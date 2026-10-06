@@ -1,113 +1,5 @@
 "use strict";
-// ColorHub v1: placement test -> meet the unit -> swipe deck -> spaced review.
-// No build step. Data lives in data/colors.js, progress in localStorage.
-(() => {
-const D = window.DATA;
-const app = document.getElementById("app");
-const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; };
-const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
-const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
-const buzz = ms => { try { navigator.vibrate && navigator.vibrate(ms); } catch (e) {} };
-
-// ---------- color math (CIELAB, D65) ----------
-const rgb = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
-function lab(h) {
-  let [r, g, b] = rgb(h).map(v => { v /= 255; return v > .04045 ? ((v + .055) / 1.055) ** 2.4 : v / 12.92; });
-  let x = (r * .4124 + g * .3576 + b * .1805) / .95047, y = r * .2126 + g * .7152 + b * .0722, z = (r * .0193 + g * .1192 + b * .9505) / 1.08883;
-  const f = t => t > .008856 ? Math.cbrt(t) : 7.787 * t + 16 / 116;
-  x = f(x); y = f(y); z = f(z);
-  return [116 * y - 16, 500 * (x - y), 200 * (y - z)];
-}
-const lch = h => { const [L, a, b] = lab(h); let H = Math.atan2(b, a) * 180 / Math.PI; if (H < 0) H += 360; return [L, Math.hypot(a, b), H]; };
-function lchHex(L, C, H) {
-  const a = C * Math.cos(H * Math.PI / 180), b = C * Math.sin(H * Math.PI / 180);
-  const fy = (L + 16) / 116, fx = a / 500 + fy, fz = fy - b / 200;
-  const inv = t => t ** 3 > .008856 ? t ** 3 : (t - 16 / 116) / 7.787;
-  const X = inv(fx) * .95047, Y = inv(fy), Z = inv(fz) * 1.08883;
-  const lin = [X * 3.2406 - Y * 1.5372 - Z * .4986, -X * .9689 + Y * 1.8758 + Z * .0415, X * .0557 - Y * .204 + Z * 1.057];
-  return "#" + lin.map(v => { v = v > .0031308 ? 1.055 * v ** (1 / 2.4) - .055 : 12.92 * v; return Math.round(clamp(v, 0, 1) * 255).toString(16).padStart(2, "0"); }).join("");
-}
-// Text color that stays readable on a swatch
-const ink = h => lab(h)[0] > 64 ? "dark" : "light";
-
-// ---------- data index ----------
-const UNITS = D.units.map((u, i) => ({ ...u, i, colors: u.colors.map(c => ({ ...c, id: u.id + ":" + c.n })) }));
-UNITS.forEach(u => u.colors.forEach(c => { c.unit = u; }));
-const ALL = UNITS.flatMap(u => u.colors);
-const BASICS = D.basics.map(([n, h]) => ({ n, h, id: "basic:" + n, basic: true }));
-const BYNAME = new Map([...BASICS, ...ALL].map(c => [c.n.toLowerCase(), c]));
-const neighbor = c => (c.vs && BYNAME.get(c.vs.toLowerCase())) || null;
-const FIRST_T3 = UNITS.findIndex(u => u.tier === 3);
-
-// ---------- days (a new day starts at 4am, so a late session still counts as tonight) ----------
-const pad = n => String(n).padStart(2, "0");
-const keyOf = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
-const today = () => keyOf(new Date(Date.now() - 4 * 3600e3));
-const addDays = (k, n) => { const [y, m, d] = k.split("-").map(Number); return keyOf(new Date(y, m - 1, d + n)); };
-
-// ---------- state ----------
-const KEY = "colorhub-v1";
-const fresh = () => ({ v: 1, placed: null, start: 0, cards: {}, done: {} });
-let S;
-try { S = JSON.parse(localStorage.getItem(KEY)); } catch (e) {}
-if (!S || S.v !== 1) S = fresh();
-const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
-
-// ---------- spaced review ----------
-// After a unit, every color is due the next day, so the first gap crosses a night of sleep.
-// Right on the first try in a review: the gap grows (3, 7, 16, 35, 90 days). Wrong: back to tomorrow.
-const INTERVALS = [1, 3, 7, 16, 35, 90];
-function learnUnit(u) {
-  const t = today();
-  u.colors.forEach(c => { if (!S.cards[c.id]) S.cards[c.id] = { b: 0, due: addDays(t, 1), since: t, own: false }; });
-  S.done[u.id] = t;
-  save();
-}
-function schedule(c, ok) {
-  const st = S.cards[c.id]; if (!st) return;
-  const t = today();
-  if (ok) { st.b = Math.min(st.b + 1, INTERVALS.length - 1); st.due = addDays(t, INTERVALS[st.b]); st.own = true; }
-  else { st.b = 0; st.due = addDays(t, 1); st.own = false; }
-  st.last = t;
-  save();
-}
-const dueList = () => { const t = today(); return ALL.filter(c => S.cards[c.id] && S.cards[c.id].due <= t).sort((a, b) => S.cards[a.id].due.localeCompare(S.cards[b.id].due)); };
-// "Owned" = recalled right, unassisted, a day or more after learning. That is the only progress number.
-const ownedCount = () => ALL.filter(c => S.cards[c.id] && S.cards[c.id].own).length;
-const nextUnit = () => UNITS.find(u => u.i >= S.start && !S.done[u.id]) || null;
-const unitLabel = u => `Unit ${u.i + 1} · ${D.tiers[u.tier].short}`;
-
-// ---------- icons ----------
-const sv = (d, s = 22, w = 2) => `<svg viewBox="0 0 24 24" width="${s}" height="${s}" fill="none" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
-const ICON = {
-  x: sv('<path d="M6 6l12 12M18 6L6 18"/>'),
-  xBig: sv('<path d="M6 6l12 12M18 6L6 18"/>', 30, 2.4),
-  check: sv('<path d="M4.5 12.5l5 5L19.5 7"/>', 30, 2.4),
-  checkS: sv('<path d="M4.5 12.5l5 5L19.5 7"/>', 13, 3.2),
-  xS: sv('<path d="M6 6l12 12M18 6L6 18"/>', 13, 3.2),
-  dots: sv('<circle cx="5" cy="12" r="1.3" fill="currentColor"/><circle cx="12" cy="12" r="1.3" fill="currentColor"/><circle cx="19" cy="12" r="1.3" fill="currentColor"/>'),
-  arrow: sv('<path d="M5 12h14M13 6l6 6-6 6"/>', 20),
-  up: sv('<path d="M6 15l6-6 6 6"/>', 18),
-  chev: sv('<path d="M9 6l6 6-6 6"/>', 18),
-};
-const LOGO = `<svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">${["#E34234", "#FFBF00", "#50C878", "#007FFF"].map((c, i) =>
-  `<rect x="9" y="1.5" width="8" height="22" rx="2.2" fill="${c}" stroke="#121212" stroke-width="1.4" transform="rotate(${-33 + i * 22} 13 22)"/>`).join("")}</svg>`;
-
-// ---------- screen plumbing ----------
-let onKey = null, timers = [];
-const later = (fn, ms) => { const t = setTimeout(fn, ms); timers.push(t); return t; };
-function show(html, cls = "") {
-  timers.forEach(clearTimeout); timers = []; onKey = null;
-  document.querySelectorAll(".scrim,.sheet,.toast").forEach(n => n.remove());
-  app.innerHTML = `<div class="screen ${cls}">${html}</div>`;
-  window.scrollTo(0, 0);
-  return app.firstElementChild;
-}
-addEventListener("keydown", e => { if (onKey && !e.metaKey && !e.ctrlKey) onKey(e); });
-function toast(msg) { document.querySelectorAll(".toast").forEach(n => n.remove()); const t = document.createElement("div"); t.className = "toast"; t.textContent = msg; document.body.appendChild(t); setTimeout(() => t.remove(), 2300); }
-const fanVars = (n, k) => `--k:${k};--mid:${(n - 1) / 2}`;
-
+// Learn tab: welcome, placement, meet the unit, swipe deck, spaced review, home with the color map.
 // ======================================================================
 // Welcome: a paint-store wall of every color in the app, sorted into strips by hue.
 // ======================================================================
@@ -480,49 +372,47 @@ function reviewDone(right, total) {
 function home() {
   if (!S.placed) return welcome();
   const due = dueList(), nu = nextUnit(), owned = ownedCount();
-  const t2n = UNITS.filter(u => u.tier === 2).length, t3n = UNITS.length - t2n;
-  const doneN = UNITS.filter(u => S.done[u.id]).length;
-  const track = UNITS.map(u => {
-    const cls = S.done[u.id] ? "done" : u === nu ? "cur" : u.i < S.start ? "skip" : "";
-    const g = `linear-gradient(90deg,${u.colors.map(c => c.h).join(",")})`;
-    return `<i class="${cls}" style="--g:${g}" title="${esc(u.title)}"></i>`;
-  }).join("");
-
-  let dock;
-  if (due.length) {
-    dock = `<div class="next-card">
-      <div class="row"><div class="chipfan">${due.slice(0, 7).map((c, k, a) => `<i style="--c:${c.h};${fanVars(a.length, k)}"></i>`).join("")}</div>
-        <div><p class="eyebrow">Daily review</p><h3>${due.length} color${due.length > 1 ? "s" : ""} due</h3><p class="sub">${nu ? `Then: ${esc(nu.title)}` : "Keep them yours"}</p></div></div>
-      <button class="btn" data-review>Review ${ICON.arrow}</button></div>`;
-  } else if (nu) {
-    dock = `<div class="next-card">
-      <div class="row"><div class="chipfan">${nu.colors.map((c, k) => `<i style="--c:${c.h};${fanVars(nu.colors.length, k)}"></i>`).join("")}</div>
-        <div><p class="eyebrow">Unit ${nu.i + 1} of ${UNITS.length}</p><h3>${esc(nu.title)}</h3><p class="sub">${nu.colors.length} colors · about ${Math.max(2, Math.round(nu.colors.length * 15 / 60))} min</p></div></div>
-      <button class="btn" data-learn>${doneN ? "Continue" : "Start"} ${ICON.arrow}</button></div>`;
-  } else {
-    dock = `<div class="next-card"><div class="row"><div><p class="eyebrow">All caught up</p><h3>Path complete</h3><p class="sub">More tiers are coming. Your reviews keep the names you have.</p></div></div></div>`;
-  }
-
+  const learning = ALL.filter(c => S.cards[c.id] && !S.cards[c.id].own).length;
+  // what to do next, as a card with the unit's chips fanned out
+  let next;
+  if (due.length) next = { eyebrow: "Daily review", title: `${due.length} color${due.length > 1 ? "s" : ""} to recall`, sub: nu ? `Then ${esc(nu.title)}` : "Recalling keeps them yours", fan: due.slice(0, 9), btn: `<button class="btn" data-review>Review ${ICON.arrow}</button>` };
+  else if (nu) next = { eyebrow: `Unit ${nu.i + 1} of ${UNITS.length} · ${esc(D.tiers[nu.tier].short)}`, title: esc(nu.title), sub: `${nu.colors.length} new names · about ${Math.max(2, Math.round(nu.colors.length * 15 / 60))} min`, fan: nu.colors.slice().sort((a, b) => lab(b.h)[0] - lab(a.h)[0]), btn: `<button class="btn" data-learn>${UNITS.some(u => S.done[u.id]) ? "Continue" : "Start"} ${ICON.arrow}</button>` };
+  else next = { eyebrow: "All caught up", title: "Path complete", sub: "More tiers are coming", fan: [], btn: "" };
   const el = show(`
     <header class="bar"><div class="brand">${LOGO}<span>ColorHub</span></div><button class="icon-btn" data-menu aria-label="Menu">${ICON.dots}</button></header>
-    <section class="map-wrap">
-      <div class="map" id="map"></div>
-      <div class="owned"><b>${owned}</b><span>of ${ALL.length} color names you own</span></div>
-      <p class="caption">Every color name in the app, placed by hue. A dot lights up once you recall its name a day after learning it.</p>
-    </section>
-    <section class="path">
-      <div class="head"><b>The path</b><span>${doneN} of ${UNITS.length} units</span></div>
-      <div class="track">${track}</div>
-      <div class="tierlbl"><span style="--n:${t2n}">In-betweens</span><span style="--n:${t3n}">Designer's vocabulary</span></div>
-    </section>
-    <div class="dock">${dock}</div>
-  `, "home");
-  drawMap(el.querySelector("#map"));
+    <button class="sky-wrap" data-sky aria-label="Your color sky: open the spectrum">
+      <div class="sky" id="sky"></div>
+      <span class="sky-count"><b>${owned}</b><span>of ${ALL.length} color names<br>are yours${learning ? ` · ${learning} learning` : ""}</span></span>
+    </button>
+    <div class="next-card">
+      <div class="row"><div class="chipfan">${next.fan.map((c, k) => `<i style="--c:${c.h};${fanVars(next.fan.length, k)}"></i>`).join("")}</div>
+        <div><p class="eyebrow">${next.eyebrow}</p><h3>${next.title}</h3><p class="sub">${next.sub}</p></div></div>
+      ${next.btn}
+    </div>
+  `, "home", "learn");
+  drawSky(el.querySelector("#sky"));
   el.querySelector("[data-menu]").onclick = menu;
   const rv = el.querySelector("[data-review]"), ln = el.querySelector("[data-learn]");
-  if (rv) rv.onclick = () => deck("review");
-  if (ln) ln.onclick = () => meet(nu);
-  onKey = e => { if (e.key === "Enter") rv ? deck("review") : ln ? meet(nu) : null; };
+  const go1 = () => rv ? deck("review") : ln ? meet(nu) : null;
+  if (rv) rv.onclick = go1;
+  if (ln) ln.onclick = go1;
+  el.querySelector("[data-sky]").onclick = () => { S.lens = "spectrum"; save(); go("explore"); };
+  onKey = e => { if (e.key === "Enter") go1(); };
+}
+
+// The color sky: every name in the app placed by hue (angle) and strength (distance from the grey center),
+// over a soft blurred color wheel. Unlearned names are faint stars; names in review glow; owned names are bright orbs.
+function drawSky(host) {
+  const stops = []; for (let t = 0; t <= 360; t += 12) stops.push(`${lchHex(62, 70, (450 - t) % 360)} ${t}deg`);
+  const pts = mapPoints();
+  const svg = pts.map(p => {
+    const st = S.cards[p.c.id], x = p.x.toFixed(1), y = p.y.toFixed(1);
+    if (st && st.own) return `<circle cx="${x}" cy="${y}" r="9" fill="${p.c.h}" opacity=".55" filter="url(#glow)"/><circle cx="${x}" cy="${y}" r="5.6" fill="${p.c.h}" stroke="#fff" stroke-opacity=".9" stroke-width="1.1"/>`;
+    if (st) return `<circle cx="${x}" cy="${y}" r="7" fill="${p.c.h}" opacity=".45" filter="url(#glow)"/><circle cx="${x}" cy="${y}" r="3.4" fill="${p.c.h}"/>`;
+    return `<circle class="star" cx="${x}" cy="${y}" r="1.25" fill="#fff" opacity=".34" style="--tw:${(3 + (p.x * 7 + p.y * 13) % 4).toFixed(1)}s"/>`;
+  }).join("");
+  host.innerHTML = `<div class="nebula" style="background:conic-gradient(${stops.join(",")})"></div>
+    <svg viewBox="0 0 320 320" aria-hidden="true"><defs><filter id="glow" x="-1" y="-1" width="3" height="3"><feGaussianBlur stdDeviation="4"/></filter></defs>${svg}</svg>`;
 }
 
 // The color map: every name in the app on the CIELAB a*b* plane (hue = angle, strength = distance
@@ -570,16 +460,6 @@ function drawMap(host) {
   });
 }
 
-// ---------- menu ----------
-function sheet(html) {
-  const scrim = document.createElement("div"), sh = document.createElement("div");
-  scrim.className = "scrim"; sh.className = "sheet"; sh.setAttribute("role", "dialog");
-  sh.innerHTML = `<div class="grab"></div>${html}`;
-  const close = () => { scrim.remove(); sh.remove(); };
-  scrim.onclick = close;
-  document.body.append(scrim, sh);
-  return { sh, close };
-}
 function menu() {
   const { sh, close } = sheet(`
     <button class="item" data-a="place">Retake the placement test ${ICON.chev}</button>
@@ -599,7 +479,3 @@ function about() {
     <p>Why names matter: Russian has separate words for light blue and dark blue, and Russian speakers tell those blues apart a little faster (Winawer et al., 2007). The effect is real but modest. Names give you handles; practice with feedback sharpens the eye.</p>
     <p>How the deck works: a color counts as yours once you recall it a day or more after learning it. Reviews space out from 1 day to 3, 7, 16, 35 and 90 days.</p>`);
 }
-
-// ---------- boot ----------
-S.placed ? home() : welcome();
-})();
