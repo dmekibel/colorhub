@@ -1,0 +1,701 @@
+<title>Learn Colors</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Instrument+Sans:wght@400..700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: a swatch-chip fan deck. Every color is a printer's chip (swatch on top, label below);
+   one narrow mobile column, bottom tab bar, lessons take over the screen with a full-bleed swatch. */
+:root{
+  --ground:#EEF0F3; --sheet:#FFFFFF; --ink:#111216; --soft:#5A606C; --rule:#D8DCE2; --tint:#E4E7EC;
+  --good:#17804D; --good-bg:#DCF1E5; --bad:#B8402A; --bad-bg:#F8E2DC; --gold:#B0893A;
+  --shadow:0 1px 0 rgba(17,18,22,.06),0 10px 24px -14px rgba(17,18,22,.35);
+  --display:"Archivo","Arial Narrow",system-ui,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0D0E11; --sheet:#18191E; --ink:#F0F1F4; --soft:#9AA0AB; --rule:#2B2E36; --tint:#22242B;
+  --good:#4CC788; --good-bg:#12291D; --bad:#F27A63; --bad-bg:#33190F; --gold:#D3AE5E;
+  --shadow:0 1px 0 rgba(0,0,0,.4),0 10px 24px -14px rgba(0,0,0,.8); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --ground:#0D0E11; --sheet:#18191E; --ink:#F0F1F4; --soft:#9AA0AB; --rule:#2B2E36; --tint:#22242B;
+  --good:#4CC788; --good-bg:#12291D; --bad:#F27A63; --bad-bg:#33190F; --gold:#D3AE5E;
+  --shadow:0 1px 0 rgba(0,0,0,.4),0 10px 24px -14px rgba(0,0,0,.8); color-scheme:dark}
+html,body{height:100%}
+body{background:var(--ground);color:var(--ink);font:16px/1.5 var(--body);-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+button:focus-visible,input:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+a{color:inherit}
+h1,h2,h3{margin:0;text-wrap:balance}
+.disp{font-family:var(--display);font-stretch:125%;font-weight:800;letter-spacing:-.01em}
+.eyebrow{font:700 11px/1.3 var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--soft)}
+.muted{color:var(--soft)}
+.mono{font-family:var(--mono)}
+.wrap{max-width:560px;margin:0 auto;padding-inline:16px;padding-block:0 120px}
+
+/* header */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--ground);display:flex;align-items:center;gap:14px;padding-block:14px 10px}
+.brand{display:flex;align-items:center;gap:10px;margin-right:auto;font:800 17px/1 var(--display);font-stretch:125%;letter-spacing:-.01em}
+.fan{position:relative;width:26px;height:26px;flex:none}
+.fan i{position:absolute;bottom:0;left:9px;width:9px;height:24px;border-radius:2px;transform-origin:50% 100%;box-shadow:0 0 0 1.5px var(--ground)}
+.fan i:nth-child(1){background:#D62F2F;transform:rotate(-34deg)}
+.fan i:nth-child(2){background:#F2C81F;transform:rotate(-12deg)}
+.fan i:nth-child(3){background:#2E9A4F;transform:rotate(12deg)}
+.fan i:nth-child(4){background:#2563C9;transform:rotate(34deg)}
+.stat{display:flex;flex-direction:column;align-items:flex-end;line-height:1.1}
+.stat b{font:800 16px/1 var(--display);font-stretch:110%;font-variant-numeric:tabular-nums}
+.stat span{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--soft)}
+.goal{height:4px;border-radius:2px;background:var(--rule);overflow:hidden}
+.goal b{display:block;height:100%;background:var(--ink);transition:width .4s}
+
+/* buttons */
+.btn{border:0;border-radius:12px;padding:15px 20px;font-weight:700;font-size:16px;background:var(--ink);color:var(--ground);transition:transform .08s,opacity .2s;min-height:52px}
+.btn:active{transform:scale(.98)}
+.btn[disabled]{opacity:.28;cursor:default;transform:none}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 2px var(--rule)}
+.btn.wide{width:100%}
+.btn.small{min-height:0;padding:9px 14px;font-size:14px;border-radius:10px}
+.link{border:0;background:none;padding:6px 2px;font-size:14px;font-weight:600;color:var(--soft);text-decoration:underline;text-underline-offset:3px}
+
+/* the chip: the app's signature object */
+.chip{background:var(--sheet);border-radius:6px;box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;text-align:left;border:0;padding:0;min-width:0}
+.chip .sw{aspect-ratio:5/4;max-width:100%;display:block}
+.chip .lb{padding:8px 10px 10px;min-width:0;display:flex;flex-direction:column;gap:1px}
+.chip .lb b{font:800 13px/1.2 var(--display);font-stretch:110%;overflow-wrap:anywhere}
+.chip .lb small{font:500 11px/1.3 var(--mono);color:var(--soft);overflow-wrap:anywhere}
+
+/* learn: review + levels */
+.panel{background:var(--sheet);border-radius:14px;box-shadow:var(--shadow);padding:16px;display:flex;gap:14px;align-items:center;margin-top:16px}
+.panel .n{font:800 34px/1 var(--display);font-stretch:125%;font-variant-numeric:tabular-nums}
+.panel>div{flex:1;min-width:0}
+.calib{display:flex;flex-direction:column;gap:6px;margin-top:10px}
+.calib div{display:flex;justify-content:space-between;gap:10px;font-size:13px;border-top:1px solid var(--rule);padding-top:6px}
+.calib b{font-variant-numeric:tabular-nums}
+.level{margin-top:40px}
+.lvhead{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;align-items:end}
+.lvnum{font:900 56px/.8 var(--display);font-stretch:125%;letter-spacing:-.04em;color:var(--ink);grid-row:span 2;font-variant-numeric:tabular-nums}
+.lvhead h2{font:800 22px/1.1 var(--display);font-stretch:115%}
+.lvblurb{margin:12px 0 0;font-size:14px;color:var(--soft);max-width:62ch}
+.deck{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}
+@media (max-width:380px){.deck{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.les{position:relative}
+.les .sw{display:flex}
+.les .sw i{flex:1}
+.les.locked .sw{filter:grayscale(1) opacity(.3)}
+.les.locked{cursor:default}
+.les.cur{box-shadow:0 0 0 2.5px var(--ink),var(--shadow)}
+.les .badge{position:absolute;top:8px;left:8px;background:var(--sheet);color:var(--ink);font:800 10px/1 var(--body);letter-spacing:.1em;text-transform:uppercase;padding:5px 7px;border-radius:5px}
+.les .tick{position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:50%;background:var(--sheet);color:var(--good);display:grid;place-items:center;font-weight:900;font-size:14px}
+.ckpt .sw{display:grid;place-items:center;background:repeating-linear-gradient(135deg,var(--tint) 0 8px,var(--sheet) 8px 16px)}
+.ckpt .sw span{font:900 26px/1 var(--display);font-stretch:125%}
+.jump{margin-top:10px}
+
+/* tabs */
+nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--sheet);border-top:1px solid var(--rule);display:flex;justify-content:center;padding-bottom:env(safe-area-inset-bottom,0px)}
+nav.tabs button{flex:1;max-width:140px;border:0;background:none;padding:10px 4px 12px;font-size:11px;font-weight:700;letter-spacing:.04em;color:var(--soft);display:flex;flex-direction:column;align-items:center;gap:4px}
+nav.tabs button svg{width:24px;height:24px}
+nav.tabs button[aria-current="true"]{color:var(--ink)}
+nav.tabs button[aria-current="true"] svg{stroke-width:2.6}
+
+/* lesson */
+.lesson{position:fixed;inset:0;z-index:10;background:var(--ground);display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px)}
+.lbar{display:flex;align-items:center;gap:12px;max-width:560px;width:100%;margin:0 auto;padding:12px 16px}
+.x{border:0;background:none;font-size:28px;line-height:1;color:var(--soft);padding:4px 8px;min-width:44px;min-height:44px}
+.prog{flex:1;height:8px;border-radius:4px;background:var(--rule);overflow:hidden}
+.prog b{display:block;height:100%;background:var(--ink);border-radius:4px;transition:width .35s}
+.lbody{flex:1;overflow-y:auto;max-width:560px;width:100%;margin:0 auto;padding:4px 16px 24px;display:flex;flex-direction:column;gap:16px}
+.stage{width:100%;max-width:100%;aspect-ratio:4/3;max-height:38vh;border-radius:16px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.07);flex:none;position:relative}
+.stage.short{aspect-ratio:16/7}
+.stage .tag{position:absolute;left:12px;bottom:12px;background:var(--sheet);color:var(--ink);border-radius:8px;padding:5px 10px;font:700 12px var(--mono)}
+.prompt{font:800 21px/1.2 var(--display);font-stretch:112%;letter-spacing:-.01em}
+.sub{font-size:14px;color:var(--soft);margin-top:-8px}
+.opts{display:grid;gap:10px}
+.opt{text-align:left;background:var(--sheet);border:2px solid var(--rule);border-radius:12px;padding:14px 16px;font-weight:600;font-size:17px;min-width:0;overflow-wrap:anywhere;min-height:54px;transition:border-color .15s}
+.opt small{display:block;font-weight:500;font-size:13px;color:var(--soft)}
+.opt.sel{border-color:var(--ink)}
+.swopts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.swopt{aspect-ratio:1;max-width:100%;border-radius:14px;border:0;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08);transition:transform .12s}
+.swopt.sel{box-shadow:0 0 0 3px var(--ground),0 0 0 6px var(--ink)}
+.swopt.right{box-shadow:0 0 0 3px var(--ground),0 0 0 6px var(--good)}
+.swopt.wrong{box-shadow:0 0 0 3px var(--ground),0 0 0 6px var(--bad)}
+.typein{width:100%;font:600 19px var(--body);padding:15px 16px;border-radius:12px;border:2px solid var(--rule);background:var(--sheet);color:var(--ink);min-height:56px}
+.typein:focus{border-color:var(--ink);outline:none}
+.typein.mono{font-family:var(--mono);letter-spacing:.06em}
+.helprow{display:flex;gap:16px;flex-wrap:wrap;margin-top:-6px}
+.hintline{font:700 18px var(--mono);letter-spacing:.18em;overflow-wrap:anywhere}
+.clue{background:var(--sheet);border-radius:12px;padding:14px 16px;font-size:17px;box-shadow:var(--shadow)}
+.note{border-left:3px solid var(--ink);padding:2px 0 2px 12px;font-size:14px;color:var(--soft)}
+.conf{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.conf .btn{padding:12px 4px;font-size:14px;min-height:50px}
+.foot{border-top:1px solid var(--rule);background:var(--sheet);padding:14px 16px calc(14px + env(safe-area-inset-bottom,0px))}
+.foot .in{max-width:528px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.foot.good{background:var(--good-bg);border-color:transparent}
+.foot.bad{background:var(--bad-bg);border-color:transparent}
+.foot .msg{font:800 19px/1.2 var(--display);font-stretch:110%}
+.foot.good .msg{color:var(--good)} .foot.bad .msg{color:var(--bad)}
+.foot.good .btn{background:var(--good);color:#fff}
+.foot.bad .btn{background:var(--bad);color:#fff}
+.ans{display:flex;align-items:center;gap:10px;font-size:15px;min-width:0}
+.ans span:last-child{min-width:0;overflow-wrap:anywhere}
+.dot{flex:none;width:22px;height:22px;border-radius:5px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.15)}
+
+/* teach card + story */
+.verdict{border-radius:12px;padding:12px 14px;font-size:15px;background:var(--sheet);box-shadow:var(--shadow)}
+.verdict b{display:block;font:800 16px/1.25 var(--display);font-stretch:110%}
+.verdict.good b{color:var(--good)} .verdict.bad b{color:var(--bad)}
+.tname{font:900 34px/1.05 var(--display);font-stretch:125%;letter-spacing:-.02em;overflow-wrap:anywhere}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tg{font:500 12px var(--mono);background:var(--sheet);border:1px solid var(--rule);border-radius:6px;padding:3px 8px}
+.story{display:grid;gap:10px}
+.facet{background:var(--sheet);border-radius:12px;padding:12px 14px;box-shadow:var(--shadow)}
+.facet b{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin-bottom:3px}
+.facet p{margin:0;font-size:15px;max-width:62ch}
+.hook{display:flex;gap:14px;align-items:flex-start;background:var(--ink);color:var(--ground);border-radius:14px;padding:14px 16px}
+.hook .fr{flex:none;width:40px;height:52px;border-radius:2px;border:4px solid var(--gold);box-shadow:0 0 0 1px rgba(0,0,0,.3)}
+.hook div{min-width:0}
+.hook small{display:block;opacity:.65;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
+.hook a{font-weight:700}
+.hook p{margin:4px 0 0;font-size:14px;opacity:.88}
+
+/* done */
+.done{padding-top:24px;display:flex;flex-direction:column;gap:16px}
+.done .big{font:900 38px/1 var(--display);font-stretch:125%;letter-spacing:-.02em}
+.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.tile{border-radius:12px;padding:12px 10px;background:var(--sheet);box-shadow:var(--shadow)}
+.tile b{display:block;font:800 22px var(--display);font-stretch:115%;font-variant-numeric:tabular-nums}
+.tile span{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);font-weight:700}
+.strip{display:flex;height:40px;border-radius:8px;overflow:hidden}
+.strip i{flex:1}
+
+/* flashcards */
+.seg{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;margin:14px -16px 0;padding-inline:16px;scrollbar-width:none}
+.seg button{flex:none;border:1.5px solid var(--rule);background:var(--sheet);border-radius:999px;padding:7px 14px;font-weight:600;font-size:14px}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+.flash{background:var(--sheet);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;margin-top:12px}
+.flash .sw{aspect-ratio:4/3;max-height:42vh;width:100%;max-width:100%}
+.flash .bd{padding:16px;display:flex;flex-direction:column;gap:12px}
+.flash .nm{font:900 26px/1.1 var(--display);font-stretch:125%;overflow-wrap:anywhere}
+
+/* hex gym */
+.gym{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.gym .sw{aspect-ratio:1;border-radius:14px;max-width:100%;display:flex;align-items:flex-end;padding:10px}
+.gym .sw span{background:var(--sheet);color:var(--ink);border-radius:6px;padding:3px 8px;font-size:12px;font-weight:700}
+.slider{display:grid;grid-template-columns:24px 1fr 40px;align-items:center;gap:12px;margin:12px 0}
+.slider label{font:700 15px var(--mono)}
+.slider output{font:500 15px var(--mono);text-align:right}
+input[type=range]{width:100%;accent-color:var(--ink);height:28px}
+.hexread{font:700 30px var(--mono);letter-spacing:.06em}
+.hexread .r{color:#E0453A}.hexread .g{color:#2A9D57}.hexread .b{color:#3B6FE0}
+.tip{background:var(--sheet);border-radius:12px;padding:12px 14px;font-size:14px;margin-top:14px;box-shadow:var(--shadow)}
+
+/* library */
+.search{width:100%;padding:13px 14px;border-radius:12px;border:2px solid var(--rule);background:var(--sheet);color:var(--ink);font:inherit;margin-top:14px}
+.lib{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:12px;margin-top:12px}
+.lib .chip .tagl{font:800 9px/1 var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:3px}
+.sheet{position:fixed;inset:0;z-index:20;background:rgba(8,9,12,.55);display:flex;align-items:flex-end;justify-content:center}
+.sheet .pane{background:var(--ground);width:100%;max-width:560px;max-height:92%;overflow-y:auto;border-radius:20px 20px 0 0;padding:0 16px calc(24px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:14px}
+.sheet .band{height:140px;margin:0 -16px;flex:none;position:relative}
+.sheet .band .x{position:absolute;right:8px;top:8px;background:var(--sheet);border-radius:50%;width:40px;height:40px;min-width:0;min-height:0;font-size:22px;padding:0;color:var(--ink)}
+.title2{font:800 24px/1.15 var(--display);font-stretch:118%;margin-top:14px}
+.clue.mystery{font:600 19px/1.4 var(--body);padding:18px}
+.sortgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:10px}
+.sorttile{aspect-ratio:3/4;max-width:100%;border:0;border-radius:12px;position:relative;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08);display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;padding:8px;min-width:0}
+.sorttile .num{min-width:30px;height:30px;border-radius:50%;background:var(--sheet);color:var(--ink);font:800 15px/30px var(--display);text-align:center;opacity:0;transform:scale(.6);transition:.15s}
+.sorttile.on .num{opacity:1;transform:none}
+.sorttile .nm{background:var(--sheet);color:var(--ink);border-radius:6px;padding:2px 6px;font-size:12px;font-weight:700;max-width:100%;overflow-wrap:anywhere;text-align:left}
+.sorttile .nm:empty{display:none}
+.sorttile.right{box-shadow:0 0 0 3px var(--ground),0 0 0 6px var(--good)}
+.sorttile.wrong{box-shadow:0 0 0 3px var(--ground),0 0 0 6px var(--bad)}
+.mixwrap{position:relative;height:56px}
+.mixtrack{position:absolute;inset:8px 0;border-radius:10px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.1)}
+.mixmark{position:absolute;top:0;bottom:0;width:4px;margin-left:-2px;background:var(--ink);border-radius:2px}
+.mixmark::after{content:"here";position:absolute;top:-20px;left:50%;transform:translateX(-50%);font:700 11px var(--body);color:var(--ink)}
+#mix{position:absolute;inset:0;width:100%;height:56px;margin:0;-webkit-appearance:none;appearance:none;background:transparent}
+#mix::-webkit-slider-thumb{-webkit-appearance:none;width:30px;height:52px;border-radius:9px;background:transparent;border:4px solid var(--sheet);box-shadow:0 0 0 2px var(--ink),0 4px 10px rgba(0,0,0,.3)}
+#mix::-moz-range-thumb{width:22px;height:44px;border-radius:9px;background:transparent;border:4px solid var(--sheet);box-shadow:0 0 0 2px var(--ink)}
+#mix::-moz-range-track{background:transparent}
+.boltbar{height:10px;border-radius:5px;background:var(--rule);overflow:hidden}
+.boltbar b{display:block;height:100%;width:100%;background:linear-gradient(90deg,#D62F2F,#F2C81F,#2E9A4F,#2563C9)}
+.bolthead{display:flex;justify-content:space-between;align-items:flex-end}
+.bolthead .n{font-size:40px;line-height:1;font-variant-numeric:tabular-nums}
+.combo{font:900 34px/1 var(--display);font-stretch:125%;color:var(--good)}
+.swopts.three{grid-template-columns:repeat(3,1fr)}
+.flashg{animation:fg .25s}.flashr{animation:fr .4s}
+@keyframes fg{50%{transform:scale(1.05)}}@keyframes fr{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.hero{padding-top:18px;display:flex;flex-direction:column;gap:12px}
+.playbtn{position:relative;overflow:hidden;border:0;border-radius:20px;background:var(--ink);color:var(--ground);text-align:left;padding:22px 20px;min-height:132px;display:flex;flex-direction:column;justify-content:flex-end;gap:2px;box-shadow:var(--shadow);transition:transform .1s}
+.playbtn:active{transform:scale(.985)}
+.playbtn .pl{font:900 44px/1 var(--display);font-stretch:125%;letter-spacing:-.03em;position:relative;z-index:1}
+.playbtn .ps{font-size:14px;font-weight:600;opacity:.75;position:relative;z-index:1}
+.pfan{position:absolute;right:-6px;top:50%;width:150px;height:120px;transform:translateY(-55%)}
+.pfan i{position:absolute;left:60px;bottom:0;width:34px;height:112px;border-radius:5px;transform-origin:50% 100%;box-shadow:0 0 0 2px var(--ink)}
+.pfan i:nth-child(1){transform:rotate(-40deg)}.pfan i:nth-child(2){transform:rotate(-20deg)}.pfan i:nth-child(3){transform:rotate(0)}.pfan i:nth-child(4){transform:rotate(20deg)}.pfan i:nth-child(5){transform:rotate(40deg)}
+.seg.modes{margin-top:2px}
+.modehint{margin:-4px 0 0;font-size:13px;color:var(--soft)}
+.likes{margin-top:20px}
+.likechips{display:flex;flex-wrap:wrap;gap:8px}
+.likechips button{border:1.5px solid var(--rule);background:var(--sheet);border-radius:999px;padding:6px 12px;font-weight:600;font-size:13px}
+.likechips button[aria-pressed="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+.row{margin-top:28px}
+.rowt{font:800 18px/1.2 var(--display);font-stretch:115%;margin-bottom:12px}
+.rail{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(132px,40%);gap:12px;overflow-x:auto;margin-inline:-16px;padding:2px 16px 14px;scroll-snap-type:x mandatory;scrollbar-width:none}
+.rail::-webkit-scrollbar{display:none}
+.pack{scroll-snap-align:start}
+.pack .sw{display:flex}.pack .sw i{flex:1}
+.pbar{display:block;height:3px;border-radius:2px;background:var(--rule);margin-top:6px;overflow:hidden}
+.pbar i{display:block;height:100%;background:var(--good)}
+.matchgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.mt{min-height:76px;border-radius:12px;border:2px solid var(--rule);background:var(--sheet);font-weight:700;font-size:14px;padding:6px;overflow-wrap:anywhere;min-width:0;transition:opacity .25s,transform .25s}
+.mt.sw{border-color:transparent;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}
+.mt.sel{border-color:var(--ink);box-shadow:0 0 0 2px var(--ink)}
+.mt.gone{opacity:0;transform:scale(.8);pointer-events:none}
+.toast{position:fixed;left:16px;right:16px;bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:30;max-width:528px;margin:0 auto;background:var(--ink);color:var(--ground);border-radius:12px;padding:12px 14px;font-size:14px;font-weight:600;box-shadow:var(--shadow)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div id="app"></div>
+<script>/*DATA*/</script>
+<script>
+"use strict";
+// ---------- utilities ----------
+const $=s=>document.querySelector(s);
+const $$=s=>document.querySelectorAll(s);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const rgb=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16));
+const toHex=(r,g,b)=>"#"+[r,g,b].map(v=>v.toString(16).padStart(2,"0")).join("").toUpperCase();
+function lab(h){let [r,g,b]=rgb(h).map(v=>{v/=255;return v>.04045?((v+.055)/1.055)**2.4:v/12.92});
+ let x=(r*.4124+g*.3576+b*.1805)/.95047,y=r*.2126+g*.7152+b*.0722,z=(r*.0193+g*.1192+b*.9505)/1.08883;
+ const f=t=>t>.008856?Math.cbrt(t):7.787*t+16/116;x=f(x);y=f(y);z=f(z);return[116*y-16,500*(x-y),200*(y-z)]}
+const dE=(a,b)=>{const p=lab(a),q=lab(b);return Math.hypot(p[0]-q[0],p[1]-q[1],p[2]-q[2])};
+const norm=s=>s.toLowerCase().replace(/[^a-z0-9]/g,"");
+function lev(a,b){const d=[...Array(b.length+1).keys()];for(let i=1;i<=a.length;i++){let p=d[0];d[0]=i;for(let j=1;j<=b.length;j++){const t=d[j];d[j]=Math.min(d[j]+1,d[j-1]+1,p+(a[i-1]===b[j-1]?0:1));p=t}}return d[b.length]}
+const DAY=864e5, today=()=>new Date().toISOString().slice(0,10);
+const INTERVALS=[0,1,3,7,16,35,90];
+
+// ---------- data index ----------
+const CARDS=[];
+LEVELS.forEach((L,idx)=>{L.lv=idx+1;L.cards.forEach(c=>{c.id=L.id+":"+c.n;c.lv=L;CARDS.push(c)})});
+const BYID=Object.fromEntries(CARDS.map(c=>[c.id,c]));
+// Color family from perceptual hue (LCh), so any color from any source can be grouped.
+function family(h){const [L,a,b]=lab(h),C=Math.hypot(a,b);let H=Math.atan2(b,a)*180/Math.PI;if(H<0)H+=360;
+ if(C<12)return"Neutrals";
+ if(H>=345||H<40)return L>70?"Pinks":"Reds";
+ if(H<70)return L<48?"Browns":"Oranges";
+ if(H<100)return L<55?"Browns":"Yellows";
+ if(H<195)return"Greens";
+ if(H<290)return"Blues";
+ return L>72?"Pinks":"Purples"}
+CARDS.forEach(c=>{if(!c.lv.hex)c.fam=family(c.h)});
+const FAMS=["Reds","Pinks","Oranges","Browns","Yellows","Greens","Blues","Purples","Neutrals"];
+
+// ---------- state (per-browser) ----------
+const KEY="learn-colors-v1";
+let S;try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){}
+S=Object.assign({mode:"mixed",likes:[],xp:0,streak:0,last:null,day:null,dayXp:0,done:{},open:{},cards:{},tab:"learn",lib:"all",fc:"due",rec:{n:0,ok:0},checks:[],tipSeen:false},S||{});
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function gain(x){S.xp+=x;const d=today();if(S.day!==d){S.day=d;S.dayXp=0}S.dayXp+=x;
+ if(S.last!==d){const y=new Date(Date.now()-DAY).toISOString().slice(0,10);S.streak=S.last===y?S.streak+1:1;S.last=d}save()}
+const learned=c=>!!S.cards[c.id];
+const due=()=>CARDS.filter(c=>S.cards[c.id]&&S.cards[c.id].due<=Date.now());
+// Correct answers widen the gap (1, 3, 7, 16, 35, 90 days); a miss brings the color back in 10 minutes.
+function grade(c,ok,step=1){const st=S.cards[c.id]||{b:0,due:0,t:Date.now()};
+ st.b=ok?Math.min(st.b+step,INTERVALS.length-1):1;st.due=Date.now()+(ok?INTERVALS[st.b]*DAY:10*60e3);S.cards[c.id]=st;save()}
+// Recall rate only counts delayed, unassisted attempts (reviews, flashcards, checkpoints).
+function logRecall(ok){S.rec.n++;if(ok)S.rec.ok++;save()}
+
+// Accept the name, the translation, or a near-miss spelling of either.
+function matches(c,typed){const a=norm(typed);if(!a)return{ok:false};
+ if(c.lv.hex){return{ok:a===norm(c.n),typo:false}}
+ for(const t of [c.n,c.tr].filter(Boolean).map(norm)){
+  if(a===t)return{ok:true,typo:false};
+  const tol=t.length>10?2:t.length>5?1:0;if(lev(a,t)<=tol)return{ok:true,typo:true}}
+ return{ok:false}}
+const hintFor=c=>c.n.split(" ").map(w=>w.split("").map((ch,i)=>i===0||!/[a-z0-9]/i.test(ch)?ch:"_").join("")).join("  ");
+
+// ---------- icons ----------
+const I={
+ play:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4.5v15l12-7.5z" stroke-linejoin="round"/></svg>',
+ learn:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 21 4 6.5l3.5-1.6L13 18"/><path d="M12 21 9.5 4.6l3.8-.6 1.7 15"/><path d="m13 21 3-15.6 3.8.7L17 19.5"/></svg>',
+ cards:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="6" width="12" height="15" rx="2"/><path d="M8 3h10a2 2 0 0 1 2 2v13"/></svg>',
+ hex:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3l-2 18M17 3l-2 18M4 8h17M3 16h17"/></svg>',
+ lib:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="5" height="16" rx="1"/><rect x="10" y="4" width="5" height="16" rx="1"/><path d="M17 5l4 1-3 14-4-1"/></svg>'};
+
+// ---------- what to play ----------
+const LIKES=[["art","Painting & art history"],["design","Design & Pantone"],["fashion","Fashion & interiors"],["japan","Japanese colors"],["code","Web & code"],["basics","I'm new to color names"]];
+const LIKE_SRC={art:["art","nuance"],design:["pantone","web","nuance"],fashion:["nuance","pantone","crayola"],japan:["japan"],code:["web","hex"],basics:["basic","web"]};
+function favPool(){const l=S.likes||[];let src=new Set(l.flatMap(k=>LIKE_SRC[k]));if(!src.size)src=new Set(["nuance","web","crayola","art","pantone","japan"]);
+ return CARDS.filter(c=>src.has(c.lv.id)||(l.includes("art")&&c.k))}
+const lookalikeSet=()=>CARDS.filter(c=>!c.lv.hex&&CARDS.some(x=>x!==c&&!x.lv.hex&&norm(x.n)!==norm(c.n)&&dE(x.h,c.h)<9));
+const trouble=()=>CARDS.filter(c=>S.cards[c.id]&&S.cards[c.id].b<=1);
+// Rows of ready-to-play packs. Each is just a pool of colors; the mode decides the game.
+function rows(){
+ const R=[];
+ const fy=[];const d=due();if(d.length)fy.push({id:"due",t:"Due for review",s:"Colors ready to recall",pool:()=>due()});
+ const tr=trouble();if(tr.length>=3)fy.push({id:"trouble",t:"Your trouble colors",s:"The ones you keep missing",pool:trouble});
+ fy.push({id:"look",t:"Lookalikes",s:"Pairs that are easy to mix up",pool:lookalikeSet});
+ fy.push({id:"paint",t:"In famous paintings",s:"Each one has a masterpiece",pool:()=>CARDS.filter(c=>c.k)});
+ R.push(["For you",fy]);
+ R.push(["By color",FAMS.map(f=>({id:"fam:"+f,t:f,pool:()=>CARDS.filter(c=>c.fam===f)}))]);
+ R.push(["By source",LEVELS.map(L=>({id:"src:"+L.id,t:({basic:"The basics",nuance:"Nuances",web:"Web colors",crayola:"Crayola",art:"Artist pigments",pantone:"Pantone Colors of the Year",japan:"Japanese traditional",hex:"Hex codes"})[L.id]||L.title,s:L.title,pool:()=>L.cards}))]);
+ return R}
+const PACKS=()=>Object.fromEntries(rows().flatMap(r=>r[1]).map(p=>[p.id,p]));
+const MODES=[["mixed","Mixed","A bit of everything"],["learn","Learn new","Meet new colors"],["flash","Flashcards","Type the name"],["match","Match","Pair names and swatches"],["sort","Sort","Light to dark"],["mix","Mix","Dial in the color"],["bolt","Lightning","45-second sprint"],["test","Test","No hints, rate your confidence"]];
+
+// ---------- shell ----------
+function shell(inner){
+ const g=Math.min(100,Math.round((S.day===today()?S.dayXp:0)/50*100));
+ const rr=S.rec.n?Math.round(S.rec.ok/S.rec.n*100)+"%":"–";
+ $("#app").innerHTML=`<div class="wrap">
+ <header class="top"><div class="brand"><span class="fan"><i></i><i></i><i></i><i></i></span>Learn Colors</div>
+  <div class="stat" title="Share of colors you named from memory in reviews and tests"><b>${rr}</b><span>Recall</span></div>
+  <div class="stat" title="Days in a row"><b>${S.streak}</b><span>Streak</span></div></header>
+ <div class="goal" title="Daily goal: ${S.day===today()?S.dayXp:0} of 50 XP"><b style="width:${g}%"></b></div>
+ ${inner}</div>
+ <nav class="tabs">${[["play","Play"],["lib","Library"],["hex","Hex Gym"]].map(([k,l])=>`<button data-tab="${k}" aria-current="${S.tab===k}">${I[k]}${l}</button>`).join("")}</nav>`;
+ $$("[data-tab]").forEach(b=>b.onclick=()=>{S.tab=b.dataset.tab;save();render();scrollTo(0,0)});
+}
+function render(){if(!["play","lib","hex"].includes(S.tab))S.tab="play";({play:renderPlay,hex:renderGym,lib:renderLib})[S.tab]()}
+
+function packChip(p){const pool=p.pool(),n=pool.length;if(!n)return"";const k=pool.filter(learned).length;
+ const strip=shuffle(pool).slice(0,8).sort((a,b)=>lab(b.h)[0]-lab(a.h)[0]);
+ return`<button class="chip pack" data-pack="${esc(p.id)}"><span class="sw">${strip.map(c=>`<i style="background:${c.h}"></i>`).join("")}</span><span class="lb"><b>${esc(p.t)}</b><small>${k?`${k}/${n} learned`:`${n} colors`}</small><span class="pbar"><i style="width:${n?k/n*100:0}%"></i></span></span></button>`}
+function renderPlay(){
+ const m=MODES.find(x=>x[0]===S.mode)||MODES[0];
+ let html=`<section class="hero"><div class="eyebrow">${due().length?`${due().length} due · `:""}About 3 minutes</div>
+  <button class="playbtn" id="play"><span class="pl">Play</span><span class="ps">${esc(m[1])} · picked for you</span><span class="pfan">${shuffle(favPool()).slice(0,5).map(c=>`<i style="background:${c.h}"></i>`).join("")}</span></button>
+  <div class="seg modes" role="group" aria-label="Game mode">${MODES.map(([k,l])=>`<button data-mode="${k}" aria-pressed="${(S.mode||"mixed")===k}">${l}</button>`).join("")}</div>
+  <p class="modehint">${esc(m[2])}. Applies to Play and to every pack below.</p></section>`;
+ if(!S.likesDone)html+=`<section class="panel likes" style="display:block"><div class="eyebrow">Make Play yours · optional</div><b style="display:block;margin:4px 0 10px">What are you into?</b>
+  <div class="likechips">${LIKES.map(([k,l])=>`<button data-like="${k}" aria-pressed="${(S.likes||[]).includes(k)}">${esc(l)}</button>`).join("")}</div>
+  <button class="btn small" id="likesok" style="margin-top:12px">Done</button></section>`;
+ rows().forEach(([title,packs])=>{html+=`<section class="row"><h3 class="rowt">${esc(title)}</h3><div class="rail">${packs.map(packChip).join("")}</div></section>`});
+ if(S.checks.length)html+=`<section class="panel" style="display:block;margin-top:28px"><div class="eyebrow">Tests · what you expected vs what you got</div><div class="calib">${S.checks.slice(-3).reverse().map(k=>`<div><span>${esc(k.pack||"Test")} · ${new Date(k.at).toLocaleDateString(undefined,{month:"short",day:"numeric"})}</span><span class="muted">expected ${k.exp} · <b style="color:var(--ink)">got ${k.ok}/${k.n}</b></span></div>`).join("")}</div></section>`;
+ html+=S.likesDone?`<button class="link" id="relikes" style="margin-top:24px">Change what you're into</button>`:"";
+ shell(html);
+ $("#play").onclick=()=>play(null);
+ $$("[data-mode]").forEach(b=>b.onclick=()=>{S.mode=b.dataset.mode;save();renderPlay()});
+ $$("[data-pack]").forEach(b=>b.onclick=()=>play(b.dataset.pack));
+ $$("[data-like]").forEach(b=>b.onclick=()=>{const l=new Set(S.likes||[]),k=b.dataset.like;l.has(k)?l.delete(k):l.add(k);S.likes=[...l];save();b.setAttribute("aria-pressed",l.has(k))});
+ const ok=$("#likesok");if(ok)ok.onclick=()=>{S.likesDone=true;save();renderPlay()};
+ const rl=$("#relikes");if(rl)rl.onclick=()=>{S.likesDone=false;save();renderPlay();scrollTo(0,0)};
+}
+
+// ---------- exercise building ----------
+// Lookalikes: the nearest colors by perceptual distance, for recall checks.
+function lookalikes(c,n=3){let pool=c.lv.cards.filter(x=>x!==c);if(pool.length<n+3)pool=pool.concat(CARDS.filter(x=>x.lv!==c.lv&&!x.lv.hex===!c.lv.hex));
+ return shuffle(pool.sort((a,b)=>dE(a.h,c.h)-dE(b.h,c.h)).slice(0,n+2)).slice(0,n)}
+// Guess options: neighbors from the same color family (three blues for a blue), so the guess takes thought.
+// Level-mates come first; other levels fill in when a level has no near neighbors.
+function guessOptions(c){const near=x=>x!==c&&!x.lv.hex===!c.lv.hex&&norm(x.n)!==norm(c.n)&&dE(x.h,c.h)>6;
+ const same=c.lv.cards.filter(near).sort((a,b)=>dE(a.h,c.h)-dE(b.h,c.h)).filter(x=>dE(x.h,c.h)<40);
+ const other=CARDS.filter(x=>x.lv!==c.lv&&near(x)).sort((a,b)=>dE(a.h,c.h)-dE(b.h,c.h));
+ const pool=same.concat(other).slice(0,4);
+ return shuffle([c,...shuffle(pool).slice(0,2)])}
+const label=c=>c.lv.hex?c.n:c.n+(c.tr?` (${c.tr})`:"");
+
+// ---------- session builder ----------
+// Picks ~8 colors: due first, then trouble colors, then a few new ones, then familiar ones.
+const storyOf=c=>c.t||(c.s&&(c.s.hist||c.s.cult))||"";
+function pickSet(pool,n=8,newMax=4){const now=Date.now(),used=new Set(),out=[];
+ const add=(arr,k)=>{for(const c of arr){if(out.length>=n||k<=0)break;if(!used.has(c)){used.add(c);out.push(c);k--}}};
+ add(shuffle(pool.filter(c=>learned(c)&&S.cards[c.id].due<=now)),4);
+ add(shuffle(pool.filter(c=>learned(c)&&S.cards[c.id].b<=1)),2);
+ add(pool.filter(c=>!learned(c)),newMax);
+ add(shuffle(pool.filter(learned)),n);
+ add(shuffle(pool),n);
+ return out}
+const introFor=(c,flip)=>[{c,type:storyOf(c)&&flip?"mystery":"guess"},{c,type:"teach"}];
+function recallFor(c){const o=["recall","mix","mix","pick"];if(!c.lv.hex)o.push("recall");if(c.k)o.push("hook");if(c.t&&!c.lv.hex)o.push("clue");return{c,type:o[Math.random()*o.length|0]}}
+function buildSession(pool,mode){
+ const q=[];let set,fresh;
+ const intros=cs=>{let f=Math.random()<.5;cs.forEach(c=>{f=!f;q.push(...introFor(c,f))})};
+ if(mode==="learn"){set=pool.filter(c=>!learned(c)).slice(0,5);if(!set.length)set=shuffle(pool).slice(0,5);fresh=set.filter(c=>!learned(c));
+  if(set.length>=3)q.push({type:"sort",cards:set});intros(set);shuffle(set).forEach(c=>q.push(recallFor(c)));}
+ else if(mode==="match"){set=pickSet(pool,12,6);fresh=[];for(let i=0;i<set.length;i+=6)if(set.slice(i,i+6).length>=3)q.push({type:"match",cards:set.slice(i,i+6)})}
+ else if(mode==="sort"){set=shuffle(pool).slice(0,15);fresh=[];for(let i=0;i<set.length;i+=5)if(set.slice(i,i+5).length>=3)q.push({type:"sort",cards:set.slice(i,i+5)})}
+ else if(mode==="bolt"){set=pool.length>40?pickSet(pool,20,10):pool;fresh=[];q.push({type:"bolt",cards:set})}
+ else if(mode==="test"){set=shuffle(pool.filter(learned)).slice(0,8);fresh=[];set.forEach(c=>q.push({c,type:"check"}))}
+ else{const type=mode==="flash"?"recall":mode==="mix"?"mix":null;
+  set=pickSet(pool,mode==="mixed"?8:8,mode==="mixed"?3:2);fresh=set.filter(c=>!learned(c));
+  if(mode==="mixed"&&set.length>=4)q.push({type:"sort",cards:shuffle(set).slice(0,5)});
+  intros(fresh);
+  shuffle(set).forEach(c=>q.push(type?{c,type}:recallFor(c)));
+  if(mode==="mixed"&&set.length>=4)q.push({type:"match",cards:shuffle(set).slice(0,6)});}
+ return{q,set,fresh:new Set((fresh||[]).map(c=>c.id))};
+}
+let lastPlay=null;
+function play(packId,mode){mode=mode||S.mode||"mixed";const pk=packId&&PACKS()[packId];const pool=pk?pk.pool():favPool().concat(due());
+ lastPlay=[packId,mode];
+ if(mode==="test"&&pool.filter(learned).length<4){toast("Test needs 4 colors you've learned here. Play Mixed or Learn new first.");return}
+ const s=buildSession([...new Set(pool)],mode);if(!s.q.length){toast("Nothing to play here yet.");return}
+ L_={mode,pack:pk?pk.t:"Play",q:s.q,set:s.set,fresh:s.fresh,i:0,total:s.q.length,right:0,wrong:0,weak:new Set(),guess:{},exp:0};step()}
+function toast(msg){const t=document.createElement("div");t.className="toast";t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),2600)}
+// Hide the color's own name inside a clue.
+function mask(c,s){let out=s;[c.n,c.tr].filter(Boolean).forEach(w=>{out=out.replace(new RegExp(w.replace(/[.*+?^${}()|[\]\\]/g,"\\$&").replace(/s?$/,"s?"),"gi"),"____")});return out}
+function reviewQueue(){
+ return shuffle(due()).slice(0,12).map(c=>{const b=(S.cards[c.id]||{}).b||1;
+  const types=["recall","recall"];if(b>=2)types.push("pick");if(c.k)types.push("hook");if(c.t&&!c.lv.hex)types.push("clue");
+  return{c,type:types[Math.random()*types.length|0]}});
+}
+function hexExplain(h){const [r,g,b]=rgb(h);const w=v=>v===255?"full":v===0?"none":v===128?"half":Math.round(v/2.55)+"%";
+ if(r===g&&g===b)return`All three pairs are equal (${h.slice(1,3)}), so it is a grey. 00 is black, FF is white.`;
+ return`Red ${h.slice(1,3)} (${w(r)}), green ${h.slice(3,5)} (${w(g)}), blue ${h.slice(5,7)} (${w(b)}).`}
+function storyHTML(c){
+ const s=c.s||{};
+ const tags=[c.lv.school,c.lv.hex?"":c.h.toUpperCase(),c.c?"Pantone "+c.c:"",c.y?String(c.y):"",c.tr||""].filter(Boolean).map(x=>`<span class="tg">${esc(x)}</span>`).join("");
+ const hexNote=c.lv.hex?`<div class="facet"><b>How to read it</b><p>${hexExplain(c.h)}</p></div>`:"";
+ const facets=[["History",s.hist],["Culture",s.cult],["Mind",s.mind]].filter(f=>f[1]).map(([k,v])=>`<div class="facet"><b>${k}</b><p>${esc(v)}</p></div>`).join("");
+ const hook=c.k?`<div class="hook"><span class="fr" style="background:${c.h}"></span><div><small>Spot it in</small><a href="${c.k.u}" target="_blank" rel="noopener">${esc(c.k.w)}</a> · ${esc(c.k.a)}, ${esc(c.k.y)}<p>${esc(c.k.note)}</p></div></div>`:"";
+ const clue=c.t&&!facets?`<div class="facet"><b>Remember it by</b><p>${esc(c.t)}</p></div>`:"";
+ return `<div class="tags">${tags}</div><div class="story">${hook}${hexNote}${facets}${clue}</div>`;
+}
+
+// ---------- session runner (lessons, reviews, checkpoints) ----------
+let L_=null;
+function startReview(){play("due","flash")}
+function frame(body,foot){
+ let el=$(".lesson");if(!el){el=document.createElement("div");el.className="lesson";document.body.appendChild(el)}
+ const pct=Math.round(L_.i/L_.total*100);
+ el.innerHTML=`<div class="lbar"><button class="x" id="quit" aria-label="Quit">×</button><div class="prog"><b style="width:${pct}%"></b></div></div><div class="lbody">${body}</div><div class="foot" id="fb"><div class="in">${foot}</div></div>`;
+ $("#quit").onclick=()=>{clearInterval(boltTimer);el.remove();L_=null;render()};
+ el.querySelector(".lbody").scrollTop=0;
+}
+const next=()=>{L_.i++;step()};
+function step(){
+ if(L_.i>=L_.q.length)return finish();
+ const x=L_.q[L_.i];
+ ({guess:stepGuess,mystery:stepMystery,teach:stepTeach,recall:stepType,clue:stepType,check:stepType,pick:stepPick,hook:stepPick,mix:stepMix,sort:stepSort,bolt:stepBolt,match:stepMatch})[x.type](x,x.c);
+}
+
+// 1. Guess before the reveal: pick a name, then say how sure you are. Never scored.
+function stepGuess(x,c){
+ const opts=guessOptions(c),mono=c.lv.hex?" mono":"";let pick=null;
+ const intro=!S.tipSeen?`<p class="note">Guess first, even if you have no idea. A guess, right or wrong, makes the real answer stick better. It never counts against you.</p>`:"";
+ frame(`<div class="eyebrow">New color · your guess</div><div class="stage" style="background:${c.h}"></div><div class="prompt">Which name fits this color?</div>${intro}
+  <div class="opts">${opts.map((o,i)=>`<button class="opt${mono}" data-i="${i}">${esc(o.n)}${o.tr?`<small>${esc(o.tr)}</small>`:""}</button>`).join("")}</div>`,
+  `<div class="eyebrow" style="text-align:center">How sure are you?</div><div class="conf">${["Guessing","Fairly sure","Sure"].map((t,i)=>`<button class="btn ghost" data-cf="${i}" disabled>${t}</button>`).join("")}</div>`);
+ $$("[data-i]").forEach(b=>b.onclick=()=>{$$("[data-i]").forEach(z=>z.classList.remove("sel"));b.classList.add("sel");pick=opts[+b.dataset.i];$$("[data-cf]").forEach(z=>z.disabled=false)});
+ $$("[data-cf]").forEach(b=>b.onclick=()=>{S.tipSeen=true;save();L_.guess[c.id]={pick,conf:+b.dataset.cf};if(pick!==c&&+b.dataset.cf===2)L_.weak.add(c.id);next()});
+}
+// 2. Teach: the reveal, the story, and the painting.
+function stepTeach(x,c){
+ const g=L_.guess[c.id];let v="";
+ if(g&&g.mystery){v=g.pick===c?`<div class="verdict good"><b>Solved it.</b>You found it from the story alone.</div>`:`<div class="verdict"><b>You picked a close neighbor.</b>Compare them below: the difference is what this lesson trains.</div>`}
+ else if(g){if(g.pick===c)v=`<div class="verdict good"><b>${g.conf===0?"Good guess.":"You called it."}</b>Now lock it in with the story below.</div>`;
+  else if(g.conf===2)v=`<div class="verdict bad"><b>You were sure it was ${esc(g.pick.n)}.</b>Confident misses like this stick best once corrected, so this color comes back sooner.</div>`;
+  else v=`<div class="verdict"><b>You guessed ${esc(g.pick.n)}.</b>That guess is what makes the real name stick.</div>`}
+ frame(`${v}<div class="stage short" style="background:${c.h}"></div><div><div class="eyebrow">This is</div><div class="tname${c.lv.hex?" mono":""}">${esc(c.n)}</div>${c.tr?`<div class="muted">${esc(c.tr)}</div>`:""}</div>${storyHTML(c)}`,
+  `<button class="btn wide" id="go">Got it</button>`);
+ $("#go").onclick=next;
+}
+// 3. Typed recall from memory (also used for story clues and checkpoints). Feedback only after the attempt.
+function stepType(x,c){
+ const ck=x.type==="check",hex=c.lv.hex;let hinted=false;
+ const prompt=x.type==="clue"?"Which color is this?":hex?"Type the code for this color":"Name this color from memory";
+ const top=x.type==="clue"?`<div class="clue">${esc(mask(c,c.t))}</div>`:`<div class="stage" style="background:${c.h}"></div>`;
+ frame(`<div class="eyebrow">${ck?"Checkpoint · no hints":x.type==="clue"?"From the story":"Recall"}</div>${top}<div class="prompt">${prompt}</div>
+  <input class="typein${hex?" mono":""}" id="ty" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="${hex?"#RRGGBB":"Type the name"}" aria-label="Your answer">
+  <div id="hl" class="hintline" hidden></div>
+  <div class="helprow">${ck?"":`<button class="link" id="hint">Show a hint</button>`}<button class="link" id="idk">I don't know</button></div>`,
+  ck?`<div class="eyebrow" style="text-align:center">How sure are you?</div><div class="conf">${["Guessing","Fairly sure","Sure"].map((t,i)=>`<button class="btn ghost" data-cf="${i}" disabled>${t}</button>`).join("")}</div>`
+    :`<button class="btn wide" id="chk" disabled>Check</button>`);
+ const ty=$("#ty");setTimeout(()=>ty.focus({preventScroll:true}),50);
+ const btns=ck?[...$$("[data-cf]")]:[$("#chk")];
+ ty.oninput=()=>btns.forEach(b=>b.disabled=!ty.value.trim());
+ ty.onkeydown=e=>{if(e.key==="Enter"&&!ck&&ty.value.trim())$("#chk").click()};
+ const h=$("#hint");if(h)h.onclick=()=>{hinted=true;const hl=$("#hl");hl.textContent=hex?"#"+c.n.slice(1,3)+"····":hintFor(c);hl.hidden=false;h.remove();ty.focus()};
+ const submit=conf=>{const m=matches(c,ty.value);if(ck)L_.exp+=[.33,.66,.95][conf]??0;result(x,c,m.ok,{typo:m.typo,typed:ty.value.trim(),hinted})};
+ if(ck)btns.forEach(b=>b.onclick=()=>submit(+b.dataset.cf));else $("#chk").onclick=()=>submit();
+ $("#idk").onclick=()=>result(x,c,false,{typed:""});
+}
+// 4. Pick the swatch among close lookalikes (from a name or a painting).
+function stepPick(x,c){
+ const opts=shuffle([c,...lookalikes(c)]);let pick=null;
+ const top=x.type==="hook"?`<div class="prompt">Which color dominates this work?</div><div class="clue"><b>${esc(c.k.w)}</b><br><span class="muted">${esc(c.k.a)}, ${esc(c.k.y)}</span></div>`
+  :`<div class="prompt">Which one is <span class="${c.lv.hex?"mono":""}" style="white-space:nowrap">${esc(c.n)}</span>?</div><p class="sub">These are close. Picture it first, then pick.</p>`;
+ frame(`<div class="eyebrow">${x.type==="hook"?"Spot it in a masterpiece":"Lookalikes"}</div>${top}<div class="swopts">${opts.map((o,i)=>`<button class="swopt" data-i="${i}" style="background:${o.h}" aria-label="Swatch ${i+1}"></button>`).join("")}</div>`,
+  `<button class="btn wide" id="chk" disabled>Check</button>`);
+ $$("[data-i]").forEach(b=>b.onclick=()=>{$$("[data-i]").forEach(z=>z.classList.remove("sel"));b.classList.add("sel");pick=opts[+b.dataset.i];$("#chk").disabled=false});
+ $("#chk").onclick=()=>{$$("[data-i]").forEach(b=>{const o=opts[+b.dataset.i];b.classList.remove("sel");if(o===c)b.classList.add("right");else if(o===pick)b.classList.add("wrong")});result(x,c,pick===c,{picked:pick})};
+}
+
+// Mystery: the story comes first; find the color among close neighbors.
+function stepMystery(x,c){
+ const opts=shuffle([c,...lookalikes(c)]);
+ frame(`<div class="eyebrow">Mystery color</div><div class="clue mystery">${esc(mask(c,storyOf(c)))}</div><div class="prompt">Which one is it?</div>
+  <div class="swopts">${opts.map((o,i)=>`<button class="swopt" data-i="${i}" style="background:${o.h}" aria-label="Swatch ${i+1}"></button>`).join("")}</div>`,
+  `<div class="muted" style="text-align:center;font-size:14px">Tap the color you think the story describes.</div>`);
+ $$("[data-i]").forEach(b=>b.onclick=()=>{const pick=opts[+b.dataset.i];$$("[data-i]").forEach(z=>{const o=opts[+z.dataset.i];z.disabled=true;if(o===c)z.classList.add("right");else if(z===b)z.classList.add("wrong")});
+  L_.guess[c.id]={pick,mystery:1};setTimeout(next,650)});
+}
+// Sort: put the lesson's colors in order from lightest to darkest, then see their names.
+function stepSort(x){
+ const cards=shuffle(x.cards),seq=[];const Ls=cards.map(c=>lab(c.h)[0]);
+ const draw=()=>{$$(".sorttile").forEach((b,i)=>{const k=seq.indexOf(i);b.querySelector(".num").textContent=k<0?"":k+1;b.classList.toggle("on",k>=0)});$("#chk").disabled=seq.length<cards.length};
+ frame(`<div class="eyebrow">Sort · train your eye</div><div class="prompt">Tap these from lightest to darkest</div><p class="sub">Tap again to undo.</p>
+  <div class="sortgrid">${cards.map((c,i)=>`<button class="sorttile" data-s="${i}" style="background:${c.h}" aria-label="Color ${i+1}"><span class="num"></span><span class="nm"></span></button>`).join("")}</div>`,
+  `<button class="btn wide" id="chk" disabled>Check order</button>`);
+ $$(".sorttile").forEach(b=>b.onclick=()=>{const i=+b.dataset.s,k=seq.indexOf(i);if(k>=0)seq.splice(k);else seq.push(i);draw()});
+ $("#chk").onclick=()=>{
+  const want=Ls.slice().sort((a,b)=>b-a);let right=0;
+  seq.forEach((i,pos)=>{const ok=Math.abs(Ls[i]-want[pos])<2.5;if(ok)right++;const b=$$(".sorttile")[i];b.classList.add(ok?"right":"wrong");b.querySelector(".nm").textContent=cards[i].n;b.disabled=true});
+  L_.sortR=(L_.sortR||0)+right;L_.sortN=(L_.sortN||0)+cards.length;
+  const fb=$("#fb");fb.className="foot "+(right===cards.length?"good":"bad");
+  fb.querySelector(".in").innerHTML=`<div class="msg">${right===cards.length?"Perfect order.":`${right} of ${cards.length} in the right place.`}</div><div class="muted" style="font-size:14px">Lightness is the hardest thing to judge by eye, because strong colors look darker than they are.</div><button class="btn wide" id="go">Continue</button>`;
+  $("#go").onclick=next};
+}
+// Mix: slide along a dial between a neighbor and beyond, stop where the named color is.
+function stepMix(x,c){
+ const T=rgb(c.h),nb=lookalikes(c,1)[0]||CARDS[0],A=rgb(nb.h),p=.3+Math.random()*.4;
+ const B=T.map((t,i)=>Math.max(0,Math.min(255,Math.round(A[i]+(t-A[i])/p))));
+ const at=s=>toHex(...A.map((a,i)=>Math.round(a+(B[i]-a)*s)));
+ let best=0,bd=1e9;for(let s=0;s<=1.0001;s+=.01){const d=dE(at(s),c.h);if(d<bd){bd=d;best=s}}
+ frame(`<div class="eyebrow">Mix it</div><div class="prompt">Make <span class="${c.lv.hex?"mono":""}">${esc(c.n)}</span></div><p class="sub">Slide until the swatch is ${c.lv.hex?"this code":"this color"}, from memory.</p>
+  <div class="stage short" id="mixsw" style="background:${at(.5)}"></div>
+  <div class="mixwrap"><div class="mixtrack" style="background:linear-gradient(90deg,${at(0)},${at(1)})"></div><div class="mixmark" id="mk" hidden></div>
+  <input type="range" id="mix" min="0" max="1000" value="500" aria-label="Mix dial"></div>`,
+  `<button class="btn wide" id="chk">Lock it in</button>`);
+ const r=$("#mix");r.oninput=()=>$("#mixsw").style.background=at(r.value/1000);
+ $("#chk").onclick=()=>{const s=r.value/1000,d=dE(at(s),c.h),off=Math.abs(s-best);const ok=off<=.1||d<6;
+  const mk=$("#mk");mk.style.left=`calc(${best*100}% )`;mk.hidden=false;
+  $("#mixsw").style.background=`linear-gradient(90deg,${at(s)} 50%,${c.h} 50%)`;$("#mixsw").innerHTML=`<span class="tag" style="left:12px">Yours</span><span class="tag" style="left:auto;right:12px">${esc(c.n)}</span>`;
+  result(x,c,ok,{mix:off<=.04||d<3?"Spot on.":ok?"Close enough to count.":"Too far off."})};
+}
+// Lightning: 45 seconds of fast picks with a combo multiplier.
+let boltTimer=null;
+function stepBolt(x){
+ const extra=shuffle(CARDS.filter(c=>learned(c)&&!x.cards.includes(c))).slice(0,8);
+ const pool=x.cards.concat(x.cards,extra);let score=0,combo=0,n=0,hits=0,left=45,cur=null;
+ frame(`<div class="eyebrow">Lightning round</div><div class="boltbar"><b id="tb"></b></div>
+  <div class="bolthead"><div><div class="n disp" id="sc">0</div><span class="muted">points</span></div><div class="combo" id="cb"></div></div><div id="bq"></div>`,
+  `<button class="btn wide" id="bstart">Start · 45 seconds</button>`);
+ const ask=()=>{const c=pool[Math.random()*pool.length|0];if(c===cur&&pool.length>1)return ask();cur=c;const opts=shuffle([c,...lookalikes(c,2)]);const byName=Math.random()<.5;
+  $("#bq").innerHTML=byName?`<div class="prompt" style="margin:8px 0 14px">${esc(c.n)}</div><div class="swopts three">${opts.map((o,i)=>`<button class="swopt" data-b="${i}" style="background:${o.h}" aria-label="Swatch ${i+1}"></button>`).join("")}</div>`
+   :`<div class="stage short" style="background:${c.h};margin-bottom:12px"></div><div class="opts">${opts.map((o,i)=>`<button class="opt${o.lv.hex?" mono":""}" data-b="${i}">${esc(o.n)}</button>`).join("")}</div>`;
+  $$("[data-b]").forEach(b=>b.onclick=()=>{const ok=opts[+b.dataset.b]===c;n++;if(ok){hits++;combo=Math.min(combo+1,5);score+=10*combo}else combo=0;
+   b.classList.add(ok?"right":"wrong");b.classList.add(ok?"flashg":"flashr");$("#sc").textContent=score;$("#cb").textContent=combo>1?"×"+combo:"";
+   setTimeout(()=>{if(left>0)ask()},ok?180:500)})};
+ $("#bstart").onclick=()=>{$("#fb").hidden=true;ask();const t0=Date.now();
+  boltTimer=setInterval(()=>{left=45-(Date.now()-t0)/1000;$("#tb").style.width=Math.max(0,left/45*100)+"%";
+   if(left<=0){clearInterval(boltTimer);L_.bolt={score,hits,n};if(score>(S.best||0)){S.best=score;L_.bolt.best=true;save()}next()}},100)};
+}
+// Match: pair each swatch with its name, against the clock.
+function stepMatch(x){
+ const cs=x.cards,tiles=shuffle(cs.flatMap(c=>[{c,k:"s"},{c,k:"n"}]));let sel=null,left=cs.length,miss=0;const t0=Date.now();
+ frame(`<div class="eyebrow">Match · pair them up</div><div class="bolthead"><div class="prompt">Tap a swatch, then its name</div><div class="combo mono" id="clock" style="font-size:20px;color:var(--soft)">0.0</div></div>
+  <div class="matchgrid">${tiles.map((o,i)=>o.k==="s"?`<button class="mt sw" data-m="${i}" style="background:${o.c.h}" aria-label="Swatch"></button>`:`<button class="mt nm${o.c.lv.hex?" mono":""}" data-m="${i}">${esc(o.c.n)}</button>`).join("")}</div>`,
+  `<div class="muted" style="text-align:center;font-size:14px">${cs.length} pairs · a wrong pair adds 2 seconds</div>`);
+ const clk=setInterval(()=>{const e=$("#clock");if(!e)return clearInterval(clk);e.textContent=((Date.now()-t0)/1000+miss*2).toFixed(1)},100);
+ $$("[data-m]").forEach(b=>b.onclick=()=>{const o=tiles[+b.dataset.m];
+  if(!sel){sel={o,b};b.classList.add("sel");return}
+  if(sel.b===b){b.classList.remove("sel");sel=null;return}
+  if(sel.o.c===o.c&&sel.o.k!==o.k){[sel.b,b].forEach(z=>{z.classList.remove("sel");z.classList.add("gone");z.disabled=true});left--;sel=null;
+   if(!left){clearInterval(clk);const secs=(Date.now()-t0)/1000+miss*2;L_.match=(L_.match||[]).concat(secs);L_.right+=cs.length;L_.wrong+=miss;
+    const fb=$("#fb");fb.className="foot good";fb.querySelector(".in").innerHTML=`<div class="msg">Cleared in ${secs.toFixed(1)} seconds.</div><div class="muted" style="font-size:14px">${miss?`${miss} wrong ${miss===1?"pair":"pairs"}.`:"No wrong pairs."}</div><button class="btn wide" id="go">Continue</button>`;$("#go").onclick=next}}
+  else{miss++;[sel.b,b].forEach(z=>{z.classList.remove("sel");z.classList.add("flashr");setTimeout(()=>z.classList.remove("flashr"),400)});sel=null}});
+}
+function result(x,c,ok,o){
+ if(ok)L_.right++;else{L_.wrong++;L_.weak.add(c.id);const isNew=L_.fresh.has(c.id);if(isNew&&!x.retry)L_.q.push({c,type:"recall",retry:1}),L_.total++}
+ if(o.hinted)L_.weak.add(c.id);
+ if(!L_.fresh.has(c.id)){grade(c,ok&&!o.hinted);logRecall(ok&&!o.hinted)}
+ $$("#fb button,.lbody button,.lbody input").forEach(b=>b.disabled=true);
+ const fb=$("#fb");fb.className="foot "+(ok?"good":"bad");
+ const msg=o.mix?o.mix:ok?(o.typo?"Right. Check the spelling.":o.hinted?"Right, with a hint.":x.type==="check"?"Remembered.":"From memory.")
+  :o.typed===""?"Here it is.":"Not this one.";
+ fb.querySelector(".in").innerHTML=`<div class="msg">${msg}</div>
+  <div class="ans"><span class="dot" style="background:${c.h}"></span><span>${ok?"":"It's "}<b class="${c.lv.hex?"mono":""}">${esc(label(c))}</b></span></div>
+  ${!ok&&o.typed?`<div class="ans muted"><span class="dot" style="background:transparent;box-shadow:none"></span><span>You typed “${esc(o.typed)}”</span></div>`:""}
+  ${!ok&&o.picked?`<div class="ans"><span class="dot" style="background:${o.picked.h}"></span><span>You picked ${esc(label(o.picked))}</span></div>`:""}
+  ${!ok&&L_.fresh.has(c.id)&&!x.retry?`<div class="muted" style="font-size:14px">You'll get another try before the end.</div>`:""}
+  <button class="btn wide" id="go">Continue</button>`;
+ $("#go").onclick=next;$("#go").focus({preventScroll:true});
+}
+function finish(){
+ const asked=L_.right+L_.wrong;let xp=Math.max(L_.right,1),head,body="";
+ const colors=L_.set.length?L_.set:L_.q.map(x=>x.c).filter(Boolean);
+ colors.forEach(c=>{if(L_.fresh.has(c.id))grade(c,!L_.weak.has(c.id))});
+ const nNew=[...L_.fresh].length;
+ if(L_.mode==="test"){
+  xp=L_.right*2;const exp=Math.round(L_.exp);
+  S.checks.push({pack:L_.pack,n:L_.total,ok:L_.right,exp,at:Date.now()});
+  head=`${L_.right} of ${L_.total} from memory.`;
+  body=`<div class="tiles" style="grid-template-columns:1fr 1fr"><div class="tile"><b>${exp}</b><span>You expected</span></div><div class="tile"><b>${L_.right}</b><span>You got</span></div></div>
+   <p class="muted">${exp>L_.right?"You felt surer than your memory was. That's normal, and it's why tests exist: feeling like you know a color isn't the same as recalling it.":exp<L_.right?"You remembered more than you thought. Trust your eye a little more.":"Your confidence matched your memory exactly."}</p>`;
+ }else{
+  const parts=[];
+  if(nNew)parts.push(`<div class="tile"><b>${nNew}</b><span>New colors</span></div>`);
+  const onlyMatch=L_.match&&!L_.q.some(x=>x.c);
+  if(onlyMatch)parts.push(`<div class="tile"><b>${L_.wrong}</b><span>Wrong pairs</span></div>`);
+  else if(L_.mode!=="sort"&&L_.mode!=="bolt"&&asked)parts.push(`<div class="tile"><b>${L_.right}/${asked}</b><span>${L_.match&&!L_.q.some(x=>x.c)?"Pairs":"Right"}</span></div>`);
+  if(L_.sortN)parts.push(`<div class="tile"><b>${L_.sortR}/${L_.sortN}</b><span>Sorted</span></div>`);
+  if(L_.match){const b=Math.min(...L_.match);parts.push(`<div class="tile"><b>${b.toFixed(1)}s</b><span>Match time</span></div>`)}
+  parts.push(`<div class="tile"><b>${S.streak||1}</b><span>Day streak</span></div>`);
+  body=`<div class="tiles">${parts.slice(0,3).join("")}</div>`;
+  head=onlyMatch?`${L_.match.length} ${L_.match.length===1?"board":"boards"} cleared.`:L_.bolt?`${L_.bolt.score} points.`:nNew?`${nNew} new ${nNew===1?"color":"colors"}, ${L_.right} right.`:asked?`${L_.right} of ${asked} right.`:"Nice sorting.";
+  if(L_.bolt){xp=L_.bolt.hits;body=`<div class="tiles"><div class="tile"><b>${L_.bolt.hits}/${L_.bolt.n}</b><span>Right</span></div><div class="tile"><b>${S.best||L_.bolt.score}</b><span>${L_.bolt.best?"New best":"Best"}</span></div><div class="tile"><b>${S.streak||1}</b><span>Day streak</span></div></div>`}
+  if(nNew)body+=`<p class="muted">The new ones come back tomorrow. Remembering them after a night's sleep is what makes them stick.</p>`;
+ }
+ gain(xp);
+ frame(`<div class="done"><div class="eyebrow">${esc(L_.pack)} · ${esc((MODES.find(m=>m[0]===L_.mode)||MODES[0])[1])}</div><div class="big">${head}</div>
+  <div class="strip">${colors.slice(0,16).map(c=>`<i style="background:${c.h}"></i>`).join("")}</div>${body}</div>`,
+  `<div style="display:flex;gap:10px"><button class="btn" id="again" style="flex:1">Play again</button><button class="btn ghost" id="go">Done</button></div>`);
+ $(".prog b").style.width="100%";
+ $("#go").onclick=()=>{$(".lesson").remove();L_=null;render()};
+ $("#again").onclick=()=>{const [p,m]=lastPlay;L_=null;play(p,m)};
+}
+
+// ---------- hex gym ----------
+let G={mode:"mix",target:null,cur:[128,128,128],opts:null,res:null};
+function newTarget(){const r=()=>Math.round(Math.random()*15)*17;G.target=toHex(r(),r(),r());G.cur=[128,128,128];G.res=null;
+ if(G.mode==="read"){G.opts=shuffle([G.target,...Array.from({length:3},()=>{const [a,b,c]=rgb(G.target).map(v=>Math.max(0,Math.min(255,v+(Math.random()<.5?-1:1)*(51+Math.round(Math.random()*3)*34))));return toHex(a,b,c)})])}}
+function renderGym(){
+ if(!G.target)newTarget();
+ const cur=toHex(...G.cur);
+ let html=`<h2 class="title2">Hex Gym</h2><p class="muted" style="margin:4px 0 0;font-size:14px">For Photoshop and Figma people. Train your eye to go from color to code and back.</p>
+ <div class="seg"><button data-m="mix" aria-pressed="${G.mode==="mix"}">Mix the color</button><button data-m="read" aria-pressed="${G.mode==="read"}">Read the code</button></div>`;
+ if(G.mode==="mix"){
+  html+=`<div class="gym"><div class="sw" style="background:${G.target}"><span>Target</span></div><div class="sw" style="background:${cur}"><span>Yours</span></div></div>
+  <div class="hexread"><span class="r">${cur.slice(1,3)}</span><span class="g">${cur.slice(3,5)}</span><span class="b">${cur.slice(5,7)}</span></div>
+  ${["R","G","B"].map((k,i)=>`<div class="slider"><label for="s${k}">${k}</label><input type="range" id="s${k}" min="0" max="255" step="1" value="${G.cur[i]}" ${G.res?"disabled":""}><output id="o${k}">${G.cur[i].toString(16).padStart(2,"0").toUpperCase()}</output></div>`).join("")}
+  ${G.res?`<div class="tip"><b>${G.res.word}</b> Difference ΔE ${G.res.d.toFixed(1)} · target was <span class="mono">${G.target}</span> · +${G.res.xp} XP</div><button class="btn wide" id="nx" style="margin-top:12px">Next color</button>`:`<button class="btn wide" id="ck" style="margin-top:8px">Check</button>`}`;
+ }else{
+  html+=`<div class="prompt" style="margin-top:6px">Which swatch is this code?</div><div class="hexread" style="margin:8px 0 14px"><span class="r">#${G.target.slice(1,3)}</span><span class="g">${G.target.slice(3,5)}</span><span class="b">${G.target.slice(5,7)}</span></div>
+  <div class="swopts">${G.opts.map(h=>`<button class="swopt ${G.res?(h===G.target?"right":h===G.res.pick?"wrong":""):""}" data-h="${h}" style="background:${h}" aria-label="Swatch" ${G.res?"disabled":""}></button>`).join("")}</div>
+  ${G.res?`<div class="tip"><b>${G.res.ok?"Correct.":"Not this time."}</b> ${hexExplain(G.target)}</div><button class="btn wide" id="nx" style="margin-top:12px">Next code</button>`:""}`;
+ }
+ html+=`<div class="tip"><b>Cheat sheet.</b> #RRGGBB. Each pair runs 00 to FF (0 to 255). FF0000 is pure red, 00FF00 green, 0000FF blue. Raise all three together to lighten; equal pairs give grey; the largest pair sets the hue family.</div>`;
+ shell(html);
+ $$("[data-m]").forEach(b=>b.onclick=()=>{G.mode=b.dataset.m;newTarget();renderGym()});
+ ["R","G","B"].forEach((k,i)=>{const s=$("#s"+k);if(s)s.oninput=()=>{G.cur[i]=+s.value;const h=toHex(...G.cur);$("#o"+k).textContent=h.slice(1+2*i,3+2*i);$$(".gym .sw")[1].style.background=h;$(".hexread").innerHTML=`<span class="r">${h.slice(1,3)}</span><span class="g">${h.slice(3,5)}</span><span class="b">${h.slice(5,7)}</span>`}});
+ const ck=$("#ck");if(ck)ck.onclick=()=>{const d=dE(G.target,toHex(...G.cur));const [word,xp]=d<3?["Spot on.",10]:d<8?["Very close.",6]:d<16?["Close.",3]:["Keep training.",1];G.res={d,word,xp};gain(xp);renderGym()};
+ $$("[data-h]").forEach(b=>b.onclick=()=>{const ok=b.dataset.h===G.target;G.res={ok,pick:b.dataset.h};if(ok)gain(3);renderGym()});
+ const nx=$("#nx");if(nx)nx.onclick=()=>{newTarget();renderGym()};
+}
+
+// ---------- library ----------
+let q="";
+function renderLib(){
+ const fs=[["all","All"],["hooks","In paintings"],["stories","With stories"],...LEVELS.map(L=>[L.id,L.school.replace(/ \(.*\)/,"")])];
+ shell(`<h2 class="title2">Color Library</h2><p class="muted" style="margin:4px 0 0;font-size:14px">${CARDS.length} colors with their history, culture and psychology, and the masterpieces where you can see them.</p>
+ <input class="search" id="q" placeholder="Search colors, painters, works" value="${esc(q)}" aria-label="Search the library">
+ <div class="seg">${fs.map(([k,l])=>`<button data-f="${k}" aria-pressed="${S.lib===k}">${esc(l)}</button>`).join("")}</div><div class="lib" id="grid"></div>`);
+ const grid=$("#grid");
+ const draw=()=>{const t=q.toLowerCase();
+  const list=CARDS.filter(c=>(S.lib==="all"||(S.lib==="hooks"&&c.k)||(S.lib==="stories"&&c.s)||c.lv.id===S.lib)&&(!t||[c.n,c.tr,c.k&&c.k.w,c.k&&c.k.a,c.lv.school].join(" ").toLowerCase().includes(t)));
+  grid.innerHTML=list.length?list.map(c=>`<button class="chip" data-id="${esc(c.id)}"><span class="sw" style="background:${c.h}"></span><span class="lb">${c.k?'<span class="tagl">Masterpiece</span>':c.s?'<span class="tagl">Story</span>':""}<b>${esc(c.n)}</b><small>${c.c?esc(c.c):c.lv.hex?esc(c.lv.school.replace(/ \(.*\)/,"")):c.h.toUpperCase()}</small></span></button>`).join(""):`<p class="muted">No colors match that search.</p>`;
+  grid.querySelectorAll("[data-id]").forEach(b=>b.onclick=()=>openSheet(BYID[b.dataset.id]))};
+ draw();
+ $("#q").oninput=e=>{q=e.target.value;draw()};
+ $$("[data-f]").forEach(b=>b.onclick=()=>{S.lib=b.dataset.f;save();renderLib()});
+}
+function openSheet(c){
+ const el=document.createElement("div");el.className="sheet";
+ el.innerHTML=`<div class="pane" role="dialog" aria-label="${esc(c.n)}"><div class="band" style="background:${c.h}"><button class="x" aria-label="Close">×</button></div>
+  <div><div class="eyebrow">${esc(c.lv.school)}</div><div class="tname${c.lv.hex?" mono":""}">${esc(c.n)}</div>${c.tr?`<div class="muted">${esc(c.tr)}</div>`:""}</div>${storyHTML(c)}</div>`;
+ el.onclick=e=>{if(e.target===el||e.target.classList.contains("x"))el.remove()};
+ document.body.appendChild(el);
+}
+render();
+</script>

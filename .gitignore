@@ -1,0 +1,4 @@
+.DS_Store
+.xfer_done/
+.claude/
+node_modules/
