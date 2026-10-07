@@ -160,18 +160,29 @@ function honeyLayout(raw, layoutKey) {
 // ---------- the eight presets ----------
 // Every field here is also a Tweak-panel slider (js/home.js hmTweakPanel): m0/m1/sig (Center/Outer/Falloff),
 // fill, gap, shape, zMinUser (Zoom-out limit), vig (Vignette), labelMin, drift, lensMode, layout.
-const HONEY_CFG_BASE = { layout: "mapTall", lensMode: "round", m0: 3.7, m1: .82, sig: 1.9, fill: .5, gap: .1, shape: 0,
+// gap: the seam between neighboring cells, in units of 20 px (.05 = 1 px), equal everywhere (honeyCells).
+// far: how the style changes as you zoom all the way out. Each value is ADDED to the near value, scaled by how far
+// out you are (0 at the starting zoom, 1 at the zoom-out limit), so a user's Tweak moves both ends together.
+const HONEY_CFG_BASE = { layout: "mapTall", lensMode: "round", m0: 3.7, m1: .82, sig: 1.9, fill: .5, gap: .05, shape: 0,
   zMinUser: null, vig: 1, labelMin: 26, drift: 1, flat: .7 };
 const HONEY_STYLES = {
-  original: { title: "Original", cfg: { layout: "mapWide", m0: 3.7, m1: 1.05, sig: 2.1, fill: .4, gap: .1, zMinUser: .11, labelMin: 24 } },
-  current: { title: "Current", cfg: { layout: "mapTall", m0: 3.7, m1: 1.1, sig: 2.2, fill: .55, gap: .09, zMinUser: .1, labelMin: 23 } },
-  edges: { title: "Edges", cfg: { layout: "mapTall", lensMode: "edges", flat: .68, fill: .6, gap: .1, zMinUser: .15, labelMin: 25 } },
-  sunflower: { title: "Sunflower", cfg: { layout: "sunflower", m0: 2.3, m1: 1, sig: 2.4, fill: .3, gap: .12, zMinUser: .18, labelMin: 24, vig: 0 } },
-  wheel: { title: "Wheel", cfg: { layout: "wheel", m0: 3.4, m1: 1, sig: 2, fill: .7, gap: .08, zMinUser: .12, labelMin: 25 } },
-  tapestry: { title: "Tapestry", cfg: { layout: "mapTall", m0: 3, m1: 1.3, sig: 2.6, fill: 1, gap: .07, shape: .45, zMinUser: .06, labelMin: 32, drift: .6 },
+  original: { title: "Original", cfg: { layout: "mapWide", m0: 3.7, m1: 1.05, sig: 2.1, gap: .05, zMinUser: .11, labelMin: 24 },
+    far: { m0: -.9, labelMin: -5, gap: -.02 } },
+  current: { title: "Current", cfg: { layout: "mapTall", m0: 3.7, m1: 1.1, sig: 2.2, gap: .05, zMinUser: .1, labelMin: 23 },
+    far: { m0: -.9, labelMin: -5, gap: -.02 } },
+  edges: { title: "Edges", cfg: { layout: "mapTall", lensMode: "edges", flat: .68, gap: .05, zMinUser: .15, labelMin: 25 },
+    far: { labelMin: -4 } },
+  sunflower: { title: "Sunflower", cfg: { layout: "sunflower", m0: 2.3, m1: 1, sig: 2.4, gap: .06, zMinUser: .18, labelMin: 24, vig: 0 },
+    far: { m0: .4, gap: -.03, labelMin: -4 } },
+  wheel: { title: "Wheel", cfg: { layout: "wheel", m0: 3.4, m1: 1, sig: 2, gap: .05, zMinUser: .12, labelMin: 25 },
+    far: { m0: -.7, labelMin: -4, gap: -.02 } },
+  tapestry: { title: "Tapestry", cfg: { layout: "mapTall", m0: 3, m1: 1.3, sig: 2.6, gap: .04, shape: .45, zMinUser: .06, labelMin: 32, drift: .6 },
+    far: { shape: .35, gap: -.02, m0: -.6 },
     sizeTune: N => ({ }), initialZoom: N => N >= 600 ? .22 : N >= 150 ? .32 : .42 },
-  magnifier: { title: "Magnifier", cfg: { layout: "mapTall", m0: 5.6, m1: .6, sig: 1.2, fill: .5, gap: .12, zMinUser: .25, labelMin: 22 } },
-  honeycomb: { title: "Honeycomb", cfg: { layout: "mapTall", lensMode: "none", flat: .999, shape: 1, gap: .03, zMinUser: .08, labelMin: 30, drift: .4, vig: .6 } },
+  magnifier: { title: "Magnifier", cfg: { layout: "mapTall", m0: 5.6, m1: .6, sig: 1.2, gap: .05, zMinUser: .25, labelMin: 22 },
+    far: { m0: -1.8, sig: .5, labelMin: -4 } },
+  honeycomb: { title: "Honeycomb", cfg: { layout: "mapTall", lensMode: "round", m0: 2.6, m1: 1, sig: 2.4, shape: 1, gap: .03, zMinUser: .08, labelMin: 30, drift: .4, vig: .6 },
+    far: { m0: -.8, gap: -.02, labelMin: -6 } },
 };
 const HONEY_STYLE_LIST = Object.keys(HONEY_STYLES).map(id => ({ id, title: HONEY_STYLES[id].title }));
 function honeyResolveCfg(styleId, tweak, N) {
@@ -179,6 +190,7 @@ function honeyResolveCfg(styleId, tweak, N) {
   let cfg = { ...HONEY_CFG_BASE, ...preset.cfg };
   if (preset.sizeTune) cfg = { ...cfg, ...preset.sizeTune(N) };
   if (tweak) cfg = { ...cfg, ...tweak };
+  cfg.far = preset.far || {};
   cfg.fill = clamp(+cfg.fill, 0, 1); cfg.shape = clamp(+cfg.shape, 0, 1); cfg.gap = clamp(+cfg.gap, 0, .5);
   cfg.vig = clamp(+cfg.vig, 0, 1); cfg.drift = Math.max(0, +cfg.drift);
   return cfg;
@@ -221,32 +233,90 @@ function honeyHexR(theta, r) {
 }
 // how far a bubble's outline reaches from its center toward angle theta (circle, hexagon or the blend between)
 const honeyExtent = (theta, r, shapeAmt) => shapeAmt <= .02 ? r : r * (1 - shapeAmt) + honeyHexR(theta, r) * shapeAmt;
-// No overlap, whatever the lens, layout, fill, gap or shape: every bubble is shrunk (never grown) until, toward each
-// near neighbor, its reach plus the neighbor's reach fits inside the distance between their centers (less a hairline).
-// Each bubble takes the tightest factor over all its neighbors, so every pair is guaranteed to fit.
-function honeyNoOverlap(drawn, shapeAmt) {
-  if (drawn.length < 2) return;
+// Cells, not separately sized bubbles. Each bubble's area is its Voronoi cell: the part of the screen closer to its
+// center than to any neighbor's, clipped back from every neighbor by half the gap. So neighbors meet along a seam of
+// exactly `gapPx` everywhere, at the center and at the edges alike, and whatever the lens does to the spacing:
+//   shape 1 = the cell itself (a true honeycomb, corners included, following the magnification)
+//   shape 0 = the largest circle that fits in the cell (touching its nearest neighbors across the same gap)
+//   between = the circle blended toward the cell, so the corners round off
+// A bubble at the edge of what's drawn (neighbors culled) is also bounded by its own lens size, so it never balloons.
+function honeyCells(drawn, gapPx, shapeAmt = 0) {
+  if (!drawn.length) return;
   let maxD = 0; for (const b of drawn) if (b.d > maxD) maxD = b.d;
-  const cell = Math.max(4, maxD * 1.2), grid = new Map(), key = (i, j) => i * 100003 + j;
+  const cell = Math.max(4, maxD * 1.25), grid = new Map(), key = (i, j) => i * 100003 + j;
   drawn.forEach((b, n) => { const k = key(Math.floor(b.x / cell), Math.floor(b.y / cell)); let a = grid.get(k); if (!a) grid.set(k, a = []); a.push(n); });
-  const scale = new Float64Array(drawn.length).fill(1);
+  const half = gapPx / 2;
   drawn.forEach((b, n) => {
+    // start from a 16-gon a little bigger than the bubble's own lens size
+    const R0 = b.d * .62; let poly = [];
+    for (let i = 0; i < 16; i++) { const t = i / 16 * 6.283185307; poly.push([Math.cos(t) * R0, Math.sin(t) * R0]); }
     const ci = Math.floor(b.x / cell), cj = Math.floor(b.y / cell);
-    for (let i = ci - 1; i <= ci + 1; i++) for (let j = cj - 1; j <= cj + 1; j++) {
+    for (let i = ci - 1; i <= ci + 1 && poly.length; i++) for (let j = cj - 1; j <= cj + 1 && poly.length; j++) {
       const a = grid.get(key(i, j)); if (!a) continue;
       for (const m of a) {
         if (m === n) continue;
-        const o = drawn[m], dx = o.x - b.x, dy = o.y - b.y, dist = Math.hypot(dx, dy);
-        if (dist > (b.d + o.d) * .62) continue;
-        const th = Math.atan2(dy, dx), need = honeyExtent(th, b.d / 2, shapeAmt) + honeyExtent(th + Math.PI, o.d / 2, shapeAmt);
-        if (need > 0) { const k = dist * .985 / need; if (k < scale[n]) scale[n] = k; }
+        const o = drawn[m], vx = o.x - b.x, vy = o.y - b.y, dist = Math.hypot(vx, vy);
+        if (dist < 1e-6 || dist > (b.d + o.d) * .75) continue;
+        (b.nb || (b.nb = [])).push([m, dist]);
+        const ux = vx / dist, uy = vy / dist, lim = dist / 2 - half;
+        // keep the side of the bisector (moved back by half the gap) that faces this bubble
+        const out = [];
+        for (let k = 0; k < poly.length; k++) {
+          const p = poly[k], q = poly[(k + 1) % poly.length], dp = p[0] * ux + p[1] * uy - lim, dq = q[0] * ux + q[1] * uy - lim;
+          if (dp <= 0) out.push(p);
+          if ((dp <= 0) !== (dq <= 0)) { const t = dp / (dp - dq); out.push([p[0] + (q[0] - p[0]) * t, p[1] + (q[1] - p[1]) * t]); }
+        }
+        poly = out;
       }
     }
+    // the inscribed circle: the nearest edge line to the center
+    let rin = Infinity;
+    for (let k = 0; k < poly.length; k++) {
+      const p = poly[k], q = poly[(k + 1) % poly.length], ex = q[0] - p[0], ey = q[1] - p[1], len = Math.hypot(ex, ey);
+      if (len < 1e-9) continue;
+      rin = Math.min(rin, Math.abs(p[0] * ey - p[1] * ex) / len);
+    }
+    b.poly = poly.length >= 3 ? poly : null; b.rin = isFinite(rin) && b.poly ? rin : 0; b.d0 = b.d; b.d = 2 * b.rin;
   });
-  drawn.forEach((b, n) => { if (scale[n] < 1) b.d *= Math.max(0, scale[n]); });
+  // Circles: a small bubble leaves room in its cell that its bigger neighbor can use (the Magnifier's center next to
+  // its smaller first ring). Grow each circle, center outward, until it meets its neighbors across the gap, never past
+  // its own lens size. Every step keeps r_a + r_b <= distance - gap, so circles still never overlap.
+  if (shapeAmt <= .02) {
+    const cx = drawn.reduce((t, b) => t + b.x, 0) / drawn.length, cy = drawn.reduce((t, b) => t + b.y, 0) / drawn.length;
+    const order = drawn.map((b, n) => n).sort((a, c) => Math.hypot(drawn[a].x - cx, drawn[a].y - cy) - Math.hypot(drawn[c].x - cx, drawn[c].y - cy));
+    for (let pass = 0; pass < 2; pass++) for (const n of order) {
+      const b = drawn[n]; if (!b.nb) continue;
+      let lim = b.d0 * .52;
+      for (const [m, dist] of b.nb) lim = Math.min(lim, dist - gapPx - drawn[m].rin);
+      b.rin = Math.max(0, lim); b.d = 2 * b.rin;
+    }
+  }
 }
-// the bubble outline: a plain circle (shape 0) blended toward a true hexagon (shape 1), rounding the corners
-// in between for free (the blend's own smooth transition from a constant radius to the hexagon's peaked one).
+// distance from the cell's center to its edge toward angle t (a ray against the convex polygon)
+function honeyRay(poly, t) {
+  const dx = Math.cos(t), dy = Math.sin(t); let best = Infinity;
+  for (let k = 0; k < poly.length; k++) {
+    const p = poly[k], q = poly[(k + 1) % poly.length], ex = q[0] - p[0], ey = q[1] - p[1], den = dx * ey - dy * ex;
+    if (Math.abs(den) < 1e-12) continue;
+    const s = (p[0] * ey - p[1] * ex) / den, u = (p[0] * dy - p[1] * dx) / den;
+    if (s > 0 && u >= -1e-9 && u <= 1 + 1e-9 && s < best) best = s;
+  }
+  return isFinite(best) ? best : 0;
+}
+// the bubble outline from its cell: the inscribed circle (shape 0), the cell (shape 1), or the blend
+function honeyCellPath(ctx, b, shapeAmt, grow = 1) {
+  ctx.beginPath();
+  const r = b.rin * grow;
+  if (!b.poly || shapeAmt <= .02 || r < 3) { ctx.arc(b.x, b.y, Math.max(0, r), 0, 6.2832); return; }
+  if (shapeAmt >= .98) { b.poly.forEach((p, i) => { const x = b.x + p[0] * grow, y = b.y + p[1] * grow; if (i) ctx.lineTo(x, y); else ctx.moveTo(x, y); }); ctx.closePath(); return; }
+  const n = r > 36 ? 36 : r > 14 ? 24 : 14;
+  for (let i = 0; i <= n; i++) {
+    const t = i / n * 6.283185307, rr = (b.rin * (1 - shapeAmt) + honeyRay(b.poly, t) * shapeAmt) * grow;
+    const x = b.x + Math.cos(t) * rr, y = b.y + Math.sin(t) * rr;
+    if (i) ctx.lineTo(x, y); else ctx.moveTo(x, y);
+  }
+  ctx.closePath();
+}
 function honeyPath(ctx, cx, cy, r, shapeAmt) {
   ctx.beginPath();
   if (shapeAmt <= .02 || r < 3) { ctx.arc(cx, cy, r, 0, 6.2832); return; }
@@ -293,7 +363,7 @@ function honeycomb(host, opts = {}) {
   const lens = t => {
     const e = 1 - Math.pow(1 - bloom, 3), br = phase === "drift" ? 1 + .028 * Math.sin(t / 1000 * Math.PI * 2 / 3.8) : 1;
     const s = (.72 + .28 * e) * Z;
-    return { s, a: e, m0: cfg.m0 * br, m1: cfg.m1, sig: cfg.sig, K: base * s * M * br, inner: inner() };
+    return { s, a: e, m0: zc("m0") * br, m1: zc("m1"), sig: zc("sig"), K: base * s * M * br, inner: inner() };
   };
   const F = (z, l) => base * l.s * (l.m1 * z + (l.m0 - l.m1) * l.sig * .8862 * honeyErf(z / l.sig));
   const magR = (z, l) => l.m1 + (l.m0 - l.m1) * Math.exp(-((z / l.sig) ** 2));            // radial derivative (F')
@@ -307,7 +377,16 @@ function honeycomb(host, opts = {}) {
     if (cfg.lensMode === "round") return Finv(Math.hypot(W, Hh) / 2 + 40, l);
     const um = l.inner + 3 * (1 - l.inner); return Math.hypot(um * W / 2, um * Hh / 2) / l.K + 1;
   };
-  const pack = () => clamp(1 - cfg.gap, .55, 1);
+  const pack = () => 1;   // spacing now comes from the cells (honeyCells); this only bounds bubbles at the drawn edge
+  const gapPx = () => clamp(zc("gap"), 0, .45) * 20;   // the seam between neighbors, in px (0-9), equal everywhere
+  // a style value at the current zoom: the near value plus its "far" change, scaled by how far out you are
+  function zc(k) {
+    const d = cfg.far && cfg.far[k]; if (!d) return cfg[k];
+    const p = HONEY_STYLES[styleId], zs = p && p.initialZoom ? p.initialZoom(lay ? lay.raw.length : 101) : 1;
+    const z0 = Math.max(ZMIN + .01, Math.min(ZMAX, zs)), t = clamp((z0 - Z) / Math.max(.01, z0 - ZMIN), 0, 1);
+    const v = cfg[k] + d * t;
+    return k === "shape" ? clamp(v, 0, 1) : k === "m0" ? Math.max(cfg.m1 + .05, v) : Math.max(0, v);
+  }
   // zoom limits for a wrapping set. A manual zMinUser (preset or Tweak "Zoom-out limit") is a hard floor: once
   // reached it does not rubber-band back to a closer zoom ("stays that far out").
   const zFloor = () => {
@@ -360,7 +439,7 @@ function honeycomb(host, opts = {}) {
   // ---- drawing ----
   function draw(t = performance.now()) {
     if (!lay || !W || dead) return;
-    const l = lens(t), R = reach(l), cx = W / 2, cy = Hh / 2, hx = W / 2, hy = Hh / 2, ia = l.inner, round = cfg.lensMode === "round", pk = pack(), shapeAmt = cfg.shape;
+    const l = lens(t), R = reach(l), cx = W / 2, cy = Hh / 2, hx = W / 2, hy = Hh / 2, ia = l.inner, round = cfg.lensMode === "round", pk = pack(), shapeAmt = zc("shape");
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, Hh);
     ctx.globalAlpha = l.a;
     drawn = [];
@@ -378,15 +457,15 @@ function honeycomb(host, opts = {}) {
       if (z < cbest) { cbest = z; cItem = p.it; }
       drawn.push({ it: p.it, x, y, d });
     });
-    honeyNoOverlap(drawn, shapeAmt);
+    honeyCells(drawn, gapPx(), shapeAmt);
     let pb = null;
     if (pressed) { const i = drawn.findIndex(b => b.it === pressed.it && Math.abs(b.x - pressed.x) < 3 && Math.abs(b.y - pressed.y) < 3); if (i >= 0) { pb = drawn.splice(i, 1)[0]; drawn.push(pb); } }
     for (const b of drawn) {
       const it = b.it, d = b.d * (b === pb ? 1 + .12 * pressK : 1), r = d / 2;
-      honeyPath(ctx, b.x, b.y, r, shapeAmt); ctx.fillStyle = it.h; ctx.fill();
+      honeyCellPath(ctx, b, shapeAmt, b === pb ? 1 + .12 * pressK : 1); ctx.fillStyle = it.h; ctx.fill();
       if (d < 8) continue;
       if (it.L < 26) { ctx.lineWidth = Math.max(1, d * .025); ctx.strokeStyle = `rgba(236,232,223,${it.L < 14 ? .34 : .24})`; ctx.stroke(); }
-      const la = Math.min(1, Math.max(0, (d - cfg.labelMin) / 5));
+      const la = Math.min(1, Math.max(0, (d - zc("labelMin")) / 5));
       if (la > 0) {
         const w = honeyWrap(ctx, it.n), fs = Math.min(w.fs * d, 30), lh = fs * 1.02;
         const sub = Math.min(1, Math.max(0, (d - 150) / 30)), subH = sub ? fs * .9 : 0;

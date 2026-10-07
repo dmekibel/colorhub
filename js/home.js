@@ -81,6 +81,9 @@ const HM_TWEAK_SPECS = [
   { key: "labelMin", label: "Label size threshold", min: 14, max: 60, step: 1 },
   { key: "drift", label: "Drift", min: 0, max: 2, step: .1 },
 ];
+// Tweaks are kept per style (S.hm.tweaks[styleId]): switching style switches to that style's own tweaks.
+function hmTweakFor(styleId) { const t = S.hm && S.hm.tweaks; return (t && t[styleId]) || null; }
+function hmSetTweak(styleId, patch) { S.hm.tweaks = S.hm.tweaks || {}; S.hm.tweaks[styleId] = patch ? { ...(S.hm.tweaks[styleId] || {}), ...patch } : null; save(); }
 function hmOpenTweak(ctrl) {
   if (document.querySelector(".hm-tweak-panel")) return;
   buzz(4);
@@ -103,17 +106,17 @@ function hmOpenTweak(ctrl) {
     const k = row.dataset.key, input = row.querySelector("input"), out = row.querySelector("b");
     input.addEventListener("input", () => {
       const v = +input.value; out.textContent = v.toFixed(2);
-      S.hm.tweak = { ...(S.hm.tweak || {}), [k]: v }; save();
+      hmSetTweak(ctrl.getStyle(), { [k]: v });
       ctrl.tweak({ [k]: v });
     });
   });
   panel.querySelector(".hm-tweak-lens").querySelectorAll("button").forEach(b => b.onclick = () => {
     panel.querySelectorAll(".hm-tweak-lens button").forEach(x => x.classList.toggle("on", x === b));
-    S.hm.tweak = { ...(S.hm.tweak || {}), lensMode: b.dataset.val }; save();
+    hmSetTweak(ctrl.getStyle(), { lensMode: b.dataset.val });
     ctrl.tweak({ lensMode: b.dataset.val });
   });
   panel.querySelector("[data-reset]").onclick = () => {
-    S.hm.tweak = null; save(); ctrl.resetTweak(); buzz(4); close();
+    hmSetTweak(ctrl.getStyle(), null); ctrl.resetTweak(); buzz(4); close();
   };
   panel.querySelector("[data-copy]").onclick = () => {
     const c = ctrl.getCfg(), text = JSON.stringify({ style: c.style, tweak: c.tweak || {} });
@@ -164,7 +167,7 @@ function labHoney() {
     loading = false;
     const id = HONEY_STYLE_LIST[pi].id;
     if (ctrl) { ctrl.destroy(); viewEl.innerHTML = ""; }
-    ctrl = honeycomb(viewEl, { items, style: id, tweak: S.hm.tweak, centerFirst: true });
+    ctrl = honeycomb(viewEl, { items, style: id, tweak: hmTweakFor(id), centerFirst: true });
     paintBar();
   }
   el.querySelector("[data-back]").onclick = () => { if (ctrl) ctrl.destroy(); hmHome(); };
@@ -240,7 +243,7 @@ function hmHome() {
     items = items.filter(HM_KEEP[v.filter]);
     paintTitle();
     if (ctrl) ctrl.update({ items, soft });
-    else ctrl = honeycomb(viewEl, { items, style: v.style, tweak: S.hm.tweak, zoom: S.hm.zoom || 1, pick, onPeek, centerFirst: true,
+    else ctrl = honeycomb(viewEl, { items, style: v.style, tweak: hmTweakFor(v.style), zoom: S.hm.zoom || 1, pick, onPeek, centerFirst: true,
       onZoom: z => { S.hm.zoom = Math.round(z * 100) / 100; save(); } });
     hmWireChrome();
   }
@@ -283,7 +286,7 @@ function hmHome() {
     }));
     sh.querySelectorAll("[data-style]").forEach(b => b.onclick = () => {
       applyView("style", b.dataset.style); sh.querySelectorAll("[data-style]").forEach(x => x.classList.toggle("on", x === b));
-      if (ctrl && ctrl.style) ctrl.style(b.dataset.style);
+      if (ctrl && ctrl.style) { ctrl.style(b.dataset.style, false); const tw = hmTweakFor(b.dataset.style); if (tw && ctrl.tweak) ctrl.tweak(tw); }
     });
     sh.querySelector("[data-tweak-open]").onclick = () => { if (ctrl) hmOpenTweak(ctrl); };
     sh.querySelector("[data-lab-open]").onclick = () => { close(); labHoney(); };
