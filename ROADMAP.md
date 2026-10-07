@@ -237,6 +237,44 @@ designer · filmmaker/photographer/colorist · interior designer/architect · fa
   right white for a room...), plus the camera mission.
 **Build:** the ordering (data, S-M, Sonnet) + stage UI/tests/field choice (M, Sonnet) as the chapters of the path (§1).
 
+## 15. Image analysis (approved in principle 2026-10-08)
+Upload any image (your painting, a photo, a film still) and get a deep read of its color. The same screen also appears as an
+"Analysis" section on every museum painting page. Layout follows the feature hierarchy: one summary card on top (3-4 headline
+facts), every deeper layer opt-in below.
+**Who it's closest to** (color only, and it says so; it can't judge brushwork or style): the nearest paintings in our archive
+(~14k, ~23k after the Commons batch), plus the nearest artist, decade, country and movement, each found by comparing palette
+features against an average for that artist, decade, country or movement, precomputed offline (gallery.py). Example: "Your
+colors sit closest to Dutch painting, 1650s; nearest painter: Vermeer; nearest painting: ...". Show a confidence; when
+nothing is close, say so.
+**Stats** (pixels only, no data needed):
+- value structure (darks/mids/lights %, 2- and 3-value notan, high/low/mid key)
+- contrast range
+- chroma (how much is muted)
+- warm/cool balance
+- hue spread with harmony detection (analogous, complementary, triad...)
+- dominant/secondary/accent proportions (the 60-30-10 check)
+- number of distinct colors
+- where the focal pull is (peak contrast + chroma)
+- percentiles against the archive ("more muted than 87% of the paintings here")
+**Palettes** (one image, several readings):
+- by area (proportional strip)
+- accents (small, saturated, salient)
+- lights vs shadows
+- value-ordered
+- hue wheel plot with a gamut-mask outline
+- the dynamic 3-20 slider (§13)
+- precise names on every swatch (tappable)
+- "which limited palette fits" (Zorn, primaries, earth palette...)
+**Views:** value only (squint), posterize to N, chroma map, temperature map, hue only.
+**Fun facts:**
+- your most-used color name and its story
+- how rare this combination is in the archive
+- pigment dating: "this violet wasn't on painters' palettes before the 1850s" (screen colors only approximate pigments,
+  so hedge; reuses PIGMENT_SINCE)
+**Build:** stats + views + palettes (M, Sonnet, client only); archive matching (M, Sonnet: feature vectors + centroids in
+gallery.py, after the Commons batch); fun facts last (S). Not doing: style/brushwork matching (needs an ML model; out of
+scope for now).
+
 ## Also queued
 - World: Botany (in progress), then Gems.
 - Color-list swaps from research/COLOR-SELECTION.md (Bistre, Stone, Green grey, Rose, Grape, Seafoam; Terracotta and Tangerine hex fixes; cross-unit near-twin check).

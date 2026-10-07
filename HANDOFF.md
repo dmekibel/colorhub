@@ -66,7 +66,9 @@ the public repo `dmekibel/colorhub`).
 3. ROADMAP build order: odd-one-out family, rearrange family, memory additions, the path (Duolingo-style lessons), photo
    missions, color-page hubs + Art filter merge, Studio critique/mockups/exports, motion/sound/haptics, design system.
 4. Stages and fields (ROADMAP §14: nine stages, 25 / 50 / 100 / 150 / 250 / 400 / 600 / 800 / 1,000 words, no colored belts, basics are placement
-   only) as the chapters of the path. Later: business (Plus, a free atlas site), Colordle, the Russian edition.
+   only) as the chapters of the path.
+5. Image analysis (ROADMAP §15): upload any image for stats, several palettes, views, and closest painter/era/country/
+   painting by color. Later: business (Plus, a free atlas site), Colordle, the Russian edition.
 
 ## Known issues
 - Art Institute of Chicago and SMK images are served from our own 200px copies (AIC blocks hotlinking; SMK is slow); SMK
