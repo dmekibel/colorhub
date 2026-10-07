@@ -17,7 +17,7 @@ units: [
 { id:"t2-blues", tier:2, title:"Blues", colors:[
   {n:"Navy", h:"#1C2B5A", src:"pick", vs:"Royal blue", d:"Far darker and greyer than royal blue, nearly black.", o:"From the dark indigo blue the Royal Navy chose for officers' uniforms in the 1740s. Between 1910 and 1950 it replaced black for police, postmen and men's suits."},
   {n:"Royal blue", h:"#4169E1", src:"css", vs:"Navy", d:"A bright, deep blue, much lighter and more vivid than navy."},
-  {n:"Sky blue", h:"#87CEEB", src:"css", vs:"Aqua", d:"Softer than aqua, without its green tint."},
+  {n:"Sky blue", h:"#87CEEB", src:"css", vs:"Aqua", d:"Softer than aqua, without its green tint.", o:"The color of a clear daytime sky. The historian Michel Pastoureau argues that Europe's elites shunned light blue as faded peasant woad until it became a court fashion in the early 1700s."},
   {n:"Periwinkle", h:"#A3A8EE", src:"pick", vs:"Sky blue", d:"Sky blue with a drop of violet.", o:"Named after the periwinkle flower."},
   {n:"Turquoise", h:"#40E0D0", src:"css", vs:"Aqua", d:"Greener and a little deeper than aqua.", o:"After the stone. Turquoise is French for 'Turkish': the stone reached Europe through Turkish lands, though it was mined in Persia."},
   {n:"Teal", h:"#008080", src:"css", vs:"Turquoise", d:"Much darker than turquoise, and slightly bluer.", o:"Named after the teal duck, which has a stripe of this color on its head."},
@@ -31,8 +31,8 @@ units: [
   {n:"Coral", h:"#FF7F50", src:"css", vs:"Salmon", d:"More orange and more vivid than salmon.", o:"After red coral, worn as jewelry for thousands of years."},
   {n:"Salmon", h:"#FA8072", src:"css", vs:"Coral", d:"Pinker and softer than coral.", o:"The color of salmon flesh."},
   {n:"Baby pink", h:"#F4C2C2", src:"wiki", vs:"Hot pink", d:"A pale, quiet pink, far lighter and softer than hot pink.", o:"Pink for girls is recent. In 1918 a trade paper called pink the stronger color, better for boys; the rule settled only in the mid-1900s."},
-  {n:"Hot pink", h:"#FF69B4", src:"css", vs:"Magenta", d:"Pinker and softer than magenta, with no purple in it."},
-  {n:"Magenta", h:"#FF00FF", src:"css", vs:"Hot pink", d:"Purple-pink at full strength, more violet than hot pink.", o:"The 1858 aniline dye was first called fuchsine, then renamed for the bloody Battle of Magenta (1859). On screens, fuchsia is the same color."}
+  {n:"Hot pink", h:"#FF69B4", src:"css", vs:"Magenta", d:"Pinker and softer than magenta, with no purple in it.", o:"Its loud ancestor is shocking pink, launched by Elsa Schiaparelli in 1937 and inspired by a large pink diamond owned by Daisy Fellowes."},
+  {n:"Magenta", h:"#FF00FF", src:"css", vs:"Hot pink", d:"Purple-pink at full strength, more violet than hot pink.", o:"The 1858 aniline dye was first called fuchsine, then renamed for the bloody Battle of Magenta (1859). Early batches were made with arsenic acid and poisoned wells near the factories. On screens, fuchsia is the same color."}
 ]},
 { id:"t2-greens", tier:2, title:"Greens", colors:[
   {n:"Lime", h:"#BFFF00", src:"wiki", vs:"Kelly green", d:"A bright yellow-green, much lighter and yellower than kelly green.", o:"The color of lime peel."},
@@ -46,7 +46,7 @@ units: [
 { id:"t2-purples", tier:2, title:"Purples", colors:[
   {n:"Lavender", h:"#BFA2E8", src:"pick", vs:"Lilac", d:"Bluer and brighter than lilac.", o:"Named after the lavender flower."},
   {n:"Lilac", h:"#C8A2C8", src:"wiki", vs:"Lavender", d:"Pinker and greyer than lavender.", o:"After the lilac flower."},
-  {n:"Mauve", h:"#A8778F", src:"pick", vs:"Lilac", d:"A dusty pink-purple, darker and pinker than lilac.", o:"French for the mallow flower. In 1856 an 18-year-old chemist, William Perkin, trying to make the malaria drug quinine, made mauveine, the first aniline dye, and mauve became a craze."},
+  {n:"Mauve", h:"#A8778F", src:"pick", vs:"Lilac", d:"A dusty pink-purple, darker and pinker than lilac.", o:"French for the mallow flower. In 1856 an 18-year-old chemist, William Perkin, trying to make the malaria drug quinine, made mauveine, the first aniline dye, and mauve became a craze. Quinine itself held out until a formal synthesis in 1944."},
   {n:"Plum", h:"#8E4585", src:"wiki", vs:"Mauve", d:"Deeper and richer than mauve.", o:"After the fruit's skin."},
   {n:"Violet", h:"#8000FF", src:"wiki", vs:"Indigo", d:"A vivid blue-purple, far brighter than indigo.", o:"Named after the flower. In 1672 Newton called the far end of the spectrum 'violet-purple'; by Opticks (1704) it was simply violet."},
   {n:"Indigo", h:"#3D2B8E", src:"pick", vs:"Violet", d:"Darker and bluer than violet.", o:"From the plant dye; the name is Greek for 'from India'. Newton added it to the rainbow probably to get seven colors, one for each note of the musical scale."}
@@ -54,7 +54,7 @@ units: [
 { id:"t2-earths", tier:2, title:"Yellows & browns", colors:[
   {n:"Gold", h:"#FFD700", src:"css", vs:"Mustard", d:"A bright, warm yellow, cleaner and lighter than mustard.", o:"Medieval gold leaf was beaten from coins, about a hundred leaves from one ducat."},
   {n:"Mustard", h:"#CFA41C", src:"pick", vs:"Gold", d:"A darker, earthier yellow than gold.", o:"The color of the condiment, made from mustard seed."},
-  {n:"Khaki", h:"#BDB76B", src:"css", vs:"Tan", d:"Greener than tan, with an olive tinge.", o:"Urdu for 'dusty', from Persian khak, dust. British troops in India dyed their uniforms this color."},
+  {n:"Khaki", h:"#BDB76B", src:"css", vs:"Tan", d:"Greener than tan, with an olive tinge.", o:"Urdu for 'dusty', from Persian khak, dust. The Corps of Guides, raised in British India in 1846, adopted drab uniforms around 1848, one of the first meant to blend into the landscape."},
   {n:"Tan", h:"#D2B48C", src:"css", vs:"Khaki", d:"Warmer and softer than khaki, like light leather.", o:"From tanbark, the oak bark used to tan leather."},
   {n:"Rust", h:"#B7410E", src:"wiki", vs:"Chocolate", d:"An orange-red brown, brighter and lighter than chocolate.", o:"The color of iron oxide."},
   {n:"Chocolate", h:"#7B3F00", src:"wiki", vs:"Rust", d:"A deep brown, darker than rust and less red."}
@@ -75,9 +75,9 @@ units: [
   {n:"Cerulean", h:"#007BA7", src:"wiki", vs:"Steel blue", d:"Greener than steel blue, leaning toward teal.", o:"From Latin caeruleus, sky blue. As a paint made of cobalt and tin it reached artists in the 1860s; Monet and Signac used it heavily."},
   {n:"Cobalt", h:"#0047AB", src:"pick", vs:"Denim", d:"A deep, vivid blue, much brighter than denim.", o:"Named for the kobold, a mine goblin blamed for poisoning Saxon silver miners. Thénard made it into a pure blue paint in 1802."},
   {n:"Steel blue", h:"#4682B4", src:"css", vs:"Azure", d:"Greyer and calmer than azure."},
-  {n:"Denim", h:"#3B638C", src:"xkcd", vs:"Cobalt", d:"Greyer and duller than cobalt, like worn jeans.", o:"Probably from French serge de Nîmes, a twill from Nîmes, though the origin is debated. Levi Strauss and Jacob Davis began making riveted indigo work trousers in 1873."},
+  {n:"Denim", h:"#3B638C", src:"xkcd", vs:"Cobalt", d:"Greyer and duller than cobalt, like worn jeans.", o:"Probably from French serge de Nîmes, a twill from Nîmes, though the origin is debated. Levi Strauss and Jacob Davis began making riveted indigo work trousers in 1873. Only the warp threads are dyed, so jeans fade where they rub but never change hue."},
   {n:"Petrol", h:"#005F6A", src:"xkcd", vs:"Teal", d:"Darker and bluer than teal."},
-  {n:"Midnight blue", h:"#191970", src:"css", vs:"Navy", d:"Darker, richer and more violet than navy."}
+  {n:"Midnight blue", h:"#191970", src:"css", vs:"Navy", d:"Darker, richer and more violet than navy.", o:"Crayola renamed its Prussian blue crayon Midnight Blue in 1958, after teachers said children couldn't relate to Prussian history."}
 ]},
 { id:"t3-reds", tier:3, title:"Reds", colors:[
   {n:"Vermilion", h:"#E34234", src:"wiki", vs:"Scarlet", d:"A warm orange-red, softer than scarlet.", o:"Mercury sulfide red. The Romans ground it from cinnabar ore; from the Middle Ages it was made by heating mercury with sulfur. The name is Latin for 'little worm', after an insect dye."},
@@ -88,7 +88,7 @@ units: [
   {n:"Raspberry", h:"#B00149", src:"xkcd", vs:"Cerise", d:"A deep pink-red, darker than cerise."}
 ]},
 { id:"t3-oranges", tier:3, title:"Oranges & yellows", colors:[
-  {n:"Peach", h:"#FFCBA4", src:"wiki", vs:"Apricot", d:"Paler and softer than apricot."},
+  {n:"Peach", h:"#FFCBA4", src:"wiki", vs:"Apricot", d:"Paler and softer than apricot.", o:"After the fruit. In 1962 Crayola renamed its 'flesh' crayon 'peach', recognizing that not everyone's skin is the same color."},
   {n:"Apricot", h:"#FFB16D", src:"xkcd", vs:"Peach", d:"A deeper, stronger orange than peach."},
   {n:"Tangerine", h:"#F28500", src:"wiki", vs:"Burnt orange", d:"Lighter and yellower than burnt orange.", o:"After the fruit, named for Tangier in Morocco."},
   {n:"Burnt orange", h:"#CC5500", src:"wiki", vs:"Tangerine", d:"Darker and redder than tangerine."},
@@ -101,9 +101,9 @@ units: [
   {n:"Chartreuse", h:"#7FFF00", src:"css", vs:"Lime", d:"Greener than lime, halfway between yellow and green.", o:"Named after a French liqueur made by Carthusian monks."},
   {n:"Pistachio", h:"#93C572", src:"wiki", vs:"Emerald", d:"Softer and yellower than emerald.", o:"The nut's green kernel."},
   {n:"Celadon", h:"#ACCFB0", src:"pick", vs:"Mint", d:"Greyer and a little darker than mint.", o:"Named after Céladon, a shepherd dressed in pale green in a 1607 French novel. Europeans gave his name to Chinese green-glazed ware."},
-  {n:"Jade", h:"#00A86B", src:"pick", vs:"Emerald", d:"Darker and bluer than emerald.", o:"After the gemstone."},
+  {n:"Jade", h:"#00A86B", src:"pick", vs:"Emerald", d:"Darker and bluer than emerald.", o:"After the gemstone, from Spanish piedra de ijada, 'flank stone', once used to treat kidney pain."},
   {n:"Malachite", h:"#0BDA51", src:"wiki", vs:"Emerald", d:"Brighter and more intense than emerald.", o:"A banded copper mineral, ground into green pigment in ancient Egypt."},
-  {n:"Viridian", h:"#40826D", src:"wiki", vs:"Teal", d:"Greener than teal.", o:"A chromium oxide paint from the 1800s. Latin viridis means green."},
+  {n:"Viridian", h:"#40826D", src:"wiki", vs:"Teal", d:"Greener than teal.", o:"A chromium oxide green, first made in Paris in 1838 and kept secret until 1859. It became Cézanne's main green and gradually replaced poisonous emerald green. Latin viridis means green."},
   {n:"Moss", h:"#8A9A5B", src:"wiki", vs:"Sage", d:"Darker and more olive than sage."},
   {n:"Hunter green", h:"#355E3B", src:"wiki", vs:"Bottle green", d:"Greyer and yellower than bottle green.", o:"Said to be named for the green hunters wore in the 1800s to blend into the woods."},
   {n:"Bottle green", h:"#006A4E", src:"pick", vs:"Hunter green", d:"Bluer and deeper than hunter green.", o:"The color of old glass bottles."}
@@ -112,7 +112,7 @@ units: [
   {n:"Thistle", h:"#D8BFD8", src:"css", vs:"Lilac", d:"Paler and greyer than lilac.", o:"After the thistle flower."},
   {n:"Orchid", h:"#DA70D6", src:"css", vs:"Magenta", d:"Softer than magenta.", o:"After the orchid flower."},
   {n:"Amethyst", h:"#9966CC", src:"wiki", vs:"Orchid", d:"Bluer and darker than orchid.", o:"After the purple quartz gem."},
-  {n:"Puce", h:"#CC8899", src:"wiki", vs:"Mauve", d:"Lighter and pinker than mauve.", o:"French for flea. It was the fashion at Marie Antoinette's court."},
+  {n:"Puce", h:"#CC8899", src:"wiki", vs:"Mauve", d:"Lighter and pinker than mauve.", o:"French for flea. In 1775 Louis XVI reportedly said Marie Antoinette's brown gown was 'couleur de puce', and the court copied it."},
   {n:"Mulberry", h:"#C54B8C", src:"wiki", vs:"Plum", d:"Pinker and brighter than plum.", o:"After the berry."},
   {n:"Byzantium", h:"#702963", src:"wiki", vs:"Plum", d:"Darker than plum.", o:"Named after the Byzantine Empire and its imperial purple."},
   {n:"Aubergine", h:"#3D0734", src:"xkcd", vs:"Byzantium", d:"Much darker than byzantium, almost black.", o:"The British name for eggplant."}

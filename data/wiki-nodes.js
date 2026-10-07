@@ -129,7 +129,8 @@ window.WIKI_NODES = [
     "Color harmony is the sense that colors belong together. For centuries it was taught as geometry on the [[color-wheel|color wheel]]: neighbors (analogous), opposites ([[complementary-colors|complementary]]), three evenly spaced hues (triadic), or a color plus the two neighbors of its opposite (split complementary).",
     "[[chevreul|Chevreul]] split harmony into two kinds in 1839: harmonies of analogy, colors that are alike, and harmonies of contrast, colors that oppose. [[johannes-itten|Johannes Itten]] at the [[bauhaus|Bauhaus]] built 'color chords' of two, three or four hues on his wheel. [[josef-albers|Josef Albers]], who studied and then taught there, distrusted fixed rules and trained students to judge by eye in [[interaction-of-color|Interaction of Color]].",
     "What does research say? In 2011 Karen Schloss and Stephen Palmer had people rate many pairs of colors. Both liking and harmony went up as the two hues got more similar, which backs Chevreul's harmony of analogy. Liking also went up when the two colors differed in lightness: a pale [[Sage|sage]] with a deep [[Hunter green|hunter green]]. People also agreed more on what looked harmonious than on what they liked.",
-    "A practical rule that survives: vary [[value|value]] more than hue. One or two hues at several lightnesses usually reads as calm and deliberate. Whistler even titled his mother's portrait an 'Arrangement in Grey and Black' ([[painting-whistlers-mother|Whistler's Mother]]): almost no hue at all, and perfectly composed."
+    "A practical rule that survives: vary [[value|value]] more than hue. One or two hues at several lightnesses usually reads as calm and deliberate. Whistler even titled his mother's portrait an 'Arrangement in Grey and Black' ([[painting-whistlers-mother|Whistler's Mother]]): almost no hue at all, and perfectly composed.",
+    "Designers also learn harmony from examples. The best-loved collection is [[dictionary-of-color-combinations|A Dictionary of Color Combinations]], drawn from the Japanese painter Sanzo Wada's pattern books of the 1930s and reissued in 2010: page after page of tested pairs and trios, with no rules attached."
   ],
   colors: ["Sage", "Hunter green", "Blue", "Red", "Yellow"],
   swatches: [
@@ -2017,6 +2018,28 @@ window.WIKI_NODES = [
     "Albers, J. (1963). Interaction of Color. Yale University Press (50th anniversary ed. 2013).",
     "Josef and Anni Albers Foundation. Interaction of Color.",
     "Wikipedia, 'Josef Albers'."
+  ]
+},
+{
+  id: "dictionary-of-color-combinations", type: "work", title: "Sanzo Wada's A Dictionary of Color Combinations",
+  dek: "A Japanese painter's 1930s pattern books, reissued in 2010 as a pocket guide that designers adore.",
+  body: [
+    "Sanzo Wada (1883–1967) was a Japanese painter who spent his working life on color. Born in Ikuno, in Hyōgo, he studied Western-style painting under Kuroda Seiki at the Tokyo School of Fine Arts and graduated in 1904. In 1907 his painting South Wind won the highest prize given at the first official Bunten exhibition, a second prize, since no first was awarded. Around 1909 he went to study in Europe, mostly France, and came home in 1915 by way of India and Burma.",
+    "Back in Japan he painted, designed for the stage and taught, and he pushed for a shared language of color for industry. In 1927 he founded the Japan Standard Color Association, which issued a standard card of 500 colors and was reorganized in 1945 as the Japan Color Research Institute. Late in life his costumes for Teinosuke Kinugasa's film Gate of Hell (1953) won the Academy Award for color costume design, at the 1955 ceremony.",
+    "His most famous work began as a set of pattern books. From 1933 he published Haishoku Sōkan, a six-volume survey of color combinations for working designers, each set of two, three or four colors printed as flat blocks side by side. It is a practical tool from Taishō and early Shōwa Japan, not a theory: almost no text, just combinations to look at.",
+    "In 2010 the Kyoto publisher Seigensha reissued a selection as a small paperback, A Dictionary of Color Combinations, with 348 combinations. Eighty years after the originals, it became a cult book among graphic designers, illustrators and web designers, who share its pages online, and a second volume followed in 2020.",
+    "This app links to the book rather than copying it: the combinations are Wada's, and the reissue is in copyright. Its lesson fits the rest of [[color-harmony|color harmony]]: instead of rules on a [[color-wheel|color wheel]], you train your eye on many good examples, much as [[josef-albers|Josef Albers]] taught with sheets of colored paper."
+  ],
+  facts: [
+    { label: "Author", value: "Sanzo Wada (1883–1967)" },
+    { label: "First published", value: "Haishoku Sōkan, six volumes, from 1933" },
+    { label: "Reissue", value: "Seigensha, Kyoto, 2010 (348 combinations)" }
+  ],
+  sources: [
+    "Wada, S. (2010). A Dictionary of Color Combinations. Seigensha Art Publishing, Kyoto. ISBN 978-4-86152-247-5.",
+    "https://en.seigensha.com/books/978-4-86152-247-5/",
+    "National Museum of Art, Japan, artist database: Wada Sanzō (artplatform.go.jp/artists/A2089).",
+    "Wikipedia (Japanese), '和田三造'; Wikipedia, 'Gate of Hell (film)' (27th Academy Awards, costume design)."
   ]
 },
 {

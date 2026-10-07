@@ -14,7 +14,8 @@ window.WIKI_COLORS = {
     { k: "history", text: "The oldest paint workshop on Earth made red. About 100,000 years ago, people at Blombos Cave in South Africa ground red [[Ochre|ochre]], mixed it with bone and charcoal, and stored the paste in abalone shells. Later reds raised the stakes: [[vermilion-pigment|vermilion]] from mercury ore, and dyes from crushed insects, [[kermes]] and [[cochineal]]." },
     { k: "language", text: "Red is one of the oldest color words we have. English red, Latin ruber and Greek erythros grow from one ancient root. [[berlin-and-kay|Berlin and Kay]] found that a language with only three [[basic-color-terms|color words]] almost always has black, white and red. Medieval scribes wrote headings in red ink, so a heading became a rubric, from rubrica, red earth." },
     { k: "symbolism", text: "In [[alchemy]], red is the finish line. The Great Work ran from [[Black|black]] to [[White|white]] to [[Yellow|yellow]] and ended in rubedo, the reddening that meant the philosopher's stone was done. [[heraldry|Heraldry]] calls red gules. The Catholic Church wears red at Pentecost and on martyrs' feasts ([[liturgical-colors]]). In China, red means weddings and luck, and New Year money comes in red envelopes." },
-    { k: "science", text: "Red is the long-wave end of the [[spectrum]], light of roughly 620 to 750 nanometers. A famous 2005 study found Olympic fighters in red won more bouts. A 2024 meta-analysis of over 6,500 bouts, co-written by the same researchers, found red won just 50.5%: no reliable red advantage. See [[color-psychology]]." }
+    { k: "science", text: "Red is the long-wave end of the [[spectrum]], light of roughly 620 to 750 nanometers. A famous 2005 study found Olympic fighters in red won more bouts. A 2024 meta-analysis of over 6,500 bouts, co-written by the same researchers, found red won just 50.5%: no reliable red advantage. See [[color-psychology]]." },
+    { k: "culture", text: "Two red myths. Bulls aren't enraged by red: they see color roughly like a red-green color-blind person and charge the cape's movement, and the matador's magenta-and-blue cape works just as well. And Santa wore red long before Coca-Cola's 1930s ads; his costume probably echoes the red robes of St Nicholas the bishop." }
   ],
   related: [
     { to: "Ochre", why: "Red ochre was humanity's first red, ground 100,000 years ago" },
@@ -28,7 +29,10 @@ window.WIKI_COLORS = {
     "Berlin & Kay, Basic Color Terms (1969); Etymonline, 'red', 'rubric'",
     "Hill & Barton, 'Red enhances human performance in contests', Nature 435: 293 (2005)",
     "Peperkoorn, Hill, Barton & Pollet, 'Meta-analysis of the red advantage in combat sports', Scientific Reports 14: 30822 (2024)",
-    "Britannica, 'Alchemy'; 'Tincture (heraldry)'"
+    "Britannica, 'Alchemy'; 'Tincture (heraldry)'",
+    "St Clair, The Secret Lives of Colour (2016)",
+    "Eckstut & Eckstut, What Is Color? (2020)",
+    "Pastoureau, Red: The History of a Color (2017)"
   ]
 },
 
@@ -39,7 +43,9 @@ window.WIKI_COLORS = {
     { k: "language", text: "The fruit came first. Its name traveled from Sanskrit naranga through Persian and Arabic into French, losing its first n on the way. Before oranges reached England, people said geoluread, yellow-red, which is one reason a robin's breast and a fox's coat are still called red. The first record of orange as a color in English is from 1502, for clothes bought for Margaret Tudor." },
     { k: "art", text: "In [[painting-impression-sunrise|Impression, Sunrise]], [[monet|Monet]]'s orange sun is no brighter than the grey sky around it. Neuroscientist Margaret Livingstone showed that in a black-and-white photo the sun all but vanishes. Your color vision sees it blaze while your brightness vision barely registers it, so it seems to shimmer. Orange against blue-grey is the [[complementary-colors|complementary]] pair at work." },
     { k: "culture", text: "The Dutch royal House of Orange took its name from a town in southern France, not the fruit. The story that Dutch growers bred orange carrots to honor William of Orange has no documents behind it, and orange carrots seem to predate him. Orange did become the Dutch national color, and fans still flood stadiums with it." },
-    { k: "design", text: "The Golden Gate Bridge is painted International Orange. The US Navy wanted black and yellow stripes so ships could see it in fog. Consulting architect Irving Morrow fell for the red-orange primer on the steel and argued for it: warm against the hills, and still visible in the mist. See [[warm-and-cool]]." }
+    { k: "design", text: "The Golden Gate Bridge is painted International Orange. The US Navy wanted black and yellow stripes so ships could see it in fog. Consulting architect Irving Morrow fell for the red-orange primer on the steel and argued for it: warm against the hills, and still visible in the mist. See [[warm-and-cool]]." },
+    { k: "history", text: "Painters had no good pure orange until the 1800s. Medieval color theory barely treated orange as its own color: orange things were called red or yellow, which is why orange minium was 'red lead'. The Renaissance's one true orange pigment was realgar, a poisonous arsenic mineral Titian bought in Venice. Chrome orange, then cadmium orange, finally gave artists a strong, pure orange." },
+    { k: "symbolism", text: "In India and Southeast Asia orange is a holy color, worn by Hindu ascetics and Buddhist monks. Their 'saffron' robes rarely saw saffron, which was far too costly: dyers used turmeric or, in Thailand, jackfruit heartwood." }
   ],
   related: [
     { to: "Blue", why: "Its complementary opposite, the pair behind Monet's Impression, Sunrise" },
@@ -52,7 +58,12 @@ window.WIKI_COLORS = {
     "Wikipedia, 'Orange (colour)' and 'Orange (word)', citing the OED for 1502",
     "Livingstone, Vision and Art (2002); Harvard Magazine, 'The Neurobiology of Art' (2003)",
     "Live Science, 'Are carrots orange because of a Dutch revolutionary?'",
-    "NPR, 'The Golden Gate Bridge's accidental color' (2011)"
+    "NPR, 'The Golden Gate Bridge's accidental color' (2011)",
+    "Ball, Bright Earth: The Invention of Colour (2001)",
+    "Jarman, Chroma (1994)",
+    "St Clair, The Secret Lives of Colour (2016)",
+    "Pastoureau, Yellow: The History of a Color (2019)",
+    "Finlay, Color: A Natural History of the Palette (2002)"
   ]
 },
 
@@ -136,8 +147,9 @@ window.WIKI_COLORS = {
   facets: [
     { k: "history", text: "Purple was the color of snail slime and emperors. [[tyrian-purple|Tyrian purple]] came from murex sea snails. In 1909 the chemist Paul Friedländer crushed 12,000 of them to get 1.4 grams of pure dye. Diocletian's price edict of 301 CE capped a pound of purple silk at 150,000 denarii, the same price it set for a lion. See [[royal-purple]]." },
     { k: "language", text: "Purple is named after a shellfish. Latin purpura and Greek porphyra meant both the murex snail and its dye. Byzantine children born to a reigning emperor were called porphyrogennetos, born in the purple, after the palace chamber where empresses gave birth." },
-    { k: "science", text: "Purple is a color your brain makes up. No single wavelength looks purple; you see it when red and blue light arrive together. [[Violet]], at the short end of the [[spectrum]], is a real rainbow color, so purple and violet are not quite the same thing. See [[extra-spectral]]." },
-    { k: "symbolism", text: "Purple is the Church's color of waiting and penance, worn in Advent and Lent ([[liturgical-colors]]). In 1856, 18-year-old [[william-perkin|William Perkin]], trying to make quinine, made [[mauveine]] instead: the first aniline dye, a fashion sensation, and the end of purple as a privilege." }
+    { k: "science", text: "Purple is a color your brain makes up. No single wavelength looks purple; you see it when red and blue light arrive together. [[Violet]], at the short end of the [[spectrum]], is a real rainbow color, so purple and violet are not quite the same thing. A purple object has to soak up the middle of the spectrum, the greens, and send back both ends. See [[extra-spectral]]." },
+    { k: "symbolism", text: "Purple is the Church's color of waiting and penance, worn in Advent and Lent ([[liturgical-colors]]). In 1856, 18-year-old [[william-perkin|William Perkin]], trying to make quinine, made [[mauveine]] instead: the first aniline dye, a fashion sensation, and the end of purple as a privilege." },
+    { k: "culture", text: "Ancient purple was not our purple. Pliny says the most prized Tyrian shade was the color of clotted blood, nearly black until light struck it, and the Roman jurist Ulpian counted as purpura any red not dyed with insects. Purple covered crimsons and violets alike; only much later did the word settle between red and blue." }
   ],
   related: [
     { to: "Indigo", why: "Tyrian purple is indigo's molecule with two bromine atoms added" },
@@ -149,7 +161,12 @@ window.WIKI_COLORS = {
   sources: [
     "Friedländer (1909), via Wikipedia, 'Tyrian purple' (6,6'-dibromoindigo)",
     "Edict on Maximum Prices (301 CE), trans. Kropff, University of Bergen",
-    "Garfield, Mauve (2000); Royal Society of Chemistry, 'William Perkin'"
+    "Garfield, Mauve (2000); Royal Society of Chemistry, 'William Perkin'",
+    "Ball, Bright Earth: The Invention of Colour (2001)",
+    "Gage, Colour and Culture (1993)",
+    "Greenfield, A Perfect Red (2005)",
+    "St Clair, The Secret Lives of Colour (2016)",
+    "Livingstone, Vision and Art: The Biology of Seeing (2002)"
   ]
 },
 
@@ -184,7 +201,9 @@ window.WIKI_COLORS = {
     { k: "language", text: "Bear may simply mean 'the brown one'. Many linguists think early Germanic speakers avoided the animal's real name out of fear and called it by its color instead; Greek arktos and Latin ursus kept the old name. Brown itself comes from a root meaning bright or brown." },
     { k: "science", text: "Brown isn't in the rainbow. It's dark orange or yellow seen next to brighter things. Light a brown object alone in a dark room and it can look orange. Your brain decides what brown is from the surroundings. See [[color-constancy]] and [[spectrum]]." },
     { k: "history", text: "Painters once used a brown made of people. [[mummy-brown|Mummy brown]] was ground from Egyptian mummies. The painter Edward Burne-Jones, learning the truth, gave his tube a funeral in his garden. The London colormen C. Roberson said their last batch came in 1964, when they ran out of mummies. Most browns are safer [[earth-pigments]]." },
-    { k: "design", text: "In 2012 researchers asked 1,000 Australian smokers to pick the least appealing color for cigarette packs. They chose Pantone 448 C, a drab dark brown, now required on every pack. UPS went the other way and built a brand on its brown, which it calls Pullman brown. See [[color-trademarks]]." }
+    { k: "design", text: "In 2012 researchers asked 1,000 Australian smokers to pick the least appealing color for cigarette packs. They chose Pantone 448 C, a drab dark brown, now required on every pack. UPS went the other way and built a brand on its brown, which it calls Pullman brown. See [[color-trademarks]]." },
+    { k: "art", text: "Some browns were traps. Asphaltum, a tarry bitumen brown loved in the 1700s and 1800s, never fully dries: it has wrinkled and cracked paintings by Joshua Reynolds and Géricault's Raft of the Medusa. The Impressionists mocked academic 'brown gravy' and tried to banish earth browns altogether." },
+    { k: "culture", text: "For centuries brown was what ordinary people wore: undyed or cheaply dyed wool for peasants and humble friars. After the Reformation, sober browns joined black and grey as respectable colors for men's everyday dress, from the 1500s into the 1800s. Around 1700, about a quarter of the clothes in Paris nobles' estate inventories were brown." }
   ],
   related: [
     { to: "Orange", why: "Brown is dark orange, seen against brighter surroundings" },
@@ -195,7 +214,13 @@ window.WIKI_COLORS = {
   sources: [
     "Etymonline, 'brown', 'bear'",
     "Smithsonian Magazine, 'Ground-up mummies were once an ingredient in paint'; Journal of Art in Society, 'The life and death of mummy brown'",
-    "Wikipedia, 'Pantone 448 C' (GfK Bluemoon research, 2012)"
+    "Wikipedia, 'Pantone 448 C' (GfK Bluemoon research, 2012)",
+    "Ball, Bright Earth: The Invention of Colour (2001)",
+    "Finlay, Color: A Natural History of the Palette (2002)",
+    "Gurney, Color and Light (2010)",
+    "St Clair, The Secret Lives of Colour (2016)",
+    "Pastoureau, Black: The History of a Color (2008)",
+    "Jarman, Chroma (1994)"
   ]
 },
 
@@ -205,7 +230,8 @@ window.WIKI_COLORS = {
     { k: "language", text: "Grey or gray? Both. Britain mostly writes grey and America gray, and both come from Old English græg." },
     { k: "art", text: "Whistler didn't call it Whistler's Mother. He called it Arrangement in Grey and Black No. 1 ([[painting-whistlers-mother]]) and wanted it seen as a study of tones. Painting entirely in greys has its own name, grisaille, and was often used to imitate carved stone." },
     { k: "science", text: "A grey has no fixed look. On red it leans green; on blue it leans orange. [[chevreul|Chevreul]] described this [[simultaneous-contrast|simultaneous contrast]] in 1839. In Edward Adelson's checker-shadow illusion, a square that looks dark and one that looks light are the identical grey. See [[color-constancy]]." },
-    { k: "poetry", text: "In [[goethe|Goethe]]'s Faust, the devil Mephistopheles tells a student: 'Grey, dear friend, is all theory, and green the golden tree of life.' Grey stands for dry learning, [[Green|green]] for life itself." }
+    { k: "poetry", text: "In [[goethe|Goethe]]'s Faust, the devil Mephistopheles tells a student: 'Grey, dear friend, is all theory, and green the golden tree of life.' Grey stands for dry learning, [[Green|green]] for life itself." },
+    { k: "history", text: "Grey was long the color of the poor: Charlemagne told peasants to dress in black and grey, and in the Renaissance grey and beige still marked the humblest. Then, in the 1400s, new dyeing methods made a clear, even grey, and it became a princely color of hope. Charles d'Orléans, held prisoner in England after Agincourt, asked friends to wear grey, not black." }
   ],
   related: [
     { to: "Green", why: "Goethe's Faust: grey is theory, green the golden tree of life" },
@@ -216,7 +242,10 @@ window.WIKI_COLORS = {
   sources: [
     "Musée d'Orsay / Britannica, 'Arrangement in Grey and Black, No. 1' (1871)",
     "Chevreul, De la loi du contraste simultané des couleurs (1839); Adelson, checker-shadow illusion (1995)",
-    "Goethe, Faust, Part One (1808)"
+    "Goethe, Faust, Part One (1808)",
+    "Greenfield, A Perfect Red (2005)",
+    "Pastoureau, Black: The History of a Color (2008)",
+    "Pastoureau, Blue: The History of a Color (2001)"
   ]
 },
 
@@ -275,7 +304,9 @@ window.WIKI_COLORS = {
   named: "abstract",
   since: { year: 1748, what: "Royal Navy officers get dark blue uniforms", approx: false },
   facets: [
-    { k: "history", text: "In 1748 Britain's Royal Navy gave its officers their first official uniforms: dark blue coats with white facings. The blue came from [[indigo-dye|indigo]], which stood up unusually well to sun and salt water. Navies around the world followed, and the color took the navy's name. A popular tale says George II picked the blue after admiring a duchess's riding habit; it's told without solid evidence." }
+    { k: "history", text: "In 1748 Britain's Royal Navy gave its officers their first official uniforms: dark blue coats with white facings. The blue came from [[indigo-dye|indigo]], which stood up unusually well to sun and salt water. Navies around the world followed, and the color took the navy's name. A popular tale says George II picked the blue after admiring a duchess's riding habit; it's told without solid evidence." },
+    { k: "culture", text: "Navy took over from black. Between about 1910 and 1950, uniforms for police, postmen and others moved from black to navy, and from the 1930s men followed with navy blazers and suits. The historian Michel Pastoureau counts it among the great fashion shifts of the 20th century: navy now carries much of the sober respectability black once had." },
+    { k: "language", text: "Navy sits at the dark end of an old dyers' ladder. Eighteenth-century English dyers graded indigo from milk blue and pearl blue through sky, queen's, watchet and garter blue to deep and navy blue. The name itself comes from the dark blue of Royal Navy officers' uniforms." }
   ],
   related: [
     { to: "Indigo", why: "The dye that let navy cloth hold its color at sea" },
@@ -285,7 +316,12 @@ window.WIKI_COLORS = {
   ],
   sources: [
     "National Portrait Gallery, 'An Officer and a Gentleman: naval uniform and male fashion in the eighteenth century'",
-    "Wikipedia, 'Navy blue'; 'Uniforms of the Royal Navy'"
+    "Wikipedia, 'Navy blue'; 'Uniforms of the Royal Navy'",
+    "Pastoureau, Blue: The History of a Color (2001)",
+    "St Clair, The Secret Lives of Colour (2016)",
+    "Finlay, Color: A Natural History of the Palette (2002)",
+    "Balfour-Paul, Indigo: Egyptian Mummies to Blue Jeans (2011)",
+    "Greenfield, A Perfect Red (2005)"
   ]
 },
 
@@ -347,7 +383,8 @@ window.WIKI_COLORS = {
   facets: [
     { k: "language", text: "Turquoise means Turkish. The stone came from mines in Persia and reached Europe through Turkish lands, so the French called it the Turkish stone, though none was mined in Turkey." },
     { k: "history", text: "Ancient Egyptians sent expeditions to the Sinai for turquoise. At the mines of Serabit el-Khadim they built a temple to Hathor, who was called the lady of turquoise. Half a world away, Aztec artisans covered masks, and at least one human skull, in turquoise mosaic." },
-    { k: "science", text: "Turquoise is a copper mineral, like [[Malachite|malachite]], and copper gives it the [[Sky blue|sky color]]. A little iron in the mix pushes it greener." }
+    { k: "science", text: "Turquoise is a copper mineral, like [[Malachite|malachite]], and copper gives it the [[Sky blue|sky color]]. A little iron in the mix pushes it greener." },
+    { k: "art", text: "The Maya made a turquoise-blue paint that has survived centuries of jungle damp. Maya blue is [[indigo-dye|indigo]] locked inside a rare clay, palygorskite. For a long time people assumed a blue-green that refused to fade must be a metal pigment; how it really works was pinned down only around 2000." }
   ],
   related: [
     { to: "Malachite", why: "Another stone colored by copper, prized in ancient Egypt" },
@@ -357,7 +394,9 @@ window.WIKI_COLORS = {
   sources: [
     "The Metropolitan Museum of Art, 'Turquoise in Ancient Egypt'",
     "British Museum, turquoise mosaic mask of Tezcatlipoca",
-    "Etymonline, 'turquoise'"
+    "Etymonline, 'turquoise'",
+    "Finlay, Color: A Natural History of the Palette (2002)",
+    "Balfour-Paul, Indigo: Egyptian Mummies to Blue Jeans (2011)"
   ]
 },
 
@@ -438,7 +477,7 @@ window.WIKI_COLORS = {
   facets: [
     { k: "language", text: "Azure is a word that lost its first letter. Persian lajvard named lapis lazuli and a place where it was mined. Arabic made it lazaward, and in French and Spanish the opening l fell away, apparently taken for the article: l'azur. Lapis lazuli kept its l." },
     { k: "history", text: "Lapis lazuli came from mines in the Badakhshan mountains of Afghanistan. Ground and purified, it made [[ultramarine-pigment|ultramarine]], blue from beyond the sea, so costly that painters saved it for the robes of the Virgin." },
-    { k: "symbolism", text: "[[heraldry|Heraldry]] calls blue azure. The arms of the French kings were azure with gold lilies, and in 1887 the writer Stéphen Liégeard named the Riviera the Côte d'Azur." }
+    { k: "symbolism", text: "[[heraldry|Heraldry]] calls blue azure, and it spread fast: about one European coat of arms in twenty used it around 1200, and nearly one in three by 1400. The arms of the French kings were azure with gold lilies, and in 1887 the writer Stéphen Liégeard named the Riviera the Côte d'Azur." }
   ],
   related: [
     { to: "Gold", why: "France's royal arms: gold lilies on an azure field" },
@@ -449,7 +488,9 @@ window.WIKI_COLORS = {
   sources: [
     "OED, 'azure'; Wiktionary, 'lapis lazuli'",
     "Britannica, 'Lapis lazuli'; 'Ultramarine'",
-    "Wikipedia, 'French Riviera' (Liégeard, La Côte d'Azur, 1887)"
+    "Wikipedia, 'French Riviera' (Liégeard, La Côte d'Azur, 1887)",
+    "St Clair, The Secret Lives of Colour (2016)",
+    "Pastoureau, Blue: The History of a Color (2001)"
   ]
 },
 
@@ -459,7 +500,8 @@ window.WIKI_COLORS = {
   facets: [
     { k: "language", text: "Cerulean comes from Latin caeruleus, the dark blue of sea and sky, probably from caelum, heaven." },
     { k: "history", text: "Cerulean blue paint is cobalt and tin oxides fired together. A Swiss chemist made it in the late 1700s, but painters only got it in the 1860s, when London colormen such as George Rowney began selling it as 'coeruleum'. It is a cool, slightly greenish blue, now counted among the lightfast pigments. See [[cobalt-blue-pigment]]." },
-    { k: "design", text: "Pantone launched its [[color-of-the-year|Color of the Year]] with Cerulean for 2000, to mark the turn of the millennium. Six years later, The Devil Wears Prada built a famous speech around a cerulean sweater and how a runway shade trickles down to the bargain bin." }
+    { k: "design", text: "Pantone launched its [[color-of-the-year|Color of the Year]] with Cerulean for 2000, to mark the turn of the millennium. Six years later, The Devil Wears Prada built a famous speech around a cerulean sweater and how a runway shade trickles down to the bargain bin." },
+    { k: "art", text: "Painters took risks for cerulean. By the 1890s it had a reputation for fading, yet Signac kept it on his palette, and Monet used it heavily. In France it sold as bleu céleste, a trade name also stuck on other blues, even Prussian blue. Today it is considered a stable pigment." }
   ],
   related: [
     { to: "Cobalt", why: "Both are cobalt pigments; cerulean adds tin" },
@@ -469,7 +511,10 @@ window.WIKI_COLORS = {
   sources: [
     "Natural Pigments, 'Cerulean blue' (Höpfner; Rowney 1860)",
     "Pantone, 'Cerulean 15-4020', Color of the Year 2000",
-    "Etymonline, 'cerulean'"
+    "Etymonline, 'cerulean'",
+    "Ball, Bright Earth: The Invention of Colour (2001)",
+    "Gage, Colour and Culture (1993)",
+    "St Clair, The Secret Lives of Colour (2016)"
   ]
 },
 
@@ -479,7 +524,9 @@ window.WIKI_COLORS = {
   facets: [
     { k: "language", text: "Cobalt is named after a goblin. German miners called a troublesome ore kobold: it gave off poisonous arsenic fumes when smelted and yielded none of the metal they wanted. In the 1730s the Swedish chemist Georg Brandt showed it held a new metal, the one that turns glass blue." },
     { k: "history", text: "In 1802 the French chemist Louis Jacques Thénard heated cobalt with alumina and got a deep, stable blue. Cobalt blue gave painters a reliable, affordable rival to [[ultramarine-pigment|ultramarine]]. See [[cobalt-blue-pigment]]." },
-    { k: "culture", text: "Centuries earlier, cobalt made China's blue-and-white porcelain. In the 14th century, under the Mongol Yuan dynasty, potters at Jingdezhen painted with cobalt brought from Persia, then sealed it under a clear glaze. The style sailed the world and was copied from Delft to Iznik." }
+    { k: "culture", text: "Centuries earlier, cobalt made China's blue-and-white porcelain. In the 14th century, under the Mongol Yuan dynasty, potters at Jingdezhen painted with cobalt brought from Persia, then sealed it under a clear glaze. The style sailed the world and was copied from Delft to Iznik." },
+    { k: "art", text: "Painters fell for cobalt in the 1800s. It was one of the Impressionists' new synthetic colors: Monet painted the snow of Lavacourt in almost pure cobalt, and Van Gogh called it a divine color for putting atmosphere around things. It also helped unmask a forger: Han van Meegeren's fake Vermeers contained cobalt blue, a pigment Vermeer never had." },
+    { k: "science", text: "Cobalt colored glass long before paint. Egyptian glassmakers used it for deep blue, and the 12th-century windows of Saint-Denis and Chartres owe their blue to it. Ground cobalt glass, called smalt, was a cheap painter's blue from the 1500s, but it dulled in oil. The 'lost' blue of Chartres is a myth: the recipe is known; the old kilns are what can't be copied." }
   ],
   related: [
     { to: "White", why: "Cobalt on white porcelain: China's blue-and-white" },
@@ -490,7 +537,12 @@ window.WIKI_COLORS = {
   sources: [
     "Royal Society of Chemistry, Periodic Table, 'Cobalt'",
     "Royal Talens, 'Cobalt blue: from fake silver to colourful pigment'",
-    "Jesus College Cambridge, 'Branding Jingdezhen blue-and-white porcelain in the fourteenth century'"
+    "Jesus College Cambridge, 'Branding Jingdezhen blue-and-white porcelain in the fourteenth century'",
+    "Ball, Bright Earth: The Invention of Colour (2001)",
+    "St Clair, The Secret Lives of Colour (2016)",
+    "Finlay, Color: A Natural History of the Palette (2002)",
+    "Pastoureau, Blue: The History of a Color (2001)",
+    "Gage, Colour and Culture (1993)"
   ]
 },
 
@@ -515,7 +567,8 @@ window.WIKI_COLORS = {
   facets: [
     { k: "language", text: "Denim is probably short for serge de Nîmes, a twill named after the city in southern France, though the word's origin is debated. Jeans are named after Genoa, Gênes in French, whose tough cotton cloth was called jean." },
     { k: "history", text: "On May 20, 1873, Levi Strauss and the tailor Jacob Davis got a US patent for work pants with copper rivets at the pocket corners, where seams tore. The blue jean was born, dyed with [[indigo-dye|indigo]]." },
-    { k: "science", text: "Jeans fade because indigo barely sticks. It coats the outside of each cotton yarn and leaves the core white. Wear rubs the blue away where you move: thighs, knees and pocket edges." }
+    { k: "science", text: "Jeans fade because indigo barely sticks. Only the lengthwise warp threads are dyed, and the indigo coats the outside of each yarn, leaving the core white. Wear rubs the blue away where you move, but the hue never shifts, only its depth. Once dyeing grew deep and even, makers had to fake the wear with stones and bleach." },
+    { k: "culture", text: "Jeans were not born rebellious. For most of their history they were sensible workwear, and in Europe they took on their rebel aura only from the late 1960s. They also rescued a dye: synthetic [[indigo-dye|indigo]] was losing ground to faster blues by the mid-1900s, until the jeans boom of the 1960s sent demand soaring." }
   ],
   related: [
     { to: "Indigo", why: "The dye that makes jeans blue, and lets them fade" },
@@ -524,7 +577,10 @@ window.WIKI_COLORS = {
   sources: [
     "Levi Strauss & Co., 'The history of denim'",
     "US National Archives, 'Forever in blue jeans' (patent 139,121)",
-    "Heddels, 'Ring dyeing'"
+    "Heddels, 'Ring dyeing'",
+    "Balfour-Paul, Indigo: Egyptian Mummies to Blue Jeans (2011)",
+    "Pastoureau, Blue: The History of a Color (2001)",
+    "Wikipedia, 'Denim' (warp-dyed indigo, white weft)"
   ]
 },
 
@@ -564,7 +620,9 @@ window.WIKI_COLORS = {
   facets: [
     { k: "language", text: "Scarlet was a fabric before it was a color. In medieval England the word meant a costly, finely finished wool cloth, and because the best of it was dyed brilliant red, the name slid from the cloth to its color. It came through French and Medieval Latin; the deeper origin is uncertain, perhaps Arabic siqillat, a fine silk." },
     { k: "history", text: "The dye made the difference. [[kermes|Kermes]] insects from Mediterranean oaks gave the finest medieval scarlet, until American [[cochineal]] took over. In the British army, ordinary soldiers wore red coats dyed with cheap madder, while officers paid for scarlet dyed with cochineal." },
-    { k: "poetry", text: "In the Book of Revelation the great harlot is dressed in purple and scarlet. In Hawthorne's The Scarlet Letter (1850), Hester Prynne must wear a red letter A for adultery. Scarlet became the color of sin worn in public." }
+    { k: "poetry", text: "In the Book of Revelation the great harlot is dressed in purple and scarlet. In Hawthorne's The Scarlet Letter (1850), Hester Prynne must wear a red letter A for adultery. Scarlet became the color of sin worn in public." },
+    { k: "culture", text: "Scarlet was the luxury cloth of the Middle Ages. In Henry VI's England a single yard of even the cheapest scarlet cost a master mason more than a month's wages. Florentine dyers' manuals ranked it the highest of all colors, and sumptuary laws across Europe kept it for the few. In the 1460s, when Byzantine purple ran out, cardinals moved into scarlet too." },
+    { k: "science", text: "Tin made scarlet blaze. Around 1607 the Dutch inventor Cornelis Drebbel found that a tin mordant turned [[cochineal]] from a dark crimson-purple into a flame scarlet, and tin recipes soon ran from deep cherry to near neon. The tale that he found it by spilling acid onto a pewter windowsill is probably a legend." }
   ],
   related: [
     { to: "Crimson", why: "Both were kermes reds; crimson's name means 'made by worms'" },
@@ -575,7 +633,12 @@ window.WIKI_COLORS = {
   sources: [
     "Etymonline, 'scarlet'",
     "Wikipedia, 'Scarlet (color)'; 'Cochineal'",
-    "Revelation 17:4; Hawthorne, The Scarlet Letter (1850)"
+    "Revelation 17:4; Hawthorne, The Scarlet Letter (1850)",
+    "Ball, Bright Earth: The Invention of Colour (2001)",
+    "Greenfield, A Perfect Red (2005)",
+    "St Clair, The Secret Lives of Colour (2016)",
+    "Gage, Colour and Culture (1993)",
+    "Pastoureau, Red: The History of a Color (2017)"
   ]
 },
 
@@ -585,7 +648,9 @@ window.WIKI_COLORS = {
   facets: [
     { k: "language", text: "Crimson means 'made by a worm'. It came into English around 1400 from Medieval Latin cremesinus, from Arabic qirmizi, and back through Persian to Sanskrit krmija, the dye from tiny insects. [[Carmine]] shares the root, and [[Vermilion|vermilion]], from Latin vermiculus, 'little worm', carries the same idea." },
     { k: "history", text: "[[kermes|Kermes]] insects live on the kermes oak around the Mediterranean. Dried, they look like seeds, so old texts called the dye grain, and colorfast cloth was 'dyed in the grain', which is where ingrained comes from. American [[cochineal]] later gave the same red with a tenth as many insects." },
-    { k: "culture", text: "Harvard's sports teams and its student newspaper are both called the Crimson." }
+    { k: "culture", text: "Harvard's sports teams and its student newspaper are both called the Crimson." },
+    { k: "art", text: "Painters used crimson as a glaze. An insect red fixed onto a clear base makes a transparent paint, a lake, and a thin layer over brighter red glows like stained glass. Sassetta laid a kermes crimson over silver leaf to make St Francis's robe glow, and five centuries later Mondrian found the purest red still came from glazing bluish crimson over orange-red [[Vermilion|vermilion]]." },
+    { k: "science", text: "Crimson's weakness is light. Insect-red lakes fade: Turner's crimson and carmine sunsets have paled. Rothko's crimson mixes for his Harvard murals included a newer synthetic, Lithol Red, which faded so badly in a sunny room that the paintings came down in 1979." }
   ],
   related: [
     { to: "Carmine", why: "Same Arabic root, qirmiz; carmine swapped kermes for cochineal" },
@@ -594,7 +659,11 @@ window.WIKI_COLORS = {
   ],
   sources: [
     "Wikipedia, 'Crimson' (etymology; kermes vs carmine)",
-    "Etymonline, 'crimson', 'ingrain'"
+    "Etymonline, 'crimson', 'ingrain'",
+    "Ball, Bright Earth: The Invention of Colour (2001)",
+    "Gage, Colour and Culture (1993)",
+    "Finlay, Color: A Natural History of the Palette (2002)",
+    "Greenfield, A Perfect Red (2005)"
   ]
 },
 
@@ -708,7 +777,9 @@ window.WIKI_COLORS = {
   facets: [
     { k: "history", text: "Magenta is named after a battle. Around 1859 a vivid aniline dye called fuchsine, after the fuchsia flower, appeared in France. It is usually credited to the chemist François-Emmanuel Verguin. On 4 June 1859 France and Sardinia beat Austria near the Italian town of Magenta, and By 1860 British makers were selling it as magenta, after the victory. It followed [[mauveine]] in the first wave of synthetic dyes." },
     { k: "science", text: "Magenta isn't in the rainbow. No single wavelength looks magenta; your brain builds it when red and blue light arrive without green. On the light wheel it sits opposite [[Green|green]]. See [[extra-spectral]]." },
-    { k: "design", text: "Magenta is one of the printing inks in CMYK, with [[Aqua|cyan]] and [[Yellow|yellow]]. Deutsche Telekom trademarked its magenta and has gone after companies in unrelated fields, such as the insurer Lemonade. See [[color-trademarks]]." }
+    { k: "design", text: "Magenta is one of the printing inks in CMYK, with [[Aqua|cyan]] and [[Yellow|yellow]]. Deutsche Telekom trademarked its magenta and has gone after companies in unrelated fields, such as the insurer Lemonade. See [[color-trademarks]]." },
+    { k: "language", text: "Magenta had a twin. The same dye was also sold as solferino, after a second bloody battle that June, and both names became fashion news. Magenta itself has drifted: it began as a purplish crimson and now reads as a bright pink. Its screen twin, fuchsia, honors the botanist Leonhart Fuchs, who died long before Europeans ever saw the plant." },
+    { k: "culture", text: "Early magenta was made with arsenic acid. An 1870 German test of commercial samples found arsenic in most, some over 6 percent. In Basel, waste from a fuchsine works poisoned a pond, the groundwater and five wells, and in 1873 the city banned arsenic-based fuchsine. Cautious food makers and pharmacists kept using insect [[Carmine|carmine]] until arsenic-free reds arrived." }
   ],
   related: [
     { to: "Mauve", why: "The first aniline dye; magenta followed within three years" },
@@ -718,7 +789,13 @@ window.WIKI_COLORS = {
   ],
   sources: [
     "Wikipedia, 'Magenta' (Verguin; Nicholson and Maule, 1860; Battle of Magenta, 4 June 1859)",
-    "Wikipedia, 'Fuchsine'"
+    "Wikipedia, 'Fuchsine'",
+    "Garfield, Mauve: How One Man Invented a Color That Changed the World (2000)",
+    "St Clair, The Secret Lives of Colour (2016)",
+    "Greenfield, A Perfect Red (2005)",
+    "Ball, Bright Earth: The Invention of Colour (2001)",
+    "Finlay, Color: A Natural History of the Palette (2002)",
+    "Swiss National Museum blog, 'A poison to dye for' (2026) (Basel fuchsine works)"
   ]
 },
 
@@ -730,7 +807,9 @@ window.WIKI_COLORS = {
   facets: [
     { k: "history", text: "Vermilion is ground cinnabar, mercury sulfide. Rome got it from Almadén in Spain; Pliny says about ten thousand pounds a year arrived, at a price fixed by law. Generals celebrating a triumph had their faces painted with it, and the red walls of Pompeii's Villa of the Mysteries are cinnabar. See [[vermilion-pigment]]." },
     { k: "science", text: "Chinese makers probably learned to synthesize vermilion from mercury and sulfur, the two great principles of [[alchemy]], by the 4th century BCE; an Arabic alchemical text described it by the early 800s. It has a flaw: around 1400 the painter Cennino Cennini warned that, exposed to air, it can turn black." },
-    { k: "culture", text: "In China vermilion was the red of seals, carved lacquer and the emperor's own hand: Qing emperors answered officials' reports in vermilion ink, a privilege no one else had." }
+    { k: "culture", text: "In China vermilion was the red of seals, carved lacquer and the emperor's own hand: Qing emperors answered officials' reports in vermilion ink, a privilege no one else had." },
+    { k: "art", text: "In the early Middle Ages vermilion was priced like gold: until about the 11th century, filling a manuscript page with it cost as much as gilding. Guilds in Florence and Siena forbade painters to swap in cheaper red earth or red lead. By the Renaissance it had become cheap and everywhere, often laid under glazes of crimson lake." },
+    { k: "language", text: "The name is a hand-me-down. St Jerome used vermiculum, 'little worm', for the red [[kermes]] dye, and the word later passed to the mercury red because the colors looked alike. Medieval red words are a famous tangle: minium could mean cinnabar or red lead, and a miniature first meant a picture painted with minium, not a small one." }
   ],
   related: [
     { to: "Crimson", why: "Both names mean 'little worm', though only crimson is made of insects" },
@@ -739,7 +818,13 @@ window.WIKI_COLORS = {
   ],
   sources: [
     "Wikipedia, 'Vermilion' (Pliny, Natural History 33; Cennini, Il libro dell'arte)",
-    "Gettens, Feller & Chase, 'Vermilion and cinnabar', Studies in Conservation (1972)"
+    "Gettens, Feller & Chase, 'Vermilion and cinnabar', Studies in Conservation (1972)",
+    "Ball, Bright Earth: The Invention of Colour (2001)",
+    "Gage, Colour and Culture (1993)",
+    "St Clair, The Secret Lives of Colour (2016)",
+    "Greenfield, A Perfect Red (2005)",
+    "Pastoureau, Red: The History of a Color (2017)",
+    "Etymonline, 'vermilion', 'miniature'"
   ]
 },
 
@@ -747,9 +832,10 @@ window.WIKI_COLORS = {
   named: "dye",
   since: { year: 1520, what: "Spain begins importing cochineal from the Americas", approx: true },
   facets: [
-    { k: "history", text: "Carmine comes from [[cochineal]] insects that feed on prickly-pear cacti in Mexico and Peru. Spain began shipping them to Europe in the 1520s, and the dye became New Spain's most valuable export after silver. It takes about 70,000 insects to make a pound of dye." },
+    { k: "history", text: "Carmine comes from [[cochineal]] insects on prickly-pear cacti in Mexico and Peru. From the 1520s Spain shipped it to Europe, where it became New Spain's most valuable export after silver, and guarded it like treasure: Europeans argued for generations whether the grains were berries, seeds or insects. In 1777 the botanist Thiéry de Menonville smuggled live insects out of Oaxaca, but the monopoly held." },
     { k: "culture", text: "You have probably eaten some. Carmine, labeled E120 or cochineal extract, colors yogurts, sweets and drinks. In 2012 Starbucks dropped it from its strawberry drinks after vegetarians objected." },
-    { k: "language", text: "Carmine comes from Medieval Latin carminium, probably a blend of Arabic qirmiz, the kermes insect, and Latin minium, red lead. It is a close cousin of [[Crimson|crimson]]." }
+    { k: "language", text: "Carmine comes from Medieval Latin carminium, probably a blend of Arabic qirmiz, the kermes insect, and Latin minium, red lead. It is a close cousin of [[Crimson|crimson]]." },
+    { k: "science", text: "The red is a defense. Female cochineal insects make carminic acid, which drives off ants and other predators. Ounce for ounce it gives about ten times the color of the old [[kermes]] dye. Even so, it takes tens of thousands of insects to make a pound of dye; the books disagree on the exact count." }
   ],
   related: [
     { to: "Crimson", why: "Same Arabic root; cochineal replaced the old kermes" },
@@ -759,7 +845,11 @@ window.WIKI_COLORS = {
   sources: [
     "Wikipedia, 'Cochineal' (70,000 insects per pound; second to silver)",
     "Etymonline, 'carmine'",
-    "BBC News, 'Starbucks to stop using cochineal insect dye' (2012)"
+    "BBC News, 'Starbucks to stop using cochineal insect dye' (2012)",
+    "St Clair, The Secret Lives of Colour (2016)",
+    "Greenfield, A Perfect Red (2005)",
+    "Finlay, Color: A Natural History of the Palette (2002)",
+    "Pastoureau, Red: The History of a Color (2017)"
   ]
 },
 
@@ -885,7 +975,9 @@ window.WIKI_COLORS = {
     { k: "science", text: "Emerald is green beryl. Pure beryl is colorless; a trace of chromium, or sometimes vanadium, turns it green." },
     { k: "history", text: "Egypt's Eastern Desert emerald mines were opened under the Ptolemies, after 300 BCE, and worked hard by the Romans. Spanish conquerors later found far richer stones in Colombia, which became the world's great source. Emerald green paint was something else: a copper-arsenic pigment made from 1814 and sold as Paris green. See [[arsenic-greens]]." },
     { k: "poetry", text: "In L. Frank Baum's The Wonderful Wizard of Oz (1900), the Emerald City is only as green as its visitors' glasses: everyone inside must wear green spectacles, locked on." },
-    { k: "design", text: "Pantone made Emerald its [[color-of-the-year|Color of the Year]] for 2013." }
+    { k: "design", text: "Pantone made Emerald its [[color-of-the-year|Color of the Year]] for 2013." },
+    { k: "culture", text: "Romans believed green rested the eyes, and ground emeralds into eye balms. The famous story that Nero watched gladiators through an emerald, like sunglasses, probably misreads Suetonius: he seems to have rested his eyes by gazing into a large one, as medieval scribes later did with theirs." },
+    { k: "language", text: "Emerald comes from Greek smaragdos, a word that once covered almost any green stone. Emerald belongs to the beryl family, and polished beryl was used for early lenses, which is why the German word for glasses is Brille. Peridot, a yellower green gem, was long sold as the 'evening emerald', because it keeps its glow by lamplight." }
   ],
   related: [
     { to: "Viridian", why: "Chromium colors emerald, and viridian is a chromium oxide" },
@@ -898,7 +990,11 @@ window.WIKI_COLORS = {
     "Wikipedia, 'Emerald' (chromium/vanadium)",
     "Harrell, J. A. (2004). Archaeological geology of the world's first emerald mine. Geoscience Canada 31(2)",
     "Baum, The Wonderful Wizard of Oz (1900)",
-    "Pantone, Color of the Year 2013: Emerald 17-5641"
+    "Pantone, Color of the Year 2013: Emerald 17-5641",
+    "Pastoureau, Green: The History of a Color (2014)",
+    "St Clair, The Secret Lives of Colour (2016)",
+    "Finlay, Jewels: A Secret History (2006)",
+    "Etymonline, 'emerald', 'beryl'"
   ]
 },
 
@@ -989,7 +1085,9 @@ window.WIKI_COLORS = {
   facets: [
     { k: "language", text: "Celadon is named after a lovesick shepherd. In Honoré d'Urfé's pastoral novel L'Astrée (1607 to 1627), Céladon wears pale green ribbons, and French collectors gave his name to the soft green glaze on Chinese ceramics." },
     { k: "science", text: "Celadon's green comes from a pinch of iron, roughly 1 to 2.5 percent, in a glaze fired in a kiln starved of oxygen. The missing oxygen turns the iron from its red form, the one that colors [[Brick|bricks]], to a green one. Fire the same glaze with plenty of air and it comes out yellow-brown." },
-    { k: "art", text: "Chinese potters made celadons for well over a thousand years, from Yue ware to the Longquan kilns of the Southern Song, prized because they looked like [[Jade|jade]]. Korean potters of the Goryeo period (918 to 1392) invented their own inlay: they carved designs and filled them with black and white clay." }
+    { k: "art", text: "Chinese potters made celadons for well over a thousand years, from Yue ware to the Longquan kilns of the Southern Song, prized because they looked like [[Jade|jade]]. Korean potters of the Goryeo period (918 to 1392) invented their own inlay: they carved designs and filled them with black and white clay." },
+    { k: "history", text: "Tang poets praised mi se, the 'mysterious color' celadon made for the court, and for about a thousand years no one knew exactly which wares they meant. In 1987 a sealed crypt under the Famen Temple pagoda was opened, with a stone inventory of bowls an emperor had donated in 874. The fabled color turned out to be a soft olive." },
+    { k: "culture", text: "Celadon was believed to reveal or neutralize poison. Ottoman sultans collected it by the hundreds, and the Topkapi Palace still holds a huge hoard. It doesn't work: the Mughal emperor Jahangir reportedly tested it and found nothing." }
   ],
   related: [
     { to: "Jade", why: "Chinese potters prized celadon for looking like jade" },
@@ -999,7 +1097,9 @@ window.WIKI_COLORS = {
   ],
   sources: [
     "Wikipedia, 'Celadon' (L'Astrée; iron 0.75-2.5%; Goryeo sanggam inlay)",
-    "Wikipedia, 'Longquan celadon'; 'Goryeo ware'"
+    "Wikipedia, 'Longquan celadon'; 'Goryeo ware'",
+    "Finlay, Color: A Natural History of the Palette (2002)",
+    "St Clair, The Secret Lives of Colour (2016)"
   ]
 },
 
@@ -1027,7 +1127,8 @@ window.WIKI_COLORS = {
   facets: [
     { k: "language", text: "Malachite means mallow stone. The Greeks named it after the green leaves of the mallow plant, the same plant whose flower gave French its word [[Mauve|mauve]]." },
     { k: "history", text: "Egyptians mined malachite in the Sinai from about 4000 BCE, ground it for green eye paint and pigment, and pictured part of the afterlife as a Field of Malachite. It stayed a painter's green until about 1800. See [[malachite-pigment]]." },
-    { k: "design", text: "Russia's tsars clad whole rooms in malachite from the Urals; the Malachite Room of the Winter Palace in St Petersburg is the famous one." }
+    { k: "design", text: "Russia's tsars clad whole rooms in malachite from the Urals; the Malachite Room of the Winter Palace in St Petersburg is the famous one." },
+    { k: "science", text: "Malachite is touchy as paint. Cennino Cennini warned that grinding it too fine turns it dingy, so painters left it coarse. Its blue twin, azurite, is almost the same copper mineral, and over centuries azurite can slowly turn into malachite: some medieval Italian blues have gone green." }
   ],
   related: [
     { to: "Mauve", why: "Both named after the mallow: one its leaf, one its flower" },
@@ -1036,7 +1137,10 @@ window.WIKI_COLORS = {
   ],
   sources: [
     "Wikipedia, 'Malachite' (molochites; Egypt c. 4000 BC; pigment until c. 1800)",
-    "State Hermitage Museum, 'The Malachite Room'"
+    "State Hermitage Museum, 'The Malachite Room'",
+    "Finlay, Color: A Natural History of the Palette (2002)",
+    "Ball, Bright Earth: The Invention of Colour (2001)",
+    "Wikipedia, 'Azurite' (alteration to malachite)"
   ]
 },
 
@@ -1044,15 +1148,19 @@ window.WIKI_COLORS = {
   named: "abstract",
   since: { year: 1838, what: "Viridian first made in Paris", approx: false },
   facets: [
-    { k: "history", text: "Viridian is hydrated chromium oxide, a cool, transparent blue-green first made in Paris in 1838 by the color maker Pannetier and his assistant Binet. They kept the process secret and the paint expensive, until Charles Guignet patented a cheaper method in 1859. J. M. W. Turner was already using it by 1840. See [[viridian-pigment]]." },
-    { k: "language", text: "Its name comes from Latin viridis, green, the root of French vert and English verdant." }
+    { k: "history", text: "Viridian is hydrated chromium oxide, a cool, transparent blue-green first made in Paris in 1838 by the color maker Pannetier. He and his successor Binet kept the process secret and the paint expensive, until Charles Guignet patented a cheaper method in 1859. J. M. W. Turner was already using it by 1840. See [[viridian-pigment]]." },
+    { k: "language", text: "Its name comes from Latin viridis, green, the root of French vert and English verdant." },
+    { k: "art", text: "Viridian became the Impressionists' green. Monet counted it among his newest colors, Renoir laid it on almost pure in Boating on the Seine, and it was Cézanne's main green: of all the new synthetic pigments, it was nearly the only one he used. Unlike the arsenic greens, it was stable and non-toxic." }
   ],
   related: [
     { to: "Emerald", why: "Chromium again: it tints emerald, and viridian is a chromium oxide" },
     { to: "Green", why: "A permanent green with no arsenic in it" }
   ],
   sources: [
-    "Wikipedia, 'Viridian' (Pannetier and Binet 1838; Guignet 1859; Turner 1840)"
+    "Wikipedia, 'Viridian' (Pannetier and Binet 1838; Guignet 1859; Turner 1840)",
+    "Ball, Bright Earth: The Invention of Colour (2001)",
+    "Gage, Colour and Culture (1993)",
+    "WebExhibits, Pigments through the Ages, 'Viridian' (Pannetier and successor Binet)"
   ]
 },
 
@@ -1147,7 +1255,10 @@ window.WIKI_COLORS = {
   since: { year: 1856, what: "Perkin makes mauveine, the first aniline dye", approx: false },
   facets: [
     { k: "history", text: "In 1856, eighteen-year-old [[william-perkin|William Perkin]] tried to make quinine from coal-tar chemicals and got a black sludge. Cleaning the flask with alcohol, he saw purple. He patented the dye, opened a factory the next year, and in 1859 it was renamed mauve, French for the mallow flower. See [[mauveine]]." },
-    { k: "culture", text: "Mauve mania followed. Between 1859 and 1861 fashionable Britain wore it everywhere, and Punch joked that 'the Mauve Measles' were spreading. By 1870 newer synthetic dyes had pushed it aside, but chemistry had become the new source of color." }
+    { k: "culture", text: "The craze came before the chemistry. Paris was wild for mauve in 1857, dyed with natural purples from lichens and from murexide, made from bird guano. Perkin's factory reached full production only at the end of that year, so his dye rode the wave rather than starting it. By 1859 Punch joked about 'the Mauve Measles', and within a few years newer aniline colors had pushed mauve aside." },
+    { k: "language", text: "Victorians said it 'morve'. Perkin first sold his dye as Tyrian purple, borrowing the glamour of the ancient [[tyrian-purple|snail dye]], and buyers also called it aniline purple or Perkin's purple. By 1859 it was mauve, the French name for the mallow, because Paris set the fashion and French dyers had already made the word chic." },
+    { k: "science", text: "Mauve came out of coal, a little at a time. About 100 pounds of coal gave a quarter of an ounce of the dye. But that dye was strong: a drop could color pounds of cotton, and it held up to washing and light far better than the lilac dyes it replaced." },
+    { k: "symbolism", text: "Mauve also became a color of grief. Victorian mourning ran in stages: after the first months in black, the bereaved could move into grey or mauve for half-mourning, a sign they were returning to ordinary life. See [[mourning-colors]]." }
   ],
   related: [
     { to: "Malachite", why: "Both named after the mallow: its flower and its leaf" },
@@ -1157,7 +1268,12 @@ window.WIKI_COLORS = {
   ],
   sources: [
     "Wikipedia, 'Mauveine' (1856; Greenford works 1857; renamed 1859; Punch)",
-    "Garfield, Mauve: How One Man Invented a Color That Changed the World (2000)"
+    "Garfield, Mauve: How One Man Invented a Color That Changed the World (2000)",
+    "Ball, Bright Earth: The Invention of Colour (2001)",
+    "Greenfield, A Perfect Red (2005)",
+    "St Clair, The Secret Lives of Colour (2016)",
+    "Finlay, Color: A Natural History of the Palette (2002)",
+    "Finlay, Fabric: The Hidden History of the Material World (2021)"
   ]
 },
 
@@ -1180,7 +1296,9 @@ window.WIKI_COLORS = {
   facets: [
     { k: "science", text: "Violet is the real end of the rainbow: light of roughly 380 to 450 nanometers, the shortest waves we can see. Just past it lies ultraviolet, named for being beyond violet. [[Purple]], by contrast, is a mix with no wavelength of its own ([[extra-spectral]])." },
     { k: "philosophy", text: "[[isaac-newton|Newton]] named seven colors in the [[spectrum]], ending with violet, partly to match the seven notes of the musical scale. That is why [[Indigo|indigo]] sits in the rainbow at all." },
-    { k: "poetry", text: "[[rimbaud|Rimbaud]]'s sonnet [[voyelles|Voyelles]] gives each vowel a color: A black, E white, I red, U green, O blue. The poem ends on O, the Omega, 'the violet ray of His Eyes'. See [[synesthesia]]." }
+    { k: "poetry", text: "[[rimbaud|Rimbaud]]'s sonnet [[voyelles|Voyelles]] gives each vowel a color: A black, E white, I red, U green, O blue. The poem ends on O, the Omega, 'the violet ray of His Eyes'. See [[synesthesia]]." },
+    { k: "art", text: "The Impressionists made violet a scandal. Critics complained that trees are not violet and that Renoir's violet and green touches made flesh look like a corpse. Some joked that the painters had damaged eyes, or saw ultraviolet; those were jibes, not findings. Monet and others mostly mixed their violets from blue and red lake." },
+    { k: "symbolism", text: "Violet is the color of penance. Medieval liturgy grouped it with black for mourning and repentance, and in 1495, when the pope wanted white for a procession against a flood, his master of ceremonies objected that white meant joy, so violet was worn instead. Victorian widows moved from black into violets and mauves for half-mourning. See [[liturgical-colors]]." }
   ],
   related: [
     { to: "Purple", why: "Violet is in the rainbow; purple has no wavelength" },
@@ -1190,7 +1308,11 @@ window.WIKI_COLORS = {
   sources: [
     "Wikipedia, 'Violet (color)'",
     "Newton, Opticks (1704)",
-    "Rimbaud, 'Voyelles' (1871)"
+    "Rimbaud, 'Voyelles' (1871)",
+    "Ball, Bright Earth: The Invention of Colour (2001)",
+    "Livingstone, Vision and Art: The Biology of Seeing (2002)",
+    "St Clair, The Secret Lives of Colour (2016)",
+    "Gage, Colour and Culture (1993)"
   ]
 },
 
@@ -1199,7 +1321,9 @@ window.WIKI_COLORS = {
   facets: [
     { k: "language", text: "Indigo comes from Greek indikon, 'the Indian dye', because India supplied it to Europe. Its other old name, anil, from Arabic an-nil and Sanskrit nila, lives on in aniline, the chemical behind the first aniline dyes, and probably in [[Lilac|lilac]]." },
     { k: "history", text: "European woad and Indian Indigofera make the same blue molecule. The trade was brutal: in 1859 Bengal's farmers rose against European planters in the Indigo Revolt, and in colonial South Carolina, indigo grown by enslaved people became the second cash crop after rice. Adolf von Baeyer synthesized indigo in 1878, and BASF's factory indigo, from 1897, undercut the plantations. See [[indigo-dye]]." },
-    { k: "philosophy", text: "[[isaac-newton|Newton]] first counted five colors in his prism. In the 1670s he added orange and indigo, making seven to match the musical scale. Many people today struggle to see indigo as its own band. See [[spectrum]]." }
+    { k: "philosophy", text: "[[isaac-newton|Newton]] first counted five colors in his prism. In the 1670s he added orange and indigo, making seven to match the musical scale. Many people today struggle to see indigo as its own band. See [[spectrum]]." },
+    { k: "culture", text: "Europe's woad growers fought the newcomer. German authorities banned indigo as 'the devil's dye' from 1577, England called it 'food for the devil', and in 1609 France threatened death for using it. The charge that indigo was corrosive or poisonous was propaganda: woad and tropical indigo make the very same blue molecule." },
+    { k: "science", text: "Indigo dyes in the air. In the vat it dissolves into a yellow-green form, and cloth lifted out comes up yellowish green, then turns blue within minutes as oxygen reaches it. It needs no mordant. Built up dip by dip on the surface of the fiber, it fades with wear but never changes hue." }
   ],
   related: [
     { to: "Purple", why: "Tyrian purple is indigo's molecule with two bromine atoms added" },
@@ -1209,7 +1333,12 @@ window.WIKI_COLORS = {
   ],
   sources: [
     "Wikipedia, 'Indigo dye' (Baeyer 1878; BASF 1897; Indigo Revolt 1859; Newton, Lectiones Opticae)",
-    "Balfour-Paul, Indigo: Egyptian Mummies to Blue Jeans (2011)"
+    "Balfour-Paul, Indigo: Egyptian Mummies to Blue Jeans (2011)",
+    "Jarman, Chroma (1994)",
+    "Ball, Bright Earth: The Invention of Colour (2001)",
+    "Finlay, Color: A Natural History of the Palette (2002)",
+    "Pastoureau, Blue: The History of a Color (2001)",
+    "Nelson, Bluets (2009)"
   ]
 },
 
@@ -1264,14 +1393,17 @@ window.WIKI_COLORS = {
   named: "animal",
   since: { year: 1775, what: "Puce in fashion at the court of Louis XVI", approx: true },
   facets: [
-    { k: "language", text: "Puce is French for flea. Couleur puce, flea color, was the fashion at the court of Louis XVI in the late 1700s and is said to have been a favorite of Marie Antoinette." }
+    { k: "language", text: "Puce is French for flea. Couleur puce, flea color, was the fashion at the court of Louis XVI in the late 1700s and is said to have been a favorite of Marie Antoinette." },
+    { k: "history", text: "In the summer of 1775, the story goes, Louis XVI saw Marie Antoinette in a brownish silk gown and called it couleur de puce, flea color. The court copied it at once, and merchants sold a whole family of fleas: young flea, old flea, flea's belly, flea's back and flea's thigh." }
   ],
   related: [
     { to: "Taupe", why: "Another French animal color: taupe is a mole, puce a flea" },
     { to: "Camel", why: "Another color named after an animal" }
   ],
   sources: [
-    "Wikipedia, 'Puce'"
+    "Wikipedia, 'Puce'",
+    "Wikipedia (French), 'Puce (couleur)' (Bachaumont, Mémoires secrets)",
+    "St Clair, The Secret Lives of Colour (2016)"
   ]
 },
 
@@ -1329,7 +1461,10 @@ window.WIKI_COLORS = {
   facets: [
     { k: "art", text: "Gustav Klimt's [[painting-the-kiss|The Kiss]] is oil paint and real gold leaf. Klimt, the son of a gold engraver, painted it at the height of his golden phase, after the gold-ground Byzantine mosaics he saw in Ravenna in 1903." },
     { k: "symbolism", text: "In medieval icons and altarpieces, gold leaf stood for heavenly light rather than for a color. [[alchemy|Alchemists]] chased gold as the perfect metal and wrote it with the sun's sign, a circle with a dot. [[heraldry|Heraldry]] calls gold or and lets it stand in for [[Yellow|yellow]]." },
-    { k: "culture", text: "Olympic gold medals haven't been solid gold since 1912. Today's are silver, plated with at least six grams of gold." }
+    { k: "culture", text: "Olympic gold medals haven't been solid gold since 1912. Today's are silver, plated with at least six grams of gold." },
+    { k: "science", text: "Gold is too soft to grind: the bits weld back together. So medieval gilders beat it from coins instead, about a hundred leaves from one ducat by Cennino Cennini's reckoning, and rubbed it with a smooth stone or an animal's tooth until it shone like a mirror. To make gold paint, they first mixed it with mercury to make it brittle." },
+    { k: "history", text: "Gold leaf lost its place in painting. Around 1435 Leon Battista Alberti urged painters to imitate gold with paint, because flat leaf looks bright from one angle and dark from another and breaks a picture's lighting. Over the 1400s real gold shrank to halos and rays of divine light." },
+    { k: "language", text: "Gold is the color yellow wanted to be. Latin aureus meant both golden and bright yellow, and heraldry calls yellow or, gold. The brilliant arsenic mineral orpiment takes its name from auripigmentum, 'gold paint'. Romans thought gold could be smelted from it, and Pliny says the emperor Caligula tried. It holds none." }
   ],
   related: [
     { to: "Byzantium", why: "Klimt's gold was inspired by the mosaics of Ravenna" },
@@ -1341,7 +1476,11 @@ window.WIKI_COLORS = {
   sources: [
     "Belvedere, Vienna, 'The Kiss' (oil and gold leaf on canvas)",
     "Britannica, 'Gustav Klimt'",
-    "International Olympic Committee, 'Are Olympic gold medals made of gold?'"
+    "International Olympic Committee, 'Are Olympic gold medals made of gold?'",
+    "Ball, Bright Earth: The Invention of Colour (2001)",
+    "St Clair, The Secret Lives of Colour (2016)",
+    "Gage, Colour and Culture (1993)",
+    "Pastoureau, Yellow: The History of a Color (2019)"
   ]
 },
 
@@ -1379,15 +1518,18 @@ window.WIKI_COLORS = {
 "Tan": {
   named: "material",
   facets: [
-    { k: "language", text: "Tan comes from tanning: soaking hides in oak bark, whose tannins turn skin into leather and stain it [[Brown|brown]]. Tan and tannin share the root." },
-    { k: "culture", text: "Fashionable Europeans long avoided the sun. In the 1920s suntans came into style, and Coco Chanel usually gets the credit." }
+    { k: "language", text: "Tan comes from tanning: soaking hides in oak bark, whose tannins turn skin into leather and stain it [[Brown|brown]]. Tan and tannin share the root. Its neighbor buff is short for buffalo: soldiers wore coats of oiled buff leather, and skin of that color gave us 'in the buff'." },
+    { k: "culture", text: "Pale skin long meant status: until the mid-1800s a tan marked someone who worked in the fields. Once factory workers went pale, a tan began to signal leisure, and in the 1920s suntans came into fashion, with Coco Chanel usually getting the credit." }
   ],
   related: [
     { to: "Camel", why: "Another warm brown named after what coats are made of" },
     { to: "Sepia", why: "Another brown named after the substance that made it" }
   ],
   sources: [
-    "Etymonline, 'tan', 'tannin'"
+    "Etymonline, 'tan', 'tannin'",
+    "Pastoureau, Black: The History of a Color (2008)",
+    "St Clair, The Secret Lives of Colour (2016)",
+    "Etymonline, 'buff'"
   ]
 },
 
@@ -1428,7 +1570,8 @@ window.WIKI_COLORS = {
   named: "material",
   facets: [
     { k: "history", text: "Ivory black, a deep warm [[Black|black]], was made by charring ivory scraps; the paint sold under that name today is made from bone. In 1989 the CITES treaty voted to ban the international commercial ivory trade to protect elephants." },
-    { k: "poetry", text: "The Song of Songs praises a neck like a tower of ivory. The ivory tower as a place of lofty seclusion comes from an 1837 poem by the French critic Sainte-Beuve." }
+    { k: "poetry", text: "The Song of Songs praises a neck like a tower of ivory. The ivory tower as a place of lofty seclusion comes from an 1837 poem by the French critic Sainte-Beuve." },
+    { k: "art", text: "Not all ivory is elephant. The Lewis Chessmen, found on a Scottish island in 1831, were probably carved in Norway around 1150 to 1200 from walrus tusk, a less white, less even ivory. Traces of red paint survive on some pieces: in the 1100s, European chess was usually red against white, not black against white." }
   ],
   related: [
     { to: "Black", why: "Charred ivory made ivory black, a painter's warm black" },
@@ -1438,7 +1581,9 @@ window.WIKI_COLORS = {
   sources: [
     "Wikipedia, 'Bone char' (ivory black)",
     "CITES, 'Elephants' (1989 Appendix I listing)",
-    "Etymonline, 'ivory tower'"
+    "Etymonline, 'ivory tower'",
+    "St Clair, The Secret Lives of Colour (2016)",
+    "Pastoureau, White: The History of a Color (2023)"
   ]
 },
 
@@ -1463,14 +1608,21 @@ window.WIKI_COLORS = {
   since: { year: 1887, what: "Beige first used as a color word in English", approx: false },
   facets: [
     { k: "language", text: "Beige is French for natural wool, neither bleached nor dyed, as [[Ecru|ecru]] is for linen. The word spread in France around 1855 to 1860 and is recorded as a color in English from the late 1880s." },
-    { k: "design", text: "From the 1970s to the 1990s, beige was the color of computers: keyboards, monitors and towers, a look Apple and IBM popularized and German office rules helped lock in." }
+    { k: "design", text: "From the 1970s to the 1990s, beige was the color of computers: keyboards, monitors and towers, a look Apple and IBM popularized and German office rules helped lock in." },
+    { k: "science", text: "Early in 2002, astronomers at Johns Hopkins averaged the light of about 200,000 galaxies and announced that the universe was pale turquoise. A software error had skewed the result. Weeks later they corrected it: the average color of the universe is a light beige, nicknamed cosmic latte." },
+    { k: "history", text: "For most of history beige was what you got, not what you chose. Until about the 1700s, European dyers and bleachers could not make cloth truly white, so 'white' wool and linen were really beige, ecru or greyish. In Renaissance Europe such undyed shades marked the poor and humble monks; bright, lasting color took imported dyes only the rich could afford." }
   ],
   related: [
     { to: "Ecru", why: "Both mean undyed: beige wool, ecru linen" },
     { to: "Taupe", why: "Another French word English borrowed for a neutral" }
   ],
   sources: [
-    "Wikipedia, 'Beige' (first English use 1887; computers)"
+    "Wikipedia, 'Beige' (first English use 1887; computers)",
+    "St Clair, The Secret Lives of Colour (2016)",
+    "Nelson, Bluets (2009)",
+    "Finlay, Color: A Natural History of the Palette (2002)",
+    "Pastoureau, White: The History of a Color (2023)",
+    "Greenfield, A Perfect Red (2005)"
   ]
 },
 
@@ -1495,7 +1647,8 @@ window.WIKI_COLORS = {
   facets: [
     { k: "science", text: "Photography began with silver. Silver salts darken in light, and Louis Daguerre's process of 1839 fixed images on silver-plated copper. Black-and-white film and prints are made of tiny grains of silver." },
     { k: "art", text: "Before pencils, artists drew with silver. Silverpoint, a silver wire dragged over prepared paper, leaves fine grey lines that tarnish to warm brown over months. Albrecht Dürer drew his self-portrait in silverpoint at 13." },
-    { k: "symbolism", text: "[[heraldry|Heraldry]] calls silver argent and paints it white. [[alchemy|Alchemy]] ties silver to the moon, as it ties [[Gold|gold]] to the sun." }
+    { k: "symbolism", text: "[[heraldry|Heraldry]] calls silver argent and paints it white. [[alchemy|Alchemy]] ties silver to the moon, as it ties [[Gold|gold]] to the sun." },
+    { k: "history", text: "Silver paid for an empire. From 1545 the Spanish mined the Cerro Rico at Potosí, in today's Bolivia, with forced Indigenous labor, and its silver flooded the world's markets. Even a country is named for it: Argentina comes from Latin argentum, silver, after the riches Europeans hoped to find up the Río de la Plata, the 'river of silver'." }
   ],
   related: [
     { to: "Gold", why: "Alchemy's moon and sun; heraldry's two metals" },
@@ -1504,7 +1657,9 @@ window.WIKI_COLORS = {
   ],
   sources: [
     "Wikipedia, 'Silverpoint' (tarnish; Dürer)",
-    "Britannica, 'Daguerreotype'"
+    "Britannica, 'Daguerreotype'",
+    "St Clair, The Secret Lives of Colour (2016)",
+    "Wikipedia, 'Argentina' (etymology); 'Potosí'"
   ]
 },
 
@@ -1526,7 +1681,8 @@ window.WIKI_COLORS = {
 "Charcoal": {
   named: "material",
   facets: [
-    { k: "history", text: "Charcoal is the oldest drawing tool and the first [[Black|black]]. Artists at Chauvet Cave in France drew with it more than 30,000 years ago, and artists still use sticks of charred willow and vine for quick, smudgy sketches." }
+    { k: "history", text: "Charcoal is the oldest drawing tool and the first [[Black|black]]. Artists at Chauvet Cave in France drew with it more than 30,000 years ago, and artists still use sticks of charred willow and vine for quick, smudgy sketches." },
+    { k: "art", text: "Charcoal once fooled the experts. When nine-year-old María Sanz de Sautuola spotted bison on the ceiling of Altamira cave in 1879, the charcoal-and-ochre animals were judged too good to be prehistoric, and her father was accused of forgery. The leading skeptic, Émile Cartailhac, publicly took it back in 1902, after her father had died." }
   ],
   related: [
     { to: "Black", why: "Charcoal drew the first black lines in caves" },
@@ -1535,7 +1691,9 @@ window.WIKI_COLORS = {
   ],
   sources: [
     "Bradshaw Foundation, 'Chauvet Cave'",
-    "Wikipedia, 'Charcoal (art)'"
+    "Wikipedia, 'Charcoal (art)'",
+    "St Clair, The Secret Lives of Colour (2016)",
+    "Finlay, Color: A Natural History of the Palette (2002)"
   ]
 },
 
@@ -1611,7 +1769,8 @@ window.WIKI_COLORS = {
     { k: "history", text: "Ochre is the oldest paint there is. Evidence from Africa suggests people were processing it some 300,000 years ago. At Blombos Cave someone engraved a crosshatch on a piece of it about 75,000 years ago, and at Lascaux a horse was painted in yellow ochre about 17,300 years ago. See [[earth-pigments]]." },
     { k: "science", text: "Ochre is earth colored by iron. Yellow ochre owes its color to goethite. Heat it, the goethite turns to hematite, and the yellow becomes red, so early painters could get both colors from one earth." },
     { k: "culture", text: "Australia has over 400 recorded ochre pits and quarries, and prized red ochre traveled across the continent along the songlines, the Aboriginal routes of trade and story." },
-    { k: "language", text: "The name comes from Greek ochra, from ochros, pale." }
+    { k: "language", text: "The name comes from Greek ochra, from ochros, pale, a word for a pale yellow that could also mean whitish or greyish. Over time ochre drifted redder and browner. The best red ochre of antiquity came from Sinope on the Black Sea, and sinopia became a name for red ochre and for the red underdrawings hidden beneath frescoes." },
+    { k: "art", text: "Ochre is the backbone of the old masters' palette. From Rembrandt to Anders Zorn, portrait painters often worked from little more than white, yellow ochre, a red earth and black. Ochre is cheap, non-toxic and lightfast, which is one reason those pictures have aged so well." }
   ],
   related: [
     { to: "Red", why: "Red ochre was humanity's first red" },
@@ -1621,7 +1780,12 @@ window.WIKI_COLORS = {
   ],
   sources: [
     "Wikipedia, 'Ochre' (Blombos c. 75,000 years; Lascaux 17,300 years; goethite to hematite)",
-    "Henshilwood et al., 'Emergence of modern human behavior', Science 295 (2002)"
+    "Henshilwood et al., 'Emergence of modern human behavior', Science 295 (2002)",
+    "Finlay, Color: A Natural History of the Palette (2002)",
+    "Pastoureau, Yellow: The History of a Color (2019)",
+    "Gurney, Color and Light (2010)",
+    "Ball, Bright Earth: The Invention of Colour (2001)",
+    "St Clair, The Secret Lives of Colour (2016)"
   ]
 },
 
@@ -1644,9 +1808,11 @@ window.WIKI_COLORS = {
 "Amber": {
   named: "gem",
   facets: [
-    { k: "language", text: "Amber gave us electricity. The Greek word for amber was elektron. Rubbed amber attracts dust and straw, and in 1600 William Gilbert coined the Latin electricus, amber-like, for that force." },
+    { k: "language", text: "Amber gave us electricity. The Greek word for amber was elektron, a name tied to the shining sun. Rubbed amber attracts dust and straw, and in 1600 William Gilbert coined the Latin electricus, amber-like, for that force. German calls amber Bernstein, 'burning stone', because it burns." },
     { k: "history", text: "Amber is fossilized tree resin. Prussia built a whole room of it, backed with [[Gold|gold]] leaf, and gave it to Peter the Great in 1716. German troops took the Amber Room from the Catherine Palace in 1941; it vanished after 1945, and a reconstruction opened in 2003." },
-    { k: "culture", text: "On British traffic lights, the middle light is amber; Americans call it [[Yellow|yellow]]." }
+    { k: "culture", text: "On British traffic lights, the middle light is amber; Americans call it [[Yellow|yellow]]." },
+    { k: "science", text: "Baltic amber is resin from conifers that grew about 40 million years ago. Dinosaurs died out about 66 million years ago, so most amber is far too young to hold them, and only rare older ambers date from their time. The Jurassic Park idea of cloning dinosaurs from blood in amber-trapped insects does not hold up." },
+    { k: "poetry", text: "In Ovid's Metamorphoses, Phaethon's sisters weep for him until they turn into poplars, and their tears harden into amber. The prophet Ezekiel reached for amber to describe the fire of God; older English Bibles render the brightness 'as the colour of amber'." }
   ],
   related: [
     { to: "Gold", why: "The Amber Room's panels were backed with gold leaf" },
@@ -1654,7 +1820,12 @@ window.WIKI_COLORS = {
   ],
   sources: [
     "Wikipedia, 'Amber' (elektron; Gilbert, De Magnete, 1600)",
-    "Wikipedia, 'Amber Room' (1716 gift; looted 14 October 1941; rebuilt 2003)"
+    "Wikipedia, 'Amber Room' (1716 gift; looted 14 October 1941; rebuilt 2003)",
+    "Finlay, Jewels: A Secret History (2006)",
+    "St Clair, The Secret Lives of Colour (2016)",
+    "Finlay, Color: A Natural History of the Palette (2002)",
+    "Gage, Colour and Culture (1993)",
+    "Ezekiel 1:4 (King James Version); Ovid, Metamorphoses II"
   ]
 },
 
@@ -1679,14 +1850,18 @@ window.WIKI_COLORS = {
 "Ecru": {
   named: "material",
   facets: [
-    { k: "language", text: "Ecru is French for raw: écru, from Latin crudus, the root of crude. It names linen and silk left unbleached, in their natural state." }
+    { k: "language", text: "Ecru is French for raw: écru, from Latin crudus, the root of crude. It names linen and silk left unbleached, in their natural state." },
+    { k: "history", text: "For most of history, white cloth was really ecru. Until about the 1700s, European bleachers could not get linen or wool truly white: Romans laid linen out in the dew or soaked it in milk, and the white habits of medieval monks were in practice ecru or grey. Drab has a similar story: from French drap, cloth, it named the dull brownish color of undyed fabric." }
   ],
   related: [
     { to: "Beige", why: "Both mean undyed: ecru linen, beige wool" },
     { to: "Cerise", why: "Another French word English kept as a color" }
   ],
   sources: [
-    "Etymonline, 'ecru'"
+    "Etymonline, 'ecru'",
+    "Pastoureau, White: The History of a Color (2023)",
+    "Finlay, Fabric: The Hidden History of the Material World (2021)",
+    "Etymonline, 'drab'"
   ]
 },
 
@@ -1759,8 +1934,9 @@ window.WIKI_COLORS = {
   named: "mineral",
   since: { year: 1650, what: "Burnt umber first used as a color name in English", approx: false },
   facets: [
-    { k: "language", text: "No one is sure where umber's name comes from. It may be terra d'ombra, earth of Umbria in Italy, or Latin umbra, shadow, which suits a pigment painters reach for in the shadows." },
-    { k: "history", text: "Umber is an iron earth rich in manganese oxide, which makes it darker than [[Ochre|ochre]] and [[Sienna|sienna]] and helps oil paint dry fast. Most of it comes from Cyprus. Roasted, it becomes burnt umber, a color name in English since 1650. See [[earth-pigments]]." }
+    { k: "language", text: "No one is sure where umber's name comes from. Most color historians lean toward Latin umbra or Italian ombra, shadow, which suits a pigment painters reach for in the shadows. The old link to Umbria is weaker, since Europe got most of its umber from the eastern Mediterranean. French calls it terre d'ombre." },
+    { k: "history", text: "Umber is an iron earth rich in manganese oxide, which makes it darker than [[Ochre|ochre]] and [[Sienna|sienna]] and helps oil paint dry fast. Most of it comes from Cyprus. Roasted, it becomes burnt umber, a color name in English since 1650. See [[earth-pigments]]." },
+    { k: "art", text: "Umber is the color of Rembrandt's darkness. In his later years he worked from a small palette of cheap, stable earths, and umber built the dark grounds around the lit faces of his late self-portraits. Caravaggio's Nativity of 1609, stolen from Palermo in 1969 and never recovered, picked its figures out of a muddy umber dark." }
   ],
   related: [
     { to: "Sienna", why: "Its lighter partner in every painter's box of earths" },
@@ -1768,7 +1944,11 @@ window.WIKI_COLORS = {
     { to: "Sepia", why: "Brown from the earth versus brown from the sea" }
   ],
   sources: [
-    "Wikipedia, 'Umber' (manganese; Cyprus; burnt umber 1650)"
+    "Wikipedia, 'Umber' (manganese; Cyprus; burnt umber 1650)",
+    "Ball, Bright Earth: The Invention of Colour (2001)",
+    "Finlay, Color: A Natural History of the Palette (2002)",
+    "St Clair, The Secret Lives of Colour (2016)",
+    "Pastoureau, Yellow: The History of a Color (2019)"
   ]
 },
 
