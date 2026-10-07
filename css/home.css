@@ -103,3 +103,8 @@
 .hm-stages .cx-chip em{font:500 11px/1 var(--mono);font-style:normal;color:var(--faint)}
 .hm-lens{display:flex;align-items:center;gap:12px;margin:4px 0 14px;font:500 11px/1 var(--mono);letter-spacing:.06em;color:var(--faint)}
 .hm-lens input{flex:1;accent-color:var(--ink)}
+/* the view chooser's one-of-several controls (Show, Layout) */
+.hm-seg{display:flex;gap:6px;margin:2px 0 14px}
+.hm-seg button{flex:1;display:flex;align-items:center;justify-content:center;height:38px;border:1px solid var(--rule);border-radius:19px;font:400 16px/1 var(--serif);color:var(--soft)}
+.hm-seg button.on{background:var(--ink);border-color:var(--ink);color:#0E0D0B}
+.hm-chooser .hm-sub{margin-top:6px}

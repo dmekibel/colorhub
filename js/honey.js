@@ -156,7 +156,7 @@ function honeycomb(host, opts = {}) {
   host.innerHTML = `<div class="hc-box"><div class="hc-vig"></div><canvas class="hc-cv" aria-label="Colors as bubbles: drag to browse, pinch to zoom, tap one to open it"></canvas></div>
     <button class="hc-cap"><i></i><span><b></b><small></small></span><em></em></button>`;
   const vig = host.querySelector(".hc-vig"), cv = host.querySelector("canvas"), ctx = cv.getContext("2d"), cap = host.querySelector(".hc-cap");
-  const RM = reduceMotion, SHOOT = typeof SHOT !== "undefined" && !!SHOT, DRIFT = .2, LENS = { m0: 3.5, m1: 1.95, sig: 2.3 }, ZMAX = 2.5;
+  const RM = reduceMotion, SHOOT = typeof SHOT !== "undefined" && !!SHOT, DRIFT = .2, ZMAX = 2.5;
   let vigK = -1, ZCLEAN = 0;
   let ZMIN = .4;   // per set: zoom out until the screen holds most of one repeat; the vignette hides the copies (see zFloor)
   let layout = opts.layout === "wheel" ? "wheel" : "map", lay = null, P = [0, 0], W = 0, Hh = 0, dpr = 1, base = 30, dead = false;
@@ -164,37 +164,39 @@ function honeycomb(host, opts = {}) {
   let phase = "idle", spring = null, touched = RM || SHOOT, visible = true, raf = 0, last = 0;
   let bloom = RM || SHOOT ? 1 : 0, bloomT0 = performance.now(), pressed = null, pressK = 0, drawn = [], center = null, settled = null;
 
-  // ---- geometry: the lens maps a world distance z (in bubble spacings) to a screen radius ----
-  // The lens is shaped like the screen: distance is measured with the vertical squeezed by the screen's aspect (ASP), so
-  // the magnified middle is a tall oval that fills a tall phone instead of a round "eye" (David, 2026-10-08). The
-  // center is about 1.8x the edge.
-  // lens strength (the view panel's "Lens" slider): 0 = flat, 1 = the default ~1.8x center, 2 = strong; never fully off
-  let lensK = opts.lens == null ? 1 : +opts.lens;
-  const lshape = () => ({ m0: LENS.m1 + (LENS.m0 - LENS.m1) * Math.max(.15, lensK), m1: LENS.m1, sig: LENS.sig });
-  const ASP = () => clamp(Hh / Math.max(1, W), 1, 2.4);
+  // ---- geometry: the Apple Watch lens ----
+  // The plane is laid out flat (K px per bubble spacing), then each screen axis is warped on its own: inside the middle
+  // part (fraction `inner` of the half-width/height) nothing changes; toward the edges positions are pulled in and the
+  // bubbles shrink smoothly to nothing, like the Watch's app grid. Because x and y warp separately, the lens is shaped
+  // like the (tall) screen, not like an eye. The Lens slider sets how big the full-size middle is.
+  const M = 2.2;                                   // bubble spacing at zoom 1, in units of `base`
+  let lensK = opts.lens == null ? 1 : +opts.lens;  // 0 = almost flat, 1 = default, 2 = strong
+  const inner = () => clamp(.92 - .3 * Math.max(.1, lensK), .25, .9);
+  const warp = (u, a) => u <= a ? u : a + (1 - a) * (1 - Math.exp(-(u - a) / (1 - a)));          // 0..inf -> 0..1
+  const dwarp = (u, a) => u <= a ? 1 : Math.exp(-(u - a) / (1 - a));                                // its slope = bubble scale
+  const unwarp = (v, a) => v <= a ? v : v >= .9999 ? 40 : a - (1 - a) * Math.log(1 - (v - a) / (1 - a));
   const lens = t => {
-    const e = 1 - Math.pow(1 - bloom, 3), s = (.72 + .28 * e) * Z;
-    const br = phase === "drift" ? 1 + .028 * Math.sin(t / 1000 * Math.PI * 2 / 3.8) : 1;
-    const sh = lshape(Z);
-    return { s, a: e, m0: sh.m0 * br, m1: sh.m1, sig: sh.sig };
+    const e = 1 - Math.pow(1 - bloom, 3), br = phase === "drift" ? 1 + .028 * Math.sin(t / 1000 * Math.PI * 2 / 3.8) : 1;
+    const s = (.72 + .28 * e) * Z;
+    return { s, a: e, K: base * s * M * br, inner: inner() };
   };
-  const F = (z, l) => base * l.s * (l.m1 * z + (l.m0 - l.m1) * l.sig * .8862 * honeyErf(z / l.sig));
-  const mag = (z, l) => l.m1 + (l.m0 - l.m1) * Math.exp(-((z / l.sig) ** 2));
-  const Finv = (r, l) => { let lo = 0, hi = 400; for (let i = 0; i < 30; i++) { const m = (lo + hi) / 2; if (F(m, l) > r) hi = m; else lo = m; } return (lo + hi) / 2; };
-  const reach = l => { const rho = Math.hypot(W / 2, Hh / 2 / ASP()) + 40; return Finv(rho, l) * (Math.hypot(W, Hh) / 2 + 40) / rho; };
-  // the smallest zoom for a wrapping set: the screen's width holds about one repeat (half a repeat each side of the
-  // center), so zoomed all the way out you see nearly every color once. The tall screen would show repeats above and
-  // below, so the vignette (draw, css .hc-vig) fades exactly those bands. ZCLEAN: the zoom where nothing repeats at all.
+  const Kat = z => base * z * M;
+  // world radius worth drawing: out to where bubbles have shrunk to ~5%
+  const reach = l => { const um = l.inner + 3 * (1 - l.inner); return Math.hypot(um * W / 2, um * Hh / 2) / l.K + 1; };
+  // zoom limits for a wrapping set: ZCLEAN = no color can show twice where bubbles are still a decent size; ZMIN lets
+  // you see a little more, and the vignette (draw, css .hc-vig) fades the bands where repeats would begin.
   const zFloor = () => {
     if (!lay || lay.finite || !W) return .4;
-    const sh = z => ({ s: z, ...lshape(z) });
-    const search = ok => { let lo = .05, hi = ZMAX; if (!ok(hi)) return ZMAX; for (let i = 0; i < 24; i++) { const m = (lo + hi) / 2; if (ok(m)) hi = m; else lo = m; } return hi; };
-    const wx = z => Finv(W / 2, sh(z)), wy = z => ASP() * Finv(Hh / 2 / ASP(), sh(z));   // world half-extents along x and y
-    ZCLEAN = search(z => wx(z) <= lay.perX * .5 && wy(z) <= lay.perY * .5);
-    return Math.max(.15, Math.min(ZCLEAN, search(z => wx(z) <= lay.perX * .5 && wy(z) <= lay.perY * .58)));
+    const a = inner(), u30 = a + 1.2 * (1 - a);
+    const need = f => Math.max(u30 * W / 2 / (lay.perX * f), u30 * Hh / 2 / (lay.perY * f)) / (base * M);
+    ZCLEAN = clamp(need(.5), .15, ZMAX);
+    return clamp(need(.62), .15, ZCLEAN);
   };
   // the world offset (from the pan point) under a screen point
-  const offAt = (sx, sy, l) => { const dx = sx - W / 2, dy = sy - Hh / 2, rho = Math.hypot(dx, dy / ASP()); if (rho < 1e-6) return [0, 0]; const z = Finv(rho, l); return [dx * z / rho, dy * z / rho]; };
+  const offAt = (sx, sy, l) => {
+    const tx = (sx - W / 2) / (W / 2), ty = (sy - Hh / 2) / (Hh / 2);
+    return [Math.sign(tx) * unwarp(Math.abs(tx), l.inner) * W / 2 / l.K, Math.sign(ty) * unwarp(Math.abs(ty), l.inner) * Hh / 2 / l.K];
+  };
   // every copy of a base point within distance R of world point Q (a wrapping plane repeats along A and B)
   function copies(p, Q, R, fn) {
     const dx = p.x - Q[0], dy = p.y - Q[1], R2 = R * R;
@@ -216,14 +218,15 @@ function honeycomb(host, opts = {}) {
   // ---- drawing ----
   function draw(t = performance.now()) {
     if (!lay || !W || dead) return;
-    const l = lens(t), R = reach(l), cx = W / 2, cy = Hh / 2, mark = lay.mixed, asp = ASP();
+    const l = lens(t), R = reach(l), cx = W / 2, cy = Hh / 2, hx = W / 2, hy = Hh / 2, mark = lay.mixed, ia = l.inner;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, Hh);
     ctx.globalAlpha = l.a;
     drawn = [];
     let cbest = Infinity, cItem = null;
     for (const p of lay.pts) copies(p, P, R, (ex, ey) => {
-      const z = Math.hypot(ex, ey / asp), k = z ? F(z, l) / z : base * l.s * l.m0;   // the oval lens (see ASP)
-      const x = cx + ex * k, y = cy + ey * k, d = base * l.s * mag(z, l) * .9;
+      const z = Math.hypot(ex, ey), ux = Math.abs(ex * l.K / hx), uy = Math.abs(ey * l.K / hy);   // the Watch lens (see warp)
+      const x = cx + Math.sign(ex) * warp(ux, ia) * hx, y = cy + Math.sign(ey) * warp(uy, ia) * hy;
+      const d = l.K * .9 * Math.min(dwarp(ux, ia), dwarp(uy, ia));
       if (x < -d || y < -d || x > W + d || y > Hh + d || d < 1.6) return;
       if (z < cbest) { cbest = z; cItem = p.it; }
       drawn.push({ it: p.it, x, y, d });
@@ -264,7 +267,7 @@ function honeycomb(host, opts = {}) {
     }
     // vignette: fade only the bands where repeats would show (beyond half a repeat from the center), top/bottom and sides
     if (lay && !lay.finite) {
-      const by = Math.max(0, Hh / 2 - asp * F(lay.perY * .5 / asp, l)), bx = Math.max(0, W / 2 - F(lay.perX * .5, l));
+      const by = hy * (1 - warp(lay.perY * .5 * l.K / hy, ia)), bx = hx * (1 - warp(lay.perX * .5 * l.K / hx, ia));
       const key = Math.round(by) * 4096 + Math.round(bx);
       if (key !== vigK) {
         vigK = key;
@@ -370,7 +373,7 @@ function honeycomb(host, opts = {}) {
     const dx = x - down.x, dy = y - down.y;
     if (!down.moved && Math.hypot(dx, dy) > 7) { down.moved = true; pressed = null; kick(); }
     if (!down.moved) return;
-    const k = base * lens(0).s * lens(0).m0, now = performance.now();
+    const k = lens(0).K, now = performance.now();
     P = [down.P0[0] - dx / k, down.P0[1] - dy / k];
     if (lay.finite) {   // rubber band past the edge of a small cluster
       const r = Math.hypot(P[0], P[1]), ext = lay.ext + .6;
@@ -421,7 +424,7 @@ function honeycomb(host, opts = {}) {
     if (!lay) return;
     const [x, y] = local(e);
     if (e.ctrlKey) { e.preventDefault(); touched = true; phase = "idle"; spring = null; zAnim = null; zoomAround(rubber(clamp(Z * Math.exp(-e.deltaY * .012), ZMIN * .8, ZMAX * 1.2)), x, y); }
-    else if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) { e.preventDefault(); touched = true; phase = "idle"; spring = null; const k = base * lens(0).s * lens(0).m0; P = [P[0] + e.deltaX / k, P[1] + e.deltaY / k]; }
+    else if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) { e.preventDefault(); touched = true; phase = "idle"; spring = null; const k = lens(0).K; P = [P[0] + e.deltaX / k, P[1] + e.deltaY / k]; }
     else return;
     draw(); clearTimeout(wheelT);
     wheelT = setTimeout(() => { if (Z < ZMIN || Z > ZMAX) zoomTo(clamp(Z, ZMIN, ZMAX), x, y); else { if (opts.onZoom) opts.onZoom(Z); snap(); } }, 160);
@@ -504,7 +507,7 @@ function honeycomb(host, opts = {}) {
     // items: a new list (soft: true cross-fades and keeps the bubble in the middle), layout: "map" | "wheel"
     update(o = {}) { if (o.layout) layout = o.layout === "wheel" ? "wheel" : "map"; setItems(o.items || (lay && lay.raw), o.focus || (center && center.o), o.soft ? "soft" : ""); },
     zoom: (z, animate = true) => animate ? zoomTo(z) : (Z = clamp(z, ZMIN, ZMAX), draw()),
-    lens: k => { lensK = clamp(+k, 0, 2); ZMIN = zFloor(); Z = clamp(Z, ZMIN, ZMAX); kick(); },
+    lens: k => { lensK = clamp(+k, 0, 2); ZMIN = zFloor(); Z = clamp(Z, ZMIN, ZMAX); draw(); },
     current: () => center && center.o,
     destroy,
   };
