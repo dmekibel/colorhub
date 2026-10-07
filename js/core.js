@@ -380,12 +380,30 @@ function sheet(html) {
   };
   // anything outside closes it: a tap or a swipe on the dimmed page
   scrim.addEventListener("pointerdown", e => { e.preventDefault(); close(); });
-  // drag the sheet down (from the grab bar, or anywhere once it's scrolled to the top) to close
-  let y0 = null, dy = 0;
-  sh.addEventListener("pointerdown", e => { if (e.target.closest("input,textarea,select") || (sh.scrollTop > 0 && !e.target.closest(".grab"))) return; y0 = e.clientY; dy = 0; });
-  sh.addEventListener("pointermove", e => { if (y0 == null) return; dy = Math.max(0, e.clientY - y0); if (dy > 6) { sh.style.transition = "none"; sh.style.transform = `translateY(${dy}px)`; } });
-  const end = () => { if (y0 == null) return; y0 = null; if (dy > 90) return close(); sh.style.transition = "transform .3s var(--ease)"; sh.style.transform = ""; };
-  sh.addEventListener("pointerup", end); sh.addEventListener("pointercancel", end);
+  // drag the sheet down (from the grab bar, or anywhere once it's scrolled to the top) to close. Touch uses touch events
+  // and claims the gesture (preventDefault) only for a downward drag at the top: with pointer events alone, iOS starts
+  // its own scrolling, cancels the pointer, and the sheet snaps back (David: "swiping down doesn't close it").
+  let y0 = null, x0 = 0, dy = 0, t0 = 0, on = false;
+  const end = () => {
+    if (y0 == null) return; y0 = null;
+    const fast = dy > 40 && dy / Math.max(1, performance.now() - t0) > .5;
+    if (on && (dy > 90 || fast)) return close();
+    on = false; sh.style.transition = "transform .3s var(--ease)"; sh.style.transform = "";
+  };
+  const start = (x, y, target) => { if (target.closest("input,textarea,select,input[type=range]") || (sh.scrollTop > 0 && !target.closest(".grab"))) return; y0 = y; x0 = x; dy = 0; on = false; t0 = performance.now(); };
+  const move = (x, y, e) => {
+    if (y0 == null) return;
+    const d = y - y0;
+    if (!on) { if (d > 6 && d > Math.abs(x - x0) && sh.scrollTop <= 0) on = true; else if (d < -6 || Math.abs(x - x0) > 10) { y0 = null; return; } else return; }
+    if (e && e.cancelable) e.preventDefault();
+    dy = Math.max(0, d); sh.style.transition = "none"; sh.style.transform = `translateY(${dy}px)`;
+  };
+  sh.addEventListener("touchstart", e => { if (e.touches.length === 1) start(e.touches[0].clientX, e.touches[0].clientY, e.target); }, { passive: true });
+  sh.addEventListener("touchmove", e => move(e.touches[0].clientX, e.touches[0].clientY, e), { passive: false });
+  sh.addEventListener("touchend", end); sh.addEventListener("touchcancel", end);
+  sh.addEventListener("pointerdown", e => { if (e.pointerType === "mouse") start(e.clientX, e.clientY, e.target); });
+  sh.addEventListener("pointermove", e => { if (e.pointerType === "mouse") move(e.clientX, e.clientY, null); });
+  sh.addEventListener("pointerup", e => { if (e.pointerType === "mouse") end(); });
   lockScroll();
   document.body.append(scrim, sh);
   return { sh, close };
