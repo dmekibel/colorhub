@@ -2,6 +2,18 @@
 
 An all-in-one color site, mobile first. David is the product owner. Read `PLAN.md` first, then `HANDOFF.md` for where things stand, then `ROADMAP.md` for the approved backlog and build order.
 
+## The philosophy (read this before designing anything; David, 2026-10-08)
+**ColorHub sees the whole world through color.** Every thing in the app is a color dataset waiting to be read: a painting, a painter's life's work, a movement, a decade, a country, a museum, a flower, a gem, a film, a fashion era, a poem, your own photo. The app's job is to get as much honest color insight out of each one as possible, and to teach people to see it themselves.
+
+What that means in practice (the default, not something David should have to ask for):
+- **Never reduce a thing to one palette.** One palette is a thumbnail, not an answer. A painter like Sargent has many palettes (his portrait blacks, his Venice watercolors, his plein-air greens), favorite combinations, colors he used far more or far less than his peers, a palette that changed over his life, a most-typical and a least-typical painting. A painting has many readings: by area, accents, lights vs shadows, value structure, warm vs cool, the hidden colors (the greens in the skin), the focal color, harmonies, a 3-to-20 slider, and how it compares to its painter, its decade and its movement.
+- **Measure, then tell.** Derive statistics, distributions, comparisons and percentiles from the data. Turn them into plain-English findings ("darker than 90% of his work", "uses black with rose 4x more than his peers"), always with the honest caveats: these are photographs of varnished paintings, so the colors are as photographed, and screen colors are approximate.
+- **Depth by default, calm on the surface.** Compute everything and show a beautiful summary first. Each deeper layer is one tap away (the "simple, not overwhelming" rule is about the surface, never an excuse for thin content).
+- **Many lenses, one color.** Every color connects outward to the paintings, painters, poems, flowers, gems, films and fashion where it lives. Every one of those connects back through its colors. The links are the product.
+- **Learn by seeing, not by being told.** Every page, game and lesson should leave you able to notice more color in the real world.
+- **Grounded and honest.** Classical, sourced depth for those who want it (the Read side). Playful interaction for those who don't (the Explore side). No hype, no myths, no fake progress.
+- **Think like the most obsessive color nerd and the best museum curator at once,** then design it like Apple. When planning any feature, first ask: "what is every piece of color information we could derive or connect here?" List it all, then choose what to show.
+
 ## The four goals
 1. **Learn color words.** More color names lets you notice more colors. This is the goal of the learning/flashcard part only.
 2. **Train artists to see.** An eye-training gym modeled on ear-training apps for musicians, plus a paint-mixing simulator.

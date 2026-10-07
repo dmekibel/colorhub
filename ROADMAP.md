@@ -469,6 +469,55 @@ David's sister got hooked on Odd one out ("which color is apart"). The plan is t
 
 **Into the Journey:** lessons draw a step-sized game that fits the colors being learned. Checkpoints and stage exams use harder variants. Train keeps the full stations, with the §4 progression (hidden skill estimate, breathing difficulty, eye profile). Built together with the Train stations redesign batch, so gym.js changes once.
 
+## 21. The color analysis engine: paintings, painters, movements, eras (David, 2026-10-08: "this is an important part of the app")
+Everything here is computed offline from the painting corpus (23,531 paintings; 837 artists with 6+ works; each painting's 24-color pool with area shares in research/_raw/corpus-pool.jsonl, plus Wikidata metadata). It is shipped as compact data files and shown on painting, painter, movement, decade, country and museum pages. §15 covers the per-image reads; this section extends them and adds the aggregates.
+
+**Per painting (many readings, never one palette):**
+- **Palettes:**
+  - by area, accents, lights / midtones / shadows, warm vs cool groups;
+  - value-ordered;
+  - the hidden colors (low-chroma colors most people wouldn't name, like greens in skin), the focal color (the peak of chroma × contrast), the "glue" mid-tone;
+  - top vs bottom of the picture (sky vs ground);
+  - the 3-20 slider.
+- **Stats:**
+  - value key (high, mid or low) and lightness histogram; contrast range;
+  - chroma distribution (% muted / moderate / vivid);
+  - warm/cool balance; hue wheel histogram; gamut area;
+  - color count (entropy); harmony fit (analogous, complementary, triad, split);
+  - the darkest dark and lightest light.
+- **Compared:** to its painter's average, movement, decade and the whole archive, as percentiles ("more muted than 87%").
+- **Findings in words:** "Only 3% of this canvas is truly vivid", "The dress and the wall are the same lightness; that's why it glows", "The most unusual color for this painter", the nearest painting by palette in another century, and a pigment hint ("consistent with…", hedged).
+
+**Per painter:**
+- **Palettes and periods:**
+  - several palettes: cluster their paintings by palette, name each cluster after its most typical painting ("Sargent's four palettes");
+  - the palette over time (a chronological barcode of every painting, decade streams); periods detected where the colors change.
+- **What they favor:**
+  - signature colors: used much more than their contemporaries (compared to their decade and country);
+  - avoided colors;
+  - favorite combinations: color pairs and triads that co-occur more than the baseline (lift), shown as chords.
+- **Their typical painting:**
+  - value key, chroma, temperature and contrast vs peers;
+  - the most typical and least typical painting;
+  - portraits vs landscapes vs watercolors, where the genre and medium are known.
+- **Connections:**
+  - "paints like…" (nearest painters by palette);
+  - teachers and influences (Wikidata), with how much of the palette each one passed on.
+- **Findings in words**, with honesty thresholds (minimum sample sizes; say "from 41 paintings here").
+
+**Per movement, decade, country and museum:** the same aggregates, plus how color use changed over time ("the archive gets lighter after 1870"). Museum comparisons warn that photography differs between museums.
+
+**Honesty:**
+- These are photographs of aged, varnished paintings. Every stat says "as photographed". Normalize each museum's camera bias where a calibration is possible.
+- Never present small samples as character.
+- Pigment claims stay hedged.
+
+**Build:**
+1. tools/analyze.py: per-painting features from the pools, plus the aggregates. Deterministic; no LLM cost.
+2. Data files, lazy-loaded.
+3. Painter, movement and painting page sections (a design pass first).
+4. Bios and movement text (the §19 writing pipeline).
+
 ## Also queued
 - World: Botany (in progress), then Gems.
 - Color-list swaps from research/COLOR-SELECTION.md (Bistre, Stone, Green grey, Rose, Grape, Seafoam; Terracotta and Tangerine hex fixes; cross-unit near-twin check).
