@@ -202,7 +202,10 @@ const TASTE = (() => {
         if (rand() < .55) continue;
         const ta = base.slice(), tb = base.slice(); ta[k] = LV[i]; tb[k] = LV[j];
         const a = genPalette(ta, seed), b = genPalette(tb, seed);
-        if (k === 4 && a.cols.length === b.cols.length) continue;
+        // every dial but "count" must compare like with like: same number of colors in both options, so a tap
+        // never has to wonder whether it's answering about the colors or about how many there are. The "count"
+        // dial is the one exception (that's the question it's asking), and there it must actually differ.
+        if (k === 4 ? a.cols.length === b.cols.length : a.cols.length !== b.cols.length) continue;
         cands.push([info(m, a.x, b.x) + .15 / (1 + times), k, rand() < .5 ? [a, b] : [b, a]]);
       }
     }

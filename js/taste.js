@@ -262,8 +262,8 @@ function tzPalRun() {
   const step = () => {
     if (asked.length >= TZ_N) return loadCoreNames().then(() => tzPalResult(m));
     const { k, pair: [a, b] } = T.nextPalPair(m, asked), dial = T.DIALS[k].k, prop = dial === "dom";
-    D.ask(tzStrip(a), tzStrip(b), prop ? "Proportion round · same colors" : `What changes: ${TZ_ASK[dial]}`,
-      prop ? "Which mix would you rather live with?" : "Which palette would you rather live with?", [a.cols[0], b.cols[0]], pick => {
+    D.ask(tzStrip(a), tzStrip(b), prop ? "Proportions" : `What changes: ${TZ_ASK[dial]}`,
+      prop ? "Same colors · which balance?" : "Which palette would you rather live with?", [a.cols[0], b.cols[0]], pick => {
         asked.push(k); T.choose(m, a.x, b.x, pick, zero); step();
       });
   };

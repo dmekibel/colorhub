@@ -128,7 +128,7 @@ function eye() {
     if (!src.width && !src.videoWidth) return;
     const c = document.createElement("canvas"), w = frozen ? still.width : vid.videoWidth, h = frozen ? still.height : vid.videoHeight, k = Math.min(1, 900 / Math.max(w, h));
     c.width = w * k; c.height = h * k; c.getContext("2d").drawImage(src, 0, 0, c.width, c.height);
-    stop(); studioFromImage(c, "From the camera");
+    stop(); phCaptureAndOpen(c, "From the camera");
   };
 
   (async () => {

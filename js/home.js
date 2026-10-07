@@ -445,15 +445,18 @@ function hmHome() {
   render(false);
 }
 
-// Opens an app color's full page directly (ROADMAP.md §12: no half-height card, no second tap), and makes Back
-// (or the browser/swipe-back gesture, which reuses the same [data-back]) return to the honeycomb where it was —
-// honey.js's own HONEY_PAN already restores the pan and zoom the next time hmHome() builds the same set of items.
+// Opens an app color's full page directly (ROADMAP.md §12: no half-height card, no second tap). Back (the
+// button, the browser/swipe-back gesture, or the pull-down-to-close below) goes one step at a time, same as
+// anywhere else (ROADMAP.md §17 job #2, Pinterest-style Back): colorPage's own back is xStep/xBack
+// (js/explore.js wireArticle), which pops XSTACK and, once a chain opened from here finally runs out, falls
+// back to the honeycomb specifically (S.tab stays "learn" the whole time, so xFallbackTab() resolves to it) —
+// not a hard override on just the first screen, which used to make every deeper page (a family's own page,
+// say) jump straight home instead of to the page that opened it.
+// honey.js's own HONEY_PAN restores the pan and zoom the next time hmHome() builds the same set of items.
 function hmOpenColor(c) {
   XSTACK = [];
   openNode(colorNode(c));
-  const btn = app.querySelector("[data-back]");
-  if (btn) btn.onclick = () => hmHome();
-  hmPullClose(app.firstElementChild, () => hmHome());
+  hmPullClose(app.firstElementChild, hmBackOneStep);
 }
 // Same, for a bubble that isn't one of the 101: its own name page (js/names.js), not the small color sheet
 // (ROADMAP.md §13: every one of the ~1,000 names has a real page now).
@@ -461,11 +464,12 @@ function hmOpenName(o) {
   XSTACK = [];
   loadCoreNames().then(() => {
     namePage(npEntryFor(o));
-    const btn = app.querySelector("[data-back]");
-    if (btn) btn.onclick = () => hmHome();
-    hmPullClose(app.firstElementChild, () => hmHome());
+    hmPullClose(app.firstElementChild, hmBackOneStep);
   });
 }
+// whatever the current screen's own Back button does (one step, same as a tap); the pull-down gesture uses
+// this too, so it never skips straight to the honeycomb when there's a nearer screen to land on
+function hmBackOneStep() { const btn = app.querySelector("[data-back]"); if (btn) btn.click(); else hmHome(); }
 
 // Pull down from the top of a page to close it, like a sheet: the page follows the finger, and past ~110px (or a quick
 // flick) it slides away and close() runs. Anywhere below the top, a downward drag is just normal scrolling.
