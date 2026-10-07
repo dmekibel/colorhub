@@ -12,6 +12,7 @@ Details live in ROADMAP.md (§ numbers).
 ## Next (in order)
 | # | Note | Where | Size |
 |---|---|---|---|
+| 0 | Honeycomb up to ~5,000: the 1,000 core names + the ~2,700 library names + described colors built from the modifier grammar ("Pale salmon", "Deep teal", "Greyish lilac"), generated only where they fill real gaps (≥ ΔE 3 from every name), each one guaranteed to read back the same through nameOf(). Described names are labeled as descriptions, not established names. New scrubber stops after Stage 9: "Every name" (~2,700) and "Every shade" (~5,000). Every name findable in search, alternate names open their color's page. Runs right after the names cleanup and the style lab (both touch the same files) | tools + data + home.js | M |
 | 1 | Uploaded photos saved per user ("Your photos" in Studio, each with an address) | §17.2 | S-M |
 | 2 | Pinterest-style Back: one step at a time, back to the photo/sheet/page you came from, same scroll | §17.2 | S-M |
 | 3 | Find your palette: pairs show the same number of colors; say "Same colors · which balance?" when only proportions change | taste.js | S |
