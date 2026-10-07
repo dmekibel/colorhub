@@ -190,9 +190,10 @@ Ends with a lesson score and Next.
 - The app teaches English color words. Every distinct color gets ONE primary English name: the most common English name for it
   (xkcd survey frequency and everyday usage first, then established trade/pigment names). Near-identical names are merged
   into that one color (below about ΔE00 2-3); alternates are shown only as small "also called" info on its page, never taught.
-- Non-English names (Japanese traditional, etc.) are NOT learning targets. They can appear as cultural notes on a color's page
-  and in the World/poems content, but the ladder and flashcards are English only. If a non-English color has no English
-  name, it isn't on the ladder.
+- Non-English names: if a distinct color HAS an English name, foreign names for it are cultural notes only (not taught).
+  If a distinct color has NO English name, it uses the best non-English name as its primary name, romanized with a short
+  meaning (e.g. "Ebizome (grape-vine purple)"), and it is learnable like any other color (English borrowed most color words:
+  khaki, sepia, turquoise).
 - Target: about 1,000 distinct, nameable colors in total; fewer is fine if that's what the distinct-English-names test yields.
 **The vocabulary ladder (later job, M)**
 - Level 1: the core 101 (today's path). Level 2: common English names people use (~300). Level 3: painter's and designer's
