@@ -87,6 +87,14 @@ PRECISION_SPAN = {11: 0, 10: 0, 9: 0, 8: 10, 7: 100, 6: 1000}
 # not a bare short form), which would otherwise split one painter into two artist entries. Spotted by scanning the
 # built corpus for one artist name that is a substring of another with both having a meaningful painting count;
 # confirmed by hand (Anton Raphael Mengs is NOT an alias of Raphael, despite the substring).
+# Wikidata's own English label is occasionally truncated at the source (checked 2026-10 against every commons
+# title: compared each title's last word to the fuller word it's a prefix of in the image filename, keeping only
+# matches where the whole reconstructed phrase also appears in the filename -- this was the single hit, confirmed
+# against the French/Italian/German labels, which all read "The Fifer/Piper" in full). Add here, never patch
+# labels.json by hand, so a resumed or from-scratch fetch stays correct.
+TITLE_FIXES = {
+    "Q26250": "The Fifer",  # Manet: Wikidata's "en" label is clipped to "The Fif"; fr "Le Fifre", it "Il pifferaio"
+}
 CREATOR_ALIAS = {
     "Rembrandt": "Rembrandt van Rijn",
     "Sir Anthony van Dyck": "Anthony van Dyck",
@@ -443,5 +451,6 @@ def norm(C, x):
         co = None
     used = C.img_used("commons").get(str(x["id"]))
     img = _https(x["image"]) + "?width=400"
-    return dict(id=f"commons-{x['id']}", src="commons", t=C.clean_title(x.get("title")), a=a, y=x.get("year"),
+    title = TITLE_FIXES.get(x["id"], x.get("title"))
+    return dict(id=f"commons-{x['id']}", src="commons", t=C.clean_title(title), a=a, y=x.get("year"),
                 span=x.get("span"), co=co, mv=None, img=used or img, url=x.get("file_url"))

@@ -68,7 +68,7 @@ function glShard(k) {
   GL_SHARDS.set(k, p);
   return p;
 }
-const glRowObj = r => r && { id: r[0], t: r[1] || "Untitled", a: r[2], co: r[3], mv: r[4], img: r[5], rec: r[6], li: r[7], wi: r[8], hi: r[9] || "" };
+const glRowObj = r => r && { id: r[0], t: r[1] || "Untitled", a: r[2], co: r[3], mv: r[4], img: r[5], rec: r[6], li: r[7], wi: r[8], hi: r[9] || "", pl: r[10] || "" };
 const glDetailNow = i => { const s = GL_SHARDS.get(Math.floor(i / GAL.shard)); return Array.isArray(s) ? glRowObj(s[i % GAL.shard]) : null; };
 const glDetail = i => glShard(Math.floor(i / GAL.shard)).then(rows => glRowObj(rows[i % GAL.shard]));
 
@@ -83,6 +83,62 @@ const glByline = (i, d) => { const who = d.a || d.co || "", y = glYear(i); retur
 // our own small copies (img/gallery/...) are only 200px wide: shown smaller so they stay crisp, or swapped for a big image
 const glSmall = d => /^img\/gallery\//.test(d.img || "");
 const glBig = url => String(url || "").replace(/\/full\/!?\d*,\d*\/0\/default\.jpg$/, "/full/843,/0/default.jpg");
+
+// ---------- the dynamic palette (ROADMAP §13, 3/6/12/20): a pool of up to 24 colors per painting
+// (tools/gallery.py's extract_pool(), the same over-cluster-then-greedy-pick method as js/studio.js
+// extractPalette, ported to Python so it runs once offline), base64'd into the detail shard as 4 raw bytes a
+// color (R, G, B, share x 250 — the same byte scheme index.bin uses for its own six). glPoolPick() re-runs just
+// the "pick k of them" step live, in OKLab, so any slider size comes from the one small download already on
+// screen. A painting with no cached image at build time ships an empty pool; the control simply doesn't show.
+function glPoolDecode(b64) {
+  if (!b64) return [];
+  let bin; try { bin = atob(b64); } catch (e) { return []; }
+  const out = [];
+  for (let i = 0; i + 3 < bin.length; i += 4) {
+    const r = bin.charCodeAt(i), g = bin.charCodeAt(i + 1), b = bin.charCodeAt(i + 2), s = bin.charCodeAt(i + 3);
+    out.push({ h: "#" + ((1 << 24) | r << 16 | g << 8 | b).toString(16).slice(1).toUpperCase(), share: s / 250 });
+  }
+  return out.sort((a, b) => b.share - a.share);
+}
+// a self-contained OKLab forward transform (Bjoern Ottosson, 2020): gallery.js draws its own dynamic palette
+// without reaching into js/studio.js, which other agents are editing.
+const GLP_LIN8 = v => { v /= 255; return v > .04045 ? ((v + .055) / 1.055) ** 2.4 : v / 12.92; };
+function glpOk(hex) {
+  const n = parseInt(hex.slice(1), 16), r = GLP_LIN8(n >> 16 & 255), g = GLP_LIN8(n >> 8 & 255), b = GLP_LIN8(n & 255);
+  const l = Math.cbrt(.4122214708 * r + .5363325363 * g + .0514459929 * b), m = Math.cbrt(.2119034982 * r + .6806995451 * g + .1073969566 * b), s = Math.cbrt(.0883024619 * r + .2817188376 * g + .6299787005 * b);
+  return [.2104542553 * l + .793617785 * m - .0040720468 * s, 1.9779984951 * l - 2.428592205 * m + .4505937099 * s, .0259040371 * l + .7827717662 * m - .808675766 * s];
+}
+// pick k of the pool: the same share^0.6 x vividness x distinctness-from-what's-picked greedy rule as the
+// Python port's step 2 (and js/studio.js extractPalette's own step 2). Shares are renormalized over the picked
+// set only (the pool has no raw pixels left to re-assign against, so this is the closest honest approximation).
+function glPoolPick(pool, k) {
+  if (!pool.length) return [];
+  if (k >= pool.length) return pool.slice();
+  const withOk = pool.map(p => ({ h: p.h, share: p.share, ok: glpOk(p.h) }));
+  const chroma = ok => Math.hypot(ok[1], ok[2]);
+  const picked = [], left = withOk.slice();
+  while (picked.length < k && left.length) {
+    let bi = 0, bs = -1;
+    left.forEach((g, i) => {
+      const near = picked.length ? Math.sqrt(Math.min(...picked.map(p => (p.ok[0] - g.ok[0]) ** 2 + (p.ok[1] - g.ok[1]) ** 2 + (p.ok[2] - g.ok[2]) ** 2))) : 1;
+      const s = Math.pow(g.share, .6) * (.5 + 3 * chroma(g.ok)) * Math.pow(Math.min(1, near / .14), 1.5);
+      if (s > bs) { bs = s; bi = i; }
+    });
+    picked.push(left.splice(bi, 1)[0]);
+  }
+  const tot = picked.reduce((a, p) => a + p.share, 0) || 1;
+  return picked.map(p => ({ h: p.h, share: p.share / tot })).sort((a, b) => b.share - a.share);
+}
+const GL_SIZES = [3, 6, 12, 20];
+// the nearest swatch in a displayed palette to an arrival color, for "≈ Aubergine · 5% of the canvas · nearest
+// swatch" (ROADMAP §13, "arrive from a color and see it") — honest when nothing is close (NEAR_DE, js/naming.js).
+function glNearestSwatch(pal, hex) {
+  if (!pal.length) return null;
+  const [L, a, b] = lab(hex);
+  let best = null, bd = Infinity;
+  pal.forEach((p, i) => { const d = de2000([L, a, b], lab(p.h)); if (d < bd) { bd = d; best = i; } });
+  return best == null ? null : { i: best, de: bd };
+}
 
 // CIEDE2000 on plain numbers: the same formula as de2000() in core.js, without arrays, for the search loops
 const GL_P7 = 6103515625, GL_RAD = Math.PI / 180;
@@ -272,7 +328,7 @@ function galleryMount(host) {
     <p class="fine">Palettes are computed from each museum's small photo, so they are screen approximations: old varnish and photography shift color.</p>`;
   host.onclick = e => {
     const p = e.target.closest("[data-gi]");
-    if (p) { GLV = { key: glKey(GLQ), y: scrollY }; return galleryPage(+p.dataset.gi); }
+    if (p) { GLV = { key: glKey(GLQ), y: scrollY }; return galleryPage(+p.dataset.gi, true, GLQ.hex || null); }
     if (e.target.closest("[data-gladj]")) return glAdjust(host);
     if (e.target.closest("[data-glclear]")) { GLQ = glFresh(); return glRender(host, true); }
     if (e.target.closest("[data-glretry]")) return galleryMount(host);
@@ -449,40 +505,104 @@ function glRange(el, val, ramp, onInput) {
 }
 
 // ---------- the lite painting page ----------
-function galleryPage(i, push = true) {
-  if (!GAL) return loadGallery().then(() => galleryPage(i, push)).catch(() => toast("The gallery didn't load"));
+// fromHex: the color the visitor arrived from (a search, a color page's "In paintings", a name page, or the
+// color sheet's "More paintings with this color") — ROADMAP §13 "arrive from a color and see it". Carried in
+// the address (?c=<hex>, js/router.js) so it survives reload and Back.
+function galleryPage(i, push = true, fromHex = null) {
+  if (!GAL) return loadGallery().then(() => galleryPage(i, push, fromHex)).catch(() => toast("The gallery didn't load"));
   if (!(i >= 0 && i < GAL.n)) return;
   // already loaded (always the case going back): draw now, so the phone's back gesture handling stays in step
   const now = glDetailNow(i);
-  if (now) { if (push) XSTACK.push("g:" + i); return glPage(i, now); }
+  if (now) { if (push) XSTACK.push("g:" + i); return glPage(i, now, fromHex); }
   glDetail(i).then(d => {
     if (push) XSTACK.push("g:" + i);
-    glPage(i, d);
+    glPage(i, d, fromHex);
   }).catch(() => toast("This painting didn't load"));
 }
-function glPage(i, d) {
-  const G = GAL, src = G.src[G.mus[i]] || { name: "Museum", short: "Museum", credit: "" }, pal = glPal(i), yr = glYear(i), ar = G.ar[i];
-  const dom = pal.reduce((a, b) => b.share > a.share ? b : a).h;
+function glPage(i, d, fromHex) {
+  const G = GAL, src = G.src[G.mus[i]] || { name: "Museum", short: "Museum", credit: "" }, pal6 = glPal(i), yr = glYear(i), ar = G.ar[i];
+  const pool = glPoolDecode(d.pl);
+  let curK = 6;   // the dynamic-palette control's current size; 6 with a pool shows the same algorithm as 3/12/20
+  const curPal = () => pool.length ? glPoolPick(pool, curK) : pal6;
+  const dom = pal6.reduce((a, b) => b.share > a.share ? b : a).h;
   const el = show(`
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button>${d.rec ? `<a class="glass-pill" href="${esc(d.rec)}" target="_blank" rel="noopener">${GL_ICON_OUT}<span>${esc(src.short)}</span></a>` : ""}</header>
-    <div class="gl-hero${glSmall(d) && !d.hi ? " small" : ""}"><span style="--c:${dom};width:${glSmall(d) && !d.hi ? "min(100%, 300px, calc(66dvh / " + ar.toFixed(3) + "))" : "min(100%, calc(66dvh / " + ar.toFixed(3) + "))"};aspect-ratio:${(1 / ar).toFixed(4)}"><img src="${esc(glBig(d.img))}" alt="${esc(d.t)}${d.a ? " by " + esc(d.a) : ""}"${d.hi ? ` data-hi="${esc(d.hi)}"` : ""}></span>${glSmall(d) && !d.hi && d.rec ? `<a class="gl-full" href="${esc(d.rec)}" target="_blank" rel="noopener">See it full size at the museum ↗</a>` : ""}</div>
+    <div class="gl-hero${glSmall(d) && !d.hi ? " small" : ""}"><span style="--c:${dom};width:${glSmall(d) && !d.hi ? "min(100%, 300px, calc(66dvh / " + ar.toFixed(3) + "))" : "min(100%, calc(66dvh / " + ar.toFixed(3) + "))"};aspect-ratio:${(1 / ar).toFixed(4)}"><img src="${esc(glBig(d.img))}" alt="${esc(d.t)}${d.a ? " by " + esc(d.a) : ""}"${d.hi ? ` data-hi="${esc(d.hi)}"` : ""}${glCORS(glBig(d.img))}></span>${glSmall(d) && !d.hi && d.rec ? `<a class="gl-full" href="${esc(d.rec)}" target="_blank" rel="noopener">See it full size at the museum ↗</a>` : ""}</div>
     <p class="eyebrow p-type">Painting${yr ? " · " + yr : ""}</p>
     <h1 class="p-title">${esc(d.t)}</h1>
     <p class="p-dek">${esc([d.a || "Artist unknown", d.co, d.mv].filter(Boolean).join(" · "))}</p>
-    <div class="sec-head gl-pal-h"><b>Computed palette</b><span>6 colors, by area</span></div>
-    <div class="palette">${pal.map(p => `<button class="pal" data-swatch="${p.h}" style="--c:${p.h};flex:${Math.max(p.share, .08).toFixed(3)}" data-ink="${ink(p.h)}"><span>${Math.round(p.share * 100)}%</span></button>`).join("")}</div>
-    <div class="pal-names">${pal.map(p => {
-      const nm = nameOf(p.h), fam = typeof familyOf === "function" && familyOf(p.h);
-      return `<button class="pal-name" data-swatch="${p.h}"><i style="--c:${p.h}"></i><b>${esc(nm.text)}</b><span>${fam ? esc(fam.head.n) + " family · " : ""}${Math.round(p.share * 100)}%</span><em class="mono">${p.h}</em></button>`;
-    }).join("")}</div>
-    <p class="fine">Computed by ColorHub, not by the museum: six colors found in its small photo, each sized by its share of the picture and given the nearest of 1,000 named colors. Screen approximations; old varnish and the photograph shift color.</p>
+    <div class="sec-head gl-pal-h"><b>Computed palette</b><span data-glpaln>6 colors, by area</span></div>
+    ${pool.length ? `<div class="seg gl-sizes" data-glsizes>${GL_SIZES.map(k => `<button class="${k === curK ? "on" : ""}" data-glk="${k}">${k}</button>`).join("")}</div>` : ""}
+    <p class="fine gl-arrive" data-glarrive hidden></p>
+    <div class="palette" data-glswatches></div>
+    <div class="pal-names" data-glrows></div>
+    <p class="fine">Computed by ColorHub, not by the museum: colors found in its small photo, each sized by its share of the picture and given the nearest of 1,000 named colors. Screen approximations; old varnish and the photograph shift color.</p>
     <div class="sec-head gl-sim-h"><b>Similar palettes</b><span>by color, not subject</span></div>
     <div class="gl-rail" data-glsim></div>
     <section class="srcs"><h3>Image and data</h3><ul><li>${d.rec ? `<a href="${esc(d.rec)}" target="_blank" rel="noopener">${esc(src.name)}</a>` : esc(src.name)}${src.credit ? ` · ${esc(src.credit)}` : ""}</li><li>Palette and color names computed by ColorHub from the museum's image</li></ul></section>
   `, "article gl-page");
+  // the palette strip + named rows + arrival line, redrawn whenever the slider's size changes
+  const drawPalette = () => {
+    const pal = curPal();
+    el.querySelector("[data-glpaln]").textContent = `${pal.length} color${pal.length === 1 ? "" : "s"}, by area`;
+    const near = fromHex ? glNearestSwatch(pal, fromHex) : null;
+    el.querySelector("[data-glswatches]").innerHTML = pal.map((p, j) => `<button class="pal${near && near.i === j ? " on" : ""}" data-swatch="${p.h}" style="--c:${p.h};flex:${Math.max(p.share, .08).toFixed(3)}" data-ink="${ink(p.h)}"><span>${Math.round(p.share * 100)}%</span></button>`).join("");
+    el.querySelector("[data-glrows]").innerHTML = pal.map((p, j) => {
+      const nm = nameOf(p.h), fam = typeof familyOf === "function" && familyOf(p.h);
+      return `<button class="pal-name${near && near.i === j ? " on" : ""}" data-swatch="${p.h}"><i style="--c:${p.h}"></i><b>${esc(nm.text)}</b><span>${fam ? esc(fam.head.n) + " family · " : ""}${Math.round(p.share * 100)}%</span><em class="mono">${p.h}</em></button>`;
+    }).join("");
+    const arrive = el.querySelector("[data-glarrive]");
+    if (!fromHex) { arrive.hidden = true; }
+    else if (near && near.de < NEAR_DE) {
+      const p = pal[near.i], nm = nameOf(p.h);
+      arrive.hidden = false; arrive.innerHTML = `<i style="--c:${p.h}" class="gl-arrive-sw"></i>≈ ${esc(nm.text)} · ${Math.round(p.share * 100)}% of the canvas · nearest swatch`;
+    } else {
+      const nm = near ? nameOf(pal[near.i].h) : null;
+      arrive.hidden = false; arrive.textContent = nm ? `No close swatch; the nearest is ${nm.text}, ΔE ${near.de.toFixed(1)}.` : "No close swatch in this palette.";
+    }
+  };
+  drawPalette();
+  if (pool.length) el.querySelector("[data-glsizes]").onclick = e => {
+    const b = e.target.closest("[data-glk]"); if (!b) return;
+    curK = +b.dataset.glk;
+    el.querySelectorAll("[data-glsizes] button").forEach(x => x.classList.toggle("on", x === b));
+    buzz(5); drawPalette();
+  };
   // swap in the big image when it arrives (SMK's server is slow; the small copy shows meanwhile)
   const hiImg = el.querySelector("img[data-hi]");
-  if (hiImg) { const big = new Image(); big.onload = () => { if (hiImg.isConnected) { hiImg.src = big.src; hiImg.classList.add("hi"); } }; big.src = hiImg.dataset.hi; }
+  if (hiImg) {
+    const big = new Image(); if (glCORS(hiImg.dataset.hi)) big.crossOrigin = "anonymous";
+    big.onload = () => { if (hiImg.isConnected) { hiImg.src = big.src; hiImg.classList.add("hi"); armSample(hiImg); } };
+    big.src = hiImg.dataset.hi;
+  }
+  // tap the painting to name a spot (ROADMAP §13): only where the image's host allows a canvas read (local
+  // copies under img/gallery/, and CORS-enabled hosts like Wikimedia). Tested once per image; the affordance
+  // (cursor, marker) simply never appears where it's blocked — no error, no explanation needed on screen.
+  const heroSpan = el.querySelector(".gl-hero > span");
+  let sampleImg = el.querySelector(".gl-hero img"), canSample = false;
+  const testSample = img => { try { const c = document.createElement("canvas"); c.width = c.height = 1; const cx = c.getContext("2d"); cx.drawImage(img, 0, 0, 1, 1); cx.getImageData(0, 0, 1, 1); return true; } catch (e) { return false; } };
+  function armSample(img) { sampleImg = img; canSample = testSample(img); heroSpan.classList.toggle("gl-tap", canSample); }
+  if (sampleImg.complete && sampleImg.naturalWidth) armSample(sampleImg); else sampleImg.addEventListener("load", () => armSample(sampleImg), { once: true });
+  heroSpan.addEventListener("click", e => {
+    if (!canSample || e.target.closest("a")) return;
+    const r = sampleImg.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
+    if (x < 0 || y < 0 || x > r.width || y > r.height || !sampleImg.naturalWidth) return;
+    try {
+      const c = document.createElement("canvas"); c.width = sampleImg.naturalWidth; c.height = sampleImg.naturalHeight;
+      const cx = c.getContext("2d"); cx.drawImage(sampleImg, 0, 0);
+      const px = Math.round(x / r.width * c.width), py = Math.round(y / r.height * c.height), half = 3;
+      const bx = clamp(px - half, 0, c.width - 1), by = clamp(py - half, 0, c.height - 1);
+      const bw = Math.min(half * 2 + 1, c.width - bx), bh = Math.min(half * 2 + 1, c.height - by);
+      const data = cx.getImageData(bx, by, bw, bh).data;
+      let rr = 0, gg = 0, bb = 0, n = 0;
+      for (let k = 0; k < data.length; k += 4) { rr += data[k]; gg += data[k + 1]; bb += data[k + 2]; n++; }
+      const hex = "#" + [rr, gg, bb].map(v => clamp(Math.round(v / n), 0, 255).toString(16).padStart(2, "0")).join("").toUpperCase();
+      heroSpan.querySelectorAll(".gl-tap-dot").forEach(nd => nd.remove());
+      const dot = document.createElement("span"); dot.className = "gl-tap-dot"; dot.style.left = x + "px"; dot.style.top = y + "px";
+      heroSpan.appendChild(dot);
+      buzz(6); nameSheet(hex);
+    } catch (e) { canSample = false; heroSpan.classList.remove("gl-tap"); }   // tainted after all: quietly give up
+  });
   el.querySelector("[data-back]").onclick = xBack;
   onKey = e => { if (e.key === "Escape") xBack(); };
   el.addEventListener("click", e => {
@@ -491,6 +611,21 @@ function glPage(i, d) {
     const p = e.target.closest("[data-gi]"); if (p) return galleryPage(+p.dataset.gi);
   });
   later(() => { const rail = el.querySelector("[data-glsim]"); if (!rail || !rail.isConnected) return; rail.innerHTML = glSimilar(i, 5).map(j => glPinHTML(j)).join(""); glFill(rail); }, 40);
+}
+// crossorigin="anonymous" lets a canvas read the image later (tap-to-name), but it only helps — and only loads
+// at all — on a host that actually answers every hop with Access-Control-Allow-Origin (checked by hand, 2026-10,
+// with curl -I and an Origin header against each museum's real image URL): NGA, the Rijksmuseum's IIIF host, the
+// Met and SMK all do, directly, no redirect. Commons looks CORS-enabled too (upload.wikimedia.org itself sends
+// the header) but the stored `img` URL is commons.wikimedia.org's Special:FilePath, which 302s through a page
+// that does NOT send the header -- a browser's CORS check runs on every redirect hop, so crossorigin there
+// fails the whole fetch (confirmed in headless Chrome: ERR_FAILED, "blocked by CORS policy", no image at all).
+// Rather than risk that for ~40% of the corpus, Commons is left off this list; the Art Institute already blocks
+// hotlinking outright (img/gallery/aic/ local copies stand in for it), and Cleveland's CDN sends no CORS header
+// at all -- those paintings simply get no tap-to-name affordance, same as Commons.
+const GL_CORS_HOSTS = new Set(["api.nga.gov", "iiif.micr.io", "images.metmuseum.org", "api.smk.dk", "iip-thumb.smk.dk"]);
+function glCORS(url) {
+  try { return GL_CORS_HOSTS.has(new URL(String(url || ""), location.href).hostname) ? ' crossorigin="anonymous"' : ""; }
+  catch (e) { return ""; }
 }
 
 // ---------- "In paintings" on a color page ----------
@@ -508,7 +643,7 @@ function galleryColorRow(host, c) {
     glFill(host);
   };
   host.onclick = e => {
-    const p = e.target.closest("[data-gi]"); if (p) return galleryPage(+p.dataset.gi);
+    const p = e.target.closest("[data-gi]"); if (p) return galleryPage(+p.dataset.gi, true, c.h);
     if (e.target.closest("[data-glall]")) return galleryOpenColor(c.h, c.n);
     const ld = e.target.closest("[data-glload]");
     if (ld) { ld.outerHTML = `<p class="fine">Loading the gallery…</p>`; loadGallery().then(draw).catch(() => { host.innerHTML = head + `<p class="fine">The gallery didn't load.</p>`; }); }

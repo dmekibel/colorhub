@@ -77,7 +77,7 @@ function npPaintingsSection(host, hex) {
       : `<p class="fine">No painting in the gallery has much of this color.</p>`);
     glFill(host);
   };
-  host.onclick = e => { const p = e.target.closest("[data-gi]"); if (p) galleryPage(+p.dataset.gi); };
+  host.onclick = e => { const p = e.target.closest("[data-gi]"); if (p) galleryPage(+p.dataset.gi, true, hex); };
   if (typeof GAL !== "undefined" && GAL) return render();
   host.innerHTML = `<h3>In paintings</h3><p class="fine">Loading the gallery…</p>`;
   loadGallery().then(render).catch(() => { if (host.isConnected) host.innerHTML = `<h3>In paintings</h3><p class="fine">The gallery didn't load.</p>`; });

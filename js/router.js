@@ -82,7 +82,7 @@ const ROUTED = [["colorPage", nodeRouted()], ["wikiPage", nodeRouted()], ["paint
   ["daily", () => routed("Color of the day", "daily")],
   ["challenge", () => routed("Daily challenge", "challenge")], ["challengeDone", () => routed("Daily challenge", "challenge")],
   ["tasteIntro", k => k === "palette" ? routed("Find your palette", "taste/palette") : routed("Find your color", "taste/color")],
-  ["glPage", (i, d) => routed(d && d.t || "Painting", "gallery/" + i)],
+  ["glPage", (i, d, fromHex) => routed(d && d.t || "Painting", "gallery/" + i + (fromHex ? "?c=" + String(fromHex).replace("#", "") : ""))],
   ["poemPage", id => id != null ? routed("Poem", "poem/" + id) : null],   // js/poems.js   // a museum painting (js/gallery.js); i = its place in the gallery index
   ["passagePage", p => p && p.id ? routed(p.title, "passage/" + p.id) : null],
   ["filmPage", f => f && f.id ? routed(f.title, "film/" + f.id) : null],   // js/passages.js, js/films.js
@@ -154,11 +154,13 @@ function openRoute(hash, initial = false) {
     return true;
   }
   if (kind === "photo" && id && typeof photoPage === "function") { base(); XSTACK = []; photoPage(id); return true; }
-  if (kind === "gallery" && /^\d+$/.test(id || "") && typeof galleryPage === "function") {
+  if (kind === "gallery" && /^\d+(\?c=[0-9a-f]{6})?$/i.test(id || "") && typeof galleryPage === "function") {
+    const [numId, qs] = String(id).split("?c=");
+    const fromHex = qs ? "#" + qs.toUpperCase() : null;
     base();
     if (!GAL) { ROUTE_NEXT = routed("Painting", "gallery/" + id); waitScreen(); ROUTE_REPLACE = true; }   // the painting replaces the placeholder
     XSTACK = [];
-    galleryPage(+id);
+    galleryPage(+numId, true, fromHex);
     return true;
   }
   const simple = { daily: () => daily(), challenge: () => chToday() ? challengeDone() : challenge(),
