@@ -27,7 +27,8 @@ function shot(name) {
     case "explore": S.lens = arg || "all"; return go("explore");
     case "meet": meet(UNITS[1]); if (arg) later2(() => { const p = document.getElementById("pager"); p.scrollTop = p.clientHeight * +arg; }, 300); return;
     case "deck": deck("learn", { unit: UNITS[1] }); later2(() => dispatchEvent(new KeyboardEvent("keydown", { key: " " })), 600); return;
-    case "drill": return runDrill(arg || "hue", { trials: 10, done: () => {} });
+    case "drill": return runDrill(arg || "hue", { trials: 10, noIntro: true, done: () => {} });
+    case "gx": return gymShot(arg);
     case "gymres": return stationDone({ k: arg || "neutral", est: 3.2, before: 4.1, pb: true, best: 3.2 });
     case "closeup": return closeup(g().nodes.get(arg || "c:Cobalt"));
     case "page": return openNode(g().nodes.get(arg || "alchemy"));
@@ -35,6 +36,15 @@ function shot(name) {
     case "daily": S.daily = {}; return daily();
     case "lab": return LAB[arg || "harmony"]();
     case "taste": return tasteShot(arg);
+    case "colors": {   // colors:<set id>:<view id>:<adjust|tap|press|zoomin|zoomout|bench|benchout>
+      const [, set, view, act] = name.split(":"), def = COLOR_SETS.find(x => x.id === (set || "101")) || COLOR_SETS[0];
+      S.lens = "spectrum"; S.cb = { preset: def.id, state: JSON.parse(JSON.stringify(def.state)), view: view || "map" }; go("explore");
+      const h = document.getElementById("honey"); if (!h) return;
+      h.className = "honey-panel"; h.innerHTML = "";
+      scrollTo(0, h.getBoundingClientRect().top + scrollY - 250);
+      colorBrowser(h, { focus: dailyColor(), pick: c => closeup(colorNode(c)), shot: act });
+      return;
+    }
     case "gallery": return galleryShot(name.slice(8));   // gallery, gallery:scroll=600, gallery:color=Cobalt, gallery:adjust=Cobalt, gallery:page=12, gallery:cpage=Cobalt
   }
 }

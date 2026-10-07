@@ -45,6 +45,7 @@
 .gl-scrim{background:rgba(0,0,0,.22)}
 .gl-sheet{padding-top:10px;padding-bottom:calc(var(--bottom) + 16px)}
 .gl-sheet .grab{margin-bottom:12px}
+.gl-picker .cp-wheel{touch-action:none}
 .gl-sh-top{display:flex;align-items:baseline;gap:12px;padding-bottom:8px}
 .gl-sh-top b{font:400 30px/1 var(--serif);letter-spacing:-.02em}
 .gl-sh-top span{flex:1;font:500 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--soft)}
@@ -62,7 +63,9 @@
 .gl-cap b{font:400 18px/1 var(--serif);color:var(--ink);white-space:nowrap}
 .gl-cap span{min-width:0}
 .gl-picker{padding:6px 0 14px}
-.gl-picker .cp-wheel{width:min(100%,210px)}
+.gl-picker .cp-wheel{width:min(100%,190px)}
+/* the wheel and the hex field are enough here; the HSB/RGB/LCh sliders live in Studio */
+.gl-picker .cp-modes,.gl-picker .cp-sliders{display:none}
 .gl-chips button{flex:none;height:30px;padding:0 11px;border:1px solid var(--rule);border-radius:2px;font:500 9.5px/1 var(--mono);letter-spacing:.11em;text-transform:uppercase;color:var(--soft);white-space:nowrap;transition:background .2s,color .2s}
 .gl-chips button.on{background:var(--paper);border-color:var(--paper);color:var(--paper-ink)}
 .gl-range{display:flex;align-items:center;gap:0;font:500 9px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}

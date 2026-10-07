@@ -82,6 +82,7 @@ nodes: [
   ["voyelles", "work", "Rimbaud's \"Voyelles\" (1871)"],
   ["spiritual-in-art", "work", "Kandinsky's Concerning the Spiritual in Art (1911)"],
   ["interaction-of-color", "work", "Albers' Interaction of Color (1963)"],
+  ["dictionary-of-color-combinations", "work", "Sanzo Wada's A Dictionary of Color Combinations (1933)"],
   ["remarks-on-colour", "work", "Wittgenstein's Remarks on Colour"]
 ],
 // Painting pages (built by the paintings pipeline, data/paintings.js). Ids are fixed so writers can link to them now.

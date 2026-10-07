@@ -266,8 +266,22 @@ function sheet(html) {
   const scrim = document.createElement("div"), sh = document.createElement("div");
   scrim.className = "scrim"; sh.className = "sheet"; sh.setAttribute("role", "dialog");
   sh.innerHTML = `<div class="grab"></div>${html}`;
-  const close = () => { scrim.remove(); sh.remove(); };
-  scrim.onclick = close;
+  let gone = false;
+  const close = () => {
+    if (gone) return; gone = true; document.documentElement.classList.remove("sheet-open");
+    if (reduceMotion) { scrim.remove(); sh.remove(); return; }
+    scrim.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 200, fill: "forwards" }).onfinish = () => scrim.remove();
+    sh.animate([{ transform: getComputedStyle(sh).transform === "none" ? "none" : getComputedStyle(sh).transform }, { transform: "translateY(105%)" }], { duration: 240, easing: "cubic-bezier(.3,0,.8,.2)", fill: "forwards" }).onfinish = () => sh.remove();
+  };
+  // anything outside closes it: a tap or a swipe on the dimmed page
+  scrim.addEventListener("pointerdown", e => { e.preventDefault(); close(); });
+  // drag the sheet down (from the grab bar, or anywhere once it's scrolled to the top) to close
+  let y0 = null, dy = 0;
+  sh.addEventListener("pointerdown", e => { if (e.target.closest("input,textarea,select") || (sh.scrollTop > 0 && !e.target.closest(".grab"))) return; y0 = e.clientY; dy = 0; });
+  sh.addEventListener("pointermove", e => { if (y0 == null) return; dy = Math.max(0, e.clientY - y0); if (dy > 6) { sh.style.transition = "none"; sh.style.transform = `translateY(${dy}px)`; } });
+  const end = () => { if (y0 == null) return; y0 = null; if (dy > 90) return close(); sh.style.transition = "transform .3s var(--ease)"; sh.style.transform = ""; };
+  sh.addEventListener("pointerup", end); sh.addEventListener("pointercancel", end);
+  document.documentElement.classList.add("sheet-open");
   document.body.append(scrim, sh);
   return { sh, close };
 }

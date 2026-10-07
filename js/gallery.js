@@ -350,10 +350,9 @@ function glHueOrder(list) {
 function glAdjust(host) {
   if (!GAL || document.querySelector(".gl-sheet")) return;
   const G = GAL, day = dailyColor(), cols = [day, ...glHueOrder([...BASICS, ...ALL].filter(c => c.n !== day.n))];
-  const scrim = document.createElement("div"), sh = document.createElement("div");
-  scrim.className = "scrim gl-scrim"; sh.className = "sheet gl-sheet"; sh.setAttribute("role", "dialog"); sh.setAttribute("aria-label", "Adjust the gallery");
   const presets = GL_PRESETS.filter(p => p[0] !== "taste" || glTasteOK());
-  sh.innerHTML = `<div class="grab"></div>
+  // the app's sheet (core.js: a tap outside or a drag down closes it), with a lighter scrim so the results show
+  const { sh, close: shut } = sheet(`
     <div class="gl-sh-top"><b>Adjust</b><span data-glshn></span><button class="gl-reset" data-glreset>Reset</button></div>
     <div class="gl-row"><span class="gl-lab">Color</span><div class="gl-sw">${cols.map((c, k) => `<button data-hex="${c.h}" data-name="${esc(c.n)}" style="--c:${c.h}" aria-label="${esc(c.n)}${k ? "" : ", today's color"}"${k ? "" : ' class="today"'}></button>`).join("")}<button class="gl-any" data-glany aria-label="Any color"></button></div></div>
     <p class="gl-cap" data-glcap></p>
@@ -363,12 +362,17 @@ function glAdjust(host) {
     ${G.src.length > 1 ? `<div class="gl-row"><span class="gl-lab">Museum</span><div class="gl-chips"><button data-mus="-1">All</button>${G.src.map((s, k) => `<button data-mus="${k}">${esc(s.short)}</button>`).join("")}</div></div>` : ""}
     <div class="gl-row"><span class="gl-lab">Value</span><div class="gl-range" data-glr="L"></div></div>
     <div class="gl-row"><span class="gl-lab">Chroma</span><div class="gl-range" data-glr="C"></div></div>
-    <button class="btn solid gl-go" data-gldone></button>`;
-  document.body.append(scrim, sh);
+    <button class="btn solid gl-go" data-gldone></button>`);
+  sh.classList.add("gl-sheet"); sh.setAttribute("aria-label", "Adjust the gallery");
+  // no scroll lock: html.sheet-open (overflow hidden on a 100%-high body) clamps the page to the top, which would
+  // lose the place in the grid and stop the live results from scrolling into view. The scrim still catches touches.
+  document.documentElement.classList.remove("sheet-open");
+  if (sh.previousElementSibling) sh.previousElementSibling.classList.add("gl-scrim");
   host.dispatchEvent(new Event("glsheet"));
   let picker = null, timer = 0;
-  const close = () => { scrim.remove(); sh.remove(); host.removeEventListener("glcount", count); host.dispatchEvent(new Event("glsheet")); };
+  const close = () => { shut(); host.dispatchEvent(new Event("glsheet")); };
   const count = e => {
+    if (!sh.isConnected) return host.removeEventListener("glcount", count);
     const n = e.detail;
     sh.querySelector("[data-glshn]").textContent = `${n.toLocaleString()} ${n === 1 ? "painting" : "paintings"}`;
     sh.querySelector("[data-gldone]").textContent = n ? `Show ${n.toLocaleString()} ${n === 1 ? "painting" : "paintings"}` : "Nothing matches";
@@ -415,7 +419,8 @@ function glAdjust(host) {
     if (e.target.closest("[data-glreset]")) { GLQ = glFresh(); sh.querySelectorAll("[data-glr]").forEach(el => el._set && el._set(GLQ[el.dataset.glr])); return apply(); }
     if (e.target.closest("[data-gldone]")) return close();
   };
-  scrim.onclick = close;
+  // dragging the color wheel must not drag the sheet down
+  sh.querySelector("[data-glpicker]").addEventListener("pointerdown", e => e.stopPropagation());
   sync();
   count({ detail: glRun(GLQ).list.length });
   onKey = e => { if (e.key === "Escape") close(); };
@@ -429,7 +434,7 @@ function glRange(el, val, ramp, onInput) {
   const place = () => { kn[0].style.left = v[0] * 100 + "%"; kn[1].style.left = v[1] * 100 + "%"; dl.style.width = v[0] * 100 + "%"; dr.style.width = (1 - v[1]) * 100 + "%"; };
   el._set = x => { v[0] = x[0]; v[1] = x[1]; place(); };
   tr.addEventListener("pointerdown", e => {
-    e.preventDefault();
+    e.preventDefault(); e.stopPropagation();   // a slider drag is not a sheet drag
     tr.setPointerCapture(e.pointerId);
     const pos = ev => { const r = tr.getBoundingClientRect(); return clamp((ev.clientX - r.left) / r.width, 0, 1); };
     const p0 = pos(e), which = Math.abs(p0 - v[0]) < Math.abs(p0 - v[1]) || (p0 < v[0]) ? 0 : 1;
@@ -539,7 +544,7 @@ function galleryShot(arg) {
     if (v === "taste" && !glTasteOK()) S.taste = { color: { at: today(), mu: TASTE.COLOR_PRIOR.map((_, i) => [-.6, -.9, .2, .1, .4, -.3, .6, -.2, 0, 0][i]) } };   // sample: likes clear blues
     if (c || k === "preset") GLV = { key: glKey(GLQ), head: true };
     lens();
-    if (k === "adjust") after(() => { const h = document.getElementById("gallery"); if (h) glAdjust(h); }, 700);
+    if (k === "adjust") after(() => { const h = document.getElementById("gallery"); if (h) glAdjust(h); const a = v === "any" && document.querySelector(".gl-sheet [data-glany]"); if (a) a.click(); }, 700);   // adjust=any opens the picker
     return;
   }
   if (k === "page") return loadGallery().then(G => galleryPage(v && /^\d+$/.test(v) ? +v : (() => { let b = 0; for (let i = 1; i < G.n; i++) if (G.C[i] > G.C[b]) b = i; return b; })()));

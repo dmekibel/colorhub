@@ -78,7 +78,7 @@ function lensSections(lens) {
   const hueKey = n => { const [L, C, H] = lch(n.h); return C < 12 ? 1000 + (100 - L) : (H + 330) % 360 + (100 - L) / 400; };
   switch (lens) {
     case "spectrum":
-      return [{ honey: true, title: "Every color", sub: "Drag to browse; tap to open." }, ...lensSections("origins").map(sec => ({ ...sec, title: sec.title === "Still being traced" ? sec.title : "Named after · " + sec.title }))];
+      return [{ honey: true, title: "Every color", sub: "Hue across, light to dark down. Drag, pinch to zoom, tap to open." }, ...lensSections("origins").map(sec => ({ ...sec, title: sec.title === "Still being traced" ? sec.title : "Named after · " + sec.title }))];
     case "ideas": {
       const sys = pages.filter(p => (p.swatches || []).length >= 3), ideas = pages.filter(p => !sys.includes(p) && ["concept", "person", "work", "tradition", "culture"].includes(p.type));
       return [{ title: "Stories", sub: "Short reads, a few swipes each.", pins: stories.map(n => pin(n)) },
@@ -143,6 +143,7 @@ function exploreHome() {
   const media = (S.profile && S.profile.media) || [];
   const first = media.includes("paint") && !media.includes("screen") ? ["paintings"] : [];
   const lensOrder = [LENSES[0], ...LENSES.slice(1).filter(l => first.includes(l[0])).sort((a, b) => first.indexOf(a[0]) - first.indexOf(b[0])), ...LENSES.slice(1).filter(l => !first.includes(l[0]))];
+  const SECS = lensSections(lens).filter(x => !x.title || x.honey || (x.pins && x.pins.length) || x.sub);
   const el = show(`
     <header class="x-head">
       <div class="x-row"><h1 class="tab-title">${lens === "saved" ? "Saved" : "Explore"}</h1><span class="x-acts"><button class="icon-btn glass${lens === "saved" ? " on" : ""}" data-saved aria-label="Saved">${ICON_HEART}${(S.saved || []).length ? `<em>${S.saved.length}</em>` : ""}</button><button class="icon-btn glass" data-search aria-label="Search">${ICON.search}</button></span></div>
@@ -150,13 +151,20 @@ function exploreHome() {
     </header>
     <div class="x-search" hidden><label class="search"><span>${ICON.search}</span><input id="q" type="search" placeholder="Search colors, paintings, people, pigments" autocomplete="off"></label><div id="results"></div></div>
     <div class="x-feed" id="feed">
-      ${lensSections(lens).map(sec => sec.gallery ? `<div class="gl-wrap" id="gallery"></div>` : `${sec.title ? `<div class="sec-head x-sec"><b>${esc(sec.title)}</b>${sec.pins && sec.pins.length ? `<span>${sec.pins.length}</span>` : ""}</div>` : ""}${sec.sub ? `<p class="x-sub">${esc(sec.sub)}</p>` : ""}${sec.honey ? `<div class="honey-panel" id="honey"></div>` : sec.rail ? `<div class="gl-rail">${sec.pins.map(p => p.html).join("")}</div>` : masonry(sec.pins)}`).join("")}
+      ${(() => {
+        // a contents row (like Wikipedia's) when a lens has several sections; "Through history · The 1800s" groups under "Through history"
+        const seen = new Set(), toc = [];
+        SECS.forEach((x, i) => { if (!x.title) return; const g = x.title.split(" · ")[0]; if (!seen.has(g)) { seen.add(g); toc.push([i, g]); } });
+        return toc.length > 2 ? `<nav class="toc x-toc" aria-label="Contents"><span class="eyebrow">Contents</span>${toc.map(([i, g]) => `<a data-jump="${i}">${esc(g)}</a>`).join("")}</nav>` : "";
+      })()}
+      ${SECS.map((sec, i) => sec.gallery ? `<div class="gl-wrap" id="gallery"></div>` : `${sec.title ? `<div class="sec-head x-sec" id="xs-${i}"><b>${esc(sec.title)}</b>${sec.pins && sec.pins.length ? `<span>${sec.pins.length}</span>` : ""}</div>` : ""}${sec.sub ? `<p class="x-sub">${esc(sec.sub)}</p>` : ""}${sec.honey ? `<div class="honey-panel" id="honey"></div>` : sec.rail ? `<div class="gl-rail">${sec.pins.map(p => p.html).join("")}</div>` : masonry(sec.pins)}`).join("")}
       <p class="fine">Hex values are screen approximations. Every page lists its sources.</p>
     </div>
   `, "explore", "explore");
   el.querySelectorAll("[data-lens]").forEach(b => b.onclick = () => { S.lens = b.dataset.lens; save(); exploreHome(); });
+  el.querySelectorAll("[data-jump]").forEach(a => a.onclick = () => { const t = el.querySelector("#xs-" + a.dataset.jump); if (t) t.scrollIntoView({ block: "start", behavior: reduceMotion ? "auto" : "smooth" }); });
   el.querySelector("[data-saved]").onclick = () => { S.lens = lens === "saved" ? "all" : "saved"; save(); exploreHome(); };
-  const hp = el.querySelector("#honey"); if (hp) honeycomb(hp, { focus: dailyColor(), pick: it => closeup(colorNode(it.c)) });
+  const hp = el.querySelector("#honey"); if (hp) colorBrowser(hp, { focus: dailyColor(), pick: c => closeup(colorNode(c)) });
   const gw = el.querySelector("#gallery"); if (gw) galleryMount(gw);
   const on = el.querySelector(".lens-key .on"); if (on) on.scrollIntoView({ inline: "center", block: "nearest" });
   el.addEventListener("click", e => {

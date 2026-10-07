@@ -130,6 +130,7 @@ function deck(mode, opts = {}) {
         <div class="meta"><span>${esc(meta)}</span><span>${c.h}</span></div>
         <h2>${esc(c.n)}</h2>
         ${nb && c.d ? `<div class="vs"><span class="pair"><i style="--c:${c.h}"></i><i style="--c:${nb.h}"></i></span><p>${esc(c.d)}</p></div>` : ""}
+        ${mode !== "place" ? peekBtn(c) : ""}
       </div>
       <div class="stamp yes">${ICON.checkS}Got it</div><div class="stamp no">${ICON.xS}Again</div>`;
     return d;
@@ -308,6 +309,7 @@ function meet(u) {
       </div>` : ""}
       <p class="diff">${esc(c.d)}</p>
       ${c.o ? `<p class="origin">${esc(c.o)}</p>` : ""}
+      ${peekBtn(c)}
     </section>`;
   };
   const el = show(`
