@@ -271,7 +271,7 @@ function honeycomb(host, opts = {}) {
       const key = Math.round(by) * 4096 + Math.round(bx);
       if (key !== vigK) {
         vigK = key;
-        vig.style.setProperty("--vy", Math.max(120, by > 1 ? by + 110 : 0) + "px"); vig.style.setProperty("--vx", Math.max(56, bx > 1 ? bx + 80 : 0) + "px");   // always a soft frame; wider bands where repeats would show
+        vig.style.setProperty("--vy", clamp(by > 1 ? by + 110 : 0, 120, Hh * .24) + "px"); vig.style.setProperty("--vx", clamp(bx > 1 ? bx + 80 : 0, 56, W * .22) + "px");   // a frame, never a curtain: far out, repeats show softly   // always a soft frame; wider bands where repeats would show
       }
     }
     if (cItem !== center) { center = cItem; caption(); }
