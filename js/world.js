@@ -60,15 +60,22 @@ function worldMount(host) {
 
 // ---------------------------------------------------------------- Fashion: the section inside World
 // A contents row of its own four parts; each opens a list screen, which opens a detail screen.
+// A World tile is a small cover: a picture or a color graphic on top, the title and a line under it.
+const wdTile = (attr, title, sub, art) => `<button class="wd-tile wd-cover" ${attr}><span class="wd-art">${art}</span><b>${esc(title)}</b><span class="wd-sub">${esc(sub)}</span></button>`;
+const wdStripes = rows => `<span class="wd-rows">${rows.map(r => `<i>${r.map(h => `<em style="--c:${h}"></em>`).join("")}</i>`).join("")}</span>`;
+const wdGrid = hexes => `<span class="wd-grid">${hexes.map(h => `<em style="--c:${h}"></em>`).join("")}</span>`;
+const wdBars = hexes => `<span class="wd-bars">${hexes.map(h => `<em style="--c:${h}"></em>`).join("")}</span>`;
+const wdImg = (src, fallback = "") => src ? `<img src="${esc(src)}" alt="" loading="lazy">` : fallback;
 function worldFashionSection(host) {
+  const histImg = ((FASHION.history.find(h => h.img) || {}).img || {}).thumb;
   const tiles = [
-    ["decades", "Decades", `${FASHION.decades.length} decades, 1900s–2020s`],
-    ["coty", "Color of the year", "Pantone's picks, 2000–present"],
-    ["houses", "Houses", `${FASHION.houses.length} signature colors`],
-    ["history", "History", `${FASHION.history.length} pages`]
+    ["decades", "Decades", `${FASHION.decades.length} decades, 1900s–2020s`, wdStripes(FASHION.decades.map(d => d.swatches.map(s => s[0])))],
+    ["coty", "Color of the year", "Pantone's picks, 2000–present", wdGrid(FASHION.coty.map(c => c.hex))],
+    ["houses", "Houses", `${FASHION.houses.length} signature colors`, wdBars(FASHION.houses.map(h => h.hex))],
+    ["history", "History", `${FASHION.history.length} pages`, wdImg(histImg, wdBars(["#4B1E4F", "#16171A", "#F3EFE6", "#6B7A3A", "#1C2B5A"]))]
   ];
   host.innerHTML = `<p class="x-sub">${esc(FASHION.dek)}</p>
-    <div class="wd-tiles">${tiles.map(([k, t, s]) => `<button class="wd-tile" data-wd="${k}"><b>${esc(t)}</b><span>${esc(s)}</span></button>`).join("")}</div>`;
+    <div class="wd-tiles">${tiles.map(([k, t, s, art]) => wdTile(`data-wd="${k}"`, t, s, art)).join("")}</div>`;
   host.querySelectorAll("[data-wd]").forEach(b => b.onclick = () => fashionPage(b.dataset.wd));
 }
 WORLD_SECTIONS.push({ key: "fashion", title: "Fashion", render: worldFashionSection });
