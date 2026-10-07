@@ -22,7 +22,6 @@ function hmHome() {
   if (!S.placed) return welcome();
   S.hm = S.hm || {};
   let setId = COLOR_SETS.some(s => s.id === S.hm.set) ? S.hm.set : "101";
-  const firstEver = !S.hm.seenHint;
   S.tab = "learn"; ROUTE_REPLACE = true; save();   // the Today tab's own home: replace its history entry, no tab bar
 
   const el = show(`
@@ -34,7 +33,6 @@ function hmHome() {
     <div class="hm-search" id="hmSearch" hidden>
       <label class="search"><span>${ICON.search}</span><input id="hmq" type="search" placeholder="sea, rust, Monet…" autocomplete="off" enterkeyhint="search"></label>
     </div>
-    ${firstEver ? `<p class="hm-hint" id="hmHint">Every color has a name. Tap one.</p>` : ""}
     <div class="hm-sheet" id="hmSheet">
       <button class="hm-grab" id="hmGrab" aria-label="Open Today"><i></i></button>
       <div class="hm-sheet-body" id="hmBody"></div>
@@ -61,7 +59,7 @@ function hmHome() {
       onZoom: z => { S.hm.zoom = Math.round(z * 100) / 100; save(); } });
     hmWireChrome();
   }
-  function applySet(id) { setId = id; S.hm.set = id; save(); buzz(4); }
+  function applySet(id) { setId = id; S.hm.set = id; save(); buzz(4); bodyBuilt = false; }
 
   // ---------- title: tap for the full chooser, swipe for the four quick views ----------
   async function chooser() {
@@ -103,6 +101,7 @@ function hmHome() {
     searchBox.hidden = !searchBox.hidden;
     if (!searchBox.hidden) { hmShowChrome(true); searchInput.focus(); } else { searchInput.value = ""; render(true); }
   };
+  searchInput.addEventListener("blur", () => { if (!searchInput.value.trim()) { searchBox.hidden = true; render(true); } });
   searchInput.addEventListener("input", () => {
     const q = searchInput.value.trim();
     if (!q) return render(true);
@@ -135,7 +134,7 @@ function hmHome() {
 
   // ---------- the bottom sheet: peek (just the handle) · mid (Today) · full (the four doors), one scrolling body ----------
   const sheetEl = $("#hmSheet"), grab = $("#hmGrab"), bodyEl = $("#hmBody");
-  const HM_PEEK = 34;
+  const HM_PEEK = 0;   // at rest the sheet is fully hidden: nothing but colors on screen
   let H = { peek: HM_PEEK, mid: Math.round(innerHeight * .46), full: Math.round(innerHeight * .88) };
   sheetEl.style.height = H.full + "px";
   let revealed = H.peek, sheetState = "peek", sheetLocked = false, bodyBuilt = false;
@@ -143,6 +142,7 @@ function hmHome() {
     sheetEl.style.transition = anim && !reduceMotion ? "transform .4s var(--ease)" : "none";
     sheetEl.style.transform = `translateY(${H.full - revealed}px)`;
     bodyEl.style.opacity = revealed > H.peek + 8 ? "1" : "0";
+    sheetEl.style.visibility = revealed > 0 ? "visible" : "hidden";
   }
   function setState(s, anim = true) {
     sheetState = s; revealed = H[s]; paintSheet(anim);
@@ -156,6 +156,7 @@ function hmHome() {
     const due = dueList(), nu = nextUnit(), dc = dailyColor(), dAns = S.daily[today()], chD = chToday(), tr = todayTrain(), chR = challengeRounds();
     const ctaLabel = due.length ? (due.length === 1 ? "One to recall" : `${due.length} to recall`) : nu ? `Continue: ${esc(nu.title)}` : "All caught up";
     bodyEl.innerHTML = `
+      <div class="hm-show"><button class="hm-views" data-views><span>${esc(hmLabel(setId))}</span> <small>${items.length.toLocaleString()}</small> ${CX_ICON.down}</button><button class="link" data-find>${ICON.search} Search</button></div>
       <p class="eyebrow hm-sec">Today</p>
       <button class="btn hm-cta" data-continue>${ctaLabel} ${ICON.arrow}</button>
       <div class="trio">
@@ -174,6 +175,8 @@ function hmHome() {
     bodyEl.querySelector("[data-challenge]").onclick = () => chToday() ? challengeDone() : challenge();
     bodyEl.querySelector("[data-daily]").onclick = () => daily();
     bodyEl.querySelector("[data-train]").onclick = tr.open;
+    bodyEl.querySelector("[data-views]").onclick = () => { setState("peek"); chooser(); };
+    bodyEl.querySelector("[data-find]").onclick = () => { setState("peek"); searchBox.hidden = false; searchInput.focus(); };
     bodyEl.querySelector("[data-camera]").onclick = () => hmCamera();
     bodyEl.querySelector("[data-surprise]").onclick = () => hmDice();
     bodyEl.querySelectorAll("[data-door]").forEach(b => b.onclick = () => b.dataset.door === "learn" ? home() : go(b.dataset.door));
@@ -198,7 +201,44 @@ function hmHome() {
   grab.addEventListener("click", e => e.preventDefault());   // the pointerup above already decides; a synthetic click would double-fire
   // a tap on the honeycomb while the sheet is up just puts it away again, rather than also picking a bubble
   viewEl.addEventListener("pointerdown", e => { if (sheetState !== "peek") { e.stopPropagation(); setState("peek"); } }, true);
+  // swipe up from the bottom of the screen: the sheet follows the finger. Short of a swipe, the honeycomb keeps the
+  // touch, so bubbles near the bottom stay tappable.
+  let edge = null;
+  const EDGE = 120;
+  viewEl.addEventListener("pointerdown", e => {
+    edge = sheetState === "peek" && e.isPrimary && e.clientY > innerHeight - EDGE ? { x0: e.clientX, y0: e.clientY, on: false } : null;
+  }, true);
+  viewEl.addEventListener("pointermove", e => {
+    if (!edge) return;
+    const dx = e.clientX - edge.x0, dy = e.clientY - edge.y0;
+    if (!edge.on) {
+      if (dy < -14 && -dy > Math.abs(dx) * 1.5) {
+        edge.on = true;
+        const cv = viewEl.querySelector("canvas");   // end the honeycomb's own drag cleanly
+        const ours = edge; edge = null;   // (so edgeEnd below ignores this synthetic cancel)
+        if (cv) cv.dispatchEvent(new PointerEvent("pointercancel", { pointerId: e.pointerId, bubbles: true, clientX: e.clientX, clientY: e.clientY }));
+        edge = ours;
+      } else { if (Math.hypot(dx, dy) > 14) edge = null; return; }
+    }
+    e.stopPropagation();
+    revealed = clamp(-dy - 14, 0, H.full); paintSheet(false);
+  }, true);
+  const edgeEnd = e => {
+    if (!edge) return; const was = edge.on; edge = null;
+    if (!was) return;
+    e.stopPropagation();
+    setState(revealed < 40 ? "peek" : revealed > H.mid * 1.25 ? "full" : "mid");
+    if (!S.hm.opened) { S.hm.opened = true; save(); }
+  };
+  viewEl.addEventListener("pointerup", edgeEnd, true); viewEl.addEventListener("pointercancel", edgeEnd, true);
   setState("peek", false);
+  // until the sheet has been opened once, it rises a little and settles back on the first few visits, so the swipe is
+  // discoverable without a permanent bar
+  if (!S.hm.opened && (S.hm.teach || 0) < 3 && !reduceMotion) {
+    S.hm.teach = (S.hm.teach || 0) + 1; save();
+    setTimeout(() => { if (!el.isConnected || sheetState !== "peek" || edge) return; hmRenderBody(); revealed = 64; paintSheet(true); el.classList.add("hm-teach");
+      setTimeout(() => { if (!el.isConnected || sheetState !== "peek") return; revealed = 0; paintSheet(true); el.classList.remove("hm-teach"); }, 1600); }, 900);
+  }
 
   render(false);
 }

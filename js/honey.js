@@ -153,7 +153,8 @@ function honeycomb(host, opts = {}) {
     <button class="hc-cap"><i></i><span><b></b><small></small></span><em></em></button>`;
   const cv = host.querySelector("canvas"), ctx = cv.getContext("2d"), cap = host.querySelector(".hc-cap");
   const RM = reduceMotion, SHOOT = typeof SHOT !== "undefined" && !!SHOT, DRIFT = .2, LENS = { m0: 3.7, m1: .82, sig: 1.9 }, ZMAX = 2.5;
-  let ZMIN = .4;   // per set: never zoom out far enough to see the same color twice (see zFloor)
+  let VIG_BG = "";
+  let ZMIN = .4;   // per set: zoom out until the screen holds most of one repeat; the vignette hides the copies (see zFloor)
   let layout = opts.layout === "wheel" ? "wheel" : "map", lay = null, P = [0, 0], W = 0, Hh = 0, dpr = 1, base = 30, dead = false;
   let Z = clamp(+opts.zoom || 1, .4, ZMAX), zAnim = null, ghost = null, ghostT0 = 0;
   let phase = "idle", spring = null, touched = RM || SHOOT, visible = true, raf = 0, last = 0;
@@ -169,13 +170,16 @@ function honeycomb(host, opts = {}) {
   const mag = (z, l) => l.m1 + (l.m0 - l.m1) * Math.exp(-((z / l.sig) ** 2));
   const Finv = (r, l) => { let lo = 0, hi = 400; for (let i = 0; i < 30; i++) { const m = (lo + hi) / 2; if (F(m, l) > r) hi = m; else lo = m; } return (lo + hi) / 2; };
   const reach = l => Finv(Math.hypot(W, Hh) / 2 + 40, l);
-  // the smallest zoom at which the visible patch is still narrower than one repeat of a wrapping set
+  // the smallest zoom for a wrapping set: zoomed all the way out, one whole repeat (a disc of unique colors, half a repeat
+  // in radius) spans about the screen's width, and the vignette (draw) fades everything beyond it, so a color
+  // never shows twice.
   const zFloor = () => {
     if (!lay || lay.finite || !W) return .4;
-    const fits = z => Finv(Math.hypot(W, Hh) / 2, { s: z, m0: LENS.m0, m1: LENS.m1, sig: LENS.sig }) <= lay.per * .5;
+    const want = 1.35 * Math.min(W, Hh) / 2;   // tuned on a phone: the faded disc then spans about the full width
+    const fits = z => F(lay.per * .52, { s: z, m0: LENS.m0, m1: LENS.m1, sig: LENS.sig }) >= want;
     let lo = .05, hi = ZMAX; if (!fits(hi)) return ZMAX;
     for (let i = 0; i < 24; i++) { const m = (lo + hi) / 2; if (fits(m)) hi = m; else lo = m; }
-    return Math.max(.4, hi);
+    return Math.max(.15, hi);
   };
   // the world offset (from the pan point) under a screen point
   const offAt = (sx, sy, l) => { const dx = sx - W / 2, dy = sy - Hh / 2, r = Math.hypot(dx, dy); if (r < 1e-6) return [0, 0]; const z = Finv(r, l); return [dx / r * z, dy / r * z]; };
@@ -246,6 +250,16 @@ function honeycomb(host, opts = {}) {
       const a = 1 - (t - ghostT0) / 240;
       if (a > 0) { ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = a; ctx.drawImage(ghost, 0, 0); ctx.globalAlpha = 1; } else ghost.on = false;
       if (!ghost.on) ghost = null;
+    }
+    // vignette: everything farther than ~half a repeat from the center fades out, so a wrapping set never shows a color twice
+    if (lay && !lay.finite) {
+      const l = lens(t), r0 = F(lay.per * .4, l), r1 = F(lay.per * .52, l), far = Math.hypot(W, Hh) / 2;
+      if (r0 < far) {
+        VIG_BG = VIG_BG || getComputedStyle(document.body).backgroundColor || "rgb(14,13,11)";
+        const g = ctx.createRadialGradient(W / 2, Hh / 2, r0, W / 2, Hh / 2, Math.max(r0 + 1, r1));
+        g.addColorStop(0, VIG_BG.replace(/rgba?\(([^,]+),([^,]+),([^,)]+).*\)/, "rgba($1,$2,$3,0)")); g.addColorStop(1, VIG_BG);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.globalAlpha = 1; ctx.fillStyle = g; ctx.fillRect(0, 0, W, Hh);
+      }
     }
     if (cItem !== center) { center = cItem; caption(); }
   }
