@@ -193,6 +193,7 @@ function prodLabel(c, verdict, cls, vs, line, meta) {
     <p class="verdict ${cls}">${verdict}</p>
     <h2>${esc(c.n)}</h2>
     ${line ? `<div class="vs">${vs ? `<span class="pair"><i style="--c:${c.h}"></i><i style="--c:${vs.h}"></i></span>` : ""}<p>${esc(line)}</p></div>` : ""}
+    ${typeof peekBtn === "function" ? peekBtn(c) : ""}
   </div>`;
 }
 const prodShow = card => { void card.offsetWidth; requestAnimationFrame(() => card.classList.add("revealed")); };
@@ -261,7 +262,8 @@ function sayCard(card, c, foot, o) {
     buzz(ok ? 12 : [10, 40, 10]);
     next = prodNext(foot, ok, o);
     card.onclick = () => next();
-    if (ok && !j.typo && !shotMode()) later(next, 1400);   // a clean right answer moves on by itself
+    // a clean right answer moves on by itself (not while its story is open)
+    if (ok && !j.typo && !shotMode()) later(() => { if (!document.querySelector(".peek")) next(); }, 1400);
   }
   form.onsubmit = e => {
     e.preventDefault();
