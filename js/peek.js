@@ -37,11 +37,11 @@ function peek(c) {
     ${rel.length ? `<section class="pk-sec"><h3>Kin</h3>${rel.map(r => `<div class="kin"><i style="--c:${r.x.h}"></i><b>${esc(r.x.n)}</b><span>${esc(r.why)}</span></div>`).join("")}</section>` : ""}
     <div class="pk-foot"><button class="btn" data-back>Back to learning ${ICON.arrow}</button></div>`;
   document.body.appendChild(box);
-  document.documentElement.classList.add("sheet-open");
+  lockScroll();
   const keyWas = onKey;
   const close = () => {
     if (!box.isConnected) return;
-    onKey = keyWas; document.documentElement.classList.remove("sheet-open");
+    onKey = keyWas; unlockScroll();
     if (reduceMotion) return box.remove();
     box.animate([{ transform: getComputedStyle(box).transform }, { transform: "translateY(100%)" }], { duration: 260, easing: "cubic-bezier(.3,0,.8,.2)", fill: "forwards" }).onfinish = () => box.remove();
     setTimeout(() => box.remove(), 400);   // even if animations are paused (background tab)

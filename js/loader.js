@@ -1,6 +1,6 @@
 "use strict";
 // Lazy content. Today, Train and Studio need only data/colors.js, so the first screen never waits for the
-// wiki (~550 KB of articles, stories, painting palettes and photo credits). The wiki loads on first need
+// wiki (~510 KB of articles, stories and photo credits). The wiki loads on first need
 // (Explore, a color page, the peek panel, the color of the day) and is prefetched right after the first
 // screen is up, so it's usually there before anyone taps.
 //   loadData("stories") -> Promise<boolean>   one file, loaded once, never rejects (false = missing or offline)
@@ -8,7 +8,8 @@
 //   wikiReady()         -> boolean
 // Files load with the same ?v= tag as this script, so a phone never mixes new code with old data.
 
-const DATA_SRC = { "wiki-colors": "data/wiki-colors.js", "wiki-nodes": "data/wiki-nodes.js", "stories": "data/stories.js", "paintings": "data/paintings.js", "images": "data/images.js" };
+// (data/paintings.js, 42 KB, stays in index.html: the Train home's match tiles show its thumbnails.)
+const DATA_SRC = { "wiki-colors": "data/wiki-colors.js", "wiki-nodes": "data/wiki-nodes.js", "stories": "data/stories.js", "images": "data/images.js" };
 const WIKI_FILES = Object.keys(DATA_SRC);
 const DATA_VER = ((document.currentScript && document.currentScript.src || "").match(/[?&]v=([^&]+)/) || [])[1] || "";
 const DATA_LOADS = {}, DATA_DONE = {};

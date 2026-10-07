@@ -2,7 +2,7 @@
 // Addresses. Every meaningful screen has a hash route, so it can be shared, bookmarked and reloaded:
 //   #/today  #/train  #/studio  #/explore  #/explore/<colors|paintings|ideas|saved>
 //   #/color/<slug>  #/page/<id>  #/painting/<slug>  #/story/<id>     (add /more for the "More like this" closeup)
-//   #/daily  #/challenge  #/taste/<color|palette>  #/lab/<harmony|contrast>
+//   #/daily  #/challenge  #/taste/<color|palette>  #/lab/<harmony|contrast>  #/gallery/<n> (a museum painting)
 // How it works: show() (core.js) calls routeCommit(tab). A tab home replaces the current history entry with
 // its route; an inner screen pushes one. Screen functions don't know their own address, so this file wraps
 // them (the ROUTED list below): the wrapper notes the route, then the screen's show() writes it to the URL and the
@@ -75,7 +75,8 @@ const ROUTED = [["colorPage", nodeRouted()], ["wikiPage", nodeRouted()], ["paint
   ["closeup", nodeRouted("/more")],
   ["daily", () => routed("Color of the day", "daily")],
   ["challenge", () => routed("Daily challenge", "challenge")], ["challengeDone", () => routed("Daily challenge", "challenge")],
-  ["tasteIntro", k => k === "palette" ? routed("Find your palette", "taste/palette") : routed("Find your color", "taste/color")]];
+  ["tasteIntro", k => k === "palette" ? routed("Find your palette", "taste/palette") : routed("Find your color", "taste/color")],
+  ["glPage", (i, d) => routed(d && d.t || "Painting", "gallery/" + i)]];   // a museum painting (js/gallery.js); i = its place in the gallery index
 ROUTED.forEach(([name, f]) => routeWrap(window, name, f));
 routeWrap(LAB, "harmony", () => routed("Harmony", "lab/harmony"));
 routeWrap(LAB, "contrast", () => routed("Albers", "lab/contrast"));
@@ -110,6 +111,13 @@ function openRoute(hash, initial = false) {
       if (more === "more") return closeup(n);
       return n.kind === "story" ? storyPlayer(n) : openNode(n);
     });
+    return true;
+  }
+  if (kind === "gallery" && /^\d+$/.test(id || "") && typeof galleryPage === "function") {
+    base();
+    if (!GAL) { ROUTE_NEXT = routed("Painting", "gallery/" + id); waitScreen(); ROUTE_REPLACE = true; }   // the painting replaces the placeholder
+    XSTACK = [];
+    galleryPage(+id);
     return true;
   }
   const simple = { daily: () => daily(), challenge: () => chToday() ? challengeDone() : challenge(),
