@@ -15,7 +15,15 @@ saved photos + Pinterest-style Back · equal-count taste pairs · honeycomb styl
 seams, no overlap, real magnified honeycomb · crash fix for big sets · photo palettes that keep vivid colors ·
 sheets close on swipe-down
 
-## Next (in order)
+## RESUME HERE (paused 2026-10-08, out of credits)
+Two jobs were stopped mid-work. Their files are uncommitted in their worktrees, so nothing is lost:
+- **Practice (~85%, screenshots mostly done):** `.claude/worktrees/agent-a647b2e173d35a651`. It has js/practice.js, css/practice.css, tools/practice_test.js, plus edits to index.html, js/learn.js and js/router.js. To finish:
+  1. Run tools/practice_test.js and the gates.
+  2. Screenshot at 375 px.
+  3. Commit, then merge into main.
+- **Rich pages for every color (~30%):** `.claude/worktrees/agent-a5d6b6e560ac09fa8`. Done so far: data/analysis/color-artists.json, color-pairs.json and tools/build_richdata.py. Still to do: the page sections in js/names.js and colorPage, per the brief in this session (≥8 sections for any color, no "101" links).
+- **After both:** learning beyond the 101, then the Journey (waiting on David's 5 decisions in design/JOURNEY.md).
+
 **Top (David, 2026-10-08: "I don't like that you're stuck on the 101 to learn"; "I want to be able to learn more colors"):** learning beyond the 101. Starts the moment the color page and Practice merge, since they share files:
 - Learn it works on every one of the 1,000 names, with look-alikes drawn from the 1,000 within the family.
 - Cards for those names get real ids (`core:<slug>`), and dueList() and review include them.
