@@ -75,7 +75,11 @@ const hueFull = h => !h || h[1] - h[0] >= 360;
 function csMatch(x, q) {
   if (x.n.toLowerCase().includes(q) || x.h.toLowerCase().includes(q.replace(/^#?/, "#"))) return true;
   const lib = x.lib;
-  return !!lib && ((lib.jp && (lib.jp.kanji + " " + lib.jp.meaning).toLowerCase().includes(q)) || srcLine(lib).toLowerCase().includes(q));
+  if (!lib) return false;
+  if ((lib.jp && (lib.jp.kanji + " " + lib.jp.meaning).toLowerCase().includes(q)) || srcLine(lib).toLowerCase().includes(q)) return true;
+  // alternate names (e.g. ISCC-NBS 1955 synonyms attached to the nearest library color, js/library.py
+  // merge_iscc_nbs()): searchable by any of them, same as the primary name
+  return !!(lib.altn && lib.altn.some(a => a.n.toLowerCase().includes(q)));
 }
 function filterColors(items, f = {}) {
   const hue = hueFull(f.hue) ? null : f.hue, [l0, l1] = f.L || [0, 100], [c0, c1x] = f.C || [0, CS_CMAX], c1 = c1x >= CS_CMAX ? Infinity : c1x;
@@ -486,13 +490,25 @@ function colorBrowser(host, opts = {}) {
   return { items: () => items };
 }
 
+// alternate names attached to a library entry (js/library.py merge_iscc_nbs(), e.g. ISCC-NBS 1955 synonyms
+// that share this entry's color but aren't close enough to its own name to merge): "Also called X, Y (source)."
+// Reached either by opening the entry directly or by searching one of the alternates themselves (csMatch above).
+function altnLine(lib) {
+  if (!lib || !lib.altn || !lib.altn.length) return "";
+  const bySrc = new Map();
+  lib.altn.forEach(a => { const k = a.src || ""; (bySrc.get(k) || bySrc.set(k, []).get(k)).push(a.n); });
+  return [...bySrc].map(([src, names]) => `Also called ${names.map(esc).join(", ")} (${esc(SRC_LABEL[src] || src)}).`).join(" ");
+}
+
 // a library color (not one of the 101): big swatch, provenance, hex to copy, and the nearest color you can learn
 function colorSheet(it, open) {
   const lib = it.lib || (it.src && it.src.length && it.n ? it : null), near = nameColor(it.h, 1).mine[0], app = near && BYNAME.get(near.n.toLowerCase());
+  const also = altnLine(lib);
   const { sh, close } = sheet(`<div class="hc-sw" style="--c:${it.h}"></div>
     <div class="eyebrow">${esc((lib && srcLine(lib)) || "Name library")}</div>
     <h3>${esc(it.n)}</h3>
     ${lib && lib.note ? `<p class="hc-note">${esc(lib.note)}</p>` : ""}
+    ${also ? `<p class="hc-note hc-also">${also}</p>` : ""}
     <button class="hc-hex" data-copy><span>${it.h}</span><small>Copy</small></button>
     ${app ? `<div class="eyebrow hc-near-h">Nearest of the 101 to learn</div>
     <button class="kin" data-near><i style="--c:${app.h}"></i><b>${esc(app.n)}</b><span>${closeness(near.d)} · ΔE ${near.d.toFixed(1)}</span></button>` : ""}

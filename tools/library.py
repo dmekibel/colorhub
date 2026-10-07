@@ -463,6 +463,105 @@ def load_ridgway():
 
 
 # ---------------------------------------------------------------------------------------------
+# ISCC-NBS (NBS Circular 553, 1955): tools/iscc_nbs.py builds data/sources/iscc-nbs-names.json (5,661 names,
+# each with a primary ISCC-NBS block 1-267) and data/sources/iscc-nbs-centroids.json (that block's official
+# Munsell centroid, converted to sRGB). Merged in a 3-way rule, not folded into the generic merge() above, since
+# most ISCC-NBS names must NOT become new honeycomb bubbles -- they're historical synonyms for colors (or
+# shades of colors) the library already has:
+#   1. Already in the library (same key() as an existing entry): that entry gets "iscc-nbs" added to `src` and
+#      an "ISCC-NBS 1955 block N (codes)" fragment in `note`. No new bubble.
+#   2. Not a name match, but an existing library color sits within ISCC_DE of the block's centroid: the name is
+#      attached to that entry's `altn` (alternate names, provenance-tagged -- distinct from `alts`, which is
+#      the same NAME with a different source's hex). No new bubble.
+#   3. Neither: one new entry is created at the block's centroid hex (`approx: "block centroid"`), named after
+#      the leftover name with the most source citations (ties broken by the plainest/shortest spelling); every
+#      other leftover name in the block becomes an `altn` on that one new entry.
+# ISCC_DE is deliberately generous (CIEDE2000 ~8, same "near" threshold js/naming.js uses) -- a block centroid is
+# already a coarse stand-in for an entire wedge of the Munsell solid, so demanding a tighter match would just
+# turn most of case 2 into case 3 (thousands of near-duplicate bubbles at almost the same spot), the exact
+# "honeycomb full of identical-colored bubbles" the import was asked to avoid.
+ISCC_DE = 8.0
+
+
+def load_iscc_sources():
+    def rows(name):
+        lines = (ROOT / "data" / "sources" / name).read_text(encoding="utf-8").splitlines()
+        return [json.loads(l) for l in lines[1:] if l.strip()]  # line 0 is the provenance header
+    names = rows("iscc-nbs-names.json")
+    centroids = {r["block"]: r for r in rows("iscc-nbs-centroids.json")}
+    by_block = {}
+    for r in names:
+        by_block.setdefault(r["block"], []).append(r)
+    return by_block, centroids
+
+
+def merge_iscc_nbs(entries, app):
+    by_block, centroids = load_iscc_sources()
+    existing_by_key = {key(e["n"]): e for e in entries}
+    base_lab = labs([e["h"] for e in entries])  # existing library only -- case 2's "nearby" search target
+    new_entries = []
+    rep = {"blocks_with_names": 0, "already_in_library": 0, "attached_as_alt": 0, "new_entries": 0, "names_total": 0}
+
+    for block in sorted(by_block):
+        names = by_block[block]
+        rep["blocks_with_names"] += 1
+        rep["names_total"] += len(names)
+        leftover = []
+        for rec in names:
+            e = existing_by_key.get(key(rec["n"]))
+            if e is None:
+                leftover.append(rec)
+                continue
+            rep["already_in_library"] += 1
+            if "iscc-nbs" not in e["src"]:
+                e["src"].append("iscc-nbs")
+            frag = f"ISCC-NBS 1955 block {block} ({'/'.join(rec['src'])})"
+            if "ISCC-NBS 1955" not in (e.get("note") or ""):
+                e["note"] = (e["note"] + "; " + frag) if e.get("note") else frag
+        if not leftover:
+            continue
+        cent = centroids.get(block)
+        if cent is None:
+            continue
+        D = de2000(labs([cent["hex"]]), base_lab)[0]
+        j = int(np.argmin(D))
+        if D[j] <= ISCC_DE:
+            target = entries[j]
+            altn = target.setdefault("altn", [])
+            have = {a["n"] for a in altn}
+            for rec in leftover:
+                nm = title(rec["n"])
+                if nm == target["n"] or nm in have:
+                    continue
+                altn.append({"n": nm, "src": "iscc-nbs", "note": f"ISCC-NBS 1955; block {block} ({'/'.join(rec['src'])})"})
+                have.add(nm)
+            rep["attached_as_alt"] += len(leftover)
+        else:
+            primary, *others = sorted(leftover, key=lambda r: (-len(r["src"]), len(r["n"]), r["n"]))
+            new_e = {"n": title(primary["n"]), "h": cent["hex"], "src": ["iscc-nbs"], "approx": "block centroid",
+                      "note": f"ISCC-NBS 1955 block {block} centroid ({'/'.join(primary['src'])})"}
+            if others:
+                seen = {new_e["n"]}
+                altn = []
+                for r in others:
+                    nm = title(r["n"])
+                    if nm in seen:
+                        continue
+                    altn.append({"n": nm, "src": "iscc-nbs", "note": f"ISCC-NBS 1955; block {block} ({'/'.join(r['src'])})"})
+                    seen.add(nm)
+                if altn:
+                    new_e["altn"] = altn
+            new_entries.append(new_e)
+            rep["new_entries"] += 1
+            rep["attached_as_alt"] += len(others)
+
+    if new_entries:
+        annotate(new_entries, app)
+        entries.extend(new_entries)
+    return entries, rep
+
+
+# ---------------------------------------------------------------------------------------------
 # Merge
 # ---------------------------------------------------------------------------------------------
 def merge(rows):
@@ -535,8 +634,9 @@ def build():
            "jp": jp, "ral": load_ral(), "xkcd": load_xkcd()}
     rows = [dict(r) for s in SOURCES for r in per[s]]
     entries = annotate(merge(rows), app)
+    entries, iscc_rep = merge_iscc_nbs(entries, app)
     entries.sort(key=sort_key)
-    order = ["n", "h", "src", "fam", "lch", "app", "alts", "werner", "jp", "note", "crude"]
+    order = ["n", "h", "src", "fam", "lch", "app", "alts", "altn", "approx", "werner", "jp", "note", "crude"]
     lines = [json.dumps({k: e[k] for k in order if k in e}, ensure_ascii=False, separators=(",", ":")) for e in entries]
     OUT.write_text("[\n" + ",\n".join(lines) + "\n]\n", encoding="utf-8")
     counts = {s: len(per[s]) for s in SOURCES}
@@ -544,6 +644,7 @@ def build():
     print(f"wiki rows dropped as Pantone: {len(wiki_dropped)}; jp RGB/hex mismatches: {len(jp_mismatch)}")
     print("ridgway:", {k: v for k, v in rrep.items() if k != "fails"})
     print("entries by source:", {s: sum(s in e["src"] for e in entries) for s in SOURCES})
+    print("iscc-nbs:", iscc_rep)
     print(f"library: {len(entries)} entries, {OUT.stat().st_size / 1024:.0f} KB")
     (RAW / "build-report.json").write_text(json.dumps(dict(counts=counts, wiki_dropped=wiki_dropped,
                                                            jp_mismatch=jp_mismatch, ridgway=rrep), ensure_ascii=False, indent=1))

@@ -1,5 +1,7 @@
 # More color names for the honeycomb: candidate sources
 
+**Update, same day:** the ISCC-NBS dictionary (row 1 below) has been imported — see `research/LIBRARY.md` §8 for the extraction method, merge rule and before/after numbers, and `tools/iscc_nbs.py`.
+
 Research pass, 2026-10-07. Looks for real, legally-usable color names beyond
 the 2,711 already in `data/library.json` (xkcd, Wikipedia, Ridgway 1912,
 Werner 1821, Japanese traditional colors, RAL, CSS/X11, the app's own 101 —

@@ -1,0 +1,268 @@
+{"_provenance": "Kelly, K.L., \"Central Notations for the Revised ISCC-NBS Color-Name Blocks\", J. Res. NBS 61(5) 427-431 (1958), Research Paper 2911. U.S. government work, public domain. Table transcribed from the proofread Wikisource edition (en.wikisource.org, {{PD-USGov}}), with OCR-glitch fixes cross-checked against an independent pdftotext pass of the NIST PDF -- see tools/iscc_nbs.py's module docstring for every fix. Munsell renotation -> sRGB via colour-science (illuminant C), approximate screen values.", "_built": "tools/iscc_nbs.py build_centroids()"}
+{"block": 1, "name": "vivid pink", "munsell": "1.5R 7.0/13.0", "value": 7.0, "chroma": 13.0, "hex": "#FF7F91", "peripheral": true, "uncertain": true, "clipped": true}
+{"block": 2, "name": "strong pink", "munsell": "1.5R 7.5/9.1", "value": 7.5, "chroma": 9.1, "hex": "#FF9EA5", "peripheral": true, "uncertain": false, "clipped": true}
+{"block": 3, "name": "deep pink", "munsell": "1.9R 6.0/11.1", "value": 6.0, "chroma": 11.1, "hex": "#E56E7B", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 4, "name": "light pink", "munsell": "2.5R 8.6/5.2", "value": 8.6, "chroma": 5.2, "hex": "#FFC9C9", "peripheral": true, "uncertain": false, "clipped": true}
+{"block": 5, "name": "moderate pink", "munsell": "2.5R 7.2/5.2", "value": 7.2, "chroma": 5.2, "hex": "#DDA4A5", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 6, "name": "dark pink", "munsell": "2.5R 6.0/6.0", "value": 6.0, "chroma": 6.0, "hex": "#C38284", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 7, "name": "pale pink", "munsell": "2.5R 8.8/2.3", "value": 8.8, "chroma": 2.3, "hex": "#EED9D8", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 8, "name": "grayish pink", "munsell": "2.5R 7.2/2.3", "value": 7.2, "chroma": 2.3, "hex": "#C5ADAD", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 9, "name": "pinkish white", "munsell": "7.6R 9.2/1.0", "value": 9.2, "chroma": 1.0, "hex": "#EFE7E5", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 10, "name": "pinkish gray", "munsell": "7.6R 7.5/1.0", "value": 7.5, "chroma": 1.0, "hex": "#C3B8B6", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 11, "name": "vivid red", "munsell": "5.0R 4.0/15.0", "value": 4.0, "chroma": 15.0, "hex": "#C10430", "peripheral": true, "uncertain": true, "clipped": false}
+{"block": 12, "name": "strong red", "munsell": "4.0R 4.5/12.0", "value": 4.5, "chroma": 12.0, "hex": "#C23C4B", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 13, "name": "deep red", "munsell": "5.0R 2.8/9.9", "value": 2.8, "chroma": 9.9, "hex": "#85102A", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 14, "name": "very deep red", "munsell": "5.0R 1.4/9.0", "value": 1.4, "chroma": 9.0, "hex": "#570021", "peripheral": true, "uncertain": false, "clipped": true}
+{"block": 15, "name": "moderate red", "munsell": "4.0R 4.5/9.1", "value": 4.5, "chroma": 9.1, "hex": "#B14C52", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 16, "name": "dark red", "munsell": "4.5R 2.8/6.8", "value": 2.8, "chroma": 6.8, "hex": "#742A33", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 17, "name": "very dark red", "munsell": "3.5R 1.2/4.9", "value": 1.2, "chroma": 4.9, "hex": "#3F0D21", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 18, "name": "light grayish red", "munsell": "4.9R 6.0/3.4", "value": 6.0, "chroma": 3.4, "hex": "#B08A88", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 19, "name": "grayish red", "munsell": "4.6R 4.5/4.7", "value": 4.5, "chroma": 4.7, "hex": "#945E5D", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 20, "name": "dark grayish red", "munsell": "3.5R 2.7/2.2", "value": 2.7, "chroma": 2.2, "hex": "#54393C", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 21, "name": "blackish red", "munsell": "3.5R 1.1/1.6", "value": 1.1, "chroma": 1.6, "hex": "#2C191E", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 22, "name": "reddish gray", "munsell": "6.5R 5.5/1.1", "value": 5.5, "chroma": 1.1, "hex": "#908482", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 23, "name": "dark reddish gray", "munsell": "6.0R 3.5/1.1", "value": 3.5, "chroma": 1.1, "hex": "#5F504F", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 24, "name": "reddish black", "munsell": "N0.9", "value": 0.9, "chroma": 0.8, "hex": "#1A1A1A", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 25, "name": "vivid yellowish pink", "munsell": "8.0R 7.0/13.0", "value": 7.0, "chroma": 13.0, "hex": "#FF8365", "peripheral": true, "uncertain": true, "clipped": true}
+{"block": 26, "name": "strong yellowish pink", "munsell": "8.0R 7.5/9.0", "value": 7.5, "chroma": 9.0, "hex": "#FF9F89", "peripheral": true, "uncertain": false, "clipped": true}
+{"block": 27, "name": "deep yellowish pink", "munsell": "5.6R 6.0/12.4", "value": 6.0, "chroma": 12.4, "hex": "#EF6964", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 28, "name": "light yellowish pink", "munsell": "0.7YR 8.6/4.8", "value": 8.6, "chroma": 4.8, "hex": "#FFCBB5", "peripheral": true, "uncertain": false, "clipped": true}
+{"block": 29, "name": "moderate yellowish pink", "munsell": "0.7YR 7.2/4.8", "value": 7.2, "chroma": 4.8, "hex": "#DDA793", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 30, "name": "dark yellowish pink", "munsell": "7.0R 6.0/6.0", "value": 6.0, "chroma": 6.0, "hex": "#C58379", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 31, "name": "pale yellowish pink", "munsell": "2.1YR 8.8/2.2", "value": 8.8, "chroma": 2.2, "hex": "#F1D9CE", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 32, "name": "grayish yellowish pink", "munsell": "0.5YR 7.2/2.3", "value": 7.2, "chroma": 2.3, "hex": "#C7ADA5", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 33, "name": "brownish pink", "munsell": "6.5YR 7.2/2.2", "value": 7.2, "chroma": 2.2, "hex": "#C5AF9D", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 34, "name": "vivid reddish orange", "munsell": "9.5R 5.5/15.5", "value": 5.5, "chroma": 15.5, "hex": "#ED5119", "peripheral": true, "uncertain": true, "clipped": false}
+{"block": 35, "name": "strong reddish orange", "munsell": "9.5R 5.5/12.0", "value": 5.5, "chroma": 12.0, "hex": "#DD6039", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 36, "name": "deep reddish orange", "munsell": "9.5R 4.0/12.0", "value": 4.0, "chroma": 12.0, "hex": "#AE3618", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 37, "name": "moderate reddish orange", "munsell": "9.5R 5.5/9.1", "value": 5.5, "chroma": 9.1, "hex": "#CC6B4F", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 38, "name": "dark reddish orange", "munsell": "9.5R 4.0/9.1", "value": 4.0, "chroma": 9.1, "hex": "#A0432E", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 39, "name": "grayish reddish orange", "munsell": "0.5YR 5.5/6.0", "value": 5.5, "chroma": 6.0, "hex": "#B77660", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 40, "name": "strong reddish brown", "munsell": "0.5YR 3.0/11.2", "value": 3.0, "chroma": 11.2, "hex": "#8C1C00", "peripheral": true, "uncertain": false, "clipped": true}
+{"block": 41, "name": "deep reddish brown", "munsell": "9.8R 1.5/7.5", "value": 1.5, "chroma": 7.5, "hex": "#540012", "peripheral": true, "uncertain": true, "clipped": false}
+{"block": 42, "name": "light reddish brown", "munsell": "0.5YR 5.5/4.1", "value": 5.5, "chroma": 4.1, "hex": "#AA7C6D", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 43, "name": "moderate reddish brown", "munsell": "9.6R 3.4/5.2", "value": 3.4, "chroma": 5.2, "hex": "#7B4136", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 44, "name": "dark reddish brown", "munsell": "9.5R 1.3/3.6", "value": 1.3, "chroma": 3.6, "hex": "#3D1619", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 45, "name": "light grayish reddish brown", "munsell": "3.0YR 5.5/2.3", "value": 5.5, "chroma": 2.3, "hex": "#9B8175", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 46, "name": "grayish reddish brown", "munsell": "9.9R 3.4/2.3", "value": 3.4, "chroma": 2.3, "hex": "#674A45", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 47, "name": "dark grayish reddish brown", "munsell": "9.5R 2.0/2.0", "value": 2.0, "chroma": 2.0, "hex": "#412B29", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 48, "name": "vivid orange", "munsell": "4.5YR 6.6/16.0", "value": 6.6, "chroma": 16.0, "hex": "#FC8300", "peripheral": true, "uncertain": true, "clipped": true}
+{"block": 49, "name": "brilliant orange", "munsell": "4.5YR 8.0/12.1", "value": 8.0, "chroma": 12.1, "hex": "#FFAE4E", "peripheral": true, "uncertain": false, "clipped": true}
+{"block": 50, "name": "strong orange", "munsell": "4.5YR 6.5/12.1", "value": 6.5, "chroma": 12.1, "hex": "#ED8728", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 51, "name": "deep orange", "munsell": "4.5YR 5.0/12.1", "value": 5.0, "chroma": 12.1, "hex": "#BE6000", "peripheral": false, "uncertain": false, "clipped": true}
+{"block": 52, "name": "light orange", "munsell": "4.5YR 8.0/8.1", "value": 8.0, "chroma": 8.1, "hex": "#FFB67B", "peripheral": true, "uncertain": false, "clipped": true}
+{"block": 53, "name": "moderate orange", "munsell": "4.6YR 6.5/8.1", "value": 6.5, "chroma": 8.1, "hex": "#DA8F58", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 54, "name": "brownish orange", "munsell": "4.5YR 5.0/8.2", "value": 5.0, "chroma": 8.2, "hex": "#B06832", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 55, "name": "strong brown", "munsell": "5.0YR 3.5/8.0", "value": 3.5, "chroma": 8.0, "hex": "#83430A", "peripheral": true, "uncertain": true, "clipped": false}
+{"block": 56, "name": "deep brown", "munsell": "5.0YR 2.1/6.0", "value": 2.1, "chroma": 6.0, "hex": "#552504", "peripheral": true, "uncertain": true, "clipped": false}
+{"block": 57, "name": "light brown", "munsell": "5.5YR 5.5/4.6", "value": 5.5, "chroma": 4.6, "hex": "#AA7D5E", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 58, "name": "moderate brown", "munsell": "5.5YR 3.5/3.9", "value": 3.5, "chroma": 3.9, "hex": "#704B34", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 59, "name": "dark brown", "munsell": "5.5YR 1.6/3.6", "value": 1.6, "chroma": 3.6, "hex": "#421F0E", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 60, "name": "light grayish brown", "munsell": "6.5YR 5.5/2.2", "value": 5.5, "chroma": 2.2, "hex": "#998272", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 61, "name": "grayish brown", "munsell": "5.6YR 3.5/2.0", "value": 3.5, "chroma": 2.0, "hex": "#654F43", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 62, "name": "dark grayish brown", "munsell": "5.5R 2.0/1.7", "value": 2.0, "chroma": 1.7, "hex": "#3F2C2D", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 63, "name": "light brownish gray", "munsell": "6.8YR 5.5/1.0", "value": 5.5, "chroma": 1.0, "hex": "#8F847D", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 64, "name": "brownish gray", "munsell": "6.4YR 3.5/0.9", "value": 3.5, "chroma": 0.9, "hex": "#5C524C", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 65, "name": "brownish black", "munsell": "N0.8", "value": 0.8, "chroma": 0.8, "hex": "#181818", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 66, "name": "vivid orange yellow", "munsell": "9.0YR 7.2/16.0", "value": 7.2, "chroma": 16.0, "hex": "#F8A100", "peripheral": true, "uncertain": true, "clipped": true}
+{"block": 67, "name": "brilliant orange yellow", "munsell": "9.0YR 8.4/12.1", "value": 8.4, "chroma": 12.1, "hex": "#FFC339", "peripheral": true, "uncertain": false, "clipped": true}
+{"block": 68, "name": "strong orange yellow", "munsell": "9.0YR 7.2/12.1", "value": 7.2, "chroma": 12.1, "hex": "#F0A40D", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 69, "name": "deep orange yellow", "munsell": "9.0YR 6.0/12.1", "value": 6.0, "chroma": 12.1, "hex": "#CC8500", "peripheral": false, "uncertain": false, "clipped": true}
+{"block": 70, "name": "light orange yellow", "munsell": "9.0YR 8.6/8.1", "value": 8.6, "chroma": 8.1, "hex": "#FFCE76", "peripheral": true, "uncertain": false, "clipped": true}
+{"block": 71, "name": "moderate orange yellow", "munsell": "9.0YR 7.2/8.1", "value": 7.2, "chroma": 8.1, "hex": "#E3A857", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 72, "name": "dark orange yellow", "munsell": "9.0YR 6.0/8.1", "value": 6.0, "chroma": 8.1, "hex": "#C18839", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 73, "name": "pale orange yellow", "munsell": "9.1YR 8.6/4.4", "value": 8.6, "chroma": 4.4, "hex": "#F7D2A3", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 74, "name": "strong yellowish brown", "munsell": "9.0YR 4.6/9.6", "value": 4.6, "chroma": 9.6, "hex": "#9D6300", "peripheral": true, "uncertain": false, "clipped": true}
+{"block": 75, "name": "deep yellowish brown", "munsell": "9.5YR 2.9/6.0", "value": 2.9, "chroma": 6.0, "hex": "#623D04", "peripheral": true, "uncertain": true, "clipped": false}
+{"block": 76, "name": "light yellowish brown", "munsell": "9.2YR 6.6/4.7", "value": 6.6, "chroma": 4.7, "hex": "#C29D6F", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 77, "name": "moderate yellowish brown", "munsell": "9.5YR 4.5/4.0", "value": 4.5, "chroma": 4.0, "hex": "#866742", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 78, "name": "dark yellowish brown", "munsell": "9.5YR 2.2/3.7", "value": 2.2, "chroma": 3.7, "hex": "#493015", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 79, "name": "light grayish yellowish brown", "munsell": "9.5YR 6.4/2.4", "value": 6.4, "chroma": 2.4, "hex": "#AF9B83", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 80, "name": "grayish yellowish brown", "munsell": "9.5YR 4.6/2.1", "value": 4.6, "chroma": 2.1, "hex": "#7E6C59", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 81, "name": "dark grayish yellow brown", "munsell": "9.5YR 2.4/1.8", "value": 2.4, "chroma": 1.8, "hex": "#45372A", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 82, "name": "vivid yellow", "munsell": "4.0Y 7.8/14.5", "value": 7.8, "chroma": 14.5, "hex": "#EDBE00", "peripheral": true, "uncertain": true, "clipped": true}
+{"block": 83, "name": "brilliant yellow", "munsell": "4.0Y 8.8/9.5", "value": 8.8, "chroma": 9.5, "hex": "#FFDB56", "peripheral": true, "uncertain": false, "clipped": true}
+{"block": 84, "name": "strong yellow", "munsell": "4.0Y 7.2/9.5", "value": 7.2, "chroma": 9.5, "hex": "#D5AF2D", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 85, "name": "deep yellow", "munsell": "4.0Y 6.0/9.5", "value": 6.0, "chroma": 9.5, "hex": "#B39000", "peripheral": false, "uncertain": false, "clipped": true}
+{"block": 86, "name": "light yellow", "munsell": "4.0Y 6.0/6.6", "value": 6.0, "chroma": 6.6, "hex": "#AD913E", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 87, "name": "moderate yellow", "munsell": "4.0Y 8.8/6.6", "value": 8.8, "chroma": 6.6, "hex": "#F8DC81", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 88, "name": "dark yellow", "munsell": "4.0Y 7.2/6.6", "value": 7.2, "chroma": 6.6, "hex": "#CDB15C", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 89, "name": "pale yellow", "munsell": "4.2Y 8.9/3.6", "value": 8.9, "chroma": 3.6, "hex": "#F0E0AC", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 90, "name": "grayish yellow", "munsell": "4.2Y 7.2/3.6", "value": 7.2, "chroma": 3.6, "hex": "#C2B283", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 91, "name": "dark grayish yellow", "munsell": "4.0Y 6.0/4.1", "value": 6.0, "chroma": 4.1, "hex": "#A59260", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 92, "name": "yellowish white", "munsell": "4.1Y 9.2/1.3", "value": 9.2, "chroma": 1.3, "hex": "#EEE8D8", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 93, "name": "yellowish gray", "munsell": "4.1Y 7.5/1.3", "value": 7.5, "chroma": 1.3, "hex": "#C1BAA8", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 94, "name": "light olive brown", "munsell": "2.5Y 5.0/8.4", "value": 5.0, "chroma": 8.4, "hex": "#9B7402", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 95, "name": "moderate olive brown", "munsell": "2.5Y 3.5/6.0", "value": 3.5, "chroma": 6.0, "hex": "#6C4F0B", "peripheral": true, "uncertain": true, "clipped": false}
+{"block": 96, "name": "dark olive brown", "munsell": "2.5Y 1.8/2.5", "value": 1.8, "chroma": 2.5, "hex": "#382A14", "peripheral": true, "uncertain": true, "clipped": false}
+{"block": 97, "name": "vivid greenish yellow", "munsell": "9.5Y 7.8/14.5", "value": 7.8, "chroma": 14.5, "hex": "#D2C800", "peripheral": true, "uncertain": true, "clipped": true}
+{"block": 98, "name": "brilliant greenish yellow", "munsell": "9.5Y 8.8/9.5", "value": 8.8, "chroma": 9.5, "hex": "#EBE34E", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 99, "name": "strong greenish yellow", "munsell": "9.5Y 7.2/9.5", "value": 7.2, "chroma": 9.5, "hex": "#BFB720", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 100, "name": "deep greenish yellow", "munsell": "9.5Y 6.0/9.5", "value": 6.0, "chroma": 9.5, "hex": "#9E9700", "peripheral": false, "uncertain": false, "clipped": true}
+{"block": 101, "name": "light greenish yellow", "munsell": "9.5Y 8.8/6.6", "value": 8.8, "chroma": 6.6, "hex": "#E8E27D", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 102, "name": "moderate greenish yellow", "munsell": "9.5Y 7.2/6.6", "value": 7.2, "chroma": 6.6, "hex": "#BCB658", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 103, "name": "dark greenish yellow", "munsell": "9.5Y 6.0/6.6", "value": 6.0, "chroma": 6.6, "hex": "#9C9739", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 104, "name": "pale greenish yellow", "munsell": "9.5Y 8.9/4.1", "value": 8.9, "chroma": 4.1, "hex": "#E8E3A3", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 105, "name": "grayish greenish yellow", "munsell": "9.5Y 7.2/4.1", "value": 7.2, "chroma": 4.1, "hex": "#B9B57B", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 106, "name": "light olive", "munsell": "8.1Y 5.1/8.0", "value": 5.1, "chroma": 8.0, "hex": "#8A7E00", "peripheral": true, "uncertain": false, "clipped": true}
+{"block": 107, "name": "moderate olive", "munsell": "8.0Y 3.5/5.8", "value": 3.5, "chroma": 5.8, "hex": "#5E5505", "peripheral": true, "uncertain": true, "clipped": false}
+{"block": 108, "name": "dark olive", "munsell": "8.0Y 1.7/3.2", "value": 1.7, "chroma": 3.2, "hex": "#312B04", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 109, "name": "light grayish olive", "munsell": "8.3Y 5.5/2.4", "value": 5.5, "chroma": 2.4, "hex": "#8C8768", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 110, "name": "grayish olive", "munsell": "8.1Y 3.5/2.3", "value": 3.5, "chroma": 2.3, "hex": "#59543A", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 111, "name": "dark grayish olive", "munsell": "8.0Y 2.0/2.0", "value": 2.0, "chroma": 2.0, "hex": "#343120", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 112, "name": "light olive gray", "munsell": "7.4Y 5.5/1.3", "value": 5.5, "chroma": 1.3, "hex": "#8A8776", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 113, "name": "olive gray", "munsell": "8.1Y 3.5/1.0", "value": 3.5, "chroma": 1.0, "hex": "#565449", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 114, "name": "olive black", "munsell": "N0.9", "value": 0.9, "chroma": 0.8, "hex": "#1A1A1A", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 115, "name": "vivid yellow green", "munsell": "5.0GY 7.5/14.5", "value": 7.5, "chroma": 14.5, "hex": "#A0CB00", "peripheral": true, "uncertain": true, "clipped": true}
+{"block": 116, "name": "brilliant yellow green", "munsell": "5.0GY 8.5/9.1", "value": 8.5, "chroma": 9.1, "hex": "#C5E25B", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 117, "name": "strong yellow green", "munsell": "5.0GY 6.0/9.1", "value": 6.0, "chroma": 9.1, "hex": "#809F1C", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 118, "name": "deep yellow green", "munsell": "5.0GY 4.0/9.1", "value": 4.0, "chroma": 9.1, "hex": "#4C6A00", "peripheral": false, "uncertain": false, "clipped": true}
+{"block": 119, "name": "light yellow green", "munsell": "5.0GY 8.6/5.2", "value": 8.6, "chroma": 5.2, "hex": "#D0E092", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 120, "name": "moderate yellow green", "munsell": "5.0GY 6.0/5.2", "value": 6.0, "chroma": 5.2, "hex": "#899B58", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 121, "name": "pale yellow green", "munsell": "3.5GY 8.7/2.2", "value": 8.7, "chroma": 2.2, "hex": "#DADEB9", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 122, "name": "grayish yellow green", "munsell": "4.4GY 6.1/2.2", "value": 6.1, "chroma": 2.2, "hex": "#92997C", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 123, "name": "strong olive green", "munsell": "5.0GY 3.2/7.8", "value": 3.2, "chroma": 7.8, "hex": "#3A5500", "peripheral": true, "uncertain": true, "clipped": true}
+{"block": 124, "name": "deep olive green", "munsell": "5.0GY 2.4/7.1", "value": 2.4, "chroma": 7.1, "hex": "#274200", "peripheral": true, "uncertain": true, "clipped": true}
+{"block": 125, "name": "moderate olive green", "munsell": "5.0GY 3.5/5.2", "value": 3.5, "chroma": 5.2, "hex": "#485A20", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 126, "name": "dark olive green", "munsell": "5.0GY 1.8/3.7", "value": 1.8, "chroma": 3.7, "hex": "#23310D", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 127, "name": "grayish olive green", "munsell": "5.0GY 3.5/2.2", "value": 3.5, "chroma": 2.2, "hex": "#4F5740", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 128, "name": "dark grayish olive green", "munsell": "5.0GY 2.0/2.0", "value": 2.0, "chroma": 2.0, "hex": "#2E3325", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 129, "name": "vivid yellowish green", "munsell": "0.5G 7.0/15.5", "value": 7.0, "chroma": 15.5, "hex": "#00CB33", "peripheral": true, "uncertain": true, "clipped": true}
+{"block": 130, "name": "brilliant yellowish green", "munsell": "0.5G 8.0/9.1", "value": 8.0, "chroma": 9.1, "hex": "#83DD82", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 131, "name": "strong yellowish green", "munsell": "0.5G 5.5/9.1", "value": 5.5, "chroma": 9.1, "hex": "#3A9948", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 132, "name": "deep yellowish green", "munsell": "0.5G 3.5/11.5", "value": 3.5, "chroma": 11.5, "hex": "#006605", "peripheral": true, "uncertain": true, "clipped": true}
+{"block": 133, "name": "very deep yellowish green", "munsell": "0.5G 2.0/9.2", "value": 2.0, "chroma": 9.2, "hex": "#003E04", "peripheral": true, "uncertain": true, "clipped": true}
+{"block": 134, "name": "very light yellowish green", "munsell": "0.5G 9.1/5.1", "value": 9.1, "chroma": 5.1, "hex": "#BFF3BC", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 135, "name": "light yellowish green", "munsell": "0.5G 7.5/5.1", "value": 7.5, "chroma": 5.1, "hex": "#95C794", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 136, "name": "moderate yellowish green", "munsell": "0.5G 5.5/5.1", "value": 5.5, "chroma": 5.1, "hex": "#629264", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 137, "name": "dark yellowish green", "munsell": "0.5G 3.5/5.1", "value": 3.5, "chroma": 5.1, "hex": "#305E37", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 138, "name": "very dark yellowish green", "munsell": "0.5G 1.5/4.9", "value": 1.5, "chroma": 4.9, "hex": "#002F10", "peripheral": true, "uncertain": false, "clipped": true}
+{"block": 139, "name": "vivid green", "munsell": "6.5G 5.2/18.0", "value": 5.2, "chroma": 18.0, "hex": "#009F5F", "peripheral": true, "uncertain": true, "clipped": true}
+{"block": 140, "name": "brilliant green", "munsell": "6.0G 7.4/9.1", "value": 7.4, "chroma": 9.1, "hex": "#40CF9C", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 141, "name": "strong green", "munsell": "6.0G 4.5/9.1", "value": 4.5, "chroma": 9.1, "hex": "#008057", "peripheral": false, "uncertain": false, "clipped": true}
+{"block": 142, "name": "deep green", "munsell": "6.0G 2.3/9.1", "value": 2.3, "chroma": 9.1, "hex": "#00462A", "peripheral": true, "uncertain": false, "clipped": true}
+{"block": 143, "name": "very light green", "munsell": "6.0G 8.6/5.1", "value": 8.6, "chroma": 5.1, "hex": "#9CE8C4", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 144, "name": "light green", "munsell": "6.0G 6.5/5.1", "value": 6.5, "chroma": 5.1, "hex": "#6AAE90", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 145, "name": "moderate green", "munsell": "6.0G 4.5/5.1", "value": 4.5, "chroma": 5.1, "hex": "#36795F", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 146, "name": "dark green", "munsell": "6.0G 2.7/5.0", "value": 2.7, "chroma": 5.0, "hex": "#054A37", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 147, "name": "very dark green", "munsell": "6.0G 1.3/4.9", "value": 1.3, "chroma": 4.9, "hex": "#002B1A", "peripheral": true, "uncertain": false, "clipped": true}
+{"block": 148, "name": "very pale green", "munsell": "9.0G 8.7/1.8", "value": 8.7, "chroma": 1.8, "hex": "#C4E1D5", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 149, "name": "pale green", "munsell": "9.0G 6.5/1.8", "value": 6.5, "chroma": 1.8, "hex": "#8DA69C", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 150, "name": "grayish green", "munsell": "9.0G 4.5/1.8", "value": 4.5, "chroma": 1.8, "hex": "#5C716A", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 151, "name": "dark grayish green", "munsell": "9.0G 2.8/1.6", "value": 2.8, "chroma": 1.6, "hex": "#374641", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 152, "name": "blackish green", "munsell": "9.0G 1.1/1.4", "value": 1.1, "chroma": 1.4, "hex": "#15211D", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 153, "name": "greenish white", "munsell": "7.0G 9.2/0.8", "value": 9.2, "chroma": 0.8, "hex": "#E0EBE6", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 154, "name": "light greenish gray", "munsell": "7.0G 7.5/0.8", "value": 7.5, "chroma": 0.8, "hex": "#B2BDB8", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 155, "name": "greenish gray", "munsell": "7.0G 5.5/0.8", "value": 5.5, "chroma": 0.8, "hex": "#7F8984", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 156, "name": "dark greenish gray", "munsell": "7.0G 3.5/0.8", "value": 3.5, "chroma": 0.8, "hex": "#4D5652", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 157, "name": "greenish black", "munsell": "N0.9", "value": 0.9, "chroma": 0.7, "hex": "#1A1A1A", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 158, "name": "vivid bluish green", "munsell": "4.5BG 5.3/15.5", "value": 5.3, "chroma": 15.5, "hex": "#009F93", "peripheral": true, "uncertain": true, "clipped": true}
+{"block": 159, "name": "brilliant bluish green", "munsell": "4.5BG 7.3/9.0", "value": 7.3, "chroma": 9.0, "hex": "#00CCBB", "peripheral": true, "uncertain": false, "clipped": true}
+{"block": 160, "name": "strong bluish green", "munsell": "4.5BG 4.5/9.0", "value": 4.5, "chroma": 9.0, "hex": "#008078", "peripheral": false, "uncertain": false, "clipped": true}
+{"block": 161, "name": "deep bluish green", "munsell": "4.5BG 2.3/9.0", "value": 2.3, "chroma": 9.0, "hex": "#004645", "peripheral": true, "uncertain": false, "clipped": true}
+{"block": 162, "name": "very light bluish green", "munsell": "4.5BG 8.5/5.0", "value": 8.5, "chroma": 5.0, "hex": "#92E5D6", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 163, "name": "light bluish green", "munsell": "4.5BG 6.5/5.0", "value": 6.5, "chroma": 5.0, "hex": "#61AEA4", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 164, "name": "moderate bluish green", "munsell": "4.5BG 4.5/5.0", "value": 4.5, "chroma": 5.0, "hex": "#287872", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 165, "name": "dark bluish green", "munsell": "4.5BG 2.7/5.0", "value": 2.7, "chroma": 5.0, "hex": "#004A48", "peripheral": false, "uncertain": false, "clipped": true}
+{"block": 166, "name": "very dark bluish green", "munsell": "4.5BG 1.3/4.9", "value": 1.3, "chroma": 4.9, "hex": "#002B2B", "peripheral": true, "uncertain": false, "clipped": true}
+{"block": 167, "name": "vivid greenish blue", "munsell": "4.5B 5.2/13.0", "value": 5.2, "chroma": 13.0, "hex": "#0093C6", "peripheral": true, "uncertain": true, "clipped": true}
+{"block": 168, "name": "brilliant greenish blue", "munsell": "4.5B 6.8/9.0", "value": 6.8, "chroma": 9.0, "hex": "#00B9D8", "peripheral": true, "uncertain": false, "clipped": true}
+{"block": 169, "name": "strong greenish blue", "munsell": "4.5B 4.5/9.0", "value": 4.5, "chroma": 9.0, "hex": "#007B9E", "peripheral": false, "uncertain": false, "clipped": true}
+{"block": 170, "name": "deep greenish blue", "munsell": "4.5B 2.5/9.0", "value": 2.5, "chroma": 9.0, "hex": "#00486D", "peripheral": true, "uncertain": false, "clipped": true}
+{"block": 171, "name": "very light greenish blue", "munsell": "4.5B 8.2/5.2", "value": 8.2, "chroma": 5.2, "hex": "#8ED9E9", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 172, "name": "light greenish blue", "munsell": "4.5B 6.5/5.2", "value": 6.5, "chroma": 5.2, "hex": "#64ABBB", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 173, "name": "moderate greenish blue", "munsell": "4.5B 4.5/5.2", "value": 4.5, "chroma": 5.2, "hex": "#2B7688", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 174, "name": "dark greenish blue", "munsell": "4.5B 2.7/5.0", "value": 2.7, "chroma": 5.0, "hex": "#00485B", "peripheral": false, "uncertain": false, "clipped": true}
+{"block": 175, "name": "very dark greenish blue", "munsell": "4.5B 1.3/4.9", "value": 1.3, "chroma": 4.9, "hex": "#00283C", "peripheral": true, "uncertain": false, "clipped": true}
+{"block": 176, "name": "vivid blue", "munsell": "3.0PB 4.2/15.0", "value": 4.2, "chroma": 15.0, "hex": "#006BCB", "peripheral": true, "uncertain": true, "clipped": true}
+{"block": 177, "name": "brilliant blue", "munsell": "3.0PB 6.4/11.0", "value": 6.4, "chroma": 11.0, "hex": "#42A4EC", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 178, "name": "strong blue", "munsell": "3.0PB 4.2/11.0", "value": 4.2, "chroma": 11.0, "hex": "#006AAF", "peripheral": false, "uncertain": false, "clipped": true}
+{"block": 179, "name": "deep blue", "munsell": "3.0PB 2.0/9.0", "value": 2.0, "chroma": 9.0, "hex": "#00336B", "peripheral": true, "uncertain": false, "clipped": true}
+{"block": 180, "name": "very light blue", "munsell": "2.4PB 8.2/7.2", "value": 8.2, "chroma": 7.2, "hex": "#97D4FF", "peripheral": true, "uncertain": false, "clipped": true}
+{"block": 181, "name": "light blue", "munsell": "2.7PB 6.5/7.3", "value": 6.5, "chroma": 7.3, "hex": "#72A5D2", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 182, "name": "moderate blue", "munsell": "2.9PB 4.2/7.2", "value": 4.2, "chroma": 7.2, "hex": "#346996", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 183, "name": "dark blue", "munsell": "2.8PB 1.7/5.0", "value": 1.7, "chroma": 5.0, "hex": "#032C4B", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 184, "name": "very pale blue", "munsell": "0.9PB 8.4/3.0", "value": 8.4, "chroma": 3.0, "hex": "#BED6E5", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 185, "name": "pale blue", "munsell": "0.9PB 6.5/3.0", "value": 6.5, "chroma": 3.0, "hex": "#8EA3B2", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 186, "name": "grayish blue", "munsell": "0.9PB 4.2/3.0", "value": 4.2, "chroma": 3.0, "hex": "#526879", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 187, "name": "dark grayish blue", "munsell": "9.5B 2.6/1.9", "value": 2.6, "chroma": 1.9, "hex": "#31404B", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 188, "name": "blackish blue", "munsell": "9.5B 1.1/1.5", "value": 1.1, "chroma": 1.5, "hex": "#152028", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 189, "name": "bluish white", "munsell": "9.5B 7.5/1.0", "value": 7.5, "chroma": 1.0, "hex": "#B4BCC0", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 190, "name": "light bluish gray", "munsell": "9.5B 7.5/1.0", "value": 7.5, "chroma": 1.0, "hex": "#B4BCC0", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 191, "name": "bluish gray", "munsell": "9.5B 5.5/1.0", "value": 5.5, "chroma": 1.0, "hex": "#80888C", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 192, "name": "dark bluish gray", "munsell": "9.5B 3.5/1.0", "value": 3.5, "chroma": 1.0, "hex": "#4D555A", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 193, "name": "bluish black", "munsell": "9.5B 1.0/0.7", "value": 1.0, "chroma": 0.7, "hex": "#191D21", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 194, "name": "vivid purplish blue", "munsell": "8.0PB 2.5/22.0", "value": 2.5, "chroma": 22.0, "hex": "#4100B8", "peripheral": true, "uncertain": true, "clipped": true}
+{"block": 195, "name": "brilliant purplish blue", "munsell": "8.0PB 6.0/10.8", "value": 6.0, "chroma": 10.8, "hex": "#818DDC", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 196, "name": "strong purplish blue", "munsell": "8.0PB 4.1/11.4", "value": 4.1, "chroma": 11.4, "hex": "#525AAD", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 197, "name": "deep purplish blue", "munsell": "8.0PB 1.6/9.1", "value": 1.6, "chroma": 9.1, "hex": "#241D5F", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 198, "name": "very light purplish blue", "munsell": "7.5PB 7.8/6.1", "value": 7.8, "chroma": 6.1, "hex": "#B4C1EF", "peripheral": true, "uncertain": true, "clipped": false}
+{"block": 199, "name": "light purplish blue", "munsell": "7.5PB 6.0/6.8", "value": 6.0, "chroma": 6.8, "hex": "#8691C1", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 200, "name": "moderate purplish blue", "munsell": "8.0PB 3.5/6.9", "value": 3.5, "chroma": 6.9, "hex": "#4B4F83", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 201, "name": "dark purplish blue", "munsell": "7.9PB 1.1/4.7", "value": 1.1, "chroma": 4.7, "hex": "#1B1A3B", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 202, "name": "very pale purplish blue", "munsell": "7.0PB 8.2/4.1", "value": 8.2, "chroma": 4.1, "hex": "#C3CDE9", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 203, "name": "pale purplish blue", "munsell": "7.0PB 6.0/4.1", "value": 6.0, "chroma": 4.1, "hex": "#8B93AE", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 204, "name": "grayish purplish blue", "munsell": "7.2PB 3.3/4.0", "value": 3.3, "chroma": 4.0, "hex": "#474D6C", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 205, "name": "vivid violet", "munsell": "1.0P 2.7/21.0", "value": 2.7, "chroma": 21.0, "hex": "#6600AE", "peripheral": true, "uncertain": true, "clipped": true}
+{"block": 206, "name": "brilliant violet", "munsell": "1.0P 5.9/11.1", "value": 5.9, "chroma": 11.1, "hex": "#9983D6", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 207, "name": "strong violet", "munsell": "1.0P 3.5/11.1", "value": 3.5, "chroma": 11.1, "hex": "#614296", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 208, "name": "deep violet", "munsell": "1.0P 1.4/10.3", "value": 1.4, "chroma": 10.3, "hex": "#350C59", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 209, "name": "very light violet", "munsell": "1.0P 7.9/7.0", "value": 7.9, "chroma": 7.0, "hex": "#C8BEF5", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 210, "name": "light violet", "munsell": "1.0P 6.0/7.2", "value": 6.0, "chroma": 7.2, "hex": "#978CC0", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 211, "name": "moderate violet", "munsell": "1.0P 3.5/7.2", "value": 3.5, "chroma": 7.2, "hex": "#5C4A81", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 212, "name": "dark violet", "munsell": "1.0P 1.3/5.0", "value": 1.3, "chroma": 5.0, "hex": "#2A1A3F", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 213, "name": "very pale violet", "munsell": "1.0P 8.2/4.1", "value": 8.2, "chroma": 4.1, "hex": "#CECAE7", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 214, "name": "pale violet", "munsell": "1.0P 6.0/4.1", "value": 6.0, "chroma": 4.1, "hex": "#9590AC", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 215, "name": "grayish violet", "munsell": "1.0P 3.3/4.1", "value": 3.3, "chroma": 4.1, "hex": "#53496B", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 216, "name": "vivid purple", "munsell": "6.0P 3.5/20.0", "value": 3.5, "chroma": 20.0, "hex": "#9500AD", "peripheral": true, "uncertain": true, "clipped": true}
+{"block": 217, "name": "brilliant purple", "munsell": "6.0P 6.7/11.1", "value": 6.7, "chroma": 11.1, "hex": "#CA8FDD", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 218, "name": "strong purple", "munsell": "6.0P 4.5/11.1", "value": 4.5, "chroma": 11.1, "hex": "#9154A2", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 219, "name": "deep purple", "munsell": "6.0P 2.8/10.2", "value": 2.8, "chroma": 10.2, "hex": "#652773", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 220, "name": "very deep purple", "munsell": "6.0P 1.2/10.2", "value": 1.2, "chroma": 10.2, "hex": "#3F004A", "peripheral": true, "uncertain": false, "clipped": true}
+{"block": 221, "name": "very light purple", "munsell": "6.0P 8.0/7.2", "value": 8.0, "chroma": 7.2, "hex": "#DFBBED", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 222, "name": "light purple", "munsell": "6.0P 6.5/7.2", "value": 6.5, "chroma": 7.2, "hex": "#B893C4", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 223, "name": "moderate purple", "munsell": "6.0P 4.5/7.2", "value": 4.5, "chroma": 7.2, "hex": "#855F90", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 224, "name": "dark puple", "munsell": "6.0P 2.7/5.1", "value": 2.7, "chroma": 5.1, "hex": "#52365A", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 225, "name": "very dark purple", "munsell": "6.0P 1.1/4.9", "value": 1.1, "chroma": 4.9, "hex": "#2E1335", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 226, "name": "very pale purple", "munsell": "5.4P 8.4/3.3", "value": 8.4, "chroma": 3.3, "hex": "#DACEE3", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 227, "name": "pale purple", "munsell": "6.8P 6.4/3.0", "value": 6.4, "chroma": 3.0, "hex": "#A999AA", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 228, "name": "grayish purple", "munsell": "7.8P 4.5/2.9", "value": 4.5, "chroma": 2.9, "hex": "#79677A", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 229, "name": "dark grayish purple", "munsell": "10.0P 2.8/2.0", "value": 2.8, "chroma": 2.0, "hex": "#4F3D4C", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 230, "name": "blackish purple", "munsell": "10.0P 1.0/1.4", "value": 1.0, "chroma": 1.4, "hex": "#231923", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 231, "name": "purplish white", "munsell": "9.0P 9.1/1.0", "value": 9.1, "chroma": 1.0, "hex": "#E9E4E8", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 232, "name": "light purplish gray", "munsell": "9.0P 7.5/1.0", "value": 7.5, "chroma": 1.0, "hex": "#BEB9BD", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 233, "name": "purplish gray", "munsell": "10.0P 5.5/1.0", "value": 5.5, "chroma": 1.0, "hex": "#8B8489", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 234, "name": "dark purplish gray", "munsell": "10.0P 3.5/1.0", "value": 3.5, "chroma": 1.0, "hex": "#5A5158", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 235, "name": "purplish black", "munsell": "10.0P 1.0/0.7", "value": 1.0, "chroma": 0.7, "hex": "#201B20", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 236, "name": "vivid reddish purple", "munsell": "1.0RP 4.0/19.0", "value": 4.0, "chroma": 19.0, "hex": "#B8009A", "peripheral": true, "uncertain": true, "clipped": true}
+{"block": 237, "name": "strong reddish purple", "munsell": "1.0RP 4.5/11.1", "value": 4.5, "chroma": 11.1, "hex": "#A54B8E", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 238, "name": "deep reddish purple", "munsell": "1.0RP 2.8/10.3", "value": 2.8, "chroma": 10.3, "hex": "#741C65", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 239, "name": "very deep reddish purple", "munsell": "1.0RP 1.3/10.3", "value": 1.3, "chroma": 10.3, "hex": "#490046", "peripheral": true, "uncertain": false, "clipped": true}
+{"block": 240, "name": "light reddish purple", "munsell": "1.0RP 6.0/7.2", "value": 6.0, "chroma": 7.2, "hex": "#BA82A7", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 241, "name": "moderate reddish purple", "munsell": "1.0RP 4.5/7.2", "value": 4.5, "chroma": 7.2, "hex": "#945983", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 242, "name": "dark reddish purple", "munsell": "1.0RP 2.7/5.1", "value": 2.7, "chroma": 5.1, "hex": "#5B3352", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 243, "name": "very dark reddish purple", "munsell": "1.0RP 1.1/5.0", "value": 1.1, "chroma": 5.0, "hex": "#331031", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 244, "name": "pale reddish purple", "munsell": "1.0RP 6.0/4.1", "value": 6.0, "chroma": 4.1, "hex": "#A98A9E", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 245, "name": "grayish reddish purple", "munsell": "1.0RP 4.5/4.1", "value": 4.5, "chroma": 4.1, "hex": "#846379", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 246, "name": "brilliant purplish pink", "munsell": "4.0RP 7.9/11.0", "value": 7.9, "chroma": 11.0, "hex": "#FFA2D3", "peripheral": true, "uncertain": true, "clipped": true}
+{"block": 247, "name": "strong purplish pink", "munsell": "4.0RP 7.0/14.5", "value": 7.0, "chroma": 14.5, "hex": "#FF7CC1", "peripheral": true, "uncertain": false, "clipped": true}
+{"block": 248, "name": "deep purplish pink", "munsell": "4.0RP 6.0/12.0", "value": 6.0, "chroma": 12.0, "hex": "#DD6EA4", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 249, "name": "light purplish pink", "munsell": "4.0RP 8.3/7.1", "value": 8.3, "chroma": 7.1, "hex": "#FFBCD8", "peripheral": true, "uncertain": false, "clipped": true}
+{"block": 250, "name": "moderate purplish pink", "munsell": "4.0RP 7.0/7.1", "value": 7.0, "chroma": 7.1, "hex": "#DD9AB6", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 251, "name": "dark purplish pink", "munsell": "6.0RP 6.0/7.2", "value": 6.0, "chroma": 7.2, "hex": "#C57F95", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 252, "name": "pale purplish pink", "munsell": "4.0RP 8.5/3.5", "value": 8.5, "chroma": 3.5, "hex": "#ECCDD8", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 253, "name": "grayish purplish pink", "munsell": "4.0RP 7.0/3.5", "value": 7.0, "chroma": 3.5, "hex": "#C3A6B1", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 254, "name": "vivid purplish red", "munsell": "7.0RP 4.0/17.0", "value": 4.0, "chroma": 17.0, "hex": "#C40069", "peripheral": true, "uncertain": true, "clipped": true}
+{"block": 255, "name": "strong purplish red", "munsell": "7.0RP 4.5/11.9", "value": 4.5, "chroma": 11.9, "hex": "#BA3E70", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 256, "name": "deep purplish red", "munsell": "7.0RP 2.8/11.0", "value": 2.8, "chroma": 11.0, "hex": "#84034E", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 257, "name": "very deep purplish red", "munsell": "7.0RP 1.3/9.0", "value": 1.3, "chroma": 9.0, "hex": "#4D0035", "peripheral": true, "uncertain": false, "clipped": true}
+{"block": 258, "name": "moderate purplish red", "munsell": "7.0RP 4.5/9.0", "value": 4.5, "chroma": 9.0, "hex": "#AA4E6E", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 259, "name": "dark purplish red", "munsell": "7.0RP 2.7/6.3", "value": 2.7, "chroma": 6.3, "hex": "#692B46", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 260, "name": "very dark purplish red", "munsell": "7.0RP 1.2/4.9", "value": 1.2, "chroma": 4.9, "hex": "#3B0F2B", "peripheral": true, "uncertain": false, "clipped": false}
+{"block": 261, "name": "light grayish purplish red", "munsell": "7.0RP 6.0/4.0", "value": 6.0, "chroma": 4.0, "hex": "#B08992", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 262, "name": "grayish purplish red", "munsell": "7.0RP 4.5/5.2", "value": 4.5, "chroma": 5.2, "hex": "#935D6D", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 263, "name": "white", "munsell": "3.0Y 9.25/0.06", "value": 9.25, "chroma": 0.06, "hex": "#EAEAE9", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 264, "name": "light gray", "munsell": "3.0Y 7.5/0.06", "value": 7.5, "chroma": 0.06, "hex": "#BBBBBA", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 265, "name": "medium gray", "munsell": "3.0Y 5.5/0.06", "value": 5.5, "chroma": 0.06, "hex": "#878686", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 266, "name": "dark gray", "munsell": "N3.5", "value": 3.5, "chroma": 0.0, "hex": "#545454", "peripheral": false, "uncertain": false, "clipped": false}
+{"block": 267, "name": "black", "munsell": "N1.25", "value": 1.25, "chroma": 0.0, "hex": "#212121", "peripheral": false, "uncertain": false, "clipped": false}
