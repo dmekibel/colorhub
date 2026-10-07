@@ -1,0 +1,6 @@
+/* Gems (the minerals behind color names, why gems are colored, play of color, color change). Reuses
+   app.css/archive.css/world.css primitives (.kin, .arch-row, .wd-tiles, .wd-list, .wd-card, .fine, .fig)
+   wherever they already fit; this file only covers the one thing that doesn't already exist. */
+
+.gm-rows{margin-top:0}
+.gm-row .kin:last-child{border-bottom:1px solid var(--rule)}
