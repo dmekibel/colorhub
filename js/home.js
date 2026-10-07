@@ -24,9 +24,28 @@ function hmStageItems(n) {
     .map(e => ({ n: e.n, h: e.h, c: BYNAME.get(e.n.toLowerCase()) || null }))
     ;
 }
+// Two stops after Stage 9 (NOTES-TRACKER.md item 0): "Every name" (core + library, every primary and library
+// name with no repeats) and "Every shade" (+ the computed shades, js/naming.js loadShades()). Browse views, not
+// lessons — same honeycomb, no stage ordering. "Every shade" stays out of the chooser while data/shades.json is
+// still empty (David, 2026-10-09: paused pending a library import of more real names).
+const hmCoreNameSet = () => new Set((CORE_NAMES || []).map(e => e.n.toLowerCase()));
+function hmCoreItems() {
+  return (CORE_NAMES || []).map(e => ({ n: e.n, h: e.h, c: BYNAME.get(e.n.toLowerCase()) || null, rank: e.rank }));
+}
+function hmEveryNameItems() {
+  const set = hmCoreNameSet();
+  // library-only entries (never folded into a core primary): csItems() already shapes these as {n,h,c:null,lib}
+  const libOnly = csItems().filter(x => !x.c && !set.has(x.n.toLowerCase()));
+  return hmCoreItems().concat(libOnly);
+}
+function hmShadeItems() {
+  return (SHADES || []).map(e => ({ n: e.n, h: e.h, c: null, shade: { base: e.base, mod: e.mod } }));
+}
+function hmEveryShadeItems() { return hmEveryNameItems().concat(hmShadeItems()); }
 // What the honeycomb shows = a SOURCE (a stage, or one collection) x a FILTER (all / learned / learning / new) x a
 // LAYOUT (map / wheel). One of each, never two sources at once (David: "All 101" next to stages made no sense).
 const HM_FILTERS = [["all", "All"], ["learned", "Learned"], ["learning", "Learning"], ["new", "New"]];
+const HM_EVERY = ["every-name", "every-shade"];   // the two stops after Stage 9, not a stage and not a COLOR_SETS id
 const hmSet = id => COLOR_SETS.find(s => s.id === id) || null;
 const hmCard = it => it.c && it.c.id ? S.cards[it.c.id] : null;
 const HM_KEEP = { all: () => true, learned: it => isMine(hmCard(it)), learning: it => !!hmCard(it) && !isMine(hmCard(it)), new: it => !hmCard(it) };
@@ -36,13 +55,13 @@ function hmView() {   // the saved view, upgrading the old single "set" id
     h.src = /^stage:\d+$/.test(old || "") ? old : old && hmSet(old) && !["101", "learned", "learning", "notmet"].includes(old) ? old : "stage:100";
     h.filter = { learned: "learned", learning: "learning", notmet: "new" }[old] || "all";
   }
-  if (!/^stage:\d+$/.test(h.src) && !hmSet(h.src)) h.src = "stage:100";
+  if (!/^stage:\d+$/.test(h.src) && !HM_EVERY.includes(h.src) && !hmSet(h.src)) h.src = "stage:100";
   h.filter = HM_KEEP[h.filter] ? h.filter : "all"; h.style = HONEY_STYLES[h.style] ? h.style : "original";
   return h;
 }
 function hmViewLabel() {
   const v = hmView(), n = /^stage:/.test(v.src) ? +v.src.slice(6) : 0;
-  const what = n ? `Stage ${HM_STAGES.indexOf(n) + 1}` : hmSet(v.src).title;
+  const what = n ? `Stage ${HM_STAGES.indexOf(n) + 1}` : v.src === "every-name" ? "Every name" : v.src === "every-shade" ? "Every shade" : hmSet(v.src).title;
   return v.filter === "all" ? what : `${what} · ${HM_FILTERS.find(x => x[0] === v.filter)[1]}`;
 }
 
@@ -204,9 +223,17 @@ function hmHome() {
     title.querySelector("small").textContent = loading ? "Loading…" : `${items.length.toLocaleString()} color${items.length === 1 ? "" : "s"} · swipe or tap`;
   }
   async function render(soft) {
-    const g = ++gen, v = hmView(), stage = /^stage:/.test(v.src) ? +v.src.slice(6) : 0, set = hmSet(v.src);
+    const g = ++gen, v = hmView(), stage = /^stage:/.test(v.src) ? +v.src.slice(6) : 0, every = HM_EVERY.includes(v.src), set = !stage && !every ? hmSet(v.src) : null;
     if (stage) { if (!CORE_NAMES) { paintTitle(true); await loadCoreNames(); if (!el.isConnected || g !== gen) return; } items = hmStageItems(stage); }
-    else {
+    else if (every) {
+      const needShades = v.src === "every-shade";
+      if (!CORE_NAMES || !LONG_NAMES || (needShades && !SHADES)) {
+        paintTitle(true);
+        await Promise.all([loadCoreNames(), loadLongNames(), needShades ? loadShades() : Promise.resolve()]);
+        if (!el.isConnected || g !== gen) return;
+      }
+      items = needShades ? hmEveryShadeItems() : hmEveryNameItems();
+    } else {
       if (csNeedsLib(set.state) && !LONG_NAMES) { paintTitle(true); await loadLongNames(); if (!el.isConnected || g !== gen) return; }
       items = set.get();
     }
@@ -222,8 +249,9 @@ function hmHome() {
   // ---------- title: tap for the full chooser, swipe for the four quick views ----------
   async function chooser() {
     buzz(4);
-    if (!LONG_NAMES || !CORE_NAMES) { await Promise.all([loadLongNames(), loadCoreNames()]); if (!el.isConnected || document.querySelector(".sheet")) return; }
+    if (!LONG_NAMES || !CORE_NAMES || !SHADES) { await Promise.all([loadLongNames(), loadCoreNames(), loadShades()]); if (!el.isConnected || document.querySelector(".sheet")) return; }
     const v = hmView(), dotsFor = s => filterColors(csBase(s.state.base), { ...s.state, n: 5 });
+    const everyNameCount = hmEveryNameItems().length, shadeCount = (SHADES || []).length;
     const seg = (key, opts) => `<div class="hm-seg" data-key="${key}">${opts.map(([id, label]) => `<button class="${v[key] === id ? "on" : ""}" data-val="${id}">${esc(label)}</button>`).join("")}</div>`;
     const groups = {};
     COLOR_SETS.forEach(s => { if (["101", "learned", "learning", "notmet"].includes(s.id)) return; (groups[s.group] = groups[s.group] || []).push(s); });
@@ -233,7 +261,9 @@ function hmHome() {
     const { sh, close } = sheet(`<div class="cx-sh hm-chooser">
       <div class="cx-sh-head"><h3>What to show</h3></div>
       <div class="cx-sec"><b>Stage</b><span>the colors each stage of the path teaches</span></div>
-      <div class="cx-chips hm-stages">${HM_STAGES.map((n, i) => `<button class="cx-chip${v.src === "stage:" + n ? " on" : ""}" data-src="stage:${n}"><b>${i + 1}</b><em>${(n === 100 ? 101 : n).toLocaleString()}</em></button>`).join("")}</div>
+      <div class="cx-chips hm-stages">${HM_STAGES.map((n, i) => `<button class="cx-chip${v.src === "stage:" + n ? " on" : ""}" data-src="stage:${n}"><b>${i + 1}</b><em>${(n === 100 ? 101 : n).toLocaleString()}</em></button>`).join("")}
+        <button class="cx-chip${v.src === "every-name" ? " on" : ""}" data-src="every-name"><b>Name</b><em>${everyNameCount.toLocaleString()}</em></button>
+        ${shadeCount ? `<button class="cx-chip${v.src === "every-shade" ? " on" : ""}" data-src="every-shade"><b>Shade</b><em>${(everyNameCount + shadeCount).toLocaleString()}</em></button>` : ""}</div>
       <div class="cx-sec"><b>Show</b><span>from your own reviews</span></div>
       ${seg("filter", HM_FILTERS)}
       <div class="cx-sec"><b>Style</b><span>how the honeycomb looks</span></div>
@@ -268,7 +298,13 @@ function hmHome() {
   searchInput.addEventListener("input", () => {
     const q = searchInput.value.trim();
     if (!q) return render(true);
-    loadLongNames().then(() => { if (!el.isConnected) return; const hits = searchColors(csItems(), q); if (ctrl) ctrl.update({ items: hits.length ? hits : items, soft: true }); });
+    // every core name, every library name (an alternate/library hit opens its color's page, "also called" shown
+    // there — js/names.js namePage) and every shade (dormant while data/shades.json is empty)
+    Promise.all([loadLongNames(), loadCoreNames(), loadShades()]).then(() => {
+      if (!el.isConnected) return;
+      const hits = searchColors((SHADES || []).length ? hmEveryShadeItems() : hmEveryNameItems(), q);
+      if (ctrl) ctrl.update({ items: hits.length ? hits : items, soft: true });
+    });
   });
 
   // ---------- the camera (js/camera.js's eye()) and the dice: both live in the sheet, next to "Surprise me" ----------
