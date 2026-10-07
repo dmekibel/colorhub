@@ -805,3 +805,30 @@ img{transition:opacity .6s var(--ease)}
 .inst b{display:block;font:400 22px/1.1 var(--serif)}
 .inst span{display:block;color:var(--soft);font-size:14px;margin-top:4px}
 .inst-act{flex:none;display:flex;gap:18px}.inst-act .btn{width:auto;min-height:36px}
+
+/* ---------- peek: a color's story over the flashcards, without leaving them ---------- */
+.peek-btn{display:inline-flex;align-items:center;gap:6px;margin-top:12px;padding:8px 0;font:500 10.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--soft);border-bottom:1px solid var(--rule-2)}
+.card .peek-btn{opacity:0;pointer-events:none;transition:opacity .3s .15s}
+.card.revealed .peek-btn{opacity:1;pointer-events:auto}
+.page .peek-btn{align-self:flex-start;margin-top:8px}
+.peek{position:fixed;inset:0;top:max(28px,var(--top));z-index:30;max-width:540px;margin:0 auto;background:#14130E;border-top:1px solid var(--rule);border-radius:14px 14px 0 0;overflow-y:auto;overscroll-behavior:contain;padding:10px var(--g) 0;animation:sheetIn .42s var(--ease) both;box-shadow:0 -20px 60px rgba(0,0,0,.6)}
+.pk-grab{width:36px;height:3px;background:var(--rule);margin:2px auto 14px;position:relative}
+.pk-grab::before{content:"";position:absolute;inset:-16px -80px}
+.pk-hero{height:min(38dvh,300px);background:var(--c);border-radius:3px;padding:18px;display:flex;flex-direction:column;justify-content:flex-end;gap:6px}
+.pk-hero[data-ink="dark"]{color:#141311}.pk-hero[data-ink="light"]{color:#fff}
+.pk-hero h2{font:400 clamp(44px,13vw,64px)/.92 var(--serif);letter-spacing:-.03em}
+.pk-hero .mono,.pk-hero small{font:500 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;opacity:.72}
+.pk-vs{display:flex;gap:12px;align-items:center;margin-top:16px}
+.pk-vs .pair{display:flex;flex:none}.pk-vs .pair i{width:26px;height:26px;background:var(--c)}
+.pk-vs p{font:400 19px/1.2 var(--serif)}
+.pk-lead{margin-top:14px;font-size:15px;line-height:1.55;color:var(--soft)}
+.pk-sec{margin-top:26px;padding-top:12px;border-top:1px solid var(--rule)}
+.pk-sec h3{font:500 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:10px}
+.pk-sec p{font-size:15px;line-height:1.6;color:var(--ink)}
+.pk-ptgs figure{margin:0}
+.pk-ptgs{display:grid;grid-template-columns:repeat(2,1fr);gap:14px 12px}
+.pk-ptgs img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:2px;background:var(--lift)}
+.pk-ptgs figcaption{display:flex;flex-direction:column;gap:3px;margin-top:6px}
+.pk-ptgs b{font:400 16px/1.15 var(--serif)}
+.pk-ptgs span{font:500 9.5px/1.4 var(--mono);letter-spacing:.06em;color:var(--faint)}
+.pk-foot{position:sticky;bottom:0;margin:28px calc(-1 * var(--g)) 0;padding:14px var(--g) calc(var(--bottom) + 14px);background:linear-gradient(rgba(20,19,14,0),#14130E 30%)}
