@@ -1,12 +1,16 @@
 "use strict";
-// Content files are optional (they grow as the wiki is written): load whatever exists, then start.
-const OPTIONAL_DATA = ["data/wiki-colors.js", "data/wiki-nodes.js", "data/stories.js", "data/paintings.js", "data/images.js"];
+// Start. The first screen draws right away from data/colors.js; the wiki (data/wiki-*.js, stories, paintings,
+// photo credits) loads lazily (loader.js) and is prefetched as soon as that screen is up.
+// An address like #/color/teal opens that screen (router.js).
 // Screenshot mode for design review: index.html#shot=<screen> renders one screen with sample progress
-// (in memory only; nothing is saved). Used by tools/shots.sh.
+// (in memory only; nothing is saved). Used by tools/shots.sh. It waits for the whole wiki first.
 const SHOT = location.hash.startsWith("#shot=") ? decodeURIComponent(location.hash.slice(6)) : null;
-Promise.all(OPTIONAL_DATA.map(src => new Promise(done => {
-  const s = document.createElement("script"); s.src = src; s.onload = s.onerror = done; document.head.appendChild(s);
-}))).then(() => { if (SHOT) return shot(SHOT); S.placed ? go(S.tab || "learn") : welcome(); });
+if (SHOT) loadWiki().then(() => shot(SHOT));
+else {
+  ROUTE_REPLACE = true;   // the first screen takes over the page's own history entry
+  if (!openRoute(location.hash, true)) S.placed ? go(S.tab || "learn") : welcome();
+  prefetchWiki();
+}
 
 function shot(name) {
   S = Object.assign(fresh(), { placed: { tier: 2, at: today() }, done: { "t2-blues": today() } });
@@ -17,7 +21,7 @@ function shot(name) {
     value: { level: 5, best: 4.2, hist: [["a", 11], ["b", 7], ["c", 5.1]], fam: {} },
     neutral: { level: 4.1, best: 3.6, hist: [["a", 7.5], ["b", 4.1]], fam: {} } };
   S.best.lightning = 14;
-  const [screen, arg] = name.split(":"), g = () => graph();
+  const [screen, ...rest] = name.split(":"), arg = rest.join(":"), g = () => graph();   // closeup:c:Teal keeps "c:Teal"
   const later2 = (f, ms) => setTimeout(f, ms);
   switch (screen) {
     case "welcome": return welcome();

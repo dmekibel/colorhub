@@ -469,7 +469,7 @@ function shareCard(c, ok, dateStr) {
   x.fillStyle = "#141414"; x.font = "400 130px 'Instrument Serif', Georgia, serif"; x.fillText(c.n, 104, 1150);
   x.fillStyle = "#66665F"; x.font = "500 32px 'Geist Mono', monospace"; x.fillText(`${c.h}   ·   ${ok ? "named it" : "learned it"} on ColorHub`, 110, 1230);
   const text = `Today's color: ${c.n} ${ok ? "(I named it)" : ""} · ColorHub`;
-  const url = location.origin + location.pathname;
+  const url = shareURL("color/" + routeSlug(c.n));   // the color's own page, with a preview card
   cv.toBlob(async blob => {
     const file = new File([blob], `colorhub-${c.n.toLowerCase().replace(/\s+/g, "-")}.png`, { type: "image/png" });
     try {

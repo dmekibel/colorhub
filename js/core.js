@@ -84,10 +84,50 @@ const addDays = (k, n) => { const [y, m, d] = k.split("-").map(Number); return k
 const KEY = "colorhub-v1";
 // tab: last tab · gym: drill scores and history · daily: color-of-the-day answers · lightning: best score
 const fresh = () => ({ v: 1, placed: null, start: 0, cards: {}, done: {}, tab: "learn", gym: { skills: {}, workouts: {} }, daily: {}, best: {} });
+// Progress is never thrown away. An older save is migrated step by step (bump STATE_V and add a step when the
+// shape changes); a save from a newer version is kept as it is; unknown keys always survive. A save that
+// can't be read is copied aside (KEY + "-unreadable") before anything is written over it.
+const STATE_V = 1;
+function migrateState(d) {
+  if (!d || typeof d !== "object" || Array.isArray(d)) return null;
+  const s = Object.assign(fresh(), d);
+  ["cards", "done", "daily", "best"].forEach(k => { if (!s[k] || typeof s[k] !== "object") s[k] = {}; });
+  if (!s.gym || typeof s.gym !== "object") s.gym = { skills: {}, workouts: {} };
+  s.gym.skills = s.gym.skills || {}; s.gym.workouts = s.gym.workouts || {};
+  if (!(s.v >= 1)) s.v = 1;   // unversioned saves had the v1 shape
+  // future steps go here: if (s.v < 2) { …; s.v = 2; }
+  return s;
+}
 let S;
-try { S = JSON.parse(localStorage.getItem(KEY)); } catch (e) {}
-S = S && S.v === 1 ? Object.assign(fresh(), S) : fresh();
-const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
+try {
+  const raw = localStorage.getItem(KEY);
+  if (raw) { try { S = migrateState(JSON.parse(raw)); } catch (e) { S = null; } if (!S) try { localStorage.setItem(KEY + "-unreadable", raw); } catch (e) {} }
+} catch (e) {}
+S = S || fresh();
+// Saving can fail (storage full, or blocked in a private window). Say so once, with a way to keep a copy.
+let SAVE_WARNED = false;
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { if (!SAVE_WARNED) { SAVE_WARNED = true; setTimeout(saveFailed, 0); } } };
+function saveFailed() {
+  const bar = document.createElement("div");
+  bar.className = "keep-warn"; bar.setAttribute("role", "alert");
+  bar.innerHTML = `<p><b>Your progress isn't saving.</b> This browser's storage is full or blocked (private windows do this). Save a backup file so you don't lose it.</p>
+    <div><button class="btn" data-k="backup">Save a backup</button><button class="icon-btn" data-k="x" aria-label="Dismiss">${ICON.x}</button></div>`;
+  bar.onclick = e => { const b = e.target.closest("[data-k]"); if (!b) return; if (b.dataset.k === "backup") backupProgress(); bar.remove(); };
+  document.body.appendChild(bar);
+}
+// A gentle reminder every ~30 days, once there's real progress, to download a backup (one tap).
+const daysSince = k => k ? Math.round((new Date(today()) - new Date(k)) / 864e5) : Infinity;
+function keepCard() {
+  if (!S.placed || !(Object.keys(S.done).length || Object.keys(S.cards).length >= 10)) return "";
+  if (daysSince(S.backedUp || S.placed.at) < 30 || daysSince(S.keepLater) < 30) return "";
+  return `<section class="inst keep-card"><div><b>Back up your progress</b><span>It lives only on this device. A backup file brings it back on a new phone, or after the browser clears its data.</span></div>
+    <div class="inst-act"><button class="btn ghost" data-keep-save>Save a backup ${ICON.arrow}</button><button class="btn ghost" data-keep-later>Later</button></div></section>`;
+}
+function wireKeep(el) {
+  const card = el.querySelector(".keep-card"); if (!card) return;
+  card.querySelector("[data-keep-save]").onclick = () => { backupProgress(); card.remove(); };
+  card.querySelector("[data-keep-later]").onclick = () => { S.keepLater = today(); save(); card.remove(); };
+}
 
 // ---------- spaced review ----------
 // After a unit, every color is due the next day, so the first gap crosses a night of sleep.
@@ -214,12 +254,9 @@ function show(html, cls = "", tab = null) {
   }
   app.innerHTML = `<div class="screen ${cls}${tab ? " has-tabs" : ""}">${html}</div>${tab ? tabbar(tab) : ""}`;
   document.documentElement.classList.toggle("booth", /\b(deck|drill|station|meet|daily|fixed|eye|cx)\b/.test(cls));
-  // history: a tab's home replaces the current entry; any screen inside adds one, so the phone's back gesture works
-  try {
-    if (tab) history.replaceState({ ch: 1, tab }, "");
-    else if (HIST_POP) history.replaceState({ ch: 1 }, "");
-    else history.pushState({ ch: 1 }, "");
-  } catch (e) {}
+  // history: a tab's home replaces the current entry; any screen inside adds one, so the phone's back gesture works.
+  // The entry carries the screen's address (#/color/teal…) and the page title: router.js.
+  routeCommit(tab);
   if (tab) wireTabbar(tab);
   window.scrollTo(0, 0); document.body.classList.remove("scrolled");
   const el = app.firstElementChild;
@@ -259,9 +296,10 @@ function wireTabbar(active) {
 // Back gesture / browser back: close a sheet or panel first; otherwise press the screen's own back or close
 // button (so each screen keeps its own idea of "back"); with none, return to the current tab's home.
 let HIST_POP = false;
-addEventListener("popstate", () => {
+addEventListener("popstate", e => {
+  if (!e.state && /^#\/./.test(location.hash)) return;   // a typed or linked address, not Back: router.js opens it
   const over = document.querySelector(".peek [data-back], .sheet");
-  if (over) { if (over.matches(".sheet")) document.querySelector(".scrim")?.dispatchEvent(new PointerEvent("pointerdown")); else over.click(); try { history.pushState({ ch: 1 }, ""); } catch (e) {} return; }
+  if (over) { if (over.matches(".sheet")) document.querySelector(".scrim")?.dispatchEvent(new PointerEvent("pointerdown")); else over.click(); try { history.pushState({ ch: 1 }, "", ROUTE_NOW || undefined); } catch (e) {} return; }
   const btn = app.querySelector("[data-back], [data-close]");
   HIST_POP = true;
   try { if (btn) btn.click(); else if (!app.querySelector(".tabbar")) go(S.tab || "learn"); } finally { HIST_POP = false; }
