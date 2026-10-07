@@ -201,6 +201,26 @@ Ends with a lesson score and Next.
 - Built from look-alike groups; Learn it works on any ladder color.
 - Progress shows both tiers: "Core 64/101 · Library 212/~1,000"; the top of the ladder = "master colorist".
 
+## 14. Belts and fields (approved in principle 2026-10-08; replaces the fixed 4-level ladder in §13)
+**Belts** (small steps; each ends with an honest no-hint test: name + pick the colors, one eye drill with them, a camera mission
+to find 3 of them in the world):
+White = the 11 basics (quick check) · Yellow 10 · Orange 20 · Green 30 · Blue 50 · Purple 100 (full core) · Brown 250 ·
+Black 500 · Master ~1,000 (every distinct named color, one primary name each, see §13).
+**Ordering logic (same for all belts):** usefulness first (xkcd frequency, everyday usage), then coverage (each belt fills the
+biggest gaps in the color map, so it fills evenly), then distinctness (no near-twins in one belt), niche/traditional last.
+Use research/COLOR-SELECTION.md as the starting point.
+**Fields** (asked at the start, editable any time, several allowed): painter · digital artist/illustrator · graphic/UI/brand
+designer · filmmaker/photographer/colorist · interior designer/architect · fashion/textile · just curious.
+- Trunk and branches: Yellow-Green (first 30) mostly shared; higher belts move each field's key words earlier and emphasize
+  its Train stations, Studio tools and World content (painter: earth/pigment names, value, mixing, Zorn, masses; digital:
+  screen colors, skin/sky, palettes; designer: neutrals, contrast, critique, exports; film/photo: skin, sky, teal-orange, casts,
+  Kelvin, shot matching; interior: whites/off-whites/greiges, wood/stone, undertones, light; fashion: camel/burgundy/blush/
+  nude/khaki/plum, seasonal palettes, fashion history).
+- Several fields: blend and interleave their lists; shared words once; belts never get longer, only the mix changes.
+- Applied tasks per field at the end of each belt (mix it, build a palette that passes contrast, grade toward it, pick the right
+  white for a room...), plus the camera mission.
+**Build:** the ordering (data, S-M, Sonnet) + belt UI/tests/field choice (M, Sonnet) as the chapters of the path (§1).
+
 ## Also queued
 - World: Botany (in progress), then Gems.
 - Color-list swaps from research/COLOR-SELECTION.md (Bistre, Stone, Green grey, Rose, Grape, Seafoam; Terracotta and Tangerine hex fixes; cross-unit near-twin check).
