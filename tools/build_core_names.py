@@ -378,6 +378,14 @@ def main():
             entry["notes"] = c["notes"][:NOTES_CAP]
         out.append(entry)
 
+    # hand-picked plain names (tools/core-name-overrides.json) win last; the generated name stays as a synonym
+    ov = json.loads((ROOT / "tools" / "core-name-overrides.json").read_text(encoding="utf-8"))
+    for e in out:
+        nn = ov.get(e["h"].upper())
+        if nn and nn != e["n"]:
+            e["also"] = [e["n"]] + [a for a in (e.get("also") or []) if a.lower() != nn.lower()][:9]
+            e["n"] = nn
+
     # sanity check: no two primaries are now identical
     seen_names = {}
     dupes = []
