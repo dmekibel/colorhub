@@ -82,6 +82,13 @@ sheets close on swipe-down
 - the color mind profile; an adaptive coach ("you confuse teal and cerulean"); explain my miss
 
 ## Smaller fixes noted
+- **Core-names quality pass:**
+  - "Seafoam Green" is #E9E0B7, a pale cream (its alternate names include Lemon Meringue), so the name and the color disagree.
+  - Typos: "Liliac", "Terracota".
+  - About 386 compound names (Light X, Dark X, repeats).
+  - The draft teaching order goes alphabetical after word ~140.
+- **Maerz & Paul:** 825 chips are extracted, but OCR merged some neighboring cells into fake names ("Maracail Domingc"). Add a filter that catches text bleeding in from a neighboring cell, or do a manual pass, then run merge_maerz_paul() (a trial merge added 212 new colors).
+- **The analysis engine is too dark for Sargent.** His 37 archive paintings are mostly dark portraits (no watercolors), so his signature reads "Ink". Add more sources, e.g. watercolors from the Brooklyn Museum and the Met.
 - Globe style (lab only for now): colors bunch up on the sphere and leave bare patches. Fix: place points evenly (a Fibonacci sphere) and assign colors to them by hue → longitude, lightness → latitude, then bring it back to the home styles.
 - Gamut wheel and saved-palette screens don't join the one-step Back yet; photos can't be renamed yet.
 - Rerun "Every shade" after the dictionary import (the tool is ready; the stop appears when data exists).
