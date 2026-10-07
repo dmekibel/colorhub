@@ -11,7 +11,7 @@ Promise.all(OPTIONAL_DATA.map(src => new Promise(done => {
 function shot(name) {
   S = Object.assign(fresh(), { placed: { tier: 2, at: today() }, done: { "t2-blues": today() } });
   const pool = ALL.slice().sort((a, b) => a.id.localeCompare(b.id)).filter((_, i) => i % 3 === 0);
-  pool.slice(0, 30).forEach((c, i) => { S.cards[c.id] = { b: 1, due: addDays(today(), 3), own: i < 24 }; });
+  pool.slice(0, 30).forEach((c, i) => { S.cards[c.id] = { b: 1, due: addDays(today(), 3), own: i < 24, ownBy: i < 18 ? "pick" : "swipe" }; });
   S.gym.skills = { hue: { level: 2.6, best: 2.4, hist: [["a", 7], ["b", 5.2], ["c", 3.9], ["d", 3.1], ["e", 2.6]], fam: { Blues: 2.1, Reds: 2.8, Greens: 3.4, Greys: 1.9 } },
     temp: { level: 4.8, best: 4.6, hist: [["a", 9], ["b", 6.4], ["c", 4.8]], fam: {} },
     value: { level: 5, best: 4.2, hist: [["a", 11], ["b", 7], ["c", 5.1]], fam: {} },
@@ -37,6 +37,7 @@ function shot(name) {
     case "lab": return LAB[arg || "harmony"]();
     case "taste": return tasteShot(arg);
     case "say": case "make": case "intro": return prodShot(screen, arg);   // say:<empty|typed|right|close|wrong|gave>, make:<picking|result>, intro:<say|make>
+    case "pick": case "place": case "exp": return pickShot(screen, arg);   // pick:<ask|right|wrong>, place:<ask|result>, exp:<about|test|done>
     case "colors": {   // older hook: colors:<set id>:<view id>:<act>, read through the old S.cb shape
       const [, set, view, act] = name.split(":"), def = COLOR_SETS.find(x => x.id === (set || "101")) || COLOR_SETS[0];
       S.lens = "spectrum"; S.cb = { preset: def.id, state: JSON.parse(JSON.stringify(def.state)), view: view || "map" };

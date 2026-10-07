@@ -1,0 +1,51 @@
+/* Pick it: a name on paper, four close shades under it. Review cards, placement and the self-test. See js/pickit.js.
+   Reuses the deck's card and footer, and produce.css's .verdict colors. */
+.card.pick{display:flex;flex-direction:column;background:#0E0D0B;touch-action:manipulation;cursor:default}
+.card.pick.next{background:var(--paper)}
+.pi-q{flex:none;background:var(--paper);color:var(--paper-ink);padding:14px 18px 16px}
+.pi-q .eyebrow{display:flex;align-items:center;gap:7px;color:var(--paper-soft)}
+.pi-q .eyebrow.verdict{margin:0}
+.pi-q b{display:block;font:400 clamp(44px,13vw,60px)/.95 var(--serif);letter-spacing:-.03em;margin-top:8px;text-wrap:balance}
+.pi-line{font-size:14px;line-height:1.4;color:#3A3832;text-wrap:pretty;margin:0}
+.pi-line:not(:empty){margin-top:10px;padding-top:10px;border-top:1px solid var(--paper-line)}
+.pi-grid{flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:2px;padding-top:2px}
+.pi-sw{position:relative;background:var(--c);border:0;border-radius:0;transition:transform .25s var(--spring),opacity .3s,box-shadow .25s}
+.pi-sw:active{transform:scale(.97)}
+.pi-k{position:absolute;top:10px;right:12px;font-style:normal;font-size:10.5px;color:rgba(255,255,255,.55);mix-blend-mode:difference;display:none}
+@media (pointer:fine){.pi-k{display:block}.picked .pi-k{display:none}}
+.pi-tag{position:absolute;left:10px;bottom:10px;max-width:calc(100% - 20px);background:var(--paper);color:var(--paper-ink);padding:6px 9px 5px;
+  font:400 19px/1.05 var(--serif);text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 6px 20px -8px rgba(0,0,0,.5);
+  opacity:0;transform:translateY(6px);transition:opacity .25s,transform .35s var(--ease);pointer-events:none}
+/* after the tap: every swatch is named and the answer is ringed. Colors stay untouched, so they can be compared. */
+.picked .pi-tag{opacity:1;transform:none}
+.picked .pi-sw:nth-child(2) .pi-tag{transition-delay:.04s}.picked .pi-sw:nth-child(3) .pi-tag{transition-delay:.08s}.picked .pi-sw:nth-child(4) .pi-tag{transition-delay:.12s}
+.picked .pi-sw.ans{box-shadow:inset 0 0 0 4px var(--paper)}
+.picked .pi-sw.ans .pi-tag{font-weight:400;padding-left:24px;background:var(--paper) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232D7448' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4.5 12.5l5 5L19.5 7'/%3E%3C/svg%3E") 8px 50%/12px no-repeat}
+.picked .pi-sw.chosen:not(.ans) .pi-tag{padding-left:24px;background:var(--paper) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23A8442F' stroke-width='3.2' stroke-linecap='round'%3E%3Cpath d='M6 6l12 12M18 6L6 18'/%3E%3C/svg%3E") 8px 50%/11px no-repeat}
+/* blind mode (self-test): only a brief ring on the tapped one */
+.card.pick:not(.picked) .pi-sw.chosen{box-shadow:inset 0 0 0 4px var(--ink)}
+.pi-foot{flex-direction:column;gap:0}
+.pi-hint{font:500 10.5px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-align:center;text-wrap:balance;max-width:30ch}
+
+/* placement intro (how): the three steps */
+.demo.pi-demo-name{background:var(--paper);display:flex;align-items:flex-end;padding:8px 9px}
+.demo.pi-demo-name b{font:400 26px/1 var(--serif);color:var(--paper-ink)}
+.demo.pi-demo{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#0E0D0B}
+.demo.pi-demo i{background:var(--c);position:relative}
+.demo.pi-demo i:first-child{animation:piPulse 2.4s var(--ease) infinite}
+@keyframes piPulse{0%,55%,100%{box-shadow:none}62%,90%{box-shadow:inset 0 0 0 3px var(--paper)}}
+.demo.pi-demo.done i:first-child{animation:none;box-shadow:inset 0 0 0 3px var(--paper)}
+.demo.pi-demo.done i:not(:first-child){opacity:.5}
+.demo.pi-demo em{position:absolute;left:50%;top:50%;width:18px;height:18px;margin:-9px;border-radius:50%;background:var(--paper);color:#2D7448;display:grid;place-items:center}
+.demo.pi-demo em svg{width:10px;height:10px}
+
+/* honest counts */
+.own-line{margin:-14px 0 22px;max-width:40ch}
+.sheet p.own-n{font:500 10.5px/1.7 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.sheet p.exp-day{font-size:10.5px;margin:0}
+.exp-h{margin-top:26px!important}
+.exp-tab{display:grid;grid-template-columns:1.1fr 1fr 1fr;border-top:1px solid var(--rule);margin:8px 0 18px}
+.exp-tab>*{padding:10px 0;border-bottom:1px solid var(--rule);font:500 10.5px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--soft)}
+.exp-tab>b{color:var(--ink);font-weight:500}
+.exp-tab>span:nth-child(n+4):not(:nth-child(3n+1)){font:400 26px/1 var(--serif);letter-spacing:-.01em;text-transform:none;color:var(--ink)}
+.result .exp-tab{margin-bottom:22px}

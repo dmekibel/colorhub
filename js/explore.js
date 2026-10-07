@@ -40,7 +40,7 @@ function pin(n, extra = {}) {
   if (n.kind === "color") {
     const h = extra.h || 150 + (hash(n.id) % 4) * 26, st = n.c.id && S.cards[n.c.id];
     const cap = extra.cap != null ? extra.cap : n.wiki && n.wiki.since ? fmtYear(n.wiki.since) : n.wiki && NAMED_LABEL[n.wiki.named] ? NAMED_LABEL[n.wiki.named] : "";
-    return { h: h + (why ? 44 : 0), html: `<button class="pin pin-color" data-pin="${id}"><span class="pc" style="--c:${n.h};height:${h}px" data-ink="${ink(n.h)}">${badge}${st && st.own ? '<i class="own-dot" title="Yours"></i>' : ""}<b>${esc(n.title)}</b>${cap ? `<small>${esc(cap)}</small>` : ""}</span>${why}</button>` };
+    return { h: h + (why ? 44 : 0), html: `<button class="pin pin-color" data-pin="${id}"><span class="pc" style="--c:${n.h};height:${h}px" data-ink="${ink(n.h)}">${badge}${isMine(st) ? '<i class="own-dot" title="Yours"></i>' : ""}<b>${esc(n.title)}</b>${cap ? `<small>${esc(cap)}</small>` : ""}</span>${why}</button>` };
   }
   if (n.kind === "painting") {
     const ar = n.w && n.h ? n.h / n.w : .78, src = n.thumb || n.img;
@@ -197,7 +197,7 @@ function closeup(n, opts = {}) {
     : n.kind === "painting" ? n.note || "" : n.kind === "story" ? n.dek : n.stub ? "" : n.dek || (n.body && n.body[0]) || "";
   const st = n.kind === "color" && n.c.id && S.cards[n.c.id];
   const hero = n.kind === "color"
-    ? `<div class="z-hero z-color" style="--c:${n.h}" data-ink="${ink(n.h)}"><span class="eyebrow">${n.c.basic ? "Basic color word" : st ? (st.own ? "Yours" : "Learning") : n.c.unit ? esc(unitLabel(n.c.unit)) : ""}</span><h1>${esc(n.title)}</h1><span class="mono">${n.h}</span></div>`
+    ? `<div class="z-hero z-color" style="--c:${n.h}" data-ink="${ink(n.h)}"><span class="eyebrow">${n.c.basic ? "Basic color word" : st ? (isMine(st) ? "Yours" : "Learning") : n.c.unit ? esc(unitLabel(n.c.unit)) : ""}</span><h1>${esc(n.title)}</h1><span class="mono">${n.h}</span></div>`
     : n.kind === "painting" ? `<div class="z-hero z-art">${n.img ? `<img src="${esc(n.img)}" alt="${esc(n.title)}">` : ""}${(n.palette || []).length ? `<span class="z-pal">${n.palette.map(c => `<i style="--c:${c.h};flex:${c.share}"></i>`).join("")}</span>` : ""}</div><h1 class="z-title">${esc(n.title)}</h1><p class="z-meta">${esc(n.artist || "")}${n.year ? " · " + esc(n.year) : ""}</p>`
     : n.kind === "story" ? `<div class="z-hero z-story" style="--g:linear-gradient(150deg,${n.cover.join(",")})"><span class="eyebrow">Story · ${n.slides.length} slides</span><h1>${esc(n.title)}</h1></div>`
     : `<div class="z-hero z-page">${(n.swatches || []).length ? n.swatches.slice(0, 7).map(x => `<i style="--c:${x.h}"><span data-ink="${ink(x.h)}">${esc(x.label || "")}</span></i>`).join("") : `<i style="--c:${nodeColor(n) || "#2c2c2c"}"></i>`}</div><p class="eyebrow z-type">${esc(TYPE_LABEL[n.type] || "Page")}</p><h1 class="z-title">${esc(n.title)}</h1>`;
@@ -327,7 +327,7 @@ function codeRows(hex) {
 
 function colorPage(n) {
   const c = n.c, w = n.wiki, nb = neighbor(c), st = c.id && S.cards[c.id];
-  const status = c.basic ? "One of the eleven basic color words" : st ? (st.own ? "Yours: you recalled it after a day" : "Learning: it's in your reviews") : `Not learned yet · ${c.unit ? unitLabel(c.unit) : ""}`;
+  const status = c.basic ? "One of the eleven basic color words" : st ? (isMine(st) ? "Yours: you picked or named it right a day or more later" : st.own || st.placed ? "In your reviews: a quick check makes it yours" : "Learning: it's in your reviews") : `Not learned yet · ${c.unit ? unitLabel(c.unit) : ""}`;
   const el = show(`
     ${artTop(n)}
     <div class="c-hero" style="--c:${c.h}" data-ink="${ink(c.h)}"><p class="eyebrow">${esc(status)}</p><h1>${esc(c.n)}</h1></div>

@@ -99,17 +99,21 @@ function learnUnit(u) {
   S.done[u.id] = t;
   save();
 }
-function schedule(c, ok) {
+// by: what graded it. "swipe" (self-graded practice) or a check ("pick" | "say" | "make"); only a check, a day or more
+// after learning, makes a name yours (pickOwn in pickit.js).
+function schedule(c, ok, by = "swipe") {
   const st = S.cards[c.id]; if (!st) return;
   const t = today();
-  if (ok) { st.b = Math.min(st.b + 1, INTERVALS.length - 1); st.due = addDays(t, INTERVALS[st.b]); st.own = true; }
-  else { st.b = 0; st.due = addDays(t, 1); st.own = false; }
+  if (ok) { st.b = Math.min(st.b + 1, INTERVALS.length - 1); st.due = addDays(t, INTERVALS[st.b]); }
+  else { st.b = 0; st.due = addDays(t, 1); }
+  pickOwn(st, ok, by, t);
   st.last = t;
   save();
 }
 const dueList = () => { const t = today(); return ALL.filter(c => S.cards[c.id] && S.cards[c.id].due <= t).sort((a, b) => S.cards[a.id].due.localeCompare(S.cards[b.id].due)); };
-// "Owned" = recalled right, unassisted, a day or more after learning. That is the only progress number.
-const ownedCount = () => ALL.filter(c => S.cards[c.id] && S.cards[c.id].own).length;
+// "Yours" = picked or named right (an objective check), a day or more after learning. That is the only progress number.
+// Self-graded swipes don't count (isMine in pickit.js).
+const ownedCount = () => ALL.filter(c => isMine(S.cards[c.id])).length;
 const nextUnit = () => UNITS.find(u => u.i >= S.start && !S.done[u.id]) || null;
 const unitLabel = u => `Unit ${u.i + 1} · ${D.tiers[u.tier].short}`;
 

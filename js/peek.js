@@ -27,7 +27,7 @@ function peek(c) {
   box.className = "peek"; box.setAttribute("role", "dialog"); box.setAttribute("aria-label", "About " + c.n);
   box.innerHTML = `
     <div class="pk-grab"></div>
-    <div class="pk-hero" style="--c:${c.h}" data-ink="${ink(c.h)}"><span class="mono">${c.h}</span><h2>${esc(c.n)}</h2>${st ? `<small>${st.own ? "Yours" : "Learning"}</small>` : ""}</div>
+    <div class="pk-hero" style="--c:${c.h}" data-ink="${ink(c.h)}"><span class="mono">${c.h}</span><h2>${esc(c.n)}</h2>${st ? `<small>${isMine(st) ? "Yours" : "Learning"}</small>` : ""}</div>
     ${nb && c.d ? `<div class="pk-vs"><span class="pair"><i style="--c:${c.h}"></i><i style="--c:${nb.h}"></i></span><p>${esc(c.d)}</p></div>` : ""}
     ${c.o ? `<p class="pk-lead">${esc(c.o)}</p>` : ""}
     ${typeof figHTML === "function" ? figHTML(c.n) : ""}

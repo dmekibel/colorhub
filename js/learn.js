@@ -55,24 +55,24 @@ function how() {
   const el = show(`
     <header class="bar"><button class="icon-btn" data-back aria-label="Back">${ICON.x}</button></header>
     <div>
-      <p class="eyebrow">Placement · 60 seconds</p>
+      <p class="eyebrow">Placement · about 60 seconds</p>
       <h1>How many colors can you name?</h1>
-      <p class="sub">No typing. Just be honest with yourself.</p>
+      <p class="sub">No typing, no honor system: you pick, the app checks.</p>
     </div>
     <div class="steps">
-      <div class="step"><div class="demo" style="--c:#008080"></div><div><b>Name it in your head</b><span>A color fills the card.</span></div></div>
-      <div class="step"><div class="demo" style="--c:#008080"><div class="tap"></div><div class="mini-label">Teal</div></div><div><b>Tap to check</b><span>The name appears.</span></div></div>
-      <div class="step"><div class="demo swipe" style="--c:#008080"><div class="mini-label">Teal</div></div><div><b>Swipe right if you knew it</b><span>Left if you didn't.</span></div></div>
+      <div class="step"><div class="demo pi-demo-name"><b>Teal</b></div><div><b>A name appears</b><span>Everyday names first, then the designer's.</span></div></div>
+      <div class="step"><div class="demo pi-demo">${["#008080", "#40826D", "#1F5F7A", "#00555A"].map(h => `<i style="--c:${h}"></i>`).join("")}</div><div><b>Tap its color</b><span>Four close shades. One is right.</span></div></div>
+      <div class="step"><div class="demo pi-demo done">${["#008080", "#40826D", "#1F5F7A", "#00555A"].map((h, i) => `<i style="--c:${h}">${i ? "" : `<em>${ICON.checkS}</em>`}</i>`).join("")}</div><div><b>Pass a level, skip it</b><span>Skipped colors still get checked in a week.</span></div></div>
     </div>
     <button class="btn" data-go style="margin-top:22px">Start ${ICON.arrow}</button>
   `, "how");
   el.querySelector("[data-back]").onclick = () => S.placed ? home() : welcome();
-  el.querySelector("[data-go]").onclick = () => deck("place");
-  onKey = e => { if (e.key === "Enter") deck("place"); };
+  el.querySelector("[data-go]").onclick = () => pickPlace();
+  onKey = e => { if (e.key === "Enter") pickPlace(); };
 }
 
 // ======================================================================
-// The deck. mode: "place" (placement test), "learn" (a unit), "review" (spaced review)
+// The deck. mode: "learn" (a unit), "review" (spaced review). Placement is pickPlace() in pickit.js.
 // ======================================================================
 function sampleTier(t, n) {
   const pools = shuffle(UNITS.filter(u => u.tier === t)).map(u => shuffle(u.colors));
@@ -83,31 +83,27 @@ function sampleTier(t, n) {
 
 function deck(mode, opts = {}) {
   let queue = [];
-  if (mode === "place") {
-    // no basics: every English speaker knows red and blue, so the test starts on the in-betweens
-    queue = sampleTier(2, 10).map(c => ({ c, dir: "f", stage: 2 }));
-  } else if (mode === "learn") {
+  if (mode === "learn") {
     queue = shuffle(opts.unit.colors).map(c => ({ c, dir: "f" }));
   } else {
     // Reverse cards (name to color) join once a color has been recalled at least once.
     queue = dueList().slice(0, 30).map(c => ({ c, dir: S.cards[c.id].b % 2 ? "r" : "f" }));
     // A few become production cards (type the name, or build the color): see produce.js
     if (typeof prodMix === "function") queue = prodMix(queue, opts.force);
+    // Names not confirmed yet get a one-tap Pick it check (pickit.js); swipes alone never make a name yours
+    if (typeof pickMix === "function") queue = pickMix(queue, opts.force);
   }
   if (!queue.length) return home();
 
   const uniq = [...new Map(queue.map(it => [it.c.id, it.c])).values()];
   const first = new Map();          // id -> right on first try?
-  const log = [];                   // placement answers
-  let cur = null, nxt = null, revealed = false, busy = false, ended = false, extended = false;
+  let cur = null, nxt = null, revealed = false, busy = false, ended = false;
   let prod = null, lastProd = false;   // the live production card (Say it / Make it), and whether the last card was one
 
   const el = show(`
     <header class="deck-top">
       <button class="icon-btn" data-close aria-label="Close">${ICON.x}</button>
-      ${mode === "place"
-        ? `<div class="timer" id="timer"><i></i></div>`
-        : `<div class="segs">${uniq.map(c => `<i data-id="${esc(c.id)}" style="--c:${c.h}"></i>`).join("")}</div>`}
+      <div class="segs">${uniq.map(c => `<i data-id="${esc(c.id)}" style="--c:${c.h}"></i>`).join("")}</div>
       <span class="left mono" id="left"></span>
     </header>
     <div class="stage" id="stage"></div>
@@ -116,13 +112,11 @@ function deck(mode, opts = {}) {
   const stage = el.querySelector("#stage"), foot = el.querySelector("#foot"), left = el.querySelector("#left");
   el.querySelector("[data-close]").onclick = () => { ended = true; S.placed ? home() : welcome(); };
 
-  if (mode === "place") later(() => { if (!ended) finish(); }, 60000);
-
   const keyOfItem = it => it.c.id + "|" + it.dir + (it.kind ? "|" + it.kind : "");
   const plain = it => ({ c: it.c, dir: it.dir });
   function cardEl(it, isNext) {
-    if (it.kind) return prodCardEl(it, isNext, keyOfItem(it));
-    const c = it.c, nb = mode === "place" ? null : neighbor(c);
+    if (it.kind) return (it.kind === "pick" ? pickCardEl : prodCardEl)(it, isNext, keyOfItem(it));
+    const c = it.c, nb = neighbor(c);
     const d = document.createElement("div");
     d.className = "card" + (it.dir === "r" ? " rev" : "") + (isNext ? " next" : "");
     d.dataset.key = keyOfItem(it);
@@ -135,7 +129,7 @@ function deck(mode, opts = {}) {
         <div class="meta"><span>${esc(meta)}</span><span>${c.h}</span></div>
         <h2>${esc(c.n)}</h2>
         ${nb && c.d ? `<div class="vs"><span class="pair"><i style="--c:${c.h}"></i><i style="--c:${nb.h}"></i></span><p>${esc(c.d)}</p></div>` : ""}
-        ${mode !== "place" ? peekBtn(c) : ""}
+        ${peekBtn(c)}
       </div>
       <div class="stamp yes">${ICON.checkS}Got it</div><div class="stamp no">${ICON.xS}Again</div>`;
     return d;
@@ -152,9 +146,9 @@ function deck(mode, opts = {}) {
     nxt = queue[1] ? cardEl(queue[1], true) : null;
     if (nxt) stage.insertBefore(nxt, cur);
     revealed = false;
-    if (queue[0].kind) prod = prodMount(cur, queue[0], foot, { el, done: ok => { revealed = true; fly(ok); } });
+    if (queue[0].kind) prod = (queue[0].kind === "pick" ? pickMount : prodMount)(cur, queue[0], foot, { el, done: ok => { revealed = true; fly(ok); } });
     else { bind(cur); setFoot(); }
-    left.textContent = mode === "place" ? "" : String(queue.length);
+    left.textContent = String(queue.length);
   }
 
   function setFoot() {
@@ -240,27 +234,17 @@ function deck(mode, opts = {}) {
     const id = it.c.id, firstTry = !first.has(id);
     lastProd = !!it.kind;
     if (firstTry) first.set(id, ok);
-    if (mode === "place") {
-      log.push({ c: it.c, ok, stage: it.stage });
-      // Strong on the in-betweens? Then test the designer's vocabulary too.
-      if (!extended && it.stage === 2 && !queue.some(q => q.stage === 2)) {
-        extended = true;
-        const t2 = log.filter(x => x.stage === 2);
-        if (t2.filter(x => x.ok).length / t2.length >= .7) queue.push(...sampleTier(3, 10).map(c => ({ c, dir: "f", stage: 3 })));
-      }
-    } else {
-      if (mode === "review" && firstTry) schedule(it.c, ok);
-      if (ok) { const seg = el.querySelector(`.segs i[data-id="${CSS.escape(id)}"]`); if (seg) seg.classList.add("on"); }
-      else queue.splice(Math.min(2, queue.length), 0, it.kind ? plain(it) : it); // comes back after two other cards, as a swipe card
-    }
+    // a swipe is practice (self-graded); Pick it / Say it / Make it are checks that can make the name yours
+    if (mode === "review" && firstTry) schedule(it.c, ok, it.kind || "swipe");
+    if (ok) { const seg = el.querySelector(`.segs i[data-id="${CSS.escape(id)}"]`); if (seg) seg.classList.add("on"); }
+    else queue.splice(Math.min(2, queue.length), 0, it.kind ? plain(it) : it); // comes back after two other cards, as a swipe card
     mount();
   }
 
   function finish() {
-    if (ended && mode !== "place") return;
+    if (ended) return;
     ended = true;
     const firstRight = [...first.values()].filter(Boolean).length;
-    if (mode === "place") return placed(log);
     if (mode === "learn") { learnUnit(opts.unit); return unitDone(opts.unit, firstRight, first.size); }
     return reviewDone(firstRight, first.size);
   }
@@ -278,18 +262,23 @@ function deck(mode, opts = {}) {
 // ======================================================================
 // Placement result
 // ======================================================================
+// A tier is skipped only when it was passed objectively (placeVerdict in pickit.js). Its colors join reviews as
+// "known (placed)" and are checked a week later. The last tier is never skipped: the path needs somewhere to start.
 function placed(log) {
   const t2 = log.filter(x => x.stage === 2), t3 = log.filter(x => x.stage === 3);
-  const r2 = t2.length ? t2.filter(x => x.ok).length / t2.length : 0;
-  const tier = t2.length >= 5 && r2 >= .7 ? 3 : 2;
+  const pass2 = placeVerdict(t2) === true, pass3 = pass2 && placeVerdict(t3) === true;
+  const tier = pass2 ? 3 : 2;
   S.placed = { tier, at: today() };
   S.start = tier === 3 ? FIRST_T3 : 0;
+  const skipped = pass2 ? placeSkip(2) : 0;
   save();
   const k2 = t2.filter(x => x.ok).length, k3 = t3.filter(x => x.ok).length;
   const lede = !t2.length
-    ? "Time ran out before the real test began, so you start at the beginning."
-    : `You named ${k2} of ${t2.length} everyday in-betweens` + (t3.length ? ` and ${k3} of ${t3.length} designer's words.` : ".") +
-      (tier === 3 ? " You skip ahead to the precise vocabulary." : " You start with the words between the basics.");
+    ? "Time ran out before the test began, so you start at the beginning."
+    : `You picked ${k2} of ${t2.length} everyday in-betweens` + (t3.length ? ` and ${k3} of ${t3.length} designer's words.` : ".") +
+      (tier === 3 ? ` You skip ahead to the precise vocabulary.${skipped ? ` The ${skipped} in-betweens you skipped come back for a quick check in a week, so none slip through.` : ""}`
+        : " You start with the words between the basics.") +
+      (pass3 ? " You know many designer's words already, so those units will go quickly." : "");
   const shown = [...t2, ...t3];
   const el = show(`
     <header class="bar"><div class="brand">${LOGO}<span>ColorHub</span></div></header>
@@ -307,6 +296,7 @@ function placed(log) {
 // Meet the unit: a vertical pager, one color per screen, each shown beside its neighbor.
 // ======================================================================
 function meet(u) {
+  u = expUnit(u);   // the self-test (off by default) holds 3 colors back from practice: pickit.js
   const n = u.colors.length;
   const page = (c, i) => {
     const nb = neighbor(c);
@@ -371,11 +361,14 @@ function unitDone(u, right, total) {
     <p class="eyebrow">${esc(unitLabel(u))}</p>
     <h1>${esc(u.title)}, <em>named.</em></h1>
     <p class="lede">${right} of ${total} on the first try. They come back tomorrow for a quick review: recalling them after a night's sleep is what makes them stick.</p>
+    <p class="fine own-line">${OWN_LINE}</p>
     <div class="stack">
       ${nu ? `<button class="btn" data-next>Next: ${esc(nu.title)} ${ICON.arrow}</button>` : ""}
+      ${expNudge()}
       <button class="btn ghost" data-home>Home</button>
     </div>
   `, "result");
+  expWireNudge(el);
   const nb = el.querySelector("[data-next]");
   if (nb) nb.onclick = () => meet(nu);
   el.querySelector("[data-home]").onclick = home;
@@ -383,21 +376,24 @@ function unitDone(u, right, total) {
 }
 
 function reviewDone(right, total) {
-  const nu = nextUnit();
+  const nu = nextUnit(), selfN = ownCounts().self;
   const el = show(`
     <div style="flex:1"></div>
     <p class="eyebrow">Daily review</p>
     <h1>Review <em>done.</em></h1>
     <div class="stat-row">
       <div class="stat"><b>${right}/${total}</b><span>right on the first try</span></div>
-      <div class="stat"><b>${ownedCount()}</b><span>color names you own</span></div>
+      <div class="stat"><b>${ownedCount()}</b><span>yours${selfN ? ` · ${selfN} to confirm` : ""}</span></div>
     </div>
     <p class="lede">The ones you knew come back in a few days, then in weeks. The misses come back tomorrow.</p>
+    <p class="fine own-line">${OWN_LINE} Swipes are practice.</p>
     <div class="stack">
       ${nu ? `<button class="btn" data-next>Continue: ${esc(nu.title)} ${ICON.arrow}</button>` : ""}
+      ${expNudge()}
       <button class="btn ghost" data-home>Home</button>
     </div>
   `, "result");
+  expWireNudge(el);
   const nb = el.querySelector("[data-next]");
   if (nb) nb.onclick = () => meet(nu);
   el.querySelector("[data-home]").onclick = home;
@@ -413,7 +409,7 @@ const pad2 = n => String(n).padStart(2, "0");
 function home() {
   if (!S.placed) return welcome();
   const due = dueList(), nu = nextUnit(), owned = ownedCount(), dc = dailyColor(), dAns = S.daily[today()];
-  const mine = ALL.filter(c => S.cards[c.id] && S.cards[c.id].own), lrn = ALL.filter(c => S.cards[c.id] && !S.cards[c.id].own);
+  const mine = ALL.filter(c => isMine(S.cards[c.id])), lrn = ALL.filter(c => S.cards[c.id] && !isMine(S.cards[c.id]));
   const hueKey = c => { const [L, C, H] = lch(c.h); return C < 12 ? 1000 + (100 - L) : (H + 330) % 360 + (100 - L) / 400; };
   mine.sort((a, b) => hueKey(a) - hueKey(b)); lrn.sort((a, b) => hueKey(a) - hueKey(b));
   // the collection: owned names fill a quilt from the top in hue order; names in review follow, faint
@@ -446,7 +442,7 @@ function home() {
     <button class="collection" data-palette aria-label="Your collection">
       <div class="coll-head"><span class="eyebrow">Your collection</span><span class="coll-n"><b data-count="${owned}">${owned}</b><small>/${ALL.length}</small></span></div>
       <div class="quilt">${quilt}</div>
-      <div class="coll-foot"><span>${lrn.length ? `${lrn.length} in review` : "Recalled a day later"}</span><span>Spectrum →</span></div>
+      <div class="coll-foot"><span>${ownFoot()}</span><span>Spectrum →</span></div>
     </button>
     ${installHint()}
   `, "home", "learn");
@@ -468,7 +464,7 @@ function drawSky(host) {
   const pts = mapPoints();
   const svg = pts.map(p => {
     const st = S.cards[p.c.id], x = p.x.toFixed(1), y = p.y.toFixed(1);
-    if (st && st.own) return `<circle cx="${x}" cy="${y}" r="9" fill="${p.c.h}" opacity=".55" filter="url(#glow)"/><circle cx="${x}" cy="${y}" r="5.6" fill="${p.c.h}" stroke="#fff" stroke-opacity=".9" stroke-width="1.1"/>`;
+    if (isMine(st)) return `<circle cx="${x}" cy="${y}" r="9" fill="${p.c.h}" opacity=".55" filter="url(#glow)"/><circle cx="${x}" cy="${y}" r="5.6" fill="${p.c.h}" stroke="#fff" stroke-opacity=".9" stroke-width="1.1"/>`;
     if (st) return `<circle cx="${x}" cy="${y}" r="7" fill="${p.c.h}" opacity=".45" filter="url(#glow)"/><circle cx="${x}" cy="${y}" r="3.4" fill="${p.c.h}"/>`;
     return `<circle class="star" cx="${x}" cy="${y}" r="1.25" fill="#fff" opacity=".34" style="--tw:${(3 + (p.x * 7 + p.y * 13) % 4).toFixed(1)}s"/>`;
   }).join("");
@@ -501,7 +497,7 @@ function drawMap(host) {
   const stops = []; for (let t = 0; t <= 360; t += 10) stops.push(`${lchHex(68, 48, (450 - t) % 360)} ${t}deg`);
   host.style.setProperty("--ring", `conic-gradient(${stops.join(",")})`);
   const dots = mapPoints().map(p => {
-    const st = S.cards[p.c.id], cls = st && st.own ? "own" : st ? "learning" : "new";
+    const st = S.cards[p.c.id], cls = isMine(st) ? "own" : st ? "learning" : "new";
     const attrs = cls === "own" ? `r="7" fill="${p.c.h}" stroke="#F3F3F1" stroke-width="1.6"`
       : cls === "learning" ? `r="6" fill="${p.c.h}" fill-opacity=".6"`
       : `r="5" fill="${p.c.h}" fill-opacity=".2"`;
@@ -545,11 +541,13 @@ function menu() {
   };
 }
 function about() {
-  sheet(`<h3>About the colors</h3>
+  const { sh, close } = sheet(`<h3>About the colors</h3>
     <p>Every swatch is a screen approximation. Hex values come from the CSS named colors, Wikipedia's list of colors and the xkcd color survey, where people named millions of colors. Where those disagree with what most people picture (CSS "khaki" is a pale yellow), we picked between them.</p>
     <p>Why names matter: Russian has separate words for light blue and dark blue, and Russian speakers tell those blues apart a little faster (Winawer et al., 2007). The effect is real but modest. Names give you handles; practice with feedback sharpens the eye.</p>
-    <p>How the deck works: a color counts as yours once you recall it a day or more after learning it. Reviews space out from 1 day to 3, 7, 16, 35 and 90 days.</p>
-    <p>Once you've recalled a name, some review cards ask you to type it (Say it) or build the color (Make it). Producing an answer from memory makes it stick better than recognizing it. Quick mode in the menu turns these off.</p>`);
+    <p>How the deck works: reviews space out from 1 day to 3, 7, 16, 35 and 90 days.</p>
+    <p>Once you've recalled a name, some review cards ask you to type it (Say it) or build the color (Make it). Producing an answer from memory makes it stick better than recognizing it. Quick mode in the menu turns these two off; the one-tap Pick it check stays.</p>
+    ${ownAboutHtml()}`);
+  ownAboutWire(sh, close);
 }
 
 // ---------- backup: progress lives on this device, so let people keep a copy ----------
@@ -563,7 +561,7 @@ function restoreProgress() {
   inp.onchange = () => {
     const f = inp.files[0]; if (!f) return;
     f.text().then(t => {
-      try { const d = JSON.parse(t); if (!d || d.v !== 1 || !d.cards) throw 0; S = Object.assign(fresh(), d); save(); toast("Progress restored"); go("learn"); }
+      try { const d = JSON.parse(t); if (!d || d.v !== 1 || !d.cards) throw 0; S = Object.assign(fresh(), d); pickMigrate(S); save(); toast("Progress restored"); go("learn"); }
       catch (e) { toast("That file isn't a ColorHub backup"); }
     });
   };

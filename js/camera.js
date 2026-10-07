@@ -145,5 +145,5 @@ function lessonStatus(name) {
   const c = BYNAME.get(name.toLowerCase()); if (!c) return "";
   if (c.basic) return "a basic word";
   const st = S.cards[c.id];
-  return st ? (st.own ? "you know it" : "learning") : "not learned yet";
+  return st ? (isMine(st) ? "you know it" : "learning") : "not learned yet";
 }

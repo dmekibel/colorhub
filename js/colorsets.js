@@ -353,7 +353,7 @@ function colorExplorer(opts = {}) {
       <div class="cx-sec"><b>Which colors</b></div>
       ${row("101", "The 101 you're learning", "The words the lessons teach", pal({ which: "101" }, 5), 101)}
       ${LONG_NAMES ? row("all", "Every name", "The whole name library", lib, csItems().length.toLocaleString()) : ""}
-      ${known ? row("yours", "The ones you know", "Recalled right a day or more later", pal({ which: "yours" }, 5), known) : ""}
+      ${known ? row("yours", "The ones you know", "Every name you have learned, checked or not yet", pal({ which: "yours" }, 5), known) : ""}
       ${LONG_NAMES ? `<div class="cx-opt cx-spread${ch.which === "spread" && !tuned ? " on" : ""}"><span class="cx-opt-t"><b>An even spread</b><small>The widest range in fewer colors</small></span>
         <span class="cx-ns">${CX_SPREAD.map(n => `<button data-which="spread" data-n="${n}" class="${ch.which === "spread" && ch.n === n && !tuned ? "on" : ""}">${n}</button>`).join("")}</span></div>` : ""}
       <div class="cx-sec"><b>One family</b><span>within the colors above</span></div>
