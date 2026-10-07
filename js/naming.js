@@ -17,6 +17,19 @@ function loadCoreNames() {
     .then(r => r.ok ? r.json() : []).catch(() => [])
     .then(list => (CORE_NAMES = list.map(e => ({ ...e, lab: lab(e.h) })))));
 }
+// NOTES-TRACKER.md item 0, "Honeycomb up to ~9,000": computed, described shades (tools/build_shades.py) that
+// fill the gaps between the ~1,000 core names and the ~2,700 library names with the app's own fixed modifier
+// grammar ("Pale salmon", "Deep teal"), each guaranteed to read back through nameOf() exactly as its own `n`.
+// Paused (David, 2026-10-09) pending a library import of more real names, so data/shades.json ships empty for
+// now; loadShades() and everything built on it (the home honeycomb's "Every shade" stop, search, name pages)
+// stays wired and ready, and simply has nothing to show until the real build runs.
+let SHADES = null, SHADES_LOADING = null;
+function loadShades() {
+  if (SHADES) return Promise.resolve(SHADES);
+  return SHADES_LOADING || (SHADES_LOADING = fetch("data/shades.json" + (typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : ""))
+    .then(r => r.ok ? r.json() : []).catch(() => [])
+    .then(list => (SHADES = list.map(e => ({ ...e, lab: lab(e.h) })))));
+}
 // the fallback list, before data/core-names.json has landed: the 101 app colors always name something
 const coreFallback = () => EVERY().map(c => ({ n: c.n, h: c.h, src: ["app"], lab: c.lab || (c.lab = lab(c.h)) }));
 

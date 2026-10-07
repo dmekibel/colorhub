@@ -17,6 +17,9 @@
 function npEntryFor(o) {
   const list = CORE_NAMES || coreFallback(), hit = list.find(e => e.n.toLowerCase() === String(o.n).toLowerCase());
   if (hit) return hit;
+  // a computed shade (js/home.js hmShadeItems, tools/build_shades.py): not a name, a description of its base
+  // made lighter/darker/greyer/etc — js/naming.js's own fixed grammar, so its page says so plainly.
+  if (o.shade) return { n: o.n, h: o.h, src: ["shade"], rank: null, shade: o.shade };
   const lib = o.lib || null;
   return { n: o.n, h: o.h, src: (lib && lib.src) || o.src || ["app"], rank: null, also: lib && lib.also };
 }
@@ -89,15 +92,20 @@ function namePage(entry, push = true) {
   const taught = BYNAME.get(name.toLowerCase());   // true only if routing ever lands here for one of the 101 (see router.js)
   const also = entry.also || [];
   const notes = entry.notes || [];
+  // a computed shade (js/home.js hmShadeItems): a description, not an established name (ROADMAP: never taught,
+  // always says so) — its own base is one of the ~1,000 core names, looked up here for the "See <base>" link.
+  const shade = entry.shade || null;
+  const shadeBase = shade && (CORE_NAMES || coreFallback()).find(e => e.n.toLowerCase() === shade.base.toLowerCase());
   const nearCore = nearestCore(hex, CORE_NAMES || coreFallback(), 7).filter(x => x.n.toLowerCase() !== name.toLowerCase()).slice(0, 6);
   const likes = typeof lookalikes === "function" ? lookalikes({ n: name, h: hex }, 6) : [];
   const el = show(`
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button></header>
     <div class="c-hero" style="--c:${hex}" data-ink="${ink(hex)}">
-      <p class="eyebrow">${stage ? `Stage ${stage}` : "Library color"}</p>
+      <p class="eyebrow">${stage ? `Stage ${stage}` : shade ? "A described shade" : "Library color"}</p>
       <h1>${esc(name)}</h1><span class="mono">${hex}</span>
       ${taught && typeof hmLearnIt === "function" ? `<button class="c-learnit" data-learnit>${ICON.bolt} Learn it <small>~2 min</small></button>` : ""}
     </div>
+    ${shade ? `<p class="fine np-shade">A described shade: ${esc(shade.base)} made ${esc(shade.mod)}${shadeBase ? `. <button class="link" data-shade-base>See ${esc(shade.base)}</button>` : "."}</p>` : ""}
     ${also.length ? `<p class="fine np-also">Also called ${also.map(esc).join(", ")}.</p>` : ""}
     ${notes.length ? `<p class="fine np-jp">${jpNoteLine(notes)}</p>` : ""}
     ${fam ? npFamilyHTML(fam) : ""}
@@ -117,6 +125,7 @@ function namePage(entry, push = true) {
   onKey = e => { if (e.key === "Escape") xBack(); };
   const li = el.querySelector("[data-learnit]"); if (li) li.onclick = () => hmLearnIt(taught);
   const famBtn = el.querySelector("[data-fam-open]"); if (famBtn) famBtn.onclick = () => openNode(colorNode(fam.head));
+  const shBtn = el.querySelector("[data-shade-base]"); if (shBtn) shBtn.onclick = () => openCoreName(shadeBase.h, shadeBase.n);
   el.querySelectorAll("[data-np-near]").forEach(b => b.onclick = () => openCoreName(b.dataset.h, b.dataset.npNear));
   npPaintingsSection(el.querySelector("[data-npgal]"), hex);
   colorPoems(el.querySelector(".c-poems"), entry);
