@@ -16,6 +16,7 @@
 //   items  [{ n, h, c?, lib? }]  c = the app color (one of the 101), lib = its data/library.json entry.
 //          Defaults to the 101 app colors as { n, h, c }.
 //   focus  an item (or anything with .n or .h) to center first.   pick(item, { morph }) on tap; morph() flies the bubble.
+//   onPeek(item)  optional: a long still press (480ms) calls this instead of pick (js/home.js: peek.js's quick look).
 
 const HONEY_SQ3 = Math.sqrt(3) / 2, HONEY_FINITE = 48;
 let HONEY_PAN = null;                 // where you were: { key, x, y, z, name }
@@ -152,29 +153,41 @@ function honeycomb(host, opts = {}) {
     <button class="hc-cap"><i></i><span><b></b><small></small></span><em></em></button>`;
   const cv = host.querySelector("canvas"), ctx = cv.getContext("2d"), cap = host.querySelector(".hc-cap");
   const RM = reduceMotion, SHOOT = typeof SHOT !== "undefined" && !!SHOT, DRIFT = .2, LENS = { m0: 3.7, m1: .82, sig: 1.9 }, ZMAX = 2.5;
-  let ZMIN = .4;   // per set: never zoom out far enough to see the same color twice (see zFloor)
+  let VIG_BG = "", ZCLEAN = 0;
+  let ZMIN = .4;   // per set: zoom out until the screen holds most of one repeat; the vignette hides the copies (see zFloor)
   let layout = opts.layout === "wheel" ? "wheel" : "map", lay = null, P = [0, 0], W = 0, Hh = 0, dpr = 1, base = 30, dead = false;
   let Z = clamp(+opts.zoom || 1, .4, ZMAX), zAnim = null, ghost = null, ghostT0 = 0;
   let phase = "idle", spring = null, touched = RM || SHOOT, visible = true, raf = 0, last = 0;
   let bloom = RM || SHOOT ? 1 : 0, bloomT0 = performance.now(), pressed = null, pressK = 0, drawn = [], center = null, settled = null;
 
   // ---- geometry: the lens maps a world distance z (in bubble spacings) to a screen radius ----
+  // the lens flattens as you zoom out (center 3.7x -> about 1.45x of the edge), so the outer bubbles stay big enough to read
+  const lshape = z => { const k = clamp((1.25 - z) / .75, 0, 1); return { m0: LENS.m0 - (LENS.m0 - 1.45) * k, m1: LENS.m1 + (1 - LENS.m1) * k, sig: LENS.sig + 2 * k }; };
   const lens = t => {
     const e = 1 - Math.pow(1 - bloom, 3), s = (.72 + .28 * e) * Z;
     const br = phase === "drift" ? 1 + .028 * Math.sin(t / 1000 * Math.PI * 2 / 3.8) : 1;
-    return { s, a: e, m0: LENS.m0 * br, m1: LENS.m1, sig: LENS.sig };
+    const sh = lshape(Z);
+    return { s, a: e, m0: sh.m0 * br, m1: sh.m1, sig: sh.sig };
   };
   const F = (z, l) => base * l.s * (l.m1 * z + (l.m0 - l.m1) * l.sig * .8862 * honeyErf(z / l.sig));
   const mag = (z, l) => l.m1 + (l.m0 - l.m1) * Math.exp(-((z / l.sig) ** 2));
   const Finv = (r, l) => { let lo = 0, hi = 400; for (let i = 0; i < 30; i++) { const m = (lo + hi) / 2; if (F(m, l) > r) hi = m; else lo = m; } return (lo + hi) / 2; };
   const reach = l => Finv(Math.hypot(W, Hh) / 2 + 40, l);
-  // the smallest zoom at which the visible patch is still narrower than one repeat of a wrapping set
+  // the smallest zoom for a wrapping set: zoomed all the way out, one whole repeat (a disc of unique colors, half a repeat
+  // in radius) spans about the screen's width, and the vignette (draw) fades everything beyond it, so a color
+  // never shows twice.
   const zFloor = () => {
     if (!lay || lay.finite || !W) return .4;
-    const fits = z => Finv(Math.hypot(W, Hh) / 2, { s: z, m0: LENS.m0, m1: LENS.m1, sig: LENS.sig }) <= lay.per * .5;
+    const want = 1.15 * Math.min(W, Hh) / 2;   // tuned on a phone: the faded disc then spans about the full width
+    const fits = z => F(lay.per * .52, { s: z, ...lshape(z) }) >= want;
     let lo = .05, hi = ZMAX; if (!fits(hi)) return ZMAX;
     for (let i = 0; i < 24; i++) { const m = (lo + hi) / 2; if (fits(m)) hi = m; else lo = m; }
-    return Math.max(.4, hi);
+    // the "clean" zoom: the whole screen still sits inside half a repeat, so no copy can show and no vignette is needed
+    const clean = z => Finv(Math.hypot(W, Hh) / 2, { s: z, ...lshape(z) }) <= lay.per * .5;
+    let a = .05, c = ZMAX;
+    if (clean(c)) { for (let i = 0; i < 24; i++) { const m = (a + c) / 2; if (clean(m)) c = m; else a = m; } }
+    ZCLEAN = c;
+    return Math.max(.15, Math.min(hi, c));
   };
   // the world offset (from the pan point) under a screen point
   const offAt = (sx, sy, l) => { const dx = sx - W / 2, dy = sy - Hh / 2, r = Math.hypot(dx, dy); if (r < 1e-6) return [0, 0]; const z = Finv(r, l); return [dx / r * z, dy / r * z]; };
@@ -219,9 +232,8 @@ function honeycomb(host, opts = {}) {
       ctx.beginPath(); ctx.arc(b.x, b.y, r, 0, 6.2832); ctx.fillStyle = it.h; ctx.fill();
       if (d < 8) continue;
       if (it.L < 20) { ctx.lineWidth = 1; ctx.strokeStyle = "rgba(236,232,223,.14)"; ctx.stroke(); }
-      const own = it.c && it.c.id && isMine(S.cards[it.c.id]);
-      if (own && d > 16) { ctx.beginPath(); ctx.arc(b.x, b.y, r + 3, 0, 6.2832); ctx.lineWidth = 1.2; ctx.strokeStyle = "rgba(236,232,223,.85)"; ctx.stroke(); }
-      const la = Math.min(1, Math.max(0, (d - 50) / 6));
+      // no ring for learned colors: the colors stay pure (the Learned view in the sheet shows progress)
+      const la = Math.min(1, Math.max(0, (d - 38) / 6));   // names show down to ~40px bubbles (readable when zoomed out)
       if (la > 0) {
         const w = honeyWrap(ctx, it.n), fs = Math.min(w.fs * d, 30), lh = fs * 1.02, dot = mark && it.c;
         const sub = Math.min(1, Math.max(0, (d - 150) / 30)), subH = sub ? fs * .9 : 0;   // at high zoom: the hex under the name
@@ -245,6 +257,19 @@ function honeycomb(host, opts = {}) {
       const a = 1 - (t - ghostT0) / 240;
       if (a > 0) { ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = a; ctx.drawImage(ghost, 0, 0); ctx.globalAlpha = 1; } else ghost.on = false;
       if (!ghost.on) ghost = null;
+    }
+    // vignette: only once you zoom out past the "clean" zoom, and only as much as needed. It grows from nothing at the clean
+    // zoom to a soft fade of the far edge (beyond half a repeat, where copies would start) at the widest zoom.
+    if (lay && !lay.finite && Z < ZCLEAN - .01) {
+      const k = clamp((ZCLEAN - Z) / Math.max(.01, ZCLEAN - ZMIN), 0, 1);
+      const l = lens(t), r0 = F(lay.per * .5, l), far = Math.hypot(W, Hh) / 2, r1 = Math.max(r0 + 40, Math.min(far, F(lay.per * .7, l)));
+      if (r0 < far) {
+        VIG_BG = VIG_BG || getComputedStyle(document.body).backgroundColor || "rgb(14,13,11)";
+        const rgb = (VIG_BG.match(/\d+/g) || [14, 13, 11]).slice(0, 3).join(",");
+        const g = ctx.createRadialGradient(W / 2, Hh / 2, r0, W / 2, Hh / 2, r1);
+        g.addColorStop(0, `rgba(${rgb},0)`); g.addColorStop(1, `rgba(${rgb},${(.85 * k).toFixed(3)})`);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.globalAlpha = 1; ctx.fillStyle = g; ctx.fillRect(0, 0, W, Hh);
+      }
     }
     if (cItem !== center) { center = cItem; caption(); }
   }
@@ -340,7 +365,7 @@ function honeycomb(host, opts = {}) {
     const dx = x - down.x, dy = y - down.y;
     if (!down.moved && Math.hypot(dx, dy) > 7) { down.moved = true; pressed = null; kick(); }
     if (!down.moved) return;
-    const k = base * lens(0).s * LENS.m0, now = performance.now();
+    const k = base * lens(0).s * lens(0).m0, now = performance.now();
     P = [down.P0[0] - dx / k, down.P0[1] - dy / k];
     if (lay.finite) {   // rubber band past the edge of a small cluster
       const r = Math.hypot(P[0], P[1]), ext = lay.ext + .6;
@@ -363,7 +388,9 @@ function honeycomb(host, opts = {}) {
     if (!down) return;
     const d = down; down = null; phase = "idle";
     if (!d.moved) {
-      const now = performance.now(), p = pressed;
+      const now = performance.now(), p = pressed, held = now - d.hist[0][0];
+      // a long, still press peeks instead of opening (js/home.js wires onPeek on the honeycomb home)
+      if (p && opts.onPeek && held >= 480) { pressed = null; kick(); return opts.onPeek(p.it.o); }
       if (lastTap && now - lastTap.t < 300 && Math.hypot(d.x - lastTap.x, d.y - lastTap.y) < 36) {   // double tap
         clearTimeout(tapTimer); lastTap = null; pressed = null; kick();
         return zoomTo(Z > 1.25 ? 1 : 2.1, d.x, d.y);
@@ -385,7 +412,7 @@ function honeycomb(host, opts = {}) {
     if (!lay) return;
     const [x, y] = local(e);
     if (e.ctrlKey) { e.preventDefault(); touched = true; phase = "idle"; spring = null; zAnim = null; zoomAround(rubber(clamp(Z * Math.exp(-e.deltaY * .012), ZMIN * .8, ZMAX * 1.2)), x, y); }
-    else if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) { e.preventDefault(); touched = true; phase = "idle"; spring = null; const k = base * lens(0).s * LENS.m0; P = [P[0] + e.deltaX / k, P[1] + e.deltaY / k]; }
+    else if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) { e.preventDefault(); touched = true; phase = "idle"; spring = null; const k = base * lens(0).s * lens(0).m0; P = [P[0] + e.deltaX / k, P[1] + e.deltaY / k]; }
     else return;
     draw(); clearTimeout(wheelT);
     wheelT = setTimeout(() => { if (Z < ZMIN || Z > ZMAX) zoomTo(clamp(Z, ZMIN, ZMAX), x, y); else { if (opts.onZoom) opts.onZoom(Z); snap(); } }, 160);

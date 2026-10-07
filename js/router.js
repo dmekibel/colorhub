@@ -4,6 +4,8 @@
 //   #/color/<slug>  #/page/<id>  #/painting/<slug>  #/story/<id>     (add /more for the "More like this" closeup)
 //   #/daily  #/challenge  #/taste/<color|palette>  #/lab/<harmony|contrast>  #/gallery/<n> (a museum painting)
 //   #/poem/<id>  #/passage/<id>  #/film/<id>   (js/poems.js, js/passages.js, js/films.js)
+//   #/learnit/<color>   the honeycomb home's instant mini-lesson (js/home.js, js/learnit.js). #/today itself
+//   already opens the honeycomb home: go("learn") does (js/core.js), and "today" is routed through go() below.
 // How it works: show() (core.js) calls routeCommit(tab). A tab home replaces the current history entry with
 // its route; an inner screen pushes one. Screen functions don't know their own address, so this file wraps
 // them (the ROUTED list below): the wrapper notes the route, then the screen's show() writes it to the URL and the
@@ -24,6 +26,7 @@ function nodeRoute(n) {
   if (n.kind === "painting") return "painting/" + String(n.id).replace(/^painting-/, "");
   if (n.kind === "story") return "story/" + (n.sid || String(n.id).replace(/^s:/, ""));
   if (n.kind === "botany") return "botany/" + String(n.id).replace(/^bt:(plant|dye|essay):/, "");   // js/botany.js
+  if (n.kind === "gems") return "gem/" + String(n.id).replace(/^gm:(gem|essay):/, "");   // js/gems.js
   return "page/" + n.id;
 }
 function tabRoute(tab) {
@@ -84,7 +87,8 @@ const ROUTED = [["colorPage", nodeRouted()], ["wikiPage", nodeRouted()], ["paint
   ["filmPage", f => f && f.id ? routed(f.title, "film/" + f.id) : null],   // js/passages.js, js/films.js
   ["fashionPage", slug => typeof worldRouteTitle === "function" ? routed(worldRouteTitle(slug), "fashion/" + slug) : null],   // js/world.js
   ["btListPage", kind => typeof btListTitle === "function" ? routed(btListTitle(kind), "botany/" + kind) : null],   // js/botany.js (plant/dye/essay detail pages route via wikiPage above)
-  ["btFloriPage", () => routed("The language of flowers", "botany/flori")]];   // js/botany.js
+  ["btFloriPage", () => routed("The language of flowers", "botany/flori")],   // js/botany.js
+  ["gmListPage", kind => typeof gmListTitle === "function" ? routed(gmListTitle(kind), "gem/" + kind) : null]];   // js/gems.js (gem/essay detail pages route via wikiPage above)
 ROUTED.forEach(([name, f]) => routeWrap(window, name, f));
 routeWrap(LAB, "harmony", () => routed("Harmony", "lab/harmony"));
 routeWrap(LAB, "contrast", () => routed("Albers", "lab/contrast"));
@@ -131,6 +135,7 @@ function openRoute(hash, initial = false) {
     base(); XSTACK = []; archWhen(() => { const f = (window.FILMS || []).find(x => x.id === id); if (f) filmPage(f); else go(S.tab || "learn"); }); return true;
   }
   if (kind === "botany" && id && typeof btOpenRoute === "function") { base(); btOpenRoute(id); return true; }   // js/botany.js
+  if (kind === "gem" && id && typeof gmOpenRoute === "function") { base(); gmOpenRoute(id); return true; }   // js/gems.js
   if (kind === "gallery" && /^\d+$/.test(id || "") && typeof galleryPage === "function") {
     base();
     if (!GAL) { ROUTE_NEXT = routed("Painting", "gallery/" + id); waitScreen(); ROUTE_REPLACE = true; }   // the painting replaces the placeholder
@@ -140,7 +145,9 @@ function openRoute(hash, initial = false) {
   }
   const simple = { daily: () => daily(), challenge: () => chToday() ? challengeDone() : challenge(),
     taste: () => tasteIntro(id === "palette" ? "palette" : "color"), lab: () => (LAB[id] && ["harmony", "contrast"].includes(id) ? LAB[id] : LAB.harmony)(),
-    fashion: () => typeof fashionPage === "function" && fashionPage(id) };
+    fashion: () => typeof fashionPage === "function" && fashionPage(id),
+    // the honeycomb home's instant mini-lesson (js/learnit.js): #/learnit/<color>
+    learnit: () => { const c = id && routeColor(id); if (c && typeof hmLearnIt === "function") hmLearnIt(c); else go(S.tab || "learn"); } };
   if (simple[kind]) { base(); simple[kind](); return true; }
   return false;
 }

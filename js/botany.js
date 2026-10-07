@@ -51,6 +51,8 @@ function btBuildNodes() {
   if (g === btGraphSeen) return;
   btGraphSeen = g;
   const B = window.BOTANY;
+  // one picture per entry (data/botany-images.js); figHTML reads WIKI_IMAGES by node id
+  window.WIKI_IMAGES = Object.assign(window.WIKI_IMAGES || {}, window.BOTANY_IMAGES || {});
   btPlantByColor = new Map(); btDyesByColor = new Map();
   const swFor = names => names.map(n => { const c = BYNAME.get(n.toLowerCase()); return c ? { h: c.h, label: n } : null; }).filter(Boolean);
   // data/botany.js keeps facts as [label, value] pairs (smaller JSON); wikiPage wants { label, value } objects
@@ -84,6 +86,14 @@ const BT_TILES = [["plants", "Flowers & plants", p => `${p.plants.length} colors
   ["dyes", "Dye plants", p => `${p.dyes.length} plants that colored the world before chemistry`],
   ["essays", "Why plants are colored", p => `${p.essays.length} short reads`],
   ["flori", "Language of flowers", p => `${p.flori.length} Victorian flower meanings`]];
+// each Botany tile shows one of the section's own pictures (or its colors)
+function btCover(k, B) {
+  const im = id => ((window.BOTANY_IMAGES || {})[id] || [])[0];
+  const pick = { plants: "bt:plant:lavender", dyes: "bt:dye:madder", flori: "bt:plant:violet" }[k];
+  const p = pick && im(pick);
+  if (p) return wdImg(p.src);
+  return wdBars(["Green", "Olive", "Amber", "Rust", "Burgundy"].map(n => (BYNAME.get(n.toLowerCase()) || {}).h).filter(Boolean));
+}
 function btWorldSection(host) {
   if (!window.BOTANY) {
     host.innerHTML = `<p class="x-sub">Loading the plants behind the colors…</p>`;
@@ -92,7 +102,7 @@ function btWorldSection(host) {
   }
   const B = window.BOTANY;
   host.innerHTML = `<p class="x-sub">The plants behind ColorHub's color names, what grew the dyes before chemistry did, and a Victorian flower dictionary.</p>
-    <div class="wd-tiles">${BT_TILES.map(([k, t, s]) => `<button class="wd-tile" data-bt="${k}"><b>${esc(t)}</b><span>${esc(s(B))}</span></button>`).join("")}</div>`;
+    <div class="wd-tiles">${BT_TILES.map(([k, t, s]) => wdTile(`data-bt="${k}"`, t, s(B), btCover(k, B))).join("")}</div>`;
   host.querySelectorAll("[data-bt]").forEach(b => b.onclick = () => b.dataset.bt === "flori" ? btFloriPage() : btListPage(b.dataset.bt));
 }
 WORLD_SECTIONS.push({ key: "botany", title: "Botany", render: btWorldSection });

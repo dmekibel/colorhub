@@ -1,0 +1,96 @@
+/* The honeycomb home (js/home.js, ROADMAP.md §12) and its instant mini-lesson (js/learnit.js).
+   Reuses the .cx screen chrome from css/honey.css (same stage/top/title plumbing as the color explorer);
+   this file only adds the bits that are new here: the top-bar extras, the search pulldown, the first-launch
+   hint, the three-state bottom sheet, and the Learn it lesson screens. */
+
+/* ---------- top bar extras ---------- */
+/* One icon button (search) beside the title, structured exactly like colorExplorer's own back-button-plus-title
+   row (css/honey.css): a plain .icon-btn, not a wrapping element. The camera moved down into the sheet, next to
+   "Surprise me" — a second wrapped flex child here reproducibly collapsed the title row's layout in testing
+   (measured with a minimal CSS extract; not chased further given the time this already cost). */
+.hm-title{min-width:0}
+.hm-title small{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hm.chrome-hide .hm-top,.hm.chrome-hide .hm-search{opacity:0;pointer-events:none}
+.hm-top,.hm-search{transition:opacity .4s var(--ease)}
+.hm-search[hidden]{display:none}
+.hm-search{position:absolute;z-index:3;left:max(12px,calc(50% - 258px));right:max(12px,calc(50% - 258px));top:calc(var(--top) + 76px)}
+.hm-search .search{display:flex;align-items:center;gap:10px;height:48px;padding:0 16px;border-radius:24px;background:rgba(14,13,11,.72);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border:1px solid var(--rule)}
+.hm-search .search svg{flex:none;width:18px;height:18px;color:var(--soft)}
+.hm-search input{flex:1;min-width:0;background:none;border:0;font:400 17px/1 var(--serif);color:var(--ink)}
+.hm-search input::placeholder{color:var(--faint)}
+
+
+/* full screen: no title bar and no name caption (the names are already on the bubbles). Views and search live in the sheet. */
+.hm .hm-top,.hm .hc-cap{display:none}
+.hm-search{top:calc(var(--top) + 12px);left:68px}
+/* the one button on the home screen: top left, small and quiet; it opens the sheet with everything else */
+.hm-menu{position:fixed;z-index:5;top:calc(var(--top) + 12px);left:14px;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;
+  color:var(--ink);background:rgba(14,13,11,.55);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid var(--rule);
+  transition:transform .3s var(--spring),background .2s}
+.hm-menu:active{transform:scale(.92)}
+.hm-menu svg{width:18px;height:18px}
+.hm.hm-sheet-open .hm-menu{background:rgba(236,232,223,.12)}
+.hm-show{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:2px 0 18px}
+.hm-views{display:inline-flex;align-items:center;gap:8px;min-width:0;font:400 22px/1 var(--serif);color:var(--ink)}
+.hm-views span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hm-views small{font:500 11px/1 var(--mono);letter-spacing:.06em;color:var(--faint)}
+.hm-views svg{flex:none;width:14px;height:14px;color:var(--soft)}
+.hm-show .link{display:inline-flex;align-items:center;gap:6px;flex:none}
+.hm-show .link svg{width:14px;height:14px}
+
+/* ---------- the bottom sheet: a handle always at the edge; drag or tap cycles peek -> mid -> full ---------- */
+.hm-sheet{position:fixed;left:0;right:0;bottom:0;z-index:4;max-width:540px;margin:0 auto;background:#17160F;border-top:1px solid var(--rule);
+  border-radius:20px 20px 0 0;box-shadow:0 -20px 50px rgba(0,0,0,.45);touch-action:none;display:flex;flex-direction:column}
+.hm-grab{flex:none;display:flex;align-items:center;justify-content:center;height:30px;touch-action:none;cursor:grab}
+.hm-grab::before{content:"";width:36px;height:4px;border-radius:2px;background:var(--rule-2)}
+.hm-sheet-body{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;padding:0 var(--g) calc(var(--bottom) + 24px);
+  transition:opacity .25s var(--ease)}
+.hm.hm-sheet-open .hm-grab::before{background:var(--soft)}
+.hm-sec{margin:4px 0 2px}
+.hm-cta{margin:4px 0 18px}
+.hm-go-row{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 18px;margin-top:28px}
+.hm-go{margin:0;flex:1 1 auto}
+.hm-go-links{display:flex;flex:none;gap:18px}
+.hm-go-row .link{display:inline-flex;flex:none;align-items:center;gap:6px;padding:0;white-space:nowrap}
+.hm-go-row .link svg{flex:none;width:14px;height:14px}
+.hm-doors{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.hm-door{display:flex;flex-direction:column;align-items:flex-start;gap:14px;min-height:92px;padding:16px;border:1px solid var(--rule);border-radius:12px;
+  transition:transform .3s var(--spring),background .2s}
+.hm-door:active{transform:scale(.96);background:rgba(236,232,223,.06)}
+.hm-door svg{width:22px;height:22px;color:var(--soft)}
+.hm-door b{font:400 20px/1 var(--serif)}
+
+/* ---------- the "Learn it" button on a color page (js/explore.js, colorPage only) ---------- */
+.c-learnit{display:inline-flex;align-items:center;gap:8px;margin-top:14px;height:40px;padding:0 16px 0 13px;border:1px solid var(--rule-2);border-radius:20px;
+  font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:inherit;transition:transform .3s var(--spring)}
+.c-learnit:active{transform:scale(.95)}
+.c-learnit svg{width:16px;height:16px}
+.c-learnit small{font:500 9.5px/1 var(--mono);letter-spacing:.06em;text-transform:none;opacity:.7}
+
+/* ---------- the lesson itself (js/learnit.js): one step at a time, booth grey (it judges swatches) ---------- */
+.lt-steps{display:flex;gap:5px;flex:1;justify-content:center}
+.lt-steps i{width:20px;height:3px;border-radius:2px;background:var(--rule-2)}
+.lt-steps i.on{background:var(--ink)}
+.lt-steps i.now{background:var(--soft)}
+.lt-card{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;text-align:center}
+.lt-sw{width:100%;max-width:300px;aspect-ratio:1;border-radius:4px;background:var(--c);box-shadow:inset 0 0 0 1px rgba(236,232,223,.1)}
+.lt-card h1{font:400 clamp(36px,10vw,52px)/1 var(--serif);letter-spacing:-.02em;margin:0}
+.lt-card .mono{font:500 13px/1 var(--mono);letter-spacing:.1em;color:var(--soft)}
+.lt-card p{margin:0;color:var(--soft);font-size:15px;max-width:320px}
+.lt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:100%;max-width:360px}
+.lt-grid button{aspect-ratio:1;background:var(--c);border-radius:3px;transition:transform .2s var(--spring)}
+.lt-grid button:active{transform:scale(.93)}
+.lt-grid button.right{box-shadow:0 0 0 3px #17160F,0 0 0 5px var(--good)}
+.lt-grid button.wrong{box-shadow:0 0 0 3px #17160F,0 0 0 5px var(--bad);opacity:.5}
+.lt-strip{display:flex;flex-direction:column;gap:8px;width:100%;max-width:340px}
+.lt-strip button{display:flex;align-items:center;gap:12px;height:56px;padding:0 14px;border-radius:8px;background:rgba(236,232,223,.04);border:1px solid var(--rule)}
+.lt-strip button i{width:36px;height:36px;border-radius:4px;background:var(--c);flex:none}
+.lt-strip button b{font:500 12px/1 var(--mono);color:var(--soft);min-width:18px}
+.lt-strip button.set{border-color:var(--rule-2)}
+.lt-strip.done button{pointer-events:none}
+.lt-strip.done button.ok{box-shadow:inset 0 0 0 1px var(--good)}
+.lt-strip.done button.off{box-shadow:inset 0 0 0 1px var(--bad)}
+.lt-done .fan{display:flex;height:120px;margin-bottom:8px}
+.lt-done .fan i{flex:1;background:var(--c)}
+.lt-done h1{font:400 clamp(34px,9vw,46px)/1.1 var(--serif);letter-spacing:-.01em}
+.lt-done p{color:var(--soft);font-size:15.5px;line-height:1.5}

@@ -91,7 +91,14 @@ function filterColors(items, f = {}) {
 const searchColors = (items, q) => filterColors(items, { q });
 
 // ---------- named starting points ----------
-const csBase = base => base === "101" ? csItems().filter(x => x.c) : base === "yours" ? csItems().filter(x => x.c && x.c.id && S.cards[x.c.id]) : csItems();
+// The honeycomb home's progress views (js/home.js): Learned (yours, honestly), Learning (in reviews, not yet
+// confirmed) and Not met yet (never scheduled). Each reads live off S.cards, same honesty rule as everywhere else.
+const csBase = base => base === "101" ? csItems().filter(x => x.c)
+  : base === "yours" ? csItems().filter(x => x.c && x.c.id && S.cards[x.c.id])
+  : base === "learned" ? csItems().filter(x => x.c && x.c.id && isMine(S.cards[x.c.id]))
+  : base === "learning" ? csItems().filter(x => x.c && x.c.id && S.cards[x.c.id] && !isMine(S.cards[x.c.id]))
+  : base === "notmet" ? csItems().filter(x => x.c && !(x.c.id && S.cards[x.c.id]))
+  : csItems();
 const csNeedsLib = st => st.base === "all" || (st.sources && st.sources.length > 0);
 function csApply(st) { return filterColors(csBase(st.base), st); }
 const csSet = (id, title, group, o) => ({ id, title, group, state: { ...CS_FULL, ...o }, get() { return csApply(this.state); } });
@@ -100,6 +107,9 @@ const COLOR_SETS = [
   csSet("all", "Every name", "Collections", {}),
   csSet("spread", "Even 500", "Collections", { n: 500 }),
   csSet("yours", "Yours", "Collections", { base: "yours" }),
+  csSet("learned", "Learned", "Progress", { base: "learned" }),
+  csSet("learning", "Learning", "Progress", { base: "learning" }),
+  csSet("notmet", "Not met yet", "Progress", { base: "notmet" }),
   csSet("pastels", "Pastels", "Character", { L: [78, 100], C: [8, 45] }),
   csSet("vivid", "Vivid", "Character", { C: [60, CS_CMAX] }),
   csSet("muted", "Muted", "Character", { L: [35, 78], C: [8, 28] }),
