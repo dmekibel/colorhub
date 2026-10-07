@@ -832,7 +832,7 @@ function honeycomb(host, opts = {}) {
     }
     if (!down) return;
     const dx = x - down.x, dy = y - down.y;
-    if (!down.moved && Math.hypot(dx, dy) > 7) { down.moved = true; pressed = null; kick(); }
+    if (!down.moved && Math.hypot(dx, dy) > 10) { down.moved = true; pressed = null; kick(); }
     if (!down.moved) return;
     const now = performance.now();
     if (lay.globe) { P = [down.P0[0] + dx / GLOBE_ROT_K, clamp(down.P0[1] - dy / GLOBE_ROT_K, -1.5, 1.5)]; }
@@ -871,8 +871,10 @@ function honeycomb(host, opts = {}) {
       lastTap = { t: now, x: d.x, y: d.y };
       if (p && e.type === "pointerup") {
         if (!RM && !SHOOT && cfg.alive > 0) { ripples.push({ x: p.x, y: p.y, t0: now, sigma: Math.max(22, p.b.d * .85) }); if (ripples.length > 4) ripples.shift(); }
-        const far = opts.centerFirst && Math.hypot(p.x - W / 2, p.y - vcy()) > p.b.d * .55;
-        tapTimer = setTimeout(() => { pressed = null; kick(); if (far) { lay.globe ? glideToGlobe(p.it) : glideTo(p.x, p.y); } else open(p.it, p.b); }, far ? 0 : 240);
+        // One tap opens the color, wherever the bubble is (David: "a single click doesn't open it, but it should").
+        // It used to glide an off-center bubble to the middle first and only open on a second tap (centerFirst).
+        // The short wait is only so a double-tap can still zoom instead.
+        tapTimer = setTimeout(() => { pressed = null; kick(); open(p.it, p.b); }, 220);
         return;
       }
       pressed = null; kick();
