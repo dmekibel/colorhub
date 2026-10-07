@@ -29,7 +29,31 @@ function shot(name) {
     case "profile": return profileSetup(() => go("gym"), { why: "Before you train" });
     case "learn": return go("learn");
     // the honeycomb home (js/home.js): home, home:sheet, home:sheetfull, home:views, home:search
-    case "home": return hmShot(arg);
+    // home:every-shade[:out][:perf] -- NOTES-TRACKER.md item 0's design-review shot: selects the "Every shade"
+    // stop directly (same S.hm the title chooser writes, js/home.js applyView()) so a screenshot doesn't need
+    // to drive a real tap; "out" also starts at the zoomed-out level (S.hm.zoom, same field onZoom save()s to).
+    // "perf" (real wall-clock rAF sampling, NOT under --virtual-time-budget) writes the draw loop's frame time
+    // into document.title after a settle delay, for a headless perf check with no browser pane available.
+    case "home": {
+      if (arg && arg.startsWith("every-shade")) {
+        const parts = arg.split(":");
+        S.hm = Object.assign(S.hm || {}, { src: "every-shade", filter: "all" });
+        if (parts.includes("out")) S.hm.zoom = 0.2;
+        hmShot();
+        if (parts.includes("perf")) setTimeout(() => {
+          let frames = 0, last = null, total = 0;
+          const tick = t => {
+            if (last != null) { total += t - last; frames++; }
+            last = t;
+            if (total < 1500) requestAnimationFrame(tick);
+            else document.title = `PERF avg=${(total / frames).toFixed(2)}ms fps=${(1000 * frames / total).toFixed(1)} frames=${frames}`;
+          };
+          requestAnimationFrame(tick);
+        }, 900);
+        return;
+      }
+      return hmShot(arg);
+    }
     // bare honeycomb review shot, no chrome at all (tools/honey-contact-sheets.sh): honey:<style>:<n>:<default|out>
     case "honey": { const [styleId = "current", nStr = "101", zArg = "default", tw = ""] = (arg || "").split(":"), n = +nStr || 101;
       return labItems(n).then(items => {

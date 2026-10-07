@@ -25,6 +25,13 @@ Sources (key used in `src`; provenance and license in research/LIBRARY.md):
   jp       Wikipedia "Traditional colors of Japan" (name = romaji; kanji and English meaning in `jp`).
   ral      Wikipedia "List of RAL colours", RAL Classic only. Approximate screen values of a paint standard.
   xkcd     The xkcd color survey (Munroe 2010), rgb.txt, CC0. Crowd names; crude ones get "crude": 1.
+  pigment  Historical pigment NAMES missing from the library, found in David's private notes on the pigment
+           compendium and Chromatopia (../color-kb/books/notes/*.jsonl) -- a name is a fact, so it's added. The
+           HEX never comes from those copyrighted books (CLAUDE.md "Book rule"): each is a public, citable value
+           (Wikidata's P465 sRGB color hex triplet, or a Wikipedia color infobox), cited by URL in `note`, with
+           the date it came into use when the notes give one. Where no public value could be found (most of the
+           obscure ones: Orpiment, Realgar, Han purple/blue, Lead-tin yellow, Azurite, ... all checked and none
+           have a citable hex), the name is skipped rather than guessed. See load_pigments().
 
 Merge rules (see research/LIBRARY.md): names are title-cased and "Gray" spelled "Grey"; two names are the same
 entry when they match after dropping case, accents, spaces, hyphens, slashes and apostrophes. A merged entry keeps
@@ -48,7 +55,7 @@ KB = ROOT.parent / "color-kb"                        # David's private color KB 
 OUT = ROOT / "data" / "library.json"
 UA = "ColorHubBot/1.0 (https://github.com/dmekibel/colorhub)"
 
-SOURCES = ["app", "css", "wiki", "werner", "ridgway", "jp", "ral", "xkcd"]  # hex priority, highest first
+SOURCES = ["app", "css", "wiki", "werner", "ridgway", "jp", "ral", "xkcd", "pigment"]  # hex priority, highest first
 FAMILIES = ["Reds", "Pinks", "Oranges", "Browns", "Yellows", "Greens", "Blues", "Purples", "Neutrals"]
 ALT_DE = 3.0  # a source's hex differing by more than this from the entry's hex is kept in alts
 
@@ -331,6 +338,41 @@ def load_xkcd():
 
 # Survey names a family app should not show by default (they stay in the data, flagged "crude": 1).
 CRUDE = re.compile(r"\b(puke|vomit|barf|poo|poop|shit|piss|pee|snot|booger|diarrhea)\b", re.I)
+
+
+# ---------------------------------------------------------------------------------------------
+# Pigments (NOTES-TRACKER.md "historical pigment names"): names come from David's private notes on the pigment
+# compendium and Chromatopia (../color-kb/books/notes/pigment-compendium.jsonl, chromatopia-coles.jsonl) -- every
+# pigment name mentioned there was checked against the library (data/library.json as it stood before this run,
+# both primary names and ISCC-NBS `altn` synonyms). This list is only the ones the library had neither as a
+# primary name nor as an alternate. Of those, only the ones below turned out to have a public, citable hex value
+# (Wikidata's P465 "sRGB color hex triplet", or a standalone Wikipedia article with its own color infobox --
+# distinct from the "List of colors" pages tools/library.py already scrapes as `wiki`). Checked and skipped for
+# having no such public value: Orpiment, Realgar, Antimony Vermilion, Asphaltum, Atacamite, Azurite, Bice,
+# Bideford Black, Chrysocolla, Flake White, Garancine, Greenockite, Han Blue, Han Purple, Iodine Scarlet, Lazurite,
+# Lead White, Lead-Tin Yellow, Manganese Blue, Mauveine (no hex distinct from Mauve), Potter's Pink, Pyrrole Red,
+# Vantablack, Vine Black, Bone Black/Ivory Black -- all real pigments, just none with a public swatch value, so
+# per CLAUDE.md's copyright rule (never take a color value from the private book notes) they are left out rather
+# than guessed.
+def load_pigments():
+    rows = [
+        dict(n="Egyptian Blue", h="#1034A6", src="pigment",
+             note="Pigment, in continuous use for over 3,000 years, from Egypt's 4th dynasty (c. 2600 BC) through "
+                  "the Roman Empire; hex is Wikidata's sRGB color value (P465), wikidata.org/wiki/Q253181"),
+        dict(n="Smalt", h="#003399", src="pigment",
+             note="Pigment, a ground cobalt-blue glass used in European oil painting from the Renaissance on; "
+                  "hex is Wikidata's sRGB color value (P465), wikidata.org/wiki/Q898977"),
+        dict(n="Brunswick Green", h="#1B4D3E", src="pigment",
+             note="Pigment, in use from 1764 (first made in Braunschweig/Brunswick, Germany); hex from Wikipedia's "
+                  "color infobox, en.wikipedia.org/wiki/Spring_green"),
+        dict(n="Green Earth", h="#DADD98", src="pigment",
+             note="Pigment (terre verte), mined and used since antiquity; hex from Wikipedia's color infobox, "
+                  "en.wikipedia.org/wiki/Green_earth"),
+        dict(n="Titanium White", h="#FFFEEF", src="pigment",
+             note="Pigment, the brightest and now most widely used white pigment; hex is Wikidata's sRGB color "
+                  "value (P465), wikidata.org/wiki/Q3639460"),
+    ]
+    return rows
 
 
 def load_werner():
@@ -631,7 +673,7 @@ def build():
     jp, jp_mismatch = load_jp()
     ridgway, rrep = load_ridgway()
     per = {"app": app_rows, "css": load_css(), "wiki": wiki, "werner": load_werner(), "ridgway": ridgway,
-           "jp": jp, "ral": load_ral(), "xkcd": load_xkcd()}
+           "jp": jp, "ral": load_ral(), "xkcd": load_xkcd(), "pigment": load_pigments()}
     rows = [dict(r) for s in SOURCES for r in per[s]]
     entries = annotate(merge(rows), app)
     entries, iscc_rep = merge_iscc_nbs(entries, app)
