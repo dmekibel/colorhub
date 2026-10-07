@@ -101,3 +101,5 @@
 .hm-stages{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .hm-stages .cx-chip{justify-content:space-between}
 .hm-stages .cx-chip em{font:500 11px/1 var(--mono);font-style:normal;color:var(--faint)}
+.hm-lens{display:flex;align-items:center;gap:12px;margin:4px 0 14px;font:500 11px/1 var(--mono);letter-spacing:.06em;color:var(--faint)}
+.hm-lens input{flex:1;accent-color:var(--ink)}

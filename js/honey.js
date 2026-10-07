@@ -168,7 +168,9 @@ function honeycomb(host, opts = {}) {
   // The lens is shaped like the screen: distance is measured with the vertical squeezed by the screen's aspect (ASP), so
   // the magnified middle is a tall oval that fills a tall phone instead of a round "eye" (David, 2026-10-08). The
   // center is about 1.8x the edge.
-  const lshape = () => LENS;
+  // lens strength (the view panel's "Lens" slider): 0 = flat, 1 = the default ~1.8x center, 2 = strong; never fully off
+  let lensK = opts.lens == null ? 1 : +opts.lens;
+  const lshape = () => ({ m0: LENS.m1 + (LENS.m0 - LENS.m1) * Math.max(.15, lensK), m1: LENS.m1, sig: LENS.sig });
   const ASP = () => clamp(Hh / Math.max(1, W), 1, 2.4);
   const lens = t => {
     const e = 1 - Math.pow(1 - bloom, 3), s = (.72 + .28 * e) * Z;
@@ -502,6 +504,7 @@ function honeycomb(host, opts = {}) {
     // items: a new list (soft: true cross-fades and keeps the bubble in the middle), layout: "map" | "wheel"
     update(o = {}) { if (o.layout) layout = o.layout === "wheel" ? "wheel" : "map"; setItems(o.items || (lay && lay.raw), o.focus || (center && center.o), o.soft ? "soft" : ""); },
     zoom: (z, animate = true) => animate ? zoomTo(z) : (Z = clamp(z, ZMIN, ZMAX), draw()),
+    lens: k => { lensK = clamp(+k, 0, 2); ZMIN = zFloor(); Z = clamp(Z, ZMIN, ZMAX); kick(); },
     current: () => center && center.o,
     destroy,
   };

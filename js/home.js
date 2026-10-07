@@ -69,7 +69,7 @@ function hmHome() {
     }
     paintTitle();
     if (ctrl) ctrl.update({ items, soft });
-    else ctrl = honeycomb(viewEl, { items, layout: "map", zoom: S.hm.zoom || 1, pick, onPeek, centerFirst: true,
+    else ctrl = honeycomb(viewEl, { items, layout: "map", zoom: S.hm.zoom || 1, pick, onPeek, centerFirst: true, lens: S.hm.lens == null ? 1 : S.hm.lens,
       onZoom: z => { S.hm.zoom = Math.round(z * 100) / 100; save(); } });
     hmWireChrome();
   }
@@ -92,10 +92,15 @@ function hmHome() {
       <div class="cx-sh-head"><h3>What to show</h3></div>
       <div class="cx-sec"><b>Views</b><span>honestly, off your own reviews</span></div>
       ${HM_QUICK.map(([id, label]) => row(id, label)).join("")}
+      <div class="cx-sec"><b>Lens</b><span>how much bigger the middle is</span></div>
+      <label class="hm-lens"><span>Flat</span><input type="range" min="0" max="2" step=".05" value="${S.hm.lens == null ? 1 : S.hm.lens}" aria-label="Lens strength"><span>Strong</span></label>
       ${stageHtml}
       ${groupHtml}
     </div>`);
     sh.classList.add("cx-sheet");
+    const lensIn = sh.querySelector(".hm-lens input");
+    lensIn.addEventListener("input", () => { S.hm.lens = +lensIn.value; if (ctrl && ctrl.lens) ctrl.lens(S.hm.lens); });
+    lensIn.addEventListener("change", () => save());
     sh.querySelectorAll("[data-set]").forEach(b => b.onclick = () => { close(); applySet(b.dataset.set); render(true); });
   }
   (() => {
