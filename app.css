@@ -949,7 +949,7 @@ img{transition:opacity .6s var(--ease)}
 /* a Room: a full-height sheet over the dimmed honeycomb, entered by the signature motion (§8). A thin strip of
    the (decorative) honeycomb shows above it, so you can see you're still on top of Home; tapping it goes home. */
 .room-floor-peek{position:fixed;left:0;right:0;top:0;height:calc(var(--top) + 12px);z-index:13;overflow:hidden;background:var(--ground)}
-.room-floor-peek i{position:absolute;top:-60%;height:220%;width:8.5%;transform:skewX(-14deg)}
+.room-floor-peek i{position:absolute;top:-60%;height:220%;width:6.6%;transform:skewX(-14deg);opacity:.32}
 .room-sheet{position:fixed;left:0;right:0;top:calc(var(--top) + 12px);bottom:0;z-index:14;background:var(--surface-1);
   border-radius:var(--r-3) var(--r-3) 0 0;box-shadow:0 -16px 48px rgba(0,0,0,.45);display:flex;flex-direction:column;
   overflow:hidden;animation:roomIn var(--grow) var(--ease-grow) both}

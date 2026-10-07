@@ -351,7 +351,8 @@ const ROOMS_GLYPH = sv('<circle cx="5.5" cy="18.5" r="2.4"/><circle cx="7.5" cy=
 const HOME_GLYPH = sv('<path d="M12 3l7 4v10l-7 4-7-4V7z"/>', 24, 1.6);
 // a cheap, decorative stand-in for "a strip of the dimmed honeycomb" above a room (the real canvas doesn't
 // survive a screen swap, since #app is fully re-rendered each time — see show() above)
-const ROOM_PEEK_BARS = Array.from({ length: 16 }, (_, i) => `<i style="background:${lchHex(50 + (i % 3) * 9, 46, (i * 23) % 360)}"></i>`).join("");
+// spread across the strip (each bar needs its own left; without it all 16 stacked into one bright slash at the left edge)
+const ROOM_PEEK_BARS = Array.from({ length: 16 }, (_, i) => `<i style="left:${(i * 6.4 - 2).toFixed(1)}%;background:${lchHex(50 + (i % 3) * 9, 46, (i * 23) % 360)}"></i>`).join("");
 function roomChrome(inner, tab) {
   return `<div class="room-floor-peek" data-floor-peek>${ROOM_PEEK_BARS}</div><div class="room-sheet" data-room="${tab}">${inner}</div><button class="corner l" data-rooms-corner aria-label="Rooms">${ROOMS_GLYPH}</button>`;
 }
