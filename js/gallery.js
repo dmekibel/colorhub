@@ -455,6 +455,9 @@ function glRange(el, val, ramp, onInput) {
 function galleryPage(i, push = true) {
   if (!GAL) return loadGallery().then(() => galleryPage(i, push)).catch(() => toast("The gallery didn't load"));
   if (!(i >= 0 && i < GAL.n)) return;
+  // already loaded (always the case going back): draw now, so the phone's back gesture handling stays in step
+  const now = glDetailNow(i);
+  if (now && GL_NAMES) { if (push) XSTACK.push("g:" + i); return glPage(i, now, GL_NAMES); }
   Promise.all([glDetail(i), glNamesLoad()]).then(([d, names]) => {
     if (push) XSTACK.push("g:" + i);
     glPage(i, d, names);

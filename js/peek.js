@@ -44,6 +44,7 @@ function peek(c) {
     onKey = keyWas; document.documentElement.classList.remove("sheet-open");
     if (reduceMotion) return box.remove();
     box.animate([{ transform: getComputedStyle(box).transform }, { transform: "translateY(100%)" }], { duration: 260, easing: "cubic-bezier(.3,0,.8,.2)", fill: "forwards" }).onfinish = () => box.remove();
+    setTimeout(() => box.remove(), 400);   // even if animations are paused (background tab)
   };
   onKey = e => { if (e.key === "Escape") close(); };
   cleanup.push(() => box.remove());   // a screen change never leaves it behind

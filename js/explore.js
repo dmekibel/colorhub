@@ -78,7 +78,7 @@ function lensSections(lens) {
   const hueKey = n => { const [L, C, H] = lch(n.h); return C < 12 ? 1000 + (100 - L) : (H + 330) % 360 + (100 - L) / 400; };
   switch (lens) {
     case "spectrum":
-      return [{ honey: true, title: "Every color", sub: "Hue across, light to dark down. Drag, pinch to zoom, tap to open." }, ...lensSections("origins").map(sec => ({ ...sec, title: sec.title === "Still being traced" ? sec.title : "Named after · " + sec.title }))];
+      return [{ honey: true }, ...lensSections("origins").map(sec => ({ ...sec, title: sec.title === "Still being traced" ? sec.title : "Named after · " + sec.title }))];
     case "ideas": {
       const sys = pages.filter(p => (p.swatches || []).length >= 3), ideas = pages.filter(p => !sys.includes(p) && ["concept", "person", "work", "tradition", "culture"].includes(p.type));
       return [{ title: "Stories", sub: "Short reads, a few swipes each.", pins: stories.map(n => pin(n)) },

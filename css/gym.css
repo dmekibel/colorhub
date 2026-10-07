@@ -227,3 +227,14 @@
 .eye-cal div{display:grid;grid-template-columns:70px 1fr 38px;align-items:center;gap:10px;font-size:13px;color:var(--soft)}
 .eye-cal i{height:10px;background:linear-gradient(var(--ink),var(--ink)) 0 0/var(--w) 100% no-repeat,var(--rule)}
 .eye-cal b{text-align:right;font-size:11px;color:var(--ink);font-weight:500}
+
+/* lighter/darker reveal: labels on the swatches, the pair in grey, one tip */
+.pairq .half{position:relative}
+.pq-lab{position:absolute;left:12px;bottom:12px;display:flex;align-items:baseline;gap:8px;padding:7px 10px 6px;background:#F3F0E8;color:#141311;border-radius:2px;text-align:left;animation:fade .3s both;z-index:2;opacity:1}
+.pq-lab b{font:400 22px/1 var(--serif)}
+.pq-lab em{font:500 11px/1 var(--mono);letter-spacing:.1em;font-style:normal;opacity:.8}
+.pq-rev{display:flex;flex-direction:column;gap:10px}
+.pq-grey{display:flex;align-items:center;gap:8px}
+.pq-grey span{font:500 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin-right:4px}
+.pq-grey i{flex:1;height:34px;background:var(--c);border-radius:2px;position:relative}
+.pq-grey em{position:absolute;left:8px;top:50%;transform:translateY(-50%);font:500 10.5px/1 var(--mono);font-style:normal;letter-spacing:.1em;text-transform:uppercase;color:#F3F0E8;mix-blend-mode:difference}
