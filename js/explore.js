@@ -95,7 +95,9 @@ function lensSections(lens) {
       return ORIGIN_GROUPS.map(([title, keys]) => ({ title, pins: colors.filter(n => n.wiki && keys.includes(n.wiki.named)).map(n => pin(n)) })).filter(s => s.pins.length)
         .concat([{ title: "Still being traced", sub: "Their stories are being written.", pins: colors.filter(n => !n.wiki || !n.wiki.named || n.wiki.named === "unknown").map(n => pin(n, { cap: "" })) }].filter(s => s.pins.length));
     case "paintings":
-      return [{ title: "Paintings and their palettes", sub: "Six exact colors from each canvas, each named.", pins: paintings.slice().sort((a, b) => (parseInt(String(a.year).replace(/\D+/g, "")) || 0) - (parseInt(String(b.year).replace(/\D+/g, "")) || 0)).map(n => pin(n)) }];
+      // the hand-built pages first, in a row; then the full gallery (js/gallery.js), loaded when this lens opens
+      return [{ title: "Featured · with stories", sub: "Hand-built pages with the story of the paint.", rail: true, pins: paintings.slice().sort((a, b) => (parseInt(String(a.year).replace(/\D+/g, "")) || 0) - (parseInt(String(b.year).replace(/\D+/g, "")) || 0)).map(n => pin(n)) },
+        { gallery: true }];
     case "history": {
       const dated = [...colors.filter(n => n.wiki && n.wiki.since).map(n => ({ n, y: n.wiki.since.year })), ...pages.filter(p => p.year != null).map(n => ({ n, y: n.year }))].sort((a, b) => a.y - b.y);
       const secs = ERAS.map(([title, a, b]) => ({ title, pins: dated.filter(d => d.y >= a && d.y < b).map(d => pin(d.n, d.n.kind === "color" ? { cap: `${fmtYear(d.n.wiki.since)} · ${d.n.wiki.since.what}` } : {})) })).filter(s => s.pins.length);
@@ -148,13 +150,14 @@ function exploreHome() {
     </header>
     <div class="x-search" hidden><label class="search"><span>${ICON.search}</span><input id="q" type="search" placeholder="Search colors, paintings, people, pigments" autocomplete="off"></label><div id="results"></div></div>
     <div class="x-feed" id="feed">
-      ${lensSections(lens).map(sec => `${sec.title ? `<div class="sec-head x-sec"><b>${esc(sec.title)}</b>${sec.pins && sec.pins.length ? `<span>${sec.pins.length}</span>` : ""}</div>` : ""}${sec.sub ? `<p class="x-sub">${esc(sec.sub)}</p>` : ""}${sec.honey ? `<div class="honey-panel" id="honey"></div>` : masonry(sec.pins)}`).join("")}
+      ${lensSections(lens).map(sec => sec.gallery ? `<div class="gl-wrap" id="gallery"></div>` : `${sec.title ? `<div class="sec-head x-sec"><b>${esc(sec.title)}</b>${sec.pins && sec.pins.length ? `<span>${sec.pins.length}</span>` : ""}</div>` : ""}${sec.sub ? `<p class="x-sub">${esc(sec.sub)}</p>` : ""}${sec.honey ? `<div class="honey-panel" id="honey"></div>` : sec.rail ? `<div class="gl-rail">${sec.pins.map(p => p.html).join("")}</div>` : masonry(sec.pins)}`).join("")}
       <p class="fine">Hex values are screen approximations. Every page lists its sources.</p>
     </div>
   `, "explore", "explore");
   el.querySelectorAll("[data-lens]").forEach(b => b.onclick = () => { S.lens = b.dataset.lens; save(); exploreHome(); });
   el.querySelector("[data-saved]").onclick = () => { S.lens = lens === "saved" ? "all" : "saved"; save(); exploreHome(); };
   const hp = el.querySelector("#honey"); if (hp) honeycomb(hp, { focus: dailyColor(), pick: it => closeup(colorNode(it.c)) });
+  const gw = el.querySelector("#gallery"); if (gw) galleryMount(gw);
   const on = el.querySelector(".lens-key .on"); if (on) on.scrollIntoView({ inline: "center", block: "nearest" });
   el.addEventListener("click", e => {
     const p = e.target.closest("[data-pin]"); if (p) return closeup(graph().nodes.get(p.dataset.pin));
@@ -208,6 +211,7 @@ function closeup(n, opts = {}) {
     XSTACK.pop();
     const prev = XSTACK[XSTACK.length - 1];
     if (!prev) return go("explore");
+    if (prev.startsWith("g:")) return galleryPage(+prev.slice(2), false);
     const node = graph().nodes.get(prev.replace(/^[zp]:/, ""));
     return prev.startsWith("z:") ? closeup(node, { back: true }) : openNode(node, false);
   };
@@ -249,6 +253,7 @@ function xBack() {
   XSTACK.pop();
   const prev = XSTACK[XSTACK.length - 1];
   if (!prev) return go("explore");
+  if (prev.startsWith("g:")) return galleryPage(+prev.slice(2), false);   // a gallery painting (js/gallery.js)
   const node = graph().nodes.get(prev.replace(/^[zp]:/, ""));
   return prev.startsWith("z:") ? closeup(node, { back: true }) : openNode(node, false);
 }
@@ -332,10 +337,12 @@ function colorPage(n) {
       if (w && w.related && w.related.length) secs.push(["kin", "Kin", w.related.map(r => { const x = graph().resolve(r.to); return x ? `<button class="kin" data-node="${esc(x.id)}"><i style="--c:${x.h}"></i><b>${esc(x.title)}</b><span>${esc(r.why)}</span></button>` : ""; }).join("")]);
       return (w ? "" : `<p class="fine">The full page for ${esc(c.n)} is being written. Its connections below are already live.</p>`) + tocHTML(secs.map(x => [x[0], x[1]])) + secs.map((x, i) => secHTML(x[0], x[1], x[2], i < 2)).join("");
     })()}
+    <section class="gl-in" data-glin></section>
     ${connSection(n)}
     ${w && w.sources ? secHTML("src", "Sources", sourcesHTML(w.sources), false) : ""}
   `, "article");
   wireArticle(el, n); wireSections(el);
+  const gi = el.querySelector("[data-glin]"); if (gi) galleryColorRow(gi, c);
   el.querySelectorAll("[data-copy]").forEach(b => b.onclick = () => { try { navigator.clipboard.writeText(b.dataset.copy); toast("Copied " + b.dataset.copy); } catch (e) {} });
 }
 

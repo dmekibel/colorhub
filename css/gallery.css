@@ -1,0 +1,94 @@
+/* The painting gallery (js/gallery.js): the Paintings lens grid, the Adjust sheet, the lite painting page and the
+   "In paintings" row on color pages. Same "Museum editorial" language as app.css: hairlines, mono small caps,
+   serif titles, color as the only decoration. */
+
+/* a sideways row of pins (Featured, Similar palettes, In paintings) */
+.gl-rail{display:flex;gap:14px;align-items:flex-start;overflow-x:auto;margin:0 calc(-1 * var(--g));padding:2px var(--g) 8px;scroll-padding:0 var(--g);scroll-snap-type:x proximity;scrollbar-width:none}
+.gl-rail::-webkit-scrollbar{display:none}
+/* a filmstrip: every picture the same height, each pin as wide as its picture; the text never widens it */
+.gl-rail>.pin,.gl-rail>.gl-pin{flex:none;width:auto;scroll-snap-align:start}
+.gl-rail>.pin-art img,.gl-rail>.gl-pin .gl-im{height:150px;width:auto}
+.gl-rail>.pin-art>:not(img),.gl-rail>.gl-pin>:not(.gl-im){width:0;min-width:100%}
+.gl-rail>.pin-art b{font-size:18px}
+
+/* the bar above the grid: Adjust, what the search is, clear */
+.gl-bar{display:flex;align-items:center;gap:14px;min-height:46px;border-top:1px solid var(--rule-2);border-bottom:1px solid var(--rule);margin:4px 0 18px}
+.gl-adj{display:inline-flex;align-items:center;gap:8px;height:46px;font:500 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink);flex:none}
+.gl-adj svg{width:16px;height:16px}
+.gl-sum{flex:1;min-width:0;display:flex;align-items:center;gap:7px;font:500 10px/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gl-sum i{width:10px;height:10px;background:var(--c);flex:none}
+.gl-x{width:40px;height:40px;display:grid;place-items:center;color:var(--soft);margin-right:-10px;flex:none}
+.gl-x svg{width:16px;height:16px}
+.gl-x[hidden],.gl-float[hidden],.gl-picker[hidden]{display:none}
+
+/* the virtualized grid: pins are absolutely placed; their heights come from the index */
+.gl-grid{position:relative;min-height:80px}
+.gl-grid>.fine{margin-top:0}
+.gl-pin{display:flex;flex-direction:column;text-align:left;min-width:0;contain:layout paint}
+.gl-grid>.gl-pin{position:absolute}
+.gl-im{position:relative;display:block;width:100%;flex:none;background:var(--c,var(--lift));border-radius:2px;overflow:hidden}
+.gl-im img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .45s var(--ease)}
+.gl-im img.ld{opacity:1}
+.gl-pin .mini-pal{margin:6px 0 8px;flex:none}
+.gl-pin b{display:block;height:21px;font:400 19px/21px var(--serif);letter-spacing:-.005em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gl-pin small{display:flex;height:14px;margin-top:5px;font:500 9.5px/14px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--soft);white-space:nowrap;overflow:hidden}
+.gl-pin small span{min-width:0;overflow:hidden;text-overflow:ellipsis}
+.gl-pin small em{flex:none;font-style:normal;white-space:pre}
+.gl-pin:active .gl-im{opacity:.8}
+.gl-badge{position:absolute;left:6px;bottom:6px;z-index:1;max-width:calc(100% - 12px);padding:5px 7px 4px;border-radius:2px;background:rgba(14,13,11,.7);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:var(--ink);font:500 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* Adjust floats once the bar has scrolled away */
+.gl-float{position:fixed;left:50%;bottom:calc(var(--tabh) + 14px);transform:translateX(-50%);z-index:14;max-width:min(78vw,420px);box-shadow:0 10px 30px -10px rgba(0,0,0,.8);animation:fade .25s both}
+.gl-float span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* the Adjust sheet: light scrim so the results stay visible above it */
+.gl-scrim{background:rgba(0,0,0,.22)}
+.gl-sheet{padding-top:10px;padding-bottom:calc(var(--bottom) + 16px)}
+.gl-sheet .grab{margin-bottom:12px}
+.gl-sh-top{display:flex;align-items:baseline;gap:12px;padding-bottom:8px}
+.gl-sh-top b{font:400 30px/1 var(--serif);letter-spacing:-.02em}
+.gl-sh-top span{flex:1;font:500 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--soft)}
+.gl-reset{font:500 10px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--soft);padding:10px 0 10px 10px}
+.gl-row{display:grid;grid-template-columns:58px minmax(0,1fr);align-items:center;min-height:48px;border-top:1px solid var(--rule)}
+.gl-lab{font:500 9.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.gl-sw,.gl-chips{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;padding:9px var(--g) 9px 3px;margin-right:calc(-1 * var(--g))}
+.gl-sw::-webkit-scrollbar,.gl-chips::-webkit-scrollbar{display:none}
+.gl-sw button{flex:none;width:30px;height:30px;background:var(--c);border-radius:2px;position:relative}
+.gl-sw button.on{outline:2px solid var(--ink);outline-offset:2px}
+.gl-sw .today::after{content:"";position:absolute;left:50%;bottom:-7px;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:var(--ink)}
+.gl-sw .gl-any{border-radius:50%;background:conic-gradient(#E34234,#FFBF00,#50C878,#00A6C8,#4B5BD8,#B04BC8,#E34234)}
+.gl-cap{display:flex;align-items:center;gap:8px;min-height:30px;margin:-4px 0 6px 58px;font-size:12px;line-height:1.3;color:var(--soft)}
+.gl-cap i{width:12px;height:12px;background:var(--c);flex:none}
+.gl-cap b{font:400 18px/1 var(--serif);color:var(--ink);white-space:nowrap}
+.gl-cap span{min-width:0}
+.gl-picker{padding:6px 0 14px}
+.gl-picker .cp-wheel{width:min(100%,210px)}
+.gl-chips button{flex:none;height:30px;padding:0 11px;border:1px solid var(--rule);border-radius:2px;font:500 9.5px/1 var(--mono);letter-spacing:.11em;text-transform:uppercase;color:var(--soft);white-space:nowrap;transition:background .2s,color .2s}
+.gl-chips button.on{background:var(--paper);border-color:var(--paper);color:var(--paper-ink)}
+.gl-range{display:flex;align-items:center;gap:0;font:500 9px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.gl-range>span{width:34px;flex:none}
+.gl-range>span:last-child{text-align:right}
+.gl-tr{position:relative;flex:1;height:8px;margin:14px 12px;border-radius:4px;touch-action:none;cursor:pointer}
+.gl-tr::before{content:"";position:absolute;left:-12px;right:-12px;top:-16px;bottom:-16px}
+.gl-dim{position:absolute;top:0;bottom:0;background:rgba(23,22,15,.74);pointer-events:none}
+.gl-dim.l{left:0;border-radius:4px 0 0 4px}.gl-dim.r{right:0;border-radius:0 4px 4px 0}
+.gl-kn{position:absolute;top:50%;width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:50%;background:var(--ink);box-shadow:0 0 0 3px #17160F,0 2px 8px rgba(0,0,0,.6);pointer-events:none}
+.gl-go{margin-top:14px}
+
+/* the lite painting page */
+.gl-hero{display:flex;justify-content:center}
+.gl-hero>span{display:block;position:relative;max-width:100%;background:var(--c);border-radius:2px;overflow:hidden}
+.gl-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity .5s var(--ease)}
+.gl-hero img.ld{opacity:1}
+.gl-pal-h{margin-top:30px}
+.gl-page .sec-head{gap:12px}
+.art-top a.glass-pill{text-decoration:none}
+.gl-page .palette{margin-top:12px}
+.gl-sim-h{margin-bottom:16px}
+
+/* "In paintings" on a color page */
+.gl-in{margin-top:40px}
+.gl-in:empty{display:none}
+.gl-in h3{font:500 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--soft);padding-bottom:10px;border-bottom:1px solid var(--rule);margin-bottom:14px}
+.gl-in-sub{color:var(--soft);font-size:13.5px;line-height:1.45;margin:0 0 14px;max-width:46ch}
+.gl-in .gl-all{margin-top:4px;padding:0}
