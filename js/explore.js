@@ -443,11 +443,13 @@ const orbit = id => closeup(graph().nodes.get(id));
 // ======================================================================
 // Opening any node
 // ======================================================================
-function openNode(n, push = true) {
+// `tapped`: an exact hex that led here but isn't quite this color (js/swatch.js openTappedColor) — only
+// colorPage uses it (namePage takes the same argument directly, since a library name has no graph node).
+function openNode(n, push = true, tapped) {
   if (!n) return;
   if (n.kind === "story") return storyPlayer(n);
   if (push) XSTACK.push("p:" + n.id);
-  if (n.kind === "color") return colorPage(n);
+  if (n.kind === "color") return colorPage(n, tapped);
   if (n.kind === "painting") return paintingPage(n);
   if (n.page) return n.page(n);   // archive pages (passages, films) bring their own renderer
   return wikiPage(n);
@@ -552,38 +554,92 @@ function codeRows(hex) {
   return rows.length ? rows : all;
 }
 
-function colorPage(n) {
-  const c = n.c, w = n.wiki, nb = neighbor(c), st = c.id && S.cards[c.id];
-  const status = c.basic ? "One of the eleven basic color words" : st ? (isMine(st) ? "Yours: you picked or named it right a day or more later" : st.own || st.placed ? "In your reviews: a quick check makes it yours" : "Learning: it's in your reviews") : `Not learned yet · ${c.unit ? unitLabel(c.unit) : ""}`;
+// The color page (DESIGN-SYSTEM.md §12 "Color page"): a full-bleed hero (solid ‹ and ⋯, a state chip, the
+// name and hex), one paper primary ("Learn it"/"Review it") with quiet save/share icons, a compare strip
+// with its diff line, the lead and photo, the picture shelves (paintings/poems/nature/gems/fashion — each
+// hides itself when it has nothing, css/colorpage.css), and Language/History/Nearest names/Codes/Sources
+// collapsed at the end. No "More like this" box competing with Back: ⋯ opens it instead.
+//
+// `tapped`: an exact hex from a swatch that opened THIS page as its nearest name, but isn't quite it (David,
+// 2026-10-07 — js/swatch.js openTappedColor). The hero shows that exact color, not the page's own, with a
+// "Your color" note and a your-color-vs-named-color strip in place of the usual look-alike one.
+function colorPage(n, tapped) {
+  const c = n.c, w = n.wiki, nb = neighbor(c), st = c.id && S.cards[c.id], mine = isMine(st);
+  tapped = tapped ? String(tapped).toUpperCase() : null;
+  const heroHex = tapped || c.h;
+  const status = tapped ? `Your color · ${pctMatch(de2000(tapped, c.h))} to ${c.n}`
+    : c.basic ? "A basic color word" : st ? (mine ? "Yours" : st.own || st.placed ? "In your reviews" : "Learning") : `New to you${c.unit ? ", from " + unitLabel(c.unit) : ""}`;
+  const saved = isSaved(n.id);
+  // the strip: a tapped color compares against the page it landed on; otherwise this color, its authored
+  // neighbor (c.vs) if it has one, then its nearest taught look-alikes, deduped — up to 3 swatches, the first
+  // (this color, or your color) wider
+  const likes = typeof lookalikes === "function" ? lookalikes(c, 4).map(o => o.x) : [];
+  const seenN = new Set([c.n]);
+  const stripOthers = tapped ? [c] : [nb, ...likes].filter(x => x && !seenN.has(x.n) && (seenN.add(x.n), true)).slice(0, 2);
+  const stripDiff = tapped ? lookDiff({ h: tapped, n: "Your color" }, c) : c.d;
   const el = show(`
-    ${artTop(n)}
-    <div class="c-hero" style="--c:${c.h}" data-ink="${ink(c.h)}"><p class="eyebrow">${esc(status)}</p><h1>${esc(c.n)}</h1>
-      ${typeof hmLearnIt === "function" ? `<button class="c-learnit" data-learnit>${ICON.bolt} Learn it <small>~2 min</small></button>` : ""}</div>
-    <div class="codes">${codeRows(c.h).map(([k, v]) => `<button data-copy="${esc(v)}"><span>${k}</span><b class="mono">${esc(v)}</b></button>`).join("")}</div>
-    ${codeRows(c.h).some(r => r[0].startsWith("CMYK")) ? `<p class="fine codes-fine">CMYK here is a rough formula, not a print profile: real values depend on the paper and press, so check them in a print workflow with a proof.</p>` : ""}
-    ${nb && c.d ? `<section class="cmp-sec"><div class="compare" data-nb="${esc(c.n)}"><div style="--c:${c.h}" data-ink="${ink(c.h)}">${esc(c.n)}</div><div style="--c:${nb.h}" data-ink="${ink(nb.h)}" data-node="c:${esc(nb.n)}">${esc(nb.n)}</div></div><p class="diff">${esc(c.d)}</p></section>` : ""}
+    <div class="c-hero cp-hero cp-hero-full" style="--c:${heroHex}" data-ink="${ink(heroHex)}">
+      <button class="cp-close" data-back aria-label="Back">${ICON.back}</button>
+      <div class="cp-hero-foot">
+        <span class="cp-chip">${esc(status)}</span>
+        <h1>${esc(c.n)}</h1>
+        <button class="mono cp-hex" data-copy="${heroHex}">${heroHex}</button>
+      </div>
+      <span class="cp-scroll-hint" aria-hidden="true">${ICON.up}</span>
+    </div>
+    <div class="cp-primary-row">
+      ${typeof hmLearnIt === "function" ? `<button class="cp-primary" data-learnit>${mine ? "Review it" : "Learn it"}${mine ? "" : `<em>2 min</em>`}${ICON.arrow}</button>` : ""}
+      <button class="icon-btn cp-icon${saved ? " saved" : ""}" data-save aria-label="Save">${saved ? "♥" : "♡"}</button>
+      <button class="icon-btn cp-icon" data-share aria-label="Share">${ICON.share}</button>
+    </div>
+    ${stripOthers.length && stripDiff ? `<section class="cp-strip-sec">
+      <div class="cp-strip"${tapped ? "" : ` data-nb="${esc(c.n)}"`}>
+        <div style="--c:${heroHex}" data-ink="${ink(heroHex)}"><b>${tapped ? "Your color" : esc(c.n)}</b></div>
+        ${stripOthers.map(x => `<div style="--c:${x.h}" data-ink="${ink(x.h)}"><b>${esc(x.n)}</b></div>`).join("")}
+      </div>
+      <p class="cp-diff">${esc(stripDiff)}</p>
+    </section>` : ""}
     ${c.o && !(w && w.facets.some(f => f.k === "language")) ? `<p class="lead">${esc(c.o)}</p>` : ""}
     ${figHTML(c.n)}
-    ${(() => {
-      const secs = (w ? w.facets : []).map((f, i) => [f.k + i, FACET_LABEL[f.k] || f.k, `<p>${linkText(f.text)}</p>` + (i === 0 ? figHTML(c.n, 1) : "")]);
-      if (w && w.related && w.related.length) secs.push(["kin", "Kin", w.related.map(r => { const x = graph().resolve(r.to); return x ? `<button class="kin" data-node="${esc(x.id)}"><i style="--c:${x.h}"></i><b>${esc(x.title)}</b><span>${esc(r.why)}</span></button>` : ""; }).join("")]);
-      return (w ? "" : `<p class="fine">The full page for ${esc(c.n)} is being written. Its connections below are already live.</p>`) + tocHTML(secs.map(x => [x[0], x[1]])) + secs.map((x, i) => secHTML(x[0], x[1], x[2], i < 2)).join("");
-    })()}
     <section class="gl-in" data-glin></section>
     <div class="c-poems"></div>
     ${typeof archiveRows === "function" ? archiveRows(c) : ""}
     ${typeof btRow === "function" ? btRow(c) : ""}
     ${typeof gmRow === "function" ? gmRow(c) : ""}
     <section class="fx-in" data-world-in></section>
+    ${(() => {
+      const secs = (w ? w.facets : []).map((f, i) => [f.k + i, FACET_LABEL[f.k] || f.k, `<p>${linkText(f.text)}</p>` + (i === 0 ? figHTML(c.n, 1) : "")]);
+      if (w && w.related && w.related.length) secs.push(["kin", "Kin", w.related.map(r => { const x = graph().resolve(r.to); return x ? `<button class="kin" data-node="${esc(x.id)}"><i style="--c:${x.h}"></i><b>${esc(x.title)}</b><span>${esc(r.why)}</span></button>` : ""; }).join("")]);
+      // the sheet used to be the only place these lived (David, 2026-10-07: "everything the sheet had moves
+      // onto the page") — the nearest of the ~1,000 core names, same list js/names.js's own pages show.
+      if (typeof nearestCore === "function") {
+        const list = CORE_NAMES || (typeof coreFallback === "function" ? coreFallback() : []);
+        const near = nearestCore(tapped || c.h, list, 7).filter(x => x.n.toLowerCase() !== c.n.toLowerCase()).slice(0, 6);
+        if (near.length) secs.push(["nearnames", "Nearest names", `<div class="lk-list">${near.map(x => `<button class="lk-row" data-cp-near="${esc(x.n)}" data-h="${x.h}"><i style="--c:${x.h}"></i><b>${esc(x.n)}</b><span>${closeness(x.de)} · ${pctDiff(x.de)}</span></button>`).join("")}</div>`]);
+      }
+      secs.push(["codes", "Codes", `<div class="cp-codes">${codeRows(c.h).map(([k, v]) => `<button class="cp-code-row" data-copy="${esc(v)}"><span>${esc(k)}</span><b class="mono">${esc(v)}</b></button>`).join("")}</div>${codeRows(c.h).some(r => r[0].startsWith("CMYK")) ? `<p class="fine cp-codes-fine">CMYK here is a rough formula, not a print profile: real values depend on the paper and press, so check them in a print workflow with a proof.</p>` : ""}`]);
+      return (w ? "" : `<p class="fine">The full page for ${esc(c.n)} is being written. Its connections below are already live.</p>`) + tocHTML(secs.map(x => [x[0], x[1]])) + secs.map(x => secHTML(x[0], x[1], x[2], false)).join("");
+    })()}
     ${connSection(n)}
     ${w && w.sources ? secHTML("src", "Sources", sourcesHTML(w.sources), false) : ""}
-  `, "article");
-  wireArticle(el, n); wireSections(el);
+  `, "article cp-page");
+  el.querySelector("[data-back]").onclick = xBack;
+  wireLinks(el); wireSections(el);
+  onKey = e => { if (e.key === "Escape") xBack(); };
   const li = el.querySelector("[data-learnit]"); if (li) li.onclick = () => hmLearnIt(c);
+  el.querySelector("[data-save]").onclick = e => { const on = toggleSave(n.id); e.currentTarget.textContent = on ? "♥" : "♡"; e.currentTarget.classList.toggle("saved", on); };
+  el.querySelector("[data-share]").onclick = () => {
+    const url = shareURL("color/" + routeSlug(c.n)), text = `${c.n} · ColorHub`;
+    if (navigator.share) navigator.share({ text, url }).catch(() => {});
+    else { try { navigator.clipboard.writeText(url); toast("Copied the link"); } catch (e) {} }
+  };
+  // a tap anywhere on a near-name row grows its chip into the next page (js/core.js's morphFrom/runMorph)
+  el.querySelectorAll("[data-cp-near]").forEach(b => b.onclick = () => { morphFrom(b.querySelector("i")); openCoreName(b.dataset.h, b.dataset.cpNear); });
   const gi = el.querySelector("[data-glin]"); if (gi) galleryColorRow(gi, c);
   colorPoems(el.querySelector(".c-poems"), c);
   if (typeof worldColorRow === "function") worldColorRow(el, n);
   el.querySelectorAll("[data-copy]").forEach(b => b.onclick = () => { try { navigator.clipboard.writeText(b.dataset.copy); toast("Copied " + b.dataset.copy); } catch (e) {} });
+  return el;   // so growFrom (js/core.js, js/home.js hmOpenColor) can grow this page from the tapped honeycomb bubble
 }
 
 function wikiPage(n) {
@@ -619,9 +675,9 @@ function paintingPage(n) {
     <p class="eyebrow p-type">Painting · ${esc(n.year || "")}</p>
     <h1 class="p-title">${esc(n.title)}</h1>
     <p class="p-dek">${esc(n.artist || "")}${n.place ? ` · ${esc(n.place)}` : ""}</p>
-    ${pal.length ? `<div class="palette">${pal.map((p, i) => `<button class="pal" data-pi="${i}" style="--c:${p.h};flex:${Math.max(p.share, .08)}" data-ink="${ink(p.h)}"><span>${Math.round(p.share * 100)}%</span></button>`).join("")}</div>
-      <div class="pal-names">${pal.map((p, i) => { const fam = typeof familyOf === "function" && familyOf(p.h); return `<button class="pal-name" data-pi="${i}"><i style="--c:${p.h}"></i><b>${esc(p.name)}</b>${fam ? `<span>${esc(fam.head.n)} family</span>` : ""}<em class="mono">${p.h}</em></button>`; }).join("")}</div>
-      <p class="fine">Tap a swatch to see where it lives in the painting.</p>` : `<p class="fine">This painting's palette is being extracted.</p>`}
+    ${pal.length ? `<div class="palette">${pal.map((p, i) => `<button class="pal" data-pi="${i}" data-swatch="${p.h}" style="--c:${p.h};flex:${Math.max(p.share, .08)}" data-ink="${ink(p.h)}"><span>${Math.round(p.share * 100)}%</span></button>`).join("")}</div>
+      <div class="pal-names">${pal.map((p, i) => { const fam = typeof familyOf === "function" && familyOf(p.h); return `<button class="pal-name" data-pi="${i}" data-swatch="${p.h}"><i style="--c:${p.h}"></i><b>${esc(p.name)}</b>${fam ? `<span>${esc(fam.head.n)} family</span>` : ""}<em class="mono">${p.h}</em></button>`; }).join("")}</div>
+      <p class="fine">Tap a swatch to open its page.</p>` : `<p class="fine">This painting's palette is being extracted.</p>`}
     ${n.note ? `<p class="p-body">${linkText(n.note)}</p>` : ""}
     ${connSection(n)}
     ${n.commons ? `<section class="srcs"><h3>Image</h3><ul><li><a href="${esc(n.commons)}" target="_blank" rel="noopener">Wikimedia Commons</a> · ${esc(n.license || "Public domain")}</li></ul></section>` : ""}

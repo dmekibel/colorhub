@@ -224,8 +224,22 @@ function hmHome() {
   let items = [], ctrl = null, gen = 0;
   const onPeek = o => { if (o.c) peek(o.c); else if (typeof colorSheet === "function") colorSheet(o, c => hmOpenColor(c)); };
   // a tap opens the real page straight away (ROADMAP §13: every name has one now) — one of the 101, or its
-  // own name page (js/names.js); a long press still shows the quick peek sheet above.
-  const pick = (o, fx) => { if (fx && fx.morph) fx.morph(); hmDismissHint(); o.c ? hmOpenColor(o.c) : hmOpenName(o); };
+  // own name page (js/names.js); a long press still shows the quick peek sheet above. The page itself grows
+  // from the tapped bubble (David, 2026-10-07: "any color in home, you should be able to click it to make it
+  // full screen"), via growFrom (js/core.js) when it's available; hmOpenColor/hmOpenName return their show()'d
+  // root for exactly this. growFrom calls its renderFn synchronously, so an async open (a name not yet in
+  // CORE_NAMES) just falls back to the old flying-chip morph — still a clean grow, never a hard cut.
+  const pick = (o, fx) => {
+    hmDismissHint();
+    const src = fx && fx.srcEl && fx.srcEl();
+    const open = () => (o.c ? hmOpenColor(o.c) : hmOpenName(o));
+    // one of the 101 resolves synchronously, so growFrom's renderFn returns its root and the grow plays; a
+    // library name waits on loadCoreNames() first (hmOpenName), so renderFn returns nothing yet and growFrom
+    // quietly skips the animation — the page still opens, just with show()'s plain cross-fade instead.
+    if (src && o.c && typeof growFrom === "function") growFrom(src, open);
+    else { if (fx && fx.morph) fx.morph(); open(); }
+    if (src) src.remove();
+  };
   function paintTitle(loading) {
     title.querySelector("span").textContent = hmViewLabel();
     title.querySelector("small").textContent = loading ? "Loading…" : `${items.length.toLocaleString()} color${items.length === 1 ? "" : "s"} · swipe or tap`;
@@ -451,8 +465,9 @@ function hmHome() {
 // honey.js's own HONEY_PAN restores the pan and zoom the next time hmHome() builds the same set of items.
 function hmOpenColor(c) {
   XSTACK = []; X_ROOT = "home";
-  openNode(colorNode(c));
+  const el = openNode(colorNode(c));
   hmPullClose(app.firstElementChild, hmBackOneStep);
+  return el;   // growFrom's renderFn (js/home.js pick, js/core.js) grows the page from the tapped bubble
 }
 // Same, for a bubble that isn't one of the 101: its own name page (js/names.js), not the small color sheet
 // (ROADMAP.md §13: every one of the ~1,000 names has a real page now).
@@ -462,6 +477,7 @@ function hmOpenName(o) {
     namePage(npEntryFor(o));
     hmPullClose(app.firstElementChild, hmBackOneStep);
   });
+  // (async: no root to return synchronously, so this path never grows from the bubble — see pick() above)
 }
 // whatever the current screen's own Back button does (one step, same as a tap); the pull-down gesture uses
 // this too, so it never skips straight to the honeycomb when there's a nearer screen to land on

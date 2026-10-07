@@ -83,7 +83,10 @@ const WIKI_SCREENS = [["exploreHome", { tab: "explore" }], ["closeup"], ["colorP
   ["peek", { overlay: true }], ["tzMaster"], ["tzPalResult"]];
 WIKI_SCREENS.forEach(([name, o]) => needsWiki(name, o));
 // screen function -> (its arguments) -> { title, path }
-const ROUTED = [["colorPage", nodeRouted()], ["wikiPage", nodeRouted()], ["paintingPage", nodeRouted()], ["storyPlayer", nodeRouted()],
+// a tapped-but-not-quite-this-color hex (js/swatch.js openTappedColor, David 2026-10-07) rides along as
+// ?c=<hex> on the color/name address, so Back and a shared link reproduce the same "Your color" view.
+const tappedQS = tapped => tapped ? "?c=" + String(tapped).replace("#", "").toLowerCase() : "";
+const ROUTED = [["colorPage", (n, tapped) => n && n.id ? routed(n.title, nodeRoute(n) + tappedQS(tapped)) : null], ["wikiPage", nodeRouted()], ["paintingPage", nodeRouted()], ["storyPlayer", nodeRouted()],
   ["closeup", nodeRouted("/more")],
   ["daily", () => routed("Color of the day", "daily")],
   ["challenge", () => routed("Daily challenge", "challenge")], ["challengeDone", () => routed("Daily challenge", "challenge")],
@@ -92,7 +95,7 @@ const ROUTED = [["colorPage", nodeRouted()], ["wikiPage", nodeRouted()], ["paint
   ["poemPage", id => id != null ? routed("Poem", "poem/" + id) : null],   // js/poems.js   // a museum painting (js/gallery.js); i = its place in the gallery index
   ["passagePage", p => p && p.id ? routed(p.title, "passage/" + p.id) : null],
   ["filmPage", f => f && f.id ? routed(f.title, "film/" + f.id) : null],   // js/passages.js, js/films.js
-  ["namePage", entry => entry && entry.n ? routed(entry.n, "name/" + routeSlug(entry.n)) : null],   // js/names.js: a library color that isn't one of the 101
+  ["namePage", (entry, push, tapped) => entry && entry.n ? routed(entry.n, "name/" + routeSlug(entry.n) + tappedQS(tapped)) : null],   // js/names.js: a library color that isn't one of the 101
   ["phOpenRecord", (id, rec) => id != null ? routed(rec && (rec.title || rec.from) || "Your photo", "photo/" + id) : null],   // js/photos.js
   ["fashionPage", slug => typeof worldRouteTitle === "function" ? routed(worldRouteTitle(slug), "fashion/" + slug) : null],   // js/world.js
   ["btListPage", kind => typeof btListTitle === "function" ? routed(btListTitle(kind), "botany/" + kind) : null],   // js/botany.js (plant/dye/essay detail pages route via wikiPage above)
@@ -112,7 +115,14 @@ const routeName = slug => (CORE_NAMES || []).find(e => routeSlug(e.n) === slug) 
 // initial: first load. The address is opened on top of its tab's home, so Back lands somewhere sensible.
 function openRoute(hash, initial = false) {
   if (!/^#\/./.test(hash || "")) return false;
-  const parts = decodeURIComponent(hash.slice(2)).split("/").filter(Boolean), [kind, id, more] = parts;
+  const parts = decodeURIComponent(hash.slice(2)).split("/").filter(Boolean);
+  let [kind, id, more] = parts;
+  // ?c=<hex> (js/swatch.js openTappedColor, David 2026-10-07): the exact color that opened this page as its
+  // nearest name but isn't quite it — same "?c=" convention the gallery route already used for a painting
+  // palette tap. Lives inside the hash fragment itself (there's no true query string here), so it's just the
+  // tail of `id` once split off, same as "gallery/12?c=aabbcc" below.
+  let tappedHex = null;
+  if (id && id.includes("?c=")) { const [clean, qs] = id.split("?c="); id = clean; tappedHex = "#" + qs.toUpperCase(); }
   // "learn" is kept as a working alias for "today" (DESIGN-SYSTEM.md §2: Learn is the room's real name now;
   // #/today still opens it, since that address is already shared and bookmarked).
   const tabs = { today: "learn", learn: "learn", train: "gym", studio: "studio", explore: "explore" };
@@ -143,7 +153,7 @@ function openRoute(hash, initial = false) {
       if (!n) return go(S.tab || "learn");
       XSTACK = [];
       if (more === "more") return closeup(n);
-      return n.kind === "story" ? storyPlayer(n) : openNode(n);
+      return n.kind === "story" ? storyPlayer(n) : openNode(n, true, kind === "color" ? tappedHex : null);
     });
     return true;
   }
@@ -162,11 +172,11 @@ function openRoute(hash, initial = false) {
     // an app color's slug opens its own deep page instead (ROADMAP.md §13): same address family, same rule
     // as routeColor above for "color/<slug>".
     const c = routeColor(id);
-    if (c) { base(); whenWiki(() => { XSTACK = []; openNode(colorNode(c)); }); return true; }
+    if (c) { base(); whenWiki(() => { XSTACK = []; openNode(colorNode(c), true, tappedHex); }); return true; }
     base();
     if (!CORE_NAMES) { ROUTE_NEXT = routed("", "name/" + id); waitScreen(); ROUTE_REPLACE = true; }
     XSTACK = [];
-    loadCoreNames().then(() => { const e = routeName(id); if (e) namePage(e); else go(S.tab || "learn"); });
+    loadCoreNames().then(() => { const e = routeName(id); if (e) namePage(e, true, tappedHex); else go(S.tab || "learn"); });
     return true;
   }
   if (kind === "photo" && id && typeof photoPage === "function") { base(); XSTACK = []; photoPage(id); return true; }
