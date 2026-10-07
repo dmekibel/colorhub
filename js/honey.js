@@ -2,16 +2,23 @@
 // The honeycomb: one view mode of the color browser (js/colorsets.js), and the engine behind the honeycomb home
 // (js/home.js). It shows ANY list of colors as bubbles on a hex lattice seen through a lens, drawn on one canvas so
 // even the 2,700-name library stays smooth on a phone.
-//  - layout "mapWide" / "mapTall": hue runs left to right and wraps around (greys get their own band at the seam);
-//    lightness runs top to bottom and tiles mirrored (light, dark, light...), so the plane has no seams. "mapWide" is
-//    the original, wider tile; "mapTall" (today's shipped look) is taller, like a phone.
-//  - layout "wheel": greys in the middle, hue around, strength outward; the hexagon-shaped wheel tiles the plane.
-//    Every lattice cell always gets a color (leftover cells in the outermost ring duplicate their nearest neighbor)
-//    so the wheel never shows an empty hole.
-//  - layout "sunflower": a golden-angle phyllotaxis disc, sorted by hue (angle) then lightness (radius). It never
-//    wraps: it's one finite cluster at every set size, 25 to 2,700.
-//  Small sets (under HONEY_FINITE colors) on the map/wheel layouts don't wrap either: they sit as one compact
-//  cluster and spring back if you pull away.
+//
+// A layout only wraps/tiles in a direction where the colors on both sides of the seam actually continue into one
+// another; otherwise it stays finite (one cluster, spring-back at the edge):
+//  - layout "mapWide" / "mapTall": hue runs left to right and wraps around — the hue sweep's own start and end sit
+//    right next to each other (both near 15°), so the seam is a smooth hue step. Greys have no hue, so they're
+//    spliced into the INTERIOR of the hue sweep, never at that wrap seam (a grey-to-saturated jump happens once,
+//    not on every repeat). Lightness runs top to bottom and tiles mirrored (light, dark, light...), which is smooth
+//    by construction (a reflection), so that direction keeps wrapping. "mapWide" is the original, wider tile;
+//    "mapTall" (today's shipped look) is taller, like a phone.
+//  - layout "wheel": greys in the middle, hue around, strength outward. Always finite — the hexagon-shaped wheel's
+//    own cut edges don't match a neighboring copy's, so it doesn't tile.
+//  - layout "sunflower": a golden-angle phyllotaxis disc, sorted by hue (angle) then lightness (radius). Always
+//    finite — one cluster at every set size, 25 to 2,700.
+//  - layout "globe": Runge's 1810 color sphere (hue = longitude, lightness = latitude, chroma = nearness to the
+//    surface). A closed sphere has no edges at all, so there's nothing to seam — hue wraps around it for free.
+//  Small sets (under HONEY_FINITE colors) on the map layout don't wrap either: they sit as one compact cluster and
+//  spring back if you pull away.
 //
 // ---- the preset system (ROADMAP: "a honeycomb David can find the perfect look in") ----
 // Every visual choice is one `cfg` object: layout, lensMode ("round" fisheye | "edges" warp | "none" flat), the
@@ -60,8 +67,13 @@ function honeyMap(items, k) {
   }
   const { H, W, e } = best, half = Math.floor(W / 2);
   const grey = items.filter(it => it.C < 7).sort((a, b) => b.L - a.L), gc = Math.max(1, Math.round(grey.length / H));
-  const order = items.filter(it => it.C >= 7).sort((a, b) => honeyHueKey(a) - honeyHueKey(b))
-    .concat(grey.map((it, i) => [i % gc, i, it]).sort((a, b) => a[0] - b[0] || a[1] - b[1]).map(x => x[2]));
+  const hued = items.filter(it => it.C >= 7).sort((a, b) => honeyHueKey(a) - honeyHueKey(b));
+  const greySeq = grey.map((it, i) => [i % gc, i, it]).sort((a, b) => a[0] - b[0] || a[1] - b[1]).map(x => x[2]);
+  // Greys go in the INTERIOR of the hue sweep, never appended at its end: honeyHueKey's own start and end are
+  // already two close hues (both near 15°), which is exactly what should sit at the tile's wrap seam. A grey run
+  // is a real jump (no hue to continue), so it happens once in the middle of a tile, not on every repeat.
+  const mid = Math.floor(hued.length / 2);
+  const order = hued.slice(0, mid).concat(greySeq, hued.slice(mid));
   const pts = [];
   for (let j = 0, k2 = 0; j < W; j++) {
     const short = Math.floor((j + 1) * e / W) > Math.floor(j * e / W), col = order.slice(k2, k2 + (short ? H - 1 : H)).sort((a, b) => b.L - a.L);
@@ -138,6 +150,31 @@ function honeyCluster(items) {
   for (const [, i, j] of pairs) { if (ti.has(i) || cj.has(j)) continue; ti.add(i); cj.add(j); pts.push({ it: tg[i].it, x: cells[j].x, y: cells[j].y }); }
   return { pts, finite: true, ext: R };
 }
+// ---------- Globe: Runge's 1810 color sphere. Hue = longitude (a sphere has no edge, so it wraps for free),
+// lightness = latitude (y = -1 at the black pole, +1 at the white pole; greys sit on the axis through the
+// middle), chroma pushes a color out toward the surface at that latitude (surf = the sphere's own radius there).
+// Always finite — a closed surface, nothing to tile.
+const HONEY_CHROMA_REF = 62;
+// a stable (not random) hash of a name, for nudging apart points that would otherwise land exactly on top of
+// each other: true greys all share r=0 regardless of hue, and honeyCells deliberately skips a pair it finds at
+// ~0 distance (no direction to clip a seam along), so two coincident points would otherwise overlap outright.
+function honeyNameHash(s) { let h = 2166136261; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return (h >>> 0) / 4294967295; }
+function honeySphere(items) {
+  const seen = new Map(), pts = [];
+  for (const it of items) {
+    const y = clamp((it.L - 50) / 50, -1, 1), surf = Math.sqrt(Math.max(0, 1 - y * y));
+    let r = Math.min(1, it.C / HONEY_CHROMA_REF) * surf, lon = it.H * Math.PI / 180;
+    // near-zero chroma: give it a small real radius (greys still read as "near the axis") and spread its angle
+    // by a hash of its name, so a library's many near-identical greys at similar lightness don't collapse onto
+    // the exact same point (atan2(b,a) returns 0 for every a=b=0 grey alike)
+    if (r < .03) { r = .02 + .025 * Math.min(1, it.C); lon = honeyNameHash(it.n) * 6.283185307; }
+    const key = Math.round(lon * 40) + "|" + Math.round(y * 60);
+    const n = seen.get(key) || 0; seen.set(key, n + 1);
+    if (n > 0) lon += n * .19 + .05;   // any remaining exact/near-exact tie: step it apart deterministically
+    pts.push({ it, lon, y, r });
+  }
+  return { pts, globe: true, finite: true, ext: 1 };
+}
 const HONEY_MAP_K = { mapWide: 1 / 2.4, mapTall: .63 };
 function honeyLayout(raw, layoutKey) {
   let hs = 2166136261; for (const o of raw) for (let i = 0; i < o.n.length; i++) { hs ^= o.n.charCodeAt(i); hs = Math.imul(hs, 16777619); }
@@ -145,11 +182,14 @@ function honeyLayout(raw, layoutKey) {
   const hit = HONEY_LAYOUTS.get(key); if (hit && hit.raw === raw) return hit;
   const items = raw.map(honeyNorm);
   let lay;
-  if (layoutKey === "sunflower") lay = honeySunflower(items);
-  else if (items.length < HONEY_FINITE) lay = layoutKey === "wheel" ? Object.assign(honeyWheel(items), { finite: true }) : honeyCluster(items);
-  else if (layoutKey === "wheel") lay = honeyWheel(items);
+  if (layoutKey === "globe") lay = honeySphere(items);
+  else if (layoutKey === "sunflower") lay = honeySunflower(items);
+  // the wheel's own cut edges never match a neighboring copy's, so (David's wrap rule) it stays finite always,
+  // not just for small sets
+  else if (layoutKey === "wheel") lay = Object.assign(honeyWheel(items), { finite: true });
+  else if (items.length < HONEY_FINITE) lay = honeyCluster(items);
   else lay = honeyMap(items, HONEY_MAP_K[layoutKey] || HONEY_MAP_K.mapTall);
-  if (lay.finite) lay.ext = Math.max(.5, ...lay.pts.map(p => Math.hypot(p.x, p.y)));
+  if (lay.finite) { if (!lay.globe) lay.ext = Math.max(.5, ...lay.pts.map(p => Math.hypot(p.x, p.y))); }
   else { const [A, B] = [lay.A, lay.B], det = A[0] * B[1] - B[0] * A[1]; lay.inv = [B[1] / det, -B[0] / det, -A[1] / det, A[0] / det]; lay.per = Math.min(Math.hypot(...A), Math.hypot(...B)); lay.perX = lay.perX || lay.per; lay.perY = lay.perY || lay.per; }
   Object.assign(lay, { key, raw, items });
   if (HONEY_LAYOUTS.size > 24) HONEY_LAYOUTS.clear();
@@ -163,8 +203,11 @@ function honeyLayout(raw, layoutKey) {
 // gap: the seam between neighboring cells, in units of 20 px (.05 = 1 px), equal everywhere (honeyCells).
 // far: how the style changes as you zoom all the way out. Each value is ADDED to the near value, scaled by how far
 // out you are (0 at the starting zoom, 1 at the zoom-out limit), so a user's Tweak moves both ends together.
+// alive: the one Motion slider David asked for (0 still, 1 default, 2 lively) — scales idle drift, the net's
+// finger-lag flex and the water breathing/ripple together. Everything else (fill, vig, drift's base speed...)
+// stays a lab-only knob.
 const HONEY_CFG_BASE = { layout: "mapTall", lensMode: "round", m0: 3.7, m1: .82, sig: 1.9, fill: .5, gap: .05, shape: 0,
-  zMinUser: null, vig: 1, labelMin: 26, drift: 1, flat: .7 };
+  zMinUser: null, vig: 1, labelMin: 26, drift: 1, flat: .7, alive: 1 };
 const HONEY_STYLES = {
   original: { title: "Original", cfg: { layout: "mapWide", m0: 3.7, m1: 1.05, sig: 2.1, gap: .05, zMinUser: .11, labelMin: 24 },
     far: { m0: -.9, labelMin: -5, gap: -.02 } },
@@ -183,8 +226,16 @@ const HONEY_STYLES = {
     far: { m0: -1.8, sig: .5, labelMin: -4 } },
   honeycomb: { title: "Honeycomb", cfg: { layout: "mapTall", lensMode: "round", m0: 2.6, m1: 1, sig: 2.4, shape: 1, gap: .03, zMinUser: .08, labelMin: 30, drift: .4, vig: .6 },
     far: { m0: -.8, gap: -.02, labelMin: -6 } },
+  globe: { title: "Globe", cfg: { layout: "globe", lensMode: "none", gap: .05, shape: 0, zMinUser: .5, labelMin: 32, vig: 0 },
+    far: { labelMin: -8 } },
 };
 const HONEY_MAX_DRAWN = 5000;   // phones stay smooth and safe; see the draw loop
+// motion (net lag + water breathe/ripple) is skipped past this many drawn bubbles, so it stays fast at the
+// biggest, most zoomed-out sets too — idle drift is unaffected (it only ever moves one pan value, not per-bubble)
+const HONEY_MOTION_BUDGET = Math.round(HONEY_MAX_DRAWN * .5);
+// the five styles the home's View panel shows (ROADMAP: "fewer choices, chosen well"); the rest (Current, Edges,
+// Wheel, Tapestry) stay reachable only from the honeycomb lab (#/lab/honey), which still steps through all of them
+const HM_HOME_STYLES = ["original", "honeycomb", "sunflower", "globe", "magnifier"];
 const HONEY_STYLE_LIST = Object.keys(HONEY_STYLES).map(id => ({ id, title: HONEY_STYLES[id].title }));
 function honeyResolveCfg(styleId, tweak, N) {
   const preset = HONEY_STYLES[styleId] || HONEY_STYLES.current;
@@ -193,13 +244,14 @@ function honeyResolveCfg(styleId, tweak, N) {
   if (tweak) cfg = { ...cfg, ...tweak };
   cfg.far = preset.far || {};
   cfg.fill = clamp(+cfg.fill, 0, 1); cfg.shape = clamp(+cfg.shape, 0, 1); cfg.gap = clamp(+cfg.gap, 0, .5);
-  cfg.vig = clamp(+cfg.vig, 0, 1); cfg.drift = Math.max(0, +cfg.drift);
+  cfg.vig = clamp(+cfg.vig, 0, 1); cfg.drift = Math.max(0, +cfg.drift); cfg.alive = clamp(+cfg.alive, 0, 2);
   return cfg;
 }
 // a compact summary of a resolved cfg, for the lab screen's "Copy my ratings" / Tweak panel's "Copy settings"
 function honeyCfgSummary(styleId, tweak) { return { style: styleId, tweak: tweak || null }; }
 
 // ---------- the lens ----------
+const honeyEaseS = u => u <= 0 ? 0 : u >= 1 ? 1 : u * u * (3 - 2 * u);   // smoothstep: 0 and 0-slope at both ends
 const honeyErf = x => { const s = x < 0 ? -1 : 1; x = Math.abs(x); const t = 1 / (1 + .3275911 * x);
   return s * (1 - ((((1.061405429 * t - 1.453152027) * t + 1.421413741) * t - .284496736) * t + .254829592) * t * Math.exp(-x * x)); };
 const HONEY_WRAP = new Map();
@@ -345,7 +397,7 @@ function honeycomb(host, opts = {}) {
   let styleId = typeof opts.style === "string" ? opts.style : "current", liveTweak = opts.tweak ? { ...opts.tweak } : null;
   // back-compat: callers that still pass layout/lens/lensMode directly (colorsets.js, and any legacy caller).
   // These fold into liveTweak (not a one-off cfg mutation) so they survive setItems()'s re-resolve on every call.
-  if (opts.layout) liveTweak = { ...(liveTweak || {}), layout: opts.layout === "wheel" ? "wheel" : opts.layout === "sunflower" ? "sunflower" : "mapTall" };
+  if (opts.layout) liveTweak = { ...(liveTweak || {}), layout: ["wheel", "sunflower", "globe"].includes(opts.layout) ? opts.layout : "mapTall" };
   if (opts.lensMode) liveTweak = { ...(liveTweak || {}), lensMode: opts.lensMode === "edges" ? "edges" : opts.lensMode === "none" ? "none" : "round" };
   if (opts.lens != null && !(liveTweak && liveTweak.m0 != null)) {
     const base0 = HONEY_STYLES[styleId] ? HONEY_STYLES[styleId].cfg : {}, pm0 = base0.m0 != null ? base0.m0 : HONEY_CFG_BASE.m0, pm1 = base0.m1 != null ? base0.m1 : HONEY_CFG_BASE.m1, lk = clamp(+opts.lens, 0, 2);
@@ -357,6 +409,12 @@ function honeycomb(host, opts = {}) {
   let phase = "idle", spring = null, touched = RM || SHOOT, visible = true, raf = 0, last = 0;
   let bloom = RM || SHOOT ? 1 : 0, bloomT0 = performance.now(), pressed = null, pressK = 0, drawn = [], center = null, settled = null;
   let ZMIN = .4;
+  // ---- "alive" motion state: idle drift (wanders after a pause), the net's finger-lag (Plag chases P, always),
+  // water's tap ripples, and the panel inset (ctrl.setInset, so a bottom sheet never covers the magnified middle)
+  let Plag = [0, 0], lastInput = performance.now(), driftT0 = 0, driftTeff = 0, driftAnchor = [0, 0], touchXY = null, ripples = [];
+  let insetBottom = 0, insetCur = 0;
+  const vy = () => Math.max(60, Hh - insetCur);   // the visible height above whatever panel is inset
+  const vcy = () => vy() / 2;
 
   // ---- geometry ----
   // lensMode "round": a radial fisheye, biggest in the middle, shrinking smoothly all the way out (Apple Watch style).
@@ -380,8 +438,8 @@ function honeycomb(host, opts = {}) {
   const Finv = (r, l) => { let lo = 0, hi = 400; for (let i = 0; i < 30; i++) { const m = (lo + hi) / 2; if (F(m, l) > r) hi = m; else lo = m; } return (lo + hi) / 2; };
   const centerK = l => cfg.lensMode === "round" ? base * l.s * l.m0 : l.K;
   const reach = l => {
-    if (cfg.lensMode === "round") return Finv(Math.hypot(W, Hh) / 2 + 40, l);
-    const um = l.inner + 3 * (1 - l.inner); return Math.hypot(um * W / 2, um * Hh / 2) / l.K + 1;
+    if (cfg.lensMode === "round") return Finv(Math.hypot(W, vy()) / 2 + 40, l);
+    const um = l.inner + 3 * (1 - l.inner); return Math.hypot(um * W / 2, um * vy() / 2) / l.K + 1;
   };
   const pack = () => 1;   // spacing now comes from the cells (honeyCells); this only bounds bubbles at the drawn edge
   const gapPx = () => clamp(zc("gap"), 0, .45) * 20;   // the seam between neighbors, in px (0-9), equal everywhere
@@ -397,18 +455,19 @@ function honeycomb(host, opts = {}) {
   // reached it does not rubber-band back to a closer zoom ("stays that far out").
   const zFloor = () => {
     if (!lay || !W) return .4;
+    if (lay.globe) return .5;   // a sphere's own math (not F/Finv) sizes it; a fixed, generous range is enough
     const search = ok => { let lo = .03, hi = ZMAX; if (!ok(hi)) return ZMAX; for (let i = 0; i < 24; i++) { const m = (lo + hi) / 2; if (ok(m)) hi = m; else lo = m; } return hi; };
     // a finite (non-wrapping) cluster has no "repeats" to hide, so its floor is just "the whole cluster fits on
     // screen with a little margin" — never so far out that 25 bubbles become a speck, but a big sunflower disc
     // (large N) still gets room to zoom out and show more of itself.
     if (lay.finite) {
       const R = lay.ext + 1.2;
-      if (cfg.lensMode === "round") return clamp(search(z => Finv(Math.hypot(W, Hh) / 2, { s: z, m0: cfg.m0, m1: cfg.m1, sig: cfg.sig }) <= R), ABS_ZMIN, .95);
-      return clamp(search(z => Math.hypot(W, Hh) / 2 / (base * z * M) <= R), ABS_ZMIN, .95);
+      if (cfg.lensMode === "round") return clamp(search(z => Finv(Math.hypot(W, vy()) / 2, { s: z, m0: cfg.m0, m1: cfg.m1, sig: cfg.sig }) <= R), ABS_ZMIN, .95);
+      return clamp(search(z => Math.hypot(W, vy()) / 2 / (base * z * M) <= R), ABS_ZMIN, .95);
     }
-    const fits = f => z => Finv(W / 2, { s: z, m0: cfg.m0, m1: cfg.m1, sig: cfg.sig }) <= lay.perX * f && Finv(Hh / 2, { s: z, m0: cfg.m0, m1: cfg.m1, sig: cfg.sig }) <= lay.perY * f;
+    const fits = f => z => Finv(W / 2, { s: z, m0: cfg.m0, m1: cfg.m1, sig: cfg.sig }) <= lay.perX * f && Finv(vy() / 2, { s: z, m0: cfg.m0, m1: cfg.m1, sig: cfg.sig }) <= lay.perY * f;
     const a = inner(), u30 = a + 1.2 * (1 - a);
-    const need = f => Math.max(u30 * W / 2 / (lay.perX * f), u30 * Hh / 2 / (lay.perY * f)) / (base * M);
+    const need = f => Math.max(u30 * W / 2 / (lay.perX * f), u30 * vy() / 2 / (lay.perY * f)) / (base * M);
     if (cfg.zMinUser != null) {
       // a small tile has too few unique bubbles per repeat: pushed past "clean" its copies line up into a
       // strongly periodic ring/moire (David: no eye-shaped artifact) rather than the glowing texture a big
@@ -420,10 +479,10 @@ function honeycomb(host, opts = {}) {
     return clamp(need(1.5), ABS_ZMIN, clamp(need(.5), .15, ZMAX));
   };
   const offAt = (sx, sy, l) => {
-    const dx = sx - W / 2, dy = sy - Hh / 2;
+    const dx = sx - W / 2, dy = sy - vcy();
     if (cfg.lensMode === "round") { const r = Math.hypot(dx, dy); if (r < 1e-6) return [0, 0]; const z = Finv(r, l); return [dx / r * z, dy / r * z]; }
-    const tx = dx / (W / 2), ty = dy / (Hh / 2);
-    return [Math.sign(tx) * unwarp(Math.abs(tx), l.inner) * W / 2 / l.K, Math.sign(ty) * unwarp(Math.abs(ty), l.inner) * Hh / 2 / l.K];
+    const tx = dx / (W / 2), ty = dy / (vy() / 2);
+    return [Math.sign(tx) * unwarp(Math.abs(tx), l.inner) * W / 2 / l.K, Math.sign(ty) * unwarp(Math.abs(ty), l.inner) * vy() / 2 / l.K];
   };
   function copies(p, Q, R, fn) {
     const dx = p.x - Q[0], dy = p.y - Q[1], R2 = R * R;
@@ -443,13 +502,10 @@ function honeycomb(host, opts = {}) {
   }
 
   // ---- drawing ----
-  function draw(t = performance.now()) {
-    if (!lay || !W || dead) return;
-    const l = lens(t), R = reach(l), cx = W / 2, cy = Hh / 2, hx = W / 2, hy = Hh / 2, ia = l.inner, round = cfg.lensMode === "round", pk = pack(), shapeAmt = zc("shape");
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, Hh);
-    ctx.globalAlpha = l.a;
-    drawn = []; let tinyN = 0;
-    let cbest = Infinity, cItem = null;
+  // Flat layouts (map/wheel/sunflower, round or edges lens): the existing fisheye/warp math, unchanged.
+  function buildFlatDrawn(l, t) {
+    const R = reach(l), cx = W / 2, cy = vcy(), hx = W / 2, hy = vy() / 2, ia = l.inner, round = cfg.lensMode === "round", pk = pack();
+    drawn = []; let tinyN = 0, cbest = Infinity, cItem = null;
     for (const p of lay.pts) copies(p, P, R, (ex, ey) => {
       const z = Math.hypot(ex, ey);
       let x, y, d;
@@ -462,13 +518,80 @@ function honeycomb(host, opts = {}) {
       if (x < -d || y < -d || x > W + d || y > Hh + d) return;
       if (d < 2.2) { tinyN++; return; }
       if (z < cbest) { cbest = z; cItem = p.it; }
-      drawn.push({ it: p.it, x, y, d });
+      drawn.push({ it: p.it, x, y, d, z });
     });
     // Safety: never draw more than ~5,000 bubbles. Far out on a big set some styles reached 50,000-120,000, which ran
     // a phone out of memory (a white or black screen). Past the budget, the zoom-out limit moves in to this zoom.
     // and never so far out that the screen is mostly specks too small to draw: move the limit in instead
     if (tinyN > drawn.length * 3 && tinyN > 800 && Z < ZMAX) { ZMIN = Math.min(ZMAX, Math.max(ZMIN, Z * 1.25)); if (Z < ZMIN) { Z = ZMIN; zAnim = null; requestAnimationFrame(() => draw()); } }
     if (drawn.length > HONEY_MAX_DRAWN) { ZMIN = Math.min(ZMAX, Math.max(ZMIN, Z * Math.sqrt(drawn.length / HONEY_MAX_DRAWN))); drawn.length = HONEY_MAX_DRAWN; if (Z < ZMIN) { Z = ZMIN; zAnim = null; requestAnimationFrame(() => draw()); } }
+    cItemCur = cItem;
+  }
+  // Globe: an orthographic projection of Runge's sphere (honeyLayout's honeySphere). P doubles as [yaw, pitch]
+  // (radians) here instead of a plane offset — see the pointer handlers and zoomAround below, which branch on
+  // lay.globe. Foreshortening toward the rim needs no extra size math: honeyCells sizes every bubble from its
+  // real neighbor spacing in screen space, and projection alone already packs the rim's neighbors tighter.
+  let cItemCur = null;
+  function buildGlobeDrawn(l, t) {
+    const cx = W / 2, cy = vcy(), Rpx = Math.min(W, vy()) * .42 * Z;
+    const yaw = P[0], pitch = clamp(P[1], -1.5, 1.5);
+    const cosY = Math.cos(yaw), sinY = Math.sin(yaw), cosP = Math.cos(pitch), sinP = Math.sin(pitch);
+    const seedD = Math.max(10, Rpx * .17);
+    drawn = []; let cbest = -Infinity, cItem = null;
+    for (const p of lay.pts) {
+      // lon=0 faces the camera (at yaw=pitch=0): X=sin(lon), Z=cos(lon), so it projects to screen-center with
+      // maximal depth — not the sphere's side. The camera sits on +Z looking toward the origin; a point is on
+      // the visible near hemisphere when its rotated Z (z2) is positive.
+      const x0 = p.r * Math.sin(p.lon), z0 = p.r * Math.cos(p.lon), y0 = p.y;
+      const x1 = x0 * cosY + z0 * sinY, z1 = -x0 * sinY + z0 * cosY;
+      const y2 = y0 * cosP - z1 * sinP, z2 = y0 * sinP + z1 * cosP;
+      if (z2 < 0) continue;   // the far hemisphere stays hidden
+      const sx = cx + x1 * Rpx, sy = cy - y2 * Rpx;
+      if (sx < -seedD || sy < -seedD || sx > W + seedD || sy > Hh + seedD) continue;
+      if (z2 > cbest) { cbest = z2; cItem = p.it; }
+      drawn.push({ it: p.it, x: sx, y: sy, d: seedD, z: Math.hypot(sx - cx, sy - cy) });
+    }
+    cItemCur = cItem;
+  }
+  // net (the finger-lag flex) + water (the breathing wave and tap ripples): shared by every layout, applied to
+  // the final screen positions/sizes before honeyCells, so the no-gap/no-overlap guarantee always still holds.
+  // Skipped past HONEY_MOTION_BUDGET bubbles, and for the net, on the globe (its rotation has no flat "pan" to lag).
+  // Calibrated to David's "subtle, beautiful, calm — never jittery" pass: net lag caps at 4% of a bubble's own
+  // spacing (8% at alive 2), water breathes at most 1% (2% at alive 2) over an 9s period, and a tap's ripple is
+  // one soft +3% pulse confined to the tapped bubble's immediate neighbors (a Gaussian sized to its own
+  // footprint), fully gone by ~0.6s — not a wave that travels the whole field. Nothing here is per-bubble random;
+  // every term is a smooth function of shared state (the lag vector, time, or distance from one shared point), so
+  // the field moves as one coherent sheet, never bubbles shaking independently.
+  function applyMotion(l, t) {
+    ripples = ripples.filter(r => t - r.t0 < 650);
+    if (RM || SHOOT || cfg.alive <= 0 || !drawn.length || drawn.length > HONEY_MOTION_BUDGET) return;
+    const lagX = P[0] - Plag[0], lagY = P[1] - Plag[1], kk = centerK(l);
+    const lvx = lagX * kk, lvy = lagY * kk;
+    const doNet = !lay.globe && Math.hypot(lvx, lvy) > .02;
+    const fx = touchXY ? touchXY[0] : W / 2, fy = touchXY ? touchXY[1] : vcy(), half = Math.max(W, Hh) * .5;
+    const per = 9, waterK = .55, amp = .01 * cfg.alive;
+    for (const b of drawn) {
+      if (doNet) {
+        const dist = Math.hypot(b.x - fx, b.y - fy), factor = clamp(dist / half, 0, 1);
+        let ox = -lvx * factor, oy = -lvy * factor;
+        const cap = Math.max(1, b.d * .04 * cfg.alive), mag = Math.hypot(ox, oy);
+        if (mag > cap) { const s = cap / mag; ox *= s; oy *= s; }
+        b.x += ox; b.y += oy;
+      }
+      let mult = 1 + amp * Math.sin(t / 1000 * (2 * Math.PI / per) - b.z * waterK);
+      for (const rp of ripples) {
+        const age = t - rp.t0; if (age > 600) continue;
+        const dist = Math.hypot(b.x - rp.x, b.y - rp.y), spatial = Math.exp(-(dist * dist) / (2 * rp.sigma * rp.sigma)), fade = 1 - age / 600;
+        mult *= 1 + .03 * cfg.alive * spatial * fade;
+      }
+      b.d *= mult;
+    }
+  }
+  // the render tail every layout shares: cells, fill/stroke/labels, the pressed lift, the ghost crossfade, the
+  // repeat-seam vignette (only for a wrapping layout — a finite one, globe included, has no seam to hide) and caption
+  function finishFrame(l, t) {
+    const shapeAmt = zc("shape");
+    applyMotion(l, t);
     honeyCells(drawn, gapPx(), shapeAmt);
     let pb = null;
     if (pressed) { const i = drawn.findIndex(b => b.it === pressed.it && Math.abs(b.x - pressed.x) < 3 && Math.abs(b.y - pressed.y) < 3); if (i >= 0) { pb = drawn.splice(i, 1)[0]; drawn.push(pb); } }
@@ -499,6 +622,7 @@ function honeycomb(host, opts = {}) {
       if (!ghost.on) ghost = null;
     }
     if (lay && !lay.finite) {
+      const round = cfg.lensMode === "round", ia = l.inner, hx = W / 2, hy = vy() / 2;
       const by = round ? Math.max(0, hy - F(lay.perY * .5, l)) : hy * (1 - warp(lay.perY * .5 * l.K / hy, ia)), bx = round ? Math.max(0, hx - F(lay.perX * .5, l)) : hx * (1 - warp(lay.perX * .5 * l.K / hx, ia));
       const key = Math.round(by) * 4096 + Math.round(bx);
       if (key !== vigK) {
@@ -511,7 +635,14 @@ function honeycomb(host, opts = {}) {
       }
     }
     if (cfg.vig !== vigOpSet) { vigOpSet = cfg.vig; vig.style.opacity = cfg.vig; }
-    if (cItem !== center) { center = cItem; caption(); }
+    if (cItemCur !== center) { center = cItemCur; caption(); }
+  }
+  function draw(t = performance.now()) {
+    if (!lay || !W || dead) return;
+    const l = lens(t);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, Hh); ctx.globalAlpha = l.a;
+    if (lay.globe) buildGlobeDrawn(l, t); else buildFlatDrawn(l, t);
+    finishFrame(l, t);
   }
   function caption() {
     const it = center; if (!it) return;
@@ -527,17 +658,53 @@ function honeycomb(host, opts = {}) {
     raf = 0;
     const dt = Math.min(.05, Math.max(0, (t - last) / 1000)); last = t;
     let more = false;
+    const ALIVE = !RM && !SHOOT && cfg.alive > 0;
+    // Idle drift: after ~4s with no touch, wander around where you left it, easing in over ~1.5s. Calm by
+    // design (David: "gently floating", never "moving a lot") — the speed is driven directly (not a position
+    // formula's derivative, which can spike mid-ease), so it's hard-bounded at ~4.2px/s at alive 1, ~8.4px/s at
+    // alive 2, measured in tools/_qa/drift_check.js. A globe instead just spins slowly (no wandering off a tilt).
+    // Any touch changes `phase` away from "idle"/"drift" immediately, which stops this.
+    if (phase === "idle" && ALIVE && !down && !pinch && (t - lastInput) > 4000) { phase = "drift"; driftT0 = t; driftTeff = 0; driftAnchor = P.slice(); }
     if (zAnim) {
       const nz = Math.abs(zAnim.to - Z) < .003 ? zAnim.to : Z + (zAnim.to - Z) * Math.min(1, dt * (RM ? 60 : 11));
       zoomAround(nz, zAnim.sx, zAnim.sy);
-      if (nz === zAnim.to) { zAnim = null; if (opts.onZoom) opts.onZoom(Z); if (!down && !pinch) snap(); } else more = true;
+      if (nz === zAnim.to) { zAnim = null; if (opts.onZoom) opts.onZoom(Z); if (!down && !pinch && !lay.globe) snap(); } else more = true;
     }
     if (phase === "spring") {
       const s = spring, tau = (t - s.t0) / 1000, e = Math.exp(-s.w * tau);
       let off = 0;
       for (let k = 0; k < 2; k++) { const q = (s.A[k] + s.B[k] * tau) * e; P[k] = s.X[k] + q; off = Math.max(off, Math.abs(q)); }
       if (off < .002 && tau > .05) { P = s.X.slice(); phase = "idle"; spring = null; draw(t); settle(); } else more = true;
-    } else if (phase === "drift") { if (!lay.finite) P[0] += .2 * cfg.drift * dt; more = true; }
+    } else if (phase === "drift") {
+      if (!ALIVE) phase = "idle";
+      else {
+        // time-warp, not amplitude-scale: the ease factor advances an internal clock (driftTeff) rather than
+        // scaling a sine's amplitude, so by the chain rule the ON-SCREEN SPEED is the raw formula's own speed
+        // times ease(τ) — never higher than the raw formula's max, so there's no mid-ramp spike to bound separately.
+        const ease = honeyEaseS(clamp((t - driftT0) / 1500, 0, 1));
+        driftTeff += ease * cfg.alive * dt;
+        if (lay.globe) { P = [driftAnchor[0] + .035 * driftTeff, driftAnchor[1]]; }
+        else {
+          const te = driftTeff, k = Math.max(8, centerK(lens(t)));
+          const wx = 54 * Math.sin(.052 * te) + 25 * Math.sin(.023 * te + 1.3);
+          const wy = 47 * Math.sin(.045 * te + .4) + 22 * Math.sin(.019 * te + 2);
+          let wxw = wx / k, wyw = wy / k;
+          if (lay.finite) { const cap = Math.max(.15, (lay.ext || 1) * .3), m = Math.hypot(wxw, wyw); if (m > cap) { const s = cap / m; wxw *= s; wyw *= s; } }
+          P = [driftAnchor[0] + wxw, driftAnchor[1] + wyw];
+        }
+      }
+      more = true;
+    }
+    // the net's lag (Plag chases P) and water's breathing run all the time ALIVE is on, not just while idle
+    if (ALIVE) {
+      const tau = .1, a = 1 - Math.exp(-dt / tau);
+      Plag = [Plag[0] + (P[0] - Plag[0]) * a, Plag[1] + (P[1] - Plag[1]) * a];
+      more = true;
+    } else Plag = P.slice();
+    if (insetCur !== insetBottom) {
+      if (RM) insetCur = insetBottom; else { insetCur += (insetBottom - insetCur) * Math.min(1, dt * 9); if (Math.abs(insetCur - insetBottom) < .4) insetCur = insetBottom; }
+      more = true;
+    }
     const pt = pressed ? 1 : 0;
     if (Math.abs(pressK - pt) > .01) { pressK += (pt - pressK) * Math.min(1, dt * 18); more = true; } else pressK = pt;
     if (bloom < 1) { bloom = Math.min(1, (t - bloomT0) / 700); more = true; }
@@ -562,7 +729,22 @@ function honeycomb(host, opts = {}) {
     const o = offAt(sx, sy, lens(0)), X = [P[0] + o[0], P[1] + o[1]], A = [P[0] - X[0], P[1] - X[1]], w = RM ? 40 : 13;
     spring = { t0: performance.now(), X, A, B: [w * A[0], w * A[1]], w }; phase = "spring"; buzz(4); kick();
   }
+  // Globe versions: glideToGlobe brings a tapped item's hue/lightness to face the camera, front and center (the
+  // same centerFirst idea, in yaw/pitch); spinRelease just lets the drag's momentum decay like friction (no
+  // lattice point to snap to on a sphere) — B:[0,0] makes the spring a pure exponential decay, no oscillation.
+  function glideToGlobe(it) {
+    const p = lay.pts.find(q => q.it === it); if (!p) return;
+    const targetPitch = clamp(Math.asin(clamp(p.y, -1, 1)), -1.5, 1.5);
+    let dyaw = ((-p.lon - P[0] + Math.PI) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI) - Math.PI;
+    const X = [P[0] + dyaw, targetPitch], A = [P[0] - X[0], P[1] - X[1]], w = RM ? 40 : 13;
+    spring = { t0: performance.now(), X, A, B: [w * A[0], w * A[1]], w }; phase = "spring"; buzz(4); kick();
+  }
+  function spinRelease(V) {
+    const w = RM ? 30 : 4.5, X = [P[0] + V[0] / w, clamp(P[1] + V[1] / w, -1.5, 1.5)], A = [P[0] - X[0], P[1] - X[1]];
+    spring = { t0: performance.now(), X, A, B: [0, 0], w }; phase = "spring"; kick();
+  }
   function zoomAround(z, sx, sy) {
+    if (lay && lay.globe) { Z = z; return; }   // the globe always centers at screen middle; nothing to re-anchor
     const l0 = lens(0), o0 = offAt(sx, sy, l0); Z = z;
     const o1 = offAt(sx, sy, lens(0));
     P = [P[0] + o0[0] - o1[0], P[1] + o0[1] - o1[1]];
@@ -575,14 +757,16 @@ function honeycomb(host, opts = {}) {
   const ptrs = new Map();
   const hit = (x, y) => { let best = null, bd = Infinity; for (const b of drawn) { const d = Math.hypot(b.x - x, b.y - y); if (d < b.d / 2 + 4 && d / b.d < bd) { bd = d / b.d; best = b; } } return best; };
   const local = e => { const r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+  const GLOBE_ROT_K = 150;
   cv.addEventListener("pointerdown", e => {
     if (!lay) return;
-    const [x, y] = local(e); ptrs.set(e.pointerId, [x, y]);
+    lastInput = performance.now();
+    const [x, y] = local(e); ptrs.set(e.pointerId, [x, y]); touchXY = [x, y];
     try { cv.setPointerCapture(e.pointerId); } catch (er) {}
     if (phase === "spring" || zAnim) loop(performance.now());
     phase = "drag"; spring = null; zAnim = null; touched = true;
     if (ptrs.size === 2) {
-      const [a, b] = [...ptrs.values()], mid = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2], o = offAt(mid[0], mid[1], lens(0));
+      const [a, b] = [...ptrs.values()], mid = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2], o = lay.globe ? [0, 0] : offAt(mid[0], mid[1], lens(0));
       pinch = { d0: Math.max(10, Math.hypot(a[0] - b[0], a[1] - b[1])), Z0: Z, W0: [P[0] + o[0], P[1] + o[1]], t0: performance.now(), moved: false };
       pressed = null; down = null; clearTimeout(tapTimer); kick(); return;
     }
@@ -594,29 +778,34 @@ function honeycomb(host, opts = {}) {
   });
   cv.addEventListener("pointermove", e => {
     if (!ptrs.has(e.pointerId)) return;
-    const [x, y] = local(e); ptrs.set(e.pointerId, [x, y]);
+    const [x, y] = local(e); ptrs.set(e.pointerId, [x, y]); touchXY = [x, y];
     if (pinch && ptrs.size >= 2) {
       const [a, b] = [...ptrs.values()], mid = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2], d = Math.hypot(a[0] - b[0], a[1] - b[1]);
       if (Math.abs(d - pinch.d0) > 8) pinch.moved = true;
       Z = rubber(pinch.Z0 * d / pinch.d0);
-      const o = offAt(mid[0], mid[1], lens(0)); P = [pinch.W0[0] - o[0], pinch.W0[1] - o[1]];
+      if (!lay.globe) { const o = offAt(mid[0], mid[1], lens(0)); P = [pinch.W0[0] - o[0], pinch.W0[1] - o[1]]; }
       draw(); return;
     }
     if (!down) return;
     const dx = x - down.x, dy = y - down.y;
     if (!down.moved && Math.hypot(dx, dy) > 7) { down.moved = true; pressed = null; kick(); }
     if (!down.moved) return;
-    const k = centerK(lens(0)), now = performance.now();
-    P = [down.P0[0] - dx / k, down.P0[1] - dy / k];
-    if (lay.finite) {
-      const r = Math.hypot(P[0], P[1]), ext = lay.ext + .6;
-      if (r > ext) { const s = (ext + (r - ext) * .35) / r; P = [P[0] * s, P[1] * s]; }
+    const now = performance.now();
+    if (lay.globe) { P = [down.P0[0] + dx / GLOBE_ROT_K, clamp(down.P0[1] - dy / GLOBE_ROT_K, -1.5, 1.5)]; }
+    else {
+      const k = centerK(lens(0));
+      P = [down.P0[0] - dx / k, down.P0[1] - dy / k];
+      if (lay.finite) {
+        const r = Math.hypot(P[0], P[1]), ext = lay.ext + .6;
+        if (r > ext) { const s = (ext + (r - ext) * .35) / r; P = [P[0] * s, P[1] * s]; }
+      }
     }
     down.hist.push([now, P[0], P[1]]); while (down.hist.length > 2 && now - down.hist[0][0] > 100) down.hist.shift();
     draw();
   });
   const up = e => {
     if (!ptrs.has(e.pointerId)) return;
+    lastInput = performance.now();
     const at = ptrs.get(e.pointerId); ptrs.delete(e.pointerId);
     if (pinch) {
       if (ptrs.size) return;
@@ -624,7 +813,7 @@ function honeycomb(host, opts = {}) {
       if (!p.moved && performance.now() - p.t0 < 260) return zoomTo(1);
       if (Z < ZMIN || Z > ZMAX) return zoomTo(clamp(Z, ZMIN, ZMAX), at[0], at[1]);
       if (opts.onZoom) opts.onZoom(Z);
-      return snap();
+      return lay.globe ? void 0 : snap();
     }
     if (!down) return;
     const d = down; down = null; phase = "idle";
@@ -637,28 +826,35 @@ function honeycomb(host, opts = {}) {
       }
       lastTap = { t: now, x: d.x, y: d.y };
       if (p && e.type === "pointerup") {
-        const far = opts.centerFirst && Math.hypot(p.x - W / 2, p.y - Hh / 2) > p.b.d * .55;
-        tapTimer = setTimeout(() => { pressed = null; kick(); if (far) glideTo(p.x, p.y); else open(p.it, p.b); }, far ? 0 : 240);
+        if (!RM && !SHOOT && cfg.alive > 0) { ripples.push({ x: p.x, y: p.y, t0: now, sigma: Math.max(22, p.b.d * .85) }); if (ripples.length > 4) ripples.shift(); }
+        const far = opts.centerFirst && Math.hypot(p.x - W / 2, p.y - vcy()) > p.b.d * .55;
+        tapTimer = setTimeout(() => { pressed = null; kick(); if (far) { lay.globe ? glideToGlobe(p.it) : glideTo(p.x, p.y); } else open(p.it, p.b); }, far ? 0 : 240);
         return;
       }
       pressed = null; kick();
-      return snap();
+      return lay.globe ? void 0 : snap();
     }
     const h = d.hist, a = h[0], b = h[h.length - 1], dt = (b[0] - a[0]) / 1000;
     let V = performance.now() - b[0] > 70 || dt < .008 ? [0, 0] : [(b[1] - a[1]) / dt, (b[2] - a[2]) / dt];
     const sp = Math.hypot(V[0], V[1]); if (sp > 40) V = [V[0] * 40 / sp, V[1] * 40 / sp];
+    if (lay.globe) return spinRelease(V);
     snap(V);
   };
   cv.addEventListener("pointerup", up); cv.addEventListener("pointercancel", up);
   let wheelT = 0;
   cv.addEventListener("wheel", e => {
     if (!lay) return;
+    lastInput = performance.now();
     const [x, y] = local(e);
     if (e.ctrlKey) { e.preventDefault(); touched = true; phase = "idle"; spring = null; zAnim = null; zoomAround(rubber(clamp(Z * Math.exp(-e.deltaY * .012), ZMIN * .8, ZMAX * 1.2)), x, y); }
-    else if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) { e.preventDefault(); touched = true; phase = "idle"; spring = null; const k = centerK(lens(0)); P = [P[0] + e.deltaX / k, P[1] + e.deltaY / k]; }
+    else if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+      e.preventDefault(); touched = true; phase = "idle"; spring = null;
+      if (lay.globe) P = [P[0] + e.deltaX / GLOBE_ROT_K, clamp(P[1] + e.deltaY / GLOBE_ROT_K, -1.5, 1.5)];
+      else { const k = centerK(lens(0)); P = [P[0] + e.deltaX / k, P[1] + e.deltaY / k]; }
+    }
     else return;
     draw(); clearTimeout(wheelT);
-    wheelT = setTimeout(() => { if (Z < ZMIN || Z > ZMAX) zoomTo(clamp(Z, ZMIN, ZMAX), x, y); else { if (opts.onZoom) opts.onZoom(Z); snap(); } }, 160);
+    wheelT = setTimeout(() => { if (Z < ZMIN || Z > ZMAX) zoomTo(clamp(Z, ZMIN, ZMAX), x, y); else { if (opts.onZoom) opts.onZoom(Z); if (!lay.globe) snap(); } }, 160);
   }, { passive: false });
   cap.onclick = () => { if (center) open(center, drawn.find(b => b.it === center)); };
 
@@ -684,7 +880,14 @@ function honeycomb(host, opts = {}) {
     cfg = honeyResolveCfg(styleId, liveTweak, raw.length);
     lay = honeyLayout(raw, cfg.layout);
     ZMIN = zFloor(); Z = clamp(Z, ZMIN, ZMAX);
-    if (how === "restore" && HONEY_PAN && HONEY_PAN.key === lay.key) { P = [HONEY_PAN.x, HONEY_PAN.y]; if (!opts.zoom && HONEY_PAN.z) Z = HONEY_PAN.z; }
+    if (lay.globe) {
+      // P means [yaw, pitch] here, not a plane offset — see the pointer handlers above
+      if (how === "restore" && HONEY_PAN && HONEY_PAN.key === lay.key) { P = [HONEY_PAN.x, HONEY_PAN.y]; if (!opts.zoom && HONEY_PAN.z) Z = HONEY_PAN.z; }
+      else {
+        const f = focus && (focus.h ? focus : BYNAME.get(String(focus.n || "").toLowerCase())), p = f && lay.pts.find(q => q.it.n === f.n);
+        P = p ? [-p.lon, clamp(Math.asin(clamp(p.y, -1, 1)), -1.5, 1.5)] : [0, 0];
+      }
+    } else if (how === "restore" && HONEY_PAN && HONEY_PAN.key === lay.key) { P = [HONEY_PAN.x, HONEY_PAN.y]; if (!opts.zoom && HONEY_PAN.z) Z = HONEY_PAN.z; }
     else {
       const f = focus && (focus.h ? focus : BYNAME.get(String(focus.n || "").toLowerCase()));
       let p = f && lay.pts.find(q => q.it.n === f.n);
@@ -694,6 +897,7 @@ function honeycomb(host, opts = {}) {
       p = p || lay.pts[0];
       P = [p.x, p.y];
     }
+    Plag = P.slice(); lastInput = performance.now();
     center = null; draw(); settled = center;
     phase = touched ? "idle" : "drift"; spring = null;
     if (how !== "soft" && !RM && !SHOOT) { bloom = 0; bloomT0 = performance.now(); }
@@ -719,6 +923,14 @@ function honeycomb(host, opts = {}) {
     document.removeEventListener("visibilitychange", vis);
   }
   cleanup.push(destroy);
+  // QA readout: a visible on-page strip (not just document.title/fetch — a --screenshot run exits as soon as
+  // virtual time is up, often before an in-flight fetch's response lands) so a plain headless screenshot is
+  // enough to read the result back.
+  function qaReadout(text) {
+    let r = document.getElementById("hc-qa"); if (!r) { r = document.createElement("div"); r.id = "hc-qa"; Object.assign(r.style, { position: "fixed", left: "0", right: "0", top: "0", zIndex: 99999, background: "#000", color: "#0f0", font: "12px monospace", padding: "4px 6px", whiteSpace: "pre-wrap" }); document.body.appendChild(r); }
+    r.textContent = text; document.title = text;
+    fetch(text.split(" ")[0] + "?" + encodeURIComponent(text)).catch(() => {});
+  }
   host.addEventListener("honeyshot", e => {
     const act = e.detail, b = center && drawn.find(x => x.it === center);
     if (act === "tap" && center) open(center, b);
@@ -727,8 +939,21 @@ function honeycomb(host, opts = {}) {
     if (/^bench/.test(act)) {
       phase = "idle"; bloom = 1; if (act === "benchout") Z = ZMIN;
       const t0 = performance.now(), n = 240; for (let i = 0; i < n; i++) { P[0] += .037; P[1] += .021; draw(); }
-      document.title = `bench ${((performance.now() - t0) / n).toFixed(2)}ms/frame, zoom ${Z}, ${drawn.length} drawn of ${lay.pts.length}`;
-      fetch("bench?" + encodeURIComponent(document.title)).catch(() => {});
+      qaReadout(`bench ${((performance.now() - t0) / n).toFixed(2)}ms/frame, zoom ${Z}, ${drawn.length} drawn of ${lay.pts.length}`);
+    }
+    // QA: scan the currently-drawn bubbles for any pair closer than the sum of their radii (minus the gap) —
+    // the no-gap/no-overlap guarantee honeyCells makes, checked numerically instead of by eye
+    if (act === "overlap") {
+      let bad = 0, worst = 0;
+      for (let i = 0; i < drawn.length; i++) for (let j = i + 1; j < drawn.length; j++) {
+        const a = drawn[i], b2 = drawn[j], dist = Math.hypot(a.x - b2.x, a.y - b2.y), lim = (a.d + b2.d) / 2 - .3;
+        if (dist < lim) { bad++; worst = Math.max(worst, lim - dist); }
+      }
+      qaReadout(`overlap ${bad} bad of ${drawn.length} drawn, worst ${worst.toFixed(2)}px`);
+    }
+    if (act === "debug") {
+      const Rpx = Math.min(W, vy()) * .42 * Z;
+      qaReadout(`debug W=${W} Hh=${Hh} dpr=${dpr} Z=${Z} ZMIN=${ZMIN} inset=${insetCur} Rpx=${Rpx.toFixed(1)} globe=${!!(lay && lay.globe)} drawn=${drawn.length}`);
     }
   });
   resize();
@@ -742,11 +967,14 @@ function honeycomb(host, opts = {}) {
   }
   return {
     update(o = {}) {
-      if (o.layout) liveTweak = { ...(liveTweak || {}), layout: o.layout === "wheel" ? "wheel" : o.layout === "sunflower" ? "sunflower" : "mapTall" };
+      if (o.layout) liveTweak = { ...(liveTweak || {}), layout: ["wheel", "sunflower", "globe"].includes(o.layout) ? o.layout : "mapTall" };
       if (o.style && HONEY_STYLES[o.style]) styleId = o.style;
       setItems(o.items || (lay && lay.raw), o.focus || (center && center.o), o.soft ? "soft" : "");
     },
     zoom: (z, animate = true) => animate ? zoomTo(z) : (Z = clamp(z, ZMIN, ZMAX), draw()),
+    // so a bottom sheet never covers the magnified middle: the lens center, the "center" bubble and the
+    // vignette all recenter into whatever's still visible above it. Animated (~300ms; see loop()'s insetCur tween).
+    setInset({ bottom } = {}) { insetBottom = Math.max(0, +bottom || 0); kick(); },
     // legacy back-compat shims (the pre-preset "Lens strength" / "Lens mode" controls, if anything still calls them)
     lens: k => { if (!(liveTweak && liveTweak.m0 != null)) { const base0 = (HONEY_STYLES[styleId] || HONEY_STYLES.current).cfg, pm0 = base0.m0 != null ? base0.m0 : HONEY_CFG_BASE.m0, pm1 = base0.m1 != null ? base0.m1 : HONEY_CFG_BASE.m1; applyTweak({ m0: pm1 + (pm0 - pm1) * Math.max(.12, clamp(+k, 0, 2)) }); } },
     lensMode: m => applyTweak({ lensMode: m === "edges" ? "edges" : m === "none" ? "none" : "round" }),

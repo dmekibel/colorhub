@@ -30,13 +30,16 @@ function shot(name) {
     case "learn": return go("learn");
     // the honeycomb home (js/home.js): home, home:sheet, home:sheetfull, home:views, home:search
     case "home": return hmShot(arg);
-    // bare honeycomb review shot, no chrome at all (tools/honey-contact-sheets.sh): honey:<style>:<n>:<default|out>
-    case "honey": { const [styleId = "current", nStr = "101", zArg = "default", tw = ""] = (arg || "").split(":"), n = +nStr || 101;
+    // bare honeycomb review shot, no chrome at all (tools/honey-contact-sheets.sh): honey:<style>:<n>:<default|out>[:<act>]
+    // act (optional, 5th segment): bench | benchout | overlap — dispatched as a "honeyshot" event once settled;
+    // the result lands in a fetch("bench?..."/"overlap?...") a QA script can read off the dev server's own log.
+    case "honey": { const [styleId = "current", nStr = "101", zArg = "default", tw = "", act = ""] = (arg || "").split(":"), n = +nStr || 101;
       return labItems(n).then(items => {
         const el = show(`<div class="hc-shot"></div>`, "fixed");
         const host = el.querySelector(".hc-shot"), ctrl = honeycomb(host, { items, style: styleId, centerFirst: true });
         if (zArg === "out") later2(() => { const z = ctrl.getCfg().resolved.zMinUser; ctrl.zoom(z != null ? z : .2, false); }, 150);
         if (tw === "tweak") later2(() => hmOpenTweak(ctrl), 200);
+        if (act) host.dispatchEvent(new CustomEvent("honeyshot", { detail: act }));
       }); }
     // the Learn it mini-lesson (js/learnit.js): learnit:<meet|tell|sort|pick|memory|done>
     case "learnit": return hmLearnitShot(arg || "meet");
@@ -66,6 +69,7 @@ function shot(name) {
     case "story": { const st = g().stories[+arg || 0]; return storyPlayer(st); }
     case "daily": S.daily = {}; return daily();
     case "lab": return LAB[arg || "harmony"]();
+    case "honeylab": return labHoney();   // the honeycomb lab (#/lab/honey) — not reachable through the router in shot mode
     // archive (js/passages.js, js/films.js): passage:<id>, passages[:<family>], film:<id>, cpage:<color> (scrolled to In books), films (Ideas lens at Films)
     case "passage": return archWhen(() => archOpen(archNode("passage", PSG.byId.get(arg) || PSG.list[0])));
     case "passages": return archWhen(() => { archOpen(PSG_INDEX_NODE()); if (arg) passagesIndexPage(arg); });
