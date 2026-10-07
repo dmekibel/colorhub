@@ -16,6 +16,11 @@ seams, no overlap, real magnified honeycomb · crash fix for big sets · photo p
 sheets close on swipe-down
 
 ## Next (in order)
+**Top (David, 2026-10-08: "I don't like that you're stuck on the 101 to learn"; "I want to be able to learn more colors"):** learning beyond the 101. Starts the moment the color page and Practice merge, since they share files:
+- Learn it works on every one of the 1,000 names, with look-alikes drawn from the 1,000 within the family.
+- Cards for those names get real ids (`core:<slug>`), and dueList() and review include them.
+- The path continues past the 101 through the stages (150 / 250 / 400 / 600 / 800 / 1,000), in mixed lessons (ROADMAP §1).
+
 | # | Note | Where | Size |
 |---|---|---|---|
 | 0 | Honeycomb up to ~9,000 (David, 2026-10-08: "Let's do 9k"; explorer's map only, lessons stay on the 1,000): the 1,000 core names + the ~2,700 library names + described colors built from the modifier grammar ("Pale salmon", "Deep teal", "Greyish lilac"), generated only where they fill real gaps (≥ ΔE 3 from every name), each one guaranteed to read back the same through nameOf(). Described names are labeled as descriptions, not established names. New scrubber stops after Stage 9: "Every name" (~2,700) and "Every shade" (~9,000). A gate fails if any shade doesn't read back its own name through nameOf(); block odd combos ("reddish teal"). Every name findable in search, alternate names open their color's page. Runs right after the names cleanup and the style lab (both touch the same files) | tools + data + home.js | M |
