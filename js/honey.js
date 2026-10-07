@@ -3,8 +3,8 @@
 // hex lattice seen through a gentle lens (bubbles nearly the same size everywhere), drawn on one canvas so even the
 // 2,700-name library stays smooth on a phone.
 //  - layout "map": hue runs left to right and wraps around (greys get their own band at the seam); lightness runs
-//    top to bottom, light to dark, then wraps back to light. The repeating tile is tall like a phone and holds each
-//    color once, so zoomed out you see every color once; the vignette fades the bands where the next repeat begins.
+//    top to bottom and tiles mirrored (light, dark, light...), so the plane has no seams. The tile is tall like a phone;
+//    the zoom-out limit and the vignette keep a color from showing twice on screen.
 //  - layout "wheel": greys in the middle, hue around, strength outward; the hexagon-shaped wheel tiles the plane.
 //  Small sets (under HONEY_FINITE colors) don't wrap: they sit as one cluster and spring back if you pull away.
 // Drag with momentum; on release a spring settles the nearest bubble into the center (with a haptic tick).
@@ -37,24 +37,33 @@ function honeyNorm(o) {
 // ---------- layouts: base points on the unit hex lattice (+ the two vectors the plane repeats along) ----------
 const honeyHueKey = it => it.C < 7 ? 400 + (100 - it.L) / 100 : (it.H - 15 + 360) % 360;   // greys after the purples
 function honeyMap(items) {
-  // A helix: hue columns of H colors each (light at the top, dark at the bottom). Past the bottom of a column you arrive
-  // at the top of the next one, so the plane has no holes, no edges, each color exactly once per repeat, and any count
-  // works. Rows outnumber columns about 2:1, so the repeat is tall like a phone.
-  const N = items.length;
-  let H = Math.max(2, Math.round(Math.sqrt(N * 1.9))); if (H & 1) H++;   // even, so the hex rows line up across the wrap
-  // greys get their own columns at the end of the hue circle, dealt round-robin so each grey column runs light to dark
+  // Hue runs left to right and wraps; lightness runs top to bottom and tiles mirrored (light, dark, light...), so the
+  // plane has no seams. The mirrored tile is turned half way round the hue circle, so a color's copy sits half the hue
+  // circle away. The tile is tall like a phone (the mirrored height is about twice half the width).
+  const N = items.length, h0 = Math.max(2, Math.round(Math.sqrt(N * .63)));
+  let best = null;
+  for (let H = Math.max(2, h0 - 3); H <= h0 + 3; H++) {
+    const W = Math.ceil(N / H), e = W * H - N, score = e + Math.abs(H - h0) * .6;
+    if (!best || score < best.score) best = { H, W, e, score };
+  }
+  const { H, W, e } = best, half = Math.floor(W / 2);
+  // greys get their own band at the seam, dealt round-robin so each grey column runs light to dark
   const grey = items.filter(it => it.C < 7).sort((a, b) => b.L - a.L), gc = Math.max(1, Math.round(grey.length / H));
   const order = items.filter(it => it.C >= 7).sort((a, b) => honeyHueKey(a) - honeyHueKey(b))
     .concat(grey.map((it, i) => [i % gc, i, it]).sort((a, b) => a[0] - b[0] || a[1] - b[1]).map(x => x[2]));
   const pts = [];
-  for (let k = 0, j = 0; k < N; k += H, j++) {
-    order.slice(k, k + H).sort((a, b) => b.L - a.L).forEach((it, r) => pts.push({ it, x: j + (r & 1 ? .5 : 0), y: r * HONEY_SQ3 }));
+  for (let j = 0, k = 0; j < W; j++) {
+    const short = Math.floor((j + 1) * e / W) > Math.floor(j * e / W), col = order.slice(k, k + (short ? H - 1 : H)).sort((a, b) => b.L - a.L);
+    k += col.length;
+    col.forEach((it, r) => {
+      const x = j + (r & 1 ? .5 : 0), y = r * HONEY_SQ3;
+      pts.push({ it, x, y });
+      // the mirrored tile, turned half way round the hue circle so no color sits next to its own copy
+      if (r > 0 && r < H - 1) pts.push({ it, x: x + half, y: -y });
+    });
   }
-  // the zigzag rows only wrap cleanly after an even number of rows, so an odd count leaves one empty spot per repeat,
-  // at the dark end of the last (grey) column
-  const M = N + (N % H) % 2, q = Math.floor(M / H), r = M % H;
-  // B: down one full column and one column left lands on the same spot; A: where color N would sit (= color 0 again)
-  return { pts, A: [q + (r & 1 ? .5 : 0), r * HONEY_SQ3], B: [-1, H * HONEY_SQ3], perX: Math.hypot(q + (r & 1 ? .5 : 0), r * HONEY_SQ3), perY: H * HONEY_SQ3 };
+  // perX/perY: how far you can see each way before a color could show twice (its mirrored copy is half the width over)
+  return { pts, A: [W, 0], B: [0, 2 * (H - 1) * HONEY_SQ3], perX: Math.max(2, half), perY: 2 * (H - 1) * HONEY_SQ3 };
 }
 // cells of a hexagon of radius n, ring by ring, each with its angle
 function honeyRings(n) {
@@ -147,7 +156,7 @@ function honeycomb(host, opts = {}) {
   host.innerHTML = `<div class="hc-box"><div class="hc-vig"></div><canvas class="hc-cv" aria-label="Colors as bubbles: drag to browse, pinch to zoom, tap one to open it"></canvas></div>
     <button class="hc-cap"><i></i><span><b></b><small></small></span><em></em></button>`;
   const vig = host.querySelector(".hc-vig"), cv = host.querySelector("canvas"), ctx = cv.getContext("2d"), cap = host.querySelector(".hc-cap");
-  const RM = reduceMotion, SHOOT = typeof SHOT !== "undefined" && !!SHOT, DRIFT = .2, LENS = { m0: 3, m1: 2.15, sig: 2.6 }, ZMAX = 2.5;
+  const RM = reduceMotion, SHOOT = typeof SHOT !== "undefined" && !!SHOT, DRIFT = .2, LENS = { m0: 3.5, m1: 1.95, sig: 2.3 }, ZMAX = 2.5;
   let vigK = -1, ZCLEAN = 0;
   let ZMIN = .4;   // per set: zoom out until the screen holds most of one repeat; the vignette hides the copies (see zFloor)
   let layout = opts.layout === "wheel" ? "wheel" : "map", lay = null, P = [0, 0], W = 0, Hh = 0, dpr = 1, base = 30, dead = false;
@@ -156,9 +165,11 @@ function honeycomb(host, opts = {}) {
   let bloom = RM || SHOOT ? 1 : 0, bloomT0 = performance.now(), pressed = null, pressK = 0, drawn = [], center = null, settled = null;
 
   // ---- geometry: the lens maps a world distance z (in bubble spacings) to a screen radius ----
-  // nearly flat: every bubble about the same size across the whole (tall) screen, the center about 40% bigger. A strong
-  // round fisheye made an eye shape on a tall phone (David, 2026-10-08).
+  // The lens is shaped like the screen: distance is measured with the vertical squeezed by the screen's aspect (ASP), so
+  // the magnified middle is a tall oval that fills a tall phone instead of a round "eye" (David, 2026-10-08). The
+  // center is about 1.8x the edge.
   const lshape = () => LENS;
+  const ASP = () => clamp(Hh / Math.max(1, W), 1, 2.4);
   const lens = t => {
     const e = 1 - Math.pow(1 - bloom, 3), s = (.72 + .28 * e) * Z;
     const br = phase === "drift" ? 1 + .028 * Math.sin(t / 1000 * Math.PI * 2 / 3.8) : 1;
@@ -168,7 +179,7 @@ function honeycomb(host, opts = {}) {
   const F = (z, l) => base * l.s * (l.m1 * z + (l.m0 - l.m1) * l.sig * .8862 * honeyErf(z / l.sig));
   const mag = (z, l) => l.m1 + (l.m0 - l.m1) * Math.exp(-((z / l.sig) ** 2));
   const Finv = (r, l) => { let lo = 0, hi = 400; for (let i = 0; i < 30; i++) { const m = (lo + hi) / 2; if (F(m, l) > r) hi = m; else lo = m; } return (lo + hi) / 2; };
-  const reach = l => Finv(Math.hypot(W, Hh) / 2 + 40, l);
+  const reach = l => { const rho = Math.hypot(W / 2, Hh / 2 / ASP()) + 40; return Finv(rho, l) * (Math.hypot(W, Hh) / 2 + 40) / rho; };
   // the smallest zoom for a wrapping set: the screen's width holds about one repeat (half a repeat each side of the
   // center), so zoomed all the way out you see nearly every color once. The tall screen would show repeats above and
   // below, so the vignette (draw, css .hc-vig) fades exactly those bands. ZCLEAN: the zoom where nothing repeats at all.
@@ -176,11 +187,12 @@ function honeycomb(host, opts = {}) {
     if (!lay || lay.finite || !W) return .4;
     const sh = z => ({ s: z, ...lshape(z) });
     const search = ok => { let lo = .05, hi = ZMAX; if (!ok(hi)) return ZMAX; for (let i = 0; i < 24; i++) { const m = (lo + hi) / 2; if (ok(m)) hi = m; else lo = m; } return hi; };
-    ZCLEAN = search(z => Finv(W / 2, sh(z)) <= lay.perX * .5 && Finv(Hh / 2, sh(z)) <= lay.perY * .5);
-    return Math.max(.15, Math.min(ZCLEAN, search(z => Finv(W / 2, sh(z)) <= lay.perX * .5 && Finv(Hh / 2, sh(z)) <= lay.perY * .58)));
+    const wx = z => Finv(W / 2, sh(z)), wy = z => ASP() * Finv(Hh / 2 / ASP(), sh(z));   // world half-extents along x and y
+    ZCLEAN = search(z => wx(z) <= lay.perX * .5 && wy(z) <= lay.perY * .5);
+    return Math.max(.15, Math.min(ZCLEAN, search(z => wx(z) <= lay.perX * .5 && wy(z) <= lay.perY * .58)));
   };
   // the world offset (from the pan point) under a screen point
-  const offAt = (sx, sy, l) => { const dx = sx - W / 2, dy = sy - Hh / 2, r = Math.hypot(dx, dy); if (r < 1e-6) return [0, 0]; const z = Finv(r, l); return [dx / r * z, dy / r * z]; };
+  const offAt = (sx, sy, l) => { const dx = sx - W / 2, dy = sy - Hh / 2, rho = Math.hypot(dx, dy / ASP()); if (rho < 1e-6) return [0, 0]; const z = Finv(rho, l); return [dx * z / rho, dy * z / rho]; };
   // every copy of a base point within distance R of world point Q (a wrapping plane repeats along A and B)
   function copies(p, Q, R, fn) {
     const dx = p.x - Q[0], dy = p.y - Q[1], R2 = R * R;
@@ -202,13 +214,13 @@ function honeycomb(host, opts = {}) {
   // ---- drawing ----
   function draw(t = performance.now()) {
     if (!lay || !W || dead) return;
-    const l = lens(t), R = reach(l), cx = W / 2, cy = Hh / 2, mark = lay.mixed;
+    const l = lens(t), R = reach(l), cx = W / 2, cy = Hh / 2, mark = lay.mixed, asp = ASP();
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, Hh);
     ctx.globalAlpha = l.a;
     drawn = [];
     let cbest = Infinity, cItem = null;
     for (const p of lay.pts) copies(p, P, R, (ex, ey) => {
-      const z = Math.hypot(ex, ey), k = z ? F(z, l) / z : base * l.s * l.m0;
+      const z = Math.hypot(ex, ey / asp), k = z ? F(z, l) / z : base * l.s * l.m0;   // the oval lens (see ASP)
       const x = cx + ex * k, y = cy + ey * k, d = base * l.s * mag(z, l) * .9;
       if (x < -d || y < -d || x > W + d || y > Hh + d || d < 1.6) return;
       if (z < cbest) { cbest = z; cItem = p.it; }
@@ -250,11 +262,11 @@ function honeycomb(host, opts = {}) {
     }
     // vignette: fade only the bands where repeats would show (beyond half a repeat from the center), top/bottom and sides
     if (lay && !lay.finite) {
-      const by = Math.max(0, Hh / 2 - F(lay.perY * .5, l)), bx = Math.max(0, W / 2 - F(lay.perX * .5, l));
+      const by = Math.max(0, Hh / 2 - asp * F(lay.perY * .5 / asp, l)), bx = Math.max(0, W / 2 - F(lay.perX * .5, l));
       const key = Math.round(by) * 4096 + Math.round(bx);
       if (key !== vigK) {
         vigK = key;
-        vig.style.setProperty("--vy", Math.max(70, by > 1 ? by + 70 : 0) + "px"); vig.style.setProperty("--vx", Math.max(34, bx > 1 ? bx + 50 : 0) + "px");   // always a soft frame; wider bands where repeats would show
+        vig.style.setProperty("--vy", Math.max(120, by > 1 ? by + 110 : 0) + "px"); vig.style.setProperty("--vx", Math.max(56, bx > 1 ? bx + 80 : 0) + "px");   // always a soft frame; wider bands where repeats would show
       }
     }
     if (cItem !== center) { center = cItem; caption(); }

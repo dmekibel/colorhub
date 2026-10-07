@@ -96,3 +96,8 @@
 .lt-done .fan i{flex:1;background:var(--c)}
 .lt-done h1{font:400 clamp(34px,9vw,46px)/1.1 var(--serif);letter-spacing:-.01em}
 .lt-done p{color:var(--soft);font-size:15.5px;line-height:1.5}
+
+/* the nine stage chips in the view chooser: a number and how many colors */
+.hm-stages{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.hm-stages .cx-chip{justify-content:space-between}
+.hm-stages .cx-chip em{font:500 11px/1 var(--mono);font-style:normal;color:var(--faint)}

@@ -16,14 +16,21 @@
 
 const HM_SUN = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></svg>`;
 const HM_SLIDERS = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 6h10M18 6h2M4 12h3M11 12h9M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>`;
+// The nine stages of the path (ROADMAP §14): stage N shows the first N names of the core list (data/core-names.json,
+// ordered by `rank` until the stage ordering exists), so you can preview what any stage holds.
+const HM_STAGES = [25, 50, 100, 150, 250, 400, 600, 800, 1000];
+function hmStageItems(n) {
+  return (CORE_NAMES || []).slice().sort((a, b) => a.rank - b.rank).slice(0, n)
+    .map(e => ({ n: e.n, h: e.h, c: BYNAME.get(e.n.toLowerCase()) || null }));
+}
 const HM_QUICK = [["101", "All 101"], ["learned", "Learned"], ["learning", "Learning"], ["notmet", "Not met yet"]];
 const hmSet = id => COLOR_SETS.find(s => s.id === id) || COLOR_SETS[0];
-const hmLabel = id => { const q = HM_QUICK.find(x => x[0] === id); return q ? q[1] : hmSet(id).title; };
+const hmLabel = id => { if (/^stage:/.test(id)) { const n = +id.slice(6); return `Stage ${HM_STAGES.indexOf(n) + 1} · ${n.toLocaleString()}`; } const q = HM_QUICK.find(x => x[0] === id); return q ? q[1] : hmSet(id).title; };
 
 function hmHome() {
   if (!S.placed) return welcome();
   S.hm = S.hm || {};
-  let setId = COLOR_SETS.some(s => s.id === S.hm.set) ? S.hm.set : "101";
+  let setId = COLOR_SETS.some(s => s.id === S.hm.set) || /^stage:\d+$/.test(S.hm.set || "") ? S.hm.set : "101";
   S.tab = "learn"; ROUTE_REPLACE = true; save();   // the Today tab's own home: replace its history entry, no tab bar
 
   const el = show(`
@@ -54,9 +61,12 @@ function hmHome() {
     title.querySelector("small").textContent = loading ? "Loading…" : `${items.length.toLocaleString()} color${items.length === 1 ? "" : "s"} · swipe or tap`;
   }
   async function render(soft) {
-    const g = ++gen, set = hmSet(setId);
-    if (csNeedsLib(set.state) && !LONG_NAMES) { paintTitle(true); await loadLongNames(); if (!el.isConnected || g !== gen) return; }
-    items = set.get();
+    const g = ++gen, stage = /^stage:/.test(setId) ? +setId.slice(6) : 0, set = hmSet(setId);
+    if (stage) { if (!CORE_NAMES) { paintTitle(true); await loadCoreNames(); if (!el.isConnected || g !== gen) return; } items = hmStageItems(stage); }
+    else {
+      if (csNeedsLib(set.state) && !LONG_NAMES) { paintTitle(true); await loadLongNames(); if (!el.isConnected || g !== gen) return; }
+      items = set.get();
+    }
     paintTitle();
     if (ctrl) ctrl.update({ items, soft });
     else ctrl = honeycomb(viewEl, { items, layout: "map", zoom: S.hm.zoom || 1, pick, onPeek, centerFirst: true,
@@ -68,7 +78,9 @@ function hmHome() {
   // ---------- title: tap for the full chooser, swipe for the four quick views ----------
   async function chooser() {
     buzz(4);
-    if (!LONG_NAMES) { title.classList.add("busy"); await loadLongNames(); title.classList.remove("busy"); if (!el.isConnected || document.querySelector(".sheet")) return; }
+    if (!LONG_NAMES || !CORE_NAMES) { title.classList.add("busy"); await Promise.all([loadLongNames(), loadCoreNames()]); title.classList.remove("busy"); if (!el.isConnected || document.querySelector(".sheet")) return; }
+    const stageHtml = `<div class="cx-sec"><b>Stages</b><span>the colors each stage of the path teaches</span></div>
+      <div class="cx-chips hm-stages">${HM_STAGES.map((n, i) => `<button class="cx-chip${setId === "stage:" + n ? " on" : ""}" data-set="stage:${n}"><b>${i + 1}</b><em>${n.toLocaleString()}</em></button>`).join("")}</div>`;
     const dotsFor = s => filterColors(csBase(s.state.base), { ...s.state, n: 5 });
     const row = (id, label) => { const s = hmSet(id); return `<button class="cx-opt${setId === id ? " on" : ""}" data-set="${id}">${cxDots(dotsFor(s))}<span class="cx-opt-t"><b>${esc(label)}</b></span><em>${s.get().length.toLocaleString()}</em></button>`; };
     const groups = {};
@@ -80,6 +92,7 @@ function hmHome() {
       <div class="cx-sh-head"><h3>What to show</h3></div>
       <div class="cx-sec"><b>Views</b><span>honestly, off your own reviews</span></div>
       ${HM_QUICK.map(([id, label]) => row(id, label)).join("")}
+      ${stageHtml}
       ${groupHtml}
     </div>`);
     sh.classList.add("cx-sheet");

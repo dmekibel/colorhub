@@ -266,6 +266,9 @@ function show(html, cls = "", tab = null) {
   timers.forEach(clearTimeout); timers = []; onKey = null;
   cleanup.forEach(f => { try { f(); } catch (e) {} }); cleanup = [];
   document.querySelectorAll(".scrim,.sheet,.toast,.fade-ghost").forEach(n => n.remove());
+  // a new screen always scrolls: release any scroll lock a sheet or panel left behind (leaving a screen with a sheet
+  // open used to keep the body pinned, so the next page couldn't scroll)
+  if (LOCKS) { LOCKS = 0; document.documentElement.classList.remove("sheet-open"); document.body.style.top = ""; }
   // the old screen fades out underneath the new one
   const old = app.firstElementChild;
   if (old && !reduceMotion) {
