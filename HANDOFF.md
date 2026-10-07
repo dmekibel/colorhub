@@ -50,8 +50,10 @@ the public repo `dmekibel/colorhub`).
   library (data/library.json), Wikimedia images with credits (data/images.js, botany-images.js, gem-images.js).
 
 ## In flight at handoff (check these first)
-- **Honeycomb home + Learn it** (Sonnet agent, worktree `.claude/worktrees/agent-a4289aed26a66d6e6`): ROADMAP §12. If it
-  finished, merge its branch, check screens, push. If not, resume or redo from the spec.
+- **Honeycomb home + Learn it:** shipped 2026-10-07 (js/home.js, js/learnit.js, css/home.css). Rough edges: the hint line
+  "Every color has a name. Tap one." overlaps bubbles; Learn it's bottom "Next" bar has no side gutter; the first tap on the
+  sheet handle sometimes does nothing; the title bar is hidden until you tap. Camera/dice live in the sheet (a Chromium flex bug
+  in the top bar, see the agent's notes in DESIGN.md).
 - **Wikimedia Commons painting batch** (Sonnet agent, worktree `.claude/worktrees/agent-a57968c4ba6d9c2fb`): adds a `commons`
   source to the corpus and rebuilds data/gallery. Merge, run `python3 tools/gallery.py --raw research/_raw`, spot-check images.
 - Paused earlier and NOT merged (partial work kept in worktrees): Looks archive (`agent-a50bf8a3c72ce6306`), the ~270 extra
