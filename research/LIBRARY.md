@@ -1,6 +1,6 @@
 # The ColorHub reference library
 
-Built 2026-10-07 by `tools/library.py`. Output: `data/library.json`, 2,711 named colors in 431 KB, one compact JSON object per line. Every download is cached in the gitignored `research/_raw/library/`.
+Built 2026-10-07 by `tools/library.py`. Output: `data/library.json`, 2,711 named colors in 431 KB, one compact JSON object per line. Every download is cached in the gitignored `research/_raw/library/`. (Same day, later: the ISCC-NBS import in §8 below added 4,340 more searchable alternate names to those same 2,711 colors, 792 KB.)
 
 **Why it exists.** The app teaches 101 curated color words (`data/colors.js`). Painting palettes were named with the nearest of those 101 and of the 390-name `data/color-names.json`, and many of those matches were far off: the median painting color sat ΔE 7.3 from its nearest app word and ΔE 5.4 from the 390 list. This library is the second layer, the reference behind the learnable words. Each entry can get an auto-generated page and be searched, and each painting swatch now carries its true nearest library name.
 
@@ -205,3 +205,30 @@ Together the 40 cover 53% of the uncovered painted area. The column "area" is th
 `Pullman Brown` (UPS brown) came out 13th in an earlier run and is excluded as a brand color (`LEARN_SKIP`).
 
 **What this says about the curriculum.** The gaps are not in hue. They are in the **dull, dark and greyish** range: warm blacks, olive-greys, drab browns and mid greys. The app has rich hue words (cerulean, vermilion) but only Umber, Taupe, Sepia, Charcoal, Gunmetal, Slate and Grey to cover the half of painting color that is muted. The first ten words alone (Bistre to Mushroom) newly name 15.9% of all painted area, about 40% of the area the app words leave unnamed. A third-tier unit like "Earths and shadows" (bistre, black olive, olive-brown, liver, mocha, mushroom, granite grey, cement) would do more for naming paintings than any further hue word.
+
+## 8. ISCC-NBS import (2026-10-07)
+
+Added by `tools/iscc_nbs.py` (extraction) + `merge_iscc_nbs()` in `tools/library.py` (merge), per the plan in `research/NAME-SOURCES.md`. Source: NBS Circular 553 (Kelly & Judd, 1955), public domain — see `tools/iscc_nbs.py`'s module docstring for the full extraction method, the OCR-cleanup evidence for the 267 block centroids, and the spot-check result.
+
+**Extraction.** `data/sources/iscc-nbs-names.json`: 8,790 raw name/source/block rows kept (2,580 dropped for no block number — mostly pure "(see X)" redirects with no designation of their own; 807 dropped for no recognizable source code; 192 dropped as implausible names (including 2 rare column-slicing clips -- see tools/iscc_nbs.py TRUNCATED_WORD_START)), grouped into **5,657 unique dictionary names**, each with its primary ISCC-NBS block (1-267), every distinct block it's cited under, and the source code(s) (M/R/P/T/TC/A/B/F/H/MUP/PSP/RC/S/SC). `data/sources/iscc-nbs-centroids.json`: all 267 official Munsell block centroids, converted to sRGB (62 fall outside the gamut and are clamped, mostly vivid/peripheral blocks).
+
+**Merge rule** (`merge_iscc_nbs()`, CIEDE2000 attach threshold 8): of the 267 blocks, 247 had at least one dictionary name pointing at them (20 blocks — mostly narrow compound modifiers like "very deep yellowish pink" — have none).
+
+| | names | result |
+|---|---|---|
+| 1. Already in the library (name match) | 1,297 | that entry's `src` gains `"iscc-nbs"`, `note` gains an "ISCC-NBS 1955 block N (codes)" fragment. No new bubble. |
+| 2. Not a name match, existing color within ΔE00 8 of the block centroid | 4,340 | attached to that entry's `altn` (alternate names), each `{n, src: "iscc-nbs", note}`. No new bubble. |
+| 3. Neither | 0 | would have created one new entry at the block centroid — never needed; the library was already dense enough (median ΔE 2.3 to nearest name, see §5 above) that every one of the 267 blocks had an existing color within 8 of its centroid. |
+
+**Before -> after:**
+
+| | before | after |
+|---|---|---|
+| Distinct colors (bubbles) | 2,711 | **2,711 — unchanged** |
+| Searchable names (primary + alternates) | 2,711 | **7,051** (2,711 primary + 4,340 ISCC-NBS alternates) |
+| `data/library.json` size | 431 KB | 792 KB |
+| `tools/name_coverage.py`, 2,711-name row | median ΔE 2.4, 98% within 5 | **identical** (no new colors were added, so color-coverage distances don't move; this import added names and provenance, not new hues) |
+
+The honeycomb itself is unchanged (same 2,711 bubbles); 1,297 of them now carry 1955 government provenance in their `note`, and 4,340 historical names (Jonquil, Navaho, Persimmon Orange, Aurantiacus, Kis Kilim…) are newly searchable and show "Also called …" on the colors they're synonyms of (`js/colorsets.js` `csMatch()`/`colorSheet()`/`altnLine()`).
+
+**Spot-check and known limitation.** Extracted entries were checked by eye against rendered page images (`pdftoppm`) across 12 randomly chosen dictionary pages, ~190 individual name/source/block triples. Every block number that came through was correct, with one exception found this way: a handful of names whose designation got OCR'd with the munsell modifier letters "l"/"O" misread as the digits "1"/"0" ("l.Ol 106" → "1.01 106") picked up a false extra block ("1", i.e. "vivid pink") ahead of the real one -- `block_numbers()` now only accepts a bare, whitespace-delimited digit token as a block number, which fixed the great majority of these (e.g. Citrine: was wrongly block 1, is now correctly block 106, "light olive"). One rarer variant survives this fix: an entry whose designation is itself truncated by a page or column edge right after the source code, with an unrelated later line's number getting pulled in as if it were confirmation (e.g. "Glaucous", `src: M`, kept block 1 instead of the correct 121 from its own `R`-sourced listing). Found by eye, not systematically; a general positional rule for it was tried and reverted (it broke more legitimate multi-line layouts than it fixed, given how differently entries wrap across physical lines). Affects roughly 19 of 5,657 names (0.3%) by rough estimate -- a known, accepted residual, consistent with "prefer dropping uncertain entries over importing garbage" where it could be caught, and left documented where it couldn't.
