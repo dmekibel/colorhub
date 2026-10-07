@@ -3,6 +3,7 @@
 //   #/today  #/train  #/studio  #/explore  #/explore/<colors|paintings|ideas|saved>
 //   #/color/<slug>  #/page/<id>  #/painting/<slug>  #/story/<id>     (add /more for the "More like this" closeup)
 //   #/daily  #/challenge  #/taste/<color|palette>  #/lab/<harmony|contrast>  #/gallery/<n> (a museum painting)
+//   #/poem/<id>  #/passage/<id>  #/film/<id>   (js/poems.js, js/passages.js, js/films.js)
 // How it works: show() (core.js) calls routeCommit(tab). A tab home replaces the current history entry with
 // its route; an inner screen pushes one. Screen functions don't know their own address, so this file wraps
 // them (the ROUTED list below): the wrapper notes the route, then the screen's show() writes it to the URL and the
@@ -78,6 +79,8 @@ const ROUTED = [["colorPage", nodeRouted()], ["wikiPage", nodeRouted()], ["paint
   ["tasteIntro", k => k === "palette" ? routed("Find your palette", "taste/palette") : routed("Find your color", "taste/color")],
   ["glPage", (i, d) => routed(d && d.t || "Painting", "gallery/" + i)],
   ["poemPage", id => id != null ? routed("Poem", "poem/" + id) : null],   // js/poems.js   // a museum painting (js/gallery.js); i = its place in the gallery index
+  ["passagePage", p => p && p.id ? routed(p.title, "passage/" + p.id) : null],
+  ["filmPage", f => f && f.id ? routed(f.title, "film/" + f.id) : null],   // js/passages.js, js/films.js
   ["fashionPage", slug => typeof worldRouteTitle === "function" ? routed(worldRouteTitle(slug), "fashion/" + slug) : null]];   // js/world.js
 ROUTED.forEach(([name, f]) => routeWrap(window, name, f));
 routeWrap(LAB, "harmony", () => routed("Harmony", "lab/harmony"));
@@ -117,6 +120,12 @@ function openRoute(hash, initial = false) {
   }
   if (kind === "poem" && id && typeof poemPage === "function") {
     base(); XSTACK = []; poemPage(id); return true;
+  }
+  if (kind === "passage" && id && typeof passagePage === "function") {
+    base(); XSTACK = []; archWhen(() => { const p = PSG && PSG.byId.get(id); if (p) passagePage(p); else go(S.tab || "learn"); }); return true;
+  }
+  if (kind === "film" && id && typeof filmPage === "function") {
+    base(); XSTACK = []; archWhen(() => { const f = (window.FILMS || []).find(x => x.id === id); if (f) filmPage(f); else go(S.tab || "learn"); }); return true;
   }
   if (kind === "gallery" && /^\d+$/.test(id || "") && typeof galleryPage === "function") {
     base();

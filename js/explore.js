@@ -81,6 +81,7 @@ function lensSections(lens) {
       return [{ title: "Stories", sub: "Short reads, a few swipes each.", pins: stories.map(n => pin(n)) },
         { title: "Color systems", sub: "Traditions that gave each color a meaning.", pins: sys.map(n => pin(n, { system: true })) },
         { title: "Ideas and people", pins: seeded(ideas, today()).map(n => pin(n)) },
+        ...[window.passagesSection, window.filmsSection].filter(f => typeof f === "function").flatMap(f => f()),   // js/passages.js, js/films.js
         ...lensSections("history").map(sec => ({ ...sec, title: "Through history · " + sec.title }))];
     }
     case "harmony": {
@@ -259,6 +260,7 @@ function openNode(n, push = true) {
   if (push) XSTACK.push("p:" + n.id);
   if (n.kind === "color") return colorPage(n);
   if (n.kind === "painting") return paintingPage(n);
+  if (n.page) return n.page(n);   // archive pages (passages, films) bring their own renderer
   return wikiPage(n);
 }
 function xBack() {
@@ -355,6 +357,7 @@ function colorPage(n) {
     })()}
     <section class="gl-in" data-glin></section>
     <div class="c-poems"></div>
+    ${typeof archiveRows === "function" ? archiveRows(c) : ""}
     <section class="fx-in" data-world-in></section>
     ${connSection(n)}
     ${w && w.sources ? secHTML("src", "Sources", sourcesHTML(w.sources), false) : ""}
