@@ -183,14 +183,14 @@ function honeycomb(host, opts = {}) {
   const Kat = z => base * z * M;
   // world radius worth drawing: out to where bubbles have shrunk to ~5%
   const reach = l => { const um = l.inner + 3 * (1 - l.inner); return Math.hypot(um * W / 2, um * Hh / 2) / l.K + 1; };
-  // zoom limits for a wrapping set: ZCLEAN = no color can show twice where bubbles are still a decent size; ZMIN lets
-  // you see a little more, and the vignette (draw, css .hc-vig) fades the bands where repeats would begin.
+  // zoom limits for a wrapping set: ZCLEAN = no color can show twice where bubbles are still a decent size; ZMIN goes
+  // well past that (about three repeats across); the vignette (draw, css .hc-vig) softens the bands where repeats begin.
   const zFloor = () => {
     if (!lay || lay.finite || !W) return .4;
     const a = inner(), u30 = a + 1.2 * (1 - a);
     const need = f => Math.max(u30 * W / 2 / (lay.perX * f), u30 * Hh / 2 / (lay.perY * f)) / (base * M);
     ZCLEAN = clamp(need(.5), .15, ZMAX);
-    return clamp(need(.62), .15, ZCLEAN);
+    return clamp(need(1.5), .15, ZCLEAN);   // David likes the far-out view even with repeats at the top and bottom
   };
   // the world offset (from the pan point) under a screen point
   const offAt = (sx, sy, l) => {
