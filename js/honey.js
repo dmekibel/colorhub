@@ -434,7 +434,7 @@ function honeycomb(host, opts = {}) {
   let Plag = [0, 0], lastInput = performance.now(), driftT0 = 0, driftTeff = 0, driftAnchor = [0, 0], touchXY = null, ripples = [];
   let insetBottom = 0, insetCur = 0;
   // per-bubble size memory, so a bubble never snaps to a new size (cells change as neighbors come and go): sizes ease
-  let sizeMem = new Map(), sizeT = 0;
+  let sizeMem = new Map(), sizeT = 0, sizeRaf = 0;
   const vy = () => Math.max(60, Hh - insetCur);   // the visible height above whatever panel is inset
   const vcy = () => vy() / 2;
 
@@ -618,18 +618,24 @@ function honeycomb(host, opts = {}) {
     // No snapping (David): a bubble's size eases to its new value over ~120 ms instead of jumping when its cell
     // changes. New bubbles (just entered the screen) start at their size; growth eases too.
     const dt = sizeT ? Math.min(100, t - sizeT) : 0; sizeT = t;
+    // Only growth eases: a bubble whose cell just got smaller (a slider, a zoom) takes its new size at once, so two
+    // bubbles never overlap mid-change (David: sliding the center size overlapped until the next pan). And while
+    // any bubble is still growing toward its size, keep drawing frames so it finishes even when nothing else moves.
     const ease = RM ? 1 : 1 - Math.exp(-dt / 120), mem = new Map();
+    let easing = false;
     for (const b of drawn) {
       if (!b.k) continue;
       const prev = sizeMem.get(b.k);
-      if (prev != null && dt > 0) {
+      if (prev != null && dt > 0 && prev < b.rin) {
         const r = prev + (b.rin - prev) * ease, f = b.rin > 0 ? r / b.rin : 1;
+        if (b.rin - r > .3) easing = true;
         if (b.poly && Math.abs(f - 1) > .001) b.poly = b.poly.map(q => [q[0] * f, q[1] * f]);
         b.rin = r; b.d = 2 * r;
       }
       mem.set(b.k, b.rin);
     }
     sizeMem = mem;
+    if (easing && !sizeRaf) sizeRaf = requestAnimationFrame(() => { sizeRaf = 0; if (!raf) draw(); });
     let pb = null;
     if (pressed) { const i = drawn.findIndex(b => b.it === pressed.it && Math.abs(b.x - pressed.x) < 3 && Math.abs(b.y - pressed.y) < 3); if (i >= 0) { pb = drawn.splice(i, 1)[0]; drawn.push(pb); } }
     for (const b of drawn) {
