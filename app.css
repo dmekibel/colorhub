@@ -955,6 +955,8 @@ img{transition:opacity .6s var(--ease)}
   overflow:hidden;animation:roomIn var(--grow) var(--ease-grow) both}
 @keyframes roomIn{from{transform:translateY(5%) scale(.97);opacity:.6}}
 .room-sheet>.screen{flex:1;min-height:0;overflow-y:auto;padding-top:calc(var(--s4) + 6px)}
+/* inside a room the sheet already sits below the status bar: sticky page headers drop their own safe-area inset */
+.room-sheet .x-head{padding-top:12px}.room-sheet .art-top{padding-top:10px}
 @media (prefers-reduced-motion:reduce){.room-sheet{animation:fade var(--dur-1) linear both}}
 
 /* the stem: Rooms raises up to five bubbles (Home at the foot, only inside a room) in a curve above the corner */
