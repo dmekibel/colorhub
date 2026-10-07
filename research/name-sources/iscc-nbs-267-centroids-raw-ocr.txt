@@ -1,0 +1,175 @@
+TABLE 1.    Central notations of ISCC-NBS colm'-name blocks.       55    strong brown                   5.0YR 3.5 +/8 + *
+                                                                   56    deep brown                     5.0YR 2.l /6 +*
+  C553                                                             57    light brown                    5.5YR 5.5/4.6
+  num-       ISCC- NBS color name       Central notation           58    moderate brown                 5.5YR 3.5/3.9
+   bel'                                                            59    dark brown                     5.5YR 1.6/3.6*
+                                                                   60    light grayish brown            6.5YR 5.5/2.2
+     1     vivid pink                  1.5R 7 / 13 +*              61    grayish brown                  5.6YR 3.5/2.0
+     2     strong pink                 1.5R 7.5/9.1 *              62    dark grayish brown             5.5} R 2.0/ 1.7
+     3     deep pink                   1.9R 6.0/ 11.1              63    light brownish gray            6.8YR 5.5/ 1.0
+     4     light pink                  2.5R 8.6/5.2*               64    brownish gray                  6.4YR 3.5/0.9
+     5     moderate pink               2.5R 7.2/5.2                65    brownish black                 7.5} R 0.8/0.8*
+
+     6     dark pink                   2.5R 6.0/6.0                66    vivid orange yellow            9.0YR 7.2 /16 +*
+     7     pale pink                   2.5R 8.8/2.3*               67    brilliant orange yellow        9.0YR 8.4/ 12.1 *
+     8     grayish pink                2.5R 7 .2/2.3               68    strong orange yellow           9.0 Y R 7.2/ 12.1
+     9     pinkish white               7.6R 9.2/1.0*               69    deep orange yellow             9.0YR 6.0 / 12.1
+    10     pinkish gray                7.6R 7.5/1.0                70    light orange yellow            9.0YR 8.6/8 .1 *
+                                                           428
+TABLE   1.    Central notations of IS CC- N BS color-name          TABLE 1.    Central nolations of ISCC- NBC color-name
+                     blocks .- Con tin u ed                                           blocks .- Con tinued
+
+C553                                                               C553
+num-         ISCC-NBS color name       Central notation            num-       ISCC- NBS color name       Celltral nolaLion
+ bel'                                                               bel'
+
+  71    moderate orange yellow         9.0Y R 7.2 /8.1              131    strong yellowish green       0.5G 5.5/9.1
+  72    dark orange ycllow             9.0YR 6.0 /8.1               132    deep yellowish green         0.5G :3.5/ 11.5 + *
+  73    pale orange ycllow             9.1 YR 8.6/4.4*              133    very deep yellowish green    0.5G 2.0/9.2 + *
+  74    strong yellowish brown         9.0YR 4.6 /9.6*              134    very light yellowish green   0.5G 9.J /5.1*
+  75    deep yellowish brown           9.5YR 2.9/ 6 + *             135    light yellowish green        0.5G 7.5/5. l
+  76    light yellowish brown          9.2YR 6.6 /4.7               136    moderate yellowish green     0.5G 5.5/5.1
+  77    moderate yellowish brown       9.5YR 4.5/4.0                137    dark yellowish green         0.5G :3.5/5.1
+  78    dark yellowish brown           9.5YR 2.2 /3.7*              138    very dark yellowish green    0.5G 1.5/4.9*
+  79    light grayish yellowish        9.5 YR 6.4/2.4               139    vivid green                  6.5G 5.2/ 18+*
+           brown                                                    140    brilliant green              6.0G 7.4/9.l *
+  80    grayish yellowish brown        9.5YR 4.6 / 2.1
+                                                                    141    strong green                 G.OG 4.5/9.1
+  81    dark grayish yellow brown      9.5 Y R 2.4/1.8              l42    deep green                   6.0G 2.3/9. l *
+  82    vivid yellow                   4.0Y 7.8 /14.5 + *           143    very light green             6.0G 8.6/5.1*
+  83    brilliant yellow               4.0 Y 8.8/9.5*               144    light green                  G.OG 6.5 /5.1
+  84    strong yellow                  4.0Y 7.2/l).5                145    moderate green               G.O G 4.5/ 5.l
+  85    deep y ello\\'                 4.0 Y 6.0 /9.5
+                                                                    146    dark green                   6.0G 2.7/5.0
+  86    light yellow                   4.0 Y 8.8/6.6*               147    very dark green              G.OG 1.3/4.9*
+  87    moderate yellow                4.0Y7.2/6.6                  148    very pale green              9.0G 8.7 / 1.8*
+  88    dark yellow                    4.0 Y 6.0 /6.6               149    pale green                   9.0G G.5/ 1.8
+  89    pale yellow                    4.2Y 8.9/3.6*                150    grayish green                9.0 G 4.5/ 1.8
+  90    grayish yellow                 4.2Y 7.2/3.6
+                                                                    151    dark grayish green           9.('G 2.8/ 1.6
+  91    dark grayish yellow            '1.0 Y 6.0 /4.1              152    blackish green               9,( G 1.l/ 1.4*
+  92    yellowish white                ·U Y 9.2/ 1.3*               ]53    greenish white               7.C G 9.2/0.8*
+  93    yellowish gray                 '1.1 Y 7.5 /1.3              154    light greenish gray          7.CO 7.5 /0.8
+  94    light olive brown              2.5 Y 5.0/8.4*               155    greenish gray                7.0G 5.5/0.8
+  95    moderate olive brown           2.5 Y 3.5 + /6 + *
+                                                                    156    dark greenish gray           7.00 3.5/0.8
+  96    dark olive brown               2.5 Y 1.8/ 2.5 + *           157    greenish black               7.5G 0.9/0.7*
+  97    vi vid greenish yellow         9.5 Y 7.8/ 14.5 + *          158    vivid bluish green           4.5BG 5.3/ 15.5 + *
+  98    brilliant greenish yellow      9.5 Y 8.8/9.5*               159    brillian t bluish green      4.5BG 7.:3/9.0*
+  99    strong greenish yello\y        9.5Y7.2/9.5                  160    strong bluish green          4.5BG 4.5/9.0
+ 100    deep greenish yellow           9.5 Y 6.0/9.5
+                                                                    161    deep bluish green            4.5BG 2.3(9.0*
+ 101    light greenish yellow          9.5 Y 8.8/6.6*               162    very light bluish green      4.5BG 8.5/ 5.0*
+ 102    moderate greenish yellow       9.5 Y 7.2/6.6                163    light bluish green           4.5BG 6.5/5.0
+ 103    dark greenish yellow           9.5 Y 6.0/6.6                164    moderate bluish green        4.5BG 4.5/ 5.0
+ 104    pale g reenish yellow          9.5 Y 8.9/4.1 *              165    dark bluish green            4.5BG 2.7/5.0
+ 105    grayish greenish yellow        9.5Y7.2/4.1
+                                                                    JG6    very dark bluish green       4.5BG 1.3( 4.9*
+ 106    light olive                    8.lY 5.1 /8.0*               J67    vivid greenish blue          4.5B 5.2( 13 + *
+ 107    moderate olive                 8.0 Y 3.5 + /5.8+ *          J68    brilliant greenish blue      4.58 6.8/ 9.0*
+ 108    dark olive                     8.0 Y 1.7/3.2*               ]69    strong greenish blue         4.5B 4.5/9.0
+ 109    light grayish olive            8.3 Y 5.5/2.4                170    deep greenish blue           4.5B 2.5/9.0*
+ 110    grayish olive                  8.1 Y 3.5/ 2.3
+                                                                    171    very light greenish blue     4.5B 8.2/5.2*
+ 111    dark grayish olive             8.0 Y 2.0/ 2.0               172    light greenish blue          4.5B 6.5/5.2
+ 112    light olive gray               7.4 Y 5.5/1.3                173    moderate greenish blue       4.5B 4.5/5.2
+ 113    olive gray                     8.1 Y 3.5/ 1.0               174    dark greenish blue           4.58 2.7/5.0
+ 114    olive black                    9.0 Y 0.9/0.8*               175    very dark greenish blue      4.5B 1.3/4.9*
+ 115    vivid yellow green             5.0GY 7.5/ 14.5+*
+                                                                    176    vivid blue                   3.0PB 4.2/ 15 + *
+  116   brilliant yellow green         5.0GY 8.5/ 9.1 *             177    brilliant blue               3.0PB 6.4/ 11.0*
+  117   strong yellow green            5.0GY 6.0/9.1                       strong blue                  3.0PB 4.2/ 11 .0
+  118   deep yellow green              5.0GY 4.0/9.1                178
+                                                                    179    deep blue                    3.0PB 2.0/9.0*
+  119   light yellow green             5.0GY 8.6/5.2*               180    very Jight blue              2.4PB 8.2/7.2*
+  120   moderate yellow green          5.0GY 6.0/5.2
+  121   pale yellow green              3.5GY .7/ 2.2*               ]81    light blue                   2.7PB 6.5/7.3
+  122   grayish yellow green           4.4GY 6.1 /2.2               182    moderate blue                2.9PB 4.2/7.2
+  123   strong oli ve green            5.0GY 3.2/7.8+*              183    dark blue                    2.8PB 1.7/5. 0*
+  124   deep olive green               5.00Y 2.4+/7.1+ *            184    very pale blue               0.9PB 8.4/3.0*
+  125   moderate olive green           5.0GY 3.5/ 5.2               185    pal e blue                   0.9PB 6.5/3.0
+  126   dark olive green               5.0GY 1.8/3.7 *              ]86    grayish blue                 0.9PB 4.2/3.0
+  127   grayish oli ve green           5.0GY 3.5/2.2                187    dark grayish blu e           9.5B 2.6/1.9
+  128   dark grayish olive green       5.0GY 2. 0/2.0               188    blackish blue                9.5B 1.1/ 1.5*
+  129   vi vid yellowish green         0.5G 7 / 15.5+*              189    bluish white                 9.5B 9. ]/ 1.0*
+  130   brilliant yellowish green      0.5G 8.0/9.1 *               190    li ght bluish gray           9.5B 7.5/1.0
+                                                             429
+  TABLE 1.    Centml notations of [SCC- NBS color-name               TABLE   1.    Central notati ons of [SC C- NBS color-name
+                     blocks-Continu ed                                                    blocks.- Continued
+
+ C553                                                                C553
+ num-        ISCC- NBS color n a m e    Ce n tr a l notation         num-         ISCC- NBS color na me     Cen tr al notation s
+  bel'                                                                ber
+
+   191   bluish gray                   9.5B 5.5/ 1.0                  231    purplish white                 9.0P 9.1/1.0*
+   192   dark bluish gray              9.5B 3.5/ ].0                  232    light purplish gray            9.0P 7.5/ 1.0
+   193   bluish black                  9.5B 1.0/ 0.7*                 233    purplish gray                  1O.0P 5.5/ l.0
+   194   vivid purplish blue           8.0PB 2.5/ 22 + *              234    d ark purplish gray            10.0P 3.5/ 1.0
+   195   brillia nt purplish blu e     8.0PB 6.0/ 10.8*               235    purplish black                 10.0P l.0/ 0.7*
+   196   stron g purplish blue         8.0PB 4.1/ 11.4                236    vivid r eddish purple          l.ORP 4 +/ 19 + *
+   197   d eep purplish blu e          8.0PB 1.6/ 9.1 *               237    strong reddish purple          l.ORP 4.5/ 11.1
+   198   very light purplish blue      7. PB 7.8 +/6.1 + *            238    deep reddish purple            l.ORP 2.8/ 10.3 I
+   199   light purplish blue           7.5PB 6.0/ 6.8                 239    v ery deep reddish purple      l.ORP 1.3(10.3*
+   200   mod erate purplish blue       8.0PB 3.5/ 6.9                 240    light reddish purple           l.ORP 6.0( 7.2
+   201   dark purplish blu e           7.9PB 1.1 / 4.7*              241     m oderate reddi sh pu rple     1.0RP 4.5/ 7.2
+   202   v er y p ale purplish blue    7.0PB 8.2/ 4.1 *              242     dark reddish purple            l.ORP 2.7/ 5.1
+   203   p ale purpli sh blu e         7.0PB 6.0/ 4.1                243     ver y dark reddish purple      1.0RP 1.1/ 5.0*
+   204   grayish purplish blu e        7.2PB 3.3/ 4.0                244     pale reddi sh purpl e          l.ORP 6.0/ 4.1
+   205   vivid violet                  1.0P 2.7/ 2] + *              245     grayish reddish purple         1.0RP 4.5/ 4.1
+   206   brillia nt violet             LOP 5.9/ 11.1 *               246     brillia nt purplish pink      4.0RP 7.9 +/11 +*
+   207   stron g violet                l.OP 3.5/ 11.1                247     stron g purplish pink         4.0RP 7- / 14.5*
+   208   d eep violet                  l.OP l.4/ ] 0.3 *             248     deep purplish pink            4.0RP 6.0/ 12.0
+   209   v ery light violet            l.OP 7.9/ 7*                  249     light purplish pink           4.0RP 8.3/ 7.1 *
+   210   light violet                  l.OP 6.0/ 7.2                 250     mod erate purplish pink       4.0RP 7.0/ 7.1
+   211   moderat e violet              l.OP 3.5/ 7.2                 251     dark purplish pink            6.0RP 6.0/ 7.2
+   212   d ark violet                  l.OP 1.3/ 5.0 *               252     p ale purplish pink           4.0RP 8.5/ 3.5*
+   213   v er y p ale viol et          1.0P 8.2/ 4.]*                253     grayish purplish pink         4.0RP 7.0/ 3.5
+   214   pale violet                   l.OP 6.0/ 4.1                 254     vivid purplish red            7.0]?'P 4+/ 17+ *
+   215   grayi sh violet               1.0P 3.3/ 4.1                 255     strong purplish red           7.0]?'P 4.5/ 11.9
+   216   vivid purple                  6.0P 3.5/ 20 + *              256     deep purplish red             7.0RP 2.8/ 11.0
+   217   brillia nt purple             6.0P 6.7/ 11.1 *              257     v er y deep purpli sh red     7.0RP 1.3/ 9.0*
+   218   s trong purple                6.0P 4.5/ 11.1                258     moderate purplish red         7.0RP 4.5/ 9.0
+   219   deep purple                   6.0P 2.8/ 10.2                259     dark purplish Ted             7.0RP 2.7/ 6.3
+   220   very deep purple              6.0P 1.2/ 10.2*               260     very dark purplish red        7.0RP 1.2/ 4.9*
+   221   v er y light purple           6.0P 8.0/ 7.2 *                261    light gray ish purplish red   7.0RP 6.0/ 4.0
+   222   light purple                  6.0P 6.5/ 7/ 2                 262    gra yish purplish red         7.0RP 4.5/ 5.2
+   223   moderate purple               6.0P 4.5/ 7.2                  263    white                         3.0 Y 9.25/ 0.06
+   224   dark pm pIe                   6.0P 2.7/ 5.1                  264    light gray                    3.0Y 7.5/ 0.06
+   225   v ery dark purple             6.0P 1.1/ 4.9 *                265    medium gray                   3.0Y 5.5/ 0.06
+   226   v ery pale purple             5.4P 8.4/ 3.3*                 266    dark gray                      N 3.5/
+   227   pale purple                   6.8P 6.4/ 3.0                  267    black                          N 1.25/
+   228   gray ish purple               7.8P 4.5/ 2.9
+   229   dark grayish pu r ple         10.0P 2.8/ 2.0
+   230   bla ckish purple              10.0P l.0/ 1.4*           accurately which ISCC- NBS designation to apply to
+                                                                 it. If necessary, such borderline cases would have
+                     5.     Applications                         to be resolved by recourse to the method described
+                                                                 in NBS Circular 553 [3] .
+
+---
+Source: Kelly, K.L. "Central notations for the revised ISCC-NBS color-name
+blocks." J. Res. Natl. Bur. Stand. 61(5), Research Paper 2911, pp. 427-431
+(Nov. 1958). https://nvlpubs.nist.gov/nistpubs/jres/61/jresv61n5p427_A1b.pdf
+Also on Wikisource (tagged {{PD-USGov}}):
+https://en.wikisource.org/wiki/Central_Notations_for_the_Revised_ISCC-NBS_Color-name_Blocks
+
+U.S. government work, public domain. This is the OFFICIAL Munsell H V/C
+notation for the centroid of each of the 267 ISCC-NBS color-name blocks,
+straight from NIST, not a third-party re-digitization.
+
+Raw text above is `pdftotext -layout` output on the NIST PDF and is NOT
+clean: OCR confuses "6" and "G", "1" and "l", drops some decimal points,
+and the three-column layout occasionally interleaves rows. It is kept here
+only to document provenance and show the data exists and is reachable; a
+real import would re-derive these 267 rows carefully (by hand, or against
+a second independent transcription such as the `munsellinterpol`/`Polychrome`
+R packages, which should be used only to CHECK a fresh transcription, not
+copied directly, since their own derivation chain back to NIST is not
+fully documented).
+
+These 267 rows are gen tic block names ("vivid pink", "deep yellowish brown",
+"black") and are useful as a VALUE SOURCE (converting each Munsell notation
+to sRGB), not as app-facing vocabulary — they are the same kind of
+lightness/strength compound the app already avoids teaching as primaries.
+The real naming value is the ~7,500-entry synonym dictionary in NBS
+Circular 553 / NBS SP 440 (see nbs553-dictionary-sample.txt), which maps
+real historical/commercial names to these 267 blocks.

@@ -1,0 +1,149 @@
+Sample excerpt — "Dictionary of Color Names" (section 15), pp. 84, 119-120
+Source: Circular of the National Bureau of Standards No. 553, "The ISCC-NBS
+Method of Designating Colors and a Dictionary of Color Names" (Kelly & Judd,
+1955), U.S. Department of Commerce / National Bureau of Standards.
+
+Full scan: https://www.govinfo.gov/app/details/GOVPUB-C13-65f63ba398aa703418c5e0881f2985ab
+(also on archive.org and HathiTrust). 172 pp., OCR text layer by the Internet
+Archive. This excerpt was produced here by `pdftotext -layout` on the govinfo
+PDF, for research purposes only — it is NOT a clean re-typed dataset (OCR
+has column-bleed and character errors, e.g. "l" for "1", stray source-code
+fragments running into the next column). A real import would need a fresh,
+careful re-OCR or manual retyping of the three-column tables, not reuse of
+this raw dump.
+
+Legal status: U.S. government work, 1955. Explicitly marked public domain —
+see the companion NIST paper (Kelly, J. Res. NBS 61(5), 1958), which states
+in its masthead "papers are in the public domain and are not subject to
+copyright in the United States."
+
+Each row is: Color name | Source code | ISCC-NBS designation + block number.
+Source-code key (partial, from p.84 of the Circular): M = Maerz & Paul,
+R = Ridgway 1912, P = Plochere, T = Textile Color Card Association,
+TC = Transportation Corps US Army, F = Federal Standard / AN (Army-Navy)
+aeronautical specs, H = Horticultural Colour Chart, SC/RC/A/B/S = various
+standards bodies listed in the Circular's front matter.
+
+=== excerpt 1 of 3 (p. 84, start of dictionary, letter A) ===
+
+Abbey                      M  s.V 207
+Absinthe [Green] / Foliage Green   M  m.YG 120
+Absinthe Green              R  m.YG 120
+Absinthe Yellow             M  gy.gY 105
+Absinthe Yellow             P  m.Y 87
+Abstract Blue               P  v.p.B 184
+Abyss                       P  p.G 149
+Acacia / Gaude, Luteous, Olde, Oold, Wald, Wau, Weld, Wield, Woald, Wod, Wold   M  l.gY 101, m.gY 102
+Acacia                       P  gy.G 150
+Acacia Gray                  P  gGy 155
+Acacia Green                 P  gGy 155
+Academy Blue                 M  m.gB 173
+Acajou (same as Laurel Oak)  M  m.rBr 43
+Acajou Red                   R  gy.R 19
+Acanthe                      M  m.OlBr 95 / Butternut, Siberian Brown
+Acetin Blue                  R  gy.pB 204
+Acier (same as Grey Drab)    M  l.gy.Ol 109
+Ackermann's Green            M  d.yG 137
+Ackermann's Green            R  m.G 145
+Aconite Violet                H  d.V 212
+Aconite Violet / Datura       M  m.P 223
+Aconite Violet                R  m.P 223
+Acorn / Meadowlark            M  gy.yBr 80
+Adamia (same as Eminence)     M  d.P 224
+Adelaide (same as Prunella)   M  deep V 208
+Aden                          M  l.G 144
+Aden                          P  l.G 144
+Admiral / Logwood             M  blackish P 230, pBlack 235
+Admiral                        P  d.gy.P 229
+Adobe                         M  m.yBr 77
+Adobe Brown / Cinnamon Brown  T  m.yBr 77
+Adrianople Red / Levant Turkey Red, Red, Turkish Red   M  m.R 15
+Adriatic                      M  m.bG 164
+Adust (same as Tan)           M  brO 54
+Aero                          M  gy.B 186
+Aerugineus                    B  l.yG 135, m.yG 136, l.G 144, m.G 145, p.G 149, gy.G 150, l.bG 163, m.bG 164
+Afghan (same as Chippendale)  M  d.gy.Br 62
+Afghan Red / Checkerberry, Hypermic Red   M  v.R 11
+African                       M  Black 267
+African Brown (same as Chippendale)   M  d.gy.Br 62
+African Brown                 TC  d.gy.Br 62, brGy 64
+African Green                 P  d.gy.B 187
+African Night                 P  d.gy.rBr 47
+Afterglow                     M  p.V 214
+After Glow                    P  p.pPk 252
+Agate                         M  s.rBr 40, s.Br 55
+Agate Grey                    M  l.Gy 264
+Agathia Green                 H  s.YG 117, s.yG 131
+Aircraft Cream (AN 507)       F  gy.Y 90
+Airedale                      M  m.yBr 77, gy.yBr 80
+Airway                         M  l.B 181
+Airy Cream                    P  White 263
+Akbar                          M  deep rBr 41, m.rBr 43
+Alabaster (same as White Jade)  M  p.yPk 31, yGy 93
+Alabaster Tint                 T  v.p.B 184, bWhite 189
+Aladdin's Lamp                 P  m.rO 37
+Alamo                          M  s.Br 55
+Alcanna (same as Henna)        M  s.rBr 40
+Alcazar (same as Egyptian Red) M  d.R 16, s.rBr 40
+Alderney                       M  m.yBr 77
+Alesan (same as French Nude)   M  l.gy.rBr 45, l.Br 57, l.gy.Br 60
+Alexandria Blue                M  v.B 176, s.B 178
+Alfalfa                        M  d.yG 137
+Algerian (same as Tanbark)     M  m.Br 58
+Algerian Red / Crimson Maple   M  deep rBr 41
+Algiers Blue                   P  m.gB 173
+Algonquin (same as Terra Cotta) M  deep O 51, brO 54
+Alhambra                       M  d.gy.G 151, d.bG 165
+Alice Blue                     M  p.B 185
+Alice Blue                     R  p.B 185
+
+=== excerpt 2 of 3 (p. 119-120, letters I-K) ===
+
+Indian Red (same as Bole)      M (5F11)  m.rBr 43
+Indian Red / Chinese Red, Iron Red, Japanese Red, Majolica Earth, Naples Red,
+  Persian Earth, Purple Ochre, Persian Red, Prussian Red, Scarlet Ochre,
+  Spanish Brown                M (6L12)  s.rBr 40
+Indian Red                     P  d.rO 38
+Indian Red                     R  gy.R 19
+Indian Red                     T  gy.R 19, m.rBr 43
+Dark Indian Red                R  gy.R 19, d.gy.R 20
+Indian Yellow                  H  brill.OY 67, l.OY 70
+Indian Yellow (same as Snowshoe) M  s.OY 68, m.OY 71
+Intense Blue                   M  m.pB 200, d.pB 201
+International Orange (AN 508)  F  v.rO 34
+Invisible Green                 M  d.bG 165
+Invisible Green                 R  d.gy.G 151, d.bG 165
+Iris                            M  p.B 185, p.P 227
+Iris, Wild (see Wild Iris)      M
+Ivory                            M  p.Y 89
+Ivory Brown (same as Bracken)    M  m.OlBr 95, d.OlBr 96
+Ivory White                      P  p.Y 89
+Ivy Green                        H  d.gy.OlG 128
+Ivy [Green]                      M  m.Ol 107, gy.Ol 110
+Jacaranda Brown (same as Biskra) M  d.gy.yBr 81
+Jade, Imperial (see Imperial Jade) M
+Jonquil                          T  v.Y 82, brill.Y 83
+Jonquil                          M  l.OY 70, m.OY 71, p.OY 73, l.Y 86
+King's Yellow (same as Lemon [Yellow]) M  brill.Y 83, s.Y 84, l.Y 86, m.Y 87
+
+=== excerpt 3 of 3 (last page, letters Y-Z) ===
+
+Yellow Beige                     M  l.yBr 76, m.yBr 77
+Yellow Green                     R  brill.YG 116
+Yellowstone                      M  d.gy.Y 91
+Yellowstone Burnt                M  (plate ref only)
+Yosemite (same as Sundown)       M  l.yBr 76
+Youth Yellow                     P  l.gY 101
+Yucatan / Cathay, French Yellow, Transparent Gold Ochre, Mexican, Ochre de Ru,
+  Oker de Luce, Oker de Luke, Oker de Rouse, Ru Ochre, Rut Ochre, Spruce Ochre
+                                  M  brO 54, s.yBr 74
+Yucca                             M  gy.G 150
+Yu Chi                            M  d.G 146
+Yule Tree                         P  d.bG 165
+Yvette Violet                    M  gy.P 228
+Yvette Violet                    R  gy.V 215
+Dark Yvette Violet               R  d.gy.P 229
+Zaffre Blue (same as ...)        M  deep B 179, m.B 182
+
+(dictionary runs ~8,000 OCR lines total for A-Z; this is a three-chunk
+spot sample used for the quality and overlap check in NAME-SOURCES.md)
