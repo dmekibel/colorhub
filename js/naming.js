@@ -86,3 +86,28 @@ function prefetchCoreNames() {
   if (CORE_PREFETCHED) return; CORE_PREFETCHED = true;
   requestAnimationFrame(() => setTimeout(loadCoreNames, 300));
 }
+
+// Families (ROADMAP §13 / David's "ecru is that close to greyish white" note, 2026-10-09): every one of the
+// ~1,000 core names belongs to exactly one family, headed by its nearest of the app's 101 (BASICS + ALL,
+// CIEDE2000) — that's where the deep history, stories and culture live (CLAUDE.md: shared history lives at
+// the family level). The 101 head their own families (de 0). `nameOrHex` is either a primary name from
+// data/core-names.json or a hex string, so js/names.js can call this with either.
+function familyOf(nameOrHex) {
+  let hex = null;
+  if (/^#[0-9a-f]{6}$/i.test(String(nameOrHex))) hex = String(nameOrHex).toUpperCase();
+  else {
+    const taught = BYNAME.get(String(nameOrHex).toLowerCase());
+    if (taught) hex = taught.h;
+    else {
+      const entry = (CORE_NAMES || coreFallback()).find(e => e.n.toLowerCase() === String(nameOrHex).toLowerCase());
+      hex = entry ? entry.h : null;
+    }
+  }
+  if (!hex) return null;
+  const every = EVERY(), exact = every.find(c => c.h.toUpperCase() === hex);
+  if (exact) return { head: exact, de: 0 };
+  const L = lab(hex);
+  let best = null, bd = Infinity;
+  for (const c of every) { const d = de2000(L, c.lab || (c.lab = lab(c.h))); if (d < bd) { bd = d; best = c; } }
+  return best ? { head: best, de: bd } : null;
+}

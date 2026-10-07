@@ -74,7 +74,9 @@ function hmHome() {
   // ---------- the honeycomb itself ----------
   let items = [], ctrl = null, gen = 0;
   const onPeek = o => { if (o.c) peek(o.c); else if (typeof colorSheet === "function") colorSheet(o, c => hmOpenColor(c)); };
-  const pick = (o, fx) => { if (fx && fx.morph) fx.morph(); hmDismissHint(); o.c ? hmOpenColor(o.c) : colorSheet(o, c => hmOpenColor(c)); };
+  // a tap opens the real page straight away (ROADMAP §13: every name has one now) — one of the 101, or its
+  // own name page (js/names.js); a long press still shows the quick peek sheet above.
+  const pick = (o, fx) => { if (fx && fx.morph) fx.morph(); hmDismissHint(); o.c ? hmOpenColor(o.c) : hmOpenName(o); };
   function paintTitle(loading) {
     title.querySelector("span").textContent = hmViewLabel();
     title.querySelector("small").textContent = loading ? "Loading…" : `${items.length.toLocaleString()} color${items.length === 1 ? "" : "s"} · swipe or tap`;
@@ -293,6 +295,17 @@ function hmOpenColor(c) {
   const btn = app.querySelector("[data-back]");
   if (btn) btn.onclick = () => hmHome();
   hmPullClose(app.firstElementChild, () => hmHome());
+}
+// Same, for a bubble that isn't one of the 101: its own name page (js/names.js), not the small color sheet
+// (ROADMAP.md §13: every one of the ~1,000 names has a real page now).
+function hmOpenName(o) {
+  XSTACK = [];
+  loadCoreNames().then(() => {
+    namePage(npEntryFor(o));
+    const btn = app.querySelector("[data-back]");
+    if (btn) btn.onclick = () => hmHome();
+    hmPullClose(app.firstElementChild, () => hmHome());
+  });
 }
 
 // Pull down from the top of a page to close it, like a sheet: the page follows the finger, and past ~110px (or a quick

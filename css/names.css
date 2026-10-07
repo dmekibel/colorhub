@@ -1,0 +1,7 @@
+/* js/names.js: a page for every one of the ~1,000 core names, not just the app's 101 "deep" colors. The
+   markup leans entirely on existing shared classes (.c-hero, .kin, .lk-list, .gl-in, .sec-head, .fine), so
+   this file only nudges their spacing on this one screen. A design-system overhaul is in progress and will
+   restyle those shared classes, not this file. */
+.names .np-also{margin-top:22px}
+.names .np-jp{color:var(--faint)}
+.names .np-fam{margin-top:14px}

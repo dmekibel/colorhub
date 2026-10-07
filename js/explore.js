@@ -225,6 +225,10 @@ function closeup(n, opts = {}) {
     const prev = XSTACK[XSTACK.length - 1];
     if (!prev) return go("explore");
     if (prev.startsWith("g:")) return galleryPage(+prev.slice(2), false);
+    if (prev.startsWith("n:")) {   // a library color's own page, not one of the 101 (js/names.js)
+      const nm = decodeURIComponent(prev.slice(2));
+      return loadCoreNames().then(() => { const e = (CORE_NAMES || []).find(x => x.n === nm); e ? namePage(e, false) : go(S.tab || "learn"); });
+    }
     const node = graph().nodes.get(prev.replace(/^[zp]:/, ""));
     return prev.startsWith("z:") ? closeup(node, { back: true }) : openNode(node, false);
   };
@@ -269,6 +273,11 @@ function xBack() {
   if (!prev) return go("explore");
   if (prev.startsWith("g:")) return galleryPage(+prev.slice(2), false);   // a gallery painting (js/gallery.js)
   if (prev.startsWith("poem:")) return poemPage(prev.slice(5), { back: true });   // a poem (js/poems.js)
+  // a library color's own page, not one of the 101 (js/names.js): it isn't a graph node, so look it up by name
+  if (prev.startsWith("n:")) {
+    const nm = decodeURIComponent(prev.slice(2));
+    return loadCoreNames().then(() => { const e = (CORE_NAMES || []).find(x => x.n === nm); e ? namePage(e, false) : go(S.tab || "learn"); });
+  }
   const node = graph().nodes.get(prev.replace(/^[zp]:/, ""));
   return prev.startsWith("z:") ? closeup(node, { back: true }) : openNode(node, false);
 }
