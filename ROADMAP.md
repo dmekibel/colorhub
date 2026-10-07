@@ -378,6 +378,28 @@ pages ("Shares colors with: ...").
    harmony fits, painter recipes, mosaic picker). Then the painting page upgrade (§13) and image analysis (§15).
 4. **The design rebuild** from DESIGN-SYSTEM.md once David approves the second mockup pass.
 
+## 18. Mix lab (David, 2026-10-08; inspired by "what do these two make" paint-mixing videos)
+Pick two colors and watch them mix at 0 / 25 / 50 / 75 / 100% (or any ratio, with a slider), each step named (nameOf) and
+tappable. It's beautiful to watch and teaches why "mixing" means different things.
+- **Four ways to mix, same two colors side by side:**
+  - **Light** (additive, like screens and stage lights: red + green light makes yellow)
+  - **Digital average** (a straight blend in sRGB, as most apps do, vs a blend in OKLab, which looks even; show the
+    difference)
+  - **Print** (subtractive inks: multiply / CMYK overprint)
+  - **Paint** (Kubelka-Munk pigment mixing, so blue + yellow really makes green and white tints go chalky)
+  - Candidate library: spectral.js (open-source KM mixing in JS; check the license). Say plainly that paint results
+    approximate real tubes.
+- **The game (Train):**
+  - predict the 50/50 mix (multiple choice among same-family neighbors)
+  - name the mix
+  - set the slider to hit a target
+  - "which two made this?"
+  - Each is played per mode, with a staircase on the gym engine.
+- **Content tie-ins:**
+  - myth-list corrections (pointillist dots average toward grey; red/yellow/blue are a convention)
+  - famous mixes (Zorn palette mixes, the painter's earth greens)
+- Size: M (Sonnet), after the palette engine.
+
 ## Also queued
 - World: Botany (in progress), then Gems.
 - Color-list swaps from research/COLOR-SELECTION.md (Bistre, Stone, Green grey, Rose, Grape, Seafoam; Terracotta and Tangerine hex fixes; cross-unit near-twin check).
