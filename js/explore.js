@@ -121,8 +121,10 @@ function LAB_TILES() {
     <b>Harmony</b><small>Build palettes on the wheel</small></button>
   <button class="lab lab-x" data-lab="contrast"><span class="lv lv-albers"><i style="--g:#BFA2E8"></i><i style="--g:#CC7722"></i></span>
     <b>Albers</b><small>One color, two looks</small></button>
-  <button class="lab lab-x" data-lab="namer"><span class="lv lv-namer"><span class="lv-loupe"></span><span class="lv-tag">Coral</span></span>
-    <b>Name it</b><small>Pick or point the camera</small></button>`;
+  <button class="lab lab-x" data-lab="eye"><span class="lv lv-namer"><span class="lv-loupe"></span><span class="lv-tag">Coral</span></span>
+    <b>Color eye</b><small>Point the camera, get the name</small></button>
+  <button class="lab lab-x" data-lab="studio"><span class="lv lv-studio">${["#EFE6D2", "#C8553D", "#E0A458", "#5B7F6E", "#2A2620"].map(h => `<i style="--c:${h}"></i>`).join("")}</span>
+    <b>Studio</b><small>Make, keep and share palettes</small></button>`;
 }
 function exploreHome() {
   XSTACK = [];

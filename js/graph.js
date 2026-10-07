@@ -140,15 +140,23 @@ function linkText(s) {
 
 // ---------- names for any color (app names first, then the long list from data/color-names.json) ----------
 let LONG_NAMES = null;
+// The big name library (data/library.json, 2,700 names from 8 sources), loaded the first time something needs it.
+// Each entry keeps its Lab value so live naming (the camera) stays fast. Names flagged crude are never shown.
+let LONG_LOADING = null;
 function loadLongNames() {
   if (LONG_NAMES) return Promise.resolve(LONG_NAMES);
-  return fetch("data/color-names.json").then(r => r.ok ? r.json() : []).catch(() => []).then(list => (LONG_NAMES = list.map(x => ({ n: x[0], h: x[1], src: x[2] })).filter(x => /^#[0-9A-Fa-f]{6}$/.test(x.h))));
+  return LONG_LOADING || (LONG_LOADING = fetch("data/library.json").then(r => r.ok ? r.json() : []).catch(() => [])
+    .then(list => (LONG_NAMES = list.filter(x => !x.crude && /^#[0-9A-Fa-f]{6}$/.test(x.h)).map(x => ({ ...x, lab: lab(x.h) })))));
 }
 function nameColor(hex, n = 5) {
-  const mine = EVERY().map(x => ({ n: x.n, h: x.h, mine: true, d: de2000(hex, x.h) }));
-  const long = (LONG_NAMES || []).filter(x => !BYNAME.has(x.n.toLowerCase())).map(x => ({ ...x, d: de2000(hex, x.h) }));
+  const L = lab(hex);
+  const mine = EVERY().map(x => ({ n: x.n, h: x.h, mine: true, d: de2000(L, x.lab || (x.lab = lab(x.h))) }));
+  const long = (LONG_NAMES || []).filter(x => !BYNAME.has(x.n.toLowerCase())).map(x => ({ ...x, d: de2000(L, x.lab) }));
   return { mine: mine.sort((a, b) => a.d - b.d).slice(0, n), long: long.sort((a, b) => a.d - b.d).slice(0, n) };
 }
+// Where a library name comes from, in a few words
+const SRC_LABEL = { app: "ColorHub", css: "Web color", wiki: "Common name", xkcd: "xkcd survey", ridgway: "Ridgway, 1912", werner: "Werner, 1821", jp: "Japanese traditional", ral: "RAL paint" };
+const srcLine = x => x.jp ? `${x.jp.kanji} · ${x.jp.meaning}` : (x.src || []).filter(s => s !== "app").slice(0, 2).map(s => SRC_LABEL[s] || s).join(" · ");
 const closeness = d => d < 2 ? "spot on" : d < 5 ? "very close" : d < 10 ? "close" : d < 18 ? "same family" : "a stretch";
 
 // ---------- daily color: the same color for everyone on a given day ----------
