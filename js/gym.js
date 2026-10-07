@@ -86,32 +86,58 @@ function spark(hist) {
   return `<svg class="spark" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" aria-hidden="true"><polyline points="${pts}" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>`;
 }
 
+// ---------- previews: every drill and every score is shown in color, not just as a number ----------
+function gymBase(k) { const pool = metColors(); return pool[hash(today() + k) % pool.length]; }
+// two colors exactly d apart, the way the drill tests them (the seam between them is your limit)
+function limitPair(k, d) {
+  if (k === "value") { const H = lch(gymBase(k).h)[2]; return [lchHex(58 + d / 2, 28, H), lchHex(58 - d / 2, 28, (H + 140) % 360)]; }
+  if (k === "temp") {
+    const L0 = [62, 2, 4], w = [0, .5, .866]; let kk = d / 2;
+    for (let i = 0; i < 6; i++) { const got = de2000(L0.map((x, j) => x + w[j] * kk), L0.map((x, j) => x - w[j] * kk)); if (got) kk *= d / got; }
+    return [labHex(...L0.map((x, j) => x + w[j] * kk)), labHex(...L0.map((x, j) => x - w[j] * kk))];
+  }
+  const A = tame(lab(gymBase(k).h)), B = offset(A, d) || A;
+  return [labHex(...A), labHex(...B)];
+}
+function drillPreview(k) {
+  const d = Math.max(skillState(k).level || SKILLS[k].start, 5);
+  if (k === "hue") { const [a, b] = limitPair("hue", d), odd = hash(today()) % 9; return `<span class="pv pv-hue">${Array.from({ length: 9 }, (_, i) => `<i style="--c:${i === odd ? b : a}"${i === odd ? ' class="odd"' : ""}></i>`).join("")}</span>`; }
+  if (k === "temp") { const [a, b] = limitPair("temp", d * 1.6); return `<span class="pv pv-temp"><i style="--c:${a}"></i><i style="--c:${b}"></i></span>`; }
+  if (k === "value") { const [a, b] = limitPair("value", d * 2); return `<span class="pv pv-value"><i style="--c:${a}"></i><i style="--c:${b}"></i></span>`; }
+  const A = tame(lab(gymBase("order").h)), B = offset(A, d * 6, [.5, 1, 1]) || A;
+  const steps = Array.from({ length: 7 }, (_, i) => labHex(...A.map((x, j) => x + (B[j] - x) * i / 6)));
+  [steps[3], steps[4]] = [steps[4], steps[3]];
+  return `<span class="pv pv-order">${steps.map((h, i) => `<i style="--c:${h}"${i === 3 || i === 4 ? ' class="odd"' : ""}></i>`).join("")}</span>`;
+}
+
 function gymHome() {
   const wk = todaysWorkout(), done = !!S.gym.workouts[today()];
-  const rows = Object.entries(SKILLS).map(([k, sk]) => {
-    const st = skillState(k), last = st.hist.length ? st.hist[st.hist.length - 1][1] : null;
-    return `<button class="skill" data-drill="${k}">
-      <span class="nm"><b>${esc(sk.name)}</b><span>${st.best != null ? `best ${fmt(st.best)} ${esc(sk.unit)}` : esc(sk.what)}</span></span>
-      <span class="val">${last == null ? "—" : `<b data-count="${fmt(last)}">${fmt(last)}</b>`}<small>${esc(sk.unit)}</small></span>${spark(st.hist) || "<span></span>"}
+  const limits = Object.entries(SKILLS).map(([k, sk]) => {
+    const st = skillState(k), last = st.hist.length ? st.hist[st.hist.length - 1][1] : null, d = last == null ? sk.start : last;
+    const [a, b] = limitPair(k, d);
+    return `<button class="limit" data-drill="${k}">
+      <span class="lp"><i style="--c:${a}"></i><i style="--c:${b}"></i><em data-ink="${ink(a)}">${last == null ? `Starting gap · ${fmt(d)} ${esc(sk.unit)}` : `Your limit · ${fmt(d)} ${esc(sk.unit)}`}</em></span>
+      <span class="lrow"><span class="nm"><b>${esc(sk.name)}</b><span>${st.best != null ? `best ${fmt(st.best)} ${esc(sk.unit)}` : "not tried yet"}</span></span>
+        <span class="val">${last == null ? "—" : `<b data-count="${fmt(last)}">${fmt(last)}</b>`}</span>${spark(st.hist) || "<span></span>"}</span>
     </button>`;
   }).join("");
   const fam = skillState("hue").fam, famRow = Object.keys(fam).length
     ? `<div class="fams">${Object.entries(fam).sort((a, b) => a[1] - b[1]).map(([f, v]) => `<span><b>${fmt(v)}</b> ${esc(f)}</span>`).join("")}</div>` : "";
   const el = show(`
     <header class="bar"><div class="brand">${LOGO}<span>ColorHub</span></div><span class="eyebrow">Eye training</span></header>
-    <p class="eyebrow kick">${done ? "Done today — again if you like" : "Today's workout — about two minutes"}</p>
+    <p class="eyebrow kick">${done ? "Done today — again if you like" : "Today's workout — three drills, two minutes"}</p>
     <h1 class="tab-title">The <em>Gym</em></h1>
-    <p class="tab-sub">Train the judgments painters make every day. You get sharper at exactly what you practice.</p>
     <div class="workout ${done ? "done" : ""}">
-      <ol class="wk-list">${wk.map((k, i) => `<li><span>${pad2(i + 1)}</span><b>${esc(SKILLS[k].name)}</b><em>${k === "order" ? "3 strips" : "10 rounds"}</em></li>`).join("")}</ol>
+      <ol class="wk-list">${wk.map((k, i) => `<li>${drillPreview(k)}<span class="wk-txt"><span>${pad2(i + 1)} — ${k === "order" ? "3 strips" : "10 rounds"}</span><b>${esc(SKILLS[k].name)}</b><small>${esc(SKILLS[k].what)}</small></span></li>`).join("")}</ol>
       <button class="btn" data-workout>${done ? "Train again" : "Begin the workout"} ${ICON.arrow}</button>
     </div>
     <div class="sec-head"><b>Your eye</b><span>smaller is sharper</span></div>
-    <div class="eye-table">${rows}</div>
+    <p class="x-sub limit-note">Each plate is split at your current limit: the smallest difference you can still see. Can you find the seam?</p>
+    <div class="limits">${limits}</div>
     ${famRow ? `<div class="sec-head"><b>Odd one out, by family</b><span>ΔE</span></div>${famRow}` : ""}
     <div class="sec-head"><b>Play</b></div>
-    <button class="play-row" data-lightning><span><b>Lightning round</b><span>Forty-five seconds. Name as many as you can.</span></span><em>${S.best.lightning ? "best " + S.best.lightning : "new"}</em></button>
-    <p class="fine">Scores are color differences: ΔE (CIEDE2000), and ΔL* for lightness. About 1 is the smallest difference most people can see side by side.</p>
+    <button class="play-row" data-lightning><span><b>Lightning round</b><span>Forty-five seconds. Name as many as you can.</span></span><em class="lt-best">${S.best.lightning ? `<b>${S.best.lightning}</b>best` : "new"}</em></button>
+    <p class="fine">Scores are color differences: ΔE (CIEDE2000), and ΔL* for lightness. About 1 is the smallest difference most people can see side by side. Practice sharpens these judgments; it isn't a brain-training claim.</p>
   `, "gym", "gym");
   el.querySelector("[data-workout]").onclick = () => workout(wk);
   el.querySelectorAll("[data-drill]").forEach(b => b.onclick = () => runDrill(b.dataset.drill, { trials: SKILLS[b.dataset.drill].trials + 4, done: r => drillDone([r]) }));
