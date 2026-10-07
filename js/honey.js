@@ -213,9 +213,37 @@ function honeyWhere(it) {
 }
 // a regular hexagon's radial boundary at angle theta (radians), apothem = r (so flat-to-flat width = 2r, and the
 // hexagon's vertices reach out to r/cos(30°)). Fixed lattice orientation (pointy-top), the same for every bubble.
+// r = the hexagon's apothem (center to the middle of a side). Sides face 0°, 60°, 120°... which is where the lattice's
+// neighbors sit, so neighboring hexagons meet side to side (corners toward neighbors left triangular gaps and overlaps).
 function honeyHexR(theta, r) {
-  const seg = Math.PI / 3; let a = theta % seg; if (a < 0) a += seg; a -= seg / 2;
+  const seg = Math.PI / 3; let a = (theta + seg / 2) % seg; if (a < 0) a += seg; a -= seg / 2;
   return r / Math.cos(a);
+}
+// how far a bubble's outline reaches from its center toward angle theta (circle, hexagon or the blend between)
+const honeyExtent = (theta, r, shapeAmt) => shapeAmt <= .02 ? r : r * (1 - shapeAmt) + honeyHexR(theta, r) * shapeAmt;
+// No overlap, whatever the lens, layout, fill, gap or shape: every bubble is shrunk (never grown) until, toward each
+// near neighbor, its reach plus the neighbor's reach fits inside the distance between their centers (less a hairline).
+// Each bubble takes the tightest factor over all its neighbors, so every pair is guaranteed to fit.
+function honeyNoOverlap(drawn, shapeAmt) {
+  if (drawn.length < 2) return;
+  let maxD = 0; for (const b of drawn) if (b.d > maxD) maxD = b.d;
+  const cell = Math.max(4, maxD * 1.2), grid = new Map(), key = (i, j) => i * 100003 + j;
+  drawn.forEach((b, n) => { const k = key(Math.floor(b.x / cell), Math.floor(b.y / cell)); let a = grid.get(k); if (!a) grid.set(k, a = []); a.push(n); });
+  const scale = new Float64Array(drawn.length).fill(1);
+  drawn.forEach((b, n) => {
+    const ci = Math.floor(b.x / cell), cj = Math.floor(b.y / cell);
+    for (let i = ci - 1; i <= ci + 1; i++) for (let j = cj - 1; j <= cj + 1; j++) {
+      const a = grid.get(key(i, j)); if (!a) continue;
+      for (const m of a) {
+        if (m === n) continue;
+        const o = drawn[m], dx = o.x - b.x, dy = o.y - b.y, dist = Math.hypot(dx, dy);
+        if (dist > (b.d + o.d) * .62) continue;
+        const th = Math.atan2(dy, dx), need = honeyExtent(th, b.d / 2, shapeAmt) + honeyExtent(th + Math.PI, o.d / 2, shapeAmt);
+        if (need > 0) { const k = dist * .985 / need; if (k < scale[n]) scale[n] = k; }
+      }
+    }
+  });
+  drawn.forEach((b, n) => { if (scale[n] < 1) b.d *= Math.max(0, scale[n]); });
 }
 // the bubble outline: a plain circle (shape 0) blended toward a true hexagon (shape 1), rounding the corners
 // in between for free (the blend's own smooth transition from a constant radius to the hexagon's peaked one).
@@ -350,6 +378,7 @@ function honeycomb(host, opts = {}) {
       if (z < cbest) { cbest = z; cItem = p.it; }
       drawn.push({ it: p.it, x, y, d });
     });
+    honeyNoOverlap(drawn, shapeAmt);
     let pb = null;
     if (pressed) { const i = drawn.findIndex(b => b.it === pressed.it && Math.abs(b.x - pressed.x) < 3 && Math.abs(b.y - pressed.y) < 3); if (i >= 0) { pb = drawn.splice(i, 1)[0]; drawn.push(pb); } }
     for (const b of drawn) {
