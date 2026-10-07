@@ -53,16 +53,18 @@ function btBuildNodes() {
   const B = window.BOTANY;
   btPlantByColor = new Map(); btDyesByColor = new Map();
   const swFor = names => names.map(n => { const c = BYNAME.get(n.toLowerCase()); return c ? { h: c.h, label: n } : null; }).filter(Boolean);
+  // data/botany.js keeps facts as [label, value] pairs (smaller JSON); wikiPage wants { label, value } objects
+  const factsFor = pairs => (pairs || []).map(([label, value]) => ({ label, value }));
   B.plants.forEach(p => {
     const id = "bt:plant:" + p.id;
     g.nodes.set(id, { kind: "botany", type: "botplant", id, title: p.plant, dek: "The plant behind ColorHub's " + p.color + ".",
-      facts: p.facts, body: p.body, colors: [p.color], sources: p.sources, swatches: swFor([p.color]) });
+      facts: factsFor(p.facts), body: p.body, colors: [p.color], sources: p.sources, swatches: swFor([p.color]) });
     btPlantByColor.set(p.color, id);
   });
   B.dyes.forEach(d => {
     const id = "bt:dye:" + d.id;
     g.nodes.set(id, { kind: "botany", type: "botdye", id, title: d.title, dek: "Dye plant",
-      facts: d.facts, body: d.body, colors: d.colors, sources: d.sources, swatches: swFor(d.colors) });
+      facts: factsFor(d.facts), body: d.body, colors: d.colors, sources: d.sources, swatches: swFor(d.colors) });
     d.colors.forEach(c => { if (!btDyesByColor.has(c)) btDyesByColor.set(c, []); btDyesByColor.get(c).push(id); });
   });
   B.essays.forEach(e => {
@@ -172,10 +174,10 @@ function btFloriRowHTML(f) {
   }
   return `<div class="kin bt-plain"><i></i><b>${esc(flower)}</b><span>${esc(meaning)}${typical ? ` · ${esc(typical)}` : ""}</span></div>`;
 }
-function btFloriPage() {
+function btFloriPage(opts = {}) {
   const B = window.BOTANY, withColor = B.flori.filter(f => f[3] && f[3].length);
   const el = show(`
-    <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button></header>
+    ${worldTop("Botany")}
     <p class="eyebrow p-type">Botany · ${B.flori.length} flowers</p>
     <h1 class="p-title">The language of flowers</h1>
     <p class="p-dek">Kate Greenaway's 1884 dictionary of flower meanings — a Victorian parlor tradition, not a fact about flowers. 19th-century dictionaries often disagree with each other on what the same flower means.</p>
@@ -200,8 +202,7 @@ function btFloriPage() {
       : `<p class="fine">No flowers match.</p>`;
   };
   draw();
-  el.querySelector("[data-back]").onclick = xBack;
-  onKey = e => { if (e.key === "Escape") xBack(); };
+  worldBackWire(el, opts, btFallback);
   el.querySelectorAll("[data-fam]").forEach(b => b.onclick = () => { btFam = b.dataset.fam; btShown = 60; el.querySelectorAll("[data-fam]").forEach(x => x.classList.toggle("on", x === b)); draw(); });
   el.querySelector("#bt-q").addEventListener("input", e => { btQ = e.target.value; btShown = 60; draw(); });
   el.addEventListener("click", e => { if (e.target.closest("[data-more]")) { btShown += 80; draw(); } });
