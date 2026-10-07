@@ -714,6 +714,11 @@ img{transition:opacity .6s var(--ease)}
 .st-eye{background:linear-gradient(140deg,#2E5E5A,#C9A15A 70%,#E9D9B8)}
 .st-eye i{width:38%;aspect-ratio:1;border-radius:50%;box-shadow:0 0 0 2px #F3F3F1,inset 0 0 0 7px #C9A15A}
 .st-photo{color:var(--soft)}.st-photo svg{width:36px;height:36px}
+.st-phrail{display:flex;gap:12px;overflow-x:auto;margin:0 calc(-1 * var(--g));padding:2px var(--g) 6px;scroll-snap-type:x proximity;scrollbar-width:none}
+.st-phrail::-webkit-scrollbar{display:none}
+.st-ph{flex:none;width:112px;scroll-snap-align:start;text-align:left;display:flex;flex-direction:column;gap:6px}
+.st-ph img{width:112px;height:112px;object-fit:cover;border-radius:2px;background:var(--c)}
+.st-ph small{display:block;font-size:12px;color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .st-saved{display:flex;flex-direction:column}
 .st-pal{display:flex;flex-direction:column;gap:9px;padding:14px 0;border-bottom:1px solid var(--rule);text-align:left}
 .st-pal .strip{display:flex;height:46px;border-radius:2px;overflow:hidden}

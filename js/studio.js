@@ -62,6 +62,7 @@ function studio() {
       <button class="st-tile" data-taste="color"><span class="st-art st-duel"><i style="--c:#C8553D"></i><i style="--c:#3F7C8C"></i></span><b>Find your color</b><small>${S.fav ? `Yours: ${esc(S.fav.n)}-ish` : "About 20 taps. A map of the colors you love."}</small></button>
       <button class="st-tile" data-taste="palette"><span class="st-art st-duel st-duel-pal">${[["#EFE6D2", "#C8553D", "#E0A458", "#5B7F6E"], ["#1F2A44", "#4F6D7A", "#C0D6DF", "#EAEAEA"]].map(p => `<i>${p.map(h => `<b style="--c:${h}"></b>`).join("")}</i>`).join("")}</span><b>Find your palette</b><small>About 15 taps. Your palette dials and painters.</small></button>
     </div>
+    ${phShelfHTML()}
     <div class="sec-head"><b>Your palettes</b><span>${saved.length || ""}</span></div>
     ${saved.length ? `<div class="st-saved">${saved.map((p, i) => `<button class="st-pal" data-i="${i}"><span class="strip">${p.cols.map(h => `<i style="--c:${h}"></i>`).join("")}</span><span class="st-meta"><b>${esc(p.from || "Palette")}</b><em>${esc(p.at || "")}</em></span></button>`).join("")}</div>`
       : `<p class="x-sub">Palettes you keep, from the wheel, a photo or the taste test, land here.</p>`}
@@ -70,8 +71,9 @@ function studio() {
   el.querySelectorAll("[data-taste]").forEach(b => b.onclick = () => tasteIntro(b.dataset.taste));
   el.querySelector("[data-wheel]").onclick = () => gamutWheel();
   el.querySelector("[data-eye]").onclick = () => eye();
-  el.querySelector("#file").onchange = e => { const f = e.target.files[0]; if (f) loadImage(f, c => studioFromImage(c, "From a photo")); };
+  el.querySelector("#file").onchange = e => { const f = e.target.files[0]; if (f) loadImage(f, c => phCaptureAndOpen(c, "From a photo")); };
   el.querySelectorAll("[data-i]").forEach(b => b.onclick = () => { const p = saved[+b.dataset.i]; paletteView({ cols: p.cols.map(h => ({ h })), from: p.from, savedAt: +b.dataset.i }); });
+  phWireShelf(el.querySelector("#phShelf"));
   // a small live wheel as the tile's picture
   const mini = el.querySelector("#mini");
   requestAnimationFrame(() => {
@@ -275,7 +277,7 @@ function paletteView(p) {
   let n = hasImg ? 6 : null, pct = hasImg, look = hasImg ? "weighted" : "stripes";
   const colsNow = () => hasImg ? p.pals[n] : p.cols;
   const el = show(`
-    <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span class="eyebrow">Studio · ${esc(p.from || "Palette")}</span><span style="width:44px"></span></header>
+    <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span class="eyebrow">Studio · ${esc(p.from || "Palette")}${p.at ? " · " + esc(p.at) : ""}</span><span style="width:44px"></span></header>
     ${hasImg ? `<div class="pv-img"><img src="${p.img}" alt=""><div id="dots"></div></div>` : ""}
     <div class="pv-ctrl">
       ${hasImg ? `<div class="seg" id="cnt">${counts.map(k => `<button class="${k === n ? "on" : ""}" data-n="${k}">${k}</button>`).join("")}</div>` : ""}
@@ -287,9 +289,13 @@ function paletteView(p) {
     <div class="row2" style="margin-top:18px"><button class="btn" data-keep>${p.savedAt != null ? "Kept" : "Keep it"}</button><button class="btn ghost" data-share>${ICON.share} Share</button></div>
     <div class="row2" style="margin-top:10px"><button class="btn ghost" data-css>Copy as CSS</button><button class="btn ghost" data-hex>Copy hex list</button></div>
     ${p.savedAt != null ? `<button class="btn ghost" data-del style="margin-top:10px">Remove from your palettes</button>` : ""}
+    ${p.photoId != null ? `<button class="btn ghost" data-delphoto style="margin-top:10px">Delete this photo</button>` : ""}
     ${hasImg ? `<p class="fine">Colors are grouped by similarity (k-means in OKLab) on a small copy of the image; "by area" shows how much of the picture each one covers. A small, striking color that the groups miss is added as an accent.</p>` : ""}
   `, "article studio");
-  el.querySelector("[data-back]").onclick = () => studio();
+  // a photo page is part of the shared back trail (ROADMAP.md §17 job #2): Back goes to wherever it was opened
+  // from (the shelf, a color page, a name page…), one step at a time; every other paletteView still just
+  // returns to the Studio tab, as before.
+  el.querySelector("[data-back]").onclick = p.photoId != null ? xBack : () => studio();
   // every row's name and family come from the one naming system (ROADMAP §17 job #1), the same as a painting
   // palette row (js/gallery.js) — no separate "lesson word" reading of the same color.
   const named = h => ({ nm: nameOf(h), fam: typeof familyOf === "function" && familyOf(h) });
@@ -313,6 +319,8 @@ function paletteView(p) {
   el.querySelector("[data-share]").onclick = () => sharePalette(colsNow(), p.from, named);
   const del = el.querySelector("[data-del]");
   if (del) del.onclick = () => { S.palettes.splice(p.savedAt, 1); save(); toast("Removed"); studio(); };
+  const delPhoto = el.querySelector("[data-delphoto]");
+  if (delPhoto) delPhoto.onclick = () => phDeleteConfirm(p.photoId, () => go("studio"));
 }
 
 // a 1080x1350 card: the palette as tall stripes with names

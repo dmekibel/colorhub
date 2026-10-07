@@ -2,6 +2,7 @@
 // Addresses. Every meaningful screen has a hash route, so it can be shared, bookmarked and reloaded:
 //   #/today  #/train  #/studio  #/explore  #/explore/<colors|paintings|ideas|saved>
 //   #/color/<slug>  #/page/<id>  #/painting/<slug>  #/story/<id>     (add /more for the "More like this" closeup)
+//   #/photo/<id>  a photo saved in Studio (js/photos.js, IndexedDB on this device)
 //   #/daily  #/challenge  #/taste/<color|palette>  #/lab/<harmony|contrast>  #/gallery/<n> (a museum painting)
 //   #/poem/<id>  #/passage/<id>  #/film/<id>   (js/poems.js, js/passages.js, js/films.js)
 //   #/learnit/<color>   the honeycomb home's instant mini-lesson (js/home.js, js/learnit.js). #/today itself
@@ -86,6 +87,7 @@ const ROUTED = [["colorPage", nodeRouted()], ["wikiPage", nodeRouted()], ["paint
   ["passagePage", p => p && p.id ? routed(p.title, "passage/" + p.id) : null],
   ["filmPage", f => f && f.id ? routed(f.title, "film/" + f.id) : null],   // js/passages.js, js/films.js
   ["namePage", entry => entry && entry.n ? routed(entry.n, "name/" + routeSlug(entry.n)) : null],   // js/names.js: a library color that isn't one of the 101
+  ["phOpenRecord", (id, rec) => id != null ? routed(rec && (rec.title || rec.from) || "Your photo", "photo/" + id) : null],   // js/photos.js
   ["fashionPage", slug => typeof worldRouteTitle === "function" ? routed(worldRouteTitle(slug), "fashion/" + slug) : null],   // js/world.js
   ["btListPage", kind => typeof btListTitle === "function" ? routed(btListTitle(kind), "botany/" + kind) : null],   // js/botany.js (plant/dye/essay detail pages route via wikiPage above)
   ["btFloriPage", () => routed("The language of flowers", "botany/flori")],   // js/botany.js
@@ -151,6 +153,7 @@ function openRoute(hash, initial = false) {
     loadCoreNames().then(() => { const e = routeName(id); if (e) namePage(e); else go(S.tab || "learn"); });
     return true;
   }
+  if (kind === "photo" && id && typeof photoPage === "function") { base(); XSTACK = []; photoPage(id); return true; }
   if (kind === "gallery" && /^\d+$/.test(id || "") && typeof galleryPage === "function") {
     base();
     if (!GAL) { ROUTE_NEXT = routed("Painting", "gallery/" + id); waitScreen(); ROUTE_REPLACE = true; }   // the painting replaces the placeholder

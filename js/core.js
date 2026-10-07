@@ -262,13 +262,25 @@ function countUp(root) {
 document.addEventListener("load", e => { if (e.target.tagName === "IMG") e.target.classList.add("ld"); }, true);
 addEventListener("scroll", () => document.body.classList.toggle("scrolled", scrollY > 24), { passive: true });
 
+// Pinterest-style back (ROADMAP.md §17 job #2): every screen's scroll position is remembered against its own
+// address, so landing back on it (the Back button, the swipe-back gesture, or Escape) puts you where you were.
+// BACK_RENDER is set by whichever function is about to re-render "the screen behind this one" — xBack() and
+// closeup()'s own back handler (js/explore.js) are the two places that do this; show() reads it once and clears
+// it, so a plain forward navigation always starts at the top, same as before.
+let BACK_RENDER = false;
+const SCROLL_BY_HASH = new Map();
+
 function show(html, cls = "", tab = null) {
+  const leavingHash = ROUTE_NOW, leavingY = scrollY;
+  const backNav = BACK_RENDER; BACK_RENDER = false;
   timers.forEach(clearTimeout); timers = []; onKey = null;
   cleanup.forEach(f => { try { f(); } catch (e) {} }); cleanup = [];
   document.querySelectorAll(".scrim,.sheet,.toast,.fade-ghost").forEach(n => n.remove());
   // a new screen always scrolls: release any scroll lock a sheet or panel left behind (leaving a screen with a sheet
   // open used to keep the body pinned, so the next page couldn't scroll)
   if (LOCKS) { LOCKS = 0; document.documentElement.classList.remove("sheet-open"); document.body.style.top = ""; }
+  // remember where we were, so a later Back to this same address can put the scroll back
+  if (leavingHash) SCROLL_BY_HASH.set(leavingHash, leavingY);
   // the old screen fades out underneath the new one
   const old = app.firstElementChild;
   if (old && !reduceMotion) {
@@ -284,7 +296,11 @@ function show(html, cls = "", tab = null) {
   // The entry carries the screen's address (#/color/teal…) and the page title: router.js.
   routeCommit(tab);
   if (tab) wireTabbar(tab);
-  window.scrollTo(0, 0); document.body.classList.remove("scrolled");
+  // forward nav starts at the top, same as always; a Back puts the scroll back where this address left it
+  const backY = backNav ? SCROLL_BY_HASH.get(ROUTE_NOW) : null;
+  if (backY) { const n = 2; let left = n; const tick = () => { if (--left > 0) return requestAnimationFrame(tick); scrollTo(0, backY); }; requestAnimationFrame(tick); }
+  else window.scrollTo(0, 0);
+  document.body.classList.remove("scrolled");
   const el = app.firstElementChild;
   const mb = tab && el.querySelector("[data-menu]"); if (mb) mb.onclick = () => menu();
   el.querySelectorAll("img").forEach(i => { if (i.complete && i.naturalWidth) i.classList.add("ld"); });

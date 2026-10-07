@@ -220,18 +220,7 @@ function closeup(n, opts = {}) {
     ${masonry(shown.map(c => pin(c.to, { rel: c.rel, why: c.why, h: c.to.kind === "color" ? 120 + (hash(c.to.id) % 3) * 20 : undefined })))}` : ""}
     <div id="more"></div>
   `, "article closeup");
-  el.querySelector("[data-back]").onclick = () => {
-    XSTACK.pop();
-    const prev = XSTACK[XSTACK.length - 1];
-    if (!prev) return go("explore");
-    if (prev.startsWith("g:")) return galleryPage(+prev.slice(2), false);
-    if (prev.startsWith("n:")) {   // a library color's own page, not one of the 101 (js/names.js)
-      const nm = decodeURIComponent(prev.slice(2));
-      return loadCoreNames().then(() => { const e = (CORE_NAMES || []).find(x => x.n === nm); e ? namePage(e, false) : go(S.tab || "learn"); });
-    }
-    const node = graph().nodes.get(prev.replace(/^[zp]:/, ""));
-    return prev.startsWith("z:") ? closeup(node, { back: true }) : openNode(node, false);
-  };
+  el.querySelector("[data-back]").onclick = xBack;
   el.querySelector("[data-save]").onclick = e => { const on = toggleSave(n.id); e.currentTarget.textContent = on ? "♥" : "♡"; e.currentTarget.classList.toggle("saved", on); };
   const rd = el.querySelector("[data-read]"); if (rd) rd.onclick = () => openNode(n);
   const pl = el.querySelector("[data-play]"); if (pl) pl.onclick = () => storyPlayer(n);
@@ -267,20 +256,27 @@ function openNode(n, push = true) {
   if (n.page) return n.page(n);   // archive pages (passages, films) bring their own renderer
   return wikiPage(n);
 }
-function xBack() {
-  XSTACK.pop();
-  const prev = XSTACK[XSTACK.length - 1];
-  if (!prev) return go("explore");
+// Pinterest-style back (ROADMAP.md §17 job #2): XSTACK is the one shared crumb trail behind every screen this
+// app can open from the honeycomb, Explore, the gallery or Studio's photo shelf — whichever of those opened
+// the first screen in a chain, going back far enough always lands there, never on an unrelated tab.
+// The fallback when the trail runs out: whatever tab we're logically in (S.tab keeps whatever it was set to by
+// go()/hmHome() and never changes just from opening a page), so a chain rooted in the honeycomb or Studio
+// returns there instead of always landing on Explore.
+const xFallbackTab = () => ["learn", "gym", "studio"].includes(S.tab) ? S.tab : "explore";
+function xStep(prev) {
+  if (!prev) return go(xFallbackTab());
   if (prev.startsWith("g:")) return galleryPage(+prev.slice(2), false);   // a gallery painting (js/gallery.js)
+  if (prev.startsWith("ph:")) return photoPage(prev.slice(3), false);   // a saved photo (js/photos.js)
   if (prev.startsWith("poem:")) return poemPage(prev.slice(5), { back: true });   // a poem (js/poems.js)
   // a library color's own page, not one of the 101 (js/names.js): it isn't a graph node, so look it up by name
   if (prev.startsWith("n:")) {
     const nm = decodeURIComponent(prev.slice(2));
-    return loadCoreNames().then(() => { const e = (CORE_NAMES || []).find(x => x.n === nm); e ? namePage(e, false) : go(S.tab || "learn"); });
+    return loadCoreNames().then(() => { const e = (CORE_NAMES || []).find(x => x.n === nm); e ? namePage(e, false) : go(xFallbackTab()); });
   }
   const node = graph().nodes.get(prev.replace(/^[zp]:/, ""));
   return prev.startsWith("z:") ? closeup(node, { back: true }) : openNode(node, false);
 }
+function xBack() { XSTACK.pop(); BACK_RENDER = true; xStep(XSTACK[XSTACK.length - 1]); }
 // links inside any article
 function wireLinks(el) {
   el.addEventListener("click", e => {
