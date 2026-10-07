@@ -266,7 +266,7 @@ function hmHome() {
       onZoom: z => { S.hm.zoom = Math.round(z * 100) / 100; save(); } });
     hmWireChrome();
   }
-  function applyView(k, val) { S.hm[k] = val; save(); buzz(4); bodyBuilt = false; }
+  function applyView(k, val) { S.hm[k] = val; save(); buzz(4); }
 
   // ---------- title: tap for the full chooser, swipe for the four quick views ----------
   // Two tabs in one sheet (David: "being able to SEE the effect while choosing"): "Show" (what — stage/filter/
