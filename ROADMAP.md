@@ -201,6 +201,23 @@ Ends with a lesson score and Next.
 - Built from look-alike groups; Learn it works on any ladder color.
 - Progress shows both tiers: "Core 64/101 · Library 212/~1,000"; the top of the ladder = "master colorist".
 
+**One naming system (David, 2026-10-08): every place that names a color uses the same function and the same list.**
+- Data: one file holds the ~1,000 primary names (§13), each with its synonyms and cultural notes. The 2,700-name library
+  becomes synonyms and info, never a separate naming source.
+- One function, `nameOf(color)`, used everywhere: painting palettes, the camera, photo palettes, Studio, the honeycomb,
+  look-alikes, Learn it, the mosaic and image analysis (§15-16). Nothing else picks names.
+- Output by distance (CIEDE2000, tune the thresholds on real paintings):
+  - very close (about ΔE < 3): the word alone, "Teal"
+  - near (about 3-8): word + one modifier, "greyish teal", "deep olive", "pale salmon"
+  - far: "between teal and slate"
+  - tapping always shows the nearest 3-5 words with how close each is
+- Modifiers are a small, fixed grammar, the same everywhere: light/pale, dark/deep, greyish/dusty, bright/vivid, and hue
+  leans (reddish, yellowish, greenish, bluish, purplish). They're taught once, early in the path (Stage 1-2), as their own
+  short lesson.
+- Learning-aware display: the name is always the true nearest of the 1,000. Names you've learned are shown plainly; names
+  you haven't met yet get a small "new word" mark that leads to Learn it.
+- Gate: tools/check.js fails if any js file names colors any other way (no direct library lookups for display).
+
 ## 14. Stages and fields (approved 2026-10-08, sizes revised the same day; replaces the fixed 4-level ladder in §13)
 No colored belts. The 11 basics are a placement check only, never taught. Counts are total words you know, basics
 included. Stages grow fast at first, then level off at about +200 new words (about 3 weeks), so no stage drags on:

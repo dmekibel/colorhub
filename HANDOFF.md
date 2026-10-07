@@ -61,7 +61,7 @@ the public repo `dmekibel/colorhub`).
   wiki images (`agent-a7a61bd7e4615b40a`). Decide whether to finish or drop.
 
 ## Next (in order, all approved; details in ROADMAP.md)
-1. ROADMAP §13: painting palettes (highlight the matching swatch, dynamic 3-20 palette precomputed offline, tap-to-name),
+1. ROADMAP §13 (start with the unified naming system: one list, one nameOf(), modifiers), then painting palettes (highlight the matching swatch, dynamic 3-20 palette precomputed offline, tap-to-name),
    every swatch tappable app-wide, the color link sheet with several nearest words in both tiers, generated library color
    pages, one primary English name per distinct color (alternates as info only; a non-English name is the primary name only when no English name exists; ~1,000 total). Wait for the Commons batch first (it rewrites data/gallery).
 2. Color-list swaps from research/COLOR-SELECTION.md (Bistre, Stone, Green grey, Rose, Grape, Seafoam; Terracotta and
