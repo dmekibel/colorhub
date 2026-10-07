@@ -16,6 +16,7 @@
 //   items  [{ n, h, c?, lib? }]  c = the app color (one of the 101), lib = its data/library.json entry.
 //          Defaults to the 101 app colors as { n, h, c }.
 //   focus  an item (or anything with .n or .h) to center first.   pick(item, { morph }) on tap; morph() flies the bubble.
+//   onPeek(item)  optional: a long still press (480ms) calls this instead of pick (js/home.js: peek.js's quick look).
 
 const HONEY_SQ3 = Math.sqrt(3) / 2, HONEY_FINITE = 48;
 let HONEY_PAN = null;                 // where you were: { key, x, y, z, name }
@@ -363,7 +364,9 @@ function honeycomb(host, opts = {}) {
     if (!down) return;
     const d = down; down = null; phase = "idle";
     if (!d.moved) {
-      const now = performance.now(), p = pressed;
+      const now = performance.now(), p = pressed, held = now - d.hist[0][0];
+      // a long, still press peeks instead of opening (js/home.js wires onPeek on the honeycomb home)
+      if (p && opts.onPeek && held >= 480) { pressed = null; kick(); return opts.onPeek(p.it.o); }
       if (lastTap && now - lastTap.t < 300 && Math.hypot(d.x - lastTap.x, d.y - lastTap.y) < 36) {   // double tap
         clearTimeout(tapTimer); lastTap = null; pressed = null; kick();
         return zoomTo(Z > 1.25 ? 1 : 2.1, d.x, d.y);

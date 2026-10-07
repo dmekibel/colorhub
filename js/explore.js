@@ -344,7 +344,8 @@ function colorPage(n) {
   const status = c.basic ? "One of the eleven basic color words" : st ? (isMine(st) ? "Yours: you picked or named it right a day or more later" : st.own || st.placed ? "In your reviews: a quick check makes it yours" : "Learning: it's in your reviews") : `Not learned yet · ${c.unit ? unitLabel(c.unit) : ""}`;
   const el = show(`
     ${artTop(n)}
-    <div class="c-hero" style="--c:${c.h}" data-ink="${ink(c.h)}"><p class="eyebrow">${esc(status)}</p><h1>${esc(c.n)}</h1></div>
+    <div class="c-hero" style="--c:${c.h}" data-ink="${ink(c.h)}"><p class="eyebrow">${esc(status)}</p><h1>${esc(c.n)}</h1>
+      ${typeof hmLearnIt === "function" ? `<button class="c-learnit" data-learnit>${ICON.bolt} Learn it <small>~2 min</small></button>` : ""}</div>
     <div class="codes">${codeRows(c.h).map(([k, v]) => `<button data-copy="${esc(v)}"><span>${k}</span><b class="mono">${esc(v)}</b></button>`).join("")}</div>
     ${codeRows(c.h).some(r => r[0].startsWith("CMYK")) ? `<p class="fine codes-fine">CMYK here is a rough formula, not a print profile: real values depend on the paper and press, so check them in a print workflow with a proof.</p>` : ""}
     ${nb && c.d ? `<section class="cmp-sec"><div class="compare" data-nb="${esc(c.n)}"><div style="--c:${c.h}" data-ink="${ink(c.h)}">${esc(c.n)}</div><div style="--c:${nb.h}" data-ink="${ink(nb.h)}" data-node="c:${esc(nb.n)}">${esc(nb.n)}</div></div><p class="diff">${esc(c.d)}</p></section>` : ""}
@@ -364,6 +365,7 @@ function colorPage(n) {
     ${w && w.sources ? secHTML("src", "Sources", sourcesHTML(w.sources), false) : ""}
   `, "article");
   wireArticle(el, n); wireSections(el);
+  const li = el.querySelector("[data-learnit]"); if (li) li.onclick = () => hmLearnIt(c);
   const gi = el.querySelector("[data-glin]"); if (gi) galleryColorRow(gi, c);
   colorPoems(el.querySelector(".c-poems"), c);
   if (typeof worldColorRow === "function") worldColorRow(el, n);

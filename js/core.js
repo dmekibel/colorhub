@@ -180,6 +180,8 @@ const ICON = {
   compass: sv('<circle cx="12" cy="12" r="8.5"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>', 24, 1.7),
   palette: sv('<path d="M12 3.5a8.5 8.5 0 1 0 0 17c1.3 0 1.9-.9 1.6-2-.4-1.4.4-2.6 1.9-2.6H17a3.5 3.5 0 0 0 3.5-3.5c0-4.9-3.8-8.9-8.5-8.9z"/><circle cx="7.8" cy="11.2" r="1.1" fill="currentColor"/><circle cx="10.5" cy="7.6" r="1.1" fill="currentColor"/><circle cx="14.8" cy="7.9" r="1.1" fill="currentColor"/>', 24, 1.7),
   bolt: sv('<path d="M13 2.5L4.5 13.5H11l-1 8 8.5-11H12z"/>', 20),
+  camera: sv('<path d="M4 8.5a2 2 0 0 1 2-2h1.2l1-2h7.6l1 2H18a2 2 0 0 1 2 2V18a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><circle cx="12" cy="13" r="3.6"/>', 22, 1.7),
+  dice: sv('<rect x="4" y="4" width="16" height="16" rx="3.5"/><circle cx="8.4" cy="8.4" r="1.3" fill="currentColor"/><circle cx="15.6" cy="8.4" r="1.3" fill="currentColor"/><circle cx="12" cy="12" r="1.3" fill="currentColor"/><circle cx="8.4" cy="15.6" r="1.3" fill="currentColor"/><circle cx="15.6" cy="15.6" r="1.3" fill="currentColor"/>', 22, 1.6),
 };
 const LOGO = `<svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">${["#E34234", "#FFBF00", "#50C878", "#007FFF"].map((c, i) =>
   `<rect x="9" y="1.5" width="8" height="22" rx="2.2" fill="${c}" stroke="#121212" stroke-width="1.4" transform="rotate(${-33 + i * 22} 13 22)"/>`).join("")}</svg>`;
@@ -207,6 +209,9 @@ function morphFrom(el) {
   PENDING_MORPH = { r, bg: cs.backgroundColor, radius: cs.borderRadius, img, at: performance.now() };
 }
 document.addEventListener("click", e => { const t = e.target.closest && e.target.closest(MORPH_TRIGGER); if (t && app.contains(t)) morphFrom(t); }, true);
+// The brand button on every tab's header (tabHead, above) is the one consistent way back to the honeycomb
+// home (js/home.js). Delegated here, not wired per screen, so it works from Train, Explore and Studio alike.
+document.addEventListener("click", e => { const b = e.target.closest && e.target.closest("[data-hm-brand]"); if (b && app.contains(b) && typeof hmHome === "function") hmHome(); });
 function runMorph(root) {
   const m = PENDING_MORPH; PENDING_MORPH = null;
   // only right after the tap that asked for it, so a stale chip never flies into an unrelated screen
@@ -284,7 +289,10 @@ function show(html, cls = "", tab = null) {
   return el;
 }
 // Every tab's home opens with the same line: the brand on the left, the tab's own actions and the menu (⋯) on the right.
-const tabHead = (acts = "") => `<header class="bar"><div class="brand">${LOGO}<span>ColorHub</span></div><span class="bar-r">${acts}<button class="icon-btn" data-menu aria-label="Settings and more">${ICON.dots}</button></span></header>`;
+// The brand itself is the one consistent way back to the honeycomb home from inside Train, Explore and Studio
+// (ROADMAP.md §12: "a slim back-to-honeycomb button top-left" — the simplest option was to make the thing
+// that's already top-left on every tab do it, rather than adding a second button next to it).
+const tabHead = (acts = "") => `<header class="bar"><button class="brand" data-hm-brand aria-label="Back to the honeycomb">${LOGO}<span>ColorHub</span></button><span class="bar-r">${acts}<button class="icon-btn" data-menu aria-label="Settings and more">${ICON.dots}</button></span></header>`;
 // Every inner screen: back (or close, for a task) on the left, the title in the middle, an optional action on the right.
 const navTop = (title = "", o = {}) => `<header class="nav-top"><button class="icon-btn" ${o.close ? `data-close aria-label="Close">${ICON.x}` : `data-back aria-label="Back">${ICON.back}`}</button><span class="nav-title">${title}</span><span class="nav-r">${o.right || ""}</span></header>`;
 // Four tabs, one job each: Today (the path and the daily things), Train (the eye), Explore (read), Studio (make).
@@ -334,7 +342,9 @@ function go(tab) {
   if (tab === "gym") return gymHome();
   if (tab === "explore") return exploreHome();
   if (tab === "studio") return studio();
-  return home();
+  // The Today tab renders the honeycomb home (ROADMAP.md §12); js/learn.js's own home() is the classic Today
+  // screen and still runs the bottom sheet's "Today" panel and every deep "Home" button after a deck or review.
+  return typeof hmHome === "function" ? hmHome() : home();
 }
 const dailyDone = () => !!(S.daily && S.daily[today()]);
 addEventListener("keydown", e => { if (onKey && !e.metaKey && !e.ctrlKey) onKey(e); });

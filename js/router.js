@@ -4,6 +4,8 @@
 //   #/color/<slug>  #/page/<id>  #/painting/<slug>  #/story/<id>     (add /more for the "More like this" closeup)
 //   #/daily  #/challenge  #/taste/<color|palette>  #/lab/<harmony|contrast>  #/gallery/<n> (a museum painting)
 //   #/poem/<id>  #/passage/<id>  #/film/<id>   (js/poems.js, js/passages.js, js/films.js)
+//   #/learnit/<color>   the honeycomb home's instant mini-lesson (js/home.js, js/learnit.js). #/today itself
+//   already opens the honeycomb home: go("learn") does (js/core.js), and "today" is routed through go() below.
 // How it works: show() (core.js) calls routeCommit(tab). A tab home replaces the current history entry with
 // its route; an inner screen pushes one. Screen functions don't know their own address, so this file wraps
 // them (the ROUTED list below): the wrapper notes the route, then the screen's show() writes it to the URL and the
@@ -140,7 +142,9 @@ function openRoute(hash, initial = false) {
   }
   const simple = { daily: () => daily(), challenge: () => chToday() ? challengeDone() : challenge(),
     taste: () => tasteIntro(id === "palette" ? "palette" : "color"), lab: () => (LAB[id] && ["harmony", "contrast"].includes(id) ? LAB[id] : LAB.harmony)(),
-    fashion: () => typeof fashionPage === "function" && fashionPage(id) };
+    fashion: () => typeof fashionPage === "function" && fashionPage(id),
+    // the honeycomb home's instant mini-lesson (js/learnit.js): #/learnit/<color>
+    learnit: () => { const c = id && routeColor(id); if (c && typeof hmLearnIt === "function") hmLearnIt(c); else go(S.tab || "learn"); } };
   if (simple[kind]) { base(); simple[kind](); return true; }
   return false;
 }
