@@ -112,6 +112,32 @@
 .hm-tweak-row{display:flex;align-items:center;justify-content:space-between;width:100%;height:48px;margin-top:14px;padding:0 4px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);font:400 17px/1 var(--serif);color:var(--ink)}
 .hm-tweak-row svg{width:16px;height:16px;color:var(--soft)}
 
+/* ---------- "Show" / "Look" tabs (one sheet, two panels): Look stays compact (no scroll) so the honeycomb
+   above it — recentered live via ctrl.setInset — is always visible while you pick a style or drag a slider ---------- */
+.hm-tabs{display:flex;gap:6px;margin:2px 0 12px}
+.hm-tabs button{flex:1;height:36px;border:1px solid var(--rule);border-radius:18px;font:500 12px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--soft)}
+.hm-tabs button.on{background:var(--ink);border-color:var(--ink);color:#0E0D0B}
+.hm-tab-panel[hidden]{display:none}
+.hm-sheet-panel.hm-sheet-compact{max-height:40vh;overflow:hidden}
+.hm-look-panel{padding-bottom:0}
+.hm-look-row{display:flex;gap:7px;overflow-x:auto;padding-bottom:2px;margin-bottom:4px}
+.hm-look-chip{flex:none;width:59px;display:flex;flex-direction:column;align-items:center;gap:4px;padding:5px 2px;border-radius:12px;border:1px solid transparent}
+.hm-look-chip.on{border-color:var(--rule-2);background:rgba(236,232,223,.05)}
+.hm-look-chip b{font:400 10.5px/1.1 var(--serif);color:var(--soft);text-align:center}
+.hm-look-chip.on b{color:var(--ink)}
+.hm-look-ic{width:32px;height:32px;border-radius:50%;display:block;box-shadow:inset 0 0 0 1px rgba(236,232,223,.14)}
+.hm-look-original{background:linear-gradient(135deg,#D9654F 0%,#E7C35C 35%,#4C9F70 60%,#4C7FD1 100%)}
+.hm-look-honeycomb{background:radial-gradient(circle at 32% 30%,#E7C35C,#4C9F70 55%,#2E3B52 100%);clip-path:polygon(25% 4%,75% 4%,100% 50%,75% 96%,25% 96%,0% 50%)}
+.hm-look-sunflower{background:conic-gradient(from -20deg,#D9654F,#E7C35C,#4C9F70,#4C7FD1,#8C5AC2,#D9654F)}
+.hm-look-globe{background:radial-gradient(circle at 32% 28%,#F3EFE4,#4C7FD1 45%,#1B2740 85%)}
+.hm-look-magnifier{background:radial-gradient(circle at 50% 50%,#F3EFE4 0%,#E7C35C 30%,#4C9F70 58%,#2E3B52 100%)}
+.hm-look-sliders{margin-top:0}
+.hm-look-sliders .hm-tweak-row{height:32px;margin-top:0;border-top:none;border-bottom:1px solid var(--rule);grid-template-columns:92px 1fr 36px;display:grid;gap:8px;align-items:center;font:inherit}
+.hm-look-sliders .hm-tweak-row span{font:500 9.5px/1.2 var(--mono);letter-spacing:.03em;color:var(--soft)}
+.hm-look-sliders .hm-tweak-row input{width:100%;accent-color:var(--ink)}
+.hm-look-sliders .hm-tweak-row b{text-align:right;font:500 10px/1 var(--mono);color:var(--faint)}
+.hm-look-panel [data-lab-open]{margin-top:8px;font-size:12.5px}
+
 /* ---------- the Tweak panel: a compact, opaque, non-modal sheet over the live honeycomb (home + #/lab/honey) ---------- */
 .hm-tweak-panel{position:fixed;left:0;right:0;bottom:0;z-index:30;max-width:540px;margin:0 auto;height:45dvh;max-height:420px;
   display:flex;flex-direction:column;background:#17160F;border-top:1px solid var(--rule);border-radius:18px 18px 0 0;

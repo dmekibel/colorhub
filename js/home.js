@@ -84,7 +84,7 @@ const HM_TWEAK_SPECS = [
 // Tweaks are kept per style (S.hm.tweaks[styleId]): switching style switches to that style's own tweaks.
 function hmTweakFor(styleId) { const t = S.hm && S.hm.tweaks; return (t && t[styleId]) || null; }
 function hmSetTweak(styleId, patch) { S.hm.tweaks = S.hm.tweaks || {}; S.hm.tweaks[styleId] = patch ? { ...(S.hm.tweaks[styleId] || {}), ...patch } : null; save(); }
-function hmOpenTweak(ctrl) {
+function hmOpenTweak(ctrl, opts = {}) {
   if (document.querySelector(".hm-tweak-panel")) return;
   buzz(4);
   const cur = ctrl.getCfg(), tw = cur.tweak || {}, resolved = cur.resolved;
@@ -99,8 +99,13 @@ function hmOpenTweak(ctrl) {
     </div>
     <div class="hm-tweak-foot"><button class="link" data-reset>Reset to preset</button><button class="cx-pill" data-copy>Copy settings</button></div>`;
   document.body.appendChild(panel);
-  requestAnimationFrame(() => panel.classList.add("on"));
-  const close = () => { panel.classList.remove("on"); setTimeout(() => panel.remove(), reduceMotion ? 0 : 260); };
+  // recenters the honeycomb above this panel too (David: see the effect while choosing); on close, restores
+  // whatever inset the caller had going (the lab's own permanent bar), or 0 if none was given
+  requestAnimationFrame(() => { panel.classList.add("on"); requestAnimationFrame(() => { const r = panel.getBoundingClientRect(); ctrl.setInset({ bottom: Math.max(0, innerHeight - r.top) }); }); });
+  const close = () => {
+    panel.classList.remove("on"); if (opts.restoreInset) opts.restoreInset(); else ctrl.setInset({ bottom: 0 });
+    setTimeout(() => panel.remove(), reduceMotion ? 0 : 260);
+  };
   panel.querySelector("[data-close]").onclick = close;
   panel.querySelectorAll(".hm-tweak-row").forEach(row => {
     const k = row.dataset.key, input = row.querySelector("input"), out = row.querySelector("b");
@@ -159,6 +164,8 @@ function labHoney() {
     el.querySelector("[data-heart]").classList.toggle("on", !!r.heart);
     el.querySelectorAll("[data-star]").forEach(b => b.classList.toggle("on", +b.dataset.star <= (r.rating || 0)));
   }
+  // the rating bar is permanently on screen here, so the honeycomb stays recentered above it the whole time
+  const applyLabInset = () => { if (!ctrl) return; const r = el.querySelector(".hm-lab-bar").getBoundingClientRect(); ctrl.setInset({ bottom: Math.max(0, innerHeight - r.top) }); };
   async function build(soft) {
     loading = true;
     window.HM_LAB_LAST_P = pi; window.HM_LAB_LAST_N = HM_LAB_SIZES[si];
@@ -168,6 +175,7 @@ function labHoney() {
     const id = HONEY_STYLE_LIST[pi].id;
     if (ctrl) { ctrl.destroy(); viewEl.innerHTML = ""; }
     ctrl = honeycomb(viewEl, { items, style: id, tweak: hmTweakFor(id), centerFirst: true });
+    applyLabInset();
     paintBar();
   }
   el.querySelector("[data-back]").onclick = () => { if (ctrl) ctrl.destroy(); hmHome(); };
@@ -181,7 +189,7 @@ function labHoney() {
   el.querySelectorAll("[data-star]").forEach(b => b.onclick = () => {
     const k = keyOf(), n = +b.dataset.star; S.hmLab[k] = { ...(S.hmLab[k] || {}), rating: (S.hmLab[k] || {}).rating === n ? 0 : n }; save(); buzz(4); paintBar();
   });
-  el.querySelector("[data-tweak]").onclick = () => { if (ctrl) hmOpenTweak(ctrl); };
+  el.querySelector("[data-tweak]").onclick = () => { if (ctrl) hmOpenTweak(ctrl, { restoreInset: applyLabInset }); };
   el.querySelector("[data-copy]").onclick = () => {
     const out = Object.entries(S.hmLab).filter(([, v]) => v && (v.heart || v.rating)).map(([k, v]) => { const [style, size] = k.split("|"); return { style, size: +size, heart: !!v.heart, rating: v.rating || 0 }; });
     const text = JSON.stringify(out);
@@ -250,7 +258,17 @@ function hmHome() {
   function applyView(k, val) { S.hm[k] = val; save(); buzz(4); bodyBuilt = false; }
 
   // ---------- title: tap for the full chooser, swipe for the four quick views ----------
-  async function chooser() {
+  // Two tabs in one sheet (David: "being able to SEE the effect while choosing"): "Show" (what — stage/filter/
+  // collection, can be tall and scroll) and "Look" (how it looks — the 5 styles as small chips, plus Fine-tune's
+  // 4 sliders, capped compact with no scroll so the honeycomb above it stays visible live). Either way the
+  // honeycomb recenters into whatever's left visible above the sheet (ctrl.setInset) and settles back when it closes.
+  const HM_FINE_SPECS = [
+    { key: "m0", label: "Center size", min: 1.2, max: 6, step: .05 },
+    { key: "gap", label: "Gap", min: 0, max: .45, step: .01 },
+    { key: "shape", label: "Shape", min: 0, max: 1, step: .02 },
+    { key: "alive", label: "Alive", min: 0, max: 2, step: .1 },
+  ];
+  async function chooser(initialTab) {
     buzz(4);
     if (!LONG_NAMES || !CORE_NAMES || !SHADES) { await Promise.all([loadLongNames(), loadCoreNames(), loadShades()]); if (!el.isConnected || document.querySelector(".sheet")) return; }
     const v = hmView(), dotsFor = s => filterColors(csBase(s.state.base), { ...s.state, n: 5 });
@@ -261,22 +279,39 @@ function hmHome() {
     const collHtml = Object.entries(groups).map(([g, list]) => `
       <div class="cx-sec hm-sub"><b>${esc(g)}</b></div>
       <div class="cx-chips">${list.map(s => `<button class="cx-chip${v.src === s.id ? " on" : ""}" data-src="${s.id}">${cxDots(dotsFor(s))}<b>${esc(s.title)}</b></button>`).join("")}</div>`).join("");
+    const cfgNow = ctrl ? ctrl.getCfg() : null, tweakNow = (cfgNow && cfgNow.tweak) || {}, resolvedNow = (cfgNow && cfgNow.resolved) || HONEY_CFG_BASE;
+    const twVal = k => tweakNow[k] != null ? tweakNow[k] : resolvedNow[k];
     const { sh, close } = sheet(`<div class="cx-sh hm-chooser">
-      <div class="cx-sh-head"><h3>What to show</h3></div>
-      <div class="cx-sec"><b>Stage</b><span>the colors each stage of the path teaches</span></div>
-      <div class="cx-chips hm-stages">${HM_STAGES.map((n, i) => `<button class="cx-chip${v.src === "stage:" + n ? " on" : ""}" data-src="stage:${n}"><b>${i + 1}</b><em>${(n === 100 ? 101 : n).toLocaleString()}</em></button>`).join("")}
-        <button class="cx-chip${v.src === "every-name" ? " on" : ""}" data-src="every-name"><b>Name</b><em>${everyNameCount.toLocaleString()}</em></button>
-        ${shadeCount ? `<button class="cx-chip${v.src === "every-shade" ? " on" : ""}" data-src="every-shade"><b>Shade</b><em>${(everyNameCount + shadeCount).toLocaleString()}</em></button>` : ""}</div>
-      <div class="cx-sec"><b>Show</b><span>from your own reviews</span></div>
-      ${seg("filter", HM_FILTERS)}
-      <div class="cx-sec"><b>Style</b><span>how the honeycomb looks</span></div>
-      <div class="cx-chips hm-styles">${HONEY_STYLE_LIST.map(s => `<button class="cx-chip${v.style === s.id ? " on" : ""}" data-style="${s.id}"><b>${esc(s.title)}</b></button>`).join("")}</div>
-      <button class="hm-tweak-row" data-tweak-open><span>Tweak…</span>${CX_ICON.down}</button>
-      <button class="link" data-lab-open>Rate every preset (honeycomb lab) →</button>
-      <div class="cx-sec"><b>Or a collection</b><span>instead of a stage</span></div>
-      ${collHtml}
+      <div class="hm-tabs" data-tabs><button class="on" data-tab="show">Show</button><button data-tab="look">Look</button></div>
+      <div class="hm-tab-panel" data-panel="show">
+        <div class="cx-sh-head"><h3>What to show</h3></div>
+        <div class="cx-sec"><b>Stage</b><span>the colors each stage of the path teaches</span></div>
+        <div class="cx-chips hm-stages">${HM_STAGES.map((n, i) => `<button class="cx-chip${v.src === "stage:" + n ? " on" : ""}" data-src="stage:${n}"><b>${i + 1}</b><em>${(n === 100 ? 101 : n).toLocaleString()}</em></button>`).join("")}
+          <button class="cx-chip${v.src === "every-name" ? " on" : ""}" data-src="every-name"><b>Name</b><em>${everyNameCount.toLocaleString()}</em></button>
+          ${shadeCount ? `<button class="cx-chip${v.src === "every-shade" ? " on" : ""}" data-src="every-shade"><b>Shade</b><em>${(everyNameCount + shadeCount).toLocaleString()}</em></button>` : ""}</div>
+        <div class="cx-sec"><b>Show</b><span>from your own reviews</span></div>
+        ${seg("filter", HM_FILTERS)}
+        <div class="cx-sec"><b>Or a collection</b><span>instead of a stage</span></div>
+        ${collHtml}
+      </div>
+      <div class="hm-tab-panel hm-look-panel" data-panel="look" hidden>
+        <div class="hm-look-row">${HM_HOME_STYLES.map(id => `<button class="hm-look-chip${v.style === id ? " on" : ""}" data-style="${id}"><i class="hm-look-ic hm-look-${id}"></i><b>${esc((HONEY_STYLES[id] || {}).title || id)}</b></button>`).join("")}</div>
+        <div class="hm-look-sliders">${HM_FINE_SPECS.map(s => `<label class="hm-tweak-row" data-key="${s.key}"><span>${s.label}</span><input type="range" min="${s.min}" max="${s.max}" step="${s.step}" value="${twVal(s.key)}"><b>${(+twVal(s.key)).toFixed(2)}</b></label>`).join("")}</div>
+        <button class="link" data-lab-open>Rate every preset (honeycomb lab) →</button>
+      </div>
     </div>`);
-    sh.classList.add("cx-sheet");
+    sh.classList.add("cx-sheet", "hm-sheet-panel");
+    const applyInset = () => requestAnimationFrame(() => { if (ctrl) { const r = sh.getBoundingClientRect(); ctrl.setInset({ bottom: Math.max(0, innerHeight - r.top) }); } });
+    const mo = new MutationObserver(() => { if (!sh.isConnected) { if (ctrl) ctrl.setInset({ bottom: 0 }); mo.disconnect(); } });
+    mo.observe(document.body, { childList: true });
+    function setTab(tab) {
+      sh.querySelectorAll("[data-tab]").forEach(b => b.classList.toggle("on", b.dataset.tab === tab));
+      sh.querySelectorAll(".hm-tab-panel").forEach(p => p.hidden = p.dataset.panel !== tab);
+      sh.classList.toggle("hm-sheet-compact", tab === "look");
+      applyInset();
+    }
+    sh.querySelectorAll("[data-tab]").forEach(b => b.onclick = () => setTab(b.dataset.tab));
+    setTab(initialTab === "look" ? "look" : "show");
     // every change applies at once and the panel stays open, so you can see what each control does
     sh.querySelectorAll("[data-src]").forEach(b => b.onclick = () => {
       applyView("src", b.dataset.src); sh.querySelectorAll("[data-src]").forEach(x => x.classList.toggle("on", x === b)); render(true);
@@ -284,12 +319,25 @@ function hmHome() {
     sh.querySelectorAll(".hm-seg").forEach(g => g.querySelectorAll("button").forEach(b => b.onclick = () => {
       applyView(g.dataset.key, b.dataset.val); g.querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b)); render(true);
     }));
-    sh.querySelectorAll("[data-style]").forEach(b => b.onclick = () => {
-      applyView("style", b.dataset.style); sh.querySelectorAll("[data-style]").forEach(x => x.classList.toggle("on", x === b));
-      if (ctrl && ctrl.style) { ctrl.style(b.dataset.style, false); const tw = hmTweakFor(b.dataset.style); if (tw && ctrl.tweak) ctrl.tweak(tw); }
+    const syncFineSliders = () => sh.querySelectorAll(".hm-look-sliders .hm-tweak-row").forEach(row => {
+      const k = row.dataset.key, input = row.querySelector("input"), out = row.querySelector("b"), c = ctrl ? ctrl.getCfg() : null;
+      const val = c ? (c.tweak && c.tweak[k] != null ? c.tweak[k] : c.resolved[k]) : +input.value;
+      input.value = val; out.textContent = (+val).toFixed(2);
     });
-    sh.querySelector("[data-tweak-open]").onclick = () => { if (ctrl) hmOpenTweak(ctrl); };
+    sh.querySelectorAll(".hm-look-chip").forEach(b => b.onclick = () => {
+      applyView("style", b.dataset.style); sh.querySelectorAll(".hm-look-chip").forEach(x => x.classList.toggle("on", x === b));
+      if (ctrl && ctrl.style) { ctrl.style(b.dataset.style, false); const tw2 = hmTweakFor(b.dataset.style); if (tw2 && ctrl.tweak) ctrl.tweak(tw2); }
+      syncFineSliders();
+    });
+    sh.querySelectorAll(".hm-look-sliders .hm-tweak-row").forEach(row => {
+      const k = row.dataset.key, input = row.querySelector("input"), out = row.querySelector("b");
+      input.addEventListener("input", () => {
+        const val = +input.value; out.textContent = val.toFixed(2);
+        if (ctrl) { hmSetTweak(ctrl.getStyle(), { [k]: val }); ctrl.tweak({ [k]: val }); }
+      });
+    });
     sh.querySelector("[data-lab-open]").onclick = () => { close(); labHoney(); };
+    applyInset();
   }
   // ---------- search: a tap reveals the field; typing filters the honeycomb to matches (searchColors, colorsets.js) ----------
   const searchBox = $("#hmSearch"), searchInput = $("#hmq");
@@ -338,7 +386,14 @@ function hmHome() {
   const sheetEl = $("#hmSheet"), grab = $("#hmGrab"), bodyEl = $("#hmBody");
   // two corner buttons, under the thumbs: Today (left) opens the sheet with everything; the view button (right) opens the chooser
   $("#hmToday").onclick = () => { if (!S.hm.opened) { S.hm.opened = true; save(); } setState(sheetState === "peek" ? "full" : "peek"); };
-  $("#hmView").onclick = () => { setState("peek"); chooser(); };
+  // a tap opens Show; a long-press (480ms) jumps straight to Look (the 5 styles + Fine-tune), since that's the
+  // one people reach for mid-browse to tweak how it looks, not what it shows
+  { let holdT = 0, longFired = false;
+    const viewBtn = $("#hmView");
+    viewBtn.addEventListener("pointerdown", () => { longFired = false; clearTimeout(holdT); holdT = setTimeout(() => { longFired = true; buzz(6); setState("peek"); chooser("look"); }, 480); });
+    ["pointerup", "pointercancel", "pointerleave"].forEach(ev => viewBtn.addEventListener(ev, () => clearTimeout(holdT)));
+    viewBtn.onclick = () => { if (longFired) { longFired = false; return; } setState("peek"); chooser("show"); };
+  }
   const HM_PEEK = 0;   // at rest the sheet is fully hidden: nothing but colors on screen
   let H = { peek: HM_PEEK, mid: Math.round(innerHeight * .46), full: Math.round(innerHeight * .88) };
   sheetEl.style.height = H.full + "px";
@@ -380,7 +435,7 @@ function hmHome() {
     bodyEl.querySelector("[data-challenge]").onclick = () => chToday() ? challengeDone() : challenge();
     bodyEl.querySelector("[data-daily]").onclick = () => daily();
     bodyEl.querySelector("[data-train]").onclick = tr.open;
-    bodyEl.querySelector("[data-views]").onclick = () => { setState("peek"); chooser(); };
+    bodyEl.querySelector("[data-views]").onclick = () => { setState("peek"); chooser("show"); };
     bodyEl.querySelector("[data-find]").onclick = () => { setState("peek"); searchBox.hidden = false; searchInput.focus(); };
     bodyEl.querySelector("[data-camera]").onclick = () => hmCamera();
     bodyEl.querySelector("[data-surprise]").onclick = () => hmDice();
@@ -445,6 +500,7 @@ function hmHome() {
       setTimeout(() => { if (!el.isConnected || sheetState !== "peek") return; revealed = 0; paintSheet(true); el.classList.remove("hm-teach"); }, 1600); }, 900);
   }
 
+  window.HM_CHOOSER = chooser;   // #shot=home:look hook (tools/shots.sh): drive the Show/Look sheet without a tap
   render(false);
 }
 
@@ -524,5 +580,6 @@ function hmShot(arg) {
   if (arg === "sheet") setTimeout(() => hmTap(document.getElementById("hmGrab")), 150);
   if (arg === "sheetfull") setTimeout(() => { hmTap(document.getElementById("hmGrab")); setTimeout(() => hmTap(document.getElementById("hmGrab")), 500); }, 150);
   if (arg === "views") setTimeout(() => hmTap(document.getElementById("hmView")), 150);   // the title itself is hidden in the full-screen design; the corner button opens the same chooser
+  if (arg === "look") setTimeout(() => window.HM_CHOOSER && window.HM_CHOOSER("look"), 150);   // the long-press shortcut, without the long-press
   if (arg === "search") setTimeout(() => hmTap(document.querySelector("[data-search]")), 150);
 }
