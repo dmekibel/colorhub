@@ -42,6 +42,9 @@ function shot(name) {
     case "screen": return screenCheck(() => go("gym"));
     case "gymres": return stationDone({ k: arg || "neutral", est: 3.2, before: 4.1, pb: true, best: 3.2 });
     case "closeup": return closeup(g().nodes.get(arg || "c:Cobalt"));
+    case "name": return namesShot(arg);   // js/names.js: name:<slug>[@scrolldown], e.g. name:ecru or name:seafoam-green@700
+    // a honeycomb tap on a non-101 bubble, from a bigger stage (js/home.js hmOpenName): hmname[:stage]
+    case "hmname": { S.hm = S.hm || {}; S.hm.src = "stage:" + (arg || "400"); return loadCoreNames().then(() => { const item = hmStageItems(+(arg || 400)).find(it => !it.c); return item ? hmOpenName(item) : hmHome(); }); }
     case "page": return openNode(g().nodes.get(arg || "alchemy"));
     case "story": { const st = g().stories[+arg || 0]; return storyPlayer(st); }
     case "daily": S.daily = {}; return daily();

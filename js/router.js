@@ -85,6 +85,7 @@ const ROUTED = [["colorPage", nodeRouted()], ["wikiPage", nodeRouted()], ["paint
   ["poemPage", id => id != null ? routed("Poem", "poem/" + id) : null],   // js/poems.js   // a museum painting (js/gallery.js); i = its place in the gallery index
   ["passagePage", p => p && p.id ? routed(p.title, "passage/" + p.id) : null],
   ["filmPage", f => f && f.id ? routed(f.title, "film/" + f.id) : null],   // js/passages.js, js/films.js
+  ["namePage", entry => entry && entry.n ? routed(entry.n, "name/" + routeSlug(entry.n)) : null],   // js/names.js: a library color that isn't one of the 101
   ["fashionPage", slug => typeof worldRouteTitle === "function" ? routed(worldRouteTitle(slug), "fashion/" + slug) : null],   // js/world.js
   ["btListPage", kind => typeof btListTitle === "function" ? routed(btListTitle(kind), "botany/" + kind) : null],   // js/botany.js (plant/dye/essay detail pages route via wikiPage above)
   ["btFloriPage", () => routed("The language of flowers", "botany/flori")],   // js/botany.js
@@ -95,6 +96,8 @@ routeWrap(LAB, "contrast", () => routed("Albers", "lab/contrast"));
 
 // ---------- opening an address ----------
 const routeColor = slug => [...BASICS, ...ALL].find(c => routeSlug(c.n) === slug) || null;
+// a library color that isn't one of the 101 (js/names.js): CORE_NAMES loads lazily, so this only resolves once it has
+const routeName = slug => (CORE_NAMES || []).find(e => routeSlug(e.n) === slug) || null;
 // initial: first load. The address is opened on top of its tab's home, so Back lands somewhere sensible.
 function openRoute(hash, initial = false) {
   if (!/^#\/./.test(hash || "")) return false;
@@ -136,6 +139,17 @@ function openRoute(hash, initial = false) {
   }
   if (kind === "botany" && id && typeof btOpenRoute === "function") { base(); btOpenRoute(id); return true; }   // js/botany.js
   if (kind === "gem" && id && typeof gmOpenRoute === "function") { base(); gmOpenRoute(id); return true; }   // js/gems.js
+  if (kind === "name" && id) {
+    // an app color's slug opens its own deep page instead (ROADMAP.md §13): same address family, same rule
+    // as routeColor above for "color/<slug>".
+    const c = routeColor(id);
+    if (c) { base(); whenWiki(() => { XSTACK = []; openNode(colorNode(c)); }); return true; }
+    base();
+    if (!CORE_NAMES) { ROUTE_NEXT = routed("", "name/" + id); waitScreen(); ROUTE_REPLACE = true; }
+    XSTACK = [];
+    loadCoreNames().then(() => { const e = routeName(id); if (e) namePage(e); else go(S.tab || "learn"); });
+    return true;
+  }
   if (kind === "gallery" && /^\d+$/.test(id || "") && typeof galleryPage === "function") {
     base();
     if (!GAL) { ROUTE_NEXT = routed("Painting", "gallery/" + id); waitScreen(); ROUTE_REPLACE = true; }   // the painting replaces the placeholder

@@ -117,7 +117,7 @@ function honeyLayout(raw, layout) {
     : layout === "wheel" ? honeyWheel(items) : honeyMap(items);
   if (lay.finite) lay.ext = Math.max(.5, ...lay.pts.map(p => Math.hypot(p.x, p.y)));
   else { const [A, B] = [lay.A, lay.B], det = A[0] * B[1] - B[0] * A[1]; lay.inv = [B[1] / det, -B[0] / det, -A[1] / det, A[0] / det]; lay.per = Math.min(Math.hypot(...A), Math.hypot(...B)); lay.perX = lay.perX || lay.per; lay.perY = lay.perY || lay.per; }
-  Object.assign(lay, { key, raw, items, mixed: items.some(it => it.c) && items.some(it => !it.c) });
+  Object.assign(lay, { key, raw, items });
   if (HONEY_LAYOUTS.size > 24) HONEY_LAYOUTS.clear();
   HONEY_LAYOUTS.set(key, lay);
   return lay;
@@ -232,7 +232,7 @@ function honeycomb(host, opts = {}) {
   // ---- drawing ----
   function draw(t = performance.now()) {
     if (!lay || !W || dead) return;
-    const l = lens(t), R = reach(l), cx = W / 2, cy = Hh / 2, hx = W / 2, hy = Hh / 2, mark = lay.mixed, ia = l.inner, round = lensMode === "round";
+    const l = lens(t), R = reach(l), cx = W / 2, cy = Hh / 2, hx = W / 2, hy = Hh / 2, ia = l.inner, round = lensMode === "round";
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, Hh);
     ctx.globalAlpha = l.a;
     drawn = [];
@@ -260,20 +260,17 @@ function honeycomb(host, opts = {}) {
       // no ring for learned colors: the colors stay pure (the Learned view in the sheet shows progress)
       const la = Math.min(1, Math.max(0, (d - 26) / 5));   // a name on every bubble down to ~28px
       if (la > 0) {
-        const w = honeyWrap(ctx, it.n), fs = Math.min(w.fs * d, 30), lh = fs * 1.02, dot = mark && it.c;
+        const w = honeyWrap(ctx, it.n), fs = Math.min(w.fs * d, 30), lh = fs * 1.02;
         const sub = Math.min(1, Math.max(0, (d - 150) / 30)), subH = sub ? fs * .9 : 0;   // at high zoom: the hex under the name
-        const y0 = b.y - (w.lines.length - 1) * lh / 2 + fs * .06 + (dot ? fs * .3 : 0) - subH / 2;
+        const y0 = b.y - (w.lines.length - 1) * lh / 2 + fs * .06 - subH / 2;
         ctx.font = `${fs}px "Instrument Serif",Georgia,serif`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
         ctx.fillStyle = it.ink; ctx.globalAlpha = l.a * la;
         w.lines.forEach((s, i) => ctx.fillText(s, b.x, y0 + i * lh));
-        if (dot) { ctx.beginPath(); ctx.arc(b.x, y0 - fs * .95, Math.max(1.6, d * .022), 0, 6.2832); ctx.fill(); }
         if (sub) {
           ctx.globalAlpha = l.a * sub * .72; ctx.font = `500 ${Math.min(13, d * .055)}px "Geist Mono",ui-monospace,monospace`;
           ctx.fillText(it.h, b.x, y0 + (w.lines.length - 1) * lh + fs * 1.05);
         }
         ctx.globalAlpha = l.a;
-      } else if (mark && it.c && d > 9) {   // one of the 101, inside a bigger set
-        ctx.beginPath(); ctx.arc(b.x, b.y, Math.max(1.3, d * .09), 0, 6.2832); ctx.fillStyle = it.ink; ctx.fill();
       }
     }
     ctx.globalAlpha = 1;

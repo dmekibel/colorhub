@@ -3,14 +3,16 @@
 // searchable by color. It is the Paintings lens in Explore (after the hand-built "Featured" pages), a lite page per
 // painting, and an "In paintings" row on color pages. Sized for ~40,000 paintings:
 //  - index.json + index.bin (about 30 bytes a painting: year, museum, aspect, L, C, six colors with their shares)
-//    load in one go the first time something needs them. Detail shards (title, artist, image, record, names) load
-//    only for the paintings on screen; names.json (library names) loads with the first painting page.
+//    load in one go the first time something needs them. Detail shards (title, artist, image, record) load
+//    only for the paintings on screen. Every swatch's name comes from nameOf()/familyOf() (js/naming.js), the
+//    app's one naming system (ROADMAP.md §13) — not from tools/gallery.py's own names.json, which nothing
+//    reads anymore now that palette rows show one name and a family (js/names.js).
 //  - A search is one pass over typed arrays. The grid is a virtualized two-column masonry: every pin's height is
 //    known from the index, so pins are placed absolutely and only the ones near the screen exist.
 // Palettes are computed (k-means on the museum's small photo), and every screen that shows one says so.
 
 const GAL_DIR = "data/gallery/";
-let GAL = null, GAL_LOADING = null, GL_NAMES = null, GL_NAMES_LOADING = null;
+let GAL = null, GAL_LOADING = null;
 const GL_SHARDS = new Map();           // detail shard number -> rows, or the pending fetch
 const GL_UNDATED = -32768;
 const GL_R = 12;                       // "near a color" = within CIEDE2000 12, weighted by closeness
@@ -69,12 +71,6 @@ function glShard(k) {
 const glRowObj = r => r && { id: r[0], t: r[1] || "Untitled", a: r[2], co: r[3], mv: r[4], img: r[5], rec: r[6], li: r[7], wi: r[8], hi: r[9] || "" };
 const glDetailNow = i => { const s = GL_SHARDS.get(Math.floor(i / GAL.shard)); return Array.isArray(s) ? glRowObj(s[i % GAL.shard]) : null; };
 const glDetail = i => glShard(Math.floor(i / GAL.shard)).then(rows => glRowObj(rows[i % GAL.shard]));
-function glNamesLoad() {
-  if (GL_NAMES) return Promise.resolve(GL_NAMES);
-  return GL_NAMES_LOADING || (GL_NAMES_LOADING = fetch(GAL_DIR + "names.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
-    .then(list => (GL_NAMES = list.map(([n, h, s, kanji, meaning]) => ({ n, h, src: s.split(" "), jp: kanji ? { kanji, meaning } : null }))))
-    .catch(e => { GL_NAMES_LOADING = null; throw e; }));
-}
 
 // ---------- small helpers ----------
 const glHex = (i, j) => { const k = (i * 6 + j) * 3, c = GAL.rgb; return "#" + ((1 << 24) | c[k] << 16 | c[k + 1] << 8 | c[k + 2]).toString(16).slice(1).toUpperCase(); };
@@ -458,15 +454,14 @@ function galleryPage(i, push = true) {
   if (!(i >= 0 && i < GAL.n)) return;
   // already loaded (always the case going back): draw now, so the phone's back gesture handling stays in step
   const now = glDetailNow(i);
-  if (now && GL_NAMES) { if (push) XSTACK.push("g:" + i); return glPage(i, now, GL_NAMES); }
-  Promise.all([glDetail(i), glNamesLoad()]).then(([d, names]) => {
+  if (now) { if (push) XSTACK.push("g:" + i); return glPage(i, now); }
+  glDetail(i).then(d => {
     if (push) XSTACK.push("g:" + i);
-    glPage(i, d, names);
+    glPage(i, d);
   }).catch(() => toast("This painting didn't load"));
 }
-function glPage(i, d, names) {
-  const G = GAL, src = G.src[G.mus[i]] || { name: "Museum", short: "Museum", credit: "" }, pal = glPal(i), yr = glYear(i);
-  const libs = d.li.map(k => names[k]), words = d.wi.map(k => G.app[k]), ar = G.ar[i];
+function glPage(i, d) {
+  const G = GAL, src = G.src[G.mus[i]] || { name: "Museum", short: "Museum", credit: "" }, pal = glPal(i), yr = glYear(i), ar = G.ar[i];
   const dom = pal.reduce((a, b) => b.share > a.share ? b : a).h;
   const el = show(`
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button>${d.rec ? `<a class="glass-pill" href="${esc(d.rec)}" target="_blank" rel="noopener">${GL_ICON_OUT}<span>${esc(src.short)}</span></a>` : ""}</header>
@@ -476,13 +471,11 @@ function glPage(i, d, names) {
     <p class="p-dek">${esc([d.a || "Artist unknown", d.co, d.mv].filter(Boolean).join(" · "))}</p>
     <div class="sec-head gl-pal-h"><b>Computed palette</b><span>6 colors, by area</span></div>
     <div class="palette">${pal.map(p => `<button class="pal" data-swatch="${p.h}" style="--c:${p.h};flex:${Math.max(p.share, .08).toFixed(3)}" data-ink="${ink(p.h)}"><span>${Math.round(p.share * 100)}%</span></button>`).join("")}</div>
-    <div class="pal-names">${pal.map((p, j) => {
-      const x = libs[j], w = words[j], nm = nameOf(p.h);
-      const word = x && x.n.toLowerCase() === w.toLowerCase() ? `<a class="wl" data-to="c:${esc(w)}">one of your words</a>` : `your word: <a class="wl" data-to="c:${esc(w)}">${esc(w)}</a>`;
-      const also = x && x.n.toLowerCase() !== nm.n.toLowerCase() ? `also called ${esc(x.n)} · ` : "";
-      return `<button class="pal-name" data-swatch="${p.h}"><i style="--c:${p.h}"></i><b>${esc(nm.text)}</b><span>${also}${esc((x && srcLine(x)) || "ColorHub")} · ${word}</span><em class="mono">${p.h}</em></button>`;
+    <div class="pal-names">${pal.map(p => {
+      const nm = nameOf(p.h), fam = typeof familyOf === "function" && familyOf(p.h);
+      return `<button class="pal-name" data-swatch="${p.h}"><i style="--c:${p.h}"></i><b>${esc(nm.text)}</b><span>${fam ? esc(fam.head.n) + " family · " : ""}${Math.round(p.share * 100)}%</span><em class="mono">${p.h}</em></button>`;
     }).join("")}</div>
-    <p class="fine">Computed by ColorHub, not by the museum: six colors found in its small photo, each sized by its share of the picture and given the nearest of 2,700 named colors. Screen approximations; old varnish and the photograph shift color.</p>
+    <p class="fine">Computed by ColorHub, not by the museum: six colors found in its small photo, each sized by its share of the picture and given the nearest of 1,000 named colors. Screen approximations; old varnish and the photograph shift color.</p>
     <div class="sec-head gl-sim-h"><b>Similar palettes</b><span>by color, not subject</span></div>
     <div class="gl-rail" data-glsim></div>
     <section class="srcs"><h3>Image and data</h3><ul><li>${d.rec ? `<a href="${esc(d.rec)}" target="_blank" rel="noopener">${esc(src.name)}</a>` : esc(src.name)}${src.credit ? ` · ${esc(src.credit)}` : ""}</li><li>Palette and color names computed by ColorHub from the museum's image</li></ul></section>

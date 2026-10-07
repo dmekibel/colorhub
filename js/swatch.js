@@ -39,20 +39,19 @@ function nameSheet(hex) {
     <div class="lk-list" data-sw-near>${nm.near.map((x, i) => `<button class="lk-row" data-sw-i="${i}"><i style="--c:${x.h}"></i><b>${esc(x.n)}</b><span>${swCloseness(x.de)} · ΔE ${x.de.toFixed(1)}</span></button>`).join("")}</div>
     ${also.length ? `<p class="fine">Also called ${also.map(esc).join(", ")}.</p>` : ""}
     ${likes.length ? `<div class="sec-head"><b>Look-alikes</b><span>among the 101 taught colors</span></div>
-      <div class="lk-list">${likes.map(o => `<button class="lk-row" data-sw-hex="${o.x.h}"><i style="--c:${o.x.h}"></i><b>${esc(o.x.n)}</b><span>${esc(lookDiff({ h: hex, n: nm.n }, o.x))}</span></button>`).join("")}</div>` : ""}
+      <div class="lk-list">${likes.map(o => `<button class="lk-row" data-sw-hex="${o.x.h}" data-sw-name="${esc(o.x.n)}"><i style="--c:${o.x.h}"></i><b>${esc(o.x.n)}</b><span>${esc(lookDiff({ h: hex, n: nm.n }, o.x))}</span></button>`).join("")}</div>` : ""}
     <div class="sw-acts">
-      ${exact ? `<button class="item" data-sw-open>Open color page ${ICON.arrow}</button>` : ""}
+      <button class="item" data-sw-open>Open page ${ICON.arrow}</button>
       ${exact && typeof hmLearnIt === "function" ? `<button class="item" data-sw-learn>Learn it ${ICON.arrow}</button>` : ""}
       ${typeof galleryOpenColor === "function" ? `<button class="item" data-sw-ptgs>More paintings with this color ${ICON.arrow}</button>` : ""}
     </div>
     <button class="btn ghost" data-sw-copy>Copy ${hex}</button>
     <p class="fine">Nearest of about 1,000 primary names (CIEDE2000). Hex values are screen approximations.</p>`);
   sh.classList.add("sw-sheet");
-  const reopen = h => { close(); later(() => nameSheet(h), reduceMotion ? 0 : 260); };
   sh.querySelectorAll("[data-sw-app]").forEach(b => b.onclick = () => { const c = BYNAME.get(b.dataset.swApp.toLowerCase()); if (c) { close(); openNode(colorNode(c)); } });
-  sh.querySelectorAll("[data-sw-i]").forEach(b => b.onclick = () => reopen(nm.near[+b.dataset.swI].h));
-  sh.querySelectorAll("[data-sw-hex]").forEach(b => b.onclick = () => reopen(b.dataset.swHex));
-  const openBtn = sh.querySelector("[data-sw-open]"); if (openBtn) openBtn.onclick = () => { close(); openNode(colorNode(taught)); };
+  sh.querySelectorAll("[data-sw-i]").forEach(b => b.onclick = () => { const x = nm.near[+b.dataset.swI]; close(); openCoreName(x.h, x.n); });
+  sh.querySelectorAll("[data-sw-hex]").forEach(b => b.onclick = () => { close(); openCoreName(b.dataset.swHex, b.dataset.swName); });
+  const openBtn = sh.querySelector("[data-sw-open]"); if (openBtn) openBtn.onclick = () => { close(); openCoreName(nm.h, nm.n); };
   const learnBtn = sh.querySelector("[data-sw-learn]"); if (learnBtn) learnBtn.onclick = () => { close(); hmLearnIt(taught); };
   const ptgBtn = sh.querySelector("[data-sw-ptgs]"); if (ptgBtn) ptgBtn.onclick = () => { close(); galleryOpenColor(hex, nm.text || nm.n); };
   sh.querySelector("[data-sw-copy]").onclick = () => { try { navigator.clipboard.writeText(hex); toast("Copied " + hex); } catch (e) {} };
