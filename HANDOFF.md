@@ -1,6 +1,6 @@
 # Handoff, 2026-10-08 (end of the big build session)
 
-Read in this order: `CLAUDE.md` (rules), this file (state), `ROADMAP.md` (approved backlog and build order), `DESIGN.md`
+Read in this order: `CLAUDE.md` (rules), this file (state), `NOTES-TRACKER.md` (every open note from David, in order), `ROADMAP.md` (approved backlog and build order), `DESIGN.md`
 (design decisions and the feature hierarchy). Live site: https://dmekibel.github.io/colorhub/ (GitHub Pages from `main` of
 the public repo `dmekibel/colorhub`).
 
