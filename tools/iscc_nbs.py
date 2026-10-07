@@ -292,10 +292,19 @@ def clean_name(raw):
     return re.sub(r"\s+", " ", s).strip(" .,_-")
 
 
+# A rare column-slicing edge case clips the leading letter off a name that starts exactly at a page's own
+# column boundary (found twice in the full run: "ight Blue"/"ight Rose", both missing "L" off "Light ..." --
+# the correctly-spelled "Light Blue" is extracted separately elsewhere and kept; "Light Rose" has no other
+# occurrence in the dictionary, so this one entry is a real, small loss, preferred over importing the typo).
+TRUNCATED_WORD_START = re.compile(r"^(ight|ark|range|ellow|reen|urple|lack|hite|rown)\b", re.IGNORECASE)
+
+
 def is_plausible_name(n):
     if not (2 <= len(n) <= 60) or not NAME_OK.match(n):
         return False
     if re.match(r"^as\b", n, re.IGNORECASE):
+        return False
+    if TRUNCATED_WORD_START.match(n):
         return False
     letters = sum(c.isalpha() for c in n)
     return letters >= max(2, len(n) * 0.6)

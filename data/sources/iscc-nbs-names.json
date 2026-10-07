@@ -2513,8 +2513,6 @@
 {"n": "Icy Morn", "block": 143, "src": ["P"], "blocks": [143], "pdf_pages": [129]}
 {"n": "ida Gold", "block": 68, "src": ["M"], "blocks": [68], "pdf_pages": [154]}
 {"n": "ide", "block": 40, "src": ["M"], "blocks": [40], "pdf_pages": [158]}
-{"n": "ight Blue", "block": 176, "src": ["A", "F", "S", "T"], "blocks": [160, 168, 176, 178], "pdf_pages": [99]}
-{"n": "ight Rose", "block": 248, "src": ["S", "T"], "blocks": [3, 248], "pdf_pages": [151]}
 {"n": "illiant Blue", "block": 169, "src": ["T"], "blocks": [169], "pdf_pages": [99]}
 {"n": "Im", "block": 140, "src": ["M"], "blocks": [94, 140], "pdf_pages": [116, 119]}
 {"n": "Immenssee", "block": 150, "src": ["M"], "blocks": [150], "pdf_pages": [129]}
@@ -4354,7 +4352,6 @@
 {"n": "Rameses", "block": 179, "src": ["B", "M"], "blocks": [179], "pdf_pages": [148, 165]}
 {"n": "ramie", "block": 182, "src": ["M"], "blocks": [182], "pdf_pages": [95, 133, 157]}
 {"n": "Ramier Blue", "block": 214, "src": ["R"], "blocks": [214], "pdf_pages": [148]}
-{"n": "range", "block": 34, "src": ["F", "H", "MUP", "R", "S", "T", "TC"], "blocks": [25, 34, 50], "pdf_pages": [140]}
 {"n": "Rangoon", "block": 58, "src": ["M"], "blocks": [58], "pdf_pages": [112]}
 {"n": "rant", "block": 12, "src": ["M"], "blocks": [12], "pdf_pages": [120]}
 {"n": "rapin", "block": 58, "src": ["M"], "blocks": [58], "pdf_pages": [120]}
