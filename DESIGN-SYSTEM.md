@@ -1,17 +1,28 @@
 # ColorHub design system
 
-One system for the whole app. It sits on top of DESIGN.md (the decisions and their sources) and the feature hierarchy there. The problems it fixes are in `research/DESIGN-AUDIT.md`. The mockups are in `design/mockups.html`. Status: **proposed, for David's approval**. Nothing here is built yet.
+One system for the whole app. It sits on top of DESIGN.md (the decisions and their sources) and the feature hierarchy there. The problems it fixes are in `research/DESIGN-AUDIT.md`. The mockups are in `design/mockups.html`. Status: **approved direction, second pass (2026-10-07)**. Nothing here is built yet.
+
+### Decided (David, 2026-10-07)
+1. **Navigation:** the honeycomb is the floor and the four rooms rise over it (§2). No tab bar anywhere.
+2. **Today folds into Learn.** Today is the top of the Learn room. The classic Today screen (`home()` in learn.js) retires as a separate screen.
+3. **Explore:** Colors is dropped (Home is the colors), and Paintings and Poems merge into **Art**. The four parts are For you, Art, Ideas and World.
+4. **One paper-filled primary button per screen.**
+5. **Sort and Memory move to Train.** Learn it is Meet, then Recall, then Tell apart.
+6. **Full-bleed heroes** on color, painting and article pages. The no-edge-to-edge rule applies to bars, buttons and text.
+
+His bar for the result: superior in every way. Clever, functional, user-friendly, iconic, minimal, beautiful, consistent and expensive-looking.
 
 ---
 
-## 1. Principles
+## 1. Principles (seven)
 
 1. **The color is the interface.** A color gets the most room on every screen. Everything else is neutral and recedes.
 2. **Controls are solid.** No glass, blur or outline-only buttons over color. A control is either an opaque surface (`--surface-2`) or a paper label. Its contrast with what's under it never depends on the color underneath.
-3. **One place.** The honeycomb is the floor of the app. Learn, Train, Explore and Studio are sheets that rise over it, and going back always lowers you onto the same floor (the Apple Maps model). Each place has one name, and it's used everywhere.
+3. **One place, one motion.** The honeycomb is the floor of the app. Every color and every room opens the same way: the bubble you touched grows into the page, and closing shrinks it back into the same bubble. Each place has one name, used everywhere.
 4. **One gesture and one filled button per screen.** Each screen has one primary action, drawn as the only filled (paper) button. Everything else is quiet. Depth (codes, ΔE, sources, settings) opens on request.
 5. **Judge on grey, read on black.** Any screen where a color is judged uses the booth grey. Screens for reading or browsing use warm black. A screen never mixes the two, and a flow never flips between them halfway through.
-6. **Nothing cut off, nothing redundant.** Gutters are at least 16 px, safe areas are respected, and every screen fits a 375 × 667 iPhone SE without clipping. A label never repeats what's already visible (a name already on the bubble, a title already in the header).
+6. **The serif speaks; mono only counts.** Hierarchy comes from serif size and contrast, never from small caps labels. Mono appears only on numbers and codes.
+7. **Nothing cut off, nothing redundant.** Gutters are at least 16 px, safe areas are respected, and every screen fits a 375 × 667 iPhone SE without clipping. A label never repeats what's already visible (a name already on the bubble, a title already in the header).
 
 ---
 
@@ -22,43 +33,51 @@ This is the most important section. It replaces the current mix: the Today tab t
 ### Places and names
 | Place | What it is | Route | Name on screen |
 |---|---|---|---|
-| **Home** | The full-screen honeycomb. Always underneath everything. | `#/` | No label. The ⬡ button means Home. |
-| **Learn** | The path: today's review/continue, Today's three, your units, your collection | `#/learn` (`#/today` = Learn, opened at Today) | "Learn". Its first section is headed "Today". |
+| **Home** | The full-screen honeycomb, always underneath everything | `#/` | No label. It's the floor. |
+| **Learn** | Today (what's due, Today's three), then the path, then your collection | `#/learn` (`#/today` opens Learn at Today) | "Learn". Its first block is about today, with no "Today" heading needed. |
 | **Train** | The eye gym: stations, levels, check-ins | `#/train` | "Train" |
-| **Explore** | Reading: For you · Art · Ideas · World | `#/explore[/art|ideas|world]` | "Explore" |
-| **Studio** | Making: gamut wheel, camera, photo palettes, taste | `#/studio` | "Studio" |
-
-"Today" stops being a place. It's the top section of Learn (what's due today). The classic `home()` screen *becomes* the Learn room, so nothing is lost. There is no fifth room. Home isn't a room: it's the floor.
+| **Explore** | Four full-bleed covers: For you, Art, Ideas, World | `#/explore[/art|ideas|world]` | "Explore" |
+| **Studio** | Making: the gamut wheel, the camera, photo palettes, taste | `#/studio` | "Studio" |
 
 ### The pieces
-- **On Home:** the two corner buttons, exactly as now. **Left: Today** (sun icon) raises the sheet to *mid*, showing Learn's Today section. **Right: View** (sliders icon) opens the View panel.
-- **The sheet:** one sheet with three detents.
-  - **Down:** Home, with only the honeycomb and the two corners.
-  - **Mid (56%):** Today (Learn's top section), with the honeycomb visible above.
-  - **Full:** a room. The sheet stops 10 px below the status bar, so a lip of honeycomb always shows at the top: you can see you're still on top of Home.
-- **The room bar:** whenever the sheet is up, a bar sits at the bottom. It's opaque `--surface-2`, 56 px tall, radius 28, with 16 px side gutters.
-  - The **⬡ Home** circle stays at exactly the pixel position of the left corner button.
-  - Next to it, a pill holds the four rooms: **Learn · Train · Explore · Studio**, each with an icon and an 11 px mono label. The current room gets an ink underline and full ink; the others are soft.
-- **The ⬡ circle** is the same object as the Today corner. When the sheet rises, its icon cross-fades from sun to ⬡ in 120 ms, and the room pill grows out of it to the right. That makes it read as one control turning into another, not a new bar appearing.
+- **On Home:** two solid corner buttons, both 56 px.
+  - **Left, Rooms:** a glyph of four small circles on a curve, the stem in miniature.
+  - **Right, View:** the sliders glyph. It opens the View panel (§12).
+- **The stem:** tapping Rooms raises four bubbles in a gentle curve above the left corner, 100 px apart, each 78 px.
+  - They are made of the honeycomb's own material and show what's inside today:
+    - **Learn:** the colors due, as stripes.
+    - **Train:** today's station tile.
+    - **Explore:** today's cover image.
+    - **Studio:** the gamut wheel.
+  - Beside each bubble sits its name (`title-2`) and one line about today (`note`): "8 to recall", "Odd one out, level 9".
+  - The honeycomb dims to 30%. The corner turns into a paper ✕.
+  - Learn sits lowest, nearest the thumb. The top bubble stays at least 150 px below the status bar on a 375 × 667 screen.
+- **A room:** a sheet at full height with a 12 px strip of the dimmed, slightly scaled-back honeycomb showing above it, so you can see you're still on top of Home.
+  - The Rooms corner stays in the same spot in every room.
+  - In a room, the stem also has **Home** at its foot: the corner itself, marked with the honeycomb glyph.
+  - There is no tab bar and no room bar, ever.
+- **The shortcut:** a swipe up from the bottom edge of Home opens Learn straight away. It's the fastest way to today's review, and the one gesture the first-launch hint teaches.
 
 ### Moving around
 | From → to | How | Motion |
 |---|---|---|
-| Home → Today | Tap the left corner, or swipe up from the bottom 120 px | Sheet springs to mid (`--dur-2`, spring). The honeycomb dims to 70% and stays live above it. |
-| Home / Today → a room | Tap a room in the bar | Sheet springs to full. The honeycomb scales to .96 and dims to 40% (the iOS card stack). |
-| Room → room | Tap another room in the bar | The content cross-fades (`--dur-1`) and the underline slides. The sheet doesn't move. |
-| Room → Home | Tap ⬡, drag the sheet down, tap the honeycomb lip, or the system back gesture | Sheet falls, the honeycomb returns to scale 1 and full brightness, and the bar shrinks back into the corner. You land exactly where you were. |
-| Anywhere → a color page | Tap a bubble, chip or swatch | Shared-element morph: the tapped swatch grows into the page's hero (`--dur-3`). |
-| Room → inner screen (station, article, painting) | Tap | Pushes in from the right over the sheet (`--dur-2`). The bar slides away (the bar belongs to rooms only). Back is ‹ or an edge swipe. |
-| Anywhere → a task (deck, Learn it, drill, placement) | Tap its primary button | Full-screen cover from the bottom. The bar hides, ✕ is top-left, and ✕ returns you to where you started. |
+| Home → the stem | Tap Rooms | The bubbles rise one after another from the corner, 30 ms apart, on a spring (`--dur-2`). The honeycomb dims. |
+| The stem → a room | Tap a bubble | **The signature motion (§8):** the bubble grows into the room's sheet. |
+| Home → Learn | Swipe up from the bottom edge | Learn's sheet follows the finger. Past 40% it springs to full. |
+| Room → another room | Rooms corner, then a bubble | The current sheet shrinks back into its own bubble on the stem while the new one grows. |
+| Room → Home | Swipe the sheet down, tap the honeycomb strip, the system back gesture, or Rooms then Home | The sheet shrinks into its bubble, the bubble sinks into the corner, and the honeycomb returns to full brightness exactly where you left it. |
+| Anywhere → a color | Tap a bubble, chip, plate or swatch | The signature motion: the shape grows into the color's page. |
+| Room → an inner screen (station, article, painting) | Tap | It grows from the tapped picture, using the signature motion with that picture's own shape. |
+| Anywhere → a task (deck, Learn it, drill, placement) | Its primary button | The paper button grows into the booth-grey task screen. ✕ shrinks it back. |
 
-**Back** is always one layer: task → origin, inner → room, room → Home. The brand logo stops being a navigation control. The `⋯` menu (settings, backup, placement) moves to the end of the View panel and the Learn room, so the header row loses its brand line.
+**Back** is always one layer down, and always the same motion in reverse. The brand logo is not a control. The old `⋯` menu (settings, backup, placement) moves to the end of the View panel and the end of Learn.
 
 ### Why this model
-- It keeps David's full-screen honeycomb and his two corners untouched, and it keeps ALTER's corner feel.
-- The rooms never feel like another app: the honeycomb lip and the ⬡ circle are always in view, and the transition is one continuous sheet.
-- It uses one bar with four jobs (DESIGN.md tier 2: "never a fifth tab").
-- **Precedent:** Apple Maps and Find My (a canvas home, everything else in sheets with detents), iOS card stacks (the dimmed, scaled layer behind) and Duolingo (a fixed bottom bar inside the app).
+- It keeps David's full-screen honeycomb and his two corners, and ALTER's corner feel.
+- It uses no tab bar. The rooms are reached by bubbles, which are the app's own material, so moving between rooms feels like part of the honeycomb, not a second app.
+- It's obvious to a first-timer: one tap shows four labeled pictures, and each one says what's waiting today.
+- It's thumb-reachable: every target is in the lower-left two thirds.
+- **Precedent:** Apple Maps (a canvas home under sheets), Material's speed-dial (actions rising from a corner button) and iOS app launch (the icon grows into the app).
 
 ---
 
@@ -95,24 +114,26 @@ This is the most important section. It replaces the current mix: the Today tab t
 
 ## 4. Type
 
-Instrument Serif (400 and italic) for names and headlines. Geist for reading. Geist Mono **only** for labels and codes, never for sentences.
+The serif carries every level of the hierarchy, through size and contrast. Instrument Serif (roman and italic) is used for every name, title and label. Geist is used only for long reading text and small print. Geist Mono is used **only on numbers and codes**: hex, ΔE, percentages, levels and counts. Never in uppercase, never for words.
 
 | Token | Font | Size / line height | Tracking | Use |
 |---|---|---|---|---|
-| `display` | serif | 64 / .9 (56 on SE) | −.035em | The color name on a hero, meet page or deck card |
-| `title-1` | serif | 40 / .95 | −.03em | Screen titles (Train, Explore), lesson questions |
-| `title-2` | serif | 28 / 1.05 | −.02em | Card titles, sheet titles, the primary button label |
-| `title-3` | serif | 21 / 1.15 | −.01em | List rows, tile names, the "diff" line on a swatch |
-| `lead` | serif | 20 / 1.35 | 0 | Lead paragraphs and difference sentences |
+| `hero` | serif | 96 / .86 | −.04em | The color name on its own page |
+| `display` | serif | 72–76 / .86 | −.04em | Names on meet pages and deck cards, room covers ("Art"), the big count in View |
+| `title-1` | serif | 44 / .95 | −.03em | Room titles, lesson questions, "8 to *recall*" |
+| `title-2` | serif | 30 / 1.02 | −.02em | Sheet titles, the current unit, room names on the stem |
+| `title-3` | serif | 22 / 1.12 | −.01em | Rows, tiles, section heads ("The path") |
+| `lead` | serif | 20 / 1.32 | 0 | Differences and lead paragraphs |
+| `note` | serif italic | 16 / 1.3, soft | 0 | Replaces every eyebrow and label: "New to you, from the Blues", "Then Reds & pinks". At most one per block. |
 | `body` | sans | 16 / 1.55 | 0 | Article text |
-| `small` | sans | 14 / 1.45 | 0 | Captions, secondary lines, credits |
-| `label` | mono 500 | 11 / 1, uppercase | +.12em | Eyebrows, tab labels, section heads |
-| `code` | mono 500 | 12 / 1, tabular | +.04em | Hex, ΔE, levels, counts |
+| `small` | sans | 14 / 1.5, soft | 0 | Credits and feedback lines |
+| `code` | mono 400 | 12 / 1, tabular | +.02em | Numbers and codes only, never uppercase |
 
 **Rules:**
-- No more than 3 styles on one card.
-- Italic serif marks the second half of a headline ("8 to *recall*"), once per screen.
-- No 68 px tab titles. Room titles are `title-1`, set left in the room header.
+- **Size contrast:** each step is about 1.4× the one below it. Every screen uses at most three steps, with at least one jump of two steps (a 44 title over a 16 note), which gives the expensive feel.
+- **No uppercase anywhere,** and no tracked-out labels.
+- **Labels are a last resort.** If the content is self-evident (a strip of colors, a row of bubbles), it gets no label. If a block needs one, use one `note`, not a header plus a caption.
+- **Italic serif** marks the turn in a headline ("8 to *recall*") once per screen, and is the voice of every `note`.
 
 ---
 
@@ -123,7 +144,7 @@ Instrument Serif (400 and italic) for names and headlines. Geist for reading. Ge
 - **Safe areas:**
   - Top content starts at `env(safe-area-inset-top) + 8`. Headers are 52 px tall.
   - Bottom controls sit at `env(safe-area-inset-bottom) + 12`, with a minimum of 16 from the edge.
-  - A scrolling page reserves `bar height + bottom inset + 24` so the last line clears the bar.
+  - A scrolling page reserves `corner height + bottom inset + 24` so the last line clears the Rooms corner.
 - **Fit test:** every fixed screen (decks, lessons, drills) is laid out with flex. The swatch is `flex:1; min-height:160px` and absorbs height. Header and footer have fixed heights (52 and 112). At 375 × 667 nothing scrolls or clips.
 
 ## 6. Radii
@@ -136,7 +157,7 @@ Instrument Serif (400 and italic) for names and headlines. Geist for reading. Ge
 | `--r-3` | 24 | Sheet top corners |
 | `--r-pill` | 999 | Buttons, the bar, chips, circles |
 
-Retire 1, 2, 3, 6, 8, 10, 12, 18, 20, 22 and 30.
+Retire 1, 2, 3, 6, 8, 10, 12, 18, 20, 22 and 30. During the signature motion the radius is animated between these values (§8).
 
 ## 7. Elevation without glass
 
@@ -144,7 +165,7 @@ Retire 1, 2, 3, 6, 8, 10, 12, 18, 20, 22 and 30.
 |---|---|---|---|---|
 | 0 | `--ground` | none | none | Page |
 | 1 | `--surface-1` | top hairline `--rule` | `0 -16px 48px rgba(0,0,0,.45)` | Sheet, panel |
-| 2 | `--surface-2` | 1 px `rgba(236,232,223,.14)` | `0 8px 24px rgba(0,0,0,.5)` | Corner buttons, room bar, floating ‹ over a hero |
+| 2 | `--surface-2` | 1 px `rgba(236,232,223,.14)` | `0 8px 24px rgba(0,0,0,.5)` | Corner buttons, floating ‹ over a hero, the stem's bubbles (shadow only) |
 | Scrim | `--scrim` | — | — | Behind a modal sheet. Under a navigation sheet the honeycomb is dimmed with a filter instead. |
 
 On booth grey, level-2 controls use `--booth-2` with no shadow, because shadows read as dark halos on grey.
@@ -153,15 +174,34 @@ On booth grey, level-2 controls use `--booth-2` with no shadow, because shadows 
 
 | Token | Duration | Easing | Use |
 |---|---|---|---|
-| `--dur-0` | 120 ms | `ease-out` | Press scale (.94), icon swap, toggles |
-| `--dur-1` | 200 ms | `--ease` `cubic-bezier(.2,.8,.2,1)` | Cross-fades, content swaps in a room |
-| `--dur-2` | 300 ms | `--ease`, or a spring for sheets | Screen push, sheet detents |
-| `--dur-3` | 380 ms | `cubic-bezier(.3,.9,.25,1)` | The shared-element morph |
-| `--dur-4` | 700 ms | `--ease` | Celebrations (lesson done, color owned). Rare and skippable. |
+| `--dur-0` | 120 ms | `ease-out` | Press dip (.94), icon swap, toggles |
+| `--dur-1` | 200 ms | `cubic-bezier(.2,.8,.2,1)` | Cross-fades, content swaps |
+| `--dur-2` | 300 ms | spring, stiffness 380, damping 34 | Sheets, the stem rising |
+| `--grow` | 420 ms | `cubic-bezier(.32,.72,0,1)` | **The signature: a bubble becomes its page** |
+| `--shrink` | 340 ms | `cubic-bezier(.4,0,.2,1)` | The signature in reverse |
+| `--dur-4` | 700 ms | `--ease` | Celebrations (lesson done, a color owned). Rare and skippable. |
 
-- **Sheet spring:** stiffness 380, damping 34 (no visible overshoot). Release velocity decides the detent: a flick past 0.5 px/ms goes to the next detent in that direction.
-- **Shared-element morph:** the tapped swatch's rect animates to the hero's rect (`transform` only, radius `--r-1`→0, or →`--r-1` for inset heroes). The new page's content fades in at +120 ms over `--dur-1`. Back runs it in reverse to the same bubble. With Reduce Motion it becomes a 150 ms cross-fade.
-- **Every motion explains something:** where it came from, where it went, or what changed. No decorative loops except the single first-run hint.
+### The signature: a bubble becomes its page
+One motion for everything that opens: honeycomb bubbles, palette chips, near-name bubbles in the color sheet, Today's plates, swatches anywhere (`data-swatch`), the room bubbles on the stem, painting thumbnails and the paper primary of a task. The thing you touched *is* the page. It never cuts to a new screen. Key frames are in `design/mockups.html`.
+
+| t | What happens |
+|---|---|
+| 0 ms | **Press.** The bubble dips to 94% (`--dur-0`) with a 4 ms tick. Its siblings don't move. |
+| 0–40 ms | It lifts above the honeycomb (z-order) and grows, still round. The honeycomb starts to dim (to 30%) and lean in (scale 1 → 1.06), so the bubble seems to come toward you. |
+| 40–110 ms | The circle becomes a rounded slab heading for the hero's rect. The corner radius follows `min(w,h)/2 × (1 − p)^0.5`, so it stays soft until the end. The name rides the same curve, from 16 px at the bubble's center to the hero size at its bottom-left. |
+| 110–420 ms | The corners square off as the slab meets the screen edges: the long, soft settle. From p = .55 the page below rises 24 px into place and fades in, and the page's ground fills in behind it. The floating ‹ and ⋯ fade in last. |
+| Back | Exactly the reverse, `--shrink` 340 ms, into the **same** bubble. The honeycomb keeps its pan and zoom while the page is open, so the bubble is always where it was. If the source scrolled away (a chip in a long page), it shrinks to where the chip now is, or to its nearest visible edge. |
+| Swipe down | Interactive. The page follows the finger 1:1, scaling to .82 and rounding to 34 px at 40% of the screen height. Release past 120 px (or a flick faster than .6 px/ms) to finish the shrink with the gesture's speed. Otherwise it springs back. |
+
+**Rules:**
+- **Shape memory:** a circle grows from a circle, a square chip from a 4 px square, and a painting thumbnail from its rect.
+- **Implementation:** `clip-path: inset(... round r)` on a fixed layer drawing the target page's hero. Animate only `clip-path`, `transform` and `opacity`, never layout.
+- **Reduce Motion:** a 150 ms cross-fade, no growth.
+- **Haptics:** a 4 ms tick at the press, and an 8 ms tick when the page settles.
+
+### Other rules
+- The stem's bubbles rise from the corner in order, 30 ms apart, and sink in reverse.
+- **Every motion explains something:** where a thing came from, where it went, or what changed. No decorative loops except the single first-run hint.
 
 ## 9. Haptics
 
@@ -182,22 +222,22 @@ On booth grey, level-2 controls use `--booth-2` with no shadow, because shadows 
 ### Buttons
 | Kind | Look | Size | Rule |
 |---|---|---|---|
-| **Primary** | Paper fill, paper-ink `title-2` label left, → right | 56 h, full width within the gutter, `--r-pill` | One per screen. On booth grey it's still paper. |
-| **Quiet** | No fill; ink `title-3` label, 1 px `--rule` top and bottom (a ruled row) | 52 h | Secondary actions, stacked under the primary |
-| **Text** | `label` mono, underlined at 4 px | 44 h hit area | Tertiary: "Copy #008080", "Sources" |
+| **Primary** | Paper fill, paper-ink serif 27 px label left, an optional italic note ("2 min") after it, → right | 58 h, full width within the gutter, `--r-pill` | One per screen. On booth grey it's still paper. When tapped it grows into its task (§8). |
+| **Quiet row** | No fill; ink serif 22 px label, the current value as a `note` right, then ›, with hairlines between rows | 60 h | Secondary actions and settings (Show, Look) |
+| **Text** | `note` serif italic, 17 px, underlined at 4 px | 44 h hit area | Tertiary: "Copy hex", "Paintings in denim", "About petrol" |
 | **Icon** | 24 px glyph, no fill | 44 × 44 | In headers |
 | **Floating icon** | Level-2 circle, 44 px | 44 × 44 | ‹ and ⋯ over a hero or image (never glass) |
-| **Corner** | Level-2 circle, 56 px, 24 px glyph | 56 × 56 at the 16 px corner | Home's Today and View, and the ⬡ in the room bar |
-| **Answer** (deck) | 64 px circle, `--surface-2` (`--booth-2` on grey), ✕ in `--bad`, ✓ in `--good`, label under it | 64 | Only in decks |
+| **Corner** | Level-2 circle, 56 px, 24 px glyph | 56 × 56 at the 16 px corner | Rooms (left, everywhere) and View (right, on Home). When the stem is open, the left corner is a paper ✕. |
+| **Answer** (deck) | 66 px circle, `--booth-2`, ✕ in `--bad`, ✓ in `--good`, no text label | 66 | Only in decks |
 
 ### Bottom sheet
 - `--surface-1`, `--r-3` top corners, grabber 36 × 4 at 8 px from the top.
-- Detents: navigation sheet at mid 56% and full (top inset + 10). Modal sheets (the color sheet, View) at mid 60% or content height, with a maximum of 88%.
-- Inner padding is the gutter. Its header is the title (`title-2`) left and an optional text action right.
+- **Detents:** a room is full height (top inset + 12, so a strip of the honeycomb stays visible). Modal sheets (the color sheet, View) take their content height, with a maximum of 70%, so what they change stays visible above them.
+- Inner padding is the gutter. The header is the title (`title-2`) on the left and up to two solid 44 px icon buttons on the right.
 - Drag anywhere on the header to move it. Content scrolls only at full height.
 
 ### Cards
-`--surface-2` on ground, `--r-2`, no border, and the image or plate flush at the top. Use one card per kind: **daily tile** (Today's three), **station tile** (Train), **cover** (Explore), **tool tile** (Studio). The same kind always has the same anatomy: picture, `title-3`, one `small` line, and an optional done dot.
+`--surface-2` on ground, `--r-2`, no border, and the image or plate flush at the top. Use one card per kind: **daily tile** (Today's three), **station tile** (Train), **cover** (Explore), **tool tile** (Studio). The same kind always has the same anatomy: picture, `title-3`, one `note` line, and an optional done dot.
 
 ### List rows
 52–64 px tall. A 32 px swatch (square, `--r-1`, or round for colors from the 1,000-word list), then a `title-3` name, then an optional `small` second line, then a trailing `code` value or ›. Rows are separated by `--rule` hairlines. No boxes.
@@ -220,7 +260,7 @@ Any swatch carrying `data-swatch` opens **the** color sheet, and there is only o
 ### Lesson / deck card
 - `--r-2`, with the 20 px gutter of booth grey around it.
 - **Front:** the color, full card.
-- **Revealed:** a paper label slides up over the bottom 34%, showing a `label` meta line (unit · hex), the `display` name, a hairline, then a compare chip pair with the diff sentence (`small`, `--paper-soft`) and "About teal ↗" in `--paper-soft` at 5.8:1.
+- **Revealed:** a paper label slides up over the bottom 34%. It shows a `note` ("One of teal's look-alikes") with the hex in `code` on the right, then the `display` name, a hairline, a compare chip pair, and the difference in `lead` at 18 px in `--paper-soft` (5.8:1).
 - Stamps (Got it / Again) are paper.
 
 ### Empty states
@@ -252,24 +292,29 @@ Placeholder blocks in the exact layout, `--surface-2`, pulsing at .55↔1 over 1
 
 ### Lesson (meet, deck, Learn it, placement, review)
 - Booth grey. A full-screen task with no bar.
-- Header (52): ✕ left (44 hit area, glyph at x = gutter), segmented progress in the middle, a step word or count right (`label`).
+- **Header (52):** ✕ on the left (44 hit area, glyph at x = gutter), then the segmented progress. No step word: the screen shows which step it is.
 - Stage: `flex:1`, holding one card or one pager page.
 - Footer (112): the actions for this step, under the thumb.
 - One gesture per step: swipe up (meet), tap then swipe (deck), or tap a swatch (pick).
 
 ### Station (a Train drill)
 - Booth grey, full-screen task.
-- Header: ✕, progress, then a level (`code`, "Lv 9").
+- Header: ✕, progress, then the level in `code` ("Lv 9").
 - The question in `title-1`, *without* an eyebrow that repeats it.
 - Stage centered, tiles at most `min(100%, 58dvh)`.
 - The footer reserves 112 px. After the answer it shows one `small` feedback line and the paper primary "Next".
 - Research notes live on the station's intro card, never on the drill screen.
 
-### Browser (Explore, the Train home, Studio, the Learn room)
-- Inside the room sheet.
-- **Room header:** `title-1` left, a search icon or room action right.
-- **Then:** a segmented lens row of at most 4 items, all fitting at 375 px, then a single column of covers and shelves.
-- The first item is a big cover (4:5 or 1:1) with its image flush.
+### Room (Learn, Train, Explore, Studio)
+- A full-height sheet over the honeycomb, entered by the signature motion.
+- **Room header:** the room name in `title-1` on the left, a `note` (the day, or nothing) or one solid icon on the right.
+- **First block, the hero of the room:**
+  - Learn: today's plates and one primary.
+  - Train: today's station, full width.
+  - Explore: the cover pager.
+  - Studio: the wheel.
+- **Then** a single column with generous rhythm: 32 px between blocks and 14 px inside them. Use pictures and color bands rather than boxes, at most one `note` per block, and no segmented tab rows.
+- The Rooms corner floats bottom-left. The last 120 px of the sheet fade into `--surface-1`, so content passes under the corner cleanly.
 
 ### Tool (Studio tools, camera)
 - Full bleed. The tool's live surface fills the screen.
@@ -284,8 +329,8 @@ Placeholder blocks in the exact layout, `--surface-2`, pulsing at .55↔1 over 1
 **Flow (about 2 minutes):** Meet → Recall → Tell apart → Done. That's three steps instead of five, and every one is a pattern David already likes.
 
 1. **Meet.** The meet pager (`meet()` from learn.js), scoped to the group: teal plus its 3–4 nearest taught look-alikes.
-   - Cover page: a row of the group's plates, light to dark (no fan, no chip feet), "Teal and its look-alikes", "5 colors · about 2 minutes", "Swipe up".
-   - Then one page per color, using meet's own page: the full swatch with the `display` name and hex inside it, the compare strip (*this color* | *teal*, or teal | its nearest), the `lead` difference line ("Darker and bluer than teal."), and "About petrol ↗".
+   - Cover page: the group's plates, light to dark (no fan, no chip feet), then "Teal and its look-alikes" in `display`, then one `note`: "Five colors that are easy to mix up."
+   - Then one page per color, using meet's own page: the full swatch with the `display` name and hex inside it, the compare strip (*this color* | *teal*, or teal | its nearest), the difference at 26 px ("Darker and bluer than teal."), and "About petrol" as a text link. Bottom right: an up chevron and `2/5`.
    - Colors already yours are skipped, but always shown on the cover.
 2. **Recall.** `deck("learn")` with the group as the queue, forward cards only. Tap to reveal, swipe until every card is known, with the same paper label, stamps and ✕/✓.
 3. **Tell apart.** One look-alike step: three Pick it rounds (the `pickBoard()` paper name card over a 2×2 of the group's own swatches). Wrong answers are same-family by construction. After each tap every swatch is named and the answer is ringed.
@@ -293,42 +338,54 @@ Placeholder blocks in the exact layout, `--surface-2`, pulsing at .55↔1 over 1
    - The group as plates.
    - `title-1`: "You met *teal* and four look-alikes."
    - Then 4 ruled rows: chip pair · "Petrol — darker, bluer".
-   - `small`: "All five come back tomorrow, after a night's sleep."
-   - Primary: "Back to Teal". Quiet: "Home".
+   - `note`: "All five come back tomorrow, after a night's sleep."
+   - Primary: "Back to Teal" (it shrinks the lesson back into the color page).
 
 Dropped: Sort and Memory (thinky exercises belong in Train), and the custom `.lt-*` layouts.
 
-**Chrome:** the lesson archetype. One segmented bar for the *whole* lesson, one segment per color, filling with that color as it becomes known in Recall. The header-right word names the step (MEET · RECALL · TELL APART). The 20 px gutter everywhere, so nothing touches an edge.
+**Chrome:** the lesson archetype. One segmented bar covers the *whole* lesson, one segment per color. A segment turns faint in that color when you meet it and solid when you know it. There's no step word. The 20 px gutter holds everywhere, so nothing touches an edge. The paper "Learn it" button grows into the lesson. "Back to Teal" shrinks it back into the color page.
 
 ### Color page
-1. Hero: a full-bleed swatch at 52% of the height.
+1. Hero: a full-bleed swatch at 50% of the height. This is where the tapped bubble lands (§8).
    - Floating level-2 ‹ and ⋯ on top.
-   - Bottom-left: a state chip (`label`, a paper chip: NEW · LEARNING · YOURS), then the `display` name, then the hex in `code`.
+   - Bottom-left: one `note` in the swatch's ink at 18 px ("New to you, from the Blues", "Learning" or "Yours since May"), then the name in `hero` (96 px), then the hex in `code`.
 2. Primary: **Learn it · 2 min**, a paper pill (the only filled button). For a color already yours it becomes "Review it". To its right, two quiet icons: save and share.
-3. **Tell it from:** the compare strip (teal | turquoise | petrol, the first wider), each tappable to open the look-alike sheet, then the `lead` diff line.
+3. The compare strip, with no label (teal | turquoise | petrol, the first wider), each tappable to open the look-alike sheet, then the `lead` diff line.
 4. Lead story (serif 20), then the image with its credit.
 5. Hub shelves with pictures: In paintings (thumbnails with palette bars), In poems (one line plus the poet), In films, In nature, Gems, Fashion. Only shelves with content render.
 6. Collapsed: Language, History (facets), Codes (HEX · RGB · HSL · CMYK, with the CMYK note inside), Sources, Connections.
 
-### Today (the sheet at mid)
-- Header: "Today" `title-2` left, the date (`code`) right.
-- Primary card: plates of what's due, "8 to *recall*" (`title-1`), "then Reds & pinks" (`small`), and the paper primary "Begin the review".
-- Today's three: three equal daily tiles (Challenge · Today's color · Train) with done dots.
-- That's all. The view chooser and search move to the View panel. Camera moves to Studio, and "Surprise me" moves into the View panel. The doors disappear: the room bar *is* the doors.
+### Learn (the first room; Today is its top)
+- **Header:** "Learn" (`title-1`) and the weekday as a `note`.
+- **Today:**
+  - A wide plate of the colors due (132 px tall, one stripe per color).
+  - "8 to *recall*" (`title-1`), then one `note`: "Then Reds & pinks, nine new names".
+  - The paper primary "Begin".
+  - Today's three (Challenge, Today's color, a Train suggestion) follow as three equal tiles with done dots, below the fold on smaller phones.
+- **The path:** a column of units drawn as their own colors.
+  - Finished units are solid 30 px bands with a `note` ("Yours").
+  - The current unit is a 72 px band with its name in `title-2`.
+  - Future units are 8 px lines with their names in soft serif.
+  - This is the path from ROADMAP §1, told with color instead of icons.
+- **Your collection:** the quilt and "27 of 101" in `title-2`, at the end.
+- Nothing else. Search, views and Surprise me live in View. The camera lives in Studio.
 
 ### View panel (Home's right corner)
-This keeps the chooser built on main (Stage, Show, Layout, Lens, or a collection) and changes only its height and density.
-- A modal sheet at **57%**, not full height, so the honeycomb above stays visible and updates live while you change things. Today the panel covers the whole honeycomb, so you can't see what a setting does.
-- **Header:** "View" (`title-2`), with two icon buttons on the right: Search (it opens a field in place) and Surprise me (dice).
-- **Lens:**
-  - A two-way segmented control, **Round | Edges**. Round is the default: the round fisheye, biggest in the middle and shrinking smoothly all the way out. Edges is the Apple Watch option, with a full-size middle and shrinking only at the edges.
-  - A strength slider from "Gentle" to "Strong". The gentle end still scales (never flat), even fully zoomed out.
-  - A 4 ms tick at the default and at each quarter. Changes are live, with no Apply button.
-- **Show:** a 4-way segmented control (All · Learned · Learning · New).
-- **Stage:** one row of 9 numbered chips, with the stage size in `code` under each number. The current stage is a paper chip. This replaces the 3 × 3 grid of bordered boxes.
-- **Layout:** Map · Wheel, as two text options on the Stage line, right-aligned.
-- **Or a collection ›:** a ruled row that opens the full list (Every name, Even 500, Yours, character, traditions) as a second page of the same sheet.
-- At the end, below the fold: Settings, Back up, Retake placement (the old ⋯ menu).
+Calm, with one big control and big targets. Every change previews live on the honeycomb, which stays visible above the panel.
+- **Height:** a modal sheet at content height, about 50% (never more than 60%).
+- **Header:** "View" (`title-2`), with two solid 44 px icon buttons: Search (it opens a field in place) and Surprise me (dice).
+- **The stage:**
+  - The count set huge ("101" at 72 px), with one `note` beside it: "colors, stage 3 of 9".
+  - Under it, a full-width scrubber: a 48 px hit area across the whole gutter, 9 detents, and a 32 px paper thumb.
+  - Dragging it snaps through the nine stages with a 4 ms tick at each one, and the honeycomb repopulates live as you drag.
+- **Three quiet rows,** each 60 px tall, each with its current value as a `note`:
+  - **Show:** All colors, Learned, Learning or New. It opens a second page of the same sheet with four big rows.
+  - **Look:** for example "Round lens, map". It opens the Look page:
+    - Two picture tiles, **Round** (default) and **Edges**, each a live miniature of the honeycomb, so you choose by picture.
+    - One strength slider from *Gentle* to *Strong*. The gentle end still scales, never flat.
+    - A Layout row: Map or Wheel.
+  - **Or a collection:** Every name, Even 500, Yours, character, traditions.
+- **At the end, below the fold:** Settings, Back up, Retake placement (the old ⋯ menu).
 
 ### Train station (drill)
 The Station archetype.
@@ -336,20 +393,34 @@ The Station archetype.
 - Header: ✕ · progress · "Lv 9".
 - `title-1`: "Which tile is different?"
 - A 3×3 grid on booth grey.
-- After the tap, the footer shows: "Right. It was 2.7 ΔE off, slightly bluer." (`small`, with the number in `code`), and the paper primary "Next".
+- The grid sizes itself to the height (`min(335px, 100vh − 410px)`), so it fits a 375 × 667 screen.
+- After the tap, the footer shows one line, "Right. It was 2.7 off, a little redder." (`small`, with the number in `code`), and the paper primary "Next".
 - The trivia ("Scores use CIEDE2000…") moves to the station intro card's "How it works".
 
-### Explore (top level)
-- The room header: "Explore" `title-1`, search icon.
-- Lens row: **For you · Art · Ideas · World** (4 items, with Paintings and Poems merged into Art; Colors is dropped because Home *is* the colors).
-- **For you:**
-  - First, a cover: today's featured story, an image at 4:5, title in `title-2` on a level-2 caption band under the image (no text over the image).
-  - Then shelves: "Paintings in your colors" (thumbnails with palette bars), "Stories" (2-up cards), "A color to read" (plate cards).
+### Explore (a pager of covers)
+Explore is unmistakably ColorHub because every screen is led by one great image and its measured colors.
+- **The top level** is a vertical pager like the meet pager. There are four full-bleed covers, one per part: **For you · Art · Ideas · World**. You swipe up through them.
+- **Each cover:**
+  - One image across the top, `100vh × .62 − 140 px` tall: today's pick for that part (Hokusai's wave for Art, a story's image for Ideas).
+  - Along the seam, a 12 px band of the image's six measured colors, sized by share.
+  - Below, a ground tinted from the image's darkest dominant color (the wave gives deep indigo `#152230`), mixed toward `--ground` so text stays above 7:1.
+  - On the ground: the part's name in `display` ("Art"), one `lead` sentence ("Fourteen thousand paintings and eleven thousand poems, found by their colors."), and one `note` about today's image.
+- **Navigation:**
+  - Four small page dots sit on the right edge.
+  - The next cover peeks 30 px at the bottom.
+  - One solid search button sits top-right.
+  - There's no tab row, no cards and no labels.
+- **Inside a part (Art):**
+  - The header takes the tint of the chosen color.
+  - A row of 46 px color bubbles picks the color (the honeycomb's material again).
+  - Below, a two-column masonry of paintings, each with its palette bar, title in `title-3` and artist in `note`. Tapping a painting grows it into its page (§8).
+  - Poems sit in the same feed as paintings, set as lines of verse with the color word in its color.
+- **Tinting rule:** the tint is computed per image (darkest dominant color, L* ≤ 18, chroma ≤ 20). Swatches judged inside Explore still sit on neutral surfaces: tint only the ground, never behind a swatch you're asked to compare.
 
 ### Museum painting page
 - Hero: the image, full width, contain-fit on ground, tap to zoom.
 - Floating ‹. A floating ↗ (the museum link) top-right, in place of the boxed "CHICAGO".
-- Then: title in `title-1`, artist · year · place in `small`.
+- Then: the title in `title-1`, and the artist and year as a `note`.
 - **Palette:** the share-sized bar (6 plates, each `data-swatch`). Under it, 6 list rows: chip · **name from the 1,000-word list, capitalized** (Gunmetal, Denim, Slate) · share % in `code`. Tapping a row highlights its area on the image and opens the color sheet.
 - The note, then "Similar palettes" (shelf), then collapsed "About this palette" (the computed-palette caveat) and "Image and data".
 
@@ -357,11 +428,11 @@ The Station archetype.
 - A modal sheet at content height (≤ 70%).
   - Hero swatch, 140 h, `--r-1`.
   - The name in `title-1`, capitalized, with the hex in `code` beside it.
-  - One line in `small`: "Closest of the 101: **Gunmetal** · darker, warmer ›".
-- **Near names:** a horizontal row of 4 chips (32 px swatch, name). Tapping one walks to that color's sheet.
+  - One `note` about where you are: "A quarter of the painting, and one of your words", or "Closest of the 101: Gunmetal, darker and warmer".
+- **Near names:** a row of four 48 px bubbles with their names under them in serif. Tapping one grows it into that color's sheet (the signature, at sheet scale).
 - **Actions:**
   - Primary (paper): "Open Gunmetal" if it's a taught color; for any other color, "Paintings with this color".
-  - Quiet rows: "Learn it" (taught only) and "Copy #221C14".
+  - Text links: "Learn it" (taught colors only), "Paintings in denim" and "Copy hex".
 - ΔE values and "Also called" sit behind a "Details" disclosure.
 - The "New word" tag appears only for real names that aren't yet met. "Between X and Y" is a description, never a name: it shows as the `small` line, with the nearest real name as the title.
 
@@ -372,7 +443,8 @@ The Station archetype.
 - [ ] Gutters at least 16 px. No bar, button or text runs edge to edge.
 - [ ] One filled button per screen. No glass, blur or outline-only control on color.
 - [ ] Judged swatches only on booth grey, with no overlay on them.
-- [ ] Mono only on labels and codes.
+- [ ] Mono only on numbers and codes. No uppercase text anywhere.
+- [ ] Every color, room and picture opens with the signature grow and closes back into its source.
 - [ ] No empty section headings. No label repeating visible text.
 - [ ] Back goes down exactly one layer.
 - [ ] Reduce Motion: every move becomes a cross-fade.
