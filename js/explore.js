@@ -459,8 +459,12 @@ function openNode(n, push = true) {
 // go()/hmHome() and never changes just from opening a page), so a chain rooted in the honeycomb or Studio
 // returns there instead of always landing on Explore.
 const xFallbackTab = () => ["learn", "gym", "studio"].includes(S.tab) ? S.tab : "explore";
+// Where a chain of pages started when that wasn't a room: "home" when a bubble on the honeycomb opened it. Home is its
+// own floor now (not a tab), so without this the trail ran out onto whatever room S.tab last pointed at, and a pull-down
+// on a color opened from Home dropped you into Studio (David). go() clears it.
+let X_ROOT = null;
 function xStep(prev) {
-  if (!prev) return go(xFallbackTab());
+  if (!prev) return X_ROOT === "home" && typeof hmHome === "function" ? (X_ROOT = null, hmHome()) : go(xFallbackTab());
   // Studio screens (ROADMAP.md §17 job #1): plain tokens (no ":"), since each reopens from its own remembered
   // state rather than an id. Checked before the generic node lookup at the bottom, which would otherwise treat
   // "harmony" etc. as a (nonexistent) graph node id and silently do nothing.
