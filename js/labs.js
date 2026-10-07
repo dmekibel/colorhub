@@ -100,8 +100,11 @@ const LAB = {};
 const pickerRow = (sel) => `<div class="pick-row">${EVERY().slice().sort((a, b) => { const A = lch(a.h), B = lch(b.h); return (A[1] < 12) - (B[1] < 12) || ((A[2] + 330) % 360) - ((B[2] + 330) % 360); }).map(c => `<button data-pick="${c.h}" title="${esc(c.n)}" style="--c:${c.h}" class="${c.h === sel ? "on" : ""}"></button>`).join("")}</div>`;
 const appName = hex => { const [x] = nearestColors(hex, 1); return x ? x : null; };
 
-// Harmony: drag the base around the picker's ring and the harmony colors swing with it, live.
-LAB.harmony = (base = lch(dailyColor().h)[1] > 30 ? dailyColor().h : "#C8553D", scheme = "triadic") => {
+// Harmony: drag the base around the picker's ring and the harmony colors swing with it, live. The base and
+// scheme are remembered (LAB_HARMONY_STATE) so a [[link]] out to a wiki page, then Back, lands on this same spot.
+let LAB_HARMONY_STATE = null;
+LAB.harmony = (base = lch(dailyColor().h)[1] > 30 ? dailyColor().h : "#C8553D", scheme = "triadic", push = true) => {
+  if (push && XSTACK[XSTACK.length - 1] !== "harmony") XSTACK.push("harmony");
   const el = show(`
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span class="eyebrow">Lab · Harmony</span><span style="width:44px"></span></header>
     <div class="poster" id="poster" aria-hidden="true"></div>
@@ -112,10 +115,12 @@ LAB.harmony = (base = lch(dailyColor().h)[1] > 30 ? dailyColor().h : "#C8553D", 
     <p class="p-body">${linkText("Why these work: [[complementary-colors|complements]] sit opposite on the [[color-wheel]] and make each other look stronger, the effect [[chevreul|Chevreul]] described for tapestry dyes. Analogous colors sit side by side and feel calm. Triads were a [[bauhaus|Bauhaus]] favorite.")}</p>
     <p class="fine">Harmonies rotate CIELAB hue (LCh h) at the same lightness and strength. The Studio gamut wheel uses OKLab hue instead, so the same angle can land on a slightly different color there. Names are the nearest of the app's ${EVERY().length}. Tap a color to copy it.</p>
   `, "article lab");
-  el.querySelector("[data-back]").onclick = () => go("studio");
+  // one-step Back (ROADMAP.md §17 job #1): pops this lab's own place in the shared trail, so it lands wherever
+  // it was opened from (Studio, usually) rather than always jumping straight to the Studio tab.
+  el.querySelector("[data-back]").onclick = xBack;
   wireLinks(el);
   const draw = hex => {
-    base = hex;
+    base = hex; LAB_HARMONY_STATE = { base, scheme };
     const cols = schemeColors(hex, scheme), [p0, p1, p2 = p1, p3 = p0] = cols, light = cols.slice().sort((a, b) => lab(b)[0] - lab(a)[0]);
     el.querySelector("#poster").innerHTML = `<svg viewBox="0 0 320 300"><rect width="320" height="300" fill="${light[0]}"/><rect x="0" y="196" width="320" height="104" fill="${p1}"/>
       <circle cx="204" cy="122" r="80" fill="${p0}"/><rect x="30" y="44" width="58" height="176" fill="${p2}"/><rect x="238" y="222" width="50" height="50" fill="${p3}"/><rect x="30" y="238" width="140" height="10" fill="${light[light.length - 1]}"/></svg>`;
@@ -127,9 +132,12 @@ LAB.harmony = (base = lch(dailyColor().h)[1] > 30 ? dailyColor().h : "#C8553D", 
   el.querySelector("#hlist").addEventListener("click", e => { const b = e.target.closest("[data-copy]"); if (b) { try { navigator.clipboard.writeText(b.dataset.copy); toast("Copied " + b.dataset.copy); } catch (x) {} } });
 };
 
-// One color, two looks (Albers): the same inner color on two grounds, then lift the grounds.
+// One color, two looks (Albers): the same inner color on two grounds, then lift the grounds. set/slot are
+// remembered the same way as Harmony's base/scheme, for the same reason.
 const CONTRAST_PRESETS = [["#8E7F71", "#BFA2E8", "#CC7722"], ["#8C9096", "#FFD700", "#3D2B8E"], ["#C19A6B", "#36454F", "#F0E6D2"], ["#9CAF88", "#E34234", "#4682B4"], ["#A8778F", "#00A86B", "#FFCBA4"]];
-LAB.contrast = (set = CONTRAST_PRESETS[0].slice(), slot = 0) => {
+let LAB_CONTRAST_STATE = null;
+LAB.contrast = (set = CONTRAST_PRESETS[0].slice(), slot = 0, push = true) => {
+  if (push && XSTACK[XSTACK.length - 1] !== "contrast") XSTACK.push("contrast");
   const el = show(`
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span class="eyebrow">Lab · Albers</span><span style="width:44px"></span></header>
     <button class="v v-contrast big" data-contrast id="ctr"><div class="g"><i></i></div><div class="g"><i></i></div><span class="v-hint">Tap to lift the grounds</span></button>
@@ -139,10 +147,11 @@ LAB.contrast = (set = CONTRAST_PRESETS[0].slice(), slot = 0) => {
     <p class="eyebrow" style="margin:22px 0 10px">Try a classic</p>
     <div class="presets">${CONTRAST_PRESETS.map((p, i) => `<button data-preset="${i}">${p.map(h => `<i style="--c:${h}"></i>`).join("")}</button>`).join("")}</div>
   `, "article lab");
-  el.querySelector("[data-back]").onclick = () => go("studio");
+  el.querySelector("[data-back]").onclick = xBack;
   wireVisuals(el);
   const ctr = el.querySelector("#ctr"), txt = el.querySelector("#ctxt");
   const draw = () => {
+    LAB_CONTRAST_STATE = { set: set.slice(), slot };
     const [inner, g1, g2] = set, names = set.map(h => appName(h)[0].n);
     const gs = ctr.querySelectorAll(".g");
     gs[0].style.setProperty("--c", g1); gs[1].style.setProperty("--c", g2);

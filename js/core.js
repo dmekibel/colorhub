@@ -79,6 +79,8 @@ const pad = n => String(n).padStart(2, "0");
 const keyOf = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
 const today = () => keyOf(new Date(Date.now() - 4 * 3600e3));
 const addDays = (k, n) => { const [y, m, d] = k.split("-").map(Number); return keyOf(new Date(y, m - 1, d + n)); };
+// a day key ("2026-10-07") as a short human date, for a photo or palette's default title
+const fmtDay = k => { if (!k) return ""; const [y, m, d] = k.split("-").map(Number); if (!y || !m || !d) return ""; return new Date(y, m - 1, d).toLocaleDateString(undefined, { month: "long", day: "numeric" }); };
 
 // ---------- state ----------
 const KEY = "colorhub-v1";
@@ -94,6 +96,8 @@ function migrateState(d) {
   ["cards", "done", "daily", "best"].forEach(k => { if (!s[k] || typeof s[k] !== "object") s[k] = {}; });
   if (!s.gym || typeof s.gym !== "object") s.gym = { skills: {}, workouts: {} };
   s.gym.skills = s.gym.skills || {}; s.gym.workouts = s.gym.workouts || {};
+  // a saved palette from before it had a stable id (for its own address and the one-step Back chain): give it one
+  if (Array.isArray(s.palettes)) s.palettes.forEach(p => { if (p && !p.id) p.id = "pl" + Date.now().toString(36) + Math.random().toString(36).slice(2, 7); });
   if (!(s.v >= 1)) s.v = 1;   // unversioned saves had the v1 shape
   // future steps go here: if (s.v < 2) { …; s.v = 2; }
   return s;
