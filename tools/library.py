@@ -562,6 +562,90 @@ def merge_iscc_nbs(entries, app):
 
 
 # ---------------------------------------------------------------------------------------------
+# Maerz & Paul 1930 (data/sources/maerz-paul-1930.json, built by tools/maerz_paul.py): per the plan in
+# research/NAME-SOURCES.md and the method in research/MAERZ-PAUL.md / tools/maerz_paul.py's own docstring.
+# Unlike the ISCC-NBS import (coarse block centroids shared by many names, deliberately never new bubbles),
+# every Maerz & Paul row is its own measured chip -- a real, possibly genuinely new, distinct color. Each
+# name is one of three things:
+#   1. Already in the library (same key() as an existing entry): that entry's `src` gains "maerz-paul" and
+#      its `note` gains this chip's plate/column/row. No new bubble (its hex is untouched, consistent with
+#      the rest of this file -- a name's hex always comes from the SOURCES priority order, and maerz-paul
+#      is not in it).
+#   2. Not a name match, and its measured chip is at least MP_NEW_DE from every existing library color
+#      (including every new Maerz & Paul bubble already added earlier in this same pass, so two near-duplicate
+#      new chips don't both become their own bubble): added as a brand-new library color.
+#   3. Not a name match, and close to an existing color: attached as an alternate name (`altn`) on the
+#      nearest one, the same shape ISCC-NBS alternates use.
+MP_NEW_DE = 2.5  # CIEDE2000: tighter than ISCC_DE (8) on purpose -- these are real per-chip measurements,
+                 # not block centroids, so "new, distinct shade" can mean a much smaller difference
+
+
+def load_maerz_paul_rows():
+    lines = (ROOT / "data" / "sources" / "maerz-paul-1930.json").read_text(encoding="utf-8").splitlines()
+    return [json.loads(l) for l in lines[1:] if l.strip()]
+
+
+def merge_maerz_paul(entries, app):
+    rows = load_maerz_paul_rows()
+    by_key = {}
+    for r in rows:
+        k = key(r["n"])
+        if k not in by_key:  # first occurrence wins; duplicates are rare (same name on >1 chip)
+            by_key[k] = r
+    existing_by_key = {key(e["n"]): e for e in entries}
+    base_entries = list(entries)
+    base_lab = labs([e["h"] for e in base_entries]) if base_entries else np.zeros((0, 3))
+    new_entries = []
+    rep = {"rows": len(rows), "unique_names": len(by_key), "already_in_library": 0,
+           "new_colors": 0, "attached_as_alt": 0, "uncertain_skipped": 0}
+
+    for k, r in by_key.items():
+        nm = title(r["n"])
+        e = existing_by_key.get(key(nm))
+        if e is not None:
+            # A name match never uses this row's own hex (the existing entry's hex always wins, same as
+            # every other source here), so an "uncertain" color flag doesn't apply to this branch.
+            if "maerz-paul" not in e["src"]:
+                e["src"].append("maerz-paul")
+            if "Maerz & Paul 1930" not in (e.get("note") or ""):
+                e["note"] = (e["note"] + "; " + r["note"]) if e.get("note") else r["note"]
+            rep["already_in_library"] += 1
+            continue
+        if r.get("uncertain"):
+            # Flagged far from its independent ISCC-NBS check (tools/maerz_paul.py ISCC_FLAG_DE) with no
+            # existing-name match to fall back on -- skip rather than mint a new bubble or alternate name
+            # from a color we don't trust (research/MAERZ-PAUL.md s6).
+            rep["uncertain_skipped"] += 1
+            continue
+        lab = labs([r["h"]])
+        if len(base_entries):
+            D = de2000(lab, base_lab)[0]
+            j = int(np.argmin(D))
+            dmin = D[j]
+        else:
+            j, dmin = -1, 1e9
+        if dmin >= MP_NEW_DE:
+            new_e = {"n": nm, "h": r["h"], "src": ["maerz-paul"], "note": r["note"]}
+            new_entries.append(new_e)
+            base_entries.append(new_e)
+            base_lab = np.vstack([base_lab, lab]) if len(base_lab) else lab
+            existing_by_key[key(nm)] = new_e
+            rep["new_colors"] += 1
+        else:
+            target = base_entries[j]
+            altn = target.setdefault("altn", [])
+            have = {a["n"] for a in altn}
+            if nm != target["n"] and nm not in have:
+                altn.append({"n": nm, "src": "maerz-paul", "note": r["note"]})
+            rep["attached_as_alt"] += 1
+
+    if new_entries:
+        annotate(new_entries, app)
+        entries.extend(new_entries)
+    return entries, rep
+
+
+# ---------------------------------------------------------------------------------------------
 # Merge
 # ---------------------------------------------------------------------------------------------
 def merge(rows):
@@ -635,6 +719,10 @@ def build():
     rows = [dict(r) for s in SOURCES for r in per[s]]
     entries = annotate(merge(rows), app)
     entries, iscc_rep = merge_iscc_nbs(entries, app)
+    mp_path = ROOT / "data" / "sources" / "maerz-paul-1930.json"
+    mp_rep = None
+    if mp_path.exists():
+        entries, mp_rep = merge_maerz_paul(entries, app)
     entries.sort(key=sort_key)
     order = ["n", "h", "src", "fam", "lch", "app", "alts", "altn", "approx", "werner", "jp", "note", "crude"]
     lines = [json.dumps({k: e[k] for k in order if k in e}, ensure_ascii=False, separators=(",", ":")) for e in entries]
@@ -645,6 +733,8 @@ def build():
     print("ridgway:", {k: v for k, v in rrep.items() if k != "fails"})
     print("entries by source:", {s: sum(s in e["src"] for e in entries) for s in SOURCES})
     print("iscc-nbs:", iscc_rep)
+    if mp_rep is not None:
+        print("maerz-paul:", mp_rep)
     print(f"library: {len(entries)} entries, {OUT.stat().st_size / 1024:.0f} KB")
     (RAW / "build-report.json").write_text(json.dumps(dict(counts=counts, wiki_dropped=wiki_dropped,
                                                            jp_mismatch=jp_mismatch, ridgway=rrep), ensure_ascii=False, indent=1))

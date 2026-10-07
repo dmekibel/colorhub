@@ -232,3 +232,23 @@ Added by `tools/iscc_nbs.py` (extraction) + `merge_iscc_nbs()` in `tools/library
 The honeycomb itself is unchanged (same 2,711 bubbles); 1,297 of them now carry 1955 government provenance in their `note`, and 4,340 historical names (Jonquil, Navaho, Persimmon Orange, Aurantiacus, Kis Kilim…) are newly searchable and show "Also called …" on the colors they're synonyms of (`js/colorsets.js` `csMatch()`/`colorSheet()`/`altnLine()`).
 
 **Spot-check and known limitation.** Extracted entries were checked by eye against rendered page images (`pdftoppm`) across 12 randomly chosen dictionary pages, ~190 individual name/source/block triples. Every block number that came through was correct, with one exception found this way: a handful of names whose designation got OCR'd with the munsell modifier letters "l"/"O" misread as the digits "1"/"0" ("l.Ol 106" → "1.01 106") picked up a false extra block ("1", i.e. "vivid pink") ahead of the real one -- `block_numbers()` now only accepts a bare, whitespace-delimited digit token as a block number, which fixed the great majority of these (e.g. Citrine: was wrongly block 1, is now correctly block 106, "light olive"). One rarer variant survives this fix: an entry whose designation is itself truncated by a page or column edge right after the source code, with an unrelated later line's number getting pulled in as if it were confirmation (e.g. "Glaucous", `src: M`, kept block 1 instead of the correct 121 from its own `R`-sourced listing). Found by eye, not systematically; a general positional rule for it was tried and reverted (it broke more legitimate multi-line layouts than it fixed, given how differently entries wrap across physical lines). Affects roughly 19 of 5,657 names (0.3%) by rough estimate -- a known, accepted residual, consistent with "prefer dropping uncertain entries over importing garbage" where it could be caught, and left documented where it couldn't.
+
+## 9. Maerz & Paul 1930 plate digitization (2026-10-07) -- extracted, not yet merged
+
+Follows the plan in this file's own §1 recommendation and `research/NAME-SOURCES.md` ("flag as a future
+digitization project"). Full detail -- the source hunt (the only usable scan is IA's *un*processed original JP2
+tar, not its own desaturated derivative), the grid-reading and white-balance method, the ISCC-NBS independent
+accuracy check, the paper-transmission gamma fit, and the spot check -- is in `research/MAERZ-PAUL.md`.
+Extraction: `tools/maerz_paul.py` -> `data/sources/maerz-paul-1930.json`. Merge code: `merge_maerz_paul()` in
+`tools/library.py` (same 3-way rule as ISCC-NBS's own merge, but with a tighter ΔE00 2.5 "new color" threshold,
+since these are real per-chip measurements rather than coarse block centroids).
+
+**55 of 56 plates recovered** (Plate 2 is missing from the only available scan -- two physical pages never
+photographed), **825 named chips extracted**, **374 independently cross-checked** against the 1955 ISCC-NBS
+dictionary's own Maerz & Paul-sourced names: 37% agree within ΔE00 8 of their assigned block, median ΔE00 9.7;
+58 chips (16% of the 374) are flagged `"uncertain"` and excluded from any merge. A direct 30-name spot check
+(`research/MAERZ-PAUL.md` §7) found a handful of plausible-looking but fabricated names the ISCC-NBS check
+cannot catch (two different cells' text merged by OCR, e.g. "Maracail Domingc") — **this import did not cleanly
+pass its own "reads right" bar, so `data/library.json` was left untouched (still 2,711 entries) rather than
+merged.** The extraction, its documentation and the merge code all ship from this pass; running the merge is
+left for a follow-up once the extraction has either a tighter cross-cell-bleed filter or a manual review pass.
