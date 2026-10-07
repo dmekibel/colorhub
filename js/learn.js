@@ -463,6 +463,7 @@ function home() {
     ${h.cta ? `<button class="btn" data-${h.act}>${h.cta} ${ICON.arrow}</button>` : ""}
     <div class="sec-head today-head"><b>Today's three</b><span>${nDone === 3 ? "All done" : `${nDone} of 3 done`}</span></div>
     <div class="trio">${tiles.map(t => `<button class="tday${t.done ? " done" : ""}" ${t.a}>${t.art}<b>${t.name}</b><span class="tday-st">${t.st}</span></button>`).join("")}</div>
+    ${typeof prEntry === "function" ? prEntry() : ""}
     <button class="collection" data-palette aria-label="Your collection">
       <div class="coll-head"><span class="eyebrow">Your collection</span><span class="coll-n"><b data-count="${owned}">${owned}</b><small>/${ALL.length}</small></span></div>
       <div class="quilt">${quilt}</div>

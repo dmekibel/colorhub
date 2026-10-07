@@ -6,6 +6,7 @@
 //   #/studio/wheel  the gamut wheel · #/studio/palette/<id>  a saved palette (js/studio.js, in S.palettes)
 //   #/daily  #/challenge  #/taste/<color|palette>  #/lab/<harmony|contrast>  #/gallery/<n> (a museum painting)
 //   #/poem/<id>  #/passage/<id>  #/film/<id>   (js/poems.js, js/passages.js, js/films.js)
+//   #/practice  #/practice/<method>   build your own deck and study it (js/practice.js)
 //   #/learnit/<color>   the honeycomb home's instant mini-lesson (js/home.js, js/learnit.js). #/today itself
 //   already opens the honeycomb home: go("learn") does (js/core.js), and "today" is routed through go() below.
 // How it works: show() (core.js) calls routeCommit(tab). A tab home replaces the current history entry with
@@ -95,7 +96,8 @@ const ROUTED = [["colorPage", nodeRouted()], ["wikiPage", nodeRouted()], ["paint
   ["gmListPage", kind => typeof gmListTitle === "function" ? routed(gmListTitle(kind), "gem/" + kind) : null],   // js/gems.js (gem/essay detail pages route via wikiPage above)
   ["labHoney", () => routed("Honeycomb lab", "lab/honey")],   // js/home.js: rate every preset at every set size
   ["gamutWheel", () => routed("Gamut wheel", "studio/wheel")],   // js/studio.js
-  ["openSavedPalette", id => routed("Your palette", "studio/palette/" + id)]];   // js/studio.js
+  ["openSavedPalette", id => routed("Your palette", "studio/palette/" + id)],   // js/studio.js
+  ["prHome", () => routed("Practice", "practice")], ["prPlay", m => PR_METHODS[m] ? routed(PR_METHODS[m].t, "practice/" + m) : null]];   // js/practice.js
 ROUTED.forEach(([name, f]) => routeWrap(window, name, f));
 routeWrap(LAB, "harmony", () => routed("Harmony", "lab/harmony"));
 routeWrap(LAB, "contrast", () => routed("Albers", "lab/contrast"));
@@ -175,7 +177,8 @@ function openRoute(hash, initial = false) {
     lab: () => id === "honey" && typeof labHoney === "function" ? labHoney() : (LAB[id] && ["harmony", "contrast"].includes(id) ? LAB[id] : LAB.harmony)(),
     fashion: () => typeof fashionPage === "function" && fashionPage(id),
     // the honeycomb home's instant mini-lesson (js/learnit.js): #/learnit/<color>
-    learnit: () => { const c = id && routeColor(id); if (c && typeof hmLearnIt === "function") hmLearnIt(c); else go(S.tab || "learn"); } };
+    learnit: () => { const c = id && routeColor(id); if (c && typeof hmLearnIt === "function") hmLearnIt(c); else go(S.tab || "learn"); },
+    practice: () => typeof prOpenRoute === "function" ? prOpenRoute(id) : go(S.tab || "learn") };   // js/practice.js: #/practice, #/practice/<method>
   if (simple[kind]) { base(); simple[kind](); return true; }
   return false;
 }
