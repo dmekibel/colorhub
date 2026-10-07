@@ -11,7 +11,10 @@ document.addEventListener("click", e => {
   const sw = e.target.closest("[data-swatch]");
   if (!sw || e.target.closest("[data-node],[data-nb],a")) return;
   e.stopPropagation(); e.preventDefault();
-  nameSheet(sw.dataset.swatch);
+  // wait for the ~1,000-word list (a moment, once) so the first tap already names the color precisely
+  const hex = sw.dataset.swatch;
+  if (typeof CORE_NAMES !== "undefined" && !CORE_NAMES) loadCoreNames().then(() => nameSheet(hex), () => nameSheet(hex));
+  else nameSheet(hex);
 }, true);
 
 const swCloseness = de => de < VERY_CLOSE_DE ? "very close" : de < NEAR_DE ? "close" : "near";
