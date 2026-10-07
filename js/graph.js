@@ -99,7 +99,7 @@ function connections(n) {
     if (opp && lch(n.h)[1] > 10) push(colorNode(opp[0]), "Opposite", "Across the color wheel. Side by side, each makes the other look stronger.", "harmony");
     [120, 240].forEach(d => { const [t] = nearestColors(rotateHue(n.h, d), 1, n.title); if (t && lch(n.h)[1] > 10) push(colorNode(t[0]), "Triad", "A third of the way around the color wheel.", "harmony"); });
     [-30, 30].forEach(d => { const [t] = nearestColors(rotateHue(n.h, d), 1, n.title); if (t && lch(n.h)[1] > 10) push(colorNode(t[0]), "Analogous", "Its next-door neighbor on the color wheel.", "harmony"); });
-    nearestColors(n.h, 4, n.title).forEach(([x, d]) => push(colorNode(x), "Looks like", `A close neighbor, ΔE ${d.toFixed(1)} away.`, "spectrum"));
+    nearestColors(n.h, 4, n.title).forEach(([x, d]) => push(colorNode(x), "Looks like", `A close neighbor, ${pctDiff(d)} away.`, "spectrum"));
   }
   const facetNames = new Set(Object.values(FACET_LABEL));
   (g.out.get(n.id) || []).forEach(e => push(e.to, e.rel === "kin" ? "Kin" : e.to.kind === "painting" ? "Painting" : e.to.kind === "story" ? "Story" : e.to.kind === "color" && facetNames.has(e.rel) ? e.rel : TYPE_LABEL[e.to.type] || e.rel || "Linked", e.why, e.to.kind === "color" ? (e.rel === "in its palette" ? "paintings" : "ideas") : lensOf(e.to, e.rel)));

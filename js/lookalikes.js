@@ -15,7 +15,9 @@ function lookDiff(a, b) {
   const [La, Ca, Ha] = lch(a.h), [Lb, Cb, Hb] = lch(b.h), out = [];
   const dL = Lb - La, dC = Cb - Ca;
   let dH = Hb - Ha; if (dH > 180) dH -= 360; if (dH < -180) dH += 360;
-  const hueWord = h => { h = (h + 360) % 360; return h < 40 || h >= 345 ? "redder" : h < 70 ? "more orange" : h < 100 ? "yellower" : h < 160 ? "greener" : h < 215 ? "more teal" : h < 270 ? "bluer" : "more purple"; };
+  // one fixed hue vocabulary, the way Webster's Third / Godlove defined colors: redder, yellower, greener, bluer, purpler
+  // (never "more teal": a direction word must not be a color name, or "teal is more teal than viridian" happens)
+  const hueWord = h => { h = (h + 360) % 360; return h < 55 || h >= 345 ? "redder" : h < 130 ? "yellower" : h < 190 ? "greener" : h < 280 ? "bluer" : "purpler"; };
   const parts = [];
   if (Math.abs(dL) >= 4) parts.push([Math.abs(dL), dL > 0 ? "lighter" : "darker"]);
   if (Math.abs(dC) >= 5) parts.push([Math.abs(dC) * .8, dC > 0 ? "more vivid" : "duller"]);

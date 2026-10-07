@@ -8,7 +8,8 @@ const SHOT = location.hash.startsWith("#shot=") ? decodeURIComponent(location.ha
 if (SHOT) loadWiki().then(() => shot(SHOT));
 else {
   ROUTE_REPLACE = true;   // the first screen takes over the page's own history entry
-  if (!openRoute(location.hash, true)) S.placed ? go(S.tab || "learn") : welcome();
+  // Home (the honeycomb) is the floor of the app (DESIGN-SYSTEM.md §2) and the default landing place, not a tab.
+  if (!openRoute(location.hash, true)) S.placed ? hmHome() : welcome();
   prefetchWiki();
 }
 
@@ -65,7 +66,7 @@ function shot(name) {
         if (tw === "tweak") later2(() => hmOpenTweak(ctrl), 200);
         if (act) host.dispatchEvent(new CustomEvent("honeyshot", { detail: act }));
       }); }
-    // the Learn it mini-lesson (js/learnit.js): learnit:<meet|tell|sort|pick|memory|done>
+    // the Learn it mini-lesson (js/learnit.js): learnit:<meet|recall|tell|done>
     case "learnit": return hmLearnitShot(arg || "meet");
     case "gym": return go("gym");
     case "studio": return go("studio");

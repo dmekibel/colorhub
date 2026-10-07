@@ -18,7 +18,7 @@
 
 const routeSlug = s => String(s).normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 const APP_BASE = () => location.origin + location.pathname.replace(/[^/]*$/, "");
-const TAB_ROUTE = { learn: ["today", "Today"], gym: ["train", "Train"], explore: ["explore", "Explore"], studio: ["studio", "Studio"] };
+const TAB_ROUTE = { learn: ["today", "Learn"], gym: ["train", "Train"], explore: ["explore", "Explore"], studio: ["studio", "Studio"] };
 const LENS_ROUTE = { spectrum: "colors", paintings: "paintings", poems: "poems", ideas: "ideas", world: "world", saved: "saved" };   // "For you" is plain #/explore
 let ROUTE_NEXT = null, ROUTE_REPLACE = false, ROUTE_NOW = "";
 
@@ -118,7 +118,9 @@ function openRoute(hash, initial = false) {
   // tail of `id` once split off, same as "gallery/12?c=aabbcc" below.
   let tappedHex = null;
   if (id && id.includes("?c=")) { const [clean, qs] = id.split("?c="); id = clean; tappedHex = "#" + qs.toUpperCase(); }
-  const tabs = { today: "learn", train: "gym", studio: "studio", explore: "explore" };
+  // "learn" is kept as a working alias for "today" (DESIGN-SYSTEM.md §2: Learn is the room's real name now;
+  // #/today still opens it, since that address is already shared and bookmarked).
+  const tabs = { today: "learn", learn: "learn", train: "gym", studio: "studio", explore: "explore" };
   // hoisted above the tabs[kind] check below, since studio/wheel and studio/palette/<id> are Studio sub-screens,
   // not the tab home itself, and need it too (js/studio.js)
   const base = () => {
@@ -128,6 +130,8 @@ function openRoute(hash, initial = false) {
   };
   if (kind === "studio" && id === "wheel" && typeof gamutWheel === "function") { base(); XSTACK = []; gamutWheel(); return true; }
   if (kind === "studio" && id === "palette" && more && typeof openSavedPalette === "function") { base(); XSTACK = []; openSavedPalette(more); return true; }
+  // the floor (the honeycomb, js/home.js): not a tab, so it's its own address
+  if (kind === "home" && typeof hmHome === "function") { base(); XSTACK = []; hmHome(); return true; }
   if (tabs[kind]) {
     if (kind === "explore") S.lens = Object.keys(LENS_ROUTE).find(k => LENS_ROUTE[k] === id) || "all";
     go(tabs[kind]);

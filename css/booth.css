@@ -6,7 +6,8 @@
    sits near the middle of the lightness range. See DESIGN.md ("Surround"). The grain is already off here (html.booth).
    Text tokens are re-tuned so captions stay readable on grey (ink 5.6:1, soft 4.6:1). */
 html:has(#app > .screen.deck), html:has(#app > .screen.meet),
-html:has(#app > .screen.drill), html:has(#app > .screen.daily){
+html:has(#app > .screen.drill), html:has(#app > .screen.daily),
+html:has(#app > .screen.learnit){
   --ground:#5F5F5F; --lift:#676767; --lift-2:#6E6E6E;
   --ink:#F4F4F2; --soft:#E0E0DD; --faint:#D6D6D2;
   --rule:rgba(255,255,255,.24); --rule-2:rgba(255,255,255,.9);

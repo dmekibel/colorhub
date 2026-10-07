@@ -109,7 +109,7 @@ function namePage(entry, push = true, tapped) {
   const shadeBase = shade && (CORE_NAMES || coreFallback()).find(e => e.n.toLowerCase() === shade.base.toLowerCase());
   const nearCore = nearestCore(tapped || hex, CORE_NAMES || coreFallback(), 7).filter(x => x.n.toLowerCase() !== name.toLowerCase()).slice(0, 6);
   const likes = typeof lookalikes === "function" ? lookalikes({ n: name, h: hex }, 6) : [];
-  const status = tapped ? `Your color · ${closeness(de2000(tapped, hex))} to ${name}` : stage ? `Stage ${stage} of 9` : shade ? "A described shade" : "Library color";
+  const status = tapped ? `Your color · ${pctMatch(de2000(tapped, hex))} to ${name}` : stage ? `Stage ${stage} of 9` : shade ? "A described shade" : "Library color";
   const el = show(`
     <div class="c-hero cp-hero" style="--c:${heroHex}" data-ink="${ink(heroHex)}">
       <div class="cp-hbar"><button class="cp-fab" data-back aria-label="Back">${ICON.back}</button></div>
@@ -132,7 +132,7 @@ function namePage(entry, push = true, tapped) {
     ${typeof gmRow === "function" ? gmRow(entry) : ""}
     <section class="fx-in" data-world-in></section>
     ${nearCore.length ? `<div class="sec-head"><b>Nearest names</b><span>of about 1,000</span></div>
-      <div class="lk-list">${nearCore.map(x => `<button class="lk-row" data-np-near="${esc(x.n)}" data-h="${x.h}"><i style="--c:${x.h}" data-morph-src></i><b>${esc(x.n)}</b><span>${closeness(x.de)} · ΔE ${x.de.toFixed(1)}</span></button>`).join("")}</div>` : ""}
+      <div class="lk-list">${nearCore.map(x => `<button class="lk-row" data-np-near="${esc(x.n)}" data-h="${x.h}"><i style="--c:${x.h}" data-morph-src></i><b>${esc(x.n)}</b><span>${closeness(x.de)} · ${pctDiff(x.de)}</span></button>`).join("")}</div>` : ""}
     ${likes.length ? `<div class="sec-head"><b>Look-alikes</b><span>among the 101 taught colors</span></div>
       <div class="lk-list">${likes.map(o => `<button class="lk-row" data-np-near="${esc(o.x.n)}" data-h="${o.x.h}"><i style="--c:${o.x.h}" data-morph-src></i><b>${esc(o.x.n)}</b><span>${esc(lookDiff({ n: name, h: hex }, o.x))}</span></button>`).join("")}</div>` : ""}
     <p class="fine">Nearest of about 1,000 primary names (CIEDE2000). Hex values are screen approximations.</p>

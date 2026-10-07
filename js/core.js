@@ -65,6 +65,24 @@ function de2000(h1, h2) {
 // Text color that stays readable on a swatch
 const ink = h => lab(h)[0] > 64 ? "dark" : "light";
 
+// ---------- percent display (David, 2026-10-10: "a delta number doesn't feel like anything") ----------
+// CIEDE2000 between pure black and pure white is 100, and L* also runs 0-100, so a ΔE00 or ΔL* value already
+// reads as "percent of the black-to-white difference". Every user-visible ΔE/ΔL* number goes through one of
+// these; the math underneath (de2000, lab, every comparison and threshold) is untouched.
+const pctFmt = n => `${(n = Math.max(0, n)) >= 10 ? n.toFixed(0) : n.toFixed(1)}%`;
+// a gap between two colors, or an unsigned ΔL*: "3.0% different" / "1.5% different"
+const pctDiff = n => `${pctFmt(n)} different`;
+// a closeness/match line: "97% match"; one decimal once it's above 99 ("99.2% match")
+function pctMatch(n) {
+  const m = Math.max(0, 100 - n);
+  if (m >= 100) return "100% match";
+  return `${m > 99 ? m.toFixed(1) : Math.round(m)}% match`;
+}
+// ΔE, ΔL* and "ΔE step" (js/gym-engine.js SKILLS, js/match.js MATCH) all sit on that 0-100 scale, so each is
+// shown as a percent; "mired" (Kelvin eye, js/match.js) isn't on it and keeps its own unit word.
+const isDeUnit = u => u === "ΔE" || u === "ΔL*" || u === "ΔE step";
+const unitWord = u => u === "ΔL*" ? "different in lightness" : isDeUnit(u) ? "different" : u;
+
 // ---------- data index ----------
 const UNITS = D.units.map((u, i) => ({ ...u, i, colors: u.colors.map(c => ({ ...c, id: u.id + ":" + c.n })) }));
 UNITS.forEach(u => u.colors.forEach(c => { c.unit = u; }));
@@ -279,13 +297,15 @@ function show(html, cls = "", tab = null) {
   const backNav = BACK_RENDER; BACK_RENDER = false;
   timers.forEach(clearTimeout); timers = []; onKey = null;
   cleanup.forEach(f => { try { f(); } catch (e) {} }); cleanup = [];
-  document.querySelectorAll(".scrim,.sheet,.toast,.fade-ghost").forEach(n => n.remove());
+  document.querySelectorAll(".scrim,.sheet,.toast,.fade-ghost,.rooms-stem").forEach(n => n.remove());
+  document.body.classList.remove("stem-open"); STEM_OPEN = false;
   // a new screen always scrolls: release any scroll lock a sheet or panel left behind (leaving a screen with a sheet
   // open used to keep the body pinned, so the next page couldn't scroll)
   if (LOCKS) { LOCKS = 0; document.documentElement.classList.remove("sheet-open"); document.body.style.top = ""; }
   // remember where we were, so a later Back to this same address can put the scroll back
   if (leavingHash) SCROLL_BY_HASH.set(leavingHash, leavingY);
-  // the old screen fades out underneath the new one
+  // the old screen fades out underneath the new one (and, combined with growFrom's clip-path on the new
+  // content below, is also what stands in for "the honeycomb dims" during a Room's grow-in: DESIGN-SYSTEM §8)
   const old = app.firstElementChild;
   if (old && !reduceMotion) {
     const ghost = document.createElement("div"), y = scrollY;
@@ -294,69 +314,161 @@ function show(html, cls = "", tab = null) {
     document.body.appendChild(ghost);
     ghost.animate([{ opacity: 1, transform: "scale(1)" }, { opacity: 0, transform: "scale(.985)" }], { duration: 260, easing: "ease-out", fill: "forwards" }).onfinish = () => ghost.remove();
   }
-  app.innerHTML = `<div class="screen ${cls}${tab ? " has-tabs" : ""}">${html}</div>${tab ? tabbar(tab) : ""}`;
+  // Navigation model (DESIGN-SYSTEM.md §2): a tab's home is now a Room — a full-height sheet over the honeycomb,
+  // with the Rooms corner floating over it — instead of the old bottom tab bar. roomChrome() wraps whatever the
+  // room's own show(html, cls, tab) call already renders, so no other screen's JS had to change.
+  const inner = `<div class="screen ${cls}${tab ? " has-tabs" : ""}">${html}</div>`;
+  app.innerHTML = tab ? roomChrome(inner, tab) : inner;
   document.documentElement.classList.toggle("booth", /\b(deck|drill|station|meet|daily|fixed|eye|cx)\b/.test(cls));
   // history: a tab's home replaces the current entry; any screen inside adds one, so the phone's back gesture works.
   // The entry carries the screen's address (#/color/teal…) and the page title: router.js.
   routeCommit(tab);
-  if (tab) wireTabbar(tab);
   // forward nav starts at the top, same as always; a Back puts the scroll back where this address left it
   const backY = backNav ? SCROLL_BY_HASH.get(ROUTE_NOW) : null;
   if (backY) { const n = 2; let left = n; const tick = () => { if (--left > 0) return requestAnimationFrame(tick); scrollTo(0, backY); }; requestAnimationFrame(tick); }
   else window.scrollTo(0, 0);
   document.body.classList.remove("scrolled");
-  const el = app.firstElementChild;
+  const el = app.querySelector(".screen");
   const mb = tab && el.querySelector("[data-menu]"); if (mb) mb.onclick = () => menu();
   el.querySelectorAll("img").forEach(i => { if (i.complete && i.naturalWidth) i.classList.add("ld"); });
   requestAnimationFrame(() => { runMorph(el); reveal(el); countUp(el); });
   return el;
 }
 // Every tab's home opens with the same line: the brand on the left, the tab's own actions and the menu (⋯) on the right.
-// The brand itself is the one consistent way back to the honeycomb home from inside Train, Explore and Studio
-// (ROADMAP.md §12: "a slim back-to-honeycomb button top-left" — the simplest option was to make the thing
-// that's already top-left on every tab do it, rather than adding a second button next to it).
+// Kept for the rooms that still build their own header this way (Train, Explore, Studio); Learn builds the new
+// Room header (.room-head) directly. The brand is still a quick way home, same as the Rooms corner's Home bubble.
 const tabHead = (acts = "") => `<header class="bar"><button class="brand" data-hm-brand aria-label="Back to the honeycomb">${LOGO}<span>ColorHub</span></button><span class="bar-r">${acts}<button class="icon-btn" data-menu aria-label="Settings and more">${ICON.dots}</button></span></header>`;
 // Every inner screen: back (or close, for a task) on the left, the title in the middle, an optional action on the right.
 const navTop = (title = "", o = {}) => `<header class="nav-top"><button class="icon-btn" ${o.close ? `data-close aria-label="Close">${ICON.x}` : `data-back aria-label="Back">${ICON.back}`}</button><span class="nav-title">${title}</span><span class="nav-r">${o.right || ""}</span></header>`;
-// Four tabs, one job each: Today (the path and the daily things), Train (the eye), Explore (read), Studio (make).
-const TABS = [["learn", "Today", "today"], ["gym", "Train", "gym"], ["explore", "Explore", "compass"], ["studio", "Studio", "palette"]];
-// The tab bar: three mono words on a blurred strip with a hairline marker under the current one.
-// It slides away while you scroll down and comes back when you scroll up.
-const tabbar = active => `<nav class="tabbar" aria-label="Sections"><div class="tabs">${TABS.map(([id, label, icon]) =>
-  `<button class="tab${id === active ? " on" : ""}" data-tab="${id}" aria-current="${id === active}">${ICON[icon]}<span>${label}</span>${id === "learn" && !dailyDone() && active !== "learn" ? '<i class="badge"></i>' : ""}</button>`).join("")}</div></nav>`;
-function wireTabbar(active) {
-  const nav = app.querySelector(".tabbar"); if (!nav) return;
-  const wrap = nav.querySelector(".tabs"), tabs = [...nav.querySelectorAll(".tab")], ind = document.createElement("i");
-  ind.className = "tab-ind"; wrap.prepend(ind);
-  const place = (id, anim) => {
-    const b = tabs.find(t => t.dataset.tab === id); if (!b) return;
-    const r = b.getBoundingClientRect(), w = wrap.getBoundingClientRect();
-    ind.style.transition = anim ? "" : "none"; ind.style.transform = `translateX(${r.left - w.left}px)`; ind.style.width = r.width + "px";
-  };
-  place(LAST_TAB || active, false);
-  requestAnimationFrame(() => requestAnimationFrame(() => place(active, true)));
-  LAST_TAB = active;
-  const setMin = v => nav.classList.toggle("min", v);
-  tabs.forEach(b => b.onclick = () => go(b.dataset.tab));
-  let lastY = scrollY;
-  const onScroll = () => {
-    const y = scrollY, dy = y - lastY;
-    if (y < 40 || dy < -6) setMin(false); else if (dy > 6) setMin(true);
-    lastY = y;
-  };
-  addEventListener("scroll", onScroll, { passive: true });
-  cleanup.push(() => removeEventListener("scroll", onScroll));
+
+// ================================================================
+// Navigation model (DESIGN-SYSTEM.md §2): one floor (the honeycomb, js/home.js hmHome()), four rooms that rise
+// over it. No tab bar anywhere. The left corner — present on the honeycomb and inside every room, always the
+// same 56px spot — raises "the stem": Learn / Train / Explore / Studio (plus Home, at the foot, inside a room).
+// ================================================================
+const ROOMS_LIST = [["learn", "Learn"], ["gym", "Train"], ["explore", "Explore"], ["studio", "Studio"]];
+const ROOMS_GLYPH = sv('<circle cx="5.5" cy="18.5" r="2.4"/><circle cx="7.5" cy="11.2" r="2.4"/><circle cx="12.6" cy="6" r="2.4"/><circle cx="19.5" cy="4.6" r="2.4"/>', 24, 1.6);
+const HOME_GLYPH = sv('<path d="M12 3l7 4v10l-7 4-7-4V7z"/>', 24, 1.6);
+// a cheap, decorative stand-in for "a strip of the dimmed honeycomb" above a room (the real canvas doesn't
+// survive a screen swap, since #app is fully re-rendered each time — see show() above)
+const ROOM_PEEK_BARS = Array.from({ length: 16 }, (_, i) => `<i style="background:${lchHex(50 + (i % 3) * 9, 46, (i * 23) % 360)}"></i>`).join("");
+function roomChrome(inner, tab) {
+  return `<div class="room-floor-peek" data-floor-peek>${ROOM_PEEK_BARS}</div><div class="room-sheet" data-room="${tab}">${inner}</div><button class="corner l" data-rooms-corner aria-label="Rooms">${ROOMS_GLYPH}</button>`;
+}
+let STEM_OPEN = false;
+function roomsBubbleArt(id) {
+  if (id === "learn") {
+    const due = (typeof dueList === "function" ? dueList() : []).slice(0, 8);
+    const cols = (due.length ? due : ALL.slice(0, 8)).map(c => c.h);
+    return `<span class="rm-art rm-art-strip">${cols.map(h => `<i style="background:${h}"></i>`).join("")}</span>`;
+  }
+  if (id === "gym") return `<span class="rm-art" style="background:conic-gradient(from 0deg,#ff3b30,#ffcc00,#4cd964,#34c8e0,#3b5bff,#c644fc,#ff3b30)"></span>`;
+  if (id === "explore") return `<span class="rm-art" style="background:linear-gradient(135deg,#2C4F6F,#8E9C8A 60%,#F0DFBC)"></span>`;
+  return `<span class="rm-art" style="background:radial-gradient(circle,#8a8a8a 0,rgba(138,138,138,0) 68%),conic-gradient(#ff3b30,#ffcc00,#4cd964,#34c8e0,#3b5bff,#c644fc,#ff3b30)"></span>`;
+}
+function roomsNote(id) {
+  try {
+    if (id === "learn") { const n = dueList().length; return n ? `${n} to recall` : "All caught up"; }
+    if (id === "gym" && typeof todayTrain === "function") return todayTrain().what;
+    if (id === "explore") return "Browse by color";
+    if (id === "studio") return "Wheel, camera, palettes";
+  } catch (e) {}
+  return "";
+}
+function closeStem() {
+  const s = document.querySelector(".rooms-stem");
+  STEM_OPEN = false;
+  document.body.classList.remove("stem-open");
+  document.querySelectorAll("[data-rooms-corner]").forEach(b => { b.classList.remove("on"); b.innerHTML = ROOMS_GLYPH; });
+  if (!s) return;
+  if (reduceMotion) { s.remove(); return; }
+  s.classList.remove("on");
+  setTimeout(() => s.remove(), 260);
+}
+function toggleStem(cornerEl) {
+  if (STEM_OPEN) return closeStem();
+  if (document.querySelector(".sheet,.scrim")) return;   // a sheet is already up; don't stack chrome on chrome
+  buzz(4);
+  STEM_OPEN = true;
+  document.body.classList.add("stem-open");
+  const inRoom = !!document.querySelector(".room-sheet");
+  const items = (inRoom ? [["home", "Home"]] : []).concat(ROOMS_LIST);
+  const stem = document.createElement("div");
+  stem.className = "rooms-stem";
+  stem.innerHTML = items.map(([id, label], i) => `
+    <button class="rm-bubble" data-room="${id}" style="--i:${i}">
+      ${id === "home" ? `<span class="rm-art rm-art-home">${HOME_GLYPH}</span>` : roomsBubbleArt(id)}
+      <span class="rm-label"><b>${esc(label)}</b><em>${esc(id === "home" ? "Back to the honeycomb" : roomsNote(id))}</em></span>
+    </button>`).join("");
+  document.body.appendChild(stem);
+  document.querySelectorAll("[data-rooms-corner]").forEach(b => { b.classList.add("on"); b.innerHTML = ICON.x; });
+  requestAnimationFrame(() => requestAnimationFrame(() => stem.classList.add("on")));
+  stem.querySelectorAll("[data-room]").forEach(b => b.onclick = () => {
+    const id = b.dataset.room;
+    closeStem();
+    if (id === "home") return roomToFloor(b.querySelector(".rm-art"));
+    growFrom(b.querySelector(".rm-art"), () => go(id));
+  });
+}
+document.addEventListener("click", e => { const b = e.target.closest && e.target.closest("[data-rooms-corner]"); if (b) toggleStem(b); });
+// tapping the dimmed strip at the top of a room is the same as Rooms → Home
+document.addEventListener("click", e => { const b = e.target.closest && e.target.closest("[data-floor-peek]"); if (b) roomToFloor(b.querySelector("i")); });
+
+// ---------- the signature motion (DESIGN-SYSTEM.md §8): "a bubble becomes its page" ----------
+// growFrom(sourceEl, renderFn): sourceEl is the tapped shape (a circle bubble or a square chip/swatch).
+// renderFn() renders the destination (typically a show() call) and must return its root element; that element
+// (or its nearest .room-sheet) grows from sourceEl's rect to fill the screen via an animated clip-path, so the
+// tapped shape visually becomes the page. Reusable anywhere a bubble/chip/swatch opens a new screen — not just
+// the four rooms. Reduced Motion gets the plain cross-fade show() already does, with no extra growth.
+function growFrom(sourceEl, renderFn) {
+  if (!sourceEl || reduceMotion) return renderFn();
+  const r = sourceEl.getBoundingClientRect();
+  if (!r.width || !r.height) return renderFn();
+  const rad0 = Math.abs(r.width - r.height) < 2 ? r.width / 2 : 4;
+  const el = renderFn();
+  if (!el) return el;
+  const root = el.closest(".room-sheet") || el;
+  const W = innerWidth, H = innerHeight;
+  const clip = (t, ri, b, l, rad) => `inset(${t}px ${ri}px ${b}px ${l}px round ${rad}px)`;
+  root.style.clipPath = clip(r.top, W - r.right, H - r.bottom, r.left, rad0);
+  root.style.willChange = "clip-path";
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    root.style.transition = "clip-path var(--grow) var(--ease-grow)";
+    root.style.clipPath = clip(0, 0, 0, 0, 0);
+  }));
+  setTimeout(() => { root.style.transition = ""; root.style.clipPath = ""; root.style.willChange = ""; }, 460);
+  return el;
+}
+// shrinkTo: the reverse (340ms), into targetEl's current rect — a room sinking back into its bubble, or into
+// the Rooms corner for "Home". after() runs once the shrink finishes (usually the call that swaps the screen).
+function shrinkTo(root, targetEl, after) {
+  if (!root || reduceMotion || !targetEl || !targetEl.isConnected) { if (after) after(); return; }
+  const r = targetEl.getBoundingClientRect(), W = innerWidth, H = innerHeight;
+  const rad0 = Math.abs(r.width - r.height) < 2 ? r.width / 2 : 4;
+  root.style.transition = "clip-path var(--shrink) var(--ease-shrink)";
+  root.style.clipPath = `inset(${Math.max(0, r.top)}px ${Math.max(0, W - r.right)}px ${Math.max(0, H - r.bottom)}px ${Math.max(0, r.left)}px round ${rad0}px)`;
+  setTimeout(() => { if (after) after(); }, 340);
+}
+// Room → Home: the current room shrinks into the Rooms corner (its "bubble" when there's no stem bubble to
+// target — e.g. a swipe-down or a tap on the floor-peek strip), then the floor takes over.
+function roomToFloor(targetEl) {
+  const cur = document.querySelector(".room-sheet"), corner = document.querySelector("[data-rooms-corner]");
+  if (cur) shrinkTo(cur, targetEl && targetEl.isConnected ? targetEl : corner, () => hmHome());
+  else hmHome();
 }
 // Back gesture / browser back: close a sheet or panel first; otherwise press the screen's own back or close
 // button (so each screen keeps its own idea of "back"); with none, return to the current tab's home.
 let HIST_POP = false;
 addEventListener("popstate", e => {
   if (!e.state && /^#\/./.test(location.hash)) return;   // a typed or linked address, not Back: router.js opens it
+  if (STEM_OPEN) { closeStem(); try { history.pushState({ ch: 1 }, "", ROUTE_NOW || undefined); } catch (e) {} return; }
   const over = document.querySelector(".peek [data-back], .sheet");
   if (over) { if (over.matches(".sheet")) document.querySelector(".scrim")?.dispatchEvent(new PointerEvent("pointerdown")); else over.click(); try { history.pushState({ ch: 1 }, "", ROUTE_NOW || undefined); } catch (e) {} return; }
   const btn = app.querySelector("[data-back], [data-close]");
   HIST_POP = true;
-  try { if (btn) btn.click(); else if (!app.querySelector(".tabbar")) go(S.tab || "learn"); } finally { HIST_POP = false; }
+  // a Room is the new "base" screen (replaces the old tab-bar check): with no back/close button and no room
+  // showing, we're already as deep as the browser's own history can take us, so let it do its default thing.
+  try { if (btn) btn.click(); else if (!app.querySelector(".room-sheet")) go(S.tab || "learn"); } finally { HIST_POP = false; }
 });
 function go(tab) {
   S.tab = tab; save();
@@ -365,9 +477,10 @@ function go(tab) {
   if (tab === "gym") return gymHome();
   if (tab === "explore") return exploreHome();
   if (tab === "studio") return studio();
-  // The Today tab renders the honeycomb home (ROADMAP.md §12); js/learn.js's own home() is the classic Today
-  // screen and still runs the bottom sheet's "Today" panel and every deep "Home" button after a deck or review.
-  return typeof hmHome === "function" ? hmHome() : home();
+  // Learn is the first Room (DESIGN-SYSTEM.md §2): Today folds into it (js/learn.js home()). The honeycomb
+  // floor itself is a separate place now — reached via hmHome(), the Rooms corner's Home bubble, or "#/home" —
+  // not a tab, so go() never lands there.
+  return home();
 }
 const dailyDone = () => !!(S.daily && S.daily[today()]);
 addEventListener("keydown", e => { if (onKey && !e.metaKey && !e.ctrlKey) onKey(e); });
@@ -406,18 +519,20 @@ function sheet(html) {
   // drag the sheet down (from the grab bar, or anywhere once it's scrolled to the top) to close. Touch uses touch events
   // and claims the gesture (preventDefault) only for a downward drag at the top: with pointer events alone, iOS starts
   // its own scrolling, cancels the pointer, and the sheet snaps back (David: "swiping down doesn't close it").
-  let y0 = null, x0 = 0, dy = 0, t0 = 0, on = false;
+  let y0 = null, x0 = 0, dy = 0, t0 = 0, on = false, lastScroll = 0;
+  sh.addEventListener("scroll", () => { lastScroll = performance.now(); }, { passive: true });
   const end = () => {
     if (y0 == null) return; y0 = null;
-    const fast = dy > 40 && dy / Math.max(1, performance.now() - t0) > .5;
-    if (on && (dy > 90 || fast)) return close();
+    const fast = dy > 60 && dy / Math.max(1, performance.now() - t0) > .7;
+    if (on && (dy > 120 || fast)) return close();
     on = false; sh.style.transition = "transform .3s var(--ease)"; sh.style.transform = "";
   };
-  const start = (x, y, target) => { if (target.closest("input,textarea,select,input[type=range]") || (sh.scrollTop > 0 && !target.closest(".grab"))) return; y0 = y; x0 = x; dy = 0; on = false; t0 = performance.now(); };
+  // a drag that starts while the sheet is scrolled (or still gliding to the top) is scrolling, never a close
+  const start = (x, y, target) => { if (target.closest("input,textarea,select,input[type=range]") || ((sh.scrollTop > 0 || performance.now() - lastScroll < 180) && !target.closest(".grab"))) return; y0 = y; x0 = x; dy = 0; on = false; t0 = performance.now(); };
   const move = (x, y, e) => {
     if (y0 == null) return;
     const d = y - y0;
-    if (!on) { if (d > 6 && d > Math.abs(x - x0) && sh.scrollTop <= 0) on = true; else if (d < -6 || Math.abs(x - x0) > 10) { y0 = null; return; } else return; }
+    if (!on) { if (d > 12 && d > Math.abs(x - x0) * 1.5 && sh.scrollTop <= 0) on = true; else if (d < -6 || Math.abs(x - x0) > 10) { y0 = null; return; } else return; }
     if (e && e.cancelable) e.preventDefault();
     dy = Math.max(0, d); sh.style.transition = "none"; sh.style.transform = `translateY(${dy}px)`;
   };

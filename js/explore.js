@@ -367,7 +367,7 @@ function colorPage(n, tapped) {
   const c = n.c, w = n.wiki, nb = neighbor(c), st = c.id && S.cards[c.id], mine = isMine(st);
   tapped = tapped ? String(tapped).toUpperCase() : null;
   const heroHex = tapped || c.h;
-  const status = tapped ? `Your color · ${closeness(de2000(tapped, c.h))} to ${c.n}`
+  const status = tapped ? `Your color · ${pctMatch(de2000(tapped, c.h))} to ${c.n}`
     : c.basic ? "A basic color word" : st ? (mine ? "Yours" : st.own || st.placed ? "In your reviews" : "Learning") : `New to you${c.unit ? ", from " + unitLabel(c.unit) : ""}`;
   const saved = isSaved(n.id);
   // the strip: a tapped color compares against the page it landed on; otherwise this color, its authored
@@ -414,7 +414,7 @@ function colorPage(n, tapped) {
       if (typeof nearestCore === "function") {
         const list = CORE_NAMES || (typeof coreFallback === "function" ? coreFallback() : []);
         const near = nearestCore(tapped || c.h, list, 7).filter(x => x.n.toLowerCase() !== c.n.toLowerCase()).slice(0, 6);
-        if (near.length) secs.push(["nearnames", "Nearest names", `<div class="lk-list">${near.map(x => `<button class="lk-row" data-cp-near="${esc(x.n)}" data-h="${x.h}"><i style="--c:${x.h}"></i><b>${esc(x.n)}</b><span>${closeness(x.de)} · ΔE ${x.de.toFixed(1)}</span></button>`).join("")}</div>`]);
+        if (near.length) secs.push(["nearnames", "Nearest names", `<div class="lk-list">${near.map(x => `<button class="lk-row" data-cp-near="${esc(x.n)}" data-h="${x.h}"><i style="--c:${x.h}"></i><b>${esc(x.n)}</b><span>${closeness(x.de)} · ${pctDiff(x.de)}</span></button>`).join("")}</div>`]);
       }
       secs.push(["codes", "Codes", `<div class="cp-codes">${codeRows(c.h).map(([k, v]) => `<button class="cp-code-row" data-copy="${esc(v)}"><span>${esc(k)}</span><b class="mono">${esc(v)}</b></button>`).join("")}</div>${codeRows(c.h).some(r => r[0].startsWith("CMYK")) ? `<p class="fine cp-codes-fine">CMYK here is a rough formula, not a print profile: real values depend on the paper and press, so check them in a print workflow with a proof.</p>` : ""}`]);
       return (w ? "" : `<p class="fine">The full page for ${esc(c.n)} is being written. Its connections below are already live.</p>`) + tocHTML(secs.map(x => [x[0], x[1]])) + secs.map(x => secHTML(x[0], x[1], x[2], false)).join("");

@@ -14,7 +14,7 @@
 // "temp" (warmer or cooler) was retired; its history stays in storage.
 const SKILLS = {
   hue:     { name: "Odd one out", what: "Find the tile that's slightly off", unit: "ΔE", start: 12, top: .8, floor: .5, trials: 12,
-    why: "Scores use CIEDE2000, which already allows for the eye seeing some hues more finely than others, so a 2 should be about as hard in yellows as in deep blues." },
+    why: "Scores use CIEDE2000, which already allows for the eye seeing some hues more finely than others, so a 2% difference should be about as hard in yellows as in deep blues." },
   value:   { name: "Which is lighter?", what: "Two different hues: tap the lighter", unit: "ΔL*", start: 14, top: 1, floor: .5, trials: 12,
     why: "Josef Albers reported that his students, even advanced painters, picked wrong about 60% of the time when asked which of two colors was darker.",
     src: "Josef Albers, Interaction of Color (1963), from his own classes over several years; a teacher's report, not a controlled study" },

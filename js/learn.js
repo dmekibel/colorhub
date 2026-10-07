@@ -113,9 +113,12 @@ function deck(mode, opts = {}) {
     </header>
     <div class="stage" id="stage"></div>
     <footer class="deck-foot" id="foot"></footer>
-  `, "fixed deck");
+  `, "fixed deck" + (opts.cls ? " " + opts.cls : ""));
   const stage = el.querySelector("#stage"), foot = el.querySelector("#foot"), left = el.querySelector("#left");
-  el.querySelector("[data-close]").onclick = () => { ended = true; S.placed ? home() : welcome(); };
+  // opts.onClose: a caller outside the path (Learn it's instant lesson) can send ✕/Escape somewhere other
+  // than home — a small, additive hook, never used by the real path or daily review.
+  const closeTo = opts.onClose || (() => S.placed ? home() : welcome());
+  el.querySelector("[data-close]").onclick = () => { ended = true; closeTo(); };
 
   const keyOfItem = it => it.c.id + "|" + it.dir + (it.kind ? "|" + it.kind : "");
   const plain = it => ({ c: it.c, dir: it.dir });
@@ -250,12 +253,15 @@ function deck(mode, opts = {}) {
     if (ended) return;
     ended = true;
     const firstRight = [...first.values()].filter(Boolean).length;
+    // opts.onFinish: a lesson that isn't a real path unit (Learn it) ends here instead of learnUnit()'s own
+    // S.done bookkeeping and the full unitDone() screen — minimal and additive, the real path is untouched.
+    if (opts.onFinish) return opts.onFinish(firstRight, first.size);
     if (mode === "learn") { learnUnit(opts.unit); return unitDone(opts.unit, firstRight, first.size); }
     return reviewDone(firstRight, first.size);
   }
 
   onKey = e => {
-    if (e.key === "Escape") { ended = true; return S.placed ? home() : welcome(); }
+    if (e.key === "Escape") { ended = true; return closeTo(); }
     if (prod) return prod.key(e);
     if (!revealed && (e.key === " " || e.key === "Enter")) { e.preventDefault(); reveal(); }
     else if (revealed && (e.key === "ArrowRight" || e.key === "l")) fly(true);
@@ -424,6 +430,12 @@ function todayTrain() {
     return { done, art: stationArt(sg.k), what: SKILLS[sg.k].name, open: () => runDrill(sg.k) };
   } catch (e) { return { done: false, art: "", what: "Eye training", open: () => go("gym") }; }
 }
+// The weekday, for the Learn room's header note ("Wednesday") — a day starts at 4am (today(), core.js), so a
+// late-night session still shows the day it feels like.
+const weekdayName = () => new Date(Date.now() - 4 * 3600e3).toLocaleDateString(undefined, { weekday: "long" });
+// Today folds into Learn (DESIGN-SYSTEM.md §2, §12): this is the Learn room, entered by the signature motion
+// from the Rooms stem or a swipe up from Home. Its first block is what used to be the separate "Today" screen;
+// below it, "the path" draws every unit as its own color (ROADMAP §1, told in color instead of icons).
 function home() {
   if (!S.placed) return welcome();
   const due = dueList(), nu = nextUnit(), owned = ownedCount(), dc = dailyColor(), dAns = S.daily[today()];
@@ -436,14 +448,14 @@ function home() {
   let h;
   if (due.length) {
     const p = due.slice(0, 12);
-    h = { kick: `Daily review — ${due.length} to recall`, title: due.length === 1 ? "One to <em>recall</em>" : `${due.length} to <em>recall</em>`, plates: p,
-      meta: [`${due.length} names`, nu ? `then ${esc(nu.title)}` : "keep them yours"], cta: "Begin the review", act: "review" };
+    h = { title: due.length === 1 ? "One to <em>recall</em>" : `${due.length} to <em>recall</em>`, plates: p,
+      note: nu ? `Then ${esc(nu.title)}, ${nu.colors.length} new names` : "Keep them yours", cta: "Begin", act: "review" };
   } else if (nu) {
     const p = nu.colors.slice().sort((a, b) => lab(b.h)[0] - lab(a.h)[0]);
-    h = { kick: `N° ${pad2(nu.i + 1)} of ${UNITS.length} — ${esc(D.tiers[nu.tier].name)}`, title: edTitle(nu.title), plates: p,
-      meta: [`${nu.colors.length} new names`, `≈ ${Math.max(2, Math.round(nu.colors.length * 15 / 60))} min`], cta: UNITS.some(u => S.done[u.id]) ? "Continue the path" : "Begin the path", act: "learn" };
+    h = { title: edTitle(nu.title), plates: p,
+      note: `${nu.colors.length} new names · about ${Math.max(2, Math.round(nu.colors.length * 15 / 60))} min`, cta: "Begin", act: "learn" };
   } else {
-    h = { kick: "All caught up", title: "The path is <em>complete</em>", plates: mine.slice(0, 12), meta: ["more tiers are coming"], cta: "", act: "" };
+    h = { title: "The path is <em>complete</em>", plates: mine.slice(0, 12), note: "More tiers are coming", cta: "", act: "" };
   }
   // Today's three: the same quiet tile for each, a small picture, a name, and a done / not done line
   const chR = challengeRounds(), chD = chToday(), tr = todayTrain();
@@ -453,23 +465,32 @@ function home() {
     { a: "data-daily", done: !!dAns, name: "Today's color", st: dAns ? esc(dc.n) : "Name it",
       art: `<span class="tday-art" data-morph-src style="background:${dc.h}"></span>` },
     { a: "data-train", done: tr.done, name: "Train", st: tr.done ? "Trained today" : esc(tr.what), art: `<span class="tday-art tday-sa">${tr.art}</span>` }];
-  const nDone = tiles.filter(t => t.done).length;
+  // the path: a column of units drawn as their own colors — finished (solid, "Yours"), current (large, named),
+  // future (a thin line, waiting)
+  const pathRows = UNITS.map(u => {
+    const cols = u.colors.map(c => c.h);
+    const band = (extra) => `<div class="path-band ${extra}">${cols.map(hx => `<i style="background:${hx}"></i>`).join("")}</div>`;
+    if (S.done[u.id]) return `<div class="path-row path-done">${band("path-band-done")}<div class="path-cap"><span class="title-3">${esc(u.title)}</span><span class="note">Yours</span></div></div>`;
+    if (nu && u.id === nu.id) return `<div class="path-row path-current">${band("path-band-current")}<div class="path-cap"><span class="title-2">${esc(u.title)}</span><span class="note">Next, about ${Math.max(2, Math.round(u.colors.length * 15 / 60))} min</span></div></div>`;
+    return `<div class="path-row path-future">${band("path-band-future")}<div class="path-cap"><span class="title-3 path-future-name">${esc(u.title)}</span></div></div>`;
+  }).join("");
   const el = show(`
-    ${tabHead()}
-    <p class="eyebrow kick">${h.kick}</p>
-    <h1>${h.title}</h1>
+    <header class="room-head"><h1 class="title-1">Learn</h1><span class="note">${esc(weekdayName())}</span></header>
     ${h.plates.length ? `<button class="plates" data-go aria-label="Start">${h.plates.map((c, k) => `<i style="--c:${c.h};--k:${k}"></i>`).join("")}</button>` : ""}
-    <div class="meta-line">${h.meta.map(m => `<span>${m}</span>`).join("")}</div>
-    ${h.cta ? `<button class="btn" data-${h.act}>${h.cta} ${ICON.arrow}</button>` : ""}
-    <div class="sec-head today-head"><b>Today's three</b><span>${nDone === 3 ? "All done" : `${nDone} of 3 done`}</span></div>
-    <div class="trio">${tiles.map(t => `<button class="tday${t.done ? " done" : ""}" ${t.a}>${t.art}<b>${t.name}</b><span class="tday-st">${t.st}</span></button>`).join("")}</div>
+    <h2 class="title-1" style="margin-top:18px">${h.title}</h2>
+    <p class="note" style="margin-top:6px">${h.note}</p>
+    ${h.cta ? `<button class="btn" data-${h.act} style="margin-top:20px">${h.cta} ${ICON.arrow}</button>` : ""}
+    <div class="trio" style="margin-top:32px">${tiles.map(t => `<button class="tday${t.done ? " done" : ""}" ${t.a}>${t.art}<b>${t.name}</b><span class="tday-st">${t.st}</span></button>`).join("")}</div>
+    <h3 class="title-3" style="margin-top:32px">The path</h3>
+    <div class="path-list">${pathRows}</div>
     <button class="collection" data-palette aria-label="Your collection">
-      <div class="coll-head"><span class="eyebrow">Your collection</span><span class="coll-n"><b data-count="${owned}">${owned}</b><small>/${ALL.length}</small></span></div>
+      <div class="coll-head"><span class="note">Your collection</span><span class="coll-n"><b data-count="${owned}">${owned}</b><small>/${ALL.length}</small></span></div>
       <div class="quilt">${quilt}</div>
       <div class="coll-foot"><span>${ownFoot()}</span><span>Spectrum →</span></div>
     </button>
     ${installHint()}
-  `, "home", "learn");
+    <button class="qrow" data-menu style="margin-top:8px">Settings & more<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+  `, "home room-learn", "learn");
   wireInstall(el);
   const go1 = () => due.length ? deck("review") : nu ? meet(nu) : null;
   el.querySelectorAll("[data-review],[data-learn],[data-go]").forEach(b => b.onclick = go1);
@@ -477,6 +498,7 @@ function home() {
   el.querySelector("[data-daily]").onclick = () => daily();
   el.querySelector("[data-challenge]").onclick = () => chToday() ? challengeDone() : challenge();
   el.querySelector("[data-train]").onclick = tr.open;
+  el.querySelector("[data-menu]").onclick = () => menu();
   onKey = e => { if (e.key === "Enter") go1(); };
 }
 

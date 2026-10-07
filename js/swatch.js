@@ -76,7 +76,7 @@ function nameSheet(hex) {
       <button class="cp-link" data-sw-copy>Copy hex</button>
     </div>
     ${also.length || notes.length ? `<details class="cp-details"><summary><span>Details</span><i></i></summary><div class="cp-details-body">
-        <p>${closeness(nm.de)} to ${esc(nm.n)} · ΔE ${nm.de.toFixed(1)}</p>
+        <p>${closeness(nm.de)} to ${esc(nm.n)} · ${pctDiff(nm.de)}</p>
         ${also.length ? `<p>Also called ${also.map(esc).join(", ")}.</p>` : ""}
         ${notes.length ? `<p>${jpNoteLine(notes)}</p>` : ""}
       </div></details>` : ""}
