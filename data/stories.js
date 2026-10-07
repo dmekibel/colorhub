@@ -145,7 +145,7 @@ window.STORIES = [
     { v: { t: "type", word: "porphyrogennetos", sub: "Greek: born in the purple" },
       text: "In Constantinople, children born to a reigning emperor were [[royal-purple|'born in the purple']], delivered in a palace room lined with purple stone. The phrase still means royal by birth." },
     { v: { t: "row", items: [{ h: "#66023C" }, { h: "#702963" }, { h: "#8E4585" }, { h: "#3D0734" }] },
-      text: "Rich, lasting purple stayed a luxury for centuries. Then in 1856 an 18-year-old chemist made one from coal tar by accident. That story is [[mauveine|Mauveine and the first synthetic dyes]]." }
+      text: "Rich, lasting purple stayed a luxury for centuries. Then in 1856 an 18-year-old chemist made one from coal tar by accident. That story is [[mauveine|Mauveine and the aniline dyes]]." }
   ],
   colors: ["Byzantium", "Plum", "Aubergine", "Lilac"],
   links: ["tyrian-purple", "royal-purple", "mauveine"],
@@ -175,7 +175,7 @@ window.STORIES = [
     { v: { t: "big", n: "36", sub: "Perkin's age when he sold up" },
       text: "[[william-perkin|Perkin]] wasn't the first to coax a dye out of coal-tar chemicals, but he was the first to build an industry on one. He sold the business at 36 and went back to research." },
     { v: { t: "pair", a: { h: "#8D029B", label: "mauve in 1856" }, b: { h: "#A8778F", label: "mauve today" } },
-      text: "The name outlived the color. Today's [[Mauve|mauve]] is a dusty pink-purple, nothing like Perkin's electric violet. More in [[mauveine|Mauveine and the first synthetic dyes]]." }
+      text: "The name outlived the color. Today's [[Mauve|mauve]] is a dusty pink-purple, nothing like Perkin's electric violet. More in [[mauveine|Mauveine and the aniline dyes]]." }
   ],
   colors: ["Mauve", "Magenta"],
   links: ["mauveine", "william-perkin", "tyrian-purple"],
@@ -588,7 +588,7 @@ window.STORIES = [
   cover: ["#F2C81F", "#1F3A93", "#D62F2F", "#2E9A4F"],
   slides: [
     { v: { t: "wheel", base: "#F2C81F", scheme: "complementary" },
-      text: "Colors facing each other on the wheel are complements: red and green, blue and orange, yellow and violet. Side by side, each makes the other look stronger. [[complementary-colors|Complementary colors]]" },
+      text: "Colors facing each other on the painter's wheel are complements: red and green, blue and orange, yellow and violet. Side by side, each makes the other look stronger. [[complementary-colors|Complementary colors]]" },
     { v: { t: "quote", q: "the terrible passions of humanity by means of red and green", by: "Vincent van Gogh, 1888" },
       text: "In 1888 [[van-gogh|Van Gogh]] painted an all-night café in Arles: blood-red walls, a green billiard table, yellow lamps. He wrote to his brother Theo that he wanted the clash of red and green to carry the feeling." },
     { v: { t: "pair", a: { h: "#D62F2F", label: "red" }, b: { h: "#2E9A4F", label: "green" } },

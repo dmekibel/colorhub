@@ -46,7 +46,7 @@ units: [
 { id:"t2-purples", tier:2, title:"Purples", colors:[
   {n:"Lavender", h:"#BFA2E8", src:"pick", vs:"Lilac", d:"Bluer and brighter than lilac.", o:"Named after the lavender flower."},
   {n:"Lilac", h:"#C8A2C8", src:"wiki", vs:"Lavender", d:"Pinker and greyer than lavender.", o:"After the lilac flower."},
-  {n:"Mauve", h:"#A8778F", src:"pick", vs:"Lilac", d:"A dusty pink-purple, darker and pinker than lilac.", o:"French for the mallow flower. In 1856 an 18-year-old chemist, William Perkin, made mauveine, the first aniline dye, and mauve became a craze."},
+  {n:"Mauve", h:"#A8778F", src:"pick", vs:"Lilac", d:"A dusty pink-purple, darker and pinker than lilac.", o:"French for the mallow flower. In 1856 an 18-year-old chemist, William Perkin, trying to make the malaria drug quinine, made mauveine, the first aniline dye, and mauve became a craze."},
   {n:"Plum", h:"#8E4585", src:"wiki", vs:"Mauve", d:"Deeper and richer than mauve.", o:"After the fruit's skin."},
   {n:"Violet", h:"#8000FF", src:"wiki", vs:"Indigo", d:"A vivid blue-purple, far brighter than indigo.", o:"Named after the flower. Newton's first spectrum ended in 'purple'; he later called the far end violet."},
   {n:"Indigo", h:"#3D2B8E", src:"pick", vs:"Violet", d:"Darker and bluer than violet.", o:"From the plant dye; the name is Greek for 'from India'. Newton added it to the rainbow probably to get seven colors, one for each note of the musical scale."}
@@ -75,13 +75,13 @@ units: [
   {n:"Cerulean", h:"#007BA7", src:"wiki", vs:"Steel blue", d:"Greener than steel blue, leaning toward teal.", o:"From Latin caeruleus, sky blue. As a paint made of cobalt and tin it reached artists in the 1860s; Monet and Signac used it heavily."},
   {n:"Cobalt", h:"#0047AB", src:"pick", vs:"Denim", d:"A deep, vivid blue, much brighter than denim.", o:"Named for the kobold, a mine goblin blamed for poisoning Saxon silver miners. Thénard made it into a pure blue paint in 1802."},
   {n:"Steel blue", h:"#4682B4", src:"css", vs:"Azure", d:"Greyer and calmer than azure."},
-  {n:"Denim", h:"#3B638C", src:"xkcd", vs:"Cobalt", d:"Greyer and duller than cobalt, like worn jeans.", o:"Probably from French serge de Nîmes, a twill from Nîmes, though the origin is debated."},
+  {n:"Denim", h:"#3B638C", src:"xkcd", vs:"Cobalt", d:"Greyer and duller than cobalt, like worn jeans.", o:"Probably from French serge de Nîmes, a twill from Nîmes, though the origin is debated. Levi Strauss and Jacob Davis began making riveted indigo work trousers in 1873."},
   {n:"Petrol", h:"#005F6A", src:"xkcd", vs:"Teal", d:"Darker and bluer than teal."},
   {n:"Midnight blue", h:"#191970", src:"css", vs:"Navy", d:"Darker, richer and more violet than navy."}
 ]},
 { id:"t3-reds", tier:3, title:"Reds", colors:[
   {n:"Vermilion", h:"#E34234", src:"wiki", vs:"Scarlet", d:"A warm orange-red, softer than scarlet.", o:"Mercury sulfide red. The Romans ground it from cinnabar ore; from the Middle Ages it was made by heating mercury with sulfur. The name is Latin for 'little worm', after an insect dye."},
-  {n:"Carmine", h:"#960018", src:"wiki", vs:"Crimson", d:"A deep red, darker than crimson.", o:"Made from cochineal insects, about 70,000 to a pound of dye. It still colors food as E120."},
+  {n:"Carmine", h:"#960018", src:"wiki", vs:"Crimson", d:"A deep red, darker than crimson.", o:"Made from cochineal insects, tens of thousands of them for a pound of dye. It still colors food as E120."},
   {n:"Oxblood", h:"#4A0000", src:"wiki", vs:"Burgundy", d:"Darker than burgundy, a nearly black red."},
   {n:"Brick", h:"#A03623", src:"xkcd", vs:"Rust", d:"Darker and duller than rust, and a touch redder.", o:"The color of fired clay bricks."},
   {n:"Cerise", h:"#DE3163", src:"wiki", vs:"Crimson", d:"Pinker than crimson.", o:"French for cherry."},

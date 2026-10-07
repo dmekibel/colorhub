@@ -238,7 +238,7 @@ window.WIKI_NODES = [
     "A prism shows a ribbon running from [[Red|red]] to [[Violet|violet]]. Look for [[Magenta|magenta]] and it isn't there. No single wavelength of light looks magenta. You see it when light from both ends of the [[spectrum|spectrum]] arrives together, reddish and bluish, with little green between. Faced with that mix, the brain makes up a hue that closes the circle.",
     "Scientists draw this as the 'line of purples', the straight edge along the bottom of the horseshoe-shaped chart of every visible color. Everything along it, from [[Purple|purple]] to magenta, is non-spectral. It's why the [[color-wheel|color wheel]] can be a wheel at all: the purples join red back to violet.",
     "Other familiar colors are missing for other reasons. [[Pink|Pink]] is red mixed with white light, so no pure wavelength makes it (its meaning has flipped too: see [[pink-and-blue|pink for girls, blue for boys]]). [[Brown|Brown]] is dark orange or yellow, and it only exists in context: an orange spot of light in a dark room looks orange, but surround it with brighter white and it turns brown. [[Grey|Grey]] is white seen as dimmer than its surroundings. See [[simultaneous-contrast|simultaneous contrast]].",
-    "None of this makes magenta less real than green. Every hue is the brain's reading of three kinds of cone signals; see [[trichromacy|how eyes see color]]. Magenta just has no single wavelength behind it. Its name is young, too: the dye that first carried it, fuchsine, was renamed after the 1859 Battle of Magenta; see [[mauveine|the first synthetic dyes]].",
+    "None of this makes magenta less real than green. Every hue is the brain's reading of three kinds of cone signals; see [[trichromacy|how eyes see color]]. Magenta just has no single wavelength behind it. Its name is young, too: the dye that first carried it, fuchsine, was renamed after the 1859 Battle of Magenta; see [[mauveine|the aniline dyes]].",
     "Scientists have even made a color no one had seen. In 2025 a UC Berkeley team used lasers aimed at single cone cells to stimulate only the medium-wavelength cones, which no natural light can do, since every wavelength also tickles their neighbors. The five people who saw it described a blue-green of unprecedented saturation and named it olo. Some vision scientists question calling it a new color; it shows how much of color lives in [[trichromacy|the eye and brain]]."
   ],
   colors: ["Magenta", "Pink", "Brown", "Grey"],
@@ -289,7 +289,7 @@ window.WIKI_NODES = [
   id: "color-blindness", type: "concept", title: "Color blindness",
   dek: "About 8% of European men mix up some reds and greens. The first man to describe it left his eyes to science.",
   body: [
-    "Most color blindness isn't blindness to color. One cone type is missing or shifted, so some colors that look different to most people look alike. The common kind blurs [[Red|red]], [[Green|green]], [[Brown|brown]] and [[Orange|orange]]. About 8% of men and 0.5% of women of Northern European descent have red-green color deficiency. Men are hit far more often because the genes for the red and green cone pigments sit on the X chromosome. See [[trichromacy|how eyes see color]].",
+    "Most color blindness isn't blindness to color. One cone type is missing or shifted, so some colors that look different to most people look alike. The common kind blurs [[Red|red]], [[Green|green]], [[Brown|brown]] and [[Orange|orange]]. About 8% of men and 0.5% of women of Northern European descent have red-green color deficiency. Men are hit far more often because the genes for the long- and medium-wavelength cone pigments (loosely, 'red' and 'green') sit on the X chromosome. See [[trichromacy|how eyes see color]].",
     "The chemist John Dalton described his own case in 1794. He guessed the fluid inside his eyeball was tinted [[Blue|blue]] and asked for his eyes to be examined after his death. They were, and the fluid was clear. In 1995 scientists extracted DNA from his preserved eye and found he lacked the gene for the medium-wavelength (green) cone pigment, one of the three behind [[trichromacy|trichromacy]]. In French and Spanish the condition is still called daltonism.",
     "Testing began on the railways. After two trains collided at Lagerlunda in Sweden in 1875, the physiologist Frithiof Holmgren blamed staff who misread colored signal lamps. He tested thousands of railway workers by asking them to sort colored skeins of wool, and testing spread to railways and ships. Historians who later reread the trial records doubt color blindness caused that crash at all. The familiar dot plates came later, from Shinobu Ishihara in 1917, hiding numbers among dots of easily confused colors like [[Red|red]], [[Olive|olive]] and [[Brown|brown]].",
     "What about the opposite, super color vision? Some women carry genes for a fourth cone type, and articles claim they see 100 million colors. Lab tests are far more sober: in a 2010 Cambridge study of 24 such carriers, only one behaved like a true four-color viewer. Rare confirmed cases exist; most tetrachromacy claims are hype. [[james-clerk-maxwell|James Clerk Maxwell]] was among the first to measure color-blind vision with mixtures of colored light."
@@ -456,18 +456,18 @@ window.WIKI_NODES = [
 },
 {
   id: "optical-mixing", type: "concept", title: "Optical mixing",
-  dek: "Put tiny dots of blue and yellow side by side, step back, and your eye mixes a color that isn't there.",
+  dek: "Put tiny dots of color side by side, step back, and your eye blends them into one.",
   body: [
-    "Optical mixing happens when small patches of color sit so close that the eye can't separate them and blends them into one. Step back from dots of [[Blue|blue]] and [[Yellow|yellow]] and you see a mix that was never on the canvas. Your phone screen works this way: tiny red, green and blue lights fuse into every color. So does printing, with dots of cyan, [[Magenta|magenta]], yellow and black.",
+    "Optical mixing happens when small patches of color sit so close that the eye can't separate them and blends them into one. Step back from dots of [[Blue|blue]] and [[Yellow|yellow]] and they merge. Because the eye averages light, the blend comes out a soft warm grey, not the green you'd get by mixing the two paints. Your phone screen works this way: tiny red, green and blue lights fuse into every color. So does printing, with dots of cyan, [[Magenta|magenta]], yellow and black.",
     "In the 1880s Georges Seurat and Paul Signac turned this into a method, often called pointillism or divisionism. They had read [[chevreul|Chevreul]] on [[simultaneous-contrast|contrast]] and the American physicist Ogden Rood, whose Modern Chromatics (1879) discussed colors mixing in the eye. Seurat spent about two years on [[painting-grande-jatte|A Sunday on La Grande Jatte]], placing small strokes of separate colors side by side.",
     "The theory promised brighter color than mixing on the palette, since paint mixtures get duller, especially mixes of [[complementary-colors|complements]]. In practice the eye averages the dots, so from a distance divisionist paintings tend to look soft and a little muted. What they gain is shimmer: up close the dots vibrate against each other; far away they settle.",
     "Time has altered the dots too. Seurat used a new zinc yellow that has browned: strokes that were bright yellow now look like [[Ochre|ochre]], and greens have drifted toward [[Olive|olive]]. Researchers have built digital reconstructions of the brighter original. The looser broken color of the [[impressionism|Impressionists]] works on the same principle."
   ],
-  colors: ["Blue", "Yellow", "Moss"],
+  colors: ["Blue", "Yellow", "Grey"],
   swatches: [
     { h: "#2563C9", label: "Dots of blue..." },
     { h: "#F2C81F", label: "...and yellow..." },
-    { h: "#8A9A5B", label: "...read as soft green" }
+    { h: "#B3A095", label: "...average to a warm grey" }
   ],
   facts: [
     { label: "Method", value: "Pointillism, or divisionism" },
@@ -1263,7 +1263,7 @@ window.WIKI_NODES = [
   ]
 },
 {
-  id: "mauveine", type: "pigment", title: "Mauveine and the first synthetic dyes",
+  id: "mauveine", type: "pigment", title: "Mauveine and the aniline dyes",
   dek: "An 18-year-old chasing a malaria drug made purple instead, and launched the chemical industry.",
   body: [
     "In the Easter holidays of 1856, [[william-perkin|William Perkin]], an 18-year-old student of the chemist August Wilhelm von Hofmann, was trying to make quinine, the malaria drug, from coal-tar chemicals in his home lab in east London. One attempt left a black sludge. Cleaning it out with alcohol, he saw a vivid purple. It dyed silk and didn't wash out.",

@@ -513,7 +513,7 @@ window.WIKI_COLORS = {
   named: "material",
   since: { year: 1873, what: "Riveted blue jeans patented in the US", approx: false },
   facets: [
-    { k: "language", text: "Denim is short for serge de Nîmes, a twill named after the city in southern France. Jeans are named after Genoa, Gênes in French, whose tough cotton cloth was called jean." },
+    { k: "language", text: "Denim is probably short for serge de Nîmes, a twill named after the city in southern France, though the word's origin is debated. Jeans are named after Genoa, Gênes in French, whose tough cotton cloth was called jean." },
     { k: "history", text: "On May 20, 1873, Levi Strauss and the tailor Jacob Davis got a US patent for work pants with copper rivets at the pocket corners, where seams tore. The blue jean was born, dyed with [[indigo-dye|indigo]]." },
     { k: "science", text: "Jeans fade because indigo barely sticks. It coats the outside of each cotton yarn and leaves the core white. Wear rubs the blue away where you move: thighs, knees and pocket edges." }
   ],
@@ -1126,7 +1126,7 @@ window.WIKI_COLORS = {
   named: "flower",
   since: { year: 1775, what: "Lilac first used as a color word in English", approx: false },
   facets: [
-    { k: "language", text: "Lilac probably goes back to Persian lilak, a form of nilak, bluish, from nil, indigo, and Sanskrit nila, dark blue. Indigo's old name, anil, comes from the same root and gave chemistry the word aniline, the base of the first synthetic dyes like [[mauveine]]. Lilac is recorded as a color in English from 1775." },
+    { k: "language", text: "Lilac probably goes back to Persian lilak, a form of nilak, bluish, from nil, indigo, and Sanskrit nila, dark blue. Indigo's old name, anil, comes from the same root and gave chemistry the word aniline, the base of the first aniline dyes like [[mauveine]]. Lilac is recorded as a color in English from 1775." },
     { k: "poetry", text: "Walt Whitman's elegy for Abraham Lincoln, 'When Lilacs Last in the Dooryard Bloom'd' (1865), ties the flower to grief: the lilacs were in bloom that April when Lincoln was shot." },
     { k: "culture", text: "In British and European mourning customs, lilac belonged to the final stage, as black gave way to softer colors ([[mourning-colors]])." }
   ],
@@ -1197,7 +1197,7 @@ window.WIKI_COLORS = {
 "Indigo": {
   named: "plant",
   facets: [
-    { k: "language", text: "Indigo comes from Greek indikon, 'the Indian dye', because India supplied it to Europe. Its other old name, anil, from Arabic an-nil and Sanskrit nila, lives on in aniline, the chemical behind the first synthetic dyes, and probably in [[Lilac|lilac]]." },
+    { k: "language", text: "Indigo comes from Greek indikon, 'the Indian dye', because India supplied it to Europe. Its other old name, anil, from Arabic an-nil and Sanskrit nila, lives on in aniline, the chemical behind the first aniline dyes, and probably in [[Lilac|lilac]]." },
     { k: "history", text: "European woad and Indian Indigofera make the same blue molecule. The trade was brutal: in 1859 Bengal's farmers rose against European planters in the Indigo Revolt, and in colonial South Carolina, indigo grown by enslaved people became the second cash crop after rice. Adolf von Baeyer synthesized indigo in 1878, and BASF's factory indigo, from 1897, undercut the plantations. See [[indigo-dye]]." },
     { k: "philosophy", text: "[[isaac-newton|Newton]] first counted five colors in his prism. In the 1670s he added orange and indigo, making seven to match the musical scale. Many people today struggle to see indigo as its own band. See [[spectrum]]." }
   ],

@@ -53,7 +53,7 @@ nodes: [
   ["malachite-pigment", "pigment", "Malachite"],
   ["mummy-brown", "pigment", "Mummy brown"],
   ["saffron-dye", "pigment", "Saffron"],
-  ["mauveine", "pigment", "Mauveine and the first synthetic dyes"],
+  ["mauveine", "pigment", "Mauveine and the aniline dyes"],
   ["chrome-yellow", "pigment", "Chrome yellow"],
   ["yinmn-blue", "pigment", "YInMn blue"],
   ["vantablack", "pigment", "Vantablack and the blackest blacks"],
