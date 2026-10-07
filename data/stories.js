@@ -70,7 +70,7 @@ window.STORIES = [
   cover: ["#F07A1A", "#F28500", "#CC5500"],
   slides: [
     { v: { t: "swatch", h: "#E2702B", label: "a robin's breast" },
-      text: "Look at a robin. Its breast is plainly [[Orange|orange]]. So why is it a redbreast? Because the name dates from the 1400s, when orange wasn't a color word in English yet." },
+      text: "Look at a robin. Its breast is plainly [[Orange|orange]]. So why is it a redbreast? Because the name dates from the 1300s, when orange wasn't a color word in English yet." },
     { v: { t: "quote", q: "His colour was bitwixe yelow and reed", by: "Chaucer, The Nun's Priest's Tale" },
       text: "Chaucer, writing in the late 1300s, had the same problem with a fox. With no word for its fur, he called it something between [[Yellow|yellow]] and [[Red|red]]." },
     { v: { t: "type", word: "nāraṅga", sub: "Sanskrit: orange tree" },
@@ -91,7 +91,7 @@ window.STORIES = [
     "Oxford English Dictionary, orange (1502 colour sense), via Wikipedia, Orange (colour)",
     "Wikipedia, Orange (word): Sanskrit to Arabic to French, and loss of the initial n by rebracketing",
     "Chaucer, The Nun's Priest's Tale, Harvard Chaucer site (chaucer.fas.harvard.edu)",
-    "Etymonline, redbreast (15th century)",
+    "Etymonline, redbreast (early 14th century)",
     "Wikipedia, Puce (couleur puce, Marie Antoinette's court)"
   ]
 },
@@ -112,7 +112,7 @@ window.STORIES = [
     { v: { t: "big", n: "1930", sub: "Japan's first traffic lights" },
       text: "When traffic lights arrived, around 1930, the rules called the go light green. People called it ao anyway, and now the law itself says 'blue light'." },
     { v: { t: "pair", a: { h: "#2E9A4F", label: "green" }, b: { h: "#00A99D", label: "bluer green" } },
-      text: "A popular story says Japan then ordered the bluest green the rules allow, to fit the name. We couldn't find that order, so treat it as legend. The word problem is real. [[linguistic-relativity|Do words change what we see?]]" }
+      text: "Since the 1970s Japan's go lights have been made a bluer green. The story of a 1973 government order to match the name has no document behind it, so treat that part as legend. [[linguistic-relativity|Do words change what we see?]]" }
   ],
   colors: ["Green", "Blue"],
   links: ["basic-color-terms", "linguistic-relativity", "berlin-and-kay"],
@@ -150,7 +150,7 @@ window.STORIES = [
   colors: ["Byzantium", "Plum", "Aubergine", "Lilac"],
   links: ["tyrian-purple", "royal-purple", "mauveine"],
   sources: [
-    "Cooksey 2010, Preparation of Tyrian Purple (6,6'-Dibromoindigo): Past and Present, Molecules 15(8) (Friedländer 1909: 12,000 snails, 1.4 g)",
+    "Wolk & Frimer 2010, Preparation of Tyrian Purple (6,6'-Dibromoindigo): Past and Present, Molecules 15(8): 5473–5508 (Friedländer 1909: 12,000 snails, 1.4 g)",
     "Pliny the Elder, Natural History, Book 9 (the clotted-blood shade)",
     "Kropff 2016, An English translation of the Edict on Maximum Prices (Diocletian, 301 AD): purple silk 150,000, purple wool 50,000, gold 72,000 denarii per pound; farm labourer 25 a day",
     "Wikipedia, Born in the purple; Britannica, Constantine VII Porphyrogenitus"
@@ -167,7 +167,7 @@ window.STORIES = [
     { v: { t: "type", word: "quinine", sub: "what he was really after" },
       text: "He was trying to make quinine, the malaria drug, from chemicals in coal tar. He failed. What he got instead dyed silk a brilliant [[Purple|purple]] that didn't wash out." },
     { v: { t: "type", word: "mauve", sub: "French for the mallow flower" },
-      text: "He patented the dye that August and, against his teacher's advice, opened a factory near London in 1857 with his father's money. He named it after the French word for mallow: [[Mauve|mauve]]." },
+      text: "He patented the dye that August and, against his teacher's advice, opened a factory near London in 1857 with his father's money. By 1859 it was called [[Mauve|mauve]], the French word for mallow." },
     { v: { t: "big", n: "1859", sub: "London catches 'mauve measles'" },
       text: "By 1859 the color was everywhere. Punch magazine joked that London had caught the 'mauve measles', a rash of ribbons spreading across the city." },
     { v: { t: "row", items: [{ h: "#8D029B", label: "mauveine" }, { h: "#FF00FF", label: "magenta" }, { h: "#66023C", label: "snail purple" }] },
@@ -210,7 +210,7 @@ window.STORIES = [
   links: ["ultramarine-pigment", "vermeer", "painting-pearl-earring", "yves-klein"],
   sources: [
     "National Gallery, London, Michelangelo, The Entombment (catalogue entry on the missing ultramarine)",
-    "Vandivere et al. 2020, Out of the blue: Vermeer's use of ultramarine in Girl with a Pearl Earring, Heritage Science 8",
+    "van Loon, Vandivere et al. 2020, Out of the blue: Vermeer's use of ultramarine in Girl with a Pearl Earring, Heritage Science 8",
     "WebExhibits, Pigments through the Ages: Ultramarine (price, 1824 prize, Guimet 1828)",
     "Wikipedia, Ultramarine (Cennini's extraction method; Sar-i Sang)"
   ]
@@ -417,7 +417,7 @@ window.STORIES = [
     { v: { t: "type", word: "two as one", sub: "Albers' harder trick" },
       text: "His harder [[interaction-of-color|trick]]: make two different colors look the same. Put the lighter one on a light ground and the darker one on a dark ground, and they can meet in the middle." },
     { v: { t: "row", items: [{ h: "#C9A227", label: "outer" }, { h: "#D9B84A", label: "middle" }, { h: "#EBD27A", label: "inner" }] },
-      text: "From 1949 [[josef-albers|Albers]] painted hundreds of Homage to the Square pictures: three or four nested squares, each one testing how neighbors push and pull. On the back he listed the exact paints." },
+      text: "From 1950 [[josef-albers|Albers]] painted hundreds of Homage to the Square pictures: three or four nested squares, each one testing how neighbors push and pull. On the back he listed the exact paints." },
     { v: { t: "swatch", h: "#121212", label: "this app's frame" },
       text: "It's why this app keeps everything around a swatch a neutral dark grey. A colored frame would [[simultaneous-contrast|change]] the very color you're trying to learn." }
   ],
@@ -425,7 +425,7 @@ window.STORIES = [
   links: ["simultaneous-contrast", "josef-albers", "interaction-of-color", "value"],
   sources: [
     "Josef Albers 1963, Interaction of Color, Yale University Press",
-    "Wikipedia, Josef Albers (Bauhaus, Black Mountain College, Yale; Homage to the Square from 1949)",
+    "Wikipedia, Josef Albers (Bauhaus, Black Mountain College, Yale; Homage to the Square from 1950, per the Josef and Anni Albers Foundation)",
     "ColorHub DESIGN.md (neutral surround, ISO 3664 viewing standard)"
   ]
 },
@@ -473,8 +473,8 @@ window.STORIES = [
       text: "Part of it may be the judges. In a 2008 study, taekwondo referees watched bouts with the colors digitally swapped. The fighter in red scored more points, though the fighting was identical." },
     { v: { t: "swatch", h: "#FF91AF", label: "Baker-Miller pink" },
       text: "Then there's pink. In 1979 a researcher claimed this bubble-gum [[Pink|pink]] calmed aggressive inmates in a US Navy jail in Seattle. It became famous, and other jails painted cells to match." },
-    { v: { t: "big", n: "59", sub: "prisoners, pink or grey cells" },
-      text: "A careful test put 59 prisoners into pink or grey cells at random. Aggression fell over three days in both, with no difference by color. The calming pink didn't hold up. [[color-psychology|Color psychology, myths and evidence]]" },
+    { v: { t: "big", n: "59", sub: "prisoners, pink or white cells" },
+      text: "A careful test in Switzerland put 59 prisoners into pink or plain white cells at random. Aggression fell over three days in both, with no difference by color. The calming pink didn't hold up. [[color-psychology|Color psychology, myths and evidence]]" },
     { v: { t: "row", items: [{ h: "#D62F2F" }, { h: "#FF91AF" }, { h: "#2563C9" }] },
       text: "The pattern: [[color-psychology|color can nudge us a little]], in some settings, and the stories grow faster than the evidence. When someone says a color 'makes' you do something, ask for the study." }
   ],
@@ -498,8 +498,8 @@ window.STORIES = [
       text: "Picture a funeral and you probably see black. But for medieval European queens, the color of deepest mourning was white. [[mourning-colors|Colors of mourning]]" },
     { v: { t: "type", word: "deuil blanc", sub: "French: white mourning" },
       text: "The French called it deuil blanc, white mourning. A widowed queen dressed in [[White|white]], not black." },
-    { v: { t: "big", n: "1934", sub: "a Dutch queen brings back white" },
-      text: "It never quite died out. When Queen Wilhelmina of the Netherlands lost her husband in 1934, she revived white mourning, and the Dutch royal family has kept it since." },
+    { v: { t: "big", n: "1934", sub: "Dutch royals mourn in white" },
+      text: "It never quite died out. When Queen Wilhelmina's husband died in 1934, the Dutch court mourned in white, as he had asked. Dutch royals wore white again at later royal funerals, though not at every one." },
     { v: { t: "pair", a: { h: "#F7F6F2", label: "white" }, b: { h: "#16171A", label: "black" } },
       text: "In China, white has long been the color of death and mourning. [[Black]] mourning in Europe goes back to Rome, where mourners wore the toga pulla, a toga of dark wool." },
     { v: { t: "big", n: "1861–1901", sub: "Queen Victoria in mourning" },
@@ -514,7 +514,8 @@ window.STORIES = [
   links: ["mourning-colors"],
   sources: [
     "Wikipedia, Mourning (white as deepest mourning for medieval queens; Wilhelmina 1934; toga pulla; Victorian half mourning in lilac, grey and lavender; white in China)",
-    "Ashmolean Museum, The colour revolution in Victorian fashion (Victoria's widow's weeds, 1861 to 1901)"
+    "Ashmolean Museum, The colour revolution in Victorian fashion (Victoria's widow's weeds, 1861 to 1901)",
+    "Irish Times, 'Dutch mourn Queen Juliana at funeral' (2004): royals in white"
   ]
 },
 {
@@ -531,7 +532,7 @@ window.STORIES = [
         options: [{ label: "All said blue" }, { label: "All said pink" }, { label: "They disagreed" }], answer: 2,
         explain: "They disagreed: six stores said pink for boys, four said blue. There simply wasn't a settled rule yet." } },
     { v: { t: "row", items: [{ h: "#F4C2C2", label: "1823" }, { h: "#F28DB2", label: "1834" }, { h: "#F4C2C2", label: "1862" }] },
-      text: "But pink for girls is old too. Historians have found it in the Netherlands in 1823, France in 1834 and England in 1862. Different places had different habits, or none." },
+      text: "But pink for girls is old too. Old sources tie it to girls in the Netherlands in 1823, France in 1834 and England in 1862. Different places had different habits, or none." },
     { v: { t: "big", n: "1950s", sub: "when the code took over in the US" },
       text: "Historian Jo Paoletti found [[pink-and-blue|pink-and-blue coding]] known by the late 1860s, but not dominant in most of the US until the 1950s, and universal only a generation later." },
     { v: { t: "type", word: "urban legend?", sub: "the great pink flip" },
@@ -562,11 +563,11 @@ window.STORIES = [
     { v: { t: "big", n: "1710", sub: "the new blue goes public" },
       text: "It was the first modern synthetic [[prussian-blue|pigment]]: strong, cheap and lightfast. It appeared in print by 1710 and spread across Europe's studios." },
     { v: { t: "type", word: "bero-ai", sub: "Japanese: 'Berlin indigo'" },
-      text: "From 1820 it reached Japan through Dutch traders. Printmakers called it bero, after Berlin. Unlike the plant blues they had been using, it didn't fade." },
+      text: "By about 1829 it was reaching Japan cheaply, through Chinese and Dutch traders. Printmakers called it bero, after Berlin. Unlike the plant blues they had been using, it didn't fade." },
     { v: { t: "swatch", h: "#1F4E79", label: "the wave's blue" },
       text: "Hokusai went all in. The Great Wave, from around 1831, was among the first Japanese prints to feature Prussian blue. [[painting-great-wave|The Great Wave off Kanagawa]]" },
     { v: { t: "big", n: "8,000", sub: "impressions, by one estimate" },
-      text: "Woodblocks made it cheap to multiply: about 1,000 copies at first, perhaps 8,000 in all. More than a hundred first-edition impressions are known today." },
+      text: "Woodblocks made it cheap to multiply: perhaps 8,000 impressions in all. About 111 original impressions are known to survive today." },
     { v: { t: "row", items: [{ h: "#003153", label: "Prussian" }, { h: "#1C2B5A", label: "navy" }, { h: "#191970", label: "midnight" }] },
       text: "It has a second life as a medicine: it binds radioactive caesium in the gut, and doctors used it after Brazil's 1987 Goiânia radiation accident. Compare it with [[Navy|navy]] and [[Midnight blue|midnight blue]]." }
   ],
@@ -574,7 +575,9 @@ window.STORIES = [
   links: ["prussian-blue", "painting-great-wave"],
   sources: [
     "Wikipedia, Prussian blue (Diesbach c. 1706, first published 1710; antidote use after the Goiânia accident)",
-    "Wikipedia, The Great Wave off Kanagawa (bero-ai imported from 1820; first prints with Prussian blue; c. 1,000 then perhaps 8,000 impressions; 113 known first-edition impressions)"
+    "Wikipedia, The Great Wave off Kanagawa (first prints with Prussian blue)",
+    "Korenberg, C., 'The Great Wave: the making of an icon' (British Museum, 2020): up to 8,000 impressions, 111 located",
+    "Scholten Japanese Art, 'Blue printed pictures (aizuri-e)': Prussian blue cheap and plentiful from c. 1829"
   ]
 },
 // ---------------------------------------------------------------- harmony
@@ -589,11 +592,11 @@ window.STORIES = [
     { v: { t: "quote", q: "the terrible passions of humanity by means of red and green", by: "Vincent van Gogh, 1888" },
       text: "In 1888 [[van-gogh|Van Gogh]] painted an all-night café in Arles: blood-red walls, a green billiard table, yellow lamps. He wrote to his brother Theo that he wanted the clash of red and green to carry the feeling." },
     { v: { t: "pair", a: { h: "#D62F2F", label: "red" }, b: { h: "#2E9A4F", label: "green" } },
-      text: "Complements at equal brightness, side by side, both look more intense. Van Gogh wrote that they raise each other to a pitch the eye can scarcely bear. Mixed as paint, though, they cancel toward [[Grey|grey]]." },
+      text: "Complements at equal brightness, side by side, both look more intense. Van Gogh copied out a critic's line that they lift each other to an intensity the eye can scarcely bear. Mixed as paint, they cancel toward [[Grey|grey]]." },
     { v: { t: "pair", a: { h: "#2A4BA0", label: "blue" }, b: { h: "#F08A24", label: "orange" } },
       text: "The idea goes back to the chemist [[chevreul|Chevreul]], and Van Gogh named it in a letter: 'the law of simultaneous contrast'. Opposites, placed together, heighten each other. [[simultaneous-contrast|Simultaneous contrast]]" },
     { v: { t: "pair", a: { h: "#1F3A93", label: "night blue" }, b: { h: "#F2C81F", label: "star yellow" } },
-      text: "[[painting-starry-night|The Starry Night]], painted in June 1889 from his window at the asylum in Saint-Rémy, sets swirling blues against yellow stars and moon: another pair of near-opposites." },
+      text: "[[painting-starry-night|The Starry Night]], painted in June 1889 from the view out of his window at the asylum in Saint-Rémy, sets swirling blues against yellow stars and moon: another pair of near-opposites." },
     { v: { t: "row", items: [{ h: "#F2C81F" }, { h: "#EAA221" }, { h: "#CFA41C" }, { h: "#FFD700" }, { h: "#CC7722" }] },
       text: "[[painting-sunflowers|Sunflowers]] went the other way: a study in yellows, made possible partly by new pigments like [[chrome-yellow|chrome yellow]]. Harmony by sameness instead of opposition." },
     { v: { t: "wheel", base: "#F2C81F", scheme: "analogous" },
@@ -734,13 +737,13 @@ window.STORIES = [
       text: "This blue belongs to a jeweler. Tiffany & Co. put it on the cover of its catalogue, the Blue Book, in 1845, and has held it as a registered trademark since 1998. [[color-trademarks|Owning a color]]" },
     { v: { t: "big", n: "1837", sub: "Tiffany blue's Pantone number" },
       text: "Pantone mixes it as a private custom color, number 1837: the year Tiffany was founded. You won't find it in the public swatch books. [[Turquoise|Turquoise]] is its nearest everyday name." },
-    { v: { t: "quiz", q: "Which company was the first in the US to win a trademark on a color, in 1985?",
+    { v: { t: "quiz", q: "Which company won a landmark 1985 US court ruling to register a color as its trademark?",
         options: [{ label: "Owens Corning, pink insulation", h: "#F3A6C3" }, { label: "Coca-Cola, red", h: "#E41E2B" }, { label: "UPS, brown", h: "#5C3A21" }], answer: 0,
         explain: "Owens Corning, for its [[Pink|pink]] building insulation. In 1985 a US appeals court agreed that, on insulation, pink had come to mean them." } },
     { v: { t: "big", n: "1995", sub: "US Supreme Court: yes, a color" },
       text: "In 1995 the US Supreme Court confirmed it, in Qualitex v. Jacobson, a case about green-gold pads for dry-cleaning presses. The catch: buyers must already link the color to you." },
     { v: { t: "swatch", h: "#4F2683", label: "Dairy Milk purple, approx." },
-      text: "Cadbury has wrapped Dairy Milk in [[Purple|purple]] since the bar's launch. But when it tried to register purple as the 'predominant' color of its packaging, Nestlé objected, and the UK Court of Appeal found it too vague." },
+      text: "Cadbury has wrapped Dairy Milk in [[Purple|purple]] since 1914. But when it tried to register purple as the 'predominant' color of its packaging, Nestlé objected, and the UK Court of Appeal found it too vague." },
     { v: { t: "row", items: [{ h: "#81D8D0", label: "a box" }, { h: "#F3A6C3", label: "insulation" }, { h: "#4F2683", label: "chocolate" }] },
       text: "The rule of thumb: you can't own a color, [[color-trademarks|only a color in a context]], like pink on insulation or blue on a jewelry box, and only once customers have learned it means you." }
   ],
@@ -749,7 +752,7 @@ window.STORIES = [
   sources: [
     "Wikipedia, Tiffany Blue (Blue Book 1845; trademark since 1998; Pantone 1837)",
     "Wikipedia, Color trademark (Owens Corning 1985; Qualitex Co. v. Jacobson Products Co., 1995; Société des Produits Nestlé v Cadbury UK)",
-    "Wikipedia, Cadbury (Dairy Milk's purple wrapper from launch)"
+    "Société des Produits Nestlé v Cadbury UK [2012] EWHC 2637 (Ch) (purple used since 1914) and [2013] EWCA Civ 1174 (4 October 2013)"
   ]
 },
 {

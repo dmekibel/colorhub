@@ -12,7 +12,7 @@ window.PAINTINGS = [
     {"h": "#909C8A", "share": 0.115, "name": "Sage", "dE": 8.5, "vocab": "Sage", "vocabDE": 8.5},
     {"h": "#A9A55B", "share": 0.035, "name": "Khaki", "dE": 5.3, "vocab": "Khaki", "vocabDE": 5.3}
   ],
-  "note": "Painted at the asylum in Saint-Rémy in June 1889. Its paint has never been sampled, but a 2008 study that modelled its reflected light points to [[ultramarine-pigment|ultramarine]] around the stars and [[cobalt-blue-pigment|cobalt blue]] in the swirls. In this photo the moon and stars average out to a dull [[Khaki|khaki]]: thin yellow strokes mixed with the blue around them. The year before, [[van-gogh|Van Gogh]] wrote to his sister that the night is even more richly colored than the day."
+  "note": "Painted at the asylum in Saint-Rémy in June 1889. Its published pigment map comes from imaging, not paint samples: a 2008 study that modelled its reflected light points to [[ultramarine-pigment|ultramarine]] in the sky around the stars and [[cobalt-blue-pigment|cobalt blue]] in the swirls. In this photo the moon and stars average out to a dull [[Khaki|khaki]]: thin yellow strokes mixed with the blue around them. The year before, [[van-gogh|Van Gogh]] wrote to his sister that the night is even more richly colored than the day."
   },
   {"id": "painting-sunflowers", "title": "Sunflowers", "artist": "Vincent van Gogh", "year": "1888", "place": "National Gallery, London", "img": "img/paintings/sunflowers.jpg", "thumb": "img/paintings/sunflowers-thumb.jpg", "map": "img/paintings/sunflowers-map.png", "w": 944, "h": 1200, "commons": "https://commons.wikimedia.org/wiki/File:Vincent_van_Gogh_-_Sunflowers_(1888,_National_Gallery_London).jpg", "license": "Public domain",
   "palette": [
@@ -34,7 +34,7 @@ window.PAINTINGS = [
     {"h": "#999E9C", "share": 0.113, "name": "Grey", "dE": 6.3, "vocab": "Grey", "vocabDE": 6.3},
     {"h": "#5F7789", "share": 0.054, "name": "Slate", "dE": 4.8, "vocab": "Slate", "vocabDE": 4.8}
   ],
-  "note": "A woodblock print, so its blue is ink on paper. The series was advertised in 1831 for its use of the newly available [[prussian-blue|Prussian blue]]. The outlines mix Prussian blue with [[indigo-dye|indigo]], and blue was printed over blue to deepen the troughs. Indigo fades faster in light than Prussian blue, one reason surviving impressions differ. The cream of the foam is the bare paper."
+  "note": "A woodblock print, so its blue is ink on paper. The publisher advertised the series in 1831 as blue-printed pictures, a style made possible by newly cheap [[prussian-blue|Prussian blue]]. The outlines mix Prussian blue with [[indigo-dye|indigo]], and blue was printed over blue to deepen the troughs. Indigo fades faster in light than Prussian blue, one reason surviving impressions differ. The cream of the foam is the bare paper."
   },
   {"id": "painting-pearl-earring", "title": "Girl with a Pearl Earring", "artist": "Johannes Vermeer", "year": "c. 1665", "place": "Mauritshuis, The Hague", "img": "img/paintings/pearl-earring.jpg", "thumb": "img/paintings/pearl-earring-thumb.jpg", "map": "img/paintings/pearl-earring-map.png", "w": 1013, "h": 1200, "commons": "https://commons.wikimedia.org/wiki/File:1665_Girl_with_a_Pearl_Earring.jpg", "license": "Public domain",
   "palette": [
@@ -103,7 +103,7 @@ window.PAINTINGS = [
     {"h": "#837496", "share": 0.037, "name": "Old lavender", "dE": 8.3, "vocab": "Mauve", "vocabDE": 11.4},
     {"h": "#423A2D", "share": 0.031, "name": "Black olive", "dE": 6.1, "vocab": "Umber", "vocabDE": 10.6}
   ],
-  "note": "Not all of the gold is gold. The Belvedere lists gold, silver and platinum leaf on the figures and brass leaf in the background. Klimt then brushed a dark brown glaze over all the metal and scattered metal flakes into it while it was wet, a method the museum compares to Japanese lacquer. That glaze is why the largest swatch is a dull bronze-brown rather than bright [[Gold|gold]]. Lab analysis found the red is [[vermilion-pigment|vermilion]] and the blue is [[cobalt-blue-pigment|cobalt]]."
+  "note": "Not all of the gold is gold. The Belvedere lists gold, silver and platinum leaf on the figures and brass leaf in the background. Klimt then brushed a dark brown glaze over all the metal and scattered metal flakes into it while it was wet, a method the museum compares to Japanese lacquer. That glaze is why the largest swatch is a dull bronze-brown rather than bright [[Gold|gold]]."
   },
   {"id": "painting-the-scream", "title": "The Scream", "artist": "Edvard Munch", "year": "1893", "place": "National Museum, Oslo", "img": "img/paintings/the-scream.jpg", "thumb": "img/paintings/the-scream-thumb.jpg", "map": "img/paintings/the-scream-map.png", "w": 966, "h": 1200, "commons": "https://commons.wikimedia.org/wiki/File:Edvard_Munch_-_The_Scream_-_NG.M.00939_-_National_Museum_of_Art,_Architecture_and_Design.jpg", "license": "Public domain",
   "palette": [
@@ -127,7 +127,7 @@ window.PAINTINGS = [
     {"h": "#554032", "share": 0.057, "name": "Café noir", "dE": 4.8, "vocab": "Umber", "vocabDE": 6.1},
     {"h": "#9199A0", "share": 0.044, "name": "Grey", "dE": 3.3, "vocab": "Grey", "vocabDE": 3.3}
   ],
-  "note": "Turner painted the old warship in pale white and gold instead of its real black and yellow, so it fades into the sky like a ghost while the dark tug pulls it to the breakers. The [[warm-and-cool|warm]] sunset on the right faces the cool, silvery ship on the left. The National Gallery notes the sun is in an impossible place for a ship heading upriver, and that the thick paint and glazes of the sunset are unusually intact."
+  "note": "Turner painted the old warship in pale white and gold instead of its real black and yellow, so it fades into the sky like a ghost while the dark tug pulls it to the breakers. The [[warm-and-cool|warm]] sunset on the right faces the cool, silvery ship on the left. The National Gallery notes the sun is in an impossible place for a ship heading upriver, and that the sunset clouds are laid on so thickly that the paint stands proud of the canvas."
   },
   {"id": "painting-wanderer", "title": "Wanderer above the Sea of Fog", "artist": "Caspar David Friedrich", "year": "c. 1817", "place": "Hamburger Kunsthalle, Hamburg", "img": "img/paintings/wanderer.jpg", "thumb": "img/paintings/wanderer-thumb.jpg", "map": "img/paintings/wanderer-map.png", "w": 951, "h": 1200, "commons": "https://commons.wikimedia.org/wiki/File:Ueber-die-sammlung-19-jahrhundert-caspar-david-friedrich-wanderer-ueber-dem-nebelmeer.jpg", "license": "Public domain",
   "palette": [
@@ -204,7 +204,7 @@ window.PAINTINGS = [
     {"h": "#7F8558", "share": 0.149, "name": "Moss", "dE": 7.8, "vocab": "Moss", "vocabDE": 7.8},
     {"h": "#868D92", "share": 0.123, "name": "Grey", "dE": 2.2, "vocab": "Grey", "vocabDE": 2.2}
   ],
-  "note": "Monet painted Camille and their son Jean in a single outdoor session. The sky is quick strokes of blue and grey with bare canvas showing, and the white dress is barely white: it is pale blues and greys, with dabs of yellow reflected from the buttercups below. We still read it as a white dress in sunlight, which is [[color-constancy]] at work."
+  "note": "Monet painted Camille and their son Jean outdoors, probably in a single session of a few hours. The sky is quick strokes of blue and grey with bare canvas showing, and the white dress is barely white: it is pale blues and greys, with dabs of yellow reflected from the buttercups below. We still read it as a white dress in sunlight, which is [[color-constancy]] at work."
   },
   {"id": "painting-rouen-cathedral", "title": "Rouen Cathedral (series)", "artist": "Claude Monet", "year": "1894", "place": "National Gallery of Art, Washington (Rouen Cathedral, West Façade, Sunlight)", "img": "img/paintings/rouen-cathedral.jpg", "thumb": "img/paintings/rouen-cathedral-thumb.jpg", "map": "img/paintings/rouen-cathedral-map.png", "w": 786, "h": 1200, "commons": "https://commons.wikimedia.org/wiki/File:Claude_Monet,_Rouen_Cathedral,_West_Fa%C3%A7ade,_Sunlight,_1894,_NGA_46654.jpg", "license": "Public domain",
   "palette": [
@@ -215,7 +215,7 @@ window.PAINTINGS = [
     {"h": "#92ACC7", "share": 0.101, "name": "Light steel blue", "dE": 7.0, "vocab": "Periwinkle", "vocabDE": 8.6},
     {"h": "#C4AF7A", "share": 0.097, "name": "Sand", "dE": 1.8, "vocab": "Tan", "vocabDE": 5.8}
   ],
-  "note": "One of more than 30 views of the cathedral front that Monet painted in 1892–93 and finished in his Giverny studio in 1894. The stone is never plain grey: sunlit [[Cream|cream]] and [[Tan|tan]] against shadows of [[Periwinkle|periwinkle]] blue. A 2025 National Gallery of Art study found that the speckled sunlit highlights were cadmium yellow that has since turned brown."
+  "note": "One of more than 30 views of the cathedral front that Monet painted in 1892–93 and finished in his Giverny studio in 1894. The stone is never plain grey: sunlit [[Cream|cream]] and [[Tan|tan]] against shadows of [[Periwinkle|periwinkle]] blue."
   },
   {"id": "painting-japanese-footbridge", "title": "The Japanese Footbridge", "artist": "Claude Monet", "year": "1899", "place": "National Gallery of Art, Washington", "img": "img/paintings/japanese-footbridge.jpg", "thumb": "img/paintings/japanese-footbridge-thumb.jpg", "map": "img/paintings/japanese-footbridge-map.png", "w": 1200, "h": 968, "commons": "https://commons.wikimedia.org/wiki/File:Claude_Monet,_The_Japanese_Footbridge,_1899,_NGA_74796.jpg", "license": "Public domain (CC0)",
   "palette": [
@@ -248,6 +248,6 @@ window.PAINTINGS = [
     {"h": "#8A9C9A", "share": 0.084, "name": "Grey", "dE": 8.8, "vocab": "Grey", "vocabDE": 8.8},
     {"h": "#59896E", "share": 0.069, "name": "Viridian", "dE": 5.1, "vocab": "Viridian", "vocabDE": 5.1}
   ],
-  "note": "One of about 250 water-lily paintings, from a group made in 1903–08. The near-square canvas shows only the pond's surface: no bank and no horizon, just reflected sky and lily pads. In 1905 Monet listed his palette as lead white, cadmium yellow, vermilion, deep madder, cobalt blue and [[viridian-pigment|viridian]], and nothing else. His cataract trouble came later (he first saw an eye specialist in 1913), so it doesn't explain these colors."
+  "note": "One of about 250 water-lily paintings, from a group made in 1903–08. The near-square canvas shows only the pond's surface: no bank and no horizon, just reflected sky and lily pads. In 1905 Monet listed his palette as lead white, cadmium yellow, vermilion, deep madder, cobalt blue and [[viridian-pigment|viridian]], and nothing else. His cataract trouble came later (he was diagnosed in 1912), so it doesn't explain these colors."
   }
 ];

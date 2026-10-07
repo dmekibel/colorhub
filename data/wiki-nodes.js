@@ -317,7 +317,7 @@ window.WIKI_NODES = [
   id: "synesthesia", type: "concept", title: "Synesthesia",
   dek: "For some people the letter A is always red. It's real, it's consistent, and sometimes it's learned from toys.",
   body: [
-    "Synesthesia is a crossing of the senses: a sound, letter or number automatically brings a color, every time; poets like [[rimbaud|Rimbaud]] only played at it. The most common kind is grapheme-color synesthesia, where letters and digits have their own colors. In a 2006 survey that tested people instead of waiting for volunteers, Julia Simner's team found about 4% of people had some form of synesthesia, and roughly 1 to 2% had colored letters or numbers.",
+    "Synesthesia is a crossing of the senses: a sound, letter or number automatically brings a color, every time; poets like [[rimbaud|Rimbaud]] only played at it. The most common kind is grapheme-color synesthesia, where letters and digits have their own colors. In a 2006 survey that tested people instead of waiting for volunteers, Julia Simner's team found about 4% of people had some form of synesthesia, and about 1% had colored letters or numbers.",
     "It isn't make-believe. Ask a synesthete the color of K and you'll get the same shade months or years later, which ordinary people can't fake. But the colors can be learned. In 2013 Nathan Witthoft and Jonathan Winawer described 11 American synesthetes whose letter colors matched a popular Fisher-Price set of fridge magnets (A [[Red|red]], B [[Orange|orange]], C [[Yellow|yellow]]), and 10 of them remembered owning it.",
     "Artists have chased the idea for a long time. [[kandinsky|Wassily Kandinsky]] wrote that hearing Wagner's Lohengrin in Moscow, “I saw all my colours in spirit, before my eyes.” Whether he had synesthesia in the clinical sense is debated, but he built a whole theory of color as sound in [[spiritual-in-art|Concerning the Spiritual in Art]]. [[rimbaud|Arthur Rimbaud]]'s sonnet [[voyelles|Voyelles]] gives each vowel a color, but it reads like a poet's invention, not a report.",
     "Synesthesia shows how tightly a brain can bind a color to a symbol. Francis Galton described people with colored numbers in 1880, and the novelist Vladimir Nabokov described his colored alphabet in his memoir. Learning [[basic-color-terms|color words]] builds a weaker version of the same bond in everyone: a name that calls up a color."
@@ -331,7 +331,7 @@ window.WIKI_NODES = [
   ],
   facts: [
     { label: "Any form", value: "~4% of people (Simner et al. 2006)" },
-    { label: "Colored letters or digits", value: "~1–2%" }
+    { label: "Colored letters or digits", value: "~1% (Simner et al. 2006)" }
   ],
   sources: [
     "Simner, J. et al. (2006). Synaesthesia: the prevalence of atypical cross-modal experiences. Perception 35(8): 1024–1033.",
@@ -361,7 +361,7 @@ window.WIKI_NODES = [
   ],
   sources: [
     "Hill, R. A. & Barton, R. A. (2005). Red enhances human performance in contests. Nature 435: 293.",
-    "Meta-analysis of the red advantage in combat sports (2024). Scientific Reports 14.",
+    "Peperkoorn, L. S., Hill, R. A., Barton, R. A. & Pollet, T. V. (2024). Meta-analysis of the red advantage in combat sports. Scientific Reports 14: 30822.",
     "Gnambs, T. (2020). Limited evidence for the effect of red color on cognitive performance: a meta-analysis. Psychonomic Bulletin & Review 27.",
     "Genschow, O., Noll, T., Wänke, M. & Gersbach, R. (2015). Does Baker-Miller pink reduce aggression in prison detention cells? Psychology, Crime & Law 21(5).",
     "Palmer, S. E. & Schloss, K. B. (2010). An ecological valence theory of human color preference. PNAS 107(19): 8877–8882."
@@ -397,7 +397,7 @@ window.WIKI_NODES = [
   dek: "Oranges feel warm and blues cool. Green and violet are up for debate. Physics runs the other way.",
   body: [
     "Painters sort colors by temperature. Reds, oranges and yellows reliably feel warm, like fire and sun; blues reliably feel cool, like water and shade. Green and violet are contested: each sits between a warm and a cool, so whether one reads warm, cool or neither depends on which way it leans and what's beside it. [[goethe|Goethe]] framed the split in his [[theory-of-colours|Theory of Colours]] as a polarity: a lively 'plus' side of yellow and orange and a restless 'minus' side of blue.",
-    "Temperature is relative. [[Crimson|Crimson]] gets called a cool red beside [[Vermilion|vermilion]], though it's more precise to say crimson is purpler and vermilion oranger. A [[Teal|teal]] can look warm next to an icy blue, and whites and greys lean too: put a creamy white beside a bluish one and both leans jump out. In lab studies of 'color emotion' with British and Chinese observers, warmth peaked around red-orange and coolness around blue, with greens and purples in between.",
+    "Temperature is relative. [[Crimson|Crimson]] gets called a cool red beside [[Vermilion|vermilion]], though it's more precise to say crimson is purpler and vermilion oranger. A [[Teal|teal]] can look warm next to an icy blue, and whites and greys lean too: put a creamy white beside a bluish one and both leans jump out. In a lab study of 'color emotion' with British and Chinese observers, warmth peaked near red-orange and coolness at the opposite hue, a greenish blue, and stronger colors felt warmer or cooler than dull ones.",
     "Physics runs the other way. Heat a piece of iron and it glows [[Red|red]], then [[Yellow|yellow]], then bluish [[White|white]] as it gets hotter. Light bulbs are rated on this scale in kelvin, so a 'warm' 2,700 K bulb is rated lower than 'cool' 6,500 K daylight. Our words follow feelings about fire and ice, not thermodynamics.",
     "Does a warm-colored room feel warmer? This 'hue-heat' idea has been tested for decades with mixed results. In paintings, though, temperature does real work. Outdoors, sunlit surfaces look warm while shadows, lit by blue sky instead of sun, look cool, which is why the [[impressionism|Impressionists]] painted violet shadows. [[monet|Monet]]'s [[painting-impression-sunrise|Impression, Sunrise]] hangs one orange sun in a cool blue-grey harbor."
   ],
@@ -423,7 +423,7 @@ window.WIKI_NODES = [
     "Goethe, J. W. von (1810). Zur Farbenlehre; trans. C. L. Eastlake (1840), Theory of Colours, Part VI.",
     "Ou, L.-C., Luo, M. R., Woodcock, A. & Wright, A. (2004). A study of colour emotion and colour preference. Part I: Colour emotions for single colours. Color Research & Application 29(3): 232–240.",
     "Gage, J. (1993). Colour and Culture. Thames & Hudson.",
-    "Investigating the validity of the hue-heat effect on thermal sensitivity (2024). Scientific Reports 14."
+    "Battistel, L., Zandonella Callegher, R., Zampini, M. & Parin, R. (2024). Investigating the validity of the hue-heat effect on thermal sensitivity. Scientific Reports 14: 21413."
   ]
 },
 {
@@ -572,7 +572,7 @@ window.WIKI_NODES = [
   dek: "Black for grief is a local habit, not a law. Medieval queens mourned in white, as China long has.",
   body: [
     "In much of Europe and the Americas, grief wears [[Black|black]]. Elsewhere it doesn't. [[White|White]] is the traditional color of mourning in Chinese culture, where white clothes were long tied to death. In Thailand black is now usual, though historically it was white, and widows may wear purple. Colors of grief are conventions, learned like words (see [[color-psychology|color psychology]]).",
-    "Europe had its own white mourning. The deepest mourning of medieval queens was [[White|white]], and French queens wore deuil blanc, 'white mourning'. The custom echoed into the 20th century: in 1934 Queen Wilhelmina of the Netherlands revived white mourning, and in 1938 Norman Hartnell made an all-white wardrobe for Britain's Queen Elizabeth, later the Queen Mother, for a state visit to France while she mourned her mother.",
+    "Europe had its own white mourning. The deepest mourning of medieval queens was [[White|white]], and French queens wore deuil blanc, 'white mourning'. The custom echoed into the 20th century: in 1934 the Dutch royal family mourned Queen Wilhelmina's husband, Prince Hendrik, in white, as he had asked, and in 1938 Norman Hartnell made an all-white wardrobe for Britain's Queen Elizabeth, later the Queen Mother, for a state visit to France while she mourned her mother.",
     "The Victorians turned black into a system. After Prince Albert died in 1861, Queen Victoria's long, public grief shaped how a whole society mourned. Widows moved through stages: full mourning in heavy black crape, then 'half mourning', when muted [[Lilac|lilac]], [[Lavender|lavender]] and [[Grey|grey]] were allowed back. Jet, a black stone formed from fossil wood, became the mourning jewel.",
     "Half mourning's lilacs overlapped with the late-1850s craze for the new [[mauveine|mauve]] dye. Black also runs through church practice, where black vestments may be worn at funerals (see [[liturgical-colors|liturgical colors]]). And the same white that means a wedding in one culture can mean a funeral in another."
   ],
@@ -711,9 +711,9 @@ window.WIKI_NODES = [
   id: "color-trademarks", type: "culture", title: "Owning a color",
   dek: "Can you own a color? Tiffany, Owens Corning and Louboutin did, within limits. Yves Klein never did.",
   body: [
-    "A company can't own a color outright, but it can sometimes own a color for one kind of product, as a trademark. Roughly, buyers must read the color as a sign of who made the thing, and the color can't do a practical job. In 1985 a US appeals court let Owens Corning protect [[Pink|pink]] for its building insulation, the first US color trademark. In 1995 the US Supreme Court confirmed, in a case about green-gold dry-cleaning pads, that a color alone can be a trademark.",
-    "Famous cases: Tiffany's robin's-egg blue has been a registered trademark since 1998, and Pantone, the company behind the [[color-of-the-year|Color of the Year]], mixes it privately as 'PMS 1837', after the year Tiffany was founded. Christian Louboutin's red soles are protected in several countries, within limits set by courts. Cadbury lost a long fight in the UK courts to register its [[Purple|purple]], partly because its description was too loose.",
-    "Useful colors can't be owned. US rulings refused orange and yellow for phone booths (they're easy to see), coral for earplugs (easy to spot in safety checks) and John Deere's [[Green|green]] for loaders, because farmers want loaders that match their tractors. If a color helps a product work or sell for reasons beyond its maker, everyone keeps it.",
+    "A company can't own a color outright, but it can sometimes own a color for one kind of product, as a trademark. Roughly, buyers must read the color as a sign of who made the thing, and the color can't do a practical job. In 1985 a US appeals court let Owens Corning protect [[Pink|pink]] for its building insulation, a landmark ruling for color trademarks. In 1995 the US Supreme Court confirmed, in a case about green-gold dry-cleaning pads, that a color alone can be a trademark.",
+    "Famous cases: Tiffany's robin's-egg blue has been a registered trademark since 1998, and Pantone, the company behind the [[color-of-the-year|Color of the Year]], mixes it privately as 'PMS 1837', after the year Tiffany was founded. Christian Louboutin's red soles are protected in several countries, within limits set by courts. Cadbury lost a key round in 2013, when the UK Court of Appeal found its description of [[Purple|purple]] too loose; later rounds went both ways.",
+    "Useful colors can't be owned. US rulings denied protection to orange and yellow for phone booths (they're easy to see), coral for earplugs (easy to spot in safety checks) and John Deere's [[Green|green]] for loaders, because farmers want loaders that match their tractors. If a color helps a product work or sell for reasons beyond its maker, everyone keeps it.",
     "The most famous 'owned' color isn't owned at all. [[yves-klein|Yves Klein]] recorded the formula of his [[ultramarine-pigment|ultramarine]] paint, International Klein Blue, in a sealed, dated envelope in 1960, a French way to prove when you invented something. He never patented it. Today's fights are over materials: the artist Anish Kapoor holds exclusive art rights to a spray form of [[vantablack|Vantablack]]."
   ],
   colors: ["Turquoise", "Red", "Indigo", "Pink"],
@@ -724,7 +724,7 @@ window.WIKI_NODES = [
     { h: "#F4A7B9", label: "Owens Corning pink · first US color mark (approx.)" }
   ],
   facts: [
-    { label: "First US color trademark", value: "Owens Corning pink, 1985" },
+    { label: "Landmark US color case", value: "Owens Corning pink, 1985" },
     { label: "US Supreme Court", value: "Qualitex v. Jacobson, 1995" },
     { label: "International Klein Blue", value: "Recorded 1960; never patented" }
   ],
@@ -732,7 +732,8 @@ window.WIKI_NODES = [
     "In re Owens-Corning Fiberglas Corp., 774 F.2d 1116 (Fed. Cir. 1985).",
     "Qualitex Co. v. Jacobson Products Co., 514 U.S. 159 (1995).",
     "Deere & Co. v. Farmhand, Inc., 560 F. Supp. 85 (S.D. Iowa 1982).",
-    "Société des Produits Nestlé SA v Cadbury UK Ltd [2013] EWCA Civ 1174.",
+    "Société des Produits Nestlé SA v Cadbury UK Ltd [2013] EWCA Civ 1174; Cadbury UK Ltd v Comptroller General [2022] EWHC 1671 (Ch).",
+    "In re Orange Communications, 41 USPQ2d 1036 (TTAB 1996); In re Howard S. Leight & Assocs., 39 USPQ2d 1058 (TTAB 1996).",
     "Wikipedia, 'International Klein Blue' (Soleau envelope, 1960)."
   ]
 },
@@ -827,9 +828,9 @@ window.WIKI_NODES = [
   id: "ultramarine-pigment", type: "pigment", title: "Ultramarine and lapis lazuli",
   dek: "Ground from a stone mined in Afghanistan, it was at times as pricey as gold. Painters saved it for the Virgin.",
   body: [
-    "Natural ultramarine is ground lapis lazuli, a deep blue stone mined for millennia in the Badakhshan mountains of Afghanistan. Its name means 'beyond the sea', for the long trade route that brought it to Italy through Venice. Simply grinding the stone gives a greyish powder; the brilliant blue comes from a slow extraction, kneading the powder in wax and resin and washing out the blue particles, first described by the 13th-century writer al-Tifashi. Its deep, slightly violet blue sits between the app's [[Cobalt|cobalt]] and [[Indigo|indigo]].",
+    "Natural ultramarine is ground lapis lazuli, a deep blue stone mined for millennia in the Badakhshan mountains of Afghanistan. Its name means 'beyond the sea', for the long trade route that brought it to Italy through Venice. Simply grinding the stone gives a greyish powder; the brilliant blue comes from a slow extraction, kneading the powder in wax and resin and washing out the blue particles, described by the 13th-century writer al-Tifashi. Its deep, slightly violet blue sits between the app's [[Cobalt|cobalt]] and [[Indigo|indigo]].",
     "Good ultramarine was at times as expensive as gold. The painter Cennino Cennini, around 1400, called it “a glorious, lovely and absolutely perfect pigment.” Contracts specified it, and painters often saved it for the robes of the Virgin Mary, using cheaper azurite underneath. The word [[Azure|azure]], via Arabic, comes from the Persian name for the same stone (see [[heraldry|heraldry]]).",
-    "[[vermeer|Johannes Vermeer]] used it lavishly, even mixing it into shadows. The turban in [[painting-pearl-earring|Girl with a Pearl Earring]] is ultramarine and lead white under a glaze of pure ultramarine, and the blue apron in [[painting-milkmaid|The Milkmaid]] is ultramarine too.",
+    "[[vermeer|Johannes Vermeer]] used it lavishly, even mixing it into shadows. The turban in [[painting-pearl-earring|Girl with a Pearl Earring]] is natural ultramarine with varying amounts of lead white, a darker blue laid over a lighter one, and the blue apron in [[painting-milkmaid|The Milkmaid]] is ultramarine too.",
     "Cheaper rivals had arrived, [[prussian-blue|Prussian blue]] around 1706 and [[cobalt-blue-pigment|cobalt blue]] in 1802, but in 1824 a French society still offered 6,000 francs for a synthetic ultramarine. Jean-Baptiste Guimet in France and Christian Gmelin in Germany both found a way in the late 1820s, and cheap 'French ultramarine' filled the tubes of the [[impressionism|Impressionists]]. In the 1950s [[yves-klein|Yves Klein]] suspended synthetic ultramarine in a matte binder to make International Klein Blue (see [[color-trademarks|owning a color]])."
   ],
   colors: ["Cobalt", "Azure", "Indigo"],
@@ -838,8 +839,8 @@ window.WIKI_NODES = [
     { h: "#007FFF", label: "Azure · named for lapis" },
     { h: "#002FA7", label: "Klein blue · synthetic ultramarine (approx.)" }
   ],
-  year: 500,
-  yearNote: "Ground lapis as paint in Buddhist cave temples, c. 500 CE",
+  year: 600,
+  yearNote: "Ground lapis as paint in cave temples near Bamiyan, 6th–7th century CE",
   facts: [
     { label: "Made from", value: "Lapis lazuli (the mineral lazurite)" },
     { label: "Mined in", value: "Badakhshan, Afghanistan" },
@@ -849,7 +850,8 @@ window.WIKI_NODES = [
     "Plesters, J. (1993). Ultramarine blue, natural and artificial. In Artists' Pigments, vol. 2. National Gallery of Art, Washington.",
     "Cennini, C. (c. 1400). Il libro dell'arte; trans. L. Broecke (2015). Archetype.",
     "National Gallery, London. Technical studies of Vermeer's ultramarine.",
-    "Wikipedia, 'Ultramarine'."
+    "Wikipedia, 'Ultramarine'.",
+    "Delaney, J. K., Dooley, K. A., van Loon, A. & Vandivere, A. (2020). Mapping the pigment distribution of Vermeer's Girl with a Pearl Earring. Heritage Science 8: 4."
   ]
 },
 {
@@ -970,7 +972,7 @@ window.WIKI_NODES = [
     "Tyrian purple comes from the glands of predatory sea snails, the murex. Crush or 'milk' them, let the secretion react with light and air, and it turns from clear to a deep red-purple: 6,6'-dibromoindigo, a cousin of [[indigo-dye|indigo]] with bromine from the sea. Phoenicians were producing it by around 1200 BCE, and it's named for their city of Tyre.",
     "It was staggeringly expensive. The Greek historian Theopompus wrote that purple dye fetched its weight in silver, and when the chemist Paul Friedländer worked it out in the early 1900s, 12,000 snails gave 1.4 grams of pure dye. That cost made it the badge of rank in Rome and Byzantium (see [[royal-purple|purple and power]]).",
     "It also stank. Ancient writers complained of the smell of the dye works, where heaps of snails rotted in vats, and an Egyptian papyrus says a dyer's hands reek of rotten fish. Cloth could be dyed shades from a near-black, [[Oxblood|oxblood]]-like 'clotted blood' to [[Violet|violet]] by mixing species and double-dipping.",
-    "The trade ended in the West with the fall of Constantinople, and the recipe was lost. When chemists built cheap purples in the 1850s, starting with [[william-perkin|William Perkin]]'s [[mauveine|mauveine]], purple stopped meaning money. The app's [[Byzantium|Byzantium]] and [[Purple|purple]] are the nearest names."
+    "Imperial production ended when crusaders sacked Constantinople in 1204, and the recipe was lost. When chemists built cheap purples in the 1850s, starting with [[william-perkin|William Perkin]]'s [[mauveine|mauveine]], purple stopped meaning money. The app's [[Byzantium|Byzantium]] and [[Purple|purple]] are the nearest names."
   ],
   colors: ["Byzantium", "Plum"],
   swatches: [
@@ -1155,7 +1157,7 @@ window.WIKI_NODES = [
   dek: "A clear, cool, safe green that replaced the poisonous ones. Its recipe was a secret until 1859.",
   body: [
     "Viridian is a hydrated chromium oxide, a deep, transparent blue-[[Green|green]], colored by the same element as [[chrome-yellow|chrome yellow]]. Its name is just Latin viridis, 'green'. The Paris color maker Pannetier and his assistant Binet first made it in 1838, but their process was slow, costly and secret. In 1859 the chemist C. E. Guignet patented a cheaper method, and viridian became a standard tube color.",
-    "Painters valued it because it was everything the [[arsenic-greens|arsenic greens]] were not: permanent, stable with other pigments and non-toxic. It's transparent, so it glazes beautifully and mixes clean. J. M. W. Turner was using it by 1840, Winsor & Newton listed it by 1849, and traces turn up in one of [[monet|Monet]]'s Gare Saint-Lazare paintings of 1877. Munch used it in [[painting-the-scream|The Scream]] (1893).",
+    "Painters valued it because it was everything the [[arsenic-greens|arsenic greens]] were not: permanent, stable with other pigments and non-toxic. It's transparent, so it glazes beautifully and mixes clean. J. M. W. Turner was using it by 1840, Winsor & Newton listed it by 1849, and [[monet|Monet]] used it widely in his Gare Saint-Lazare of 1877, now in London's National Gallery. Munch used it in [[painting-the-scream|The Scream]] (1893).",
     "Viridian is strong and cool. Mixed with [[Cobalt|cobalt]] blue it gives sea greens; with yellow, fresh grass greens; with [[Red|red]], rich dark neutrals, since red and green are painter's-wheel [[complementary-colors|complements]].",
     "The app's [[Viridian|viridian]] is a dark, muted blue-green, darker than [[Jade|jade]] and less blue than [[Teal|teal]]. It was one of the bright modern pigments that let the [[impressionism|Impressionists]] paint outdoor light."
   ],
@@ -1174,7 +1176,8 @@ window.WIKI_NODES = [
   sources: [
     "Newman, R. (1997). Chromium oxide greens. In Artists' Pigments, vol. 3. National Gallery of Art, Washington.",
     "Bomford, D. et al. (1990). Art in the Making: Impressionism. National Gallery, London.",
-    "Wikipedia, 'Viridian'."
+    "Wikipedia, 'Viridian'.",
+    "ColourLex, 'Claude Monet, The Gare Saint-Lazare' (National Gallery, London, NG6479): viridian used extensively."
   ]
 },
 {
@@ -1421,6 +1424,7 @@ window.WIKI_NODES = [
   ],
   sources: [
     "Gladstone, W. E. (1858). Studies on Homer and the Homeric Age. Oxford University Press.",
+    "Gladstone, W. E. (1877). The Colour-Sense. The Nineteenth Century 2 (October 1877).",
     "Deutscher, G. (2010). Through the Language Glass. Metropolitan Books.",
     "Alexander, C. (2013). A winelike sea. Lapham's Quarterly 6(3).",
     "Wikipedia, 'Wine-dark sea'."
@@ -1547,7 +1551,7 @@ window.WIKI_NODES = [
   body: [
     "Michel Eugène Chevreul (1786–1889) was a chemist first. His studies of animal fats explained how soap forms and improved candle-making; he isolated and named stearic and oleic acids. His name is one of the 72 engraved on the Eiffel Tower. He lived to 102, and France celebrated his 100th birthday as a national event.",
     "In 1824 he became director of dyeing at the Gobelins tapestry works in Paris. Complaints about dull black wool led him to [[simultaneous-contrast|simultaneous contrast]]: colors seen side by side shift away from each other in hue and lightness, so a good black beside blues and violets looks weak and reddish. His 1839 book on the 'law of simultaneous contrast' gave rules for tapestries, gardens, clothing, maps and painting, including [[color-harmony|harmonies]] of similar and of contrasting colors.",
-    "Painters took it as a manual. The [[impressionism|Impressionists]] absorbed his ideas about [[complementary-colors|complementary]] contrast, and Camille Pissarro reported Georges Seurat describing his own method as founded on “the theory of colors discovered by M. Chevreul.” That method, separate dots that mix in the eye, became [[optical-mixing|optical mixing]] and [[painting-grande-jatte|La Grande Jatte]].",
+    "Painters took it as a manual. The [[impressionism|Impressionists]] absorbed his ideas about [[complementary-colors|complementary]] contrast, and Camille Pissarro, explaining the method Seurat had pioneered, said it rested on “the theory of colors discovered by M. Chevreul.” That method, separate dots that mix in the eye, became [[optical-mixing|optical mixing]] and [[painting-grande-jatte|La Grande Jatte]].",
     "At 100 he sat for a series of conversations photographed by Paul Nadar, the first photo-interview published in a magazine. Over a century later, [[josef-albers|Josef Albers]]'s [[interaction-of-color|Interaction of Color]] turned his discovery into a classroom course: no color is seen alone."
   ],
   colors: ["Black", "Blue", "Purple"],
@@ -1564,7 +1568,8 @@ window.WIKI_NODES = [
   sources: [
     "Chevreul, M. E. (1839). De la loi du contraste simultané des couleurs. Paris (English trans. 1854).",
     "Viénot, F. (2002). Michel-Eugène Chevreul: from laws and principles to the production of colour plates. Color Research & Application 27(1).",
-    "Wikipedia, 'Michel Eugène Chevreul'."
+    "Wikipedia, 'Michel Eugène Chevreul'.",
+    "Pissarro, C., letter to Paul Durand-Ruel, November 1886 (quoted in J. Rewald, The History of Impressionism)."
   ]
 },
 {
@@ -1684,9 +1689,9 @@ window.WIKI_NODES = [
   dek: "He painted squares inside squares for over 25 years to show that no color is ever seen on its own.",
   body: [
     "Josef Albers (1888–1976) began as a schoolteacher and stained-glass maker in Germany. He joined the [[bauhaus|Bauhaus]] as a student in 1920, taking [[johannes-itten|Johannes Itten]]'s preliminary course, and stayed on to teach, leading part of that course himself from 1923. When the Bauhaus closed under Nazi pressure in 1933, he and his wife, the textile artist Anni Albers, moved to Black Mountain College in North Carolina.",
-    "In America he became one of the century's most influential art teachers. His Black Mountain students included Robert Rauschenberg, Ruth Asawa and Cy Twombly, and from 1950 to 1958 he headed the design department at Yale. His method, carried over from the [[bauhaus|Bauhaus]], was to look first and theorize later: students moved colored papers around until they could see what color was doing.",
+    "In America he became one of the century's most influential art teachers. His Black Mountain students included Robert Rauschenberg and Ruth Asawa, and from 1950 to 1958 he headed the design department at Yale. His method, carried over from the [[bauhaus|Bauhaus]], was to look first and theorize later: students moved colored papers around until they could see what color was doing.",
     "In 1963 he published that method as [[interaction-of-color|Interaction of Color]], a set of exercises showing that a color almost never looks like itself: it shifts with its neighbors ([[simultaneous-contrast|simultaneous contrast]]), with its area and with the light. One exercise makes a single color look like two; another makes two different colors look the same.",
-    "His own painting tested the same idea. Homage to the Square, begun in 1949, runs to hundreds of paintings and prints of three or four nested squares, with the paints recorded on the back. Side by side, the same [[Yellow|yellow]] or [[Grey|grey]] keeps changing character. In 1971 he became the first living artist given a solo show at New York's Metropolitan Museum of Art."
+    "His own painting tested the same idea. Homage to the Square, begun in 1950, runs to hundreds of paintings and prints of three or four nested squares, with the paints recorded on the back. Side by side, the same [[Yellow|yellow]] or [[Grey|grey]] keeps changing character. In 1971 he became the first living artist given a solo show at New York's Metropolitan Museum of Art."
   ],
   colors: ["Yellow", "Marigold", "Taupe"],
   swatches: [
@@ -1697,12 +1702,13 @@ window.WIKI_NODES = [
   facts: [
     { label: "Lived", value: "1888–1976" },
     { label: "Taught", value: "Bauhaus, Black Mountain College, Yale" },
-    { label: "Series", value: "Homage to the Square, from 1949" }
+    { label: "Series", value: "Homage to the Square, from 1950" }
   ],
   sources: [
     "Albers, J. (1963). Interaction of Color. Yale University Press.",
     "Josef and Anni Albers Foundation. Josef Albers: biography.",
-    "Wikipedia, 'Josef Albers'."
+    "Wikipedia, 'Josef Albers'.",
+    "Josef and Anni Albers Foundation, 'Homage to the Square' (series begun 1950)."
   ]
 },
 {
@@ -1791,7 +1797,7 @@ window.WIKI_NODES = [
   id: "monet", type: "person", title: "Claude Monet",
   dek: "He painted the same haystack, cathedral and pond again and again to catch color changing with the light.",
   body: [
-    "Claude Monet (1840–1926) gave [[impressionism|Impressionism]] its name: a critic mocked his harbor view [[painting-impression-sunrise|Impression, Sunrise]] at the group's first show in 1874. Taught to paint outdoors by Eugène Boudin, Monet wanted to paint not things but the light on them, like the sunlit white dress and green-shadowed parasol of [[painting-woman-parasol|Woman with a Parasol]] (1875), and in the 1870s he took an interest in [[chevreul|Chevreul]]'s color theories.",
+    "Claude Monet (1840–1926) gave [[impressionism|Impressionism]] its name: a critic mocked his harbor view [[painting-impression-sunrise|Impression, Sunrise]] at the group's first show in 1874. Taught to paint outdoors by Eugène Boudin, Monet wanted to paint not things but the light on them, like the sunlit white dress and green-shadowed parasol of [[painting-woman-parasol|Woman with a Parasol]] (1875).",
     "From 1890 he worked in series. He painted haystacks at different hours and seasons, then dozens of views of [[painting-rouen-cathedral|Rouen Cathedral]]'s facade as the light moved, switching canvases through the day. In London he painted the [[painting-houses-of-parliament|Houses of Parliament]] at sunset and in fog. The subject stays put; the color is the story (see [[color-constancy|color constancy]]). One of his haystacks later set [[kandinsky|Kandinsky]] on the road to abstraction.",
     "His last great subject was his garden at Giverny, with its lily pond and [[painting-japanese-footbridge|Japanese footbridge]]. From 1899 until his death he made more than 250 paintings of [[painting-water-lilies|water lilies]]. Like the other Impressionists he mostly avoided black, built darks from colors, and loved violet shadows and [[warm-and-cool|warm-cool]] contrasts.",
     "Then his eyes failed. Cataracts dimmed his sight from around 1912, and his paintings grew broader and leaned toward [[Red|reds]] and [[Yellow|yellows]]. After surgery in 1923 he saw things strongly [[Blue|bluish]] for a time, destroyed some canvases from his years of poor sight, and retouched others with bluer water lilies: a rare record of a painter's eyes changing his color."
@@ -1849,8 +1855,8 @@ window.WIKI_NODES = [
   dek: "About 35 paintings, a fortune's worth of ultramarine, and a widow left in debt.",
   body: [
     "Johannes Vermeer (1632–1675) spent his life in Delft painting quiet rooms full of daylight, like the kitchen of [[painting-milkmaid|The Milkmaid]]. He worked slowly, perhaps a few paintings a year, and only about 34 are universally accepted as his today. He also dealt in art, and when the war of 1672 wrecked the Dutch art market he stopped selling. He died at 43; his widow was left with 11 children and debts.",
-    "His great extravagance was color. No other 17th-century painter used natural [[ultramarine-pigment|ultramarine]], ground from lapis lazuli and at times as costly as gold, so lavishly or so early in his career. He used it not only for blue things but under other colors: beneath the red dress in The Girl with the Wine Glass, a layer of ultramarine gives the red a crisp, slightly purple coolness.",
-    "In [[painting-milkmaid|The Milkmaid]] the blue cloth is ultramarine, the bodice a bright lead-tin yellow, and the white wall is built from [[lead-white|lead white]], [[Umber|umber]] and charcoal black. In [[painting-pearl-earring|Girl with a Pearl Earring]] the turban is ultramarine and lead white under a glaze of pure ultramarine. Its near-black background was once a green glaze, made with indigo and a yellow dye, weld, that have faded.",
+    "His great extravagance was color. No other 17th-century painter used natural [[ultramarine-pigment|ultramarine]], ground from lapis lazuli and at times as costly as gold, so lavishly or so early in his career. He used it not only for blue things but under other colors: beneath the shadows of the red dress in The Girl with the Wine Glass, a layer of ultramarine gives the red a crisp, slightly purple coolness.",
+    "In [[painting-milkmaid|The Milkmaid]] the blue cloth is ultramarine, the bodice a bright lead-tin yellow, and the white wall is built from [[lead-white|lead white]], [[Umber|umber]] and charcoal black. In [[painting-pearl-earring|Girl with a Pearl Earring]] the turban is natural ultramarine and lead white, and he even put ultramarine in the shadows of her yellow jacket. Its near-black background was once a green glaze, made with indigo and a yellow dye, weld, that have faded.",
     "After his death he was nearly forgotten for two centuries, until the French critic Théophile Thoré-Bürger championed him in the 1860s and nicknamed him 'the Sphinx of Delft'. His pairing of clear yellow with ultramarine blue is now one of the most recognizable in Western painting (see [[value|value]] for how his light works)."
   ],
   colors: ["Cobalt", "Yellow", "White"],
@@ -1868,7 +1874,9 @@ window.WIKI_NODES = [
     "Mauritshuis, The Hague. Girl with a Pearl Earring: research project (2018).",
     "Rijksmuseum, Amsterdam. The Milkmaid: technical notes.",
     "National Gallery, London. The altered appearance of ultramarine in the paintings of Vermeer.",
-    "Wikipedia, 'Johannes Vermeer'."
+    "Wikipedia, 'Johannes Vermeer'.",
+    "Delaney, J. K., Dooley, K. A., van Loon, A. & Vandivere, A. (2020). Mapping the pigment distribution of Vermeer's Girl with a Pearl Earring. Heritage Science 8: 4.",
+    "Essential Vermeer, 'The Girl with the Wine Glass' (after Wheelock 1995): ultramarine under the shadows of the red dress."
   ]
 },
 

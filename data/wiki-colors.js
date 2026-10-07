@@ -14,7 +14,7 @@ window.WIKI_COLORS = {
     { k: "history", text: "The oldest paint workshop on Earth made red. About 100,000 years ago, people at Blombos Cave in South Africa ground red [[Ochre|ochre]], mixed it with bone and charcoal, and stored the paste in abalone shells. Later reds raised the stakes: [[vermilion-pigment|vermilion]] from mercury ore, and dyes from crushed insects, [[kermes]] and [[cochineal]]." },
     { k: "language", text: "Red is one of the oldest color words we have. English red, Latin ruber and Greek erythros grow from one ancient root. [[berlin-and-kay|Berlin and Kay]] found that a language with only three [[basic-color-terms|color words]] almost always has black, white and red. Medieval scribes wrote headings in red ink, so a heading became a rubric, from rubrica, red earth." },
     { k: "symbolism", text: "In [[alchemy]], red is the finish line. The Great Work ran from [[Black|black]] to [[White|white]] to [[Yellow|yellow]] and ended in rubedo, the reddening that meant the philosopher's stone was done. [[heraldry|Heraldry]] calls red gules. The Catholic Church wears red at Pentecost and on martyrs' feasts ([[liturgical-colors]]). In China, red means weddings and luck, and New Year money comes in red envelopes." },
-    { k: "science", text: "Red is the long-wave end of the [[spectrum]], light of roughly 620 to 750 nanometers. A famous 2005 study claimed Olympic fighters in red won more bouts. A reanalysis of the same games traced the edge to a bias in how the contests were set up, and later studies found no reliable red advantage. See [[color-psychology]]." }
+    { k: "science", text: "Red is the long-wave end of the [[spectrum]], light of roughly 620 to 750 nanometers. A famous 2005 study found Olympic fighters in red won more bouts. A 2024 meta-analysis of over 6,500 bouts, co-written by the same researchers, found red won just 50.5%: no reliable red advantage. See [[color-psychology]]." }
   ],
   related: [
     { to: "Ochre", why: "Red ochre was humanity's first red, ground 100,000 years ago" },
@@ -26,7 +26,8 @@ window.WIKI_COLORS = {
   sources: [
     "Henshilwood et al., 'A 100,000-year-old ochre-processing workshop at Blombos Cave', Science 334 (2011)",
     "Berlin & Kay, Basic Color Terms (1969); Etymonline, 'red', 'rubric'",
-    "Hill & Barton, 'Red enhances human performance in contests', Nature 435 (2005), and later reanalyses",
+    "Hill & Barton, 'Red enhances human performance in contests', Nature 435: 293 (2005)",
+    "Peperkoorn, Hill, Barton & Pollet, 'Meta-analysis of the red advantage in combat sports', Scientific Reports 14: 30822 (2024)",
     "Britannica, 'Alchemy'; 'Tincture (heraldry)'"
   ]
 },
@@ -60,8 +61,8 @@ window.WIKI_COLORS = {
   since: { year: -15000, what: "Yellow ochre painted on the walls of Lascaux", approx: true },
   facets: [
     { k: "language", text: "Yellow and [[Gold|gold]] come from the same ancient root, *ghel-, to shine. Gleam and glow belong to the family too. To the first speakers, yellow simply was the shining color." },
-    { k: "history", text: "Yellow [[Ochre|ochre]] glows on the cave walls of Lascaux. Egyptians painted with orpiment, a gorgeous, poisonous arsenic yellow. In the 1800s [[chrome-yellow|chrome yellow]] arrived, and [[van-gogh|Van Gogh]] loaded his [[painting-sunflowers|Sunflowers]] with it. Scientists studying that canvas found one of its two chrome yellows slowly turning olive-brown under light." },
-    { k: "culture", text: "In Qing China, bright yellow was reserved for the emperor, the empress and the empress dowager. Ordinary people could not wear it; even crown princes were limited to yellow trim. Yellow was the color of earth, the center of the five elements, and so of the ruler at the center of the world." },
+    { k: "history", text: "Yellow [[Ochre|ochre]] glows on the cave walls of Lascaux. Egyptians painted with orpiment, a gorgeous, poisonous arsenic yellow. In the 1800s [[chrome-yellow|chrome yellow]] arrived, and [[van-gogh|Van Gogh]] loaded his [[painting-sunflowers|Sunflowers]] with it. Scientists studying the Amsterdam version found its paler, sulfate-rich chrome yellow slowly darkening toward brown under light." },
+    { k: "culture", text: "In Qing China, bright yellow was reserved for the emperor, the empress and the empress dowager. Ordinary people could not wear it; the crown prince wore apricot yellow and other princes a golden yellow. Yellow was the color of earth, the center of the five elements, and so of the ruler at the center of the world." },
     { k: "symbolism", text: "[[alchemy|Alchemy]] named a yellowing stage, citrinitas, between the white and the final red. [[heraldry|Heraldry]] treats yellow as gold and calls it or." },
     { k: "philosophy", text: "[[goethe|Goethe]] called yellow 'the colour nearest the light' in his [[theory-of-colours|Theory of Colours]]. He set it against [[Blue|blue]], the color that brings darkness with it, and built his whole system on that pair, pushing back against [[isaac-newton|Newton]]." }
   ],
@@ -74,7 +75,7 @@ window.WIKI_COLORS = {
   ],
   sources: [
     "Etymonline, 'yellow', 'gold'",
-    "Monico et al., 'Evidence for degradation of the chrome yellows in Van Gogh's Sunflowers', Analytical Chemistry (2015)",
+    "Monico et al., 'Evidence for degradation of the chrome yellows in Van Gogh's Sunflowers', Angewandte Chemie International Edition 54(47) (2015)",
     "Goethe, Theory of Colours (1810), trans. Eastlake (1840), §765",
     "South China Morning Post, 'What was the Qing dynasty's imperial yellow jacket'"
   ]
@@ -159,7 +160,7 @@ window.WIKI_COLORS = {
     { k: "language", text: "Pink is named after a flower. Garden pinks (Dianthus) have frilly petal edges, as if trimmed with pinking shears, and the flower's name came first. Pink as a color word shows up in the 1600s." },
     { k: "culture", text: "Pink for girls is younger than you think. A 1918 trade magazine, Earnshaw's Infants' Department, called pink the stronger color and so right for boys, with dainty blue for girls. Other sources said the opposite, and stores disagreed for decades. Historian Jo Paoletti shows the girls-in-pink rule only hardened in the mid-1900s. See [[pink-and-blue]]." },
     { k: "design", text: "In 1937 Elsa Schiaparelli launched a perfume called Shocking and a loud pink to match, shocking pink. Barbie's pink is a Pantone shade, 219 C. And in 2016 the artist Stuart Semple sold the 'pinkest pink' to everyone except Anish Kapoor, in protest at Kapoor's exclusive rights to [[vantablack|Vantablack]]." },
-    { k: "science", text: "In 1979 Alexander Schauss claimed a bubblegum shade, Baker-Miller pink, calmed aggressive prisoners, and jails painted cells to match. Later, tighter studies, including his own, did not find the effect. See [[color-psychology]]." },
+    { k: "science", text: "In 1979 Alexander Schauss claimed a bubblegum shade, Baker-Miller pink, calmed aggressive prisoners, and jails painted cells to match. Later, tighter studies by other researchers did not find the effect. See [[color-psychology]]." },
     { k: "art", text: "In Fragonard's [[painting-the-swing|The Swing]], a woman in a froth of pink silk kicks her slipper into the air over a hidden admirer. The dress is the brightest thing in a dim, green garden." }
   ],
   related: [
@@ -364,7 +365,7 @@ window.WIKI_COLORS = {
   named: "animal",
   since: { year: 1917, what: "Teal first used as a color word in English", approx: false },
   facets: [
-    { k: "language", text: "Teal is a duck. The male Eurasian teal has a green-blue band sweeping back from its eye, and that patch gave the color its name, one of many colors named after animals, like [[Canary|canary]] and [[Taupe|taupe]]. Its first known use as a color word in English is from 1917." }
+    { k: "language", text: "Teal is a duck. The male Eurasian teal has a green-blue band sweeping back from its eye, and that patch gave the color its name, one of many colors named after animals, like [[Canary|canary]] and [[Taupe|taupe]]. It is usually dated as a color word to 1917, though some dictionaries find it only in the early 1920s." }
   ],
   related: [
     { to: "Canary", why: "Another color named after a bird" },
@@ -380,7 +381,7 @@ window.WIKI_COLORS = {
 "Aqua": {
   named: "nature",
   facets: [
-    { k: "language", text: "Aqua is Latin for water. On screens it is exactly cyan, #00FFFF: the X Window System gave cyan a second name, aqua, in 1987, and the web kept both. Cyan comes from Greek kyanos, dark blue enamel, the word [[homer|Homer]] used for the dark brows of Zeus." },
+    { k: "language", text: "Aqua is Latin for water. On screens it is exactly cyan, #00FFFF: the 16 basic HTML colors, taken from the Windows VGA palette, gave cyan a second name, aqua, and the web kept both. Cyan comes from Greek kyanos, dark blue enamel, the word [[homer|Homer]] used for the dark brows of Zeus." },
     { k: "design", text: "Cyan is one of the three printing inks, with [[Magenta|magenta]] and [[Yellow|yellow]], plus black: CMYK. Every full-color magazine photo is built from tiny dots of those inks that your eye blends. See [[optical-mixing]]." }
   ],
   related: [
@@ -389,7 +390,7 @@ window.WIKI_COLORS = {
     { to: "Blue", why: "Homer's kyanos, the root of cyan, meant dark, not sky blue" }
   ],
   sources: [
-    "Wikipedia, 'Aqua (color)' (X11 name, 1987; HTML 3.2)",
+    "W3C, HTML 3.2 Reference Specification (1997), the 16 color names",
     "Etymonline, 'cyan'"
   ]
 },
@@ -458,7 +459,7 @@ window.WIKI_COLORS = {
   facets: [
     { k: "language", text: "Cerulean comes from Latin caeruleus, the dark blue of sea and sky, probably from caelum, heaven." },
     { k: "history", text: "Cerulean blue paint is cobalt and tin oxides fired together. A Swiss chemist made it in the late 1700s, but painters only got it after the London colorman George Rowney sold it as 'coeruleum' around 1860. It is a cool, slightly greenish blue that does not fade. See [[cobalt-blue-pigment]]." },
-    { k: "design", text: "Pantone launched its [[color-of-the-year|Color of the Year]] with Cerulean for 2000, calling it the color of the millennium. Six years later, The Devil Wears Prada built a famous speech around a cerulean sweater and how a runway shade trickles down to the bargain bin." }
+    { k: "design", text: "Pantone launched its [[color-of-the-year|Color of the Year]] with Cerulean for 2000, to mark the turn of the millennium. Six years later, The Devil Wears Prada built a famous speech around a cerulean sweater and how a runway shade trickles down to the bargain bin." }
   ],
   related: [
     { to: "Cobalt", why: "Both are cobalt pigments; cerulean adds tin" },
@@ -561,7 +562,7 @@ window.WIKI_COLORS = {
 "Scarlet": {
   named: "material",
   facets: [
-    { k: "language", text: "Scarlet was a fabric before it was a color. In medieval England the word meant a costly, finely finished wool cloth, and because the best of it was dyed brilliant red, the name slid from the cloth to its color. It came through French and Latin from Persian saqerlat." },
+    { k: "language", text: "Scarlet was a fabric before it was a color. In medieval England the word meant a costly, finely finished wool cloth, and because the best of it was dyed brilliant red, the name slid from the cloth to its color. It came through French and Medieval Latin; the deeper origin is uncertain, perhaps Arabic siqillat, a fine silk." },
     { k: "history", text: "The dye made the difference. [[kermes|Kermes]] insects from Mediterranean oaks gave the finest medieval scarlet, until American [[cochineal]] took over. In the British army, ordinary soldiers wore red coats dyed with cheap madder, while officers paid for scarlet dyed with cochineal." },
     { k: "poetry", text: "In the Book of Revelation the great harlot is dressed in purple and scarlet. In Hawthorne's The Scarlet Letter (1850), Hester Prynne must wear a red letter A for adultery. Scarlet became the color of sin worn in public." }
   ],
@@ -829,9 +830,9 @@ window.WIKI_COLORS = {
 
 "Lime": {
   named: "fruit",
-  since: { year: 1890, what: "Lime green first used as a color name in English", approx: false },
+  since: { year: 1883, what: "Lime green first used as a color name in English", approx: true },
   facets: [
-    { k: "language", text: "Lime green is recorded as a color name from 1890, in a London newspaper." },
+    { k: "language", text: "Lime green is recorded as a color name by 1883." },
     { k: "science", text: "A 2009 US Fire Administration study found fluorescent yellow-green and orange the easiest colors to spot in daylight, and some fire departments now paint their trucks lime-yellow instead of red. It works because your eye is most sensitive to yellow-green ([[trichromacy]])." }
   ],
   related: [
@@ -840,7 +841,8 @@ window.WIKI_COLORS = {
     { to: "Green", why: "Yellow-green sits at the peak of the eye's sensitivity" }
   ],
   sources: [
-    "Wikipedia, 'Lime (color)' (first use 1890; USFA 2009 study)"
+    "Wikipedia, 'Lime (color)' (first use 1890)",
+    "US Fire Administration, Emergency Vehicle Visibility and Conspicuity Study, FA-323 (August 2009)"
   ]
 },
 
@@ -862,7 +864,7 @@ window.WIKI_COLORS = {
 "Kelly green": {
   named: "person",
   facets: [
-    { k: "culture", text: "Kelly green is named after Kelly, one of Ireland's most common surnames. Ireland has been the [[Emerald|Emerald Isle]] since William Drennan's 1795 poem 'When Erin First Rose'. Officially, though, Ireland's [[heraldry|heraldic]] color is blue: the [[Gold|gold]] harp sits on [[Azure|azure]], the knights of the Order of St Patrick (1783) wore [[Sky blue|sky blue]], and the national football team played in blue until 1931." }
+    { k: "culture", text: "Kelly green is named after Kelly, one of Ireland's most common surnames. Ireland has been the [[Emerald|Emerald Isle]] since William Drennan's 1795 poem 'When Erin First Rose'. Officially, though, Ireland's [[heraldry|heraldic]] color is blue: the [[Gold|gold]] harp sits on [[Azure|azure]], the knights of the Order of St Patrick (1783) wore [[Sky blue|sky blue]], and the all-Ireland football team played in blue until 1931." }
   ],
   related: [
     { to: "Emerald", why: "Ireland is the Emerald Isle, a phrase from a 1795 poem" },
@@ -878,10 +880,10 @@ window.WIKI_COLORS = {
 
 "Emerald": {
   named: "gem",
-  since: { year: -1500, what: "Egyptians mining emeralds in the Eastern Desert", approx: true },
+  since: { year: -250, what: "Ptolemaic emerald mines in Egypt's Eastern Desert", approx: true },
   facets: [
     { k: "science", text: "Emerald is green beryl. Pure beryl is colorless; a trace of chromium, or sometimes vanadium, turns it green." },
-    { k: "history", text: "Egyptians were mining emeralds in the Eastern Desert by about 1500 BCE, and Romans and Byzantines worked the same mines. Spanish conquerors later found far richer stones in Colombia, which became the world's great source. Emerald green paint was something else: a copper-arsenic pigment made from 1814 and sold as Paris green. See [[arsenic-greens]]." },
+    { k: "history", text: "Egypt's Eastern Desert emerald mines were opened under the Ptolemies, after 300 BCE, and worked hard by the Romans. Spanish conquerors later found far richer stones in Colombia, which became the world's great source. Emerald green paint was something else: a copper-arsenic pigment made from 1814 and sold as Paris green. See [[arsenic-greens]]." },
     { k: "poetry", text: "In L. Frank Baum's The Wonderful Wizard of Oz (1900), the Emerald City is only as green as its visitors' glasses: everyone inside must wear green spectacles, locked on." },
     { k: "design", text: "Pantone made Emerald its [[color-of-the-year|Color of the Year]] for 2013." }
   ],
@@ -893,7 +895,8 @@ window.WIKI_COLORS = {
     { to: "Orchid", why: "Pantone's Color of the Year right after Emerald, in 2014" }
   ],
   sources: [
-    "Wikipedia, 'Emerald' (chromium/vanadium; Egyptian mines from c. 1500 BC)",
+    "Wikipedia, 'Emerald' (chromium/vanadium)",
+    "Harrell, J. A. (2004). Archaeological geology of the world's first emerald mine. Geoscience Canada 31(2)",
     "Baum, The Wonderful Wizard of Oz (1900)",
     "Pantone, Color of the Year 2013: Emerald 17-5641"
   ]
@@ -954,7 +957,7 @@ window.WIKI_COLORS = {
   named: "drink",
   since: { year: 1884, what: "Chartreuse first used as a color word in English", approx: false },
   facets: [
-    { k: "history", text: "Chartreuse was a liqueur first. In 1605 a French nobleman gave the Carthusian monks near Grenoble an [[alchemy|alchemical]] manuscript for an elixir of long life. The monks have made liqueurs from it since 1737, with about 130 herbs, plants and flowers, and only two monks at a time know the whole recipe. Green Chartreuse as sold today dates from 1840; the color name followed in 1884." }
+    { k: "history", text: "Chartreuse was a liqueur first. In 1605 a French nobleman gave the Carthusian monks near Grenoble an [[alchemy|alchemical]] manuscript for an elixir of long life. The monks began working on it in 1737 and fixed the elixir's formula in 1764. It uses about 130 herbs, plants and flowers, and only two monks at a time know the whole recipe. Green Chartreuse dates from 1840; the color name followed in 1884." }
   ],
   related: [
     { to: "Burgundy", why: "Another color named after a French drink" },
@@ -1123,7 +1126,7 @@ window.WIKI_COLORS = {
   named: "flower",
   since: { year: 1775, what: "Lilac first used as a color word in English", approx: false },
   facets: [
-    { k: "language", text: "Lilac goes back to Persian lilak, a form of nilak, bluish, from nil, indigo, and Sanskrit nila, dark blue. Indigo's old name, anil, comes from the same root and gave chemistry the word aniline, the base of the first synthetic dyes like [[mauveine]]. Lilac is recorded as a color in English from 1775." },
+    { k: "language", text: "Lilac probably goes back to Persian lilak, a form of nilak, bluish, from nil, indigo, and Sanskrit nila, dark blue. Indigo's old name, anil, comes from the same root and gave chemistry the word aniline, the base of the first synthetic dyes like [[mauveine]]. Lilac is recorded as a color in English from 1775." },
     { k: "poetry", text: "Walt Whitman's elegy for Abraham Lincoln, 'When Lilacs Last in the Dooryard Bloom'd' (1865), ties the flower to grief: the lilacs were in bloom that April when Lincoln was shot." },
     { k: "culture", text: "In British and European mourning customs, lilac belonged to the final stage, as black gave way to softer colors ([[mourning-colors]])." }
   ],
@@ -1194,7 +1197,7 @@ window.WIKI_COLORS = {
 "Indigo": {
   named: "plant",
   facets: [
-    { k: "language", text: "Indigo comes from Greek indikon, 'the Indian dye', because India supplied it to Europe. Its other old name, anil, from Arabic an-nil and Sanskrit nila, lives on in aniline, the chemical behind the first synthetic dyes, and in [[Lilac|lilac]]." },
+    { k: "language", text: "Indigo comes from Greek indikon, 'the Indian dye', because India supplied it to Europe. Its other old name, anil, from Arabic an-nil and Sanskrit nila, lives on in aniline, the chemical behind the first synthetic dyes, and probably in [[Lilac|lilac]]." },
     { k: "history", text: "European woad and Indian Indigofera make the same blue molecule. The trade was brutal: in 1859 Bengal's farmers rose against European planters in the Indigo Revolt, and in colonial South Carolina, indigo grown by enslaved people became the second cash crop after rice. Adolf von Baeyer synthesized indigo in 1878, and BASF's factory indigo, from 1897, undercut the plantations. See [[indigo-dye]]." },
     { k: "philosophy", text: "[[isaac-newton|Newton]] first counted five colors in his prism. In the 1670s he added orange and indigo, making seven to match the musical scale. Many people today struggle to see indigo as its own band. See [[spectrum]]." }
   ],
@@ -1261,7 +1264,7 @@ window.WIKI_COLORS = {
   named: "animal",
   since: { year: 1775, what: "Puce in fashion at the court of Louis XVI", approx: true },
   facets: [
-    { k: "language", text: "Puce is French for flea. Couleur puce, flea color, was the fashion at the court of Louis XVI in the late 1700s and is said to have been Marie Antoinette's favorite, though no portrait shows her wearing it." }
+    { k: "language", text: "Puce is French for flea. Couleur puce, flea color, was the fashion at the court of Louis XVI in the late 1700s and is said to have been a favorite of Marie Antoinette." }
   ],
   related: [
     { to: "Taupe", why: "Another French animal color: taupe is a mole, puce a flea" },
@@ -1460,7 +1463,7 @@ window.WIKI_COLORS = {
   since: { year: 1887, what: "Beige first used as a color word in English", approx: false },
   facets: [
     { k: "language", text: "Beige is French for natural wool, neither bleached nor dyed, as [[Ecru|ecru]] is for linen. The word spread in France around 1855 to 1860 and is recorded as a color in English from 1887." },
-    { k: "design", text: "From the 1970s to the 1990s, beige was the color of computers: keyboards, monitors and towers, a look that started in Germany and spread worldwide." }
+    { k: "design", text: "From the 1970s to the 1990s, beige was the color of computers: keyboards, monitors and towers, a look Apple and IBM popularized and German office rules helped lock in." }
   ],
   related: [
     { to: "Ecru", why: "Both mean undyed: beige wool, ecru linen" },
@@ -1572,7 +1575,7 @@ window.WIKI_COLORS = {
 "Tangerine": {
   named: "fruit",
   facets: [
-    { k: "language", text: "Tangerine means 'of Tangier', the Moroccan port that shipped the fruit, a kind of mandarin. The Oxford English Dictionary's first example of the word is from 1710." },
+    { k: "language", text: "Tangerine means 'of Tangier', the Moroccan port that shipped the fruit, a kind of mandarin. The word appears in 1710 for a native of Tangier; the fruit has been called a tangerine since the 1840s." },
     { k: "design", text: "Pantone named Tangerine Tango its [[color-of-the-year|Color of the Year]] for 2012." }
   ],
   related: [
@@ -1602,7 +1605,7 @@ window.WIKI_COLORS = {
 
 "Ochre": {
   named: "mineral",
-  since: { year: -73000, what: "Engraved ochre at Blombos Cave, South Africa", approx: true },
+  since: { year: -75000, what: "Engraved ochre at Blombos Cave, South Africa", approx: true },
   facets: [
     { k: "history", text: "Ochre is the oldest paint there is. Evidence from Africa suggests people were processing it some 300,000 years ago. At Blombos Cave someone engraved a crosshatch on a piece of it about 75,000 years ago, and at Lascaux a horse was painted in yellow ochre about 17,300 years ago. See [[earth-pigments]]." },
     { k: "science", text: "Ochre is earth colored by iron. Yellow ochre owes its color to goethite. Heat it, the goethite turns to hematite, and the yellow becomes red, so early painters could get both colors from one earth." },
