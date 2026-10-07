@@ -275,7 +275,7 @@ function honeyWrap(ctx, name) {
 function honeyWhere(it) {
   if (it.c) {
     const u = UNITS.find(u => u.colors.includes(it.c)), s = it.c.id && S.cards[it.c.id];
-    return [u ? `Unit ${u.i + 1} of the 101` : "A basic word", s ? (isMine(s) ? "you know it" : "learning") : ""].filter(Boolean).join(" · ");
+    return [u ? `Unit ${u.i + 1}` : "A basic word", s ? (isMine(s) ? "you know it" : "learning") : ""].filter(Boolean).join(" · ");
   }
   return (it.lib && srcLine(it.lib)) || "Name library";
 }

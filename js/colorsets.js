@@ -107,7 +107,7 @@ const csNeedsLib = st => st.base === "all" || (st.sources && st.sources.length >
 function csApply(st) { return filterColors(csBase(st.base), st); }
 const csSet = (id, title, group, o) => ({ id, title, group, state: { ...CS_FULL, ...o }, get() { return csApply(this.state); } });
 const COLOR_SETS = [
-  csSet("101", "The 101", "Collections", { base: "101" }),
+  csSet("101", "Lesson colors", "Collections", { base: "101" }),
   csSet("all", "Every name", "Collections", {}),
   csSet("spread", "Even 500", "Collections", { n: 500 }),
   csSet("yours", "Yours", "Collections", { base: "yours" }),
@@ -252,7 +252,7 @@ function cxTitle(ch, st) {
   }
   if (!ch.narrow) {
     const known = csBase("yours").length;
-    return { "101": "The 101 colors you're learning", all: LONG_NAMES ? `All ${csItems().length.toLocaleString()} names` : "Every name",
+    return { "101": "The colors your lessons teach", all: LONG_NAMES ? `All ${csItems().length.toLocaleString()} names` : "Every name",
       yours: `The ${known} color${known === 1 ? "" : "s"} you know`, spread: `An even spread of ${ch.n}` }[ch.which];
   }
   return cxNoun(ch.narrow) + { "101": " you're learning", all: " · from every name", yours: " you know", spread: ` · an even ${ch.n}` }[ch.which];
@@ -295,7 +295,7 @@ function colorExplorer(opts = {}) {
   if (typeof XSTACK !== "undefined") XSTACK = [];
   const el = show(`
     <div class="cx-stage"><div class="cx-view"></div>
-      <div class="cx-empty" hidden><p></p><button class="cx-pill" data-reset>Show the 101 again</button></div></div>
+      <div class="cx-empty" hidden><p></p><button class="cx-pill" data-reset>Show your lesson colors again</button></div></div>
     <header class="cx-top">
       <button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button>
       <button class="cx-title glass-box" aria-haspopup="dialog" aria-label="Change which colors you see"><b><span></span>${CX_ICON.down}</b><small></small></button>
@@ -365,7 +365,7 @@ function colorExplorer(opts = {}) {
     const { sh, close } = sheet(`<div class="cx-sh">
       <div class="cx-sh-head"><h3>What to show</h3><button class="cx-link" data-reset>Reset</button></div>
       <div class="cx-sec"><b>Which colors</b></div>
-      ${row("101", "The 101 you're learning", "The words the lessons teach", pal({ which: "101" }, 5), 101)}
+      ${row("101", "Lesson colors", "The words the lessons teach now", pal({ which: "101" }, 5), 101)}
       ${LONG_NAMES ? row("all", "Every name", "The whole name library", lib, csItems().length.toLocaleString()) : ""}
       ${known ? row("yours", "The ones you know", "Every name you have learned, checked or not yet", pal({ which: "yours" }, 5), known) : ""}
       ${LONG_NAMES ? `<div class="cx-opt cx-spread${ch.which === "spread" && !tuned ? " on" : ""}"><span class="cx-opt-t"><b>An even spread</b><small>The widest range in fewer colors</small></span>
@@ -510,7 +510,7 @@ function colorSheet(it, open) {
     ${lib && lib.note ? `<p class="hc-note">${esc(lib.note)}</p>` : ""}
     ${also ? `<p class="hc-note hc-also">${also}</p>` : ""}
     <button class="hc-hex" data-copy><span>${it.h}</span><small>Copy</small></button>
-    ${app ? `<div class="eyebrow hc-near-h">Nearest of the 101 to learn</div>
+    ${app ? `<div class="eyebrow hc-near-h">Nearest names to learn</div>
     <button class="kin" data-near><i style="--c:${app.h}"></i><b>${esc(app.n)}</b><span>${closeness(near.d)} · ${pctDiff(near.d)}</span></button>` : ""}
     <div class="fine">Hex values are screen approximations.</div>`);
   sh.querySelector("[data-copy]").onclick = () => { try { navigator.clipboard.writeText(it.h); toast("Copied " + it.h); } catch (e) {} };
