@@ -301,24 +301,21 @@ function gymHome() {
     </button>`;
   }
   const el = show(`
-    <header class="bar"><div class="brand">${LOGO}<span>ColorHub</span></div><span class="eyebrow">Eye training</span></header>
-    <h1 class="tab-title" style="margin-top:22px">Train</h1>
+    ${tabHead()}
+    <h1 class="tab-title">Train</h1>
     ${top}
     ${eyeProfile()}
     ${cvdOn() ? `<p class="x-sub" style="margin-top:12px">Stations are tuned for ${S.profile.cvd} color blindness: differences lean on lightness and the colors you see best.</p>` : ""}
     ${SHELVES.map(([name, ks]) => `<div class="sec-head"><b>${name}</b><span>${name === "Applied" ? "built on the basics" : name === "In context" ? "color next to color" : "one judgment at a time"}</span></div>
       <div class="gs-grid">${ks.map(stationTile).join("")}</div>`).join("")}
-    <div class="sec-head"><b>Play</b></div>
-    <button class="play-row" data-taste="color"><span><b>Find your color</b><span>About 20 quick choices. Get a map of the colors you love and avoid.</span></span><em>${S.fav ? esc(S.fav.n) + "-ish" : "new"}</em></button>
-    <button class="play-row" data-taste="palette"><span><b>Find your palette</b><span>About 15 quick choices. Find your palette dials and your painters.</span></span><em>${(S.palettes || []).length ? S.palettes.length + " saved" : "new"}</em></button>
-    <button class="play-row" data-lightning><span><b>Lightning round</b><span>Forty-five seconds. Name as many as you can.</span></span><em class="lt-best">${S.best.lightning ? `<b>${S.best.lightning}</b>best` : "new"}</em></button>
+    <div class="sec-head"><b>Game</b><span>for fun</span></div>
+    <button class="play-row" data-lightning><span><b>Lightning round</b><span>Forty-five seconds. Name as many colors as you can.</span></span><em class="lt-best">${S.best.lightning ? `<b>${S.best.lightning}</b>best` : "new"}</em></button>
     <p class="fine">Scores are color differences: ΔE (CIEDE2000), and ΔL* for lightness. About 1 is the smallest difference most people can see side by side. Every swatch is at least a quarter of the screen wide, because small patches look less colorful. Practice sharpens these judgments; it isn't a brain-training claim.</p>
   `, "gym", "gym");
   el.querySelectorAll("[data-st]").forEach(b => b.onclick = () => b.dataset.locked ? toast(b.dataset.locked) : runDrill(b.dataset.st));
   const ck = el.querySelector("[data-checkin]"); if (ck) ck.onclick = runCheckin;
   el.querySelector("[data-lightning]").onclick = lightning;
   el.querySelector("[data-eye]").onclick = eyeReport;
-  el.querySelectorAll("[data-taste]").forEach(b => b.onclick = () => tasteIntro(b.dataset.taste));
 }
 const k0Trials = k => k === "order" ? `${SKILLS[k].trials} strips` : k === "squint" ? `${SKILLS[k].trials} paintings` : `${SKILLS[k].trials} rounds`;
 const dueWords = n => n <= 0 ? "today" : n === 1 ? "tomorrow" : `in ${n} days`;

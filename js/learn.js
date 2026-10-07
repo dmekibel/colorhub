@@ -1,5 +1,5 @@
 "use strict";
-// Learn tab: welcome, placement, meet the unit, swipe deck, spaced review, home with the color map.
+// Learn tab (Today): welcome, placement, meet the unit, swipe deck, spaced review, and the Today screen.
 // ======================================================================
 // Welcome: a paint-store wall of every color in the app, sorted into strips by hue.
 // ======================================================================
@@ -15,32 +15,38 @@ function welcome() {
     <div class="wall" aria-hidden="true">${strips.map((s, k) => `<div class="strip" style="--k:${k}">${s.map(p => `<i style="--c:${p.c.h}"></i>`).join("")}</div>`).join("")}</div>
     <div class="copy">
       <h1>Name the colors <em>you see.</em></h1>
-      <p>English has eleven basic color words. Painters and designers use hundreds. Learn them one family at a time, a few minutes a day.</p>
+      <p>Painters and designers use hundreds of color names. Learn them a family at a time, a few minutes a day.</p>
     </div>
     <button class="btn" data-go>Find my level <small>· 60 sec</small></button>
   `, "welcome");
-  el.querySelector("[data-go]").onclick = () => profileSetup(how);
-  onKey = e => { if (e.key === "Enter") profileSetup(how); };
+  // show before asking: the first color is on screen two taps from here; the profile questions wait until Train
+  el.querySelector("[data-go]").onclick = how;
+  onKey = e => { if (e.key === "Enter") how(); };
 }
 
-// Two questions at the start (and any time from the menu): color vision, and which colors you work with.
-// The app adapts: paint people see value and chroma instead of hex, print people get CMYK,
-// and drills lean on lightness and the axis you see best if you're color blind. Not a test or a diagnosis.
-function profileSetup(next) {
+// Two questions, asked the first time they matter (the first visit to Train) and any time from the menu:
+// color vision, and which colors you work with. The app adapts: paint people see value and chroma instead of hex,
+// print people get CMYK, and drills lean on lightness and the axis you see best if you're color blind.
+// Not a test or a diagnosis. Skipping is fine: everything works with the defaults.
+function profileSetup(next, o = {}) {
   const p = Object.assign({ cvd: "typical", media: [] }, S.profile || {});
   const VISION = [["typical", "Typical, as far as I know", ""], ["red-green", "Red–green color blind", "The most common kind, about 1 in 12 men"], ["blue-yellow", "Blue–yellow color blind", "Rare"], ["unsure", "Not sure", "We'll keep drills fair either way"]];
   const MEDIA = [["screen", "Screens & digital", "Hex, RGB and HSL codes"], ["paint", "Paint & pigments", "Value and chroma, real pigments, mixing"], ["print", "Print", "CMYK, and where screen and paper differ"]];
+  const first = !S.profile;
+  S.profileAsked = true; save();
   const el = show(`
-    <header class="deck-top"><button class="icon-btn" data-close aria-label="Close">${ICON.x}</button><span class="eyebrow" style="flex:1">Two questions · ten seconds</span></header>
+    ${navTop(o.why ? esc(o.why) : "Two questions", { close: true })}
     <h1 class="t-title" style="font-size:clamp(48px,14vw,64px)">How do you <em>see</em>, and what do you <em>make</em>?</h1>
     <p class="sec-head" style="margin-top:28px"><b>Color vision</b></p>
     <div class="opt-list" data-q="cvd">${VISION.map(([k, t, d]) => `<button class="opt${p.cvd === k ? " on" : ""}" data-v="${k}"><i></i><span><b>${t}</b>${d ? `<small>${d}</small>` : ""}</span></button>`).join("")}</div>
     <p class="sec-head"><b>The colors you care about</b><span>pick any</span></p>
     <div class="opt-list" data-q="media">${MEDIA.map(([k, t, d]) => `<button class="opt multi${p.media.includes(k) ? " on" : ""}" data-v="${k}"><i></i><span><b>${t}</b><small>${d}</small></span></button>`).join("")}</div>
-    <p class="fine">Not a test or a diagnosis. Change these any time from the menu.</p>
+    <p class="fine">Not a test or a diagnosis. Change these any time from the ⋯ menu.</p>
     <button class="btn" data-go style="margin-top:20px">Continue ${ICON.arrow}</button>
+    ${first ? `<button class="btn ghost" data-skip>Not now</button>` : ""}
   `, "profile");
-  el.querySelector("[data-close]").onclick = () => S.placed ? home() : welcome();
+  el.querySelector("[data-close]").onclick = () => next();
+  const sk = el.querySelector("[data-skip]"); if (sk) sk.onclick = () => next();
   el.querySelectorAll(".opt-list").forEach(list => list.addEventListener("click", e => {
     const b = e.target.closest(".opt"); if (!b) return;
     if (list.dataset.q === "cvd") { p.cvd = b.dataset.v; list.querySelectorAll(".opt").forEach(x => x.classList.toggle("on", x === b)); }
@@ -53,9 +59,8 @@ function profileSetup(next) {
 // How the deck works (shown once, before placement)
 function how() {
   const el = show(`
-    <header class="bar"><button class="icon-btn" data-back aria-label="Back">${ICON.x}</button></header>
+    ${navTop("Placement · 60 seconds", { close: true })}
     <div>
-      <p class="eyebrow">Placement · 60 seconds</p>
       <h1>How many colors can you name?</h1>
       <p class="sub">No typing. Just be honest with yourself.</p>
     </div>
@@ -66,7 +71,7 @@ function how() {
     </div>
     <button class="btn" data-go style="margin-top:22px">Start ${ICON.arrow}</button>
   `, "how");
-  el.querySelector("[data-back]").onclick = () => S.placed ? home() : welcome();
+  el.querySelector("[data-close]").onclick = () => S.placed ? home() : welcome();
   el.querySelector("[data-go]").onclick = () => deck("place");
   onKey = e => { if (e.key === "Enter") deck("place"); };
 }
@@ -394,11 +399,22 @@ function reviewDone(right, total) {
 }
 
 // ======================================================================
-// Home: the color map, the path, and one next step.
+// Today: one primary card (review or the next unit, with the screen's only filled button),
+// then "Today's three" as equal quiet tiles, then the collection.
 // ======================================================================
 // Title with its last word in italic, the editorial way ("Reds & *pinks*")
 const edTitle = t => { const m = esc(t).match(/^(.*?)(\s*(?:&amp;|and)\s*)(.+)$/); return m ? `${m[1]}${m[2]}<em>${m[3]}</em>` : esc(t); };
 const pad2 = n => String(n).padStart(2, "0");
+// The Train tile on Today: the weekly check-in when it's due, else the station Train suggests. Done once you've trained today.
+function todayTrain() {
+  try {
+    const done = TRAIN_KEYS.some(k => { const h = (S.gym.skills[k] || {}).hist || []; return h.length && h[h.length - 1][0] === today(); });
+    const ci = checkinDue(gyState().checkins, triedKeys().length, gyDay());
+    if (ci.due) return { done, art: stationArt(checkinPick(triedKeys(), gyState().checkins)[0] || "hue"), what: "Check-in", open: runCheckin };
+    const sg = suggestStation();
+    return { done, art: stationArt(sg.k), what: SKILLS[sg.k].name, open: () => runDrill(sg.k) };
+  } catch (e) { return { done: false, art: "", what: "Eye training", open: () => go("gym") }; }
+}
 function home() {
   if (!S.placed) return welcome();
   const due = dueList(), nu = nextUnit(), owned = ownedCount(), dc = dailyColor(), dAns = S.daily[today()];
@@ -420,18 +436,24 @@ function home() {
   } else {
     h = { kick: "All caught up", title: "The path is <em>complete</em>", plates: mine.slice(0, 12), meta: ["more tiers are coming"], cta: "", act: "" };
   }
+  // Today's three: the same quiet tile for each, a small picture, a name, and a done / not done line
+  const chR = challengeRounds(), chD = chToday(), tr = todayTrain();
+  const tiles = [
+    { a: "data-challenge", done: !!chD, name: "Challenge", st: chD ? `${chD.hits.filter(Boolean).length} of 6 right` : chStreak() ? `${chStreak()}-day streak` : "6 rounds",
+      art: `<span class="tday-art tday-ch">${chR.map((x, i) => `<i style="--c:${x.base}"${chD ? ` class="${chD.hits[i] ? "hit" : "miss"}"` : ""}></i>`).join("")}</span>` },
+    { a: "data-daily", done: !!dAns, name: "Today's color", st: dAns ? esc(dc.n) : "Name it",
+      art: `<span class="tday-art" data-morph-src style="background:${dc.h}"></span>` },
+    { a: "data-train", done: tr.done, name: "Train", st: tr.done ? "Trained today" : esc(tr.what), art: `<span class="tday-art tday-sa">${tr.art}</span>` }];
+  const nDone = tiles.filter(t => t.done).length;
   const el = show(`
-    <header class="bar"><div class="brand">${LOGO}<span>ColorHub</span></div><span class="bar-r"><button class="icon-btn" data-eye aria-label="Color eye: name what the camera sees">${ICON_CAM}</button><button class="icon-btn" data-menu aria-label="Menu">${ICON.dots}</button></span></header>
+    ${tabHead()}
     <p class="eyebrow kick">${h.kick}</p>
     <h1>${h.title}</h1>
     ${h.plates.length ? `<button class="plates" data-go aria-label="Start">${h.plates.map((c, k) => `<i style="--c:${c.h};--k:${k}"></i>`).join("")}</button>` : ""}
     <div class="meta-line">${h.meta.map(m => `<span>${m}</span>`).join("")}</div>
     ${h.cta ? `<button class="btn" data-${h.act}>${h.cta} ${ICON.arrow}</button>` : ""}
-    <div class="sec-head today-head"><b>Today</b><span>${esc(new Date(Date.now() - 4 * 3600e3).toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" }))}</span></div>
-    <div class="today">
-      ${challengeCard()}
-      <button class="daily-pin" data-daily style="--c:${dc.h}" data-ink="${ink(dc.h)}"><span class="eyebrow">Color of the day</span><b>${dAns ? esc(dc.n) : "What's this one called?"}</b><small>${dAns ? (dAns.ok ? "You named it · read its story" : "Read its story") : "Guess it, then read its story"}</small></button>
-    </div>
+    <div class="sec-head today-head"><b>Today's three</b><span>${nDone === 3 ? "All done" : `${nDone} of 3 done`}</span></div>
+    <div class="trio">${tiles.map(t => `<button class="tday${t.done ? " done" : ""}" ${t.a}>${t.art}<b>${t.name}</b><span class="tday-st">${t.st}</span></button>`).join("")}</div>
     <button class="collection" data-palette aria-label="Your collection">
       <div class="coll-head"><span class="eyebrow">Your collection</span><span class="coll-n"><b data-count="${owned}">${owned}</b><small>/${ALL.length}</small></span></div>
       <div class="quilt">${quilt}</div>
@@ -439,75 +461,14 @@ function home() {
     </button>
     ${installHint()}
   `, "home", "learn");
-  el.querySelector("[data-menu]").onclick = menu;
-  el.querySelector("[data-eye]").onclick = () => eye();
   wireInstall(el);
   const go1 = () => due.length ? deck("review") : nu ? meet(nu) : null;
   el.querySelectorAll("[data-review],[data-learn],[data-go]").forEach(b => b.onclick = go1);
   el.querySelector("[data-palette]").onclick = () => { S.lens = "spectrum"; save(); go("explore"); };
   el.querySelector("[data-daily]").onclick = () => daily();
-  const ch = el.querySelector("[data-challenge]"); if (ch) ch.onclick = () => chToday() ? challengeDone() : challenge();
+  el.querySelector("[data-challenge]").onclick = () => chToday() ? challengeDone() : challenge();
+  el.querySelector("[data-train]").onclick = tr.open;
   onKey = e => { if (e.key === "Enter") go1(); };
-}
-
-// The color sky: every name in the app placed by hue (angle) and strength (distance from the grey center),
-// over a soft blurred color wheel. Unlearned names are faint stars; names in review glow; owned names are bright orbs.
-function drawSky(host) {
-  const stops = []; for (let t = 0; t <= 360; t += 12) stops.push(`${lchHex(62, 70, (450 - t) % 360)} ${t}deg`);
-  const pts = mapPoints();
-  const svg = pts.map(p => {
-    const st = S.cards[p.c.id], x = p.x.toFixed(1), y = p.y.toFixed(1);
-    if (st && st.own) return `<circle cx="${x}" cy="${y}" r="9" fill="${p.c.h}" opacity=".55" filter="url(#glow)"/><circle cx="${x}" cy="${y}" r="5.6" fill="${p.c.h}" stroke="#fff" stroke-opacity=".9" stroke-width="1.1"/>`;
-    if (st) return `<circle cx="${x}" cy="${y}" r="7" fill="${p.c.h}" opacity=".45" filter="url(#glow)"/><circle cx="${x}" cy="${y}" r="3.4" fill="${p.c.h}"/>`;
-    return `<circle class="star" cx="${x}" cy="${y}" r="1.25" fill="#fff" opacity=".34" style="--tw:${(3 + (p.x * 7 + p.y * 13) % 4).toFixed(1)}s"/>`;
-  }).join("");
-  host.innerHTML = `<div class="nebula" style="background:conic-gradient(${stops.join(",")})"></div>
-    <svg viewBox="0 0 320 320" aria-hidden="true"><defs><filter id="glow" x="-1" y="-1" width="3" height="3"><feGaussianBlur stdDeviation="4"/></filter></defs>${svg}</svg>`;
-}
-
-// The color map: every name in the app on the CIELAB a*b* plane (hue = angle, strength = distance
-// from the grey center). Owned names are solid, ones in progress are faint, the rest are outlines.
-let MAP_PTS = null;
-function mapPoints() {
-  if (MAP_PTS) return MAP_PTS;
-  const R = 132, cx = 160, cy = 160;
-  const pts = ALL.map(c => {
-    const [, C, H] = lch(c.h), r = R * Math.pow(Math.min(C, 110) / 110, .62), a = H * Math.PI / 180;
-    const x = cx + r * Math.cos(a), y = cy - r * Math.sin(a);
-    return { c, x, y, ox: x, oy: y };
-  });
-  // Nudge overlapping dots apart while a spring keeps each near its true hue and strength.
-  for (let it = 0; it < 120; it++) {
-    for (let i = 0; i < pts.length; i++) for (let j = i + 1; j < pts.length; j++) {
-      const p = pts[i], q = pts[j], dx = q.x - p.x, dy = q.y - p.y, d = Math.hypot(dx, dy) || .01, min = 14.5;
-      if (d < min) { const m = (min - d) / 2 / d; p.x -= dx * m; p.y -= dy * m; q.x += dx * m; q.y += dy * m; }
-    }
-    pts.forEach(p => { p.x += (p.ox - p.x) * .06; p.y += (p.oy - p.y) * .06; });
-  }
-  return (MAP_PTS = pts);
-}
-function drawMap(host) {
-  const stops = []; for (let t = 0; t <= 360; t += 10) stops.push(`${lchHex(68, 48, (450 - t) % 360)} ${t}deg`);
-  host.style.setProperty("--ring", `conic-gradient(${stops.join(",")})`);
-  const dots = mapPoints().map(p => {
-    const st = S.cards[p.c.id], cls = st && st.own ? "own" : st ? "learning" : "new";
-    const attrs = cls === "own" ? `r="7" fill="${p.c.h}" stroke="#F3F3F1" stroke-width="1.6"`
-      : cls === "learning" ? `r="6" fill="${p.c.h}" fill-opacity=".6"`
-      : `r="5" fill="${p.c.h}" fill-opacity=".2"`;
-    return `<circle class="dot ${cls}" data-id="${esc(p.c.id)}" cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" ${attrs}/>`;
-  }).join("");
-  host.innerHTML = `<div class="ring"></div><svg viewBox="0 0 320 320" role="img" aria-label="Map of color names">
-    <circle cx="160" cy="160" r="66" fill="none" stroke="rgba(255,255,255,.05)"/>
-    <path d="M160 34V286M34 160H286" stroke="rgba(255,255,255,.035)"/>${dots}</svg>`;
-  host.querySelector("svg").addEventListener("click", e => {
-    const t = e.target.closest(".dot"); host.querySelectorAll(".tip").forEach(n => n.remove());
-    if (!t) return;
-    const c = ALL.find(x => x.id === t.dataset.id), st = S.cards[c.id];
-    const tip = document.createElement("div"); tip.className = "tip";
-    tip.textContent = st ? c.n : "Not learned yet";
-    const s = host.clientWidth / 320; tip.style.left = t.getAttribute("cx") * s + "px"; tip.style.top = t.getAttribute("cy") * s + "px";
-    host.appendChild(tip); setTimeout(() => tip.remove(), 1800);
-  });
 }
 
 function menu() {
@@ -522,13 +483,13 @@ function menu() {
   sh.onclick = e => {
     const a = e.target.closest("[data-a]"); if (!a) return;
     close();
-    if (a.dataset.a === "profile") profileSetup(home);
+    if (a.dataset.a === "profile") profileSetup(() => go(S.tab || "learn"));
     if (a.dataset.a === "backup") backupProgress();
     if (a.dataset.a === "restore") restoreProgress();
     if (a.dataset.a === "place") how();
     if (a.dataset.a === "about") about();
     if (a.dataset.a === "haptics") { S.haptics = S.haptics === false; save(); buzz(12); toast(`Haptics ${S.haptics ? "on" : "off"}`); }
-    if (a.dataset.a === "reset" && confirm("Erase all progress on this device?")) { S = fresh(); save(); MAP_PTS = null; welcome(); }
+    if (a.dataset.a === "reset" && confirm("Erase all progress on this device?")) { S = fresh(); save(); welcome(); }
   };
 }
 function about() {
@@ -567,4 +528,3 @@ function wireInstall(el) {
   if (i) i.onclick = async () => { const e = INSTALL_EVT; INSTALL_EVT = null; e.prompt(); try { await e.userChoice; } catch (x) {} home(); };
   if (n) n.onclick = () => { S.installNo = true; save(); el.querySelector(".inst").remove(); };
 }
-const ICON_CAM = sv('<path d="M4 8.5A2.5 2.5 0 0 1 6.5 6h1.8l1.4-2h4.6l1.4 2h1.8A2.5 2.5 0 0 1 20 8.5v8A2.5 2.5 0 0 1 17.5 19h-11A2.5 2.5 0 0 1 4 16.5z"/><circle cx="12" cy="12.5" r="3.4"/>', 22, 1.8);

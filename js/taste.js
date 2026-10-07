@@ -33,7 +33,7 @@ function tasteIntro(kind) {
     <button class="btn" data-go>Begin ${ICON.arrow}</button>
     ${last ? `<button class="btn ghost" data-last>See your last result · ${esc(last.at)}</button>` : ""}
   `, "taste tz-intro");
-  el.querySelector("[data-close]").onclick = () => go("gym");
+  el.querySelector("[data-close]").onclick = () => go("studio");
   el.querySelector("[data-go]").onclick = () => tasteRun(kind);
   const lb = el.querySelector("[data-last]"); if (lb) lb.onclick = () => tzReopen(kind);
 }
@@ -51,7 +51,7 @@ function tzDuel(total) {
     <div class="tz-duel" id="tduel"></div>
     <div class="tz-alt"><button data-alt="both">Both</button><i></i><button data-alt="neither">Neither</button></div>
   `, "fixed tz-run");
-  el.querySelector("[data-close]").onclick = () => go("gym");
+  el.querySelector("[data-close]").onclick = () => go("studio");
   const $ = s => el.querySelector(s), duel = $("#tduel"), segs = $("#tsegs");
   let done = 0, locked = true, cb = null, cols = null;
   const answer = k => {
@@ -231,7 +231,7 @@ function tzColorResult(m, reopen) {
   `, "article tz-res");
   wireLinks(el);
   const map = el.querySelector("#map"); map.appendChild(tzRoseCanvas(R, Math.min(map.clientWidth || 346, 380)));
-  el.querySelector("[data-close]").onclick = () => go("gym");
+  el.querySelector("[data-close]").onclick = () => go("studio");
   el.querySelector("[data-again]").onclick = () => tasteRun("color");
   el.querySelector("[data-pal]").onclick = () => tasteIntro("palette");
   el.querySelectorAll("[data-word]").forEach(b => b.onclick = () => { const n = graph().resolve(b.dataset.word); if (n) closeup(n); });
@@ -333,7 +333,7 @@ function tzPalResult(m, reopen) {
     <p class="fine">How it works: each pair mostly changed one thing (contrast, vividness, warmth, hue spread, number of colors or proportions). A choice model learns how much of each you like best; the dot is that ideal, and a faded dial means your choices didn't lean either way. Tap a color to copy its code.</p>
   `, "article tz-res");
   wireLinks(el);
-  el.querySelector("[data-close]").onclick = () => go("gym");
+  el.querySelector("[data-close]").onclick = () => go("studio");
   el.querySelector("[data-again]").onclick = () => tasteRun("palette");
   el.querySelector("[data-master]").onclick = () => tzMaster();
   el.querySelector("[data-shuffle]").onclick = () => {
@@ -396,7 +396,7 @@ function tzMaster() {
       <div class="stack" style="margin-top:26px"><button class="btn" data-again>Play again ${ICON.arrow}</button></div>
     `, "article tz-res");
     wireLinks(el);
-    el.querySelector("[data-close]").onclick = () => go("gym");
+    el.querySelector("[data-close]").onclick = () => go("studio");
     el.querySelector("[data-again]").onclick = () => tzMaster();
   };
   round();
