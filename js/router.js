@@ -1,6 +1,8 @@
 "use strict";
 // Addresses. Every meaningful screen has a hash route, so it can be shared, bookmarked and reloaded:
-//   #/today  #/train  #/studio  #/explore  #/explore/<colors|paintings|ideas|saved>
+//   #/today  #/train  #/studio  #/explore  #/explore/<art|ideas|world|saved>
+//   (older #/explore/paintings and #/explore/poems open Art; #/explore/colors and #/explore/spectrum open
+//   the pager itself — js/explore.js dropped the "Colors" lens and merged Paintings + Poems into Art)
 //   #/color/<slug>  #/page/<id>  #/painting/<slug>  #/story/<id>     (add /more for the "More like this" closeup)
 //   #/photo/<id>  a photo saved in Studio (js/photos.js, IndexedDB on this device)
 //   #/studio/wheel  the gamut wheel · #/studio/palette/<id>  a saved palette (js/studio.js, in S.palettes)
@@ -19,7 +21,10 @@
 const routeSlug = s => String(s).normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 const APP_BASE = () => location.origin + location.pathname.replace(/[^/]*$/, "");
 const TAB_ROUTE = { learn: ["today", "Learn"], gym: ["train", "Train"], explore: ["explore", "Explore"], studio: ["studio", "Studio"] };
-const LENS_ROUTE = { spectrum: "colors", paintings: "paintings", poems: "poems", ideas: "ideas", world: "world", saved: "saved" };   // "For you" is plain #/explore
+const LENS_ROUTE = { art: "art", ideas: "ideas", world: "world", saved: "saved" };   // "For you" (the pager) is plain #/explore
+const LENS_TITLE = { art: "Art", ideas: "Ideas", world: "World", saved: "Saved" };
+// legacy lens tokens, from before Paintings/Poems merged into Art and Colors was dropped (links, bookmarks, S.lens left over from an old save)
+const LENS_LEGACY = { paintings: "art", poems: "art", colors: "all", spectrum: "all" };
 let ROUTE_NEXT = null, ROUTE_REPLACE = false, ROUTE_NOW = "";
 
 function nodeRoute(n) {
@@ -33,7 +38,7 @@ function nodeRoute(n) {
 }
 function tabRoute(tab) {
   const [path, title] = TAB_ROUTE[tab] || TAB_ROUTE.learn;
-  if (tab === "explore" && LENS_ROUTE[S.lens]) return { path: path + "/" + LENS_ROUTE[S.lens], title: S.lens === "saved" ? "Saved" : title };
+  if (tab === "explore" && LENS_ROUTE[S.lens]) return { path: path + "/" + LENS_ROUTE[S.lens], title: LENS_TITLE[S.lens] || title };
   return { path, title };
 }
 const routeURL = path => APP_BASE() + "#/" + path;
@@ -123,7 +128,7 @@ function openRoute(hash, initial = false) {
   // the floor (the honeycomb, js/home.js): not a tab, so it's its own address
   if (kind === "home" && typeof hmHome === "function") { base(); XSTACK = []; hmHome(); return true; }
   if (tabs[kind]) {
-    if (kind === "explore") S.lens = Object.keys(LENS_ROUTE).find(k => LENS_ROUTE[k] === id) || "all";
+    if (kind === "explore") S.lens = LENS_LEGACY[id] || Object.keys(LENS_ROUTE).find(k => LENS_ROUTE[k] === id) || "all";
     go(tabs[kind]);
     return true;
   }
