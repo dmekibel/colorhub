@@ -745,9 +745,16 @@ def describe(lab):
     return f"{light} {sat} {name}"
 
 
+def corpus_rows():
+    """data/corpus.json, or every shard in data/corpus/*.json when tools/corpus.py has split the corpus."""
+    one = ROOT / "data" / "corpus.json"
+    files = [one] if one.exists() else sorted((ROOT / "data" / "corpus").glob("*.json"))
+    return [r for f in files for r in json.loads(f.read_text())]
+
+
 def corpus_swatches():
-    """Every palette color of the 4,655-painting corpus plus the 22 painting pages: (hex, share, painting id)."""
-    out = [(h, s, p["id"]) for p in json.loads((ROOT / "data" / "corpus.json").read_text()) for h, s, *_ in p["p"]]
+    """Every palette color of the painting corpus plus the 22 painting pages: (hex, share, painting id)."""
+    out = [(h, s, p["id"]) for p in corpus_rows() for h, s, *_ in p["p"]]
     for line in (ROOT / "data" / "paintings.js").read_text().split("\n"):
         m = re.search(r'\{"id": "(painting-[^"]+)"', line)
         if m:
