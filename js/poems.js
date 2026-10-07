@@ -199,6 +199,8 @@ async function poemPage(id, opts = {}) {
       <p class="eyebrow">${esc(r.trad)}</p>${poemTextHTML(poem.o, poem.om, oword)}
       ${poem.ro && poem.ro.length ? `<p class="pm-read">${poem.ro.map(esc).join("<br>")}</p>` : ""}</div>` : "";
   const enText = `<div class="pm-text pm-en">${hasOrig ? `<p class="eyebrow">English</p>` : ""}${poemTextHTML(poem.l, poem.m, word)}</div>`;
+  // the poem loads first, so the address is set here, just before the screen is drawn (router.js)
+  if (typeof routed === "function") ROUTE_NEXT = routed(poem.title || "Poem", "poem/" + id);
   const el = show(`
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button>
       ${hasOrig ? `<div class="pm-view" role="tablist">${[["both", "Both"], ["orig", "Original"], ["en", "English"]].map(([k, t]) => `<button class="${view === k ? "on" : ""}" data-view="${k}">${t}</button>`).join("")}</div>` : ""}</header>
