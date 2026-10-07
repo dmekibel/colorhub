@@ -63,10 +63,10 @@ CHROMA_W = 1.5
 THIS = sys.modules[__name__]
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from museums import met, nga, rijks, smk  # noqa: E402  (source adapters; they call back into this module)
+from museums import met, nga, rijks, smk, commons  # noqa: E402  (source adapters; they call back into this module)
 from museums import common as museum_common  # noqa: E402
 
-ADAPTERS = {"met": met, "nga": nga, "rijks": rijks, "smk": smk}
+ADAPTERS = {"met": met, "nga": nga, "rijks": rijks, "smk": smk, "commons": commons}
 SRC = {
     "aic": dict(dir=RAW / "aic", gap=1.0, workers=1, name="Art Institute of Chicago",
                 api="https://api.artic.edu/docs/", license="CC0 metadata; public-domain images"),
@@ -1410,8 +1410,11 @@ def write_corpus(out_rows):
 def write_outputs(rows, stats, finds, fetched):
     out_rows = []
     for r in rows:
-        out_rows.append(dict(id=r["id"], src=r["src"], t=r["t"], a=r["a"], y=r["y"], co=r["co"], mv=r["mv"],
-                             img=r["img"], p=r["p"], L=r["L"], C=r["C"]))
+        row = dict(id=r["id"], src=r["src"], t=r["t"], a=r["a"], y=r["y"], co=r["co"], mv=r["mv"],
+                  img=r["img"], p=r["p"], L=r["L"], C=r["C"])
+        if r.get("url"):  # a record's own page (only Commons sets this; other sources use gallery.py's SOURCES rec)
+            row["url"] = r["url"]
+        out_rows.append(row)
     files = write_corpus(out_rows)
     n_src = Counter(r["src"] for r in rows)
     meta = dict(
