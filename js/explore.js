@@ -358,6 +358,7 @@ function colorPage(n) {
     <section class="gl-in" data-glin></section>
     <div class="c-poems"></div>
     ${typeof archiveRows === "function" ? archiveRows(c) : ""}
+    ${typeof btRow === "function" ? btRow(c) : ""}
     <section class="fx-in" data-world-in></section>
     ${connSection(n)}
     ${w && w.sources ? secHTML("src", "Sources", sourcesHTML(w.sources), false) : ""}

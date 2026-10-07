@@ -1,0 +1,18 @@
+/* Botany (plants behind color names, dye plants, the language of flowers). Reuses app.css/archive.css/poems.css
+   primitives (.kin, .arch-row, .search, .psg-fams, .sec-head, .fine) wherever they already fit; this file only
+   covers the few things that don't already exist. */
+
+.bt-rows{margin-top:0}
+.bt-row .kin:last-child{border-bottom:1px solid var(--rule)}
+
+/* a fact with no linked page (Werner's pairing, a Victorian meaning, a false friend): same rhythm as .kin
+   but plain text, no button affordance */
+.bt-fact{margin:0;padding:11px 0;border-bottom:1px solid var(--rule);font-size:13.5px;line-height:1.5;color:var(--soft)}
+.bt-fact b{color:var(--ink);font-weight:500}
+
+/* the language-of-flowers index */
+.bt-search{margin-top:22px}
+.bt-plain{cursor:default}
+.bt-plain i{background:var(--lift);box-shadow:inset 0 0 0 1px rgba(236,232,223,.18)}
+.bt-plain b,.bt-plain span{opacity:.72}
+.bt-more{margin-top:8px}
