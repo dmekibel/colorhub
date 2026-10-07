@@ -159,7 +159,9 @@ Ends with a lesson score and Next.
   - While dragging the honeycomb both buttons shrink to dots and fade back when you stop.
   - Top: "The 101 you're learning ▾" (tap for views; swipe sideways for All/Learned/Learning/Not met) and the center color's name.
   - Inside Learn/Train/Explore/Studio the same Go button stays bottom-right; swipe down returns to the honeycomb.
-- Tap a color: its card slides up (swatch, two-line story, look-alikes, In paintings/poems/nature links) with one button: Learn it.
+- Tap a color: its FULL page opens directly (no half-height card, no second tap): the bubble grows into the page's swatch; the page has
+  the story, look-alikes, In paintings/poems/nature/fashion, and a prominent Learn it button near the top. Back or swipe down returns
+  to the honeycomb exactly where you were.
 - Learn it = an instant ~2-minute lesson built around that color and its 3-4 closest look-alikes:
   Meet (swipe cards for the ones not yet known) → tell them apart (odd one out with only that group) → sort (strip or 2D board)
   → Pick it (name → choose among the look-alikes) → one memory round. Ends with "You learned teal, and how it differs from
