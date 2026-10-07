@@ -149,7 +149,16 @@ Ends with a lesson score and Next.
 - The app opens on the full-screen color explorer (the 101 you're learning by default); chrome fades while browsing.
 - The honeycomb stays pure: true colors only, no progress rings, no dimming (every color must look exactly like its name).
 - Progress is a view, not a marking: one-tap toggles in the title control: All 101 · Learned · Learning · Not met yet.
-- Floating on top: a small "Continue" pill (next path lesson or review) and a pull-up handle for Today's three.
+- Controls (inspired by ALTER's single notebook door): only two small round corner buttons + one line of text at the top.
+  - Bottom-left "Do": its ring shows how much of today is done; tap → a stack rises up the left edge: Continue (next lesson
+    or review) · Challenge · Today's color · Train (today's suggested station).
+  - Bottom-right "Go": tap → a stack rises up the right edge: Learn (the path) · Train · Explore · Studio · Camera. It replaces
+    the tab bar on home. Long-press Go = camera.
+  - Stacks: items rise one by one with labels sliding in; the honeycomb dims slightly; tap outside or the button to close;
+    only one stack open at a time.
+  - While dragging the honeycomb both buttons shrink to dots and fade back when you stop.
+  - Top: "The 101 you're learning ▾" (tap for views; swipe sideways for All/Learned/Learning/Not met) and the center color's name.
+  - Inside Learn/Train/Explore/Studio the same Go button stays bottom-right; swipe down returns to the honeycomb.
 - Tap a color: its card slides up (swatch, two-line story, look-alikes, In paintings/poems/nature links) with one button: Learn it.
 - Learn it = an instant ~2-minute lesson built around that color and its 3-4 closest look-alikes:
   Meet (swipe cards for the ones not yet known) → tell them apart (odd one out with only that group) → sort (strip or 2D board)
