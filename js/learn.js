@@ -96,6 +96,8 @@ function deck(mode, opts = {}) {
   } else {
     // Reverse cards (name to color) join once a color has been recalled at least once.
     queue = dueList().slice(0, 30).map(c => ({ c, dir: S.cards[c.id].b % 2 ? "r" : "f" }));
+    // A few become production cards (type the name, or build the color): see produce.js
+    if (typeof prodMix === "function") queue = prodMix(queue, opts.force);
   }
   if (!queue.length) return home();
 
@@ -103,6 +105,7 @@ function deck(mode, opts = {}) {
   const first = new Map();          // id -> right on first try?
   const log = [];                   // placement answers
   let cur = null, nxt = null, revealed = false, busy = false, ended = false, extended = false;
+  let prod = null, lastProd = false;   // the live production card (Say it / Make it), and whether the last card was one
 
   const el = show(`
     <header class="deck-top">
@@ -120,8 +123,10 @@ function deck(mode, opts = {}) {
 
   if (mode === "place") later(() => { if (!ended) finish(); }, 60000);
 
-  const keyOfItem = it => it.c.id + "|" + it.dir;
+  const keyOfItem = it => it.c.id + "|" + it.dir + (it.kind ? "|" + it.kind : "");
+  const plain = it => ({ c: it.c, dir: it.dir });
   function cardEl(it, isNext) {
+    if (it.kind) return prodCardEl(it, isNext, keyOfItem(it));
     const c = it.c, nb = mode === "place" ? null : neighbor(c);
     const d = document.createElement("div");
     d.className = "card" + (it.dir === "r" ? " rev" : "") + (isNext ? " next" : "");
@@ -143,13 +148,17 @@ function deck(mode, opts = {}) {
 
   function mount() {
     if (!queue.length || ended) return finish();
+    // never two production cards in a row
+    if (queue[0].kind && lastProd) queue[0] = plain(queue[0]);
+    if (queue[0].kind && queue[1] && queue[1].kind) queue[1] = plain(queue[1]);
+    prod = null; foot.className = "deck-foot";
     if (nxt && nxt.dataset.key === keyOfItem(queue[0])) { cur = nxt; cur.style.transition = cur.style.transform = cur.style.opacity = ""; cur.classList.remove("next"); }
     else { if (nxt) nxt.remove(); cur = cardEl(queue[0]); stage.appendChild(cur); }
     nxt = queue[1] ? cardEl(queue[1], true) : null;
     if (nxt) stage.insertBefore(nxt, cur);
     revealed = false;
-    bind(cur);
-    setFoot();
+    if (queue[0].kind) prod = prodMount(cur, queue[0], foot, { el, done: ok => { revealed = true; fly(ok); } });
+    else { bind(cur); setFoot(); }
     left.textContent = mode === "place" ? "" : String(queue.length);
   }
 
@@ -234,6 +243,7 @@ function deck(mode, opts = {}) {
   function grade(ok) {
     const it = queue.shift();
     const id = it.c.id, firstTry = !first.has(id);
+    lastProd = !!it.kind;
     if (firstTry) first.set(id, ok);
     if (mode === "place") {
       log.push({ c: it.c, ok, stage: it.stage });
@@ -246,7 +256,7 @@ function deck(mode, opts = {}) {
     } else {
       if (mode === "review" && firstTry) schedule(it.c, ok);
       if (ok) { const seg = el.querySelector(`.segs i[data-id="${CSS.escape(id)}"]`); if (seg) seg.classList.add("on"); }
-      else queue.splice(Math.min(2, queue.length), 0, it); // comes back after two other cards
+      else queue.splice(Math.min(2, queue.length), 0, it.kind ? plain(it) : it); // comes back after two other cards, as a swipe card
     }
     mount();
   }
@@ -262,6 +272,7 @@ function deck(mode, opts = {}) {
 
   onKey = e => {
     if (e.key === "Escape") { ended = true; return S.placed ? home() : welcome(); }
+    if (prod) return prod.key(e);
     if (!revealed && (e.key === " " || e.key === "Enter")) { e.preventDefault(); reveal(); }
     else if (revealed && (e.key === "ArrowRight" || e.key === "l")) fly(true);
     else if (revealed && (e.key === "ArrowLeft" || e.key === "h")) fly(false);
@@ -479,6 +490,7 @@ function menu() {
     <button class="item" data-a="restore">Restore a backup ${ICON.chev}</button>
     <button class="item" data-a="about">About the colors ${ICON.chev}</button>
     <button class="item" data-a="haptics">Haptics: ${S.haptics === false ? "off" : "on"} ${ICON.chev}</button>
+    <button class="item" data-a="quick">Quick mode, swipe only: ${S.quick ? "on" : "off"} ${ICON.chev}</button>
     <button class="item danger" data-a="reset">Reset all progress</button>`);
   sh.onclick = e => {
     const a = e.target.closest("[data-a]"); if (!a) return;
@@ -488,6 +500,7 @@ function menu() {
     if (a.dataset.a === "restore") restoreProgress();
     if (a.dataset.a === "place") how();
     if (a.dataset.a === "about") about();
+    if (a.dataset.a === "quick") { S.quick = !S.quick; save(); buzz(8); toast(`Quick mode ${S.quick ? "on" : "off"}`); }
     if (a.dataset.a === "haptics") { S.haptics = S.haptics === false; save(); buzz(12); toast(`Haptics ${S.haptics ? "on" : "off"}`); }
     if (a.dataset.a === "reset" && confirm("Erase all progress on this device?")) { S = fresh(); save(); welcome(); }
   };
@@ -496,7 +509,8 @@ function about() {
   sheet(`<h3>About the colors</h3>
     <p>Every swatch is a screen approximation. Hex values come from the CSS named colors, Wikipedia's list of colors and the xkcd color survey, where people named millions of colors. Where those disagree with what most people picture (CSS "khaki" is a pale yellow), we picked between them.</p>
     <p>Why names matter: Russian has separate words for light blue and dark blue, and Russian speakers tell those blues apart a little faster (Winawer et al., 2007). The effect is real but modest. Names give you handles; practice with feedback sharpens the eye.</p>
-    <p>How the deck works: a color counts as yours once you recall it a day or more after learning it. Reviews space out from 1 day to 3, 7, 16, 35 and 90 days.</p>`);
+    <p>How the deck works: a color counts as yours once you recall it a day or more after learning it. Reviews space out from 1 day to 3, 7, 16, 35 and 90 days.</p>
+    <p>Once you've recalled a name, some review cards ask you to type it (Say it) or build the color (Make it). Producing an answer from memory makes it stick better than recognizing it. Quick mode in the menu turns these off.</p>`);
 }
 
 // ---------- backup: progress lives on this device, so let people keep a copy ----------
