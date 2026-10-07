@@ -173,6 +173,7 @@ function countUp(root) {
     const t0 = performance.now(), dur = 900 + Math.min(600, to * 6);
     const step = t => { const k = Math.min(1, (t - t0) / dur), e = 1 - (1 - k) ** 4; el.textContent = (to * e).toFixed(dec); if (k < 1) requestAnimationFrame(step); };
     el.textContent = (0).toFixed(dec); requestAnimationFrame(step);
+    setTimeout(() => { el.textContent = to.toFixed(dec); }, dur + 150);   // lands even if animation frames are paused
   });
 }
 document.addEventListener("load", e => { if (e.target.tagName === "IMG") e.target.classList.add("ld"); }, true);
@@ -201,21 +202,24 @@ function show(html, cls = "", tab = null) {
 }
 // Three tabs, one job each: Learn (the path), Gym (train the eye), Explore (the color wiki).
 const TABS = [["learn", "Learn"], ["gym", "Gym"], ["explore", "Explore"]];
-// The tab bar (iOS 26 style): full at rest, shrinks to one round button while you scroll down,
-// comes back when you scroll up. Tap the round button to bring it back too.
-const tabbar = active => `<nav class="tabbar" aria-label="Sections"><button class="tab-fab" data-fab aria-label="Show sections">${ICON[active]}${!dailyDone() && active !== "explore" ? '<i class="badge"></i>' : ""}</button><div class="tabs">${TABS.map(([id, label]) =>
-  `<button class="tab${id === active ? " on" : ""}" data-tab="${id}" aria-current="${id === active}">${ICON[id]}<span>${label}</span>${id === "explore" && !dailyDone() ? '<i class="badge"></i>' : ""}</button>`).join("")}</div></nav>`;
+// The tab bar: three mono words on a blurred strip with a hairline marker under the current one.
+// It slides away while you scroll down and comes back when you scroll up.
+const tabbar = active => `<nav class="tabbar" aria-label="Sections"><div class="tabs">${TABS.map(([id, label]) =>
+  `<button class="tab${id === active ? " on" : ""}" data-tab="${id}" aria-current="${id === active}"><span>${label}</span>${id === "explore" && !dailyDone() && active !== "explore" ? '<i class="badge"></i>' : ""}</button>`).join("")}</div></nav>`;
 function wireTabbar(active) {
   const nav = app.querySelector(".tabbar"); if (!nav) return;
-  const tabs = [...nav.querySelectorAll(".tab")], ind = document.createElement("i");
-  ind.className = "tab-ind"; nav.querySelector(".tabs").prepend(ind);
-  const place = (id, anim) => { const b = tabs.find(t => t.dataset.tab === id); if (!b) return; ind.style.transition = anim ? "" : "none"; ind.style.transform = `translateX(${b.offsetLeft - 5}px)`; ind.style.width = b.offsetWidth + "px"; };
+  const wrap = nav.querySelector(".tabs"), tabs = [...nav.querySelectorAll(".tab")], ind = document.createElement("i");
+  ind.className = "tab-ind"; wrap.prepend(ind);
+  const place = (id, anim) => {
+    const b = tabs.find(t => t.dataset.tab === id); if (!b) return;
+    const r = b.querySelector("span").getBoundingClientRect(), w = wrap.getBoundingClientRect();
+    ind.style.transition = anim ? "" : "none"; ind.style.transform = `translateX(${r.left - w.left}px)`; ind.style.width = r.width + "px";
+  };
   place(LAST_TAB || active, false);
   requestAnimationFrame(() => requestAnimationFrame(() => place(active, true)));
   LAST_TAB = active;
   const setMin = v => nav.classList.toggle("min", v);
-  nav.querySelector("[data-fab]").onclick = () => setMin(false);
-  nav.querySelectorAll("[data-tab]").forEach(b => b.onclick = () => go(b.dataset.tab));
+  tabs.forEach(b => b.onclick = () => go(b.dataset.tab));
   let lastY = scrollY;
   const onScroll = () => {
     const y = scrollY, dy = y - lastY;

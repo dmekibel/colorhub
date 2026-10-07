@@ -88,31 +88,30 @@ function spark(hist) {
 
 function gymHome() {
   const wk = todaysWorkout(), done = !!S.gym.workouts[today()];
-  const tiles = Object.entries(SKILLS).map(([k, sk]) => {
+  const rows = Object.entries(SKILLS).map(([k, sk]) => {
     const st = skillState(k), last = st.hist.length ? st.hist[st.hist.length - 1][1] : null;
     return `<button class="skill" data-drill="${k}">
-      <span class="eyebrow">${esc(sk.name)}</span>
-      <b>${last == null ? "–" : fmt(last)}</b><small>${esc(sk.unit)}</small>
-      <span class="sub">${st.best != null ? `best ${fmt(st.best)}` : "not tried yet"}</span>${spark(st.hist)}
+      <span class="nm"><b>${esc(sk.name)}</b><span>${st.best != null ? `best ${fmt(st.best)} ${esc(sk.unit)}` : esc(sk.what)}</span></span>
+      <span class="val">${last == null ? "—" : `<b data-count="${fmt(last)}">${fmt(last)}</b>`}<small>${esc(sk.unit)}</small></span>${spark(st.hist) || "<span></span>"}
     </button>`;
   }).join("");
   const fam = skillState("hue").fam, famRow = Object.keys(fam).length
     ? `<div class="fams">${Object.entries(fam).sort((a, b) => a[1] - b[1]).map(([f, v]) => `<span><b>${fmt(v)}</b> ${esc(f)}</span>`).join("")}</div>` : "";
   const el = show(`
-    <header class="bar"><h1 class="tab-title">Gym</h1></header>
+    <header class="bar"><div class="brand">${LOGO}<span>ColorHub</span></div><span class="eyebrow">Eye training</span></header>
+    <p class="eyebrow kick">${done ? "Done today — again if you like" : "Today's workout — about two minutes"}</p>
+    <h1 class="tab-title">The <em>Gym</em></h1>
     <p class="tab-sub">Train the judgments painters make every day. You get sharper at exactly what you practice.</p>
     <div class="workout ${done ? "done" : ""}">
-      <div class="wk-top"><p class="eyebrow">${done ? "Done today" : "Today's workout"}</p><span class="mono">~2 min</span></div>
-      <h2>${wk.map(k => esc(SKILLS[k].name)).join(" · ")}</h2>
-      <div class="wk-dots">${wk.map(k => `<i class="d-${k}"></i>`).join("")}</div>
-      <button class="btn" data-workout>${done ? "Do it again" : "Start workout"} ${ICON.arrow}</button>
+      <ol class="wk-list">${wk.map((k, i) => `<li><span>${pad2(i + 1)}</span><b>${esc(SKILLS[k].name)}</b><em>${k === "order" ? "3 strips" : "10 rounds"}</em></li>`).join("")}</ol>
+      <button class="btn" data-workout>${done ? "Train again" : "Begin the workout"} ${ICON.arrow}</button>
     </div>
     <div class="sec-head"><b>Your eye</b><span>smaller is sharper</span></div>
-    <div class="skills">${tiles}</div>
-    ${famRow ? `<div class="sec-head"><b>Odd one out by family</b><span>ΔE</span></div>${famRow}` : ""}
+    <div class="eye-table">${rows}</div>
+    ${famRow ? `<div class="sec-head"><b>Odd one out, by family</b><span>ΔE</span></div>${famRow}` : ""}
     <div class="sec-head"><b>Play</b></div>
-    <button class="play-row" data-lightning>${ICON.bolt}<div><b>Lightning round</b><span>45 seconds. Name as many as you can.</span></div><em class="mono">${S.best.lightning ? "best " + S.best.lightning : ""}</em></button>
-    <p class="fine">Scores are color differences (ΔE, CIEDE2000; ΔL* for lightness). About 1 is the smallest difference most people can see side by side.</p>
+    <button class="play-row" data-lightning><span><b>Lightning round</b><span>Forty-five seconds. Name as many as you can.</span></span><em>${S.best.lightning ? "best " + S.best.lightning : "new"}</em></button>
+    <p class="fine">Scores are color differences: ΔE (CIEDE2000), and ΔL* for lightness. About 1 is the smallest difference most people can see side by side.</p>
   `, "gym", "gym");
   el.querySelector("[data-workout]").onclick = () => workout(wk);
   el.querySelectorAll("[data-drill]").forEach(b => b.onclick = () => runDrill(b.dataset.drill, { trials: SKILLS[b.dataset.drill].trials + 4, done: r => drillDone([r]) }));

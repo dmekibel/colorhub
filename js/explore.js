@@ -253,8 +253,8 @@ function wireLinks(el) {
 function connSection(n) {
   const conns = connections(n);
   if (!conns.length) return "";
-  return `<section class="conns"><h3>Connections</h3>${GROUPS.map(([g, name]) => {
-    const list = conns.filter(c => c.group === g);
+  return `<section class="conns"><h3>Connections</h3>${CONN_LENSES.filter(([g]) => g !== "all").map(([g, name]) => {
+    const list = conns.filter(c => c.lens === g);
     if (!list.length) return "";
     return `<div class="cg"><p class="eyebrow">${name}</p><div class="chips-wrap">${list.slice(0, 14).map(c => {
       const col = nodeColor(c.to);

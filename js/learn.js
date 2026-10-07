@@ -369,34 +369,47 @@ function reviewDone(right, total) {
 // ======================================================================
 // Home: the color map, the path, and one next step.
 // ======================================================================
+// Title with its last word in italic, the editorial way ("Reds & *pinks*")
+const edTitle = t => { const m = esc(t).match(/^(.*?)(\s*(?:&amp;|and)\s*)(.+)$/); return m ? `${m[1]}${m[2]}<em>${m[3]}</em>` : esc(t); };
+const pad2 = n => String(n).padStart(2, "0");
 function home() {
   if (!S.placed) return welcome();
   const due = dueList(), nu = nextUnit(), owned = ownedCount();
-  const learning = ALL.filter(c => S.cards[c.id] && !S.cards[c.id].own).length;
-  // what to do next, as a card with the unit's chips fanned out
-  let next;
-  if (due.length) next = { eyebrow: "Daily review", title: `${due.length} color${due.length > 1 ? "s" : ""} to recall`, sub: nu ? `Then ${esc(nu.title)}` : "Recalling keeps them yours", fan: due.slice(0, 9), btn: `<button class="btn" data-review>Review ${ICON.arrow}</button>` };
-  else if (nu) next = { eyebrow: `Unit ${nu.i + 1} of ${UNITS.length} · ${esc(D.tiers[nu.tier].short)}`, title: esc(nu.title), sub: `${nu.colors.length} new names · about ${Math.max(2, Math.round(nu.colors.length * 15 / 60))} min`, fan: nu.colors.slice().sort((a, b) => lab(b.h)[0] - lab(a.h)[0]), btn: `<button class="btn" data-learn>${UNITS.some(u => S.done[u.id]) ? "Continue" : "Start"} ${ICON.arrow}</button>` };
-  else next = { eyebrow: "All caught up", title: "Path complete", sub: "More tiers are coming", fan: [], btn: "" };
+  const mine = ALL.filter(c => S.cards[c.id] && S.cards[c.id].own), lrn = ALL.filter(c => S.cards[c.id] && !S.cards[c.id].own);
+  const hueKey = c => { const [L, C, H] = lch(c.h); return C < 12 ? 1000 + (100 - L) : (H + 330) % 360 + (100 - L) / 400; };
+  mine.sort((a, b) => hueKey(a) - hueKey(b)); lrn.sort((a, b) => hueKey(a) - hueKey(b));
+  // the collection: owned names fill a quilt from the top in hue order; names in review follow, faint
+  const quilt = Array.from({ length: ALL.length }, (_, i) => mine[i] ? `<i class="o" style="--c:${mine[i].h};--k:${i}"></i>`
+    : lrn[i - mine.length] ? `<i class="l" style="--c:${lrn[i - mine.length].h}"></i>` : "<i></i>").join("");
+  let h;
+  if (due.length) {
+    const p = due.slice(0, 12);
+    h = { kick: `Daily review — ${due.length} to recall`, title: due.length === 1 ? "One to <em>recall</em>" : `${due.length} to <em>recall</em>`, plates: p,
+      meta: [`${due.length} names`, nu ? `then ${esc(nu.title)}` : "keep them yours"], cta: "Begin the review", act: "review" };
+  } else if (nu) {
+    const p = nu.colors.slice().sort((a, b) => lab(b.h)[0] - lab(a.h)[0]);
+    h = { kick: `N° ${pad2(nu.i + 1)} of ${UNITS.length} — ${esc(D.tiers[nu.tier].name)}`, title: edTitle(nu.title), plates: p,
+      meta: [`${nu.colors.length} new names`, `≈ ${Math.max(2, Math.round(nu.colors.length * 15 / 60))} min`], cta: UNITS.some(u => S.done[u.id]) ? "Continue the path" : "Begin the path", act: "learn" };
+  } else {
+    h = { kick: "All caught up", title: "The path is <em>complete</em>", plates: mine.slice(0, 12), meta: ["more tiers are coming"], cta: "", act: "" };
+  }
   const el = show(`
     <header class="bar"><div class="brand">${LOGO}<span>ColorHub</span></div><button class="icon-btn" data-menu aria-label="Menu">${ICON.dots}</button></header>
-    <button class="sky-wrap" data-sky aria-label="Your color sky: open the spectrum">
-      <div class="sky" id="sky"></div>
-      <span class="sky-count"><b>${owned}</b><span>of ${ALL.length} color names<br>are yours${learning ? ` · ${learning} learning` : ""}</span></span>
+    <p class="eyebrow kick">${h.kick}</p>
+    <h1>${h.title}</h1>
+    ${h.plates.length ? `<button class="plates" data-go aria-label="Start">${h.plates.map((c, k) => `<i style="--c:${c.h};--k:${k}"></i>`).join("")}</button>` : ""}
+    <div class="meta-line">${h.meta.map(m => `<span>${m}</span>`).join("")}</div>
+    ${h.cta ? `<button class="btn" data-${h.act}>${h.cta} ${ICON.arrow}</button>` : ""}
+    <button class="collection" data-palette aria-label="Your collection">
+      <div class="coll-head"><span class="eyebrow">Your collection</span><span class="coll-n"><b data-count="${owned}">${owned}</b><small>/${ALL.length}</small></span></div>
+      <div class="quilt">${quilt}</div>
+      <div class="coll-foot"><span>${lrn.length ? `${lrn.length} in review` : "Recalled a day later"}</span><span>Spectrum →</span></div>
     </button>
-    <div class="next-card">
-      <div class="row"><div class="chipfan">${next.fan.map((c, k) => `<i style="--c:${c.h};${fanVars(next.fan.length, k)}"></i>`).join("")}</div>
-        <div><p class="eyebrow">${next.eyebrow}</p><h3>${next.title}</h3><p class="sub">${next.sub}</p></div></div>
-      ${next.btn}
-    </div>
   `, "home", "learn");
-  drawSky(el.querySelector("#sky"));
   el.querySelector("[data-menu]").onclick = menu;
-  const rv = el.querySelector("[data-review]"), ln = el.querySelector("[data-learn]");
-  const go1 = () => rv ? deck("review") : ln ? meet(nu) : null;
-  if (rv) rv.onclick = go1;
-  if (ln) ln.onclick = go1;
-  el.querySelector("[data-sky]").onclick = () => { S.lens = "spectrum"; save(); go("explore"); };
+  const go1 = () => due.length ? deck("review") : nu ? meet(nu) : null;
+  el.querySelectorAll("[data-review],[data-learn],[data-go]").forEach(b => b.onclick = go1);
+  el.querySelector("[data-palette]").onclick = () => { S.lens = "spectrum"; save(); go("explore"); };
   onKey = e => { if (e.key === "Enter") go1(); };
 }
 
