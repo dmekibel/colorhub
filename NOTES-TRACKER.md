@@ -93,6 +93,18 @@ sheets close on swipe-down
 - Accounts (sync photos/progress across devices) + the anonymous scores service for world percentiles.
 - Reaching out to Peter Donahue (Color Nerd) once the paint features ship (Claude drafts, David sends).
 
+- **Film color archive (David, 2026-10-08; build when credits allow).** Directors get the same treatment as painters, e.g. Kubrick:
+  - a palette for each film (one for the whole film, or 10 across its running time, in order);
+  - his films compared with each other;
+  - his color evolving from his first color film to his last;
+  - signature colors and favorite combinations.
+
+  **Copyright:** frames from films under copyright are not ours to host or re-publish, and screenshot sites (IMDb, film-stills and Blu-ray screenshot galleries) have terms against scraping. So we store only computed color data (palettes and stats, which are facts), never the frames, and link out to where the stills live.
+
+  **Sources:** public-domain films (before 1930, plus some later ones whose copyright lapsed) can show frames. For others, frames we sample ourselves from a copy David owns, kept private and used only for analysis.
+
+  Reuses the §21 analysis engine. Today data/films.js holds 32 films with written text and "colors discussed", no frame palettes.
+
 ## Ideas only (not planned)
 - Nail-polish style names: maybe a playful game or a fashion/beauty culture note; no brand catalogs.
 - Multiplayer duels, seasonal skins: later.
