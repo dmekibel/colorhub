@@ -89,8 +89,11 @@ OUT = ROOT / "data" / "shades.json"
 
 VERY_CLOSE_DE = 3.0   # js/naming.js: below this, nameOf() shows the bare name (no modifier) -- too close to use
 NEAR_DE = 8.0         # js/naming.js: at/above this, nameOf() says "between X and Y" -- too far to read as a shade
-MIN_DE_ALL = 4.0      # ROADMAP's "at least ~ΔE00 4 from every core name/library name/kept shade", inclusive floor
-TARGET_WINDOW = (MIN_DE_ALL + 0.3, NEAR_DE - 0.2)   # (4.3, 7.8): comfortably inside both bounds after rounding
+DEFAULT_MIN_DE_ALL = 4.0   # ROADMAP's "at least ~ΔE00 4 from every core name/library name/kept shade", inclusive
+                           # floor -- overridable with --min-de (NOTES-TRACKER.md's spacing sweep: 4.0/3.5/3.0/2.5).
+                           # Never go below 2.5 (ROADMAP: neighbours become indistinguishable on many screens).
+MIN_DE_ALL = DEFAULT_MIN_DE_ALL   # reset from args.min_de at the top of main(); module-level so try_axis() etc. see it
+TARGET_WINDOW = (MIN_DE_ALL + 0.3, NEAR_DE - 0.2)   # recomputed from MIN_DE_ALL at the top of main()
 TARGET_DE = 5.6       # the search aims here first; the window above is what actually gets accepted
 DEFAULT_TARGET_TOTAL = 9000   # overridable with --target
 
@@ -212,14 +215,26 @@ def try_axis(base_lab, mover, hi):
 
 
 def main():
+    global MIN_DE_ALL, TARGET_WINDOW
     ap = argparse.ArgumentParser()
     ap.add_argument("--target", type=int, default=DEFAULT_TARGET_TOTAL,
                     help="grand total to aim for: len(core) + len(library) + shades (default 9000)")
+    ap.add_argument("--min-de", type=float, default=DEFAULT_MIN_DE_ALL, dest="min_de",
+                    help="minimum CIEDE2000 spacing a shade must keep from every core/library/kept-shade color "
+                         "(default 4.0; NOTES-TRACKER.md's sweep tries 4.0/3.5/3.0/2.5 -- never go below 2.5)")
     ap.add_argument("--out", default=str(OUT), help="output path (default data/shades.json)")
     ap.add_argument("--report", action="store_true")
     args = ap.parse_args()
     report = args.report
     out_path = Path(args.out)
+    MIN_DE_ALL = args.min_de
+    # The window a shade's distance-from-its-own-base must land in has its OWN floor, independent of --min-de:
+    # js/naming.js's nameOf() only prints a modifier at VERY_CLOSE_DE (3.0) or above -- below that it shows the
+    # bare base name, which is exactly what check_shades.js's read-back gate catches. --min-de 4.0/3.5/3.0 are all
+    # already above VERY_CLOSE_DE so this was never visible before the sweep went to 2.5, where MIN_DE_ALL + 0.3
+    # (2.8) would otherwise dip under 3.0 and generate shades that read back as their bare base name.
+    base_floor = max(MIN_DE_ALL, VERY_CLOSE_DE)
+    TARGET_WINDOW = (base_floor + 0.3, NEAR_DE - 0.2)
     core = json.loads(CORE_OUT.read_text(encoding="utf-8"))
     lib = LIB.load_library()   # always read fresh: as real names are imported, this grows with no code change
     core_names_lower = {e["n"].lower() for e in core}
@@ -287,10 +302,10 @@ def main():
             if not (TARGET_WINDOW[0] <= de < TARGET_WINDOW[1]):
                 blocked["gamut_or_range"] += 1
                 continue
-            # the base must really be the nearest core name (so nameOf() would land here), with margin >= MIN_DE_ALL
+            # the base must really be the nearest core name (so nameOf() would land here), with margin >= base_floor
             d_core = LIB.de2000(cand_lab[None], core_lab)[0]
             j = int(np.argmin(d_core))
-            if j != i or not (MIN_DE_ALL - 0.15 <= d_core[j] < NEAR_DE):
+            if j != i or not (base_floor - 0.15 <= d_core[j] < NEAR_DE):
                 blocked["nearest_not_base"] += 1
                 continue
             d_lib = LIB.de2000(cand_lab[None], lib_lab)[0]
@@ -338,7 +353,7 @@ def main():
     out_path.write_text("[\n" + ",\n".join(lines) + "\n]\n" if out else "[]\n", encoding="utf-8")
 
     total = len(core) + len(lib) + len(out)
-    print(f"{out_path.name}: {len(out)} shades written ({out_path.stat().st_size / 1024:.1f} KB)")
+    print(f"{out_path.name}: {len(out)} shades written ({out_path.stat().st_size / 1024:.1f} KB), min-de {MIN_DE_ALL}")
     print(f"core {len(core)} + library {len(lib)} + shades {len(out)} = {total} total (target ~{args.target})")
     print(f"candidates generated: {len(candidates)}, kept: {len(out)} ({100 * len(out) / max(1, len(candidates)):.0f}%)")
     print("blocked, by reason:", blocked)

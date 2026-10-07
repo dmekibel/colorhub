@@ -232,3 +232,21 @@ Added by `tools/iscc_nbs.py` (extraction) + `merge_iscc_nbs()` in `tools/library
 The honeycomb itself is unchanged (same 2,711 bubbles); 1,297 of them now carry 1955 government provenance in their `note`, and 4,340 historical names (Jonquil, Navaho, Persimmon Orange, Aurantiacus, Kis Kilim…) are newly searchable and show "Also called …" on the colors they're synonyms of (`js/colorsets.js` `csMatch()`/`colorSheet()`/`altnLine()`).
 
 **Spot-check and known limitation.** Extracted entries were checked by eye against rendered page images (`pdftoppm`) across 12 randomly chosen dictionary pages, ~190 individual name/source/block triples. Every block number that came through was correct, with one exception found this way: a handful of names whose designation got OCR'd with the munsell modifier letters "l"/"O" misread as the digits "1"/"0" ("l.Ol 106" → "1.01 106") picked up a false extra block ("1", i.e. "vivid pink") ahead of the real one -- `block_numbers()` now only accepts a bare, whitespace-delimited digit token as a block number, which fixed the great majority of these (e.g. Citrine: was wrongly block 1, is now correctly block 106, "light olive"). One rarer variant survives this fix: an entry whose designation is itself truncated by a page or column edge right after the source code, with an unrelated later line's number getting pulled in as if it were confirmation (e.g. "Glaucous", `src: M`, kept block 1 instead of the correct 121 from its own `R`-sourced listing). Found by eye, not systematically; a general positional rule for it was tried and reverted (it broke more legitimate multi-line layouts than it fixed, given how differently entries wrap across physical lines). Affects roughly 19 of 5,657 names (0.3%) by rough estimate -- a known, accepted residual, consistent with "prefer dropping uncertain entries over importing garbage" where it could be caught, and left documented where it couldn't.
+
+## 9. Historical pigment names (2026-10-09)
+
+Added by `load_pigments()` in `tools/library.py`, per the plan in NOTES-TRACKER.md. Source of the NAMES: David's private notes on the pigment compendium and Chromatopia (`../color-kb/books/notes/pigment-compendium.jsonl`, `chromatopia-coles.jsonl`) -- every pigment name mentioned in either file was checked against the library as it stood before this pass (both primary names and ISCC-NBS `altn` synonyms). Only names present in *neither* were candidates.
+
+**Hex values never come from the books** (CLAUDE.md's copyright "Book rule"): each candidate was checked against Wikidata's P465 ("sRGB color hex triplet") and, failing that, a standalone Wikipedia article with its own color infobox (distinct from the "List of colors" pages `wiki` already scrapes). Only **5 of roughly 30 candidate names** turned out to have a public, citable value; the rest are real pigments with no public swatch value anywhere checked, so they were left out rather than guessed:
+
+| Name | Hex | Public source |
+|---|---|---|
+| Egyptian Blue | #1034A6 | Wikidata P465, wikidata.org/wiki/Q253181 |
+| Smalt | #003399 | Wikidata P465, wikidata.org/wiki/Q898977 |
+| Titanium White | #FFFEEF | Wikidata P465, wikidata.org/wiki/Q3639460 |
+| Brunswick Green | #1B4D3E | Wikipedia color infobox, en.wikipedia.org/wiki/Spring_green |
+| Green Earth | #DADD98 | Wikipedia color infobox, en.wikipedia.org/wiki/Green_earth |
+
+Checked and skipped for having no public hex anywhere (Wikipedia article, Wikipedia "List of colors", or Wikidata P465): Orpiment, Realgar, Antimony Vermilion, Asphaltum, Atacamite, Azurite, Bice, Bideford Black, Chrysocolla, Flake White, Garancine, Greenockite, Han Blue, Han Purple, Iodine Scarlet, Lazurite, Lead White, Lead-Tin Yellow, Manganese Blue, Mauveine (no hex distinct from Mauve), Potter's Pink, Pyrrole Red, Vantablack, Vine Black, Bone Black/Ivory Black. Several of these (Orpiment, Realgar, Egyptian Blue, Smalt before this pass) were already *searchable* only as ISCC-NBS `altn` synonyms attached to an unrelated nearby color by block-centroid proximity, not a value sourced to that pigment specifically -- adding Egyptian Blue and Smalt as their own entries let the next `--build` reattach their ISCC-NBS block citation to the real pigment color instead (see each entry's `note`).
+
+**Before -> after:** 2,711 -> **2,716** entries (+5), 792 KB -> 794 KB.
