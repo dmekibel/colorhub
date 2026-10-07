@@ -110,7 +110,7 @@ window.WIKI_COLORS = {
   named: "abstract",
   since: { year: -3250, what: "Egyptian blue, the first synthetic pigment", approx: true },
   facets: [
-    { k: "language", text: "[[homer|Homer]] never calls the sea blue. He calls it wine-dark. In 1858 William Gladstone noticed that blue is missing from Homer altogether, and some readers decided the Greeks couldn't see it. They could. They lacked a basic word for it, as many languages once did. Russian today splits light blue (goluboy) from dark blue (siniy), and its speakers tell those blues apart a little faster. See [[linguistic-relativity]]." },
+    { k: "language", text: "[[homer|Homer]] never calls the sea blue. He calls it wine-dark. In 1858 William Gladstone noticed that blue is missing from Homer altogether, and some readers decided the Greeks couldn't see it. They could. They lacked a basic word for it, as many languages once did. Russian today splits light blue (goluboy) from dark blue (siniy), and in a 2007 study its speakers told those blues apart a little faster, though a 2020 repeat did not find the edge. See [[linguistic-relativity]]." },
     { k: "history", text: "Blue was the first color people learned to manufacture. [[egyptian-blue|Egyptian blue]], a fired copper silicate, dates to about 3250 BCE, the oldest known synthetic pigment. Then came [[ultramarine-pigment|ultramarine]], ground from Afghan lapis lazuli and priced like gold, and in about 1706 [[prussian-blue|Prussian blue]], a lucky accident in a Berlin color-maker's shop." },
     { k: "symbolism", text: "Blue was a minor color in early medieval Europe. In the 12th century painters began dressing the Virgin Mary in a blue mantle, and the color climbed: into stained glass, onto royal coats of arms, all the way to Europe's favorite color. The historian Michel Pastoureau traced that rise. See [[heraldry]]." },
     { k: "art", text: "[[vermeer|Vermeer]] painted the turban of [[painting-pearl-earring|Girl with a Pearl Earring]] in costly natural ultramarine, and even mixed it into the shadows of her yellow jacket. Hokusai's [[painting-great-wave|Great Wave]] curls in Prussian blue, newly imported to Japan. And [[yves-klein|Yves Klein]] made one ultramarine so much his own that it carries his name." },
@@ -137,7 +137,7 @@ window.WIKI_COLORS = {
     { k: "history", text: "Purple was the color of snail slime and emperors. [[tyrian-purple|Tyrian purple]] came from murex sea snails. In 1909 the chemist Paul Friedländer crushed 12,000 of them to get 1.4 grams of pure dye. Diocletian's price edict of 301 CE capped a pound of purple silk at 150,000 denarii, the same price it set for a lion. See [[royal-purple]]." },
     { k: "language", text: "Purple is named after a shellfish. Latin purpura and Greek porphyra meant both the murex snail and its dye. Byzantine children born to a reigning emperor were called porphyrogennetos, born in the purple, after the palace chamber where empresses gave birth." },
     { k: "science", text: "Purple is a color your brain makes up. No single wavelength looks purple; you see it when red and blue light arrive together. [[Violet]], at the short end of the [[spectrum]], is a real rainbow color, so purple and violet are not quite the same thing. See [[extra-spectral]]." },
-    { k: "symbolism", text: "Purple is the Church's color of waiting and penance, worn in Advent and Lent ([[liturgical-colors]]). In 1856, 18-year-old [[william-perkin|William Perkin]], trying to make quinine, made [[mauveine]] instead: the first coal-tar dye to become a hit, and the end of purple as a privilege." }
+    { k: "symbolism", text: "Purple is the Church's color of waiting and penance, worn in Advent and Lent ([[liturgical-colors]]). In 1856, 18-year-old [[william-perkin|William Perkin]], trying to make quinine, made [[mauveine]] instead: the first aniline dye, a fashion sensation, and the end of purple as a privilege." }
   ],
   related: [
     { to: "Indigo", why: "Tyrian purple is indigo's molecule with two bromine atoms added" },
@@ -157,7 +157,7 @@ window.WIKI_COLORS = {
   named: "flower",
   since: { year: 1680, what: "Pink first used as a color name in English", approx: true },
   facets: [
-    { k: "language", text: "Pink is named after a flower. Garden pinks (Dianthus) have frilly petal edges, as if trimmed with pinking shears, and the flower's name came first. Pink as a color word shows up in the 1600s." },
+    { k: "language", text: "Pink is named after a flower. Garden pinks (Dianthus) have frilly petal edges, as if trimmed with pinking shears, and the flower's name came first. Pink as a word for pale red shows up in the late 1600s; at the time 'pink' could also mean a yellowish paint." },
     { k: "culture", text: "Pink for girls is younger than you think. A 1918 trade magazine, Earnshaw's Infants' Department, called pink the stronger color and so right for boys, with dainty blue for girls. Other sources said the opposite, and stores disagreed for decades. Historian Jo Paoletti shows the girls-in-pink rule only hardened in the mid-1900s. See [[pink-and-blue]]." },
     { k: "design", text: "In 1937 Elsa Schiaparelli launched a perfume called Shocking and a loud pink to match, shocking pink. Barbie's pink is a Pantone shade, 219 C. And in 2016 the artist Stuart Semple sold the 'pinkest pink' to everyone except Anish Kapoor, in protest at Kapoor's exclusive rights to [[vantablack|Vantablack]]." },
     { k: "science", text: "In 1979 Alexander Schauss claimed a bubblegum shade, Baker-Miller pink, calmed aggressive prisoners, and jails painted cells to match. Later, tighter studies by other researchers did not find the effect. See [[color-psychology]]." },
@@ -345,7 +345,7 @@ window.WIKI_COLORS = {
   named: "gem",
   since: { year: -1950, what: "Egyptian temple to Hathor at the Sinai turquoise mines", approx: true },
   facets: [
-    { k: "language", text: "Turquoise means Turkish. The stone reached Europe from Persian mines through Turkish traders, and the French called it the Turkish stone." },
+    { k: "language", text: "Turquoise means Turkish. The stone came from mines in Persia and reached Europe through Turkish lands, so the French called it the Turkish stone, though none was mined in Turkey." },
     { k: "history", text: "Ancient Egyptians sent expeditions to the Sinai for turquoise. At the mines of Serabit el-Khadim they built a temple to Hathor, who was called the lady of turquoise. Half a world away, Aztec artisans covered masks, and at least one human skull, in turquoise mosaic." },
     { k: "science", text: "Turquoise is a copper mineral, like [[Malachite|malachite]], and copper gives it the [[Sky blue|sky color]]. A little iron in the mix pushes it greener." }
   ],
@@ -458,7 +458,7 @@ window.WIKI_COLORS = {
   since: { year: 1860, what: "Rowney sells cerulean blue paint as 'coeruleum'", approx: true },
   facets: [
     { k: "language", text: "Cerulean comes from Latin caeruleus, the dark blue of sea and sky, probably from caelum, heaven." },
-    { k: "history", text: "Cerulean blue paint is cobalt and tin oxides fired together. A Swiss chemist made it in the late 1700s, but painters only got it after the London colorman George Rowney sold it as 'coeruleum' around 1860. It is a cool, slightly greenish blue that does not fade. See [[cobalt-blue-pigment]]." },
+    { k: "history", text: "Cerulean blue paint is cobalt and tin oxides fired together. A Swiss chemist made it in the late 1700s, but painters only got it in the 1860s, when London colormen such as George Rowney began selling it as 'coeruleum'. It is a cool, slightly greenish blue, now counted among the lightfast pigments. See [[cobalt-blue-pigment]]." },
     { k: "design", text: "Pantone launched its [[color-of-the-year|Color of the Year]] with Cerulean for 2000, to mark the turn of the millennium. Six years later, The Devil Wears Prada built a famous speech around a cerulean sweater and how a runway shade trickles down to the bargain bin." }
   ],
   related: [
@@ -531,7 +531,7 @@ window.WIKI_COLORS = {
 "Petrol": {
   named: "material",
   facets: [
-    { k: "language", text: "Petrol blue, a deep, inky [[Teal|teal]], is a British and European name, from petrol, the British word for gasoline, and appears in the early 1900s. Why petrol is unclear: maybe the tint of fuel, maybe blue-dyed products like paraffin. The idea that it's a misspelling of petrel, the seabird, has no support." }
+    { k: "language", text: "Petrol blue, a deep, inky [[Teal|teal]], is mostly a British and European name, from petrol, the British word for gasoline. Oddly, its earliest record, from 1913, is in an American newspaper. Why petrol is unclear: maybe the tint of fuel, maybe blue-dyed products like paraffin. The idea that it's a misspelling of petrel, the seabird, has no support." }
   ],
   related: [
     { to: "Steel blue", why: "Both named after industrial materials" },
@@ -706,7 +706,7 @@ window.WIKI_COLORS = {
   named: "place",
   since: { year: 1859, what: "Fuchsine dye made in France, soon renamed magenta", approx: true },
   facets: [
-    { k: "history", text: "Magenta is named after a battle. Around 1859 a vivid aniline dye called fuchsine, after the fuchsia flower, appeared in France. It is usually credited to the chemist François-Emmanuel Verguin. On 4 June 1859 France and Sardinia beat Austria near the Italian town of Magenta, and British chemists renamed the dye after the victory. It followed [[mauveine]] in the first wave of synthetic dyes." },
+    { k: "history", text: "Magenta is named after a battle. Around 1859 a vivid aniline dye called fuchsine, after the fuchsia flower, appeared in France. It is usually credited to the chemist François-Emmanuel Verguin. On 4 June 1859 France and Sardinia beat Austria near the Italian town of Magenta, and By 1860 British makers were selling it as magenta, after the victory. It followed [[mauveine]] in the first wave of synthetic dyes." },
     { k: "science", text: "Magenta isn't in the rainbow. No single wavelength looks magenta; your brain builds it when red and blue light arrive without green. On the light wheel it sits opposite [[Green|green]]. See [[extra-spectral]]." },
     { k: "design", text: "Magenta is one of the printing inks in CMYK, with [[Aqua|cyan]] and [[Yellow|yellow]]. Deutsche Telekom trademarked its magenta and has gone after companies in unrelated fields, such as the insurer Lemonade. See [[color-trademarks]]." }
   ],
@@ -832,7 +832,7 @@ window.WIKI_COLORS = {
   named: "fruit",
   since: { year: 1883, what: "Lime green first used as a color name in English", approx: true },
   facets: [
-    { k: "language", text: "Lime green is recorded as a color name by 1883." },
+    { k: "language", text: "Lime green is recorded as a color name by 1883; the Oxford English Dictionary's first example is from a London newspaper in 1890." },
     { k: "science", text: "A 2009 US Fire Administration study found fluorescent yellow-green and orange the easiest colors to spot in daylight, and some fire departments now paint their trucks lime-yellow instead of red. It works because your eye is most sensitive to yellow-green ([[trichromacy]])." }
   ],
   related: [
@@ -841,7 +841,7 @@ window.WIKI_COLORS = {
     { to: "Green", why: "Yellow-green sits at the peak of the eye's sensitivity" }
   ],
   sources: [
-    "Wikipedia, 'Lime (color)' (first use 1890)",
+    "Wikipedia, 'Lime (color)' (OED first use 1890); Etymonline, 'lime' (by 1883)",
     "US Fire Administration, Emergency Vehicle Visibility and Conspicuity Study, FA-323 (August 2009)"
   ]
 },
@@ -1007,7 +1007,7 @@ window.WIKI_COLORS = {
   named: "gem",
   since: { year: -4700, what: "Hongshan culture carving jade in China", approx: true },
   facets: [
-    { k: "language", text: "Jade means 'flank stone'. Spaniards in the Americas called it piedra de ijada, recorded in 1565, believing it cured pains in the side and kidneys. Translated into Latin as lapis nephriticus, kidney stone, it also gave us nephrite." },
+    { k: "language", text: "Jade means 'flank stone'. Spaniards in the Americas called it piedra de ijada, recorded in the 1560s, believing it cured pains in the side and kidneys. Translated into Latin as lapis nephriticus, kidney stone, it also gave us nephrite." },
     { k: "science", text: "Jade is two different minerals. In 1863 the French mineralogist Alexis Damour showed that 'jade' could be nephrite or jadeite, which look alike but differ in chemistry." },
     { k: "culture", text: "In China jade was the imperial gem, valued above [[Gold|gold]] and carved for ritual since Neolithic cultures like Hongshan and Liangzhu. In Mesoamerica, the Olmec and Maya took all their jade from one river valley, the Motagua in Guatemala." }
   ],
@@ -1126,7 +1126,7 @@ window.WIKI_COLORS = {
   named: "flower",
   since: { year: 1775, what: "Lilac first used as a color word in English", approx: false },
   facets: [
-    { k: "language", text: "Lilac probably goes back to Persian lilak, a form of nilak, bluish, from nil, indigo, and Sanskrit nila, dark blue. Indigo's old name, anil, comes from the same root and gave chemistry the word aniline, the base of the first aniline dyes like [[mauveine]]. Lilac is recorded as a color in English from 1775." },
+    { k: "language", text: "Lilac probably goes back, through Arabic, to Persian lilak, a form of nilak, bluish, from nil, indigo, and Sanskrit nila, dark blue. Indigo's old name, anil, comes from the same root and gave chemistry the word aniline, the base of the first aniline dyes like [[mauveine]]. Lilac is recorded as a color in English from 1775." },
     { k: "poetry", text: "Walt Whitman's elegy for Abraham Lincoln, 'When Lilacs Last in the Dooryard Bloom'd' (1865), ties the flower to grief: the lilacs were in bloom that April when Lincoln was shot." },
     { k: "culture", text: "In British and European mourning customs, lilac belonged to the final stage, as black gave way to softer colors ([[mourning-colors]])." }
   ],
@@ -1247,7 +1247,7 @@ window.WIKI_COLORS = {
 "Amethyst": {
   named: "gem",
   facets: [
-    { k: "language", text: "Amethyst means 'not drunk'. The Greeks believed the stone kept its wearer sober. Anglican bishops traditionally wear amethyst rings, recalling Peter's words at Pentecost that the apostles were not drunk (Acts 2:15)." },
+    { k: "language", text: "Amethyst means 'not drunk'. The Greeks believed the stone kept its wearer sober. Anglican bishops often wear amethyst rings, traditionally explained as recalling Peter's words at Pentecost that the apostles were not drunk (Acts 2:15)." },
     { k: "science", text: "Amethyst is quartz tinted by iron and natural radiation. Heat it and the [[Violet|violet]] turns [[Yellow|yellow]]-brown, like citrine. Once ranked among the most precious gems, it lost most of its value after huge deposits were found in Brazil." }
   ],
   related: [
@@ -1462,7 +1462,7 @@ window.WIKI_COLORS = {
   named: "material",
   since: { year: 1887, what: "Beige first used as a color word in English", approx: false },
   facets: [
-    { k: "language", text: "Beige is French for natural wool, neither bleached nor dyed, as [[Ecru|ecru]] is for linen. The word spread in France around 1855 to 1860 and is recorded as a color in English from 1887." },
+    { k: "language", text: "Beige is French for natural wool, neither bleached nor dyed, as [[Ecru|ecru]] is for linen. The word spread in France around 1855 to 1860 and is recorded as a color in English from the late 1880s." },
     { k: "design", text: "From the 1970s to the 1990s, beige was the color of computers: keyboards, monitors and towers, a look Apple and IBM popularized and German office rules helped lock in." }
   ],
   related: [
@@ -1478,14 +1478,15 @@ window.WIKI_COLORS = {
   named: "animal",
   since: { year: 1846, what: "Taupe listed among fashionable greys in English", approx: false },
   facets: [
-    { k: "language", text: "Taupe is French for mole, from Latin talpa. It first meant the [[Grey|grey]]-[[Brown|brown]] of a mole's fur; an English fashion note of 1846 lists it among the fashionable greys. Since the 1940s it has stretched to cover almost any greyish brown, and no one agrees on a single taupe." }
+    { k: "language", text: "Taupe is French for mole, from Latin talpa. It first meant the [[Grey|grey]]-[[Brown|brown]] of a mole's fur; an English-language fashion note of 1846, printed in Australia, lists it among the fashionable greys. By the 1930s color standardizers found it had drifted far browner than real mole fur, and today it covers almost any greyish brown." }
   ],
   related: [
     { to: "Puce", why: "Another French animal color: taupe is a mole, puce a flea" },
     { to: "Teal", why: "Another color named after an animal" }
   ],
   sources: [
-    "Wikipedia, 'Taupe' (OED first citation 1911; earlier use 1846)"
+    "Wikipedia, 'Taupe' (OED first citation 1911; earlier use 1846)",
+    "St Clair, The Secret Lives of Colour (2016) (1930s standardizers and mole fur)"
   ]
 },
 
@@ -1543,7 +1544,7 @@ window.WIKI_COLORS = {
 "Peach": {
   named: "fruit",
   facets: [
-    { k: "language", text: "Peach means Persian. The Romans called it malum persicum, Persian apple, and the word wore down to peach. But the fruit comes from China, where it was domesticated around 6000 BCE in the Yangtze valley." },
+    { k: "language", text: "Peach means Persian. The Romans called it malum persicum, Persian apple, and the word wore down to peach. But the fruit comes from China, where people in the Yangtze valley were already selecting peaches by about 6000 BCE." },
     { k: "design", text: "Pantone named Peach Fuzz its [[color-of-the-year|Color of the Year]] for 2024." }
   ],
   related: [
@@ -1560,7 +1561,7 @@ window.WIKI_COLORS = {
 "Apricot": {
   named: "fruit",
   facets: [
-    { k: "language", text: "Apricot and precocious share a root. Latin praecoquum meant early-ripening, because apricots ripen before [[Peach|peaches]]. The word passed into Greek, then Arabic as al-barquq, then Spanish and French, and reached English in the 1500s as abrecock." }
+    { k: "language", text: "Apricot and precocious share a root. Latin praecoquum meant early-ripening, because apricots ripen before [[Peach|peaches]]. The word passed into Greek, then Arabic as al-barquq, then Catalan, and reached English in the 1500s as abrecock." }
   ],
   related: [
     { to: "Peach", why: "The early-ripening cousin of the 'Persian apple'" },
@@ -1660,7 +1661,7 @@ window.WIKI_COLORS = {
 "Canary": {
   named: "animal",
   facets: [
-    { k: "language", text: "The canary is named after the islands, not the other way round. The Romans called them Canariae Insulae, islands of dogs; Pliny reports huge dogs there. Wild canaries are a streaky [[Yellow|yellow]]-[[Green|green]]; the clear canary yellow came from breeding." },
+    { k: "language", text: "The canary is named after the islands, not the other way round. The Romans called them Canariae Insulae, probably 'islands of dogs': Pliny reports huge dogs there, though the name may instead come from a local people. Wild canaries are a streaky [[Yellow|yellow]]-[[Green|green]]; the clear canary yellow came from breeding." },
     { k: "history", text: "British coal miners carried canaries underground from around 1900 as an early warning: the birds succumbed to carbon monoxide before people did. Electronic detectors replaced them in 1986." }
   ],
   related: [

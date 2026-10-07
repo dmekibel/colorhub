@@ -15,16 +15,16 @@ tiers: {
 },
 units: [
 { id:"t2-blues", tier:2, title:"Blues", colors:[
-  {n:"Navy", h:"#1C2B5A", src:"pick", vs:"Royal blue", d:"Far darker and greyer than royal blue, nearly black.", o:"From naval uniforms, dyed dark to resist sun and sea. Between 1910 and 1950 it replaced black for police, postmen and men's suits."},
+  {n:"Navy", h:"#1C2B5A", src:"pick", vs:"Royal blue", d:"Far darker and greyer than royal blue, nearly black.", o:"From the dark indigo blue the Royal Navy chose for officers' uniforms in the 1740s. Between 1910 and 1950 it replaced black for police, postmen and men's suits."},
   {n:"Royal blue", h:"#4169E1", src:"css", vs:"Navy", d:"A bright, deep blue, much lighter and more vivid than navy."},
   {n:"Sky blue", h:"#87CEEB", src:"css", vs:"Aqua", d:"Softer than aqua, without its green tint."},
   {n:"Periwinkle", h:"#A3A8EE", src:"pick", vs:"Sky blue", d:"Sky blue with a drop of violet.", o:"Named after the periwinkle flower."},
-  {n:"Turquoise", h:"#40E0D0", src:"css", vs:"Aqua", d:"Greener and a little deeper than aqua.", o:"After the stone. Turquoise is French for 'Turkish': Europeans thought the stone came from Turkey, though most came from Persia."},
+  {n:"Turquoise", h:"#40E0D0", src:"css", vs:"Aqua", d:"Greener and a little deeper than aqua.", o:"After the stone. Turquoise is French for 'Turkish': the stone reached Europe through Turkish lands, though it was mined in Persia."},
   {n:"Teal", h:"#008080", src:"css", vs:"Turquoise", d:"Much darker than turquoise, and slightly bluer.", o:"Named after the teal duck, which has a stripe of this color on its head."},
   {n:"Aqua", h:"#00FFFF", src:"css", vs:"Turquoise", d:"Brighter and bluer than turquoise. On screens it is the same as cyan.", o:"Latin for water."}
 ]},
 { id:"t2-reds", tier:2, title:"Reds & pinks", colors:[
-  {n:"Scarlet", h:"#FF2400", src:"wiki", vs:"Crimson", d:"A bright red leaning orange. Crimson leans the other way, toward blue.", o:"First the name of a luxury wool cloth that could be any color, even blue or black. The best was dyed with kermes, so by the 1300s the word meant the red."},
+  {n:"Scarlet", h:"#FF2400", src:"wiki", vs:"Crimson", d:"A bright red leaning orange. Crimson leans the other way, toward blue.", o:"First the name of a luxury wool cloth, not always red: many historians say it came in other colors too. The best was dyed with kermes, so by the 1300s the word meant the red."},
   {n:"Crimson", h:"#DC143C", src:"css", vs:"Scarlet", d:"Deeper than scarlet, leaning toward purple.", o:"From kermes, an insect dye. The word goes back through Arabic qirmiz to a Sanskrit word for 'worm'."},
   {n:"Maroon", h:"#800000", src:"css", vs:"Burgundy", d:"A dark brownish red. Burgundy is more purple.", o:"From the French marron, chestnut."},
   {n:"Burgundy", h:"#800020", src:"wiki", vs:"Maroon", d:"Dark red with a purple, wine-like tint. Maroon is browner.", o:"Named after the red wine of Burgundy, France."},
@@ -37,7 +37,7 @@ units: [
 { id:"t2-greens", tier:2, title:"Greens", colors:[
   {n:"Lime", h:"#BFFF00", src:"wiki", vs:"Kelly green", d:"A bright yellow-green, much lighter and yellower than kelly green.", o:"The color of lime peel."},
   {n:"Mint", h:"#A8EBC4", src:"pick", vs:"Emerald", d:"Much paler and softer than emerald, slightly cooler.", o:"Named after the herb."},
-  {n:"Kelly green", h:"#4CBB17", src:"wiki", vs:"Emerald", d:"A vivid grass green, yellower than emerald.", o:"After the common Irish surname Kelly; the name dates from the early 1900s. Ireland's green is younger than it seems: St Patrick's color was blue until the 1700s."},
+  {n:"Kelly green", h:"#4CBB17", src:"wiki", vs:"Emerald", d:"A vivid grass green, yellower than emerald.", o:"After the common Irish surname Kelly; the name dates from the early 1900s. Green was worn on St Patrick's Day by the 1680s; his official blue came later, in 1783."},
   {n:"Emerald", h:"#50C878", src:"wiki", vs:"Kelly green", d:"Cooler and bluer than kelly green.", o:"Named after the gemstone. 'Emerald green' paint (1814) was made with copper and arsenic and colored Victorian wallpapers."},
   {n:"Sage", h:"#9CAF88", src:"pick", vs:"Mint", d:"Greyer and darker than mint, and a little yellower.", o:"After the grey-green leaves of the sage herb."},
   {n:"Olive", h:"#808000", src:"css", vs:"Forest green", d:"A yellowish dark green. Forest green is greener.", o:"The color of green olives."},
@@ -48,13 +48,13 @@ units: [
   {n:"Lilac", h:"#C8A2C8", src:"wiki", vs:"Lavender", d:"Pinker and greyer than lavender.", o:"After the lilac flower."},
   {n:"Mauve", h:"#A8778F", src:"pick", vs:"Lilac", d:"A dusty pink-purple, darker and pinker than lilac.", o:"French for the mallow flower. In 1856 an 18-year-old chemist, William Perkin, trying to make the malaria drug quinine, made mauveine, the first aniline dye, and mauve became a craze."},
   {n:"Plum", h:"#8E4585", src:"wiki", vs:"Mauve", d:"Deeper and richer than mauve.", o:"After the fruit's skin."},
-  {n:"Violet", h:"#8000FF", src:"wiki", vs:"Indigo", d:"A vivid blue-purple, far brighter than indigo.", o:"Named after the flower. Newton's first spectrum ended in 'purple'; he later called the far end violet."},
+  {n:"Violet", h:"#8000FF", src:"wiki", vs:"Indigo", d:"A vivid blue-purple, far brighter than indigo.", o:"Named after the flower. In 1672 Newton called the far end of the spectrum 'violet-purple'; by Opticks (1704) it was simply violet."},
   {n:"Indigo", h:"#3D2B8E", src:"pick", vs:"Violet", d:"Darker and bluer than violet.", o:"From the plant dye; the name is Greek for 'from India'. Newton added it to the rainbow probably to get seven colors, one for each note of the musical scale."}
 ]},
 { id:"t2-earths", tier:2, title:"Yellows & browns", colors:[
   {n:"Gold", h:"#FFD700", src:"css", vs:"Mustard", d:"A bright, warm yellow, cleaner and lighter than mustard.", o:"Medieval gold leaf was beaten from coins, about a hundred leaves from one ducat."},
   {n:"Mustard", h:"#CFA41C", src:"pick", vs:"Gold", d:"A darker, earthier yellow than gold.", o:"The color of the condiment, made from mustard seed."},
-  {n:"Khaki", h:"#BDB76B", src:"css", vs:"Tan", d:"Greener than tan, with an olive tinge.", o:"From the Persian and Urdu word for dust. British troops in India dyed their uniforms this color."},
+  {n:"Khaki", h:"#BDB76B", src:"css", vs:"Tan", d:"Greener than tan, with an olive tinge.", o:"Urdu for 'dusty', from Persian khak, dust. British troops in India dyed their uniforms this color."},
   {n:"Tan", h:"#D2B48C", src:"css", vs:"Khaki", d:"Warmer and softer than khaki, like light leather.", o:"From tanbark, the oak bark used to tan leather."},
   {n:"Rust", h:"#B7410E", src:"wiki", vs:"Chocolate", d:"An orange-red brown, brighter and lighter than chocolate.", o:"The color of iron oxide."},
   {n:"Chocolate", h:"#7B3F00", src:"wiki", vs:"Rust", d:"A deep brown, darker than rust and less red."}
@@ -105,7 +105,7 @@ units: [
   {n:"Malachite", h:"#0BDA51", src:"wiki", vs:"Emerald", d:"Brighter and more intense than emerald.", o:"A banded copper mineral, ground into green pigment in ancient Egypt."},
   {n:"Viridian", h:"#40826D", src:"wiki", vs:"Teal", d:"Greener than teal.", o:"A chromium oxide paint from the 1800s. Latin viridis means green."},
   {n:"Moss", h:"#8A9A5B", src:"wiki", vs:"Sage", d:"Darker and more olive than sage."},
-  {n:"Hunter green", h:"#355E3B", src:"wiki", vs:"Bottle green", d:"Greyer and yellower than bottle green.", o:"Worn by hunters to blend into woods."},
+  {n:"Hunter green", h:"#355E3B", src:"wiki", vs:"Bottle green", d:"Greyer and yellower than bottle green.", o:"Said to be named for the green hunters wore in the 1800s to blend into the woods."},
   {n:"Bottle green", h:"#006A4E", src:"pick", vs:"Hunter green", d:"Bluer and deeper than hunter green.", o:"The color of old glass bottles."}
 ]},
 { id:"t3-purples", tier:3, title:"Purples & pinks", colors:[
@@ -126,6 +126,6 @@ units: [
   {n:"Umber", h:"#635147", src:"wiki", vs:"Sepia", d:"Darker and greyer than sepia.", o:"A brown earth pigment, darkened by manganese. The name probably comes from Latin umbra, shadow, more likely than from Umbria."},
   {n:"Mahogany", h:"#6C2E1F", src:"pick", vs:"Maroon", d:"Browner and duller than maroon.", o:"After the reddish tropical hardwood."},
   {n:"Ash", h:"#B2BEB5", src:"wiki", vs:"Silver", d:"Silver with a faint green-grey cast.", o:"After wood ash."},
-  {n:"Gunmetal", h:"#2A3439", src:"wiki", vs:"Charcoal", d:"Darker than charcoal.", o:"After the bronze once used to cast cannons."}
+  {n:"Gunmetal", h:"#2A3439", src:"wiki", vs:"Charcoal", d:"Darker than charcoal.", o:"After gunmetal, the bronze once cast into cannons, in its dark tarnished state."}
 ]}
 ]};

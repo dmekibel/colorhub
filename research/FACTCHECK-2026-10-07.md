@@ -148,5 +148,5 @@ Paintings have no `sources` field, so their sources are listed only here.
 
 ## Still worth a look
 
-- Martinovic et al. 2020 (Cognition) received a corrigendum in 2026 (Cognition 275: 106566) that we could not read. The two-blues story relies on this paper.
+- Martinovic et al. 2020 (Cognition) received a corrigendum in 2026 (Cognition 275: 106566) that we could not read. The two-blues story relies on this paper. Follow-up in FACTCHECK-ETYMOLOGY-2026-10-07.md: the corrigendum is confirmed but still unread, so every claim resting on the paper is now softened.
 - Several museum sites (Met, Mauritshuis, NGA, vangoghletters.org, olympics.com, cites.org) blocked automated reading. For those, the verdicts rest on peer-reviewed papers, museum PDFs or search excerpts.
