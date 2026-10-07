@@ -132,6 +132,9 @@ const ICON = {
   explore: sv('<circle cx="6" cy="7" r="2.6"/><circle cx="18" cy="6" r="2.6"/><circle cx="13" cy="18" r="2.6"/><path d="M8.5 6.7l6.9-.5M7.3 9.3l4.4 6.4M17 8.5l-2.9 7"/>', 24, 1.8),
   search: sv('<circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.3-4.3"/>', 20),
   play: sv('<path d="M8 5.5v13l10-6.5z" fill="currentColor"/>', 18),
+  today: sv('<rect x="6.5" y="3.5" width="11" height="17" rx="2"/><path d="M6.5 14.5h11"/><path d="M9.5 17.5h5"/>', 24, 1.7),
+  compass: sv('<circle cx="12" cy="12" r="8.5"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>', 24, 1.7),
+  palette: sv('<path d="M12 3.5a8.5 8.5 0 1 0 0 17c1.3 0 1.9-.9 1.6-2-.4-1.4.4-2.6 1.9-2.6H17a3.5 3.5 0 0 0 3.5-3.5c0-4.9-3.8-8.9-8.5-8.9z"/><circle cx="7.8" cy="11.2" r="1.1" fill="currentColor"/><circle cx="10.5" cy="7.6" r="1.1" fill="currentColor"/><circle cx="14.8" cy="7.9" r="1.1" fill="currentColor"/>', 24, 1.7),
   bolt: sv('<path d="M13 2.5L4.5 13.5H11l-1 8 8.5-11H12z"/>', 20),
 };
 const LOGO = `<svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">${["#E34234", "#FFBF00", "#50C878", "#007FFF"].map((c, i) =>
@@ -218,18 +221,18 @@ function show(html, cls = "", tab = null) {
   return el;
 }
 // Four tabs, one job each: Today (the path and the daily things), Train (the eye), Explore (read), Studio (make).
-const TABS = [["learn", "Today"], ["gym", "Train"], ["explore", "Explore"], ["studio", "Studio"]];
+const TABS = [["learn", "Today", "today"], ["gym", "Train", "gym"], ["explore", "Explore", "compass"], ["studio", "Studio", "palette"]];
 // The tab bar: three mono words on a blurred strip with a hairline marker under the current one.
 // It slides away while you scroll down and comes back when you scroll up.
-const tabbar = active => `<nav class="tabbar" aria-label="Sections"><div class="tabs">${TABS.map(([id, label]) =>
-  `<button class="tab${id === active ? " on" : ""}" data-tab="${id}" aria-current="${id === active}"><span>${label}</span>${id === "learn" && !dailyDone() && active !== "learn" ? '<i class="badge"></i>' : ""}</button>`).join("")}</div></nav>`;
+const tabbar = active => `<nav class="tabbar" aria-label="Sections"><div class="tabs">${TABS.map(([id, label, icon]) =>
+  `<button class="tab${id === active ? " on" : ""}" data-tab="${id}" aria-current="${id === active}">${ICON[icon]}<span>${label}</span>${id === "learn" && !dailyDone() && active !== "learn" ? '<i class="badge"></i>' : ""}</button>`).join("")}</div></nav>`;
 function wireTabbar(active) {
   const nav = app.querySelector(".tabbar"); if (!nav) return;
   const wrap = nav.querySelector(".tabs"), tabs = [...nav.querySelectorAll(".tab")], ind = document.createElement("i");
   ind.className = "tab-ind"; wrap.prepend(ind);
   const place = (id, anim) => {
     const b = tabs.find(t => t.dataset.tab === id); if (!b) return;
-    const r = b.querySelector("span").getBoundingClientRect(), w = wrap.getBoundingClientRect();
+    const r = b.getBoundingClientRect(), w = wrap.getBoundingClientRect();
     ind.style.transition = anim ? "" : "none"; ind.style.transform = `translateX(${r.left - w.left}px)`; ind.style.width = r.width + "px";
   };
   place(LAST_TAB || active, false);
