@@ -275,6 +275,40 @@ nothing is close, say so.
 gallery.py, after the Commons batch); fun facts last (S). Not doing: style/brushwork matching (needs an ML model; out of
 scope for now).
 
+## 16. Palette engine, mosaic picker, cross-matching (approved in principle 2026-10-08; extends §15)
+**Mosaic picker.** Any image (yours or any painting in the app) becomes a grid of averaged tiles with a slider from about 6
+to 400 tiles. Average in linear light or OKLab, not raw sRGB (sRGB averages go muddy). Drag a finger across tiles to collect
+colors into a palette tray (near-twins merge, every swatch named and tappable), or let it build the palette for you.
+The mosaic can also be exported as an image.
+**Palette engine.** One image gives a carousel of palette cards. Each card has a name, a one-line reason, and a shared size
+control (3 / 5 / 10 / 20 / custom). Different rules for different sizes: 3 = dominant, secondary, accent; 5 = a theme;
+10 = with a value ramp; 20+ = the full range, neutrals included.
+Strategies:
+- Extraction: by area (k-means / median cut); maximum spread (farthest-point in OKLab); accent-weighted (salient, small,
+  saturated); one per hue family; lights vs shadows (painters' light family and shadow family); a value or gradient ramp
+  (for UI scales); neutrals + one accent (60-30-10).
+- Harmony math: fit the image's hues to Matsuda's harmonic hue templates (as used in Cohen-Or et al. 2006, "Color
+  Harmonization"), then suggest the analogous, complementary, split, triad or square version. Golden-angle hue spacing for
+  many distinct colors. Even OKLCH lightness steps.
+- Learned beauty: O'Donovan, Agarwala & Hertzmann 2011 (a model of which 5-color themes people rate well, trained on large
+  palette sites); Lin & Hanrahan 2013 (how people pull themes from images); Ou & Luo's two-color harmony model. Use these to
+  rank cards, not to forbid anything.
+- Traditions: Itten's seven contrasts (hue, light-dark, cold-warm, complementary, simultaneous, saturation, extension/
+  proportion); Albers' interaction; Wada Sanzō's "Dictionary of Color Combinations" (1933-34; the original is public
+  domain in Japan, a modern reprint isn't; an open dataset of its combinations exists, so check its license) as a
+  reference set of good combinations.
+- Painter recipes, measured from each painter's own paintings in our archive (their value key, chroma, hue spread and
+  proportions), not invented: "Morandi" (muted, close values), "Monet" (high key, complementary shadows), "Warhol" (flat,
+  high chroma, complementary pops), "Rothko" (2-3 neighbors, close values), "Vermeer" (yellow-blue among neutrals),
+  "Hiroshige" (blue gradients), "Zorn" (limited palette). Present as "in the spirit of", never as the painter's real palette.
+- Verify each paper before citing it in the app; research pass first: research/PALETTE-STRATEGIES.md (S, Sonnet).
+**Cross-matching.** Compare any image's palette with flowers (Botany), gems, fashion decades and colors of the year, the
+Looks archive and named films. Say "shares colors with peony, lilac and iris" or "close to a 1970s fashion palette", never
+"influenced by" (color matching can't show influence). Precompute for every painting in the archive and show it on painting
+pages ("Shares colors with: ...").
+**Build:** palette-strategy research (S) → mosaic picker (S-M) → palette engine + cards (M-L) → cross-matching (S-M, after the
+§15 feature vectors). Sonnet throughout.
+
 ## Also queued
 - World: Botany (in progress), then Gems.
 - Color-list swaps from research/COLOR-SELECTION.md (Bistre, Stone, Green grey, Rose, Grape, Seafoam; Terracotta and Tangerine hex fixes; cross-unit near-twin check).

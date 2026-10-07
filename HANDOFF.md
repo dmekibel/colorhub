@@ -70,7 +70,8 @@ the public repo `dmekibel/colorhub`).
 4. Stages and fields (ROADMAP §14: nine stages, 25 / 50 / 100 / 150 / 250 / 400 / 600 / 800 / 1,000 words, no colored belts, basics are placement
    only) as the chapters of the path.
 5. Image analysis (ROADMAP §15): upload any image for stats, several palettes, views, and closest painter/era/country/
-   painting by color. Later: business (Plus, a free atlas site), Colordle, the Russian edition.
+   painting by color. Then §16: mosaic picker (6-400 tiles, finger-swipe to collect), the palette engine (many strategies:
+   extraction, harmony math, learned beauty, painter recipes) and cross-matching with flowers/gems/fashion. Later: business (Plus, a free atlas site), Colordle, the Russian edition.
 
 ## Known issues
 - Art Institute of Chicago and SMK images are served from our own 200px copies (AIC blocks hotlinking; SMK is slow); SMK
