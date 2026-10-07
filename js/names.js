@@ -70,11 +70,13 @@ function npPaintingsSection(host, hex) {
   if (!host) return;
   const render = () => {
     if (!host.isConnected) return;
-    const hits = npGalleryHits(hex);
-    host.innerHTML = `<h3>In paintings</h3>` + (hits.length
-      ? `<p class="gl-in-sub">Paintings with a color close to this one, by how much of the canvas it covers.</p>
+    // a strip of (up to) 6 real thumbnails, the paintings that use this color most (David, 2026-10-07:
+    // "the paintings that use it most, as a strip of 6 thumbnails") — no empty section when there are none.
+    const hits = npGalleryHits(hex).slice(0, 6);
+    host.innerHTML = hits.length
+      ? `<h3>In paintings</h3><p class="gl-in-sub">Paintings with a color close to this one, by how much of the canvas it covers.</p>
          <div class="gl-rail">${hits.map(([i, w]) => glPinHTML(i, { badge: `${Math.max(1, Math.round(w * 100))}% of the canvas` })).join("")}</div>`
-      : `<p class="fine">No painting in the gallery has much of this color.</p>`);
+      : "";
     glFill(host);
   };
   host.onclick = e => { const p = e.target.closest("[data-gi]"); if (p) galleryPage(+p.dataset.gi, true, hex); };
@@ -109,6 +111,12 @@ function namePage(entry, push = true, tapped) {
   const shadeBase = shade && (CORE_NAMES || coreFallback()).find(e => e.n.toLowerCase() === shade.base.toLowerCase());
   const nearCore = nearestCore(tapped || hex, CORE_NAMES || coreFallback(), 7).filter(x => x.n.toLowerCase() !== name.toLowerCase()).slice(0, 6);
   const likes = typeof lookalikes === "function" ? lookalikes({ n: name, h: hex }, 6) : [];
+  // a small codes block at the end (David, 2026-10-07): HEX/RGB/HSL from js/explore.js's codes() (shared, not
+  // reimplemented here), plus Lab, which that one doesn't carry (it's CMYK there, for print; a library name
+  // has no print context, so Lab — the space every ΔE/closeness number on this page is already computed in —
+  // is the more honest fourth row).
+  const Lab = lab(heroHex);
+  const codeRows = (typeof codes === "function" ? codes(heroHex).slice(0, 3) : [["HEX", heroHex]]).concat([["LAB", `${Lab[0].toFixed(1)} ${Lab[1].toFixed(1)} ${Lab[2].toFixed(1)}`]]);
   const status = tapped ? `Your color · ${pctMatch(de2000(tapped, hex))} to ${name}` : stage ? `Stage ${stage} of 9` : shade ? "A described shade" : "Library color";
   const el = show(`
     <div class="c-hero cp-hero cp-hero-full" style="--c:${heroHex}" data-ink="${ink(heroHex)}">
@@ -136,9 +144,11 @@ function namePage(entry, push = true, tapped) {
     ${typeof gmRow === "function" ? gmRow(entry) : ""}
     <section class="fx-in" data-world-in></section>
     ${nearCore.length ? `<div class="sec-head"><b>Nearest names</b><span>of about 1,000</span></div>
-      <div class="lk-list">${nearCore.map(x => `<button class="lk-row" data-np-near="${esc(x.n)}" data-h="${x.h}"><i style="--c:${x.h}" data-morph-src></i><b>${esc(x.n)}</b><span>${closeness(x.de)} · ${pctDiff(x.de)}</span></button>`).join("")}</div>` : ""}
+      <div class="lk-list">${nearCore.map(x => `<button class="lk-row" data-np-near="${esc(x.n)}" data-h="${x.h}"><i style="--c:${x.h}" data-morph-src></i><b>${esc(x.n)}</b><span>${pctMatch(x.de)}</span></button>`).join("")}</div>` : ""}
     ${likes.length ? `<div class="sec-head"><b>Look-alikes</b><span>among the 101 taught colors</span></div>
       <div class="lk-list">${likes.map(o => `<button class="lk-row" data-np-near="${esc(o.x.n)}" data-h="${o.x.h}"><i style="--c:${o.x.h}" data-morph-src></i><b>${esc(o.x.n)}</b><span>${esc(lookDiff({ n: name, h: hex }, o.x))}</span></button>`).join("")}</div>` : ""}
+    <div class="sec-head"><b>Codes</b></div>
+    <div class="cp-codes">${codeRows.map(([k, v]) => `<button class="cp-code-row" data-copy="${esc(v)}"><span>${esc(k)}</span><b class="mono">${esc(v)}</b></button>`).join("")}</div>
     <p class="fine">Nearest of about 1,000 primary names (CIEDE2000). Hex values are screen approximations.</p>
   `, "article cp-page names");
   el.querySelector("[data-back]").onclick = xBack;
