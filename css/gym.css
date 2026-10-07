@@ -68,11 +68,16 @@
 .mem-chip{width:min(72%,42dvh);aspect-ratio:1;background:var(--c);border-radius:3px;transition:opacity .25s}
 .mem-chip.gone{opacity:0}
 .mem-bar{display:block;width:min(72%,42dvh);height:2px;background:var(--ink);transform-origin:left}
-.mem-bar.go{transition:transform 2s linear;transform:scaleX(0)}
+.mem-bar.go{transition:transform var(--t,2s) linear;transform:scaleX(0)}
 .mem-bar.gone{opacity:0}
 .mem-opts{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;width:100%}
 .mem-opts .tile{grid-column:span 2;min-width:25vw}
-.mem-opts .tile:nth-child(4){grid-column:2/4}.mem-opts .tile:nth-child(5){grid-column:4/6}
+.mem-opts.n5 .tile:nth-child(4){grid-column:2/4}.mem-opts.n5 .tile:nth-child(5){grid-column:4/6}
+/* 3 in a row; 7 and 9 as a 3x3 grid (the 7th centered) */
+.mem-opts.n3,.mem-opts.n7,.mem-opts.n9{grid-template-columns:repeat(3,1fr)}
+.mem-opts.n3 .tile,.mem-opts.n7 .tile,.mem-opts.n9 .tile{grid-column:auto;aspect-ratio:1}
+.mem-opts.n7 .tile:nth-child(7){grid-column:2}
+.mem-up{color:var(--ink)}
 .drill-order .sorter{max-height:560px}
 
 /* adjust stations: a colored field, a slider, a lock button */

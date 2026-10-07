@@ -23,7 +23,7 @@ const SKILLS = {
     why: "Monet's sun in Impression, Sunrise is about as light as the clouds around it, so it seems to glow; in a black-and-white copy it nearly disappears." },
   match:   { name: "One color, two looks", what: "Make the lower square match the upper", unit: "ΔE", start: 15, top: 1.5, trials: 4, kind: "adjust", ok: 4,
     why: "One color on two grounds can look like two colors: each ground pushes its square toward the ground's opposite." },
-  memory:  { name: "Color memory", what: "See it, lose it, find it among five", unit: "ΔE", start: 16, top: 2, floor: 1.5, trials: 8,
+  memory:  { name: "Color memory", what: "See it, lose it, find it again. It gets harder as you climb", unit: "ΔE", start: 16, top: 2, floor: 1.5, trials: 12,
     why: "Remembered colors tend to drift toward the typical example of their name, so close neighbors are hard to tell apart from memory." },
   order:   { name: "Sort the strip", what: "Put close colors in order", unit: "ΔE step", start: 9, top: .8, floor: .6, trials: 4,
     why: "A smooth strip means judging each step against both of its neighbors at once." },
@@ -263,6 +263,7 @@ function runDrill(k, opts = {}) {
   const sk = SKILLS[k];
   if (!sk) return gymHome();
   const adj = sk.kind === "adjust", ses = adj ? makeAdjust(k) : makeStair(k), total = opts.trials || sk.trials, famHits = {};
+  if (k === "memory") MEM = { lv: Math.max(1, S.gym.memLv || levelOf("memory", lastScore("memory")) || 1), run: 0 };
   let n = 0;
   const el = show(`
     <header class="deck-top">
@@ -279,7 +280,7 @@ function runDrill(k, opts = {}) {
   const stage = el.querySelector("#dstage"), foot = el.querySelector("#dfoot"), q = el.querySelector("#q"), lvl = el.querySelector("#lvl");
   const segs = el.querySelectorAll(".segs i");
   const mark = ok => { segs[n].classList.add("on"); segs[n].style.setProperty("--c", ok ? "var(--good)" : "var(--bad)"); buzz(ok ? 10 : [10, 40, 10]); n++; };
-  const finish = () => { const r = record(k, ses, k === "hue" ? famHits : null); return opts.done ? opts.done(r) : stationDone(r); };
+  const finish = () => { if (k === "memory") { S.gym.memLv = MEM.lv; save(); } const r = record(k, ses, k === "hue" ? famHits : null); return opts.done ? opts.done(r) : stationDone(r); };
   // staircase stations call answer(right?); adjust stations call settle(error) and then show a Next button
   const answer = (ok, fam) => {
     if (fam) famHits[fam] = ses.d;
@@ -311,6 +312,25 @@ function gyLock(ctx, label, onLock) {
 }
 // a start position at least `gap` away from the answer
 const gyStart = (s0, gap = .2) => { const dir = Math.random() < .5 ? -1 : 1, s = s0 + dir * (gap + Math.random() * .2); return s < 0 || s > 1 ? s0 - dir * (gap + Math.random() * .2) : s; };
+
+// Color memory levels: every two right in a row moves you up a level, two misses in a row move you down.
+// A session starts at the level your last score earned.
+let MEM = { lv: 1, run: 0 };
+function memParams(lv) {
+  return {
+    look: Math.round(2200 - Math.min(lv - 1, 15) * 90),              // 2.2 s down to 0.85 s
+    gap: Math.round(1500 + Math.min(lv - 1, 15) * 170),              // 1.5 s up to 4 s
+    opts: lv < 4 ? 3 : lv < 9 ? 5 : lv < 15 ? 7 : 9,                 // more look-alikes to choose from
+    flash: lv >= 7,                                                  // a different color flashes in the gap
+    hold: lv >= 11 ? 2 : 1,                                          // two colors to remember, asked about one
+    news: lv === 4 ? "five choices now" : lv === 7 ? "a distractor flashes in the gap" : lv === 9 ? "seven choices" : lv === 11 ? "two colors to hold" : lv === 15 ? "nine choices" : "a shorter look, a longer wait",
+  };
+}
+function memStep(ok) {
+  if (ok) { MEM.run = MEM.run > 0 ? MEM.run + 1 : 1; if (MEM.run >= 2 && MEM.lv < 20) { MEM.lv++; MEM.run = 0; return true; } }
+  else { MEM.run = MEM.run < 0 ? MEM.run - 1 : -1; if (MEM.run <= -2 && MEM.lv > 1) { MEM.lv--; MEM.run = 0; } }
+  return false;
+}
 
 const DRILLS = {
   // Odd one out: a 3 x 3 grid of one color with one tile shifted by d (three columns keeps tiles big).
@@ -351,34 +371,52 @@ const DRILLS = {
     pairQuestion(ctx, lightTop ? [light, dark] : [dark, light], lightTop ? 0 : 1, answer, (x, y) => `Lightness ${lab(x)[0].toFixed(0)} vs ${lab(y)[0].toFixed(0)} (L*)`);
   },
 
-  // Color memory: see a color for 2 s, it's gone for 1.5 s, then find it among five close neighbors (d apart).
+  // Color memory as a level game: the staircase still tightens the neighbors (d), and the level adds pressure:
+  // shorter looks, longer waits, more choices, a distractor flash in the gap, then two colors to hold at once.
   memory(ctx, d, answer) {
-    const base = tame(lab(shuffle(metColors())[0].h));
+    const lv = MEM.lv, P = memParams(lv);
+    const pick = () => tame(lab(shuffle(metColors())[0].h));
+    const bases = P.hold === 2 ? [pick(), pick()] : [pick()], ask = bases.length === 2 ? (Math.random() < .5 ? 0 : 1) : 0, base = bases[ask];
+    const want = P.opts - 1;
     let nb = [];
     for (let t = 0; t < 30; t++) {
-      const o = [0, 1, 2, 3].map(() => offset(base, d, cvdW([.6, 1, 1]))).filter(Boolean);
-      if (o.length > nb.length || (o.length === 4 && o.every((x, i) => o.every((y, j) => i === j || de2000(x, y) >= d * .7)))) nb = o;
-      if (nb.length === 4 && nb.every((x, i) => nb.every((y, j) => i === j || de2000(x, y) >= d * .7))) break;
+      const o = Array.from({ length: want }, () => offset(base, d, cvdW([.6, 1, 1]))).filter(Boolean);
+      const spread = o.every((x, i) => o.every((y, j) => i === j || de2000(x, y) >= d * .6));
+      if (o.length > nb.length || (o.length === want && spread)) nb = o;
+      if (nb.length === want && spread) break;
     }
-    while (nb.length < 4) nb.push(tame([base[0] + (nb.length % 2 ? 1 : -1) * d * (1 + nb.length / 2), base[1], base[2]]));
-    const hex = labHex(...base), opts = shuffle([base, ...nb].map(x => labHex(...x))), right = opts.indexOf(hex);
-    ctx.q.textContent = "Remember this color";
-    ctx.stage.innerHTML = `<div class="mem"><div class="mem-chip" id="chip" style="--c:${hex}"></div><i class="mem-bar" id="bar"></i></div>`;
+    while (nb.length < want) nb.push(tame([base[0] + (nb.length % 2 ? 1 : -1) * d * (1 + nb.length / 2), base[1], base[2]]));
+    const hexes = bases.map(x => labHex(...x)), hex = hexes[ask], opts = shuffle([base, ...nb].map(x => labHex(...x))), right = opts.indexOf(hex);
+    ctx.el.querySelector(".drill-head .eyebrow").textContent = `Color memory · Level ${lv}`;
+    ctx.stage.innerHTML = `<div class="mem"><div class="mem-chip" id="chip"></div><i class="mem-bar" id="bar" style="--t:${P.look}ms"></i></div>`;
     const chip = ctx.stage.querySelector("#chip"), bar = ctx.stage.querySelector("#bar");
-    requestAnimationFrame(() => bar.classList.add("go"));
-    later(() => { chip.classList.add("gone"); bar.classList.add("gone"); ctx.q.textContent = "Hold it in mind"; }, 2000);
+    // show each color in turn, then the gap (with a distractor flash at higher levels), then the choices
+    let t = 0;
+    hexes.forEach((h, i) => {
+      later(() => { chip.classList.remove("gone"); chip.style.setProperty("--c", h); ctx.q.textContent = hexes.length === 2 ? (i ? "…and this one" : "Remember this one…") : "Remember this color";
+        bar.classList.remove("go", "gone"); void bar.offsetWidth; bar.classList.add("go"); }, t);
+      t += P.look;
+      if (i < hexes.length - 1) { later(() => chip.classList.add("gone"), t); t += 350; }
+    });
+    later(() => { chip.classList.add("gone"); bar.classList.add("gone"); ctx.q.textContent = "Hold it in mind"; }, t);
+    if (P.flash) {
+      const [L0, , H0] = lch(hex), fl = lchHex(clamp(100 - L0, 25, 80), 55, (H0 + 120 + Math.random() * 120) % 360);
+      later(() => { chip.style.setProperty("--c", fl); chip.classList.remove("gone"); ctx.q.textContent = "Ignore this one"; }, t + P.gap * .35);
+      later(() => { chip.classList.add("gone"); ctx.q.textContent = "Hold it in mind"; }, t + P.gap * .35 + 500);
+    }
     later(() => {
-      ctx.q.textContent = "Which one was it?";
-      ctx.stage.innerHTML = `<div class="mem-opts">${opts.map((h, i) => `<button class="tile" data-i="${i}" style="--c:${h}" aria-label="Option ${i + 1}"></button>`).join("")}</div>`;
+      ctx.q.textContent = hexes.length === 2 ? (ask ? "Which was the second?" : "Which was the first?") : "Which one was it?";
+      ctx.stage.innerHTML = `<div class="mem-opts n${opts.length}">${opts.map((h, i) => `<button class="tile" data-i="${i}" style="--c:${h}" aria-label="Option ${i + 1}"></button>`).join("")}</div>`;
       let done = false;
-      ctx.stage.querySelectorAll(".tile").forEach(t => t.onclick = () => {
+      ctx.stage.querySelectorAll(".tile").forEach(b => b.onclick = () => {
         if (done) return; done = true;
-        const ok = +t.dataset.i === right;
+        const ok = +b.dataset.i === right, up = memStep(ok);
         ctx.stage.querySelector(`[data-i="${right}"]`).classList.add("ring");
-        if (!ok) { t.classList.add("miss"); ctx.foot.innerHTML = `<p class="note">The ringed one was it, <b>${fmt(de2000(hex, opts[+t.dataset.i]))}</b> ΔE from your pick</p>`; }
+        if (!ok) { b.classList.add("miss"); ctx.foot.innerHTML = `<p class="note">The ringed one was it, <b>${fmt(de2000(hex, opts[+b.dataset.i]))}</b> ΔE from your pick</p>`; }
+        else if (up) { ctx.foot.innerHTML = `<p class="note mem-up">Level ${MEM.lv} · ${esc(memParams(MEM.lv).news || "")}</p>`; buzz([8, 30, 8, 30, 14]); }
         answer(ok);
       });
-    }, 3500);
+    }, t + P.gap);
   },
 
   // Sort the strip: ends fixed, middle shuffled, drag into order. Six rows keep each swatch big.
