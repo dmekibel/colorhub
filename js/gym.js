@@ -325,15 +325,81 @@ function gymHome() {
 const k0Trials = k => k === "order" ? `${SKILLS[k].trials} strips` : k === "squint" ? `${SKILLS[k].trials} paintings` : `${SKILLS[k].trials} rounds`;
 const dueWords = n => n <= 0 ? "today" : n === 1 ? "tomorrow" : `in ${n} days`;
 
-// Results for one set: level before and after, what unlocked, the weak zone, and one tip with a 3-round fix.
+// ---------- results: the score in plain words, every miss side by side, replay, and your trend ----------
+// A reference value, not a claim about this player: under good light and a well-calibrated screen, about 1
+// (ΔE00, or ΔL* for lightness) is the smallest difference most people can see side by side. Phone screens vary,
+// so it's shown as a reference, never as a world comparison (that needs the opt-in scores service: NOTES-TRACKER #13).
+const JND_REF = 1;
+function plainMeaning(k, est) {
+  const sk = SKILLS[k], noun = sk.unit === "ΔL*" ? "lightness" : sk.unit === "ΔE step" ? "steps" : "colors";
+  const cmp = est <= JND_REF * 1.6 ? "close to the limit of human vision under good conditions"
+    : est <= JND_REF * 4 ? "a small, trained difference" : "a difference most people would also notice";
+  return `You can tell ${noun} apart about ${fmt(est)} ${sk.unit} apart, ${cmp}.`;
+}
+// The hex you picked and the hex that was right, for the station kinds that log both (hue, value, shade, memory).
+// Adjust stations (neutral, vanish, match) and order don't log a clean pair, so they're left out of the strip.
+function missPick(k, t) {
+  const rp = t.rp;
+  if (!rp) return null;
+  if (rp.a != null && rp.b != null) return k === "value" || k === "shade" ? { picked: rp.b, correct: rp.a } : { picked: rp.a, correct: rp.b };
+  if (rp.h != null && rp.pk != null) return { picked: rp.pk, correct: rp.h };
+  return null;
+}
+// One short "why it was hard" line, only when the trial's own bands say so.
+function missWhy(t) {
+  const bits = [];
+  if (t.l === "dark") bits.push("both dark"); else if (t.l === "light") bits.push("both light");
+  if (t.c === "muted") bits.push("low chroma"); else if (t.c === "vivid") bits.push("both vivid");
+  return bits.length ? bits.join(", ") : null;
+}
+function missCard(k, t) {
+  const sk = SKILLS[k], pr = missPick(k, t);
+  if (!pr) return "";
+  const dist = sk.unit === "ΔL*" ? Math.abs(lab(pr.picked)[0] - lab(pr.correct)[0]) : de2000(pr.picked, pr.correct), why = missWhy(t);
+  return `<div class="gy-miss">
+    <div class="gy-miss-pair">
+      <span class="gy-miss-sw bad" style="--c:${pr.picked}"><b>Picked</b></span>
+      <span class="gy-miss-sw good" style="--c:${pr.correct}"><b>${k === "memory" ? "It was" : "Odd one"}</b></span>
+    </div>
+    <div class="gy-miss-meta"><b class="mono">${fmt(dist)} <small>${esc(sk.unit)}</small></b>${why ? `<span>${esc(why)}</span>` : ""}</div>
+  </div>`;
+}
+// A short set built from exactly the missed pairs, at the same difference each was drawn at.
+function runReplay(k, misses) {
+  const items = misses.filter(t => t.rp).map(t => ({ k, P: dialPlan(k, planLevel(k)), rp: t.rp, d: t.rp.d }));
+  if (!items.length) return runDrill(k);
+  runSession({ kind: "replay", items, onEnd: res => replayDone(k, res) });
+}
+function replayDone(k, res) {
+  storeTrials(res.trials); save();
+  const hits = res.trials.filter(t => t.ok).length, total = res.trials.length;
+  const el = show(`
+    <div style="flex:1"></div>
+    <p class="eyebrow">${esc(SKILLS[k].name)} · replay</p>
+    <h1>${hits} of <em>${total}.</em></h1>
+    <p class="lede">${hits === total ? "Every miss from that set, solved." : "Same pairs, another look. The ones you still miss are worth another pass."}</p>
+    <div class="stack"><button class="btn" data-again>Another set ${ICON.arrow}</button><button class="btn ghost" data-home>Back to Train</button></div>
+  `, "result gym-res");
+  el.querySelector("[data-again]").onclick = () => runDrill(k);
+  el.querySelector("[data-home]").onclick = () => go("gym");
+  if (hits === total) buzz([12, 60, 12]);
+}
+
+// Results for one set: the score, what it means, every miss side by side, your trend, level and what unlocked,
+// the weak zone, and one tip with a 3-round fix.
 function stationDone(r) {
   const sk = SKILLS[r.k], lvA = levelOf(r.k, r.est), lvB = r.before != null ? levelOf(r.k, r.before) : null;
   const head = r.pb && r.before != null ? "New personal <em>best.</em>" : lvB != null && lvA > lvB ? "Level <em>up.</em>" : r.before == null ? "First <em>set.</em>" : "Eyes <em>trained.</em>";
-  const tip = r.tip;
+  const tip = r.tip, pct = r.total ? Math.round(r.hits / r.total * 100) : null;
+  const cards = (r.misses || []).map(t => missCard(r.k, t)).filter(Boolean);
+  const hist = skillState(r.k).hist;
   const el = show(`
     <div style="flex:1"></div>
     <p class="eyebrow">${esc(sk.name)} · set done</p>
     <h1>${head}</h1>
+    ${pct != null ? `<div class="gy-score"><b>${r.hits} of ${r.total}</b><span>right · ${pct}%</span></div>` : ""}
+    <p class="gy-weak">${esc(plainMeaning(r.k, r.est))}</p>
+    <p class="fine">Reference value for human color discrimination under good viewing conditions; phone screens vary, and this isn't a comparison with other players.</p>
     <div class="gr-lv"><span class="mono">Level</span>${lvB != null ? `<s>${lvB}</s><i>→</i>` : ""}<b data-count="${lvA}">${lvA}</b><span class="mono">of 20</span></div>
     ${ladder(lvA, "big")}
     ${(r.news || []).map(([l, n]) => `<p class="gy-news"><b>New at level ${l}</b> ${esc(n)}</p>`).join("")}
@@ -343,12 +409,15 @@ function stationDone(r) {
     </div>
     ${r.weak ? `<p class="gy-weak">${esc(r.weak)}.</p>` : ""}
     ${tip ? `<div class="gy-tip"><p class="eyebrow">One thing to try</p><p>${esc(tip.tip)}</p><p class="gy-fixwhat">The fix: ${esc(tip.fixWhat)}</p></div>` : `<p class="lede">${esc(sk.why)}</p>`}
+    ${cards.length ? `<div class="sec-head"><b>Every miss</b><span>${cards.length} of ${r.total}</span></div><div class="gy-miss-strip">${cards.join("")}</div>` : ""}
+    ${hist.length >= 2 ? `<div class="sec-head"><b>Your trend</b><span>this station, past sessions</span></div>${eyeChart(hist, sk.unit, true)}` : ""}
     <p class="fine gr-fine">Smaller numbers mean smaller differences, measured on the colors as your screen drew them. Session scores move from day to day; your weekly check-in is the real trend.${!tip && sk.src ? ` Source: ${esc(sk.src)}.` : ""}</p>
-    <div class="stack">${tip ? `<button class="btn" data-fix>Fix it: 3 rounds ${ICON.arrow}</button><button class="btn ghost" data-again>Another set</button>` : `<button class="btn" data-again>Another set ${ICON.arrow}</button>`}<button class="btn ghost" data-home>Back to Train</button></div>
+    <div class="stack">${tip ? `<button class="btn" data-fix>Fix it: 3 rounds ${ICON.arrow}</button><button class="btn ghost" data-again>Another set</button>` : `<button class="btn" data-again>Another set ${ICON.arrow}</button>`}${cards.length ? `<button class="btn ghost" data-replay>Replay my misses (${cards.length})</button>` : ""}<button class="btn ghost" data-home>Back to Train</button></div>
   `, "result gym-res");
   el.querySelector("[data-again]").onclick = () => runDrill(r.k);
   el.querySelector("[data-home]").onclick = () => go("gym");
   const fx = el.querySelector("[data-fix]"); if (fx) fx.onclick = () => runDrill(r.k, { fix: tip });
+  const rp = el.querySelector("[data-replay]"); if (rp) rp.onclick = () => runReplay(r.k, r.misses);
   onKey = e => { if (e.key === "Enter") go("gym"); };
   if (r.pb || (lvB != null && lvA > lvB)) buzz([12, 60, 12]);
 }
@@ -438,8 +507,8 @@ function runSession(o) {
     if (lastCls) el.classList.remove(lastCls); lastCls = "drill-" + k; el.classList.add(lastCls);
     GY_R = it.seed != null ? seededRnd(it.seed) : Math.random;
     const d = it.rp && it.rp.d ? it.rp.d : it.d != null ? it.d : s.d;
-    ey.textContent = kind === "checkin" ? `Check-in · ${sk.name}` : kind === "intro" ? `${sk.name} · first look` : it.rp ? `${sk.name} · one you were sure about`
-      : it.news ? `${sk.name} · Level ${it.lv} · ${it.news}` : kind === "fix" ? `${sk.name} · fix it` : sk.name;
+    ey.textContent = kind === "checkin" ? `Check-in · ${sk.name}` : kind === "intro" ? `${sk.name} · first look` : kind === "replay" ? `${sk.name} · replay a miss`
+      : it.rp ? `${sk.name} · one you were sure about` : it.news ? `${sk.name} · Level ${it.lv} · ${it.news}` : kind === "fix" ? `${sk.name} · fix it` : sk.name;
     why.classList.remove("show");
     why.textContent = kind === "intro" ? "First look: just guess, quickly. The why comes after." : kind === "checkin" ? "No feedback during the check-in. Answer and move on." : sk.why;
     if (lvl) lvl.textContent = adj || kind === "checkin" ? `${n + 1}/${total}` : `${fmt(d)} ${sk.unit}`;
@@ -502,6 +571,9 @@ function finishStation(k, res, plv0) {
   r.tip = detectPattern(k, st.trials);
   r.weak = weakLine(weakBand(st.trials, day));
   r.due = st.due - day;
+  r.hits = res.trials.filter(t => t.ok).length;
+  r.total = res.trials.length;
+  r.misses = res.trials.filter(t => !t.ok && missPick(k, t));
   save();
   stationDone(r);
 }
@@ -740,7 +812,7 @@ const DRILLS = {
           ctx.stage.querySelector(`[data-i="${right}"]`).classList.add("ring");
           if (!ok) { b.classList.add("miss"); ctx.foot.innerHTML = `<p class="note">The ringed one was it, <b>${fmt(de2000(hex, opts[+b.dataset.i]))}</b> ΔE from your pick</p>`; }
           else if (up) { ctx.foot.innerHTML = `<p class="note mem-up">Level ${MEM.lv} · ${esc(memParams(MEM.lv).news || "")}</p>`; buzz([8, 30, 8, 30, 14]); }
-        }, { ...bandsOf(hex), s: ok ? undefined : { dC: +(Cp - Ct).toFixed(1), dL: +(Lp - Lt).toFixed(1) }, rp: { h: hex } });
+        }, { ...bandsOf(hex), s: ok ? undefined : { dC: +(Cp - Ct).toFixed(1), dL: +(Lp - Lt).toFixed(1) }, rp: { h: hex, pk: opts[+b.dataset.i] } });
       });
     }, t + P.gap);
   },
@@ -1120,6 +1192,16 @@ function gymShot(arg) {
   if (what === "introdone") { gyState().seen[k || "value"] = 0; delete S.gym.skills[k || "value"]; runDrill(k || "value"); return setTimeout(() => { const b = document.querySelector(".half,.tile"); if (b) b.click(); }, 700); }
   if (what === "conf") { runDrill(k || "value", { confAll: true }); return setTimeout(() => { const b = document.querySelectorAll(".half,.tile"); if (b[0]) b[0].click(); setTimeout(() => { const c = document.querySelectorAll(".half,.tile"); if (document.querySelector("[data-cf]")) return; if (c[1]) c[1].click(); }, 900); }, 700); }
   if (what === "tip") { const st = stOf("value"); return stationDone({ k: "value", est: 3.1, before: 3.4, pb: false, best: 2.8, news: [[7, dialNews("value", 7)]], tip: detectPattern("value", st.trials), weak: weakLine(weakBand(st.trials, gyDay())), due: 3 }); }
+  // the results screen with real misses, for design review (NOTES-TRACKER #12): gx:miss or gx:missreplay (taps "Replay my misses" right away)
+  if (what === "miss" || what === "missreplay") {
+    const pairs = [["#3C6FC8", "#5A96EC"], ["#2E8A4C", "#3EA85C"], ["#C8323C", "#B21E2C"], ["#7E4FB0", "#8E5FC0"]];
+    const trials = pairs.map(([a, b]) => ({ k: "hue", ok: 0, ...bandsOf(a), rp: { a, b, d: de2000(a, b) }, d: de2000(a, b) }));
+    ["#8C8C88", "#B0763C", "#6B8E9E", "#A85C7C", "#E0C040", "#C86BA0", "#4C8C6C", "#9C5C3C"].forEach((h, i) => trials.push({ k: "hue", ok: 1, ...bandsOf(h), d: 1 + i * .15 }));
+    const log = trials.map(t => t.d), ses = { d: log[log.length - 1], log, estimate() { return geoMean(this.log); } };
+    finishStation("hue", { ses: { hue: ses }, trials }, 1);
+    if (what === "missreplay") { const b = document.querySelector("[data-replay]"); if (b) b.click(); }
+    return;
+  }
   if (what === "checkin") { gyState().checkins = []; return runCheckin(); }
   if (what === "squint") { gyState().seen.squint = 1; return runDrill("squint", { noIntro: true }); }
   if (what === "squintrev") { runDrill("squint", { noIntro: true }); return setTimeout(() => { const d = document.querySelectorAll(".sq-dot"); d[0] && d[0].click(); setTimeout(() => d[1] && d[1].click(), 200); }, 900); }
@@ -1137,6 +1219,19 @@ function gymShot(arg) {
       const b = q("[data-cf]") || q("[data-lock]") || q("[data-next]") || q("[data-check]") || q(".sq-dot:not(.on):not(.rev)") || q(".drill .tile:not(.ring):not(.miss):not(.picked)") || q(".drill .half:not(.ring):not(.miss):not(.picked)");
       if (b && !q(".result")) b.click();
       if (!q(".result")) setTimeout(tick, 350);
+    };
+    return setTimeout(tick, 600);
+  }
+  // auto-play to the first result, then tap "Replay my misses" once and stop there (for screenshotting the replay set itself).
+  if (what === "autoreplay") {
+    runDrill(k || "hue", { noIntro: true });
+    const tick = () => {
+      const q = s => document.querySelector(s);
+      const rp = q("[data-replay]");
+      if (rp) return rp.click();
+      const b = q("[data-cf]") || q("[data-lock]") || q("[data-next]") || q("[data-check]") || q(".sq-dot:not(.on):not(.rev)") || q(".drill .tile:not(.ring):not(.miss):not(.picked)") || q(".drill .half:not(.ring):not(.miss):not(.picked)");
+      if (b && !q(".result")) b.click();
+      setTimeout(tick, 350);
     };
     return setTimeout(tick, 600);
   }

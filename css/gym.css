@@ -132,6 +132,28 @@
 .gym-res .lede{margin-bottom:6px}
 .gym-res .gr-fine{margin:0 0 22px}
 .af-field.asked .af-x{display:none}
+/* the score, and the plain-words line under it (DESIGN-SYSTEM §3/§4: serif carries the hierarchy) */
+.gy-score{display:flex;align-items:baseline;gap:10px;margin:4px 0 14px}
+.gy-score b{font:400 44px/1 var(--serif);letter-spacing:-.02em}
+.gy-score span{font:500 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--soft)}
+.gym-res .gy-weak+.fine{margin-top:-6px;margin-bottom:20px}
+/* every miss, side by side: a short scrolling strip, swatches judged on the neutral booth grey
+   (DESIGN-SYSTEM §3 "Surround"), feedback as a 3px ring outside the swatch, never over it */
+.gy-miss-strip{display:flex;gap:12px;overflow-x:auto;margin:14px calc(-1 * var(--g)) 4px;padding:2px var(--g) 8px;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity}
+.gy-miss{flex:0 0 150px;scroll-snap-align:start;background:#5F5F5F;border-radius:3px;padding:14px 12px 12px}
+.gy-miss-pair{display:flex;gap:10px}
+.gy-miss-sw{position:relative;flex:1;min-width:0;aspect-ratio:1;border-radius:4px;background:var(--c)}
+.gy-miss-sw.bad{outline:3px solid var(--bad);outline-offset:3px}
+.gy-miss-sw.good{outline:3px solid var(--good);outline-offset:3px}
+.gy-miss-sw b{position:absolute;left:-3px;right:-3px;bottom:-19px;text-align:center;font:500 9.5px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.82)}
+.gy-miss-meta{display:flex;flex-direction:column;gap:3px;margin-top:24px}
+.gy-miss-meta b{font:500 15px/1 var(--mono);color:#fff}
+.gy-miss-meta small{font-size:11px;opacity:.75}
+.gy-miss-meta span{font-size:11.5px;color:rgba(255,255,255,.72);text-wrap:pretty}
+/* your trend: the compact session chart, reused from the "Your eye" page */
+.eye-chart{display:block;width:100%}
+.eye-ends{display:flex;justify-content:space-between;margin-top:4px;font:500 11px/1 var(--mono);letter-spacing:.04em;color:var(--soft)}
+.eye-ends b{color:var(--ink);font-weight:500}
 
 /* ======================================================================
    Training engine (js/gym-engine.js): shelves, your-eye profile, check-in, confidence, tips, squint
