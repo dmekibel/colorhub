@@ -37,7 +37,7 @@ function hmView() {   // the saved view, upgrading the old single "set" id
     h.filter = { learned: "learned", learning: "learning", notmet: "new" }[old] || "all";
   }
   if (!/^stage:\d+$/.test(h.src) && !hmSet(h.src)) h.src = "stage:100";
-  h.filter = HM_KEEP[h.filter] ? h.filter : "all"; h.layout = h.layout === "wheel" ? "wheel" : "map";
+  h.filter = HM_KEEP[h.filter] ? h.filter : "all"; h.layout = h.layout === "wheel" ? "wheel" : "map"; h.lensMode = h.lensMode === "edges" ? "edges" : "round";
   return h;
 }
 function hmViewLabel() {
@@ -89,7 +89,7 @@ function hmHome() {
     items = items.filter(HM_KEEP[v.filter]);
     paintTitle();
     if (ctrl) ctrl.update({ items, soft, layout: v.layout });
-    else ctrl = honeycomb(viewEl, { items, layout: v.layout, zoom: S.hm.zoom || 1, pick, onPeek, centerFirst: true, lens: S.hm.lens == null ? 1 : S.hm.lens,
+    else ctrl = honeycomb(viewEl, { items, layout: v.layout, zoom: S.hm.zoom || 1, pick, onPeek, centerFirst: true, lens: S.hm.lens == null ? 1 : S.hm.lens, lensMode: S.hm.lensMode,
       onZoom: z => { S.hm.zoom = Math.round(z * 100) / 100; save(); } });
     hmWireChrome();
   }
@@ -114,7 +114,8 @@ function hmHome() {
       ${seg("filter", HM_FILTERS)}
       <div class="cx-sec"><b>Layout</b></div>
       ${seg("layout", [["map", "Map"], ["wheel", "Wheel"]])}
-      <div class="cx-sec"><b>Lens</b><span>how much the edges shrink</span></div>
+      <div class="cx-sec"><b>Lens</b><span>how bubbles shrink away from the middle</span></div>
+      ${seg("lensMode", [["round", "Round"], ["edges", "Edges"]])}
       <label class="hm-lens"><span>Flat</span><input type="range" min="0" max="2" step=".05" value="${S.hm.lens == null ? 1 : S.hm.lens}" aria-label="Lens strength"><span>Strong</span></label>
       <div class="cx-sec"><b>Or a collection</b><span>instead of a stage</span></div>
       ${collHtml}
@@ -128,7 +129,8 @@ function hmHome() {
       applyView("src", b.dataset.src); sh.querySelectorAll("[data-src]").forEach(x => x.classList.toggle("on", x === b)); render(true);
     });
     sh.querySelectorAll(".hm-seg").forEach(g => g.querySelectorAll("button").forEach(b => b.onclick = () => {
-      applyView(g.dataset.key, b.dataset.val); g.querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b)); render(true);
+      applyView(g.dataset.key, b.dataset.val); g.querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b));
+      if (g.dataset.key === "lensMode") { if (ctrl && ctrl.lensMode) ctrl.lensMode(b.dataset.val); } else render(true);
     }));
   }
   // ---------- search: a tap reveals the field; typing filters the honeycomb to matches (searchColors, colorsets.js) ----------

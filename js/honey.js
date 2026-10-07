@@ -164,37 +164,51 @@ function honeycomb(host, opts = {}) {
   let phase = "idle", spring = null, touched = RM || SHOOT, visible = true, raf = 0, last = 0;
   let bloom = RM || SHOOT ? 1 : 0, bloomT0 = performance.now(), pressed = null, pressK = 0, drawn = [], center = null, settled = null;
 
-  // ---- geometry: the Apple Watch lens ----
-  // The plane is laid out flat (K px per bubble spacing), then each screen axis is warped on its own: inside the middle
-  // part (fraction `inner` of the half-width/height) nothing changes; toward the edges positions are pulled in and the
-  // bubbles shrink smoothly to nothing, like the Watch's app grid. Because x and y warp separately, the lens is shaped
-  // like the (tall) screen, not like an eye. The Lens slider sets how big the full-size middle is.
-  const M = 2.2;                                   // bubble spacing at zoom 1, in units of `base`
-  let lensK = opts.lens == null ? 1 : +opts.lens;  // 0 = almost flat, 1 = default, 2 = strong
+  // ---- geometry: two lens styles (the view panel's "Lens" choice) ----
+  // "round" (the default, the original honeycomb): a radial fisheye. Bubbles are biggest in the middle and shrink smoothly
+  //   all the way out, like the Apple Watch home screen; zoomed out it becomes a glowing honeycomb.
+  // "edges": the plane is flat and each screen axis is warped on its own near the edges, so only the outer band shrinks.
+  // The Lens slider sets the strength of either style (0 = almost flat, 1 = default, 2 = strong).
+  const LENS = { m0: 3.7, m1: .82, sig: 1.9 }, M = 2.2;
+  let lensK = opts.lens == null ? 1 : +opts.lens, lensMode = opts.lensMode === "edges" ? "edges" : "round";
   const inner = () => clamp(.92 - .3 * Math.max(.1, lensK), .25, .9);
   const warp = (u, a) => u <= a ? u : a + (1 - a) * (1 - Math.exp(-(u - a) / (1 - a)));          // 0..inf -> 0..1
   const dwarp = (u, a) => u <= a ? 1 : Math.exp(-(u - a) / (1 - a));                                // its slope = bubble scale
   const unwarp = (v, a) => v <= a ? v : v >= .9999 ? 40 : a - (1 - a) * Math.log(1 - (v - a) / (1 - a));
+  const shape = z => ({ s: z, m0: LENS.m1 + (LENS.m0 - LENS.m1) * Math.max(.12, lensK), m1: LENS.m1, sig: LENS.sig });
   const lens = t => {
     const e = 1 - Math.pow(1 - bloom, 3), br = phase === "drift" ? 1 + .028 * Math.sin(t / 1000 * Math.PI * 2 / 3.8) : 1;
-    const s = (.72 + .28 * e) * Z;
-    return { s, a: e, K: base * s * M * br, inner: inner() };
+    const sh = shape((.72 + .28 * e) * Z);
+    return { ...sh, a: e, m0: sh.m0 * br, K: base * sh.s * M * br, inner: inner() };
   };
-  const Kat = z => base * z * M;
-  // world radius worth drawing: out to where bubbles have shrunk to ~5%
-  const reach = l => { const um = l.inner + 3 * (1 - l.inner); return Math.hypot(um * W / 2, um * Hh / 2) / l.K + 1; };
+  const F = (z, l) => base * l.s * (l.m1 * z + (l.m0 - l.m1) * l.sig * .8862 * honeyErf(z / l.sig));
+  const mag = (z, l) => l.m1 + (l.m0 - l.m1) * Math.exp(-((z / l.sig) ** 2));
+  const Finv = (r, l) => { let lo = 0, hi = 400; for (let i = 0; i < 30; i++) { const m = (lo + hi) / 2; if (F(m, l) > r) hi = m; else lo = m; } return (lo + hi) / 2; };
+  const centerK = l => lensMode === "edges" ? l.K : base * l.s * l.m0;   // px per world unit at the center (pan speed)
+  const reach = l => {
+    if (lensMode === "round") return Finv(Math.hypot(W, Hh) / 2 + 40, l);
+    const um = l.inner + 3 * (1 - l.inner); return Math.hypot(um * W / 2, um * Hh / 2) / l.K + 1;
+  };
   // zoom limits for a wrapping set: ZCLEAN = no color can show twice where bubbles are still a decent size; ZMIN goes
   // well past that (about three repeats across); the vignette (draw, css .hc-vig) softens the bands where repeats begin.
   const zFloor = () => {
     if (!lay || lay.finite || !W) return .4;
+    const search = ok => { let lo = .05, hi = ZMAX; if (!ok(hi)) return ZMAX; for (let i = 0; i < 24; i++) { const m = (lo + hi) / 2; if (ok(m)) hi = m; else lo = m; } return hi; };
+    if (lensMode === "round") {
+      const fits = f => z => Finv(W / 2, shape(z)) <= lay.perX * f && Finv(Hh / 2, shape(z)) <= lay.perY * f;
+      ZCLEAN = search(fits(.5));
+      return clamp(search(fits(1.5)), .15, ZCLEAN);
+    }
     const a = inner(), u30 = a + 1.2 * (1 - a);
     const need = f => Math.max(u30 * W / 2 / (lay.perX * f), u30 * Hh / 2 / (lay.perY * f)) / (base * M);
     ZCLEAN = clamp(need(.5), .15, ZMAX);
-    return clamp(need(1.5), .15, ZCLEAN);   // David likes the far-out view even with repeats at the top and bottom
+    return clamp(need(1.5), .15, ZCLEAN);
   };
   // the world offset (from the pan point) under a screen point
   const offAt = (sx, sy, l) => {
-    const tx = (sx - W / 2) / (W / 2), ty = (sy - Hh / 2) / (Hh / 2);
+    const dx = sx - W / 2, dy = sy - Hh / 2;
+    if (lensMode === "round") { const r = Math.hypot(dx, dy); if (r < 1e-6) return [0, 0]; const z = Finv(r, l); return [dx / r * z, dy / r * z]; }
+    const tx = dx / (W / 2), ty = dy / (Hh / 2);
     return [Math.sign(tx) * unwarp(Math.abs(tx), l.inner) * W / 2 / l.K, Math.sign(ty) * unwarp(Math.abs(ty), l.inner) * Hh / 2 / l.K];
   };
   // every copy of a base point within distance R of world point Q (a wrapping plane repeats along A and B)
@@ -218,15 +232,19 @@ function honeycomb(host, opts = {}) {
   // ---- drawing ----
   function draw(t = performance.now()) {
     if (!lay || !W || dead) return;
-    const l = lens(t), R = reach(l), cx = W / 2, cy = Hh / 2, hx = W / 2, hy = Hh / 2, mark = lay.mixed, ia = l.inner;
+    const l = lens(t), R = reach(l), cx = W / 2, cy = Hh / 2, hx = W / 2, hy = Hh / 2, mark = lay.mixed, ia = l.inner, round = lensMode === "round";
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, Hh);
     ctx.globalAlpha = l.a;
     drawn = [];
     let cbest = Infinity, cItem = null;
     for (const p of lay.pts) copies(p, P, R, (ex, ey) => {
-      const z = Math.hypot(ex, ey), ux = Math.abs(ex * l.K / hx), uy = Math.abs(ey * l.K / hy);   // the Watch lens (see warp)
-      const x = cx + Math.sign(ex) * warp(ux, ia) * hx, y = cy + Math.sign(ey) * warp(uy, ia) * hy;
-      const d = l.K * .9 * Math.min(dwarp(ux, ia), dwarp(uy, ia));
+      const z = Math.hypot(ex, ey);
+      let x, y, d;
+      if (round) { const k = z ? F(z, l) / z : base * l.s * l.m0; x = cx + ex * k; y = cy + ey * k; d = base * l.s * mag(z, l) * .9; }
+      else {
+        const ux = Math.abs(ex * l.K / hx), uy = Math.abs(ey * l.K / hy);
+        x = cx + Math.sign(ex) * warp(ux, ia) * hx; y = cy + Math.sign(ey) * warp(uy, ia) * hy; d = l.K * .9 * Math.min(dwarp(ux, ia), dwarp(uy, ia));
+      }
       if (x < -d || y < -d || x > W + d || y > Hh + d || d < 1.6) return;
       if (z < cbest) { cbest = z; cItem = p.it; }
       drawn.push({ it: p.it, x, y, d });
@@ -267,7 +285,7 @@ function honeycomb(host, opts = {}) {
     }
     // vignette: fade only the bands where repeats would show (beyond half a repeat from the center), top/bottom and sides
     if (lay && !lay.finite) {
-      const by = hy * (1 - warp(lay.perY * .5 * l.K / hy, ia)), bx = hx * (1 - warp(lay.perX * .5 * l.K / hx, ia));
+      const by = round ? Math.max(0, hy - F(lay.perY * .5, l)) : hy * (1 - warp(lay.perY * .5 * l.K / hy, ia)), bx = round ? Math.max(0, hx - F(lay.perX * .5, l)) : hx * (1 - warp(lay.perX * .5 * l.K / hx, ia));
       const key = Math.round(by) * 4096 + Math.round(bx);
       if (key !== vigK) {
         vigK = key;
@@ -373,7 +391,7 @@ function honeycomb(host, opts = {}) {
     const dx = x - down.x, dy = y - down.y;
     if (!down.moved && Math.hypot(dx, dy) > 7) { down.moved = true; pressed = null; kick(); }
     if (!down.moved) return;
-    const k = lens(0).K, now = performance.now();
+    const k = centerK(lens(0)), now = performance.now();
     P = [down.P0[0] - dx / k, down.P0[1] - dy / k];
     if (lay.finite) {   // rubber band past the edge of a small cluster
       const r = Math.hypot(P[0], P[1]), ext = lay.ext + .6;
@@ -424,7 +442,7 @@ function honeycomb(host, opts = {}) {
     if (!lay) return;
     const [x, y] = local(e);
     if (e.ctrlKey) { e.preventDefault(); touched = true; phase = "idle"; spring = null; zAnim = null; zoomAround(rubber(clamp(Z * Math.exp(-e.deltaY * .012), ZMIN * .8, ZMAX * 1.2)), x, y); }
-    else if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) { e.preventDefault(); touched = true; phase = "idle"; spring = null; const k = lens(0).K; P = [P[0] + e.deltaX / k, P[1] + e.deltaY / k]; }
+    else if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) { e.preventDefault(); touched = true; phase = "idle"; spring = null; const k = centerK(lens(0)); P = [P[0] + e.deltaX / k, P[1] + e.deltaY / k]; }
     else return;
     draw(); clearTimeout(wheelT);
     wheelT = setTimeout(() => { if (Z < ZMIN || Z > ZMAX) zoomTo(clamp(Z, ZMIN, ZMAX), x, y); else { if (opts.onZoom) opts.onZoom(Z); snap(); } }, 160);
@@ -508,6 +526,7 @@ function honeycomb(host, opts = {}) {
     update(o = {}) { if (o.layout) layout = o.layout === "wheel" ? "wheel" : "map"; setItems(o.items || (lay && lay.raw), o.focus || (center && center.o), o.soft ? "soft" : ""); },
     zoom: (z, animate = true) => animate ? zoomTo(z) : (Z = clamp(z, ZMIN, ZMAX), draw()),
     lens: k => { lensK = clamp(+k, 0, 2); ZMIN = zFloor(); Z = clamp(Z, ZMIN, ZMAX); draw(); },
+    lensMode: m => { lensMode = m === "edges" ? "edges" : "round"; ZMIN = zFloor(); Z = clamp(Z, ZMIN, ZMAX); draw(); },
     current: () => center && center.o,
     destroy,
   };
