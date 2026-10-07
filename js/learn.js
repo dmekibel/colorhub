@@ -399,7 +399,7 @@ const edTitle = t => { const m = esc(t).match(/^(.*?)(\s*(?:&amp;|and)\s*)(.+)$/
 const pad2 = n => String(n).padStart(2, "0");
 function home() {
   if (!S.placed) return welcome();
-  const due = dueList(), nu = nextUnit(), owned = ownedCount();
+  const due = dueList(), nu = nextUnit(), owned = ownedCount(), dc = dailyColor(), dAns = S.daily[today()];
   const mine = ALL.filter(c => S.cards[c.id] && S.cards[c.id].own), lrn = ALL.filter(c => S.cards[c.id] && !S.cards[c.id].own);
   const hueKey = c => { const [L, C, H] = lch(c.h); return C < 12 ? 1000 + (100 - L) : (H + 330) % 360 + (100 - L) / 400; };
   mine.sort((a, b) => hueKey(a) - hueKey(b)); lrn.sort((a, b) => hueKey(a) - hueKey(b));
@@ -425,6 +425,11 @@ function home() {
     ${h.plates.length ? `<button class="plates" data-go aria-label="Start">${h.plates.map((c, k) => `<i style="--c:${c.h};--k:${k}"></i>`).join("")}</button>` : ""}
     <div class="meta-line">${h.meta.map(m => `<span>${m}</span>`).join("")}</div>
     ${h.cta ? `<button class="btn" data-${h.act}>${h.cta} ${ICON.arrow}</button>` : ""}
+    <div class="sec-head today-head"><b>Today</b><span>${esc(new Date(Date.now() - 4 * 3600e3).toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" }))}</span></div>
+    <div class="today">
+      ${challengeCard()}
+      <button class="daily-pin" data-daily style="--c:${dc.h}" data-ink="${ink(dc.h)}"><span class="eyebrow">Color of the day</span><b>${dAns ? esc(dc.n) : "What's this one called?"}</b><small>${dAns ? (dAns.ok ? "You named it · read its story" : "Read its story") : "Guess it, then read its story"}</small></button>
+    </div>
     <button class="collection" data-palette aria-label="Your collection">
       <div class="coll-head"><span class="eyebrow">Your collection</span><span class="coll-n"><b data-count="${owned}">${owned}</b><small>/${ALL.length}</small></span></div>
       <div class="quilt">${quilt}</div>
@@ -438,6 +443,8 @@ function home() {
   const go1 = () => due.length ? deck("review") : nu ? meet(nu) : null;
   el.querySelectorAll("[data-review],[data-learn],[data-go]").forEach(b => b.onclick = go1);
   el.querySelector("[data-palette]").onclick = () => { S.lens = "spectrum"; save(); go("explore"); };
+  el.querySelector("[data-daily]").onclick = () => daily();
+  const ch = el.querySelector("[data-challenge]"); if (ch) ch.onclick = () => chToday() ? challengeDone() : challenge();
   onKey = e => { if (e.key === "Enter") go1(); };
 }
 

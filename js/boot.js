@@ -21,6 +21,7 @@ function shot(name) {
     case "welcome": return welcome();
     case "learn": return go("learn");
     case "gym": return go("gym");
+    case "studio": return go("studio");
     case "explore": S.lens = arg || "all"; return go("explore");
     case "meet": meet(UNITS[1]); if (arg) later2(() => { const p = document.getElementById("pager"); p.scrollTop = p.clientHeight * +arg; }, 300); return;
     case "deck": deck("learn", { unit: UNITS[1] }); later2(() => dispatchEvent(new KeyboardEvent("keydown", { key: " " })), 600); return;

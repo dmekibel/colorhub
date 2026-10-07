@@ -112,7 +112,7 @@ LAB.harmony = (base = lch(dailyColor().h)[1] > 30 ? dailyColor().h : "#C8553D", 
     <p class="p-body">${linkText("Why these work: [[complementary-colors|complements]] sit opposite on the [[color-wheel]] and make each other look stronger, the effect [[chevreul|Chevreul]] described for tapestry dyes. Analogous colors sit side by side and feel calm. Triads were a [[bauhaus|Bauhaus]] favorite.")}</p>
     <p class="fine">Harmonies rotate hue on the CIELAB wheel at the same lightness and strength. Names are the nearest of the app's ${EVERY().length}. Tap a color to copy it.</p>
   `, "article lab");
-  el.querySelector("[data-back]").onclick = () => go("explore");
+  el.querySelector("[data-back]").onclick = () => go("studio");
   wireLinks(el);
   const draw = hex => {
     base = hex;
@@ -139,7 +139,7 @@ LAB.contrast = (set = CONTRAST_PRESETS[0].slice(), slot = 0) => {
     <p class="eyebrow" style="margin:22px 0 10px">Try a classic</p>
     <div class="presets">${CONTRAST_PRESETS.map((p, i) => `<button data-preset="${i}">${p.map(h => `<i style="--c:${h}"></i>`).join("")}</button>`).join("")}</div>
   `, "article lab");
-  el.querySelector("[data-back]").onclick = () => go("explore");
+  el.querySelector("[data-back]").onclick = () => go("studio");
   wireVisuals(el);
   const ctr = el.querySelector("#ctr"), txt = el.querySelector("#ctxt");
   const draw = () => {
@@ -166,7 +166,7 @@ LAB.namer = (hex = "#5F8C8A") => {
     <div id="nout"></div>
     <p class="fine">Cameras and light shift colors, so a camera reading is a hint, not a measurement.</p>
   `, "article lab");
-  el.querySelector("[data-back]").onclick = () => go("explore");
+  el.querySelector("[data-back]").onclick = () => go("studio");
   const out = el.querySelector("#nout");
   const render = h => {
     const { mine, long } = nameColor(h, 4);

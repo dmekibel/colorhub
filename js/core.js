@@ -217,12 +217,12 @@ function show(html, cls = "", tab = null) {
   requestAnimationFrame(() => { runMorph(el); reveal(el); countUp(el); });
   return el;
 }
-// Three tabs, one job each: Learn (the path), Gym (train the eye), Explore (the color wiki).
-const TABS = [["learn", "Learn"], ["gym", "Gym"], ["explore", "Explore"]];
+// Four tabs, one job each: Today (the path and the daily things), Train (the eye), Explore (read), Studio (make).
+const TABS = [["learn", "Today"], ["gym", "Train"], ["explore", "Explore"], ["studio", "Studio"]];
 // The tab bar: three mono words on a blurred strip with a hairline marker under the current one.
 // It slides away while you scroll down and comes back when you scroll up.
 const tabbar = active => `<nav class="tabbar" aria-label="Sections"><div class="tabs">${TABS.map(([id, label]) =>
-  `<button class="tab${id === active ? " on" : ""}" data-tab="${id}" aria-current="${id === active}"><span>${label}</span>${id === "explore" && !dailyDone() && active !== "explore" ? '<i class="badge"></i>' : ""}</button>`).join("")}</div></nav>`;
+  `<button class="tab${id === active ? " on" : ""}" data-tab="${id}" aria-current="${id === active}"><span>${label}</span>${id === "learn" && !dailyDone() && active !== "learn" ? '<i class="badge"></i>' : ""}</button>`).join("")}</div></nav>`;
 function wireTabbar(active) {
   const nav = app.querySelector(".tabbar"); if (!nav) return;
   const wrap = nav.querySelector(".tabs"), tabs = [...nav.querySelectorAll(".tab")], ind = document.createElement("i");
@@ -250,6 +250,7 @@ function go(tab) {
   S.tab = tab; save();
   if (tab === "gym") return gymHome();
   if (tab === "explore") return exploreHome();
+  if (tab === "studio") return studio();
   return home();
 }
 const dailyDone = () => !!(S.daily && S.daily[today()]);

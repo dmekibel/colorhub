@@ -53,7 +53,7 @@ function challenge() {
     <div class="drill-foot" id="dfoot"></div>
   `, "fixed drill drill-hue");
   // leaving early still counts as played (one try a day), with the rounds not reached as misses
-  const quit = () => { if (hits.length) { while (hits.length < 6) hits.push(false); finish(); } else go("gym"); };
+  const quit = () => { if (hits.length) { while (hits.length < 6) hits.push(false); finish(); } else go(S.tab || "gym"); };
   el.querySelector("[data-close]").onclick = quit;
   onKey = e => { if (e.key === "Escape") quit(); };
   const stage = el.querySelector("#dstage"), foot = el.querySelector("#dfoot"), segs = el.querySelectorAll(".segs i");
@@ -92,7 +92,7 @@ function challengeDone(fresh) {
     <div class="stack"><button class="btn" data-share>Share your grid ${ICON.share}</button>
     <button class="btn ghost" data-home>Back to the Gym</button></div>
   `, "result");
-  el.querySelector("[data-home]").onclick = () => go("gym");
+  el.querySelector("[data-home]").onclick = () => go(S.tab || "gym");
   el.querySelector("[data-share]").onclick = () => shareChallenge(st.hits, sharp);
   if (fresh) buzz(got >= 4 ? [12, 60, 12] : 10);
 }
@@ -141,5 +141,5 @@ function eyeReport() {
       ${ch.length ? `<div class="eye-ch">${ch.slice(-28).map(([d, v]) => `<span title="${esc(d)}">${v.hits.map(h => `<i class="${h ? "hit" : ""}"></i>`).join("")}</span>`).join("")}</div>` : `<p class="x-sub">Six tiles a day, the same for everyone.</p>`}</section>
     <p class="fine">Practice sharpens these particular judgments. It isn't a claim about general brain training.</p>
   `, "article gym-eye");
-  el.querySelector("[data-back]").onclick = () => go("gym");
+  el.querySelector("[data-back]").onclick = () => go(S.tab || "gym");
 }

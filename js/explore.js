@@ -15,11 +15,13 @@ let TRAIL = [];        // kept for older callers; closeups use XSTACK
 // Origins, Paintings, History, Symbols, Saved. Tap any pin for its closeup and "More like this":
 // its connections as pins, each labeled with why, then connections of connections.
 // ======================================================================
-const LENSES = [["all", "For you"], ["spectrum", "Spectrum"], ["harmony", "Harmony"], ["origins", "Origins"], ["paintings", "Paintings"], ["history", "History"], ["symbols", "Symbols"], ["saved", "Saved"]];
+// Four lenses: a mixed feed, every color, the paintings, and the ideas (stories, systems, history). Saved lives behind the heart.
+const LENSES = [["all", "For you"], ["spectrum", "Colors"], ["paintings", "Paintings"], ["ideas", "Ideas"]];
 const ORIGIN_GROUPS = [["Flowers & plants", ["flower", "plant"]], ["Fruit, food & drink", ["fruit", "food", "drink"]], ["Gems, stones & metals", ["gem", "mineral", "metal"]], ["Animals", ["animal"]], ["Places & people", ["place", "person"]], ["Materials & dyes", ["material", "dye"]], ["Sky & nature", ["nature"]], ["Plain color words", ["abstract"]]];
 const ERAS = [["Prehistory", -1e9, -3000], ["The ancient world", -3000, 500], ["The Middle Ages", 500, 1400], ["The Renaissance", 1400, 1600], ["The 1600s", 1600, 1700], ["The 1700s", 1700, 1800], ["The 1800s", 1800, 1900], ["The 1900s and after", 1900, 1e9]];
 const hash = s => { let h = 2166136261; for (const ch of s) { h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; };
 const seeded = (arr, seed) => arr.map(x => [hash(seed + (x.id || x.title)), x]).sort((a, b) => a[0] - b[0]).map(x => x[1]);
+const ICON_HEART = sv('<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>', 20, 1.8);
 const isSaved = id => (S.saved || []).includes(id);
 function toggleSave(id) {
   S.saved = S.saved || [];
@@ -76,8 +78,14 @@ function lensSections(lens) {
   const hueKey = n => { const [L, C, H] = lch(n.h); return C < 12 ? 1000 + (100 - L) : (H + 330) % 360 + (100 - L) / 400; };
   switch (lens) {
     case "spectrum":
-      return [{ honey: true, title: "Every color, as a wheel", sub: "Greys in the middle, hue around, strength outward. Drag to browse; tap to open." },
-        { title: "Every color, in order", sub: "Hue around the wheel, light to dark, then the greys.", pins: colors.slice().sort((a, b) => hueKey(a) - hueKey(b)).map(n => pin(n, { cap: "" })) }];
+      return [{ honey: true, title: "Every color", sub: "Drag to browse; tap to open." }, ...lensSections("origins").map(sec => ({ ...sec, title: sec.title === "Still being traced" ? sec.title : "Named after · " + sec.title }))];
+    case "ideas": {
+      const sys = pages.filter(p => (p.swatches || []).length >= 3), ideas = pages.filter(p => !sys.includes(p) && ["concept", "person", "work", "tradition", "culture"].includes(p.type));
+      return [{ title: "Stories", sub: "Short reads, a few swipes each.", pins: stories.map(n => pin(n)) },
+        { title: "Color systems", sub: "Traditions that gave each color a meaning.", pins: sys.map(n => pin(n, { system: true })) },
+        { title: "Ideas and people", pins: seeded(ideas, today()).map(n => pin(n)) },
+        ...lensSections("history").map(sec => ({ ...sec, title: "Through history · " + sec.title }))];
+    }
     case "harmony": {
       const vivid = colors.filter(n => lch(n.h)[1] > 28).sort((a, b) => hueKey(a) - hueKey(b));
       const pairs = vivid.map(n => { const [o] = nearestColors(opposite(n.h), 1, n.title); return o ? pairPin(n, colorNode(o[0]), "Opposites") : null; }).filter(Boolean);
@@ -112,45 +120,40 @@ function lensSections(lens) {
   }
 }
 
-function LAB_TILES() {
+function LAB_TILES(keys = ["harmony", "contrast", "eye", "studio"]) {
   const ring = ringStops(), tri = [30, 150, 270].map(a => { const r = 30, x = 40 + r * Math.cos(a * Math.PI / 180), y = 40 - r * Math.sin(a * Math.PI / 180); return [x.toFixed(1), y.toFixed(1)]; });
   const triCols = [30, 150, 270].map(a => lchHex(62, 52, (90 - (90 - a) + 0) % 360));
-  return `
-  <button class="lab lab-x" data-lab="harmony"><span class="lv lv-wheel"><span class="lv-ring" style="background:${ring}"></span>
+  const tiles = {
+  harmony: `<button class="lab lab-x" data-lab="harmony"><span class="lv lv-wheel"><span class="lv-ring" style="background:${ring}"></span>
       <svg viewBox="0 0 80 80"><polygon points="${tri.map(p => p.join(",")).join(" ")}" fill="none" stroke="#F3F3F1" stroke-width="1.4" stroke-linejoin="round"/>${tri.map((p, i) => `<circle cx="${p[0]}" cy="${p[1]}" r="6" fill="${triCols[i]}" stroke="#F3F3F1" stroke-width="1.6"/>`).join("")}</svg></span>
-    <b>Harmony</b><small>Build palettes on the wheel</small></button>
-  <button class="lab lab-x" data-lab="contrast"><span class="lv lv-albers"><i style="--g:#BFA2E8"></i><i style="--g:#CC7722"></i></span>
-    <b>Albers</b><small>One color, two looks</small></button>
-  <button class="lab lab-x" data-lab="eye"><span class="lv lv-namer"><span class="lv-loupe"></span><span class="lv-tag">Coral</span></span>
-    <b>Color eye</b><small>Point the camera, get the name</small></button>
-  <button class="lab lab-x" data-lab="studio"><span class="lv lv-studio">${["#EFE6D2", "#C8553D", "#E0A458", "#5B7F6E", "#2A2620"].map(h => `<i style="--c:${h}"></i>`).join("")}</span>
-    <b>Studio</b><small>Make, keep and share palettes</small></button>`;
+    <b>Harmony</b><small>Build palettes on the wheel</small></button>`,
+  contrast: `<button class="lab lab-x" data-lab="contrast"><span class="lv lv-albers"><i style="--g:#BFA2E8"></i><i style="--g:#CC7722"></i></span>
+    <b>Albers</b><small>One color, two looks</small></button>`,
+  eye: `<button class="lab lab-x" data-lab="eye"><span class="lv lv-namer"><span class="lv-loupe"></span><span class="lv-tag">Coral</span></span>
+    <b>Color eye</b><small>Point the camera, get the name</small></button>`,
+  studio: `<button class="lab lab-x" data-lab="studio"><span class="lv lv-studio">${["#EFE6D2", "#C8553D", "#E0A458", "#5B7F6E", "#2A2620"].map(h => `<i style="--c:${h}"></i>`).join("")}</span>
+    <b>Studio</b><small>Make, keep and share palettes</small></button>` };
+  return keys.map(k => tiles[k]).join("");
 }
 function exploreHome() {
   XSTACK = [];
-  const lens = LENSES.some(l => l[0] === S.lens) ? S.lens : "all";
+  const lens = LENSES.some(l => l[0] === S.lens) || S.lens === "saved" ? S.lens : "all";
   const media = (S.profile && S.profile.media) || [];
-  const first = media.includes("paint") && !media.includes("screen") ? ["paintings", "history"] : media.includes("screen") && !media.includes("paint") ? ["spectrum", "harmony"] : [];
+  const first = media.includes("paint") && !media.includes("screen") ? ["paintings"] : [];
   const lensOrder = [LENSES[0], ...LENSES.slice(1).filter(l => first.includes(l[0])).sort((a, b) => first.indexOf(a[0]) - first.indexOf(b[0])), ...LENSES.slice(1).filter(l => !first.includes(l[0]))];
-  const dc = dailyColor(), ans = S.daily[today()];
   const el = show(`
     <header class="x-head">
-      <div class="x-row"><h1 class="tab-title">Explore</h1><button class="icon-btn glass" data-search aria-label="Search">${ICON.search}</button></div>
+      <div class="x-row"><h1 class="tab-title">${lens === "saved" ? "Saved" : "Explore"}</h1><span class="x-acts"><button class="icon-btn glass${lens === "saved" ? " on" : ""}" data-saved aria-label="Saved">${ICON_HEART}${(S.saved || []).length ? `<em>${S.saved.length}</em>` : ""}</button><button class="icon-btn glass" data-search aria-label="Search">${ICON.search}</button></span></div>
       <div class="lens-key" role="tablist">${lensOrder.map(([k, t]) => `<button role="tab" class="${k === lens ? "on" : ""}" data-lens="${k}">${t}${k === "saved" && (S.saved || []).length ? ` <em>${S.saved.length}</em>` : ""}</button>`).join("")}</div>
     </header>
     <div class="x-search" hidden><label class="search"><span>${ICON.search}</span><input id="q" type="search" placeholder="Search colors, paintings, people, pigments" autocomplete="off"></label><div id="results"></div></div>
     <div class="x-feed" id="feed">
-      ${lens === "all" ? `<button class="daily-pin" data-daily style="--c:${dc.h}" data-ink="${ink(dc.h)}"><span class="eyebrow">Color of the day</span><b>${ans ? esc(dc.n) : "What's this one called?"}</b><small>${ans ? "Tap to read its story" : "Guess it, then read its story"}</small></button>
-        <div class="labs">${LAB_TILES()}</div>
-        <div class="play-tiles">
-          <button class="play-tile" data-taste="color"><span class="pt-v pt-c">${FAV_SEEDS.slice(0, 8).map(n => `<i style="--c:${BYNAME.get(n.toLowerCase()).h}"></i>`).join("")}</span><b>Find your color</b><small>A tournament, then an eye exam for your taste</small></button>
-          <button class="play-tile" data-taste="palette"><span class="pt-v pt-p">${[["#1E3A5F", "#3E6A8A", "#E8D59A", "#D9A441", "#2B2B2B"], ["#F4A6B8", "#E9C46A", "#9CAF88", "#5FB8A8", "#F0E6D2"]].map(p => `<span>${p.map(c => `<i style="--c:${c}"></i>`).join("")}</span>`).join("")}</span><b>Find your palette</b><small>Paintings and harmonies, head to head</small></button>
-        </div>` : ""}
       ${lensSections(lens).map(sec => `${sec.title ? `<div class="sec-head x-sec"><b>${esc(sec.title)}</b>${sec.pins && sec.pins.length ? `<span>${sec.pins.length}</span>` : ""}</div>` : ""}${sec.sub ? `<p class="x-sub">${esc(sec.sub)}</p>` : ""}${sec.honey ? `<div class="honey-panel" id="honey"></div>` : masonry(sec.pins)}`).join("")}
       <p class="fine">Hex values are screen approximations. Every page lists its sources.</p>
     </div>
   `, "explore", "explore");
   el.querySelectorAll("[data-lens]").forEach(b => b.onclick = () => { S.lens = b.dataset.lens; save(); exploreHome(); });
+  el.querySelector("[data-saved]").onclick = () => { S.lens = lens === "saved" ? "all" : "saved"; save(); exploreHome(); };
   const hp = el.querySelector("#honey"); if (hp) honeycomb(hp, { focus: dailyColor(), pick: it => closeup(colorNode(it.c)) });
   const on = el.querySelector(".lens-key .on"); if (on) on.scrollIntoView({ inline: "center", block: "nearest" });
   el.addEventListener("click", e => {
@@ -418,7 +421,7 @@ function daily() {
     <div class="d-body" id="dbody"></div>
   `, "fixed daily");
   const body = el.querySelector("#dbody");
-  el.querySelector("[data-close]").onclick = () => go("explore");
+  el.querySelector("[data-close]").onclick = () => go(S.tab || "learn");
   const reveal = ok => {
     const sw = el.querySelector(".d-swatch");
     if (!sw.querySelector("h1")) sw.insertAdjacentHTML("beforeend", `<h1>${esc(c.n)}</h1>`);

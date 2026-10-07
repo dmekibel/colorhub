@@ -322,7 +322,17 @@ a{color:inherit}
 .x-head{position:sticky;top:0;z-index:6;margin:0 calc(-1 * var(--g));padding:calc(var(--top) + 12px) var(--g) 0;background:linear-gradient(var(--ground) 86%,rgba(14,13,11,0))}
 .x-row{display:flex;justify-content:space-between;align-items:flex-end;padding-bottom:4px;transition:margin .45s var(--ease)}
 .x-row .tab-title{font-size:56px}
-.x-row .icon-btn{margin-right:-12px;margin-bottom:6px}
+.x-row .icon-btn{margin-bottom:6px}
+.x-acts{display:flex;gap:8px;margin-right:-6px}
+.x-acts .icon-btn{position:relative}
+.x-acts .icon-btn.on{color:var(--yes,#E8B4B8)}
+.x-acts .icon-btn em{position:absolute;top:4px;right:2px;font:600 9px/1 var(--mono);font-style:normal;color:var(--soft)}
+/* Today: the daily things under the learning card */
+.today-head{margin-top:34px}
+.today{display:grid;gap:12px}
+.today .ch-card{margin-top:0;border-top:0}
+.today .daily-pin{margin-top:0;height:170px}
+.st-labs{margin-top:28px}
 .lens-key{display:flex;gap:22px;overflow-x:auto;margin:16px calc(-1 * var(--g)) 0;padding:0 var(--g);border-bottom:1px solid var(--rule);scrollbar-width:none}
 .lens-key::-webkit-scrollbar{display:none}
 .lens-key button{flex:none;position:relative;padding:12px 0 13px;font:500 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--faint);transition:color .25s}
