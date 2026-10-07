@@ -378,13 +378,14 @@ function colorPage(n, tapped) {
   const stripOthers = tapped ? [c] : [nb, ...likes].filter(x => x && !seenN.has(x.n) && (seenN.add(x.n), true)).slice(0, 2);
   const stripDiff = tapped ? lookDiff({ h: tapped, n: "Your color" }, c) : c.d;
   const el = show(`
-    <div class="c-hero cp-hero" style="--c:${heroHex}" data-ink="${ink(heroHex)}">
-      <div class="cp-hbar">
-        <button class="cp-fab" data-back aria-label="Back">${ICON.back}</button>
-        <button class="cp-fab" data-more aria-label="More like this">${ICON.dots}</button>
+    <div class="c-hero cp-hero cp-hero-full" style="--c:${heroHex}" data-ink="${ink(heroHex)}">
+      <button class="cp-close" data-back aria-label="Back">${ICON.back}</button>
+      <div class="cp-hero-foot">
+        <span class="cp-chip">${esc(status)}</span>
+        <h1>${esc(c.n)}</h1>
+        <button class="mono cp-hex" data-copy="${heroHex}">${heroHex}</button>
       </div>
-      <span class="cp-chip">${esc(status)}</span>
-      <h1>${esc(c.n)}</h1><span class="mono">${heroHex}</span>
+      <span class="cp-scroll-hint" aria-hidden="true">${ICON.up}</span>
     </div>
     <div class="cp-primary-row">
       ${typeof hmLearnIt === "function" ? `<button class="cp-primary" data-learnit>${mine ? "Review it" : "Learn it"}${mine ? "" : `<em>2 min</em>`}${ICON.arrow}</button>` : ""}
@@ -423,7 +424,6 @@ function colorPage(n, tapped) {
     ${w && w.sources ? secHTML("src", "Sources", sourcesHTML(w.sources), false) : ""}
   `, "article cp-page");
   el.querySelector("[data-back]").onclick = xBack;
-  el.querySelector("[data-more]").onclick = () => closeup(n);
   wireLinks(el); wireSections(el);
   onKey = e => { if (e.key === "Escape") xBack(); };
   const li = el.querySelector("[data-learnit]"); if (li) li.onclick = () => hmLearnIt(c);
@@ -439,6 +439,7 @@ function colorPage(n, tapped) {
   colorPoems(el.querySelector(".c-poems"), c);
   if (typeof worldColorRow === "function") worldColorRow(el, n);
   el.querySelectorAll("[data-copy]").forEach(b => b.onclick = () => { try { navigator.clipboard.writeText(b.dataset.copy); toast("Copied " + b.dataset.copy); } catch (e) {} });
+  return el;   // so growFrom (js/core.js, js/home.js hmOpenColor) can grow this page from the tapped honeycomb bubble
 }
 
 function wikiPage(n) {

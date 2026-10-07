@@ -23,12 +23,25 @@
   border-radius:0;
   padding:16px var(--g) 22px;
 }
-.cp-hbar{position:absolute;top:calc(var(--top) + 10px);left:16px;right:16px;display:flex;justify-content:space-between;align-items:center;z-index:2}
-.cp-fab{width:44px;height:44px;border-radius:50%;background:var(--cp-surface-2);color:var(--ink);display:grid;place-items:center;box-shadow:0 8px 24px rgba(0,0,0,.5);transition:transform .2s var(--spring)}
-.cp-fab:active{transform:scale(.9)}
-.cp-fab svg{width:20px;height:20px}
 .cp-chip{display:block;font:italic 400 18px/1.25 var(--serif);opacity:.85}
 .cp-hero h1{margin-top:4px}
+
+/* The page's first screen IS the color, full viewport, no chrome but the way back (David, 2026-10-07: "any
+   color in home, you should be able to click it to make it full screen with the hex on the bottom left").
+   The hero already bleeds to every edge (.cp-page .cp-hero above); at 100dvh its bottom edge lands exactly on
+   the viewport's own bottom, so the rest of the page (primary row, strip, shelves…) sits one scroll away. */
+.cp-hero-full{height:100dvh}
+.cp-close{position:absolute;top:calc(var(--top) + 14px);left:20px;width:36px;height:36px;display:grid;place-items:center;z-index:2;transition:transform .2s var(--spring)}
+.cp-close:active{transform:scale(.88)}
+.cp-close svg{width:24px;height:24px}
+.cp-hero-foot{display:flex;flex-direction:column;align-items:flex-start;gap:2px}
+/* two classes deep, to outrank app.css's ".c-hero .mono" (same specificity, loads earlier) rather than lose
+   to it: .mono's font shorthand would otherwise quietly win back the font-size this needs. */
+.cp-hero-foot .cp-hex{background:none;border:0;padding:2px 0;margin-top:4px;font-size:13px;letter-spacing:.04em;opacity:.8;text-decoration:underline;text-decoration-color:currentColor;text-decoration-thickness:1px;text-underline-offset:3px}
+.cp-scroll-hint{position:absolute;right:22px;bottom:calc(var(--bottom) + 18px);opacity:.6;animation:cpBob 1.8s ease-in-out infinite;transform:rotate(180deg)}
+.cp-scroll-hint svg{display:block;width:18px;height:18px}
+@keyframes cpBob{0%,100%{transform:rotate(180deg) translateY(0)}50%{transform:rotate(180deg) translateY(-6px)}}
+@media (prefers-reduced-motion:reduce){.cp-scroll-hint{animation:none}}
 
 /* ---------- primary row: the one filled button, plus save/share ---------- */
 .cp-primary-row{display:flex;align-items:center;gap:10px;margin-top:20px}

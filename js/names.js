@@ -111,10 +111,14 @@ function namePage(entry, push = true, tapped) {
   const likes = typeof lookalikes === "function" ? lookalikes({ n: name, h: hex }, 6) : [];
   const status = tapped ? `Your color · ${pctMatch(de2000(tapped, hex))} to ${name}` : stage ? `Stage ${stage} of 9` : shade ? "A described shade" : "Library color";
   const el = show(`
-    <div class="c-hero cp-hero" style="--c:${heroHex}" data-ink="${ink(heroHex)}">
-      <div class="cp-hbar"><button class="cp-fab" data-back aria-label="Back">${ICON.back}</button></div>
-      <span class="cp-chip">${esc(status)}</span>
-      <h1>${esc(name)}</h1><span class="mono">${heroHex}</span>
+    <div class="c-hero cp-hero cp-hero-full" style="--c:${heroHex}" data-ink="${ink(heroHex)}">
+      <button class="cp-close" data-back aria-label="Back">${ICON.back}</button>
+      <div class="cp-hero-foot">
+        <span class="cp-chip">${esc(status)}</span>
+        <h1>${esc(name)}</h1>
+        <button class="mono cp-hex" data-copy="${heroHex}">${heroHex}</button>
+      </div>
+      <span class="cp-scroll-hint" aria-hidden="true">${ICON.up}</span>
     </div>
     ${taught && typeof hmLearnIt === "function" ? `<div class="cp-primary-row"><button class="cp-primary" data-learnit>${mine ? "Review it" : "Learn it"}${mine ? "" : `<em>2 min</em>`}${ICON.arrow}</button></div>` : ""}
     ${tapped ? `<section class="cp-strip-sec">
@@ -150,6 +154,8 @@ function namePage(entry, push = true, tapped) {
   npPaintingsSection(el.querySelector("[data-npgal]"), hex);
   colorPoems(el.querySelector(".c-poems"), entry);
   if (typeof worldColorRow === "function") worldColorRow(el, { kind: "color", h: hex, title: name });
+  el.querySelectorAll("[data-copy]").forEach(b => b.onclick = () => { try { navigator.clipboard.writeText(b.dataset.copy); toast("Copied " + b.dataset.copy); } catch (e) {} });
+  return el;   // so growFrom (js/core.js, js/home.js hmOpenName) can grow this page from the tapped honeycomb bubble
 }
 
 // ---------- screenshot hook: #shot=name:<slug>[@scrolldown] ----------

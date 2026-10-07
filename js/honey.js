@@ -898,13 +898,17 @@ function honeycomb(host, opts = {}) {
 
   function open(it, b) {
     remember();
-    const morph = () => {
-      if (!b) return;
+    // a small positioned element standing in for the tapped bubble — the honeycomb itself is a canvas, so
+    // there's no real DOM element at the bubble's spot for growFrom()/morphFrom() to read a rect from.
+    const mkSrc = () => {
+      if (!b) return null;
       const m = document.createElement("div"), r = b.d * 1.06;
       m.className = "hc-morph"; Object.assign(m.style, { left: b.x - r / 2 + "px", top: b.y - r / 2 + "px", width: r + "px", height: r + "px", background: it.h });
-      cv.parentNode.appendChild(m); morphFrom(m); m.remove();
+      cv.parentNode.appendChild(m);
+      return m;
     };
-    if (opts.pick) opts.pick(it.o, { morph });
+    const morph = () => { const m = mkSrc(); if (m) { morphFrom(m); m.remove(); } };
+    if (opts.pick) opts.pick(it.o, { morph, srcEl: mkSrc });
   }
 
   // ---- contents ----
