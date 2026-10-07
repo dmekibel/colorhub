@@ -13,7 +13,7 @@ let XSTACK = [];       // back stack inside Explore (closeups and pages)
 // its connections as pins, each labeled with why, then connections of connections.
 // ======================================================================
 // Four lenses: a mixed feed, every color, the paintings, and the ideas (stories, systems, history). Saved lives behind the heart.
-const LENSES = [["all", "For you"], ["spectrum", "Colors"], ["paintings", "Paintings"], ["poems", "Poems"], ["ideas", "Ideas"]];
+const LENSES = [["all", "For you"], ["spectrum", "Colors"], ["paintings", "Paintings"], ["poems", "Poems"], ["ideas", "Ideas"], ["world", "World"]];
 const ORIGIN_GROUPS = [["Flowers & plants", ["flower", "plant"]], ["Fruit, food & drink", ["fruit", "food", "drink"]], ["Gems, stones & metals", ["gem", "mineral", "metal"]], ["Animals", ["animal"]], ["Places & people", ["place", "person"]], ["Materials & dyes", ["material", "dye"]], ["Sky & nature", ["nature"]], ["Plain color words", ["abstract"]]];
 const ERAS = [["Prehistory", -1e9, -3000], ["The ancient world", -3000, 500], ["The Middle Ages", 500, 1400], ["The Renaissance", 1400, 1600], ["The 1600s", 1600, 1700], ["The 1700s", 1700, 1800], ["The 1800s", 1800, 1900], ["The 1900s and after", 1900, 1e9]];
 const hash = s => { let h = 2166136261; for (const ch of s) { h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; };
@@ -84,6 +84,10 @@ function lensSections(lens) {
         ...[window.passagesSection, window.filmsSection].filter(f => typeof f === "function").flatMap(f => f()),   // js/passages.js, js/films.js
         ...lensSections("history").map(sec => ({ ...sec, title: "Through history · " + sec.title }))];
     }
+    // shared with any other file that pushes a section-returning function onto window.WORLD_SECTIONS
+    // (each function returns one section object or an array of them, same convention as passagesSection/filmsSection above)
+    case "world":
+      return (window.WORLD_SECTIONS || []).filter(f => typeof f === "function").flatMap(f => f());
     case "harmony": {
       const vivid = colors.filter(n => lch(n.h)[1] > 28).sort((a, b) => hueKey(a) - hueKey(b));
       const pairs = vivid.map(n => { const [o] = nearestColors(opposite(n.h), 1, n.title); return o ? pairPin(n, colorNode(o[0]), "Opposites") : null; }).filter(Boolean);
@@ -355,6 +359,7 @@ function colorPage(n) {
     <section class="gl-in" data-glin></section>
     <div class="c-poems"></div>
     ${typeof archiveRows === "function" ? archiveRows(c) : ""}
+    ${typeof btRow === "function" ? btRow(c) : ""}
     ${connSection(n)}
     ${w && w.sources ? secHTML("src", "Sources", sourcesHTML(w.sources), false) : ""}
   `, "article");

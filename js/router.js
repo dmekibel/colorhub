@@ -23,6 +23,7 @@ function nodeRoute(n) {
   if (n.kind === "color") return "color/" + routeSlug(n.title);
   if (n.kind === "painting") return "painting/" + String(n.id).replace(/^painting-/, "");
   if (n.kind === "story") return "story/" + (n.sid || String(n.id).replace(/^s:/, ""));
+  if (n.kind === "botany") return "botany/" + String(n.id).replace(/^bt:(plant|dye|essay):/, "");   // js/botany.js
   return "page/" + n.id;
 }
 function tabRoute(tab) {
@@ -80,7 +81,8 @@ const ROUTED = [["colorPage", nodeRouted()], ["wikiPage", nodeRouted()], ["paint
   ["glPage", (i, d) => routed(d && d.t || "Painting", "gallery/" + i)],
   ["poemPage", id => id != null ? routed("Poem", "poem/" + id) : null],   // js/poems.js   // a museum painting (js/gallery.js); i = its place in the gallery index
   ["passagePage", p => p && p.id ? routed(p.title, "passage/" + p.id) : null],
-  ["filmPage", f => f && f.id ? routed(f.title, "film/" + f.id) : null]];   // js/passages.js, js/films.js
+  ["filmPage", f => f && f.id ? routed(f.title, "film/" + f.id) : null],   // js/passages.js, js/films.js
+  ["btFloriPage", () => routed("The language of flowers", "botany/flori")]];   // js/botany.js (plant/dye/essay pages route via wikiPage above)
 ROUTED.forEach(([name, f]) => routeWrap(window, name, f));
 routeWrap(LAB, "harmony", () => routed("Harmony", "lab/harmony"));
 routeWrap(LAB, "contrast", () => routed("Albers", "lab/contrast"));
@@ -126,6 +128,7 @@ function openRoute(hash, initial = false) {
   if (kind === "film" && id && typeof filmPage === "function") {
     base(); XSTACK = []; archWhen(() => { const f = (window.FILMS || []).find(x => x.id === id); if (f) filmPage(f); else go(S.tab || "learn"); }); return true;
   }
+  if (kind === "botany" && id && typeof btOpenRoute === "function") { base(); btOpenRoute(id); return true; }   // js/botany.js
   if (kind === "gallery" && /^\d+$/.test(id || "") && typeof galleryPage === "function") {
     base();
     if (!GAL) { ROUTE_NEXT = routed("Painting", "gallery/" + id); waitScreen(); ROUTE_REPLACE = true; }   // the painting replaces the placeholder
