@@ -1,0 +1,826 @@
+{"_provenance": "Maerz, A. & Paul, M. Rea, \"A Dictionary of Color\", 1st ed. (McGraw-Hill, 1930). U.S. public domain since 2026-01-01 (1930 registration A23794, renewed 1957 as R197244, Stanford Copyright Renewal Database -> full 95-year term). Scanned from Internet Archive item dictionaryofcolo0000aloy (archive.org/details/dictionaryofcolo0000aloy), using the ORIGINAL per-page camera captures (dictionaryofcolo0000aloy_orig_jp2.tar), not IA's own desaturated derivative. See research/MAERZ-PAUL.md for the source search and research/LIBRARY.md s9 for the extraction method and tools/maerz_paul.py's module docstring for the full detail.", "_built": "tools/maerz_paul.py", "_fields": "n=name (OCR'd off the plate's own key page), plate=1-56 (2 missing from this scan), col=A-L, row=1-12, h=hex (approximate, measured+white-balanced from the raw plate scan), note"}
+{"n": "Arbutus", "plate": 1, "col": "B", "row": 4, "h": "#D88696", "note": "Maerz & Paul 1930, Plate 1 B4; approximate: measured from a 1930 plate scan"}
+{"n": "Sweet Briar", "plate": 1, "col": "C", "row": 4, "h": "#D77A8C", "note": "Maerz & Paul 1930, Plate 1 C4; approximate: measured from a 1930 plate scan"}
+{"n": "France Rose", "plate": 1, "col": "F", "row": 4, "h": "#DA6377", "note": "Maerz & Paul 1930, Plate 1 F4; approximate: measured from a 1930 plate scan"}
+{"n": "Rose Neyron", "plate": 1, "col": "J", "row": 4, "h": "#DD3D4E", "note": "Maerz & Paul 1930, Plate 1 J4; approximate: measured from a 1930 plate scan"}
+{"n": "PINK 1T", "plate": 1, "col": "B", "row": 7, "h": "#D9CDCC", "note": "Maerz & Paul 1930, Plate 1 B7; approximate: measured from a 1930 plate scan"}
+{"n": "Rose Breath", "plate": 1, "col": "D", "row": 7, "h": "#DBC3C5", "note": "Maerz & Paul 1930, Plate 1 D7; approximate: measured from a 1930 plate scan"}
+{"n": "Jpera", "plate": 1, "col": "B", "row": 8, "h": "#DBBFB8", "note": "Maerz & Paul 1930, Plate 1 B8; approximate: measured from a 1930 plate scan"}
+{"n": "BABY PK", "plate": 1, "col": "C", "row": 8, "h": "#DCBAB5", "note": "Maerz & Paul 1930, Plate 1 C8; approximate: measured from a 1930 plate scan"}
+{"n": "Cupid", "plate": 1, "col": "E", "row": 8, "h": "#DFB4B0", "note": "Maerz & Paul 1930, Plate 1 E8; approximate: measured from a 1930 plate scan"}
+{"n": "Jherry Bloom", "plate": 1, "col": "I", "row": 8, "h": "#DC7E83", "note": "Maerz & Paul 1930, Plate 1 I8; approximate: measured from a 1930 plate scan"}
+{"n": "Satrano", "plate": 1, "col": "B", "row": 9, "h": "#DEB3A6", "note": "Maerz & Paul 1930, Plate 1 B9; approximate: measured from a 1930 plate scan"}
+{"n": "Mirefly", "plate": 1, "col": "K", "row": 10, "h": "#E94424", "note": "Maerz & Paul 1930, Plate 1 K10; approximate: measured from a 1930 plate scan"}
+{"n": "Castile", "plate": 1, "col": "L", "row": 10, "h": "#EB2909", "note": "Maerz & Paul 1930, Plate 1 L10; approximate: measured from a 1930 plate scan; OCR 'ASTIL' corrected to 'Castile' against the ISCC-NBS 1955 Maerz & Paul name list", "uncertain": "dE00 25 from its ISCC-NBS 1955 block centroid (block 58); see research/MAERZ-PAUL.md s6"}
+{"n": "CARLET", "plate": 1, "col": "L", "row": 12, "h": "#EB3106", "note": "Maerz & Paul 1930, Plate 1 L12; approximate: measured from a 1930 plate scan"}
+{"n": "Vassar Rose", "plate": 3, "col": "I", "row": 2, "h": "#C6747E", "note": "Maerz & Paul 1930, Plate 3 I2; approximate: measured from a 1930 plate scan"}
+{"n": "Kugenie R", "plate": 3, "col": "K", "row": 2, "h": "#C7646F", "note": "Maerz & Paul 1930, Plate 3 K2; approximate: measured from a 1930 plate scan"}
+{"n": "Bridal Rose", "plate": 3, "col": "F", "row": 3, "h": "#C2707B", "note": "Maerz & Paul 1930, Plate 3 F3; approximate: measured from a 1930 plate scan"}
+{"n": "WEIGEL-IA", "plate": 3, "col": "I", "row": 3, "h": "#C56875", "note": "Maerz & Paul 1930, Plate 3 I3; approximate: measured from a 1930 plate scan"}
+{"n": "Bachelor Button", "plate": 3, "col": "B", "row": 4, "h": "#C17181", "note": "Maerz & Paul 1930, Plate 3 B4; approximate: measured from a 1930 plate scan"}
+{"n": "Rambler Rose", "plate": 3, "col": "D", "row": 4, "h": "#C45F71", "note": "Maerz & Paul 1930, Plate 3 D4; approximate: measured from a 1930 plate scan"}
+{"n": "Persian Pink", "plate": 3, "col": "H", "row": 4, "h": "#C75063", "note": "Maerz & Paul 1930, Plate 3 H4; approximate: measured from a 1930 plate scan"}
+{"n": "Spinel", "plate": 3, "col": "H", "row": 5, "h": "#CB344D", "note": "Maerz & Paul 1930, Plate 3 H5; approximate: measured from a 1930 plate scan"}
+{"n": "Eglantine", "plate": 3, "col": "C", "row": 6, "h": "#C91A42", "note": "Maerz & Paul 1930, Plate 3 C6; approximate: measured from a 1930 plate scan"}
+{"n": "Hockey", "plate": 3, "col": "K", "row": 6, "h": "#CF1122", "note": "Maerz & Paul 1930, Plate 3 K6; approximate: measured from a 1930 plate scan"}
+{"n": "Salvia", "plate": 3, "col": "L", "row": 6, "h": "#CF0F19", "note": "Maerz & Paul 1930, Plate 3 L6; approximate: measured from a 1930 plate scan"}
+{"n": "Powder", "plate": 3, "col": "E", "row": 7, "h": "#C4A2A2", "note": "Maerz & Paul 1930, Plate 3 E7; approximate: measured from a 1930 plate scan"}
+{"n": "LILAC", "plate": 3, "col": "G", "row": 7, "h": "#C4A09F", "note": "Maerz & Paul 1930, Plate 3 G7; approximate: measured from a 1930 plate scan"}
+{"n": "ROSE", "plate": 3, "col": "I", "row": 7, "h": "#C58B93", "note": "Maerz & Paul 1930, Plate 3 I7; approximate: measured from a 1930 plate scan", "uncertain": "dE00 21 from its ISCC-NBS 1955 block centroid (block 255); see research/MAERZ-PAUL.md s6"}
+{"n": "Carnival R", "plate": 3, "col": "L", "row": 7, "h": "#C85966", "note": "Maerz & Paul 1930, Plate 3 L7; approximate: measured from a 1930 plate scan"}
+{"n": "Sharon", "plate": 3, "col": "K", "row": 8, "h": "#C76367", "note": "Maerz & Paul 1930, Plate 3 K8; approximate: measured from a 1930 plate scan"}
+{"n": "Japan", "plate": 3, "col": "A", "row": 10, "h": "#6B6B6A", "note": "Maerz & Paul 1930, Plate 3 A10; approximate: measured from a 1930 plate scan"}
+{"n": "JONEO", "plate": 3, "col": "C", "row": 10, "h": "#CF7552", "note": "Maerz & Paul 1930, Plate 3 C10; approximate: measured from a 1930 plate scan"}
+{"n": "Jood", "plate": 3, "col": "L", "row": 11, "h": "#D73811", "note": "Maerz & Paul 1930, Plate 3 L11; approximate: measured from a 1930 plate scan"}
+{"n": "Livid V", "plate": 4, "col": "G", "row": 1, "h": "#B08B8D", "note": "Maerz & Paul 1930, Plate 4 G1; approximate: measured from a 1930 plate scan"}
+{"n": "Gloaming", "plate": 4, "col": "H", "row": 2, "h": "#B37880", "note": "Maerz & Paul 1930, Plate 4 H2; approximate: measured from a 1930 plate scan"}
+{"n": "OLD ROSE", "plate": 4, "col": "I", "row": 2, "h": "#B26C76", "note": "Maerz & Paul 1930, Plate 4 I2; approximate: measured from a 1930 plate scan"}
+{"n": "Japonica", "plate": 4, "col": "J", "row": 2, "h": "#B65C68", "note": "Maerz & Paul 1930, Plate 4 J2; approximate: measured from a 1930 plate scan"}
+{"n": "Ros", "plate": 4, "col": "K", "row": 2, "h": "#BC4651", "note": "Maerz & Paul 1930, Plate 4 K2; approximate: measured from a 1930 plate scan"}
+{"n": "Zinnia", "plate": 4, "col": "L", "row": 2, "h": "#C12621", "note": "Maerz & Paul 1930, Plate 4 L2; approximate: measured from a 1930 plate scan"}
+{"n": "Azalea", "plate": 4, "col": "J", "row": 3, "h": "#B44B58", "note": "Maerz & Paul 1930, Plate 4 J3; approximate: measured from a 1930 plate scan"}
+{"n": "ASHES OF ROSIE", "plate": 4, "col": "A", "row": 4, "h": "#7E7F7C", "note": "Maerz & Paul 1930, Plate 4 A4; approximate: measured from a 1930 plate scan"}
+{"n": "Moss Pk", "plate": 4, "col": "B", "row": 4, "h": "#AD6170", "note": "Maerz & Paul 1930, Plate 4 B4; approximate: measured from a 1930 plate scan"}
+{"n": "Jherry Blossom", "plate": 4, "col": "J", "row": 4, "h": "#B93043", "note": "Maerz & Paul 1930, Plate 4 J4; approximate: measured from a 1930 plate scan"}
+{"n": "Daphne F", "plate": 4, "col": "A", "row": 5, "h": "#7E7F7C", "note": "Maerz & Paul 1930, Plate 4 A5; approximate: measured from a 1930 plate scan"}
+{"n": "Hellebore R", "plate": 4, "col": "C", "row": 5, "h": "#B43A51", "note": "Maerz & Paul 1930, Plate 4 C5; approximate: measured from a 1930 plate scan"}
+{"n": "Solferino", "plate": 4, "col": "E", "row": 5, "h": "#B4334B", "note": "Maerz & Paul 1930, Plate 4 E5; approximate: measured from a 1930 plate scan"}
+{"n": "Flaming Maple", "plate": 4, "col": "L", "row": 5, "h": "#B60D0A", "note": "Maerz & Paul 1930, Plate 4 L5; approximate: measured from a 1930 plate scan"}
+{"n": "Sultan", "plate": 4, "col": "K", "row": 6, "h": "#BB0F19", "note": "Maerz & Paul 1930, Plate 4 K6; approximate: measured from a 1930 plate scan"}
+{"n": "Marie Antoinette", "plate": 4, "col": "I", "row": 7, "h": "#AF747C", "note": "Maerz & Paul 1930, Plate 4 I7; approximate: measured from a 1930 plate scan"}
+{"n": "Touquet", "plate": 4, "col": "B", "row": 8, "h": "#AD998B", "note": "Maerz & Paul 1930, Plate 4 B8; approximate: measured from a 1930 plate scan"}
+{"n": "Colonial Rose", "plate": 4, "col": "I", "row": 8, "h": "#B16C6F", "note": "Maerz & Paul 1930, Plate 4 I8; approximate: measured from a 1930 plate scan"}
+{"n": "Flesh Blond", "plate": 4, "col": "A", "row": 9, "h": "#757775", "note": "Maerz & Paul 1930, Plate 4 A9; approximate: measured from a 1930 plate scan", "uncertain": "dE00 28 from its ISCC-NBS 1955 block centroid (block 29); see research/MAERZ-PAUL.md s6"}
+{"n": "Polignac", "plate": 4, "col": "D", "row": 9, "h": "#B28170", "note": "Maerz & Paul 1930, Plate 4 D9; approximate: measured from a 1930 plate scan"}
+{"n": "Marsh Rose", "plate": 4, "col": "I", "row": 9, "h": "#B3645D", "note": "Maerz & Paul 1930, Plate 4 I9; approximate: measured from a 1930 plate scan"}
+{"n": "Araby", "plate": 4, "col": "G", "row": 10, "h": "#BC6849", "note": "Maerz & Paul 1930, Plate 4 G10; approximate: measured from a 1930 plate scan"}
+{"n": "Lolly Berry", "plate": 4, "col": "L", "row": 10, "h": "#B81A0B", "note": "Maerz & Paul 1930, Plate 4 L10; approximate: measured from a 1930 plate scan"}
+{"n": "ACQUER", "plate": 4, "col": "K", "row": 11, "h": "#BF2D13", "note": "Maerz & Paul 1930, Plate 4 K11; approximate: measured from a 1930 plate scan"}
+{"n": "Losque", "plate": 4, "col": "F", "row": 12, "h": "#C8460B", "note": "Maerz & Paul 1930, Plate 4 F12; approximate: measured from a 1930 plate scan"}
+{"n": "Yastur", "plate": 4, "col": "I", "row": 12, "h": "#C44013", "note": "Maerz & Paul 1930, Plate 4 I12; approximate: measured from a 1930 plate scan"}
+{"n": "Nectar", "plate": 5, "col": "E", "row": 2, "h": "#956E6A", "note": "Maerz & Paul 1930, Plate 5 E2; approximate: measured from a 1930 plate scan"}
+{"n": "BLUSH ROSE", "plate": 5, "col": "G", "row": 3, "h": "#9A5A5C", "note": "Maerz & Paul 1930, Plate 5 G3; approximate: measured from a 1930 plate scan"}
+{"n": "Rose Petal", "plate": 5, "col": "I", "row": 3, "h": "#A05153", "note": "Maerz & Paul 1930, Plate 5 I3; approximate: measured from a 1930 plate scan"}
+{"n": "China Rose", "plate": 5, "col": "A", "row": 5, "h": "#6F6F6C", "note": "Maerz & Paul 1930, Plate 5 A5; approximate: measured from a 1930 plate scan"}
+{"n": "Cobweb", "plate": 5, "col": "B", "row": 6, "h": "#A0152D", "note": "Maerz & Paul 1930, Plate 5 B6; approximate: measured from a 1930 plate scan", "uncertain": "dE00 40 from its ISCC-NBS 1955 block centroid (block 79); see research/MAERZ-PAUL.md s6"}
+{"n": "Marmora", "plate": 5, "col": "C", "row": 6, "h": "#A11427", "note": "Maerz & Paul 1930, Plate 5 C6; approximate: measured from a 1930 plate scan; OCR 'Marm' corrected to 'Marmora' against the ISCC-NBS 1955 Maerz & Paul name list", "uncertain": "dE00 53 from its ISCC-NBS 1955 block centroid (block 164); see research/MAERZ-PAUL.md s6"}
+{"n": "Long", "plate": 5, "col": "A", "row": 8, "h": "#696A68", "note": "Maerz & Paul 1930, Plate 5 A8; approximate: measured from a 1930 plate scan"}
+{"n": "Rose", "plate": 5, "col": "C", "row": 8, "h": "#9A7061", "note": "Maerz & Paul 1930, Plate 5 C8; approximate: measured from a 1930 plate scan", "uncertain": "dE00 22 from its ISCC-NBS 1955 block centroid (block 255); see research/MAERZ-PAUL.md s6"}
+{"n": "Lemnos", "plate": 5, "col": "B", "row": 10, "h": "#A66744", "note": "Maerz & Paul 1930, Plate 5 B10; approximate: measured from a 1930 plate scan; OCR 'NOS' corrected to 'Lemnos' against the ISCC-NBS 1955 Maerz & Paul name list"}
+{"n": "Orca", "plate": 5, "col": "J", "row": 11, "h": "#AD4022", "note": "Maerz & Paul 1930, Plate 5 J11; approximate: measured from a 1930 plate scan"}
+{"n": "IENNAPE", "plate": 5, "col": "F", "row": 12, "h": "#AB350D", "note": "Maerz & Paul 1930, Plate 5 F12; approximate: measured from a 1930 plate scan"}
+{"n": "Rosedust", "plate": 6, "col": "B", "row": 2, "h": "#806D67", "note": "Maerz & Paul 1930, Plate 6 B2; approximate: measured from a 1930 plate scan"}
+{"n": "Livid Br", "plate": 6, "col": "D", "row": 3, "h": "#80484B", "note": "Maerz & Paul 1930, Plate 6 D3; approximate: measured from a 1930 plate scan"}
+{"n": "Mineral R", "plate": 6, "col": "J", "row": 3, "h": "#8C4248", "note": "Maerz & Paul 1930, Plate 6 J3; approximate: measured from a 1930 plate scan"}
+{"n": "Claret Cup", "plate": 6, "col": "B", "row": 4, "h": "#853F49", "note": "Maerz & Paul 1930, Plate 6 B4; approximate: measured from a 1930 plate scan"}
+{"n": "Crushed Berry", "plate": 6, "col": "F", "row": 4, "h": "#862F3A", "note": "Maerz & Paul 1930, Plate 6 F4; approximate: measured from a 1930 plate scan"}
+{"n": "Vernonia Pr", "plate": 6, "col": "A", "row": 5, "h": "#797A76", "note": "Maerz & Paul 1930, Plate 6 A5; approximate: measured from a 1930 plate scan"}
+{"n": "Raspberry Red", "plate": 6, "col": "I", "row": 5, "h": "#911F2E", "note": "Maerz & Paul 1930, Plate 6 I5; approximate: measured from a 1930 plate scan; OCR 'RASP-BERRY' corrected to 'Raspberry Red' against the ISCC-NBS 1955 Maerz & Paul name list"}
+{"n": "Rubaiyat", "plate": 6, "col": "J", "row": 5, "h": "#921F2F", "note": "Maerz & Paul 1930, Plate 6 J5; approximate: measured from a 1930 plate scan"}
+{"n": "Clove Pk", "plate": 6, "col": "K", "row": 5, "h": "#931D2B", "note": "Maerz & Paul 1930, Plate 6 K5; approximate: measured from a 1930 plate scan"}
+{"n": "Oxheart", "plate": 6, "col": "L", "row": 5, "h": "#941926", "note": "Maerz & Paul 1930, Plate 6 L5; approximate: measured from a 1930 plate scan"}
+{"n": "RUBY", "plate": 6, "col": "G", "row": 6, "h": "#910F1F", "note": "Maerz & Paul 1930, Plate 6 G6; approximate: measured from a 1930 plate scan"}
+{"n": "Peony Re", "plate": 6, "col": "J", "row": 6, "h": "#941120", "note": "Maerz & Paul 1930, Plate 6 J6; approximate: measured from a 1930 plate scan"}
+{"n": "Slate-V", "plate": 6, "col": "I", "row": 8, "h": "#8B504D", "note": "Maerz & Paul 1930, Plate 6 I8; approximate: measured from a 1930 plate scan"}
+{"n": "Saraband", "plate": 6, "col": "K", "row": 8, "h": "#904848", "note": "Maerz & Paul 1930, Plate 6 K8; approximate: measured from a 1930 plate scan"}
+{"n": "Manon", "plate": 6, "col": "A", "row": 9, "h": "#747573", "note": "Maerz & Paul 1930, Plate 6 A9; approximate: measured from a 1930 plate scan"}
+{"n": "Rosestone", "plate": 6, "col": "C", "row": 9, "h": "#875445", "note": "Maerz & Paul 1930, Plate 6 C9; approximate: measured from a 1930 plate scan", "uncertain": "dE00 30 from its ISCC-NBS 1955 block centroid (block 1); see research/MAERZ-PAUL.md s6"}
+{"n": "Cameo Br", "plate": 6, "col": "F", "row": 9, "h": "#8A5043", "note": "Maerz & Paul 1930, Plate 6 F9; approximate: measured from a 1930 plate scan"}
+{"n": "Ambrosia", "plate": 6, "col": "G", "row": 9, "h": "#8C5045", "note": "Maerz & Paul 1930, Plate 6 G9; approximate: measured from a 1930 plate scan"}
+{"n": "Rose Ash", "plate": 6, "col": "J", "row": 9, "h": "#904741", "note": "Maerz & Paul 1930, Plate 6 J9; approximate: measured from a 1930 plate scan"}
+{"n": "Havana Rose", "plate": 6, "col": "K", "row": 9, "h": "#92403C", "note": "Maerz & Paul 1930, Plate 6 K9; approximate: measured from a 1930 plate scan"}
+{"n": "Garnet Br", "plate": 6, "col": "L", "row": 9, "h": "#913937", "note": "Maerz & Paul 1930, Plate 6 L9; approximate: measured from a 1930 plate scan"}
+{"n": "Aragon", "plate": 6, "col": "F", "row": 10, "h": "#8F422D", "note": "Maerz & Paul 1930, Plate 6 F10; approximate: measured from a 1930 plate scan"}
+{"n": "Cedarbark", "plate": 6, "col": "I", "row": 10, "h": "#923D2D", "note": "Maerz & Paul 1930, Plate 6 I10; approximate: measured from a 1930 plate scan"}
+{"n": "Spanish Cedar", "plate": 6, "col": "J", "row": 10, "h": "#943E2E", "note": "Maerz & Paul 1930, Plate 6 J10; approximate: measured from a 1930 plate scan"}
+{"n": "Saona", "plate": 6, "col": "F", "row": 11, "h": "#8F371C", "note": "Maerz & Paul 1930, Plate 6 F11; approximate: measured from a 1930 plate scan"}
+{"n": "Cauldron Redwood Morocco R", "plate": 6, "col": "K", "row": 11, "h": "#97321C", "note": "Maerz & Paul 1930, Plate 6 K11; approximate: measured from a 1930 plate scan"}
+{"n": "Gypsy", "plate": 6, "col": "B", "row": 12, "h": "#8F3008", "note": "Maerz & Paul 1930, Plate 6 B12; approximate: measured from a 1930 plate scan"}
+{"n": "Sopper Br", "plate": 6, "col": "C", "row": 12, "h": "#8C2D09", "note": "Maerz & Paul 1930, Plate 6 C12; approximate: measured from a 1930 plate scan"}
+{"n": "Agate", "plate": 6, "col": "H", "row": 12, "h": "#8E2D13", "note": "Maerz & Paul 1930, Plate 6 H12; approximate: measured from a 1930 plate scan"}
+{"n": "HENNA", "plate": 6, "col": "J", "row": 12, "h": "#953216", "note": "Maerz & Paul 1930, Plate 6 J12; approximate: measured from a 1930 plate scan"}
+{"n": "Kobe", "plate": 6, "col": "K", "row": 12, "h": "#953217", "note": "Maerz & Paul 1930, Plate 6 K12; approximate: measured from a 1930 plate scan"}
+{"n": "INDIAN", "plate": 6, "col": "L", "row": 12, "h": "#972F16", "note": "Maerz & Paul 1930, Plate 6 L12; approximate: measured from a 1930 plate scan"}
+{"n": "Malaga", "plate": 7, "col": "K", "row": 1, "h": "#72342A", "note": "Maerz & Paul 1930, Plate 7 K1; approximate: measured from a 1930 plate scan"}
+{"n": "Klephai", "plate": 7, "col": "A", "row": 2, "h": "#787978", "note": "Maerz & Paul 1930, Plate 7 A2; approximate: measured from a 1930 plate scan"}
+{"n": "Haemat", "plate": 7, "col": "G", "row": 3, "h": "#613535", "note": "Maerz & Paul 1930, Plate 7 G3; approximate: measured from a 1930 plate scan"}
+{"n": "Old Ros", "plate": 7, "col": "I", "row": 3, "h": "#662E2E", "note": "Maerz & Paul 1930, Plate 7 I3; approximate: measured from a 1930 plate scan"}
+{"n": "Anatolia", "plate": 7, "col": "K", "row": 3, "h": "#6D2523", "note": "Maerz & Paul 1930, Plate 7 K3; approximate: measured from a 1930 plate scan; OCR 'Anatoli' corrected to 'Anatolia' against the ISCC-NBS 1955 Maerz & Paul name list"}
+{"n": "Sultana", "plate": 7, "col": "C", "row": 5, "h": "#5E2A31", "note": "Maerz & Paul 1930, Plate 7 C5; approximate: measured from a 1930 plate scan"}
+{"n": "Mauverc", "plate": 7, "col": "E", "row": 5, "h": "#5D252B", "note": "Maerz & Paul 1930, Plate 7 E5; approximate: measured from a 1930 plate scan"}
+{"n": "Aubusson", "plate": 7, "col": "G", "row": 5, "h": "#602025", "note": "Maerz & Paul 1930, Plate 7 G5; approximate: measured from a 1930 plate scan; OCR 'Aubusso' corrected to 'Aubusson' against the ISCC-NBS 1955 Maerz & Paul name list"}
+{"n": "Tapestry", "plate": 7, "col": "I", "row": 5, "h": "#661C1F", "note": "Maerz & Paul 1930, Plate 7 I5; approximate: measured from a 1930 plate scan; OCR 'Tapestr' corrected to 'Tapestry' against the ISCC-NBS 1955 Maerz & Paul name list", "uncertain": "dE00 33 from its ISCC-NBS 1955 block centroid (block 183); see research/MAERZ-PAUL.md s6"}
+{"n": "Algeriar Crimson", "plate": 7, "col": "K", "row": 5, "h": "#691816", "note": "Maerz & Paul 1930, Plate 7 K5; approximate: measured from a 1930 plate scan"}
+{"n": "Canyon", "plate": 7, "col": "E", "row": 6, "h": "#601821", "note": "Maerz & Paul 1930, Plate 7 E6; approximate: measured from a 1930 plate scan"}
+{"n": "Peony Burmese", "plate": 7, "col": "G", "row": 6, "h": "#64161B", "note": "Maerz & Paul 1930, Plate 7 G6; approximate: measured from a 1930 plate scan"}
+{"n": "Spanish", "plate": 7, "col": "I", "row": 6, "h": "#651516", "note": "Maerz & Paul 1930, Plate 7 I6; approximate: measured from a 1930 plate scan"}
+{"n": "Bonito Fuscous", "plate": 7, "col": "C", "row": 7, "h": "#57544A", "note": "Maerz & Paul 1930, Plate 7 C7; approximate: measured from a 1930 plate scan"}
+{"n": "Roan", "plate": 7, "col": "I", "row": 7, "h": "#5F3636", "note": "Maerz & Paul 1930, Plate 7 I7; approximate: measured from a 1930 plate scan"}
+{"n": "Marocain", "plate": 7, "col": "K", "row": 7, "h": "#662A2B", "note": "Maerz & Paul 1930, Plate 7 K7; approximate: measured from a 1930 plate scan; OCR 'MAROC' corrected to 'Marocain' against the ISCC-NBS 1955 Maerz & Paul name list"}
+{"n": "ROSE G", "plate": 7, "col": "A", "row": 8, "h": "#737472", "note": "Maerz & Paul 1930, Plate 7 A8; approximate: measured from a 1930 plate scan"}
+{"n": "MAUVE Copra", "plate": 7, "col": "C", "row": 8, "h": "#594C41", "note": "Maerz & Paul 1930, Plate 7 C8; approximate: measured from a 1930 plate scan"}
+{"n": "Taupe", "plate": 7, "col": "D", "row": 8, "h": "#594439", "note": "Maerz & Paul 1930, Plate 7 D8; approximate: measured from a 1930 plate scan; OCR 'AUPE' corrected to 'Taupe' against the ISCC-NBS 1955 Maerz & Paul name list"}
+{"n": "Domingc", "plate": 7, "col": "I", "row": 8, "h": "#61332F", "note": "Maerz & Paul 1930, Plate 7 I8; approximate: measured from a 1930 plate scan"}
+{"n": "Mascara", "plate": 7, "col": "K", "row": 8, "h": "#672926", "note": "Maerz & Paul 1930, Plate 7 K8; approximate: measured from a 1930 plate scan"}
+{"n": "Kaffa Hampte", "plate": 7, "col": "E", "row": 9, "h": "#5C3F34", "note": "Maerz & Paul 1930, Plate 7 E9; approximate: measured from a 1930 plate scan"}
+{"n": "Brown", "plate": 7, "col": "F", "row": 9, "h": "#5A382E", "note": "Maerz & Paul 1930, Plate 7 F9; approximate: measured from a 1930 plate scan"}
+{"n": "Liver Br Autumn", "plate": 7, "col": "G", "row": 9, "h": "#60392F", "note": "Maerz & Paul 1930, Plate 7 G9; approximate: measured from a 1930 plate scan"}
+{"n": "Tanagra Castilian Old Cedse", "plate": 7, "col": "I", "row": 9, "h": "#623029", "note": "Maerz & Paul 1930, Plate 7 I9; approximate: measured from a 1930 plate scan"}
+{"n": "Kaa", "plate": 7, "col": "K", "row": 9, "h": "#682822", "note": "Maerz & Paul 1930, Plate 7 K9; approximate: measured from a 1930 plate scan"}
+{"n": "CHESTN Brownstc", "plate": 7, "col": "E", "row": 10, "h": "#5E3727", "note": "Maerz & Paul 1930, Plate 7 E10; approximate: measured from a 1930 plate scan"}
+{"n": "Laurel O", "plate": 7, "col": "I", "row": 10, "h": "#642F22", "note": "Maerz & Paul 1930, Plate 7 I10; approximate: measured from a 1930 plate scan"}
+{"n": "Kettledr Manzani Moro Re", "plate": 7, "col": "K", "row": 10, "h": "#6A291D", "note": "Maerz & Paul 1930, Plate 7 K10; approximate: measured from a 1930 plate scan"}
+{"n": "Cordova Castellon", "plate": 7, "col": "I", "row": 11, "h": "#652C1D", "note": "Maerz & Paul 1930, Plate 7 I11; approximate: measured from a 1930 plate scan"}
+{"n": "Coroman Tuscany", "plate": 7, "col": "K", "row": 11, "h": "#6A291B", "note": "Maerz & Paul 1930, Plate 7 K11; approximate: measured from a 1930 plate scan"}
+{"n": "SEN", "plate": 7, "col": "H", "row": 12, "h": "#662F1C", "note": "Maerz & Paul 1930, Plate 7 H12; approximate: measured from a 1930 plate scan"}
+{"n": "Chutney", "plate": 7, "col": "I", "row": 12, "h": "#6A2F1E", "note": "Maerz & Paul 1930, Plate 7 I12; approximate: measured from a 1930 plate scan"}
+{"n": "Caldera", "plate": 7, "col": "K", "row": 12, "h": "#6E2F1F", "note": "Maerz & Paul 1930, Plate 7 K12; approximate: measured from a 1930 plate scan"}
+{"n": "Andorra", "plate": 8, "col": "K", "row": 4, "h": "#291B16", "note": "Maerz & Paul 1930, Plate 8 K4; approximate: measured from a 1930 plate scan"}
+{"n": "Chippen African Afghan", "plate": 8, "col": "G", "row": 5, "h": "#221915", "note": "Maerz & Paul 1930, Plate 8 G5; approximate: measured from a 1930 plate scan"}
+{"n": "Horsech", "plate": 8, "col": "I", "row": 5, "h": "#261A16", "note": "Maerz & Paul 1930, Plate 8 I5; approximate: measured from a 1930 plate scan"}
+{"n": "Zanzibar", "plate": 8, "col": "K", "row": 5, "h": "#281912", "note": "Maerz & Paul 1930, Plate 8 K5; approximate: measured from a 1930 plate scan; OCR 'Zanziba' corrected to 'Zanzibar' against the ISCC-NBS 1955 Maerz & Paul name list"}
+{"n": "Ambulance", "plate": 8, "col": "C", "row": 6, "h": "#26191A", "note": "Maerz & Paul 1930, Plate 8 C6; approximate: measured from a 1930 plate scan; OCR 'Ambula' corrected to 'Ambulance' against the ISCC-NBS 1955 Maerz & Paul name list"}
+{"n": "Rose Eb", "plate": 8, "col": "E", "row": 6, "h": "#261917", "note": "Maerz & Paul 1930, Plate 8 E6; approximate: measured from a 1930 plate scan"}
+{"n": "Briarwoc", "plate": 8, "col": "I", "row": 6, "h": "#271812", "note": "Maerz & Paul 1930, Plate 8 I6; approximate: measured from a 1930 plate scan"}
+{"n": "Mirador Argentir Art Brov", "plate": 8, "col": "K", "row": 6, "h": "#281811", "note": "Maerz & Paul 1930, Plate 8 K6; approximate: measured from a 1930 plate scan"}
+{"n": "Carbuncle", "plate": 8, "col": "K", "row": 7, "h": "#261E1C", "note": "Maerz & Paul 1930, Plate 8 K7; approximate: measured from a 1930 plate scan; OCR 'Carbunc' corrected to 'Carbuncle' against the ISCC-NBS 1955 Maerz & Paul name list"}
+{"n": "Chaetura", "plate": 8, "col": "C", "row": 8, "h": "#24262B", "note": "Maerz & Paul 1930, Plate 8 C8; approximate: measured from a 1930 plate scan; OCR 'Chaetur' corrected to 'Chaetura' against the ISCC-NBS 1955 Maerz & Paul name list"}
+{"n": "Ink Black", "plate": 8, "col": "D", "row": 8, "h": "#212326", "note": "Maerz & Paul 1930, Plate 8 D8; approximate: measured from a 1930 plate scan; OCR 'Black' corrected to 'Ink Black' against the ISCC-NBS 1955 Maerz & Paul name list"}
+{"n": "African", "plate": 8, "col": "E", "row": 8, "h": "#232427", "note": "Maerz & Paul 1930, Plate 8 E8; approximate: measured from a 1930 plate scan; OCR 'AFRICA' corrected to 'African' against the ISCC-NBS 1955 Maerz & Paul name list"}
+{"n": "CORDO Woodlar", "plate": 8, "col": "G", "row": 8, "h": "#222021", "note": "Maerz & Paul 1930, Plate 8 G8; approximate: measured from a 1930 plate scan"}
+{"n": "Java Brc", "plate": 8, "col": "I", "row": 8, "h": "#252021", "note": "Maerz & Paul 1930, Plate 8 I8; approximate: measured from a 1930 plate scan"}
+{"n": "Brazil B", "plate": 8, "col": "K", "row": 8, "h": "#271E1B", "note": "Maerz & Paul 1930, Plate 8 K8; approximate: measured from a 1930 plate scan"}
+{"n": "Hudson", "plate": 8, "col": "A", "row": 9, "h": "#61799A", "note": "Maerz & Paul 1930, Plate 8 A9; approximate: measured from a 1930 plate scan"}
+{"n": "London", "plate": 8, "col": "C", "row": 9, "h": "#252629", "note": "Maerz & Paul 1930, Plate 8 C9; approximate: measured from a 1930 plate scan"}
+{"n": "NEGRO", "plate": 8, "col": "E", "row": 9, "h": "#262527", "note": "Maerz & Paul 1930, Plate 8 E9; approximate: measured from a 1930 plate scan"}
+{"n": "Maracail Domingc", "plate": 8, "col": "K", "row": 9, "h": "#291F1D", "note": "Maerz & Paul 1930, Plate 8 K9; approximate: measured from a 1930 plate scan"}
+{"n": "SEPIA", "plate": 8, "col": "A", "row": 10, "h": "#617A9A", "note": "Maerz & Paul 1930, Plate 8 A10; approximate: measured from a 1930 plate scan", "uncertain": "dE00 28 from its ISCC-NBS 1955 block centroid (block 61); see research/MAERZ-PAUL.md s6"}
+{"n": "Moose", "plate": 8, "col": "C", "row": 10, "h": "#272627", "note": "Maerz & Paul 1930, Plate 8 C10; approximate: measured from a 1930 plate scan"}
+{"n": "SEAL", "plate": 8, "col": "E", "row": 10, "h": "#282422", "note": "Maerz & Paul 1930, Plate 8 E10; approximate: measured from a 1930 plate scan"}
+{"n": "CHOCO", "plate": 8, "col": "G", "row": 10, "h": "#27211F", "note": "Maerz & Paul 1930, Plate 8 G10; approximate: measured from a 1930 plate scan"}
+{"n": "Falcon Muskrat", "plate": 8, "col": "I", "row": 10, "h": "#2B2421", "note": "Maerz & Paul 1930, Plate 8 I10; approximate: measured from a 1930 plate scan"}
+{"n": "Nomad", "plate": 8, "col": "K", "row": 10, "h": "#2C2423", "note": "Maerz & Paul 1930, Plate 8 K10; approximate: measured from a 1930 plate scan"}
+{"n": "Montella", "plate": 8, "col": "I", "row": 11, "h": "#2C2523", "note": "Maerz & Paul 1930, Plate 8 I11; approximate: measured from a 1930 plate scan"}
+{"n": "LEAF M Kolinsky Weather", "plate": 8, "col": "K", "row": 11, "h": "#2D241F", "note": "Maerz & Paul 1930, Plate 8 K11; approximate: measured from a 1930 plate scan"}
+{"n": "Autumn", "plate": 8, "col": "A", "row": 12, "h": "#657CA0", "note": "Maerz & Paul 1930, Plate 8 A12; approximate: measured from a 1930 plate scan; OCR 'AUTUM' corrected to 'Autumn' against the ISCC-NBS 1955 Maerz & Paul name list", "uncertain": "dE00 33 from its ISCC-NBS 1955 block centroid (block 110); see research/MAERZ-PAUL.md s6"}
+{"n": "Bracken", "plate": 8, "col": "C", "row": 12, "h": "#292620", "note": "Maerz & Paul 1930, Plate 8 C12; approximate: measured from a 1930 plate scan", "uncertain": "dE00 24 from its ISCC-NBS 1955 block centroid (block 95); see research/MAERZ-PAUL.md s6"}
+{"n": "Martius", "plate": 9, "col": "I", "row": 1, "h": "#E4DF94", "note": "Maerz & Paul 1930, Plate 9 I1; approximate: measured from a 1930 plate scan"}
+{"n": "POLAR BEAR", "plate": 9, "col": "B", "row": 2, "h": "#DFD2BF", "note": "Maerz & Paul 1930, Plate 9 B2; approximate: measured from a 1930 plate scan"}
+{"n": "CREAM", "plate": 9, "col": "D", "row": 2, "h": "#E3D4AB", "note": "Maerz & Paul 1930, Plate 9 D2; approximate: measured from a 1930 plate scan"}
+{"n": "Pinard Y", "plate": 9, "col": "J", "row": 2, "h": "#E7D77E", "note": "Maerz & Paul 1930, Plate 9 J2; approximate: measured from a 1930 plate scan"}
+{"n": "POP-CORN", "plate": 9, "col": "J", "row": 3, "h": "#E9D174", "note": "Maerz & Paul 1930, Plate 9 J3; approximate: measured from a 1930 plate scan"}
+{"n": "Empire Y", "plate": 9, "col": "K", "row": 3, "h": "#EAD05E", "note": "Maerz & Paul 1930, Plate 9 K3; approximate: measured from a 1930 plate scan"}
+{"n": "Burnous", "plate": 9, "col": "C", "row": 4, "h": "#E5C7A1", "note": "Maerz & Paul 1930, Plate 9 C4; approximate: measured from a 1930 plate scan"}
+{"n": "PEACH", "plate": 9, "col": "A", "row": 5, "h": "#DEBEAC", "note": "Maerz & Paul 1930, Plate 9 A5; approximate: measured from a 1930 plate scan"}
+{"n": "Capucine Buff", "plate": 9, "col": "E", "row": 5, "h": "#EAC68F", "note": "Maerz & Paul 1930, Plate 9 E5; approximate: measured from a 1930 plate scan"}
+{"n": "Jonquil", "plate": 9, "col": "J", "row": 5, "h": "#ECC662", "note": "Maerz & Paul 1930, Plate 9 J5; approximate: measured from a 1930 plate scan"}
+{"n": "Apricot Y", "plate": 9, "col": "K", "row": 5, "h": "#EEC347", "note": "Maerz & Paul 1930, Plate 9 K5; approximate: measured from a 1930 plate scan"}
+{"n": "Cherub Orient Pk", "plate": 9, "col": "A", "row": 6, "h": "#E3B499", "note": "Maerz & Paul 1930, Plate 9 A6; approximate: measured from a 1930 plate scan"}
+{"n": "Golden Corn", "plate": 9, "col": "I", "row": 6, "h": "#EFC068", "note": "Maerz & Paul 1930, Plate 9 I6; approximate: measured from a 1930 plate scan"}
+{"n": "Forsythia", "plate": 9, "col": "K", "row": 6, "h": "#F0BB3E", "note": "Maerz & Paul 1930, Plate 9 K6; approximate: measured from a 1930 plate scan"}
+{"n": "Golden Glow", "plate": 9, "col": "L", "row": 6, "h": "#F0B81B", "note": "Maerz & Paul 1930, Plate 9 L6; approximate: measured from a 1930 plate scan"}
+{"n": "Trianon", "plate": 9, "col": "B", "row": 7, "h": "#EDAF7F", "note": "Maerz & Paul 1930, Plate 9 B7; approximate: measured from a 1930 plate scan"}
+{"n": "Cavalry DEEP CHROME YP", "plate": 9, "col": "L", "row": 7, "h": "#F3AC14", "note": "Maerz & Paul 1930, Plate 9 L7; approximate: measured from a 1930 plate scan"}
+{"n": "Ceres", "plate": 9, "col": "C", "row": 8, "h": "#F0A360", "note": "Maerz & Paul 1930, Plate 9 C8; approximate: measured from a 1930 plate scan"}
+{"n": "Japucine", "plate": 9, "col": "I", "row": 8, "h": "#F4A84A", "note": "Maerz & Paul 1930, Plate 9 I8; approximate: measured from a 1930 plate scan"}
+{"n": "Genista", "plate": 9, "col": "J", "row": 8, "h": "#F5A73C", "note": "Maerz & Paul 1930, Plate 9 J8; approximate: measured from a 1930 plate scan"}
+{"n": "Vapucine Y", "plate": 9, "col": "K", "row": 8, "h": "#F6A429", "note": "Maerz & Paul 1930, Plate 9 K8; approximate: measured from a 1930 plate scan"}
+{"n": "Mikado O", "plate": 9, "col": "J", "row": 9, "h": "#F89D2B", "note": "Maerz & Paul 1930, Plate 9 J9; approximate: measured from a 1930 plate scan"}
+{"n": "Sunkiss", "plate": 9, "col": "K", "row": 9, "h": "#F89B1C", "note": "Maerz & Paul 1930, Plate 9 K9; approximate: measured from a 1930 plate scan"}
+{"n": "Vloresco", "plate": 9, "col": "E", "row": 10, "h": "#F99736", "note": "Maerz & Paul 1930, Plate 9 E10; approximate: measured from a 1930 plate scan"}
+{"n": "PRINCE-TON O", "plate": 9, "col": "K", "row": 11, "h": "#F98704", "note": "Maerz & Paul 1930, Plate 9 K11; approximate: measured from a 1930 plate scan"}
+{"n": "SOLDER", "plate": 9, "col": "L", "row": 12, "h": "#FA7901", "note": "Maerz & Paul 1930, Plate 9 L12; approximate: measured from a 1930 plate scan"}
+{"n": "IVORY", "plate": 10, "col": "B", "row": 2, "h": "#D4C8A9", "note": "Maerz & Paul 1930, Plate 10 B2; approximate: measured from a 1930 plate scan"}
+{"n": "STRAW", "plate": 10, "col": "F", "row": 2, "h": "#DBCD91", "note": "Maerz & Paul 1930, Plate 10 F2; approximate: measured from a 1930 plate scan"}
+{"n": "Cockatoc", "plate": 10, "col": "H", "row": 2, "h": "#DCCD8C", "note": "Maerz & Paul 1930, Plate 10 H2; approximate: measured from a 1930 plate scan"}
+{"n": "Vanilla", "plate": 10, "col": "C", "row": 3, "h": "#D9C59C", "note": "Maerz & Paul 1930, Plate 10 C3; approximate: measured from a 1930 plate scan"}
+{"n": "LEG-HORN", "plate": 10, "col": "D", "row": 3, "h": "#DBC797", "note": "Maerz & Paul 1930, Plate 10 D3; approximate: measured from a 1930 plate scan"}
+{"n": "Nankeen", "plate": 10, "col": "F", "row": 3, "h": "#DDC98F", "note": "Maerz & Paul 1930, Plate 10 F3; approximate: measured from a 1930 plate scan"}
+{"n": "Corsi", "plate": 10, "col": "G", "row": 3, "h": "#DDC987", "note": "Maerz & Paul 1930, Plate 10 G3; approximate: measured from a 1930 plate scan"}
+{"n": "SUNSET", "plate": 10, "col": "C", "row": 4, "h": "#DBBF91", "note": "Maerz & Paul 1930, Plate 10 C4; approximate: measured from a 1930 plate scan"}
+{"n": "Sunlight", "plate": 10, "col": "H", "row": 4, "h": "#E0C47D", "note": "Maerz & Paul 1930, Plate 10 H4; approximate: measured from a 1930 plate scan"}
+{"n": "Pond Lily", "plate": 10, "col": "I", "row": 4, "h": "#E0C36C", "note": "Maerz & Paul 1930, Plate 10 I4; approximate: measured from a 1930 plate scan"}
+{"n": "Sp OME", "plate": 10, "col": "L", "row": 4, "h": "#E2BF1B", "note": "Maerz & Paul 1930, Plate 10 L4; approximate: measured from a 1930 plate scan"}
+{"n": "MAISE", "plate": 10, "col": "G", "row": 5, "h": "#E2BF76", "note": "Maerz & Paul 1930, Plate 10 G5; approximate: measured from a 1930 plate scan"}
+{"n": "Sugar Cane", "plate": 10, "col": "B", "row": 6, "h": "#E0AE7B", "note": "Maerz & Paul 1930, Plate 10 B6; approximate: measured from a 1930 plate scan"}
+{"n": "Cornhusk", "plate": 10, "col": "E", "row": 6, "h": "#E5B575", "note": "Maerz & Paul 1930, Plate 10 E6; approximate: measured from a 1930 plate scan"}
+{"n": "Chinese Y", "plate": 10, "col": "K", "row": 6, "h": "#E7AF2B", "note": "Maerz & Paul 1930, Plate 10 K6; approximate: measured from a 1930 plate scan"}
+{"n": "Ta-Ming", "plate": 10, "col": "L", "row": 6, "h": "#E7AE13", "note": "Maerz & Paul 1930, Plate 10 L6; approximate: measured from a 1930 plate scan"}
+{"n": "Sunrise Y", "plate": 10, "col": "C", "row": 7, "h": "#E5A464", "note": "Maerz & Paul 1930, Plate 10 C7; approximate: measured from a 1930 plate scan"}
+{"n": "APRICOT", "plate": 10, "col": "F", "row": 7, "h": "#E8A95F", "note": "Maerz & Paul 1930, Plate 10 F7; approximate: measured from a 1930 plate scan"}
+{"n": "Mirabelle", "plate": 10, "col": "J", "row": 7, "h": "#EAA63E", "note": "Maerz & Paul 1930, Plate 10 J7; approximate: measured from a 1930 plate scan"}
+{"n": "Snowshoe", "plate": 10, "col": "K", "row": 7, "h": "#EBA528", "note": "Maerz & Paul 1930, Plate 10 K7; approximate: measured from a 1930 plate scan"}
+{"n": "Saffron Y", "plate": 10, "col": "K", "row": 8, "h": "#F19819", "note": "Maerz & Paul 1930, Plate 10 K8; approximate: measured from a 1930 plate scan"}
+{"n": "Jacinthe", "plate": 10, "col": "I", "row": 9, "h": "#F5912B", "note": "Maerz & Paul 1930, Plate 10 I9; approximate: measured from a 1930 plate scan"}
+{"n": "Murous", "plate": 10, "col": "A", "row": 10, "h": "#EB762B", "note": "Maerz & Paul 1930, Plate 10 A10; approximate: measured from a 1930 plate scan"}
+{"n": "Navaho", "plate": 10, "col": "C", "row": 12, "h": "#F76901", "note": "Maerz & Paul 1930, Plate 10 C12; approximate: measured from a 1930 plate scan"}
+{"n": "HROME OP OME", "plate": 10, "col": "K", "row": 12, "h": "#F97001", "note": "Maerz & Paul 1930, Plate 10 K12; approximate: measured from a 1930 plate scan"}
+{"n": "Amber White", "plate": 11, "col": "C", "row": 1, "h": "#C5C4A7", "note": "Maerz & Paul 1930, Plate 11 C1; approximate: measured from a 1930 plate scan"}
+{"n": "Acacia", "plate": 11, "col": "K", "row": 1, "h": "#D0CB7E", "note": "Maerz & Paul 1930, Plate 11 K1; approximate: measured from a 1930 plate scan"}
+{"n": "ECRU BEIGE", "plate": 11, "col": "C", "row": 2, "h": "#C9BA9C", "note": "Maerz & Paul 1930, Plate 11 C2; approximate: measured from a 1930 plate scan"}
+{"n": "Pat", "plate": 11, "col": "L", "row": 2, "h": "#D2C46A", "note": "Maerz & Paul 1930, Plate 11 L2; approximate: measured from a 1930 plate scan"}
+{"n": "BISQUI", "plate": 11, "col": "A", "row": 3, "h": "#C0AA97", "note": "Maerz & Paul 1930, Plate 11 A3; approximate: measured from a 1930 plate scan"}
+{"n": "Canary Y Quince Y", "plate": 11, "col": "L", "row": 3, "h": "#D2BF65", "note": "Maerz & Paul 1930, Plate 11 L3; approximate: measured from a 1930 plate scan"}
+{"n": "Sombrero", "plate": 11, "col": "D", "row": 4, "h": "#D2AF7F", "note": "Maerz & Paul 1930, Plate 11 D4; approximate: measured from a 1930 plate scan"}
+{"n": "MAPLE", "plate": 11, "col": "E", "row": 4, "h": "#D1B17C", "note": "Maerz & Paul 1930, Plate 11 E4; approximate: measured from a 1930 plate scan"}
+{"n": "Mustard", "plate": 11, "col": "J", "row": 4, "h": "#D3B770", "note": "Maerz & Paul 1930, Plate 11 J4; approximate: measured from a 1930 plate scan"}
+{"n": "Gold", "plate": 11, "col": "K", "row": 4, "h": "#D4BA6C", "note": "Maerz & Paul 1930, Plate 11 K4; approximate: measured from a 1930 plate scan"}
+{"n": "Wax Y", "plate": 11, "col": "L", "row": 4, "h": "#D5BA5F", "note": "Maerz & Paul 1930, Plate 11 L4; approximate: measured from a 1930 plate scan"}
+{"n": "Sweetmeat", "plate": 11, "col": "C", "row": 5, "h": "#D0A985", "note": "Maerz & Paul 1930, Plate 11 C5; approximate: measured from a 1930 plate scan"}
+{"n": "Rafha", "plate": 11, "col": "E", "row": 5, "h": "#D5AB73", "note": "Maerz & Paul 1930, Plate 11 E5; approximate: measured from a 1930 plate scan"}
+{"n": "CHAMOIS", "plate": 11, "col": "I", "row": 5, "h": "#D4B067", "note": "Maerz & Paul 1930, Plate 11 I5; approximate: measured from a 1930 plate scan"}
+{"n": "Banana Sunbeam", "plate": 11, "col": "K", "row": 5, "h": "#D7B361", "note": "Maerz & Paul 1930, Plate 11 K5; approximate: measured from a 1930 plate scan"}
+{"n": "Lime Y", "plate": 11, "col": "L", "row": 5, "h": "#D8B259", "note": "Maerz & Paul 1930, Plate 11 L5; approximate: measured from a 1930 plate scan"}
+{"n": "Rattan", "plate": 11, "col": "K", "row": 6, "h": "#D9AB5A", "note": "Maerz & Paul 1930, Plate 11 K6; approximate: measured from a 1930 plate scan"}
+{"n": "Pink", "plate": 11, "col": "A", "row": 7, "h": "#C9815D", "note": "Maerz & Paul 1930, Plate 11 A7; approximate: measured from a 1930 plate scan"}
+{"n": "Toltec", "plate": 11, "col": "B", "row": 7, "h": "#D18C60", "note": "Maerz & Paul 1930, Plate 11 B7; approximate: measured from a 1930 plate scan"}
+{"n": "Auteuil", "plate": 11, "col": "C", "row": 7, "h": "#D79364", "note": "Maerz & Paul 1930, Plate 11 C7; approximate: measured from a 1930 plate scan"}
+{"n": "Golden Wheat", "plate": 11, "col": "D", "row": 7, "h": "#DA955B", "note": "Maerz & Paul 1930, Plate 11 D7; approximate: measured from a 1930 plate scan"}
+{"n": "BUFF", "plate": 11, "col": "K", "row": 7, "h": "#DE9E4D", "note": "Maerz & Paul 1930, Plate 11 K7; approximate: measured from a 1930 plate scan"}
+{"n": "YELLOW OCHREP", "plate": 11, "col": "L", "row": 7, "h": "#DE9E42", "note": "Maerz & Paul 1930, Plate 11 L7; approximate: measured from a 1930 plate scan"}
+{"n": "Gold Leaf", "plate": 11, "col": "K", "row": 8, "h": "#E19138", "note": "Maerz & Paul 1930, Plate 11 K8; approximate: measured from a 1930 plate scan"}
+{"n": "Oil Y", "plate": 12, "col": "L", "row": 1, "h": "#BBAF2B", "note": "Maerz & Paul 1930, Plate 12 L1; approximate: measured from a 1930 plate scan"}
+{"n": "Moonmis", "plate": 12, "col": "A", "row": 2, "h": "#A99885", "note": "Maerz & Paul 1930, Plate 12 A2; approximate: measured from a 1930 plate scan"}
+{"n": "Sallow", "plate": 12, "col": "E", "row": 2, "h": "#B7A468", "note": "Maerz & Paul 1930, Plate 12 E2; approximate: measured from a 1930 plate scan"}
+{"n": "Hay", "plate": 12, "col": "I", "row": 2, "h": "#BEA85F", "note": "Maerz & Paul 1930, Plate 12 I2; approximate: measured from a 1930 plate scan"}
+{"n": "Absinthe Y", "plate": 12, "col": "J", "row": 2, "h": "#C1AA56", "note": "Maerz & Paul 1930, Plate 12 J2; approximate: measured from a 1930 plate scan"}
+{"n": "OLD IVORY", "plate": 12, "col": "C", "row": 3, "h": "#B59A6C", "note": "Maerz & Paul 1930, Plate 12 C3; approximate: measured from a 1930 plate scan"}
+{"n": "CRASH", "plate": 12, "col": "D", "row": 3, "h": "#B79B67", "note": "Maerz & Paul 1930, Plate 12 D3; approximate: measured from a 1930 plate scan"}
+{"n": "Cloudy Amber", "plate": 12, "col": "K", "row": 3, "h": "#BEA143", "note": "Maerz & Paul 1930, Plate 12 K3; approximate: measured from a 1930 plate scan"}
+{"n": "Pyrite Y", "plate": 12, "col": "L", "row": 3, "h": "#BA9A22", "note": "Maerz & Paul 1930, Plate 12 L3; approximate: measured from a 1930 plate scan"}
+{"n": "Malacea", "plate": 12, "col": "C", "row": 4, "h": "#B89363", "note": "Maerz & Paul 1930, Plate 12 C4; approximate: measured from a 1930 plate scan"}
+{"n": "Tanaura", "plate": 12, "col": "D", "row": 4, "h": "#BA9560", "note": "Maerz & Paul 1930, Plate 12 D4; approximate: measured from a 1930 plate scan"}
+{"n": "Sulphine Y", "plate": 12, "col": "L", "row": 4, "h": "#BA931D", "note": "Maerz & Paul 1930, Plate 12 L4; approximate: measured from a 1930 plate scan"}
+{"n": "FALLOW", "plate": 12, "col": "B", "row": 5, "h": "#BA8F65", "note": "Maerz & Paul 1930, Plate 12 B5; approximate: measured from a 1930 plate scan"}
+{"n": "Manila", "plate": 12, "col": "C", "row": 5, "h": "#BA8F61", "note": "Maerz & Paul 1930, Plate 12 C5; approximate: measured from a 1930 plate scan"}
+{"n": "India Buff", "plate": 12, "col": "E", "row": 5, "h": "#BF9156", "note": "Maerz & Paul 1930, Plate 12 E5; approximate: measured from a 1930 plate scan"}
+{"n": "Walnut Taffy", "plate": 12, "col": "E", "row": 6, "h": "#C1894E", "note": "Maerz & Paul 1930, Plate 12 E6; approximate: measured from a 1930 plate scan"}
+{"n": "Powdered Gold", "plate": 12, "col": "I", "row": 6, "h": "#C58F47", "note": "Maerz & Paul 1930, Plate 12 I6; approximate: measured from a 1930 plate scan"}
+{"n": "CORK", "plate": 12, "col": "B", "row": 7, "h": "#BE7E4A", "note": "Maerz & Paul 1930, Plate 12 B7; approximate: measured from a 1930 plate scan"}
+{"n": "Papyrus", "plate": 12, "col": "C", "row": 7, "h": "#C07D45", "note": "Maerz & Paul 1930, Plate 12 C7; approximate: measured from a 1930 plate scan"}
+{"n": "BRAN", "plate": 12, "col": "D", "row": 7, "h": "#C17E42", "note": "Maerz & Paul 1930, Plate 12 D7; approximate: measured from a 1930 plate scan"}
+{"n": "CINNA-MON", "plate": 12, "col": "E", "row": 7, "h": "#C27E3F", "note": "Maerz & Paul 1930, Plate 12 E7; approximate: measured from a 1930 plate scan"}
+{"n": "PABLO", "plate": 12, "col": "G", "row": 7, "h": "#C5843D", "note": "Maerz & Paul 1930, Plate 12 G7; approximate: measured from a 1930 plate scan"}
+{"n": "Macaroon", "plate": 12, "col": "H", "row": 7, "h": "#C6833D", "note": "Maerz & Paul 1930, Plate 12 H7; approximate: measured from a 1930 plate scan"}
+{"n": "Desert", "plate": 12, "col": "I", "row": 7, "h": "#C8843B", "note": "Maerz & Paul 1930, Plate 12 I7; approximate: measured from a 1930 plate scan"}
+{"n": "Samovar", "plate": 12, "col": "K", "row": 7, "h": "#C8842A", "note": "Maerz & Paul 1930, Plate 12 K7; approximate: measured from a 1930 plate scan"}
+{"n": "Burnished Gold", "plate": 12, "col": "L", "row": 7, "h": "#C37D17", "note": "Maerz & Paul 1930, Plate 12 L7; approximate: measured from a 1930 plate scan"}
+{"n": "Hormosa", "plate": 12, "col": "A", "row": 8, "h": "#B56333", "note": "Maerz & Paul 1930, Plate 12 A8; approximate: measured from a 1930 plate scan"}
+{"n": "TOPAZ", "plate": 12, "col": "I", "row": 8, "h": "#CC7A2C", "note": "Maerz & Paul 1930, Plate 12 I8; approximate: measured from a 1930 plate scan"}
+{"n": "Spruce Y", "plate": 12, "col": "K", "row": 8, "h": "#CE7A22", "note": "Maerz & Paul 1930, Plate 12 K8; approximate: measured from a 1930 plate scan"}
+{"n": "Faloma", "plate": 12, "col": "A", "row": 9, "h": "#B95B25", "note": "Maerz & Paul 1930, Plate 12 A9; approximate: measured from a 1930 plate scan"}
+{"n": "Tarvest", "plate": 12, "col": "H", "row": 9, "h": "#CF711E", "note": "Maerz & Paul 1930, Plate 12 H9; approximate: measured from a 1930 plate scan"}
+{"n": "Maya", "plate": 12, "col": "A", "row": 10, "h": "#BB581F", "note": "Maerz & Paul 1930, Plate 12 A10; approximate: measured from a 1930 plate scan"}
+{"n": "Caramel", "plate": 12, "col": "F", "row": 10, "h": "#CE6817", "note": "Maerz & Paul 1930, Plate 12 F10; approximate: measured from a 1930 plate scan"}
+{"n": "Chinese Gold", "plate": 12, "col": "K", "row": 10, "h": "#D66810", "note": "Maerz & Paul 1930, Plate 12 K10; approximate: measured from a 1930 plate scan"}
+{"n": "Colour", "plate": 12, "col": "L", "row": 10, "h": "#CF640E", "note": "Maerz & Paul 1930, Plate 12 L10; approximate: measured from a 1930 plate scan", "uncertain": "dE00 35 from its ISCC-NBS 1955 block centroid (block 234); see research/MAERZ-PAUL.md s6"}
+{"n": "Lalavera", "plate": 12, "col": "A", "row": 12, "h": "#BF4708", "note": "Maerz & Paul 1930, Plate 12 A12; approximate: measured from a 1930 plate scan"}
+{"n": "Idorado", "plate": 12, "col": "B", "row": 12, "h": "#C64E09", "note": "Maerz & Paul 1930, Plate 12 B12; approximate: measured from a 1930 plate scan"}
+{"n": "Indian", "plate": 12, "col": "C", "row": 12, "h": "#C84F07", "note": "Maerz & Paul 1930, Plate 12 C12; approximate: measured from a 1930 plate scan", "uncertain": "dE00 20 from its ISCC-NBS 1955 block centroid (block 43); see research/MAERZ-PAUL.md s6"}
+{"n": "Sudan", "plate": 13, "col": "E", "row": 4, "h": "#A78A5E", "note": "Maerz & Paul 1930, Plate 13 E4; approximate: measured from a 1930 plate scan"}
+{"n": "Mastic", "plate": 13, "col": "E", "row": 5, "h": "#A88353", "note": "Maerz & Paul 1930, Plate 13 E5; approximate: measured from a 1930 plate scan"}
+{"n": "Bistre Gr", "plate": 13, "col": "L", "row": 5, "h": "#A88743", "note": "Maerz & Paul 1930, Plate 13 L5; approximate: measured from a 1930 plate scan"}
+{"n": "CRACK-ER", "plate": 13, "col": "D", "row": 6, "h": "#A67F54", "note": "Maerz & Paul 1930, Plate 13 D6; approximate: measured from a 1930 plate scan"}
+{"n": "Arizona", "plate": 13, "col": "E", "row": 6, "h": "#AA7F50", "note": "Maerz & Paul 1930, Plate 13 E6; approximate: measured from a 1930 plate scan"}
+{"n": "Oakbuff", "plate": 13, "col": "D", "row": 7, "h": "#AD7440", "note": "Maerz & Paul 1930, Plate 13 D7; approximate: measured from a 1930 plate scan"}
+{"n": "Yellow Beige", "plate": 13, "col": "H", "row": 7, "h": "#A87135", "note": "Maerz & Paul 1930, Plate 13 H7; approximate: measured from a 1930 plate scan"}
+{"n": "Bamboo", "plate": 13, "col": "I", "row": 7, "h": "#AE773D", "note": "Maerz & Paul 1930, Plate 13 I7; approximate: measured from a 1930 plate scan"}
+{"n": "Isabella", "plate": 13, "col": "K", "row": 7, "h": "#AF7838", "note": "Maerz & Paul 1930, Plate 13 K7; approximate: measured from a 1930 plate scan"}
+{"n": "Tinsel DEEP STONE", "plate": 13, "col": "L", "row": 7, "h": "#AE7730", "note": "Maerz & Paul 1930, Plate 13 L7; approximate: measured from a 1930 plate scan"}
+{"n": "Bure", "plate": 13, "col": "H", "row": 8, "h": "#AE692C", "note": "Maerz & Paul 1930, Plate 13 H8; approximate: measured from a 1930 plate scan"}
+{"n": "AZTEC Indian Tan", "plate": 13, "col": "I", "row": 8, "h": "#B36F32", "note": "Maerz & Paul 1930, Plate 13 I8; approximate: measured from a 1930 plate scan"}
+{"n": "Creole", "plate": 13, "col": "A", "row": 9, "h": "#6B6B69", "note": "Maerz & Paul 1930, Plate 13 A9; approximate: measured from a 1930 plate scan"}
+{"n": "Wild Honey", "plate": 13, "col": "B", "row": 9, "h": "#B15B2D", "note": "Maerz & Paul 1930, Plate 13 B9; approximate: measured from a 1930 plate scan"}
+{"n": "Sayal", "plate": 13, "col": "G", "row": 9, "h": "#B46222", "note": "Maerz & Paul 1930, Plate 13 G9; approximate: measured from a 1930 plate scan"}
+{"n": "Sonora", "plate": 13, "col": "A", "row": 10, "h": "#696968", "note": "Maerz & Paul 1930, Plate 13 A10; approximate: measured from a 1930 plate scan", "uncertain": "dE00 24 from its ISCC-NBS 1955 block centroid (block 54); see research/MAERZ-PAUL.md s6"}
+{"n": "Tawny", "plate": 13, "col": "D", "row": 10, "h": "#B25921", "note": "Maerz & Paul 1930, Plate 13 D10; approximate: measured from a 1930 plate scan"}
+{"n": "Pekinese", "plate": 13, "col": "G", "row": 10, "h": "#B75D20", "note": "Maerz & Paul 1930, Plate 13 G10; approximate: measured from a 1930 plate scan"}
+{"n": "Titian Gold", "plate": 13, "col": "A", "row": 11, "h": "#686867", "note": "Maerz & Paul 1930, Plate 13 A11; approximate: measured from a 1930 plate scan", "uncertain": "dE00 25 from its ISCC-NBS 1955 block centroid (block 54); see research/MAERZ-PAUL.md s6"}
+{"n": "Mango", "plate": 13, "col": "D", "row": 11, "h": "#B35117", "note": "Maerz & Paul 1930, Plate 13 D11; approximate: measured from a 1930 plate scan"}
+{"n": "Spice", "plate": 13, "col": "B", "row": 12, "h": "#B74408", "note": "Maerz & Paul 1930, Plate 13 B12; approximate: measured from a 1930 plate scan"}
+{"n": "Amber Br", "plate": 13, "col": "K", "row": 12, "h": "#BC5215", "note": "Maerz & Paul 1930, Plate 13 K12; approximate: measured from a 1930 plate scan"}
+{"n": "Palmleaf", "plate": 14, "col": "L", "row": 1, "h": "#8D8721", "note": "Maerz & Paul 1930, Plate 14 L1; approximate: measured from a 1930 plate scan; OCR 'Palmlea' corrected to 'Palmleaf' against the ISCC-NBS 1955 Maerz & Paul name list"}
+{"n": "Silver Fern", "plate": 14, "col": "J", "row": 2, "h": "#8C7E3C", "note": "Maerz & Paul 1930, Plate 14 J2; approximate: measured from a 1930 plate scan"}
+{"n": "OLD MOSS Olive Y", "plate": 14, "col": "L", "row": 2, "h": "#8D801E", "note": "Maerz & Paul 1930, Plate 14 L2; approximate: measured from a 1930 plate scan"}
+{"n": "Hemp", "plate": 14, "col": "H", "row": 4, "h": "#8B7440", "note": "Maerz & Paul 1930, Plate 14 H4; approximate: measured from a 1930 plate scan"}
+{"n": "OLD GOLD", "plate": 14, "col": "K", "row": 5, "h": "#907327", "note": "Maerz & Paul 1930, Plate 14 K5; approximate: measured from a 1930 plate scan", "uncertain": "dE00 20 from its ISCC-NBS 1955 block centroid (block 88); see research/MAERZ-PAUL.md s6"}
+{"n": "Airedale", "plate": 14, "col": "F", "row": 6, "h": "#906936", "note": "Maerz & Paul 1930, Plate 14 F6; approximate: measured from a 1930 plate scan"}
+{"n": "CITRINE Rhubarb", "plate": 14, "col": "L", "row": 6, "h": "#8E6B16", "note": "Maerz & Paul 1930, Plate 14 L6; approximate: measured from a 1930 plate scan"}
+{"n": "FAWN SANDAL-WOOD Autumn Blonde", "plate": 14, "col": "A", "row": 7, "h": "#864F35", "note": "Maerz & Paul 1930, Plate 14 A7; approximate: measured from a 1930 plate scan"}
+{"n": "Adobe", "plate": 14, "col": "D", "row": 7, "h": "#936235", "note": "Maerz & Paul 1930, Plate 14 D7; approximate: measured from a 1930 plate scan"}
+{"n": "Stag", "plate": 14, "col": "E", "row": 7, "h": "#966233", "note": "Maerz & Paul 1930, Plate 14 E7; approximate: measured from a 1930 plate scan"}
+{"n": "GOLD", "plate": 14, "col": "K", "row": 7, "h": "#956523", "note": "Maerz & Paul 1930, Plate 14 K7; approximate: measured from a 1930 plate scan", "uncertain": "dE00 25 from its ISCC-NBS 1955 block centroid (block 68); see research/MAERZ-PAUL.md s6"}
+{"n": "Bronkes", "plate": 14, "col": "L", "row": 7, "h": "#936518", "note": "Maerz & Paul 1930, Plate 14 L7; approximate: measured from a 1930 plate scan"}
+{"n": "Mocha Bisque", "plate": 14, "col": "C", "row": 8, "h": "#96572C", "note": "Maerz & Paul 1930, Plate 14 C8; approximate: measured from a 1930 plate scan"}
+{"n": "Mosul", "plate": 14, "col": "F", "row": 8, "h": "#985B2A", "note": "Maerz & Paul 1930, Plate 14 F8; approximate: measured from a 1930 plate scan"}
+{"n": "Madura", "plate": 14, "col": "I", "row": 8, "h": "#965B29", "note": "Maerz & Paul 1930, Plate 14 I8; approximate: measured from a 1930 plate scan"}
+{"n": "MLAPLE SUGAR", "plate": 14, "col": "J", "row": 8, "h": "#975B26", "note": "Maerz & Paul 1930, Plate 14 J8; approximate: measured from a 1930 plate scan"}
+{"n": "Stroller Tan", "plate": 14, "col": "C", "row": 9, "h": "#954C24", "note": "Maerz & Paul 1930, Plate 14 C9; approximate: measured from a 1930 plate scan"}
+{"n": "MUMMY", "plate": 14, "col": "J", "row": 9, "h": "#985322", "note": "Maerz & Paul 1930, Plate 14 J9; approximate: measured from a 1930 plate scan", "uncertain": "dE00 22 from its ISCC-NBS 1955 block centroid (block 81); see research/MAERZ-PAUL.md s6"}
+{"n": "Bunny", "plate": 14, "col": "K", "row": 9, "h": "#98561E", "note": "Maerz & Paul 1930, Plate 14 K9; approximate: measured from a 1930 plate scan"}
+{"n": "Seminole", "plate": 14, "col": "E", "row": 10, "h": "#9C4D1F", "note": "Maerz & Paul 1930, Plate 14 E10; approximate: measured from a 1930 plate scan"}
+{"n": "Antique Bronze", "plate": 14, "col": "L", "row": 10, "h": "#98531A", "note": "Maerz & Paul 1930, Plate 14 L10; approximate: measured from a 1930 plate scan"}
+{"n": "Cookie", "plate": 14, "col": "C", "row": 11, "h": "#954115", "note": "Maerz & Paul 1930, Plate 14 C11; approximate: measured from a 1930 plate scan"}
+{"n": "Tortoise Shell", "plate": 14, "col": "G", "row": 11, "h": "#9A4619", "note": "Maerz & Paul 1930, Plate 14 G11; approximate: measured from a 1930 plate scan"}
+{"n": "Jognac", "plate": 14, "col": "J", "row": 11, "h": "#9C4819", "note": "Maerz & Paul 1930, Plate 14 J11; approximate: measured from a 1930 plate scan"}
+{"n": "OLD ROW NG", "plate": 14, "col": "F", "row": 12, "h": "#994116", "note": "Maerz & Paul 1930, Plate 14 F12; approximate: measured from a 1930 plate scan"}
+{"n": "Cub", "plate": 15, "col": "C", "row": 1, "h": "#5F5C50", "note": "Maerz & Paul 1930, Plate 15 C1; approximate: measured from a 1930 plate scan"}
+{"n": "Traprock", "plate": 15, "col": "A", "row": 2, "h": "#737373", "note": "Maerz & Paul 1930, Plate 15 A2; approximate: measured from a 1930 plate scan; OCR 'Trapro' corrected to 'Traprock' against the ISCC-NBS 1955 Maerz & Paul name list"}
+{"n": "Beal", "plate": 15, "col": "C", "row": 2, "h": "#645949", "note": "Maerz & Paul 1930, Plate 15 C2; approximate: measured from a 1930 plate scan"}
+{"n": "Beech", "plate": 15, "col": "E", "row": 4, "h": "#68563D", "note": "Maerz & Paul 1930, Plate 15 E4; approximate: measured from a 1930 plate scan"}
+{"n": "Seaeiaeeasaneeteiies OLIVE", "plate": 15, "col": "K", "row": 4, "h": "#70632D", "note": "Maerz & Paul 1930, Plate 15 K4; approximate: measured from a 1930 plate scan"}
+{"n": "REEN", "plate": 15, "col": "L", "row": 4, "h": "#6F622B", "note": "Maerz & Paul 1930, Plate 15 L4; approximate: measured from a 1930 plate scan"}
+{"n": "Log Cal", "plate": 15, "col": "A", "row": 5, "h": "#727271", "note": "Maerz & Paul 1930, Plate 15 A5; approximate: measured from a 1930 plate scan"}
+{"n": "RAB", "plate": 15, "col": "J", "row": 5, "h": "#705D2F", "note": "Maerz & Paul 1930, Plate 15 J5; approximate: measured from a 1930 plate scan"}
+{"n": "Roman", "plate": 15, "col": "K", "row": 5, "h": "#726029", "note": "Maerz & Paul 1930, Plate 15 K5; approximate: measured from a 1930 plate scan", "uncertain": "dE00 37 from its ISCC-NBS 1955 block centroid (block 11); see research/MAERZ-PAUL.md s6"}
+{"n": "Metallic", "plate": 15, "col": "K", "row": 6, "h": "#735A29", "note": "Maerz & Paul 1930, Plate 15 K6; approximate: measured from a 1930 plate scan"}
+{"n": "ACORN Meadow", "plate": 15, "col": "E", "row": 7, "h": "#69462E", "note": "Maerz & Paul 1930, Plate 15 E7; approximate: measured from a 1930 plate scan"}
+{"n": "Chukker Tamara", "plate": 15, "col": "C", "row": 8, "h": "#673D27", "note": "Maerz & Paul 1930, Plate 15 C8; approximate: measured from a 1930 plate scan"}
+{"n": "Sphinx Mustang", "plate": 15, "col": "E", "row": 8, "h": "#6B4127", "note": "Maerz & Paul 1930, Plate 15 E8; approximate: measured from a 1930 plate scan"}
+{"n": "Teakwoc Pinecone", "plate": 15, "col": "C", "row": 9, "h": "#683A23", "note": "Maerz & Paul 1930, Plate 15 C9; approximate: measured from a 1930 plate scan"}
+{"n": "English Circassig", "plate": 15, "col": "A", "row": 10, "h": "#6C6D6C", "note": "Maerz & Paul 1930, Plate 15 A10; approximate: measured from a 1930 plate scan"}
+{"n": "OLIVE V Collie", "plate": 15, "col": "E", "row": 10, "h": "#6B391E", "note": "Maerz & Paul 1930, Plate 15 E10; approximate: measured from a 1930 plate scan"}
+{"n": "JOD", "plate": 15, "col": "F", "row": 10, "h": "#683A1F", "note": "Maerz & Paul 1930, Plate 15 F10; approximate: measured from a 1930 plate scan"}
+{"n": "Whippet", "plate": 15, "col": "K", "row": 10, "h": "#764822", "note": "Maerz & Paul 1930, Plate 15 K10; approximate: measured from a 1930 plate scan"}
+{"n": "Coffee", "plate": 15, "col": "A", "row": 11, "h": "#6B6B6B", "note": "Maerz & Paul 1930, Plate 15 A11; approximate: measured from a 1930 plate scan"}
+{"n": "Cowboy NEW BR Brussels", "plate": 15, "col": "E", "row": 11, "h": "#6B3518", "note": "Maerz & Paul 1930, Plate 15 E11; approximate: measured from a 1930 plate scan"}
+{"n": "Buffalo", "plate": 15, "col": "K", "row": 11, "h": "#794622", "note": "Maerz & Paul 1930, Plate 15 K11; approximate: measured from a 1930 plate scan"}
+{"n": "BURNT", "plate": 15, "col": "A", "row": 12, "h": "#6D6D6F", "note": "Maerz & Paul 1930, Plate 15 A12; approximate: measured from a 1930 plate scan", "uncertain": "dE00 29 from its ISCC-NBS 1955 block centroid (block 13); see research/MAERZ-PAUL.md s6"}
+{"n": "Partridge RAW Uh", "plate": 15, "col": "K", "row": 12, "h": "#7C4626", "note": "Maerz & Paul 1930, Plate 15 K12; approximate: measured from a 1930 plate scan"}
+{"n": "Gargoyle", "plate": 16, "col": "C", "row": 1, "h": "#26272E", "note": "Maerz & Paul 1930, Plate 16 C1; approximate: measured from a 1930 plate scan; OCR 'Gargoy' corrected to 'Gargoyle' against the ISCC-NBS 1955 Maerz & Paul name list"}
+{"n": "BROWN", "plate": 16, "col": "B", "row": 2, "h": "#232528", "note": "Maerz & Paul 1930, Plate 16 B2; approximate: measured from a 1930 plate scan", "uncertain": "dE00 24 from its ISCC-NBS 1955 block centroid (block 58); see research/MAERZ-PAUL.md s6"}
+{"n": "Phantor", "plate": 16, "col": "A", "row": 3, "h": "#6D7397", "note": "Maerz & Paul 1930, Plate 16 A3; approximate: measured from a 1930 plate scan"}
+{"n": "Rodent", "plate": 16, "col": "C", "row": 3, "h": "#28262B", "note": "Maerz & Paul 1930, Plate 16 C3; approximate: measured from a 1930 plate scan"}
+{"n": "Taupe", "plate": 16, "col": "B", "row": 4, "h": "#242325", "note": "Maerz & Paul 1930, Plate 16 B4; approximate: measured from a 1930 plate scan; OCR 'UPE' corrected to 'Taupe' against the ISCC-NBS 1955 Maerz & Paul name list"}
+{"n": "Guinea Hen", "plate": 16, "col": "C", "row": 4, "h": "#282528", "note": "Maerz & Paul 1930, Plate 16 C4; approximate: measured from a 1930 plate scan; OCR 'Guinea' corrected to 'Guinea Hen' against the ISCC-NBS 1955 Maerz & Paul name list"}
+{"n": "Bear Chaetur", "plate": 16, "col": "A", "row": 5, "h": "#6B7093", "note": "Maerz & Paul 1930, Plate 16 A5; approximate: measured from a 1930 plate scan"}
+{"n": "Sagebrus", "plate": 16, "col": "E", "row": 5, "h": "#282827", "note": "Maerz & Paul 1930, Plate 16 E5; approximate: measured from a 1930 plate scan"}
+{"n": "TAUPE", "plate": 16, "col": "A", "row": 6, "h": "#6B7093", "note": "Maerz & Paul 1930, Plate 16 A6; approximate: measured from a 1930 plate scan"}
+{"n": "Kangaroo", "plate": 16, "col": "C", "row": 6, "h": "#262422", "note": "Maerz & Paul 1930, Plate 16 C6; approximate: measured from a 1930 plate scan; OCR 'Kangaro' corrected to 'Kangaroo' against the ISCC-NBS 1955 Maerz & Paul name list"}
+{"n": "Beetle", "plate": 16, "col": "I", "row": 6, "h": "#2C2E2E", "note": "Maerz & Paul 1930, Plate 16 I6; approximate: measured from a 1930 plate scan"}
+{"n": "Kagle Clove B", "plate": 16, "col": "A", "row": 7, "h": "#6C7294", "note": "Maerz & Paul 1930, Plate 16 A7; approximate: measured from a 1930 plate scan"}
+{"n": "CASTOE", "plate": 16, "col": "A", "row": 8, "h": "#6A7092", "note": "Maerz & Paul 1930, Plate 16 A8; approximate: measured from a 1930 plate scan"}
+{"n": "Owl", "plate": 16, "col": "A", "row": 9, "h": "#6D7395", "note": "Maerz & Paul 1930, Plate 16 A9; approximate: measured from a 1930 plate scan", "uncertain": "dE00 22 from its ISCC-NBS 1955 block centroid (block 64); see research/MAERZ-PAUL.md s6"}
+{"n": "Bronze FE", "plate": 16, "col": "C", "row": 9, "h": "#29231F", "note": "Maerz & Paul 1930, Plate 16 C9; approximate: measured from a 1930 plate scan"}
+{"n": "Ivy Gree", "plate": 16, "col": "K", "row": 9, "h": "#2C2F2D", "note": "Maerz & Paul 1930, Plate 16 K9; approximate: measured from a 1930 plate scan"}
+{"n": "Opaline Gi", "plate": 17, "col": "A", "row": 6, "h": "#80817F", "note": "Maerz & Paul 1930, Plate 17 A6; approximate: measured from a 1930 plate scan"}
+{"n": "Viridine Gr", "plate": 17, "col": "I", "row": 6, "h": "#BECB85", "note": "Maerz & Paul 1930, Plate 17 I6; approximate: measured from a 1930 plate scan"}
+{"n": "Viridine Y", "plate": 17, "col": "L", "row": 7, "h": "#B2C239", "note": "Maerz & Paul 1930, Plate 17 L7; approximate: measured from a 1930 plate scan"}
+{"n": "Arcadian Gr", "plate": 17, "col": "G", "row": 8, "h": "#86BD75", "note": "Maerz & Paul 1930, Plate 17 G8; approximate: measured from a 1930 plate scan"}
+{"n": "Water Sprite", "plate": 17, "col": "I", "row": 8, "h": "#8ABE72", "note": "Maerz & Paul 1930, Plate 17 I8; approximate: measured from a 1930 plate scan"}
+{"n": "Jeva", "plate": 17, "col": "L", "row": 8, "h": "#9CBB36", "note": "Maerz & Paul 1930, Plate 17 L8; approximate: measured from a 1930 plate scan"}
+{"n": "Seafoam", "plate": 17, "col": "A", "row": 9, "h": "#7A7B7A", "note": "Maerz & Paul 1930, Plate 17 A9; approximate: measured from a 1930 plate scan", "uncertain": "dE00 31 from its ISCC-NBS 1955 block centroid (block 140); see research/MAERZ-PAUL.md s6"}
+{"n": "Sona", "plate": 18, "col": "L", "row": 2, "h": "#D2D17A", "note": "Maerz & Paul 1930, Plate 18 L2; approximate: measured from a 1930 plate scan"}
+{"n": "Glass Gr", "plate": 18, "col": "F", "row": 3, "h": "#C9CD9B", "note": "Maerz & Paul 1930, Plate 18 F3; approximate: measured from a 1930 plate scan"}
+{"n": "Oural G", "plate": 18, "col": "A", "row": 5, "h": "#7E7E7C", "note": "Maerz & Paul 1930, Plate 18 A5; approximate: measured from a 1930 plate scan"}
+{"n": "OCEAN GR", "plate": 18, "col": "B", "row": 5, "h": "#B1C5B2", "note": "Maerz & Paul 1930, Plate 18 B5; approximate: measured from a 1930 plate scan"}
+{"n": "Olivine", "plate": 18, "col": "C", "row": 6, "h": "#A8C29A", "note": "Maerz & Paul 1930, Plate 18 C6; approximate: measured from a 1930 plate scan"}
+{"n": "Tiber Gr", "plate": 18, "col": "E", "row": 6, "h": "#B0C492", "note": "Maerz & Paul 1930, Plate 18 E6; approximate: measured from a 1930 plate scan"}
+{"n": "GREEN", "plate": 18, "col": "B", "row": 7, "h": "#87BB9C", "note": "Maerz & Paul 1930, Plate 18 B7; approximate: measured from a 1930 plate scan", "uncertain": "dE00 35 from its ISCC-NBS 1955 block centroid (block 137); see research/MAERZ-PAUL.md s6"}
+{"n": "SPRING GR", "plate": 18, "col": "J", "row": 7, "h": "#95BB77", "note": "Maerz & Paul 1930, Plate 18 J7; approximate: measured from a 1930 plate scan"}
+{"n": "Psyche", "plate": 18, "col": "B", "row": 8, "h": "#62B48A", "note": "Maerz & Paul 1930, Plate 18 B8; approximate: measured from a 1930 plate scan"}
+{"n": "Paris", "plate": 18, "col": "B", "row": 9, "h": "#4CB07E", "note": "Maerz & Paul 1930, Plate 18 B9; approximate: measured from a 1930 plate scan"}
+{"n": "Butterfly", "plate": 19, "col": "I", "row": 1, "h": "#C7C07E", "note": "Maerz & Paul 1930, Plate 19 I1; approximate: measured from a 1930 plate scan; OCR 'Butterfl' corrected to 'Butterfly' against the ISCC-NBS 1955 Maerz & Paul name list"}
+{"n": "Linden Gr", "plate": 19, "col": "J", "row": 1, "h": "#C8C27F", "note": "Maerz & Paul 1930, Plate 19 J1; approximate: measured from a 1930 plate scan"}
+{"n": "Oyster Gy", "plate": 19, "col": "A", "row": 2, "h": "#7F807E", "note": "Maerz & Paul 1930, Plate 19 A2; approximate: measured from a 1930 plate scan"}
+{"n": "Reed Gr", "plate": 19, "col": "D", "row": 2, "h": "#BBBD91", "note": "Maerz & Paul 1930, Plate 19 D2; approximate: measured from a 1930 plate scan"}
+{"n": "Glaucous", "plate": 19, "col": "B", "row": 3, "h": "#AFB7A1", "note": "Maerz & Paul 1930, Plate 19 B3; approximate: measured from a 1930 plate scan", "uncertain": "dE00 37 from its ISCC-NBS 1955 block centroid (block 1); see research/MAERZ-PAUL.md s6"}
+{"n": "Corydalis Gr", "plate": 19, "col": "B", "row": 4, "h": "#A4B39C", "note": "Maerz & Paul 1930, Plate 19 B4; approximate: measured from a 1930 plate scan"}
+{"n": "NILE GR", "plate": 19, "col": "B", "row": 5, "h": "#9DB198", "note": "Maerz & Paul 1930, Plate 19 B5; approximate: measured from a 1930 plate scan"}
+{"n": "Lily", "plate": 19, "col": "H", "row": 5, "h": "#A5B173", "note": "Maerz & Paul 1930, Plate 19 H5; approximate: measured from a 1930 plate scan"}
+{"n": "Kildare Gr", "plate": 19, "col": "I", "row": 5, "h": "#A8B270", "note": "Maerz & Paul 1930, Plate 19 I5; approximate: measured from a 1930 plate scan"}
+{"n": "Sosse Gr", "plate": 19, "col": "L", "row": 5, "h": "#AEB664", "note": "Maerz & Paul 1930, Plate 19 L5; approximate: measured from a 1930 plate scan"}
+{"n": "Seacrest", "plate": 19, "col": "A", "row": 6, "h": "#7B7B79", "note": "Maerz & Paul 1930, Plate 19 A6; approximate: measured from a 1930 plate scan", "uncertain": "dE00 29 from its ISCC-NBS 1955 block centroid (block 135); see research/MAERZ-PAUL.md s6"}
+{"n": "PISTA-CHIO GR PIS-TACHE", "plate": 19, "col": "C", "row": 6, "h": "#95B086", "note": "Maerz & Paul 1930, Plate 19 C6; approximate: measured from a 1930 plate scan"}
+{"n": "SEA GR", "plate": 19, "col": "K", "row": 6, "h": "#A1B165", "note": "Maerz & Paul 1930, Plate 19 K6; approximate: measured from a 1930 plate scan"}
+{"n": "Jaliste", "plate": 19, "col": "L", "row": 6, "h": "#A1B15C", "note": "Maerz & Paul 1930, Plate 19 L6; approximate: measured from a 1930 plate scan"}
+{"n": "Russet Gr", "plate": 20, "col": "K", "row": 1, "h": "#BBB260", "note": "Maerz & Paul 1930, Plate 20 K1; approximate: measured from a 1930 plate scan"}
+{"n": "Mineral Grey", "plate": 20, "col": "A", "row": 2, "h": "#80807E", "note": "Maerz & Paul 1930, Plate 20 A2; approximate: measured from a 1930 plate scan"}
+{"n": "Artichoke Gr", "plate": 20, "col": "B", "row": 2, "h": "#9A9D8A", "note": "Maerz & Paul 1930, Plate 20 B2; approximate: measured from a 1930 plate scan"}
+{"n": "Sertosa", "plate": 20, "col": "L", "row": 3, "h": "#A7A959", "note": "Maerz & Paul 1930, Plate 20 L3; approximate: measured from a 1930 plate scan"}
+{"n": "Verdant", "plate": 20, "col": "K", "row": 5, "h": "#9BA458", "note": "Maerz & Paul 1930, Plate 20 K5; approximate: measured from a 1930 plate scan"}
+{"n": "Lettuce Gr", "plate": 20, "col": "L", "row": 5, "h": "#9CA553", "note": "Maerz & Paul 1930, Plate 20 L5; approximate: measured from a 1930 plate scan"}
+{"n": "IEA GREEN", "plate": 20, "col": "G", "row": 6, "h": "#819858", "note": "Maerz & Paul 1930, Plate 20 G6; approximate: measured from a 1930 plate scan"}
+{"n": "Fairy Gr", "plate": 20, "col": "A", "row": 7, "h": "#787876", "note": "Maerz & Paul 1930, Plate 20 A7; approximate: measured from a 1930 plate scan"}
+{"n": "Surf Gr", "plate": 20, "col": "C", "row": 7, "h": "#688E5F", "note": "Maerz & Paul 1930, Plate 20 C7; approximate: measured from a 1930 plate scan"}
+{"n": "Neen", "plate": 20, "col": "D", "row": 7, "h": "#698E59", "note": "Maerz & Paul 1930, Plate 20 D7; approximate: measured from a 1930 plate scan"}
+{"n": "Killarney Gr", "plate": 20, "col": "A", "row": 9, "h": "#757573", "note": "Maerz & Paul 1930, Plate 20 A9; approximate: measured from a 1930 plate scan"}
+{"n": "Locarno Gr", "plate": 20, "col": "A", "row": 11, "h": "#707170", "note": "Maerz & Paul 1930, Plate 20 A11; approximate: measured from a 1930 plate scan"}
+{"n": "Grey Drab Quaker Gy", "plate": 21, "col": "B", "row": 1, "h": "#989785", "note": "Maerz & Paul 1930, Plate 21 B1; approximate: measured from a 1930 plate scan"}
+{"n": "Grape Gr", "plate": 21, "col": "J", "row": 1, "h": "#A49E56", "note": "Maerz & Paul 1930, Plate 21 J1; approximate: measured from a 1930 plate scan"}
+{"n": "MER-MAID", "plate": 21, "col": "B", "row": 2, "h": "#909380", "note": "Maerz & Paul 1930, Plate 21 B2; approximate: measured from a 1930 plate scan"}
+{"n": "Silver Gr", "plate": 21, "col": "F", "row": 3, "h": "#919564", "note": "Maerz & Paul 1930, Plate 21 F3; approximate: measured from a 1930 plate scan"}
+{"n": "Courge Gr", "plate": 21, "col": "L", "row": 3, "h": "#94952C", "note": "Maerz & Paul 1930, Plate 21 L3; approximate: measured from a 1930 plate scan"}
+{"n": "Rainette", "plate": 21, "col": "K", "row": 4, "h": "#92964A", "note": "Maerz & Paul 1930, Plate 21 K4; approximate: measured from a 1930 plate scan"}
+{"n": "Biscay Gr", "plate": 21, "col": "K", "row": 5, "h": "#8C9344", "note": "Maerz & Paul 1930, Plate 21 K5; approximate: measured from a 1930 plate scan"}
+{"n": "GRASS GR", "plate": 21, "col": "L", "row": 5, "h": "#898F26", "note": "Maerz & Paul 1930, Plate 21 L5; approximate: measured from a 1930 plate scan"}
+{"n": "Aignon", "plate": 21, "col": "J", "row": 6, "h": "#818D4D", "note": "Maerz & Paul 1930, Plate 21 J6; approximate: measured from a 1930 plate scan"}
+{"n": "Parrot Gr", "plate": 21, "col": "L", "row": 6, "h": "#7F8A28", "note": "Maerz & Paul 1930, Plate 21 L6; approximate: measured from a 1930 plate scan"}
+{"n": "Ninter Gr", "plate": 21, "col": "E", "row": 9, "h": "#417F46", "note": "Maerz & Paul 1930, Plate 21 E9; approximate: measured from a 1930 plate scan"}
+{"n": "Mistletoe", "plate": 22, "col": "A", "row": 5, "h": "#787877", "note": "Maerz & Paul 1930, Plate 22 A5; approximate: measured from a 1930 plate scan; OCR 'Mistleto' corrected to 'Mistletoe' against the ISCC-NBS 1955 Maerz & Paul name list"}
+{"n": "Negro", "plate": 22, "col": "I", "row": 5, "h": "#767B47", "note": "Maerz & Paul 1930, Plate 22 I5; approximate: measured from a 1930 plate scan; OCR 'EGR' corrected to 'Negro' against the ISCC-NBS 1955 Maerz & Paul name list", "uncertain": "dE00 28 from its ISCC-NBS 1955 block centroid (block 81); see research/MAERZ-PAUL.md s6"}
+{"n": "PALMET-TO", "plate": 22, "col": "A", "row": 6, "h": "#797A78", "note": "Maerz & Paul 1930, Plate 22 A6; approximate: measured from a 1930 plate scan"}
+{"n": "Cactus", "plate": 22, "col": "B", "row": 7, "h": "#446B4E", "note": "Maerz & Paul 1930, Plate 22 B7; approximate: measured from a 1930 plate scan"}
+{"n": "Civette", "plate": 22, "col": "D", "row": 8, "h": "#446D3D", "note": "Maerz & Paul 1930, Plate 22 D8; approximate: measured from a 1930 plate scan"}
+{"n": "Aradiise", "plate": 22, "col": "L", "row": 11, "h": "#26672F", "note": "Maerz & Paul 1930, Plate 22 L11; approximate: measured from a 1930 plate scan"}
+{"n": "Alfalfa", "plate": 22, "col": "B", "row": 12, "h": "#085A33", "note": "Maerz & Paul 1930, Plate 22 B12; approximate: measured from a 1930 plate scan"}
+{"n": "Hellebo", "plate": 23, "col": "K", "row": 3, "h": "#5C5F31", "note": "Maerz & Paul 1930, Plate 23 K3; approximate: measured from a 1930 plate scan"}
+{"n": "Green", "plate": 23, "col": "L", "row": 3, "h": "#5D6030", "note": "Maerz & Paul 1930, Plate 23 L3; approximate: measured from a 1930 plate scan"}
+{"n": "LINCOL", "plate": 23, "col": "I", "row": 4, "h": "#525633", "note": "Maerz & Paul 1930, Plate 23 I4; approximate: measured from a 1930 plate scan"}
+{"n": "GREEN", "plate": 23, "col": "J", "row": 4, "h": "#555834", "note": "Maerz & Paul 1930, Plate 23 J4; approximate: measured from a 1930 plate scan"}
+{"n": "Quaker", "plate": 23, "col": "K", "row": 4, "h": "#585B2F", "note": "Maerz & Paul 1930, Plate 23 K4; approximate: measured from a 1930 plate scan", "uncertain": "dE00 29 from its ISCC-NBS 1955 block centroid (block 233); see research/MAERZ-PAUL.md s6"}
+{"n": "Elm Gre", "plate": 23, "col": "I", "row": 5, "h": "#4F5432", "note": "Maerz & Paul 1930, Plate 23 I5; approximate: measured from a 1930 plate scan"}
+{"n": "Cedar G", "plate": 23, "col": "K", "row": 5, "h": "#53582E", "note": "Maerz & Paul 1930, Plate 23 K5; approximate: measured from a 1930 plate scan"}
+{"n": "Cypress Forest G", "plate": 23, "col": "K", "row": 6, "h": "#4B552E", "note": "Maerz & Paul 1930, Plate 23 K6; approximate: measured from a 1930 plate scan"}
+{"n": "Kmpire C", "plate": 23, "col": "E", "row": 9, "h": "#27432E", "note": "Maerz & Paul 1930, Plate 23 E9; approximate: measured from a 1930 plate scan"}
+{"n": "Meadows", "plate": 23, "col": "G", "row": 9, "h": "#2C472F", "note": "Maerz & Paul 1930, Plate 23 G9; approximate: measured from a 1930 plate scan"}
+{"n": "Polo Gree", "plate": 23, "col": "I", "row": 9, "h": "#304B2D", "note": "Maerz & Paul 1930, Plate 23 I9; approximate: measured from a 1930 plate scan"}
+{"n": "Monticell", "plate": 23, "col": "E", "row": 11, "h": "#1B402A", "note": "Maerz & Paul 1930, Plate 23 E11; approximate: measured from a 1930 plate scan"}
+{"n": "Yew Gr Brewste", "plate": 24, "col": "K", "row": 1, "h": "#693E2F", "note": "Maerz & Paul 1930, Plate 24 K1; approximate: measured from a 1930 plate scan"}
+{"n": "Bat Iron Gr", "plate": 24, "col": "A", "row": 2, "h": "#A25D71", "note": "Maerz & Paul 1930, Plate 24 A2; approximate: measured from a 1930 plate scan"}
+{"n": "Swamp", "plate": 24, "col": "A", "row": 9, "h": "#A65F73", "note": "Maerz & Paul 1930, Plate 24 A9; approximate: measured from a 1930 plate scan", "uncertain": "dE00 40 from its ISCC-NBS 1955 block centroid (block 151); see research/MAERZ-PAUL.md s6"}
+{"n": "Shirvan", "plate": 24, "col": "C", "row": 10, "h": "#1E2527", "note": "Maerz & Paul 1930, Plate 24 C10; approximate: measured from a 1930 plate scan"}
+{"n": "HUNTEI Elephant", "plate": 24, "col": "C", "row": 11, "h": "#182526", "note": "Maerz & Paul 1930, Plate 24 C11; approximate: measured from a 1930 plate scan"}
+{"n": "Tartan G", "plate": 24, "col": "E", "row": 11, "h": "#202824", "note": "Maerz & Paul 1930, Plate 24 E11; approximate: measured from a 1930 plate scan"}
+{"n": "Evergreen", "plate": 24, "col": "E", "row": 12, "h": "#1C2825", "note": "Maerz & Paul 1930, Plate 24 E12; approximate: measured from a 1930 plate scan; OCR 'EVERGR' corrected to 'Evergreen' against the ISCC-NBS 1955 Maerz & Paul name list", "uncertain": "dE00 22 from its ISCC-NBS 1955 block centroid (block 137); see research/MAERZ-PAUL.md s6"}
+{"n": "Seaspray", "plate": 25, "col": "D", "row": 3, "h": "#BAD0CD", "note": "Maerz & Paul 1930, Plate 25 D3; approximate: measured from a 1930 plate scan; OCR 'SPRAY' corrected to 'Seaspray' against the ISCC-NBS 1955 Maerz & Paul name list"}
+{"n": "Cascade", "plate": 25, "col": "J", "row": 3, "h": "#9ACCCC", "note": "Maerz & Paul 1930, Plate 25 J3; approximate: measured from a 1930 plate scan"}
+{"n": "HORIZOI BL", "plate": 25, "col": "A", "row": 4, "h": "#787876", "note": "Maerz & Paul 1930, Plate 25 A4; approximate: measured from a 1930 plate scan"}
+{"n": "Turquoise Gr", "plate": 25, "col": "I", "row": 5, "h": "#88C4BE", "note": "Maerz & Paul 1930, Plate 25 I5; approximate: measured from a 1930 plate scan"}
+{"n": "Beryl Gr", "plate": 25, "col": "J", "row": 5, "h": "#7DC3BD", "note": "Maerz & Paul 1930, Plate 25 J5; approximate: measured from a 1930 plate scan"}
+{"n": "Sprite", "plate": 25, "col": "K", "row": 6, "h": "#59BBB2", "note": "Maerz & Paul 1930, Plate 25 K6; approximate: measured from a 1930 plate scan"}
+{"n": "Variscite Gr", "plate": 25, "col": "B", "row": 7, "h": "#94C4A9", "note": "Maerz & Paul 1930, Plate 25 B7; approximate: measured from a 1930 plate scan"}
+{"n": "Etain BI", "plate": 26, "col": "F", "row": 1, "h": "#ACCBCB", "note": "Maerz & Paul 1930, Plate 26 F1; approximate: measured from a 1930 plate scan"}
+{"n": "Lumiere Bl", "plate": 26, "col": "I", "row": 1, "h": "#8AC7CC", "note": "Maerz & Paul 1930, Plate 26 I1; approximate: measured from a 1930 plate scan"}
+{"n": "Nile Bl", "plate": 26, "col": "J", "row": 2, "h": "#67C0C3", "note": "Maerz & Paul 1930, Plate 26 J2; approximate: measured from a 1930 plate scan"}
+{"n": "Adriatic", "plate": 26, "col": "L", "row": 2, "h": "#19B6C5", "note": "Maerz & Paul 1930, Plate 26 L2; approximate: measured from a 1930 plate scan", "uncertain": "dE00 22 from its ISCC-NBS 1955 block centroid (block 164); see research/MAERZ-PAUL.md s6"}
+{"n": "Lichen G", "plate": 26, "col": "A", "row": 4, "h": "#80807E", "note": "Maerz & Paul 1930, Plate 26 A4; approximate: measured from a 1930 plate scan"}
+{"n": "Lapis", "plate": 26, "col": "K", "row": 5, "h": "#24AEAC", "note": "Maerz & Paul 1930, Plate 26 K5; approximate: measured from a 1930 plate scan"}
+{"n": "Sulphate Gr", "plate": 26, "col": "J", "row": 8, "h": "#16A38E", "note": "Maerz & Paul 1930, Plate 26 J8; approximate: measured from a 1930 plate scan"}
+{"n": "GREENP", "plate": 26, "col": "C", "row": 11, "h": "#1BA66C", "note": "Maerz & Paul 1930, Plate 26 C11; approximate: measured from a 1930 plate scan"}
+{"n": "Fox Tro", "plate": 27, "col": "K", "row": 1, "h": "#7ABBBE", "note": "Maerz & Paul 1930, Plate 27 K1; approximate: measured from a 1930 plate scan"}
+{"n": "Court Grey", "plate": 27, "col": "B", "row": 2, "h": "#B7BAA6", "note": "Maerz & Paul 1930, Plate 27 B2; approximate: measured from a 1930 plate scan"}
+{"n": "Venice Red", "plate": 27, "col": "K", "row": 2, "h": "#70B9B6", "note": "Maerz & Paul 1930, Plate 27 K2; approximate: measured from a 1930 plate scan; OCR 'Venice' corrected to 'Venice Red' against the ISCC-NBS 1955 Maerz & Paul name list", "uncertain": "dE00 54 from its ISCC-NBS 1955 block centroid (block 43); see research/MAERZ-PAUL.md s6"}
+{"n": "Robin's Kgg Bl", "plate": 27, "col": "H", "row": 3, "h": "#93BAB2", "note": "Maerz & Paul 1930, Plate 27 H3; approximate: measured from a 1930 plate scan"}
+{"n": "Niagara Gr", "plate": 27, "col": "H", "row": 4, "h": "#85B6AB", "note": "Maerz & Paul 1930, Plate 27 H4; approximate: measured from a 1930 plate scan"}
+{"n": "Monaco", "plate": 27, "col": "K", "row": 4, "h": "#5FB1AA", "note": "Maerz & Paul 1930, Plate 27 K4; approximate: measured from a 1930 plate scan"}
+{"n": "Glaucous-Green", "plate": 27, "col": "B", "row": 5, "h": "#9EB298", "note": "Maerz & Paul 1930, Plate 27 B5; approximate: measured from a 1930 plate scan"}
+{"n": "Cabaret", "plate": 27, "col": "I", "row": 6, "h": "#68AE9F", "note": "Maerz & Paul 1930, Plate 27 I6; approximate: measured from a 1930 plate scan"}
+{"n": "Naiad", "plate": 27, "col": "B", "row": 7, "h": "#75A682", "note": "Maerz & Paul 1930, Plate 27 B7; approximate: measured from a 1930 plate scan"}
+{"n": "Cuaquet", "plate": 27, "col": "H", "row": 7, "h": "#5EA895", "note": "Maerz & Paul 1930, Plate 27 H7; approximate: measured from a 1930 plate scan"}
+{"n": "Veptune", "plate": 27, "col": "J", "row": 8, "h": "#40A38C", "note": "Maerz & Paul 1930, Plate 27 J8; approximate: measured from a 1930 plate scan"}
+{"n": "FRENCH GREY", "plate": 28, "col": "C", "row": 1, "h": "#9CA299", "note": "Maerz & Paul 1930, Plate 28 C1; approximate: measured from a 1930 plate scan"}
+{"n": "Huron", "plate": 28, "col": "J", "row": 2, "h": "#5D9F9D", "note": "Maerz & Paul 1930, Plate 28 J2; approximate: measured from a 1930 plate scan"}
+{"n": "Pine Frost", "plate": 28, "col": "B", "row": 4, "h": "#86977F", "note": "Maerz & Paul 1930, Plate 28 B4; approximate: measured from a 1930 plate scan"}
+{"n": "Opal", "plate": 28, "col": "K", "row": 5, "h": "#38958F", "note": "Maerz & Paul 1930, Plate 28 K5; approximate: measured from a 1930 plate scan"}
+{"n": "Corsage Gr", "plate": 28, "col": "G", "row": 6, "h": "#529285", "note": "Maerz & Paul 1930, Plate 28 G6; approximate: measured from a 1930 plate scan"}
+{"n": "Matrix", "plate": 28, "col": "L", "row": 6, "h": "#0D8E86", "note": "Maerz & Paul 1930, Plate 28 L6; approximate: measured from a 1930 plate scan"}
+{"n": "Rejane Gr", "plate": 28, "col": "A", "row": 7, "h": "#767775", "note": "Maerz & Paul 1930, Plate 28 A7; approximate: measured from a 1930 plate scan"}
+{"n": "Vall Gr", "plate": 28, "col": "L", "row": 8, "h": "#048776", "note": "Maerz & Paul 1930, Plate 28 L8; approximate: measured from a 1930 plate scan"}
+{"n": "Dewkiss", "plate": 29, "col": "C", "row": 3, "h": "#848F7E", "note": "Maerz & Paul 1930, Plate 29 C3; approximate: measured from a 1930 plate scan"}
+{"n": "Sorrento", "plate": 29, "col": "L", "row": 3, "h": "#047583", "note": "Maerz & Paul 1930, Plate 29 L3; approximate: measured from a 1930 plate scan"}
+{"n": "Celandine Gr", "plate": 29, "col": "B", "row": 4, "h": "#88927A", "note": "Maerz & Paul 1930, Plate 29 B4; approximate: measured from a 1930 plate scan"}
+{"n": "Serpent", "plate": 29, "col": "D", "row": 5, "h": "#728A7A", "note": "Maerz & Paul 1930, Plate 29 D5; approximate: measured from a 1930 plate scan"}
+{"n": "Croelain", "plate": 29, "col": "J", "row": 5, "h": "#30817A", "note": "Maerz & Paul 1930, Plate 29 J5; approximate: measured from a 1930 plate scan"}
+{"n": "Posy Gr", "plate": 29, "col": "E", "row": 6, "h": "#5D8170", "note": "Maerz & Paul 1930, Plate 29 E6; approximate: measured from a 1930 plate scan"}
+{"n": "Kremlin", "plate": 29, "col": "L", "row": 6, "h": "#036A70", "note": "Maerz & Paul 1930, Plate 29 L6; approximate: measured from a 1930 plate scan"}
+{"n": "Paddock", "plate": 29, "col": "L", "row": 7, "h": "#016765", "note": "Maerz & Paul 1930, Plate 29 L7; approximate: measured from a 1930 plate scan"}
+{"n": "u Chi", "plate": 29, "col": "K", "row": 12, "h": "#025F46", "note": "Maerz & Paul 1930, Plate 29 K12; approximate: measured from a 1930 plate scan"}
+{"n": "Cabb Gr e", "plate": 30, "col": "G", "row": 1, "h": "#6A7574", "note": "Maerz & Paul 1930, Plate 30 G1; approximate: measured from a 1930 plate scan"}
+{"n": "Storm Grey", "plate": 30, "col": "C", "row": 2, "h": "#797C6F", "note": "Maerz & Paul 1930, Plate 30 C2; approximate: measured from a 1930 plate scan"}
+{"n": "Michigar", "plate": 30, "col": "L", "row": 2, "h": "#327575", "note": "Maerz & Paul 1930, Plate 30 L2; approximate: measured from a 1930 plate scan"}
+{"n": "Silverpine", "plate": 30, "col": "E", "row": 5, "h": "#5B7368", "note": "Maerz & Paul 1930, Plate 30 E5; approximate: measured from a 1930 plate scan"}
+{"n": "ALMOND GR", "plate": 30, "col": "E", "row": 6, "h": "#507062", "note": "Maerz & Paul 1930, Plate 30 E6; approximate: measured from a 1930 plate scan"}
+{"n": "Russian Gr", "plate": 30, "col": "D", "row": 7, "h": "#426E59", "note": "Maerz & Paul 1930, Plate 30 D7; approximate: measured from a 1930 plate scan"}
+{"n": "Amulet", "plate": 30, "col": "L", "row": 7, "h": "#0F5F57", "note": "Maerz & Paul 1930, Plate 30 L7; approximate: measured from a 1930 plate scan"}
+{"n": "Kashmir", "plate": 30, "col": "E", "row": 8, "h": "#366D54", "note": "Maerz & Paul 1930, Plate 30 E8; approximate: measured from a 1930 plate scan"}
+{"n": "Meadow", "plate": 30, "col": "D", "row": 10, "h": "#256949", "note": "Maerz & Paul 1930, Plate 30 D10; approximate: measured from a 1930 plate scan"}
+{"n": "Amarna", "plate": 30, "col": "K", "row": 11, "h": "#075B44", "note": "Maerz & Paul 1930, Plate 30 K11; approximate: measured from a 1930 plate scan"}
+{"n": "Stone C", "plate": 31, "col": "A", "row": 2, "h": "#737271", "note": "Maerz & Paul 1930, Plate 31 A2; approximate: measured from a 1930 plate scan"}
+{"n": "Castor", "plate": 31, "col": "C", "row": 2, "h": "#58594B", "note": "Maerz & Paul 1930, Plate 31 C2; approximate: measured from a 1930 plate scan"}
+{"n": "Pan", "plate": 31, "col": "I", "row": 3, "h": "#3A5451", "note": "Maerz & Paul 1930, Plate 31 I3; approximate: measured from a 1930 plate scan"}
+{"n": "Bayou", "plate": 31, "col": "K", "row": 3, "h": "#295252", "note": "Maerz & Paul 1930, Plate 31 K3; approximate: measured from a 1930 plate scan"}
+{"n": "Juniper", "plate": 31, "col": "G", "row": 4, "h": "#3C4D49", "note": "Maerz & Paul 1930, Plate 31 G4; approximate: measured from a 1930 plate scan"}
+{"n": "Pinegrov Kabistar", "plate": 31, "col": "G", "row": 5, "h": "#394C46", "note": "Maerz & Paul 1930, Plate 31 G5; approximate: measured from a 1930 plate scan"}
+{"n": "Aspen G", "plate": 31, "col": "C", "row": 6, "h": "#444F3F", "note": "Maerz & Paul 1930, Plate 31 C6; approximate: measured from a 1930 plate scan"}
+{"n": "Gardenie", "plate": 31, "col": "G", "row": 6, "h": "#324A42", "note": "Maerz & Paul 1930, Plate 31 G6; approximate: measured from a 1930 plate scan"}
+{"n": "Nickle G Frosty G", "plate": 31, "col": "E", "row": 7, "h": "#364A3B", "note": "Maerz & Paul 1930, Plate 31 E7; approximate: measured from a 1930 plate scan"}
+{"n": "Bosphorus", "plate": 31, "col": "K", "row": 7, "h": "#1B4742", "note": "Maerz & Paul 1930, Plate 31 K7; approximate: measured from a 1930 plate scan; OCR 'Bosphor' corrected to 'Bosphorus' against the ISCC-NBS 1955 Maerz & Paul name list"}
+{"n": "Poplar", "plate": 31, "col": "C", "row": 8, "h": "#304A37", "note": "Maerz & Paul 1930, Plate 31 C8; approximate: measured from a 1930 plate scan"}
+{"n": "Antique", "plate": 31, "col": "E", "row": 8, "h": "#2D4939", "note": "Maerz & Paul 1930, Plate 31 E8; approximate: measured from a 1930 plate scan", "uncertain": "dE00 34 from its ISCC-NBS 1955 block centroid (block 94); see research/MAERZ-PAUL.md s6"}
+{"n": "Alhambra", "plate": 31, "col": "K", "row": 8, "h": "#164540", "note": "Maerz & Paul 1930, Plate 31 K8; approximate: measured from a 1930 plate scan; OCR 'Alhambr' corrected to 'Alhambra' against the ISCC-NBS 1955 Maerz & Paul name list"}
+{"n": "Alpine G", "plate": 31, "col": "C", "row": 9, "h": "#2A4A35", "note": "Maerz & Paul 1930, Plate 31 C9; approximate: measured from a 1930 plate scan"}
+{"n": "Danube", "plate": 31, "col": "A", "row": 10, "h": "#6F6F6D", "note": "Maerz & Paul 1930, Plate 31 A10; approximate: measured from a 1930 plate scan"}
+{"n": "Marine G", "plate": 31, "col": "G", "row": 10, "h": "#1F4637", "note": "Maerz & Paul 1930, Plate 31 G10; approximate: measured from a 1930 plate scan"}
+{"n": "Robinhoc", "plate": 31, "col": "K", "row": 10, "h": "#13433C", "note": "Maerz & Paul 1930, Plate 31 K10; approximate: measured from a 1930 plate scan"}
+{"n": "Green", "plate": 31, "col": "L", "row": 10, "h": "#11433D", "note": "Maerz & Paul 1930, Plate 31 L10; approximate: measured from a 1930 plate scan"}
+{"n": "Triton", "plate": 31, "col": "K", "row": 11, "h": "#11433B", "note": "Maerz & Paul 1930, Plate 31 K11; approximate: measured from a 1930 plate scan"}
+{"n": "RIFLE", "plate": 32, "col": "A", "row": 2, "h": "#B86469", "note": "Maerz & Paul 1930, Plate 32 A2; approximate: measured from a 1930 plate scan"}
+{"n": "Arctic", "plate": 32, "col": "K", "row": 2, "h": "#37262B", "note": "Maerz & Paul 1930, Plate 32 K2; approximate: measured from a 1930 plate scan"}
+{"n": "Everglade", "plate": 32, "col": "K", "row": 4, "h": "#2B2428", "note": "Maerz & Paul 1930, Plate 32 K4; approximate: measured from a 1930 plate scan; OCR 'Evergla' corrected to 'Everglade' against the ISCC-NBS 1955 Maerz & Paul name list"}
+{"n": "CANNC", "plate": 32, "col": "A", "row": 5, "h": "#B66367", "note": "Maerz & Paul 1930, Plate 32 A5; approximate: measured from a 1930 plate scan"}
+{"n": "Balsam", "plate": 32, "col": "G", "row": 5, "h": "#352427", "note": "Maerz & Paul 1930, Plate 32 G5; approximate: measured from a 1930 plate scan"}
+{"n": "Highlan", "plate": 32, "col": "K", "row": 5, "h": "#252224", "note": "Maerz & Paul 1930, Plate 32 K5; approximate: measured from a 1930 plate scan"}
+{"n": "Spruce", "plate": 32, "col": "G", "row": 6, "h": "#312326", "note": "Maerz & Paul 1930, Plate 32 G6; approximate: measured from a 1930 plate scan"}
+{"n": "Marble", "plate": 32, "col": "K", "row": 7, "h": "#212023", "note": "Maerz & Paul 1930, Plate 32 K7; approximate: measured from a 1930 plate scan"}
+{"n": "Jasper", "plate": 32, "col": "G", "row": 9, "h": "#262425", "note": "Maerz & Paul 1930, Plate 32 G9; approximate: measured from a 1930 plate scan"}
+{"n": "Lyrouvuan", "plate": 32, "col": "A", "row": 12, "h": "#BB666B", "note": "Maerz & Paul 1930, Plate 32 A12; approximate: measured from a 1930 plate scan"}
+{"n": "Hemlock", "plate": 32, "col": "G", "row": 12, "h": "#222625", "note": "Maerz & Paul 1930, Plate 32 G12; approximate: measured from a 1930 plate scan"}
+{"n": "IUNGLE", "plate": 32, "col": "K", "row": 12, "h": "#212425", "note": "Maerz & Paul 1930, Plate 32 K12; approximate: measured from a 1930 plate scan"}
+{"n": "REEN", "plate": 32, "col": "L", "row": 12, "h": "#202526", "note": "Maerz & Paul 1930, Plate 32 L12; approximate: measured from a 1930 plate scan"}
+{"n": "Beryl Bl", "plate": 33, "col": "H", "row": 2, "h": "#A2CBD5", "note": "Maerz & Paul 1930, Plate 33 H2; approximate: measured from a 1930 plate scan"}
+{"n": "Beryl", "plate": 33, "col": "K", "row": 2, "h": "#5EC1D8", "note": "Maerz & Paul 1930, Plate 33 K2; approximate: measured from a 1930 plate scan"}
+{"n": "Honey Bird", "plate": 33, "col": "L", "row": 2, "h": "#0FB5DC", "note": "Maerz & Paul 1930, Plate 33 L2; approximate: measured from a 1930 plate scan"}
+{"n": "Italian Bl", "plate": 33, "col": "L", "row": 4, "h": "#09A6DB", "note": "Maerz & Paul 1930, Plate 33 L4; approximate: measured from a 1930 plate scan"}
+{"n": "SKY BLUE", "plate": 33, "col": "E", "row": 6, "h": "#9BB2D4", "note": "Maerz & Paul 1930, Plate 33 E6; approximate: measured from a 1930 plate scan"}
+{"n": "Airway", "plate": 33, "col": "I", "row": 6, "h": "#70AAD5", "note": "Maerz & Paul 1930, Plate 33 I6; approximate: measured from a 1930 plate scan"}
+{"n": "Daphne Red", "plate": 33, "col": "H", "row": 8, "h": "#5E92DC", "note": "Maerz & Paul 1930, Plate 33 H8; approximate: measured from a 1930 plate scan; OCR 'Daphne' corrected to 'Daphne Red' against the ISCC-NBS 1955 Maerz & Paul name list", "uncertain": "dE00 38 from its ISCC-NBS 1955 block centroid (block 258); see research/MAERZ-PAUL.md s6"}
+{"n": "Amparo Bl", "plate": 33, "col": "A", "row": 10, "h": "#747473", "note": "Maerz & Paul 1930, Plate 33 A10; approximate: measured from a 1930 plate scan"}
+{"n": "LIGHT BLUE 4T", "plate": 34, "col": "F", "row": 1, "h": "#B6CCCB", "note": "Maerz & Paul 1930, Plate 34 F1; approximate: measured from a 1930 plate scan"}
+{"n": "Sky Grey", "plate": 34, "col": "B", "row": 2, "h": "#C6C7C7", "note": "Maerz & Paul 1930, Plate 34 B2; approximate: measured from a 1930 plate scan"}
+{"n": "IGROTTO BL", "plate": 34, "col": "L", "row": 2, "h": "#5CB8D0", "note": "Maerz & Paul 1930, Plate 34 L2; approximate: measured from a 1930 plate scan"}
+{"n": "Burn Bl", "plate": 34, "col": "B", "row": 4, "h": "#BABCC7", "note": "Maerz & Paul 1930, Plate 34 B4; approximate: measured from a 1930 plate scan"}
+{"n": "Twinkle Bl", "plate": 34, "col": "I", "row": 5, "h": "#81AFCD", "note": "Maerz & Paul 1930, Plate 34 I5; approximate: measured from a 1930 plate scan"}
+{"n": "Starlight", "plate": 34, "col": "E", "row": 6, "h": "#90ACCE", "note": "Maerz & Paul 1930, Plate 34 E6; approximate: measured from a 1930 plate scan"}
+{"n": "Diana Squill Bl", "plate": 34, "col": "I", "row": 6, "h": "#74A2CD", "note": "Maerz & Paul 1930, Plate 34 I6; approximate: measured from a 1930 plate scan"}
+{"n": "Zenith Bl", "plate": 34, "col": "A", "row": 7, "h": "#818180", "note": "Maerz & Paul 1930, Plate 34 A7; approximate: measured from a 1930 plate scan"}
+{"n": "LUPINE", "plate": 34, "col": "D", "row": 7, "h": "#7B9AD0", "note": "Maerz & Paul 1930, Plate 34 D7; approximate: measured from a 1930 plate scan"}
+{"n": "Blue Lotus", "plate": 34, "col": "F", "row": 7, "h": "#7B9DD3", "note": "Maerz & Paul 1930, Plate 34 F7; approximate: measured from a 1930 plate scan"}
+{"n": "Dresden Bl", "plate": 34, "col": "I", "row": 7, "h": "#6493D2", "note": "Maerz & Paul 1930, Plate 34 I7; approximate: measured from a 1930 plate scan"}
+{"n": "LOUIS Philippe", "plate": 34, "col": "K", "row": 7, "h": "#4690D1", "note": "Maerz & Paul 1930, Plate 34 K7; approximate: measured from a 1930 plate scan"}
+{"n": "BLE", "plate": 34, "col": "L", "row": 7, "h": "#2B8CD2", "note": "Maerz & Paul 1930, Plate 34 L7; approximate: measured from a 1930 plate scan"}
+{"n": "Sevres", "plate": 34, "col": "K", "row": 9, "h": "#2A7FDA", "note": "Maerz & Paul 1930, Plate 34 K9; approximate: measured from a 1930 plate scan"}
+{"n": "Glaucous-Grey", "plate": 35, "col": "B", "row": 2, "h": "#AFB0AD", "note": "Maerz & Paul 1930, Plate 35 B2; approximate: measured from a 1930 plate scan"}
+{"n": "BABY BLUE", "plate": 35, "col": "E", "row": 2, "h": "#A0B3B3", "note": "Maerz & Paul 1930, Plate 35 E2; approximate: measured from a 1930 plate scan"}
+{"n": "Ether", "plate": 35, "col": "K", "row": 2, "h": "#8AB6BB", "note": "Maerz & Paul 1930, Plate 35 K2; approximate: measured from a 1930 plate scan"}
+{"n": "Motmot", "plate": 35, "col": "L", "row": 2, "h": "#76B4BE", "note": "Maerz & Paul 1930, Plate 35 L2; approximate: measured from a 1930 plate scan"}
+{"n": "Russian Bl", "plate": 35, "col": "D", "row": 4, "h": "#91A3B1", "note": "Maerz & Paul 1930, Plate 35 D4; approximate: measured from a 1930 plate scan"}
+{"n": "Alice BI", "plate": 35, "col": "G", "row": 5, "h": "#859DB2", "note": "Maerz & Paul 1930, Plate 35 G5; approximate: measured from a 1930 plate scan"}
+{"n": "SISTINE", "plate": 35, "col": "H", "row": 5, "h": "#849EB3", "note": "Maerz & Paul 1930, Plate 35 H5; approximate: measured from a 1930 plate scan"}
+{"n": "Faience", "plate": 35, "col": "L", "row": 5, "h": "#65A0BB", "note": "Maerz & Paul 1930, Plate 35 L5; approximate: measured from a 1930 plate scan"}
+{"n": "Columbia Bl", "plate": 35, "col": "D", "row": 6, "h": "#7D91B2", "note": "Maerz & Paul 1930, Plate 35 D6; approximate: measured from a 1930 plate scan"}
+{"n": "BRIT-TANY", "plate": 35, "col": "J", "row": 6, "h": "#7497B8", "note": "Maerz & Paul 1930, Plate 35 J6; approximate: measured from a 1930 plate scan"}
+{"n": "Nattier", "plate": 35, "col": "K", "row": 6, "h": "#6C98BA", "note": "Maerz & Paul 1930, Plate 35 K6; approximate: measured from a 1930 plate scan"}
+{"n": "Blue Sapphire", "plate": 35, "col": "L", "row": 6, "h": "#5B96BC", "note": "Maerz & Paul 1930, Plate 35 L6; approximate: measured from a 1930 plate scan"}
+{"n": "Stardew", "plate": 35, "col": "F", "row": 7, "h": "#6782B4", "note": "Maerz & Paul 1930, Plate 35 F7; approximate: measured from a 1930 plate scan"}
+{"n": "Wireless", "plate": 35, "col": "I", "row": 7, "h": "#6D8AB8", "note": "Maerz & Paul 1930, Plate 35 I7; approximate: measured from a 1930 plate scan"}
+{"n": "Tuileries", "plate": 35, "col": "J", "row": 7, "h": "#688BBB", "note": "Maerz & Paul 1930, Plate 35 J7; approximate: measured from a 1930 plate scan"}
+{"n": "Virgin", "plate": 35, "col": "K", "row": 7, "h": "#5F8CBD", "note": "Maerz & Paul 1930, Plate 35 K7; approximate: measured from a 1930 plate scan"}
+{"n": "DOUR", "plate": 35, "col": "J", "row": 8, "h": "#5881C1", "note": "Maerz & Paul 1930, Plate 35 J8; approximate: measured from a 1930 plate scan"}
+{"n": "Ailot Bl", "plate": 35, "col": "I", "row": 9, "h": "#4276C3", "note": "Maerz & Paul 1930, Plate 35 I9; approximate: measured from a 1930 plate scan"}
+{"n": "ATRA", "plate": 35, "col": "J", "row": 12, "h": "#205AD0", "note": "Maerz & Paul 1930, Plate 35 J12; approximate: measured from a 1930 plate scan"}
+{"n": "Pacifie", "plate": 36, "col": "J", "row": 1, "h": "#77A5A5", "note": "Maerz & Paul 1930, Plate 36 J1; approximate: measured from a 1930 plate scan"}
+{"n": "NICKLE Nimbus", "plate": 36, "col": "A", "row": 2, "h": "#7F807D", "note": "Maerz & Paul 1930, Plate 36 A2; approximate: measured from a 1930 plate scan"}
+{"n": "Puritan Grey", "plate": 36, "col": "B", "row": 2, "h": "#9E9F9C", "note": "Maerz & Paul 1930, Plate 36 B2; approximate: measured from a 1930 plate scan"}
+{"n": "Powder BI Poudre", "plate": 36, "col": "H", "row": 2, "h": "#7C9DA2", "note": "Maerz & Paul 1930, Plate 36 H2; approximate: measured from a 1930 plate scan"}
+{"n": "Rapids", "plate": 36, "col": "L", "row": 2, "h": "#5E9EAE", "note": "Maerz & Paul 1930, Plate 36 L2; approximate: measured from a 1930 plate scan"}
+{"n": "Gull Gy", "plate": 36, "col": "A", "row": 3, "h": "#7F807C", "note": "Maerz & Paul 1930, Plate 36 A3; approximate: measured from a 1930 plate scan"}
+{"n": "Glaucous-Blue", "plate": 36, "col": "I", "row": 3, "h": "#7198A5", "note": "Maerz & Paul 1930, Plate 36 I3; approximate: measured from a 1930 plate scan"}
+{"n": "Cadet Grey", "plate": 36, "col": "C", "row": 4, "h": "#8492A1", "note": "Maerz & Paul 1930, Plate 36 C4; approximate: measured from a 1930 plate scan"}
+{"n": "Iceberg", "plate": 36, "col": "H", "row": 4, "h": "#718EA2", "note": "Maerz & Paul 1930, Plate 36 H4; approximate: measured from a 1930 plate scan"}
+{"n": "Infantry Moonlight Bl", "plate": 36, "col": "I", "row": 4, "h": "#6C90A5", "note": "Maerz & Paul 1930, Plate 36 I4; approximate: measured from a 1930 plate scan"}
+{"n": "Kashan", "plate": 36, "col": "L", "row": 4, "h": "#508FAA", "note": "Maerz & Paul 1930, Plate 36 L4; approximate: measured from a 1930 plate scan"}
+{"n": "Crayon Bl", "plate": 36, "col": "C", "row": 5, "h": "#808EA2", "note": "Maerz & Paul 1930, Plate 36 C5; approximate: measured from a 1930 plate scan"}
+{"n": "Cloud", "plate": 36, "col": "G", "row": 5, "h": "#6F889F", "note": "Maerz & Paul 1930, Plate 36 G5; approximate: measured from a 1930 plate scan"}
+{"n": "Parula Bl", "plate": 36, "col": "C", "row": 6, "h": "#7382A1", "note": "Maerz & Paul 1930, Plate 36 C6; approximate: measured from a 1930 plate scan"}
+{"n": "Arctic", "plate": 36, "col": "D", "row": 6, "h": "#6A809D", "note": "Maerz & Paul 1930, Plate 36 D6; approximate: measured from a 1930 plate scan", "uncertain": "dE00 35 from its ISCC-NBS 1955 block centroid (block 267); see research/MAERZ-PAUL.md s6"}
+{"n": "Twilight", "plate": 36, "col": "G", "row": 6, "h": "#617C9E", "note": "Maerz & Paul 1930, Plate 36 G6; approximate: measured from a 1930 plate scan"}
+{"n": "SAXE BL", "plate": 36, "col": "I", "row": 6, "h": "#5B80A3", "note": "Maerz & Paul 1930, Plate 36 I6; approximate: measured from a 1930 plate scan"}
+{"n": "Tile BI", "plate": 36, "col": "J", "row": 6, "h": "#557FA3", "note": "Maerz & Paul 1930, Plate 36 J6; approximate: measured from a 1930 plate scan"}
+{"n": "Venezia", "plate": 36, "col": "K", "row": 6, "h": "#487FA6", "note": "Maerz & Paul 1930, Plate 36 K6; approximate: measured from a 1930 plate scan"}
+{"n": "Jrient Bl", "plate": 36, "col": "G", "row": 7, "h": "#5272A1", "note": "Maerz & Paul 1930, Plate 36 G7; approximate: measured from a 1930 plate scan"}
+{"n": "Ceramic", "plate": 36, "col": "K", "row": 7, "h": "#3872A9", "note": "Maerz & Paul 1930, Plate 36 K7; approximate: measured from a 1930 plate scan"}
+{"n": "Duck Bl", "plate": 36, "col": "L", "row": 7, "h": "#2E74AC", "note": "Maerz & Paul 1930, Plate 36 L7; approximate: measured from a 1930 plate scan"}
+{"n": "Jhin-Chin Bl", "plate": 36, "col": "I", "row": 8, "h": "#3B6BAB", "note": "Maerz & Paul 1930, Plate 36 I8; approximate: measured from a 1930 plate scan"}
+{"n": "MPIRE", "plate": 36, "col": "J", "row": 8, "h": "#3A6BAB", "note": "Maerz & Paul 1930, Plate 36 J8; approximate: measured from a 1930 plate scan"}
+{"n": "Murillo", "plate": 36, "col": "K", "row": 8, "h": "#2E68AF", "note": "Maerz & Paul 1930, Plate 36 K8; approximate: measured from a 1930 plate scan"}
+{"n": "Amoges", "plate": 36, "col": "K", "row": 9, "h": "#245EB3", "note": "Maerz & Paul 1930, Plate 36 K9; approximate: measured from a 1930 plate scan"}
+{"n": "Rees", "plate": 36, "col": "B", "row": 11, "h": "#2948AC", "note": "Maerz & Paul 1930, Plate 36 B11; approximate: measured from a 1930 plate scan"}
+{"n": "SILVER", "plate": 37, "col": "A", "row": 2, "h": "#7F7F7C", "note": "Maerz & Paul 1930, Plate 37 A2; approximate: measured from a 1930 plate scan"}
+{"n": "Jouvenc", "plate": 37, "col": "L", "row": 2, "h": "#3F8185", "note": "Maerz & Paul 1930, Plate 37 L2; approximate: measured from a 1930 plate scan"}
+{"n": "Medici Bl", "plate": 37, "col": "E", "row": 3, "h": "#748280", "note": "Maerz & Paul 1930, Plate 37 E3; approximate: measured from a 1930 plate scan"}
+{"n": "Gobelin Bl", "plate": 37, "col": "I", "row": 5, "h": "#5D7B83", "note": "Maerz & Paul 1930, Plate 37 I5; approximate: measured from a 1930 plate scan"}
+{"n": "Arno Bl", "plate": 37, "col": "J", "row": 6, "h": "#4D7283", "note": "Maerz & Paul 1930, Plate 37 J6; approximate: measured from a 1930 plate scan"}
+{"n": "Genoa BI", "plate": 37, "col": "K", "row": 6, "h": "#417285", "note": "Maerz & Paul 1930, Plate 37 K6; approximate: measured from a 1930 plate scan"}
+{"n": "PEACOCK BL", "plate": 37, "col": "L", "row": 6, "h": "#397187", "note": "Maerz & Paul 1930, Plate 37 L6; approximate: measured from a 1930 plate scan"}
+{"n": "LIGHT WEDG-WOOD", "plate": 37, "col": "A", "row": 7, "h": "#777875", "note": "Maerz & Paul 1930, Plate 37 A7; approximate: measured from a 1930 plate scan"}
+{"n": "OLD CHINA", "plate": 37, "col": "C", "row": 7, "h": "#677281", "note": "Maerz & Paul 1930, Plate 37 C7; approximate: measured from a 1930 plate scan"}
+{"n": "Electric", "plate": 37, "col": "I", "row": 7, "h": "#496780", "note": "Maerz & Paul 1930, Plate 37 I7; approximate: measured from a 1930 plate scan; OCR 'LECTRIC' corrected to 'Electric' against the ISCC-NBS 1955 Maerz & Paul name list"}
+{"n": "Napoli", "plate": 37, "col": "K", "row": 7, "h": "#376486", "note": "Maerz & Paul 1930, Plate 37 K7; approximate: measured from a 1930 plate scan"}
+{"n": "Uyrian", "plate": 37, "col": "C", "row": 8, "h": "#485685", "note": "Maerz & Paul 1930, Plate 37 C8; approximate: measured from a 1930 plate scan"}
+{"n": "Somet", "plate": 37, "col": "F", "row": 8, "h": "#292C42", "note": "Maerz & Paul 1930, Plate 37 F8; approximate: measured from a 1930 plate scan"}
+{"n": "Tydro", "plate": 37, "col": "H", "row": 8, "h": "#333E58", "note": "Maerz & Paul 1930, Plate 37 H8; approximate: measured from a 1930 plate scan"}
+{"n": "Tadonna", "plate": 37, "col": "J", "row": 9, "h": "#2F478B", "note": "Maerz & Paul 1930, Plate 37 J9; approximate: measured from a 1930 plate scan"}
+{"n": "Iuebell", "plate": 37, "col": "J", "row": 10, "h": "#283F8C", "note": "Maerz & Paul 1930, Plate 37 J10; approximate: measured from a 1930 plate scan"}
+{"n": "Raphael", "plate": 37, "col": "K", "row": 10, "h": "#243F8E", "note": "Maerz & Paul 1930, Plate 37 K10; approximate: measured from a 1930 plate scan"}
+{"n": "Secs RSS", "plate": 37, "col": "A", "row": 12, "h": "#6F6F6F", "note": "Maerz & Paul 1930, Plate 37 A12; approximate: measured from a 1930 plate scan"}
+{"n": "f OLD f SILVER", "plate": 38, "col": "A", "row": 1, "h": "#7F807D", "note": "Maerz & Paul 1930, Plate 38 A1; approximate: measured from a 1930 plate scan"}
+{"n": "West Point", "plate": 38, "col": "A", "row": 6, "h": "#797B78", "note": "Maerz & Paul 1930, Plate 38 A6; approximate: measured from a 1930 plate scan"}
+{"n": "Tarbor", "plate": 38, "col": "H", "row": 6, "h": "#4F5F7A", "note": "Maerz & Paul 1930, Plate 38 H6; approximate: measured from a 1930 plate scan"}
+{"n": "Pevlon", "plate": 38, "col": "L", "row": 6, "h": "#365577", "note": "Maerz & Paul 1930, Plate 38 L6; approximate: measured from a 1930 plate scan"}
+{"n": "Alpine", "plate": 38, "col": "G", "row": 7, "h": "#44537E", "note": "Maerz & Paul 1930, Plate 38 G7; approximate: measured from a 1930 plate scan"}
+{"n": "Mallard", "plate": 38, "col": "L", "row": 7, "h": "#304C78", "note": "Maerz & Paul 1930, Plate 38 L7; approximate: measured from a 1930 plate scan"}
+{"n": "DELEI BL", "plate": 38, "col": "A", "row": 8, "h": "#747673", "note": "Maerz & Paul 1930, Plate 38 A8; approximate: measured from a 1930 plate scan"}
+{"n": "Torino", "plate": 38, "col": "C", "row": 8, "h": "#37427A", "note": "Maerz & Paul 1930, Plate 38 C8; approximate: measured from a 1930 plate scan"}
+{"n": "Jenmark", "plate": 38, "col": "J", "row": 8, "h": "#364A81", "note": "Maerz & Paul 1930, Plate 38 J8; approximate: measured from a 1930 plate scan"}
+{"n": "Aajolica", "plate": 38, "col": "K", "row": 9, "h": "#2C417F", "note": "Maerz & Paul 1930, Plate 38 K9; approximate: measured from a 1930 plate scan"}
+{"n": "Rigi Bh", "plate": 39, "col": "I", "row": 2, "h": "#40585A", "note": "Maerz & Paul 1930, Plate 39 I2; approximate: measured from a 1930 plate scan"}
+{"n": "Saas", "plate": 39, "col": "K", "row": 2, "h": "#2E565E", "note": "Maerz & Paul 1930, Plate 39 K2; approximate: measured from a 1930 plate scan"}
+{"n": "Rail", "plate": 39, "col": "A", "row": 4, "h": "#787976", "note": "Maerz & Paul 1930, Plate 39 A4; approximate: measured from a 1930 plate scan"}
+{"n": "Olympic", "plate": 39, "col": "K", "row": 5, "h": "#2A4859", "note": "Maerz & Paul 1930, Plate 39 K5; approximate: measured from a 1930 plate scan"}
+{"n": "Arona", "plate": 39, "col": "I", "row": 6, "h": "#344454", "note": "Maerz & Paul 1930, Plate 39 I6; approximate: measured from a 1930 plate scan"}
+{"n": "Ducklin Teal Blt", "plate": 39, "col": "K", "row": 6, "h": "#2A4358", "note": "Maerz & Paul 1930, Plate 39 K6; approximate: measured from a 1930 plate scan"}
+{"n": "Glacier I", "plate": 39, "col": "G", "row": 7, "h": "#373F52", "note": "Maerz & Paul 1930, Plate 39 G7; approximate: measured from a 1930 plate scan"}
+{"n": "Bruges", "plate": 39, "col": "I", "row": 7, "h": "#314057", "note": "Maerz & Paul 1930, Plate 39 I7; approximate: measured from a 1930 plate scan"}
+{"n": "Teal Du", "plate": 39, "col": "K", "row": 7, "h": "#273F5A", "note": "Maerz & Paul 1930, Plate 39 K7; approximate: measured from a 1930 plate scan"}
+{"n": "Glacier", "plate": 39, "col": "I", "row": 8, "h": "#2D3B58", "note": "Maerz & Paul 1930, Plate 39 I8; approximate: measured from a 1930 plate scan"}
+{"n": "Pagoda Atlantis", "plate": 39, "col": "K", "row": 8, "h": "#243A5A", "note": "Maerz & Paul 1930, Plate 39 K8; approximate: measured from a 1930 plate scan"}
+{"n": "LEMISI", "plate": 39, "col": "E", "row": 10, "h": "#2D3353", "note": "Maerz & Paul 1930, Plate 39 E10; approximate: measured from a 1930 plate scan"}
+{"n": "Dlue Dev", "plate": 39, "col": "C", "row": 11, "h": "#2A2F54", "note": "Maerz & Paul 1930, Plate 39 C11; approximate: measured from a 1930 plate scan"}
+{"n": "Vapestry Majolica Peasant", "plate": 39, "col": "G", "row": 11, "h": "#292F56", "note": "Maerz & Paul 1930, Plate 39 G11; approximate: measured from a 1930 plate scan"}
+{"n": "Ale", "plate": 39, "col": "L", "row": 12, "h": "#222E60", "note": "Maerz & Paul 1930, Plate 39 L12; approximate: measured from a 1930 plate scan"}
+{"n": "Ispahan", "plate": 40, "col": "K", "row": 3, "h": "#2C3726", "note": "Maerz & Paul 1930, Plate 40 K3; approximate: measured from a 1930 plate scan"}
+{"n": "Balsam", "plate": 40, "col": "K", "row": 4, "h": "#273123", "note": "Maerz & Paul 1930, Plate 40 K4; approximate: measured from a 1930 plate scan"}
+{"n": "Tonian E", "plate": 40, "col": "K", "row": 6, "h": "#252921", "note": "Maerz & Paul 1930, Plate 40 K6; approximate: measured from a 1930 plate scan"}
+{"n": "Radio Bl", "plate": 40, "col": "I", "row": 7, "h": "#252722", "note": "Maerz & Paul 1930, Plate 40 I7; approximate: measured from a 1930 plate scan"}
+{"n": "Trooper", "plate": 40, "col": "K", "row": 9, "h": "#201F24", "note": "Maerz & Paul 1930, Plate 40 K9; approximate: measured from a 1930 plate scan"}
+{"n": "Nippon", "plate": 40, "col": "K", "row": 10, "h": "#201F26", "note": "Maerz & Paul 1930, Plate 40 K10; approximate: measured from a 1930 plate scan"}
+{"n": "NAVY BI", "plate": 40, "col": "E", "row": 11, "h": "#1E1B21", "note": "Maerz & Paul 1930, Plate 40 E11; approximate: measured from a 1930 plate scan"}
+{"n": "Peasant", "plate": 40, "col": "G", "row": 11, "h": "#242425", "note": "Maerz & Paul 1930, Plate 40 G11; approximate: measured from a 1930 plate scan", "uncertain": "dE00 55 from its ISCC-NBS 1955 block centroid (block 1); see research/MAERZ-PAUL.md s6"}
+{"n": "Dagestan", "plate": 40, "col": "K", "row": 11, "h": "#212127", "note": "Maerz & Paul 1930, Plate 40 K11; approximate: measured from a 1930 plate scan"}
+{"n": "Vlusketee", "plate": 40, "col": "G", "row": 12, "h": "#242426", "note": "Maerz & Paul 1930, Plate 40 G12; approximate: measured from a 1930 plate scan"}
+{"n": "INSIGN", "plate": 40, "col": "I", "row": 12, "h": "#272526", "note": "Maerz & Paul 1930, Plate 40 I12; approximate: measured from a 1930 plate scan"}
+{"n": "Corsair", "plate": 40, "col": "K", "row": 12, "h": "#262527", "note": "Maerz & Paul 1930, Plate 40 K12; approximate: measured from a 1930 plate scan; OCR 'Orsair' corrected to 'Corsair' against the ISCC-NBS 1955 Maerz & Paul name list"}
+{"n": "Sean A", "plate": 41, "col": "I", "row": 1, "h": "#E1A7B4", "note": "Maerz & Paul 1930, Plate 41 I1; approximate: measured from a 1930 plate scan"}
+{"n": "Mauvette", "plate": 41, "col": "C", "row": 4, "h": "#C1BBCA", "note": "Maerz & Paul 1930, Plate 41 C4; approximate: measured from a 1930 plate scan"}
+{"n": "Phlox Pk", "plate": 41, "col": "E", "row": 4, "h": "#BFA9BE", "note": "Maerz & Paul 1930, Plate 41 E4; approximate: measured from a 1930 plate scan"}
+{"n": "ORCHID", "plate": 41, "col": "F", "row": 5, "h": "#B59BBA", "note": "Maerz & Paul 1930, Plate 41 F5; approximate: measured from a 1930 plate scan"}
+{"n": "Nuncio", "plate": 41, "col": "H", "row": 7, "h": "#9E7DBA", "note": "Maerz & Paul 1930, Plate 41 H7; approximate: measured from a 1930 plate scan"}
+{"n": "Amparo", "plate": 41, "col": "I", "row": 7, "h": "#9D74B4", "note": "Maerz & Paul 1930, Plate 41 I7; approximate: measured from a 1930 plate scan"}
+{"n": "Minuet", "plate": 41, "col": "C", "row": 8, "h": "#8484D0", "note": "Maerz & Paul 1930, Plate 41 C8; approximate: measured from a 1930 plate scan"}
+{"n": "Hortense", "plate": 41, "col": "I", "row": 8, "h": "#8D67B6", "note": "Maerz & Paul 1930, Plate 41 I8; approximate: measured from a 1930 plate scan"}
+{"n": "MON-SIGNOR", "plate": 41, "col": "K", "row": 8, "h": "#8950A6", "note": "Maerz & Paul 1930, Plate 41 K8; approximate: measured from a 1930 plate scan"}
+{"n": "Pontiff", "plate": 41, "col": "K", "row": 10, "h": "#6A3DAB", "note": "Maerz & Paul 1930, Plate 41 K10; approximate: measured from a 1930 plate scan"}
+{"n": "Zephyr", "plate": 42, "col": "B", "row": 1, "h": "#8B8A86", "note": "Maerz & Paul 1930, Plate 42 B1; approximate: measured from a 1930 plate scan", "uncertain": "dE00 25 from its ISCC-NBS 1955 block centroid (block 7); see research/MAERZ-PAUL.md s6"}
+{"n": "Nymphea", "plate": 42, "col": "F", "row": 1, "h": "#8E8D8A", "note": "Maerz & Paul 1930, Plate 42 F1; approximate: measured from a 1930 plate scan; OCR 'Nymph' corrected to 'Nymphea' against the ISCC-NBS 1955 Maerz & Paul name list", "uncertain": "dE00 26 from its ISCC-NBS 1955 block centroid (block 223); see research/MAERZ-PAUL.md s6"}
+{"n": "ORCHID", "plate": 42, "col": "G", "row": 1, "h": "#94928C", "note": "Maerz & Paul 1930, Plate 42 G1; approximate: measured from a 1930 plate scan", "uncertain": "dE00 25 from its ISCC-NBS 1955 block centroid (block 222); see research/MAERZ-PAUL.md s6"}
+{"n": "Morning Glory", "plate": 42, "col": "F", "row": 4, "h": "#C4AABA", "note": "Maerz & Paul 1930, Plate 42 F4; approximate: measured from a 1930 plate scan"}
+{"n": "Jrchadee", "plate": 42, "col": "H", "row": 4, "h": "#C8A7B9", "note": "Maerz & Paul 1930, Plate 42 H4; approximate: measured from a 1930 plate scan"}
+{"n": "Jpera Mauve", "plate": 42, "col": "H", "row": 5, "h": "#BE9BB6", "note": "Maerz & Paul 1930, Plate 42 H5; approximate: measured from a 1930 plate scan"}
+{"n": "Vervain Verbena", "plate": 42, "col": "B", "row": 6, "h": "#B1B4C4", "note": "Maerz & Paul 1930, Plate 42 B6; approximate: measured from a 1930 plate scan"}
+{"n": "Eventide", "plate": 42, "col": "C", "row": 6, "h": "#B3AAC1", "note": "Maerz & Paul 1930, Plate 42 C6; approximate: measured from a 1930 plate scan"}
+{"n": "Daybreak", "plate": 42, "col": "E", "row": 6, "h": "#AF9CBA", "note": "Maerz & Paul 1930, Plate 42 E6; approximate: measured from a 1930 plate scan"}
+{"n": "Jattleya", "plate": 42, "col": "H", "row": 6, "h": "#B797B6", "note": "Maerz & Paul 1930, Plate 42 H6; approximate: measured from a 1930 plate scan"}
+{"n": "Jhicory Bl", "plate": 42, "col": "B", "row": 7, "h": "#9FA5C5", "note": "Maerz & Paul 1930, Plate 42 B7; approximate: measured from a 1930 plate scan"}
+{"n": "Viola", "plate": 42, "col": "G", "row": 7, "h": "#A48CB6", "note": "Maerz & Paul 1930, Plate 42 G7; approximate: measured from a 1930 plate scan"}
+{"n": "Thistle", "plate": 42, "col": "J", "row": 7, "h": "#A979AC", "note": "Maerz & Paul 1930, Plate 42 J7; approximate: measured from a 1930 plate scan"}
+{"n": "Patricia", "plate": 42, "col": "K", "row": 7, "h": "#AB689F", "note": "Maerz & Paul 1930, Plate 42 K7; approximate: measured from a 1930 plate scan"}
+{"n": "Wistaria Blue", "plate": 42, "col": "C", "row": 8, "h": "#8180C2", "note": "Maerz & Paul 1930, Plate 42 C8; approximate: measured from a 1930 plate scan"}
+{"n": "Purple Heather", "plate": 42, "col": "I", "row": 8, "h": "#936FB2", "note": "Maerz & Paul 1930, Plate 42 I8; approximate: measured from a 1930 plate scan"}
+{"n": "Tepatica", "plate": 42, "col": "K", "row": 8, "h": "#965EA3", "note": "Maerz & Paul 1930, Plate 42 K8; approximate: measured from a 1930 plate scan"}
+{"n": "Chamoline", "plate": 42, "col": "I", "row": 10, "h": "#654BB8", "note": "Maerz & Paul 1930, Plate 42 I10; approximate: measured from a 1930 plate scan; OCR 'Moline' corrected to 'Chamoline' against the ISCC-NBS 1955 Maerz & Paul name list", "uncertain": "dE00 56 from its ISCC-NBS 1955 block centroid (block 72); see research/MAERZ-PAUL.md s6"}
+{"n": "Vood", "plate": 42, "col": "K", "row": 10, "h": "#673DAC", "note": "Maerz & Paul 1930, Plate 42 K10; approximate: measured from a 1930 plate scan"}
+{"n": "Rhodonite Pk", "plate": 43, "col": "G", "row": 1, "h": "#C59B9F", "note": "Maerz & Paul 1930, Plate 43 G1; approximate: measured from a 1930 plate scan"}
+{"n": "Ageratum Bl", "plate": 43, "col": "C", "row": 3, "h": "#AFADB2", "note": "Maerz & Paul 1930, Plate 43 C3; approximate: measured from a 1930 plate scan"}
+{"n": "Anemone", "plate": 43, "col": "F", "row": 3, "h": "#AB8597", "note": "Maerz & Paul 1930, Plate 43 F3; approximate: measured from a 1930 plate scan"}
+{"n": "Geisha", "plate": 43, "col": "I", "row": 3, "h": "#B68197", "note": "Maerz & Paul 1930, Plate 43 I3; approximate: measured from a 1930 plate scan"}
+{"n": "Plumbago-Blue", "plate": 43, "col": "B", "row": 4, "h": "#A3A4AA", "note": "Maerz & Paul 1930, Plate 43 B4; approximate: measured from a 1930 plate scan"}
+{"n": "Vanda", "plate": 43, "col": "E", "row": 4, "h": "#A48F9E", "note": "Maerz & Paul 1930, Plate 43 E4; approximate: measured from a 1930 plate scan"}
+{"n": "CROCUS", "plate": 43, "col": "F", "row": 4, "h": "#A28697", "note": "Maerz & Paul 1930, Plate 43 F4; approximate: measured from a 1930 plate scan", "uncertain": "dE00 28 from its ISCC-NBS 1955 block centroid (block 53); see research/MAERZ-PAUL.md s6"}
+{"n": "Argyle Pr", "plate": 43, "col": "G", "row": 4, "h": "#A48498", "note": "Maerz & Paul 1930, Plate 43 G4; approximate: measured from a 1930 plate scan"}
+{"n": "Old Lavender", "plate": 43, "col": "C", "row": 5, "h": "#A49EB0", "note": "Maerz & Paul 1930, Plate 43 C5; approximate: measured from a 1930 plate scan; OCR 'LAVEN-DER' corrected to 'Old Lavender' against the ISCC-NBS 1955 Maerz & Paul name list", "uncertain": "dE00 48 from its ISCC-NBS 1955 block centroid (block 235); see research/MAERZ-PAUL.md s6"}
+{"n": "Diadem", "plate": 43, "col": "E", "row": 5, "h": "#9B89A1", "note": "Maerz & Paul 1930, Plate 43 E5; approximate: measured from a 1930 plate scan"}
+{"n": "Dahlia", "plate": 43, "col": "I", "row": 6, "h": "#946E95", "note": "Maerz & Paul 1930, Plate 43 I6; approximate: measured from a 1930 plate scan"}
+{"n": "Ontario", "plate": 43, "col": "B", "row": 7, "h": "#7B84B0", "note": "Maerz & Paul 1930, Plate 43 B7; approximate: measured from a 1930 plate scan"}
+{"n": "MIGNON", "plate": 43, "col": "G", "row": 7, "h": "#84699B", "note": "Maerz & Paul 1930, Plate 43 G7; approximate: measured from a 1930 plate scan"}
+{"n": "Antique", "plate": 43, "col": "K", "row": 7, "h": "#8A5093", "note": "Maerz & Paul 1930, Plate 43 K7; approximate: measured from a 1930 plate scan", "uncertain": "dE00 53 from its ISCC-NBS 1955 block centroid (block 94); see research/MAERZ-PAUL.md s6"}
+{"n": "PERI-WINKLE", "plate": 43, "col": "B", "row": 8, "h": "#5F75B7", "note": "Maerz & Paul 1930, Plate 43 B8; approximate: measured from a 1930 plate scan"}
+{"n": "Petunia V", "plate": 43, "col": "K", "row": 8, "h": "#794697", "note": "Maerz & Paul 1930, Plate 43 K8; approximate: measured from a 1930 plate scan"}
+{"n": "Tyacinth V", "plate": 43, "col": "K", "row": 9, "h": "#6B3C9A", "note": "Maerz & Paul 1930, Plate 43 K9; approximate: measured from a 1930 plate scan"}
+{"n": "Viva Dl", "plate": 43, "col": "B", "row": 10, "h": "#3F67BD", "note": "Maerz & Paul 1930, Plate 43 B10; approximate: measured from a 1930 plate scan"}
+{"n": "Watnedral Bl", "plate": 43, "col": "C", "row": 10, "h": "#4667C1", "note": "Maerz & Paul 1930, Plate 43 C10; approximate: measured from a 1930 plate scan"}
+{"n": "Luxor", "plate": 43, "col": "B", "row": 11, "h": "#325EC0", "note": "Maerz & Paul 1930, Plate 43 B11; approximate: measured from a 1930 plate scan"}
+{"n": "COYAL PURPLE", "plate": 43, "col": "K", "row": 11, "h": "#4B319F", "note": "Maerz & Paul 1930, Plate 43 K11; approximate: measured from a 1930 plate scan"}
+{"n": "DUNC f Bl", "plate": 43, "col": "A", "row": 12, "h": "#6D6D6C", "note": "Maerz & Paul 1930, Plate 43 A12; approximate: measured from a 1930 plate scan"}
+{"n": "SHADOW", "plate": 44, "col": "B", "row": 1, "h": "#A6A192", "note": "Maerz & Paul 1930, Plate 44 B1; approximate: measured from a 1930 plate scan", "uncertain": "dE00 51 from its ISCC-NBS 1955 block centroid (block 44); see research/MAERZ-PAUL.md s6"}
+{"n": "Inrisglow", "plate": 44, "col": "B", "row": 3, "h": "#8E8F92", "note": "Maerz & Paul 1930, Plate 44 B3; approximate: measured from a 1930 plate scan"}
+{"n": "Heliotrope Grey", "plate": 44, "col": "C", "row": 3, "h": "#90858D", "note": "Maerz & Paul 1930, Plate 44 C3; approximate: measured from a 1930 plate scan"}
+{"n": "Plumba", "plate": 44, "col": "B", "row": 4, "h": "#888991", "note": "Maerz & Paul 1930, Plate 44 B4; approximate: measured from a 1930 plate scan"}
+{"n": "Rosemary", "plate": 44, "col": "H", "row": 4, "h": "#907486", "note": "Maerz & Paul 1930, Plate 44 H4; approximate: measured from a 1930 plate scan"}
+{"n": "Wild Iris", "plate": 44, "col": "B", "row": 5, "h": "#838491", "note": "Maerz & Paul 1930, Plate 44 B5; approximate: measured from a 1930 plate scan"}
+{"n": "Hugenie", "plate": 44, "col": "F", "row": 5, "h": "#806E84", "note": "Maerz & Paul 1930, Plate 44 F5; approximate: measured from a 1930 plate scan"}
+{"n": "Dutch B", "plate": 44, "col": "A", "row": 6, "h": "#858582", "note": "Maerz & Paul 1930, Plate 44 A6; approximate: measured from a 1930 plate scan"}
+{"n": "Aster", "plate": 44, "col": "F", "row": 7, "h": "#6C5688", "note": "Maerz & Paul 1930, Plate 44 F7; approximate: measured from a 1930 plate scan"}
+{"n": "Hyssop V", "plate": 44, "col": "G", "row": 7, "h": "#70588A", "note": "Maerz & Paul 1930, Plate 44 G7; approximate: measured from a 1930 plate scan"}
+{"n": "Aconite V", "plate": 44, "col": "I", "row": 7, "h": "#735585", "note": "Maerz & Paul 1930, Plate 44 I7; approximate: measured from a 1930 plate scan"}
+{"n": "Windsor", "plate": 44, "col": "B", "row": 8, "h": "#4C5F9F", "note": "Maerz & Paul 1930, Plate 44 B8; approximate: measured from a 1930 plate scan", "uncertain": "dE00 20 from its ISCC-NBS 1955 block centroid (block 224); see research/MAERZ-PAUL.md s6"}
+{"n": "Roman V Pansy V", "plate": 44, "col": "K", "row": 8, "h": "#643A81", "note": "Maerz & Paul 1930, Plate 44 K8; approximate: measured from a 1930 plate scan"}
+{"n": "Amar", "plate": 44, "col": "L", "row": 8, "h": "#69357A", "note": "Maerz & Paul 1930, Plate 44 L8; approximate: measured from a 1930 plate scan"}
+{"n": "Parme", "plate": 44, "col": "G", "row": 9, "h": "#533F91", "note": "Maerz & Paul 1930, Plate 44 G9; approximate: measured from a 1930 plate scan"}
+{"n": "Hnglish V", "plate": 44, "col": "K", "row": 9, "h": "#563381", "note": "Maerz & Paul 1930, Plate 44 K9; approximate: measured from a 1930 plate scan"}
+{"n": "Wild Aster", "plate": 44, "col": "L", "row": 9, "h": "#57317D", "note": "Maerz & Paul 1930, Plate 44 L9; approximate: measured from a 1930 plate scan"}
+{"n": "Roman Pr", "plate": 44, "col": "K", "row": 10, "h": "#4E2F84", "note": "Maerz & Paul 1930, Plate 44 K10; approximate: measured from a 1930 plate scan"}
+{"n": "Monet Bl", "plate": 44, "col": "C", "row": 11, "h": "#2F3D9F", "note": "Maerz & Paul 1930, Plate 44 C11; approximate: measured from a 1930 plate scan"}
+{"n": "Prunella Russian", "plate": 44, "col": "K", "row": 11, "h": "#422C87", "note": "Maerz & Paul 1930, Plate 44 K11; approximate: measured from a 1930 plate scan"}
+{"n": "DOVE GREY", "plate": 45, "col": "B", "row": 1, "h": "#94927F", "note": "Maerz & Paul 1930, Plate 45 B1; approximate: measured from a 1930 plate scan"}
+{"n": "Sunglow", "plate": 45, "col": "C", "row": 1, "h": "#95847B", "note": "Maerz & Paul 1930, Plate 45 C1; approximate: measured from a 1930 plate scan; OCR 'GLOW' corrected to 'Sunglow' against the ISCC-NBS 1955 Maerz & Paul name list", "uncertain": "dE00 21 from its ISCC-NBS 1955 block centroid (block 3); see research/MAERZ-PAUL.md s6"}
+{"n": "Mello-Mauve", "plate": 45, "col": "F", "row": 1, "h": "#927A73", "note": "Maerz & Paul 1930, Plate 45 F1; approximate: measured from a 1930 plate scan"}
+{"n": "Denver Battleship Grey", "plate": 45, "col": "A", "row": 4, "h": "#7A7A77", "note": "Maerz & Paul 1930, Plate 45 A4; approximate: measured from a 1930 plate scan"}
+{"n": "Crushed Violets", "plate": 45, "col": "G", "row": 5, "h": "#766870", "note": "Maerz & Paul 1930, Plate 45 G5; approximate: measured from a 1930 plate scan"}
+{"n": "Yid Lilae", "plate": 45, "col": "H", "row": 6, "h": "#6A596A", "note": "Maerz & Paul 1930, Plate 45 H6; approximate: measured from a 1930 plate scan"}
+{"n": "Livid Pr", "plate": 45, "col": "I", "row": 6, "h": "#6D5466", "note": "Maerz & Paul 1930, Plate 45 I6; approximate: measured from a 1930 plate scan"}
+{"n": "Blue Orchid", "plate": 45, "col": "A", "row": 7, "h": "#787977", "note": "Maerz & Paul 1930, Plate 45 A7; approximate: measured from a 1930 plate scan"}
+{"n": "Ramier Bl", "plate": 45, "col": "E", "row": 7, "h": "#625573", "note": "Maerz & Paul 1930, Plate 45 E7; approximate: measured from a 1930 plate scan"}
+{"n": "Cygnet", "plate": 45, "col": "L", "row": 7, "h": "#673253", "note": "Maerz & Paul 1930, Plate 45 L7; approximate: measured from a 1930 plate scan"}
+{"n": "Digitalis", "plate": 45, "col": "G", "row": 8, "h": "#574573", "note": "Maerz & Paul 1930, Plate 45 G8; approximate: measured from a 1930 plate scan"}
+{"n": "Cannon", "plate": 45, "col": "J", "row": 8, "h": "#563F6A", "note": "Maerz & Paul 1930, Plate 45 J8; approximate: measured from a 1930 plate scan; OCR 'Non' corrected to 'Cannon' against the ISCC-NBS 1955 Maerz & Paul name list", "uncertain": "dE00 28 from its ISCC-NBS 1955 block centroid (block 152); see research/MAERZ-PAUL.md s6"}
+{"n": "Mulberry Purple", "plate": 45, "col": "K", "row": 10, "h": "#463066", "note": "Maerz & Paul 1930, Plate 45 K10; approximate: measured from a 1930 plate scan"}
+{"n": "Jamson", "plate": 45, "col": "J", "row": 11, "h": "#3E2E6E", "note": "Maerz & Paul 1930, Plate 45 J11; approximate: measured from a 1930 plate scan"}
+{"n": "Jatican", "plate": 45, "col": "L", "row": 12, "h": "#38295F", "note": "Maerz & Paul 1930, Plate 45 L12; approximate: measured from a 1930 plate scan"}
+{"n": "Cement Nations a Grey", "plate": 46, "col": "A", "row": 1, "h": "#8A8A87", "note": "Maerz & Paul 1930, Plate 46 A1; approximate: measured from a 1930 plate scan"}
+{"n": "Shadow", "plate": 46, "col": "C", "row": 1, "h": "#7B6F67", "note": "Maerz & Paul 1930, Plate 46 C1; approximate: measured from a 1930 plate scan", "uncertain": "dE00 30 from its ISCC-NBS 1955 block centroid (block 44); see research/MAERZ-PAUL.md s6"}
+{"n": "Quaker Drab", "plate": 46, "col": "B", "row": 2, "h": "#6A6A69", "note": "Maerz & Paul 1930, Plate 46 B2; approximate: measured from a 1930 plate scan"}
+{"n": "Mauve Dust", "plate": 46, "col": "C", "row": 2, "h": "#716869", "note": "Maerz & Paul 1930, Plate 46 C2; approximate: measured from a 1930 plate scan"}
+{"n": "Corinth", "plate": 46, "col": "J", "row": 2, "h": "#815963", "note": "Maerz & Paul 1930, Plate 46 J2; approximate: measured from a 1930 plate scan"}
+{"n": "Peat", "plate": 46, "col": "B", "row": 3, "h": "#676768", "note": "Maerz & Paul 1930, Plate 46 B3; approximate: measured from a 1930 plate scan"}
+{"n": "Old Mauve", "plate": 46, "col": "I", "row": 5, "h": "#6F4F60", "note": "Maerz & Paul 1930, Plate 46 I5; approximate: measured from a 1930 plate scan"}
+{"n": "CLADH I", "plate": 46, "col": "A", "row": 6, "h": "#828380", "note": "Maerz & Paul 1930, Plate 46 A6; approximate: measured from a 1930 plate scan"}
+{"n": "Plumbago-Slatet", "plate": 46, "col": "D", "row": 6, "h": "#5E5365", "note": "Maerz & Paul 1930, Plate 46 D6; approximate: measured from a 1930 plate scan"}
+{"n": "Napoli", "plate": 46, "col": "I", "row": 6, "h": "#634C61", "note": "Maerz & Paul 1930, Plate 46 I6; approximate: measured from a 1930 plate scan; OCR 'Pol' corrected to 'Napoli' against the ISCC-NBS 1955 Maerz & Paul name list", "uncertain": "dE00 32 from its ISCC-NBS 1955 block centroid (block 174); see research/MAERZ-PAUL.md s6"}
+{"n": "MOWISS DI Slate Bl", "plate": 46, "col": "A", "row": 7, "h": "#80817E", "note": "Maerz & Paul 1930, Plate 46 A7; approximate: measured from a 1930 plate scan"}
+{"n": "Del Monte", "plate": 46, "col": "E", "row": 7, "h": "#574A6D", "note": "Maerz & Paul 1930, Plate 46 E7; approximate: measured from a 1930 plate scan"}
+{"n": "Yvette V", "plate": 46, "col": "I", "row": 8, "h": "#513E68", "note": "Maerz & Paul 1930, Plate 46 I8; approximate: measured from a 1930 plate scan"}
+{"n": "Jictoria", "plate": 46, "col": "J", "row": 9, "h": "#483564", "note": "Maerz & Paul 1930, Plate 46 J9; approximate: measured from a 1930 plate scan"}
+{"n": "Monks", "plate": 46, "col": "I", "row": 10, "h": "#47356C", "note": "Maerz & Paul 1930, Plate 46 I10; approximate: measured from a 1930 plate scan"}
+{"n": "Petunia", "plate": 46, "col": "K", "row": 11, "h": "#3A2A61", "note": "Maerz & Paul 1930, Plate 46 K11; approximate: measured from a 1930 plate scan"}
+{"n": "Rosetta", "plate": 47, "col": "C", "row": 1, "h": "#636153", "note": "Maerz & Paul 1930, Plate 47 C1; approximate: measured from a 1930 plate scan; OCR 'Rosett' corrected to 'Rosetta' against the ISCC-NBS 1955 Maerz & Paul name list"}
+{"n": "Griffin", "plate": 47, "col": "A", "row": 3, "h": "#7D7D7B", "note": "Maerz & Paul 1930, Plate 47 A3; approximate: measured from a 1930 plate scan"}
+{"n": "Shark", "plate": 47, "col": "C", "row": 3, "h": "#5A5A5A", "note": "Maerz & Paul 1930, Plate 47 C3; approximate: measured from a 1930 plate scan"}
+{"n": "Perilla", "plate": 47, "col": "I", "row": 3, "h": "#5E3840", "note": "Maerz & Paul 1930, Plate 47 I3; approximate: measured from a 1930 plate scan", "uncertain": "dE00 27 from its ISCC-NBS 1955 block centroid (block 205); see research/MAERZ-PAUL.md s6"}
+{"n": "STEEL Davy's", "plate": 47, "col": "A", "row": 4, "h": "#7C7C7A", "note": "Maerz & Paul 1930, Plate 47 A4; approximate: measured from a 1930 plate scan"}
+{"n": "Leadville", "plate": 47, "col": "C", "row": 5, "h": "#515256", "note": "Maerz & Paul 1930, Plate 47 C5; approximate: measured from a 1930 plate scan; OCR 'Leadvill' corrected to 'Leadville' against the ISCC-NBS 1955 Maerz & Paul name list"}
+{"n": "SLATE Dusk", "plate": 47, "col": "C", "row": 6, "h": "#4B4B53", "note": "Maerz & Paul 1930, Plate 47 C6; approximate: measured from a 1930 plate scan"}
+{"n": "PRUNE", "plate": 47, "col": "I", "row": 8, "h": "#3A2B3D", "note": "Maerz & Paul 1930, Plate 47 I8; approximate: measured from a 1930 plate scan", "uncertain": "dE00 53 from its ISCC-NBS 1955 block centroid (block 120); see research/MAERZ-PAUL.md s6"}
+{"n": "Plumbet", "plate": 47, "col": "I", "row": 9, "h": "#34273E", "note": "Maerz & Paul 1930, Plate 47 I9; approximate: measured from a 1930 plate scan; OCR 'PLUM' corrected to 'Plumbet' against the ISCC-NBS 1955 Maerz & Paul name list", "uncertain": "dE00 58 from its ISCC-NBS 1955 block centroid (block 190); see research/MAERZ-PAUL.md s6"}
+{"n": "Cyclamen", "plate": 47, "col": "K", "row": 9, "h": "#372338", "note": "Maerz & Paul 1930, Plate 47 K9; approximate: measured from a 1930 plate scan; OCR 'Cyclame' corrected to 'Cyclamen' against the ISCC-NBS 1955 Maerz & Paul name list"}
+{"n": "REGIME", "plate": 47, "col": "C", "row": 10, "h": "#2D3156", "note": "Maerz & Paul 1930, Plate 47 C10; approximate: measured from a 1930 plate scan"}
+{"n": "Windsor", "plate": 47, "col": "I", "row": 10, "h": "#33273F", "note": "Maerz & Paul 1930, Plate 47 I10; approximate: measured from a 1930 plate scan"}
+{"n": "Ink Blue", "plate": 47, "col": "A", "row": 11, "h": "#7A797A", "note": "Maerz & Paul 1930, Plate 47 A11; approximate: measured from a 1930 plate scan", "uncertain": "dE00 23 from its ISCC-NBS 1955 block centroid (block 187); see research/MAERZ-PAUL.md s6"}
+{"n": "NDEPED Jrania Bh", "plate": 47, "col": "G", "row": 12, "h": "#2D274A", "note": "Maerz & Paul 1930, Plate 47 G12; approximate: measured from a 1930 plate scan"}
+{"n": "Tortensia", "plate": 47, "col": "K", "row": 12, "h": "#30273F", "note": "Maerz & Paul 1930, Plate 47 K12; approximate: measured from a 1930 plate scan"}
+{"n": "E Cruiser Plymou", "plate": 48, "col": "A", "row": 1, "h": "#8C9376", "note": "Maerz & Paul 1930, Plate 48 A1; approximate: measured from a 1930 plate scan"}
+{"n": "Pewter", "plate": 48, "col": "A", "row": 3, "h": "#8A9273", "note": "Maerz & Paul 1930, Plate 48 A3; approximate: measured from a 1930 plate scan", "uncertain": "dE00 27 from its ISCC-NBS 1955 block centroid (block 266); see research/MAERZ-PAUL.md s6"}
+{"n": "Slag", "plate": 48, "col": "A", "row": 4, "h": "#899173", "note": "Maerz & Paul 1930, Plate 48 A4; approximate: measured from a 1930 plate scan", "uncertain": "dE00 26 from its ISCC-NBS 1955 block centroid (block 266); see research/MAERZ-PAUL.md s6"}
+{"n": "Cobbles", "plate": 48, "col": "C", "row": 4, "h": "#2A2D26", "note": "Maerz & Paul 1930, Plate 48 C4; approximate: measured from a 1930 plate scan"}
+{"n": "Sooty B", "plate": 48, "col": "C", "row": 5, "h": "#262823", "note": "Maerz & Paul 1930, Plate 48 C5; approximate: measured from a 1930 plate scan"}
+{"n": "Slate Bl", "plate": 48, "col": "C", "row": 6, "h": "#242623", "note": "Maerz & Paul 1930, Plate 48 C6; approximate: measured from a 1930 plate scan"}
+{"n": "Graphite", "plate": 48, "col": "C", "row": 7, "h": "#232322", "note": "Maerz & Paul 1930, Plate 48 C7; approximate: measured from a 1930 plate scan; OCR 'GRAPH' corrected to 'Graphite' against the ISCC-NBS 1955 Maerz & Paul name list"}
+{"n": "Mulberry", "plate": 48, "col": "E", "row": 9, "h": "#1E1C20", "note": "Maerz & Paul 1930, Plate 48 E9; approximate: measured from a 1930 plate scan"}
+{"n": "Continen", "plate": 48, "col": "C", "row": 11, "h": "#1A1922", "note": "Maerz & Paul 1930, Plate 48 C11; approximate: measured from a 1930 plate scan"}
+{"n": "Valencia", "plate": 49, "col": "H", "row": 5, "h": "#D585A1", "note": "Maerz & Paul 1930, Plate 49 H5; approximate: measured from a 1930 plate scan"}
+{"n": "Mallow Pk", "plate": 49, "col": "A", "row": 7, "h": "#7C7D7B", "note": "Maerz & Paul 1930, Plate 49 A7; approximate: measured from a 1930 plate scan"}
+{"n": "INDIANA", "plate": 49, "col": "L", "row": 7, "h": "#D12C6A", "note": "Maerz & Paul 1930, Plate 49 L7; approximate: measured from a 1930 plate scan"}
+{"n": "Thulite P", "plate": 50, "col": "I", "row": 1, "h": "#D68D9B", "note": "Maerz & Paul 1930, Plate 50 I1; approximate: measured from a 1930 plate scan"}
+{"n": "Cameo Pk", "plate": 50, "col": "C", "row": 2, "h": "#D0BEC1", "note": "Maerz & Paul 1930, Plate 50 C2; approximate: measured from a 1930 plate scan"}
+{"n": "Spring Beauty", "plate": 50, "col": "J", "row": 5, "h": "#CE5580", "note": "Maerz & Paul 1930, Plate 50 J5; approximate: measured from a 1930 plate scan"}
+{"n": "Cosmos", "plate": 50, "col": "D", "row": 6, "h": "#CF8DAE", "note": "Maerz & Paul 1930, Plate 50 D6; approximate: measured from a 1930 plate scan"}
+{"n": "Persian Rose", "plate": 50, "col": "K", "row": 7, "h": "#CD2169", "note": "Maerz & Paul 1930, Plate 50 K7; approximate: measured from a 1930 plate scan"}
+{"n": "Fuchsia", "plate": 50, "col": "I", "row": 12, "h": "#CB168B", "note": "Maerz & Paul 1930, Plate 50 I12; approximate: measured from a 1930 plate scan; OCR 'UCHSIA' corrected to 'Fuchsia' against the ISCC-NBS 1955 Maerz & Paul name list"}
+{"n": "Livid Pl", "plate": 51, "col": "D", "row": 1, "h": "#BAA6A1", "note": "Maerz & Paul 1930, Plate 51 D1; approximate: measured from a 1930 plate scan"}
+{"n": "Persian Lilac", "plate": 51, "col": "H", "row": 1, "h": "#C3989D", "note": "Maerz & Paul 1930, Plate 51 H1; approximate: measured from a 1930 plate scan"}
+{"n": "Spinel F", "plate": 51, "col": "K", "row": 1, "h": "#C9788A", "note": "Maerz & Paul 1930, Plate 51 K1; approximate: measured from a 1930 plate scan"}
+{"n": "I Opal s Mauve", "plate": 51, "col": "A", "row": 2, "h": "#80817D", "note": "Maerz & Paul 1930, Plate 51 A2; approximate: measured from a 1930 plate scan"}
+{"n": "Sweet Pea", "plate": 51, "col": "C", "row": 2, "h": "#BBA7A9", "note": "Maerz & Paul 1930, Plate 51 C2; approximate: measured from a 1930 plate scan"}
+{"n": "Mallow Red", "plate": 51, "col": "I", "row": 3, "h": "#C27B90", "note": "Maerz & Paul 1930, Plate 51 I3; approximate: measured from a 1930 plate scan; OCR 'Mallow' corrected to 'Mallow Red' against the ISCC-NBS 1955 Maerz & Paul name list"}
+{"n": "Candida", "plate": 51, "col": "C", "row": 5, "h": "#B78B9F", "note": "Maerz & Paul 1930, Plate 51 C5; approximate: measured from a 1930 plate scan"}
+{"n": "Clover", "plate": 51, "col": "C", "row": 7, "h": "#B66B9A", "note": "Maerz & Paul 1930, Plate 51 C7; approximate: measured from a 1930 plate scan"}
+{"n": "Byzantine", "plate": 51, "col": "K", "row": 8, "h": "#BE2D7C", "note": "Maerz & Paul 1930, Plate 51 K8; approximate: measured from a 1930 plate scan"}
+{"n": "LUBEL-LITE", "plate": 51, "col": "L", "row": 8, "h": "#BE2572", "note": "Maerz & Paul 1930, Plate 51 L8; approximate: measured from a 1930 plate scan"}
+{"n": "TMOX", "plate": 51, "col": "A", "row": 11, "h": "#727372", "note": "Maerz & Paul 1930, Plate 51 A11; approximate: measured from a 1930 plate scan"}
+{"n": "Daphne Red", "plate": 52, "col": "I", "row": 1, "h": "#B58089", "note": "Maerz & Paul 1930, Plate 52 I1; approximate: measured from a 1930 plate scan; OCR 'Daphne' corrected to 'Daphne Red' against the ISCC-NBS 1955 Maerz & Paul name list"}
+{"n": "Wild Orchid", "plate": 52, "col": "A", "row": 7, "h": "#70706F", "note": "Maerz & Paul 1930, Plate 52 A7; approximate: measured from a 1930 plate scan"}
+{"n": "Verbena", "plate": 52, "col": "A", "row": 8, "h": "#6D6D6C", "note": "Maerz & Paul 1930, Plate 52 A8; approximate: measured from a 1930 plate scan", "uncertain": "dE00 23 from its ISCC-NBS 1955 block centroid (block 241); see research/MAERZ-PAUL.md s6"}
+{"n": "Ophelia", "plate": 52, "col": "F", "row": 8, "h": "#A2397F", "note": "Maerz & Paul 1930, Plate 52 F8; approximate: measured from a 1930 plate scan"}
+{"n": "Hockey", "plate": 53, "col": "L", "row": 11, "h": "#830B3A", "note": "Maerz & Paul 1930, Plate 53 L11; approximate: measured from a 1930 plate scan; OCR 'HOCK' corrected to 'Hockey' against the ISCC-NBS 1955 Maerz & Paul name list"}
+{"n": "Opal Gy", "plate": 54, "col": "B", "row": 1, "h": "#7C776B", "note": "Maerz & Paul 1930, Plate 54 B1; approximate: measured from a 1930 plate scan"}
+{"n": "CRANE Prince Grey", "plate": 54, "col": "A", "row": 2, "h": "#737372", "note": "Maerz & Paul 1930, Plate 54 A2; approximate: measured from a 1930 plate scan"}
+{"n": "Rose Castor", "plate": 54, "col": "C", "row": 2, "h": "#7F696C", "note": "Maerz & Paul 1930, Plate 54 C2; approximate: measured from a 1930 plate scan"}
+{"n": "Noe", "plate": 54, "col": "H", "row": 8, "h": "#832F5C", "note": "Maerz & Paul 1930, Plate 54 H8; approximate: measured from a 1930 plate scan"}
+{"n": "Pansy Pr", "plate": 54, "col": "L", "row": 8, "h": "#801B44", "note": "Maerz & Paul 1930, Plate 54 L8; approximate: measured from a 1930 plate scan"}
+{"n": "HELIO", "plate": 54, "col": "C", "row": 10, "h": "#7B225F", "note": "Maerz & Paul 1930, Plate 54 C10; approximate: measured from a 1930 plate scan"}
+{"n": "Thistle", "plate": 54, "col": "A", "row": 12, "h": "#6C6C6C", "note": "Maerz & Paul 1930, Plate 54 A12; approximate: measured from a 1930 plate scan", "uncertain": "dE00 21 from its ISCC-NBS 1955 block centroid (block 223); see research/MAERZ-PAUL.md s6"}
+{"n": "TURTI", "plate": 55, "col": "C", "row": 1, "h": "#5E5B4F", "note": "Maerz & Paul 1930, Plate 55 C1; approximate: measured from a 1930 plate scan"}
+{"n": "DOVE", "plate": 55, "col": "D", "row": 1, "h": "#605D4F", "note": "Maerz & Paul 1930, Plate 55 D1; approximate: measured from a 1930 plate scan", "uncertain": "dE00 30 from its ISCC-NBS 1955 block centroid (block 259); see research/MAERZ-PAUL.md s6"}
+{"n": "LEAD GREBI Squirre", "plate": 55, "col": "A", "row": 2, "h": "#7C7D7A", "note": "Maerz & Paul 1930, Plate 55 A2; approximate: measured from a 1930 plate scan"}
+{"n": "Mauve", "plate": 55, "col": "E", "row": 2, "h": "#644F4F", "note": "Maerz & Paul 1930, Plate 55 E2; approximate: measured from a 1930 plate scan"}
+{"n": "Pigeon", "plate": 55, "col": "A", "row": 3, "h": "#7B7C79", "note": "Maerz & Paul 1930, Plate 55 A3; approximate: measured from a 1930 plate scan; OCR 'PIGEO' corrected to 'Pigeon' against the ISCC-NBS 1955 Maerz & Paul name list"}
+{"n": "Wineberry", "plate": 55, "col": "G", "row": 4, "h": "#5E3940", "note": "Maerz & Paul 1930, Plate 55 G4; approximate: measured from a 1930 plate scan; OCR 'Wineber' corrected to 'Wineberry' against the ISCC-NBS 1955 Maerz & Paul name list"}
+{"n": "Rubient", "plate": 55, "col": "K", "row": 8, "h": "#5D192E", "note": "Maerz & Paul 1930, Plate 55 K8; approximate: measured from a 1930 plate scan"}
+{"n": "Gooseberry", "plate": 55, "col": "G", "row": 9, "h": "#58213C", "note": "Maerz & Paul 1930, Plate 55 G9; approximate: measured from a 1930 plate scan; OCR 'Gooseber' corrected to 'Gooseberry' against the ISCC-NBS 1955 Maerz & Paul name list"}
+{"n": "Kara Da", "plate": 56, "col": "A", "row": 2, "h": "#538B6E", "note": "Maerz & Paul 1930, Plate 56 A2; approximate: measured from a 1930 plate scan"}
+{"n": "Old Lave", "plate": 56, "col": "A", "row": 7, "h": "#558F6F", "note": "Maerz & Paul 1930, Plate 56 A7; approximate: measured from a 1930 plate scan"}
+{"n": "Aol", "plate": 56, "col": "D", "row": 9, "h": "#1B171C", "note": "Maerz & Paul 1930, Plate 56 D9; approximate: measured from a 1930 plate scan"}
+{"n": "Id Burgi", "plate": 56, "col": "G", "row": 9, "h": "#231F1E", "note": "Maerz & Paul 1930, Plate 56 G9; approximate: measured from a 1930 plate scan"}
+{"n": "AULBERR", "plate": 56, "col": "G", "row": 12, "h": "#262125", "note": "Maerz & Paul 1930, Plate 56 G12; approximate: measured from a 1930 plate scan"}
+{"n": "FRUIT", "plate": 56, "col": "H", "row": 12, "h": "#1B1F20", "note": "Maerz & Paul 1930, Plate 56 H12; approximate: measured from a 1930 plate scan"}
+{"n": "Port Wine", "plate": 56, "col": "I", "row": 12, "h": "#262623", "note": "Maerz & Paul 1930, Plate 56 I12; approximate: measured from a 1930 plate scan"}
