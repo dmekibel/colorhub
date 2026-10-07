@@ -21,8 +21,10 @@ The design is built from proven decisions in real products, not invented from sc
 | "Meet the unit" as a full-screen vertical pager | TikTok, Instagram Reels | One color per screen, swipe up. No menus. |
 | Each color shown beside its nearest neighbor | Paint-store chip strips, teaching by contrast | Words are learned at their boundaries: teal only means something next to turquoise. |
 | Unit cover as a fanned deck of paint strips, light to dark | Pantone Formula Guide fan deck | Shows the whole family at once and sets the theme. |
-| Home hero: every color name plotted by hue on the CIELAB a\*b\* plane, lighting up as you own it | CIELAB chromaticity diagrams; Apple Fitness rings (fill as you progress) | Honest, beautiful progress: you see which parts of color space you can name. |
-| One "next step" card at the bottom of home, with review first and then the next unit | Duolingo's single path and big bottom button | One clear path, reachable by thumb. No lesson-picking. |
+| Today: one primary card (review, else the next unit) with the screen's only filled button, then "Today's three" (daily challenge · color of the day · one suggested Train station) as equal quiet tiles with a done dot, then the collection quilt | Duolingo's single path; Apple Fitness's three rings (same weight, done or not at a glance) | One clear path, reachable by thumb. The daily extras are visible but never compete with it. |
+| Show before asking: welcome, then straight to the placement deck; the two profile questions wait until the first visit to Train (and live in the ⋯ menu) | Apple onboarding guidance (value first, permissions in context) | The first real color is on screen two taps in. Nobody answers a form before seeing the product. |
+| Every tab opens with the same line: brand left, the tab's actions and the ⋯ menu right. Every inner screen: back (or close, for a task) left, title centered, optional action right | iOS navigation bars | Settings are reachable from anywhere, always in the same corner. |
+| Motion signature: wherever a color opens, its chip grows into the new page's swatch (under 400 ms; off with Reduce Motion) | iOS app-launch zoom, Material container transform | The color you tapped is the color you land on; the transition says "this is the same thing, bigger". |
 | Path track: one segment per unit, filled with that unit's gradient once done | Duolingo path, GitHub contribution graph | Shows where you are without opening a menu. |
 | Welcome screen: a wall of every color sorted into strips by hue | Paint-store chip walls | The product's promise in one image. |
 | Add to Home Screen, fullscreen, safe-area aware | iOS web apps (ALTER uses the same setup) | Most use is on David's phone. |
@@ -39,7 +41,7 @@ The design is built from proven decisions in real products, not invented from sc
 
 ## Tunables worth testing on David's phone
 - Card corner radius (30px), stamp angle (±10°), and swipe threshold (100px, or a fast flick past 36px).
-- Map size (`.map` width `37dvh`) and dot sizes (5, 6 and 7 px radius for new, learning and owned).
+- The color-opening morph (360 ms, `runMorph` in core.js) and the dimming of done tiles in "Today's three" (`.tday.done`, 55%).
 - Booth grey (`css/booth.css`, now `#5F5F5F`): try L\* 40 to 50 on the phone; lighter shows browns best, darker keeps text readable.
 
 ## Feature hierarchy: many features, never a mess (David, 2026-10-07)

@@ -1,0 +1,68 @@
+/* Production cards in the review deck: Say it (type the name) and Make it (build the color). See js/produce.js.
+   They reuse the deck's card, paper label and footer; this file only adds what is new. */
+.card.prod{touch-action:manipulation;cursor:default}
+.card.prod .fill{transition:background .12s linear}
+/* small paper tag on a color, like a chip sticker */
+.p-tag{position:absolute;top:16px;left:16px;z-index:1;background:var(--paper);color:var(--paper-ink);padding:7px 10px 6px;font:500 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;box-shadow:0 6px 20px -8px rgba(0,0,0,.5)}
+.label .verdict{display:flex;align-items:center;gap:7px;margin:12px 0 -2px;font:500 10.5px/1.35 var(--mono);letter-spacing:.12em;text-transform:uppercase;text-wrap:balance}
+.label .verdict svg{width:11px;height:11px;flex:none}
+.verdict.ok{color:#2D7448}.verdict.close{color:#8C5E0E}.verdict.miss{color:#A8442F}
+
+/* ---------- Say it ---------- */
+.prod-foot{height:auto;min-height:104px;flex-direction:column;align-items:stretch;justify-content:flex-end;gap:2px;padding:10px 0 0}
+.say-form{display:flex;align-items:center;gap:2px;border-bottom:1px solid var(--rule-2)}
+.say-form.shake{animation:sayShake .36s ease-out}
+@keyframes sayShake{20%{transform:translateX(-9px)}45%{transform:translateX(8px)}70%{transform:translateX(-4px)}}
+.say-in{flex:1;min-width:0;background:none;border:0;border-radius:0;outline:none;-webkit-appearance:none;appearance:none;color:var(--ink);caret-color:var(--ink);
+  font:400 36px/1.15 var(--serif);letter-spacing:-.015em;padding:6px 2px 8px}
+.say-in::placeholder{color:var(--faint);opacity:1}
+.say-mic,.say-go{flex:none;width:44px;height:48px;display:grid;place-items:center;color:var(--soft);transition:color .2s,transform .3s var(--spring)}
+.say-go{color:var(--ink)}
+.say-mic:active,.say-go:active{transform:scale(.88)}
+.say-mic.on{color:var(--bad);animation:micPulse 1.1s ease-in-out infinite}
+@keyframes micPulse{50%{opacity:.45}}
+.say-sub{display:flex;justify-content:space-between;align-items:center;min-height:40px;font:500 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.say-give{color:var(--soft);padding:12px 12px 12px 0;font:inherit;letter-spacing:inherit;text-transform:inherit}
+@media (pointer:coarse){.say-hint{visibility:hidden}}
+/* keyboard up (iPhone): the screen is fitted to the visible area above the keys */
+.deck.kb{padding-bottom:6px}
+.deck.kb .stage{margin-top:6px}
+.deck.kb .say-sub{min-height:34px}
+
+/* ---------- Make it ---------- */
+.mk-q{position:absolute;top:16px;left:16px;max-width:calc(100% - 32px);background:var(--paper);color:var(--paper-ink);padding:10px 14px 12px;box-shadow:0 10px 30px -12px rgba(0,0,0,.55)}
+.mk-q .eyebrow{color:var(--paper-soft)}
+.mk-q b{display:block;font:400 clamp(40px,11.5vw,54px)/.95 var(--serif);letter-spacing:-.03em;margin-top:6px;text-wrap:balance}
+.prod-foot.make{flex-direction:row;align-items:center;justify-content:space-between;gap:18px;padding:14px 0 0}
+.mk-pick{flex:none;width:min(52vw,27dvh,250px)}
+.mk-pick .cp-wheel{width:100%}
+/* the picker's own readout would name the color, which is the answer: hide it, and keep only the wheel */
+.mk-pick .cp-read,.mk-pick .cp-modes,.mk-pick .cp-sliders{display:none}
+.mk-side{flex:1;min-width:0;display:flex;flex-direction:column;gap:16px}
+.mk-side p{font:500 10.5px/1.5 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--faint);text-wrap:pretty}
+.mk-done{display:flex;align-items:center;justify-content:space-between;min-height:58px;padding:0 2px;border-top:1px solid var(--rule-2);border-bottom:1px solid var(--rule-2);font:400 30px/1 var(--serif);letter-spacing:-.01em;transition:opacity .2s,padding .35s var(--ease)}
+.mk-done svg{width:20px;height:20px}
+.mk-done:active{opacity:.6;padding-left:8px}
+.mk-split{position:absolute;inset:0;display:flex}
+.mk-split>div{flex:1;position:relative;background:var(--c)}
+.mk-split>div+div .p-tag{left:12px}
+.card.make .label{padding-top:14px}
+
+/* ---------- one-time intro card ---------- */
+.card.intro{background:var(--paper);color:var(--paper-ink)}
+.intro-in{position:absolute;inset:0;display:flex;flex-direction:column;padding:20px 22px 18px}
+.intro-in .eyebrow{color:var(--paper-soft)}
+.intro-in h2{font:400 clamp(54px,15vw,72px)/.9 var(--serif);letter-spacing:-.03em;margin:8px 0 14px}
+.intro-in ol{list-style:none;margin:0;padding:0;counter-reset:i}
+.intro-in li{counter-increment:i;display:grid;grid-template-columns:30px 1fr;padding:10px 0;border-top:1px solid var(--paper-line);font-size:15px;line-height:1.4;color:#3A3832;text-wrap:pretty}
+.intro-in li::before{content:counter(i,decimal-leading-zero);font:500 10.5px/2 var(--mono);color:var(--paper-soft)}
+.intro-art{flex:1;min-height:0;display:flex;margin-bottom:18px}
+.ia-say,.ia-make{flex:1;display:flex;position:relative;overflow:hidden;border-radius:3px}
+.ia-say i{position:absolute;inset:0;background:var(--c)}
+.ia-say span{position:absolute;left:0;right:0;bottom:0;padding:10px 14px 12px;background:rgba(14,13,11,.9);color:var(--ink);font:400 32px/1 var(--serif)}
+.ia-say span b{display:inline-block;width:2px;height:28px;margin-left:2px;vertical-align:-4px;background:var(--ink);animation:caret 1s steps(1) infinite}
+@keyframes caret{50%{opacity:0}}
+.ia-make i{flex:1;position:relative;background:var(--c)}
+.ia-make em{position:absolute;top:10px;left:10px;background:var(--paper);color:var(--paper-ink);padding:5px 8px 4px;font:500 9.5px/1 var(--mono);font-style:normal;letter-spacing:.14em;text-transform:uppercase}
+/* screenshot mode (index.html#shot=say:... / make:... / intro:...) */
+.prod-shot *{transition:none!important;animation-duration:0s!important;animation-delay:0s!important}

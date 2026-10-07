@@ -32,16 +32,7 @@ function chStreak() {
 // the smallest difference you got right, as drawn on screen
 const chSharpest = (hits, rounds = challengeRounds()) => { let s = null; hits.forEach((h, i) => { if (h && rounds[i] && (s == null || rounds[i].act < s)) s = rounds[i].act; }); return s; };
 
-// the Gym's top card: today's six base colors, filled in once you've played
-function challengeCard() {
-  const r = challengeRounds(), done = chToday();
-  return `<button class="ch-card${done ? " done" : ""}" data-challenge>
-    <span class="ch-top"><span class="eyebrow">Daily · No. ${chNumber()}</span><span class="eyebrow">${chStreak() ? `${chStreak()}-day streak` : "Same for everyone"}</span></span>
-    <span class="ch-row">${r.map((x, i) => `<i style="--c:${x.base}" class="${done ? (done.hits[i] ? "hit" : "miss") : ""}"></i>`).join("")}</span>
-    <span class="ch-foot"><b>${done ? `${done.hits.filter(Boolean).length} of 6${chSharpest(done.hits, r) ? ` · you saw ${fmt(chSharpest(done.hits, r))} ΔE` : ""}` : "Six tiles, each one harder to spot"}</b>${done ? "<em>Share</em>" : ICON.arrow}</span>
-  </button>`;
-}
-
+// (Today shows the challenge as one of "Today's three" tiles: see home() in learn.js.)
 function challenge() {
   if (chToday()) return challengeDone();
   const rounds = challengeRounds(), hits = [];
@@ -94,7 +85,7 @@ function challengeDone(fresh) {
     <div class="ch-grid">${rounds.map((r, i) => `<span class="${st.hits[i] ? "hit" : "miss"}"><i style="--c:${r.base}"></i><em class="mono">${fmt(r.act)}</em></span>`).join("")}</div>
     <p class="lede">${got} of 6 right.${sharp ? ` The smallest difference you spotted was <b>${fmt(sharp)} ΔE</b>; about 1 is the limit for most people side by side.` : " Every round shrinks the difference, so the last ones are hard for anyone."} ${chStreak() > 1 ? `${chStreak()} days in a row.` : ""} A new set comes tomorrow.</p>
     <div class="stack"><button class="btn" data-share>Share your grid ${ICON.share}</button>
-    <button class="btn ghost" data-home>Back to the Gym</button></div>
+    <button class="btn ghost" data-home>Back to ${S.tab === "gym" ? "Train" : "Today"}</button></div>
   `, "result");
   el.querySelector("[data-home]").onclick = () => go(S.tab || "gym");
   el.querySelector("[data-share]").onclick = () => shareChallenge(st.hits, sharp);
