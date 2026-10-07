@@ -172,6 +172,29 @@ Ends with a lesson score and Next.
 - The path stays as the gentle default (the Continue pill); exploration is the other way in. Spaced review ties both together.
 - Size: M (Sonnet), reusing deck, odd one out, sort, Pick it and memory.
 
+## 13. Every color is a link; two-tier vocabulary (approved 2026-10-07)
+**Painting palettes (next job after the Commons batch lands, M, Sonnet)**
+- Arriving at a painting from a color search highlights the matching swatch: "≈ Aubergine · 5% of the canvas", with the precise
+  library name under it (fixes "the color I came from isn't in the palette").
+- Dynamic palette: a slider for how many colors (3 / 6 / 12 / up to ~20), precomputed offline from the cached small copies
+  (stored per painting in the gallery detail shards, no extra phone download); tap anywhere on the painting to name that spot
+  where the museum's image allows canvas reads (CORS), else the slider still works.
+- App-wide rule: every swatch everywhere is tappable (paintings, fashion, looks, poems, botany, gems, palettes).
+**The color link sheet**
+- Several nearest words in both tiers, each with closeness and tappable: Core words (the 101) and Precise names (library,
+  with provenance, e.g. Japanese kanji), plus the look-alike ring, "More paintings with this color", and Learn it.
+**Library color pages**
+- Every library color gets a generated page: names and sources, synonyms, look-alikes, paintings/poems/fashion containing it,
+  nearest core word.
+**Synonyms**
+- Group near-identical library names (e.g. below about ΔE00 2-3) as one color with several names ("Eggplant · also called
+  Aubergine, Brinjal"); learning targets distinguishable colors (probably ~1,000), not 2,700 hexes.
+**The vocabulary ladder (later job, M)**
+- Level 1: the core 101 (today's path). Level 2: common names people use (xkcd, web; ~300). Level 3: painter's and designer's
+  names (pigments, trade names; ~300). Level 4: traditions (Japanese, Werner, Ridgway, RAL; the rest).
+- Built from look-alike groups; Learn it works on any library color.
+- Progress shows both tiers: "Core 64/101 · Library 212/~1,000"; the top of the ladder = "master colorist".
+
 ## Also queued
 - World: Botany (in progress), then Gems.
 - Color-list swaps from research/COLOR-SELECTION.md (Bistre, Stone, Green grey, Rose, Grape, Seafoam; Terracotta and Tangerine hex fixes; cross-unit near-twin check).
