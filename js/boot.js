@@ -36,6 +36,7 @@ function shot(name) {
     case "daily": S.daily = {}; return daily();
     case "lab": return LAB[arg || "harmony"]();
     case "taste": return tasteShot(arg);
+    case "match": return openMatch(arg || "list", { shot: name.split(":")[2] || "task" });   // match:<id>[:reveal|:curves|:lvN|:done]
     case "say": case "make": case "intro": return prodShot(screen, arg);   // say:<empty|typed|right|close|wrong|gave>, make:<picking|result>, intro:<say|make>
     case "colors": {   // older hook: colors:<set id>:<view id>:<act>, read through the old S.cb shape
       const [, set, view, act] = name.split(":"), def = COLOR_SETS.find(x => x.id === (set || "101")) || COLOR_SETS[0];
