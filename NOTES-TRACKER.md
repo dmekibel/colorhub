@@ -23,7 +23,9 @@ Details live in ROADMAP.md (§ numbers).
 | 9 | Design rebuild to DESIGN-SYSTEM.md, in testable batches: rooms + navigation (Today folds into Learn), Learn it on the flashcards (fixes the cut-off and ugly steps), color page, Explore covers, Train stations, the bubble-to-page motion | DESIGN-SYSTEM.md | L, batched |
 | 10 | Stages as the learning path (25 / 50 / 101 / 150 / 250 / 400 / 600 / 800 / 1,000) with fields (painter, designer, colorist...) and end-of-stage tests | §14 | M + M |
 | 11 | More painting stories: real fact-checked stories in batches (next 30 famous paintings) + a short data-based note for every painting | content | M per batch + S |
-| 12 | Train families from the brainstorm: odd-one-out family, rearrange family (2D gradients), memory additions, photo missions | ROADMAP build order | M each |
+| 12 | Train results screen after every session: % right, count, your threshold in plain words ("you can tell apart colors about 1.5 ΔE apart, close to the limit of human vision"), every miss shown side by side with what you picked, "replay my misses", and your trend vs your own past sessions | gym.js / gym-engine.js | S-M |
+| 13 | World percentile ("better than 82% of people"): needs a small anonymous scores service (Supabase; opt-in, no personal data). Until then, show your threshold against the standard reference values for human color discrimination, labeled as reference values, not other players | backend + gym | M |
+| 14 | Train families from the brainstorm: odd-one-out family, rearrange family (2D gradients), memory additions, photo missions | ROADMAP build order | M each |
 
 ## Smaller fixes noted
 - One painting title is truncated ("The Fif").
