@@ -270,7 +270,20 @@ def build_centroids():
 SRC_SORTED = sorted(SRC_CODES, key=len, reverse=True)
 SRC_PATTERN = "|".join(re.escape(s) for s in SRC_SORTED)
 SRC_RE = re.compile(rf"\s+({SRC_PATTERN})(?:\s*\([A-Za-z0-9&\- ]{{1,20}}\))?\s+", re.IGNORECASE)
-NUM_RE = re.compile(r"\b(\d{1,3})\b")
+# A real ISCC-NBS block number is always its own whitespace-delimited token in the designation ("s.V 207",
+# "l.gY 101, m.gY 102"). A naive \d{1,3} scan across the whole designation string also matches digits that are
+# part of a GARBLED ABBREVIATION -- the OCR regularly misreads the lowercase munsell-modifier letters "l"/"O" as
+# the digits "1"/"0" ("l.Ol 106" -> "1.01 106"), which would otherwise hand a name a false extra block (1).
+# Splitting on whitespace first and requiring the WHOLE token (after stripping trailing punctuation) to be
+# nothing but digits excludes that kind of noise, since a decimal-point abbreviation fragment is never a bare
+# digit token.
+def block_numbers(text):
+    out = []
+    for tok in text.split():
+        tok = tok.strip(",.;()[]")
+        if tok.isdigit() and 1 <= int(tok) <= 267:
+            out.append(int(tok))
+    return out
 NAME_OK = re.compile(r"^[A-Za-z][A-Za-z '\-\.&]*$")
 
 
@@ -395,11 +408,19 @@ def extract_dictionary_raw():
                     rejects["no_src_token"] += 1
                     continue
                 name_part, src, rest = full[:m.start()], m.group(1).upper(), full[m.end():]
+                # A rare page/column-edge truncation can leave a source code with a bare, misleadingly-
+                # plausible digit right after it and no abbreviation at all before the real designation would
+                # have printed (seen once: "Glaucous M 1", really block 121 -- found by eye during spot-
+                # checking, not by this rule; a general positional check for it tried here made more entries
+                # worse than it fixed, given how many legitimate layouts -- a long name alone on its own line,
+                # synonym lists before the shared designation -- also split source code from abbreviation
+                # across physical lines. Left as a known, rare residual: block_numbers()'s own pure-digit-token
+                # rule still catches the much more common OCR failure mode, a garbled abbreviation ("l.Ol" ->
+                # "1.01") leaking a false low block number in front of the real one.
                 later = e["lines"][1:]
                 desig_extra = [ll for ll in later if re.search(r"\d", ll)]
                 name_extra = [ll for ll in later if not re.search(r"\d", ll)]
-                nums = [int(n) for n in NUM_RE.findall(rest + " " + " ".join(desig_extra))]
-                blocks = [n for n in nums if 1 <= n <= 267]
+                blocks = block_numbers(rest + " " + " ".join(desig_extra))
                 name = re.sub(r"\s*/.*$", "", clean_name(name_part)).strip()
                 if not blocks:
                     rejects["no_block_number"] += 1
