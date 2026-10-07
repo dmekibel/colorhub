@@ -229,8 +229,7 @@ function honeycomb(host, opts = {}) {
       ctx.beginPath(); ctx.arc(b.x, b.y, r, 0, 6.2832); ctx.fillStyle = it.h; ctx.fill();
       if (d < 8) continue;
       if (it.L < 20) { ctx.lineWidth = 1; ctx.strokeStyle = "rgba(236,232,223,.14)"; ctx.stroke(); }
-      const own = it.c && it.c.id && isMine(S.cards[it.c.id]);
-      if (own && d > 16) { ctx.beginPath(); ctx.arc(b.x, b.y, r + 3, 0, 6.2832); ctx.lineWidth = 1.2; ctx.strokeStyle = "rgba(236,232,223,.85)"; ctx.stroke(); }
+      // no ring for learned colors: the colors stay pure (the Learned view in the sheet shows progress)
       const la = Math.min(1, Math.max(0, (d - 50) / 6));
       if (la > 0) {
         const w = honeyWrap(ctx, it.n), fs = Math.min(w.fs * d, 30), lh = fs * 1.02, dot = mark && it.c;
