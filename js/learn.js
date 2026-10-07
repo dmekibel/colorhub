@@ -486,7 +486,7 @@ function menu() {
     <button class="item" data-a="restore">Restore a backup ${ICON.chev}</button>
     <button class="item" data-a="about">About the colors ${ICON.chev}</button>
     <button class="item" data-a="haptics">Haptics: ${S.haptics === false ? "off" : "on"} ${ICON.chev}</button>
-    <button class="item" data-a="quick">Quick mode, swipe only: ${S.quick ? "on" : "off"} ${ICON.chev}</button>
+    <button class="item" data-a="quick">Quick mode, no typing: ${S.quick ? "on" : "off"} ${ICON.chev}</button>
     <button class="item danger" data-a="reset">Reset all progress</button>`);
   sh.onclick = e => {
     const a = e.target.closest("[data-a]"); if (!a) return;
