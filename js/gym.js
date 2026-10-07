@@ -31,9 +31,9 @@ const metColors = () => { const m = ALL.filter(c => S.cards[c.id]); return m.len
 
 // Move a color by roughly `d` CIEDE2000 in a random direction, staying on screen.
 // dir weights let a drill choose lightness-only or chroma-only moves.
-function offset(baseLab, d, w = [.6, 1, 1]) {
+function offset(baseLab, d, w = [.6, 1, 1], rnd = Math.random) {
   for (let tries = 0; tries < 24; tries++) {
-    let v = [w[0] * (Math.random() * 2 - 1), w[1] * (Math.random() * 2 - 1), w[2] * (Math.random() * 2 - 1)];
+    let v = [w[0] * (rnd() * 2 - 1), w[1] * (rnd() * 2 - 1), w[2] * (rnd() * 2 - 1)];
     const n = Math.hypot(...v) || 1; v = v.map(x => x / n);
     let k = d;
     for (let i = 0; i < 6; i++) {
@@ -127,13 +127,14 @@ function gymHome() {
     ? `<div class="fams">${Object.entries(fam).sort((a, b) => a[1] - b[1]).map(([f, v]) => `<span><b>${fmt(v)}</b> ${esc(f)}</span>`).join("")}</div>` : "";
   const el = show(`
     <header class="bar"><div class="brand">${LOGO}<span>ColorHub</span></div><span class="eyebrow">Eye training</span></header>
-    <p class="eyebrow kick">${done ? "Done today — again if you like" : "Today's workout — three drills, two minutes"}</p>
-    <h1 class="tab-title">The <em>Gym</em></h1>
+    <h1 class="tab-title" style="margin-top:22px">The <em>Gym</em></h1>
+    ${challengeCard()}
+    <p class="eyebrow kick" style="margin-top:30px">${done ? "Workout done today — again if you like" : "Today's workout — three drills, two minutes"}</p>
     <div class="workout ${done ? "done" : ""}">
       <ol class="wk-list">${wk.map((k, i) => `<li>${drillPreview(k)}<span class="wk-txt"><span>${pad2(i + 1)} — ${k === "order" ? "3 strips" : "10 rounds"}</span><b>${esc(SKILLS[k].name)}</b><small>${esc(SKILLS[k].what)}</small></span></li>`).join("")}</ol>
       <button class="btn" data-workout>${done ? "Train again" : "Begin the workout"} ${ICON.arrow}</button>
     </div>
-    <div class="sec-head"><b>Your eye</b><span>smaller is sharper</span></div>
+    <button class="sec-head sec-link" data-eye><b>Your eye</b><span>progress ${ICON.chev}</span></button>
     ${S.profile && ["red-green", "blue-yellow"].includes(S.profile.cvd) ? `<p class="x-sub" style="margin-top:12px">Drills are tuned for ${S.profile.cvd} color blindness: differences lean on lightness and the colors you see best.</p>` : ""}
     <p class="x-sub limit-note">Each plate is split at your current limit: the smallest difference you can still see. Can you find the seam?</p>
     <div class="limits">${limits}</div>
@@ -147,6 +148,8 @@ function gymHome() {
   el.querySelector("[data-workout]").onclick = () => workout(wk);
   el.querySelectorAll("[data-drill]").forEach(b => b.onclick = () => runDrill(b.dataset.drill, { trials: SKILLS[b.dataset.drill].trials + 4, done: r => drillDone([r]) }));
   el.querySelector("[data-lightning]").onclick = lightning;
+  el.querySelector("[data-challenge]").onclick = () => chToday() ? challengeDone() : challenge();
+  el.querySelector("[data-eye]").onclick = eyeReport;
   el.querySelectorAll("[data-taste]").forEach(b => b.onclick = () => tasteIntro(b.dataset.taste));
 }
 
@@ -199,7 +202,7 @@ function runDrill(k, opts) {
   const answer = (ok, fam) => {
     if (fam) famHits[fam] = stair.d;
     stair.step(ok);
-    segs[n].classList.add("on"); segs[n].style.setProperty("--c", ok ? "var(--yes)" : "var(--no)");
+    segs[n].classList.add("on"); segs[n].style.setProperty("--c", ok ? "var(--good)" : "var(--bad)");
     buzz(ok ? 10 : [10, 40, 10]);
     n++;
     later(trial, ok ? 420 : 1100);

@@ -419,7 +419,7 @@ function home() {
     h = { kick: "All caught up", title: "The path is <em>complete</em>", plates: mine.slice(0, 12), meta: ["more tiers are coming"], cta: "", act: "" };
   }
   const el = show(`
-    <header class="bar"><div class="brand">${LOGO}<span>ColorHub</span></div><button class="icon-btn" data-menu aria-label="Menu">${ICON.dots}</button></header>
+    <header class="bar"><div class="brand">${LOGO}<span>ColorHub</span></div><span class="bar-r"><button class="icon-btn" data-eye aria-label="Color eye: name what the camera sees">${ICON_CAM}</button><button class="icon-btn" data-menu aria-label="Menu">${ICON.dots}</button></span></header>
     <p class="eyebrow kick">${h.kick}</p>
     <h1>${h.title}</h1>
     ${h.plates.length ? `<button class="plates" data-go aria-label="Start">${h.plates.map((c, k) => `<i style="--c:${c.h};--k:${k}"></i>`).join("")}</button>` : ""}
@@ -430,8 +430,11 @@ function home() {
       <div class="quilt">${quilt}</div>
       <div class="coll-foot"><span>${lrn.length ? `${lrn.length} in review` : "Recalled a day later"}</span><span>Spectrum →</span></div>
     </button>
+    ${installHint()}
   `, "home", "learn");
   el.querySelector("[data-menu]").onclick = menu;
+  el.querySelector("[data-eye]").onclick = () => eye();
+  wireInstall(el);
   const go1 = () => due.length ? deck("review") : nu ? meet(nu) : null;
   el.querySelectorAll("[data-review],[data-learn],[data-go]").forEach(b => b.onclick = go1);
   el.querySelector("[data-palette]").onclick = () => { S.lens = "spectrum"; save(); go("explore"); };
@@ -505,6 +508,7 @@ function menu() {
     <button class="item" data-a="backup">Back up your progress ${ICON.chev}</button>
     <button class="item" data-a="restore">Restore a backup ${ICON.chev}</button>
     <button class="item" data-a="about">About the colors ${ICON.chev}</button>
+    <button class="item" data-a="haptics">Haptics: ${S.haptics === false ? "off" : "on"} ${ICON.chev}</button>
     <button class="item danger" data-a="reset">Reset all progress</button>`);
   sh.onclick = e => {
     const a = e.target.closest("[data-a]"); if (!a) return;
@@ -514,6 +518,7 @@ function menu() {
     if (a.dataset.a === "restore") restoreProgress();
     if (a.dataset.a === "place") how();
     if (a.dataset.a === "about") about();
+    if (a.dataset.a === "haptics") { S.haptics = S.haptics === false; save(); buzz(12); toast(`Haptics ${S.haptics ? "on" : "off"}`); }
     if (a.dataset.a === "reset" && confirm("Erase all progress on this device?")) { S = fresh(); save(); MAP_PTS = null; welcome(); }
   };
 }
@@ -541,3 +546,16 @@ function restoreProgress() {
   };
   inp.click();
 }
+
+// "Put it on your Home Screen": shown once you've finished a unit, until it's installed or dismissed
+function installHint() {
+  if (standalone() || S.installNo || !Object.keys(S.done).length || !(INSTALL_EVT || isIOS())) return "";
+  return `<section class="inst"><div><b>Keep ColorHub on your Home Screen</b><span>${INSTALL_EVT ? "It opens full screen, like an app, and works offline." : "Tap Share, then “Add to Home Screen”. It opens full screen and works offline."}</span></div>
+    <div class="inst-act">${INSTALL_EVT ? `<button class="btn ghost" data-install>Install ${ICON.arrow}</button>` : ""}<button class="btn ghost" data-inst-no>Not now</button></div></section>`;
+}
+function wireInstall(el) {
+  const i = el.querySelector("[data-install]"), n = el.querySelector("[data-inst-no]");
+  if (i) i.onclick = async () => { const e = INSTALL_EVT; INSTALL_EVT = null; e.prompt(); try { await e.userChoice; } catch (x) {} home(); };
+  if (n) n.onclick = () => { S.installNo = true; save(); el.querySelector(".inst").remove(); };
+}
+const ICON_CAM = sv('<path d="M4 8.5A2.5 2.5 0 0 1 6.5 6h1.8l1.4-2h4.6l1.4 2h1.8A2.5 2.5 0 0 1 20 8.5v8A2.5 2.5 0 0 1 17.5 19h-11A2.5 2.5 0 0 1 4 16.5z"/><circle cx="12" cy="12.5" r="3.4"/>', 22, 1.8);

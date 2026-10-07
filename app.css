@@ -562,7 +562,7 @@ a{color:inherit}
 .cam .btn{position:absolute;left:16px;right:16px;bottom:16px;width:auto;background:rgba(14,13,11,.7)}
 
 /* ---------- motion ---------- */
-.ghost{position:fixed;left:0;right:0;z-index:0;pointer-events:none;transform-origin:50% 30%}
+.fade-ghost{position:fixed;left:0;right:0;z-index:0;pointer-events:none;transform-origin:50% 30%}
 .flyer{position:fixed;z-index:50;pointer-events:none;object-fit:cover;transform-origin:0 0;box-shadow:0 30px 60px -20px rgba(0,0,0,.8)}
 .rv{opacity:0;translate:0 18px;transition:opacity .7s var(--ease),translate .8s var(--ease)}
 .rv.in{opacity:1;translate:0 0}
@@ -825,3 +825,48 @@ img{transition:opacity .6s var(--ease)}
 .pv-chips i{aspect-ratio:1;border-radius:2px}
 .pv-pal + .h-list{margin-top:16px}
 .st-mini{position:relative;width:120px;height:120px}.st-mini svg{position:absolute;inset:0;width:100%;height:100%}
+
+/* ---------- daily challenge ---------- */
+.ch-card{display:flex;flex-direction:column;gap:14px;width:100%;text-align:left;margin-top:22px;padding:16px 0 18px;border-top:1px solid var(--rule-2);border-bottom:1px solid var(--rule)}
+.ch-top{display:flex;justify-content:space-between;gap:12px}
+.ch-row{display:grid;grid-template-columns:repeat(6,1fr);gap:4px}
+.ch-row i{aspect-ratio:1;background:var(--c);border-radius:2px;position:relative}
+.ch-card:not(.done) .ch-row i:nth-child(n){animation:chPulse 2.4s var(--ease) infinite;animation-delay:calc(var(--i,0) * 1s)}
+.ch-row i.miss{opacity:.28}
+.ch-row i.hit::after{content:"";position:absolute;left:50%;top:50%;width:6px;height:6px;margin:-3px;border-radius:50%;background:#F3F3F1;box-shadow:0 0 0 1.5px rgba(0,0,0,.25)}
+.ch-foot{display:flex;justify-content:space-between;align-items:center}
+.ch-foot b{font:400 22px/1.1 var(--serif)}
+.ch-foot em{font:500 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;font-style:normal;color:var(--soft)}
+.ch-foot svg{width:20px;height:20px}
+@keyframes chPulse{0%,100%{transform:none}50%{transform:translateY(-2px)}}
+.ch-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin:22px 0 18px}
+.ch-grid span{display:flex;flex-direction:column;gap:6px;align-items:center}
+.ch-grid i{width:100%;aspect-ratio:1;background:var(--c);border-radius:2px}
+.ch-grid .miss i{opacity:.25}
+.ch-grid em{font-size:10px;color:var(--faint);font-style:normal}
+.ch-grid .hit em{color:var(--ink)}
+.sec-link{width:100%;text-align:left}
+.sec-link span{display:inline-flex;align-items:center;gap:2px}
+.sec-link svg{width:13px;height:13px}
+
+/* ---------- your eye ---------- */
+.eye-sec .sec-head{margin-top:34px}
+.eye-chart{display:block;width:100%;height:120px;margin-top:14px;color:var(--ink);overflow:visible}
+.eye-ends{display:flex;justify-content:space-between;font:500 10px/1 var(--mono);letter-spacing:.06em;color:var(--faint);margin-top:8px}
+.eye-ends b{color:var(--ink);font-weight:500}
+.eye-gain{font:400 22px/1.15 var(--serif);margin-top:12px}
+.eye-fams{display:flex;flex-direction:column;gap:9px;margin-top:14px}
+.eye-fams div{display:grid;grid-template-columns:70px 1fr 38px;align-items:center;gap:10px;font-size:13px;color:var(--soft)}
+.eye-fams i{height:10px;width:var(--w);background:var(--c);border-radius:1px}
+.eye-fams b{text-align:right;font-size:11px;color:var(--ink);font-weight:500}
+.eye-ch{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-top:14px}
+.eye-ch span{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.eye-ch i{aspect-ratio:1;background:var(--rule);border-radius:1px}
+.eye-ch i.hit{background:var(--good)}
+
+/* home: camera shortcut and install hint */
+.bar-r{display:flex;gap:2px;margin-right:-10px}
+.inst{flex:none;display:flex;flex-direction:column;gap:10px;margin-top:30px;padding:16px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.inst b{display:block;font:400 22px/1.1 var(--serif)}
+.inst span{display:block;color:var(--soft);font-size:14px;margin-top:4px}
+.inst-act{flex:none;display:flex;gap:18px}.inst-act .btn{width:auto;min-height:36px}

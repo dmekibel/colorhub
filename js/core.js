@@ -7,7 +7,24 @@ const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;"
 const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; };
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
-const buzz = ms => { try { navigator.vibrate && navigator.vibrate(ms); } catch (e) {} };
+// Haptics: Android vibrates; iPhone Safari has no vibrate(), but toggling a hidden switch control
+// (<input type=checkbox switch>, Safari 17.4+) gives a light system tap. A wrong answer taps twice.
+let HAPTIC = null, lastTap = 0;
+function iosTap() {
+  const now = performance.now(); if (now - lastTap < 35) return; lastTap = now;
+  if (!HAPTIC) { HAPTIC = document.createElement("label"); HAPTIC.setAttribute("aria-hidden", "true"); HAPTIC.style.cssText = "position:fixed;left:-99px;top:0;opacity:0;pointer-events:none"; HAPTIC.innerHTML = '<input type="checkbox" switch tabindex="-1">'; document.body.appendChild(HAPTIC); }
+  HAPTIC.click();
+}
+const buzz = ms => {
+  if (typeof S !== "undefined" && S && S.haptics === false) return;
+  try { if (navigator.vibrate) { navigator.vibrate(ms); return; } } catch (e) {}
+  iosTap(); if (Array.isArray(ms) && ms.length > 2) setTimeout(iosTap, 90);
+};
+// Install: Android/desktop Chrome hands us a prompt; iPhone needs Share > Add to Home Screen.
+let INSTALL_EVT = null;
+addEventListener("beforeinstallprompt", e => { e.preventDefault(); INSTALL_EVT = e; });
+const standalone = () => matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+const isIOS = () => /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
 
 // ---------- color math (CIELAB, D65) ----------
 const rgb = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
@@ -182,12 +199,12 @@ addEventListener("scroll", () => document.body.classList.toggle("scrolled", scro
 function show(html, cls = "", tab = null) {
   timers.forEach(clearTimeout); timers = []; onKey = null;
   cleanup.forEach(f => { try { f(); } catch (e) {} }); cleanup = [];
-  document.querySelectorAll(".scrim,.sheet,.toast,.ghost").forEach(n => n.remove());
+  document.querySelectorAll(".scrim,.sheet,.toast,.fade-ghost").forEach(n => n.remove());
   // the old screen fades out underneath the new one
   const old = app.firstElementChild;
   if (old && !reduceMotion) {
     const ghost = document.createElement("div"), y = scrollY;
-    ghost.className = "ghost"; ghost.style.top = -y + "px";
+    ghost.className = "fade-ghost"; ghost.style.top = -y + "px";
     ghost.appendChild(old);
     document.body.appendChild(ghost);
     ghost.animate([{ opacity: 1, transform: "scale(1)" }, { opacity: 0, transform: "scale(.985)" }], { duration: 260, easing: "ease-out", fill: "forwards" }).onfinish = () => ghost.remove();
