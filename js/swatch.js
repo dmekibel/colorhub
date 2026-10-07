@@ -60,8 +60,7 @@ function nameSheet(hex) {
   const descLine = nm.between ? `Between ${esc(nm.between.a.toLowerCase())} and ${esc(nm.between.b.toLowerCase())}` : nm.mod ? esc(nm.text) : "";
   // every one of the ~1,000 colors should still lead to a deep article: the nearest 1-2 of the 101 taught
   // colors (the ones with full pages) get one quiet line, even when the sheet's own name isn't among them.
-  const nearApp = nearestColors(hex, 2).map(([c]) => c);
-  const noteLine = nearApp.length ? `Closest of the 101: ${nearApp.map(c => `${esc(c.n)} — ${esc(lookDiff({ h: hex, n: nm.n }, c))}`).join("; ")}` : "";
+  const noteLine = "";   // no "closest of the 101" line (David: the 101 aren't a special list)
   const hasName = !nm.between;
   const { sh, close } = sheet(`
     <div class="pk-hero" style="--c:${hex}" data-ink="${ink(hex)}" data-morph-src></div>

@@ -136,7 +136,6 @@ function namePage(entry, push = true, tapped) {
     ${shade ? `<p class="fine np-shade">A described shade: ${esc(shade.base)} made ${esc(shade.mod)}${shadeBase ? `. <button class="link" data-shade-base>See ${esc(shade.base)}</button>` : "."}</p>` : ""}
     ${also.length ? `<p class="fine np-also">Also called ${also.map(esc).join(", ")}.</p>` : ""}
     ${notes.length ? `<p class="fine np-jp">${jpNoteLine(notes)}</p>` : ""}
-    ${fam ? npFamilyHTML(fam) : ""}
     <section class="gl-in" data-npgal></section>
     <div class="c-poems"></div>
     ${typeof archiveRows === "function" ? archiveRows(entry) : ""}
@@ -144,9 +143,7 @@ function namePage(entry, push = true, tapped) {
     ${typeof gmRow === "function" ? gmRow(entry) : ""}
     <section class="fx-in" data-world-in></section>
     ${nearCore.length ? `<div class="sec-head"><b>Nearest names</b><span>of about 1,000</span></div>
-      <div class="lk-list">${nearCore.map(x => `<button class="lk-row" data-np-near="${esc(x.n)}" data-h="${x.h}"><i style="--c:${x.h}" data-morph-src></i><b>${esc(x.n)}</b><span>${pctMatch(x.de)}</span></button>`).join("")}</div>` : ""}
-    ${likes.length ? `<div class="sec-head"><b>Look-alikes</b><span>among the 101 taught colors</span></div>
-      <div class="lk-list">${likes.map(o => `<button class="lk-row" data-np-near="${esc(o.x.n)}" data-h="${o.x.h}"><i style="--c:${o.x.h}" data-morph-src></i><b>${esc(o.x.n)}</b><span>${esc(lookDiff({ n: name, h: hex }, o.x))}</span></button>`).join("")}</div>` : ""}
+      <div class="lk-list">${nearCore.map(x => `<button class="lk-row" data-np-near="${esc(x.n)}" data-h="${x.h}"><i style="--c:${x.h}" data-morph-src></i><b>${esc(x.n)}</b><span>${pctMatch(x.de)} · ${esc(lookDiff({ n: name, h: hex }, x))}</span></button>`).join("")}</div>` : ""}
     <div class="sec-head"><b>Codes</b></div>
     <div class="cp-codes">${codeRows.map(([k, v]) => `<button class="cp-code-row" data-copy="${esc(v)}"><span>${esc(k)}</span><b class="mono">${esc(v)}</b></button>`).join("")}</div>
     <p class="fine">Nearest of about 1,000 primary names (CIEDE2000). Hex values are screen approximations.</p>
@@ -155,7 +152,7 @@ function namePage(entry, push = true, tapped) {
   onKey = e => { if (e.key === "Escape") xBack(); };
   wireLinks(el);
   const li = el.querySelector("[data-learnit]"); if (li) li.onclick = () => hmLearnIt(taught);
-  const famBtn = el.querySelector("[data-fam-open]"); if (famBtn) famBtn.onclick = () => openNode(colorNode(fam.head));
+  
   const shBtn = el.querySelector("[data-shade-base]"); if (shBtn) shBtn.onclick = () => openCoreName(shadeBase.h, shadeBase.n);
   // a tap anywhere on the row grows its little swatch into the next page's hero (the whole row is the hit
   // target, not just the 28px chip, so this calls morphFrom itself rather than relying on the generic
