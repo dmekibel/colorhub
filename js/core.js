@@ -65,6 +65,24 @@ function de2000(h1, h2) {
 // Text color that stays readable on a swatch
 const ink = h => lab(h)[0] > 64 ? "dark" : "light";
 
+// ---------- percent display (David, 2026-10-10: "a delta number doesn't feel like anything") ----------
+// CIEDE2000 between pure black and pure white is 100, and L* also runs 0-100, so a ΔE00 or ΔL* value already
+// reads as "percent of the black-to-white difference". Every user-visible ΔE/ΔL* number goes through one of
+// these; the math underneath (de2000, lab, every comparison and threshold) is untouched.
+const pctFmt = n => `${(n = Math.max(0, n)) >= 10 ? n.toFixed(0) : n.toFixed(1)}%`;
+// a gap between two colors, or an unsigned ΔL*: "3.0% different" / "1.5% different"
+const pctDiff = n => `${pctFmt(n)} different`;
+// a closeness/match line: "97% match"; one decimal once it's above 99 ("99.2% match")
+function pctMatch(n) {
+  const m = Math.max(0, 100 - n);
+  if (m >= 100) return "100% match";
+  return `${m > 99 ? m.toFixed(1) : Math.round(m)}% match`;
+}
+// ΔE, ΔL* and "ΔE step" (js/gym-engine.js SKILLS, js/match.js MATCH) all sit on that 0-100 scale, so each is
+// shown as a percent; "mired" (Kelvin eye, js/match.js) isn't on it and keeps its own unit word.
+const isDeUnit = u => u === "ΔE" || u === "ΔL*" || u === "ΔE step";
+const unitWord = u => u === "ΔL*" ? "different in lightness" : isDeUnit(u) ? "different" : u;
+
 // ---------- data index ----------
 const UNITS = D.units.map((u, i) => ({ ...u, i, colors: u.colors.map(c => ({ ...c, id: u.id + ":" + c.n })) }));
 UNITS.forEach(u => u.colors.forEach(c => { c.unit = u; }));

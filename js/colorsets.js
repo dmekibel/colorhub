@@ -511,7 +511,7 @@ function colorSheet(it, open) {
     ${also ? `<p class="hc-note hc-also">${also}</p>` : ""}
     <button class="hc-hex" data-copy><span>${it.h}</span><small>Copy</small></button>
     ${app ? `<div class="eyebrow hc-near-h">Nearest of the 101 to learn</div>
-    <button class="kin" data-near><i style="--c:${app.h}"></i><b>${esc(app.n)}</b><span>${closeness(near.d)} · ΔE ${near.d.toFixed(1)}</span></button>` : ""}
+    <button class="kin" data-near><i style="--c:${app.h}"></i><b>${esc(app.n)}</b><span>${closeness(near.d)} · ${pctDiff(near.d)}</span></button>` : ""}
     <div class="fine">Hex values are screen approximations.</div>`);
   sh.querySelector("[data-copy]").onclick = () => { try { navigator.clipboard.writeText(it.h); toast("Copied " + it.h); } catch (e) {} };
   const nb = sh.querySelector("[data-near]"); if (nb) nb.onclick = () => { close(); open(app); };
