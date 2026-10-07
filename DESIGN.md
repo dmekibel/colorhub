@@ -35,3 +35,24 @@ The design is built from proven decisions in real products, not invented from sc
 ## Tunables worth testing on David's phone
 - Card corner radius (30px), stamp angle (±10°), and swipe threshold (100px, or a fast flick past 36px).
 - Map size (`.map` width `37dvh`) and dot sizes (5, 6 and 7 px radius for new, learning and owned).
+
+## Feature hierarchy: many features, never a mess (David, 2026-10-07)
+ColorHub can have a lot of features. It must never feel like a lot. Every feature gets a tier, and the tier decides where it lives and how loud it is.
+
+| Tier | What | Where it shows | How loud |
+|---|---|---|---|
+| 1. The daily loop | Today's review or next unit, the daily challenge, the color of the day | Top of Today | The one filled button on the screen |
+| 2. The four jobs | Learn (Today), Train, Explore, Studio | The tab bar | One tab each; never a fifth tab |
+| 3. Tools and modes | Gym stations, Studio tools, Explore views, taste tests | Inside their tab, as tiles | Quiet tiles; at most about 5 above the fold, the rest under "More" |
+| 4. Depth | Options, extra layers, nerd data (other color systems, sources) | Inside a tool, behind a chip, a sheet or a long press | Off by default |
+
+Rules:
+1. **One primary action per screen.** One filled button; everything else is quiet.
+2. **A new feature needs a home, not a menu item.** Before building, name its goal (one of the four), its tab, its tier, and its one-sentence purpose. If it can't name all four, it waits.
+3. **Defaults over options.** Every tool opens already doing something good. Options are collapsed chips.
+4. **The app grows with you.** Tools unlock as progress makes them meaningful (stations by level, Studio tools after the first palette). A new thing gets a small "New" tag once, then none.
+5. **Today is the curator.** New or seasonal features are introduced by appearing once on Today, not by adding entry points.
+6. **Same thing, same look.** One card style per kind: tool tile, station tile, reading pin, daily card. One header pattern for every inner screen: back on the left, title in the middle.
+7. **Two levels deep at most** from a tab, and every inner screen has a way straight back to its tab.
+8. **Profile reorders, never hides.** A painter sees paint things first; a designer sees codes first; nobody loses anything.
+9. **Prune.** If a tile is rarely opened, it moves under "More" or merges into another tool.
