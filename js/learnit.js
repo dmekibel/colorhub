@@ -1,15 +1,16 @@
 "use strict";
-// Learn it: an instant ~2-minute lesson for one color and its 3-4 closest look-alikes (ROADMAP.md §12), opened
-// from a color page or the honeycomb home. Five short steps, reusing what already exists wherever it fit:
-// Meet (a small card sequence, like meet() in js/learn.js but only for names not yet known) -> Tell apart
-// (odd one out, restricted to this group — a simplified standalone version of js/gym.js's "hue" drill, since
-// the real drill's staircase/dial engine is built for its own session bookkeeping, not a 5-color one-off) ->
-// Sort (tap the group light to dark — a simplified stand-in for js/gym-engine.js's "order" drill, same reason) ->
-// Pick it (js/pickit.js's pickBoard(), given this lesson's own group as its four options instead of the
-// nearest-by-ΔE pool) -> one Memory round (see it, lose it, find it among the group).
-// Every color in the lesson joins spaced review at the end (due tomorrow, like learnUnit() in core.js, but
-// without learnUnit's own S.done bookkeeping, which belongs to real path units, not an ad-hoc lesson). Nothing
-// here marks a name "yours": that still only happens the honest way, a day or more later (js/pickit.js).
+// Learn it: an instant ~2-minute lesson for one color and its 3-4 closest look-alikes, opened from a color
+// page or the honeycomb home (DESIGN-SYSTEM.md §12). Rebuilt on the patterns David already likes, reusing the
+// real components: Meet (the meet-pager pattern from meet(), js/learn.js) -> Recall (the real swipe deck,
+// deck(), with a small additive opt-out of its unit-completion side effects, added there) -> Tell apart
+// (pickBoard(), js/pickit.js, given this lesson's own group as its four options) -> a calm Done. Sort and
+// Memory are gone: thinky exercises belong in the eye-training gym, never the flashcard loop (CLAUDE.md).
+// One segmented bar runs the whole lesson (no step word): a segment is grey until its color is met, faint in
+// its own color once met, solid once it's been recalled. The whole flow stays on the booth grey (css/booth.css
+// has "learnit" in its list), and ✕ / the final primary always return to the color's own page — never the
+// honeycomb — matching the signature motion (the paper "Learn it" button grew into this; closing shrinks it
+// back). Every color in the lesson joins spaced review at the end, due tomorrow, honestly: nothing here ever
+// marks a name "yours" (that only happens the honest way, a check a day or more later: js/pickit.js).
 
 // The group: the color plus its closest taught look-alikes (lookalikes(), js/lookalikes.js), excluding basics
 // (placement-only words, never part of a lesson or spaced review — CLAUDE.md's product rules).
@@ -21,153 +22,114 @@ function hmLearnIt(c) {
   const near = hmLearnGroup(c);
   if (!near.length) { toast("No close look-alikes to compare yet"); return hmOpenColor(c); }
   const group = [c, ...near];
-  const steps = [hmLtMeet, hmLtTell, hmLtSort, hmLtPick, hmLtMemory];
-  let i = 0;
-  const advance = () => { i++; i < steps.length ? steps[i](group, c, advance) : hmLtDone(group, c); };
-  steps[0](group, c, advance);
+  hmLtMeet(group, c, () => hmLtRecall(group, c, () => hmLtTell(group, c, () => hmLtDone(group, c))));
 }
 
-const hmLtTop = i => `<header class="deck-top"><button class="icon-btn" data-close aria-label="Back to the honeycomb">${ICON.x}</button>
-  <span class="lt-steps">${Array.from({ length: 5 }, (_, k) => `<i class="${k < i ? "on" : k === i ? "now" : ""}"></i>`).join("")}</span>
-  <span style="width:44px"></span></header>`;
-const hmLtClose = el => { el.querySelector("[data-close]").onclick = () => hmHome(); };
+// ---------- shared chrome: one segmented bar for the whole lesson, no step word (css/learnit.css) ----------
+// clsFor(x) -> "" (not met yet, grey) | "met" (shown, faint in its own color) | "known" (recalled, solid).
+function hmLtHead(group, clsFor) {
+  return `<header class="lt-head"><button class="icon-btn" data-lt-x aria-label="Back to ${esc(group[0].n)}">${ICON.x}</button>
+    <div class="segs">${group.map(x => `<i style="--c:${x.h}" class="${clsFor(x)}"></i>`).join("")}</div></header>`;
+}
+function hmLtClose(el, onClose) { const b = el.querySelector("[data-lt-x]"); if (b) b.onclick = onClose; }
+// How x differs from base, one honest sentence (the color's own fact-checked line when it actually applies,
+// else the measured LCh difference, js/lookalikes.js's lookDiff — same source either way).
+function hmLtLine(base, x) {
+  if (x.vs && x.vs.toLowerCase() === base.n.toLowerCase() && x.d) return x.d;
+  const w = lookDiff(base, x);
+  return w.charAt(0).toUpperCase() + w.slice(1) + ` than ${base.n.toLowerCase()}.`;
+}
 
-// ---------- 1. Meet: the ones not yet known, one at a time (like meet() in js/learn.js, without the full pager) ----------
+// ---------- 1. Meet: the meet-pager pattern (meet(), js/learn.js), scoped to the group ----------
+// Colors already yours are skipped (no page of their own) but always shown on the cover.
 function hmLtMeet(group, c, next) {
   const todo = group.filter(x => !isMine(S.cards[x.id]));
   const list = todo.length ? todo : group;
-  let i = 0;
-  function render() {
-    const x = list[i], diff = x.n === c.n ? "" : lookDiff(c, x);
-    const el = show(`
-      ${hmLtTop(0)}
-      <div class="lt-card">
-        <div class="lt-sw" style="--c:${x.h}"></div>
-        <h1>${esc(x.n)}</h1><span class="mono">${x.h}</span>
-        <p>${x.n === c.n ? "The color you're learning now." : `${esc(diff.charAt(0).toUpperCase() + diff.slice(1))} than ${esc(c.n.toLowerCase())}.`}</p>
-      </div>
-      <button class="btn" data-next>${i < list.length - 1 ? "Next" : "Start"} ${ICON.arrow}</button>
-    `, "fixed meet learnit");
-    hmLtClose(el);
-    el.querySelector("[data-next]").onclick = () => { i++; i < list.length ? render() : next(); };
-    onKey = e => { if (e.key === "Escape") hmHome(); else if (e.key === "Enter" || e.key === " ") el.querySelector("[data-next]").click(); };
-  }
-  render();
-}
-
-// ---------- 2. Tell apart: odd one out, restricted to this group (c vs. each look-alike in turn) ----------
-function hmLtTell(group, c, next) {
-  const pairs = group.slice(1).map(x => [c, x]);
-  const rounds = shuffle(pairs).slice(0, Math.min(3, pairs.length));
-  let i = 0;
-  function render() {
-    const flip = Math.random() < .5, [base, odd] = flip ? [rounds[i][1], rounds[i][0]] : rounds[i];
-    const n = 6, oddPos = Math.floor(Math.random() * n);
-    let answered = false;
-    const el = show(`
-      ${hmLtTop(1)}
-      <div class="lt-card">
-        <p class="eyebrow">Tell them apart</p>
-        <h1>Which one is <em>${esc(odd.n.toLowerCase())}</em>?</h1>
-        <div class="lt-grid">${Array.from({ length: n }, (_, k) => `<button data-i="${k}" style="--c:${k === oddPos ? odd.h : base.h}" aria-label="Option ${k + 1}"></button>`).join("")}</div>
-        <p class="pi-hint" id="ltline"></p>
-      </div>
-    `, "fixed drill learnit");
-    hmLtClose(el);
-    el.querySelectorAll("[data-i]").forEach(b => b.onclick = () => {
-      if (answered) return; answered = true;
-      const ok = +b.dataset.i === oddPos;
-      buzz(ok ? 12 : [10, 40, 10]);
-      el.querySelectorAll("[data-i]").forEach(x => x.classList.add(+x.dataset.i === oddPos ? "right" : "wrong"));
-      el.querySelector("#ltline").textContent = ok ? `Right — ${odd.n} is ${lookDiff(base, odd)} than ${base.n}.` : `That's ${base.n}. ${odd.n} is ${lookDiff(base, odd)}.`;
-      later(() => { i++; i < rounds.length ? render() : next(); }, 1200);
-    });
-  }
-  render();
-}
-
-// ---------- 3. Sort: tap the group light to dark (a short, standalone stand-in for js/gym.js's "order" drill) ----------
-function hmLtSort(group, c, next) {
-  const list = shuffle(group), order = list.slice().sort((a, b) => lab(b.h)[0] - lab(a.h)[0]);
-  const picks = [];
+  const near = group.slice(1);
+  const plates = group.slice().sort((a, b) => lab(b.h)[0] - lab(a.h)[0]);
+  const known = new Set(group.filter(x => isMine(S.cards[x.id])).map(x => x.id));
+  const met = new Set();
+  const onClose = () => hmOpenColor(c);
+  const clsFor = x => known.has(x.id) ? "known" : met.has(x.id) ? "met" : "";
+  const pageHtml = (x, i) => {
+    const partner = x.n === c.n ? (near[0] || c) : c;
+    return `<section class="lt-page">
+      <div class="lt-swatch" style="--c:${x.h}" data-ink="${ink(x.h)}"><h2 class="lt-display">${esc(x.n)}</h2><span class="lt-code">${x.h}</span></div>
+      <div class="compare lt-cmp"><div style="--c:${x.h}" data-ink="${ink(x.h)}">${esc(x.n)}</div><div style="--c:${partner.h}" data-ink="${ink(partner.h)}">${esc(partner.n)}</div></div>
+      <p class="lt-diff">${esc(hmLtLine(partner, x))}</p>
+      <div class="lt-page-foot">${peekBtn(x)}<span class="lt-up" aria-hidden="true">${ICON.up}<span class="lt-code">${i + 1}/${list.length}</span></span></div>
+    </section>`;
+  };
   const el = show(`
-    ${hmLtTop(2)}
-    <div class="lt-card">
-      <p class="eyebrow">Sort the strip</p>
-      <h1>Tap them <em>light to dark.</em></h1>
-      <div class="lt-strip" id="ltstrip">${list.map(x => `<button data-n="${esc(x.n)}"><i style="--c:${x.h}"></i><span>${esc(x.n)}</span><b></b></button>`).join("")}</div>
-      <p class="pi-hint" id="ltres"></p>
+    ${hmLtHead(group, clsFor)}
+    <div class="lt-pager" id="ltPager">
+      <section class="lt-page lt-cover">
+        <div class="lt-plates">${plates.map(x => `<i style="--c:${x.h}"></i>`).join("")}</div>
+        <h1 class="lt-display">${esc(c.n)} and its look-alikes</h1>
+        <p class="note">${list.length} color${list.length === 1 ? "" : "s"} that ${list.length === 1 ? "is" : "are"} easy to mix up.</p>
+      </section>
+      ${list.map(pageHtml).join("")}
     </div>
-  `, "fixed drill learnit");
-  hmLtClose(el);
-  const strip = el.querySelector("#ltstrip");
-  strip.querySelectorAll("button").forEach(b => b.onclick = () => {
-    if (b.classList.contains("set") || picks.length >= list.length) return;
-    picks.push(b.dataset.n); b.classList.add("set"); b.querySelector("b").textContent = picks.length; buzz(5);
-    if (picks.length !== list.length) return;
-    strip.classList.add("done");
-    let right = 0;
-    strip.querySelectorAll("button").forEach(x => {
-      const ok = picks.indexOf(x.dataset.n) === order.findIndex(o => o.n === x.dataset.n);
-      if (ok) right++;
-      x.classList.add(ok ? "ok" : "off");
-    });
-    el.querySelector("#ltres").textContent = `${right} of ${list.length} in the right spot`;
-    later(next, 1500);
-  });
+  `, "fixed learnit");
+  hmLtClose(el, onClose);
+  const pager = el.querySelector("#ltPager"), pages = [...pager.children], segs = el.querySelectorAll(".segs i");
+  const markMet = x => {
+    if (met.has(x.id) || known.has(x.id)) return;
+    met.add(x.id);
+    const s = segs[group.indexOf(x)]; if (s) s.classList.add("met");
+  };
+  // the page you're looking at counts as "met" — the same idea as meet()'s own page counter, trimmed to this group
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    const i = pages.indexOf(e.target) - 1;   // -1 for the cover page
+    if (i >= 0) markMet(list[i]);
+  }), { root: pager, threshold: .6 });
+  pages.forEach(p => io.observe(p));
+  cleanup.push(() => io.disconnect());
+  const go = d => {
+    const i = Math.round(pager.scrollTop / pager.clientHeight), ni = i + d;
+    if (ni < 0) return;
+    if (ni >= pages.length) { list.forEach(markMet); return next(); }
+    pager.scrollTo({ top: ni * pager.clientHeight, behavior: reduceMotion ? "auto" : "smooth" });
+  };
+  pager.addEventListener("click", e => { if (!e.target.closest("[data-peek]")) go(1); });
+  onKey = e => {
+    if (e.key === "Escape") return onClose();
+    if (["ArrowDown", "PageDown", " ", "Enter"].includes(e.key)) { e.preventDefault(); go(1); }
+    if (["ArrowUp", "PageUp"].includes(e.key)) { e.preventDefault(); go(-1); }
+  };
 }
 
-// ---------- 4. Pick it: the name, choose its color among this group's own swatches (js/pickit.js's pickBoard) ----------
-function hmLtPick(group, c, next) {
+// ---------- 2. Recall: the real swipe deck (deck("learn"), js/learn.js), forward cards only ----------
+function hmLtRecall(group, c, next) {
+  deck("learn", { unit: { colors: group }, cls: "learnit lt-recall", onClose: () => hmOpenColor(c), onFinish: next });
+}
+
+// ---------- 3. Tell apart: Pick it (pickBoard(), js/pickit.js), the group's own swatches as the options ----------
+function hmLtTell(group, c, next) {
   const rounds = shuffle(group).slice(0, Math.min(3, group.length));
+  const onClose = () => hmOpenColor(c);
   let i = 0;
   function render() {
-    // pickBoard's board is a fixed 2x2 (pi-grid, css/pickit.css): at most 4 options, whatever the group's size
     const target = rounds[i], others = shuffle(group.filter(x => x.n !== target.n)).slice(0, 3);
     const opts = shuffle([{ c: target, h: target.h, ok: true }, ...others.map(x => ({ c: x, h: x.h, ok: false }))]);
     const el = show(`
-      ${hmLtTop(3)}
+      ${hmLtHead(group, () => "known")}
       <div class="stage" id="stage"></div>
-      <footer class="deck-foot pi-foot"><p class="pi-hint">Tap its color, among this group</p></footer>
-    `, "fixed deck learnit");
-    hmLtClose(el);
+      <footer class="deck-foot pi-foot"><p class="pi-hint">Tap its color</p></footer>
+    `, "fixed learnit");
+    hmLtClose(el, onClose);
     const card = document.createElement("div"); el.querySelector("#stage").appendChild(card);
-    pickBoard(card, target, { opts, onPick: () => later(() => { i++; i < rounds.length ? render() : next(); }, 1200) });
+    pickBoard(card, target, { opts, tag: "Which one is", onPick: () => later(() => { i++; i < rounds.length ? render() : next(); }, 1200) });
+    onKey = e => { if (e.key === "Escape") onClose(); };
   }
   render();
 }
 
-// ---------- 5. Memory: see it, lose it, find it among the group ----------
-function hmLtMemory(group, c, next) {
-  const target = group[Math.floor(Math.random() * group.length)];
-  const el = show(`
-    ${hmLtTop(4)}
-    <div class="lt-card" id="ltmem">
-      <p class="eyebrow">Memory</p>
-      <h1>Remember this <em>color.</em></h1>
-      <div class="lt-sw" style="--c:${target.h}"></div>
-    </div>
-  `, "fixed drill learnit");
-  hmLtClose(el);
-  later(() => {
-    if (!el.isConnected) return;
-    el.querySelector("#ltmem").innerHTML = `<p class="eyebrow">Memory</p><h1>Which one was it?</h1>
-      <div class="lt-grid">${shuffle(group).map(x => `<button data-n="${esc(x.n)}" style="--c:${x.h}"></button>`).join("")}</div>`;
-    let answered = false;
-    el.querySelectorAll("[data-n]").forEach(b => b.onclick = () => {
-      if (answered) return; answered = true;
-      const ok = b.dataset.n === target.n;
-      buzz(ok ? 12 : [10, 40, 10]);
-      el.querySelectorAll("[data-n]").forEach(x => x.classList.add(x.dataset.n === target.n ? "right" : x === b ? "wrong" : ""));
-      later(next, 1200);
-    });
-  }, 1400);
-}
-
-// ---------- end screen: "You learned teal, and how it differs from turquoise, petrol and cerulean." ----------
-// Every color in the lesson joins spaced review here, due tomorrow — learnUnit()'s own rule (core.js), just
-// without learnUnit's S.done bookkeeping, which is for real path units. Nothing here marks a name "yours":
-// that only ever happens the honest way, a check a day or more later (js/pickit.js's own rule, untouched).
+// ---------- 4. Done: a calm finish, still on grey ----------
+// Every color in the lesson joins spaced review here, due tomorrow (the same rule as learnUnit(), core.js, just
+// without its S.done bookkeeping, which is for real path units, not an ad-hoc lesson). Nothing here marks a
+// name "yours": that only ever happens the honest way, a check a day or more later (js/pickit.js's own rule).
 function hmSchedule(group) {
   const t = today();
   group.forEach(x => { if (x.basic || S.cards[x.id]) return; S.cards[x.id] = { b: 0, due: addDays(t, 1), since: t, own: false }; });
@@ -175,30 +137,26 @@ function hmSchedule(group) {
 }
 function hmLtDone(group, c) {
   hmSchedule(group);
-  const names = group.slice(1).map(x => x.n);
-  const list = names.length > 1 ? names.slice(0, -1).join(", ") + " and " + names[names.length - 1] : names[0] || "";
+  const near = group.slice(1);
+  const plates = group.slice().sort((a, b) => lab(b.h)[0] - lab(a.h)[0]);
   const el = show(`
+    <div class="lt-done-pal">${plates.map(x => `<i style="--c:${x.h}"></i>`).join("")}</div>
+    <h1 class="lt-t1">You met <em>${esc(c.n.toLowerCase())}</em>${near.length ? `, and ${near.length} look-alike${near.length === 1 ? "" : "s"}.` : "."}</h1>
+    ${near.length ? `<div class="lt-rows">${near.map(x => `<div class="lt-row"><span class="pair"><i style="--c:${c.h}"></i><i style="--c:${x.h}"></i></span><span class="lt-row-n">${esc(x.n)}</span><span class="note">${esc(lookDiff(c, x))}</span></div>`).join("")}</div>` : ""}
+    <p class="note lt-done-note">All ${group.length} come back tomorrow, after a night's sleep.</p>
     <div style="flex:1"></div>
-    <div class="lt-done">
-      <div class="fan">${group.map(x => `<i style="--c:${x.h}"></i>`).join("")}</div>
-      <p class="eyebrow">Learn it · done</p>
-      <h1>You learned ${esc(c.n.toLowerCase())},<em>${list ? ` and how it differs from ${esc(list.toLowerCase())}.` : " a little better."}</em></h1>
-      <p>Every color here joins your reviews, due tomorrow — recalling them after a night's sleep is what makes them stick.</p>
-    </div>
-    <div class="stack">
-      <button class="btn" data-see>See its page ${ICON.arrow}</button>
-      <button class="btn ghost" data-home>Back to the honeycomb</button>
-    </div>
-  `, "result learnit");
-  el.querySelector("[data-see]").onclick = () => hmOpenColor(c);
-  el.querySelector("[data-home]").onclick = () => hmHome();
-  onKey = e => { if (e.key === "Enter") hmHome(); };
+    <button class="lt-primary" data-lt-back>Back to ${esc(c.n)} ${ICON.arrow}</button>
+  `, "fixed learnit");
+  el.querySelector("[data-lt-back]").onclick = () => hmOpenColor(c);
+  onKey = e => { if (e.key === "Enter" || e.key === "Escape") hmOpenColor(c); };
 }
 
-// ---------- screenshot hook: #shot=learnit:<meet|tell|sort|pick|memory|done> ----------
+// ---------- screenshot hook: #shot=learnit:<meet|meetpage|recall|tell|done> ----------
 function hmLearnitShot(arg) {
   const c = BYNAME.get("teal") || ALL[0], group = [c, ...hmLearnGroup(c)];
-  const steps = { meet: hmLtMeet, tell: hmLtTell, sort: hmLtSort, pick: hmLtPick, memory: hmLtMemory };
+  if (arg === "recall") return hmLtRecall(group, c, () => {});
+  if (arg === "tell") return hmLtTell(group, c, () => {});
   if (arg === "done") return hmLtDone(group, c);
-  (steps[arg] || hmLtMeet)(group, c, () => {});
+  hmLtMeet(group, c, () => {});
+  if (arg === "meetpage") setTimeout(() => { const p = document.querySelector("#ltPager"); if (p) p.scrollTop = p.clientHeight; }, 60);
 }
