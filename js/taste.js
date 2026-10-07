@@ -303,7 +303,7 @@ function tzPalResult(m, reopen) {
     const hist = prevRec ? [{ at: prevRec.at, mu: prevRec.mu, dials: prevRec.dials }, ...(prevRec.hist || [])].slice(0, 8) : [];
     S.taste.palette = { at: today(), mu: tzRound(m.mu), S: tzRound(m.S, 4), dials: tzRound(ideal, 2), hist };
     S.palettes = S.palettes || [];
-    if (!S.palettes.some(p => p.cols.join() === pal.cols.join())) { S.palettes.unshift({ cols: tzOrder(pal).map(i => pal.cols[i]), from: "Find your palette", at: today() }); S.palettes = S.palettes.slice(0, 60); }
+    if (!S.palettes.some(p => p.cols.join() === pal.cols.join())) { S.palettes.unshift({ id: plMakeId(), cols: tzOrder(pal).map(i => pal.cols[i]), from: "Find your palette", at: today() }); S.palettes = S.palettes.slice(0, 60); }
     save();
   }
   const rec = S.taste.palette, before = (rec.hist || [])[0];

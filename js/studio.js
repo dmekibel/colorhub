@@ -47,6 +47,9 @@ function diskColor(x, y) {
 
 // ---------- Studio home ----------
 function studio() {
+  // Studio is a room like Explore (ROADMAP.md §17 job #1): entering it fresh (the tab, not a Back) starts its
+  // own back chain over, so a trail from another tab never leaks in here.
+  XSTACK = [];
   const saved = S.palettes || [];
   const el = show(`
     ${tabHead()}
@@ -64,7 +67,7 @@ function studio() {
     </div>
     ${phShelfHTML()}
     <div class="sec-head"><b>Your palettes</b><span>${saved.length || ""}</span></div>
-    ${saved.length ? `<div class="st-saved">${saved.map((p, i) => `<button class="st-pal" data-i="${i}"><span class="strip">${p.cols.map(h => `<i style="--c:${h}"></i>`).join("")}</span><span class="st-meta"><b>${esc(p.from || "Palette")}</b><em>${esc(p.at || "")}</em></span></button>`).join("")}</div>`
+    ${saved.length ? `<div class="st-saved">${saved.map(p => `<button class="st-pal" data-id="${esc(p.id)}"><span class="strip">${p.cols.map(h => `<i style="--c:${h}"></i>`).join("")}</span><span class="st-meta"><b>${esc(p.name || p.from || "Palette")}</b><em>${esc(p.at || "")}</em></span></button>`).join("")}</div>`
       : `<p class="x-sub">Palettes you keep, from the wheel, a photo or the taste test, land here.</p>`}
   `, "studio", "studio");
   el.querySelectorAll("[data-lab]").forEach(b => b.onclick = () => LAB[b.dataset.lab]());
@@ -72,7 +75,7 @@ function studio() {
   el.querySelector("[data-wheel]").onclick = () => gamutWheel();
   el.querySelector("[data-eye]").onclick = () => eye();
   el.querySelector("#file").onchange = e => { const f = e.target.files[0]; if (f) loadImage(f, c => phCaptureAndOpen(c, "From a photo")); };
-  el.querySelectorAll("[data-i]").forEach(b => b.onclick = () => { const p = saved[+b.dataset.i]; paletteView({ cols: p.cols.map(h => ({ h })), from: p.from, savedAt: +b.dataset.i }); });
+  el.querySelectorAll("[data-id]").forEach(b => b.onclick = () => openSavedPalette(b.dataset.id));
   phWireShelf(el.querySelector("#phShelf"));
   // a small live wheel as the tile's picture
   const mini = el.querySelector("#mini");
@@ -127,8 +130,12 @@ function maskPalette(pts) {
   return { cols: [light, ...corners, dark], center: [cx, cy] };
 }
 
-function gamutWheel(preset = "Warm") {
-  let pts = MASKS[preset].map(polar), names = !!S.wheelNames;
+// the wheel's own shape, remembered across a trip to "Views & export" and back (ROADMAP.md §17 job #1): not
+// persisted, just enough so Back doesn't throw away a shape you were mid-drag on.
+let GW_LAST = null;
+function gamutWheel(preset = "Warm", initPts = null, push = true) {
+  let pts = initPts ? initPts.map(p => p.slice()) : MASKS[preset].map(polar), names = !!S.wheelNames, presetName = preset;
+  if (push && XSTACK[XSTACK.length - 1] !== "wheel") XSTACK.push("wheel");
   const el = show(`
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span class="eyebrow">Studio · Gamut wheel</span><span style="width:44px"></span></header>
     <div class="gw" id="gw"><canvas class="gw-mask" id="mask"></canvas><div class="gw-names" id="names"></div></div>
@@ -140,7 +147,9 @@ function gamutWheel(preset = "Warm") {
     <p class="p-body">${linkText("Painters call this a gamut mask. Mix only from colors inside the shape and a picture holds together, because every color shares the same few ingredients. The idea comes from the painter James Gurney; the [[color-wheel]] here is perceptual, so colors facing each other are the eye's opposites, not the painter's-wheel pairs (see [[complementary-colors|complements]]).")}</p>
     <p class="fine">The wheel is OKLab hue (Björn Ottosson, 2020); the Harmony lab rotates CIELAB hue, so their angles differ a little. Rim: the most vivid screen color of each hue. Center: grey. The palette is the shape's corners, plus a light and a dark mixed from its middle. Inspired by <a href="https://petertdonahue.com/" target="_blank" rel="noopener">Peter Donahue (Color Nerd)</a>: his Color Fidget and ColorDisk.</p>
   `, "article lab studio");
-  el.querySelector("[data-back]").onclick = () => studio();
+  // one-step Back, same as every other Studio screen (ROADMAP.md §17 job #1): Back pops this screen's own
+  // place in the shared trail (XSTACK), so it lands one level down (Studio, or wherever a [[link]] led onward from here).
+  el.querySelector("[data-back]").onclick = xBack;
   wireLinks(el);
   const gw = el.querySelector("#gw"), mcv = el.querySelector("#mask");
   let size = 0, cur = null;
@@ -166,6 +175,7 @@ function gamutWheel(preset = "Warm") {
     const pal = maskPalette(pts);
     P.forEach((p, i) => { c.fillStyle = pal.cols[i + 1]; c.beginPath(); c.arc(p[0], p[1], 9, 0, Math.PI * 2); c.fill(); c.strokeStyle = "#F3F3F1"; c.lineWidth = 2; c.stroke(); });
     const [qx, qy] = toPx(pal.center); c.fillStyle = "#F3F3F1"; c.beginPath(); c.arc(qx, qy, 3, 0, Math.PI * 2); c.fill();
+    GW_LAST = { preset: presetName, pts: pts.map(p => p.slice()) };
     if (cur && cur.join() === pal.cols.join()) return;
     cur = pal.cols;
     el.querySelector("#pal").innerHTML = pal.cols.map(h => `<i style="--c:${h}" data-swatch="${h}"></i>`).join("");
@@ -191,20 +201,45 @@ function gamutWheel(preset = "Warm") {
   });
   const end = () => { drag = null; };
   mcv.addEventListener("pointerup", end); mcv.addEventListener("pointercancel", end);
-  el.querySelectorAll("[data-m]").forEach(b => b.onclick = () => { pts = MASKS[b.dataset.m].map(polar); el.querySelectorAll("[data-m]").forEach(x => x.classList.toggle("on", x === b)); draw(); buzz(5); });
+  el.querySelectorAll("[data-m]").forEach(b => b.onclick = () => { presetName = b.dataset.m; pts = MASKS[b.dataset.m].map(polar); el.querySelectorAll("[data-m]").forEach(x => x.classList.toggle("on", x === b)); draw(); buzz(5); });
   el.querySelector("[data-names]").onclick = e => { names = S.wheelNames = !names; save(); e.currentTarget.classList.toggle("on", names); drawNames(); };
   el.querySelector("#hlist").addEventListener("click", e => { const b = e.target.closest("[data-copy]"); if (b) { try { navigator.clipboard.writeText(b.dataset.copy); toast("Copied " + b.dataset.copy); } catch (x) {} } });
   el.querySelector("[data-keep]").onclick = () => { keepPalette(cur, "Gamut wheel"); };
-  el.querySelector("[data-open]").onclick = () => paletteView({ cols: cur.map(h => ({ h })), from: "Gamut wheel" });
+  // the result view is one step further down the same trail: Back from it returns to this exact shape (gwReopen below)
+  el.querySelector("[data-open]").onclick = () => { if (XSTACK[XSTACK.length - 1] !== "wheelview") XSTACK.push("wheelview"); paletteView({ cols: cur.map(h => ({ h })), from: "Gamut wheel" }); };
   requestAnimationFrame(setup);
   addEventListener("resize", setup); cleanup.push(() => removeEventListener("resize", setup));
   if (!CORE_NAMES) loadCoreNames().then(() => { if (el.isConnected) { cur = null; draw(); } });
+}
+// reopening the wheel's result (xStep's "wheelview" case): the colors are derived fresh from GW_LAST's shape,
+// so it's always exactly what the wheel was last showing, not a stale copy.
+function gwReopenView() {
+  if (!GW_LAST) return gamutWheel(undefined, undefined, false);
+  const pal = maskPalette(GW_LAST.pts);
+  paletteView({ cols: pal.cols.map(h => ({ h })), from: "Gamut wheel" });
+}
+
+// ---------- saved palettes: a stable id, so a palette has its own address and a place in the Back chain ----------
+const plMakeId = () => "pl" + Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+const plGet = id => (S.palettes || []).find(x => x.id === id);
+function plRename(id, name) {
+  const p = plGet(id); if (!p) return;
+  const v = (name || "").trim();
+  if (v) p.name = v; else delete p.name;
+  save();
+}
+// the palette page: an address, and one step at a time Back (ROADMAP.md §17 job #1, same pattern as photoPage).
+function openSavedPalette(id, push = true) {
+  const p = plGet(id);
+  if (!p) { toast("That palette isn't here anymore"); return go(xFallbackTab()); }
+  if (push && XSTACK[XSTACK.length - 1] !== "pal:" + id) XSTACK.push("pal:" + id);
+  paletteView({ cols: p.cols.map(h => ({ h })), from: p.from, title: p.name || "", savedId: id });
 }
 
 function keepPalette(cols, from) {
   S.palettes = S.palettes || [];
   if (S.palettes.some(p => p.cols.join() === cols.join())) return toast("Already kept");
-  S.palettes.unshift({ cols: cols.slice(), from, at: today() }); S.palettes = S.palettes.slice(0, 60); save();
+  S.palettes.unshift({ id: plMakeId(), cols: cols.slice(), from, at: today() }); S.palettes = S.palettes.slice(0, 60); save();
   buzz(10); toast("Kept in your palettes");
 }
 
@@ -276,8 +311,15 @@ function paletteView(p) {
   const hasImg = !!p.img, counts = hasImg ? [3, 6, 10] : null;
   let n = hasImg ? 6 : null, pct = hasImg, look = hasImg ? "weighted" : "stripes";
   const colsNow = () => hasImg ? p.pals[n] : p.cols;
+  // a photo or a saved palette can be renamed (ROADMAP.md §17 jobs #2-3); its title defaults to the date for a
+  // photo, and is just blank (shown as an invitation) for a palette. Anything else here (a fresh photo from a
+  // private window, the wheel's unsaved "Views & export") has nothing to rename.
+  const titleKind = p.photoId != null ? "photo" : p.savedId != null ? "palette" : null;
+  let curTitle = p.title || "";
+  const titlePlaceholder = titleKind === "photo" ? (fmtDay(p.at) || "Your photo") : "Name this palette";
   const el = show(`
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span class="eyebrow">Studio · ${esc(p.from || "Palette")}${p.at ? " · " + esc(p.at) : ""}</span><span style="width:44px"></span></header>
+    ${titleKind ? `<button class="pv-title${curTitle ? "" : " ph"}" data-rename aria-label="Rename">${esc(curTitle || titlePlaceholder)}</button>` : ""}
     ${hasImg ? `<div class="pv-img"><img src="${p.img}" alt=""><div id="dots"></div></div>` : ""}
     <div class="pv-ctrl">
       ${hasImg ? `<div class="seg" id="cnt">${counts.map(k => `<button class="${k === n ? "on" : ""}" data-n="${k}">${k}</button>`).join("")}</div>` : ""}
@@ -286,16 +328,39 @@ function paletteView(p) {
     </div>
     <div class="pv-pal" id="pv"></div>
     <div class="h-list" id="hlist"></div>
-    <div class="row2" style="margin-top:18px"><button class="btn" data-keep>${p.savedAt != null ? "Kept" : "Keep it"}</button><button class="btn ghost" data-share>${ICON.share} Share</button></div>
+    <div class="row2" style="margin-top:18px"><button class="btn" data-keep>${p.savedId != null ? "Kept" : "Keep it"}</button><button class="btn ghost" data-share>${ICON.share} Share</button></div>
     <div class="row2" style="margin-top:10px"><button class="btn ghost" data-css>Copy as CSS</button><button class="btn ghost" data-hex>Copy hex list</button></div>
-    ${p.savedAt != null ? `<button class="btn ghost" data-del style="margin-top:10px">Remove from your palettes</button>` : ""}
+    ${p.savedId != null ? `<button class="btn ghost" data-del style="margin-top:10px">Remove from your palettes</button>` : ""}
     ${p.photoId != null ? `<button class="btn ghost" data-delphoto style="margin-top:10px">Delete this photo</button>` : ""}
     ${hasImg ? `<p class="fine">Colors are grouped by similarity (k-means in OKLab) on a small copy of the image; "by area" shows how much of the picture each one covers. A small, striking color that the groups miss is added as an accent.</p>` : ""}
   `, "article studio");
-  // a photo page is part of the shared back trail (ROADMAP.md §17 job #2): Back goes to wherever it was opened
-  // from (the shelf, a color page, a name page…), one step at a time; every other paletteView still just
-  // returns to the Studio tab, as before.
-  el.querySelector("[data-back]").onclick = p.photoId != null ? xBack : () => studio();
+  // every paletteView is a leaf of the shared back trail (ROADMAP.md §17 jobs #1-2): whoever opened it (the
+  // photo shelf, the saved-palettes shelf, the gamut wheel's own "Views & export") already pushed its place on
+  // XSTACK, so Back always just pops one step, same as a color page or a closeup.
+  el.querySelector("[data-back]").onclick = xBack;
+  const renameRow = () => el.querySelector("[data-rename]");
+  const wireRename = () => {
+    const row = renameRow(); if (!row) return;
+    row.onclick = () => {
+      const input = document.createElement("input");
+      input.className = "pv-title-input"; input.value = curTitle; input.placeholder = titlePlaceholder; input.maxLength = 60;
+      input.setAttribute("aria-label", "Rename");
+      row.replaceWith(input); input.focus(); input.select();
+      let done = false;
+      const commit = () => {
+        if (done) return; done = true;
+        curTitle = input.value.trim();
+        if (titleKind === "photo") phRename(p.photoId, curTitle); else plRename(p.savedId, curTitle);
+        const b = document.createElement("button");
+        b.className = "pv-title" + (curTitle ? "" : " ph"); b.setAttribute("data-rename", ""); b.setAttribute("aria-label", "Rename");
+        b.textContent = curTitle || titlePlaceholder;
+        input.replaceWith(b); wireRename();
+      };
+      input.addEventListener("keydown", ev => { if (ev.key === "Enter") { ev.preventDefault(); input.blur(); } });
+      input.addEventListener("blur", commit, { once: true });
+    };
+  };
+  wireRename();
   // every row's name and family come from the one naming system (ROADMAP §17 job #1), the same as a painting
   // palette row (js/gallery.js) — no separate "lesson word" reading of the same color.
   const named = h => ({ nm: nameOf(h), fam: typeof familyOf === "function" && familyOf(h) });
@@ -315,10 +380,10 @@ function paletteView(p) {
   const copy = t => { try { navigator.clipboard.writeText(t); toast("Copied"); } catch (e) {} };
   el.querySelector("[data-css]").onclick = () => copy(":root {\n" + colsNow().map((c, i) => `  --color-${i + 1}: ${c.h}; /* ${named(c.h).nm.text} */`).join("\n") + "\n}");
   el.querySelector("[data-hex]").onclick = () => copy(hexes().join(" "));
-  el.querySelector("[data-keep]").onclick = e => { if (p.savedAt != null) return; keepPalette(hexes(), p.from || "Palette"); e.currentTarget.textContent = "Kept"; };
-  el.querySelector("[data-share]").onclick = () => sharePalette(colsNow(), p.from, named);
+  el.querySelector("[data-keep]").onclick = e => { if (p.savedId != null) return; keepPalette(hexes(), p.from || "Palette"); e.currentTarget.textContent = "Kept"; };
+  el.querySelector("[data-share]").onclick = () => sharePalette(colsNow(), curTitle || p.from, named);
   const del = el.querySelector("[data-del]");
-  if (del) del.onclick = () => { S.palettes.splice(p.savedAt, 1); save(); toast("Removed"); studio(); };
+  if (del) del.onclick = () => { S.palettes = (S.palettes || []).filter(x => x.id !== p.savedId); save(); toast("Removed"); studio(); };
   const delPhoto = el.querySelector("[data-delphoto]");
   if (delPhoto) delPhoto.onclick = () => phDeleteConfirm(p.photoId, () => go("studio"));
 }

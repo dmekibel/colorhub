@@ -83,7 +83,12 @@ function photoPage(id, push = true) {
 // the actual renderer (what router.js gives an address): kept separate from photoPage so going back to an
 // already-fetched record (xStep's "ph:" case) doesn't need to touch IndexedDB again.
 function phOpenRecord(id, rec) {
-  paletteView({ img: phURL(rec), pals: rec.pals, from: rec.title || rec.from || "Your photo", at: rec.at, photoId: id });
+  paletteView({ img: phURL(rec), pals: rec.pals, from: rec.from || "Your photo", title: rec.title || "", at: rec.at, photoId: id });
+}
+// renaming (ROADMAP.md §17 job #2): the title is tappable on the photo's own page (js/studio.js's paletteView)
+// and saves straight to IndexedDB, same record, so it shows on the shelf next time too.
+function phRename(id, title) {
+  return phGet(id).then(rec => { if (!rec) return; rec.title = (title || "").trim(); return phSave(rec); }).catch(() => {});
 }
 function phDeleteConfirm(id, after) {
   const { sh, close } = sheet(`<div class="pk-hero" data-ink="light" style="--c:#3A3732"><h2>Delete this photo?</h2><small>Its palettes go with it. This can't be undone.</small></div>
@@ -101,7 +106,7 @@ function phWireShelf(host) {
     if (!host.isConnected) return;
     if (!rows.length) { host.innerHTML = `<p class="x-sub">A photo you upload or shoot with the camera lands here, with its palette ready next time.</p>`; return; }
     host.innerHTML = rows.map(r => `<button class="st-ph" data-ph="${r.id}" style="--c:${(r.pals[6] || r.pals[3] || [{ h: "#3A3732" }])[0].h}">
-      <img src="${phURL(r)}" alt="" loading="lazy"><small>${esc(r.title || r.at || "")}</small></button>`).join("");
+      <img src="${phURL(r)}" alt="" loading="lazy"><small>${esc(r.title || fmtDay(r.at) || "")}</small></button>`).join("");
     host.querySelectorAll("[data-ph]").forEach(b => {
       let t = 0;
       b.addEventListener("pointerdown", () => { t = setTimeout(() => { buzz(8); phDeleteConfirm(b.dataset.ph, () => phWireShelf(host)); }, 550); });

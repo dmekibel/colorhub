@@ -737,6 +737,12 @@ img{transition:opacity .6s var(--ease)}
 .gw-pal i{flex:1;background:var(--c);transition:background .15s}
 
 /* palette view */
+/* the tappable title on a saved photo or palette (ROADMAP.md §17 jobs #2-3): a plain serif line with a quiet
+   hairline underneath, the one hint that it's editable; italic + soft when it's still just the placeholder */
+.pv-title{display:block;width:100%;margin-top:14px;padding:4px 0 7px;border:0;border-bottom:1px solid var(--rule);background:none;font:400 30px/1.05 var(--serif);letter-spacing:-.02em;color:var(--ink);text-align:left}
+.pv-title.ph{color:var(--soft);font-style:italic}
+.pv-title-input{display:block;width:100%;margin-top:14px;padding:4px 0 7px;border:0;border-bottom:1px solid var(--rule-2);background:none;font:400 30px/1.05 var(--serif);letter-spacing:-.02em;color:var(--ink)}
+.pv-title-input::placeholder{color:var(--faint);font-style:italic}
 .pv-img{position:relative;margin-top:10px}
 .pv-img img{display:block;width:100%;max-height:52dvh;object-fit:contain;border-radius:2px;background:var(--lift)}
 .pv-img #dots{position:absolute;inset:0}

@@ -3,6 +3,7 @@
 //   #/today  #/train  #/studio  #/explore  #/explore/<colors|paintings|ideas|saved>
 //   #/color/<slug>  #/page/<id>  #/painting/<slug>  #/story/<id>     (add /more for the "More like this" closeup)
 //   #/photo/<id>  a photo saved in Studio (js/photos.js, IndexedDB on this device)
+//   #/studio/wheel  the gamut wheel · #/studio/palette/<id>  a saved palette (js/studio.js, in S.palettes)
 //   #/daily  #/challenge  #/taste/<color|palette>  #/lab/<harmony|contrast>  #/gallery/<n> (a museum painting)
 //   #/poem/<id>  #/passage/<id>  #/film/<id>   (js/poems.js, js/passages.js, js/films.js)
 //   #/learnit/<color>   the honeycomb home's instant mini-lesson (js/home.js, js/learnit.js). #/today itself
@@ -92,7 +93,9 @@ const ROUTED = [["colorPage", nodeRouted()], ["wikiPage", nodeRouted()], ["paint
   ["btListPage", kind => typeof btListTitle === "function" ? routed(btListTitle(kind), "botany/" + kind) : null],   // js/botany.js (plant/dye/essay detail pages route via wikiPage above)
   ["btFloriPage", () => routed("The language of flowers", "botany/flori")],   // js/botany.js
   ["gmListPage", kind => typeof gmListTitle === "function" ? routed(gmListTitle(kind), "gem/" + kind) : null],   // js/gems.js (gem/essay detail pages route via wikiPage above)
-  ["labHoney", () => routed("Honeycomb lab", "lab/honey")]];   // js/home.js: rate every preset at every set size
+  ["labHoney", () => routed("Honeycomb lab", "lab/honey")],   // js/home.js: rate every preset at every set size
+  ["gamutWheel", () => routed("Gamut wheel", "studio/wheel")],   // js/studio.js
+  ["openSavedPalette", id => routed("Your palette", "studio/palette/" + id)]];   // js/studio.js
 ROUTED.forEach(([name, f]) => routeWrap(window, name, f));
 routeWrap(LAB, "harmony", () => routed("Harmony", "lab/harmony"));
 routeWrap(LAB, "contrast", () => routed("Albers", "lab/contrast"));
@@ -106,16 +109,20 @@ function openRoute(hash, initial = false) {
   if (!/^#\/./.test(hash || "")) return false;
   const parts = decodeURIComponent(hash.slice(2)).split("/").filter(Boolean), [kind, id, more] = parts;
   const tabs = { today: "learn", train: "gym", studio: "studio", explore: "explore" };
-  if (tabs[kind]) {
-    if (kind === "explore") S.lens = Object.keys(LENS_ROUTE).find(k => LENS_ROUTE[k] === id) || "all";
-    go(tabs[kind]);
-    return true;
-  }
+  // hoisted above the tabs[kind] check below, since studio/wheel and studio/palette/<id> are Studio sub-screens,
+  // not the tab home itself, and need it too (js/studio.js)
   const base = () => {
     if (!initial) return;
     try { history.replaceState({ ch: 1, tab: S.tab || "learn" }, "", "#/" + tabRoute(S.tab || "learn").path); } catch (e) {}
     ROUTE_REPLACE = false;   // the screen itself goes on top
   };
+  if (kind === "studio" && id === "wheel" && typeof gamutWheel === "function") { base(); XSTACK = []; gamutWheel(); return true; }
+  if (kind === "studio" && id === "palette" && more && typeof openSavedPalette === "function") { base(); XSTACK = []; openSavedPalette(more); return true; }
+  if (tabs[kind]) {
+    if (kind === "explore") S.lens = Object.keys(LENS_ROUTE).find(k => LENS_ROUTE[k] === id) || "all";
+    go(tabs[kind]);
+    return true;
+  }
   const node = () => kind === "color" ? (routeColor(id) ? colorNode(routeColor(id)) : null)
     : graph().nodes.get(kind === "painting" ? "painting-" + id : kind === "story" ? "s:" + id : id) || null;
   if (["color", "page", "painting", "story"].includes(kind) && id) {
