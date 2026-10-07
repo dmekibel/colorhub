@@ -131,7 +131,7 @@ function gamutWheel(preset = "Warm") {
     <div class="h-list" id="hlist"></div>
     <div class="row2" style="margin-top:18px"><button class="btn" data-keep>Keep it</button><button class="btn ghost" data-open>Views & export</button></div>
     <p class="p-body">${linkText("Painters call this a gamut mask. Mix only from colors inside the shape and a picture holds together, because every color shares the same few ingredients. The idea comes from the painter James Gurney; the [[color-wheel]] here is perceptual, so colors facing each other are the eye's opposites, not the painter's-wheel pairs (see [[complementary-colors|complements]]).")}</p>
-    <p class="fine">Rim: the most vivid screen color of each hue. Center: grey. The palette is the shape's corners, plus a light and a dark mixed from its middle. Inspired by Peter Donahue's Color Fidget and ColorDisk.</p>
+    <p class="fine">Rim: the most vivid screen color of each hue. Center: grey. The palette is the shape's corners, plus a light and a dark mixed from its middle. Inspired by <a href="https://petertdonahue.com/" target="_blank" rel="noopener">Peter Donahue (Color Nerd)</a>: his Color Fidget and ColorDisk.</p>
   `, "article lab studio");
   el.querySelector("[data-back]").onclick = () => studio();
   wireLinks(el);
