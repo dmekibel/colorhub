@@ -161,10 +161,13 @@ function honeycomb(host, opts = {}) {
   let bloom = RM || SHOOT ? 1 : 0, bloomT0 = performance.now(), pressed = null, pressK = 0, drawn = [], center = null, settled = null;
 
   // ---- geometry: the lens maps a world distance z (in bubble spacings) to a screen radius ----
+  // the lens flattens as you zoom out (center 3.7x -> about 1.45x of the edge), so the outer bubbles stay big enough to read
+  const lshape = z => { const k = clamp((1.25 - z) / .75, 0, 1); return { m0: LENS.m0 - (LENS.m0 - 1.45) * k, m1: LENS.m1 + (1 - LENS.m1) * k, sig: LENS.sig + 2 * k }; };
   const lens = t => {
     const e = 1 - Math.pow(1 - bloom, 3), s = (.72 + .28 * e) * Z;
     const br = phase === "drift" ? 1 + .028 * Math.sin(t / 1000 * Math.PI * 2 / 3.8) : 1;
-    return { s, a: e, m0: LENS.m0 * br, m1: LENS.m1, sig: LENS.sig };
+    const sh = lshape(Z);
+    return { s, a: e, m0: sh.m0 * br, m1: sh.m1, sig: sh.sig };
   };
   const F = (z, l) => base * l.s * (l.m1 * z + (l.m0 - l.m1) * l.sig * .8862 * honeyErf(z / l.sig));
   const mag = (z, l) => l.m1 + (l.m0 - l.m1) * Math.exp(-((z / l.sig) ** 2));
@@ -175,12 +178,12 @@ function honeycomb(host, opts = {}) {
   // never shows twice.
   const zFloor = () => {
     if (!lay || lay.finite || !W) return .4;
-    const want = 1.35 * Math.min(W, Hh) / 2;   // tuned on a phone: the faded disc then spans about the full width
-    const fits = z => F(lay.per * .52, { s: z, m0: LENS.m0, m1: LENS.m1, sig: LENS.sig }) >= want;
+    const want = 1.15 * Math.min(W, Hh) / 2;   // tuned on a phone: the faded disc then spans about the full width
+    const fits = z => F(lay.per * .52, { s: z, ...lshape(z) }) >= want;
     let lo = .05, hi = ZMAX; if (!fits(hi)) return ZMAX;
     for (let i = 0; i < 24; i++) { const m = (lo + hi) / 2; if (fits(m)) hi = m; else lo = m; }
     // the "clean" zoom: the whole screen still sits inside half a repeat, so no copy can show and no vignette is needed
-    const clean = z => Finv(Math.hypot(W, Hh) / 2, { s: z, m0: LENS.m0, m1: LENS.m1, sig: LENS.sig }) <= lay.per * .5;
+    const clean = z => Finv(Math.hypot(W, Hh) / 2, { s: z, ...lshape(z) }) <= lay.per * .5;
     let a = .05, c = ZMAX;
     if (clean(c)) { for (let i = 0; i < 24; i++) { const m = (a + c) / 2; if (clean(m)) c = m; else a = m; } }
     ZCLEAN = c;
@@ -230,7 +233,7 @@ function honeycomb(host, opts = {}) {
       if (d < 8) continue;
       if (it.L < 20) { ctx.lineWidth = 1; ctx.strokeStyle = "rgba(236,232,223,.14)"; ctx.stroke(); }
       // no ring for learned colors: the colors stay pure (the Learned view in the sheet shows progress)
-      const la = Math.min(1, Math.max(0, (d - 50) / 6));
+      const la = Math.min(1, Math.max(0, (d - 38) / 6));   // names show down to ~40px bubbles (readable when zoomed out)
       if (la > 0) {
         const w = honeyWrap(ctx, it.n), fs = Math.min(w.fs * d, 30), lh = fs * 1.02, dot = mark && it.c;
         const sub = Math.min(1, Math.max(0, (d - 150) / 30)), subH = sub ? fs * .9 : 0;   // at high zoom: the hex under the name
@@ -362,7 +365,7 @@ function honeycomb(host, opts = {}) {
     const dx = x - down.x, dy = y - down.y;
     if (!down.moved && Math.hypot(dx, dy) > 7) { down.moved = true; pressed = null; kick(); }
     if (!down.moved) return;
-    const k = base * lens(0).s * LENS.m0, now = performance.now();
+    const k = base * lens(0).s * lens(0).m0, now = performance.now();
     P = [down.P0[0] - dx / k, down.P0[1] - dy / k];
     if (lay.finite) {   // rubber band past the edge of a small cluster
       const r = Math.hypot(P[0], P[1]), ext = lay.ext + .6;
@@ -409,7 +412,7 @@ function honeycomb(host, opts = {}) {
     if (!lay) return;
     const [x, y] = local(e);
     if (e.ctrlKey) { e.preventDefault(); touched = true; phase = "idle"; spring = null; zAnim = null; zoomAround(rubber(clamp(Z * Math.exp(-e.deltaY * .012), ZMIN * .8, ZMAX * 1.2)), x, y); }
-    else if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) { e.preventDefault(); touched = true; phase = "idle"; spring = null; const k = base * lens(0).s * LENS.m0; P = [P[0] + e.deltaX / k, P[1] + e.deltaY / k]; }
+    else if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) { e.preventDefault(); touched = true; phase = "idle"; spring = null; const k = base * lens(0).s * lens(0).m0; P = [P[0] + e.deltaX / k, P[1] + e.deltaY / k]; }
     else return;
     draw(); clearTimeout(wheelT);
     wheelT = setTimeout(() => { if (Z < ZMIN || Z > ZMAX) zoomTo(clamp(Z, ZMIN, ZMAX), x, y); else { if (opts.onZoom) opts.onZoom(Z); snap(); } }, 160);
