@@ -65,7 +65,7 @@ function shot(name) {
         if (tw === "tweak") later2(() => hmOpenTweak(ctrl), 200);
         if (act) host.dispatchEvent(new CustomEvent("honeyshot", { detail: act }));
       }); }
-    // the Learn it mini-lesson (js/learnit.js): learnit:<meet|tell|sort|pick|memory|done>
+    // the Learn it mini-lesson (js/learnit.js): learnit:<meet|recall|tell|done>
     case "learnit": return hmLearnitShot(arg || "meet");
     case "gym": return go("gym");
     case "studio": return go("studio");

@@ -113,9 +113,12 @@ function deck(mode, opts = {}) {
     </header>
     <div class="stage" id="stage"></div>
     <footer class="deck-foot" id="foot"></footer>
-  `, "fixed deck");
+  `, "fixed deck" + (opts.cls ? " " + opts.cls : ""));
   const stage = el.querySelector("#stage"), foot = el.querySelector("#foot"), left = el.querySelector("#left");
-  el.querySelector("[data-close]").onclick = () => { ended = true; S.placed ? home() : welcome(); };
+  // opts.onClose: a caller outside the path (Learn it's instant lesson) can send ✕/Escape somewhere other
+  // than home — a small, additive hook, never used by the real path or daily review.
+  const closeTo = opts.onClose || (() => S.placed ? home() : welcome());
+  el.querySelector("[data-close]").onclick = () => { ended = true; closeTo(); };
 
   const keyOfItem = it => it.c.id + "|" + it.dir + (it.kind ? "|" + it.kind : "");
   const plain = it => ({ c: it.c, dir: it.dir });
@@ -250,12 +253,15 @@ function deck(mode, opts = {}) {
     if (ended) return;
     ended = true;
     const firstRight = [...first.values()].filter(Boolean).length;
+    // opts.onFinish: a lesson that isn't a real path unit (Learn it) ends here instead of learnUnit()'s own
+    // S.done bookkeeping and the full unitDone() screen — minimal and additive, the real path is untouched.
+    if (opts.onFinish) return opts.onFinish(firstRight, first.size);
     if (mode === "learn") { learnUnit(opts.unit); return unitDone(opts.unit, firstRight, first.size); }
     return reviewDone(firstRight, first.size);
   }
 
   onKey = e => {
-    if (e.key === "Escape") { ended = true; return S.placed ? home() : welcome(); }
+    if (e.key === "Escape") { ended = true; return closeTo(); }
     if (prod) return prod.key(e);
     if (!revealed && (e.key === " " || e.key === "Enter")) { e.preventDefault(); reveal(); }
     else if (revealed && (e.key === "ArrowRight" || e.key === "l")) fly(true);
