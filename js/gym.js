@@ -405,12 +405,12 @@ function runSession(o) {
       mark(ok);
       if (kind === "intro") return later(() => introPanel(), ok ? 500 : 900);
       // drills with a lot to read in the reveal (Squint's L* values) wait for a Next tap
-      if (meta.hold && kind !== "checkin") {
+      if ((meta.hold || !ok) && kind !== "checkin") {
         foot.innerHTML = `<div class="gy-rev">${foot.innerHTML}<button class="btn" data-next>${n >= total ? "See results" : "Next"} ${ICON.arrow}</button></div>`;
         foot.querySelector("[data-next]").onclick = trial;
         return;
       }
-      later(trial, kind === "checkin" ? 280 : ok ? 520 : 1250);
+      later(trial, kind === "checkin" ? 280 : 1400);
     };
     if (cur.conf && !meta.noConf) {
       // KB #5/#16: on about 1 round in 4, say how sure you are before you see the answer
@@ -937,7 +937,17 @@ function pairPick(ctx, light, dark) {
   ctx.stage.querySelectorAll(".half").forEach(b => b.onclick = () => {
     b.classList.add("picked");
     const ok = +b.dataset.i === right, pickedHex = hexes[+b.dataset.i], pv = lch(pickedHex)[1] > lch(hexes[1 - b.dataset.i])[1] ? 1 : 0;
-    ctx.pick(ok, () => { b.classList.remove("picked"); ring(); if (!ok) b.classList.add("miss"); ctx.foot.innerHTML = `<p class="note">${esc(explain)}</p>`; }, { ...meta, s: { vd, pv } });
+    ctx.pick(ok, () => {
+      b.classList.remove("picked"); ring(); if (!ok) b.classList.add("miss");
+      // label both halves with what they really are, so the answer is readable on the colors themselves
+      ctx.stage.querySelectorAll(".half").forEach((h, i) => { const L = lch(hexes[i])[0]; h.insertAdjacentHTML("beforeend", `<span class="pq-lab" data-ink="${ink(hexes[i])}"><b>${i === right ? "Lighter" : "Darker"}</b><em>L* ${L.toFixed(0)}</em></span>`); });
+      const grey = h => labHex(lch(h)[0], 0, 0), gap = Math.abs(Ll - Ld);
+      const why = ok ? `Right: ${gap.toFixed(0)} points apart on a 0 to 100 lightness scale.`
+        : pv ? "The one you picked is more vivid. Strong color can pass for light; judge the light, not the strength."
+        : (lch(pickedHex)[2] > 60 && lch(pickedHex)[2] < 110) ? "Yellows tend to read lighter than they are next to other hues; squint and compare the grey."
+        : "Squint, or picture both in black and white: the grey strip below is what each one really is.";
+      ctx.foot.innerHTML = `<div class="pq-rev"><div class="pq-grey"><span>In grey</span>${hexes.map((h, i) => `<i style="--c:${grey(h)}"><em>${i ? "bottom" : "top"} · ${lch(h)[0].toFixed(0)}</em></i>`).join("")}</div><p class="note">${esc(why)}</p></div>`;
+    }, { ...meta, s: { vd, pv } });
   });
 }
 
