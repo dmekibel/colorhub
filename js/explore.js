@@ -76,7 +76,8 @@ function lensSections(lens) {
   const hueKey = n => { const [L, C, H] = lch(n.h); return C < 12 ? 1000 + (100 - L) : (H + 330) % 360 + (100 - L) / 400; };
   switch (lens) {
     case "spectrum":
-      return [{ title: "Every color, in order", sub: "Hue around the wheel, light to dark, then the greys.", pins: colors.slice().sort((a, b) => hueKey(a) - hueKey(b)).map(n => pin(n, { cap: "" })) }];
+      return [{ honey: true, title: "Every color, as a wheel", sub: "Greys in the middle, hue around, strength outward. Drag to browse; tap to open." },
+        { title: "Every color, in order", sub: "Hue around the wheel, light to dark, then the greys.", pins: colors.slice().sort((a, b) => hueKey(a) - hueKey(b)).map(n => pin(n, { cap: "" })) }];
     case "harmony": {
       const vivid = colors.filter(n => lch(n.h)[1] > 28).sort((a, b) => hueKey(a) - hueKey(b));
       const pairs = vivid.map(n => { const [o] = nearestColors(opposite(n.h), 1, n.title); return o ? pairPin(n, colorNode(o[0]), "Opposites") : null; }).filter(Boolean);
@@ -126,26 +127,35 @@ function LAB_TILES() {
 function exploreHome() {
   XSTACK = [];
   const lens = LENSES.some(l => l[0] === S.lens) ? S.lens : "all";
+  const media = (S.profile && S.profile.media) || [];
+  const first = media.includes("paint") && !media.includes("screen") ? ["paintings", "history"] : media.includes("screen") && !media.includes("paint") ? ["spectrum", "harmony"] : [];
+  const lensOrder = [LENSES[0], ...LENSES.slice(1).filter(l => first.includes(l[0])).sort((a, b) => first.indexOf(a[0]) - first.indexOf(b[0])), ...LENSES.slice(1).filter(l => !first.includes(l[0]))];
   const dc = dailyColor(), ans = S.daily[today()];
   const el = show(`
     <header class="x-head">
       <div class="x-row"><h1 class="tab-title">Explore</h1><button class="icon-btn glass" data-search aria-label="Search">${ICON.search}</button></div>
-      <div class="lens-key" role="tablist">${LENSES.map(([k, t]) => `<button role="tab" class="${k === lens ? "on" : ""}" data-lens="${k}">${t}${k === "saved" && (S.saved || []).length ? ` <em>${S.saved.length}</em>` : ""}</button>`).join("")}</div>
+      <div class="lens-key" role="tablist">${lensOrder.map(([k, t]) => `<button role="tab" class="${k === lens ? "on" : ""}" data-lens="${k}">${t}${k === "saved" && (S.saved || []).length ? ` <em>${S.saved.length}</em>` : ""}</button>`).join("")}</div>
     </header>
     <div class="x-search" hidden><label class="search"><span>${ICON.search}</span><input id="q" type="search" placeholder="Search colors, paintings, people, pigments" autocomplete="off"></label><div id="results"></div></div>
     <div class="x-feed" id="feed">
       ${lens === "all" ? `<button class="daily-pin" data-daily style="--c:${dc.h}" data-ink="${ink(dc.h)}"><span class="eyebrow">Color of the day</span><b>${ans ? esc(dc.n) : "What's this one called?"}</b><small>${ans ? "Tap to read its story" : "Guess it, then read its story"}</small></button>
-        <div class="labs">${LAB_TILES()}</div>` : ""}
-      ${lensSections(lens).map(sec => `${sec.title ? `<div class="sec-head x-sec"><b>${esc(sec.title)}</b>${sec.pins.length ? `<span>${sec.pins.length}</span>` : ""}</div>` : ""}${sec.sub ? `<p class="x-sub">${esc(sec.sub)}</p>` : ""}${masonry(sec.pins)}`).join("")}
+        <div class="labs">${LAB_TILES()}</div>
+        <div class="play-tiles">
+          <button class="play-tile" data-taste="color"><span class="pt-v pt-c">${FAV_SEEDS.slice(0, 8).map(n => `<i style="--c:${BYNAME.get(n.toLowerCase()).h}"></i>`).join("")}</span><b>Find your color</b><small>A tournament, then an eye exam for your taste</small></button>
+          <button class="play-tile" data-taste="palette"><span class="pt-v pt-p">${[["#1E3A5F", "#3E6A8A", "#E8D59A", "#D9A441", "#2B2B2B"], ["#F4A6B8", "#E9C46A", "#9CAF88", "#5FB8A8", "#F0E6D2"]].map(p => `<span>${p.map(c => `<i style="--c:${c}"></i>`).join("")}</span>`).join("")}</span><b>Find your palette</b><small>Paintings and harmonies, head to head</small></button>
+        </div>` : ""}
+      ${lensSections(lens).map(sec => `${sec.title ? `<div class="sec-head x-sec"><b>${esc(sec.title)}</b>${sec.pins && sec.pins.length ? `<span>${sec.pins.length}</span>` : ""}</div>` : ""}${sec.sub ? `<p class="x-sub">${esc(sec.sub)}</p>` : ""}${sec.honey ? `<div class="honey-panel" id="honey"></div>` : masonry(sec.pins)}`).join("")}
       <p class="fine">Hex values are screen approximations. Every page lists its sources.</p>
     </div>
   `, "explore", "explore");
   el.querySelectorAll("[data-lens]").forEach(b => b.onclick = () => { S.lens = b.dataset.lens; save(); exploreHome(); });
+  const hp = el.querySelector("#honey"); if (hp) honeycomb(hp, { focus: dailyColor(), pick: it => closeup(colorNode(it.c)) });
   const on = el.querySelector(".lens-key .on"); if (on) on.scrollIntoView({ inline: "center", block: "nearest" });
   el.addEventListener("click", e => {
     const p = e.target.closest("[data-pin]"); if (p) return closeup(graph().nodes.get(p.dataset.pin));
     if (e.target.closest("[data-daily]")) return daily();
     const l = e.target.closest("[data-lab]"); if (l) return LAB[l.dataset.lab]();
+    const t = e.target.closest("[data-taste]"); if (t) return tasteIntro(t.dataset.taste);
   });
   // search
   const box = el.querySelector(".x-search"), q = el.querySelector("#q"), results = el.querySelector("#results"), feed = el.querySelector("#feed");
@@ -280,21 +290,47 @@ function codes(hex) {
   return [["HEX", hex], ["RGB", `${r} ${g} ${b}`], ["HSL", `${h}° ${Math.round(s * 100)}% ${Math.round(l * 100)}%`], ["CMYK", `${cmy.join(" ")} ${Math.round(k * 100)}`]];
 }
 
+// Wikipedia-style pieces: sections that fold open and shut, a contents row, and photographs with credits.
+const secHTML = (id, title, inner, open) => `<details class="sec" id="s-${id}"${open ? " open" : ""}><summary><span>${esc(title)}</span><i aria-hidden="true"></i></summary><div class="sec-body">${inner}</div></details>`;
+const tocHTML = list => list.length > 2 ? `<nav class="toc" aria-label="Contents"><span class="eyebrow">Contents</span>${list.map(([id, t]) => `<a data-sec="${id}">${esc(t)}</a>`).join("")}</nav>` : "";
+function figHTML(key, i = 0) {
+  const imgs = (window.WIKI_IMAGES || {})[key]; if (!imgs || !imgs[i]) return "";
+  const f = imgs[i];
+  return `<figure class="fig"><img src="${esc(f.src)}" alt="${esc(f.alt || "")}" loading="lazy"${f.w ? ` width="${f.w}" height="${f.h}"` : ""}><figcaption>${esc(f.caption || "")}<span>${f.commons ? `<a href="${esc(f.commons)}" target="_blank" rel="noopener">${esc(f.credit || "Wikimedia Commons")}</a>` : esc(f.credit || "")}</span></figcaption></figure>`;
+}
+function wireSections(el) {
+  el.querySelectorAll("[data-sec]").forEach(a => a.onclick = () => { const d = el.querySelector("#s-" + a.dataset.sec); if (d) { d.open = true; d.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" }); } });
+}
+// codes shown depend on what the person works with (asked at the start): screens, paint or print
+function codeRows(hex) {
+  const all = codes(hex), media = (S.profile && S.profile.media) || [], [L, C] = lch(hex);
+  if (!media.length) return all;
+  const rows = [];
+  if (media.includes("screen")) rows.push(...all.slice(0, 3));
+  if (media.includes("print")) rows.push(all[3]);
+  if (media.includes("paint")) rows.push(["VALUE ≈", (L / 10).toFixed(1)], ["CHROMA ≈", (C / 5).toFixed(1)]);
+  return rows.length ? rows : all;
+}
+
 function colorPage(n) {
   const c = n.c, w = n.wiki, nb = neighbor(c), st = c.id && S.cards[c.id];
-  const status = c.basic ? "One of the eleven basic color words" : st ? (st.own ? "Yours: you recalled it after a day" : "Learning: it's in your reviews") : `Not learned yet · ${c.unit ? esc(unitLabel(c.unit)) : ""}`;
+  const status = c.basic ? "One of the eleven basic color words" : st ? (st.own ? "Yours: you recalled it after a day" : "Learning: it's in your reviews") : `Not learned yet · ${c.unit ? unitLabel(c.unit) : ""}`;
   const el = show(`
     ${artTop(n)}
     <div class="c-hero" style="--c:${c.h}" data-ink="${ink(c.h)}"><p class="eyebrow">${esc(status)}</p><h1>${esc(c.n)}</h1></div>
-    <div class="codes">${codes(c.h).map(([k, v]) => `<button data-copy="${esc(v)}"><span>${k}</span><b class="mono">${esc(v)}</b></button>`).join("")}</div>
+    <div class="codes">${codeRows(c.h).map(([k, v]) => `<button data-copy="${esc(v)}"><span>${k}</span><b class="mono">${esc(v)}</b></button>`).join("")}</div>
     ${nb && c.d ? `<section class="cmp-sec"><div class="compare"><div style="--c:${c.h}" data-ink="${ink(c.h)}">${esc(c.n)}</div><div style="--c:${nb.h}" data-ink="${ink(nb.h)}" data-node="c:${esc(nb.n)}">${esc(nb.n)}</div></div><p class="diff">${esc(c.d)}</p></section>` : ""}
-    ${c.o && !(w && w.facets.some(f => f.k === "language")) ? `<p class="origin">${esc(c.o)}</p>` : ""}
-    ${w ? w.facets.map(f => `<section class="facet"><h3>${esc(FACET_LABEL[f.k] || f.k)}</h3><p>${linkText(f.text)}</p></section>`).join("") : `<p class="fine">The full page for ${esc(c.n)} is being written. Its connections below are already live.</p>`}
-    ${w && w.related && w.related.length ? `<section class="facet"><h3>Kin</h3>${w.related.map(r => { const x = graph().resolve(r.to); return x ? `<button class="kin" data-node="${esc(x.id)}"><i style="--c:${x.h}"></i><b>${esc(x.title)}</b><span>${esc(r.why)}</span></button>` : ""; }).join("")}</section>` : ""}
+    ${c.o && !(w && w.facets.some(f => f.k === "language")) ? `<p class="lead">${esc(c.o)}</p>` : ""}
+    ${figHTML(c.n)}
+    ${(() => {
+      const secs = (w ? w.facets : []).map((f, i) => [f.k + i, FACET_LABEL[f.k] || f.k, `<p>${linkText(f.text)}</p>`]);
+      if (w && w.related && w.related.length) secs.push(["kin", "Kin", w.related.map(r => { const x = graph().resolve(r.to); return x ? `<button class="kin" data-node="${esc(x.id)}"><i style="--c:${x.h}"></i><b>${esc(x.title)}</b><span>${esc(r.why)}</span></button>` : ""; }).join("")]);
+      return (w ? "" : `<p class="fine">The full page for ${esc(c.n)} is being written. Its connections below are already live.</p>`) + tocHTML(secs.map(x => [x[0], x[1]])) + secs.map((x, i) => secHTML(x[0], x[1], x[2], i < 2)).join("");
+    })()}
     ${connSection(n)}
-    ${sourcesHTML(w && w.sources)}
+    ${w && w.sources ? secHTML("src", "Sources", sourcesHTML(w.sources), false) : ""}
   `, "article");
-  wireArticle(el, n);
+  wireArticle(el, n); wireSections(el);
   el.querySelectorAll("[data-copy]").forEach(b => b.onclick = () => { try { navigator.clipboard.writeText(b.dataset.copy); toast("Copied " + b.dataset.copy); } catch (e) {} });
 }
 
@@ -302,17 +338,25 @@ function wikiPage(n) {
   const sw = n.swatches || [];
   const el = show(`
     ${artTop(n)}
-    ${sw.length ? `<div class="p-hero">${sw.map(s => `<div style="--c:${s.h}" data-ink="${ink(s.h)}"><span>${esc(s.label || "")}</span></div>`).join("")}</div>` : ""}
+    ${sw.length ? `<div class="p-hero">${sw.map(s => `<div style="--c:${s.h}" data-ink="${ink(s.h)}" title="${esc(s.label || "")}"><span>${esc(sw.length > 3 ? (s.label || "").split(/ · |: |, /)[0] : s.label || "")}</span></div>`).join("")}</div>` : ""}
     <p class="eyebrow p-type">${esc(TYPE_LABEL[n.type] || "Page")}</p>
     <h1 class="p-title">${esc(n.title)}</h1>
     ${n.dek ? `<p class="p-dek">${linkText(n.dek)}</p>` : ""}
+    ${figHTML(n.id)}
     ${n.facts && n.facts.length ? `<dl class="facts">${n.facts.map(f => `<div><dt>${esc(f.label)}</dt><dd>${linkText(f.value)}</dd></div>`).join("")}</dl>` : ""}
-    ${n.stub ? `<p class="fine">This page is being written. Its connections are already live.</p>` : (n.body || []).map(p => `<p class="p-body">${linkText(p)}</p>`).join("")}
-    ${n.colors && n.colors.length ? `<section class="facet"><h3>Colors</h3><div class="chips-wrap">${n.colors.map(cn => { const x = graph().resolve(cn); return x ? `<button class="pchip" data-node="${esc(x.id)}"><i style="--c:${x.h}"></i>${esc(x.title)}</button>` : ""; }).join("")}</div></section>` : ""}
+    ${(() => {
+      if (n.stub) return `<p class="fine">This page is being written. Its connections are already live.</p>`;
+      const body = n.body || [];
+      // pages written with sections use them; older pages get a lead paragraph and a folding "full story"
+      const secs = n.sections && n.sections.length ? n.sections.map((x, i) => ["p" + i, x.title, (Array.isArray(x.text) ? x.text : [x.text]).map(t => `<p>${linkText(t)}</p>`).join("") + (x.img != null ? figHTML(n.id, x.img) : "")])
+        : body.length > 1 ? [["story", "The full story", body.slice(1).map(t => `<p>${linkText(t)}</p>`).join("") + figHTML(n.id, 1)]] : [];
+      if (n.colors && n.colors.length) secs.push(["colors", "Colors", `<div class="chips-wrap">${n.colors.map(cn => { const x = graph().resolve(cn); return x ? `<button class="pchip" data-node="${esc(x.id)}"><i style="--c:${x.h}"></i>${esc(x.title)}</button>` : ""; }).join("")}</div>`]);
+      return (body[0] && !(n.sections && n.sections.length) ? `<p class="lead">${linkText(body[0])}</p>` : "") + tocHTML(secs.map(x => [x[0], x[1]])) + secs.map((x, i) => secHTML(x[0], x[1], x[2], i === 0)).join("");
+    })()}
     ${connSection(n)}
-    ${sourcesHTML(n.sources)}
+    ${n.sources ? secHTML("src", "Sources", sourcesHTML(n.sources), false) : ""}
   `, "article");
-  wireArticle(el, n);
+  wireArticle(el, n); wireSections(el);
 }
 
 function paintingPage(n) {

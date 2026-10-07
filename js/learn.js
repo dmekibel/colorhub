@@ -19,8 +19,35 @@ function welcome() {
     </div>
     <button class="btn" data-go>Find my level <small>· 60 sec</small></button>
   `, "welcome");
-  el.querySelector("[data-go]").onclick = how;
-  onKey = e => { if (e.key === "Enter") how(); };
+  el.querySelector("[data-go]").onclick = () => profileSetup(how);
+  onKey = e => { if (e.key === "Enter") profileSetup(how); };
+}
+
+// Two questions at the start (and any time from the menu): color vision, and which colors you work with.
+// The app adapts: paint people see value and chroma instead of hex, print people get CMYK,
+// and drills lean on lightness and the axis you see best if you're color blind. Not a test or a diagnosis.
+function profileSetup(next) {
+  const p = Object.assign({ cvd: "typical", media: [] }, S.profile || {});
+  const VISION = [["typical", "Typical, as far as I know", ""], ["red-green", "Red–green color blind", "The most common kind, about 1 in 12 men"], ["blue-yellow", "Blue–yellow color blind", "Rare"], ["unsure", "Not sure", "We'll keep drills fair either way"]];
+  const MEDIA = [["screen", "Screens & digital", "Hex, RGB and HSL codes"], ["paint", "Paint & pigments", "Value and chroma, real pigments, mixing"], ["print", "Print", "CMYK, and where screen and paper differ"]];
+  const el = show(`
+    <header class="deck-top"><button class="icon-btn" data-close aria-label="Close">${ICON.x}</button><span class="eyebrow" style="flex:1">Two questions · ten seconds</span></header>
+    <h1 class="t-title" style="font-size:clamp(48px,14vw,64px)">How do you <em>see</em>, and what do you <em>make</em>?</h1>
+    <p class="sec-head" style="margin-top:28px"><b>Color vision</b></p>
+    <div class="opt-list" data-q="cvd">${VISION.map(([k, t, d]) => `<button class="opt${p.cvd === k ? " on" : ""}" data-v="${k}"><i></i><span><b>${t}</b>${d ? `<small>${d}</small>` : ""}</span></button>`).join("")}</div>
+    <p class="sec-head"><b>The colors you care about</b><span>pick any</span></p>
+    <div class="opt-list" data-q="media">${MEDIA.map(([k, t, d]) => `<button class="opt multi${p.media.includes(k) ? " on" : ""}" data-v="${k}"><i></i><span><b>${t}</b><small>${d}</small></span></button>`).join("")}</div>
+    <p class="fine">Not a test or a diagnosis. Change these any time from the menu.</p>
+    <button class="btn" data-go style="margin-top:20px">Continue ${ICON.arrow}</button>
+  `, "profile");
+  el.querySelector("[data-close]").onclick = () => S.placed ? home() : welcome();
+  el.querySelectorAll(".opt-list").forEach(list => list.addEventListener("click", e => {
+    const b = e.target.closest(".opt"); if (!b) return;
+    if (list.dataset.q === "cvd") { p.cvd = b.dataset.v; list.querySelectorAll(".opt").forEach(x => x.classList.toggle("on", x === b)); }
+    else { b.classList.toggle("on"); p.media = [...list.querySelectorAll(".opt.on")].map(x => x.dataset.v); }
+    buzz(5);
+  }));
+  el.querySelector("[data-go]").onclick = () => { S.profile = p; save(); next(); };
 }
 
 // How the deck works (shown once, before placement)
@@ -57,10 +84,8 @@ function sampleTier(t, n) {
 function deck(mode, opts = {}) {
   let queue = [];
   if (mode === "place") {
-    queue = [
-      ...shuffle(BASICS.filter(b => b.n !== "Black" && b.n !== "White")).slice(0, 3).map(c => ({ c, dir: "f", stage: 1 })),
-      ...sampleTier(2, 10).map(c => ({ c, dir: "f", stage: 2 })),
-    ];
+    // no basics: every English speaker knows red and blue, so the test starts on the in-betweens
+    queue = sampleTier(2, 10).map(c => ({ c, dir: "f", stage: 2 }));
   } else if (mode === "learn") {
     queue = shuffle(opts.unit.colors).map(c => ({ c, dir: "f" }));
   } else {
@@ -475,12 +500,18 @@ function drawMap(host) {
 
 function menu() {
   const { sh, close } = sheet(`
+    <button class="item" data-a="profile">Your eyes & tools ${ICON.chev}</button>
     <button class="item" data-a="place">Retake the placement test ${ICON.chev}</button>
+    <button class="item" data-a="backup">Back up your progress ${ICON.chev}</button>
+    <button class="item" data-a="restore">Restore a backup ${ICON.chev}</button>
     <button class="item" data-a="about">About the colors ${ICON.chev}</button>
     <button class="item danger" data-a="reset">Reset all progress</button>`);
   sh.onclick = e => {
     const a = e.target.closest("[data-a]"); if (!a) return;
     close();
+    if (a.dataset.a === "profile") profileSetup(home);
+    if (a.dataset.a === "backup") backupProgress();
+    if (a.dataset.a === "restore") restoreProgress();
     if (a.dataset.a === "place") how();
     if (a.dataset.a === "about") about();
     if (a.dataset.a === "reset" && confirm("Erase all progress on this device?")) { S = fresh(); save(); MAP_PTS = null; welcome(); }
@@ -491,4 +522,22 @@ function about() {
     <p>Every swatch is a screen approximation. Hex values come from the CSS named colors, Wikipedia's list of colors and the xkcd color survey, where people named millions of colors. Where those disagree with what most people picture (CSS "khaki" is a pale yellow), we picked between them.</p>
     <p>Why names matter: Russian has separate words for light blue and dark blue, and Russian speakers tell those blues apart a little faster (Winawer et al., 2007). The effect is real but modest. Names give you handles; practice with feedback sharpens the eye.</p>
     <p>How the deck works: a color counts as yours once you recall it a day or more after learning it. Reviews space out from 1 day to 3, 7, 16, 35 and 90 days.</p>`);
+}
+
+// ---------- backup: progress lives on this device, so let people keep a copy ----------
+function backupProgress() {
+  const blob = new Blob([JSON.stringify(S, null, 1)], { type: "application/json" });
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = `colorhub-backup-${today()}.json`; a.click();
+  toast("Backup saved");
+}
+function restoreProgress() {
+  const inp = document.createElement("input"); inp.type = "file"; inp.accept = "application/json,.json";
+  inp.onchange = () => {
+    const f = inp.files[0]; if (!f) return;
+    f.text().then(t => {
+      try { const d = JSON.parse(t); if (!d || d.v !== 1 || !d.cards) throw 0; S = Object.assign(fresh(), d); save(); toast("Progress restored"); go("learn"); }
+      catch (e) { toast("That file isn't a ColorHub backup"); }
+    });
+  };
+  inp.click();
 }

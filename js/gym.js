@@ -25,6 +25,8 @@ function family(h) {
   return L > 72 ? "Pinks" : "Purples";
 }
 // Colors the drills draw from: the ones you've met, so practice reinforces the path.
+// For color-blind players, offsets lean on lightness and the axis they see (fair drills, honest scores).
+const cvdW = base => { const v = S.profile && S.profile.cvd; return v === "red-green" ? [base[0] + .3, base[1] * .3, base[2]] : v === "blue-yellow" ? [base[0] + .3, base[1], base[2] * .3] : base; };
 const metColors = () => { const m = ALL.filter(c => S.cards[c.id]); return m.length >= 6 ? m : ALL; };
 
 // Move a color by roughly `d` CIEDE2000 in a random direction, staying on screen.
@@ -132,16 +134,20 @@ function gymHome() {
       <button class="btn" data-workout>${done ? "Train again" : "Begin the workout"} ${ICON.arrow}</button>
     </div>
     <div class="sec-head"><b>Your eye</b><span>smaller is sharper</span></div>
+    ${S.profile && ["red-green", "blue-yellow"].includes(S.profile.cvd) ? `<p class="x-sub" style="margin-top:12px">Drills are tuned for ${S.profile.cvd} color blindness: differences lean on lightness and the colors you see best.</p>` : ""}
     <p class="x-sub limit-note">Each plate is split at your current limit: the smallest difference you can still see. Can you find the seam?</p>
     <div class="limits">${limits}</div>
     ${famRow ? `<div class="sec-head"><b>Odd one out, by family</b><span>ΔE</span></div>${famRow}` : ""}
     <div class="sec-head"><b>Play</b></div>
+    <button class="play-row" data-taste="color"><span><b>Find your color</b><span>Sixteen colors, head to head, then an eye exam for your taste.</span></span><em>${S.fav ? esc(S.fav.n) + "-ish" : "new"}</em></button>
+    <button class="play-row" data-taste="palette"><span><b>Find your palette</b><span>Paintings and harmonies, head to head.</span></span><em>${(S.palettes || []).length ? S.palettes.length + " saved" : "new"}</em></button>
     <button class="play-row" data-lightning><span><b>Lightning round</b><span>Forty-five seconds. Name as many as you can.</span></span><em class="lt-best">${S.best.lightning ? `<b>${S.best.lightning}</b>best` : "new"}</em></button>
     <p class="fine">Scores are color differences: ΔE (CIEDE2000), and ΔL* for lightness. About 1 is the smallest difference most people can see side by side. Practice sharpens these judgments; it isn't a brain-training claim.</p>
   `, "gym", "gym");
   el.querySelector("[data-workout]").onclick = () => workout(wk);
   el.querySelectorAll("[data-drill]").forEach(b => b.onclick = () => runDrill(b.dataset.drill, { trials: SKILLS[b.dataset.drill].trials + 4, done: r => drillDone([r]) }));
   el.querySelector("[data-lightning]").onclick = lightning;
+  el.querySelectorAll("[data-taste]").forEach(b => b.onclick = () => tasteIntro(b.dataset.taste));
 }
 
 function workout(list) {
@@ -210,7 +216,7 @@ const DRILLS = {
   // Odd one out: a grid of one color with one tile shifted by d.
   hue(ctx, d, answer) {
     const base = shuffle(metColors())[0], L0 = lab(base.h);
-    const odd = offset(L0, d) || offset(tame(L0.map((x, i) => i ? x * .8 : x)), d);
+    const odd = offset(L0, d, cvdW([.6, 1, 1])) || offset(tame(L0.map((x, i) => i ? x * .8 : x)), d, cvdW([.6, 1, 1]));
     const baseHex = labHex(...L0), oddHex = odd ? labHex(...odd) : baseHex;
     const n = d > 6 ? 3 : d > 2.5 ? 4 : 5, cells = n * n, at = Math.random() * cells | 0;
     ctx.q.textContent = "Which tile is different?";
@@ -253,7 +259,7 @@ const DRILLS = {
   // Sort the strip: ends fixed, middle shuffled, drag into order.
   order(ctx, d, answer) {
     const n = 7, base = shuffle(metColors())[0], A = tame(lab(base.h));
-    const B = offset(A, d * (n - 1), [.5, 1, 1]) || offset(tame(A.map((x, i) => i ? x * .7 : x)), d * (n - 1), [.5, 1, 1]) || [A[0] > 50 ? A[0] - 25 : A[0] + 25, A[1], A[2]];
+    const B = offset(A, d * (n - 1), cvdW([.5, 1, 1])) || offset(tame(A.map((x, i) => i ? x * .7 : x)), d * (n - 1), cvdW([.5, 1, 1])) || [A[0] > 50 ? A[0] - 25 : A[0] + 25, A[1], A[2]];
     const steps = Array.from({ length: n }, (_, i) => labHex(...A.map((x, j) => x + (B[j] - x) * i / (n - 1))));
     let order = [0, ...shuffle([1, 2, 3, 4, 5]), 6];
     if (order.every((v, i) => v === i)) order = [0, 2, 1, 3, 5, 4, 6];

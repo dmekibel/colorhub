@@ -100,82 +100,82 @@ const LAB = {};
 const pickerRow = (sel) => `<div class="pick-row">${EVERY().slice().sort((a, b) => { const A = lch(a.h), B = lch(b.h); return (A[1] < 12) - (B[1] < 12) || ((A[2] + 330) % 360) - ((B[2] + 330) % 360); }).map(c => `<button data-pick="${c.h}" title="${esc(c.n)}" style="--c:${c.h}" class="${c.h === sel ? "on" : ""}"></button>`).join("")}</div>`;
 const appName = hex => { const [x] = nearestColors(hex, 1); return x ? x : null; };
 
-// Harmony wheel: any base color, five classic schemes, each result named with the nearest app name.
-LAB.harmony = (base = dailyColor().h, scheme = "triadic") => {
-  const cols = schemeColors(base, scheme);
-  const named = cols.map(h => { const [c, d] = appName(h); return { h, n: c.n, d }; });
-  const [p0, p1, p2 = p1, p3 = p0] = cols;
-  const light = cols.slice().sort((a, b) => lab(b)[0] - lab(a)[0]);
+// Harmony: drag the base around the picker's ring and the harmony colors swing with it, live.
+LAB.harmony = (base = lch(dailyColor().h)[1] > 30 ? dailyColor().h : "#C8553D", scheme = "triadic") => {
   const el = show(`
-    <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span class="eyebrow">Lab · Harmony wheel</span><span style="width:44px"></span></header>
-    <div class="poster" aria-hidden="true">
-      <svg viewBox="0 0 320 380"><rect width="320" height="380" fill="${light[0]}"/>
-        <rect x="0" y="250" width="320" height="130" fill="${p1}"/>
-        <circle cx="200" cy="150" r="96" fill="${p0}"/>
-        <rect x="34" y="60" width="64" height="210" fill="${p2}"/>
-        <rect x="236" y="286" width="56" height="56" fill="${p3}"/>
-        <rect x="34" y="300" width="150" height="12" fill="${light[light.length - 1]}"/></svg>
-    </div>
+    <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span class="eyebrow">Lab · Harmony</span><span style="width:44px"></span></header>
+    <div class="poster" id="poster" aria-hidden="true"></div>
     <div class="schemes">${Object.keys(SCHEMES).map(k => `<button class="${k === scheme ? "on" : ""}" data-scheme="${k}">${k}</button>`).join("")}</div>
-    <div class="h-row">${wheelSVG(base, scheme, 170)}
-      <div class="h-list">${named.map((x, i) => `<button class="h-item" data-copy="${x.h}"><i style="--c:${x.h}"></i><span><b>${i ? "" : "Base · "}≈ ${esc(x.n)}</b><em class="mono">${x.h}</em></span></button>`).join("")}</div></div>
-    <p class="fine">Hues rotate around the CIELAB wheel at the same lightness and strength. Names are the nearest of the app's ${EVERY().length}. Tap a color to copy it.</p>
-    <p class="eyebrow" style="margin:18px 0 8px">Base color</p>
-    ${pickerRow(base)}
-    <label class="any">Any color <input type="color" value="${base.toLowerCase()}"></label>
+    <div class="h-list" id="hlist"></div>
+    <p class="eyebrow" style="margin:26px 0 10px">Base color · drag the ring</p>
+    <div id="pick"></div>
     <p class="p-body">${linkText("Why these work: [[complementary-colors|complements]] sit opposite on the [[color-wheel]] and make each other look stronger, the effect [[chevreul|Chevreul]] described for tapestry dyes. Analogous colors sit side by side and feel calm. Triads were a [[bauhaus|Bauhaus]] favorite.")}</p>
+    <p class="fine">Harmonies rotate hue on the CIELAB wheel at the same lightness and strength. Names are the nearest of the app's ${EVERY().length}. Tap a color to copy it.</p>
   `, "article lab");
   el.querySelector("[data-back]").onclick = () => go("explore");
   wireLinks(el);
-  el.querySelectorAll("[data-scheme]").forEach(b => b.onclick = () => LAB.harmony(base, b.dataset.scheme));
-  el.querySelectorAll("[data-pick]").forEach(b => b.onclick = () => LAB.harmony(b.dataset.pick, scheme));
-  el.querySelector("input[type=color]").onchange = e => LAB.harmony(e.target.value.toUpperCase(), scheme);
-  el.querySelectorAll("[data-copy]").forEach(b => b.onclick = () => { try { navigator.clipboard.writeText(b.dataset.copy); toast("Copied " + b.dataset.copy); } catch (e) {} });
-  const on = el.querySelector(".pick-row .on"); if (on) on.scrollIntoView({ inline: "center", block: "nearest" });
+  const draw = hex => {
+    base = hex;
+    const cols = schemeColors(hex, scheme), [p0, p1, p2 = p1, p3 = p0] = cols, light = cols.slice().sort((a, b) => lab(b)[0] - lab(a)[0]);
+    el.querySelector("#poster").innerHTML = `<svg viewBox="0 0 320 300"><rect width="320" height="300" fill="${light[0]}"/><rect x="0" y="196" width="320" height="104" fill="${p1}"/>
+      <circle cx="204" cy="122" r="80" fill="${p0}"/><rect x="30" y="44" width="58" height="176" fill="${p2}"/><rect x="238" y="222" width="50" height="50" fill="${p3}"/><rect x="30" y="238" width="140" height="10" fill="${light[light.length - 1]}"/></svg>`;
+    el.querySelector("#hlist").innerHTML = cols.map((h, i) => { const [c, d] = appName(h); return `<button class="h-item" data-copy="${h}"><i style="--c:${h}"></i><span><b>${i ? "" : "Base · "}≈ ${esc(c.n)}</b><em class="mono">${h} · ${closeness(d)}</em></span></button>`; }).join("");
+  };
+  const picker = colorPicker(el.querySelector("#pick"), { hex: base, onChange: draw, marks: hex => schemeColors(hex, scheme) });
+  draw(base);
+  el.querySelectorAll("[data-scheme]").forEach(b => b.onclick = () => { scheme = b.dataset.scheme; el.querySelectorAll("[data-scheme]").forEach(x => x.classList.toggle("on", x === b)); draw(base); picker.set(base); });
+  el.querySelector("#hlist").addEventListener("click", e => { const b = e.target.closest("[data-copy]"); if (b) { try { navigator.clipboard.writeText(b.dataset.copy); toast("Copied " + b.dataset.copy); } catch (x) {} } });
 };
 
 // One color, two looks (Albers): the same inner color on two grounds, then lift the grounds.
 const CONTRAST_PRESETS = [["#8E7F71", "#BFA2E8", "#CC7722"], ["#8C9096", "#FFD700", "#3D2B8E"], ["#C19A6B", "#36454F", "#F0E6D2"], ["#9CAF88", "#E34234", "#4682B4"], ["#A8778F", "#00A86B", "#FFCBA4"]];
 LAB.contrast = (set = CONTRAST_PRESETS[0].slice(), slot = 0) => {
-  const [inner, g1, g2] = set, names = set.map(h => appName(h)[0].n);
   const el = show(`
-    <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span class="eyebrow">Lab · One color, two looks</span><span style="width:44px"></span></header>
-    <button class="v v-contrast big" data-contrast><div class="g" style="--c:${g1}"><i style="--c:${inner}"></i></div><div class="g" style="--c:${g2}"><i style="--c:${inner}"></i></div><span class="v-hint">Tap to lift the grounds</span></button>
-    <p class="p-body">${linkText(`Both small squares are the same ≈ [[${names[0]}]]. Each ground pushes the square toward its own [[complementary-colors|opposite]]: on ≈ [[${names[1]}]] it drifts one way, on ≈ [[${names[2]}]] the other. [[josef-albers|Josef Albers]] built a whole course on this ([[interaction-of-color]]).`)}</p>
+    <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span class="eyebrow">Lab · Albers</span><span style="width:44px"></span></header>
+    <button class="v v-contrast big" data-contrast id="ctr"><div class="g"><i></i></div><div class="g"><i></i></div><span class="v-hint">Tap to lift the grounds</span></button>
+    <p class="p-body" id="ctxt"></p>
     <div class="schemes">${["Square", "Left ground", "Right ground"].map((t, i) => `<button class="${i === slot ? "on" : ""}" data-slot="${i}">${t}</button>`).join("")}</div>
-    ${pickerRow(set[slot])}
-    <p class="eyebrow" style="margin:18px 0 8px">Try a classic</p>
+    <div id="pick" style="margin-top:18px"></div>
+    <p class="eyebrow" style="margin:22px 0 10px">Try a classic</p>
     <div class="presets">${CONTRAST_PRESETS.map((p, i) => `<button data-preset="${i}">${p.map(h => `<i style="--c:${h}"></i>`).join("")}</button>`).join("")}</div>
   `, "article lab");
   el.querySelector("[data-back]").onclick = () => go("explore");
-  wireLinks(el); wireVisuals(el);
-  el.querySelectorAll("[data-slot]").forEach(b => b.onclick = () => LAB.contrast(set, +b.dataset.slot));
-  el.querySelectorAll("[data-pick]").forEach(b => b.onclick = () => { const s2 = set.slice(); s2[slot] = b.dataset.pick; LAB.contrast(s2, slot); });
-  el.querySelectorAll("[data-preset]").forEach(b => b.onclick = () => LAB.contrast(CONTRAST_PRESETS[+b.dataset.preset].slice(), 0));
-  const on = el.querySelector(".pick-row .on"); if (on) on.scrollIntoView({ inline: "center", block: "nearest" });
+  wireVisuals(el);
+  const ctr = el.querySelector("#ctr"), txt = el.querySelector("#ctxt");
+  const draw = () => {
+    const [inner, g1, g2] = set, names = set.map(h => appName(h)[0].n);
+    const gs = ctr.querySelectorAll(".g");
+    gs[0].style.setProperty("--c", g1); gs[1].style.setProperty("--c", g2);
+    ctr.querySelectorAll(".g i").forEach(i => i.style.setProperty("--c", inner));
+    txt.innerHTML = linkText(`Both small squares are the same ≈ [[${names[0]}]]. Each ground pushes the square toward its own [[complementary-colors|opposite]]: on ≈ [[${names[1]}]] it drifts one way, on ≈ [[${names[2]}]] the other. [[josef-albers|Josef Albers]] built a whole course on this ([[interaction-of-color]]).`);
+  };
+  wireLinks(txt);
+  const picker = colorPicker(el.querySelector("#pick"), { hex: set[slot], onChange: h => { set[slot] = h; draw(); } });
+  draw();
+  el.querySelectorAll("[data-slot]").forEach(b => b.onclick = () => { slot = +b.dataset.slot; el.querySelectorAll("[data-slot]").forEach(x => x.classList.toggle("on", x === b)); picker.set(set[slot]); });
+  el.querySelectorAll("[data-preset]").forEach(b => b.onclick = () => { set = CONTRAST_PRESETS[+b.dataset.preset].slice(); picker.set(set[slot]); draw(); });
 };
 
 // Name any color: pick it, or point the camera and sample the middle of the frame.
 LAB.namer = (hex = "#5F8C8A") => {
   const el = show(`
-    <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span class="eyebrow">Lab · Name any color</span><span style="width:44px"></span></header>
-    <div class="cam" id="cam" hidden><video id="vid" playsinline muted></video><i class="reticle"></i><button class="btn" data-snap>Use this color</button></div>
-    <div class="nm-sw" id="nsw" style="--c:${hex}" data-ink="${ink(hex)}"><span class="mono" id="nhex">${hex}</span></div>
-    <div class="row2"><label class="btn ghost any-btn">Pick a color<input type="color" id="nin" value="${hex.toLowerCase()}"></label><button class="btn ghost" data-camera>Use the camera</button></div>
+    <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span class="eyebrow">Lab · Name it</span><span style="width:44px"></span></header>
+    <div class="cam" id="cam" hidden><video id="vid" playsinline muted></video><i class="reticle"></i><button class="btn" data-snap>Use this color ${ICON.arrow}</button></div>
+    <div id="pick"></div>
+    <button class="btn ghost" data-camera>${ICON.search} Use the camera instead</button>
     <div id="nout"></div>
     <p class="fine">Cameras and light shift colors, so a camera reading is a hint, not a measurement.</p>
   `, "article lab");
   el.querySelector("[data-back]").onclick = () => go("explore");
-  const out = el.querySelector("#nout"), sw = el.querySelector("#nsw"), hx = el.querySelector("#nhex");
+  const out = el.querySelector("#nout");
   const render = h => {
-    sw.style.setProperty("--c", h); sw.dataset.ink = ink(h); hx.textContent = h;
     const { mine, long } = nameColor(h, 4);
     out.innerHTML = `<section class="facet"><h3>In the app's words</h3>${mine.map(x => `<button class="kin" data-node="c:${esc(x.n)}"><i style="--c:${x.h}"></i><b>${esc(x.n)}</b><span>${closeness(x.d)} · ΔE ${x.d.toFixed(1)}</span></button>`).join("")}</section>
       ${long.length ? `<section class="facet"><h3>Precise names</h3>${long.map(x => `<div class="kin"><i style="--c:${x.h}"></i><b>${esc(x.n)}</b><span>${closeness(x.d)} · ΔE ${x.d.toFixed(1)}</span></div>`).join("")}</section>` : ""}`;
   };
   wireLinks(out);
-  el.querySelector("#nin").addEventListener("input", e => render(e.target.value.toUpperCase()));
-  loadLongNames().then(() => render(hx.textContent));
+  const picker = colorPicker(el.querySelector("#pick"), { hex, onChange: render });
+  loadLongNames().then(() => render(picker.get()));
   render(hex);
   let stream = null;
   const stop = () => { if (stream) stream.getTracks().forEach(t => t.stop()); stream = null; };
@@ -188,13 +188,13 @@ LAB.namer = (hex = "#5F8C8A") => {
     } catch (e) { toast("The camera isn't available here"); }
   };
   el.querySelector("[data-snap]").onclick = () => {
-    const v = el.querySelector("#vid"), c = document.createElement("canvas"), s = 24;
-    c.width = s; c.height = s;
+    const v = el.querySelector("#vid"), c = document.createElement("canvas"), sz = 24;
+    c.width = sz; c.height = sz;
     const ctx = c.getContext("2d"), side = Math.min(v.videoWidth, v.videoHeight) * .12;
-    ctx.drawImage(v, (v.videoWidth - side) / 2, (v.videoHeight - side) / 2, side, side, 0, 0, s, s);
-    const d = ctx.getImageData(0, 0, s, s).data; let r = 0, g = 0, b = 0;
+    ctx.drawImage(v, (v.videoWidth - side) / 2, (v.videoHeight - side) / 2, side, side, 0, 0, sz, sz);
+    const d = ctx.getImageData(0, 0, sz, sz).data; let r = 0, g = 0, b = 0;
     for (let p = 0; p < d.length; p += 4) { r += d[p]; g += d[p + 1]; b += d[p + 2]; }
     const n = d.length / 4, h = "#" + [r, g, b].map(x => Math.round(x / n).toString(16).padStart(2, "0")).join("").toUpperCase();
-    stop(); el.querySelector("#cam").hidden = true; render(h);
+    stop(); el.querySelector("#cam").hidden = true; picker.set(h); render(h);
   };
 };

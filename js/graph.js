@@ -133,8 +133,8 @@ function linkText(s) {
   return esc(s).replace(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g, (_, t, l) => {
     const n = g.resolve(t.replace(/&amp;/g, "&")), label = l || t;
     if (!n) return label;
-    const dot = n.kind === "color" ? `<i style="--c:${n.h}"></i>` : "";
-    return `<a class="wl" data-to="${esc(n.id)}">${dot}${label}</a>`;
+    if (n.kind === "color") return `<a class="wl wl-c" style="--c:${n.h}" data-to="${esc(n.id)}">${label}</a>`;
+    return `<a class="wl" data-to="${esc(n.id)}">${label}</a>`;
   });
 }
 

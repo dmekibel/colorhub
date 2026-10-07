@@ -1,6 +1,6 @@
 "use strict";
 // Content files are optional (they grow as the wiki is written): load whatever exists, then start.
-const OPTIONAL_DATA = ["data/wiki-colors.js", "data/wiki-nodes.js", "data/stories.js", "data/paintings.js"];
+const OPTIONAL_DATA = ["data/wiki-colors.js", "data/wiki-nodes.js", "data/stories.js", "data/paintings.js", "data/images.js"];
 // Screenshot mode for design review: index.html#shot=<screen> renders one screen with sample progress
 // (in memory only; nothing is saved). Used by tools/shots.sh.
 const SHOT = location.hash.startsWith("#shot=") ? decodeURIComponent(location.hash.slice(6)) : null;
@@ -32,3 +32,6 @@ function shot(name) {
     case "lab": return LAB[arg || "harmony"]();
   }
 }
+
+try { navigator.storage && navigator.storage.persist && navigator.storage.persist(); } catch (e) {}
+if ("serviceWorker" in navigator && location.protocol === "https:") navigator.serviceWorker.register("sw.js").catch(() => {});
