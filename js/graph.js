@@ -59,7 +59,7 @@ function graph() {
     if (n.kind === "painting" && !n.stub) {
       scan(n, n.note, "painting");
       const seen = new Set();
-      (n.palette || []).forEach(p => { if (p.vocab && !seen.has(p.vocab)) { seen.add(p.vocab); add(n, resolve(p.vocab), "in its palette", `${Math.round(p.share * 100)}% of the canvas, closest to ${p.name}`); } });
+      (n.palette || []).forEach(p => { if (p.vocab && !seen.has(p.vocab)) { seen.add(p.vocab); add(n, resolve(p.vocab), "in its palette", `${Math.round(p.share * 100)}% of the canvas, named ${p.name}`); } });
     }
     if (n.kind === "story") {
       n.slides.forEach(sl => { scan(n, sl.text, "story"); if (sl.v && sl.v.explain) scan(n, sl.v.explain, "story"); });
@@ -157,7 +157,10 @@ function nameColor(hex, n = 5) {
 // Where a library name comes from, in a few words
 const SRC_LABEL = { app: "ColorHub", css: "Web color", wiki: "Common name", xkcd: "xkcd survey", ridgway: "Ridgway, 1912", werner: "Werner, 1821", jp: "Japanese traditional", ral: "RAL paint" };
 const srcLine = x => x.jp ? `${x.jp.kanji} · ${x.jp.meaning}` : (x.src || []).filter(s => s !== "app").slice(0, 2).map(s => SRC_LABEL[s] || s).join(" · ");
-const closeness = d => d < 2 ? "spot on" : d < 5 ? "very close" : d < 10 ? "close" : d < 18 ? "same family" : "a stretch";
+// ROADMAP §17 job #1: honest everywhere, and the same honest everywhere — these are js/naming.js's own
+// VERY_CLOSE_DE/NEAR_DE thresholds (a ΔE of 3.7 used to read "very close" here because this had its own,
+// looser scale; now it reads "close", matching what nameOf() itself would call that gap).
+const closeness = d => d < VERY_CLOSE_DE ? "very close" : d < NEAR_DE ? "close" : "not close";
 
 // ---------- daily color: the same color for everyone on a given day ----------
 function dailyColor(k = today()) {

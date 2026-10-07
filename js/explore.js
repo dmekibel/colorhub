@@ -416,7 +416,7 @@ function paintingPage(n) {
     <h1 class="p-title">${esc(n.title)}</h1>
     <p class="p-dek">${esc(n.artist || "")}${n.place ? ` · ${esc(n.place)}` : ""}</p>
     ${pal.length ? `<div class="palette">${pal.map((p, i) => `<button class="pal" data-pi="${i}" style="--c:${p.h};flex:${Math.max(p.share, .08)}" data-ink="${ink(p.h)}"><span>${Math.round(p.share * 100)}%</span></button>`).join("")}</div>
-      <div class="pal-names">${pal.map((p, i) => `<button class="pal-name" data-pi="${i}"><i style="--c:${p.h}"></i><b>${esc(p.name)}</b>${p.vocab ? `<span>your word: <a class="wl" data-to="c:${esc(p.vocab)}">${esc(p.vocab)}</a></span>` : ""}<em class="mono">${p.h}</em></button>`).join("")}</div>
+      <div class="pal-names">${pal.map((p, i) => { const fam = typeof familyOf === "function" && familyOf(p.h); return `<button class="pal-name" data-pi="${i}"><i style="--c:${p.h}"></i><b>${esc(p.name)}</b>${fam ? `<span>${esc(fam.head.n)} family</span>` : ""}<em class="mono">${p.h}</em></button>`; }).join("")}</div>
       <p class="fine">Tap a swatch to see where it lives in the painting.</p>` : `<p class="fine">This painting's palette is being extracted.</p>`}
     ${n.note ? `<p class="p-body">${linkText(n.note)}</p>` : ""}
     ${connSection(n)}

@@ -70,7 +70,10 @@ function nameOf(color, opts = {}) {
   let mod = "", text = top.n, between = null;
   if (top.de >= NEAR_DE) {
     const second = near.find(x => x.n !== top.n);
+    // honest even when there's no second candidate to compare against (ROADMAP §17 job #1): never let a far
+    // match read as a confident name, and never "closest to X" — say plainly that nothing close exists
     if (second) { between = { a: top.n, b: second.n }; text = `between ${top.n.toLowerCase()} and ${second.n.toLowerCase()}`; }
+    else text = `No close name; nearest is ${top.n}`;
   } else if (top.de >= VERY_CLOSE_DE) {
     mod = pickModifier(lch(top.h), Lt, top.n);
     if (mod) text = `${mod} ${top.n.toLowerCase()}`;
@@ -110,4 +113,14 @@ function familyOf(nameOrHex) {
   let best = null, bd = Infinity;
   for (const c of every) { const d = de2000(L, c.lab || (c.lab = lab(c.h))); if (d < bd) { bd = d; best = c; } }
   return best ? { head: best, de: bd } : null;
+}
+
+// ---------- the Japanese cultural note (ROADMAP §17 job #1) ----------
+// A quiet line, never a name and never a heading: data/core-names.json's `notes` (tools/build_core_names.py's
+// jp-only pass) keeps the romaji, kanji and English meaning of any Japanese traditional color this one merged
+// into, even though the primary name is always English now. "In Japanese: 葡萄染 · Ebizome, 'vine grape'".
+function jpNoteLine(notes) {
+  if (!notes || !notes.length) return "";
+  const one = j => `${esc(j.kanji || "")}${j.kanji && j.jp ? " · " : ""}${esc(j.jp || "")}${j.meaning ? `, '${esc(j.meaning.toLowerCase())}'` : ""}`;
+  return `In Japanese: ${notes.map(one).join("; ")}`;
 }

@@ -290,13 +290,14 @@ function paletteView(p) {
     ${hasImg ? `<p class="fine">Colors are grouped by similarity (k-means in OKLab) on a small copy of the image; "by area" shows how much of the picture each one covers. A small, striking color that the groups miss is added as an accent.</p>` : ""}
   `, "article studio");
   el.querySelector("[data-back]").onclick = () => studio();
-  // the nearest taught (101) word, mentioned only when it differs from the real nearest-of-1,000 name
-  const named = h => { const nm = nameOf(h), [pair] = nearestColors(h, 1); return { nm, lesson: pair && pair[1] < 6 && pair[0].n.toLowerCase() !== nm.n.toLowerCase() ? pair[0] : null }; };
+  // every row's name and family come from the one naming system (ROADMAP §17 job #1), the same as a painting
+  // palette row (js/gallery.js) — no separate "lesson word" reading of the same color.
+  const named = h => ({ nm: nameOf(h), fam: typeof familyOf === "function" && familyOf(h) });
   const render = () => {
     const cols = colsNow();
     el.querySelector("#pv").className = "pv-pal pv-" + look;
     el.querySelector("#pv").innerHTML = cols.map(c => `<i style="--c:${c.h};--w:${look === "weighted" ? Math.max(c.share, .02) : 1}" data-ink="${ink(c.h)}" data-swatch="${c.h}">${pct && c.share != null && look !== "chips" ? `<span>${c.share < .01 ? "<1" : Math.round(c.share * 100)}%</span>` : ""}</i>`).join("");
-    el.querySelector("#hlist").innerHTML = cols.map(c => { const { nm, lesson } = named(c.h); return `<button class="h-item" data-copy="${c.h}"><i style="--c:${c.h}" data-swatch="${c.h}"></i><span><b>${esc(nm.text)}</b><em class="mono">${c.h}${c.accent ? " · accent" : ""}${pct && c.share != null ? ` · ${c.share < .01 ? "<1" : Math.round(c.share * 100)}%` : ""}${lesson ? ` · lesson word ${esc(lesson.n)}` : ""}</em></span></button>`; }).join("");
+    el.querySelector("#hlist").innerHTML = cols.map(c => { const { nm, fam } = named(c.h); return `<button class="h-item" data-copy="${c.h}"><i style="--c:${c.h}" data-swatch="${c.h}"></i><span><b>${esc(nm.text)}</b><em class="mono">${c.h}${c.accent ? " · accent" : ""}${fam ? ` · ${esc(fam.head.n)} family` : ""}${pct && c.share != null ? ` · ${c.share < .01 ? "<1" : Math.round(c.share * 100)}%` : ""}</em></span></button>`; }).join("");
     if (hasImg) el.querySelector("#dots").innerHTML = cols.map(c => `<i style="--c:${c.h};left:${c.at[0] * 100}%;top:${c.at[1] * 100}%"></i>`).join("");
   };
   loadCoreNames().then(render); render();
