@@ -65,7 +65,7 @@ the public repo `dmekibel/colorhub`).
    Tangerine hex fixes; a cross-unit near-twin check in tools/check.js).
 3. ROADMAP build order: odd-one-out family, rearrange family, memory additions, the path (Duolingo-style lessons), photo
    missions, color-page hubs + Art filter merge, Studio critique/mockups/exports, motion/sound/haptics, design system.
-4. Stages and fields (ROADMAP §14: five stages of ~50 / 150 / 300 / 600 / 1,000 words, no colored belts, basics are placement
+4. Stages and fields (ROADMAP §14: six stages of 25 / 50 / 100 / 250 / 500 / ~1,000 words, no colored belts, basics are placement
    only) as the chapters of the path. Later: business (Plus, a free atlas site), Colordle, the Russian edition.
 
 ## Known issues

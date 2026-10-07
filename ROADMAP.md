@@ -201,15 +201,24 @@ Ends with a lesson score and Next.
 - Built from look-alike groups; Learn it works on any ladder color.
 - Progress shows both tiers: "Core 64/101 · Library 212/~1,000"; the top of the ladder = "master colorist".
 
-## 14. Stages and fields (approved 2026-10-08; replaces the fixed 4-level ladder in §13)
-No colored belts and no tiny steps. The basics (red, blue, pink...) are a placement check only, never a stage. Each stage is
-a real jump, roughly doubling what you know, so finishing one feels like a new skill level:
-- **Stage 1: Everyday** (about 50 words): the names people hear but can't place: teal, maroon, navy, beige, coral, olive,
-  lavender, turquoise, mustard, burgundy...
-- **Stage 2: Fluent** (about 150 total, +100)
-- **Stage 3: Pro** (about 300 total, +150)
-- **Stage 4: Expert** (about 600 total, +300)
-- **Stage 5: Master** (about 1,000: every distinct named color, one primary name each, see §13)
+## 14. Stages and fields (approved 2026-10-08, sizes revised the same day; replaces the fixed 4-level ladder in §13)
+No colored belts. The 11 basics are a placement check only, never taught. Counts are total words you know, basics
+included. Each stage roughly doubles the last (25 → 50 → 100 → 250 → 500 → 1,000), and each ends at a real-world benchmark:
+- **Stage 1: 25.** Just above the average adult. In Lindsey & Brown (2014, free naming), men used ~9.7 words beyond the
+  basics and women ~12.3, so a typical adult actively uses about 21-23. Short on purpose: a win in 2-3 days.
+  Placement skips it for people who already know these words.
+- **Stage 2: 50.** The color-aware person (fashion, home, shopping): salmon, mauve, coral, khaki, rust, mint, burgundy...
+- **Stage 3: 100.** The "big crayon box" (Crayola's largest standard box is 120). Werner's Nomenclature of Colours
+  (110 names) was what Darwin used to describe specimens.
+- **Stage 4: 250.** A word near every region of color space. The ISCC-NBS naming system splits all colors into 267 named
+  blocks. Check with our data: the nearest-word ΔE should fall sharply by this point. CSS's 148 named colors can be a
+  milestone badge inside this stage.
+- **Stage 5: 500.** Field depth: where the field paths differ most (pigments, whites/greiges, film/skin tones, fabrics).
+- **Stage 6: Master, ~1,000.** About the size of the xkcd survey's 954 most agreed names. Beyond that, people stop agreeing
+  on names, so they become niche or brand names (library only).
+Memory: the size of a session never changes (about 10 new words a day plus reviews, introduced a few at a time). Only how long
+a stage lasts grows: early stages take days, late ones weeks (goal-gradient: wins come early, then the end of each stage stays
+in sight). Later words are finer distinctions, so they go slower.
 Inside a stage you still learn about 10 at a time (the existing units); the stage is the chapter. Each stage ends with an
 honest no-hint test (name + pick the colors, one eye drill with them, a camera mission to find some of them in the world).
 **Ordering logic:** usefulness first (xkcd frequency, everyday usage), then coverage (each stage fills the biggest gaps in the
