@@ -150,30 +150,44 @@ const later = (fn, ms) => { const t = setTimeout(fn, ms); timers.push(t); return
 if ("scrollRestoration" in history) history.scrollRestoration = "manual";
 let cleanup = [];   // functions to run when the screen changes (stop animation loops, cameras...)
 // ---------- motion ----------
-// Screens crossfade (the old screen lingers as a fading ghost), a tapped pin can fly into the next screen's hero,
-// content rises into view as you scroll, and big numbers count up. Everything is skipped under Reduce Motion.
+// Screens crossfade (the old screen lingers as a fading ghost), content rises into view as you scroll, and big
+// numbers count up. The signature: wherever a color opens, its chip grows into the new page's swatch.
+// Everything is skipped under Reduce Motion.
 let PENDING_MORPH = null, LAST_TAB = null;
+// Tapping any of these opens a color; the swatch inside is the chip that grows. [data-morph-src] marks one by hand.
+const MORPH_TRIGGER = "[data-morph-src], .pin-color, .pin-pair, .kin, .pchip, .tday[data-daily]";
+const MORPH_CHIP = "[data-morph-src], .pc, .pair2>span, .kin>i, .pchip>i";
+// The swatch a color page opens on: a hand-marked [data-morph], or a known hero.
+const MORPH_TARGET = "[data-morph], .z-color, .c-hero, .d-swatch";
 function morphFrom(el) {
   if (reduceMotion || !el) return;
-  const src = el.querySelector("[data-morph-src]") || el, r = src.getBoundingClientRect(), cs = getComputedStyle(src);
+  const src = el.matches("[data-morph-src]") ? el : el.querySelector(MORPH_CHIP) || el, r = src.getBoundingClientRect(), cs = getComputedStyle(src);
+  if (!r.width) return;
   const img = src.tagName === "IMG" ? src.currentSrc || src.src : null;
-  PENDING_MORPH = { r, bg: cs.backgroundColor, radius: cs.borderRadius, img };
+  PENDING_MORPH = { r, bg: cs.backgroundColor, radius: cs.borderRadius, img, at: performance.now() };
 }
+document.addEventListener("click", e => { const t = e.target.closest && e.target.closest(MORPH_TRIGGER); if (t && app.contains(t)) morphFrom(t); }, true);
 function runMorph(root) {
   const m = PENDING_MORPH; PENDING_MORPH = null;
-  const t = m && root.querySelector("[data-morph]");
+  // only right after the tap that asked for it, so a stale chip never flies into an unrelated screen
+  const t = m && performance.now() - m.at < 700 && root.querySelector(MORPH_TARGET);
   if (!t) return;
   const r = t.getBoundingClientRect();
-  if (!r.width) return;
+  if (!r.width || r.top > innerHeight) return;
   const fly = document.createElement(m.img ? "img" : "div");
   fly.className = "flyer";
   if (m.img) fly.src = m.img; else fly.style.background = m.bg;
   Object.assign(fly.style, { left: r.left + "px", top: r.top + "px", width: r.width + "px", height: r.height + "px", borderRadius: getComputedStyle(t).borderRadius });
   document.body.appendChild(fly);
+  // the page's own text waits under the chip, then fades in as the chip lands
   t.style.visibility = "hidden";
   const sx = m.r.width / r.width, sy = m.r.height / r.height;
   fly.animate([{ transform: `translate(${m.r.left - r.left}px,${m.r.top - r.top}px) scale(${sx},${sy})`, borderRadius: m.radius }, { transform: "none" }],
-    { duration: 520, easing: "cubic-bezier(.2,.85,.2,1)" }).onfinish = () => { t.style.visibility = ""; fly.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 140 }).onfinish = () => fly.remove(); };
+    { duration: 360, easing: "cubic-bezier(.2,.85,.2,1)" }).onfinish = () => {
+      t.style.visibility = "";
+      [...t.children].forEach(c => c.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 160, easing: "ease-out" }));
+      fly.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 120 }).onfinish = () => fly.remove();
+    };
 }
 // content rises in as it scrolls into view, in a short cascade
 const REVEAL = ".pin,.skill,.next-card,.facet,.kin,.res,.chip,.pal-name,.cg,.story-card,.ptg-card,.lab,.workout,.play-row,.palette,.codes,.compare,.z-sum,.p-body,.h-item,.az button,.sky-count";
@@ -227,10 +241,15 @@ function show(html, cls = "", tab = null) {
   if (tab) wireTabbar(tab);
   window.scrollTo(0, 0); document.body.classList.remove("scrolled");
   const el = app.firstElementChild;
+  const mb = tab && el.querySelector("[data-menu]"); if (mb) mb.onclick = () => menu();
   el.querySelectorAll("img").forEach(i => { if (i.complete && i.naturalWidth) i.classList.add("ld"); });
   requestAnimationFrame(() => { runMorph(el); reveal(el); countUp(el); });
   return el;
 }
+// Every tab's home opens with the same line: the brand on the left, the tab's own actions and the menu (⋯) on the right.
+const tabHead = (acts = "") => `<header class="bar"><div class="brand">${LOGO}<span>ColorHub</span></div><span class="bar-r">${acts}<button class="icon-btn" data-menu aria-label="Settings and more">${ICON.dots}</button></span></header>`;
+// Every inner screen: back (or close, for a task) on the left, the title in the middle, an optional action on the right.
+const navTop = (title = "", o = {}) => `<header class="nav-top"><button class="icon-btn" ${o.close ? `data-close aria-label="Close">${ICON.x}` : `data-back aria-label="Back">${ICON.back}`}</button><span class="nav-title">${title}</span><span class="nav-r">${o.right || ""}</span></header>`;
 // Four tabs, one job each: Today (the path and the daily things), Train (the eye), Explore (read), Studio (make).
 const TABS = [["learn", "Today", "today"], ["gym", "Train", "gym"], ["explore", "Explore", "compass"], ["studio", "Studio", "palette"]];
 // The tab bar: three mono words on a blurred strip with a hairline marker under the current one.
@@ -272,6 +291,8 @@ addEventListener("popstate", () => {
 });
 function go(tab) {
   S.tab = tab; save();
+  // The two profile questions wait until they matter: the first visit to Train, where color vision tunes the drills.
+  if (tab === "gym" && S.placed && !S.profile && !S.profileAsked) return profileSetup(gymHome, { why: "Before you train" });
   if (tab === "gym") return gymHome();
   if (tab === "explore") return exploreHome();
   if (tab === "studio") return studio();
@@ -283,13 +304,24 @@ function toast(msg) { document.querySelectorAll(".toast").forEach(n => n.remove(
 const fanVars = (n, k) => `--k:${k};--mid:${(n - 1) / 2}`;
 
 // ---------- menu ----------
+// Lock page scrolling under a sheet or panel without losing your place (overflow:hidden on a 100%-tall body
+// would jump to the top): pin the body at its current offset, then put the scroll back on release.
+let LOCKS = 0, LOCK_Y = 0;
+function lockScroll() {
+  if (LOCKS++) return;
+  LOCK_Y = scrollY; document.body.style.top = -LOCK_Y + "px"; document.documentElement.classList.add("sheet-open");
+}
+function unlockScroll() {
+  if (!LOCKS || --LOCKS) return;
+  document.documentElement.classList.remove("sheet-open"); document.body.style.top = ""; scrollTo(0, LOCK_Y);
+}
 function sheet(html) {
   const scrim = document.createElement("div"), sh = document.createElement("div");
   scrim.className = "scrim"; sh.className = "sheet"; sh.setAttribute("role", "dialog");
   sh.innerHTML = `<div class="grab"></div>${html}`;
   let gone = false;
   const close = () => {
-    if (gone) return; gone = true; document.documentElement.classList.remove("sheet-open");
+    if (gone) return; gone = true; unlockScroll();
     if (reduceMotion) { scrim.remove(); sh.remove(); return; }
     scrim.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 200, fill: "forwards" }).onfinish = () => scrim.remove();
     sh.animate([{ transform: getComputedStyle(sh).transform === "none" ? "none" : getComputedStyle(sh).transform }, { transform: "translateY(105%)" }], { duration: 240, easing: "cubic-bezier(.3,0,.8,.2)", fill: "forwards" }).onfinish = () => sh.remove();
@@ -303,7 +335,7 @@ function sheet(html) {
   sh.addEventListener("pointermove", e => { if (y0 == null) return; dy = Math.max(0, e.clientY - y0); if (dy > 6) { sh.style.transition = "none"; sh.style.transform = `translateY(${dy}px)`; } });
   const end = () => { if (y0 == null) return; y0 = null; if (dy > 90) return close(); sh.style.transition = "transform .3s var(--ease)"; sh.style.transform = ""; };
   sh.addEventListener("pointerup", end); sh.addEventListener("pointercancel", end);
-  document.documentElement.classList.add("sheet-open");
+  lockScroll();
   document.body.append(scrim, sh);
   return { sh, close };
 }

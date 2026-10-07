@@ -2,6 +2,8 @@
 // The color eye: point the camera at anything and it names the color in the middle of the frame, live,
 // from the 2,700-name library, with the nearest word the app teaches underneath. Freeze to tap any spot,
 // keep a find, or turn the whole frame into a palette. Cameras shift color, so the copy calls it a guess.
+// Optional white balance: tap WB, then something white or grey; readings are then corrected by von Kries
+// scaling (wbFrom in js/accuracy.js), so that reference comes out neutral.
 
 function eye() {
   const el = show(`
@@ -10,7 +12,7 @@ function eye() {
       <canvas id="still" hidden></canvas>
       <i class="eye-ret" id="ret"></i>
     </div>
-    <header class="eye-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span class="eye-hint" id="hint">Point at anything</span><span style="width:44px"></span></header>
+    <header class="eye-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span class="eye-hint" id="hint">Point at anything</span><button class="icon-btn glass eye-wb" id="wb" aria-label="White balance: tap, then tap something white or grey" aria-pressed="false">WB</button></header>
     <div class="eye-card" id="card">
       <button class="eye-name" id="nm"><i id="chip"></i><span><b id="big">Looking…</b><em id="src"></em></span></button>
       <button class="eye-mine" id="mine"></button>
@@ -29,7 +31,8 @@ function eye() {
   const $ = s => el.querySelector(s);
   const vid = $("#vid"), still = $("#still"), ret = $("#ret"), stage = $("#stage");
   const probe = document.createElement("canvas"), pctx = probe.getContext("2d", { willReadFrequently: true });
-  let stream = null, frozen = false, raf = 0, cur = null, smooth = null, last = 0, at = [.5, .5];
+  let stream = null, frozen = false, raf = 0, cur = null, smooth = null, last = 0, at = [.5, .5], wb = null, wbArm = false;
+  const read = hex => wb ? wb(hex) : hex;
   const stop = () => { cancelAnimationFrame(raf); if (stream) stream.getTracks().forEach(t => t.stop()); stream = null; };
   cleanup.push(stop);
   $("[data-back]").onclick = () => { stop(); go(S.tab || "explore"); };
@@ -62,7 +65,7 @@ function eye() {
     raf = requestAnimationFrame(tick);
     if (frozen || !vid.videoWidth || t - last < 120) return;
     last = t;
-    const L = lab(sample(vid, vid.videoWidth, vid.videoHeight, .5, .5));
+    const L = lab(read(sample(vid, vid.videoWidth, vid.videoHeight, .5, .5)));
     smooth = smooth ? smooth.map((x, i) => x + (L[i] - x) * .45) : L;
     paint(labHex(...smooth));
   };
@@ -75,7 +78,7 @@ function eye() {
     vid.style.visibility = "hidden";
     $("#hint").textContent = "Tap anywhere to name it";
     $("#shut").setAttribute("aria-label", "Back to live");
-    at = [.5, .5]; placeRet(); paint(sample(still, still.width, still.height, .5, .5));
+    at = [.5, .5]; placeRet(); paint(read(sample(still, still.width, still.height, .5, .5)));
     buzz(10);
   };
   const live = () => {
@@ -84,10 +87,28 @@ function eye() {
     at = [.5, .5]; placeRet();
   };
   const placeRet = () => { ret.style.left = at[0] * 100 + "%"; ret.style.top = at[1] * 100 + "%"; };
+  // white balance: the next tap picks the reference (live: the middle circle; frozen: where you tap)
+  const hintNow = () => $("#hint").textContent = wbArm ? (frozen ? "Tap something white or grey" : "Aim the circle at white or grey, tap") : frozen ? "Tap anywhere to name it" : "Point at anything";
+  const wbBtn = $("#wb");
+  const setWb = f => { wb = f; wbBtn.classList.toggle("on", !!f); wbBtn.setAttribute("aria-pressed", f ? "true" : "false"); smooth = null; };
+  wbBtn.onclick = () => {
+    if (wb) { setWb(null); wbArm = false; toast("White balance off"); }
+    else { wbArm = !wbArm; wbBtn.classList.toggle("arm", wbArm); }
+    hintNow();
+  };
   stage.addEventListener("pointerdown", e => {
+    if (wbArm) {
+      const R = stage.getBoundingClientRect(), p = frozen ? [(e.clientX - R.left) / R.width, (e.clientY - R.top) / R.height] : [.5, .5];
+      const ref = frozen ? sample(still, still.width, still.height, p[0], p[1]) : vid.videoWidth ? sample(vid, vid.videoWidth, vid.videoHeight, .5, .5) : null;
+      const f = ref && wbFrom(ref);
+      wbArm = false; wbBtn.classList.remove("arm");
+      if (f) { setWb(f); toast("White set"); if (frozen) paint(read(sample(still, still.width, still.height, at[0], at[1]))); }
+      else toast("Too dark or too colorful. Try white or grey");
+      hintNow(); buzz(5); return;
+    }
     if (!frozen) return;
     const R = stage.getBoundingClientRect(); at = [(e.clientX - R.left) / R.width, (e.clientY - R.top) / R.height];
-    placeRet(); paint(sample(still, still.width, still.height, at[0], at[1])); buzz(5);
+    placeRet(); paint(read(sample(still, still.width, still.height, at[0], at[1]))); buzz(5);
   });
   $("#shut").onclick = () => {
     if (frozen) return stream ? live() : null;
@@ -129,7 +150,7 @@ function eyeSheet(hex) {
     <div class="eye-sw" style="--c:${hex}" data-ink="${ink(hex)}"><span class="mono">${hex}</span></div>
     <p class="eyebrow" style="margin:18px 0 6px">Precise names · from 2,700</p>${long.map(row).join("")}
     <p class="eyebrow" style="margin:18px 0 6px">Closest lesson words · the colors you learn here</p>${mine.slice(0, 3).map(row).join("")}
-    <p class="fine">Phone cameras adjust white balance and exposure, so treat a camera reading as a good guess, not a measurement.</p>
+    <p class="fine">Phone cameras adjust white balance and exposure, so treat a camera reading as a good guess, not a measurement. WB (top right) sets white from something white or grey you tap, a simple von Kries correction. Readings are sRGB: colors more vivid than that (the iPhone camera and screen reach P3) are clipped.</p>
     <button class="btn ghost" data-copy>Copy ${hex}</button>`);
   sh.querySelector("[data-copy]").onclick = () => { try { navigator.clipboard.writeText(hex); toast("Copied " + hex); } catch (e) {} };
   sh.querySelectorAll("[data-node]").forEach(b => b.onclick = () => { close(); XSTACK = []; openNode(graph().nodes.get(b.dataset.node)); });

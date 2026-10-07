@@ -168,7 +168,7 @@ function pickBoard(card, c, o = {}) {
 // How the answer differs from the one tapped: the written line if it is the named neighbor, else measured.
 function pickWhy(c, x) {
   if (c.vs && c.vs.toLowerCase() === x.n.toLowerCase() && c.d) return c.d;
-  if (x.vs && x.vs.toLowerCase() === c.n.toLowerCase() && x.d) return x.d;
+  if (x.vs && x.vs.toLowerCase() === c.n.toLowerCase() && x.d) return `${x.n}: ${x.d}`;   // the other color's own line, so name it
   return typeof compareLine === "function" ? compareLine(c, x) : "";
 }
 

@@ -9,7 +9,7 @@ Promise.all(OPTIONAL_DATA.map(src => new Promise(done => {
 }))).then(() => { if (SHOT) return shot(SHOT); S.placed ? go(S.tab || "learn") : welcome(); });
 
 function shot(name) {
-  S = Object.assign(fresh(), { placed: { tier: 2, at: today() }, done: { "t2-blues": today() } });
+  S = Object.assign(fresh(), { placed: { tier: 2, at: today() }, done: { "t2-blues": today() }, profileAsked: true });
   const pool = ALL.slice().sort((a, b) => a.id.localeCompare(b.id)).filter((_, i) => i % 3 === 0);
   pool.slice(0, 30).forEach((c, i) => { S.cards[c.id] = { b: 1, due: addDays(today(), 3), own: i < 24, ownBy: i < 18 ? "pick" : "swipe" }; });
   S.gym.skills = { hue: { level: 2.6, best: 2.4, hist: [["a", 7], ["b", 5.2], ["c", 3.9], ["d", 3.1], ["e", 2.6]], fam: { Blues: 2.1, Reds: 2.8, Greens: 3.4, Greys: 1.9 } },
@@ -21,6 +21,8 @@ function shot(name) {
   const later2 = (f, ms) => setTimeout(f, ms);
   switch (screen) {
     case "welcome": return welcome();
+    case "how": return how();
+    case "profile": return profileSetup(() => go("gym"), { why: "Before you train" });
     case "learn": return go("learn");
     case "gym": return go("gym");
     case "studio": return go("studio");
@@ -29,6 +31,7 @@ function shot(name) {
     case "deck": deck("learn", { unit: UNITS[1] }); later2(() => dispatchEvent(new KeyboardEvent("keydown", { key: " " })), 600); return;
     case "drill": return runDrill(arg || "hue", { trials: 10, noIntro: true, done: () => {} });
     case "gx": return gymShot(arg);
+    case "screen": return screenCheck(() => go("gym"));
     case "gymres": return stationDone({ k: arg || "neutral", est: 3.2, before: 4.1, pb: true, best: 3.2 });
     case "closeup": return closeup(g().nodes.get(arg || "c:Cobalt"));
     case "page": return openNode(g().nodes.get(arg || "alchemy"));
@@ -36,6 +39,7 @@ function shot(name) {
     case "daily": S.daily = {}; return daily();
     case "lab": return LAB[arg || "harmony"]();
     case "taste": return tasteShot(arg);
+    case "match": return openMatch(arg || "list", { shot: name.split(":")[2] || "task" });   // match:<id>[:reveal|:curves|:lvN|:done]
     case "say": case "make": case "intro": return prodShot(screen, arg);   // say:<empty|typed|right|close|wrong|gave>, make:<picking|result>, intro:<say|make>
     case "pick": case "place": case "exp": return pickShot(screen, arg);   // pick:<ask|right|wrong>, place:<ask|result>, exp:<about|test|done>
     case "colors": {   // older hook: colors:<set id>:<view id>:<act>, read through the old S.cb shape
@@ -51,6 +55,7 @@ function shot(name) {
       if (act === "tuned") Object.assign(S.cb, { tuned: true, state: { ...cxState(cxNorm(ch)), hue: [190, 280], L: [30, 80] } });
       return colorExplorer({ focus: dailyColor(), pick: c => closeup(colorNode(c)), shot: ["wheel", "tuned"].includes(act) ? "" : act });
     }
+    case "gallery": return galleryShot(name.slice(8));   // gallery, gallery:scroll=600, gallery:color=Cobalt, gallery:adjust=Cobalt, gallery:page=12, gallery:cpage=Cobalt
   }
 }
 
