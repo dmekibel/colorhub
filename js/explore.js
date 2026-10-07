@@ -1,14 +1,11 @@
 "use strict";
-// Explore tab: the color wiki.
-//  - Honeycomb: every color as a bubble in a watchOS-style honeycomb that is also a color wheel
-//    (greys in the middle, hue around, strength outward). Bubbles swell near the center, shrink at the edge.
-//  - Orbit: tap a bubble and it flies to the center with its connections floating around it
-//    (Obsidian's local graph). Tap any connection and it becomes the center: you surf the web hop by hop.
+// Explore tab: the color wiki, as an editorial feed.
+//  - Lens chips recompose the feed: For you, Colors (opens on the color explorer, colorsets.js), Paintings, Ideas.
+//    Saved (the heart) holds what you keep. Search finds any node by name.
+//  - Tap any pin for its closeup: the pin big, then "More like this" (its connections, each saying why).
 //  - Pages: every color, idea, pigment, person, book and painting has an article full of [[links]].
-//  - A pull-up sheet (Apple Maps) holds the color of the day, stories, labs, paintings and the index.
 
 let XSTACK = [];       // back stack inside Explore (closeups and pages)
-let TRAIL = [];        // kept for older callers; closeups use XSTACK
 
 // ======================================================================
 // Explore is a Pinterest-style feed. The key (lens chips) recomposes it: For you, Spectrum, Harmony,
@@ -28,7 +25,7 @@ function toggleSave(id) {
   const i = S.saved.indexOf(id);
   if (i >= 0) S.saved.splice(i, 1); else S.saved.unshift(id);
   save(); buzz(8);
-  toast(i >= 0 ? "Removed from your palette" : "Saved to your palette");
+  toast(i >= 0 ? "Removed from Saved" : "Saved");
   return i < 0;
 }
 
@@ -109,7 +106,7 @@ function lensSections(lens) {
     }
     case "saved": {
       const list = (S.saved || []).map(id => g.nodes.get(id)).filter(Boolean);
-      return [{ title: "Your palette", sub: list.length ? `${list.length} saved` : "Tap ♡ on anything to keep it here.", pins: list.map(n => pin(n)) }];
+      return [{ title: "Saved", sub: list.length ? `${list.length} kept` : "Tap ♡ on anything to keep it here.", pins: list.map(n => pin(n)) }];
     }
     default: {
       // For you: colors shuffled by day, with a painting, a story or a page every few pins
@@ -146,7 +143,8 @@ function exploreHome() {
   const SECS = lensSections(lens).filter(x => !x.title || x.honey || (x.pins && x.pins.length) || x.sub);
   const el = show(`
     <header class="x-head">
-      <div class="x-row"><h1 class="tab-title">${lens === "saved" ? "Saved" : "Explore"}</h1><span class="x-acts"><button class="icon-btn glass${lens === "saved" ? " on" : ""}" data-saved aria-label="Saved">${ICON_HEART}${(S.saved || []).length ? `<em>${S.saved.length}</em>` : ""}</button><button class="icon-btn glass" data-search aria-label="Search">${ICON.search}</button></span></div>
+      ${tabHead(`<span class="x-acts"><button class="icon-btn${lens === "saved" ? " on" : ""}" data-saved aria-label="Saved">${ICON_HEART}${(S.saved || []).length ? `<em>${S.saved.length}</em>` : ""}</button><button class="icon-btn" data-search aria-label="Search">${ICON.search}</button></span>`)}
+      <div class="x-row"><h1 class="tab-title">${lens === "saved" ? "Saved" : "Explore"}</h1></div>
       <div class="lens-key" role="tablist">${lensOrder.map(([k, t]) => `<button role="tab" class="${k === lens ? "on" : ""}" data-lens="${k}">${t}${k === "saved" && (S.saved || []).length ? ` <em>${S.saved.length}</em>` : ""}</button>`).join("")}</div>
     </header>
     <div class="x-search" hidden><label class="search"><span>${ICON.search}</span><input id="q" type="search" placeholder="Search colors, paintings, people, pigments" autocomplete="off"></label><div id="results"></div></div>
