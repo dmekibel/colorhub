@@ -434,7 +434,7 @@ function honeycomb(host, opts = {}) {
   let Plag = [0, 0], lastInput = performance.now(), driftT0 = 0, driftTeff = 0, driftAnchor = [0, 0], touchXY = null, ripples = [];
   let insetBottom = 0, insetCur = 0;
   // per-bubble size memory, so a bubble never snaps to a new size (cells change as neighbors come and go): sizes ease
-  let sizeMem = new Map(), sizeT = 0, sizeRaf = 0;
+  let sizeMem = new Map(), sizeT = 0, sizeRaf = 0, glided = null;   // glided: the item a tap last brought to the middle
   const vy = () => Math.max(60, Hh - insetCur);   // the visible height above whatever panel is inset
   const vcy = () => vy() / 2;
 
@@ -832,7 +832,7 @@ function honeycomb(host, opts = {}) {
     }
     if (!down) return;
     const dx = x - down.x, dy = y - down.y;
-    if (!down.moved && Math.hypot(dx, dy) > 10) { down.moved = true; pressed = null; kick(); }
+    if (!down.moved && Math.hypot(dx, dy) > 10) { down.moved = true; pressed = null; glided = null; kick(); }
     if (!down.moved) return;
     const now = performance.now();
     if (lay.globe) { P = [down.P0[0] + dx / GLOBE_ROT_K, clamp(down.P0[1] - dy / GLOBE_ROT_K, -1.5, 1.5)]; }
@@ -871,10 +871,12 @@ function honeycomb(host, opts = {}) {
       lastTap = { t: now, x: d.x, y: d.y };
       if (p && e.type === "pointerup") {
         if (!RM && !SHOOT && cfg.alive > 0) { ripples.push({ x: p.x, y: p.y, t0: now, sigma: Math.max(22, p.b.d * .85) }); if (ripples.length > 4) ripples.shift(); }
-        // One tap opens the color, wherever the bubble is (David: "a single click doesn't open it, but it should").
-        // It used to glide an off-center bubble to the middle first and only open on a second tap (centerFirst).
-        // The short wait is only so a double-tap can still zoom instead.
-        tapTimer = setTimeout(() => { pressed = null; kick(); open(p.it, p.b); }, 220);
+        // centerFirst: a tap on an off-center bubble glides it to the middle; a tap on the middle one opens it.
+        // "The middle one" is the bubble the view itself calls its center (the caption's), or the one we just glided
+        // there. Distance alone wasn't enough: idle drift, the panel inset and the lens could leave the centered
+        // bubble a few px off, so a tap on it only glided again and never opened (David).
+        const far = opts.centerFirst && p.it !== center && p.it !== glided && Math.hypot(p.x - W / 2, p.y - vcy()) > p.b.d * .55;
+        tapTimer = setTimeout(() => { pressed = null; kick(); if (far) { glided = p.it; lay.globe ? glideToGlobe(p.it) : glideTo(p.x, p.y); } else { glided = null; open(p.it, p.b); } }, far ? 0 : 220);
         return;
       }
       pressed = null; kick();
