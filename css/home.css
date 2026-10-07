@@ -22,14 +22,16 @@
 
 /* full screen: no title bar and no name caption (the names are already on the bubbles). Views and search live in the sheet. */
 .hm .hm-top,.hm .hc-cap{display:none}
-.hm-search{top:calc(var(--top) + 12px);left:68px}
-/* the one button on the home screen: top left, small and quiet; it opens the sheet with everything else */
-.hm-menu{position:fixed;z-index:5;top:calc(var(--top) + 12px);left:14px;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;
-  color:var(--ink);background:rgba(14,13,11,.55);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid var(--rule);
-  transition:transform .3s var(--spring),background .2s}
-.hm-menu:active{transform:scale(.92)}
-.hm-menu svg{width:18px;height:18px}
-.hm.hm-sheet-open .hm-menu{background:rgba(236,232,223,.12)}
+.hm-search{top:calc(var(--top) + 12px)}
+/* two solid corner buttons (not see-through: glass over this many colors looks muddy), under the thumbs */
+.hm-corner{position:fixed;z-index:3;bottom:calc(var(--bottom) + 14px);width:54px;height:54px;border-radius:50%;display:grid;place-items:center;
+  color:var(--ink);background:#1D1C17;border:1px solid rgba(236,232,223,.16);box-shadow:0 8px 22px rgba(0,0,0,.5);
+  transition:transform .3s var(--spring),opacity .25s}
+.hm-corner-l{left:16px}
+.hm-corner-r{right:16px}
+.hm-corner:active{transform:scale(.92)}
+.hm-corner svg{width:24px;height:24px}
+.hm.hm-sheet-open .hm-corner{opacity:0;pointer-events:none}
 .hm-show{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:2px 0 18px}
 .hm-views{display:inline-flex;align-items:center;gap:8px;min-width:0;font:400 22px/1 var(--serif);color:var(--ink)}
 .hm-views span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}

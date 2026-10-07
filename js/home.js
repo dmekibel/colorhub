@@ -14,6 +14,8 @@
 // so that change stays small). The one consistent way back to the honeycomb from Train / Explore / Studio is
 // the brand button at the top-left of their own headers (tabHead, js/core.js) — the thing already there.
 
+const HM_SUN = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></svg>`;
+const HM_SLIDERS = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 6h10M18 6h2M4 12h3M11 12h9M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>`;
 const HM_QUICK = [["101", "All 101"], ["learned", "Learned"], ["learning", "Learning"], ["notmet", "Not met yet"]];
 const hmSet = id => COLOR_SETS.find(s => s.id === id) || COLOR_SETS[0];
 const hmLabel = id => { const q = HM_QUICK.find(x => x[0] === id); return q ? q[1] : hmSet(id).title; };
@@ -33,7 +35,8 @@ function hmHome() {
     <div class="hm-search" id="hmSearch" hidden>
       <label class="search"><span>${ICON.search}</span><input id="hmq" type="search" placeholder="sea, rust, Monet…" autocomplete="off" enterkeyhint="search"></label>
     </div>
-    <button class="hm-menu" id="hmMenu" aria-label="Menu">${ICON.dots}</button>
+    <button class="hm-corner hm-corner-l" id="hmToday" aria-label="Today">${HM_SUN}</button>
+    <button class="hm-corner hm-corner-r" id="hmView" aria-label="What to show">${HM_SLIDERS}</button>
     <div class="hm-sheet" id="hmSheet">
       <button class="hm-grab" id="hmGrab" aria-label="Open Today"><i></i></button>
       <div class="hm-sheet-body" id="hmBody"></div>
@@ -56,7 +59,7 @@ function hmHome() {
     items = set.get();
     paintTitle();
     if (ctrl) ctrl.update({ items, soft });
-    else ctrl = honeycomb(viewEl, { items, layout: "map", zoom: S.hm.zoom || 1, pick, onPeek,
+    else ctrl = honeycomb(viewEl, { items, layout: "map", zoom: S.hm.zoom || 1, pick, onPeek, centerFirst: true,
       onZoom: z => { S.hm.zoom = Math.round(z * 100) / 100; save(); } });
     hmWireChrome();
   }
@@ -134,9 +137,10 @@ function hmHome() {
   function hmDismissHint() { if (S.hm.seenHint) return; S.hm.seenHint = true; save(); const h = $("#hmHint"); if (h) h.remove(); }
 
   // ---------- the bottom sheet: peek (just the handle) · mid (Today) · full (the four doors), one scrolling body ----------
-  const sheetEl = $("#hmSheet"), grab = $("#hmGrab"), bodyEl = $("#hmBody"), menuBtn = $("#hmMenu");
-  // the one button on the home: top left, opens (or closes) everything else
-  menuBtn.onclick = () => { if (!S.hm.opened) { S.hm.opened = true; save(); } setState(sheetState === "peek" ? "full" : "peek"); };
+  const sheetEl = $("#hmSheet"), grab = $("#hmGrab"), bodyEl = $("#hmBody");
+  // two corner buttons, under the thumbs: Today (left) opens the sheet with everything; the view button (right) opens the chooser
+  $("#hmToday").onclick = () => { if (!S.hm.opened) { S.hm.opened = true; save(); } setState(sheetState === "peek" ? "full" : "peek"); };
+  $("#hmView").onclick = () => { setState("peek"); chooser(); };
   const HM_PEEK = 0;   // at rest the sheet is fully hidden: nothing but colors on screen
   let H = { peek: HM_PEEK, mid: Math.round(innerHeight * .46), full: Math.round(innerHeight * .88) };
   sheetEl.style.height = H.full + "px";
@@ -150,7 +154,6 @@ function hmHome() {
   function setState(s, anim = true) {
     sheetState = s; revealed = H[s]; paintSheet(anim);
     el.classList.toggle("hm-sheet-open", s !== "peek");
-    menuBtn.setAttribute("aria-label", s === "peek" ? "Menu" : "Close menu");
     grab.setAttribute("aria-label", s === "peek" ? "Open Today" : "Close");
     if (s !== "peek") { if (!sheetLocked) { lockScroll(); sheetLocked = true; } hmRenderBody(); buzz(s === "full" ? 6 : 4); }
     else if (sheetLocked) { unlockScroll(); sheetLocked = false; }
