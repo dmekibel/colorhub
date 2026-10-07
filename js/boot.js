@@ -85,6 +85,15 @@ function shot(name) {
     case "gallery": return galleryShot(name.slice(8));   // gallery, gallery:scroll=600, gallery:color=Cobalt, gallery:adjust=Cobalt, gallery:page=12, gallery:cpage=Cobalt
     case "world": case "fashiondecade": case "fashioncoty": case "fashionhouse": case "fashionhistory":
       return typeof worldShot === "function" && worldShot(screen, arg);   // js/world.js
+    // gems (js/gems.js): gems:world, gems:gems|essays, gems:gem:<id>, gems:essay:<id>
+    case "gems": { const [sub, a2] = (arg || "world").split(":");
+      if (sub === "world") { S.lens = "world"; return go("explore"); }
+      return gmWhen(() => {
+        if (GM_LIST_META[sub]) return gmListPage(sub);
+        const n = a2 && gmNode("gm:" + sub + ":" + a2);
+        if (n) return openNode(n);
+        S.lens = "world"; go("explore");
+      }); }
   }
 }
 

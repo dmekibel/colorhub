@@ -172,6 +172,71 @@ Ends with a lesson score and Next.
 - The path stays as the gentle default (the Continue pill); exploration is the other way in. Spaced review ties both together.
 - Size: M (Sonnet), reusing deck, odd one out, sort, Pick it and memory.
 
+## 13. Every color is a link; two-tier vocabulary (approved 2026-10-07)
+**Painting palettes (next job after the Commons batch lands, M, Sonnet)**
+- Arriving at a painting from a color search highlights the matching swatch: "≈ Aubergine · 5% of the canvas", with the precise
+  library name under it (fixes "the color I came from isn't in the palette").
+- Dynamic palette: a slider for how many colors (3 / 6 / 12 / up to ~20), precomputed offline from the cached small copies
+  (stored per painting in the gallery detail shards, no extra phone download); tap anywhere on the painting to name that spot
+  where the museum's image allows canvas reads (CORS), else the slider still works.
+- App-wide rule: every swatch everywhere is tappable (paintings, fashion, looks, poems, botany, gems, palettes).
+**The color link sheet**
+- Several nearest words in both tiers, each with closeness and tappable: Core words (the 101) and Precise names (library,
+  with provenance, e.g. Japanese kanji), plus the look-alike ring, "More paintings with this color", and Learn it.
+**Library color pages**
+- Every library color gets a generated page: names and sources, synonyms, look-alikes, paintings/poems/fashion containing it,
+  nearest core word.
+**One primary English name per distinct color (David, 2026-10-08)**
+- The app teaches English color words. Every distinct color gets ONE primary English name: the most common English name for it
+  (xkcd survey frequency and everyday usage first, then established trade/pigment names). Near-identical names are merged
+  into that one color (below about ΔE00 2-3); alternates are shown only as small "also called" info on its page, never taught.
+- Non-English names: if a distinct color HAS an English name, foreign names for it are cultural notes only (not taught).
+  If a distinct color has NO English name, it uses the best non-English name as its primary name, romanized with a short
+  meaning (e.g. "Ebizome (grape-vine purple)"), and it is learnable like any other color (English borrowed most color words:
+  khaki, sepia, turquoise).
+- Target: about 1,000 distinct, nameable colors in total; fewer is fine if that's what the distinct-English-names test yields.
+**The vocabulary ladder (later job, M)**
+- Level 1: the core 101 (today's path). Level 2: common English names people use (~300). Level 3: painter's and designer's
+  English names (pigments, trade names; ~300). Level 4: the remaining distinct English names, up to ~1,000 in all.
+- Built from look-alike groups; Learn it works on any ladder color.
+- Progress shows both tiers: "Core 64/101 · Library 212/~1,000"; the top of the ladder = "master colorist".
+
+## 14. Stages and fields (approved 2026-10-08, sizes revised the same day; replaces the fixed 4-level ladder in §13)
+No colored belts. The 11 basics are a placement check only, never taught. Counts are total words you know, basics
+included. Stages grow fast at first, then level off at about +200 new words (about 3 weeks), so no stage drags on:
+25 → 50 → 100 → 150 → 250 → 400 → 600 → 800 → 1,000 (new words: +14, +25, +50, +50, +100, +150, +200, +200, +200).
+- **25.** Just above the average adult. In Lindsey & Brown (2014, free naming), men used ~9.7 words beyond the basics and
+  women ~12.3, so a typical adult actively uses about 21-23. A win in 2-3 days. Placement skips it for people who already
+  know these.
+- **50.** The color-aware person (fashion, home, shopping): salmon, mauve, coral, khaki, rust, mint, burgundy...
+- **100.** The "big crayon box" (Crayola's largest standard box is 120). Darwin described specimens with Werner's
+  Nomenclature of Colours (110 names).
+- **150.** About the 148 named colors in web code (CSS): the designer's everyday set.
+- **250.** A word near every region of color space. The ISCC-NBS naming system splits all colors into 267 named blocks.
+  Check with our data: the nearest-word ΔE should fall sharply by this point (move the stage if the drop is at 200 or 300).
+- **400 / 600 / 800.** Field depth: the field paths differ most here (pigments, whites/greiges, film/skin tones, fabrics).
+- **1,000: Master.** About the size of the xkcd survey's 954 most agreed names. Beyond that, people stop agreeing on
+  names, so they become niche or brand names (library only).
+Memory: the size of a session never changes (about 10 new words a day plus reviews, introduced a few at a time). Early stages
+take days; from 400 on, each stage is about 3 weeks (goal-gradient: the end of the stage always stays in sight). Later words
+are finer distinctions, so they go slower.
+Inside a stage you still learn about 10 at a time (the existing units); the stage is the chapter. Each stage ends with an
+honest no-hint test (name + pick the colors, one eye drill with them, a camera mission to find some of them in the world).
+**Ordering logic:** usefulness first (xkcd frequency, everyday usage), then coverage (each stage fills the biggest gaps in the
+color map, so it fills evenly), then distinctness (no near-twins in one unit), niche/traditional last. Start from
+research/COLOR-SELECTION.md.
+**Fields** (asked at the start, editable any time, several allowed): painter · digital artist/illustrator · graphic/UI/brand
+designer · filmmaker/photographer/colorist · interior designer/architect · fashion/textile · just curious.
+- Trunk and branches: Stage 1 is shared by everyone; from Stage 2 each field's key words move earlier and its Train stations,
+  Studio tools and World content get emphasis (painter: earth/pigment names, value, mixing, Zorn, masses; digital: screen
+  colors, skin/sky, palettes; designer: neutrals, contrast, critique, exports; film/photo: skin, sky, teal-orange, casts,
+  Kelvin, shot matching; interior: whites/off-whites/greiges, wood/stone, undertones, light; fashion: camel/burgundy/blush/
+  nude/khaki/plum, seasonal palettes, fashion history).
+- Several fields: blend and interleave their lists; shared words once; stages never get longer, only the mix changes.
+- Applied tasks per field at the end of each stage (mix it, build a palette that passes contrast, grade toward it, pick the
+  right white for a room...), plus the camera mission.
+**Build:** the ordering (data, S-M, Sonnet) + stage UI/tests/field choice (M, Sonnet) as the chapters of the path (§1).
+
 ## Also queued
 - World: Botany (in progress), then Gems.
 - Color-list swaps from research/COLOR-SELECTION.md (Bistre, Stone, Green grey, Rose, Grape, Seafoam; Terracotta and Tangerine hex fixes; cross-unit near-twin check).

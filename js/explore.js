@@ -360,6 +360,7 @@ function colorPage(n) {
     <div class="c-poems"></div>
     ${typeof archiveRows === "function" ? archiveRows(c) : ""}
     ${typeof btRow === "function" ? btRow(c) : ""}
+    ${typeof gmRow === "function" ? gmRow(c) : ""}
     <section class="fx-in" data-world-in></section>
     ${connSection(n)}
     ${w && w.sources ? secHTML("src", "Sources", sourcesHTML(w.sources), false) : ""}
