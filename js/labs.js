@@ -110,7 +110,7 @@ LAB.harmony = (base = lch(dailyColor().h)[1] > 30 ? dailyColor().h : "#C8553D", 
     <p class="eyebrow" style="margin:26px 0 10px">Base color · drag the ring</p>
     <div id="pick"></div>
     <p class="p-body">${linkText("Why these work: [[complementary-colors|complements]] sit opposite on the [[color-wheel]] and make each other look stronger, the effect [[chevreul|Chevreul]] described for tapestry dyes. Analogous colors sit side by side and feel calm. Triads were a [[bauhaus|Bauhaus]] favorite.")}</p>
-    <p class="fine">Harmonies rotate hue on the CIELAB wheel at the same lightness and strength. Names are the nearest of the app's ${EVERY().length}. Tap a color to copy it.</p>
+    <p class="fine">Harmonies rotate CIELAB hue (LCh h) at the same lightness and strength. The Studio gamut wheel uses OKLab hue instead, so the same angle can land on a slightly different color there. Names are the nearest of the app's ${EVERY().length}. Tap a color to copy it.</p>
   `, "article lab");
   el.querySelector("[data-back]").onclick = () => go("studio");
   wireLinks(el);
@@ -164,7 +164,7 @@ LAB.namer = (hex = "#5F8C8A") => {
     <div id="pick"></div>
     <button class="btn ghost" data-camera>${ICON.search} Use the camera instead</button>
     <div id="nout"></div>
-    <p class="fine">Cameras and light shift colors, so a camera reading is a hint, not a measurement.</p>
+    <p class="fine">Cameras and light shift colors, so a camera reading is a hint, not a measurement. Readings are sRGB: colors more vivid than that (the iPhone camera and screen reach P3) are clipped.</p>
   `, "article lab");
   el.querySelector("[data-back]").onclick = () => go("studio");
   const out = el.querySelector("#nout");

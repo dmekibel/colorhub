@@ -35,6 +35,7 @@ function shot(name) {
     case "deck": deck("learn", { unit: UNITS[1] }); later2(() => dispatchEvent(new KeyboardEvent("keydown", { key: " " })), 600); return;
     case "drill": return runDrill(arg || "hue", { trials: 10, noIntro: true, done: () => {} });
     case "gx": return gymShot(arg);
+    case "screen": return screenCheck(() => go("gym"));
     case "gymres": return stationDone({ k: arg || "neutral", est: 3.2, before: 4.1, pb: true, best: 3.2 });
     case "closeup": return closeup(g().nodes.get(arg || "c:Cobalt"));
     case "page": return openNode(g().nodes.get(arg || "alchemy"));
