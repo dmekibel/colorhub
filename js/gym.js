@@ -203,8 +203,7 @@ function gymHome() {
   const demos = S.gym.demos || {}, af = demos.after;
   const el = show(`
     <header class="bar"><div class="brand">${LOGO}<span>ColorHub</span></div><span class="eyebrow">Eye training</span></header>
-    <h1 class="tab-title" style="margin-top:22px">The <em>Gym</em></h1>
-    ${challengeCard()}
+    <h1 class="tab-title" style="margin-top:22px"><em>Train</em> your eye</h1>
     <button class="sg-card" data-st="${sg.k}">
       <span class="sg-top"><span class="eyebrow">Suggested</span><span class="eyebrow">${esc(sg.why)}</span></span>
       ${stationArt(sg.k)}
@@ -227,7 +226,6 @@ function gymHome() {
   `, "gym", "gym");
   el.querySelectorAll("[data-st]").forEach(b => b.onclick = () => runDrill(b.dataset.st));
   el.querySelector("[data-lightning]").onclick = lightning;
-  el.querySelector("[data-challenge]").onclick = () => chToday() ? challengeDone() : challenge();
   el.querySelector("[data-eye]").onclick = eyeReport;
   el.querySelectorAll("[data-taste]").forEach(b => b.onclick = () => tasteIntro(b.dataset.taste));
 }
