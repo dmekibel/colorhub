@@ -1,19 +1,23 @@
 "use strict";
-// Explore tab: the color wiki, as an editorial feed.
-//  - Lens chips recompose the feed: For you, Colors (opens on the color explorer, colorsets.js), Paintings, Ideas.
-//    Saved (the heart) holds what you keep. Search finds any node by name.
+// Explore tab (redesigned 2026-10-11, DESIGN-SYSTEM.md §12 "Explore: a pager of covers"):
+//  - The top level is a vertical pager of four full-bleed covers, one per part: For you, Art, Ideas, World.
+//    "Colors" is dropped (the home honeycomb is the colors). Tapping a cover opens that part full screen.
+//  - Art merges the old Paintings and Poems lenses: pick a color from a row of bubbles, the header takes its
+//    tint, and paintings (two-column, palette bars) and poems (lines of verse) share one feed.
+//  - For you / Ideas / World reuse the Pinterest-style sections built by lensSections() below; World still
+//    delegates to worldMount() (js/world.js). S.lens remembers which part is open, exactly as it remembered
+//    which lens chip was on before (router.js maps its value to #/explore/<art|ideas|world|saved>).
 //  - Tap any pin for its closeup: the pin big, then "More like this" (its connections, each saying why).
 //  - Pages: every color, idea, pigment, person, book and painting has an article full of [[links]].
 
 let XSTACK = [];       // back stack inside Explore (closeups and pages)
 
 // ======================================================================
-// Explore is a Pinterest-style feed. The key (lens chips) recomposes it: For you, Spectrum, Harmony,
-// Origins, Paintings, History, Symbols, Saved. Tap any pin for its closeup and "More like this":
-// its connections as pins, each labeled with why, then connections of connections.
+// Below the pager, Explore is still a Pinterest-style feed. lensSections() recomposes it: For you (mixed),
+// Harmony, Origins, Paintings (the hand-built "Featured" rail), History, Symbols, Ideas, World, Saved.
+// Tap any pin for its closeup and "More like this": its connections as pins, each labeled with why, then
+// connections of connections.
 // ======================================================================
-// Four lenses: a mixed feed, every color, the paintings, and the ideas (stories, systems, history). Saved lives behind the heart.
-const LENSES = [["all", "For you"], ["spectrum", "Colors"], ["paintings", "Paintings"], ["poems", "Poems"], ["ideas", "Ideas"], ["world", "World"]];
 const ORIGIN_GROUPS = [["Flowers & plants", ["flower", "plant"]], ["Fruit, food & drink", ["fruit", "food", "drink"]], ["Gems, stones & metals", ["gem", "mineral", "metal"]], ["Animals", ["animal"]], ["Places & people", ["place", "person"]], ["Materials & dyes", ["material", "dye"]], ["Sky & nature", ["nature"]], ["Plain color words", ["abstract"]]];
 const ERAS = [["Prehistory", -1e9, -3000], ["The ancient world", -3000, 500], ["The Middle Ages", 500, 1400], ["The Renaissance", 1400, 1600], ["The 1600s", 1600, 1700], ["The 1700s", 1700, 1800], ["The 1800s", 1800, 1900], ["The 1900s and after", 1900, 1e9]];
 const hash = s => { let h = 2166136261; for (const ch of s) { h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; };
@@ -139,54 +143,246 @@ function LAB_TILES(keys = ["harmony", "contrast", "eye", "studio"]) {
     <b>Studio</b><small>Make, keep and share palettes</small></button>` };
   return keys.map(k => tiles[k]).join("");
 }
+// ======================================================================
+// Explore's top level: a vertical pager of four full-bleed covers (DESIGN-SYSTEM.md §12).
+// S.lens remembers which part is open ("all" = the pager itself, i.e. For you's own address is plain
+// #/explore); exploreHome() is the one entry point router.js and go() call, same as before.
+// ======================================================================
 function exploreHome() {
+  const lens = ["art", "ideas", "world", "saved"].includes(S.lens) ? S.lens : "all";
+  if (lens === "art") return artHome();
+  if (lens === "ideas") return exploreIdeas();
+  if (lens === "world") return exploreWorld();
+  if (lens === "saved") return exploreSaved();
+  return explorePager();
+}
+// a part's cover opens the same way a honeycomb bubble or a painting thumbnail would (DESIGN-SYSTEM §8):
+// here, a plain lens switch, re-using the pattern every lens chip used before this redesign.
+function openPart(part) { S.lens = part; save(); exploreHome(); }
+function backToPager() { openPart("all"); }
+
+// ---------- tinting a cover or the Art header from its darkest dominant color (DESIGN-SYSTEM §3, §12) ----------
+// L* <= 18, chroma <= 20: dark and quiet enough that --ink text over it still clears 7:1.
+function tintFromHex(hex) {
+  const [, , H] = lch(hex);
+  return lchHex(Math.min(lch(hex)[0], 18), Math.min(lch(hex)[1], 20), H);
+}
+const darkestHex = list => list.reduce((a, b) => lch(b)[0] < lch(a)[0] ? b : a);
+const tintFromHexList = list => list && list.length ? tintFromHex(darkestHex(list)) : null;
+const tintFromPalette = pal => pal && pal.length ? tintFromHex(darkestHex(pal.map(p => p.h))) : null;
+// pad or trim any list of colors to exactly six, for the seam band every cover shows
+const cycleTo6 = list => list && list.length ? Array.from({ length: 6 }, (_, i) => list[i % list.length]) : [];
+const sixSwatchHTML = (hexes, shares) => cycleTo6(hexes).map((h, i) => `<i style="background:${h};flex:${shares && shares[i] != null ? shares[i] : 1}"></i>`).join("");
+// For you and World have no photo, so their "one great image" is the color itself, full bleed, with its own
+// name set large in the corner (the same "color is the interface" move as a color page's hero) — plain flat
+// color reads as empty space otherwise, especially when today's pick is very light or very dark.
+const flatHeroHTML = (hex, label) => `<div class="xp-flat" style="background:${hex}"></div><div class="xp-flat-label" data-ink="${ink(hex)}">${esc(label)}</div>`;
+
+// what each cover shows today: a color (For you), a hand-built painting (Art), a story (Ideas), a Pantone
+// Color of the Year (World) — the only four things in the data that come with a ready "today" pick.
+function coverData() {
+  const day = today(), g = graph();
+  const c = dailyColor(day);
+  const paintings = [...g.nodes.values()].filter(x => x.kind === "painting" && !x.stub && x.img && (x.palette || []).length);
+  const art = paintings.length ? seeded(paintings, "artcover" + day)[0] : null;
+  const story = g.stories.length ? seeded(g.stories, "ideacover" + day)[0] : null;
+  const coty = window.FASHION && FASHION.coty && FASHION.coty[FASHION.coty.length - 1];
+  return { c, art, story, coty };
+}
+function artCoverNote(art) {
+  const pal = art.palette, dom = pal.reduce((a, b) => b.share > a.share ? b : a), dark = pal.reduce((a, b) => lch(b.h)[0] < lch(a.h)[0] ? b : a);
+  const names = [dom.name, dark.name].filter((n, i, arr) => n && arr.indexOf(n) === i);
+  return `Today, ${art.title}${names.length ? `, in ${names.map(n => n.toLowerCase()).join(" and ")}` : ""}`;
+}
+function coverHTML(part, name, lead, note, tint, heroHTML, seamHTML) {
+  return `<section class="xp-cover" data-part="${esc(part)}" style="${tint ? `--tint:${tint}` : ""}">
+    <div class="xp-img">${heroHTML}</div>
+    ${seamHTML ? `<div class="xp-seam">${seamHTML}</div>` : ""}
+    <div class="xp-body">
+      <h2 class="xp-name">${esc(name)}</h2>
+      <p class="xp-lead">${esc(lead)}</p>
+      ${note ? `<p class="xp-note">${esc(note)}</p>` : ""}
+    </div>
+  </section>`;
+}
+function explorePager() {
   XSTACK = [];
-  const lens = LENSES.some(l => l[0] === S.lens) || S.lens === "saved" ? S.lens : "all";
-  const media = (S.profile && S.profile.media) || [];
-  const first = media.includes("paint") && !media.includes("screen") ? ["paintings"] : [];
-  const lensOrder = [LENSES[0], ...LENSES.slice(1).filter(l => first.includes(l[0])).sort((a, b) => first.indexOf(a[0]) - first.indexOf(b[0])), ...LENSES.slice(1).filter(l => !first.includes(l[0]))];
-  const SECS = lensSections(lens).filter(x => !x.title || x.honey || x.poems || (x.pins && x.pins.length) || x.sub);
+  const { c, art, story, coty } = coverData();
+  const forYouSeam = sixSwatchHTML([c.h, ...nearestColors(c.h, 5, c.n).map(x => x[0].h)]);
+  const covers = [
+    coverHTML("all", "For you", "A new pick of colors, paintings and stories every day.", `Today, ${c.n}`,
+      tintFromHex(c.h), flatHeroHTML(c.h, c.n), forYouSeam),
+    art ? coverHTML("art", "Art", "Fourteen thousand paintings and eleven thousand poems, found by their colors.", artCoverNote(art),
+      tintFromPalette(art.palette), `<img src="${esc(art.img)}" alt="${esc(art.title)}">`, sixSwatchHTML(art.palette.map(p => p.h), art.palette.map(p => p.share)))
+      : coverHTML("art", "Art", "Fourteen thousand paintings and eleven thousand poems, found by their colors.", "", null, `<div class="xp-flat" style="background:var(--lift-2)"></div>`, ""),
+    story ? coverHTML("ideas", "Ideas", "Short stories, systems and history, read through color.", `Today, ${story.title}`,
+      tintFromHexList(story.cover), `<div class="xp-flat" style="background:linear-gradient(135deg,${story.cover.join(",")})"></div>`, sixSwatchHTML(story.cover))
+      : coverHTML("ideas", "Ideas", "Short stories, systems and history, read through color.", "", null, `<div class="xp-flat" style="background:var(--lift-2)"></div>`, ""),
+    coty ? coverHTML("world", "World", "Fashion, gems and growing things, in color.", `Today, ${coty.name} · ${coty.year}`,
+      tintFromHex(coty.hex), flatHeroHTML(coty.hex, coty.name), sixSwatchHTML(FASHION.coty.slice(-6).map(y => y.hex)))
+      : coverHTML("world", "World", "Fashion, gems and growing things, in color.", "", null, `<div class="xp-flat" style="background:var(--lift-2)"></div>`, ""),
+  ];
   const el = show(`
-    <header class="x-head">
-      ${tabHead(`<span class="x-acts"><button class="icon-btn${lens === "saved" ? " on" : ""}" data-saved aria-label="Saved">${ICON_HEART}${(S.saved || []).length ? `<em>${S.saved.length}</em>` : ""}</button><button class="icon-btn" data-search aria-label="Search">${ICON.search}</button></span>`)}
-      <div class="x-row"><h1 class="tab-title">${lens === "saved" ? "Saved" : "Explore"}</h1></div>
-      <div class="lens-key" role="tablist">${lensOrder.map(([k, t]) => `<button role="tab" class="${k === lens ? "on" : ""}" data-lens="${k}">${t}${k === "saved" && (S.saved || []).length ? ` <em>${S.saved.length}</em>` : ""}</button>`).join("")}</div>
-    </header>
-    <div class="x-search" hidden><label class="search"><span>${ICON.search}</span><input id="q" type="search" placeholder="Search colors, paintings, people, pigments" autocomplete="off"></label><div id="results"></div></div>
-    <div class="x-feed" id="feed">
-      ${(() => {
-        // a contents row (like Wikipedia's) when a lens has several sections; "Through history · The 1800s" groups under "Through history"
-        const seen = new Set(), toc = [];
-        SECS.forEach((x, i) => { if (!x.title) return; const g = x.title.split(" · ")[0]; if (!seen.has(g)) { seen.add(g); toc.push([i, g]); } });
-        return toc.length > 2 ? `<nav class="toc x-toc" aria-label="Contents"><span class="eyebrow">Contents</span>${toc.map(([i, g]) => `<a data-jump="${i}">${esc(g)}</a>`).join("")}</nav>` : "";
-      })()}
-      ${SECS.map((sec, i) => sec.gallery ? `<div class="gl-wrap" id="gallery"></div>` : sec.world ? `<div class="wd-wrap" id="world"></div>` : `${sec.title ? `<div class="sec-head x-sec" id="xs-${i}"><b>${esc(sec.title)}</b>${sec.pins && sec.pins.length ? `<span>${sec.pins.length}</span>` : ""}</div>` : ""}${sec.sub ? `<p class="x-sub">${esc(sec.sub)}</p>` : ""}${sec.honey ? `<div class="honey-panel" id="honey"></div>` : sec.poems ? `<div id="poems-panel"></div>` : sec.rail ? `<div class="gl-rail">${sec.pins.map(p => p.html).join("")}</div>` : masonry(sec.pins)}`).join("")}
-      <p class="fine">Hex values are screen approximations. Every page lists its sources.</p>
+    <div class="xp-wrap">
+      <div class="xp-pager" id="xpPager">${covers.join("")}</div>
+      <div class="xp-dots">${covers.map((_, i) => `<i class="${i === 0 ? "on" : ""}"></i>`).join("")}</div>
+      <button class="xp-search" data-search aria-label="Search Explore">${ICON.search}</button>
     </div>
   `, "explore", "explore");
-  el.querySelectorAll("[data-lens]").forEach(b => b.onclick = () => { S.lens = b.dataset.lens; save(); exploreHome(); });
+  const pager = el.querySelector("#xpPager"), dots = [...el.querySelectorAll(".xp-dots i")], sections = [...pager.querySelectorAll(".xp-cover")];
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.intersectionRatio > .5) { const i = sections.indexOf(e.target); dots.forEach((d, j) => d.classList.toggle("on", j === i)); } }),
+      { root: pager, threshold: [.5] });
+    sections.forEach(s => io.observe(s));
+    cleanup.push(() => io.disconnect());
+  }
+  pager.addEventListener("click", e => { const s = e.target.closest("[data-part]"); if (s) openPart(s.dataset.part); });
+  el.querySelector("[data-search]").onclick = () => exploreSearchSheet();
+}
+
+// ---------- the generic feed: For you, Ideas and Saved share this (plain {title, sub, pins} sections) ----------
+const partHeader = title => `<header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span style="width:44px"></span></header><h1 class="p-title">${esc(title)}</h1>`;
+function feedSectionsHTML(SECS) {
+  const seen = new Set(), toc = [];
+  SECS.forEach((x, i) => { if (!x.title) return; const g = x.title.split(" · ")[0]; if (!seen.has(g)) { seen.add(g); toc.push([i, g]); } });
+  return (toc.length > 2 ? `<nav class="toc x-toc" aria-label="Contents"><span class="eyebrow">Contents</span>${toc.map(([i, g]) => `<a data-jump="${i}">${esc(g)}</a>`).join("")}</nav>` : "")
+    + SECS.map((sec, i) => `${sec.title ? `<div class="sec-head x-sec" id="xs-${i}"><b>${esc(sec.title)}</b>${sec.pins && sec.pins.length ? `<span>${sec.pins.length}</span>` : ""}</div>` : ""}${sec.sub ? `<p class="x-sub">${esc(sec.sub)}</p>` : ""}${masonry(sec.pins || [])}`).join("")
+    + `<p class="fine">Hex values are screen approximations. Every page lists its sources.</p>`;
+}
+function wireFeedSections(el) {
   el.querySelectorAll("[data-jump]").forEach(a => a.onclick = () => { const t = el.querySelector("#xs-" + a.dataset.jump); if (t) t.scrollIntoView({ block: "start", behavior: reduceMotion ? "auto" : "smooth" }); });
-  el.querySelector("[data-saved]").onclick = () => { S.lens = lens === "saved" ? "all" : "saved"; save(); exploreHome(); };
-  const hp = el.querySelector("#honey"); if (hp) colorBrowser(hp, { focus: dailyColor(), pick: c => closeup(colorNode(c)) });
-  const gw = el.querySelector("#gallery"); if (gw) galleryMount(gw);
-  const wd = el.querySelector("#world"); if (wd && typeof worldMount === "function") worldMount(wd);
-  const pp = el.querySelector("#poems-panel"); if (pp) poemsPanel(pp);
-  const on = el.querySelector(".lens-key .on"); if (on) on.scrollIntoView({ inline: "center", block: "nearest" });
   el.addEventListener("click", e => {
     const p = e.target.closest("[data-pin]"); if (p) return closeup(graph().nodes.get(p.dataset.pin));
     if (e.target.closest("[data-daily]")) return daily();
     const l = e.target.closest("[data-lab]"); if (l) return LAB[l.dataset.lab]();
     const t = e.target.closest("[data-taste]"); if (t) return tasteIntro(t.dataset.taste);
   });
-  // search
-  const box = el.querySelector(".x-search"), q = el.querySelector("#q"), results = el.querySelector("#results"), feed = el.querySelector("#feed");
-  el.querySelector("[data-search]").onclick = () => { box.hidden = !box.hidden; feed.hidden = !box.hidden; if (!box.hidden) q.focus(); };
+}
+function wirePartBack(el) { el.querySelector("[data-back]").onclick = backToPager; onKey = e => { if (e.key === "Escape") backToPager(); }; }
+function exploreForYou() {
+  XSTACK = [];
+  const SECS = lensSections("all").filter(x => !x.title || (x.pins && x.pins.length) || x.sub);
+  const el = show(`${partHeader("For you")}<div class="x-feed">${feedSectionsHTML(SECS)}</div>`, "article");
+  wirePartBack(el); wireFeedSections(el);
+}
+function exploreIdeas() {
+  XSTACK = [];
+  const SECS = lensSections("ideas").filter(x => !x.title || (x.pins && x.pins.length) || x.sub);
+  const el = show(`${partHeader("Ideas")}<div class="x-feed">${feedSectionsHTML(SECS)}</div>`, "article");
+  wirePartBack(el); wireFeedSections(el);
+}
+function exploreWorld() {
+  XSTACK = [];
+  const el = show(`${partHeader("World")}<div class="wd-wrap" id="world"></div>`, "article");
+  wirePartBack(el);
+  const wd = el.querySelector("#world"); if (wd && typeof worldMount === "function") worldMount(wd);
+}
+function exploreSaved() {
+  XSTACK = [];
+  const SECS = lensSections("saved");
+  const el = show(`${partHeader("Saved")}<div class="x-feed">${feedSectionsHTML(SECS)}</div>`, "article");
+  wirePartBack(el); wireFeedSections(el);
+}
+
+// ======================================================================
+// Art: Paintings + Poems merged (DESIGN-SYSTEM §12 "Inside a part"). A row of color bubbles picks the color;
+// the header takes its tint; paintings (js/gallery.js's corpus, searched by color) and poems (js/poems.js's
+// archive) share one two-column feed, each sized and placed by the existing masonry() above.
+// ======================================================================
+let ART_UI = { hex: null, name: "" };   // the picked color, or none for "a new mix every day"
+// the shared entry point: "Paintings/poems with this color", from a color page, the color link sheet, or
+// anywhere else that used to send people to the old Paintings lens (js/gallery.js, js/swatch.js, js/poems.js).
+function artOpenColor(hex, name) { ART_UI = { hex, name: name || "" }; openPart("art"); }
+// a plain gallery pin, built straight from the GAL corpus index (js/gallery.js) rather than a graph node, so
+// Art can show any of the ~40,000 paintings, not only the hand-written "Featured" ones pin() above knows.
+function artGalPinHTML(i) {
+  const d = glDetailNow(i), pal = glPal(i), ar = glAR(i);
+  return { h: 167 * ar + 64, html: `<button class="pin pin-art" data-gi="${i}">${d && d.img ? `<img src="${esc(d.img)}" alt="" loading="lazy" style="aspect-ratio:${(1 / ar).toFixed(3)}">` : `<span class="noimg"></span>`}
+    <span class="mini-pal">${pal.map(x => `<i style="--c:${x.h};flex:${x.share}"></i>`).join("")}</span><b>${d ? esc(d.t) : ""}</b><small>${d ? glByline(i, d) : ""}</small></button>` };
+}
+// a poem pin: the same look as "In poems" on a color page (css/poems.css .pm-q), a line of verse with its
+// color word in color, then the poet and title.
+function artPoemPinHTML(p, lineHTML) {
+  return { h: 172, html: `<button class="pm-q" data-poem="${esc(p.id)}"><span class="pm-q-line">${lineHTML}</span><small>${esc(p.poet)} · ${esc(p.title)}</small></button>` };
+}
+async function artPoemPins(name) {
+  const ix = await loadPoemIndex(); if (!ix) return [];
+  let rows;
+  if (name) {
+    const ci = ix.colorByName.get(name.toLowerCase());
+    if (ci == null) return [];
+    rows = ix.list.filter(x => x.pal.some(([c]) => c === ci)).sort((a, b) => {
+      const sa = a.pal.find(([c]) => c === ci)[1], sb = b.pal.find(([c]) => c === ci)[1];
+      return sb - sa || a.lines - b.lines;
+    }).slice(0, 8);
+  } else rows = seeded(ix.list.filter(p => p.pal.length), "artpoems" + today()).slice(0, 6);
+  const poems = await Promise.all(rows.map(p => loadPoem(p.id)));
+  const pins = [];
+  rows.forEach((p, i) => { const poem = poems[i]; if (poem) pins.push(artPoemPinHTML(p, poemLineHTML(poem, poemKeyLine(poem)))); });
+  return pins;
+}
+// paintings near the picked color (or a daily mix with none picked), interleaved with poems naming it
+async function artFeedPins(hex, name) {
+  await loadGallery();
+  const res = glRun({ ...glFresh(), hex: hex || null, name: name || "" });
+  const list = [...res.list].slice(0, 48);
+  await Promise.all([...new Set(list.map(i => Math.floor(i / GAL.shard)))].map(k => glShard(k).catch(() => {})));
+  const paintingPins = list.map(artGalPinHTML);
+  const poemPins = await artPoemPins(name);
+  const out = []; let pi = 0;
+  paintingPins.forEach((p, i) => { out.push(p); if ((i + 1) % 5 === 0 && pi < poemPins.length) out.push(poemPins[pi++]); });
+  while (pi < poemPins.length) out.push(poemPins[pi++]);
+  return out;
+}
+function artHome() {
+  XSTACK = [];
+  const { hex, name } = ART_UI, tint = hex ? tintFromHex(hex) : null;
+  const colors = glHueOrder([...BASICS, ...ALL]);
+  const el = show(`
+    <div class="art-band" style="${tint ? `--tint:${tint}` : ""}">
+      <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><button class="icon-btn glass" data-search aria-label="Search">${ICON.search}</button></header>
+      <h1 class="p-title">Art</h1>
+      <p class="p-dek">${hex ? `In ${esc(name.toLowerCase())}, from fourteen thousand paintings and eleven thousand poems.` : "Fourteen thousand paintings and eleven thousand poems, found by their colors."}</p>
+      <div class="art-bubbles" role="tablist">${colors.map(c => `<button class="art-bubble${c.n === name ? " on" : ""}" data-hex="${c.h}" data-name="${esc(c.n)}" style="--c:${c.h}" aria-label="${esc(c.n)}"></button>`).join("")}</div>
+    </div>
+    <div class="art-feed" id="artFeed"><p class="fine">Loading the gallery…</p></div>
+  `, "article");
+  wirePartBack(el);
+  el.querySelector("[data-search]").onclick = () => exploreSearchSheet();
+  el.querySelectorAll("[data-hex]").forEach(b => b.onclick = () => {
+    const same = ART_UI.name === b.dataset.name;
+    ART_UI = same ? { hex: null, name: "" } : { hex: b.dataset.hex, name: b.dataset.name };
+    buzz(6); artHome();
+  });
+  const feed = el.querySelector("#artFeed");
+  artFeedPins(hex, name).then(pins => {
+    if (!feed.isConnected) return;
+    feed.innerHTML = pins.length ? masonry(pins) : `<p class="fine">Nothing matches yet. Try another color.</p>`;
+    glFill(feed);
+  }).catch(() => { if (feed.isConnected) feed.innerHTML = `<p class="fine">The gallery didn't load. <button class="wl" data-retry>Try again</button></p>`; });
+  feed.addEventListener("click", e => {
+    const g = e.target.closest("[data-gi]"); if (g) return galleryPage(+g.dataset.gi, true, hex);
+    const pm = e.target.closest("[data-poem]"); if (pm) { POEM_ORIGIN = "explore"; return poemPage(pm.dataset.poem); }
+    if (e.target.closest("[data-retry]")) return artHome();
+  });
+}
+
+// ---------- search, over everything, from the pager's or Art's floating search button ----------
+function exploreSearchSheet() {
+  const saved = (S.saved || []).map(id => graph().nodes.get(id)).filter(Boolean);
+  const { sh, close } = sheet(`
+    <label class="search"><span>${ICON.search}</span><input id="xq" type="search" placeholder="Search colors, paintings, people, pigments" autocomplete="off"></label>
+    <div id="xresults">${saved.length ? `<div class="sec-head"><b>Saved</b><span>${saved.length}</span></div>${masonry(saved.map(n => pin(n)))}` : `<p class="fine">Tap ${ICON_HEART} on anything to keep it here, or start typing to search.</p>`}</div>
+  `);
+  const q = sh.querySelector("#xq"), results = sh.querySelector("#xresults");
   q.addEventListener("input", () => {
     const s = q.value.trim().toLowerCase();
-    const hits = s ? [...graph().nodes.values()].filter(n => (n.title || "").toLowerCase().includes(s)).slice(0, 40) : [];
-    results.innerHTML = s ? (hits.length ? masonry(hits.map(n => pin(n))) : `<p class="fine">Nothing called that yet.</p>`) : "";
+    if (!s) { results.innerHTML = saved.length ? `<div class="sec-head"><b>Saved</b><span>${saved.length}</span></div>${masonry(saved.map(n => pin(n)))}` : `<p class="fine">Tap ${ICON_HEART} on anything to keep it here, or start typing to search.</p>`; return; }
+    const hits = [...graph().nodes.values()].filter(n => (n.title || "").toLowerCase().includes(s)).slice(0, 40);
+    results.innerHTML = hits.length ? masonry(hits.map(n => pin(n))) : `<p class="fine">Nothing called that yet.</p>`;
   });
-  results.addEventListener("click", e => { const p = e.target.closest("[data-pin]"); if (p) closeup(graph().nodes.get(p.dataset.pin)); });
+  results.addEventListener("click", e => { const p = e.target.closest("[data-pin]"); if (p) { close(); closeup(graph().nodes.get(p.dataset.pin)); } });
+  setTimeout(() => q.focus(), 260);
 }
 
 // ======================================================================
@@ -265,8 +461,12 @@ function openNode(n, push = true, tapped) {
 // go()/hmHome() and never changes just from opening a page), so a chain rooted in the honeycomb or Studio
 // returns there instead of always landing on Explore.
 const xFallbackTab = () => ["learn", "gym", "studio"].includes(S.tab) ? S.tab : "explore";
+// Where a chain of pages started when that wasn't a room: "home" when a bubble on the honeycomb opened it. Home is its
+// own floor now (not a tab), so without this the trail ran out onto whatever room S.tab last pointed at, and a pull-down
+// on a color opened from Home dropped you into Studio (David). go() clears it.
+let X_ROOT = null;
 function xStep(prev) {
-  if (!prev) return go(xFallbackTab());
+  if (!prev) return X_ROOT === "home" && typeof hmHome === "function" ? (X_ROOT = null, hmHome()) : go(xFallbackTab());
   // Studio screens (ROADMAP.md §17 job #1): plain tokens (no ":"), since each reopens from its own remembered
   // state rather than an id. Checked before the generic node lookup at the bottom, which would otherwise treat
   // "harmony" etc. as a (nonexistent) graph node id and silently do nothing.

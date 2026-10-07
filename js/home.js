@@ -464,7 +464,7 @@ function hmHome() {
 // say) jump straight home instead of to the page that opened it.
 // honey.js's own HONEY_PAN restores the pan and zoom the next time hmHome() builds the same set of items.
 function hmOpenColor(c) {
-  XSTACK = [];
+  XSTACK = []; X_ROOT = "home";
   const el = openNode(colorNode(c));
   hmPullClose(app.firstElementChild, hmBackOneStep);
   return el;   // growFrom's renderFn (js/home.js pick, js/core.js) grows the page from the tapped bubble
@@ -472,7 +472,7 @@ function hmOpenColor(c) {
 // Same, for a bubble that isn't one of the 101: its own name page (js/names.js), not the small color sheet
 // (ROADMAP.md §13: every one of the ~1,000 names has a real page now).
 function hmOpenName(o) {
-  XSTACK = [];
+  XSTACK = []; X_ROOT = "home";
   loadCoreNames().then(() => {
     namePage(npEntryFor(o));
     hmPullClose(app.firstElementChild, hmBackOneStep);

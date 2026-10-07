@@ -472,6 +472,7 @@ addEventListener("popstate", e => {
 });
 function go(tab) {
   S.tab = tab; save();
+  if (typeof X_ROOT !== "undefined") X_ROOT = null;
   // The two profile questions wait until they matter: the first visit to Train, where color vision tunes the drills.
   if (tab === "gym" && S.placed && !S.profile && !S.profileAsked) return profileSetup(gymHome, { why: "Before you train" });
   if (tab === "gym") return gymHome();

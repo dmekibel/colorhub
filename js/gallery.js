@@ -658,18 +658,14 @@ function galleryColorRow(host, c) {
     }
   }
 }
-// open the gallery searched by one color
-function galleryOpenColor(hex, name) {
-  GLQ = { ...glFresh(), hex, name };
-  GLV = { key: glKey(GLQ), head: true };
-  S.lens = "paintings"; save();
-  go("explore");
-}
+// open Art (js/explore.js) searched by one color: the Paintings lens merged into it (DESIGN-SYSTEM §12),
+// so the old GLQ/GLV gallery-search state no longer applies here — Art picks its color from its own bubble row.
+function galleryOpenColor(hex, name) { artOpenColor(hex, name); }
 
 // ---------- screenshot hooks (index.html#shot=gallery..., see js/boot.js) ----------
 function galleryShot(arg) {
   const [spec, down] = String(arg || "").replace(/^:/, "").split("@"), [k, v] = spec.split("=");
-  const lens = () => { S.lens = "paintings"; go("explore"); };
+  const lens = () => artOpenColor(GLQ.hex || null, GLQ.name || "");
   const after = (f, ms = 500) => loadGallery().then(() => setTimeout(f, ms));
   if (down) after(() => scrollBy(0, +down), 1100);   // "...@600": then scroll down 600px
   if (!k) return lens();
