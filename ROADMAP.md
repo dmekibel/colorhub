@@ -302,6 +302,18 @@ Strategies:
   high chroma, complementary pops), "Rothko" (2-3 neighbors, close values), "Vermeer" (yellow-blue among neutrals),
   "Hiroshige" (blue gradients), "Zorn" (limited palette). Present as "in the spirit of", never as the painter's real palette.
 - Verify each paper before citing it in the app; research pass first: research/PALETTE-STRATEGIES.md (S, Sonnet).
+**Harmony as music theory** (David's framing; it also gives the engine its vocabulary and a Train track):
+- Interval: the step between two colors on 3 axes (hue angle, lightness step, chroma step). Name the intervals: "neighbor"
+  (≈30°), "third" (≈90°), "complement" (180°), plus value steps.
+- Chord: a palette built from intervals. Root: the dominant color. Triad, split, analogous run, square.
+- Key: high key or low key, warm or cool. Voicing: where each color sits in value and chroma, and how much area it gets
+  (Itten's proportion contrast, like how loud each note is).
+- Tension and resolution: complements and saturation pops vs close neighbors and greys. A gradient works like a scale or
+  progression.
+- Train track, modeled on ear training: "name the interval" between two swatches, "build the chord" (complete a palette by
+  a rule), "spot the wrong note" (one color breaks the harmony).
+- Honesty: it's a teaching analogy, not physics. Light frequencies have no musical ratios, and Newton picked seven rainbow
+  colors to match the scale (myth list). Never claim colors "are" notes.
 **Cross-matching.** Compare any image's palette with flowers (Botany), gems, fashion decades and colors of the year, the
 Looks archive and named films. Say "shares colors with peony, lilac and iris" or "close to a 1970s fashion palette", never
 "influenced by" (color matching can't show influence). Precompute for every painting in the archive and show it on painting
