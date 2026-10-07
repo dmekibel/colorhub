@@ -203,22 +203,23 @@ Ends with a lesson score and Next.
 
 ## 14. Stages and fields (approved 2026-10-08, sizes revised the same day; replaces the fixed 4-level ladder in §13)
 No colored belts. The 11 basics are a placement check only, never taught. Counts are total words you know, basics
-included. Each stage roughly doubles the last (25 → 50 → 100 → 250 → 500 → 1,000), and each ends at a real-world benchmark:
-- **Stage 1: 25.** Just above the average adult. In Lindsey & Brown (2014, free naming), men used ~9.7 words beyond the
-  basics and women ~12.3, so a typical adult actively uses about 21-23. Short on purpose: a win in 2-3 days.
-  Placement skips it for people who already know these words.
-- **Stage 2: 50.** The color-aware person (fashion, home, shopping): salmon, mauve, coral, khaki, rust, mint, burgundy...
-- **Stage 3: 100.** The "big crayon box" (Crayola's largest standard box is 120). Werner's Nomenclature of Colours
-  (110 names) was what Darwin used to describe specimens.
-- **Stage 4: 250.** A word near every region of color space. The ISCC-NBS naming system splits all colors into 267 named
-  blocks. Check with our data: the nearest-word ΔE should fall sharply by this point. CSS's 148 named colors can be a
-  milestone badge inside this stage.
-- **Stage 5: 500.** Field depth: where the field paths differ most (pigments, whites/greiges, film/skin tones, fabrics).
-- **Stage 6: Master, ~1,000.** About the size of the xkcd survey's 954 most agreed names. Beyond that, people stop agreeing
-  on names, so they become niche or brand names (library only).
-Memory: the size of a session never changes (about 10 new words a day plus reviews, introduced a few at a time). Only how long
-a stage lasts grows: early stages take days, late ones weeks (goal-gradient: wins come early, then the end of each stage stays
-in sight). Later words are finer distinctions, so they go slower.
+included. Stages grow fast at first, then level off at about +200 new words (about 3 weeks), so no stage drags on:
+25 → 50 → 100 → 150 → 250 → 400 → 600 → 800 → 1,000 (new words: +14, +25, +50, +50, +100, +150, +200, +200, +200).
+- **25.** Just above the average adult. In Lindsey & Brown (2014, free naming), men used ~9.7 words beyond the basics and
+  women ~12.3, so a typical adult actively uses about 21-23. A win in 2-3 days. Placement skips it for people who already
+  know these.
+- **50.** The color-aware person (fashion, home, shopping): salmon, mauve, coral, khaki, rust, mint, burgundy...
+- **100.** The "big crayon box" (Crayola's largest standard box is 120). Darwin described specimens with Werner's
+  Nomenclature of Colours (110 names).
+- **150.** About the 148 named colors in web code (CSS): the designer's everyday set.
+- **250.** A word near every region of color space. The ISCC-NBS naming system splits all colors into 267 named blocks.
+  Check with our data: the nearest-word ΔE should fall sharply by this point (move the stage if the drop is at 200 or 300).
+- **400 / 600 / 800.** Field depth: the field paths differ most here (pigments, whites/greiges, film/skin tones, fabrics).
+- **1,000: Master.** About the size of the xkcd survey's 954 most agreed names. Beyond that, people stop agreeing on
+  names, so they become niche or brand names (library only).
+Memory: the size of a session never changes (about 10 new words a day plus reviews, introduced a few at a time). Early stages
+take days; from 400 on, each stage is about 3 weeks (goal-gradient: the end of the stage always stays in sight). Later words
+are finer distinctions, so they go slower.
 Inside a stage you still learn about 10 at a time (the existing units); the stage is the chapter. Each stage ends with an
 honest no-hint test (name + pick the colors, one eye drill with them, a camera mission to find some of them in the world).
 **Ordering logic:** usefulness first (xkcd frequency, everyday usage), then coverage (each stage fills the biggest gaps in the
