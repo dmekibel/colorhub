@@ -33,6 +33,7 @@ function hmHome() {
     <div class="hm-search" id="hmSearch" hidden>
       <label class="search"><span>${ICON.search}</span><input id="hmq" type="search" placeholder="sea, rust, Monet…" autocomplete="off" enterkeyhint="search"></label>
     </div>
+    <button class="hm-menu" id="hmMenu" aria-label="Menu">${ICON.dots}</button>
     <div class="hm-sheet" id="hmSheet">
       <button class="hm-grab" id="hmGrab" aria-label="Open Today"><i></i></button>
       <div class="hm-sheet-body" id="hmBody"></div>
@@ -133,7 +134,9 @@ function hmHome() {
   function hmDismissHint() { if (S.hm.seenHint) return; S.hm.seenHint = true; save(); const h = $("#hmHint"); if (h) h.remove(); }
 
   // ---------- the bottom sheet: peek (just the handle) · mid (Today) · full (the four doors), one scrolling body ----------
-  const sheetEl = $("#hmSheet"), grab = $("#hmGrab"), bodyEl = $("#hmBody");
+  const sheetEl = $("#hmSheet"), grab = $("#hmGrab"), bodyEl = $("#hmBody"), menuBtn = $("#hmMenu");
+  // the one button on the home: top left, opens (or closes) everything else
+  menuBtn.onclick = () => { if (!S.hm.opened) { S.hm.opened = true; save(); } setState(sheetState === "peek" ? "full" : "peek"); };
   const HM_PEEK = 0;   // at rest the sheet is fully hidden: nothing but colors on screen
   let H = { peek: HM_PEEK, mid: Math.round(innerHeight * .46), full: Math.round(innerHeight * .88) };
   sheetEl.style.height = H.full + "px";
@@ -147,6 +150,7 @@ function hmHome() {
   function setState(s, anim = true) {
     sheetState = s; revealed = H[s]; paintSheet(anim);
     el.classList.toggle("hm-sheet-open", s !== "peek");
+    menuBtn.setAttribute("aria-label", s === "peek" ? "Menu" : "Close menu");
     grab.setAttribute("aria-label", s === "peek" ? "Open Today" : "Close");
     if (s !== "peek") { if (!sheetLocked) { lockScroll(); sheetLocked = true; } hmRenderBody(); buzz(s === "full" ? 6 : 4); }
     else if (sheetLocked) { unlockScroll(); sheetLocked = false; }
