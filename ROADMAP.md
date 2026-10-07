@@ -123,6 +123,28 @@ Ends with a lesson score and Next.
 - Adaptive coach: "You confuse teal and cerulean: 3 cards, a 30-second story and a drill for that pair."
 - Explain my miss: one sentence after any mistake on why the eye was fooled (vividness, surround, size).
 
+## 11. Design: next level (approved 2026-10-07; the "everything is a paint chip" signature idea is NOT approved, signature object still open)
+- A real design system: complete tokens (spacing, radius, type sizes, motion durations/easing, shadows, the two surrounds),
+  a type scale with intent (one huge display size for names, one reading, one label), a custom icon set (20-30 icons, one grid
+  and stroke, with a small family signature), a hidden component sheet showing every component in every state, and a
+  design-QA checklist before every push.
+- The path as the home screen: a winding single-column path of lesson markers in each chapter's colors (done ones filled,
+  the current one pulsing, future ones outlined), chapter banners as wide swatches, bigger checkpoints, gold for legendary,
+  a marker that slides on when a lesson ends.
+- Moments: lesson complete (a short fan of the lesson's colors, the score counting up, a soft chord, a firm haptic; under 2 s,
+  skippable); a new color owned (it flies into the collection, which shimmers once); level up (the ladder fills with rising
+  ticks, the number flips like a departure board); a calm daily-goal ring filled with today's colors, not a flame.
+- Motion language: three speeds (micro 100-150 ms, standard 250-350 ms, celebration 600-900 ms, rare), two easings (a soft
+  spring for physical things, a calm ease for screens), every motion explains something.
+- Sound and haptics as one language (optional sound; hue families may get their own pitch).
+- Restraint: one idea and one filled button per screen, more space and fewer borders, less text, the squint test.
+- Character without a mascot: a warm, curious, slightly witty voice; small drawn details in empty states and stories.
+- Screen-by-screen: Today = the path; flashcards with paper texture and a felt stack; Train = a map of station worlds with
+  progress rings and full-bleed drills; Explore = big editorial covers and color pages as hubs; Studio = a workbench where
+  palettes are strips you can drag, with instant mockups; results = before/after color pairs.
+- Order: design system first (M), the path home with the path (roadmap step 4), the moments pass with sound and haptics (S-M),
+  then one tab at a time (S each). Ask David for 3-5 reference screenshots (Duolingo, ALTER, others) before the design system.
+
 ## Also queued
 - World: Botany (in progress), then Gems.
 - Color-list swaps from research/COLOR-SELECTION.md (Bistre, Stone, Green grey, Rose, Grape, Seafoam; Terracotta and Tangerine hex fixes; cross-unit near-twin check).
