@@ -201,7 +201,9 @@ def main():
         for pre in ("aic", "smk"):
             if x["id"].startswith(pre + "-") and (ROOT / "img" / "gallery" / pre / (x["id"][len(pre) + 1:] + ".jpg")).exists():
                 img = f"img/gallery/{pre}/" + x["id"][len(pre) + 1:] + ".jpg"
-        details.append([x["id"], x.get("t") or "Untitled", x.get("a"), x.get("co"), x.get("mv"), img, rec, li, wi])
+        # hi: a bigger image for the painting page when the grid uses our small copy ("" = none reachable)
+        hi = (x["img"] or "").replace("/full/400,/0/", "/full/1000,/0/") if img != x["img"] and x["id"].startswith("smk-") else ""
+        details.append([x["id"], x.get("t") or "Untitled", x.get("a"), x.get("co"), x.get("mv"), img, rec, li, wi, hi])
 
         r = ratio.get(x["id"]) or x.get("r") or (x["h"] / x["w"] if x.get("w") and x.get("h") else None)
         if not r:

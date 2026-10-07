@@ -95,3 +95,8 @@
 .gl-in h3{font:500 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--soft);padding-bottom:10px;border-bottom:1px solid var(--rule);margin-bottom:14px}
 .gl-in-sub{color:var(--soft);font-size:13.5px;line-height:1.45;margin:0 0 14px;max-width:46ch}
 .gl-in .gl-all{margin-top:4px;padding:0}
+
+/* painting page: our 200px copies stay crisp at a smaller size; a link offers the full image at the museum */
+.gl-hero.small span{margin:0 auto}
+.gl-full{display:block;text-align:center;margin-top:10px;font:500 11px/1.4 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--soft);text-decoration:underline;text-underline-offset:3px}
+.gl-hero img.hi{animation:fade .4s both}

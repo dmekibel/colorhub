@@ -66,7 +66,7 @@ function glShard(k) {
   GL_SHARDS.set(k, p);
   return p;
 }
-const glRowObj = r => r && { id: r[0], t: r[1] || "Untitled", a: r[2], co: r[3], mv: r[4], img: r[5], rec: r[6], li: r[7], wi: r[8] };
+const glRowObj = r => r && { id: r[0], t: r[1] || "Untitled", a: r[2], co: r[3], mv: r[4], img: r[5], rec: r[6], li: r[7], wi: r[8], hi: r[9] || "" };
 const glDetailNow = i => { const s = GL_SHARDS.get(Math.floor(i / GAL.shard)); return Array.isArray(s) ? glRowObj(s[i % GAL.shard]) : null; };
 const glDetail = i => glShard(Math.floor(i / GAL.shard)).then(rows => glRowObj(rows[i % GAL.shard]));
 function glNamesLoad() {
@@ -84,6 +84,8 @@ const glYear = i => { const y = GAL.year[i]; return y === GL_UNDATED ? "" : y < 
 // artist (or country) and year; the name gives way before the year does
 const glByline = (i, d) => { const who = d.a || d.co || "", y = glYear(i); return `<span>${esc(who)}</span>${y ? `<em>${who ? " · " : ""}${y}</em>` : ""}`; };
 // a bigger copy for the painting page: IIIF servers take any width; other museums' URLs are used as they are
+// our own small copies (img/gallery/...) are only 200px wide: shown smaller so they stay crisp, or swapped for a big image
+const glSmall = d => /^img\/gallery\//.test(d.img || "");
 const glBig = url => String(url || "").replace(/\/full\/!?\d*,\d*\/0\/default\.jpg$/, "/full/843,/0/default.jpg");
 
 // CIEDE2000 on plain numbers: the same formula as de2000() in core.js, without arrays, for the search loops
@@ -468,7 +470,7 @@ function glPage(i, d, names) {
   const dom = pal.reduce((a, b) => b.share > a.share ? b : a).h;
   const el = show(`
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button>${d.rec ? `<a class="glass-pill" href="${esc(d.rec)}" target="_blank" rel="noopener">${GL_ICON_OUT}<span>${esc(src.short)}</span></a>` : ""}</header>
-    <div class="gl-hero"><span style="--c:${dom};width:min(100%, calc(66dvh / ${ar.toFixed(3)}));aspect-ratio:${(1 / ar).toFixed(4)}"><img src="${esc(glBig(d.img))}" alt="${esc(d.t)}${d.a ? " by " + esc(d.a) : ""}"></span></div>
+    <div class="gl-hero${glSmall(d) && !d.hi ? " small" : ""}"><span style="--c:${dom};width:${glSmall(d) && !d.hi ? "min(100%, 300px, calc(66dvh / " + ar.toFixed(3) + "))" : "min(100%, calc(66dvh / " + ar.toFixed(3) + "))"};aspect-ratio:${(1 / ar).toFixed(4)}"><img src="${esc(glBig(d.img))}" alt="${esc(d.t)}${d.a ? " by " + esc(d.a) : ""}"${d.hi ? ` data-hi="${esc(d.hi)}"` : ""}></span>${glSmall(d) && !d.hi && d.rec ? `<a class="gl-full" href="${esc(d.rec)}" target="_blank" rel="noopener">See it full size at the museum ↗</a>` : ""}</div>
     <p class="eyebrow p-type">Painting${yr ? " · " + yr : ""}</p>
     <h1 class="p-title">${esc(d.t)}</h1>
     <p class="p-dek">${esc([d.a || "Artist unknown", d.co, d.mv].filter(Boolean).join(" · "))}</p>
@@ -484,6 +486,9 @@ function glPage(i, d, names) {
     <div class="gl-rail" data-glsim></div>
     <section class="srcs"><h3>Image and data</h3><ul><li>${d.rec ? `<a href="${esc(d.rec)}" target="_blank" rel="noopener">${esc(src.name)}</a>` : esc(src.name)}${src.credit ? ` · ${esc(src.credit)}` : ""}</li><li>Palette and color names computed by ColorHub from the museum's image</li></ul></section>
   `, "article gl-page");
+  // swap in the big image when it arrives (SMK's server is slow; the small copy shows meanwhile)
+  const hiImg = el.querySelector("img[data-hi]");
+  if (hiImg) { const big = new Image(); big.onload = () => { if (hiImg.isConnected) { hiImg.src = big.src; hiImg.classList.add("hi"); } }; big.src = hiImg.dataset.hi; }
   el.querySelector("[data-back]").onclick = xBack;
   onKey = e => { if (e.key === "Escape") xBack(); };
   let on = -1;
