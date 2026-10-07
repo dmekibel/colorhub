@@ -34,6 +34,12 @@ function shot(name) {
     case "story": { const st = g().stories[+arg || 0]; return storyPlayer(st); }
     case "daily": S.daily = {}; return daily();
     case "lab": return LAB[arg || "harmony"]();
+    // archive (js/passages.js, js/films.js): passage:<id>, passages[:<family>], film:<id>, cpage:<color> (scrolled to In books), films (Ideas lens at Films)
+    case "passage": return archWhen(() => archOpen(archNode("passage", PSG.byId.get(arg) || PSG.list[0])));
+    case "passages": return archWhen(() => { archOpen(PSG_INDEX_NODE()); if (arg) passagesIndexPage(arg); });
+    case "film": return archWhen(() => archOpen(archNode("film", FILMS.find(f => f.id === arg) || FILMS[0])));
+    case "cpage": return archWhen(() => { openNode(colorNode(BYNAME.get((arg || "Teal").toLowerCase()))); later2(() => { const r = document.querySelector(".arch-rows"); if (r) scrollTo(0, r.getBoundingClientRect().top + scrollY - 60); }, 900); });
+    case "films": S.lens = "ideas"; go("explore"); return archWhen(() => later2(() => { const h = [...document.querySelectorAll(".x-sec")].find(x => /^Films/.test(x.textContent)); if (h) scrollTo(0, h.getBoundingClientRect().top + scrollY - 20); }, 1500));
     case "taste": return tasteShot(arg);
     case "colors": {   // colors:<set id>:<view id>:<adjust|tap|press|zoomin|zoomout|bench|benchout>
       const [, set, view, act] = name.split(":"), def = COLOR_SETS.find(x => x.id === (set || "101")) || COLOR_SETS[0];
