@@ -256,7 +256,8 @@ function honeycomb(host, opts = {}) {
       const it = b.it, d = b.d * (b === pb ? 1 + .12 * pressK : 1), r = d / 2;
       ctx.beginPath(); ctx.arc(b.x, b.y, r, 0, 6.2832); ctx.fillStyle = it.h; ctx.fill();
       if (d < 8) continue;
-      if (it.L < 20) { ctx.lineWidth = 1; ctx.strokeStyle = "rgba(236,232,223,.14)"; ctx.stroke(); }
+      // near-black bubbles get a visible rim, or on the dark ground they read as holes in the honeycomb
+      if (it.L < 26) { ctx.lineWidth = Math.max(1, d * .025); ctx.strokeStyle = `rgba(236,232,223,${it.L < 14 ? .34 : .24})`; ctx.stroke(); }
       // no ring for learned colors: the colors stay pure (the Learned view in the sheet shows progress)
       const la = Math.min(1, Math.max(0, (d - 26) / 5));   // a name on every bubble down to ~28px
       if (la > 0) {
