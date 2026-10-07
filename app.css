@@ -248,6 +248,11 @@ a{color:inherit}
 
 /* ---------- sheets ---------- */
 .scrim{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:20;animation:fade .25s both}
+.scrim{touch-action:none}
+.sheet{touch-action:pan-y;overscroll-behavior:contain}
+.sheet .grab{position:relative;touch-action:none;cursor:grab}
+.sheet .grab::before{content:"";position:absolute;inset:-16px -80px}   /* a big invisible handle */
+html.sheet-open,html.sheet-open body{overflow:hidden}
 .sheet{position:fixed;left:0;right:0;bottom:0;z-index:21;max-width:540px;margin:0 auto;background:#17160F;padding:12px var(--g) calc(var(--bottom) + 20px);animation:sheetIn .4s var(--ease) both;max-height:88dvh;overflow:auto;border-top:1px solid var(--rule)}
 @keyframes sheetIn{from{transform:translateY(100%)}}
 .sheet .grab{width:36px;height:3px;background:var(--rule);margin:0 auto 18px}
@@ -635,19 +640,14 @@ img{transition:opacity .6s var(--ease)}
 .play-tile .pt-p{grid-template-rows:repeat(2,1fr)}.play-tile .pt-p span{display:flex;gap:1px}.play-tile .pt-p span i{flex:1}
 .play-tile b{font:400 22px/1 var(--serif);margin-top:6px}
 .play-tile small{color:var(--soft);font-size:12px}
-/* honeycomb (Spectrum view) */
-.honey-panel{position:relative;height:66dvh;margin:6px calc(-1 * var(--g)) 0;overflow:hidden;touch-action:none;cursor:grab;
-  background:radial-gradient(circle at 50% 50%,rgba(236,232,223,.04),transparent 70%)}
-.bub{position:absolute;left:0;top:0;width:64px;height:64px;border-radius:50%;background:var(--c);display:grid;place-items:center;will-change:transform;padding:6px;
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),0 8px 18px -10px rgba(0,0,0,.9)}
-.bub span{font:400 11.5px/1.05 var(--serif);text-align:center;opacity:0;transition:opacity .25s;pointer-events:none}
-.bub[data-l="1"] span{opacity:1}
-.bub[data-ink="dark"] span{color:rgba(20,19,17,.85)}.bub[data-ink="light"] span{color:rgba(255,255,255,.92)}
-.bub.own{box-shadow:0 0 0 2px var(--ground),0 0 0 3px rgba(236,232,223,.9)}
+/* honeycomb (Spectrum view); the rest lives in css/honey.css */
+.honey-panel{position:relative;height:66dvh;margin:6px calc(-1 * var(--g)) 0;overflow:hidden;touch-action:none}
 /* ---------- articles: lead, contents, folding sections, photographs, colored words ---------- */
 .lead{font:400 23px/1.32 var(--serif);color:#E6E1D5;margin-top:20px;text-wrap:pretty}
 .toc{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;margin-top:24px;padding:14px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
 .toc .eyebrow{width:100%;margin-bottom:2px}
+.x-toc{margin-top:20px}
+.x-sec{scroll-margin-top:150px}   /* clears the sticky Explore header when jumped to */
 .toc a{font:400 18px/1.2 var(--serif);color:var(--ink);text-decoration:underline;text-decoration-color:var(--rule-2);text-underline-offset:4px;cursor:pointer}
 .sec{border-bottom:1px solid var(--rule)}
 .sec summary{list-style:none;display:flex;justify-content:space-between;align-items:center;min-height:58px;cursor:pointer;-webkit-tap-highlight-color:transparent}
