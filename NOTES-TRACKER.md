@@ -77,6 +77,7 @@ sheets close on swipe-down
 - the color mind profile; an adaptive coach ("you confuse teal and cerulean"); explain my miss
 
 ## Smaller fixes noted
+- Globe style (lab only for now): colors bunch up on the sphere and leave bare patches. Fix: place points evenly (a Fibonacci sphere) and assign colors to them by hue → longitude, lightness → latitude, then bring it back to the home styles.
 - Gamut wheel and saved-palette screens don't join the one-step Back yet; photos can't be renamed yet.
 - Rerun "Every shade" after the dictionary import (the tool is ready; the stop appears when data exists).
 - Paused earlier, unmerged: the Looks archive (fashion looks as palettes) and ~270 extra wiki images.

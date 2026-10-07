@@ -235,7 +235,9 @@ const HONEY_MAX_DRAWN = 5000;   // phones stay smooth and safe; see the draw loo
 const HONEY_MOTION_BUDGET = Math.round(HONEY_MAX_DRAWN * .5);
 // the five styles the home's View panel shows (ROADMAP: "fewer choices, chosen well"); the rest (Current, Edges,
 // Wheel, Tapestry) stay reachable only from the honeycomb lab (#/lab/honey), which still steps through all of them
-const HM_HOME_STYLES = ["original", "honeycomb", "sunflower", "globe", "magnifier"];
+// The Globe stays in the lab until its colors are spread evenly over the sphere (today they bunch up and leave
+// bare patches); see NOTES-TRACKER.md.
+const HM_HOME_STYLES = ["original", "honeycomb", "sunflower", "magnifier"];
 const HONEY_STYLE_LIST = Object.keys(HONEY_STYLES).map(id => ({ id, title: HONEY_STYLES[id].title }));
 function honeyResolveCfg(styleId, tweak, N) {
   const preset = HONEY_STYLES[styleId] || HONEY_STYLES.current;
@@ -293,7 +295,7 @@ const honeyExtent = (theta, r, shapeAmt) => shapeAmt <= .02 ? r : r * (1 - shape
 //   shape 0 = the largest circle that fits in the cell (touching its nearest neighbors across the same gap)
 //   between = the circle blended toward the cell, so the corners round off
 // A bubble at the edge of what's drawn (neighbors culled) is also bounded by its own lens size, so it never balloons.
-function honeyCells(drawn, gapPx, shapeAmt = 0) {
+function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52) {   // grow: how far a bubble may swell past its own lens size, as a fraction of its diameter
   if (!drawn.length) return;
   // Speed: the grid is sized to a TYPICAL bubble (not the biggest, which put thousands of tiny ones in every lookup),
   // and each bubble searches only as many cells as its own size needs. Tiny bubbles (under ~7 px) skip the cell
@@ -306,7 +308,7 @@ function honeyCells(drawn, gapPx, shapeAmt = 0) {
     if (b.d < 7) { b.poly = null; b.rin = Math.max(0, b.d * .44 - half); b.d0 = b.d; b.d = 2 * b.rin; return; }
     const reach = Math.min(12, Math.ceil((b.d + maxD) * .75 / cell));
     // start from a 16-gon a little bigger than the bubble's own lens size
-    const R0 = b.d * .62; let poly = [];
+    const R0 = b.d * Math.max(.62, grow * 1.2); let poly = [];
     for (let i = 0; i < 16; i++) { const t = i / 16 * 6.283185307; poly.push([Math.cos(t) * R0, Math.sin(t) * R0]); }
     const ci = Math.floor(b.x / cell), cj = Math.floor(b.y / cell);
     for (let i = ci - reach; i <= ci + reach && poly.length; i++) for (let j = cj - reach; j <= cj + reach && poly.length; j++) {
@@ -344,7 +346,7 @@ function honeyCells(drawn, gapPx, shapeAmt = 0) {
     const order = drawn.map((b, n) => n).sort((a, c) => Math.hypot(drawn[a].x - cx, drawn[a].y - cy) - Math.hypot(drawn[c].x - cx, drawn[c].y - cy));
     for (let pass = 0; pass < 2; pass++) for (const n of order) {
       const b = drawn[n]; if (!b.nb) continue;
-      let lim = b.d0 * .52;
+      let lim = b.d0 * grow;
       for (const [m, dist] of b.nb) lim = Math.min(lim, dist - gapPx - drawn[m].rin);
       b.rin = Math.max(0, lim); b.d = 2 * b.rin;
     }
