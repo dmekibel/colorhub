@@ -186,13 +186,18 @@ Ends with a lesson score and Next.
 **Library color pages**
 - Every library color gets a generated page: names and sources, synonyms, look-alikes, paintings/poems/fashion containing it,
   nearest core word.
-**Synonyms**
-- Group near-identical library names (e.g. below about ΔE00 2-3) as one color with several names ("Eggplant · also called
-  Aubergine, Brinjal"); learning targets distinguishable colors (probably ~1,000), not 2,700 hexes.
+**One primary English name per distinct color (David, 2026-10-08)**
+- The app teaches English color words. Every distinct color gets ONE primary English name: the most common English name for it
+  (xkcd survey frequency and everyday usage first, then established trade/pigment names). Near-identical names are merged
+  into that one color (below about ΔE00 2-3); alternates are shown only as small "also called" info on its page, never taught.
+- Non-English names (Japanese traditional, etc.) are NOT learning targets. They can appear as cultural notes on a color's page
+  and in the World/poems content, but the ladder and flashcards are English only. If a non-English color has no English
+  name, it isn't on the ladder.
+- Target: about 1,000 distinct, nameable colors in total; fewer is fine if that's what the distinct-English-names test yields.
 **The vocabulary ladder (later job, M)**
-- Level 1: the core 101 (today's path). Level 2: common names people use (xkcd, web; ~300). Level 3: painter's and designer's
-  names (pigments, trade names; ~300). Level 4: traditions (Japanese, Werner, Ridgway, RAL; the rest).
-- Built from look-alike groups; Learn it works on any library color.
+- Level 1: the core 101 (today's path). Level 2: common English names people use (~300). Level 3: painter's and designer's
+  English names (pigments, trade names; ~300). Level 4: the remaining distinct English names, up to ~1,000 in all.
+- Built from look-alike groups; Learn it works on any ladder color.
 - Progress shows both tiers: "Core 64/101 · Library 212/~1,000"; the top of the ladder = "master colorist".
 
 ## Also queued

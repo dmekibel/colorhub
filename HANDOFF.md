@@ -60,7 +60,7 @@ the public repo `dmekibel/colorhub`).
 ## Next (in order, all approved; details in ROADMAP.md)
 1. ROADMAP §13: painting palettes (highlight the matching swatch, dynamic 3-20 palette precomputed offline, tap-to-name),
    every swatch tappable app-wide, the color link sheet with several nearest words in both tiers, generated library color
-   pages, synonym grouping. Wait for the Commons batch first (it rewrites data/gallery).
+   pages, one primary English name per distinct color (alternates as info only; no non-English learning targets; ~1,000 total). Wait for the Commons batch first (it rewrites data/gallery).
 2. Color-list swaps from research/COLOR-SELECTION.md (Bistre, Stone, Green grey, Rose, Grape, Seafoam; Terracotta and
    Tangerine hex fixes; a cross-unit near-twin check in tools/check.js).
 3. ROADMAP build order: odd-one-out family, rearrange family, memory additions, the path (Duolingo-style lessons), photo
