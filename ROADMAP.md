@@ -145,6 +145,19 @@ Ends with a lesson score and Next.
 - Order: design system first (M), the path home with the path (roadmap step 4), the moments pass with sound and haptics (S-M),
   then one tab at a time (S each). Ask David for 3-5 reference screenshots (Duolingo, ALTER, others) before the design system.
 
+## 12. The honeycomb as the home screen (approved 2026-10-07; next build after the running agents)
+- The app opens on the full-screen color explorer (the 101 you're learning by default); chrome fades while browsing.
+- The honeycomb stays pure: true colors only, no progress rings, no dimming (every color must look exactly like its name).
+- Progress is a view, not a marking: one-tap toggles in the title control: All 101 · Learned · Learning · Not met yet.
+- Floating on top: a small "Continue" pill (next path lesson or review) and a pull-up handle for Today's three.
+- Tap a color: its card slides up (swatch, two-line story, look-alikes, In paintings/poems/nature links) with one button: Learn it.
+- Learn it = an instant ~2-minute lesson built around that color and its 3-4 closest look-alikes:
+  Meet (swipe cards for the ones not yet known) → tell them apart (odd one out with only that group) → sort (strip or 2D board)
+  → Pick it (name → choose among the look-alikes) → one memory round. Ends with "You learned teal, and how it differs from
+  turquoise, petrol and cerulean"; every color in it joins spaced review.
+- The path stays as the gentle default (the Continue pill); exploration is the other way in. Spaced review ties both together.
+- Size: M (Sonnet), reusing deck, odd one out, sort, Pick it and memory.
+
 ## Also queued
 - World: Botany (in progress), then Gems.
 - Color-list swaps from research/COLOR-SELECTION.md (Bistre, Stone, Green grey, Rose, Grape, Seafoam; Terracotta and Tangerine hex fixes; cross-unit near-twin check).
