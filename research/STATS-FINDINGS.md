@@ -5,18 +5,25 @@ Built 2026-10-07 by `tools/corpus.py`, with one adapter per newer museum in `too
 **What it answers:** which colors a painter, decade, century, country or movement uses most, measured from the paintings themselves. It covers **14,447 public-domain paintings from six museums**, 6 colors each, named with the app's 101 color words. The first version (4,655 paintings, Chicago and Cleveland only) is compared in section 3.
 
 > **Update, 2026-10-07 (same day, later build): a seventh source, Wikimedia Commons.** `tools/museums/commons.py`
-> added **9,117 more public-domain paintings** via Wikidata (the Uffizi, the Prado, the Louvre, the Hermitage, the
-> National Gallery London, the Musee d'Orsay, plus ~30 named old masters), bringing the corpus to **23,545
-> paintings**, **830 artists** with at least 6 works (up from 484), **21 countries** and **data/corpus.json now
-> shards** (past the 8 MB single-file limit). Method, licensing and spot-checks: `research/COMMONS.md`. All 14
-> findings below still hold; the numbers in **bold** in section 3 are this later build, with the six-museum number
-> that preceded it in brackets. Two findings moved enough to call out: **#8 (Van Gogh)**, now built on a much
-> larger sample of his work (50 vs 25 paintings) and no longer the single greenest artist in the corpus by a wide
-> margin; and **#13 (the black country)**, which changed hands from the Netherlands to **Russia** once the
-> Hermitage's holdings arrived. The six-museum totals, table and "first version" comparisons below are left as they
-> were built (section 3's intro paragraph, the region table in section 4, and the quality-check list in section 5
-> describe the six-museum build only) — re-deriving them for 23,545 paintings was judged not worth doing twice in
-> one document; `research/COMMONS.md` has what changed on the Commons side specifically.
+> added **9,106 more public-domain paintings** via Wikidata (the Uffizi, the Prado, the Louvre, the Hermitage, the
+> National Gallery London, the Musee d'Orsay, plus ~30 named old masters), bringing the corpus to **23,531
+> paintings**, **837 artists** with at least 6 works (up from 484), **21 countries** and **data/corpus.json now
+> shards** (past the 8 MB single-file limit). Method, licensing and spot-checks: `research/COMMONS.md`, including a
+> same-day revision that fixed three bugs in the first commons pass (painting titles were taken from the Commons
+> filename instead of the artwork's own name; 79 rows showed a raw Wikidata id as the artist; every commons image
+> URL used `http://` on an https site) and one field-definition mismatch (country used the painter's citizenship,
+> not — as every other source in this document means by "country" — the modern country the picture was made in;
+> fixed to prefer Wikidata's `P495` "country of origin", falling back to citizenship only when a painting has no
+> `P495` at all). The numbers below already reflect the fixed, rebuilt data. All 14 findings below still hold; the
+> numbers in **bold** in section 3 are this later build, with the six-museum number that preceded it in brackets.
+> Two findings moved enough to call out: **#8 (Van Gogh)**, now built on a much larger sample of his work (50 vs 25
+> paintings) and no longer the single greenest artist in the corpus by a wide margin; and **#13 (the black
+> country)**, which changed hands from the Netherlands to **Russia** once the Hermitage's holdings arrived (detail
+> and caveats rewritten below to state plainly what "country" means here). The six-museum totals, table and "first
+> version" comparisons below are left as they were built (section 3's intro paragraph, the region table in section
+> 4, and the quality-check list in section 5 describe the six-museum build only) — re-deriving them for 23,531
+> paintings was judged not worth doing twice in one document; `research/COMMONS.md` has what changed on the Commons
+> side specifically.
 
 ---
 
@@ -30,7 +37,7 @@ Built 2026-10-07 by `tools/corpus.py`, with one adapter per newer museum in `too
 | National Gallery of Art, Washington (`nga`) | NGA open data on GitHub (CSV files), CC0 | 2,916 open-access paintings | 2,599 | IIIF at 400 px. George Catlin's 351 paintings capped to 50. |
 | Rijksmuseum, Amsterdam (`rijks`) | data.rijksmuseum.nl OAI-PMH (EDM), no key | 4,367 public-domain paintings | 4,356 | IIIF (iiif.micr.io) at 400 px. 4 images would not load. |
 | SMK, Copenhagen (`smk`) | api.smk.dk search API, no key | 4,637 public-domain paintings | 2,827 | 1,751 of SMK's images are old black-and-white photographs and are left out. |
-| Wikimedia Commons (`commons`) | query.wikidata.org SPARQL + Commons' thumbnail server, no key | ~20,061 candidates (six target museums or ~30 named artists, PD by date, minus the six museums above) | 9,117 | Added 2026-10-07, after the rest of this document. Trimmed to 9,194 before any image was fetched (an artist already at the corpus's 50-per-artist cap got 0 headroom). Method: `research/COMMONS.md`. |
+| Wikimedia Commons (`commons`) | query.wikidata.org SPARQL + wbgetentities + Commons' thumbnail server, no key | ~20,061 candidates (six target museums or ~30 named artists, PD by date, minus the six museums above) | 9,106 | Added 2026-10-07, after the rest of this document; revised same day (title, artist-id and country-field bugs — `research/COMMONS.md`). Trimmed to ~9,180 before any image was fetched (an artist already at the corpus's 50-per-artist cap got 0 headroom). |
 
 **Rijksmuseum needed no key.** Its new Data Services offer two key-free routes. The Linked Art search API (`data.rijksmuseum.nl/search/collection?type=painting&imageAvailable=true`) finds the ~4,900 paintings but needs three more requests per painting to reach an image. The OAI-PMH endpoint returns whole Europeana (EDM) records for set 261208 ("schilderijen") 50 at a time: title, date, creator, rights, production place and IIIF image, in about 100 requests. The OAI route is used. Only records whose `edm:rights` is the Public Domain Mark or CC0 are kept; one in-copyright record was skipped.
 
@@ -93,7 +100,7 @@ The copy is trimmed of edge bands that are near-uniform *and* end in a clear ste
 
 The sample grew threefold and changed character. Dutch (3,715) and Danish (1,658) paintings now make up 37% of the corpus, against 4% before. That shift explains most of the moved numbers below. Old numbers (4,655 paintings, Chicago and Cleveland) are in brackets.
 
-1. **Earth and shadow.** Browns and neutrals cover **86.6%** of the average painting's surface [85.5%]. Purples and pinks are the rarest families at **0.1%** each [0.1%]. *Area-weighting and aged varnish both push toward brown.* **Holds.** → +Commons (23,545): 87.2%, still holds.
+1. **Earth and shadow.** Browns and neutrals cover **86.6%** of the average painting's surface [85.5%]. Purples and pinks are the rarest families at **0.1%** each [0.1%]. *Area-weighting and aged varnish both push toward brown.* **Holds.** → +Commons (23,531): 87.2%, still holds.
 2. **The most-used app color is now black** at **21.4%** of the average painting, then umber at **18.3%** [umber 15.1%, then black 12.6%]. Taupe, sepia, brown and camel follow at 6-8%. **Changed:** the Rijksmuseum's dark 17th-century portraits and still lifes moved black to first place. *Most of the app's names are brighter than real paint, so muted colors pile onto the few muted names.* → +Commons: black 24.9%, umber 17.8%; still holds (the Prado and the Hermitage are dark too).
 3. **Europe lightens.** Mean L\* of European paintings is **29.5** in the 1600s (n = 3,043), **39.7** in the 1800s (n = 3,574) and **44.3** in the 1900s (n = 644) [28.8 / 37.8 / 43.4, with n = 334 / 786 / 78]. The 1800s minus 1600s interval is +9.4 to +10.8. **Holds, on ten times the data.** *Old varnish and grime darken older pictures, so part of the gap is age, not the painter.* → +Commons: 29.3 / 38.6 / 44.9. Still holds; barely moved.
 4. **Blue arrives late.** Blues cover **0.8%** of the average European painting from the 1600s, **2.1%** in the 1800s and **5.0%** in the 1900s [1.2% / 3.1% / 7.6%]. **Holds;** the levels are lower because Danish and Dutch 19th-century painting is less blue than the French-heavy American collections. *Yellowed varnish turns old blues green-grey.* → +Commons: 0.8% / 2.0% / 4.9%. Still holds; barely moved.
@@ -105,8 +112,8 @@ The sample grew threefold and changed character. Dutch (3,715) and Danish (1,658
 10. **East Asian paintings are light, and almost never blue.** Chinese and Japanese paintings average L\* **58.9** against **35.5** for European ones [59.0 vs 36.2]. Blue covers **0.1%** of the average Chinese painting. **Holds.** *Silk and paper brown with age, and mountings are often in the photograph.* → +Commons: 58.9 vs 35.1. Still holds; barely moved (same reason as #9).
 11. **Gold grounds.** Oranges and yellows cover **12.0%** of European paintings made before 1500, against **2.0%** in the 1600s (n = 515 and 3,043) [9.3% vs 0.9%, n = 191 and 334]. **Holds.** *Photographed gold often reads as brown instead.* → +Commons: 11.1% vs 2.5%. Still holds.
 12. **Neutrals vs browns.** **90.5%** of European paintings give at least 5% of their surface to neutrals, against **57.8%** of Asian paintings. In Asian paintings browns and tans take that role: **95.2%** have at least 5% brown [93.7% / 58.2% / 94.8%]. **Holds.** → +Commons: 92.0% / 57.8% / 95.2%. Still holds.
-13. **The Netherlands is the black country.** The app color black covers **32.3%** of the average Dutch painting, the most of any country, against **21.4%** across the collection (n = 3,715) [35.2% vs 12.6%, n = 203]. 58% of these paintings are from the 1600s. **Holds, now on 18 times the Dutch sample.** The gap to the whole collection is smaller because the whole collection got darker. → +Commons (**changed hands**): **Russia** is now the black country — black covers 35.5% of the average painting made there, against 24.9% across the whole collection, once the Hermitage's Russian-made holdings gave the `co = Russia` group enough paintings (n = 327) to be reported (the minimum is 25). The Netherlands is still dark (its own share barely moved) but Russia's Hermitage-heavy sample is darker still. A country entering or leaving this finding by crossing the reporting threshold is exactly the kind of small-group sensitivity caveated throughout this document.
-14. **Extremes.** Of the 484 artists with at least 6 works, the darkest is **Cornelis van der Voort** (L\* 13.3, n = 7) and the lightest is still **Bian Shoumin** (L\* 82.1, n = 8). **Changed** [darkest was Eastman Johnson, 20.2, of 103 artists]. *Small groups: one museum's choice of works decides these extremes.* → +Commons: of 830 artists, the darkest is now **Willem Kalf** (L\* 13.0, n = 6) and the lightest is unchanged, Bian Shoumin. Expected churn at this group size (6 works): treat as an anecdote, as the caveat already says.
+13. **The Netherlands is the black country.** The app color black covers **32.3%** of the average Dutch painting, the most of any country, against **21.4%** across the collection (n = 3,715) [35.2% vs 12.6%, n = 203]. 58% of these paintings are from the 1600s. **Holds, now on 18 times the Dutch sample.** The gap to the whole collection is smaller because the whole collection got darker. → +Commons (**changed hands**): **Russia** is now the black country — black covers **35.8%** of the average painting made there, against **24.9%** across the whole collection (n = 329: 314 from Commons via the Hermitage, 15 from the other museums). **"Made there," not "owned there":** `co` means the modern country the painting was made in, same as everywhere else in this document — read from Wikidata's `P495` ("country of origin") when a painting has one, else the painter's citizenship as a fallback. It is never the museum's own location, so this is not simply "the Hermitage is in Russia" circularity; it reflects where the 329 pictures were actually painted (or, for the citizenship-fallback majority, where their painters held citizenship). Century mix behind the number: **74% from the 1800s** (243 of 329), 15% from the 1700s (49), 8% from the 1900s (27), the rest undated — so this is substantially a portrait of 19th-century Russian painting specifically, collected by one museum, not of "Russia" across time. The Netherlands is still dark (its own share barely moved) but Russia's Hermitage-heavy, 19th-century-heavy sample is darker still. A country entering or leaving this finding by crossing the reporting threshold (minimum n = 25) is exactly the kind of small-group sensitivity caveated throughout this document.
+14. **Extremes.** Of the 484 artists with at least 6 works, the darkest is **Cornelis van der Voort** (L\* 13.3, n = 7) and the lightest is still **Bian Shoumin** (L\* 82.1, n = 8). **Changed** [darkest was Eastman Johnson, 20.2, of 103 artists]. *Small groups: one museum's choice of works decides these extremes.* → +Commons: of 837 artists, the darkest is now **Willem Kalf** (L\* 13.0, n = 6) and the lightest is unchanged, Bian Shoumin. Expected churn at this group size (6 works): treat as an anecdote, as the caveat already says.
 
 ## 4. Limits
 
