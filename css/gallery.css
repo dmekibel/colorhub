@@ -100,3 +100,16 @@
 .gl-hero.small span{margin:0 auto}
 .gl-full{display:block;text-align:center;margin-top:10px;font:500 11px/1.4 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--soft);text-decoration:underline;text-underline-offset:3px}
 .gl-hero img.hi{animation:fade .4s both}
+
+/* the dynamic palette's 3/6/12/20 control (ROADMAP §13) */
+.gl-sizes{margin-top:14px}
+
+/* "arrive from a color and see it": the line above the palette, and the nearest swatch's highlight (the .on
+   styling itself — outline on .pal, underline on .pal-name — already exists in app.css) */
+.gl-arrive{display:flex;align-items:center;gap:8px;margin:14px 0 0}
+.gl-arrive-sw{width:14px;height:14px;border-radius:50%;flex:none;box-shadow:inset 0 0 0 1px rgba(236,232,223,.22)}
+
+/* tap the painting to name a spot: a quiet crosshair cursor only once a canvas read is confirmed possible, and
+   a small marker where the visitor tapped (removed on the next tap) */
+.gl-hero>span.gl-tap{cursor:crosshair}
+.gl-tap-dot{position:absolute;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.5),0 2px 6px rgba(0,0,0,.4);pointer-events:none;animation:fade .2s both}
