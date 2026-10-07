@@ -268,6 +268,11 @@ designer · filmmaker/photographer/colorist · interior designer/architect · fa
 - Applied tasks per field at the end of each stage (mix it, build a palette that passes contrast, grade toward it, pick the
   right white for a room...), plus the camera mission.
 **Build:** the ordering (data, S-M, Sonnet) + stage UI/tests/field choice (M, Sonnet) as the chapters of the path (§1).
+**The honeycomb uses the stages too (David, 2026-10-08):** the view panel's "How many" control snaps to the stages instead of a
+free slider: Stage 1 (25) · 2 (50) · 3 (100) · 4 (150) · 5 (250) · 6 (400) · 7 (600) · 8 (800) · 9 (1,000), plus "Every name"
+(the 2,700 library). Stage N shows the first N names of the ordered core list (data/core-names.json `rank` until the stage
+ordering exists), so you can preview what any stage holds. The other views (Learned, Learning, New, traditions, search)
+sit beside it.
 
 ## 15. Image analysis (approved in principle 2026-10-08)
 Upload any image (your painting, a photo, a film still) and get a deep read of its color. The same screen also appears as an
