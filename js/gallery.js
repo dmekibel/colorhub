@@ -364,9 +364,8 @@ function glAdjust(host) {
     <div class="gl-row"><span class="gl-lab">Chroma</span><div class="gl-range" data-glr="C"></div></div>
     <button class="btn solid gl-go" data-gldone></button>`);
   sh.classList.add("gl-sheet"); sh.setAttribute("aria-label", "Adjust the gallery");
-  // no scroll lock: html.sheet-open (overflow hidden on a 100%-high body) clamps the page to the top, which would
-  // lose the place in the grid and stop the live results from scrolling into view. The scrim still catches touches.
-  document.documentElement.classList.remove("sheet-open");
+  // no scroll lock here: the live results behind the sheet may scroll into view. The scrim still catches touches.
+  unlockScroll();
   if (sh.previousElementSibling) sh.previousElementSibling.classList.add("gl-scrim");
   host.dispatchEvent(new Event("glsheet"));
   let picker = null, timer = 0;

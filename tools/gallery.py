@@ -176,7 +176,12 @@ def main():
             wi.append(app_idx[p[2]])
         rec = record_url(x)
         no_rec += rec is None
-        details.append([x["id"], x.get("t") or "Untitled", x.get("a"), x.get("co"), x.get("mv"), x["img"], rec, li, wi])
+        img = x["img"]
+        # The Art Institute of Chicago's image server now refuses requests from other sites, so its
+        # paintings are served from our own small copies (img/gallery/aic/<number>.jpg, 200px wide).
+        if x["id"].startswith("aic-") and (ROOT / "img" / "gallery" / "aic" / (x["id"][4:] + ".jpg")).exists():
+            img = "img/gallery/aic/" + x["id"][4:] + ".jpg"
+        details.append([x["id"], x.get("t") or "Untitled", x.get("a"), x.get("co"), x.get("mv"), img, rec, li, wi])
 
         r = ratio.get(x["id"]) or x.get("r") or (x["h"] / x["w"] if x.get("w") and x.get("h") else None)
         if not r:

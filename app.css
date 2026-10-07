@@ -254,7 +254,7 @@ a{color:inherit}
 .sheet{touch-action:pan-y;overscroll-behavior:contain}
 .sheet .grab{position:relative;touch-action:none;cursor:grab}
 .sheet .grab::before{content:"";position:absolute;inset:-16px -80px}   /* a big invisible handle */
-html.sheet-open,html.sheet-open body{overflow:hidden}
+html.sheet-open body{position:fixed;left:0;right:0;overflow:hidden}
 .sheet{position:fixed;left:0;right:0;bottom:0;z-index:21;max-width:540px;margin:0 auto;background:#17160F;padding:12px var(--g) calc(var(--bottom) + 20px);animation:sheetIn .4s var(--ease) both;max-height:88dvh;overflow:auto;border-top:1px solid var(--rule)}
 @keyframes sheetIn{from{transform:translateY(100%)}}
 .sheet .grab{width:36px;height:3px;background:var(--rule);margin:0 auto 18px}
