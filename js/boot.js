@@ -30,6 +30,7 @@ function shot(name) {
     case "story": { const st = g().stories[+arg || 0]; return storyPlayer(st); }
     case "daily": S.daily = {}; return daily();
     case "lab": return LAB[arg || "harmony"]();
+    case "taste": return tasteShot(arg);
   }
 }
 
