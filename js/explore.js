@@ -84,10 +84,6 @@ function lensSections(lens) {
         ...[window.passagesSection, window.filmsSection].filter(f => typeof f === "function").flatMap(f => f()),   // js/passages.js, js/films.js
         ...lensSections("history").map(sec => ({ ...sec, title: "Through history · " + sec.title }))];
     }
-    // shared with any other file that pushes a section-returning function onto window.WORLD_SECTIONS
-    // (each function returns one section object or an array of them, same convention as passagesSection/filmsSection above)
-    case "world":
-      return (window.WORLD_SECTIONS || []).filter(f => typeof f === "function").flatMap(f => f());
     case "harmony": {
       const vivid = colors.filter(n => lch(n.h)[1] > 28).sort((a, b) => hueKey(a) - hueKey(b));
       const pairs = vivid.map(n => { const [o] = nearestColors(opposite(n.h), 1, n.title); return o ? pairPin(n, colorNode(o[0]), "Opposites") : null; }).filter(Boolean);
@@ -98,6 +94,8 @@ function lensSections(lens) {
         .concat([{ title: "Still being traced", sub: "Their stories are being written.", pins: colors.filter(n => !n.wiki || !n.wiki.named || n.wiki.named === "unknown").map(n => pin(n, { cap: "" })) }].filter(s => s.pins.length));
     case "poems":
       return [{ poems: true }];   // js/poems.js draws this lens
+    case "world":
+      return [{ world: true }];   // js/world.js draws this lens (Fashion, plus Botany/Gems pushed in later)
     case "paintings":
       // the hand-built pages first, in a row; then the full gallery (js/gallery.js), loaded when this lens opens
       return [{ title: "Featured · with stories", sub: "Hand-built pages with the story of the paint.", rail: true, pins: paintings.slice().sort((a, b) => (parseInt(String(a.year).replace(/\D+/g, "")) || 0) - (parseInt(String(b.year).replace(/\D+/g, "")) || 0)).map(n => pin(n)) },
@@ -162,7 +160,7 @@ function exploreHome() {
         SECS.forEach((x, i) => { if (!x.title) return; const g = x.title.split(" · ")[0]; if (!seen.has(g)) { seen.add(g); toc.push([i, g]); } });
         return toc.length > 2 ? `<nav class="toc x-toc" aria-label="Contents"><span class="eyebrow">Contents</span>${toc.map(([i, g]) => `<a data-jump="${i}">${esc(g)}</a>`).join("")}</nav>` : "";
       })()}
-      ${SECS.map((sec, i) => sec.gallery ? `<div class="gl-wrap" id="gallery"></div>` : `${sec.title ? `<div class="sec-head x-sec" id="xs-${i}"><b>${esc(sec.title)}</b>${sec.pins && sec.pins.length ? `<span>${sec.pins.length}</span>` : ""}</div>` : ""}${sec.sub ? `<p class="x-sub">${esc(sec.sub)}</p>` : ""}${sec.honey ? `<div class="honey-panel" id="honey"></div>` : sec.poems ? `<div id="poems-panel"></div>` : sec.rail ? `<div class="gl-rail">${sec.pins.map(p => p.html).join("")}</div>` : masonry(sec.pins)}`).join("")}
+      ${SECS.map((sec, i) => sec.gallery ? `<div class="gl-wrap" id="gallery"></div>` : sec.world ? `<div class="wd-wrap" id="world"></div>` : `${sec.title ? `<div class="sec-head x-sec" id="xs-${i}"><b>${esc(sec.title)}</b>${sec.pins && sec.pins.length ? `<span>${sec.pins.length}</span>` : ""}</div>` : ""}${sec.sub ? `<p class="x-sub">${esc(sec.sub)}</p>` : ""}${sec.honey ? `<div class="honey-panel" id="honey"></div>` : sec.poems ? `<div id="poems-panel"></div>` : sec.rail ? `<div class="gl-rail">${sec.pins.map(p => p.html).join("")}</div>` : masonry(sec.pins)}`).join("")}
       <p class="fine">Hex values are screen approximations. Every page lists its sources.</p>
     </div>
   `, "explore", "explore");
@@ -171,6 +169,7 @@ function exploreHome() {
   el.querySelector("[data-saved]").onclick = () => { S.lens = lens === "saved" ? "all" : "saved"; save(); exploreHome(); };
   const hp = el.querySelector("#honey"); if (hp) colorBrowser(hp, { focus: dailyColor(), pick: c => closeup(colorNode(c)) });
   const gw = el.querySelector("#gallery"); if (gw) galleryMount(gw);
+  const wd = el.querySelector("#world"); if (wd && typeof worldMount === "function") worldMount(wd);
   const pp = el.querySelector("#poems-panel"); if (pp) poemsPanel(pp);
   const on = el.querySelector(".lens-key .on"); if (on) on.scrollIntoView({ inline: "center", block: "nearest" });
   el.addEventListener("click", e => {
@@ -360,12 +359,14 @@ function colorPage(n) {
     <div class="c-poems"></div>
     ${typeof archiveRows === "function" ? archiveRows(c) : ""}
     ${typeof btRow === "function" ? btRow(c) : ""}
+    <section class="fx-in" data-world-in></section>
     ${connSection(n)}
     ${w && w.sources ? secHTML("src", "Sources", sourcesHTML(w.sources), false) : ""}
   `, "article");
   wireArticle(el, n); wireSections(el);
   const gi = el.querySelector("[data-glin]"); if (gi) galleryColorRow(gi, c);
   colorPoems(el.querySelector(".c-poems"), c);
+  if (typeof worldColorRow === "function") worldColorRow(el, n);
   el.querySelectorAll("[data-copy]").forEach(b => b.onclick = () => { try { navigator.clipboard.writeText(b.dataset.copy); toast("Copied " + b.dataset.copy); } catch (e) {} });
 }
 

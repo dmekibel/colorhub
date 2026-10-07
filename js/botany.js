@@ -2,11 +2,14 @@
 // Botany: the plants behind ColorHub's color names, dye plants, why-plants-are-colored essays, Greenaway's
 // 1884 language of flowers, and Werner's 1821 plant pairings. Data: data/botany.js (window.BOTANY), loaded
 // in the background, same pattern as js/passages.js and js/films.js.
-// Registers a "World" lens section (window.WORLD_SECTIONS, shared with other contributors) and an
-// "In nature" row on color pages (btRow(c), called once from js/explore.js's colorPage).
+// Pushes a "Botany" entry onto js/world.js's shared WORLD_SECTIONS array ({ key, title, render(host) }, the
+// same shape Fashion uses) and adds an "In nature" row on color pages (btRow(c), called once from
+// js/explore.js's colorPage, alongside Fashion's own worldColorRow — the two are independent and additive).
 // All top-level names here are prefixed bt to stay out of everyone else's way (tools/check_names.js).
 // Plant, dye and essay pages render through the app's own generic wikiPage(n) (they're graph nodes shaped
-// like any other wiki page); only the language-of-flowers index is a page of its own, btFloriPage().
+// like any other wiki page, so pin()/closeup()/Saved/search all work on them for free); the three list
+// screens (btListPage) and the language-of-flowers index (btFloriPage) are their own small pages, styled
+// like js/world.js's own fashionList (.wd-tiles/.wd-list/.wd-card, worldTop, worldBackWire).
 
 const btV = ((document.currentScript && document.currentScript.src.match(/[?&]v=([\w.-]+)/)) || [])[1] || "";
 let btOK = false, btStale = false, btGraphSeen = null;
@@ -73,24 +76,54 @@ function btBuildNodes() {
 }
 const btNode = id => graph().nodes.get(id);
 
-// ---------- the World lens section ----------
-function btWorldSection() {
-  if (!window.BOTANY) { btStale = true; return { title: "Botany", sub: "Loading the plants behind the colors…", pins: [] }; }
-  btBuildNodes();
+// ---------- the World lens section (js/world.js: WORLD_SECTIONS is a shared, bare top-level array of
+// { key, title, render(host) }; worldMount() calls render(host) into its own slot once per section) ----------
+const BT_TILES = [["plants", "Flowers & plants", p => `${p.plants.length} colors named after a plant`],
+  ["dyes", "Dye plants", p => `${p.dyes.length} plants that colored the world before chemistry`],
+  ["essays", "Why plants are colored", p => `${p.essays.length} short reads`],
+  ["flori", "Language of flowers", p => `${p.flori.length} Victorian flower meanings`]];
+function btWorldSection(host) {
+  if (!window.BOTANY) {
+    host.innerHTML = `<p class="x-sub">Loading the plants behind the colors…</p>`;
+    btWhen(() => { if (host.isConnected) btWorldSection(host); });
+    return;
+  }
   const B = window.BOTANY;
-  const plantNodes = B.plants.map(p => btNode("bt:plant:" + p.id)).filter(Boolean);
-  const dyeNodes = B.dyes.map(d => btNode("bt:dye:" + d.id)).filter(Boolean);
-  const essayNodes = B.essays.map(e => btNode("bt:essay:" + e.id)).filter(Boolean);
-  const floriNode = btNode("bt:flori-index");
-  return [
-    { title: "Flowers and plants behind the names", sub: "Why a color took a plant's name, and how the real plant actually varies.", pins: seeded(plantNodes, "btplants" + today()).map(n => pin(n)) },
-    { title: "Dye plants", sub: "What grew the colors before chemistry did.", pins: dyeNodes.map(n => pin(n)) },
-    { title: "Why plants are colored", pins: essayNodes.map(n => pin(n)) },
-    { title: "The language of flowers", sub: "A Victorian parlor tradition, not a fact about flowers — 19th-century dictionaries disagree with each other.", pins: floriNode ? [pin(floriNode)] : [] },
-  ];
+  host.innerHTML = `<p class="x-sub">The plants behind ColorHub's color names, what grew the dyes before chemistry did, and a Victorian flower dictionary.</p>
+    <div class="wd-tiles">${BT_TILES.map(([k, t, s]) => `<button class="wd-tile" data-bt="${k}"><b>${esc(t)}</b><span>${esc(s(B))}</span></button>`).join("")}</div>`;
+  host.querySelectorAll("[data-bt]").forEach(b => b.onclick = () => b.dataset.bt === "flori" ? btFloriPage() : btListPage(b.dataset.bt));
 }
-window.WORLD_SECTIONS = window.WORLD_SECTIONS || [];
-window.WORLD_SECTIONS.push(btWorldSection);
+WORLD_SECTIONS.push({ key: "botany", title: "Botany", render: btWorldSection });
+
+// ---------- the three list screens (plants / dyes / essays), one card per entry, Fashion's own look ----------
+const BT_LIST_META = {
+  plants: ["Flowers and plants behind the names", "Why a color took a plant's name, and how the real plant actually varies."],
+  dyes: ["Dye plants", "What grew the colors before chemistry did."],
+  essays: ["Why plants are colored", "Four short reads on the biology behind plant color."],
+};
+const btListTitle = kind => (BT_LIST_META[kind] || ["Botany"])[0];
+function btListNodes(kind) {
+  const B = window.BOTANY;
+  if (kind === "plants") return B.plants.map(p => btNode("bt:plant:" + p.id));
+  if (kind === "dyes") return B.dyes.map(d => btNode("bt:dye:" + d.id));
+  return B.essays.map(e => btNode("bt:essay:" + e.id));
+}
+function btFallback() { S.lens = "world"; go("explore"); }
+function btListPage(kind, opts = {}) {
+  if (!window.BOTANY) return btFallback();
+  btBuildNodes();
+  const [title, dek] = BT_LIST_META[kind] || ["Botany", ""];
+  const nodes = btListNodes(kind);
+  const el = show(`
+    ${worldTop("Botany")}
+    <h1 class="p-title">${esc(title)}</h1>
+    <p class="p-dek">${esc(dek)}</p>
+    ${masonry(nodes.map(n => pin(n)))}
+  `, "article bt-list");
+  worldBackWire(el, opts, btFallback);
+  el.addEventListener("click", e => { const p = e.target.closest("[data-pin]"); if (p) closeup(graph().nodes.get(p.dataset.pin)); });
+  return el;
+}
 
 // ---------- "In nature" row on a color page (js/explore.js colorPage calls btRow(c)) ----------
 const btLinkLabel = { werner: "Werner, 1821", flori: "Victorian language of flowers", tradition: "Also linked", garden: "Jekyll's color garden, 1908", "false": "False friend" };
@@ -179,7 +212,9 @@ function btFloriPage() {
 function btOpenRoute(id) {
   XSTACK = [];
   btWhen(() => {
-    const n = id === "flori" ? btNode("bt:flori-index") : btNode("bt:plant:" + id) || btNode("bt:dye:" + id) || btNode("bt:essay:" + id);
+    if (id === "flori") return btFloriPage();
+    if (BT_LIST_META[id]) return btListPage(id);
+    const n = btNode("bt:plant:" + id) || btNode("bt:dye:" + id) || btNode("bt:essay:" + id);
     if (n) openNode(n); else go(S.tab || "learn");
   });
 }

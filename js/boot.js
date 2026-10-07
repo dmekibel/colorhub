@@ -48,9 +48,16 @@ function shot(name) {
     case "film": return archWhen(() => archOpen(archNode("film", FILMS.find(f => f.id === arg) || FILMS[0])));
     case "cpage": return archWhen(() => { openNode(colorNode(BYNAME.get((arg || "Teal").toLowerCase()))); later2(() => { const r = document.querySelector(".arch-rows"); if (r) scrollTo(0, r.getBoundingClientRect().top + scrollY - 60); }, 900); });
     case "films": S.lens = "ideas"; go("explore"); return archWhen(() => later2(() => { const h = [...document.querySelectorAll(".x-sec")].find(x => /^Films/.test(x.textContent)); if (h) scrollTo(0, h.getBoundingClientRect().top + scrollY - 20); }, 1500));
-    // botany (js/botany.js): botany:world, botany:plant:<id>, botany:dye:<id>, botany:essay:<id>, botany:flori
-    case "botany": { const [sub, a2] = (arg || "world").split(":"); if (sub === "world") { S.lens = "world"; return go("explore"); }
-      return btWhen(() => { const n = sub === "flori" ? null : btNode("bt:" + sub + ":" + a2); if (sub === "flori") return btFloriPage(); if (n) return openNode(n); S.lens = "world"; go("explore"); }); }
+    // botany (js/botany.js): botany:world, botany:plants|dyes|essays, botany:plant:<id>, botany:dye:<id>, botany:essay:<id>, botany:flori
+    case "botany": { const [sub, a2] = (arg || "world").split(":");
+      if (sub === "world") { S.lens = "world"; return go("explore"); }
+      return btWhen(() => {
+        if (sub === "flori") return btFloriPage();
+        if (BT_LIST_META[sub]) return btListPage(sub);
+        const n = a2 && btNode("bt:" + sub + ":" + a2);
+        if (n) return openNode(n);
+        S.lens = "world"; go("explore");
+      }); }
     case "taste": return tasteShot(arg);
     case "poem": return poemPage(name.slice(5), {});   // poem:<poem id>
     case "poemcolor": { const n = g().nodes.get("c:" + (arg || "Crimson")); XSTACK = ["p:" + n.id]; colorPage(n); const x = document.querySelector(".c-poems"), h = document.querySelector(".c-hero"); if (x && h) h.after(x); return; }   // "In poems" moved up so one screen shows it
@@ -72,6 +79,8 @@ function shot(name) {
       return colorExplorer({ focus: dailyColor(), pick: c => closeup(colorNode(c)), shot: ["wheel", "tuned"].includes(act) ? "" : act });
     }
     case "gallery": return galleryShot(name.slice(8));   // gallery, gallery:scroll=600, gallery:color=Cobalt, gallery:adjust=Cobalt, gallery:page=12, gallery:cpage=Cobalt
+    case "world": case "fashiondecade": case "fashioncoty": case "fashionhouse": case "fashionhistory":
+      return typeof worldShot === "function" && worldShot(screen, arg);   // js/world.js
   }
 }
 
