@@ -65,6 +65,8 @@ SOURCES = {
                 home="https://www.nga.gov/collection", rec="https://www.nga.gov/collection/art-object-page.{num}.html"),
     "smk": dict(name="SMK, National Gallery of Denmark", short="SMK", credit="public domain · CC0 data",
                 home="https://open.smk.dk", rec="https://open.smk.dk/artwork/image/{num}"),
+    "commons": dict(name="Wikimedia Commons", short="Commons", credit="public domain · CC0 data (Wikidata)",
+                    home="https://commons.wikimedia.org/wiki/Commons:Welcome", rec="https://www.wikidata.org/wiki/{num}"),
 }
 CMA_IMG = re.compile(r"^https://openaccess-cdn\.clevelandart\.org/([^/]+)/\1_web\.jpg$")
 
@@ -111,7 +113,7 @@ def sizes(raw):
         from PIL import Image
     except ImportError:
         return out
-    for src in ("nga", "rijks", "smk", "met"):
+    for src in ("nga", "rijks", "smk", "met", "commons"):
         d = raw / src / "img"
         if not d.is_dir():
             continue
@@ -202,7 +204,12 @@ def main():
             if x["id"].startswith(pre + "-") and (ROOT / "img" / "gallery" / pre / (x["id"][len(pre) + 1:] + ".jpg")).exists():
                 img = f"img/gallery/{pre}/" + x["id"][len(pre) + 1:] + ".jpg"
         # hi: a bigger image for the painting page when the grid uses our small copy ("" = none reachable)
-        hi = (x["img"] or "").replace("/full/400,/0/", "/full/1000,/0/") if img != x["img"] and x["id"].startswith("smk-") else ""
+        if x["id"].startswith("commons-") and "?width=400" in (x["img"] or ""):
+            hi = x["img"].replace("?width=400", "?width=1200")  # Commons is hotlinked directly: always a sharper copy
+        elif img != x["img"] and x["id"].startswith("smk-"):
+            hi = (x["img"] or "").replace("/full/400,/0/", "/full/1000,/0/")
+        else:
+            hi = ""
         details.append([x["id"], x.get("t") or "Untitled", x.get("a"), x.get("co"), x.get("mv"), img, rec, li, wi, hi])
 
         r = ratio.get(x["id"]) or x.get("r") or (x["h"] / x["w"] if x.get("w") and x.get("h") else None)
