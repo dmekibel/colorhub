@@ -230,7 +230,7 @@ function hmHome() {
   // root for exactly this. growFrom calls its renderFn synchronously, so an async open (a name not yet in
   // CORE_NAMES) just falls back to the old flying-chip morph — still a clean grow, never a hard cut.
   const pick = (o, fx) => {
-    hmDismissHint();
+    if (typeof hmDismissHint === "function") hmDismissHint();
     const src = fx && fx.srcEl && fx.srcEl();
     const open = () => (o.c ? hmOpenColor(o.c) : hmOpenName(o));
     // one of the 101 resolves synchronously, so growFrom's renderFn returns its root and the grow plays; a
@@ -389,17 +389,19 @@ function hmHome() {
     if (!ctrl || !items.length) return;
     const unmet = items.filter(it => !(it.c && it.c.id && S.cards[it.c.id]));
     const pool = unmet.length ? unmet : items;
-    buzz(6); hmDismissHint();
+    buzz(6); if (typeof hmDismissHint === "function") hmDismissHint();
     ctrl.update({ items, focus: pool[Math.floor(Math.random() * pool.length)], soft: true });
   }
 
   // ---------- chrome fade: visible on a tap or a pause, hidden the instant you start dragging ----------
   let chromeT = 0;
-  function hmShowChrome(hold) { el.classList.remove("chrome-hide"); clearTimeout(chromeT); if (!hold) chromeT = setTimeout(() => el.classList.add("chrome-hide"), 1800); }
+  // Shown again as soon as the finger lifts, and it stays: no timer. (A 1.8 s auto-hide left the buttons drawn but
+  // untappable, pointer-events off, so "no button in View works" — David.)
+  function hmShowChrome() { el.classList.remove("chrome-hide"); clearTimeout(chromeT); }
   function hmWireChrome() {
     const cv = viewEl.querySelector("canvas"); if (!cv || cv.dataset.hmWired) return; cv.dataset.hmWired = "1";
     cv.addEventListener("pointerdown", () => { el.classList.add("chrome-hide"); clearTimeout(chromeT); });
-    cv.addEventListener("pointerup", () => { hmShowChrome(); hmDismissHint(); });
+    cv.addEventListener("pointerup", () => { hmShowChrome(); if (typeof hmDismissHint === "function") hmDismissHint(); });
     cv.addEventListener("pointercancel", () => hmShowChrome());
   }
   hmShowChrome();
