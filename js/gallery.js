@@ -600,7 +600,7 @@ function glPage(i, d, fromHex) {
       heroSpan.querySelectorAll(".gl-tap-dot").forEach(nd => nd.remove());
       const dot = document.createElement("span"); dot.className = "gl-tap-dot"; dot.style.left = x + "px"; dot.style.top = y + "px";
       heroSpan.appendChild(dot);
-      buzz(6); nameSheet(hex);
+      buzz(6); openTappedColor(hex);   // David, 2026-10-07: tap anywhere on the painting opens that color's page, not the sheet
     } catch (e) { canSample = false; heroSpan.classList.remove("gl-tap"); }   // tainted after all: quietly give up
   });
   el.querySelector("[data-back]").onclick = xBack;

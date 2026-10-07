@@ -1,0 +1,87 @@
+/* The color page, the name page and the color sheet — DESIGN-SYSTEM.md §11-12 ("Article", "Color page",
+   "The color sheet"). Scoped to js/explore.js's colorPage(), js/names.js's namePage() and js/swatch.js's
+   nameSheet(). Reuses shared primitives (.lead, .fine, .sec, .kin, .icon-btn, .lk-list…) from app.css where
+   they already match the new system; everything new lives here so app.css stays untouched.
+   Loaded after every other stylesheet, so equal-specificity rules here win over app.css's older ones. */
+
+:root{
+  --cp-surface-2:#1F1D18;   /* floating controls over a hero: solid, never glass (DESIGN-SYSTEM §1 rule 2) */
+  --cp-rule:rgba(236,232,223,.14);
+}
+
+/* A color/name page is exactly as tall as its content: the shared .screen rule forces min-height:100dvh,
+   which is right for a deck or a drill, but on a short article (few facets, no connections) it leaves a
+   slab of dead ground after the last line (research/DESIGN-AUDIT.md problem #8). */
+.screen.cp-page{min-height:0}
+
+/* ---------- the full-bleed hero ---------- */
+.cp-page .cp-hero{
+  position:relative;
+  /* bleed past the screen's own top-and-side padding, so the swatch reaches every edge */
+  margin:calc(-1 * (var(--top) + 12px)) calc(-1 * var(--g)) 0;
+  width:calc(100% + var(--g) * 2);
+  border-radius:0;
+  padding:16px var(--g) 22px;
+}
+.cp-hbar{position:absolute;top:calc(var(--top) + 10px);left:16px;right:16px;display:flex;justify-content:space-between;align-items:center;z-index:2}
+.cp-fab{width:44px;height:44px;border-radius:50%;background:var(--cp-surface-2);color:var(--ink);display:grid;place-items:center;box-shadow:0 8px 24px rgba(0,0,0,.5);transition:transform .2s var(--spring)}
+.cp-fab:active{transform:scale(.9)}
+.cp-fab svg{width:20px;height:20px}
+.cp-chip{display:block;font:italic 400 18px/1.25 var(--serif);opacity:.85}
+.cp-hero h1{margin-top:4px}
+
+/* ---------- primary row: the one filled button, plus save/share ---------- */
+.cp-primary-row{display:flex;align-items:center;gap:10px;margin-top:20px}
+.cp-primary{flex:1;display:flex;align-items:center;gap:10px;height:58px;padding:0 22px;background:var(--paper);color:var(--paper-ink);border-radius:999px;font:400 24px/1 var(--serif);letter-spacing:-.01em}
+.cp-primary em{font:italic 400 14px/1 var(--serif);color:var(--paper-soft);font-style:italic;margin-left:2px}
+.cp-primary svg{width:18px;height:18px;margin-left:auto;flex:none}
+.cp-icon{width:44px;height:44px;flex:none}
+
+/* ---------- the look-alike strip: no label, the diff line right under it ---------- */
+.cp-strip-sec{margin-top:26px}
+.cp-strip{display:flex;gap:2px;height:64px;border-radius:4px;overflow:hidden;cursor:pointer}
+.cp-strip>div{flex:1;display:flex;align-items:center;padding:0 12px;background:var(--c)}
+.cp-strip>div:first-child{flex:1.6}
+.cp-strip b{font:400 18px/1.05 var(--serif);text-wrap:balance}
+.cp-strip div[data-ink="dark"]{color:#141311}.cp-strip div[data-ink="light"]{color:#fff}
+.cp-diff{font:400 24px/1.15 var(--serif);letter-spacing:-.01em;margin-top:14px;text-wrap:pretty}
+
+/* ---------- empty hub shelves collapse to nothing, never a gap ---------- */
+.cp-page .gl-in:empty,.cp-page .fx-in:empty,.cp-page .bt-rows:empty,.cp-page .gm-rows:empty,.cp-page .arch-rows:empty{display:none;margin:0}
+
+/* ---------- the quiet Codes row (tier 4, collapsed with Language/History/Sources) ---------- */
+.cp-codes{display:flex;flex-direction:column}
+.cp-code-row{display:flex;align-items:baseline;justify-content:space-between;width:100%;padding:12px 0;border-bottom:1px solid var(--cp-rule);text-align:left}
+.cp-code-row:last-child{border-bottom:0}
+.cp-code-row span{font:400 18px/1 var(--serif);color:var(--soft)}
+.cp-code-row b{font:500 13px/1 var(--mono);letter-spacing:.04em;color:var(--ink)}
+.cp-codes-fine{margin-top:12px}
+
+/* ============================================================
+   The color sheet (js/swatch.js nameSheet) — one sheet for every swatch.
+   ============================================================ */
+.sw-sheet .pk-hero{border-radius:var(--r-1,4px)}
+.cp-sheet-title{display:flex;align-items:baseline;gap:10px;margin-top:16px;flex-wrap:wrap}
+.cp-sheet-title h2{font:400 34px/1.05 var(--serif);letter-spacing:-.02em}
+.cp-sheet-tag{display:inline-block;font:italic 400 14px/1 var(--serif);color:var(--soft);padding:3px 10px;border:1px solid var(--cp-rule);border-radius:999px}
+.cp-sheet-desc,.cp-sheet-note{margin-top:6px;font:italic 400 16px/1.35 var(--serif);color:var(--soft)}
+
+/* near-name bubbles: tap one and the sheet becomes that color (js/swatch.js walks the chain) */
+.cp-near-row{display:flex;gap:14px;margin-top:18px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.cp-near{display:flex;flex-direction:column;align-items:center;gap:8px;width:66px;flex:none;text-align:center}
+.cp-near i{width:48px;height:48px;border-radius:50%;background:var(--c);flex:none}
+.cp-near span{font:400 15px/1.1 var(--serif);text-wrap:balance}
+
+.cp-sheet-primary{margin-top:20px}
+.cp-sheet-links{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:16px}
+.cp-link{font:italic 400 16px/1 var(--serif);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;color:var(--ink)}
+
+/* Details: ΔE and "Also called" sit behind this disclosure, reusing the app's own .sec/.sec-body look */
+.cp-details{margin-top:18px;border-top:1px solid var(--cp-rule)}
+.cp-details summary{list-style:none;display:flex;justify-content:space-between;align-items:center;min-height:48px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.cp-details summary::-webkit-details-marker{display:none}
+.cp-details summary span{font:400 20px/1 var(--serif)}
+.cp-details summary i{width:10px;height:10px;border-right:1px solid var(--soft);border-bottom:1px solid var(--soft);transform:rotate(45deg) translate(-2px,-2px);transition:transform .35s var(--ease)}
+.cp-details[open] summary i{transform:rotate(225deg) translate(-2px,-2px)}
+.cp-details-body{padding:0 0 16px;display:flex;flex-direction:column;gap:8px}
+.cp-details-body p{font-size:15px;line-height:1.55;color:var(--soft)}

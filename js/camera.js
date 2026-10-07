@@ -113,7 +113,7 @@ function eye() {
     if (frozen) return stream ? live() : null;
     if (vid.videoWidth) freeze(vid, vid.videoWidth, vid.videoHeight);
   };
-  $("#nm").onclick = () => cur && nameSheet(cur.hex);
+  $("#nm").onclick = () => cur && openTappedColor(cur.hex);   // David, 2026-10-07: one tap opens the page, not the sheet
   $("#mine").onclick = () => { if (cur && cur.m) { stop(); XSTACK = []; openNode(graph().nodes.get("c:" + cur.m.n)); } };
   const fromFile = f => {
     if (!f) return;

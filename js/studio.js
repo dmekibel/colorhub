@@ -369,7 +369,7 @@ function paletteView(p) {
     el.querySelector("#pv").className = "pv-pal pv-" + look;
     el.querySelector("#pv").innerHTML = cols.map(c => `<i style="--c:${c.h};--w:${look === "weighted" ? Math.max(c.share, .02) : 1}" data-ink="${ink(c.h)}" data-swatch="${c.h}">${pct && c.share != null && look !== "chips" ? `<span>${c.share < .01 ? "<1" : Math.round(c.share * 100)}%</span>` : ""}</i>`).join("");
     el.querySelector("#hlist").innerHTML = cols.map(c => { const { nm, fam } = named(c.h); return `<button class="h-item" data-copy="${c.h}"><i style="--c:${c.h}" data-swatch="${c.h}"></i><span><b>${esc(nm.text)}</b><em class="mono">${c.h}${c.accent ? " · accent" : ""}${fam ? ` · ${esc(fam.head.n)} family` : ""}${pct && c.share != null ? ` · ${c.share < .01 ? "<1" : Math.round(c.share * 100)}%` : ""}</em></span></button>`; }).join("");
-    if (hasImg) el.querySelector("#dots").innerHTML = cols.map(c => `<i style="--c:${c.h};left:${c.at[0] * 100}%;top:${c.at[1] * 100}%"></i>`).join("");
+    if (hasImg) el.querySelector("#dots").innerHTML = cols.map(c => `<i style="--c:${c.h};left:${c.at[0] * 100}%;top:${c.at[1] * 100}%" data-swatch="${c.h}"></i>`).join("");
   };
   loadCoreNames().then(render); render();
   const seg = (sel, attr, set) => el.querySelectorAll(`${sel} [${attr}]`).forEach(b => b.onclick = () => { set(b.getAttribute(attr)); el.querySelectorAll(`${sel} [${attr}]`).forEach(x => x.classList.toggle("on", x === b)); render(); buzz(4); });
