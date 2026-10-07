@@ -25,6 +25,17 @@ Source: `../learning-kb/EXPORT-learning-kb-for-claude-project.md` (David's menta
 - Interleave neighbors once each one is known. Perceptual skills learn from many varied examples.
 - Never promise anything from the KB's anti-claims list (§3). Example: the "jungle tribe with many greens" story is a misreported TV demo, so don't use it. The Russian blues study (Winawer 2007) is real but the effect is modest.
 
+## Color myths: never state these as fact
+Checked against 18 modern color books (private notes in `../color-kb/books/`, see `CONFLICTS.md` there). Mention a myth only to correct it.
+- **Names and origins:** Newton's seven rainbow colors are natural bands (he chose seven to match the musical scale). Mauveine was the first synthetic dye (it was the first aniline dye and the first big hit; picric acid came earlier). Drebbel found tin-scarlet by spilling acid (disputed). "Guarantee" comes from garance. Isabelline is Archduchess Isabella's unwashed linen. Indigo is corrosive or poisonous (woad growers' propaganda). Prussian blue releases cyanide.
+- **Gems and minerals:** Nero watched games through an emerald like sunglasses (disputed). Amber holds dinosaur DNA. Celadon detects poison. The legendary Chai ware exists. The flecks in lapis are gold (they're pyrite).
+- **Pigments and poison:** Arsenic wallpaper killed Napoleon (unproven). Indian yellow was banned for cruelty (no record of a ban; the mango-cow story is unverified). Chartres blue is a lost recipe. Bone black came from human corpses (mummy brown did). Rubens used cobalt blue.
+- **Psychology and perception:** Baker-Miller pink calms aggression. Bulls are enraged by red. Pink was always for girls. A red room drives prisoners mad. Green paper is easiest to read (report the old belief as a belief). The Greeks couldn't see blue. Impressionists saw violet from afterimages or ultraviolet. The Inuit have dozens of snow words.
+- **Culture and history:** Greek statues were white. Le Corbusier's architecture was all white. Santa's red suit comes from Coca-Cola. Queen Victoria started the white wedding dress. Medieval prostitutes wore a golden belt. Red in heraldry honors Crusader blood. Jeans were always rebel clothing. Ancient painters used only four colors. Napoleon started Empire green. Molière died on stage in green. The Tuareg name means "abandoned by God". The universe is turquoise (a 2002 error, corrected to beige).
+- **Books disagree, so hedge or leave out:** when cardinals got scarlet (say "in the 1460s, when Byzantine purple ran out"), the dates of the "Mauve Decade", who invented magenta (usually credited to Verguin), whether Caesar's Britons painted themselves with woad, the origin of "denim", and where synthetic vermilion began.
+- **Birren (1950) claims marked "contested"** are old opinion, not modern evidence.
+- **Book rule:** the color books are copyrighted. Write original prose from their facts; quotes stay rare, attributed and under 15 words. Never copy anything from `../color-kb/books/` into this repo.
+
 ## Tech
 - Static site, no build tools needed yet. Deploy on GitHub Pages (same as `alter/`).
 - `prototype/` holds the last cloud prototype (v3, "Play + modes"). David rejected its structure, but it has reusable parts: Lab/ΔE color math, a lookalike finder, color-family classification, a spaced-repetition scheduler, a hex gym and the color data (~165 colors with stories and painting hooks in `prototype/src/data.js`). Rebuild with `prototype/build.sh`.

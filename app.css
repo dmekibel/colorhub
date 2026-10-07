@@ -573,8 +573,10 @@ img{transition:opacity .6s var(--ease)}
 .pin,.lab,.pchip,.skill,.play-row,.kin,.pal-name,.h-item{transition:opacity .25s,transform .4s var(--spring)}
 .pin:active,.lab:active,.skill:active,.play-row:active,.kin:active,.h-item:active{transform:scale(.97);opacity:.8}
 @supports (animation-timeline: view()){
-  .col .swatch h2{animation:rise linear both;animation-timeline:view();animation-range:entry 10% cover 45%}
-  .col .compare,.col .diff{animation:rise linear both;animation-timeline:view();animation-range:entry 20% cover 50%}
+  /* timed on the whole page, so text near the bottom of a card has finished rising once the card snaps into place */
+  .page.col{view-timeline:--pg y}
+  .col .swatch h2{animation:rise linear both;animation-timeline:--pg;animation-range:entry 10% entry 80%}
+  .col .compare,.col .diff,.col .origin{animation:rise linear both;animation-timeline:--pg;animation-range:entry 30% entry 100%}
 }
 @keyframes rise{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){

@@ -137,12 +137,12 @@ window.WIKI_COLORS = {
     { k: "history", text: "Purple was the color of snail slime and emperors. [[tyrian-purple|Tyrian purple]] came from murex sea snails. In 1909 the chemist Paul Friedländer crushed 12,000 of them to get 1.4 grams of pure dye. Diocletian's price edict of 301 CE capped a pound of purple silk at 150,000 denarii, the same price it set for a lion. See [[royal-purple]]." },
     { k: "language", text: "Purple is named after a shellfish. Latin purpura and Greek porphyra meant both the murex snail and its dye. Byzantine children born to a reigning emperor were called porphyrogennetos, born in the purple, after the palace chamber where empresses gave birth." },
     { k: "science", text: "Purple is a color your brain makes up. No single wavelength looks purple; you see it when red and blue light arrive together. [[Violet]], at the short end of the [[spectrum]], is a real rainbow color, so purple and violet are not quite the same thing. See [[extra-spectral]]." },
-    { k: "symbolism", text: "Purple is the Church's color of waiting and penance, worn in Advent and Lent ([[liturgical-colors]]). In 1856, 18-year-old [[william-perkin|William Perkin]], trying to make quinine, made [[mauveine]] instead: the first synthetic dye, and the end of purple as a privilege." }
+    { k: "symbolism", text: "Purple is the Church's color of waiting and penance, worn in Advent and Lent ([[liturgical-colors]]). In 1856, 18-year-old [[william-perkin|William Perkin]], trying to make quinine, made [[mauveine]] instead: the first coal-tar dye to become a hit, and the end of purple as a privilege." }
   ],
   related: [
     { to: "Indigo", why: "Tyrian purple is indigo's molecule with two bromine atoms added" },
     { to: "Byzantium", why: "Named for the empire that made purple its imperial monopoly" },
-    { to: "Mauve", why: "The first synthetic dye made purple cheap in 1856" },
+    { to: "Mauve", why: "Perkin's coal-tar dye made purple cheap in 1856" },
     { to: "Violet", why: "The rainbow's real end; purple has no wavelength of its own" },
     { to: "Yellow", why: "Imperial purple in Rome, imperial yellow in Qing China" }
   ],
@@ -251,7 +251,7 @@ window.WIKI_COLORS = {
     { k: "language", text: "White and wheat share a root. Wheat is the white grain, named for its pale flour, and both words go back to an ancient root meaning to shine." },
     { k: "science", text: "In 1666 [[isaac-newton|Newton]] began splitting sunlight with prisms and showed that white is not pure: it is every color at once ([[opticks]], [[spectrum]]). [[goethe|Goethe]] spent years arguing he was wrong. [[wittgenstein|Wittgenstein]] asked a stranger question in [[remarks-on-colour|Remarks on Colour]]: why can glass be clear and green, but never clear and white?" },
     { k: "history", text: "For about two thousand years, European painters' main white was [[lead-white|lead white]]: brilliant, flexible and poisonous. Zinc white arrived in the 1800s. Titanium white, made in bulk from 1916, reached artists' tubes in 1921 and is now the standard." },
-    { k: "culture", text: "Queen Victoria married in white silk in 1840, breaking with royal custom, and brides across the West followed. In China, white is the traditional color of [[mourning-colors|mourning]], and Hindu widows in India have long worn white." },
+    { k: "culture", text: "Queen Victoria married in white silk in 1840 and made white bridal gowns fashionable, though French and Italian brides already wore white in the 1830s. In China, white is the traditional color of [[mourning-colors|mourning]], and Hindu widows in India have long worn white." },
     { k: "symbolism", text: "[[alchemy|Alchemy]]'s second stage, albedo, washes the blackened matter white. [[heraldry|Heraldry]] calls white argent, silver. The Church wears white at Easter and Christmas ([[liturgical-colors]])." }
   ],
   related: [
@@ -706,7 +706,7 @@ window.WIKI_COLORS = {
   named: "place",
   since: { year: 1859, what: "Fuchsine dye made in France, soon renamed magenta", approx: true },
   facets: [
-    { k: "history", text: "Magenta is named after a battle. Around 1859 the French chemist François-Emmanuel Verguin made a vivid aniline dye and called it fuchsine, after the fuchsia flower. On 4 June 1859 France and Sardinia beat Austria near the Italian town of Magenta, and British chemists renamed the dye after the victory. It followed [[mauveine]] in the first wave of synthetic dyes." },
+    { k: "history", text: "Magenta is named after a battle. Around 1859 a vivid aniline dye called fuchsine, after the fuchsia flower, appeared in France. It is usually credited to the chemist François-Emmanuel Verguin. On 4 June 1859 France and Sardinia beat Austria near the Italian town of Magenta, and British chemists renamed the dye after the victory. It followed [[mauveine]] in the first wave of synthetic dyes." },
     { k: "science", text: "Magenta isn't in the rainbow. No single wavelength looks magenta; your brain builds it when red and blue light arrive without green. On the light wheel it sits opposite [[Green|green]]. See [[extra-spectral]]." },
     { k: "design", text: "Magenta is one of the printing inks in CMYK, with [[Aqua|cyan]] and [[Yellow|yellow]]. Deutsche Telekom trademarked its magenta and has gone after companies in unrelated fields, such as the insurer Lemonade. See [[color-trademarks]]." }
   ],
@@ -1144,7 +1144,7 @@ window.WIKI_COLORS = {
 
 "Mauve": {
   named: "flower",
-  since: { year: 1856, what: "Perkin makes mauveine, the first synthetic dye", approx: false },
+  since: { year: 1856, what: "Perkin makes mauveine, the first aniline dye", approx: false },
   facets: [
     { k: "history", text: "In 1856, eighteen-year-old [[william-perkin|William Perkin]] tried to make quinine from coal-tar chemicals and got a black sludge. Cleaning the flask with alcohol, he saw purple. He patented the dye, opened a factory the next year, and in 1859 it was renamed mauve, French for the mallow flower. See [[mauveine]]." },
     { k: "culture", text: "Mauve mania followed. Between 1859 and 1861 fashionable Britain wore it everywhere, and Punch joked that 'the Mauve Measles' were spreading. By 1870 newer synthetic dyes had pushed it aside, but chemistry had become the new source of color." }
