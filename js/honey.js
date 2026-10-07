@@ -141,7 +141,7 @@ function honeyWrap(ctx, name) {
 function honeyWhere(it) {
   if (it.c) {
     const u = UNITS.find(u => u.colors.includes(it.c)), s = it.c.id && S.cards[it.c.id];
-    return [u ? `Unit ${u.i + 1} of the 101` : "A basic word", s ? (s.own ? "you know it" : "learning") : ""].filter(Boolean).join(" · ");
+    return [u ? `Unit ${u.i + 1} of the 101` : "A basic word", s ? (isMine(s) ? "you know it" : "learning") : ""].filter(Boolean).join(" · ");
   }
   return (it.lib && srcLine(it.lib)) || "Name library";
 }
@@ -219,7 +219,7 @@ function honeycomb(host, opts = {}) {
       ctx.beginPath(); ctx.arc(b.x, b.y, r, 0, 6.2832); ctx.fillStyle = it.h; ctx.fill();
       if (d < 8) continue;
       if (it.L < 20) { ctx.lineWidth = 1; ctx.strokeStyle = "rgba(236,232,223,.14)"; ctx.stroke(); }
-      const own = it.c && it.c.id && S.cards[it.c.id] && S.cards[it.c.id].own;
+      const own = it.c && it.c.id && isMine(S.cards[it.c.id]);
       if (own && d > 16) { ctx.beginPath(); ctx.arc(b.x, b.y, r + 3, 0, 6.2832); ctx.lineWidth = 1.2; ctx.strokeStyle = "rgba(236,232,223,.85)"; ctx.stroke(); }
       const la = Math.min(1, Math.max(0, (d - 50) / 6));
       if (la > 0) {

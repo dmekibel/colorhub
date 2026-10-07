@@ -1,0 +1,44 @@
+/* The viewing booth: where a swatch is judged (the flashcard deck, meet-the-unit pages, the color of the day,
+   and every Train drill), the surround is a neutral mid-grey instead of the warm near-black used elsewhere.
+   Why: a color is judged against what surrounds it. On near-black, browns, olives and other dark colors read
+   lighter and brighter than they are (brown only looks brown next to something lighter), and pale colors glare.
+   A mid-grey around L* 40 (#5F5F5F) is the painter's and photographer's grey card idea: it pushes no hue and
+   sits near the middle of the lightness range. See DESIGN.md ("Surround"). The grain is already off here (html.booth).
+   Text tokens are re-tuned so captions stay readable on grey (ink 5.6:1, soft 4.6:1). */
+html:has(#app > .screen.deck), html:has(#app > .screen.meet),
+html:has(#app > .screen.drill), html:has(#app > .screen.daily){
+  --ground:#5F5F5F; --lift:#676767; --lift-2:#6E6E6E;
+  --ink:#F4F4F2; --soft:#E0E0DD; --faint:#D6D6D2;
+  --rule:rgba(255,255,255,.24); --rule-2:rgba(255,255,255,.9);
+  --good:#B9F0CB; --bad:#FFC2B4;
+  --booth:#5F5F5F;
+}
+/* drop shadows read as dark halos on grey; keep them soft */
+html:has(#app > .screen.deck) .card{box-shadow:0 30px 60px -36px rgba(0,0,0,.55)}
+html:has(#app > .screen.meet) .fan i{box-shadow:0 14px 30px -14px rgba(0,0,0,.5)}
+
+/* ---------- the screen check (js/accuracy.js): shown on the booth grey, so the test greys sit on neutral ---------- */
+html:has(#app > .screen.scr){--ground:#5F5F5F;--ink:#F4F4F2;--soft:#E0E0DD;--faint:#D6D6D2;--rule:rgba(255,255,255,.24);--rule-2:rgba(255,255,255,.9)}
+.scr-h{font:400 clamp(48px,14vw,64px)/.9 var(--serif);letter-spacing:-.03em;margin:22px 0 12px}
+.scr-h em{font-style:italic}
+.scr-lede{color:var(--soft);font-size:15px;max-width:38ch;text-wrap:pretty}
+.scr-steps{list-style:none;counter-reset:scr;margin:20px 0 0;padding:0;border-top:1px solid var(--rule)}
+.scr-steps li{counter-increment:scr;display:grid;grid-template-columns:26px 1fr;column-gap:8px;padding:12px 0;border-bottom:1px solid var(--rule)}
+.scr-steps li::before{content:counter(scr);grid-row:1 / 3;font:500 11px/1.6 var(--mono);color:var(--soft)}
+.scr-steps b{font-weight:500;font-size:15.5px}
+.scr-steps span{color:var(--soft);font-size:13.5px;line-height:1.45}
+.scr-other{color:var(--soft);font-size:13.5px;margin-top:12px}
+.scr-cap{margin:24px 0 10px;color:var(--ink)}
+.scr-greys,.scr-darks{display:grid;grid-template-columns:repeat(5,1fr);gap:2px}
+.scr-greys i{aspect-ratio:1;background:var(--c)}
+.scr-darks{background:#000;padding:10px;gap:10px}
+.scr-darks i{aspect-ratio:1;background:var(--c)}
+.scr-note{color:var(--soft);font-size:13px;margin-top:8px;max-width:42ch}
+.scr-acts{margin-top:26px}
+/* reminder chip under the check-in card */
+.scr-chip{display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:8px 12px 7px;border:1px solid var(--rule);border-radius:99px;font:500 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--soft)}
+.scr-chip i{width:6px;height:6px;border-radius:50%;background:var(--bad)}
+/* camera: the white-balance button in the top bar */
+.eye-wb{font:600 11px/1 var(--mono);letter-spacing:.08em}
+.eye-wb.on{background:#F3F3F1;color:#141311}
+.eye-wb.arm{box-shadow:inset 0 0 0 2px #F3F3F1}

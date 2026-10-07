@@ -14,11 +14,12 @@
 // "temp" (warmer or cooler) was retired; its history stays in storage.
 const SKILLS = {
   hue:     { name: "Odd one out", what: "Find the tile that's slightly off", unit: "ΔE", start: 12, top: .8, floor: .5, trials: 12,
-    why: "Your eye splits yellows finely but deep blues and deep reds coarsely, so this score moves with the hue." },
+    why: "Scores use CIEDE2000, which already allows for the eye seeing some hues more finely than others, so a 2 should be about as hard in yellows as in deep blues." },
   value:   { name: "Which is lighter?", what: "Two different hues: tap the lighter", unit: "ΔL*", start: 14, top: 1, floor: .5, trials: 12,
-    why: "In Josef Albers's classes, students asked which of two colors was darker were wrong about 60% of the time." },
-  neutral: { name: "Find neutral", what: "Slide until the square looks pure grey", unit: "ΔE", start: 12, top: 1, trials: 5, kind: "adjust", ok: 3,
-    why: "A colored ground tints a grey toward its opposite (simultaneous contrast), so true grey rarely looks grey on it." },
+    why: "Josef Albers reported that his students, even advanced painters, picked wrong about 60% of the time when asked which of two colors was darker.",
+    src: "Josef Albers, Interaction of Color (1963), from his own classes over several years; a teacher's report, not a controlled study" },
+  neutral: { name: "Find neutral", what: "Make the square truly grey, even though the ground tints it", unit: "ΔE", start: 12, top: 1, trials: 5, kind: "adjust", ok: 3,
+    why: "A colored ground tints a grey toward its opposite (simultaneous contrast), so true grey rarely looks grey on it. The skill is to see past that push." },
   vanish:  { name: "Make it vanish", what: "Match the disc's lightness to the ground", unit: "ΔL*", start: 15, top: 1, trials: 5, kind: "adjust", ok: 3,
     why: "Monet's sun in Impression, Sunrise is about as light as the clouds around it, so it seems to glow; in a black-and-white copy it nearly disappears." },
   match:   { name: "One color, two looks", what: "Make the lower square match the upper", unit: "ΔE", start: 15, top: 1.5, trials: 4, kind: "adjust", ok: 4,

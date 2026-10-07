@@ -10,11 +10,15 @@ const seededRnd = seed => () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t
 
 function challengeRounds(k = today()) {
   const rnd = seededRnd(hash("challenge" + k));
-  return CH_LEVELS.map(d => {
+  return CH_LEVELS.map((d, i) => {
     const base = ALL[Math.floor(rnd() * ALL.length)], L0 = tame(lab(base.h));
     const odd = offset(L0, d, [.6, 1, 1], rnd) || offset(tame(L0.map((x, i) => i ? x * .8 : x)), d, [.6, 1, 1], rnd) || L0;
-    const n = d > 6 ? 3 : d > 2.5 ? 4 : 5;
-    return { d, base: labHex(...L0), odd: labHex(...odd), n, at: Math.floor(rnd() * n * n), fam: family(base.h) };
+    const n = d > 6 ? 3 : d > 2.5 ? 4 : 5, at = Math.floor(rnd() * n * n);
+    // score what's drawn (js/accuracy.js): act is the difference between the two hex codes on screen. When rounding
+    // moved it more than 15% off the round's level, the pair is redrawn from its own seed, so the rest of the set holds.
+    let a = labHex(...L0), b = labHex(...odd), act = de2000(a, b);
+    if (b === a || act < SHOWN_MIN || Math.abs(act - d) > d * .15) { const got = shownOffset(L0, d, [.6, 1, 1], seededRnd(hash("challenge-shown" + k + i))); if (got) ({ a, b, act } = got); }
+    return { d, act, base: a, odd: b, n, at, fam: family(base.h) };
   });
 }
 const chState = () => (S.challenge = S.challenge || {});
@@ -25,19 +29,10 @@ function chStreak() {
   while (chState()[k]) { n++; k = addDays(k, -1); }
   return n;
 }
-// the hardest round you got right, as a color difference
-const chSharpest = hits => { let s = null; hits.forEach((h, i) => { if (h) s = CH_LEVELS[i]; }); return s; };
+// the smallest difference you got right, as drawn on screen
+const chSharpest = (hits, rounds = challengeRounds()) => { let s = null; hits.forEach((h, i) => { if (h && rounds[i] && (s == null || rounds[i].act < s)) s = rounds[i].act; }); return s; };
 
-// the Gym's top card: today's six base colors, filled in once you've played
-function challengeCard() {
-  const r = challengeRounds(), done = chToday();
-  return `<button class="ch-card${done ? " done" : ""}" data-challenge>
-    <span class="ch-top"><span class="eyebrow">Daily · No. ${chNumber()}</span><span class="eyebrow">${chStreak() ? `${chStreak()}-day streak` : "Same for everyone"}</span></span>
-    <span class="ch-row">${r.map((x, i) => `<i style="--c:${x.base}" class="${done ? (done.hits[i] ? "hit" : "miss") : ""}"></i>`).join("")}</span>
-    <span class="ch-foot"><b>${done ? `${done.hits.filter(Boolean).length} of 6${chSharpest(done.hits) ? ` · you saw ${fmt(chSharpest(done.hits))} ΔE` : ""}` : "Six tiles, each one harder to spot"}</b>${done ? "<em>Share</em>" : ICON.arrow}</span>
-  </button>`;
-}
-
+// (Today shows the challenge as one of "Today's three" tiles: see home() in learn.js.)
 function challenge() {
   if (chToday()) return challengeDone();
   const rounds = challengeRounds(), hits = [];
@@ -61,8 +56,8 @@ function challenge() {
   const round = () => {
     if (i >= rounds.length) return finish();
     const r = rounds[i], cells = r.n * r.n;
-    el.querySelector("#ey").textContent = `Round ${i + 1} of 6 · ${fmt(r.d)} ΔE`;
-    el.querySelector("#lvl").textContent = fmt(r.d);
+    el.querySelector("#ey").textContent = `Round ${i + 1} of 6 · ${fmt(r.act)} ΔE`;
+    el.querySelector("#lvl").textContent = fmt(r.act);
     foot.innerHTML = "";
     stage.innerHTML = `<div class="grid" style="--n:${r.n}">${Array.from({ length: cells }, (_, j) => `<button class="tile" data-i="${j}" style="--c:${j === r.at ? r.odd : r.base}" aria-label="Tile ${j + 1}"></button>`).join("")}</div>`;
     let done = false;
@@ -81,16 +76,16 @@ function challenge() {
 }
 
 function challengeDone(fresh) {
-  const st = chToday(), rounds = challengeRounds(), got = st.hits.filter(Boolean).length, sharp = chSharpest(st.hits);
+  const st = chToday(), rounds = challengeRounds(), got = st.hits.filter(Boolean).length, sharp = chSharpest(st.hits, rounds);
   const verdict = got === 6 ? "A perfect <em>eye.</em>" : got >= 4 ? "Sharp <em>eyes.</em>" : got >= 2 ? "Good <em>start.</em>" : "Tough <em>one.</em>";
   const el = show(`
     <div style="flex:1"></div>
     <p class="eyebrow">Daily challenge · No. ${chNumber()}</p>
     <h1>${verdict}</h1>
-    <div class="ch-grid">${rounds.map((r, i) => `<span class="${st.hits[i] ? "hit" : "miss"}"><i style="--c:${r.base}"></i><em class="mono">${fmt(r.d)}</em></span>`).join("")}</div>
+    <div class="ch-grid">${rounds.map((r, i) => `<span class="${st.hits[i] ? "hit" : "miss"}"><i style="--c:${r.base}"></i><em class="mono">${fmt(r.act)}</em></span>`).join("")}</div>
     <p class="lede">${got} of 6 right.${sharp ? ` The smallest difference you spotted was <b>${fmt(sharp)} ΔE</b>; about 1 is the limit for most people side by side.` : " Every round shrinks the difference, so the last ones are hard for anyone."} ${chStreak() > 1 ? `${chStreak()} days in a row.` : ""} A new set comes tomorrow.</p>
     <div class="stack"><button class="btn" data-share>Share your grid ${ICON.share}</button>
-    <button class="btn ghost" data-home>Back to the Gym</button></div>
+    <button class="btn ghost" data-home>Back to ${S.tab === "gym" ? "Train" : "Today"}</button></div>
   `, "result");
   el.querySelector("[data-home]").onclick = () => go(S.tab || "gym");
   el.querySelector("[data-share]").onclick = () => shareChallenge(st.hits, sharp);
@@ -99,7 +94,7 @@ function challengeDone(fresh) {
 
 function shareChallenge(hits, sharp) {
   const text = `ColorHub daily No. ${chNumber()}\n${hits.map(h => h ? "🟩" : "⬛").join("")} ${hits.filter(Boolean).length}/6${sharp ? ` · saw ${fmt(sharp)} ΔE` : ""}`;
-  const url = location.origin + location.pathname;
+  const url = routeURL("challenge");
   if (navigator.share) return navigator.share({ text, url }).catch(() => {});
   try { navigator.clipboard.writeText(text + "\n" + url); toast("Copied your grid"); } catch (e) {}
 }
@@ -162,7 +157,7 @@ function eyeReport() {
     ${TRAIN_KEYS.map(station).join("")}
     ${famE.length ? `<section class="eye-sec"><div class="sec-head"><b>By color family</b><span>odd one out · shorter is sharper</span></div>
       <div class="eye-fams">${famE.sort((a, b) => a[1] - b[1]).map(([f, v]) => `<div><span>${esc(f)}</span><i style="--c:${FAM_HEX[f] || "#888"};--w:${(v / famMax * 100).toFixed(0)}%"></i><b class="mono">${fmt(v)}</b></div>`).join("")}</div>
-      <p class="x-sub">Most people see smaller differences in some families than others. Your weakest family is where practice pays most.</p></section>` : ""}
+      <p class="x-sub">Scores are CIEDE2000, which already evens out most of the eye's differences between hues, so a family that stands out is worth extra practice.</p></section>` : ""}
     <section class="eye-sec"><div class="sec-head"><b>Daily challenge</b><span>${ch.length ? `${ch.length} played · ${chStreak()}-day streak` : "not played yet"}</span></div>
       ${ch.length ? `<div class="eye-ch">${ch.slice(-28).map(([d, v]) => `<span title="${esc(d)}">${v.hits.map(h => `<i class="${h ? "hit" : ""}"></i>`).join("")}</span>`).join("")}</div>` : `<p class="x-sub">Six tiles a day, the same for everyone.</p>`}</section>
     <p class="fine">Practice sharpens these particular judgments. It isn't a claim about general brain training.</p>

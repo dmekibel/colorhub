@@ -27,7 +27,7 @@ function peek(c) {
   box.className = "peek"; box.setAttribute("role", "dialog"); box.setAttribute("aria-label", "About " + c.n);
   box.innerHTML = `
     <div class="pk-grab"></div>
-    <div class="pk-hero" style="--c:${c.h}" data-ink="${ink(c.h)}"><span class="mono">${c.h}</span><h2>${esc(c.n)}</h2>${st ? `<small>${st.own ? "Yours" : "Learning"}</small>` : ""}</div>
+    <div class="pk-hero" style="--c:${c.h}" data-ink="${ink(c.h)}"><span class="mono">${c.h}</span><h2>${esc(c.n)}</h2>${st ? `<small>${isMine(st) ? "Yours" : "Learning"}</small>` : ""}</div>
     ${nb && c.d ? `<div class="pk-vs"><span class="pair"><i style="--c:${c.h}"></i><i style="--c:${nb.h}"></i></span><p>${esc(c.d)}</p></div>` : ""}
     ${c.o ? `<p class="pk-lead">${esc(c.o)}</p>` : ""}
     ${typeof figHTML === "function" ? figHTML(c.n) : ""}
@@ -37,11 +37,11 @@ function peek(c) {
     ${rel.length ? `<section class="pk-sec"><h3>Kin</h3>${rel.map(r => `<div class="kin"><i style="--c:${r.x.h}"></i><b>${esc(r.x.n)}</b><span>${esc(r.why)}</span></div>`).join("")}</section>` : ""}
     <div class="pk-foot"><button class="btn" data-back>Back to learning ${ICON.arrow}</button></div>`;
   document.body.appendChild(box);
-  document.documentElement.classList.add("sheet-open");
+  lockScroll();
   const keyWas = onKey;
   const close = () => {
     if (!box.isConnected) return;
-    onKey = keyWas; document.documentElement.classList.remove("sheet-open");
+    onKey = keyWas; unlockScroll();
     if (reduceMotion) return box.remove();
     box.animate([{ transform: getComputedStyle(box).transform }, { transform: "translateY(100%)" }], { duration: 260, easing: "cubic-bezier(.3,0,.8,.2)", fill: "forwards" }).onfinish = () => box.remove();
     setTimeout(() => box.remove(), 400);   // even if animations are paused (background tab)
