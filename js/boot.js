@@ -34,6 +34,15 @@ function shot(name) {
     case "learnit": return hmLearnitShot(arg || "meet");
     case "gym": return go("gym");
     case "studio": return go("studio");
+    // a Studio photo palette, for design review (ROADMAP §17 job #1 screenshots): a synthetic canvas run
+    // through the real extractPalette()/studioFromImage(), never a saved or uploaded photo
+    case "studiopv": {
+      const c = document.createElement("canvas"); c.width = 300; c.height = 200;
+      const x = c.getContext("2d");
+      [["#2F6F4E", 0, 0, 160, 110], ["#C8553D", 160, 0, 140, 110], ["#E0A458", 0, 110, 100, 90],
+       ["#3F7C8C", 100, 110, 100, 90], ["#8C5E58", 200, 110, 100, 90]].forEach(([h, bx, by, bw, bh]) => { x.fillStyle = h; x.fillRect(bx, by, bw, bh); });
+      return studioFromImage(c, "From a photo");
+    }
     case "explore": S.lens = arg || "all"; return go("explore");
     case "meet": meet(UNITS[1]); if (arg) later2(() => { const p = document.getElementById("pager"); p.scrollTop = p.clientHeight * +arg; }, 300); return;
     case "deck": deck("learn", { unit: UNITS[1] }); later2(() => dispatchEvent(new KeyboardEvent("keydown", { key: " " })), 600); return;

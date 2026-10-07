@@ -17,8 +17,6 @@ document.addEventListener("click", e => {
   else nameSheet(hex);
 }, true);
 
-const swCloseness = de => de < VERY_CLOSE_DE ? "very close" : de < NEAR_DE ? "close" : "near";
-
 // The color link sheet: nameOf()'s reading of the color, the nearest 3-5 core words (each tappable, so you can
 // walk from one name to a neighbor), its synonyms, the look-alike ring among the taught 101 (js/lookalikes.js),
 // and whatever actions make sense for this particular color.
@@ -29,6 +27,7 @@ function nameSheet(hex) {
   const taught = BYNAME.get(nm.n.toLowerCase());
   const exact = !!taught && nm.de < VERY_CLOSE_DE;
   const also = (nm.near[0] && nm.near[0].entry && nm.near[0].entry.also) || [];
+  const notes = (nm.near[0] && nm.near[0].entry && nm.near[0].entry.notes) || [];
   const likes = typeof lookalikes === "function" ? lookalikes({ n: nm.n, h: hex }, 5) : [];
   // every one of the ~1,000 colors should lead to a deep article: the nearest 1-2 of the 101 taught colors
   // (the ones with full pages) get one quiet line, even when the sheet's own name isn't among them.
@@ -36,8 +35,9 @@ function nameSheet(hex) {
   const { sh, close } = sheet(`
     <div class="pk-hero" style="--c:${hex}" data-ink="${ink(hex)}"><span class="mono">${hex}</span><h2>${esc(nm.text || nm.n)}</h2>${!nm.met && !nm.between ? `<small>New word</small>` : ""}</div>
     ${nearApp.length ? `<p class="fine sw-close-app">Close to ${nearApp.map(c => `<button class="wl" data-sw-app="${esc(c.n)}">${esc(c.n)}</button>`).join(nearApp.length > 1 ? " and " : "")} · read ${nearApp.length > 1 ? "their stories" : "its story"}</p>` : ""}
-    <div class="lk-list" data-sw-near>${nm.near.map((x, i) => `<button class="lk-row" data-sw-i="${i}"><i style="--c:${x.h}"></i><b>${esc(x.n)}</b><span>${swCloseness(x.de)} · ΔE ${x.de.toFixed(1)}</span></button>`).join("")}</div>
+    <div class="lk-list" data-sw-near>${nm.near.map((x, i) => `<button class="lk-row" data-sw-i="${i}"><i style="--c:${x.h}"></i><b>${esc(x.n)}</b><span>${closeness(x.de)} · ΔE ${x.de.toFixed(1)}</span></button>`).join("")}</div>
     ${also.length ? `<p class="fine">Also called ${also.map(esc).join(", ")}.</p>` : ""}
+    ${notes.length ? `<p class="fine sw-jp">${jpNoteLine(notes)}</p>` : ""}
     ${likes.length ? `<div class="sec-head"><b>Look-alikes</b><span>among the 101 taught colors</span></div>
       <div class="lk-list">${likes.map(o => `<button class="lk-row" data-sw-hex="${o.x.h}" data-sw-name="${esc(o.x.n)}"><i style="--c:${o.x.h}"></i><b>${esc(o.x.n)}</b><span>${esc(lookDiff({ h: hex, n: nm.n }, o.x))}</span></button>`).join("")}</div>` : ""}
     <div class="sw-acts">

@@ -99,7 +99,7 @@ function namePage(entry, push = true) {
       ${taught && typeof hmLearnIt === "function" ? `<button class="c-learnit" data-learnit>${ICON.bolt} Learn it <small>~2 min</small></button>` : ""}
     </div>
     ${also.length ? `<p class="fine np-also">Also called ${also.map(esc).join(", ")}.</p>` : ""}
-    ${notes.length ? `<p class="fine np-jp">${notes.map(j => `${esc(j.jp || "")}${j.kanji ? ` (${esc(j.kanji)})` : ""}${j.meaning ? ` — ${esc(j.meaning)}` : ""}`).join("; ")}</p>` : ""}
+    ${notes.length ? `<p class="fine np-jp">${jpNoteLine(notes)}</p>` : ""}
     ${fam ? npFamilyHTML(fam) : ""}
     <section class="gl-in" data-npgal></section>
     <div class="c-poems"></div>

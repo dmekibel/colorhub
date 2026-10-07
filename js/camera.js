@@ -57,7 +57,7 @@ function eye() {
     $("#big").textContent = nm.text;
     $("#src").textContent = nm.met ? `A lesson word · ${lessonStatus(nm.n)}` : nm.de < VERY_CLOSE_DE ? "Nearest of about 1,000 names" : `Nearest of about 1,000 names · ΔE ${nm.de}`;
     // second line: the nearest of the colors the lessons teach (hidden when the big name already is one)
-    $("#mine").innerHTML = m && m.n.toLowerCase() !== nm.n.toLowerCase() ? `<i style="--c:${m.h}" data-swatch="${m.h}"></i><span>Closest lesson word <b>${esc(m.n)}</b></span><em>${lessonStatus(m.n)}</em>` : "";
+    $("#mine").innerHTML = m && m.n.toLowerCase() !== nm.n.toLowerCase() ? `<i style="--c:${m.h}" data-swatch="${m.h}"></i><span>Nearest lesson word <b>${esc(m.n)}</b></span><em>${lessonStatus(m.n)}</em>` : "";
   };
   // live: sample about eight times a second and ease between readings so the name doesn't flicker
   const tick = t => {
