@@ -64,3 +64,19 @@ Rules:
 7. **Two levels deep at most** from a tab, and every inner screen has a way straight back to its tab.
 8. **Profile reorders, never hides.** A painter sees paint things first; a designer sees codes first; nobody loses anything.
 9. **Prune.** If a tile is rarely opened, it moves under "More" or merges into another tool.
+
+## The honeycomb as the home screen (built 2026-10-08, ROADMAP.md §12)
+The Today tab now opens on the full-screen honeycomb (js/home.js), not the flat Today list: the color is the
+interface, taken to its limit. Chrome (the title/search/camera/dice row) fades while you drag and returns on a
+tap or a pause; the honeycomb itself stays pure (true colors, no rings, no dimming — judging a color needs to see
+it plainly). The title is also the progress switch: tap for every set (reusing js/colorsets.js's COLOR_SETS,
+extended with three honest, S.cards-driven views — Learned, Learning, Not met yet), or swipe it sideways to flick
+between the four views David asked for. A bottom sheet, always reachable by its handle, holds the rest: pulled up
+partway it's the old Today card (Continue, Challenge, today's color, a Train suggestion); pulled all the way it's
+four doors to Learn (the classic Today screen), Train, Explore and Studio. Tapping a bubble opens that color's
+full page directly, with the same chip-grows-into-the-swatch morph as everywhere else; back returns to the
+honeycomb exactly where you were. Every color page now carries a **Learn it** button: an instant ~2-minute lesson
+(js/learnit.js) built from that color and its closest taught look-alikes — meet, tell apart, sort, Pick it, one
+memory round — ending with every color in it freshly in spaced review. Inside Train, Explore and Studio, the
+brand mark at the top-left of the header is the one consistent way back to the honeycomb (tabHead, js/core.js) —
+simpler than adding a second button next to it on every tab.

@@ -293,8 +293,10 @@ function placed(log) {
     <p class="lede">${esc(lede)}</p>
     <button class="btn" data-go>Start learning ${ICON.arrow}</button>
   `, "result");
-  el.querySelector("[data-go]").onclick = home;
-  onKey = e => { if (e.key === "Enter") home(); };
+  // Straight to the honeycomb home (ROADMAP.md §12): "First tap opens its page; first Learn it is guided."
+  const goHome = () => go("learn");
+  el.querySelector("[data-go]").onclick = goHome;
+  onKey = e => { if (e.key === "Enter") goHome(); };
 }
 
 // ======================================================================

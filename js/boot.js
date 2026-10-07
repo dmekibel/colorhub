@@ -28,6 +28,10 @@ function shot(name) {
     case "how": return how();
     case "profile": return profileSetup(() => go("gym"), { why: "Before you train" });
     case "learn": return go("learn");
+    // the honeycomb home (js/home.js): home, home:sheet, home:sheetfull, home:views, home:search
+    case "home": return hmShot(arg);
+    // the Learn it mini-lesson (js/learnit.js): learnit:<meet|tell|sort|pick|memory|done>
+    case "learnit": return hmLearnitShot(arg || "meet");
     case "gym": return go("gym");
     case "studio": return go("studio");
     case "explore": S.lens = arg || "all"; return go("explore");
