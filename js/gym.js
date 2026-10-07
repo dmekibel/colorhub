@@ -195,7 +195,7 @@ function gymHome() {
     return `<button class="gs-tile" data-st="${k}">
       ${stationArt(k)}
       <span class="gs-name">${esc(sk.name)}</span>
-      <span class="gs-meta"><span>${s.lv ? `Level ${s.lv}` : "New"}</span>${spark(skillState(k).hist)}</span>
+      <span class="gs-meta"><span>${s.lv ? `Level ${s.lv}` : "New"}</span></span>
       ${ladder(s.lv)}
       <span class="gs-best">${esc(s.best)}</span>
     </button>`;
