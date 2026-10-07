@@ -49,20 +49,25 @@ function diskColor(x, y) {
 function studio() {
   const saved = S.palettes || [];
   const el = show(`
-    <header class="bar"><div class="brand">${LOGO}<span>ColorHub</span></div><span class="eyebrow">Make</span></header>
-    <p class="eyebrow kick">Palettes and tools</p>
-    <h1 class="tab-title">The <em>Studio</em></h1>
+    ${tabHead()}
+    <h1 class="tab-title">Studio</h1>
     <div class="st-tiles">
       <button class="st-tile" data-wheel><span class="st-art st-wheel" id="mini"></span><b>Gamut wheel</b><small>Lay a shape on the wheel. What's inside is your palette.</small></button>
       <button class="st-tile" data-eye><span class="st-art st-eye"><i></i></span><b>Camera</b><small>Name what you see, or turn it into colors.</small></button>
       <label class="st-tile"><span class="st-art st-photo">${ICON_PHOTO}</span><b>From a photo</b><small>Pull the main colors out of any picture.</small><input type="file" accept="image/*" hidden id="file"></label>
     </div>
     <div class="labs st-labs">${LAB_TILES(["harmony", "contrast"])}</div>
+    <div class="sec-head"><b>Your taste</b><span>quick taste tests</span></div>
+    <div class="st-tiles st-taste">
+      <button class="st-tile" data-taste="color"><span class="st-art st-duel"><i style="--c:#C8553D"></i><i style="--c:#3F7C8C"></i></span><b>Find your color</b><small>${S.fav ? `Yours: ${esc(S.fav.n)}-ish` : "About 20 taps. A map of the colors you love."}</small></button>
+      <button class="st-tile" data-taste="palette"><span class="st-art st-duel st-duel-pal">${[["#EFE6D2", "#C8553D", "#E0A458", "#5B7F6E"], ["#1F2A44", "#4F6D7A", "#C0D6DF", "#EAEAEA"]].map(p => `<i>${p.map(h => `<b style="--c:${h}"></b>`).join("")}</i>`).join("")}</span><b>Find your palette</b><small>About 15 taps. Your palette dials and painters.</small></button>
+    </div>
     <div class="sec-head"><b>Your palettes</b><span>${saved.length || ""}</span></div>
     ${saved.length ? `<div class="st-saved">${saved.map((p, i) => `<button class="st-pal" data-i="${i}"><span class="strip">${p.cols.map(h => `<i style="--c:${h}"></i>`).join("")}</span><span class="st-meta"><b>${esc(p.from || "Palette")}</b><em>${esc(p.at || "")}</em></span></button>`).join("")}</div>`
       : `<p class="x-sub">Palettes you keep, from the wheel, a photo or the taste test, land here.</p>`}
   `, "studio", "studio");
   el.querySelectorAll("[data-lab]").forEach(b => b.onclick = () => LAB[b.dataset.lab]());
+  el.querySelectorAll("[data-taste]").forEach(b => b.onclick = () => tasteIntro(b.dataset.taste));
   el.querySelector("[data-wheel]").onclick = () => gamutWheel();
   el.querySelector("[data-eye]").onclick = () => eye();
   el.querySelector("#file").onchange = e => { const f = e.target.files[0]; if (f) loadImage(f, c => studioFromImage(c, "From a photo")); };
@@ -131,7 +136,7 @@ function gamutWheel(preset = "Warm") {
     <div class="h-list" id="hlist"></div>
     <div class="row2" style="margin-top:18px"><button class="btn" data-keep>Keep it</button><button class="btn ghost" data-open>Views & export</button></div>
     <p class="p-body">${linkText("Painters call this a gamut mask. Mix only from colors inside the shape and a picture holds together, because every color shares the same few ingredients. The idea comes from the painter James Gurney; the [[color-wheel]] here is perceptual, so colors facing each other are the eye's opposites, not the painter's-wheel pairs (see [[complementary-colors|complements]]).")}</p>
-    <p class="fine">Rim: the most vivid screen color of each hue. Center: grey. The palette is the shape's corners, plus a light and a dark mixed from its middle. Inspired by Peter Donahue's Color Fidget and ColorDisk.</p>
+    <p class="fine">The wheel is OKLab hue (Björn Ottosson, 2020); the Harmony lab rotates CIELAB hue, so their angles differ a little. Rim: the most vivid screen color of each hue. Center: grey. The palette is the shape's corners, plus a light and a dark mixed from its middle. Inspired by <a href="https://petertdonahue.com/" target="_blank" rel="noopener">Peter Donahue (Color Nerd)</a>: his Color Fidget and ColorDisk.</p>
   `, "article lab studio");
   el.querySelector("[data-back]").onclick = () => studio();
   wireLinks(el);

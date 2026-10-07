@@ -202,7 +202,7 @@ async function poemPage(id, opts = {}) {
   const el = show(`
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button>
       ${hasOrig ? `<div class="pm-view" role="tablist">${[["both", "Both"], ["orig", "Original"], ["en", "English"]].map(([k, t]) => `<button class="${view === k ? "on" : ""}" data-view="${k}">${t}</button>`).join("")}</div>` : ""}</header>
-    ${r.pal.length ? `<div class="pm-palette">${r.pal.map(([ci, n]) => { const c = poemColor(ci); return `<button style="--c:${c.h};flex:${n}" data-ci="${ci}" data-ink="${ink(c.h)}" aria-label="${esc(c.n)}"><span>${esc(c.n)}</span></button>`; }).join("")}</div>
+    ${r.pal.length ? `<div class="pm-palette">${r.pal.map(([ci, n]) => { const c = poemColor(ci), wide = n / r.pal.reduce((t, x) => t + x[1], 0) >= .14; return `<button style="--c:${c.h};flex:${n}" data-ci="${ci}" data-ink="${ink(c.h)}" aria-label="${esc(c.n)}">${wide ? `<span>${esc(c.n)}</span>` : ""}</button>`; }).join("")}</div>
       <p class="fine pm-pal-cap">The colors in this poem, in the order they appear</p>` : ""}
     <p class="eyebrow p-type">${esc(r.trad === "English" ? "Poem" : r.trad)}${r.year != null ? " · " + esc(poemYear(r.year, r.approx)) : ""}</p>
     <h1 class="p-title pm-title">${esc(poem.t)}</h1>

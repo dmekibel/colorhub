@@ -10,11 +10,15 @@ const seededRnd = seed => () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t
 
 function challengeRounds(k = today()) {
   const rnd = seededRnd(hash("challenge" + k));
-  return CH_LEVELS.map(d => {
+  return CH_LEVELS.map((d, i) => {
     const base = ALL[Math.floor(rnd() * ALL.length)], L0 = tame(lab(base.h));
     const odd = offset(L0, d, [.6, 1, 1], rnd) || offset(tame(L0.map((x, i) => i ? x * .8 : x)), d, [.6, 1, 1], rnd) || L0;
-    const n = d > 6 ? 3 : d > 2.5 ? 4 : 5;
-    return { d, base: labHex(...L0), odd: labHex(...odd), n, at: Math.floor(rnd() * n * n), fam: family(base.h) };
+    const n = d > 6 ? 3 : d > 2.5 ? 4 : 5, at = Math.floor(rnd() * n * n);
+    // score what's drawn (js/accuracy.js): act is the difference between the two hex codes on screen. When rounding
+    // moved it more than 15% off the round's level, the pair is redrawn from its own seed, so the rest of the set holds.
+    let a = labHex(...L0), b = labHex(...odd), act = de2000(a, b);
+    if (b === a || act < SHOWN_MIN || Math.abs(act - d) > d * .15) { const got = shownOffset(L0, d, [.6, 1, 1], seededRnd(hash("challenge-shown" + k + i))); if (got) ({ a, b, act } = got); }
+    return { d, act, base: a, odd: b, n, at, fam: family(base.h) };
   });
 }
 const chState = () => (S.challenge = S.challenge || {});
@@ -25,19 +29,10 @@ function chStreak() {
   while (chState()[k]) { n++; k = addDays(k, -1); }
   return n;
 }
-// the hardest round you got right, as a color difference
-const chSharpest = hits => { let s = null; hits.forEach((h, i) => { if (h) s = CH_LEVELS[i]; }); return s; };
+// the smallest difference you got right, as drawn on screen
+const chSharpest = (hits, rounds = challengeRounds()) => { let s = null; hits.forEach((h, i) => { if (h && rounds[i] && (s == null || rounds[i].act < s)) s = rounds[i].act; }); return s; };
 
-// the Gym's top card: today's six base colors, filled in once you've played
-function challengeCard() {
-  const r = challengeRounds(), done = chToday();
-  return `<button class="ch-card${done ? " done" : ""}" data-challenge>
-    <span class="ch-top"><span class="eyebrow">Daily · No. ${chNumber()}</span><span class="eyebrow">${chStreak() ? `${chStreak()}-day streak` : "Same for everyone"}</span></span>
-    <span class="ch-row">${r.map((x, i) => `<i style="--c:${x.base}" class="${done ? (done.hits[i] ? "hit" : "miss") : ""}"></i>`).join("")}</span>
-    <span class="ch-foot"><b>${done ? `${done.hits.filter(Boolean).length} of 6${chSharpest(done.hits) ? ` · you saw ${fmt(chSharpest(done.hits))} ΔE` : ""}` : "Six tiles, each one harder to spot"}</b>${done ? "<em>Share</em>" : ICON.arrow}</span>
-  </button>`;
-}
-
+// (Today shows the challenge as one of "Today's three" tiles: see home() in learn.js.)
 function challenge() {
   if (chToday()) return challengeDone();
   const rounds = challengeRounds(), hits = [];
@@ -61,8 +56,8 @@ function challenge() {
   const round = () => {
     if (i >= rounds.length) return finish();
     const r = rounds[i], cells = r.n * r.n;
-    el.querySelector("#ey").textContent = `Round ${i + 1} of 6 · ${fmt(r.d)} ΔE`;
-    el.querySelector("#lvl").textContent = fmt(r.d);
+    el.querySelector("#ey").textContent = `Round ${i + 1} of 6 · ${fmt(r.act)} ΔE`;
+    el.querySelector("#lvl").textContent = fmt(r.act);
     foot.innerHTML = "";
     stage.innerHTML = `<div class="grid" style="--n:${r.n}">${Array.from({ length: cells }, (_, j) => `<button class="tile" data-i="${j}" style="--c:${j === r.at ? r.odd : r.base}" aria-label="Tile ${j + 1}"></button>`).join("")}</div>`;
     let done = false;
@@ -81,16 +76,16 @@ function challenge() {
 }
 
 function challengeDone(fresh) {
-  const st = chToday(), rounds = challengeRounds(), got = st.hits.filter(Boolean).length, sharp = chSharpest(st.hits);
+  const st = chToday(), rounds = challengeRounds(), got = st.hits.filter(Boolean).length, sharp = chSharpest(st.hits, rounds);
   const verdict = got === 6 ? "A perfect <em>eye.</em>" : got >= 4 ? "Sharp <em>eyes.</em>" : got >= 2 ? "Good <em>start.</em>" : "Tough <em>one.</em>";
   const el = show(`
     <div style="flex:1"></div>
     <p class="eyebrow">Daily challenge · No. ${chNumber()}</p>
     <h1>${verdict}</h1>
-    <div class="ch-grid">${rounds.map((r, i) => `<span class="${st.hits[i] ? "hit" : "miss"}"><i style="--c:${r.base}"></i><em class="mono">${fmt(r.d)}</em></span>`).join("")}</div>
+    <div class="ch-grid">${rounds.map((r, i) => `<span class="${st.hits[i] ? "hit" : "miss"}"><i style="--c:${r.base}"></i><em class="mono">${fmt(r.act)}</em></span>`).join("")}</div>
     <p class="lede">${got} of 6 right.${sharp ? ` The smallest difference you spotted was <b>${fmt(sharp)} ΔE</b>; about 1 is the limit for most people side by side.` : " Every round shrinks the difference, so the last ones are hard for anyone."} ${chStreak() > 1 ? `${chStreak()} days in a row.` : ""} A new set comes tomorrow.</p>
     <div class="stack"><button class="btn" data-share>Share your grid ${ICON.share}</button>
-    <button class="btn ghost" data-home>Back to the Gym</button></div>
+    <button class="btn ghost" data-home>Back to ${S.tab === "gym" ? "Train" : "Today"}</button></div>
   `, "result");
   el.querySelector("[data-home]").onclick = () => go(S.tab || "gym");
   el.querySelector("[data-share]").onclick = () => shareChallenge(st.hits, sharp);
@@ -99,7 +94,7 @@ function challengeDone(fresh) {
 
 function shareChallenge(hits, sharp) {
   const text = `ColorHub daily No. ${chNumber()}\n${hits.map(h => h ? "🟩" : "⬛").join("")} ${hits.filter(Boolean).length}/6${sharp ? ` · saw ${fmt(sharp)} ΔE` : ""}`;
-  const url = location.origin + location.pathname;
+  const url = routeURL("challenge");
   if (navigator.share) return navigator.share({ text, url }).catch(() => {});
   try { navigator.clipboard.writeText(text + "\n" + url); toast("Copied your grid"); } catch (e) {}
 }
@@ -109,7 +104,7 @@ function shareChallenge(hits, sharp) {
 // Smaller differences = sharper. Scores bounce from day to day, so the copy points at the trend.
 // ======================================================================
 const FAM_HEX = { Reds: "#C8323C", Oranges: "#E07B39", Browns: "#8B5A3C", Yellows: "#E0C040", Greens: "#3E9A5C", Blues: "#3C6FC8", Purples: "#7E4FB0", Pinks: "#E58BB0", Greys: "#8C8C88" };
-function eyeChart(hist, unit) {
+function eyeChart(hist, unit, compact = false) {
   // one point per day (the day's last score), on a log scale so a drop from 4 to 2 looks like 2 to 1
   const byDay = new Map(); hist.forEach(([d, v]) => byDay.set(d, v));
   const pts = [...byDay.entries()];
@@ -120,23 +115,49 @@ function eyeChart(hist, unit) {
   const yy = xy.map(([x, y]) => [x, H - y]);
   const line = yy.map(p => p.map(v => v.toFixed(1)).join(",")).join(" ");
   const first = pts[0][1], last = pts[pts.length - 1][1], gain = Math.round((1 - last / first) * 100);
-  return `<svg class="eye-chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-hidden="true"><polyline points="${line}" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>${yy.map(([x, y], i) => i === 0 || i === yy.length - 1 ? `<circle cx="${x}" cy="${y}" r="3.2" fill="currentColor"/>` : "").join("")}</svg>
+  return `<svg class="eye-chart${compact ? " compact" : ""}" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-hidden="true"><polyline points="${line}" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>${yy.map(([x, y], i) => !compact && (i === 0 || i === yy.length - 1) ? `<circle cx="${x}" cy="${y}" r="3.2" fill="currentColor"/>` : "").join("")}</svg>
     <div class="eye-ends"><span>${pts[0][0] ? esc(String(pts[0][0]).slice(5)) + " · " : ""}<b>${fmt(first)}</b> ${esc(unit)}</span><span><b>${fmt(last)}</b> ${esc(unit)}${pts[pts.length - 1][0] ? " · " + esc(String(pts[pts.length - 1][0]).slice(5)) : ""}</span></div>
-    <p class="eye-gain">${gain > 0 ? `You now see differences ${gain}% smaller than when you started` : gain < 0 ? "A little behind your start today. That's normal: watch the trend over weeks." : "About where you started"}</p>`;
+    ${compact ? "" : `<p class="eye-gain">${gain > 0 ? `You now see differences ${gain}% smaller than when you started` : gain < 0 ? "A little behind your start today. That's normal: watch the trend over weeks." : "About where you started"}</p>`}`;
+}
+// Check-in levels over time (1-20, higher is better): one point per check-in that included the station.
+function ciChart(pts) {
+  if (pts.length < 2) return "";
+  const W = 320, H = 96, P = 10, x = i => P + i / (pts.length - 1) * (W - 2 * P), y = lv => H - P - (lv - 1) / 19 * (H - 2 * P);
+  const line = pts.map((p, i) => `${x(i).toFixed(1)},${y(p.lv).toFixed(1)}`).join(" ");
+  return `<div class="ci-wrap"><svg class="eye-chart ci-chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-hidden="true">
+    ${[5, 10, 15].map(l => `<line x1="0" x2="${W}" y1="${y(l)}" y2="${y(l)}" class="ci-grid" vector-effect="non-scaling-stroke"/>`).join("")}
+    <polyline points="${line}" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg>
+    <div class="ci-dots">${pts.map((p, i) => `<span style="left:${(x(i) / W * 100).toFixed(1)}%;top:${(y(p.lv) / H * 100).toFixed(1)}%"><b>${p.lv}</b></span>`).join("")}</div></div>`;
 }
 function eyeReport() {
   const ch = Object.entries(chState()).sort((a, b) => a[0].localeCompare(b[0]));
   const fam = skillState("hue").fam, famE = Object.entries(fam);
   const famMax = Math.max(...famE.map(f => f[1]), 1);
+  const g = gyState(), day = gyDay(), cl = calib(g.conf), clLine = calibLine(cl);
+  const all = TRAIN_KEYS.flatMap(k => (g.st[k] ? g.st[k].trials : [])).sort((a, b) => a.t - b.t), wl = weakLine(weakBand(all, day));
+  const due = checkinDue(g.checkins, triedKeys().length, day);
+  const station = k => {
+    const sk = SKILLS[k], st = S.gym.skills[k] || { hist: [] }, lv = stationLevel(k);
+    const pts = g.checkins.filter(c => c.res[k]).map(c => ({ t: c.t, lv: c.res[k].lv }));
+    if (!lv.tried) return `<section class="eye-sec"><div class="sec-head"><b>${esc(sk.name)}</b><span>not tried yet</span></div></section>`;
+    return `<section class="eye-sec"><div class="sec-head"><b>${esc(sk.name)}</b><span>${lv.ci != null ? `level ${lv.ci} · check-in` : `level ${lv.sess} · sessions`}${(g.st[k] || {}).maint ? " · maintenance" : ""}</span></div>
+      ${pts.length >= 2 ? `<p class="eye-cap">Check-ins</p>${ciChart(pts)}`
+        : pts.length === 1 ? `<p class="x-sub">One check-in so far: level ${pts[0].lv}. Your trend starts with the next one.</p>` : ""}
+      ${st.hist.length ? `<p class="eye-cap">Sessions${pts.length ? " · these move around day to day" : ""}</p>${eyeChart(st.hist, sk.unit, pts.length > 0)}` : ""}</section>`;
+  };
   const el = show(`
-    <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span class="eyebrow">Gym · Your eye</span><span style="width:44px"></span></header>
+    <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span class="eyebrow">Train · Your eye</span><span style="width:44px"></span></header>
     <p class="eyebrow kick">Progress</p>
     <h1 class="tab-title">Your <em>eye</em></h1>
-    <p class="x-sub">Each chart is the smallest difference you could see, day by day. Higher on the chart means sharper.</p>
-    ${Object.entries(SKILLS).map(([k, sk]) => { const st = skillState(k); return `<section class="eye-sec"><div class="sec-head"><b>${esc(sk.name)}</b><span>${st.best != null ? `best ${fmt(st.best)} ${esc(sk.unit)}` : "not tried yet"}</span></div>${st.hist.length ? eyeChart(st.hist, sk.unit) : `<p class="x-sub">Not tried yet.</p>`}</section>`; }).join("")}
+    <p class="x-sub">Your levels come from the weekly check-in: a short fixed test with no feedback. Session scores move around day to day; check-ins are the real trend. ${esc(due.due ? "A check-in is ready on the Train tab." : due.why + ".")}</p>
+    ${clLine || wl ? `<section class="eye-sec"><div class="sec-head"><b>How you judge</b><span>recent rounds</span></div>
+      ${clLine ? `<p class="eye-gain">${esc(clLine)}</p><div class="eye-cal"><div><span>Sure</span><i style="--w:${cl.sure}%"></i><b class="mono">${cl.sure}%</b></div>${cl.nGuess ? `<div><span>Guessing</span><i style="--w:${cl.guess}%"></i><b class="mono">${cl.guess}%</b></div>` : ""}</div>
+        <p class="x-sub">From the rounds where you said how sure you were. A good eye also knows when it's guessing.</p>` : ""}
+      ${wl ? `<p class="eye-gain">${esc(wl)}.</p>` : ""}</section>` : ""}
+    ${TRAIN_KEYS.map(station).join("")}
     ${famE.length ? `<section class="eye-sec"><div class="sec-head"><b>By color family</b><span>odd one out · shorter is sharper</span></div>
       <div class="eye-fams">${famE.sort((a, b) => a[1] - b[1]).map(([f, v]) => `<div><span>${esc(f)}</span><i style="--c:${FAM_HEX[f] || "#888"};--w:${(v / famMax * 100).toFixed(0)}%"></i><b class="mono">${fmt(v)}</b></div>`).join("")}</div>
-      <p class="x-sub">Most people see smaller differences in some families than others. Your weakest family is where practice pays most.</p></section>` : ""}
+      <p class="x-sub">Scores are CIEDE2000, which already evens out most of the eye's differences between hues, so a family that stands out is worth extra practice.</p></section>` : ""}
     <section class="eye-sec"><div class="sec-head"><b>Daily challenge</b><span>${ch.length ? `${ch.length} played · ${chStreak()}-day streak` : "not played yet"}</span></div>
       ${ch.length ? `<div class="eye-ch">${ch.slice(-28).map(([d, v]) => `<span title="${esc(d)}">${v.hits.map(h => `<i class="${h ? "hit" : ""}"></i>`).join("")}</span>`).join("")}</div>` : `<p class="x-sub">Six tiles a day, the same for everyone.</p>`}</section>
     <p class="fine">Practice sharpens these particular judgments. It isn't a claim about general brain training.</p>

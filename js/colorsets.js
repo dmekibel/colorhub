@@ -7,8 +7,11 @@
 //    hue wraps (a > b means through red, e.g. [330, 40]); [0, 360] means every hue (greys only count then).
 //  - COLOR_SETS: named starting points (presets) for that filter, grouped. getSet(id) -> items.
 //  - COLOR_VIEWS: view modes { id, title, render(host, items, opts) -> { update, current, destroy } }. Add more here.
-//  - colorBrowser(host, { focus, pick }): the shell: the view big, a one-line summary, and an Adjust panel
-//    (presets, sources, hue ring, how many, lightness, strength). pick(appColor) opens one of the 101.
+//  - colorExplorer({ focus, pick, back }): the explorer, a full-screen tool. The view fills the screen; the title is one
+//    plain sentence naming what you see ("Blues · from every name ▾") and opens one sheet of choices (which colors,
+//    one family, a feel, a tradition). A glass bar at the bottom names the color in the middle and holds Fine-tune
+//    (hue ring, how many, lightness, strength, live behind a short sheet) and the Map/Wheel switch. Saved in S.cb.
+//  - colorBrowser(host, { focus, pick }): the Explore "Colors" card, a quiet live preview that opens the explorer.
 
 const CS_CMAX = 132;
 const CS_SRC = [["jp", "Japanese"], ["werner", "Werner 1821"], ["ridgway", "Ridgway 1912"], ["ral", "RAL"], ["xkcd", "xkcd survey"], ["css", "Web colors"], ["wiki", "Common names"]];
@@ -202,132 +205,275 @@ function csRing(el, o) {
   return { set(v) { if (!drag) { h = v.slice(); paint(); } } };
 }
 
-function colorBrowser(host, opts = {}) {
-  const saved = S.cb || {}, setById = id => COLOR_SETS.find(s => s.id === id);
-  let preset = saved.preset && (saved.preset === "custom" || setById(saved.preset)) ? saved.preset : "101";
-  let st = { ...CS_FULL, ...(saved.state || setById(preset === "custom" ? "101" : preset).state) };
+// ---------- the choice: which colors, narrowed by at most one family, feel or tradition ----------
+// ch = { which: "101" | "all" | "yours" | "spread", n: 50 | 200 | 500 (spread only), narrow: a COLOR_SETS id or null }.
+// A tradition only exists in the name library, so it lifts "the 101" or "yours" to every name.
+const CX_FAMS = [["reds", "#C23B30"], ["oranges", "#E07B39"], ["browns", "#7A4B2E"], ["yellows", "#E9C33F"], ["greens", "#3F8B4F"], ["blues", "#2F62B0"], ["purples", "#6E46A2"], ["pinks", "#E795B4"], ["greys", "#8C8A84"]];
+const CX_FEELS = [["pastels", "Pastel", "Pastels"], ["vivid", "Vivid", "Vivid colors"], ["muted", "Dusty", "Dusty colors"], ["darks", "Dark", "Dark colors"], ["earth", "Earthy", "Earthy colors"], ["neutrals", "Neutral", "Neutrals"]];
+const CX_TRADS = [["jp", "Japanese", "Japanese traditional colors"], ["werner", "Werner 1821", "Werner's 1821 colors"], ["ridgway", "Ridgway 1912", "Ridgway's 1912 colors"], ["ral", "RAL paint", "RAL paint colors"], ["xkcd", "xkcd survey", "Colors from the xkcd survey"], ["css", "Web colors", "Web colors"]];
+const CX_SPREAD = [50, 200, 500];
+const cxIsTrad = id => !!id && id.startsWith("src-");
+function cxNorm(ch = {}) {
+  const set = ch.narrow && COLOR_SETS.find(s => s.id === ch.narrow && s.group !== "Collections");
+  const out = { which: ["101", "all", "yours", "spread"].includes(ch.which) ? ch.which : "101", n: CX_SPREAD.includes(+ch.n) ? +ch.n : 200, narrow: set ? set.id : null };
+  if (cxIsTrad(out.narrow) && (out.which === "101" || out.which === "yours")) out.which = "all";
+  return out;
+}
+function cxState(ch) {
+  const set = ch.narrow && COLOR_SETS.find(s => s.id === ch.narrow);
+  const st = JSON.parse(JSON.stringify(set ? set.state : CS_FULL));
+  st.base = ch.which === "spread" ? "all" : ch.which; st.n = ch.which === "spread" ? ch.n : 0;
+  return st;
+}
+const cxNoun = id => { const f = CX_FEELS.find(x => x[0] === id); if (f) return f[2]; const s = COLOR_SETS.find(x => x.id === id); return s ? s.title : ""; };
+// one plain sentence naming what you see
+// (fine-tuned: named by the hue slice when there is one, so the sentence never claims more than is shown)
+function cxTitle(ch, st) {
+  const trad = cxIsTrad(ch.narrow) && CX_TRADS.find(x => "src-" + x[0] === ch.narrow);
+  if (trad) return trad[2] + (ch.which === "spread" ? ` · an even ${ch.n}` : "");
+  if (st) {
+    const base = cxState(ch), hue = !hueFull(st.hue) && (hueFull(base.hue) || st.hue[0] !== base.hue[0] || st.hue[1] !== base.hue[1]);
+    const h = hue ? hueName(st.hue[0]) + " to " + hueName(st.hue[1]) : ch.narrow ? cxNoun(ch.narrow) : "Colors";
+    return h.charAt(0).toUpperCase() + h.slice(1) + { "101": " you're learning", all: " · from every name", yours: " you know", spread: " · from an even spread" }[ch.which];
+  }
+  if (!ch.narrow) {
+    const known = csBase("yours").length;
+    return { "101": "The 101 colors you're learning", all: LONG_NAMES ? `All ${csItems().length.toLocaleString()} names` : "Every name",
+      yours: `The ${known} color${known === 1 ? "" : "s"} you know`, spread: `An even spread of ${ch.n}` }[ch.which];
+  }
+  return cxNoun(ch.narrow) + { "101": " you're learning", all: " · from every name", yours: " you know", spread: ` · an even ${ch.n}` }[ch.which];
+}
+// what was last chosen (S.cb), reading older saves ({ preset, state }) too
+function cxSaved() {
+  const s = S.cb || {};
+  if (s.ch) return { ch: cxNorm(s.ch), tuned: !!(s.tuned && s.state), state: s.state };
+  const set = s.preset && COLOR_SETS.find(x => x.id === s.preset);
+  if (s.preset === "custom" && s.state) return { ch: cxNorm({ which: ["101", "yours"].includes(s.state.base) ? s.state.base : "all" }), tuned: true, state: s.state };
+  if (!set) return { ch: cxNorm(), tuned: false };
+  if (set.group === "Collections") return { ch: cxNorm(set.id === "spread" ? { which: "spread", n: 500 } : { which: set.id }), tuned: false };
+  return { ch: cxNorm({ which: "all", narrow: set.id }), tuned: false };
+}
+const cxStateOf = m => m.tuned ? { ...CS_FULL, ...JSON.parse(JSON.stringify(m.state)) } : cxState(m.ch);
+// the colors for a filter state: everything that matches (pre) and what's shown (the first n, evenly spread)
+async function cxCompute(st) {
+  if (csNeedsLib(st) && !LONG_NAMES) await loadLongNames();
+  const pre = filterColors(csBase(st.base), { ...st, n: 0 });
+  return { pre, items: st.n && st.n < pre.length ? filterColors(pre, { n: st.n }) : pre };
+}
+const CX_ICON = {
+  map: sv('<circle cx="12" cy="12" r="2.3"/><circle cx="18" cy="12" r="2.3"/><circle cx="6" cy="12" r="2.3"/><circle cx="9" cy="6.8" r="2.3"/><circle cx="15" cy="6.8" r="2.3"/><circle cx="9" cy="17.2" r="2.3"/><circle cx="15" cy="17.2" r="2.3"/>', 20, 1.5),
+  wheel: sv('<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="2.4"/><path d="M12 3.5v3M12 17.5v3M3.5 12h3M17.5 12h3"/>', 20, 1.5),
+  tune: sv('<path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2.2"/><circle cx="9" cy="17" r="2.2"/>', 20, 1.6),
+  down: sv('<path d="M6 9l6 6 6-6"/>', 14, 2.2),
+};
+const cxDots = list => `<span class="cx-dots">${list.map(x => `<i style="--c:${x.h}"></i>`).join("")}</span>`;
+
+// ---------- the explorer: the honeycomb full screen, the title is the control ----------
+// colorExplorer({ focus, pick, back, shot }): back() defaults to the Explore tab; pick(appColor) opens one of the 101.
+// Opening one of the 101 leaves a note (CX_BACK) so Back from its page lands here again (see colorBrowser).
+let CX_BACK = null;
+function colorExplorer(opts = {}) {
+  const m = cxSaved(), saved = S.cb || {}, zooms = { ...(saved.zoom || {}) };
+  let ch = m.ch, tuned = m.tuned, st = cxStateOf(m);
   let viewId = COLOR_VIEWS.some(v => v.id === saved.view) ? saved.view : COLOR_VIEWS[0].id;
-  const zooms = { ...(saved.zoom || {}) };
-  let ctrl = null, cur = null, items = [], maxN = 0, frame = 0, saveT = 0, gen = 0;
-  const chip = s => `<button class="cb-chip" data-set="${s.id}">${esc(s.title)}</button>`;
-  host.classList.add("cb");
-  host.innerHTML = `<div class="cb-top">
-      <button class="cb-sum" aria-label="Adjust which colors"><b></b><span></span></button>
-      <div class="hc-seg cb-views" role="group" aria-label="View">${COLOR_VIEWS.map(v => `<button data-v="${v.id}">${esc(v.title)}</button>`).join("")}</div>
-      <button class="cb-adj" aria-expanded="false">Adjust</button>
-    </div>
-    <div class="cb-stage"><div class="cb-view"></div><p class="cb-empty" hidden></p></div>
-    <div class="cb-panel" aria-hidden="true"><div class="cb-panel-in">
-      <div class="cb-row">${COLOR_SETS.filter(s => s.group !== "Sources").map(chip).join("")}</div>
-      <div class="cb-row"><button class="cb-chip" data-src="">Any source</button>${CS_SRC.map(([k, l]) => `<button class="cb-chip" data-src="${k}">${esc(l)}</button>`).join("")}</div>
-      <div class="cb-ctl">
-        <div class="cb-ring"></div>
-        <div class="cb-sl">
-          <div class="cb-f"><span>How many<b data-o="n"></b></span><div class="cb-range" data-k="n"></div></div>
-          <div class="cb-f"><span>Lightness<b data-o="L"></b></span><div class="cb-range" data-k="L"></div></div>
-          <div class="cb-f"><span>Strength<b data-o="C"></b></span><div class="cb-range" data-k="C"></div></div>
-        </div>
-      </div>
-    </div></div>`;
-  const $ = s => host.querySelector(s), viewEl = $(".cb-view"), emptyEl = $(".cb-empty"), adj = $(".cb-adj"), panel = $(".cb-panel");
+  let ctrl = null, cur = null, items = [], maxN = 0, frame = 0, saveT = 0, gen = 0, tune = null;
+  CX_BACK = null;
+  if (typeof XSTACK !== "undefined") XSTACK = [];
+  const el = show(`
+    <div class="cx-stage"><div class="cx-view"></div>
+      <div class="cx-empty" hidden><p></p><button class="cx-pill" data-reset>Show the 101 again</button></div></div>
+    <header class="cx-top">
+      <button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button>
+      <button class="cx-title glass-box" aria-haspopup="dialog" aria-label="Change which colors you see"><b><span></span>${CX_ICON.down}</b><small></small></button>
+      <span class="cx-sp"></span>
+    </header>
+    <div class="cx-bar"><div class="cx-btns">
+      <button data-tune>${CX_ICON.tune}<span>Fine-tune</span></button>
+      <button data-view></button>
+    </div></div>`, "fixed cx");
+  const $ = s => el.querySelector(s), viewEl = $(".cx-view"), emptyEl = $(".cx-empty"), title = $(".cx-title");
+  loadLongNames();
 
-  const persist = () => { clearTimeout(saveT); saveT = setTimeout(() => { S.cb = { preset, state: st, view: viewId, zoom: zooms }; save(); }, 300); };
-  const custom = () => { preset = "custom"; persist(); schedule(); };
+  const persist = (now) => {
+    clearTimeout(saveT); saveT = 0;
+    const w = () => { saveT = 0; S.cb = { ch, tuned, state: st, view: viewId, zoom: zooms, preset: tuned ? "custom" : ch.narrow || (ch.which === "spread" ? "spread" : ch.which) }; save(); };
+    if (now) w(); else saveT = setTimeout(w, 300);
+  };
   const schedule = () => { if (!frame) frame = requestAnimationFrame(() => { frame = 0; render(true); }); };
-  // the count slider runs on a log scale: 10, 20, 50... up to everything that matches
-  const nLo = () => Math.min(10, maxN), toN = p => p >= 1000 ? 0 : Math.round(nLo() * Math.pow(Math.max(1, maxN) / Math.max(1, nLo()), p / 1000));
-  const toP = n => !n || n >= maxN || maxN <= nLo() ? 1000 : Math.round(1000 * Math.log(n / nLo()) / Math.log(maxN / nLo()));
-  const midHue = () => hueFull(st.hue) ? 30 : (st.hue[0] + ((st.hue[1] - st.hue[0] + 360) % 360) / 2) % 360;
-  const grads = {
-    n: "linear-gradient(90deg,rgba(236,232,223,.16),rgba(236,232,223,.6))",
-    L: () => `linear-gradient(90deg,${[0, 25, 50, 75, 100].map(L => lchHex(L, Math.min(18, L * .3), midHue())).join(",")})`,
-    C: () => `linear-gradient(90deg,${[0, 30, 60, 90, 120].map(C => lchHex(58, C, midHue())).join(",")})`,
-  };
-  const sl = {
-    n: csRange($('[data-k="n"]'), { min: 0, max: 1000, vals: [1000], grad: grads.n, onInput: ([p]) => { st.n = toN(p); custom(); }, onEnd: persist }),
-    L: csRange($('[data-k="L"]'), { min: 0, max: 100, vals: st.L, grad: grads.L(), onInput: v => { st.L = v; custom(); }, onEnd: persist }),
-    C: csRange($('[data-k="C"]'), { min: 0, max: CS_CMAX, vals: st.C, grad: grads.C(), onInput: v => { st.C = v; custom(); }, onEnd: persist }),
-  };
-  const ring = csRing($(".cb-ring"), { value: st.hue, onInput: v => { st.hue = v; custom(); }, onEnd: persist });
-
-  function summary() {
-    const s = preset === "custom" ? "Custom" : setById(preset).title;
-    const bits = [`${items.length.toLocaleString()} color${items.length === 1 ? "" : "s"}`, hueFull(st.hue) ? "all hues" : `${hueName(st.hue[0])} to ${hueName(st.hue[1])}`];
-    if (preset !== "custom") { $(".cb-sum b").textContent = s; $(".cb-sum span").textContent = bits.join(" · "); return; }
-    if (st.L[0] > 0 || st.L[1] < 100) bits.push(st.L[0] >= 60 ? "light" : st.L[1] <= 40 ? "dark" : `lightness ${st.L[0]}–${st.L[1]}`);
-    if (st.C[0] > 0 || st.C[1] < CS_CMAX) bits.push(st.C[1] <= 15 ? "greyed" : st.C[0] >= 50 ? "vivid" : st.C[1] <= 50 ? "soft" : `strength ${st.C[0]}–${Math.min(st.C[1], CS_CMAX)}`);
-    if (st.sources.length) bits.push(st.sources.map(k => (CS_SRC.find(x => x[0] === k) || [k, k])[1]).join(", "));
-    $(".cb-sum b").textContent = s; $(".cb-sum span").textContent = bits.join(" · ");
-  }
-  function paintPanel() {
-    host.querySelectorAll("[data-set]").forEach(b => b.classList.toggle("on", b.dataset.set === preset));
-    host.querySelectorAll("[data-src]").forEach(b => b.classList.toggle("on", b.dataset.src ? st.sources.includes(b.dataset.src) : !st.sources.length));
-    host.querySelectorAll(".cb-views button").forEach(b => { b.classList.toggle("on", b.dataset.v === viewId); b.setAttribute("aria-pressed", b.dataset.v === viewId); });
-    sl.n.set([toP(st.n)], grads.n); sl.L.set(st.L, grads.L()); sl.C.set(st.C, grads.C()); ring.set(st.hue);
-    $('[data-o="n"]').textContent = items.length.toLocaleString() + (items.length < maxN ? " of " + maxN.toLocaleString() : "");
-    $('[data-o="L"]').textContent = `${st.L[0]}–${st.L[1]}`;
-    $('[data-o="C"]').textContent = `${st.C[0]}–${st.C[1] >= CS_CMAX ? "max" : st.C[1]}`;
-  }
-  const dflt = c => closeup(colorNode(c));
+  const openApp = c => { CX_BACK = { t: Date.now(), opts: { pick: opts.pick, back: opts.back } }; (opts.pick || (x => closeup(colorNode(x))))(c); };
   const pick = (it, fx) => {
-    if (it.c) { if (fx && fx.morph) fx.morph(); return (opts.pick || dflt)(it.c); }
-    colorSheet(it, c => (opts.pick || dflt)(c));
+    if (it.c) { if (fx && fx.morph) fx.morph(); return openApp(it.c); }
+    colorSheet(it, openApp);
   };
+  function paintTitle(loading) {
+    title.querySelector("span").textContent = cxTitle(ch, tuned && st);
+    title.querySelector("small").textContent = loading ? "Loading 2,700 names…" : `${items.length.toLocaleString()} color${items.length === 1 ? "" : "s"} · ${tuned ? "fine-tuned" : "tap to change"}`;
+    const other = COLOR_VIEWS.find(v => v.id !== viewId) || COLOR_VIEWS[0];
+    $("[data-view]").innerHTML = `${CX_ICON[other.id] || ""}<span>${esc(other.title)}</span>`;
+    $("[data-view]").setAttribute("aria-label", "Show as a " + other.title.toLowerCase());
+    el.classList.toggle("tuned", tuned);
+  }
   async function render(soft) {
     const g = ++gen;
-    if (csNeedsLib(st) && !LONG_NAMES) {
-      $(".cb-sum span").textContent = "Loading 2,700 names…";
-      await loadLongNames(); if (!host.isConnected || g !== gen) return;
+    if (csNeedsLib(st) && !LONG_NAMES) { paintTitle(true); await loadLongNames(); if (!el.isConnected || g !== gen) return; }
+    const r = await cxCompute(st); if (!el.isConnected || g !== gen) return;
+    maxN = r.pre.length; items = r.items;
+    paintTitle(); if (tune) tune.paint();
+    emptyEl.hidden = !!items.length; el.classList.toggle("none", !items.length);
+    if (!items.length) {
+      emptyEl.querySelector("p").textContent = st.base === "yours" && !tuned ? "Colors you know gather here. Learn a unit and come back after a night's sleep." : "No colors match. Widen a range or start again.";
+      return;
     }
-    const pre = filterColors(csBase(st.base), { ...st, n: 0 });
-    maxN = pre.length;
-    items = st.n && st.n < pre.length ? filterColors(pre, { n: st.n }) : pre;
-    summary(); paintPanel();
-    emptyEl.hidden = !!items.length;
-    if (!items.length) { emptyEl.textContent = st.base === "yours" ? "Colors you learn gather here. Start a unit and come back." : "No colors match. Widen a range."; return; }
     const view = COLOR_VIEWS.find(v => v.id === viewId) || COLOR_VIEWS[0];
     if (ctrl && cur === view) return ctrl.update({ items, soft });
     const focus = (ctrl && ctrl.current()) || opts.focus;
     if (ctrl) ctrl.destroy();
-    viewEl.className = "cb-view"; viewEl.innerHTML = "";
-    ctrl = view.render(viewEl, items, { focus, pick, zoom: zooms[view.id], onZoom: z => { zooms[view.id] = Math.round(z * 100) / 100; persist(); } }); cur = view;
-    if (!shotDone) shoot();
+    viewEl.innerHTML = ""; viewEl.className = "cx-view";
+    ctrl = view.render(viewEl, items, { focus, pick, zoom: zooms[view.id] || 1, onZoom: z => { zooms[view.id] = Math.round(z * 100) / 100; persist(); } });
+    cur = view;
+    if (opts.shot && !shotDone) shoot();
+  }
+  function apply(nx) {
+    ch = cxNorm(nx); tuned = false; st = cxState(ch);
+    persist(); buzz(4); render(true);
   }
 
-  const toggle = on => {
-    host.classList.toggle("adjusting", on); panel.setAttribute("aria-hidden", !on);
-    adj.textContent = on ? "Done" : "Adjust"; adj.setAttribute("aria-expanded", on); buzz(4);
-    // keep the whole browser (view and panel) on screen, above the tab bar
-    if (on) setTimeout(() => {
-      const r = host.getBoundingClientRect(), tab = document.querySelector(".tabbar"), limit = innerHeight - (tab ? tab.offsetHeight : 0) - 6;
-      if (r.bottom > limit) scrollBy({ top: r.bottom - limit, behavior: reduceMotion || opts.shot ? "auto" : "smooth" });
-    }, opts.shot ? 0 : 60);
-  };
-  adj.onclick = () => toggle(!host.classList.contains("adjusting"));
-  $(".cb-sum").onclick = () => toggle(true);
-  host.querySelectorAll("[data-set]").forEach(b => b.onclick = () => {
-    const s = setById(b.dataset.set); preset = s.id; st = JSON.parse(JSON.stringify(s.state)); persist(); buzz(4); render(true);
-  });
-  host.querySelectorAll("[data-src]").forEach(b => b.onclick = () => {
-    const k = b.dataset.src;
-    st.sources = !k ? [] : st.sources.includes(k) ? st.sources.filter(x => x !== k) : st.sources.concat(k);
-    buzz(4); custom();
-  });
-  host.querySelectorAll(".cb-views button").forEach(b => b.onclick = () => { if (b.dataset.v === viewId) return; viewId = b.dataset.v; persist(); buzz(4); render(false); });
-  cleanup.push(() => { cancelAnimationFrame(frame); if (saveT) { clearTimeout(saveT); S.cb = { preset, state: st, view: viewId, zoom: zooms }; save(); } if (ctrl) ctrl.destroy(); });
-  // screenshot hook (js/boot.js): opts.shot = "adjust" opens the panel; anything else goes to the view
+  // ---- the title sheet: one sheet, four plain questions ----
+  async function chooser() {
+    buzz(4);
+    if (!LONG_NAMES) { title.classList.add("busy"); await loadLongNames(); title.classList.remove("busy"); if (!el.isConnected || document.querySelector(".sheet")) return; }
+    const cnt = c => { const s = cxState(cxNorm(c)); return filterColors(csBase(s.base), s).length; };
+    const pal = (c, k = 4) => { const s = cxState(cxNorm(c)); return filterColors(csBase(s.base), { ...s, n: k }); };
+    const lib = csItems().filter(x => !x.c).slice().sort((a, b) => a.rank - b.rank).slice(0, 5);
+    const known = csBase("yours").length, onW = w => !tuned && ch.which === w, onN = id => !tuned && ch.narrow === id;
+    const row = (w, label, sub, dots, count) => `<button class="cx-opt${onW(w) ? " on" : ""}" data-which="${w}">${cxDots(dots)}<span class="cx-opt-t"><b>${label}</b><small>${sub}</small></span><em>${count}</em></button>`;
+    const n0 = (k, x) => k ? "" : " off";
+    const { sh, close } = sheet(`<div class="cx-sh">
+      <div class="cx-sh-head"><h3>What to show</h3><button class="cx-link" data-reset>Reset</button></div>
+      <div class="cx-sec"><b>Which colors</b></div>
+      ${row("101", "The 101 you're learning", "The words the lessons teach", pal({ which: "101" }, 5), 101)}
+      ${LONG_NAMES ? row("all", "Every name", "The whole name library", lib, csItems().length.toLocaleString()) : ""}
+      ${known ? row("yours", "The ones you know", "Every name you have learned, checked or not yet", pal({ which: "yours" }, 5), known) : ""}
+      ${LONG_NAMES ? `<div class="cx-opt cx-spread${ch.which === "spread" && !tuned ? " on" : ""}"><span class="cx-opt-t"><b>An even spread</b><small>The widest range in fewer colors</small></span>
+        <span class="cx-ns">${CX_SPREAD.map(n => `<button data-which="spread" data-n="${n}" class="${ch.which === "spread" && ch.n === n && !tuned ? "on" : ""}">${n}</button>`).join("")}</span></div>` : ""}
+      <div class="cx-sec"><b>One family</b><span>within the colors above</span></div>
+      <div class="cx-fams">${CX_FAMS.map(([id, hex]) => { const k = cnt({ ...ch, narrow: id }); return `<button class="cx-fam${onN(id) ? " on" : ""}${n0(k)}" data-narrow="${id}" style="--c:${hex}"><i></i><b>${esc(cxNoun(id))}</b><small>${k.toLocaleString()}</small></button>`; }).join("")}</div>
+      <div class="cx-sec"><b>A feel</b><span>within the colors above</span></div>
+      <div class="cx-chips">${CX_FEELS.map(([id, label]) => { const k = cnt({ ...ch, narrow: id }); return `<button class="cx-chip${onN(id) ? " on" : ""}${n0(k)}" data-narrow="${id}">${cxDots(pal({ ...ch, narrow: id }))}<b>${label}</b><small>${k.toLocaleString()}</small></button>`; }).join("")}</div>
+      ${LONG_NAMES ? `<div class="cx-sec"><b>From a tradition</b><span>named lists from the library</span></div>
+      <div class="cx-chips">${CX_TRADS.map(([k, label]) => { const id = "src-" + k, c = cnt({ which: "all", narrow: id }); return `<button class="cx-chip${onN(id) ? " on" : ""}${n0(c)}" data-narrow="${id}">${cxDots(pal({ which: "all", narrow: id }))}<b>${label}</b><small>${c.toLocaleString()}</small></button>`; }).join("")}</div>` : ""}
+    </div>`);
+    sh.classList.add("cx-sheet");
+    sh.querySelectorAll("[data-which]").forEach(b => b.onclick = e => {
+      e.stopPropagation();
+      const w = b.dataset.which, nx = { ...ch, which: w, n: +b.dataset.n || ch.n };
+      if ((w === "101" || w === "yours") && cxIsTrad(ch.narrow)) nx.narrow = null;
+      close(); apply(nx);
+    });
+    sh.querySelectorAll("[data-narrow]").forEach(b => b.onclick = () => { const id = b.dataset.narrow; close(); apply({ ...ch, narrow: ch.narrow === id && !tuned ? null : id }); });
+    sh.querySelector("[data-reset]").onclick = () => { close(); apply({ which: "101" }); };
+    return { sh, close };
+  }
+
+  // ---- the fine-tune sheet: short, so the view stays live above it ----
+  function fineTune() {
+    if (tune) return;
+    buzz(4);
+    const { sh, close } = sheet(`<div class="cx-sh cx-tune">
+      <div class="cx-sh-head"><h3>Fine-tune</h3><span><button class="cx-link" data-undo>Reset</button><button class="cx-pill" data-done>Done</button></span></div>
+      <div class="cx-hue"><div class="cb-ring"></div><p><b>Hue</b>Drag the two handles to keep a slice of the wheel. Tap the middle for every hue.</p></div>
+      <div class="cx-f"><span><b>How many</b><i>fewer, still spread evenly</i><em data-o="n"></em></span><div class="cb-range" data-k="n"></div></div>
+      <div class="cx-f"><span><b>Lightness</b><i>from dark to light</i><em data-o="L"></em></span><div class="cb-range" data-k="L"></div></div>
+      <div class="cx-f"><span><b>Strength</b><i>from grey to vivid</i><em data-o="C"></em></span><div class="cb-range" data-k="C"></div></div>
+    </div>`);
+    sh.classList.add("cx-sheet", "cx-tune-sheet");
+    const scrim = [...document.querySelectorAll(".scrim")].pop(); if (scrim) scrim.classList.add("cx-clear");
+    const q = s => sh.querySelector(s);
+    const changed = () => { tuned = true; persist(); schedule(); };
+    // the count slider runs on a log scale: 10, 20, 50... up to everything that matches
+    const nLo = () => Math.min(10, maxN), toN = p => p >= 1000 ? 0 : Math.round(nLo() * Math.pow(Math.max(1, maxN) / Math.max(1, nLo()), p / 1000));
+    const toP = n => !n || n >= maxN || maxN <= nLo() ? 1000 : Math.round(1000 * Math.log(n / nLo()) / Math.log(maxN / nLo()));
+    const midHue = () => hueFull(st.hue) ? 30 : (st.hue[0] + ((st.hue[1] - st.hue[0] + 360) % 360) / 2) % 360;
+    const grads = {
+      n: "linear-gradient(90deg,rgba(236,232,223,.16),rgba(236,232,223,.6))",
+      L: () => `linear-gradient(90deg,${[0, 25, 50, 75, 100].map(L => lchHex(L, Math.min(18, L * .3), midHue())).join(",")})`,
+      C: () => `linear-gradient(90deg,${[0, 30, 60, 90, 120].map(C => lchHex(58, C, midHue())).join(",")})`,
+    };
+    const sl = {
+      n: csRange(q('[data-k="n"]'), { min: 0, max: 1000, vals: [toP(st.n)], grad: grads.n, onInput: ([p]) => { st.n = toN(p); changed(); }, onEnd: persist }),
+      L: csRange(q('[data-k="L"]'), { min: 0, max: 100, vals: st.L, grad: grads.L(), onInput: v => { st.L = v; changed(); }, onEnd: persist }),
+      C: csRange(q('[data-k="C"]'), { min: 0, max: CS_CMAX, vals: st.C, grad: grads.C(), onInput: v => { st.C = v; changed(); }, onEnd: persist }),
+    };
+    const ring = csRing(q(".cb-ring"), { value: st.hue, onInput: v => { st.hue = v; changed(); }, onEnd: persist });
+    // a drag on a control is not a drag on the sheet
+    sh.querySelectorAll(".cb-range,.cb-ring").forEach(x => x.addEventListener("pointerdown", e => e.stopPropagation()));
+    const paint = () => {
+      sl.n.set([toP(st.n)], grads.n); sl.L.set(st.L, grads.L()); sl.C.set(st.C, grads.C()); ring.set(st.hue);
+      q('[data-o="n"]').textContent = items.length.toLocaleString() + (items.length < maxN ? " of " + maxN.toLocaleString() : "");
+      q('[data-o="L"]').textContent = `${st.L[0]}–${st.L[1]}`;
+      q('[data-o="C"]').textContent = `${st.C[0]}–${st.C[1] >= CS_CMAX ? "max" : st.C[1]}`;
+      q("[data-undo]").disabled = !tuned;
+    };
+    const done = () => {
+      if (!tune) return;
+      tune = null; mo.disconnect(); el.classList.remove("tuning"); persist(true);
+    };
+    const mo = new MutationObserver(() => { if (!sh.isConnected) done(); });
+    mo.observe(document.body, { childList: true });
+    if (scrim) scrim.addEventListener("pointerdown", done);
+    q("[data-done]").onclick = () => { done(); close(); };
+    q("[data-undo]").onclick = () => { tuned = false; st = cxState(ch); persist(); buzz(4); render(true); };
+    tune = { paint, close: () => { done(); close(); } };
+    paint();
+    // lift the view so its middle sits in the space above the sheet
+    el.style.setProperty("--tune-h", sh.offsetHeight + "px"); el.classList.add("tuning");
+  }
+
+  // ---- wiring ----
+  const back = () => { CX_BACK = null; if (tune) tune.close(); persist(true); (opts.back || (() => go("explore")))(); };
+  $("[data-back]").onclick = back;
+  title.onclick = () => chooser();
+  $("[data-tune]").onclick = () => fineTune();
+  $("[data-view]").onclick = () => { viewId = (COLOR_VIEWS.find(v => v.id !== viewId) || COLOR_VIEWS[0]).id; persist(); buzz(4); render(false); };
+  $(".cx-empty [data-reset]").onclick = () => apply({ which: "101" });
+  onKey = e => { if (e.key === "Escape" && !document.querySelector(".sheet")) back(); };
+  cleanup.push(() => { cancelAnimationFrame(frame); if (saveT) persist(true); if (ctrl) ctrl.destroy(); });
+  // screenshot hook (js/boot.js #shot=cx:<choice>:<act>): sheet | tune | tap | press | zoomin
   let shotDone = !opts.shot;
   const shoot = () => {
     shotDone = true;
-    if (opts.shot === "adjust" || opts.shot === "custom") {
-      panel.style.transition = "none"; toggle(true);
-      if (opts.shot === "custom") { st.hue = [20, 95]; st.n = 120; custom(); }
-      return;
-    }
+    if (opts.shot === "sheet") return chooser();
+    if (opts.shot === "tune") return fineTune();
     viewEl.dispatchEvent(new CustomEvent("honeyshot", { detail: opts.shot }));
   };
   render(false);
-  return { set(id) { const s = setById(id); if (s) { preset = id; st = JSON.parse(JSON.stringify(s.state)); render(true); } }, items: () => items };
+  return { items: () => items };
+}
+
+// ---------- the Colors lens card: a live, quiet preview of the explorer ----------
+// colorBrowser(host, { focus, pick }) fills host with the card; a tap opens colorExplorer. Kept under this name for
+// older callers. The preview never takes a touch (its canvas ignores pointers), so the page scrolls over it.
+function colorBrowser(host, opts = {}) {
+  // back from a color opened in the explorer: go straight back into the explorer
+  if (CX_BACK && Date.now() - CX_BACK.t < 15 * 60e3) {
+    const o = CX_BACK.opts; CX_BACK = null; app.innerHTML = "";
+    return colorExplorer({ ...o, pick: o.pick || opts.pick });
+  }
+  CX_BACK = null;
+  const m = cxSaved(), st = cxStateOf(m), view = S.cb && S.cb.view === "wheel" ? "wheel" : "map";
+  host.classList.add("cx-prev");
+  host.innerHTML = `<button class="cx-card" aria-label="Open the color explorer"><span class="cx-card-view"></span>
+    <span class="cx-card-txt"><span class="eyebrow">${esc(cxTitle(m.ch, m.tuned && st))}${m.tuned ? " · fine-tuned" : ""}</span><b>Every color</b><span class="cx-open">Open the explorer ${ICON.arrow}</span></span></button>`;
+  const viewEl = host.querySelector(".cx-card-view");
+  let ctrl = null, items = [];
+  host.querySelector(".cx-card").onclick = () => { buzz(4); colorExplorer({ focus: (ctrl && ctrl.current()) || opts.focus, pick: opts.pick }); };
+  cxCompute(st).then(r => {
+    if (!host.isConnected) return;
+    items = r.items.length ? r.items : csBase("101");
+    ctrl = honeycomb(viewEl, { items, layout: view, focus: opts.focus, zoom: .8 });
+    if (opts.shot) viewEl.dispatchEvent(new CustomEvent("honeyshot", { detail: opts.shot }));
+  });
+  return { items: () => items };
 }
 
 // a library color (not one of the 101): big swatch, provenance, hex to copy, and the nearest color you can learn

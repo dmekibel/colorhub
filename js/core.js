@@ -84,10 +84,50 @@ const addDays = (k, n) => { const [y, m, d] = k.split("-").map(Number); return k
 const KEY = "colorhub-v1";
 // tab: last tab · gym: drill scores and history · daily: color-of-the-day answers · lightning: best score
 const fresh = () => ({ v: 1, placed: null, start: 0, cards: {}, done: {}, tab: "learn", gym: { skills: {}, workouts: {} }, daily: {}, best: {} });
+// Progress is never thrown away. An older save is migrated step by step (bump STATE_V and add a step when the
+// shape changes); a save from a newer version is kept as it is; unknown keys always survive. A save that
+// can't be read is copied aside (KEY + "-unreadable") before anything is written over it.
+const STATE_V = 1;
+function migrateState(d) {
+  if (!d || typeof d !== "object" || Array.isArray(d)) return null;
+  const s = Object.assign(fresh(), d);
+  ["cards", "done", "daily", "best"].forEach(k => { if (!s[k] || typeof s[k] !== "object") s[k] = {}; });
+  if (!s.gym || typeof s.gym !== "object") s.gym = { skills: {}, workouts: {} };
+  s.gym.skills = s.gym.skills || {}; s.gym.workouts = s.gym.workouts || {};
+  if (!(s.v >= 1)) s.v = 1;   // unversioned saves had the v1 shape
+  // future steps go here: if (s.v < 2) { …; s.v = 2; }
+  return s;
+}
 let S;
-try { S = JSON.parse(localStorage.getItem(KEY)); } catch (e) {}
-S = S && S.v === 1 ? Object.assign(fresh(), S) : fresh();
-const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
+try {
+  const raw = localStorage.getItem(KEY);
+  if (raw) { try { S = migrateState(JSON.parse(raw)); } catch (e) { S = null; } if (!S) try { localStorage.setItem(KEY + "-unreadable", raw); } catch (e) {} }
+} catch (e) {}
+S = S || fresh();
+// Saving can fail (storage full, or blocked in a private window). Say so once, with a way to keep a copy.
+let SAVE_WARNED = false;
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { if (!SAVE_WARNED) { SAVE_WARNED = true; setTimeout(saveFailed, 0); } } };
+function saveFailed() {
+  const bar = document.createElement("div");
+  bar.className = "keep-warn"; bar.setAttribute("role", "alert");
+  bar.innerHTML = `<p><b>Your progress isn't saving.</b> This browser's storage is full or blocked (private windows do this). Save a backup file so you don't lose it.</p>
+    <div><button class="btn" data-k="backup">Save a backup</button><button class="icon-btn" data-k="x" aria-label="Dismiss">${ICON.x}</button></div>`;
+  bar.onclick = e => { const b = e.target.closest("[data-k]"); if (!b) return; if (b.dataset.k === "backup") backupProgress(); bar.remove(); };
+  document.body.appendChild(bar);
+}
+// A gentle reminder every ~30 days, once there's real progress, to download a backup (one tap).
+const daysSince = k => k ? Math.round((new Date(today()) - new Date(k)) / 864e5) : Infinity;
+function keepCard() {
+  if (!S.placed || !(Object.keys(S.done).length || Object.keys(S.cards).length >= 10)) return "";
+  if (daysSince(S.backedUp || S.placed.at) < 30 || daysSince(S.keepLater) < 30) return "";
+  return `<section class="inst keep-card"><div><b>Back up your progress</b><span>It lives only on this device. A backup file brings it back on a new phone, or after the browser clears its data.</span></div>
+    <div class="inst-act"><button class="btn ghost" data-keep-save>Save a backup ${ICON.arrow}</button><button class="btn ghost" data-keep-later>Later</button></div></section>`;
+}
+function wireKeep(el) {
+  const card = el.querySelector(".keep-card"); if (!card) return;
+  card.querySelector("[data-keep-save]").onclick = () => { backupProgress(); card.remove(); };
+  card.querySelector("[data-keep-later]").onclick = () => { S.keepLater = today(); save(); card.remove(); };
+}
 
 // ---------- spaced review ----------
 // After a unit, every color is due the next day, so the first gap crosses a night of sleep.
@@ -99,17 +139,21 @@ function learnUnit(u) {
   S.done[u.id] = t;
   save();
 }
-function schedule(c, ok) {
+// by: what graded it. "swipe" (self-graded practice) or a check ("pick" | "say" | "make"); only a check, a day or more
+// after learning, makes a name yours (pickOwn in pickit.js).
+function schedule(c, ok, by = "swipe") {
   const st = S.cards[c.id]; if (!st) return;
   const t = today();
-  if (ok) { st.b = Math.min(st.b + 1, INTERVALS.length - 1); st.due = addDays(t, INTERVALS[st.b]); st.own = true; }
-  else { st.b = 0; st.due = addDays(t, 1); st.own = false; }
+  if (ok) { st.b = Math.min(st.b + 1, INTERVALS.length - 1); st.due = addDays(t, INTERVALS[st.b]); }
+  else { st.b = 0; st.due = addDays(t, 1); }
+  pickOwn(st, ok, by, t);
   st.last = t;
   save();
 }
 const dueList = () => { const t = today(); return ALL.filter(c => S.cards[c.id] && S.cards[c.id].due <= t).sort((a, b) => S.cards[a.id].due.localeCompare(S.cards[b.id].due)); };
-// "Owned" = recalled right, unassisted, a day or more after learning. That is the only progress number.
-const ownedCount = () => ALL.filter(c => S.cards[c.id] && S.cards[c.id].own).length;
+// "Yours" = picked or named right (an objective check), a day or more after learning. That is the only progress number.
+// Self-graded swipes don't count (isMine in pickit.js).
+const ownedCount = () => ALL.filter(c => isMine(S.cards[c.id])).length;
 const nextUnit = () => UNITS.find(u => u.i >= S.start && !S.done[u.id]) || null;
 const unitLabel = u => `Unit ${u.i + 1} · ${D.tiers[u.tier].short}`;
 
@@ -146,30 +190,44 @@ const later = (fn, ms) => { const t = setTimeout(fn, ms); timers.push(t); return
 if ("scrollRestoration" in history) history.scrollRestoration = "manual";
 let cleanup = [];   // functions to run when the screen changes (stop animation loops, cameras...)
 // ---------- motion ----------
-// Screens crossfade (the old screen lingers as a fading ghost), a tapped pin can fly into the next screen's hero,
-// content rises into view as you scroll, and big numbers count up. Everything is skipped under Reduce Motion.
+// Screens crossfade (the old screen lingers as a fading ghost), content rises into view as you scroll, and big
+// numbers count up. The signature: wherever a color opens, its chip grows into the new page's swatch.
+// Everything is skipped under Reduce Motion.
 let PENDING_MORPH = null, LAST_TAB = null;
+// Tapping any of these opens a color; the swatch inside is the chip that grows. [data-morph-src] marks one by hand.
+const MORPH_TRIGGER = "[data-morph-src], .pin-color, .pin-pair, .kin, .pchip, .tday[data-daily]";
+const MORPH_CHIP = "[data-morph-src], .pc, .pair2>span, .kin>i, .pchip>i";
+// The swatch a color page opens on: a hand-marked [data-morph], or a known hero.
+const MORPH_TARGET = "[data-morph], .z-color, .c-hero, .d-swatch";
 function morphFrom(el) {
   if (reduceMotion || !el) return;
-  const src = el.querySelector("[data-morph-src]") || el, r = src.getBoundingClientRect(), cs = getComputedStyle(src);
+  const src = el.matches("[data-morph-src]") ? el : el.querySelector(MORPH_CHIP) || el, r = src.getBoundingClientRect(), cs = getComputedStyle(src);
+  if (!r.width) return;
   const img = src.tagName === "IMG" ? src.currentSrc || src.src : null;
-  PENDING_MORPH = { r, bg: cs.backgroundColor, radius: cs.borderRadius, img };
+  PENDING_MORPH = { r, bg: cs.backgroundColor, radius: cs.borderRadius, img, at: performance.now() };
 }
+document.addEventListener("click", e => { const t = e.target.closest && e.target.closest(MORPH_TRIGGER); if (t && app.contains(t)) morphFrom(t); }, true);
 function runMorph(root) {
   const m = PENDING_MORPH; PENDING_MORPH = null;
-  const t = m && root.querySelector("[data-morph]");
+  // only right after the tap that asked for it, so a stale chip never flies into an unrelated screen
+  const t = m && performance.now() - m.at < 700 && root.querySelector(MORPH_TARGET);
   if (!t) return;
   const r = t.getBoundingClientRect();
-  if (!r.width) return;
+  if (!r.width || r.top > innerHeight) return;
   const fly = document.createElement(m.img ? "img" : "div");
   fly.className = "flyer";
   if (m.img) fly.src = m.img; else fly.style.background = m.bg;
   Object.assign(fly.style, { left: r.left + "px", top: r.top + "px", width: r.width + "px", height: r.height + "px", borderRadius: getComputedStyle(t).borderRadius });
   document.body.appendChild(fly);
+  // the page's own text waits under the chip, then fades in as the chip lands
   t.style.visibility = "hidden";
   const sx = m.r.width / r.width, sy = m.r.height / r.height;
   fly.animate([{ transform: `translate(${m.r.left - r.left}px,${m.r.top - r.top}px) scale(${sx},${sy})`, borderRadius: m.radius }, { transform: "none" }],
-    { duration: 520, easing: "cubic-bezier(.2,.85,.2,1)" }).onfinish = () => { t.style.visibility = ""; fly.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 140 }).onfinish = () => fly.remove(); };
+    { duration: 360, easing: "cubic-bezier(.2,.85,.2,1)" }).onfinish = () => {
+      t.style.visibility = "";
+      [...t.children].forEach(c => c.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 160, easing: "ease-out" }));
+      fly.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 120 }).onfinish = () => fly.remove();
+    };
 }
 // content rises in as it scrolls into view, in a short cascade
 const REVEAL = ".pin,.skill,.next-card,.facet,.kin,.res,.chip,.pal-name,.cg,.story-card,.ptg-card,.lab,.workout,.play-row,.palette,.codes,.compare,.z-sum,.p-body,.h-item,.az button,.sky-count";
@@ -213,13 +271,22 @@ function show(html, cls = "", tab = null) {
     ghost.animate([{ opacity: 1, transform: "scale(1)" }, { opacity: 0, transform: "scale(.985)" }], { duration: 260, easing: "ease-out", fill: "forwards" }).onfinish = () => ghost.remove();
   }
   app.innerHTML = `<div class="screen ${cls}${tab ? " has-tabs" : ""}">${html}</div>${tab ? tabbar(tab) : ""}`;
+  document.documentElement.classList.toggle("booth", /\b(deck|drill|station|meet|daily|fixed|eye|cx)\b/.test(cls));
+  // history: a tab's home replaces the current entry; any screen inside adds one, so the phone's back gesture works.
+  // The entry carries the screen's address (#/color/teal…) and the page title: router.js.
+  routeCommit(tab);
   if (tab) wireTabbar(tab);
   window.scrollTo(0, 0); document.body.classList.remove("scrolled");
   const el = app.firstElementChild;
+  const mb = tab && el.querySelector("[data-menu]"); if (mb) mb.onclick = () => menu();
   el.querySelectorAll("img").forEach(i => { if (i.complete && i.naturalWidth) i.classList.add("ld"); });
   requestAnimationFrame(() => { runMorph(el); reveal(el); countUp(el); });
   return el;
 }
+// Every tab's home opens with the same line: the brand on the left, the tab's own actions and the menu (⋯) on the right.
+const tabHead = (acts = "") => `<header class="bar"><div class="brand">${LOGO}<span>ColorHub</span></div><span class="bar-r">${acts}<button class="icon-btn" data-menu aria-label="Settings and more">${ICON.dots}</button></span></header>`;
+// Every inner screen: back (or close, for a task) on the left, the title in the middle, an optional action on the right.
+const navTop = (title = "", o = {}) => `<header class="nav-top"><button class="icon-btn" ${o.close ? `data-close aria-label="Close">${ICON.x}` : `data-back aria-label="Back">${ICON.back}`}</button><span class="nav-title">${title}</span><span class="nav-r">${o.right || ""}</span></header>`;
 // Four tabs, one job each: Today (the path and the daily things), Train (the eye), Explore (read), Studio (make).
 const TABS = [["learn", "Today", "today"], ["gym", "Train", "gym"], ["explore", "Explore", "compass"], ["studio", "Studio", "palette"]];
 // The tab bar: three mono words on a blurred strip with a hairline marker under the current one.
@@ -249,8 +316,21 @@ function wireTabbar(active) {
   addEventListener("scroll", onScroll, { passive: true });
   cleanup.push(() => removeEventListener("scroll", onScroll));
 }
+// Back gesture / browser back: close a sheet or panel first; otherwise press the screen's own back or close
+// button (so each screen keeps its own idea of "back"); with none, return to the current tab's home.
+let HIST_POP = false;
+addEventListener("popstate", e => {
+  if (!e.state && /^#\/./.test(location.hash)) return;   // a typed or linked address, not Back: router.js opens it
+  const over = document.querySelector(".peek [data-back], .sheet");
+  if (over) { if (over.matches(".sheet")) document.querySelector(".scrim")?.dispatchEvent(new PointerEvent("pointerdown")); else over.click(); try { history.pushState({ ch: 1 }, "", ROUTE_NOW || undefined); } catch (e) {} return; }
+  const btn = app.querySelector("[data-back], [data-close]");
+  HIST_POP = true;
+  try { if (btn) btn.click(); else if (!app.querySelector(".tabbar")) go(S.tab || "learn"); } finally { HIST_POP = false; }
+});
 function go(tab) {
   S.tab = tab; save();
+  // The two profile questions wait until they matter: the first visit to Train, where color vision tunes the drills.
+  if (tab === "gym" && S.placed && !S.profile && !S.profileAsked) return profileSetup(gymHome, { why: "Before you train" });
   if (tab === "gym") return gymHome();
   if (tab === "explore") return exploreHome();
   if (tab === "studio") return studio();
@@ -262,16 +342,28 @@ function toast(msg) { document.querySelectorAll(".toast").forEach(n => n.remove(
 const fanVars = (n, k) => `--k:${k};--mid:${(n - 1) / 2}`;
 
 // ---------- menu ----------
+// Lock page scrolling under a sheet or panel without losing your place (overflow:hidden on a 100%-tall body
+// would jump to the top): pin the body at its current offset, then put the scroll back on release.
+let LOCKS = 0, LOCK_Y = 0;
+function lockScroll() {
+  if (LOCKS++) return;
+  LOCK_Y = scrollY; document.body.style.top = -LOCK_Y + "px"; document.documentElement.classList.add("sheet-open");
+}
+function unlockScroll() {
+  if (!LOCKS || --LOCKS) return;
+  document.documentElement.classList.remove("sheet-open"); document.body.style.top = ""; scrollTo(0, LOCK_Y);
+}
 function sheet(html) {
   const scrim = document.createElement("div"), sh = document.createElement("div");
   scrim.className = "scrim"; sh.className = "sheet"; sh.setAttribute("role", "dialog");
   sh.innerHTML = `<div class="grab"></div>${html}`;
   let gone = false;
   const close = () => {
-    if (gone) return; gone = true; document.documentElement.classList.remove("sheet-open");
+    if (gone) return; gone = true; unlockScroll();
     if (reduceMotion) { scrim.remove(); sh.remove(); return; }
     scrim.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 200, fill: "forwards" }).onfinish = () => scrim.remove();
     sh.animate([{ transform: getComputedStyle(sh).transform === "none" ? "none" : getComputedStyle(sh).transform }, { transform: "translateY(105%)" }], { duration: 240, easing: "cubic-bezier(.3,0,.8,.2)", fill: "forwards" }).onfinish = () => sh.remove();
+    setTimeout(() => { scrim.remove(); sh.remove(); }, 400);
   };
   // anything outside closes it: a tap or a swipe on the dimmed page
   scrim.addEventListener("pointerdown", e => { e.preventDefault(); close(); });
@@ -281,7 +373,7 @@ function sheet(html) {
   sh.addEventListener("pointermove", e => { if (y0 == null) return; dy = Math.max(0, e.clientY - y0); if (dy > 6) { sh.style.transition = "none"; sh.style.transform = `translateY(${dy}px)`; } });
   const end = () => { if (y0 == null) return; y0 = null; if (dy > 90) return close(); sh.style.transition = "transform .3s var(--ease)"; sh.style.transform = ""; };
   sh.addEventListener("pointerup", end); sh.addEventListener("pointercancel", end);
-  document.documentElement.classList.add("sheet-open");
+  lockScroll();
   document.body.append(scrim, sh);
   return { sh, close };
 }

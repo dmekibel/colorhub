@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dmekibel.github.io/colorhub/sitemap.xml
