@@ -283,6 +283,7 @@ function hmHome() {
     const twVal = k => tweakNow[k] != null ? tweakNow[k] : resolvedNow[k];
     const { sh, close } = sheet(`<div class="cx-sh hm-chooser">
       <div class="hm-tabs" data-tabs><button class="on" data-tab="show">Show</button><button data-tab="look">Look</button></div>
+      <p class="hm-count" data-count></p>
       <div class="hm-tab-panel" data-panel="show">
         <div class="cx-sh-head"><h3>What to show</h3></div>
         <div class="cx-sec"><b>Stage</b><span>the colors each stage of the path teaches</span></div>
@@ -314,11 +315,21 @@ function hmHome() {
     setTab(initialTab === "look" ? "look" : "show");
     // every change applies at once and the panel stays open, so you can see what each control does
     sh.querySelectorAll("[data-src]").forEach(b => b.onclick = () => {
-      applyView("src", b.dataset.src); sh.querySelectorAll("[data-src]").forEach(x => x.classList.toggle("on", x === b)); render(true);
+      applyView("src", b.dataset.src); sh.querySelectorAll("[data-src]").forEach(x => x.classList.toggle("on", x === b));
+      // a new set always starts at All: a leftover Learned/New filter made every set look stuck at a small count
+      if (S.hm.filter !== "all") { applyView("filter", "all"); sh.querySelectorAll('.hm-seg[data-key="filter"] button').forEach(x => x.classList.toggle("on", x.dataset.val === "all")); }
+      render(true).then(paintCount);
     });
     sh.querySelectorAll(".hm-seg").forEach(g => g.querySelectorAll("button").forEach(b => b.onclick = () => {
-      applyView(g.dataset.key, b.dataset.val); g.querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b)); render(true);
+      applyView(g.dataset.key, b.dataset.val); g.querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b)); render(true).then(paintCount);
     }));
+    paintCount();
+    // one plain line under the tabs: how many colors the honeycomb holds right now, and the filter if one is on
+    function paintCount() {
+      const p = sh.querySelector("[data-count]"); if (!p || !p.isConnected) return;
+      const f = hmView().filter, fl = (HM_FILTERS.find(x => x[0] === f) || [])[1];
+      p.textContent = `${items.length.toLocaleString()} color${items.length === 1 ? "" : "s"} on the honeycomb${f !== "all" ? ` · ${fl} only` : ""}`;
+    }
     const syncFineSliders = () => sh.querySelectorAll(".hm-look-sliders .hm-tweak-row").forEach(row => {
       const k = row.dataset.key, input = row.querySelector("input"), out = row.querySelector("b"), c = ctrl ? ctrl.getCfg() : null;
       const val = c ? (c.tweak && c.tweak[k] != null ? c.tweak[k] : c.resolved[k]) : +input.value;
