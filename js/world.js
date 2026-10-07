@@ -146,11 +146,11 @@ function fashionDecadeDetail(id, opts = {}) {
   const self = () => fashionDecadeDetail(id, opts);
   const el = show(`
     ${worldTop("Decades")}
-    <div class="palette wd-dpal">${d.swatches.map(([h]) => `<span class="pal" style="--c:${h};flex:1" data-ink="${ink(h)}"></span>`).join("")}</div>
+    <div class="palette wd-dpal">${d.swatches.map(([h]) => `<button class="pal" data-swatch="${h}" style="--c:${h};flex:1" data-ink="${ink(h)}"></button>`).join("")}</div>
     <p class="eyebrow p-type">Fashion · Decade</p>
     <h1 class="p-title">${esc(d.label)}</h1>
     <p class="p-dek">${esc(d.years)}</p>
-    <div class="pal-names">${d.swatches.map(([h, label]) => `<div class="pal-name"><i style="--c:${h}"></i><b>${esc(label)}</b><em class="mono">${esc(h)}</em></div>`).join("")}</div>
+    <div class="pal-names">${d.swatches.map(([h, label]) => `<button class="pal-name" data-swatch="${h}"><i style="--c:${h}"></i><b>${esc(label)}</b><em class="mono">${esc(h)}</em></button>`).join("")}</div>
     <section class="wd-sec"><h3>Why these colors</h3><p>${worldLinkText(d.why)}</p></section>
     ${d.pieces && d.pieces.length ? `<section class="wd-sec"><h3>Iconic pieces</h3><ul class="wd-pieces">${d.pieces.map(p => `<li>${worldLinkText(p)}</li>`).join("")}</ul></section>` : ""}
     ${d.hedge ? `<p class="fine">${esc(d.hedge)}</p>` : ""}
@@ -169,7 +169,7 @@ function fashionHouseDetail(id, opts = {}) {
   const self = () => fashionHouseDetail(id, opts);
   const el = show(`
     ${worldTop("Houses")}
-    <div class="z-hero z-color" style="--c:${h.hex}" data-ink="${ink(h.hex)}"><span class="eyebrow">${esc(h.house)}</span><h1>${esc(h.label)}</h1><span class="mono">${esc(h.hex)}</span></div>
+    <div class="z-hero z-color" data-swatch="${h.hex}" style="--c:${h.hex}" data-ink="${ink(h.hex)}"><span class="eyebrow">${esc(h.house)}</span><h1>${esc(h.label)}</h1><span class="mono">${esc(h.hex)}</span></div>
     ${h.body ? `<p class="z-sum">${worldLinkText(h.body)}</p>` : ""}
     ${h.hedge ? `<p class="fine">${esc(h.hedge)}</p>` : ""}
     ${sourcesHTML(h.sources)}
@@ -187,7 +187,7 @@ function fashionHistoryDetail(id, opts = {}) {
   const sw = h.swatches || [];
   const el = show(`
     ${worldTop("Fashion history")}
-    ${sw.length ? `<div class="p-hero">${sw.map(([hex, label]) => `<div style="--c:${hex}" data-ink="${ink(hex)}" title="${esc(label)}"><span>${esc(label)}</span></div>`).join("")}</div>` : ""}
+    ${sw.length ? `<div class="p-hero">${sw.map(([hex, label]) => `<div style="--c:${hex}" data-swatch="${hex}" data-ink="${ink(hex)}" title="${esc(label)}"><span>${esc(label)}</span></div>`).join("")}</div>` : ""}
     <p class="eyebrow p-type">Fashion history</p>
     <h1 class="p-title">${esc(h.title)}</h1>
     ${h.dek ? `<p class="p-dek">${worldLinkText(h.dek)}</p>` : ""}
@@ -209,7 +209,7 @@ function fashionCoty(opts = {}) {
     <h1 class="p-title">Pantone Color of the Year</h1>
     <p class="p-dek">${worldLinkText(FASHION.cotyNote)}</p>
     <p class="fine">Approximate screen colors. Pantone® is a trademark of Pantone LLC; nothing here is an official published Pantone value.</p>
-    <div class="pal-names wd-coty">${FASHION.coty.map(c => `<div class="pal-name"><i style="--c:${esc(c.hex)}"></i><b>${esc(c.name)}</b><span>${worldLinkText(c.note)}</span><em class="mono">${c.year}</em></div>`).join("")}</div>
+    <div class="pal-names wd-coty">${FASHION.coty.map(c => `<button class="pal-name" data-swatch="${esc(c.hex)}"><i style="--c:${esc(c.hex)}"></i><b>${esc(c.name)}</b><span>${worldLinkText(c.note)}</span><em class="mono">${c.year}</em></button>`).join("")}</div>
   `, "article wd");
   worldBackWire(el, opts, fashionFallback);
   worldWire(el, self);

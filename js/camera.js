@@ -36,7 +36,7 @@ function eye() {
   const stop = () => { cancelAnimationFrame(raf); if (stream) stream.getTracks().forEach(t => t.stop()); stream = null; };
   cleanup.push(stop);
   $("[data-back]").onclick = () => { stop(); go(S.tab || "explore"); };
-  loadLongNames();
+  loadCoreNames();
 
   // average a small patch (in linear light, so it matches what the eye blends) at a point of the source
   const sample = (src, w, h, fx, fy) => {
@@ -51,14 +51,13 @@ function eye() {
   };
   const paint = hex => {
     if (!hex) return;
-    const { mine, long } = nameColor(hex, 1), best = long[0] && (!mine[0] || long[0].d <= mine[0].d + 1.5) ? long[0] : mine[0], m = mine[0];
-    if (!best) return;
-    cur = { hex, best, m };
+    const nm = nameOf(hex), [pair] = nearestColors(hex, 1), m = pair && pair[0];
+    cur = { hex, nm, m };
     ret.style.setProperty("--c", hex); $("#chip").style.setProperty("--c", hex);
-    $("#big").textContent = best.n;
-    $("#src").textContent = best.mine ? `A lesson word · ${lessonStatus(best.n)}` : `${srcLine(best)}${best.d > 6 ? " · nearest name" : ""}`;
+    $("#big").textContent = nm.text;
+    $("#src").textContent = nm.met ? `A lesson word · ${lessonStatus(nm.n)}` : nm.de < VERY_CLOSE_DE ? "Nearest of about 1,000 names" : `Nearest of about 1,000 names · ΔE ${nm.de}`;
     // second line: the nearest of the colors the lessons teach (hidden when the big name already is one)
-    $("#mine").innerHTML = m && !(best.mine && best.n === m.n) ? `<i style="--c:${m.h}"></i><span>Closest lesson word <b>${esc(m.n)}</b></span><em>${lessonStatus(m.n)}</em>` : "";
+    $("#mine").innerHTML = m && m.n.toLowerCase() !== nm.n.toLowerCase() ? `<i style="--c:${m.h}" data-swatch="${m.h}"></i><span>Closest lesson word <b>${esc(m.n)}</b></span><em>${lessonStatus(m.n)}</em>` : "";
   };
   // live: sample about eight times a second and ease between readings so the name doesn't flicker
   const tick = t => {
@@ -114,7 +113,7 @@ function eye() {
     if (frozen) return stream ? live() : null;
     if (vid.videoWidth) freeze(vid, vid.videoWidth, vid.videoHeight);
   };
-  $("#nm").onclick = () => cur && eyeSheet(cur.hex);
+  $("#nm").onclick = () => cur && nameSheet(cur.hex);
   $("#mine").onclick = () => { if (cur && cur.m) { stop(); XSTACK = []; openNode(graph().nodes.get("c:" + cur.m.n)); } };
   const fromFile = f => {
     if (!f) return;
@@ -140,20 +139,6 @@ function eye() {
     vid.srcObject = stream; vid.play().catch(() => {});
     raf = requestAnimationFrame(tick);
   })();
-}
-
-// tap the name: the closest names from every source, and the closest words the app teaches
-function eyeSheet(hex) {
-  const { mine, long } = nameColor(hex, 5);
-  const row = x => `<${x.mine ? `button data-node="c:${esc(x.n)}"` : "div"} class="kin"><i style="--c:${x.h}"></i><b>${esc(x.n)}</b><span>${x.mine ? lessonStatus(x.n) : esc(srcLine(x))} · ${closeness(x.d)}</span></${x.mine ? "button" : "div"}>`;
-  const { sh, close } = sheet(`
-    <div class="eye-sw" style="--c:${hex}" data-ink="${ink(hex)}"><span class="mono">${hex}</span></div>
-    <p class="eyebrow" style="margin:18px 0 6px">Precise names · from 2,700</p>${long.map(row).join("")}
-    <p class="eyebrow" style="margin:18px 0 6px">Closest lesson words · the colors you learn here</p>${mine.slice(0, 3).map(row).join("")}
-    <p class="fine">Phone cameras adjust white balance and exposure, so treat a camera reading as a good guess, not a measurement. WB (top right) sets white from something white or grey you tap, a simple von Kries correction. Readings are sRGB: colors more vivid than that (the iPhone camera and screen reach P3) are clipped.</p>
-    <button class="btn ghost" data-copy>Copy ${hex}</button>`);
-  sh.querySelector("[data-copy]").onclick = () => { try { navigator.clipboard.writeText(hex); toast("Copied " + hex); } catch (e) {} };
-  sh.querySelectorAll("[data-node]").forEach(b => b.onclick = () => { close(); XSTACK = []; openNode(graph().nodes.get(b.dataset.node)); });
 }
 
 const ICON_PHOTO = sv('<rect x="3" y="5" width="18" height="14" rx="2.5"/><circle cx="9" cy="10" r="1.8"/><path d="M21 16l-5.5-5.5L6 19"/>', 22, 1.8);

@@ -9,10 +9,10 @@ const tzMean = a => a.reduce((s, v) => s + v, 0) / Math.max(a.length, 1);
 function tzCorr(x, y) { const mx = tzMean(x), my = tzMean(y); let a = 0, b = 0, c = 0; x.forEach((v, i) => { a += (v - mx) * (y[i] - my); b += (v - mx) ** 2; c += (y[i] - my) ** 2; }); return b && c ? a / Math.sqrt(b * c) : 0; }
 const tzPct = (sorted, v) => { let lo = 0, hi = sorted.length; while (lo < hi) { const m = (lo + hi) >> 1; if (sorted[m] < v) lo = m + 1; else hi = m; } return lo / sorted.length; };
 const tzRound = (a, d = 3) => a.map(v => Array.isArray(v) ? tzRound(v, d) : +v.toFixed(d));
-// the most precise name for a color: the library name if it's clearly closer, else the app's word
+// the most precise name for a color (nameOf(), ROADMAP §13's one naming system), plus the nearest taught word
 function tzNamed(h) {
-  const { mine, long } = nameColor(h, 1), m = mine[0], l = long[0], best = l && l.d < m.d - .3 ? l : m;
-  return { h, n: best.n, src: best.mine ? "ColorHub" : srcLine(best) || "Color library", d: best.d, word: m.n, wordD: m.d };
+  const nm = nameOf(h), [pair] = nearestColors(h, 1), isApp = !!BYNAME.get(nm.n.toLowerCase());
+  return { h, n: nm.text, src: isApp ? "ColorHub" : (nm.near[0] && srcLine(nm.near[0].entry)) || "Nearest name", d: nm.de, word: pair ? pair[0].n : nm.n, wordD: pair ? pair[1] : 0 };
 }
 const tzOrder = p => p.shares.map((s, i) => i).sort((a, b) => p.shares[b] - p.shares[a]);
 const tzStrip = (p, cls = "tz-strip") => `<span class="${cls}">${tzOrder(p).map(i => `<i style="--c:${p.cols[i]};flex:${Math.max(p.shares[i], .012).toFixed(3)}"></i>`).join("")}</span>`;
@@ -39,7 +39,7 @@ function tasteIntro(kind) {
 }
 function tzReopen(kind) {
   const r = S.taste[kind], m = { mu: r.mu, S: r.S, n: TZ_N };
-  loadLongNames().then(() => kind === "palette" ? tzPalResult(m, true) : tzColorResult(m, true));
+  loadCoreNames().then(() => kind === "palette" ? tzPalResult(m, true) : tzColorResult(m, true));
 }
 const tasteRun = kind => kind === "palette" ? tzPalRun() : tzColorRun();
 
@@ -83,7 +83,7 @@ function tzColorRun() {
   const D = tzDuel(TZ_N);
   let t = 0;
   const step = () => {
-    if (t >= TZ_N) return loadLongNames().then(() => tzColorResult(m));
+    if (t >= TZ_N) return loadCoreNames().then(() => tzColorResult(m));
     const [a, b] = T.nextPair(m, pool, { skip: new Set(recent), ok: (a, b) => de2000(a.h, b.h) > (t < 8 ? 18 : 10) });
     const face = c => `<span class="tz-plate" style="--c:${c.h}"></span>`;
     D.ask(face(a), face(b), t < 6 ? "Sketching your taste" : t < 14 ? "Testing the edges" : "Fine-tuning", "Which color do you like more?", [a.h, b.h], k => {
@@ -186,7 +186,7 @@ function tzColorResult(m, reopen) {
   }
   const rec = S.taste.color, why = rec.why || (rec.why = {});
   const reading = tzReading(R);
-  const plate = (x, label, cls) => `<div class="tz-pick ${cls}"><span class="tz-pick-c" style="--c:${x.h}" data-ink="${ink(x.h)}"><span class="eyebrow">${label}</span></span>
+  const plate = (x, label, cls) => `<div class="tz-pick ${cls}"><span class="tz-pick-c" style="--c:${x.h}" data-swatch="${x.h}" data-ink="${ink(x.h)}"><span class="eyebrow">${label}</span></span>
     <b>${esc(x.n)}</b><small>${esc(x.src)}</small><span class="mono">${x.h}</span>${x.n !== x.word ? `<button class="tz-word" data-word="${esc(x.word)}">your word: ${esc(x.word)}</button>` : `<button class="tz-word" data-word="${esc(x.word)}">read about it</button>`}</div>`;
   // you vs most people: two well-studied reference colors, placed on this person's own map
   const blue = T.hexItem("#2A5DB0"), olive = T.hexItem("#4A412A");
@@ -260,7 +260,7 @@ function tzPalRun() {
   const T = TASTE, m = T.model(T.PAL_PRIOR), asked = [], zero = T.palFeat(T.DIALS.map(() => 0));
   const D = tzDuel(TZ_N);
   const step = () => {
-    if (asked.length >= TZ_N) return loadLongNames().then(() => tzPalResult(m));
+    if (asked.length >= TZ_N) return loadCoreNames().then(() => tzPalResult(m));
     const { k, pair: [a, b] } = T.nextPalPair(m, asked), dial = T.DIALS[k].k, prop = dial === "dom";
     D.ask(tzStrip(a), tzStrip(b), prop ? "Proportion round · same colors" : `What changes: ${TZ_ASK[dial]}`,
       prop ? "Which mix would you rather live with?" : "Which palette would you rather live with?", [a.cols[0], b.cols[0]], pick => {
@@ -312,7 +312,7 @@ function tzPalResult(m, reopen) {
     return `<div class="tz-dial ${r.strength < .45 ? "weak" : ""}"><div class="tz-dial-top"><b>${r.name}</b><em>${esc(tzDialText(r))}</em></div>
       <div class="tz-track">${was != null ? `<s style="left:${was.toFixed(1)}%"></s>` : ""}<i style="left:${x.toFixed(1)}%"></i></div><div class="tz-ends"><span>${r.lo}</span><span>${r.hi}</span></div></div>`;
   };
-  const names = () => tzOrder(pal).map(i => { const x = tzNamed(pal.cols[i]); return `<button class="tz-name" data-copy="${x.h}"><i style="--c:${x.h}"></i><b>${esc(x.n)}</b><small>${Math.round(pal.shares[i] * 100)}% · ${esc(x.src)}</small><em class="mono">${x.h}</em></button>`; }).join("");
+  const names = () => tzOrder(pal).map(i => { const x = tzNamed(pal.cols[i]); return `<button class="tz-name" data-copy="${x.h}"><i style="--c:${x.h}" data-swatch="${x.h}"></i><b>${esc(x.n)}</b><small>${Math.round(pal.shares[i] * 100)}% · ${esc(x.src)}</small><em class="mono">${x.h}</em></button>`; }).join("");
   const movedWords = before && before.dials ? read.map((r, k) => { const d = r.z - before.dials[k]; if (Math.abs(d) < .5) return null; return TZ_MOVE[r.k][d > 0 ? 1 : 0]; }).filter(Boolean) : null;
   const el = show(`
     <header class="art-top"><button class="icon-btn glass" data-close aria-label="Close">${ICON.x}</button><button class="glass-pill" data-share>${ICON.share}<span>Share</span></button></header>
@@ -454,12 +454,12 @@ function tasteShot(arg = "intro-color") {
     const u = c => { const s = Math.min(1, c.C / 30), b = (H, at, w) => Math.exp(-((T.hueDist(H, at) / w) ** 2)); return 3.4 * b(c.H, 225, 45) * s - 2.2 * b(c.H, 105, 30) * s - ((c.L - 42) / 22) ** 2; };
     for (let t = 0; t < TZ_N; t++) { const [a, b] = T.nextPair(m, pool, { rand, ok: (a, b) => de2000(a.h, b.h) > 12 }); T.choose(m, a.x, b.x, rand() < T.sig(u(a) - u(b)) ? 0 : 1, ref); }
     if (what === "moved") S.taste = { color: { at: "2026-09-30", mu: T.COLOR_PRIOR.map((_, i) => [.8, .2, 0, .3, .1, -.2, .5, 0, 0, 0][i]), top: { h: "#C8553D", n: "Terra cotta" } } };
-    if (what === "why") { S.taste = { color: { at: today(), mu: m.mu, S: m.S, top: {}, low: {}, why: { top: "sea", low: "mud" }, hist: [] } }; return loadLongNames().then(() => tzColorResult(m, true)); }
-    return loadLongNames().then(() => tzColorResult(m));
+    if (what === "why") { S.taste = { color: { at: today(), mu: m.mu, S: m.S, top: {}, low: {}, why: { top: "sea", low: "mud" }, hist: [] } }; return loadCoreNames().then(() => tzColorResult(m, true)); }
+    return loadCoreNames().then(() => tzColorResult(m));
   }
   const m = T.model(T.PAL_PRIOR), asked = [], zero = T.palFeat(T.DIALS.map(() => 0)), ideal = [1.1, -.9, .8, -.6, 0, 1.2];
   const u = p => -p.z.reduce((s, z, k) => s + (clamp(z, -2.5, 2.5) - ideal[k]) ** 2, 0) / 2;
   if (what === "moved") S.taste = { palette: { at: "2026-09-30", mu: [], dials: [-.6, .9, -.4, .5, 1, -.3] } };
   for (let t = 0; t < TZ_N; t++) { const { k, pair: [a, b] } = T.nextPalPair(m, asked, rand); asked.push(k); T.choose(m, a.x, b.x, rand() < T.sig(u(a) - u(b)) ? 0 : 1, zero); }
-  return loadLongNames().then(() => tzPalResult(m));
+  return loadCoreNames().then(() => tzPalResult(m));
 }

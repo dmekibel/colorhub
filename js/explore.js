@@ -377,7 +377,7 @@ function wikiPage(n) {
   const sw = n.swatches || [];
   const el = show(`
     ${artTop(n)}
-    ${sw.length ? `<div class="p-hero">${sw.map(s => `<div style="--c:${s.h}" data-ink="${ink(s.h)}" title="${esc(s.label || "")}"><span>${esc(sw.length > 3 ? (s.label || "").split(/ · |: |, /)[0] : s.label || "")}</span></div>`).join("")}</div>` : ""}
+    ${sw.length ? `<div class="p-hero">${sw.map(s => `<div style="--c:${s.h}" data-swatch="${s.h}" data-ink="${ink(s.h)}" title="${esc(s.label || "")}"><span>${esc(sw.length > 3 ? (s.label || "").split(/ · |: |, /)[0] : s.label || "")}</span></div>`).join("")}</div>` : ""}
     <p class="eyebrow p-type">${esc(TYPE_LABEL[n.type] || "Page")}</p>
     <h1 class="p-title">${esc(n.title)}</h1>
     ${n.dek ? `<p class="p-dek">${linkText(n.dek)}</p>` : ""}

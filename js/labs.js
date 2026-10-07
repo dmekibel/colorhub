@@ -169,13 +169,12 @@ LAB.namer = (hex = "#5F8C8A") => {
   el.querySelector("[data-back]").onclick = () => go("studio");
   const out = el.querySelector("#nout");
   const render = h => {
-    const { mine, long } = nameColor(h, 4);
-    out.innerHTML = `<section class="facet"><h3>In the app's words</h3>${mine.map(x => `<button class="kin" data-node="c:${esc(x.n)}"><i style="--c:${x.h}"></i><b>${esc(x.n)}</b><span>${closeness(x.d)} · ΔE ${x.d.toFixed(1)}</span></button>`).join("")}</section>
-      ${long.length ? `<section class="facet"><h3>Precise names</h3>${long.map(x => `<div class="kin"><i style="--c:${x.h}"></i><b>${esc(x.n)}</b><span>${closeness(x.d)} · ΔE ${x.d.toFixed(1)}</span></div>`).join("")}</section>` : ""}`;
+    const nm = nameOf(h);
+    out.innerHTML = `<section class="facet"><h3>Nearest names · tap any</h3>${nm.near.map(x => `<button class="kin" data-swatch="${esc(x.h)}"><i style="--c:${x.h}"></i><b>${esc(x.n)}</b><span>${swCloseness(x.de)} · ΔE ${x.de.toFixed(1)}</span></button>`).join("")}</section>`;
   };
   wireLinks(out);
   const picker = colorPicker(el.querySelector("#pick"), { hex, onChange: render });
-  loadLongNames().then(() => render(picker.get()));
+  loadCoreNames().then(() => render(picker.get()));
   render(hex);
   let stream = null;
   const stop = () => { if (stream) stream.getTracks().forEach(t => t.stop()); stream = null; };

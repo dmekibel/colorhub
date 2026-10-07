@@ -1,7 +1,8 @@
 """How close painting colors get to their nearest name, at several list sizes (ROADMAP §13-14).
-Run from the repo root: python3 tools/name_coverage.py. Lists are a farthest-point spread of data/library.json, a stand-in
-for the real ordered core list until that exists."""
-import json, numpy as np
+Run from the repo root: python3 tools/name_coverage.py. The synthetic ladder (101/250/.../2711) is a farthest-point
+spread of data/library.json, used to pick a target size; the final section measures the real, built core list
+(data/core-names.json, tools/build_core_names.py) the same way, so the two are directly comparable."""
+import json, sys, numpy as np
 def lab(rgb):
     c=rgb/255.0; c=np.where(c>0.04045,((c+0.055)/1.055)**2.4,c/12.92)
     M=np.array([[0.4124,0.3576,0.1805],[0.2126,0.7152,0.0722],[0.0193,0.1192,0.9505]])
@@ -34,9 +35,16 @@ LH=np.array([[int(x['h'][i:i+2],16) for i in (1,3,5)] for x in lib],float); LL=l
 order=[int(np.argmin(np.abs(LL[:,0]-50)+np.hypot(LL[:,1],LL[:,2])))]; dmin=de00(LL,LL[order])[:,0]
 for _ in range(len(LL)-1):
     j=int(np.argmax(dmin)); order.append(j); dmin=np.minimum(dmin,de00(LL,LL[[j]])[:,0])
-print(f"{n} paintings, 20,000 sampled palette colors. Nearest-name ΔE2000:")
-for N in [101,250,500,1000,1500,2711]:
-    sub=LL[order[:N]]
+def row(label, sub):
     d=np.concatenate([de00(PL[i:i+2000],sub).min(1) for i in range(0,len(PL),2000)])
     q=lambda p: np.percentile(d,p)
-    print(f"{N:5d} names: median {q(50):4.1f}  90th {q(90):4.1f}  <3: {np.mean(d<3)*100:4.0f}%  <5: {np.mean(d<5)*100:4.0f}%")
+    print(f"{label:>22}: median {q(50):4.1f}  90th {q(90):4.1f}  <3: {np.mean(d<3)*100:4.0f}%  <5: {np.mean(d<5)*100:4.0f}%")
+
+print(f"{n} paintings, 20,000 sampled palette colors. Nearest-name ΔE2000:")
+if "--ladder" in sys.argv or "--core" not in sys.argv:
+    for N in [101,250,500,1000,1500,2711]:
+        row(f"{N} names (synthetic)", LL[order[:N]])
+if "--core" in sys.argv or "--ladder" not in sys.argv:
+    core=json.load(open('data/core-names.json'))
+    CH=np.array([[int(x['h'][i:i+2],16) for i in (1,3,5)] for x in core],float); CL=lab(CH)
+    row(f"{len(core)} names (core-names.json)", CL)
