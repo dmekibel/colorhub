@@ -25,7 +25,7 @@ sheets close on swipe-down
 | 4 | Clever palettes from any image: many strategies (area, accents, lights vs shadows, harmony fits, painter recipes), the mosaic picker (6-400 tiles, finger-swipe to collect) | §16 | M-L |
 | 5 | Painting page: highlight the color you came from, 3-20 palette slider, tap the painting to name a spot | §13 | M |
 | 6 | Image analysis for uploads and every painting: closest painter / era / country / painting by color, stats, views, fun facts; "shares colors with" flowers, gems, fashion eras | §15, §16 | M + S-M |
-| 7 | Color harmony taught like music (intervals, chords, keys) + a Train track (name the interval, build the chord, spot the wrong note) | §16 | M |
+| 7 | (Folded into #4, the palette engine.) David's music metaphor is a way to THINK about the palette engine, not a separate feature: intervals, chords, keys, voicing and tension/resolution become one of the engine's strategies and its vocabulary for explaining a palette ("a warm triad in a low key, with one bright accent"). A Train track built on it is optional, later | §16 | in #4 |
 | 8 | Mix lab: two colors at every ratio in light / digital / print / paint, with prediction games | §18 | M |
 | 9 | Design rebuild to DESIGN-SYSTEM.md, in testable batches: rooms + navigation (Today folds into Learn), Learn it on the flashcards (fixes the cut-off and ugly steps), color page, Explore covers, Train stations, the bubble-to-page motion | DESIGN-SYSTEM.md | L, batched |
 | 10 | Stages as the learning path (25 / 50 / 101 / 150 / 250 / 400 / 600 / 800 / 1,000) with fields (painter, designer, colorist...) and end-of-stage tests | §14 | M + M |

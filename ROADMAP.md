@@ -339,7 +339,7 @@ Strategies:
   high chroma, complementary pops), "Rothko" (2-3 neighbors, close values), "Vermeer" (yellow-blue among neutrals),
   "Hiroshige" (blue gradients), "Zorn" (limited palette). Present as "in the spirit of", never as the painter's real palette.
 - Verify each paper before citing it in the app; research pass first: research/PALETTE-STRATEGIES.md (S, Sonnet).
-**Harmony as music theory** (David's framing; it also gives the engine its vocabulary and a Train track):
+**Harmony as music theory** (David's framing, clarified 2026-10-08: it's one way to think about and build palettes inside the palette engine, and the language the engine uses to explain a palette; a Train track is optional and later):
 - Interval: the step between two colors on 3 axes (hue angle, lightness step, chroma step). Name the intervals: "neighbor"
   (≈30°), "third" (≈90°), "complement" (180°), plus value steps.
 - Chord: a palette built from intervals. Root: the dominant color. Triad, split, analogous run, square.
