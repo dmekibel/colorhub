@@ -149,16 +149,19 @@ Ends with a lesson score and Next.
 - The app opens on the full-screen color explorer (the 101 you're learning by default); chrome fades while browsing.
 - The honeycomb stays pure: true colors only, no progress rings, no dimming (every color must look exactly like its name).
 - Progress is a view, not a marking: one-tap toggles in the title control: All 101 · Learned · Learning · Not met yet.
-- Controls (inspired by ALTER's single notebook door): only two small round corner buttons + one line of text at the top.
-  - Bottom-left "Do": its ring shows how much of today is done; tap → a stack rises up the left edge: Continue (next lesson
-    or review) · Challenge · Today's color · Train (today's suggested station).
-  - Bottom-right "Go": tap → a stack rises up the right edge: Learn (the path) · Train · Explore · Studio · Camera. It replaces
-    the tab bar on home. Long-press Go = camera.
-  - Stacks: items rise one by one with labels sliding in; the honeycomb dims slightly; tap outside or the button to close;
-    only one stack open at a time.
-  - While dragging the honeycomb both buttons shrink to dots and fade back when you stop.
-  - Top: "The 101 you're learning ▾" (tap for views; swipe sideways for All/Learned/Learning/Not met) and the center color's name.
-  - Inside Learn/Train/Explore/Studio the same Go button stays bottom-right; swipe down returns to the honeycomb.
+- Controls (David preferred this over the ALTER-style corner menus): almost nothing on screen but color.
+  - One caption at the bottom names the color in the center as you drift ("Cerulean · a lesson word"), like a radio dial.
+  - Controls appear only when needed: tap empty space or pause and a thin glass bar fades in; start dragging and it fades away.
+  - The bottom sheet is the app: a small handle at the bottom edge. Pull it up partway = Today (Continue · Challenge · Today's
+    color · a Train suggestion). Pull it all the way = four big doors: Learn · Train · Explore · Studio. Push it down = back to color.
+  - No tab bar on the home screen; inside Learn/Train/Explore/Studio a slim back-to-honeycomb button sits top-left.
+  - Title control at the top (shown with the bar): "The 101 you're learning ▾"; tap for views (All · Learned · Learning · Not met yet
+    · Every name · families · traditions); swipe sideways on it to flick between All/Learned/Learning/Not met.
+  - Pull down from the top for search ("sea", "rust", "Monet"): the honeycomb glides to the closest color or filters to matches.
+  - A camera button in the bar: point at something and the honeycomb flies to the nearest name.
+  - Small touches: a faint haptic tick as bubbles pass the center; long-press a bubble to peek (name + look-alikes); two-finger
+    tap to zoom out to the whole view; a "surprise me" dice that glides to a color you haven't met.
+  - First launch: the honeycomb drifting, one line: "Every color has a name. Tap one." First tap opens its page; first Learn it is guided.
 - Tap a color: its FULL page opens directly (no half-height card, no second tap): the bubble grows into the page's swatch; the page has
   the story, look-alikes, In paintings/poems/nature/fashion, and a prominent Learn it button near the top. Back or swipe down returns
   to the honeycomb exactly where you were.
