@@ -27,14 +27,19 @@ const VERY_CLOSE_DE = 3, NEAR_DE = 8;   // ROADMAP §13's thresholds
 // the target color and its nearest name — the same "biggest difference wins" weighting as lookDiff()
 // (js/lookalikes.js), just producing one absolute word ("pale salmon") instead of a comparative sentence.
 const hueLean = h => { h = (h + 360) % 360; return h < 40 || h >= 345 ? "reddish" : h < 100 ? "yellowish" : h < 170 ? "greenish" : h < 260 ? "bluish" : "purplish"; };
-function pickModifier(nameLch, targetLch) {
+// Words a name may already carry, by axis: a modifier never doubles up on its own axis ("pale dark jungle green").
+const MOD_AXIS_WORDS = { L: /\b(light|pale|dark|deep|dusky|bright)\b/i, C: /\b(grey|gray|greyish|grayish|dusty|dull|vivid|bright|neon|electric)\b/i,
+  H: /\b(reddish|yellowish|greenish|bluish|purplish|orangish|pinkish)\b/i };
+function pickModifier(nameLch, targetLch, name = "") {
   const [Ln, Cn] = nameLch, [Lt, Ct, Ht] = targetLch;
   const dL = Lt - Ln, dC = Ct - Cn;
   let dH = Ht - nameLch[2]; if (dH > 180) dH -= 360; if (dH < -180) dH += 360;
   const scores = [["L", Math.abs(dL), dL], ["C", Math.abs(dC) * .8, dC]];
   if (Cn > 8 && Ct > 8) scores.push(["H", Math.abs(dH) * Math.min(Cn, Ct) / 40, dH]);
   scores.sort((a, b) => b[1] - a[1]);
-  const [axis, , v] = scores[0];
+  const ok = scores.filter(sc => !MOD_AXIS_WORDS[sc[0]].test(name));
+  if (!ok.length) return "";
+  const [axis, , v] = ok[0];
   if (axis === "L") return v > 0 ? (Ct < 20 ? "pale" : "light") : (Ct > 35 ? "deep" : "dark");
   if (axis === "C") return v < 0 ? (Ct < 15 ? "greyish" : "dusty") : (Lt > 55 ? "bright" : "vivid");
   return hueLean(Ht);
@@ -67,9 +72,10 @@ function nameOf(color, opts = {}) {
     const second = near.find(x => x.n !== top.n);
     if (second) { between = { a: top.n, b: second.n }; text = `between ${top.n.toLowerCase()} and ${second.n.toLowerCase()}`; }
   } else if (top.de >= VERY_CLOSE_DE) {
-    mod = pickModifier(lch(top.h), Lt);
-    text = `${mod} ${top.n.toLowerCase()}`;
+    mod = pickModifier(lch(top.h), Lt, top.n);
+    if (mod) text = `${mod} ${top.n.toLowerCase()}`;
   }
+  text = text.charAt(0).toUpperCase() + text.slice(1);   // "Pale salmon", "Between teal and slate"
   return { n: top.n, h: top.h, de: Math.round(top.de * 10) / 10, mod, text, near, between, met: coreWordMet(top.entry) };
 }
 

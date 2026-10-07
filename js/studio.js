@@ -206,53 +206,62 @@ function keepPalette(cols, from) {
   buzz(10); toast("Kept in your palettes");
 }
 
-// ---------- palette from an image: k-means in OKLab, weighted by area ----------
+// ---------- palette from an image ----------
+// 1. Over-cluster: k-means in OKLab into many more groups than asked for (16+), so a vivid detail (a red sun, a teal sky
+//    in a comic) gets its own group instead of being averaged into its neighbors.
+// 2. Choose k of them: area matters, but so do vividness and distinctness. Each pick is the group with the best
+//    share^0.6 x vividness x distance-from-what's-already-picked, so three near-identical greys don't crowd out a teal.
+// 3. Re-measure shares against the chosen colors only, so the percentages add up to 100.
 function extractPalette(canvas, k) {
-  const sc = Math.min(1, 140 / Math.max(canvas.width, canvas.height)), w = Math.max(1, Math.round(canvas.width * sc)), h = Math.max(1, Math.round(canvas.height * sc));
+  const sc = Math.min(1, 160 / Math.max(canvas.width, canvas.height)), w = Math.max(1, Math.round(canvas.width * sc)), h = Math.max(1, Math.round(canvas.height * sc));
   const c = document.createElement("canvas"); c.width = w; c.height = h; const x = c.getContext("2d"); x.drawImage(canvas, 0, 0, w, h);
   const d = x.getImageData(0, 0, w, h).data, px = [];
   for (let i = 0; i < d.length; i += 4) if (d[i + 3] > 128) px.push(oklabRgb(lin8(d[i]), lin8(d[i + 1]), lin8(d[i + 2])).concat([(i / 4) % w / w, Math.floor(i / 4 / w) / h]));
+  if (!px.length) return [];
   const dist = (p, q) => (p[0] - q[0]) ** 2 + (p[1] - q[1]) ** 2 + (p[2] - q[2]) ** 2;
+  const chroma = p => Math.hypot(p[1], p[2]);
+  const toHex = cc => "#" + oklabToLin(...cc).map(v => enc8(v).toString(16).padStart(2, "0")).join("").toUpperCase();
   // k-means++ start with a fixed seed, so the same image always gives the same palette
   let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
-  const cents = [px[Math.floor(rnd() * px.length)].slice(0, 3)];
-  while (cents.length < k) {
-    const ds = px.map(p => Math.min(...cents.map(cc => dist(p, cc)))), tot = ds.reduce((a, b) => a + b, 0);
-    let t = rnd() * tot, i = 0; while (t > ds[i] && i < ds.length - 1) t -= ds[i++];
-    cents.push(px[i].slice(0, 3));
+  const K = Math.min(px.length, Math.max(16, k * 2 + 4));
+  const cents = [px[Math.floor(rnd() * px.length)].slice(0, 3)], dmin = px.map(p => dist(p, cents[0]));
+  while (cents.length < K) {
+    const tot = dmin.reduce((a, b) => a + b, 0); if (!tot) break;
+    let t = rnd() * tot, i = 0; while (t > dmin[i] && i < dmin.length - 1) t -= dmin[i++];
+    cents.push(px[i].slice(0, 3)); px.forEach((p, j) => { const dd = dist(p, cents[cents.length - 1]); if (dd < dmin[j]) dmin[j] = dd; });
   }
-  let lab = new Array(px.length).fill(0);
-  for (let it = 0; it < 12; it++) {
-    lab = px.map(p => { let b = 0, bd = 1e9; cents.forEach((cc, j) => { const dd = dist(p, cc); if (dd < bd) { bd = dd; b = j; } }); return b; });
+  const assign = cs => px.map(p => { let b = 0, bd = 1e9; cs.forEach((cc, j) => { const dd = dist(p, cc); if (dd < bd) { bd = dd; b = j; } }); return b; });
+  let lab = assign(cents);
+  for (let it = 0; it < 14; it++) {
     const sum = cents.map(() => [0, 0, 0, 0]);
     px.forEach((p, i) => { const s = sum[lab[i]]; s[0] += p[0]; s[1] += p[1]; s[2] += p[2]; s[3]++; });
     sum.forEach((s, j) => { if (s[3]) cents[j] = [s[0] / s[3], s[1] / s[3], s[2] / s[3]]; });
+    lab = assign(cents);
   }
-  const out = cents.map((cc, j) => {
+  // each group's color: its inner core (the 60% of its pixels nearest the center), then the more vivid half of that.
+  // Printed inks and painted areas mix with line work and texture at this size; the plain mean comes out muddy.
+  const groups = cents.map((cc, j) => {
     const mine = px.filter((p, i) => lab[i] === j); if (!mine.length) return null;
-    // where in the picture: the pixel closest to the cluster's average color
-    let best = mine[0], bd = 1e9; mine.forEach(p => { const dd = dist(p, cc); if (dd < bd) { bd = dd; best = p; } });
-    const lin = oklabToLin(...cc), hx = "#" + lin.map(v => enc8(v).toString(16).padStart(2, "0")).join("").toUpperCase();
-    return { h: hx, share: mine.length / px.length, at: [best[3], best[4]] };
-  }).filter(Boolean);
-  // k-means averages small bright details away (a red boat on a grey sea). Look for the most striking pixels that
-  // no cluster explains; if there are enough of them, they replace the smallest cluster as an accent.
-  if (k >= 6) {
-    const chroma = p => Math.hypot(p[1], p[2]), near = p => Math.min(...cents.map(cc => dist(p, cc)));
-    let cand = null, score = 0;
-    for (const p of px) { const sc = chroma(p) * Math.sqrt(near(p)); if (sc > score) { score = sc; cand = p; } }
-    if (cand && chroma(cand) > .09 && near(cand) > .012) {
-      // the accent = pixels of the same hue that are nearly as vivid (a red drop shades from bright to dark)
-      const hc = Math.atan2(cand[2], cand[1]), cc = chroma(cand), dh = p => Math.abs(((Math.atan2(p[2], p[1]) - hc + 3 * Math.PI) % (2 * Math.PI)) - Math.PI);
-      const group = px.filter(p => chroma(p) > cc * .55 && dh(p) < .4);
-      if (group.length >= Math.max(6, px.length * .001)) {
-        const m = [0, 1, 2].map(j => group.reduce((t, p) => t + p[j], 0) / group.length), lin = oklabToLin(...m);
-        out.sort((a, b) => b.share - a.share).pop();
-        out.push({ h: "#" + lin.map(v => enc8(v).toString(16).padStart(2, "0")).join("").toUpperCase(), share: group.length / px.length, at: [cand[3], cand[4]], accent: true });
-      }
-    }
+    mine.sort((p, q) => dist(p, cc) - dist(q, cc));
+    const core = mine.slice(0, Math.max(1, Math.ceil(mine.length * .6))).sort((p, q) => chroma(q) - chroma(p)).slice(0, Math.max(1, Math.ceil(mine.length * .3)));
+    const col = [0, 1, 2].map(t => core.reduce((a, p) => a + p[t], 0) / core.length);
+    return { col, share: mine.length / px.length, at: [core[0][3], core[0][4]] };
+  }).filter(g => g && g.share > .002);
+  // pick k: area x vividness x distinctness
+  const picked = [], left = groups.slice();
+  while (picked.length < k && left.length) {
+    let bi = 0, bs = -1;
+    left.forEach((g, i) => {
+      const near = picked.length ? Math.sqrt(Math.min(...picked.map(q => dist(g.col, q.col)))) : 1;
+      const s = Math.pow(g.share, .6) * (.5 + 3 * chroma(g.col)) * Math.pow(Math.min(1, near / .14), 1.5);
+      if (s > bs) { bs = s; bi = i; }
+    });
+    picked.push(left.splice(bi, 1)[0]);
   }
-  return out.sort((a, b) => b.share - a.share);
+  // shares against the chosen colors only
+  const final = assign(picked.map(g => g.col)), n = picked.map(() => 0); final.forEach(j => n[j]++);
+  return picked.map((g, j) => ({ h: toHex(g.col), share: n[j] / px.length, at: g.at, accent: g.share < .05 && chroma(g.col) > .08 }))
+    .filter(p => p.share > 0).sort((a, b) => b.share - a.share);
 }
 
 function studioFromImage(canvas, from) {

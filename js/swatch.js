@@ -34,7 +34,7 @@ function nameSheet(hex) {
   // (the ones with full pages) get one quiet line, even when the sheet's own name isn't among them.
   const nearApp = nearestColors(hex, 2).map(([c]) => c);
   const { sh, close } = sheet(`
-    <div class="pk-hero" style="--c:${hex}" data-ink="${ink(hex)}"><span class="mono">${hex}</span><h2>${esc(nm.text || nm.n)}</h2>${!nm.met ? `<small>New word</small>` : ""}</div>
+    <div class="pk-hero" style="--c:${hex}" data-ink="${ink(hex)}"><span class="mono">${hex}</span><h2>${esc(nm.text || nm.n)}</h2>${!nm.met && !nm.between ? `<small>New word</small>` : ""}</div>
     ${nearApp.length ? `<p class="fine sw-close-app">Close to ${nearApp.map(c => `<button class="wl" data-sw-app="${esc(c.n)}">${esc(c.n)}</button>`).join(nearApp.length > 1 ? " and " : "")} · read ${nearApp.length > 1 ? "their stories" : "its story"}</p>` : ""}
     <div class="lk-list" data-sw-near>${nm.near.map((x, i) => `<button class="lk-row" data-sw-i="${i}"><i style="--c:${x.h}"></i><b>${esc(x.n)}</b><span>${swCloseness(x.de)} · ΔE ${x.de.toFixed(1)}</span></button>`).join("")}</div>
     ${also.length ? `<p class="fine">Also called ${also.map(esc).join(", ")}.</p>` : ""}
