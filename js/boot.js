@@ -30,6 +30,14 @@ function shot(name) {
     case "learn": return go("learn");
     // the honeycomb home (js/home.js): home, home:sheet, home:sheetfull, home:views, home:search
     case "home": return hmShot(arg);
+    // bare honeycomb review shot, no chrome at all (tools/honey-contact-sheets.sh): honey:<style>:<n>:<default|out>
+    case "honey": { const [styleId = "current", nStr = "101", zArg = "default", tw = ""] = (arg || "").split(":"), n = +nStr || 101;
+      return labItems(n).then(items => {
+        const el = show(`<div class="hc-shot"></div>`, "fixed");
+        const host = el.querySelector(".hc-shot"), ctrl = honeycomb(host, { items, style: styleId, centerFirst: true });
+        if (zArg === "out") later2(() => { const z = ctrl.getCfg().resolved.zMinUser; ctrl.zoom(z != null ? z : .2, false); }, 150);
+        if (tw === "tweak") later2(() => hmOpenTweak(ctrl), 200);
+      }); }
     // the Learn it mini-lesson (js/learnit.js): learnit:<meet|tell|sort|pick|memory|done>
     case "learnit": return hmLearnitShot(arg || "meet");
     case "gym": return go("gym");

@@ -116,6 +116,10 @@
 .cx-f>span i{flex:1;font-style:normal;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .cx-f>span em{font:500 10px/1 var(--mono);font-style:normal;letter-spacing:.04em;color:var(--ink)}
 
+/* a bare, chrome-free honeycomb for design review screenshots (#shot=honey:<style>:<n>:<default|out>) */
+.hc-shot{position:absolute;inset:0}
+.hc-shot .hc-cap{display:none}
+
 /* ---- the honeycomb view: canvas plus a caption naming the bubble in the middle ---- */
 .hc{display:flex;flex-direction:column}
 .hc-box{flex:1;min-height:0;position:relative;overflow:hidden}
