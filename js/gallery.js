@@ -475,11 +475,12 @@ function glPage(i, d, names) {
     <h1 class="p-title">${esc(d.t)}</h1>
     <p class="p-dek">${esc([d.a || "Artist unknown", d.co, d.mv].filter(Boolean).join(" · "))}</p>
     <div class="sec-head gl-pal-h"><b>Computed palette</b><span>6 colors, by area</span></div>
-    <div class="palette">${pal.map((p, j) => `<button class="pal" data-pi="${j}" style="--c:${p.h};flex:${Math.max(p.share, .08).toFixed(3)}" data-ink="${ink(p.h)}"><span>${Math.round(p.share * 100)}%</span></button>`).join("")}</div>
+    <div class="palette">${pal.map(p => `<button class="pal" data-swatch="${p.h}" style="--c:${p.h};flex:${Math.max(p.share, .08).toFixed(3)}" data-ink="${ink(p.h)}"><span>${Math.round(p.share * 100)}%</span></button>`).join("")}</div>
     <div class="pal-names">${pal.map((p, j) => {
-      const x = libs[j], w = words[j];
+      const x = libs[j], w = words[j], nm = nameOf(p.h);
       const word = x && x.n.toLowerCase() === w.toLowerCase() ? `<a class="wl" data-to="c:${esc(w)}">one of your words</a>` : `your word: <a class="wl" data-to="c:${esc(w)}">${esc(w)}</a>`;
-      return `<button class="pal-name" data-pi="${j}"><i style="--c:${p.h}"></i><b>${esc(x ? x.n : w)}</b><span>${esc((x && srcLine(x)) || "ColorHub")} · ${word}</span><em class="mono">${p.h}</em></button>`;
+      const also = x && x.n.toLowerCase() !== nm.n.toLowerCase() ? `also called ${esc(x.n)} · ` : "";
+      return `<button class="pal-name" data-swatch="${p.h}"><i style="--c:${p.h}"></i><b>${esc(nm.text)}</b><span>${also}${esc((x && srcLine(x)) || "ColorHub")} · ${word}</span><em class="mono">${p.h}</em></button>`;
     }).join("")}</div>
     <p class="fine">Computed by ColorHub, not by the museum: six colors found in its small photo, each sized by its share of the picture and given the nearest of 2,700 named colors. Screen approximations; old varnish and the photograph shift color.</p>
     <div class="sec-head gl-sim-h"><b>Similar palettes</b><span>by color, not subject</span></div>
@@ -491,12 +492,6 @@ function glPage(i, d, names) {
   if (hiImg) { const big = new Image(); big.onload = () => { if (hiImg.isConnected) { hiImg.src = big.src; hiImg.classList.add("hi"); } }; big.src = hiImg.dataset.hi; }
   el.querySelector("[data-back]").onclick = xBack;
   onKey = e => { if (e.key === "Escape") xBack(); };
-  let on = -1;
-  el.querySelectorAll("[data-pi]").forEach(b => b.addEventListener("click", e => {
-    if (e.target.closest("[data-to]")) return;
-    const j = +b.dataset.pi; on = on === j ? -1 : j;
-    el.querySelectorAll("[data-pi]").forEach(x => x.classList.toggle("on", +x.dataset.pi === on));
-  }));
   el.addEventListener("click", e => {
     const a = e.target.closest("[data-to]");
     if (a) { e.preventDefault(); return openNode(graph().nodes.get(a.dataset.to)); }

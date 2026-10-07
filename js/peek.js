@@ -21,19 +21,20 @@ function peek(c) {
   const n = colorNode(c), w = n && n.wiki, nb = neighbor(c), st = c.id && S.cards[c.id];
   const pts = peekPaintings(c);
   const facets = (w ? w.facets : []).slice(0, 3);
-  const twins = (LONG_NAMES ? nameColor(c.h, 5).long : []).filter(x => x.d < 6).slice(0, 4);
+  // other names nearly the same color (ROADMAP §13's one naming system: data/core-names.json via js/naming.js)
+  const twins = (CORE_NAMES || []).filter(x => x.n.toLowerCase() !== c.n.toLowerCase()).map(x => ({ ...x, d: de2000(c.h, x.lab) })).filter(x => x.d < 6).sort((a, b) => a.d - b.d).slice(0, 4);
   const rel = (w && w.related || []).slice(0, 4).map(r => { const x = BYNAME.get(String(r.to).toLowerCase()); return x ? { x, why: r.why } : null; }).filter(Boolean);
   const box = document.createElement("div");
   box.className = "peek"; box.setAttribute("role", "dialog"); box.setAttribute("aria-label", "About " + c.n);
   box.innerHTML = `
     <div class="pk-grab"></div>
-    <div class="pk-hero" style="--c:${c.h}" data-ink="${ink(c.h)}"><span class="mono">${c.h}</span><h2>${esc(c.n)}</h2>${st ? `<small>${isMine(st) ? "Yours" : "Learning"}</small>` : ""}</div>
+    <div class="pk-hero" style="--c:${c.h}" data-swatch="${c.h}" data-ink="${ink(c.h)}"><span class="mono">${c.h}</span><h2>${esc(c.n)}</h2>${st ? `<small>${isMine(st) ? "Yours" : "Learning"}</small>` : ""}</div>
     ${nb && c.d ? `<div class="pk-vs" data-nb="${esc(c.n)}"><span class="pair"><i style="--c:${c.h}"></i><i style="--c:${nb.h}"></i></span><p>${esc(c.d)}</p></div>` : ""}
     ${c.o ? `<p class="pk-lead">${esc(c.o)}</p>` : ""}
     ${typeof figHTML === "function" ? figHTML(c.n) : ""}
     ${facets.map(f => `<section class="pk-sec"><h3>${esc(FACET_LABEL[f.k] || f.k)}</h3><p>${peekPlain(f.text)}</p></section>`).join("")}
     ${pts.length ? `<section class="pk-sec"><h3>${pts[0].near ? "Closest in the paintings" : "In paintings"}</h3><div class="pk-ptgs">${pts.map(x => `<figure><img src="${esc(x.p.thumb || x.p.img)}" alt="" loading="lazy"><figcaption><b>${esc(x.p.title)}</b><span>${esc(x.p.artist || "")}${x.share ? ` · ${Math.round(x.share * 100)}% of the canvas` : ""}</span></figcaption></figure>`).join("")}</div></section>` : ""}
-    ${twins.length ? `<section class="pk-sec"><h3>Nearly the same, other names</h3>${twins.map(x => `<div class="kin"><i style="--c:${x.h}"></i><b>${esc(x.n)}</b><span>${esc(srcLine(x))}</span></div>`).join("")}</section>` : ""}
+    ${twins.length ? `<section class="pk-sec"><h3>Nearly the same, other names</h3>${twins.map(x => `<div class="kin" data-swatch="${x.h}"><i style="--c:${x.h}"></i><b>${esc(x.n)}</b><span>${esc(srcLine(x))}</span></div>`).join("")}</section>` : ""}
     ${rel.length ? `<section class="pk-sec"><h3>Kin</h3>${rel.map(r => `<div class="kin"><i style="--c:${r.x.h}"></i><b>${esc(r.x.n)}</b><span>${esc(r.why)}</span></div>`).join("")}</section>` : ""}
     <div class="pk-foot"><button class="btn" data-back>Back to learning ${ICON.arrow}</button></div>`;
   document.body.appendChild(box);
@@ -55,7 +56,7 @@ function peek(c) {
   box.addEventListener("pointermove", e => { if (y0 == null) return; dy = e.clientY - y0; if (dy > 6 && box.scrollTop <= 0) { box.style.transition = "none"; box.style.transform = `translateY(${dy}px)`; } });
   const end = () => { if (y0 == null) return; y0 = null; if (dy > 110) return close(); box.style.transition = "transform .3s var(--ease)"; box.style.transform = ""; };
   box.addEventListener("pointerup", end); box.addEventListener("pointercancel", end);
-  if (!LONG_NAMES) loadLongNames();   // the "other names" row fills in next time
+  if (!CORE_NAMES) loadCoreNames();   // the "other names" row fills in next time
   buzz(6);
 }
 

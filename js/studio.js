@@ -166,8 +166,8 @@ function gamutWheel(preset = "Warm") {
     const [qx, qy] = toPx(pal.center); c.fillStyle = "#F3F3F1"; c.beginPath(); c.arc(qx, qy, 3, 0, Math.PI * 2); c.fill();
     if (cur && cur.join() === pal.cols.join()) return;
     cur = pal.cols;
-    el.querySelector("#pal").innerHTML = pal.cols.map(h => `<i style="--c:${h}"></i>`).join("");
-    el.querySelector("#hlist").innerHTML = pal.cols.map((h, i) => { const { mine, long } = nameColor(h, 1), b = long[0] && (!mine[0] || long[0].d <= mine[0].d + 1.5) ? long[0] : mine[0]; return `<button class="h-item" data-copy="${h}"><i style="--c:${h}"></i><span><b>${esc(b ? b.n : h)}</b><em class="mono">${h}${i === 0 ? " · light" : i === pal.cols.length - 1 ? " · dark" : ""}</em></span></button>`; }).join("");
+    el.querySelector("#pal").innerHTML = pal.cols.map(h => `<i style="--c:${h}" data-swatch="${h}"></i>`).join("");
+    el.querySelector("#hlist").innerHTML = pal.cols.map((h, i) => { const nm = nameOf(h); return `<button class="h-item" data-copy="${h}"><i style="--c:${h}" data-swatch="${h}"></i><span><b>${esc(nm.text)}</b><em class="mono">${h}${i === 0 ? " · light" : i === pal.cols.length - 1 ? " · dark" : ""}</em></span></button>`; }).join("");
   };
   // dragging: a corner reshapes, the inside moves the whole shape; everything stays on the wheel
   let drag = null;
@@ -196,6 +196,7 @@ function gamutWheel(preset = "Warm") {
   el.querySelector("[data-open]").onclick = () => paletteView({ cols: cur.map(h => ({ h })), from: "Gamut wheel" });
   requestAnimationFrame(setup);
   addEventListener("resize", setup); cleanup.push(() => removeEventListener("resize", setup));
+  if (!CORE_NAMES) loadCoreNames().then(() => { if (el.isConnected) { cur = null; draw(); } });
 }
 
 function keepPalette(cols, from) {
@@ -280,22 +281,23 @@ function paletteView(p) {
     ${hasImg ? `<p class="fine">Colors are grouped by similarity (k-means in OKLab) on a small copy of the image; "by area" shows how much of the picture each one covers. A small, striking color that the groups miss is added as an accent.</p>` : ""}
   `, "article studio");
   el.querySelector("[data-back]").onclick = () => studio();
-  const named = h => { const { mine, long } = nameColor(h, 1), b = long[0] && (!mine[0] || long[0].d <= mine[0].d + 1.5) ? long[0] : mine[0]; return { b, m: mine[0] }; };
+  // the nearest taught (101) word, mentioned only when it differs from the real nearest-of-1,000 name
+  const named = h => { const nm = nameOf(h), [pair] = nearestColors(h, 1); return { nm, lesson: pair && pair[1] < 6 && pair[0].n.toLowerCase() !== nm.n.toLowerCase() ? pair[0] : null }; };
   const render = () => {
     const cols = colsNow();
     el.querySelector("#pv").className = "pv-pal pv-" + look;
-    el.querySelector("#pv").innerHTML = cols.map(c => `<i style="--c:${c.h};--w:${look === "weighted" ? Math.max(c.share, .02) : 1}" data-ink="${ink(c.h)}">${pct && c.share != null && look !== "chips" ? `<span>${c.share < .01 ? "<1" : Math.round(c.share * 100)}%</span>` : ""}</i>`).join("");
-    el.querySelector("#hlist").innerHTML = cols.map(c => { const { b, m } = named(c.h); return `<button class="h-item" data-copy="${c.h}"><i style="--c:${c.h}"></i><span><b>${esc(b ? b.n : c.h)}</b><em class="mono">${c.h}${c.accent ? " · accent" : ""}${pct && c.share != null ? ` · ${c.share < .01 ? "<1" : Math.round(c.share * 100)}%` : ""}${m && b !== m ? ` · lesson word ${esc(m.n)}` : ""}</em></span></button>`; }).join("");
+    el.querySelector("#pv").innerHTML = cols.map(c => `<i style="--c:${c.h};--w:${look === "weighted" ? Math.max(c.share, .02) : 1}" data-ink="${ink(c.h)}" data-swatch="${c.h}">${pct && c.share != null && look !== "chips" ? `<span>${c.share < .01 ? "<1" : Math.round(c.share * 100)}%</span>` : ""}</i>`).join("");
+    el.querySelector("#hlist").innerHTML = cols.map(c => { const { nm, lesson } = named(c.h); return `<button class="h-item" data-copy="${c.h}"><i style="--c:${c.h}" data-swatch="${c.h}"></i><span><b>${esc(nm.text)}</b><em class="mono">${c.h}${c.accent ? " · accent" : ""}${pct && c.share != null ? ` · ${c.share < .01 ? "<1" : Math.round(c.share * 100)}%` : ""}${lesson ? ` · lesson word ${esc(lesson.n)}` : ""}</em></span></button>`; }).join("");
     if (hasImg) el.querySelector("#dots").innerHTML = cols.map(c => `<i style="--c:${c.h};left:${c.at[0] * 100}%;top:${c.at[1] * 100}%"></i>`).join("");
   };
-  loadLongNames().then(render); render();
+  loadCoreNames().then(render); render();
   const seg = (sel, attr, set) => el.querySelectorAll(`${sel} [${attr}]`).forEach(b => b.onclick = () => { set(b.getAttribute(attr)); el.querySelectorAll(`${sel} [${attr}]`).forEach(x => x.classList.toggle("on", x === b)); render(); buzz(4); });
   if (hasImg) { seg("#cnt", "data-n", v => { n = +v; }); el.querySelector("[data-pct]").onclick = e => { pct = !pct; e.currentTarget.classList.toggle("on", pct); render(); }; }
   seg("#look", "data-look", v => { look = v; });
   el.querySelector("#hlist").addEventListener("click", e => { const b = e.target.closest("[data-copy]"); if (b) { try { navigator.clipboard.writeText(b.dataset.copy); toast("Copied " + b.dataset.copy); } catch (x) {} } });
   const hexes = () => colsNow().map(c => c.h);
   const copy = t => { try { navigator.clipboard.writeText(t); toast("Copied"); } catch (e) {} };
-  el.querySelector("[data-css]").onclick = () => copy(":root {\n" + colsNow().map((c, i) => `  --color-${i + 1}: ${c.h}; /* ${named(c.h).b ? named(c.h).b.n : ""} */`).join("\n") + "\n}");
+  el.querySelector("[data-css]").onclick = () => copy(":root {\n" + colsNow().map((c, i) => `  --color-${i + 1}: ${c.h}; /* ${named(c.h).nm.text} */`).join("\n") + "\n}");
   el.querySelector("[data-hex]").onclick = () => copy(hexes().join(" "));
   el.querySelector("[data-keep]").onclick = e => { if (p.savedAt != null) return; keepPalette(hexes(), p.from || "Palette"); e.currentTarget.textContent = "Kept"; };
   el.querySelector("[data-share]").onclick = () => sharePalette(colsNow(), p.from, named);
@@ -312,9 +314,9 @@ function sharePalette(cols, from, named) {
   cols.forEach((c, i) => { x.fillStyle = c.h; x.fillRect(m + i * bw - .5, top, bw + 1, bh); });
   x.restore();
   cols.forEach((c, i) => {
-    const nm = named(c.h).b; x.save(); x.translate(m + i * bw + bw / 2 + 12, top + bh - 40); x.rotate(-Math.PI / 2);
+    const nm = named(c.h).nm; x.save(); x.translate(m + i * bw + bw / 2 + 12, top + bh - 40); x.rotate(-Math.PI / 2);
     x.fillStyle = ink(c.h) === "dark" ? "rgba(20,19,17,.85)" : "rgba(255,255,255,.9)"; x.font = `500 ${Math.min(30, bw * .32)}px 'Geist Mono', monospace`;
-    x.fillText(((nm ? nm.n : "") + "  " + c.h).toUpperCase(), 0, 0); x.restore();
+    x.fillText((nm.text + "  " + c.h).toUpperCase(), 0, 0); x.restore();
   });
   x.fillStyle = "#F3F3F1"; x.font = "400 92px 'Instrument Serif', Georgia, serif"; x.fillText(from || "A palette", m, 1180);
   x.fillStyle = "#8C8A84"; x.font = "500 30px 'Geist Mono', monospace"; x.fillText("MADE IN COLORHUB", m, 1250);

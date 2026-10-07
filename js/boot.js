@@ -85,6 +85,12 @@ function shot(name) {
     case "gallery": return galleryShot(name.slice(8));   // gallery, gallery:scroll=600, gallery:color=Cobalt, gallery:adjust=Cobalt, gallery:page=12, gallery:cpage=Cobalt
     case "world": case "fashiondecade": case "fashioncoty": case "fashionhouse": case "fashionhistory":
       return typeof worldShot === "function" && worldShot(screen, arg);   // js/world.js
+    // the color link sheet (ROADMAP §13, js/swatch.js) opened over a real screen: swsheet:gallery|studio|fashion
+    case "swsheet": {
+      if (arg === "studio") { gamutWheel(); return later2(() => nameSheet("#4CBB17"), 900); }
+      if (arg === "fashion") { if (window.FASHION) fashionDecadeDetail(FASHION.decades[2].id); else fashionFallback(); return later2(() => nameSheet("#1C2B5A"), 700); }
+      return loadGallery().then(() => { galleryPage(0); later2(() => nameSheet(glHex(0, 0)), 700); });
+    }
     // gems (js/gems.js): gems:world, gems:gems|essays, gems:gem:<id>, gems:essay:<id>
     case "gems": { const [sub, a2] = (arg || "world").split(":");
       if (sub === "world") { S.lens = "world"; return go("explore"); }

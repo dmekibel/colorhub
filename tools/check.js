@@ -64,4 +64,21 @@ for (const u of D.units) {
 warnings.forEach(w => console.log("warn  " + w));
 errors.forEach(e => console.log("FAIL  " + e));
 console.log(`${total} colors, ${D.units.length} units: ${errors.length} failures, ${warnings.length} warnings`);
-process.exit(errors.length ? 1 : 0);
+
+// ROADMAP.md §13's naming gate: nameOf() (js/naming.js) is the only function that names a color for display,
+// built on data/core-names.json; nothing else picks names straight out of the old 2,700-name library.
+// Simple allowlist, not a parser: a file on it may reference LONG_NAMES, nameColor( or library.json; everything
+// else fails the build if it does. js/naming.js and js/graph.js are the naming system itself. js/colorsets.js
+// and js/home.js are a different feature, not a display path: the honeycomb's "every name" view browses the
+// raw library as a set of items (each bubble is one exact library entry), not the nearest name of a color.
+// js/honey.js only mentions "library.json" in a comment about that same view's item shape.
+const NAMING_ALLOW = new Set(["naming.js", "graph.js", "colorsets.js", "home.js", "honey.js"]);
+const nameErrors = [];
+for (const f of fs.readdirSync(path.join(__dirname, "../js")).filter(f => f.endsWith(".js"))) {
+  if (NAMING_ALLOW.has(f)) continue;
+  const text = fs.readFileSync(path.join(__dirname, "../js", f), "utf8");
+  if (/LONG_NAMES|\bnameColor\(|library\.json/.test(text)) nameErrors.push(f);
+}
+nameErrors.forEach(f => console.log(`FAIL  js/${f}: names a color outside js/naming.js's nameOf() (LONG_NAMES, nameColor(, or library.json)`));
+console.log(`naming gate: ${nameErrors.length} files name colors outside the one naming system`);
+process.exit(errors.length || nameErrors.length ? 1 : 0);

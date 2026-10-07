@@ -794,8 +794,11 @@ img{transition:opacity .6s var(--ease)}
 .pk-grab::before{content:"";position:absolute;inset:-16px -80px}
 .pk-hero{height:min(38dvh,300px);background:var(--c);border-radius:3px;padding:18px;display:flex;flex-direction:column;justify-content:flex-end;gap:6px}
 .pk-hero[data-ink="dark"]{color:#141311}.pk-hero[data-ink="light"]{color:#fff}
-.pk-hero h2{font:400 clamp(44px,13vw,64px)/.92 var(--serif);letter-spacing:-.03em}
+.pk-hero h2{font:400 clamp(44px,13vw,64px)/.92 var(--serif);letter-spacing:-.03em;word-break:break-word}
 .pk-hero .mono,.pk-hero small{font:500 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;opacity:.72}
+/* the color link sheet (js/swatch.js) can show a longer phrase ("between teal and slate"), not just one word */
+.sw-sheet .pk-hero h2{font-size:clamp(26px,7.5vw,38px)}
+.sw-sheet .pk-hero{height:auto;min-height:160px}
 .pk-vs{display:flex;gap:12px;align-items:center;margin-top:16px}
 .pk-vs .pair{display:flex;flex:none}.pk-vs .pair i{width:26px;height:26px;background:var(--c)}
 .pk-vs p{font:400 19px/1.2 var(--serif)}
