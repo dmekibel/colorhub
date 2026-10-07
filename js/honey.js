@@ -153,7 +153,7 @@ function honeycomb(host, opts = {}) {
     <button class="hc-cap"><i></i><span><b></b><small></small></span><em></em></button>`;
   const cv = host.querySelector("canvas"), ctx = cv.getContext("2d"), cap = host.querySelector(".hc-cap");
   const RM = reduceMotion, SHOOT = typeof SHOT !== "undefined" && !!SHOT, DRIFT = .2, LENS = { m0: 3.7, m1: .82, sig: 1.9 }, ZMAX = 2.5;
-  let VIG_BG = "";
+  let VIG_BG = "", ZCLEAN = 0;
   let ZMIN = .4;   // per set: zoom out until the screen holds most of one repeat; the vignette hides the copies (see zFloor)
   let layout = opts.layout === "wheel" ? "wheel" : "map", lay = null, P = [0, 0], W = 0, Hh = 0, dpr = 1, base = 30, dead = false;
   let Z = clamp(+opts.zoom || 1, .4, ZMAX), zAnim = null, ghost = null, ghostT0 = 0;
@@ -179,7 +179,12 @@ function honeycomb(host, opts = {}) {
     const fits = z => F(lay.per * .52, { s: z, m0: LENS.m0, m1: LENS.m1, sig: LENS.sig }) >= want;
     let lo = .05, hi = ZMAX; if (!fits(hi)) return ZMAX;
     for (let i = 0; i < 24; i++) { const m = (lo + hi) / 2; if (fits(m)) hi = m; else lo = m; }
-    return Math.max(.15, hi);
+    // the "clean" zoom: the whole screen still sits inside half a repeat, so no copy can show and no vignette is needed
+    const clean = z => Finv(Math.hypot(W, Hh) / 2, { s: z, m0: LENS.m0, m1: LENS.m1, sig: LENS.sig }) <= lay.per * .5;
+    let a = .05, c = ZMAX;
+    if (clean(c)) { for (let i = 0; i < 24; i++) { const m = (a + c) / 2; if (clean(m)) c = m; else a = m; } }
+    ZCLEAN = c;
+    return Math.max(.15, Math.min(hi, c));
   };
   // the world offset (from the pan point) under a screen point
   const offAt = (sx, sy, l) => { const dx = sx - W / 2, dy = sy - Hh / 2, r = Math.hypot(dx, dy); if (r < 1e-6) return [0, 0]; const z = Finv(r, l); return [dx / r * z, dy / r * z]; };
@@ -251,13 +256,16 @@ function honeycomb(host, opts = {}) {
       if (a > 0) { ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = a; ctx.drawImage(ghost, 0, 0); ctx.globalAlpha = 1; } else ghost.on = false;
       if (!ghost.on) ghost = null;
     }
-    // vignette: everything farther than ~half a repeat from the center fades out, so a wrapping set never shows a color twice
-    if (lay && !lay.finite) {
-      const l = lens(t), r0 = F(lay.per * .4, l), r1 = F(lay.per * .52, l), far = Math.hypot(W, Hh) / 2;
+    // vignette: only once you zoom out past the "clean" zoom, and only as much as needed. It grows from nothing at the clean
+    // zoom to a soft fade of the far edge (beyond half a repeat, where copies would start) at the widest zoom.
+    if (lay && !lay.finite && Z < ZCLEAN - .01) {
+      const k = clamp((ZCLEAN - Z) / Math.max(.01, ZCLEAN - ZMIN), 0, 1);
+      const l = lens(t), r0 = F(lay.per * .5, l), far = Math.hypot(W, Hh) / 2, r1 = Math.max(r0 + 40, Math.min(far, F(lay.per * .7, l)));
       if (r0 < far) {
         VIG_BG = VIG_BG || getComputedStyle(document.body).backgroundColor || "rgb(14,13,11)";
-        const g = ctx.createRadialGradient(W / 2, Hh / 2, r0, W / 2, Hh / 2, Math.max(r0 + 1, r1));
-        g.addColorStop(0, VIG_BG.replace(/rgba?\(([^,]+),([^,]+),([^,)]+).*\)/, "rgba($1,$2,$3,0)")); g.addColorStop(1, VIG_BG);
+        const rgb = (VIG_BG.match(/\d+/g) || [14, 13, 11]).slice(0, 3).join(",");
+        const g = ctx.createRadialGradient(W / 2, Hh / 2, r0, W / 2, Hh / 2, r1);
+        g.addColorStop(0, `rgba(${rgb},0)`); g.addColorStop(1, `rgba(${rgb},${(.85 * k).toFixed(3)})`);
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.globalAlpha = 1; ctx.fillStyle = g; ctx.fillRect(0, 0, W, Hh);
       }
     }
