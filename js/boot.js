@@ -43,6 +43,9 @@ function shot(name) {
     case "daily": S.daily = {}; return daily();
     case "lab": return LAB[arg || "harmony"]();
     case "taste": return tasteShot(arg);
+    case "poem": return poemPage(name.slice(5), {});   // poem:<poem id>
+    case "poemcolor": { const n = g().nodes.get("c:" + (arg || "Crimson")); XSTACK = ["p:" + n.id]; colorPage(n); const x = document.querySelector(".c-poems"), h = document.querySelector(".c-hero"); if (x && h) h.after(x); return; }   // "In poems" moved up so one screen shows it
+    case "potd": return show(`<div class="sec-head"><b>Today</b></div><div class="today">${poemOfTheDayCard()}</div>`, "", "learn");
     case "match": return openMatch(arg || "list", { shot: name.split(":")[2] || "task" });   // match:<id>[:reveal|:curves|:lvN|:done]
     case "say": case "make": case "intro": return prodShot(screen, arg);   // say:<empty|typed|right|close|wrong|gave>, make:<picking|result>, intro:<say|make>
     case "pick": case "place": case "exp": return pickShot(screen, arg);   // pick:<ask|right|wrong>, place:<ask|result>, exp:<about|test|done>

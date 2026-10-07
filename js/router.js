@@ -14,7 +14,7 @@
 const routeSlug = s => String(s).normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 const APP_BASE = () => location.origin + location.pathname.replace(/[^/]*$/, "");
 const TAB_ROUTE = { learn: ["today", "Today"], gym: ["train", "Train"], explore: ["explore", "Explore"], studio: ["studio", "Studio"] };
-const LENS_ROUTE = { spectrum: "colors", paintings: "paintings", ideas: "ideas", saved: "saved" };   // "For you" is plain #/explore
+const LENS_ROUTE = { spectrum: "colors", paintings: "paintings", poems: "poems", ideas: "ideas", saved: "saved" };   // "For you" is plain #/explore
 let ROUTE_NEXT = null, ROUTE_REPLACE = false, ROUTE_NOW = "";
 
 function nodeRoute(n) {
@@ -76,7 +76,8 @@ const ROUTED = [["colorPage", nodeRouted()], ["wikiPage", nodeRouted()], ["paint
   ["daily", () => routed("Color of the day", "daily")],
   ["challenge", () => routed("Daily challenge", "challenge")], ["challengeDone", () => routed("Daily challenge", "challenge")],
   ["tasteIntro", k => k === "palette" ? routed("Find your palette", "taste/palette") : routed("Find your color", "taste/color")],
-  ["glPage", (i, d) => routed(d && d.t || "Painting", "gallery/" + i)]];   // a museum painting (js/gallery.js); i = its place in the gallery index
+  ["glPage", (i, d) => routed(d && d.t || "Painting", "gallery/" + i)],
+  ["poemPage", id => id != null ? routed("Poem", "poem/" + id) : null]];   // js/poems.js   // a museum painting (js/gallery.js); i = its place in the gallery index
 ROUTED.forEach(([name, f]) => routeWrap(window, name, f));
 routeWrap(LAB, "harmony", () => routed("Harmony", "lab/harmony"));
 routeWrap(LAB, "contrast", () => routed("Albers", "lab/contrast"));
@@ -112,6 +113,9 @@ function openRoute(hash, initial = false) {
       return n.kind === "story" ? storyPlayer(n) : openNode(n);
     });
     return true;
+  }
+  if (kind === "poem" && id && typeof poemPage === "function") {
+    base(); XSTACK = []; poemPage(id); return true;
   }
   if (kind === "gallery" && /^\d+$/.test(id || "") && typeof galleryPage === "function") {
     base();
