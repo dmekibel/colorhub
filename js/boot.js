@@ -30,6 +30,15 @@ function shot(name) {
     case "story": { const st = g().stories[+arg || 0]; return storyPlayer(st); }
     case "daily": S.daily = {}; return daily();
     case "lab": return LAB[arg || "harmony"]();
+    case "colors": {   // colors:<set id>:<view id>:<adjust|tap|press|zoomin|zoomout|bench|benchout>
+      const [, set, view, act] = name.split(":"), def = COLOR_SETS.find(x => x.id === (set || "101")) || COLOR_SETS[0];
+      S.lens = "spectrum"; S.cb = { preset: def.id, state: JSON.parse(JSON.stringify(def.state)), view: view || "map" }; go("explore");
+      const h = document.getElementById("honey"); if (!h) return;
+      h.className = "honey-panel"; h.innerHTML = "";
+      scrollTo(0, h.getBoundingClientRect().top + scrollY - 250);
+      colorBrowser(h, { focus: dailyColor(), pick: c => closeup(colorNode(c)), shot: act });
+      return;
+    }
   }
 }
 
