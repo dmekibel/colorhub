@@ -106,6 +106,24 @@ def sizes(raw):
             w = (x.get("images") or {}).get("web") or {}
             if w.get("width") and w.get("height"):
                 out[f"cma-{x['id']}"] = int(w["height"]) / int(w["width"])
+    # every other museum: read the size of the small copy cached when the palettes were measured
+    try:
+        from PIL import Image
+    except ImportError:
+        return out
+    for src in ("nga", "rijks", "smk", "met"):
+        d = raw / src / "img"
+        if not d.is_dir():
+            continue
+        for f in d.iterdir():
+            if f.suffix.lower() not in (".jpg", ".jpeg", ".png"):
+                continue
+            try:
+                with Image.open(f) as im:
+                    w, h = im.size
+                out.setdefault(f"{src}-{f.stem}", h / w)
+            except Exception:
+                pass
     return out
 
 
@@ -179,8 +197,10 @@ def main():
         img = x["img"]
         # The Art Institute of Chicago's image server now refuses requests from other sites, so its
         # paintings are served from our own small copies (img/gallery/aic/<number>.jpg, 200px wide).
-        if x["id"].startswith("aic-") and (ROOT / "img" / "gallery" / "aic" / (x["id"][4:] + ".jpg")).exists():
-            img = "img/gallery/aic/" + x["id"][4:] + ".jpg"
+        # SMK's image server is too slow for a phone (often 15-40 s per image), so it gets the same treatment.
+        for pre in ("aic", "smk"):
+            if x["id"].startswith(pre + "-") and (ROOT / "img" / "gallery" / pre / (x["id"][len(pre) + 1:] + ".jpg")).exists():
+                img = f"img/gallery/{pre}/" + x["id"][len(pre) + 1:] + ".jpg"
         details.append([x["id"], x.get("t") or "Untitled", x.get("a"), x.get("co"), x.get("mv"), img, rec, li, wi])
 
         r = ratio.get(x["id"]) or x.get("r") or (x["h"] / x["w"] if x.get("w") and x.get("h") else None)
