@@ -7,7 +7,7 @@ Details live in ROADMAP.md (§ numbers).
 | Note | Where | Status |
 |---|---|---|
 | Honeycomb: no black gaps, outer bubbles bigger with names, zoom-out that stays, circle-to-hexagon shape, style presets, a Tweak panel with sliders and "Copy settings" | style lab agent | building |
-| Plain-English names only (no "Blue (Munsell)", "Vinaceous-Brown"); Japanese names become English with a cultural note; honest "close / not close" wording; Studio drops "lesson word" | names cleanup agent | building |
+| Plain-English names only; Japanese names become English with a cultural note; honest "close / not close" wording; Studio drops "lesson word" | names cleanup | DONE 2026-10-08 |
 
 ## Next (in order)
 | # | Note | Where | Size |
@@ -27,6 +27,48 @@ Details live in ROADMAP.md (§ numbers).
 | 12 | Train results screen after every session: % right, count, your threshold in plain words ("you can tell apart colors about 1.5 ΔE apart, close to the limit of human vision"), every miss shown side by side with what you picked, "replay my misses", and your trend vs your own past sessions | gym.js / gym-engine.js | S-M |
 | 13 | World percentile ("better than 82% of people"): needs a small anonymous scores service (Supabase; opt-in, no personal data). Until then, show your threshold against the standard reference values for human color discrimination, labeled as reference values, not other players | backend + gym | M |
 | 14 | Train families from the brainstorm: odd-one-out family, rearrange family (2D gradients), memory additions, photo missions | ROADMAP build order | M each |
+
+## Everything else approved (ROADMAP §1-11), grouped. Built after the queue above, in testable batches
+**Train: odd one out family (§2)**
+- odd pair, odd group (hidden shape), how many (0-4), twins, which direction
+- boards: grid, ring, honeycomb, mosaic, strip; mixed tile sizes; busy colored grounds; gradient boards; painting tiles
+- flash (1 s), growing board, speed tiers with a combo meter
+
+**Train: rearrange family (§3)**
+- 2D gradient board, hue ring (Farnsworth-style), two-sheet swap, repair 3 wrong tiles, mixing ladder, painting strip,
+  spiral boards
+- Wordle-style lock-in (3 tries), a heat map of how far each tile was off; snap and ripple feel
+
+**Train: progression and flow (§4)**
+- a hidden skill estimate per judgment and per color region
+- an honest eye profile ("you see blues to 1.4")
+- difficulty that breathes inside a set (~80% right)
+- streak-sensitive difficulty; speed counts lightly
+- worlds instead of numbers (Greys, Skin tones, Skies, Shadows), each with a final challenge and mastery stars
+- a before/after with real color pairs
+- a journey map per station
+- daily three in Train
+- replay misses (also #12 above)
+
+**Train: memory (§5)**
+- name ↔ color recall; remembering real objects' colors; Simon-style sequences; drift reveal after a miss
+
+**Learning (§1, §6, §14)**
+- the path: chapters and 3-5 minute lessons (meet, see, sort, story, make, mission); checkpoints; review lessons;
+  "legendary" replays; testing out
+- unit stories; real-object cards (a teal duck); photo missions ("spotted teal today?", auto-checked); a weekly recap
+- the stages and fields as the path's chapters
+
+**Explore and Studio (§7, §8)**
+- color pages as hubs (done); today in color; mood search ("sea at dusk"); Paintings + Poems merged into Art
+- Studio: palette critique (lightness spread, color-blind safety, contrast, "fix"); mockups (poster, phone, room, outfit);
+  exports (Procreate, .ase, Figma, CSS)
+
+**Beauty and clever (§9, §10, §11, DESIGN-SYSTEM.md)**
+- motion pass and moments (lesson complete, new color owned, level up)
+- the bubble-to-page signature motion
+- optional sound; a haptic language
+- the color mind profile; an adaptive coach ("you confuse teal and cerulean"); explain my miss
 
 ## Smaller fixes noted
 - One painting title is truncated ("The Fif").
