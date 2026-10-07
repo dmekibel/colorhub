@@ -73,7 +73,8 @@ function family(h) {
 // Where a trial sat: family, lightness band, strength band.
 const bandsOf = h => { const [L, C] = lch(h); return { f: family(h), l: lBand(L), c: cBand(C) }; };
 // Colors the drills draw from: the ones you've met, so practice reinforces the path.
-// For color-blind players, offsets lean on lightness and the axis they see (fair drills, honest scores).
+// For color-blind players: a simple adjustment, not a simulation of color blindness. Offsets lean on lightness and
+// shrink along the axis that's hard to tell apart, so the drills stay fair; scores are still plain CIEDE2000.
 const cvdOn = () => !!(S.profile && ["red-green", "blue-yellow"].includes(S.profile.cvd));
 const cvdW = base => { const v = S.profile && S.profile.cvd; return v === "red-green" ? [base[0] + .3, base[1] * .3, base[2]] : v === "blue-yellow" ? [base[0] + .3, base[1], base[2] * .3] : base; };
 // A hue (LCh degrees) the player can see: red-green color blindness keeps to yellows and blues, blue-yellow to reds and greens.
@@ -138,8 +139,9 @@ function makeStair(k) {
   const st = skillState(k), sk = SKILLS[k];
   return {
     d: st.level || sk.start, log: [],
-    step(ok) { this.log.push(this.d); this.d = stairNext(this.d, ok, sk.floor); },
-    // Estimate = geometric mean of the last few levels you worked at.
+    // act = the difference actually drawn (8-bit hex codes), logged instead of the intended d (js/accuracy.js)
+    step(ok, act) { this.log.push(act != null ? act : this.d); this.d = stairNext(this.d, ok, sk.floor); },
+    // Estimate = geometric mean of the last few differences you worked at, as drawn.
     estimate() { return geoMean(this.log.slice(-6)) || this.d; },
   };
 }
@@ -288,7 +290,7 @@ function gymHome() {
       <span class="sg-name">Check-in</span>
       <span class="sg-what">${ks.map(k => esc(SKILLS[k].name)).join(" · ")}. A short fixed test with no feedback: the honest number behind your levels.</span>
       <span class="sg-go"><b>Start</b><span>${rounds} rounds · about 3 minutes</span>${ICON.arrow}</span>
-    </button>`;
+    </button>${scrChip()}`;
   } else {
     const sg = suggestStation(), sk0 = SKILLS[sg.k], s0 = stationLevel(sg.k);
     top = `<button class="sg-card" data-st="${sg.k}">
@@ -305,7 +307,7 @@ function gymHome() {
     <h1 class="tab-title" style="margin-top:22px">Train</h1>
     ${top}
     ${eyeProfile()}
-    ${cvdOn() ? `<p class="x-sub" style="margin-top:12px">Stations are tuned for ${S.profile.cvd} color blindness: differences lean on lightness and the colors you see best.</p>` : ""}
+    ${cvdOn() ? `<p class="x-sub" style="margin-top:12px">A simple adjustment for ${S.profile.cvd} color blindness, not a simulation of it: differences lean on lightness and on the colors you see best.</p>` : ""}
     ${SHELVES.map(([name, ks]) => `<div class="sec-head"><b>${name}</b><span>${name === "Applied" ? "built on the basics" : name === "In context" ? "color next to color" : "one judgment at a time"}</span></div>
       <div class="gs-grid">${ks.map(stationTile).join("")}</div>`).join("")}
     <div class="sec-head"><b>Play</b></div>
@@ -316,6 +318,7 @@ function gymHome() {
   `, "gym", "gym");
   el.querySelectorAll("[data-st]").forEach(b => b.onclick = () => b.dataset.locked ? toast(b.dataset.locked) : runDrill(b.dataset.st));
   const ck = el.querySelector("[data-checkin]"); if (ck) ck.onclick = runCheckin;
+  const sc = el.querySelector("[data-scr]"); if (sc) sc.onclick = () => screenCheck(() => go("gym"));
   el.querySelector("[data-lightning]").onclick = lightning;
   el.querySelector("[data-eye]").onclick = eyeReport;
   el.querySelectorAll("[data-taste]").forEach(b => b.onclick = () => tasteIntro(b.dataset.taste));
@@ -341,7 +344,7 @@ function stationDone(r) {
     </div>
     ${r.weak ? `<p class="gy-weak">${esc(r.weak)}.</p>` : ""}
     ${tip ? `<div class="gy-tip"><p class="eyebrow">One thing to try</p><p>${esc(tip.tip)}</p><p class="gy-fixwhat">The fix: ${esc(tip.fixWhat)}</p></div>` : `<p class="lede">${esc(sk.why)}</p>`}
-    <p class="fine gr-fine">Smaller numbers mean smaller differences. Session scores move from day to day; your weekly check-in is the real trend.</p>
+    <p class="fine gr-fine">Smaller numbers mean smaller differences, measured on the colors as your screen drew them. Session scores move from day to day; your weekly check-in is the real trend.${!tip && sk.src ? ` Source: ${esc(sk.src)}.` : ""}</p>
     <div class="stack">${tip ? `<button class="btn" data-fix>Fix it: 3 rounds ${ICON.arrow}</button><button class="btn ghost" data-again>Another set</button>` : `<button class="btn" data-again>Another set ${ICON.arrow}</button>`}<button class="btn ghost" data-home>Back to Train</button></div>
   `, "result gym-res");
   el.querySelector("[data-again]").onclick = () => runDrill(r.k);
@@ -388,20 +391,21 @@ function runSession(o) {
     clk.style.setProperty("--t", ms + "ms"); clk.classList.remove("on"); void clk.offsetWidth; clk.classList.add("on");
     later(() => { if (cur.id === id && !cur.done) onOut(); }, ms);
   };
-  const log = (ok, meta = {}) => trials.push({ k: it.k, ok: ok ? 1 : 0, f: meta.f, l: meta.l, c: meta.c, s: meta.s, cf: meta.cf, rp: meta.rp ? { ...meta.rp, d: it.d != null ? it.d : sesOf(it.k).d } : null, cb: !!it.rp, d: sesOf(it.k).d });
+  const log = (ok, meta = {}) => trials.push({ k: it.k, ok: ok ? 1 : 0, f: meta.f, l: meta.l, c: meta.c, s: meta.s, cf: meta.cf, rp: meta.rp ? { ...meta.rp, d: it.d != null ? it.d : sesOf(it.k).d } : null, cb: !!it.rp, d: meta.act != null ? meta.act : sesOf(it.k).d, a: meta.act });
   // after the one intro round: the why, the aim line, then practice
   const introPanel = (extra = null) => {
     const prev = extra != null ? extra : (foot.querySelector(".note") || {}).innerHTML;
     why.textContent = SKILLS[it.k].why; why.classList.add("show");
-    foot.innerHTML = `<div class="gy-ipanel">${prev ? `<p class="note">${prev}</p>` : ""}<p class="note gy-aim">${esc(AIM_LINE)}</p><button class="btn" data-start>Start practice ${ICON.arrow}</button></div>`;
+    foot.innerHTML = `<div class="gy-ipanel">${prev ? `<p class="note">${prev}</p>` : ""}<p class="note gy-aim">${esc(AIM_LINE)}</p>${SKILLS[it.k].src ? `<p class="fine gy-src">Source: ${esc(SKILLS[it.k].src)}.</p>` : ""}<button class="btn" data-start>Start practice ${ICON.arrow}</button></div>`;
     foot.querySelector("[data-start]").onclick = () => { gyState().seen[it.k] = 1; save(); runDrill(it.k, { noIntro: true }); };
   };
   function pick(ok, reveal, meta = {}) {
     if (cur.done) return; cur.done = true; stopClock();
+    if (meta.act == null && cur.act != null) meta = { ...meta, act: cur.act };
     const go2 = cf => {
       if (kind !== "checkin") reveal();
       log(ok, { ...meta, cf });
-      if (SKILLS[it.k].kind !== "adjust" && it.d == null && !it.rp) sesOf(it.k).step(ok);
+      if (SKILLS[it.k].kind !== "adjust" && it.d == null && !it.rp) sesOf(it.k).step(ok, meta.act);
       mark(ok);
       if (kind === "intro") return later(() => introPanel(), ok ? 500 : 900);
       // drills with a lot to read in the reveal (Squint's L* values) wait for a Next tap
@@ -444,13 +448,15 @@ function runSession(o) {
     const want = it.want !== undefined ? it.want : o.want && o.want[k] && Math.random() < .4 ? o.want[k] : null;
     cur = { id: n, done: false, conf: !adj && (kind === "station" || kind === "mixed") && !it.rp && (n > 0 || o.confAll) && Math.random() < (o.confAll ? 1 : .25) };
     const P = k === "memory" ? memParams(MEM.lv) : it.P || dialPlan(k, 1);
-    DRILLS[k]({ stage, foot, q, el, k, d, P, want, fix: it.fix || {}, rp: it.rp || null, check: kind === "checkin", intro: kind === "intro", pick, settle, clock });
+    const shown = act => { if (!(act > 0)) return; cur.act = act; if (lvl && !adj && kind !== "checkin") lvl.textContent = `${fmt(act)} ${sk.unit}`; };
+    DRILLS[k]({ stage, foot, q, el, k, d, P, want, fix: it.fix || {}, rp: it.rp || null, check: kind === "checkin", intro: kind === "intro", pick, settle, clock, shown });
   }
   trial();
 }
 
 // A station set (or its first-look intro, or a 3-round fix).
 function runDrill(k, opts = {}) {
+  if (!S.scr && !scrShot()) return screenCheck(() => runDrill(k, opts));
   if (k === "after") return afterimage();
   if (k && k.startsWith("mix:")) return runMixed(k.slice(4));
   const sk = SKILLS[k];
@@ -548,6 +554,7 @@ function runMixed(m) {
 function runCheckin() {
   const g = gyState(), day = gyDay(), week = weekOf(day), ks = checkinPick(triedKeys(), g.checkins);
   if (ks.length < 3) return gymHome();
+  if (!g.checkins.length && !(S.scr && S.scr.ci) && !scrShot()) return screenCheck(runCheckin, true);
   const items = [];
   ks.forEach(k => {
     const sk = SKILLS[k], P = dialPlan(k, CI_PLAN);
@@ -560,7 +567,7 @@ function runCheckin() {
     ks.forEach(k => {
       const t = res.trials.filter(x => x.k === k);
       if (SKILLS[k].kind === "adjust") { const est = res.ses[k].estimate(); out[k] = { lv: levelOf(k, est), est: +est.toFixed(2) }; }
-      else { const lad = ciLadder(k), hits = t.filter(x => x.ok).length; out[k] = { lv: ciLevel(k, t.map((x, i) => ({ lv: lad[i], ok: x.ok }))), hits, n: t.length }; }
+      else { const lad = ciLadder(k), hits = t.filter(x => x.ok).length; out[k] = { lv: ciLevel(k, t.map((x, i) => ({ lv: x.a > 0 ? lvExact(SKILLS[k], x.a) : lad[i], ok: x.ok }))), hits, n: t.length }; }
     });
     const prev = Object.fromEntries(ks.map(k => [k, lastCheckin(k)]));
     g.checkins.push({ t: day, date: today(), res: out });
@@ -639,10 +646,12 @@ const DRILLS = {
     let baseHex, oddHex;
     if (ctx.rp) { baseHex = ctx.rp.a; oddHex = ctx.rp.b; }
     else {
-      const L0 = tame(lab(pickBase(ctx.want, P)));
-      const odd = offset(L0, d, cvdW([.6, 1, 1])) || offset(tame(L0.map((x, i) => i ? x * .8 : x)), d, cvdW([.6, 1, 1]));
-      baseHex = labHex(...L0); oddHex = odd ? labHex(...odd) : baseHex;
+      // the pair as drawn: a few directions are tried and the drawn difference closest to d wins
+      let L0 = null, got = null;
+      for (let t = 0; t < 4 && !got; t++) { L0 = tame(lab(pickBase(ctx.want, P))); got = shownOffset(L0, d, cvdW([.6, 1, 1]), gR); }
+      baseHex = got ? got.a : labHex(...L0); oddHex = got ? got.b : baseHex;
     }
+    ctx.shown(shownDE(baseHex, oddHex));
     const n = 3, cells = n * n, at = gR() * cells | 0;
     ctx.q.textContent = "Which tile is different?";
     ctx.stage.innerHTML = `<div class="grid" style="--n:${n}">${Array.from({ length: cells }, (_, i) =>
@@ -661,8 +670,9 @@ const DRILLS = {
       const Lm = wantL(ctx.want, 38, 66);
       const cc = P.chroma === 2 || f.viv ? [62, 10] : P.chroma === 1 ? [52, 26] : [38, 38];
       const vividLight = f.viv ? false : gR() < .5, C0 = wantC(ctx.want, cc[0]), C1 = wantC(ctx.want, cc[1]);
-      light = gyFit(Lm + d / 2, vividLight ? C0 : C1, H1); dark = gyFit(Lm - d / 2, vividLight ? C1 : C0, H2);
+      ({ light, dark } = shownLPair((dd, sh) => [gyFit(Lm + sh + dd / 2, vividLight ? C0 : C1, H1), gyFit(Lm + sh - dd / 2, vividLight ? C1 : C0, H2)], d));
     }
+    ctx.shown(shownDL(light, dark));
     ctx.q.textContent = "Which is lighter?";
     pairPick(ctx, light, dark);
   },
@@ -676,8 +686,9 @@ const DRILLS = {
       const H = wantHue(ctx.want), Lm = wantL(ctx.want, P.deep ? 28 : 44, 68), vividLight = f.viv ? false : gR() < .5;
       const [cv, cd] = P.gap === 2 || f.viv ? [72, 5] : P.gap === 1 ? [58, 10] : [42, 20];
       const vivid = L => gyFit(L, cv, H), dull = L => gyFit(L, cd, H);
-      light = vividLight ? vivid(Lm + d / 2) : dull(Lm + d / 2); dark = vividLight ? dull(Lm - d / 2) : vivid(Lm - d / 2);
+      ({ light, dark } = shownLPair((dd, sh) => vividLight ? [vivid(Lm + sh + dd / 2), dull(Lm + sh - dd / 2)] : [dull(Lm + sh + dd / 2), vivid(Lm + sh - dd / 2)], d));
     }
+    ctx.shown(shownDL(light, dark));
     ctx.q.textContent = "Which is lighter?";
     pairPick(ctx, light, dark);
   },
@@ -692,7 +703,7 @@ const DRILLS = {
     const want = P.opts - 1;
     let nb = [];
     for (let t = 0; t < 30; t++) {
-      const o = Array.from({ length: want }, () => offset(base, d, cvdW([.6, 1, 1]))).filter(Boolean);
+      const o = Array.from({ length: want }, () => offset(base, d, cvdW([.6, 1, 1]))).filter(x => x && shownDE(labHex(...base), labHex(...x)) >= SHOWN_MIN);
       const spread = o.every((x, i) => o.every((y, j) => i === j || de2000(x, y) >= d * .6));
       if (o.length > nb.length || (o.length === want && spread)) nb = o;
       if (nb.length === want && spread) break;
@@ -720,6 +731,7 @@ const DRILLS = {
       ctx.q.textContent = hexes.length === 2 ? (ask ? "Which was the second?" : "Which was the first?") : "Which one was it?";
       ctx.stage.innerHTML = `<div class="mem-opts n${opts.length}">${opts.map((h, i) => `<button class="tile" data-i="${i}" style="--c:${h}" aria-label="Option ${i + 1}"></button>`).join("")}</div>`;
       const [Lt, Ct] = lch(hex);
+      ctx.shown(geoMean(opts.filter(h => h !== hex).map(h => shownDE(hex, h))));
       ctx.stage.querySelectorAll(".tile").forEach(b => b.onclick = () => {
         b.classList.add("picked");
         const ok = +b.dataset.i === right, [Lp, Cp] = lch(opts[+b.dataset.i]);
@@ -742,10 +754,15 @@ const DRILLS = {
     let steps;
     if (ctx.rp) steps = ctx.rp.steps;
     else {
-      const A = tame(lab(pickBase(ctx.want)));
-      const B = offset(A, d * (n - 1), cvdW(w)) || offset(tame(A.map((x, i) => i ? x * .7 : x)), d * (n - 1), cvdW(w)) || [A[0] > 50 ? A[0] - 25 : A[0] + 25, A[1], A[2]];
-      steps = Array.from({ length: n }, (_, i) => labHex(...A.map((x, j) => x + (B[j] - x) * i / (n - 1))));
+      // redraw when rounding makes two neighbors (nearly) the same code
+      for (let t = 0; t < 6; t++) {
+        const A = tame(lab(pickBase(ctx.want)));
+        const B = offset(A, d * (n - 1), cvdW(w)) || offset(tame(A.map((x, i) => i ? x * .7 : x)), d * (n - 1), cvdW(w)) || [A[0] > 50 ? A[0] - 25 : A[0] + 25, A[1], A[2]];
+        steps = Array.from({ length: n }, (_, i) => labHex(...A.map((x, j) => x + (B[j] - x) * i / (n - 1))));
+        if (steps.every((h, i) => !i || shownDE(steps[i - 1], h) >= SHOWN_MIN)) break;
+      }
     }
+    ctx.shown(geoMean(steps.slice(1).map((h, i) => Math.max(shownDE(steps[i], h), .05))));
     const mid = Array.from({ length: n - 2 }, (_, i) => i + 1);
     let order = [0, ...gShuf(mid), n - 1];
     if (order.every((v, i) => v === i)) order = [0, ...mid.slice().reverse(), n - 1];
@@ -778,10 +795,10 @@ const DRILLS = {
     });
     const check = timeout => {
       if (checked) return; checked = true;
-      const now = items.map(it => +it.dataset.s), wrong = now.filter((s, i) => s !== i).length;
+      const now = items.map(it => +it.dataset.s), wrong = now.filter((s, i) => steps[s] !== steps[i]).length;
       ctx.foot.innerHTML = "";
       ctx.pick(!wrong, () => {
-        items.forEach((it, i) => it.classList.add(+it.dataset.s === i ? "good" : "bad"));
+        items.forEach((it, i) => it.classList.add(steps[+it.dataset.s] === steps[i] ? "good" : "bad"));
         ctx.foot.innerHTML = `<p class="note">${timeout ? "Time's up. " : ""}${wrong ? `${wrong} out of place. Here's the strip in order.` : "Perfect strip."}</p>`;
         later(() => { items.sort((a, b) => a.dataset.s - b.dataset.s); layout(); }, wrong ? 700 : 0);
       }, { ...bandsOf(steps[Math.floor(n / 2)]), s: timeout ? { out: 1 } : undefined, rp: { steps }, noConf: timeout ? 1 : 0 });
@@ -791,7 +808,8 @@ const DRILLS = {
   },
 
   // Find neutral: a grey square on a colored ground. The slider moves the square toward or away from the
-  // ground's hue; the score is how far your "grey" sits from true grey (a* = b* = 0).
+  // ground's hue; the score is how far your "grey" sits from true grey (a* = b* = 0). The ground tints true grey
+  // toward its opposite, so the task is to make it truly grey anyway: score and copy both mean physical grey.
   // Dials: the ground gets stronger, the square smaller, then a time limit.
   neutral(ctx) {
     const P = ctx.P, f = ctx.fix;
@@ -801,20 +819,20 @@ const DRILLS = {
     const tOf = s => (s - s0) * 2 * R * sgn;   // + = toward the ground's own hue
     const patch = s => { const t = tOf(s); return labHex(...tame([Lp, t * Math.cos(rad), t * Math.sin(rad)])); };
     const s1 = gyStart(s0, .2);
-    ctx.q.textContent = "Make it pure grey";
+    ctx.q.textContent = "Make it truly grey";
     ctx.stage.innerHTML = `<div class="gy-col">
       <div class="gy-field" style="--g:${ground}"><div class="gy-patch" style="--sz:${(P.size || .46) * 100}%"><i id="pa" style="--c:${patch(s1)}"></i><i id="pb" style="--c:${patch(s1)}"></i></div>
         <span class="gy-tags" id="tags" data-ink="${ink(ground)}"><span>yours</span><span>true grey</span></span></div>
-      ${gySlider("sl", s1, "Slide until it is neither warm nor cool")}</div>`;
+      ${gySlider("sl", s1, "Truly grey, not just grey-looking")}</div>`;
     const sl = ctx.stage.querySelector("#sl"), pa = ctx.stage.querySelector("#pa"), pb = ctx.stage.querySelector("#pb");
     sl.oninput = () => { const h = patch(sl.value / 1000); pa.style.setProperty("--c", h); pb.style.setProperty("--c", h); };
-    gyLock(ctx, "Looks grey", () => {
+    gyLock(ctx, "It's grey", () => {
       const s = sl.value / 1000, mine = patch(s), grey = labHex(Lp, 0, 0), err = de2000(mine, grey), t = tOf(s);
       pb.style.setProperty("--c", grey); ctx.stage.querySelector(".gy-field").classList.add("rev");
       // which way the miss leaned: toward the ground's hue, and warm (reds to yellows) or cool (greens to blues)
       const rh = ((t >= 0 ? H : H + 180) % 360 + 360) % 360, warm = Math.abs(t) < 1 ? 0 : (rh >= 330 || rh < 100) ? 1 : (rh >= 150 && rh < 300) ? -1 : 0;
-      const lean = err < 1.2 ? "Spot on." : t > 0 ? "You leaned toward the ground's own hue: the ground tints true grey the other way, so you pushed back." : "You leaned away from the ground's hue.";
-      return { err, note: `Off by <b>${fmt(err)}</b> ΔE. ${lean} The right half is true grey.`, meta: { ...bandsOf(ground), s: { err: +err.toFixed(2), tw: Math.sign(t), warm, gH: Math.round(H) } } };
+      const lean = err < 1.2 ? "Spot on: you corrected for the ground." : t > 0 ? "You leaned toward the ground's own hue: the ground tints true grey the other way, and you pushed back against it." : "You leaned away from the ground's hue.";
+      return { err, note: `Off by <b>${fmt(err)}</b> ΔE. ${lean} The right half is true grey; on this ground it looks faintly tinted.`, meta: { ...bandsOf(ground), s: { err: +err.toFixed(2), tw: Math.sign(t), warm, gH: Math.round(H) } } };
     });
   },
 
@@ -904,6 +922,7 @@ const DRILLS = {
     const chosen = [], dots = [...ctx.stage.querySelectorAll(".sq-dot")];
     const paintRanks = () => dots.forEach((b, i) => { const r = chosen.indexOf(i); b.classList.toggle("on", r >= 0); b.querySelector("b").textContent = r >= 0 ? r + 1 : ""; });
     const closePair = Math.min(...truth.slice(1).map((x, j) => spots[truth[j]][2] - spots[x][2]));
+    ctx.shown(closePair);
     const meta = { l: lBand(spots.reduce((s, p) => s + p[2], 0) / spots.length), c: cBand(Math.max(...spots.map(p => p[3]))), rp: { p: paint.id, i: idx } };
     const reveal = () => {
       im.classList.remove("blur");

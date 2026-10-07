@@ -293,14 +293,15 @@ function wireArticle(el, n) {
   wireLinks(el);
   onKey = e => { if (e.key === "Escape") xBack(); };
 }
-// approximate print and screen codes
+// screen codes, plus a rough CMYK. The CMYK is the naive formula (no ICC profile, no paper, no ink limits), so it
+// is labeled rough: real print values come from a print profile (e.g. an uncoated or coated press profile) and a proof.
 function codes(hex) {
   const [r, g, b] = rgb(hex), k = 1 - Math.max(r, g, b) / 255;
   const cmy = [r, g, b].map(v => k >= 1 ? 0 : Math.round((1 - v / 255 - k) / (1 - k) * 100));
   const mx = Math.max(r, g, b) / 255, mn = Math.min(r, g, b) / 255, l = (mx + mn) / 2, d = mx - mn;
   let h = 0; if (d) { h = mx === r / 255 ? ((g - b) / 255 / d) % 6 : mx === g / 255 ? (b - r) / 255 / d + 2 : (r - g) / 255 / d + 4; h = Math.round(h * 60 + 360) % 360; }
   const s = d ? d / (1 - Math.abs(2 * l - 1)) : 0;
-  return [["HEX", hex], ["RGB", `${r} ${g} ${b}`], ["HSL", `${h}° ${Math.round(s * 100)}% ${Math.round(l * 100)}%`], ["CMYK", `${cmy.join(" ")} ${Math.round(k * 100)}`]];
+  return [["HEX", hex], ["RGB", `${r} ${g} ${b}`], ["HSL", `${h}° ${Math.round(s * 100)}% ${Math.round(l * 100)}%`], ["CMYK, ROUGH", `${cmy.join(" ")} ${Math.round(k * 100)}`]];
 }
 
 // Wikipedia-style pieces: sections that fold open and shut, a contents row, and photographs with credits.
@@ -321,7 +322,8 @@ function codeRows(hex) {
   const rows = [];
   if (media.includes("screen")) rows.push(...all.slice(0, 3));
   if (media.includes("print")) rows.push(all[3]);
-  if (media.includes("paint")) rows.push(["VALUE ≈", (L / 10).toFixed(1)], ["CHROMA ≈", (C / 5).toFixed(1)]);
+  // CIELAB lightness, chroma and hue, labeled as what they are (not Munsell value and chroma, which need a real conversion)
+  if (media.includes("paint")) { const H = lch(hex)[2]; rows.push(["LCH", `L ${Math.round(L)} · C ${Math.round(C)} · h ${Math.round(H)}`]); }
   return rows.length ? rows : all;
 }
 
@@ -332,6 +334,7 @@ function colorPage(n) {
     ${artTop(n)}
     <div class="c-hero" style="--c:${c.h}" data-ink="${ink(c.h)}"><p class="eyebrow">${esc(status)}</p><h1>${esc(c.n)}</h1></div>
     <div class="codes">${codeRows(c.h).map(([k, v]) => `<button data-copy="${esc(v)}"><span>${k}</span><b class="mono">${esc(v)}</b></button>`).join("")}</div>
+    ${codeRows(c.h).some(r => r[0].startsWith("CMYK")) ? `<p class="fine codes-fine">CMYK here is a rough formula, not a print profile: real values depend on the paper and press, so check them in a print workflow with a proof.</p>` : ""}
     ${nb && c.d ? `<section class="cmp-sec"><div class="compare"><div style="--c:${c.h}" data-ink="${ink(c.h)}">${esc(c.n)}</div><div style="--c:${nb.h}" data-ink="${ink(nb.h)}" data-node="c:${esc(nb.n)}">${esc(nb.n)}</div></div><p class="diff">${esc(c.d)}</p></section>` : ""}
     ${c.o && !(w && w.facets.some(f => f.k === "language")) ? `<p class="lead">${esc(c.o)}</p>` : ""}
     ${figHTML(c.n)}

@@ -9,7 +9,7 @@ The design is built from proven decisions in real products, not invented from sc
 
 | Decision | Source | Why |
 |---|---|---|
-| Neutral dark grey chrome (`#121212`), with no colored UI near a swatch | Color-grading suites (DaVinci Resolve, Lightroom) and the ISO 3664 viewing standard | Colored surroundings shift how a color looks (simultaneous contrast). A neutral surround keeps the swatch true. |
+| Surround: a neutral mid-grey (`#5F5F5F`, L\* 40) wherever a swatch is judged (the flashcard deck, meet-the-unit pages, the color of the day, every Train drill and the screen check); the warm near-black (`#0E0D0B`) everywhere else. No colored UI near a swatch. No film grain over test swatches. | The photographer's grey card and the painter's mid-grey ground; the ISO 3664 viewing standard (a neutral surround); photo editors such as Lightroom and Photoshop, which offer a medium-grey surround for judging color | A color is judged against what surrounds it (simultaneous contrast), and lightness most of all. On near-black, browns and olives read lighter and brighter than they are (brown only looks brown next to something lighter) and pale colors glare. A neutral grey near the middle of the lightness range pushes no hue and lets dark and light colors read as themselves. L\* 40 rather than 50 so the captions stay readable (light text at 5:1 or better). The warm black stays for the editorial screens, where nothing is being judged. Rules live in `css/booth.css`. |
 | Swipe card with tilt, a "Got it / Again" stamp, and ✕ / ✓ buttons | Tinder | Everyone already knows the gesture. It's fast and thumb-driven, and it's the core loop. |
 | The next card grows as you drag the top one away | Tinder | The deck feels physical, and the next color is already arriving. |
 | Revealed card turns into a paint chip: color on top, a paper label with the name and hex below | Pantone chips, paint-store sample cards | You keep seeing the color while you read its name. It looks like a real swatch. |
@@ -29,12 +29,18 @@ The design is built from proven decisions in real products, not invented from sc
 
 ## What we left out on purpose
 - No XP, coins or streak flames. Progress is a number of names **owned**: recalled right a day or more after learning (learning-kb rule).
-- No light mode. The neutral dark surround is part of seeing color accurately.
+- No light mode. The surround is chosen for seeing color: mid-grey where a color is judged, warm near-black elsewhere.
 - No colored backgrounds behind swatches, for the same reason.
+
+## Color accuracy (2026-10-07)
+- **Scores measure what was drawn.** Drills build colors in Lab, but the screen shows 8-bit hex codes; every drill and the daily challenge measures ΔE00 (or ΔL\*) between the hex codes actually shown, logs that, and redraws a pair that rounding collapsed below about one code step (`js/accuracy.js`).
+- **Screen check.** Before the first Train session and the first weekly check-in: brightness up, Night Shift and True Tone off, two quick visual tests. A chip on the check-in card stays until it's confirmed.
+- **Honest labels.** CMYK is marked rough (no print profile); paint people see CIELAB LCh, not a fake Munsell. Harmony says CIELAB hue, the gamut wheel says OKLab hue. The color-blind setting is a simple adjustment, not a simulation.
 
 ## Tunables worth testing on David's phone
 - Card corner radius (30px), stamp angle (±10°), and swipe threshold (100px, or a fast flick past 36px).
 - Map size (`.map` width `37dvh`) and dot sizes (5, 6 and 7 px radius for new, learning and owned).
+- Booth grey (`css/booth.css`, now `#5F5F5F`): try L\* 40 to 50 on the phone; lighter shows browns best, darker keeps text readable.
 
 ## Feature hierarchy: many features, never a mess (David, 2026-10-07)
 ColorHub can have a lot of features. It must never feel like a lot. Every feature gets a tier, and the tier decides where it lives and how loud it is.
