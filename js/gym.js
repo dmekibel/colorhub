@@ -308,6 +308,7 @@ function gymHome() {
     ${cvdOn() ? `<p class="x-sub" style="margin-top:12px">Stations are tuned for ${S.profile.cvd} color blindness: differences lean on lightness and the colors you see best.</p>` : ""}
     ${SHELVES.map(([name, ks]) => `<div class="sec-head"><b>${name}</b><span>${name === "Applied" ? "built on the basics" : name === "In context" ? "color next to color" : "one judgment at a time"}</span></div>
       <div class="gs-grid">${ks.map(stationTile).join("")}</div>`).join("")}
+    ${typeof matchShelves === "function" ? matchShelves() : ""}
     <div class="sec-head"><b>Play</b></div>
     <button class="play-row" data-taste="color"><span><b>Find your color</b><span>About 20 quick choices. Get a map of the colors you love and avoid.</span></span><em>${S.fav ? esc(S.fav.n) + "-ish" : "new"}</em></button>
     <button class="play-row" data-taste="palette"><span><b>Find your palette</b><span>About 15 quick choices. Find your palette dials and your painters.</span></span><em>${(S.palettes || []).length ? S.palettes.length + " saved" : "new"}</em></button>
@@ -319,6 +320,7 @@ function gymHome() {
   el.querySelector("[data-lightning]").onclick = lightning;
   el.querySelector("[data-eye]").onclick = eyeReport;
   el.querySelectorAll("[data-taste]").forEach(b => b.onclick = () => tasteIntro(b.dataset.taste));
+  if (typeof wireMatch === "function") wireMatch(el);
 }
 const k0Trials = k => k === "order" ? `${SKILLS[k].trials} strips` : k === "squint" ? `${SKILLS[k].trials} paintings` : `${SKILLS[k].trials} rounds`;
 const dueWords = n => n <= 0 ? "today" : n === 1 ? "tomorrow" : `in ${n} days`;
