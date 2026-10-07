@@ -89,7 +89,8 @@ const ROUTED = [["colorPage", nodeRouted()], ["wikiPage", nodeRouted()], ["paint
   ["fashionPage", slug => typeof worldRouteTitle === "function" ? routed(worldRouteTitle(slug), "fashion/" + slug) : null],   // js/world.js
   ["btListPage", kind => typeof btListTitle === "function" ? routed(btListTitle(kind), "botany/" + kind) : null],   // js/botany.js (plant/dye/essay detail pages route via wikiPage above)
   ["btFloriPage", () => routed("The language of flowers", "botany/flori")],   // js/botany.js
-  ["gmListPage", kind => typeof gmListTitle === "function" ? routed(gmListTitle(kind), "gem/" + kind) : null]];   // js/gems.js (gem/essay detail pages route via wikiPage above)
+  ["gmListPage", kind => typeof gmListTitle === "function" ? routed(gmListTitle(kind), "gem/" + kind) : null],   // js/gems.js (gem/essay detail pages route via wikiPage above)
+  ["labHoney", () => routed("Honeycomb lab", "lab/honey")]];   // js/home.js: rate every preset at every set size
 ROUTED.forEach(([name, f]) => routeWrap(window, name, f));
 routeWrap(LAB, "harmony", () => routed("Harmony", "lab/harmony"));
 routeWrap(LAB, "contrast", () => routed("Albers", "lab/contrast"));
@@ -158,7 +159,8 @@ function openRoute(hash, initial = false) {
     return true;
   }
   const simple = { daily: () => daily(), challenge: () => chToday() ? challengeDone() : challenge(),
-    taste: () => tasteIntro(id === "palette" ? "palette" : "color"), lab: () => (LAB[id] && ["harmony", "contrast"].includes(id) ? LAB[id] : LAB.harmony)(),
+    taste: () => tasteIntro(id === "palette" ? "palette" : "color"),
+    lab: () => id === "honey" && typeof labHoney === "function" ? labHoney() : (LAB[id] && ["harmony", "contrast"].includes(id) ? LAB[id] : LAB.harmony)(),
     fashion: () => typeof fashionPage === "function" && fashionPage(id),
     // the honeycomb home's instant mini-lesson (js/learnit.js): #/learnit/<color>
     learnit: () => { const c = id && routeColor(id); if (c && typeof hmLearnIt === "function") hmLearnIt(c); else go(S.tab || "learn"); } };
