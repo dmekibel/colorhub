@@ -69,6 +69,7 @@ function gmBuildNodes() {
   // Re-merged every time graph() rebuilds (above), since loader.js replaces window.WIKI_IMAGES wholesale
   // once data/images.js lands, which would otherwise wipe this.
   if (G.images) window.WIKI_IMAGES = Object.assign(window.WIKI_IMAGES || {}, G.images);
+  if (window.GEM_IMAGES) window.WIKI_IMAGES = Object.assign(window.WIKI_IMAGES || {}, window.GEM_IMAGES);   // data/gem-images.js: one photo for every other gem
 }
 const gmNode = id => graph().nodes.get(id);
 
