@@ -151,9 +151,10 @@ function honeycomb(host, opts = {}) {
   host.innerHTML = `<div class="hc-box"><canvas class="hc-cv" aria-label="Colors as bubbles: drag to browse, pinch to zoom, tap one to open it"></canvas></div>
     <button class="hc-cap"><i></i><span><b></b><small></small></span><em></em></button>`;
   const cv = host.querySelector("canvas"), ctx = cv.getContext("2d"), cap = host.querySelector(".hc-cap");
-  const RM = reduceMotion, SHOOT = typeof SHOT !== "undefined" && !!SHOT, DRIFT = .2, LENS = { m0: 3.7, m1: .82, sig: 1.9 }, ZMIN = .4, ZMAX = 2.5;
+  const RM = reduceMotion, SHOOT = typeof SHOT !== "undefined" && !!SHOT, DRIFT = .2, LENS = { m0: 3.7, m1: .82, sig: 1.9 }, ZMAX = 2.5;
+  let ZMIN = .4;   // per set: never zoom out far enough to see the same color twice (see zFloor)
   let layout = opts.layout === "wheel" ? "wheel" : "map", lay = null, P = [0, 0], W = 0, Hh = 0, dpr = 1, base = 30, dead = false;
-  let Z = clamp(+opts.zoom || 1, ZMIN, ZMAX), zAnim = null, ghost = null, ghostT0 = 0;
+  let Z = clamp(+opts.zoom || 1, .4, ZMAX), zAnim = null, ghost = null, ghostT0 = 0;
   let phase = "idle", spring = null, touched = RM || SHOOT, visible = true, raf = 0, last = 0;
   let bloom = RM || SHOOT ? 1 : 0, bloomT0 = performance.now(), pressed = null, pressK = 0, drawn = [], center = null, settled = null;
 
@@ -167,6 +168,14 @@ function honeycomb(host, opts = {}) {
   const mag = (z, l) => l.m1 + (l.m0 - l.m1) * Math.exp(-((z / l.sig) ** 2));
   const Finv = (r, l) => { let lo = 0, hi = 400; for (let i = 0; i < 30; i++) { const m = (lo + hi) / 2; if (F(m, l) > r) hi = m; else lo = m; } return (lo + hi) / 2; };
   const reach = l => Finv(Math.hypot(W, Hh) / 2 + 40, l);
+  // the smallest zoom at which the visible patch is still narrower than one repeat of a wrapping set
+  const zFloor = () => {
+    if (!lay || lay.finite || !W) return .4;
+    const fits = z => Finv(Math.hypot(W, Hh) / 2, { s: z, m0: LENS.m0, m1: LENS.m1, sig: LENS.sig }) <= lay.per * .5;
+    let lo = .05, hi = ZMAX; if (!fits(hi)) return ZMAX;
+    for (let i = 0; i < 24; i++) { const m = (lo + hi) / 2; if (fits(m)) hi = m; else lo = m; }
+    return Math.max(.4, hi);
+  };
   // the world offset (from the pan point) under a screen point
   const offAt = (sx, sy, l) => { const dx = sx - W / 2, dy = sy - Hh / 2, r = Math.hypot(dx, dy); if (r < 1e-6) return [0, 0]; const z = Finv(r, l); return [dx / r * z, dy / r * z]; };
   // every copy of a base point within distance R of world point Q (a wrapping plane repeats along A and B)
@@ -403,6 +412,7 @@ function honeycomb(host, opts = {}) {
       const g = ghost.getContext("2d"); g.clearRect(0, 0, ghost.width, ghost.height); g.drawImage(cv, 0, 0); ghostT0 = performance.now();
     }
     lay = honeyLayout(raw, layout);
+    ZMIN = zFloor(); Z = clamp(Z, ZMIN, ZMAX);
     if (how === "restore" && HONEY_PAN && HONEY_PAN.key === lay.key) { P = [HONEY_PAN.x, HONEY_PAN.y]; if (!opts.zoom && HONEY_PAN.z) Z = HONEY_PAN.z; }
     else {
       // center the focus color, or its nearest look-alike in this set
@@ -424,7 +434,7 @@ function honeycomb(host, opts = {}) {
   function resize() {
     const r = cv.getBoundingClientRect(); dpr = Math.min(3, devicePixelRatio || 1);
     W = r.width; Hh = r.height; cv.width = Math.round(W * dpr); cv.height = Math.round(Hh * dpr);
-    base = clamp(W / 13, 26, 34); ghost = null; draw();
+    base = clamp(W / 13, 26, 34); ghost = null; ZMIN = zFloor(); Z = clamp(Z, ZMIN, ZMAX); draw();
   }
   const ro = new ResizeObserver(resize); ro.observe(cv);
   const io = "IntersectionObserver" in window ? new IntersectionObserver(es => { visible = es[0].isIntersecting && !document.hidden; if (visible) kick(); }) : null;
