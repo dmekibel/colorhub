@@ -1,22 +1,35 @@
 #!/usr/bin/env python3
 """ColorHub art-history color corpus. Re-runnable and resumable; every step caches in research/_raw/ (gitignored).
 
-  python3 tools/corpus.py meta                 # 1. fetch painting metadata (AIC + CMA) -> research/_raw/{aic,cma}/meta.json
-  python3 tools/corpus.py images [aic|cma]     # 2. download one small image per painting (skips cached ones)
-  python3 tools/corpus.py palettes             # 3. 6-color k-means palette per cached image -> research/_raw/corpus-palettes.jsonl
-  python3 tools/corpus.py build                # 4. write data/corpus.json and data/stats.js
-  python3 tools/corpus.py sheet [N] [out.png] [seed]  # contact sheet of N random paintings (image | palette | names)
-  python3 tools/corpus.py all                  # 1-4 in order
+  python3 tools/corpus.py meta [src ...] [--resume]    # 1. painting metadata -> research/_raw/<src>/meta.json
+  python3 tools/corpus.py images [src ...]             # 2. one small image per painting (skips cached ones)
+  python3 tools/corpus.py palettes                     # 3. 6-color k-means palette per cached image -> research/_raw/corpus-palettes.jsonl
+  python3 tools/corpus.py build                        # 4. write the corpus (data/corpus.json or data/corpus/*.json) and data/stats.js
+  python3 tools/corpus.py fetch [src ...] [--resume]   # 1+2 for some sources (run one process per museum in parallel)
+  python3 tools/corpus.py status                       # what is cached so far, per source
+  python3 tools/corpus.py sheet [N] [out.png] [seed] [src]  # contact sheet of N random paintings (image | palette | names)
+  python3 tools/corpus.py all [--resume]               # 1-4 in order
+--resume keeps every metadata page or record already cached (a finished source is not asked again; an interrupted one
+continues where it stopped). Without it, `meta` asks each API again. Images and palettes are always incremental.
 
-Sources (both CC0 metadata, public-domain / CC0 images only):
+Sources (public-domain / CC0 images only; source codes are the `src` field of every row):
   aic = Art Institute of Chicago API  https://api.artic.edu/docs/   (artwork_type Painting or Miniature Painting,
         is_public_domain, has image). Images via IIIF at 200px wide (a size the docs recommend for cache hits).
         Throttle: the docs ask scrapers for <= 1 request a second, one thread, so AIC runs at 1 req/s.
   cma = Cleveland Museum of Art Open Access API  https://openaccess-api.clevelandart.org/  (type Painting, cc0,
         has_image). The ~900px "web" JPEG is downloaded once and only a 200px copy is kept. ~2 req/s.
+  met, nga, rijks, smk = The Met, the National Gallery of Art (Washington), the Rijksmuseum and SMK (Copenhagen):
+        one adapter each in tools/museums/ (its docstring says which route, filters and image size it uses).
+        Their images are fetched at about 400px and only a 200px copy is kept.
 
 Selection (select()): manuscript text and calligraphy pages are dropped, and one manuscript or album keeps at most
-GROUP_CAP leaves, so a 600-leaf book cannot outweigh a century.
+GROUP_CAP leaves, so a 600-leaf book cannot outweigh a century. At build time near-duplicate images are dropped
+(dedupe()) and one artist keeps at most ARTIST_CAP paintings (cap_artists()), so a prolific painter cannot outweigh
+a country or a decade.
+
+Output shape: one array of rows. Up to SHARD_LIMIT bytes it is data/corpus.json; above that it is split into
+data/corpus/<src>-<n>.json (by source, rows in id order, ~2.5 MB each) and data/corpus.json is removed. Readers
+should accept both: load_corpus() below does (data/corpus.json if present, else every data/corpus/*.json).
 
 Palette (step 3): the 200px image is auto-trimmed of near-uniform border bands that end in a clear edge (frame, mat,
 scanner bed), inset 2%, reduced to ~120px on the long side by area averaging and converted to CIELAB. A flat neutral
@@ -30,8 +43,9 @@ by century, decade, country, movement and artist, plus findings). Method and fin
 
 Needs Python 3 with Pillow and numpy only.
 """
-import json, math, random, re, sys, time, urllib.request, urllib.parse, urllib.error, io, unicodedata
+import json, math, random, re, sys, time, urllib.request, urllib.parse, urllib.error, io, unicodedata, threading
 from collections import Counter, defaultdict
+from concurrent.futures import ThreadPoolExecutor
 from datetime import date
 from pathlib import Path
 import numpy as np
@@ -39,53 +53,99 @@ from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / "research" / "_raw"
-UA = "ColorHub (https://github.com/dmekibel/colorhub)"
+UA = "ColorHubBot/1.0 (https://github.com/dmekibel/colorhub)"
 PAL_CACHE = RAW / "corpus-palettes.jsonl"
+HASH_CACHE = RAW / "corpus-hashes.jsonl"
 IMG_W = 200          # cached image width
 K_SIDE = 120         # long side of the copy k-means runs on
 K = 6
 CHROMA_W = 1.5
+THIS = sys.modules[__name__]
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from museums import met, nga, rijks, smk  # noqa: E402  (source adapters; they call back into this module)
+from museums import common as museum_common  # noqa: E402
+
+ADAPTERS = {"met": met, "nga": nga, "rijks": rijks, "smk": smk}
 SRC = {
-    "aic": dict(dir=RAW / "aic", gap=1.0, name="Art Institute of Chicago",
+    "aic": dict(dir=RAW / "aic", gap=1.0, workers=1, name="Art Institute of Chicago",
                 api="https://api.artic.edu/docs/", license="CC0 metadata; public-domain images"),
-    "cma": dict(dir=RAW / "cma", gap=0.45, name="Cleveland Museum of Art",
+    "cma": dict(dir=RAW / "cma", gap=0.45, workers=1, name="Cleveland Museum of Art",
                 api="https://openaccess-api.clevelandart.org/", license="CC0 metadata and images"),
 }
+for _s, _m in ADAPTERS.items():
+    SRC[_s] = dict(dir=RAW / _s, **_m.INFO)
 
 # ---------------------------------------------------------------------------------------------
 # Network
 # ---------------------------------------------------------------------------------------------
 _last = defaultdict(float)
+_pace_lock = threading.Lock()
 
 
-def fetch(src, url, data=None, binary=False, tries=5):
-    """GET (or POST json `data`) with the source's polite gap between requests and backoff on errors."""
+def _pace(src):
+    """Reserve the next request slot for `src` (thread-safe): requests leave at least SRC[src]['gap'] seconds apart
+    however many threads share the source."""
+    with _pace_lock:
+        now = time.time()
+        slot = max(now, _last[src] + SRC[src]["gap"])
+        _last[src] = slot
+    if slot > now:
+        time.sleep(slot - now)
+
+
+def fetch(src, url, data=None, binary=False, tries=5, headers=None, text=False):
+    """GET (or POST json `data`) with the source's polite gap between requests and backoff on errors.
+    Returns parsed JSON, or bytes (binary=True), or a str (text=True)."""
     for i in range(tries):
-        wait = SRC[src]["gap"] - (time.time() - _last[src])
-        if wait > 0:
-            time.sleep(wait)
-        _last[src] = time.time()
+        _pace(src)
         try:
-            headers = {"User-Agent": UA, "AIC-User-Agent": UA} if src == "aic" else {"User-Agent": UA}
+            h = {"User-Agent": UA, "AIC-User-Agent": UA} if src == "aic" else {"User-Agent": UA}
+            h.update(headers or {})
             body = None
             if data is not None:
                 body = json.dumps(data).encode()
-                headers["Content-Type"] = "application/json"
-            req = urllib.request.Request(url, data=body, headers=headers)
+                h["Content-Type"] = "application/json"
+            req = urllib.request.Request(url, data=body, headers=h)
             with urllib.request.urlopen(req, timeout=90) as r:
                 out = r.read()
-            return out if binary else json.loads(out.decode("utf-8"))
+            if binary:
+                return out
+            return out.decode("utf-8") if text else json.loads(out.decode("utf-8"))
         except urllib.error.HTTPError as e:
-            if e.code in (403, 404, 410):
+            if e.code in (400, 403, 404, 410):
                 raise
             back = 10 * (i + 1) if e.code == 429 else 4 * (i + 1)
             print(f"   {src} HTTP {e.code}; retry in {back}s", flush=True)
             time.sleep(back)
-        except (urllib.error.URLError, TimeoutError, ConnectionError, OSError) as e:
+        except (urllib.error.URLError, TimeoutError, ConnectionError, OSError, json.JSONDecodeError) as e:
             print(f"   {src} fetch failed ({e}); retry in {4 * (i + 1)}s", flush=True)
             time.sleep(4 * (i + 1))
     raise RuntimeError(f"could not fetch {url}")
+
+
+def download(src, url, path, chunk=1 << 20):
+    """Stream a large file (a CSV dump) to `path` politely; written to a .part file first, so a cut-off download
+    is never mistaken for a finished one."""
+    _pace(src)
+    tmp = Path(str(path) + ".part")
+    req = urllib.request.Request(url, headers={"User-Agent": UA})
+    with urllib.request.urlopen(req, timeout=120) as r, tmp.open("wb") as f:
+        while True:
+            b = r.read(chunk)
+            if not b:
+                break
+            f.write(b)
+    tmp.replace(path)
+
+
+def write_meta(src, rows, **extra):
+    d = SRC[src]["dir"]
+    d.mkdir(parents=True, exist_ok=True)
+    head = dict(fetched=date.today().isoformat(), complete=True)
+    head.update(extra)
+    (d / "meta.json").write_text(json.dumps(dict(head, rows=rows), ensure_ascii=False))
+    return rows
 
 
 # ---------------------------------------------------------------------------------------------
@@ -161,9 +221,24 @@ TEXT_PAGE = re.compile(r"^(genealogical )?text\b|text page|^(persian )?calligrap
 
 
 def group_key(src, x):
+    if src in ADAPTERS:
+        return ADAPTERS[src].group_key(THIS, x)
     acc = (x.get("accession_number") if src == "cma" else x.get("main_reference_number")) or str(x["id"])
     acc = re.sub(r"[a-z]+(-[a-z]+)?$", "", acc.strip())  # 1925.3412a-b -> 1925.3412
     return src + ":" + ".".join(acc.split(".")[:2])
+
+
+# The newer sources number accessions differently (the Met's 29.100.5 is item 5 of the Havemeyer bequest, not a leaf
+# of book 29.100), so for them only records whose title names a leaf, folio, page or album are grouped by accession
+# prefix; every other record is its own group.
+LEAF = re.compile(r"\b(folio|folios|leaf|leaves|album|page from|pages from)\b", re.I)
+
+
+def leaf_group(src, acc, title, rid):
+    if acc and LEAF.search(title or ""):
+        acc = re.sub(r"[a-z]+(-[a-z]+)?$", "", re.sub(r"[\s–—-]+.*$", "", acc.strip()))
+        return src + ":" + ".".join(acc.split(".")[:2])
+    return f"{src}:{rid}"
 
 
 def select(src, rows):
@@ -193,35 +268,77 @@ def img_path(src, rid):
     return SRC[src]["dir"] / "img" / f"{rid}.jpg"
 
 
+def image_candidates(src, x):
+    """URLs to try, in order, for the analysis copy of one painting."""
+    if src == "aic":
+        return [aic_iiif(x["image_id"], IMG_W)]
+    if src == "cma":
+        web = (x.get("images") or {}).get("web") or {}
+        return [web["url"]] if web.get("url") else []
+    return ADAPTERS[src].image_urls(x)
+
+
+_used = {}
+
+
+def img_used(src):
+    """id -> image URL, for the paintings whose first candidate URL failed and a later one worked."""
+    p = SRC[src]["dir"] / "img_used.json"
+    key = (src, p.stat().st_mtime if p.exists() else 0)
+    if key not in _used:
+        _used[key] = json.loads(p.read_text()) if p.exists() else {}
+    return _used[key]
+
+
+_img_lock = threading.Lock()
+
+
+def save_image(src, x):
+    """Fetch one painting's image (first candidate URL that works), keep a IMG_W-wide copy. Returns None, or the
+    last error. A later candidate that worked is noted in <src>/img_used.json, so the row's img is a URL that loads."""
+    (SRC[src]["dir"] / "img").mkdir(parents=True, exist_ok=True)
+    err = "no image URL"
+    for j, url in enumerate(image_candidates(src, x)):
+        try:
+            im = Image.open(io.BytesIO(fetch(src, url, binary=True))).convert("RGB")
+            if im.width > IMG_W:
+                im = im.resize((IMG_W, max(1, round(im.height * IMG_W / im.width))), Image.LANCZOS)
+            im.save(img_path(src, x["id"]), "JPEG", quality=92)
+            if j:
+                with _img_lock:
+                    used = img_used(src)
+                    used[str(x["id"])] = url
+                    (SRC[src]["dir"] / "img_used.json").write_text(json.dumps(used, indent=0))
+            return None
+        except Exception as e:  # 404 on a smaller rendition: try the next candidate
+            err = e
+    return err
+
+
 def download_images(src):
     rows = select(src, load_meta(src)["rows"])
-    (SRC[src]["dir"] / "img").mkdir(parents=True, exist_ok=True)
     failed_p = SRC[src]["dir"] / "failed.json"
     failed = {}  # failures are logged here and retried on the next run (most are transient 503s)
     todo = [x for x in rows if not img_path(src, x["id"]).exists()]
     print(f"{src}: {len(rows)} paintings, {len(todo)} images to fetch", flush=True)
-    t0 = time.time()
-    for i, x in enumerate(todo):
-        try:
-            if src == "aic":
-                data = fetch("aic", aic_iiif(x["image_id"], IMG_W), binary=True)
-                im = Image.open(io.BytesIO(data)).convert("RGB")
-            else:
-                web = (x.get("images") or {}).get("web") or {}
-                if not web.get("url"):
-                    raise RuntimeError("no web image")
-                data = fetch("cma", web["url"], binary=True)
-                im = Image.open(io.BytesIO(data)).convert("RGB")
-                if im.width > IMG_W:
-                    im = im.resize((IMG_W, max(1, round(im.height * IMG_W / im.width))), Image.LANCZOS)
-            im.save(img_path(src, x["id"]), "JPEG", quality=92)
-        except Exception as e:
-            failed[str(x["id"])] = str(e)[:200]
-            failed_p.write_text(json.dumps(failed, indent=0))
-            print(f"   {src} {x['id']} failed: {e}", flush=True)
-        if i % 50 == 0:
-            el = time.time() - t0
-            print(f"{src} images {i + 1}/{len(todo)}  {el / 60:.1f} min", flush=True)
+    t0, lock, done, refused = time.time(), threading.Lock(), [0], [0]
+
+    def one(x):
+        if refused[0] >= 3:  # the server keeps refusing us (403): stop asking; the next run retries
+            return
+        err = save_image(src, x)
+        with lock:
+            refused[0] = refused[0] + 1 if isinstance(err, urllib.error.HTTPError) and err.code == 403 else 0
+            if err:
+                failed[str(x["id"])] = str(err)[:200]
+                failed_p.write_text(json.dumps(failed, indent=0))
+                print(f"   {src} {x['id']} failed: {err}", flush=True)
+            done[0] += 1
+            if done[0] % 100 == 1:
+                print(f"{src} images {done[0]}/{len(todo)}  {(time.time() - t0) / 60:.1f} min", flush=True)
+
+    with ThreadPoolExecutor(SRC[src].get("workers", 1)) as ex:
+        list(ex.map(one, todo))
     print(f"{src}: images done, {len(failed)} failed", flush=True)
 
 
@@ -543,7 +660,7 @@ COUNTRY_RULES = [(re.compile(p, re.I), c) for p, c in [
     (r"egypt", "Egypt"),
     (r"south(ern)? netherlands|flanders|flemish|bruges|belgi", "Belgium"),
     (r"netherland|holland|dutch|delft|dordrecht|haarlem", "Netherlands"),
-    (r"england|english|scotland|united kingdom|britain|british|london", "United Kingdom"),
+    (r"england|english|scotland|scottish|wales|welsh|united kingdom|britain|british|britisk|london", "United Kingdom"),
     (r"ireland|irish", "Ireland"),
     (r"france|french|paris|provence|brittany|giverny|trouville|saint-r[eé]my|lyon", "France"),
     (r"ital|venice|florence|\brome\b|genoa|naples|bologna|feltre|frascati|umbria|siena|tuscan|milan|pisa|padua|"
@@ -551,10 +668,17 @@ COUNTRY_RULES = [(re.compile(p, re.I), c) for p, c in [
     (r"german|munich|bavaria|rhine|nuremberg|cologne", "Germany"),
     (r"spain|spanish|seville|catalonia|valencia", "Spain"),
     (r"austria|salzburg|styria", "Austria"), (r"switzerland|swiss", "Switzerland"), (r"hungar", "Hungary"),
-    (r"denmark|danish", "Denmark"), (r"sweden|swedish", "Sweden"), (r"norw", "Norway"), (r"finland", "Finland"),
+    (r"denmark|danish", "Denmark"), (r"sweden|swedish", "Sweden"), (r"norw", "Norway"), (r"finland|finnish", "Finland"),
     (r"russia", "Russia"), (r"greece|greek|kr[ií]ti|crete|corfu|cretan", "Greece"),
     (r"ethiopia|gond[aä]r", "Ethiopia"), (r"algeria", "Algeria"), (r"australia", "Australia"),
-    (r"mexico|teotihuac", "Mexico"), (r"peru", "Peru"),
+    (r"mexico|mexican|teotihuac", "Mexico"), (r"peru", "Peru"), (r"guatemal", "Guatemala"),
+    # added with the Met, NGA, Rijksmuseum and SMK: nationalities and places none of the first two museums used
+    (r"poland|polish|krak[oó]w|warsaw", "Poland"), (r"czech|bohemia|prague", "Czechia"),
+    (r"portug|lisbon", "Portugal"), (r"canad", "Canada"), (r"turkey|turkish|ottoman|istanbul", "Turkey"),
+    (r"argentin", "Argentina"), (r"brazil", "Brazil"), (r"cuba", "Cuba"), (r"ecuador|quito", "Ecuador"),
+    (r"bolivia|potos[ií]", "Bolivia"), (r"colombia|bogot", "Colombia"), (r"estonia", "Estonia"),
+    (r"latvia", "Latvia"), (r"iceland", "Iceland"), (r"croatia|dalmatia", "Croatia"), (r"sloven", "Slovenia"),
+    (r"romania", "Romania"), (r"ukrain", "Ukraine"), (r"luxemb", "Luxembourg"),
     (US_PLACES, "United States"),
 ]]
 UNMAPPED = Counter()
@@ -608,7 +732,8 @@ GENERIC_WORDS = set("""mughal english dutch spanish teotihuacan russian tuscan g
 netherlandish flemish roman austrian bolognese genoese cretan belgian british lakota tibeto chinese cheyenne chancay
 ancient egyptian american japanese korean indian persian unknown anonymous artist unidentified school of the north
 south northern southern central umbrian sienese florentine lombard neapolitan portuguese swiss himalayan tibetan
-nepalese byzantine european asian eastern western mediterranean""".split())
+nepalese byzantine european asian eastern western mediterranean anoniem onbekend ubekendt ukendt anonym unbekannt
+inconnu anonimo danish""".split())
 
 
 def clean_artist(name):
@@ -617,6 +742,8 @@ def clean_artist(name):
     name = re.sub(r",?\s+R\.A\.$", "", re.sub(r"\s+", " ", name).strip())  # "Richard Cosway, R.A."
     toks = [t for t in re.split(r"[\s\-]+", name.lower()) if t]
     if not toks or all(t in GENERIC_WORDS for t in toks):
+        return None
+    if museum_common.NOT_BY.match(name):  # "After Jean Baptiste Joseph Pater", "Workshop of ...": not by that artist
         return None
     return name
 
@@ -642,6 +769,8 @@ def year_cma(x):
 
 
 def norm_record(src, x):
+    if src in ADAPTERS:
+        return ADAPTERS[src].norm(THIS, x)
     if src == "aic":
         y = x.get("date_start")
         span = (x["date_end"] - x["date_start"]) if x.get("date_end") is not None and y is not None else None
@@ -681,7 +810,15 @@ MIN_N = dict(century=10, decade=25, country=25, movement=20, artist=6)
 DECADE_SPAN, CENTURY_SPAN = 20, 100  # a work dated to a wider range is left out of decade / century tables
 
 
+# Some museums still show an old black-and-white photograph for a painting (SMK for over a third of its paintings,
+# the Art Institute for about 120). Such an image has mean chroma C* of exactly 0; a real grisaille or a faded ink
+# painting still has a tint (C* >= 1). Rows under BW_C are left out.
+BW_C = 0.6
+BW_DROPPED = Counter()
+
+
 def build_rows():
+    BW_DROPPED.clear()
     app = app_names()
     app_lab = rgb_to_lab(np.array([hex_to_rgb(h) for _, h in app]))
     pals = load_palettes()
@@ -691,8 +828,11 @@ def build_rows():
             key = f"{src}-{x['id']}"
             if key not in pals:
                 continue
-            r = norm_record(src, x)
             p = pals[key]
+            if p["C"] < BW_C:  # a black-and-white photograph of a painting: its colors are not the painting's
+                BW_DROPPED[src] += 1
+                continue
+            r = norm_record(src, x)
             rgbs = lab_to_rgb(np.array(p["lab"]))
             exact = rgb_to_lab(rgbs)  # Lab of the rounded hex, so names match what the app shows
             V = de2000(exact, app_lab).argmin(1)
@@ -705,18 +845,155 @@ def build_rows():
             r["_share"] = np.array(p["share"])
             r["L"], r["C"] = round(p["L"], 1), round(p["C"], 1)
             rows.append(r)
-    # one display name per artist across both museums ("Paul Cezanne" / "Paul Cézanne"): the most used spelling,
-    # ties to the one with diacritics
+    merge_artists(rows)
+    rows = dedupe(rows)
+    rows = cap_artists(rows)
+    rows.sort(key=lambda r: (r["y"] if r["y"] is not None else 99999, r["id"]))
+    return rows, app
+
+
+def merge_artists(rows):
+    """One display name per artist across museums ("Paul Cezanne" / "Paul Cézanne"; the Met's "Rembrandt (Rembrandt
+    van Rijn)" joins "Rembrandt van Rijn" when another museum writes it that way): the most used spelling, preferring
+    a name without brackets, ties to the one with diacritics."""
     spell = defaultdict(Counter)
     for r in rows:
         if r["a"]:
             spell[artist_key(r["a"])][r["a"]] += 1
-    best = {k: max(c, key=lambda n: (c[n], sum(ord(ch) > 127 for ch in n))) for k, c in spell.items()}
+    alias = {}
+    for k, c in spell.items():
+        m = re.match(r"^(.*?)\s*\((.+)\)\s*$", c.most_common(1)[0][0])
+        if m:
+            for part in (m.group(2), m.group(1)):
+                pk = artist_key(part)
+                if pk != k and pk in spell:
+                    alias[k] = pk
+                    break
+    merged = defaultdict(Counter)
+    for k, c in spell.items():
+        merged[alias.get(k, k)].update(c)
+    best = {k: max(c, key=lambda n: ("(" not in n, c[n], sum(ord(ch) > 127 for ch in n))) for k, c in merged.items()}
     for r in rows:
         if r["a"]:
-            r["a"] = best[artist_key(r["a"])]
-    rows.sort(key=lambda r: (r["y"] if r["y"] is not None else 99999, r["id"]))
-    return rows, app
+            k = artist_key(r["a"])
+            r["a"] = best[alias.get(k, k)]
+
+
+# Near-duplicates: the same picture catalogued twice, or a replica photographed like its original. Found with a 64-bit
+# difference hash (dHash) of each cached image: a pair is a duplicate when the hashes differ in at most DUP_BITS_ANY
+# bits, or in at most DUP_BITS_TITLE bits and the titles share most words; and in both cases mean L* and C* differ by
+# under 3. The copy from the source listed first in SRC (then the lower id) is kept. Pairs go to research/_raw/dups.tsv.
+DUP_BITS_ANY, DUP_BITS_TITLE = 2, 6
+STOP = set("a an the of and in with on at to de la le les du des van der den het een".split())
+
+
+def dhash(path):
+    im = Image.open(path).convert("L")
+    w, h = im.size
+    im = im.crop((round(w * .03), round(h * .03), w - round(w * .03), h - round(h * .03))).resize((9, 8), Image.BOX)
+    a = np.asarray(im, dtype=np.int16)
+    bits = (a[:, 1:] > a[:, :-1]).flatten()
+    return int("".join("1" if b else "0" for b in bits), 2)
+
+
+def load_hashes(rows):
+    have = {}
+    if HASH_CACHE.exists():
+        for line in HASH_CACHE.read_text().splitlines():
+            if line.strip():
+                d = json.loads(line)
+                have[d["key"]] = d["h"]
+    new = [r for r in rows if r["id"] not in have]
+    if new:
+        with HASH_CACHE.open("a") as f:
+            for r in new:
+                src, rid = r["id"].split("-", 1)
+                try:
+                    have[r["id"]] = dhash(img_path(src, rid))
+                except Exception:
+                    have[r["id"]] = 0
+                f.write(json.dumps(dict(key=r["id"], h=have[r["id"]])) + "\n")
+    return have
+
+
+DUP_DE = 5.0  # and the middle 70% of the two pictures, at 12x12, differs by under this mean dE76 (two lockets in
+              # the same gilt frame on the same backdrop hash alike; their sitters do not)
+
+
+def center_de(a, b):
+    def thumb(r):
+        src, rid = r["id"].split("-", 1)
+        im = Image.open(img_path(src, rid)).convert("RGB")
+        w, h = im.size
+        im = im.crop((round(w * .15), round(h * .15), round(w * .85), round(h * .85))).resize((12, 12), Image.BOX)
+        return rgb_to_lab(np.asarray(im, dtype=np.float64).reshape(-1, 3))
+    try:
+        return float(np.sqrt(((thumb(a) - thumb(b)) ** 2).sum(-1)).mean())
+    except Exception:
+        return 99.0
+
+
+def title_words(t):
+    return {w for w in re.findall(r"[a-z0-9]+", unicodedata.normalize("NFKD", t or "").encode("ascii", "ignore")
+                                     .decode().lower()) if w not in STOP}
+
+
+def dedupe(rows):
+    hashes = load_hashes(rows)
+    rank = {s: i for i, s in enumerate(SRC)}
+    order = sorted(rows, key=lambda r: (rank[r["src"]], r["id"]))
+    H = np.array([hashes[r["id"]] for r in order], dtype=np.uint64)
+    drop, pairs, seen = set(), [], {}
+    for r in order:
+        if r["img"] in seen:
+            drop.add(r["id"])
+            pairs.append((seen[r["img"]], r, 0, "same image URL"))
+        else:
+            seen[r["img"]] = r
+    for s in range(0, len(order), 1000):
+        X = np.bitwise_count(H[s:s + 1000, None] ^ H[None, :])
+        for i, j in zip(*np.nonzero(X <= DUP_BITS_TITLE)):
+            a, b = order[s + i], order[j]
+            if j <= s + i or b["id"] in drop or a["id"] in drop or hashes[a["id"]] == 0:
+                continue
+            if abs(a["L"] - b["L"]) >= 3 or abs(a["C"] - b["C"]) >= 3:
+                continue
+            bits = int(X[i, j])
+            ta, tb = title_words(a["t"]), title_words(b["t"])
+            similar = bool(ta and tb) and len(ta & tb) / len(ta | tb) >= 0.6
+            if (bits <= DUP_BITS_ANY or similar) and (d := center_de(a, b)) < DUP_DE:
+                drop.add(b["id"])
+                pairs.append((a, b, bits, ("titles alike" if similar else "same picture") + f", center dE {d:.1f}"))
+    with (RAW / "dups.tsv").open("w") as f:
+        for a, b, bits, why in pairs:
+            f.write(f"{a['id']}\t{b['id']}\t{bits}\t{why}\t{a['t']}\t{b['t']}\n")
+    print(f"near-duplicates dropped: {len(drop)} (list in research/_raw/dups.tsv)")
+    return [r for r in rows if r["id"] not in drop]
+
+
+# One artist keeps at most ARTIST_CAP paintings, spread evenly over the artist's dated works (sorted by year, then id),
+# so a museum that owns hundreds of one painter's sketches cannot outweigh a country or a decade.
+ARTIST_CAP = 50
+CAPPED = {}
+
+
+def cap_artists(rows):
+    by = defaultdict(list)
+    for r in rows:
+        if r["a"]:
+            by[r["a"]].append(r)
+    drop = set()
+    CAPPED.clear()
+    for a, rs in by.items():
+        if len(rs) > ARTIST_CAP:
+            rs = sorted(rs, key=lambda r: (r["y"] if r["y"] is not None else 99999, r["id"]))
+            keep = {rs[i]["id"] for i in np.linspace(0, len(rs) - 1, ARTIST_CAP).round().astype(int)}
+            drop.update(r["id"] for r in rs if r["id"] not in keep)
+            CAPPED[a] = len(rs)
+    if CAPPED:
+        print(f"artists capped at {ARTIST_CAP}: " + ", ".join(f"{a} ({n})" for a, n in
+                                                               sorted(CAPPED.items(), key=lambda kv: -kv[1])))
+    return [r for r in rows if r["id"] not in drop]
 
 
 def fam_vec(r):
@@ -828,7 +1105,7 @@ def boot_ci(vals_a, vals_b=None, n=2000, seed=7):
 CAVEATS = [
     "Aged varnish yellows and darkens old paintings, so older works read warmer, browner and darker than they were painted.",
     "These are photographs of paintings, so screen color is approximate: lighting, camera profiles and museum editing all shift it.",
-    "The collection reflects two museums' holdings (Chicago and Cleveland), not all of art history: what they bought, kept, and could put online as public domain.",
+    "The collection reflects six museums' holdings (Chicago, Cleveland, the Met in New York, the National Gallery in Washington, the Rijksmuseum in Amsterdam and SMK in Copenhagen), not all of art history: what they bought, kept, and could put online as public domain. Four of the six are American, and the two European ones are national collections, so Dutch and Danish painting weigh more than their share of Europe.",
     "A palette is area-weighted: a large dull background counts for more than a small bright accent the eye goes to first.",
     "Every painting counts equally in a group average, whatever its size.",
     "Groups are only reported above a minimum size (century 10, decade 25, country 25, movement 20, artist 6), and small groups still swing on a few works.",
@@ -838,7 +1115,16 @@ CAVEATS = [
 
 
 EUROPE = {"France", "Italy", "United Kingdom", "Netherlands", "Germany", "Belgium", "Spain", "Austria", "Switzerland",
-          "Denmark", "Sweden", "Norway", "Hungary", "Russia", "Ireland", "Finland", "Greece"}
+          "Denmark", "Sweden", "Norway", "Hungary", "Russia", "Ireland", "Finland", "Greece", "Poland", "Czechia",
+          "Portugal", "Estonia", "Latvia", "Iceland", "Croatia", "Slovenia", "Romania", "Ukraine", "Luxembourg"}
+
+
+CITY = dict(aic="Chicago", cma="Cleveland", met="New York", nga="Washington", rijks="Amsterdam", smk="Copenhagen")
+
+
+def src_counts(rs):
+    c = Counter(r["src"] for r in rs)
+    return ", ".join(f"{c[s]} in {CITY[s]}" for s in SRC if c[s])
 
 
 def pct(x):
@@ -875,14 +1161,15 @@ def findings(rows, stats):
 
     # 1. What paintings are mostly made of
     ov = stats["overall"]
-    fam_sorted = sorted(ov["fam"].items(), key=lambda kv: kv[1])
-    earth = ov["fam"]["Browns"] + ov["fam"]["Neutrals"]
+    fm = {f: float(np.mean(fam(rows, f))) for f in FAMILIES}  # unrounded (stats rounds to 3 decimals)
+    fam_sorted = sorted(fm.items(), key=lambda kv: kv[1])
+    earth = fm["Browns"] + fm["Neutrals"]
     add("earth-and-shadow", earth > 0.7 and {fam_sorted[0][0], fam_sorted[1][0]} == {"Purples", "Pinks"},
         f"Browns and neutrals (greys, blacks, whites) cover {pct(earth)} of the average painting's surface. "
-        f"Purples ({pct(ov['fam']['Purples'])}) and pinks ({pct(ov['fam']['Pinks'])}) are the rarest families: "
+        f"Purples ({pct(fm['Purples'])}) and pinks ({pct(fm['Pinks'])}) are the rarest families: "
         f"they appear as accents, almost never as large areas.",
-        dict(browns=ov["fam"]["Browns"], neutrals=ov["fam"]["Neutrals"], purples=ov["fam"]["Purples"],
-             pinks=ov["fam"]["Pinks"], n=ov["n"]),
+        dict(browns=round(fm["Browns"], 4), neutrals=round(fm["Neutrals"], 4), purples=round(fm["Purples"], 5),
+             pinks=round(fm["Pinks"], 5), n=ov["n"]),
         "Area-weighted: a small vivid accent barely moves these shares. Aged varnish pushes old pictures toward brown.")
 
     # 2. The single most common app color
@@ -927,7 +1214,8 @@ def findings(rows, stats):
         dict(bg1860s=round(np.mean(fam(f60, "Blues", "Greens")), 4), bg1880s=round(np.mean(fam(f80, "Blues", "Greens")), 4),
              L1860s=round(np.mean(L(f60)), 1), L1880s=round(np.mean(L(f80)), 1), n=[len(f60), len(f80)],
              ci_bluegreen=ci_b, ci_L=ci_l),
-        "Two American museums collected French Impressionism heavily, so the 1880s sample leans to it. "
+        "The American museums (Chicago, Cleveland, the Met, the National Gallery) collected French Impressionism "
+        "heavily, so the 1880s sample leans to it. "
         f"Decade groups are modest (n={len(f60)} and {len(f80)}).")
 
     # 6. Impressionism vs Realism
@@ -962,8 +1250,7 @@ def findings(rows, stats):
                  L_monet=round(np.mean(L(mon)), 1), L_others=round(np.mean(L(rest18)), 1), n=[len(mon), len(rest18)],
                  ci_blues=ci, ci_L=ci_l, top=[t["vocab"] for t in art["top"][:4]],
                  dist=[[t["vocab"], t["lift"]] for t in extra]),
-            f"{len(mon)} paintings ({sum(r['src'] == 'aic' for r in mon)} in Chicago, {sum(r['src'] == 'cma' for r in mon)} "
-            "in Cleveland). A six-color palette averages his small broken strokes, so "
+            f"{len(mon)} paintings ({src_counts(mon)}). A six-color palette averages his small broken strokes, so "
             "lilacs and pale blues come out as soft greys and slates.")
 
     # 8. Van Gogh's greens
@@ -1070,39 +1357,93 @@ def findings(rows, stats):
     return out
 
 
+SHARD_LIMIT = 8_000_000   # bytes: above this the corpus is split into data/corpus/<src>-<n>.json
+SHARD_SIZE = 2_500_000    # target bytes per shard
+
+
+def corpus_files():
+    one = ROOT / "data" / "corpus.json"
+    return [one] if one.exists() else sorted((ROOT / "data" / "corpus").glob("*.json"))
+
+
+def load_corpus():
+    """Every corpus row, from data/corpus.json or, when the corpus is split, from every data/corpus/*.json shard."""
+    return [r for f in corpus_files() for r in json.loads(f.read_text())]
+
+
+def write_corpus(out_rows):
+    """data/corpus.json when it fits under SHARD_LIMIT; otherwise shards by source, rows in id order, each about
+    SHARD_SIZE bytes: data/corpus/aic-1.json, data/corpus/met-1.json, data/corpus/met-2.json ... Each file is a JSON
+    array of rows in the same format. Stale files of the other shape are removed."""
+    line = lambda r: json.dumps(r, ensure_ascii=False, separators=(",", ":"))
+    dump = lambda rs: "[\n" + ",\n".join(line(r) for r in rs) + "\n]\n"
+    one, shard_dir = ROOT / "data" / "corpus.json", ROOT / "data" / "corpus"
+    whole = dump(out_rows)
+    if len(whole.encode()) <= SHARD_LIMIT:
+        one.write_text(whole)
+        for p in shard_dir.glob("*.json"):
+            p.unlink()
+        return [one]
+    shard_dir.mkdir(exist_ok=True)
+    written = []
+    idkey = lambda r: (r["id"].split("-", 1)[0], int(r["id"].split("-", 1)[1]) if r["id"].split("-", 1)[1].isdigit()
+                       else 0, r["id"])
+    for s in SRC:
+        rs = sorted((r for r in out_rows if r["src"] == s), key=idkey)
+        if not rs:
+            continue
+        size = sum(len(line(r).encode()) + 2 for r in rs)
+        n = max(1, math.ceil(size / SHARD_SIZE))
+        per = math.ceil(len(rs) / n)
+        for k in range(n):
+            p = shard_dir / f"{s}-{k + 1}.json"
+            p.write_text(dump(rs[k * per:(k + 1) * per]))
+            written.append(p)
+    for p in shard_dir.glob("*.json"):
+        if p not in written:
+            p.unlink()
+    if one.exists():
+        one.unlink()
+    return written
+
+
 def write_outputs(rows, stats, finds, fetched):
     out_rows = []
     for r in rows:
         out_rows.append(dict(id=r["id"], src=r["src"], t=r["t"], a=r["a"], y=r["y"], co=r["co"], mv=r["mv"],
                              img=r["img"], p=r["p"], L=r["L"], C=r["C"]))
-    (ROOT / "data" / "corpus.json").write_text(
-        "[\n" + ",\n".join(json.dumps(r, ensure_ascii=False, separators=(",", ":")) for r in out_rows) + "\n]\n")
+    files = write_corpus(out_rows)
     n_src = Counter(r["src"] for r in rows)
     meta = dict(
         sources=[dict(id=s, name=SRC[s]["name"], api=SRC[s]["api"], license=SRC[s]["license"], n=n_src[s],
                       fetched=fetched.get(s)) for s in SRC if n_src[s]],
         count=len(rows), built=date.today().isoformat(),
+        files=[str(p.relative_to(ROOT)) for p in files],
         method=[
-            "Public-domain paintings with an image from each museum's open API. Manuscript text pages are dropped, and one manuscript or album keeps at most %d leaves." % GROUP_CAP,
-            "Image: the museum's 200px-wide copy, near-uniform border bands trimmed, plus a 2% inset; a flat neutral photo backdrop around shaped panels and lockets is masked out.",
+            "Public-domain paintings with an image from each museum's open API or open data. Manuscript text pages are dropped, one manuscript or album keeps at most %d leaves, near-duplicate images and black-and-white photographs (mean C* under %.1f) are dropped, and one artist keeps at most %d paintings, spread over the artist's dates." % (GROUP_CAP, BW_C, ARTIST_CAP),
+            "Image: a 200px-wide copy (the Art Institute's 200px IIIF image; the other museums' ~400-900px images scaled down), near-uniform border bands trimmed, plus a 2% inset; a flat neutral photo backdrop around shaped panels and lockets is masked out.",
             "Palette: k-means (k=6) in CIELAB on a ~120px copy, a*/b* weighted 1.5x for clustering only; each color's share is its pixel area.",
             "Names: each palette color gets the nearest of the app's 101 color names by CIEDE2000. Families follow an LCh rule (familyRule).",
             "L and C: mean CIELAB lightness L* (0 black to 100 white) and mean chroma C* (0 grey; higher = more saturated) over every pixel.",
             "Group stats: the mean over paintings of each painting's area shares; top = the 8 app names with the largest mean share; sample = the paintings whose family mix is closest to the group's.",
         ],
         familyRule=FAMILY_RULE, minN=MIN_N, caveats=CAVEATS,
-        fields=dict(id="source-id", src="aic | cma", t="title", a="artist (null when the museum gives only a culture or 'unknown')",
-                    y="year (start of the museum's date range)", co="modern country where made", mv="movement or school, where stated",
-                    img="display image URL (AIC: IIIF 400px; CMA: ~900px web JPEG)",
+        fields=dict(id="source-id", src=" | ".join(SRC), t="title",
+                    a="artist (null when the museum gives only a culture or 'unknown', or says workshop, follower or copy)",
+                    y="year (start of the museum's date range)",
+                    co="modern country where made (the Met, NGA and SMK: from the artist's nationality where no place is given; the Rijksmuseum: place of making, else catalogue, else birthplace)",
+                    mv="movement or school, where stated",
+                    img="display image URL (AIC, NGA, Rijksmuseum: IIIF 400px wide; SMK: IIIF 400px, or its fixed 1600px JPEG where it has no IIIF image; the Met: ~450px 'mobile-large' JPEG; CMA: ~900px web JPEG)",
                     p="palette: [hex, area share, nearest app name, family] x up to 6, largest first",
                     L="mean L*", C="mean C*"),
     )
     stats = dict(meta=meta, **stats, findings=finds)
-    js = ("// ColorHub art-history color statistics. Generated by tools/corpus.py from data/corpus.json; do not edit.\n"
+    js = ("// ColorHub art-history color statistics. Generated by tools/corpus.py with the painting corpus "
+          "(data/corpus.json or data/corpus/*.json); do not edit.\n"
           "window.STATS = " + json.dumps(stats, ensure_ascii=False, separators=(",", ":")) + ";\n")
     (ROOT / "data" / "stats.js").write_text(js)
-    for p in ("corpus.json", "stats.js"):
-        print(f"data/{p}: {(ROOT / 'data' / p).stat().st_size / 1e6:.2f} MB")
+    for p in files + [ROOT / "data" / "stats.js"]:
+        print(f"{p.relative_to(ROOT)}: {p.stat().st_size / 1e6:.2f} MB")
 
 
 def build():
@@ -1113,7 +1454,8 @@ def build():
     write_outputs(rows, stats, finds, fetched)
     if UNMAPPED:
         print("places with no country:", UNMAPPED.most_common(30))
-    print(f"{len(rows)} paintings; centuries {len(stats['byCentury'])}, decades {len(stats['byDecade'])}, "
+    print(f"black-and-white photographs left out: {dict(BW_DROPPED)}")
+    print(f"{len(rows)} paintings ({dict(Counter(r['src'] for r in rows))}); centuries {len(stats['byCentury'])}, decades {len(stats['byDecade'])}, "
           f"countries {len(stats['byCountry'])}, movements {len(stats['byMovement'])}, artists {len(stats['byArtist'])}, "
           f"findings {len(finds)}")
     return rows, stats, finds
@@ -1161,22 +1503,54 @@ def contact_sheet(rows, path, n=10, seed=None, ids=None):
     print("contact sheet:", path)
 
 
+def fetch_meta(src, resume=False):
+    if resume and load_meta(src).get("rows") and load_meta(src).get("complete", True):
+        print(f"{src}: metadata cached ({len(load_meta(src)['rows'])} rows); --resume keeps it", flush=True)
+        return
+    if src == "aic":
+        meta_aic()
+    elif src == "cma":
+        meta_cma()
+    else:
+        ADAPTERS[src].meta(THIS, resume)
+
+
+def status():
+    pals = load_palettes()
+    for s in SRC:
+        m = load_meta(s)
+        rows = select(s, m["rows"]) if m["rows"] else []
+        imgs = sum(img_path(s, x["id"]).exists() for x in rows)
+        npal = sum(f"{s}-{x['id']}" in pals for x in rows)
+        failed = SRC[s]["dir"] / "failed.json"
+        nf = len(json.loads(failed.read_text())) if failed.exists() else 0
+        print(f"{s:6} meta {'done' if m.get('complete', bool(m['rows'])) else 'partial'} {m.get('fetched')}: "
+              f"{len(m['rows'])} rows, {len(rows)} selected, {imgs} images, {npal} palettes, {nf} image failures")
+
+
 def main(argv):
+    resume = "--resume" in argv
+    argv = [a for a in argv if a != "--resume"]
     cmd = argv[0] if argv else "all"
-    if cmd in ("meta", "all"):
-        for s in (argv[1:] if cmd == "meta" and argv[1:] else SRC):
-            (meta_aic if s == "aic" else meta_cma)()
-    if cmd in ("images", "all"):
-        for s in (argv[1:] if cmd == "images" and argv[1:] else SRC):
+    srcs = [s for s in argv[1:] if s in SRC] or list(SRC)
+    if cmd in ("meta", "all", "fetch"):
+        for s in srcs:
+            fetch_meta(s, resume=resume)
+    if cmd in ("images", "all", "fetch"):
+        for s in srcs:
             download_images(s)
     if cmd in ("palettes", "all"):
         run_palettes()
     if cmd in ("build", "all"):
         build()
+    if cmd == "status":
+        status()
     if cmd == "sheet":
         n = int(argv[1]) if len(argv) > 1 else 10
         path = argv[2] if len(argv) > 2 else str(RAW / "corpus-contact.png")
         rows, _ = build_rows()
+        if len(argv) > 4:
+            rows = [r for r in rows if r["src"] == argv[4]]
         contact_sheet(rows, path, n=n, seed=int(argv[3]) if len(argv) > 3 else None)
 
 
