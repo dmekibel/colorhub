@@ -120,7 +120,7 @@
 .hm-tab-panel[hidden]{display:none}
 .hm-sheet-panel.hm-sheet-compact{max-height:40vh;overflow:hidden}
 .hm-look-panel{padding-bottom:0}
-.hm-look-row{display:flex;gap:7px;overflow-x:auto;padding-bottom:2px;margin-bottom:4px}
+.hm-look-row{display:flex;gap:7px;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;padding-bottom:2px;margin-bottom:4px}
 .hm-look-chip{flex:none;width:59px;display:flex;flex-direction:column;align-items:center;gap:4px;padding:5px 2px;border-radius:12px;border:1px solid transparent}
 .hm-look-chip.on{border-color:var(--rule-2);background:rgba(236,232,223,.05)}
 .hm-look-chip b{font:400 10.5px/1.1 var(--serif);color:var(--soft);text-align:center}

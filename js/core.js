@@ -377,6 +377,9 @@ const fanVars = (n, k) => `--k:${k};--mid:${(n - 1) / 2}`;
 // ---------- menu ----------
 // Lock page scrolling under a sheet or panel without losing your place (overflow:hidden on a 100%-tall body
 // would jump to the top): pin the body at its current offset, then put the scroll back on release.
+// iOS Safari ignores user-scalable=no, so stop its pinch-zoom gesture on pages directly (the honeycomb and other
+// canvases read raw pointers, which this doesn't touch)
+document.addEventListener("gesturestart", e => e.preventDefault(), { passive: false });
 let LOCKS = 0, LOCK_Y = 0;
 function lockScroll() {
   if (LOCKS++) return;

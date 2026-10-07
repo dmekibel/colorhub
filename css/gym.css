@@ -139,7 +139,7 @@
 .gym-res .gy-weak+.fine{margin-top:-6px;margin-bottom:20px}
 /* every miss, side by side: a short scrolling strip, swatches judged on the neutral booth grey
    (DESIGN-SYSTEM §3 "Surround"), feedback as a 3px ring outside the swatch, never over it */
-.gy-miss-strip{display:flex;gap:12px;overflow-x:auto;margin:14px calc(-1 * var(--g)) 4px;padding:2px var(--g) 8px;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity}
+.gy-miss-strip{display:flex;gap:12px;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;margin:14px calc(-1 * var(--g)) 4px;padding:2px var(--g) 8px;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity}
 .gy-miss{flex:0 0 150px;scroll-snap-align:start;background:#5F5F5F;border-radius:3px;padding:14px 12px 12px}
 .gy-miss-pair{display:flex;gap:10px}
 .gy-miss-sw{position:relative;flex:1;min-width:0;aspect-ratio:1;border-radius:4px;background:var(--c)}

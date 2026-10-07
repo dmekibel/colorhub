@@ -33,7 +33,7 @@
 .wd-coty .pal-name em{align-self:start}
 
 /* ---------- "In fashion" row on a color page ---------- */
-.wd-in-strip{display:flex;gap:12px;overflow-x:auto;margin:14px calc(-1 * var(--g)) 4px;padding:2px var(--g) 8px;scrollbar-width:none}
+.wd-in-strip{display:flex;gap:12px;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;margin:14px calc(-1 * var(--g)) 4px;padding:2px var(--g) 8px;scrollbar-width:none}
 .wd-in-strip::-webkit-scrollbar{display:none}
 .wd-in{flex:none;width:132px;text-align:left;padding:10px;border:1px solid var(--rule);border-radius:3px}
 .wd-in i{display:block;width:100%;height:40px;background:var(--c);border-radius:2px;margin-bottom:8px}

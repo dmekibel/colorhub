@@ -3,7 +3,7 @@
    serif titles, color as the only decoration. */
 
 /* a sideways row of pins (Featured, Similar palettes, In paintings) */
-.gl-rail{display:flex;gap:14px;align-items:flex-start;overflow-x:auto;margin:0 calc(-1 * var(--g));padding:2px var(--g) 8px;scroll-padding:0 var(--g);scroll-snap-type:x proximity;scrollbar-width:none}
+.gl-rail{display:flex;gap:14px;align-items:flex-start;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;margin:0 calc(-1 * var(--g));padding:2px var(--g) 8px;scroll-padding:0 var(--g);scroll-snap-type:x proximity;scrollbar-width:none}
 .gl-rail::-webkit-scrollbar{display:none}
 /* a filmstrip: every picture the same height, each pin as wide as its picture; the text never widens it */
 .gl-rail>.pin,.gl-rail>.gl-pin{flex:none;width:auto;scroll-snap-align:start}
@@ -52,7 +52,7 @@
 .gl-reset{font:500 10px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--soft);padding:10px 0 10px 10px}
 .gl-row{display:grid;grid-template-columns:58px minmax(0,1fr);align-items:center;min-height:48px;border-top:1px solid var(--rule)}
 .gl-lab{font:500 9.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
-.gl-sw,.gl-chips{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;padding:9px var(--g) 9px 3px;margin-right:calc(-1 * var(--g))}
+.gl-sw,.gl-chips{display:flex;gap:7px;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;scrollbar-width:none;padding:9px var(--g) 9px 3px;margin-right:calc(-1 * var(--g))}
 .gl-sw::-webkit-scrollbar,.gl-chips::-webkit-scrollbar{display:none}
 .gl-sw button{flex:none;width:30px;height:30px;background:var(--c);border-radius:2px;position:relative}
 .gl-sw button.on{outline:2px solid var(--ink);outline-offset:2px}

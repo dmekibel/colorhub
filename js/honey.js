@@ -229,10 +229,11 @@ const HONEY_STYLES = {
   globe: { title: "Globe", cfg: { layout: "globe", lensMode: "none", gap: .05, shape: 0, zMinUser: .5, labelMin: 32, vig: 0 },
     far: { labelMin: -8 } },
 };
-const HONEY_MAX_DRAWN = 5000;   // phones stay smooth and safe; see the draw loop
+const HONEY_MAX_DRAWN = 3000;   // phones stay smooth and safe; see the draw loop
 // motion (net lag + water breathe/ripple) is skipped past this many drawn bubbles, so it stays fast at the
 // biggest, most zoomed-out sets too — idle drift is unaffected (it only ever moves one pan value, not per-bubble)
 const HONEY_MOTION_BUDGET = Math.round(HONEY_MAX_DRAWN * .5);
+const HONEY_ALIVE_MAX = 1500;   // above this many drawn bubbles: no idle drift or water at all (see the loop)
 // the five styles the home's View panel shows (ROADMAP: "fewer choices, chosen well"); the rest (Current, Edges,
 // Wheel, Tapestry) stay reachable only from the honeycomb lab (#/lab/honey), which still steps through all of them
 // The Globe stays in the lab until its colors are spread evenly over the sphere (today they bunch up and leave
@@ -309,6 +310,23 @@ function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52) {   // grow: how far
     const reach = Math.min(12, Math.ceil((b.d + maxD) * .75 / cell));
     // start from a 16-gon a little bigger than the bubble's own lens size
     const R0 = b.d * Math.max(.62, grow * 1.2); let poly = [];
+    const ci0 = Math.floor(b.x / cell), cj0 = Math.floor(b.y / cell);
+    // circles (shape 0) only need the cell's inscribed circle: the nearest bisector. No polygon clipping, which is
+    // most of the cost on big sets (and what made panning 2,700 colors janky on a phone).
+    if (shapeAmt <= .02) {
+      let r = R0 * .98;
+      for (let i = ci0 - reach; i <= ci0 + reach; i++) for (let j = cj0 - reach; j <= cj0 + reach; j++) {
+        const a = grid.get(key(i, j)); if (!a) continue;
+        for (const m of a) {
+          if (m === n) continue;
+          const o = drawn[m], dist = Math.hypot(o.x - b.x, o.y - b.y);
+          if (dist < 1e-6 || dist > (b.d + o.d) * .75) continue;
+          (b.nb || (b.nb = [])).push([m, dist]);
+          if (dist / 2 - half < r) r = dist / 2 - half;
+        }
+      }
+      b.poly = null; b.rin = Math.max(0, r); b.d0 = b.d; b.d = 2 * b.rin; return;
+    }
     for (let i = 0; i < 16; i++) { const t = i / 16 * 6.283185307; poly.push([Math.cos(t) * R0, Math.sin(t) * R0]); }
     const ci = Math.floor(b.x / cell), cj = Math.floor(b.y / cell);
     for (let i = ci - reach; i <= ci + reach && poly.length; i++) for (let j = cj - reach; j <= cj + reach && poly.length; j++) {
@@ -415,6 +433,8 @@ function honeycomb(host, opts = {}) {
   // water's tap ripples, and the panel inset (ctrl.setInset, so a bottom sheet never covers the magnified middle)
   let Plag = [0, 0], lastInput = performance.now(), driftT0 = 0, driftTeff = 0, driftAnchor = [0, 0], touchXY = null, ripples = [];
   let insetBottom = 0, insetCur = 0;
+  // per-bubble size memory, so a bubble never snaps to a new size (cells change as neighbors come and go): sizes ease
+  let sizeMem = new Map(), sizeT = 0;
   const vy = () => Math.max(60, Hh - insetCur);   // the visible height above whatever panel is inset
   const vcy = () => vy() / 2;
 
@@ -520,7 +540,7 @@ function honeycomb(host, opts = {}) {
       if (x < -d || y < -d || x > W + d || y > Hh + d) return;
       if (d < 2.2) { tinyN++; return; }
       if (z < cbest) { cbest = z; cItem = p.it; }
-      drawn.push({ it: p.it, x, y, d, z });
+      drawn.push({ it: p.it, x, y, d, z, k: p.it.n + "|" + Math.round((P[0] + ex) * 8) + "|" + Math.round((P[1] + ey) * 8) });
     });
     // Safety: never draw more than ~5,000 bubbles. Far out on a big set some styles reached 50,000-120,000, which ran
     // a phone out of memory (a white or black screen). Past the budget, the zoom-out limit moves in to this zoom.
@@ -595,6 +615,21 @@ function honeycomb(host, opts = {}) {
     const shapeAmt = zc("shape");
     applyMotion(l, t);
     honeyCells(drawn, gapPx(), shapeAmt);
+    // No snapping (David): a bubble's size eases to its new value over ~120 ms instead of jumping when its cell
+    // changes. New bubbles (just entered the screen) start at their size; growth eases too.
+    const dt = sizeT ? Math.min(100, t - sizeT) : 0; sizeT = t;
+    const ease = RM ? 1 : 1 - Math.exp(-dt / 120), mem = new Map();
+    for (const b of drawn) {
+      if (!b.k) continue;
+      const prev = sizeMem.get(b.k);
+      if (prev != null && dt > 0) {
+        const r = prev + (b.rin - prev) * ease, f = b.rin > 0 ? r / b.rin : 1;
+        if (b.poly && Math.abs(f - 1) > .001) b.poly = b.poly.map(q => [q[0] * f, q[1] * f]);
+        b.rin = r; b.d = 2 * r;
+      }
+      mem.set(b.k, b.rin);
+    }
+    sizeMem = mem;
     let pb = null;
     if (pressed) { const i = drawn.findIndex(b => b.it === pressed.it && Math.abs(b.x - pressed.x) < 3 && Math.abs(b.y - pressed.y) < 3); if (i >= 0) { pb = drawn.splice(i, 1)[0]; drawn.push(pb); } }
     for (const b of drawn) {
@@ -660,7 +695,8 @@ function honeycomb(host, opts = {}) {
     raf = 0;
     const dt = Math.min(.05, Math.max(0, (t - last) / 1000)); last = t;
     let more = false;
-    const ALIVE = !RM && !SHOOT && cfg.alive > 0;
+    // big sets stay still unless touched: every animated frame recomputes thousands of cells (2,700 felt janky)
+    const ALIVE = !RM && !SHOOT && cfg.alive > 0 && drawn.length <= HONEY_ALIVE_MAX && (lay ? lay.raw.length : 0) <= 1200;
     // Idle drift: after ~4s with no touch, wander around where you left it, easing in over ~1.5s. Calm by
     // design (David: "gently floating", never "moving a lot") — the speed is driven directly (not a position
     // formula's derivative, which can spike mid-ease), so it's hard-bounded at ~4.2px/s at alive 1, ~8.4px/s at

@@ -26,7 +26,7 @@
 .pm-fams button,.pm-chips button{font:500 10.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--faint);padding:8px 0;border-bottom:1px solid transparent;transition:color .2s}
 .pm-fams button.on,.pm-chips button.on{color:var(--ink);border-bottom-color:var(--ink)}
 .pm-chips em{font-style:normal;color:var(--faint);letter-spacing:.04em}
-.pm-chips{display:flex;gap:16px;overflow-x:auto;margin:10px calc(-1 * var(--g)) 0;padding:0 var(--g);scrollbar-width:none}
+.pm-chips{display:flex;gap:16px;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;margin:10px calc(-1 * var(--g)) 0;padding:0 var(--g);scrollbar-width:none}
 .pm-chips::-webkit-scrollbar{display:none}
 .pm-chips button{flex:none}
 .pm-dots{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
