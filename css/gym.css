@@ -1,0 +1,129 @@
+/* ColorHub Gym: stations, previews, adjust drills, afterimage, results.
+   Same "Museum editorial" rules as app.css: no card boxes, hairlines, serif names, mono captions.
+   Size rule: every drill swatch is at least 25vw wide (small patches look less colorful). */
+
+/* ---------- level ladder: 20 hairline steps ---------- */
+.ladder{display:grid;grid-template-columns:repeat(20,1fr);gap:2px;height:3px}
+.ladder i{background:var(--rule)}
+.ladder i.on{background:var(--ink)}
+.ladder.blank{background:none}
+.ladder.big{height:5px;gap:3px;margin:16px 0 22px}
+
+/* ---------- station previews (art, not drills) ---------- */
+.sa{position:relative;display:grid;width:100%;aspect-ratio:4/3;gap:2px;overflow:hidden;border-radius:2px}
+.sa i{background:var(--c);min-width:0}
+.sa-grid{grid-template-columns:repeat(3,1fr)}
+.sa-grid i.odd{animation:gyOdd 2.4s ease-in-out infinite}
+@keyframes gyOdd{50%{transform:scale(.86)}}
+.sa-pair{grid-template-columns:1fr 1fr;gap:0}
+.sa-strip{grid-template-columns:repeat(6,1fr);gap:1px}
+.sa-strip i.odd{animation:gySwap 2.6s var(--ease) infinite}
+.sa-strip i.l{--dir:1}.sa-strip i.r{--dir:-1}
+@keyframes gySwap{0%,35%{transform:none}55%,85%{transform:translateX(calc(var(--dir) * 100%))}100%{transform:none}}
+.sa-ground{display:grid;place-items:center;background:var(--g)}
+.sa-ground b{height:56%;aspect-ratio:1;background:var(--c)}
+.sa-ground b.disc{border-radius:50%;height:66%}
+.sa-two{grid-template-rows:1fr 1fr;gap:0}
+.sa-two>span{display:grid;place-items:center;background:var(--g)}
+.sa-two b{height:58%;aspect-ratio:1;background:var(--c)}
+.sa-mem{grid-template-columns:repeat(5,1fr);grid-template-rows:2fr 1fr;gap:2px}
+.sa-mem i.big{grid-column:1/-1}
+.sa-after{place-items:center;background:#77746D}
+.sa-after b{height:58%;aspect-ratio:1;border-radius:50%;background:var(--c);grid-area:1/1}
+.sa-after svg{grid-area:1/1;height:76%;aspect-ratio:1;overflow:visible;transform:rotate(-90deg)}
+.sa-after circle{fill:none;stroke:#F3F1EC;stroke-width:2.5;stroke-dasharray:100;stroke-dashoffset:30;animation:gyRing 6s linear infinite}
+@keyframes gyRing{from{stroke-dashoffset:100}to{stroke-dashoffset:0}}
+
+/* ---------- gym home: suggested station ---------- */
+.sg-card{display:flex;flex-direction:column;gap:12px;width:100%;text-align:left;margin-top:34px;padding:16px 0 0;border-top:1px solid var(--rule-2)}
+.sg-top{display:flex;justify-content:space-between;gap:12px}
+.sg-top .eyebrow:first-child{color:var(--ink)}
+.sg-card .sa{aspect-ratio:2/1;margin-top:2px}
+.sg-name{font:400 44px/.95 var(--serif);letter-spacing:-.03em;margin-top:6px}
+.sg-what{color:var(--soft);font-size:14.5px}
+.sg-lv{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+.sg-lv>span:last-child{font:500 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.sg-go{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px;min-height:60px;margin-top:4px;border-top:1px solid var(--rule-2);border-bottom:1px solid var(--rule-2)}
+.sg-go b{font:400 28px/1 var(--serif);font-weight:400}
+.sg-go span{font:500 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--soft)}
+.sg-go svg{width:20px;height:20px}
+.sg-card:active .sg-go{opacity:.6}
+
+/* ---------- gym home: station tiles ---------- */
+.gs-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 14px;margin-top:18px}
+.gs-tile{display:flex;flex-direction:column;gap:8px;min-width:0;text-align:left;transition:opacity .25s,transform .4s var(--spring)}
+.gs-tile:active{transform:scale(.97);opacity:.8}
+.gs-name{font:400 23px/1.02 var(--serif);letter-spacing:-.01em;margin-top:4px;min-height:2.04em}
+.gs-meta{display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:20px}
+.gs-meta>span{font:500 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.gs-meta .spark{width:56px;height:18px;color:var(--soft)}
+.gs-best{font:500 10px/1 var(--mono);letter-spacing:.1em;color:var(--faint)}
+
+/* ---------- drills ---------- */
+.dr-why{color:var(--faint);font-size:13px;line-height:1.4;margin-top:10px;max-width:46ch;text-wrap:pretty}
+.station .grid{width:min(100%,52dvh)}
+.station .grid .tile{min-width:25vw}
+/* color memory */
+.mem{display:flex;flex-direction:column;align-items:center;gap:14px;width:100%}
+.mem-chip{width:min(72%,42dvh);aspect-ratio:1;background:var(--c);border-radius:3px;transition:opacity .25s}
+.mem-chip.gone{opacity:0}
+.mem-bar{display:block;width:min(72%,42dvh);height:2px;background:var(--ink);transform-origin:left}
+.mem-bar.go{transition:transform 2s linear;transform:scaleX(0)}
+.mem-bar.gone{opacity:0}
+.mem-opts{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;width:100%}
+.mem-opts .tile{grid-column:span 2;min-width:25vw}
+.mem-opts .tile:nth-child(4){grid-column:2/4}.mem-opts .tile:nth-child(5){grid-column:4/6}
+.drill-order .sorter{max-height:560px}
+
+/* adjust stations: a colored field, a slider, a lock button */
+.gy-col{display:flex;flex-direction:column;gap:14px;width:100%;height:100%}
+.gy-field{position:relative;flex:1;min-height:0;display:grid;place-items:center;background:var(--g);border-radius:3px;transition:background .45s}
+.gy-patch{display:grid;grid-template-columns:1fr 1fr;width:42%;min-width:25vw;aspect-ratio:1}
+.gy-patch i{background:var(--c);transition:background .45s}
+.gy-disc{width:50%;min-width:25vw;aspect-ratio:1;border-radius:50%;background:var(--c);transition:background .45s}
+.gy-two{flex:1;min-height:0;display:flex;flex-direction:column;gap:3px}
+.gy-two .gy-field{flex:1}
+.gy-sq{height:64%;min-height:25vw;aspect-ratio:1;background:var(--c)}
+.gy-sq.gy-patch{width:auto;background:none}
+.gy-tags{position:absolute;left:12px;right:12px;bottom:10px;display:none;justify-content:space-between;font:500 9.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase}
+.gy-tags.one{justify-content:flex-start}
+.gy-tags[data-ink="dark"]{color:rgba(20,19,17,.72)}.gy-tags[data-ink="light"]{color:rgba(255,255,255,.82)}
+.rev .gy-tags{display:flex}
+.gy-sl{display:flex;flex-direction:column;gap:6px;flex:none}
+.gy-sl span{font:500 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--soft)}
+.gy-sl input{-webkit-appearance:none;appearance:none;width:100%;height:36px;margin:0;background:transparent;touch-action:none}
+.gy-sl input::-webkit-slider-runnable-track{height:2px;background:var(--rule-2)}
+.gy-sl input::-moz-range-track{height:2px;background:var(--rule-2)}
+.gy-sl input::-webkit-slider-thumb{-webkit-appearance:none;width:30px;height:30px;margin-top:-14px;border-radius:50%;background:var(--ink);border:0;box-shadow:0 2px 10px rgba(0,0,0,.5)}
+.gy-sl input::-moz-range-thumb{width:30px;height:30px;border-radius:50%;background:var(--ink);border:0}
+.gy-sl input:disabled{opacity:.35}
+.gy-rev{display:flex;flex-direction:column;gap:12px;width:100%;text-align:left}
+.gy-rev .note{font-size:13.5px;line-height:1.4;text-wrap:pretty}
+.drill-neutral .drill-foot,.drill-vanish .drill-foot,.drill-match .drill-foot{min-height:62px}
+
+/* afterimage */
+.af-timer i{animation:none}
+.af-timer.go i{animation:drain 20s linear both}
+.af-field{position:relative;width:100%;height:100%;max-height:520px;display:grid;place-items:center;background:#77746D;border-radius:3px;transition:background .15s}
+.af-dot{position:relative;width:min(58%,40dvh);min-width:25vw;aspect-ratio:1;border-radius:50%;background:var(--c)}
+.af-dot svg{position:absolute;inset:-12%;width:124%;height:124%;overflow:visible;transform:rotate(-90deg)}
+.af-dot circle{fill:none;stroke:#F3F1EC;stroke-width:1.6;stroke-dasharray:100;stroke-dashoffset:100;opacity:0}
+.af-field.go circle{transition:stroke-dashoffset 20s linear;stroke-dashoffset:0;opacity:1}
+.af-x{position:absolute;left:50%;top:50%;width:16px;height:16px;margin:-8px;pointer-events:none}
+.af-x::before,.af-x::after{content:"";position:absolute;background:#141311}
+.af-x::before{left:7px;top:0;width:2px;height:16px}.af-x::after{top:7px;left:0;height:2px;width:16px}
+.af-field.white{background:#F6F5F1}
+.af-field.white .af-dot{visibility:hidden}
+.af-opts{position:absolute;inset:14px;display:grid;grid-template-columns:1fr 1fr;gap:10px;animation:fade .5s var(--ease) both}
+.af-opts .tile{aspect-ratio:auto;min-width:25vw;box-shadow:inset 0 0 0 1px rgba(20,19,17,.08)}
+.af-end{width:100%}
+.drill-after .drill-foot{min-height:62px}
+
+/* ---------- results ---------- */
+.gr-lv{display:flex;align-items:baseline;gap:12px;font:400 76px/.9 var(--serif);letter-spacing:-.03em}
+.gr-lv span{font:500 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--soft)}
+.gr-lv s{color:var(--faint);text-decoration:none;font-size:48px}
+.gr-lv i{font-style:normal;color:var(--faint);font-size:32px}
+.gym-res .lede{margin-bottom:6px}
+.gym-res .gr-fine{margin:0 0 22px}
+.af-field.asked .af-x{display:none}
