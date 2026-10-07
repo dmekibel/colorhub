@@ -133,7 +133,7 @@ function deck(mode, opts = {}) {
       <div class="label">
         <div class="meta"><span>${esc(meta)}</span><span>${c.h}</span></div>
         <h2>${esc(c.n)}</h2>
-        ${nb && c.d ? `<div class="vs"><span class="pair"><i style="--c:${c.h}"></i><i style="--c:${nb.h}"></i></span><p>${esc(c.d)}</p></div>` : ""}
+        ${nb && c.d ? `<div class="vs" data-nb="${esc(c.n)}"><span class="pair"><i style="--c:${c.h}"></i><i style="--c:${nb.h}"></i></span><p>${esc(c.d)}</p></div>` : ""}
         ${peekBtn(c)}
       </div>
       <div class="stamp yes">${ICON.checkS}Got it</div><div class="stamp no">${ICON.xS}Again</div>`;
@@ -309,7 +309,7 @@ function meet(u) {
       <div class="swatch" style="--c:${c.h}" data-ink="${ink(c.h)}">
         <h2>${esc(c.n)}</h2><span class="hex">${c.h}</span>
       </div>
-      ${nb ? `<div class="compare">
+      ${nb ? `<div class="compare" data-nb="${esc(c.n)}">
         <div style="--c:${c.h}" data-ink="${ink(c.h)}">${esc(c.n)}</div>
         <div style="--c:${nb.h}" data-ink="${ink(nb.h)}">${esc(nb.n)}</div>
       </div>` : ""}

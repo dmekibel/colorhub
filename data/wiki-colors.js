@@ -500,7 +500,9 @@ window.WIKI_COLORS = {
   facets: [
     { k: "language", text: "Cerulean comes from Latin caeruleus, the dark blue of sea and sky, probably from caelum, heaven." },
     { k: "history", text: "Cerulean blue paint is cobalt and tin oxides fired together. A Swiss chemist made it in the late 1700s, but painters only got it in the 1860s, when London colormen such as George Rowney began selling it as 'coeruleum'. It is a cool, slightly greenish blue, now counted among the lightfast pigments. See [[cobalt-blue-pigment]]." },
-    { k: "design", text: "Pantone launched its [[color-of-the-year|Color of the Year]] with Cerulean for 2000, to mark the turn of the millennium. Six years later, The Devil Wears Prada built a famous speech around a cerulean sweater and how a runway shade trickles down to the bargain bin." },
+    { k: "design", text: "Pantone launched its [[color-of-the-year|Color of the Year]] with Cerulean for 2000, to mark the turn of the millennium." },
+    { k: "culture", text: "In The Devil Wears Prada (2006), editor Miranda Priestly (Meryl Streep) corrects her assistant: the sweater isn't just blue, it's cerulean. She traces it from designer runways (she credits Oscar de la Renta and Yves Saint Laurent) through copies and department stores to the clearance bin where the assistant found it. Her point: even people who ignore fashion wear colors fashion chose. The film's history is the script's, but it's the best-known lesson on how a trend travels." },
+    { k: "culture", text: "The scene's most quoted line: \"It's not just blue, it's not turquoise, it's not lapis.\" Watch it for the timing: a whole supply chain in a minute." },
     { k: "art", text: "Painters took risks for cerulean. By the 1890s it had a reputation for fading, yet Signac kept it on his palette, and Monet used it heavily. In France it sold as bleu céleste, a trade name also stuck on other blues, even Prussian blue. Today it is considered a stable pigment." }
   ],
   related: [
@@ -511,6 +513,7 @@ window.WIKI_COLORS = {
   sources: [
     "Natural Pigments, 'Cerulean blue' (Höpfner; Rowney 1860)",
     "Pantone, 'Cerulean 15-4020', Color of the Year 2000",
+    "The Devil Wears Prada (film, 2006), screenplay by Aline Brosh McKenna",
     "Etymonline, 'cerulean'",
     "Ball, Bright Earth: The Invention of Colour (2001)",
     "Gage, Colour and Culture (1993)",

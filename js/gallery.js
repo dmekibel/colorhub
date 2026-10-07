@@ -521,7 +521,14 @@ function galleryColorRow(host, c) {
     if (ld) { ld.outerHTML = `<p class="fine">Loading the gallery…</p>`; loadGallery().then(draw).catch(() => { host.innerHTML = head + `<p class="fine">The gallery didn't load.</p>`; }); }
   };
   if (GAL) { host.innerHTML = head + `<p class="fine">Finding paintings…</p>`; later(draw, 80); }
-  else host.innerHTML = head + `<button class="btn ghost gl-all" data-glload>Show paintings with this color ${ICON.arrow}</button>`;
+  else {
+    // load the gallery on its own when the row scrolls near the screen (the button stays as a fallback)
+    host.innerHTML = head + `<button class="btn ghost gl-all" data-glload>Show paintings with this color ${ICON.arrow}</button>`;
+    if ("IntersectionObserver" in window) {
+      const io = new IntersectionObserver(es => { if (!es[0].isIntersecting) return; io.disconnect(); const b = host.querySelector("[data-glload]"); if (b) b.click(); }, { rootMargin: "400px 0px" });
+      io.observe(host); cleanup.push(() => io.disconnect());
+    }
+  }
 }
 // open the gallery searched by one color
 function galleryOpenColor(hex, name) {

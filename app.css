@@ -854,3 +854,27 @@ img{transition:opacity .6s var(--ease)}
 .st-duel-pal b{flex:1;margin:0;background:var(--c)}
 /* Explore: the sticky header carries its own top padding, so the screen adds none (the bar lines up with every tab) */
 .explore{padding-top:0}
+
+/* ---------- look-alikes: a color among its closest neighbors ---------- */
+[data-nb]{cursor:pointer}
+.vs[data-nb]::after,.compare[data-nb]::after,.pk-vs[data-nb]::after{content:"look-alikes ↗";display:block;margin-top:6px;font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;opacity:.55}
+.compare[data-nb]{flex-wrap:wrap}
+.compare[data-nb]::after{flex-basis:100%}
+.lk-ring{position:relative;width:min(300px,78vw);aspect-ratio:1;margin:8px auto 4px}
+.lk-mid{position:absolute;inset:27%;border-radius:50%;background:var(--c);display:flex;align-items:center;justify-content:center;text-align:center;padding:8px}
+.lk-mid[data-ink="dark"]{color:#141311}.lk-mid[data-ink="light"]{color:#fff}
+.lk-mid b{font:400 22px/1 var(--serif)}
+.lk-dot{position:absolute;width:21%;aspect-ratio:1;margin:-10.5%;border-radius:50%;background:var(--c);transition:transform .25s var(--spring),box-shadow .2s}
+.lk-dot.on{transform:scale(1.15);box-shadow:0 0 0 2px var(--ink)}
+.lk-pair{display:flex;gap:2px;height:120px;margin-top:10px}
+.lk-pair div{flex:1;background:var(--c);display:flex;align-items:flex-end;padding:10px;border-radius:2px}
+.lk-pair div[data-ink="dark"]{color:#141311}.lk-pair div[data-ink="light"]{color:#fff}
+.lk-pair span{font:400 20px/1 var(--serif)}
+.lk-line{margin-top:10px;font-size:15px;line-height:1.5}
+.lk-list{display:grid;gap:2px;margin-top:16px}
+.lk-row{display:grid;grid-template-columns:28px 1fr auto;grid-template-rows:auto auto;column-gap:12px;align-items:center;text-align:left;padding:10px 6px;border-radius:3px}
+.lk-row.on{background:var(--lift)}
+.lk-row i{grid-row:1 / span 2;width:28px;height:28px;border-radius:50%;background:var(--c)}
+.lk-row b{font:400 19px/1.1 var(--serif)}
+.lk-row span{grid-column:2;font-size:13px;color:var(--soft)}
+.lk-row em{grid-column:3;grid-row:1 / span 2;font:500 11px/1 var(--mono);font-style:normal;letter-spacing:.1em;text-transform:uppercase;color:var(--soft)}

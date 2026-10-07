@@ -347,7 +347,7 @@ function colorPage(n) {
     <div class="c-hero" style="--c:${c.h}" data-ink="${ink(c.h)}"><p class="eyebrow">${esc(status)}</p><h1>${esc(c.n)}</h1></div>
     <div class="codes">${codeRows(c.h).map(([k, v]) => `<button data-copy="${esc(v)}"><span>${k}</span><b class="mono">${esc(v)}</b></button>`).join("")}</div>
     ${codeRows(c.h).some(r => r[0].startsWith("CMYK")) ? `<p class="fine codes-fine">CMYK here is a rough formula, not a print profile: real values depend on the paper and press, so check them in a print workflow with a proof.</p>` : ""}
-    ${nb && c.d ? `<section class="cmp-sec"><div class="compare"><div style="--c:${c.h}" data-ink="${ink(c.h)}">${esc(c.n)}</div><div style="--c:${nb.h}" data-ink="${ink(nb.h)}" data-node="c:${esc(nb.n)}">${esc(nb.n)}</div></div><p class="diff">${esc(c.d)}</p></section>` : ""}
+    ${nb && c.d ? `<section class="cmp-sec"><div class="compare" data-nb="${esc(c.n)}"><div style="--c:${c.h}" data-ink="${ink(c.h)}">${esc(c.n)}</div><div style="--c:${nb.h}" data-ink="${ink(nb.h)}" data-node="c:${esc(nb.n)}">${esc(nb.n)}</div></div><p class="diff">${esc(c.d)}</p></section>` : ""}
     ${c.o && !(w && w.facets.some(f => f.k === "language")) ? `<p class="lead">${esc(c.o)}</p>` : ""}
     ${figHTML(c.n)}
     ${(() => {
