@@ -14,7 +14,7 @@
 const routeSlug = s => String(s).normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 const APP_BASE = () => location.origin + location.pathname.replace(/[^/]*$/, "");
 const TAB_ROUTE = { learn: ["today", "Today"], gym: ["train", "Train"], explore: ["explore", "Explore"], studio: ["studio", "Studio"] };
-const LENS_ROUTE = { spectrum: "colors", paintings: "paintings", poems: "poems", ideas: "ideas", saved: "saved" };   // "For you" is plain #/explore
+const LENS_ROUTE = { spectrum: "colors", paintings: "paintings", poems: "poems", ideas: "ideas", world: "world", saved: "saved" };   // "For you" is plain #/explore
 let ROUTE_NEXT = null, ROUTE_REPLACE = false, ROUTE_NOW = "";
 
 function nodeRoute(n) {
@@ -77,7 +77,8 @@ const ROUTED = [["colorPage", nodeRouted()], ["wikiPage", nodeRouted()], ["paint
   ["challenge", () => routed("Daily challenge", "challenge")], ["challengeDone", () => routed("Daily challenge", "challenge")],
   ["tasteIntro", k => k === "palette" ? routed("Find your palette", "taste/palette") : routed("Find your color", "taste/color")],
   ["glPage", (i, d) => routed(d && d.t || "Painting", "gallery/" + i)],
-  ["poemPage", id => id != null ? routed("Poem", "poem/" + id) : null]];   // js/poems.js   // a museum painting (js/gallery.js); i = its place in the gallery index
+  ["poemPage", id => id != null ? routed("Poem", "poem/" + id) : null],   // js/poems.js   // a museum painting (js/gallery.js); i = its place in the gallery index
+  ["fashionPage", slug => typeof worldRouteTitle === "function" ? routed(worldRouteTitle(slug), "fashion/" + slug) : null]];   // js/world.js
 ROUTED.forEach(([name, f]) => routeWrap(window, name, f));
 routeWrap(LAB, "harmony", () => routed("Harmony", "lab/harmony"));
 routeWrap(LAB, "contrast", () => routed("Albers", "lab/contrast"));
@@ -125,7 +126,8 @@ function openRoute(hash, initial = false) {
     return true;
   }
   const simple = { daily: () => daily(), challenge: () => chToday() ? challengeDone() : challenge(),
-    taste: () => tasteIntro(id === "palette" ? "palette" : "color"), lab: () => (LAB[id] && ["harmony", "contrast"].includes(id) ? LAB[id] : LAB.harmony)() };
+    taste: () => tasteIntro(id === "palette" ? "palette" : "color"), lab: () => (LAB[id] && ["harmony", "contrast"].includes(id) ? LAB[id] : LAB.harmony)(),
+    fashion: () => typeof fashionPage === "function" && fashionPage(id) };
   if (simple[kind]) { base(); simple[kind](); return true; }
   return false;
 }

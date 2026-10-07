@@ -13,7 +13,7 @@ let XSTACK = [];       // back stack inside Explore (closeups and pages)
 // its connections as pins, each labeled with why, then connections of connections.
 // ======================================================================
 // Four lenses: a mixed feed, every color, the paintings, and the ideas (stories, systems, history). Saved lives behind the heart.
-const LENSES = [["all", "For you"], ["spectrum", "Colors"], ["paintings", "Paintings"], ["poems", "Poems"], ["ideas", "Ideas"]];
+const LENSES = [["all", "For you"], ["spectrum", "Colors"], ["paintings", "Paintings"], ["poems", "Poems"], ["ideas", "Ideas"], ["world", "World"]];
 const ORIGIN_GROUPS = [["Flowers & plants", ["flower", "plant"]], ["Fruit, food & drink", ["fruit", "food", "drink"]], ["Gems, stones & metals", ["gem", "mineral", "metal"]], ["Animals", ["animal"]], ["Places & people", ["place", "person"]], ["Materials & dyes", ["material", "dye"]], ["Sky & nature", ["nature"]], ["Plain color words", ["abstract"]]];
 const ERAS = [["Prehistory", -1e9, -3000], ["The ancient world", -3000, 500], ["The Middle Ages", 500, 1400], ["The Renaissance", 1400, 1600], ["The 1600s", 1600, 1700], ["The 1700s", 1700, 1800], ["The 1800s", 1800, 1900], ["The 1900s and after", 1900, 1e9]];
 const hash = s => { let h = 2166136261; for (const ch of s) { h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; };
@@ -93,6 +93,8 @@ function lensSections(lens) {
         .concat([{ title: "Still being traced", sub: "Their stories are being written.", pins: colors.filter(n => !n.wiki || !n.wiki.named || n.wiki.named === "unknown").map(n => pin(n, { cap: "" })) }].filter(s => s.pins.length));
     case "poems":
       return [{ poems: true }];   // js/poems.js draws this lens
+    case "world":
+      return [{ world: true }];   // js/world.js draws this lens (Fashion, plus Botany/Gems pushed in later)
     case "paintings":
       // the hand-built pages first, in a row; then the full gallery (js/gallery.js), loaded when this lens opens
       return [{ title: "Featured · with stories", sub: "Hand-built pages with the story of the paint.", rail: true, pins: paintings.slice().sort((a, b) => (parseInt(String(a.year).replace(/\D+/g, "")) || 0) - (parseInt(String(b.year).replace(/\D+/g, "")) || 0)).map(n => pin(n)) },
@@ -157,7 +159,7 @@ function exploreHome() {
         SECS.forEach((x, i) => { if (!x.title) return; const g = x.title.split(" · ")[0]; if (!seen.has(g)) { seen.add(g); toc.push([i, g]); } });
         return toc.length > 2 ? `<nav class="toc x-toc" aria-label="Contents"><span class="eyebrow">Contents</span>${toc.map(([i, g]) => `<a data-jump="${i}">${esc(g)}</a>`).join("")}</nav>` : "";
       })()}
-      ${SECS.map((sec, i) => sec.gallery ? `<div class="gl-wrap" id="gallery"></div>` : `${sec.title ? `<div class="sec-head x-sec" id="xs-${i}"><b>${esc(sec.title)}</b>${sec.pins && sec.pins.length ? `<span>${sec.pins.length}</span>` : ""}</div>` : ""}${sec.sub ? `<p class="x-sub">${esc(sec.sub)}</p>` : ""}${sec.honey ? `<div class="honey-panel" id="honey"></div>` : sec.poems ? `<div id="poems-panel"></div>` : sec.rail ? `<div class="gl-rail">${sec.pins.map(p => p.html).join("")}</div>` : masonry(sec.pins)}`).join("")}
+      ${SECS.map((sec, i) => sec.gallery ? `<div class="gl-wrap" id="gallery"></div>` : sec.world ? `<div class="wd-wrap" id="world"></div>` : `${sec.title ? `<div class="sec-head x-sec" id="xs-${i}"><b>${esc(sec.title)}</b>${sec.pins && sec.pins.length ? `<span>${sec.pins.length}</span>` : ""}</div>` : ""}${sec.sub ? `<p class="x-sub">${esc(sec.sub)}</p>` : ""}${sec.honey ? `<div class="honey-panel" id="honey"></div>` : sec.poems ? `<div id="poems-panel"></div>` : sec.rail ? `<div class="gl-rail">${sec.pins.map(p => p.html).join("")}</div>` : masonry(sec.pins)}`).join("")}
       <p class="fine">Hex values are screen approximations. Every page lists its sources.</p>
     </div>
   `, "explore", "explore");
@@ -166,6 +168,7 @@ function exploreHome() {
   el.querySelector("[data-saved]").onclick = () => { S.lens = lens === "saved" ? "all" : "saved"; save(); exploreHome(); };
   const hp = el.querySelector("#honey"); if (hp) colorBrowser(hp, { focus: dailyColor(), pick: c => closeup(colorNode(c)) });
   const gw = el.querySelector("#gallery"); if (gw) galleryMount(gw);
+  const wd = el.querySelector("#world"); if (wd && typeof worldMount === "function") worldMount(wd);
   const pp = el.querySelector("#poems-panel"); if (pp) poemsPanel(pp);
   const on = el.querySelector(".lens-key .on"); if (on) on.scrollIntoView({ inline: "center", block: "nearest" });
   el.addEventListener("click", e => {
@@ -352,12 +355,14 @@ function colorPage(n) {
     })()}
     <section class="gl-in" data-glin></section>
     <div class="c-poems"></div>
+    <section class="fx-in" data-world-in></section>
     ${connSection(n)}
     ${w && w.sources ? secHTML("src", "Sources", sourcesHTML(w.sources), false) : ""}
   `, "article");
   wireArticle(el, n); wireSections(el);
   const gi = el.querySelector("[data-glin]"); if (gi) galleryColorRow(gi, c);
   colorPoems(el.querySelector(".c-poems"), c);
+  if (typeof worldColorRow === "function") worldColorRow(el, n);
   el.querySelectorAll("[data-copy]").forEach(b => b.onclick = () => { try { navigator.clipboard.writeText(b.dataset.copy); toast("Copied " + b.dataset.copy); } catch (e) {} });
 }
 
