@@ -213,6 +213,13 @@ function show(html, cls = "", tab = null) {
     ghost.animate([{ opacity: 1, transform: "scale(1)" }, { opacity: 0, transform: "scale(.985)" }], { duration: 260, easing: "ease-out", fill: "forwards" }).onfinish = () => ghost.remove();
   }
   app.innerHTML = `<div class="screen ${cls}${tab ? " has-tabs" : ""}">${html}</div>${tab ? tabbar(tab) : ""}`;
+  document.documentElement.classList.toggle("booth", /\b(deck|drill|station|meet|daily|fixed|eye|cx)\b/.test(cls));
+  // history: a tab's home replaces the current entry; any screen inside adds one, so the phone's back gesture works
+  try {
+    if (tab) history.replaceState({ ch: 1, tab }, "");
+    else if (HIST_POP) history.replaceState({ ch: 1 }, "");
+    else history.pushState({ ch: 1 }, "");
+  } catch (e) {}
   if (tab) wireTabbar(tab);
   window.scrollTo(0, 0); document.body.classList.remove("scrolled");
   const el = app.firstElementChild;
@@ -249,6 +256,16 @@ function wireTabbar(active) {
   addEventListener("scroll", onScroll, { passive: true });
   cleanup.push(() => removeEventListener("scroll", onScroll));
 }
+// Back gesture / browser back: close a sheet or panel first; otherwise press the screen's own back or close
+// button (so each screen keeps its own idea of "back"); with none, return to the current tab's home.
+let HIST_POP = false;
+addEventListener("popstate", () => {
+  const over = document.querySelector(".peek [data-back], .sheet");
+  if (over) { if (over.matches(".sheet")) document.querySelector(".scrim")?.dispatchEvent(new PointerEvent("pointerdown")); else over.click(); try { history.pushState({ ch: 1 }, ""); } catch (e) {} return; }
+  const btn = app.querySelector("[data-back], [data-close]");
+  HIST_POP = true;
+  try { if (btn) btn.click(); else if (!app.querySelector(".tabbar")) go(S.tab || "learn"); } finally { HIST_POP = false; }
+});
 function go(tab) {
   S.tab = tab; save();
   if (tab === "gym") return gymHome();
@@ -272,6 +289,7 @@ function sheet(html) {
     if (reduceMotion) { scrim.remove(); sh.remove(); return; }
     scrim.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 200, fill: "forwards" }).onfinish = () => scrim.remove();
     sh.animate([{ transform: getComputedStyle(sh).transform === "none" ? "none" : getComputedStyle(sh).transform }, { transform: "translateY(105%)" }], { duration: 240, easing: "cubic-bezier(.3,0,.8,.2)", fill: "forwards" }).onfinish = () => sh.remove();
+    setTimeout(() => { scrim.remove(); sh.remove(); }, 400);
   };
   // anything outside closes it: a tap or a swipe on the dimmed page
   scrim.addEventListener("pointerdown", e => { e.preventDefault(); close(); });
