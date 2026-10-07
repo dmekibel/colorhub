@@ -35,14 +35,18 @@ function shot(name) {
     case "daily": S.daily = {}; return daily();
     case "lab": return LAB[arg || "harmony"]();
     case "taste": return tasteShot(arg);
-    case "colors": {   // colors:<set id>:<view id>:<adjust|tap|press|zoomin|zoomout|bench|benchout>
+    case "colors": {   // older hook: colors:<set id>:<view id>:<act>, read through the old S.cb shape
       const [, set, view, act] = name.split(":"), def = COLOR_SETS.find(x => x.id === (set || "101")) || COLOR_SETS[0];
-      S.lens = "spectrum"; S.cb = { preset: def.id, state: JSON.parse(JSON.stringify(def.state)), view: view || "map" }; go("explore");
-      const h = document.getElementById("honey"); if (!h) return;
-      h.className = "honey-panel"; h.innerHTML = "";
-      scrollTo(0, h.getBoundingClientRect().top + scrollY - 250);
-      colorBrowser(h, { focus: dailyColor(), pick: c => closeup(colorNode(c)), shot: act });
-      return;
+      S.lens = "spectrum"; S.cb = { preset: def.id, state: JSON.parse(JSON.stringify(def.state)), view: view || "map" };
+      return colorExplorer({ focus: dailyColor(), pick: c => closeup(colorNode(c)), shot: act });
+    }
+    case "cx": {   // the explorer: cx:<choice>:<act>. choice: 101 | all | yours | 50 | 200 | 500, joined by + to a family,
+      // feel or tradition id (blues+all, pastels+all, src-jp). act: sheet | tune | tuned | wheel | tap | press | zoomin
+      const [, choice = "101", act = ""] = name.split(":"), ch = { which: "101" };
+      choice.split("+").forEach(t => { if (["101", "all", "yours"].includes(t)) ch.which = t; else if (/^\d+$/.test(t)) { ch.which = "spread"; ch.n = +t; } else ch.narrow = t; });
+      S.lens = "spectrum"; S.cb = { ch, view: act === "wheel" ? "wheel" : "map" };
+      if (act === "tuned") Object.assign(S.cb, { tuned: true, state: { ...cxState(cxNorm(ch)), hue: [190, 280], L: [30, 80] } });
+      return colorExplorer({ focus: dailyColor(), pick: c => closeup(colorNode(c)), shot: ["wheel", "tuned"].includes(act) ? "" : act });
     }
   }
 }
