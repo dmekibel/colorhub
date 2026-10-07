@@ -358,6 +358,26 @@ pages ("Shares colors with: ...").
 **Build:** palette-strategy research (S) → mosaic picker (S-M) → palette engine + cards (M-L) → cross-matching (S-M, after the
 §15 feature vectors). Sonnet throughout.
 
+## 17. Next build queue after the families job (David, 2026-10-08)
+1. **Names cleanup (S-M, Sonnet):**
+   - Every primary name in data/core-names.json is plain English a normal person can read: no parentheses ("Blue (Munsell)",
+     "Silver (Crayola)"), and no technical Ridgway coinages as primaries ("Vinaceous-Brown", "rose doree").
+   - Japanese names never appear as primary names. The color takes its English translation ("Ebizome (vine grape)" becomes
+     "Vine grape"); the Japanese name, kanji and meaning stay as a cultural note on its page. A "Japanese traditional colors"
+     collection lives in Explore/World.
+   - Closeness wording is honest everywhere: when the nearest word is far, say "no close word; nearest is X", never
+     "closest to X". Studio rows drop "lesson word" and use nameOf plus the family.
+   - Rerun tools/name_coverage.py and report.
+2. **The exploration trail (S-M, Sonnet):**
+   - Uploaded photos are saved per user (IndexedDB on this device for now; synced once accounts exist): the downscaled image,
+     its palettes, and the date. They appear in a "Your photos" shelf in Studio and get an address (#/photo/<id>).
+   - Back works like Pinterest: every screen you open pushes one step and Back pops exactly one step, restoring that screen
+     and its scroll position (photo, sheet, color page, painting). No "back" button jumps home. Screens opened from the
+     honeycomb return to it.
+3. **The palette engine (§16, M-L):** many palette strategies on photos and paintings (by area, accents, lights vs shadows,
+   harmony fits, painter recipes, mosaic picker). Then the painting page upgrade (§13) and image analysis (§15).
+4. **The design rebuild** from DESIGN-SYSTEM.md once David approves the second mockup pass.
+
 ## Also queued
 - World: Botany (in progress), then Gems.
 - Color-list swaps from research/COLOR-SELECTION.md (Bistre, Stone, Green grey, Rose, Grape, Seafoam; Terracotta and Tangerine hex fixes; cross-unit near-twin check).
