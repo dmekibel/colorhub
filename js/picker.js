@@ -91,6 +91,8 @@ function colorPicker(host, opts) {
   $("[data-hex]").addEventListener("input", e => { const t = e.target.value.trim(); if (/^#?[0-9a-f]{6}$/i.test(t)) { [h, s, v] = rgb2hsv(rgb("#" + t.replace("#", ""))); update(); } });
   drawSliders();
   requestAnimationFrame(() => update(true));
-  addEventListener("resize", () => update(true));
+  const onResize = () => { if (!host.isConnected) return removeEventListener("resize", onResize); update(true); };
+  addEventListener("resize", onResize);
+  cleanup.push(() => removeEventListener("resize", onResize));
   return { set: x => { [h, s, v] = rgb2hsv(rgb(x)); update(true); }, get: hex };
 }

@@ -132,3 +132,109 @@
 .gym-res .lede{margin-bottom:6px}
 .gym-res .gr-fine{margin:0 0 22px}
 .af-field.asked .af-x{display:none}
+
+/* ======================================================================
+   Training engine (js/gym-engine.js): shelves, your-eye profile, check-in, confidence, tips, squint
+   ====================================================================== */
+.gs-meta em{font:500 9px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--faint);font-style:normal}
+.gs-best{line-height:1.45}
+.gs-tile.locked .sa{filter:grayscale(1) brightness(.7);opacity:.32}
+.gs-tile.locked .gs-name{color:var(--soft)}
+.gs-tile.locked .gs-meta>span{color:var(--faint)}
+/* applied previews */
+.sa-sq{display:block;background:#1b1a17}
+.sa-sq img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.sa-sq b{position:absolute;width:13px;height:13px;margin:-6.5px;border-radius:50%;border:1.5px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.5)}
+.sa-mix{grid-template-columns:repeat(3,1fr);gap:2px}
+.sa-mix>span{display:grid;min-width:0}
+.mx-pair,.mx-two{grid-template-rows:1fr 1fr}
+.mx-pair i,.mx-two i{background:var(--c)}
+.mx-ground{place-items:center;background:var(--g)}
+.mx-ground b{width:46%;aspect-ratio:1;background:var(--c)}
+.mx-ground b.disc{border-radius:50%;width:56%}
+.mx-grid{grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:1px}
+.mx-grid i{background:var(--c)}
+/* check-in card: the three stations side by side */
+.ci-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:2px}
+.sg-card .ci-strip .sa{aspect-ratio:1;margin:0}
+/* your eye, compact */
+.ey-prof{display:block;width:100%;text-align:left}
+.ey-prof .sec-head{display:flex}
+.ey-prof .sec-head svg{width:12px;height:12px;vertical-align:-2px}
+.ey-rows{display:flex;flex-direction:column;gap:7px;margin-top:14px}
+.ey-row{display:grid;grid-template-columns:minmax(0,1.25fr) 2fr 22px;align-items:center;gap:10px}
+.ey-row span{font:500 9.5px/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ey-row i{height:5px;background:linear-gradient(var(--ink),var(--ink)) 0 0/var(--w) 100% no-repeat,var(--rule)}
+.ey-row b{font:500 11px/1 var(--mono);text-align:right}
+.ey-line{display:block;font:400 19px/1.2 var(--serif);margin-top:14px;text-wrap:pretty}
+.ey-line+.ey-line{margin-top:6px}
+.ey-empty{display:block;color:var(--soft);font-size:14px;margin-top:12px}
+.ey-foot{display:block;font:500 9.5px/1.4 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-top:12px}
+.ey-prof:active{opacity:.7}
+/* drill chrome: time limit bar, confidence, intro */
+.gy-clock{height:2px;margin-top:10px;background:var(--rule);visibility:hidden}
+.gy-clock i{display:block;height:100%;background:var(--ink);transform-origin:left}
+.gy-clock.on{visibility:visible}
+.gy-clock.on i{animation:drain var(--t,5s) linear both}
+.tile.picked,.half.picked{outline:2px solid var(--ink);outline-offset:3px}
+.gy-conf{display:grid;grid-template-columns:auto 1fr 1fr;align-items:center;gap:10px;width:100%;animation:fade .25s var(--ease) both}
+.gy-conf span{font:500 10px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--soft)}
+.gy-conf button{min-height:52px;border:1px solid var(--rule-2);border-radius:2px;font:400 24px/1 var(--serif);color:var(--ink)}
+.gy-conf button:active{background:rgba(236,232,223,.08)}
+.gy-skip{font:500 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--soft);padding:12px 0 12px 12px}
+.gy-intro .dr-why.show{color:var(--ink);font-size:15px;animation:fade .4s var(--ease) both}
+.gy-ipanel{display:flex;flex-direction:column;gap:10px;width:100%;text-align:left}
+.gy-ipanel .note{font-size:13.5px;line-height:1.4}
+.gy-ipanel .gy-aim{color:var(--ink);font:400 19px/1.2 var(--serif)}
+.drill.gy-intro .drill-foot{min-height:150px}
+/* results: unlock news, weak zone, one tip */
+.gy-news{font-size:14px;color:var(--soft);margin:-8px 0 14px}
+.gy-news b{font:500 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#E8C66B;margin-right:6px}
+.gy-weak{font:400 21px/1.15 var(--serif);margin:0 0 14px}
+.gy-tip{border-left:2px solid var(--ink);padding:2px 0 2px 14px;margin:0 0 6px}
+.gy-fixwhat{font:500 10px/1.4 var(--mono)!important;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);margin-top:10px!important}
+.gy-tip p:nth-child(2){font-size:15px;line-height:1.45;margin-top:6px;text-wrap:pretty}
+.gym-res .btn small{margin-left:auto;margin-right:2px}
+/* adjust stations: the dials resize the square and the disc */
+.gy-patch{width:var(--sz,42%)}
+.gy-disc{width:var(--sz,50%)}
+/* squint: a painting with marked spots */
+.sq-box{width:100%;height:100%;display:grid;place-items:center;min-height:0}
+.sq-img{position:relative;width:100%;height:100%}
+.sq-img img{display:block;width:100%;height:100%;border-radius:2px;user-select:none;-webkit-user-select:none;transition:filter .35s var(--ease)}
+.sq-img.blur img{filter:blur(6px)}
+.sq-dot{position:absolute;width:24px;height:24px;margin:-12px 0 0 -12px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1.5px rgba(0,0,0,.6),inset 0 0 0 1.5px rgba(0,0,0,.6)}
+.sq-dot::before{content:"";position:absolute;inset:-12px}
+.sq-dot b{position:absolute;left:15px;top:-17px;min-width:20px;height:20px;padding:0 5px;border-radius:10px;display:none;place-items:center;background:#F3F1EC;color:#141311;font:600 11px/1 var(--mono)}
+.sq-dot.on b,.sq-dot.rev b{display:grid}
+.sq-dot.rev.good{border-color:var(--good)}.sq-dot.rev.good b{background:var(--good)}
+.sq-dot.rev.bad{border-color:var(--bad)}.sq-dot.rev.bad b{background:var(--bad)}
+.gy-hold{width:100%;min-height:52px;border-top:1px solid var(--rule-2);border-bottom:1px solid var(--rule-2);font:500 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--soft);touch-action:none;user-select:none;-webkit-user-select:none}
+.gy-hold:active{color:var(--ink)}
+.drill-squint .drill-foot{min-height:70px}
+/* progress page: check-in charts and calibration */
+.eye-cap{font:500 9.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-top:16px}
+.ci-wrap{position:relative;margin-top:6px}
+.ci-chart{height:96px;margin-top:0}
+.ci-grid{stroke:var(--rule);stroke-width:1}
+.ci-dots{position:absolute;inset:0;pointer-events:none}
+.ci-dots span{position:absolute;width:7px;height:7px;margin:-3.5px;border-radius:50%;background:var(--ink)}
+.ci-dots b{position:absolute;bottom:9px;left:50%;transform:translateX(-50%);font:500 10px/1 var(--mono);color:var(--ink)}
+.eye-chart.compact{height:64px}
+.eye-sec .sec-head{gap:12px}
+.eye-sec .sec-head span{text-align:right;white-space:nowrap}
+.eye-cal{display:flex;flex-direction:column;gap:9px;margin-top:14px}
+.eye-cal div{display:grid;grid-template-columns:70px 1fr 38px;align-items:center;gap:10px;font-size:13px;color:var(--soft)}
+.eye-cal i{height:10px;background:linear-gradient(var(--ink),var(--ink)) 0 0/var(--w) 100% no-repeat,var(--rule)}
+.eye-cal b{text-align:right;font-size:11px;color:var(--ink);font-weight:500}
+
+/* lighter/darker reveal: labels on the swatches, the pair in grey, one tip */
+.pairq .half{position:relative}
+.pq-lab{position:absolute;left:12px;bottom:12px;display:flex;align-items:baseline;gap:8px;padding:7px 10px 6px;background:#F3F0E8;color:#141311;border-radius:2px;text-align:left;animation:fade .3s both;z-index:2;opacity:1}
+.pq-lab b{font:400 22px/1 var(--serif)}
+.pq-lab em{font:500 11px/1 var(--mono);letter-spacing:.1em;font-style:normal;opacity:.8}
+.pq-rev{display:flex;flex-direction:column;gap:10px}
+.pq-grey{display:flex;align-items:center;gap:8px}
+.pq-grey span{font:500 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin-right:4px}
+.pq-grey i{flex:1;height:34px;background:var(--c);border-radius:2px;position:relative}
+.pq-grey em{position:absolute;left:8px;top:50%;transform:translateY(-50%);font:500 10.5px/1 var(--mono);font-style:normal;letter-spacing:.1em;text-transform:uppercase;color:#F3F0E8;mix-blend-mode:difference}

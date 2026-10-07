@@ -24,7 +24,7 @@ window.STORIES = [
     { v: { t: "type", word: "busy", sub: "a word task wipes out the edge" },
       text: "Then the researchers kept people's language busy with a second task. The Russian speakers' edge vanished; a spatial task didn't touch it. The words were helping in the moment, not rewiring the [[trichromacy|eye]]." },
     { v: { t: "pair", a: { h: "#9CC8EE", label: "goluboy" }, b: { h: "#3F6FC0", label: "siniy" } },
-      text: "Keep it in proportion. The edge was a fraction of a second, and a 2020 study found no speed advantage at this line at all. [[linguistic-relativity|Words give you handles]] for color. They don't give you new eyes." }
+      text: "Keep it in proportion. The edge was a fraction of a second, and a careful 2020 repeat found no speed advantage at this line, so it may be smaller than first thought. [[linguistic-relativity|Words give you handles]] for color. They don't give you new eyes." }
   ],
   colors: ["Sky blue", "Cobalt", "Pink", "Red"],
   links: ["linguistic-relativity", "basic-color-terms"],
@@ -83,7 +83,7 @@ window.STORIES = [
         options: [{ label: "A flea" }, { label: "A plum" }, { label: "A mole" }, { label: "A chestnut" }], answer: 0,
         explain: "A flea. [[Puce]] was the fashion at Marie Antoinette's court. The others are real too: [[Taupe|taupe]] means mole, and [[Maroon|maroon]] comes from marron, chestnut." } },
     { v: { t: "row", items: [{ h: "#C8A2C8", label: "lilac" }, { h: "#FA8072", label: "salmon" }, { h: "#40E0D0", label: "turquoise" }, { h: "#BDB76B", label: "khaki" }] },
-      text: "A flower, a fish, a stone, and an Urdu word for dust. Of the 90 names you learn in this app, all but a handful are borrowed from a thing: [[Lilac|lilac]], [[Salmon|salmon]], [[Turquoise|turquoise]], [[Khaki|khaki]]." }
+      text: "A flower, a fish, a stone, and an Urdu word for dusty. Of the 90 names you learn in this app, all but a handful are borrowed from a thing: [[Lilac|lilac]], [[Salmon|salmon]], [[Turquoise|turquoise]], [[Khaki|khaki]]." }
   ],
   colors: ["Orange", "Puce", "Taupe", "Maroon", "Lilac", "Salmon", "Turquoise", "Khaki"],
   links: ["basic-color-terms"],
@@ -106,7 +106,7 @@ window.STORIES = [
     { v: { t: "type", word: "ao", sub: "青: blue, and once green too" },
       text: "For most of Japanese history, ao covered blue and green together: sky, sea and leaves. Many languages work this way. Linguists call such a word 'grue'. [[basic-color-terms|Basic color terms]]" },
     { v: { t: "type", word: "midori", sub: "緑: green" },
-      text: "Midori comes from an old verb for coming into leaf. Over centuries it became the everyday word for green, but ao never fully let go." },
+      text: "Midori first meant fresh new shoots. Over centuries it became the everyday word for green, but ao never fully let go." },
     { v: { t: "row", items: [{ h: "#3E8E3A", label: "ao-yasai" }, { h: "#7BB661", label: "aoba" }, { h: "#A8D46F", label: "ao-ringo" }] },
       text: "The old grue word survives in food and plants. Fresh leaves are aoba, a green apple is an ao-ringo, and leafy greens can be ao-yasai, literally 'blue vegetables'." },
     { v: { t: "big", n: "1930", sub: "Japan's first traffic lights" },
@@ -119,7 +119,7 @@ window.STORIES = [
   sources: [
     "Japan, Road Traffic Act Enforcement Order (道路交通法施行令), Article 2: the go signal is 青色の灯火, 'blue light'",
     "Motor Club web column (mc-web.jp, 2023): the 1930 regulations called it a 'green signal'",
-    "Wikipedia, Blue–green distinction in language; Green (Japanese midori from midoru, 'to come into leaf')",
+    "Wikipedia, Blue–green distinction in language; Green; Kotobank (Daijisen and Nihon Kokugo Daijiten), 緑: midori first meant new shoots or buds",
     "Atlas Obscura 2017, According to Japanese Traffic Lights, 'Bleen' Means Go (the unconfirmed 1973 story)"
   ]
 },

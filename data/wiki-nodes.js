@@ -38,11 +38,11 @@ window.WIKI_NODES = [
 },
 {
   id: "linguistic-relativity", type: "concept", title: "Do words change what we see?",
-  dek: "Russian has two words for blue, and Russian speakers tell those blues apart a little faster.",
+  dek: "Russian has two words for blue. Do its speakers tell those blues apart faster? Maybe, a little.",
   body: [
     "Linguistic relativity is the idea that the language you speak shapes how you think. Its strong form, that words decide what you can see, is wrong: people without a word for [[Blue|blue]] still see blue. The live question is the weak form. Do color words nudge perception at the edges?",
     "The best evidence comes from blues. Russian has no single everyday word for blue. Light blues are goluboy and dark blues are siniy, as separate as [[Pink|pink]] and [[Red|red]] are in English. In a 2007 study, Jonathan Winawer and colleagues showed Russian speakers three blue squares and asked which two matched. They were faster when the two blues fell on opposite sides of the goluboy/siniy line. English speakers showed no such edge.",
-    "Two details make the result convincing and keep it honest. The advantage vanished when Russian speakers silently rehearsed a string of digits, which ties up the verbal system, but not during a spatial task. So the word helps live, in the moment. And the effect is modest: a small speed gain, largest on hard comparisons. It isn't a different visual world: the eyes themselves ([[trichromacy|how eyes see color]]) work the same in every language.",
+    "Two details make the result convincing and keep it honest. The advantage vanished when Russian speakers silently rehearsed a string of digits, which ties up the verbal system, but not during a spatial task. So the word helps live, in the moment. And the effect is modest: a small speed gain, largest on hard comparisons. A careful 2020 repeat of the experiment found no speed advantage at the goluboy/siniy line at all, so the effect may be smaller or less reliable than first reported. It isn't a different visual world: the eyes themselves ([[trichromacy|how eyes see color]]) work the same in every language.",
     "That's the bet behind learning more [[basic-color-terms|color names]]: a word like [[Teal]] or [[Periwinkle]] gives you a handle, and practice with feedback sharpens the eye. You may have seen a viral TV clip about a tribe that 'couldn't see blue'. It was misreported, so skip it. The real research, from [[berlin-and-kay|Berlin and Kay]] onward, is quieter and more interesting."
   ],
   colors: ["Sky blue", "Cobalt"],
@@ -129,7 +129,8 @@ window.WIKI_NODES = [
     "Color harmony is the sense that colors belong together. For centuries it was taught as geometry on the [[color-wheel|color wheel]]: neighbors (analogous), opposites ([[complementary-colors|complementary]]), three evenly spaced hues (triadic), or a color plus the two neighbors of its opposite (split complementary).",
     "[[chevreul|Chevreul]] split harmony into two kinds in 1839: harmonies of analogy, colors that are alike, and harmonies of contrast, colors that oppose. [[johannes-itten|Johannes Itten]] at the [[bauhaus|Bauhaus]] built 'color chords' of two, three or four hues on his wheel. [[josef-albers|Josef Albers]], who studied and then taught there, distrusted fixed rules and trained students to judge by eye in [[interaction-of-color|Interaction of Color]].",
     "What does research say? In 2011 Karen Schloss and Stephen Palmer had people rate many pairs of colors. Both liking and harmony went up as the two hues got more similar, which backs Chevreul's harmony of analogy. Liking also went up when the two colors differed in lightness: a pale [[Sage|sage]] with a deep [[Hunter green|hunter green]]. People also agreed more on what looked harmonious than on what they liked.",
-    "A practical rule that survives: vary [[value|value]] more than hue. One or two hues at several lightnesses usually reads as calm and deliberate. Whistler even titled his mother's portrait an 'Arrangement in Grey and Black' ([[painting-whistlers-mother|Whistler's Mother]]): almost no hue at all, and perfectly composed."
+    "A practical rule that survives: vary [[value|value]] more than hue. One or two hues at several lightnesses usually reads as calm and deliberate. Whistler even titled his mother's portrait an 'Arrangement in Grey and Black' ([[painting-whistlers-mother|Whistler's Mother]]): almost no hue at all, and perfectly composed.",
+    "Designers also learn harmony from examples. The best-loved collection is [[dictionary-of-color-combinations|A Dictionary of Color Combinations]], drawn from the Japanese painter Sanzo Wada's pattern books of the 1930s and reissued in 2010: page after page of tested pairs and trios, with no rules attached."
   ],
   colors: ["Sage", "Hunter green", "Blue", "Red", "Yellow"],
   swatches: [
@@ -859,7 +860,7 @@ window.WIKI_NODES = [
   dek: "The first color people made from scratch, over 5,000 years ago. Under infrared light it still glows.",
   body: [
     "Egyptian blue is the oldest known synthetic pigment: not dug up but cooked. Heat sand, lime, a copper source (ore or bronze scrap) and a little alkali to around 850–950 °C, and you get [[Blue|blue]] crystals of calcium copper silicate. The earliest known example, on a bowl from Hierakonpolis now in Boston's Museum of Fine Arts, dates to around 3250 BCE.",
-    "Egyptians painted tombs, statues and coffins with it for three thousand years, and the Romans called it caeruleum, from caelum, the sky, a root shared by our word [[Cerulean|cerulean]]. The architect Vitruvius gave a recipe in the 1st century BCE, and Roman sources say a man named Vestorius brought production from Alexandria to Pozzuoli near Naples. After Rome the know-how faded, and the pigment dropped out of use until chemists reconstructed it in the 1800s.",
+    "Egyptians painted tombs, statues and coffins with it for three thousand years, and the Romans called it caeruleum, probably from caelum, the sky, a root shared by our word [[Cerulean|cerulean]]. The architect Vitruvius gave a recipe in the 1st century BCE, and Roman sources say a man named Vestorius brought production from Alexandria to Pozzuoli near Naples. After Rome the know-how faded, and the pigment dropped out of use until chemists reconstructed it in the 1800s.",
     "Its strangest property was noticed only recently. Egyptian blue absorbs visible light and gives off strong, long-lasting infrared light, just past the red end of the [[spectrum|spectrum]]: invisible to us, bright to an infrared camera. Conservators use it to find faded traces of blue on statues and walls that look unpainted, and it has turned up in places no one expected, including Raphael's 16th-century fresco The Triumph of Galatea.",
     "It also corrects a myth. People in the ancient world made and traded a bright, stable blue, whatever their word lists say: Theophrastus called it kyanos. When [[homer|Homer]] skips blue, it's a matter of [[basic-color-terms|vocabulary]], not eyesight. Its modern cousins include [[cobalt-blue-pigment|cobalt blue]], [[prussian-blue|Prussian blue]], synthetic [[ultramarine-pigment|ultramarine]] and the 2009 newcomer [[yinmn-blue|YInMn blue]]."
   ],
@@ -1239,7 +1240,7 @@ window.WIKI_NODES = [
   dek: "Each crocus gives three red threads. A kilo takes about 150,000 flowers, picked by hand.",
   body: [
     "Saffron is the dried stigmas of the saffron crocus, Crocus sativus, a sterile plant that only reproduces when people dig up and replant its bulbs. Each [[Lilac|lilac]]-purple flower carries three [[Crimson|crimson]] threads. About 150,000 flowers, picked by hand in a few autumn weeks, make one kilogram, and premium saffron sells for thousands of dollars a kilo.",
-    "Its color comes from crocin, a water-soluble carotenoid that turns rice, cloth and water [[Gold|golden]] yellow. That made it a dye as well as a spice: saffron-dyed textiles were known in Levantine cities like Sidon and Tyre, home of [[tyrian-purple|Tyrian purple]], and in China and India. Aegean frescoes of about 1600 BCE show crocus gathering, and the name comes from Persian zafaran, perhaps from an older word meaning 'gold-strung'.",
+    "Its color comes from crocin, a water-soluble carotenoid that turns rice, cloth and water [[Gold|golden]] yellow. That made it a dye as well as a spice: saffron-dyed textiles were known in Levantine cities like Sidon and Tyre, home of [[tyrian-purple|Tyrian purple]], and in China and India. Aegean frescoes of about 1600 BCE show crocus gathering, and the name comes from Arabic za'faran, of uncertain origin; one guess traces it to a Persian word meaning 'gold-feathered'.",
     "Because it's so costly, 'saffron' often means something cheaper. Medieval Europeans called turmeric 'Indian saffron', safflower is sold as 'Portuguese saffron', and powdered saffron is easily faked with turmeric and paprika. The color word 'saffron' usually means a deep yellow-orange, near the app's [[Marigold|marigold]] and [[Amber|amber]].",
     "Saffron sits in the long list of colors named for costly materials, alongside [[ultramarine-pigment|ultramarine]], [[tyrian-purple|Tyrian purple]] and [[Gold|gold]]. The yellow it gives is warm and luminous, the opposite of the cheap earth [[Ochre|ochre]]."
   ],
@@ -1267,8 +1268,8 @@ window.WIKI_NODES = [
   dek: "An 18-year-old chasing a malaria drug made purple instead, and launched the chemical industry.",
   body: [
     "In the Easter holidays of 1856, [[william-perkin|William Perkin]], an 18-year-old student of the chemist August Wilhelm von Hofmann, was trying to make quinine, the malaria drug, from coal-tar chemicals in his home lab in east London. One attempt left a black sludge. Cleaning it out with alcohol, he saw a vivid purple. It dyed silk and didn't wash out.",
-    "It was not the very first synthetic dye: picric acid, a yellow, was dyeing silk in Lyon from 1845. Mauveine was the first to become a mass-market hit. Perkin patented it that August, and in 1857 opened a dye works at Greenford, west of London. It was first sold as 'aniline purple', then named [[Mauve|mauve]], after the French word for the mallow flower. Empress Eugénie and Queen Victoria wore the color, the crinoline's huge skirts used yards of cloth, and by 1859 the craze was so big that Punch joked about 'the mauve measles'.",
-    "Mauveine opened the floodgates. Chemists across Europe raced to make new colors from aniline. In France, François-Emmanuel Verguin made a red-purple he called fuchsine; British makers renamed their version after the 1859 Battle of Magenta, giving us [[Magenta|magenta]]. Then came synthetic alizarin reds and, by 1897, synthetic [[indigo-dye|indigo]]. Germany came to dominate the industry.",
+    "It was not the very first synthetic dye: picric acid, a yellow, was dyeing silk in Lyon from 1845. Mauveine was the first aniline dye, made from coal tar, and it became a fashion sensation. Perkin patented it that August, and in 1857 opened a dye works at Greenford, west of London. Perkin first marketed it as 'Tyrian purple', and it was also called aniline purple; by 1859 it was [[Mauve|mauve]], after the French word for the mallow flower. Empress Eugénie and Queen Victoria wore the color, the crinoline's huge skirts used yards of cloth, and by 1859 the craze was so big that Punch joked about 'the mauve measles'.",
+    "Mauveine opened the floodgates. Chemists across Europe raced to make new colors from aniline. In France, François-Emmanuel Verguin made a red-purple he called fuchsine; a British firm sold a similar dye as roseine, then, by 1860, as [[Magenta|magenta]], after the Battle of Magenta in June 1859. Then came synthetic alizarin reds and, by 1897, synthetic [[indigo-dye|indigo]]. Germany came to dominate the industry.",
     "The result was a democratization of color. Purples that once needed [[tyrian-purple|sea snails]] were now a few pence a ribbon (see [[royal-purple|purple and power]]), though dye workers paid a price: aniline dye work was later linked to bladder cancer. The app's [[Mauve|mauve]] today is a soft greyish purple, much duller than Perkin's original bright violet-purple."
   ],
   colors: ["Plum", "Magenta", "Mauve"],
@@ -2017,6 +2018,28 @@ window.WIKI_NODES = [
     "Albers, J. (1963). Interaction of Color. Yale University Press (50th anniversary ed. 2013).",
     "Josef and Anni Albers Foundation. Interaction of Color.",
     "Wikipedia, 'Josef Albers'."
+  ]
+},
+{
+  id: "dictionary-of-color-combinations", type: "work", title: "Sanzo Wada's A Dictionary of Color Combinations",
+  dek: "A Japanese painter's 1930s pattern books, reissued in 2010 as a pocket guide that designers adore.",
+  body: [
+    "Sanzo Wada (1883–1967) was a Japanese painter who spent his working life on color. Born in Ikuno, in Hyōgo, he studied Western-style painting under Kuroda Seiki at the Tokyo School of Fine Arts and graduated in 1904. In 1907 his painting South Wind won the highest prize given at the first official Bunten exhibition, a second prize, since no first was awarded. Around 1909 he went to study in Europe, mostly France, and came home in 1915 by way of India and Burma.",
+    "Back in Japan he painted, designed for the stage and taught, and he pushed for a shared language of color for industry. In 1927 he founded the Japan Standard Color Association, which issued a standard card of 500 colors and was reorganized in 1945 as the Japan Color Research Institute. Late in life his costumes for Teinosuke Kinugasa's film Gate of Hell (1953) won the Academy Award for color costume design, at the 1955 ceremony.",
+    "His most famous work began as a set of pattern books. From 1933 he published Haishoku Sōkan, a six-volume survey of color combinations for working designers, each set of two, three or four colors printed as flat blocks side by side. It is a practical tool from Taishō and early Shōwa Japan, not a theory: almost no text, just combinations to look at.",
+    "In 2010 the Kyoto publisher Seigensha reissued a selection as a small paperback, A Dictionary of Color Combinations, with 348 combinations. Eighty years after the originals, it became a cult book among graphic designers, illustrators and web designers, who share its pages online, and a second volume followed in 2020.",
+    "This app links to the book rather than copying it: the combinations are Wada's, and the reissue is in copyright. Its lesson fits the rest of [[color-harmony|color harmony]]: instead of rules on a [[color-wheel|color wheel]], you train your eye on many good examples, much as [[josef-albers|Josef Albers]] taught with sheets of colored paper."
+  ],
+  facts: [
+    { label: "Author", value: "Sanzo Wada (1883–1967)" },
+    { label: "First published", value: "Haishoku Sōkan, six volumes, from 1933" },
+    { label: "Reissue", value: "Seigensha, Kyoto, 2010 (348 combinations)" }
+  ],
+  sources: [
+    "Wada, S. (2010). A Dictionary of Color Combinations. Seigensha Art Publishing, Kyoto. ISBN 978-4-86152-247-5.",
+    "https://en.seigensha.com/books/978-4-86152-247-5/",
+    "National Museum of Art, Japan, artist database: Wada Sanzō (artplatform.go.jp/artists/A2089).",
+    "Wikipedia (Japanese), '和田三造'; Wikipedia, 'Gate of Hell (film)' (27th Academy Awards, costume design)."
   ]
 },
 {

@@ -39,6 +39,6 @@ Checked against 18 modern color books (private notes in `../color-kb/books/`, se
 ## Tech
 - Static site, no build tools needed yet. Deploy on GitHub Pages (same as `alter/`).
 - `prototype/` holds the last cloud prototype (v3, "Play + modes"). David rejected its structure, but it has reusable parts: Lab/ΔE color math, a lookalike finder, color-family classification, a spaced-repetition scheduler, a hex gym and the color data (~165 colors with stories and painting hooks in `prototype/src/data.js`). Rebuild with `prototype/build.sh`.
-- Before each push, bump the `?v=` tag on every script and stylesheet in index.html (one shared value, e.g. the date plus a letter), so phones never mix new HTML with cached old scripts.
+- Before each push run `node tools/check.js`, `node tools/check_wiki.js` and `node tools/check_names.js` (all js files share one global scope; a duplicate top-level name breaks the whole app). Bump the `?v=` tag on every script and stylesheet in index.html (one shared value, e.g. the date plus a letter), so phones never mix new HTML with cached old scripts.
 - Progress is stored in localStorage for now. Accounts (e.g. Supabase) come later.
 - Public-domain painting images come from Wikimedia Commons (upload.wikimedia.org). Hex values for Pantone, Crayola and pigments are screen approximations, and the UI should say so.

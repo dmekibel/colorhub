@@ -27,7 +27,8 @@ function shot(name) {
     case "explore": S.lens = arg || "all"; return go("explore");
     case "meet": meet(UNITS[1]); if (arg) later2(() => { const p = document.getElementById("pager"); p.scrollTop = p.clientHeight * +arg; }, 300); return;
     case "deck": deck("learn", { unit: UNITS[1] }); later2(() => dispatchEvent(new KeyboardEvent("keydown", { key: " " })), 600); return;
-    case "drill": return runDrill(arg || "hue", { trials: 10, done: () => {} });
+    case "drill": return runDrill(arg || "hue", { trials: 10, noIntro: true, done: () => {} });
+    case "gx": return gymShot(arg);
     case "gymres": return stationDone({ k: arg || "neutral", est: 3.2, before: 4.1, pb: true, best: 3.2 });
     case "closeup": return closeup(g().nodes.get(arg || "c:Cobalt"));
     case "page": return openNode(g().nodes.get(arg || "alchemy"));
@@ -41,14 +42,19 @@ function shot(name) {
     case "cpage": return archWhen(() => { openNode(colorNode(BYNAME.get((arg || "Teal").toLowerCase()))); later2(() => { const r = document.querySelector(".arch-rows"); if (r) scrollTo(0, r.getBoundingClientRect().top + scrollY - 60); }, 900); });
     case "films": S.lens = "ideas"; go("explore"); return archWhen(() => later2(() => { const h = [...document.querySelectorAll(".x-sec")].find(x => /^Films/.test(x.textContent)); if (h) scrollTo(0, h.getBoundingClientRect().top + scrollY - 20); }, 1500));
     case "taste": return tasteShot(arg);
-    case "colors": {   // colors:<set id>:<view id>:<adjust|tap|press|zoomin|zoomout|bench|benchout>
+    case "say": case "make": case "intro": return prodShot(screen, arg);   // say:<empty|typed|right|close|wrong|gave>, make:<picking|result>, intro:<say|make>
+    case "colors": {   // older hook: colors:<set id>:<view id>:<act>, read through the old S.cb shape
       const [, set, view, act] = name.split(":"), def = COLOR_SETS.find(x => x.id === (set || "101")) || COLOR_SETS[0];
-      S.lens = "spectrum"; S.cb = { preset: def.id, state: JSON.parse(JSON.stringify(def.state)), view: view || "map" }; go("explore");
-      const h = document.getElementById("honey"); if (!h) return;
-      h.className = "honey-panel"; h.innerHTML = "";
-      scrollTo(0, h.getBoundingClientRect().top + scrollY - 250);
-      colorBrowser(h, { focus: dailyColor(), pick: c => closeup(colorNode(c)), shot: act });
-      return;
+      S.lens = "spectrum"; S.cb = { preset: def.id, state: JSON.parse(JSON.stringify(def.state)), view: view || "map" };
+      return colorExplorer({ focus: dailyColor(), pick: c => closeup(colorNode(c)), shot: act });
+    }
+    case "cx": {   // the explorer: cx:<choice>:<act>. choice: 101 | all | yours | 50 | 200 | 500, joined by + to a family,
+      // feel or tradition id (blues+all, pastels+all, src-jp). act: sheet | tune | tuned | wheel | tap | press | zoomin
+      const [, choice = "101", act = ""] = name.split(":"), ch = { which: "101" };
+      choice.split("+").forEach(t => { if (["101", "all", "yours"].includes(t)) ch.which = t; else if (/^\d+$/.test(t)) { ch.which = "spread"; ch.n = +t; } else ch.narrow = t; });
+      S.lens = "spectrum"; S.cb = { ch, view: act === "wheel" ? "wheel" : "map" };
+      if (act === "tuned") Object.assign(S.cb, { tuned: true, state: { ...cxState(cxNorm(ch)), hue: [190, 280], L: [30, 80] } });
+      return colorExplorer({ focus: dailyColor(), pick: c => closeup(colorNode(c)), shot: ["wheel", "tuned"].includes(act) ? "" : act });
     }
   }
 }
