@@ -1,6 +1,6 @@
 # ColorHub (working name: Learn Colors)
 
-An all-in-one color site, mobile first. David is the product owner. Read `PLAN.md` first, then `HANDOFF.md` for where things stand.
+An all-in-one color site, mobile first. David is the product owner. Read `PLAN.md` first, then `HANDOFF.md` for where things stand, then `ROADMAP.md` for the approved backlog and build order.
 
 ## The four goals
 1. **Learn color words.** More color names lets you notice more colors. This is the goal of the learning/flashcard part only.
