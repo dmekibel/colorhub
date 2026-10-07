@@ -184,6 +184,7 @@ const HONEY_STYLES = {
   honeycomb: { title: "Honeycomb", cfg: { layout: "mapTall", lensMode: "round", m0: 2.6, m1: 1, sig: 2.4, shape: 1, gap: .03, zMinUser: .08, labelMin: 30, drift: .4, vig: .6 },
     far: { m0: -.8, gap: -.02, labelMin: -6 } },
 };
+const HONEY_MAX_DRAWN = 5000;   // phones stay smooth and safe; see the draw loop
 const HONEY_STYLE_LIST = Object.keys(HONEY_STYLES).map(id => ({ id, title: HONEY_STYLES[id].title }));
 function honeyResolveCfg(styleId, tweak, N) {
   const preset = HONEY_STYLES[styleId] || HONEY_STYLES.current;
@@ -242,16 +243,21 @@ const honeyExtent = (theta, r, shapeAmt) => shapeAmt <= .02 ? r : r * (1 - shape
 // A bubble at the edge of what's drawn (neighbors culled) is also bounded by its own lens size, so it never balloons.
 function honeyCells(drawn, gapPx, shapeAmt = 0) {
   if (!drawn.length) return;
-  let maxD = 0; for (const b of drawn) if (b.d > maxD) maxD = b.d;
-  const cell = Math.max(4, maxD * 1.25), grid = new Map(), key = (i, j) => i * 100003 + j;
+  // Speed: the grid is sized to a TYPICAL bubble (not the biggest, which put thousands of tiny ones in every lookup),
+  // and each bubble searches only as many cells as its own size needs. Tiny bubbles (under ~7 px) skip the cell
+  // clipping altogether: at that size a slightly smaller circle is indistinguishable and costs nothing.
+  const ds = drawn.map(b => b.d).sort((a, c) => a - c), typ = ds[Math.floor(ds.length / 2)] || 8, maxD = ds[ds.length - 1] || 8;
+  const cell = Math.max(4, typ * 1.3), grid = new Map(), key = (i, j) => i * 100003 + j;
   drawn.forEach((b, n) => { const k = key(Math.floor(b.x / cell), Math.floor(b.y / cell)); let a = grid.get(k); if (!a) grid.set(k, a = []); a.push(n); });
   const half = gapPx / 2;
   drawn.forEach((b, n) => {
+    if (b.d < 7) { b.poly = null; b.rin = Math.max(0, b.d * .44 - half); b.d0 = b.d; b.d = 2 * b.rin; return; }
+    const reach = Math.min(12, Math.ceil((b.d + maxD) * .75 / cell));
     // start from a 16-gon a little bigger than the bubble's own lens size
     const R0 = b.d * .62; let poly = [];
     for (let i = 0; i < 16; i++) { const t = i / 16 * 6.283185307; poly.push([Math.cos(t) * R0, Math.sin(t) * R0]); }
     const ci = Math.floor(b.x / cell), cj = Math.floor(b.y / cell);
-    for (let i = ci - 1; i <= ci + 1 && poly.length; i++) for (let j = cj - 1; j <= cj + 1 && poly.length; j++) {
+    for (let i = ci - reach; i <= ci + reach && poly.length; i++) for (let j = cj - reach; j <= cj + reach && poly.length; j++) {
       const a = grid.get(key(i, j)); if (!a) continue;
       for (const m of a) {
         if (m === n) continue;
@@ -442,7 +448,7 @@ function honeycomb(host, opts = {}) {
     const l = lens(t), R = reach(l), cx = W / 2, cy = Hh / 2, hx = W / 2, hy = Hh / 2, ia = l.inner, round = cfg.lensMode === "round", pk = pack(), shapeAmt = zc("shape");
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, Hh);
     ctx.globalAlpha = l.a;
-    drawn = [];
+    drawn = []; let tinyN = 0;
     let cbest = Infinity, cItem = null;
     for (const p of lay.pts) copies(p, P, R, (ex, ey) => {
       const z = Math.hypot(ex, ey);
@@ -453,10 +459,16 @@ function honeycomb(host, opts = {}) {
         x = cx + Math.sign(ex) * warp(ux, ia) * hx; y = cy + Math.sign(ey) * warp(uy, ia) * hy;
         d = l.K * pk * (Math.min(dwx, dwy) * (1 - cfg.fill) + Math.sqrt(dwx * dwy) * cfg.fill);
       }
-      if (x < -d || y < -d || x > W + d || y > Hh + d || d < 1.6) return;
+      if (x < -d || y < -d || x > W + d || y > Hh + d) return;
+      if (d < 2.2) { tinyN++; return; }
       if (z < cbest) { cbest = z; cItem = p.it; }
       drawn.push({ it: p.it, x, y, d });
     });
+    // Safety: never draw more than ~5,000 bubbles. Far out on a big set some styles reached 50,000-120,000, which ran
+    // a phone out of memory (a white or black screen). Past the budget, the zoom-out limit moves in to this zoom.
+    // and never so far out that the screen is mostly specks too small to draw: move the limit in instead
+    if (tinyN > drawn.length * 3 && tinyN > 800 && Z < ZMAX) { ZMIN = Math.min(ZMAX, Math.max(ZMIN, Z * 1.25)); if (Z < ZMIN) { Z = ZMIN; zAnim = null; requestAnimationFrame(() => draw()); } }
+    if (drawn.length > HONEY_MAX_DRAWN) { ZMIN = Math.min(ZMAX, Math.max(ZMIN, Z * Math.sqrt(drawn.length / HONEY_MAX_DRAWN))); drawn.length = HONEY_MAX_DRAWN; if (Z < ZMIN) { Z = ZMIN; zAnim = null; requestAnimationFrame(() => draw()); } }
     honeyCells(drawn, gapPx(), shapeAmt);
     let pb = null;
     if (pressed) { const i = drawn.findIndex(b => b.it === pressed.it && Math.abs(b.x - pressed.x) < 3 && Math.abs(b.y - pressed.y) < 3); if (i >= 0) { pb = drawn.splice(i, 1)[0]; drawn.push(pb); } }
