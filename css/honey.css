@@ -1,24 +1,122 @@
-/* The color browser (js/colorsets.js) and its honeycomb view (js/honey.js).
-   Default: the view big, a one-line summary and one quiet "Adjust" button. Adjust slides up the filter panel
-   (presets, sources, hue ring, how many, lightness, strength) and the view shrinks above it, still live. */
-.honey-panel{display:flex;flex-direction:column;min-width:0;overflow:hidden;height:max(460px,calc(100dvh - 318px));max-height:820px;touch-action:auto;background:none}
-.cb-top{flex:none;display:flex;align-items:center;gap:10px;padding:0 var(--g) 10px;min-height:46px}
-.cb-sum{flex:1;min-width:0;text-align:left}
-.cb-sum b{display:block;font:400 22px/1 var(--serif);letter-spacing:-.01em}
-.cb-sum span{display:block;margin-top:5px;font:500 9.5px/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.cb-adj,.hc-seg button{height:32px;padding:0 12px;font:500 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;transition:color .2s,background .2s}
-.cb-adj{flex:none;border:1px solid var(--rule);border-radius:2px;color:var(--ink)}
-.hc-seg{flex:none;display:flex;border:1px solid var(--rule);border-radius:2px}
-.hc-seg button{padding:0 10px;color:var(--faint)}
-.hc-seg button+button{border-left:1px solid var(--rule)}
-.hc-seg button.on{color:var(--ink);background:rgba(236,232,223,.07)}
-.cb-views{display:none}
-.adjusting .cb-views{display:flex;animation:fade .3s both}
-.cb-stage{flex:1;min-height:0;position:relative;display:flex;flex-direction:column}
-.cb-view{flex:1;min-height:0;min-width:0}
-.cb-empty{position:absolute;inset:0;display:grid;place-items:center;padding:0 48px;text-align:center;font:400 22px/1.25 var(--serif);color:var(--soft);background:var(--ground)}
-.cb-empty[hidden]{display:none}
-/* the honeycomb view: canvas plus a caption naming the bubble in the middle */
+/* The color explorer (js/colorsets.js) and its honeycomb view (js/honey.js).
+   Explore > Colors shows a quiet live preview card; tapping it opens the explorer full screen: the view edge to edge,
+   a back button and the title (one sentence, the one control for which colors) on top, and a glass bar at the
+   bottom with the color in the middle, Fine-tune and the Map/Wheel switch. */
+
+/* ---- the Colors lens card ---- */
+.honey-panel.cx-prev{position:relative;display:block;height:auto;margin:22px 0 0;overflow:visible;touch-action:auto}
+.cx-card{position:relative;display:block;width:100%;height:min(360px,48dvh);padding:0;border:1px solid var(--rule);border-radius:4px;overflow:hidden;background:var(--ground);text-align:left;transition:transform .4s var(--spring)}
+.cx-card:active{transform:scale(.985)}
+.cx-card-view{position:absolute;inset:0;display:flex}
+.cx-card-view .hc{flex:1}
+.cx-prev .hc-cv{pointer-events:none;touch-action:auto;cursor:pointer}
+.cx-prev .hc-cap{display:none}
+.cx-card-txt{position:absolute;left:0;right:0;bottom:0;display:block;padding:96px 18px 16px;background:linear-gradient(to top,rgba(14,13,11,.97) 48%,rgba(14,13,11,.72) 74%,rgba(14,13,11,0));pointer-events:none}
+.cx-card-txt .eyebrow{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cx-card-txt b{display:block;margin:6px 0 10px;font:400 46px/.92 var(--serif);letter-spacing:-.03em;color:var(--ink)}
+.cx-open{display:inline-flex;align-items:center;gap:8px;font:500 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
+.cx-open svg{width:16px;height:16px}
+
+/* ---- the explorer screen ---- */
+.cx{position:relative;padding:0;max-width:none;background:var(--ground)}
+.cx-stage{position:absolute;inset:0;overflow:hidden;transition:transform .45s var(--ease)}
+.cx-view{position:absolute;inset:0;display:flex}
+.cx-view .hc{flex:1;min-width:0;position:relative}
+.cx.tuning .cx-stage{transform:translateY(calc(var(--tune-h,0px) * -.5 + var(--top) * .5 + 40px))}
+.cx-top{position:absolute;top:0;left:0;right:0;z-index:3;display:flex;align-items:flex-start;gap:8px;padding:calc(var(--top) + 10px) 12px 26px;
+  background:linear-gradient(to bottom,rgba(14,13,11,.72),rgba(14,13,11,0));pointer-events:none}
+.cx-top>*{pointer-events:auto}
+.cx-top .icon-btn{flex:none;color:var(--ink)}
+.cx-sp{flex:none;width:44px}
+.glass-box{background:rgba(14,13,11,.66);-webkit-backdrop-filter:blur(16px) saturate(1.1);backdrop-filter:blur(16px) saturate(1.1);border:1px solid var(--rule);color:var(--ink)}
+.cx-title{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:5px;padding:9px 14px 8px;border-radius:22px;text-align:center;transition:transform .3s var(--spring)}
+.cx-title:active{transform:scale(.97)}
+.cx-title.busy{opacity:.6}
+.cx-title b{display:block;font:400 20px/1.08 var(--serif);letter-spacing:-.01em;text-wrap:balance}
+.cx-title b svg{display:inline-block;vertical-align:-1px;margin-left:5px;color:var(--soft)}
+.cx-title small{font:500 9px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--soft);white-space:nowrap}
+.cx.tuned .cx-title small{color:var(--ink)}
+/* the bottom bar: the honeycomb's own caption becomes its left side; two small buttons sit on its right */
+.cx .hc-box{position:absolute;inset:0}
+.cx .hc-cap{position:absolute;z-index:2;left:max(12px,calc(50% - 258px));right:max(12px,calc(50% - 258px));bottom:calc(var(--bottom) + 12px);
+  display:grid;grid-template-columns:30px 1fr;grid-template-rows:auto auto;column-gap:11px;row-gap:5px;align-content:center;align-items:center;
+  width:auto;min-height:66px;padding:10px 136px 10px 14px;border:1px solid var(--rule);border-top:1px solid var(--rule);border-radius:18px;
+  background:rgba(14,13,11,.7);-webkit-backdrop-filter:blur(16px) saturate(1.1);backdrop-filter:blur(16px) saturate(1.1)}
+.cx .hc-cap i{grid-row:1 / 3;width:30px;height:30px}
+.cx .hc-cap span{grid-column:2;min-width:0}
+.cx .hc-cap b{font-size:21px}
+.cx .hc-cap small{margin-top:4px}
+.cx .hc-cap em{grid-column:2;font-size:9.5px;letter-spacing:.08em;color:var(--faint);line-height:1}
+.cx.none .hc-cap,.cx.none .cx-btns [data-view]{visibility:hidden}
+.cx-bar{position:absolute;z-index:3;left:max(12px,calc(50% - 258px));right:max(12px,calc(50% - 258px));bottom:calc(var(--bottom) + 12px);height:0;pointer-events:none}
+.cx-btns{position:absolute;right:8px;bottom:9px;display:flex;gap:2px;pointer-events:auto}
+.cx-btns button{width:60px;height:48px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;border-radius:12px;color:var(--ink);
+  font:500 8.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;transition:background .2s,transform .3s var(--spring)}
+.cx-btns button:active{background:rgba(236,232,223,.08);transform:scale(.94)}
+.cx-btns button+button{box-shadow:-1px 0 0 var(--rule)}
+.cx-btns svg{width:20px;height:20px}
+.cx.tuned [data-tune]{color:var(--ink)}
+.cx-btns button{position:relative}
+.cx.tuned [data-tune]::after{content:"";position:absolute;top:7px;right:13px;width:5px;height:5px;border-radius:50%;background:var(--ink)}
+.cx-empty{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:0 44px;text-align:center}
+.cx-empty[hidden]{display:none}
+.cx-empty p{margin:0;font:400 24px/1.2 var(--serif);color:var(--soft);text-wrap:balance}
+.cx-pill{height:36px;padding:0 16px;border:1px solid var(--rule-2);border-radius:18px;font:500 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+
+/* ---- the sheets ---- */
+.scrim.cx-clear{background:rgba(0,0,0,.14)}
+.cx-sheet{padding-top:10px}
+.cx-sheet .grab{margin-bottom:14px}
+.cx-sh-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:4px}
+.cx-sh-head h3{margin:0!important;font-size:30px!important}
+.cx-sh-head>span{display:flex;align-items:center;gap:6px}
+.cx-link{height:36px;padding:0 6px;font:500 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--soft);text-decoration:underline;text-underline-offset:4px}
+.cx-link:disabled{opacity:.35;text-decoration:none}
+.cx-sec{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:20px 0 4px;padding-bottom:8px;border-bottom:1px solid var(--rule)}
+.cx-sec b{font:500 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
+.cx-sec span{font:500 9.5px/1 var(--mono);letter-spacing:.08em;color:var(--faint)}
+.cx-dots{display:flex;flex:none}
+.cx-dots i{width:14px;height:14px;border-radius:50%;background:var(--c);box-shadow:0 0 0 1.5px #17160F,inset 0 0 0 1px rgba(236,232,223,.16)}
+.cx-dots i+i{margin-left:-4px}
+.cx-opt{position:relative;display:flex;align-items:center;gap:14px;width:100%;min-height:56px;padding:8px 2px;border-bottom:1px solid var(--rule);text-align:left}
+.cx-opt .cx-dots{width:58px}
+.cx-opt-t{flex:1;min-width:0}
+.cx-opt-t b{display:block;font:400 21px/1.05 var(--serif);letter-spacing:-.01em}
+.cx-opt-t small{display:block;margin-top:4px;font-size:12.5px;line-height:1.3;color:var(--soft)}
+.cx-opt em{flex:none;font:500 10.5px/1 var(--mono);font-style:normal;letter-spacing:.06em;color:var(--faint)}
+.cx-opt.on .cx-opt-t b::after,.cx-spread.on .cx-opt-t b::after{content:"";display:inline-block;width:6px;height:6px;margin:0 0 3px 8px;border-radius:50%;background:var(--ink)}
+.cx-spread{gap:10px}
+.cx-ns{display:flex;flex:none;border:1px solid var(--rule);border-radius:18px;overflow:hidden}
+.cx-ns button{min-width:46px;height:34px;padding:0 10px;font:500 11px/1 var(--mono);letter-spacing:.04em;color:var(--soft)}
+.cx-ns button+button{border-left:1px solid var(--rule)}
+.cx-ns button.on{color:#17160F;background:var(--ink)}
+.cx-fams{display:grid;grid-template-columns:repeat(5,1fr);gap:12px 4px;padding-top:12px}
+.cx-fam{display:flex;flex-direction:column;align-items:center;gap:5px;min-width:0;transition:transform .3s var(--spring)}
+.cx-fam:active{transform:scale(.92)}
+.cx-fam i{width:40px;height:40px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(236,232,223,.16);transition:box-shadow .2s}
+.cx-fam.on i{box-shadow:0 0 0 2px #17160F,0 0 0 3.5px var(--ink)}
+.cx-fam b{font:400 15px/1 var(--serif)}
+.cx-fam small{font:500 9px/1 var(--mono);letter-spacing:.04em;color:var(--faint)}
+.cx-chips{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding-top:12px}
+.cx-chip{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:7px 6px;min-width:0;padding:10px 10px 9px;border:1px solid var(--rule);border-radius:10px;text-align:left;transition:border-color .2s,background .2s,transform .3s var(--spring)}
+.cx-chip:active{transform:scale(.96)}
+.cx-chip small{grid-row:1;grid-column:2;justify-self:end;font:500 9px/1 var(--mono);letter-spacing:.04em;color:var(--faint)}
+.cx-chip b{grid-column:1 / 3;font:400 17px/1 var(--serif);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cx-chip .cx-dots i{width:12px;height:12px}
+.cx-chip.on{border-color:var(--rule-2);background:rgba(236,232,223,.07)}
+.cx-fam.off,.cx-chip.off{opacity:.32;pointer-events:none}
+/* fine-tune */
+.cx-tune-sheet{max-height:min(420px,56dvh)}
+.cx-hue{display:flex;align-items:center;gap:16px;margin:10px 0 6px}
+.cx-hue p{margin:0!important;font-size:13px!important;line-height:1.4!important}
+.cx-hue p b{display:block;margin-bottom:4px;font:500 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.cx-f{margin-top:8px}
+.cx-f>span{display:flex;align-items:baseline;gap:8px;font-size:12.5px;color:var(--soft)}
+.cx-f>span b{font:500 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.cx-f>span i{flex:1;font-style:normal;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cx-f>span em{font:500 10px/1 var(--mono);font-style:normal;letter-spacing:.04em;color:var(--ink)}
+
+/* ---- the honeycomb view: canvas plus a caption naming the bubble in the middle ---- */
 .hc{display:flex;flex-direction:column}
 .hc-box{flex:1;min-height:0;position:relative;overflow:hidden}
 .hc-cv{position:absolute;left:0;top:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
@@ -29,35 +127,25 @@
 .hc-cap b{display:block;font:400 24px/1 var(--serif);letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .hc-cap small{display:block;margin-top:5px;font:500 9.5px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .hc-cap em{flex:none;font:500 10.5px/1 var(--mono);font-style:normal;letter-spacing:.06em;color:var(--faint)}
-.adjusting .hc-cap{display:none}
 .hc-morph{position:absolute;border-radius:50%;pointer-events:none}
-/* the Adjust panel */
-.cb-panel{flex:none;max-height:0;overflow:hidden;border-top:1px solid transparent;transition:max-height .45s var(--ease),border-color .3s}
-.adjusting .cb-panel{max-height:290px;border-top-color:var(--rule)}
-.cb-panel-in{padding:12px 0 14px}
-.cb-row{display:flex;gap:6px;overflow-x:auto;padding:0 var(--g);margin-bottom:8px;scrollbar-width:none;touch-action:pan-x}
-.cb-row::-webkit-scrollbar{display:none}
-.cb-chip{flex:none;height:28px;padding:0 10px;border:1px solid var(--rule);border-radius:2px;font:500 10px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--soft);transition:color .2s,background .2s,border-color .2s}
-.cb-chip.on{color:var(--ink);background:rgba(236,232,223,.08);border-color:rgba(236,232,223,.4)}
-.cb-ctl{display:flex;align-items:center;gap:18px;padding:8px var(--g) 0}
-.cb-ring{position:relative;flex:none;width:108px;height:108px;touch-action:none;cursor:pointer}
+
+/* ---- hue ring and range sliders (Fine-tune) ---- */
+.cb-ring{position:relative;flex:none;width:100px;height:100px;touch-action:none;cursor:pointer}
 .cb-ring-c{position:absolute;inset:0;border-radius:50%;-webkit-mask:radial-gradient(closest-side,transparent 67%,#000 68.5%);mask:radial-gradient(closest-side,transparent 67%,#000 68.5%)}
 .cb-ring svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg);pointer-events:none}
-.cb-ring-dim{fill:none;stroke:rgba(14,13,11,.8);stroke-width:16.5}
+.cb-ring-dim{fill:none;stroke:rgba(23,22,15,.82);stroke-width:16.5}
 .cb-th{position:absolute;width:16px;height:16px;margin:-8px;border-radius:50%;border:2px solid var(--ink);box-shadow:0 0 0 1px rgba(0,0,0,.45),0 2px 6px rgba(0,0,0,.5);pointer-events:none}
 .cb-ring-mid{position:absolute;inset:23%;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;text-align:center}
-.cb-ring-mid b{font:400 17px/1 var(--serif)}
-.cb-ring-mid span{font:500 8.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--soft)}
-.cb-sl{flex:1;min-width:0;display:grid;gap:9px}
-.cb-f>span{display:flex;justify-content:space-between;font:500 9.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--soft)}
-.cb-f>span b{font-weight:500;color:var(--ink);letter-spacing:.04em}
-.cb-range{position:relative;height:24px;touch-action:none;cursor:pointer}
+.cb-ring-mid b{font:400 16px/1 var(--serif)}
+.cb-ring-mid span{font:500 8px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--soft)}
+.cb-range{position:relative;height:30px;touch-action:none;cursor:pointer}
 .cb-track{position:absolute;left:0;right:0;top:50%;height:6px;margin-top:-3px;border-radius:3px}
-.cb-dim{position:absolute;top:50%;height:8px;margin-top:-4px;background:rgba(14,13,11,.74)}
+.cb-dim{position:absolute;top:50%;height:8px;margin-top:-4px;background:rgba(23,22,15,.78)}
 .cb-dl{left:0}.cb-dr{right:0}
-.cb-knob{position:absolute;top:50%;width:18px;height:18px;margin:-9px;border-radius:50%;background:var(--ink);box-shadow:0 1px 5px rgba(0,0,0,.55);transition:transform .2s var(--spring)}
+.cb-knob{position:absolute;top:50%;width:20px;height:20px;margin:-10px;border-radius:50%;background:var(--ink);box-shadow:0 1px 5px rgba(0,0,0,.55);transition:transform .2s var(--spring)}
 .cb-range.on .cb-knob{transform:scale(1.18)}
-/* a library color's sheet */
+
+/* ---- a library color's sheet ---- */
 .hc-sw{height:28dvh;margin:0 0 18px;border-radius:3px;background:var(--c);box-shadow:inset 0 0 0 1px rgba(236,232,223,.1)}
 .hc-note{font-size:14px!important;line-height:1.45}
 .hc-hex{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:52px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);font:500 15px/1 var(--mono);letter-spacing:.06em}
