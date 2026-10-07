@@ -277,6 +277,7 @@ async function colorPoems(el, c) {
   }).join("")}${count > items.length ? `<button class="btn ghost" data-allpoems>All ${count.toLocaleString()} poems naming ${esc(c.n.toLowerCase())} ${ICON.arrow}</button>` : ""}</section>`;
   el.addEventListener("click", e => {
     const p = e.target.closest("[data-poem]"); if (p) { POEM_ORIGIN = "explore"; return poemPage(p.dataset.poem); }
-    if (e.target.closest("[data-allpoems]")) { Object.assign(POEM_UI, { color: ci, fam: null, era: "all", trad: "all", q: "", shown: 40 }); S.lens = "poems"; save(); go("explore"); }
+    // the old Poems lens is gone (merged into Art, DESIGN-SYSTEM §12): Art finds the same poems by picking this color's own bubble
+    if (e.target.closest("[data-allpoems]")) artOpenColor(c.h, c.n);
   });
 }
