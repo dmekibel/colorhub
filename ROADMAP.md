@@ -186,6 +186,9 @@ Ends with a lesson score and Next.
 **Library color pages**
 - Every library color gets a generated page: names and sources, synonyms, look-alikes, paintings/poems/fashion containing it,
   nearest core word.
+- Every one of the ~1,000 links to its nearest 1-2 of the 101 (David, 2026-10-08), where the deep history, stories and culture
+  live: "Close to Teal and Slate · read their stories". It's in the color sheet too, so no color is a dead end. The dot that
+  marks the 101 inside bigger honeycomb sets goes away once every color has a page.
 **One primary English name per distinct color (David, 2026-10-08)**
 - The app teaches English color words. Every distinct color gets ONE primary English name: the most common English name for it
   (xkcd survey frequency and everyday usage first, then established trade/pigment names). Near-identical names are merged
