@@ -558,7 +558,7 @@ function glPage(i, d, fromHex) {
       arrive.hidden = false; arrive.innerHTML = `<i style="--c:${p.h}" class="gl-arrive-sw"></i>≈ ${esc(nm.text)} · ${Math.round(p.share * 100)}% of the canvas · nearest swatch`;
     } else {
       const nm = near ? nameOf(pal[near.i].h) : null;
-      arrive.hidden = false; arrive.textContent = nm ? `No close swatch; the nearest is ${nm.text}, ΔE ${near.de.toFixed(1)}.` : "No close swatch in this palette.";
+      arrive.hidden = false; arrive.textContent = nm ? `No close swatch; the nearest is ${nm.text}, ${pctDiff(near.de)}.` : "No close swatch in this palette.";
     }
   };
   drawPalette();

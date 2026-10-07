@@ -25,6 +25,9 @@ const MATCH = {
     why: "The four-paint palette is named after the Swedish painter Anders Zorn, who is often said to have worked with just these; his actual palettes varied." },
 };
 const mtFmt = d => d >= 10 ? d.toFixed(0) : d.toFixed(1);
+// "mired" (Kelvin eye) is the only MATCH unit not on the black-to-white 0-100 scale, so it alone keeps its raw
+// number; ΔE/ΔL* stations (js/core.js isDeUnit/unitWord) show as a percent instead (David, 2026-10-10).
+const mtScoreNum = (v, unit) => isDeUnit(unit) ? pctFmt(v) : mtFmt(v);
 const mtState = id => { S.match = S.match || {}; return S.match[id] || (S.match[id] = { hist: [], best: null }); };
 const mtLast = id => { const h = mtState(id).hist; return h.length ? h[h.length - 1][1] : null; };
 const mtLevel = id => mtLevelOf(MATCH[id], mtLast(id));
@@ -264,7 +267,7 @@ function matchTask(t, ui, done, next) {
     const sc = t.score(st), tip = t.tip(st, sc), unit = sc.unit || "ΔE";
     ui.view.className = "mt-view solo rev"; ui.view.innerHTML = ""; ui.view.append(t.split(st, sc));
     ui.ctl.className = "mt-ctl rev";
-    ui.ctl.innerHTML = `<div class="mt-score"><b>${mtFmt(sc.err)}</b><span>${esc(unit)}<em>${esc(sc.verdict || mtVerdict(sc.err, unit))}</em></span>${sc.side ? `<small>${sc.side}</small>` : ""}</div>
+    ui.ctl.innerHTML = `<div class="mt-score"><b>${mtScoreNum(sc.err, unit)}</b><span>${esc(unitWord(unit))}<em>${esc(sc.verdict || mtVerdict(sc.err, unit))}</em></span>${sc.side ? `<small>${sc.side}</small>` : ""}</div>
       <p class="mt-tip">${esc(tip)}</p>${sc.note ? `<p class="mt-note">${sc.note}</p>` : ""}`;
     const label = done(sc.err);
     ui.foot.innerHTML = ""; const nb = mtEl("button", "btn", `${esc(label)} ${ICON.arrow}`); nb.onclick = next; ui.foot.append(nb);
@@ -330,8 +333,8 @@ function mtDone(r) {
     <div class="gr-lv"><span class="mono">Level</span>${lvB != null ? `<s>${lvB}</s><i>→</i>` : ""}<b data-count="${lvA}">${lvA}</b><span class="mono">of 20</span></div>
     ${ladder(lvA, "big")}
     <div class="res-list">
-      <div class="res"><span>This set</span><b class="mono">${r.before != null ? mtFmt(r.before) + " → " : ""}${mtFmt(r.est)} <small>${esc(def.unit)}</small></b>${r.pb ? "<em>best</em>" : ""}</div>
-      <div class="res"><span>Personal best</span><b class="mono">${r.best != null ? mtFmt(r.best) : "—"} <small>${esc(def.unit)}</small></b><span></span></div>
+      <div class="res"><span>This set</span><b class="mono">${r.before != null ? mtScoreNum(r.before, def.unit) + " → " : ""}${mtScoreNum(r.est, def.unit)} <small>${esc(unitWord(def.unit))}</small></b>${r.pb ? "<em>best</em>" : ""}</div>
+      <div class="res"><span>Personal best</span><b class="mono">${r.best != null ? mtScoreNum(r.best, def.unit) : "—"} <small>${esc(unitWord(def.unit))}</small></b><span></span></div>
     </div>
     <p class="lede">${esc(def.why)}</p>
     <p class="fine gr-fine">Smaller numbers mean closer matches. Scenes and paint mixing are simplified models. Practice sharpens this judgment; it isn't a brain-training claim.</p>
@@ -595,7 +598,7 @@ async function mtMakeZorn({ lv, f, n, total, shot }) {
     apply: s => { const m = mtMix(amounts(s)); mixEl.style.setProperty("--c", m ? m.hex : "transparent"); mixEl.classList.toggle("empty", !m); },
     ready: s => !!mtMix(amounts(s)),
     score: s => { const m = mtMix(amounts(s)), de = mtDELab(m.lab, target);
-      return out ? { err: Math.max(0, de - best.de), verdict: de - best.de < 1.5 ? "as close as it gets" : "short of the best mix", side: `ΔE ${mtFmt(de)} · best possible ${mtFmt(best.de)}`, note: "Out-of-range targets score how close you got to the best possible mix. Ten-band reflectance curves (approximations), mixed by weighted geometric mean under D65." }
+      return out ? { err: Math.max(0, de - best.de), verdict: de - best.de < 1.5 ? "as close as it gets" : "short of the best mix", side: `${pctFmt(de)} different · best possible ${pctFmt(best.de)}`, note: "Out-of-range targets score how close you got to the best possible mix. Ten-band reflectance curves (approximations), mixed by weighted geometric mean under D65." }
         : { err: de, note: "Simplified model: ten-band reflectance curves (approximations), mixed by weighted geometric mean, under D65 daylight. Real paints vary by brand." }; },
     tip: s => mtZornTip(amounts(s), target, best),
     split: s => { const m = mtMix(amounts(s)), v = mtEl("div", `mt-zorn rev${best ? "" : " one"}`, `<div class="mt-sw"><i class="half" style="--c:${m.hex};--t:${tHex}"></i><span>Yours | target</span></div>`
@@ -624,7 +627,7 @@ function matchStations() {
   return Object.entries(MATCH).map(([id, d]) => {
     const st = mtState(id), lv = mtLevel(id);
     return { id, set: d.set, shelf: MT_SETS[d.set], name: d.name, what: d.what, unit: d.unit, level: lv,
-      best: st.best != null ? `best ${mtFmt(st.best)} ${d.unit}` : "not tried yet", art: mtArt(id), open: () => openMatch(id) };
+      best: st.best != null ? `best ${mtScoreNum(st.best, d.unit)} ${unitWord(d.unit)}` : "not tried yet", art: mtArt(id), open: () => openMatch(id) };
   });
 }
 // Tiles for the Train home, styled like gym.js station tiles. gym.js can use matchShelves() + wireMatch(el),

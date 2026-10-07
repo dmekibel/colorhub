@@ -6,6 +6,11 @@
 
 const mtClamp = (v, a, b) => v < a ? a : v > b ? b : v;
 const mtLerp = (a, b, t) => a + (b - a) * t;
+// A ΔE/ΔL* number means nothing on its own, so tips show it as a percent of the black-to-white range instead
+// (CIEDE2000 between black and white is 100, and L* also runs 0-100); mirrors js/core.js's pctFmt/pctDiff, kept
+// local (mt-prefixed) so this file still runs standalone in node for tools/match_test.js.
+const mtPctFmt = n => `${(n = Math.max(0, n)) >= 10 ? n.toFixed(0) : n.toFixed(1)}%`;
+const mtPctDiff = n => `${mtPctFmt(n)} different`;
 const mtImg = (w, h) => typeof ImageData !== "undefined" ? new ImageData(w, h) : { width: w, height: h, data: new Uint8ClampedArray(w * h * 4) };
 
 // ---------- sRGB <-> linear, Lab, CIEDE2000 ----------
@@ -316,8 +321,8 @@ function mtFlatSpots(img, n = 3, rnd = Math.random, r = 5) {
 // ONE tip for a value task. items = [{ label, yours, truth, sur? }] in L*.
 function mtValueTip(items, o = {}) {
   const worst = items.slice().sort((a, b) => Math.abs(b.yours - b.truth) - Math.abs(a.yours - a.truth))[0], e = worst.yours - worst.truth;
-  if (Math.abs(e) < 2) return "Spot on: every value within 2 L*, about the smallest lightness step most people can see.";
-  const by = `${Math.round(Math.abs(e))} L*`;
+  if (Math.abs(e) < 2) return "Spot on: every value within about 2% in lightness, about the smallest lightness step most people can see.";
+  const by = mtPctFmt(Math.abs(e));
   if (worst.sur != null && Math.abs(worst.sur - worst.truth) > 8 && (worst.sur < worst.truth) === (e > 0))
     return `${worst.label} is ${by} too ${e > 0 ? "light" : "dark"}. Its ${worst.sur < worst.truth ? "darker" : "lighter"} surround made it look ${e > 0 ? "lighter" : "darker"} than it is (simultaneous contrast).`;
   return o.spot ? `${worst.label} is ${by} too ${e > 0 ? "light" : "dark"}. Find the lightest light and darkest dark first, then place the spot between them.`
@@ -355,7 +360,7 @@ function mtMassLabels(map, w, h, k, r = 9) {
 function mtMassTip(items) {
   const scored = items.map(it => ({ ...it, de: mtDELab(it.yours, it.truth) })).sort((a, b) => b.de * Math.sqrt(b.share) - a.de * Math.sqrt(a.share));
   const w = scored[0];
-  if (w.de < 2) return "Spot on: every mass within about 2 ΔE of the painting.";
+  if (w.de < 2) return "Spot on: every mass within about 2% of the painting.";
   const dL = w.yours[0] - w.truth[0], da = w.yours[1] - w.truth[1], db = w.yours[2] - w.truth[2], dC = Math.hypot(w.yours[1], w.yours[2]) - Math.hypot(w.truth[1], w.truth[2]);
   const what = Math.abs(dL) * .8 >= Math.hypot(da, db) ? (dL > 0 ? "too light" : "too dark")
     : Math.abs(dC) > Math.hypot(da, db) * .7 ? (dC > 0 ? "too strong: it needs to be greyer" : "too grey: it needs more color")
@@ -420,7 +425,7 @@ function mtZornBest(target) {
 // ONE tip: the single change (a bit more or a bit less of one paint) that helps most.
 function mtZornTip(amounts, target, best) {
   const now = mtMix(amounts), de0 = now ? mtDELab(now.lab, target) : 99;
-  if (best && best.de > 6) return `Out of range: no mix of these four paints reaches this color (the closest possible is ΔE ${best.de.toFixed(1)}). The Zorn palette has no true blue or green; its cool notes are greys of black and white, which can read as blue beside the warm colors.`;
+  if (best && best.de > 6) return `Out of range: no mix of these four paints reaches this color (the closest possible is ${mtPctDiff(best.de)}). The Zorn palette has no true blue or green; its cool notes are greys of black and white, which can read as blue beside the warm colors.`;
   if (de0 < 2) return "Spot on: about as close as two dabs of real paint ever match.";
   const tot = amounts.reduce((s, x) => s + x, 0) || 1, step = Math.max(.25, tot * .12);
   let pick = null;

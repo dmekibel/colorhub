@@ -330,7 +330,7 @@ function makeCard(card, c, foot, o) {
     const user = PROD_PICKER.get(), d = de2000(user, c.h), res = d <= MAKE_OK ? "right" : d <= MAKE_CLOSE ? "close" : "wrong", ok = res === "right";
     const verdict = ok ? `${ICON.checkS} Right` : res === "close" ? "Close" : `${ICON.xS} Not quite`;
     card.innerHTML = `<div class="mk-split"><div style="--c:${user}"><span class="p-tag">Yours</span></div><div style="--c:${c.h}"><span class="p-tag">${esc(c.n)}</span></div></div>
-      ${prodLabel(c, verdict, ok ? "ok" : res === "close" ? "close" : "miss", null, makeRead(user, c.h), `ΔE ${d.toFixed(1)} apart`)}`;
+      ${prodLabel(c, verdict, ok ? "ok" : res === "close" ? "close" : "miss", null, makeRead(user, c.h), `${pctDiff(d)}`)}`;
     card.classList.add(ok ? "is-right" : "is-miss");
     prodShow(card);
     buzz(ok ? 12 : [10, 40, 10]);
