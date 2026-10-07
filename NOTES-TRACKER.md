@@ -89,6 +89,7 @@ sheets close on swipe-down
 ## Later (approved, not scheduled)
 - Multilingual names (the 1905 six-language atlas) and the Russian edition, after the English app is finished.
 - Business: Plus subscription, a free atlas website; Colordle (a daily color word game).
+- Shop in this color (David's sister's idea, 2026-10-08), one quiet "Get it in this color" row on color, palette and painting pages, with an affiliate disclosure. Order: (1) print-on-demand posters and cards of palettes, painting palettes and "your color" via Printful or Gelato; (2) art-supply affiliate links for real pigments and paints (Jackson's, Blick), paired with the Mix lab; (3) fashion and home affiliates (ShopStyle/LTK, Etsy via Awin) by matching product colors. Never sell trademarked colors (Tiffany blue, Pantone names). Say screen colors are approximate. Worth building once the crawlable pages bring traffic.
 - Accounts (sync photos/progress across devices) + the anonymous scores service for world percentiles.
 - Reaching out to Peter Donahue (Color Nerd) once the paint features ship (Claude drafts, David sends).
 

@@ -545,27 +545,33 @@ function hmBackOneStep() { const btn = app.querySelector("[data-back]"); if (btn
 // flick) it slides away and close() runs. Anywhere below the top, a downward drag is just normal scrolling.
 function hmPullClose(screen, close) {
   if (!screen) return;
-  let y0 = null, x0 = 0, dy = 0, t0 = 0, on = false;
+  let y0 = null, x0 = 0, dy = 0, t0 = 0, on = false, lastScroll = 0;
+  const born = performance.now();
+  const onScroll = () => { lastScroll = performance.now(); if (!screen.isConnected) removeEventListener("scroll", onScroll); };
+  addEventListener("scroll", onScroll, { passive: true });
   const reset = () => { screen.style.transition = "transform .35s var(--ease)"; screen.style.transform = ""; };
   screen.addEventListener("touchstart", e => {
-    if (e.touches.length !== 1 || scrollY > 0 || document.querySelector(".sheet")) { y0 = null; return; }
+    // arm only when the page is resting at the top: not mid-fling (a scroll in the last 180 ms means the finger is
+    // catching a page that's still moving), and not in the first moments after the page opened
+    if (e.touches.length !== 1 || scrollY > 0 || document.querySelector(".sheet") || performance.now() - lastScroll < 180 || performance.now() - born < 350) { y0 = null; return; }
     y0 = e.touches[0].clientY; x0 = e.touches[0].clientX; dy = 0; on = false; t0 = performance.now();
   }, { passive: true });
   screen.addEventListener("touchmove", e => {
     if (y0 == null) return;
     const d = e.touches[0].clientY - y0, dx = e.touches[0].clientX - x0;
     if (!on) {
-      if (d > 8 && d > Math.abs(dx) * 1.3 && scrollY <= 0) on = true;
+      if (d > 14 && d > Math.abs(dx) * 1.5 && scrollY <= 0) on = true;
       else if (Math.abs(dx) > 10 || d < -6) { y0 = null; return; } else return;
     }
     e.preventDefault();
-    dy = Math.max(0, d); screen.style.transition = "none"; screen.style.transform = `translateY(${dy * .9}px)`;
+    // the page follows with resistance, so a small pull looks small and only a deliberate one carries it away
+    dy = Math.max(0, d); screen.style.transition = "none"; screen.style.transform = `translateY(${dy < 60 ? dy * .5 : 30 + (dy - 60) * .8}px)`;
   }, { passive: false });
   screen.addEventListener("touchend", () => {
     if (y0 == null || !on) { y0 = null; return; }
     y0 = null;
-    const fast = dy > 40 && dy / (performance.now() - t0) > .6;
-    if (dy > 110 || fast) {
+    const fast = dy > 70 && dy / (performance.now() - t0) > .8;
+    if (dy > 150 || fast) {
       buzz(6);
       screen.style.transition = reduceMotion ? "none" : "transform .25s var(--ease), opacity .25s";
       screen.style.transform = `translateY(${innerHeight * .4}px)`; screen.style.opacity = "0";

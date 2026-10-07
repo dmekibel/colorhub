@@ -26,6 +26,33 @@ stay out of the deck: they run as separate short steps inside a lesson.
 6. Mission (optional): find it in the world (see section 4).
 Ends with a lesson score and Next.
 
+**Update (David, 2026-10-08): mixed lessons, Duolingo-style.** The family-by-family units ("just the blues, then the reds") are boring. The new lesson engine:
+- Each lesson is about 3 minutes and about 15 quick steps. Every step is a different kind of exercise (a meet card, pick the name, pick the color, swipe card, say it, type it, match 5 pairs, odd one out, pairs, a one-line story card, "find it in this painting").
+- Each step takes 10 seconds or less, so nothing turns into a thinking puzzle.
+- Lessons bring in 3-4 new names in the 1,000-name stage order, which already mixes families. Each new name is paired with its closest look-alike that you already know (contrast, not blocking).
+- Due reviews are woven in, so there are no separate review sessions.
+- The lesson ends with a lesson-complete moment.
+- Built on Practice's reusable step components (js/practice.js PR_STEPS).
+- Learn it, opened from a color page, stays the focused look-alike flow.
+- Grounded in the learning KB (../learning-kb/EXPORT-learning-kb-for-claude-project.md):
+  - Duolingo is a strong program (difficulty model, spacing, streaks) around a thin workout that is mostly recognition. Keep the program and make the workout deep: within a lesson, steps climb from recognition (pick it) to recall (say or type it), with mostly recall by the end (§1 retrieval, §4 fade the scaffolding).
+  - Interleaving look-alikes has STRONG evidence; mixing unrelated families only WEAK. So variety across families keeps it fun, but every new name is tested against its own neighbors (§8), and only after it has been met (no mixing before the basics).
+  - Guess first, with confidence; confident misses come back sooner (§5).
+  - Feedback right after each attempt, specific: "yours was lighter and greener" (§6, N1).
+  - Varied examples of the same name: a flat swatch, a painting spot, an object, a texture (perceptual learning, §9).
+  - No "mastered" claims inside a lesson, because same-session scores under-report learning. "Yours" still needs a check a day or more later (§3).
+  - Say up front that misses are normal (§15).
+  - Lesson length is an open question in the KB (A1): start at about 3 minutes and tune it from completion data.
+- **Fun and a little addictive (David, 2026-10-08), but rewards never lie about progress.** Rewards are real things: every color you learn unlocks its painting, poem line, gem, flower, fashion look and film frame into your Cabinet, a collection that grows as you learn. Also a streak (with a freeze), a daily goal, combo moments and haptics inside a lesson, a "perfect lesson" gold replay, a lesson-complete celebration, and chapter seals earned only by the delayed check. Weekly leagues come later, with accounts. The one progress number stays "Yours".
+- **A whole education through color (David):** colors taught together with where they live in the world: art history, poetry, painting, fashion, botany, gems, film and design. Lessons mix in "world steps" from these strands, for example:
+  - "Find cerulean in this Monet";
+  - "Which color fills this line?" (public-domain poems only);
+  - "What color is this flower?";
+  - "This gem is…";
+  - "Name the coat in this 1950s look";
+  - a 2-slide story card.
+- **Your interests:** an opt-in/out switch per strand (Paintings, Poetry, Fashion, Flowers, Gems, Film, Design, Science), asked once at the start ("What do you love?") and changeable any time. Strands that are off never appear in lessons. The colors stay the same.
+
 **Chapters** (theme + skill focus):
 1. Seeing light and dark (value: squint, lighter/darker)
 2. Warm and cool (temperature, find neutral)
@@ -399,6 +426,48 @@ tappable. It's beautiful to watch and teaches why "mixing" means different thing
   - myth-list corrections (pointillist dots average toward grey; red/yellow/blue are a convention)
   - famous mixes (Zorn palette mixes, the painter's earth greens)
 - Size: M (Sonnet), after the palette engine.
+
+## 19. Writing plan: deeper, more nuanced, more fun articles, and more colors (David, 2026-10-08)
+Where it stands: 101 color articles (median ~950 characters, thin), 74 wiki pages, 29 stories; the other ~900 core names have computed pages only.
+
+**Engine: fact cards first, prose second.** Every claim is a small fact card (claim, source, confidence, which colors it touches). Writers compose articles only from cards; one card feeds every color it touches (written once, reused by its family and neighbors). Pipeline per batch of ~15 colors: research agent (cards) → writer agent (original prose, house voice) → adversarial fact-checker (CLAUDE.md myth list, CONFLICTS.md, "books disagree" hedges) → gate script (length, plain English, quote ≤15 words, every sentence traceable to a card) → David spot-checks 3 per batch.
+
+**Three depths.**
+- Deep (the 101 and ~50 legends: ultramarine, Tyrian purple, mauve, Prussian blue, vermilion…): 2,500-4,000 characters, with a lead, the twist, the history, in art, around the world, the science, a myth corrected, and how to tell it from its neighbor.
+- Medium (~300 names with a real history: pigments, dyes, gems, flowers, historic fashion colors): 800-1,500 characters.
+- Data-written (every other name, up to ~9,000): sections that write themselves from our own data. Painters and decades that use it most (23,531 paintings), poem lines that name it, films, gems, flowers, fashion looks, harmony partners, a mixing recipe, text contrast, a color-blind view, the closest neighbors and how it differs, and the 1930/1955 dictionary entries. They are labeled as data, never dressed up as history.
+
+**Formats that make it fun (not one wall of text):** a one-line hook up top; "The twist" (the surprising true fact); "Myth vs fact"; a mini timeline; "Found in nature" (Werner 1821: an animal, a plant and a mineral for each color); "Where it came from" map; "Then vs now" (fresh vs faded: smalt, Prussian blue, carmine); "Spot it in" painting closeups that open the painting at that spot; "Say it in" other languages; one quiz card at the end, which feeds Practice.
+
+**Sources (public domain or facts only):** Maerz & Paul 1930 (names and its dictionary of first-use dates and origins, ~4,000 entries: the best single lever for word origins), Werner 1821 (110 colors with nature examples), Ridgway 1912 (1,117 names; plates need digitizing like M&P), ISCC-NBS 1955 (done), Wikidata (CC0 facts), museum APIs (pigment fields), the private book notes (facts only, original prose), Paterson notes for etymology, Greenaway 1884 for flower meanings.
+
+**More colors:** M&P 1930 (running) plus Ridgway 1912 plates make ~6-9k real named colors, so "Every shade" can be built from real historical names instead of generated descriptions.
+
+**Order:** pilot 10 deep articles (David reviews the voice) → the 101 in stage order → legends → medium batches → the data-written template for all names. Two writer pipelines run in parallel, about 15 colors each per run.
+
+## 20. Game grammar: many mini games from a few parts (David, 2026-10-08)
+David's sister got hooked on Odd one out ("which color is apart"). The plan is to deepen that mechanic and combine it with Rearrange and Memory (§2, §3, §5). Every game is **Task × Board × Twist × Content**, so a few parts make dozens of games. Each game exists in two sizes: a 10-second **step** for the Journey and the full **station** with a level ladder for Train. The gym's twist ladders in js/gym-engine.js (twists join at certain levels) are the engine for both.
+
+**Tasks:** find (the odd one) · order (rearrange) · recall (memory) · name (the words) · match (a pair) · make (mix or adjust).
+**Boards:** grid · ring · honeycomb · strip · spiral · scattered mosaic · moving bubbles · a painting cut into tiles · real textures (fabric, petals, paint strokes, gems).
+**Twists:** time limit · flash (about 1 s, then tap where it was) · growing board · lives (3) · chain (the odd tile becomes the next board's base, so you tour the color space) · busy or colored grounds · mixed tile sizes · breathing tiles (all pulse, the odd one is out of phase) · drifting tiles · peripheral (fixate the center dot) · feature isolation (all differ in hue; find the one that differs in lightness) · illusion rounds (the "odd" tile is identical, and "none" is right) · direction (afterwards, say how it differs: lighter, warmer, duller) · zen (no clock).
+**Content:** flat colors · names (words only) · paintings · objects · materials.
+
+**Odd one out, deepened:** odd one · odd pair · odd group (a hidden letter or shape) · how many (0-4) · twins · which direction · "Which one is NOT teal?" · "Find every teal" · painting patch recolored · texture edition (same color, different material) · survival (a growing board with 3 lives) · daily seed (one shared board a day with a shareable result grid, Wordle-style) · boss boards near your threshold · pass-and-play duel.
+
+**Combinations (the clever part):**
+- Odd + Memory = **What changed?**: see the board, a blink, one tile changed (change blindness).
+- Odd + Rearrange = **Out of order**: a gradient with one misplaced tile; find it, then drag it home.
+- Memory + Rearrange = **Rebuild**: see a gradient for 2 s, it scrambles, rebuild it from memory.
+- Memory + Odd = **Was it there?**: see 5 colors, then find the one that wasn't in the set.
+- Names + Rearrange = **Word gradient**: put names (no swatches) from light to dark, or around the wheel. This tests real vocabulary.
+- Names + Memory = **Say them back**: 4 colors flash; name them in order (typed or spoken).
+- Names + Odd = **Imposter**: four swatches labeled with names, one label is wrong.
+- Memory = **Color n-back**: same as 2 ago? Plus **Simon** sequences and **drift reveal** (which way your memory drifted).
+- Paint + Odd = **Bad mix**: which of these mixes isn't blue + yellow?
+- Painting + Rearrange = **Sky strip**: put a real sky back together.
+
+**Into the Journey:** lessons draw a step-sized game that fits the colors being learned. Checkpoints and stage exams use harder variants. Train keeps the full stations, with the §4 progression (hidden skill estimate, breathing difficulty, eye profile). Built together with the Train stations redesign batch, so gym.js changes once.
 
 ## Also queued
 - World: Botany (in progress), then Gems.

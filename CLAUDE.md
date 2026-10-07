@@ -16,6 +16,7 @@ An all-in-one color site, mobile first. David is the product owner. Read `PLAN.m
 - Painting palettes must be exact: pull about 6 colors from the real image and give each the most precise name, like "salmon pink", not "pink".
 - Stories must be deep but honest. Every color gets a line on how it differs from its neighbor. Shared history lives at the family level, and only colors with a real history get a signature story.
 - Beautiful UI; most use is on David's phone.
+- One tap on any color opens its page (David, 2026-10-08). That covers palette chips, photo palettes, painting analysis, hyperlinks and tiles, anywhere in the app. Never a sheet with an "Open page" button in between. An in-between color opens its nearest name's page with the exact color shown ("Your color · 97% match").
 
 ## Learning-science rules
 Source: `../learning-kb/EXPORT-learning-kb-for-claude-project.md` (David's mental-gym KB). The rules that matter here:
