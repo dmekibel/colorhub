@@ -403,14 +403,14 @@ function tzMaster() {
 }
 
 // ---------- share cards (1080 x 1350) ----------
-function tzShareCanvas(draw, file, text) {
+function tzShareCanvas(draw, file, text, url) {
   const cv = document.createElement("canvas"); cv.width = 1080; cv.height = 1350;
   const x = cv.getContext("2d"); x.fillStyle = "#0E0D0B"; x.fillRect(0, 0, 1080, 1350);
   // the card's fonts may not be on the page yet (the italic serif especially)
   const fonts = document.fonts ? Promise.all(["400 40px 'Instrument Serif'", "italic 400 40px 'Instrument Serif'", "500 24px 'Geist Mono'"].map(f => document.fonts.load(f))).catch(() => {}) : Promise.resolve();
   fonts.then(() => { draw(x); cv.toBlob(async blob => {
     const f = new File([blob], file, { type: "image/png" });
-    try { if (navigator.canShare && navigator.canShare({ files: [f] })) return await navigator.share({ files: [f], text }); } catch (e) { if (e && e.name === "AbortError") return; }
+    try { if (navigator.canShare && navigator.canShare({ files: [f] })) return await navigator.share({ files: [f], text, url }); } catch (e) { if (e && e.name === "AbortError") return; }
     const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = file; a.click(); toast("Saved the card");
   }, "image/png"); });
 }
@@ -426,7 +426,7 @@ function tzShareColor(R, top, low, reading) {
     x.fillStyle = "#9A958A"; x.font = "500 24px 'Geist Mono', monospace"; x.fillText(`LEAST FAVORITE · ${low.h}`, 256, 1135);
     x.fillStyle = "#CFC9BC"; x.font = "italic 400 40px 'Instrument Serif', Georgia, serif";
     tzWrap(x, reading, 936).slice(0, 2).forEach((l, i) => x.fillText(l, 72, 1225 + i * 48));
-  }, "colorhub-my-color.png", `My color: ${top.n}`);
+  }, "colorhub-my-color.png", `My color: ${top.n}`, routeURL("taste/color"));
 }
 function tzSharePal(pal, read, painter) {
   tzShareCanvas(x => {
@@ -439,7 +439,7 @@ function tzSharePal(pal, read, painter) {
       x.fillStyle = r.strength < .45 ? "#5F5B53" : "#ECE8DF"; x.beginPath(); x.arc(72 + clamp((r.z + 2) / 4, 0, 1) * 936, y + 23, 11, 0, 2 * Math.PI); x.fill();
     });
     if (painter) { x.fillStyle = "#CFC9BC"; x.font = "italic 400 42px 'Instrument Serif', Georgia, serif"; tzWrap(x, `Closest painting: ${painter}`, 936).slice(0, 2).forEach((l, i) => x.fillText(l, 72, 1250 + i * 50)); }
-  }, "colorhub-my-palette.png", "My palette");
+  }, "colorhub-my-palette.png", "My palette", routeURL("taste/palette"));
 }
 
 // ---------- screenshot mode (boot.js #shot=taste:...): a simulated person answers, in memory only ----------

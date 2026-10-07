@@ -513,6 +513,7 @@ function about() {
 
 // ---------- backup: progress lives on this device, so let people keep a copy ----------
 function backupProgress() {
+  S.backedUp = today(); save();
   const blob = new Blob([JSON.stringify(S, null, 1)], { type: "application/json" });
   const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = `colorhub-backup-${today()}.json`; a.click();
   toast("Backup saved");
@@ -522,21 +523,25 @@ function restoreProgress() {
   inp.onchange = () => {
     const f = inp.files[0]; if (!f) return;
     f.text().then(t => {
-      try { const d = JSON.parse(t); if (!d || d.v !== 1 || !d.cards) throw 0; S = Object.assign(fresh(), d); pickMigrate(S); save(); toast("Progress restored"); go("learn"); }
+      try { const d = migrateState(JSON.parse(t)); if (!d || !d.cards) throw 0; S = d; pickMigrate(S); save(); toast("Progress restored"); go("learn"); }
       catch (e) { toast("That file isn't a ColorHub backup"); }
     });
   };
   inp.click();
 }
 
-// "Put it on your Home Screen": shown once you've finished a unit, until it's installed or dismissed
+// "Put it on your Home Screen": shown once you've finished a unit, until it's installed; "Not now" waits 30 days.
+// On iPhone it also protects progress: Safari can clear a website's data after about a week without a visit,
+// but not a Home Screen app's. The backup reminder (core.js keepCard) rides along in the same spot.
 function installHint() {
-  if (standalone() || S.installNo || !Object.keys(S.done).length || !(INSTALL_EVT || isIOS())) return "";
-  return `<section class="inst"><div><b>Keep ColorHub on your Home Screen</b><span>${INSTALL_EVT ? "It opens full screen, like an app, and works offline." : "Tap Share, then “Add to Home Screen”. It opens full screen and works offline."}</span></div>
-    <div class="inst-act">${INSTALL_EVT ? `<button class="btn ghost" data-install>Install ${ICON.arrow}</button>` : ""}<button class="btn ghost" data-inst-no>Not now</button></div></section>`;
+  const keep = keepCard(), snoozed = S.installNo && (S.installNo === true || daysSince(S.installNo) < 30);
+  if (standalone() || snoozed || !Object.keys(S.done).length || !(INSTALL_EVT || isIOS())) return keep;
+  return `<section class="inst"><div><b>Keep ColorHub on your Home Screen</b><span>${INSTALL_EVT ? "It opens full screen, like an app, and works offline." : "Tap Share, then “Add to Home Screen”. It opens full screen, works offline, and keeps your progress safe: Safari can clear a website's data after a week away."}</span></div>
+    <div class="inst-act">${INSTALL_EVT ? `<button class="btn ghost" data-install>Install ${ICON.arrow}</button>` : ""}<button class="btn ghost" data-inst-no>Not now</button></div></section>${keep}`;
 }
 function wireInstall(el) {
   const i = el.querySelector("[data-install]"), n = el.querySelector("[data-inst-no]");
   if (i) i.onclick = async () => { const e = INSTALL_EVT; INSTALL_EVT = null; e.prompt(); try { await e.userChoice; } catch (x) {} home(); };
-  if (n) n.onclick = () => { S.installNo = true; save(); el.querySelector(".inst").remove(); };
+  if (n) n.onclick = () => { S.installNo = today(); save(); el.querySelector(".inst").remove(); };
+  wireKeep(el);
 }

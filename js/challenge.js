@@ -94,7 +94,7 @@ function challengeDone(fresh) {
 
 function shareChallenge(hits, sharp) {
   const text = `ColorHub daily No. ${chNumber()}\n${hits.map(h => h ? "🟩" : "⬛").join("")} ${hits.filter(Boolean).length}/6${sharp ? ` · saw ${fmt(sharp)} ΔE` : ""}`;
-  const url = location.origin + location.pathname;
+  const url = routeURL("challenge");
   if (navigator.share) return navigator.share({ text, url }).catch(() => {});
   try { navigator.clipboard.writeText(text + "\n" + url); toast("Copied your grid"); } catch (e) {}
 }
