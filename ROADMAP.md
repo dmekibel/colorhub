@@ -201,6 +201,18 @@ Ends with a lesson score and Next.
 - Built from look-alike groups; Learn it works on any ladder color.
 - Progress shows both tiers: "Core 64/101 · Library 212/~1,000"; the top of the ladder = "master colorist".
 
+**Why 1,000 and not 2,700 (measured 2026-10-08, tools/name_coverage.py, 20,000 painting palette colors, CIEDE2000):**
+
+| names | median | 90th | within 3 | within 5 |
+|---|---|---|---|---|
+| 250 | 5.2 | 7.0 | 10% | 46% |
+| 500 | 3.8 | 5.3 | 27% | 85% |
+| 1,000 | 2.9 | 4.2 | 53% | 97% |
+| 2,711 | 2.4 | 3.8 | 71% | 98% |
+
+Going from 1,000 to 2,700 names cuts the median gap by only 0.5, which is below what museum photos and phone screens
+already vary by. The modifiers cover the rest. The 2,700 stay as "also called" synonyms on tap.
+
 **One naming system (David, 2026-10-08): every place that names a color uses the same function and the same list.**
 - Data: one file holds the ~1,000 primary names (§13), each with its synonyms and cultural notes. The 2,700-name library
   becomes synonyms and info, never a separate naming source.
