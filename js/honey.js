@@ -875,7 +875,11 @@ function honeycomb(host, opts = {}) {
         // "The middle one" is the bubble the view itself calls its center (the caption's), or the one we just glided
         // there. Distance alone wasn't enough: idle drift, the panel inset and the lens could leave the centered
         // bubble a few px off, so a tap on it only glided again and never opened (David).
-        const far = opts.centerFirst && p.it !== center && p.it !== glided && Math.hypot(p.x - W / 2, p.y - vcy()) > p.b.d * .55;
+        // The open zone (David): the center bubble AND the ring touching it open on one tap; only bubbles further out
+        // glide to the middle first. The ring's reach is measured from the center bubble's edge, one tapped-bubble wide.
+        const cb = drawn.find(q => q.it === center), cd = cb ? cb.d : p.b.d;
+        const reach = Math.max(cd * .5 + p.b.d * .95, Math.min(W, vy()) * .16);
+        const far = opts.centerFirst && p.it !== center && p.it !== glided && Math.hypot(p.x - W / 2, p.y - vcy()) > reach;
         tapTimer = setTimeout(() => { pressed = null; kick(); if (far) { glided = p.it; lay.globe ? glideToGlobe(p.it) : glideTo(p.x, p.y); } else { glided = null; open(p.it, p.b); } }, far ? 0 : 220);
         return;
       }
