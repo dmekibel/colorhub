@@ -104,6 +104,11 @@ sheets close on swipe-down
   **Sources:** public-domain films (before 1930, plus some later ones whose copyright lapsed) can show frames. For others, frames we sample ourselves from a copy David owns, kept private and used only for analysis.
 
   Reuses the §21 analysis engine. Today data/films.js holds 32 films with written text and "colors discussed", no frame palettes.
+- **The film strip (David, 2026-10-08):**
+  - Every shot in order becomes a progression through the running time, the "movie barcode" idea. It is modular: show 1 color per shot (the most-used one), or a palette of 3, 5 or 10 per shot.
+  - Zoom from the whole film down to one scene.
+  - Also: acts and turning points visible as color shifts, the film's overall palette, and films compared side by side.
+  - A shot-gallery page (e.g. Barry Lyndon on beautifulfilmframes.com, about 180 stills) is the kind of source, read for color only.
 
 ## Ideas only (not planned)
 - Nail-polish style names: maybe a playful game or a fashion/beauty culture note; no brand catalogs.
