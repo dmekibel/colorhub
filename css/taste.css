@@ -1,0 +1,106 @@
+/* Taste tests (js/taste.js): "Find your color" and "Find your palette". Museum editorial: the color is the interface,
+   chrome stays neutral, hairlines instead of boxes, serif names, mono small-caps labels. */
+
+/* ---------- intro ---------- */
+.tz-intro .tz-prev{flex:1;min-height:230px;display:grid;grid-template-columns:repeat(8,1fr);grid-auto-rows:1fr;gap:2px;margin-top:16px}
+.tz-intro .tz-prev>i{background:var(--c);animation:plate .8s var(--ease) both;animation-delay:calc(var(--k) * 40ms)}
+.tz-intro .tz-prev.tz-pals{grid-template-columns:1fr 1fr;gap:3px}
+.tz-intro .tz-pals .tz-strip{height:100%}
+.tz-kick{margin-top:26px}
+.tz-intro .btn[data-go]{margin-top:22px}
+.tz-intro .btn.ghost{margin-top:4px}
+
+/* ---------- the duel ---------- */
+.tz-q{padding:10px 0 0}
+.tz-q h2{font:400 32px/1.02 var(--serif);letter-spacing:-.02em;margin-top:8px;text-wrap:balance}
+.tz-duel{flex:1;min-height:0;display:flex;flex-direction:column;gap:6px;padding:16px 0 4px}
+.tz-opt{position:relative;flex:1;min-height:0;display:flex;border-radius:3px;overflow:hidden;transition:flex .42s var(--ease),opacity .32s,transform .2s;animation:tz-in .38s var(--ease) both}
+.tz-opt+.tz-opt{animation-delay:50ms}
+.tz-opt:active{transform:scale(.985)}
+.tz-opt.win{flex:2.2}
+.tz-opt.lose{flex:.35;opacity:.28}
+.tz-opt.both{opacity:1;transform:scale(.97)}
+.tz-opt.none{opacity:.2;transform:scale(.97)}
+.tz-opt.real{flex:1.6;box-shadow:0 0 0 2px var(--ground),0 0 0 3px var(--ink)}
+@keyframes tz-in{from{opacity:0;transform:translateY(8px)}}
+.tz-plate{flex:1;background:var(--c)}
+.tz-strip{flex:1;display:flex;gap:2px;min-width:0}
+.tz-strip i{background:var(--c);min-width:3px}
+.tz-alt{display:flex;justify-content:center;align-items:center;gap:6px;padding:4px 0 2px}
+.tz-alt button{min-height:44px;padding:0 16px;font:500 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--soft);transition:color .2s}
+.tz-alt button:active{color:var(--ink)}
+.tz-alt i{width:3px;height:3px;border-radius:50%;background:var(--faint)}
+.tz-reveal{min-height:150px}
+.tz-reveal p{font-size:15px;line-height:1.45;color:#DAD5C9;margin:12px 0 6px;text-wrap:pretty}
+.tz-reveal p b{font-weight:500;color:var(--ink)}
+
+/* ---------- color results ---------- */
+.tz-reading{font:400 clamp(34px,9.6vw,42px)/1.02 var(--serif);letter-spacing:-.025em;margin-top:12px;text-wrap:balance}
+.tz-map{display:flex;justify-content:center;margin-top:18px}
+.tz-rose{display:block}
+.tz-cap{text-align:center;margin:6px auto 0;max-width:34ch}
+.tz-picks{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:32px}
+.tz-pick{display:flex;flex-direction:column;min-width:0}
+.tz-pick-c{aspect-ratio:4/5;background:var(--c);border-radius:3px;padding:12px;display:flex;align-items:flex-end}
+.tz-pick-c[data-ink="dark"] .eyebrow{color:rgba(20,19,17,.7)}
+.tz-pick-c[data-ink="light"] .eyebrow{color:rgba(255,255,255,.78)}
+.tz-pick.low .tz-pick-c{aspect-ratio:4/5}
+.tz-pick b{font:400 26px/1 var(--serif);letter-spacing:-.015em;margin-top:12px;text-wrap:balance}
+.tz-pick small{font:500 9.5px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-top:7px}
+.tz-pick .mono{font-size:11px;color:var(--soft);margin-top:4px;letter-spacing:.06em}
+.tz-word{align-self:flex-start;font:500 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--soft);text-decoration:underline;text-underline-offset:4px;padding:12px 0 4px}
+.tz-lc{display:grid;grid-template-columns:18px 1fr;grid-template-rows:auto auto;gap:6px 8px;margin-top:16px}
+.tz-ax-y{writing-mode:vertical-rl;transform:rotate(180deg);font:500 9.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--faint);text-align:right}
+.tz-ax-y::after{content:" →"}
+.tz-ax-x{grid-column:2;font:500 9.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--faint);text-align:right}
+.tz-lc-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:3px}
+.tz-lc-grid i{aspect-ratio:1.6;display:grid;place-items:center;position:relative}
+.tz-lc-grid i::before{content:"";width:100%;height:100%;background:var(--c);transform:scale(var(--s));border-radius:2px;transition:transform .6s var(--ease)}
+.tz-lc-grid i.me::after{content:"";position:absolute;inset:-2px;border:1px solid var(--ink);border-radius:3px}
+.tz-why{padding:16px 0;border-bottom:1px solid var(--rule)}
+.tz-why p{display:flex;align-items:center;gap:10px;font-size:15px;color:var(--soft)}
+.tz-why p i{flex:none;width:22px;height:22px;border-radius:2px;background:var(--c)}
+.tz-why p b{color:var(--ink);font-weight:500}
+.tz-opts{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.tz-opts button{min-height:34px;padding:0 10px;border:1px solid var(--rule);border-radius:2px;font-size:13px;color:#DAD5C9;transition:background .2s,color .2s,border-color .2s}
+.tz-opts button.on{background:var(--paper);color:var(--paper-ink);border-color:var(--paper)}
+.tz-whyout{padding-top:6px}
+.tz-whyout p{font-size:16px;line-height:1.55;color:#DAD5C9;margin-top:14px;text-wrap:pretty}
+.tz-whyout .tz-verdict{font:400 22px/1.2 var(--serif);color:var(--ink)}
+.tz-vs{display:grid;grid-template-columns:44px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid var(--rule)}
+.tz-vs i{width:44px;height:56px;border-radius:2px;background:var(--c)}
+.tz-vs p{font-size:15px;line-height:1.5;color:#DAD5C9;text-wrap:pretty}
+.tz-vs b{font-weight:500;color:var(--ink)}
+.tz-moved{display:flex;align-items:center;gap:12px;margin-top:16px}
+.tz-moved i{flex:1;height:64px;border-radius:2px;background:var(--c)}
+.tz-moved span{color:var(--soft)}
+
+/* ---------- palette results ---------- */
+.tz-ptitle{font-size:clamp(46px,13vw,60px);margin-top:10px}
+.tz-hero{display:flex;gap:2px;height:38dvh;min-height:220px;margin-top:20px}
+.tz-hero i{background:var(--c);min-width:4px;border-radius:2px;animation:plate .7s var(--ease) both}
+.tz-names{margin-top:6px}
+.tz-name{display:grid;grid-template-columns:20px 1fr auto;grid-template-rows:auto auto;column-gap:12px;align-items:center;width:100%;padding:11px 0;border-bottom:1px solid var(--rule);text-align:left}
+.tz-name i{grid-row:span 2;width:20px;height:32px;border-radius:2px;background:var(--c)}
+.tz-name b{font:400 21px/1.05 var(--serif);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tz-name small{grid-column:2;font:500 9.5px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-top:3px}
+.tz-name em{grid-row:1 / span 2;grid-column:3;font-style:normal;font-size:11px;color:var(--soft)}
+.tz-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+.tz-dials{display:flex;flex-direction:column;gap:20px;padding-top:18px}
+.tz-dial-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.tz-dial-top b{font:400 22px/1 var(--serif)}
+.tz-dial-top em{font:500 10px/1 var(--mono);font-style:normal;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);text-align:right}
+.tz-track{position:relative;height:1px;background:var(--rule-2);margin:14px 6px 0}
+.tz-track i,.tz-track s{position:absolute;top:50%;width:13px;height:13px;margin:-6.5px;border-radius:50%}
+.tz-track i{background:var(--ink)}
+.tz-track s{box-shadow:inset 0 0 0 1px var(--soft)}
+.tz-dial.weak .tz-track i{background:var(--ground);box-shadow:inset 0 0 0 1px var(--soft)}
+.tz-dial.weak .tz-dial-top em{color:var(--faint)}
+.tz-ends{display:flex;justify-content:space-between;gap:16px;margin-top:10px;font:500 9.5px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.tz-ends span:last-child{text-align:right}
+.tz-ptg{display:grid;grid-template-columns:96px 1fr 18px;gap:14px;align-items:center;width:100%;padding:12px 0;border-bottom:1px solid var(--rule);text-align:left;color:var(--soft)}
+.tz-ptg .tz-strip{height:52px;gap:1px}
+.tz-ptg b{display:block;font:400 21px/1.05 var(--serif);color:var(--ink);text-wrap:balance}
+.tz-ptg small{display:block;font-size:12.5px;color:var(--soft);margin-top:4px}
+.tz-ptg svg{width:16px;height:16px}
+.tz-sub{margin-top:26px;padding-bottom:4px}

@@ -626,39 +626,8 @@ img{transition:opacity .6s var(--ease)}
 .cp-knob{position:absolute;top:50%;width:14px;height:30px;transform:translate(-50%,-50%);border-radius:2px;background:transparent;box-shadow:0 0 0 2px #fff,0 0 0 3.5px rgba(0,0,0,.5);pointer-events:none}
 
 /* ---------- taste tests ---------- */
-.taste .t-prev{display:grid;grid-template-columns:repeat(8,1fr);gap:2px;margin-top:20px}
-.taste .t-prev>i{aspect-ratio:.7;background:var(--c);animation:plate .8s var(--ease) both;animation-delay:calc(var(--k) * 40ms)}
-.taste .t-prev .t-pal{display:flex;flex-direction:column;grid-column:span 4;height:64px;margin-bottom:2px}
-.taste .t-prev .t-pal i{flex:1;background:var(--c)}
-.taste .kick{margin-top:26px}
 .t-title{font:400 clamp(58px,17vw,78px)/.88 var(--serif);letter-spacing:-.04em;margin-top:12px}
 .t-title em{font-style:italic;color:#CFC9BC}
-.t-head{padding:12px 0 0}
-.t-head h2{font:400 34px/1 var(--serif);letter-spacing:-.02em;margin-top:8px}
-.t-duel{flex:1;min-height:0;display:flex;flex-direction:column;gap:4px;padding:14px 0 6px}
-.t-half{position:relative;flex:1;min-height:0;display:flex;transition:flex .5s var(--ease),opacity .4s;overflow:hidden;border-radius:3px}
-.t-half.win{flex:2.4}.t-half.lose{flex:.25;opacity:.35}
-.t-plate{flex:1;background:var(--c)}
-.t-stripes{flex:1;display:flex;gap:2px}.t-stripes i{flex:1;background:var(--c)}
-.t-n{position:absolute;left:14px;bottom:12px;font:400 30px/1 var(--serif);font-style:normal;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.45)}
-.t-n[data-ink="dark"]{color:#141311;text-shadow:none}
-.t-res-col{height:52dvh;background:var(--c);display:flex;flex-direction:column;justify-content:flex-end;padding:20px;border-radius:3px;margin-top:2px}
-.t-res-col[data-ink="dark"]{color:#141311}.t-res-col[data-ink="light"]{color:#fff}
-.t-res-col .eyebrow{color:inherit;opacity:.72}
-.t-res-col h1{font:400 clamp(58px,17vw,88px)/.88 var(--serif);letter-spacing:-.04em;margin:8px 0 10px}
-.t-res-col h1 em{font-style:italic;opacity:.75}
-.t-res-col .mono{font:500 10.5px/1 var(--mono);letter-spacing:.1em;opacity:.75}
-.t-res-pal{display:flex;height:46dvh;gap:2px;margin-top:2px}
-.t-res-pal i{flex:1;background:var(--c);display:flex;align-items:flex-end;padding:10px 8px}
-.t-res-pal span{font:400 17px/1.05 var(--serif);writing-mode:vertical-rl;transform:rotate(180deg)}
-.t-res-pal span em{font:500 9px/1 var(--mono);letter-spacing:.08em;font-style:normal;opacity:.7;margin-top:8px}
-.t-res-pal span[data-ink="dark"]{color:#141311}.t-res-pal span[data-ink="light"]{color:#fff}
-.t-prof{display:flex;flex-direction:column;gap:14px;padding-top:16px}
-.t-scale{display:grid;grid-template-columns:52px 1fr 52px;align-items:center;gap:12px;font:500 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--soft)}
-.t-scale span:last-child{text-align:right}
-.t-scale i{position:relative;height:1px;background:var(--rule-2)}
-.t-scale b{position:absolute;top:50%;width:11px;height:11px;margin:-5.5px;border-radius:50%;background:var(--ink)}
-.t-codes{display:block;width:100%;text-align:left;padding:14px 0;border-bottom:1px solid var(--rule);font:500 12px/1.6 var(--mono);letter-spacing:.06em;color:var(--ink)}
 .play-tiles{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px;padding-top:16px;border-top:1px solid var(--rule)}
 .play-tile{text-align:left;display:flex;flex-direction:column;gap:6px}
 .play-tile .pt-v{display:grid;height:110px;gap:2px}
@@ -705,10 +674,6 @@ img{transition:opacity .6s var(--ease)}
 .opt b{display:block;font:400 22px/1.1 var(--serif)}
 .opt small{display:block;color:var(--soft);font-size:12.5px;margin-top:3px}
 .profile .sec-head{margin-top:30px}
-.taste .t-prev{flex:1;min-height:240px;grid-auto-rows:1fr;margin-top:16px}
-.taste .t-prev>i{aspect-ratio:auto}
-.taste .t-prev .t-pal{height:auto;margin:0}
-.taste .btn{margin-top:22px!important}
 /* many swatches: labels run up the strip like book spines instead of breaking mid-word */
 .p-hero:has(div:nth-child(5)) div{align-items:flex-end;justify-content:flex-start}
 .p-hero:has(div:nth-child(5)) span{writing-mode:vertical-rl;transform:rotate(180deg);white-space:nowrap;overflow-wrap:normal}
