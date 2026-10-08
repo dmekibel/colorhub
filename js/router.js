@@ -1,6 +1,7 @@
 "use strict";
 // Addresses. Every meaningful screen has a hash route, so it can be shared, bookmarked and reloaded:
-//   #/today  #/train  #/studio  #/explore  #/explore/<art|ideas|world|saved>
+//   #/today  #/train  #/studio  #/museum  #/museum/<art|ideas|world|saved>  #/home (the map)
+//   (the Museum was called Explore until 2026-10-08: every #/explore… address still opens it)
 //   (older #/explore/paintings and #/explore/poems open Art; #/explore/colors and #/explore/spectrum open
 //   the pager itself — js/explore.js dropped the "Colors" lens and merged Paintings + Poems into Art)
 //   #/color/<slug>  #/page/<id>  #/painting/<slug>  #/story/<id>     (add /more for the "More like this" closeup)
@@ -177,7 +178,7 @@ function openRoute(hash, initial = false) {
     ROUTE_NEXT = routed(kind === "color" ? routeColor(id).n : "", parts.slice(0, more === "more" ? 3 : 2).join("/"));
     whenWiki(() => {
       const n = node();
-      if (!n) return go(S.tab || "learn");
+      if (!n) return xToOrigin();
       XSTACK = [];
       if (more === "more") return closeup(n);
       return n.kind === "story" ? storyPlayer(n) : openNode(n, true, kind === "color" ? tappedHex : null);
@@ -188,10 +189,10 @@ function openRoute(hash, initial = false) {
     base(); XSTACK = []; poemPage(id); return true;
   }
   if (kind === "passage" && id && typeof passagePage === "function") {
-    base(); XSTACK = []; archWhen(() => { const p = PSG && PSG.byId.get(id); if (p) passagePage(p); else go(S.tab || "learn"); }); return true;
+    base(); XSTACK = []; archWhen(() => { const p = PSG && PSG.byId.get(id); if (p) passagePage(p); else xToOrigin(); }); return true;
   }
   if (kind === "film" && id && typeof filmPage === "function") {
-    base(); XSTACK = []; archWhen(() => { const f = (window.FILMS || []).find(x => x.id === id); if (f) filmPage(f); else go(S.tab || "learn"); }); return true;
+    base(); XSTACK = []; archWhen(() => { const f = (window.FILMS || []).find(x => x.id === id); if (f) filmPage(f); else xToOrigin(); }); return true;
   }
   if (kind === "look" && id && typeof lkOpenRoute === "function") { base(); XSTACK = []; lkOpenRoute(id); return true; }   // js/looks.js
   if (kind === "botany" && id && typeof btOpenRoute === "function") { base(); btOpenRoute(id); return true; }   // js/botany.js
@@ -204,7 +205,7 @@ function openRoute(hash, initial = false) {
     base();
     if (!CORE_NAMES) { ROUTE_NEXT = routed("", "name/" + id); waitScreen(); ROUTE_REPLACE = true; }
     XSTACK = [];
-    loadCoreNames().then(() => { const e = routeName(id); if (e) namePage(e, true, tappedHex); else go(S.tab || "learn"); });
+    loadCoreNames().then(() => { const e = routeName(id); if (e) namePage(e, true, tappedHex); else xToOrigin(); });
     return true;
   }
   if (kind === "line" && typeof ooAcross === "function") { base(); XSTACK = []; ooAcross(); return true; }   // js/games/line.js
@@ -236,13 +237,13 @@ function openRoute(hash, initial = false) {
   if (["painter", "movement", "decade", "country", "arthistory", "painters"].includes(kind) && typeof awOpenRoute === "function") { base(); XSTACK = []; awOpenRoute(kind, id, more); return true; }   // js/artwiki.js
   const simple = { daily: () => daily(), challenge: () => challenge(),
     taste: () => tasteIntro(id === "palette" ? "palette" : "color"),
-    favorites: () => typeof favShelf !== "function" ? go(S.tab || "learn") : id === "taste" ? favTaste() : id === "rank" ? frStart(more || "bws", "all") : favShelf(),   // js/favs.js
+    favorites: () => typeof favShelf !== "function" ? xToOrigin() : id === "taste" ? favTaste() : id === "rank" ? frStart(more || "bws", "all") : favShelf(),   // js/favs.js
     lab: () => id === "honey" && typeof labHoney === "function" ? labHoney() : (LAB[id] && ["harmony", "contrast"].includes(id) ? LAB[id] : LAB.harmony)(),
     fashion: () => typeof fashionPage === "function" && fashionPage(id),
-    mapstudy: () => typeof msOpen === "function" ? msOpen() : go(S.tab || "learn"),   // js/mapstudy.js
+    mapstudy: () => typeof msOpen === "function" ? msOpen() : xToOrigin(),   // js/mapstudy.js
     // the honeycomb home's instant mini-lesson (js/learnit.js): #/learnit/<color>
-    learnit: () => { const c = id && routeColor(id); if (c && typeof hmLearnIt === "function") hmLearnIt(c); else if (id && typeof lxRouteLearnIt === "function") lxRouteLearnIt(id); else go(S.tab || "learn"); },
-    practice: () => typeof prOpenRoute === "function" ? prOpenRoute(id) : go(S.tab || "learn") };   // js/practice.js: #/practice, #/practice/<method>
+    learnit: () => { const c = id && routeColor(id); if (c && typeof hmLearnIt === "function") hmLearnIt(c); else if (id && typeof lxRouteLearnIt === "function") lxRouteLearnIt(id); else xToOrigin(); },
+    practice: () => typeof prOpenRoute === "function" ? prOpenRoute(id) : xToOrigin() };   // js/practice.js: #/practice, #/practice/<method>
   if (simple[kind]) { base(); simple[kind](); return true; }
   return false;
 }
@@ -250,5 +251,5 @@ function openRoute(hash, initial = false) {
 addEventListener("hashchange", () => {
   if (SHOT || location.hash === ROUTE_NOW || !/^#\/./.test(location.hash)) return;
   ROUTE_REPLACE = true;   // the browser already made the history entry
-  if (!openRoute(location.hash)) go(S.tab || "learn");
+  if (!openRoute(location.hash)) xToOrigin();
 });

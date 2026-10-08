@@ -913,7 +913,7 @@ const TRL = {
   },
 };
 
-scenario("trail-chain", "a 6-deep chain (color, painting, painter, painting, color, gem) backs out one step at a time", async t => {
+scenario("trail", "a 6-deep chain (color, painting, painter, painting, color, gem) backs out one step at a time", async t => {
   await TRL.open(t, "#/color/cobalt");
   const seen = await TRL.chain(t);
   t.expect(seen.length === 6, `the chain is ${seen.length} deep, not 6`);
@@ -933,7 +933,7 @@ scenario("trail-chain", "a 6-deep chain (color, painting, painter, painting, col
   t.expect(!t.$(".room-sheet"), "the trail ran out into a room instead of the map");
 });
 
-scenario("trail-sheet", "long-press ‹ shows the trail; a row jumps there; the map glyph exits with the map's pan and zoom kept", async t => {
+scenario("trail", "long-press ‹ shows the trail; a row jumps there; the map glyph exits with the map's pan and zoom kept", async t => {
   await TRL.open(t, "#/home");
   const cv = await t.waitFor(".hm canvas", 12000, "the map");
   await t.sleep(600);
@@ -975,7 +975,7 @@ scenario("trail-sheet", "long-press ‹ shows the trail; a row jumps there; the 
 
 // fresh loads of shared addresses: each opens its page, and Back goes to the map (not a room)
 [["#/painter/abraham-bloemaert", /Bloemaert/], ["#/gallery/15146?c=0047ab", null], ["#/pair/c2412d+4f6b3a", null], ["#/look/rococo", /Rococo/], ["#/hub/source:crayola", /Crayola/i]].forEach(([hash, re]) => {
-  scenario(hash.includes("painter") || hash.includes("gallery") ? "trail-links" : "trail-links2", `a fresh ${hash.split("/")[1].split("?")[0]} address opens it; Back goes to the map`, async t => {
+  scenario("trail-links", `a fresh ${hash.split("/")[1].split("?")[0]} address opens it; Back goes to the map`, async t => {
     await TRL.open(t, hash);
     await t.waitFor(() => t.$("#app .screen [data-back]") && !t.$(".screen.waiting") && t.$("#app").innerText.length > 120, 20000, `the page at ${hash}`);
     t.expect(TRL.hash(t) === decodeURIComponent(hash), `the address changed to ${TRL.hash(t)}`);
@@ -986,7 +986,7 @@ scenario("trail-sheet", "long-press ‹ shows the trail; a row jumps there; the 
   });
 });
 
-scenario("trail-museum", "the Museum: its own address, the old one still works, and a part's trail runs out back into it", async t => {
+scenario("trail-links", "the Museum: its own address, the old one still works, and a part's trail runs out back into it", async t => {
   await TRL.open(t, "#/museum");
   await t.waitFor(".xp-pager", 15000, "the Museum's covers at #/museum");
   t.expect(/^Museum/.test(t.d.title), `the title is "${t.d.title}"`);
