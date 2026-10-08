@@ -17,6 +17,8 @@ writes, into data/design/:
 Honesty: every figure is "as photographed"; n is on every claim; a group under its minimum n is not reported; shares
 are area shares of a 6-color k-means palette, not exact pixel statistics.
 
+Paper. On posters and printed graphics the sheet itself (L* >= 72, C* <= 14) is not a color choice, so it is left out and the rest renormalized.
+
 Weighting. Museums hold very different amounts of each kind of object (Cooper Hewitt: wallpaper and textiles; Rijksmuseum:
 posters), so the headline design share of a color is CATEGORY-BALANCED: the mean of the per-category mean shares over
 the categories with at least MIN_CAT objects. Decade series are balanced the same way. The raw (object-weighted) share is
@@ -38,6 +40,7 @@ DECADES = list(range(1800, 1980, 10))
 MIN_CAT = 60            # a category counts toward the balanced mean only with this many objects
 MIN_CELL = 25           # a category x decade cell, or a decade, is reported with at least this many objects
 MIN_MAKER = 8           # a designer/maker gets a palette with at least this many objects
+PAPER_CATS, PAPER_L, PAPER_C = {"poster", "graphic"}, 72.0, 14.0   # paper tone: light and nearly neutral, on printed sheets only
 PRESENT = 0.03          # a color "is in" an object when it covers at least this share of the palette
 SHARD = 100
 STYLES = {  # curated lists of makers by movement; the n shown is how many of OUR objects name them (often few)
@@ -114,7 +117,16 @@ def main():
     decs = np.array([r["y"] // 10 * 10 for r in rows])
     srcs = np.array([r["src"] for r in rows])
     ri, ci, sh, hx = entries_of(rows)
-    M = share_matrix(len(rows), ri, ci, sh, NC)                 # object x color area share
+    M_all = share_matrix(len(rows), ri, ci, sh, NC)             # object x color area share, paper included
+    # PAPER: on posters and printed graphics the sheet itself (a light, nearly neutral palette color) is not a design
+    # choice and is shown in nearly every object, so it is left out and the rest renormalized. All design shares below
+    # (and the painting comparison) are of the INKED / DYED area. M_all keeps the raw share for `raw`.
+    lab_e = C.rgb_to_lab(np.array([C.hex_to_rgb(h) for h in hx], dtype=np.float64))
+    paper_e = (np.array([cats[i] in PAPER_CATS for i in ri])) & (lab_e[:, 0] >= PAPER_L) & (np.hypot(lab_e[:, 1], lab_e[:, 2]) <= PAPER_C)
+    keep_w = np.where(paper_e, 0.0, sh)
+    tot = np.bincount(ri, weights=keep_w, minlength=len(rows))
+    sh_i = np.where(tot[ri] > 0.05, keep_w / np.maximum(tot[ri], 1e-9), sh)   # an object that is >95% paper keeps its palette
+    M = share_matrix(len(rows), ri, ci, sh_i, NC)
     P = (M >= PRESENT)                                          # present?
     Lr = np.array([r["L"] for r in rows]); Cr = np.array([r["C"] for r in rows])
 
@@ -133,7 +145,7 @@ def main():
 
     allmask = np.ones(len(rows), dtype=bool)
     design_share = balanced(allmask)                            # (NC,) balanced area share
-    raw_share = M.mean(0)
+    raw_share = M_all.mean(0)
     dec_n = {d: int((decs == d).sum()) for d in DECADES}
     dec_share = {d: balanced(decs == d) for d in DECADES if dec_n[d] >= MIN_CELL}
     cat_share = {c: M[cats == c].mean(0) for c in bal_cats}
@@ -543,6 +555,7 @@ def main():
                         "on posters, stamps, magazine and book covers and advertisements from Wikimedia Commons, the Rijksmuseum, the Art Institute "
                         "of Chicago and the National Postal Museum; the n per cell is in the matrix.",
                         "Cooper Hewitt's Hewitt-family holdings make wallpaper and textiles of 1800-1919 the deepest cells.",
+                        "On posters and printed graphics the paper tone (a light, nearly neutral palette color) is left out of every share and the rest renormalized; `raw` on a color keeps it.",
                         "Painting comparison uses the public-domain painting corpus (data/corpus), which thins out after 1900.",
                         "Designer attribution is as catalogued; 'attributed to' is kept, 'workshop of' and 'after' are dropped."])
     (OUT / "index.json").write_text(json.dumps(idx, ensure_ascii=False, separators=(",", ":")))

@@ -58,4 +58,24 @@ Source: **Wikidata** (CC0), plus the Wikimedia Commons flag files for rendering.
 
 ## 6. Findings
 
-(Filled from the final build.)
+Final build: **10,577 design objects**, 619 of the app's colors appear in at least 5 of them. Sources: Cooper Hewitt 4,270; Art Institute of Chicago 1,938; Wikimedia Commons 1,837; Rijksmuseum 980; Cleveland 880; National Postal Museum 548; the Met 124 (thin, see section 1). By category: graphic and print 1,854, textiles 1,620, posters and ads 1,267, product design 1,187, ceramics 1,178, stamps 943, costume 930, wallpaper 766, glass 646, furniture 186. By decade: 1800s 463 ... 1890s 759, 1900s 1,144, 1910s 797, 1920s 535, 1930s 389, 1940s 385, 1950s 321, 1960s 285, 1970s 279. About 4,270 objects are flagged commercial (advertising, posters, packaging and covers, stamps, product design). Not reached: the Commons fetch was capped (about 2,200 of 2,800 selected images; the rest thin the 1930-1979 poster, cover and ad cells, which hold 100-180 each), and the Rijksmuseum fashion plates, ex libris and big ceramics sets were left out.
+
+**The question: when do the vivid modern colors reach design?** "Vivid" = a palette color of CIELAB chroma 60 or more. Share of design area in vivid colors, category-balanced, with commercial design alone and the paintings of the corpus (n per decade is in `data/design/vivid.json`):
+
+| Decade | Design (n) | Commercial only (n) | Paintings (n) |
+|---|---|---|---|
+| 1800s-1890s | 0.2-0.8% (460-800 each) | under 1% (75-260) | 0.05-1.4% (440-1,200) |
+| 1900s | 0.6% (1,144) | 1.6% (477) | 0.3% (754) |
+| 1920s | 1.2% (535) | 2.3% (402) | 0.4% (214) |
+| 1940s | 2.5% (385) | 2.7% (349) | 0.5% (28, too few) |
+| 1960s | 5.4% (285) | 6.0% (283) | none |
+| 1970s | 8.5% (279) | 8.6% (272) | none |
+
+- Vivid color is a **20th-century commercial story, and it builds slowly**: roughly flat under 1% until 1900, a first step in commercial print (posters, stamps, labels) in the 1900s, about 2% by the 1920s, then 5-9% of the area of 1960s-70s posters, covers and stamps. Objects with at least 10% of their area in vivid colors: 1% in the 1800s, 2.6% in the 1900s, 10.8% in the 1930s, 22.9% in the 1970s (n above).
+- **Caveat that matters:** the late decades are posters, stamps, covers and ads (what is open), not plastics, packaging or neon (in copyright, so absent). So the curve shows commercial print, and it is probably a floor for the real world of products and signs. The 1930s-1970s cells are 280-390 objects each, small next to the 1800s-1900s.
+- **Named vivid colors** (area of at least 5% in an object, n is the number of such objects): Magenta first appears 1826 and 1887 (3 objects, probably a dyed textile and a print) and then 1944; Lime only in 1967 (n=1); Vermilion from 1900 (n=32, median 1952); Orange 1845 then mostly from the 1920s (n=12, median 1954); Turquoise 1954 (n=2); Cerise 1966 (n=1). Electric Blue, Hot Pink and Chartreuse are not in any object. These are single-digit counts: say "first seen in our archive", never "first used".
+- **286 of the 1,000 named colors never reach 1% of any of the 23,306 dated paintings; 64 of them reach 5% of at least 3 design objects**, nearly all earlier tints and dyes of textiles and prints (Royal plum, Indigo, Merlot, Baby pink), not neon. The modern neon colors are the ones missing from both.
+- Commercial design is over-represented in light warm greys and silvers (Greige 2.7x, Warm silver 2.7x, Biscuit 2.3x versus other design), which is paper, tin and card, not vividness. Posters and advertisements are the most saturated kind of object (mean chroma 20.4, n=1,267); glass the most muted (10.9, n=646).
+- Paper tone is left out of poster and graphic shares (section 3); stamps keep theirs, so "platinum" (a pale grey) tops 1930-69 stamps (4.8%, n=236).
+- Arts and Crafts (5 makers, n=38), Art Nouveau (13 makers, n=82) have palettes in `superlatives.json`; Bauhaus and Art Deco have n=1 each (in copyright), so there is no "most Bauhaus color" and the app must not claim one.
+- Flags (Wikidata, 197 national flags): the most common colors by nearest name are White (132 flags), Smoky Black (43), Lava (41), Gold (34), Lipstick Red (22). 1,303 notable parties with their own hex and 59 organizations with a named shade are in `graph-facts.json`.

@@ -24,7 +24,9 @@ from . import common
 API = "https://commons.wikimedia.org/w/api.php"
 INFO = dict(gap=0.7, workers=3, name="Wikimedia Commons (posters and stamps by year)", api=API,
             license="Public domain / CC0 files only (per-file license read from Commons)")
-YEARS = range(1850, 1980)
+import os
+_y = os.environ.get("COMMONS_YEARS", "1850-1979").split("-")
+YEARS = range(int(_y[0]), int(_y[1]) + 1)   # env COMMONS_YEARS=1924-1967 runs a slice; cached years are not asked again
 PER_CAT = 100
 SEEDS = [("poster", "{y} posters"), ("stamps", "{y} stamps"), ("stamps", "{y} postage stamps"),
          ("cover", "{y} magazine covers"), ("cover", "{y} book covers"),
@@ -130,7 +132,9 @@ def meta(C, resume=False):
     d.mkdir(parents=True, exist_ok=True)
     cache = d / "cats.json"
     done = json.loads(cache.read_text()) if resume and cache.exists() else {}
-    lock, rows, n = threading.Lock(), {}, [0]
+    old = d / "meta.json"
+    rows = {r["title"]: r for r in json.loads(old.read_text())["rows"]} if resume and old.exists() else {}
+    lock, n = threading.Lock(), [0]
 
     def job(y):
         r = one_year(C, y, done, lock)

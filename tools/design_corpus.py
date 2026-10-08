@@ -74,8 +74,9 @@ CAT_NAME = {"poster": "Posters and advertisements", "graphic": "Graphic design a
             "product": "Product and industrial design", "costume": "Costume, fashion and jewelry", "stamps": "Postage stamps"}
 OBJECT_CATS = {"ceramics", "glass", "furniture", "product", "costume"}   # photographed as 3-D objects on a backdrop
 YEAR_MIN, YEAR_MAX = 1800, 1979
-CELL_CAP, SRC_CELL_CAP, MAKER_CAP = 140, 60, 20
-SRC_SPEC = {"aicd": 1.0}
+CELL_CAP, SRC_CELL_CAP, MAKER_CAP = 180, 60, 20
+CAT_SRC_CAP = {("commonsd", "stamps"): 50}   # Commons has thousands of stamps; the Postal Museum already covers them
+SRC_CAP = {"commonsd": 120, "rijksd": 100, "npmd": 80}   # the sources for 1900-1979 and for commercial work get a larger share
 
 
 def decade(y):
@@ -128,7 +129,7 @@ def cmd_select(srcs=None):
         for r in rows:
             cell = (r["cat"], decade(r["y"]))
             mk = (r["cat"], (r["a"] or "").lower())
-            if cells[cell] >= SRC_CELL_CAP or (r["a"] and makers[mk] >= MAKER_CAP):
+            if cells[cell] >= CAT_SRC_CAP.get((s, r["cat"]), SRC_CAP.get(s, SRC_CELL_CAP)) or (r["a"] and makers[mk] >= MAKER_CAP):
                 continue
             cells[cell] += 1
             if r["a"]:
