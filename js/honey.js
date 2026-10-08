@@ -421,7 +421,7 @@ function honeyStudyMarks(ctx, drawn, marks, t) {
     ctx.beginPath();
     if (m.kind === "pulse") {
       const k = .5 + .5 * Math.sin(age / 1000 * Math.PI * 2 / 1.8);
-      ctx.arc(b.x, b.y, r + 3 + 3 * k, 0, 6.2832); ctx.lineWidth = 2.2; ctx.strokeStyle = `rgba(239,235,227,${.55 + .4 * k})`; ctx.stroke();
+      ctx.arc(b.x, b.y, r + 3 + 3 * k, 0, 6.2832); ctx.lineWidth = 3; ctx.strokeStyle = `rgba(239,235,227,${.55 + .4 * k})`; ctx.stroke();
     } else if (m.kind === "right") {
       const u = Math.min(1, age / 900), e = 1 - Math.pow(1 - u, 3);
       ctx.arc(b.x, b.y, r + 2 + 10 * e, 0, 6.2832); ctx.lineWidth = 3 * (1 - u) + .5; ctx.strokeStyle = `rgba(154,212,174,${.95 * (1 - u)})`; ctx.stroke();
@@ -1149,6 +1149,8 @@ function honeycomb(host, opts = {}) {
       spring = { t0: performance.now(), X: best, A, B: [w * A[0], w * A[1]], w }; phase = "spring"; glided = null; kick();
       return true;
     },
+    // ease the zoom about the middle without cancelling a glide in flight (ctrl.zoom would drop the spring)
+    studyZoom(z) { if (!lay || lay.globe) return; zAnim = { to: clamp(z, ZMIN, ZMAX), sx: W / 2, sy: vcy() }; kick(); },
     // the lattice itself, for neighbors and paths: every point (an item can sit at two), and how the plane repeats
     studyPoints() {
       if (!lay || lay.globe) return null;

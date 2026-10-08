@@ -65,7 +65,10 @@
 .ms-fog{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:16px;padding-top:12px;border-top:1px solid var(--rule)}
 .ms-fog b{display:block;font:500 14px/1.2 var(--sans);color:var(--ink)}
 .ms-fog small{display:block;font-size:12.5px;line-height:1.35;color:var(--soft);margin-top:2px}
-.ms-fog input{flex:none;width:44px;height:26px;accent-color:var(--good)}
+.ms-fog input{flex:none;-webkit-appearance:none;appearance:none;position:relative;width:46px;height:28px;margin:0;border-radius:14px;background:var(--surface-3);transition:background .25s var(--ease);cursor:pointer}
+.ms-fog input::after{content:"";position:absolute;left:3px;top:3px;width:22px;height:22px;border-radius:50%;background:var(--ink);transition:transform .3s var(--spring)}
+.ms-fog input:checked{background:var(--good)}
+.ms-fog input:checked::after{transform:translateX(18px);background:#fff}
 .ms-line{font-size:14.5px;line-height:1.45;color:var(--soft);margin:10px 0 0;text-wrap:pretty}
 .ms-warn{color:var(--ink)}
 .ms-good{color:var(--good)}

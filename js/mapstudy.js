@@ -504,7 +504,7 @@ function msOpen(o = {}) {
     const t = P.t; P.answered = true; M.seenFind = 1;
     const nb = P.breath >= 3 ? graph().get(msLow(t.n)) : null;
     const res = x ? msGrade(x, t, nb, P.breath) : "wrong";
-    record(t, res, x ? "pick" : null, x && res !== "right" ? x : null);
+    record(t, res, "pick", x && res !== "right" ? x : null);   // "Show me" is a miss, as in Practice
     if (res === "right") P.right++; else if (res === "close") P.close++;
     const lift = streakAfter(res === "right");
     reveal.add(msLow(t.n)); if (x) reveal.add(msLow(x.n));
@@ -537,7 +537,7 @@ function msOpen(o = {}) {
     const t = P.t; P.answered = true;
     const res = o && msLow(o.n) === msLow(t.n) ? "right" : close ? "close" : "wrong";
     const said = o && res !== "right" && o.h ? o : null;
-    record(t, res, o ? by : null, said);
+    record(t, res, by, said);
     if (res === "right") P.right++;
     const lift = streakAfter(res === "right");
     reveal.add(msLow(t.n)); if (said) reveal.add(msLow(said.n));
@@ -572,7 +572,7 @@ function msOpen(o = {}) {
     if (P.board) { P.board = null; mapUpdate(mapItems); }
     P.list.forEach(it => reveal.add(msLow(it.n)));
     ctrl.study({ hit: null, label: labelFn, marks: P.list.map(it => ({ n: it.n, kind: (P.first.get(msLow(it.n)) || {}).res === "right" ? "right" : "true" })) });
-    ctrl.zoom(.75);
+    ctrl.studyZoom(.75);
     setAsk(`<small>${spec.mode === "find" ? "Find it" : "Name it"} · ${esc(msLevelLabel(spec.level))}</small><b>${r === n ? "Every one" : `${r} of ${n}`}</b>`);
     setProg("");
     P.kind = "done";
@@ -625,7 +625,13 @@ function msOpen(o = {}) {
     if (!P.region.has(k)) { buzz(4); say(`That one's outside the ring. ${P.list.length - P.done.size} left inside.`); return; }
     if (P.done.has(k)) { buzz(4); say(`<b>${esc(x.n)}</b>, already named.`); return; }
     P.cur = mapItems.find(it => msLow(it.n) === k) || x; P.tq = performance.now(); buzz(6); hoodPaint();
-    const opts = P.breath <= 1 ? msShuffle(P.list.filter(it => !P.done.has(msLow(it.n)))) : null;
+    // the names still to place, topped up with same-family neighbors so the last one is never a give-away
+    let opts = null;
+    if (P.breath <= 1) {
+      const left = P.list.filter(it => !P.done.has(msLow(it.n))), want = P.breath === 0 ? 4 : 6;
+      const extra = left.length < want ? msDistractors(P.cur, msCore().slice(0, 614), want - left.length).filter(d => !left.some(l => msLow(l.n) === msLow(d.n))) : [];
+      opts = msShuffle(left.concat(extra)).slice(0, Math.max(want, left.length));
+    }
     const box = panel.querySelector(".ms-hood-opts");
     say(opts ? "Which name is it?" : "Type or say its name.");
     if (opts) {
@@ -659,7 +665,7 @@ function msOpen(o = {}) {
     // everything nearby gets its name too: the neighborhood in context
     const ring2 = msHood(graph(), P.center.n, P.list.length + 12); ring2.forEach(k => reveal.add(k));
     ctrl.study({ hit: null, label: labelFn, marks: P.list.map(it => ({ n: it.n, kind: P.done.get(msLow(it.n)) === "right" ? "right" : "true" })) });
-    ctrl.zoom(.95);
+    ctrl.studyZoom(.95);
     P.kind = "done";
     setAsk(`<small>Neighborhood</small><b>${r} of ${n} named</b>`); setProg("");
     const miss = P.list.filter(it => P.done.get(msLow(it.n)) !== "right");
@@ -769,8 +775,9 @@ function msOpen(o = {}) {
     const g = graph(), nb = [...(g.get(msLow(t.n)) || [])].map(k => mapItems.find(it => msLow(it.n) === k)).filter(Boolean);
     const anchors = nb.filter(x => P.known.has(msLow(x.n))).concat(nb.filter(x => !P.known.has(msLow(x.n)))).slice(0, 2);
     // your map so far keeps its names; today's new one shows its own
-    reveal.clear(); P.known.forEach(k => reveal.add(k)); P.list.slice(0, P.i + 1).forEach(it => reveal.add(msLow(it.n)));
-    ctrl.study({ label: labelFn, marks: P.list.slice(0, P.i).map(it => ({ n: it.n, kind: "start" })).concat([{ n: t.n, kind: "pulse" }]) });
+    // (the two neighbors it's described against show their names and a quiet ring, so the words point somewhere)
+    reveal.clear(); P.known.forEach(k => reveal.add(k)); P.list.slice(0, P.i + 1).forEach(it => reveal.add(msLow(it.n))); anchors.forEach(a => reveal.add(msLow(a.n)));
+    ctrl.study({ label: labelFn, marks: P.list.slice(0, P.i).map(it => ({ n: it.n, kind: "start" })).concat(anchors.map(a => ({ n: a.n, kind: "ring" })), [{ n: t.n, kind: "pulse" }]) });
     ctrl.studyFlyTo(t, 1.35);
     setAsk(`<small>New on your map · ${P.i + 1} of ${P.list.length}</small><b>${esc(t.n)}</b>`);
     setProg(`<span class="ms-dots">${P.list.map((x, i) => `<i class="${i < P.i ? "ok" : i === P.i ? "now" : ""}"></i>`).join("")}</span>`);
@@ -801,7 +808,7 @@ function msOpen(o = {}) {
     reveal.clear(); P.known.forEach(k => reveal.add(k));
     P.list.forEach((it, i) => { if (i < P.i) reveal.add(msLow(it.n)); });
     ctrl.study({ label: labelFn, marks: [] });
-    if (P.i === 0) ctrl.zoom(.85);
+    if (P.i === 0) ctrl.studyZoom(.85);
     setAsk(`<small>Find, from memory</small><b>${esc(t.n)}</b>`);
     setProg(`<span class="ms-dots">${P.list.map((x, i) => { const f = P.first.get(msLow(x.n)); return `<i class="${i === P.i ? "now" : f ? f.res === "right" ? "ok" : "no" : ""}"></i>`; }).join("")}</span>`);
     panel.innerHTML = `<div class="ms-play"><p class="ms-say in">Your named colors are showing. Today's five aren't.</p><div class="ms-acts"><button class="btn ghost" data-skip>Show me</button></div></div>`;
@@ -815,7 +822,7 @@ function msOpen(o = {}) {
     const r = P.right, n = P.list.length, total = msKnown().size;
     P.list.forEach(it => reveal.add(msLow(it.n)));
     ctrl.study({ hit: null, label: labelFn, marks: P.list.map(it => ({ n: it.n, kind: (P.first.get(msLow(it.n)) || {}).res === "right" ? "right" : "true" })) });
-    ctrl.zoom(.7);
+    ctrl.studyZoom(.7);
     P.kind = "done";
     setAsk(`<small>Light up 5</small><b>${n} lit today</b>`); setProg("");
     panel.innerHTML = `<div class="ms-end">
