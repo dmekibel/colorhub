@@ -1641,6 +1641,24 @@ scenario("sets", "a pair page: facts and paintings and Add a color makes a trio"
   await t.click(".sp-page .sp-plus ~ button, .sp-names [data-swatch]", { force: true, wait: 800 });
   await t.waitFor(".cp-page .cp-hero-foot h1", 12000, "a color page from the trio");
 });
+scenario("sets", "double-tap the top swatches keeps the palette (a heart burst); a single tap still opens that color", async t => {
+  SP.placed();
+  await t.open("#/pair/4f6b3a+c2412d", { settle: 800, keepState: true });
+  await t.waitFor(".sp-page .sp-plate", 12000, "the pair page");
+  t.ev("S.palettes = []; save()");
+  const plate = t.$(".sp-pair .sp-plate");
+  await t.click(plate, { wait: 60 });
+  await t.click(plate, { wait: 300 });
+  t.expect(!t.$(".sp-page.cp-page") && t.$(".sp-page .sp-plate"), "a double tap must not navigate away");
+  t.expect(t.ev("S.palettes") && t.ev("S.palettes").length === 1, "the double tap didn't keep the palette");
+  t.expect(t.ev("S.palettes[0].cols.length") === 2, "the kept palette doesn't hold both colors");
+  t.expect(t.$(".sp-heart"), "no heart burst on the double tap");
+  // a single tap (no second tap follows) still opens that color's page, just after the double-tap wait
+  await t.open("#/pair/4f6b3a+c2412d", { settle: 800, keepState: true });
+  await t.waitFor(".sp-page .sp-plate", 12000, "the pair page again");
+  await t.click(t.$(".sp-pair .sp-plate"), { wait: 500 });
+  await t.waitFor(".cp-page .cp-hero-foot h1", 8000, "a single tap on a plate still opens its color page");
+});
 scenario("sets", "a set page: pairs inside and Improve with Apply and Undo", async t => {
   SP.placed();
   await t.open("#/set/2b2a4c-b85c38-e0c097-6f8f72", { settle: 800, keepState: true });
