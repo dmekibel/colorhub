@@ -39,8 +39,9 @@ const MS_MODES = [
   ["wander", "Wander", "No score. Every name showing: tap to hear and compare."],
 ];
 const MS_FAMS = ["Reds", "Pinks", "Oranges", "Browns", "Yellows", "Greens", "Blues", "Purples", "Greys"];
+// three honeycomb cells, one of them marked: "find this one on the map". Never the single hexagon, which is the way back to the map (core.js HOME_GLYPH)
+const MS_ICON = sv('<path d="M7.9 4.2l3.64 2.1v4.2l-3.64 2.1-3.64-2.1V6.3z"/><path d="M16.1 4.2l3.64 2.1v4.2l-3.64 2.1-3.64-2.1V6.3z"/><path d="M12 11.3l3.64 2.1v4.2L12 19.7l-3.64-2.1v-4.2z"/><circle cx="12" cy="15.5" r="1.3" fill="currentColor" stroke="none"/>', 24, 1.5);
 const MS_HOOD = [4, 5, 6, 7, 8, 10, 12];              // neighborhood size by help step
-const MS_ICON = sv('<path d="M12 3.5l7.4 4.25v8.5L12 20.5l-7.4-4.25v-8.5z"/><circle cx="12" cy="12" r="2.6"/>', 24, 1.6);
 
 // ======================================================================
 // Pure parts (no DOM). Unit-tested by tools/mapstudy_test.js.

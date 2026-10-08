@@ -139,15 +139,7 @@ scenario("home", "View sheet: Look tab, styles and sliders", async t => {
     await t.click(s, { wait: 300 });
     t.expect(s.classList.contains("on"), `style chip "${t.text(s)}" did not turn on`);
   }
-  const sliders = t.$$(".hm-look-sliders input[type=range]");
-  t.expect(sliders.length === 4, `${sliders.length} fine-tune sliders instead of 4`);
-  for (const inp of sliders) {
-    const out = inp.parentElement.querySelector("b"), was = out.textContent, mid = (+inp.min + +inp.max) / 2;
-    inp.value = String(+inp.value === mid ? +inp.max : mid);
-    inp.dispatchEvent(new t.w.Event("input", { bubbles: true }));
-    await t.sleep(150);
-    t.expect(out.textContent !== was, `slider "${t.text(inp.parentElement.firstElementChild)}" did not update its readout`);
-  }
+  t.expect(!t.$(".hm-look-sliders, [data-lab-open]"), "the developer sliders or lab link are back in the View sheet");
   await t.click('.hm-chooser [data-tab="show"]');
   t.expect(!t.$('.hm-chooser [data-panel="show"]').hidden, "back to the Show tab did not show it");
   t.expect(H.num(t.text("[data-count]")) === n0, "looking at styles changed the item count");
@@ -1248,6 +1240,18 @@ scenario("trail", "a 6-deep chain (color, painting, painter, painting, color, ge
   await t.click(TRL.screenBack(t), { wait: 700 });
   await t.waitFor(".hm canvas", 10000, "the map after the trail ran out");
   t.expect(!t.$(".room-sheet"), "the trail ran out into a room instead of the map");
+});
+
+scenario("trail", "a page's colors lit on the map keep the trail: the pill's ‹ returns to the page", async t => {
+  await TRL.open(t, "#/color/cobalt");
+  const h0 = TRL.hash(t), d0 = TRL.depth(t);
+  t.ev("csOnMap(colorSet({ kind: 'color', id: 'cobalt', title: 'Cobalt and kin', colors: [{ h: '#0047AB' }, { h: '#2A52BE' }, { h: '#1F3A93' }] }))");
+  await t.waitFor(".hm canvas", 12000, "the map with the set lit");
+  const back = await t.waitFor(".cs-hl-back", 6000, "the lit set's ‹ back to its page");
+  t.expect(TRL.depth(t) === d0, `the map wiped the trail: ${TRL.depth(t)} pages, was ${d0}`);
+  await t.click(back, { wait: 800 });
+  await t.waitFor(() => TRL.hash(t) === h0 && !t.$(".screen.waiting"), 12000, `back on ${h0} (on ${TRL.hash(t)})`);
+  t.expect(!t.$(".cs-hl-pill"), "the lit set's pill is still up after going back");
 });
 
 scenario("trail", "long-press ‹ shows the trail; a row jumps there; the map glyph exits with the map's pan and zoom kept", async t => {
