@@ -5,6 +5,7 @@
 // Screenshot mode for design review: index.html#shot=<screen> renders one screen with sample progress
 // (in memory only; nothing is saved). Used by tools/shots.sh. It waits for the whole wiki first.
 const SHOT = location.hash.startsWith("#shot=") ? decodeURIComponent(location.hash.slice(6)) : null;
+routeWrapAll();   // js/router.js: wrap the screens of scripts that loaded after it (art wiki, hubs, looks, fashion)
 if (SHOT) loadWiki().then(() => shot(SHOT));
 else {
   ROUTE_REPLACE = true;   // the first screen takes over the page's own history entry

@@ -771,3 +771,12 @@ scenario("paintings", "a color page's In paintings section: presets re-run the q
   await t.click("[data-pt-tune]", { force: true, wait: 400 });
   t.expect(t.$$("[data-pt-tuner] .pt-range").length === 2, "Fine-tune doesn't open two sliders");
 });
+
+// ================================================================== DIRECT LOADS (a typed or shared address on a fresh load)
+scenario("pages", "a fresh load of #/painter/<slug> opens that painter, not Home", async t => {
+  await t.open("#/painter/abraham-bloemaert", { settle: 600 });
+  await t.waitFor(".aw-page, [data-awpainter-page], .screen.aw", 15000, "the painter page on a direct load");
+  t.expect(/Bloemaert/.test(t.$("#app").innerText), "the painter's page doesn't name the painter");
+  t.expect(!t.$(".hm canvas"), "a direct painter address landed on Home");
+  t.expect(t.w.location.hash === "#/painter/abraham-bloemaert", `the address changed to ${t.w.location.hash}`);
+});

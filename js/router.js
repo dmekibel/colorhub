@@ -72,12 +72,13 @@ const routed = (title, path) => path ? { path, title } : null;
 const nodeRouted = (more = "") => n => n && n.id ? routed(n.title, nodeRoute(n) + more) : null;
 function routeWrap(host, key, toRoute) {
   const orig = host[key];
-  if (typeof orig !== "function") return;
+  if (typeof orig !== "function" || orig.__routed) return;   // not defined yet (a later script), or already wrapped
   host[key] = function (...a) {
     let r = null; try { r = toRoute(...a); } catch (e) {}
     if (r) ROUTE_NEXT = r;
     try { return orig.apply(this, a); } finally { if (r) ROUTE_NEXT = null; }
   };
+  host[key].__routed = true;
 }
 // Screens that need the wiki wait for it (loader.js); the placeholder already carries the address.
 const WIKI_SCREENS = [["exploreHome", { tab: "explore" }], ["closeup"], ["colorPage"], ["wikiPage"], ["paintingPage"], ["storyPlayer"], ["daily"],
@@ -118,7 +119,10 @@ const ROUTED = [["colorPage", (n, tapped) => n && n.id ? routed(n.title, nodeRou
   ["ooMap", () => routed("Odd one out", "odd")], ["ooEyePage", () => routed("Your eye", "odd/eye")],   // js/games/oo-ui.js
   ["ooWhose", () => routed("Whose palette?", "odd/whose")], ["ooAcross", () => routed("Across the line", "line")], ["ooPairs", () => routed("Painters' pairs", "odd/pairs")],
   ["arHubPage", id => id ? routed(arPretty(id), "hub/" + id) : null], ["arWhichPage", name => name ? routed(arPretty(name), "which/" + name) : null]];   // js/article.js: #/hub/<id>, #/which/<name>
-ROUTED.forEach(([name, f]) => routeWrap(window, name, f));
+// Scripts loaded after router.js (artwiki.js, article.js, looks.js, fashion.js...) aren't defined yet when this runs, so boot.js
+// calls routeWrapAll() again before the first address opens (without it a typed #/painter/<slug> lost its address).
+function routeWrapAll() { ROUTED.forEach(([name, f]) => routeWrap(window, name, f)); }
+routeWrapAll();
 routeWrap(LAB, "harmony", () => routed("Harmony", "lab/harmony"));
 routeWrap(LAB, "contrast", () => routed("Albers", "lab/contrast"));
 routeWrap(LAB, "namer", () => routed("Name any color", "studio/namer"));   // js/namer.js
