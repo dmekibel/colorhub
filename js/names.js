@@ -144,7 +144,7 @@ function namePage(entry, push = true, tapped) {
     ${notes.length ? `<p class="fine np-jp">${jpNoteLine(notes)}</p>` : ""}
     ${rpPageBody(entry, name, hex, heroHex, famC, `<section class="gl-in" data-npgal></section>`)}
     ${nearCore.length ? `<div class="sec-head"><b>Nearest names</b><span>of about 1,000</span></div>
-      <div class="lk-list">${nearCore.map(x => `<button class="lk-row" data-np-near="${esc(x.n)}" data-h="${x.h}"><i style="--c:${x.h}" data-morph-src></i><b>${esc(x.n)}</b><span>${pctMatch(x.de)} · ${esc(lookDiff({ n: name, h: hex }, x))}${typeof rcHasArticle === "function" && rcHasArticle(x.n) ? " · has its own story" : ""}</span></button>`).join("")}</div>` : ""}
+      <div class="lk-list">${nearCore.map(x => `<button class="lk-row" data-np-near="${esc(x.n)}" data-h="${x.h}"><i class="lk-split" style="--c:${x.h};--c2:${tapped || hex}" data-morph-src></i><b>${esc(x.n)}</b><span>${pctMatch(x.de)} · ${esc(lookDiff({ n: name, h: hex }, x))}${typeof rcHasArticle === "function" && rcHasArticle(x.n) ? " · has its own story" : ""}</span></button>`).join("")}</div>` : ""}
     ${entry.src && entry.src.length && typeof rcPassportHTML === "function" && rcPassportHTML(entry.src) ? `<div class="sec-head"><b>Passport</b><span>naming systems that list it</span></div>${rcPassportHTML(entry.src)}` : ""}
     <div class="sec-head"><b>Codes</b></div>
     <div class="cp-codes">${codeRows.map(([k, v]) => `<button class="cp-code-row" data-copy="${esc(v)}"><span>${esc(k)}</span><b class="mono">${esc(v)}</b></button>`).join("")}</div>

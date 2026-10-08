@@ -517,6 +517,77 @@ function glRange(el, val, ramp, onInput) {
   place();
 }
 
+// ---------- "Stands out" first (design/IMPROVE-2026-10-08/PLAN.md, Wave 1a Lane A) ----------
+// The area palette of an old painting is varnish: "Dark black 36%, mahogany 31%…". The page now leads with the
+// colors that make the painting itself: score = chroma x (1 - this painter's mean share of the hue) x the color's
+// distance from the painting's mean, with a little weight for size and a penalty for repeating a pick. Half the
+// slots go to those; the rest fill by area so the ground is still there. Each pick's share is then the area of
+// every pool color nearest to it, so the percentages stay honest ("of the canvas", as photographed).
+const glHueBin = (C, H) => C < 8 ? 12 : Math.floor(H / 30) % 12;   // 12 hue bins of 30°, plus the neutrals
+let GL_HUE_ALL = null;
+const GL_HUE_PAINTER = new Map();     // painter slug -> mean hue-bin shares over their paintings (null while loading)
+function glHueShares(list) {
+  const acc = new Array(13).fill(0); let n = 0;
+  for (const i of list) { for (let j = 0; j < 6; j++) { const k = i * 6 + j; acc[glHueBin(GAL.ch[k], GAL.hu[k])] += GAL.sh[k]; } n++; }
+  return acc.map(v => v / (n || 1));
+}
+const glHueAll = () => GL_HUE_ALL || (GL_HUE_ALL = glHueShares(Array.from({ length: GAL.n }, (_, i) => i)));
+// this painter's hue habits (data/artists/p/<slug>.json lists their paintings), loaded through js/artwiki.js when it's there
+function glPainterHue(name) {
+  if (!name || typeof awLoad !== "function" || typeof awPainterLoad !== "function") return Promise.resolve(null);
+  const slug = routeSlug(name);
+  if (GL_HUE_PAINTER.has(slug)) return Promise.resolve(GL_HUE_PAINTER.get(slug));
+  return awLoad().then(() => typeof awHasPainter === "function" && awHasPainter(slug) ? awPainterLoad(slug) : null)
+    .then(x => { const ix = x && x.P && x.P.ix; const h = ix && ix.length >= 3 ? glHueShares(ix.filter(i => i >= 0 && i < GAL.n)) : null; GL_HUE_PAINTER.set(slug, h); return h; })
+    .catch(() => null);
+}
+function glStandOut(pool, k, prior) {
+  if (!pool.length) return [];
+  const P = pool.map(p => { const l = lab(p.h), c = lch(p.h); return { h: p.h, share: p.share, lab: l, L: c[0], C: c[1], bin: glHueBin(c[1], c[2]) }; });
+  const tot = P.reduce((a, p) => a + p.share, 0) || 1, m = [0, 1, 2].map(x => P.reduce((a, p) => a + p.share * p.lab[x], 0) / tot);
+  const pr = prior || glHueAll(), picked = [], nOut = Math.min(Math.ceil(k / 2), k);
+  const nearest = p => picked.length ? Math.min(...picked.map(q => de2000(q.lab, p.lab))) : 99;
+  const left = P.filter(p => p.L >= 20 || p.C >= 25);   // never a near-black as a "stands out" pick
+  while (picked.length < nOut && left.length) {
+    let bi = -1, bs = 0;
+    left.forEach((p, j) => {
+      const near = nearest(p); if (near < 10) return;
+      const away = Math.hypot(p.lab[0] - m[0], p.lab[1] - m[1], p.lab[2] - m[2]);
+      const s = (p.C + 10) * (1 - Math.min(.9, pr[p.bin])) * away * Math.pow(Math.max(p.share, .001), .2) * Math.min(1, near / 25);
+      if (s > bs) { bs = s; bi = j; }
+    });
+    if (bi < 0) break;
+    picked.push(Object.assign(left.splice(bi, 1)[0], { out: true }));
+  }
+  const rest = P.filter(p => !picked.includes(p)).sort((a, b) => b.share - a.share);
+  for (const minDE of [6, 0]) for (const p of rest) { if (picked.length >= k) break; if (!picked.includes(p) && nearest(p) >= minDE) picked.push(p); }
+  // each pick's area: every pool color goes to its nearest pick
+  const area = picked.map(() => 0);
+  P.forEach(p => { let b = 0, bd = Infinity; picked.forEach((q, j) => { const d = de2000(q.lab, p.lab); if (d < bd) { bd = d; b = j; } }); area[b] += p.share; });
+  return picked.map((p, j) => ({ h: p.h, share: area[j] / tot, out: !!p.out }));
+}
+// the chip's name: the nearest Learn-layer name (never "between X and Y", which moves to the subline), and no
+// modifier that says nothing ("Dark black", "Pale white")
+function glName(h) {
+  const nm = nameOf(h);
+  if (nm.between) return { t: nm.n, sub: `between ${nm.between.a.toLowerCase()} and ${nm.between.b.toLowerCase()}`, n: nm.n };
+  let t = nm.text;
+  if (nm.mod) { const L = lch(nm.h)[0]; if ((L < 22 && /^(dark|deep|pale|light)$/.test(nm.mod)) || (L > 90 && /^(pale|light|dark|deep)$/.test(nm.mod))) t = nm.n; }
+  return { t, sub: "", n: nm.n };
+}
+const glPctTxt = s => s < .005 ? "under 1%" : Math.round(s * 100) + "%";
+// js/thingquiz.js + css/thingquiz.css: listed in index.html once the conductor adds the tags; until then (and if a
+// cached index.html lacks them) they load here, once, the moment a painting page opens
+let GL_TQ = null;
+function glQuizLoad() {
+  if (typeof thingQuiz === "function") return Promise.resolve();
+  const v = typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : "";
+  return GL_TQ || (GL_TQ = new Promise((res, rej) => {
+    if (!document.querySelector('link[href^="css/thingquiz.css"]')) { const l = document.createElement("link"); l.rel = "stylesheet"; l.href = "css/thingquiz.css" + v; document.head.appendChild(l); }
+    const s = document.createElement("script"); s.src = "js/thingquiz.js" + v; s.onload = res; s.onerror = () => { GL_TQ = null; rej(new Error("thingquiz")); }; document.head.appendChild(s);
+  }));
+}
+
 // ---------- the lite painting page ----------
 // fromHex: the color the visitor arrived from (a search, a color page's "In paintings", a name page, or the
 // color sheet's "More paintings with this color") — ROADMAP §13 "arrive from a color and see it". Carried in
@@ -536,36 +607,56 @@ function glPage(i, d, fromHex, tol) {
   const G = GAL, src = G.src[G.mus[i]] || { name: "Museum", short: "Museum", credit: "" }, pal6 = glPal(i), yr = glYear(i), ar = G.ar[i];
   const pool = glPoolDecode(d.pl);
   let curK = 6;   // the dynamic-palette control's current size; 6 with a pool shows the same algorithm as 3/12/20
-  const curPal = () => pool.length ? glPoolPick(pool, curK) : pal6;
+  let order = "out";   // "out" = stands out first (the default), "area" = by area
+  let prior = null;    // this painter's hue habits once they load (glPainterHue); the archive's until then
+  const curPal = () => order === "area" ? (pool.length ? glPoolPick(pool, curK) : pal6) : glStandOut(pool.length ? pool : pal6, pool.length ? curK : 6, prior);
   const dom = pal6.reduce((a, b) => b.share > a.share ? b : a).h;
   const el = show(`
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button>${d.rec ? `<a class="glass-pill" href="${esc(d.rec)}" target="_blank" rel="noopener">${GL_ICON_OUT}<span>${esc(src.short)}</span></a>` : ""}</header>
-    <div class="gl-hero${glSmall(d) && !d.hi ? " small" : ""}"><span style="--c:${dom};width:${glSmall(d) && !d.hi ? "min(100%, 300px, calc(66dvh / " + ar.toFixed(3) + "))" : "min(100%, calc(66dvh / " + ar.toFixed(3) + "))"};aspect-ratio:${(1 / ar).toFixed(4)}"><img src="${esc(glBig(d.img))}" alt="${esc(d.t)}${d.a ? " by " + esc(d.a) : ""}"${glCropStyle(i, d, ar)}${d.hi ? ` data-hi="${esc(d.hi)}"` : ""}${glCORS(glBig(d.img))}></span>${glSmall(d) && !d.hi && d.rec ? `<a class="gl-full" href="${esc(d.rec)}" target="_blank" rel="noopener">See it full size at the museum ↗</a>` : ""}</div>
+    <div class="gl-hero gl-full-w"><span style="--c:${dom};width:min(100%, calc(82dvh / ${ar.toFixed(3)}));aspect-ratio:${(1 / ar).toFixed(4)}"><img src="${esc(glBig(d.img))}" alt="${esc(d.t)}${d.a ? " by " + esc(d.a) : ""}"${glCropStyle(i, d, ar)}${d.hi ? ` data-hi="${esc(d.hi)}"` : ""}${glCORS(glBig(d.img))}></span></div>
+    <div class="gl-under"><div class="gl-quiz" data-glquiz></div>${glSmall(d) && !d.hi && d.rec ? `<a class="gl-full" href="${esc(d.rec)}" target="_blank" rel="noopener">Full size at the museum ↗</a>` : ""}</div>
     <p class="eyebrow p-type">Painting${yr ? " · " + yr : ""}</p>
     <h1 class="p-title">${esc(d.t)}</h1>
     <p class="p-dek">${esc([d.a || "Artist unknown", d.co, d.mv].filter(Boolean).join(" · "))}</p>
-    <div class="sec-head gl-pal-h"><b>Computed palette</b><span data-glpaln>6 colors, by area</span></div>
-    ${pool.length ? `<div class="seg gl-sizes" data-glsizes>${GL_SIZES.map(k => `<button class="${k === curK ? "on" : ""}" data-glk="${k}">${k}</button>`).join("")}</div>` : ""}
+    <div class="gl-roles" data-glroles></div>
+    <div class="sec-head gl-pal-h"><b>Its colors</b><span data-glpaln>as photographed</span></div>
+    <div class="gl-ctl"><div class="seg gl-order" data-glorder><button class="on" data-glo="out">Stands out</button><button data-glo="area">By area</button></div>
+    ${pool.length ? `<div class="seg gl-sizes" data-glsizes aria-label="How many colors">${GL_SIZES.map(k => `<button class="${k === curK ? "on" : ""}" data-glk="${k}">${k}</button>`).join("")}</div>` : ""}</div>
     <div class="pt-arrive gl-arrive" data-glarrive hidden></div>
     <div class="palette" data-glswatches></div>
     <div class="pal-names" data-glrows></div>
+    <div class="gl-cov" data-glcov></div>
     <div data-csacts></div>
-    <p class="fine">Computed by ColorHub, not by the museum: colors found in its small photo, each sized by its share of the picture and given the nearest of 1,000 named colors. Screen approximations; old varnish and the photograph shift color.</p>
+    <p class="fine">Computed by ColorHub, not by the museum, from its photograph: "Stands out" leads with the colors that are vivid, rare for this painter and far from the painting's average; "By area" sizes each by its share of the picture. Names are the nearest of about 1,000. Old varnish and the photograph shift color, and screens differ.</p>
     <div data-awan></div>
     ${typeof twSection === "function" ? `<div data-glsim></div>` : `<div class="sec-head gl-sim-h"><b>Similar palettes</b><span>by color, not subject</span></div>
     <div class="gl-rail" data-glsim></div>`}
     <section class="srcs"><h3>Image and data</h3><ul><li>${d.rec ? `<a href="${esc(d.rec)}" target="_blank" rel="noopener">${esc(src.name)}</a>` : esc(src.name)}${src.credit ? ` · ${esc(src.credit)}` : ""}</li><li>Palette and color names computed by ColorHub from the museum's image</li></ul></section>
   `, "article gl-page");
+  const route = "#/gallery/" + i;
+  // "You can name 4 of 6" (js/coverage.js) for the colors on screen, one name each, and "Learn the rest"
+  const drawCov = pal => {
+    const host = el.querySelector("[data-glcov]");
+    if (!host || typeof setCoverage !== "function" || typeof coverageRing !== "function") return;
+    const seen = new Set(), items = [];
+    pal.forEach(p => { const nm = nameOf(p.h); if (nm.n && nm.de < NEAR_DE && !seen.has(nm.n)) { seen.add(nm.n); items.push({ n: nm.n, h: p.h }); } });
+    if (items.length < 2) { host.innerHTML = ""; return; }
+    const cov = setCoverage(items), rest = items.filter(x => { try { return typeof knowState !== "function" || knowState(x) !== "yours"; } catch (e) { return true; } });
+    host.innerHTML = `${coverageRing(cov, { size: 40, stroke: 4 })}<span><b>${esc(typeof covLabel === "function" ? covLabel(cov) : "")}</b><em>${cov.yours === cov.total ? "Every name here is yours." : "Yours once recalled on a later day."}</em></span>${cov.yours && rest.length && typeof prQuick === "function" ? `<button class="gl-cov-go" data-glrest>Learn the rest</button>` : ""}`;
+    const go = host.querySelector("[data-glrest]");
+    if (go) go.onclick = () => prQuick({ items: rest.map(x => x.h), label: d.t, src: "painting", route });
+  };
   // the palette strip + named rows + arrival line, redrawn whenever the slider's size changes
   const drawPalette = () => {
     const pal = curPal();
-    el.querySelector("[data-glpaln]").textContent = `${pal.length} color${pal.length === 1 ? "" : "s"}, by area`;
     const near = fromHex ? glNearestSwatch(pal, fromHex) : null;
-    el.querySelector("[data-glswatches]").innerHTML = pal.map((p, j) => `<button class="pal${near && near.i === j ? " on" : ""}" data-swatch="${p.h}" style="--c:${p.h};flex:${Math.max(p.share, .08).toFixed(3)}" data-ink="${ink(p.h)}"><span>${Math.round(p.share * 100)}%</span></button>`).join("");
+    el.querySelector("[data-glswatches]").innerHTML = pal.map((p, j) => `<button class="pal${near && near.i === j ? " on" : ""}${p.out ? " gl-out" : ""}" data-swatch="${p.h}" style="--c:${p.h};flex:${Math.max(p.share, .08).toFixed(3)}" data-ink="${ink(p.h)}"><span>${p.share < .005 ? "<1" : Math.round(p.share * 100)}%</span></button>`).join("");
     el.querySelector("[data-glrows]").innerHTML = pal.map((p, j) => {
-      const nm = nameOf(p.h), fam = typeof familyOf === "function" && familyOf(p.h);
-      return `<button class="pal-name${near && near.i === j ? " on" : ""}" data-swatch="${p.h}"><i style="--c:${p.h}"></i><b>${esc(nm.text)}</b><span>${fam ? esc(fam.head.n) + " family · " : ""}${Math.round(p.share * 100)}%</span><em class="mono">${p.h}</em></button>`;
+      const nm = glName(p.h), fam = !nm.sub && !p.out && typeof familyOf === "function" && familyOf(p.h);
+      const sub = [p.out ? "Stands out" : nm.sub ? nm.sub.charAt(0).toUpperCase() + nm.sub.slice(1) : fam ? fam.head.n + " family" : "", glPctTxt(p.share)].filter(Boolean).join(" · ");
+      return `<button class="pal-name${near && near.i === j ? " on" : ""}" data-swatch="${p.h}"><i style="--c:${p.h}"></i><b>${esc(nm.t)}</b><span>${esc(p.out && nm.sub ? sub + " · " + nm.sub : sub)}</span><em class="mono">${p.h}</em></button>`;
     }).join("");
+    drawCov(pal);
     const arrive = el.querySelector("[data-glarrive]");
     if (typeof ptArrival === "function") { /* the arriving color is drawn by js/paintingsof.js (L26) */ }
     else if (!fromHex) { arrive.hidden = true; }
@@ -592,6 +683,28 @@ function glPage(i, d, fromHex, tol) {
     el.querySelectorAll("[data-glsizes] button").forEach(x => x.classList.toggle("on", x === b));
     buzz(5); drawPalette();
   };
+  el.querySelector("[data-glorder]").onclick = e => {
+    const b = e.target.closest("[data-glo]"); if (!b || b.dataset.glo === order) return;
+    order = b.dataset.glo;
+    el.querySelectorAll("[data-glorder] button").forEach(x => x.classList.toggle("on", x === b));
+    buzz(5); drawPalette();
+  };
+  // the painter's own hue habits sharpen "stands out" (a camel that's rare for van Dyck), quietly, once they load
+  glPainterHue(d.a).then(h => { if (h && el.isConnected) { prior = h; if (order === "out") drawPalette(); } });
+  // accents, the color you'd miss, and the focal color (data/analysis, the same reading as the Analysis drawer), above the bars
+  if (pool.length >= 6 && typeof awShard === "function") awShard(i).then(rows => {
+    const r = rows && rows[i % 100], host = el.querySelector("[data-glroles]");
+    if (!r || r.id !== d.id || !host || !host.isConnected) return;
+    const roles = [["Accent", (r.acc || []).map(k => pool[k]).find(Boolean), "small and vivid"], ["Easy to miss", (r.hid || []).map(k => pool[k]).find(Boolean), "muted, another family"], ["Focal", pool[r.foc], "stands apart"]].filter(x => x[1]);
+    if (!roles.length) return;
+    host.innerHTML = `<p class="gl-roles-h">Look for</p><div class="gl-roles-row">${roles.map(([t, p, why]) => `<button class="gl-role" data-swatch="${p.h}" aria-label="${esc(t)}: ${esc(glName(p.h).n)}"><i style="--c:${p.h}"></i><span><em>${esc(t)}</em><b>${esc(glName(p.h).n)}</b><small>${esc(why)}</small></span></button>`).join("")}</div>`;
+  }).catch(() => {});
+  // Name its colors (js/thingquiz.js): guess before you're told, one quiet button under the picture, never forced
+  glQuizLoad().then(() => {
+    const host = el.querySelector("[data-glquiz]"); if (!host || !host.isConnected || typeof thingQuiz !== "function") return;
+    thingQuiz(host, { img: () => sampleImg, crop: d.crop, colors: glStandOut(pool.length ? pool : pal6, pool.length ? 12 : 6, prior), pool: pool.length ? pool : pal6,
+      title: d.t, kind: "painting", src: route, learn: null, label: "Name its colors" });
+  }).catch(() => {});
   // swap in the big image when it arrives (SMK's server is slow; the small copy shows meanwhile)
   const hiImg = el.querySelector("img[data-hi]");
   if (hiImg) {
@@ -647,7 +760,15 @@ function glPage(i, d, fromHex, tol) {
   later(() => {
     const rail = el.querySelector("[data-glsim]"); if (!rail || !rail.isConnected) return;
     // "More like this, by…": the metric switch from js/twins.js (overall palette, dominant colors, accents, mood, light, one color, layout)
-    if (typeof twSection === "function") return twSection(rail, pool.length >= 3 ? pool : pal6, { self: i, what: "this painting", title: "More like this, by…", img: () => canSample ? sampleImg : null });
+    // matched on the accents by default, near-blacks (L* < 20) left out: every old painting shares the varnish browns,
+    // so twins by overall palette were five near-identical dark rectangles (IMPROVE-2026-10-08 A15)
+    if (typeof twSection === "function") {
+      const lit = (pool.length >= 3 ? pool : pal6).filter(p => lab(p.h)[0] >= 20);
+      const cols = lit.length >= 3 ? lit : (pool.length >= 3 ? pool : pal6);
+      const ct = cols.reduce((a, p) => a + (p.share || 0), 0) || 1;
+      if (cols.some(p => lch(p.h)[1] >= 25 && (p.share || 0) / ct < .12) && !rail._tw) rail._tw = { metric: "accents" };   // twins.js keeps a preset metric
+      return twSection(rail, cols, { self: i, what: "this painting", title: "More like this, by…", img: () => canSample ? sampleImg : null });
+    }
     rail.innerHTML = glSimilar(i, 5).map(j => glPinHTML(j)).join(""); glFill(rail);
   }, 40);
 }

@@ -185,3 +185,7 @@ function compassOf(hex, selfName) {
   const nearest = cands.reduce((a, b) => !a || b.de < a.de ? b : a, null);
   return { cells, crowd: { near: cands.filter(x => x.de <= COMPASS_CROWD_DE).length, nearest, total: list.length } };
 }
+
+// The widest name list loaded so far (every library name once it lands, the ~1,000 core names before), for features that
+// lay names out by closeness, like the color page's walk (js/richpage.js); naming itself still goes through nameOf()
+function walkNameList() { return (typeof LONG_NAMES !== "undefined" && LONG_NAMES) || CORE_NAMES || null; }
