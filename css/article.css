@@ -256,8 +256,10 @@ span.ar-ref.ar-x{text-decoration:none;color:var(--ar-body)}
 @media (min-width:420px){.ar-sec>p{font-size:19px;line-height:1.6}}
 .ar-sec>p.ar-chk{font:italic 400 17px/1.2 var(--serif);color:var(--ar-acc-x);margin:40px 0 0;max-width:none}
 .ar-sec .ar-chk+h2{margin-top:6px}
-.ar-sec>p.ar-dc::first-letter{font-family:var(--serif);color:var(--ar-acc-x);-webkit-initial-letter:2;initial-letter:2;margin-right:.1em;font-weight:400}
-@supports not ((initial-letter:2) or (-webkit-initial-letter:2)){.ar-sec>p.ar-dc::first-letter{float:left;font-size:3.35em;line-height:.82;margin:.06em .1em 0 0}}
+/* a tuned float drop cap, not initial-letter: Safari's -webkit-initial-letter renders low with Instrument Serif
+   (its cap-height/line metrics don't match what initial-letter assumes), so both engines get the same plain
+   float sizing instead — top of the glyph lands on line 1's cap height, its foot on line 2's baseline. */
+.ar-sec>p.ar-dc::first-letter{font-family:var(--serif);color:var(--ar-acc-x);font-weight:400;float:left;font-size:3.7em;line-height:.78;margin:.04em .12em 0 0}
 /* color words */
 .ar-link.hl-t,.ar-hl.hl-t{color:var(--hl);font-weight:500}
 .ar-link.hl-t{text-decoration-color:color-mix(in srgb,var(--hl) 45%,transparent)}
