@@ -43,7 +43,10 @@
    "deep-delft-blue"
   ],
   "disambiguation": [
-   "Delft Blue the color (Ridgway) is a greyed blue; the pottery itself is painted in a much more saturated cobalt blue."
+   {
+    "slug": "cobalt",
+    "gloss": "the Delft pottery itself is painted in a much more saturated cobalt blue; the Ridgway color Delft Blue is a greyed blue"
+   }
   ],
   "other_languages": [
    {

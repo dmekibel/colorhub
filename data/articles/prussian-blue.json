@@ -47,7 +47,7 @@
   {
    "id": "field",
    "title": "Field notes",
-   "body": "On screen, this swatch is darker than 96 per cent of our core color names, with a contrast of more than 13 to 1 against white [27]. Its closest named neighbors are [[yale-blue]], [[indigo-dye]] and [[konjo-iro]], all within six units [27].\n\nIn our archive of 23,531 paintings, a color within six units of it covers at least five per cent of the canvas in only 33 works [26]. In 85 per cent of them it is among the darkest colors of the painting, a shadow rather than a sky [26]. The surprise is the date: eight of the 33 were painted in the 1400s, six times the archive's rate, centuries before the pigment existed [26]. Those deep blues are something else, such as azurite, ultramarine, indigo or darkened varnish, which is the whole lesson of a color archive: a color is not a pigment [26]. Ball names *La Mousmé* as a Prussian blue painting [1]. Our reading finds a dusky blue covering eight per cent of its canvas, about eight units from this swatch: close but not identical, as you would expect of a pigment mixed with white and photographed under varnish [26].\n\nThe phrase itself had its day early. In Google Books, *Prussian blue* is printed most around 1808, falls to a quarter of that by 1900, and has stayed at a few per cent since 1980 [28]."
+   "body": "On screen, this swatch is darker than 96 per cent of our core color names, with a contrast of more than 13 to 1 against white [27]. Its closest named neighbors are [[yale-blue]], which also carries the Japanese name [[konjo-iro|Konjō-iro]], and [[indigo-dye]], both within six units [27].\n\nIn our archive of 23,531 paintings, a color within six units of it covers at least five per cent of the canvas in only 33 works [26]. In 85 per cent of them it is among the darkest colors of the painting, a shadow rather than a sky [26]. The surprise is the date: eight of the 33 were painted in the 1400s, six times the archive's rate, centuries before the pigment existed [26]. Those deep blues are something else, such as azurite, ultramarine, indigo or darkened varnish, which is the whole lesson of a color archive: a color is not a pigment [26]. Ball names *La Mousmé* as a Prussian blue painting [1]. Our reading finds a dusky blue covering eight per cent of its canvas, about eight units from this swatch: close but not identical, as you would expect of a pigment mixed with white and photographed under varnish [26].\n\nThe phrase itself had its day early. In Google Books, *Prussian blue* is printed most around 1808, falls to a quarter of that by 1900, and has stayed at a few per cent since 1980 [28]."
   }
  ],
  "aside": {
@@ -66,7 +66,6 @@
   ],
   "siblings": [
    "berlin-blue",
-   "paris-blue",
    "konjo-iro",
    "antwerp-blue"
   ],
@@ -75,8 +74,14 @@
    "midnight-blue"
   ],
   "disambiguation": [
-   "Prussian Red (Ridgway 1912) is an unrelated brownish red.",
-   "Werner's Berlin Blue swatch is far paler than this one: same pigment name, different aged plates."
+   {
+    "slug": "prussian-red",
+    "gloss": "Prussian Red (Ridgway 1912) is an unrelated brownish red"
+   },
+   {
+    "slug": "berlin-blue",
+    "gloss": "Werner's Berlin Blue swatch is far paler than this one: same pigment name, different aged plates"
+   }
   ],
   "other_languages": [
    {
@@ -395,7 +400,7 @@
   "The poison cyanide was named after this paint, not the other way round.",
   "Find it in blueprints, in Hokusai's waves and in the dark corners of Picasso's Blue Period."
  ],
- "words": 1654,
+ "words": 1659,
  "status": "pilot",
  "checked": {
   "by": "L7 self-check (sentence-to-card trace, myth list, hedges)",

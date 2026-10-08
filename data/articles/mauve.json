@@ -69,8 +69,10 @@
    "mauvette"
   ],
   "disambiguation": [
-   "Mauveine is the 1856 dye, a vivid purple; mauve the modern color name is a dusty pink-purple.",
-   "Mallow Purple (Ridgway) is a bright pink-purple, much closer to Perkin's dye."
+   {
+    "slug": "mallow-purple",
+    "gloss": "Ridgway's Mallow Purple is a bright pink-purple, much closer to Perkin's dye than modern mauve"
+   }
   ],
   "other_languages": [
    {
