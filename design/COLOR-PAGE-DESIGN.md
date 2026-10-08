@@ -1,6 +1,6 @@
 # The color page and its article: design spec (2026-10-08)
 
-**Status:** design round, for David's review. L5 (computed page sections) and L8 (article reader, hubs, Versus) build from this file. The mockups are in `design/colorpage-mockups.html` (23 phones, real data). Screenshots are in `design/colorpage-shots/f01.png … f23.png`.
+**Status:** design round, for David's review. L5 (computed page sections) and L8 (article reader, hubs, Versus) build from this file. The mockups are in `design/colorpage-mockups.html` (23 phones, real data). Screenshots are in `design/colorpage-shots/f01.png … f23.png`. Every count, ΔE and neighbor in them was recomputed on main after the L15 data merge (984 core names, 1,789 library cards, 23,781 paintings), with the scripts' rules written out below so L5 can reproduce them.
 
 **Builds on:** DESIGN-SYSTEM.md (tokens, type, motion, archetypes), MASTER-PLAN §1–3, GENIUS-PANEL-1 (L5/L8 rows), IDEAS-10X/color-archive.md (#1 one engine, #2 the band and the Unpainted, #3 three witnesses, #4 Versus, #5 the Compass, #7 hubs, #9 the myth trap, #10 kin, #11 numbers are doors, #17 alias landings, #22 stamps). Where this spec differs from those, this spec wins for the page's UI, and the reason is given.
 
@@ -47,7 +47,7 @@ Replace `colorPage` (js/explore.js) and `namePage` (js/names.js) with **one page
 | Name | `hero` serif. **Fit rule:** 96 px if it fits one line in `100vw − 40`; else the largest of 80 / 72 / 64 that fits in two lines (`text-wrap: balance`); 56 px minimum (three lines, only for names like "International Orange (Golden Gate Bridge)", where the parenthetical drops to the tier line). Measure with a canvas `measureText` once per page. |
 | Tier line | Italic serif 19. Two halves: the **origin tier** (underlined; tap opens that tier's hub) and **the most specific dated fact** we hold. Vocabulary in §2.1.1. |
 | Definition | Serif 20/1.3, one sentence, at most ~95 characters. Sources, in order: the article's `def` (sourced) → ISCC-NBS block descriptor ("Vivid red, ISCC-NBS 1955") → Werner's 1821 anchor ("Werner: the beauty spot on a mallard drake's wing") → a **differential definition** computed from the nearest named neighbor, Webster's-Third style ("A deep night blue, a touch purpler than Prussian blue"). |
-| Definition source | Italic serif 14.5, full ink: "From its story · 11 sources" / "ISCC-NBS 1955" / "Werner, 1821" / "RAL's name · the rest measured" / "Measured". Tap opens Sources. |
+| Definition source | Italic serif 14.5, full ink: "From its story · 11 sources" / "ISCC-NBS 1955" / "Werner, 1821" / "Measured", plus a merged alias when one exists ("Measured · RAL calls it Pearl Night Blue"). Tap opens Sources. |
 | Hex | `code`, underlined, tap copies (toast "Copied #CC3336"). For a tapped color, the ΔE to the name follows it ("#407497  ΔE 2.6"). |
 | Tapped color extra | Under the definition: a 56 × 40 chip of the name's own color with "Dull Blue itself, beside your color" (frame 14). The hero is your color, so the chip *is* the comparison. |
 | The peek | The glance strip's first two cards, top 88 px visible: witness glyph + word, then the big figure. The figures are the hook to scroll. |
@@ -60,6 +60,7 @@ Replace `colorPage` (js/explore.js) and `namePage` (js/names.js) with **one page
 | pigment / mineral | A pigment name | from the madder root · Berlin, about 1706 |
 | dye | A dye name | after a battle, June 1859 |
 | naturalist (Werner, Ridgway) | A naturalist's name | Ridgway, 1912 |
+| color dictionary (Maerz & Paul) | A dictionary name | Maerz & Paul, 1930 |
 | nature-named | Named after a flower / a bird / a stone | the mallow |
 | place or institution | Named after a place / an institution | Yale, 1890s |
 | person | Named after a person | General Skobelev |
@@ -70,10 +71,10 @@ Replace `colorPage` (js/explore.js) and `namePage` (js/names.js) with **one page
 | modifier child | A described shade | teal, lighter |
 | unknown | Origin undocumented | (nothing) |
 
-A dated second half needs a source (card, standard date or M&P). Without one, the tier line is the first half alone.
+A dated second half needs a source (card, standard date or M&P). Without one, the tier line is the first half alone. When a name carries several stamps, the tier is the first match in this order: pigment, dye, naturalist, nature / place / person (needs a card), traditional, dictionary, descriptive standard, industrial, web, commercial, crowd, modifier. So Marine (M&P 1930, ISCC-NBS, RAL, crowd survey) is "A dictionary name · Maerz & Paul, 1930".
 
 ### 2.2 The color header (frames 02–05, 13, 16, 18, 19)
-When the hero scrolls away, a **104 px color header** stays pinned: the color full-bleed, the floating ‹ and ⋯, and the name in serif 25 after ‹ (left-aligned, never centered). You always see which color you're on. Tap the name: scroll back to the cover. Swipe down on it: the page shrinks back into its source (DESIGN-SYSTEM §8). When `contrast(hex, --ground) < 1.6` (Prussian blue, Pearl Night Blue), the header and the hero get a 1 px `rgba(255,255,255,.1)` bottom hairline.
+When the hero scrolls away, a **104 px color header** stays pinned: the color full-bleed, the floating ‹ and ⋯, and the name in serif 25 after ‹ (left-aligned, never centered). You always see which color you're on. Tap the name: scroll back to the cover. Swipe down on it: the page shrinks back into its source (DESIGN-SYSTEM §8). When `contrast(hex, --ground) < 1.6` (Prussian blue, Marine), the header and the hero get a 1 px `rgba(255,255,255,.1)` bottom hairline.
 
 ### 2.3 The glance strip (frames 02, 16, 18, 19)
 - A horizontal rail of 2–4 cards, 256 × ≥188 px, `--surface-2`, `--r-2`, 10 px gaps, gutter-inset, scroll-snapped; the next card always peeks.
@@ -121,11 +122,11 @@ Placement: after the story door or story home for a returning learner (`lmStatus
 
 | Drawer | Headline example | Inside, in order | Verb at the end |
 |---|---|---|---|
-| In paintings | "193 paintings, from about 1000 to the 1930s. Mostly a small, vivid accent." | century bars (in the color); the **role bar** (accent / shadow / mid / light, within-painting lens); the paintings where it covers most (rail of 104 px crops, share badge in `code`); the most devoted painter only if n ≥ 10; the caveat line | *Play a board of these* (`playSet`) |
-| Its company | "Set beside pale buffs far more than chance: cinnamon-buff 6.8×" | pairs with lift and n (support ≥ 10, partners within ΔE 10 excluded); colors it's never seen with | *Make a palette from these* (Studio) |
+| In paintings | "194 paintings, from about 1000 to the 1930s. Mostly a small, vivid accent." | century bars (in the color); the **role bar** (accent / shadow / mid / light, within-painting lens); the paintings where it covers most (rail of 104 px crops, share badge in `code`); the most devoted painter only if n ≥ 10; the caveat line | *Play a board of these* (`playSet`) |
+| Its company | "Set beside pale fawns far more than chance: pale vinaceous-fawn 5.3×" | pairs with lift and n (support ≥ 10, partners within ΔE 10 excluded); colors it's never seen with | *Make a palette from these* (Studio) |
 | In words | "An old paint name, kept by ISCC-NBS in 1955" | Ngram `_ADJ` curve (only for unambiguous words); first-recorded date and source; poem lines and passages (≤ 15 words each, attributed); books count once the sense filter exists | *Read the poems* |
 | In the world | "Its twins: a garnet, a tulip, a 1950s lipstick" | flowers, gems, minerals, fashion decades, films, brands (screen-approximate) | *Find it* (camera) |
-| Measured | "Darker than 67% of named colors, more vivid than 83%" | codes (HEX, RGB, HSL, OKLCH, Lab; CMYK only behind "for print, rough"); percentiles; contrast on white and black with AA/AAA; three color-blind views; complement per wheel; a mixing recipe; standard twins within ΔE 2 | *Copy*, *Mix it* |
+| Measured | "Darker than 65% of named colors, more vivid than 88%" | codes (HEX, RGB, HSL, OKLCH, Lab; CMYK only behind "for print, rough"); percentiles; contrast on white and black with AA/AAA; three color-blind views; complement per wheel; a mixing recipe; standard twins within ΔE 2 | *Copy*, *Mix it* |
 
 Every archive number says "as photographed" once per drawer, in the caveat line: "Museum photographs of aged, varnished paintings. A color match, not a pigment test." A drawer with no data isn't drawn. The Unpainted variant of In paintings is §6.4.
 
@@ -137,17 +138,18 @@ Every archive number says "as photographed" once per drawer, in the caveat line:
   - NW and SE: the two hue moves, labeled with lookDiff's fixed vocabulary (redder, yellower, greener, bluer, purpler; never a color name).
 - Each hex: the neighbor's color, its direction (`note` 13), its name (serif 16.5, ≤ 2 lines) and "ΔE 2.6" (`code`). Tap: it grows into its page (shape memory: a hex grows from a hex). Long-press: the Versus page.
 - **Choosing neighbors (L5, `compassFor(hex, self)`):** the Ideas doc's §8A rules over all ~2,700 names, in ΔE00, with three changes:
-  1. Skip candidates under ΔE 2: they are twins (§2.10), not directions.
+  1. Skip candidates under ΔE 2: they are twins (§2.10), not directions. **A name fills one hex only:** assign greedily by lowest ΔE across all six cells, so a name that qualifies twice (Vermilion is both lighter and yellower than Madder Lake) takes its closest cell and the other cell takes its next candidate (Blood Orange).
   2. Skip Japanese-primary names (they're "Also called" doors, not titles).
   3. Hue cells need C ≥ 8; for near-greys the two hue hexes become "No hue to turn" (quiet, `--surface-2`).
 - **Empty direction:** a quiet hex, "No named color this way". At the sRGB edge (any channel at 0 or 255 and the color is the most chromatic in its hue), More vivid reads "Screens can't show more vivid".
-- **Crowding line** under the flower (serif 17, ink): "A crowded corner: 22 named colors within ΔE 5." or "A lonely color: the nearest name is ΔE 9 away."
+- **Crowding line** under the flower (serif 17, ink): "A crowded corner: 9 named colors within ΔE 5." or "A lonely color: the nearest name is ΔE 9 away."
 - At 320 px the flower scales to fit (hex 104 × 90); names drop to serif 15.
 
 ### 2.10 Family and look-alikes (frames 04, 05)
 - `title-3` "Family": a **lineage**, not a chip cloud (Ideas #10): the material root (a 32 px material glyph, its name, one line, from fact cards only), then this color (ringed), then, indented under a 1 px rule, its children and same-material siblings with one line each ("a lighter, pinker lake of the root"; "its dye, from coal tar since 1868"). Other-language names appear here as "Also called Konjō-iro (Japanese)". Without a root card the lineage starts at the name.
-- **"Look-alikes that live here"** (on a page with an article): pill chips of the colors within ΔE 6 whose story home is this page ("Persian Red 99.2%"). This is the reverse of §5: correlation works both ways.
-- **"Practically the same"** (on a page without one): the twins under ΔE 2.5, also chips (frame 19: "Purple Blue 99%, Purpley Blue 99%").
+- **"Look-alikes that live here"** (on a page with an article): pill chips of the colors within ΔE 6 whose story home is this page ("Fire Engine Red 97%", "Dull Red 96%"). This is the reverse of §5: correlation works both ways.
+- **"Near twins"** (on a page without an article): the names within ΔE 6, also chips, labeled by §5.2 ("Near twins, also crowd words: Purplish Blue 97%, Purpleish Blue 97%", frame 19).
+- **Merged aliases** (L15's near-duplicates, `altn` with "near-duplicate") are never chips or pages of their own: they show as "also called" in the family (Madder Lake: "also called Persian Red"; Marine: "RAL calls it Pearl Night Blue").
 - Spelling twins (Bistre/Bister) never show as twins: they merge (GENIUS-PANEL §2.3) and show "Also spelled Bister" in the family.
 
 ### 2.11 Sources, stamps and the last line (frame 05)
@@ -155,7 +157,7 @@ Every archive number says "as photographed" once per drawer, in the caveat line:
 - **The last line** (`small`): "Built from 23 sourced facts and 9 measurements. Screen colors are approximate." For a page with no facts: "Built from 7 measurements. No sourced facts yet." (Ideas #8, said plainly.)
 
 ### 2.12 Order by case
-| # | (a) Color with an article: Madder Lake | (b) Niche color: Pearl Night Blue | (c) Tapped hex: #407497 → Dull Blue |
+| # | (a) Color with an article: Madder Lake | (b) Niche color: Marine | (c) Tapped hex: #407497 → Dull Blue |
 |---|---|---|---|
 | 1 | Cover | Cover (differential definition) | Cover: your color, "from The Great Wave · 97% match", the name's chip |
 | 2 | Glance strip | Glance strip | Glance strip: card 1 is "where you found it" |
@@ -166,7 +168,7 @@ Every archive number says "as photographed" once per drawer, in the caveat line:
 | 7 | Walk from here | Walk from here (from your exact color) | Walk from here (from your exact color) |
 | 8 | Family, look-alikes that live here | Family, practically the same | Family |
 | 9 | You and this color (stranger: find-it only) | same | same |
-| 10 | Sources and stamps, last line | Stamps ("A one-stamp color"), last line | Stamps of the name, last line |
+| 10 | Sources and stamps, last line | Stamps (M&P 1930, ISCC-NBS 1955, RAL, crowd 2010), last line | Stamps of the name, last line |
 
 **Which name a tapped color opens:** the nearest of the ~2,700 by ΔE00, except that a Learn-layer name within +1.0 ΔE of the nearest wins (common words win near-ties). "Exact" (no "Your color" view) only under `VERY_CLOSE_DE`, as today.
 
@@ -212,7 +214,7 @@ The contents icon, or a pull-down at a chapter's top, raises a sheet (≤ 80%): 
 Text size (three steps: 16, 17, 19), Night or Paper, and "Reduce motion follows your system". Stored per device (`localStorage` key inside `colorhub-v1`, via `migrateState`).
 
 ### 3.8 Reading from a twin (frame 07)
-Where the header sits, a solid context pill: the twin's dot, "From **Pearl Night Blue**, its near twin". Tap it, or ‹: the book shrinks back into Pearl Night Blue's story-home card. The ribbon uses the article color's accent. At the end, the paper button reads "Back to Pearl Night Blue".
+Where the header sits, a solid context pill: the source color's dot, "From **Marine**, its near twin". Tap it, or ‹: the book shrinks back into Marine's story-home card. The ribbon uses the article color's accent. At the end, the paper button reads "Back to Marine".
 
 ---
 
@@ -232,7 +234,7 @@ Where the header sits, a solid context pill: the twin's dot, "From **Pearl Night
 
 **Hold to walk (frame 10).** After 350 ms of a still press on the cover (8 ms tick), the page dims to 34%, and the flower (the same geometry as §2.9) rises centered on the press point, clamped inside the gutters, its six hexes appearing 30 ms apart from the center. Dragging highlights the hex under the finger (a 6 px white ring, scale 1.12, a 4 ms tick on each change), and its direction, name and "ΔE 2.6 · 97% match" rise large at the top (`title-1`). Let go on a hex: it grows into its page. Let go at the center or outside: the flower sinks and the page undims (`--shrink`). Reduce Motion: the flower fades in.
 
-**The trail (frame 11).** A long press on ‹ opens a level-2 popover under it (≤ 312 px wide, ≤ 7 rows): every place in this walk, newest first, each with its swatch or crop and the verb that got you there: "you're here", "walked duller", "walked more vivid", "from its story", "tapped in a photo · near Dull Blue", and at the foot "The map · where you started". Tapping a row closes everything above it with one shrink. The data is `XSTACK` with a `via` field added to each entry (the Compass direction, "twin", "story", "tapped", "chip"); entries are kept in `sessionStorage` so a reload keeps the walk.
+**The trail (frame 11).** A long press on ‹ opens a level-2 popover under it (≤ 312 px wide, ≤ 7 rows): every place in this walk, newest first, each with its swatch or crop and how you arrived there: "you're here · walked more vivid", "from the painting's story", "where your color was", "tapped · near Dull Blue", and at the foot "The map · where you started". Tapping a row closes everything above it with one shrink. The data is `XSTACK` with a `via` field added to each entry (the Compass direction, "twin", "story", "tapped", "chip"); entries are kept in `sessionStorage` so a reload keeps the walk.
 
 **Back to the map.** When Back reaches the honeycomb, the map pans to the first color of the walk and draws the walk as a thin ink thread from bubble to bubble (700 ms, then it fades after 3 s or at the first touch). Hook: `hmDrawWalk(slugs)` in js/honey.js (L18 owns it; the page only hands it the list).
 
@@ -251,7 +253,7 @@ Where the header sits, a solid context pill: the twin's dot, "From **Pearl Night
 Candidates, first match wins:
 1. **Same pigment, another name** (graph edge with a card or a standard): this isn't a story card. The page is an **alias landing**: a solid banner on the cover ("Konjō-iro: its Japanese name", frame 15), and the search alias lands on the main page.
 2. **Modifier child** (Light Teal): its parent, labeled "A described shade of teal".
-3. **Near twins with an article:** colors within ΔE00 10 that have an article of 150 words or more. Score = `log2(words) × (1 − ΔE/10)`, and the highest wins, so a 2,000-word epic at ΔE 4.5 beats a 300-word institution page at ΔE 2.6. A second candidate scoring at least 60% of the first shows as a quiet row ("Also close, with a story: Navy · 97%").
+3. **Near twins with an article:** colors within ΔE00 10 that have an article of 150 words or more. Score = `sqrt(words) × (1 − ΔE/10)`, and the highest wins. For Marine: Prussian blue (an epic of ~2,400 words at ΔE 4.2) scores 28, Yale blue (an institution page of ~600 words at ΔE 2.6) scores 18, Navy (~250 words at ΔE 3.9) scores 10. Depth outweighs a point of match, which is David's ask; a log weight would have picked Yale blue. A second candidate scoring at least 60% of the first shows as a quiet row ("Also close, with a story: Yale Blue · 97%").
 4. **Family head** (`familyOf`) when nothing is within ΔE 10: "Part of the blues", with the family's lede.
 
 ### 5.2 The words
@@ -263,18 +265,18 @@ The label is set by ΔE00 alone, never by list membership:
 | 2.5–6 | A near twin |
 | 6–10 | Its nearest story |
 
-It's always followed by `pctMatch()`: "A near twin · 96% match". The title is "Its story lives with *Prussian blue*". Never "closest of the 101", never a list name.
+It's always followed by `pctMatch()`: "A near twin · 96% match" (Marine to Prussian blue, ΔE 4.2). The title is "Its story lives with *Prussian blue*". Never "closest of the 101", never a list name.
 
 ### 5.3 The card
 - **Full card**, when the twin's article has 600 words or more (frame 13): a 72 px split swatch, this color | the twin (tap: the Versus page); the label; the title in `title-2`; **the twin's real lede** (its first 1–2 sentences, serif 18, unedited); the **How they differ** box (`--surface-3`); the paper button "Read its story · 14 min" (or a quiet row, if Learn it is the primary).
 - **Compact card**, for a shorter story (frame 19): a 56 px split swatch, the label, the title in `title-3`, the difference sentence, and a text link "Read violet's story".
 - **How they differ** is always two sentences:
-  1. The look: `lookDiff(this, twin)` plus "at the same depth" when |ΔL| < 2: "Pearl Night Blue is a touch purpler at the same depth."
-  2. What is and isn't shared, from the tier pair: "It names a coating finish; Prussian blue is a pigment with three centuries of history. The story is Prussian blue's, shown here because the two look almost alike." Templates per tier pair live in `js/article.js` (`TWIN_KIND[tierA][tierB]`), and a crowd word gets "It's the crowd's word for the in-between, not a name with a history."
-- **Honesty rules:** the twin's facts are never restated as this color's. The definition stays this color's own. Archive numbers on this page are this color's own (Pearl Night Blue: 199 paintings), never the twin's.
+  1. The look: `lookDiff(twin → this)` plus "at the same depth" when |ΔL| < 2: "Marine is purpler and more vivid, at the same depth."
+  2. What is and isn't shared, from the tier pair: "It names a look, in a 1930 dictionary and a 2010 survey; Prussian blue is a pigment with three centuries of history. The story is Prussian blue's, shown here because the two look alike." Templates per tier pair live in `js/article.js` (`TWIN_KIND[tierA][tierB]`), and a crowd word gets "It's the crowd's word for the in-between, not a name with a history."
+- **Honesty rules:** the twin's facts are never restated as this color's. The definition stays this color's own. Archive numbers on this page are this color's own (Marine: 142 paintings), never the twin's.
 
 ### 5.4 Both directions
-The twin's page lists the colors whose story home it is ("Look-alikes that live here", §2.10). Search results for a niche name show its twin's story as a second line ("Pearl Night Blue · story with Prussian blue").
+The twin's page lists the colors whose story home it is ("Look-alikes that live here", §2.10). Search results for a niche name show its twin's story as a second line ("Marine · story with Prussian blue").
 
 ---
 
@@ -286,7 +288,7 @@ The twin's page lists the colors whose story home it is ("Look-alikes that live 
 | **Missing article** | No door, no placeholder. The story home (§5) takes its slot; with no candidate at all, the slot is simply absent. |
 | **Error / offline** | A section whose data failed shows one `small` line where it would be ("The paintings didn't load. Try again"), with the retry as a text link. The cover never fails. |
 | **Thin data** (frame 19) | Only sections with data render. The glance strip needs 2 cards; the field notes show only drawers with data; the last line says what the page was built from. The page may be two screens long, and that's correct. |
-| **The Unpainted** (frames 17, 18) | The band card is glance card 1: this color beside the closest painted color, "ΔE 18", "No painting in our archive of 23,531 comes within ΔE 10. The closest is a painting of a many-armed figure from about 1900." The In paintings drawer shows the three closest paintings with their ΔE, the caveat line, and a row into the hub "The Unpainted · 39 colors". **Closest is searched within ±25° of hue** (for C > 20), because CIEDE2000 is built for small differences: by raw ΔE00, magenta's nearest pool color is a grey (ΔE 14.9). |
+| **The Unpainted** (frames 17, 18) | The band card is glance card 1: this color beside the closest painted color, "ΔE 18", "No painting in our archive of 23,781 comes within ΔE 10. The closest is a painting of a many-armed figure from about 1900." The In paintings drawer shows the three closest paintings with their ΔE, the caveat line, and a row into the hub "The Unpainted · 39 colors". **Closest is searched within ±25° of hue** (for C > 20), because CIEDE2000 is built for small differences: by raw ΔE00, magenta's nearest pool color is a grey (ΔE 14.9). |
 | **Very dark** (frames 12, 15) | L* < 12, or contrast against the ground < 1.6: a 1 px light hairline at the hero's and the header's bottom edge; Compass center and chips get a 1 px inner hairline; the reading accent is lightened (§3.2). White ink. |
 | **Very light** (frame 20) | Paper-ink text, status bar and home indicator follow `ink()`, and the floating controls stay dark and solid. No hairline needed (the edge against black is strong). |
 | **Mid-tone ink failure** | §2.1 ink rule: the definition drops below the hero. |
@@ -325,7 +327,7 @@ Haptics: 8 ms when the hold engages, 4 ms per hex crossed, 8 ms when a page sett
   - The paper button **Walk all 39 · one by one**.
   - Rows (32 px swatch, name, the hub's measure in `code`); each grows into its page.
 - **Walk mode:** `?walk=<hub>&i=<n>` adds a solid walk bar at the page's foot (56 px pill, `--surface-2`, inside the gutters, above the home indicator): "3 of 39 · Next: Violet" with the next color's dot. Tap: the next page grows from the bar's dot. The walk is a ColorSet, so *On the map* and *Learn these* come free (GENIUS-PANEL §2.2).
-- The first hubs: The Unpainted (39 core words by this method; re-run in L6), One pigment, many names, The workhorses, Naturalists' colors, Words the crowd invented, Names that died (Ideas #7).
+- The first hubs: The Unpainted (39 of the 984 core words by this method on today's main; L6 reruns it), One pigment, many names, The workhorses, Naturalists' colors, Words the crowd invented, Names that died (Ideas #7).
 
 ## 9. The Versus page (frames 22, 23)
 - **Route** `#/vs/<a>+<b>` (slugs in alphabetical order, so each pair has one address). It's reached from a twin's split swatch, a long-press on a Compass hex, ⋯ → Compare with…, search ("teal vs turquoise") and crawlable static copies for the top ~500 pairs (L17).
@@ -410,14 +412,14 @@ Haptics: 8 ms when the hold engages, 4 ms per hex crossed, 8 ms when a page sett
 - [ ] `glanceFor(entry)`: the scoring of §2.3, card rendering, evidence doors, the 2-card minimum.
 - [ ] `tools/archive_reach.py` → `data/analysis/reach.json`, with the ±25° hue gate for the closest-painted search; `loadReach()` lazy (never at load time).
 - [ ] The five field-note drawers with headline findings, the role bar (within-painting lens), pair lifts excluding partners within ΔE 10, the caveat line, and a verb per drawer.
-- [ ] `compassFor(hex, self)` over ~2,700 names in ΔE00 (skip < 2, skip Japanese-primary names, C ≥ 8 for hue cells, the empty-direction and sRGB-edge copy); the flower render; the crowding line.
+- [ ] `compassFor(hex, self)` over all names in ΔE00 (skip < 2, skip Japanese-primary names, one hex per name by greedy lowest ΔE, C ≥ 8 for hue cells, the empty-direction and sRGB-edge copy); parenthetical qualifiers ("Carmine (M&P)") drop to the page, the hex shows "Carmine"; the flower render; the crowding line.
 - [ ] Hold to walk on the cover (350 ms, the drag highlight, release to open, center to cancel, haptics, Reduce Motion fade).
-- [ ] Look-alikes that live here / Practically the same (chips; alias merges excluded).
+- [ ] Look-alikes that live here / Near twins (chips; merged aliases shown as "also called", never as chips).
 - [ ] You and this color (only lines that exist; the duel; the find-it ending).
 - [ ] Stamps, sources and the built-from line.
 - [ ] The trail: `via` on XSTACK entries, sessionStorage, the long-press-‹ popover; hand the walk to `hmDrawWalk()` if it exists.
 - [ ] States: loading skeletons on light and dark heroes, the error line, thin pages, very dark and very light, 320 px.
-- [ ] Gates: check.js, check_wiki.js, check_names.js, tools/smoke.sh; screenshots at 375 × 812 and 375 × 667 of Madder Lake (library), Prussian Blue (Learn layer, dark), Pearl Night Blue, Magenta, Burple, Eggshell, a tapped hex, and a near-grey (Compass without hue cells).
+- [ ] Gates: check.js, check_wiki.js, check_names.js, tools/smoke.sh; screenshots at 375 × 812 and 375 × 667 of Madder Lake (library), Prussian Blue (Learn layer, dark), Marine, Magenta, Burple, Eggshell, a tapped hex, and a near-grey (Compass without hue cells).
 
 ### L8: article reader, story home, family, hubs, Versus (owns js/article.js, css/article.css)
 - [ ] `artFromJSON()` adapter to L7's schema; lazy fetch of `data/articles/<slug>.json`; prefetch when a page with a door is opened.
