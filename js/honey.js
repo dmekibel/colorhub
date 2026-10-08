@@ -197,7 +197,25 @@ function honeySphere(items) {
 // color exactly once and is finite, so switching between them is a glide (each bubble flies to its new place).
 // Two engines: a GRID (columns by one key, rows by another, on the hex lattice) and RINGS (hex rings filled in order
 // of one key, each ring's colors placed at the angle of their hue). "Families" is islands of small grids.
-const honeyAngleOf = it => it.C < 7 ? 359.5 : honeyHueKey(it);   // greys gather in one quiet spoke at the wrap
+// The angle a color takes on a ring. Hued colors: their hue. Greys have no hue to go by (David, 2026-10-08: "black
+// next to white, kinda weird, no?" when every grey shared one spoke and landed in any order), so a grey's angle is its
+// LIGHTNESS, on the wheel's own lightness: white at the top (where the pale yellows are), black at the bottom (the deep
+// violets), mid greys at the sides (the mid reds and teals), each grey on the side nearer its own faint hue. A ring
+// that is all greys then runs white down both sides to black (no wrap seam), rings line up by lightness, and the
+// ramp meets the hues of matching lightness. Muted colors (chroma 3 to 17) blend the two by how much hue they have.
+const honeyLAngle = (L, near) => {
+  const s = (100 - Math.max(0, Math.min(100, L))) * 1.8, a1 = (90 + s) % 360, a2 = (450 - s) % 360;
+  const ad = a => { const d = Math.abs(a - near) % 360; return d > 180 ? 360 - d : d; };
+  return ad(a1) <= ad(a2) ? a1 : a2;
+};
+function honeyAngleOf(it) {
+  if (it.ang != null) return it.ang;
+  const hk = (it.H - 15 + 360) % 360, w = Math.max(0, Math.min(1, (it.C - 3) / 14));
+  if (w >= 1) return (it.ang = hk);
+  const la = honeyLAngle(it.L, hk) * Math.PI / 180, ha = hk * Math.PI / 180;
+  const x = w * Math.cos(ha) + (1 - w) * Math.cos(la), y = w * Math.sin(ha) + (1 - w) * Math.sin(la);
+  return (it.ang = (Math.atan2(y, x) * 180 / Math.PI + 360) % 360);
+}
 function honeyCenterPts(pts) {
   const cx = pts.reduce((t, q) => t + q.x, 0) / (pts.length || 1), cy = pts.reduce((t, q) => t + q.y, 0) / (pts.length || 1);
   return pts.map(q => ({ it: q.it, x: q.x - cx, y: q.y - cy, g: q.g }));
@@ -207,9 +225,10 @@ function honeyCenterPts(pts) {
 function honeyGridArr(items, xKey, yKey, k = 1.9) {
   const N = items.length; if (!N) return { pts: [], finite: true };
   const H = Math.max(1, Math.min(N, Math.round(Math.sqrt(N * k)))), W = Math.ceil(N / H), e = W * H - N;
-  const order = items.slice().sort((a, b) => xKey(a) - xKey(b) || yKey(a) - yKey(b)), pts = [];
+  // ties (greys share one warmth, one hue key...) break light to dark, so a run of greys is a lightness ramp
+  const order = items.slice().sort((a, b) => xKey(a) - xKey(b) || yKey(a) - yKey(b) || b.L - a.L), pts = [];
   for (let j = 0, k2 = 0; j < W; j++) {
-    const short = Math.floor((j + 1) * e / W) > Math.floor(j * e / W), col = order.slice(k2, k2 + (short ? H - 1 : H)).sort((a, b) => yKey(a) - yKey(b));
+    const short = Math.floor((j + 1) * e / W) > Math.floor(j * e / W), col = order.slice(k2, k2 + (short ? H - 1 : H)).sort((a, b) => yKey(a) - yKey(b) || b.L - a.L);
     k2 += col.length;
     col.forEach((it, r) => pts.push({ it, x: j + (r & 1 ? .5 : 0), y: r * HONEY_SQ3 }));
   }
@@ -424,6 +443,7 @@ function honeyOk(it) {
   const l = Math.cbrt(.4122214708 * r + .5363325363 * g + .0514459929 * b), m = Math.cbrt(.2119034982 * r + .6806995451 * g + .1073969566 * b), s = Math.cbrt(.0883024619 * r + .2817188376 * g + .6299787005 * b);
   return (it.ok = [100 * (.2104542553 * l + .793617785 * m - .0040720468 * s), 100 * (1.9779984951 * l - 2.428592205 * m + .4505937099 * s), 100 * (.0259040371 * l + .7827717662 * m - .808675766 * s)]);
 }
+const HONEY_DL_OK = 30, HONEY_DL_W = 3, HONEY_DL_BAD = 35;
 function honeySmooth(lay, budgetMs = 120) {
   const P = lay.pts, n = P.length;
   if (n < 8 || lay.globe || new Set(P.map(q => q.it)).size !== n) return;   // a tiled map repeats colors: leave it
@@ -438,8 +458,19 @@ function honeySmooth(lay, budgetMs = 120) {
     nbs.push(out);
   });
   // colors as OKLab triples in one array; col[k] = which color sits at place k
-  const its = P.map(q => q.it), O = new Float64Array(n * 3), col = new Int32Array(n), grp = P.map(q => q.g == null ? 0 : q.g);
-  its.forEach((it, i) => { const o = honeyOk(it); O[i * 3] = o[0]; O[i * 3 + 1] = o[1]; O[i * 3 + 2] = o[2]; col[i] = i; });
+  const its = P.map(q => q.it), O = new Float64Array(n * 3), Ls = new Float64Array(n), col = new Int32Array(n), grp = P.map(q => q.g == null ? 0 : q.g);
+  its.forEach((it, i) => { const o = honeyOk(it); O[i * 3] = o[0]; O[i * 3 + 1] = o[1]; O[i * 3 + 2] = o[2]; Ls[i] = it.L; col[i] = i; });
+  // David, 2026-10-08 ("black next to white, kinda weird, no?"): a lightness jump is the one difference the eye can't
+  // forgive between touching cells, so beyond HONEY_DL_OK (L*) every extra step costs HONEY_DL_W times a plain one.
+  // White never touches black wherever any swap within reach can prevent it.
+  const lOf = k => {
+    const c = col[k] * 3, L = O[c], A = O[c + 1], B = O[c + 2], LL = Ls[col[k]], nb = nbs[k]; let t = 0;
+    for (let i = 0; i < nb.length; i++) {
+      const m = col[nb[i]], d = m * 3, x = O[d] - L, y = O[d + 1] - A, z = O[d + 2] - B, dl = Math.abs(Ls[m] - LL);
+      t += Math.sqrt(x * x + y * y + z * z) + (dl > HONEY_DL_OK ? (dl - HONEY_DL_OK) * HONEY_DL_W : 0);
+    }
+    return t;
+  };
   const local = k => {
     const c = col[k] * 3, L = O[c], A = O[c + 1], B = O[c + 2], nb = nbs[k]; let t = 0;
     for (let i = 0; i < nb.length; i++) { const d = col[nb[i]] * 3, x = O[d] - L, y = O[d + 1] - A, z = O[d + 2] - B; t += Math.sqrt(x * x + y * y + z * z); }
@@ -452,12 +483,34 @@ function honeySmooth(lay, budgetMs = 120) {
   for (let pass = 0; pass < 14; pass++) {
     let moved = 0;
     for (let k = 0; k < n; k++) for (const m of cands[k]) {
-      const b0 = local(k) + local(m);
+      const b0 = lOf(k) + lOf(m);
       let tmp = col[k]; col[k] = col[m]; col[m] = tmp;
-      if (local(k) + local(m) < b0 - .05) { moved++; continue; }
+      if (lOf(k) + lOf(m) < b0 - .05) { moved++; continue; }
       tmp = col[k]; col[k] = col[m]; col[m] = tmp;
     }
     if (!moved || performance.now() - t0 > budgetMs) break;
+  }
+  // repair: a cell still touching a lightness jump (> HONEY_DL_BAD) looks farther afield, up to three cells away in its
+  // own group, for the swap that helps most. Few cells qualify, so this is cheap; it unsticks what pairwise swaps can't.
+  const bad = k => { const LL = Ls[col[k]]; for (const m of nbs[k]) if (Math.abs(Ls[col[m]] - LL) > HONEY_DL_BAD) return true; return false; };
+  const t1 = performance.now();
+  for (let rep = 0; rep < 6; rep++) {
+    let fixed = 0;
+    for (let k = 0; k < n; k++) {
+      if (!bad(k)) continue;
+      const q = P[k], ci = Math.floor(q.x / R), cj = Math.floor(q.y / R);
+      let best = -1, gain = .05;
+      for (let i = ci - 4; i <= ci + 4; i++) for (let j = cj - 4; j <= cj + 4; j++) for (const m of cell.get(key(i, j)) || []) {
+        if (m === k || grp[m] !== grp[k] || Math.hypot(P[m].x - q.x, P[m].y - q.y) > 4.4) continue;
+        const b0 = lOf(k) + lOf(m);
+        let tmp = col[k]; col[k] = col[m]; col[m] = tmp;
+        const g = b0 - lOf(k) - lOf(m);
+        tmp = col[k]; col[k] = col[m]; col[m] = tmp;
+        if (g > gain) { gain = g; best = m; }
+      }
+      if (best >= 0) { const tmp = col[k]; col[k] = col[best]; col[best] = tmp; fixed++; }
+    }
+    if (!fixed || performance.now() - t1 > budgetMs / 3) break;
   }
   const after = mean();
   P.forEach((q, k) => { q.it = its[col[k]]; });
