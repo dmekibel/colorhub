@@ -88,8 +88,8 @@ WIKI_SCREENS.forEach(([name, o]) => needsWiki(name, o));
 const tappedQS = tapped => tapped ? "?c=" + String(tapped).replace("#", "").toLowerCase() : "";
 const ROUTED = [["colorPage", (n, tapped) => n && n.id ? routed(n.title, nodeRoute(n) + tappedQS(tapped)) : null], ["wikiPage", nodeRouted()], ["paintingPage", nodeRouted()], ["storyPlayer", nodeRouted()],
   ["closeup", nodeRouted("/more")],
-  ["daily", () => routed("Color of the day", "daily")],
-  ["challenge", () => routed("Daily challenge", "challenge")], ["challengeDone", () => routed("Daily challenge", "challenge")],
+  ["daily", () => routed("Today's color", "daily")],   // js/colordle.js: Name today's color
+  ["challenge", () => routed("Today's painting", "challenge")], ["challengeDone", () => routed("Today's painting", "challenge")],   // js/challenge.js
   ["tasteIntro", k => k === "palette" ? routed("Find your palette", "taste/palette") : routed("Find your color", "taste/color")],
   ["glPage", (i, d, fromHex) => routed(d && d.t || "Painting", "gallery/" + i + (fromHex ? "?c=" + String(fromHex).replace("#", "") : ""))],
   ["poemPage", id => id != null ? routed("Poem", "poem/" + id) : null],   // js/poems.js   // a museum painting (js/gallery.js); i = its place in the gallery index
@@ -189,7 +189,7 @@ function openRoute(hash, initial = false) {
     galleryPage(+numId, true, fromHex);
     return true;
   }
-  const simple = { daily: () => daily(), challenge: () => chToday() ? challengeDone() : challenge(),
+  const simple = { daily: () => daily(), challenge: () => challenge(),
     taste: () => tasteIntro(id === "palette" ? "palette" : "color"),
     lab: () => id === "honey" && typeof labHoney === "function" ? labHoney() : (LAB[id] && ["harmony", "contrast"].includes(id) ? LAB[id] : LAB.harmony)(),
     fashion: () => typeof fashionPage === "function" && fashionPage(id),
