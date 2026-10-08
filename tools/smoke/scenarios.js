@@ -196,7 +196,7 @@ scenario("home", "Rooms corner opens the stem; each room bubble navigates", asyn
 });
 
 // ================================================================== ROOMS
-for (const [shot, id, label, needs] of [["learn", "learn", "Learn", ".plates, .btn"], ["gym", "gym", "Train", ".gs-tile"], ["explore", "explore", "Explore", ".xp-cover"], ["studio", "studio", "Studio", "[data-wheel]"]]) {
+for (const [shot, id, label, needs] of [["learn", "learn", "Learn", ".plates, .btn"], ["gym", "gym", "Train", ".r2-g, .gs-tile"], ["explore", "explore", "Explore", ".xp-cover"], ["studio", "studio", "Studio", "[data-wheel]"]]) {
   scenario("rooms", `${label} renders inside the room sheet`, async t => {
     await t.open("#shot=" + shot, { settle: 600 });
     await t.waitFor(`.room-sheet[data-room="${id}"]`, 8000, `the ${label} room sheet`);
@@ -296,6 +296,24 @@ scenario("train", "check-in card opens the drill", async t => {
     if (b) await t.click(b, { force: true, wait: 400 }); else await t.sleep(300);
   }
   t.expect(t.$$(".drill .segs i.on").length >= done0 + 3 || t.$(".result"), "answering three check-in rounds did not advance the progress bar");
+});
+
+scenario("train", "every entry on the Train menu opens something (nothing locked)", async t => {
+  // design round 2 (js/rooms2.js): the games grid, the drills and the checks; each tap must leave the room
+  // (a game, a drill, a page) or answer with a sheet or a toast, with no error
+  await t.open("#shot=gx:home", { settle: 600 });
+  await t.waitFor(".r2-games .r2-g", 6000, "the Train games grid");
+  const n = t.$$(".r2-games .r2-g, .r2-list .r2-li").length;
+  t.expect(n >= 25, `only ${n} entries on the Train menu`);
+  t.expect(!t.$(".r2-train .locked, .r2-train [data-locked]"), "a locked entry on the Train menu");
+  for (let i = 0; i < n; i++) {
+    const b = t.$$(".r2-games .r2-g, .r2-list .r2-li")[i], label = (b.querySelector("b") || b).textContent.trim();
+    await t.click(b, { wait: 500 });
+    await t.waitFor(() => !t.$('.room-sheet[data-room="gym"]') || t.$(".sheet") || t.$(".toast"), 6000, `"${label}" to open something`);
+    t.ev("document.querySelectorAll('.scrim,.sheet,.toast').forEach(n => n.remove()); go('gym')");
+    await t.waitFor(".r2-games .r2-g", 6000, `the Train menu again after "${label}"`);
+  }
+  t.notes.push(`${n} entries opened`);
 });
 
 scenario("train", "Odd one out: tap tiles through a whole round", async t => {
