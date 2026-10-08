@@ -1,7 +1,8 @@
 // Tests for js/eye-names.js (every miss has names). Run: node tools/eye_names_test.js
 // Over 300 seeded pairs, with the real nameOf (js/naming.js) and the ~1,000 core names: same-name pairs never
 // claim different names; the lightness word matches the sign of ΔL*; "brighter", "warmer" and "cooler" never
-// appear; hue words are skipped for near-greys; the output is deterministic.
+// appear; hue words are skipped for near-greys; the output is deterministic; each color is named by one Learn word
+// (a core name), never a generated description like "Reddish antique ruby" (design/IMPROVE-2026-10-08 Lane H).
 const fs = require("fs"), path = require("path");
 const rd = f => fs.readFileSync(path.join(__dirname, "..", f), "utf8");
 const core = rd("js/core.js"), math = core.slice(core.indexOf("// ---------- color math"), core.indexOf("// ---------- percent display"));
@@ -13,6 +14,7 @@ const api = new Function("clamp", "esc", "S", "BYNAME", "EVERY", "LIST",
   math + pctSrc + rd("js/naming.js") + "\n" + rd("js/eye-names.js") + "\nCORE_NAMES = LIST.map(e => ({ ...e, lab: lab(e.h) }));\nreturn { lab, lch, labHex, lchHex, inGamut, labRgb, de2000, nameOf, eyeDir, eyeNames, eyeNamesLine };")(
   clamp, esc, { cards: {} }, new Map(), () => [], names);
 const E = require("../js/games/oo-engine.js");
+const LEARN = new Set(names.map(e => esc(e.n).toLowerCase()));
 let fails = 0, passes = 0;
 const ok = (c, m) => { if (c) passes++; else { fails++; if (fails < 15) console.log("FAIL  " + m); } };
 Object.assign(global, api);
@@ -25,7 +27,10 @@ for (let i = 0; i < 300; i++) {
   const e = api.eyeNames(base, m.hex), line = api.eyeNamesLine(base, m.hex, { found: i % 2 === 0 });
   const nA = api.nameOf(base).n, nB = api.nameOf(m.hex).n;
   if (nA === nB) { same++; ok(e.same && /Both are/.test(line) && /no word/.test(line), `pair ${i}: same name (${nA}) must say so`); }
-  else { diff++; ok(!e.same && line.includes(">" + esc(api.nameOf(m.hex).text) + "<"), `pair ${i}: different names must name both (${nA} / ${nB})`); }
+  else { diff++; ok(!e.same && line.includes(">" + esc(e.b.text) + "<") && line.includes(">" + esc(e.a.text) + "<") && e.a.text.toLowerCase() === nA.toLowerCase() && e.b.text.toLowerCase() === nB.toLowerCase(), `pair ${i}: different names must name both (${nA} / ${nB})`); }
+  // one Learn word per color: every linked name is one of the ~1,000 core names, never a generated description
+  const linked = [...line.matchAll(/data-swatch="[^"]+">([^<]+)</g)].map(x => x[1]);
+  ok(linked.length && linked.every(t => LEARN.has(t.toLowerCase())), `pair ${i}: only Learn words are named (${linked.join(" / ")})`);
   const dL = api.lab(m.hex)[0] - api.lab(base)[0];
   if (/\blighter\b/.test(e.dir)) ok(dL > 0, `pair ${i}: "lighter" needs a positive ΔL* (${dL.toFixed(2)})`);
   if (/\bdarker\b/.test(e.dir)) ok(dL < 0, `pair ${i}: "darker" needs a negative ΔL* (${dL.toFixed(2)})`);
