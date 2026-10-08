@@ -1068,6 +1068,38 @@ scenario("map", "the map keeps its pan and zoom when you open a color and come b
   t.expect(Math.hypot(after[0] - before[0], after[1] - before[1]) < .6 && Math.abs(after[2] - before[2]) < .02, `pan/zoom reset: ${before.map(v => v.toFixed(2))} -> ${after.map(v => v.toFixed(2))}`);
   t.expect(t.ev("HM_CTRL.current().n") === name, `the middle changed from ${name} to ${t.ev("HM_CTRL.current().n")}`);
 });
+// David, 2026-10-08 ("clicking a color makes it stick"): after a few taps and Backs, big unlabeled bubbles stayed stuck
+// over the map and the map came back off-center. Three opens in a row, each one a far bubble tapped again mid-glide
+// (taps open at once), with Back between: no stand-in bubble or flying chip is left anywhere, and Home comes back
+// centered on a bubble, not on a half-way pan.
+scenario("map", "three bubble taps with Back between leave no stuck bubble and Home re-centers", async t => {
+  let cv = await H.homeReady(t);
+  const leftovers = () => t.$$(".hc-morph, .flyer").length;
+  const onLattice = () => t.ev(`(() => { const [x, y] = HM_CTRL.panValue(), sp = HM_CTRL.studyPoints(); return sp.pts.reduce((m, p) => Math.min(m, Math.hypot(p.x - x, p.y - y)), 1e9); })()`);
+  for (let i = 0; i < 3; i++) {
+    cv = t.$(".screen.hm canvas");
+    const r = cv.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    // a bubble outside the open zone (it glides to the middle first), a different one each round
+    const far = t.ev(`(() => { const seen = new Set(), out = []; for (const p of HM_CTRL.studyPoints().pts) { const h = p.o.h; if (seen.has(h)) continue; seen.add(h);
+      const l = HM_CTRL.locate(h); if (!l || l.d < 34) continue; const d = Math.hypot(l.x - ${cx}, l.y - ${cy}); if (d > 130 && d < 230) out.push({ h, n: p.n, d }); }
+      return out.sort((a, b) => a.d - b.d)[${i}] || null; })()`);
+    t.expect(far, `round ${i + 1}: no bubble outside the open zone to tap`);
+    let at = t.ev(`HM_CTRL.locate(${JSON.stringify(far.h)})`);
+    await t.tapAt(cv, at.x, at.y, { wait: 40 });   // starts the glide
+    at = t.ev(`HM_CTRL.locate(${JSON.stringify(far.h)})`) || at;
+    await t.tapAt(cv, at.x, at.y, { wait: 60 });   // the same bubble again, mid-glide: it opens
+    if (!t.$("[data-back]")) { await t.tapAt(cv, cx, cy, { wait: 60 }); }   // (a slow frame finished the glide: the middle one opens)
+    await t.waitFor("[data-back]", 8000, `round ${i + 1}: a page for ${far.n}`);
+    t.expect(!t.$(".hc-morph"), `round ${i + 1}: the tapped bubble's stand-in stayed on the page`);
+    await t.click("[data-back]", { wait: 80 });   // Back at once, while the page may still be flying in
+    await t.waitFor(() => t.$$(".screen.hm canvas").length === 1, 8000, `round ${i + 1}: Home again`);
+    await t.sleep(1000);
+    t.expect(leftovers() === 0, `round ${i + 1}: ${leftovers()} stuck bubble(s) over Home after Back`);
+    const off = onLattice();
+    t.expect(off < .05, `round ${i + 1}: Home came back off-center (${off.toFixed(2)} from the nearest bubble)`);
+  }
+  t.notes.push("3 opens mid-glide, no leftovers, centered on return");
+});
 scenario("map", "Look: family names when zoomed out is off by default and toggles on", async t => {
   await H.homeReady(t);
   t.expect(!t.ev("S.hm.famNames"), "family names are on by default");

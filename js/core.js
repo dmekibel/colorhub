@@ -267,10 +267,12 @@ function runMorph(root) {
   const m = PENDING_MORPH; PENDING_MORPH = null;
   // only right after the tap that asked for it, so a stale chip never flies into an unrelated screen
   const t = m && performance.now() - m.at < 700 && root.querySelector(MORPH_TARGET);
-  if (!t) return;
+  if (!t || !root.isConnected) return;   // the screen already left (a quick Back): nothing to fly into
   const r = t.getBoundingClientRect();
   if (!r.width || r.top > innerHeight) return;
   const fly = document.createElement(m.img ? "img" : "div");
+  // never outlives its flight: if onfinish doesn't come (the page was swapped mid-flight), it still goes
+  setTimeout(() => { fly.remove(); t.style.visibility = ""; }, 900);
   fly.className = "flyer";
   if (m.img) fly.src = m.img; else fly.style.background = m.bg;
   Object.assign(fly.style, { left: r.left + "px", top: r.top + "px", width: r.width + "px", height: r.height + "px", borderRadius: getComputedStyle(t).borderRadius });
@@ -331,7 +333,9 @@ function show(html, cls = "", tab = null) {
   const backNav = BACK_RENDER; BACK_RENDER = false;
   timers.forEach(clearTimeout); timers = []; onKey = null;
   cleanup.forEach(f => { try { f(); } catch (e) {} }); cleanup = [];
-  document.querySelectorAll(".scrim,.sheet,.toast,.fade-ghost,.rooms-stem,.rm-scrim").forEach(n => n.remove());
+  // (.flyer / .hc-morph: a bubble-to-page shape belongs to the screen that asked for it; one left mid-flight or
+  // orphaned by an error must never float over the next screen as a stuck, unlabeled circle)
+  document.querySelectorAll(".scrim,.sheet,.toast,.fade-ghost,.rooms-stem,.rm-scrim,.flyer,.hc-morph").forEach(n => n.remove());
   document.body.classList.remove("stem-open"); STEM_OPEN = false;
   // a new screen always scrolls: release any scroll lock a sheet or panel left behind (leaving a screen with a sheet
   // open used to keep the body pinned, so the next page couldn't scroll)

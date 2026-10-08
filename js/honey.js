@@ -1178,6 +1178,16 @@ function honeycomb(host, opts = {}) {
   const ptrs = new Map();
   const hit = (x, y) => { let best = null, bd = Infinity; for (const b of drawn) { const d = Math.hypot(b.x - x, b.y - y); if (d < b.d / 2 + 4 && d / b.d < bd) { bd = d / b.d; best = b; } } return best; };
   const local = e => { const r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+  // A bubble opens on pointerup, so the page is already under the finger when a phone sends the tap's own click
+  // a moment later: that click must not land on the new page (it pressed whatever sat at the bubble's spot).
+  const swallowClick = e => {
+    if (e.pointerType === "mouse") return;
+    const x = e.clientX, y = e.clientY, t0 = performance.now();
+    const eat = ev => { if (performance.now() - t0 < 600 && Math.hypot(ev.clientX - x, ev.clientY - y) < 30) { ev.preventDefault(); ev.stopPropagation(); } done(); };
+    const done = () => { removeEventListener("click", eat, true); clearTimeout(tm); };
+    const tm = setTimeout(done, 600);
+    addEventListener("click", eat, true);
+  };
   const GLOBE_ROT_K = 150;
   cv.addEventListener("pointerdown", e => {
     if (!lay) return;
@@ -1281,7 +1291,7 @@ function honeycomb(host, opts = {}) {
         const reach = Math.max(cd * .5 + p.b.d * .95, Math.min(W, vy()) * .16);
         const far = opts.centerFirst && p.it !== center && p.it !== glided && Math.hypot(p.x - W / 2, p.y - vcy()) > reach;
         pressed = null; kick();
-        if (far) { glided = p.it; lay.globe ? glideToGlobe(p.it) : glideTo(p.x, p.y); } else { glided = null; open(p.it, p.b); }
+        if (far) { glided = p.it; lay.globe ? glideToGlobe(p.it) : glideTo(p.x, p.y); } else { glided = null; swallowClick(e); open(p.it, p.b); }
         return;
       }
       pressed = null; kick();
@@ -1317,9 +1327,11 @@ function honeycomb(host, opts = {}) {
     // there's no real DOM element at the bubble's spot for growFrom()/morphFrom() to read a rect from.
     const mkSrc = () => {
       if (!b) return null;
+      cv.parentNode.querySelectorAll(".hc-morph").forEach(n => n.remove());   // only ever one, and only for this tap
       const m = document.createElement("div"), r = b.d * 1.06;
       m.className = "hc-morph"; Object.assign(m.style, { left: b.x - r / 2 + "px", top: b.y - r / 2 + "px", width: r + "px", height: r + "px", background: it.h });
       cv.parentNode.appendChild(m);
+      setTimeout(() => m.remove(), 700);   // a stand-in lives for one tap; it can never stay stuck on the map
       return m;
     };
     const morph = () => { const m = mkSrc(); if (m) { morphFrom(m); m.remove(); } };
@@ -1348,7 +1360,12 @@ function honeycomb(host, opts = {}) {
         const f = focus && (focus.h ? focus : BYNAME.get(String(focus.n || "").toLowerCase())), p = f && lay.pts.find(q => q.it.n === f.n);
         P = p ? [-p.lon, clamp(Math.asin(clamp(p.y, -1, 1)), -1.5, 1.5)] : [0, 0];
       }
-    } else if (how === "restore" && HONEY_PAN && HONEY_PAN.key === lay.key) { P = [HONEY_PAN.x, HONEY_PAN.y]; if (HONEY_PAN.z) Z = clamp(HONEY_PAN.z, ZMIN, ZMAX);   /* L18: the last zoom you left, always */ }
+    } else if (how === "restore" && HONEY_PAN && HONEY_PAN.key === lay.key) {
+      P = [HONEY_PAN.x, HONEY_PAN.y]; if (HONEY_PAN.z) Z = clamp(HONEY_PAN.z, ZMIN, ZMAX);   /* L18: the last zoom you left, always */
+      // a tap can open a bubble mid-glide or mid rubber-band (taps open at once), which saved a half-way pan: come
+      // back centered on the nearest bubble, never off to one side (a no-op for a pan saved at rest)
+      const n = nearestTo(P); if (n) P = [n.x, n.y];
+    }
     else {
       const f = focus && (focus.h ? focus : BYNAME.get(String(focus.n || "").toLowerCase()));
       let p = f && lay.pts.find(q => q.it.n === f.n);
