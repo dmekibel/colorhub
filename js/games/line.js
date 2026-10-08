@@ -86,7 +86,7 @@ function ooAcrossRun() {
         s.res.forEach((r, k) => { if (ps[k] != null) ooEdgeUpdate(edge, "line", ps[k], !!r.ok); });
         ln.p = +stair.d.toFixed(2); ln.n = (ln.n || 0) + 1; const pb = s.hits > (ln.best || 0); ln.best = Math.max(ln.best || 0, s.hits); save();
         const finish = s.hits >= 6;
-        ooResults({ title: "Across the line", s, finish, stars: [finish, finish && s.med != null && s.med <= 4500, finish].map(Number), got: [1, 1, 1], pb, next: null,
+        ooResults({ title: "Across the line", s, finish, stars: [finish, finish && s.med != null && s.med <= 4500, finish && s.hits === s.total].map(Number), got: [1, 1, 1], labels: ["Passed", "Quick", "Perfect"], lede: finish ? "You held the word's edge most of the way." : `You need 6 of ${s.total}. Look for where one word turns into the next, not for the biggest difference.`, pb, next: null,
           again: ooAcrossRun, diff: ooPickLine("line"), score: `${s.hits} of ${s.total} right`, back: "Back to Train", onBack: () => go("gym") });
       } });
   };

@@ -193,7 +193,7 @@ function knowState(color) {
 function confusions(color, n = 5) {
   try {
     const ix = lnIndex(), k = color ? lnKey(color) : null;
-    let list = Object.values(ix.p).filter(p => p.ab + p.ba > 0);
+    let list = Object.values(ix.p).filter(p => p.ab + p.ba > 0 && p.a && p.b);   // word mix-ups only: older saves hold hex-to-hex perceptual misses, ignored here
     if (k) list = list.filter(p => p.ka === k || p.kb === k).map(p => p.ka === k ? p : { ...p, a: p.b, ha: p.hb, b: p.a, hb: p.ha, ab: p.ba, ba: p.ab });
     return list.map(p => ({ a: p.a || p.ha, ha: p.ha || null, b: p.b || p.hb, hb: p.hb || null, n: p.ab + p.ba, ab: p.ab, ba: p.ba, last: p.t }))
       .sort((x, y) => y.n - x.n || y.last - x.last).slice(0, n);

@@ -116,7 +116,12 @@ function trEyeThreshold(family, axis) {
 // learnerLog (js/learner.js, another lane) when it exists; otherwise S.gymMiss, a capped list the learner lane reads.
 function ooLogMiss(right, picked, meta = {}) {
   if (!right || !picked || right === picked) return;
-  try { if (typeof learnerLog === "function" && learnerLog({ type: "confuse", a: right, b: picked, src: "train" })) return; } catch (e) {}
+  // a word mix-up only when both colors have real names; a perceptual miss between two hexes is eye data, not a naming confusion
+  try {
+    const nm = x => { const c = BYNAME.get(String(x).toLowerCase()); if (c) return c.n; const u = String(x).toUpperCase(); const e = (typeof ALL !== "undefined" ? ALL : []).find(c => c.h.toUpperCase() === u); return e ? e.n : null; };
+    const na = nm(right), nb = nm(picked);
+    if (na && nb && na !== nb && typeof learnerLog === "function" && learnerLog({ type: "confuse", a: na, b: nb, src: "train" })) return;
+  } catch (e) {}
   // no learner (yet): a capped list the learner lane reads, with the direction of the miss (dL, dC, dH)
   const [L1, C1, H1] = lch(right), [L2, C2, H2] = lch(picked);
   let dH = H2 - H1; if (dH > 180) dH -= 360; if (dH < -180) dH += 360;
@@ -396,8 +401,14 @@ function ooRun(cfg) {
     const last = (cfg.endOnMiss && !res.ok) || (cfg.lives && st.lives <= 0) || (!cfg.lives && !cfg.endOnMiss && st.i >= cfg.total) || st.i >= (cfg.max || 99) || (cfg.endWhen && cfg.endWhen(st));
     const cmp = fb.cmp ? `<div class="oo-cmp">${fb.cmp.map(([h, w]) => `<span><i style="--c:${h}"></i><em>${esc(w)}</em></span>`).join("")}</div>` : "";
     if (res.ok && !last && !it.hold) {
-      ui.foot.innerHTML = `<p class="oo-fb ok oo-in">${fb.html}</p>`;
-      return later(round, fb.html.length > 120 ? 1900 : 1300);
+      // right: a short auto-advance, but a tap on the line or the board holds it, and Next goes on whenever you're ready
+      ui.foot.innerHTML = `<div class="oo-rev oo-in"><p class="oo-fb ok">${fb.html}</p><button class="btn ghost" data-next>Next ${ICON.arrow}</button></div>`;
+      let tm = later(round, fb.html.length > 120 ? 2400 : 1500), gone = false;
+      const hold = () => { if (tm) { clearTimeout(tm); tm = 0; } };
+      const go1 = () => { if (gone) return; gone = true; hold(); round(); };
+      ui.foot.querySelector("[data-next]").onclick = go1;
+      ui.foot.addEventListener("pointerdown", hold, { once: true }); ui.stage.addEventListener("pointerdown", hold, { once: true });
+      return;
     }
     ui.foot.innerHTML = `<div class="oo-rev oo-in">${res.ok ? "" : cmp}<p class="oo-fb${res.ok ? " ok" : ""}">${fb.html}</p><button class="btn" data-next>${last ? (cfg.box ? "Done" : "See how you did") : "Next"} ${ICON.arrow}</button></div>`;
     ui.foot.querySelector("[data-next]").onclick = () => last ? end() : round();
@@ -522,7 +533,7 @@ function ooPlayExtra(id) {
 // ---------- results: every end of a set is designed (cleared, mastered, a best, not yet) ----------
 function ooResults(o) {
   const s = o.s, misses = s.res.filter(x => !x.ok && x.base && x.odd && x.base !== x.odd && !x.none).slice(0, 8);
-  const starRow = ["Passed", "Quick", "No hints"].map((w, k) => `<span class="oo-star${o.stars[k] ? " on" : ""}${o.got[k] && o.stars[k] ? " new" : ""}" style="--k:${k}"><i></i>${w}</span>`).join("");
+  const starRow = (o.labels || ["Passed", "Quick", "No hints"]).map((w, k) => `<span class="oo-star${o.stars[k] ? " on" : ""}${o.got[k] && o.stars[k] ? " new" : ""}" style="--k:${k}"><i></i>${w}</span>`).join("");
   const nx = o.next != null ? OO_LEVELS[o.next] : null;
   const head = o.head ? o.head : o.mastered ? "Level <em>mastered.</em>" : o.unlocked ? "Level <em>cleared.</em>" : o.finish ? (o.pb ? "A new <em>best.</em>" : "Well <em>seen.</em>") : "Not <em>yet.</em>";
   // the honest eye line: the judgment that moved most during this set

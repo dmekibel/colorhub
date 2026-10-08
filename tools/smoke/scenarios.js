@@ -382,8 +382,7 @@ scenario("train", "Gradients: teaching board then level 1 by taps", async t => {
 scenario("train", "Gradients: map and Choose mode and the daily board", async t => {
   await t.open("#shot=gx:hue:map", { settle: 600 });
   await t.waitFor(".hg-lv", 6000, "the level grid");
-  const locked0 = t.$$(".hg-lv.locked").length;
-  t.expect(locked0 > 0, "nothing is locked on a played save");
+  t.expect(t.$$(".hg-lv.locked").length === 0, "levels are locked in For you: nothing should be locked");
   await t.click("[data-mode=choose]", { wait: 500 });
   await t.waitFor("[data-diff]", 4000, "the difficulty picker");
   await t.click("[data-diff=hard]", { wait: 500 });
