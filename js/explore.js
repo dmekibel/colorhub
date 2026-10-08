@@ -236,7 +236,8 @@ function explorePager() {
     sections.forEach(s => io.observe(s));
     cleanup.push(() => io.disconnect());
   }
-  pager.addEventListener("click", e => { const s = e.target.closest("[data-part]"); if (s) openPart(s.dataset.part); });
+  // (the "For you" cover opens its feed directly: openPart("all") is the pager itself, so it used to just redraw the pager)
+  pager.addEventListener("click", e => { const s = e.target.closest("[data-part]"); if (s) s.dataset.part === "all" ? exploreForYou() : openPart(s.dataset.part); });
   el.querySelector("[data-search]").onclick = () => exploreSearchSheet();
 }
 
