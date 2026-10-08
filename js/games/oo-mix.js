@@ -143,7 +143,8 @@ const OO_MIXPLAY = {
           const ok = i === rd.fresh; chips[rd.fresh].classList.add("ring"); if (!ok) c.classList.add("miss");
           buzz(ok ? 10 : [10, 40, 10]); if (ok) ooRipple(ui.stage.querySelector(".oo-chips"), c);
           resolve({ ok: ok ? 1 : 0, ms: performance.now() - t0, act: rd.act, right: rd.opts[rd.fresh], picked: ok ? null : rd.opts[i],
-            line: ok ? `Right. It was ${ooPct(rd.act)} from one you'd seen.` : `The ringed one was new, ${ooPct(rd.act)} from one you'd seen.` });
+            line: ok ? `Right. It was ${ooPct(rd.act)} from one you'd seen.` : `The ringed one was new, ${ooPct(rd.act)} from one you'd seen.`,
+            mc: ok ? null : { you: { h: rd.opts[i] }, was: { h: rd.opts[rd.fresh] }, wasLabel: "The new one", line: typeof eyeDir === "function" ? `The new one is ${eyeDir(rd.opts[i], rd.opts[rd.fresh])} than the one you picked.` : "" } });
         });
       }, 3400);
     });

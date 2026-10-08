@@ -448,11 +448,11 @@ scenario("train", "Gradients: map and Choose mode and the daily board", async t 
 });
 
 // ================================================================== EXPLORE
-for (const [part, expect] of [["all", ".x-feed .pin, .x-feed [data-pin]"], ["art", ".xb-pick"], ["ideas", ".x-feed .pin, .x-feed [data-pin]"], ["world", "#world *"]]) {
+for (const [part, expect] of [["all", ".x-feed .pin, .x-feed [data-pin]"], ["art", ".xb-pick"], ["ideas", ".x-feed .pin, .x-feed [data-pin]"], ["world", "#world *"], ["saved", ".x-feed"]]) {
   scenario("explore", `${part} cover opens and goes back`, async t => {
     await t.open("#shot=explore:all", { settle: 600 });
     const cover = await t.waitFor(`.xp-cover[data-part="${part}"]`, 8000, `the ${part} cover`);
-    t.expect(t.$$(".xp-cover").length === 4, `${t.$$(".xp-cover").length} covers instead of 4`);
+    t.expect(t.$$(".xp-cover").length === 5, `${t.$$(".xp-cover").length} covers instead of 5`);
     let pinOpened = false;
     await t.click(cover, { force: true, wait: 500 });
     await t.waitFor(".p-title", 8000, `the ${part} screen`);
@@ -471,6 +471,18 @@ for (const [part, expect] of [["all", ".x-feed .pin, .x-feed [data-pin]"], ["art
     await t.waitFor(".xp-cover", 6000, "the pager of covers after Back");
   });
 }
+
+scenario("explore", "a cover's palette chip opens its color page; the primary opens the part", async t => {
+  await t.open("#shot=explore:all", { settle: 600 });
+  const chip = await t.waitFor('.xp-cover[data-part="all"] .xp-chip', 8000, "a palette chip on the For you cover");
+  await t.click(chip, { force: true, wait: 500 });
+  await t.waitFor(".cp-page, .nm-page, .p-title", 8000, "a color page after tapping a palette chip");
+  t.expect(!t.$(".x-feed"), "the chip opened the For you feed instead of its color page");
+  await t.open("#shot=explore:all", { settle: 600 });
+  const go = await t.waitFor('.xp-cover[data-part="saved"] [data-go]', 8000, "the Saved cover's primary");
+  await t.click(go, { force: true, wait: 500 });
+  await t.waitFor(".p-title", 8000, "a part after the Saved cover's primary");
+});
 
 scenario("explore", "Art with a color shows tiles", async t => {
   await t.open("#shot=explore:art:Denim", { settle: 600 });
@@ -1577,6 +1589,37 @@ scenario("you-coverage", "You: Untangle on a mix-up opens the Learn sheet on tha
   t.expect(/Teal/i.test(t.text(".ls-sheet")) && /Petrol/i.test(t.text(".ls-sheet")), "the sheet isn't on the pair");
 });
 
+// ================================================================== THE PAINTING PAGE + NAME IT / FIND IT (PLAN.md lane A)
+scenario("paintings", "lane A: a painting page leads with what stands out; Name its colors runs three rounds, logs them, and offers Learn", async t => {
+  await t.open("#/gallery/12", { settle: 800 });
+  await t.waitFor(".pal-name b", 12000, "the palette rows");
+  t.expect(!t.$$(".pal-name b").some(b => /^between/i.test(b.textContent)), "a 'between X and Y' is used as a name");
+  t.expect(t.$("[data-glswatches] .pal.gl-out"), "the strip doesn't lead with a stands-out color");
+  const L0 = t.ev(`lab(document.querySelector("[data-glswatches] .pal").dataset.swatch)[0]`);
+  t.expect(L0 > 30, `the first chip is a near-black (L* ${Math.round(L0)})`);
+  const heroW = t.$(".gl-hero>span").getBoundingClientRect().width, pageW = t.$(".p-title").getBoundingClientRect().width;
+  t.expect(heroW >= pageW - 2, `the picture isn't full width (${Math.round(heroW)} of ${Math.round(pageW)})`);
+  await t.waitFor(() => /You can name \d+ of \d+/.test(t.text(".gl-cov")), 6000, "the coverage line");
+  await t.click('[data-glo="area"]', { wait: 300 });
+  const shares = t.$$("[data-glswatches] .pal span").map(s => parseInt(s.textContent, 10) || 0);
+  t.expect(shares[0] >= Math.max(...shares), "By area doesn't lead with the biggest color");
+  await t.click('[data-glo="out"]', { wait: 300 });
+  const answers = () => t.ev(`lnS().ev.filter(e => e.e === "answer" && /-it$/.test(e.by || "")).length`);
+  const n0 = answers();
+  await t.click(await t.waitFor(".tq-open", 8000, "the Name its colors button"), { wait: 500 });
+  for (let r = 0; r < 3; r++) {
+    await t.waitFor(".tq-opts button, .tq.finding", 6000, `round ${r + 1}`);
+    if (t.$(".tq.finding")) t.ev(`(() => { const f = document.querySelector(".tq-frame"), b = f.getBoundingClientRect(); f.dispatchEvent(new MouseEvent("click", { bubbles: true, clientX: b.left + b.width / 2, clientY: b.top + b.height * .4 })); })()`);
+    else await t.click(".tq-opts button", { wait: 300 });
+    await t.click(await t.waitFor(".tq-next", 4000, `round ${r + 1}'s answer`), { wait: 400 });
+  }
+  await t.waitFor(".tq-learn", 4000, "the end of the quiz");
+  t.expect(answers() - n0 === 3, `the quiz logged ${answers() - n0} answers, not 3`);
+  t.expect(t.ev(`lnS().ev.slice(-6).filter(e => e.e === "answer").every(e => e.c && e.src === "painting")`), "an answer was logged without its name");
+  await t.click(".tq-learn", { wait: 700 });
+  await t.waitFor(".ls-sheet", 5000, "the Learn sheet from the quiz");
+  t.expect(/Helena/.test(t.text(".ls-sheet")), "the Learn sheet doesn't name the painting");
+});
 // Lane H (design/IMPROVE-2026-10-08/PLAN.md): Across the line clicks. The anchor chip shows the word's own color,
 // a right answer offers the neighbor word, adding it makes a review card due tomorrow, a miss says "In ColorHub's
 // map", and each answer is logged to the Learner Model with names.

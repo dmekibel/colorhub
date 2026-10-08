@@ -125,7 +125,7 @@ function rpDrawersHTML(entry, name, hex, famC, paintHost) {
   const paint = `${paintHost}${call(rcReachSection, name, hex)}${call(rcRoleSection, name, hex)}${call(rcPaintersSection, name, hex)}${call(rcWhenWhereSection, name, hex)}`;
   const words = `<div class="c-poems"></div>${call(archiveRows, entry, "books", famC)}`;
   const world = `${call(btRow, entry, famC)}${call(gmRow, entry, famC)}<section class="fx-in" data-world-in></section>${call(archiveRows, entry, "films", famC)}`;
-  const measured = `${rcMeasuredHTML(hex)}${rcMixHTML(hex)}${rcHarmonyHTML(hex)}`;
+  const measured = `${rcMeasuredHTML(hex)}${rcMixHTML(hex)}${rcHarmonyHTML(hex, name)}`;
   const [L, C] = lch(hex);
   rcPercentileCaches();
   const lp = rcPercentile(RC_LSORT, L), cp = rcPercentile(RC_CSORT, C);
@@ -201,20 +201,84 @@ const RP_TWINKIND = { "pigment-mineral-dye": "a pigment or dye name with a histo
 const RP_POS = { n: [0, -1], s: [0, 1], ne: [1, -.5], nw: [-1, -.5], se: [1, .5], sw: [-1, .5] };
 function rpHexHTML(pos, c, extra = "") {
   const cls = `rp-hex rp-${pos}${c && c.hit ? "" : " rp-hex-empty"}`;
-  if (!c.hit) return `<div class="${cls}"><small>${esc(c.label)}</small><span>${c.nohue ? "" : "No named color this way"}</span></div>`;
-  return `<button class="${cls}" data-rc-open data-h="${c.hit.h}" data-n="${esc(c.hit.n)}" data-dir="${esc(c.label)}" style="--c:${c.hit.h}" data-ink="${ink(c.hit.h)}"${extra}><small>${esc(c.label)}</small><b>${esc(c.hit.n)}</b><em>${pctDiff(c.hit.de)}</em></button>`;
+  if (!c.hit) return `<div class="${cls}"></div>`;
+  return `<button class="${cls}" data-rc-open data-h="${c.hit.h}" data-n="${esc(c.hit.n)}" style="--c:${c.hit.h}" data-ink="${ink(c.hit.h)}"${extra}><b>${esc(c.hit.n)}</b><em>${Math.round(Math.max(0, 100 - c.hit.de))}%</em></button>`;
 }
 function rpFlowerHTML(cells, name, hex) {
   return `<div class="rp-flower">${cells.map(c => rpHexHTML(c.pos, c)).join("")}<div class="rp-hex rp-c" style="--c:${hex}" data-ink="${ink(hex)}"><b>${esc(name)}</b><em class="mono">${hex}</em></div></div>`;
+}
+// ---------- Walk from here: a honeycomb you can drag outward (David, 2026-10-08) ----------
+// Axial hex grid centred on this color. Rings are filled lazily as you pan: each new cell takes the unplaced name
+// closest (CIELAB) to the cells already around it, so neighbors on screen are neighbors in color.
+const RP_HS = 46, RP_DIR = [[1, 0], [1, -1], [0, -1], [-1, 0], [-1, 1], [0, 1]];
+function rpHexXY(q, r) { return [1.5 * RP_HS * q, Math.sqrt(3) * RP_HS * (r + q / 2)]; }
+function rpRing(n) {
+  if (n === 0) return [[0, 0]];
+  const out = []; let q = -n, r = n;
+  for (let d = 0; d < 6; d++) for (let i = 0; i < n; i++) { out.push([q, r]); q += RP_DIR[d][0]; r += RP_DIR[d][1]; }
+  return out;
+}
+function rpWalkGrid(name, hex) {
+  const list = (walkNameList() || coreFallback()).filter(e => !(e.src && e.src.length === 1 && e.src[0] === "jp") && e.n.toLowerCase() !== name.toLowerCase());
+  list.forEach(e => { if (!e.lab) e.lab = lab(e.h); });
+  const used = new Set(), cells = new Map(), L0 = lab(hex), key = (q, r) => q + "," + r;
+  cells.set(key(0, 0), { q: 0, r: 0, lab: L0, self: true });
+  let rings = 0;
+  const d2 = (a, b) => (a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2 + (a[2] - b[2]) ** 2;
+  const grow = n => {
+    while (rings < n) {
+      rings++;
+      rpRing(rings).forEach(([q, r]) => {
+        const nb = RP_DIR.map(([dq, dr]) => cells.get(key(q + dq, r + dr))).filter(Boolean);
+        let best = null, bd = 1e12;
+        for (const e of list) { if (used.has(e.n)) continue; let t = 0; for (const c of nb) t += d2(e.lab, c.lab); if (t < bd) { bd = t; best = e; } }
+        if (!best) return;
+        used.add(best.n);
+        cells.set(key(q, r), { q, r, n: best.n, h: best.h, lab: best.lab, de: de2000(L0, best.lab) });
+      });
+    }
+  };
+  return { cells, grow, get rings() { return rings; } };
 }
 function rpWalkSection(name, hex) {
   const id = "rp-walk-" + Math.random().toString(36).slice(2, 8);
   const draw = () => {
     const box = document.getElementById(id); if (!box) return;
-    const { cells, crowd } = compassOf(hex, name), nm = crowd.nearest, near = crowd.near;
-    const line = near >= 8 ? `A crowded corner: ${near} named colors within ${pctFmt(5)}.` : near >= 3 ? `A well-named corner: ${near} named colors within ${pctFmt(5)}.` : near >= 1 ? `A sparse corner: ${near === 1 ? "one other name" : near + " other names"} within ${pctFmt(5)}.` : `A lonely color: the nearest name${nm ? ` (${esc(nm.n)})` : ""} is ${nm ? pctDiff(nm.de) : "far"}.`;
-    box.innerHTML = `<section class="rp-walk"><h2>Walk from here</h2><p class="rp-walk-sub">Six neighbors by name. Hold the color at the top to walk without scrolling.</p>${rpFlowerHTML(cells, name, hex)}<p class="rp-crowd">${line}</p></section>`;
-    box._cells = cells;
+    const g = rpWalkGrid(name, hex);
+    box.innerHTML = `<section class="rp-walk"><h2>Walk from here</h2><p class="rp-walk-sub">Drag to keep walking. Neighbors are close in color.</p>
+      <div class="rp-hc" tabindex="0" aria-label="Neighborhood of ${esc(name)}"><div class="rp-hc-in"></div></div>
+      <button class="rp-hc-map" type="button">Open on the map</button></section>`;
+    const vp = box.querySelector(".rp-hc"), inn = box.querySelector(".rp-hc-in"), W = () => vp.clientWidth || 340, H = () => vp.clientHeight || 360;
+    let ox = 0, oy = 0, sc = 1, drawn = new Set();
+    const apply = () => { inn.style.transform = `translate(${W() / 2 + ox}px,${H() / 2 + oy}px) scale(${sc})`; };
+    const paint = () => {
+      const need = Math.min(14, Math.ceil(Math.max(Math.hypot(Math.abs(ox) + W() / 2 / sc, 0), Math.hypot(Math.abs(oy) + H() / 2 / sc, 0)) / (RP_HS * 1.5)) + 1);
+      g.grow(Math.max(3, need));
+      let html = "";
+      g.cells.forEach(c => { const k = c.q + "," + c.r; if (drawn.has(k)) return; drawn.add(k); const [x, y] = rpHexXY(c.q, c.r);
+        const st = `left:${(x - RP_HS).toFixed(1)}px;top:${(y - RP_HS * .866).toFixed(1)}px`;
+        html += c.self ? `<div class="rp-hc-c rp-hc-self" style="${st};--c:${hex}" data-ink="${ink(hex)}"><b>${esc(name)}</b></div>`
+          : `<button class="rp-hc-c" style="${st};--c:${c.h}" data-ink="${ink(c.h)}" data-rc-open data-h="${c.h}" data-n="${esc(c.n)}"><b>${esc(c.n)}</b><em>${Math.round(Math.max(0, 100 - c.de))}%</em></button>`; });
+      inn.insertAdjacentHTML("beforeend", html);
+    };
+    paint(); apply();
+    const ptrs = new Map(); let moved = 0, pd = 0, last = null;
+    vp.addEventListener("pointerdown", e => { ptrs.set(e.pointerId, [e.clientX, e.clientY]); moved = 0; last = [e.clientX, e.clientY]; if (ptrs.size === 2) { const [a, b2] = [...ptrs.values()]; pd = Math.hypot(a[0] - b2[0], a[1] - b2[1]); } });
+    vp.addEventListener("pointermove", e => {
+      if (!ptrs.has(e.pointerId)) return;
+      const prev = ptrs.get(e.pointerId); ptrs.set(e.pointerId, [e.clientX, e.clientY]);
+      if (ptrs.size === 2) { const [a, b2] = [...ptrs.values()], d = Math.hypot(a[0] - b2[0], a[1] - b2[1]); if (pd) sc = Math.max(.6, Math.min(1.5, sc * d / pd)); pd = d; moved = 99; apply(); return; }
+      const dx = e.clientX - prev[0], dy = e.clientY - prev[1]; moved += Math.abs(dx) + Math.abs(dy);
+      if (moved > 8) { ox += dx / sc; oy += dy / sc; vp.classList.add("drag"); apply(); paint(); }
+    });
+    const up = e => { ptrs.delete(e.pointerId); pd = 0; if (!ptrs.size) setTimeout(() => vp.classList.remove("drag"), 0); };
+    vp.addEventListener("pointerup", up); vp.addEventListener("pointercancel", up);
+    vp.addEventListener("click", e => { if (moved > 8) { e.stopPropagation(); e.preventDefault(); } }, true);
+    vp.addEventListener("wheel", e => { if (!e.ctrlKey) return; e.preventDefault(); sc = Math.max(.6, Math.min(1.5, sc * (e.deltaY < 0 ? 1.08 : .92))); apply(); }, { passive: false });
+    box.querySelector(".rp-hc-map").onclick = () => {
+      const near = [...g.cells.values()].filter(c => !c.self).sort((p, q) => p.de - q.de).slice(0, 23);
+      if (typeof colorSet === "function" && typeof csOnMap === "function") csOnMap(colorSet({ kind: "walk", id: routeSlug(name), title: `Around ${name}`, colors: [{ h: hex, n: name }, ...near.map(c => ({ h: c.h, n: c.n }))], src: "color/" + routeSlug(name) }));
+    };
   };
   setTimeout(() => { draw(); if (!compassHasLibrary()) loadLongNames().then(draw).catch(() => {}); }, 0);
   return `<div id="${id}"></div>`;
@@ -240,7 +304,7 @@ function rpHoldWalk(el, name, hex) {
   hero.addEventListener("pointermove", e => {
     if (!ov) { if (timer && Math.hypot(e.clientX - sx, e.clientY - sy) > 12) { clearTimeout(timer); timer = 0; } return; }
     const t = document.elementFromPoint(e.clientX, e.clientY), h = t && t.closest(".rp-hold .rp-hex");
-    if (h !== hot) { if (hot) hot.classList.remove("hot"); hot = h; if (hot) { hot.classList.add("hot"); buzz(4); const say = ov.querySelector(".rp-hold-say"); say.querySelector("[data-say-dir]").textContent = hot.dataset.dir || ""; say.querySelector("[data-say-name]").textContent = hot.dataset.n ? `${hot.dataset.n} · ${pctMatch(+(hot.querySelector("em").textContent.replace(/[^\d.]/g, "")) || 0)}` : ""; } }
+    if (h !== hot) { if (hot) hot.classList.remove("hot"); hot = h; if (hot) { hot.classList.add("hot"); buzz(4); const say = ov.querySelector(".rp-hold-say"); say.querySelector("[data-say-dir]").textContent = hot.dataset.n || ""; say.querySelector("[data-say-name]").textContent = hot.querySelector("em") ? hot.querySelector("em").textContent : ""; } }
   });
   hero.addEventListener("pointerup", () => end(true));
   hero.addEventListener("pointercancel", () => end(false));

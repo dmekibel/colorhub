@@ -113,3 +113,30 @@
    a small marker where the visitor tapped (removed on the next tap) */
 .gl-hero>span.gl-tap{cursor:crosshair}
 .gl-tap-dot{position:absolute;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.5),0 2px 6px rgba(0,0,0,.4);pointer-events:none;animation:fade .2s both}
+
+/* the painting page leads with its best colors (IMPROVE-2026-10-08, Wave 1a Lane A): the picture full width, one
+   quiet "Name its colors" button under it, then Look for (accent, easy to miss, focal) above the bars */
+.gl-hero.gl-full-w{flex-direction:column;align-items:center}
+.gl-under{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;min-height:58px}
+.gl-under .gl-full{margin:0;text-align:right;margin-left:auto}
+.gl-quiz{min-height:44px}
+.gl-quiz .tq-open{margin:8px 0 0}
+.gl-roles{margin-top:22px}
+.gl-roles:empty{display:none}
+.gl-roles-h{margin:0 0 10px;font:italic 400 17px/1 var(--serif);color:var(--soft)}
+.gl-roles-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.gl-role{display:flex;flex-direction:column;gap:8px;min-width:0;padding:0;text-align:left;color:var(--ink);background:none}
+.gl-role i{display:block;width:100%;height:56px;border-radius:var(--r-1);background:var(--c);box-shadow:inset 0 0 0 1px rgba(236,232,223,.14)}
+.gl-role span{display:flex;flex-direction:column;gap:2px;min-width:0}
+.gl-role em{font:italic 400 15px/1.2 var(--serif);color:var(--soft)}
+.gl-role b{font:400 18px/1.15 var(--serif);overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.gl-role small{font:400 13px/1.3 var(--sans);color:var(--soft)}
+.gl-ctl{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:14px}
+.gl-ctl .gl-sizes{margin-top:0}
+.gl-ctl .seg button{padding:0 12px}
+.gl-cov{display:flex;align-items:center;gap:12px;margin:16px 0 4px}
+.gl-cov:empty{display:none}
+.gl-cov>span{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}
+.gl-cov b{font:400 19px/1.2 var(--serif)}
+.gl-cov em{font:400 14px/1.35 var(--sans);font-style:normal;color:var(--soft)}
+.gl-cov-go{flex:none;min-height:44px;padding:0 16px;border-radius:var(--r-pill,22px);border:1px solid var(--ink);background:transparent;color:var(--ink);font:italic 400 17px/1 var(--serif)}

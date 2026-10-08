@@ -399,6 +399,9 @@ function ooRun(cfg) {
     save();
     const fb = kind === "board" ? ooLine(r, res) : { html: res.line || "", cmp: res.cmp || null };
     const last = (cfg.endOnMiss && !res.ok) || (cfg.lives && st.lives <= 0) || (!cfg.lives && !cfg.endOnMiss && st.i >= cfg.total) || st.i >= (cfg.max || 99) || (cfg.endWhen && cfg.endWhen(st));
+    // a miss on a color: the one you tapped and the right one fill the screen (js/misscompare.js), not two small squares
+    const big = !res.ok && typeof mcShow === "function" && (res.mc || (kind === "board" && fb.cmp && res.picked && res.right && res.picked !== res.right ? { you: { h: res.picked }, was: { h: res.right }, wasLabel: "The odd one" } : null));
+    if (big) fb.cmp = null;
     const cmp = fb.cmp ? `<div class="oo-cmp">${fb.cmp.map(([h, w]) => `<span><i style="--c:${h}"></i><em>${esc(w)}</em></span>`).join("")}</div>` : "";
     if (res.ok && !last && !it.hold) {
       // right: a short auto-advance, but a tap on the line or the board holds it, and Next goes on whenever you're ready
@@ -412,6 +415,7 @@ function ooRun(cfg) {
     }
     ui.foot.innerHTML = `<div class="oo-rev oo-in">${res.ok ? "" : cmp}<p class="oo-fb${res.ok ? " ok" : ""}">${fb.html}</p><button class="btn" data-next>${last ? (cfg.box ? "Done" : "See how you did") : "Next"} ${ICON.arrow}</button></div>`;
     ui.foot.querySelector("[data-next]").onclick = () => last ? end() : round();
+    if (big) later(() => ui.foot.querySelector("[data-next]") && mcShow({ ...big, from: ui.stage.querySelector(".miss"), label: last ? "See how you did" : "Next", go: () => last ? end() : round() }), 450);
   }
   function end() {
     const o = ooS(); o.sets++; o.last = today(); ooSnap(); save();

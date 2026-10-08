@@ -54,7 +54,9 @@ OO_MIXPLAY.pairs = function (ui, it) {
       const line = rd.variant === "avoided"
         ? `${ok ? "Right: " : ""}${esc(nm(w[0]))} and ${esc(nm(w[1]).toLowerCase())} meet ${ooLiftWords(w[4])} ${where}: ${w[2]} paintings where chance predicts ${Math.round(w[3])}.`
         : `${ok ? "Right: " : ""}${esc(nm(w[0]))} with ${esc(nm(w[1]).toLowerCase())} turns up ${ooLiftWords(w[4])} ${where}; the other pair ${ooLiftWords(l[4]).replace(" as chance", "")}.`;
-      resolve({ ok: ok ? 1 : 0, ms: performance.now() - t0, act: 0, noModel: true, hold: true, line, ratio: ooPairRatioOf(rd.a, rd.b) });
+      resolve({ ok: ok ? 1 : 0, ms: performance.now() - t0, act: 0, noModel: true, hold: true, line, ratio: ooPairRatioOf(rd.a, rd.b),
+        mc: ok ? null : { you: { hs: [hx(l[0]), hx(l[1])], ns: [nm(l[0]), nm(l[1])] }, was: { hs: [hx(w[0]), hx(w[1])], ns: [nm(w[0]), nm(w[1])] }, youLabel: "You picked", wasLabel: rd.variant === "avoided" ? "Kept apart" : "Painters favored",
+          line: rd.variant === "avoided" ? `Painters kept ${nm(w[0]).toLowerCase()} and ${nm(w[1]).toLowerCase()} apart.` : `${nm(w[0])} with ${nm(w[1]).toLowerCase()} turns up ${ooLiftWords(w[4])} ${where}.` } });
     });
   });
 };
