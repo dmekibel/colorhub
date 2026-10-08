@@ -146,6 +146,76 @@ function rcRoleSection(name, hex) {
   return `<div id="${id}"></div>`;
 }
 
+// ---------- Role paintings (design/audit-graph/CHECKPOINT.md #6): for 1,434 colors, data/graph/fieldnotes'
+// ar.rp_ names one real painting where the color plays each part -- shadow, mid-tone, light, accent, hidden
+// note -- picked once by L6, not recomputed live the way rcRoleSection's bar above is. "Never one palette,
+// five ways," already computed, never shown (the checkpoint's "dark data"). A compact row of small
+// thumbnails; each opens its painting with this color marked (rcWireOpen, already wired on the whole page).
+const RC_RP_ROLES = [["shadow", "Shadow"], ["mid", "Mid"], ["light", "Light"], ["accent", "Accent"], ["hidden", "Hidden"]];
+function rcRolePaintingsHTML(name, hex) {
+  const id = "rc-rp-" + Math.random().toString(36).slice(2, 8);
+  const draw = () => {
+    const box = document.getElementById(id); if (!box) return;
+    rpGraph(name).then(g => {
+      if (!box.isConnected) return;
+      const rp = g && g.fn && g.fn.ar && g.fn.ar.rp_, roles = rp ? RC_RP_ROLES.filter(([k]) => rp[k]) : [];
+      if (roles.length < 2 || typeof arfPainting !== "function") { box.remove(); return; }
+      box.innerHTML = `<section class="rc-sec rc-roleimg"><h3>Its roles, one painting each</h3>
+        <div class="rc-roleimg-row">${roles.map(([k, label]) => `<button type="button" class="rc-ri wait" data-role="${k}" aria-label="${esc(label)}"><span class="rc-ri-im"></span><small>${esc(label)}</small></button>`).join("")}</div>
+        <p class="fine">A real painting where it plays each part, as photographed.</p></section>`;
+      roles.forEach(([k]) => {
+        arfPainting(rp[k]).then(base => base ? Promise.resolve(base.fill ? base.fill() : null).catch(() => {}).then(() => base) : null).then(base => {
+          const tile = box.querySelector(`[data-role="${k}"]`); if (!tile) return;
+          if (!base) { tile.remove(); return; }
+          tile.classList.remove("wait"); tile.dataset.rcGi = base.i;
+          const im = tile.querySelector(".rc-ri-im");
+          if (base.img && base.img.src) im.innerHTML = `<img src="${esc(base.img.src)}" alt="" loading="lazy" decoding="async"${base.img.cors ? ' crossorigin="anonymous"' : ""} onload="this.classList.add('ld')">`;
+          else im.style.background = (base.pal && base.pal[0]) || hex;
+        }).catch(() => { const tile = box.querySelector(`[data-role="${k}"]`); if (tile) tile.remove(); });
+      });
+    }).catch(() => { const box2 = document.getElementById(id); if (box2) box2.remove(); });
+  };
+  rcLazyGallery(id, draw);   // arfPainting (js/article-refs.js) resolves through the same gallery index
+  return `<div id="${id}"></div>`;
+}
+
+// ---------- Werner's 1821 examples (CHECKPOINT.md #7): node.werner (data/graph/nodes-<a-z>.json, 99 nodes)
+// pairs each of Werner's tints with a named animal, plant and mineral example (e.g. Indigo Blue: "Blue Copper
+// Ore"). Until now this only surfaced on the Twins page, matched live off a tapped palette; here it's the
+// node's own example, read once, as a short line in "In the world". Linked to a gem or dye page only when one
+// of their titles is wholly contained in the example's words -- rare by design, since no page beats a wrong one.
+const RC_WERNER_KIND = [["animal", "animal"], ["vegetable", "plant"], ["mineral", "mineral"]];
+function rcWernerTwin(text) {
+  const words = new Set(String(text || "").toLowerCase().match(/[a-z]+/g) || []);
+  if (!words.size) return null;
+  const fits = titlef => { const t = String(titlef).toLowerCase().match(/[a-z]+/g) || []; return t.length > 0 && t.every(w => words.has(w)); };
+  const gm = window.GEMS && window.GEMS.gems.find(g => fits(g.title)); if (gm) return { id: "gm:gem:" + gm.id };
+  const dy = window.BOTANY && window.BOTANY.dyes && window.BOTANY.dyes.find(d => fits(d.title)); if (dy) return { id: "bt:dye:" + dy.id };
+  return null;
+}
+function rcWernerLine(name, hex) {
+  const id = "rc-werner-" + Math.random().toString(36).slice(2, 8);
+  let wired = false;
+  const render = () => {
+    const box = document.getElementById(id); if (!box) return;
+    rpGraph(name).then(g => {
+      if (!box.isConnected) return;
+      const w = g && g.node && g.node.werner;
+      const parts = w ? RC_WERNER_KIND.map(([k, label]) => w[k] ? { text: w[k], label } : null).filter(Boolean) : [];
+      if (!parts.length) { box.remove(); return; }
+      const bits = parts.map(p => { const tw = rcWernerTwin(p.text); return `${tw ? `<button type="button" class="wl" data-to="${esc(tw.id)}">${esc(p.text)}</button>` : esc(p.text)} <em>(${esc(p.label)})</em>`; }).join(", ");
+      box.innerHTML = `<p class="rc-werner">Werner, 1821: ${bits}</p><p class="fine">His 1821 chart paired each tint with a named animal, plant and mineral; the printed swatches have aged.</p>`;
+      if (!wired) { wired = true; wireLinks(box); }
+    });
+  };
+  // this string is still being assembled into its host's innerHTML, so the id isn't in the document yet --
+  // a macrotask (setTimeout 0) waits for that, the same way js/richcolor.js's own rcLazyGallery does.
+  setTimeout(render, 0);
+  if (typeof gmWhen === "function" && !window.GEMS) gmWhen(render);
+  if (typeof btWhen === "function" && !window.BOTANY) btWhen(render);
+  return `<div class="rc-werner-box" id="${id}"></div>`;
+}
+
 // ======================================================================
 // 5. Harmonies -- pure color math, so every page gets this, even with zero written content.
 // ======================================================================
