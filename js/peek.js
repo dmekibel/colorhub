@@ -65,7 +65,7 @@ const peekBtn = c => `<button class="peek-btn" data-peek="${esc(c.n)}" aria-labe
 document.addEventListener("click", e => {
   const b = e.target.closest("[data-peek]"); if (!b) return;
   e.stopPropagation(); e.preventDefault();
-  peek(BYNAME.get(b.dataset.peek.toLowerCase()));
+  peek(BYNAME.get(b.dataset.peek.toLowerCase()) || (typeof lxByName === "function" ? lxByName(b.dataset.peek) : null));
 }, true);
 // a press on the door must not start a card drag or a reveal
 document.addEventListener("pointerdown", e => { if (e.target.closest("[data-peek]")) e.stopPropagation(); }, true);

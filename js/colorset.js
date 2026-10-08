@@ -50,9 +50,9 @@ function csTeachable(set) {
   }).filter(Boolean);
   return near.find(x => typeof knowState !== "function" || knowState(x) !== "yours") || near[0] || null;
 }
-function csLearn(set) {
+function csLearn(set, o = {}) {
   set = csGet(set); if (!set || !set.colors.length) return;
-  if (typeof prInstantDeck === "function") return prInstantDeck({ source: "set", set });
+  if (typeof prInstantDeck === "function") return prInstantDeck({ source: "set", set, back: o.back });
   const c = csTeachable(set);
   if (c && typeof hmLearnIt === "function") return hmLearnIt(c);
   toast("Nothing here to learn yet");
@@ -150,7 +150,7 @@ function csActions(set, o = {}) {
     e.stopPropagation(); buzz(5);
     const s = csGet(set), k = b.dataset.cs;
     if (k === "map") csOnMap(s);
-    else if (k === "learn") csLearn(s);
+    else if (k === "learn") csLearn(s, { back: o.back });
     else if (k === "play") csPlay(s, { back: o.back });
     else if (k === "compare") csCompare(s, partner());
     else if (k === "keep") { csPalette(s); b.querySelector("span").textContent = "Kept"; }

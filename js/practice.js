@@ -104,8 +104,10 @@ function prSaveSpec(spec) { prState().last = { ...spec }; save(); }
 // ======================================================================
 let PR_CORE = null, PR_CORE_SRC = null, PR_BYKEY = null;
 function prItem(e) {
-  const key = e.n.toLowerCase(), c = typeof BYNAME !== "undefined" ? BYNAME.get(key) || null : null;
-  return { n: e.n, h: String(e.h).toUpperCase(), key, rank: e.rank == null ? 9999 : e.rank, useRank: e.useRank == null ? null : e.useRank, also: e.also || [], c: c && c.id ? c : null, vs: c && c.vs || "", d: c && c.d || "" };
+  const key = e.n.toLowerCase(), app = typeof BYNAME !== "undefined" ? BYNAME.get(key) || null : null;
+  // any learnable color has a card id now (js/learnmore.js): Practice answers on a learned, due card count as its review
+  const c = app || (typeof lxByName === "function" ? lxByName(e.n) : null);
+  return { n: e.n, h: String(e.h).toUpperCase(), key, rank: e.rank == null ? 9999 : e.rank, useRank: e.useRank == null ? null : e.useRank, also: e.also || [], c: c && c.id && !c.basic ? c : app && app.id ? app : null, vs: app && app.vs || "", d: app && app.d || "" };
 }
 function prCore() {
   const src = (typeof CORE_NAMES !== "undefined" && CORE_NAMES) || null;
@@ -157,7 +159,7 @@ const prFirst = n => prCore().slice(0, n);
 function prUnique(items) { const seen = new Set(); return items.filter(it => it && !seen.has(it.key) && seen.add(it.key)); }
 function prList(list) {
   const p = prState();
-  if (list === "mine") return ALL.filter(c => S.cards[c.id]).map(prOfApp);
+  if (list === "mine") return (typeof cardsAll === "function" ? cardsAll() : ALL.filter(c => S.cards[c.id])).map(prOfApp);
   if (list === "due") return dueList().map(prOfApp);
   if (list === "tricky") return Object.entries(p.tricky).sort((a, b) => (b[1].m || 0) - (a[1].m || 0)).map(([k, e]) => prByKey(k) || prItem({ n: e.n, h: e.h }));
   if (list === "star") return p.star.map(prByKey).filter(Boolean);
@@ -1382,7 +1384,7 @@ function prLists() {
   const p = prState(), out = [];
   const add = (id, n) => { if (n) out.push([id, prListLabel(id), n]); };
   add("due", dueList().length);
-  add("mine", ALL.filter(c => S.cards[c.id]).length);
+  add("mine", (typeof cardsAll === "function" ? cardsAll() : ALL.filter(c => S.cards[c.id])).length);
   add("tricky", Object.keys(p.tricky).length);
   add("star", p.star.length);
   UNITS.forEach(u => add("unit:" + u.id, u.colors.length));
@@ -1495,7 +1497,7 @@ const prLevelRank = it => it.useRank != null ? it.useRank : it.rank;
 const prSeedRank = it => it.rank < 9999 ? prLevelRank(it) : (prItemOf(it.h) ? prLevelRank(prItemOf(it.h)) : 9999);
 function prInstantDeck(o = {}) {
   // csLearn (js/colorset.js) hands over a ColorSet: open the quick sheet with its colors as "These colors"
-  if (o.set && !o.build) { const set = typeof o.set === "function" ? o.set() : o.set; return prQuick({ items: ((set && set.colors) || []).map(c => c.h), label: (set && set.title) || "", seed: o.seed }); }
+  if (o.set && !o.build) { const set = typeof o.set === "function" ? o.set() : o.set; return prQuick({ items: ((set && set.colors) || []).map(c => c.h), label: (set && set.title) || "", seed: o.seed, back: o.back }); }
   if (o.source === "set") o = { ...o, source: "these" };
   const seed = prSeed(o.seed), size = o.size == null ? 10 : +o.size, core = prCore(), p = prState();
   const these = prUnique((o.items || []).map(x => typeof x === "string" ? prItemOf(x) : prSeed(x)).filter(Boolean));
@@ -1574,7 +1576,7 @@ function prQuick(o = {}) {
     if (!deck || !deck.items.length) return;
     remember(); close(); buzz(8);
     if (st.method === "lesson") return hmLearnIt(app);
-    const exit = () => { if (backTo && /^#\/./.test(backTo)) { if (!openRoute(backTo)) go(S.tab || "learn"); } else prHome(); };
+    const exit = () => { if (typeof backTo === "function") backTo(); else if (backTo && /^#\/./.test(backTo)) { if (!openRoute(backTo)) go(S.tab || "learn"); } else prHome(); };
     prPlay(st.method, { items: deck.items, label: deck.label, exit, other: () => { exit(); setTimeout(() => prQuick({ ...o, back: backTo }), 60); } });
   }
   sh.addEventListener("click", e => {

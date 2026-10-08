@@ -67,6 +67,7 @@ function nearestCore(hexOrLab, list, n = 5) {
 // is a later job): a core-list word beyond those 101 is always "new" until then.
 function coreWordMet(entry) {
   const c = entry && BYNAME.get(entry.n.toLowerCase());
+  if (!c && entry && typeof cardIdFor === "function") { const id = cardIdFor(entry); return !!(id && S.cards[id]); }   // any core name can be learned now (js/learnmore.js)
   return !!(c && S.cards[c.id]);
 }
 
