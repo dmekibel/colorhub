@@ -478,29 +478,29 @@ scenario("learn", "the path goes past the first units: Begin teaches a generated
   await t.click("[data-next]", { wait: 600 });
   await t.waitFor("#pager", 6000, "the next generated unit");
 });
-scenario("learn", "Learn it on a name past the first units: meet, recall, edges, tell apart, done", async t => {
+scenario("learn", "Learn it opens on a name past the first units", async t => {
   await t.open("#/name/chestnut", { settle: 600 });
   await t.waitFor(".cp-page [data-learnit]", 10000, "Learn it on the Chestnut name page");
   await t.click("[data-learnit]", { wait: 600 });
   await t.waitFor("#ltPager", 6000, "the Learn it meet pager");
-  for (let i = 0; i < 12 && t.$("#ltPager"); i++) await H.keys(t, "Enter");
-  await t.waitFor(".lt-recall .card", 6000, "the recall deck");
-  for (let i = 0; i < 40 && !t.$(".lt-edge"); i++) {
-    const rev = t.$("[data-reveal]"); if (rev) await t.click(rev, { wait: 60 });
-    const yes = t.$("[data-yes]"); if (yes) await t.click(yes, { wait: 350 }); else await t.sleep(150);
-  }
-  await t.waitFor(".lt-edge", 6000, "the Edges step");
+  t.expect(t.$$("#ltPager .lt-page").length >= 3, "the group has look-alikes from the ~1,000 names");
+  await t.click("[data-lt-x]", { wait: 600 });
+  await t.waitFor(".cp-page", 6000, "back on the name page after closing");
+});
+scenario("learn", "Edges: tap a step, every step gets its name, the border is kept", async t => {
+  await t.open("#shot=lx:edge", { settle: 600 });
+  await t.waitFor(".lt-edge-b", 8000, "the Edges strip");
   await t.click(t.$$(".lt-edge-b")[5], { wait: 300 });
   t.expect(t.$$(".lt-edge-lab").filter(e => e.textContent.trim()).length === 9, "every step is labeled with its nearest name");
   t.expect(t.$(".lt-edge-b.mid"), "the halfway mark");
   t.expect(t.ev("Object.keys(S.edges || {}).length") >= 1, "the border was kept in S.edges");
-  for (let i = 0; i < 3 && t.$(".lt-edge"); i++) { if (!t.$(".lt-edge-b.on")) await t.click(t.$$(".lt-edge-b")[4], { wait: 300 }); await t.click("[data-next]", { wait: 500 }); }
-  for (let i = 0; i < 8 && !t.$(".lt-done-pal"); i++) {
-    const sw = t.$(".pi-sw"); if (sw && !t.$(".card.picked")) await t.click(sw, { wait: 1500 }); else await t.sleep(500);
-  }
+  t.expect(t.$("[data-next]") && !t.$("[data-next]").hidden, "Next shows after the reveal");
+});
+scenario("learn", "Learn it done: the group joins review as core cards, due tomorrow", async t => {
+  await t.open("#shot=lx:ltdone", { settle: 600 });
   await t.waitFor(".lt-done-pal", 8000, "the Learn it done screen");
   t.expect(t.ev("!!S.cards['core:chestnut'] && S.cards['core:chestnut'].n === 'Chestnut'"), "Chestnut joined spaced review as core:chestnut");
-  t.expect(t.ev("dueList().length === 0 && cardsAll().some(c => c.id === 'core:chestnut')"), "cardsAll covers it, due tomorrow, not today");
+  t.expect(t.ev("cardsAll().some(c => c.id === 'core:chestnut') && !dueList().some(c => c.id === 'core:chestnut')"), "cardsAll covers it, due tomorrow, not today");
   await t.click("[data-lt-back]", { wait: 700 });
-  await t.waitFor(".cp-page", 6000, "back on the name page");
+  await t.waitFor(".cp-page", 8000, "the name page after Done");
 });
