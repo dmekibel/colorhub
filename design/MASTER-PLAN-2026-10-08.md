@@ -150,6 +150,7 @@ The full-screen color, then a one-line definition with its source, then the **Re
 6. Screenshot every changed screen at 375×812 using an iframe wrapper (headless Chrome won't go below ~500 px). Look at every shot.
 7. Commit with explicit paths. Never `git add -A`, never research/_raw, never book text. Don't push. Don't bump `?v=`; the conductor does that at merge.
 8. Report in at most 20 lines: what shipped, what's left, screenshot paths.
+9. **The genius check (David, standing rule):** before building, ask "how can this be more clever, more genius, and work with every other part of the app?" and build at least two real connections to other systems (the Color Graph, the Learner Model, articles, Journey, Train, Explore, Studio, painters, the Cabinet). Put the connections in your report.
 
 ## 6. Conductor protocol
 - **Merge cadence:** merge each finished lane right away, in arrival order. Then: resolve index.html as ours plus the new tags, bump `?v=`, run gates and smoke, push. Then tell David what's live.
@@ -178,3 +179,4 @@ The full-screen color, then a one-line definition with its source, then the **Re
 
 ## Progress log
 - 12:0x: Wave 0 launched: L1 ledger, L2 concordance, L3 smoke harness, L4 Practice resume, L5 rich pages resume.
+- 12:1x: Wave 1 started early (no dependencies): L6 graph, L15 data quality, L10 Train games, L11 art wiki, L12 design lead. The genius panel is reviewing this plan (design/GENIUS-PANEL-1.md). An ECC study agent is writing design/ECC-ADAPT.md (patterns only; no plugin installed mid-sprint).
