@@ -15,7 +15,7 @@ function welcome() {
     <div class="wall" aria-hidden="true">${strips.map((s, k) => `<div class="strip" style="--k:${k}">${s.map(p => `<i style="--c:${p.c.h}"></i>`).join("")}</div>`).join("")}</div>
     <div class="copy">
       <h1>Name the colors <em>you see.</em></h1>
-      <p>Painters and designers use hundreds of color names. Learn them a family at a time, a few minutes a day.</p>
+      <p>Painters and designers use hundreds of color names. Learn a few at a time, each beside the look-alike it's easiest to confuse, a few minutes a day.</p>
     </div>
     <button class="btn" data-go>Find my level <small>· 60 sec</small></button>
   `, "welcome");
@@ -439,11 +439,14 @@ const weekdayName = () => new Date(Date.now() - 4 * 3600e3).toLocaleDateString(u
 function home() {
   if (!S.placed) return welcome();
   const due = dueList(), nu = nextUnit(), owned = ownedCount(), dc = dailyColor(), dAns = S.daily[today()];
-  const mine = ALL.filter(c => isMine(S.cards[c.id])), lrn = ALL.filter(c => S.cards[c.id] && !isMine(S.cards[c.id]));
+  const cards = cardsAll(), mine = cards.filter(c => isMine(S.cards[c.id])), lrn = cards.filter(c => !isMine(S.cards[c.id]));
+  // the collection counts toward the next named checkpoint ("27 of 614 · Fluent"), never toward the first units
+  const ck = typeof lxCheckpoint === "function" ? lxCheckpoint(owned) : { n: ALL.length, name: "", approx: false };
+  const qN = Math.max(ck.n, mine.length + lrn.length), qCols = qN > 1200 ? 60 : qN > 700 ? 40 : qN > 260 ? 30 : 15;
   const hueKey = c => { const [L, C, H] = lch(c.h); return C < 12 ? 1000 + (100 - L) : (H + 330) % 360 + (100 - L) / 400; };
   mine.sort((a, b) => hueKey(a) - hueKey(b)); lrn.sort((a, b) => hueKey(a) - hueKey(b));
   // the collection: owned names fill a quilt from the top in hue order; names in review follow, faint
-  const quilt = Array.from({ length: ALL.length }, (_, i) => mine[i] ? `<i class="o" style="--c:${mine[i].h};--k:${i}"></i>`
+  const quilt = Array.from({ length: qN }, (_, i) => mine[i] ? `<i class="o" style="--c:${mine[i].h};--k:${i}"></i>`
     : lrn[i - mine.length] ? `<i class="l" style="--c:${lrn[i - mine.length].h}"></i>` : "<i></i>").join("");
   let h;
   if (due.length) {
@@ -454,8 +457,12 @@ function home() {
     const p = nu.colors.slice().sort((a, b) => lab(b.h)[0] - lab(a.h)[0]);
     h = { title: edTitle(nu.title), plates: p,
       note: `${nu.colors.length} new names · about ${Math.max(2, Math.round(nu.colors.length * 15 / 60))} min`, cta: "Begin", act: "learn" };
+  } else if (typeof lxPending === "function" && lxPending()) {
+    // the next stage's names are still loading (they're fetched the first time they're needed): say so, then redraw
+    h = { title: "The next stage is <em>on its way</em>", plates: mine.slice(0, 12), note: "Fetching the next names", cta: "", act: "" };
+    lxPending().then(() => { if (app.querySelector(".room-learn") && nextUnit()) home(); });
   } else {
-    h = { title: "The path is <em>complete</em>", plates: mine.slice(0, 12), note: "More tiers are coming", cta: "", act: "" };
+    h = { title: "Every name on the path, <em>met</em>", plates: mine.slice(0, 12), note: `${cards.length.toLocaleString("en-US")} names met. Reviews keep them yours.`, cta: "", act: "" };
   }
   // Today's three: the same quiet tile for each, a small picture, a name, and a done / not done line
   const chR = challengeRounds(), chD = chToday(), tr = todayTrain();
@@ -482,10 +489,10 @@ function home() {
     ${h.cta ? `<button class="btn" data-${h.act} style="margin-top:20px">${h.cta} ${ICON.arrow}</button>` : ""}
     <div class="trio" style="margin-top:32px">${tiles.map(t => `<button class="tday${t.done ? " done" : ""}" ${t.a}>${t.art}<b>${t.name}</b><span class="tday-st">${t.st}</span></button>`).join("")}</div>
     <h3 class="title-3" style="margin-top:32px">The path</h3>
-    <div class="path-list">${pathRows}</div>
+    <div class="path-list">${typeof lxPathHtml === "function" ? lxPathHtml(nu) : pathRows}</div>
     <button class="collection" data-palette aria-label="Your collection">
-      <div class="coll-head"><span class="note">Your collection</span><span class="coll-n"><b data-count="${owned}">${owned}</b><small>/${ALL.length}</small></span></div>
-      <div class="quilt">${quilt}</div>
+      <div class="coll-head"><span class="note">Your collection</span><span class="coll-n"><b data-count="${owned}">${owned}</b><small> of ${ck.approx ? "about " : ""}${ck.n.toLocaleString("en-US")}${ck.name ? ` · ${esc(ck.name)}` : ""}</small></span></div>
+      <div class="quilt" style="grid-template-columns:repeat(${qCols},1fr)">${quilt}</div>
       <div class="coll-foot"><span>${ownFoot()}</span><span>Spectrum →</span></div>
     </button>
     ${installHint()}

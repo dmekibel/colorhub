@@ -133,7 +133,8 @@ function prodMix(queue, force) {
 // The cards
 // ======================================================================
 let PROD_POOL = null, PROD_PICKER = null;
-const prodPool = () => PROD_POOL || (PROD_POOL = [...BASICS, ...ALL]);
+// every core name once the list has loaded (js/learnmore.js lxLookPool): typing "dark teal" for teal reads as close
+const prodPool = () => typeof lxLookPool === "function" && lxLookPool().length > BASICS.length + ALL.length ? lxLookPool() : PROD_POOL || (PROD_POOL = [...BASICS, ...ALL]);
 const speechCtor = () => typeof window !== "undefined" && (window.SpeechRecognition || window.webkitSpeechRecognition) || null;
 const ICON_MIC = sv('<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/>', 22, 1.8);
 const shotMode = () => typeof SHOT !== "undefined" && !!SHOT;
@@ -189,7 +190,7 @@ function prodIntro(card, kind, foot, go) {
 // The paper label that slides up with the answer. vs: the neighbor to show beside it, line: how they differ.
 function prodLabel(c, verdict, cls, vs, line, meta) {
   return `<div class="label">
-    <div class="meta"><span>${esc(meta || c.unit.title)}</span><span>${c.h}</span></div>
+    <div class="meta"><span>${esc(meta || (c.unit && c.unit.title) || "")}</span><span>${c.h}</span></div>
     <p class="verdict ${cls}">${verdict}</p>
     <h2>${esc(c.n)}</h2>
     ${line ? `<div class="vs">${vs ? `<span class="pair"><i style="--c:${c.h}"></i><i style="--c:${vs.h}"></i></span>` : ""}<p>${esc(line)}</p></div>` : ""}

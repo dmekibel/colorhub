@@ -47,7 +47,8 @@ function hmEveryShadeItems() { return hmEveryNameItems().concat(hmShadeItems());
 const HM_FILTERS = [["all", "All"], ["learned", "Learned"], ["learning", "Learning"], ["new", "New"]];
 const HM_EVERY = ["every-name", "every-shade"];   // the two stops after Stage 9, not a stage and not a COLOR_SETS id
 const hmSet = id => COLOR_SETS.find(s => s.id === id) || null;
-const hmCard = it => it.c && it.c.id ? S.cards[it.c.id] : null;
+// a bubble past the first units has no app color, but can still have a card (js/learnmore.js cardIdFor)
+const hmCard = it => { const id = it.c && it.c.id ? it.c.id : typeof cardIdFor === "function" && !it.shade ? cardIdFor(it) : null; return id ? S.cards[id] || null : null; };
 const HM_KEEP = { all: () => true, learned: it => isMine(hmCard(it)), learning: it => !!hmCard(it) && !isMine(hmCard(it)), new: it => !hmCard(it) };
 function hmView() {   // the saved view, upgrading the old single "set" id
   const h = S.hm, old = h.set;

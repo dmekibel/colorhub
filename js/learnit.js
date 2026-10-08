@@ -14,13 +14,24 @@
 
 // The group: the color plus its closest taught look-alikes (lookalikes(), js/lookalikes.js), excluding basics
 // (placement-only words, never part of a lesson or spaced review — CLAUDE.md's product rules).
+// With the ~1,000-name list loaded, the group comes from all of it, same family, every pair solvable (lxGroup,
+// js/learnmore.js), so Learn it works on ANY color, not only the first units.
 function hmLearnGroup(c, n = 4) {
+  if (typeof lxGroup === "function" && typeof lxCore === "function" && lxCore()) return lxGroup(c, n).filter(x => x.n.toLowerCase() !== c.n.toLowerCase());
   return lookalikes(c, 8).map(o => o.x).filter(x => x.id && !x.basic && x.n.toLowerCase() !== c.n.toLowerCase()).slice(0, n);
+}
+// Where ✕ and the last button go: the color's own page (a deep page for the first units, else its name page)
+function hmLtHome(c) {
+  if (c && c.kind && typeof openCoreName === "function") return openCoreName(c.h, c.n);
+  return hmOpenColor(c);
 }
 
 function hmLearnIt(c) {
+  if (!c) return;
+  // the group draws on the ~1,000-name list: wait for it the first time (it's usually prefetched already)
+  if (typeof CORE_NAMES !== "undefined" && !CORE_NAMES && typeof loadCoreNames === "function") return loadCoreNames().then(() => hmLearnIt(c));
   const near = hmLearnGroup(c);
-  if (!near.length) { toast("No close look-alikes to compare yet"); return hmOpenColor(c); }
+  if (!near.length) { toast("No close look-alikes to compare yet"); return hmLtHome(c); }
   const group = [c, ...near];
   hmLtMeet(group, c, () => hmLtRecall(group, c, () => hmLtTell(group, c, () => hmLtDone(group, c))));
 }
@@ -49,7 +60,7 @@ function hmLtMeet(group, c, next) {
   const plates = group.slice().sort((a, b) => lab(b.h)[0] - lab(a.h)[0]);
   const known = new Set(group.filter(x => isMine(S.cards[x.id])).map(x => x.id));
   const met = new Set();
-  const onClose = () => hmOpenColor(c);
+  const onClose = () => hmLtHome(c);
   const clsFor = x => known.has(x.id) ? "known" : met.has(x.id) ? "met" : "";
   const pageHtml = (x, i) => {
     const partner = x.n === c.n ? (near[0] || c) : c;
@@ -102,13 +113,13 @@ function hmLtMeet(group, c, next) {
 
 // ---------- 2. Recall: the real swipe deck (deck("learn"), js/learn.js), forward cards only ----------
 function hmLtRecall(group, c, next) {
-  deck("learn", { unit: { colors: group }, cls: "learnit lt-recall", onClose: () => hmOpenColor(c), onFinish: next });
+  deck("learn", { unit: { colors: group }, cls: "learnit lt-recall", onClose: () => hmLtHome(c), onFinish: next });
 }
 
 // ---------- 3. Tell apart: Pick it (pickBoard(), js/pickit.js), the group's own swatches as the options ----------
 function hmLtTell(group, c, next) {
   const rounds = shuffle(group).slice(0, Math.min(3, group.length));
-  const onClose = () => hmOpenColor(c);
+  const onClose = () => hmLtHome(c);
   let i = 0;
   function render() {
     const target = rounds[i], others = shuffle(group.filter(x => x.n !== target.n)).slice(0, 3);
@@ -132,7 +143,7 @@ function hmLtTell(group, c, next) {
 // name "yours": that only ever happens the honest way, a check a day or more later (js/pickit.js's own rule).
 function hmSchedule(group) {
   const t = today();
-  group.forEach(x => { if (x.basic || S.cards[x.id]) return; S.cards[x.id] = { b: 0, due: addDays(t, 1), since: t, own: false }; });
+  group.forEach(x => { if (x.basic || S.cards[x.id]) return; S.cards[x.id] = { b: 0, due: addDays(t, 1), since: t, own: false, n: x.n, h: x.h }; });
   save();
 }
 function hmLtDone(group, c) {
@@ -147,8 +158,8 @@ function hmLtDone(group, c) {
     <div style="flex:1"></div>
     <button class="lt-primary" data-lt-back>Back to ${esc(c.n)} ${ICON.arrow}</button>
   `, "fixed learnit");
-  el.querySelector("[data-lt-back]").onclick = () => hmOpenColor(c);
-  onKey = e => { if (e.key === "Enter" || e.key === "Escape") hmOpenColor(c); };
+  el.querySelector("[data-lt-back]").onclick = () => hmLtHome(c);
+  onKey = e => { if (e.key === "Enter" || e.key === "Escape") hmLtHome(c); };
 }
 
 // ---------- screenshot hook: #shot=learnit:<meet|meetpage|recall|tell|done> ----------
