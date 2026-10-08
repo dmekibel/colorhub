@@ -145,3 +145,21 @@
 .gl-pmap span{flex:1;font:400 18px/1.2 var(--serif)}
 .gl-pmap svg:first-child{color:var(--soft)}
 .gl-pmap svg:last-child{color:var(--faint)}
+
+/* the palette sits right under the painting; the painting stays pinned while you change types and sizes */
+.gl-pal-wrap .gl-hero{position:sticky;top:calc(var(--top) + 64px);z-index:4;margin:0 calc(-1 * var(--g));padding:0 var(--g) 10px;background:var(--ground)}
+.gl-pal-ui{padding-top:2px}
+.gl-modes{display:flex;gap:8px;overflow-x:auto;margin:0 calc(-1 * var(--g));padding:2px var(--g);scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.gl-modes::-webkit-scrollbar{display:none}
+.gl-modes button{flex:none;min-height:var(--tap,44px);padding:0 16px;border-radius:999px;font:400 15px/1 var(--sans);color:var(--soft);box-shadow:inset 0 0 0 1px var(--rule)}
+.gl-modes button.on{background:var(--ink);color:var(--ground);box-shadow:none}
+.gl-ctl{margin-top:6px;flex-wrap:nowrap}
+.gl-slide{flex:1;min-width:0;margin:0}
+.gl-slide[hidden]{display:none}
+.gl-kn-t{min-width:72px;text-align:right;font:400 15px/1 var(--sans);color:var(--soft)}
+.gl-lit{flex:none;margin-left:auto;min-height:var(--tap,44px);padding:0 14px;border-radius:999px;font:400 15px/1 var(--sans);color:var(--soft);box-shadow:inset 0 0 0 1px var(--rule)}
+.gl-lit.on{background:var(--ink);color:var(--ground);box-shadow:none}
+.gl-cap{margin:2px 0 12px;color:var(--soft);font:400 15px/1.4 var(--sans);min-height:2.8em;max-width:46ch}
+.gl-lit-cv{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none;opacity:0;transition:opacity .25s var(--ease)}
+.gl-lit-cv.on{opacity:1}
+.gl-pick-dot{pointer-events:none}

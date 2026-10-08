@@ -1980,8 +1980,18 @@ scenario("paintings", "lane A: a painting page leads with what stands out; Name 
   t.expect(t.$("[data-glswatches] .pal.gl-out"), "the strip doesn't lead with a stands-out color");
   const L0 = t.ev(`lab(document.querySelector("[data-glswatches] .pal").dataset.swatch)[0]`);
   t.expect(L0 > 30, `the first chip is a near-black (L* ${Math.round(L0)})`);
-  const heroW = t.$(".gl-hero>span").getBoundingClientRect().width, pageW = t.$(".p-title").getBoundingClientRect().width;
-  t.expect(heroW >= pageW - 2, `the picture isn't full width (${Math.round(heroW)} of ${Math.round(pageW)})`);
+  // David, 2026-10-08: the palette is right under the painting, and both fit one screen so you can change types and sizes
+  const heroB = t.$(".gl-hero>span").getBoundingClientRect().bottom, stripB = t.$("[data-glswatches]").getBoundingClientRect().bottom;
+  t.expect(stripB <= t.ev("innerHeight"), `the palette strip sits below the first screen (${Math.round(stripB)})`);
+  t.expect(t.$("[data-glorder]").getBoundingClientRect().top - heroB < 40, "the palette types aren't right under the painting");
+  const nTypes = t.$$("[data-glorder] [data-glo]").length;
+  t.expect(nTypes >= 5, `only ${nTypes} palette types`);
+  await t.click('[data-glo="shadows"]', { wait: 300 });
+  const kIn = t.$("[data-glk]");
+  t.expect(kIn && !kIn.closest("[hidden]"), "no How many colors slider on Shadows");
+  t.ev(`(() => { const s = document.querySelector("[data-glk]"); s.value = 3; s.dispatchEvent(new Event("input", { bubbles: true })); })()`);
+  t.expect(t.$$("[data-glswatches] [data-swatch]").length === 3, "the slider didn't redraw the palette live");
+  await t.click('[data-glo="out"]', { wait: 300 });
   await t.waitFor(() => /You can name \d+ of \d+/.test(t.text(".gl-cov")), 6000, "the coverage line");
   await t.click('[data-glo="area"]', { wait: 300 });
   const shares = t.$$("[data-glswatches] .pal span").map(s => parseInt(s.textContent, 10) || 0);
