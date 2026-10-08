@@ -350,9 +350,11 @@ function paintingsOfPage(hexes, o = {}) {
     row.innerHTML = `<div class="pt-seg">${opts.map(([k, t]) => `<button data-src="${k}" class="${st.source === k ? "on" : ""}">${t}</button>`).join("")}</div>`;
   });
   el.addEventListener("click", e => {
+    // a painting from this screen arrived from every color here, not just the weakest one (David, 2026-10-08):
+    // ptArrival measures each of `hexes` on the painting itself.
     const g = e.target.closest("[data-gi]");
-    if (g && !g.closest("[data-statsbody]")) { const i = +g.dataset.gi, r = rows.find(x => x.i === i && x.src === "paintings"); const weakest = r && r.covers ? hexes[r.covers.indexOf(Math.min(...r.covers))] : hexes[0]; return galleryPage(i, true, weakest, st.tol); }
-    if (g) return galleryPage(+g.dataset.gi, true, hexes[0], st.tol);
+    if (g && !g.closest("[data-statsbody]")) return galleryPage(+g.dataset.gi, true, hexes, st.tol);
+    if (g) return galleryPage(+g.dataset.gi, true, hexes, st.tol);
     if (e.target.closest("[data-more]")) return paint(true);
     if (e.target.closest("[data-retry]")) return run();
     const drop = e.target.closest("[data-drop]");
@@ -398,10 +400,18 @@ function ptAddSheet(have, onPick) {
 // ---------- arriving on a painting ----------
 // o: { i, hex, tol, pool, heroSpan, getImg(), canRead() }. Draws the pinned color above the palette, measures its
 // coverage from the index, and (when the museum lets the page read pixels) maps where it lives.
+// o.hex can be one color, or (arriving from a pair/set page, js/setpage.js) the whole set: then this is the
+// quiet "You came from Teal + Coral" row instead, each measured on this painting and marked at once (David, 2026-10-08).
 function ptArrival(el, o) {
   const host = el.querySelector("[data-glarrive]");
   if (!host || !o.hex) return null;
-  const hex = o.hex.toUpperCase(), nm = ptNear(hex), st = { tol: o.tol != null ? o.tol : 3 };
+  const hexes = (Array.isArray(o.hex) ? o.hex : [o.hex]).filter(Boolean).map(h => h.toUpperCase());
+  if (!hexes.length) return null;
+  if (hexes.length > 1) return ptArrivalSet(el, host, o, hexes);
+  return ptArrivalOne(el, host, o, hexes[0]);
+}
+function ptArrivalOne(el, host, o, hex) {
+  const nm = ptNear(hex), st = { tol: o.tol != null ? o.tol : 3 };
   let res = null, mask = null, sel = -1, on = false, canvas = null, seq = 0, img = null, readable = false, known = false, more = false;
   host.hidden = false;
   // David, 2026-10-08: the painting stays the focus. The color you came from is one quiet row under the palette
@@ -535,6 +545,93 @@ function ptArrival(el, o) {
     },
     stop() { seq++; },
     // js/gallery.js: the palette's markers or highlight came on, so this map goes off
+    mapOff() { if (on) setOn(false); },
+  };
+}
+
+// arriving from a pair/set page (js/setpage.js): every color of it, each measured on this one painting ("You
+// came from Teal + Coral · 4.1% and 2.3% of the canvas"). "Where they live" marks all of them at once, each its
+// own numbered, colored dot (reusing the palette's own .gl-mk marker, js/gallery.js markDraw). A tap on the row
+// (not a swatch, not the map button) reopens the pair/set page — there's no single nearest color to fall back
+// on here. Single-color arrival (ptArrivalOne above) is unchanged.
+function ptArrivalSet(el, host, o, hexes) {
+  const names = hexes.map(ptNear), st = { tol: o.tol != null ? o.tol : 3 };
+  let results = null, seq = 0, img = null, readable = false, on = false, points = null, layer = null;
+  host.hidden = false;
+  const anyCover = () => results && results.some(r => r.cover > 0);
+  const isCoarse = () => !!(results && results[0] && results[0].coarse);
+  const shareLine = () => {
+    if (!results) return "measuring…";
+    if (!anyCover()) return `Nothing in this painting comes near ${hexes.length === 2 ? "either" : "any"} of them.`;
+    return `${spList(results.map(r => r.cover > 0 ? ptPct(r.cover) : "0%"))} of the canvas.`;
+  };
+  const canMark = () => readable && anyCover() && !isCoarse();
+  const html = () => {
+    const tolTxt = st.tol === 0 ? "exactly these colors" : `within ${st.tol}%`;
+    const swatches = hexes.map(h => `<i class="pt-ar-sw-s" style="--c:${h}" data-swatch="${h}" role="button" aria-label="Open ${esc(ptNear(h))}"></i>`).join("");
+    const how = !results ? "" : isCoarse() ? "Approximate: measured from a 24-color summary of the picture, not its pixels."
+      : `${esc(tolTxt)} of each · measured pixel by pixel in the museum's photograph, as photographed.`;
+    host.innerHTML = `<div class="pt-ar-row"><span class="pt-ar-set">${swatches}</span>
+      <button class="pt-ar-txt" data-opensp><span class="pt-ar-line">You came from <b>${esc(names.join(" + "))}</b></span><small>${esc(shareLine())}</small></button>
+      ${canMark() ? `<button class="pt-ar-map${on ? " on" : ""}" data-map aria-pressed="${on}">${PT_ICON_MAP}<span>${on ? "Hide" : "Where they live"}</span></button>` : ""}</div>
+      <small class="pt-ar-why">${how}</small>`;
+  };
+  const measure = async () => {
+    const my = ++seq;
+    results = null; html();
+    const got = await Promise.all(hexes.map(h => ciArrival(o.i, h, st.tol).catch(() => ({ cover: 0, coarse: false }))));
+    if (my !== seq) return;
+    results = got;
+    html(); if (on) buildMarks();
+  };
+  // ---- the map: one weighted-center marker per color, same pixel read as the single-color map above ----
+  const buildMarks = () => {
+    if (!img || !readable || !o.heroSpan) return;
+    try {
+      const W = img.naturalWidth, H = img.naturalHeight, sc = Math.min(1, 240 / Math.max(W, H)), w = Math.max(1, Math.round(W * sc)), h = Math.max(1, Math.round(H * sc));
+      const c = document.createElement("canvas"); c.width = w; c.height = h;
+      const cx = c.getContext("2d", { willReadFrequently: true }); cx.drawImage(img, 0, 0, w, h);
+      const d = cx.getImageData(0, 0, w, h).data, T = hexes.map(lab), R = 18;
+      const W_ = T.map(() => 0), SX = T.map(() => 0), SY = T.map(() => 0);
+      for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+        const p = (y * w + x) * 4;
+        const l = lab("#" + ((1 << 24) | d[p] << 16 | d[p + 1] << 8 | d[p + 2]).toString(16).slice(1));
+        let bk = -1, bd = R;
+        for (let k = 0; k < T.length; k++) { const t = T[k], dd = Math.hypot(l[0] - t[0], l[1] - t[1], l[2] - t[2]); if (dd < bd) { bd = dd; bk = k; } }
+        if (bk < 0) continue;
+        const wt = 1 - bd / R; W_[bk] += wt; SX[bk] += wt * x; SY[bk] += wt * y;
+      }
+      points = hexes.map((h2, k) => W_[k] > 0 ? { k, fx: (SX[k] / W_[k] + .5) / w, fy: (SY[k] / W_[k] + .5) / h } : null);
+      draw(); html();
+    } catch (e) { readable = false; points = null; on = false; html(); }
+  };
+  const draw = () => {
+    if (!o.heroSpan) return;
+    if (!layer) { layer = document.createElement("div"); layer.className = "gl-mks"; o.heroSpan.appendChild(layer); }
+    if (!on || !points) { layer.innerHTML = ""; return; }
+    const im = o.getImg(), ir = im.getBoundingClientRect(), sr = o.heroSpan.getBoundingClientRect();
+    if (!ir.width || !sr.width) return;
+    layer.innerHTML = points.filter(Boolean).map(p => {
+      const h = hexes[p.k], px = (p.fx * ir.width + ir.left - sr.left) / sr.width * 100, py = (p.fy * ir.height + ir.top - sr.top) / sr.height * 100;
+      if (px < 2 || py < 2 || px > 98 || py > 98) return "";
+      return `<button class="gl-mk in" data-swatch="${h}" data-ink="${ink(h)}" style="left:${px.toFixed(2)}%;top:${py.toFixed(2)}%;--c:${h}" aria-label="${esc(ptNear(h))}, color ${p.k + 1}">${p.k + 1}</button>`;
+    }).join("");
+  };
+  const setOn = v => {
+    on = v;
+    if (on && !points) buildMarks(); else draw();
+    html();
+    if (on && o.onMap) o.onMap();   // the page's own overlay (palette markers) steps aside
+  };
+  host.onclick = e => {
+    if (e.target.closest("[data-map]")) { buzz(6); return setOn(!on); }
+    if (e.target.closest("[data-opensp]")) { buzz(5); return typeof spPage === "function" ? spPage(hexes) : null; }
+  };
+  html(); measure();
+  return {
+    image(im, ok) { img = im; readable = !!ok; points = null; if (results) html(); if (on && readable) buildMarks(); },
+    tap() { return false; },   // the set's markers are tapped as swatches (data-swatch), not picked by place
+    stop() { seq++; },
     mapOff() { if (on) setOn(false); },
   };
 }

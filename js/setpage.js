@@ -234,13 +234,24 @@ function spPage(hexes, o = {}) {
   // the set page does not keep the tray alive: opening it consumed the tray (js/settray.js sxOpen)
   const set = () => colorSet({ kind: "set", id: hexes.join("+"), title: spTitle(hexes), colors: hexes.map(h => ({ h, n: spNm(h) })), src: path });
   const plate = (h, other) => `<button class="sp-plate" data-swatch="${h}" style="--c:${h}" data-ink="${ink(h)}" aria-label="Open ${esc(spNm(h))}"><span class="sp-sample" style="color:${other}">Aa</span><b>${esc(spNm(h))}</b><em class="mono">${h}</em></button>`;
+  // double-tap the swatches at the top to keep the palette (David, 2026-10-08): a single tap still opens that
+  // color's page (js/swatch.js data-dbltap delays it ~280ms to listen for a second tap first). A heart burst at
+  // the tap point, a haptic and a sound; no middle step, no toggle to miss.
+  const heartBurst = (host, x, y) => {
+    const r = host.getBoundingClientRect(), b = document.createElement("span");
+    b.className = "sp-heart"; b.innerHTML = icon("heartOn", 72);
+    b.style.left = (x - r.left) + "px"; b.style.top = (y - r.top) + "px";
+    host.appendChild(b);
+    b.addEventListener("animationend", () => b.remove());
+    setTimeout(() => b.isConnected && b.remove(), 1200);
+  };
   const el = show(`
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button></header>
     <p class="eyebrow p-type">${pair ? "A pair" : k === 3 ? "A trio" : `A palette of ${k}`}</p>
     <h1 class="p-title sp-title${names.join("").length > 44 ? " longer" : names.join("").length > 24 ? " long" : ""}">${names.map((n, i) => `<button data-swatch="${hexes[i]}">${esc(n)}</button>`).join(`<span class="sp-plus">+</span>`)}</h1>
     ${o.undo ? `<div class="sp-undo" data-undo-bar><span>${esc(o.applied || "Changed")}.</span><button data-undo>Undo</button></div>` : ""}
-    ${pair ? `<div class="sp-pair">${plate(hexes[0], hexes[1])}${plate(hexes[1], hexes[0])}</div>`
-      : `<div class="sp-strip" data-strip>${hexes.map(h => `<button data-swatch="${h}" style="--c:${h};flex:1" aria-label="${esc(spNm(h))}"></button>`).join("")}</div>
+    ${pair ? `<div class="sp-pair" data-dbltap>${plate(hexes[0], hexes[1])}${plate(hexes[1], hexes[0])}</div>`
+      : `<div class="sp-strip" data-strip data-dbltap>${hexes.map(h => `<button data-swatch="${h}" style="--c:${h};flex:1" aria-label="${esc(spNm(h))}"></button>`).join("")}</div>
          <p class="sp-strip-cap" data-stripcap>Equal shares.</p>
          <div class="sp-names">${hexes.map((h, i) => `<span class="sp-name"><button data-swatch="${h}"><i style="--c:${h}"></i><b>${esc(names[i])}</b><em class="mono">${h}</em></button><button class="sp-drop" data-drop="${i}" aria-label="Remove ${esc(names[i])}">${SX_ICON_X}</button></span>`).join("")}</div>`}
     <p class="sp-lead" data-lead aria-live="polite">Reading the paintings…</p>
@@ -255,6 +266,13 @@ function spPage(hexes, o = {}) {
     <p class="fine sp-fine">Paintings are measured pixel by pixel in the museums' own photographs of varnished paintings, so colors are as photographed and screen colors are approximate. A painting “holds” a color when something within 4% of it covers at least 1% of the canvas. “× chance” compares with the colors being scattered independently: a tendency in these photographs, not a rule of painting.</p>
   `, "article sp-page");
   el.querySelector("[data-back]").onclick = xBack;
+  el.addEventListener("swatch-dbltap", e => {
+    const was = (S.palettes || []).some(p => p.cols.join() === hexes.join());
+    heartBurst(el, e.detail.x, e.detail.y);
+    buzz(was ? 8 : [10, 30, 20]); if (typeof sfxChord === "function") sfxChord(hexes, { gap: .07 });
+    keepPalette(hexes, pair ? "A pair" : `A palette of ${k}`);
+    const kb = $("[data-acts] [data-cs=\"keep\"]"); if (kb) kb.querySelector("span").textContent = "Kept";
+  });
   onKey = e => { if (e.key === "Escape") xBack(); };
   const $ = s => el.querySelector(s), my = ++SP_SEQ, live = () => my === SP_SEQ && el.isConnected;
   const acts = typeof csActions === "function" ? csActions(set, { only: ["learn", "keep", "share"] }) : document.createElement("div");
@@ -408,8 +426,11 @@ function spPage(hexes, o = {}) {
 
   // ---- taps ----
   el.addEventListener("click", e => {
+    // a painting from one of these rails arrived from the whole set, not just one color of it (David, 2026-10-08):
+    // ptArrival (js/paintingsof.js) measures each of `hexes` on that painting itself, so the weakest-cover guess
+    // this used to make here isn't needed any more.
     const g = e.target.closest("[data-gi]");
-    if (g) { const r = ($("[data-ptg]")._rows || []).find(x => x.i === +g.dataset.gi), weakest = r && r.covers ? q[r.covers.indexOf(Math.min(...r.covers))] : q[0]; return galleryPage(+g.dataset.gi, true, weakest, CI_STD.tol); }
+    if (g) return galleryPage(+g.dataset.gi, true, hexes, CI_STD.tol);
     if (e.target.closest("[data-all]")) { const o2 = ($("[data-ptg]")._res || {}).o || CI_STD; return paintingsOfPage(q, { tol: o2.tol, minCover: o2.minCover, mode: "all", sort: "cover", source: "paintings", maxCover: null, names: q.map(spNm) }); }
     const pr = e.target.closest("[data-pair]"); if (pr) { buzz(6); return spPage(pr.dataset.pair.split("+")); }
     const pa = e.target.closest("[data-painter]"); if (pa && typeof awPainter === "function") { buzz(5); return awPainter(routeSlug(pa.dataset.painter)); }

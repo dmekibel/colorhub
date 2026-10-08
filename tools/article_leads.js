@@ -19,7 +19,7 @@ const table = { "data/graph/names.json": readJSON("data/graph/names.json"), "dat
 const sandbox = {
   console, Promise, setTimeout, Math, Date, JSON, Map, Set, Array, Object, String, Number, RegExp, Error, Float32Array, Uint8Array, Int16Array,
   lab: cm.lab, de2000: cm.de2000, toast: () => {}, icon: () => "",
-  pctMatch: n => { const m = Math.max(0, 100 - n); return m >= 100 ? "100% match" : `${m > 99 ? m.toFixed(1) : Math.round(m)}% match`; },
+  pctMatch: (n, decimal) => { const m = Math.max(0, 100 - n); return m >= 100 ? "100% match" : `${decimal || m > 99 ? m.toFixed(1) : Math.round(m)}% match`; },
   esc: s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])),
   ink: () => "dark", routeSlug: norm, routeColor: () => null, CORE_NAMES: core, loadCoreNames: () => Promise.resolve(core), BYNAME: new Map(), lookDiff: () => "", lookalikes: () => [],
   loadWiki: () => Promise.resolve(true),

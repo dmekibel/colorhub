@@ -1,8 +1,11 @@
 "use strict";
 // The set tray and the "Pair with…" picker (design/SET-PAGES.md). How two, three or more colors get together:
 //   sxPairBtnHTML(hex, name)  the small "Pair with…" button under a color page's hex (js/richpage.js, one line)
-//   sxPick(anchor, o)         the picker sheet: harmonies, painters' pairs, look-alikes, your colors, recent,
-//                             search any name, or any color on the ring. One tap opens the pair (or set) page.
+//   sxPick(anchor, o)         the picker sheet: a live try-on strip (the set so far, large, plus a dashed trying
+//                             slot), then harmonies, painters' pairs, look-alikes, your colors, recent, search any
+//                             name, or any color on the ring. Tapping a candidate drops it into the trying slot
+//                             (no commit, swap freely); Add commits it, Cancel clears the trial. One tap on a
+//                             candidate's own page (search's "open" state) still opens it directly.
 //   sxAdd(hex)                add a color to the set (long-press on any [data-swatch] anywhere does this)
 //   sxOpen(hexes)             open the pair page (2 colors) or the set page (3+) for these colors
 // The set lives in S.setTray (up to SX_MAX colors) and shows as a small pill at the foot of every screen, so you
@@ -16,6 +19,24 @@ const sxTray = () => (Array.isArray(S.setTray) ? S.setTray : (S.setTray = [])).f
 const sxNm = h => { const n = nameOf(h); return n.de < VERY_CLOSE_DE && !n.between ? n.n : n.text || h; };
 // one color, already in the set? (within 1% different counts as the same color)
 const sxHas = (list, h) => list.some(x => de2000(x, h) < 1);
+// the try-on relation line: "Complement · 12.4% apart · contrast 4.8:1" (nearest textbook hue relation, plus the
+// measured gap and WCAG contrast). de2000/lch/rgb are js/core.js color math.
+const SX_REL_LIN = v => { v /= 255; return v <= .04045 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4; };
+const SX_REL_LUM = h => { const [r, g, b] = rgb(h).map(SX_REL_LIN); return .2126 * r + .7152 * g + .0722 * b; };
+const sxContrast = (a, b) => { const x = SX_REL_LUM(a), y = SX_REL_LUM(b); return (Math.max(x, y) + .05) / (Math.min(x, y) + .05); };
+function sxRelName(a, b) {
+  const [, Ca] = lch(a), [, Cb] = lch(b);
+  if (Ca < 8 && Cb < 8) return "Both neutral";
+  if (Ca < 8 || Cb < 8) return "Neutral pairing";
+  const [, , Ha] = lch(a), [, , Hb] = lch(b), gap = Math.abs(Ha - Hb) % 360, d = gap > 180 ? 360 - gap : gap;
+  if (d < 12) return "Twins";
+  const targets = [["Neighbor", 30], ["Triad", 120], ["Split complement", 150], ["Complement", 180]];
+  return targets.reduce((best, t) => Math.abs(d - t[1]) < Math.abs(d - best[1]) ? t : best, targets[0])[0];
+}
+function sxRelLine(a, b) {
+  const r = sxContrast(a, b);
+  return `${sxRelName(a, b)} · ${pctFmt(de2000(a, b))} apart · contrast ${r.toFixed(1)}:1`;
+}
 
 // The tray is only for building a set: opening the set page consumes it, two screens without adding clears it, ✕ clears it.
 // (The pair/set lives on at its own address, in the trail and in You → Kept.)
@@ -129,6 +150,7 @@ function sxPick(anchor, o = {}) {
   const recent = typeof trail === "function" ? trail(14).filter(x => x.kind === "color" && x.colors[0]).map(x => x.colors[0].h).map(sxHex).filter(h => h && de2000(h, anchor) >= 1) : [];
   const { sh, close } = sheet(`
     <div class="sx-head"><i style="--c:${anchor}"></i><div><p class="eyebrow">${o.title ? "Add a color to" : "Pair with…"}</p><h2>${esc(o.title || name)}</h2></div></div>
+    <div class="sx-try" data-sx-try></div>
     ${others.length && !o.onPick ? `<button class="sx-addset" data-sx-addset><span class="sx-tray-sw">${others.map(h => `<i style="--c:${h}"></i>`).join("")}<i style="--c:${anchor}"></i></span><span><b>Add to your set</b><small>${others.length + 1} colors: ${esc(others.map(sxNm).slice(0, 3).join(", "))}${others.length > 3 ? "…" : ""} and ${esc(name.toLowerCase())}</small></span>${ICON.arrow}</button>` : ""}
     <label class="sx-search"><input type="search" placeholder="Search any color name" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Search any color name" data-sx-q></label>
     <div class="sx-results" data-sx-results hidden></div>
@@ -141,14 +163,36 @@ function sxPick(anchor, o = {}) {
     </div>
     <button class="sx-any" data-sx-any><span class="sx-any-ring"></span><span><b>Any color</b><small>Pick it on the ring</small></span></button>
     <div class="sx-picker" data-sx-picker hidden></div>
-    <button class="btn solid sx-use" data-sx-use hidden>Pair with this color</button>`);
+    <button class="btn solid sx-use" data-sx-use hidden>Try this color</button>`);
   sh.classList.add("sx-sheet");
+  // the set as it stands (the anchor, plus anything already in the tray): what the try-on strip shows beside the
+  // dashed trying slot. A candidate never commits on its own tap; Add does (sxTryAdd), Cancel clears the trial.
+  const buildSet = others.length ? [...others, anchor] : [anchor];
+  let trying = null;
+  const tryBox = sh.querySelector("[data-sx-try]");
+  const paintTry = () => {
+    const full = trying ? [...buildSet, trying] : buildSet, against = buildSet[buildSet.length - 1];
+    tryBox.innerHTML = `<div class="sx-try-row">${buildSet.map(h => `<div class="sx-try-sw" style="--c:${h}"><b>${esc(sxNm(h))}</b></div>`).join("")}${
+      trying ? `<div class="sx-try-sw trying" data-sx-trying style="--c:${trying}"><b>${esc(sxNm(trying))}</b></div>`
+             : `<div class="sx-try-sw empty" data-sx-trying aria-label="Trying nothing yet"><span>+</span></div>`}</div>
+      ${trying ? `<p class="sx-try-rel">${esc(sxRelLine(against, trying))}</p>
+      <div class="sx-try-acts"><button class="btn ghost" data-try-cancel>Cancel</button><button class="btn solid" data-try-add ${full.length > SX_MAX ? "disabled" : ""}>Add</button></div>` : ""}`;
+  };
+  const setTrying = h => { h = sxHex(h); if (!h || buildSet.some(x => de2000(x, h) < 1)) return; trying = h; buzz(6); paintTry(); tryBox.scrollIntoView({ block: "nearest", behavior: reduceMotion ? "auto" : "smooth" }); };
+  const cancelTrying = () => { trying = null; paintTry(); };
+  const addTrying = () => {
+    if (!trying) return;
+    buzz(10); lsSfx2("sfxChord", [...buildSet, trying]);
+    const h = trying; close();
+    if (o.onPick) return o.onPick(h);
+    sxOpen(sxSetTray([...buildSet, h]));
+  };
+  // sfxChord lives in js/sound.js, loaded after this file in some screens; guard the same way js/learnset.js does
+  const lsSfx2 = (fn, ...a) => { try { if (typeof window[fn] === "function") window[fn](...a); } catch (e) {} };
+  paintTry();
   const pick = h => {
     h = sxHex(h); if (!h) return;
-    buzz(8); close();
-    if (o.onPick) return o.onPick(h);
-    const set = sxSetTray([anchor, h]);
-    sxOpen(set);
+    setTrying(h);
   };
   // painters' pairs: the affinity table (counted over the museum photographs)
   if (typeof ciAffinity === "function") ciAffinity(nameOf(anchor).n).then(aff => {
@@ -180,11 +224,13 @@ function sxPick(anchor, o = {}) {
     if (e.target.closest("[data-sx-any]")) {
       const box = sh.querySelector("[data-sx-picker]"), use = sh.querySelector("[data-sx-use]");
       box.hidden = !box.hidden; use.hidden = box.hidden;
-      if (!box.hidden && !picker && typeof colorPicker === "function") picker = colorPicker(box, { hex: rotateHue(anchor, 180), onChange: h => { cur = h; use.textContent = `${o.title ? "Add" : "Pair with"} ${sxNm(h).toLowerCase()}`; } });
-      if (!box.hidden && picker) { cur = picker.get(); use.textContent = `${o.title ? "Add" : "Pair with"} ${sxNm(cur).toLowerCase()}`; box.scrollIntoView({ block: "nearest", behavior: reduceMotion ? "auto" : "smooth" }); }
+      if (!box.hidden && !picker && typeof colorPicker === "function") picker = colorPicker(box, { hex: rotateHue(anchor, 180), onChange: h => { cur = h; use.textContent = `Try ${sxNm(h).toLowerCase()}`; } });
+      if (!box.hidden && picker) { cur = picker.get(); use.textContent = `Try ${sxNm(cur).toLowerCase()}`; box.scrollIntoView({ block: "nearest", behavior: reduceMotion ? "auto" : "smooth" }); }
       buzz(5); return;
     }
-    if (e.target.closest("[data-sx-use]") && cur) return pick(cur);
+    if (e.target.closest("[data-sx-use]") && cur) return setTrying(cur);
+    if (e.target.closest("[data-try-cancel]")) { buzz(5); return cancelTrying(); }
+    if (e.target.closest("[data-try-add]")) return addTrying();
   });
   sh.querySelector("[data-sx-picker]").addEventListener("pointerdown", e => e.stopPropagation());
   return { sh, close };

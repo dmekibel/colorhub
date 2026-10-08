@@ -211,16 +211,17 @@ function rpTwinHTML(name, hex) {
     if (!near.length) { box.remove(); return; }
     const c = near[0], rich = c.d < 2.5, rows = rich ? near.slice(1) : near;
     const [slug, tname, thex, words, ttier, lede] = c.a, d = c.d, sentences = lede.split(/(?<=[.!?])\s/).slice(0, 2).join(" ");
+    const decDigits = pctMatchDecimal(near.map(x => x.d));   // more than one match shown on this page: never a false tie
     const diff = lookDiff({ h: thex, n: tname }, { h: hex, n: name }), dl = Math.abs(lab(hex)[0] - lab(thex)[0]);
     const mine = g.node && g.node.tier, kindMine = RP_TWINKIND[mine] || "a name", kindTheirs = RP_TWINKIND[({ pigment: "pigment-mineral-dye", traditional: "traditional-system", nature: "nature", place: "place-institution", person: "person", standard: "standard-system", commercial: "commercial" })[ttier]] || "a name";
     const how = `${esc(name)} is ${esc(diff)}${dl < 2 ? ", at the same depth" : ""}. It is ${kindMine}; ${esc(tname)} is ${kindTheirs}. The story is ${esc(tname)}'s, shown here because the two look alike.`;
     const full = words >= 600;
     const rowsHTML = rows.map(x => { const [, rn, rh, rw, , rl] = x.a, first = (rl.split(/(?<=[.!?])\s/)[0] || "").trim();
       return `<button class="rp-ns-row" data-rp-twin="${esc(rn)}" data-h="${rh}"><span class="rp-ns-sw"><i style="--c:${hex}"></i><i style="--c:${rh}"></i></span>
-        <span class="rp-ns-t"><b>${esc(rn)}</b><em>${pctMatch(x.d)}</em><span class="rp-ns-l">${esc(first)}</span><span class="rp-ns-m">${Math.max(1, Math.round(rw / 220))} min read</span></span>${ICON.arrow}</button>`; }).join("");
+        <span class="rp-ns-t"><b>${esc(rn)}</b><em>${pctMatch(x.d, decDigits)}</em><span class="rp-ns-l">${esc(first)}</span><span class="rp-ns-m">${Math.max(1, Math.round(rw / 220))} min read</span></span>${ICON.arrow}</button>`; }).join("");
     const list = rows.length ? `<div class="rp-ns">${rich ? `<p class="rp-ns-h">More stories nearby</p>` : `<p class="rp-ns-h">Nearest stories</p><p class="rp-ns-sub">${esc(name)} has no story of its own yet. These colors do, and they look closest.</p>`}${rowsHTML}</div>` : "";
     const card = rich ? `<section class="rp-twin${full ? "" : " rp-twin-compact"}"><div class="rp-twin-split"><i style="--c:${hex}"></i><i style="--c:${thex}"></i></div>
-      <p class="rp-twin-label">${rpTwinLabel(d)} · ${pctMatch(d)}</p><h3>Its story lives with <em>${esc(tname)}</em></h3>
+      <p class="rp-twin-label">${rpTwinLabel(d)} · ${pctMatch(d, decDigits)}</p><h3>Its story lives with <em>${esc(tname)}</em></h3>
       ${full ? `<p class="rp-twin-lede">${esc(sentences)}</p><div class="rp-twin-how"><b>How they differ</b><p>${how}</p></div>` : `<p class="rp-twin-how-c">${how}</p>`}
       <button class="rp-twin-go" data-rp-twin="${esc(tname)}" data-h="${thex}">${full ? `Read its story · ${Math.max(2, Math.round(words / 220))} min` : `Read ${esc(tname.toLowerCase())}'s story`}${ICON.arrow}</button></section>` : "";
     box.innerHTML = card + list;
