@@ -2246,7 +2246,7 @@ const MXT = {
     // a tap may first zoom onto a small bubble (the zoomed-out rule): then the next tap on the same one opens it
     for (let k = 0; k < 3 && !t.$(".cp-page [data-back]"); k++) {
       t.ev("HM_CTRL._settle()");
-      before = t.ev("HM_CTRL.panValue()"); cur = t.ev("HM_CTRL.current()"); at = t.ev(`HM_CTRL.locate(${JSON.stringify(cur.h)})`);
+      before = t.ev("HM_CTRL.panValue()"); cur = t.ev("HM_CTRL.current()"); at = t.ev(`HM_CTRL.locate(${JSON.stringify(cur.h)})`); at.top = t.$(".screen.hm canvas").getBoundingClientRect().top;   // (in canvas px: a headless entrance may still hold the screen a few px down)
       t.expect(at && at.d > 20, `${when}: no middle bubble to tap`);
       await t.tapAt(t.$(".screen.hm canvas"), at.x, at.y, { wait: 30 });
       try { await t.waitFor(".cp-page [data-back]", 1500, "", 600); } catch (e) {}
@@ -2257,9 +2257,9 @@ const MXT = {
     await t.click(".cp-page [data-back]", { wait: 60 });
     await t.waitFor(() => t.$$(".screen.hm canvas").length === 1 && !t.$(".mx") && !t.$(".mx-floor"), 8000, `${when}: back on the map with the shrink done`);
     await t.sleep(120);
-    const after = t.ev("HM_CTRL.panValue()"), at2 = t.ev(`HM_CTRL.locate(${JSON.stringify(cur.h)})`);
+    const after = t.ev("HM_CTRL.panValue()"), at2 = t.ev(`HM_CTRL.locate(${JSON.stringify(cur.h)})`), top2 = t.$(".screen.hm canvas").getBoundingClientRect().top;
     t.expect(Math.hypot(after[0] - before[0], after[1] - before[1]) < .01 && Math.abs(after[2] - before[2]) < .01, `${when}: the view moved: ${before.map(v => v.toFixed(3))} -> ${after.map(v => v.toFixed(3))}`);
-    t.expect(at2 && Math.hypot(at2.x - at.x, at2.y - at.y) < 1, `${when}: ${cur.n} came back at ${at2 && [at2.x, at2.y].map(Math.round)}, was ${[at.x, at.y].map(Math.round)}`);
+    t.expect(at2 && Math.hypot(at2.x - at.x, (at2.y - top2) - (at.y - at.top)) < 1, `${when}: ${cur.n} came back at ${at2 && [at2.x, at2.y].map(Math.round)}, was ${[at.x, at.y].map(Math.round)}`);
     MXT.corners(t, when);
     return cur.n;
   },

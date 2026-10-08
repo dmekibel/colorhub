@@ -1919,7 +1919,7 @@ function honeycomb(host, opts = {}) {
     zoomValue: () => Z,
     panValue: () => [P[0], P[1], Z],   // QA: the pan a return to Home must keep
     // QA (tools/smoke map-return): finish a spring or zoom in flight at once (headless frames don't always run)
-    _settle() { if (phase === "spring" && spring) { P = spring.X.slice(); spring = null; phase = "idle"; } if (zAnim) { Z = zAnim.to; zAnim = null; } Plag = P.slice(); draw(); return [P[0], P[1], Z]; },
+    _settle() { if (phase === "spring" && spring) { P = spring.X.slice(); spring = null; phase = "idle"; } if (zAnim) { Z = zAnim.to; zAnim = null; } insetCur = insetBottom; Plag = P.slice(); draw(); return [P[0], P[1], Z]; },
     _morphCheck: items => l18MorphCheck(items),
     // QA (tools/smoke map group): the median seam between each readable bubble and its nearest neighbor, in px
     _gapStat() {
