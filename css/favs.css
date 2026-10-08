@@ -342,12 +342,13 @@ html:has(#app > .screen.fv-run){--ground:#5F5F5F;--lift:#676767;--lift-2:#6E6E6E
 .fva-strip{display:flex;gap:2px;width:100%;height:72px;padding:0;margin:12px 0 0;border:0;border-radius:var(--r-1);overflow:hidden;background:none}
 .fva-strip .fva-im{flex:1;height:100%;aspect-ratio:auto;border-radius:0}
 
-/* ---------- the heart on a painting's page: quiet, under the picture, never over it ---------- */
-.fva-heart{flex:none;width:44px;height:44px;margin-left:auto;display:grid;place-items:center;border-radius:50%;color:var(--soft);transition:color .2s,transform .2s var(--spring)}
+/* ---------- the heart on a painting's page: in the top bar beside the museum link, always on screen (David,
+   2026-10-09 — it used to sit under the picture, a scroll away) ---------- */
+.fva-heart{flex:none;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;color:var(--soft);transition:color .2s,transform .2s var(--spring)}
 .fva-heart.on{color:#E8787A}
 .fva-heart:active{transform:scale(.88)}
 .fva-heart.pop svg{animation:fvaPop .42s var(--spring)}
-.gl-under .gl-full~.fva-heart{margin-left:0}
+.art-top .fva-heart{background:var(--s2);border:1px solid var(--line)}
 @keyframes fvaPop{0%{transform:scale(.6)}55%{transform:scale(1.22)}100%{transform:scale(1)}}
 /* a long press on the picture: a heart blooms where the thumb is, then goes */
 .fva-bloom{position:absolute;z-index:3;width:84px;height:84px;margin:-42px 0 0 -42px;color:#F2EEE6;pointer-events:none;filter:drop-shadow(0 6px 18px rgba(0,0,0,.45));animation:fvaBloom .85s var(--ease-grow) both}

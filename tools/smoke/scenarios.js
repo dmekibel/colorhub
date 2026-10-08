@@ -77,6 +77,27 @@ scenario("home", "center bubble opens a color page", async t => {
   await t.waitFor("canvas", 6000, "the honeycomb again after Back");
 });
 
+// js/learn.js's placement hint ("Tap any color to open it") marks itself pending with S.mapHint = 1 so a later
+// Home open can show it again if the app closed before that first touch (its own comment says so, but nothing
+// called lrMapHint() on a later open, and js/home.js's hmDismissHint was guarded by `typeof` with no function
+// behind it, so a pending hint from an earlier session could never reappear or be dismissed on this Home).
+scenario("home", "a pending placement hint reappears on a later Home open, and a bubble tap clears it", async t => {
+  // a real address (not #shot=home, which builds its own demo state and ignores localStorage) so the seeded save loads
+  try { localStorage.setItem("colorhub-v1", JSON.stringify({ v: 3, placed: { tier: 1, at: "2026-10-01" }, mapHint: 1 })); } catch (e) {}
+  await t.open("#/home", { settle: 300, keepState: true });
+  const cv = await t.waitFor("canvas", 10000, "the honeycomb canvas");
+  await t.waitFor(() => /\d/.test(t.text(".hm-title small")) && !/Loading/.test(t.text(".hm-title small")), 10000, "the honeycomb to fill");
+  await t.waitFor(".lr-maphint", 3000, "the pending hint on a fresh Home open");
+  t.expect(/Tap any color/.test(t.text(".lr-maphint")), `the hint reads "${t.text(".lr-maphint")}"`);
+  const r = cv.getBoundingClientRect();
+  await t.tapAt(cv, r.left + r.width / 2, r.top + r.height / 2, { wait: 400 });
+  await t.waitFor(".cp-page", 6000, "a color page after tapping the center bubble");
+  t.expect(!t.ev("S.mapHint"), "S.mapHint is still set after the tap (hmDismissHint)");
+  await H.back(t);
+  await t.waitFor("canvas", 6000, "the honeycomb again after Back");
+  t.expect(!t.$(".lr-maphint"), "the hint is still in the DOM after being dismissed");
+});
+
 scenario("home", "a far bubble glides to the middle, it does not open", async t => {
   const cv = await H.homeReady(t);
   const r = cv.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
@@ -581,6 +602,23 @@ for (const [part, expect] of [["all", ".x-feed .pin, .x-feed [data-pin]"], ["art
   });
 }
 
+// For you (js/explore.js, default lens): a strong painting interest (interests(), js/learner.js) nudges
+// painting pins earlier in the mix -- a nudge like fvForYou's, never a filter, so every kind still shows.
+scenario("explore", "For you nudges pins toward a strand you follow, without hiding the others", async t => {
+  try {
+    localStorage.setItem("colorhub-v1", JSON.stringify({
+      v: 3, placed: { tier: 1, at: "2026-10-01" },
+      learn: { v: 1, ev: Array.from({ length: 20 }, (_, i) => ({ t: Date.now() - i * 36e5, e: "seen", src: "painting" })), agg: { c: {}, p: {} }, sets: {}, bf: 1 },
+    }));
+  } catch (e) {}
+  await t.open("#shot=explore:all", { settle: 600, keepState: true });
+  await t.click('.xp-cover[data-part="all"]', { force: true, wait: 500 });
+  await t.waitFor(".x-feed .pin", 10000, "pins in the For you feed");
+  const kinds = t.$$(".x-feed .pin").map(p => p.className.match(/pin-(\w+)/)?.[1] || "");
+  t.expect(kinds.includes("art"), "no painting pin anywhere in the feed despite a strong painting interest");
+  t.expect(kinds.includes("color"), "the color pins disappeared; a nudge should never hide the others");
+});
+
 scenario("explore", "a cover's palette chip opens its color page; the primary opens the part", async t => {
   await t.open("#shot=explore:all", { settle: 600 });
   const chip = await t.waitFor('.xp-cover[data-part="all"] .xp-chip', 8000, "a palette chip on the For you cover");
@@ -756,6 +794,28 @@ scenario("pages", "a world twin (In gems) opens its page in one tap, Back return
   t.notes.push(`Fiery Rose > ${id}`);
   await t.click("[data-back]", { wait: 600 });
   await t.waitFor(() => t.$(".cp-page .cp-hero-foot h1") && H.title(t) === "Fiery Rose", 8000, "Back to return to Fiery Rose");
+});
+
+// design/audit-graph/CHECKPOINT.md #6/#7: role paintings (ar.rp_) and Werner's 1821 examples (node.werner),
+// both already computed, never shown before this -- js/richcolor.js rcRolePaintingsHTML / rcWernerLine.
+scenario("pages", "role paintings and Werner's 1821 example show on the color page", async t => {
+  await H.openPage(t, "#/name/auburn", "Auburn");
+  const paint = await t.waitFor(() => t.$('[data-rp-drawer="paint"]'), 8000, "the 'In paintings' drawer");
+  if (!paint.open) await t.click(paint.querySelector("summary"), { wait: 200 });
+  await t.waitFor(() => t.$$(".rc-ri", paint).length >= 2, 15000, "a role-paintings row (shadow/mid/light/accent/hidden)");
+  const tiles = t.$$(".rc-ri", paint);
+  t.expect(tiles.every(x => /Shadow|Mid|Light|Accent|Hidden/.test(x.textContent)), "a role tile is missing its label");
+  const tile = await t.waitFor(() => tiles.find(x => x.dataset.rcGi), 15000, "a role painting resolved to a gallery index");
+  await t.click(tile, { wait: 700 });
+  await t.waitFor(() => t.$(".gl-page"), 10000, "the role painting's own page");
+  await t.click("[data-back]", { wait: 600 });
+  await t.waitFor(() => t.$(".cp-page .cp-hero-foot h1") && H.title(t) === "Auburn", 8000, "Back to return to Auburn");
+
+  await H.openPage(t, "#/name/indigo-blue", "Indigo Blue");
+  const world = await t.waitFor(() => t.$('[data-rp-drawer="world"]'), 8000, "the 'In the world' drawer");
+  if (!world.open) await t.click(world.querySelector("summary"), { wait: 200 });
+  const line = await t.waitFor(() => t.$(".rc-werner", world), 15000, "Werner's 1821 example line");
+  t.expect(/Werner, 1821:.*Blue Copper Ore.*\(mineral\)/.test(t.text(line)), `the Werner line reads "${t.text(line)}"`);
 });
 
 scenario("pages", "hold the cover: the flower rises, dragging lights a hex, letting go opens that color; Back returns", async t => {
@@ -1109,6 +1169,32 @@ scenario("studio", "Name any color: tabs, drag, save, a name opens its page", as
   await t.waitFor(".nmr-hero", 6000, "the namer again after Back");
   await t.click("[data-back]", { force: true, wait: 700 });
   await t.waitFor(() => !t.$(".nmr-hero") && t.$("#app").innerText.length > 60, 6000, "a room after Back from the namer (opened by address, so it falls back to the current room)");
+});
+
+// Eyedrop (js/namer.js), a photo: a kept find used to go nowhere -- typeof hmDismissHint-style six-function rot,
+// here js/learner.js's learnerLog was simply never called. A Save on an Eyedrop pick now logs a "find" (color,
+// src "photo"), the same Learner Model event the camera screen (js/camera.js) logs on a tapped name.
+scenario("studio", "Name any color, Eyedrop tab: a kept photo find logs to the Learner Model", async t => {
+  await t.open("#/studio/namer?c=5F8C8A", { settle: 600 });
+  await t.waitFor(".nmr-hero", 8000, "the namer");
+  await t.click("[data-tab='eye']", { force: true, wait: 300 });
+  await t.waitFor("#ef", 4000, "the Eyedrop tab's photo picker");
+  const n0 = (t.ev("S.learn && S.learn.ev ? S.learn.ev.length : 0")) || 0;
+  // a tiny 1x1 PNG, so the test needs no real photo, camera permission or network image
+  await t.ev(`(async () => {
+    const r = await fetch("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=");
+    const b = await r.blob(), f = new File([b], "swatch.png", { type: "image/png" }), dt = new DataTransfer();
+    dt.items.add(f); document.getElementById("ef").files = dt.files;
+    document.getElementById("ef").dispatchEvent(new Event("change", { bubbles: true }));
+  })()`);
+  await t.waitFor(() => t.$("#ecv") && t.$("#ecv").width > 0, 6000, "the chosen photo to draw into the Eyedrop canvas");
+  await t.sleep(200);
+  await t.click("#acts [data-save]", { force: true, wait: 300 });
+  t.expect(t.$$(".nmr-chips button").length >= 1, "Save did not add the color to the tray");
+  const ev = t.ev("S.learn.ev") || [];
+  t.expect(ev.length > n0, "no new Learner Model event after the save");
+  const find = ev.slice(n0).find(e => e.e === "find" && e.src === "photo");
+  t.expect(find, `the new event(s) ${JSON.stringify(ev.slice(n0))} don't include a "find" with src "photo"`);
 });
 
 scenario("home", "View sheet: the picker icon opens Name any color", async t => {
@@ -1577,6 +1663,31 @@ scenario("paintings", "a painting's On the painting control: numbered Markers th
   t.expect(!t.$(".gl-mks .gl-mk") && t.$("[data-gllitcv]").classList.contains("on"), "Highlight didn't swap the markers for the dimmed painting");
   await t.click('[data-glw="off"]', { force: true, wait: 300 });
   t.expect(!t.$("[data-gllitcv]").classList.contains("on"), "Off left the painting dimmed");
+});
+// The Analysis section's "Learn this painting" button (js/artwiki.js awAnalysis) was guarded by
+// `typeof paintingLesson === "function"`, a function that was never defined anywhere, so the button never
+// rendered. It now opens the painting's palette as a quick deck (prQuick -> js/learnset.js lsOpen).
+scenario("paintings", "a painting's Analysis: Learn this painting opens a deck of its palette", async t => {
+  await t.open("#/gallery/12", { settle: 800 });
+  const btn = await t.waitFor("[data-awlesson]", 15000, "the Learn this painting button");
+  t.expect(/learn this painting/i.test(t.text(btn)), `the button reads "${t.text(btn)}"`);
+  await t.click(btn, { force: true, wait: 500 });
+  await t.waitFor(".sheet.ls-sheet, .sheet.pr-qsheet", 8000, "a quick-deck sheet after Learn this painting");
+});
+// "You and this color" (js/richcolor.js rcYouHTML): opening a painting logs it as seen (js/gallery.js glPage),
+// so one of its colors should quietly say "You met it in <title>, a painting", one tap back to that painting.
+scenario("paintings", "a color page says where you met it, and the link reopens that painting", async t => {
+  await t.open("#/gallery/12", { settle: 800 });
+  const title = t.text(".p-title");
+  const sw = await t.waitFor("[data-glswatches] [data-swatch]", 15000, "a palette swatch on the painting");
+  await t.click(sw, { force: true, wait: 600 });
+  await t.waitFor(".cp-page", 8000, "the color page after tapping a palette swatch");
+  const met = await t.waitFor(".rc-you .rc-met", 8000, 'the "You met it in…" line');
+  t.expect(new RegExp(title.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).test(t.text(met)), `the met line "${t.text(met)}" doesn't name "${title}"`);
+  const link = t.$(".rc-you [data-rc-met]");
+  t.expect(link, 'the met line has no one-tap link back to the painting');
+  await t.click(link, { force: true, wait: 600 });
+  await t.waitFor(() => t.text(".p-title") === title, 8000, "the painting to reopen from the met line");
 });
 scenario("paintings", "a color page's In paintings section: presets re-run the query; Fine-tune opens the sliders", async t => {
   await t.open("#/color/cobalt", { settle: 800 });
@@ -2073,6 +2184,21 @@ scenario("you-coverage", "You: Untangle on a mix-up opens the Learn sheet on tha
   t.expect(/Teal/i.test(t.text(".ls-sheet")) && /Petrol/i.test(t.text(".ls-sheet")), "the sheet isn't on the pair");
 });
 
+// The week strip (js/you.js ymWeek): a played-but-not-recalled day used to read `challengeRounds(k)[0].base`,
+// a function that never existed, so a typeof guard quietly left that day's dot blank. It now reads the day's
+// stored focal color (chState()[k].focal, js/challenge.js) instead.
+scenario("you-coverage", "You: the week strip shows a color for a day you only played the daily painting", async t => {
+  await t.open("#/you", { settle: 400 });
+  t.ev(`(() => { const k = addDays(today(), -1); S.challenge = { [k]: { hits: [true, false, true, true, true], p: "g1", focal: { n: "Cerulean", h: "#2A52BE" }, v: 2 } }; save(); youPage(); })()`);
+  await t.sleep(400);
+  const dots = t.$$(".ym-week span");
+  t.expect(dots.length === 7, `${dots.length} days in the week strip instead of 7`);
+  const played = dots[5];   // yesterday: index 6 is "now" (today)
+  t.expect(played.classList.contains("on"), "yesterday isn't marked played");
+  const i = played.querySelector("i");
+  t.expect(i && getComputedStyle(i).getPropertyValue("--c").trim().toUpperCase() === "#2A52BE", `the played day's dot is "${i && getComputedStyle(i).getPropertyValue("--c")}", expected the day's focal color`);
+});
+
 // ================================================================== THE PAINTING PAGE + NAME IT / FIND IT (PLAN.md lane A)
 scenario("paintings", "lane A: a painting page leads with what stands out; Name its colors runs three rounds, logs them, and offers Learn", async t => {
   await t.open("#/gallery/12", { settle: 800 });
@@ -2206,9 +2332,19 @@ scenario("paintmap", "arrange by time and painter and around the middle one then
   await t.waitFor(() => Math.abs(t.w.PM_CTRL.count - want) <= 1, 8000, "the map to show the filtered paintings");
   t.expect(/y0=\d+/.test(t.w.location.hash), `the address doesn't carry the years: ${t.w.location.hash}`);
 });
-scenario("favs", "a painting's heart keeps it; the shelf sorts favorites into kinds with counts, remembered", async t => {
+scenario("favs", "a painting's heart (now in the top bar) and a double-tap on the picture both keep it; the shelf sorts favorites into kinds with counts, remembered", async t => {
   await t.open("#/gallery/8136", { settle: 800 });
   await t.waitFor("[data-fva]", 14000, "the heart under the painting");
+  t.expect(!!t.$(".art-top [data-fva]"), "the heart isn't in the top bar beside the museum link, where it's visible without scrolling");
+  // double-tap to like (Instagram-style): a quick second tap on the picture favorites it, with a heart burst,
+  // before its single-tap action (name a spot) gets to fire
+  const hero = t.$(".gl-hero>span");
+  await t.click(hero, { wait: 100 });
+  await t.click(hero, { wait: 500 });
+  t.expect(t.ev("Object.keys(S.favArt || {}).length") === 1, "a double-tap on the painting didn't favorite it");
+  t.expect(t.$("[data-fva]").getAttribute("aria-pressed") === "true", "the heart didn't fill after the double-tap");
+  await t.click("[data-fva]", { wait: 400 });
+  t.expect(t.ev("Object.keys(S.favArt || {}).length") === 0, "the heart button didn't un-favorite it again");
   await t.click("[data-fva]", { wait: 400 });
   t.expect(t.$("[data-fva]").getAttribute("aria-pressed") === "true", "the heart didn't fill");
   t.expect(t.ev("Object.keys(S.favArt || {}).length") === 1, "the painting isn't in favorites");

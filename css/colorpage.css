@@ -162,6 +162,22 @@
 .rc-role small{font-size:13px;line-height:1.25;opacity:.7}
 .cp-page [id^="rc-role-"]:empty,.cp-page [id^="rc-reach-"]:empty,.cp-page [id^="rc-compass-"]:empty{display:none}
 
+/* Role paintings (CHECKPOINT.md #6): one small square thumbnail per role, squares because these are samples
+   (VISUAL-DIRECTION.md §2 "the bubble" rule), not named colors. */
+.rc-roleimg-row{display:flex;gap:8px}
+.rc-ri{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0;background:none;border:0;padding:0}
+.rc-ri-im{display:block;width:100%;aspect-ratio:1;border-radius:var(--r-tile,6px);overflow:hidden;background:var(--cp-surface-2)}
+.rc-ri.wait .rc-ri-im{animation:rpPulse 1.6s ease-in-out infinite}
+.rc-ri-im img{width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .25s var(--ease,ease)}
+.rc-ri-im img.ld{opacity:1}
+.rc-ri small{font-size:13px;line-height:1;color:var(--soft)}
+@media (prefers-reduced-motion:reduce){.rc-ri.wait .rc-ri-im{animation:none}}
+
+/* Werner's 1821 examples (CHECKPOINT.md #7), "In the world" */
+.rc-werner{font:400 17px/1.4 var(--serif)}
+.rc-werner .wl{font:inherit;color:var(--ink);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.rc-werner em{font-style:italic;color:var(--soft)}
+
 /* The history band, the Compass and the passport (js/richcolor.js) */
 .rc-reach{margin-top:22px}
 .rc-reach-head{font:400 26px/1.15 var(--serif);letter-spacing:-.01em;text-wrap:balance}
@@ -263,6 +279,8 @@
 .rc-you{margin-top:26px;padding:16px 18px;background:var(--surface-2);border-radius:var(--r-2)}
 .rc-you h3{font:400 22px/1.15 var(--serif);margin-bottom:8px}
 .rc-you p{font:400 17px/1.35 var(--serif)}
+.rc-you .rc-met{margin-top:4px}
+.rc-metlink{display:inline;padding:0;border:0;background:none;font:inherit;color:inherit;font-weight:600;text-decoration:underline;text-decoration-color:var(--faint)}
 .rc-you .rc-duel{margin-top:12px;padding:10px 18px;border-radius:999px;border:1px solid var(--cp-rule);font:italic 400 17px/1 var(--serif)}
 .rc-duel-panel{display:block;margin-top:12px}
 

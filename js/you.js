@@ -126,7 +126,7 @@ function ymWeek() {
   const ch = S.challenge || {};
   const days = Array.from({ length: 7 }, (_, i) => { const k = addDays(today(), i - 6), [y, m, d] = k.split("-").map(Number);
     const r = by[k], played = !!ch[k];
-    return { k, h: r ? r.h : played && typeof challengeRounds === "function" ? (challengeRounds(k)[0] || {}).base : null, w: new Date(y, m - 1, d).toLocaleDateString("en-US", { weekday: "narrow" }), on: !!(r || played), now: i === 6 }; });
+    return { k, h: r ? r.h : played && ch[k].focal ? ch[k].focal.h : null, w: new Date(y, m - 1, d).toLocaleDateString("en-US", { weekday: "narrow" }), on: !!(r || played), now: i === 6 }; });
   return days;
 }
 function ymEyeBars() {

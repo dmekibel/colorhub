@@ -602,9 +602,24 @@ function pmMount(el, s, F) {
     const bl = document.createElement("i"); bl.className = "fva-bloom pmx-bloom"; bl.innerHTML = FVA_HEART_ON;
     bl.style.left = x + "px"; bl.style.top = y + "px"; el.appendChild(bl); setTimeout(() => bl.remove(), 900);
   }
+  // double-tap the centered painting to like it (Instagram-style, David 2026-10-09): opening it is delayed the
+  // same ~280ms js/gallery.js and js/swatch.js use, so a quick second tap can be caught first and turned into
+  // the heart burst + toggle instead of opening the page
+  let lastTapAt = 0, tapTimer = 0;
   function tap(x, y) {
     const b = hitAt(x, y); if (!b) return;
-    if (b.k === centerK && b.z < .6) return openK(b.k);
+    if (b.k === centerK && b.z < .6) {
+      const now = performance.now();
+      if (now - lastTapAt < 300) {
+        clearTimeout(tapTimer); tapTimer = 0; lastTapAt = 0;
+        bloomAt(x, y); toggleHeart(true);   // double-tap only adds, like the long press just above — never un-hearts
+        if (typeof sfxColor === "function") sfxColor(pmHex(b.k));
+        return;
+      }
+      lastTapAt = now;
+      tapTimer = setTimeout(() => { lastTapAt = 0; if (!dead) openK(b.k); }, 280);
+      return;
+    }
     buzz(5); glideTo([lay.x[b.k], lay.y[b.k]], 360);
   }
   function openK(k) {
@@ -683,7 +698,7 @@ function pmMount(el, s, F) {
   el.querySelector("[data-pmfilter]").onclick = () => pmFilterSheet(s, F, () => rebuild());
   // ---- life cycle
   const ro = new ResizeObserver(() => size()); ro.observe(cv);
-  cleanup.push(() => { dead = true; ro.disconnect(); cancelAnimationFrame(raf); imgs.destroy(); if (lay && centerK >= 0) PM_PAN.set(lay.key, { x: lay.x[centerK], y: lay.y[centerK], s: Z }); });
+  cleanup.push(() => { dead = true; clearTimeout(tapTimer); ro.disconnect(); cancelAnimationFrame(raf); imgs.destroy(); if (lay && centerK >= 0) PM_PAN.set(lay.key, { x: lay.x[centerK], y: lay.y[centerK], s: Z }); });
   size(); build(false);
   window.PM_CTRL = { get center() { return centerK >= 0 ? lay.items[centerK] : -1; }, get count() { return lay ? lay.n : 0; }, get drawn() { return drawn.length; }, images: () => imgs.stats(), get spec() { return s; }, glideTo: k => glideTo([lay.x[k], lay.y[k]], 300), lay: () => lay, zoom: z => { Z = clamp(z, zMin(), ZMAX); kick(); } };
 }

@@ -119,8 +119,19 @@ function lensSections(lens) {
       return [{ title: "Saved", sub: list.length ? `${list.length} kept` : "Tap the heart on anything to keep it here.", pins: list.map(n => pin(n)) }];
     }
     default: {
-      // For you: colors shuffled by day, with a painting, a story or a page every few pins
-      const day = today(), cs = typeof fvForYou === "function" ? fvForYou(seeded(colors, day)) : seeded(colors, day), others = seeded([...paintings, ...stories, ...pages.filter(p => p.dek)], day);
+      // For you: colors shuffled by day, with a painting, a story or a page every few pins, nudged toward the
+      // strands you actually follow (interests(), js/learner.js: what you've seen, liked and found, plus any
+      // strand you switched on in Journey) — a nudge like fvForYou's, never a filter: every kind still shows up,
+      // just a little earlier or later in the mix.
+      const day = today(), cs = typeof fvForYou === "function" ? fvForYou(seeded(colors, day)) : seeded(colors, day);
+      let others = seeded([...paintings, ...stories, ...pages.filter(p => p.dek)], day);
+      if (typeof interests === "function") {
+        const STRAND_OF = { painting: "painting", story: "story", page: "article" };
+        let w = {};
+        try { interests().forEach(x => { w[x.strand] = x.w + (x.on ? 50 : 0); }); } catch (e) { w = {}; }
+        const N = others.length || 1;
+        others = others.map((n, i) => ({ n, k: i / N - .4 * Math.min(1, (w[STRAND_OF[n.kind]] || 0) / 20) })).sort((a, b) => a.k - b.k).map(x => x.n);
+      }
       const out = [];
       cs.forEach((c, i) => { out.push(pin(c)); if (i % 3 === 2 && others.length) out.push(pin(others.shift())); });
       others.forEach(o => out.push(pin(o)));
