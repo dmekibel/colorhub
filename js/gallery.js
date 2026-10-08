@@ -589,6 +589,79 @@ function glQuizLoad() {
   }));
 }
 
+// ---------- palette types: many palettes from one painting (David, 2026-10-08) ----------
+// Each type is a different question asked of the same measured pool: the shares are always the colors' share of the
+// whole canvas, as photographed. glModeSet() returns { pal, max, fixed?, cap? } or null when this painting has none.
+const GL_MODES = [
+  ["out", "Stands out", "The colors that make this painting itself: vivid, rare for this painter and far from the picture's average."],
+  ["area", "By area", "Every color sized by how much of the picture it covers."],
+  ["lights", "Lights", "Only the light colors: highlights and pale grounds."],
+  ["mids", "Mid-tones", "Only the middle values, between the lights and the darks."],
+  ["shadows", "Shadows", "Only the dark colors."],
+  ["accents", "Accents", "Small, vivid areas set against the bigger colors."],
+  ["hidden", "Hidden colors", "Quiet and rare, from another family than the rest, like the greens under skin."],
+  ["focal", "Focal", "The color where the eye lands first, with its closest neighbors."],
+  ["skin", "Skin tones", "The flesh colors, where there is a figure."],
+  ["warm", "Warm only", "Only the warm colors: reds, oranges and yellows."],
+  ["cool", "Cool only", "Only the cool colors: greens, blues and violets."],
+  ["ladder", "Value ladder", "Five steps from light to dark, each the average of the colors in that band."],
+  ["harmony", "Harmony", "The painting's main hue with its strongest partners."],
+  ["pick", "Pick from it", ""],
+];
+function glModeSet(m, pool, k, row) {
+  if (!pool.length) return null;
+  const P = pool.map(p => { const c = lch(p.h); return { h: p.h, share: p.share, L: c[0], C: c[1], H: c[2] }; });
+  const tot = P.reduce((a, p) => a + p.share, 0) || 1;
+  const warm = p => p.C >= 8 && (p.H >= 330 || p.H < 100), cool = p => p.C >= 8 && p.H >= 100 && p.H < 330;
+  const sub = (f, min) => { const S = P.filter(f); return S.length >= 2 && S.reduce((a, p) => a + p.share, 0) / tot >= min ? S : null; };
+  const fromSub = S => {
+    if (!S) return null;
+    const picks = glPoolPick(S.map(p => ({ h: p.h, share: p.share })), Math.min(k, S.length)), area = picks.map(() => 0);
+    S.forEach(p => { let b = 0, bd = 1e9; picks.forEach((q, j) => { const dd = de2000(q.h, p.h); if (dd < bd) { bd = dd; b = j; } }); area[b] += p.share; });
+    return { pal: picks.map((q, j) => ({ h: q.h, share: area[j] / tot })).sort((a, b) => b.share - a.share), max: Math.min(S.length, 24) };
+  };
+  const raw = (arr, cap) => arr.length ? { pal: arr.map(p => ({ h: p.h, share: p.share / tot })), max: arr.length, fixed: true, cap } : null;
+  switch (m) {
+    case "lights": return fromSub(sub(p => p.L >= 65, .03));
+    case "mids": return fromSub(sub(p => p.L >= 35 && p.L < 65, .03));
+    case "shadows": return fromSub(sub(p => p.L < 35, .03));
+    case "warm": return fromSub(sub(warm, .03));
+    case "cool": return fromSub(sub(cool, .03));
+    case "skin": return fromSub(sub(p => p.C >= 10 && p.C <= 50 && p.H >= 15 && p.H <= 65 && p.L >= 30 && p.L <= 88, .04));
+    case "accents": {
+      let a = row && row.acc ? row.acc.map(j => P[j]).filter(Boolean) : P.filter(p => p.C >= 28 && p.share < .06 && p.L >= 20).sort((x, y) => y.C - x.C).slice(0, 5);
+      return raw(a, "Small, vivid areas set against the bigger colors. Press Show on painting to see where they sit.");
+    }
+    case "hidden": return row && row.hid ? raw(row.hid.map(j => P[j]).filter(Boolean), "Quiet and rare, from another family than the rest, like the greens under skin. Press Show on painting to find them.") : null;
+    case "focal": {
+      const f = row && row.foc != null && P[row.foc]; if (!f) return null;
+      const near = P.filter(p => p !== f && de2000(p.h, f.h) < 22).sort((x, y) => de2000(x.h, f.h) - de2000(y.h, f.h)).slice(0, 4);
+      return raw([f, ...near], "The color where the eye lands first (a computed guess, not eye-tracking), with its closest neighbors.");
+    }
+    case "ladder": {
+      const bands = [[80, 101], [60, 80], [40, 60], [20, 40], [-1, 20]], pal = [];
+      bands.forEach(([lo, hi]) => {
+        const S = P.filter(p => p.L >= lo && p.L < hi), t = S.reduce((a, p) => a + p.share, 0); if (!S.length || t / tot < .004) return;
+        const l = S.reduce((a, p) => { const x = lab(p.h); return [a[0] + x[0] * p.share, a[1] + x[1] * p.share, a[2] + x[2] * p.share]; }, [0, 0, 0]).map(v => v / t);
+        pal.push({ h: labHex(l[0], l[1], l[2]), share: t / tot });
+      });
+      return pal.length >= 3 ? { pal, max: 5, fixed: true } : null;
+    }
+    case "harmony": {
+      const C = P.filter(p => p.C >= 14); if (C.length < 2) return null;
+      const dom = C.reduce((a, p) => p.share > a.share ? p : a), dh = p => { const x = Math.abs(p.H - dom.H) % 360; return x > 180 ? 360 - x : x; };
+      const strong = (f) => C.filter(f).sort((x, y) => y.share * y.C - x.share * x.C);
+      const comp = strong(p => dh(p) >= 145)[0], pal = [dom];
+      if (comp) pal.push(comp);
+      strong(p => p !== dom && dh(p) <= 40).forEach(p => { if (pal.length < 4 && pal.every(q => de2000(q.h, p.h) > 8)) pal.push(p); });
+      if (pal.length < 2) return null;
+      return { pal: pal.map(p => ({ h: p.h, share: p.share / tot })), max: pal.length, fixed: true,
+        cap: `The main hue (${nameOf(dom.h).n.toLowerCase()})${comp ? ", its strongest complement" : ", with no strong complement in this one"}, and the neighbors that sit beside it on the wheel.` };
+    }
+  }
+  return null;
+}
+
 // ---------- the lite painting page ----------
 // fromHex: the color the visitor arrived from (a search, a color page's "In paintings", a name page, or the
 // color sheet's "More paintings with this color") — ROADMAP §13 "arrive from a color and see it". Carried in
@@ -607,29 +680,44 @@ function galleryPage(i, push = true, fromHex = null, tol = null) {
 function glPage(i, d, fromHex, tol) {
   const G = GAL, src = G.src[G.mus[i]] || { name: "Museum", short: "Museum", credit: "" }, pal6 = glPal(i), yr = glYear(i), ar = G.ar[i];
   const pool = glPoolDecode(d.pl);
-  let curK = 6;   // the dynamic-palette control's current size; 6 with a pool shows the same algorithm as 3/12/20
-  let order = "out";   // "out" = stands out first (the default), "area" = by area
+  let curK = 6;   // the "How many colors" slider; every palette type draws that many (up to what it has)
+  let mode = "out";   // the palette type (GL_MODES); "out" = stands out first (the default)
   let prior = null;    // this painter's hue habits once they load (glPainterHue); the archive's until then
-  const curPal = () => order === "area" ? (pool.length ? glPoolPick(pool, curK) : pal6) : glStandOut(pool.length ? pool : pal6, pool.length ? curK : 6, prior);
+  let row = null;      // this painting's analysis row once it loads (accents, hidden, focal)
+  const picks = [];    // "Pick from the painting": colors the visitor tapped
+  const lit = { on: false, ok: false, img: null, pix: null };
+  const modeSet = (m, k) => {
+    if (m === "out") return { pal: glStandOut(pool.length ? pool : pal6, pool.length ? k : 6, prior), max: pool.length ? Math.min(pool.length, 24) : 6 };
+    if (m === "area") return { pal: pool.length ? glPoolPick(pool, k) : pal6, max: pool.length ? Math.min(pool.length, 24) : 6 };
+    if (m === "pick") return { pal: picks.map(h => ({ h, share: 1 / picks.length, pick: true })), max: 12, fixed: true,
+      cap: !lit.ok ? "This museum's image can't be read here, so tapping the painting can't pick colors from it. Every other palette type still works." : picks.length ? "Colors you took from the painting. Tap the picture for more, a swatch to open its page." : "Tap anywhere on the painting to take its color. Up to 12." };
+    return glModeSet(m, pool, k, row);
+  };
+  const curSet = () => modeSet(mode, curK) || modeSet("out", curK);
+  const curPal = () => curSet().pal;
   const dom = pal6.reduce((a, b) => b.share > a.share ? b : a).h;
   const el = show(`
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button>${d.rec ? `<a class="glass-pill" href="${esc(d.rec)}" target="_blank" rel="noopener">${GL_ICON_OUT}<span>${esc(src.short)}</span></a>` : ""}</header>
-    <div class="gl-hero gl-full-w"><span style="--c:${dom};width:min(100%, calc(82dvh / ${ar.toFixed(3)}));aspect-ratio:${(1 / ar).toFixed(4)}"><img src="${esc(glBig(d.img))}" alt="${esc(d.t)}${d.a ? " by " + esc(d.a) : ""}"${glCropStyle(i, d, ar)}${d.hi ? ` data-hi="${esc(d.hi)}"` : ""}${glCORS(glBig(d.img))}></span></div>
+    <div class="gl-pal-wrap">
+    <div class="gl-hero gl-full-w"><span style="--c:${dom};width:min(100%, calc(38dvh / ${ar.toFixed(3)}));aspect-ratio:${(1 / ar).toFixed(4)}"><img src="${esc(glBig(d.img))}" alt="${esc(d.t)}${d.a ? " by " + esc(d.a) : ""}"${glCropStyle(i, d, ar)}${d.hi ? ` data-hi="${esc(d.hi)}"` : ""}${glCORS(glBig(d.img))}><canvas class="gl-lit-cv" data-gllitcv aria-hidden="true"${glCropStyle(i, d, ar)}></canvas></span></div>
+    <div class="gl-pal-ui">
+    <div class="gl-modes" data-glorder role="group" aria-label="Palette type"></div>
+    <div class="gl-ctl"><div class="pr-slide gl-slide" data-glslide hidden><input type="range" min="3" max="24" step="1" value="6" data-glk aria-label="How many colors"><span class="gl-kn-t" data-glkn>6 colors</span></div>
+    <button class="gl-lit" data-gllit aria-pressed="false" hidden>Show on painting</button></div>
+    <p class="gl-cap" data-glcap></p>
+    <div class="pt-arrive gl-arrive" data-glarrive hidden></div>
+    <div class="palette" data-glswatches></div>
+    <div class="pal-names" data-glrows></div>
+    <div class="gl-cov" data-glcov></div>
+    <div data-csacts></div>
+    </div></div>
     <div class="gl-under"><div class="gl-quiz" data-glquiz></div>${glSmall(d) && !d.hi && d.rec ? `<a class="gl-full" href="${esc(d.rec)}" target="_blank" rel="noopener">Full size at the museum ↗</a>` : ""}${typeof fvArtHeart === "function" ? fvArtHeart(d.id) : ""}</div>
     <p class="eyebrow p-type">Painting${yr ? " · " + yr : ""}</p>
     <h1 class="p-title">${esc(d.t)}</h1>
     <p class="p-dek">${esc([d.a || "Artist unknown", d.co, d.mv].filter(Boolean).join(" · "))}</p>
     <div class="gl-roles" data-glroles></div>
     <div class="aw-cx" data-glctx></div>
-    <div class="sec-head gl-pal-h"><b>Its colors</b><span data-glpaln>as photographed</span></div>
-    <div class="gl-ctl"><div class="seg gl-order" data-glorder><button class="on" data-glo="out">Stands out</button><button data-glo="area">By area</button></div>
-    ${pool.length ? `<div class="seg gl-sizes" data-glsizes aria-label="How many colors">${GL_SIZES.map(k => `<button class="${k === curK ? "on" : ""}" data-glk="${k}">${k}</button>`).join("")}</div>` : ""}</div>
-    <div class="pt-arrive gl-arrive" data-glarrive hidden></div>
-    <div class="palette" data-glswatches></div>
-    <div class="pal-names" data-glrows></div>
-    <div class="gl-cov" data-glcov></div>
-    <div data-csacts></div>
-    <p class="fine">Computed by ColorHub, not by the museum, from its photograph: "Stands out" leads with the colors that are vivid, rare for this painter and far from the painting's average; "By area" sizes each by its share of the picture. Names are the nearest of about 1,000. Old varnish and the photograph shift color, and screens differ.</p>
+    <p class="fine">Computed by ColorHub, not by the museum, from its photograph. Names are the nearest of about 1,000. Old varnish and the photograph shift color, and screens differ.</p>
     <div data-awan></div>
     ${typeof twSection === "function" ? `<div data-glsim></div>` : `<div class="sec-head gl-sim-h"><b>Similar palettes</b><span>by color, not subject</span></div>
     <div class="gl-rail" data-glsim></div>`}
@@ -651,12 +739,13 @@ function glPage(i, d, fromHex, tol) {
   };
   // the palette strip + named rows + arrival line, redrawn whenever the slider's size changes
   const drawPalette = () => {
-    const pal = curPal();
+    const set = curSet(), pal = set.pal;
+    drawModes(set);
     const near = fromHex ? glNearestSwatch(pal, fromHex) : null;
-    el.querySelector("[data-glswatches]").innerHTML = pal.map((p, j) => `<button class="pal${near && near.i === j ? " on" : ""}${p.out ? " gl-out" : ""}" data-swatch="${p.h}" style="--c:${p.h};flex:${Math.max(p.share, .08).toFixed(3)}" data-ink="${ink(p.h)}"><span>${p.share < .005 ? "<1" : Math.round(p.share * 100)}%</span></button>`).join("");
+    el.querySelector("[data-glswatches]").innerHTML = pal.map((p, j) => `<button class="pal${near && near.i === j ? " on" : ""}${p.out ? " gl-out" : ""}" data-swatch="${p.h}" style="--c:${p.h};flex:${Math.max(p.share, .08).toFixed(3)}" data-ink="${ink(p.h)}"><span>${p.pick ? "" : p.share < .005 ? "<1%" : Math.round(p.share * 100) + "%"}</span></button>`).join("");
     el.querySelector("[data-glrows]").innerHTML = pal.map((p, j) => {
       const nm = glName(p.h), fam = !nm.sub && !p.out && typeof familyOf === "function" && familyOf(p.h);
-      const sub = [p.out ? "Stands out" : nm.sub ? nm.sub.charAt(0).toUpperCase() + nm.sub.slice(1) : fam ? fam.head.n + " family" : "", glPctTxt(p.share)].filter(Boolean).join(" · ");
+      const sub = [p.out ? "Stands out" : nm.sub ? nm.sub.charAt(0).toUpperCase() + nm.sub.slice(1) : fam ? fam.head.n + " family" : "", p.pick ? "Picked" : glPctTxt(p.share)].filter(Boolean).join(" · ");
       return `<button class="pal-name${near && near.i === j ? " on" : ""}" data-swatch="${p.h}"><i style="--c:${p.h}"></i><b>${esc(nm.t)}</b><span>${esc(p.out && nm.sub ? sub + " · " + nm.sub : sub)}</span><em class="mono">${p.h}</em></button>`;
     }).join("");
     drawCov(pal);
@@ -670,35 +759,81 @@ function glPage(i, d, fromHex, tol) {
       const nm = near ? nameOf(pal[near.i].h) : null;
       arrive.hidden = false; arrive.textContent = nm ? `No close swatch; the nearest is ${nm.text}, ${pctDiff(near.de)}.` : "No close swatch in this palette.";
     }
-    if (el._awPal) el._awPal(pal);   // the Analysis readings follow the 3/6/12/20 size (js/artwiki.js)
+    if (el._awPal && pal.length) el._awPal(pal);   // the Analysis readings follow the palette on screen (js/artwiki.js)
+    litDraw(pal);
+    const acts = el.querySelector("[data-csacts]"); if (acts) acts.hidden = !pal.length;
+  };
+  // the palette types as one row of chips, only the ones this painting has; the slider and caption follow the type
+  const drawModes = set => {
+    const have = GL_MODES.filter(m => m[0] === "out" || m[0] === "area" || m[0] === "pick" || (pool.length && glModeSet(m[0], pool, 6, row)));
+    const host = el.querySelector("[data-glorder]"), key = have.map(m => m[0]).join();
+    if (host.dataset.k !== key) {
+      host.dataset.k = key;
+      host.innerHTML = have.map(m => `<button data-glo="${m[0]}" aria-pressed="false">${m[1]}</button>`).join("");
+    }
+    host.querySelectorAll("button").forEach(b => { const on = b.dataset.glo === mode; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); });
+    const slide = el.querySelector("[data-glslide]"), inp = slide.querySelector("input"), kk = Math.min(curK, set.max);
+    slide.hidden = !!set.fixed || set.max <= 3;
+    inp.max = set.max; inp.min = 3; inp.value = kk;
+    el.querySelector("[data-glkn]").textContent = kk + " colors";
+    const def = GL_MODES.find(m => m[0] === mode);
+    el.querySelector("[data-glcap]").innerHTML = esc(set.cap || def[2]) + (mode === "pick" && picks.length ? ` <button class="aw-link" data-glclear>Start over</button>` : "");
+    const lb = el.querySelector("[data-gllit]"); lb.hidden = !lit.ok; lb.classList.toggle("on", lit.on); lb.setAttribute("aria-pressed", lit.on);
+    const sel = host.querySelector(".on"); if (sel && host.scrollWidth > host.clientWidth) { const l = sel.offsetLeft - (host.clientWidth - sel.offsetWidth) / 2; host.scrollTo ? host.scrollTo({ left: l }) : (host.scrollLeft = l); }
+  };
+  // "Show on painting": the painting dimmed everywhere except where one of these colors lives (a coarse read of
+  // the photo, 140 px on the long side; only where the image host allows a canvas read)
+  const litBuild = () => {
+    if (lit.pix || !lit.img) return lit.pix;
+    try {
+      const im = lit.img, k = 140 / Math.max(im.naturalWidth, im.naturalHeight), w = Math.max(1, Math.round(im.naturalWidth * k)), h = Math.max(1, Math.round(im.naturalHeight * k));
+      const c = document.createElement("canvas"); c.width = w; c.height = h; const x = c.getContext("2d", { willReadFrequently: true }); x.drawImage(im, 0, 0, w, h);
+      const px = x.getImageData(0, 0, w, h).data, L = new Float32Array(w * h * 3);
+      for (let j = 0; j < w * h; j++) { const l = lab("#" + ((1 << 24) | px[j * 4] << 16 | px[j * 4 + 1] << 8 | px[j * 4 + 2]).toString(16).slice(1)); L[j * 3] = l[0]; L[j * 3 + 1] = l[1]; L[j * 3 + 2] = l[2]; }
+      return lit.pix = { w, h, L };
+    } catch (e) { lit.ok = false; lit.on = false; return null; }
+  };
+  const litDraw = pal => {
+    const cv = el.querySelector("[data-gllitcv]");
+    if (!cv) return;
+    if (!lit.on || !lit.ok || !pal.length) { cv.classList.remove("on"); return; }
+    const P = litBuild(); if (!P) { cv.classList.remove("on"); return; }
+    cv.width = P.w; cv.height = P.h;
+    const x = cv.getContext("2d"), out = x.createImageData(P.w, P.h), T = pal.map(p => lab(p.h));
+    for (let j = 0; j < P.w * P.h; j++) {
+      let m = 1e9; for (const t of T) { const dd = Math.hypot(P.L[j * 3] - t[0], P.L[j * 3 + 1] - t[1], P.L[j * 3 + 2] - t[2]); if (dd < m) m = dd; }
+      const o = j * 4; out.data[o] = 14; out.data[o + 1] = 13; out.data[o + 2] = 11; out.data[o + 3] = m < 13 ? 0 : 205;
+    }
+    x.putImageData(out, 0, 0); cv.classList.add("on");
   };
   drawPalette();
   if (typeof awPaintingHook === "function") awPaintingHook(el, i, d, { pool, curPal });
   // the ColorSet verbs (js/colorset.js): this painting's palette, at whatever size the slider shows
   if (typeof colorSet === "function") {
     const glSet = () => colorSet({ kind: "painting", id: "g" + i, title: d.t, colors: curPal().map(p => ({ h: p.h, share: p.share })), src: "gallery/" + i,
-      ...(pool.length > 3 && typeof csPoolPick === "function" ? { pick: csPoolPick(pool), max: pool.length } : {}) });
+      ...(pool.length > 3 && (mode === "out" || mode === "area") && typeof csPoolPick === "function" ? { pick: csPoolPick(pool), max: pool.length } : {}) });
     learnerLog({ type: "seen", set: glSet(), src: "painting" });
     el.querySelector("[data-csacts]").appendChild(csActions(glSet, { back: () => galleryPage(i, false) }));
   }
-  if (pool.length) el.querySelector("[data-glsizes]").onclick = e => {
-    const b = e.target.closest("[data-glk]"); if (!b) return;
-    curK = +b.dataset.glk;
-    el.querySelectorAll("[data-glsizes] button").forEach(x => x.classList.toggle("on", x === b));
-    buzz(5); drawPalette();
-  };
+  el.querySelector("[data-glk]").oninput = e => { curK = +e.target.value; drawPalette(); };   // live while sliding
+  el.querySelector("[data-glk]").onchange = () => buzz(5);
   el.querySelector("[data-glorder]").onclick = e => {
-    const b = e.target.closest("[data-glo]"); if (!b || b.dataset.glo === order) return;
-    order = b.dataset.glo;
-    el.querySelectorAll("[data-glorder] button").forEach(x => x.classList.toggle("on", x === b));
+    const b = e.target.closest("[data-glo]"); if (!b || b.dataset.glo === mode) return;
+    mode = b.dataset.glo;
+    // the Look-for types are about where the colors sit: light them on the painting
+    if (["accents", "hidden", "focal", "skin"].includes(mode) && lit.ok) lit.on = true;
+    clearDots(); if (mode === "pick") picks.forEach(addDot);
     buzz(5); drawPalette();
   };
+  el.querySelector("[data-gllit]").onclick = () => { lit.on = !lit.on; buzz(5); drawPalette(); };
+  el.querySelector("[data-glcap]").onclick = e => { if (e.target.closest("[data-glclear]")) { picks.length = 0; clearDots(); buzz(5); drawPalette(); } };
   // the painter's own hue habits sharpen "stands out" (a camel that's rare for van Dyck), quietly, once they load
-  glPainterHue(d.a).then(h => { if (h && el.isConnected) { prior = h; if (order === "out") drawPalette(); } });
+  glPainterHue(d.a).then(h => { if (h && el.isConnected) { prior = h; if (mode === "out") drawPalette(); } });
   // accents, the color you'd miss, and the focal color (data/analysis, the same reading as the Analysis drawer), above the bars
   if (pool.length >= 6 && typeof awShard === "function") awShard(i).then(rows => {
     const r = rows && rows[i % 100], host = el.querySelector("[data-glroles]");
     if (!r || r.id !== d.id || !host || !host.isConnected) return;
+    row = r; drawPalette();   // the accents / hidden / focal palette types come from this row
     const roles = [["Accent", (r.acc || []).map(k => pool[k]).find(Boolean), "small and vivid"], ["Easy to miss", (r.hid || []).map(k => pool[k]).find(Boolean), "muted, another family"], ["Focal", pool[r.foc], "stands apart"]].filter(x => x[1]);
     if (!roles.length) return;
     host.innerHTML = `<p class="gl-roles-h">Look for</p><div class="gl-roles-row">${roles.map(([t, p, why]) => `<button class="gl-role" data-swatch="${p.h}" aria-label="${esc(t)}: ${esc(glName(p.h).n)}"><i style="--c:${p.h}"></i><span><em>${esc(t)}</em><b>${esc(glName(p.h).n)}</b><small>${esc(why)}</small></span></button>`).join("")}</div>`;
@@ -722,13 +857,41 @@ function glPage(i, d, fromHex, tol) {
   const heroSpan = el.querySelector(".gl-hero > span");
   let sampleImg = el.querySelector(".gl-hero img"), canSample = false, arrival = null;
   const testSample = img => { try { const c = document.createElement("canvas"); c.width = c.height = 1; const cx = c.getContext("2d"); cx.drawImage(img, 0, 0, 1, 1); cx.getImageData(0, 0, 1, 1); return true; } catch (e) { return false; } };
-  function armSample(img) { sampleImg = img; canSample = testSample(img); heroSpan.classList.toggle("gl-tap", canSample); if (arrival) arrival.image(img, canSample); }
+  function armSample(img) {
+    sampleImg = img; canSample = testSample(img); heroSpan.classList.toggle("gl-tap", canSample); if (arrival) arrival.image(img, canSample);
+    lit.ok = canSample; lit.img = img; lit.pix = null; if (!canSample) lit.on = false;
+    drawPalette();
+  }
+  // "Pick from the painting": a small ring where each color was taken (the page's own tap-dot, kept)
+  const dotAt = [];
+  function clearDots() { heroSpan.querySelectorAll(".gl-pick-dot").forEach(n => n.remove()); }
+  function addDot(h) { const q = dotAt.find(o => o.h === h); if (!q) return; const dot = document.createElement("span"); dot.className = "gl-tap-dot gl-pick-dot"; dot.style.left = q.x + "px"; dot.style.top = q.y + "px"; dot.style.background = h; heroSpan.appendChild(dot); }
+  const sampleHex = (x, y) => {
+    const c = document.createElement("canvas"), W = sampleImg.naturalWidth, H = sampleImg.naturalHeight; c.width = W; c.height = H;
+    const cx = c.getContext("2d", { willReadFrequently: true }); cx.drawImage(sampleImg, 0, 0);
+    const r = sampleImg.getBoundingClientRect(), px = Math.round(x / r.width * W), py = Math.round(y / r.height * H), half = 3;
+    const bx = clamp(px - half, 0, W - 1), by = clamp(py - half, 0, H - 1), bw = Math.min(half * 2 + 1, W - bx), bh = Math.min(half * 2 + 1, H - by);
+    const data = cx.getImageData(bx, by, bw, bh).data; let rr = 0, gg = 0, bb = 0, n = 0;
+    for (let k = 0; k < data.length; k += 4) { rr += data[k]; gg += data[k + 1]; bb += data[k + 2]; n++; }
+    return "#" + [rr, gg, bb].map(v => clamp(Math.round(v / n), 0, 255).toString(16).padStart(2, "0")).join("").toUpperCase();
+  };
   // the arriving color: pinned above the palette, with how much of this canvas it covers and where (js/paintingsof.js, L26)
   if (fromHex && typeof ptArrival === "function") arrival = ptArrival(el, { i, hex: fromHex, tol, pool, heroSpan, getImg: () => sampleImg, why: "This museum's image server doesn't let ColorHub read its pixels, so the map isn't available for this painting." });
   if (typeof fvArtWire === "function") fvArtWire(el, i, d, heroSpan);   // the heart under the picture; a long press on it keeps it too (js/favs.js)
   if (sampleImg.complete && sampleImg.naturalWidth) armSample(sampleImg); else sampleImg.addEventListener("load", () => armSample(sampleImg), { once: true });
   heroSpan.addEventListener("click", e => {
     if (arrival && arrival.tap(e)) return;
+    if (mode === "pick") {
+      if (!canSample) return;
+      const r0 = sampleImg.getBoundingClientRect(), s0 = heroSpan.getBoundingClientRect();
+      if (e.clientX < s0.left || e.clientY < s0.top || e.clientX > s0.right || e.clientY > s0.bottom) return;
+      try {
+        const hex = sampleHex(e.clientX - r0.left, e.clientY - r0.top);
+        if (!picks.includes(hex) && picks.length < 12) { picks.push(hex); dotAt.push({ h: hex, x: e.clientX - s0.left, y: e.clientY - s0.top }); addDot(hex); }
+        buzz(6); drawPalette();
+      } catch (er) { canSample = false; lit.ok = false; heroSpan.classList.remove("gl-tap"); drawPalette(); }
+      return;
+    }
     if (!canSample || e.target.closest("a")) return;
     // r = the whole photo (a cropped painting's <img> is bigger than the box that shows it), sr = what is on screen
     const r = sampleImg.getBoundingClientRect(), sr = heroSpan.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;

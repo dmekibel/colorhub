@@ -506,7 +506,6 @@ function awAnalysis(host, el, i, d, r, ctx) {
       <div><span>Vivid</span><b>${awPct(ch[2])}%</b><em>${awPct(ch[0])}% muted · ${awPct(ch[1])}% moderate</em></div>
       <div><span>Warm / cool</span><b>${awPct(warm)}% warm</b><em>by chroma-weighted hue</em></div>
     </div>
-    ${poolOK ? `<div class="aw-look" data-awlook></div>` : ""}
     ${(typeof paintingLesson === "function") ? `<button class="btn" data-awlesson>Learn this painting${ICON.arrow}</button>` : ""}
     <div data-awreadings></div>
     <details class="aw-more"><summary>The measurements</summary>
@@ -556,8 +555,6 @@ function awAnalysis(host, el, i, d, r, ctx) {
   };
   draw(curPal());
   el._awPal = draw;
-  // the guided look
-  if (poolOK) awGuided(host.querySelector("[data-awlook]"), i, d, r, pool);
   const les = host.querySelector("[data-awlesson]"); if (les) les.onclick = () => paintingLesson(i);
   // pigment hint (hedged)
   if (r.pig && CORE_NAMES && CORE_NAMES[r.pig.ci]) {
@@ -579,45 +576,6 @@ function awAnalysis(host, el, i, d, r, ctx) {
   }).catch(() => {});
 }
 const awUnb64 = s => Array.from(atob(s), c => c.charCodeAt(0) / 255);
-
-// the guided look: three stops, each one a guess first, then the reveal
-function awGuided(host, i, d, r, pool) {
-  const hash2 = (a, b) => Math.imul(a * 2654435761 ^ b * 40503, 2246822519) >>> 0;
-  const stops = [
-    { k: "foc", pos: r.foc, q: "Where does your eye land first?", sub: "Pick the color that pulls hardest.", why: "The focal color: strong, and set apart from the painting's average lightness. A computed guess, not eye-tracking." },
-    { k: "hid", pos: (r.hid || [])[0], q: "One color hides here. Which?", sub: "Muted, from a different family than the rest.", why: "A hidden color is quiet and sits outside the painting's main family, like the greens that shade skin." },
-    { k: "glu", pos: r.glu, q: "Which color holds the painting together?", sub: "The tone everything rests on.", why: "The glue: the biggest mid-tone, between the lights and the darks." },
-  ].filter(s => s.pos != null && pool[s.pos]);
-  if (stops.length < 2) { host.remove(); return; }
-  let at = 0, done = 0;
-  const optsFor = (s, n) => {
-    const ans = pool[s.pos], others = pool.map((p, k) => ({ p, k })).filter(o => o.k !== s.pos && de2000(o.p.h, ans.h) > 9 && o.p.share > .004);
-    others.sort((a, b) => hash2(i + s.pos, a.k) - hash2(i + s.pos, b.k));
-    const pick = []; for (const o of others) { if (pick.every(q => de2000(q.p.h, o.p.h) > 7)) pick.push(o); if (pick.length >= 3) break; }
-    const all = [{ p: ans, k: s.pos, ok: true }, ...pick.map(o => ({ ...o, ok: false }))];
-    return all.sort((a, b) => hash2(i * 7 + s.pos, a.k) - hash2(i * 7 + s.pos, b.k));
-  };
-  const paint = () => {
-    if (!host.isConnected) return;
-    if (at >= stops.length) { host.innerHTML = `<div class="aw-lookdone"><b>You looked three ways.</b><span>${done} of ${stops.length} first guesses right. Tap any swatch in the readings below to open it.</span><button class="aw-link" data-awagain>Look again</button></div>`; host.querySelector("[data-awagain]").onclick = () => { at = 0; done = 0; paint(); }; return; }
-    const s = stops[at], opts = optsFor(s);
-    host.innerHTML = `<div class="aw-look-h"><span>A guided look · ${at + 1} of ${stops.length}</span></div><p class="aw-look-q">${s.q}</p><p class="aw-look-s">${s.sub}</p>
-      <div class="aw-opts">${opts.map((o, k) => `<button class="aw-opt" data-k="${k}" style="--c:${o.p.h}" data-ink="${ink(o.p.h)}" aria-label="Option ${k + 1}"></button>`).join("")}</div><div class="aw-reveal" data-reveal></div>`;
-    host.querySelector(".aw-opts").onclick = e => {
-      const b = e.target.closest(".aw-opt"); if (!b || host.classList.contains("shown" + at)) return;
-      host.classList.add("shown" + at);
-      const o = opts[+b.dataset.k], nmOf = p => nameOf(p.h);
-      if (o.ok) done++;
-      if (typeof lmLog === "function") { try { const nm = nmOf(pool[s.pos]); lmLog({ t: Date.now(), k: o.ok ? "recall_ok" : "recall_miss", c: routeSlug(nm.n), surf: "painting", ref: d.id }); } catch (e) {} }
-      host.querySelectorAll(".aw-opt").forEach((x, k) => { const oo = opts[k]; x.setAttribute("data-swatch", oo.p.h); x.classList.toggle("right", oo.ok); x.classList.toggle("miss", x === b && !oo.ok); x.innerHTML = `<span>${esc(nmOf(oo.p).text)}</span>`; });
-      const nm = nmOf(pool[s.pos]), near = (typeof BYNAME !== "undefined") ? BYNAME.get(nm.n.toLowerCase()) : null;
-      host.querySelector("[data-reveal]").innerHTML = `<p><b>${o.ok ? "Yes. " : "Not quite. "}${esc(nm.text)}</b>, ${awPct(pool[s.pos].share) || "under 1"}% of the canvas.${near ? " One of the words you can learn." : ""}</p><p class="fine">${s.why}</p><button class="btn ghost" data-next>${at + 1 < stops.length ? "Next stop" : "Finish"} ${ICON.arrow}</button>`;
-      host.querySelector("[data-next]").onclick = () => { at++; paint(); };
-      buzz(o.ok ? 8 : 4);
-    };
-  };
-  paint();
-}
 
 // ======================================================================
 // Movement, decade and country pages

@@ -52,6 +52,45 @@ function lsPick(these, seed) {
   return { list: got.map(x => x.it), know: new Map(st.map(x => [x.it.key, x.k])), yoursOut: dropYours ? st.length - open.length : 0,
     twinsOut: got.length < LS_PICK_MAX ? Math.max(0, pool.length - got.length) : 0 };
 }
+
+// ----------------------------------------------------------------------
+// Pinned sets (David, 2026-10-08): Study from a pair, a set or a palette keeps THOSE colors (pinned, always in, their
+// identity) and offers look-alikes to study beside them. lsNeighbors gives each pinned color its nearest Learn-layer
+// names, the ones you can't name yet first; lsGroups turns the picks into the session: items + groups for the pacer.
+// ----------------------------------------------------------------------
+const LS_NB_MAX = 4, LS_NB_GAP = 3, LS_NB_REACH = 24, LS_NB_POOL = 10;
+// default neighbors per pinned color: 2 for a pair, 1 for 3-5 colors, 0 for more
+const lsNbDefault = n => n <= 2 ? 2 : n <= 5 ? 1 : 0;
+// -> [{ pin, nbs: [item…] }]  (up to LS_NB_MAX each, in the order they'd be added; a smaller "per" is just a prefix).
+// Round-robin over the pins, so a close pair doesn't give all the good neighbors to the first; no neighbor is a pinned
+// color or within LS_NB_GAP (ΔE00) of one, of another neighbor, or of itself twice.
+function lsNeighbors(pins, o = {}) {
+  const max = o.max || LS_NB_MAX, core = prCore(), taken = pins.slice();
+  const ranked = pins.map(pin => core.filter(x => x.key !== pin.key && x.h !== pin.h).map(x => ({ x, d: de2000(pin.h, x.h) }))
+    .filter(c => c.d <= LS_NB_REACH).sort((a, b) => a.d - b.d).slice(0, LS_NB_POOL * 3)
+    .map(c => ({ ...c, k: LS_KNOW[lsKnow(c.x)] || 0 })));
+  // the nearest ten, the ones you can't name yet first within them, then a little further if ten weren't enough
+  const order = ranked.map(list => { const near = list.slice(0, LS_NB_POOL).sort((a, b) => (a.k === 3) - (b.k === 3) || a.k - b.k || a.d - b.d); return [...near, ...list.slice(LS_NB_POOL)].map(c => c.x); });
+  const out = pins.map(pin => ({ pin, nbs: [] })), at = pins.map(() => 0);
+  for (let r = 0; r < max; r++) pins.forEach((pin, i) => {
+    while (at[i] < order[i].length) {
+      const x = order[i][at[i]++];
+      if (taken.some(t => t.key === x.key || t.h === x.h || de2000(t.h, x.h) < LS_NB_GAP)) continue;
+      out[i].nbs.push(x); taken.push(x); break;
+    }
+  });
+  return out;
+}
+// the picks (per neighbors each, minus the removed, plus the added) -> { groups: [{ pin, nbs }], items, keys: [[pinKey, nbKey…]] }
+function lsGroups(auto, per, rm, extra) {
+  const groups = auto.map(g => ({ pin: g.pin, nbs: g.nbs.slice(0, per).filter(x => !rm.has(x.key)) }));
+  (extra || []).forEach(x => {
+    if (groups.some(g => g.pin.key === x.key || g.nbs.some(n => n.key === x.key))) return;
+    let b = groups[0], bd = Infinity; groups.forEach(g => { const d = de2000(g.pin.h, x.h); if (d < bd) { bd = d; b = g; } });
+    b.nbs.push(x);
+  });
+  return { groups, items: prUnique(groups.flatMap(g => [g.pin, ...g.nbs])), keys: groups.map(g => [g.pin.key, ...g.nbs.map(n => n.key)]) };
+}
 // the line under the preview that says why these colors: "The 8 you can't name yet · 3 you know left out"
 function lsWhy(items, pick, all) {
   const know = pick ? pick.know : new Map(items.map(it => [it.key, lsKnow(it)]));
@@ -98,13 +137,19 @@ function lsOpen(o = {}) {
   const these = prUnique((o.items || []).map(x => typeof x === "string" ? prItemOf(x) : prSeed(x)).filter(Boolean));
   const st = { from: these.length && !(seed && o.source === "alike") ? "these" : seed ? "alike" : "these", size: ls.size || 10, close: ls.close != null ? ls.close : 1 };
   if (!seed && !these.length) return toast("Nothing here to learn yet");
+  // pinned (a pair, a set, a palette): these colors are the set; look-alikes are offered beside each (lsNeighbors)
+  const pinned = !!o.pin && these.length >= 1, auto = pinned ? lsNeighbors(these) : null;
+  if (pinned) { st.from = "these"; st.per = lsNbDefault(these.length); st.rm = new Set(); st.extra = []; }
+  let grp = null;
   const { sh, close } = sheet(`<div class="pr-quick ls-sheet">
     <div class="pr-qhead"><h2 class="pr-t2" data-qtitle></h2><span class="pr-note" data-qcount></span></div>
     <div class="ls-from" data-from></div>
     <div class="pr-plate ls-prev" data-prev></div>
+    <div class="ls-groups" data-groups hidden></div>
     <div class="ls-say"><p class="ls-names" data-names></p><p class="ls-why" data-why></p></div>
     <label class="ls-slide" data-sizerow><span class="ls-sl-t">How many</span><input type="range" min="3" step="1" data-size aria-label="How many colors"><b class="ls-sl-v" data-sizev></b></label>
     <label class="ls-slide" data-closerow><span class="ls-sl-t">How close</span><input type="range" min="0" max="${LS_CLOSE.length - 1}" step="1" data-closeness aria-label="How close the look-alikes are"><b class="ls-sl-v" data-closev></b></label>
+    <label class="ls-slide" data-perrow hidden><span class="ls-sl-t">Neighbors</span><input type="range" min="0" max="${LS_NB_MAX}" step="1" data-per aria-label="Look-alikes per color"><b class="ls-sl-v" data-perv></b></label>
     <p class="ls-closehint" data-closehint></p>
     <div class="ls-go" data-qgo><button class="ls-look" data-look>${LS_ICON.eye}<span>Look</span></button>${prPrimary("Study", "", "data-go")}</div>
     <div class="ls-pace"><div class="pr-rail" role="radiogroup" aria-label="Pace">${LS_PACES.map(([k, t]) => `<button class="pr-chip" role="radio" data-pace="${k}">${t}</button>`).join("")}</div><p class="ls-pace-say" data-pacesay></p></div>
@@ -116,11 +161,36 @@ function lsOpen(o = {}) {
   let items = [];
   const pick = these.length ? lsPick(these, seed) : { list: [], know: new Map(), yoursOut: 0, twinsOut: 0 };
   const build = () => {
+    if (pinned) { grp = lsGroups(auto, st.per, st.rm, st.extra); return grp.items; }
     if (st.from === "alike" && seed) return lsAlike(seed, st.size, LS_CLOSE[st.close][1]);
     return pick.list.slice(0, st.size);
   };
+  const paintPinned = () => {
+    items = build();
+    const nPin = these.length, nNb = items.length - nPin, nm = o.label || "these colors", per = $s("[data-per]");
+    per.value = st.per;
+    $s("[data-qtitle]").innerHTML = `Study <em>${esc(nm)}</em>`;
+    $s("[data-qcount]").textContent = nNb ? `plus ${nNb} look-alike${nNb === 1 ? "" : "s"}` : "";
+    $s("[data-from]").innerHTML = "";
+    $s("[data-prev]").hidden = true; $s("[data-sizerow]").hidden = true; $s("[data-closerow]").hidden = true;
+    $s("[data-perrow]").hidden = false; $s("[data-closehint]").hidden = false;
+    $s("[data-perv]").textContent = st.per ? `${st.per} each` : "None";
+    $s("[data-closehint]").textContent = st.per ? "The closest names you can't say yet, beside each of yours. Tap one to leave it out." : "Only your colors. Add look-alikes to study them in relation to the rest.";
+    const g = $s("[data-groups]"); g.hidden = false; g.classList.toggle("rows", grp.groups.some(x => x.nbs.length));
+    g.innerHTML = grp.groups.map(x => `<div class="ls-grp"><span class="ls-chip pin" title="In your set"><i style="--c:${x.pin.h}"></i>${esc(prName(x.pin))}</span>${x.nbs.map(n => `<button class="ls-chip nb" data-rm="${esc(n.key)}" aria-label="Leave out ${esc(prName(n))}"><i style="--c:${n.h}"></i>${esc(prName(n))}<span class="ls-x" aria-hidden="true">×</span></button>`).join("")}</div>`).join("")
+      + (typeof sxPick === "function" ? `<button class="ls-chip ls-add" data-add>+ Add a color</button>` : "");
+    $s("[data-names]").textContent = items.slice(0, 6).map(prName).join(", ") + (items.length > 6 ? `, and ${items.length - 6} more` : "");
+    $s("[data-why]").textContent = lsWhy(items, null, false);
+    const pace = ls.pace || "you", nNew = items.filter(it => { const k = lsKnow(it); return k === "none" || k === "met"; }).length;
+    sh.querySelectorAll("[data-pace]").forEach(b => { const on = b.dataset.pace === pace; b.classList.toggle("on", on); b.setAttribute("aria-checked", on); });
+    $s("[data-pacesay]").textContent = lsPaceSay(pace, nNew);
+    const mins = Math.max(1, Math.round((items.length * 2.6 * 5 + (pace === "test" ? 0 : nNew * 6)) / 60));
+    $s("[data-go]").querySelector("em") ? 0 : $s("[data-go] span").insertAdjacentHTML("afterend", "<em></em>");
+    $s("[data-go] em").textContent = `about ${mins} min`;
+  };
   const paint = () => {
     const max = st.from === "alike" ? 30 : Math.max(pick.list.length, 1);
+    if (pinned) return paintPinned();
     size.max = max; size.disabled = max <= 3; if (st.size > max) st.size = max; if (st.size < Math.min(3, max)) st.size = Math.min(3, max);
     size.value = st.size;
     items = build();
@@ -145,15 +215,24 @@ function lsOpen(o = {}) {
     $s("[data-go]").querySelector("em") ? 0 : $s("[data-go] span").insertAdjacentHTML("afterend", "<em></em>");
     $s("[data-go] em").textContent = `about ${mins} min`;
   };
-  const remember = () => { ls.size = st.size; if (st.from === "alike") ls.close = st.close; ls.typing = $s("[data-typing]").checked; save(); };
+  const remember = () => { if (!pinned) { ls.size = st.size; if (st.from === "alike") ls.close = st.close; } ls.typing = $s("[data-typing]").checked; save(); };
   let lastTick = "";
   const onSlide = () => { st.size = +size.value; st.close = +closeIn.value; paint(); const k = st.size + "|" + st.close; if (k !== lastTick) { lastTick = k; buzz(3); } };
+  const perIn = $s("[data-per]");
+  let lastPer = st.per;
+  perIn.oninput = () => { st.per = +perIn.value; paint(); if (st.per !== lastPer) { lastPer = st.per; buzz(3); } };
   size.oninput = onSlide; closeIn.oninput = onSlide; size.onchange = remember; closeIn.onchange = remember;
   $s("[data-typing]").onchange = () => { remember(); buzz(4); };
   const exit = lsExitTo(backTo), again = () => setTimeout(() => lsOpen({ ...o, back: backTo }), 60);
-  const label = () => st.from === "alike" && seed ? `${prName(seed)} and its look-alikes` : (o.label || "These colors");
-  const setOpts = () => ({ label: label(), back: exit, reopen: again, route: typeof backTo === "string" ? backTo : "", src: lsSrcOf(o, st.from, backTo) });
+  const label = () => pinned ? (o.label || "These colors") : st.from === "alike" && seed ? `${prName(seed)} and its look-alikes` : (o.label || "These colors");
+  const setOpts = () => ({ label: label(), back: exit, reopen: again, route: typeof backTo === "string" ? backTo : "", src: lsSrcOf(o, st.from, backTo),
+    ...(pinned ? { pin: these, groups: grp.keys, route: o.route || (typeof backTo === "string" ? backTo : "") } : {}) });
   sh.addEventListener("click", e => {
+    const rmb = e.target.closest("[data-rm]"); if (rmb) { st.rm.add(rmb.dataset.rm); st.extra = st.extra.filter(x => x.key !== rmb.dataset.rm); buzz(5); paint(); return; }
+    if (e.target.closest("[data-add]")) {
+      buzz(5);
+      return void sxPick(these[0].h, { title: o.label || "your colors", onPick: h => { const it = prItemOf(h); if (it) { st.rm.delete(it.key); if (!items.some(x => x.key === it.key)) st.extra.push(it); paint(); } } });
+    }
     const f = e.target.closest("[data-fromk]"); if (f) { st.from = f.dataset.fromk; buzz(4); paint(); return; }
     const pc = e.target.closest("[data-pace]"); if (pc) { ls.pace = pc.dataset.pace; save(); buzz(4); paint(); return; }
     const m = e.target.closest("[data-method]"); if (!m || !items.length) return;
@@ -280,6 +359,7 @@ function lsKeep(sess, items, o, lvOf) {
   });
   const old = ls.sets[id] || {};
   ls.sets[id] = { t: String(o.label || old.t || "").slice(0, 80), src: o.src || old.src || "set", r: o.route || old.r || "", hs: items.map(it => it.h),
+    ...(o.pin && o.pin.length ? { pin: o.pin.map(it => it.h) } : old.pin ? { pin: old.pin } : {}),
     at: old.at || t, last: t, climbed: lvOf ? [...lvOf.values()].filter(lsUp).map(q => q.it.key) : (old.climbed || []) };
   const ids = Object.keys(ls.sets);
   if (ids.length > LS_SETS_MAX) ids.sort((a, b) => String(ls.sets[a].last).localeCompare(String(ls.sets[b].last))).slice(0, ids.length - LS_SETS_MAX).forEach(k => { delete ls.sets[k]; });
@@ -294,7 +374,7 @@ function lsPlan(items, o = {}, resume = null) {
   const know = new Map(items.map(it => [it.key, lsKnow(it)])), keys = new Set(items.map(it => it.key));
   let mix = [];
   try { if (typeof confusions === "function") mix = confusions(null, 40).map(p => [String(p.a || "").toLowerCase(), String(p.b || "").toLowerCase()]).filter(([a, b]) => keys.has(a) && keys.has(b)).slice(0, 3); } catch (e) {}
-  const P = spNew(items, { know, pace: o.pace || "you", typing: o.typing, quick: o.quick, looked: o.looked, mix, resume, de: de2000 });
+  const P = spNew(items, { know, pace: o.pace || "you", typing: o.typing, quick: o.quick, looked: o.looked, mix, resume, de: de2000, groups: o.groups });
   P.qs.forEach(q => { q.y = q.k === "yours"; });
   return P;
 }
@@ -322,7 +402,7 @@ function lsStudy(items, o = {}, resume = null) {
   if (!items.length) return;
   const ls = lsState(), n = items.length;
   const sess = prSession("learn", { dir: "f" }, items, { deckAll: items, label: o.label || "" });
-  const P = lsPlan(items, { pace: o.pace || ls.pace || "you", typing: ls.typing !== false, quick: o.quick, looked: o.looked }, resume), lvOf = P.qs;
+  const P = lsPlan(items, { pace: o.pace || ls.pace || "you", typing: ls.typing !== false, quick: o.quick, looked: o.looked, groups: o.groups }, resume), lvOf = P.qs;
   let combo = 0, bestCombo = 0, climbed = [...lvOf.values()].filter(lsUp).length, boss = null, meeting = null, aside = 0;
   const keep = () => lsKeep(sess, items, o, lvOf);
   // screenshot states (#lsshot=study:…): start mid-session
@@ -374,7 +454,10 @@ function lsStudy(items, o = {}, resume = null) {
   { const adj = el.querySelector("[data-adjust]"); if (adj) adj.onclick = () => { sess.ended = true; el.remove(); o.adjust(); }; }
   const coachDone = () => { const c = el.querySelector(".pr-coach"); if (c && !c.hidden) { c.hidden = true; const p = prState(); p.seen.learnset = today(); save(); } };
   // the nearest other color in the set (for a Meet card's one line)
-  const nearestIn = it => { let b = null, bd = Infinity; items.forEach(x => { if (x !== it) { const d = de2000(it.h, x.h); if (d < bd) { bd = d; b = x; } } }); return b; };
+  // a pinned set: each color sits with its group (the pinned color and its look-alikes), so Meet and the questions pair them
+  const itemOf = new Map(items.map(it => [it.key, it])), mates = new Map(), pinKeys = new Set((o.pin || []).map(x => x.key));
+  (o.groups || []).forEach(g => g.forEach(k => { if (!mates.has(k)) mates.set(k, g.filter(m => m !== k && itemOf.has(m)).map(m => itemOf.get(m))); }));
+  const nearestIn = it => { let b = null, bd = Infinity; (mates.get(it.key) && mates.get(it.key).length ? mates.get(it.key) : items).forEach(x => { if (x !== it) { const d = de2000(it.h, x.h); if (d < bd) { bd = d; b = x; } } }); return b; };
   // a Meet / pair card: waits for Next (button, Enter, Space, →), one beat so a fast double tap can't skip it unseen
   const card = html => new Promise(resolve => {
     stage.innerHTML = html;
@@ -387,6 +470,14 @@ function lsStudy(items, o = {}, resume = null) {
   });
   // options for an early rung: three far apart in the same family (spFar), so the first questions are winnable
   const farOpts = (it, k) => { const w = spFar(it, k, prUnique([...items, ...prCore().filter(x => x.rank <= 600)]), de2000, prFam9); return w.length >= k ? w : null; };
+  // same-group colors are the distractors first (the pinned color's look-alikes, and it for theirs), then the usual neighbors
+  const groupOpts = (it, kind) => {
+    const m = mates.get(it.key);
+    if (!m || !m.length || (kind !== "quiz-name" && kind !== "quiz-color")) return null;
+    const out = m.slice().sort((x, y) => de2000(it.h, x.h) - de2000(it.h, y.h)).slice(0, 3);
+    if (out.length < 3) prNear(it, 6, items).forEach(x => { if (out.length < 3 && !out.includes(x) && x.key !== it.key) out.push(x); });
+    return out.length === 3 ? out : null;
+  };
   (async () => {
     status();
     while (!sess.ended) {
@@ -398,7 +489,7 @@ function lsStudy(items, o = {}, resume = null) {
         meeting = a.t === "meet" ? { i: a.i, of: a.of } : null; status();
         if (a.t === "meet" && a.i === 1 && a.wave > 0) pop(a.of === 1 ? "One more to meet" : `${a.of} more to meet`, "round");
         lsSfx("sfxColor", it.h);
-        await card(lsMeetHTML(it, a.t === "relook" && a.q.pick && a.q.pick.h !== it.h ? a.q.pick : nearestIn(it), { again: a.t === "relook", label: a.t === "relook" ? "Got it" : a.i === a.of ? "Start" : "Next" }));
+        await card(lsMeetHTML(it, a.t === "relook" && a.q.pick && a.q.pick.h !== it.h ? a.q.pick : nearestIn(it), { again: a.t === "relook", tag: pinKeys.size ? (pinKeys.has(it.key) ? "In your set" : "Look-alike") : "", label: a.t === "relook" ? "Got it" : a.i === a.of ? "Start" : "Next" }));
         if (sess.ended || !stage.isConnected) return;
         coachDone(); meeting = null;
         continue;
@@ -421,7 +512,7 @@ function lsStudy(items, o = {}, resume = null) {
       }
       const q = a.q, kind = a.kind;
       stage._lsIt = q.it;   // test hook
-      const wrong = a.far ? farOpts(q.it, kind === "quiz-color" ? 3 : a.opts) : null;
+      const wrong = a.far ? farOpts(q.it, kind === "quiz-color" ? 3 : a.opts) : groupOpts(q.it, kind);
       // a step that throws, or bookkeeping that throws, must never leave the screen frozen on Next: log it, move on
       let res;
       try { res = await PR_STEPS[kind].render(stage, q.it, ctx({ dir: kind === "quiz-color" ? "r" : "f", wrong })); }
@@ -501,9 +592,9 @@ function lsResults(sess, r) {
   const tiles = [[pct + "%", "first try"], [r.bestCombo, "best streak"], [prTime(ms), "time"], ...(r.bossMs != null ? [[prTime(r.bossMs), newBest && best != null ? "a new best" : best != null ? `final round · best ${prTime(best)}` : "final round"]] : [])];
   const shareText = `ColorHub · ${o.label || "A color set"} · ${String(title).replace(/<[^>]+>/g, "")} · ${pct}% first try · best streak ${r.bestCombo}${r.bossMs != null ? ` · final round ${prTime(r.bossMs)}` : ""}`;
   const el = show(`<header class="pr-top"><button class="pr-x" data-close aria-label="Close">${prX()}</button><span class="pr-grow"></span><span class="pr-note">Study</span></header>
-    ${prPlate(items, "pr-plate-res" + (all ? " win" : ""))}
+    ${prPlate(o.pin && o.pin.length ? o.pin : items, "pr-plate-res" + (all ? " win" : ""))}
     <h1 class="pr-t1 pr-res-t">${title}</h1>
-    <p class="pr-notep">${esc(o.label || "")}</p>
+    <p class="pr-notep">${esc(o.label || "")}${o.pin && o.pin.length && items.length > o.pin.length ? ` · with ${items.length - o.pin.length} look-alike${items.length - o.pin.length === 1 ? "" : "s"}` : ""}</p>
     <div class="ls-stats">${tiles.map(([v, t]) => `<div><b>${mono(v)}</b><span>${t}</span></div>`).join("")}</div>
     ${back.length ? `<p class="ls-tmrw">${back.length === 1 ? "It comes" : back.length === items.length ? `All ${back.length} come` : `${back.length} come`} back tomorrow, after a night's sleep. Name ${back.length === 1 ? "it" : "them"} then and ${back.length === 1 ? "it's" : "they're"} yours.</p>` : ""}
     ${climbedList.length ? `<p class="pr-note pr-sec-n">Climbed · each ring fills when you name it tomorrow</p><div class="ls-chips">${climbedList.map(it => { const y = isYours(it); return `<button class="ls-chip" data-h="${it.h}" data-n="${esc(it.n)}"><i style="--c:${it.h}"></i>${esc(prName(it))}<span class="ls-ring${y ? " on" : ""}" role="img" aria-label="${y ? "Yours" : "Fills when you name it tomorrow"}"></span></button>`; }).join("")}</div>` : ""}

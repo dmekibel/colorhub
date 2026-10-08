@@ -40,3 +40,6 @@ Each color climbs rungs; a right answer climbs one, a miss drops one.
 
 ## States
 Meet card (first, middle, last of a wave; very light and very dark swatches), pair card, re-Look, wave 2 starting ("2 more to meet"), set aside, ease and harden (silent: the questions change, not a banner), the results.
+
+## 5. Pinned sets (from a pair, a set or a palette)
+Study started from a pair, set or palette (csLearn kinds `set`, `palette`; the You page's kept sets) opens the sheet with those colors **pinned**: always in, marked, the set's identity (the end screen shows only them, "with N look-alikes"). **Neighbors** slider 0 to 4 per color (default 2 for a pair, 1 for 3 to 5, 0 beyond); `lsNeighbors` gives each pinned color its nearest Learn-layer names (ones you can't name yet first, round-robin so no neighbor is shared, ΔE >= 3 apart). Tap a look-alike to leave it out; "+ Add a color" reuses the set picker. The pacer gets `groups` (`[[pin, nb...]]`): a wave is one group (pin first), Meet compares a color with its group, and quiz distractors are the group's colors first. The saved set records `pin` and the route it came from.

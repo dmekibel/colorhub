@@ -75,11 +75,13 @@ function csTeachable(set) {
   }).filter(Boolean);
   return near.find(x => typeof knowState !== "function" || knowState(x) !== "yours") || near[0] || null;
 }
+// a pair, a set or a palette is the set itself: Learn pins those colors and offers look-alikes beside them (js/learnset.js)
+const CS_PIN_KINDS = ["set", "palette"];
 function csLearn(set, o = {}) {
   set = csGet(set); if (!set || !set.colors.length) return;
-  if (typeof prInstantDeck === "function") return prInstantDeck({ source: "set", set, back: o.back });
+  if (typeof prInstantDeck === "function") return prInstantDeck({ source: "set", set, back: o.back, pin: CS_PIN_KINDS.includes(set.kind) && set.colors.length <= 24, route: typeof ROUTE_NOW === "string" ? ROUTE_NOW : "" });
   // the one Learn door (js/learnset.js); Learn it directly only if the sheet isn't loaded
-  if (typeof lsOpen === "function") return lsOpen({ items: set.colors.map(c => c.h), label: set.title || "", src: set.kind, back: o.back });
+  if (typeof lsOpen === "function") return lsOpen({ items: set.colors.map(c => c.h), label: set.title || "", src: set.kind, back: o.back, pin: CS_PIN_KINDS.includes(set.kind) });
   const c = csTeachable(set);
   if (c && typeof hmLearnIt === "function") return hmLearnIt(c);
   toast("Nothing here to learn yet");

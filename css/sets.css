@@ -127,6 +127,14 @@ html.sheet-open .sx-tray,html.booth .sx-tray{display:none}
 .sp-imp-head h3{margin:0}
 .sp-imp{padding:14px 0 16px;border-bottom:1px solid var(--rule)}
 .sp-imp:last-child{border-bottom:0}
+/* Improve: which colors may change, and only the changed swatches lit in the After strip */
+.sp-istrip.after i:not(.moved){opacity:.4}
+.sp-sel{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.sp-lk{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 12px 0 8px;border-radius:999px;background:var(--s2,rgba(0,0,0,.18));color:var(--soft);font:400 15px/1 var(--sans);box-shadow:inset 0 0 0 1px rgba(236,232,223,.14)}
+.sp-lk i{width:22px;height:22px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(236,232,223,.2)}
+.sp-lk.on{color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.sp-selnote{font:italic 400 14px/1.3 var(--serif);color:var(--soft);margin:6px 0 0}
+.sp-imp.blocked>p{margin-bottom:0}
 .sp-imp-t{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .sp-imp-t b{font:400 21px/1.2 var(--serif)}
 .sp-apply{flex:none;height:38px;padding:0 18px;border-radius:var(--r-pill);background:var(--paper);color:var(--paper-ink);font:500 14px/1 var(--sans)}
