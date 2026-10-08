@@ -296,7 +296,7 @@ const honeyExtent = (theta, r, shapeAmt) => shapeAmt <= .02 ? r : r * (1 - shape
 //   shape 0 = the largest circle that fits in the cell (touching its nearest neighbors across the same gap)
 //   between = the circle blended toward the cell, so the corners round off
 // A bubble at the edge of what's drawn (neighbors culled) is also bounded by its own lens size, so it never balloons.
-function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52) {   // grow: how far a bubble may swell past its own lens size, as a fraction of its diameter
+function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52, clipAll = false) {   // clipAll (L18 glide): clip even tiny bubbles   // grow: how far a bubble may swell past its own lens size, as a fraction of its diameter
   if (!drawn.length) return;
   // Speed: the grid is sized to a TYPICAL bubble (not the biggest, which put thousands of tiny ones in every lookup),
   // and each bubble searches only as many cells as its own size needs. Tiny bubbles (under ~7 px) skip the cell
@@ -306,7 +306,7 @@ function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52) {   // grow: how far
   drawn.forEach((b, n) => { const k = key(Math.floor(b.x / cell), Math.floor(b.y / cell)); let a = grid.get(k); if (!a) grid.set(k, a = []); a.push(n); });
   const half = gapPx / 2;
   drawn.forEach((b, n) => {
-    if (b.d < 7) { b.poly = null; b.rin = Math.max(0, b.d * .44 - half); b.d0 = b.d; b.d = 2 * b.rin; return; }
+    if (b.d < 7 && !clipAll) { b.poly = null; b.rin = Math.max(0, b.d * .44 - half); b.d0 = b.d; b.d = 2 * b.rin; return; }
     const reach = Math.min(12, Math.ceil((b.d + maxD) * .75 / cell));
     // start from a 16-gon a little bigger than the bubble's own lens size
     const R0 = b.d * Math.max(.62, grow * 1.2); let poly = [];
@@ -684,7 +684,7 @@ function honeycomb(host, opts = {}) {
   function finishFrame(l, t) {
     const shapeAmt = zc("shape");
     applyMotion(l, t);
-    honeyCells(drawn, gapPx(), shapeAmt);
+    honeyCells(drawn, gapPx(), shapeAmt, .52, !!morph);
     // No snapping (David): a bubble's size eases to its new value over ~120 ms instead of jumping when its cell
     // changes. New bubbles (just entered the screen) start at their size; growth eases too.
     const dt = sizeT ? Math.min(100, t - sizeT) : 0; sizeT = t;
@@ -758,7 +758,7 @@ function honeycomb(host, opts = {}) {
     if (!lay || !W || dead) return;
     const l = lens(t);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, Hh); ctx.globalAlpha = l.a;
-    if (lay.globe) buildGlobeDrawn(l, t); else buildFlatDrawn(l, t);
+    if (lay.globe) buildGlobeDrawn(l, t); else { buildFlatDrawn(l, t); if (morph) l18MorphApply(t); }
     finishFrame(l, t);
   }
   function caption() {
@@ -828,7 +828,7 @@ function honeycomb(host, opts = {}) {
     const pt = pressed ? 1 : 0;
     if (Math.abs(pressK - pt) > .01) { pressK += (pt - pressK) * Math.min(1, dt * 18); more = true; } else pressK = pt;
     if (bloom < 1) { bloom = Math.min(1, (t - bloomT0) / 700); more = true; }
-    if (ghost) more = true;
+    if (ghost || morph) more = true;
     draw(t);
     if (more) kick();
   }
@@ -904,6 +904,60 @@ function honeycomb(host, opts = {}) {
     const o = offAt(p.x, p.y, lens(0)), X = [P[0] + o[0], P[1] + o[1]];
     const pz = HONEY_STYLES[styleId], z0 = pz && pz.initialZoom ? pz.initialZoom(lay.raw.length) : 1;
     flyTo(X, Math.max(Z * 1.6, Math.min(1, Math.max(z0, .7))));
+  }
+  // ---- L18 H3: the stage glide. Kept bubbles slide from where they were to where they now belong (shrinking
+  // a little mid-flight, so nothing collides), removed ones shrink away in the first 250 ms, then new ones bloom in
+  // between. Positions only: honeyCells still sizes every bubble from its real neighbors each frame, so the
+  // no-overlap guarantee holds at every moment of the glide.
+  let morph = null, l18ForceMorph = false;
+  const L18_MORPH_MS = 450;
+  function l18Snapshot() {
+    const old = new Map();
+    for (const b of drawn) { if (b.d < 1) continue; let a = old.get(b.it.n); if (!a) old.set(b.it.n, a = []); a.push({ x: b.x, y: b.y, d: b.d, it: b.it }); }
+    return old;
+  }
+  const l18MorphStart = old => ({ t0: performance.now(), old });
+  function l18MorphApply(t) {
+    const m = morph, u = clamp((t - m.t0) / L18_MORPH_MS, 0, 1);
+    if (u >= 1) { morph = null; return; }
+    const e = honeyEaseS(u), shrink = 1 - .15 * Math.sin(Math.PI * u), grow = honeyEaseS(clamp((u - .56) / .44, 0, 1));
+    const used = new Set();
+    for (const b of drawn) {
+      const a = m.old.get(b.it.n);
+      let o = null, bd = Infinity;
+      if (a) for (const q of a) { if (used.has(q)) continue; const d = (q.x - b.x) ** 2 + (q.y - b.y) ** 2; if (d < bd) { bd = d; o = q; } }
+      // new here: blooms in between once the leaving colors have gone (a new color often lands on the exact spot a
+      // leaving one held, so the two never share it)
+      if (!o) { b.d *= grow; continue; }
+      used.add(o);
+      b.x = o.x + (b.x - o.x) * e; b.y = o.y + (b.y - o.y) * e; b.d = (o.d + (b.d - o.d) * e) * shrink;
+      b.k = null;   // mid-glide sizes are the glide's, not the size memory's
+    }
+    if (grow <= 0) drawn = drawn.filter(b => b.d > 0);
+    // removed colors (and kept ones whose new place is off screen) shrink away where they were
+    const gu = 1 - honeyEaseS(clamp(u * L18_MORPH_MS / 250, 0, 1));
+    if (gu > 0) {
+      const here = new Set(); for (const b of drawn) here.add(b.it.n);
+      const n0 = drawn.length;
+      m.old.forEach((a, n) => { if (!here.has(n)) for (const o of a) drawn.push({ it: o.it, x: o.x, y: o.y, d: o.d * gu, z: 1e9 }); });
+      if (drawn.length > HONEY_MAX_DRAWN) drawn.length = Math.max(n0, HONEY_MAX_DRAWN);
+    }
+  }
+  // QA (tools/smoke map group): glide to a new set and scan for overlaps at u = .25, .5 and .75
+  function l18MorphCheck(items) {
+    l18ForceMorph = true; setItems(items, center && center.o, "soft"); l18ForceMorph = false;
+    const m = morph; if (!m) return { ok: false, why: "no glide" };
+    const out = [];
+    for (const u of [.25, .5, .75]) {
+      m.t0 = performance.now() - u * L18_MORPH_MS; morph = m; draw(performance.now());
+      let bad = 0;
+      for (let i = 0; i < drawn.length; i++) for (let j = i + 1; j < drawn.length; j++) {
+        const a = drawn[i], c = drawn[j], dd = Math.hypot(a.x - c.x, a.y - c.y); if (dd < (a.d + c.d) / 2 - .3) { bad++; if (bad < 4) out.ex = (out.ex || []).concat([[a.it.n, c.it.n, +dd.toFixed(2), +a.d.toFixed(2), +c.d.toFixed(2), a.z === 1e9, c.z === 1e9, !!a.poly, !!c.poly]]); }
+      }
+      out.push({ u, drawn: drawn.length, bad, ex: out.ex }); out.ex = null;
+    }
+    morph = null; draw();
+    return { ok: out.every(r => !r.bad), out };
   }
   // where an item sits in the plane, the copy nearest the current pan (a wrapping map repeats every item)
   function l18WorldOf(it) {
@@ -1081,13 +1135,17 @@ function honeycomb(host, opts = {}) {
   // ---- contents ----
   function setItems(raw, focus, how) {
     raw = raw && raw.length ? raw : EVERY().map(c => ({ n: c.n, h: c.h, c }));
-    if (how === "soft" && W && !RM) {
+    // L18 H3: a soft change between flat layouts glides instead of crossfading (Reduced Motion keeps the crossfade)
+    const snap0 = how === "soft" && W && !RM && (!SHOOT || l18ForceMorph) && lay && !lay.globe && drawn.length ? l18Snapshot() : null;
+    morph = null;
+    if (how === "soft" && W && !RM && !snap0) {
       ghost = ghost || document.createElement("canvas"); ghost.on = true;
       if (ghost.width !== cv.width || ghost.height !== cv.height) { ghost.width = cv.width; ghost.height = cv.height; }
       const g = ghost.getContext("2d"); g.clearRect(0, 0, ghost.width, ghost.height); g.drawImage(cv, 0, 0); ghostT0 = performance.now();
     }
     cfg = honeyResolveCfg(styleId, liveTweak, raw.length);
     lay = honeyLayout(raw, cfg.layout);
+    if (snap0 && !lay.globe) morph = l18MorphStart(snap0);
     ZMIN = zFloor(); Z = clamp(Z, ZMIN, ZMAX);
     if (lay.globe) {
       // P means [yaw, pitch] here, not a plane offset — see the pointer handlers above
@@ -1242,6 +1300,7 @@ function honeycomb(host, opts = {}) {
     },
     zoomValue: () => Z,
     famNames(on) { famOn = !!on; draw(); },
+    _morphCheck: items => l18MorphCheck(items),
     isZoomedOut: () => l18ZoomedOut(),
     // where a color sits on screen right now (js/polish.js flyToMap): the biggest drawn bubble with that hex, in viewport px
     locate(h) { const H = String(h).toUpperCase(), b = drawn.filter(x => String(x.it.h).toUpperCase() === H).sort((x, y) => y.d - x.d)[0]; if (!b) return null; const r = cv.parentNode.getBoundingClientRect(); return { x: r.left + b.x, y: r.top + b.y, d: b.d }; },

@@ -586,6 +586,16 @@ scenario("map", "zoomed out: a tap zooms onto a tiny bubble, the next tap opens 
   await t.tapAt(cv, r.left + r.width / 2, r.top + r.height / 2, { wait: 500 });
   await t.waitFor(".cp-page", 8000, "a page on the second tap");
 });
+scenario("map", "stage glide: no overlap at a quarter, half and three quarters of the way", async t => {
+  await H.homeReady(t);
+  const res = [];
+  for (const n of [250, 50, 1000]) {
+    const r = t.ev(`HM_CTRL._morphCheck(hmStageItems(${n}))`);
+    t.expect(r.ok, `glide to ${n}: ${JSON.stringify(r)}`);
+    res.push(`${n}: ${r.out.map(o => o.drawn).join("/")}`);
+  }
+  t.notes.push(res.join(", "));
+});
 scenario("map", "Look: family names when zoomed out is off by default and toggles on", async t => {
   await H.homeReady(t);
   t.expect(!t.ev("S.hm.famNames"), "family names are on by default");
