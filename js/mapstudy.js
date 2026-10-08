@@ -863,7 +863,7 @@ function msOpen(o = {}) {
 }
 
 // ---------- entry points: Home's chrome (js/home.js) and a Train tile (js/gym.js) ----------
-function msHomeButton() { return `<button class="corner r2" id="hmMapStudy" aria-label="Study the map">${MS_ICON}</button>`; }
+function msHomeButton() { return `<button class="corner ms-corner" id="hmMapStudy" aria-label="Study the map">${MS_ICON}</button>`; }
 function msTrainShelf() {
   const M = msState(), lvl = M.spec.level, f = (M.found[msLevelKey(lvl)] || []).length, day = M.day && M.day.d === today() && M.day.done;
   const art = ["#7FA88A", "#B9C9A7", "#4E7A6A", "#A8C3BC", "#D5D9B0", "#5C8C78", "#93B39A"].map(h => `<i style="--c:${h}"></i>`).join("");

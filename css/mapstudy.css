@@ -122,7 +122,7 @@
 .ms-empty p{color:var(--soft);font-size:15px}
 
 /* ---------- entry points ---------- */
-.corner.r2{right:152px}
+.corner.ms-corner{right:152px}
 .hm.chrome-hide #hmMapStudy{opacity:0;pointer-events:none}
 .hm #hmMapStudy{transition:opacity .4s var(--ease)}
 .ms-art{display:flex;flex-wrap:wrap;align-content:center;justify-content:center;gap:4px;padding:10px 18%;background:var(--surface-2)}
