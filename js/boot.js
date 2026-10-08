@@ -73,6 +73,7 @@ function shot(name) {
       }); }
     // the Learn it mini-lesson (js/learnit.js): learnit:<meet|recall|tell|done>
     case "learnit": return hmLearnitShot(arg || "meet");
+    case "lx": return lxShot(arg || "room");   // js/learnmore.js: lx:<room|unit|meet|deck|learnit|learnitpage|edge>
     case "gym": return go("gym");
     case "studio": return go("studio");
     // a Studio photo palette, for design review (ROADMAP §17 job #1 screenshots): a synthetic canvas run
@@ -108,6 +109,7 @@ function shot(name) {
     case "page": return openNode(g().nodes.get(arg || "alchemy"));
     case "story": { const st = g().stories[+arg || 0]; return storyPlayer(st); }
     case "daily": S.daily = {}; return daily();
+    case "dl": return dlShot(arg);   // the two dailies (js/challenge.js): dl:row · dl:paint[:<round 0-4>|:end] · dl:name[:three|:hint|:won|:lost]
     case "lab": return LAB[arg || "harmony"]();
     case "honeylab": return labHoney();   // the honeycomb lab (#/lab/honey) — not reachable through the router in shot mode
     // archive (js/passages.js, js/films.js): passage:<id>, passages[:<family>], film:<id>, cpage:<color> (scrolled to In books), films (Ideas lens at Films)
