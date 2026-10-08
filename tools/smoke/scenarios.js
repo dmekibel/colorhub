@@ -883,6 +883,9 @@ scenario("paintings", "a pair page, the masters' chords, and a painting with its
 scenario("paintings", "a color page's In paintings section: presets re-run the query; Fine-tune opens the sliders", async t => {
   await t.open("#/color/cobalt", { settle: 800 });
   const sec = await t.waitFor("[data-glin]", 12000, "the In paintings section");
+  // it lives in the "In paintings" field-note drawer (closed until a tap, like a thumb would)
+  const dr = sec.closest("details");
+  if (dr && !dr.open) await t.click(dr.querySelector("summary"), { wait: 300 });
   sec.scrollIntoView();
   await t.waitFor("[data-pt-quick] [data-pre-tol]", 15000, "the tolerance presets");
   await t.waitFor(() => t.$$("[data-pt-rail] .gl-pin, [data-pt-rail] .pin").length > 0 || /No painting/.test(t.text("[data-pt-lead]")), 20000, "the rail or an honest empty line");
