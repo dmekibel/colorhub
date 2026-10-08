@@ -136,6 +136,14 @@ function honeySunflower(items) {
   const pts = ordered.map((it, i) => { const r = c * Math.sqrt(i + .5), a = i * HONEY_GA; return { it, x: r * Math.cos(a), y: r * Math.sin(a) }; });
   return { pts, finite: true };
 }
+// L18 H5: the learning spiral. The same golden-angle disc, but ordered by how early the path teaches a name (rank,
+// i.e. useRank: the first words in the middle, rarer ones further out), so the stages are rings you can see.
+function honeySpiral(items) {
+  const c = .56, rk = it => it.o.rank != null ? +it.o.rank : 1e9;
+  const ordered = items.slice().sort((a, b) => rk(a) - rk(b) || honeyHueKey(a) - honeyHueKey(b));
+  const pts = ordered.map((it, i) => { const r = c * Math.sqrt(i + .5), a = i * HONEY_GA; return { it, x: r * Math.cos(a), y: r * Math.sin(a) }; });
+  return { pts, finite: true, spiral: true };
+}
 // a small set as one compact cluster: hue across, light to dark down, each color in the nearest free cell
 function honeyCluster(items) {
   const N = items.length, cells = honeyRings(8).flat().sort((a, b) => Math.hypot(a.x, a.y) - Math.hypot(b.x, b.y) || a.a - b.a).slice(0, N);
@@ -184,6 +192,7 @@ function honeyLayout(raw, layoutKey) {
   let lay;
   if (layoutKey === "globe") lay = honeySphere(items);
   else if (layoutKey === "sunflower") lay = honeySunflower(items);
+  else if (layoutKey === "spiral") lay = honeySpiral(items);
   // the wheel's own cut edges never match a neighboring copy's, so (David's wrap rule) it stays finite always,
   // not just for small sets
   else if (layoutKey === "wheel") lay = Object.assign(honeyWheel(items), { finite: true });
@@ -226,6 +235,8 @@ const HONEY_STYLES = {
     far: { m0: -1.8, sig: .5, labelMin: -4 } },
   honeycomb: { title: "Honeycomb", cfg: { layout: "mapTall", lensMode: "round", m0: 2.6, m1: 1, sig: 2.4, shape: 1, gap: .03, zMinUser: .08, labelMin: 30, drift: .4, vig: .6 },
     far: { m0: -.8, gap: -.02, labelMin: -6 } },
+  spiral: { title: "Spiral", cfg: { layout: "spiral", m0: 2.3, m1: 1, sig: 2.4, gap: .06, zMinUser: .18, labelMin: 24, vig: 0 },
+    far: { m0: .4, gap: -.03, labelMin: -4 } },
   globe: { title: "Globe", cfg: { layout: "globe", lensMode: "none", gap: .05, shape: 0, zMinUser: .5, labelMin: 32, vig: 0 },
     far: { labelMin: -8 } },
 };
@@ -238,7 +249,7 @@ const HONEY_ALIVE_MAX = 1500;   // above this many drawn bubbles: no idle drift 
 // Wheel, Tapestry) stay reachable only from the honeycomb lab (#/lab/honey), which still steps through all of them
 // The Globe stays in the lab until its colors are spread evenly over the sphere (today they bunch up and leave
 // bare patches); see NOTES-TRACKER.md.
-const HM_HOME_STYLES = ["original", "honeycomb", "sunflower", "magnifier"];
+const HM_HOME_STYLES = ["original", "honeycomb", "sunflower", "magnifier", "spiral"];
 const HONEY_STYLE_LIST = Object.keys(HONEY_STYLES).map(id => ({ id, title: HONEY_STYLES[id].title }));
 function honeyResolveCfg(styleId, tweak, N) {
   const preset = HONEY_STYLES[styleId] || HONEY_STYLES.current;
@@ -486,7 +497,7 @@ function honeycomb(host, opts = {}) {
   let styleId = typeof opts.style === "string" ? opts.style : "current", liveTweak = opts.tweak ? { ...opts.tweak } : null;
   // back-compat: callers that still pass layout/lens/lensMode directly (colorsets.js, and any legacy caller).
   // These fold into liveTweak (not a one-off cfg mutation) so they survive setItems()'s re-resolve on every call.
-  if (opts.layout) liveTweak = { ...(liveTweak || {}), layout: ["wheel", "sunflower", "globe"].includes(opts.layout) ? opts.layout : "mapTall" };
+  if (opts.layout) liveTweak = { ...(liveTweak || {}), layout: ["wheel", "sunflower", "globe", "spiral"].includes(opts.layout) ? opts.layout : "mapTall" };
   if (opts.lensMode) liveTweak = { ...(liveTweak || {}), lensMode: opts.lensMode === "edges" ? "edges" : opts.lensMode === "none" ? "none" : "round" };
   if (opts.lens != null && !(liveTweak && liveTweak.m0 != null)) {
     const base0 = HONEY_STYLES[styleId] ? HONEY_STYLES[styleId].cfg : {}, pm0 = base0.m0 != null ? base0.m0 : HONEY_CFG_BASE.m0, pm1 = base0.m1 != null ? base0.m1 : HONEY_CFG_BASE.m1, lk = clamp(+opts.lens, 0, 2);
@@ -709,6 +720,7 @@ function honeycomb(host, opts = {}) {
     let pb = null;
     if (pressed) { const i = drawn.findIndex(b => b.it === pressed.it && Math.abs(b.x - pressed.x) < 3 && Math.abs(b.y - pressed.y) < 3); if (i >= 0) { pb = drawn.splice(i, 1)[0]; drawn.push(pb); } }
     const hlSet = hlItems();
+    if (lay.spiral && !hlSet) l18StageRings(l);
     for (const b of drawn) {
       const it = b.it, d = b.d * (b === pb ? 1 + .12 * pressK : 1), r = d / 2;
       honeyCellPath(ctx, b, shapeAmt, b === pb ? 1 + .12 * pressK : 1); ctx.fillStyle = it.h; ctx.fill();
@@ -973,6 +985,28 @@ function honeycomb(host, opts = {}) {
     let lo = ZMIN, hi = Math.max(ZMIN, Z);
     if (!fits(lo)) hi = lo; else for (let i = 0; i < 20; i++) { const m = (lo + hi) / 2; if (fits(m)) lo = m; else hi = m; }
     P = [cx, cy]; Plag = P.slice(); Z = clamp(Math.min(Z, lo), ZMIN, ZMAX); center = null; draw(); settled = center;
+  }
+  // L18 H5: the stage rings, on the ground between bubbles: a thin circle where each stage ends (the bubble at
+  // index i sits at .56*sqrt(i + .5), so a ring at .56*sqrt(n) falls in the seam between stage n's last name and the
+  // next one), mapped through the lens like everything else. No numbers: a label would have to sit on a bubble, and
+  // nothing marks a bubble (X7); the View sheet's stage chips name the rings.
+  function l18StageRings(l) {
+    if (typeof HM_STAGES === "undefined" || !lay.pts.length) return;
+    const N = lay.pts.length, cx = W / 2, cy = vcy(), round = cfg.lensMode === "round";
+    const scr = (wx, wy) => {
+      const ex = wx - P[0], ey = wy - P[1], z = Math.hypot(ex, ey);
+      if (round) { const k = z ? F(z, l) / z : base * l.s * l.m0; return [cx + ex * k, cy + ey * k]; }
+      return [cx + ex * l.K, cy + ey * l.K];
+    };
+    ctx.save(); ctx.lineWidth = 1.25; ctx.strokeStyle = "rgba(236,232,223,.3)";
+    HM_STAGES.forEach(n => {
+      if (n >= N) return;
+      const R = .56 * Math.sqrt(n);
+      ctx.beginPath();
+      for (let i = 0; i <= 96; i++) { const a = i / 96 * 6.2832, q = scr(R * Math.cos(a), R * Math.sin(a)); if (i) ctx.lineTo(q[0], q[1]); else ctx.moveTo(q[0], q[1]); }
+      ctx.stroke();
+    });
+    ctx.restore();
   }
   // where an item sits in the plane, the copy nearest the current pan (a wrapping map repeats every item)
   function l18WorldOf(it) {
@@ -1273,7 +1307,7 @@ function honeycomb(host, opts = {}) {
   }
   return {
     update(o = {}) {
-      if (o.layout) liveTweak = { ...(liveTweak || {}), layout: ["wheel", "sunflower", "globe"].includes(o.layout) ? o.layout : "mapTall" };
+      if (o.layout) liveTweak = { ...(liveTweak || {}), layout: ["wheel", "sunflower", "globe", "spiral"].includes(o.layout) ? o.layout : "mapTall" };
       if (o.style && HONEY_STYLES[o.style]) styleId = o.style;
       setItems(o.items || (lay && lay.raw), o.focus || (center && center.o), o.soft ? "soft" : "");
     },

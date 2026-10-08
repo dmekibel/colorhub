@@ -32,12 +32,12 @@ function hmStageItems(n) {
 // still empty (David, 2026-10-09: paused pending a library import of more real names).
 const hmCoreNameSet = () => new Set((CORE_NAMES || []).map(e => e.n.toLowerCase()));
 function hmCoreItems() {
-  return (CORE_NAMES || []).map(e => ({ n: e.n, h: e.h, c: BYNAME.get(e.n.toLowerCase()) || null, rank: e.rank }));
+  return (CORE_NAMES || []).map(e => ({ n: e.n, h: e.h, c: BYNAME.get(e.n.toLowerCase()) || null, rank: hmUseRank(e) }));
 }
 function hmEveryNameItems() {
   const set = hmCoreNameSet();
   // library-only entries (never folded into a core primary): csItems() already shapes these as {n,h,c:null,lib}
-  const libOnly = csItems().filter(x => !x.c && !set.has(x.n.toLowerCase()));
+  const libOnly = csItems().filter(x => !x.c && !set.has(x.n.toLowerCase())).map(x => ({ ...x, rank: 1e6 + (x.rank || 0) }));   // after every core name (the spiral's order)
   return hmCoreItems().concat(libOnly);
 }
 function hmShadeItems() {
@@ -719,6 +719,7 @@ function hmTap(el) {
 function hmShot(arg) {
   // L18: home:far (stage 9, all the way out) · home:fam (the same, with family names on)
   if (arg === "far" || arg === "fam") S.hm = Object.assign(S.hm || {}, { src: "stage:1000", filter: "all", zoom: .01, famNames: arg === "fam" });
+  if (/^spiral/.test(arg)) S.hm = Object.assign(S.hm || {}, { src: "stage:1000", filter: "all", style: "spiral", zoom: arg === "spiral:out" ? .01 : 1 });   // L18 H5
   hmHome();
   if (arg === "bar") setTimeout(() => { const s = document.querySelector(".screen.hm"); if (s) s.classList.remove("chrome-hide"); }, 3200);
   if (arg === "floor") setTimeout(() => { hmSnapFloor(); go("gym"); }, 600);   // L18 B2: a room over the real floor
