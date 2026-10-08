@@ -64,9 +64,10 @@ const rcNearNote = (name, near) => `<p class="fine">Nothing of ${esc(name.toLowe
 
 // ======================================================================
 // "You and this color" -- one quiet line under the hero, only when there is something true to say.
-// Today that is when it became Yours (S.cards[..].ownAt, js/pickit.js). When the learner model lands
-// (js/learner.js: lmStatus / lmPairs / lmSeen -- all optional here) it also shows the mix-up note with a
-// duel button and any camera finds. Hidden entirely when there is nothing to show.
+// Today that is when it became Yours (S.cards[..].ownAt, js/pickit.js). The Learner Model (js/learner.js:
+// lmPairs / seenIn -- both optional here) adds the mix-up note with a duel button, and "You met it in
+// <title>, a painting" (one tap, where this file knows how to reopen that kind). Hidden entirely when
+// there is nothing to show.
 // ======================================================================
 const RC_MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 function rcDayLabel(k) { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(k || ""); return m ? `${+m[3]} ${RC_MONTHS[+m[2] - 1]}` : ""; }
@@ -84,15 +85,39 @@ function rcYouHTML(name, hex) {
       }
     } catch (e) {}
   }
-  if (typeof lmSeen === "function") {
-    try { const sets = lmSeen(self, 3) || []; if (sets.length) lines.push(`You've met it in ${sets.length === 1 ? "one set" : sets.length + " sets"} you opened${sets[0].title ? `, like ${esc(sets[0].title)}` : ""}.`); } catch (e) {}
+  // "You met it in The Milkmaid, a painting" (seenIn, js/learner.js): the most recent set that really has a
+  // title, with its own kind's word, and a one-tap link where this file knows how to reopen that kind.
+  let met = "";
+  if (typeof seenIn === "function") {
+    try {
+      const sets = (seenIn(self, 3) || []).filter(s => s.title);
+      if (sets.length) {
+        const s0 = sets[0], word = RC_SEEN_WORD[s0.kind];
+        met = `<p class="rc-met">You met it in ${rcOpenable(s0) ? `<button type="button" class="rc-metlink" data-rc-met="${esc(s0.key)}">${esc(s0.title)}</button>` : `<b>${esc(s0.title)}</b>`}${word ? `, ${word}` : ""}${sets.length > 1 ? `, and ${sets.length - 1} other${sets.length > 2 ? "s" : ""}` : ""}.</p>`;
+      }
+    } catch (e) {}
   }
-  if (!lines.length) return "";
-  return `<section class="rc-you"><h3>You and this color</h3><p>${lines.join(" ")}</p>${duel}</section>`;
+  if (!lines.length && !met) return "";
+  return `<section class="rc-you"><h3>You and this color</h3>${lines.length ? `<p>${lines.join(" ")}</p>` : ""}${met}${duel}</section>`;
+}
+// what each seenIn() kind is called, in plain words (never "set" or "node" -- David's P9, no jargon labels)
+const RC_SEEN_WORD = { painting: "a painting", photo: "your photo", palette: "a palette", poem: "a poem", passage: "a passage" };
+// true when this file knows how to reopen that kind (painting, photo, a kept palette); anything else still gets
+// the line, just without a tap -- honest, never a button that goes nowhere
+const rcOpenable = s => s.kind === "painting" ? /^g\d+$/.test(s.id) && typeof galleryPage === "function"
+  : s.kind === "photo" ? typeof photoPage === "function" : s.kind === "palette" ? typeof openSavedPalette === "function" : false;
+function rcOpenSeen(s) {
+  if (s.kind === "painting") return galleryPage(+s.id.slice(1));
+  if (s.kind === "photo") return photoPage(s.id);
+  if (s.kind === "palette") return openSavedPalette(s.id);
 }
 function rcWireYou(el, name, hex) {
-  const b = el.querySelector("[data-rc-duel]"); if (!b) return;
-  b.onclick = () => { const pan = el.querySelector("[data-rc-duel-panel]"); pan.hidden = false; b.hidden = true; arDuel(pan, { n: name, h: hex }, { n: b.dataset.b, h: b.dataset.hb }, 5); };
+  const b = el.querySelector("[data-rc-duel]");
+  if (b) b.onclick = () => { const pan = el.querySelector("[data-rc-duel-panel]"); pan.hidden = false; b.hidden = true; arDuel(pan, { n: name, h: hex }, { n: b.dataset.b, h: b.dataset.hb }, 5); };
+  const m = el.querySelector("[data-rc-met]");
+  if (m && typeof seenIn === "function") m.onclick = () => {
+    try { const sets = seenIn({ n: name, h: hex }, 3) || []; const s = sets.find(x => x.key === m.dataset.rcMet); if (s) rcOpenSeen(s); } catch (e) {}
+  };
 }
 
 // ======================================================================

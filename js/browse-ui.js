@@ -700,7 +700,6 @@ function xbPainters(body, F, res) {
 function xbOpenPainter(a) {
   const F = XBF, m = F && F.meta.artists[a - 1]; if (!m) return;
   if (m[3] && typeof awPainter === "function") { XB.y = xbSY(); XB.back = true; return awPainter(m[1]); }   // L11's art wiki, #/painter/<slug>
-  if (m[3] && typeof painterPage === "function") { XB.y = xbSY(); XB.back = true; return painterPage(m[1]); }
   const f = xbCopy(XB.f); f.painter = a;
   xbSet(f, { view: "grid", sort: "date" });
 }

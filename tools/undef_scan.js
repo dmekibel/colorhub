@@ -199,4 +199,7 @@ for (const [name, xs] of group(fails)) {
 }
 const nfiles = CHECKED.length, nglob = GLOBAL.size;
 console.log(`undef_scan: ${nfiles} files, ${nglob} top-level names, ${fails.length} unresolved use${fails.length === 1 ? "" : "s"} (${group(fails).length} name${group(fails).length === 1 ? "" : "s"})${warns.length ? `, ${group(warns).length} guarded-but-missing` : ""}`);
-process.exit(fails.length ? 1 : 0);
+// A typeof-guarded name that is never defined anywhere is a feature silently gone dark (the six-function rot this
+// gate exists to catch: the guard reads true-ish-never, so the button or hook just never fires and nothing errors).
+// WARN is a gate, not a courtesy: any guarded-but-missing name fails the build same as a true unresolved use.
+process.exit(fails.length || warns.length ? 1 : 0);

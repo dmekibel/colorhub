@@ -41,7 +41,7 @@ const nmrPaste = t => {   // "#abc", "#aabbcc", "rgb(12, 99, 180)", "12 99 180"
 LAB.namer = (hex, push = true) => {
   hex = (hex && /^#[0-9a-f]{6}$/i.test(hex) ? hex : NMR_LAST.hex || "#5F8C8A").toUpperCase();
   if (push && XSTACK[XSTACK.length - 1] !== "namer") XSTACK.push("namer");
-  let cur = hex, tab = NMR_LAST.tab, raf = 0, urlT = 0, stream = null;
+  let cur = hex, tab = NMR_LAST.tab, raf = 0, urlT = 0, stream = null, eyeSrc = null;   // eyeSrc: "camera" | "photo", the Eyedrop tab's last capture (js/learner.js learnerLog "find")
   // One screen, no scrolling for the thing the page is for (David, 2026-10-08: "doesn't fit on the screen"): a
   // 100dvh stage holds the name (on its own color), the four next names as a swipeable row, the actions, the
   // tabs and the picker, which takes whatever height is left. Every band above the picker has a fixed height,
@@ -88,7 +88,16 @@ LAB.namer = (hex, push = true) => {
       + (typeof galleryOpenColor === "function" ? `<button data-pt>Paintings</button>` : "")
       + (taught && nm.de < VERY_CLOSE_DE && typeof hmLearnIt === "function" ? `<button data-learn>Learn it</button>` : "")
       + (typeof hmHome === "function" ? `<button data-map>On the map</button>` : "");
-    $("#acts [data-save]").onclick = () => { const t = nmrTray(); if (t.includes(cur)) { S.namerTray = t.filter(x => x !== cur); } else { t.unshift(cur); S.namerTray = t.slice(0, 12); buzz(8); } save(); render(); drawTray(); };
+    $("#acts [data-save]").onclick = () => {
+      const t = nmrTray();
+      if (t.includes(cur)) { S.namerTray = t.filter(x => x !== cur); }
+      else {
+        t.unshift(cur); S.namerTray = t.slice(0, 12); buzz(8);
+        // a kept color, identified by Eyedrop (photo or camera): the Learner Model's "find" (js/learner.js)
+        if (tab === "eye" && eyeSrc && typeof learnerLog === "function") learnerLog({ type: "find", color: { n: nm.n, h: cur }, src: eyeSrc });
+      }
+      save(); render(); drawTray();
+    };
     const pt = $("#acts [data-pt]"); if (pt) pt.onclick = () => galleryOpenColor(cur, nm.text);
     const lr = $("#acts [data-learn]"); if (lr) lr.onclick = () => typeof prQuick === "function" ? prQuick({ seed: { n: taught.n, h: taught.h } }) : hmLearnIt(taught);   // the one Learn door (js/learnset.js)
     const mp = $("#acts [data-map]"); if (mp) mp.onclick = () => nmrOnMap(nm.n);
@@ -233,10 +242,11 @@ LAB.namer = (hex, push = true) => {
         cv.width = Math.round(w * k); cv.height = Math.round(h * k); cv.getContext("2d").drawImage(src, 0, 0, cv.width, cv.height);
         cv.hidden = false; vid.hidden = true; live = false; stopCam(); box.hidden = false; $("#snap").hidden = true; $("#er").textContent = "Tap or drag across the picture."; mark(); pick();
       };
-      $("#ef").onchange = e => { const f = e.target.files[0]; if (!f) return; const img = new Image(); img.onload = () => { showImg(img); URL.revokeObjectURL(img.src); }; img.onerror = () => toast("Couldn't open that image"); img.src = URL.createObjectURL(f); };
+      $("#ef").onchange = e => { const f = e.target.files[0]; if (!f) return; const img = new Image(); img.onload = () => { eyeSrc = "photo"; showImg(img); URL.revokeObjectURL(img.src); }; img.onerror = () => toast("Couldn't open that image"); img.src = URL.createObjectURL(f); };
       $("#ec").onclick = async () => {
         try { stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment", width: { ideal: 1280 } }, audio: false }); }
         catch (e) { toast("The camera isn't available here"); return; }
+        eyeSrc = "camera";
         vid.srcObject = stream; vid.hidden = false; cv.hidden = true; box.hidden = false; live = true; pos = [.5, .5]; mark(); $("#snap").hidden = false; $("#er").textContent = "Aim the circle, then freeze the frame.";
         try { await vid.play(); } catch (e) {}
         const tick = () => { if (!live || !el.isConnected) return; if (vid.videoWidth) setColor(isoSample(vid, .5, .5, { frac: .03 }), "eye"); setTimeout(() => requestAnimationFrame(tick), 140); };

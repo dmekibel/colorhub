@@ -32,6 +32,7 @@ function eye() {
   const $ = s => el.querySelector(s);
   const vid = $("#vid"), still = $("#still"), ret = $("#ret"), stage = $("#stage");
   let stream = null, frozen = false, raf = 0, cur = null, smooth = null, last = 0, at = [.5, .5], wb = null, wbArm = false;
+  let capKind = "camera";   // "camera" | "photo": the live feed, or a chosen image (js/learner.js learnerLog "find")
   const read = hex => wb ? wb(hex) : hex;
   const stop = () => { cancelAnimationFrame(raf); if (stream) stream.getTracks().forEach(t => t.stop()); stream = null; };
   cleanup.push(stop);
@@ -74,7 +75,7 @@ function eye() {
     buzz(10);
   };
   const live = () => {
-    frozen = false; el.classList.remove("frozen"); still.hidden = true; vid.style.visibility = ""; $("#iso").hidden = true;
+    frozen = false; capKind = "camera"; el.classList.remove("frozen"); still.hidden = true; vid.style.visibility = ""; $("#iso").hidden = true;
     $("#hint").textContent = "Point at anything"; $("#shut").setAttribute("aria-label", "Freeze");
     at = [.5, .5]; placeRet();
   };
@@ -107,12 +108,14 @@ function eye() {
     if (vid.videoWidth) freeze(vid, vid.videoWidth, vid.videoHeight);
   };
   $("#iso").onclick = () => { if (frozen) isoOpen({ src: still, fx: at[0], fy: at[1], from: "camera", ref: "camera" }); };
-  $("#nm").onclick = () => cur && openTappedColor(cur.hex);   // David, 2026-10-07: one tap opens the page, not the sheet
-  $("#mine").onclick = () => { if (cur && cur.nx) openTappedColor(cur.nx.h); };
+  // a tap on either name is a kept find: you looked, the app named it, and you chose to open it (js/learner.js learnerLog "find")
+  const logFind = (n, h) => { if (typeof learnerLog === "function") learnerLog({ type: "find", color: { n, h }, src: capKind }); };
+  $("#nm").onclick = () => { if (!cur) return; logFind(cur.nm.n, cur.hex); openTappedColor(cur.hex); };   // David, 2026-10-07: one tap opens the page, not the sheet
+  $("#mine").onclick = () => { if (cur && cur.nx) { logFind(cur.nx.n, cur.nx.h); openTappedColor(cur.nx.h); } };
   const fromFile = f => {
     if (!f) return;
     const img = new Image();
-    img.onload = () => { stop(); el.classList.remove("nocam"); $("#off").hidden = true; freeze(img, img.naturalWidth, img.naturalHeight); URL.revokeObjectURL(img.src); };
+    img.onload = () => { stop(); capKind = "photo"; el.classList.remove("nocam"); $("#off").hidden = true; freeze(img, img.naturalWidth, img.naturalHeight); URL.revokeObjectURL(img.src); };
     img.src = URL.createObjectURL(f);
   };
   $("#file").onchange = e => fromFile(e.target.files[0]);
