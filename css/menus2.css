@@ -14,7 +14,7 @@
   --corner-b:calc(var(--bottom) + var(--corner-gap) - var(--vb));
   --dock:calc(var(--bottom) + var(--corner-gap) + var(--corner) + 28px);
   --tabh:var(--dock)}
-html,body{background:var(--ground)}
+/* html,body background left as before (2026-10-08 black-bar regression) */
 .room-floor-peek{display:none}
 .room-sheet{top:0;bottom:calc(-1 * var(--vb));border-radius:0;box-shadow:none;background:var(--ground)}
 .room-sheet>.screen{padding-top:calc(var(--top) + 18px)}

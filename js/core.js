@@ -32,6 +32,7 @@ const isIOS = () => /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.pla
 function vbFix() {
   let gap = 0;
   try { if (standalone() && isIOS()) { const full = innerHeight > innerWidth ? Math.max(screen.width, screen.height) : Math.min(screen.width, screen.height); gap = full - innerHeight; if (gap < 1 || gap > 80) gap = 0; } } catch (e) {}
+  gap = 0;   // disabled 2026-10-08: on David's phone it pushed Home's bottom edge into a black bar; needs a device test before re-enabling
   document.documentElement.style.setProperty("--vb", gap + "px");
 }
 vbFix(); addEventListener("resize", vbFix); addEventListener("orientationchange", () => setTimeout(vbFix, 300));
