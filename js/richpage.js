@@ -153,6 +153,11 @@ function rpDrawersWire(el, name, hex) {
       if (id === "measured") return;
       const has = body.textContent.replace(/\s+/g, "").length > 30 || body.querySelector("img,.gl-pin,.kin,.pm-q,.arch-quote,.film-row,.wd-in");
       d.hidden = !has;
+      if (has && id === "world" && typeof csActions === "function" && typeof colorSet === "function" && !body.querySelector(".cs-acts")) {
+        // the twins' colors as a set: Learn them, put them on the map (js/colorset.js); each twin row itself opens its page in one tap
+        const hs = [...body.querySelectorAll(".kin i, .wd-in i, .film-strip i")].map(i => i.style.getPropertyValue("--c").trim()).filter(Boolean);
+        if (hs.length >= 2) body.appendChild(csActions(colorSet({ kind: "twins", id: routeSlug(name), title: `${name} in the world`, colors: hs.map(h => ({ h })), src: "color/" + routeSlug(name) }), { only: ["learn", "map"], back: () => {} }));
+      }
       if (has && id === "world") head("world", (() => { const t = [...body.querySelectorAll(".kin b,.wd-in b,.film-row b")].slice(0, 3).map(x => x.textContent.toLowerCase()); return t.length ? `Its twins: ${t.join(", ")}.` : ""; })());
       if (has && id === "paint") head("paint", (() => { const p = body.querySelector(".rc-reach-stat b"); return p ? `${p.textContent} come close.` : ""; })());
       if (has && id === "company") head("company", (() => { const k = body.querySelector(".kin b"); return k ? `Set beside ${k.textContent} more than chance.` : ""; })());

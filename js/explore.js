@@ -501,8 +501,12 @@ function wireLinks(el) {
   el.addEventListener("click", e => {
     const a = e.target.closest("[data-to],[data-node]");
     if (!a) return;
+    // a node the graph doesn't hold yet (a gem or flower page registered by its own file, after the wiki rebuilt
+    // the graph) is left for js/swatch.js's fallback, which waits for it: never a silent dead tap
+    const node = graph().nodes.get(a.dataset.to || a.dataset.node);
+    if (!node) return;
     e.preventDefault();
-    openNode(graph().nodes.get(a.dataset.to || a.dataset.node));
+    openNode(node);
   });
 }
 

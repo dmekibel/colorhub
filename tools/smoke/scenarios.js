@@ -380,6 +380,22 @@ scenario("pages", "a tapped in-between hex opens its nearest name with 'Your col
   t.expect(sawYours >= 1, "none of the in-between colors showed a 'Your color' page");
 });
 
+scenario("pages", "a world twin (In gems) opens its page in one tap, Back returns to the color", async t => {
+  await H.openPage(t, "#/name/fiery-rose", "Fiery Rose");
+  const d = await t.waitFor(() => t.$('[data-rp-drawer="world"]'), 8000, "the 'In the world' drawer");
+  await t.waitFor(() => !d.hidden && t.$$("[data-to]", d).length > 0, 10000, "a twin row (gem, flower, fashion or film) in the world drawer");
+  if (!d.open) await t.click(d.querySelector("summary"), { wait: 200 });
+  const row = t.$$("[data-to]", d).find(e => /^gm:/.test(e.dataset.to)) || t.$$("[data-to]", d)[0];
+  t.expect(row, "no twin row to tap");
+  const id = row.dataset.to;
+  await t.click(row, { wait: 700 });
+  await t.waitFor(() => !t.$(".cp-page .cp-hero-foot h1") || H.title(t) !== "Fiery Rose", 8000, `the twin page for ${id} to open`);
+  t.expect(t.$("#app").innerText.length > 100, `the page for ${id} is empty`);
+  t.notes.push(`Fiery Rose > ${id}`);
+  await t.click("[data-back]", { wait: 600 });
+  await t.waitFor(() => t.$(".cp-page .cp-hero-foot h1") && H.title(t) === "Fiery Rose", 8000, "Back to return to Fiery Rose");
+});
+
 scenario("pages", "Learn it runs meet > recall from a color page", async t => {
   await H.openPage(t, "#/color/teal", "Teal");
   await t.click("[data-learnit]", { wait: 600 });
