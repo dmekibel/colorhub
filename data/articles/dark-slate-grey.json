@@ -13,7 +13,7 @@
   {
    "id": "lineage",
    "title": "From a Unix file to every browser",
-   "body": "The name comes from `rgb.txt`, the list of named colors that shipped with the X Window System, first with X10 Release 3 in June 1986 [1]. Who wrote the original list is not recorded [2]. The big expansion came with X11 Release 4 in January 1989, when Paul Raveling added colors based on Sinclair Paints samples and John C. Thomas added colors matched to a box of 72 Crayola crayons [1][2]. They tuned the values on the monitors in front of them, DEC VT240 terminals [1].\n\nEarly web browsers borrowed the X11 list, and the W3C later wrote it into SVG and CSS, adding a *grey* spelling beside every *gray* [1][3]. That is why `darkslategray` and `darkslategrey` both work today, and both mean #2F4F4F, red 47, green 79, blue 79 [3]. Paterson's dictionary of color lists it simply as one of the X11 colors [4]."
+   "body": "The name comes from `rgb.txt`, the list of named colors that shipped with the X Window System, first with X10 Release 3 in June 1986 [1]. Who wrote the original list is not recorded [2]. The big expansion came with X11 Release 4 in January 1989, when Paul Raveling added colors based on Sinclair Paints samples and John C. Thomas added colors matched to a box of 72 Crayola crayons [1][2]. The older values had been tuned for DEC VT240 terminals; Raveling retuned his on an HP monitor [8]. Dark slate grey was already in the list that shipped before 1989, at exactly today's 47, 79, 79, while plain slate grey arrived only with the 1989 expansion, so the dark one is the older of the two [8].\n\nEarly web browsers borrowed the X11 list, and the W3C later wrote it into SVG and CSS, adding a *grey* spelling beside every *gray* [1][3]. That is why `darkslategray` and `darkslategrey` both work today, and both mean #2F4F4F, red 47, green 79, blue 79 [3]. Paterson's dictionary of color lists it simply as one of the X11 colors [4]."
   },
   {
    "id": "odd",
@@ -141,6 +141,13 @@
    "cite": "ColorHub archive, 23,531 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
    "loc_kind": null,
    "url": null
+  },
+  {
+   "n": 8,
+   "kind": "web",
+   "cite": "X.Org rgb package, others/README and old-rgb.txt (the pre-1989 database)",
+   "loc_kind": null,
+   "url": "https://gitlab.freedesktop.org/xorg/app/rgb/-/tree/master/others"
   }
  ],
  "questions": [
@@ -169,7 +176,7 @@
   "In CSS, darkgray is lighter than gray. Dark Slate Grey has its own family quirks.",
   "Some web color names were matched to a box of 72 crayons."
  ],
- "words": 373,
+ "words": 414,
  "status": "pilot",
  "checked": {
   "by": "L7 self-check (sentence-to-card trace, myth list, hedges)",

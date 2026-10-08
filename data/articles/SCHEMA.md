@@ -57,7 +57,7 @@ One file per article. Written by the article engine (lane L7), read by the artic
 
 - `origin.named_after`: plain words; say "origin undocumented" when true.
 - `aka`: alternative names, display text (not slugs).
-- `siblings` / `parent` / `children`: **slugs** that resolve to a color name or article (gate-checked). Siblings = same material or same name in other systems; children = modifiers and named variants.
+- `siblings` / `parent` / `children`: **slugs** that resolve to a slug in `data/graph/names.json` or to an article (gate-checked). Siblings = same material or same name in other systems; children = modifiers and named variants.
 - `disambiguation`: lines for same-name-different-color cases (Indigo vs Indigo Dye; Isabelline vs Isabella Color).
 
 ## notes[]
@@ -89,3 +89,18 @@ The numbers the prose quotes, so the UI can draw them (charts, shelves) and late
 ## Private side (never in this repo)
 
 `../color-kb/facts/<slug>.jsonl`: one atomic fact card per line, `{id, claim, src:[{book|web|data, loc}], conf: H|M|L, theme, nodes[], edge?, conflict?}`. Every sentence in the article traces to a card. Cards may paraphrase books; they never leave color-kb. The gate warns if an article has no cards file.
+
+## What the gate fails on (`tools/article_gate.py`)
+
+- Invalid JSON; a missing required key; `slug` not equal to the file name or not in routeSlug form; a bad hex; an unknown `tier`, `depth` or `status`.
+- Length (lede + section bodies, refs and markup stripped) outside the bounds of `depth`.
+- `words` not equal to the computed count (fix with `--write-words`).
+- A `[n]` with no note; a note with a bad kind, an empty cite, or (web) no url; a fact sentence (a digit, or a capitalised word after the first) with no `[n]` (the lede is exempt).
+- A quotation over 15 words.
+- A phrase from the CLAUDE.md myth list without a correcting cue (myth, legend, not, never, claim, rumor, disputed…) in the same sentence or the next.
+- The words "the 101".
+- A `[[slug]]` link, or an aside sibling/child/parent, that resolves to no slug in `data/graph/names.json` and no article; an `[[art:id|label]]` not in `data/gallery`.
+- Not 2–3 questions, a bad question kind, or an answer not among its choices.
+- Fewer than 4 connections (siblings + children + parent + `[[links]]`) or fewer than 3 `field` keys.
+
+Warnings (do not block): a 10-word run shared with a private book text, an unused note, a sentence over 45 words, a missing private fact-card file.

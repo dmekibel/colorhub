@@ -15,10 +15,11 @@ FAIL (blocks the article):
   - a quotation over 15 words (text in double quotes, straight or curly)
   - a myth-list phrase (CLAUDE.md "Color myths") with no correcting frame in the same or the next sentence
   - the words "the 101"
-  - a [[slug]] link that resolves to no color name or article; an [[art:id|label]] that is not in data/gallery
+  - "words" differs from the computed count (fix with --write-words)
+  - a [[slug]] link (or aside sibling/child/parent) that resolves to no slug in data/graph/names.json or article; an [[art:id|label]] that is not in data/gallery
   - questions: 2-3, kind pick|true-false, answer among the choices
   - fewer than 4 connections (aside siblings + children + aka + [[links]]) or fewer than 3 field keys
-WARN (printed, does not block): a 10-word run shared with a private book text; an unused note; a sentence over 45 words; "words" out of date.
+WARN (printed, does not block): a 10-word run shared with a private book text; an unused note; a sentence over 45 words.
 
 Private fact cards live in ../color-kb/facts/<slug>.jsonl (never in this repo). When that folder exists the
 gate also checks that the cards file is there and that every card names a source.
@@ -61,9 +62,48 @@ MYTHS = [
     r"napoleon.{0,60}arsenic|arsenic.{0,60}napoleon",
     r"indian yellow.{0,60}banned",
     r"mauve decade",
+    # the rest of CLAUDE.md "Color myths" (names, gems, pigments, perception, culture)
+    r"navy.{0,60}(king|monarch).{0,40}(favou?rite|mistress)",
+    r"drebbel.{0,80}(spill|accident)",
+    r"nero.{0,60}emerald|emerald.{0,60}nero",
+    r"amber.{0,60}(dinosaur|dna)",
+    r"celadon.{0,60}poison",
+    r"chai ware",
+    r"lapis.{0,60}(flecks?|specks?).{0,30}\bgold|gold (flecks?|specks?).{0,40}lapis|(flecks?|specks?) (in|of) lapis.{0,30}\bgold",
+    r"chartres blue.{0,40}(lost|secret)",
+    r"bone black.{0,60}(human|corpse)",
+    r"chromotherapy|colou?rs? (can )?heal",
+    r"moonlight is blue|blue moonlight",
+    r"(red|green|blue) cones?\b",
+    r"rods see (brightness|black)",
+    r"black and white (are not|aren.t) colou?rs",
+    r"colou?r-?blind (people )?(see|have) no colou?r",
+    r"bulls?.{0,40}(enraged|angered|hate|charge).{0,20}red|red.{0,30}(enrages|angers) bulls?",
+    r"pink (was|has) always (been )?(for|a) girls?",
+    r"red (room|cell).{0,60}(mad|insane)",
+    r"pointillis.{0,80}(mix|blend) in the eye",
+    r"warm colou?rs advance",
+    r"one true complement",
+    r"greek (statues|sculpture).{0,40}(were|was) (all |pure )?white",
+    r"le corbusier.{0,60}all.white",
+    r"queen victoria.{0,80}(started|invented|began).{0,40}white wedding",
+    r"prostitutes?.{0,60}golden belt",
+    r"crusaders?'? blood",
+    r"(four|4) colou?rs? only|only (four|4) colou?rs",
+    r"napoleon.{0,40}empire green",
+    r"moli[eè]re.{0,60}green",
+    r"abandoned by god",
+    r"universe is turquoise",
+    r"inuit.{0,60}(dozens|hundreds|many) (of )?(words|names) for snow",
+    r"(each|every) colou?r (triggers|causes|has) (one|a single) (fixed )?emotion",
+    r"half the world.{0,40}jeans",
+    r"(mango|cows?).{0,60}indian yellow.{0,60}(cruel|banned)|indian yellow.{0,60}(cruel|banned)",
+    r"jungle tribe|tribe.{0,40}many (words for )?greens",
 ]
-CUES = re.compile(r"\b(myth|legend|folk|not|never|no |false|wrong|isn.t|doesn.t|didn.t|wasn.t|story|stories|rumou?r|"
-                  r"claim|propaganda|evidence|unproven|disputed|disagree|nonsense|invent|actually|in fact|only)\b", re.I)
+# Correcting cues. Deliberately no bare "only"/"no": they are too common to prove a correction.
+CUES = re.compile(r"\b(myth|legend|folk|not|never|false|wrong|isn.t|doesn.t|didn.t|wasn.t|story|stories|rumou?r|"
+                  r"claim|propaganda|evidence|unproven|disputed|disagree|nonsense|invent|actually|in fact|"
+                  r"supposedly|so-called|untrue|no evidence|no record)\b", re.I)
 REF = re.compile(r"\[(\d+)\]")
 LINK = re.compile(r"\[\[([^\]|]+)(?:\|([^\]]+))?\]\]")
 QUOTE = re.compile(r"[\"“]([^\"”]{1,600})[\"”]")
@@ -100,6 +140,11 @@ def sentences(text):
 
 
 def load_names():
+    """Every routable color slug. The Color Graph's names.json ([slug, name, hex, tier, lists]) is the source of
+    truth; core-names/library are a fallback for a checkout built before the graph."""
+    g = ROOT / "data" / "graph" / "names.json"
+    if g.exists():
+        return {r[0] for r in json.loads(g.read_text())}
     names = set()
     for f in ("core-names.json", "library.json"):
         p = ROOT / "data" / f
@@ -192,7 +237,7 @@ def check(path, names, gallery, slugs, write_words=False):
             txt = json.dumps(a, ensure_ascii=False, indent=1)
             path.write_text(txt + "\n", encoding="utf-8")
         else:
-            warns.append(f"'words' is {a.get('words')}, computed {n_words} (run with --write-words)")
+            fails.append(f"'words' is {a.get('words')}, computed {n_words} (run with --write-words)")
 
     notes = {}
     for nt in a["notes"]:
@@ -238,7 +283,8 @@ def check(path, names, gallery, slugs, write_words=False):
                 warns.append(f"{where}: long sentence ({words(s)} words): “{plain(s)[:60]}…”")
             for pat in MYTHS:
                 if re.search(pat, plain(s), re.I):
-                    ctx = s + " " + (sents[i + 1] if i + 1 < len(sents) else "") + " " + (sents[i - 1] if i else "")
+                    # the correction must sit in the same sentence or the one right after it
+                    ctx = s + " " + (sents[i + 1] if i + 1 < len(sents) else "")
                     if not CUES.search(plain(ctx)):
                         fails.append(f"{where}: myth phrase without a correcting frame: “{plain(s)[:90]}…”")
     grams = book_grams()
