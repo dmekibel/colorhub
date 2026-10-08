@@ -5,13 +5,17 @@
 // Screenshot mode for design review: index.html#shot=<screen> renders one screen with sample progress
 // (in memory only; nothing is saved). Used by tools/shots.sh. It waits for the whole wiki first.
 const SHOT = location.hash.startsWith("#shot=") ? decodeURIComponent(location.hash.slice(6)) : null;
-if (SHOT) loadWiki().then(() => shot(SHOT));
-else {
+// Start once every script is in: js/artwiki.js, article.js, looks.js and friends load after this file, and a
+// first-load address like #/painter/<slug> or #/hub/<id> fell back to Home without them.
+function bootStart() {
+  if (SHOT) return loadWiki().then(() => shot(SHOT));
   ROUTE_REPLACE = true;   // the first screen takes over the page's own history entry
   // Home (the honeycomb) is the floor of the app (DESIGN-SYSTEM.md §2) and the default landing place, not a tab.
   if (!openRoute(location.hash, true)) S.placed ? hmHome() : welcome();
   prefetchWiki();
 }
+if (document.readyState === "loading") addEventListener("DOMContentLoaded", bootStart, { once: true });
+else bootStart();
 
 function shot(name) {
   S = Object.assign(fresh(), { placed: { tier: 2, at: today() }, done: { "t2-blues": today() }, profileAsked: true });

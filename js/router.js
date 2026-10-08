@@ -113,6 +113,10 @@ const ROUTED = [["colorPage", (n, tapped) => n && n.id ? routed(n.title, nodeRou
   ["openSavedPalette", id => routed("Your palette", "studio/palette/" + id)],   // js/studio.js
   ["arHubPage", id => id ? routed(arPretty(id), "hub/" + id) : null], ["arWhichPage", name => name ? routed(arPretty(name), "which/" + name) : null]];   // js/article.js: #/hub/<id>, #/which/<name>
 ROUTED.forEach(([name, f]) => routeWrap(window, name, f));
+// Screens from scripts that load after this file (js/artwiki.js, article.js, looks.js…) don't exist yet: wrap them
+// once every script is in (boot.js starts on the same event, after this), or they never get an address.
+const ROUTED_LATE = ROUTED.filter(([name]) => typeof window[name] !== "function");
+addEventListener("DOMContentLoaded", () => ROUTED_LATE.forEach(([name, f]) => routeWrap(window, name, f)), { once: true });
 routeWrap(LAB, "harmony", () => routed("Harmony", "lab/harmony"));
 routeWrap(LAB, "contrast", () => routed("Albers", "lab/contrast"));
 

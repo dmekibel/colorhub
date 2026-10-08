@@ -494,7 +494,18 @@ function arWhichDraw(name, push, art) {
   return arShell(`<div class="ar-hubband ar-flat">${arBack()}</div>
     <h1 class="ar-hubt">Which <em>${esc(title)}</em>?</h1>
     <p class="ar-hubd">${esc((ent && ent.dek) || "Several colors go by this name. Each one opens its own page.")}</p>
-    <div class="ar-plates">${list.map(c => `<button type="button" class="ar-plate" style="--c:${c.h}" data-ink="${ink(c.h)}" data-ar-open="${esc(c.slug)}"><i hidden></i><b>${esc(c.n)}</b>${c.gloss ? `<span>${esc(c.gloss)}</span>` : ""}</button>`).join("")}</div>`, "ar-which");
+    <div class="ar-plates">${list.map((c, i) => `<button type="button" class="ar-plate" style="--c:${c.h}" data-ink="${ink(c.h)}" data-ar-open="${esc(c.slug)}"><i hidden></i><b>${esc(c.n)}</b>${c.gloss ? `<span>${esc(c.gloss)}</span>` : ""}${arWhichDiff(c, i ? list[0] : null)}</button>`).join("")}</div>`, "ar-which");
+}
+// every sense says how it differs from the main one (CLAUDE.md: "every color gets a line on how it differs"),
+// measured, e.g. "Lighter and bluer than lavender."
+function arWhichDiff(c, main) {
+  if (!main || typeof colorDiff !== "function" || typeof MORE === "undefined") return "";
+  try {
+    const p = colorDiff(c.h, main.h).slice(0, 2).filter(x => MORE[x.w]);
+    if (!p.length) return `<em>Almost the same as ${esc(main.n.toLowerCase())}.</em>`;
+    const w = MORE[p[0].w] + (p[1] ? " and " + MORE[p[1].w] : "");
+    return `<em>${esc(w.charAt(0).toUpperCase() + w.slice(1))} than ${esc(main.n.toLowerCase())}.</em>`;
+  } catch (e) { return ""; }
 }
 function arWhichPage(name, push = true) {
   if (AR_HUBS && (arWhichEntry(AR_WHICH, name) || arWhichEntry(AR_HUBS, name))) { arWhichDraw(name, push, null); return; }
