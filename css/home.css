@@ -88,12 +88,6 @@
 .hm-look-sunflower{background:conic-gradient(from -20deg,#D9654F,#E7C35C,#4C9F70,#4C7FD1,#8C5AC2,#D9654F)}
 .hm-look-globe{background:radial-gradient(circle at 32% 28%,#F3EFE4,#4C7FD1 45%,#1B2740 85%)}
 .hm-look-magnifier{background:radial-gradient(circle at 50% 50%,#F3EFE4 0%,#E7C35C 30%,#4C9F70 58%,#2E3B52 100%)}
-.hm-look-sliders{margin-top:0}
-.hm-look-sliders .hm-tweak-row{height:32px;margin-top:0;border-top:none;border-bottom:1px solid var(--rule);grid-template-columns:92px 1fr 36px;display:grid;gap:8px;align-items:center;font:inherit}
-.hm-look-sliders .hm-tweak-row span{font:500 9.5px/1.2 var(--mono);letter-spacing:.03em;color:var(--soft)}
-.hm-look-sliders .hm-tweak-row input{width:100%;accent-color:var(--ink)}
-.hm-look-sliders .hm-tweak-row b{text-align:right;font:500 10px/1 var(--mono);color:var(--faint)}
-.hm-look-panel [data-lab-open]{margin-top:8px;font-size:12.5px}
 
 /* ---------- the Tweak panel: a compact, opaque, non-modal sheet over the live honeycomb (home + #/lab/honey) ---------- */
 .hm-tweak-panel{position:fixed;left:0;right:0;bottom:0;z-index:30;max-width:540px;margin:0 auto;height:45dvh;max-height:420px;

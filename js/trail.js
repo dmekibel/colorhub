@@ -10,7 +10,7 @@
 //    it) is xBack(): one step, scroll restored (core.js SCROLL_BY_HASH). Each page's own back closure is bypassed.
 //  - Long-press ‹ opens the trail sheet: where you've been, newest first, with a picture of each; tap one to jump.
 //  - Every inner page gets a second control, top-right: the map glyph, straight to the honeycomb with its pan
-//    and zoom kept (honey.js HONEY_PAN). A pull down from the top of a page goes to wherever the trail started.
+//    and zoom kept (honey.js HONEY_PAN). A pull down from the top of a page goes one step back.
 //  - The trail lives in sessionStorage, so a reload keeps it.
 // core.js show() calls tlNote() for every screen; router.js routeWrap() calls tlCallNote() for every addressed one.
 
@@ -19,6 +19,7 @@ const TL_REPLAY = new Map();   // "r:" token -> the call that drew it
 let TL_CALL = null;            // the addressed screen call in progress: { run, t }
 let TL_PREV = "";              // the trail as it stood at the previous screen
 let TL_KEEP = null;            // a replay that must not lose the trail behind it: { stack, root, t }
+let TL_MAPKEEP = null;         // a page lit its colors on the map (csOnMap): the trail stays behind the map so the lit set can return: { stack, root, t }
 let TL_SUPPRESS = 0;           // the click that ends a long press must not also go back
 let TL_BOOTED = false;
 const TL_KEY = "colorhub-trail";
@@ -75,6 +76,11 @@ function tlNote(el, tab, backNav) {
   if (el.classList.contains("waiting")) { TL_CALL = call; return; }
   if (TL_KEEP) { if (performance.now() - TL_KEEP.t < 4000) { XSTACK = TL_KEEP.stack; X_ROOT = TL_KEEP.root; } TL_KEEP = null; }
   if (!TL_BOOTED) { TL_BOOTED = true; tlRestore(); }
+  // the map opened BY a page (a painting's colors lit on it): the trail stays, so the lit set can go back to its source
+  if (el.classList.contains("hm") && TL_MAPKEEP) {
+    const k = TL_MAPKEEP; TL_MAPKEEP = null;
+    if (performance.now() - k.t < 4000 && k.stack.length) { XSTACK = k.stack; X_ROOT = k.root; TL_UNDER = null; TL_PREV = ""; tlSave(); return; }
+  }
   // a room or the map is where a trail starts: nothing behind it, and it's where the trail returns when it runs out
   if (tab || el.classList.contains("hm")) { XSTACK = []; X_ROOT = tab || "home"; TL_UNDER = null; TL_PREV = ""; tlSave(); return; }
   const back = tlBackBtn(el);
@@ -120,8 +126,8 @@ function tlDecorate(el) {
     hd.classList.add("tl-x");
   }
   back.setAttribute("aria-description", "Hold to see your trail");
-  // pull down from the top: back to where this trail started (not on full-screen tools, whose drags are their own)
-  if (!el.classList.contains("fixed") && typeof hmPullClose === "function") hmPullClose(el, tlToOrigin);
+  // pull down from the top: one step back, like closing a sheet (not on full-screen tools, whose drags are their own)
+  if (!el.classList.contains("fixed") && typeof hmPullClose === "function") hmPullClose(el, () => { if (el.dataset.tl) xBack(); else tlToOrigin(); });
 }
 
 // ---------- going back, jumping, exiting ----------
@@ -134,6 +140,12 @@ function tlBackUnder() {
   TL_UNDER = null; XSTACK = u.stack; X_ROOT = u.root; BACK_RENDER = true;
   xStep(XSTACK[XSTACK.length - 1]);
   return true;
+}
+// the trail kept behind the map (csOnMap): its newest page, for the lit-set pill's back arrow
+function tlMapBack() {
+  const tok = XSTACK[XSTACK.length - 1]; if (!tok) return null;
+  const m = TL_META.get(tok);
+  return { title: (m && m.title) || "", go: () => tlJump(XSTACK.length - 1) };
 }
 function tlJump(i) {
   if (i < 0 || i >= XSTACK.length) return;
@@ -220,6 +232,23 @@ function tlThumb(m) {
   if (m.sw && m.sw.length) return `<span class="tl-th tl-th-sw">${m.sw.map(h => `<i style="background:${h}"></i>`).join("")}</span>`;
   return `<span class="tl-th tl-th-none"></span>`;
 }
+// a row whose page was never captured (it left before its screen was measured): the real title from what the token names,
+// never a generic "A page you opened"
+function tlMetaFor(tok) {
+  const m = TL_META.get(tok); if (m && m.title) return m;
+  let title = "", kind = "";
+  try {
+    const i = tok.indexOf(":"), pre = i < 0 ? tok : tok.slice(0, i), rest = i < 0 ? "" : tok.slice(i + 1);
+    if ((pre === "p" || pre === "z") && typeof graph === "function") { const n = graph().nodes.get(rest); if (n) { title = n.title || n.n || ""; kind = n.kind || ""; } }
+    else if (pre === "n") title = decodeURIComponent(rest);
+    else if (pre === "aw") title = rest.split(":").pop().replace(/[-_]+/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+    else if (pre === "ar") title = rest.split("/").pop();
+    else if (pre === "r") title = tlKind("#/" + rest);
+    else if (pre === "g") kind = "gallery";
+    else title = ({ favs: "Your colors", "favs-taste": "Your taste", chords: "Masters' chords", wheel: "Color wheel", wheelview: "Color wheel", namer: "Name any color", harmony: "Harmony", contrast: "Contrast" })[tok] || "";
+  } catch (e) {}
+  return { ...(m || {}), title: title || (kind && (TL_KIND[kind] || kind)) || "Earlier page", hash: (m && m.hash) || (kind ? "#/" + kind : "") };
+}
 const tlRow = (k, m, sub, here) => `<li><button class="tl-row${here ? " here" : ""}" data-tl-go="${k}"${here ? ' aria-current="page"' : ""}>${tlThumb(m)}<span class="tl-txt"><b>${esc(m.title || "A page")}</b><em>${esc(sub)}</em></span>${here ? "" : ICON.chev}</button></li>`;
 function tlSheet() {
   if (document.querySelector(".sheet")) return;
@@ -228,7 +257,7 @@ function tlSheet() {
   const rows = [];
   if (!onTrail && scr) rows.push(tlRow("none", tlCapture(scr), "You're here", true));
   for (let i = XSTACK.length - 1; i >= 0; i--) {
-    const tok = XSTACK[i], m = TL_META.get(tok) || { title: "A page you opened" };
+    const tok = XSTACK[i], m = tlMetaFor(tok);
     const here = onTrail && i === XSTACK.length - 1;
     rows.push(tlRow(i, m, here ? `${tlKind(m.hash)} · You're here` : tlKind(m.hash), here));
   }

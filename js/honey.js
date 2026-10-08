@@ -513,13 +513,13 @@ function honeyStudyMarks(ctx, drawn, marks, t) {
       const k = .5 + .5 * Math.sin(age / 1000 * Math.PI * 2 / 1.8);
       ctx.arc(b.x, b.y, r + 3 + 3 * k, 0, 6.2832); ctx.lineWidth = 3; ctx.strokeStyle = `rgba(239,235,227,${.55 + .4 * k})`; ctx.stroke();
     } else if (m.kind === "right") {
-      const u = Math.min(1, age / 900), e = 1 - Math.pow(1 - u, 3);
+      const u = Math.max(0, Math.min(1, age / 900)), e = 1 - Math.pow(1 - u, 3);
       ctx.arc(b.x, b.y, r + 2 + 10 * e, 0, 6.2832); ctx.lineWidth = 3 * (1 - u) + .5; ctx.strokeStyle = `rgba(154,212,174,${.95 * (1 - u)})`; ctx.stroke();
       ctx.beginPath(); ctx.arc(b.x, b.y, r + 2.5, 0, 6.2832); ctx.lineWidth = 2; ctx.strokeStyle = "rgba(154,212,174,.9)"; ctx.stroke();
     } else if (m.kind === "wrong") {
       ctx.arc(b.x, b.y, r + 2.5, 0, 6.2832); ctx.lineWidth = 1.6; ctx.setLineDash([4, 4]); ctx.strokeStyle = "rgba(240,154,134,.9)"; ctx.stroke(); ctx.setLineDash([]);
     } else if (m.kind === "true") {
-      const u = Math.min(1, age / 420);
+      const u = Math.max(0, Math.min(1, age / 420));
       ctx.arc(b.x, b.y, r + 3 + 8 * (1 - u), 0, 6.2832); ctx.lineWidth = 2.6; ctx.strokeStyle = `rgba(239,235,227,${.4 + .55 * u})`; ctx.stroke();
     } else if (m.kind === "ring") {
       ctx.arc(b.x, b.y, r + 2, 0, 6.2832); ctx.lineWidth = 1.2; ctx.strokeStyle = "rgba(239,235,227,.5)"; ctx.stroke();
@@ -805,7 +805,7 @@ function honeycomb(host, opts = {}) {
     ctx.globalAlpha = 1;
     if (ST.marks.size) honeyStudyMarks(ctx, drawn, ST.marks, t);
     if (sel) for (const b of drawn) if (b.d >= 10 && sel.isOn(b.it.o)) honeyPicked(ctx, b, shapeAmt, l.a);
-    if (famOn && !hlSet && !lay.globe) { const fa = l18FarAmount(cItemCur); if (fa > 0) honeyFamPills(ctx, drawn, W, vy(), fa * l.a); }
+    if (famOn && !hlSet && !lay.globe) { const fa = l18FarAmount(); if (fa > 0) honeyFamPills(ctx, drawn, W, vy(), fa * l.a); }
     if (ghost) {
       const a = 1 - (t - ghostT0) / 240;
       if (a > 0) { ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = a; ctx.drawImage(ghost, 0, 0); ctx.globalAlpha = 1; } else ghost.on = false;
@@ -965,9 +965,14 @@ function honeycomb(host, opts = {}) {
   // in to that bubble and centers it; the next tap (it's now the center) opens its page.
   const L18_TINY_D = 46;
   // 0 at normal zoom, 1 once the center bubble is too small for its name (a 12 px fade between, so nothing snaps)
-  function l18FarAmount(it) {
-    let cd = 0; for (const q of drawn) if (q.it === it && q.d > cd) cd = q.d;
-    return cd ? clamp((Math.max(L18_TINY_D, zc("labelMin") * 1.8) + 6 - cd) / 12, 0, 1) : 0;
+  // How far zoomed out the map is, 0..1, for the family-name pills. Measured on the typical bubble on screen, not the
+  // center one: the lens keeps the center bubble large even at the zoom-out floor, so a center-based test never
+  // reached the threshold and the pills never showed.
+  function l18FarAmount() {
+    const ds = []; for (const q of drawn) if (q.d >= 1) ds.push(q.d);
+    if (ds.length < 24) return 0;
+    ds.sort((a, b) => a - b);
+    return clamp((Math.max(L18_TINY_D, zc("labelMin") * 1.8) + 6 - ds[ds.length >> 1]) / 12, 0, 1);
   }
   function l18ZoomedOut() {
     // the center's own copy (a wrapping map repeats it; a far copy is always tiny): the biggest one on screen
@@ -1187,11 +1192,12 @@ function honeycomb(host, opts = {}) {
       }
       if (sel && p && e.type === "pointerup") { pressed = null; selSet(p.it, !sel.isOn(p.it.o)); kick(); return; }
       if (p && opts.onPeek && held >= 480) { pressed = null; kick(); return opts.onPeek(p.it.o); }
-      if (lastTap && now - lastTap.t < 300 && Math.hypot(d.x - lastTap.x, d.y - lastTap.y) < 36) {
+      // double-tap zoom is for empty space only: a tap on a bubble never waits to see whether a second one follows
+      if (!p && lastTap && now - lastTap.t < 300 && Math.hypot(d.x - lastTap.x, d.y - lastTap.y) < 36) {
         clearTimeout(tapTimer); lastTap = null; pressed = null; kick();
         return zoomTo(Z > 1.25 ? 1 : 2.1, d.x, d.y);
       }
-      lastTap = { t: now, x: d.x, y: d.y };
+      lastTap = p ? null : { t: now, x: d.x, y: d.y };
       if (p && e.type === "pointerup") {
         if (!RM && !SHOOT && cfg.alive > 0) { ripples.push({ x: p.x, y: p.y, t0: now, sigma: Math.max(22, p.b.d * .85) }); if (ripples.length > 4) ripples.shift(); }
         // centerFirst: a tap on an off-center bubble glides it to the middle; a tap on the middle one opens it.
@@ -1207,7 +1213,8 @@ function honeycomb(host, opts = {}) {
         const cb = drawn.find(q => q.it === center), cd = cb ? cb.d : p.b.d;
         const reach = Math.max(cd * .5 + p.b.d * .95, Math.min(W, vy()) * .16);
         const far = opts.centerFirst && p.it !== center && p.it !== glided && Math.hypot(p.x - W / 2, p.y - vcy()) > reach;
-        tapTimer = setTimeout(() => { pressed = null; kick(); if (far) { glided = p.it; lay.globe ? glideToGlobe(p.it) : glideTo(p.x, p.y); } else { glided = null; open(p.it, p.b); } }, far ? 0 : 220);
+        pressed = null; kick();
+        if (far) { glided = p.it; lay.globe ? glideToGlobe(p.it) : glideTo(p.x, p.y); } else { glided = null; open(p.it, p.b); }
         return;
       }
       pressed = null; kick();
@@ -1368,7 +1375,10 @@ function honeycomb(host, opts = {}) {
   function hlShowPill() {
     if (hlPill || !host.parentElement) return;
     hlPill = document.createElement("button"); hlPill.className = "cs-hl-pill"; hlPill.setAttribute("aria-label", "Show every color again");
-    hlPill.innerHTML = `<span>${esc(HONEY_HL.title || "Your set")}</span>${ICON.x}`;
+    const bk = typeof tlMapBack === "function" ? tlMapBack() : null;   // the page that lit this set is still on the trail: the arrow goes back to it
+    hlPill.innerHTML = `${bk ? `<i class="cs-hl-back" role="button" aria-label="Back to ${esc(bk.title || "the page")}">\u2039</i>` : ""}<span>${esc(HONEY_HL.title || "Your set")}</span>${ICON.x}`;
+    const bb = hlPill.querySelector(".cs-hl-back");
+    if (bb) bb.onclick = e => { e.stopPropagation(); buzz(6); honeyHighlight(null); bk.go(); };
     hlPill.onclick = e => { e.stopPropagation(); buzz(4); honeyHighlight(null); };
     host.parentElement.appendChild(hlPill);
   }

@@ -139,15 +139,7 @@ scenario("home", "View sheet: Look tab, styles and sliders", async t => {
     await t.click(s, { wait: 300 });
     t.expect(s.classList.contains("on"), `style chip "${t.text(s)}" did not turn on`);
   }
-  const sliders = t.$$(".hm-look-sliders input[type=range]");
-  t.expect(sliders.length === 4, `${sliders.length} fine-tune sliders instead of 4`);
-  for (const inp of sliders) {
-    const out = inp.parentElement.querySelector("b"), was = out.textContent, mid = (+inp.min + +inp.max) / 2;
-    inp.value = String(+inp.value === mid ? +inp.max : mid);
-    inp.dispatchEvent(new t.w.Event("input", { bubbles: true }));
-    await t.sleep(150);
-    t.expect(out.textContent !== was, `slider "${t.text(inp.parentElement.firstElementChild)}" did not update its readout`);
-  }
+  t.expect(!t.$(".hm-look-sliders, [data-lab-open]"), "the developer sliders or lab link are back in the View sheet");
   await t.click('.hm-chooser [data-tab="show"]');
   t.expect(!t.$('.hm-chooser [data-panel="show"]').hidden, "back to the Show tab did not show it");
   t.expect(H.num(t.text("[data-count]")) === n0, "looking at styles changed the item count");
@@ -382,8 +374,7 @@ scenario("train", "Gradients: teaching board then level 1 by taps", async t => {
 scenario("train", "Gradients: map and Choose mode and the daily board", async t => {
   await t.open("#shot=gx:hue:map", { settle: 600 });
   await t.waitFor(".hg-lv", 6000, "the level grid");
-  const locked0 = t.$$(".hg-lv.locked").length;
-  t.expect(locked0 > 0, "nothing is locked on a played save");
+  t.expect(t.$$(".hg-lv.locked").length === 0, "levels are locked in For you: nothing should be locked");
   await t.click("[data-mode=choose]", { wait: 500 });
   await t.waitFor("[data-diff]", 4000, "the difficulty picker");
   await t.click("[data-diff=hard]", { wait: 500 });
@@ -1251,6 +1242,18 @@ scenario("trail", "a 6-deep chain (color, painting, painter, painting, color, ge
   t.expect(!t.$(".room-sheet"), "the trail ran out into a room instead of the map");
 });
 
+scenario("trail", "a page's colors lit on the map keep the trail: the pill's ‹ returns to the page", async t => {
+  await TRL.open(t, "#/color/cobalt");
+  const h0 = TRL.hash(t), d0 = TRL.depth(t);
+  t.ev("csOnMap(colorSet({ kind: 'color', id: 'cobalt', title: 'Cobalt and kin', colors: [{ h: '#0047AB' }, { h: '#2A52BE' }, { h: '#1F3A93' }] }))");
+  await t.waitFor(".hm canvas", 12000, "the map with the set lit");
+  const back = await t.waitFor(".cs-hl-back", 6000, "the lit set's ‹ back to its page");
+  t.expect(TRL.depth(t) === d0, `the map wiped the trail: ${TRL.depth(t)} pages, was ${d0}`);
+  await t.click(back, { wait: 800 });
+  await t.waitFor(() => TRL.hash(t) === h0 && !t.$(".screen.waiting"), 12000, `back on ${h0} (on ${TRL.hash(t)})`);
+  t.expect(!t.$(".cs-hl-pill"), "the lit set's pill is still up after going back");
+});
+
 scenario("trail", "long-press ‹ shows the trail; a row jumps there; the map glyph exits with the map's pan and zoom kept", async t => {
   await TRL.open(t, "#/home");
   const cv = await t.waitFor(".hm canvas", 12000, "the map");
@@ -1316,4 +1319,68 @@ scenario("trail-links", "the Museum: its own address, the old one still works, a
   await t.waitFor(() => t.$(".screen[data-tl] [data-back]"), 10000, "a closeup on the trail");
   await t.click(TRL.screenBack(t), { wait: 700 });
   await t.waitFor(".x-feed", 10000, "Ideas again after the trail ran out (not the map, not another room)");
+});
+
+// ================================================================== STUDY THE MAP (js/mapstudy.js, v2: design/MAP-STUDY-2.md)
+// The honeycomb's hit callback (MS_DEBUG.onHit) stands in for a thumb on the canvas: the same path a real tap takes.
+const MSH = {
+  async ready(t, mode) {
+    await t.open("#/mapstudy", { settle: 500 });
+    await t.waitFor("[data-go]", 12000, "the Study the map setup");
+    if (mode) { await t.click(`[data-mode="${mode}"]`, { wait: 500 }); await t.waitFor(`[data-mode="${mode}"].on`, 8000, `${mode} chosen`); await t.waitFor("[data-go]", 8000, "the setup again"); }
+  },
+  hit: (t, n) => t.ev(`(() => { const D = MS_DEBUG, it = D.mapItems.find(x => x.n === ${JSON.stringify(n)}) || (D.P.board || []).find(x => x.n === ${JSON.stringify(n)}); D.onHit(it || { n: ${JSON.stringify(n)}, h: "#808080" }); })()`),
+};
+scenario("mapstudy", "Find it: a whole session, misses teach, the end lights the field", async t => {
+  await MSH.ready(t, "find");
+  t.expect(t.$("[data-field]"), "no field dial on the setup");
+  t.expect(!t.$('[data-mode="path"]'), "Path is still offered");
+  await t.click("[data-go]", { wait: 500 });
+  for (let i = 0; i < 40 && !t.$(".ms-end"); i++) {
+    if (t.$("[data-next]")) { await t.click("[data-next]", { wait: 350 }); continue; }
+    const P = t.ev("MS_DEBUG.P");
+    if (!P || P.answered || P.kind !== "find") { await t.sleep(300); continue; }
+    // every third round miss on purpose (a board neighbor), the rest right
+    const wrong = i % 3 === 1 && P.board && P.board.find(x => x.n !== P.t.n);
+    MSH.hit(t, wrong ? wrong.n : P.t.n); await t.sleep(wrong ? 300 : 1200);
+    if (wrong) t.expect(/is here|Next door|Warmer/.test(t.text(".ms-panel")), "a miss said nothing useful");
+  }
+  await t.waitFor(".ms-end", 8000, "the end of the session");
+  t.expect(/found so far/.test(t.text(".ms-end")), "the end doesn't say how much of the field is found");
+  await t.click("[data-setup]", { wait: 500 });
+  await t.waitFor("[data-go]", 8000, "back to the setup");
+});
+scenario("mapstudy", "Name it, Neighborhood and Wander all play; Choose shows both dials", async t => {
+  await MSH.ready(t, "name");
+  await t.click("[data-go]", { wait: 600 });
+  const opt = await t.waitFor(".ms-opt", 8000, "name options");
+  t.expect(t.$$(".ms-opt").length >= 3 && t.$$(".ms-opt").length <= 6, `${t.$$(".ms-opt").length} name options`);
+  await t.click(opt, { wait: 400 });
+  t.expect(t.$(".ms-res"), "picking a name gave no result");
+  await t.click("[data-close]", { wait: 600 });
+  await MSH.ready(t, "hood");
+  await t.click("[data-go]", { wait: 700 });
+  const P = t.ev("MS_DEBUG.P"); t.expect(P && P.kind === "hood", "no neighborhood");
+  MSH.hit(t, P.list[0].n); await t.sleep(300);
+  const ho = await t.waitFor(".ms-hood-opts .ms-opt", 5000, "the ring's names to match");
+  await t.click(ho, { wait: 400 });
+  t.expect(t.ev("MS_DEBUG.P.done.size") === 1, "matching a name didn't count");
+  await t.click("[data-reveal]", { wait: 500 });
+  await t.waitFor(".ms-end", 5000, "the corner's end");
+  await t.click("[data-setup]", { wait: 500 });
+  await t.click('[data-mode="wander"]', { wait: 500 });
+  await t.click("[data-go]", { wait: 600 });
+  const a = t.ev("MS_DEBUG.mapItems[0].n"), b = t.ev("MS_DEBUG.mapItems[3].n");
+  MSH.hit(t, a); await t.sleep(250); MSH.hit(t, b); await t.sleep(300);
+  t.expect(/than/.test(t.text(".ms-panel")), "wander didn't compare two colors");
+  await t.click(".ms-panel [data-setup]", { wait: 500 });
+  await t.click('[data-mode="find"]', { wait: 500 });
+  await t.click('[data-dm="pick"]', { wait: 400 });
+  const hr = await t.waitFor("[data-help]", 4000, "the Pick from dial under Choose");
+  t.ev(`(() => { const h = document.querySelector("[data-help]"); h.value = 6; h.dispatchEvent(new Event("input")); h.dispatchEvent(new Event("change")); const f = document.querySelector("[data-field]"); f.value = 3; f.dispatchEvent(new Event("input")); f.dispatchEvent(new Event("change")); })()`);
+  await t.sleep(800);
+  await t.waitFor("[data-go]", 8000, "the setup after moving the dials");
+  t.expect(t.ev("S.mapstudy.spec.level") === 25 && t.ev("S.mapstudy.spec.help") === 6, `the dials didn't save (${t.ev("JSON.stringify(S.mapstudy.spec)")})`);
+  t.expect(t.$("[data-test]"), "no test-out under Choose");
+  await t.click('[data-dm="you"]', { wait: 300 });
 });

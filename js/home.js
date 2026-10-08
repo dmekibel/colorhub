@@ -58,6 +58,7 @@ function hmView() {   // the saved view, upgrading the old single "set" id
     h.src = /^stage:\d+$/.test(old || "") ? old : old && hmSet(old) && !["101", "learned", "learning", "notmet"].includes(old) ? old : "stage:100";
     h.filter = { learned: "learned", learning: "learning", notmet: "new" }[old] || "all";
   }
+  if (h.src === "all") h.src = "every-name";   // the old "Every name" collection is the stage chip now: one entry, one count
   if (!/^stage:\d+$/.test(h.src) && !HM_EVERY.includes(h.src) && !hmSet(h.src)) h.src = "stage:100";
   h.filter = HM_KEEP[h.filter] ? h.filter : "all"; h.style = HONEY_STYLES[h.style] ? h.style : "original";
   return h;
@@ -289,15 +290,9 @@ function hmHome() {
 
   // ---------- title: tap for the full chooser, swipe for the four quick views ----------
   // Two tabs in one sheet (David: "being able to SEE the effect while choosing"): "Show" (what — stage/filter/
-  // collection, can be tall and scroll) and "Look" (how it looks — the 5 styles as small chips, plus Fine-tune's
-  // 4 sliders, capped compact with no scroll so the honeycomb above it stays visible live). Either way the
+  // collection, can be tall and scroll) and "Look" (how it looks — the 5 styles as small chips and the map-edge toggles; the lab sliders live at #/lab/honey only,
+  // kept compact so the honeycomb above it stays visible live). Either way the
   // honeycomb recenters into whatever's left visible above the sheet (ctrl.setInset) and settles back when it closes.
-  const HM_FINE_SPECS = [
-    { key: "m0", label: "Center size", min: 1.2, max: 6, step: .05 },
-    { key: "gap", label: "Gap", min: 0, max: .45, step: .01 },
-    { key: "shape", label: "Shape", min: 0, max: 1, step: .02 },
-    { key: "alive", label: "Alive", min: 0, max: 2, step: .1 },
-  ];
   async function chooser(initialTab) {
     buzz(4);
     if (!LONG_NAMES || !CORE_NAMES || !SHADES) { await Promise.all([loadLongNames(), loadCoreNames(), loadShades()]); if (!el.isConnected || document.querySelector(".sheet")) return; }
@@ -305,12 +300,10 @@ function hmHome() {
     const everyNameCount = hmEveryNameItems().length, shadeCount = (SHADES || []).length;
     const seg = (key, opts) => `<div class="hm-seg" data-key="${key}">${opts.map(([id, label]) => `<button class="${v[key] === id ? "on" : ""}" data-val="${id}">${esc(label)}</button>`).join("")}</div>`;
     const groups = {};
-    COLOR_SETS.forEach(s => { if (["101", "learned", "learning", "notmet"].includes(s.id)) return; (groups[s.group] = groups[s.group] || []).push(s); });
+    COLOR_SETS.forEach(s => { if (["101", "all", "learned", "learning", "notmet"].includes(s.id)) return; (groups[s.group] = groups[s.group] || []).push(s); });
     const collHtml = Object.entries(groups).map(([g, list]) => `
-      <div class="cx-sec hm-sub"><b>${esc(g)}</b></div>
+      ${g === "Collections" ? "" : `<div class="cx-sec hm-sub"><b>${esc(g)}</b></div>`}
       <div class="cx-chips">${list.map(s => `<button class="cx-chip${v.src === s.id ? " on" : ""}" data-src="${s.id}">${cxDots(dotsFor(s))}<b>${esc(s.title)}</b></button>`).join("")}</div>`).join("");
-    const cfgNow = ctrl ? ctrl.getCfg() : null, tweakNow = (cfgNow && cfgNow.tweak) || {}, resolvedNow = (cfgNow && cfgNow.resolved) || HONEY_CFG_BASE;
-    const twVal = k => tweakNow[k] != null ? tweakNow[k] : resolvedNow[k];
     const { sh, close } = sheet(`<div class="cx-sh hm-chooser">
       <div class="hm-chooser-top"><h3 class="title-2">View</h3><span class="hm-chooser-acts">
         <button class="iconq" data-search aria-label="Search">${ICON.search}</button>
@@ -320,23 +313,20 @@ function hmHome() {
       <div class="hm-tabs" data-tabs><button class="on" data-tab="show">Show</button><button data-tab="look">Look</button></div>
       <p class="hm-count" data-count></p>
       <div class="hm-tab-panel" data-panel="show">
-        <div class="cx-sh-head"><h3>What to show</h3></div>
-        <div class="cx-sec"><b>Stage</b><span>the colors each stage of the path teaches</span></div>
+        <div class="cx-sec"><b>Stage</b></div>
         <div class="cx-chips hm-stages">${HM_STAGES.map((n, i) => `<button class="cx-chip${v.src === "stage:" + n ? " on" : ""}" data-src="stage:${n}"><b>${i + 1}</b><em>${n.toLocaleString()}</em></button>`).join("")}
           <button class="cx-chip${v.src === "every-name" ? " on" : ""}" data-src="every-name"><b>Name</b><em>${everyNameCount.toLocaleString()}</em></button>
           ${shadeCount ? `<button class="cx-chip${v.src === "every-shade" ? " on" : ""}" data-src="every-shade"><b>Shade</b><em>${(everyNameCount + shadeCount).toLocaleString()}</em></button>` : ""}</div>
-        <div class="cx-sec"><b>Show</b><span>from your own reviews</span></div>
+        <div class="cx-sec"><b>Show</b></div>
         ${seg("filter", HM_FILTERS)}
-        <div class="cx-sec"><b>Or a collection</b><span>instead of a stage</span></div>
+        <div class="cx-sec"><b>Or a collection</b></div>
         ${collHtml}
       </div>
       <div class="hm-tab-panel hm-look-panel" data-panel="look" hidden>
         <div class="hm-look-row">${HM_HOME_STYLES.map(id => `<button class="hm-look-chip${v.style === id ? " on" : ""}" data-style="${id}"><i class="hm-look-ic hm-look-${id}"></i><b>${esc((HONEY_STYLES[id] || {}).title || id)}</b></button>`).join("")}</div>
-        <div class="cx-sec hm-l18-sec"><b>Zoomed out</b><span>name each family's region</span></div>
+        <div class="cx-sec hm-l18-sec"><b>Zoomed out</b></div>
         <div class="hm-seg hm-l18-fam" data-l18-fam aria-label="Zoomed out">${[["", "Just colors"], ["1", "Family names"]].map(([k, l]) => `<button class="${!!S.hm.famNames === !!k ? "on" : ""}" data-fam="${k}">${l}</button>`).join("")}</div>
         <div class="hm-seg hm-l18-fam" aria-label="Map edges">${[["", "One map"], ["1", "Endless"]].map(([k, l]) => `<button class="${!!S.hm.endless === !!k ? "on" : ""}" data-endless="${k}">${l}</button>`).join("")}</div>
-        <div class="hm-look-sliders">${HM_FINE_SPECS.map(s => `<label class="hm-tweak-row" data-key="${s.key}"><span>${s.label}</span><input type="range" min="${s.min}" max="${s.max}" step="${s.step}" value="${twVal(s.key)}"><b>${(+twVal(s.key)).toFixed(2)}</b></label>`).join("")}</div>
-        <button class="link" data-lab-open>Rate every preset (honeycomb lab) →</button>
       </div>
     </div>`);
     sh.classList.add("cx-sheet", "hm-sheet-panel");
@@ -368,22 +358,9 @@ function hmHome() {
       const f = hmView().filter, fl = (HM_FILTERS.find(x => x[0] === f) || [])[1];
       p.textContent = `${items.length.toLocaleString()} color${items.length === 1 ? "" : "s"} on the honeycomb${f !== "all" ? ` · ${fl} only` : ""}`;
     }
-    const syncFineSliders = () => sh.querySelectorAll(".hm-look-sliders .hm-tweak-row").forEach(row => {
-      const k = row.dataset.key, input = row.querySelector("input"), out = row.querySelector("b"), c = ctrl ? ctrl.getCfg() : null;
-      const val = c ? (c.tweak && c.tweak[k] != null ? c.tweak[k] : c.resolved[k]) : +input.value;
-      input.value = val; out.textContent = (+val).toFixed(2);
-    });
     sh.querySelectorAll(".hm-look-chip").forEach(b => b.onclick = () => {
       applyView("style", b.dataset.style); sh.querySelectorAll(".hm-look-chip").forEach(x => x.classList.toggle("on", x === b));
       if (ctrl && ctrl.style) { ctrl.style(b.dataset.style, false); const tw2 = hmTweakFor(b.dataset.style); if (tw2 && ctrl.tweak) ctrl.tweak(tw2); }
-      syncFineSliders();
-    });
-    sh.querySelectorAll(".hm-look-sliders .hm-tweak-row").forEach(row => {
-      const k = row.dataset.key, input = row.querySelector("input"), out = row.querySelector("b");
-      input.addEventListener("input", () => {
-        const val = +input.value; out.textContent = val.toFixed(2);
-        if (ctrl) { hmSetTweak(ctrl.getStyle(), { [k]: val }); ctrl.tweak({ [k]: val }); }
-      });
     });
     // zoomed out: just the colors (default), or family names over each region (L18 H1)
     sh.querySelectorAll("[data-endless]").forEach(b => b.onclick = () => {
@@ -393,7 +370,6 @@ function hmHome() {
       applyView("famNames", !!b.dataset.fam); sh.querySelectorAll("[data-fam]").forEach(x => x.classList.toggle("on", x === b));
       if (ctrl && ctrl.famNames) ctrl.famNames(S.hm.famNames);
     });
-    sh.querySelector("[data-lab-open]").onclick = () => { close(); labHoney(); };
     sh.querySelector("[data-search]").onclick = () => { close(); openSearch(); };
     const nmBtn = sh.querySelector("[data-namer]"); if (nmBtn) nmBtn.onclick = () => { close(); XSTACK = []; X_ROOT = "home"; LAB.namer(); };   // Name any color (js/namer.js)
     sh.querySelector("[data-surprise]").onclick = () => { close(); hmDice(); };
