@@ -36,6 +36,9 @@ const ptNth = n => { const s = ["th", "st", "nd", "rd"], v = n % 100; return n +
 const ptTolWord = t => t === 0 ? "exactly this color" : `within ${t}%`;
 const ptCoverWord = (m, mx) => mx ? `between ${m}% and ${mx}% of the painting` : m <= .05 ? "even a single speck" : m >= 50 ? "half the painting or more" : `at least ${m}% of the painting`;
 const ptTolShort = t => t === 0 ? "Exact" : t + "%";
+const ptAutoFor = (hexes, st) => ciAuto(hexes, st, PT_TOL, PT_MIN);
+// a tile for a fallback ("closest in the archive") row
+const ptNearBadge = r => ciNearWords(r);
 function ptNear(hex) { const n = nameOf(hex); return n.de < VERY_CLOSE_DE ? n.n : n.text; }
 
 // ---------- the edge of the range: the colors exactly `tol` away in six directions ----------
@@ -73,6 +76,7 @@ function ptSliders(host, state, onChange, o = {}) {
       <input class="pt-range" type="range" min="0" max="${PT_MIN.length - 1}" step="1" aria-label="How much of the painting">
       <div class="pt-chips">${PT_PRE_MIN.map(([t, v, mx]) => `<button data-pre-min="${v}" data-pre-max="${mx || ""}">${t}</button>`).join("")}</div>
     </div>
+    ${o.auto ? `<button class="pt-auto" data-pt-auto aria-label="Set both sliders to the tightest values that still show 12 paintings">Auto<small>the tightest setting that still shows 12</small></button>` : ""}
     ${o.noCount ? "" : `<p class="pt-count" data-count aria-live="polite"></p>`}
   </div>`;
   const [rt, rm] = host.querySelectorAll(".pt-range"), $ = q => host.querySelector(q);
@@ -94,6 +98,9 @@ function ptSliders(host, state, onChange, o = {}) {
   rt.addEventListener("input", () => { const t = PT_TOL[+rt.value]; if (t !== state.tol) { state.tol = t; buzz(3); fire(); } });
   rm.addEventListener("input", () => { const m = PT_MIN[+rm.value]; if (m !== state.minCover || state.maxCover) { state.minCover = m; state.maxCover = null; buzz(3); fire(); } });
   host.addEventListener("click", e => {
+    const au = e.target.closest("[data-pt-auto]");
+    if (au && o.auto) { au.classList.add("busy"); o.auto(state).then(s => { au.classList.remove("busy"); Object.assign(state, s); buzz(8); fire(); au.classList.add("on"); }).catch(() => au.classList.remove("busy")); return; }
+    host.querySelectorAll("[data-pt-auto]").forEach(x => x.classList.remove("on"));
     const a = e.target.closest("[data-pre-tol]"), b = e.target.closest("[data-pre-min]");
     if (a) { state.tol = +a.dataset.preTol; buzz(6); fire(); }
     if (b) { state.minCover = +b.dataset.preMin; state.maxCover = +b.dataset.preMax || null; buzz(6); fire(); }
@@ -141,23 +148,23 @@ function paintingsOfSection(hex, host, o = {}) {
       if (my !== seq || !host.isConnected) return;
       const lead = host.querySelector("[data-pt-lead]"), all = host.querySelector("[data-pt-all]");
       const words = `${ptTolWord(st.tol)}, ${ptCoverWord(st.minCover, st.maxCover)}`;
-      if (tuner) tuner.count(res.count ? `<b>${ptNum(res.count)}</b> ${res.count === 1 ? "painting" : "paintings"} ${words}` : `Nothing at this setting.`);
-      if (!res.count) {
-        lead.innerHTML = `No painting has ${esc(name.toLowerCase())} ${esc(words)}.`;
-        paintingsFor(hex, { ...st, tol: Math.max(st.tol, 6), minCover: Math.min(st.minCover, 1), maxCover: null }).then(loose => {
-          if (my !== seq || !host.isConnected) return;
-          rail.innerHTML = loose.count ? `<button class="btn ghost gl-all" data-pt-loosen>${ptNum(loose.count)} paintings are within ${Math.max(st.tol, 6)}% and cover 1% ${ICON.arrow}</button>` : `<p class="fine">Nothing in the gallery comes near this color.</p>`;
-          host.querySelector("[data-pt-loosen]") && (host.querySelector("[data-pt-loosen]").onclick = () => { Object.assign(st, { tol: Math.max(st.tol, 6), minCover: Math.min(st.minCover, 1), maxCover: null }); ptSave(st); if (tuner) tuner.set(st); refresh(); });
-        });
-        all.hidden = true;
-        return;
-      }
-      lead.innerHTML = `<b>${ptNum(res.count)}</b> ${res.count === 1 ? "painting" : "paintings"} ${esc(words)} (${res.count / res.n * 100 < 1 ? "under 1" : Math.round(res.count / res.n * 100)}% of ${ptNum(res.n)}).`;
-      const top = res.rows.slice(0, 8);
-      rail.innerHTML = top.map(r => glPinHTML(r.i, { badge: `${ptPct(r.cover)} of the canvas` })).join("");
-      glFill(rail);
-      rail._rows = top;
-      all.hidden = false; all.innerHTML = `See all ${ptNum(res.count)} ${ICON.arrow}`;
+      if (tuner) tuner.count(res.count ? `<b>${ptNum(res.count)}</b> ${res.count === 1 ? "painting" : "paintings"} ${words}` : `Nothing at this setting: showing the closest.`);
+      const tail = res.count >= 12 ? Promise.resolve({ rows: [] }) : ciClosest([hex], res, { max: 24 });
+      tail.then(cl => {
+        if (my !== seq || !host.isConnected) return;
+        if (!res.count) {
+          const best = cl.rows[0];
+          lead.innerHTML = `Nothing is ${esc(words)} for ${esc(name.toLowerCase())}, so here are the closest paintings in the archive, best first.${best ? ` The best: ${esc(ciNearWords(best))}, as photographed.` : ""}`;
+        } else {
+          lead.innerHTML = `<b>${ptNum(res.count)}</b> ${res.count === 1 ? "painting" : "paintings"} ${esc(words)} (${res.count / res.n * 100 < 1 ? "under 1" : Math.round(res.count / res.n * 100)}% of ${ptNum(res.n)}).${res.count < 12 ? " The closest others follow." : ""}`;
+        }
+        const top = res.rows.slice(0, 8), more = cl.rows.slice(0, Math.max(0, 8 - top.length));
+        rail.innerHTML = top.map(r => glPinHTML(r.i, { badge: `${ptPct(r.cover)} of the canvas` })).join("")
+          + more.map(r => glPinHTML(r.i, { badge: `${ptPct(r.cover)} within ${r.tc}%` })).join("");
+        glFill(rail);
+        rail._rows = top.concat(more);
+        all.hidden = false; all.innerHTML = res.count ? `See all ${ptNum(res.count)} ${ICON.arrow}` : `See the closest ${ICON.arrow}`;
+      }).catch(() => { if (my === seq && host.isConnected) rail.innerHTML = `<p class="fine">The paintings didn't load. <button class="wl" data-pt-retry>Try again</button></p>`; });
     }).catch(() => { if (my === seq && host.isConnected) host.querySelector("[data-pt-rail]").innerHTML = `<p class="fine">The paintings didn't load. <button class="wl" data-pt-retry>Try again</button></p>`; });
   };
   const start = () => {
@@ -178,7 +185,7 @@ function paintingsOfSection(hex, host, o = {}) {
       const box = host.querySelector("[data-pt-tuner]");
       box.hidden = !box.hidden;
       host.querySelector("[data-pt-tune]").textContent = box.hidden ? "Fine-tune" : "Done";
-      if (!box.hidden && !tuner) { tuner = ptSliders(box, st, () => { ptSave(st); refresh(); }, { hex }); refresh(); }
+      if (!box.hidden && !tuner) { tuner = ptSliders(box, st, () => { ptSave(st); refresh(); }, { hex, auto: s => ptAutoFor([hex], s) }); refresh(); }
       return;
     }
     const pair = e.target.closest("[data-pt-pair]");
@@ -264,14 +271,24 @@ function paintingsOfPage(hexes, o = {}) {
     el.querySelector("[data-sortrow]").hidden = st.mode === "palette";
   };
   const tile = (r) => {
+    if (r.near) return r.src === "paintings" ? glPinHTML(r.i, { badge: ptNearBadge(r) }) : tile({ ...r, near: false });
     if (r.src === "paintings") return glPinHTML(r.i, { badge: st.mode === "palette" ? `${Math.round(r.score * 100)}% match` : st.mode === "all" && hexes.length > 1 ? `${ptPct(r.cover)} of the canvas, least of the set` : `${ptPct(r.cover)} of the canvas` });
     const def = CI_SOURCES[r.src]; return def && def.pin ? def.pin(r, st) : `<span class="pt-tile"><b>${esc(def ? def.label : "Item")} ${r.i + 1}</b></span>`;
   };
   const paint = (more) => {
     const host = el.querySelector("[data-results]");
     if (!more) { shown = 0; host.innerHTML = `<div class="masonry pt-masonry"><div></div><div></div></div><button class="btn ghost gl-all" data-more hidden></button>`; host._h = [0, 0]; }
-    const cols = host.querySelectorAll(".masonry > div"), next = rows.slice(shown, shown + PAGE);
+    let cols = host.querySelectorAll(".masonry > div:not(.pt-nearhead)"), next = rows.slice(shown, shown + PAGE);
+    if (!more) host._near = false;
     next.forEach(r => {
+      if (r.near && !host._near) {
+        host._near = true;
+        const sep = document.createElement("div");
+        sep.className = "pt-closest";
+        sep.innerHTML = `<h3>Closest in the archive</h3><p class="fine">${lastRes && lastRes.count ? `Only ${ptNum(lastRes.count)} ${lastRes.count === 1 ? "painting passes" : "paintings pass"} these sliders. These come nearest, best first, with their honest numbers (as photographed).` : "Nothing passes these sliders, so every painting is ranked by how much of this color it holds, best first (as photographed)."}</p><div class="masonry pt-masonry"><div></div><div></div></div>`;
+        host.insertBefore(sep, host.querySelector("[data-more]"));
+        cols = sep.querySelectorAll(".masonry > div"); host._h = [0, 0];
+      }
       const k = host._h[0] <= host._h[1] ? 0 : 1; host._h[k] += (r.src === "paintings" ? glAR(r.i) : 1) + .3;
       cols[k].insertAdjacentHTML("beforeend", tile(r));
     });
@@ -300,7 +317,6 @@ function paintingsOfPage(hexes, o = {}) {
       if (s.earliest) glDetail(s.earliest.i).then(d => { const e = body.querySelector("[data-early]"); if (e) e.textContent = d.t + (d.a ? ", " + d.a : ""); }).catch(() => {});
     });
   };
-  let autoWiden = true;   // the first empty result opens at the nearest setting that finds paintings, once
   const run = () => {
     const my = ++seq;
     ptSync();
@@ -310,24 +326,21 @@ function paintingsOfPage(hexes, o = {}) {
       lastRes = res; rows = res.rows;
       const names = hexes.map(nm);
       el.querySelector("[data-finding]").textContent = ciFinding(names, res, null);
-      if (!res.count) {
-        // an empty result teaches: what would find something
-        paintingsWith(hexes, { ...st, tol: Math.max(st.tol, 6), minCover: Math.min(st.minCover, 1), maxCover: null }).then(loose => {
-          if (my !== seq) return;
-          if (autoWiden && loose.count) { autoWiden = false; Object.assign(st, { tol: Math.max(st.tol, 6), minCover: Math.min(st.minCover, 1), maxCover: null }); if (tuner) tuner.set(st); return run(); }
-          const host = el.querySelector("[data-results]");
-          host.innerHTML = loose.count ? `<p class="fine">Nothing at this setting.</p><button class="btn ghost gl-all" data-loosen>${ptNum(loose.count)} ${loose.count === 1 ? "painting is" : "paintings are"} within ${Math.max(st.tol, 6)}% and cover 1% ${ICON.arrow}</button>` : `<p class="fine">No painting in the gallery holds ${hexes.length > 1 ? "all of these" : "this color"}, even loosely. ${hexes.length > 1 ? "Try “Any”, or remove a color." : ""}</p>`;
-        });
-        el.querySelector("[data-stats]").hidden = true;
-        return;
-      }
-      paint(false); stats(res);
+      const done = cl => {
+        if (my !== seq || !el.isConnected) return;
+        rows = res.rows.concat(cl.rows);
+        if (!rows.length) { el.querySelector("[data-results]").innerHTML = `<p class="fine">The archive has nothing to rank for this color. Try “Any”, or remove a color.</p>`; el.querySelector("[data-stats]").hidden = true; return; }
+        if (!res.count) { const b = cl.rows[0]; el.querySelector("[data-finding]").textContent = `Nothing passes these sliders. The best in the archive: ${ciNearWords(b)}.`; }
+        paint(false); stats(res);
+      };
+      if (res.count >= 12) return done({ rows: [] });
+      return ciClosest(hexes, res, { max: 60 }).then(done);
     }).catch(() => { if (my === seq && el.isConnected) el.querySelector("[data-results]").innerHTML = `<p class="fine">The paintings didn't load. <button class="wl" data-retry>Try again</button></p>`; });
   };
   const ptSync = () => ptSyncURL(hexes, st);
   const sliderHost = el.querySelector("[data-sliders]");
   const tune = () => {
-    tuner = ptSliders(sliderHost, st, () => { autoWiden = false; ptSave(st); run(); }, { hex: hexes.length === 1 ? hexes[0] : null, noCount: true });
+    tuner = ptSliders(sliderHost, st, () => { ptSave(st); run(); }, { hex: hexes.length === 1 ? hexes[0] : null, noCount: true, auto: s => ptAutoFor(hexes, s) });
   };
   // source switch: only the sources that exist
   ciAvailable().then(keys => {
@@ -342,8 +355,6 @@ function paintingsOfPage(hexes, o = {}) {
     if (g) return galleryPage(+g.dataset.gi, true, hexes[0], st.tol);
     if (e.target.closest("[data-more]")) return paint(true);
     if (e.target.closest("[data-retry]")) return run();
-    const lo = e.target.closest("[data-loosen]");
-    if (lo) { Object.assign(st, { tol: Math.max(st.tol, 6), minCover: Math.min(st.minCover, 1), maxCover: null }); if (tuner) tuner.set(st); ptSave(st); return run(); }
     const drop = e.target.closest("[data-drop]");
     if (drop) { hexes.splice(+drop.dataset.drop, 1); buzz(6); colorsRow(); if (tuner && hexes.length === 1) { tune(); } return run(); }
     const op = e.target.closest("[data-open]");

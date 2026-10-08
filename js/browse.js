@@ -117,7 +117,7 @@ function xbRun(F, f, o = {}) {
   const out = new Int32Array(N); let n = 0;
   for (let i = 0; i < N; i++) {
     let fail = 0;
-    if (col) { const c = col.cov[i]; if (!(c > 0 && c >= lo && c <= hi)) fail |= 1; }
+    if (col) { const c = col.cov[i]; if (!(c > 0 && (o.loose || (c >= lo && c <= hi)))) fail |= 1; }
     if (when) { const y = G.year[i]; if (y === GL_UNDATED || y < y0 || y > y1) fail |= 2; }
     if (f.painter && F.artist[i] !== f.painter) fail |= 4;
     if (f.mv && F.mv[i] !== f.mv) fail |= 8;

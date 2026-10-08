@@ -435,8 +435,8 @@ function arAct(root, art, self, btn) {
   }
   if (kind === "painting") {
     return loadGallery().then(() => {
-      const hit = npGalleryHits(self.h, 6)[0];
-      if (hit) galleryPage(hit[0], true, self.h); else toast("No painting in the archive holds this color closely enough");
+      const hit = [6, 12, 24, 60, 200].map(R => npGalleryHits(self.h, R)[0]).find(Boolean);
+      if (hit) galleryPage(hit[0], true, self.h); else toast("The paintings didn't load");
     }).catch(() => toast("The gallery didn't load"));
   }
   if (kind === "mix") return mixLab(self.h, self.n);
