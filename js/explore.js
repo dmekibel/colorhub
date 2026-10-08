@@ -475,6 +475,8 @@ function xStep(prev) {
   // Studio screens (ROADMAP.md §17 job #1): plain tokens (no ":"), since each reopens from its own remembered
   // state rather than an id. Checked before the generic node lookup at the bottom, which would otherwise treat
   // "harmony" etc. as a (nonexistent) graph node id and silently do nothing.
+  if (prev === "chords") return chordsPage({ push: false });   // the masters' chords (js/chords.js)
+  if (prev.startsWith("pt:")) { const q = ptParse(prev.slice(3)); return paintingsOfPage(q.hexes, { ...q.st, push: false }); }   // color in paintings (js/paintingsof.js)
   if (prev === "favs") return favShelf();   // your colors (js/favs.js)
   if (prev === "favs-taste") return favTaste();   // your taste (js/favprofile.js)
   if (prev.startsWith("aw:") && typeof awStep === "function") return awStep(prev);   // the art wiki (js/artwiki.js)

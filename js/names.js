@@ -66,8 +66,9 @@ function npGalleryHits(hex, R = 6) {
   }
   return out.sort((a, b) => b[1] - a[1]).slice(0, 24);
 }
-function npPaintingsSection(host, hex) {
+function npPaintingsSection(host, hex, name) {
   if (!host) return;
+  if (typeof paintingsOfSection === "function") return paintingsOfSection(hex, host, { name });   // js/paintingsof.js (L26): the finer index + sliders + pairs
   const render = () => {
     if (!host.isConnected) return;
     // a strip of (up to) 6 real thumbnails, the paintings that use this color most (David, 2026-10-07:
@@ -164,7 +165,7 @@ function namePage(entry, push = true, tapped) {
   // target, not just the 28px chip, so this calls morphFrom itself rather than relying on the generic
   // [data-morph-src] delegated listener, which only catches a tap exactly on the marked element).
   el.querySelectorAll("[data-np-near]").forEach(b => b.onclick = () => { morphFrom(b.querySelector("i")); openCoreName(b.dataset.h, b.dataset.npNear); });
-  npPaintingsSection(el.querySelector("[data-npgal]"), hex);
+  npPaintingsSection(el.querySelector("[data-npgal]"), hex, name);
   colorPoems(el.querySelector(".c-poems"), entry);
   if (typeof worldColorRow === "function") worldColorRow(el, { kind: "color", h: hex, title: name });
   el.querySelectorAll("[data-copy]").forEach(b => b.onclick = () => { try { navigator.clipboard.writeText(b.dataset.copy); toast("Copied " + b.dataset.copy); } catch (e) {} });

@@ -91,7 +91,7 @@ function xbClick(e) {
   const t = e.target;
   if (t.closest("[data-swatch]")) return;   // js/swatch.js opens the color page
   const gi = t.closest("[data-gi]");
-  if (gi) { XB.y = xbSY(); XB.back = true; return galleryPage(+gi.dataset.gi, true, XB.f.hexes[0] || null); }
+  if (gi) { XB.y = xbSY(); XB.back = true; return galleryPage(+gi.dataset.gi, true, XB.f.hexes[0] || null, XB.f.hexes.length ? XB.f.tol : undefined); }
   const x = t.closest("[data-xbx]"); if (x) { e.stopPropagation(); return xbSet(xbWithout(XB.f, x.dataset.xbx)); }
   const fc = t.closest("[data-xbfacet]"); if (fc) return xbFacetSheet(fc.dataset.xbfacet);
   const bub = t.closest("[data-xbhex]"); if (bub) return xbPickColor(bub.dataset.xbhex, bub.dataset.xbname || "");
@@ -154,17 +154,25 @@ function xbRender(toTop, bodyOnly = false, keepScroll = false) {
   else if (toTop) { const fa = el.querySelector("[data-xbfacets]"); const top = fa ? xbSY() + fa.getBoundingClientRect().top - 8 : 0; if (xbSY() > top) xbTo(top); }
 }
 // the query, with L26's paintingsFor() standing in for the six-color coverage when it exists
+// (js/colorindex.js: a fine per-painting color histogram). paintingsFor() is a Promise that, once answered, also
+// carries its rows { src, i, cover (% of the canvas), de } synchronously: while the first answer is on its way the
+// six-color reading draws, then the screen redraws in place with the finer one. XB.fine says which one is showing.
 function xbQuery(F, f) {
   let cov = null;
+  XB.fine = false;
   if (f.hexes.length === 1 && typeof paintingsFor === "function") {
     try {
-      const r = paintingsFor(f.hexes[0], { tol: f.tol, minCover: 0, sort: "cover" });
-      const items = r && (r.list || r.items);
-      if (Array.isArray(items) && items.length && (items[0].i != null || items[0].gi != null)) {
+      const r = paintingsFor(f.hexes[0], { tol: f.tol, minCover: .05, sort: "cover" });
+      const items = r && r.items;
+      if (Array.isArray(items)) {
         cov = { cov: new Float32Array(F.N), near: new Float32Array(F.N).fill(1e3) };
-        items.forEach(x => { const i = x.i != null ? x.i : x.gi, c = x.cover != null ? x.cover : x.coverage || 0; cov.cov[i] = c > 1 ? c / 100 : c; cov.near[i] = x.de != null ? x.de : x.closest != null ? x.closest : 0; });
+        items.forEach(x => { if (x.src === "paintings" && x.i >= 0 && x.i < F.N) { cov.cov[x.i] = x.cover / 100; cov.near[x.i] = x.de; } });
+        XB.fine = true;
+      } else if (r && typeof r.then === "function") {
+        const want = JSON.stringify([f.hexes, f.tol]);
+        r.then(() => { if (XBF && JSON.stringify([XB.f.hexes, XB.f.tol]) === want && document.querySelector(".xb-screen")) xbLive(true); }).catch(() => {});
       }
-    } catch (e) { cov = null; }
+    } catch (e) { cov = null; XB.fine = false; }
   }
   return xbRun(F, f, cov ? { cov } : {});
 }
@@ -245,6 +253,20 @@ function xbTune(host, F, f, res) {
     try { history.pushState({ ch: 1 }, "", typeof ROUTE_NOW !== "undefined" && ROUTE_NOW ? ROUTE_NOW : undefined); } catch (e) {}
     clearTimeout(timer); xbLive(true);
   };
+  // L26's own two sliders (js/paintingsof.js) when they're here, so "how close" reads the same on every screen
+  if (one && typeof ptSliders === "function") {
+    const box = host.querySelector('[data-xbsl="tol"]');
+    host.querySelector('[data-xbsl="cover"]').remove(); host.querySelector(".xb-presets").remove();
+    let idle = 0;
+    const st = { tol: f.tol, minCover: f.cover, maxCover: f.coverMax < 100 ? f.coverMax : null };
+    try {
+      ptSliders(box, st, s => {
+        start(); XB.f.tol = s.tol; XB.f.cover = s.minCover; XB.f.coverMax = s.maxCover || 100; live();
+        clearTimeout(idle); idle = setTimeout(commit, 650);   // one history entry per adjustment, once the finger rests
+      }, { hex: f.hexes[0], noCount: true });
+      return;
+    } catch (e) { box.innerHTML = ""; }
+  }
   xbStepper(host.querySelector('[data-xbsl="tol"]'), { title: "How close", stops: XB_TOLS, value: f.tol, text: xbTolText, ends: ["exact", "loose"], ramp: one ? xbTolRamp(f.hexes[0]) : null },
     v => { start(); XB.f.tol = v; live(); }, commit);
   xbStepper(host.querySelector('[data-xbsl="cover"]'), { title: "How much of the painting", stops: XB_COVERS, value: f.cover, text: xbCovText, ends: ["a touch", "half"] },
@@ -260,7 +282,7 @@ function xbTolRamp(hex) {
   const [L, C, H] = lch(hex);
   return [0, 4, 8, 12, 16].map(d => lchHex(clamp(L + d * .55, 0, 100), Math.max(0, C - d * .35), H + d * 1.4));
 }
-const xbTuneSum = (f, n) => `${xbPaint(n)} ${f.tol <= 1 ? "with this exact color" : `within ${f.tol}%`}${f.cover > 0 ? `, covering at least ${f.cover}%` : ""}${f.coverMax < 100 ? ` and under ${f.coverMax}%` : ""}. Measured from six colors per painting, as photographed.`;
+const xbTuneSum = (f, n) => `${xbPaint(n)} ${f.tol <= 0 ? "with this exact color" : f.tol <= 1 ? "within 1%" : `within ${f.tol}%`}${f.cover > 0 ? `, covering at least ${f.cover}%` : ""}${f.coverMax < 100 ? ` and under ${f.coverMax}%` : ""}. ${XB.fine ? "Measured on each painting's fine color index" : "Measured from six colors per painting"}, as photographed.`;
 // a slider move: recount and redraw the results, without a history entry until the finger lifts
 function xbLive(full) {
   const el = document.querySelector(".xb-screen"); if (!el || !XBF) return;
@@ -308,10 +330,10 @@ function xbStepper(el, o, onInput, onCommit) {
 const XB_ROOMS = [
   { id: "learning", name: "Colors you're learning", note: "Paintings that hold the colors in your reviews", dyn: () => { const L = xbLearning(); return L.length ? { hexes: L.slice(0, 12).map(c => c.h), name: "Colors you're learning", tol: 8, cover: 2 } : null; }, sort: "most" },
   { id: "favorites", name: "In your favorite colors", note: "The colors you saved and made yours", dyn: () => { const L = xbFavorites(); return L.length ? { hexes: L.slice(0, 12).map(c => c.h), name: "Your favorite colors", tol: 8, cover: 2 } : null; }, sort: "most" },
-  { id: "blue1700", name: "Blue before 1700", note: "Blues over a tenth of the canvas, before 1700", f: { hexes: ["#3A5A8C"], name: "Blue", tol: 15, cover: 10, y1: 1699 }, sort: "date" },
+  { id: "blue1700", name: "Blue before 1700", note: "Blues over an eighth of the canvas, before 1700", f: { hexes: ["#3A5A8C"], name: "Blue", tol: 15, cover: 12, y1: 1699 }, sort: "date" },
   { id: "twins", name: "Twins across time", note: "The same palette, a century or more apart", special: "twins" },
   { id: "mono", name: "Monochrome masterpieces", note: "The fewest effective colors, and muted", f: { size: 0, chroma: 0 }, sort: "date" },
-  { id: "reds", name: "The loudest reds", note: "Vivid paintings with a tenth or more of red", f: { hexes: ["#B3261E"], name: "Red", tol: 12, cover: 10, chroma: 2 }, sort: "most" },
+  { id: "reds", name: "The loudest reds", note: "Vivid paintings with an eighth or more in red", f: { hexes: ["#B3261E"], name: "Red", tol: 12, cover: 12, chroma: 2 }, sort: "most" },
   { id: "unpainted", name: "The unpainted", note: "Named colors no painting here comes close to", special: "unpainted" },
   { id: "dark-academia", name: "Dark academia", note: "Dark key, warmer, muted", f: { key: 0, temp: 2, chroma: 0 }, recipe: true, sort: "date" },
   { id: "nocturne", name: "Nocturne", note: "Dark key, cooler", f: { key: 0, temp: 0 }, recipe: true, sort: "date" },
@@ -692,7 +714,7 @@ function xbWall(body, F, res) {
   wall.onclick = e => {
     const r = wall.getBoundingClientRect(), c = Math.floor((e.clientX - r.left) / cell), rr = Math.floor((e.clientY - r.top) / cell), q = rr * cols + c;
     if (c < 0 || c >= cols || q < 0 || q >= N) return;
-    if (close) { XB.y = xbSY(); XB.back = true; buzz(6); return galleryPage(order[q], true, XB.f.hexes[0] || null); }
+    if (close) { XB.y = xbSY(); XB.back = true; buzz(6); return galleryPage(order[q], true, XB.f.hexes[0] || null, XB.f.hexes.length ? XB.f.tol : undefined); }
     XB.wall = { level: 1, at: q }; buzz(6);
     xbRender(false, true, true);
     const w2 = document.querySelector("[data-xbwall]"); if (!w2) return;
