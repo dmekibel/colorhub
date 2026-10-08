@@ -102,7 +102,9 @@ function namePage(entry, push = true, tapped) {
   const fam = familyOf(hex);
   const stage = npStage(entry.rank);
   const taught = BYNAME.get(name.toLowerCase());   // true only if routing ever lands here for one of the 101 (see router.js)
-  const mine = taught && taught.id && isMine(S.cards[taught.id]);
+  // Learn it works on any name, not only the first units (js/learnmore.js lxLearnable: its card id and look-alikes)
+  const learnC = taught || (typeof lxLearnable === "function" ? lxLearnable(entry) : null);
+  const mine = learnC && learnC.id && isMine(S.cards[learnC.id]);
   const also = entry.also || [];
   const notes = entry.notes || [];
   // a computed shade (js/home.js hmShadeItems): a description, not an established name (ROADMAP: never taught,
@@ -123,16 +125,19 @@ function namePage(entry, push = true, tapped) {
       <button class="cp-close" data-back aria-label="Back">${ICON.back}</button>
       <div class="cp-hero-foot">
         <span class="cp-chip">${esc(status)}</span>
+        ${typeof fvPageChip === "function" ? fvPageChip(hex) : ""}
         <h1>${esc(name)}</h1>
         <button class="mono cp-hex" data-copy="${heroHex}">${heroHex}</button>
       </div>
       <span class="cp-scroll-hint" aria-hidden="true">${ICON.up}</span>
     </div>
-    ${taught && typeof hmLearnIt === "function" ? `<div class="cp-primary-row"><button class="cp-primary" data-learnit>${mine ? "Review it" : "Learn it"}${mine ? "" : `<em>2 min</em>`}${ICON.arrow}</button></div>` : ""}
+    ${typeof fvHeartRow === "function" ? fvHeartRow(hex, name, (learnC && typeof hmLearnIt === "function") || typeof prQuick === "function" ? `<button class="cp-primary" data-learnit>${mine ? "Review it" : "Learn it"}${mine ? "" : `<em>2 min</em>`}${ICON.arrow}</button>` : "")
+      : (learnC && typeof hmLearnIt === "function") || typeof prQuick === "function" ? `<div class="cp-primary-row"><button class="cp-primary" data-learnit>${mine ? "Review it" : "Learn it"}${mine ? "" : `<em>2 min</em>`}${ICON.arrow}</button></div>` : ""}
     ${tapped ? `<section class="cp-strip-sec">
       <div class="cp-strip"><div style="--c:${tapped}" data-ink="${ink(tapped)}"><b>Your color</b></div><div style="--c:${hex}" data-ink="${ink(hex)}"><b>${esc(name)}</b></div></div>
       <p class="cp-diff">${esc(lookDiff({ h: tapped, n: "Your color" }, { h: hex, n: name }))}</p>
     </section>` : ""}
+    <div class="ar-slot" data-ar-slot hidden></div>
     ${shade ? `<p class="fine np-shade">A described shade: ${esc(shade.base)} made ${esc(shade.mod)}${shadeBase ? `. <button class="link" data-shade-base>See ${esc(shade.base)}</button>` : "."}</p>` : ""}
     ${also.length ? `<p class="fine np-also">Also called ${also.map(esc).join(", ")}.</p>` : ""}
     ${notes.length ? `<p class="fine np-jp">${jpNoteLine(notes)}</p>` : ""}
@@ -151,8 +156,9 @@ function namePage(entry, push = true, tapped) {
   el.querySelector("[data-back]").onclick = xBack;
   onKey = e => { if (e.key === "Escape") xBack(); };
   wireLinks(el);
-  const li = el.querySelector("[data-learnit]"); if (li) li.onclick = () => hmLearnIt(taught);
-  
+  if (typeof articleRender === "function") articleRender(routeSlug(name), el.querySelector("[data-ar-slot]"), { n: name, h: hex });   // js/article.js (lane L8)
+  const li = el.querySelector("[data-learnit]"); if (li) li.onclick = () => typeof prQuick === "function" ? prQuick({ seed: { n: name, h: hex } }) : hmLearnIt(learnC);   // js/practice.js (its sheet offers Learn it for any learnable name: js/learnmore.js)
+  if (typeof fvWireHeart === "function") fvWireHeart(el, hex, name);   // js/favs.js
   const shBtn = el.querySelector("[data-shade-base]"); if (shBtn) shBtn.onclick = () => openCoreName(shadeBase.h, shadeBase.n);
   // a tap anywhere on the row grows its little swatch into the next page's hero (the whole row is the hit
   // target, not just the 28px chip, so this calls morphFrom itself rather than relying on the generic

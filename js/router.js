@@ -8,6 +8,7 @@
 //   #/studio/wheel  the gamut wheel · #/studio/palette/<id>  a saved palette (js/studio.js, in S.palettes)
 //   #/daily  #/challenge  #/taste/<color|palette>  #/lab/<harmony|contrast>  #/gallery/<n> (a museum painting)
 //   #/poem/<id>  #/passage/<id>  #/film/<id>   (js/poems.js, js/passages.js, js/films.js)
+//   #/practice  #/practice/<method>   build your own deck and study it (js/practice.js)
 //   #/learnit/<color>   the honeycomb home's instant mini-lesson (js/home.js, js/learnit.js). #/today itself
 //   already opens the honeycomb home: go("learn") does (js/core.js), and "today" is routed through go() below.
 // How it works: show() (core.js) calls routeCommit(tab). A tab home replaces the current history entry with
@@ -90,6 +91,8 @@ const ROUTED = [["colorPage", (n, tapped) => n && n.id ? routed(n.title, nodeRou
   ["closeup", nodeRouted("/more")],
   ["daily", () => routed("Color of the day", "daily")],
   ["challenge", () => routed("Daily challenge", "challenge")], ["challengeDone", () => routed("Daily challenge", "challenge")],
+  ["favShelf", () => routed("Your colors", "favorites")], ["favTaste", () => routed("Your taste", "favorites/taste")],   // js/favs.js, js/favprofile.js
+  ["frStart", (m, c) => routed("Rank your colors", "favorites/rank/" + (m || "bws"))],   // js/favrank.js
   ["tasteIntro", k => k === "palette" ? routed("Find your palette", "taste/palette") : routed("Find your color", "taste/color")],
   ["glPage", (i, d, fromHex) => routed(d && d.t || "Painting", "gallery/" + i + (fromHex ? "?c=" + String(fromHex).replace("#", "") : ""))],
   ["poemPage", id => id != null ? routed("Poem", "poem/" + id) : null],   // js/poems.js   // a museum painting (js/gallery.js); i = its place in the gallery index
@@ -97,16 +100,26 @@ const ROUTED = [["colorPage", (n, tapped) => n && n.id ? routed(n.title, nodeRou
   ["filmPage", f => f && f.id ? routed(f.title, "film/" + f.id) : null],   // js/passages.js, js/films.js
   ["namePage", (entry, push, tapped) => entry && entry.n ? routed(entry.n, "name/" + routeSlug(entry.n) + tappedQS(tapped)) : null],   // js/names.js: a library color that isn't one of the 101
   ["phOpenRecord", (id, rec) => id != null ? routed(rec && (rec.title || rec.from) || "Your photo", "photo/" + id) : null],   // js/photos.js
+  ["lkOpen", id => { const l = typeof lkGet === "function" && lkGet(id); return l ? routed(l.name, "look/" + id) : null; }],   // js/looks.js
   ["fashionPage", slug => typeof worldRouteTitle === "function" ? routed(worldRouteTitle(slug), "fashion/" + slug) : null],   // js/world.js
   ["btListPage", kind => typeof btListTitle === "function" ? routed(btListTitle(kind), "botany/" + kind) : null],   // js/botany.js (plant/dye/essay detail pages route via wikiPage above)
   ["btFloriPage", () => routed("The language of flowers", "botany/flori")],   // js/botany.js
+  ["awPainter", slug => slug ? routed(awTitle("painter", slug), "painter/" + slug) : null],   // js/artwiki.js: the art wiki
+  ["awGroup", (kind, key) => kind && key != null ? routed(awTitle(kind, key), kind + "/" + (kind === "decade" ? key : routeSlug(key))) : null],
+  ["awIndex", () => routed("Art history by color", "arthistory")],
+  ["awVs", (a, b) => routed("Painter against painter", "painters" + (a ? "/" + a + (b ? "/" + b : "") : ""))],
   ["gmListPage", kind => typeof gmListTitle === "function" ? routed(gmListTitle(kind), "gem/" + kind) : null],   // js/gems.js (gem/essay detail pages route via wikiPage above)
   ["labHoney", () => routed("Honeycomb lab", "lab/honey")],   // js/home.js: rate every preset at every set size
   ["gamutWheel", () => routed("Gamut wheel", "studio/wheel")],   // js/studio.js
-  ["openSavedPalette", id => routed("Your palette", "studio/palette/" + id)]];   // js/studio.js
+  ["openSavedPalette", id => routed("Your palette", "studio/palette/" + id)],   // js/studio.js
+  ["prHome", () => routed("Practice", "practice")], ["prPlay", m => PR_METHODS[m] ? routed(PR_METHODS[m].t, "practice/" + m) : null],   // js/practice.js
+  ["ooMap", () => routed("Odd one out", "odd")], ["ooEyePage", () => routed("Your eye", "odd/eye")],   // js/games/oo-ui.js
+  ["ooWhose", () => routed("Whose palette?", "odd/whose")], ["ooAcross", () => routed("Across the line", "line")], ["ooPairs", () => routed("Painters' pairs", "odd/pairs")],
+  ["arHubPage", id => id ? routed(arPretty(id), "hub/" + id) : null], ["arWhichPage", name => name ? routed(arPretty(name), "which/" + name) : null]];   // js/article.js: #/hub/<id>, #/which/<name>
 ROUTED.forEach(([name, f]) => routeWrap(window, name, f));
 routeWrap(LAB, "harmony", () => routed("Harmony", "lab/harmony"));
 routeWrap(LAB, "contrast", () => routed("Albers", "lab/contrast"));
+routeWrap(LAB, "namer", () => routed("Name any color", "studio/namer"));   // js/namer.js
 
 // ---------- opening an address ----------
 const routeColor = slug => [...BASICS, ...ALL].find(c => routeSlug(c.n) === slug) || null;
@@ -133,6 +146,7 @@ function openRoute(hash, initial = false) {
     try { history.replaceState({ ch: 1, tab: S.tab || "learn" }, "", "#/" + tabRoute(S.tab || "learn").path); } catch (e) {}
     ROUTE_REPLACE = false;   // the screen itself goes on top
   };
+  if (kind === "studio" && id === "namer" && typeof LAB.namer === "function") { base(); XSTACK = []; LAB.namer(tappedHex); return true; }
   if (kind === "studio" && id === "wheel" && typeof gamutWheel === "function") { base(); XSTACK = []; gamutWheel(); return true; }
   if (kind === "studio" && id === "palette" && more && typeof openSavedPalette === "function") { base(); XSTACK = []; openSavedPalette(more); return true; }
   // the floor (the honeycomb, js/home.js): not a tab, so it's its own address
@@ -166,6 +180,7 @@ function openRoute(hash, initial = false) {
   if (kind === "film" && id && typeof filmPage === "function") {
     base(); XSTACK = []; archWhen(() => { const f = (window.FILMS || []).find(x => x.id === id); if (f) filmPage(f); else go(S.tab || "learn"); }); return true;
   }
+  if (kind === "look" && id && typeof lkOpenRoute === "function") { base(); XSTACK = []; lkOpenRoute(id); return true; }   // js/looks.js
   if (kind === "botany" && id && typeof btOpenRoute === "function") { base(); btOpenRoute(id); return true; }   // js/botany.js
   if (kind === "gem" && id && typeof gmOpenRoute === "function") { base(); gmOpenRoute(id); return true; }   // js/gems.js
   if (kind === "name" && id) {
@@ -179,7 +194,11 @@ function openRoute(hash, initial = false) {
     loadCoreNames().then(() => { const e = routeName(id); if (e) namePage(e, true, tappedHex); else go(S.tab || "learn"); });
     return true;
   }
+  if (kind === "line" && typeof ooAcross === "function") { base(); XSTACK = []; ooAcross(); return true; }   // js/games/line.js
+  if (kind === "odd" && typeof ooOpenRoute === "function") { base(); XSTACK = []; ooOpenRoute(id); return true; }   // js/games/oo-ui.js: #/odd, #/odd/eye, #/odd/whose, #/odd/pairs
   if (kind === "photo" && id && typeof photoPage === "function") { base(); XSTACK = []; photoPage(id); return true; }
+  if (kind === "hub" && id && typeof arHubPage === "function") { base(); XSTACK = []; arHubPage(id); return true; }   // js/article.js
+  if (kind === "which" && id && typeof arWhichPage === "function") { base(); XSTACK = []; arWhichPage(id); return true; }
   if (kind === "gallery" && /^\d+(\?c=[0-9a-f]{6})?$/i.test(id || "") && typeof galleryPage === "function") {
     const [numId, qs] = String(id).split("?c=");
     const fromHex = qs ? "#" + qs.toUpperCase() : null;
@@ -189,12 +208,15 @@ function openRoute(hash, initial = false) {
     galleryPage(+numId, true, fromHex);
     return true;
   }
+  if (["painter", "movement", "decade", "country", "arthistory", "painters"].includes(kind) && typeof awOpenRoute === "function") { base(); XSTACK = []; awOpenRoute(kind, id, more); return true; }   // js/artwiki.js
   const simple = { daily: () => daily(), challenge: () => chToday() ? challengeDone() : challenge(),
     taste: () => tasteIntro(id === "palette" ? "palette" : "color"),
+    favorites: () => typeof favShelf !== "function" ? go(S.tab || "learn") : id === "taste" ? favTaste() : id === "rank" ? frStart(more || "bws", "all") : favShelf(),   // js/favs.js
     lab: () => id === "honey" && typeof labHoney === "function" ? labHoney() : (LAB[id] && ["harmony", "contrast"].includes(id) ? LAB[id] : LAB.harmony)(),
     fashion: () => typeof fashionPage === "function" && fashionPage(id),
     // the honeycomb home's instant mini-lesson (js/learnit.js): #/learnit/<color>
-    learnit: () => { const c = id && routeColor(id); if (c && typeof hmLearnIt === "function") hmLearnIt(c); else go(S.tab || "learn"); } };
+    learnit: () => { const c = id && routeColor(id); if (c && typeof hmLearnIt === "function") hmLearnIt(c); else if (id && typeof lxRouteLearnIt === "function") lxRouteLearnIt(id); else go(S.tab || "learn"); },
+    practice: () => typeof prOpenRoute === "function" ? prOpenRoute(id) : go(S.tab || "learn") };   // js/practice.js: #/practice, #/practice/<method>
   if (simple[kind]) { base(); simple[kind](); return true; }
   return false;
 }

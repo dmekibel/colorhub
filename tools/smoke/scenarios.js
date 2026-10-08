@@ -260,17 +260,20 @@ scenario("train", "check-in card opens the drill", async t => {
 });
 
 scenario("train", "Odd one out: tap tiles through a whole round", async t => {
+  // js/games: the Train shelf opens the Odd one out map (a played save), then level 1
   await t.open("#shot=gx:home", { settle: 600 });
-  const st = await t.waitFor('[data-st="hue"]', 6000, "the Odd one out tile");
-  await t.click(st, { wait: 500 });
-  await t.waitFor(".drill .tile", 6000, "the 3x3 grid of tiles");
-  t.expect(t.$$(".drill .tile").length === 9, `${t.$$(".drill .tile").length} tiles instead of 9`);
-  const first = t.$(".drill #dstage").innerHTML;
-  await t.click(".drill .tile", { wait: 1200 });
-  t.expect(t.$(".drill #dstage").innerHTML !== first || t.$(".result"), "tapping a tile changed nothing");
+  const st = await t.waitFor("[data-oo-map]", 6000, "the Odd one out shelf");
+  await t.click(st, { wait: 600 });
+  const play = await t.waitFor("[data-play], .oo-board", 6000, "the map or level 1");
+  if (play.matches("[data-play]")) await t.click(play, { wait: 600 });
+  await t.waitFor(".oo-board .oo-t", 6000, "the board");
+  t.expect(t.$$(".oo-board .oo-t").length >= 9, `${t.$$(".oo-board .oo-t").length} tiles`);
+  const first = t.$("#oostage").innerHTML;
+  await t.click(".oo-board .oo-t", { wait: 1200 });
+  t.expect(t.$("#oostage").innerHTML !== first || t.$(".result") || t.$("#oofoot").innerText.length > 5, "tapping a tile changed nothing");
   let taps = 1;
   for (let i = 0; i < 60 && !t.$(".result"); i++) {
-    const b = t.$("[data-cf]") || t.$("[data-next]") || t.$(".drill .tile:not(.ring):not(.miss):not(.picked)");
+    const b = t.$("[data-next]") || t.$("[data-w]") || t.$("[data-k]:not(:disabled)") || t.$(".oo-board .oo-t:not(.ring):not(.miss):not(.sel):not(:disabled)");
     if (b) { await t.click(b, { force: true, wait: 400 }); taps++; } else await t.sleep(300);
   }
   await t.waitFor(".result", 6000, "the station result screen");
@@ -406,6 +409,8 @@ scenario("pages", "a tapped in-between hex opens its nearest name with 'Your col
 scenario("pages", "Learn it runs meet > recall from a color page", async t => {
   await H.openPage(t, "#/color/teal", "Teal");
   await t.click("[data-learnit]", { wait: 600 });
+  // the Learn button opens the instant-deck sheet (js/practice.js); Learn it is one of its methods
+  if (t.$(".pr-quick")) { await t.click('[data-method="lesson"]', { wait: 200 }); await t.click(".pr-quick [data-go]", { wait: 600 }); }
   await t.waitFor("#ltPager", 6000, "the Learn it meet pager");
   t.expect(t.$$("#ltPager .lt-page").length >= 3, "the meet pager has too few pages");
   // (smooth scrolling does not run under the virtual clock, so jump page by page like a finger would, then press Enter on the last one)
@@ -422,6 +427,32 @@ scenario("pages", "Learn it runs meet > recall from a color page", async t => {
   // closing returns to the color's own page
   await t.click("[data-close]", { wait: 600 });
   await t.waitFor(".cp-page", 6000, "the color page after closing Learn it");
+});
+
+scenario("pages", "Learn opens the instant deck; Start plays flashcards to the results", async t => {
+  await H.openPage(t, "#/color/teal", "Teal");
+  await t.click("[data-learnit]", { wait: 600 });
+  await t.waitFor(".pr-quick", 4000, "the instant-deck sheet");
+  await t.click('.pr-quick [data-size="5"]', { wait: 150 });
+  await t.click('.pr-quick [data-method="cards"]', { wait: 150 });
+  await t.click(".pr-quick [data-go]", { wait: 600 });
+  await t.waitFor(".pr-play .pr-card", 4000, "the flashcard");
+  for (let i = 0; i < 20 && !t.$(".pr-res"); i++) {
+    const st = t.$(".pr-stage"); if (st && st._prReveal && !t.$(".pr-card.revealed")) { st._prReveal(); await t.sleep(150); }
+    const yes = t.$("[data-yes]"); if (yes) await t.click(yes, { wait: 450 }); else await t.sleep(200);
+  }
+  await t.waitFor(".pr-res", 4000, "the results screen");
+  t.expect(/known/.test(t.$(".pr-res-t").textContent), "the results title");
+  await t.click(".pr-res [data-close]", { wait: 600 });
+  await t.waitFor(".cp-page", 6000, "back on the color page after closing");
+});
+
+scenario("home", "Study corner opens the instant deck seeded with the middle color", async t => {
+  await H.homeReady(t);
+  await t.click("[data-pr-study]", { wait: 600 });
+  await t.waitFor(".pr-quick", 4000, "the instant-deck sheet from Home");
+  t.expect(/Learn/.test(t.$("[data-qtitle]").textContent), "the sheet title");
+  t.expect(t.$$(".pr-quick .pr-plate i").length >= 5, "the deck plate");
 });
 
 // ================================================================== STUDIO
@@ -475,4 +506,237 @@ scenario("studio", "photo palette: controls work and a chip opens its page", asy
   await H.back(t);
   t.expect(!t.$(".cp-page"), "Back left the color page open");
   t.expect(t.$("#app").innerText.length > 60, "Back from the color page landed on an empty screen");
+});
+
+// ---- L13 Studio: Name any color, the Isolator, the Export sheet, Closest in the archive ----
+scenario("studio", "Name any color: tabs, drag, save, a name opens its page", async t => {
+  await t.open("#/studio/namer?c=5F8C8A", { settle: 600 });
+  await t.waitFor(".nmr-hero", 8000, "the namer");
+  const n0 = t.text("#name");
+  t.expect(n0.length > 2 && t.$$(".nmr-row").length === 4, "the namer shows a name and four next names");
+  for (const k of ["plane", "field", "type", "eye", "ring"]) { await t.click(`[data-tab='${k}']`, { force: true, wait: 350 }); t.expect(t.$("#pane").children.length, `the ${k} tab is empty`); }
+  await t.click("[data-tab='type']", { force: true, wait: 300 });
+  const hx = t.$("#hx"); hx.value = "#C8553D"; hx.dispatchEvent(new t.w.Event("input", { bubbles: true }));
+  await t.waitFor(() => t.text("#name") !== n0, 6000, "the name to follow a typed hex");
+  await t.click("#acts [data-save]", { force: true, wait: 300 });
+  t.expect(t.$$(".nmr-chips button").length === 1, "Save did not add the color to the tray");
+  await t.click(".nmr-row", { force: true, wait: 500 });
+  await t.waitFor(".cp-page", 8000, "a color page after tapping a near name");
+  await H.back(t);
+  await t.waitFor(".nmr-hero", 6000, "the namer again after Back");
+  await t.click("[data-back]", { force: true, wait: 700 });
+  await t.waitFor(() => !t.$(".nmr-hero") && t.$("#app").innerText.length > 60, 6000, "a room after Back from the namer (opened by address, so it falls back to the current room)");
+});
+
+scenario("home", "View sheet: the picker icon opens Name any color", async t => {
+  await t.open("#shot=home:views", { settle: 1500 });
+  await t.waitFor("[data-namer]", 8000, "the picker icon in the View sheet");
+  await t.click("[data-namer]", { force: true, wait: 800 });
+  await t.waitFor(".nmr-hero", 6000, "Name any color from Home");
+});
+
+scenario("studio", "Isolator: guess, reveal alone, hold to see it back, try another", async t => {
+  await t.open("#shot=studiopv", { settle: 900 });
+  const img = await t.waitFor(() => { const i = t.$(".pv-img img"); return i && i.complete && i.naturalWidth ? i : null; }, 8000, "the photo");
+  const r = img.getBoundingClientRect();
+  img.dispatchEvent(new t.w.MouseEvent("click", { bubbles: true, clientX: r.left + r.width * .5, clientY: r.top + r.height * .5, view: t.w }));
+  await t.waitFor(".iso .iso-opts button", 6000, "the four options");
+  t.expect(t.$$(".iso-opts button").length >= 3, "fewer than three options");
+  await t.click(".iso-opts button", { force: true, wait: 700 });
+  await t.waitFor(".iso.isolated .iso-name", 4000, "the reveal");
+  const f = t.$("#isoFrame"), fr = f.getBoundingClientRect(), w = t.w, o = { bubbles: true, cancelable: true, clientX: fr.left + 30, clientY: fr.top + 30, pointerId: 1, pointerType: "touch", isPrimary: true, view: w };
+  f.dispatchEvent(new w.PointerEvent("pointerdown", o)); await t.sleep(450);
+  t.expect(t.$(".iso.peek"), "holding the picture did not bring the surroundings back");
+  f.dispatchEvent(new w.PointerEvent("pointerup", o)); await t.sleep(300);
+  t.expect(!t.$(".iso.peek"), "letting go did not isolate again");
+  await t.click("[data-again]", { force: true, wait: 400 });
+  t.expect(t.$(".iso-opts"), "Try another spot did not ask again");
+  await t.click("[data-iso-close]", { force: true, wait: 300 });
+  t.expect(!t.$(".iso"), "the Isolator did not close");
+});
+
+scenario("studio", "Export sheet opens and Closest in the archive switches metric", async t => {
+  await t.open("#shot=studiopv", { settle: 900 });
+  await t.waitFor("[data-export]", 8000, "the Export button");
+  await t.click("[data-export]", { force: true, wait: 500 });
+  await t.waitFor(".ex-sheet [data-ex-copy='css']", 4000, "the Export sheet");
+  t.expect(t.$$(".ex-sheet [data-ex-row]").length === 6, "the sheet should list six formats");
+  await t.click(".ex-sheet [data-ex-tints]", { force: true, wait: 200 });
+  t.$("#twins").scrollIntoView();
+  await t.waitFor(".tw-card", 20000, "the closest paintings");
+  t.expect(t.$$(".tw-chips button").length >= 6, "the metric chips are missing");
+  for (const m of ["dominant", "mood", "light"]) {
+    await t.click(`.tw-chips [data-m='${m}']`, { force: true, wait: 300 });
+    await t.waitFor(() => t.$(".tw-out .tw-card .tw-why"), 25000, `results for ${m}`);
+    t.expect(t.text(".tw-why").length > 12, `${m}: a result has no reason`);
+  }
+});
+
+// ================================================================== YOUR COLORS (L23: favorites, ranking, taste)
+scenario("favs", "Home pick mode: tap and hold-sweep heart colors, Save keeps them", async t => {
+  const cv = await H.homeReady(t);
+  await t.click("#hmFav", { wait: 500 });
+  await t.waitFor(".fv-bar", 4000, "the pick bar");
+  const count = () => +t.text(".fv-count b");
+  t.expect(count() === 0, "pick mode starts with picks already made");
+  const r = cv.getBoundingClientRect(), o = (x, y) => ({ bubbles: true, cancelable: true, clientX: r.left + x, clientY: r.top + y, pointerId: 5, pointerType: "touch", isPrimary: true, view: t.w });
+  await t.tapAt(cv, r.left + r.width / 2, r.top + r.height / 2, { wait: 300 });
+  t.expect(count() === 1, `a tap should heart one bubble (count ${count()})`);
+  // hold still, then drag across a run
+  cv.dispatchEvent(new t.w.PointerEvent("pointerdown", o(r.width * .25, r.height * .72)));
+  await t.sleep(420);
+  for (const x of [.32, .4, .5, .6, .7]) { cv.dispatchEvent(new t.w.PointerEvent("pointermove", o(r.width * x, r.height * .72))); await t.sleep(40); }
+  cv.dispatchEvent(new t.w.PointerEvent("pointerup", o(r.width * .7, r.height * .72)));
+  await t.sleep(300);
+  t.expect(count() >= 4, `hold-then-drag should sweep a run (count ${count()})`);
+  const n = count();
+  await t.click(".fv-save", { wait: 400 });
+  t.expect(t.ev("fvCount()") === n, `Save kept ${t.ev("fvCount()")} colors, expected ${n}`);
+  t.expect(t.$(".fv-bar[data-mode=saved]"), "no saved state after Save");
+  await t.click("[data-shelf]", { wait: 800 });
+  await t.waitFor(".fv-shelf .fv-top5", 6000, "the shelf after Save");
+});
+
+scenario("favs", "shelf: top five, a plate opens its page, Back returns, a row heart removes with Undo", async t => {
+  await t.open("#shot=favs:shelf", { settle: 900 });
+  await t.waitFor(".fv-shelf .fv-top5 .fv-plate", 6000, "the shelf");
+  t.expect(t.$$(".fv-top5 .fv-plate").length === 5, "the shelf should show a top five");
+  t.expect(t.$("#fvHero canvas"), "no honeycomb of your colors");
+  await t.click(".fv-top5 .fv-plate", { wait: 500 });
+  await t.waitFor(".cp-page", 8000, "a color page from the top plate");
+  t.expect(t.$("[data-fv-chip]") && !t.$("[data-fv-chip]").hidden, "the page doesn't show your rank for a favorite");
+  await H.back(t);
+  await t.waitFor(".fv-shelf", 6000, "the shelf after Back");
+  const n = t.ev("fvCount()");
+  await t.click(".fv-un", { wait: 700 });
+  t.expect(t.ev("fvCount()") === n - 1, "the row heart didn't remove the color");
+  const undo = t.$(".fv-toast button"); t.expect(undo, "no Undo after removing");
+  await t.click(undo, { wait: 700 });
+  t.expect(t.ev("fvCount()") === n, "Undo didn't bring the color back");
+  // the share card draws without throwing (the real share sheet is replaced by a canvas run)
+  t.ev("window.__card = false; window.tzShareCanvas = d => { const c = document.createElement('canvas'); c.width = 1080; c.height = 1350; d(c.getContext('2d')); window.__card = true; }");
+  await t.click("[data-share]", { wait: 300 });
+  t.expect(t.ev("window.__card"), "the My colors card didn't draw");
+  // the verbs: Learn opens a deck (and Close comes back), Keep saves a palette, the primary opens a ranking screen, On the map opens Home
+  await t.click("[data-cs=learn]", { wait: 600 });
+  // Learn now opens Practice's quick sheet (prInstantDeck) first: start it, then a deck or a Practice run appears
+  await t.waitFor(".screen.deck, [data-qgo], .screen.pr-play", 6000, "the Learn sheet or deck");
+  if (t.ev("!!document.querySelector('[data-qgo]')")) await t.click("[data-qgo] [data-go]", { wait: 600 });
+  await t.waitFor(".screen.deck, .screen.pr-play, .screen.learnit, .screen.pr-say-intro, .screen.meet", 6000, "the Learn my favorites deck");
+  await t.click("[data-close]", { wait: 500 });
+  await t.waitFor(".fv-shelf", 6000, "the shelf after closing the deck");
+  await t.click("[data-go]", { wait: 500 });
+  await t.waitFor(".screen.fv-run", 6000, "a ranking screen");
+  await t.click("[data-close]", { wait: 500 });
+  await t.waitFor(".fv-shelf", 6000, "the shelf after closing the ranking");
+  await t.click("[data-cs=map]", { wait: 900 });
+  await t.waitFor(".hm canvas", 15000, "Home with your colors lit");
+});
+
+scenario("favs", "best of three: keep one, drop one, a new set arrives; Undo takes it back", async t => {
+  await t.open("#shot=favs:rank:bws", { settle: 700 });
+  await t.waitFor(".fv-tri .fv-p", 6000, "three plates");
+  const c0 = t.ev("fvChoices('all')"), first = t.$$(".fv-tri .fv-p").map(p => p.dataset.k).join();
+  await t.click(".fv-tri .fv-p:nth-child(1)", { wait: 300 });
+  t.expect(t.$(".fv-tri .fv-p.kept"), "keeping a plate showed no heart");
+  await t.click(".fv-tri .fv-p:nth-child(3)", { wait: 900 });
+  t.expect(t.ev("fvChoices('all')") === c0 + 2, `two taps should add two choices (${c0} to ${t.ev("fvChoices('all')")})`);
+  t.expect(t.$$(".fv-tri .fv-p").length === 3, "no new set of three");
+  await t.click("[data-undo]", { wait: 500 });
+  t.expect(t.ev("fvChoices('all')") === c0, "Undo didn't restore the choice count");
+  t.expect(t.$$(".fv-tri .fv-p").map(p => p.dataset.k).join() === first, "Undo didn't bring the same set back");
+});
+
+scenario("favs", "tier board, swipe stack, ten drops and drag-to-order each take input and end on the summary", async t => {
+  await t.open("#shot=favs:rank:tiers", { settle: 700 });
+  await t.waitFor(".fv-chip", 6000, "the tier chips");
+  const k0 = t.$$(".fv-chip").length;
+  await t.click(".fv-chip", { pointer: true, wait: 200 });
+  await t.click(".fv-tier[data-t='0']", { wait: 500 });
+  t.expect(t.$$(".fv-chip").length === k0 - 1 && t.$$(".fv-tier[data-t='0'] .fv-dot").length === 1, "tap a chip, tap a tier: the color didn't land in Love");
+  await t.click(".fv-tier .fv-dot", { wait: 400 });
+  t.expect(t.$$(".fv-chip").length === k0, "tapping a placed dot didn't take it back");
+  await t.open("#shot=favs:rank:swipe", { settle: 700 });
+  await t.waitFor(".fv-card", 6000, "the swipe card");
+  for (let i = 0; i < 20 && t.$(".fv-card"); i++) { await t.click(i % 2 ? "[data-no]" : "[data-yes]", { force: true, wait: 450 }); }
+  await t.waitFor(".fv-settle", 8000, "the summary after the stack");
+  await t.open("#shot=favs:rank:budget", { settle: 700 });
+  await t.waitFor("[data-add]", 6000, "the budget plates");
+  for (let i = 0; i < 10; i++) await t.click("[data-add]", { force: true, wait: 120 });
+  t.expect(t.text("#frLeft") === "0", "ten drops didn't spend to zero");
+  await t.click("[data-go]", { force: true, wait: 600 });
+  await t.waitFor(".fv-settle", 6000, "the summary after the drops");
+  await t.open("#shot=favs:rank:order", { settle: 700 });
+  await t.waitFor(".fv-or", 6000, "the order rows");
+  await t.click("[data-go]", { force: true, wait: 600 });
+  await t.waitFor(".fv-settle", 6000, "the summary after ordering");
+  await t.click("[data-again]", { force: true, wait: 600 });
+});
+
+scenario("favs", "taste profile: findings, the painter match and a palette from the top five", async t => {
+  await t.open("#shot=favs:taste", { settle: 900 });
+  await t.waitFor(".fp-find", 10000, "the findings");
+  t.expect(t.$$(".fp-find").length >= 3, "fewer than three findings");
+  t.expect(/lean|spans/.test(t.text(".fp-lead")), "no headline sentence");
+  await t.waitFor(".fp-painter", 10000, "the painter match");
+  const n = t.ev("(S.palettes||[]).length");
+  await t.click("[data-pal]", { wait: 800 });
+  t.expect(t.ev("(S.palettes||[]).length") === n + 1, "no palette saved from the top five");
+});
+
+// ================================================================== LEARN (past the first units: js/learnmore.js)
+scenario("learn", "the path goes past the first units: Begin teaches a generated unit as core cards", async t => {
+  await t.open("#shot=lx:room", { settle: 600 });
+  await t.waitFor(".path-list .lx-stage-h", 10000, "the path's current stage header");
+  t.expect(/of 655 · Fluent/.test(t.text(".coll-n")), `the collection counts toward Fluent ("${t.text(".coll-n")}")`);
+  t.expect(!/the 101|\/101/.test(t.text("#app")), "the Learn room mentions the 101");
+  const before = t.ev("Object.keys(S.cards).filter(k => k.startsWith('core:')).length");
+  await t.click("[data-learn]", { wait: 600 });
+  await t.waitFor("#pager", 6000, "the meet pager for the generated unit");
+  t.expect(/Unit \d+ · to /.test(t.text("#pager .eyebrow")), `the unit label ("${t.text("#pager .eyebrow")}")`);
+  const pager = t.$("#pager");
+  pager.scrollTop = pager.scrollHeight; await t.tick(); await t.sleep(300);
+  await t.click("[data-go]", { wait: 600 });
+  await t.waitFor(".deck .card", 6000, "the swipe deck");
+  for (let i = 0; i < 60 && !t.$(".result"); i++) {
+    const rev = t.$("[data-reveal]"); if (rev) await t.click(rev, { wait: 60 });
+    const yes = t.$("[data-yes]"); if (yes) await t.click(yes, { wait: 350 }); else await t.sleep(150);
+  }
+  await t.waitFor(".result", 6000, "the unit-done screen");
+  const after = t.ev("Object.keys(S.cards).filter(k => k.startsWith('core:') && S.cards[k].n && S.cards[k].h).length");
+  t.expect(after >= before + 4, `the unit's colors became core:<slug> cards with their own name and hex (${before} -> ${after})`);
+  const bet = t.$(".lx-bet-b[data-n='2']"); t.expect(bet, "the bet-on-tomorrow row");
+  await t.click(bet, { wait: 200 });
+  t.expect(t.ev("!!(S.bets && S.bets[today()] && S.bets[today()].n === 2)"), "the bet was kept");
+  await t.click("[data-next]", { wait: 600 });
+  await t.waitFor("#pager", 6000, "the next generated unit");
+});
+scenario("learn", "Learn it opens on a name past the first units", async t => {
+  await t.open("#/name/chestnut", { settle: 600 });
+  await t.waitFor(".cp-page [data-learnit]", 10000, "Learn it on the Chestnut name page");
+  await t.click("[data-learnit]", { wait: 600 });
+  await t.waitFor(".pr-quick [data-method='lesson']", 6000, "Practice's sheet offering Learn it for a name past the first units");
+  await t.click("[data-method='lesson']", { wait: 300 });
+  await t.click(".pr-quick [data-go]", { wait: 700 });
+  await t.waitFor("#ltPager", 6000, "the Learn it meet pager");
+  t.expect(t.$$("#ltPager .lt-page").length >= 3, "the group has look-alikes from the ~1,000 names");
+  await t.click("[data-lt-x]", { wait: 600 });
+  await t.waitFor(".cp-page", 6000, "back on the name page after closing");
+});
+scenario("learn", "Edges: tap a step, every step gets its name, the border is kept", async t => {
+  await t.open("#shot=lx:edge", { settle: 600 });
+  await t.waitFor(".lt-edge-b", 8000, "the Edges strip");
+  await t.click(t.$$(".lt-edge-b")[5], { wait: 300 });
+  t.expect(t.$$(".lt-edge-lab").filter(e => e.textContent.trim()).length === 9, "every step is labeled with its nearest name");
+  t.expect(t.$(".lt-edge-b.mid"), "the halfway mark");
+  t.expect(t.ev("Object.keys(S.edges || {}).length") >= 1, "the border was kept in S.edges");
+  t.expect(t.$("[data-next]") && !t.$("[data-next]").hidden, "Next shows after the reveal");
+});
+scenario("learn", "Learn it done: the group joins review as core cards, due tomorrow", async t => {
+  await t.open("#shot=lx:ltdone", { settle: 600 });
+  await t.waitFor(".lt-done-pal", 8000, "the Learn it done screen");
+  t.expect(t.ev("!!S.cards['core:chestnut'] && S.cards['core:chestnut'].n === 'Chestnut'"), "Chestnut joined spaced review as core:chestnut");
+  t.expect(t.ev("cardsAll().some(c => c.id === 'core:chestnut') && !dueList().some(c => c.id === 'core:chestnut')"), "cardsAll covers it, due tomorrow, not today");
+  await t.click("[data-lt-back]", { wait: 700 });
+  await t.waitFor(".cp-page", 8000, "the name page after Done");
 });
