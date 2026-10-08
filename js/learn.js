@@ -508,6 +508,8 @@ function home() {
 }
 
 function menu() {
+  // design round 2: the Settings sheet in the menu family (js/you.js); the old list below stays as a fallback
+  if (typeof ymSettingsSheet === "function") return ymSettingsSheet();
   const { sh, close } = sheet(`
     <button class="item" data-a="profile">Your eyes & tools ${ICON.chev}</button>
     <button class="item" data-a="place">Retake the placement test ${ICON.chev}</button>
