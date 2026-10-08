@@ -22,12 +22,12 @@
   {
    "id": "fire",
    "title": "Fired clay and glaze",
-   "body": "Fire changes clay, and potters learned to steer the change. Ball describes the red and black ware of Greek and Roman civilizations as coloured with a clay slip that contained red clay and organic matter, or iron oxides [3]. He dates the technique to about 1500 BC at Mycenae, with big refinements by Attic potters in the sixth century BC [3]. Its secret was later lost to the West [3].\n\nWhere to look: on a flowerpot, compare the bare red-orange of the fired rim with the glazed inside, and compare both with a wet lump of garden clay. Glazes have their own history of color. Some of the earliest Egyptian glazes are found on clay beads fired with soda and copper minerals, and the earliest pottery glazes were thin coats of coloured glass with a little clay to help them stick [3]. In Mesopotamia from about 1000 BC, the Babylonians made lead glazes simply by grinding galena to dust and painting it on the pottery clay, and coloured them with copper, iron or manganese oxides [3].\n\nThe most famous clay color of all is [[celadon]]. Finlay writes that its delicate skin and jade-like color came from wood ash and kaolin, both from the mountains, and that the kiln atmosphere matters: reduction fired in a lack of air gives the green, and oxidation gives brown [6]. A glaze that took its green from the fire is a reminder that the color of a finished pot is a record of how it was baked, not of what it started as [6]."
+   "body": "Fire changes clay, and potters learned to steer the change. Ball describes the red and black ware of Greek and Roman civilizations as coloured with a clay slip that contained red clay and organic matter, or iron oxides [3]. He says the technique was apparently devised around 1500 BC at Mycenae, with big refinements by Attic potters in the sixth century BC [3]. Its secret was later lost to the West [3].\n\nWhere to look: on a flowerpot, compare the bare red-orange of the fired rim with the glazed inside, and compare both with a wet lump of garden clay. Glazes have their own history of color. Among Egypt's earliest glazes are those on clay beads, which were fired with a mix of soda and copper minerals, and the earliest pottery glazes were thin coats of coloured glass with a little clay to help them stick [3]. In Mesopotamia, from around 1000 BC, Babylonian potters made lead glazes by painting powdered galena (lead sulphide) onto the pottery, then tinted them with copper, iron or manganese oxides [3].\n\nThe most famous clay color of all is [[celadon]]. Finlay writes that its delicate skin and jade-like color came from wood ash and kaolin, both from the mountains, and that the kiln atmosphere matters: reduction fired in a lack of air gives the green, and oxidation gives brown [6]. A glaze that took its green from the fire is a reminder that the color of a finished pot is a record of how it was baked, not of what it started as [6]."
   },
   {
    "id": "pigments",
    "title": "Clay inside pigments and dyes",
-   "body": "Clay also carries other colors. The Maya made a vivid turquoise for their frescoes by combining a local species of indigo with the clay mineral palygorskite, and Europeans did not understand until 2000 that the molecules were trapped in the clay lattice [7][1]. It was so bright that people believed until the 1960s that Maya blue was made from metal [7]. Balfour-Paul adds that the Maya used it on murals, sculptures, ceramics and textiles [7]. The same book explains why indigo makers were tempted to cheat: ever since Pliny warned of indigo adulterated with clay, manufacturers had added bulk with substances from brick dust to Prussian blue [11].\n\nCennino Cennini, the Italian painter, recommended slipping a little Baghdad indigo into clay to make a fake ultramarine for frescoes, according to Finlay [7]. The idea is the same as Maya blue, but without the Maya's understanding of the clay [7].\n\nRed earths were traded by the clay pit. Pastoureau writes that clay pits around Sinope, on the Black Sea shore, gave a good red ochre in antiquity, and the port exported it to the Roman world [8]. The Latin words that came from the town's name all point to red [8].\n\nClay was also a tool. The Dutch stack process for white lead used clay pots divided into two chambers, one for the lead and one for vinegar, lined up by the dozen and heaped with manure for heat [12]. The pot, in other words, was clay and the pigment was white."
+   "body": "Clay also carries other colors. The Maya made a vivid turquoise for their frescoes by combining a local species of indigo with the clay mineral palygorskite, and Europeans did not understand until 2000 that the molecules were trapped in the clay lattice [7][1]. It was so bright that people believed until the 1960s that Maya blue was made from metal [7]. Balfour-Paul adds that the Maya used it on murals, sculptures, ceramics and textiles [7]. The same book explains why indigo makers were tempted to cheat: ever since Pliny warned of indigo adulterated with clay, manufacturers had added bulk with substances from brick dust to Prussian blue [11].\n\nCennino Cennini, the Italian painter, advised mixing a little Baghdad indigo with clay as a cheap stand-in for ultramarine in frescoes, according to Finlay [7].\n\nRed earths were traded by the clay pit. Pastoureau writes that clay pits around Sinope, on the Black Sea shore, gave a good red ochre in antiquity, and the port exported it to the Roman world [8]. The Latin words that came from the town's name all point to red [8].\n\nClay was also a tool. The Dutch stack process for white lead used clay pots divided into two chambers, one for the lead and one for vinegar, lined up by the dozen and heaped with manure for heat [12]. The pot, in other words, was clay and the pigment was white."
   },
   {
    "id": "boles",
@@ -249,16 +249,16 @@
   "The Maya trapped indigo inside a clay mineral to make a blue that lasted for centuries.",
   "India has this color 7.9 times as often as the rest of our archive."
  ],
- "words": 1529,
+ "words": 1515,
  "status": "checked",
  "checked": {
-  "by": "article engine batch 10",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Concordance hits for clay are mostly the material; article is honest about that.",
-   "Chiari fresco-magnetism claim and Rainbow Snake huntite remark are single-source (Finlay) and hedged.",
-   "Maerz and Paul 1594 date from library note only.",
-   "Pigment Compendium pages are PDF pages (entries cited by name)."
+   "Removed unsupported editorial comparing Cennini's fake ultramarine to Maya blue",
+   "Hedged Mycenae date ('apparently' per Ball)",
+   "Reworded glaze sentence to avoid shared book phrasing",
+   "Verified Maya blue, Chiari, Sinope, Cave pigments, Gurney silt, Paterson clay, Pliny against book text"
   ]
  }
 }

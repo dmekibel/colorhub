@@ -1,0 +1,206 @@
+{
+ "slug": "deep-red",
+ "name": "Deep Red",
+ "hex": "#9A0200",
+ "names": [
+  "Deep Red"
+ ],
+ "tier": "descriptive",
+ "depth": "medium",
+ "lede": "Deep red is a descriptive color name, a dark and saturated red; no book we read ties it to one pigment, dye or place, but its alternate names in old color lists are mostly iron-oxide earths.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A description, not a pigment",
+   "body": "Deep red is a plain description: a red that is dark and saturated. Our library carries it from two sources, the ISCC-NBS color names of 1955 and the xkcd color survey of 2010, and the swatch on this page is `#9A0200` [1]. No book we read treats it as the name of a particular pigment, dye or place. What the books do show is how often writers reach for the words when they describe something red and dark [2][3][4].\n\nThe library lists many alternate names for this swatch, all from ISCC-NBS block 40, and they are mostly materials [1]. They include Iron Oxide Red, Iron Red, Spanish Brown, Scarlet Ochre, Persian Earth, Majolica Earth, Purple Ochre and Red Ox [1]. Maerz and Paul recorded Majolica Earth and Agate in 1598, Persian Earth in 1735 and Scarlet Ochre in 1764 [1]. The dark red that people name \"deep\" turns out, in the old color lists, to be mostly iron-oxide earth, the family of [[indian-red]] and [[venetian-red]] [1]."
+  },
+  {
+   "id": "dyes",
+   "title": "Deep red in the dyer's vat",
+   "body": "Dyers were first to need the words. Ball notes that among the finest ancient dyes was a deep red obtained from an insect, and ties it to Isaiah's line about sins that are like scarlet [3]. After cochineal reached Europe from the Americas, wealthy buyers demanded cloth in this new deep red, often called *grana* or \"in grain\", Finlay writes [5]. In present-day Oaxaca a dyer still ground cochineal and finished the bath with alum, acacia fruits and lime juice to darken and intensify the deep red, Greenfield reports [6].\n\nMadder gives a deep red too. The Compendium reports that Gentele in 1860 found partial precipitation of madder dye with soda or potash gave a deep red lake, while complete precipitation gave a lighter one [7]. Coles adds brazilwood, a hardwood that gives a deep red dye and supplied the cool reds of medieval lake pigments (see [[brazil-red]]) [8]. Ball also notes that the old purple of the dyers ran from bluish to a deep red depending on preparation, which is a reminder that ancient color words were wide [3]."
+  },
+  {
+   "id": "earth",
+   "title": "Deep red from the ground",
+   "body": "Mineral reds are the other source. St Clair describes the walls of the Villa of Mysteries at Pompeii as an intense ground of deep red vermilion [4]. Finlay's account of icon painters names a deep red from Spanish mercury, presumably cinnabar, the ore of [[vermilion]] [9]. Stones belong here too: Ball explains that chromium impurities make corundum deep red in ruby, and sea-green in emerald, because the crystal field around the chromium is stronger in emerald [3]. A look at [[gem:ruby|ruby]] shows the red.\n\nEarths are the oldest case. Red iron oxide has stained objects deep red since the Upper Paleolithic, some 50,000 years ago [4]. The Compendium lists Armenian bole as a deep red ochre from Cappadocia, and Paterson gives *almagra* as a deep red ochre found in Spain [7][2]."
+  },
+  {
+   "id": "words",
+   "title": "A crowd of other names",
+   "body": "Paterson's dictionary uses \"deep red\" as a gloss for a long list of names. Castillian, Iraq red, oxheart, para-red and Parma red are all described as a deep red, and *grenat* is the deep red of the garnet, which Paterson notes is an anagram of the stone [2]. *Sang-de-boeuf*, \"ox blood\", is a deep red glaze on old Chinese porcelain [2]. The shared idea is a red that is dark enough to need a second word.\n\nClothes carry the words too. In Nella Larsen's novel *Quicksand*, the teacher Helga Crane is thought strange for wearing \"deep reds\" at a school where bright colors are considered vulgar, and she is expected to wear black, brown and navy [10]. The color was a mark of how a person was allowed to look."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, this swatch is present in 178 (0.75 per cent), and in 171 by the stricter within-painting count [11]. That is more common than 68 per cent of the named colors [11]. Inside a painting it is an accent in 91 per cent of the 171 [11].\n\nIt peaks in the 1400s, in 28 of 945 paintings (3.0 per cent), 3.6 times the museums' baseline [11]. One hit is [[painting:commons-Q134545315|Botticelli's portrait of a young man with a red cap]] of 1484, in which a color within six units of the swatch covers about a third of the canvas [11]. The first dated painting that holds it is from 1391, by Niccolo di Pietro Gerini, a floor and not a first [11]. It shares canvases with Dark Sienna and Dark chocolate brown more often than chance, with a lift of 6.6 and 2.6 [11]. As ever these are photographs of aged, varnished paintings, so a match is not a pigment test [11]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented: a descriptive name, not a pigment, dye or place",
+   "first_recorded": "ISCC-NBS 1955 and the xkcd survey of 2010 in our sources",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "Iron Oxide Red",
+   "Spanish Brown",
+   "Scarlet Ochre",
+   "Red Ox"
+  ],
+  "siblings": [
+   "blood-red",
+   "oxblood",
+   "maroon"
+  ],
+  "parent": "red",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "blood-red",
+    "gloss": "darker, a named reference to blood, with its own history"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 178,
+  "n_within_painting": 171,
+  "pct": 0.75,
+  "rank_more_common_than_pct": 68,
+  "peak_century": {
+   "century": 1400,
+   "hits": 28,
+   "n": 945,
+   "lift": 3.6
+  },
+  "role": {
+   "accent": 0.91
+  },
+  "first_dated": {
+   "id": "commons-Q18147522",
+   "year": 1391,
+   "painter": "Niccolo di Pietro Gerini"
+  },
+  "company": [
+   "Dark Sienna",
+   "Dark chocolate brown"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Deep Red, sources xkcd 2010 and ISCC-NBS 1955; alternate names from ISCC-NBS block 40 with Maerz and Paul 1930 dates",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, pp. 25, 92, 183, 199, 222, 291, 297, 298, 355",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 10 and ch. 11",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, ch. 67 and ch. 69",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 13",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 23",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"Madder\" lakes, \"Armenian bole\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 115 (\"Brazilwood\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Finlay, Jewels: A Secret History, ch. 1",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 24",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (data/graph/fieldnotes; tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which is the better description of the name Deep Red?",
+   "choices": [
+    "A plain description of a dark, saturated red, not a pigment name",
+    "The name of a medieval dye",
+    "A place name",
+    "A Crayola trade name"
+   ],
+   "answer": "A plain description of a dark, saturated red, not a pigment name",
+   "kind": "pick"
+  },
+  {
+   "q": "What did dyers call the deep red cloth made with cochineal when it reached Europe?",
+   "choices": [
+    "Grana, or in grain",
+    "Sang-de-boeuf",
+    "Almagra",
+    "Caput mortuum"
+   ],
+   "answer": "Grana, or in grain",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Old color lists file Iron Oxide Red, Spanish Brown and Scarlet Ochre under the same swatch as Deep Red.",
+  "Chromium makes the same crystal deep red in ruby and sea-green in emerald."
+ ],
+ "words": 791,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Hedged Finlay's 'Spanish mercury' red as presumably cinnabar (the book does not name cinnabar)."
+  ]
+ }
+}

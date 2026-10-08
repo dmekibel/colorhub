@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A bird's color",
-   "body": "Paterson defines *canary* as a bright yellow like the plumage of the bird, and *canary yellow* as the bright yellow of the canary [1]. The swatch here, #FFEF00, is the vivid screen version: in the ISCC-NBS system of 1955 its nearest block is a brilliant greenish yellow, and the name also appears in the Crayola list [3].\n\nThe word has drifted. Werner's table of 1774 used descriptive names such as milk white, canary green and sky blue [4]. When the mineralogist Jameson revised the list, he changed canary green to siskin green [5]. Paterson now glosses canary green as a dark yellow [1]. A name that began as a green ended as a yellow.\n\nIn the books, the word \"Canary\" more often means the islands, where cochineal farming grew sixfold between 1855 and the early 1870s [16]. The books we read do not say how the bird or the color got its name."
+   "body": "Paterson defines *canary* as a bright yellow like the plumage of the bird, and *canary yellow* as the bright yellow of the canary [1]. The swatch here, #FFEF00, is the vivid screen version: in the ISCC-NBS system of 1955 its nearest block is a brilliant greenish yellow, and the name also appears in the Crayola list [3].\n\nThe word has drifted. Werner's table of 1774 used descriptive names such as milk white, canary green and sky blue [4]. When the mineralogist Jameson revised the list, he changed canary green to siskin green [5]. Paterson now glosses canary green as a dark yellow [1]. A name that began as a green ended as a yellow.\n\nThe word \"Canary\" also names the islands, where cochineal farming grew sixfold between 1855 and the early 1870s [16]. The books we read do not say how the bird or the color got its name."
   },
   {
    "id": "table",
@@ -22,12 +22,12 @@
   {
    "id": "chrome",
    "title": "Chrome yellow and the cab",
-   "body": "The canary of the street was a mineral. In 1797 the chemist Vauquelin found a new metal in crocoite, a red lead ore from Siberia, and named it chrome from the Greek word for color [8]. Lead chromate, made synthetically, proved a rich yellow, and in 1804 Vauquelin and Berthollet suggested it as a pigment [8]. By 1809 chrome yellow was on the painter's palette, and Thomas Lawrence used it in a portrait of 1810 [8].\n\nThe hue could be tuned. Mixed half and half with lead sulphate it gave a primrose yellow, 65 per cent chromate gave a lemon yellow, and more chromate deepened it [8]. Its strong tinting power meant extenders such as barium sulphate could stretch it, and so it reached commercial paint and the coaches of Europe, ahead of the canary-yellow taxis of the United States [8]. The Pigment Compendium cautions that \"canary yellow\" was one of several shade terms for chrome yellow that never reliably named a composition [10]. It adds that chrome yellow tends to darken in light [10].\n\nThe tale is told that Delacroix, wanting to emphasize a yellow drapery, looked at a Paris cab painted canary yellow and saw it cast a violet shadow in the sun [9]. Ball gives it only as a tale, and we could not verify it, but the optics hold: look at the shadow beside any bright yellow object and it leans violet [9]. Ball treats the episode as a hinge to Impressionism [9]."
+   "body": "The canary of the street was a mineral. In 1797 the chemist Vauquelin found a new metal in crocoite, a red lead ore from Siberia, and named it chrome from the Greek word for color [8]. Lead chromate, made synthetically, proved a rich yellow, and in 1804 Vauquelin and Berthollet suggested it as a pigment [8]. By 1809 chrome yellow was on the painter's palette, and Thomas Lawrence used it in a portrait of 1810 [8].\n\nThe hue could be tuned. Mixed half and half with lead sulphate it gave a primrose yellow, 65 per cent chromate gave a lemon yellow, and more chromate deepened it [8]. Its strong tinting power meant extenders such as barium sulphate could stretch it, and so it reached commercial paint and the coaches of Europe, ahead of the canary-yellow taxis of the United States [8]. The Pigment Compendium cautions that \"canary yellow\" was one of several shade terms for chrome yellow that did not consistently designate a composition [10]. It adds that chrome yellow tends to darken in light [10].\n\nThe tale is told that Delacroix, wanting to emphasize a yellow drapery, looked at a Paris cab painted canary yellow and saw it cast a violet shadow in the sun [9]. Ball gives it only as a tale, and we could not verify it, but the optics hold: look at the shadow beside any bright yellow object and it leans violet [9]. Ball treats the episode as a hinge to Impressionism [9]."
   },
   {
    "id": "street",
    "title": "Canary in the street and the mine",
-   "body": "Pastoureau warns against reading earlier centuries through their paintings. In interiors of the late 1600s and early 1700s, yellows look dull, and lemon or canary yellows appear only in still lifes of fruit, though varnish and age have altered the pictures [11]. By 1827 a Montpellier doctor proposed that registered prostitutes wear a canary yellow hat and belt, and after 1850 officials more often asked for plain dress without garish yellow [12].\n\nBy the 1880s the color was one of the partners recommended for [[heliotrope]], with eucalyptus green and peacock blue, in what one commentator called startling combinations [13]. St Clair calls the mineral [[orpiment]] a canary-yellow arsenic sulfide, about 60 per cent arsenic [14]. In gem grading a [[gem:diamond|diamond]] with a deep yellow tinge is a canary diamond, set apart from the paler cape stones [2][15]."
+   "body": "Pastoureau warns against reading earlier centuries through their paintings. In interiors of the late 1600s and early 1700s, yellows look dull, and lemon or canary yellows appear only in still lifes of fruit, though varnish and age have altered the pictures [11]. By 1827 a Montpellier doctor proposed that registered prostitutes wear a canary yellow hat and belt, and after 1850 officials more often asked for plain dress without garish yellow [12].\n\nLater in the nineteenth century the color was one of the partners recommended for [[heliotrope]], with eucalyptus green and peacock blue, in what one commentator called startling combinations [13]. St Clair calls the mineral [[orpiment]] a canary-yellow arsenic sulfide, about 60 per cent arsenic [14]. In gem grading a [[gem:diamond|diamond]] with a deep yellow tinge is called a canary, while a yellow tinge alone is called cape [2][15]."
   },
   {
    "id": "field",
@@ -260,13 +260,13 @@
  "words": 737,
  "status": "checked",
  "checked": {
-  "by": "article writer, sentence-to-card trace",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Books say nothing on origin of the bird's name; stated as such.",
-   "Delacroix cab episode is a told tale in Ball; marked as such. Optics sentence is interpretive and cited to Ball.",
-   "Library note merges several Maerz & Paul first-use dates (1789, 1868) across names; not used.",
-   "Paterson 'canary green' = dark yellow vs Werner green: drift noted, not resolved."
+   "Removed unsupported 'more often' islands claim.",
+   "Heliotrope pairing date 1880s not supported (only 1880 other pairing); made 'later'.",
+   "Cape/canary diamond wording tied to Paterson.",
+   "Pigment Compendium wording tightened."
   ]
  }
 }

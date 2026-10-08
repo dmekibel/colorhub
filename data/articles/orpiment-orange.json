@@ -1,0 +1,235 @@
+{
+ "slug": "orpiment-orange",
+ "name": "Orpiment Orange",
+ "hex": "#D17C3F",
+ "names": [
+  "Orpiment Orange"
+ ],
+ "tier": "pigment",
+ "depth": "medium",
+ "lede": "Orpiment Orange is a warm orange from Patrick Syme's 1821 color chart, named for the arsenic mineral orpiment even though true orpiment is mostly yellow.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Number 78 in Syme's chart",
+   "body": "Orpiment Orange is number 78 among the oranges in Patrick Syme's 1821 edition of Werner's *Nomenclature of Colours* [1]. Of Syme's oranges only one came from Werner himself, Orange Yellow, which Syme renamed Dutch Orange; the others were already in his 1814 edition, as is Orpiment Orange [1][9].\n\nSyme treated it as the characteristic color of the group, a blend of about equal parts gamboge yellow and arterial blood red [2]. Neighboring oranges are built from it. Brownish Orange takes Orpiment Orange as its base and adds a touch of [[hyacinth-red]] and some light chestnut brown, while [[buff-orange]] starts instead from sienna yellow with a touch of Dutch Orange [2][3]. In this way the chart reads as a family tree of mixtures, with [[gamboge-yellow]] at one root.\n\nSyme's examples are the neck ruff of the golden pheasant, the belly of the warty newt and the garden nasturtium, which he called Indian cress [1][2]. Baty's plates add a specimen of carbonate of lime from James Sowerby's *British Mineralogy* [2]. Hewitson's egg book of 1833, by Baty's captions, gives the number to the red-backed shrike [4]."
+  },
+  {
+   "id": "material",
+   "title": "Orpiment, realgar and the orange",
+   "body": "The mineral that gave the name is mostly yellow. Orpiment is a yellow to greenish-yellow arsenic sulfide, about 60 per cent arsenic [5]. Its name goes back to the Latin *auripigmentum*, \"gold paint\", and further to the Persian *zarnikh*, which became *arsenikon* in Greek [5][6]. The color of the mineral on our own scale is [[orpiment]], a yellow about 26 units away from this orange [9].\n\nThe orange arsenic mineral is realgar, a red arsenic disulphide that yields a rich orange pigment and turns up in the same deposits as orpiment [7]. Colourmen blurred the two. Field in 1835 filed orpiment under orange and said the orange kind was wrongly called red orpiment, and Salter in 1869 said that what was sold as orange orpiment was realgar, often adulterated with brick dust and yellow ochre [8]. Reeves sold a paint of that name from 1856 to 1859 [8].\n\nNo book we hold says which material Syme had in mind [2][8]. What the books do say is that the mineral and its orange cousin were traded under blurred names [5][7][8]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch, and a Japanese name",
+   "body": "The swatch is Syme's aged chart chip, approximate, and our library also holds it under ISCC-NBS block 48 and as plate 10 B 12 in Maerz and Paul's dictionary of 1930, which dates the name to 1814 [9]. The nearest named color in the app is [[ochre]], about five units away [9].\n\nThe library pairs it, by screen color, with the traditional Japanese name *kuchiba-iro*, written 朽葉色 and meaning decaying-leaves color [9]. The pairing is by color, not by shared history [9]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a screen color within six units of this swatch covers at least five per cent of the canvas in 195 works, 0.8 per cent of the collection [10]. In 62 per cent of them it is among the lightest notes [10]. The earliest dated example is a *Saint Cecilia* altarpiece by the Master of Saint Cecilia, painted in 1304, where it covers 14 per cent of the panel [10].\n\nIt clusters. The 1480s are the peak decade, with 5 of 141 paintings, about four times the archive rate [10]. [[painter:filippo-lippi|Filippo Lippi]] carries it in 3 of 13 works, [[painter:amedeo-modigliani|Modigliani]] in 3 of 18 and [[painter:paul-gauguin|Gauguin]] in 4 of 50 [10]. Indian painting has it in 24 of 721 works, 4.1 times the archive rate, led by the Pahari and Rajput schools [10]. In the album portrait of a kneeling holy man by [[painting:cma-170788|Mir Sayyid Ali]], dated 1556, it covers 52 per cent of the image [10].\n\nThe color most often found beside it is [[ochre]], on 170 of the 195 canvases [10]. These are photographs of aged, varnished paintings, and a color match is not a pigment test: a patch like this may be orpiment, realgar, an iron earth or toned varnish [10]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the arsenic mineral orpiment (Latin auripigmentum, 'gold paint')",
+   "first_recorded": "Syme's 1814 edition (Maerz & Paul date); no. 78 in the 1821 edition",
+   "source": "Baty, Nature's Palette, p. 205; ColorHub library"
+  },
+  "aka": [
+   "Orpiment-orange"
+  ],
+  "siblings": [
+   "orpiment",
+   "buff-orange",
+   "brownish-orange"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "orpiment",
+    "gloss": "The yellow of the mineral itself, about 26 units from this orange"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Kuchiba-iro (朽葉色), paired by screen color in our library"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#D17C3F",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 195,
+  "first_dated": {
+   "id": "commons-Q3948951",
+   "painter": "Master of Saint Cecilia",
+   "year": 1304
+  },
+  "top_paintings": [
+   "cma-170788",
+   "commons-Q61890653",
+   "nga-46521",
+   "aic-64001"
+  ],
+  "role": {
+   "highlight": 0.62,
+   "mid": 0.34,
+   "shadow": 0.04
+  },
+  "peak_decade": {
+   "key": 1480,
+   "n": 141,
+   "hits": 5
+  },
+  "top_country": {
+   "name": "India",
+   "hits": 24,
+   "n": 721,
+   "lift": 4.1
+  },
+  "company": [
+   "Ochre"
+  ],
+  "measured": {
+   "lch": [
+    60,
+    54,
+    59
+   ],
+   "nearest": [
+    [
+     "Ochre",
+     4.7
+    ]
+   ],
+   "de2000_to_orpiment": 26
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 205",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 208-209",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 206",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 129-130",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 298 (\"Orpiment\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 51 (\"Orpiment\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 53 (\"Realgar\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 295 (\"Orange orpiment\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json: Werner/Syme, ISCC-NBS 1955, Maerz & Paul 1930, jp names), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why is the mineral orpiment a poor guide to the color called Orpiment Orange?",
+   "choices": [
+    "Orpiment is mainly yellow; the orange arsenic mineral is realgar",
+    "Orpiment is blue until it is ground",
+    "Orpiment is always white",
+    "The name was invented in the twentieth century"
+   ],
+   "answer": "Orpiment is mainly yellow; the orange arsenic mineral is realgar",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Syme described Orpiment Orange as about equal parts gamboge yellow and arterial blood red.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which of these is one of Syme's examples of the color?",
+   "choices": [
+    "The neck ruff of the golden pheasant",
+    "A bluebell petal",
+    "A lump of coal",
+    "A snowdrop"
+   ],
+   "answer": "The neck ruff of the golden pheasant",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Syme built his oranges as mixtures: Brownish Orange is Orpiment Orange plus a little red and brown.",
+  "The mineral orpiment is yellow; the orange arsenic mineral is realgar, and colourmen mixed the two up.",
+  "Look for Orpiment Orange on a golden pheasant's neck ruff or a garden nasturtium, Syme's own examples."
+ ],
+ "words": 657,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported poison/why-artists-dropped-it claim",
+   "Persian word described by name only, not as 'gold-colored'"
+  ]
+ }
+}

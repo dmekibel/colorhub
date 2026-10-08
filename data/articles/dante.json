@@ -126,13 +126,9 @@
  "words": 554,
  "status": "checked",
  "checked": {
-  "by": "batch-64 writer self-check",
+  "by": "checker",
   "date": "2026-10-08",
-  "issues": [
-   "Name origin undocumented; poet link explicitly not claimed.",
-   "Removed an unsourced claim about early-1900s naming fashions.",
-   "Delacroix anecdote single-source (Gage), hedged."
-  ]
+  "issues": []
  },
  "notes": [
   {

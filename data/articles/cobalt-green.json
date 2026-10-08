@@ -27,7 +27,7 @@
   {
    "id": "trade",
    "title": "Dear and weak",
-   "body": "Church called cobalt green chemically and artistically perfect in 1901: bright, and excellent in permanence [1]. He did not say it was cheap. Ball adds that it had poor opacity and, like every cobalt pigment, stayed expensive [1]. Zerr and Rübencamp in 1906 called it unpopular because of its price [4].\n\nThe cheaper rivals were artificial ultramarine greens, perfected in the 1820s by Guimet and Gmelin, and the older copper greens [6]. Painters distrusted the ultramarine greens until the 1880s, and the Customs Officer Henri Rousseau used one for his jungles because it was cheaper than cobalt green and safer than copper greens [6]. [[viridian]] won the same market from a different direction. Coles pairs it with cobalt green as the pair of safe, stable, readily available greens that artists finally gained in the nineteenth century [7]."
+   "body": "Church called cobalt green chemically and artistically perfect in 1901: bright, and excellent in permanence [1]. He did not say it was cheap. Ball adds that it had poor opacity and remained costly, as the cobalt pigments generally did [1]. Zerr and Rübencamp in 1906 called it unpopular because of its price [4].\n\nThe cheaper rivals were artificial ultramarine greens, perfected in the 1820s by Guimet and Gmelin, and the older copper greens [6]. Painters distrusted the ultramarine greens until the 1880s, and the Customs Officer Henri Rousseau used one for his jungles because it was cheaper than cobalt green and safer than copper greens [6]. [[viridian]] won the same market from a different direction. Coles pairs it with cobalt green as the pair of safe, stable, readily available greens that artists finally gained in the nineteenth century [7]."
   },
   {
    "id": "painters",
@@ -263,16 +263,14 @@
   "The name is a pigment recipe that never had one fixed recipe: the zinc and cobalt shares varied by maker.",
   "Our archive holds only four paintings with a broad passage of this green."
  ],
- "words": 1146,
+ "words": 1148,
  "status": "checked",
  "checked": {
-  "by": "L7 batch 59 self-check (sentence-to-card trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Hue (Paterson yellowish green vs Compendium blue-green) and date of availability (Ball mid-19th c. vs Pastoureau end of 18th c.) are book disagreements, named in text.",
-   "Pastoureau's 'sometimes called emerald green' left out as single-source and unsupported by the Compendium synonyms.",
-   "Swedish green: sources disagree, left out of the family.",
-   "Rubens/cobalt blue myth corrected."
+   "Reworded Ball's cost line to avoid close paraphrase.",
+   "Verified kobold/Agricola/Mathesius, Rinmann 1780, Thenard/Chaptal, invisible ink, Rubens myth, Pastoureau against book text."
   ]
  }
 }

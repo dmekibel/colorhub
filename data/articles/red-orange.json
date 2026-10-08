@@ -22,12 +22,12 @@
   {
    "id": "warm",
    "title": "The warmest color",
-   "body": "Birren reports a study by Newhall in which 297 observers judged 50 color samples for warmth and coolness [5]. Their \"warmest\" judgments clustered strongly in the red-orange region, while their \"coolest\" judgments were spread from yellow through green and blue to purple [5]. By this evidence red-orange is the warm color most people agree on, though the study measures judgments of warmth, not temperature [5].\n\nStaring at a strong red or red-orange and then looking at a white surface produces an afterimage in the complementary color, a green or blue-green, as Albers describes the classroom demonstration [6]. Birren also repeats an older claim, from color therapists he puts on the wrong side of the medical profession, that red-orange pairs with indigo-blue and that colors can cure illness [7]. The claim that colors heal is a myth, and the pairing is old opinion, not evidence [7]."
+   "body": "Birren reports a study by Newhall in which 297 observers judged 50 color samples for warmth and coolness [5]. Their \"warmest\" judgments had a strikingly major mode in the red-orange region (and a minor one in violet), while their \"coolest\" judgments were spread from yellow through green and blue to purple [5]. By this evidence red-orange is the warm color most people agree on, though the study measures judgments of warmth, not temperature [5].\n\nStaring at a strong red or red-orange and then looking at a white surface produces an afterimage in the complementary color, a green or blue-green, as Albers describes the classroom demonstration [6]. Birren also repeats an older claim, from color therapists he puts on the wrong side of the medical profession, that red-orange pairs with indigo-blue and that colors can cure illness [7]. The claim that colors heal is a myth, and the pairing is old opinion, not evidence [7]."
   },
   {
    "id": "world",
    "title": "Where it shows up",
-   "body": "Red-orange is the glow of a sunset. Gurney notes that the boldest red-orange forms in the sky where the sun crosses the horizon, and that only the lowest clouds receive the high-chroma red-orange light as the sky dims [8]. A neon sign is a harder case: its red-orange is both very light and very saturated, which paint cannot match, so Gurney's painter used a pure tint of the hue and a flood of the same color at mid value around it [8].\n\nIn pigments, [[vermilion]] owes its red-orange to mercury [8]. The Pigment Compendium uses Red-Orange as one of its own color classes [9]. It files there burnt orpiment, a name for synthetic realgar made by heating [[orpiment]], and orange lead [10]. It also files Pliny's sandyx, a mixture of white lead and roasted red ochre [10]. The hematite-rich Red Chalk at Hunstanton in Norfolk is described there as a strong red-orange [9]. In gems, spessartine is the red-orange member of the [[gem:garnet|garnet]] family [11]."
+   "body": "Red-orange is the glow of a sunset. Gurney notes that the boldest red-orange forms in the sky where the sun crosses the horizon, and that only the lowest clouds receive the high-chroma red-orange light as the sky dims [8]. A neon sign is a harder case: its red-orange is both very light and very saturated, which paint cannot match, so Gurney's painter used a pure tint of the hue and a flood of the same color at mid value around it [8].\n\nIn pigments, [[vermilion]] owes its red-orange to mercury [8]. The Pigment Compendium uses Red-Orange as one of its own color classes [9]. It files there burnt orpiment, a name for synthetic realgar made by heating [[orpiment]], and orange lead [10]. It also files Pliny's sandyx, a mixture of red lead and red ochre [10]. The hematite-rich Red Chalk at Hunstanton in Norfolk is described there as a strong red-orange [9]. In gems, spessartine is the red-orange member of the [[gem:garnet|garnet]] family [11]."
   },
   {
    "id": "field",
@@ -207,15 +207,14 @@
   "Three standards give three very different red-oranges.",
   "Look for it at sunset, on the clouds nearest the horizon."
  ],
- "words": 725,
+ "words": 733,
  "status": "checked",
  "checked": {
-  "by": "batch-14 writer",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Concordance hits are mostly the phrase 'red, orange' and the Pigment Compendium colour class; article is deliberately short.",
-   "Birren therapy claim given only to correct it.",
-   "Pigment Compendium p.10 note on colour classes read in text; entry counts not used."
+   "Sandyx: 'white lead' corrected to red lead and red ochre (Pigment Compendium)",
+   "Newhall warmth study: added the minor violet mode Birren reports"
   ]
  }
 }

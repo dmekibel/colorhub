@@ -1,0 +1,160 @@
+{
+ "slug": "abbey",
+ "name": "Abbey",
+ "hex": "#6457AE",
+ "names": [
+  "Abbey"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Abbey is a vivid blue-violet that appears in Maerz and Paul's 1930 color dictionary, with no recorded reason for its name.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name with no recorded reason",
+   "body": "Abbey is a saturated blue-violet, #6457AE, and the only source that records it in our library is Maerz and Paul's 1930 dictionary, which lists it as first recorded in 1921 on plate 41, position F 10 [1]. The dictionary's reason for the name is not in our collection, so the origin is undocumented.\n\nIn the concordance of our 29 books, the word turns up only as a building, never as a color [7]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch is a screen approximation of a color printed on a plate in 1930 [1]. It measures about 42 in lightness and 53 in chroma, at a hue angle near 301 degrees, which is a blue-violet [6]. The nearest named color in our app is [[purple]], 9.6 units away, so it sits between [[royal-blue]] and purple, nearer to [[periwinkle]] than to [[indigo]] [6]."
+  },
+  {
+   "id": "abbeys",
+   "title": "Abbeys in the color books",
+   "body": "The books put abbeys beside color for two reasons. Suger rebuilt the abbey church of Saint-Denis near Paris in the 1130s and 1140s as what Pastoureau calls a temple of color, and St Clair credits its craftsmen with perfecting cobalt-colored glass [2][3]. In the same books, the black of monks and clerics stands for humility and temperance [2].\n\nThe second is Merton Abbey in Surrey, where William Morris had his dye works [3]. Visitors watched wool come out of woad vats an almost grassy color before it turned blue in the air [3], and Morris recorded his indigo discharge recipes in a Merton Abbey dye book [4].\n\nNeither of these blues is the swatch, and no book says Maerz and Paul had them in mind [1][3]. They are places to see blues made by hand [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Abbey, matched within six units of CIEDE2000 and covering at least five per cent of the canvas, appears in only 2 of 23,781 paintings in our archive [5]. They are Edvard Munch's *Forest on the Way to Borre* of 1901 and John Singer Sargent's *Bedouins* of 1905, covering 14 and 11 per cent [5]. Both date from the first years of the twentieth century [5]. These are photographs of aged, varnished paintings, so a color match is not a pigment test [5].\n\nWhere to look: [[painter:edvard-munch|Munch]]'s [[painting:commons-Q18889878|Forest on the Way to Borre]] holds the color across 14 per cent of the canvas [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented",
+   "first_recorded": "Maerz and Paul list it as first recorded in 1921 (plate 41 F 10)",
+   "source": "ColorHub library, Maerz & Paul 1930"
+  },
+  "aka": [],
+  "siblings": [
+   "periwinkle",
+   "royal-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#6457AE",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 2,
+  "top_paintings": [
+   "commons-Q18889878",
+   "commons-Q131754092"
+  ],
+  "measured": {
+   "lch": [
+    42,
+    53,
+    301
+   ],
+   "nearest": [
+    [
+     "Purple",
+     9.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Abbey entry; Maerz & Paul 1930, first recorded 1921, plate 41 F 10",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, Black: The History of a Color, pp. 32 and 68",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Woad\" (Merton Abbey) and \"Blue\" (Saint-Denis)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 173",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py \"#6457AE\", CIEDE2000 within 6, at least 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "color-kb concordance for \"abbey\" (53 hits, all about buildings or institutions)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub measurement: CIE LCH of the swatch and nearest app color (CIEDE2000)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What do the color books say about where the color name Abbey comes from?",
+   "choices": [
+    "Nothing; the origin is undocumented",
+    "It is named for monks' robes",
+    "It is named for Saint-Denis glass",
+    "It is named for Merton Abbey woad"
+   ],
+   "answer": "Nothing; the origin is undocumented",
+   "kind": "pick"
+  },
+  {
+   "q": "The Abbey swatch on this page is a measurement of the original 1930 printed plate.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Abbey is a vivid blue-violet whose name no book explains."
+ ],
+ "words": 383,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "All claims traced to cards and book text; no changes needed"
+  ]
+ }
+}

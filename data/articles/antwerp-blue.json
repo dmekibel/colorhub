@@ -1,0 +1,260 @@
+{
+ "slug": "antwerp-blue",
+ "name": "Antwerp Blue",
+ "hex": "#085D93",
+ "names": [
+  "Antwerp Blue"
+ ],
+ "tier": "pigment",
+ "depth": "long",
+ "lede": "Antwerp Blue is a nineteenth-century paint name for a pale, greenish form of Prussian blue, though earlier writers took it for a copper pigment, and it was never one fixed recipe.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name with a city in it",
+   "body": "The name points to Antwerp, yet it behaves as a paint term [6]. Paterson's dictionary calls it a greenish blue variety of Prussian blue, and adds that the dictionary also knows an Antwerp brown and an Antwerp red [6]. Jarman puts it with Naples yellow and raw Sienna among colors that carry a place name [9]. Why Antwerp, and whether the city made or sold it, is not explained in any book we searched [1][6][9].\n\nThe family was never tidy. A list of 1885 gives Antwerp red as a variety of red ochre, so the city's name traveled across the whole palette [1]."
+  },
+  {
+   "id": "chemistry",
+   "title": "What it was made of",
+   "body": "Writers disagreed about what Antwerp blue was [1]. Around 1797 to 1808 it was identified as a copper pigment, but by 1835 Field described it as a lighter and brighter form of [[prussian-blue]] [1]. Salter, editing Field in 1869, said the paler tint came from a larger proportion of aluminous base, and Mallet in 1870 mentioned added white clay or chalk [1].\n\nLater authors describe it as a modified Prussian blue [1]. Martel in 1860, Seward in 1889 and Church in 1901 all describe a modified Prussian blue containing alumina, or sometimes magnesium and zinc carbonates [1]. Riffault's list of 1874 gives Prussian blue mixed with alumina, magnesia and zinc oxide [2]. Mierzinski in 1881 described a zinc oxide dissolved in iron vitriol and combined with a potassium hexacyanoferrate solution, where more iron vitriol gave a darker blue [1]. Berlin blue is among the many synonyms the compendium lists for [[berlin-blue|Prussian blue]] [2]. Heaton, in 1928, called Antwerp blue rare, and said a zinc form is made by precipitating zinc and ferrous sulfates with sodium ferrocyanide [1][3].\n\nThe name also overlapped with others. Salter listed Haarlem blue as a synonym of Antwerp blue, a term he used for both synthetic copper pigments and forms of Prussian blue [4]. Mayer reported that Antwerp blue and manganese blue were both sold as mineral blue [5]. The safe reading is that a tube marked Antwerp blue was a pale, greenish, white-extended Prussian blue, but that the label alone did not guarantee it [1][2][4]."
+  },
+  {
+   "id": "painters",
+   "title": "In the paintbox",
+   "body": "Antwerp blue was one of the stock blues of the nineteenth-century colourman. By 1878 Winsor and Newton sold Prussian blue itself, Antwerp blue mixed with white, and two greens made from Prussian blue and gamboge [7]. Field had already noted in 1835 that Hooker's green and Varley's green resembled mixed greens of Prussian or Antwerp blue with [[gamboge-yellow|gamboge]] [8]. Those mixed greens explain why [[hooker-s-green]] has a blue base [8].\n\nPainters did not always like it. C. Storey, an English contemporary of Whistler quoted by Gage, found Antwerp blue with white too crude and black not purple enough, so he added lake, on a palette arranged like piano keys [10].\n\nAntwerp blue also turns up in a famous art-world scandal. In the late 1790s Ann Jemima Provis claimed to have found an old manuscript that recorded the techniques of the sixteenth-century Venetian painters [11]. Benjamin West tried the \"Venetian Secret\" at the Royal Academy [11]. Its so-called Titian Shade combined ivory black with crimson lake and a blue that could be indigo, Hungarian blue (Prussian) or Antwerp blue [11]. Prussian blue was an eighteenth-century invention, widely known in Europe only by 1750, so no such blue belonged to Titian [12]. West's paintings were shown in 1797 to general disappointment [11]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch is Ridgway's Antwerp Blue of 1912, plate VIII, which our library also finds in ISCC-NBS block 170 and in Maerz and Paul's dictionary of 1930, where the name is dated to about 1724 [13]. It is an aged scan, so the color is approximate [13]. On screen it sits about 15 units from our [[prussian-blue]] and is far lighter, which agrees with Field's \"lighter and brighter\" [13][1]. Its nearest named color in the app is [[denim]], a little under five units off [13]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a screen color within six units of this swatch covers at least five per cent of the canvas in only 31 works, about 0.13 per cent [14]. Where it appears it is usually a mid or dark note: 52 per cent mid, 32 per cent shadow, 16 per cent highlight [14]. Every one of those 31 paintings also contains denim, the app's nearest neighbor [14].\n\nThe earliest is a portrait of Giamberti da Sangallo by [[painter:piero-di-cosimo|Piero di Cosimo]], dated 1482, where the match covers 20 per cent [14]. That is a lesson in what a match means: Antwerp blue as a pigment did not exist for well over two centuries, so this is a color found in a painting and not a pigment identified [12][14]. The rate rises after 1900, with 9 of 1,674 paintings, and the strongest movement signal is Impressionism, at 2 of 140 [14].\n\nTwo works cover the most canvas. Arthur B. Davies reaches 34 per cent in *Hermes and the Infant Dionysus* of 1900, and [[painting:commons-Q26220263|Van Gogh's *Three White Cottages in Saintes-Maries*]] of 1888 reaches 29 per cent [14]. Ball notes Prussian blue in Van Gogh's *La Mousmé* from the same year [7]. These are photographs of aged, varnished paintings, so a color match is no pigment test [14]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Antwerp; the reason is undocumented in the books searched",
+   "first_recorded": "c. 1724 (Maerz & Paul 1930 entry)",
+   "source": "ColorHub library; Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "Antwerp-blue"
+  ],
+  "siblings": [
+   "prussian-blue",
+   "berlin-blue"
+  ],
+  "parent": "prussian-blue",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "denim",
+    "gloss": "nearest everyday name for this screen color, unrelated in origin"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#085D93",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 31,
+  "first_dated": {
+   "id": "rijks-200107876",
+   "painter": "Piero di Cosimo",
+   "year": 1482
+  },
+  "top_paintings": [
+   "cma-109030",
+   "commons-Q26220263",
+   "nga-42446",
+   "commons-Q141559670"
+  ],
+  "role": {
+   "mid": 0.52,
+   "shadow": 0.32,
+   "highlight": 0.16
+  },
+  "century_1900": {
+   "hits": 9,
+   "n": 1674
+  },
+  "top_movement": {
+   "name": "Impressionism",
+   "hits": 2,
+   "n": 140
+  },
+  "company": [
+   "Denim"
+  ],
+  "measured": {
+   "lch": [
+    38,
+    36,
+    267
+   ],
+   "nearest": [
+    [
+     "Denim",
+     4.6
+    ]
+   ],
+   "de2000_to_prussian_blue": 15
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 33 (\"Antwerp blue\", \"Antwerp red\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 322 (\"Prussian blue\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 418 (\"Zinc hexacyanoferrate(II)\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 193 (\"Haarlem blue\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 275 (\"Mineral blue\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Antwerp blue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 18",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, pp. 199, 396 (\"Hooker's green\", \"Varley's green\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 5",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 189",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 217",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 18 (Prussian blue known across Europe by 1750)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json: Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did later nineteenth-century authors say Antwerp blue mostly was?",
+   "choices": [
+    "A modified Prussian blue extended with alumina, zinc or similar bases",
+    "A natural copper mineral",
+    "A form of ultramarine",
+    "A plant dye like woad"
+   ],
+   "answer": "A modified Prussian blue extended with alumina, zinc or similar bases",
+   "kind": "pick"
+  },
+  {
+   "q": "A 1482 portrait in our archive matches the Antwerp Blue swatch. What does that show?",
+   "choices": [
+    "Only that a similar screen color was photographed; the pigment itself did not yet exist",
+    "That the painter used Antwerp blue",
+    "That Antwerp blue is a medieval pigment",
+    "That the painting is a forgery"
+   ],
+   "answer": "Only that a similar screen color was photographed; the pigment itself did not yet exist",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Antwerp blue was the only paint to carry the city's name.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Antwerp blue was a pale Prussian blue, but for years writers took it for a copper pigment.",
+  "There was an Antwerp brown and an Antwerp red too: the city's name traveled across the palette.",
+  "The 'Titian Shade' of the 1790s Venetian Secret named a blue that did not exist in Titian's lifetime."
+ ],
+ "words": 866,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Softened 'settled the point'",
+   "Storey identified as in Gage and invented moral removed"
+  ]
+ }
+}

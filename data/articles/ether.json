@@ -182,12 +182,10 @@
  "words": 451,
  "status": "checked",
  "checked": {
-  "by": "batch-53 self-check",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Name origin undocumented; stated as such.",
-   "Birren quote paraphrased; one-word quote only.",
-   "Ngram skipped (word is a common physics term)."
+   "Verified Huygens/Young (Ball), Jeans quote and color-ether fad (Birren), Archer collodion, Garfield, Paterson lipochrin; no fixes needed."
   ]
  }
 }

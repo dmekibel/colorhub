@@ -1,0 +1,537 @@
+{
+ "slug": "ochre",
+ "name": "Ochre",
+ "hex": "#CC7722",
+ "names": [
+  "Ochre",
+  "Ocher"
+ ],
+ "tier": "pigment",
+ "depth": "epic",
+ "lede": "Ochre is iron in the ground: a family of yellow, orange and red earths that people have dug, washed and burned for paint longer than any other pigment, and that still sits in nearly every painter's box.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "Ochre is less a single color than a family of earths. The word comes from Greek *ōchros*, which Finlay glosses as pale yellow and Pastoureau as a pale color, usually yellow but sometimes whitish, greyish or brownish [1][35]. Over the centuries the sense drifted toward something redder, browner and earthier, and today it can cover almost any natural earth pigment, though strictly it means an earth that carries iron oxide [1]. Greek had a crowd of yellow words, and *okros* sat beside *xanthos*, *chrysos* and *krokinos*, terms that described light and sheen as much as hue [15].\n\nEnglish has spelled it ochre, ocher, oker and oaker, and the paint trade named each kind after the place it was dug [2]. Maerz and Paul's 1930 dictionary of color names dates the English color word to 1398 [28]. Dictionaries define the color loosely: Paterson gives a light brown, an orangey yellow or a shade of yellow, and the material as an ancient pigment that runs from red through yellow to brown [13]."
+  },
+  {
+   "id": "material",
+   "title": "Iron in the ground",
+   "body": "Ochres are rocks and soils colored by the oxides and hydroxides of iron, and they range from yellow through orange and red to purple [2]. The red ones owe their color to hematite, the anhydrous iron oxide that is also rust; the yellow ones to goethite, the hydrated oxide long sold as limonite [2][6]. A true ochre carries no manganese, and that is what separates it from its darker cousins [[sienna]] and [[umber]] [2]. When manganese is present the earth turns brown, and painters called it *terre d'ombre*, umber [16].\n\nOchre turns up in what one nineteenth-century chemist called countless localities, and its working qualities depend on the local geology [2]. France, Spain, Cyprus, Iran, Italy, Australia and the United States have all been major producers [2]. Preparing it has barely changed: the clay is ground and stirred into water, sand and grit sink, and the fine ochre left in suspension is filtered off and dried [3]. The result is nontoxic, does not fade in light, and stays inert in every medium painters use [3][2].\n\nFire is the second tool. Heating drives the water out of yellow goethite and leaves red hematite, so a yellow ochre turns orange under moderate heat and red under strong heat [8][4]. Roasting a red ochre pushes it toward purple or dark brown [2]. Raw and burnt sienna are the same trick played on a single earth: the raw pigment is yellowish, and roasting makes it a warm brownish red [11]."
+  },
+  {
+   "id": "history",
+   "title": "The first paint",
+   "body": "Ochre is the oldest pigment people are known to have used, and the books disagree on how old, because each counts a different kind of evidence. The Pigment Compendium cites ochre use in South African deposits 270,000 to 170,000 years old, before modern humans, and speculation reaching back 300,000 years [2]. Coles gives 250,000 years [8]; St Clair dates red-stained burials and dwellings from about 50,000 years ago [6]; Pastoureau puts the earliest yellow ochre at about 45,000 to 40,000 BCE, later and rarer than red [3]. Our own origin record marks engraved ochre from Blombos Cave in South Africa at roughly 75,000 years [30].\n\nFinlay describes mines at Bomvu Ridge in Swaziland, *bomvu* meaning red in Zulu, worked for red and yellow body paint at least 40,000 years ago [1]. Paleolithic painters were already chemists. Stone crucibles survive in which yellow ochre was heated to drive off its water and turn it red, and a few still carry red traces [4].\n\nCave palettes are reds, blacks, browns and ochres, with almost no white and no blue or green at all [4]. Some of the dead were laid on beds of red ochre, which Pastoureau reads as protection while conceding that no one knows the reason [4]."
+  },
+  {
+   "id": "antiquity",
+   "title": "Sealed Sinope",
+   "body": "In the classical world the best red ochre came from Sinope on the Black Sea, and it travelled under a seal, so that sealed Sinope became a mark of quality [1]. The long sea voyage made it expensive in Rome [5]. *Sinopia* and *sinoper* became general words for red ochre, and our [[sinopia]] swatch keeps the Black Sea name as a strong orange-red [1][28].\n\nOchre could also be a state asset. In the fourth century BC Athens passed a law giving itself a monopoly on a rich red ochre from the island of Kea, used in shipbuilding, medicine and ink [6]. Red ink for headings gave Latin *rubrica*, red ochre, its afterlife in English *rubric* [6][13]. Theophrastus described a red ochre called *miltos* that came in many shades, some close to the pink of flesh [33].\n\nAt Pompeii most wall yellows are ochre, and vessels from the villas show that yellow ochre was heated there to make reds and browns [14]. Roman painters even burned white lead together with red ochre to make pinks [5]. Egyptian painters had earlier mixed a green from blue frit and yellow ochre [33].\n\nOchre was the cheap red against which luxury was measured, and the books give different multiples. Pastoureau quotes Pliny pricing cinnabar at fifteen times red ochre from Africa, while St Clair prices Roman [[vermilion]] from Spain at 70 sesterces a pound, a tenfold markup over red ochre [5][7]."
+  },
+  {
+   "id": "words",
+   "title": "Words dug out of the ground",
+   "body": "The trade in red earth from Sinope left a stranger trace in heraldry: *sinople*, named after the red earth, came to mean green in the heraldic vocabulary [18][19]. Books disagree on when: Gage has the switch made by the early thirteenth century, Pastoureau places it around 1350 to 1380 and calls the reversal unexplained [18][19].\n\nMedieval names for reds were a tangle anyway. Cennino Cennini's *cinabrese* was a red ochre related to Pliny's sinopis, not cinnabar [32]. Farmers had their own word: ruddle, reddle or raddle is red ochre used to mark sheep, and its seller, the reddleman, is a character in Thomas Hardy's *The Return of the Native* (1878) [13]."
+  },
+  {
+   "id": "trade",
+   "title": "Oxford, Spruce and golden ochre",
+   "body": "Britain was known for its ochres, and the Oxford deposits on Shotover Hill gave what was thought the best yellow ochre in the country in the seventeenth and eighteenth centuries [2]. A 1676 painting manual said most of the yellow ochre sold in England was dug there; by 1928 the good seams were nearly gone, and the poorer stone ochres were cut with chalk and barytes [2]. The second-best grade was imported Dutch or Spruce ochre, Spruce being an old form of Prussian, while Spanish brown, despite its name, was usually a low-grade British red ochre [2].\n\nOchre's red and yellow forms invited a trade in disguise. Finlay reports that eighteenth-century Dutch makers bought French yellow ochre, roasted it and sold it as English red [1]. In the other direction, the golden ochre of early twentieth-century paint catalogues was French or American ochre brightened with chrome yellow, some of it 12 to 15 per cent orange chrome [2].\n\nChemistry also learned to make ochre without digging. Medieval alchemists oxidized iron into a product they called *crocus martis*, and Theodore de Mayerne gave recipes for a red version in the early seventeenth century [11]. The Mars pigments became an industry in the eighteenth century, when iron oxide came as a by-product of the sulphuric acid used to bleach textiles [11]. Ball counts Mars red as a refinement of red ochre rather than a new color [36]. Gurney calls natural yellow ochre the mellower of the two yellows, beside a synthetic Mars yellow of higher chroma [26]."
+  },
+  {
+   "id": "art",
+   "title": "In the paintbox",
+   "body": "Because it was cheap, stable and everywhere, ochre runs through almost every painting tradition. It is the most common pigment on Byzantine and Russian Orthodox icons, and it appears in Roman and medieval frescoes, illuminated manuscripts and pre-Hispanic codices [2]. In the Renaissance the ochres of Siena earned special respect [11].\n\nThe seventeenth century made it central. From the 1620s painters set their palettes in tonal order along the edge, from white through yellow ochre and vermilion to the browns and black [20]. Velázquez never used a pure green pigment; he mixed his greens from azurite and yellow ochre or lead-tin yellow [11]. The foreground of van Dyck's portrait of Charles I is glazed with ochres, browns and black [11]. After his bankruptcy in 1656 Rembrandt relied on a small range of cheap earths, umber above all, for the dark grounds of his late self-portraits [31].\n\nGurney gives the figure painter's palette that served from Rembrandt to Anders Zorn as white, yellow ochre, a red earth and black [21]. Zorn's own is recorded as vermilion, ivory black, flake white and yellow ochre [22]. Look at the warm half-tones of skin in an old portrait and this is often the mixture you are seeing.\n\nLater painters kept it even as brighter pigments arrived. A pigment box of Fragonard's in Grasse shows that he used mainly golden ochre and Naples yellow for his yellows, and Pastoureau sets it beside his [[art:nga-46303|Young Girl Reading]] [17]. In Cézanne's *Hillside in Provence* of about 1885 the orange and brown rocks are ochre earths mixed with vermilion, and Gauguin in Tahiti found burnt ochre indispensable for skin [12]. Le Corbusier and Ozenfant's Purism of 1920 put ochres, reds and earths in its stable major scale [23]. Ball reads Mark Rothko's *Ochre and Red on Red* (1954) as heat haze over a desert [24].\n\nOchre also shows how much a color depends on its neighbors. In one of Josef Albers's plates, Naples yellow and ochre, clearly different side by side, look nearly alike when one sits on deep red and the other on a yellowish white [25]. Gurney notes that a low-chroma yellow like ochre sits well inside the rim of the color wheel, which is why limited palettes built on it hold together [26]."
+  },
+  {
+   "id": "australia",
+   "title": "Ochre in Aboriginal Australia",
+   "body": "Finlay's chapter on ochre is largely about Australia, where ochre was traded across the continent [1]. Diyari expeditions of 70 to 80 men walked to the Bookartoo mine at Parachilna in the Flinders Ranges, a round trip of about a thousand miles over two months, each man carrying home about 20 kilograms in baked cakes [1]. Clashes with settlers along the route in the 1860s became known as the ochre wars, and in 1874 officials hauled four tons of a different, coastal ochre to Lake Eyre in the hope of ending the journeys [1]. It failed: the trip was a pilgrimage, ochre was a currency, and the substitute was not sacred [1].\n\nThe Bookartoo red was prized for its gleam, which Finlay links to a trace of mercury [1]. Among the Tiwi people each of four groups is linked to an ochre color: sun red, stone black, pandanus white and mullet yellow [1]. When a 1991 painting in ochre and gum by Rover Thomas sold at Christie's in Melbourne for A$786,625, it set a record for Aboriginal art, and the National Gallery of Australia was the buyer [1]."
+  },
+  {
+   "id": "science",
+   "title": "A compass in the plaster",
+   "body": "Red ochre has one property that no painter chose. While a fresco is wet, its iron oxide particles turn toward magnetic north, and when the plaster dries they stay put [1]. Because magnetic north wanders, Giacomo Chiari's team in Turin used the alignment to date wall paintings, and found that some Vatican fresco borders had been repainted in 1870 [1]."
+  },
+  {
+   "id": "myths",
+   "title": "Myths and loose ends",
+   "body": "Pliny's famous story that the great Greek painters used only four colors names two ochres among them, Attic yellow and Sinopian red, beside Melian white and a black [9]. It is a story, not a record. Gage argues that Pliny bent history to praise Roman austerity and points out that Pliny contradicts himself elsewhere [9]; the Pompeian walls, with cinnabar beside the ochres, show a wider palette [5].\n\nThe same story produced a second error. Pliny's yellow was *sil*, a mineral word for yellow ochre, but when blue rose to the rank of a basic color, Renaissance scholars wanted it in the Greek palette [10]. Cesare Cesariano claimed in 1521 that sil was ultramarine, and in 1585 Montjosieu declared it blue, which Gage calls a linguistic error [10][34]. A French encyclopedia later tied it to violet [10].\n\nA modern myth runs the other way. Le Corbusier's 1925 Pavillon de l'Esprit Nouveau is remembered as white, but it was in fact painted in about ten colors, among them yellow ochre and burnt sienna [23]."
+  },
+  {
+   "id": "swatch",
+   "title": "Which ochre?",
+   "body": "The ochre on this page, #CC7722, is the swatch that ISCC-NBS and Maerz and Paul attach to the name, a strong orange [28]. It is one point in a family that runs from pale yellow to purplish red. The American spelling shows the problem: the swatch filed as Ocher is a mustard yellow about 18.7 CIEDE2000 units away, and our library folds both names into this page [28].\n\nClose neighbors include [[bronze]], only 2.5 units off, while [[ochre-yellow]], from Werner's 1821 nomenclature, is far paler [28]. [[blue-ochre]], a Maerz and Paul name of about 1750, is a dark grey-blue that shares nothing with this swatch but the word [28]. Its red relatives sit under other names: [[english-red]], [[venetian-red]] and Ridgway's [[ocher-red]] [28]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six CIEDE2000 units of this ochre covers at least five per cent of the canvas in 217 works, under one per cent of the collection [27]. Indian court painting carries it far more often than average: Rajput pictures nine times as often (8 of 97) and Pahari pictures 4.6 times (5 of 118) [27]. The painting where it covers most canvas is a Bhagavata Purana page of about 1600, [[art:cma-314492|Krishna Exacts a Toll from the Milkmaids]], at a third of the surface [27].\n\nThe decade with the highest rate is the 1820s, with 43 of 731 paintings, 6.5 times the archive rate [27]. Most are portraits of Russian officers dated 1821 to 1828, several of them by George Dawe, who shows the color in 6 of his 50 works here [27]. Across all matches the color sits among the lightest tones of its painting 69 per cent of the time [27]. On a uniform portrait that more likely means gilt braid than ochre paint, and on the gold-ground [[art:nga-34|Saint Peter]] by Grifo di Tancredi, our earliest dated match (1310), it is more likely gold leaf [27].\n\nAmong painters with enough works here, Pierre Bonnard (4 of 45) and Paul Gauguin (3 of 50) carry it most often [27]. Gauguin's include [[art:commons-Q17493569|Les Alyscamps]] (1888) and the Tahitian [[art:commons-Q8191814|Eau mystérieuse]] (1893) [27]. Velázquez's [[art:commons-Q3500414|The Farmers' Lunch]] of 1618 matches too [27]. Ochre keeps warm company: it shares canvases with [[marigold]] nearly nine times more often than chance, and with [[chocolate]] five times [27].\n\nThese are photographs of aged, varnished paintings, and a color match is not a pigment test [27]. In Google Books the word *ochre* is printed most around 1817, falls to about 40 per cent of that level by 1920, and holds there [29]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Greek ōchros, pale or pale yellow; the iron-rich earth pigment",
+   "first_recorded": "English color name 1398 (Maerz & Paul, 1930)",
+   "source": "Finlay, Colour, ch. 1; Pastoureau, Yellow, ch. 37; data/library.json"
+  },
+  "aka": [
+   "Ocher",
+   "Oker",
+   "Yellow ochre",
+   "Red ochre",
+   "Sinopia (red ochre)",
+   "Ruddle, reddle (red ochre for marking sheep)"
+  ],
+  "siblings": [
+   "sienna",
+   "umber",
+   "raw-sienna",
+   "venetian-red",
+   "english-red"
+  ],
+  "parent": null,
+  "children": [
+   "ochre-yellow",
+   "ochre-brown",
+   "ocher-red",
+   "sinopia"
+  ],
+  "disambiguation": [
+   {
+    "slug": "blue-ochre",
+    "gloss": "Maerz & Paul name for a dark grey-blue, unrelated to this swatch"
+   },
+   {
+    "slug": "ochre-yellow",
+    "gloss": "Werner's Ochre Yellow is a pale buff yellow, much lighter than this swatch"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "ocre"
+   },
+   {
+    "lang": "ja",
+    "name": "ōdo-iro (黄土色, 'yellow earth')"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#CC7722",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 217,
+  "top_paintings": [
+   "cma-314492",
+   "commons-Q27697142",
+   "nga-56737",
+   "commons-Q27696992",
+   "cma-136475",
+   "commons-Q21727804"
+  ],
+  "first_dated": {
+   "id": "nga-34",
+   "painter": "Grifo di Tancredi",
+   "year": 1310
+  },
+  "movements": [
+   {
+    "name": "Rajput",
+    "hits": 8,
+    "n": 97,
+    "lift": 9.04
+   },
+   {
+    "name": "Pahari",
+    "hits": 5,
+    "n": 118,
+    "lift": 4.64
+   }
+  ],
+  "top_country": {
+   "name": "India",
+   "hits": 17,
+   "n": 721,
+   "lift": 2.58
+  },
+  "peak_decade": {
+   "decade": 1820,
+   "hits": 43,
+   "n": 731,
+   "lift": 6.45
+  },
+  "painters": [
+   {
+    "name": "George Dawe",
+    "hits": 6,
+    "n": 50,
+    "lift": 13.15
+   },
+   {
+    "name": "Pierre Bonnard",
+    "hits": 4,
+    "n": 45,
+    "lift": 9.74
+   },
+   {
+    "name": "Paul Gauguin",
+    "hits": 3,
+    "n": 50,
+    "lift": 6.58
+   }
+  ],
+  "role": {
+   "highlight": 0.69,
+   "mid": 0.3,
+   "shadow": 0.01
+  },
+  "company": [
+   {
+    "word": "Marigold",
+    "hits": 21,
+    "lift": 8.92
+   },
+   {
+    "word": "Chocolate",
+    "hits": 36,
+    "lift": 5.38
+   }
+  ],
+  "ngram": {
+   "word": "ochre",
+   "peak": 1817,
+   "rel_1920": 0.395,
+   "rel_2000": 0.409
+  },
+  "measured": {
+   "lch": [
+    58.2,
+    63.1,
+    64.3
+   ],
+   "iscc_nbs": "strong orange",
+   "first_recorded_maerz_paul": 1398,
+   "nearest": [
+    [
+     "Bronze",
+     2.5
+    ]
+   ],
+   "ocher_spelling_hex": "#BF9B0C",
+   "ocher_de2000": 18.7
+  },
+  "origin_record": {
+   "year": -75000,
+   "what": "Engraved ochre at Blombos Cave, South Africa",
+   "approx": true
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 1 (\"Ochre\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"Ochre\", pp. 278-279",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, ch. 9",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Red: The History of a Color, ch. 9",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Red: The History of a Color, ch. 11",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Hematite\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Vermilion\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 37",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, pp. 33-34",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 18",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 14",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 16",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"ochre\", \"rubric\", \"ruddle\", \"reddleman\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, ch. 8",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, ch. 16",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, ch. 28",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, ch. 32",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 18,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 86",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 19,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, ch. 29",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 20,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 182",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 21,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 106",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 22,
+   "kind": "book",
+   "cite": "Westland, Universal Principles of Color, ch. 76",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 23,
+   "kind": "book",
+   "cite": "Batchelor, Chromophobia, ch. 2",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 24,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 22",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 25,
+   "kind": "book",
+   "cite": "Albers, Interaction of Color, p. 98",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 26,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, pp. 107, 220",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 27,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 28,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Maerz & Paul 1930, Werner 1821, Ridgway 1912) and Color Graph aliases, CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 29,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  },
+  {
+   "n": 30,
+   "kind": "data",
+   "cite": "ColorHub Color Graph origin record for Ochre (data/graph/nodes-o.json, approximate date)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 31,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Umber\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 32,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 12",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 33,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 11",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 34,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 39",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 35,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, ch. 37",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 36,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 21",
+   "loc_kind": "epub-chapter",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why does roasting yellow ochre turn it red?",
+   "choices": [
+    "Heat drives the water out of yellow iron hydroxide, leaving red iron oxide",
+    "Heat burns off a yellow plant dye mixed into the clay",
+    "The ash from the fire stains it red",
+    "Heat adds manganese to the earth"
+   ],
+   "answer": "Heat drives the water out of yellow iron hydroxide, leaving red iron oxide",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the great painters of ancient Greece used only four colors.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "What separates an ochre from an umber?",
+   "choices": [
+    "Umber also contains manganese oxide, which makes it brown",
+    "Umber is made from burnt bones",
+    "Umber is a synthetic pigment",
+    "Umber contains no iron"
+   ],
+   "answer": "Umber also contains manganese oxide, which makes it brown",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Ochre is the oldest paint there is, and painters still buy it: iron-stained earth, washed in water and sometimes roasted red.",
+  "While a fresco dries, the iron in its red ochre turns toward magnetic north, so the paint itself can say when it was laid.",
+  "Look at the warm half-tones of skin in an old portrait: they are often yellow ochre and a red earth."
+ ],
+ "words": 2411,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Re-verified 8+ claims against book text (Bookartoo/Diyari, Rover Thomas sale, Chiari 1870, Pliny 15x vs St Clair 10x, sinople dates, Reynolds, Pavillon, Albers): all supported; no changes"
+  ]
+ }
+}

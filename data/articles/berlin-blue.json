@@ -258,13 +258,8 @@
  "words": 1026,
  "status": "checked",
  "checked": {
-  "by": "claude-sonnet-5.5 batch 27",
+  "by": "checker",
   "date": "2026-10-08",
-  "issues": [
-   "Discovery dates disagree (1704, 1704-07, 1709)",
-   "Diesbach/Dippel account is Pastoureau's retelling",
-   "Swatch is Werner's aged plate, far paler than pigment",
-   "Syme's Werner mixes from Baty captions"
-  ]
+  "issues": []
  }
 }

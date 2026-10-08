@@ -1,0 +1,228 @@
+{
+ "slug": "byzantium",
+ "name": "Byzantium",
+ "hex": "#702963",
+ "names": [
+  "Byzantium"
+ ],
+ "tier": "place",
+ "depth": "long",
+ "lede": "Byzantium is a deep reddish purple named for the eastern Roman capital, where the shellfish purple of Tyrian dye was a monopoly of the court; the screen color is modern, but the name carries the history of imperial purple.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A color named for a city",
+   "body": "Byzantium is a deep reddish purple, named for the empire whose emperors were famous for dressing in purple [5]. The swatch sits in ISCC-NBS block 238, \"deep reddish purple\", 2.6 units from the block's reference color, and the Maerz and Paul dictionary of 1930 lists it (plate 44, K 7) with a first record of 1926 [9]. Our name list also files the words amaranth and amaranthine under this page [9]. Who first used the city's name for a color is undocumented in the books."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch is not the dye",
+   "body": "The dye that Byzantium stands for is better known as Tyrian purple [3]. The Pigment Compendium records Byzantium purple among its names, alongside royal purple, imperial purple and purple of the ancients [3][4]. Our [[tyrian-purple]] swatch is about 16 CIELAB units from this one, and [[royal-purple]] is about 26 units away [9]. Even [[plum]] is closer to the Byzantium swatch, at 12 units [9].\n\nSo the screen color is a twentieth-century paint-chip purple, and nothing ties it to a measured sample of the ancient dye. The color names that surround it, [[purple]], [[imperial-purple]] and [[mulberry]], show how loosely the family has been sorted [9]."
+  },
+  {
+   "id": "dye",
+   "title": "What the dye was",
+   "body": "Tyrian purple came only from marine shellfish of the families Muricidae and Thaisidae [3]. The color does not exist in the mollusc itself: it is generated once the animal is processed [3]. Evidence for the industry reaches back to the thirteenth century BC at Sarepta [3]. Its main component, 6,6'-dibromoindigotin, was identified only in the first half of the twentieth century, and further components in 1992 [3]. In chemical terms it is a brominated relative of [[indigo]], so purple from shellfish is close kin to blue from a plant [3].\n\nPliny, as Gage reads him, praised the best purple as gleaming like a dark rose, and complained about the dye's smell [1]. By the time of Diocletian, in the early fourth century AD, purple was tied exclusively to the emperor [1]."
+  },
+  {
+   "id": "court",
+   "title": "Purple at the Byzantine court",
+   "body": "Byzantine rulers inherited this tradition and made it a system. A \"green purple\" was used to mark out the curators of the imperial court, and the deepest, double-dyed cloth, such as Theodora's robe in the mosaics at Ravenna, was the most valued [1]. Gage notes that observers marked the lustre and brilliance of purple, and that it was read as a heavenly color [1].\n\nIn the sixth century Justinian tightened the rules on what scholars read as purple-dyed silk, the \"forbidden silk\" of the sources [2]. Constantine in the tenth century was nicknamed Porphyrogenitus, \"born in the purple\"; the phrase may refer to the color of the walls of the room where emperors' children were born, but in any case it signified immense privilege [2]. For the finest books, Christian artists of the sixth century reserved Tyrian purple [2].\n\nThe prestige outlasted the empire. In the Carolingian period, Pastoureau notes, the western emperor's red cast him as heir to the Roman emperors and a counterpart to the Byzantine ones, who dressed in purple [5]."
+  },
+  {
+   "id": "end",
+   "title": "When the dye ended",
+   "body": "The books disagree about when imperial purple dyeing stopped. Finlay says the old dyers disappeared with the storming of Constantinople in 1453, or possibly earlier [2]. The last recorded mention of purple dyeing as a living industry may be Benjamin of Tudela's journal of 1165, which names the Jewish community of Thebes as famous for purple silk [2].\n\nThe robes of cardinals show the end of the trade. Gage writes that Innocent IV decreed the red hat in the thirteenth century, but that the cardinals' traditional purple robe was kept until 1464, when Paul II let them wear scarlet [6]. He ties the change to the end of Byzantine purple exports once the Turks took the city in 1453, and to alum discovered in papal lands in 1462 [6]. St Clair also gives 1464 for Paul II [8]. Greenfield places a decree for \"red\" robes earlier, in 1295, and says they were really a reddish imperial purple bought from Constantinople [7]. The safe reading is that scarlet replaced purple in the 1460s, when Byzantine purple ran out [6][8].\n\nSt Clair adds that the purple molluscs were all but extinct by then [8], which sits oddly with the Compendium's note that a dye from the snail *Nucella lapillus* is sold commercially today [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, no work has a color within four units of this swatch over even one per cent of its canvas [10]. Loosen the match to ten units and at least five per cent of the canvas, and three paintings appear, all from the early 1900s: two dated about 1900, and Vittorio Zecchin's [[painting:commons-Q17493074|Le mille e una notte]] (1914) [10]. These are photographs of aged, varnished paintings, so this describes the archive, not painting as a whole [10].\n\nThe gap is informative. The imperial dye lived in silk and on parchment, which an archive of paintings does not hold [2]. To see Byzantium purple, look at textiles and manuscripts [2], and at the dark red-purples of twentieth-century paint [10]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Byzantium, the capital of the Byzantine empire, famous for imperial purple",
+   "first_recorded": "1926 (Maerz & Paul 1930, plate 44 K 7); who coined the color name is undocumented",
+   "source": "ColorHub library; Pigment Compendium, \"Tyrian purple\" and \"Byzantium purple\""
+  },
+  "aka": [
+   "Amaranth",
+   "Amaranthine"
+  ],
+  "siblings": [
+   "tyrian-purple",
+   "imperial-purple",
+   "royal-purple"
+  ],
+  "parent": "purple",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "tyrian-purple",
+    "gloss": "the dye that Byzantium purple names; our Tyrian Purple swatch is darker and redder"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#702963",
+   "de2000": 10,
+   "min_cover": 0.05
+  },
+  "n_present": 3,
+  "top_paintings": [
+   "cma-164458",
+   "cma-164457",
+   "commons-Q17493074"
+  ],
+  "measured": {
+   "iscc": [
+    "deep reddish purple",
+    238,
+    2.6
+   ],
+   "lch": [
+    29.2,
+    43.3,
+    333.9
+   ],
+   "nearest_lab_units": [
+    [
+     "plum",
+     12.0
+    ],
+    [
+     "tyrian-purple",
+     16.3
+    ],
+    [
+     "royal-purple",
+     26.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 29",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 10 (\"Violet\") and notes",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Tyrian purple\", p. 386",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Byzantium purple\", p. 80",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Red: The History of a Color, \"The Red of Power\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 135",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 2 (\"The Color of the Sun\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Scarlet\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS 1955 block 238; Maerz & Paul 1930 plate 44 K 7; alias list; CIELAB distances between swatches",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "ColorHub archive and article_field, 23,781 paintings, as photographed (within 4 and 1% of canvas; within 10 and 5%)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which pigment does the Pigment Compendium treat Byzantium purple as another name for?",
+   "choices": [
+    "Tyrian purple",
+    "Mauveine",
+    "Madder lake",
+    "Indigo"
+   ],
+   "answer": "Tyrian purple",
+   "kind": "pick"
+  },
+  {
+   "q": "According to Gage and St Clair, when did the pope let cardinals swap their purple robes for scarlet?",
+   "choices": [
+    "In the 1460s",
+    "In the 1290s",
+    "In the 1560s",
+    "In the 1860s"
+   ],
+   "answer": "In the 1460s",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the books agree that purple dyeing ended exactly when Constantinople fell in 1453.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Purple was so closely tied to the Byzantine court that an emperor's child was called born in the purple.",
+  "The cardinals' scarlet robes date from the 1460s, when the supply of Byzantine purple ran out.",
+  "To see imperial purple, look at silk and manuscripts: our painting archive has almost no canvas this color before 1900."
+ ],
+ "words": 838,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported: Sarafand gloss, Tyrian/royal swatch color descriptions, 'older words', Pliny-vs-violets inference, 'suspected of plotting', 'cheaper manuscripts got cheaper dyes'",
+   "Fixed century: Christian artists' Tyrian purple was sixth century, not tenth",
+   "'two further components' -> 'further components'; Gage lustre sentence softened to card wording"
+  ]
+ }
+}

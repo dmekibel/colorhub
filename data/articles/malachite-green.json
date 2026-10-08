@@ -1,0 +1,264 @@
+{
+ "slug": "malachite-green",
+ "name": "Malachite Green",
+ "hex": "#9CBA89",
+ "names": [
+  "Malachite Green"
+ ],
+ "tier": "pigment",
+ "depth": "long",
+ "lede": "Malachite green is the green of the copper mineral malachite, which painters ground into pigment for thousands of years; the same name was later given to a coal-tar dye, so it points at several different materials.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Three things with one name",
+   "body": "The mineral is [[gem:malachite|malachite]], a basic copper carbonate; its name comes from a Greek word for the mallow plant [1]. \"Malachite green\" is the old name for that mineral used as a pigment, which the Paterson dictionary also lists as green malachite and mineral green, with Bremen green as the name of the synthetic form [12]. The same words later named an artificial pigment sold under that label, and then a synthetic dye [1][8]. Which one a source means has to be read from its date and its trade."
+  },
+  {
+   "id": "material",
+   "title": "The mineral",
+   "body": "Malachite forms where water seeps slowly through copper-bearing rock, and it turns up beside [[gem:azurite|azurite]], its blue cousin; the two are basic copper carbonates of almost identical composition [2][5]. In the Middle Ages the green was called *verde azzurro*, green-blue, a nod to that neighbour [2][8]. Azurite can turn into malachite with age, which is why some blues in medieval Italian fresco have gone green [5].\n\nEgyptian painters ground malachite and azurite as their copper colors, alongside the ochres and the arsenic yellows [3], and Coles adds that malachite was also worn as a cosmetic and used for tomb paintings [2]. Coles dates it in European illuminated manuscripts back to the eighth century [2].\n\nMaking the pigment was a matter of selecting good ore, crushing it and washing the powder in swirling water to separate the green particles [2]. The grain size mattered: ground coarse, the powder stays a bright green, and the finer it is milled the paler and more transparent it becomes [2]. Cennino Cennini, writing in the Italian craft tradition, warned that over-grinding gives a dingy, ashy color [2]."
+  },
+  {
+   "id": "painting",
+   "title": "In painting",
+   "body": "Malachite was a costly green. A Florentine painter's accounts for 1471 show him paying 2.5 times more per ounce for good azurite than for a good green, probably malachite, so the green sat well below the blue [4]. Pastoureau sums up the European struggle with green in one list: plant greens faded, earth greens covered poorly, malachite greens were expensive, and copper greens were corrosive and toxic [6].\n\nIt was still used for the best work. Ball counts the greens of Titian's *Bacchus and Ariadne* (1523) as malachite, green earth, verdigris and copper resinate [4]. A painter's cost analysis shows up in Rembrandt as well: Gage traces how Rembrandt's early range, a dozen or so pigments including azurite, vermilion and malachite green, was cut roughly in half after about 1650 [9].\n\nIn oil the pigment loses its strength. Malachite has a low refractive index, so it stays fairly transparent in oil, and its use declined [4]. It does have one great virtue over its rival: where verdigris darkens with age, malachite is generally very stable and has lasted well in murals [5]. The mineral was not only a European color: Finlay saw the Buddhas of the Dunhuang caves painted in bright malachite greens, and notes that Silk Road merchants sold the pigment in the local market [7]."
+  },
+  {
+   "id": "replaced",
+   "title": "Why it faded from the palette",
+   "body": "By Coles's account, malachite had been replaced by more easily obtained synthetic greens by the end of the eighteenth century [2]. [[scheele-s-green]], discovered in 1775 as a copper-arsenic pigment, was made to stand in for the older copper greens, verdigris and malachite among them; it lost favor because it was toxic and discolored in the presence of acids and sulfur [11]."
+  },
+  {
+   "id": "confusion",
+   "title": "A name for several greens",
+   "body": "By the nineteenth century the artists' color called malachite green could be quite different things, and the sources disagree. The Pigment Compendium notes that Seward (1889) says the artificial version is meant, while Weber (1923) uses the name for green verditer, an artificial copper carbonate [1][15]. The English colormen were not consistent either: Rowney's used the powdered mineral, Winsor & Newton said they used the mineral in 1896, and Reeves, in a catalog from about 1898, described theirs as then made from chromium and zinc oxides [1]. Gage reads a \"malachite green\" in a list of bright pigments from Arles in 1888 as probably copper aceto-arsenate, the poisonous emerald green [10]. Together these show that a tube labeled malachite green around 1900 may contain no malachite at all [1][10]."
+  },
+  {
+   "id": "dye",
+   "title": "The dye",
+   "body": "The coal-tar dye of the same name is chemically unrelated to the mineral. The Colour Index files it as Basic Green 4, a triphenylmethane dye [1]. Finlay writes that it was discovered twice, apparently independently, in 1877 and 1878, one of a quick procession of synthetic greens after iodine green (1866) and methyl green (1874) [8]. Better, cheaper dyes have displaced it in textiles, but it survives as a treatment for mold on goldfish, which may be left green for a while [8]. Paterson adds that it has been used against fungal infection in farmed salmon, and calls it toxic and possibly carcinogenic [12]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch is not the mineral",
+   "body": "The swatch here, #9CBA89, is a pale, soft yellowish green [13]. It comes from Ridgway's 1886 *Nomenclature of Colors*, was carried into his 1912 atlas, and was cited again by the 1955 ISCC-NBS circular, whose nearest named block is \"light yellowish green\" at a distance of 4.8 [13]. Raw malachite is much stronger than this: Coles describes it as varying from a cold to a bright yellow-green [2]. The archive also does not read pigment; it only finds screen colors that match the swatch."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In the ColorHub archive, 45 of 23,781 paintings hold a color near this swatch over at least 5 percent of the canvas, about 0.2 percent [14]. The 1910s stand out, at about seven times the expected rate [14]. Among painters, van Gogh, Munch and Klimt each show it in 3 of roughly 50 works, over thirty times the rate across the whole collection [14]. These are photographs of varnished paintings, so the colors are as photographed. In books, the phrase *malachite green* hardly exists before the 1870s and peaks near 1921, which is the dye and paint era rather than the mineral's [14]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the mineral malachite, whose Greek name refers to the mallow plant; as a dye, borrowed for a coal-tar green in the 1870s",
+   "first_recorded": "mineral pigment in antiquity; dye 1877-1878",
+   "source": "Pigment Compendium, \"malachite\"; Finlay, Color, ch. 16"
+  },
+  "aka": [
+   "green malachite",
+   "mineral green",
+   "Bremen green (synthetic)",
+   "CI Basic Green 4 (the dye)"
+  ],
+  "siblings": [
+   "malachite",
+   "green-earth",
+   "scheele-s-green",
+   "emerald-green"
+  ],
+  "parent": "malachite",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "emerald-green",
+    "gloss": "the arsenic pigment that some labels sold as malachite green"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "it",
+    "name": "verde azzurro (medieval Italian name for the mineral pigment)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#9CBA89",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 45,
+  "peak_decade": {
+   "key": 1910,
+   "lift": 7.07
+  },
+  "painters": [
+   "Vincent van Gogh",
+   "Edvard Munch",
+   "Gustav Klimt"
+  ],
+  "ngram": {
+   "first_5pct": 1876,
+   "peak": 1921
+  },
+  "measured": {
+   "iscc_nearest": "light yellowish green",
+   "iscc_de": 4.8
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"malachite\" and \"malachite green\", pp. 262-263",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, \"Malachite\", p. 65",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 11",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 13",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 19",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, Green, p. 41",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 12",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 16",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 172",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 228",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, \"Scheele's green\", p. 143",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"malachite\", \"malachite green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "data",
+   "cite": "ColorHub color library and graph node (data/graph/nodes-m.json): Ridgway 1886 and 1912, Maerz and Paul 1930, ISCC-NBS 1955, CIEDE2000 distance",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas); Google Books Ngram, case-insensitive, 5-year smoothed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"green verditer\", p. 190",
+   "loc_kind": "pdf-page",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What was the Italian medieval name for the mineral malachite as a pigment?",
+   "choices": [
+    "Verde azzurro",
+    "Terra verde",
+    "Verdigris",
+    "Viridian"
+   ],
+   "answer": "Verde azzurro",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the dye called malachite green is made from the mineral malachite.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Why did malachite lose ground in oil painting?",
+   "choices": [
+    "It stays fairly transparent in oil",
+    "It turns black in oil",
+    "It dissolves in linseed oil",
+    "It is too dark"
+   ],
+   "answer": "It stays fairly transparent in oil",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Malachite is the blue mineral azurite's green cousin, and old frescoes show blue turning into it.",
+  "Three different materials were sold as malachite green: a mineral, an artificial pigment, and a coal-tar dye.",
+  "In 1471 a Florentine painter paid two and a half times as much for good azurite as for good green."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "words": 974
+}

@@ -212,3 +212,35 @@ span.ar-ref.ar-x{text-decoration:none;color:var(--ar-body)}
 .ar-seen .ar-fig:first-of-type{margin-top:14px}
 @media (max-width:359px){.ar-fig-b{grid-template-columns:88px minmax(0,1fr);column-gap:12px}.ar-fig-im{width:88px;height:88px}.ar-fig-cr{margin-left:100px}.ar-fig-n{font-size:19px}}
 @media (prefers-reduced-motion:reduce){.ar-fig-im img,.ar-fig-hl{transition:none}}
+
+/* ---------- the story door (IMPROVE-2026-10-08 color-page #1, COLOR-PAGE-DESIGN §2.5): a long story is a book ---------- */
+.ar-door{margin-top:26px;padding:20px 18px 18px;background:var(--surface-2);border-radius:var(--r-2);border:1px solid var(--cp-rule,var(--rule))}
+.ar-door .fig{margin:-20px -18px 16px;border-radius:var(--r-2) var(--r-2) 0 0;overflow:hidden}
+.ar-door .fig img{display:block;width:100%;max-height:220px;object-fit:cover}
+.ar-door .fig figcaption{padding:8px 18px 0;font-size:13px}
+.ar-door-k{font:italic 400 16px/1.2 var(--serif);color:var(--soft)}
+.ar-door-t{margin-top:6px;font:400 34px/1.04 var(--serif);letter-spacing:-.02em;text-wrap:balance}
+.ar-door-dek{margin-top:10px;font:400 18px/1.35 var(--serif);color:var(--ink);text-wrap:pretty}
+.ar-door-meta{margin-top:10px;font-size:14px;color:var(--soft)}
+.ar-door-rows{margin-top:12px;border-top:1px solid var(--rule)}
+.ar-door-row{display:grid;grid-template-columns:28px 1fr auto;align-items:baseline;gap:10px;width:100%;min-height:48px;padding:12px 0;border-bottom:1px solid var(--rule);text-align:left;color:var(--ink)}
+.ar-door-row span{font-size:13px;color:var(--soft)}
+.ar-door-row b{font:400 20px/1.2 var(--serif)}
+.ar-door-row em{font:italic 400 15px/1 var(--serif);color:var(--soft)}
+.ar-door-more b{font-size:16px;color:var(--soft);line-height:1.35}
+.ar-door-prog{height:4px;margin-top:14px;border-radius:2px;background:var(--rule);overflow:hidden}
+.ar-door-prog i{display:block;height:100%;width:var(--p);background:var(--ink)}
+.ar-door-go{display:flex;align-items:center;gap:10px;margin-top:16px;width:100%;height:54px;padding:0 20px;border-radius:999px;background:var(--paper);color:var(--paper-ink);font:400 21px/1 var(--serif)}
+.ar-door-go svg{margin-left:auto;flex:none}
+
+/* ---------- the book: its own screen ---------- */
+.ar-rd-top{display:flex;align-items:center;gap:12px;min-height:48px}
+.ar-rd-t{flex:1;min-width:0;display:flex;align-items:center;gap:8px;font:italic 400 17px/1.2 var(--serif);color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ar-rd-t i{flex:none;width:10px;height:10px;border-radius:50%;background:var(--c)}
+.ar-rd-sp{width:44px;flex:none}
+.ar-rd-band{margin:14px calc(-1 * var(--g)) 0;padding:56px var(--g) 18px;background:var(--c)}
+.ar-rd-band[data-ink="dark"]{color:#141311}.ar-rd-band[data-ink="light"]{color:#fff}
+.ar-rd-band h1{font:400 48px/1 var(--serif);letter-spacing:-.03em;text-wrap:balance}
+.ar-read .ar{margin-top:22px}
+.ar-rd-end{margin-top:40px}
+.ar-kin{border-top:1px solid var(--rule)}

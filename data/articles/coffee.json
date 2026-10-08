@@ -17,7 +17,7 @@
   {
    "id": "names",
    "title": "Sweet names for brown",
-   "body": "Brown is an old color, and Jarman points out that the names of brown dyes are sweet and edible: a coat could be bought in caramel, toffee, almond, coffee, chocolate or curry [2]. The pigments behind those names are plainer. Jarman lists earth brown, burnt umber, burnt ochre and burnt sienna as earths cooked red hot, with [[sepia]] the odd one out, because it is the ink of the cuttlefish [2].\n\nSt Clair describes cuttlefish ink as a burnt coffee-brown liquid made almost entirely of melanin, with very strong tinting power [9]. In other words the comparison runs both ways: the ink is called coffee-colored, and the coffee is called sepia. The darker kin of this page are [[umber]], [[bistre]] and [[chocolate]] [15]."
+   "body": "Brown is an old color, and Jarman points out that the names of brown dyes are sweet and edible: a coat could be bought in caramel, toffee, almond, coffee, chocolate or curry [2]. The pigments behind those names are plainer. Jarman lists earth brown, burnt umber, burnt ochre and burnt sienna as earths cooked red hot, with [[sepia]] the odd one out, because it is the ink of the cuttlefish [2].\n\nSt Clair describes cuttlefish ink as a burnt coffee-brown liquid made almost entirely of melanin, with very strong tinting power [9]. The darker kin of this page are [[umber]], [[bistre]] and [[chocolate]] [15]."
   },
   {
    "id": "eye",
@@ -32,7 +32,7 @@
   {
    "id": "pigment",
    "title": "Pigments called coffee",
-   "body": "The Pigment Compendium finds coffee in the paint trade under several names, and none is secure [7]. Osborn said in 1845 that coffee black was little known and not on sale, and De Montabert preferred to call it coffee brown; the formulation and composition remain obscure [7]. Field in 1835 and Salter in 1869 mention greens made from coffee berries and named Venetian green or emerald green, and the Compendium counts this as one of four distinct pigments that carried the name emerald green [7]. Rose lists in 1916 a blue pigment called blue coffee, made with yellow Java coffee and iron filings [7].\n\nCoffee also names a failure. St Clair writes that verdigris was fickle and discolored, so that the greenery in works from Raphael to Tintoretto has withered to a shade approaching coffee [8]. When a green turns the color of coffee in a Renaissance painting, the painter did not choose it, and the change is a known weakness of the pigment [8]."
+   "body": "The Pigment Compendium finds coffee in the paint trade under several names, and none is secure [7]. Osborn said in 1845 that coffee black was little known and not on sale, and De Montabert preferred to call it coffee brown; the formulation and composition remain obscure [7]. Field in 1835 mentions greens made from coffee berries and named Venetian green or emerald green, and the Compendium counts this as one of four distinct pigments that carried the name emerald green [7]. Rose lists in 1916 a blue pigment called blue coffee, made with yellow Java coffee and iron filings [7].\n\nCoffee also names a failure. St Clair writes that verdigris was fickle and discolored, so that the greenery in works from Raphael to Tintoretto has withered to a shade approaching coffee [8]. When a green turns the color of coffee in a Renaissance painting, the painter did not choose it, and the change is a known weakness of the pigment [8]."
   },
   {
    "id": "trade",
@@ -268,17 +268,16 @@
   "Pour the same coffee into a cup and a glass tube and it shows two different browns, because liquid color depends on depth.",
   "Dusty brown uniforms in the Indian army of the 1860s were dyed with coffee, tea, soil and curry powder."
  ],
- "words": 1212,
+ "words": 1189,
  "status": "checked",
  "checked": {
-  "by": "L7 article engine (sentence-to-card trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Books say little about coffee as a color; article draws on Albers, St Clair, Pigment Compendium and the dye-crop history.",
-   "Lumsden/khaki origin is hedged ('thought to'); khaki has its own article.",
-   "First recorded 1695 is Maerz and Paul via our library note; not independently checked.",
-   "Blue coffee (Rose 1916) is a single obscure entry; reported as listed.",
-   "Archive matches are look-alike colors on aged photographs."
+   "Removed unsupported claim that coffee is called sepia (St Clair only says the ink is coffee-brown).",
+   "Dropped Salter 1869 from the coffee-berry green sentence (the Compendium text cites Field 1835 and Osborn 1845).",
+   "Other claims traced to Paterson, Jarman, Albers, Livingstone, St Clair, Pigment Compendium, Balfour-Paul, Greenfield, Pastoureau: supported.",
+   "Maerz and Paul 1695 first-use date comes from the library, not independently checked."
   ]
  }
 }

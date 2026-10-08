@@ -22,12 +22,12 @@
   {
    "id": "leaves",
    "title": "What the leaves are doing",
-   "body": "Older dictionaries record the pigments behind the season. Paterson lists *erythrophyll* as the red coloring matter in autumn leaves and *phylloxanthin* as their yellow pigment, and he adds that tannin and carotin are yellow or orange pigments found in autumn leaves and in carrots [2]. These are older terms, given without chemistry, and a modern botany text would give a fuller account. The point for the eye is simple: leaves do not turn brown by one route, and the dark brown of fallen leaves is the end of the process, not its brightest moment."
+   "body": "Older dictionaries record the pigments behind the season. Paterson lists *erythrophyll* as the red coloring matter in autumn leaves and *phylloxanthin* as their yellow pigment, and he glosses the yellow or orange pigment of autumn leaves and carrots as carotin [2]. These are older terms, given without chemistry, and a modern botany text would give a fuller account. The point for the eye is simple: leaves do not turn brown by one route, and the dark brown of fallen leaves is the end of the process, not its brightest moment."
   },
   {
    "id": "seasons",
    "title": "Seasons and colors, a shifting scheme",
-   "body": "Pastoureau reports that medieval and Renaissance writers who linked colors to the seasons agreed on spring and summer but hardly on autumn [4]. Summer was often red, sometimes gold or orange, while autumn went to yellow or black, the color of Saturn and melancholy, and more rarely to brown [4]. In a related scheme, he says, yellow itself was the color of autumn, in nature and in a human life, with a dull, withered and faded air [5].\n\nGage lists the disagreement in more detail. Alberti assigned white to autumn; Tertullian and Corippus assigned blue; Antiochus of Athens assigned black; and Theon of Smyrna linked autumn to the water-green icosahedron [6]. Gage's own conclusion is that around 1500 these links were arbitrary and conflicting [6]. A brown autumn is a modern habit, not a classical one."
+   "body": "Pastoureau reports that medieval writers who linked colors to the seasons agreed on green for spring but showed much less consensus on the others [4]. Summer was often red, sometimes gold or orange, while autumn went to yellow or black, the color of Saturn and melancholy, and more rarely to brown [4]. In a related scheme, he says, yellow itself was the color of autumn, in nature and in a human life, with a dull, withered and faded air [5].\n\nGage lists the disagreement in more detail. Alberti assigned white to autumn; Tertullian and Corippus assigned blue; Antiochus of Athens assigned black; and Theon of Smyrna linked autumn to the water-green icosahedron [6]. Gage's own conclusion is that around 1500 these links were arbitrary and conflicting [6]. A brown autumn is a modern habit, not a classical one."
   },
   {
    "id": "painting",
@@ -194,15 +194,14 @@
   "Medieval writers could not agree on autumn's color: yellow, black, white and blue all had backers.",
   "The brown of an old painting may be a green that aged."
  ],
- "words": 851,
+ "words": 849,
  "status": "checked",
  "checked": {
-  "by": "claude-sonnet",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Little book material: the name is descriptive and Maerz and Paul is the earliest record",
-   "Paterson leaf-pigment terms are dictionary glosses, not modern chemistry",
-   "Archive match dates before 1917 are look-alike hues"
+   "Pastoureau did not say writers agreed on summer; reworded to green for spring only",
+   "Dropped tannin as a separate pigment (Paterson equates it with carotin)"
   ]
  }
 }

@@ -1,0 +1,251 @@
+{
+ "slug": "mustard",
+ "name": "Mustard",
+ "hex": "#CFA41C",
+ "names": [
+  "Mustard"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Mustard is the deep yellow of the condiment, a color that eighteenth-century France briefly adored and Europeans have mostly distrusted since.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The condiment's yellow",
+   "body": "Dictionaries describe mustard a little differently. Paterson calls it a reddish yellow, \"mustard brown\" a deep brownish yellow, and \"mustard yellow\" a deep yellow that was popular in the 1930s [1]. St Clair's glossary says simply a strong yellow, like the condiment [2]. The books do not agree on whether it leans toward red or stays yellow [1][2].\n\nThe swatch here is a strong, slightly warm yellow. In the ISCC-NBS system of 1955 it falls in block 88, \"strong yellow\", about three units away, and Maerz and Paul's 1930 dictionary lists it from 1886 [3]. Two online lists place mustard at #FFDB58 and #CEB301, one brighter and one greener than our swatch [3]. It sits next to [[ochre]], [[marigold]] and [[khaki]] in the yellow-brown range."
+  },
+  {
+   "id": "history",
+   "title": "The ugliest color, for a few weeks the best",
+   "body": "By Pastoureau's account, a brownish yellow with the crude name *caca-dauphin* was fashionable in the last weeks of 1751, to celebrate the birth of Louis XV's first grandson [4]. He says the shade we now call mustard, or in French *caca d'oie* (goose droppings), had been counted among the ugliest of colors since the Middle Ages [4]. The Enlightenment gave it only a few weeks of glory [4].\n\nThe verdict has hardly changed. Pastoureau adds that even now European eyes find the mustard and greenish-yellow family the least agreeable, citing his 1992 dictionary of colors [5]. Elsewhere he offers a test: few mothers would trust a baby to a nurse in the dirty color of mustard yellow, as against clean white [6].\n\nThe same dull yellow-green range did useful work. Pastoureau argues that such tones were adopted for work clothes and military uniforms because they do not fade, do not show dirt and let the wearer blend into the landscape [7]. The best known is [[khaki]], whose name comes from a Hindustani word for earth or dust color and not, as is often assumed, from the French name of the persimmon [7]."
+  },
+  {
+   "id": "relatives",
+   "title": "Mustard in other things",
+   "body": "The plant family is more interesting than the sauce. Woad, the European source of blue dye, belongs to the mustard family, and its yellow-flowered fields in medieval Europe were as distinctive as mustard and rape crops are today [8][9]. Finlay adds that the words woad and weed share an origin [10]. So the blue of [[indigo]] and the yellow of mustard have a botanical cousin in common [8][9].\n\nPaint history has its own mustard. St Clair describes the first Indian yellow reaching Europe in the late 1700s as powdery balls of a rotten mustard color, with bright yolk-yellow centers and a sharp ammonia smell [11]. She also reports that Hermès packaging was cream before the Second World War, shifted to mustard under wartime shortages, and ended at orange when that was the last paperboard color available [12].\n\nIn the lab, mustard turns up as a test color. Livingstone writes that Monet used black, blue, white and mustard for the water in his La Grenouillère paintings, producing a feeling of motion, and that Akiyoshi Kitaoka built the illusion *Rotating Snakes* from the same four hues [13]. She suspects the cause is timing differences produced by lateral inhibition in the eye [13]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 164 works, or 0.7 per cent [14]. It is a rare painted color in Europe and a common one in South Asia: 35 of 721 Indian works carry it, seven times the archive rate [14]. Rajput paintings have it in 11 of 97 and Pahari in 11 of 118 [14]. In 87 per cent of the matching works it is one of the lightest tones in the painting's own palette [14].\n\nThe peak decade is the 1820s, with 21 of 731 works, driven by Russian portraits such as George Dawe's of [[painting:commons-Q27966424|Alexander V. Rosen]], where it covers 45 per cent of the canvas, probably uniform cloth [14]. The cluster fits Pastoureau's point about uniforms, though a color match cannot prove a dye [7][14]. In Indian miniatures it covers 46 per cent in the [[painting:cma-314429|Abduction of Rukmini]] of about 1640 [14]. [[painter:pierre-bonnard|Bonnard]] and [[painter:emile-bernard|Bernard]] are among the few European painters with a high rate [14].\n\nThe archive does not back the Monet story literally: the Impressionist works in it have no match at this size, which is a reminder that Livingstone's mustard is a small accent and not a large area [13][14]. In Google Books the word *mustard* stands at 70 per cent of its eventual peak by 1860 and peaks around 2013, though it counts the condiment as much as the color [15]. As photographed, these are aged paintings, so read matches as screen colors [14]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the condiment (and the yellow seed of the mustard plant)",
+   "first_recorded": "1886 as a color in Maerz and Paul (1930), per our library",
+   "source": "Pastoureau, Black, ch. on the Enlightenment; Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "mustard yellow",
+   "caca d'oie (French, a crude old name)"
+  ],
+  "siblings": [
+   "ochre",
+   "marigold",
+   "khaki"
+  ],
+  "parent": "yellow",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "golden-yellow",
+    "gloss": "a brighter, cleaner yellow with no brown in it"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "moutarde; historically caca d'oie"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#CFA41C",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 164,
+  "top_paintings": [
+   "commons-Q27966424",
+   "cma-314429",
+   "aic-47159"
+  ],
+  "countries": {
+   "India": {
+    "n": 721,
+    "hits": 35,
+    "lift": 7.04
+   }
+  },
+  "role": {
+   "highlight": 0.87,
+   "mid": 0.13
+  },
+  "company": [
+   "Mustard",
+   "Marigold",
+   "Ochre"
+  ],
+  "ngram": {
+   "rel_1860": 0.7,
+   "peak": 2013
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"mustard\", \"mustard brown\", \"mustard yellow\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary, \"Mustard\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Maerz and Paul 1930, xkcd and Wikipedia lists)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Black, p. 82",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Black, note 17 (citing his Dictionnaire des couleurs de notre temps, 1992)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, White, p. 196",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pastoureau, Green, p. 44",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pastoureau, Blue, p. 7",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 103",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 18",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Indian yellow\", p. 35",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Orange\", p. 45",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Livingstone, Vision and Art, ch. 19",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why does woad count as a relative of mustard?",
+   "choices": [
+    "Both belong to the mustard plant family",
+    "Both give a yellow dye",
+    "Both grow only in Asia",
+    "Both were named by Perkin"
+   ],
+   "answer": "Both belong to the mustard plant family",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: according to Pastoureau, mustard-like yellows were ranked among the ugliest colors from the Middle Ages.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "In our painting archive, which country's works carry mustard most above the archive rate?",
+   "choices": [
+    "India",
+    "Netherlands",
+    "France",
+    "Spain"
+   ],
+   "answer": "India",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "For a few weeks in 1751 the color Europeans had called ugliest since the Middle Ages was the height of fashion in France.",
+  "Woad, the blue dye plant, is a member of the mustard family.",
+  "Look for mustard in Indian miniatures: seven times the archive rate."
+ ],
+ "words": 770,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No fixes needed: 8 key claims verified against book text and fact cards; no myth-list or copied-phrasing problems."
+  ]
+ }
+}

@@ -12,17 +12,17 @@
   {
    "id": "name",
    "title": "The name",
-   "body": "Cream is a food word that became a color word. Paterson defines it as the color of the milk product, a yellowish white [1]. His dictionary keeps the word's other careers too: *cream wove* is writing paper with an even surface, *cream-faced* means pale from fear, and *regency cream* is a name for an off-white [1].\n\nThe phrase \"peaches and cream\" describes the classic British fair complexion, a cream-colored skin with pinkish cheeks [2]. St Clair's glossary sets the neighbors around it: cream is a pale yellow or rich off-white, *milk white* a pale greyish cream, and *lily white* a very pale cream with some warmth [3]."
+   "body": "Cream is a food word that became a color word. Paterson defines it as the color of the milk product, a yellowish white [1]. His dictionary keeps the word's other careers too: *cream wove* is writing paper with an even surface, *cream-faced* means pale from fear, and *regency cream* is a name for an off-white [1].\n\nThe phrase \"peaches and cream\" describes the classic British fair complexion, a cream-colored skin with pinkish cheeks [1]. St Clair's glossary sets the neighbors around it: cream is a pale yellow or rich off-white, *milk white* a pale greyish cream, and *lily white* a very pale cream with some warmth [2]."
   },
   {
    "id": "werner",
    "title": "Cream Yellow",
-   "body": "The naturalists' nomenclatures used the word before the paint shops did. When Patrick Syme revised Werner's list in 1821, he renamed Werner's no. 75, Isabella Yellow, as Cream Yellow [4]. Baty's examples of it are the breast of a teal drake, the petals of the yellow butterfly ginger, and the minerals porcelain jasper and fluor spar [4].\n\nThe older name lives on as [[isabelline]], whose own story is told in its article. So the same pale yellow-white has had a queen's name and a dairy's, and the dairy won."
+   "body": "The naturalists' nomenclatures used the word before the paint shops did. When Patrick Syme revised Werner's list in 1821, he renamed Werner's no. 75, Isabella Yellow, as Cream Yellow [3]. Baty's examples of it are the breast of a teal drake, the petals of the yellow butterfly ginger, and the minerals porcelain jasper and fluor spar [3].\n\nThe older name lives on as [[isabelline]], whose own story is told in its article. So the same pale yellow-white has had the name Isabella and a dairy's, and the dairy won [3]."
   },
   {
    "id": "cloth",
    "title": "On wool, silk and paper",
-   "body": "Natural materials are where cream is easiest to see. Finlay describes washed fleece in a mill as the color of pale cream [7]. Silk cocoons come naturally in cream white, citron yellow, yolk orange, dusky pink or chestnut, colors that come from carotenoids in the gum around the thread, and most of the thread turns out white once that gum is dissolved [7].\n\nCream often works as a ground for something else. Welsh quilts are often white-on-white or cream-on-cream, patterns you see only when you wait for the light to reveal them [7]. Javanese soga batiks set indigo and a tan from soga bark on a white or cream ground [8], and Maisin clan designs in Papua New Guinea are drawn in black and red on cream bark-cloth [9]. In the trade, Toch listed *cream ochre* in 1916 among the ochre variants of the paint shop [10]."
+   "body": "Natural materials are where cream is easiest to see. Finlay describes wool in a mill's dehairing room as the color of pale cream [7]. Silk cocoons come naturally in cream white, citron yellow, yolk orange, dusky pink or chestnut, colors that come from carotenoids in the gum around the thread, and most of the thread turns out white once that gum is dissolved [7].\n\nCream often works as a ground for something else. Welsh quilts are often white-on-white or cream-on-cream, a tone-on-tone effect [7]. Javanese soga batiks set indigo and a tan from soga bark on a white or cream ground [8], and Maisin clan designs in Papua New Guinea are drawn in black and red on cream bark-cloth [9]. In the trade, Toch listed *cream ochre* in 1916 among the ochre variants of the paint shop [10]."
   },
   {
    "id": "white-not-white",
@@ -256,20 +256,19 @@
  ],
  "openers": [
   "In 2013 Wimbledon banned off-white, cream and ecru by name: its rule is all white.",
-  "Cream Yellow is Syme's 1821 renaming of Werner's Isabella Yellow, the same pale yellow with a dairy's name instead of a queen's.",
-  "Look at a Welsh quilt: the old ones are often cream on cream, and the pattern appears only as the light moves."
+  "Cream Yellow is Syme's 1821 renaming of Werner's Isabella Yellow, the same pale yellow with a dairy's name instead of Isabella's.",
+  "Look at a Welsh quilt: the old ones are often white on white or cream on cream."
  ],
- "words": 782,
+ "words": 773,
  "status": "checked",
  "checked": {
-  "by": "Sonnet 5.5 batch writer (self-check: sentence-to-note trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Books say little on cream beyond dictionary glosses, Werner/Syme nomenclature and textile mentions; kept short on purpose.",
-   "Le Corbusier 'all white' myth corrected from Jarman p.12 (single source).",
-   "Birren 1950 advice marked as old opinion.",
-   "Archive matches are colors, not pigment tests; top matches may be paper or silk grounds (hedged).",
-   "Ngram counts the dairy product too (said in text)."
+   "Fixed note numbers: peaches-and-cream now cites Paterson [1], St Clair [2], Syme/Werner Baty [3]",
+   "Removed unsupported 'wait for the light' quilt claim (in body and opener)",
+   "'washed fleece' corrected to wool in a dehairing room (Finlay p.237)",
+   "'queen's name' softened to Isabella (isabelline origin legend is disputed)"
   ]
  }
 }

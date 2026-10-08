@@ -1,0 +1,224 @@
+{
+ "slug": "umber-brown",
+ "name": "Umber Brown",
+ "hex": "#613936",
+ "names": [
+  "Umber Brown"
+ ],
+ "tier": "pigment",
+ "depth": "long",
+ "lede": "Umber brown is a dark, reddish chestnut brown, number 102 in Patrick Syme's colour chart, named for the earth pigment that painters used for shadows.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "From the paint box to the chart",
+   "body": "Syme's chart of 1814 and 1821 borrowed freely from artists' supplies [3]. Baty observes that many of his terms came from painters' pigments and dyes, and that umber brown stands beside gamboge, Sienna yellow, sap green and lake red in that group; Syme probably used the real materials to make his swatches [3]. Several of the same names turn up in the flower-painting manuals of Brookshaw and Francia [3].\n\nThe pigment word is old. *Umber* comes from the Latin *ombra*, shadow, and it names a pigment useful for rendering shadows [4]. The pigment has its own article at [[umber]], with [[raw-umber]] and [[burnt-umber]] beside it; roasting umber drives water out of its iron hydroxides and gives the warm reddish brown of the burnt kind [5]."
+  },
+  {
+   "id": "chart",
+   "title": "What Syme actually wrote",
+   "body": "On the chart, umber brown is not defined as a pigment at all. Syme's recipe is color mixing: chesnut brown with a little blackish brown [1]. Chesnut brown, in turn, is the characteristic color of the browns in Werner's series, a deep reddish brown and yellowish brown together [1]. Syme spelled it with one *t*, and Baty keeps his spelling [1].\n\nHe gave three things to look at. The animal is the moor buzzard, which Baty identifies as the marsh harrier; the plant is the disk of the rudbeckia, or coneflower; the mineral is an oxide of tin [1][2]. Baty's plates use Gould's *Birds of Great Britain* (1862 to 1873), Saint-Hilaire's *Flore et la pomone françaises* (1828) and Sowerby's *British Mineralogy* (1802 to 1817) for the three [2]."
+  },
+  {
+   "id": "browns",
+   "title": "The browns around it",
+   "body": "Umber brown is number 102, second in a run of browns that starts with deep reddish brown (101) [6]. After it come [[chestnut]] (103), yellowish brown (104), wood brown (105), [[liver-brown]] (106), [[hair-brown]] (107) and [[broccoli-brown]] (108) [6]. The run ends with [[olive-brown]], which Syme also called clove brown, and [[blackish-brown]] [6]. It is the reddest and darkest of the first few, and the one named for a pigment.\n\nThe chart stayed in use long after Syme [7]. Baty's key to cuckoo eggs collected by Edgar Percival Chance in 1920 to 1922 matches twenty eggs to Syme numbers, and umber brown, 102, is one of them [7]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch is not the tube",
+   "body": "The swatch here, `#613936`, is a dark reddish brown, with a lightness of 29 and a chroma of 20 [8]. It is the color our library draws from Werner's aged chart, and it also fits Ridgway's 1912 plate I and block 16 of the 1955 ISCC-NBS system [8]. Maerz and Paul give 1912 as its first recorded date [8]. Its nearest everyday name is [[mahogany]], 8.1 units of color difference away, and it is almost the same as the lake color Victoria Lake, 1.1 units off [8].\n\nIt also sits 11.6 units of color difference from the page for the pigment, [[umber]] [8]. A chart name inherits a pigment's word, not its recipe: Syme's color comes from chesnut brown and blackish brown, and any tube of umber, raw or burnt, will differ from it [1][5][8]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 728 works, or 3.1 per cent [9]. It is a Renaissance color in the numbers: 61 of 945 paintings from the 1400s (6.5 per cent, 2.1 times the museums' baseline) and 131 of 2,231 from the 1500s, falling to 166 of 6,394 in the 1600s, below baseline [9]. Inside a painting it is a shadow half the time and a middle tone the rest [9].\n\nThe painters who hold it most are Florentines: [[painter:bronzino|Bronzino]] in 7 of his 21 works here, [[painter:pontormo|Pontormo]] in 5 of 13 [9]. Tibetan painting has it in 4 of 47 [9]. The largest covers are Indian works, such as a *Ragamala* page of about 1750 with 59 per cent of its canvas in this brown [9]. The earliest match is dated 1201, but the name's earliest record in our sources is 1821, so that is a look-alike color and not Syme's [8][9]. As always these are photographs of aged, varnished paintings, so a match is a look-alike color, not a pigment test [9].\n\nIn Google Books the phrase \"umber brown\" peaks around 1860, is at about a quarter of that height by 1880, and is at a fiftieth of it in the 2000s [10]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the earth pigment umber (Latin ombra, shadow)",
+   "first_recorded": "Syme's Werner's Nomenclature of Colours, 1814/1821 (no. 102)",
+   "source": "Baty, Nature's Palette, pp. 173, 257-258"
+  },
+  "aka": [
+   "Syme no. 102"
+  ],
+  "siblings": [
+   "umber",
+   "burnt-umber",
+   "raw-umber",
+   "chestnut"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "umber",
+    "gloss": "the pigment's page; a greyer, less red brown, about 12 units away"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#613936",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 728,
+  "top_paintings": [
+   "cma-161771",
+   "cma-314460"
+  ],
+  "painters": [
+   "bronzino",
+   "pontormo"
+  ],
+  "role": {
+   "shadow": 0.5,
+   "mid": 0.49
+  },
+  "ngram": {
+   "peak": 1860,
+   "rel_1880": 0.24,
+   "rel_2000": 0.02
+  },
+  "measured": {
+   "lch": [
+    29,
+    20,
+    28
+   ],
+   "nearest": [
+    [
+     "Mahogany",
+     8.1
+    ],
+    [
+     "Victoria Lake",
+     1.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 257-258 (Syme no. 102, Umber Brown; no. 103, Chesnut Brown)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 257-258 (plate captions)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 173 (Syme's terminology)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium (Eastaugh et al.), \"Umber\", p. 390",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Burnt umber\", p. 79",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 8, 15, 34, 254 (Syme's browns)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 15 (cuckoo-egg key)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub library and graph (Werner no. 102, Ridgway 1912, ISCC-NBS 1955, Maerz and Paul 1930)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "Google Books Ngram, \"umber brown\", all senses, 5-year smoothed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How did Syme define umber brown?",
+   "choices": [
+    "Chesnut brown with a little blackish brown",
+    "Raw umber roasted",
+    "Black mixed with ochre",
+    "Sepia with white"
+   ],
+   "answer": "Chesnut brown with a little blackish brown",
+   "kind": "pick"
+  },
+  {
+   "q": "Where does the word umber come from?",
+   "choices": [
+    "Latin ombra, shadow",
+    "A town called Umber",
+    "The Umber river",
+    "Greek for earth"
+   ],
+   "answer": "Latin ombra, shadow",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: umber brown on Syme's chart is a pigment recipe.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Syme's umber brown is a chart color: chestnut brown with a touch of blackish brown, shown by a marsh harrier and a coneflower disk.",
+  "In our archive this reddish brown peaks in the Renaissance and is most devoted to Bronzino and Pontormo."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported \"redder and darker\" direction for distance to umber page (card gives only 11.6 units)."
+  ]
+ },
+ "words": 729
+}

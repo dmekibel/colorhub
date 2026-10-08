@@ -7,7 +7,7 @@
  ],
  "tier": "pigment",
  "depth": "epic",
- "lede": "Silver is the color of the moon's metal, shown on screens as a light neutral grey, though the real thing is all reflection: it paid for empires, drew the first sketches of the Renaissance, stained medieval glass yellow and made the first photographs.",
+ "lede": "Silver is the color of the moon's metal, shown on screens as a light neutral grey, though the real thing is all reflection: it paid for empires, drew fine Renaissance sketches in silverpoint, stained medieval glass yellow and underlies photography.",
  "sections": [
   {
    "id": "name",
@@ -438,19 +438,13 @@
   "Look at a silver spoon: almost none of it is grey. It is dark reflections and a few white highlights.",
   "English once called tribute paid in silver coin white mail, the opposite of blackmail."
  ],
- "words": 1840,
+ "words": 1837,
  "status": "checked",
  "checked": {
-  "by": "L7 self-check (sentence-to-card trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Poison-detecting silver and the Greifswald silver bullet are presented as belief and legend (St Clair only).",
-   "Potosí discovery story framed as local tradition.",
-   "Silver stain date: 'about 1300' (Gage) and 'early fourteenth century' (Pastoureau) agree.",
-   "Etymology from Wiktionary (web), not the books.",
-   "Herodotus's walls quoted via Birren (Birren's attribution to Nebuchadnezzar's temple omitted as contested).",
-   "Fox-Davies, Werner/Syme, Jekyll cited via public-domain atoms.",
-   "Archive greys are not silver metal: caveat in text."
+   "Lede: first sketches of the Renaissance and made the first photographs were unsupported; reworded to silverpoint and underlies photography"
   ]
  }
 }

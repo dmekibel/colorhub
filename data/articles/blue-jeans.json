@@ -226,14 +226,8 @@
  "words": 980,
  "status": "checked",
  "checked": {
-  "by": "batch-61 writer self-check",
+  "by": "checker",
   "date": "2026-10-08",
-  "issues": [
-   "Books disagree: Strauss/Davis partnership 1872 (Pastoureau) vs 1873 (Balfour-Paul); Davis described differently; Finlay's French-dyed claim single-source and hedged.",
-   "Half the world wears jeans: unsourced estimate, corrected.",
-   "Jeans-as-rebel myth corrected (Pastoureau).",
-   "Crayola date undocumented in our sources.",
-   "Ngram numbers from the article_field output."
-  ]
+  "issues": []
  }
 }

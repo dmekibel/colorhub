@@ -1,0 +1,240 @@
+{
+ "slug": "blue-grey",
+ "name": "Blue-Grey",
+ "hex": "#6699CC",
+ "names": [
+  "Blue-Grey",
+  "Blue Grey",
+  "Blue-Gray"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Blue-grey is a plain English compound for a grey with blue in it, and the swatch used for it here, a clear light blue, is only one of at least five competing versions.",
+ "sections": [
+  {
+   "id": "swatch",
+   "title": "Five blue-greys",
+   "body": "Our library holds five screen values under this name: the swatch #6699CC from Wikipedia's list, a RAL 7031 value (#5D6970), and three from the xkcd color survey [1]. The swatch is the bluest of them, a clear light blue with a chroma of about 32, and ISCC-NBS (1955) calls its nearest block simply \"light blue\" [1]. The RAL value is a dark slate that sits 22.3 units from it, and the xkcd greys lie between 8 and 13 units away [1].\n\nThe same swatch also appears as Livid, in Wikipedia, ISCC-NBS and Maerz and Paul, and Crayola's Cerulean Frost is 2.1 units from it [1]. The nearest name in our teaching set is [[cornflower]], 4.2 away [1]. If you want the greyer reading, look at [[grey-blue]], [[dove-grey]] and [[gunmetal]]."
+  },
+  {
+   "id": "language",
+   "title": "A name with soft edges",
+   "body": "Two broad words joined together make a color with no fixed edge. Batchelor points out that Literary Welsh has no words that match English green, blue, grey or brown exactly, which is a reminder that these boundaries are a language's habit, not nature's [2]. Paterson glosses Dutch blue as a blue-grey and gunmetal as a dull blue-grey [3], and St Clair calls gunmetal a mid blue-gray and [[cadet-blue]] a gray-greenish blue taken from military uniforms [4]."
+  },
+  {
+   "id": "history",
+   "title": "In paint and in fashion",
+   "body": "Medieval illuminators used blue-gray tones in grisaille miniatures to show water, atmosphere, light and distance, as in a manuscript made around 1460 for Philip the Good of Burgundy [5]. Gage notes that a beautiful blue-grey, made by laying transparent black over a white ground, had long been known in the studio [6]. He also reports that Matisse's *Red Studio* (1911) was originally a blue-grey interior, and traces of that show through its thinner paint [6]. The Pigment Compendium lists blue grey as a synonym for blue lead, a mixed pigment based on lead compounds and named for its color [7].\n\nBlue-gray later worked quietly as a social color. After the French Revolution, Greenfield writes, quieter blues (sky blue, gray blues, navy) found buyers across all classes, and they fitted Victorian ideas of propriety [8].\n\nPainters also use it as a foil. Gurney describes a low-chroma blue-gray as the complementary accent to high-chroma reds, oranges and yellows, and deep blue-gray as the color of shadows under warm light [9]. Look for it on a dark-haired man's lower face: hair follicles give it a blue-gray cast [9]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch is rare as a painted color. A color within six units of it covers at least five per cent of the canvas in only 66 of 23,781 paintings, about 0.3 per cent [10]. It is twice as likely in the 1900s as the average, and the 1660s stand out, with 7 of 820 canvases [10]. Alfred Sisley and Henri Matisse each have 3 of 50 works in range, more than 20 times the archive average [10]. Sisley's [[painting:commons-Q17493189|*The Bridge at Moret*]] (1893) fills 30 per cent of its canvas, and a Mughal portrait of Prince Azam Shah, of about 1660, 51 per cent [10].\n\nIn the paintings that hold it, it is most often a mid-tone (55 per cent) or a highlight (42 per cent), almost never a shadow [10]. These are photographs of aged, varnished paintings, and the swatch is a light blue, so the greyer blue-greys in the books are not what these matches measure [10][1]. In print, *blue grey* peaks around 1949 [11]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "English compound of blue and grey; no single coinage is documented",
+   "first_recorded": "origin undocumented; the earliest dated source for this name in our library is RAL (1927)",
+   "source": "ColorHub library"
+  },
+  "aka": [
+   "blue-gray",
+   "Livid",
+   "Cerulean Frost (Crayola)"
+  ],
+  "siblings": [
+   "grey-blue",
+   "gunmetal",
+   "dove-grey"
+  ],
+  "parent": "grey",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "cadet-blue",
+    "gloss": "a gray-greenish blue named for military uniforms"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#6699CC",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 66,
+  "rate": 0.0028,
+  "top_paintings": [
+   "aic-28290",
+   "commons-Q17493189",
+   "commons-Q27970670",
+   "cma-140343"
+  ],
+  "role": {
+   "highlight": 0.42,
+   "mid": 0.55,
+   "shadow": 0.03
+  },
+  "painters": [
+   {
+    "name": "Alfred Sisley",
+    "hits": 3,
+    "n": 50
+   },
+   {
+    "name": "Henri Matisse",
+    "hits": 3,
+    "n": 50
+   }
+  ],
+  "ngram": {
+   "peak": 1949
+  },
+  "measured": {
+   "lch": [
+    61.6,
+    31.6,
+    264.9
+   ],
+   "alts_de2000": {
+    "RAL 7031": 22.3,
+    "xkcd #607C8E": 13.4,
+    "xkcd #85A3B2": 10.8,
+    "xkcd #758DA3": 8.3
+   }
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library: Wikipedia list, RAL 7031, xkcd survey, ISCC-NBS 1955 blocks 154 and 234, Maerz & Paul 1930; distances computed by ColorHub (CIEDE2000)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Batchelor, Chromophobia, ch. 9",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Dutch blue\" and \"gunmetal\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary (\"Gunmetal\", \"Cadet blue\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Blue: The History of a Color, ch. 9 (grisaille miniatures)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, on blue-grey from transparent black and on Matisse's Red Studio",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"blue grey\" and \"blue lead\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 24",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, on gamut masks, mountain shadows and facial color",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "ColorHub archive and graph field notes, as photographed (n = 23,781; CIEDE2000 within 6, at least 5% of the canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "Google Books Ngram, \"blue grey\" (5-year smoothed, relative to peak)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why is this page's swatch a poor guide to what most people mean by blue-grey?",
+   "choices": [
+    "It is a fairly clear light blue, while the other versions are much duller",
+    "It is actually a pale green",
+    "It is a purple-grey from RAL",
+    "It was made for Crayola in 1990"
+   ],
+   "answer": "It is a fairly clear light blue, while the other versions are much duller",
+   "kind": "pick"
+  },
+  {
+   "q": "What did medieval illuminators use blue-gray tones in grisaille miniatures to show?",
+   "choices": [
+    "Water, atmosphere, light and distance",
+    "Blood and wounds",
+    "Gold leaf",
+    "Royal robes"
+   ],
+   "answer": "Water, atmosphere, light and distance",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: in our archive, a color matching this swatch fills a large part of more than one painting in ten.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Our library holds five different screen colors under the name blue-grey, from a clear light blue to a dark slate.",
+  "Matisse's Red Studio started out as a blue-grey interior, and some of it still shows through.",
+  "Look at a dark-haired man's lower face: hair follicles give it a blue-gray cast."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Swatch is a light blue, not a grey: said plainly; greyer alternatives given with CIEDE2000 distances.",
+   "Pigment Compendium 'blue lead' described only as 'mixed pigment based on lead compounds'.",
+   "Welsh color-term claim is Batchelor's, hedged as his point.",
+   "Books say little about this term; article kept short.",
+   "Checker re-traced key claims against book text (Coles, Ball, Finlay, Gage); no changes needed."
+  ]
+ },
+ "words": 577
+}

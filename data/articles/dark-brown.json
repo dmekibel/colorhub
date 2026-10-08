@@ -22,7 +22,7 @@
   {
    "id": "earths",
    "title": "Earths, bitumen and mummy",
-   "body": "Most historic dark browns were dug, not cooked. The pigment compendium puts the iron oxide in umber at between 45 and 70 per cent and the manganese oxide at between 5 and 20 per cent, a mix that gives a warm, rich brown [6]. Vandyke brown is more disputed: a source quoted there lists three kinds, one from roasted iron earth, one a dark brown form of colcothar, and one a brown earth rich in humus or bituminous matter [7]. Asphalts, which run from black to dark brown, are another source of tar-like brown, softening at about 20 degrees Celsius [8].\n\nThe grimmest dark brown is mummy brown. Coles says it was made from the flesh, bones and wrappings of mummified Egyptians and animals, and that medieval Europe first used it as medicine [4]. Paterson is vaguer, describing a bituminous brown *said* to come from the asphalt of mummies [5]. Books disagree on the exact stuff, then [4][5]. The claim that bone black came from human corpses is a myth, and mummy brown is the pigment that really did use human remains [4]. Paterson adds that *atramentum*, described by Pliny, was a very dark brown pigment from calcined bones [9].\n\nNot every dark brown is made on purpose. Verdigris, the copper green, turns dark brown when it meets sulphur-containing pigments such as ultramarine or orpiment, and Persian miniaturists added saffron to slow the change [10]."
+   "body": "Most historic dark browns were dug, not cooked. The pigment compendium puts the iron oxide in umber at between 45 and 70 per cent and the manganese oxide at between 5 and 20 per cent, a mix that gives a warm, rich brown [6]. Vandyke brown is more disputed: a source quoted there lists three kinds, one from roasted iron earth, one a dark brown form of colcothar, and one a brown earth rich in humus or bituminous matter [7]. Asphalts, which run from black to dark brown, are another source of tar-like brown, and the semi-solid varieties soften at temperatures above 20 degrees Celsius [8].\n\nThe grimmest dark brown is mummy brown. Coles says it was made from the flesh, bones and wrappings of mummified Egyptians and animals, and that medieval Europe first used it as medicine [4]. Paterson is vaguer, describing a bituminous brown *said* to come from the asphalt of mummies [5]. Books disagree on the exact stuff, then [4][5]. The claim that bone black came from human corpses is a myth, and mummy brown is the pigment that really did use human remains [4]. Paterson adds that *atramentum*, described by Pliny, was a very dark brown pigment from calcined bones [9].\n\nNot every dark brown is made on purpose. Verdigris, the copper green, turns dark brown when it meets sulphur-containing pigments such as ultramarine or orpiment, and Persian miniaturists added saffron to slow the change [10]."
   },
   {
    "id": "shadow",
@@ -32,12 +32,12 @@
   {
    "id": "almost-black",
    "title": "The color that stood in for black",
-   "body": "For much of history dark brown was what black looked like. Pastoureau writes that the monks of Cluny and Cîteaux, said to wear black or white, in fact dressed in near-black shades such as grey, bluish and dark brown, because a true black or white dye was hard to get until the eighteenth century [12]. Early photography did the same: nineteenth-century photographs were less black and white than a mix of dark browns and creams, depending on paper and chemicals [13].\n\nWork clothes followed the pattern. In the mid-1800s, Levi Strauss's overalls and trousers came in canvas in shades from off-white to dark brown [14]. Between 1860 and 1865 he began replacing the canvas with denim dyed in [[indigo]], and blue jeans were born [14]. The first workwear color, in other words, was a brown that [[denim]] then displaced."
+   "body": "For much of history dark brown was what black looked like. Pastoureau writes that the monks of Cluny and Cîteaux, said to wear black or white, in fact dressed in near-black shades such as grey, bluish and dark brown, because a true black or white dye was hard to get until the eighteenth century [12]. Early photography did the same: nineteenth-century photographs were less black and white than a mix of dark browns and creams, depending on paper and chemicals [13].\n\nWork clothes followed the pattern. After 1853, Pastoureau says, Levi Strauss's overalls and trousers were not yet blue but came in canvas in shades from off-white to dark brown [14]. Between 1860 and 1865 he began replacing the canvas with denim dyed in [[indigo]] [14]. The origins of jeans are poorly documented, since the company's archives burned in 1906, so treat the tidy story with care [14]. In this account, the brown canvas came first and [[denim]] displaced it."
   },
   {
    "id": "myth",
    "title": "A myth about brown and blue",
-   "body": "In the nineteenth century Nietzsche argued that the Greeks saw a dark brown where we see blue and a pale yellow where we see green [15]. This is a version of the old myth that the Greeks could not see blue [15]. The evidence is against it: in many surviving fragments of Greek painting, blue was put to work as a darkener, and a clear bluish grey could be mixed from charcoal black and white [16]. The ancient vocabulary for color is different from ours, but the eye was the same."
+   "body": "In the nineteenth century Nietzsche argued that the Greeks saw a dark brown where we see blue and a pale yellow where we see green [15]. This is a version of the old myth that the Greeks could not see blue [15]. It is a myth, and Ball adds that in many surviving fragments of Greek painting blue was put to work as a darkener, and that a clear bluish grey could be mixed from charcoal black and white [16]. The ancient vocabulary for color is different from ours, but that is a matter of words."
   },
   {
    "id": "names",
@@ -299,18 +299,15 @@
   "Before blue jeans, work clothes came in canvas in shades from off-white to dark brown.",
   "In our archive, dark brown holds in 24.71 per cent of paintings, more than 99 per cent of the named colors."
  ],
- "words": 1121,
+ "words": 1151,
  "status": "checked",
  "checked": {
-  "by": "batch-41 writer self-check (sentence-to-source trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "mummy brown: Coles and Paterson differ in detail, shown as 'books disagree'",
-   "Vandyke brown variety list is quoted by the Compendium from an older source; hedged",
-   "Rembrandt attribution from Ball ch. 14 paragraph on Rembrandt",
-   "St Clair note locator is the glossary page per concordance",
-   "Kobicha name origin undocumented",
-   "article_field.py fails here; de2000 match not computed"
+   "Asphalt softening point hedged to semi-solid varieties",
+   "Denim/Levi Strauss story hedged (Pastoureau: origins shrouded, archives burned 1906)",
+   "Greek blue myth: stated as myth, Ball evidence reworded, claim about the eye softened"
   ]
  }
 }

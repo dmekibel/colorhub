@@ -288,13 +288,11 @@
  "words": 1388,
  "status": "checked",
  "checked": {
-  "by": "article engine (batch 40), sentence-to-card trace, myth list",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Name is a description, not a single material: stated.",
-   "Roman dyer lists (Pastoureau Red vs Yellow) are two listings; the later date is not given in the passage used.",
-   "Birren aura claim is flagged as old opinion.",
-   "Archive match is a colour, not a pigment test: stated."
+   "8 claims traced to Baty, Pastoureau, Ball, Gurney, Finlay, Paterson, Birren: all supported",
+   "No myth-list or copied-phrasing issues"
   ]
  }
 }

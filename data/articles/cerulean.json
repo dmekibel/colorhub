@@ -7,7 +7,7 @@
  ],
  "tier": "pigment",
  "depth": "long",
- "lede": "Cerulean is a strong, slightly greenish sky blue, named for the Latin word for the heavens and made as a paint of cobalt and tin from 1860.",
+ "lede": "Cerulean is a strong, slightly greenish sky blue, named for the Latin word for the heavens and made as a paint of cobalt and tin from about 1860.",
  "sections": [
   {
    "id": "name",
@@ -17,7 +17,7 @@
   {
    "id": "discovery",
    "title": "Höpfner, Rowney and a forgotten recipe",
-   "body": "Cerulean blue is cobalt stannate, a compound of cobalt and tin oxides [1][4]. Books disagree on who found it first. Coles credits the Swiss chemist Albrecht Höpfner in the late eighteenth century, with the recipe forgotten and rediscovered in the 1860s [1]. The Pigment Compendium dates Höpfner's preparation to 1789 and says Schreger described it in 1805 as a beautiful blue painter's color [4]. Rose, cited there, says only that Höpfner made it before 1805 [4].\n\nThe commercial date is firmer. Paterson says the pigment was discovered in 1860 by the firm of George Rowney and Son [3]. Ball adds that Rowney sold it as a watercolor in the 1860s, and that by the 1870s it was an oil color, *cerulean blue* in England and *bleu céleste* in France [6]. Our library records Rowney selling it as *coeruleum* in 1860 [12]. The compendium suggests the 1860s version differed from Höpfner's: it adds calcium sulfate and silica to the cobalt and tin oxides [4].\n\nThe older process mixed a solution of cobalt in aqua regia with tin, then precipitated it with potash, washed, dried and calcined it [4]. Nineteenth-century recipes calcined tin oxide and cobalt nitrate, or precipitated potassium stannate with cobalt chloride and then fired it with silica [4]. A 1913 handbook recipe gives 50 per cent tin oxide, 20 per cent cobalt oxide and 30 per cent silica, and its authors judged the result stable but not very colorful [4]."
+   "body": "Cerulean blue is cobalt stannate, a compound of cobalt and tin oxides [1][4]. Books disagree on who found it first. Coles credits the Swiss chemist Albrecht Höpfner in the late eighteenth century, with the recipe forgotten and rediscovered in the 1860s [1]. The Pigment Compendium dates Höpfner's preparation to 1789 and says Schreger described it in 1805 as a beautiful blue painter's color [4]. Rose, cited there, says only that Höpfner made it before 1805 [4].\n\nThe commercial story is also disputed. Paterson says the pigment was discovered in 1860 by the firm of George Rowney and Son [3], and our library records Rowney selling it as *coeruleum* in 1860 [12]. The compendium notes that some sources put Rowney's introduction as early as about 1850, but that Carlyle (2001) found it unlikely before about 1862 to 63, and that the firm of Roberson was then buying a cerulean from a German supplier [4]. It also finds a London advertisement for \"Caeruleum\" as a new artists' color in December 1859 [4]. Ball says that Rowney sold it as a watercolor in the 1860s, and that by the 1870s it was an oil color, *cerulean blue* in England and *bleu céleste* in France [6]. The compendium suggests the 1860s version differed from Höpfner's: it adds calcium sulfate and silica to the cobalt and tin oxides [4].\n\nThe older process mixed a solution of cobalt in aqua regia with tin, then precipitated it with potash, washed, dried and calcined it [4]. Nineteenth-century recipes calcined tin oxide and cobalt nitrate, or precipitated potassium stannate with cobalt chloride and then fired it with silica [4]. A 1913 handbook recipe gives 50 per cent tin oxide, 20 per cent cobalt oxide and 30 per cent silica, and its authors judged the result stable but not very colorful [4]."
   },
   {
    "id": "greener",
@@ -32,7 +32,7 @@
   {
    "id": "sky",
    "title": "Where to look: the sky near the horizon",
-   "body": "Gurney notes that the sky generally gets lighter toward the horizon, because we look through more atmosphere, and that near the horizon it can range from pale cerulean to warm grey to dull orange [10]. Westland describes the same effect as aerial perspective: distant objects are veiled by scattered light and grow bluer, ending in a hazy cerulean horizon [11].\n\nThe swatch here is deeper than a pale horizon, closer to the sky overhead on a clear day. Finlay saw a light cerulean stain on the lip of an indigo pot in Lombok, as if the pot had been drinking the sky [13]. The color is easiest to notice in a clear sky at mid-morning, well above the pale band at the horizon."
+   "body": "Gurney notes that the sky generally gets lighter toward the horizon, because we look through more atmosphere, and that near the horizon it can range from pale cerulean to warm grey to dull orange [10]. Westland quotes James Fox on the same effect, called aerial perspective: distant objects are veiled by scattered light and grow bluer, ending in a hazy cerulean horizon [11].\n\nThe swatch here is deeper than a pale horizon, closer to the sky overhead on a clear day. Finlay saw a light cerulean stain on the lip of an indigo pot in Lombok, as if the pot had been drinking the sky [13]. The color is easiest to notice in a clear sky at mid-morning, well above the pale band at the horizon."
   },
   {
    "id": "meaning",
@@ -48,7 +48,7 @@
  "aside": {
   "origin": {
    "named_after": "Latin caeruleus, dark blue, related to caelum, the vault of heaven",
-   "first_recorded": "paint sold by Rowney, 1860; the word is much older as a sky adjective",
+   "first_recorded": "paint sold by Rowney, about 1860 (sources differ); the word is much older as a sky adjective",
    "source": "Coles, Chromatopia; Paterson, A Dictionary of Colour"
   },
   "aka": [
@@ -255,16 +255,15 @@
   "The Roman caeruleum was Egyptian blue, not cerulean: the modern paint dates from 1860.",
   "Look for cerulean overhead on a clear day, above the pale band at the horizon."
  ],
- "words": 1169,
+ "words": 1232,
  "status": "checked",
  "checked": {
-  "by": "claude-sonnet",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Books disagree on Hopfner dates and on permanence",
-   "Picasso order is an anecdote via Brassai quoted in Ball",
-   "UN emblem intent is St Clair single-source",
-   "Archive matches before 1860 are look-alike hues"
+   "'Commercial date is firmer' overstated: compendium cites Carlyle placing Rowney after about 1862-63; hedged",
+   "Lede and aside now say about 1860",
+   "Aerial-perspective line is Fox quoted in Westland"
   ]
  }
 }

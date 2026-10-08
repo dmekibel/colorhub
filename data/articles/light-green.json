@@ -1,0 +1,220 @@
+{
+ "slug": "light-green",
+ "name": "Light Green",
+ "hex": "#90EE90",
+ "names": [
+  "Light Green"
+ ],
+ "tier": "standard",
+ "depth": "medium",
+ "lede": "Light Green is the web's pale, fresh green, one of the X11 colors; the words \"light green\" are far older than the screen, and across the books they mark a green that is young, cheerful and easy on the eye.",
+ "sections": [
+  {
+   "id": "screen",
+   "title": "The screen color",
+   "body": "`lightgreen` is a named color in the X11 set, with the hex code #90EE90 [1][2]. Our library also lists it under CSS, the Wikipedia color list, RAL, the XKCD survey and ISCC-NBS [2]. The RAL match, 6027, is a screen approximation and comes out as a bluer, greyer green than the X11 value [2].\n\nThe XKCD survey offers two quite different greens under the same name, #96F97B and #76FF7B, both more yellow and more intense than X11's [2]. The ISCC-NBS system of 1955 puts the name in blocks 130 and 131, with older names such as Bright Nile Green, Fountain Green and Eve Green, which Maerz and Paul record in 1926 [2].\n\nIn measured terms the swatch is very light (lightness 87) and strongly saturated (chroma 59), and the nearest named color in our set is [[malachite]], about 9.8 units away [2]. Beside it sit [[leaf-green]], [[pistachio]] and [[light-lime]]."
+  },
+  {
+   "id": "before",
+   "title": "Light green before the screen",
+   "body": "As a plain description, \"light green\" is old. Paterson's *Dictionary of Colour* uses it to gloss absinthe, chlorine, eau de nil, feuille, reseda (the green of the mignonette plant) and Victoria green, and calls Paris green a bright yellowy-green and a light green pigment [3]. Coles lists terre verte as a light green earth pigment [4]. In the *Pigment Compendium*, the mineral antlerite varies from light green to dark green-black [5].\n\nThe Middle Ages prized the idea [6]. Pastoureau reports that medieval authors called green a joyous, \"cheerful\" color, which is why it was used early in stained glass, enamel and miniatures; the large prophets window at Augsburg cathedral, dated 1115 to 1120, is largely green [6]. He adds that the green in those arts was always bright and relatively light, and that twelfth-century enamels often paired it with blue or white [6].\n\nA phrase from late medieval wardrobe inventories is often mistranslated. *Vert gai* is rendered as \"light green\", but *gai* means lively and joyous, and the opposite *vert perdu* means dim and unsaturated, not necessarily dark [7]. A sixteenth-century treatise, as Pastoureau reports it, recommended light green with flesh color as one of the most pleasing pairs [8]."
+  },
+  {
+   "id": "change",
+   "title": "The stage a green passes through",
+   "body": "Light green often appears as one step in a dye's change. An observer in Bengal described the indigo liquid in the vat as first dark orange, then light green, then darker green, and finally the deep blue of stormy sea [9]. In 1685 the naturalist William Cole watched the shellfish purple dye in sunlight pass from a first light green to a deep green, a dull sea green and a blue before it turned purplish red [9]. The color of the liquid is not the color of the cloth.\n\nVictorian fashion used the green as a partner. In 1880 heliotrope was paired with light green or apricot, and the commentator of the day found the combinations startling [10]. A biographical note in Birren's 1950 book says he reduced fatigue in Southern textile mills by giving workers light green end-walls; it is a promotional account, not independent evidence [11]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This exact green is absent from painting. In our archive of 23,781 paintings, no work has a color within six units of #90EE90 covering even five per cent of the canvas [12]. This much lightness and chroma together is easiest to reach with light on a screen; an aged painted surface rarely holds it.\n\nThe phrase is another matter. In Google Books, \"light green\" is already about a third of its peak frequency in 1800, rises to about 70 per cent by 1900 and peaks around 1933 [12]. That curve counts the words, not the X11 color, so it shows how long people have described pale greens, not how long this swatch has existed [12].\n\nThese are photographs of aged, varnished paintings, and screen colors are approximate [12]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive English; as a web color, the X11 color set",
+   "first_recorded": "phrase in use by 1800 in Google Books; X11 swatch #90EE90",
+   "source": "Paterson, A Dictionary of Colour; ColorHub library"
+  },
+  "aka": [
+   "lightgreen (CSS keyword)",
+   "RAL 6027 (approximate)"
+  ],
+  "siblings": [
+   "malachite",
+   "leaf-green",
+   "pistachio",
+   "light-lime"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "light-lime",
+    "gloss": "a brighter, more yellow screen green"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#90EE90",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 0,
+  "ngram": {
+   "word": "light green",
+   "rel_1800": 0.342,
+   "rel_1900": 0.699,
+   "peak": 1933
+  },
+  "measured": {
+   "lch": [
+    87,
+    59,
+    141
+   ],
+   "nearest": [
+    [
+     "Malachite",
+     9.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"LightGreen\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library, entry \"Light Green\" (CSS, Wikipedia, RAL 6027, XKCD, ISCC-NBS 1955 blocks 130-131; Maerz and Paul 1930)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, entries \"absinthe\", \"chlorine\", \"eau de nil\", \"feuille\", \"reseda\", \"Victoria green\", \"Paris green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, section on earth pigments",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Antlerite\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, chapter on the medieval green of light, stained glass and enamel",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, section on vert gai and vert perdu",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pastoureau, Green and White, sections on Renaissance color combinations (Morato)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Finlay, Colour, chapters on indigo and on purple",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Heliotrope\"",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, biographical note",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (ΔE 6, 5% cover); Google Books Ngram, \"light green\", 5-year smoothed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the medieval phrase vert gai actually mean?",
+   "choices": [
+    "A lively, joyous green",
+    "Light green",
+    "Dark green",
+    "A poisonous green"
+   ],
+   "answer": "A lively, joyous green",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: in our archive, painters often use the X11 Light Green.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "What color did Bengal indigo liquid pass through on its way to blue?",
+   "choices": [
+    "Light green",
+    "Pink",
+    "Yellow",
+    "Grey"
+   ],
+   "answer": "Light green",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Vert gai is often translated as light green, but gai means joyous.",
+  "Indigo and the shellfish purple both pass through light green on their way to their final color."
+ ],
+ "words": 647,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Birren claim reattributed: it is a biographical note in his book, not his own report; marked as not independent evidence.",
+   "Other claims (Paterson, Pastoureau, Finlay, St Clair) verified."
+  ]
+ }
+}

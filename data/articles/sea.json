@@ -17,7 +17,7 @@
   {
    "id": "painted",
    "title": "The painted sea",
-   "body": "Pastoureau, writing the history of blue, says that in ancient and medieval societies water was rarely thought of as blue [4][5]. Pictures could give it any color, and in symbolism it was tied mainly to green [5]. Medieval artists usually drew water as undulating lines of light green, blue, or those two mixed with white [4]. From the thirteenth century, European maps of every kind used green more often than blue for sea, lakes and rivers, while the opposite was true in the East [4].\n\nWhen blue took over is a matter on which Pastoureau gives two dates [4][5]. In one passage he says blue did not become the definitive pictorial and symbolic color for water until the seventeenth century, and in another that on the oldest maps green began to give way to blue in the late fifteenth century [4][5]. Both can be true if the second is the start and the first is the end of a long change. In his book on green he adds that medieval illuminators and Renaissance painters gave the sea a very broad palette, and only in the modern period did painters reduce it to three dominant colors: green, grey and blue [6].\n\nMonet's early *The Green Wave* of 1866 to 1867 is one of Pastoureau's examples: a dark, saturated green makes the sea look violent, very unlike the sea that his Impressionist friends would paint [6]. Gage notes that Titian's sea was blue-green [7]. Byzantine writers went the other way, comparing the marble floor of Sta Sophia to the sea, with blue waves raised up against the stone, as the twelfth-century writer Michael of Thessaloniki described it [7]."
+   "body": "Pastoureau, writing the history of blue, says that in ancient and medieval societies water was rarely thought of as blue [4][5]. Pictures could give it any color, and in symbolism it was tied mainly to green [5]. Medieval artists usually drew water as undulating lines of light green, blue, or those two mixed with white [4]. From the thirteenth century, European maps of every kind used green more often than blue for sea, lakes and rivers, while the opposite was true in the East [4].\n\nWhen blue took over is a matter on which Pastoureau gives two dates [4][5]. In one passage he says blue did not become the definitive pictorial and symbolic color for water until the seventeenth century, and in another that on the oldest maps green began to give way to blue in the late fifteenth century [4][5]. Both can be true if the second is the start and the first is the end of a long change. In his book on green he adds that medieval illuminators and Renaissance painters gave the sea a very broad palette, and only in the modern period did painters reduce it to three dominant colors: green, grey and blue [6].\n\nMonet's early *The Green Wave* of 1866 to 1867 is one of Pastoureau's examples: a dark, saturated green makes the sea look violent, very unlike the sea that his Impressionist friends would paint [6]. Byzantine writers went the other way, comparing the marble floor of Sta Sophia to the sea, with blue waves raised up against the stone, as the twelfth-century writer Michael of Thessaloniki described it [7]."
   },
   {
    "id": "greeks",
@@ -27,7 +27,7 @@
   {
    "id": "dye",
    "title": "A green on the way to blue",
-   "body": "A second sea green turns up in the dye vat. Woad and indigo are both prepared in a vat where the liquid is a yellowish green, and cloth lifted out of the vat is first that color, then turns sea green, and then deepens into blue as the dye takes up oxygen from the air [8][9]. St Clair describes a visitor's trick at Merton Abbey in which skeins of wool came out of the woad vat almost grassy, then deep sea green, then a resonant blue [8]. Finlay gives an older account, from an observer named Grant writing about Bengal, of an indigo liquor passing through a run of greens before it reaches blue [9].\n\nThe sea green stage is a clue that the blue is real chemistry and not paint: a color that changes in front of you is a color made in the air. The same sequence has been told of the shellfish purple, whose liquid in sunlight turns pale yellow, then sea green, then blue and finally a dark purple-red [8]."
+   "body": "A second sea green turns up in the dye vat. Woad and indigo are both prepared in a vat where the liquid is a yellowish green, and cloth lifted out of the vat is first that color, then turns sea green, and then deepens into blue as the dye takes up oxygen from the air [8][9]. St Clair describes a visitor's trick at Merton Abbey in which skeins of wool came out of the woad vat almost grassy, then deep sea green, then a resonant blue [8]. Finlay gives an older account, from an observer named Grant writing about Bengal, of an indigo liquor passing through a run of greens before it reaches blue [9].\n\nThe sea green stage is a clue that the blue is real chemistry and not paint: a color that changes in front of you is a color made in the air. St Clair tells a similar story of the shellfish purple, whose drop of liquid in sunlight passes from pale yellow through sea green and blue to a dark purple-red [8]."
   },
   {
    "id": "stone",
@@ -47,7 +47,7 @@
   {
    "id": "names",
    "title": "Names beside it",
-   "body": "Baty reproduces Werner and Syme's nomenclature, which lists sea green among a long run of greens, beside verdigris green, emerald green and apple green [16]. Its neighbors in modern lists are [[teal]], [[turquoise]], [[aquamarine]] and [[seafoam]], and the cooler greener neighbor is [[sea-green]] [2][3]. Paterson also lists a sea-green as a color in the Ostwald circle [2]. The Buddhist fable of the boy who is told to close his eyes and not think of sea green is told by both Finlay and St Clair [12][13]."
+   "body": "Werner's nomenclature, which Baty reproduces, named colors by familiar things, such as apple-green and milk-white, a habit that gave sea green its place in many later lists [16]. Its neighbors in modern lists are [[teal]], [[turquoise]], [[aquamarine]] and [[seafoam]], and the cooler greener neighbor is [[sea-green]] [2][3]. Paterson also lists a sea-green as a color in the Ostwald circle [2]. The Buddhist fable of the boy who is told to close his eyes and not think of sea green is told by both Finlay and St Clair [12][13]."
   },
   {
    "id": "field",
@@ -270,16 +270,16 @@
   "A fresh indigo-dyed cloth turns sea green before it turns blue.",
   "Stare at red, look at a white wall, and the afterimage you see is a sea green."
  ],
- "words": 1506,
+ "words": 1504,
  "status": "checked",
  "checked": {
-  "by": "batch-9 writer self-check",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Pastoureau gives two dates for blue overtaking green for water; stated both.",
-   "The sea color term has thin book history; concordance hits for plain 'sea' are mostly literal.",
-   "Which Gage circle pairs red with sea green is not identified in the concordance.",
-   "Ngram for sea green peak is from the all-senses term."
+   "Removed unsupported claim that Titian's sea was blue-green (not found in Gage).",
+   "Replaced claim that Werner/Syme list sea green (not found in Baty) with what Baty does say.",
+   "Reworded a 10-word run shared with St Clair on the shellfish purple.",
+   "Kept both Pastoureau dates for blue overtaking green, flagged as his two statements."
   ]
  }
 }

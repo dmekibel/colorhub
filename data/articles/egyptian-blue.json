@@ -1,0 +1,320 @@
+{
+ "slug": "egyptian-blue",
+ "name": "Egyptian Blue",
+ "hex": "#1034A6",
+ "names": [
+  "Egyptian Blue"
+ ],
+ "tier": "pigment",
+ "depth": "epic",
+ "lede": "Egyptian blue is a calcium copper silicate, fired from sand, lime and copper in Egypt some 4,500 years ago: among the oldest synthetic pigments, and the standard blue of the ancient Mediterranean for more than two thousand years.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "What the name covers",
+   "body": "Egyptian blue is the modern name for a synthetic pigment whose main compound is calcium copper tetrasilicate, CaCuSi4O10 [4]. Its natural twin is a rare mineral, cuprorivaite, but natural deposits are far too small to have supplied any pigment [4]. The Romans were the first to call it Egyptian blue; the Egyptians themselves wrote its name as the word for lapis lazuli joined to a word meaning artificial [3][4].\n\nAncient writers gave it many names. Theophrastus, about 315 BC, knew it as *kyanos* and noted that it was manufactured, not mined [4]. Pliny ranked the Egyptian kind first of all the blues and recorded that it was also made at Pozzuoli, where the product was called Puteolanum [4]. By the Compendium's account a man named Vestorius ran a factory there, which gave a further name, Vestorian blue [4]. The port of Alexandria, from which it was traded, gave Alexandrian blue [4].\n\nThe Latin word *caeruleum* was looser, a general term for blues, though the pigment Vitruvius describes under it is, by the Compendium's reading, certainly Egyptian blue [4]. Coles notes that the color name cerulean descends from that Latin word [2]. Paterson adds a modern synonym, Pompeian blue [6], and the Compendium warns that the same label was also pinned on some impermanent lakes that resembled it in hue [13]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch is one Egyptian blue among many",
+   "body": "The swatch on this page, #1034A6, is the screen value Wikidata gives for the pigment [14]. It reads as a deep, saturated blue, and the nearest block in the ISCC-NBS system of 1955 is called simply deep blue [14]. Maerz and Paul's dictionary of 1930 records the name with a first date of 1809 [14].\n\nThe pigment itself was never one color. St Clair writes that, depending on how finely it was ground, it could range from the depth of lapis lazuli to the paleness of turquoise, and that laid over a dark base it could look almost electric [3]. Jarman, writing as a filmmaker and painter, called it a clear, astringent blue, the blue of the mosque and of glaze [17]. The swatch is a plausible sample of that range [3][14]."
+  },
+  {
+   "id": "making",
+   "title": "How it was made",
+   "body": "The recipe is sand, lime and copper, fired together. Ball gives the proportions as one part lime, one part copper oxide and four parts quartz, with the lime from chalk or limestone, the copper from an ore such as malachite, and the silica from plain sand [1]. Egyptian workers also needed a flux, and the books name it differently: natron in Coles [2], soda or plant-derived potash in the Compendium [4], potash in Pastoureau [9].\n\nThe books disagree on the heat as well. Ball says 800 to 900 degrees Celsius [1], and Coles says a kiln held close to 830 [2]. The Compendium gives 850 to 1000 [4], and St Clair's Fahrenheit figures work out to about 950 to 1000 for a first firing and 850 to 950 for a second [3]. A figure of 900 to 950 held for one to two days, with a mix of five parts quartz to two of lime, two of copper and one of soda, is credited to Ullrich in the Compendium [4].\n\nFiring gave a brittle, glassy blue mass, which was ground and fired again to raise the share of blue crystals [4][3]. Go above about 1000 degrees, or fire without enough oxygen, and the result is a green frit instead [4]. That frit was made on purpose too, and is called Egyptian green [5]. In a modern replication Canti and Heathcote, working from copper oxide, calcium carbonate, diatomite and a sodium flux, needed three firings before a block of deep blue crystals formed [4].\n\nNone of this was luck. Ball argues that the proportions show precision and forethought, and that the pigment grew from the same work with glazes and glass that produced faience [1]. Coles likewise calls it a development of ceramic glaze processes [2]. Excavations at Tell el-Amarna turned up the workshops themselves, with stocks of raw materials and round pots for firing, and green and purple pigments among the debris [4]."
+  },
+  {
+   "id": "egypt",
+   "title": "In Egypt",
+   "body": "The earliest known Egyptian blue comes from the Fourth Dynasty, about 2613 to 2494 BC, where it was molded into amulets and also ground as paint for sculptures and sarcophagi [4]. Books disagree on the start. Ball and St Clair say about 2500 BC [1][3], Coles says about five thousand years ago, in the age of the pyramids [2], and Pastoureau places the pigment almost three thousand years before our era [9]. It stayed the standard blue of Egyptian art until the Ptolemaic period, in the fourth century BC [4].\n\nScribes wrote with it on papyrus, and it appears in hieroglyphs on walls, in glazes on funerary objects and on coffins [3]. Ball points to a wall painting probably from the tomb of Nebamun, about 1350 BC, as a showcase of it [1]. Coles credits Nefertiti's famous crown to the pigment [2]. Pyrite turns up in several Fifth Dynasty tomb paintings; the Compendium suggests it was either an additive to make the blue look more like lapis lazuli, or an impurity [4].\n\nBlue mattered. St Clair says it stood for the sky, the Nile, creation and divinity, and that Amun-Ra was often shown with blue skin or hair [3]. Beads of it were thought to dispel evil and bring prosperity [3]. Pastoureau notes that blue and blue-green funerary figures made from copper silicates were believed to protect the dead, and that on some figurines the two colors cannot be told apart [8]. Real blue stones were poor substitutes: turquoise was rare and costly, and azurite was hard to carve [3]."
+  },
+  {
+   "id": "spread",
+   "title": "Across the Mediterranean",
+   "body": "The pigment travelled with trade. It appears in Minoan wall paintings on Thera and Crete, where it was sometimes mixed with a natural blue amphibole mineral [4]. Ball reports it in paintings at Knossos from before 2100 BC and on Mycenaean buildings from about 1400 BC [1]. Mesopotamian sites such as Persepolis, Pasargadae and Nineveh have it too [4].\n\nThe Greeks seem to have bought it rather than made it [1]. Theophrastus says an artificial blue was imported from Egypt, and Ball reads that as a sign the Greeks did not know how, or did not care, to manufacture it [1]. Gage lists bright, saturated blues from Egyptian blue in Bronze Age wall paintings at Thera and Knossos, in sixth-century tombs in Lycia, in the Tomb of the Diver at Paestum, and in fourth- to third-century paintings in Bulgaria [7]. The Etruscans used it in the sixth century BC, and so did the Romans, who set up local factories [1][4].\n\nAt Pompeii it is on the walls and also sits unused in the color shops, and it was found in the tombs of Roman painters [1]. Pliny says cinnabar cost fifteen times as much as red ocher from Africa and about as much as blue from Alexandria, which Pastoureau identifies as Egyptian blue and describes as otherwise the most expensive pigment [10]. Its reach was wide. Canti and Heathcote found it in Romano-British and Saxon layers in west-central England, with evidence that it was made locally, and the most northerly find is on a painted shield of the third century AD from Norway [4]."
+  },
+  {
+   "id": "myths",
+   "title": "The white statues and the blue the Greeks never saw",
+   "body": "A familiar belief says ancient Greek and Roman statues were bare white marble, and that is a myth [11]. A caption in Pastoureau's *Red* lists the principal mineral pigments identified on Greek and Roman statuary, and Egyptian blue is among them [11].\n\nA second claim says the Greeks could not see blue, and this too is a myth [2][7]. Coles notes that the Greek word that could include blue, *melas*, actually meant dark, so blue was treated as a value of darkness, and Ball adds that classical writers show no sense of blue as a primary color [2][12]. What the books describe is a vocabulary that filed blue with dark, not a blind eye. The paint pots tell the other story: Gage stresses bright, saturated blues made from Egyptian frit [7].\n\nBooks disagree about how much the Greeks cared for blue [7][8]. Pastoureau says blue was less prized and less common in Greece, and that the Romans disliked it still more [8]. Gage argues that Pliny's famous four-color painters were an ideal of Roman austerity, not a record of the palette, since blue pigments were common [7]."
+  },
+  {
+   "id": "lost",
+   "title": "Decline, loss and rediscovery",
+   "body": "Production faded through the late Roman period and the Middle Ages [4]. The Compendium notes late appearances in Christian wall painting in the ninth century [4]. The earliest known European use of ultramarine, in the San Saba church in Rome in the first half of the eighth century, was mixed with Egyptian blue [3]. Examples from the thirteenth century in Italy are believed to be reuse of old stock, since small balls of the pigment turn up in Roman excavations [3].\n\nWhy did the making stop? St Clair gives two possible reasons: demand for blue fell before the twelfth-century revival, so the skill was not passed on, or Western patrons came to prefer raw materials with intrinsic value, like ultramarine [3]. Coles says simply that the knowledge was lost with the fall of the Roman Empire [2]. The timeline in the other books is less tidy than that, because the pigment and its texts survived for centuries [3][4].\n\nInterest returned after Napoleon's expedition to Egypt in 1798 [2]. Coles says the chemical composition was identified in the 1880s and the process recreated [2], while the Compendium credits Pabst with the first modern synthesis of the compound, in 1959 [4]. A 2004 study cited by St Clair examined why paint containing Egyptian blue can blacken [18]."
+  },
+  {
+   "id": "han",
+   "title": "Han blue and its relatives",
+   "body": "China had its own copper silicate. Barium copper silicate, BaCuSi4O10, was made during the Han dynasty and is called Chinese blue, or more accurately Han blue [4]. A purple version, Han purple, is also known [4]. Hughes and colleagues showed in 1997 that strontium and barium analogues of the Egyptian compound can be made, though their colors lack the intensity of the calcium one [4]. Egyptian blue itself is so far unknown from the Far East [4].\n\nThe same idea, a colored glass ground to powder, returned in Europe with cobalt in place of copper [2]. Coles points out that smalt is made much as Egyptian blue is, heating lime, silica and potash, with cobalt as the colorant [2]. For the story of that blue, and of the pigment that finally replaced it, see [[cobalt]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "These are our own numbers, from museum photographs of aged, varnished paintings, so a color match here is not a pigment test. Our strict test asks for a screen color within six units of this swatch, covering at least five per cent of the canvas. Only one painting of 23,781 passes: Vilhelm Lundstrøm's *[[painting:smk-KMS4585|Seated Female Nude]]* of 1950, with the blue over about 14 per cent of the canvas [15]. On the looser test, a color among a painting's six largest, it appears in 5 paintings, 0.01 per cent of the archive, and is rarer than 75 per cent of named colors [14][15].\n\nThe earliest and latest dated matches are both by André Derain, from 1906 and 1914, and his *[[painting:smk-KMSr14|Woman in a Chemise]]* is the first [14]. The oldest Egyptian blue is about four thousand years older than that [4][14]. The gap is real but not a mystery: this archive holds museum paintings, not tomb walls, and a screen match is not proof of the pigment [15]. In the library, the nearest swatches are [[persian-blue]] at 3.3 units and [[blue-blue]] at 5.9 [14].\n\nIn Google Books the phrase *Egyptian blue* sits at about 13 per cent of its peak in 1840, 17 per cent in 1880, 29 per cent in 1920 and 77 per cent in 2000, before peaking in 2007 [16]. That count takes in every use of the words, so it follows interest in the pigment [16]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Egypt, by Roman usage; the Egyptians called it artificial lapis lazuli",
+   "first_recorded": "Fourth Dynasty Egypt (about 2613 to 2494 BC) as a material; the name Egyptian blue comes from Roman writers",
+   "source": "Pigment Compendium, \"Egyptian blue\"; St Clair, The Secret Lives of Colour"
+  },
+  "aka": [
+   "Egyptian frit",
+   "Pompeian blue",
+   "Alexandrian blue",
+   "Pozzuoli blue (Puteolanum)",
+   "Vestorian blue",
+   "caeruleum (the Latin general term)",
+   "cuprorivaite (the mineral analogue)"
+  ],
+  "siblings": [
+   "pompeian-blue",
+   "cerulean"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "persian-blue",
+    "gloss": "nearly the same screen color (3.3 units apart), unrelated name"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "egy",
+    "name": "hsbd iryt (artificial lapis lazuli)"
+   },
+   {
+    "lang": "grc",
+    "name": "kyanos"
+   },
+   {
+    "lang": "la",
+    "name": "caeruleum"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#1034A6",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1,
+  "within_painting_lens": 5,
+  "rarer_than_named_pct": 75,
+  "top_paintings": [
+   "smk-KMS4585"
+  ],
+  "first_dated": {
+   "id": "smk-KMSr14",
+   "painter": "André Derain",
+   "year": 1906
+  },
+  "ngram": {
+   "phrase": "egyptian blue",
+   "peak": 2007,
+   "rel_1840": 0.127,
+   "rel_1880": 0.169,
+   "rel_1920": 0.294,
+   "rel_2000": 0.772
+  },
+  "measured": {
+   "lch": [
+    27.6,
+    72.4,
+    298.0
+   ],
+   "nearest": [
+    [
+     "Persian Blue",
+     3.3
+    ],
+    [
+     "Blue Blue",
+     5.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 11",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 49 (\"Egyptian blue\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Egyptian blue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, pp. 160-161 (\"Egyptian blue\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 161 (\"Egyptian green\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Egyptian blue\" and \"Pompeian blue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 34",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pastoureau, Blue: The History of a Color, ch. 7",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Pastoureau, Red: The History of a Color, ch. 9",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Pastoureau, Red: The History of a Color, ch. 11",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Pastoureau, Red: The History of a Color, ch. 14 (figure caption)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 18",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"Pompeian blue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "data",
+   "cite": "ColorHub color library and graph (data/library.json, data/graph/), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "book",
+   "cite": "Jarman, Chroma, pp. 102-103",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 18,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Egyptian blue\", endnotes (citing Daniels et al., 2004)",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What went into the Egyptian recipe for Egyptian blue?",
+   "choices": [
+    "Sand, lime and a copper compound, fired in a kiln",
+    "Ground lapis lazuli mixed with chalk",
+    "Cobalt oxide fused with alumina",
+    "Indigo vat dye on clay"
+   ],
+   "answer": "Sand, lime and a copper compound, fired in a kiln",
+   "kind": "pick"
+  },
+  {
+   "q": "What happens if the kiln runs well above 1000 degrees, or without enough oxygen?",
+   "choices": [
+    "A green frit forms instead of the blue",
+    "The blue turns purple",
+    "Nothing: it only takes longer",
+    "The pigment turns white"
+   ],
+   "answer": "A green frit forms instead of the blue",
+   "kind": "pick"
+  },
+  {
+   "q": "The Greeks never painted with blue because they could not see it.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "One of the oldest synthetic pigments was fired from sand, lime and copper in Egypt about 4,500 years ago, and was still being made at Pozzuoli in Pliny's day.",
+  "Pliny's Rome paid about as much for blue from Alexandria as for cinnabar, and Pastoureau calls it otherwise the most expensive pigment.",
+  "Look at painted Egyptian coffins and tomb walls in a museum: where the sky-blue is still bright, it is often this pigment."
+ ],
+ "words": 1932,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Hedged 'the oldest synthetic pigment' to 'among the oldest' (Ball and the Compendium say oldest/earliest, but the Compendium also calls heated ochre the first synthetic pigment)",
+   "Verified recipe, Nefertiti crown, melas, Napoleon/1880s, Pabst 1959, Pliny price, 2500 BC claims against sources; no other changes"
+  ]
+ }
+}

@@ -273,12 +273,10 @@
  ],
  "status": "checked",
  "checked": {
-  "by": "claude",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Swatch is paler than typical terre verte (library hex from Wikipedia)",
-   "Books disagree on cave-art use (Ball vs St Clair) and deposit supply (Coles vs St Clair)",
-   "Appian green meaning disputed (Pliny, Rackham, Grissom)"
+   "Re-verified vs Compendium, St Clair, Ball; disagreements (cave art, supply, Appian) already hedged in text"
   ]
  },
  "words": 1672

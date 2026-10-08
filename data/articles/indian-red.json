@@ -1,0 +1,267 @@
+{
+ "slug": "indian-red",
+ "name": "Indian Red",
+ "hex": "#CD5C5C",
+ "names": [
+  "Indian Red"
+ ],
+ "tier": "pigment",
+ "depth": "long",
+ "lede": "Indian red is an old pigment of finely ground iron oxide, a dark brownish red; the web color that borrows its name is a much lighter, pinker red.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two things called Indian red",
+   "body": "Two different things carry this name, and they do not look alike. The pigment is a dark brownish red made from iron oxide [1][4]. The web color of the same name is one of the 140 colors of the X11 set, with the code `#CD5C5C`, a softer and lighter red that screens show as a dusty salmon-rose [1].\n\nThe swatch on this page is the web color. Everything below about paint and history is about the pigment; the swatch section says how far apart the two have drifted."
+  },
+  {
+   "id": "origin",
+   "title": "Five stories about the name",
+   "body": "No one origin of the name is documented, and the old sources offer several. Chambers's *Cyclopaedia* (1738, supplement 1753) says colourmen used the name for a kind of purple ochre shipped from Ormus, an island in the Persian Gulf [4]. Dossie, in 1764, wrote that this had once been true but that the color then sold under the name was made from caput mortuum [4]. Ure, in the 1870s, likewise says the earth first came from the East Indies and was by then prepared artificially by roasting iron sulfate [4].\n\nToch (1916) gives two guesses and vouches for neither [4]. One is that the American painter [[painter:benjamin-west|Benjamin West]], as a boy, saw Native Americans use a natural hematite as face paint and named it after them [4]. The other is that ore from the Persian Gulf was exported to England as \"East Indian Red\" [4]. Neither guess comes with a dated record in the books we read [4].\n\nA third thread points to a place. Rivington (1901) describes Indian red as a ground hematite from Bengal, and Heaton (1928) says Crawshay red, a good ochre from the Forest of Dean in England, is sometimes also called Indian red [5]. Church (1901) lists Indian red, Persian red and Indian red ochre together, and says the original natural kinds came from Ormuz in Persia [5]. What the stories share is a red earth that reached Europe on the eastern trade, but the books do not settle which route gave the name [4][5]."
+  },
+  {
+   "id": "material",
+   "title": "Rust, finely ground",
+   "body": "The coloring matter is iron(III) oxide, Fe2O3, the compound St Clair calls anhydrous iron oxide, or more simply rust [9]. Its mineral form, hematite, is the commonest ore of iron, usually a dull red, and finely divided red hematite is abundant in weathered rock and soil [5]. The mineral is stable, which is why the pigment is so permanent [5][6].\n\nThe pigment was made as well as dug. Church wrote that Venetian red began as a native ferric oxide, less purplish than Indian red, and that the name later moved to an artificial oxide made by calcining green vitriol [6]. Heaton calls Indian red an oxide of iron \"highly calcined\" [6]. Weber (1923) judged the synthetic iron oxides purer than the natural ones and very permanent [6]. Ball adds that such Mars colors were first given as an artist's recipe by Theodore de Mayerne in the early 1600s [10]. They boomed in the 1700s, when sulphuric acid made for textile bleaching left iron oxide as a by-product [10]."
+  },
+  {
+   "id": "cousins",
+   "title": "A tangle of cousins",
+   "body": "Paterson's dictionary says Venetian red goes by many names according to where it is found, among them Venice, Indian, Spanish, Pompeian and Persian red, and also sinopia [2]. His entry for English red gives the same list for red iron oxide [3]. The Compendium agrees that Venetian red, Indian red, Tuscan red, Pompeiian red, light red, rouge, colcothar and caput mortuum are \"generally\" terms for synthetic reds, then adds that some sources on Byzantine and eastern Mediterranean art use caput mortuum for natural hematite [6].\n\nThe names also point in different directions. Church had Venetian red as the less purplish of the two, while Paterson describes Indian red as dark brownish red and Venetian red as orange-red or reddish brown, so the pair can swap places depending on the author [1][2][6]. Weber notes that the grades called Tuscan red and Pompeiian red had alizarin madder mixed in [6]. In practice a tube labelled with any of these names may have held a different oxide, and a recipe naming one is a hint, not a specification.\n\nThe nearest named neighbors in our color library are [[venetian-red]], [[pompeian-red]], [[tuscan-red]] and [[english-red]]. Older and plainer cousins are the clay [[bole]] used under gold leaf and [[sinopia]], the red earth of Roman and Renaissance underdrawings [5][15]."
+  },
+  {
+   "id": "ancient",
+   "title": "The oldest red",
+   "body": "Objects stained deep red with iron oxide have gone with human settlement since the Upper Paleolithic, some 50,000 years ago [9]. Paleolithic cave painters used reds from hematite, and analyses show that some yellow ochres were heated in stone crucibles to turn them red, an early artificial pigment [12]. At Niaux, around 12,000 BC, painters mixed hematite with feldspar as an extender, which darkened it but made it stick better [10].\n\nIn Egypt, the storehouse manager Wah was wrapped around 1975 BC in a hematite-red cloth, and Osiris carries the epithet \"lord of the red cloth\" in Egyptian funerary texts [9]. In the fourth century BC a law gave Athens a monopoly on the rich red earth of Kea, and the Latin word for red ochre, *rubrica*, gave English *rubric*, because such ink was used for headings [9].\n\nThen the pigment lost its place. Pliny priced cinnabar at fifteen times red ochre from Africa [12], and St Clair notes that hematite fell out of favor as soon as a more vivid red, [[vermilion]], became available [9]. Iron oxide did not disappear. It settled into the dull, steady reds of grounds and shadows, as its cousin [[ochre]] did [9]."
+  },
+  {
+   "id": "art",
+   "title": "In painting",
+   "body": "Gage reports that late in life Sir Joshua Reynolds based his pictures on simple underpaintings built from white, black, Indian red and [[raw-umber]] [8]. Church recommended artificial Indian red, mixed with ultramarine, Prussian blue, or indigo and yellow ochre, for \"the lilac greys of stormy clouds\" in the English watercolor school [6].\n\nIndian red also sat under other pigments. Salter (1869) says mars violet was usually compounded with Indian red as its base, and that mars red has the richness and depth of Indian red though with a russet orange hue [13]. Ball points out that every primary and secondary hue got a major new pigment in the 1800s except red [10]. There, Mars red merely refined red ochre, the aniline reds failed as artists' colors, and synthetic alizarin is the same molecule as in madder [10]."
+  },
+  {
+   "id": "others",
+   "title": "A name used for other reds",
+   "body": "A few writers stretched the name beyond iron. Riffault and colleagues (1874) give the name Indian red to a lake made from sandalwood, and the Compendium calls this an unusual association of the term [7]. The same book notes that Riffault cites a Professor Dussauce, who described the pigment in 1861 as an organic color from sandalwood [4]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch is not the pigment",
+   "body": "The web color `#CD5C5C` entered the X11 and CSS lists, and Paterson records it as one of the 140 colors in the X11 set [1]. Our library also finds the name in Ridgway's 1912 color atlas, in the ISCC-NBS system of 1955, in Maerz and Paul's 1930 dictionary and in the xkcd color survey of 2010 [15]. The lighter, pinker web color is a long way from Paterson's \"dark brownish red\" pigment [1].\n\nThe library files several names as alternates for this swatch: Eugenia Red, Faded Red, Pale Red, Rose Neyron, English Vermillion, Pastel Red and Dark Coral [15]. Hex values for historical pigments are screen approximations [15]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, this swatch is present in 47 paintings (0.2 per cent), and in 32 by the stricter within-painting count [16]. That makes it rarer than 56 per cent of the named colors [16]. Inside a painting it most often plays an accent, in 78 per cent of those 32 [16].\n\nThe strongest pull is outside Europe [16]. It is most over-represented in works from India, 11 of 721 paintings, or 2.9 times the expected rate, and in the Kalighat school, 7 of 96 paintings [16]. The earliest dated painting that holds it at least 2 per cent of the canvas is from 1236, a Tibetan painting of Kagyu masters, [[painting:cma-153618|Portraits of Two Lineage Masters of the Kagyu Order]] [16]. The archive's early centuries are thin, so 1236 is a floor and not a first [16]. It is also 676 years before the earliest record of the color name in our sources, 1912, so a match here is a look-alike hue, not proof of the pigment [16][15].\n\nIn printed English the phrase \"Indian red\" peaks around 1880 and rose fastest in the 1810s [17]. Google Books counts every sense of the phrase, so it is a rough guide only [17]. All archive counts are photographs of aged, varnished paintings, and a color match is not a pigment test [16]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "disputed: Persian Gulf (Ormus) earth sold as East Indian red, Bengal hematite, or a tale about the painter Benjamin West",
+   "first_recorded": "colourmen's name by 1738 (Chambers); the web color's name in our sources from Ridgway, 1912",
+   "source": "Pigment Compendium, \"Indian red\"; ColorHub library"
+  },
+  "aka": [
+   "Persian red",
+   "Spanish red",
+   "Indian red ochre",
+   "Persian Gulf oxide"
+  ],
+  "siblings": [
+   "venetian-red",
+   "pompeian-red",
+   "tuscan-red",
+   "english-red"
+  ],
+  "parent": "red",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "indian-yellow",
+    "gloss": "another pigment with India in its name, unrelated in material: a yellow"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 47,
+  "n_within_painting": 32,
+  "pct": 0.2,
+  "rank_rarer_than_pct": 56,
+  "role": {
+   "accent": 0.78
+  },
+  "first_dated": {
+   "id": "cma-153618",
+   "year": 1236,
+   "min_cover": 0.02
+  },
+  "top_country": {
+   "India": {
+    "hits": 11,
+    "n": 721,
+    "lift": 2.9
+   }
+  },
+  "ngram": {
+   "peak": 1880,
+   "rise": 1810
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 218 (\"Indian red\", \"IndianRed\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 410 (\"Venetian red\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 159 (\"English red\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"Indian red\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"Hematite\", \"Red ochre\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"Venetian red\", \"Pompeian red\", \"Caput mortuum\", \"Iron(III) oxide, hematite type\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"Sandalwood\", \"Santal red\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 41",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, ch. 69 (\"Hematite\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 11, ch. 14 and ch. 21",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Pastoureau, Red, ch. 9 and ch. 11",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"Mars red\", \"Mars violet\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "data",
+   "cite": "ColorHub color library and graph (data/core-names.json, data/library.json): sources CSS/X11, Ridgway 1912, ISCC-NBS 1955, Maerz and Paul 1930, xkcd 2010",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "data",
+   "cite": "Google Books Ngram, \"indian red\", all senses, 5-year smoothed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What gives the pigment Indian red its color?",
+   "choices": [
+    "Iron oxide, the same compound as rust",
+    "Cochineal insects",
+    "Ground sandalwood bark",
+    "Mercury sulfide"
+   ],
+   "answer": "Iron oxide, the same compound as rust",
+   "kind": "pick"
+  },
+  {
+   "q": "The web color Indian Red (#CD5C5C) is a close match for the dark brownish-red pigment of that name.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "In 1764 Dossie wrote that the color then sold as Indian red was prepared from what?",
+   "choices": [
+    "Caput mortuum",
+    "Madder root",
+    "Cinnabar",
+    "Bengal indigo"
+   ],
+   "answer": "Caput mortuum",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Indian red the pigment is rust, finely ground; Indian Red the web color is a lighter, pinker salmon-red.",
+  "The word rubric comes from *rubrica*, Latin for red ochre, the ink used for headings.",
+  "Reynolds underpainted late portraits with white, black, Indian red and raw umber."
+ ],
+ "words": 1424,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported claim that Salter lists English vermilion as a synonym of red ochre (not found in the Pigment Compendium text).",
+   "Reworded Osiris line to avoid a 10-word run shared with a book."
+  ]
+ }
+}

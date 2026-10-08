@@ -17,7 +17,7 @@
   {
    "id": "pair",
    "title": "The pair, not the color",
-   "body": "Books that mention [[black]] and [[red]] together are almost always talking about two colors side by side. Pastoureau tells how chess began with black and red pieces in India and in Islamic lands, a pair of opposites in Asia from time immemorial [2]. When the game reached Europe around the year 1000, the opposition changed to white against red, and from the mid-thirteenth century to the white against black we know now [2].\n\nIn Gothic art, black and red together stood for the devil: black body, red flames of hell and the blood of the damned, as in Fra Angelico's *Last Judgment* of about 1431 to 1432 [3]. Medieval discriminatory marks drew on five colors, and red and black were among the most frequent combinations [4]. None of these is the single dark red of the swatch."
+   "body": "Books that mention [[black]] and [[red]] together are almost always talking about two colors side by side. Pastoureau tells how chess began with black and red pieces in India and in Islamic lands, a pair of opposites in Asia from time immemorial [2]. When the game reached Europe, over the eleventh century the opposition changed to white against red, and from the mid-thirteenth century to the white against black we know now [2].\n\nIn Gothic art, black and red together stood for the devil: black body, red flames of hell and the blood of the damned, as in Fra Angelico's *Last Judgment* of about 1431 to 1432 [3]. Medieval discriminatory marks drew on five colors, and red and black were among the most frequent combinations [4]. None of these is the single dark red of the swatch."
   },
   {
    "id": "field",
@@ -144,12 +144,10 @@
  "words": 394,
  "status": "checked",
  "checked": {
-  "by": "L7 self-check",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "No book treats Black Red as a single color; mentions are of the pair.",
-   "Nisemurasaki pairing is library-only.",
-   "Short by design."
+   "Chess: 'around the year 1000' replaced with eleventh century, per Pastoureau"
   ]
  }
 }

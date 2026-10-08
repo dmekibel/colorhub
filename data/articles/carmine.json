@@ -330,14 +330,10 @@
  "words": 1588,
  "status": "checked",
  "checked": {
-  "by": "Sonnet 5.5 batch writer (self-check: sentence-to-note trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Earliest use in the Americas: Coles 700 BCE vs St Clair 2nd century BCE; stated as books disagree.",
-   "Insect counts differ by product (raw dye vs lake); stated as tens of thousands.",
-   "Finlay's 'carmine is made of blood' corrected.",
-   "Baty's claim that kugellack and Florentine lake are carmine variants is single-source and hedged.",
-   "Archive matches are colors, not pigment identifications; 1480s reds predate Spanish cochineal imports."
+   "Verified insect counts, Aztec tribute, Ocampo, 144,000 lb, E120, Carmen, Sanskrit/Persian, Turner against St Clair, Coles, Greenfield, Finlay: no changes needed"
   ]
  }
 }

@@ -1,0 +1,512 @@
+{
+ "slug": "gold",
+ "name": "Gold",
+ "hex": "#FFD700",
+ "names": [
+  "Gold",
+  "Metallic Gold",
+  "Old Gold"
+ ],
+ "tier": "pigment",
+ "depth": "epic",
+ "lede": "Gold is the warm, bright yellow of the precious metal, the color that stood in for heaven on medieval altarpieces and for wealth everywhere else, and the one color a screen can only imitate.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A metal that names a color",
+   "body": "Gold is a color named after a metal, and for most of history the two were hard to tell apart. Paterson's dictionary defines it as a deep yellow, the color of the precious metal, the color Renaissance painters used for the background of heaven, and the bull's-eye of an archery target [1]. Whether it is a color at all has been argued for a long time. Jarman decides it is not, only something that makes colors shine, and the poet Maggie Nelson leaves the question open [2][3].\n\nThe word and the color have grown together. Wiktionary traces English *gold* and *yellow* to the same Indo-European root, meaning yellow, green or shining [4]. Latin *aureus* could mean gilded, golden or simply a bright, saturated yellow, and as a noun it was a gold coin worth 25 silver denarii [5]. Since the seventeenth century, Pastoureau notes, most dictionaries have defined yellow itself as the color of gold [5].\n\nGold often stood where yellow should be. In the first 120 volumes of the Latin Church Fathers, François Jacquesson counted color words and found gold and yellow together at 10 per cent, behind white, red and black [6]. Pastoureau's argument is that much of the Western history of yellow is really the history of gold, because the metal took the color's place in texts, images and symbols [7][8]."
+  },
+  {
+   "id": "material",
+   "title": "The metal",
+   "body": "The oldest gold objects found in Europe come from a cemetery at Varna, on Bulgaria's Black Sea coast, discovered in 1972 and dated to between 4600 and 4200 BCE [5]. Gold is rare, but what made it precious was also its stability: it does not change in air or water [5]. It is absurdly malleable. A single grain of 53 milligrams can be drawn into a wire 200 meters long or beaten into a sheet covering 360 square meters, and a strand three millimeters thick can hold up 250 kilograms [5].\n\nIts look comes from physics, not pigment. Like silver, copper and iron, gold has free electrons that reflect light strongly, which gives it its sheen, and it does not tarnish, which made it an easy emblem for the divine [9]. In Egypt, gold from the mines of Nubia and the eastern desert was thought to be the flesh of the sun and of the gods, and tomb painters gave the gods vivid yellow skin made from orpiment [5][10].\n\nMoney followed. The first coins were struck in Lydia, in Asia Minor, in the seventh century BCE, first in electrum, a natural alloy of gold and silver, then in gold and later in silver [5]. Because pure gold is soft, it had to be alloyed with silver or copper to make objects and coins, which is where the goldsmith's craft began [5]."
+  },
+  {
+   "id": "trade",
+   "title": "Wealth on the move",
+   "body": "Europe has little gold of its own and long relied on African and Eastern supplies [9]. For centuries the Carthaginians were the main channel for African gold into Europe; yet after their defeat in 202 BC they paid their reparations in silver, just under 360 tons over 50 years [9]. In 1324 Mansa Musa, emperor of Mali, passed through Cairo on pilgrimage with 60,000 men and 80 camels carrying 300 pounds of gold [9]. By St Clair's account he spent so freely that the price of gold in the region stayed low for more than a decade [9].\n\nGold was also worn. Cloth of gold, woven from threads with a silk or linen core wrapped in gold, was known from Roman times [9]. When Henry VIII of England and Francis I of France met in 1520, the meeting took its name, the Field of the Cloth of Gold, from their rival displays, and Henry's tent was made entirely of the cloth [9]."
+  },
+  {
+   "id": "craft",
+   "title": "Leaf, powder and fakes",
+   "body": "Medieval painters did not buy gold from an apothecary; they had it beaten from coins [11]. Goldbeaters measured their leaf by the ducat, the Italian gold coin, well into the twentieth century, and the thickness was set by how many leaves came from one coin [11][9]. Cennino Cennini wanted no more than a hundred leaves per ducat for gilding panels, though beaters were getting 145, because flat grounds need slightly thicker gold [11]. Books disagree on the size of a leaf: Ball gives about 8.5 centimeters square, St Clair about 11.5 inches [11][9].\n\nThe leaf was so thin that nearly any damp glue held it: egg white, gum, honey or plant juices [11][9]. Laid down like that it scatters light and looks like a flat, opaque yellow [11]. It shines only after burnishing, rubbing it smooth with a polished stone or a tooth; Cennini suggested hematite, a gem, or the tooth of a meat-eating animal [9][11]. The word *burnish* means to make brown, Ball notes, because the polished gold turns dark in its shadows as its highlights brighten [11].\n\nGold can also be a paint. Ground in a mortar it welds back together, so medieval workshops first mixed it with mercury to make a brittle paste or ground leaf with honey or salt [11]. The cheaper option was imitation. Orpiment, an arsenic mineral, was called *auripigmentum*, gold paint, and Pliny records that Caligula tried to smelt gold out of it; it contains none [12][13]. Mosaic gold, a tin sulphide, was used for gilding parchment as a fake gold [11], and saffron in egg white served as a poor man's gold in manuscripts [14]. A survey of fourteenth- and fifteenth-century recipes lists counterfeits made from mercury, tin, chalk, sulphur, bile and saffron [15]."
+  },
+  {
+   "id": "art",
+   "title": "Gold in painting",
+   "body": "Before painters learned to build space, gold was the space. Until at least the fourteenth century, holy figures on altarpieces stand against a field of gold with no depth and no shadow [11]. Giotto's Madonna painted for the Ognissanti church in Florence around 1310 sits on such a ground, with a gold frame and gold haloes [9]. Most of these fields were probably burnished to a mirror shine; they look matt today because of cracks and grime [11].\n\nMosaic had done it first. Gold tesserae appear in the early third century AD, first in the halo of Christ in the Mausoleum of the Julii beneath St Peter's [16]. Each cube was glass with a sheet of gold leaf sealed inside [8]. Mosaicists set them unevenly, some tilted as much as 30 degrees, to throw light down to the people below, and in Italy some cubes had a red glass base or sat in red plaster, giving the gold an old-fashioned warmth [16].\n\nGold was never just yellow. In a manuscript from the abbey of Reichenau, gold marks the divine light while ordinary yellow paints the angel's clothes and the sheep's wool [8]. Then the Renaissance turned against it [17][18]. Alberti told painters to imitate gold with colors, because real gold looks bright from one angle and dark from another and breaks the unity of a picture [17]. By 1486 Carlo Crivelli, in his *Annunciation*, kept real gold only for the beam of divine light [18]. When Pope Julius II asked for gold on the Sistine ceiling, Michelangelo answered that the people painted there were poor and wore none; Gage notes that cleaning has shown he did gild the lunettes [19].\n\nGold came back as a modern statement. Klimt's portrait of Adele Bloch-Bauer of 1907, the last work of his golden phase, places her in fields of flat and patterned gold; seized by the Nazis, it was returned to her niece after a long legal fight and now hangs in New York [9]. His *[[art:commons-Q698487|The Kiss]]*, dated 1907 in our records, is in our archive [32]."
+  },
+  {
+   "id": "culture",
+   "title": "Heaven, heraldry and greed",
+   "body": "The Bible names gold often and yellow almost never, and Pastoureau argues that this silence kept yellow out of Christian symbolism while gold filled its place [7]. Early writers worried that gold in churches was mere luxury, but Byzantine practice and goldsmith-bishops such as Saint Eligius won out; until the thirteenth century the goldsmith's art served the Church alone [7]. After the Reformation, Catholic Baroque churches filled with gold again, and gilded Virgins gradually displaced blue ones [20][21].\n\nHeraldry made gold a rank. *Or*, gold, was one of the six tinctures of European arms, beside silver, blue, red, green and black [22]. The fourteenth-century jurist Bartolo of Sassoferrato ranked gold the noblest of them, as the color of light [22]. A herald of the 1440s put it first because it was bright and strong like the sun, and tied it to the lion, Sunday, nobility and courage [23]. In printed engravings gold came to be shown by dots, a code spread by Petra-Sancta in the 1630s [22]. The royal arms of France, gold lilies on blue, began as a white Marian lily that turned gold because medieval imagery treated gold as a kind of super-white [24][25].\n\nThe other side of gold is greed. Pastoureau reads the story of Midas as the oldest evidence of a lasting link between yellow and avarice, and the river Pactolus, where Midas washed away his curse, ran with gold flakes [26]. Marsilio Ficino, in fifteenth-century Florence, named green, gold and sapphire as three universal colors, with gold for the sun [27]."
+  },
+  {
+   "id": "science",
+   "title": "Seeing gold",
+   "body": "Gold is a reflection, so it changes with its surroundings more than most colors. Thomas Aquinas already noticed that gold looks better on blue than on white [28]. Westland's handbook uses gold to show simultaneous contrast: the same gold looks darker on white and lighter on black [29]. In 2015 a photograph of a dress split the internet into those who saw white and gold and those who saw blue and black; a BuzzFeed poll went two to one for white and gold, though the dress was blue and black [30][31]. Eckstut favors the explanation that viewers judged the lighting differently, and scientists still disagree [31].\n\nGold can even make red. From the sixteenth century glassmakers dissolved gold in aqua regia and precipitated it as tiny particles that scatter light into a clear red, the finest red glass [33]. Paterson lists purple of Cassius, a deep purple named after a seventeenth-century physician, and the Pigment Compendium records gold reds, a gold blue and a red gold-silver sulfide found on artefacts from dynastic Egypt [34][15]. Gage suggests that the alchemists' habit of equating gold with red owed something to vermilion, made from sulphur and mercury, the supposed parents of all metals [35]."
+  },
+  {
+   "id": "myths",
+   "title": "Pyrite, belts and other gold stories",
+   "body": "The gold in lapis lazuli is a myth. Leonardo, attacking the alchemists around 1508, described veins of gold running through the stone; Gage points out they were iron pyrites, which is not gold [36]. Nelson repeats the idea that the ancients prized lapis partly for its golden specks, and adds that the specks are pyrite [3].\n\nA popular story says medieval prostitutes had to wear a golden belt. Pastoureau calls it a legend: the belt probably never existed, although nineteenth-century prostitutes in big cities did choose yellow shawls and gold-colored accessories to be seen under street lamps [37]. Caligula's attempt to get gold from orpiment is a true story about a false idea: the mineral holds arsenic, not gold [12][13]."
+  },
+  {
+   "id": "swatch",
+   "title": "Gold on a screen",
+   "body": "A screen cannot show gold, only a yellow that stands for it. This page's swatch is the web color `gold`, number #FFD700 in the X11 set, which Paterson lists among the 140 X11 names [1]. It is lighter than 92 per cent of our core color names and has a contrast of only 1.4 to 1 against white, so gold text on a white page is barely readable [38].\n\nIts nearest named neighbors are [[golden-yellow]] and [[yellow]], both within four units [38]. The swatches that try to look like the metal are much darker and greener: [[metallic-gold]] sits 11.4 units away and [[old-gold]] 10.7 [38]. The browns of [[dark-goldenrod]] and [[goldenrod]] are closer to what a gold ground looks like in a photograph [38]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive makes the screen problem plain. In 23,781 paintings, not one has a color within six units of this swatch covering at least five per cent of the canvas [32]. Painted and gilded gold, photographed under museum light, never comes out this bright.\n\nThe darker [[metallic-gold]] swatch finds 204 paintings, and in 91 per cent of them it is the lightest color in the picture, as a highlight should be [32]. The earliest is a Japanese *[[art:cma-130358|Welcoming Descent of Amida]]* dated around 1300 [32]. Gentile da Fabriano's *[[art:nga-396|Madonna and Child Enthroned]]* of 1420 is about a third this color, Sano di Pietro's *[[art:nga-186|Crucifixion]]* of 1445 about two fifths, and Klimt's *The Kiss* about 15 per cent [32]. It is most at home in India: 42 of 721 Indian works carry it, and 20 of 96 Kalighat paintings, 24 times the archive's rate [32].\n\nThe oldest gold grounds read darker still. With [[dark-goldenrod]], the earliest match is a Florentine *[[art:commons-Q3842543|Madonna with Child Enthroned]]* of about 1230, and paintings from the 1200s carry it at more than twice the archive rate [32]. Bernardo Daddi's *[[art:nga-46101|Crucifixion]]* of about 1320 is 41 per cent this brownish gold [32]. The caveat is the usual one: these are photographs of aged, varnished paintings, and a color match is not a test for gold, so a Kalighat yellow may well be paint [32]. In Google Books, *gold* used as an adjective peaks in the 1890s [39]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the metal gold",
+   "first_recorded": "Old English gold; as a web color, the X11 set",
+   "source": "Wiktionary; Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "or (heraldry)",
+   "golden",
+   "aureus (Latin)"
+  ],
+  "siblings": [
+   "silver",
+   "bronze",
+   "copper"
+  ],
+  "parent": "yellow",
+  "children": [
+   "metallic-gold",
+   "old-gold",
+   "golden-yellow",
+   "satin-sheen-gold",
+   "harvest-gold"
+  ],
+  "disambiguation": [
+   {
+    "slug": "metallic-gold",
+    "gloss": "a darker, greener swatch that imitates the metal; this page shows the web color gold"
+   },
+   {
+    "slug": "goldenrod",
+    "gloss": "named after the flower, not the metal"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "or, doré"
+   },
+   {
+    "lang": "la",
+    "name": "aurum (the metal), aureus (golden)"
+   },
+   {
+    "lang": "de",
+    "name": "Gold, golden"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#FFD700",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 0,
+  "metallic_gold": {
+   "hex": "#D3AF37",
+   "n_present": 204,
+   "role_highlight": 0.91,
+   "first": {
+    "id": "cma-130358",
+    "year": 1300
+   },
+   "india": {
+    "hits": 42,
+    "n": 721,
+    "lift": 6.8
+   },
+   "kalighat": {
+    "hits": 20,
+    "n": 96,
+    "lift": 24.3
+   },
+   "top_paintings": [
+    "nga-186",
+    "nga-396",
+    "commons-Q698487"
+   ]
+  },
+  "dark_goldenrod": {
+   "hex": "#B8860B",
+   "n_present": 283,
+   "first": {
+    "id": "commons-Q3842543",
+    "year": 1230
+   },
+   "lift_1200s": 2.4,
+   "top_paintings": [
+    "nga-46101"
+   ]
+  },
+  "ngram": {
+   "word": "gold",
+   "peak": 1895,
+   "adj_peak": 1890
+  },
+  "measured": {
+   "lch": [
+    86.9,
+    87.2,
+    91
+   ],
+   "lighter_than_core_pct": 92,
+   "contrast_white": 1.4,
+   "contrast_black": 14.97,
+   "nearest": [
+    [
+     "Golden Yellow",
+     2.5
+    ],
+    [
+     "Yellow",
+     3.9
+    ],
+    [
+     "Sunglow",
+     4.7
+    ]
+   ],
+   "metallic_gold_de": 11.4,
+   "old_gold_de": 10.7
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"gold\" and \"Gold\" (X11)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 76",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Nelson, Bluets, props. 112 and 151",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "web",
+   "cite": "Wiktionary, \"gold\" and \"yellow\" (etymology)",
+   "loc_kind": null,
+   "url": "https://en.wiktionary.org/wiki/gold"
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, ch. 10 (\"The Yellow Metal\")",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, White: The History of a Color, p. 68",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, ch. 17",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, ch. 19",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Gold\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 30",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 12",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Orpiment\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 51 (\"Orpiment\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 6 (\"Yellow\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 184 (\"gold\", \"gold group\", \"gold-silver sulfide\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, pp. 44-45",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 123",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 18,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 13",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 19,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 153",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 20,
+   "kind": "book",
+   "cite": "Pastoureau, Blue: The History of a Color, ch. 9",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 21,
+   "kind": "book",
+   "cite": "Pastoureau, White: The History of a Color, note 112",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 22,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, pp. 85, 93, 95",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 23,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, ch. 21",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 24,
+   "kind": "book",
+   "cite": "Pastoureau, White: The History of a Color, pp. 82-86",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 25,
+   "kind": "book",
+   "cite": "Pastoureau, Blue: The History of a Color, ch. 8",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 26,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, ch. 11",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 27,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 35",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 28,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 177",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 29,
+   "kind": "book",
+   "cite": "Westland et al., Universal Principles of Color, ch. 15",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 30,
+   "kind": "book",
+   "cite": "Westland et al., Universal Principles of Color, ch. 6 (\"#TheDress\")",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 31,
+   "kind": "book",
+   "cite": "Eckstut, What Is Color?, ch. 54",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 32,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas; run for #FFD700, #D3AF37 and #B8860B)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 33,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 24 (notes to the glass chapter)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 34,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"purple of cassius\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 35,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 143",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 36,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 141",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 37,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, ch. 33",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 38,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json, data/graph/names.json), CIEDE2000 distances, WCAG contrast",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 39,
+   "kind": "data",
+   "cite": "Google Books Ngram via data/graph fieldnotes (adjective-tagged, relative to peak)",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why do the gold grounds of medieval altarpieces often look like flat, brownish yellow in photographs today?",
+   "choices": [
+    "Gold leaf that is cracked or no longer smooth scatters light instead of reflecting it, so it reads as a dull yellow",
+    "Painters used yellow paint instead of gold",
+    "Gold turns brown as it tarnishes",
+    "Museums cover gold with brown varnish to protect it"
+   ],
+   "answer": "Gold leaf that is cracked or no longer smooth scatters light instead of reflecting it, so it reads as a dull yellow",
+   "kind": "pick"
+  },
+  {
+   "q": "Where did medieval painters get their gold leaf?",
+   "choices": [
+    "They had it beaten from gold coins, up to about a hundred leaves per ducat",
+    "From the flecks in lapis lazuli",
+    "They ground orpiment",
+    "From an apothecary, as a powder"
+   ],
+   "answer": "They had it beaten from gold coins, up to about a hundred leaves per ducat",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the golden specks in lapis lazuli are real gold.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A single 53-milligram grain of gold can be beaten into a sheet covering 360 square meters.",
+  "Medieval gold leaf was hammered from coins: a good goldbeater got up to 145 leaves from one ducat.",
+  "Look at a gold-ground altarpiece from the side, then from the front: the gold flips from dark to bright, which is exactly why Alberti told painters to stop using it."
+ ],
+ "words": 2161,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "mosaic gold: removed unsupported \"hardly looks golden\""
+  ]
+ }
+}

@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A naturalist's term",
-   "body": "Bluish green is one of Werner's colors as Patrick Syme set them out for naturalists, number 51 in the greens [1]. Syme matched it to the egg of a thrush, to the underside of wild rose leaves and to beryl [1]. He took the term itself, with saffron yellow, lilac and blackish grey, from the English edition of Willdenow's botany textbook of 1805 [2].\n\nSyme's chart, first published in 1814 and revised in 1821, was perhaps the only one English-speaking botanists used until 1886 [2]. That made its vocabulary durable, and bluish green stayed in field guides long after the chart did. The older Latin vocabulary had a word for the same zone: *glaucus*, which could mean grey-green, greenish or bluish green [3]."
+   "body": "Bluish green is one of Werner's colors as Patrick Syme set them out for naturalists, number 51 in the greens [1]. Syme matched it to the egg of a thrush, to the underside of wild rose leaves and to beryl [1]. He took the term itself, with saffron yellow, lilac and blackish grey, from the English edition of Willdenow's botany textbook of 1805 [2].\n\nSyme's chart, first published in 1814 and revised in 1821, was perhaps the only one English-speaking botanists used until 1886 [2]. The older Latin vocabulary had a word for the same zone: *glaucus*, which could mean grey-green, greenish or bluish green [3]."
   },
   {
    "id": "swatch",
@@ -219,13 +219,11 @@
  ],
  "status": "checked",
  "checked": {
-  "by": "L7 batch writer self-check",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Syme 1814 first / 1821 second edition: Baty, no book disagreement.",
-   "Gauguin attribution from Gage p. 201 only; Theosophical chart is one symbolic code.",
-   "Birren opinion flagged contested."
+   "Removed unsourced claim that bluish green stayed in field guides after the chart"
   ]
  },
- "words": 575
+ "words": 558
 }

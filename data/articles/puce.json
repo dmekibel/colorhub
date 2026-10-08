@@ -1,0 +1,210 @@
+{
+ "slug": "puce",
+ "name": "Puce",
+ "hex": "#CC8899",
+ "names": [
+  "Puce"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Puce is French for flea, the name of a dull brown-pink-purple that turned from an insult into the fashionable color of a French court summer.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The color of fleas",
+   "body": "The word comes from the Latin *pulex*, flea, whose underside is puce in color, according to Paterson [1]. Paterson also records how loosely the word has been used: a dull purple, a brownish purple, a pinkish blue, even a dark red [1]. Ball uses puce as his example of a low-level color term whose edges anyone can dispute, asking when puce becomes russet, burgundy or rust-red [2].\n\nFinlay adds that the name once carried no sting: for a while flea-colored was a kind description of Marie Antoinette's favorite shade [3]."
+  },
+  {
+   "id": "1775",
+   "title": "Summer 1775",
+   "body": "The story comes from St Clair [4]. In the summer of 1775 Marie Antoinette was twenty, a year into her reign and unpopular, after riots over the price of grain that spring [4]. Her mother, Empress Maria Theresa, had scolded her for \"extravagances of fashion\" [4]. Louis XVI is reported to have found her trying on a new glossy taffeta gown of a peculiar shade between brown, pink and gray, and to have remarked that it resembled *couleur de puce* [4].\n\nThe remark backfired, in this telling. The Baronne d'Oberkirch recalled that by the next day every lady at court wore puce, in shades named old, young, belly and back of the flea [4]. Lady Spencer wrote to her daughter that puce was the uniform at Fontainebleau and the only color that could be worn [4]. The anecdote rests on this one book, so take it as reported, not proven."
+  },
+  {
+   "id": "word",
+   "title": "A fashion, not the word's birth",
+   "body": "The story explains a craze and does not explain the word. Maerz and Paul's 1930 dictionary lists puce with a first record of about 1350, long before Versailles [5]. We have not seen that earlier citation, and the books do not name it, so the date stays a flag, not a fact. What is solid is the Latin source in Paterson [1] and the long afterlife of the fashion in English: the fashion magazines of the 1790s, which St Clair read in the V&A archive, recommend a gown of \"puce-colored satin\" worn with a scarlet mantle [6]."
+  },
+  {
+   "id": "temple",
+   "title": "The gown at the Temple",
+   "body": "After the fall of the monarchy on 10 August 1792, the royal family were held in the Temple, and Marie Antoinette was allowed few clothes [4]. Among the few garments she kept were plain shifts, a muslin skirt and three dresses, one of them a taffeta gown the color of fleas [4]. Seventeen years after the court copied the king's insult, the color was still hers, now among the few garments of a prisoner. The couple were executed the following year [4]."
+  },
+  {
+   "id": "swatch",
+   "title": "Which puce",
+   "body": "Our swatch is a soft, slightly dusty pink-mauve. It is paler and pinker than the color the 1775 sources describe, which sits somewhere in brown, pink and gray [4]. Our library carries puce from Ridgway 1912, the ISCC-NBS system of 1955 and Maerz and Paul 1930, and Daphne Pink is a near-twin of the swatch, 0.8 units apart [7]. Close neighbors are [[dusty-rose]], [[old-rose]], [[mauve]] and [[rosy-brown]], and a browner reading drifts toward [[taupe]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Puce is rare in paint. In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in only 9 works [8]. The largest share is [[painter:henri-matisse|Matisse]]'s [[painting:commons-Q16937070|The Roofs of Collioure]] of 1905, 26 per cent, followed by a Mandi royal portrait of about 1700 at 24 per cent [8]. The 1900s lift is 6.3 times the archive rate, with 4 of 1,674 works [8]. France, the country of the 1775 court, has only 3 of 3,443 [8].\n\nThe word fades slowly. In Google Books, *puce* is highest at the start of our 1800 window, falls to about 30 per cent of that by 1920, and recovers to about half by 2000 [9]. These are photographs of aged, varnished paintings: a color match, not a pigment test [8]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the flea (Latin pulex; French puce)",
+   "first_recorded": "c. 1350 per Maerz & Paul 1930 (unverified); French court fashion 1775 (St Clair)",
+   "source": "Paterson, A Dictionary of Colour; St Clair, The Secret Lives of Color"
+  },
+  "aka": [
+   "couleur de puce",
+   "flea color"
+  ],
+  "siblings": [
+   "old-rose",
+   "dusty-rose",
+   "mauve"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "rosy-brown",
+    "gloss": "a browner pink; a close neighbor, not the same name"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "puce (flea)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#CC8899",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 9,
+  "top_paintings": [
+   "commons-Q16937070",
+   "cma-314230",
+   "cma-137452"
+  ],
+  "countries": {
+   "France": {
+    "n": 3443,
+    "hits": 3,
+    "lift": 2.3
+   }
+  },
+  "ngram": {
+   "rel_1920": 0.302,
+   "rel_2000": 0.521,
+   "peak": 1800
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 323, \"puce\"",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 9",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 11",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, \"Puce\"",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz & Paul 1930, first recorded c. 1350, plate 7 H 4 (unverified)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, Preface",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub color library: Puce entry (Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930); near-duplicate Daphne Pink",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive: 23,781 paintings, color within six units, at least five per cent of the canvas (as photographed)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "Google Books Ngram, \"puce\", 5-year smoothed, relative to peak",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does puce mean in French, and what did Louis XVI compare the 1775 gown to?",
+   "choices": [
+    "Flea; the color of fleas",
+    "Plum; the color of a ripe plum",
+    "Mud; the color of Paris mud",
+    "Rose; the color of faded roses"
+   ],
+   "answer": "Flea; the color of fleas",
+   "kind": "pick"
+  },
+  {
+   "q": "The 1775 anecdote is the documented origin of the word puce.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which description fits the gown the king remarked on?",
+   "choices": [
+    "Between brown, pink and gray",
+    "A vivid scarlet",
+    "A pale sky blue",
+    "A bright emerald"
+   ],
+   "answer": "Between brown, pink and gray",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Puce means flea: a king's insult in 1775 became the only color to wear at Fontainebleau, according to one memoirist."
+ ],
+ "words": 642,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Softened 'prison color' to match St Clair",
+   "Other claims verified; 1775 anecdote and c.1350 date remain hedged"
+  ]
+ }
+}
