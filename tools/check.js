@@ -89,4 +89,15 @@ const idsGate = require("./check_ids.js").checkIds();
 idsGate.warnings.forEach(w => console.log("warn  " + w));
 idsGate.errors.forEach(e => console.log("FAIL  " + e));
 console.log(`ids gate: ${idsGate.N} paintings, ${idsGate.errors.length} files out of step with the corpus`);
-process.exit(errors.length || nameErrors.length || idsGate.errors.length ? 1 : 0);
+// articles-lite gate: the "nearest stories" block on a color with no article reads data/analysis/articles-lite.json.
+// tools/analyze.py once wiped it silently; it must exist and match the articles that have a lede and a hex.
+const liteErrors = [];
+{
+  const dir = path.join(__dirname, "../data/articles"), lite = path.join(__dirname, "../data/analysis/articles-lite.json");
+  const want = fs.readdirSync(dir).filter(f => f.endsWith(".json") && f !== "index.json").filter(f => { try { const a = JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")); return a.lede && a.hex; } catch (e) { return false; } }).length;
+  if (!fs.existsSync(lite)) liteErrors.push("data/analysis/articles-lite.json is missing (python3 tools/build_articles_lite.py)");
+  else { const got = JSON.parse(fs.readFileSync(lite, "utf8")).length; if (got !== want) liteErrors.push(`articles-lite.json has ${got} entries but ${want} articles have a lede and a hex (python3 tools/build_articles_lite.py)`); }
+}
+liteErrors.forEach(e => console.log("FAIL  " + e));
+console.log(`articles-lite gate: ${liteErrors.length} problems`);
+process.exit(errors.length || nameErrors.length || idsGate.errors.length || liteErrors.length ? 1 : 0);
