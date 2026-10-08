@@ -739,6 +739,7 @@ function honeycomb(host, opts = {}) {
     // alive 2, measured in tools/_qa/drift_check.js. A globe instead just spins slowly (no wandering off a tilt).
     // Any touch changes `phase` away from "idle"/"drift" immediately, which stops this.
     if (phase === "idle" && ALIVE && !down && !pinch && (t - lastInput) > 4000) { phase = "drift"; driftT0 = t; driftTeff = 0; driftAnchor = P.slice(); }
+    if (fly && flyStep(t)) more = true;
     if (zAnim) {
       const nz = Math.abs(zAnim.to - Z) < .003 ? zAnim.to : Z + (zAnim.to - Z) * Math.min(1, dt * (RM ? 60 : 11));
       zoomAround(nz, zAnim.sx, zAnim.sy);
@@ -817,6 +818,62 @@ function honeycomb(host, opts = {}) {
     const w = RM ? 30 : 4.5, X = [P[0] + V[0] / w, clamp(P[1] + V[1] / w, -1.5, 1.5)], A = [P[0] - X[0], P[1] - X[1]];
     spring = { t0: performance.now(), X, A, B: [0, 0], w }; phase = "spring"; kick();
   }
+  // ---- L18 fly: one calm move of pan AND zoom together (the zoomed-out tap rule, and search 2.0's "fly there").
+  // Zoom eases on a log scale (so a 10x zoom feels even); dip > 0 pulls back a little mid-flight so you see the
+  // distance traveled. A touch cancels it (pointerdown below), and it never snaps: honeyEaseS has 0 slope at both ends.
+  let fly = null;
+  function flyTo(X, z1, o = {}) {
+    if (!lay || lay.globe) return;
+    z1 = clamp(z1 == null ? Z : z1, ZMIN, ZMAX);
+    const dist = Math.hypot(X[0] - P[0], X[1] - P[1]);
+    fly = { t0: performance.now(), dur: RM ? 1 : o.dur || clamp(420 + dist * 14, 480, 900), P0: P.slice(), X: X.slice(), Z0: Z, Z1: z1, dip: RM ? 0 : o.dip || 0 };
+    spring = null; zAnim = null; phase = "fly"; if (o.buzz !== false) buzz(4);
+    if (SHOOT) { flyStep(fly.t0 + fly.dur); return; }   // screenshot/test runs land at once (headless has no frames)
+    kick();
+  }
+  function flyStep(t) {
+    const f = fly, u = clamp((t - f.t0) / f.dur, 0, 1), e = honeyEaseS(u);
+    const zz = f.Z0 * Math.pow(f.Z1 / f.Z0, e) * (1 - f.dip * Math.sin(Math.PI * u));
+    Z = Math.max(ZMIN, zz);
+    P = [f.P0[0] + (f.X[0] - f.P0[0]) * e, f.P0[1] + (f.X[1] - f.P0[1]) * e];
+    if (u < 1) return true;
+    fly = null; phase = "idle"; P = f.X.slice(); Z = clamp(f.Z1, ZMIN, ZMAX);
+    if (opts.onZoom) opts.onZoom(Z);
+    draw(t); settle();
+    return false;
+  }
+  // the zoomed-out tap rule (David, MASTER-PLAN 0c): when the map is zoomed out and bubbles are tiny, a tap zooms
+  // in to that bubble and centers it; the next tap (it's now the center) opens its page.
+  const L18_TINY_D = 46;
+  function l18ZoomedOut() {
+    // the center's own copy (a wrapping map repeats it; a far copy is always tiny): the biggest one on screen
+    let cd = 0; for (const q of drawn) if (q.it === center && q.d > cd) cd = q.d;
+    return cd > 0 && cd < Math.max(L18_TINY_D, zc("labelMin") * 1.8);
+  }
+  function l18ZoomOnto(p) {
+    const o = offAt(p.x, p.y, lens(0)), X = [P[0] + o[0], P[1] + o[1]];
+    const pz = HONEY_STYLES[styleId], z0 = pz && pz.initialZoom ? pz.initialZoom(lay.raw.length) : 1;
+    flyTo(X, Math.max(Z * 1.6, Math.min(1, Math.max(z0, .7))));
+  }
+  // where an item sits in the plane, the copy nearest the current pan (a wrapping map repeats every item)
+  function l18WorldOf(it) {
+    let best = null, bd = Infinity;
+    const R = lay.finite ? 1e9 : Math.max(2, lay.per) * 1.5;
+    for (const p of lay.pts) if (p.it === it) copies(p, P, R, (ex, ey) => { const d = ex * ex + ey * ey; if (d < bd) { bd = d; best = [P[0] + ex, P[1] + ey]; } });
+    return best;
+  }
+  function l18Nearest(x, y, rad) {
+    let best = null, bd = rad;
+    for (const q of drawn) { const d = Math.hypot(q.x - x, q.y - y) - q.d / 2; if (d < bd) { bd = d; best = q; } }
+    return best;
+  }
+  function l18ItemNear(h) {
+    if (!lay) return null;
+    const H = String(h || "").toUpperCase(), L = lab(H);
+    let best = null, bd = Infinity;
+    for (const it of lay.items) { if (String(it.h).toUpperCase() === H) return it; const d = (it.lab[0] - L[0]) ** 2 + (it.lab[1] - L[1]) ** 2 + (it.lab[2] - L[2]) ** 2; if (d < bd) { bd = d; best = it; } }
+    return best;
+  }
   function zoomAround(z, sx, sy) {
     if (lay && lay.globe) { Z = z; return; }   // the globe always centers at screen middle; nothing to re-anchor
     const l0 = lens(0), o0 = offAt(sx, sy, l0); Z = z;
@@ -841,14 +898,15 @@ function honeycomb(host, opts = {}) {
     const [x, y] = local(e); ptrs.set(e.pointerId, [x, y]); touchXY = [x, y];
     try { cv.setPointerCapture(e.pointerId); } catch (er) {}
     if (phase === "spring" || zAnim) loop(performance.now());
-    phase = "drag"; spring = null; zAnim = null; touched = true;
+    phase = "drag"; spring = null; zAnim = null; fly = null; touched = true;
     if (ptrs.size === 2) {
       const [a, b] = [...ptrs.values()], mid = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2], o = lay.globe ? [0, 0] : offAt(mid[0], mid[1], lens(0));
       pinch = { d0: Math.max(10, Math.hypot(a[0] - b[0], a[1] - b[1])), Z0: Z, W0: [P[0] + o[0], P[1] + o[1]], t0: performance.now(), moved: false };
       pressed = null; down = null; paint = null; clearTimeout(holdT); clearTimeout(tapTimer); kick(); return;
     }
     if (ptrs.size > 2 || pinch) return;
-    const b = hit(x, y);
+    // zoomed out, bubbles are smaller than a fingertip: the nearest one within a finger's reach counts (L18)
+    const b = hit(x, y) || (!sel && l18ZoomedOut() ? l18Nearest(x, y, 22) : null);
     pressed = b ? { it: b.it, x: b.x, y: b.y, b } : null;
     down = { x, y, P0: P.slice(), moved: false, hist: [[performance.now(), P[0], P[1]]] };
     clearTimeout(holdT);
@@ -918,6 +976,10 @@ function honeycomb(host, opts = {}) {
         // bubble a few px off, so a tap on it only glided again and never opened (David).
         // The open zone (David): the center bubble AND the ring touching it open on one tap; only bubbles further out
         // glide to the middle first. The ring's reach is measured from the center bubble's edge, one tapped-bubble wide.
+        // zoomed out (L18): a tap on a tiny bubble zooms in onto it first; the next tap opens it
+        if (opts.centerFirst && !lay.globe && p.it !== glided && l18ZoomedOut()) {
+          glided = p.it; pressed = null; kick(); return l18ZoomOnto(p);
+        }
         const cb = drawn.find(q => q.it === center), cd = cb ? cb.d : p.b.d;
         const reach = Math.max(cd * .5 + p.b.d * .95, Math.min(W, vy()) * .16);
         const far = opts.centerFirst && p.it !== center && p.it !== glided && Math.hypot(p.x - W / 2, p.y - vcy()) > reach;
@@ -937,7 +999,7 @@ function honeycomb(host, opts = {}) {
   let wheelT = 0;
   cv.addEventListener("wheel", e => {
     if (!lay) return;
-    lastInput = performance.now();
+    lastInput = performance.now(); fly = null;
     const [x, y] = local(e);
     if (e.ctrlKey) { e.preventDefault(); touched = true; phase = "idle"; spring = null; zAnim = null; zoomAround(rubber(clamp(Z * Math.exp(-e.deltaY * .012), ZMIN * .8, ZMAX * 1.2)), x, y); }
     else if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
@@ -1118,6 +1180,18 @@ function honeycomb(host, opts = {}) {
     getCfg: () => ({ style: styleId, tweak: liveTweak, resolved: cfg }),
     getTweak: () => liveTweak,
     current: () => center && center.o,
+    // L18: fly the map to a color (a hex, or an item with .h) — the nearest bubble lands in the middle, ready to
+    // open on the next tap. o.zoom (default: in to at least the normal size), o.dip (the mid-flight pull-back).
+    flyToColor(h, o = {}) {
+      if (!lay || lay.globe) return null;
+      const it = l18ItemNear(h && h.h ? h.h : h); if (!it) return null;
+      const X = l18WorldOf(it); if (!X) return null;
+      glided = it;
+      flyTo(X, o.zoom != null ? o.zoom : Math.max(Z, .9), { dip: o.dip != null ? o.dip : .22 });
+      return it.o;
+    },
+    zoomValue: () => Z,
+    isZoomedOut: () => l18ZoomedOut(),
     // where a color sits on screen right now (js/polish.js flyToMap): the biggest drawn bubble with that hex, in viewport px
     locate(h) { const H = String(h).toUpperCase(), b = drawn.filter(x => String(x.it.h).toUpperCase() === H).sort((x, y) => y.d - x.d)[0]; if (!b) return null; const r = cv.parentNode.getBoundingClientRect(); return { x: r.left + b.x, y: r.top + b.y, d: b.d }; },
     destroy,

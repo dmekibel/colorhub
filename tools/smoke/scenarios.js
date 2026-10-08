@@ -559,3 +559,30 @@ scenario("favs", "taste profile: findings, the painter match and a palette from 
   await t.click("[data-pal]", { wait: 800 });
   t.expect(t.ev("(S.palettes||[]).length") === n + 1, "no palette saved from the top five");
 });
+
+// ================================================================== MAP (L18: the honeycomb build)
+const L18M = {
+  // Home on a big stage, zoomed all the way out
+  async farOut(t, src = "stage:1000") {
+    await H.homeReady(t);
+    t.ev(`S.hm.src = ${JSON.stringify(src)}; S.hm.filter = "all"; hmHome();`);
+    // the old Home crossfades out: wait until only the new one (and its canvas) is left
+    await t.waitFor(() => t.$$(".screen.hm").length === 1 && H.num(t.text(".hm-title small")) > 500, 10000, "the big stage to fill");
+    await t.sleep(300);
+    t.ev("HM_CTRL.zoom(0.01, false)");
+    await t.sleep(300);
+    return t.$(".screen.hm canvas");
+  },
+};
+scenario("map", "zoomed out: a tap zooms onto a tiny bubble, the next tap opens it", async t => {
+  const cv = await L18M.farOut(t);
+  t.expect(t.ev("HM_CTRL.isZoomedOut()"), `the map is not zoomed out (zoom ${t.ev("HM_CTRL.zoomValue()")})`);
+  const z0 = t.ev("HM_CTRL.zoomValue()"), r = cv.getBoundingClientRect();
+  await t.tapAt(cv, r.left + r.width / 2 + 70, r.top + r.height / 2 + 50, { wait: 600 });
+  t.expect(!t.$(".cp-page"), "the first tap on a tiny bubble opened a page");
+  const z1 = t.ev("HM_CTRL.zoomValue()");
+  t.expect(z1 > z0 * 1.5 && !t.ev("HM_CTRL.isZoomedOut()"), `the tap did not zoom in (${z0.toFixed(2)} > ${z1.toFixed(2)})`);
+  t.notes.push(`zoom ${z0.toFixed(2)} > ${z1.toFixed(2)}`);
+  await t.tapAt(cv, r.left + r.width / 2, r.top + r.height / 2, { wait: 500 });
+  await t.waitFor(".cp-page", 8000, "a page on the second tap");
+});
