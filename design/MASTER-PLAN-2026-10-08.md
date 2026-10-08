@@ -180,6 +180,7 @@ The full-screen color, then a one-line definition with its source, then the **Re
 ## Launch queue (start as slots free; 20 subagents can run at once)
 0. R1 competitor teardown (design/lanes/R1-competitors.md): first free slot.
 0c. L18 Honeycomb 10× build (design/IDEAS-10X/home-map.md specs H1 family names when zoomed out, **an optional toggle in Look, off by default** (David: he likes seeing all the tiny colors too); **zoomed-out tap rule (David): when bubbles are tiny, a tap zooms in to that bubble and centers it, and the next tap opens its page; the normal-zoom rules (glide to center, center ring opens) stay**; H3 stage glide, H4 on the map for any painting, H5 learning spiral, B1 Placement 2.0, B2 live stem + real floor, B3 pull-down search 2.0). Start after L23 and L24 merge, since they share honey.js.
+0d. L27 image lens + deep analysis for any image (design/lanes/L27-image-lens.md). Start after L13 merges.
 0b. L16 Explore 2.0 browsing (design/lanes/L16-explore-browse.md): the color dial, facet chips with counts, views (grid with a jump bar, Decade River, by painter, wall), smart collections. Second free slot; pairs with L26.
 1. L22 Maerz & Paul round 2: the dictionary index (~4,000 names, plate/cell, origin and date), per-plate color correction, a clean merge.
 2. L9 learning beyond the 101 + the Journey, after Practice (L4) merges.
