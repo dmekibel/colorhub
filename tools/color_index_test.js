@@ -105,6 +105,23 @@ const HEXES = ["#2A5E91", "#C2412D", "#D8B25A", "#4F6B3A", "#8A6B52", "#F1ECE0",
   }
   ok(off <= 2, `the browser query matches the offline counts (${off} of ${checked} differ)`);
 
+  // ---------- never empty: the ranked fallback ----------
+  for (const hex of ["#00FFFF", "#FF00FF", "#2A5E91", "#39FF14"]) {
+    const strict = await CI.paintingsWith([hex], { tol: 0, minCover: 50 });
+    const t0 = Date.now(), cl = await CI.ciClosest([hex], strict);
+    const dt = Date.now() - t0;
+    ok(cl.rows.length >= 12, `${hex}: the fallback lists paintings even at 0% / 50% (${cl.rows.length})`);
+    ok(cl.rows.every((r, i) => i === 0 || r.score <= cl.rows[i - 1].score + 1e-9), `${hex}: fallback sorted best first`);
+    ok(cl.rows.every(r => isFinite(r.de) && r.cover >= 0), `${hex}: fallback rows carry honest numbers`);
+    console.log(`  ${hex} fallback: ${cl.rows.length} rows, R=${cl.R}, tc=${cl.tc}, ${dt} ms (cold), top ${CI.ciNearWords(cl.rows[0])}`);
+    const t1 = Date.now(); await CI.ciClosest([hex], strict); console.log(`  ${hex} warm: ${Date.now() - t1} ms`);
+  }
+  const pairCl = await CI.ciClosest(["#00FFFF", "#FF00FF"], await CI.paintingsWith(["#00FFFF", "#FF00FF"], { tol: 0, minCover: 50 }));
+  ok(pairCl.rows.length > 0, "a pair with no exact match still ranks paintings");
+  const auto = await CI.ciAuto(["#2A5E91"], { mode: "all" }, [0, 1, 2, 3, 4, 5, 6, 8, 10, 12, 15], [.05, .1, .25, .5, 1, 2, 3, 5, 8, 12, 20, 35, 50]);
+  const ar = await CI.paintingsFor("#2A5E91", { tol: auto.tol, minCover: auto.minCover });
+  ok(ar.count >= 12, `Auto setting (${auto.tol}%, ${auto.minCover}%) shows at least 12 (${ar.count})`);
+
   // ---------- a second corpus plugs in with the same format ----------
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "ci-design-"));
   const items = [

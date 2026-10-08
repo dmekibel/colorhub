@@ -189,6 +189,26 @@ function glNear(hex) {
   }
   return s;
 }
+// Never empty: when fewer than 12 paintings hold a color at the usual measure, every painting is ranked, those
+// that hold it first (by share), then the rest by how near their closest patch comes (the same order the "In
+// paintings" fallback shows). Cached per color.
+const GL_NEAR_RANK = new Map();
+function glNearRanked(hex) {
+  const k = hex.toUpperCase();
+  if (GL_NEAR_RANK.has(k)) return GL_NEAR_RANK.get(k);
+  const G = GAL, N = G.n, s = glNear(hex);
+  let have = 0; for (let i = 0; i < N; i++) if (s[i] >= .02) have++;
+  if (have >= 12) { GL_NEAR_RANK.set(k, { key: s, min: .02 }); return GL_NEAR_RANK.get(k); }
+  const [tL, ta, tb] = lab(hex), Lb = G.lab, out = new Float32Array(N);
+  for (let i = 0; i < N; i++) {
+    let bd = 1e9;
+    for (let j = 0; j < 6; j++) { const o = (i * 6 + j) * 3, d = glDE(tL, ta, tb, Lb[o], Lb[o + 1], Lb[o + 2]); if (d < bd) bd = d; }
+    out[i] = s[i] > 0 ? 1 + s[i] : 1 / (2 + bd);   // holders first, then nearest patch
+  }
+  GL_NEAR_RANK.set(k, { key: out, min: 0, ranked: true, floor: have });
+  if (GL_NEAR_RANK.size > 8) GL_NEAR_RANK.delete(GL_NEAR_RANK.keys().next().value);
+  return GL_NEAR_RANK.get(k);
+}
 // Family shares by the corpus's LCh rule (research/STATS-FINDINGS.md): blue = not neutral, hue 180-305.
 // Pink accents: light, rosy hues (330-30), at least a little colorful.
 const glBlue = (L, C, H) => C >= 10 && !(L < 20 && C < 15) && !(L > 90 && C < 25) && H >= 180 && H < 305;
@@ -238,7 +258,10 @@ function glRun(q) {
   const Clo = q.C[0] > 0 ? at(G.Cs, q.C[0]) : -1, Chi = q.C[1] < 1 ? at(G.Cs, q.C[1]) : 1e3;
   const eras = q.eras.map(k => GL_ERAS[k]);
   let key = null, min = -Infinity, max = Infinity, asc = false, badge = null;
-  if (q.hex) { key = glNear(q.hex); min = .02; badge = i => `${Math.max(1, Math.round(key[i] * 100))}% ${q.custom ? "this color" : q.name}`; }
+  if (q.hex) {
+    const nr = glNearRanked(q.hex); key = nr.key; min = nr.min;
+    badge = nr.ranked ? i => key[i] >= 1 ? `${Math.max(1, Math.round((key[i] - 1) * 100))}% ${q.custom ? "this color" : q.name}` : `nearest patch ${Math.round(1 / key[i] - 2)}% away` : i => `${Math.max(1, Math.round(key[i] * 100))}% ${q.custom ? "this color" : q.name}`;
+  }
   else if (q.preset === "blue") { key = glFam(glBlue); min = .05; badge = i => `${Math.round(key[i] * 100)}% blue`; }
   else if (q.preset === "pink") { key = glFam(glPink); min = .01; max = .2; badge = i => `${Math.max(1, Math.round(key[i] * 100))}% pink`; }
   else if (q.preset === "dark") { key = G.L; asc = true; }
@@ -368,7 +391,7 @@ function glRender(host, toTop) {
   host.querySelector("[data-glclear]").hidden = !sum.length;
   if (GL_CTRL) GL_CTRL.destroy();
   GL_CTRL = null;
-  if (!res.list.length) { grid.style.height = ""; grid.innerHTML = `<p class="fine">No painting matches all of that. Loosen a filter.</p>`; }
+  if (!res.list.length) { grid.style.height = ""; grid.innerHTML = `<p class="fine">Nothing matches every filter at once. Loosen one.</p>`; }
   else GL_CTRL = glGrid(grid, res);
   const key = glKey(GLQ);
   if (GLV && GLV.key === key) {
@@ -970,7 +993,7 @@ function galleryColorRow(host, c) {
     host.innerHTML = head + (list.length ? `<p class="gl-in-sub">Where a color close to ${esc(c.n)} covers the most of the canvas. Matched by color in the museum photos, not by pigment.</p>
       <div class="gl-rail">${list.slice(0, 6).map(i => glPinHTML(i, { badge: `${Math.max(1, Math.round(s[i] * 100))}%` })).join("")}</div>
       ${list.length > 6 ? `<button class="btn ghost gl-all" data-glall>See all ${list.length.toLocaleString()} in the gallery ${ICON.arrow}</button>` : ""}`
-      : `<p class="fine">No painting in the gallery has much of this color.</p>`);
+      : `<p class="fine">Nothing in the gallery holds much of this color.</p>`);
     glFill(host);
   };
   host.onclick = e => {

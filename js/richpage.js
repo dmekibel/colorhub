@@ -240,6 +240,9 @@ function rpFlowerHTML(cells, name, hex) {
 // closest (CIELAB) to the cells already around it, so neighbors on screen are neighbors in color.
 const RP_HS = 50, RP_DIR = [[1, 0], [1, -1], [0, -1], [-1, 0], [-1, 1], [0, 1]];
 function rpHexXY(q, r) { return [1.5 * RP_HS * q, Math.sqrt(3) * RP_HS * (r + q / 2)]; }
+// the center is drawn about 2x a neighbor, so every other cell is pushed straight out from it by RP_OFF
+const RP_OFF = 56;
+function rpPos(q, r) { const [x, y] = rpHexXY(q, r), d = Math.hypot(x, y); return d ? [x + x / d * RP_OFF, y + y / d * RP_OFF] : [0, 0]; }
 function rpRing(n) {
   if (n === 0) return [[0, 0]];
   const out = []; let q = -n, r = n;
@@ -273,20 +276,28 @@ function rpWalkSection(name, hex) {
   const draw = () => {
     const box = document.getElementById(id); if (!box) return;
     const g = rpWalkGrid(name, hex);
-    box.innerHTML = `<section class="rp-walk"><h2>Walk from here</h2><p class="rp-walk-sub">Drag to keep walking. Neighbors are close in color.</p>
-      <div class="rp-hc" tabindex="0" aria-label="Neighborhood of ${esc(name)}"><div class="rp-hc-in"></div></div>
+    box.innerHTML = `<section class="rp-walk"><h2>Walk from here</h2><p class="rp-walk-sub">The closest colors to ${esc(name)}.</p>
+      <div class="rp-hc" tabindex="0" aria-label="Neighborhood of ${esc(name)}"><div class="rp-hc-in"></div><p class="rp-hc-hint">Drag to walk further</p><button class="rp-hc-back" type="button" hidden>Back to ${esc(name)}</button></div>
       <button class="rp-hc-map" type="button">Open on the map</button></section>`;
     const vp = box.querySelector(".rp-hc"), inn = box.querySelector(".rp-hc-in"), W = () => vp.clientWidth || 340, H = () => vp.clientHeight || 360;
     let ox = 0, oy = 0, sc = 1, drawn = new Set();
-    const apply = () => { inn.style.transform = `translate(${W() / 2 + ox}px,${H() / 2 + oy}px) scale(${sc})`; };
+    const back = box.querySelector(".rp-hc-back");
+    // the outer rings stay hidden until you pan or zoom out; the recenter chip appears once the center drifts away
+    const apply = () => {
+      inn.style.transform = `translate(${W() / 2 + ox}px,${H() / 2 + oy}px) scale(${sc})`;
+      if (Math.hypot(ox, oy) > 14 || sc < .92) vp.classList.add("far-on");
+      back.hidden = !(Math.hypot(ox, oy) * sc > Math.min(W(), H()) * .6);
+    };
+    back.onclick = () => { vp.classList.add("glide"); ox = 0; oy = 0; sc = 1; apply(); setTimeout(() => vp.classList.remove("glide"), 400); };
     const paint = () => {
       const need = Math.min(14, Math.ceil(Math.max(Math.hypot(Math.abs(ox) + W() / 2 / sc, 0), Math.hypot(Math.abs(oy) + H() / 2 / sc, 0)) / (RP_HS * 1.5)) + 1);
       g.grow(Math.max(3, need));
       let html = "";
-      g.cells.forEach(c => { const k = c.q + "," + c.r; if (drawn.has(k)) return; drawn.add(k); const [x, y] = rpHexXY(c.q, c.r);
+      g.cells.forEach(c => { const k = c.q + "," + c.r; if (drawn.has(k)) return; drawn.add(k); const [x, y] = rpPos(c.q, c.r);
         const st = `left:${(x - RP_HS).toFixed(1)}px;top:${(y - RP_HS * .866).toFixed(1)}px`;
-        html += c.self ? `<div class="rp-hc-c rp-hc-self" style="${st};--c:${hex}" data-ink="${ink(hex)}"><b>${esc(name)}</b></div>`
-          : `<button class="rp-hc-c" style="${st};--c:${c.h}" data-ink="${ink(c.h)}" data-rc-open data-h="${c.h}" data-n="${esc(c.n)}"><b>${esc(c.n)}</b><em>${Math.round(Math.max(0, 100 - c.de))}%</em></button>`; });
+        const far = Math.max(Math.abs(c.q), Math.abs(c.r), Math.abs(c.q + c.r)) > 1 ? " rp-hc-far" : "";
+        html += c.self ? `<div class="rp-hc-ring" style="left:${-RP_HS * 2 - 7}px;top:${-RP_HS * 1.732 - 6}px"></div><div class="rp-hc-c rp-hc-self" style="left:${-RP_HS * 2}px;top:${-RP_HS * 1.732}px;--c:${hex}" data-ink="${ink(hex)}"><b>${esc(name)}</b><em>${hex}</em></div>`
+          : `<button class="rp-hc-c${far}" style="${st};--c:${c.h}" data-ink="${ink(c.h)}"${far ? " tabindex=-1" : ""} data-rc-open data-h="${c.h}" data-n="${esc(c.n)}"><b>${esc(c.n)}</b><em>${Math.round(Math.max(0, 100 - c.de))}%</em></button>`; });
       inn.insertAdjacentHTML("beforeend", html);
     };
     paint(); apply();
@@ -295,14 +306,14 @@ function rpWalkSection(name, hex) {
     vp.addEventListener("pointermove", e => {
       if (!ptrs.has(e.pointerId)) return;
       const prev = ptrs.get(e.pointerId); ptrs.set(e.pointerId, [e.clientX, e.clientY]);
-      if (ptrs.size === 2) { const [a, b2] = [...ptrs.values()], d = Math.hypot(a[0] - b2[0], a[1] - b2[1]); if (pd) sc = Math.max(.6, Math.min(1.5, sc * d / pd)); pd = d; moved = 99; apply(); return; }
+      if (ptrs.size === 2) { const [a, b2] = [...ptrs.values()], d = Math.hypot(a[0] - b2[0], a[1] - b2[1]); if (pd) sc = Math.max(.4, Math.min(1.5, sc * d / pd)); pd = d; moved = 99; apply(); return; }
       const dx = e.clientX - prev[0], dy = e.clientY - prev[1]; moved += Math.abs(dx) + Math.abs(dy);
       if (moved > 8) { ox += dx / sc; oy += dy / sc; vp.classList.add("drag"); apply(); paint(); }
     });
     const up = e => { ptrs.delete(e.pointerId); pd = 0; if (!ptrs.size) setTimeout(() => vp.classList.remove("drag"), 0); };
     vp.addEventListener("pointerup", up); vp.addEventListener("pointercancel", up);
     vp.addEventListener("click", e => { if (moved > 8) { e.stopPropagation(); e.preventDefault(); } }, true);
-    vp.addEventListener("wheel", e => { if (!e.ctrlKey) return; e.preventDefault(); sc = Math.max(.6, Math.min(1.5, sc * (e.deltaY < 0 ? 1.08 : .92))); apply(); }, { passive: false });
+    vp.addEventListener("wheel", e => { if (!e.ctrlKey) return; e.preventDefault(); sc = Math.max(.4, Math.min(1.5, sc * (e.deltaY < 0 ? 1.08 : .92))); apply(); }, { passive: false });
     box.querySelector(".rp-hc-map").onclick = () => {
       const near = [...g.cells.values()].filter(c => !c.self).sort((p, q) => p.de - q.de).slice(0, 23);
       if (typeof colorSet === "function" && typeof csOnMap === "function") csOnMap(colorSet({ kind: "walk", id: routeSlug(name), title: `Around ${name}`, colors: [{ h: hex, n: name }, ...near.map(c => ({ h: c.h, n: c.n }))], src: "color/" + routeSlug(name) }));

@@ -167,3 +167,8 @@ input[type=range]:not(.mt-sl *):not(.mt-wh *):not(.pt-range)::-moz-range-thumb{w
 .lr-tc-act b{white-space:nowrap;flex:none}
 .lr-tc-act .lr-tc-st{min-width:0;flex:1 1 0}
 .lr-tick,.lr-tc-sw,.lr-tc-act svg:last-child{flex:none}
+/* (Museum, later additions) Auto, and the walk's Back: solid; Auto on is raised and ringed, never paper */
+.pt-auto{border:0;background:var(--s2);border-radius:var(--r-card)}
+.pt-auto.on{background:var(--sel-fill);color:var(--sel-ink);box-shadow:var(--sel-ring)}
+.pt-auto.on small{color:var(--soft);opacity:1}
+.rp-hc-back{border:0;background:var(--s2);font:500 var(--type-ui)/1 var(--sans)}

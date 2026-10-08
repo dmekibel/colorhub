@@ -222,6 +222,67 @@ async function paintingsWith(hexes, opts = {}) {
   else rows.sort((a, b) => b.cover - a.cover || a.de - b.de);
   return { count, n: N, per, expected, lift, rows, sources: parts.map(p => p.src), o, hexes };
 }
+// ---------- never empty: every picture ranked by how much of the color it holds ----------
+// A painting's representation of a color = sum over its pool colors of share x max(0, 1 - dE/R) (the soft coverage
+// the palette mode already uses). R is 16, and widens to 40 then 100 for a color no painting comes near, so the
+// ranking always exists. ciClosest(hexes, res, o) returns the pictures that did NOT pass the sliders, best first,
+// each with its honest numbers: the nearest patch (% different) and the share of the canvas within `tc`%.
+const CI_WANT = 12, CI_RADII = [16, 40, 100];
+const ciHexes = hs => (hs || []).map(h => "#" + String(h).replace("#", "").toUpperCase()).filter(h => /^#[0-9A-F]{6}$/.test(h)).slice(0, 5);
+async function ciClosest(hexes, res, o = {}) {
+  hexes = ciHexes(hexes);
+  const opts = { ...CI_DEFAULT, ...(res && res.o || {}), ...o }, key = opts.source === "design" ? "design" : "paintings";
+  if (!hexes.length) return { rows: [], tc: 0, R: 0, key };
+  const src = await ciOpen(key), n = src.n, k = hexes.length, have = new Set(((res && res.rows) || []).filter(r => r.src === key).map(r => r.i));
+  let soft = null, R = 0;
+  for (const r of CI_RADII) {
+    R = r; soft = await Promise.all(hexes.map(h => ciCoverage(src, h, r, true)));
+    let best = 0;
+    for (let i = 0; i < n; i++) { let g = 1; for (let j = 0; j < k && g > 0; j++) g *= soft[j].cov[i]; if (g > best) best = g; }
+    if (Math.pow(best, 1 / k) >= .002) break;
+  }
+  const score = new Float32Array(n), any = opts.mode === "any";
+  for (let i = 0; i < n; i++) {
+    if (any) { let s = 0; for (let j = 0; j < k; j++) s += soft[j].cov[i]; score[i] = s; }
+    else { let g = 1; for (let j = 0; j < k; j++) g *= soft[j].cov[i] + 1e-6; score[i] = Math.pow(g, 1 / k); }
+  }
+  const ord = [];
+  for (let i = 0; i < n; i++) if (!have.has(i) && score[i] > 1e-5) ord.push(i);
+  ord.sort((a, b) => score[b] - score[a]);
+  const top = ord.slice(0, o.max || 48);
+  const deOf = i => { let d = 0; for (let j = 0; j < k; j++) { const x = soft[j].de[i]; d = Math.max(d, isFinite(x) ? x : R); } return d; };
+  const tc = top.length ? Math.min(R, Math.max(opts.tol || 0, Math.ceil(deOf(top[0])))) : 0;
+  const hard = tc ? await Promise.all(hexes.map(h => ciCoverage(src, h, tc))) : [];
+  const rows = top.map(i => {
+    const covers = hard.map(c => c.cov[i] * 100);
+    return { src: key, i, near: true, score: score[i], de: deOf(i), covers, cover: any ? Math.max(...covers) : Math.min(...covers), tc };
+  });
+  return { rows, tc, R, key };
+}
+// "nearest patch 7% away, 3% within 8%": the honest numbers on a fallback tile
+function ciNearWords(r) {
+  const f = c => c >= 10 ? Math.round(c) + "%" : c >= 1 ? (+c.toFixed(1)) + "%" : c >= .1 ? (+c.toFixed(2)) + "%" : "under 0.1%";
+  return `nearest patch ${r.de < 1 ? "under 1" : Math.round(r.de)}% away, ${f(r.cover)} of the canvas within ${r.tc}%`;
+}
+// Auto: the tightest pair of sliders that still shows at least `want` pictures. tolList/minList are the slider stops.
+async function ciAuto(hexes, o, tolList, minList, want = CI_WANT) {
+  hexes = ciHexes(hexes);
+  const key = o && o.source === "design" ? "design" : "paintings", src = await ciOpen(key), n = src.n, k = hexes.length, any = !!o && o.mode === "any";
+  let best = null;
+  for (let ti = 0; ti < tolList.length; ti++) {
+    const cs = await Promise.all(hexes.map(h => ciCoverage(src, h, tolList[ti])));
+    const v = new Float32Array(n);
+    for (let i = 0; i < n; i++) { let a = any ? 0 : Infinity; for (let j = 0; j < k; j++) { const c = cs[j].cov[i]; a = any ? Math.max(a, c) : Math.min(a, c); } v[i] = a; }
+    v.sort();
+    const kth = v[Math.max(0, n - want)] * 100;
+    let mi = -1; for (let m = 0; m < minList.length; m++) if (minList[m] <= kth + 1e-6) mi = m;
+    if (mi < 0) continue;
+    const cost = ti / Math.max(1, tolList.length - 1) + (minList.length - 1 - mi) / Math.max(1, minList.length - 1);
+    if (!best || cost < best.cost) best = { cost, tol: tolList[ti], minCover: minList[mi], maxCover: null };
+  }
+  if (!best) best = { tol: tolList[tolList.length - 1], minCover: minList[0], maxCover: null };
+  return { tol: best.tol, minCover: best.minCover, maxCover: null };
+}
 // paintingsFor(hex, { tol, minCover, sort }) is a Promise (the index loads lazily). Once a query has been answered,
 // asking again returns that same Promise already carrying the answer's fields (count, n, rows, list, items), so a
 // caller that renders synchronously (Explore's filter pass, js/browse*.js) can read r.items right away and simply
@@ -286,7 +347,7 @@ function ciFinding(names, res, st) {
   const N = n => n.toLocaleString("en-US");
   const n = res.count;
   let s;
-  if (!n) return `No ${item} holds ${k === 1 ? list : k === 2 ? "both " + list : "all of " + list}, ${how}.`;
+  if (!n) return `Nothing at this setting holds ${k === 1 ? list : k === 2 ? "both " + list : "all of " + list}, ${how}. The closest ${plural} in the archive are ranked below.`;
   if (k === 1) s = `${N(n)} ${n === 1 ? item : plural} (${pcts}% of ${N(res.n)}) hold ${list}, ${how}.`;
   else if (o.mode === "any") s = `${N(n)} ${n === 1 ? item : plural} hold at least one of ${list}, ${how}.`;
   else if (o.mode === "palette") s = `${N(n)} ${n === 1 ? item : plural} match this palette closely.`;
@@ -338,7 +399,7 @@ function ciTakeaway(nameA, nameB, ps) {
   const rel = { 0: "two neutrals", 1: `${nameA} and ${nameB} pair a color with a neutral`, 2: `${nameA} and ${nameB} are neighbors on the wheel`, 3: "sit a third of the way round the wheel from each other", 4: `${nameA} and ${nameB} are near-opposites on the wheel` }[th.code];
   const theoryLine = th.code === 4 ? `Theory calls near-opposites a vivid pairing${l != null && l < .9 ? ", but painters in this archive use it less than chance" : l != null && l > 1.25 ? ", and painters here do use it more than chance" : ""}.`
     : th.code === 2 ? `Theory calls neighbors on the wheel harmonious${l != null && l > 1.25 ? ", and painters here agree" : l != null && l < .9 ? ", yet this pair is rarer than chance here" : ""}.` : "";
-  if (!n) return `No painting holds both at this setting. ${theoryLine}`.trim();
+  if (!n) return `Nothing holds both at this setting; the closest paintings are ranked below. ${theoryLine}`.trim();
   if (n < 5) return `${n === 1 ? "One painting holds" : n + " paintings hold"} both: too few to say anything about painters' habits.`;
   const head = l == null ? `${n.toLocaleString("en-US")} paintings hold both.`
     : l >= 1.5 ? `Painters really do reach for this pair: ${l >= 10 ? Math.round(l) : l.toFixed(1)}× more often than chance, ${n.toLocaleString("en-US")} paintings.`
@@ -389,4 +450,4 @@ function ciRank(pool, hex, tol, cover) {
   return { rank: 1 + others.filter(g => g.share > target).length, of: others.length + 1 };
 }
 
-if (typeof module !== "undefined" && module.exports) module.exports = { pairStats, topChords, ciTheory, ciTakeaway, ciChords, paintingsFor, paintingsWith, ciOpen, ciCoverage, ciLeaf, ciNeedLeaves, ciDecode, ciLab, ciDE, ciSetStats, ciFinding, ciAffinity, ciArrival, ciRank, ciMeta, CI_SOURCES, ciTolR, ciCellOf, ciSlug, ciAvailable };
+if (typeof module !== "undefined" && module.exports) module.exports = { ciClosest, ciAuto, ciNearWords, pairStats, topChords, ciTheory, ciTakeaway, ciChords, paintingsFor, paintingsWith, ciOpen, ciCoverage, ciLeaf, ciNeedLeaves, ciDecode, ciLab, ciDE, ciSetStats, ciFinding, ciAffinity, ciArrival, ciRank, ciMeta, CI_SOURCES, ciTolR, ciCellOf, ciSlug, ciAvailable };
