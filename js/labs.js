@@ -158,7 +158,7 @@ LAB.contrast = (set = CONTRAST_PRESETS[0].slice(), slot = 0, push = true) => {
     gs[0].style.setProperty("--c", g1); gs[1].style.setProperty("--c", g2);
     ctr.querySelectorAll(".g i").forEach(i => i.style.setProperty("--c", inner));
     const nl = h => `<span class="wl wl-c" style="--c:${h}" data-swatch="${h}">${esc(nameOf(h).text.toLowerCase())}</span>`;
-    txt.innerHTML = `Both small squares are the same ${nl(inner)}. Each ground pushes the square toward its own ${linkText("[[complementary-colors|opposite]]")}: on ${nl(g1)} it drifts one way, on ${nl(g2)} the other. ${linkText("[[josef-albers|Josef Albers]] built a whole course on this ([[interaction-of-color]]).")}`;
+    txt.innerHTML = `Both small squares are the same ${nl(inner)}. Each ground pushes the square toward its own ${linkText("[[complementary-colors|opposite]]")}: on ${nl(g1)} it drifts one way, on ${nl(g2)} the other. ${linkText("[[josef-albers|Josef Albers]] built a whole course on this ([[interaction-of-color|Interaction of Color]]).")}`;
   };
   wireLinks(txt);
   const picker = colorPicker(el.querySelector("#pick"), { hex: set[slot], onChange: h => { set[slot] = h; draw(); } });

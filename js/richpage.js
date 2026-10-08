@@ -33,21 +33,23 @@ const RP_FS = { since: y => `first recorded as a color word, ${y}`, ral: y => `R
   "iscc-nbs": y => `ISCC-NBS, ${y}`, xkcd: y => `the crowd survey, ${y}`, werner: y => `Werner, ${y}`, pigment: y => `${y}` };
 function rpTierLine(node, entry) {
   if (!node) return entry && entry.src ? rcTierLine(entry.src) : "";
-  const first = RP_TIER[node.tier] || "", fs = node.fs && RP_FS[node.fs], second = fs && node.fy ? fs(node.fy) : "";
+  const first = RP_TIER[node.tier] || "", fs = node.fs && RP_FS[node.fs], second = fs && node.fy && node.fy > 0 ? fs(node.fy) : "";   // a negative year is a prehistoric pigment, not a word
   return first ? (second ? `${first} · ${second}` : first) : "";
 }
 const rpCap = s => s.charAt(0).toUpperCase() + s.slice(1);
 // definition: the article's own first sentence, else the ISCC-NBS descriptor, else a differential definition from the nearest named neighbor
 function rpDefinition(name, hex, node, art) {
   if (art && art.lede) { const s = art.lede.split(/(?<=[.!?])\s/)[0]; if (s.length <= 150) return { t: s, src: "From its story" }; }
+  const own = BYNAME.get(String(name).toLowerCase()), ownLine = own && (own.o || own.d);   // a basic word's authored line beats a measured one
+  if (ownLine) { const s = String(ownLine).split(/(?<=[.!?])\s/)[0]; if (s.length <= 150) return { t: s, src: "ColorHub" }; }
   if (node && node.iscc && node.iscc.n && node.iscc.de <= 5) return { t: `${rpCap(node.iscc.n)}.`, src: "ISCC-NBS, 1955" };
   const near = (CORE_NAMES || coreFallback()).map(e => ({ e, d: de2000(hex, e.lab || (e.lab = lab(e.h))) })).filter(x => x.e.n.toLowerCase() !== name.toLowerCase() && x.d >= 1.5).sort((a, b) => a.d - b.d)[0];
-  if (!near) return null;
+  if (!near || (node && node.tier === "basic-term")) return null;
   const diff = lookDiff({ h: near.e.h, n: near.e.n }, { h: hex, n: name });
   return { t: diff === "almost the same" ? `Almost the same as ${near.e.n.toLowerCase()}.` : `${rpCap(diff)} than ${near.e.n.toLowerCase()}.`, src: "Measured" };
 }
 function rpRelation(name, tapped, hex) {
-  if (tapped) return `Your color · ${pctMatch(de2000(tapped, hex))}`;
+  if (tapped) return "Your color";   // the match % is said once, on the hex line below
   const t = BYNAME.get(String(name).toLowerCase()), st = t && t.id && S.cards[t.id];
   if (st && isMine(st)) return st.ownAt && typeof rcDayLabel === "function" ? `Yours since ${rcDayLabel(st.ownAt)}` : "Yours";
   if (st) return "Learning";
@@ -94,7 +96,7 @@ function rpGlanceCards(name, hex, g, reach) {
   if (ar && ar.role && ar.n >= 20) { const mx = Math.max(...ar.role.slice(0, 4)), i = ar.role.indexOf(mx); if (mx >= 55) out.push({ s: 70, w: "the paintings", fig: `${mx}%`, text: `Inside a painting it most often plays the ${RP_ROLE[i]}.`, door: "paint" }); }
   if (ar && ar.rp != null && (ar.rp >= 90 || ar.rp <= 10)) out.push({ s: 60, w: "measured", fig: `${ar.rp}%`, text: ar.rp >= 90 ? "of the named colors are rarer than it in the archive." : "of the named colors are more common than it in the archive.", door: "paint" });
   const co = fact("company"); if (co) { const m = /lift ([\d.]+)/.exec(co.t); if (m) out.push({ s: 55, w: "the paintings", fig: `${m[1]}×`, text: co.t.split(/(?<=\))\./)[0].replace(/\s*\(lift.*$/, "") + ".", door: "company" }); }
-  if (g.node && g.node.since && g.node.since.y) out.push({ s: 50, w: "the words", fig: String(g.node.since.y), text: `${g.node.since.what}.`, door: "words" });
+  if (g.node && g.node.since && g.node.since.y) out.push({ s: 50, w: "the words", fig: g.node.since.y < 0 ? (g.node.since.y <= -10000 ? `about ${Math.abs(g.node.since.y).toLocaleString()} years ago` : `${Math.abs(g.node.since.y)} BCE`) : String(g.node.since.y), text: `${g.node.since.what}.`, door: "words" });
   if (g.fn && g.fn.ng && g.fn.ng.adj && g.fn.ng.adj.pk) out.push({ s: 45, w: "the words", fig: `${g.fn.ng.adj.pk}s`, text: "In printed English the word peaks then (Google Books, the color sense).", door: "words" });
   if (ar && ar.nph) out.push({ s: 40, w: "the paintings", fig: String(ar.nph), text: "paintings in our archive hold a color close to it, as photographed.", door: "paint" });
   out.sort((a, b) => b.s - a.s);
