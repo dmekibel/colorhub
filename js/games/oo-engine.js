@@ -544,15 +544,30 @@ function ooNbackSeq(len, d, rnd, from) {
 // "Three of these are Teal. Which one isn't?" The in-name tiles vary inside Teal's region; one tile sits just
 // across the boundary in a neighbor name, often closer to its nearest tile than the in-name tiles are to each
 // other, so "the most different tile" fails and the word's edge is the skill.
-// opts: { p (ΔE past the line), k (tiles: 4 or 6), cats: [{ n, h }] (category words, e.g. the ones you've met),
-//         namer(hex) -> { n, de, near: [{ n, h }] } (nameOf in the app; a nearest-name list in tests) }
-// Returns { cat, catHex, nb, nbHex, colors, at, trap, B, p, act, spread, tries } or null.
-const OO_NEAR_DE = 8;
+// Confident edges only (design/IMPROVE-2026-10-08/train.md §5, "the app can't explain itself"): a round is drawn
+// only where the odd tile's own name wins by a margin (its ΔE to that name at least 30% lower than to the
+// category word, and clearly ahead of any third name), the in-name tiles sit confidently inside the word, and the
+// trap (the in-name tile nearest the odd one) is still clearly on the word's side. Near-ties are never asked.
+// opts: { p (ΔE between the odd tile and the trap), k (tiles: 4 or 6), cats: [{ n, h }] (category words, e.g.
+//         your Learn words), namer(hex) -> { n, de, near: [{ n, h, de }] } (nameOf in the app; a nearest-name
+//         list in tests), margin (default .3) }
+// Returns { cat, catHex, nb, nbHex, colors, at, trap, B, p, act, spread, margin, tries } or null.
+const OO_NEAR_DE = 8, OO_LINE_MARGIN = .3, OO_LINE_TRAP = .12, OO_LINE_IN = .25;
+// how clearly hex belongs to its nearest name: 1 - d(nearest) / d(runner-up). vs: a name to measure against
+// instead of the runner-up (the category word, for the odd tile).
+function ooNameMargin(hex, nm, vs) {
+  const near = nm.near || [], d1 = nm.de;
+  let d2;
+  if (vs) { const x = near.find(e => e.n === vs.n); d2 = x && x.de != null ? x.de : de2000(hex, vs.h); }
+  else { const x = near.find(e => e.n !== nm.n); d2 = x && x.de != null ? x.de : null; }
+  if (d2 == null) return 1;
+  return d2 > 0 ? 1 - d1 / d2 : 0;
+}
 function ooLineRound(rnd, o) {
-  const k = o.k || 4, p = o.p || 6, namer = o.namer, cats = o.cats || [];
+  const k = o.k || 4, p = o.p || 6, namer = o.namer, cats = o.cats || [], mg = o.margin != null ? o.margin : OO_LINE_MARGIN;
   let tries = 0;
   const st = o.stats || {};
-  ["narrow", "noflip", "gate", "spread"].forEach(x => { st[x] = st[x] || 0; });
+  ["narrow", "noflip", "gate", "spread", "unsure"].forEach(x => { st[x] = st[x] || 0; });
   for (let c = 0; c < 12; c++) {
     const N = ooPick(cats, rnd);
     if (!N) return null;
@@ -561,10 +576,11 @@ function ooLineRound(rnd, o) {
     // the region must be wide enough: jittered samples within ΔE 6 keep the name
     const wide = [0, 1, 2, 3, 4].map(() => ooMoveDir(N.h, ooRandDir(rnd), ooBtw(2, 4, rnd))).filter(m => m && namer(m.hex).n === N.n && namer(m.hex).de < OO_NEAR_DE).length;
     if (wide < 3) { st.narrow++; continue; }
-    const M = (nN.near || []).find(x => x.n !== N.n);
-    if (!M) continue;
+    const Ms = (nN.near || []).filter(x => x.n !== N.n).slice(0, 2);
+    if (!Ms.length) continue;
     for (let t = 0; t < 30; t++) {
       tries++;
+      const M = Ms[t % Ms.length];
       // march from N toward M (a little off the straight line, so rounds vary) until the name flips
       const A = lab(N.h), Bm = lab(M.h), jit = ooRandDir(rnd).map(x => x * 3), dir = Bm.map((x, i) => x - A[i] + jit[i]);
       const len = Math.hypot(...dir), u = dir.map(x => x / len);
@@ -573,25 +589,42 @@ function ooLineRound(rnd, o) {
       if (hi == null) { st.noflip++; continue; }
       for (let i = 0; i < 10; i++) { const mid = (lo + hi) / 2, P = A.map((x, j) => x + u[j] * mid); if (namer(labHex(...P)).n !== N.n) hi = mid; else lo = mid; }
       const Bhex = labHex(...A.map((x, i) => x + u[i] * hi));
-      const odd = ooMoveDir(Bhex, u, p * .5), trap = odd && ooMoveDir(odd.hex, u.map(x => -x), p);
-      if (!odd || !trap) continue;
-      // the odd tile's name is whichever neighbor the line leads into (revealed only after the tap)
-      const nb = namer(odd.hex);
-      if (nb.n === N.n || namer(trap.hex).n !== N.n || nb.de >= OO_NEAR_DE) { st.gate++; continue; }
+      // place the odd tile far enough past the line that its own name clearly wins, with the trap p behind it
+      // and still clearly inside the word: the first split that satisfies both
+      let odd = null, trap = null, nb = null, margin = 0;
+      for (const f of [.5, .6, .7, .8, .9]) {
+        const od = ooMoveDir(Bhex, u, p * f), tr = od && ooMoveDir(od.hex, u.map(x => -x), p);
+        if (!od || !tr) continue;
+        const nm = namer(od.hex), nt = namer(tr.hex);
+        if (nm.n === N.n || nt.n !== N.n || nm.de >= OO_NEAR_DE) continue;
+        const m1 = ooNameMargin(od.hex, nm, N), m2 = ooNameMargin(od.hex, nm), m3 = ooNameMargin(tr.hex, nt);
+        if (m1 >= mg && m2 >= mg / 2 && m3 >= OO_LINE_TRAP) { odd = od; trap = tr; nb = nm; margin = m1; break; }
+      }
+      if (!odd) { st.unsure++; continue; }
       const act = de2000(odd.hex, trap.hex);
       if (act < .3) continue;
-      // the other in-name tiles: spread inside the region so at least one pair is further apart than odd vs trap
-      const ins = [trap.hex];
-      for (let g = 0; g < 80 && ins.length < k - 1; g++) {
+      // the other in-name tiles: a pool of samples confidently inside the word, then a pick that spreads them so
+      // at least one in-name pair is further apart than odd vs trap (the "most different tile" is a trap)
+      const pool = [], gap = Math.max(.8, p * .4);
+      for (let g = 0; g < 36; g++) {
         const m = ooMoveDir(N.h, ooRandDir(rnd), ooBtw(.25, 1.1, rnd) * hi);
-        if (m && namer(m.hex).n === N.n && ins.every(h => de2000(h, m.hex) >= Math.max(.8, p * .4)) && de2000(m.hex, odd.hex) > act * .9) ins.push(m.hex);
+        if (!m || de2000(m.hex, odd.hex) <= act * .9 || de2000(m.hex, trap.hex) < gap) continue;   // the cheap tests first
+        const nm = namer(m.hex);
+        if (nm.n === N.n && ooNameMargin(m.hex, nm) >= OO_LINE_IN) pool.push({ hex: m.hex, dt: de2000(m.hex, trap.hex) });
       }
+      // the first one from the far side of the word (from the top third by distance to the trap), the rest at random
+      pool.sort((x, y) => y.dt - x.dt);
+      const far = pool.slice(0, Math.max(1, Math.ceil(pool.length / 3))), first = far.length ? far[Math.floor(rnd() * far.length)] : null;
+      const ins = [trap.hex];
+      if (first) ins.push(first.hex);
+      ooShuf(pool.filter(x => x !== first), rnd).forEach(x => { if (ins.length < k - 1 && ins.every(h => de2000(h, x.hex) >= gap)) ins.push(x.hex); });
       if (ins.length < k - 1) { st.spread++; continue; }
       const spread = Math.max(...ins.flatMap((a, i) => ins.slice(i + 1).map(b => de2000(a, b))));
       // prefer boards where "the most different tile" is a trap: retry a few times before settling
-      if (spread <= act && t < 20) { st.spread++; continue; }
+      if (spread <= act && t < 10) { st.trapless = (st.trapless || 0) + 1; continue; }
       const colors = ooShuf([...ins, odd.hex], rnd);
-      return { cat: N.n, catHex: N.h, nb: nb.n, nbHex: (nb.near && nb.near[0] && nb.near[0].h) || M.h, colors, at: colors.indexOf(odd.hex), trap: colors.indexOf(trap.hex), odd: odd.hex, B: Bhex, p, act, spread, trapOk: spread > act, tries };
+      const nbE = (nb.near || []).find(x => x.n === nb.n);
+      return { cat: N.n, catHex: N.h, nb: nb.n, nbHex: (nbE && nbE.h) || (nb.n === M.n ? M.h : nb.h) || M.h, colors, at: colors.indexOf(odd.hex), trap: colors.indexOf(trap.hex), odd: odd.hex, B: Bhex, p, act, spread, trapOk: spread > act, margin: +margin.toFixed(3), tries };
     }
   }
   return null;
@@ -706,5 +739,5 @@ if (typeof module !== "undefined") module.exports = {
   OO_LAYOUTS, ooLayout, ooLayoutsFor, ooLayoutNext, ooLayoutF, OO_KINDS, OO_ROUNDS, OO_MIX_AT, OO_MIX, OO_PASS, OO_FAST_MS, ooTierAt, ooKindKey, OO_DAILY_D, ooDaily, ooDayNum, ooShareText,
   OO_DIFFS, OO_DIFF_IDS, OO_DIFF_TIER, ooDiffName, ooPrefNorm, ooPickLevel, ooPickTier, ooTestTier, ooDoneAt, ooFrontier, ooTestOutMark, OO_TEST_ROUNDS,
   OO_EDGE, ooEdgeTh, ooEdgeD, ooEdgeUpdate, ooPairRatioOf, ooWhoseAlts,
-  ooPairsRound, ooPairClear, OO_PAIR_RATIO, ooLineRound, OO_LINE_P0, OO_LINE_MIN, ooGradStrip, ooOrderRound, ooChangedRound, ooWasRound, ooNbackSeq, ooCountPick,
+  ooPairsRound, ooPairClear, OO_PAIR_RATIO, ooLineRound, ooNameMargin, OO_LINE_MARGIN, OO_LINE_P0, OO_LINE_MIN, ooGradStrip, ooOrderRound, ooChangedRound, ooWasRound, ooNbackSeq, ooCountPick,
 };

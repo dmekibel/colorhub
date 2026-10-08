@@ -1405,3 +1405,32 @@ scenario("mapstudy", "Name it, Neighborhood and Wander all play; Choose shows bo
   t.expect(t.$("[data-test]"), "no test-out under Choose");
   await t.click('[data-dm="you"]', { wait: 300 });
 });
+
+// Lane H (design/IMPROVE-2026-10-08/PLAN.md): Across the line clicks. The anchor chip shows the word's own color,
+// a right answer offers the neighbor word, adding it makes a review card due tomorrow, a miss says "In ColorHub's
+// map", and each answer is logged to the Learner Model with names.
+scenario("train", "Across the line: anchor, add the neighbor word, honest miss, answers logged with names", async t => {
+  await t.open("#/train", { settle: 600 });
+  t.ev("S.scr = { ok: true, t: today() }; ooAcross()");   // past the one-time screen check
+  await t.click(await t.waitFor("[data-go]", 8000, "Play eight rounds"), { wait: 600 });
+  await t.waitFor(".oo-line .oo-board .oo-t", 10000, "the first board");
+  const anc = t.ev("(() => { const a = document.querySelector('#ooq .oo-lanchor'); return a ? getComputedStyle(a).backgroundColor + ' ' + a.getBoundingClientRect().width : null; })()");
+  t.expect(anc && /rgb/.test(anc) && parseFloat(anc.split(" ").pop()) >= 16, `no anchor swatch beside the word (${anc})`);
+  const ev0 = t.ev("S.learn && S.learn.ev ? S.learn.ev.length : 0");
+  await t.click(t.$$(".oo-line .oo-board .oo-t")[t.ev("OO_LAST.ans[0]")], { force: true, wait: 700 });
+  await t.waitFor(".oo-lstrip", 4000, "the reveal strip");
+  const add = t.$("[data-ladd]");
+  if (add) {
+    const n0 = t.ev("Object.keys(S.cards).length");
+    await t.click(add, { wait: 400 });
+    t.expect(t.ev("Object.keys(S.cards).length") === n0 + 1, "Add to your words made no review card");
+    t.expect(t.$(".oo-ladded"), "the add row didn't settle");
+  } else t.notes.push("the neighbor word was already yours");
+  const ev1 = t.ev("S.learn.ev.slice(-3).map(r => r.e + ':' + (r.c || '') + ':' + (r.by || '')).join('|')");
+  t.expect(t.ev("S.learn.ev.length") > ev0 && /answer:[^:]+:game/.test(ev1), `the answer wasn't logged with a name (${ev1})`);
+  await t.click("[data-next]", { wait: 700 });
+  await t.waitFor(".oo-line .oo-board .oo-t:not(:disabled)", 10000, "the second board");
+  await t.click(t.$$(".oo-line .oo-board .oo-t")[(t.ev("OO_LAST.ans[0]") + 1) % t.$$(".oo-line .oo-board .oo-t").length], { force: true, wait: 700 });
+  t.expect(/In ColorHub's map/.test(t.text("#oofoot")), `the miss line isn't honest: "${t.text("#oofoot")}"`);
+  t.expect(t.ev("S.learn.ev.some(r => r.e === 'confuse' && r.src === 'across' && r.c && r.b)"), "the miss wasn't logged as a named mix-up");
+});
