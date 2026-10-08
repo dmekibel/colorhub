@@ -100,6 +100,10 @@ const ROUTED = [["colorPage", (n, tapped) => n && n.id ? routed(n.title, nodeRou
   ["fashionPage", slug => typeof worldRouteTitle === "function" ? routed(worldRouteTitle(slug), "fashion/" + slug) : null],   // js/world.js
   ["btListPage", kind => typeof btListTitle === "function" ? routed(btListTitle(kind), "botany/" + kind) : null],   // js/botany.js (plant/dye/essay detail pages route via wikiPage above)
   ["btFloriPage", () => routed("The language of flowers", "botany/flori")],   // js/botany.js
+  ["awPainter", slug => slug ? routed(awTitle("painter", slug), "painter/" + slug) : null],   // js/artwiki.js: the art wiki
+  ["awGroup", (kind, key) => kind && key != null ? routed(awTitle(kind, key), kind + "/" + (kind === "decade" ? key : routeSlug(key))) : null],
+  ["awIndex", () => routed("Art history by color", "arthistory")],
+  ["awVs", (a, b) => routed("Painter against painter", "painters" + (a ? "/" + a + (b ? "/" + b : "") : ""))],
   ["gmListPage", kind => typeof gmListTitle === "function" ? routed(gmListTitle(kind), "gem/" + kind) : null],   // js/gems.js (gem/essay detail pages route via wikiPage above)
   ["labHoney", () => routed("Honeycomb lab", "lab/honey")],   // js/home.js: rate every preset at every set size
   ["gamutWheel", () => routed("Gamut wheel", "studio/wheel")],   // js/studio.js
@@ -189,6 +193,7 @@ function openRoute(hash, initial = false) {
     galleryPage(+numId, true, fromHex);
     return true;
   }
+  if (["painter", "movement", "decade", "country", "arthistory", "painters"].includes(kind) && typeof awOpenRoute === "function") { base(); XSTACK = []; awOpenRoute(kind, id, more); return true; }   // js/artwiki.js
   const simple = { daily: () => daily(), challenge: () => chToday() ? challengeDone() : challenge(),
     taste: () => tasteIntro(id === "palette" ? "palette" : "color"),
     lab: () => id === "honey" && typeof labHoney === "function" ? labHoney() : (LAB[id] && ["harmony", "contrast"].includes(id) ? LAB[id] : LAB.harmony)(),
