@@ -224,3 +224,5 @@ html.booth .toast{background:var(--booth-2);box-shadow:none;border-color:var(--b
 /* the You bubble: your colors as one disc, with a small hole like a record */
 .rm-art-you{position:relative}
 .rm-art-you i{position:absolute;inset:38%;border-radius:50%;background:var(--surface-2)}
+/* the honeycomb reaches through the strip an iPhone Home Screen app leaves below its viewport (js/core.js vbFix) */
+.cx-stage{bottom:calc(-1 * var(--vb,0px))}
