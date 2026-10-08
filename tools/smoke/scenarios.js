@@ -1590,19 +1590,36 @@ const SP = {
   placed() { try { localStorage.clear(); localStorage.setItem("colorhub-v1", JSON.stringify({ v: 3, placed: { tier: 1, at: "2026-10-01" }, tlHint: 1 })); } catch (e) {} },
   async lead(t) { await t.waitFor(() => t.text("[data-lead]") && !/Reading the paintings/.test(t.text("[data-lead]")), 25000, "the pair's headline finding"); return t.text("[data-lead]"); },
 };
-scenario("sets", "Pair with on a color page: picker suggests and searches and a tap opens the pair page", async t => {
+scenario("sets", "Pair with on a color page: picker suggests, searches, try-on before committing, and Add opens the pair page", async t => {
   SP.placed();
   await t.open("#/color/teal", { settle: 800, keepState: true });
   const btn = await t.waitFor("[data-sx-pair]", 12000, "the Pair with… button");
   await t.click(btn, { wait: 600 });
   await t.waitFor(".sheet.sx-sheet .sx-opt", 6000, "the picker's suggestions");
   t.expect(t.$$(".sx-sheet .sx-sec").length >= 2, "fewer than two suggestion rows");
+  t.expect(t.$(".sx-try-sw.empty"), "the try-on strip starts with a dashed empty slot");
   const q = t.$(".sx-sheet [data-sx-q]"); q.value = "rose"; q.dispatchEvent(new t.w.Event("input", { bubbles: true })); await t.sleep(200);
   await t.waitFor(".sx-sheet .sx-li", 6000, "search results for rose");
   q.value = ""; q.dispatchEvent(new t.w.Event("input", { bubbles: true })); await t.sleep(200);
   await t.click(".sx-sheet [data-sx-any]", { force: true, wait: 400 });
   t.expect(t.$(".sx-sheet .sx-picker .cp"), "Any color didn't open the ring picker");
-  await t.click(".sx-sheet .sx-opt", { force: true, wait: 800 });
+  // tapping a suggestion drops it into the trying slot, with its name and the relation line — no navigation yet
+  const firstOpt = t.$(".sx-sheet .sx-opt");
+  const hex1 = firstOpt.dataset.sxHex;
+  await t.click(firstOpt, { force: true, wait: 300 });
+  t.expect(!t.$(".sp-page"), "tapping a candidate must not navigate away");
+  t.expect(t.$(".sx-try-sw.trying"), "the trying slot is filled");
+  t.expect(/· .+% apart · contrast/.test(t.text(".sx-try-rel")), "the relation line reads name · % apart · contrast");
+  // swapping to another candidate replaces the trial
+  const opts = t.$$(".sx-sheet .sx-opt"), second = opts.find(b => b.dataset.sxHex !== hex1);
+  if (second) { await t.click(second, { force: true, wait: 300 }); t.expect(t.ev("de2000")(t.$(".sx-try-sw.trying").style.getPropertyValue("--c"), second.dataset.sxHex) < 1, "swapping candidates replaces the trial, not adds to it"); }
+  // Cancel discards the trial, leaving the set unchanged
+  await t.click("[data-try-cancel]", { force: true, wait: 200 });
+  t.expect(!t.$(".sx-try-sw.trying") && t.$(".sx-try-sw.empty"), "Cancel clears the trying slot");
+  t.expect(t.ev("sxTray().length") === 0, "Cancel left the tray unchanged");
+  // Add commits it
+  await t.click(t.$(".sx-sheet .sx-opt"), { force: true, wait: 300 });
+  await t.click("[data-try-add]", { force: true, wait: 800 });
   await t.waitFor(".sp-page .sp-pair .sp-plate", 12000, "the pair page");
   t.expect(/^#\/pair\/[0-9a-f]{6}\+[0-9a-f]{6}$/.test(t.w.location.hash), `the pair's address is ${t.w.location.hash}`);
   await SP.lead(t);
@@ -1617,7 +1634,8 @@ scenario("sets", "a pair page: facts and paintings and Add a color makes a trio"
   t.expect(/:1 contrast/.test(t.text(".sp-facts")), "no contrast ratio");
   await t.click('.cs-act[data-sp-add]', { wait: 600 });
   await t.waitFor(".sheet.sx-sheet .sx-opt", 6000, "the add-a-color picker");
-  await t.click(".sx-sheet .sx-opt", { force: true, wait: 800 });
+  await t.click(".sx-sheet .sx-opt", { force: true, wait: 300 });
+  await t.click(".sx-sheet [data-try-add]", { force: true, wait: 800 });
   await t.waitFor(() => /^#\/set\//.test(t.w.location.hash) && t.$(".sp-page .sp-strip"), 12000, "the trio page");
   t.expect(t.$$(".sp-names .sp-name").length === 3, "the trio doesn't list three colors");
   await t.click(".sp-page .sp-plus ~ button, .sp-names [data-swatch]", { force: true, wait: 800 });
