@@ -107,7 +107,8 @@ const ROUTED = [["colorPage", (n, tapped) => n && n.id ? routed(n.title, nodeRou
   ["gmListPage", kind => typeof gmListTitle === "function" ? routed(gmListTitle(kind), "gem/" + kind) : null],   // js/gems.js (gem/essay detail pages route via wikiPage above)
   ["labHoney", () => routed("Honeycomb lab", "lab/honey")],   // js/home.js: rate every preset at every set size
   ["gamutWheel", () => routed("Gamut wheel", "studio/wheel")],   // js/studio.js
-  ["openSavedPalette", id => routed("Your palette", "studio/palette/" + id)]];   // js/studio.js
+  ["openSavedPalette", id => routed("Your palette", "studio/palette/" + id)],   // js/studio.js
+  ["arHubPage", id => id ? routed(arPretty(id), "hub/" + id) : null], ["arWhichPage", name => name ? routed(arPretty(name), "which/" + name) : null]];   // js/article.js: #/hub/<id>, #/which/<name>
 ROUTED.forEach(([name, f]) => routeWrap(window, name, f));
 routeWrap(LAB, "harmony", () => routed("Harmony", "lab/harmony"));
 routeWrap(LAB, "contrast", () => routed("Albers", "lab/contrast"));
@@ -184,6 +185,8 @@ function openRoute(hash, initial = false) {
     return true;
   }
   if (kind === "photo" && id && typeof photoPage === "function") { base(); XSTACK = []; photoPage(id); return true; }
+  if (kind === "hub" && id && typeof arHubPage === "function") { base(); XSTACK = []; arHubPage(id); return true; }   // js/article.js
+  if (kind === "which" && id && typeof arWhichPage === "function") { base(); XSTACK = []; arWhichPage(id); return true; }
   if (kind === "gallery" && /^\d+(\?c=[0-9a-f]{6})?$/i.test(id || "") && typeof galleryPage === "function") {
     const [numId, qs] = String(id).split("?c=");
     const fromHex = qs ? "#" + qs.toUpperCase() : null;
