@@ -454,51 +454,12 @@ function todayTrain() {
 // late-night session still shows the day it feels like.
 const weekdayName = () => new Date(Date.now() - 4 * 3600e3).toLocaleDateString(undefined, { weekday: "long" });
 // Today folds into Learn (DESIGN-SYSTEM.md §2, §12): this is the Learn room, entered by the signature motion
-// from the Rooms stem or a swipe up from Home. Decluttered (design/IMPROVE-2026-10-08/PLAN.md, lane C): the
-// primary card, one Today card, the Practice row, and one "Your words" bar with its next stop named. The stage
-// rows, the 655-square collection grid and the Settings row are gone: the map is the collection (one tap away
-// from the bar), and Settings lives on You.
+// from the Rooms stem or a swipe up from Home. Version 2 (design/LEARN-ROOM-2.md, js/learnhub.js): a hub you choose
+// from, not a linear path. For you (due reviews first), your color wheel by family, a short list of other choices,
+// and Today; every one of them opens the same Study sheet as the map.
 function home() {
   if (!S.placed) return welcome();
-  const due = dueList(), nu = nextUnit();
-  const cards = cardsAll(), mine = cards.filter(c => isMine(S.cards[c.id]));
-  let h;
-  if (due.length) {
-    const p = due.slice(0, 12);
-    h = { title: due.length === 1 ? "One to <em>recall</em>" : `${due.length} to <em>recall</em>`, plates: p,
-      note: nu ? `Then ${esc(nu.title)}, ${nu.colors.length} new names` : "Keep them yours", cta: "Begin", act: "review" };
-  } else if (nu) {
-    const p = nu.colors.slice().sort((a, b) => lab(b.h)[0] - lab(a.h)[0]);
-    h = { title: edTitle(nu.title), plates: p,
-      note: `${nu.colors.length} new names · about ${Math.max(2, Math.round(nu.colors.length * 15 / 60))} min`, cta: "Begin", act: "learn" };
-  } else if (typeof lxPending === "function" && lxPending()) {
-    // the next stage's names are still loading (they're fetched the first time they're needed): say so, then redraw
-    h = { title: "The next stage is <em>on its way</em>", plates: mine.slice(0, 12), note: "Fetching the next names", cta: "", act: "" };
-    lxPending().then(() => { if (app.querySelector(".room-learn") && nextUnit()) home(); });
-  } else {
-    h = { title: "Every name on the path, <em>met</em>", plates: mine.slice(0, 12), note: `${cards.length.toLocaleString("en-US")} names met. Reviews keep them yours.`, cta: "", act: "" };
-  }
-  const words = () => typeof lxWordsHtml === "function" ? lxWordsHtml(nextUnit()) : "";
-  const el = show(`
-    <header class="room-head"><h1 class="title-1">Learn</h1><span class="note">${esc(weekdayName())}</span></header>
-    ${h.plates.length ? `<button class="plates" data-go aria-label="Start">${h.plates.map((c, k) => `<i style="--c:${c.h};--k:${k}"></i>`).join("")}</button>` : ""}
-    <h2 class="title-1" style="margin-top:18px">${h.title}</h2>
-    <p class="note" style="margin-top:6px">${h.note}</p>
-    ${h.cta ? `<button class="btn" data-${h.act} style="margin-top:20px">${h.cta} ${ICON.arrow}</button>` : ""}
-    ${lrTodayHtml()}
-    ${typeof prEntry === "function" ? prEntry() : ""}
-    <div class="lr-words-slot">${words()}</div>
-    ${installHint()}
-  `, "home room-learn", "learn");
-  wireInstall(el);
-  const wireWords = () => { if (typeof lxWordsWire === "function") lxWordsWire(el); };
-  // the stages past the first units are known once the ~1,000-name list is in (usually already prefetched)
-  if (typeof lxPlan === "function" && !lxPlan().ready) loadCoreNames().then(() => { const sl = el.querySelector(".lr-words-slot"); if (sl && sl.isConnected) { sl.innerHTML = words(); wireWords(); } });
-  wireWords();
-  const go1 = () => due.length ? deck("review") : nu ? meet(nu) : null;
-  el.querySelectorAll("[data-review],[data-learn],[data-go]").forEach(b => b.onclick = go1);
-  lrTodayWire(el);
-  onKey = e => { if (e.key === "Enter") go1(); };
+  return lhRoom();
 }
 
 // ---------- Today: one card (PLAN.md decision 5) ----------

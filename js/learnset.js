@@ -14,7 +14,10 @@ const LS_COMBO = [3, 5, 10, 15, 20, 30];
 // S.practice.ls (kept by migrateState as an unknown key; prState and this repair it, never wipe it). sets: the Study sets
 // you worked on, with where they came from: { id: { t title, src kind, r route, hs hexes, at first day, last day, climbed keys } }
 const lsState = () => {
-  const p = prState(), ls = p.ls || (p.ls = { size: 10, close: 1, typing: true, view: "grid", best: {} });
+  const p = prState(), ls = p.ls || (p.ls = { size: 10, close: 1, typing: false, view: "grid", best: {}, typingV: 2 });
+  // typing is opt-in now (David, 2026-10-09: "typing the name really broke the flow"): an older save's default
+  // (typing on, never chosen) turns off once; a choice made after this sticks
+  if (ls.typingV !== 2) { ls.typing = false; ls.typingV = 2; }
   if (!ls.best || typeof ls.best !== "object") ls.best = {};
   if (!ls.sets || typeof ls.sets !== "object" || Array.isArray(ls.sets)) ls.sets = {};
   return ls;
@@ -141,19 +144,21 @@ function lsOpen(o = {}) {
     <div class="pr-plate ls-prev" data-prev></div>
     <div class="ls-groups" data-groups hidden></div>
     <div class="ls-say"><p class="ls-names" data-names></p><p class="ls-why" data-why></p></div>
-    <label class="ls-slide" data-sizerow><span class="ls-sl-t">How many</span><input type="range" min="3" step="1" data-size aria-label="How many colors"><b class="ls-sl-v" data-sizev></b></label>
+    <label class="ls-slide" data-sizerow><span class="ls-sl-t">How many</span><input type="range" data-size aria-label="How many colors"><b class="ls-sl-v" data-sizev></b></label>
     <label class="ls-slide" data-closerow><span class="ls-sl-t">How close</span><input type="range" min="0" max="${LS_CLOSE.length - 1}" step="1" data-closeness aria-label="How close the look-alikes are"><b class="ls-sl-v" data-closev></b></label>
     <label class="ls-slide" data-perrow hidden><span class="ls-sl-t">Neighbors</span><input type="range" min="0" max="${LS_NB_MAX}" step="1" data-per aria-label="Look-alikes per color"><b class="ls-sl-v" data-perv></b></label>
     <p class="ls-closehint" data-closehint></p>
     <div class="ls-go" data-qgo><button class="ls-look" data-look>${LS_ICON.eye}<span>Look</span></button>${prPrimary("Study", "", "data-go")}</div>
     <div class="ls-pace"><div class="pr-rail" role="radiogroup" aria-label="Pace">${LS_PACES.map(([k, t]) => `<button class="pr-chip" role="radio" data-pace="${k}">${t}</button>`).join("")}</div><p class="ls-pace-say" data-pacesay></p></div>
-    <label class="ls-typing"><input type="checkbox" data-typing${ls.typing !== false ? " checked" : ""}><span>Ask me to type names near the end</span></label>
+    <label class="ls-typing"><input type="checkbox" data-typing${ls.typing === true ? " checked" : ""}><span>Ask me to type names near the end</span></label>
     <div class="ls-just"><span class="pr-note">Just one way</span><div class="pr-rail">${[["cards", "Flashcards"], ["quiz", "Quiz"], ["match", "Matching"], ["type", "Type it"], ["odd", "Odd one out"]].map(([m, t]) => `<button class="pr-chip" data-method="${m}">${t}</button>`).join("")}${app && typeof hmLearnIt === "function" ? `<button class="pr-chip" data-method="lesson">The full lesson</button>` : ""}</div></div>
   </div>`);
   sh.classList.add("pr-qsheet", "ls-qsheet");
   const $s = s => sh.querySelector(s), size = $s("[data-size]"), closeIn = $s("[data-closeness]");
   let items = [];
-  const pick = these.length ? lsPick(these, seed) : { list: [], know: new Map(), yoursOut: 0, twinsOut: 0 };
+  // o.exact: the caller already chose and ordered these (the Learn room's For you puts due reviews first): keep them
+  // as they are, yours included, so the How many slider trims from the end
+  const pick = these.length ? (o.exact ? { list: these.slice(0, LS_PICK_MAX), know: new Map(these.map(it => [it.key, lsKnow(it)])), yoursOut: 0, twinsOut: 0 } : lsPick(these, seed)) : { list: [], know: new Map(), yoursOut: 0, twinsOut: 0 };
   const build = () => {
     if (pinned) { grp = lsGroups(auto, st.per, st.rm, st.extra); return grp.items; }
     if (st.from === "alike" && seed) return lsAlike(seed, st.size, LS_CLOSE[st.close][1]);
@@ -175,7 +180,7 @@ function lsOpen(o = {}) {
       + (typeof sxPick === "function" ? `<button class="ls-chip ls-add" data-add>+ Add a color</button>` : "");
     $s("[data-names]").textContent = items.slice(0, 6).map(prName).join(", ") + (items.length > 6 ? `, and ${items.length - 6} more` : "");
     $s("[data-why]").textContent = lsWhy(items, null, false);
-    const pace = ls.pace || "you", nNew = items.filter(it => { const k = lsKnow(it); return k === "none" || k === "met"; }).length;
+    const pace = o.pace || ls.pace || "you", nNew = items.filter(it => { const k = lsKnow(it); return k === "none" || k === "met"; }).length;
     sh.querySelectorAll("[data-pace]").forEach(b => { const on = b.dataset.pace === pace; b.classList.toggle("on", on); b.setAttribute("aria-checked", on); });
     $s("[data-pacesay]").textContent = lsPaceSay(pace, nNew);
     const mins = Math.max(1, Math.round((items.length * 2.6 * 5 + (pace === "test" ? 0 : nNew * 6)) / 60));
@@ -185,24 +190,25 @@ function lsOpen(o = {}) {
   const paint = () => {
     const max = st.from === "alike" ? 30 : Math.max(pick.list.length, 1);
     if (pinned) return paintPinned();
-    size.max = max; size.disabled = max <= 3; if (st.size > max) st.size = max; if (st.size < Math.min(3, max)) st.size = Math.min(3, max);
-    size.value = st.size;
+    const lo = Math.min(2, max);
+    if (st.size > max) st.size = max; if (st.size < lo) st.size = lo;
+    cnt.range(lo, max); cnt.set(st.size); size.disabled = max <= 2;
     items = build();
     const nm = seed ? prName(seed) : "";
-    $s("[data-qtitle]").innerHTML = st.from === "alike" ? `Learn <em>${esc(nm)}</em>` : `Learn <em>${esc(o.label || "these colors")}</em>`;
+    $s("[data-qtitle]").innerHTML = o.title && st.from === "these" ? o.title : st.from === "alike" ? `Learn <em>${esc(nm)}</em>` : `Learn <em>${esc(o.label || "these colors")}</em>`;
     $s("[data-qcount]").innerHTML = st.from === "alike" ? "and its look-alikes" : "";
     $s("[data-from]").innerHTML = seed && these.length ? [["alike", "Its look-alikes"], ["these", o.label || "These colors"]].map(([k, t]) => `<button class="pr-chip${k === st.from ? " on" : ""}" data-fromk="${k}">${esc(t)}</button>`).join("") : "";
     $s("[data-prev]").innerHTML = items.map((it, k) => `<i style="--c:${it.h};--k:${k}" title="${esc(prName(it))}"></i>`).join("");
     $s("[data-prev]").style.setProperty("--n", items.length);
     $s("[data-names]").textContent = items.slice(0, 6).map(prName).join(", ") + (items.length > 6 ? `, and ${items.length - 6} more` : "");
     $s("[data-sizev]").textContent = st.size >= max && st.from === "these" && max > 3 ? `All ${max}` : String(items.length);
-    $s("[data-sizerow]").hidden = max <= 3;
+    $s("[data-sizerow]").hidden = max <= 2;
     const fromThese = st.from === "these";
-    $s("[data-why]").textContent = items.length ? lsWhy(items, fromThese ? pick : null, fromThese && items.length >= pick.list.length) : "";
+    $s("[data-why]").textContent = items.length ? (o.why && fromThese ? o.why(items) : lsWhy(items, fromThese ? pick : null, fromThese && items.length >= pick.list.length)) : "";
     const showClose = st.from === "alike";
     $s("[data-closerow]").hidden = !showClose; $s("[data-closehint]").hidden = !showClose;
     closeIn.value = st.close; $s("[data-closev]").textContent = LS_CLOSE[st.close][0]; $s("[data-closehint]").textContent = LS_CLOSE[st.close][2] + (items.length < st.size ? `. Only ${items.length} names are that far apart here.` : ".");
-    const pace = ls.pace || "you", nNew = items.filter(it => { const k = fromThese ? pick.know.get(it.key) || lsKnow(it) : lsKnow(it); return k === "none" || k === "met"; }).length;
+    const pace = o.pace || ls.pace || "you", nNew = items.filter(it => { const k = fromThese ? pick.know.get(it.key) || lsKnow(it) : lsKnow(it); return k === "none" || k === "met"; }).length;
     sh.querySelectorAll("[data-pace]").forEach(b => { const on = b.dataset.pace === pace; b.classList.toggle("on", on); b.setAttribute("aria-checked", on); });
     $s("[data-pacesay]").textContent = lsPaceSay(pace, nNew);
     const mins = Math.max(1, Math.round((items.length * 2.6 * 5 + (pace === "test" ? 0 : nNew * 6)) / 60));
@@ -211,15 +217,17 @@ function lsOpen(o = {}) {
   };
   const remember = () => { if (!pinned) { ls.size = st.size; if (st.from === "alike") ls.close = st.close; } ls.typing = $s("[data-typing]").checked; save(); };
   let lastTick = "";
-  const onSlide = () => { st.size = +size.value; st.close = +closeIn.value; paint(); const k = st.size + "|" + st.close; if (k !== lastTick) { lastTick = k; buzz(3); } };
+  const onSlide = () => { st.close = +closeIn.value; paint(); const k = st.size + "|" + st.close; if (k !== lastTick) { lastTick = k; buzz(3); } };
+  // How many: stops on the track (small sizes get most of it) and −/+ steppers for an exact count (countify, core.js)
+  const cnt = countify(size, { min: 2, max: 30, value: st.size, out: $s("[data-sizev]"), onSet: (v, final) => { st.size = v; onSlide(); if (final) remember(); } });
   const perIn = $s("[data-per]");
   let lastPer = st.per;
   perIn.oninput = () => { st.per = +perIn.value; paint(); if (st.per !== lastPer) { lastPer = st.per; buzz(3); } };
-  size.oninput = onSlide; closeIn.oninput = onSlide; size.onchange = remember; closeIn.onchange = remember;
+  closeIn.oninput = onSlide; closeIn.onchange = remember;
   $s("[data-typing]").onchange = () => { remember(); buzz(4); };
   const exit = lsExitTo(backTo), again = () => setTimeout(() => lsOpen({ ...o, back: backTo }), 60);
   const label = () => pinned ? (o.label || "These colors") : st.from === "alike" && seed ? `${prName(seed)} and its look-alikes` : (o.label || "These colors");
-  const setOpts = () => ({ label: label(), back: exit, reopen: again, route: typeof backTo === "string" ? backTo : "", src: lsSrcOf(o, st.from, backTo),
+  const setOpts = () => ({ label: label(), back: exit, reopen: again, route: typeof backTo === "string" ? backTo : "", src: lsSrcOf(o, st.from, backTo), ...(o.pace ? { pace: o.pace } : {}),
     ...(pinned ? { pin: these, groups: grp.keys, route: o.route || (typeof backTo === "string" ? backTo : "") } : {}) });
   sh.addEventListener("click", e => {
     const rmb = e.target.closest("[data-rm]"); if (rmb) { st.rm.add(rmb.dataset.rm); st.extra = st.extra.filter(x => x.key !== rmb.dataset.rm); buzz(5); paint(); return; }
@@ -228,7 +236,7 @@ function lsOpen(o = {}) {
       return void sxPick(these[0].h, { title: o.label || "your colors", onPick: h => { const it = prItemOf(h); if (it) { st.rm.delete(it.key); if (!items.some(x => x.key === it.key)) st.extra.push(it); paint(); } } });
     }
     const f = e.target.closest("[data-fromk]"); if (f) { st.from = f.dataset.fromk; buzz(4); paint(); return; }
-    const pc = e.target.closest("[data-pace]"); if (pc) { ls.pace = pc.dataset.pace; save(); buzz(4); paint(); return; }
+    const pc = e.target.closest("[data-pace]"); if (pc) { ls.pace = pc.dataset.pace; o.pace = null; save(); buzz(4); paint(); return; }
     const m = e.target.closest("[data-method]"); if (!m || !items.length) return;
     remember(); close(); buzz(8);
     if (m.dataset.method === "lesson") return hmLearnIt(app, { lesson: true });
@@ -243,7 +251,7 @@ function lsOpen(o = {}) {
 function lsPaceSay(pace, nNew) {
   const meet = nNew ? `Meets the ${nNew === 1 ? "new one" : `${nNew} new ones`} first` : "Nothing new to meet";
   if (pace === "gentle") return `${meet}, two at a time, with easy questions to start.`;
-  if (pace === "standard") return `${meet}, then a steady climb from picking to typing.`;
+  if (pace === "standard") return `${meet}, then a steady climb from picking to naming from memory.`;
   if (pace === "test") return "No looking first: straight to finding and naming.";
   return `${meet}, then questions that keep up with you.`;
 }
@@ -368,7 +376,9 @@ function lsPlan(items, o = {}, resume = null) {
   const know = new Map(items.map(it => [it.key, lsKnow(it)])), keys = new Set(items.map(it => it.key));
   let mix = [];
   try { if (typeof confusions === "function") mix = confusions(null, 40).map(p => [String(p.a || "").toLowerCase(), String(p.b || "").toLowerCase()]).filter(([a, b]) => keys.has(a) && keys.has(b)).slice(0, 3); } catch (e) {}
-  const P = spNew(items, { know, pace: o.pace || "you", typing: o.typing, quick: o.quick, looked: o.looked, mix, resume, de: de2000, groups: o.groups });
+  // due reviews in the set (spaced review): asked first, before anything new is met
+  const t = today(), due = new Set(items.filter(it => { const st = it.c && it.c.id && S.cards && S.cards[it.c.id]; return st && st.due && st.due <= t; }).map(it => it.key));
+  const P = spNew(items, { know, pace: o.pace || "you", typing: o.typing, quick: o.quick, looked: o.looked, mix, resume, de: de2000, groups: o.groups, due });
   P.qs.forEach(q => { q.y = q.k === "yours"; });
   return P;
 }
@@ -396,7 +406,7 @@ function lsStudy(items, o = {}, resume = null) {
   if (!items.length) return;
   const ls = lsState(), n = items.length;
   const sess = prSession("learn", { dir: "f" }, items, { deckAll: items, label: o.label || "" });
-  const P = lsPlan(items, { pace: o.pace || ls.pace || "you", typing: ls.typing !== false, quick: o.quick, looked: o.looked, groups: o.groups }, resume), lvOf = P.qs;
+  const P = lsPlan(items, { pace: o.pace || ls.pace || "you", typing: ls.typing === true, quick: o.quick, looked: o.looked, groups: o.groups }, resume), lvOf = P.qs;
   let combo = 0, bestCombo = 0, climbed = [...lvOf.values()].filter(lsUp).length, boss = null, meeting = null, aside = 0;
   const keep = () => lsKeep(sess, items, o, lvOf);
   // screenshot states (#lsshot=study:…): start mid-session
@@ -408,7 +418,7 @@ function lsStudy(items, o = {}, resume = null) {
       <div class="ls-prog">${items.map(it => `<i data-k="${esc(it.key)}" style="--c:${it.h}"></i>`).join("")}</div>
       <span class="ls-combo" data-combo aria-live="polite"><b>0</b><span>in a row</span></span></header>
     <p class="ls-status"><span data-status></span><span class="ls-pop" data-pop></span></p>
-    <p class="pr-coach"${prState().seen.learnset ? " hidden" : ""}>Meet each color first. Then ${o.quick ? "a few quick questions on each" : "each one climbs from picking to typing"}.</p>
+    <p class="pr-coach"${prState().seen.learnset ? " hidden" : ""}>${[...lvOf.values()].some(q => q.due) ? "The ones due today come first, from memory. Then you meet the new ones." : `Meet each color first. Then ${o.quick ? "a few quick questions on each" : "each one climbs from picking to naming it from memory"}.`}</p>
     <div class="pr-stage"></div><div class="ls-grad" data-grad></div>`, "fixed pr-play pr-booth pr-m-learn ls-study");
   const stage = el.querySelector(".pr-stage"), comboEl = el.querySelector("[data-combo]");
   let stepKey = null;
@@ -462,7 +472,7 @@ function lsStudy(items, o = {}, resume = null) {
   const runStory = run => new Promise(resolve => {
     const total = run.length, shown = new Set();
     let i = 0, live = false, down = null;
-    const finish = () => { stage.onpointerdown = stage.onpointerup = null; buzz(6); resolve(); };
+    const finish = () => { stage.onpointerdown = stage.onpointerup = null; delete stage._lsStory; buzz(6); resolve(); };
     const renderAt = idx => {
       i = idx; live = false;
       const a = run[i], it = a.t === "pair" ? a.a.it : a.q.it;
@@ -503,6 +513,15 @@ function lsStudy(items, o = {}, resume = null) {
   });
   // options for an early rung: three far apart in the same family (spFar), so the first questions are winnable
   const farOpts = (it, k) => { const w = spFar(it, k, prUnique([...items, ...prCore().filter(x => x.rank <= 600)]), de2000, prFam9); return w.length >= k ? w : null; };
+  // spot it among 6 to 10: its own family's neighbors first (never an obviously different color), then the set's
+  // colors from that family, every tile at least ΔE00 5 from it and 4 from each other
+  const spotOpts = (it, n) => {
+    const fam = prFam9(it.h), out = [], fair = x => x && x.key !== it.key && x.h !== it.h && de2000(it.h, x.h) >= 5 && out.every(y => de2000(y.h, x.h) >= 4);
+    [...prNear(it, Math.min(n, 9), items), ...items.filter(x => prFam9(x.h) === fam), ...prCore().filter(x => x.rank <= 800 && prFam9(x.h) === fam)].forEach(x => { if (out.length < n && fair(x)) out.push(x); });
+    return out.length >= 3 ? out : null;
+  };
+  // recall among 6 to 8 names: close same-family neighbors only (prNear), so it's memory, not elimination
+  const recallOpts = (it, n) => { const w = prNear(it, n, items); return w.length >= 3 ? w : null; };
   // same-group colors are the distractors first (the pinned color's look-alikes, and it for theirs), then the usual neighbors
   const groupOpts = (it, kind) => {
     const m = mates.get(it.key);
@@ -544,10 +563,11 @@ function lsStudy(items, o = {}, resume = null) {
       }
       const q = a.q, kind = a.kind;
       stage._lsIt = q.it;   // test hook
-      const wrong = a.far ? farOpts(q.it, kind === "quiz-color" ? 3 : a.opts) : groupOpts(q.it, kind);
+      const wrong = kind === "echo" ? farOpts(q.it, 1) : kind === "spot" ? spotOpts(q.it, a.opts) : kind === "recall" ? recallOpts(q.it, a.opts) : kind === "edge" ? null
+        : a.far ? farOpts(q.it, kind === "quiz-color" ? 3 : a.opts) : groupOpts(q.it, kind);
       // a step that throws, or bookkeeping that throws, must never leave the screen frozen on Next: log it, move on
       let res;
-      try { res = await PR_STEPS[kind].render(stage, q.it, ctx({ dir: kind === "quiz-color" ? "r" : "f", wrong })); }
+      try { res = await PR_STEPS[kind].render(stage, q.it, ctx({ dir: kind === "quiz-color" ? "r" : "f", wrong, other: a.other })); }
       catch (err) { console.error("Study step failed", kind, err); res = await PR_STEPS["quiz-name"].render(stage, q.it, ctx({})); }
       if (sess.ended || !stage.isConnected) return;
       try { prRecord(sess, q.it, res, kind); } catch (err) { console.error("Study record failed", err); }
@@ -664,7 +684,7 @@ function lsShot(arg) {
   try { const set = localStorage.setItem.bind(localStorage); localStorage.setItem = (k, v) => { if (k !== KEY) set(k, v); }; } catch (e) {}
   document.documentElement.classList.add("pr-shot");
   const [w, st] = String(arg).split(":"), teal = prByKey("teal"), items = lsAlike(teal, 8, 5), label = "Teal and its look-alikes";
-  const ls = lsState(); ls.typing = st !== "card";
+  const ls = lsState(); ls.typing = st === "type";
   if (w === "sheet") { openRoute("#/color/teal"); if (st) ls.close = +st; return setTimeout(() => lsOpen({ seed: teal }), 1200); }
   if (w === "look") return lsLook(items, { label, view: st || "grid" });
   if (w === "study") {

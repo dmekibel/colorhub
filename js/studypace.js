@@ -11,12 +11,18 @@
 //     groups  [[keyPin, keyNeighbor…], …] a pinned color with its look-alikes: they're met together (one wave per group) and
 //             practiced beside each other (js/learnset.js lsGroups); omitted = no grouping
 //     looked  true when you come from Look ("Test me"): you've just seen them all, so no Meet
+//     due     Set of keys whose review is due today: asked before any new wave is met (recall before reveal, and
+//             the review counts on its first answer), never shown on a pair card before they're asked
 //   spNext(P) -> { t: "meet", q, i, of, wave } | { t: "pair", a, b, why } | { t: "relook", q }
 //             |  { t: "ask", q, kind, far, opts } | { t: "match", qs } | null (every color climbed or set aside)
 //   spAnswer(P, q, ok) -> { up, out, ease }   after each answer (a Matching round: once per pair)
 //
-// Rungs: 0 pick its name from 3 far options · 1 pick its name from 4 neighbors · 2 find the color / odd one out ·
-// 3 recall (type it, or a recall flashcard) · top (4, or 3 in a quick session) climbed.
+// Rungs: 0 just met (echo: which of two, or its name from 3 far) · 1 recognize (name or color from 4 neighbors, or a
+// flash: see it, then find it) · 2 tell apart (find it among 4, odd one out, spot it among 6 to 10, where it ends) ·
+// 3 recall (its name from 6 to 8 close names, the color alone; typing only when you ask for it) · top (4, or 3 in a
+// quick session) climbed.
+// The format library (design/LEARN-ROOM-2.md): each rung has several formats, and the pacer picks the one this color
+// has seen least, never the kind just asked, so a lesson keeps changing shape as each color climbs.
 const SP_WAVE = 3, SP_WAVE_EASY = 2, SP_INPLAY = 4, SP_MATCH_EVERY = 6, SP_WINDOW = 8, SP_SET_ASIDE = 3;
 const SP_EASE_LO = .7, SP_EASE_HI = .92;
 const SP_START = { none: 0, met: 0, learning: 1, yours: 3 };
@@ -24,7 +30,7 @@ const SP_START = { none: 0, met: 0, learning: 1, yours: 3 };
 function spNew(items, o = {}) {
   const know = o.know || new Map(), pace = o.pace || "you", test = pace === "test", top = o.quick ? 3 : 4;
   const de = o.de || (() => 99);
-  const P = { top, pace, typing: o.typing !== false, quick: !!o.quick, de, qs: new Map(), queue: [], fresh: [], newQ: [], wave: [], acts: [],
+  const P = { top, pace, typing: o.typing === true, quick: !!o.quick, de, qs: new Map(), queue: [], fresh: [], newQ: [], wave: [], acts: [],
     hist: [], ease: pace === "gentle" ? -1 : test ? 1 : 0, asked: 0, sinceMatch: 0, lastKind: "", mix: [], pairsShown: new Set(), meetDone: 0, cap: Math.max(24, items.length * 10) };
   // a pinned color and its look-alikes stay together: the order they're met and queued in, and one wave per group
   const grouped = Array.isArray(o.groups) && o.groups.some(g => g.length > 1);
@@ -35,13 +41,15 @@ function spNew(items, o = {}) {
     const fresh = k === "none" || k === "met";
     let lv = test ? Math.max(2, SP_START[k] || 0) : SP_START[k] || 0;
     if (r != null) lv = Math.max(0, Math.min(top, +r || 0));
-    const q = { it, k, lv, up: lv >= top, miss: 0, missRun: 0, relook: false, out: false, n: 0, met: !fresh || test || !!o.looked || r != null };
+    const q = { it, k, lv, up: lv >= top, miss: 0, missRun: 0, relook: false, out: false, n: 0, met: !fresh || test || !!o.looked || r != null, due: !!(o.due && o.due.has(it.key)) };
     P.qs.set(it.key, q);
     if (q.up) return;
     if (q.met) P.fresh.push(q); else P.newQ.push(q);
   });
-  // you mixed these up before: both get a side-by-side look before either is asked
-  (o.mix || []).forEach(([a, b]) => { const qa = P.qs.get(a), qb = P.qs.get(b); if (qa && qb && qa !== qb && !qa.up && !qb.up) P.mix.push([qa, qb]); });
+  // due reviews go to the front of practice (a stable sort keeps the rest in order)
+  P.fresh.sort((a, b) => (b.due ? 1 : 0) - (a.due ? 1 : 0));
+  // you mixed these up before: both get a side-by-side look before either is asked (never a due one: that's a review)
+  (o.mix || []).forEach(([a, b]) => { const qa = P.qs.get(a), qb = P.qs.get(b); if (qa && qb && qa !== qb && !qa.up && !qb.up && !qa.due && !qb.due) P.mix.push([qa, qb]); });
   // learning pace from the start: gentle when nothing in the set is known yet and it's a big set of new names
   if (pace === "you" && P.newQ.length >= 6 && !P.fresh.length) P.ease = -1;
   return P;
@@ -93,14 +101,26 @@ function spStartWave(P) {
   // the wave joins the front of practice, its first color last (a beat between meeting it and being asked)
   P.queue.unshift(...wave.slice(1), wave[0]);
 }
+// the nearest other color in play, close enough to share a border (for "where does it end?")
+function spMate(P, q) {
+  let b = null, bd = Infinity;
+  P.qs.forEach(x => { if (x === q) return; const d = P.de(q.it.h, x.it.h); if (d >= 5 && d <= 30 && d < bd) { bd = d; b = x; } });
+  return b;
+}
 function spKind(P, q) {
-  const last = P.lastKind, lv = q.lv;
+  const last = P.lastKind, lv = q.lv, hard = P.ease > 0, easy = P.ease < 0;
   let opts;
-  if (lv <= 1) opts = ["quiz-name", "quiz-color"];
-  else if (lv === 2) opts = P.ease < 0 ? ["quiz-color", "quiz-name"] : q.n % 2 ? ["odd-one-out", "quiz-color"] : ["quiz-color", "odd-one-out"];
-  else opts = P.typing && !P.quick ? ["type", "quiz-color"] : ["card", "quiz-color"];
-  if (P.quick && lv >= 3) opts = ["card", "quiz-color"];
-  return opts.find(k => k !== last) || opts[0];
+  if (lv <= 0) opts = q.n === 0 && !q.due ? ["echo", "quiz-name", "quiz-color"] : ["quiz-name", "quiz-color"];
+  else if (lv === 1) opts = easy ? ["quiz-name", "quiz-color"] : ["quiz-name", "quiz-color", ...(q.due ? [] : ["flash"])];
+  else if (lv === 2) opts = easy ? ["quiz-color", "quiz-name"] : ["quiz-color", "odd-one-out", "spot", ...(spMate(P, q) ? ["edge"] : [])];
+  // recall: name it from memory among 6 to 8 close names, the color alone (tap, no typing); typing only when asked for
+  else opts = P.typing && !P.quick ? ["type", "recall"] : ["recall", hard ? "spot" : "quiz-color"];
+  if (P.quick && lv >= 3) opts = ["recall", "quiz-color"];
+  // the one this color has met least (ties: the rung's own order), never the kind just asked
+  const used = q.used || (q.used = {});
+  const pick = opts.filter(k => k !== last).sort((a, b) => (used[a] || 0) - (used[b] || 0))[0] || opts[0];
+  used[pick] = (used[pick] || 0) + 1;
+  return pick;
 }
 function spNext(P) {
   if (P.acts.length) return P.acts.shift();
@@ -111,7 +131,9 @@ function spNext(P) {
   if (P.asked >= P.cap) return null;
   // a new wave: at the start, or once the last one has settled and you're not struggling (or there's little else to do)
   const live = P.queue.filter(q => !q.up && !q.out).length;
-  if (P.newQ.length && (!P.wave.length || (spSettled(P) && (P.ease >= 0 || live < 2)) || live === 0)) { spStartWave(P); return P.acts.shift(); }
+  // due reviews first: no new wave is met while one hasn't been asked yet
+  const dueLeft = [...P.qs.values()].some(q => q.due && !q.n && !q.up && !q.out);
+  if (P.newQ.length && !dueLeft && (!P.wave.length || (spSettled(P) && (P.ease >= 0 || live < 2)) || live === 0)) { spStartWave(P); return P.acts.shift(); }
   while (P.queue.length < SP_INPLAY && P.fresh.length) P.queue.push(P.fresh.shift());
   // a Matching round of the colors in play now and then
   const inPlay = spLive(P).filter(q => q.met && q.lv >= 1 && P.queue.includes(q));
@@ -123,6 +145,11 @@ function spNext(P) {
   // far options on the first rung, and on the first three while you're struggling
   const kind = spKind(P, q), far = q.lv === 0 || (q.lv <= 2 && P.ease < 0);
   P.lastKind = kind; P.asked++; P.sinceMatch++;
+  // echo: two to pick from; spot: 6, 8 or 10 tiles by how it's going; edge: the border with its nearest mate
+  if (kind === "echo") return { t: "ask", q, kind, far: true, opts: 1 };
+  if (kind === "spot") return { t: "ask", q, kind, far: false, opts: P.ease < 0 ? 5 : P.ease > 0 ? 9 : 7 };
+  if (kind === "recall") return { t: "ask", q, kind, far: false, opts: P.ease < 0 ? 5 : 7 };
+  if (kind === "edge") { const m = spMate(P, q); return { t: "ask", q, kind, far: false, opts: 0, other: m && m.it }; }
   return { t: "ask", q, kind, far: far && (kind === "quiz-name" || kind === "quiz-color"), opts: far ? 2 : 3 };
 }
 function spAnswer(P, q, ok) {
