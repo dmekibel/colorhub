@@ -126,7 +126,8 @@ to which rows — the second run only needed 66 new images, everything else was 
   (everyone else), `"Auguste Renoir"` (NGA, the Met) vs `"Pierre-Auguste Renoir"` (AIC, CMA, Commons), `"David
   Teniers"` (CMA, Rijksmuseum, SMK) vs `"David Teniers the Younger"` (AIC, NGA, Commons), `"Lucas Cranach"` (CMA,
   Rijksmuseum, SMK) vs `"Lucas Cranach the Elder"` (AIC, the Met, NGA, Commons) — a separate follow-up task was
-  filed for these.
+  filed for these. (Fixed later the same day by `ARTIST_ALIAS` in corpus.py, which now holds all five pairs for
+  every source, so `CREATOR_ALIAS` here is redundant but harmless.)
 - **How many of the "no artist" rows are really anonymous?** 709 of the 9,106 commons rows in the built corpus
   have no artist. Traced to source: **616 (87%)** are paintings where Wikidata explicitly records the creator as
   unknown (the `somevalue` case above — a real cataloguing judgment, e.g. "unknown Italian painter, 17th century");
