@@ -216,6 +216,7 @@ function hmHome() {
     </div>
     <button class="corner l" data-rooms-corner aria-label="Rooms">${ROOMS_GLYPH}</button>
     <button class="corner r" id="hmView" aria-label="View">${HM_SLIDERS}</button>
+    ${typeof prQuick === "function" ? `<button class="corner r pr-study-corner" data-pr-study aria-label="Study">${PR_ICON.cards}</button>` : ""}
     ${typeof FV_HEART === "string" ? `<button class="corner r fv-corner" id="hmFav" aria-label="Pick favorites">${FV_HEART}</button>` : ""}
   `, "fixed cx hm");
   const $ = s => el.querySelector(s), viewEl = $(".cx-view"), title = $(".hm-title");
@@ -420,6 +421,7 @@ function hmHome() {
     viewBtn.onclick = () => { if (longFired) { longFired = false; return; } chooser("show"); };
     const favBtn = $("#hmFav"); if (favBtn) favBtn.onclick = () => { if (typeof hmDismissHint === "function") hmDismissHint(); buzz(6); fvPickStart(el, ctrl); };   // js/favs.js: Pick favorites
   }
+  { const study = $("[data-pr-study]"); if (study) study.onclick = () => { const mid = ctrl && ctrl.current(); prQuick({ seed: mid ? { n: mid.n, h: mid.h } : null, items: items.slice(0, 400).map(x => x.h), label: hmViewLabel(), source: mid ? "alike" : "these" }); }; }   // js/practice.js
   // swipe up from the bottom edge of Home opens Learn straight away (DESIGN-SYSTEM §2 "the shortcut"): the
   // honeycomb keeps a short drag (bubbles near the bottom stay tappable), but a real upward swipe wins.
   let edge = null;
