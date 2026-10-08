@@ -593,7 +593,10 @@ scenario("favs", "shelf: top five, a plate opens its page, Back returns, a row h
   t.expect(t.ev("window.__card"), "the My colors card didn't draw");
   // the verbs: Learn opens a deck (and Close comes back), Keep saves a palette, the primary opens a ranking screen, On the map opens Home
   await t.click("[data-cs=learn]", { wait: 600 });
-  await t.waitFor(".screen.deck", 6000, "the Learn my favorites deck");
+  // Learn now opens Practice's quick sheet (prInstantDeck) first: start it, then a deck or a Practice run appears
+  await t.waitFor(".screen.deck, [data-qgo], .screen.pr-play", 6000, "the Learn sheet or deck");
+  if (t.ev("!!document.querySelector('[data-qgo]')")) await t.click("[data-qgo] [data-go]", { wait: 600 });
+  await t.waitFor(".screen.deck, .screen.pr-play, .screen.learnit, .screen.pr-say-intro, .screen.meet", 6000, "the Learn my favorites deck");
   await t.click("[data-close]", { wait: 500 });
   await t.waitFor(".fv-shelf", 6000, "the shelf after closing the deck");
   await t.click("[data-go]", { wait: 500 });

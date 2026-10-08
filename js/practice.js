@@ -1495,7 +1495,7 @@ const prLevelRank = it => it.useRank != null ? it.useRank : it.rank;
 const prSeedRank = it => it.rank < 9999 ? prLevelRank(it) : (prItemOf(it.h) ? prLevelRank(prItemOf(it.h)) : 9999);
 function prInstantDeck(o = {}) {
   // csLearn (js/colorset.js) hands over a ColorSet: open the quick sheet with its colors as "These colors"
-  if (o.set && !o.build) { const set = typeof o.set === "function" ? o.set() : o.set; return prQuick({ items: ((set && set.colors) || []).map(c => c.h), label: (set && set.title) || "", seed: o.seed }); }
+  if (o.set && !o.build) { const set = typeof o.set === "function" ? o.set() : o.set; return prQuick({ items: ((set && set.colors) || []).map(c => c.h), label: (set && set.title) || "", seed: o.seed, back: o.back }); }
   if (o.source === "set") o = { ...o, source: "these" };
   const seed = prSeed(o.seed), size = o.size == null ? 10 : +o.size, core = prCore(), p = prState();
   const these = prUnique((o.items || []).map(x => typeof x === "string" ? prItemOf(x) : prSeed(x)).filter(Boolean));
@@ -1574,7 +1574,7 @@ function prQuick(o = {}) {
     if (!deck || !deck.items.length) return;
     remember(); close(); buzz(8);
     if (st.method === "lesson") return hmLearnIt(app);
-    const exit = () => { if (backTo && /^#\/./.test(backTo)) { if (!openRoute(backTo)) go(S.tab || "learn"); } else prHome(); };
+    const exit = () => { if (typeof backTo === "function") backTo(); else if (backTo && /^#\/./.test(backTo)) { if (!openRoute(backTo)) go(S.tab || "learn"); } else prHome(); };
     prPlay(st.method, { items: deck.items, label: deck.label, exit, other: () => { exit(); setTimeout(() => prQuick({ ...o, back: backTo }), 60); } });
   }
   sh.addEventListener("click", e => {
