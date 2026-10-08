@@ -287,9 +287,11 @@ function hmHome() {
     // one of the 101 resolves synchronously, so growFrom's renderFn returns its root and the grow plays; a
     // library name waits on loadCoreNames() first (hmOpenName), so renderFn returns nothing yet and growFrom
     // quietly skips the animation — the page still opens, just with show()'s plain cross-fade instead.
-    if (src && o.c && typeof growFrom === "function") growFrom(src, open);
-    else { if (fx && fx.morph) fx.morph(); open(); }
-    if (src) src.remove();
+    // finally: the stand-in bubble goes even if opening the page throws (it used to stay, stuck over the map)
+    try {
+      if (src && o.c && typeof growFrom === "function") growFrom(src, open);
+      else { if (fx && fx.morph) fx.morph(); open(); }
+    } finally { if (src) src.remove(); }
   };
   let hlAll = false;
   if (typeof HONEY_LIVE !== "undefined") HONEY_LIVE.add(() => { if (!el.isConnected) return false; if (hlAll && !HONEY_HL) { hlAll = false; render(true); } return true; });
