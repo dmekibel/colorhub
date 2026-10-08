@@ -6,3 +6,35 @@
 .lx-stage-next .path-band{opacity:.45}
 .lx-band-wait{background:var(--surface-2)}
 .lx-stage-next .path-cap .note{white-space:nowrap}
+.path-list .path-cap{gap:12px}
+.path-list .path-cap .note{flex:none}
+
+/* Edges inside Learn it (js/learnit.js hmLtEdge): nine steps from a name to its look-alike, on the booth grey */
+.screen.learnit .lt-edge-q{font:400 clamp(26px,7.4vw,34px)/1.08 var(--serif);letter-spacing:-.015em;margin-top:18px;text-wrap:pretty;flex:none}
+.screen.learnit .lt-edge-q em{font-style:italic}
+.screen.learnit .lt-edge{display:flex;gap:3px;height:min(46vh,380px);margin-top:20px;flex:none}
+.screen.learnit .lt-edge-b{flex:1;position:relative;border:0;padding:0;border-radius:6px;background:var(--c);cursor:pointer;transition:transform .25s var(--ease),box-shadow .2s}
+.screen.learnit .lt-edge-b:active{transform:scaleY(.97)}
+.screen.learnit .lt-edge-b.on{box-shadow:0 0 0 3px #ECE8DF,0 0 0 4px rgba(0,0,0,.35);z-index:1}
+.screen.learnit .lt-edge-b.mid::before{content:"";position:absolute;left:-2.5px;top:-8px;bottom:-8px;width:2px;background:#ECE8DF;border-radius:1px}
+.screen.learnit .lt-edge-lab{position:absolute;inset:8px 0;writing-mode:vertical-rl;transform:rotate(180deg);display:flex;align-items:center;justify-content:flex-start;
+  font:400 12px/1 var(--sans);letter-spacing:.01em;white-space:nowrap;overflow:hidden;opacity:0;transition:opacity .4s ease .1s}
+.screen.learnit .lt-edge-b[data-ink="dark"] .lt-edge-lab{color:#141311}
+.screen.learnit .lt-edge-b[data-ink="light"] .lt-edge-lab{color:#F4F1EA}
+.screen.learnit .lt-edge.revealed .lt-edge-lab{opacity:.92}
+.screen.learnit .lt-edge-ends{display:flex;justify-content:space-between;margin-top:10px;font:400 14px/1.2 var(--sans);color:var(--ink);flex:none}
+.screen.learnit .lt-edge-line{margin-top:14px;font-size:17px;line-height:1.35;color:var(--ink);flex:none;text-wrap:pretty}
+.screen.learnit .lt-edge-name{display:inline;border:0;padding:0;background:none;color:var(--ink);font:inherit;text-decoration:underline;text-underline-offset:3px;text-align:left;cursor:pointer}
+.screen.learnit .lt-edge-name em{font-style:italic}
+.screen.learnit .lt-edge-next[hidden]{display:none}
+
+/* Bet on tomorrow (js/learnmore.js lxBetHtml): one quiet row on a lesson's done screen */
+.lx-bet{margin-top:18px;flex:none}
+.lx-bet-q{font:400 15px/1.3 var(--sans);color:var(--ink)}
+.lx-bet-row{display:flex;gap:8px;margin-top:10px}
+.lx-bet-b{flex:1;max-width:56px;height:44px;display:grid;place-items:center;padding:0;text-align:center;border-radius:22px;border:1px solid rgba(236,232,223,.22);background:var(--surface-2);color:var(--ink);font:500 15px/1 var(--mono);font-variant-numeric:tabular-nums;cursor:pointer;transition:background .2s,color .2s,transform .15s}
+.lx-bet-b:active{transform:scale(.94)}
+.lx-bet-b.on{background:var(--paper);color:var(--paper-ink);border-color:var(--paper)}
+.lx-bet-a{margin-top:8px;min-height:1.3em}
+.screen.learnit .lx-bet-b{background:rgba(0,0,0,.18);border-color:rgba(236,232,223,.28)}
+.screen.learnit .lx-bet-b.on{background:var(--paper);color:var(--paper-ink)}

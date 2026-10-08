@@ -26,6 +26,7 @@ run(cut("// ---------- spaced review", "// ---------- icons"));
 run(R("js/pickit.js"));
 run(R("js/lookalikes.js"));
 run(R("js/learnmore.js"));
+run(R("js/learnit.js"));
 // the name lists, as the app's loaders would hand them over
 ctx.__core = JSON.parse(R("data/core-names.json"));
 ctx.__lib = JSON.parse(R("data/library.json")).filter(x => !x.crude && /^#[0-9A-Fa-f]{6}$/.test(x.h));
@@ -160,6 +161,16 @@ const de = (a, b) => { ctx.__a = a; ctx.__b = b; return run("de2000(__a, __b)");
   ok(ex && ex.n === fl.n + vars.length, `Expert = Fluent plus every variation (${ex && ex.n})`);
   ok(last.name === "Every learnable color" && last.n === P.total && !last.approx, `the last checkpoint is every learnable color, sized from the data (${last.n})`);
   ok(P.units.every(u => u.title && !/the 101|\/101|of 101/i.test(u.title + " " + u.label)), "unit titles and labels never mention the 101");
+  // ---------- 5. Edges (B3): the strip ----------
+  for (const [a, b] of [["#008080", "#007BA7"], ["#954535", "#CD7F32"], ["#F7F6F2", "#16171A"], ["#FF00FF", "#FF69B4"]]) {
+    ctx.__a = a; ctx.__b = b;
+    const s1 = run("edgeStrip(__a, __b, 9)"), s2 = run("edgeStrip(__b, __a, 9)");
+    ok(s1.hexes.length === 9 && s1.hexes[0] === a.toUpperCase() && s1.hexes[8] === b.toUpperCase(), `edge strip ${a}→${b}: nine steps, the two names at the ends`);
+    ok(s1.mid >= 1 && s1.mid <= 8, `edge strip ${a}→${b}: the halfway mark sits inside the strip (${s1.mid})`);
+    ok(JSON.stringify(s1.hexes.slice().reverse()) === JSON.stringify(s2.hexes), `edge strip ${a}→${b}: the same strip read backwards`);
+    ok(Math.abs((s1.mid - 1) - (8 - s2.mid)) <= 1, `edge strip ${a}→${b}: halfway is symmetric (${s1.mid} vs ${s2.mid})`);
+    ok(run("edgeStrip(__a, __b, 5).hexes.length") === 5, `edge strip ${a}→${b}: n steps`);
+  }
   console.log(`path: 101 → ${P.stages.slice(2).map(s => (s.name ? s.name + " " : "") + s.n).join(" → ")} · ${P.units.length} generated units`);
   console.log(`${pass + fail} cases: ${pass} passed, ${fail} failed`);
   process.exit(fail ? 1 : 0);

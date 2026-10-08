@@ -33,7 +33,80 @@ function hmLearnIt(c) {
   const near = hmLearnGroup(c);
   if (!near.length) { toast("No close look-alikes to compare yet"); return hmLtHome(c); }
   const group = [c, ...near];
-  hmLtMeet(group, c, () => hmLtRecall(group, c, () => hmLtTell(group, c, () => hmLtDone(group, c))));
+  hmLtMeet(group, c, () => hmLtRecall(group, c, () => hmLtEdge(group, c, () => hmLtTell(group, c, () => hmLtDone(group, c)))));
+}
+
+// ---------- 2b. Edges: where a name ends (design/IDEAS-10X/learning.md B3) ----------
+// Nine steps from c to a look-alike, mixed in Lab; "tap the last one you'd still call teal". The reveal labels
+// every step with its nearest name (of about 1,000), marks where the two colors meet halfway (by perceived
+// difference, CIEDE2000), and says where your border sits. It's a judgment, not a recall: it never counts toward
+// Yours. Every tap is kept in S.edges["a|b"] = [[day, tap, mid]] for a later border map.
+// The pure strip: n colors from a to b (both ends included), and mid = the first step nearer b than a.
+function edgeStrip(aHex, bHex, n = 9) {
+  const A = lab(aHex), B = lab(bHex), hexes = [];
+  for (let i = 0; i < n; i++) { const t = i / (n - 1); hexes.push(labHex(A[0] + (B[0] - A[0]) * t, A[1] + (B[1] - A[1]) * t, A[2] + (B[2] - A[2]) * t)); }
+  hexes[0] = aHex.toUpperCase(); hexes[n - 1] = bHex.toUpperCase();
+  let mid = hexes.findIndex(h => de2000(h, bHex) < de2000(h, aHex));
+  if (mid < 1) mid = Math.ceil(n / 2);
+  return { hexes, mid };
+}
+function hmLtEdge(group, c, next) {
+  const rounds = group.slice(1, 3);
+  if (!rounds.length) return next();
+  const onClose = () => hmLtHome(c);
+  let r = 0;
+  function render() {
+    const b = rounds[r], { hexes, mid } = edgeStrip(c.h, b.h, 9);
+    const name = x => esc(typeof lxLower === "function" ? lxLower(x.n) : x.n.toLowerCase());
+    const el = show(`
+      ${hmLtHead(group, () => "known")}
+      <h2 class="lt-edge-q">Tap the last one you'd still call <em>${name(c)}</em>.</h2>
+      <div class="lt-edge" role="group" aria-label="Nine steps from ${esc(c.n)} to ${esc(b.n)}">
+        ${hexes.map((h, i) => `<button class="lt-edge-b" data-i="${i}" style="--c:${h}" data-ink="${ink(h)}" aria-label="Step ${i + 1}"><span class="lt-edge-lab"></span></button>`).join("")}
+      </div>
+      <div class="lt-edge-ends"><span>${esc(c.n)}</span><span>${esc(b.n)}</span></div>
+      <p class="lt-edge-line note" aria-live="polite">${r === 0 ? "Names are fuzzy. There's no wrong answer here, only your border." : "One more border."}</p>
+      <div style="flex:1"></div>
+      <button class="lt-primary lt-edge-next" data-next hidden>${r + 1 < rounds.length ? "Next border" : "Next"} ${ICON.arrow}</button>
+    `, "fixed learnit lt-edge-screen");
+    hmLtClose(el, onClose);
+    let tapped = -1;
+    el.querySelectorAll(".lt-edge-b").forEach(btn => btn.onclick = () => {
+      if (tapped >= 0) {   // after the reveal a step opens the name it's labeled with: one tap, its page
+        const nm = btn.dataset.nm; if (nm && typeof openCoreName === "function") openCoreName(btn.dataset.nh, nm);
+        return;
+      }
+      tapped = +btn.dataset.i; buzz(10);
+      btn.classList.add("on");
+      el.querySelector(".lt-edge").classList.add("revealed");
+      // the reveal: each step's nearest name, the halfway mark, and one line about your border
+      const nms = hexes.map(h => typeof nameOf === "function" ? nameOf(h) : { n: "", h });
+      el.querySelectorAll(".lt-edge-b").forEach((x, i) => {
+        const nm = nms[i]; x.querySelector(".lt-edge-lab").textContent = nm.n || "";
+        if (nm.n) { x.dataset.nm = nm.n; x.dataset.nh = nm.h; x.setAttribute("aria-label", `Step ${i + 1}: ${nm.n}`); }
+        if (i === mid) x.classList.add("mid");
+      });
+      const yours = tapped, ref = mid - 1, k = yours - ref;
+      const steps = n => `${Math.abs(n)} step${Math.abs(n) === 1 ? "" : "s"}`;
+      let line = `The two meet halfway between steps ${mid} and ${mid + 1}. `;
+      line += k === 0 ? `You stopped right there: your ${name(c)} ends where most eyes would split it.`
+        : k > 0 ? `You stopped at step ${yours + 1}: your ${name(c)} reaches ${steps(k)} further toward ${name(b)}.`
+        : `You stopped at step ${yours + 1}: your ${name(c)} gives way ${steps(k)} sooner, before ${name(b)}'s half.`;
+      const inner = nms.map((nm, i) => ({ nm, i })).find(o => o.i > 0 && o.i < 8 && o.nm.n && ![c.n, b.n].some(n => n.toLowerCase() === o.nm.n.toLowerCase()));
+      el.querySelector(".lt-edge-line").innerHTML = esc(line) + (inner ? ` <button class="lt-edge-name" data-nm="${esc(inner.nm.n)}" data-nh="${inner.nm.h}">Step ${inner.i + 1} has a name of its own: <em>${esc(inner.nm.n)}</em></button>` : "");
+      const nb = el.querySelector(".lt-edge-name"); if (nb) nb.onclick = () => openCoreName(nb.dataset.nh, nb.dataset.nm);
+      S.edges = S.edges || {};
+      const key = c.n + "|" + b.n; (S.edges[key] = S.edges[key] || []).push([today(), yours, mid]); save();
+      const go = el.querySelector("[data-next]"); go.hidden = false;
+      go.onclick = () => { r++; r < rounds.length ? render() : next(); };
+    });
+    onKey = e => {
+      if (e.key === "Escape") return onClose();
+      if (/^[1-9]$/.test(e.key) && tapped < 0) el.querySelectorAll(".lt-edge-b")[+e.key - 1].click();
+      else if (e.key === "Enter" && tapped >= 0) el.querySelector("[data-next]").click();
+    };
+  }
+  render();
 }
 
 // ---------- shared chrome: one segmented bar for the whole lesson, no step word (css/learnit.css) ----------
@@ -155,9 +228,11 @@ function hmLtDone(group, c) {
     <h1 class="lt-t1">You met <em>${esc(c.n.toLowerCase())}</em>${near.length ? `, and ${near.length} look-alike${near.length === 1 ? "" : "s"}.` : "."}</h1>
     ${near.length ? `<div class="lt-rows">${near.map(x => `<div class="lt-row"><span class="pair"><i style="--c:${c.h}"></i><i style="--c:${x.h}"></i></span><span class="lt-row-n">${esc(x.n)}</span><span class="note">${esc(lookDiff(c, x))}</span></div>`).join("")}</div>` : ""}
     <p class="note lt-done-note">All ${group.length} come back tomorrow, after a night's sleep.</p>
+    ${typeof lxBetHtml === "function" ? lxBetHtml(group.map(x => x.id)) : ""}
     <div style="flex:1"></div>
     <button class="lt-primary" data-lt-back>Back to ${esc(c.n)} ${ICON.arrow}</button>
   `, "fixed learnit");
+  if (typeof lxBetWire === "function") lxBetWire(el, group.map(x => x.id));
   el.querySelector("[data-lt-back]").onclick = () => hmLtHome(c);
   onKey = e => { if (e.key === "Enter" || e.key === "Escape") hmLtHome(c); };
 }

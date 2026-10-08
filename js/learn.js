@@ -376,6 +376,7 @@ function unitDone(u, right, total) {
     <h1>${esc(u.title)}, <em>named.</em></h1>
     <p class="lede">${right} of ${total} on the first try. They come back tomorrow for a quick review: recalling them after a night's sleep is what makes them stick.</p>
     <p class="fine own-line">${OWN_LINE}</p>
+    ${typeof lxBetHtml === "function" ? lxBetHtml(u.colors.map(c => c.id)) : ""}
     <div class="stack">
       ${nu ? `<button class="btn" data-next>Next: ${esc(nu.title)} ${ICON.arrow}</button>` : ""}
       ${expNudge()}
@@ -383,6 +384,7 @@ function unitDone(u, right, total) {
     </div>
   `, "result");
   expWireNudge(el);
+  if (typeof lxBetWire === "function") lxBetWire(el, u.colors.map(c => c.id));
   const nb = el.querySelector("[data-next]");
   if (nb) nb.onclick = () => meet(nu);
   el.querySelector("[data-home]").onclick = home;
@@ -390,7 +392,7 @@ function unitDone(u, right, total) {
 }
 
 function reviewDone(right, total) {
-  const nu = nextUnit(), selfN = ownCounts().self;
+  const nu = nextUnit(), selfN = ownCounts().self, bet = typeof lxBetSettle === "function" ? lxBetSettle() : "";
   const el = show(`
     <div style="flex:1"></div>
     <p class="eyebrow">Daily review</p>
@@ -400,6 +402,7 @@ function reviewDone(right, total) {
       <div class="stat"><b>${ownedCount()}</b><span>yours${selfN ? ` · ${selfN} to confirm` : ""}</span></div>
     </div>
     <p class="lede">The ones you knew come back in a few days, then in weeks. The misses come back tomorrow.</p>
+    ${bet ? `<p class="lede lx-bet-line">${esc(bet)}</p>` : ""}
     <p class="fine own-line">${OWN_LINE} Swipes are practice.</p>
     <div class="stack">
       ${nu ? `<button class="btn" data-next>Continue: ${esc(nu.title)} ${ICON.arrow}</button>` : ""}

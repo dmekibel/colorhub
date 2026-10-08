@@ -450,3 +450,57 @@ scenario("studio", "photo palette: controls work and a chip opens its page", asy
   t.expect(!t.$(".cp-page"), "Back left the color page open");
   t.expect(t.$("#app").innerText.length > 60, "Back from the color page landed on an empty screen");
 });
+
+// ================================================================== LEARN (past the first units: js/learnmore.js)
+scenario("learn", "the path goes past the first units: Begin teaches a generated unit as core cards", async t => {
+  await t.open("#shot=lx:room", { settle: 600 });
+  await t.waitFor(".path-list .lx-stage-h", 10000, "the path's current stage header");
+  t.expect(/of 655 · Fluent/.test(t.text(".coll-n")), `the collection counts toward Fluent ("${t.text(".coll-n")}")`);
+  t.expect(!/the 101|\/101/.test(t.text("#app")), "the Learn room mentions the 101");
+  const before = t.ev("Object.keys(S.cards).filter(k => k.startsWith('core:')).length");
+  await t.click("[data-learn]", { wait: 600 });
+  await t.waitFor("#pager", 6000, "the meet pager for the generated unit");
+  t.expect(/Unit \d+ · to /.test(t.text("#pager .eyebrow")), `the unit label ("${t.text("#pager .eyebrow")}")`);
+  const pager = t.$("#pager");
+  pager.scrollTop = pager.scrollHeight; await t.tick(); await t.sleep(300);
+  await t.click("[data-go]", { wait: 600 });
+  await t.waitFor(".deck .card", 6000, "the swipe deck");
+  for (let i = 0; i < 60 && !t.$(".result"); i++) {
+    const rev = t.$("[data-reveal]"); if (rev) await t.click(rev, { wait: 60 });
+    const yes = t.$("[data-yes]"); if (yes) await t.click(yes, { wait: 350 }); else await t.sleep(150);
+  }
+  await t.waitFor(".result", 6000, "the unit-done screen");
+  const after = t.ev("Object.keys(S.cards).filter(k => k.startsWith('core:') && S.cards[k].n && S.cards[k].h).length");
+  t.expect(after >= before + 4, `the unit's colors became core:<slug> cards with their own name and hex (${before} -> ${after})`);
+  const bet = t.$(".lx-bet-b[data-n='2']"); t.expect(bet, "the bet-on-tomorrow row");
+  await t.click(bet, { wait: 200 });
+  t.expect(t.ev("!!(S.bets && S.bets[today()] && S.bets[today()].n === 2)"), "the bet was kept");
+  await t.click("[data-next]", { wait: 600 });
+  await t.waitFor("#pager", 6000, "the next generated unit");
+});
+scenario("learn", "Learn it on a name past the first units: meet, recall, edges, tell apart, done", async t => {
+  await t.open("#/name/chestnut", { settle: 600 });
+  await t.waitFor(".cp-page [data-learnit]", 10000, "Learn it on the Chestnut name page");
+  await t.click("[data-learnit]", { wait: 600 });
+  await t.waitFor("#ltPager", 6000, "the Learn it meet pager");
+  for (let i = 0; i < 12 && t.$("#ltPager"); i++) await H.keys(t, "Enter");
+  await t.waitFor(".lt-recall .card", 6000, "the recall deck");
+  for (let i = 0; i < 40 && !t.$(".lt-edge"); i++) {
+    const rev = t.$("[data-reveal]"); if (rev) await t.click(rev, { wait: 60 });
+    const yes = t.$("[data-yes]"); if (yes) await t.click(yes, { wait: 350 }); else await t.sleep(150);
+  }
+  await t.waitFor(".lt-edge", 6000, "the Edges step");
+  await t.click(t.$$(".lt-edge-b")[5], { wait: 300 });
+  t.expect(t.$$(".lt-edge-lab").filter(e => e.textContent.trim()).length === 9, "every step is labeled with its nearest name");
+  t.expect(t.$(".lt-edge-b.mid"), "the halfway mark");
+  t.expect(t.ev("Object.keys(S.edges || {}).length") >= 1, "the border was kept in S.edges");
+  for (let i = 0; i < 3 && t.$(".lt-edge"); i++) { if (!t.$(".lt-edge-b.on")) await t.click(t.$$(".lt-edge-b")[4], { wait: 300 }); await t.click("[data-next]", { wait: 500 }); }
+  for (let i = 0; i < 8 && !t.$(".lt-done-pal"); i++) {
+    const sw = t.$(".pi-sw"); if (sw && !t.$(".card.picked")) await t.click(sw, { wait: 1500 }); else await t.sleep(500);
+  }
+  await t.waitFor(".lt-done-pal", 8000, "the Learn it done screen");
+  t.expect(t.ev("!!S.cards['core:chestnut'] && S.cards['core:chestnut'].n === 'Chestnut'"), "Chestnut joined spaced review as core:chestnut");
+  t.expect(t.ev("dueList().length === 0 && cardsAll().some(c => c.id === 'core:chestnut')"), "cardsAll covers it, due tomorrow, not today");
+  await t.click("[data-lt-back]", { wait: 700 });
+  await t.waitFor(".cp-page", 6000, "back on the name page");
+});

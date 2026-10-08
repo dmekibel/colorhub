@@ -71,6 +71,9 @@ function lxMake(kind, e) {
   c.fam = lxFam(c.h);
   c.unit = { title: c.fam, fam: true };
   ["vs", "d", "vsC"].forEach(k => Object.defineProperty(c, k, { get: () => lxNb(c)[k], enumerable: false, configurable: true }));
+  // the meet page's second line: the other names the lists give this same color (honest, from the data)
+  const also = (e.also || []).filter(a => !/[()0-9]/.test(a)).slice(0, 3);
+  if (also.length) c.o = `Also called ${also.map(lxLower).join(", ")}${(e.also || []).length > also.length ? ", and more" : ""}.`;
   return c;
 }
 // The core list as learnable colors: the first units' own objects where the name is one of them, else a "core" color.
@@ -364,7 +367,7 @@ function lxPlan() {
       cs.forEach(c => { c.ord = ord++; c._nb = null; });
       const u = { id: "x:" + lxSlug(cs[0].n), i: units.length, gen: true, stage: st.k, colors: cs, field: extra.field || "" };
       u.title = lxTitle(cs);
-      u.label = `Unit ${u.i + 1} · ${lxStageWord(st)}`;
+      u.label = `Unit ${u.i + 1} · to ${st.name ? st.name + ", " : ""}${lxNum(st.n)} words`;
       cs.forEach(c => { c.unit = u; });
       st.units.push(u); units.push(u);
     });
@@ -411,7 +414,7 @@ function lxPlan() {
 }
 // "Puce, slate & rust": the unit's three most useful names (two if they're long)
 function lxTitle(cs) {
-  const ns = cs.slice(0, 3).map((c, i) => i ? lxLower(c.n) : c.n);
+  const ns = cs.slice(0, 3).map((c, i) => { const s = lxLower(c.n); return i ? s : s.charAt(0).toUpperCase() + s.slice(1); });
   const use = ns.join("").length > 30 ? ns.slice(0, 2) : ns;
   return use.length > 1 ? use.slice(0, -1).join(", ") + " & " + use[use.length - 1] : use[0];
 }
@@ -484,7 +487,7 @@ function lxPathHtml(nu) {
     }
     // a stage still ahead: its name and a thin band of what it holds (or a quiet one, before the lists load)
     const cs = st.units.flatMap(u => u.colors);
-    rows.push(`<div class="path-row path-future lx-stage-next">${cs.length ? band(sample(cs, 28).map(c => c.h), "path-band-future") : `<div class="path-band path-band-future lx-band-wait"></div>`}<div class="path-cap"><span class="title-3 path-future-name">${esc(head)}</span><span class="note">${st.units.length ? `${st.units.length} units` : st.k < 2 ? "" : "Waiting"}</span></div></div>`);
+    rows.push(`<div class="path-row path-future lx-stage-next">${cs.length ? band(sample(cs, 28).map(c => c.h), "path-band-future") : `<div class="path-band path-band-future lx-band-wait"></div>`}<div class="path-cap"><span class="title-3 path-future-name">${esc(head)}</span><span class="note">${st.units.length ? `${st.units.length} units` : ""}</span></div></div>`);
   });
   return rows.join("");
 }
@@ -520,6 +523,38 @@ function lxGroup(c, n = 4) {
   return out;
 }
 
+// ---------- Bet on tomorrow (design/IDEAS-10X/learning.md idea 6) ----------
+// At the end of a lesson: "How many of these will you name tomorrow?" One tap. The next review that recalls
+// them settles it ("You bet 2 of 4. You named 3."): calibration, not a score. A low bet is never punished, a
+// same-day answer never settles a bet, and nothing here touches Yours. S.bets[day] = { ids, n, got?, of? }.
+function lxBetHtml(ids) {
+  const n = ids.length; if (n < 2 || n > 12) return "";
+  const opts = n <= 6 ? Array.from({ length: n + 1 }, (_, i) => i) : [0, Math.round(n / 4), Math.round(n / 2), Math.round(3 * n / 4), n];
+  return `<div class="lx-bet" data-lx-bet><p class="lx-bet-q">How many of these will you name tomorrow?</p>
+    <div class="lx-bet-row">${opts.map(i => `<button class="lx-bet-b" data-n="${i}">${i}</button>`).join("")}</div>
+    <p class="lx-bet-a note" aria-live="polite"></p></div>`;
+}
+function lxBetWire(el, ids) {
+  const box = el.querySelector("[data-lx-bet]"); if (!box) return;
+  const t = today(), prev = S.bets && S.bets[t];
+  const mark = n => { box.querySelectorAll(".lx-bet-b").forEach(b => b.classList.toggle("on", +b.dataset.n === n)); box.querySelector(".lx-bet-a").textContent = `Noted: ${n} of ${ids.length}. Tomorrow's review settles it.`; };
+  if (prev && prev.ids.join() === ids.join()) mark(prev.n);
+  box.querySelectorAll(".lx-bet-b").forEach(b => b.onclick = () => {
+    S.bets = S.bets || {}; S.bets[t] = { ids: ids.slice(), n: +b.dataset.n }; save(); buzz(8); mark(+b.dataset.n);
+  });
+}
+// After a review: settle the oldest open bet from an earlier day whose colors came up today.
+function lxBetSettle() {
+  if (!S.bets) return "";
+  const t = today(), day = Object.keys(S.bets).filter(d => d < t && S.bets[d] && S.bets[d].got == null).sort()[0];
+  if (!day) return "";
+  const bet = S.bets[day], seen = bet.ids.filter(id => S.cards[id] && S.cards[id].last === t);
+  if (!seen.length) return "";
+  bet.got = seen.filter(id => S.cards[id].b > 0).length; bet.of = seen.length; bet.at = t; save();
+  const when = day === addDays(t, -1) ? "Yesterday" : "Last time";
+  return `${when} you bet you'd name ${bet.n} of ${bet.ids.length}. You named ${bet.got}${bet.of < bet.ids.length ? ` of the ${bet.of} that came up` : ""}.`;
+}
+
 // ---------- routes and doors ----------
 // #/learnit/<slug> for a name past the first units (js/router.js): the core list may still be loading.
 function lxRouteLearnIt(slug) {
@@ -540,10 +575,22 @@ function lxShot(arg = "room") {
     if (arg === "room") return home();
     if (arg === "unit" || arg === "meet") { meet(nu); if (arg === "meet") setTimeout(() => { const p = document.getElementById("pager"); if (p) p.scrollTop = p.clientHeight; }, 300); return; }
     if (arg === "deck") { deck("learn", { unit: nu }); setTimeout(() => dispatchEvent(new KeyboardEvent("keydown", { key: " " })), 600); return; }
-    const c = lxByName("Puce") || gen[0].colors[0];
+    if (arg === "done") return unitDone(nu, 6, 8);
+    if (arg === "reviewdone") {
+      const ids = gen[0].colors.slice(0, 4).map(x => x.id);
+      S.bets = { [addDays(t, -1)]: { ids, n: 2 } };
+      ids.forEach((id, i) => { S.cards[id].last = t; S.cards[id].b = i < 3 ? 2 : 0; });
+      return reviewDone(7, 9);
+    }
+    const c = lxByName("Chestnut") || gen[3].colors[0];   // a name past the first units, not met yet
+    if (arg === "ltdone") return hmLtDone([c, ...lxGroup(c)], c);
     if (arg === "learnit") return hmLearnIt(c);
     if (arg === "learnitpage") { hmLearnIt(c); setTimeout(() => { const p = document.querySelector("#ltPager"); if (p) p.scrollTop = p.clientHeight * 2; }, 300); return; }
-    if (arg === "edge" && typeof hmLtEdge === "function") return hmLtEdge([c, ...lxGroup(c)], c, () => {});
+    if ((arg === "edge" || arg === "edgedone") && typeof hmLtEdge === "function") {
+      hmLtEdge([c, ...lxGroup(c)], c, () => {});
+      if (arg === "edgedone") setTimeout(() => { const b = document.querySelectorAll(".lt-edge-b")[5]; if (b) b.click(); }, 400);
+      return;
+    }
     return home();
   });
 }
