@@ -1,3 +1,5 @@
+> **Voice decision (David, 2026-10-08):** "Keep it as is: grounded, encyclopedic, sourced." The pilot articles (Madder, Prussian blue, Mauve) are the models.
+
 # Article voice: how ColorHub writes about a color
 
 Learned from the 8 pilot articles (2026-10-08: Madder, Prussian Blue, Indigo, Mauve, Isabelline, Delft Blue, Dark Slate Grey, B'dazzled Blue). Every batch writer reads this, `data/articles/SCHEMA.md`, CLAUDE.md's myth list, and one pilot of the same tier before writing.
