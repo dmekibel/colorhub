@@ -447,7 +447,7 @@ function hmHome() {
     viewBtn.onclick = () => { if (longFired) { longFired = false; return; } chooser("show"); };
     const favBtn = $("#hmFav"); if (favBtn) favBtn.onclick = () => { if (typeof hmDismissHint === "function") hmDismissHint(); buzz(6); fvPickStart(el, ctrl); };   // js/favs.js: Pick favorites
   }
-  { const study = $("[data-pr-study]"); if (study) study.onclick = () => { const mid = ctrl && ctrl.current(); prQuick({ seed: mid ? { n: mid.n, h: mid.h } : null, items: items.slice(0, 400).map(x => x.h), label: hmViewLabel(), source: mid ? "alike" : "these" }); }; }   // js/practice.js
+  { const study = $("[data-pr-study]"); if (study) study.onclick = () => { const mid = ctrl && ctrl.current(); prQuick({ seed: mid ? { n: mid.n, h: mid.h } : null, items: items.slice(0, 400).map(x => x.h), label: hmViewLabel(), src: "map", source: mid ? "alike" : "these" }); }; }   // js/practice.js
   // (the swipe-up-from-the-bottom shortcut to Learn is gone: David, 2026-10-08, a scroll near the bottom kept landing
   // in Learn. The rooms button is the way in.)
   // L18 B3: the mirror gesture, a pull down from the top of Home opens search (View's magnifier stays the second way in)

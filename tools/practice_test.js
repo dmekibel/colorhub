@@ -235,5 +235,62 @@ const kinds = ["card", "quiz-name", "quiz-color", "type", "say", "match", "pairs
 ok(kinds.every(k => run(`typeof PR_STEPS[${JSON.stringify(k)}].render === "function" && "by" in PR_STEPS[${JSON.stringify(k)}]`)), "every step kind has render() and by");
 ok(run(`Object.keys(PR_METHODS).every(m => typeof PR_RUN[m] === "function")`), "every method has a runner");
 
+// ---------- Learn a set (js/learnset.js): Study keeps cards and the set, Keep going resumes, the sheet picks well ----------
+run(read("js/learnset.js"));
+run(`S.cards = {}; S.practice = undefined; var KNOWN = new Set(); var knowState = c => KNOWN.has(String(c.n).toLowerCase()) ? "yours" : "none";`);
+{
+  const T1 = run(`addDays(today(), 1)`);
+  run(`var LS_ITEMS = ALL.filter(c => !c.basic).slice(0, 6).map(prOfApp);`);
+  ok(run(`LS_ITEMS.length === 6 && LS_ITEMS.every(it => it.c && it.c.id)`), "Study test items are learnable colors with card ids");
+  // a session that answers 4 of the 6, one of them wrong; the 5th was already yours, so it gets no card
+  run(`KNOWN.add(LS_ITEMS[4].key);
+    var LS_SESS = prSession("learn", { dir: "f" }, LS_ITEMS, {}); var LS_LV = lsLevels(LS_ITEMS);
+    LS_ITEMS.slice(0, 5).forEach((it, i) => prRecord(LS_SESS, it, { ok: i !== 1 }, "quiz-name"));
+    LS_LV.get(LS_ITEMS[0].key).lv = 3; LS_LV.get(LS_ITEMS[2].key).lv = 2;
+    S.cards[LS_ITEMS[3].c.id] = { b: 3, due: addDays(today(), 9), since: addDays(today(), -30), own: true };
+    var LS_MADE = lsKeep(LS_SESS, LS_ITEMS, { label: "Teal and its look-alikes", src: "alike", route: "#/color/teal" }, LS_LV);`);
+  const id = run(`lsSetId(LS_ITEMS)`), c0 = run(`S.cards[LS_ITEMS[0].c.id]`), c1 = run(`S.cards[LS_ITEMS[1].c.id]`);
+  ok(run(`LS_MADE.length`) === 3, "Study end: a new review card for each answered color (3 of 4: one already had a card, one was already yours)");
+  ok(c0 && c0.b === 0 && c0.due === T1 && c0.since === run(`today()`) && c0.own === false && c0.n && c0.h, "the new card is the path's card: box 0, due tomorrow, after a night's sleep, not yours");
+  ok(c1 && c1.due === T1, "a color answered wrong is in review too");
+  ok(c0.from === id && c1.from === id, "each card remembers the set it came from");
+  ok(run(`S.cards[LS_ITEMS[3].c.id].b === 3 && !S.cards[LS_ITEMS[3].c.id].from`), "an existing card is left as it was");
+  ok(run(`!S.cards[LS_ITEMS[4].c.id] && !S.cards[LS_ITEMS[5].c.id]`), "no card for a color already yours, or one never answered");
+  const rec = run(`lsState().sets[lsSetId(LS_ITEMS)]`);
+  ok(rec && rec.t === "Teal and its look-alikes" && rec.src === "alike" && rec.r === "#/color/teal" && rec.hs.length === 6 && rec.at === run(`today()`), "the set is kept with its title, source and way back");
+  ok(rec.climbed.length === 1 && rec.climbed[0] === run(`LS_ITEMS[0].key`), "the set record knows which colors climbed");
+  run(`lsKeep(LS_SESS, LS_ITEMS, { label: "Teal and its look-alikes" }, LS_LV)`);
+  ok(run(`Object.keys(lsState().sets).length === 1 && lsState().sets[lsSetId(LS_ITEMS)].src === "alike" && S.cards[LS_ITEMS[0].c.id].due === addDays(today(), 1)`), "keeping again (a stopped session, then its results) adds nothing twice");
+  ok(run(`lsSetId(LS_ITEMS) === lsSetId(LS_ITEMS.slice().reverse())`), "a set's id doesn't depend on order");
+  run(`S.practice.ls.sets = "garbage"`);
+  ok(run(`typeof lsState().sets === "object" && !Array.isArray(lsState().sets)`), "an unreadable sets field is repaired, not thrown on");
+
+  // Keep going: each color resumes at its rung, climbed ones stay climbed
+  run(`var LS_RES = lsLevels(LS_ITEMS, new Map([[LS_ITEMS[0].key, 3], [LS_ITEMS[2].key, 2], [LS_ITEMS[1].key, 1]]));`);
+  ok(run(`LS_RES.get(LS_ITEMS[0].key).lv === 3 && LS_RES.get(LS_ITEMS[2].key).lv === 2 && LS_RES.get(LS_ITEMS[1].key).lv === 1`), "Keep going resumes each color's level, not 0");
+  ok(run(`LS_RES.get(LS_ITEMS[4].key).lv === 1 && LS_RES.get(LS_ITEMS[5].key).lv === 0`), "colors without a saved level start where a fresh session would (yours a rung up)");
+  ok(run(`lsLevels(LS_ITEMS).get(LS_ITEMS[0].key).lv === 0`), "a fresh session starts unknown colors at 0");
+
+  // The sheet's pick: unknown first, yours left out, every pair fair
+  run(`KNOWN = new Set(); var LS_SRC = prFirst(80); LS_SRC.slice(0, 20).forEach(it => KNOWN.add(it.key));`);
+  const pk = run(`(() => { const p = lsPick(LS_SRC, null); return { keys: p.list.map(x => x.key), yoursOut: p.yoursOut, twinsOut: p.twinsOut }; })()`);
+  ok(pk.keys.length > 10 && pk.keys.every(k => !run(`KNOWN.has(${JSON.stringify(k)})`)), "the pick leaves out the colors you can already name");
+  ok(pk.yoursOut === 20, "and counts them (20 you know left out)");
+  ok(run(`(() => { const l = lsPick(LS_SRC, null).list; return l.every((a, i) => l.every((b, j) => i === j || de2000(a.h, b.h) >= 5)); })()`), "every pair in the pick is at least ΔE 5 apart (fair rounds)");
+  ok(pk.twinsOut === 80 - 20 - pk.keys.length, "near-twins dropped are counted");
+  ok(run(`lsPick(LS_SRC, null).list[0].key`) === run(`LS_SRC.find(it => !KNOWN.has(it.key)).key`), "with no seed, the source's own order breaks ties");
+  run(`KNOWN = new Set([LS_SRC[30].key]);`);
+  const near = run(`(() => { const seed = prByKey("teal"), l = lsPick(LS_SRC, seed).list; return l.slice(0, 5).map(x => de2000(seed.h, x.h)); })()`);
+  ok(near.every((d, i) => !i || near[i - 1] <= d), "with a seed (the map's center), the nearest unknown colors come first");
+  ok(run(`lsPick(LS_SRC, null).list.some(x => x.key === LS_SRC[30].key)`) === false, "a known color isn't picked while there are others");
+  run(`KNOWN = new Set(LS_SRC.slice(0, 3).map(x => x.key));`);
+  ok(run(`lsPick(LS_SRC.slice(0, 3), null).list.length`) === 3, "a set you fully know still opens (nothing left out)");
+  run(`KNOWN = new Set([LS_SRC[0].key, LS_SRC[1].key]);`);
+  const why = run(`(() => { const p = lsPick(LS_SRC.slice(0, 12), null); return lsWhy(p.list, p, true); })()`);
+  ok(/^The \d+ you can't name yet · 2 you know left out/.test(why), `the sheet says why: "${why}"`);
+  ok(run(`(() => { KNOWN = new Set([LS_SRC[0].key]); return lsWhy(LS_SRC.slice(0, 4), null, false); })()`) === "3 you can't name yet, 1 you know", "look-alike sets say how many you know");
+  run(`KNOWN = new Set(); S.cards = {}; S.practice = undefined;`);
+}
+
 console.log(`practice tests: ${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

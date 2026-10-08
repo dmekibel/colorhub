@@ -3,7 +3,7 @@
 // phases always there: Look (nothing hidden, six views) and Study (the mixed, adaptive session, like Quizlet Learn).
 //   lsOpen({ seed, items, label, back })   the sheet: live preview, a size slider and a closeness slider
 //   lsLook(items, { label, view, back })    the Look screen
-//   lsStudy(items, { label, back })         the mixed session, then its results
+//   lsStudy(items, { label, back, src, route }, resume)   the mixed session, then its results (lsKeep: cards + the set)
 // Builds on js/practice.js (the PR_STEPS step contract, prRecord for the Learner Model and honest scheduling).
 
 const LS_CLOSE = [["Twins", 2.5, "Very hard to tell apart"], ["Close", 5, "Easy to mix up"], ["Neighbors", 9, "Related, each its own"], ["Cousins", 14, "Same corner of the map"], ["Wide", 22, "A gentle tour"]];
@@ -11,9 +11,19 @@ const LS_VIEWS = [["grid", "Grid"], ["strip", "Strip"], ["pairs", "Pairs"], ["ma
 const LS_INPLAY = 4;          // colors being worked on at once
 const LS_MATCH_EVERY = 6;     // a Matching round after this many single questions
 const LS_COMBO = [3, 5, 10, 15, 20, 30];
-const lsState = () => { const p = prState(); return p.ls || (p.ls = { size: 10, close: 1, typing: true, view: "grid", best: {} }); };
+// S.practice.ls (kept by migrateState as an unknown key; prState and this repair it, never wipe it). sets: the Study sets
+// you worked on, with where they came from: { id: { t title, src kind, r route, hs hexes, at first day, last day, climbed keys } }
+const lsState = () => {
+  const p = prState(), ls = p.ls || (p.ls = { size: 10, close: 1, typing: true, view: "grid", best: {} });
+  if (!ls.best || typeof ls.best !== "object") ls.best = {};
+  if (!ls.sets || typeof ls.sets !== "object" || Array.isArray(ls.sets)) ls.sets = {};
+  return ls;
+};
 const lsHexes = items => items.map(it => it.h).join("");
 const lsSetKey = items => items.map(it => it.key).sort().join("|");
+// a short stable id for a set (its sorted keys, hashed): a review card's "from" points here
+const lsSetId = items => { let h = 5381; const k = lsSetKey(items); for (let i = 0; i < k.length; i++) h = (h * 33 + k.charCodeAt(i)) >>> 0; return "s" + h.toString(36); };
+const LS_SETS_MAX = 60;
 function lsExitTo(back) {
   return () => { if (typeof back === "function") back(); else if (back && /^#\/./.test(back)) { if (!openRoute(back)) go(S.tab || "learn"); } else go(S.tab || "learn"); };
 }
@@ -25,6 +35,41 @@ function lsAlike(seed, n, gap) {
   const out = [seed], cand = prCore().filter(x => x.key !== seed.key && x.h !== seed.h).map(x => ({ x, d: de2000(seed.h, x.h) })).sort((a, b) => a.d - b.d);
   for (const o of cand) { if (out.length >= n) break; if (out.every(p => de2000(p.h, o.x.h) >= gap)) out.push(o.x); }
   return out;
+}
+// What you can name already (the Learner Model, js/learner.js): none | met | learning | yours
+const LS_KNOW = { none: 0, met: 1, learning: 2, yours: 3 };
+const lsKnow = it => { try { return typeof knowState === "function" ? knowState({ n: it.n, h: it.h }) : "none"; } catch (e) { return "none"; } };
+// The sheet's pick from a big source (a painting, a palette, the map view): the colors you can't name yet first
+// (yours are left out while at least 3 others remain), then nearest the seed (else the source's own order), spread
+// so every pair is at least ΔE00 5 apart and each round is fair (falling back to 2.5, twins, for a tight source).
+const LS_FAIR = [5, 2.5], LS_PICK_MAX = 60;
+function lsPick(these, seed) {
+  const st = these.map((it, i) => ({ it, i, k: lsKnow(it), d: seed ? de2000(seed.h, it.h) : 0 }));
+  const open = st.filter(x => x.k !== "yours"), dropYours = open.length >= 3;
+  const pool = (dropYours ? open : st).slice().sort((a, b) => LS_KNOW[a.k] - LS_KNOW[b.k] || a.d - b.d || a.i - b.i);
+  const spread = gap => { const out = []; for (const x of pool) { if (out.length >= LS_PICK_MAX) break; if (out.every(y => de2000(y.it.h, x.it.h) >= gap)) out.push(x); } return out; };
+  let got = spread(LS_FAIR[0]);
+  if (got.length < Math.min(3, pool.length)) got = spread(LS_FAIR[1]);
+  return { list: got.map(x => x.it), know: new Map(st.map(x => [x.it.key, x.k])), yoursOut: dropYours ? st.length - open.length : 0,
+    twinsOut: got.length < LS_PICK_MAX ? Math.max(0, pool.length - got.length) : 0 };
+}
+// the line under the preview that says why these colors: "The 8 you can't name yet · 3 you know left out"
+function lsWhy(items, pick, all) {
+  const know = pick ? pick.know : new Map(items.map(it => [it.key, lsKnow(it)]));
+  const nNew = items.filter(it => know.get(it.key) !== "yours").length, nKnow = items.length - nNew, parts = [];
+  if (!nKnow) parts.push(nNew === 1 ? (all ? "The one you can't name yet" : "One you can't name yet") : `${all ? "The " : ""}${nNew} you can't name yet`);
+  else if (nNew) parts.push(`${nNew} you can't name yet, ${nKnow} you know`);
+  else parts.push(nKnow === 1 ? "One you can name already" : `All ${nKnow} you can name already`);
+  if (pick && pick.yoursOut) parts.push(`${pick.yoursOut} you know left out`);
+  if (pick && pick.twinsOut) parts.push(`${pick.twinsOut} near-twin${pick.twinsOut === 1 ? "" : "s"} left out`);
+  return parts.join(" · ");
+}
+// where a set came from, kept with it for tomorrow's review: alike | painting | color | palette | photo | daily | set …
+function lsSrcOf(o, from, route) {
+  if (from === "alike") return "alike";
+  if (o.src) return String(o.src);
+  const m = typeof route === "string" && route.match(/^#\/(painting|gallery|color|page|story|palette|photo|today|daily|explore)\b/);
+  return m ? (m[1] === "gallery" ? "painting" : m[1] === "page" ? "color" : m[1]) : "set";
 }
 
 // ======================================================================
@@ -41,7 +86,7 @@ function lsOpen(o = {}) {
     <div class="pr-qhead"><h2 class="pr-t2" data-qtitle></h2><span class="pr-note" data-qcount></span></div>
     <div class="ls-from" data-from></div>
     <div class="pr-plate ls-prev" data-prev></div>
-    <p class="ls-names" data-names></p>
+    <div class="ls-say"><p class="ls-names" data-names></p><p class="ls-why" data-why></p></div>
     <label class="ls-slide" data-sizerow><span class="ls-sl-t">How many</span><input type="range" min="3" step="1" data-size aria-label="How many colors"><b class="ls-sl-v" data-sizev></b></label>
     <label class="ls-slide" data-closerow><span class="ls-sl-t">How close</span><input type="range" min="0" max="${LS_CLOSE.length - 1}" step="1" data-closeness aria-label="How close the look-alikes are"><b class="ls-sl-v" data-closev></b></label>
     <p class="ls-closehint" data-closehint></p>
@@ -52,12 +97,13 @@ function lsOpen(o = {}) {
   sh.classList.add("pr-qsheet", "ls-qsheet");
   const $s = s => sh.querySelector(s), size = $s("[data-size]"), closeIn = $s("[data-closeness]");
   let items = [];
+  const pick = these.length ? lsPick(these, seed) : { list: [], know: new Map(), yoursOut: 0, twinsOut: 0 };
   const build = () => {
     if (st.from === "alike" && seed) return lsAlike(seed, st.size, LS_CLOSE[st.close][1]);
-    return these.slice(0, st.size);
+    return pick.list.slice(0, st.size);
   };
   const paint = () => {
-    const max = st.from === "alike" ? 30 : Math.max(these.length, 1);
+    const max = st.from === "alike" ? 30 : Math.max(pick.list.length, 1);
     size.max = max; size.disabled = max <= 3; if (st.size > max) st.size = max; if (st.size < Math.min(3, max)) st.size = Math.min(3, max);
     size.value = st.size;
     items = build();
@@ -70,6 +116,8 @@ function lsOpen(o = {}) {
     $s("[data-names]").textContent = items.slice(0, 6).map(prName).join(", ") + (items.length > 6 ? `, and ${items.length - 6} more` : "");
     $s("[data-sizev]").textContent = st.size >= max && st.from === "these" && max > 3 ? `All ${max}` : String(items.length);
     $s("[data-sizerow]").hidden = max <= 3;
+    const fromThese = st.from === "these";
+    $s("[data-why]").textContent = items.length ? lsWhy(items, fromThese ? pick : null, fromThese && items.length >= pick.list.length) : "";
     const showClose = st.from === "alike";
     $s("[data-closerow]").hidden = !showClose; $s("[data-closehint]").hidden = !showClose;
     closeIn.value = st.close; $s("[data-closev]").textContent = LS_CLOSE[st.close][0]; $s("[data-closehint]").textContent = LS_CLOSE[st.close][2] + (items.length < st.size ? `. Only ${items.length} names are that far apart here.` : ".");
@@ -84,6 +132,7 @@ function lsOpen(o = {}) {
   $s("[data-typing]").onchange = () => { remember(); buzz(4); };
   const exit = lsExitTo(backTo), again = () => setTimeout(() => lsOpen({ ...o, back: backTo }), 60);
   const label = () => st.from === "alike" && seed ? `${prName(seed)} and its look-alikes` : (o.label || "These colors");
+  const setOpts = () => ({ label: label(), back: exit, reopen: again, route: typeof backTo === "string" ? backTo : "", src: lsSrcOf(o, st.from, backTo) });
   sh.addEventListener("click", e => {
     const f = e.target.closest("[data-fromk]"); if (f) { st.from = f.dataset.fromk; buzz(4); paint(); return; }
     const m = e.target.closest("[data-method]"); if (!m || !items.length) return;
@@ -91,8 +140,8 @@ function lsOpen(o = {}) {
     if (m.dataset.method === "lesson") return hmLearnIt(app);
     prPlay(m.dataset.method, { items: prShuffle(items), label: label(), exit, other: () => { exit(); again(); } });
   });
-  $s("[data-look]").onclick = () => { if (!items.length) return; remember(); close(); buzz(8); lsLook(items, { label: label(), back: exit, reopen: again }); };
-  $s("[data-go]").onclick = () => { if (!items.length) return; remember(); close(); buzz(8); lsStudy(items, { label: label(), back: exit, reopen: again }); };
+  $s("[data-look]").onclick = () => { if (!items.length) return; remember(); close(); buzz(8); lsLook(items, setOpts()); };
+  $s("[data-go]").onclick = () => { if (!items.length) return; remember(); close(); buzz(8); lsStudy(items, setOpts()); };
   paint();
   return { sh, close };
 }
@@ -197,16 +246,43 @@ function lsKindFor(q, typing, last) {
   if (k === last) k = lv <= 0 ? "quiz-color" : lv === 1 ? "quiz-name" : "quiz-color";   // never the same kind twice in a row
   return k;
 }
-function lsStudy(items, o = {}) {
+// Study keeps what you did. Every color you answered joins spaced review with the same new card as a path unit or
+// Learn it (cardNew, js/learnmore.js: due tomorrow, so the first gap crosses a night's sleep), tagged with the set it
+// came from; and the set itself is kept (lsState().sets) with its source, so a review can say where a name came from.
+// A color that was already yours when the session began gets no card (a new one would read as "learning" again).
+// Climbing in one session never makes a color yours: only tomorrow's unassisted recall does (isMine, js/pickit.js).
+function lsKeep(sess, items, o, lvOf) {
+  const t = today(), ls = lsState(), id = lsSetId(items), made = [];
+  sess.first.forEach(f => {
+    const it = f.it, c = it && it.c, q = lvOf && lvOf.get(it.key);
+    if (!c || !c.id || c.basic || S.cards[c.id] || (q && q.y)) return;
+    S.cards[c.id] = { ...(typeof cardNew === "function" ? cardNew(c, t) : { b: 0, due: addDays(t, 1), since: t, own: false, n: c.n, h: c.h }), from: id };
+    made.push(c.id);
+  });
+  const old = ls.sets[id] || {};
+  ls.sets[id] = { t: String(o.label || old.t || "").slice(0, 80), src: o.src || old.src || "set", r: o.route || old.r || "", hs: items.map(it => it.h),
+    at: old.at || t, last: t, climbed: lvOf ? [...lvOf.values()].filter(q => q.lv >= 3).map(q => q.it.key) : (old.climbed || []) };
+  const ids = Object.keys(ls.sets);
+  if (ids.length > LS_SETS_MAX) ids.sort((a, b) => String(ls.sets[a].last).localeCompare(String(ls.sets[b].last))).slice(0, ids.length - LS_SETS_MAX).forEach(k => { delete ls.sets[k]; });
+  save();
+  return made;
+}
+// Each color's rung (0 pick a name · 1 pick a color · 2 type · 3 climbed). A color already yours starts a rung up
+// (y: it gets no new card). resume: Map(key -> rung) from a stopped session, so "Keep going" picks each one up there.
+function lsLevels(items, resume) {
+  return new Map(items.map(it => { const y = lsKnow(it) === "yours", r = resume && resume.get(it.key); return [it.key, { it, y, lv: r != null ? Math.max(0, Math.min(3, +r || 0)) : y ? 1 : 0, n1: 0 }]; }));
+}
+function lsStudy(items, o = {}, resume = null) {
   if (!items.length) return;
   const ls = lsState(), typing = ls.typing !== false, n = items.length;
   const sess = prSession("learn", { dir: "f" }, items, { deckAll: items, label: o.label || "" });
-  const lvOf = new Map(items.map(it => [it.key, { it, lv: typeof knowState === "function" && it.c && knowState(it.c) === "yours" ? 1 : 0, n1: 0 }]));
-  const fresh = items.slice(), queue = [];
-  let asked = 0, sinceMatch = 0, combo = 0, bestCombo = 0, lastKind = "", mastered = 0, boss = null, stopped = false;
+  const lvOf = lsLevels(items, resume);
+  const fresh = items.filter(it => lvOf.get(it.key).lv < 3), queue = [];
+  let asked = 0, sinceMatch = 0, combo = 0, bestCombo = 0, lastKind = "", climbed = n - fresh.length, boss = null, stopped = false;
+  const keep = () => lsKeep(sess, items, o, lvOf);
   // screenshot states (#lsshot=study:…): start mid-session
   if (o.shot === "match") { lvOf.forEach(q => { q.lv = 1; }); sinceMatch = LS_MATCH_EVERY; fresh.length = 0; items.forEach(it => queue.push(lvOf.get(it.key))); }
-  if (o.shot === "boss") { lvOf.forEach(q => { q.lv = 3; }); mastered = n; fresh.length = 0; }
+  if (o.shot === "boss") { lvOf.forEach(q => { q.lv = 3; }); climbed = n; fresh.length = 0; }
   if (o.shot === "grad") { combo = 4; bestCombo = 4; const q = lvOf.get(items[0].key); q.lv = 2; fresh.splice(fresh.indexOf(items[0]), 1); queue.push(q); lvOf.forEach(x => { if (x !== q && x.lv === 0 && Math.random() < .5) x.lv = 1; }); }
   const el = show(`<header class="pr-top"><button class="pr-x" data-close aria-label="Close">${prX()}</button>
       <div class="ls-prog">${items.map(it => `<i data-k="${esc(it.key)}" style="--c:${it.h}"></i>`).join("")}</div>
@@ -220,7 +296,7 @@ function lsStudy(items, o = {}) {
   onKey = e => { if (e.key === "Escape") return el.querySelector("[data-close]").click(); if (stepKey) stepKey(e); };
   const status = () => {
     const met = [...lvOf.values()].filter(q => q.lv > 0 && q.lv < 3).length;
-    el.querySelector("[data-status]").innerHTML = boss ? `Final round` : `<span class="pr-code">${mastered}</span> of <span class="pr-code">${n}</span> mastered${met ? ` · <span class="pr-code">${met}</span> getting there` : ""}`;
+    el.querySelector("[data-status]").innerHTML = boss ? `Final round` : `<span class="pr-code">${climbed}</span> of <span class="pr-code">${n}</span> climbed${met ? ` · <span class="pr-code">${met}</span> getting there` : ""}`;
     lvOf.forEach((q, k) => { const s = el.querySelector(`.ls-prog i[data-k="${CSS.escape(k)}"]`); if (s) s.style.setProperty("--lv", Math.min(3, q.lv) / 3); s && s.classList.toggle("done", q.lv >= 3); });
   };
   const pop = (txt, cls = "") => { const p = el.querySelector("[data-pop]"); p.className = "ls-pop " + cls; p.textContent = txt; void p.offsetWidth; p.classList.add("go"); };
@@ -231,11 +307,11 @@ function lsStudy(items, o = {}) {
     if (ok && LS_COMBO.includes(combo)) { pop(`${combo} in a row`, "streak"); buzz([8, 30, 8, 30, 16]); lsSfx("sfx", combo >= 10 ? "best" : "combo", items.map(it => it.h)); }
   };
   const graduate = it => {
-    mastered++; buzz([10, 30, 20]); coachDone();
+    climbed++; buzz([10, 30, 20]); coachDone();
     lsSfx("sfxColor", it.h, { long: true }); setTimeout(() => lsSfx("sfx", "best", [it.h]), 200);
     const seg = el.querySelector(`.ls-prog i[data-k="${CSS.escape(it.key)}"]`); if (seg) { seg.classList.remove("pop"); void seg.offsetWidth; seg.classList.add("pop"); }
     const g = el.querySelector("[data-grad]");
-    g.innerHTML = `<span class="ls-gchip"><i style="--c:${it.h}"></i><b>${esc(prName(it))}</b><span>mastered</span></span>`;
+    g.innerHTML = `<span class="ls-gchip"><i style="--c:${it.h}"></i><b>${esc(prName(it))}</b><span>climbed</span></span>`;
     g.classList.remove("go"); void g.offsetWidth; g.classList.add("go");
   };
   const climb = (q, ok) => {
@@ -248,7 +324,7 @@ function lsStudy(items, o = {}) {
   };
   el._lsFx = { bump, graduate };   // screenshot hook
   const ctx = extra => ({ deck: items, feedback: true, setKey, screen: el, ...extra });
-  el.querySelector("[data-close]").onclick = () => { stopped = true; sess.ended = true; if (sess.first.size) lsResults(sess, { items, o, stopped: true, bestCombo, mastered, lvOf }); else (o.back || lsExitTo(""))(); };
+  el.querySelector("[data-close]").onclick = () => { stopped = true; sess.ended = true; if (sess.first.size) lsResults(sess, { items, o, stopped: true, bestCombo, climbed, lvOf }); else (o.back || lsExitTo(""))(); };
   const coachDone = () => { const c = el.querySelector(".pr-coach"); if (c && !c.hidden) { c.hidden = true; const p = prState(); p.seen.learnset = today(); save(); } };
   (async () => {
     status();
@@ -262,7 +338,7 @@ function lsStudy(items, o = {}) {
         const res = await PR_STEPS.match.render(stage, set.map(q => q.it), ctx({ note: "Pair each name with its color" }));
         if (sess.ended || !stage.isConnected) return;
         (res.per || []).forEach(p => { const q = lvOf.get(p.item.key); prRecord(sess, p.item, { ok: p.ok, answer: p.answer, ms: res.ms / set.length }, "match"); climb(q, p.ok); if (!p.ok) { const i = queue.indexOf(q); if (i > 1) { queue.splice(i, 1); queue.splice(1, 0, q); } } });
-        bump(res.ok); lastKind = "match"; status(); coachDone();
+        keep(); bump(res.ok); lastKind = "match"; status(); coachDone();
         continue;
       }
       const q = next();
@@ -273,7 +349,7 @@ function lsStudy(items, o = {}) {
       if (sess.ended || !stage.isConnected) return;
       prRecord(sess, q.it, res, kind);
       asked++; sinceMatch++; lastKind = kind; coachDone();
-      climb(q, !!res.ok); bump(!!res.ok);
+      climb(q, !!res.ok); keep(); bump(!!res.ok);
       if (q.lv < 3) queue.splice(res.ok ? Math.min(queue.length, 2 + q.lv) : Math.min(1, queue.length), 0, q);
       status();
     }
@@ -283,7 +359,7 @@ function lsStudy(items, o = {}) {
     if (n >= 3) {
       boss = true; status(); coachDone();
       const set = prShuffle(items).slice(0, 6);
-      stage.innerHTML = `<div class="ls-boss"><div class="ls-fan">${set.map((it, k) => `<i style="--c:${it.h};--k:${k}"></i>`).join("")}</div><span class="pr-note">Every color mastered</span><b class="pr-t1">Final round</b><p class="pr-notep">Lightning match: pair all ${set.length} as fast as you can.</p>${prPrimary("Go", "", "data-boss")}</div>`;
+      stage.innerHTML = `<div class="ls-boss"><div class="ls-fan">${set.map((it, k) => `<i style="--c:${it.h};--k:${k}"></i>`).join("")}</div><span class="pr-note">Every color climbed</span><b class="pr-t1">Final round</b><p class="pr-notep">Lightning match: pair all ${set.length} as fast as you can.</p>${prPrimary("Go", "", "data-boss")}</div>`;
       buzz([10, 40, 10, 40, 20]); lsSfx("sfxChord", set.map(it => it.h));
       await new Promise(r => { const b = stage.querySelector("[data-boss]"); b.onclick = r; setKey(e => { if (e.key === "Enter") r(); }); });
       if (sess.ended) return;
@@ -296,7 +372,7 @@ function lsStudy(items, o = {}) {
       bossMs = performance.now() - t0 + pen * 1000;
       lsSfx("sfx", "levelup", set.map(it => it.h));
     }
-    lsResults(sess, { items, o, bestCombo, mastered, lvOf, bossMs });
+    lsResults(sess, { items, o, bestCombo, climbed, lvOf, bossMs });
   })();
   return el;
 }
@@ -310,12 +386,19 @@ function lsResults(sess, r) {
   const pct = total ? Math.round(right * 100 / total) : 0, ms = performance.now() - sess.t0, ls = lsState(), key = lsSetKey(items);
   let best = null, newBest = false;
   if (r.bossMs != null) { const old = ls.best[key]; newBest = !old || r.bossMs < old.v; if (newBest) ls.best[key] = { v: r.bossMs, at: today() }; best = old ? old.v : null; save(); }
-  const masteredList = [...r.lvOf.values()].filter(q => q.lv >= 3).map(q => q.it);
+  const climbedList = [...r.lvOf.values()].filter(q => q.lv >= 3).map(q => q.it);
+  // everything answered is in spaced review now (lsKeep); the ring on each climbed color fills only when it's yours,
+  // which takes a check a day or more later (isMine, js/pickit.js), never this session
+  lsKeep(sess, items, o, r.lvOf);
+  const t = today(), cardOf = it => it.c && it.c.id ? S.cards[it.c.id] : null;
+  const isYours = it => lsKnow(it) === "yours";
+  const back = firsts.map(f => f.it).filter(it => { const c = cardOf(it); return c && c.due === addDays(t, 1) && !isYours(it); });
+  const betIds = back.map(it => it.c.id);
   // the mix-ups: every wrong pick in this session, as pairs (one row per pair)
   const seen = new Set(), mix = [];
   sess.log.forEach(l => { const a = l.answer; if (l.ok || !a || !a.h || !l.it) return; const other = prItemOf(a.h) || { n: a.n, h: a.h, key: a.n }; const k = [l.it.key, other.key].sort().join("|"); if (seen.has(k) || other.h === l.it.h) return; seen.add(k); mix.push({ a: l.it, b: other }); });
-  const all = masteredList.length === items.length && !r.stopped;
-  const title = all ? (items.length === 1 ? `<em>Mastered</em>` : `All ${items.length} <em>mastered</em>`) : `${masteredList.length} of ${items.length} <em>mastered</em>`;
+  const all = climbedList.length === items.length && !r.stopped;
+  const title = all ? (items.length === 1 ? `<em>Climbed</em>` : `All ${items.length} <em>climbed</em>`) : `${climbedList.length} of ${items.length} <em>climbed</em>`;
   const mono = v => `<span class="pr-code">${v}</span>`;
   const tiles = [[pct + "%", "first try"], [r.bestCombo, "best streak"], [prTime(ms), "time"], ...(r.bossMs != null ? [[prTime(r.bossMs), newBest && best != null ? "a new best" : best != null ? `final round · best ${prTime(best)}` : "final round"]] : [])];
   const shareText = `ColorHub · ${o.label || "A color set"} · ${String(title).replace(/<[^>]+>/g, "")} · ${pct}% first try · best streak ${r.bestCombo}${r.bossMs != null ? ` · final round ${prTime(r.bossMs)}` : ""}`;
@@ -324,7 +407,9 @@ function lsResults(sess, r) {
     <h1 class="pr-t1 pr-res-t">${title}</h1>
     <p class="pr-notep">${esc(o.label || "")}</p>
     <div class="ls-stats">${tiles.map(([v, t]) => `<div><b>${mono(v)}</b><span>${t}</span></div>`).join("")}</div>
-    ${masteredList.length ? `<p class="pr-note pr-sec-n">Mastered</p><div class="ls-chips">${masteredList.map(it => `<button class="ls-chip" data-h="${it.h}" data-n="${esc(it.n)}"><i style="--c:${it.h}"></i>${esc(prName(it))}</button>`).join("")}</div>` : ""}
+    ${back.length ? `<p class="ls-tmrw">${back.length === 1 ? "It comes" : back.length === items.length ? `All ${back.length} come` : `${back.length} come`} back tomorrow, after a night's sleep. Name ${back.length === 1 ? "it" : "them"} then and ${back.length === 1 ? "it's" : "they're"} yours.</p>` : ""}
+    ${climbedList.length ? `<p class="pr-note pr-sec-n">Climbed · each ring fills when you name it tomorrow</p><div class="ls-chips">${climbedList.map(it => { const y = isYours(it); return `<button class="ls-chip" data-h="${it.h}" data-n="${esc(it.n)}"><i style="--c:${it.h}"></i>${esc(prName(it))}<span class="ls-ring${y ? " on" : ""}" role="img" aria-label="${y ? "Yours" : "Fills when you name it tomorrow"}"></span></button>`; }).join("")}</div>` : ""}
+    ${typeof lxBetHtml === "function" ? lxBetHtml(betIds) : ""}
     ${mix.length ? `<p class="pr-note pr-sec-n">${mix.length === 1 ? "The pair you mixed up" : `The ${mix.length} pairs you mixed up`}</p><div class="pr-rows">${mix.slice(0, 8).map((m, i) => `<button class="pr-row pr-miss" data-mix="${i}"><span class="pr-pair2"><i style="--c:${m.a.h}"></i><i style="--c:${m.b.h}"></i></span><span class="pr-rowt"><b>${esc(prName(m.a))} and ${esc(prName(m.b))}</b><small>${esc(prDiff(m.a, m.b))}</small></span>${PR_ICON.chev}</button>`).join("")}</div>
       <button class="pr-text ls-sbs" data-a="pairs">See them side by side</button>` : ""}
     <div class="pr-grow"></div>
@@ -333,17 +418,20 @@ function lsResults(sess, r) {
   buzz(all ? [10, 30, 10, 30, 24] : 8); lsSfx("sfxChord", items.map(it => it.h));
   if (newBest && best != null) setTimeout(() => { if (el.isConnected) lsSfx("sfx", "best", items.map(it => it.h)); }, 1100);
   const exit = o.back || lsExitTo("");
+  if (typeof lxBetWire === "function") lxBetWire(el, betIds);
+  // "Keep going" picks each color up at its level; "Study again" (everything climbed) starts the climb over
+  const again = () => all ? lsStudy(items, o) : lsStudy(items, o, new Map([...r.lvOf].map(([k, q]) => [k, q.lv])));
   el.querySelector("[data-close]").onclick = () => exit();
   el.querySelectorAll("[data-h]").forEach(b => b.onclick = () => lsOpenPage({ h: b.dataset.h, n: b.dataset.n }));
   el.querySelectorAll("[data-mix]").forEach(b => b.onclick = () => lsOpenPage(mix[+b.dataset.mix].a));
   el.querySelectorAll("[data-a]").forEach(b => b.onclick = () => {
     const a = b.dataset.a;
-    if (a === "again") return lsStudy(items, o);
+    if (a === "again") return again();
     if (a === "look") return lsLook(items, o);
     if (a === "pairs") { const inv = [...new Set(mix.flatMap(m => [m.a, m.b]))]; return lsLook(prUnique(inv.filter(x => x.key)).length >= 2 ? prUnique(inv.filter(x => x.key)) : items, { ...o, view: "pairs" }); }
     if (a === "share") { try { if (navigator.share) return void navigator.share({ text: shareText }).catch(() => {}); navigator.clipboard.writeText(shareText); toast("Copied"); } catch (e) {} }
   });
-  onKey = e => { if (e.key === "Enter") lsStudy(items, o); if (e.key === "Escape") exit(); };
+  onKey = e => { if (e.key === "Enter" && !e.target.closest?.("button")) again(); if (e.key === "Escape") exit(); };
   return el;
 }
 
@@ -373,7 +461,7 @@ function lsShot(arg) {
     items.forEach((it, i) => { const nb = items[(i + 1) % items.length], ok = i % 3 !== 1; const r = { ok, answer: ok ? null : { kind: "pick", n: prName(nb), h: nb.h } }; sess.first.set(it.key, { it, ...r, kind: "quiz-name" }); sess.log.push({ it, kind: "quiz-name", ...r }); });
     sess.t0 = performance.now() - 192000;
     const lvOf = new Map(items.map(it => [it.key, { it, lv: 3 }]));
-    return lsResults(sess, { items, o: { label }, bestCombo: 9, mastered: items.length, lvOf, bossMs: 8400 });
+    return lsResults(sess, { items, o: { label }, bestCombo: 9, climbed: items.length, lvOf, bossMs: 8400 });
   }
 }
 if (typeof location !== "undefined" && /^#lsshot=/.test(location.hash)) {

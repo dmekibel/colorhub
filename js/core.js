@@ -305,7 +305,8 @@ function countUp(root) {
     const to = parseFloat(el.dataset.count), dec = (el.dataset.count.split(".")[1] || "").length;
     if (reduceMotion || !isFinite(to)) { el.textContent = el.dataset.count; return; }
     const t0 = performance.now(), dur = 900 + Math.min(600, to * 6);
-    const step = t => { const k = Math.min(1, (t - t0) / dur), e = 1 - (1 - k) ** 4; el.textContent = (to * e).toFixed(dec); if (k < 1) requestAnimationFrame(step); };
+    // a frame's timestamp can be a little earlier than t0, and a negative k overshoots below zero ("-1 colors yours")
+    const step = t => { const k = Math.max(0, Math.min(1, (t - t0) / dur)), e = 1 - (1 - k) ** 4; el.textContent = (to * e).toFixed(dec); if (k < 1) requestAnimationFrame(step); };
     el.textContent = (0).toFixed(dec); requestAnimationFrame(step);
     setTimeout(() => { el.textContent = to.toFixed(dec); }, dur + 150);   // lands even if animation frames are paused
   });

@@ -672,9 +672,30 @@ scenario("learnset", "Study: a mixed session runs to the results", async t => {
   t.notes.push("kinds: " + [...kinds].join(","));
   t.expect(kinds.has("qn") && (kinds.has("qc") || kinds.has("odd")), "the session mixed question kinds");
   t.expect(kinds.has("boss"), "the final round came up");
-  t.expect(/mastered/.test(t.text(".pr-res-t")), "the results title");
+  t.expect(/climbed/.test(t.text(".pr-res-t")), "the results title");
+  t.expect(/back tomorrow/.test(t.text(".ls-tmrw")), "the results say the colors come back tomorrow");
+  t.expect(t.$$(".ls-res .ls-ring").length >= 1, "each climbed color has a ring for tomorrow");
+  t.expect(t.ev("Object.values(S.cards).filter(c => c.from && c.due > today()).length") >= 1, "the Study colors are in spaced review");
   await t.click(".ls-res [data-a=look]", { wait: 500 });
   await t.waitFor(".ls-lookscr", 4000, "Look again from the results");
+});
+scenario("learnset", "Study: stop part-way, Keep going picks each color up at its level", async t => {
+  await H.openPage(t, "#/color/teal", "Teal");
+  await t.click("[data-learnit]", { wait: 600 });
+  await t.waitFor(".ls-sheet", 4000, "the Learn sheet");
+  t.ev("(() => { const r = document.querySelector('.ls-sheet [data-size]'); r.value = 4; r.dispatchEvent(new Event('input', { bubbles: true })); })()");
+  await t.click(".ls-sheet [data-go]", { wait: 600 });
+  await t.waitFor(".ls-study .pr-stage .pr-step", 6000, "the first question");
+  const lvSum = () => t.ev("[...document.querySelectorAll('.ls-prog i')].reduce((s, i) => s + (+i.style.getPropertyValue('--lv') || 0), 0)");
+  for (let i = 0; i < 40 && lvSum() < .9; i++) { const k = t.ev(LS_SOLVE); await t.sleep(k === "wait" ? 300 : 250); }
+  const before = lvSum();
+  t.expect(before > 0, "some colors climbed before stopping");
+  await t.click(".ls-study [data-close]", { wait: 500 });
+  await t.waitFor(".ls-res", 4000, "the results after stopping");
+  t.expect(/back tomorrow/.test(t.text(".ls-tmrw")), "a stopped session still schedules what you answered");
+  await t.click(".ls-res [data-a=again]", { wait: 600 });
+  await t.waitFor(".ls-study .pr-stage .pr-step", 6000, "Keep going");
+  t.expect(Math.abs(lvSum() - before) < .01, `Keep going restarted the levels (${lvSum()} vs ${before})`);
 });
 
 // ================================================================== STUDIO

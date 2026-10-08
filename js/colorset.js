@@ -55,6 +55,8 @@ function csTeachable(set) {
 function csLearn(set, o = {}) {
   set = csGet(set); if (!set || !set.colors.length) return;
   if (typeof prInstantDeck === "function") return prInstantDeck({ source: "set", set, back: o.back });
+  // the one Learn door (js/learnset.js); Learn it directly only if the sheet isn't loaded
+  if (typeof lsOpen === "function") return lsOpen({ items: set.colors.map(c => c.h), label: set.title || "", src: set.kind, back: o.back });
   const c = csTeachable(set);
   if (c && typeof hmLearnIt === "function") return hmLearnIt(c);
   toast("Nothing here to learn yet");
