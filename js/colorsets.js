@@ -331,12 +331,7 @@ async function cxCompute(st) {
   const pre = filterColors(csBase(st.base), { ...st, n: 0 });
   return { pre, items: st.n && st.n < pre.length ? filterColors(pre, { n: st.n }) : pre };
 }
-const CX_ICON = {
-  map: sv('<circle cx="12" cy="12" r="2.3"/><circle cx="18" cy="12" r="2.3"/><circle cx="6" cy="12" r="2.3"/><circle cx="9" cy="6.8" r="2.3"/><circle cx="15" cy="6.8" r="2.3"/><circle cx="9" cy="17.2" r="2.3"/><circle cx="15" cy="17.2" r="2.3"/>', 20, 1.5),
-  wheel: sv('<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="2.4"/><path d="M12 3.5v3M12 17.5v3M3.5 12h3M17.5 12h3"/>', 20, 1.5),
-  tune: sv('<path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2.2"/><circle cx="9" cy="17" r="2.2"/>', 20, 1.6),
-  down: sv('<path d="M6 9l6 6 6-6"/>', 14, 2.2),
-};
+const CX_ICON = { map: icon("map", 20), wheel: icon("wheel", 20), tune: icon("arrange", 20), down: icon("down", 14) };   // js/core.js ICON_PATHS
 const cxDots = list => `<span class="cx-dots">${list.map(x => `<i style="--c:${x.h}"></i>`).join("")}</span>`;
 
 // ---------- the explorer: the honeycomb full screen, the title is the control ----------

@@ -158,10 +158,7 @@ function lsHexLabel(name, x, y, fill) {
   const y0 = y + .04 - (lines.length - 1) * lh / 2;
   return `<text x="${x}" fill="${fill}" font-size="${fs.toFixed(3)}">${lines.map((l, i) => `<tspan x="${x}" y="${(y0 + i * lh).toFixed(3)}">${esc(l)}</tspan>`).join("")}</text>`;
 }
-const LS_ICON = {
-  eye: sv('<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/>', 22, 1.6),
-  map: sv('<path d="M12 3l7.8 4.5v9L12 21l-7.8-4.5v-9z"/>', 18, 1.6),
-};
+const LS_ICON = { eye: icon("train", 22), map: icon("map", 18) };   // js/core.js ICON_PATHS
 
 // ======================================================================
 // Look: no hiding, many views

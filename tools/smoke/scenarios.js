@@ -166,7 +166,9 @@ scenario("home", "Arrange sheet: the strip morphs the map and keeps every color"
   await H.sheet(t, "arrange");
   const arrs = t.$$(".hm-chooser [data-arr]");
   t.expect(arrs.length >= 8, `only ${arrs.length} arrangements`);
-  await t.waitFor(() => arrs.every(b => { const c = b.querySelector("canvas"), d = c.getContext("2d").getImageData(0, 0, c.width, c.height).data; for (let i = 3; i < d.length; i += 16) if (d[i]) return true; return false; }), 6000, "every arrangement picture to draw");
+  // each arrangement has its own flat icon (js/home.js hmArrIcon) and a one-line label
+  t.expect(arrs.every(b => b.querySelectorAll(".hm-arr-pic svg circle, .hm-arr-pic svg rect, .hm-arr-pic svg path").length >= 6), "an arrangement picture is empty");
+  t.expect(arrs.every(b => b.querySelector("b").scrollWidth <= b.querySelector("b").clientWidth + 1), "an arrangement label is cut off");
   const n0 = H.num(t.text("[data-count]"));
   for (const b of arrs.filter(b => !b.classList.contains("on"))) {
     await t.click(b, { wait: 120 });

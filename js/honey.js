@@ -731,7 +731,7 @@ function honeyLitBar() {
     : `<span class="cs-hl-th cs-hl-sw">${sw.map(h => `<i style="background:${esc(h)}"></i>`).join("")}</span>`;
   const canFind = typeof msOpen === "function" && cs.length >= HONEY_FIND_MIN;
   bar.innerHTML = `<div class="cs-hl-head">
-      ${bk ? `<button class="cs-hl-back" aria-label="Back to ${esc(bk.title || title)}">‹</button>` : ""}
+      ${bk ? `<button class="cs-hl-back" aria-label="Back to ${esc(bk.title || title)}">${ICON.back}</button>` : ""}
       ${thumb}<span class="cs-hl-t"><b>${esc(title)}</b><i class="cs-hl-sep"> · </i><small>${esc(sub)}</small></span>
       <button class="cs-hl-x" aria-label="Show every color again">${ICON.x}</button>
     </div>

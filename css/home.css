@@ -312,3 +312,4 @@
 .hm-seg{gap:8px}
 .hm-seg button{border:0;background:var(--ctl-fill);font:400 15px/1 var(--sans);color:var(--soft)}
 .hm-seg button.on{font-weight:500}
+.hm-lab-stars button svg,.hm-lab-heart svg{width:18px;height:18px}

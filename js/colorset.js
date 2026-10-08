@@ -134,13 +134,8 @@ function csCompare(a, b) {
 }
 
 // ---------- the action row ----------
-const CS_ICON = {
-  map: sv('<circle cx="7" cy="8" r="3"/><circle cx="17" cy="7" r="3"/><circle cx="12" cy="16.5" r="3"/>', 20, 1.8),
-  learn: sv('<rect x="7" y="3" width="12" height="15" rx="2.5"/><path d="M4 7.5V18a3 3 0 0 0 3 3h8.5"/>', 20, 1.8),
-  play: sv('<rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5" fill="currentColor"/>', 20, 1.8),
-  compare: sv('<rect x="3" y="5" width="8" height="14" rx="2"/><rect x="13" y="5" width="8" height="14" rx="2"/>', 20, 1.8),
-  keep: sv('<path d="M7 4h10v16l-5-4-5 4z"/>', 20, 1.8),
-  share: sv('<path d="M12 3v12M7 8l5-5 5 5M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/>', 20, 1.8),
+const CS_ICON = {   // the shared icon set (js/core.js ICON_PATHS): one metaphor per concept
+  map: icon("map", 20), learn: icon("learn", 20), play: icon("play", 20), compare: icon("compare", 20), keep: icon("heart", 20), share: icon("share", 20),
 };
 const CS_ACTS = [["map", "On the map"], ["learn", "Learn"], ["play", "Play"], ["compare", "Compare"], ["keep", "Keep"], ["share", "Share"]];
 function csActions(set, o = {}) {

@@ -12,7 +12,7 @@
 
 const NMR_TABS = [["ring", "Ring"], ["plane", "Perceptual"], ["field", "Names"], ["type", "Type"], ["eye", "Eyedrop"]];
 const NMR_SCHEMES = [["off", "Off"], ["complementary", "Complement"], ["analogous", "Analogous"], ["triadic", "Triad"], ["square", "Square"]];
-const NMR_ICON = sv('<path d="M14.5 5.5l4 4M17 3l4 4-3 3-4-4zM13 8l-8 8v3h3l8-8"/>', 22, 1.8);   // a pipette
+const NMR_ICON = icon("pipette", 22);   // a pipette (js/core.js ICON_PATHS)
 const NMR_CMAX = .34;   // the strongest chroma any sRGB color reaches in OKLCH is a little over .32
 let NMR_LAST = { hex: null, tab: "ring", scheme: "off" };
 

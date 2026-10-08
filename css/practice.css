@@ -119,8 +119,8 @@ html:has(#app > .screen.pr-booth) body::after{display:none}
 .pr-opt.chosen{outline-color:#fff}
 .pr-opt.ok{outline-color:var(--good)}
 .pr-opt.bad{outline-color:var(--bad)}
-.pr-opt.ok span::before{content:"✓ ";color:var(--good)}
-.pr-opt.bad span::before{content:"✕ ";color:var(--bad)}
+.pr-opt.ok span::before{content:"";display:inline-block;width:.8em;height:.8em;margin-right:.3em;vertical-align:-.05em;background:var(--good);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/contain no-repeat}
+.pr-opt.bad span::before{content:"";display:inline-block;width:.8em;height:.8em;margin-right:.3em;vertical-align:-.05em;background:var(--bad);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.6' stroke-linecap='round'%3E%3Cpath d='M6.5 6.5l11 11M17.5 6.5l-11 11'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.6' stroke-linecap='round'%3E%3Cpath d='M6.5 6.5l11 11M17.5 6.5l-11 11'/%3E%3C/svg%3E") center/contain no-repeat}
 .pr-opt:disabled:not(.ok):not(.bad){opacity:.6}
 .pr-blind .pr-opt.chosen{outline-color:#fff}
 
@@ -136,8 +136,8 @@ html:has(#app > .screen.pr-booth) body::after{display:none}
 .pr-cell.chosen .pr-swc{outline-color:#fff}
 .pr-cell.ok .pr-swc{outline-color:var(--good)}
 .pr-cell.bad .pr-swc{outline-color:var(--bad)}
-.pr-cell.ok .pr-tag::before{content:"✓ ";color:var(--good)}
-.pr-cell.bad .pr-tag::before{content:"✕ ";color:var(--bad)}
+.pr-cell.ok .pr-tag::before{content:"";display:inline-block;width:.8em;height:.8em;margin-right:.3em;vertical-align:-.05em;background:var(--good);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/contain no-repeat}
+.pr-cell.bad .pr-tag::before{content:"";display:inline-block;width:.8em;height:.8em;margin-right:.3em;vertical-align:-.05em;background:var(--bad);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.6' stroke-linecap='round'%3E%3Cpath d='M6.5 6.5l11 11M17.5 6.5l-11 11'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.6' stroke-linecap='round'%3E%3Cpath d='M6.5 6.5l11 11M17.5 6.5l-11 11'/%3E%3C/svg%3E") center/contain no-repeat}
 
 /* ---------- type ---------- */
 .pr-typef{flex:none;display:flex;align-items:center;border-bottom:1px solid rgba(255,255,255,.9)}
@@ -324,6 +324,7 @@ html:has(#app > .screen.pr-booth) body::after{display:none}
 .pr-art .a-yn{display:flex;gap:6px}
 .pr-art .a-yn b{width:24px;height:24px;border-radius:50%;background:#2E2C26;display:grid;place-items:center;font:600 12px/1 var(--sans);color:var(--good)}
 .pr-art .a-yn b+b{color:var(--bad)}
+.pr-art .a-yn b svg{width:14px;height:14px}
 .pr-art .a-rain{position:relative;width:76px;height:50px}
 .pr-art .a-rain i{position:absolute;left:26px;top:0;width:22px;height:22px;border-radius:50%;background:var(--c)}
 .pr-art .a-rain b{position:absolute;left:0;right:0;height:5px;border-radius:3px;background:rgba(236,232,223,.2)}

@@ -16,7 +16,7 @@
 
 const HM_SUN = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></svg>`;
 // the right corner's one button: four quiet dots (a menu), the due count beside it when reviews wait
-const HM_DO_GLYPH = `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="8" cy="8" r="1.9"/><circle cx="16" cy="8" r="1.9"/><circle cx="8" cy="16" r="1.9"/><circle cx="16" cy="16" r="1.9"/></svg>`;
+const HM_DO_GLYPH = icon("grid", 22);
 const HM_SLIDERS = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 6h10M18 6h2M4 12h3M11 12h9M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>`;
 // The nine stages of the path (ROADMAP §14): stage N shows the first N names of the core list (data/core-names.json,
 // ordered by `rank` until the stage ordering exists), so you can preview what any stage holds.
@@ -252,8 +252,8 @@ function labHoney() {
       <div class="hm-lab-row"><button class="hm-lab-step" data-p-1>${ICON.chev}</button><b data-p-label></b><button class="hm-lab-step" data-p1>${ICON.chev}</button></div>
       <div class="hm-lab-row"><button class="hm-lab-step" data-n-1>${ICON.chev}</button><b data-n-label></b><button class="hm-lab-step" data-n1>${ICON.chev}</button></div>
       <div class="hm-lab-row hm-lab-rate">
-        <button class="hm-lab-heart" data-heart aria-label="Favorite">♥</button>
-        <span class="hm-lab-stars" data-stars>${[1, 2, 3, 4, 5].map(n => `<button data-star="${n}">★</button>`).join("")}</span>
+        <button class="hm-lab-heart" data-heart aria-label="Favorite">${ICON.heartOn}</button>
+        <span class="hm-lab-stars" data-stars>${[1, 2, 3, 4, 5].map(n => `<button data-star="${n}" aria-label="${n} star${n > 1 ? "s" : ""}">${ICON.starOn}</button>`).join("")}</span>
       </div>
       <div class="hm-lab-row"><button class="link" data-tweak>Tweak…</button><button class="cx-pill" data-copy>Copy my ratings</button></div>
     </div>
