@@ -22,3 +22,6 @@ David uses an iPhone 16 Pro Max: 440x956 CSS px, top inset ~62, bottom ~34. Ever
 
 ## Verify the reported commit landed (2026-10-08)
 An agent's worktree branch name can differ from where its commits are. Lane E's lsQuick was "merged" by branch name but never reached main. After every merge, run `git merge-base --is-ancestor <reported commit> main`.
+
+## Smoke runs on a clean snapshot (2026-10-09)
+ship.sh tests a clean HEAD snapshot (/tmp/colorhub-ship-snap), because article drafts in data/articles/ broke the pages group. An agent that sees "no result" for a whole smoke group in the main checkout should suspect untracked drafts before blaming its own code.
