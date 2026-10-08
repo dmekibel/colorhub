@@ -70,7 +70,7 @@ function rpCoverFoot(name, hex, tapped, entry) {
         <h1 class="rp-name">${esc(name)}</h1>
         <p class="rp-tier" data-rp-tier></p>
         <p class="rp-def" data-rp-def></p><p class="rp-defsrc" data-rp-defsrc></p>
-        <button class="mono cp-hex" data-copy="${tapped || hex}">${tapped || hex}${tapped ? `<em> · ${pctMatch(de2000(tapped, hex))} to ${esc(name)}</em>` : ""}</button>` };
+        <button class="mono cp-hex" data-copy="${tapped || hex}">${tapped || hex}${tapped ? `<em> · ${pctMatch(de2000(tapped, hex))} to ${esc(name)}</em>` : ""}</button>${typeof sxPairBtnHTML === "function" ? sxPairBtnHTML(tapped || hex, name) : ""}` };
 }
 function rpCoverFill(el, name, hex, heroHex, entry) {
   const h1 = el.querySelector(".rp-name"); if (h1) { rpFitName(h1); if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => h1.isConnected && rpFitName(h1)); }
