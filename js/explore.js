@@ -637,7 +637,7 @@ function colorPage(n, tapped) {
         secs.push(["names", "Also called", `${(coreSelf.also || []).length ? `<p>${(coreSelf.also || []).map(esc).join(", ")}.</p>` : ""}${rcPassportHTML(coreSelf.src || [])}`]);
       }
       secs.push(["codes", "Codes", `<div class="cp-codes">${codeRows(c.h).map(([k, v]) => `<button class="cp-code-row" data-copy="${esc(v)}"><span>${esc(k)}</span><b class="mono">${esc(v)}</b></button>`).join("")}</div>${codeRows(c.h).some(r => r[0].startsWith("CMYK")) ? `<p class="fine cp-codes-fine">CMYK here is a rough formula, not a print profile: real values depend on the paper and press, so check them in a print workflow with a proof.</p>` : ""}`]);
-      return (w ? "" : `<p class="fine">The full page for ${esc(c.n)} is being written. Its connections below are already live.</p>`) + tocHTML(secs.map(x => [x[0], x[1]])) + secs.map(x => secHTML(x[0], x[1], x[2], false)).join("");
+      return tocHTML(secs.map(x => [x[0], x[1]])) + secs.map(x => secHTML(x[0], x[1], x[2], false)).join("");
     })()}
     ${typeof wgColorTail === "function" ? wgColorTail(c, w) : ""}
     ${connSection(n)}

@@ -171,8 +171,8 @@ function compassOf(hex, selfName) {
     { key: "darker", pos: "s", label: "Darker", list: rank(x => -x.dL, offLC, 3) },
     { key: "vivid", pos: "ne", label: "More vivid", list: rank(x => x.dC, offCL, 3) },
     { key: "greyer", pos: "sw", label: "Duller", list: rank(x => -x.dC, offCL, 3) },
-    { key: "huem", pos: "nw", label: hasHue ? compassHueWord(h0 - 25) : "No hue to turn", nohue: !hasHue, list: hasHue ? rank(x => -x.arc, offH, 3) : [] },
-    { key: "huep", pos: "se", label: hasHue ? compassHueWord(h0 + 25) : "No hue to turn", nohue: !hasHue, list: hasHue ? rank(x => x.arc, offH, 3) : [] },
+    { key: "huem", pos: "nw", label: hasHue ? compassHueWord(h0 - 45) : "No hue to turn", nohue: !hasHue, list: hasHue ? rank(x => -x.arc, offH, 3) : [] },
+    { key: "huep", pos: "se", label: hasHue ? compassHueWord(h0 + 45) : "No hue to turn", nohue: !hasHue, list: hasHue ? rank(x => x.arc, offH, 3) : [] },
   ];
   const taken = new Set();
   cells.forEach(c => { c.hit = null; });
