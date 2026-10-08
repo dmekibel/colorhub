@@ -1588,6 +1588,7 @@ function prInstantDeck(o = {}) {
 // The quick sheet. Smart defaults are already chosen, so one tap on Start begins; chips change them; it remembers.
 function prQuick(o = {}) {
   // every "Learn" with a color or a set opens the Learn sheet (js/learnset.js): Look and Study, always both
+  if (typeof lsQuick === "function" && !o.legacy && !o.sheet && o.seed && !(o.items && o.items.length)) return lsQuick(o);   // Learn it starts now (js/learnset.js)
   if (typeof lsOpen === "function" && !o.legacy && ((o.items && o.items.length) || o.seed)) return lsOpen(o);
   if (typeof CORE_NAMES !== "undefined" && !CORE_NAMES && typeof loadCoreNames === "function") return void loadCoreNames().then(() => prQuick(o));
   const p = prState(), last = p.quick || {};
@@ -1625,7 +1626,7 @@ function prQuick(o = {}) {
   function start() {
     if (!deck || !deck.items.length) return;
     remember(); close(); buzz(8);
-    if (st.method === "lesson") return hmLearnIt(app);
+    if (st.method === "lesson") return hmLearnIt(app, { lesson: true });
     const exit = () => { if (typeof backTo === "function") backTo(); else if (backTo && /^#\/./.test(backTo)) { if (!openRoute(backTo)) go(S.tab || "learn"); } else prHome(); };
     prPlay(st.method, { items: deck.items, label: deck.label, exit, other: () => { exit(); setTimeout(() => prQuick({ ...o, back: backTo }), 60); } });
   }

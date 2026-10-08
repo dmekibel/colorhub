@@ -714,6 +714,7 @@ scenario("pages", "hold the cover: the flower rises, dragging lights a hex, lett
 scenario("pages", "Learn it runs meet > recall from a color page", async t => {
   await H.openPage(t, "#/color/teal", "Teal");
   await t.click("[data-learnit]", { wait: 600 });
+  await t.waitFor("[data-adjust]", 4000, "Learn it starts straight into Study"); await t.click("[data-adjust]", { wait: 600 });   // Adjust opens the full sheet
   // the Learn button opens the instant-deck sheet (js/practice.js); Learn it is one of its methods
   if (t.$(".pr-quick")) await t.click('[data-method="lesson"]', { wait: 600 });
   await t.waitFor("#ltPager", 6000, "the Learn it meet pager");
@@ -737,6 +738,7 @@ scenario("pages", "Learn it runs meet > recall from a color page", async t => {
 scenario("pages", "Learn opens the instant deck; Start plays flashcards to the results", async t => {
   await H.openPage(t, "#/color/teal", "Teal");
   await t.click("[data-learnit]", { wait: 600 });
+  await t.waitFor("[data-adjust]", 4000, "Learn it starts straight into Study"); await t.click("[data-adjust]", { wait: 600 });   // Adjust opens the full sheet
   await t.waitFor(".pr-quick", 4000, "the instant-deck sheet");
   t.ev("(() => { const r = document.querySelector('.pr-quick [data-size]'); r.value = 5; r.dispatchEvent(new Event('input', { bubbles: true })); })()");
   await t.click('.pr-quick [data-method="cards"]', { wait: 600 });
@@ -780,6 +782,7 @@ const LS_SOLVE = `(() => {
 scenario("learnset", "Learn sheet: live preview, size and closeness sliders, Look and Study both there", async t => {
   await H.openPage(t, "#/color/teal", "Teal");
   await t.click("[data-learnit]", { wait: 600 });
+  await t.waitFor("[data-adjust]", 4000, "Learn it starts straight into Study"); await t.click("[data-adjust]", { wait: 600 });   // Adjust opens the full sheet
   await t.waitFor(".ls-sheet", 4000, "the Learn sheet");
   t.expect(t.$(".ls-sheet [data-look]") && t.$(".ls-sheet [data-go]"), "Look and Study are both on the sheet");
   const set = v => t.ev(`(() => { const r = document.querySelector('.ls-sheet [data-size]'); r.value = ${v}; r.dispatchEvent(new Event('input', { bubbles: true })); return document.querySelectorAll('.ls-prev i').length; })()`);
@@ -793,6 +796,7 @@ scenario("learnset", "Learn sheet: live preview, size and closeness sliders, Loo
 scenario("learnset", "Look: every view draws, a tile opens its page", async t => {
   await H.openPage(t, "#/color/teal", "Teal");
   await t.click("[data-learnit]", { wait: 600 });
+  await t.waitFor("[data-adjust]", 4000, "Learn it starts straight into Study"); await t.click("[data-adjust]", { wait: 600 });   // Adjust opens the full sheet
   await t.waitFor(".ls-sheet", 4000, "the Learn sheet");
   await t.click(".ls-sheet [data-look]", { wait: 600 });
   await t.waitFor(".ls-lookscr", 4000, "the Look screen");
@@ -807,6 +811,7 @@ scenario("learnset", "Look: every view draws, a tile opens its page", async t =>
 scenario("learnset", "Study: a mixed session runs to the results", async t => {
   await H.openPage(t, "#/color/teal", "Teal");
   await t.click("[data-learnit]", { wait: 600 });
+  await t.waitFor("[data-adjust]", 4000, "Learn it starts straight into Study"); await t.click("[data-adjust]", { wait: 600 });   // Adjust opens the full sheet
   await t.waitFor(".ls-sheet", 4000, "the Learn sheet");
   t.ev("(() => { const r = document.querySelector('.ls-sheet [data-size]'); r.value = 4; r.dispatchEvent(new Event('input', { bubbles: true })); })()");
   await t.click(".ls-sheet [data-go]", { wait: 600 });
@@ -823,6 +828,27 @@ scenario("learnset", "Study: a mixed session runs to the results", async t => {
   t.expect(t.ev("Object.values(S.cards).filter(c => c.from && c.due > today()).length") >= 1, "the Study colors are in spaced review");
   await t.click(".ls-res [data-a=look]", { wait: 500 });
   await t.waitFor(".ls-lookscr", 4000, "Look again from the results");
+});
+// Lane E (David, 2026-10-08): Learn it starts now. One tap on a color page's Learn it is a quick Study of the color
+// and its 3 closest neighbors: Meet the new ones, a few questions, no final round, then "N climbed", the fly to the
+// map, and back on the page you came from.
+scenario("learnset", "Learn it starts now: Meet at once, Adjust, 4 colors, a short climb, then back to the page", async t => {
+  await H.openPage(t, "#/color/teal", "Teal");
+  await t.click(".cp-page [data-learnit]", { wait: 400 });
+  await t.waitFor(".ls-study .pr-stage .pr-step", 3000, "Study (a Meet card or a question) within seconds");
+  t.expect(t.$(".ls-study [data-adjust]"), "the quiet Adjust link on a quick Study");
+  t.expect(t.$$(".ls-prog i").length === 4, `${t.$$(".ls-prog i").length} colors in the quick set, expected 4`);
+  t.expect(t.$(".ls-study .ls-meet"), "a new color is met before it's asked");
+  const kinds = new Set();
+  for (let i = 0; i < 160 && !t.$(".ls-res"); i++) { const k = t.ev(LS_SOLVE); kinds.add(k); await t.sleep(k === "wait" ? 300 : 250); }
+  await t.waitFor(".ls-qend", 6000, "the Learn it ending");
+  t.notes.push("kinds: " + [...kinds].join(","));
+  t.expect(!kinds.has("boss"), "no final round in a quick session");
+  t.expect(!kinds.has("type"), "no typing in a quick session");
+  t.expect(/4\s*climbed/.test(t.text(".ls-qend h1")), `ending title "${t.text(".ls-qend h1")}"`);
+  t.expect(/Back tomorrow/.test(t.text(".ls-qend")), "the ending says back tomorrow");
+  await t.waitFor(".cp-page", 9000, "back on the color page after the fly to the map");
+  t.expect(H.title(t) === "Teal", `back on Teal, got "${H.title(t)}"`);
 });
 // Answer wrong (every other question, so the session can end) and press Next the way an iPhone does: a touch
 // pointerdown/pointerup with no click after it (iOS can drop the synthesized click), or the miss compare's Got it.
@@ -856,6 +882,7 @@ scenario("learnset", "Study: wrong answers and touch-only Next play a 3-color se
   if (t.ev("typeof lsQuick === 'function'")) { t.ev("lsQuick({ seed: prByKey('teal') })"); }
   else {
     await t.click("[data-learnit]", { wait: 600 });
+    await t.waitFor("[data-adjust]", 4000, "Learn it starts straight into Study"); await t.click("[data-adjust]", { wait: 600 });   // Adjust opens the full sheet
     await t.waitFor(".ls-sheet", 4000, "the Learn sheet");
     t.ev("(() => { const r = document.querySelector('.ls-sheet [data-size]'); r.value = 3; r.dispatchEvent(new Event('input', { bubbles: true })); })()");
     await t.click(".ls-sheet [data-go]", { wait: 600 });
@@ -878,6 +905,7 @@ scenario("learnset", "Study: wrong answers and touch-only Next play a 3-color se
 scenario("learnset", "Study: new colors are met (a Meet card each, then the closest two) before any question; Test me skips Meet", async t => {
   await H.openPage(t, "#/color/teal", "Teal");
   await t.click("[data-learnit]", { wait: 600 });
+  await t.waitFor("[data-adjust]", 4000, "Learn it starts straight into Study"); await t.click("[data-adjust]", { wait: 600 });   // Adjust opens the full sheet
   await t.waitFor(".ls-sheet", 4000, "the Learn sheet");
   t.expect(t.$$(".ls-sheet [data-pace]").length === 4 && t.$(".ls-sheet [data-pace].on"), "the pace chips, one on");
   t.expect(/new ones? first|Nothing new/.test(t.text(".ls-sheet [data-pacesay]")), "the pace line says what Study will do");
@@ -907,6 +935,7 @@ scenario("learnset", "Study: new colors are met (a Meet card each, then the clos
 scenario("learnset", "Study: stop part-way, Keep going picks each color up at its level", async t => {
   await H.openPage(t, "#/color/teal", "Teal");
   await t.click("[data-learnit]", { wait: 600 });
+  await t.waitFor("[data-adjust]", 4000, "Learn it starts straight into Study"); await t.click("[data-adjust]", { wait: 600 });   // Adjust opens the full sheet
   await t.waitFor(".ls-sheet", 4000, "the Learn sheet");
   t.ev("(() => { const r = document.querySelector('.ls-sheet [data-size]'); r.value = 4; r.dispatchEvent(new Event('input', { bubbles: true })); })()");
   await t.click(".ls-sheet [data-go]", { wait: 600 });
@@ -1372,6 +1401,7 @@ scenario("learn", "Learn it opens on a name past the first units", async t => {
   await t.open("#/name/chestnut", { settle: 600 });
   await t.waitFor(".cp-page [data-learnit]", 10000, "Learn it on the Chestnut name page");
   await t.click("[data-learnit]", { wait: 600 });
+  await t.waitFor("[data-adjust]", 4000, "Learn it starts straight into Study"); await t.click("[data-adjust]", { wait: 600 });   // Adjust opens the full sheet
   await t.waitFor(".pr-quick [data-method='lesson']", 6000, "Practice's sheet offering Learn it for a name past the first units");
   await t.click("[data-method='lesson']", { wait: 700 });
   await t.waitFor("#ltPager", 6000, "the Learn it meet pager");
