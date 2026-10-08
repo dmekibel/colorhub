@@ -1,139 +1,142 @@
 {
- "name": "Antique rose",
- "hex": "#AF7678",
- "names": [
-  "Antique rose"
- ],
- "tier": "nature",
- "depth": "medium",
- "lede": "Antique Rose dulls the pink of the rose flower into a muted, slightly brown-grey pink, catalogued by Ridgway in 1912.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A faded rose",
-   "body": "Rose, the base word, is one of the oldest flower-color names in English; \"antique\" dulls it toward brown and grey, the way an old dried rose fades [1]. Robert Ridgway recorded this exact shade in his 1912 *Color Standards and Color Nomenclature*, and the ISCC-NBS system filed it in 1955 under block 19, a grayish red [1][2]. In printed English, use of the phrase \"antique rose\" rose fastest in the 1990s and peaked in the 2000s, well after Ridgway's plate, so its popularity as a name outran its origin by nearly a century [3]. Its closest named neighbor is [[ash-rose|Ash Rose]], a near-twin at ΔE 4.4 [4], along with [[marsh-rose]] and [[dusty-rose]] [4].\n\nRose names have multiplied in English since the nineteenth century, as dye and paint catalogs split the flower's pink into ever finer shades: dusty, old, ash and antique among them, each describing a slightly different fade from the fresh flower [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds Antique Rose in 92 of 23,781 paintings (0.39 percent, as photographed), rarer than 56 percent of the named colors here [5]. It peaks in paintings from the 1900s, at 3.3 times the expected rate for that century, and most often plays an accent color [5]. The earliest matching canvas dates to the year 1000, nine centuries before Ridgway's plate; the archive's early centuries are thin, so this is a floor, not a first, and a look-alike hue, not the name's actual age [5]. It shows up across a long span of painting history rather than clustering in one movement, which fits a color defined by a wide dye and paint tradition rather than a single workshop or school [5]. As with most of these dulled nature names, the computed match only tells us the hue recurs; it says nothing about whether any painter was reaching for an aged, faded pink on purpose [5]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the rose flower, dulled by the modifier \"antique\"",
-   "first_recorded": "1912 (Ridgway)",
-   "source": "Ridgway, Color Standards and Color Nomenclature"
-  },
-  "aka": [],
-  "siblings": [
-   "ash-rose",
-   "marsh-rose",
-   "dusty-rose"
+  "name": "Antique rose",
+  "hex": "#AF7678",
+  "names": [
+    "Antique rose",
+    "Deep Vinaceous"
   ],
-  "parent": "rose",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 92,
-  "rank_pct": 56,
-  "measured": {
-   "lch": [
-    55.5,
-    24.0,
-    19.5
-   ],
-   "nearest": [
-    [
-     "Marsh Rose",
-     4.2
+  "tier": "nature",
+  "depth": "medium",
+  "lede": "Antique Rose dulls the pink of the rose flower into a muted, slightly brown-grey pink, catalogued by Ridgway in 1912.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A faded rose",
+      "body": "Rose, the base word, is one of the oldest flower-color names in English; \"antique\" dulls it toward brown and grey, the way an old dried rose fades [1]. Robert Ridgway recorded this exact shade in his 1912 *Color Standards and Color Nomenclature*, and the ISCC-NBS system filed it in 1955 under block 19, a grayish red [1][2]. In printed English, use of the phrase \"antique rose\" rose fastest in the 1990s and peaked in the 2000s, well after Ridgway's plate, so its popularity as a name outran its origin by nearly a century [3]. Its closest named neighbor is [[ash-rose|Ash Rose]], a near-twin at ΔE 4.4 [4], along with [[marsh-rose]] and [[dusty-rose]] [4].\n\nRose names have multiplied in English since the nineteenth century, as dye and paint catalogs split the flower's pink into ever finer shades: dusty, old, ash and antique among them, each describing a slightly different fade from the fresh flower [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds Antique Rose in 92 of 23,781 paintings (0.39 percent, as photographed), rarer than 56 percent of the named colors here [5]. It peaks in paintings from the 1900s, at 3.3 times the expected rate for that century, and most often plays an accent color [5]. The earliest matching canvas dates to the year 1000, nine centuries before Ridgway's plate; the archive's early centuries are thin, so this is a floor, not a first, and a look-alike hue, not the name's actual age [5]. It shows up across a long span of painting history rather than clustering in one movement, which fits a color defined by a wide dye and paint tradition rather than a single workshop or school [5]. As with most of these dulled nature names, the computed match only tells us the hue recurs; it says nothing about whether any painter was reaching for an aged, faded pink on purpose [5]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the rose flower, dulled by the modifier \"antique\"",
+      "first_recorded": "1912 (Ridgway)",
+      "source": "Ridgway, Color Standards and Color Nomenclature"
+    },
+    "aka": [
+      "Deep Vinaceous (ridgway+iscc-nbs)"
     ],
-    [
-     "Dusty Rose",
-     4.2
+    "siblings": [
+      "ash-rose",
+      "marsh-rose",
+      "dusty-rose"
     ],
-    [
-     "Ash rose",
-     4.4
-    ]
-   ]
+    "parent": "rose",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  "ngram": {
-   "peak": 2000,
-   "rise": 1990
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Ridgway, Color Standards and Color Nomenclature, 1912",
-   "loc_kind": "entry",
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 92,
+    "rank_pct": 56,
+    "measured": {
+      "lch": [
+        55.5,
+        24.0,
+        19.5
+      ],
+      "nearest": [
+        [
+          "Marsh Rose",
+          4.2
+        ],
+        [
+          "Dusty Rose",
+          4.2
+        ],
+        [
+          "Ash rose",
+          4.4
+        ]
+      ]
+    },
+    "ngram": {
+      "peak": 2000,
+      "rise": 1990
+    }
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library: ISCC-NBS 1955 block 19",
-   "loc_kind": null,
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Ridgway, Color Standards and Color Nomenclature, 1912",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library: ISCC-NBS 1955 block 19",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub Ngram cache, \"antique rose\"",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE Lab ΔE)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which color is Antique Rose's closest named neighbor?",
+      "choices": [
+        "Ash Rose",
+        "Mauve",
+        "Indigo",
+        "Burlywood"
+      ],
+      "answer": "Ash Rose",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: \"antique rose\" was most popular in print around the time Ridgway first listed it.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Antique Rose and Ash Rose are near-twins, just 4.4 units apart."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "batch-writer",
+    "date": "2026-10-09",
+    "issues": []
   },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub Ngram cache, \"antique rose\"",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE Lab ΔE)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which color is Antique Rose's closest named neighbor?",
-   "choices": [
-    "Ash Rose",
-    "Mauve",
-    "Indigo",
-    "Burlywood"
-   ],
-   "answer": "Ash Rose",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: \"antique rose\" was most popular in print around the time Ridgway first listed it.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Antique Rose and Ash Rose are near-twins, just 4.4 units apart."
- ],
- "status": "checked",
- "checked": {
-  "by": "batch-writer",
-  "date": "2026-10-09",
-  "issues": []
- },
- "slug": "antique-rose",
- "words": 325
+  "slug": "antique-rose",
+  "words": 325
 }

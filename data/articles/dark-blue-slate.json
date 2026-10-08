@@ -1,133 +1,133 @@
 {
- "slug": "dark-blue-slate",
- "name": "Dark blue slate",
- "hex": "#47545D",
- "names": [
-  "Dark blue slate"
- ],
- "tier": "descriptive",
- "depth": "short",
- "lede": "Dark blue slate is a muted, bluish-grey modifier on [[blue-slate]], scanned from Ridgway's 1912 plates and filed by the ISCC-NBS system in 1955, and is an exact color match for a separately named [[dark-violet-slate|Dark Violet-Slate]].",
- "sections": [
-  {
-   "id": "name",
-   "title": "Two catalogue names, one color",
-   "body": "The name follows the library's modifier grammar, *dark* plus [[blue-slate]], and both Ridgway's 1912 *Color Standards and Color Nomenclature* and the ISCC-NBS system of 1955 cite a block this dark and muted, without naming a plate number for this particular chip [1]. Our library finds that Dark Violet-Slate, from a separate source, measures to the identical hex value, close enough that the two names describe the same chip under different catalogues [1]. The books do not explain the choice of \"dark\" over another modifier [2].\n\nIts nearest named neighbors are [[dark-violet-grey]] and [[dark-payne-s-grey]], both almost indistinguishable at 3.1 to 3.3 units [3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "A color this close to Dark blue slate is common in our archive: 501 of 23,781 paintings, as photographed, about 2.1 percent, more common than 70 percent of the named colors [4]. It is most often a shadow, 36 percent of the time, and is most overrepresented in paintings from India, at 2.4 times expected [4]. The earliest match dates to 1100, 812 years before the name's earliest record [4]. That is centuries before the name's own record, a floor on the hue's age, not a first use of either the name or a pigment."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "a modifier on blue-slate; the choice of \"dark\" is undocumented",
-   "first_recorded": "Ridgway, Color Standards and Color Nomenclature (1912)",
-   "source": "ColorHub color library (Ridgway 1912; ISCC-NBS 1955)"
-  },
-  "aka": [],
-  "siblings": [
-   "dark-violet-grey",
-   "dark-payne-s-grey",
-   "arona"
+  "slug": "dark-blue-slate",
+  "name": "Dark blue slate",
+  "hex": "#47545D",
+  "names": [
+    "Dark blue slate"
   ],
-  "parent": "blue-slate",
-  "children": [],
-  "disambiguation": [
-   {
-    "slug": "dark-violet-slate",
-    "gloss": "a separately sourced name that measures to the same hex value"
-   }
+  "tier": "descriptive",
+  "depth": "short",
+  "lede": "Dark blue slate is a muted, bluish-grey modifier on [[blue-slate]], scanned from Ridgway's 1912 plates and filed by the ISCC-NBS system in 1955, and is an exact color match for a separately named [[dark-blue-slate|Dark Violet-Slate]].",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Two catalogue names, one color",
+      "body": "The name follows the library's modifier grammar, *dark* plus [[blue-slate]], and both Ridgway's 1912 *Color Standards and Color Nomenclature* and the ISCC-NBS system of 1955 cite a block this dark and muted, without naming a plate number for this particular chip [1]. Our library finds that Dark Violet-Slate, from a separate source, measures to the identical hex value, close enough that the two names describe the same chip under different catalogues [1]. The books do not explain the choice of \"dark\" over another modifier [2].\n\nIts nearest named neighbors are [[dark-violet-grey]] and [[dark-payne-s-grey]], both almost indistinguishable at 3.1 to 3.3 units [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "A color this close to Dark blue slate is common in our archive: 501 of 23,781 paintings, as photographed, about 2.1 percent, more common than 70 percent of the named colors [4]. It is most often a shadow, 36 percent of the time, and is most overrepresented in paintings from India, at 2.4 times expected [4]. The earliest match dates to 1100, 812 years before the name's earliest record [4]. That is centuries before the name's own record, a floor on the hue's age, not a first use of either the name or a pigment."
+    }
   ],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 501,
-  "n_within": 194,
-  "role": "shadow 36%",
-  "country": "India, 2.4x",
-  "measured": {
-   "lch": [
-    34.9,
-    7.5,
-    247.8
-   ],
-   "nearest": [
-    [
-     "Dark Violet-Grey",
-     3.1
+  "aside": {
+    "origin": {
+      "named_after": "a modifier on blue-slate; the choice of \"dark\" is undocumented",
+      "first_recorded": "Ridgway, Color Standards and Color Nomenclature (1912)",
+      "source": "ColorHub color library (Ridgway 1912; ISCC-NBS 1955)"
+    },
+    "aka": [],
+    "siblings": [
+      "dark-violet-grey",
+      "dark-payne-s-grey",
+      "arona"
     ],
-    [
-     "Dark Payne's Grey",
-     3.3
-    ]
-   ]
+    "parent": "blue-slate",
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "dark-violet-slate",
+        "gloss": "a separately sourced name that measures to the same hex value"
+      }
+    ],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 501,
+    "n_within": 194,
+    "role": "shadow 36%",
+    "country": "India, 2.4x",
+    "measured": {
+      "lch": [
+        34.9,
+        7.5,
+        247.8
+      ],
+      "nearest": [
+        [
+          "Dark Violet-Grey",
+          3.1
+        ],
+        [
+          "Dark Payne's Grey",
+          3.3
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/graph/nodes-d.json): Ridgway 1912; ISCC-NBS 1955; exact hex match to Dark Violet-Slate",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "Color-kb concordance of the 29 color books for this name (no hits beyond the catalogue entries)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color graph, look-alike edges (data/graph/edges-d.json), CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes); counts are computed color matches on photographs of varnished, aged canvases, not pigment identifications",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which other name measures to the exact same hex value as Dark blue slate?",
+      "choices": [
+        "Dark Violet-Slate",
+        "Payne's Grey",
+        "Charcoal",
+        "Gunmetal"
+      ],
+      "answer": "Dark Violet-Slate",
+      "kind": "pick"
+    },
+    {
+      "q": "In our archive, where does a color near Dark blue slate most often sit inside a painting?",
+      "choices": [
+        "As a shadow",
+        "As the brightest highlight",
+        "As a frame or border",
+        "As a background sky"
+      ],
+      "answer": "As a shadow",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Dark blue slate and Dark Violet-Slate are two catalogue names for the exact same chip."
+  ],
+  "words": 237,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-09",
+    "issues": []
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/graph/nodes-d.json): Ridgway 1912; ISCC-NBS 1955; exact hex match to Dark Violet-Slate",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "Color-kb concordance of the 29 color books for this name (no hits beyond the catalogue entries)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color graph, look-alike edges (data/graph/edges-d.json), CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes); counts are computed color matches on photographs of varnished, aged canvases, not pigment identifications",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which other name measures to the exact same hex value as Dark blue slate?",
-   "choices": [
-    "Dark Violet-Slate",
-    "Payne's Grey",
-    "Charcoal",
-    "Gunmetal"
-   ],
-   "answer": "Dark Violet-Slate",
-   "kind": "pick"
-  },
-  {
-   "q": "In our archive, where does a color near Dark blue slate most often sit inside a painting?",
-   "choices": [
-    "As a shadow",
-    "As the brightest highlight",
-    "As a frame or border",
-    "As a background sky"
-   ],
-   "answer": "As a shadow",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Dark blue slate and Dark Violet-Slate are two catalogue names for the exact same chip."
- ],
- "words": 237,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-09",
-  "issues": []
- }
 }

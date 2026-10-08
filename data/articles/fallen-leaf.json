@@ -1,114 +1,114 @@
 {
- "slug": "fallen-leaf",
- "name": "Fallen leaf",
- "hex": "#AA8736",
- "names": [
-  "Fallen leaf"
- ],
- "tier": "nature",
- "depth": "brief",
- "lede": "Fallen leaf is a dull gold-brown that our library also carries, at the identical hex, from a Japanese traditional color list.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A leaf, twice over",
-   "body": "Our library records this name from a Japanese traditional-color source, with no further date given [1]. The same hex appears again under [[light-hazel]], also from a Japanese list, where the source note carries the characters 青朵葉, read literally as a blue-green fallen leaf [1]. The ISCC-NBS system reads the swatch as a light yellow, about 3.7 units from the block center [1].\n\nThe nearest other named colors are [[pinchbeck-brown]] and [[honey-yellow]], both under 6 units away [2]. The family is [[leaf]], a plant word rather than a mineral or animal one [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "This color, as photographed, appears in 1,232 of 23,781 paintings, about 5.18 percent, more common than 89 percent of the named colors we track [3]. It peaks in the 1400s, in 49 of 945 paintings, at 5.2 percent of that period's paintings, 1.3 times the overall rate [3]. Inside a painting it most often plays an accent [3]. Its most devoted painter is Fritz Thomsen, carrying it in 6 of 18 works here, 6.9 times the baseline for his museums [3]. The earliest match in the archive is a 1240 painting by Master of the Cross 434; the archive's early centuries are thin, so this is a floor, not a first, and no date is implied for the name itself [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "a fallen leaf",
-   "first_recorded": "undocumented in the sources read here",
-   "source": "data/library.json"
-  },
-  "aka": [],
-  "siblings": [
-   "light-hazel",
-   "pinchbeck-brown",
-   "honey-yellow"
+  "slug": "fallen-leaf",
+  "name": "Fallen leaf",
+  "hex": "#AA8736",
+  "names": [
+    "Fallen leaf"
   ],
-  "parent": "leaf",
-  "children": [],
-  "disambiguation": [
-   {
-    "slug": "light-hazel",
-    "gloss": "the identical screen color under a separate Japanese-list name"
-   }
+  "tier": "nature",
+  "depth": "brief",
+  "lede": "Fallen leaf is a dull gold-brown that our library also carries, at the identical hex, from a Japanese traditional color list.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A leaf, twice over",
+      "body": "Our library records this name from a Japanese traditional-color source, with no further date given [1]. The same hex appears again under [[fallen-leaf]], also from a Japanese list, where the source note carries the characters 青朵葉, read literally as a blue-green fallen leaf [1]. The ISCC-NBS system reads the swatch as a light yellow, about 3.7 units from the block center [1].\n\nThe nearest other named colors are [[pinchbeck-brown]] and [[honey-yellow]], both under 6 units away [2]. The family is [[leaf]], a plant word rather than a mineral or animal one [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "This color, as photographed, appears in 1,232 of 23,781 paintings, about 5.18 percent, more common than 89 percent of the named colors we track [3]. It peaks in the 1400s, in 49 of 945 paintings, at 5.2 percent of that period's paintings, 1.3 times the overall rate [3]. Inside a painting it most often plays an accent [3]. Its most devoted painter is Fritz Thomsen, carrying it in 6 of 18 works here, 6.9 times the baseline for his museums [3]. The earliest match in the archive is a 1240 painting by Master of the Cross 434; the archive's early centuries are thin, so this is a floor, not a first, and no date is implied for the name itself [3]."
+    }
   ],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 1232,
-  "pct": 5.18,
-  "peak": "1400s, 5.2% of this period's paintings, 1.3x expected",
-  "painter": [
-   "Fritz Thomsen",
-   6,
-   18
-  ]
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json): Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930 and other name sources; CIEDE2000",
-   "loc_kind": null,
-   "url": null
+  "aside": {
+    "origin": {
+      "named_after": "a fallen leaf",
+      "first_recorded": "undocumented in the sources read here",
+      "source": "data/library.json"
+    },
+    "aka": [],
+    "siblings": [
+      "light-hazel",
+      "pinchbeck-brown",
+      "honey-yellow"
+    ],
+    "parent": "leaf",
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "light-hazel",
+        "gloss": "the identical screen color under a separate Japanese-list name"
+      }
+    ],
+    "other_languages": []
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub Color Graph look-alikes (data/graph), CIEDE2000",
-   "loc_kind": null,
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 1232,
+    "pct": 5.18,
+    "peak": "1400s, 5.2% of this period's paintings, 1.3x expected",
+    "painter": [
+      "Fritz Thomsen",
+      6,
+      18
+    ]
   },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5 per cent of canvas); data/graph/fieldnotes",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which other library name shares this exact hex?",
-   "choices": [
-    "Light Hazel",
-    "Honey Yellow",
-    "Olive",
-    "Camel"
-   ],
-   "answer": "Light Hazel",
-   "kind": "pick"
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930 and other name sources; CIEDE2000",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub Color Graph look-alikes (data/graph), CIEDE2000",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5 per cent of canvas); data/graph/fieldnotes",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which other library name shares this exact hex?",
+      "choices": [
+        "Light Hazel",
+        "Honey Yellow",
+        "Olive",
+        "Camel"
+      ],
+      "answer": "Light Hazel",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: our sources give a precise year for when the name Fallen leaf was first used.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Fallen leaf shares its exact hex with a separate Japanese traditional color name."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Fixed: the field-notes paragraph (and the matching \"field\" object) invented a country claim (\"over-represented in Iranian painting, 8 of 29\") with no basis — ar.co is empty for this slug (the real over-representation is a movement, Mughal, 13 of 168, 2.9x, which went unmentioned) — and an earliest-match claim (\"a Roman carved fragment from about 1 CE\") that doesn't match the real first-seen record (a 1240 painting by Master of the Cross 434). The presence count (1,062) also didn't match either real count (898 within-painting / 1,232 as-photographed). The Paulus Potter painter stat was accurate but wasn't this slug's most-devoted painter (Fritz Thomsen, 6 of 18, is). Rewrote the paragraph directly from data/graph/fieldnotes for this slug; removed every unsupported claim rather than inventing a replacement for it.",
+      "lint 2026-10-09"
+    ]
   },
-  {
-   "q": "True or false: our sources give a precise year for when the name Fallen leaf was first used.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Fallen leaf shares its exact hex with a separate Japanese traditional color name."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Fixed: the field-notes paragraph (and the matching \"field\" object) invented a country claim (\"over-represented in Iranian painting, 8 of 29\") with no basis — ar.co is empty for this slug (the real over-representation is a movement, Mughal, 13 of 168, 2.9x, which went unmentioned) — and an earliest-match claim (\"a Roman carved fragment from about 1 CE\") that doesn't match the real first-seen record (a 1240 painting by Master of the Cross 434). The presence count (1,062) also didn't match either real count (898 within-painting / 1,232 as-photographed). The Paulus Potter painter stat was accurate but wasn't this slug's most-devoted painter (Fritz Thomsen, 6 of 18, is). Rewrote the paragraph directly from data/graph/fieldnotes for this slug; removed every unsupported claim rather than inventing a replacement for it.",
-   "lint 2026-10-09"
-  ]
- },
- "words": 234
+  "words": 234
 }

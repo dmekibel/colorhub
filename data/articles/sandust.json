@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A tan from plate 3",
-   "body": "Maerz and Paul's 1930 dictionary places this hue on plate 3, swatch A9, first recorded in 1927, and the ISCC-NBS circular of 1955 cites the same entry, classing it a moderate yellowish pink [1]. Its Munsell notation is 6.7YR 7.8/2.4, a light, low-chroma hue in the yellow-red family [1]. The books read give no story for the name, and its origin is undocumented here [1].\n\nThe nearest named colors on file are [[tussore]], [[biscuit]] and [[vinaceous-buff]], at 3, 3.5 and 3.5 ΔE [1]. It sits close to [[buff]] in our library as well, another pale, low-chroma tan [1]."
+   "body": "Maerz and Paul's 1930 dictionary places this hue on plate 3, swatch A9, first recorded in 1927, and the ISCC-NBS circular of 1955 cites the same entry, classing it a moderate yellowish pink [1]. Its Munsell notation is 6.7YR 7.8/2.4, a light, low-chroma hue in the yellow-red family [1]. The books read give no story for the name, and its origin is undocumented here [1].\n\nThe nearest named colors on file are [[tussore]], [[biscuit]] and [[biscuit]], at 3, 3.5 and 3.5 ΔE [1]. It sits close to [[buff]] in our library as well, another pale, low-chroma tan [1]."
   },
   {
    "id": "field",
@@ -123,7 +123,7 @@
  "openers": [
   "Sandust turns up in about one painting in twenty in our archive, more common than most named colors."
  ],
- "words": 367,
+ "words": 366,
  "status": "checked",
  "checked": {
   "by": "checker",

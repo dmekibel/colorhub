@@ -1,120 +1,123 @@
 {
- "slug": "dark-peacock",
- "name": "Dark Peacock",
- "hex": "#1D697C",
- "names": [
-  "Dark peacock"
- ],
- "tier": "nature",
- "depth": "short",
- "lede": "Dark Peacock is a deep, greenish blue named for the peacock's feathers, listed in our data only through a Japanese traditional color source and nearly matched by two other library names.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A bird's name, thinly recorded",
-   "body": "Our naming data classes Dark Peacock as a plant-and-landscape word, after the bird rather than a pigment or a place [1]. Unlike most of its neighbors it is not recorded in Ridgway's 1912 atlas or the ISCC-NBS lists of 1955; our only traced source for it is a Japanese traditional color list, undated in that source [1]. The ISCC-NBS classification that its hex would fall into is \"moderate greenish blue,\" about 4.7 units from that block's center, even though no ISCC-NBS entry carries this exact name [1].\n\nTwo names in our data sit close enough to read as nearly the same color: [[venezia|Venezia]], 2.5 units away, and [[pearl-gentian|Pearl-Gentian]], 2.7 units away, both called \"almost the same\" in our computed comparison [2]. In LCH terms Dark Peacock measures lightness 27, chroma 36, hue 227 degrees: dark, moderately saturated, and between blue and green [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, a close match covers enough of the canvas in 33, as photographed, rarer than 56 percent of the named colors we track [3]. It peaks in paintings from the 1900s, at 2.3 times the rate expected from that century's share of the archive [3]. Inside a painting it most often plays a hidden color, in a third of its matches, by lightness rank within the canvas [3]. The earliest match is a 1500 painting by Quentin Massys, as photographed, a floor and not a first, since the archive's early centuries are thin [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the peacock",
-   "first_recorded": "undocumented in the sources consulted beyond a Japanese traditional list",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "venezia",
-   "pearl-gentian",
-   "teal-blue",
-   "dark-chessylite-blue"
+  "slug": "dark-peacock",
+  "name": "Dark Peacock",
+  "hex": "#1D697C",
+  "names": [
+    "Dark peacock",
+    "Bluish petrol"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 33,
-  "measured": {
-   "lch": [
-    27,
-    36,
-    227
-   ],
-   "nearest": [
-    [
-     "Venezia",
-     2.5
+  "tier": "nature",
+  "depth": "short",
+  "lede": "Dark Peacock is a deep, greenish blue named for the peacock's feathers, listed in our data only through a Japanese traditional color source and nearly matched by two other library names.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A bird's name, thinly recorded",
+      "body": "Our naming data classes Dark Peacock as a plant-and-landscape word, after the bird rather than a pigment or a place [1]. Unlike most of its neighbors it is not recorded in Ridgway's 1912 atlas or the ISCC-NBS lists of 1955; our only traced source for it is a Japanese traditional color list, undated in that source [1]. The ISCC-NBS classification that its hex would fall into is \"moderate greenish blue,\" about 4.7 units from that block's center, even though no ISCC-NBS entry carries this exact name [1].\n\nTwo names in our data sit close enough to read as nearly the same color: [[venezia|Venezia]], 2.5 units away, and [[pearl-gentian|Pearl-Gentian]], 2.7 units away, both called \"almost the same\" in our computed comparison [2]. In LCH terms Dark Peacock measures lightness 27, chroma 36, hue 227 degrees: dark, moderately saturated, and between blue and green [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, a close match covers enough of the canvas in 33, as photographed, rarer than 56 percent of the named colors we track [3]. It peaks in paintings from the 1900s, at 2.3 times the rate expected from that century's share of the archive [3]. Inside a painting it most often plays a hidden color, in a third of its matches, by lightness rank within the canvas [3]. The earliest match is a 1500 painting by Quentin Massys, as photographed, a floor and not a first, since the archive's early centuries are thin [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the peacock",
+      "first_recorded": "undocumented in the sources consulted beyond a Japanese traditional list",
+      "source": "ColorHub color library"
+    },
+    "aka": [
+      "Bluish petrol (jp)"
     ],
-    [
-     "Pearl-Gentian",
-     2.7
+    "siblings": [
+      "venezia",
+      "pearl-gentian",
+      "teal-blue",
+      "dark-chessylite-blue"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 33,
+    "measured": {
+      "lch": [
+        27,
+        36,
+        227
+      ],
+      "nearest": [
+        [
+          "Venezia",
+          2.5
+        ],
+        [
+          "Pearl-Gentian",
+          2.7
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color graph (data/graph/nodes-d.json): Dark Peacock — tier classification, Japanese traditional color source, computed ISCC-NBS-style block",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph (data/graph/edges-d.json): nearest distinct neighbors by CIEDE2000",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings, as photographed, data/graph/fieldnotes/d.json)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "True or false: Dark Peacock appears in Ridgway's 1912 color atlas.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "Which two library names read as almost the same color as Dark Peacock?",
+      "choices": [
+        "Venezia and Pearl-Gentian",
+        "Berry and Raspberry",
+        "Wheat and Khaki",
+        "Tan and Sand"
+      ],
+      "answer": "Venezia and Pearl-Gentian",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Unlike most of its neighbors, Dark Peacock has no entry in Ridgway's 1912 atlas or the 1955 ISCC-NBS lists."
+  ],
+  "words": 269,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "No book concordance hits; the name is thinly documented in our sources, said plainly in the article.",
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color graph (data/graph/nodes-d.json): Dark Peacock — tier classification, Japanese traditional color source, computed ISCC-NBS-style block",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color graph (data/graph/edges-d.json): nearest distinct neighbors by CIEDE2000",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings, as photographed, data/graph/fieldnotes/d.json)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "True or false: Dark Peacock appears in Ridgway's 1912 color atlas.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  },
-  {
-   "q": "Which two library names read as almost the same color as Dark Peacock?",
-   "choices": [
-    "Venezia and Pearl-Gentian",
-    "Berry and Raspberry",
-    "Wheat and Khaki",
-    "Tan and Sand"
-   ],
-   "answer": "Venezia and Pearl-Gentian",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Unlike most of its neighbors, Dark Peacock has no entry in Ridgway's 1912 atlas or the 1955 ISCC-NBS lists."
- ],
- "words": 269,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "No book concordance hits; the name is thinly documented in our sources, said plainly in the article.",
-   "lint 2026-10-09"
-  ]
- }
 }

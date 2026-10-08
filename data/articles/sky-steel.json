@@ -4,7 +4,8 @@
  "hex": "#4D8FAC",
  "names": [
   "Sky Steel",
-  "Sky steel"
+  "Sky steel",
+  "Bluish steel blue"
  ],
  "tier": "pigment",
  "depth": "brief",
@@ -13,7 +14,7 @@
   {
    "id": "name",
    "title": "One color, two names",
-   "body": "Our library carries Sky Steel from a Japanese traditional-color source, listed there without a Western dictionary date; it also cross-references to Sora-iro, a Japanese name meaning \"sky blue color\" [1]. The ISCC-NBS system would place it in a vivid greenish blue block, about 5.6 units off that block's center, and the Munsell notation is 8.3B 5.5/6.0 [1].\n\nIn our own graph, Sky Steel is a duplicate at zero color difference of [[bluish-steel-blue]], meaning the two names in our library point to the same screen color [1]. The nearest distinct neighbor is [[beaucaire]], 3.9 units away, described as almost the same; [[dusty-steel-blue]] follows at 4.6, a touch bluer [3]."
+   "body": "Our library carries Sky Steel from a Japanese traditional-color source, listed there without a Western dictionary date; it also cross-references to Sora-iro, a Japanese name meaning \"sky blue color\" [1]. The ISCC-NBS system would place it in a vivid greenish blue block, about 5.6 units off that block's center, and the Munsell notation is 8.3B 5.5/6.0 [1].\n\nIn our own graph, Sky Steel is a duplicate at zero color difference of [[sky-steel]], meaning the two names in our library point to the same screen color [1]. The nearest distinct neighbor is [[beaucaire]], 3.9 units away, described as almost the same; [[dusty-steel-blue]] follows at 4.6, a touch bluer [3]."
   },
   {
    "id": "field",
@@ -116,7 +117,7 @@
   "Sky Steel and Bluish Steel Blue sit at zero color difference in our library — the same color under two names.",
   "In print, the word behind this blue-grey has climbed almost every decade since the 1870s."
  ],
- "words": 338,
+ "words": 337,
  "status": "checked",
  "checked": {
   "by": "claude",

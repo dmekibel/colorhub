@@ -1,132 +1,132 @@
 {
- "slug": "light-purplish-vinaceous",
- "name": "Light Purplish Vinaceous",
- "hex": "#C4A3A6",
- "names": [
-  "Light Purplish Vinaceous"
- ],
- "tier": "standard",
- "depth": "short",
- "lede": "Light Purplish Vinaceous is a pale, dusty mauve-pink from Ridgway's 1912 atlas, rarer in our painting archive than most of the colors in this group.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A dusty mauve-pink",
-   "body": "Ridgway's 1912 atlas carries this tone on plate XXXIX, hue 1‴, notated 0.1R 6.9/3.3 in the Munsell system [1]. The 1955 ISCC-NBS dictionary groups it under block 5, naming it moderate pink, 3.6 units from Ridgway's reading [1].\n\nIts closest neighbor in our library is [[tuscany]], about 3.4 units away, almost the same color, followed by [[dawn]], about 4.1 units off and redder [2]. [[corinthian-pink]] and [[old-pink]] sit a similar distance away, about 4.2 units off and more vivid [2]. \"Vinaceous\" again supplies the wine-colored base; \"purplish\" is Ridgway's modifier, not a separate dye or pigment name [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive matches this tone in 76 of 23,781 paintings, about 0.32 percent, as photographed, rarer than 52 percent of the named colors we track [3]. It peaks in the 1900s, present in 0.8 percent of the 1,674 paintings from that decade, 3.6 times its museums' expected rate [3].\n\nInside a painting it most often hides, in 44 percent of its 43 clearly-ranked appearances, a rank computed within each canvas so varnish cannot fake it [3]. It is also most over-represented in Indian paintings, 3.3 times the expected rate, found in 7 of the archive's 721 [3]. These are photographs of aged, varnished paintings, and the match is a computed color reading, not a pigment identification [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "vinaceous, wine-colored, with Ridgway's purplish modifier",
-   "first_recorded": "1912 (Ridgway); carried into the 1955 ISCC-NBS dictionary",
-   "source": "Ridgway, Color Standards and Color Nomenclature; ISCC-NBS, NBS Circular 553"
-  },
-  "aka": [],
-  "siblings": [
-   "tuscany",
-   "dawn",
-   "corinthian-pink",
-   "old-pink"
+  "slug": "light-purplish-vinaceous",
+  "name": "Light Purplish Vinaceous",
+  "hex": "#C4A3A6",
+  "names": [
+    "Light Purplish Vinaceous"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#C4A3A6",
-   "de2000": 3.6,
-   "min_cover": 0.02
+  "tier": "standard",
+  "depth": "short",
+  "lede": "Light Purplish Vinaceous is a pale, dusty mauve-pink from Ridgway's 1912 atlas, rarer in our painting archive than most of the colors in this group.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A dusty mauve-pink",
+      "body": "Ridgway's 1912 atlas carries this tone on plate XXXIX, hue 1‴, notated 0.1R 6.9/3.3 in the Munsell system [1]. The 1955 ISCC-NBS dictionary groups it under block 5, naming it moderate pink, 3.6 units from Ridgway's reading [1].\n\nIts closest neighbor in our library is [[tuscany]], about 3.4 units away, almost the same color, followed by [[dawn]], about 4.1 units off and redder [2]. [[old-pink]] and [[old-pink]] sit a similar distance away, about 4.2 units off and more vivid [2]. \"Vinaceous\" again supplies the wine-colored base; \"purplish\" is Ridgway's modifier, not a separate dye or pigment name [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive matches this tone in 76 of 23,781 paintings, about 0.32 percent, as photographed, rarer than 52 percent of the named colors we track [3]. It peaks in the 1900s, present in 0.8 percent of the 1,674 paintings from that decade, 3.6 times its museums' expected rate [3].\n\nInside a painting it most often hides, in 44 percent of its 43 clearly-ranked appearances, a rank computed within each canvas so varnish cannot fake it [3]. It is also most over-represented in Indian paintings, 3.3 times the expected rate, found in 7 of the archive's 721 [3]. These are photographs of aged, varnished paintings, and the match is a computed color reading, not a pigment identification [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "vinaceous, wine-colored, with Ridgway's purplish modifier",
+      "first_recorded": "1912 (Ridgway); carried into the 1955 ISCC-NBS dictionary",
+      "source": "Ridgway, Color Standards and Color Nomenclature; ISCC-NBS, NBS Circular 553"
+    },
+    "aka": [],
+    "siblings": [
+      "tuscany",
+      "dawn",
+      "corinthian-pink",
+      "old-pink"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  "n_present": 76,
-  "measured": {
-   "lch": [
-    70.0,
-    12.9,
-    13.3
-   ],
-   "nearest": [
-    [
-     "Tuscany",
-     3.4
-    ],
-    [
-     "Dawn",
-     4.1
-    ],
-    [
-     "Corinthian Pink",
-     4.2
-    ],
-    [
-     "Old pink",
-     4.2
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#C4A3A6",
+      "de2000": 3.6,
+      "min_cover": 0.02
+    },
+    "n_present": 76,
+    "measured": {
+      "lch": [
+        70.0,
+        12.9,
+        13.3
+      ],
+      "nearest": [
+        [
+          "Tuscany",
+          3.4
+        ],
+        [
+          "Dawn",
+          4.1
+        ],
+        [
+          "Corinthian Pink",
+          4.2
+        ],
+        [
+          "Old pink",
+          4.2
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XXXIX, hue 1‴; cited in ISCC-NBS, NBS Circular 553 (1955), block 5, \"grayish purplish pink\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library and graph: computed LCH and nearest-neighbor distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What word in this name points to a wine color rather than a brown?",
+      "choices": [
+        "Vinaceous",
+        "Purplish",
+        "Light",
+        "Dawn"
+      ],
+      "answer": "Vinaceous",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Light Purplish Vinaceous is one of the more common colors in our painting archive.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Light Purplish Vinaceous is among the rarer colors in this group, found in under one painting in three hundred."
+  ],
+  "words": 246,
+  "status": "checked",
+  "checked": {
+    "by": "batch-36",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XXXIX, hue 1‴; cited in ISCC-NBS, NBS Circular 553 (1955), block 5, \"grayish purplish pink\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library and graph: computed LCH and nearest-neighbor distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What word in this name points to a wine color rather than a brown?",
-   "choices": [
-    "Vinaceous",
-    "Purplish",
-    "Light",
-    "Dawn"
-   ],
-   "answer": "Vinaceous",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Light Purplish Vinaceous is one of the more common colors in our painting archive.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Light Purplish Vinaceous is among the rarer colors in this group, found in under one painting in three hundred."
- ],
- "words": 246,
- "status": "checked",
- "checked": {
-  "by": "batch-36",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

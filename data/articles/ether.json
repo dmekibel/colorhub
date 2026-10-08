@@ -22,7 +22,7 @@
   {
    "id": "swatch",
    "title": "The swatch",
-   "body": "The color is a mid-light blue with a trace of green: lightness 60 and little chroma, with a contrast of about 3.2 to 1 against white and 6.6 to 1 against black [2]. Its nearest named neighbors are [[greenish-blue]], [[grey-blue]], [[sky-steel]] and [[bluish-steel-blue]], all within about five units [2]."
+   "body": "The color is a mid-light blue with a trace of green: lightness 60 and little chroma, with a contrast of about 3.2 to 1 against white and 6.6 to 1 against black [2]. Its nearest named neighbors are [[greenish-blue]], [[grey-blue]], [[sky-steel]] and [[sky-steel]], all within about five units [2]."
   },
   {
    "id": "field",
@@ -179,7 +179,7 @@
   "Ether the color is recorded in 1930; ether the substance was proposed for light in 1678 and never found.",
   "Look for it in the mid-tones of French landscapes of the 1870s, the peak decade in our archive."
  ],
- "words": 451,
+ "words": 450,
  "status": "checked",
  "checked": {
   "by": "checker",

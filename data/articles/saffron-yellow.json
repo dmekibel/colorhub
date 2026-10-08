@@ -47,7 +47,7 @@
   {
    "id": "charts",
    "title": "A color in the naturalists' charts",
-   "body": "The name reached natural science through a mineralogy handbook [15]. In Werner's 1821 nomenclature, as edited by Patrick Syme, number 68 among the yellows is Saffron Yellow [15]. Syme says it is gamboge yellow mixed with gallstone yellow in about equal parts, and he points to the tail coverts of the golden pheasant, the anthers of the saffron crocus, and the mineral sulphate of magnesia [15]. Syme's own ingredients are [[gamboge-yellow]] and [[gallstone-yellow]] [15]. By measured distance, the nearest names to this swatch are [[forsythia]], [[goldenrod]] and [[mustard]], at 2.9, 3.6 and 4.7 CIEDE2000 units [21].\n\nSyme took the term from the English edition of Willdenow's textbook, along with bluish green, lilac and blackish grey [16]. The chart then passed on. Ridgway's 1886 *Nomenclature of Colors for Naturalists* kept at least 19 of Syme's terms, saffron yellow among them [16]. Within Syme's own pages the color is a building block: Sap Green is a mix of emerald green, a good deal of saffron yellow and a little chestnut brown, while King's Yellow is mostly gamboge yellow with a touch of saffron [17]. Our library also lists the name in Maerz and Paul (1930, as cited by the NBS), in RAL (1927) and in ISCC-NBS (1955), whose nearest category to the swatch is \"moderate orange yellow\" [21].\n\nTreat every screen swatch with suspicion. The Werner sample has aged, RAL's saffron yellow is lighter and more orange (about #F6A950), and the hex shown here is one approximation among several [21]. None of them is the spice, whose threads are crimson [6]."
+   "body": "The name reached natural science through a mineralogy handbook [15]. In Werner's 1821 nomenclature, as edited by Patrick Syme, number 68 among the yellows is Saffron Yellow [15]. Syme says it is gamboge yellow mixed with gallstone yellow in about equal parts, and he points to the tail coverts of the golden pheasant, the anthers of the saffron crocus, and the mineral sulphate of magnesia [15]. Syme's own ingredients are [[gamboge-yellow]] and [[toffee]] [15]. By measured distance, the nearest names to this swatch are [[forsythia]], [[goldenrod]] and [[mustard]], at 2.9, 3.6 and 4.7 CIEDE2000 units [21].\n\nSyme took the term from the English edition of Willdenow's textbook, along with bluish green, lilac and blackish grey [16]. The chart then passed on. Ridgway's 1886 *Nomenclature of Colors for Naturalists* kept at least 19 of Syme's terms, saffron yellow among them [16]. Within Syme's own pages the color is a building block: Sap Green is a mix of emerald green, a good deal of saffron yellow and a little chestnut brown, while King's Yellow is mostly gamboge yellow with a touch of saffron [17]. Our library also lists the name in Maerz and Paul (1930, as cited by the NBS), in RAL (1927) and in ISCC-NBS (1955), whose nearest category to the swatch is \"moderate orange yellow\" [21].\n\nTreat every screen swatch with suspicion. The Werner sample has aged, RAL's saffron yellow is lighter and more orange (about #F6A950), and the hex shown here is one approximation among several [21]. None of them is the spice, whose threads are crimson [6]."
   },
   {
    "id": "field",
@@ -400,7 +400,7 @@
   "In 1374 nobles hijacked 800 pounds of saffron bound for Basel, and a war followed.",
   "Look at an Indian miniature of the Pahari or Rajput schools: about one in six carries this color."
  ],
- "words": 2072,
+ "words": 2071,
  "status": "checked",
  "checked": {
   "by": "checker",

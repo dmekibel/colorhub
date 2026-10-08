@@ -1,243 +1,243 @@
 {
- "slug": "greyish-black",
- "name": "Greyish Black",
- "hex": "#555152",
- "names": [
-  "Greyish Black"
- ],
- "tier": "descriptive",
- "depth": "medium",
- "lede": "Greyish black is a black softened with grey, a name that appears as number 17 among the blacks in Patrick Syme's 1821 edition of the mineralogist Werner's color list.",
- "sections": [
-  {
-   "id": "name",
-   "title": "Number 17 among the blacks",
-   "body": "Greyish black is a descriptive name, a [[black]] with some grey in it. Its earliest appearance in our sources is the color system of the mineralogist Abraham Gottlob Werner, where it is number 17 among the blacks, as reproduced in Patrick Syme's edition of 1821 [1]. Syme reused only three of Werner's blacks, numbers 17, 18 and 20, so this one survived the editing [2].\n\nWerner's examples were things a student could pick up. The animal example is the water ousel, a river bird, and the breast and upper back of the water hen; the mineral is basalt [2]. The 1821 edition describes it as velvet black with a portion of ash grey [2]. Baty's book also shows it in the back feathers of the dipper, on the center of the petals of *Roella ciliata*, and on a specimen of basalt with chalybite embedded in it [2]."
-  },
-  {
-   "id": "travel",
-   "title": "A name that travelled",
-   "body": "Werner's terms were quickly borrowed. Johann Lenz, a professor at Jena, published a handbook in 1791 that used identical terminology, and he describes common flint as appearing, among other things, smoky yellowish dark grey and greyish black [3]. In 1827 the Nuremberg dermatologist Heinrich Eichhorn argued that doctors needed such a color table for skin eruptions, and his example shades included basalt black or greyish black [4].\n\nBaty records the weakness of the system too. A name taken from a natural object conveys a color only if the reader has met the object, and in medicine an approximate impression was judged unsatisfactory [4]. A basalt that you have never held tells you little about the shade."
-  },
-  {
-   "id": "elsewhere",
-   "title": "Other places the words turn up",
-   "body": "Paterson lists *rubican* as a greyish black [5]. The Pigment Compendium uses the words for a hot-solution form of antimony(III) sulfide called antimony black, and for novaculite, a quartz rock that is white to greyish black [6]. In each case the phrase describes a measured look of a material, not a pigment of that name."
-  },
-  {
-   "id": "swatch",
-   "title": "The swatch and the thing",
-   "body": "The Werner swatch in our library is an aged swatch, so it is only approximate [7]. The color shown here, #555152, is the ISCC-NBS 1955 block 267, which that system calls \"dark gray\" [7]. It is almost a neutral: its chroma is 1.8, where the green of this site has 56 [7]. Against white it has a contrast ratio of 7.8 [7]. The nearest named colors in our graph are [[charcoal]], [[dark-grey]] and [[gunmetal]] [7]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, 1,179 contain this color within six units of ΔE over at least five per cent of the canvas, which is 5.0 per cent [8]. In those paintings it is as often a mid-tone (48 per cent) as a shadow (47 per cent) [8]. Its share rises in the 1900s, when 204 of 1,674 paintings carry it, or 12.2 per cent, 2.5 times the expected rate [8].\n\nThe painters who use it most are mostly Scandinavian [8]. [[painter:vilhelm-hammersh-i|Hammershøi]] has it in 15 of his 50 paintings, six times the archive rate, and Peter Hansen in 9 of 18 [8]. By country, Norway has it in 20 of 120 paintings and Denmark in 174 of 1,676 [8]. It keeps company with [[charcoal]], grey and silver [8].\n\nIn printed English, \"greyish black\" peaks around 1809, when Werner's system was still being translated, and has fallen steadily since (Google Books, all senses) [9]. All archive numbers are as photographed: museum photographs of aged, varnished paintings, so a color match is not a pigment test."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "descriptive: black modified by grey (Werner no. 17, Blacks)",
-   "first_recorded": "Werner's nomenclature (1774), in Syme's edition of 1821",
-   "source": "Baty, Nature's Palette, pp. 60-62"
-  },
-  "aka": [
-   "Rubican (Paterson)"
+  "slug": "greyish-black",
+  "name": "Greyish Black",
+  "hex": "#555152",
+  "names": [
+    "Greyish Black"
   ],
-  "siblings": [
-   "bluish-black",
-   "greenish-black",
-   "blackish-grey",
-   "reddish-black"
+  "tier": "descriptive",
+  "depth": "medium",
+  "lede": "Greyish black is a black softened with grey, a name that appears as number 17 among the blacks in Patrick Syme's 1821 edition of the mineralogist Werner's color list.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Number 17 among the blacks",
+      "body": "Greyish black is a descriptive name, a [[black]] with some grey in it. Its earliest appearance in our sources is the color system of the mineralogist Abraham Gottlob Werner, where it is number 17 among the blacks, as reproduced in Patrick Syme's edition of 1821 [1]. Syme reused only three of Werner's blacks, numbers 17, 18 and 20, so this one survived the editing [2].\n\nWerner's examples were things a student could pick up. The animal example is the water ousel, a river bird, and the breast and upper back of the water hen; the mineral is basalt [2]. The 1821 edition describes it as velvet black with a portion of ash grey [2]. Baty's book also shows it in the back feathers of the dipper, on the center of the petals of *Roella ciliata*, and on a specimen of basalt with chalybite embedded in it [2]."
+    },
+    {
+      "id": "travel",
+      "title": "A name that travelled",
+      "body": "Werner's terms were quickly borrowed. Johann Lenz, a professor at Jena, published a handbook in 1791 that used identical terminology, and he describes common flint as appearing, among other things, smoky yellowish dark grey and greyish black [3]. In 1827 the Nuremberg dermatologist Heinrich Eichhorn argued that doctors needed such a color table for skin eruptions, and his example shades included basalt black or greyish black [4].\n\nBaty records the weakness of the system too. A name taken from a natural object conveys a color only if the reader has met the object, and in medicine an approximate impression was judged unsatisfactory [4]. A basalt that you have never held tells you little about the shade."
+    },
+    {
+      "id": "elsewhere",
+      "title": "Other places the words turn up",
+      "body": "Paterson lists *rubican* as a greyish black [5]. The Pigment Compendium uses the words for a hot-solution form of antimony(III) sulfide called antimony black, and for novaculite, a quartz rock that is white to greyish black [6]. In each case the phrase describes a measured look of a material, not a pigment of that name."
+    },
+    {
+      "id": "swatch",
+      "title": "The swatch and the thing",
+      "body": "The Werner swatch in our library is an aged swatch, so it is only approximate [7]. The color shown here, #555152, is the ISCC-NBS 1955 block 267, which that system calls \"dark gray\" [7]. It is almost a neutral: its chroma is 1.8, where the green of this site has 56 [7]. Against white it has a contrast ratio of 7.8 [7]. The nearest named colors in our graph are [[charcoal]], [[cool-grey]] and [[gunmetal]] [7]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, 1,179 contain this color within six units of ΔE over at least five per cent of the canvas, which is 5.0 per cent [8]. In those paintings it is as often a mid-tone (48 per cent) as a shadow (47 per cent) [8]. Its share rises in the 1900s, when 204 of 1,674 paintings carry it, or 12.2 per cent, 2.5 times the expected rate [8].\n\nThe painters who use it most are mostly Scandinavian [8]. [[painter:vilhelm-hammersh-i|Hammershøi]] has it in 15 of his 50 paintings, six times the archive rate, and Peter Hansen in 9 of 18 [8]. By country, Norway has it in 20 of 120 paintings and Denmark in 174 of 1,676 [8]. It keeps company with [[charcoal]], grey and silver [8].\n\nIn printed English, \"greyish black\" peaks around 1809, when Werner's system was still being translated, and has fallen steadily since (Google Books, all senses) [9]. All archive numbers are as photographed: museum photographs of aged, varnished paintings, so a color match is not a pigment test."
+    }
   ],
-  "parent": "black",
-  "children": [],
-  "disambiguation": [
-   {
-    "slug": "blackish-grey",
-    "gloss": "grey leaning dark, not black leaning grey"
-   }
+  "aside": {
+    "origin": {
+      "named_after": "descriptive: black modified by grey (Werner no. 17, Blacks)",
+      "first_recorded": "Werner's nomenclature (1774), in Syme's edition of 1821",
+      "source": "Baty, Nature's Palette, pp. 60-62"
+    },
+    "aka": [
+      "Rubican (Paterson)"
+    ],
+    "siblings": [
+      "bluish-black",
+      "greenish-black",
+      "blackish-grey",
+      "reddish-black"
+    ],
+    "parent": "black",
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "blackish-grey",
+        "gloss": "grey leaning dark, not black leaning grey"
+      }
+    ],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#555152",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 1179,
+    "top_paintings": [
+      "cma-143307",
+      "smk-KMS1424",
+      "aic-22527",
+      "smk-KMS8562"
+    ],
+    "painters": {
+      "Vilhelm Hammershøi": [
+        15,
+        50,
+        6.05
+      ],
+      "Peter Hansen": [
+        9,
+        18,
+        10.09
+      ]
+    },
+    "countries": {
+      "Norway": [
+        20,
+        120,
+        3.36
+      ],
+      "Denmark": [
+        174,
+        1676,
+        2.09
+      ]
+    },
+    "role": {
+      "shadow": 0.47,
+      "mid": 0.48,
+      "highlight": 0.05
+    },
+    "century_1900s": [
+      204,
+      1674
+    ],
+    "ngram": {
+      "term": "greyish black",
+      "peak": 1809,
+      "rel_2000": 0.078
+    },
+    "measured": {
+      "lch": [
+        34.9,
+        1.8,
+        359.8
+      ],
+      "contrast_white": 7.82,
+      "nearest": [
+        [
+          "ISCC-NBS dark gray",
+          2.7
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, pp. 60-62 (Werner no. 17, Blacks)",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, pp. 60-62 (Syme 1821, Blacks)",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, p. 20 (Lenz 1791)",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, p. 220 (Eichhorn 1827, color tables in medicine)",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"rubican\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "Pigment Compendium, \"Antimony(III) sulfide\" and \"Novaculite\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "data",
+      "cite": "ColorHub library and color graph: Werner no. 17 (aged swatch, approximate), ISCC-NBS 1955 block 267",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "data",
+      "cite": "ColorHub archive of 23,781 paintings, as photographed (tools/article_field.py)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "data",
+      "cite": "Google Books Ngram, \"greyish black\", all senses, 5-year smoothed",
+      "loc_kind": null,
+      "url": null
+    }
   ],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#555152",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 1179,
-  "top_paintings": [
-   "cma-143307",
-   "smk-KMS1424",
-   "aic-22527",
-   "smk-KMS8562"
+  "questions": [
+    {
+      "q": "Which number was greyish black among the blacks in Syme's 1821 edition of Werner's list?",
+      "choices": [
+        "17",
+        "3",
+        "22",
+        "8"
+      ],
+      "answer": "17",
+      "kind": "pick"
+    },
+    {
+      "q": "According to the Syme edition, what is greyish black composed of?",
+      "choices": [
+        "Velvet black with a portion of ash grey",
+        "Grey with a trace of blue",
+        "Lamp black with chalk",
+        "Pitch black with white"
+      ],
+      "answer": "Velvet black with a portion of ash grey",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: this swatch is a strongly tinted color.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
   ],
-  "painters": {
-   "Vilhelm Hammershøi": [
-    15,
-    50,
-    6.05
-   ],
-   "Peter Hansen": [
-    9,
-    18,
-    10.09
-   ]
-  },
-  "countries": {
-   "Norway": [
-    20,
-    120,
-    3.36
-   ],
-   "Denmark": [
-    174,
-    1676,
-    2.09
-   ]
-  },
-  "role": {
-   "shadow": 0.47,
-   "mid": 0.48,
-   "highlight": 0.05
-  },
-  "century_1900s": [
-   204,
-   1674
+  "openers": [
+    "Greyish black was number 17 among the blacks in Syme's edition of Werner's list, and its mineral example was basalt.",
+    "A Danish interior by Hammershøi is a good place to look for it: he uses it in 15 of 50 paintings here."
   ],
-  "ngram": {
-   "term": "greyish black",
-   "peak": 1809,
-   "rel_2000": 0.078
-  },
-  "measured": {
-   "lch": [
-    34.9,
-    1.8,
-    359.8
-   ],
-   "contrast_white": 7.82,
-   "nearest": [
-    [
-     "ISCC-NBS dark gray",
-     2.7
+  "words": 586,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Number 17 is Syme's 1821 numbering; lede, heading, opener and quiz no longer imply it was Werner's own or when the name entered use.",
+      "Recipe wording no longer credits Syme as its author (source marks it with Werner's initial).",
+      "Verified Lenz 1791, Eichhorn 1827, Syme's three reused blacks, dipper/Roella/basalt examples: supported."
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, pp. 60-62 (Werner no. 17, Blacks)",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, pp. 60-62 (Syme 1821, Blacks)",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, p. 20 (Lenz 1791)",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, p. 220 (Eichhorn 1827, color tables in medicine)",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"rubican\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "Pigment Compendium, \"Antimony(III) sulfide\" and \"Novaculite\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "data",
-   "cite": "ColorHub library and color graph: Werner no. 17 (aged swatch, approximate), ISCC-NBS 1955 block 267",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "data",
-   "cite": "ColorHub archive of 23,781 paintings, as photographed (tools/article_field.py)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 9,
-   "kind": "data",
-   "cite": "Google Books Ngram, \"greyish black\", all senses, 5-year smoothed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which number was greyish black among the blacks in Syme's 1821 edition of Werner's list?",
-   "choices": [
-    "17",
-    "3",
-    "22",
-    "8"
-   ],
-   "answer": "17",
-   "kind": "pick"
-  },
-  {
-   "q": "According to the Syme edition, what is greyish black composed of?",
-   "choices": [
-    "Velvet black with a portion of ash grey",
-    "Grey with a trace of blue",
-    "Lamp black with chalk",
-    "Pitch black with white"
-   ],
-   "answer": "Velvet black with a portion of ash grey",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: this swatch is a strongly tinted color.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Greyish black was number 17 among the blacks in Syme's edition of Werner's list, and its mineral example was basalt.",
-  "A Danish interior by Hammershøi is a good place to look for it: he uses it in 15 of 50 paintings here."
- ],
- "words": 586,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Number 17 is Syme's 1821 numbering; lede, heading, opener and quiz no longer imply it was Werner's own or when the name entered use.",
-   "Recipe wording no longer credits Syme as its author (source marks it with Werner's initial).",
-   "Verified Lenz 1791, Eichhorn 1827, Syme's three reused blacks, dipper/Roella/basalt examples: supported."
-  ]
- }
 }

@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A pale pink from the 1912 plates",
-   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* places this hue at plate XXVIII, hue 7′′, tone f, scanned from an aged plate and so approximate [1]. The ISCC-NBS system later filed it in its own block [1]. It carries \"Congo\" in its name, but no source we checked documents why, so its origin stays undocumented here [1].\n\nIts nearest relatives in our color graph are [[hydrangea-pink]], redder, and [[pale-flesh-color]] and [[pale-greyish-vinaceous]], close behind, all within four units [2]."
+   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* places this hue at plate XXVIII, hue 7′′, tone f, scanned from an aged plate and so approximate [1]. The ISCC-NBS system later filed it in its own block [1]. It carries \"Congo\" in its name, but no source we checked documents why, so its origin stays undocumented here [1].\n\nIts nearest relatives in our color graph are [[hydrangea-pink]], redder, and [[pale-flesh-color]] and [[shell-pink]], close behind, all within four units [2]."
   },
   {
    "id": "field",
@@ -133,5 +133,5 @@
    "lint 2026-10-09"
   ]
  },
- "words": 234
+ "words": 233
 }

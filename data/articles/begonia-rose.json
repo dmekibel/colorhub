@@ -1,123 +1,123 @@
 {
- "name": "Begonia Rose",
- "hex": "#F76470",
- "names": [
-  "Begonia Rose",
-  "Usubeni"
- ],
- "tier": "nature",
- "depth": "brief",
- "lede": "Begonia Rose is a bright coral-pink named for the flower, cataloged four times over in our library yet found almost nowhere in our painting archive.",
- "sections": [
-  {
-   "id": "name",
-   "title": "Four catalogs, one color",
-   "body": "The ISCC-NBS system of 1955 files it as \"moderate red,\" block 15 [1]. Ridgway's 1912 atlas separately places it on plate I, hue 1, tone b [1]. Maerz and Paul's 1930 dictionary also records it, and Japan's traditional color list carries the same measured hue as 薄紅, romanized Usubeni, meaning pale crimson dye [1]. Despite four independent catalogs agreeing on the hue, its nearest named library neighbor is [[ultra-red]], a notably different shade, which says more about how few true near-matches exist in our list than about any closeness between the two [2]. Our library's other near matches, [[fiery-rose]], [[dusty-cerise]] and [[red-plum]], are all farther off, which says more about the gaps in our naming list near this hue than closeness between them [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds a match for Begonia Rose in only 1 of 23,781 paintings, essentially absent, as photographed [3]. A bright, saturated coral like this rarely survives in old pigments or varnished paint, which is likely why painters' palettes leave it almost untouched here, though that is our inference, not a measured cause [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the begonia flower",
-   "first_recorded": "1912, Ridgway's systematic nomenclature",
-   "source": "ColorHub color library"
-  },
-  "aka": [
-   "Usubeni"
+  "name": "Begonia Rose",
+  "hex": "#F76470",
+  "names": [
+    "Begonia Rose",
+    "Usubeni"
   ],
-  "siblings": [
-   "ultra-red",
-   "fiery-rose",
-   "dusty-cerise",
-   "red-plum"
+  "tier": "nature",
+  "depth": "brief",
+  "lede": "Begonia Rose is a bright coral-pink named for the flower, cataloged four times over in our library yet found almost nowhere in our painting archive.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Four catalogs, one color",
+      "body": "The ISCC-NBS system of 1955 files it as \"moderate red,\" block 15 [1]. Ridgway's 1912 atlas separately places it on plate I, hue 1, tone b [1]. Maerz and Paul's 1930 dictionary also records it, and Japan's traditional color list carries the same measured hue as 薄紅, romanized Usubeni, meaning pale crimson dye [1]. Despite four independent catalogs agreeing on the hue, its nearest named library neighbor is [[ultra-red]], a notably different shade, which says more about how few true near-matches exist in our list than about any closeness between the two [2]. Our library's other near matches, [[fiery-rose]], [[red-plum]] and [[red-plum]], are all farther off, which says more about the gaps in our naming list near this hue than closeness between them [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds a match for Begonia Rose in only 1 of 23,781 paintings, essentially absent, as photographed [3]. A bright, saturated coral like this rarely survives in old pigments or varnished paint, which is likely why painters' palettes leave it almost untouched here, though that is our inference, not a measured cause [3]."
+    }
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": [
-   {
-    "lang": "ja",
-    "name": "薄紅 (Usubeni)"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 1,
-  "measured": {
-   "lch": [
-    61.7,
-    61.5,
-    21.7
-   ],
-   "nearest": [
-    [
-     "Ultra Red",
-     8.8
+  "aside": {
+    "origin": {
+      "named_after": "the begonia flower",
+      "first_recorded": "1912, Ridgway's systematic nomenclature",
+      "source": "ColorHub color library"
+    },
+    "aka": [
+      "Usubeni"
+    ],
+    "siblings": [
+      "ultra-red",
+      "fiery-rose",
+      "dusty-cerise",
+      "red-plum"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": [
+      {
+        "lang": "ja",
+        "name": "薄紅 (Usubeni)"
+      }
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: ISCC-NBS 1955, Ridgway 1912, Maerz & Paul 1930, traditional colors of Japan entries",
-   "loc_kind": null,
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library, nearest-neighbor computation",
-   "loc_kind": null,
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 1,
+    "measured": {
+      "lch": [
+        61.7,
+        61.5,
+        21.7
+      ],
+      "nearest": [
+        [
+          "Ultra Red",
+          8.8
+        ]
+      ]
+    }
   },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "How many of our library's catalogs independently record Begonia Rose's hue?",
-   "choices": [
-    "Four",
-    "One",
-    "None",
-    "Ten"
-   ],
-   "answer": "Four",
-   "kind": "pick"
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: ISCC-NBS 1955, Ridgway 1912, Maerz & Paul 1930, traditional colors of Japan entries",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library, nearest-neighbor computation",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "How many of our library's catalogs independently record Begonia Rose's hue?",
+      "choices": [
+        "Four",
+        "One",
+        "None",
+        "Ten"
+      ],
+      "answer": "Four",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Begonia Rose is a common color in our painting archive.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Four separate color catalogs agree on Begonia Rose, but our painting archive has found it only once."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
+    ]
   },
-  {
-   "q": "True or false: Begonia Rose is a common color in our painting archive.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Four separate color catalogs agree on Begonia Rose, but our painting archive has found it only once."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- },
- "slug": "begonia-rose",
- "words": 201
+  "slug": "begonia-rose",
+  "words": 201
 }

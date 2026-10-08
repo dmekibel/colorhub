@@ -1,130 +1,130 @@
 {
- "name": "Continental Blue",
- "hex": "#2A2330",
- "names": [
-  "Continental Blue"
- ],
- "tier": "standard",
- "depth": "brief",
- "lede": "Continental Blue is a near-black, blackish purple from Maerz and Paul's 1930 dictionary, despite the word \"blue\" in its name.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A blue that reads as black",
-   "body": "Maerz and Paul's *A Dictionary of Color* places this hue on plate 48, cell C11, first recorded in 1927 [1]. The ISCC-NBS system classes it as a blackish purple, not a blue at all by the modern systematic name, even though the dictionary entry calls it blue [2]. The same plate carries two related names, Sailor (1923) and Sinbad (1926), both nautical [1].\n\nThe nearest named colors on file are [[pale-black-hue]], [[pale-black-shade]], [[vivid-black]] and [[black-blue]], at 3.4, 3.4, 5.5 and 5.6 ΔE [1]. Say plainly that the name promises more blue than the eye finds [3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "ColorHub's archive finds this very dark color in 518 of 23,781 paintings, about 2.2 percent, as photographed [4]. It peaks in the 1820s, in 42 of 731 paintings, and in portrait painters such as Pedro Orrente, Pietro Perugino and Gustave Caillebotte, where it is likely a shadowed background or a sitter's dark coat [4]. The count is a computed match on photographed, varnished canvases, not a pigment identification [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "undocumented (likely continental, as in a style of dress)",
-   "first_recorded": "1927, Maerz & Paul 1930",
-   "source": "Maerz & Paul, A Dictionary of Color"
-  },
-  "aka": [],
-  "siblings": [
-   "pale-black-hue",
-   "pale-black-shade",
-   "vivid-black",
-   "black-blue"
+  "name": "Continental Blue",
+  "hex": "#2A2330",
+  "names": [
+    "Continental Blue"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 518,
-  "match": {
-   "nearest_library": "Charcoal",
-   "de2000": 16.3
-  },
-  "measured": {
-   "lch": [
-    15,
-    10,
-    311
-   ],
-   "nearest": [
-    [
-     "Pale black hue",
-     3.4
+  "tier": "standard",
+  "depth": "brief",
+  "lede": "Continental Blue is a near-black, blackish purple from Maerz and Paul's 1930 dictionary, despite the word \"blue\" in its name.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A blue that reads as black",
+      "body": "Maerz and Paul's *A Dictionary of Color* places this hue on plate 48, cell C11, first recorded in 1927 [1]. The ISCC-NBS system classes it as a blackish purple, not a blue at all by the modern systematic name, even though the dictionary entry calls it blue [2]. The same plate carries two related names, Sailor (1923) and Sinbad (1926), both nautical [1].\n\nThe nearest named colors on file are [[pale-black-shade]], [[pale-black-shade]], [[vivid-black]] and [[black-blue]], at 3.4, 3.4, 5.5 and 5.6 ΔE [1]. Say plainly that the name promises more blue than the eye finds [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "ColorHub's archive finds this very dark color in 518 of 23,781 paintings, about 2.2 percent, as photographed [4]. It peaks in the 1820s, in 42 of 731 paintings, and in portrait painters such as Pedro Orrente, Pietro Perugino and Gustave Caillebotte, where it is likely a shadowed background or a sitter's dark coat [4]. The count is a computed match on photographed, varnished canvases, not a pigment identification [4]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "undocumented (likely continental, as in a style of dress)",
+      "first_recorded": "1927, Maerz & Paul 1930",
+      "source": "Maerz & Paul, A Dictionary of Color"
+    },
+    "aka": [],
+    "siblings": [
+      "pale-black-hue",
+      "pale-black-shade",
+      "vivid-black",
+      "black-blue"
     ],
-    [
-     "Pale black shade",
-     3.4
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 518,
+    "match": {
+      "nearest_library": "Charcoal",
+      "de2000": 16.3
+    },
+    "measured": {
+      "lch": [
+        15,
+        10,
+        311
+      ],
+      "nearest": [
+        [
+          "Pale black hue",
+          3.4
+        ],
+        [
+          "Pale black shade",
+          3.4
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Maerz & Paul, A Dictionary of Color (1930), plate 48, cell C11",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library: ISCC-NBS (1955) block entry",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color library: nearest named colors by CIEDE2000",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does the ISCC-NBS system call this hue, despite its dictionary name?",
+      "choices": [
+        "Blackish purple",
+        "Vivid sky blue",
+        "Pale cyan",
+        "Deep teal"
+      ],
+      "answer": "Blackish purple",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Continental Blue's screen color looks close to a clear blue.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Continental Blue has \"blue\" in its name but reads, on screen, as nearly black."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: Maerz & Paul, A Dictionary of Color (1930), plate 48, cell C11",
-   "loc_kind": null,
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library: ISCC-NBS (1955) block entry",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color library: nearest named colors by CIEDE2000",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What does the ISCC-NBS system call this hue, despite its dictionary name?",
-   "choices": [
-    "Blackish purple",
-    "Vivid sky blue",
-    "Pale cyan",
-    "Deep teal"
-   ],
-   "answer": "Blackish purple",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Continental Blue's screen color looks close to a clear blue.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Continental Blue has \"blue\" in its name but reads, on screen, as nearly black."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- },
- "slug": "continental-blue",
- "words": 189
+  "slug": "continental-blue",
+  "words": 189
 }

@@ -1,114 +1,114 @@
 {
- "slug": "beige-red",
- "name": "Beige Red",
- "hex": "#CB8D73",
- "names": [
-  "Beige Red"
- ],
- "tier": "nature",
- "depth": "brief",
- "lede": "Beige Red is a dusty terracotta from the RAL system, named for its warmer, redder place in the beige family.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A RAL warm beige",
-   "body": "Our library dates Beige Red to the RAL system, color 3012, from 1927; the hex here is an approximate screen value rather than a measured swatch [1]. The nearest named colors on file are [[onion-skin-pink]], [[antique-brass]], [[copper-crayola]] and [[testaceous]], at 3.5, 3.9, 4 and 4.1 ΔE [1]. The ISCC-NBS system of 1955 classes a close match as a dark yellowish pink [1]. 5, 3.9, 4 and 4.1 ΔE [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds a close match to Beige Red in 452 of 23,781 paintings (1.9 percent), as photographed [2]. It peaks in the 1500s, in 47 of 2,231 paintings, at 2.2 times the archive's overall rate for that century, and is over-represented in paintings from India, at 2.3 times the expected rate [2]. Maurice Denis used it most relative to his own museums' baseline [2]. Inside a painting it most often plays an accent, and the earliest dated match, from 1230, long predates the 1927 RAL record, which only means a similar hue was photographed there, not that the name or the dye existed yet, a floor and not a first, since the archive's early centuries are thin [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "a redder variant of beige, in the RAL system",
-   "first_recorded": "RAL 3012, 1927",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "onion-skin-pink",
-   "antique-brass",
-   "copper-crayola",
-   "testaceous"
+  "slug": "beige-red",
+  "name": "Beige Red",
+  "hex": "#CB8D73",
+  "names": [
+    "Beige Red"
   ],
-  "parent": "beige",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 452,
-  "role": {
-   "accent": 0.56
-  },
-  "company": [
-   "Nutmeg"
+  "tier": "nature",
+  "depth": "brief",
+  "lede": "Beige Red is a dusty terracotta from the RAL system, named for its warmer, redder place in the beige family.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A RAL warm beige",
+      "body": "Our library dates Beige Red to the RAL system, color 3012, from 1927; the hex here is an approximate screen value rather than a measured swatch [1]. The nearest named colors on file are [[onion-skin-pink]], [[antique-brass]], [[copper-crayola]] and [[clay]], at 3.5, 3.9, 4 and 4.1 ΔE [1]. The ISCC-NBS system of 1955 classes a close match as a dark yellowish pink [1]. 5, 3.9, 4 and 4.1 ΔE [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds a close match to Beige Red in 452 of 23,781 paintings (1.9 percent), as photographed [2]. It peaks in the 1500s, in 47 of 2,231 paintings, at 2.2 times the archive's overall rate for that century, and is over-represented in paintings from India, at 2.3 times the expected rate [2]. Maurice Denis used it most relative to his own museums' baseline [2]. Inside a painting it most often plays an accent, and the earliest dated match, from 1230, long predates the 1927 RAL record, which only means a similar hue was photographed there, not that the name or the dye existed yet, a floor and not a first, since the archive's early centuries are thin [2]."
+    }
   ],
-  "measured": {
-   "lch": [
-    64,
-    31,
-    49
-   ],
-   "nearest": [
-    [
-     "Onion-Skin Pink",
-     3.5
+  "aside": {
+    "origin": {
+      "named_after": "a redder variant of beige, in the RAL system",
+      "first_recorded": "RAL 3012, 1927",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "onion-skin-pink",
+      "antique-brass",
+      "copper-crayola",
+      "testaceous"
+    ],
+    "parent": "beige",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 452,
+    "role": {
+      "accent": 0.56
+    },
+    "company": [
+      "Nutmeg"
+    ],
+    "measured": {
+      "lch": [
+        64,
+        31,
+        49
+      ],
+      "nearest": [
+        [
+          "Onion-Skin Pink",
+          3.5
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: name records, plate and block locators, tier classification",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which system and year does our library date Beige Red to?",
+      "choices": [
+        "RAL, 1927",
+        "ISCC-NBS, 1955",
+        "Ridgway, 1912",
+        "Maerz and Paul, 1930"
+      ],
+      "answer": "RAL, 1927",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Beige Red's hex value is a measured pigment reading.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Beige Red is the warmer, redder cousin of beige in the RAL paint system."
+  ],
+  "words": 214,
+  "status": "checked",
+  "checked": {
+    "by": "batch-writer",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: name records, plate and block locators, tier classification",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 museum paintings), computed color match, as photographed (tools/article_field.py)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which system and year does our library date Beige Red to?",
-   "choices": [
-    "RAL, 1927",
-    "ISCC-NBS, 1955",
-    "Ridgway, 1912",
-    "Maerz and Paul, 1930"
-   ],
-   "answer": "RAL, 1927",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Beige Red's hex value is a measured pigment reading.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Beige Red is the warmer, redder cousin of beige in the RAL paint system."
- ],
- "words": 214,
- "status": "checked",
- "checked": {
-  "by": "batch-writer",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

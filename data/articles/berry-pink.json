@@ -1,120 +1,121 @@
 {
- "slug": "berry-pink",
- "name": "Berry Pink",
- "hex": "#BF507E",
- "names": [
-  "Berry Pink"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Berry Pink is a deep pink-purple from Ridgway's 1912 plates, and its name has nothing to do with the old pigment called pink, which was yellow.",
- "sections": [
-  {
-   "id": "name",
-   "title": "Two meanings of pink",
-   "body": "In the color library Berry Pink comes from Ridgway's 1912 plates and the ISCC-NBS system, with Reddish Mulberry and Rosolane Purple listed as other names [1]. The books we hold say nothing about the origin of the name, so it is undocumented [1].\n\nOlder uses of berry and pink can mislead. The Pigment Compendium explains that the artists' pigment called pink was a yellow lake made from unripe buckthorn berries, sold as French berries or Avignon berries [2]. The word survived in names such as Dutch pink and English pink before it fell out of use [2]. That yellow is a different story from this swatch, which is a strong red-pink near [[raspberry]], [[cerise]] and [[rose-pink]] [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, a color within six units of this one covers at least five per cent of the canvas in only three, led by a 1900 Indian figure painting at about 29 per cent and Patrick Henry Bruce's Peinture/Nature Morte (1924) [3]. These are photographs of aged, varnished paintings, so a match is not a pigment test [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "berries (descriptive); also called Reddish Mulberry and Rosolane Purple",
-   "first_recorded": "origin undocumented",
-   "source": "Ridgway 1912; ISCC-NBS 1955"
-  },
-  "aka": [
-   "Reddish Mulberry",
-   "Rosolane Purple"
+  "slug": "berry-pink",
+  "name": "Berry Pink",
+  "hex": "#BF507E",
+  "names": [
+    "Berry Pink",
+    "Rosolane Purple"
   ],
-  "siblings": [
-   "raspberry",
-   "cerise",
-   "rose-pink",
-   "pink"
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Berry Pink is a deep pink-purple from Ridgway's 1912 plates, and its name has nothing to do with the old pigment called pink, which was yellow.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Two meanings of pink",
+      "body": "In the color library Berry Pink comes from Ridgway's 1912 plates and the ISCC-NBS system, with Reddish Mulberry and Rosolane Purple listed as other names [1]. The books we hold say nothing about the origin of the name, so it is undocumented [1].\n\nOlder uses of berry and pink can mislead. The Pigment Compendium explains that the artists' pigment called pink was a yellow lake made from unripe buckthorn berries, sold as French berries or Avignon berries [2]. The word survived in names such as Dutch pink and English pink before it fell out of use [2]. That yellow is a different story from this swatch, which is a strong red-pink near [[raspberry]], [[cerise]] and [[rose-pink]] [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, a color within six units of this one covers at least five per cent of the canvas in only three, led by a 1900 Indian figure painting at about 29 per cent and Patrick Henry Bruce's Peinture/Nature Morte (1924) [3]. These are photographs of aged, varnished paintings, so a match is not a pigment test [3]."
+    }
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [
-   {
-    "slug": "pink",
-    "gloss": "the old pigment 'pink' was a yellow lake from buckthorn berries"
-   }
+  "aside": {
+    "origin": {
+      "named_after": "berries (descriptive); also called Reddish Mulberry and Rosolane Purple",
+      "first_recorded": "origin undocumented",
+      "source": "Ridgway 1912; ISCC-NBS 1955"
+    },
+    "aka": [
+      "Reddish Mulberry",
+      "Rosolane Purple"
+    ],
+    "siblings": [
+      "raspberry",
+      "cerise",
+      "rose-pink",
+      "pink"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "pink",
+        "gloss": "the old pigment 'pink' was a yellow lake from buckthorn berries"
+      }
+    ],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 3,
+    "match": {
+      "hex": "#BF507E",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "top_paintings": [
+      "cma-164465",
+      "nga-166434",
+      "cma-164456"
+    ]
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json) and Color Graph look-alikes, CIEDE2000",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Pigment Compendium, entries \"Pink\" and \"French berries\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+      "loc_kind": null,
+      "url": null
+    }
   ],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 3,
-  "match": {
-   "hex": "#BF507E",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "top_paintings": [
-   "cma-164465",
-   "nga-166434",
-   "cma-164456"
-  ]
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json) and Color Graph look-alikes, CIEDE2000",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Pigment Compendium, entries \"Pink\" and \"French berries\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
-   "loc_kind": null,
-   "url": null
+  "questions": [
+    {
+      "q": "What color was the artists' pigment called pink?",
+      "choices": [
+        "Yellow",
+        "Rose",
+        "Green",
+        "Blue"
+      ],
+      "answer": "Yellow",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: the books we hold explain who named Berry Pink.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Old 'pink' was yellow: a lake made from buckthorn berries."
+  ],
+  "words": 201,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "All key claims verified against fact cards and book text; no changes."
+    ]
   }
- ],
- "questions": [
-  {
-   "q": "What color was the artists' pigment called pink?",
-   "choices": [
-    "Yellow",
-    "Rose",
-    "Green",
-    "Blue"
-   ],
-   "answer": "Yellow",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: the books we hold explain who named Berry Pink.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Old 'pink' was yellow: a lake made from buckthorn berries."
- ],
- "words": 201,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "All key claims verified against fact cards and book text; no changes."
-  ]
- }
 }

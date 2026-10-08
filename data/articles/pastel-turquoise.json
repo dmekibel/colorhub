@@ -1,114 +1,114 @@
 {
- "slug": "pastel-turquoise",
- "name": "Pastel Turquoise",
- "hex": "#7FB0B2",
- "names": [
-  "Pastel Turquoise"
- ],
- "tier": "standard",
- "depth": "brief",
- "lede": "Pastel Turquoise is a muted, greyed blue-green fixed by the German RAL paint system in 1927, grammatically a softened version of Turquoise rather than a new color idea.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A softened Turquoise",
-   "body": "Our library records Pastel Turquoise as RAL 6034, one of the colors the German RAL paint-naming system fixed in 1927, with no further story behind the choice of \"pastel\" over any other softening word [1]. The nearest named colors on file are [[grey-teal]], [[glaucous-blue]], [[light-dull-glaucous-blue]] and [[dark-ash]], at 3.9, 3.9, \nIn ISCC-NBS terms this reads as a light greenish blue, and in Munsell notation 9.8BG 6.8/3.4 [1]. The nearest named color in our library is Ash, 12.3 units off, a looser match than most of our standard colors get, with [[turquoise]] itself the obvious sibling [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this blue-green in 107 of 23,781 paintings, 0.45 percent, more common than 53 percent of our named colors, as photographed [2]. It most often appears as a hidden color, buried in shadow rather than light, in just over half its appearances [2]. It is over-represented in France, at twice the archive's baseline rate [2]. The earliest dated example, a 1480 panel by Geertgen tot Sint Jans, sits 447 years before RAL's 1927 record of the name, so the match is a look-alike hue in aged paint, not a trace of the pigment itself, a floor and not a first, since the archive's early centuries are thin [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "Turquoise, softened by the modifier \"pastel\"",
-   "first_recorded": "RAL, 1927 (RAL 6034)",
-   "source": "ColorHub color library (RAL)"
-  },
-  "aka": [],
-  "siblings": [
-   "grey-teal",
-   "glaucous-blue",
-   "light-dull-glaucous-blue",
-   "dark-ash"
+  "slug": "pastel-turquoise",
+  "name": "Pastel Turquoise",
+  "hex": "#7FB0B2",
+  "names": [
+    "Pastel Turquoise"
   ],
-  "parent": "turquoise",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 107,
-  "rate": 0.0045,
-  "measured": {
-   "lch": [
-    69,
-    17,
-    202
-   ],
-   "nearest": [
-    [
-     "Grey teal",
-     3.9
+  "tier": "standard",
+  "depth": "brief",
+  "lede": "Pastel Turquoise is a muted, greyed blue-green fixed by the German RAL paint system in 1927, grammatically a softened version of Turquoise rather than a new color idea.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A softened Turquoise",
+      "body": "Our library records Pastel Turquoise as RAL 6034, one of the colors the German RAL paint-naming system fixed in 1927, with no further story behind the choice of \"pastel\" over any other softening word [1]. The nearest named colors on file are [[grey-teal]], [[grey-teal]], [[light-dull-glaucous-blue]] and [[grey-aqua]], at 3.9, 3.9, \nIn ISCC-NBS terms this reads as a light greenish blue, and in Munsell notation 9.8BG 6.8/3.4 [1]. The nearest named color in our library is Ash, 12.3 units off, a looser match than most of our standard colors get, with [[turquoise]] itself the obvious sibling [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this blue-green in 107 of 23,781 paintings, 0.45 percent, more common than 53 percent of our named colors, as photographed [2]. It most often appears as a hidden color, buried in shadow rather than light, in just over half its appearances [2]. It is over-represented in France, at twice the archive's baseline rate [2]. The earliest dated example, a 1480 panel by Geertgen tot Sint Jans, sits 447 years before RAL's 1927 record of the name, so the match is a look-alike hue in aged paint, not a trace of the pigment itself, a floor and not a first, since the archive's early centuries are thin [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "Turquoise, softened by the modifier \"pastel\"",
+      "first_recorded": "RAL, 1927 (RAL 6034)",
+      "source": "ColorHub color library (RAL)"
+    },
+    "aka": [],
+    "siblings": [
+      "grey-teal",
+      "glaucous-blue",
+      "light-dull-glaucous-blue",
+      "dark-ash"
+    ],
+    "parent": "turquoise",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 107,
+    "rate": 0.0045,
+    "measured": {
+      "lch": [
+        69,
+        17,
+        202
+      ],
+      "nearest": [
+        [
+          "Grey teal",
+          3.9
+        ]
+      ]
+    },
+    "first_seen": {
+      "year": 1480,
+      "painting": "rijks-200109296",
+      "painter": "Geertgen tot Sint Jans"
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: RAL 1927 (RAL 6034)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does the \"pastel\" in Pastel Turquoise signal?",
+      "choices": [
+        "A specific pigment",
+        "A desaturated, light version of the base color",
+        "A French paint brand",
+        "A painting technique"
+      ],
+      "answer": "A desaturated, light version of the base color",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: our archive's earliest match for this color predates RAL's 1927 naming of it.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Pastel Turquoise's closest named match in our library is 12.3 units away, a looser fit than most standard colors get."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
   },
-  "first_seen": {
-   "year": 1480,
-   "painting": "rijks-200109296",
-   "painter": "Geertgen tot Sint Jans"
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: RAL 1927 (RAL 6034)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What does the \"pastel\" in Pastel Turquoise signal?",
-   "choices": [
-    "A specific pigment",
-    "A desaturated, light version of the base color",
-    "A French paint brand",
-    "A painting technique"
-   ],
-   "answer": "A desaturated, light version of the base color",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: our archive's earliest match for this color predates RAL's 1927 naming of it.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Pastel Turquoise's closest named match in our library is 12.3 units away, a looser fit than most standard colors get."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- },
- "words": 242
+  "words": 242
 }
