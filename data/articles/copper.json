@@ -1,0 +1,544 @@
+{
+ "slug": "copper",
+ "name": "Copper",
+ "hex": "#B87333",
+ "names": [
+  "Copper"
+ ],
+ "tier": "pigment",
+ "depth": "epic",
+ "lede": "Copper is the reddish-brown orange of the metal, named after Cyprus; the strange thing is that the red metal has given painters almost nothing red, and instead most of the blues and greens of the ancient and medieval paintbox.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The red metal and its name",
+   "body": "As a color, copper simply means the color of the metal, and the metal's English name goes back to Cyprus [1]. The Latin prefix *cupri-* gives the formal adjective *cupreous*, which Paterson defines as the reddish brown of copper [1]. St Clair describes the color as a reddish, rosy gold, and notes that for hair the word means something hotter, a fiery orange [7]. Maerz and Paul's 1930 dictionary dates copper as a color name to 1594, and the nearest ISCC-NBS category to this swatch is brownish orange [41].\n\nThe swatch on this page is the metal's average color, a warm brown-orange [41]. A flat screen cannot show shine, so it stands in for polished copper the way a photograph of a coin does. Other systems disagree on how light and pink it should be: the Crayola crayon called [[copper-crayola|Copper]] and our library's [[copper-red]] both sit about 13 units away, and [[copper-penny]] about 18 [41].\n\nCopper was also a standard reference for naturalists. The color lists that grew out of Abraham Werner's mineral scale, from 1774 to 1821, include a copper red, and Richard Kirwan's 1794 list added a copper yellow [36][35]. Baty records the objection that such names only work for someone who has seen the object [37]. Copper is a moving target even then, because the metal itself changes color."
+  },
+  {
+   "id": "patina",
+   "title": "From rose to green",
+   "body": "Left outdoors, copper and its alloy bronze grow a green crust when oxygen, water, carbon dioxide or sulfur reach them [8]. The Statue of Liberty, dedicated in 1886, is made of copper and was first brown; weather and polluted air had turned it green by the early twentieth century [34]. St Clair puts the change at about thirty years, from rosy copper to full green [8].\n\nThat green, verdigris, gave its name to a color and a paint. Patrick Syme's 1814 color book used the green on copper as the mineral example for its [[verdigris-green]] [36]. Werner went further and argued that a mineral's color can hint at its chemistry: copper minerals, in his view, are mostly green or blue [35]. Baty presents this as Werner's argument, not a law, but the paintbox mostly bears it out [35]."
+  },
+  {
+   "id": "material",
+   "title": "A red metal that paints blue and green",
+   "body": "The Pigment Compendium calls copper pigments an extremely large group [21]. Almost all of them are blues and greens. The oldest is [[egyptian-blue]], made from about 2500 BC: one part lime, one part copper oxide and four parts quartz, fired at 800 to 900 degrees Celsius [12]. Ball calls it the oldest synthetic pigment [12]. Egyptian makers glazed small funerary figures and beads with copper blues and blue-greens, whose color was believed to protect the dead [25].\n\nThe natural copper ores azurite and [[malachite]] were dug from the same mines [24]. Azurite, a basic copper carbonate, was Dürer's usual blue, sold in Germany as mountain blue [13]. It leans green beside ultramarine, and it is less stable: Finlay notes that a robe of Michelangelo's Magdalene has faded from sea blue to olive [24]. Blue and green verditer, made by refiners, are the same copper carbonate-hydroxides in different proportions, and until the late eighteenth century nobody could control which one a batch would give [14].\n\nVerdigris was made rather than mined. Vinegar, the strongest acid of antiquity, was enough to corrode copper into it, and Theophrastus gives the earliest account [12]. Later makers sealed copper sheets in pots with vinegar or sour wine for about two weeks and scraped off the green [8]; in Persia, Finlay reports, yogurt could stand in for the vinegar [23]. A late thirteenth-century recipe asks for the filings to steep three days or nine months, numbers Pastoureau reads as ritual rather than measurement [26]. The name means green of Greece in French, while German calls it *Grünspan*, Spanish green [8][5]."
+  },
+  {
+   "id": "art",
+   "title": "Copper greens that turned brown",
+   "body": "Roman wall painters already had copper greens. The painted garden in the Villa of Livia, from about 20 BC, uses malachite and artificial copper greens alongside green earths [27]. In the fifteenth century, painters working in oil added copper resinate, a green made by cooking verdigris with pine resin [14].\n\nMany of those greens did not last. Jarman lists the dead copper greens of Venetian painting among famous pigment failures [44], and the brown foliage and hills of many Italian pictures of the fifteenth and sixteenth centuries were once green [18]. Verdigris took the blame, but Ball reports that modern tests show little darkening in verdigris itself [18]. The likely culprit is copper resinate, whose resin breaks down in light [18]. Cennino Cennini called verdigris and lead white mortal enemies, yet tests show no harm in mixing them, and painters often did [18].\n\nThe real hazards were corrosion and chemistry. Pastoureau describes artificial copper greens attacking neighboring colors and even their supports [26]. Poussin still used a splendid but unstable oxidized-copper green, while Vermeer softened his copper green with honey [26]. Look closely at an old landscape with brown trees: the brown is often a green that changed, not the painter's choice."
+  },
+  {
+   "id": "arsenic",
+   "title": "Arsenic greens",
+   "body": "In 1775 the Swedish chemist Carl Scheele made copper arsenite, sold as [[scheele-s-green]] [15]. Two years later he privately worried that it was poisonous and should carry a warning [23]. In 1814 Wilhelm Sattler and Friedrich Russ at Schweinfurt found a brighter relative, copper aceto-arsenite, which the English called [[emerald-green]] [15].\n\nBoth went into wallpaper, cloth, artificial flowers and even sweets. By 1858 about a hundred square miles of British wallpaper used Scheele's green, and the death in 1861 of Matilda Scheurer, a nineteen-year-old maker of artificial flowers, helped end its use [9]. In 1862 the chemist August Hofmann found it in a ballroom head-dress, a use already banned in Bavaria [38].\n\nPastoureau goes further and suggests that damp green wallpaper at Longwood may have poisoned Napoleon [39]. That claim is unproven, and this article does not repeat it as fact."
+  },
+  {
+   "id": "glass",
+   "title": "Copper in fire: glass",
+   "body": "Glassmakers used copper for color from the start. In Egyptian glass, cobalt gave a deeper blue than copper, while greens came from iron or copper oxides, and those recipes passed almost unchanged to medieval cathedral windows [33]. Vitruvius described Roman blue glass made with soda and copper filings [24].\n\nCopper is also two-faced in the furnace. Medieval glassmakers used the same copper oxide for red glass and for green, and the color depended on how long the glass was heated [2][28]. Around 1200, French window makers swapped cobalt for cheaper copper and manganese salts, which gave the murkier blues of windows such as the Sainte-Chapelle [25]. Aventurine, an Italian invention, is brown glass full of sparkling flecks of copper or gold [6]."
+  },
+  {
+   "id": "reds",
+   "title": "The rare copper reds",
+   "body": "The metal's own color is hard to find in a paintbox. The nineteenth-century writer Salter listed only two copper reds: copper oxide, the mineral cuprite, and turacine [21]. Turacine is an organo-copper compound supposedly drawn from the feathers of the turaco, an African bird [22]. Salter dismissed it as a mere curiosity, because an entire plumage yields no more than three grains of it [22].\n\nThe browns came closer. Paterson lists Hatchett's brown, also sold as Roman brown and Florentine brown, as a copper color; the Pigment Compendium identifies it as a copper iron cyanide, copper hexacyanoferrate [4][45]. [[copper-brown]] in our library is far darker than the metal, about 24 units away [41]."
+  },
+  {
+   "id": "modern",
+   "title": "Plates, presses and a modern blue",
+   "body": "Copper shaped the look of print. From about 1500, printers of books swapped their wood blocks for engraved copper plates, and textile printers soon did the same [16]. The black ink of Gutenberg's Bible of 1455 included iron or copper sulfate, which helped make the print impossible to scratch away [43]. Rembrandt painted some early pictures on gilded copper, a precious-material habit Gage finds old-fashioned [30].\n\nThe most important modern copper color is a blue. In 1928, chemists at Scottish Dyes noticed a blue contaminant while making another compound, and between 1935 and 1937 ICI developed its copper version, a deep turquoise [16]. Sold from 1935 as Monastral blue, copper phthalocyanine absorbs red and yellow light almost completely, which makes it close to an ideal cyan for color printing [17]. Its molecule has the same ring shape as chlorophyll, which holds magnesium, and haemoglobin, which holds iron [20]. The cyan in a color printer is, in this sense, a copper color too.\n\nArtists also used the metal straight. Frank Stella painted early works with copper paint made to stop barnacles growing on boat hulls [19]."
+  },
+  {
+   "id": "seeing",
+   "title": "Where to see copper",
+   "body": "Copper is a color of glints as much as surfaces. The best indigo shows it: in 1610 William Finch listed what good indigo needed, and merchants tested a cake by scratching it for a coppery sheen [31]. Louisiana growers sold their best grade as *cuivre*, copper [32], and West African dyers beat indigo cloth with mallets to a coppery, bronzy shine [33]. Tilt a deeply dyed indigo cloth toward the light and look for that red-gold glint on the dark blue.\n\nThe color also belongs to hair. Elizabeth Siddal, the model for Millais's *Ophelia*, was famous for copper hair [11]. To the alchemists the metal belonged to Venus: a goldsmith's table from Strasbourg pairs Venus with green, copper and Friday [29]. Copper and green have been linked for as long as people have watched the metal age."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a screen color within six units of copper covers at least five per cent of the canvas in 685 works, about one in thirty-five [40]. It is most frequent in the 1300s and 1400s, at more than twice the archive's rate, and in the 1390s it appears in 5 of 25 dated works [40]. Where it covers the most canvas, it is mostly early Italian gold-ground panels: Paolo Veneziano's *[[art:nga-284|The Crucifixion]]* of about 1340 (46 per cent) and Duccio's *[[art:nga-282|The Calling of the Apostles Peter and Andrew]]* of 1308 (39 per cent) [40]. The earliest example is an Egyptian funerary papyrus of about 1069 BC [40].\n\nThis is the surprise. Copper pigments are blue and green, so the copper color in these paintings is almost certainly not copper: as photographed, aged gold leaf, warm grounds and yellowed varnish read as copper [40]. The same color covers 45 per cent of Van Gogh's *[[art:commons-Q26221149|Wheat Field with Sheaves]]* of 1888, which has no gold at all [40]. Inside paintings it is a light color: 67 per cent of the time it falls among the highlights, and almost never in shadow [40]. It shares canvases with [[ochre]] nearly 16 times more often than chance [40].\n\nThese are photographs of aged, varnished paintings, and a color match is not a pigment test [40]. Our nearest named neighbors to the swatch are [[leather]] (3.6 units), [[tawny]] and India Spice (4.4) and Ochre (4.8) [41]. In Google Books the word, metal and color together, peaks in 1909 and has fallen to about 30 per cent of that level by 2000 [42]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the metal copper, whose name derives from Cyprus",
+   "first_recorded": "as a color name: 1594 (Maerz & Paul)",
+   "source": "Paterson, A Dictionary of Colour; Maerz & Paul, A Dictionary of Color (1930)"
+  },
+  "aka": [
+   "cupreous",
+   "Liver (Dogs)",
+   "Mast Brown (Maerz & Paul)"
+  ],
+  "siblings": [
+   "verdigris-green",
+   "egyptian-blue",
+   "malachite",
+   "bronze"
+  ],
+  "parent": null,
+  "children": [
+   "copper-red",
+   "copper-brown",
+   "copper-rose",
+   "copper-penny",
+   "copper-crayola"
+  ],
+  "disambiguation": [
+   {
+    "slug": "copper-crayola",
+    "gloss": "the crayon color, lighter and pinker than the metal"
+   },
+   {
+    "slug": "verdigris-green",
+    "gloss": "the green that grows on copper, not the metal's own color"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "la",
+    "name": "cupri- (prefix), as in cupreous"
+   },
+   {
+    "lang": "de",
+    "name": "Kupfer"
+   },
+   {
+    "lang": "ja",
+    "name": "Kigaracha (黄唐茶), the traditional swatch filed with Copper in our library"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#B87333",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 685,
+  "by_century_lift": {
+   "1300": 2.35,
+   "1400": 2.2
+  },
+  "peak_decade": {
+   "decade": 1390,
+   "hits": 5,
+   "n": 25,
+   "lift": 6.94
+  },
+  "top_paintings": [
+   "nga-284",
+   "commons-Q26221149",
+   "commons-Q21727867",
+   "nga-282",
+   "rijks-200109300",
+   "rijks-200109285"
+  ],
+  "first_dated": {
+   "id": "aic-805",
+   "title": "Funerary Papyrus of Tayuhenutmut",
+   "year": -1069
+  },
+  "role": {
+   "highlight": 0.67,
+   "mid": 0.32,
+   "shadow": 0.01
+  },
+  "company": [
+   [
+    "Ochre",
+    15.65,
+    553
+   ]
+  ],
+  "ngram": {
+   "copper_peak": 1909,
+   "rel_2000": 0.304
+  },
+  "measured": {
+   "lch": [
+    54.8,
+    50.3,
+    64.5
+   ],
+   "iscc_nbs": "brownish orange (block 39)",
+   "de_variants": {
+    "Copper (Crayola)": 12.7,
+    "Copper Red": 12.6,
+    "Copper Penny": 18.1,
+    "Copper brown": 23.5
+   },
+   "nearest": [
+    [
+     "Leather",
+     3.6
+    ],
+    [
+     "India Spice",
+     4.4
+    ],
+    [
+     "Tawny",
+     4.4
+    ],
+    [
+     "Ochre",
+     4.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"copper\" and \"cupreous\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"copper oxide\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Hatchett's brown\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"verdigris\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"aventurine\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary, \"Copper\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Verdigris\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Scheele's green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Ginger\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 11",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 12",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 13",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 15",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 17",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 18",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 18,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 19",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 19,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 22",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 20,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 10 (\"Plucking the Rainbow\")",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 21,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, pp. 139, 142 (\"copper group\", \"copper red\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 22,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 383 (\"turacine\", quoting Salter 1869)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 23,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 7 (\"Green\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 24,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 8 (\"Blue\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 25,
+   "kind": "book",
+   "cite": "Pastoureau, Blue: The History of a Color, ch. 7",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 26,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, ch. 33",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 27,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, ch. 11",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 28,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 94",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 29,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 151",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 30,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 172",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 31,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 120",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 32,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 78",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 33,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 11; Balfour-Paul, Indigo, p. 143",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 34,
+   "kind": "book",
+   "cite": "Westland et al., Universal Principles of Color, ch. 80",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 35,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 20, 80",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 36,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 32-34, 146",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 37,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 220",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 38,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 9",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 39,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, ch. 40",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 40,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 41,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json, data/graph/names.json; Maerz & Paul 1930 and ISCC-NBS 1955 sources), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 42,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  },
+  {
+   "n": 43,
+   "kind": "book",
+   "cite": "Pastoureau, Black: The History of a Color, p. 117",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 44,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 41",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 45,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 195 (\"Hatchett's brown\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Copper is a reddish metal. What colors are most copper pigments?",
+   "choices": [
+    "Blues and greens",
+    "Reds and pinks",
+    "Yellows and oranges",
+    "Blacks and browns"
+   ],
+   "answer": "Blues and greens",
+   "kind": "pick"
+  },
+  {
+   "q": "Why are the trees in some fifteenth- and sixteenth-century Italian paintings brown?",
+   "choices": [
+    "A copper green, often copper resinate, darkened over time",
+    "Painters were copying autumn",
+    "Green pigments were banned in Italy",
+    "Museums photograph green as brown"
+   ],
+   "answer": "A copper green, often copper resinate, darkened over time",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: in our archive, most of the large copper-colored areas in early Italian panels are probably copper pigment.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The red metal gave painters almost no reds: copper made the blues and greens of the ancient paintbox.",
+  "The Statue of Liberty took about thirty years to turn from rosy copper to green.",
+  "Scratch a cake of good indigo and look for a copper glint: merchants used it as a test."
+ ],
+ "words": 1771,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Turacine: Pigment Compendium says 'supposedly derived' and Salter's 'curiosity' remark; reworded, dropped unsupported 'first animal or vegetable pigment' attribution to Salter.",
+   "Verified: Statue of Liberty, Monastral/phthalocyanine dates and 'ideal cyan', Sainte-Chapelle copper/manganese glass, Scheurer, Scheele, Gutenberg ink, Egyptian faience; Napoleon claim already labelled unproven."
+  ]
+ }
+}

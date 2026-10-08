@@ -1,0 +1,480 @@
+{
+  "slug": "cobalt",
+  "name": "Cobalt",
+  "hex": "#0047AB",
+  "names": [
+    "Cobalt",
+    "Cobalt Blue"
+  ],
+  "tier": "pigment",
+  "depth": "epic",
+  "lede": "Cobalt is a deep, vivid blue named after a metal, and the metal after a mine goblin: the blue of Chartres glass and Chinese porcelain long before a French chemist made it into one of the steadiest paints ever made.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A goblin in the mine",
+      "body": "Cobalt is a metal before it is a color, and the metal is named after a goblin. Silver miners in Saxony dug an ore laced with arsenic whose dust ate at their hands, feet, lungs and eyes; Georgius Agricola warned of it in 1556 [1]. The German translation of his book called the stuff *kobelt*, after the goblins thought to haunt the mines, and in 1562 the scholar Johann Mathesius wrote that, devil or not, it was a poisonous metal [1]. Finlay and Coles tell the same story of the *kobold*, a spiteful earth sprite [2][3], and Paterson places the usage in Bohemia [4].\n\nThe ore is a mixture of cobalt and nickel arsenides called smaltite, which grows a fibrous crust in air that miners called cobalt bloom [1][3]. Early in the 1700s Georg Brandt, a Swedish chemist, examined smalt, a blue glass, and showed that this metal was its coloring agent [14]. Cobalt had a quieter trick as well: in the seventeenth century its salts were used as invisible ink that turned green when the paper was warmed [2].\n\nCobalt is not only blue. Werner's mineral color chart, in Syme's edition, used red cobalt ore as its example of peach-blossom red and black cobalt ochre for bluish black [36]. In glass and in paint, though, the metal gives a deep blue so reliably that Ball, sorting the transition metals by their usual colors, gives rich blue to cobalt as red goes to iron [35]."
+    },
+    {
+      "id": "glass",
+      "title": "Blue glass, from Egypt to Chartres",
+      "body": "The color is far older than the paint. Egyptian glassmakers used cobalt minerals for their deepest blues, darker than anything copper gave them, and the same family of recipes later colored the windows of medieval cathedrals [6]. Cobalt aluminate, the compound of the modern pigment, has been identified in artefacts from dynastic Egypt [7]. Persian potters used cobalt for blue enamels, glazes and the tiles on mosque roofs [1][11].\n\nChina wanted that blue. By Finlay's account, for about four hundred years China sent green celadon west and received Persian cobalt, called \"Mohammedan blue\", in return [2]. She reports reading at the Victoria and Albert Museum that its quality rose and fell through the Ming dynasty, finest in the mid-fifteenth-century Xuande reign and greyer later, after trade with Central Asia was cut [2]. Jarman offers a rule of thumb for the old blues: indigo dressed people, cobalt colored glass and ultramarine served painting [27].\n\nIn Europe the great moment was the twelfth century [8]. The blue windows of Saint-Denis, Le Mans and Chartres, made between about 1140 and 1160, were colored with cobalt in a soda-based glass, and they have survived almost unchanged while reds and greens of the same years have altered [8][9]. By about 1200 the glaziers had replaced costly cobalt with copper and manganese, so the blue of the Sainte-Chapelle, built in the 1240s, is darker and murkier than the blue of Chartres [8][9]. Gage notes that the cobalt was imported from Saxony, Bohemia or even Persia, and that French window glass before the thirteenth century was usually colored with the commoner copper and manganese [10]."
+    },
+    {
+      "id": "smalt",
+      "title": "Smalt: glass ground into paint",
+      "body": "The first cobalt paint was simply blue glass, ground. To make smalt, the ore was roasted, driving off arsenic fumes; the cobalt oxide left behind was melted with sand and potash, poured into water so that it shattered, and the fragments were ground [1][12]. It had to stay coarse, because finely ground smalt loses its color, and that grit made it awkward to paint with [1][12].\n\nIts origin is unclear. Tradition credits a Bohemian glassmaker, Christoph Schürer, between 1540 and 1560, but smalt appears in Dieric Bouts's *Entombment* of about 1455, and some historians look to Italian glassmakers or to the Near East instead [1]. By the middle of the sixteenth century it was made on a large scale, chiefly in the Netherlands, and Titian, Tintoretto, Veronese, El Greco, van Dyck, Rubens and Rembrandt all used it [1]. It was still being manufactured in the 1950s [1].\n\nSmalt was cheap, which was its appeal, and unstable, which was its flaw. Its best grade had a purplish cast that made it a stand-in for ultramarine, but in oil the color dulls [1], and cobalt can leach out of the glass particles [13]. Ball points to the smalt sky of Velázquez's *Immaculate Conception*, painted about 1618, which has turned brown [13]."
+    },
+    {
+      "id": "discovery",
+      "title": "Thénard's blue",
+      "body": "By 1800 painters still had no blue to match ultramarine, which was ground from lapis lazuli and ruinously expensive [14]. Napoleon's interior minister, Count Chaptal, himself a chemist, set Louis-Jacques Thénard to find a substitute [14][15]. Thénard knew that the potters of Sèvres used cobalt salts in their blue glazes, and in 1802 he heated a cobalt salt with alumina and obtained a fine deep blue, cobalt aluminate [14][11]. It was purer in hue than azurite, Prussian blue or indigo, and artists took it up at once [14][3].\n\nBooks disagree on whether Thénard invented it or perfected it [14][7]. Ball, St Clair, Coles and Paterson date cobalt blue to Thénard in 1802 [14][11][3][5]. The Pigment Compendium reports that a Viennese maker named Leithner had found the basic process of firing cobalt oxide with alumina in 1775, that Gahn in Sweden and Wenzel in Freiberg observed it independently soon after, and it dates Thénard's published method to 1803 [7]. Pastoureau splits the difference, writing that the blue was \"discovered or rediscovered\" in 1802 [28].\n\nThe pigment collected names as it went: Dresden blue, King's blue and Thénard's blue, as well as Leithner's, Gahn's and Wenzel's blues after the men credited with versions of the process [5][7]. In the Colour Index it is number 77346 [7]."
+    },
+    {
+      "id": "family",
+      "title": "The cobalt family",
+      "body": "Once chemists knew what cobalt could do, they made it give other colors. Cobalt green, cobalt with zinc oxide in place of alumina, was found by the Swedish chemist Sven Rinmann in 1780, earlier than the blue, but became practical only when zinc oxide was produced industrially from 1835 [14][3]. The chemist Arthur Church called it chemically and artistically perfect in 1901, but like every cobalt color it was weak in opacity and expensive [14]. See [[cobalt-green]] for the swatch that carries its name.\n\nCerulean blue is cobalt with tin, a greener blue. A Swiss chemist, Albrecht Höpfner, made a version in the late eighteenth century that was forgotten until the 1860s [24]; Paterson credits the London firm of George Rowney with the 1860 discovery [30]. Coles describes its slight green as the natural partner for the red tinge of cobalt blue [24]. The swatches named [[cerulean]] and [[cerulean-blue]] carry its name.\n\nCobalt violet was made in France from 1859, and the cheaper [[manganese-violet]] of 1868 soon displaced it [14][3]. A cobalt yellow, aureolin, was synthesized in 1831 by N. W. Fischer but was not sold as a pigment until the 1850s [14][3]. The family has stayed expensive. Livingstone, comparing oil paints, found most tubes cost about five dollars and cobalt violet forty-five [20]."
+    },
+    {
+      "id": "painters",
+      "title": "On the palette",
+      "body": "Painters adopted the new blue quickly. A chart of permanent colors drawn up for professional painters in 1816 listed just three blues: Prussian, the new cobalt and indigo [23]. Turner used cobalt blue within a few years of its introduction [14], and William Blake's early biographer listed it among his few pigments, with occasional ultramarine, gamboge and vermilion [26]. Millais filled *Ophelia* (1851 to 1852) with new materials, cobalt blue among them, and Holman Hunt used it in *The Awakening Conscience* (1853) [14].\n\nThe Impressionists made it a signature [16]. Of the twenty principal pigments identified in their pictures, twelve were new synthetics, cobalt blue among them [16]. In Renoir's *Boating on the Seine* (1879 to 1880) the river is pure cobalt blue with a little white, glazed with red lake for the purple shadows, set against a chrome-orange skiff [16]. In Monet's *Lavacourt under Snow* (about 1879) the brightest snow is pure cobalt, and there is no black anywhere [16].\n\nVan Gogh wrote to his brother that he was crazy about two colors, carmine and cobalt, and called cobalt a divine color for putting atmosphere around things [16]. Gauguin used a mixture of cobalt blue and barium sulphate known as Charron blue [16][34]. In Australia, Arthur Streeton, having no charcoal, designed a large river landscape of 1896 in red and cobalt blue [22]. Matisse remembered the young Vlaminck insisting that a painter needed nothing but pure cobalt, pure vermilion and pure Veronese green [25].\n\nIt was never the cheapest blue. Once synthetic ultramarine was made in France from 1828, it became the standard painter's blue by the 1870s, more so than cobalt, which cost appreciably more [17]. Painters who wanted a blue that would last still chose cobalt: the painter Jean-Georges Vibert's 1891 list of trustworthy pigments named cobalt blue, cobalt green and cobalt violet [14]."
+    },
+    {
+      "id": "chemistry",
+      "title": "Why it stays blue",
+      "body": "Cobalt blue is among the most durable paints a painter can buy [7][13]. The Pigment Compendium calls it extremely stable and notes that it helps drying oils cure [7]. Gurney explains why metal pigments like cobalt and cadmium resist sunlight: they are solid particles that ultraviolet light cannot break apart, unlike the chain-like molecules of many dyes [21]. Ball's verdict on the new nineteenth-century colors is that cobalt blue aged very well, while zinc yellow turned greenish and spoiled Seurat's careful dots [13].\n\nThe way it looks is a small puzzle of vision. Livingstone measured its reflectance and found that cobalt blue reflects well into the green, which ought to make it look greenish, but it also reflects some red [19]. Red and cyan are opponent signals in the visual system and cancel, so what is left is a pure blue [19]. Coles notes the same red tinge from the painter's side [24].\n\nThe name on a tube is not always the substance. Ball notes that paint makers began naming new pigments after classical ones, as if cobalt blue were a hue rather than a material [29]. Gurney's rule is that the word \"hue\" in a paint name means a mixture standing in for a costly or outmoded pigment, so a tube of cobalt blue hue may contain no cobalt at all [21]."
+    },
+    {
+      "id": "myths",
+      "title": "Forgers, Rubens and the blue of Chartres",
+      "body": "Cobalt blue once helped convict a forger. Han van Meegeren was arrested in 1945 for selling a supposed Vermeer, *Christ and the Adulteress*, to Hermann Göring, and he defended himself by confessing that he had painted it [11]. He had used old canvases and seventeenth-century pigments, but analysis found cobalt blue, a pigment made about 130 years after Vermeer died [11]. Finlay tells it with a twist: the ultramarine he bought had itself been cut with cobalt, so the adulterated paint was both his undoing and his defense [2]. He was convicted of forgery, not collaboration, in November 1947 and died the following month [11].\n\nA persistent error puts cobalt blue on the palette of Rubens [18]. It is wrong: the color theorist Faber Birren's history of painting assigns the pigment to Rubens and his contemporaries almost two centuries before it was invented [18]. Ball suggests Birren was thinking of smalt, the cobalt glass that Rubens did use [18][1].\n\nThe \"lost blue of Chartres\" is another myth [2]. Finlay was told firmly by modern glassmakers that the recipe was never lost: a good blue needs only the right proportion of cobalt oxide in molten silica [2]. Her point is subtler: what cannot be repeated is the world of wood-fired furnaces and uneven, impure batches that gave Gothic glass its character [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "On screen this swatch is a vivid blue, darker than 86 per cent of our core color names, with a contrast of about 8.4 to 1 against white [32]. It comes to us through Crayola by way of Wikipedia [32]. Its closest named neighbors are Helvetia Blue, Signal Blue and [[cerulean-blue]], all under five units away, with [[egyptian-blue]] at 6.4 [32]. The library's own [[cobalt-blue]], from the RAL standard and Maerz and Paul's 1930 dictionary, is much darker, a navy about 15 units from this one [32]. Maerz and Paul record that name from 1777, a date that fits the Compendium's earlier makers rather than Thénard [32][7].\n\nThe color is rare in old paintings. In our archive of 23,781 paintings, a screen color within six units of this swatch covers at least five per cent of the canvas in only 10 works [31]. Seven of the ten are from the 1900s, almost ten times the archive's rate for that century [31]. Matisse's *[[art:commons-Q7727514|The Conversation]]* leads, with nearly half its surface in this blue, and Derain's *[[art:smk-KMSr14|Woman in a Chemise]]* of 1906 is there too, as if answering Vlaminck's call for pure cobalt [31][25].\n\nThe two earliest matches are English portraits from 1668 and 1675, more than a century before Thénard [31]. That is the usual caveat in action: these are photographs of aged, varnished paintings, and a color match is not a pigment test, so those blues are probably ultramarine, smalt or the camera [31]. In Google Books, *cobalt* used as an adjective, the nearest proxy for the color sense, rises fastest in the 1950s and peaks in the 1960s [33]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the metal cobalt, from German kobelt or kobold, a mine goblin",
+      "first_recorded": "as a pigment, 1802 (Thénard); Maerz & Paul record the name Cobalt Blue from 1777",
+      "source": "Ball, Bright Earth; Pigment Compendium; Maerz & Paul 1930"
+    },
+    "aka": [
+      "Cobalt blue",
+      "Thénard's blue",
+      "Dresden blue",
+      "King's blue",
+      "Leithner's blue"
+    ],
+    "siblings": [
+      "cobalt-green",
+      "cerulean-blue",
+      "manganese-violet"
+    ],
+    "parent": "blue",
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "cobalt-blue",
+        "gloss": "the library's Cobalt Blue (RAL 5013, Maerz & Paul) is a much darker navy"
+      },
+      {
+        "slug": "egyptian-blue",
+        "gloss": "an ancient copper blue; the cobalt glass pigment smalt is filed beside it"
+      }
+    ],
+    "other_languages": [
+      {
+        "lang": "fr",
+        "name": "bleu de cobalt"
+      },
+      {
+        "lang": "de",
+        "name": "Kobaltblau"
+      }
+    ]
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#0047AB",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 10,
+    "by_century": {
+      "1900": {
+        "hits": 7,
+        "n": 1674,
+        "lift": 9.9
+      },
+      "1800": {
+        "hits": 1,
+        "n": 8345
+      },
+      "1600": {
+        "hits": 2,
+        "n": 6394
+      }
+    },
+    "top_paintings": [
+      "commons-Q7727514",
+      "commons-Q141559670",
+      "smk-KMS4585",
+      "smk-KMS8760",
+      "aic-7303",
+      "smk-KMSr14"
+    ],
+    "first_dated": {
+      "id": "aic-16014",
+      "painter": "Nicholas Dixon",
+      "year": 1668
+    },
+    "ngram": {
+      "word": "cobalt",
+      "peak": 1960,
+      "adj_peak": 1960,
+      "adj_rise": 1950,
+      "rel_1800": 0.2,
+      "rel_1920": 0.47,
+      "rel_2000": 0.27
+    },
+    "measured": {
+      "lch": [
+        32.8,
+        62.6,
+        291
+      ],
+      "darker_than_core_pct": 86,
+      "contrast_white": 8.44,
+      "contrast_black": 2.49,
+      "nearest": [
+        [
+          "Helvetia Blue",
+          4.6
+        ],
+        [
+          "Signal Blue",
+          4.7
+        ],
+        [
+          "Cerulean Blue",
+          4.7
+        ],
+        [
+          "Egyptian Blue",
+          6.4
+        ]
+      ],
+      "cobalt_blue_library": {
+        "hex": "#232D53",
+        "de2000": 15.2,
+        "source": "RAL 5013; Maerz & Paul 1930, first recorded 1777"
+      }
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 13",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Finlay, Colour, ch. 8 (\"Blue\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Coles, Chromatopia, p. 145",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"cobalt\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"cobalt blue\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 11",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Eastaugh et al., Pigment Compendium, pp. 125-126 (\"cobalt aluminium oxide\", \"cobalt blue\")",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "book",
+      "cite": "Pastoureau, Blue: The History of a Color, ch. 7",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "book",
+      "cite": "Pastoureau, Blue: The History of a Color, ch. 8",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 10,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, p. 76",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 11,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, \"Cobalt\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 12,
+      "kind": "book",
+      "cite": "Coles, Chromatopia, p. 93 (\"Smalt\")",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 13,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 19",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 14,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 15",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 15,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, p. 219",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 16,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 16",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 17,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 18",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 18,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 9 and its notes",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 19,
+      "kind": "book",
+      "cite": "Livingstone, Vision and Art, ch. 15",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 20,
+      "kind": "book",
+      "cite": "Livingstone, Vision and Art, ch. 13",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 21,
+      "kind": "book",
+      "cite": "Gurney, Color and Light, pp. 92, 96",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 22,
+      "kind": "book",
+      "cite": "Gurney, Color and Light, p. 22",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 23,
+      "kind": "book",
+      "cite": "Balfour-Paul, Indigo, p. 220",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 24,
+      "kind": "book",
+      "cite": "Coles, Chromatopia, p. 153 (\"Cerulean blue\")",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 25,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 21",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 26,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, p. 42",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 27,
+      "kind": "book",
+      "cite": "Jarman, Chroma, p. 57",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 28,
+      "kind": "book",
+      "cite": "Pastoureau, Green: The History of a Color, notes to the nineteenth-century chapters",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 29,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 17",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 30,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"cerulean blue\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 31,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 32,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json, data/graph/names.json), CIEDE2000 distances, WCAG contrast",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 33,
+      "kind": "data",
+      "cite": "Google Books Ngram, case-insensitive and adjective-tagged, 5-year smoothing, relative to peak",
+      "loc_kind": null,
+      "url": "https://books.google.com/ngrams"
+    },
+    {
+      "n": 34,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"Charron blue\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 35,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 10",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 36,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, pp. 63, 241 (Werner nos. 18 and 90)",
+      "loc_kind": "pdf-page",
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Why did Velázquez's smalt sky turn brown while Monet's cobalt-blue snow kept its color?",
+      "choices": [
+        "Smalt is ground glass that dulls in oil and loses its cobalt; cobalt aluminate is an extremely stable compound",
+        "Monet varnished his paintings more heavily",
+        "Smalt was made from copper, not cobalt",
+        "Seventeenth-century oil paint was always brown"
+      ],
+      "answer": "Smalt is ground glass that dulls in oil and loses its cobalt; cobalt aluminate is an extremely stable compound",
+      "kind": "pick"
+    },
+    {
+      "q": "How did cobalt blue help expose Han van Meegeren's fake Vermeer?",
+      "choices": [
+        "The pigment was not made until about 130 years after Vermeer died",
+        "Vermeer never painted in blue",
+        "Cobalt blue fades in a few years",
+        "The canvas was too new"
+      ],
+      "answer": "The pigment was not made until about 130 years after Vermeer died",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Rubens painted with cobalt blue.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "The word cobalt comes from the goblins that German miners blamed for a poisonous ore.",
+    "A forged Vermeer sold to Göring was unmasked partly by cobalt blue, a pigment made about 130 years after Vermeer died.",
+    "Look at twelfth-century church windows and old Chinese blue-and-white porcelain: the clear blue in both is cobalt."
+  ],
+  "words": 2132,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Vlaminck quote: source says Veronese green, not emerald green"
+    ]
+  }
+}

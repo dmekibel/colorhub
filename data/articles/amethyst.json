@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "The name and the swatch",
-   "body": "*Amethyst* comes from a Greek word meaning \"not drunken\": the stone was once credited with preventing intoxication [1]. As a color word it names the violet-purple of that quartz, and some dictionaries add a heraldic sense, purplish blue [1].\n\nThe swatch here, #9966CC, is the web-standard amethyst [2]. It is a clear mid-violet, a little redder and lighter than the deep purple of a fine cut stone [16][2]. Our library records the name in Maerz & Paul's dictionary of 1930 with a first recorded use of 1572, and gives the nearest ISCC-NBS category as \"brilliant violet\" [2]. That is the oldest dated record we hold for it, though the gem is far older than the English word [2][5]. A lighter relative of this swatch is [[medium-purple]], and the family word is [[violet]]."
+   "body": "*Amethyst* comes from a Greek word meaning \"not drunken\": the stone was once credited with preventing intoxication [1]. As a color word it names the violet-purple of that quartz, and some dictionaries add a heraldic sense, purplish blue [1].\n\nThe swatch here, #9966CC, is the web-standard amethyst [2]. It is a clear mid-violet [2]. Our library records the name in Maerz & Paul's dictionary of 1930 with a first recorded use of 1572, and gives the nearest ISCC-NBS category as \"brilliant violet\" [2]. That is the oldest dated record we hold for it, though the gem is far older than the English word [2][5]. A lighter relative of this swatch is [[medium-purple]], and the family word is [[violet]]."
   },
   {
    "id": "stone",
@@ -276,15 +276,14 @@
   "Our archive of 23,781 paintings holds no broad passage in this violet.",
   "Look for the color in a bishop's ring, then ask whether the stone is quartz or sapphire."
  ],
- "words": 1086,
+ "words": 1072,
  "status": "checked",
  "checked": {
-  "by": "L7 batch 59 self-check (sentence-to-card trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Cennini amatisto/hematite misreading is from Pigment Compendium (Thompson), single source.",
-   "Color-center and heating claims come from ColorHub gem notes, not a book; hedged as 'gem writers add'.",
-   "Hessey/chromotherapy corrected as unsupported."
+   "Removed unsupported comparison of swatch with a fine cut stone.",
+   "Spot-checked Pliny, Gage, Finlay, Birren, Pigment Compendium claims against book text: supported."
   ]
  }
 }

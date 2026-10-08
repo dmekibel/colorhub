@@ -22,12 +22,12 @@
   {
    "id": "light",
    "title": "Whites change with the light",
-   "body": "The tint in a white is often borrowed from its surroundings. In his *Science de la peinture*, Vibert wrote that a white wall in full sunlight is never simply white, and he named pinkish, yellowish and greenish whites as the tints it takes from nearby reflections, as Gage quotes him [6]. Livingstone makes the same point with flashlights: under green light a white table still looks white, but a greenish white, while a red tomato looks black because it reflects no green [7].\n\nPastoureau finds three whites in Rembrandt's *Anatomy Lesson of Doctor Tulp* of 1632: a brilliant white for the neckwear, a dull white for the cloth over the body, and a greenish white for the corpse of the executed man [8]. Hold a sheet of paper beside a green lawn or a wall of leaves and the same effect appears on the paper."
+   "body": "The tint in a white is often borrowed from its surroundings. In his *Science de la peinture*, Vibert wrote that a white wall in full sunlight is never simply white, and he named pinkish, yellowish and greenish whites as the tints it takes from nearby reflections, as Gage quotes him [6]. Livingstone makes the same point with flashlights: under green light a white table still looks white, but a greenish white, while a red tomato looks black because it reflects no green [7].\n\nPastoureau finds three whites in Rembrandt's *Anatomy Lesson of Doctor Tulp* of 1632: a brilliant white for the neckwear, a dull white for the cloth covering the dead man's loins, and a greenish white for the corpse of the executed man [8]."
   },
   {
    "id": "swatch",
    "title": "On screen it is a cream",
-   "body": "The swatch, #F2EBCD, comes from a scan of an aged Werner chart and is approximate [9]. Its a* value is only -2.5, just on the green side of neutral, and ISCC-NBS reads it as yellowish white [9]. The nearest named color is [[ecru]], 4.2 CIEDE2000 units away [9].\n\nOn the aged paper, Werner's Snow White, Yellowish White and Orange-coloured White fall within 1.3 units of it, and Snow White is only 0.9 away [9]. The green that gave the color its name cannot be seen on screen, which is why the swatch is better read as a family of old whites than as a green."
+   "body": "The swatch, #F2EBCD, comes from a scan of an aged Werner chart and is approximate [9]. Its a* value is only -2.5, just on the green side of neutral, and ISCC-NBS reads it as yellowish white [9]. The nearest named color is [[ecru]], 4.2 CIEDE2000 units away [9].\n\nOn the aged paper, Werner's Snow White, Yellowish White and Orange-coloured White fall within 1.3 units of it, and Snow White is 0.9 away and Yellowish White only 0.5 [9]. The green that gave the color its name cannot be seen on screen, which is why the swatch is better read as a family of old whites than as a green."
   },
   {
    "id": "field",
@@ -203,15 +203,15 @@
   "On our aged scan, Greenish White sits only 0.9 units from Snow White: the green has faded out.",
   "Hold white paper beside a green lawn and watch it turn greenish white."
  ],
- "words": 624,
+ "words": 609,
  "status": "checked",
  "checked": {
-  "by": "Claude (batch 63 self-check: sentence-to-card trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Thin book coverage: Baty carries the chart facts; short honest article, not padded.",
-   "Gage quotation of Vibert is partly garbled in the OCR; paraphrased conservatively.",
-   "Livingstone locator is chapter-level only."
+   "Corrected nearest-white distances (Yellowish White 0.5 is closest)",
+   "Removed uncited lawn/paper illustration",
+   "Reworded cloth description to match Pastoureau caption"
   ]
  }
 }

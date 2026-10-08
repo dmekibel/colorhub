@@ -42,7 +42,7 @@
   {
    "id": "in-use",
    "title": "In the paint box and in the lab",
-   "body": "Gauguin, short of supplies in Tahiti, relied on burnt ochre for skin, according to Ball [17]. That is a typical use of the family: a warm, quiet red that belongs to flesh and earth, not to flags.\n\nThe modern industrial reds went another way. Cadmium reds, which replace some of the sulphur in cadmium sulphide with selenium, were introduced in 1910 by Coles's dating and quickly replaced the toxic pigment vermilion in many uses [10]. The Compendium notes that a cerium-sulfide pigment developed for industry since 1997 can be tuned from deep red to a light red or orange by adding an alkali metal [16]. Neither of those is the old light red, but both are a reminder that the words describe a position on a chart as much as a material.\n\nLight red is also a lesson in perception. Albers shows that a student's laying of light red bricks in white mortar looks far lighter than the same bricks in black mortar, a case of the Bezold effect [13]. A light red is never one color; it depends on what it sits beside."
+   "body": "Gauguin, who struggled to get materials in remote Tahiti, found burnt ochre indispensable for the skin of his sitters, according to Ball [17]. That is a typical use of the family: a warm, quiet red that belongs to flesh and earth, not to flags.\n\nThe modern industrial reds went another way. Cadmium reds, which replace some of the sulphur in cadmium sulphide with selenium, were introduced in 1910 by Coles's dating and quickly replaced the toxic pigment vermilion in many uses [10]. The Compendium notes that a cerium-sulfide pigment developed for industry since 1997 can be tuned from deep red to a light red or orange by adding an alkali metal [16]. Neither of those is the old light red, but both are a reminder that the words describe a position on a chart as much as a material.\n\nLight red is also a lesson in perception. Albers shows that a student's laying of light red bricks in white mortar looks far lighter than the same bricks in black mortar, a case of the Bezold effect [13]. A light red is never one color; it depends on what it sits beside."
   },
   {
    "id": "swatch",
@@ -297,16 +297,17 @@
   "The word pink began as a kind of pigment, and drifted into meaning a light red.",
   "Look for burnt-ochre reds in flesh and earth in old paintings, in the quiet red under the bright one."
  ],
- "words": 1608,
+ "words": 1615,
  "status": "checked",
  "checked": {
-  "by": "L7 batch 46 self-check (sentence-to-card trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
    "Palaeolithic crucible claim is Pastoureau's; the earliest-pyrotechnology idea is hedged as a Compendium suggestion.",
    "Titian quotation is secondhand (Ball), hedged.",
    "Cadmium red date (1910) is Coles only; other books give earlier cadmium dates, so it is attributed to Coles.",
-   "Archive numbers are colors in aged photographs, not pigment identifications."
+   "Archive numbers are colors in aged photographs, not pigment identifications.",
+   "Gauguin sentence: Ball says burnt ochre was indispensable for Tahitian skin; the 'short of supplies' framing was a separate point, so reworded."
   ]
  }
 }

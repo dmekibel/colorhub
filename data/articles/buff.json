@@ -22,7 +22,7 @@
   {
    "id": "revolution",
    "title": "Buff and blue",
-   "body": "The color's most famous turn came in the American Revolution [2]. George Washington had fought for Britain, in scarlet, in the Seven Years' War [2]. Delegates meeting at the Second Continental Congress in the summer of 1775 saw him in the buff and blue of the Fairfax Independent Company of Volunteers [2]. John Adams wrote to his wife Abigail that Colonel Washington's uniform and military experience were of great service to the delegates [2]. He was made commander in chief on the spot, and from then on he put his soldiers in buff and blue whenever cloth allowed [2].\n\nA letter of 22 April 1777, about his personal guard, shows how personal the choice was [2]. He told Captain Caleb Gibbs that he preferred blue and buff because it was the uniform he wore himself, and that any other color would do, red excepted [2].\n\nFrom there the pair became a badge of liberty. Across the Atlantic, Whigs led by Edmund Burke and Charles James Fox took up Washington's colors as a sign of sympathy with American independence [2]. Georgiana, Duchess of Devonshire, canvassed for the Whigs in buff and blue and dressed her footmen at Chatsworth in the same pair [2]. In 1961, at a Bermuda summit, Prime Minister Harold Macmillan presented John F. Kennedy with silver buttons taken from that livery [2].\n\nCloth in the right colors was hard to find. When HMS *Symmetry* was captured on New Year's Day 1778 with scarlet, blue and buff cloth for the army's officers aboard, St Clair's notes record general rejoicing, followed by a squabble over where the cloth would end up [2]."
+   "body": "The color's most famous turn came in the American Revolution [2]. George Washington had fought for Britain, in scarlet, in the Seven Years' War [2]. When delegates gathered for the 1775 Second Continental Congress, they saw him in the buff and blue of the Fairfax Independent Company of Volunteers [2]. John Adams wrote to his wife Abigail that Colonel Washington's uniform and military experience were of great service to the delegates [2]. He was made commander in chief on the spot, and from then on he put his soldiers in buff and blue whenever cloth allowed [2].\n\nA letter of 22 April 1777, about his personal guard, shows how personal the choice was [2]. He told Captain Caleb Gibbs that he preferred blue and buff because it was the uniform he wore himself, and that any other color would do, red excepted [2].\n\nFrom there the pair became a badge of liberty. Across the Atlantic, Whigs led by Edmund Burke and Charles James Fox took up Washington's colors as a sign of sympathy with American independence [2]. Georgiana, Duchess of Devonshire, canvassed for the Whigs in buff and blue and dressed her footmen at Chatsworth in the same pair [2]. In 1961, at a Bermuda summit, Prime Minister Harold Macmillan presented John F. Kennedy with silver buttons taken from that livery [2].\n\nCloth in the right colors was hard to find. When HMS *Symmetry* was captured on New Year's Day 1778 with scarlet, blue and buff cloth for the army's officers aboard, St Clair's notes record general rejoicing, followed by a squabble over where the cloth would end up [2]."
   },
   {
    "id": "syme",
@@ -32,7 +32,7 @@
   {
    "id": "neighbors",
    "title": "Among its neighbors",
-   "body": "Buff sits in a crowd of pale warm neutrals: [[tan]], [[camel]], [[apricot]], [[beige]] and [[khaki]]. Pastoureau notes one earlier crowd of the same kind. The yellow called Nankin, highly prized from the 1740s to the 1770s, covered a wide range from light yellow to nearly orange, passing through blond, straw, buff and beige, and its common trait was to be luminous without being saturated [7].\n\nPainters use the word loosely too. Jarman, writing as an artist rather than a historian, notes that Geertgen tot Sint Jans painted flesh in a buff-pink in *The Nativity at Night* [9]. The same writer ties buff to buffalo hide and, more darkly, to death and slaughter, which is a poet's association and not a documented one [9]."
+   "body": "Buff sits in a crowd of pale warm neutrals: [[tan]], [[camel]], [[apricot]], [[beige]] and [[khaki]]. Pastoureau notes one earlier crowd of the same kind. The yellow called Nankin, prized in the 1740s to 1770s, spread across a wide range from light yellow to nearly orange, passing through blond, straw, buff and beige, and its common trait was to be luminous without being saturated [7].\n\nPainters use the word loosely too. Jarman, writing as an artist rather than a historian, notes that Geertgen tot Sint Jans painted flesh in a buff-pink in *The Nativity at Night* [9]. The same writer ties buff to buffalo hide and, more darkly, to death and slaughter, which is a poet's association and not a documented one [9]."
   },
   {
    "id": "words",
@@ -242,16 +242,13 @@
   "Washington asked for blue and buff because it was the uniform he wore himself, and any color but red would do.",
   "Look at the feathers around a kingfisher's eye: naturalists two centuries ago used them to define buff orange."
  ],
- "words": 1292,
+ "words": 1289,
  "status": "checked",
  "checked": {
-  "by": "self-check against fact cards (sentence-to-card trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Syme's Buff Orange is described by recipe only; no swatch value claimed.",
-   "Jarman's associations are marked as a poet's, not documentation.",
-   "Birren's room-color warnings marked as period opinion.",
-   "First-recorded date of buff as a color name is not in the books used; stated as undocumented here."
+   "Reworded Congress and Nankin sentences that matched book phrasing."
   ]
  }
 }

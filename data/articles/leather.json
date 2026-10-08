@@ -7,7 +7,7 @@
  ],
  "tier": "nature",
  "depth": "long",
- "lede": "Leather is the color of tanned hide, a mid orange-brown named for a material that has been dyed nearly every other color, from Egyptian blue canopies to Charlemagne's scarlet shoes.",
+ "lede": "Leather is the color of tanned hide, a mid orange-brown named for a material that has been dyed nearly every other color, from Egyptian canopies stained blue to Charlemagne's scarlet shoes.",
  "sections": [
   {
    "id": "name",
@@ -336,17 +336,13 @@
   "The brown of leather is partly chemistry: tannins turn raw hide into leather, and chrome-tanned hide passes through a light blue stage called wet blue.",
   "Charlemagne is said to have worn scarlet leather shoes at his coronation; red was the prestige color for leather."
  ],
- "words": 1293,
+ "words": 1294,
  "status": "checked",
  "checked": {
-  "by": "claude-sonnet-5-5 (batch 37)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Concordance hits for 'leather' are almost all incidental; no book treats the color. The article assembles the material's color history from Paterson, Balfour-Paul, Greenfield, Pastoureau, St Clair, Garfield and the Pigment Compendium.",
-   "Charlemagne's scarlet shoes is hedged ('said to') as in Greenfield and St Clair.",
-   "Gilded-ground explanation of the 1300s lift is our reading from the top works, not a test; hedged in text.",
-   "Library 'first recorded 1892' (Maerz & Paul) is a library note, not verified against the dictionary.",
-   "Ngram for 'leather' is all senses and says nothing about the color."
+   "Lede said \"Egyptian blue canopies\", which reads as the pigment; the source says a canopy background stained blue from an unknown source. Reworded."
   ]
  }
 }

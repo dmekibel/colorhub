@@ -1,0 +1,241 @@
+{
+ "slug": "bordeaux",
+ "name": "Bordeaux",
+ "hex": "#75343D",
+ "names": [
+  "Bordeaux"
+ ],
+ "tier": "place",
+ "depth": "long",
+ "lede": "Bordeaux is the deep, slightly bluish red of the red wines of Bordeaux, a port that was also a hub of the blue-dye trade.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A wine's color",
+   "body": "Paterson's dictionary defines *Bordeaux* as a bluish red, the color of Bordeaux wines, and lists a separate industrial *Bordeaux red* made from beta-naphthol [1]. It defines *claret* as a reddish violet that has the same hue as Bordeaux wine, and says the word comes from the Latin for clear [1]. *Burgundy*, the red of the other great French wine region, is a reddish purple that Paterson calls less blue than Bordeaux [1]. St Clair sees it differently: Bordeaux is a deep cherry and burgundy a deep purple-brown [2]. Books disagree, then, on which of the two wine reds leans further toward purple, and the safe reading is that the two are close neighbors [1][2].\n\nThe swatch here, #75343D, is a dark red in the ISCC-NBS system [3]. Ridgway's 1912 color atlas has a Bordeaux on plate XII, and Maerz and Paul's 1930 dictionary dates the name to about 1850 [3]. The nearest of our core colors is [[burgundy]] [3]. ISCC-NBS block 16, which this color falls in, gathers a dozen more wine names, among them Claret Wine, Old Wine, Ruby Wine, Spanish Wine, Wine Lees and Vin Rosé, whose first recorded use Maerz and Paul put at 1895 [3]. Close relatives with their own pages include [[claret]], [[maroon]], [[oxblood]] and [[merlot]] [3]."
+  },
+  {
+   "id": "blue-trade",
+   "title": "The port of the blue trade",
+   "body": "Bordeaux is also a place where blue was bought and sold, and the history is worth knowing, because the city's name sits oddly on a red. Woad grown around Toulouse in the Languedoc was shipped by barge down the Garonne to Bordeaux, which profited greatly from exporting it to Flanders, Italy, Spain and Britain [4]. Balfour-Paul gives an annual figure of 200,000 bales of woad, with madder dye, alum and wine traveling alongside it [4]. Italian merchants centered on Venice dominated the sea trade in woad, and the main route ran from Venice through Genoa, Narbonne and Bordeaux to Britain and the Low Countries [4].\n\nWhen West Indian indigo arrived, the port turned to the new dye [5]. From the mid-1680s it was the most interesting commodity landing at Bordeaux and Marseilles [5]. By the 1780s the French colony of Saint-Domingue had no fewer than 3,150 indigo plantations, and indigo was a key cargo at Bordeaux, destined for French textile mills and for re-export [5]. Pastoureau adds that New World indigo was cheaper than European woad, even after the Atlantic crossing, because its production relied more and more on slavery [6]. French law finally approved indigo throughout the kingdom in 1737, which enriched Nantes, Bordeaux and Marseilles and ruined Toulouse, the woad capital [6]. The wealth also helped make blue the common color of eighteenth-century dress, as dyers learned to make lighter and more luminous blues [7]. Paterson lists a *Bordeaux blue* too, a shade of blue with no further description [1]."
+  },
+  {
+   "id": "industrial",
+   "title": "Bordeaux in the dye vat and the pigment tube",
+   "body": "In modern dyes and pigments *bordeaux* became a standard description for the darkest, bluest reds. The Pigment Compendium says the beta-naphthol azo pigments run from yellowish and medium reds to bordeaux, carmine, brown and violet, citing Herbst and Hunger [8]. The benzimidazolone azo pigments reach maroon, bordeaux and brown [8]. Perylene vat pigments range from red and scarlet through vermilion to bordeaux; the first were discovered by Kardos in 1912 and 1913 and by Friedlander in 1919, but they were not generally used until after 1950 [9]. Perinone pigments, discovered in 1924 by Eckert and Greune at Hoechst, were recognized as pigments only in 1950 and give orange to bordeaux shades [9].\n\nA dye gave a name to one artist's pigment as well. A supplier's Mars violet, an iron-oxide earth, was brightened with an organic violet dye called Helio Bordeaux, which the Colour Index lists as Pigment Red 54, according to an analysis by Helwig in 1998 [10]. The Compendium notes the practice because it means such a paint is not a pure earth [10]."
+  },
+  {
+   "id": "burgundy",
+   "title": "The duchy's court",
+   "body": "The other great wine red takes its name from a duchy whose court was known for black. Philip the Good, who ruled the duchy until 1467, made black the fashion of the age at his court [11]. Chroniclers said he wore it in mourning for his father, killed in 1419, though Pastoureau treats that as only part of the story [11]. The style spread to Spain and across Europe and lasted until the middle of the seventeenth century [11]. Where to look: hold a glass of red wine up to a window, or look at dark red velvet in daylight, and watch for the bluish cast that Paterson's definition points to [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 museum paintings, 114 contain this color as at least five per cent of the canvas, within a ΔE of 6 [12]. Those are photographs of aged, varnished paintings, so the match is as photographed and not a pigment test [12]. The largest covers are a ragamala page of about 1750 at 59 per cent, Poussin's [[painting:commons-Q27974876|Descent from the Cross]] of about 1630 at 57 per cent, and a portrait of an official of about 1600 at 52 per cent [12]. The earliest is Lippo Memmi's *Madonna and Child with Donor* of about 1325, where it just reaches 5 per cent [12].\n\nThe color clusters in the late 1400s [12]. In the 1400s, 14 of 945 paintings hold it, about three times the average rate, and in the 1500s, 21 of 2,231 [12]. The peak decade is the 1470s, with 6 of 156 paintings, eight times the rate [12]. Our data cannot say whether the reason is dye, glaze or the way red lakes have aged, and it would be a mistake to guess [12]. By country, Italy supplies 23 of the hits, and India 8 of 721 paintings [12]. Among movements, 3 of 96 Kalighat paintings and 3 of 168 Mughal paintings hold it, about 6.5 and 3.7 times the average [12].\n\nWhen it appears it is a shadow or middle tone: 47 per cent of its pixels are in the shadow band, 50 per cent in the middle and only 3 per cent in the highlights [12]. In Google Books the word *bordeaux* peaks around 1908, but the word is mostly the city and the wine, so the curve is not a history of the color [13]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the wines of Bordeaux",
+   "first_recorded": "c. 1850 (Maerz & Paul)",
+   "source": "Paterson, Dictionary of Colour; Maerz & Paul 1930"
+  },
+  "aka": [
+   "Bordeaux red"
+  ],
+  "siblings": [
+   "burgundy",
+   "claret",
+   "merlot"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "burgundy",
+    "gloss": "the wine red of the other French region; Paterson calls it less blue than Bordeaux"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#75343D",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 114,
+  "top_paintings": [
+   "cma-161771",
+   "commons-Q27974876",
+   "cma-150944",
+   "commons-Q21741492"
+  ],
+  "role": {
+   "shadow": 0.47,
+   "mid": 0.5,
+   "highlight": 0.03
+  },
+  "ngram": {
+   "word": "bordeaux",
+   "peak": 1908
+  },
+  "measured": {
+   "lch": [
+    30.8,
+    30.6,
+    15.6
+   ],
+   "contrast_white": 9.07,
+   "contrast_black": 2.31,
+   "nearest": [
+    [
+     "Burgundy",
+     9.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Bordeaux\", \"Bordeaux blue\", \"claret\", \"Burgundy\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, glossary, p. 125",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub library: Ridgway 1912 plate XII; Maerz & Paul 1930; ISCC-NBS 1955 blocks 16 and 259; xkcd 2010",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, pp. 44, 46",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, pp. 62, 76",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, Blue: The History of a Color, ch. 10",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pastoureau, Black: The History of a Color, p. 81",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Eastaugh and others, Pigment Compendium, azo pigment groups, pp. 43, 45",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Eastaugh and others, Pigment Compendium, perylene and perinone pigments, pp. 308-317",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Eastaugh and others, Pigment Compendium, \"Mars violet\", p. 268",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Pastoureau, Black: The History of a Color, pp. 52-53",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed; threshold: ΔE 6, at least 5% of the canvas",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "data",
+   "cite": "Google Books Ngram, \"bordeaux\", 5-year smoothed, relative to peak",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why did Bordeaux profit from the woad and indigo trades?",
+   "choices": [
+    "It was the port where the dyes were shipped out and landed",
+    "It was where woad was grown",
+    "Its wine was used to ferment the dye",
+    "It owned the indigo patents"
+   ],
+   "answer": "It was the port where the dyes were shipped out and landed",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: books agree exactly on how Bordeaux and burgundy differ.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which dye-based paint family is described as running from yellowish red to bordeaux, carmine, brown and violet?",
+   "choices": [
+    "Beta-naphthol azo pigments",
+    "Iron-oxide earths",
+    "Lead whites",
+    "Ultramarines"
+   ],
+   "answer": "Beta-naphthol azo pigments",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Bordeaux shipped woad and then indigo: the city of red wine was a port of blue.",
+  "Close, but not the same: books disagree on whether Bordeaux or Burgundy is the bluer wine red."
+ ],
+ "words": 1022,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Lede reworded: color word was not 'earned' by the dye trade.",
+   "Removed unsupported claim that burgundy wine red has little to do with the duchy."
+  ]
+ }
+}

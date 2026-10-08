@@ -17,7 +17,7 @@
   {
    "id": "mineralogists",
    "title": "Smoke-grey in the mineralogist's list",
-   "body": "The name is older than Ridgway [3]. Abraham Werner's mineral color list, taught in the late eighteenth century, already had smoke-grey among its greys, between bluish-grey and yellowish-grey [3]. Later versions of the list, down to Syme's of 1821, kept it and added pearl-grey, greenish-grey and steel-grey around it [3].\n\nBy 1815 the English chemist Arthur Aikin was using it in his *Manual of Mineralogy* to describe flinty chert, alongside wax yellow, honey yellow and blood red [3]. A color name that identifies a stone has to be exact enough for a second person to recognize it, which is why a hobby of naming greys after fire, metal and pearl grew up in mineral cabinets before it reached fashion [3]."
+   "body": "The name is older than Ridgway [3]. Abraham Werner's mineral color list, taught in the late eighteenth century, already had smoke-grey among its greys, between bluish-grey and yellowish-grey [3]. Later versions of the list, down to Syme's of 1821, kept it and added pearl-grey, greenish-grey and steel-grey around it [3].\n\nThe first American edition of the English chemist Arthur Aikin's *Manual of Mineralogy*, in 1815, still used it to describe flinty chert, alongside wax yellow, honey yellow and blood red [3]. A color name that identifies a stone has to be exact enough for a second person to recognize it, which is why a hobby of naming greys after fire, metal and pearl grew up in mineral cabinets before it reached fashion [3]."
   },
   {
    "id": "soot",
@@ -37,12 +37,12 @@
   {
    "id": "seeing",
    "title": "Seeing through smoke",
-   "body": "Aristotle noted that the sun, which looks white, takes a crimson hue when seen through fog or a cloud of smoke [18]. Painters have been working with that effect ever since. Gurney observes that in firelit rooms smoke scatters the light, so there are no deep darks near the flame, and that photographs of night scenes miss this by making the darks look profoundly black [10]. In fog, mist and smoke he finds that contrast falls off fast as forms recede, and the light seems to come from all directions [10].\n\nMonet's four versions of the Gare Saint-Lazare, painted in 1877, look out through the station canopy into billows of locomotive smoke and steam [11]. Ball points out that even the darkest of the series, its greys, browns and blacks, are built almost entirely from mixtures of the new bright artificial pigments, such as cobalt blue, cerulean blue and synthetic ultramarine, and not from earth pigments [11]. The smoke grey in that series is a mixed color, not a tube color."
+   "body": "Aristotle noted that the sun, which looks white, takes a crimson hue when seen through fog or a cloud of smoke [18]. Painters have been working with that effect ever since. Gurney observes that in firelit rooms smoke scatters the light, so there are no deep darks near the flame, and that photographs of night scenes miss this by making the darks look profoundly black [10]. In extremely foggy or misty conditions he notes that contrast falls off fast as forms recede, and the light seems to come from all directions [10].\n\nMonet's four versions of the Gare Saint-Lazare, painted in 1877, look out through the station canopy into billows of locomotive smoke and steam [11]. Ball points out that even the darkest of the series, its greys, browns and blacks, are built almost entirely from mixtures of the new bright artificial pigments, such as cobalt blue, cerulean blue and synthetic ultramarine, and not from earth pigments [11]. The smoke grey in that series is a mixed color, not a tube color."
   },
   {
    "id": "industrial",
    "title": "The smoke of the cities",
-   "body": "In the nineteenth century smoke became a condition of urban life. World coal production grew from 172 million tons in 1858 to 928 million in 1905, and with it came soot, grime and pollution [9]. Dickens in 1860 called the London streets the darkest and dirtiest the world had seen, with a smoky suit of mourning always draped over them [9]. Pastoureau adds that in every industrial city smoke coated buildings, objects and people with layers of soot [9].\n\nPastoureau also suggests that the smoke, grime and fog of big cities explain why taxis and other urban vehicles are often yellow, a color that stays visible through it [19]. The color word seems to have followed the chimneys: in Google Books the adjective *smoke*, the color sense, rose fastest in the 1850s and peaked in the 1880s, which fits the coal figures, though a printed word is only a loose mirror of the street [20]. In India, by contrast, St Clair describes the god Krishna as having smoke-blue skin, a use with no soot in it at all [12]."
+   "body": "In the nineteenth century smoke became a condition of urban life. World coal production grew from 172 million tons in 1858 to 928 million in 1905, and with it came soot, grime and pollution [9]. Pastoureau quotes Dickens, dating the remark to 1860, calling the London streets the darkest and dirtiest the world had seen, with soot and smoke enveloping them continually in a grimy suit of mourning [9]. Pastoureau adds that in every industrial city smoke coated buildings, objects and people with layers of soot [9].\n\nPastoureau also says that the smoke, grime and fog of big cities account for the yellow of taxis in many countries. He also traces the yellow of European taxis to the livery of the Thurn and Taxis family, so the visibility story is partial [19]. The color word seems to have followed the chimneys: in Google Books the adjective *smoke*, the color sense, rose fastest in the 1850s and peaked in the 1880s, which fits the coal figures, though a printed word is only a loose mirror of the street [20]. In India, by contrast, St Clair describes the god Krishna as having smoke-blue skin, a use with no soot in it at all [12]."
   },
   {
    "id": "field",
@@ -281,16 +281,16 @@
   "Lamp black, soot from a flame, was on Roman walls in the first century BC.",
   "In a firelit room, look for the missing darks: smoke scatters the light."
  ],
- "words": 1319,
+ "words": 1346,
  "status": "checked",
  "checked": {
-  "by": "article engine batch 28",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Swatch (dark purplish grey, ISCC-NBS) differs from dictionary 'bluish grey': stated in text.",
-   "Finlay vs Coles attribute the vermilion recipe differently: stated.",
-   "Pastoureau yellow-taxi claim hedged with 'suggests'.",
-   "Baty table column order not verified per version; stated loosely."
+   "Aikin chert use dated to the 1815 American edition, not Aikin himself in 1815",
+   "Dickens: quoted by Pastoureau, wording corrected to grimy suit of mourning",
+   "Taxi claim hedged and Thurn and Taxis livery added (Pastoureau gives both)",
+   "Gurney fog/contrast limited to fog and mist as he states it"
   ]
  }
 }

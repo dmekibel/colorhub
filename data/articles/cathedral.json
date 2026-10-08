@@ -1,0 +1,197 @@
+{
+ "slug": "cathedral",
+ "name": "Cathedral",
+ "hex": "#413A4C",
+ "names": [
+  "Cathedral"
+ ],
+ "tier": "standard",
+ "depth": "long",
+ "lede": "Cathedral is a dark grayish purple from the Maerz and Paul color dictionary, a name whose origin the books do not record, set beside the real colors of medieval cathedral glass.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name from a color dictionary",
+   "body": "Cathedral, as a color, is a dark grayish purple. It comes from the Maerz and Paul dictionary of color of 1930, which gives 1919 as the first recorded use of the word for a color and lists it on plate 47, row J, column 12 [8]. The ISCC-NBS system of 1955 files the nearest color as a dark grayish purple, 5.2 units away [8].\n\nNone of the books we read says why the shade was called cathedral. The origin of the name is undocumented, and what follows is therefore the story of the colors that cathedrals really held, not a derivation [8]. The closest named relatives in our data are [[english-violet]], [[russian-violet]], [[plum-purple]] and [[grey-purple]] [8]."
+  },
+  {
+   "id": "glass",
+   "title": "Color made in the furnace",
+   "body": "A medieval cathedral's colors came largely from its windows, and the glass got its colors from metal oxides. Finlay describes how the monk Theophilus, writing in the twelfth century, explained that glaziers used three furnaces and that the color came from oxides such as manganese and iron found in the wood and the clay of their pots [1]. The final hue was hard to predict [1]. Theophilus also described how a batch that had turned tawny could be reheated to a light purple, and heated longer to a reddish purple that he called exquisite [1].\n\nSo purple was already part of the cathedral's glass, though it was a purple of accident and skill, and the dark grayish purple of the swatch is better read as the color of a shadowed corner than of a window [1][8]."
+  },
+  {
+   "id": "blue",
+   "title": "The blue that took over",
+   "body": "Blue was a late arrival in this glass. In the early twelfth century windows of Augsburg, Pastoureau notes, red, green and yellow dominated, and green was the leading color there around 1110-1120 [2][3]. Blue became an important presence only in the years 1140-60, when large churches such as Saint-Denis, Le Mans, Vendome and Chartres used it extensively [2].\n\nThe celebrated blue of Chartres could as well be called the blue of Saint-Denis, since it was perfected at both sites in the middle of the twelfth century [2]. It was made from a soda-based glass colored with cobalt, and it proved extraordinarily stable: it has survived almost unchanged, while reds and greens of the same period have changed a great deal [2]. See [[cobalt]] for the pigment of that name and [[blue]] for the family [2].\n\nBy the end of that century this blue was no longer being made. Costly cobalt gave way to copper and manganese, so the Gothic blue of the 1240s Parisian Sainte-Chapelle looks quite unlike the Romanesque blue of Chartres, made almost a century earlier [2]. Pastoureau counts this a matter of technical and financial limits, and it produced an aesthetic of its own [2]."
+  },
+  {
+   "id": "myth",
+   "title": "Myths: the lost Chartres recipe",
+   "body": "A popular legend holds that the recipe for Chartres blue is lost [1]. Finlay was told otherwise by modern glassmakers: a good blue needs only the right proportion of cobalt oxide in the glass, and the legend is a myth [1]. He adds that something is true in it, since the Gothic blue cannot be made again for a different reason: the world that produced it has changed [1].\n\nThere is a lesson in color politics too. A contract of 1256 in Strasbourg between madder merchants and two glass masters from France specified that the Devil in a window be shown in blue, to discredit the color and protect the madder trade [4]. The glaziers obeyed, and the craze for blue went on regardless [4]."
+  },
+  {
+   "id": "light",
+   "title": "Light, not paint",
+   "body": "Suger's ideas, as Pastoureau tells it, made the church a place where gems and colored glass spread God's light, and the cathedral builders of the thirteenth century gave them concrete form [2]. The Sainte-Chapelle, of the 1240s, was designed as a sanctuary of light and color [2]. Gage reports that in the 1440s work on a colored window at Siena was suspended because some citizens feared it would darken the interior [5].\n\nColor scientists draw their own lessons from cathedrals. Livingstone points to Lichtenstein's *Rouen Cathedral #2* of 1969, where the red and blue have close to the same luminance, so the building's shape comes mostly from shading [6]. And Lovibond, the English brewer, got the idea for his beer colorimeter in a service at Salisbury Cathedral, where he saw that brown stained glass could be a standard for color, and by 1885 he produced the first colorimeter [7]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Cathedral is a modest color in our painting archive. Counting a painting when the color covers at least 1 per cent of the canvas, it appears in 156 of 23,781 paintings, 0.66 per cent, as photographed [9]. That is more common than 57 per cent of the named colors [9]. Inside a painting it most often plays a mid-tone, in 36 per cent of the 87 paintings that the lightness-rank lens catches [9].\n\nIt peaks in the 1900s, at 1.2 per cent of the 1,674 paintings from that century, 20 in all, 2.4 times the rate its museums would predict [9]. The most devoted painter is [[painter:georges-seurat|Seurat]], with 5 of his 41 works here, 7.7 times the baseline [9]. The earliest matching painting dates from 1099, hundreds of years before the name's record in our sources, so the hue is older than the word [8][9].\n\nThe caveat is the usual one: these are photographs of aged, varnished paintings, and a color match is not a pigment test [9]. Nothing in this archive says that any of these paintings is the color of a cathedral; it only says how common the swatch is [9]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented in the books consulted",
+   "first_recorded": "Maerz & Paul 1930 (first recorded use of the color word 1919)",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "english-violet",
+   "russian-violet",
+   "plum-purple",
+   "grey-purple"
+  ],
+  "parent": "dark-purple",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#413A4C",
+   "de2000": 4,
+   "min_cover": 0.01
+  },
+  "n_present": 156,
+  "painters": [
+   "georges-seurat"
+  ],
+  "role": {
+   "mid_pct": 36,
+   "n": 87
+  },
+  "measured": {
+   "iscc": "dark grayish purple",
+   "iscc_de": 5.2,
+   "munsell": "1.9P 2.6/2.1",
+   "lch": [
+    25.8,
+    12.2,
+    306.3
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Finlay, Colour, chapter \"Chartres Blue\"",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, Blue, sections on stained glass and the twelfth to fourteenth centuries",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Green, section on twelfth-century stained glass",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Red, section on the madder and woad trades",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 73",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Livingstone, Vision and Art, section on luminance and shape from shading",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Finlay, Colour, section on beer color and Lovibond",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json): Maerz & Paul 1930, ISCC-NBS 1955",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (graph fieldnotes)",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "True or false: the recipe for Chartres blue has been lost.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "What colored the famous twelfth-century blue glass of Chartres and Saint-Denis?",
+   "choices": [
+    "Cobalt",
+    "Indigo",
+    "Copper and manganese",
+    "Lapis lazuli"
+   ],
+   "answer": "Cobalt",
+   "kind": "pick"
+  },
+  {
+   "q": "Why does the later blue of the Sainte-Chapelle look unlike the blue of Chartres?",
+   "choices": [
+    "Costly cobalt gave way to copper and manganese",
+    "The glass was painted over",
+    "It was made from woad",
+    "It was lit differently only"
+   ],
+   "answer": "Costly cobalt gave way to copper and manganese",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Early twelfth-century cathedral windows were mostly red, green and yellow; blue only took over from about 1140.",
+  "The Chartres blue recipe is not lost; the world that made it is gone.",
+  "A Strasbourg contract of 1256 told glaziers to paint the Devil blue, to protect the madder trade."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "words": 926
+}

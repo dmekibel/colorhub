@@ -252,13 +252,11 @@
  "words": 868,
  "status": "checked",
  "checked": {
-  "by": "L7 self-check",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Descriptive tier: written medium; the phrase is not a historic color name.",
-   "Indian yellow ban and cow-urine story: unverified (CONFLICTS); stated as myth and unverified.",
-   "St. Clair 1603 Dutch ship is single-source; hedged.",
-   "Maerz & Paul 1598 and RAL values come from our library; approximate."
+   "No text changes needed: verified picric acid 1771/1845/1851, aniline yellow 1863, arylide 1925, Kandinsky, Rubens, Manchu pencils, gamboge fading, Indian yellow myth handling.",
+   "Kept hedges: St. Clair 1603 ship single-source, Maerz and Paul 1598 from library."
   ]
  }
 }

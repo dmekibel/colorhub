@@ -1,0 +1,230 @@
+{
+ "slug": "mineral-green",
+ "name": "Mineral Green",
+ "hex": "#5B905E",
+ "names": [
+  "Mineral Green"
+ ],
+ "tier": "pigment",
+ "depth": "long",
+ "lede": "Mineral green is a name that colourmen attached to many different green pigments, mostly copper compounds, so it points to a family of recipes and a trade habit more than to one substance.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "One name, many recipes",
+   "body": "The *Pigment Compendium* opens its entry with a warning: the name covers a huge variety of formulations [1]. Its examples are a catalogue of disagreement. A recipe in Fishwick's manuscript of 1795-1816 mixes blue verditer with masticot, ground in water and dried on boards [1]. Field's *Chromatography* of 1835 calls it the commercial name for green lakes, and for a copper sulfate pigment [1].\n\nSalter's 1869 edition of Field adds a German pigment made to replace Schweinfurt green, a blend of lead chromate, copper carbonate, iron oxide and chalk [1]. Mierzinski in 1881 uses the name for green cinnabar, a Prussian-blue-type pigment laid down with a yellow such as lead chromate [1]. Terry in 1893 says mineral green was malachite, while allowing that it could be a synthetic copper carbonate or a copper-arsenic compound [1]."
+  },
+  {
+   "id": "malachite",
+   "title": "The mineral behind the name",
+   "body": "The simplest reading is the oldest one. Heaton in 1928, and Gettens and FitzHugh in their review of the mineral as a pigment, identify mineral green with [[malachite]] [1]. Paterson's dictionary agrees: it calls malachite a very old bright green pigment or dye, also referred to as green malachite and mineral green, and its synthetic form Bremen green [2].\n\nMalachite has gone by many names over the centuries, among them chrysocolla in classical and medieval writing, mountain green, *Berggrün*, *verde azzurro*, Hungarian green, Bremen green, copper green, iris green and Olympian green [3]. Mines in Hungary, Central Europe and France may have supplied it [3]. The same word reaches east: the Song-dynasty writer Fan Chengda says mineral green comes from along the You River and is called malachite [4]. The stone itself is catalogued with the gems as [[gem:malachite|malachite]]."
+  },
+  {
+   "id": "disagree",
+   "title": "Books disagree",
+   "body": "Paterson's dictionary does not even keep the name to one substance. It says mineral green is the same as malachite green [2], and in another entry that it is Scheele's green, the toxic yellowish green discovered in 1775 by the Swede Carl Scheele and used in paint and wallpaper [2]. In a third entry it lists mineral green among the copper greens, with Scheele's green, chrysocolla, Montpellier green, verditer and verdigris [2].\n\nSo a reader meeting the words in a recipe book needs the date and the country. A name that means a clean mineral to one author and an arsenic compound to another is a risk when the hand using it is a painter's."
+  },
+  {
+   "id": "arsenic",
+   "title": "The arsenic greens and their aliases",
+   "body": "The *Pigment Compendium* notes that emerald and Scheele's greens collected a proliferation of trade names, possibly to hide the link with the known toxicity of Scheele's green [5]. Fiedler and Bayard list mineral green and Swedish green among them, and Schaaff and Riederer list some 86 names tied to the two pigments [5]. Brunswick green and green verditer have also been used for them, though wrongly [5]. See [[emerald-green]] for the pigment itself.\n\nA collection gives a concrete case. The nineteenth-century Dutch Hafkenscheid Collection holds two samples labelled *minraalgroen*, \"mineral green\", and another labelled *papegaaigroen*, \"parrot green\" [6]. Analysis shows artificial copper-arsenic compounds, tentatively identified as copper formate arsenite [6]. Here the name hid a poison, and the sample proves it."
+  },
+  {
+   "id": "italy",
+   "title": "Fifteenth-century greens",
+   "body": "For earlier centuries the evidence is murkier. Gettens and FitzHugh treat *verde azzurro* as synonymous with malachite, but Martin and colleagues in 1995 found other \"mineral greens\" on fifteenth-century paintings [7]. The copper greens in Italian paintings of that century may have been manufactured, since they carry metallic impurities such as tin and zinc [7].\n\nOne more recipe shows how the name travelled as an ingredient. Fishwick's Naples green combined a patent mineral green with Prussian blue, Dutch pink, gamboge and starch [8]. Mineral green could be a component in a mix, not just a paint on its own."
+  },
+  {
+   "id": "swatch",
+   "title": "What the swatch is",
+   "body": "Our swatch comes from Maerz and Paul's 1930 dictionary of color, which lists mineral green with a first record of 1815 on plate 28 A 9, the plate it shares with Bremen green (1839) and Olympian green (about 1850) [9]. Three of those four names, then, are the malachite family's own aliases. The swatch is a mid, slightly bluish green, one printed reading of a name that meant many greens, so do not take it as the color of any one pigment. Nearby names are [[green]], [[sap-green]] and [[viridian]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 28 works [10]. It is a middle color: in 79 per cent of those works it falls in the middle tier of the lightness order [10]. The count is small before the nineteenth century, 1 work in the 1600s and none in the 1700s, and then rises, with 15 works in the 1800s and 12 in the 1900s, 6.1 times the archive rate for that century [10]. The peak decade is the 1910s, with 6 of 523 [10].\n\nThe strongest examples are [[painter:henri-matisse|Matisse]]'s [[painting:commons-Q2049345|Game of Bowls]] of 1908, where it covers 44 per cent, and Manet's *At the Races* of 1875, 34 per cent [10]. Impressionism is over-represented, with 2 of 140 works, 12 times the archive rate, among them [[painting:nga-74796|The Japanese Footbridge]] by Monet [10]. These are photographs of aged, varnished paintings: a color match, not a pigment test, and no sign that any of these painters bought a pigment called mineral green [10]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a trade name for copper greens, chiefly malachite",
+   "first_recorded": "1815 (Maerz & Paul 1930); recipe use 1795-1816 (Fishwick)",
+   "source": "Pigment Compendium, \"mineral green\"; Maerz & Paul 1930"
+  },
+  "aka": [
+   "malachite green (Paterson)",
+   "Bremen green",
+   "Olympian green",
+   "mountain green",
+   "Berggrün"
+  ],
+  "siblings": [
+   "malachite",
+   "malachite-green",
+   "emerald-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "malachite-green",
+    "gloss": "Paterson calls the two names the same, but the swatches differ"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "nl",
+    "name": "minraalgroen (Dutch collection label)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#5B905E",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 28,
+  "top_paintings": [
+   "commons-Q2049345",
+   "nga-121096",
+   "nga-1180",
+   "nga-74796"
+  ],
+  "peak_decade": {
+   "decade": 1910,
+   "n": 523,
+   "hits": 6
+  },
+  "role": {
+   "mid": 0.79,
+   "highlight": 0.14,
+   "shadow": 0.07
+  },
+  "movements": {
+   "Impressionism": {
+    "n": 140,
+    "hits": 2,
+    "lift": 12.1
+   }
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 276, \"mineral green\"",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, pp. 129, 254, 265, 358",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, pp. 261-262 (malachite)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 305 (Fan Chengda, via Yu 1955)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 348 (emerald green)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pigment Compendium, pp. 225, 305 (Hafkenscheid Collection)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 397 (verde azzurro)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 286 (Naples green)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz & Paul 1930, plate 28 A 9 (approximate scan)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "ColorHub archive: 23,781 paintings, color within six units, at least five per cent of the canvas (as photographed)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why is the name mineral green a poor guide to what a pigment contains?",
+   "choices": [
+    "Authors used it for malachite, for copper greens, for lead-chromate blends and for arsenic compounds",
+    "It always meant a crushed emerald",
+    "It was only used in the twentieth century",
+    "It named one single copper sulfate paint"
+   ],
+   "answer": "Authors used it for malachite, for copper greens, for lead-chromate blends and for arsenic compounds",
+   "kind": "pick"
+  },
+  {
+   "q": "The Hafkenscheid samples labelled minraalgroen turned out to be plain crushed malachite.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "In our archive, where did this mid green appear most strongly above the average rate?",
+   "choices": [
+    "Impressionism",
+    "Flemish still life",
+    "Byzantine icons",
+    "Dutch Golden Age portraits"
+   ],
+   "answer": "Impressionism",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Mineral green was a name for malachite, for lead-and-copper blends and for arsenic greens, all at once."
+ ],
+ "words": 884,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "All 8 key claims verified against Pigment Compendium and Paterson; no changes needed"
+  ]
+ }
+}

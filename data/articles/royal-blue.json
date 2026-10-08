@@ -1,0 +1,242 @@
+{
+ "slug": "royal-blue",
+ "name": "Royal blue",
+ "hex": "#4169E1",
+ "names": [
+  "Royal blue"
+ ],
+ "tier": "pigment",
+ "depth": "medium",
+ "lede": "Royal blue is a deep, vivid blue whose name began as a dyers' grade of indigo and later wandered across smalt, Prussian blue and ultramarine.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "One name, several materials",
+   "body": "Books disagree on what royal blue was made of, because the name was a grade before it was a recipe. Balfour-Paul says it began among eighteenth-century European dyers, who sorted indigo-dyed cloth into thirteen shades in common use, from milk-blue and pearl-blue at the light end to deep-blue and infernal- or navy-blue at the dark end [1]. Queen's blue, also called king's blue, was the seventh of the thirteen, and royal blue was another name for it [1]. By his account both royal blue and navy blue later left their indigo roots behind and became ordinary color words [1].\n\nIn the paint trade the same words pointed elsewhere. Paterson defines royal blue as a dark blue made from smalt, and also lists it as a name for [[prussian-blue]] [2]. The Pigment Compendium calls it principally a synonym for smalt, recorded so by Field in 1809, and names it among the artists' grades of smalt beside Dumont's blue [3][4]. Later it moved on: Heaton in 1928 used it for a pigment based on artificial ultramarine, and Mayer says it could also mean numerous synthetic organic lakes [3][5].\n\nSo a label reading royal blue in a color box or a recipe book may be an indigo dye, a ground glass, an iron blue or a modern synthetic, depending on the year [1][2][3]. Compare [[indigo]], [[cobalt-blue]] and [[egyptian-blue]], which name one thing each."
+  },
+  {
+   "id": "royal",
+   "title": "Why royal",
+   "body": "Blue became a royal color long before the dyers' name. Pastoureau reports that French kings bore a blue shield strewn with golden lilies from the late twelfth century, and that the lily was a settled heraldic device by about 1180, under Philip Augustus [6]. In that period no other Western ruler had blue in his arms [6]. Saint Louis of France and Henry III of England took to wearing blue in the middle decades of the thirteenth century (about 1230 to 1250), a habit earlier kings almost certainly lacked [6].\n\nThat history is about heraldic azure, not about the dyers' grade, and none of the books we read says that the later name descends from it. The two meet only in the word royal."
+  },
+  {
+   "id": "uses",
+   "title": "Royal blue in use",
+   "body": "The name turns up in odd places. In 1861 James Clerk Maxwell gave his color-photograph demonstration at the Royal Institution, using filters made of glass vessels holding colored solutions; Ball notes that as a scientist he would have known the royal blue of ammoniacal copper sulphate from the laboratory [7]. In 1888 Van Gogh told his brother Theo that he hoped his sunflower paintings would run through blues from the palest Veronese to royal blue, by St Clair's account [8].\n\nIn Nella Larsen's novel *Quicksand* (1928), the teacher Helga Crane is thought indecent at her school for wearing \"royal blues, rich greens, deep reds\", while her colleagues expected black, brown and navy blue [9]. Jarman, in *Chroma*, places the royal blue of the garter robes among the blues of the world [10].\n\nBirren records one chromopath, C. E. Iredell, who used royal blue in a cancer treatment sequence, after green and before yellow [11]. Other healers in the same passage prescribe other colors, and the claim that colors cure disease is a myth, not medicine [11]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch is not the dye",
+   "body": "The swatch here is the web color `royalblue`, hex #4169E1, one of the 140 X11 colors [2][12]. The ISCC-NBS 1955 system files it under vivid blue, 6.9 units away, and Maerz and Paul's 1930 dictionary dates the name to 1892, a first record that we have not checked [12]. The xkcd survey uses another royal blue, #0504AA, which is 44 units away, much darker and more saturated [12].\n\nNo book gives a color value for the dyers' queen's blue, so this swatch is a modern convention, not a reconstruction of an indigo shade. It is vivid: chroma 70 against lightness 48 [12]. Nearby named blues are [[blue]], [[dark-blue]] and [[navy]], and the darkest dyers' shade, infernal or navy blue, shares its name with the last [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a screen color within six units of Royal blue covers at least five per cent of the canvas in exactly one work, [[painting:aic-7479|Portrait of a Lady]] by Christian Friedrich Zincke, dated 1725, at 10 per cent [13]. A blue this vivid is almost absent from old paint as photographed.\n\nThe word has a curve of its own. In Google Books, *royal blue* sits near 6 per cent of its peak level in 1800, 15 per cent in 1860, 48 per cent in 1900 and 74 per cent in 1940, and peaks in 2013 [14]. As always, these are photographs of aged, varnished paintings, and a color match is not a pigment test [13]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a grade of indigo-dyed cloth, also called queen's or king's blue",
+   "first_recorded": "eighteenth century in dyers' shade lists; Maerz and Paul give 1892 as a first record",
+   "source": "Balfour-Paul, Indigo, p. 188; ColorHub library"
+  },
+  "aka": [
+   "queen's blue",
+   "king's blue",
+   "royalblue (CSS)"
+  ],
+  "siblings": [
+   "navy",
+   "cobalt-blue",
+   "prussian-blue"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "royal-purple",
+    "gloss": "a different color: a reddish purple, not a blue"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#4169E1",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1,
+  "top_paintings": [
+   "aic-7479"
+  ],
+  "ngram": {
+   "rel_1800": 0.06,
+   "rel_1900": 0.484,
+   "peak": 2013
+  },
+  "measured": {
+   "lch": [
+    47.8,
+    70.4,
+    291.9
+   ],
+   "iscc": "vivid blue, block 179, de 6.9",
+   "nearest": [
+    [
+     "xkcd royal blue #0504AA",
+     43.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 188",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"royal blue\", \"Prussian blue\", \"RoyalBlue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"royal blue\", pp. 339-340",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"smalt\", pp. 358-359",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"ultramarine\", p. 389",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, Blue, ch. 8",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 20",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Chrome yellow\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 24",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 57",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 14",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Maerz & Paul 1930, CSS/X11, xkcd), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings (tools/article_field.py), as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothed, relative to peak",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In the eighteenth-century dyers' ladder of indigo shades, royal blue was another name for which shade?",
+   "choices": [
+    "Queen's blue",
+    "Milk-blue",
+    "Pearl-blue",
+    "Watchet-blue"
+   ],
+   "answer": "Queen's blue",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: royal blue always named the same pigment.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "What did Maxwell's blue filter for color photography contain, according to Ball?",
+   "choices": [
+    "A solution of ammoniacal copper sulphate",
+    "Ground lapis lazuli",
+    "A bath of woad",
+    "Powdered smalt"
+   ],
+   "answer": "A solution of ammoniacal copper sulphate",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Royal blue was the dyers' name for the seventh of thirteen indigo shades, queen's blue, in the eighteenth century.",
+  "In our archive of 23,781 paintings, exactly one carries a large patch of this blue: a portrait of 1725.",
+  "Look at the royal blue name on old color boxes: it could mean smalt, Prussian blue, ultramarine or a synthetic lake."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Birren sequence is one healer (Iredell), not healers in general; narrowed."
+  ]
+ },
+ "words": 782
+}

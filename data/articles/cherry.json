@@ -1,0 +1,293 @@
+{
+ "slug": "cherry",
+ "name": "Cherry",
+ "hex": "#CF0234",
+ "names": [
+  "Cherry",
+  "Cherry Red"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Cherry is the red of the ripe fruit, a plain English name that mineralogists once used for a dark brownish red and that today means a bright, clear one.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The fruit and the word",
+   "body": "Cherry is the red of the ripe fruit. Paterson defines it as a bright red, the color of cherries, and points the reader on to *cerise*, the French word for cherry, which he says is not necessarily the same color as the fruit and is often a bluish or purplish red [1]. The swatch on this page sits in the middle of the red range: ISCC-NBS files it as a vivid red [2]. Its closest named neighbors are Cardinal, a near-duplicate 2.3 units away, and [[crimson]] at 3.3 [2]. The cooler cousin is [[cerise]].\n\nThe color name has a long paper trail in our data, with entries in the ISCC-NBS system of 1955, in Maerz and Paul's dictionary of 1930 and in the 2010 xkcd color survey [2]. The name carries no pigment history, because it comes from the fruit, so what follows is a history of how people have used the cherry as a yardstick for red."
+  },
+  {
+   "id": "werner",
+   "title": "The cherry red of the mineralogists",
+   "body": "The earliest uses of the name in our books come from mineralogy. Werner-style color lists of the 1790s to 1821, which named some 50 to 110 shades so that stones could be described by eye, carry *cherry-red* among their reds [3]. In Syme's chart the color is renamed *brownish purple red*, which Baty glosses as the cherry red of Werner [3]. Syme's recipe blends lake red with brownish black and a little grey [3]. That is a dark, brownish color, nothing like the vivid swatch here [2][3].\n\nThe word moved easily from the rock collection to the jeweler. The mineralogist James Mawe used it in his *Treatise on Diamonds and Precious Stones* of 1813 for garnet and opal, alongside blood red, crimson red and fire red [4]. Finlay's glossary of gems gives pyrope as the cherry-red garnet, set beside the brownish almandine and the red-orange spessartine [5]. The cut stone to compare is [[gem:garnet|garnet]], whose cherry-red member is the pyrope [5]."
+  },
+  {
+   "id": "food",
+   "title": "Cherry on the plate",
+   "body": "Cherry is also where food coloring and the fruit meet. St Clair writes that cochineal, additive E120, is found in Cherry Coke, and Finlay mentions the same use; ingredients vary by market and year, so read it as their report, not a current label [6][7]. The jarred maraschino cherry gets its color from E123, a red azo dye that goes by the name amaranth; St Clair notes that it is banned in the United States over cancer fears but still used in Europe [8]. Glacé cherries are colored with erythrosine, additive E127 [9]. The red of the preserved cherry is therefore often not the red of the fruit.\n\nThe trick is old. In early nineteenth-century England, Greenfield writes, bakers used cochineal to make apple and gooseberry fillings look redder than cherry and plum [10]. Drebbel's tin-and-cochineal [[scarlet]] dyes ranged by recipe from a deep cherry red to a neon red [11]. Cochineal is the source of the carmine lake that painters bought [18]."
+  },
+  {
+   "id": "culture",
+   "title": "Love, steel and the body",
+   "body": "In the late Middle Ages red fruit could stand for love, and Pastoureau singles out cherries: offering them was a way for a shy suitor to speak without words, and the season of cherries was the season of love [12]. Smiths and engineers use the word too. Paterson describes a chart of the colors of heated steel, with white at 1200 degrees, then yellow, orange, a red called cherry, and brown-red at 600 [13].\n\nThe fruit is also a diagnostic color. Birren's 1950s book on color and health lists a bright cherry hue of the skin among the signs of carbon monoxide poisoning [14]. The list is an old one and should be read as a historical claim, not as medical advice."
+  },
+  {
+   "id": "eye",
+   "title": "Teach the eye: cherries at dusk",
+   "body": "Cherries are Livingstone's example of the Purkinje shift [15]. Set red cherries in a blue bowl and watch them in the evening: by day the fruit and the bowl are close in lightness [15]. As the eye adapts to the dark the bowl grows lighter and the cherries go nearly black [15]. She explains it by the changing contributions of rods and cones, so that reds become darker and blues brighter as the light falls [15].\n\nThis matters to anyone painting a cherry red. A painter who sets the lightness of the cherries by daylight will find the painted fruit darkening at dusk just as the real fruit does [15]. Under tungsten light the effect runs the other way, because the lamp is redder than sunlight and red objects reflect it better [15]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "As a painted color, cherry is rare. In our archive of 23,781 paintings, a screen color within six units of this swatch covers at least five per cent of the canvas in only three works, which makes it rarer than 77 per cent of the named colors [16]. The three are José Benlliure y Gil's *A Cardinal* of 1880, where it covers 24 per cent of the canvas, Filippino Lippi's *Annunciation* of 1494 at 17 per cent, and Pierre Bonnard's *The Red Blouse* of 1925 at 12 per cent [16]. The first is a cardinal's robe, and Cardinal is the near-duplicate name in our library [16][2].\n\nThe word has its own curve. In Google Books, *cherry* used as an adjective, which is the color sense, peaks in the 2010s and rose fastest in the 2000s [17]. These numbers are photographs of aged, varnished paintings, so a color match is not a pigment test and the name tells you nothing about the paint [16].\n\nOne last data point: Wikipedia's list of traditional Japanese colors gives this same screen color to *karakurenai*, \"foreign crimson\", which is not a translation of cherry [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the cherry fruit",
+   "first_recorded": "in the Werner-style color lists of the 1790s to 1821; color name in Maerz and Paul, 1930",
+   "source": "Baty, Nature's Palette, pp. 32-34; library data"
+  },
+  "aka": [
+   "cherry red"
+  ],
+  "siblings": [
+   "cherry-red",
+   "cerise",
+   "crimson"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "cerise",
+    "gloss": "French for cherry, but a cooler, bluer red than the fruit"
+   },
+   {
+    "slug": "cherry-red",
+    "gloss": "Werner's cherry red was a dark brownish purple red"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "karakurenai (唐紅/韓紅), 'foreign crimson': the same screen color in Wikipedia's list of traditional Japanese colors"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#CF0234",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 3,
+  "top_paintings": [
+   "commons-Q59859476",
+   "commons-Q21723145",
+   "commons-Q17492885"
+  ],
+  "first_dated": {
+   "id": "commons-Q21723145",
+   "painter": "Filippino Lippi",
+   "year": 1494
+  },
+  "ngram": {
+   "adjective_peak": "2010s",
+   "rise": "2000s"
+  },
+  "measured": {
+   "lch": [
+    43.6,
+    77.0,
+    26.0
+   ],
+   "contrast_white": 5.66,
+   "nearest": [
+    [
+     "Crimson",
+     3.3
+    ],
+    [
+     "Cardinal",
+     2.3
+    ]
+   ]
+  }
+ },
+ "questions": [
+  {
+   "q": "What did Werner-style color charts mean by the cherry red of Werner?",
+   "choices": [
+    "A dark brownish purple red",
+    "A pale pink",
+    "A bright orange-red",
+    "A deep blue-violet"
+   ],
+   "answer": "A dark brownish purple red",
+   "kind": "pick"
+  },
+  {
+   "q": "Looking at red cherries in a blue bowl as the light fades, what do you see?",
+   "choices": [
+    "The bowl looks lighter and the cherries almost black",
+    "The cherries glow brighter than the bowl",
+    "Both stay the same lightness",
+    "The cherries turn blue"
+   ],
+   "answer": "The bowl looks lighter and the cherries almost black",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the red in Cherry Coke comes from cochineal insects.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Look at red cherries in a blue bowl at dusk: the cherries go nearly black before the bowl does.",
+  "The cherry red of the 1800s mineralogists was dark and brownish, not bright.",
+  "In our painting archive, the cherry red of the swatch covers a quarter of the canvas only in a cardinal's robe."
+ ],
+ "words": 927,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Cherry Coke cochineal claim attributed to St Clair/Finlay and hedged (ingredients vary); other claims traced OK"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"cherry\" and \"cerise\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json, data/graph/nodes-c.json), CIEDE2000 distances; ISCC-NBS 1955, Maerz and Paul 1930, xkcd 2010 as recorded there",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 32-34 (color lists) and p. 250 (\"Brownish Purple Red\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 24",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Finlay, Jewels: A Secret History, \"garnet\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 13",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"cochineal\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"amaranth\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"erythrosin\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 11",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 15",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Pastoureau, Red: The History of a Color, ch. 21",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 207",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 9 (\"Diagnosis through Color\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Livingstone, Vision and Art, ch. 12",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 18,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 19",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "data",
+   "cite": "ColorHub graph fieldnotes (data/graph/fieldnotes/c.json), Google Books Ngram, adjective use",
+   "loc_kind": null,
+   "url": null
+  }
+ ]
+}

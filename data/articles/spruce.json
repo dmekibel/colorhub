@@ -1,0 +1,202 @@
+{
+ "slug": "spruce",
+ "name": "Spruce",
+ "hex": "#0A5F38",
+ "names": [
+  "Spruce"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Spruce is a deep, slightly bluish green named for the conifer, though the same word once named a yellow earth pigment and, by one dictionary's count, has also stood for a mauve.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A word with four colors",
+   "body": "As a color word, *spruce* has never settled down. Paterson's dictionary lists four senses: a mauve, a yellow-leaning green, a grey-green and a deep green [1]. Its colour index files it with the greens [2]. The swatch here is the dark green: Maerz and Paul recorded the name in 1916, and the other source behind this swatch is the xkcd color survey [3].\n\nMeasured against our library, the nearest named color is [[hunter-green]], about five units away on the ΔE scale [3]. A close neighbor, Spruce green, sits beside it, and the family also includes [[evergreen]], [[bottle-green]] and [[dark-green]] [3]. Compared with a plain [[green]], all of these are darker and quieter. The books we checked say nothing about the tree's foliage, so we claim no needle color here. The one book that mentions spruce wood is Finlay's, and it is writing about Cremona violins and choir stalls, where spruce and maple are admired under varnish [4]."
+  },
+  {
+   "id": "ochre",
+   "title": "Spruce ochre: a yellow with a Prussian name",
+   "body": "Before spruce was a green it was a yellow. The Pigment Compendium lists *spruce ochre* (or *oker*) as a historical term for a variety of yellow ochre, and quotes Field in 1835 calling it a dark yellow [5]. Another entry says that the second-best ochre sold to British artists was imported as Dutch or Spruce ochre, and that *spruce* here is an old form of *Prussia* or *Prussian* [6]. Salter, writing in 1869, used the same name for a brown ochre, which he also called *ocre de rue* [7].\n\nThe books we checked do not say whether the tree's name and the ochre's name share a root, so the link between them is not established here [6]. What the entries do show is that an artist's color-man in the 1800s could mean a dark yellow or a brown by the word, and nothing green at all [5][7]. Compare plain [[ochre]], which is warmer and more orange than any of these [3]."
+  },
+  {
+   "id": "insect",
+   "title": "A scarlet insect on a spruce",
+   "body": "One more spruce turns up in the pigment literature, and it is a red one. In the compendium's quotation of a mid-nineteenth-century report, a species of scale insect was found on a black spruce near Kingston, in Canada [8]. By that account it looked much like cochineal but was a little more scarlet [8]. The entry is a curiosity, not a trade: it records one find, and nothing in the book suggests it became a dye [8]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A spruce-like green is a painter's shadow color, and a late one. In our archive of 23,781 museum paintings, a color within six units of this swatch covers at least five per cent of the canvas in only 13 works [9]. Nine are from the 1800s, four from the 1900s, and none is older than 1800, although about 13,500 of the archive's dated paintings are [9]. That is roughly two to four times the archive's overall rate for the two modern centuries [9].\n\nThe largest single patch is [[painter:paul-gauguin|Gauguin]]'s [[painting:cma-149410|In the Waves]] of 1889, where the color covers about 38 per cent of the picture [9]. Next come the American *Spring on the Range* of 1875, at 31 per cent, and [[painter:edvard-munch|Munch]]'s [[painting:commons-Q18890792|Self-Portrait against a Green Background]] of 1905, at 26 per cent [9]. In the lightness ordering of each painting, this color falls in the shadows about 62 per cent of the time [9]. Our Ngram check is not shown: the word *spruce* mostly means the tree or the verb, so its curve would not follow the color [9]. As always, these are photographs of aged, varnished paintings, so read them as screen colors, not as a pigment test [9]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the spruce tree (the word's own root is not established in our books)",
+   "first_recorded": "Maerz & Paul 1930 give 1916 for the color name; 'spruce ochre' is older (Field, 1835)",
+   "source": "Paterson, A Dictionary of Colour; Pigment Compendium, 'spruce ochre'"
+  },
+  "aka": [
+   "dark spruce green"
+  ],
+  "siblings": [
+   "spruce-green",
+   "hunter-green",
+   "evergreen"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "ochre",
+    "gloss": "'Spruce ochre' was a yellow or brown earth, nothing like this green"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#0A5F38",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 13,
+  "top_paintings": [
+   "cma-149410",
+   "nga-52960",
+   "commons-Q18890792",
+   "nga-103247",
+   "nga-195808"
+  ],
+  "role": {
+   "shadow": 0.62,
+   "mid": 0.23,
+   "highlight": 0.15
+  },
+  "measured": {
+   "lch": [
+    35,
+    37,
+    155
+   ],
+   "nearest": [
+    [
+     "Hunter green",
+     5.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"spruce\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, colour index (greens)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library: Spruce (Maerz & Paul 1930, first recorded 1916; xkcd), nearest Hunter green (dE 5.1)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 14",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"spruce ochre\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"ochres\" (Dutch or Spruce ochre)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"brown ochre\" (quoting Salter, 1869)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 231 (a mid-1800s report quoted under a cochineal-like insect)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas); Google Books Ngram not used for this word",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "The Pigment Compendium says the 'spruce' in 'spruce ochre' is an old form of which word?",
+   "choices": [
+    "Prussia",
+    "Spice",
+    "Sprout",
+    "Spruce tree"
+   ],
+   "answer": "Prussia",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: spruce ochre was a green earth pigment.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "In our painting archive, when does a spruce-like green first cover a big part of a canvas?",
+   "choices": [
+    "Only in the 1800s and 1900s",
+    "Already in the 1200s",
+    "Mostly in Renaissance portraits",
+    "Only after 1950"
+   ],
+   "answer": "Only in the 1800s and 1900s",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Spruce was a yellow before it was a green: spruce ochre was a dark yellow earth, and 'spruce' there is an old form of Prussia.",
+  "In our archive no painting before 1800 has a canvas that is five per cent spruce green; Gauguin's In the Waves has 38 per cent."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Verified 8 key claims against fact card and book text; no changes needed."
+  ]
+ },
+ "words": 610
+}

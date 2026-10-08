@@ -27,7 +27,7 @@
   {
    "id": "trade",
    "title": "Coral on the move",
-   "body": "Coral traveled long distances. Finlay notes that when Pliny complained in about 70 AD that the Roman craze for silk was draining bullion, the goods heading the other way included silver, Baltic [[gem:amber|amber]] and coral [11]. Even now in Tibet, Ladakh and Mongolia, coral is prized and handed down from mother to daughter as wealth [11]. In Ladakh the *perak* headdress, set with turquoise, coral and silver, was until recently among a woman's most valuable possessions [11].\n\nThat is a different coral from the swatch. The coral of a Ladakhi headdress is a deep red bead, and the long chain from Mediterranean divers to Himalayan bridal chests is a trade in red [11]. The books do not say when the name drifted from red toward orange-pink; the earliest recorded use as a color word in our library, 1513, long predates any swatch [15]."
+   "body": "Coral traveled long distances. Finlay notes that when Pliny complained in about 70 AD that the Roman craze for silk was draining bullion, the goods heading the other way included silver, Baltic [[gem:amber|amber]] and coral [11]. Even now in Tibet, Ladakh and Mongolia, coral is prized and handed down from mother to daughter as wealth [11]. In Ladakh the *perak* headdress, set with turquoise, coral and silver, was until recently among a woman's most valuable possessions [11].\n\nThat is a different coral from the swatch, a jewel rather than a color name. Finlay places the source of the finest coral in the Mediterranean off Naples, and thinks the eastern fashion probably began in Roman times, paid for with the silk trade [11]. The books do not say when the name drifted from red toward orange-pink; the earliest recorded use as a color word in our library, 1513, long predates any swatch [15]."
   },
   {
    "id": "werner",
@@ -37,7 +37,7 @@
   {
    "id": "painters",
    "title": "Turner's coral clouds",
-   "body": "Finlay's story of coral in painting is about loss. For the sunset in *The Fighting Téméraire*, painted in 1838, Turner passed over vermilion, madder and carmine and took up a new paint, iodine scarlet, which is mercury iodide [13]. Bernard Courtois had made it just before Waterloo, and Humphry Davy developed it a few years later, although Davy himself warned in 1815 that it changed in light [13]. George Field's verdict was that nothing matched it for scarlet geraniums, but its beauty was almost as fleeting as the flowers [13].\n\nAccording to Finlay, Turner painted clouds of coral in just the color he thought right, and visitors to the National Gallery today can only imagine it [13]. Curators already noted pigment change around the sun in 1859, three years after the picture arrived [13]. The coral of those clouds survives, in Finlay's telling, only in the imagination [13]."
+   "body": "Finlay's story of coral in painting is about loss. For the sunset in *The Fighting Téméraire*, painted in 1838, Turner passed over vermilion, madder and carmine and took up a new paint, iodine scarlet, which is mercury iodide [13]. Bernard Courtois had invented it just before Waterloo, and Humphry Davy, Turner's friend, developed it a few years later, although Davy himself warned in 1815 that it changed in light [13]. George Field's verdict was that nothing matched it for scarlet geraniums, but its beauty was almost as fleeting as the flowers [13].\n\nAccording to Finlay, Turner painted clouds of coral in just the color he thought right, and visitors to the National Gallery today can only imagine it [13]. Curators already noted pigment change around the sun in 1859, three years after the picture arrived [13]. The coral of those clouds survives, in Finlay's telling, only in the imagination [13]."
   },
   {
    "id": "names",
@@ -274,16 +274,16 @@
   "Sailors fixed a coral stone to the top of the mast against lightning.",
   "In our archive coral is rare in paintings, and nearly always an accent."
  ],
- "words": 1294,
+ "words": 1305,
  "status": "checked",
  "checked": {
-  "by": "L7 self-check (sentence-to-card trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Short for an epic slot: books say little about the color itself; written long, not padded.",
-   "1513 date is Maerz & Paul via Wikipedia/our library; hedged.",
-   "Karl Isakson dating (1893) comes from archive record and looks wrong for the painter; flagged as the archive's date.",
-   "Gage coral bracelet painting not identified (OCR jumble); hedged."
+   "Removed unsupported 'deep red bead' / 'trade in red' claim about Ladakhi coral; replaced with Finlay's Naples/Roman-era point.",
+   "Turner paragraph: Courtois/Davy attribution aligned with Finlay's wording.",
+   "Verified: Greenfield Druid, Birren (teeth, Roman coral and carnelian), Pastoureau mast, Pliny/Ladakh, Judd counts, Turner 1859 note, Gage bracelet.",
+   "Kept hedges: 1513 date, Isakson 1893 archive date, unidentified Gage painting."
   ]
  }
 }

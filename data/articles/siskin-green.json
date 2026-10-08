@@ -1,0 +1,206 @@
+{
+ "slug": "siskin-green",
+ "name": "Siskin Green",
+ "hex": "#C8C76F",
+ "names": [
+  "Siskin Green"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Siskin Green is a bright, yellowish olive-green named for a small finch, written into the colour lists of early nineteenth-century naturalists in place of an older name, canary green.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A finch's colour",
+   "body": "The siskin is a small Eurasian finch, *Spinus spinus*, and its yellow-green breast feathers are the animal example that the Edinburgh flower painter Patrick Syme gave for this colour in his chart, as Baty reproduces it from the 1821 edition [2]. His other examples are the ripe Colmar pear (he spells it \"Coalmar\"), the Irish Pitcher apple and a green uranium mineral, torbernite, which he calls uran mica [2]. A bird, two fruits and a stone: the chart worked by pointing at things a reader could go and look at.\n\nSyme's recipe for painters was equally plain. Siskin Green is [[emerald-green]] mixed with a great deal of [[lemon-yellow]] and a little yellowish white [2]. The result is the swatch here, which sits next to [[khaki]] and [[moss-green]] on the modern colour wheel and, by our measure, closest to khaki [6]."
+  },
+  {
+   "id": "werner",
+   "title": "Not quite Werner's colour",
+   "body": "The name belongs to a family of colour terms that began with the German mineralogist Abraham Gottlob Werner, whose book of 1774 gave collectors a standard vocabulary for describing minerals [3]. Siskin Green is not in that first list [1][3]. The Scottish naturalist Robert Jameson, who had studied under Werner, changed canary green to siskin green when he revised the terms that had been in use for about thirty years [1]. Baty does not give the year, and Jameson's 1805 list still reads canary green, so the change falls somewhere after it [1][3].\n\nSyme took the new name into his *Werner's Nomenclature of Colours* in 1814, a list of 108 colours, and kept it in the second edition of 1821, where it is green number 61 of 110 [3][6]. The American mineralogist Parker Cleaveland used it too, in a list of 80 colours in 1816 [3]. Syme's own marking of which colours were \"original\" to Werner is not reliable, since he labelled some of Picardet's and Lenz's colours as Werner's, so the source of any single name has to be checked list by list [4]."
+  },
+  {
+   "id": "critics",
+   "title": "A name that needs a picture",
+   "body": "Not everyone liked the animal-and-vegetable method. In 1841 the optician James Hunter wanted a colour table for the stages of inflammation in the iris, and he set Werner's names aside [5]. His complaint was that names such as pistachio green and siskin green mean little without illustrations, and that apple green, for instance, matches the bark rather than the fruit [5].\n\nHunter's point still holds. A colour named for a finch tells you something only if you have held a siskin, which is why the later nomenclatures that followed Syme added printed swatches and, in the end, numbers [4]. Syme's chart was, by one account, perhaps the only one used by English-speaking botanists until 1886 [7]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a colour within six units of this swatch covers at least five per cent of the canvas in 77 works, or about 0.3 per cent [8]. It is rare in European easel painting and much more at home in India: 17 of the 721 Indian works carry it [8]. The movement with the most is the Kalighat bazaar paintings of Calcutta, where 14 of 96 works do, about 45 times the archive's overall rate [8].\n\nThe largest single patch is in [[painting:cma-162430|Manasa, The Snake Goddess]], an Indian work of about 1890, where it fills about 69 per cent of the picture [8]. By decade it peaks in the 1890s, with 20 of 1,173 works [8]. As always these are photographs of aged, varnished paintings, so read them as screen colours rather than pigment tests [8]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the siskin, a small yellow-green finch (Spinus spinus)",
+   "first_recorded": "Jameson, replacing canary green (year not given by Baty); Syme, 1814",
+   "source": "Baty, Nature's Palette, pp. 26, 160-161"
+  },
+  "aka": [
+   "Werner's siskin green"
+  ],
+  "siblings": [
+   "moss-green",
+   "apple-green",
+   "olive-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "khaki",
+    "gloss": "the modern name for a nearby screen colour, with an unrelated history"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#C8C76F",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 77,
+  "top_paintings": [
+   "cma-162430",
+   "cma-149996",
+   "rijks-20028690",
+   "commons-Q119810428"
+  ],
+  "movements": {
+   "Kalighat": [
+    14,
+    96
+   ]
+  },
+  "countries": {
+   "India": [
+    17,
+    721
+   ]
+  },
+  "peak_decade": 1890,
+  "role": {
+   "highlight": 0.92,
+   "mid": 0.08
+  },
+  "measured": {
+   "lch": [
+    79,
+    46,
+    105
+   ],
+   "nearest": [
+    [
+     "Khaki",
+     4.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 26",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 160-161 (Syme's chart no. 61)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 34 (comparison of the colour lists, Werner to Syme)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 28-29",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 220 (Hunter on the iris)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub library, Siskin Green (Syme 1821 no. 61; ISCC-NBS 1955 block 105)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 172 (Syme's chart in botany)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive, tools/article_field.py, #C8C76F, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which older colour name did siskin green replace in Jameson's list?",
+   "choices": [
+    "Canary green",
+    "Apple green",
+    "Sap green",
+    "Emerald green"
+   ],
+   "answer": "Canary green",
+   "kind": "pick"
+  },
+  {
+   "q": "Why did the optician James Hunter drop Werner's names for his table of iris colours?",
+   "choices": [
+    "Names like siskin green mean little without a picture",
+    "The names were too new",
+    "They were all in German",
+    "They only described minerals"
+   ],
+   "answer": "Names like siskin green mean little without a picture",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Syme's examples for siskin green were all minerals.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Siskin Green is a finch's breast, a Colmar pear and a uranium mineral, as Syme chose to show it.",
+  "In the Kalighat paintings of Calcutta, 14 of 96 works carry this green."
+ ],
+ "words": 596,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Verified key claims against Baty text and fact card; no changes needed."
+  ]
+ }
+}

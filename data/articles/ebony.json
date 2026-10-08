@@ -1,0 +1,261 @@
+{
+ "slug": "ebony",
+ "name": "Ebony",
+ "hex": "#555D50",
+ "names": [
+  "Ebony"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Ebony is the name of a dense tropical heartwood and, from it, of a glossy black; the swatch on screen is a dark green-grey, which is a good reason to read what the books say about the wood.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A wood that became a color",
+   "body": "Ebony is the heartwood of tropical trees of the genus *Diospyros*, and the color is named from it [2]. Paterson's dictionary defines the color as black, taken from the wood, and cites Shakespeare's phrase \"ebon-coloured ink\" in *Love's Labour's Lost* [1]. St Clair's glossary gives something different: a very dark brown [2]. The books disagree, and the disagreement is the interesting part, because the wood sits right on the line between the two.\n\nPaterson also files ebony among the wood colors, beside mahogany, oak, pine, teak and walnut [3]. In English the comparison with ebony is one of the stock similes for blackness, listed with death, hell, ink, jet, night, pitch and soot [4]. The Pigment Compendium, which catalogues pigment names, labels the entry *Ebony* as black-brown [5]. Three sources, and three slightly different darks."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch is not black",
+   "body": "The swatch here, #555D50, is a dark grey with a clear green cast, at a lightness of about 38 out of 100 [6]. It comes from the old charts: Maerz and Paul's 1930 dictionary records the name as first used in 1596, and Ridgway's 1912 plate XLVI and the ISCC-NBS 1955 system (block 108) also carry it [6]. The library's nearest equivalent is Dark Greyish Olive, a mere 1.5 units away, and the nearest app color is [[hunter-green]], 12.6 units away [6].\n\nNeither book describes the wood as olive, so the chart is giving an idea of an ebony-colored object rather than the heartwood itself [1][2]. If you want the color the word usually means, think of [[black]] with a trace of brown. The swatch is closer to [[green-grey]] than to [[jet]]."
+  },
+  {
+   "id": "myth",
+   "title": "Black in myth and in argument",
+   "body": "Ebony is old as a word for black. Pastoureau's history of black places Hades, god of the Greek underworld, on an ebony throne, in the palace at the center of the dark world below [7]. In late antiquity Boethius used ebony to make a philosophical point: the one word *black* is applied to a person, to a crow and to ebony, so color is an accident and tells us nothing about the nature of a thing [8].\n\nBe careful reading too much into such words. Pastoureau notes that the Hebrew Bible is rich in terms for materials such as gold, ivory and ebony and poor in terms for color, and that material and color are often confused [9]. A passage that mentions ebony may mean the wood, the color, or both."
+  },
+  {
+   "id": "pigment",
+   "title": "Ebony as a pigment name",
+   "body": "Ebony black turns up as a pigment name in nineteenth-century sources, but not as a black made from the wood. The Pigment Compendium reports that Riffault and colleagues, in 1874, describe ebony black as obtained by burning copper nitrate with peat [5]. The resulting composition is unknown [5]. The same entry notes that Field stated in 1835 that olive lake was prepared from ebony, though by the end of the century olive lake was a blend of other pigments, among them quercitron lake, bone brown and ultramarine [5][10].\n\nSo the name outlived any clear recipe. When an old color box says *ebony*, the safe reading is a dark, glossy tone, and nothing more specific can be claimed."
+  },
+  {
+   "id": "eye",
+   "title": "Where to look",
+   "body": "The books use ebony for gloss more than for hue. Finlay describes amber ranging from ivory to ebony, with all the other colors in between [11]. Jarman puts ebony on a silk dress and a desk [12]. Finlay's Suffolk sheep, in the same spirit, have ebony faces [13]. Hold a black wooden object in daylight and see whether it leans brown or stays neutral: the two glosses in the dictionaries, black and very dark brown, are about exactly that lean."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 1,344 works, 5.7 per cent [14]. It is mostly a mid-tone, playing that role in 58 per cent of the paintings that carry it, against 30 per cent as a shadow [14]. The largest examples are quiet: Købke's *Study of Clouds over the Sea* of 1840, at 86 per cent of the canvas, and [[painter:james-mcneill-whistler|Whistler's]] [[painting:aic-56905|Nocturne: Blue and Gold, Southampton Water]] of 1872, at 75 per cent [14].\n\nIt has grown more common with time. The 1900s carry it in 172 of 1,674 works, 10.3 per cent, a lift of 1.8 over the archive rate, and the 1930s peak at 9 of 69 [14]. It is most at home in Tibetan paintings (9 of 47), Norwegian paintings (19 of 120) and Post-Impressionism (8 of 45) [14]. The Danish painter [[painter:harald-giersing|Giersing]] has it in 8 of his 23 works [14]. As always these are photographs of aged, varnished paintings, so a color match is not a pigment test [14]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "ebony wood (Diospyros heartwood)",
+   "first_recorded": "Maerz and Paul 1930 give 1596 as the first recorded use of the color name",
+   "source": "Paterson, A Dictionary of Colour; ColorHub library"
+  },
+  "aka": [
+   "ebon"
+  ],
+  "siblings": [
+   "jet",
+   "ivory"
+  ],
+  "parent": "black",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "hunter-green",
+    "gloss": "the nearest app color to the swatch, a dark green and not a black wood"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#555D50",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1344,
+  "top_paintings": [
+   "smk-KMS7643",
+   "aic-56905"
+  ],
+  "role": {
+   "shadow": 0.3,
+   "mid": 0.58,
+   "highlight": 0.12
+  },
+  "peak_decade": {
+   "1930s": {
+    "hits": 9,
+    "n": 69,
+    "lift": 2.31
+   }
+  },
+  "company": [
+   "Hunter green",
+   "Charcoal",
+   "Moss"
+  ],
+  "measured": {
+   "lch": [
+    38,
+    9,
+    132
+   ],
+   "nearest": [
+    [
+     "Dark Greyish Olive",
+     1.5
+    ],
+    [
+     "Hunter green",
+     12.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"ebony, ebon\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary, \"Ebony\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"wood colours\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"black as coal; to be as\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Ebony\", \"Ebony black\" and the copper nitrates and nitrites group",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Maerz & Paul 1930, Ridgway 1912 plate XLVI, ISCC-NBS 1955 block 108; CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pastoureau, Black: The History of a Color, p. 18 (the Greek underworld)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 83 (Boethius)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, ch. 13 (\"The silences of the Bible and the church fathers\"); Pastoureau, Red, ch. 15",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Olive lake\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Finlay, Jewels: A Secret History, ch. 10 (amber)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Jarman, Chroma, pp. 46-47",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Finlay, Fabric, p. 151",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "data",
+   "cite": "ColorHub archive field notes, tools/article_field.py, CIEDE2000 6, 5% cover. As photographed: museum photographs of aged, varnished paintings. A color match, not a pigment test.",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What color is the Ebony swatch on this page?",
+   "choices": [
+    "A dark grey with a green cast",
+    "Pure black",
+    "A deep red-brown",
+    "A blue-black"
+   ],
+   "answer": "A dark grey with a green cast",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the pigment called ebony black was made by charring ebony wood.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "In the Greek underworld, what was the throne of Hades said to be made of?",
+   "choices": [
+    "Ebony",
+    "Gold",
+    "Marble",
+    "Iron"
+   ],
+   "answer": "Ebony",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "The Ebony swatch is a dark green-grey, though the wood it is named for is black or very dark brown.",
+  "In the Greek underworld Hades sits on an ebony throne.",
+  "Ebony black, as a nineteenth-century pigment name, was recorded as made from copper nitrate and peat, not from the wood."
+ ],
+ "words": 799,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed Gage/Averroes 'ebony shade' paragraph: low-confidence OCR-garbled card, not verifiable in book text",
+   "Dropped its note and renumbered notes"
+  ]
+ }
+}

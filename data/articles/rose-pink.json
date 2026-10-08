@@ -1,0 +1,208 @@
+{
+ "slug": "rose-pink",
+ "name": "Rose Pink",
+ "hex": "#FF66CC",
+ "names": [
+  "Rose Pink"
+ ],
+ "tier": "pigment",
+ "depth": "long",
+ "lede": "Rose pink began as a cheap paint: red dye from brazilwood fixed onto chalk, sold to house painters and paper-stainers, and its odd name helped turn the word pink from a method into a color.",
+ "sections": [
+  {
+   "id": "swatch",
+   "title": "Which rose pink",
+   "body": "The swatch on this page, a hot, slightly purple pink, is the Wikipedia-list version of the name, and other sources disagree with it sharply [8]. Ridgway's 1912 plate XII gives a pale, cool pink about the same hue family but far lighter, and the crowd-sourced xkcd survey puts it at a warmer salmon-leaning pink [8]. ISCC-NBS 1955 files the name in block 38, and Maerz and Paul recorded it around 1850 [8]. Ridgway's first edition of 1886 already carried the name, which is the earliest dated source in our library [8]. Our nearest standard name for the screen swatch is [[hot-pink]], about 5 units away [8].\n\nThe pigment itself was not this bright. Dossie in 1764 calls it like red lake but made on a chalk base, and Field in 1835 calls it a coarse lake used for the commonest distempers [3]. Treat the swatch as a modern idea of rose pink, not a sample of the old paint."
+  },
+  {
+   "id": "before-color",
+   "title": "A word for a method",
+   "body": "For a long time *pink* named a way of making a pigment, not a color. Ball explains that pinks were defined neither by their ingredients nor their color, and that the noun referred, like *lake*, to the method of synthesis: an organic colorant carried on an inorganic powder [1]. There were yellow pinks, made from weld, broom or unripe buckthorn berries, as well as green pinks, brown pinks and rose pinks [1][2][5].\n\nYellow pink was popular through the seventeenth and eighteenth centuries, and Ball notes that it was often mixed with blue to give a green pink; Edward Norgate left a recipe for a pink in the seventeenth century [1]. The Compendium names French, Italian and Dutch pink as other yellow versions [2]. Rose pink was the one that was actually pink."
+  },
+  {
+   "id": "brazilwood",
+   "title": "Brazilwood on chalk",
+   "body": "The earliest appearance of the English term that the Pigment Compendium can find is in the 1729 English edition of the *Traité de mignature*, usually attributed to Claude Boutet (1674), where the original French *lacque colombine* for a brazilwood lake was translated as rose pink [3]. In the seventeenth century the English name for it was *roset* [3]. Dossie (1764) says rose lake is commonly called rose pink, and that its dye came from [[flower:brazilwood|brazilwood]] or Campeachy wood, on a base that was usually chalk [3]. He adds that it was used mostly for house painting and wallpaper [3]. Field (1835) lists the dyewoods as Brazil, peach, sapan, bar and camwood, and says paper-stainers and the commonest distemper painters used it [3].\n\nBy the time of Heaton in 1928 the name was marked as obsolete or rare [3]. In use it also turned up in recipes, such as a Devonshire brown listed by Fishwick (1795 to 1816) that combined burnt umber, Frankfort black, rose pink and colcothar [4]. Brazilwood lakes are rarely identified in surviving paintings, which the Compendium blames on their evident lack of permanence [2]. A related name, [[brazil-red]], has its own article.\n\nBooks differ in detail here. Ball says rose pink made from brazilwood was considered different from the lake pigment made from the same colorant [1], while Dossie, as the Compendium quotes him, treats rose lake and rose pink as one thing [3]."
+  },
+  {
+   "id": "becoming-color",
+   "title": "How pink became a color",
+   "body": "Ball's account is that yellow pink fell out of use toward the end of the eighteenth century, and brown pink lingered into the nineteenth, until *pink* became synonymous with the light red rose pink and the meaning shifted from manufacture to color [1]. Paterson reaches the same view: rose pinks were probably instrumental in moving the word from the process to the color [5]. The Compendium dates the first use of the word for a light red to the middle of the seventeenth century, citing Harley, so the books disagree on the timing: mid-1600s in one, the late 1700s in another [3][1].\n\nSt Clair adds an observation [6]. Light reds got a name of their own while pale greens and yellows mostly did not, though some languages, Russian among them, distinguish more shades [6]. The article on [[pink]] picks up the story from there.\n\nIn the dictionary, rose pink today means a strong pink, a purplish pink or, most commonly, a light red-pink [5]. Its neighbors are [[carnation]], which Paterson glosses as rose-pink or flesh-colored [5], and [[rose-red]]."
+  },
+  {
+   "id": "elsewhere",
+   "title": "Rose pink in the wild",
+   "body": "The name also turns up outside paint. Finlay describes the rose-pink [[gem:pearl|pearls]] of Scotland, exported across Europe for centuries, and a river pearler who said the sweet rose-pink pearls of the Oykel were always the most valuable [7]. In art, Ball notes that Yves Klein began with textured monochromes in golden yellows and deep rose pinks before he settled on a single color [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, none has a color within four units of this swatch covering even one per cent of the canvas [8]. That describes our archive, not painting as a whole, and fits a pigment that was a cheap, impermanent house paint [8][2]. Modern hot pink is far more saturated than any aged rose lake in a museum photograph [8].\n\nThe words are easier to follow than the paint. In Google Books, the phrase *rose pink* appears from around 1820, rises to a peak around 1950, and has since fallen to roughly a quarter of that level [8]. These counts include every use of the phrase, so they are not a clean measure of the color [8]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the rose plus pink, the trade word for a dye fixed on a chalk base",
+   "first_recorded": "English: 1729 edition of the Traité de mignature, translating a brazil lake; roset in the 1600s",
+   "source": "Pigment Compendium, \"rose pink\"; Ball, Bright Earth, ch. 14"
+  },
+  "aka": [
+   "roset (17th-century English)",
+   "rose lake (Dossie's term)"
+  ],
+  "siblings": [
+   "pink",
+   "carnation",
+   "rose-red"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "hot-pink",
+    "gloss": "the Wikipedia-list swatch used here lands nearest Hot Pink, not the old pale lake"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "lacque colombine (a brazil lake, in Boutet)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#FF66CC",
+   "de2000": 4,
+   "min_cover": 0.01
+  },
+  "n_present": 0,
+  "ngram": {
+   "first": 1820,
+   "peak": 1950
+  },
+  "swatches": {
+   "wiki": "#FF66CC",
+   "ridgway_1912": "#FEC2E4",
+   "xkcd": "#F7879A"
+  },
+  "measured": {
+   "lch": [
+    66,
+    73,
+    341
+   ],
+   "nearest": [
+    [
+     "Hot pink",
+     5.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 14 and ch. 18",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"brazilwood\" and \"yellow pink\" entries, pp. 74 and 312",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"rose pink\", p. 338",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Devonshire brown\", p. 153",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"carnation\", \"English pink\" and \"rose pink\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, p. 54",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Finlay, Jewels, ch. 12",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub color library (Ridgway, ISCC-NBS, Maerz & Paul, xkcd), archive field notes and Google Books Ngram, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did the word pink originally name in painters' vocabulary?",
+   "choices": [
+    "A way of making a pigment on a chalk-like base",
+    "A flower",
+    "A shade between red and white",
+    "A kind of pearl"
+   ],
+   "answer": "A way of making a pigment on a chalk-like base",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: every pink pigment was pink in color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Rose pink pigment was dyed mainly from which wood?",
+   "choices": [
+    "Brazilwood",
+    "Walnut",
+    "Oak gall",
+    "Ebony"
+   ],
+   "answer": "Brazilwood",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Before pink was a color it was a method, and many pinks were yellow, green or brown.",
+  "Rose pink was a coarse chalk-and-brazilwood paint for houses and wallpaper, not a painter's refined lake."
+ ],
+ "status": "checked",
+ "words": 895,
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Claims verified against fact card and book text; no fixes needed."
+  ]
+ }
+}

@@ -1,0 +1,213 @@
+{
+ "slug": "kashmir",
+ "name": "Kashmir",
+ "hex": "#426C53",
+ "names": [
+  "Kashmir"
+ ],
+ "tier": "place",
+ "depth": "medium",
+ "lede": "Kashmir is a dark, muted green named for the Himalayan valley; nothing in the books explains why, though the place is famous for shawls, saffron and sapphires.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Name and meaning",
+   "body": "*Kashmir* is a place name used as a color name for a muted, dark green. It is the name of the mountain valley and region in the Himalayas, and the color is filed in our sources as a place word, with no record of why this green carries it [1]. The earliest record is Maerz and Paul's *Dictionary of Color* of 1930, where it appears on plate 30, block E8, with a first use given as 1925 [1]. Who chose the name is undocumented.\n\nThat matters because the place is much better known for other colors. Paterson's dictionary lists \"Kashmir blues\" in a set of evocative regional phrases, with Rajasthan reds and Topkapi greens [2]. The green on this page is not one of those [1][2]."
+  },
+  {
+   "id": "shawls",
+   "title": "The shawl colors",
+   "body": "The color most often attached to Kashmir in the books is cloth [3]. Finlay follows the Kashmir shawl, woven from fine pashm goat wool, through a history that runs from legend to ledger [3]. One tradition dates a loom technique to the eleventh century, and other scholars dispute that date; by the fifteenth century, a century after the valley's conversion to Islam, a distinct technique had emerged [3]. One legend has the eighth sultan, whose reign ran from 1418 to 1470, calling in a Turkestan weaver to adapt it [3].\n\nColor changed after Emperor Jahangir first spent a spring in the valley in 1620 and wrote of its tulips [4]. Court painters were already copying European botanical pictures, and from then the shawls turned from stylized, geometric flowers toward naturalistic ones [4]. Fragments in the Victoria and Albert Museum are described by conservators with a color list: peony red, verdigris and cinnamon on vanilla, or straw, saxe blue, green muscat, claret and mole on a saffron ground [5].\n\nThose shawls were soft, not hard-edged: in the twill tapestry technique one color slides into the next, so the pattern seems to float [5]. Owen Jones, in his *Grammar of Ornament* of 1856, held up the Kashmir shawl as an example of colors that blend to a neutral bloom at a distance and reveal detail close up [6]. Indigo ran through the cloth as well. Balfour-Paul notes that late eighteenth-century shawls contain yarns dyed with sulphonated indigo, the bright turquoise-leaning \"Saxon blue\" invented around 1740 [7], and that indigo-and-white striped bier cloths were woven in Kashmir for Syria in the same century [8]."
+  },
+  {
+   "id": "saffron",
+   "title": "Saffron and the sapphire",
+   "body": "Two other things carry the place name to the color world. The first is saffron: the spice has been grown in Kashmir since at least 500 BC by Finlay's account, though she judges the local claim that saffron was born there to be probably wrong [9]. When she went looking for the saffron harvest, the industry in Kashmir had shrunk to under a ton a year [9]. Monastic robes in Tibet, often called saffron, are not dyed with it [9].\n\nThe second is the Kashmir sapphire, a gem that shares with the best Golconda diamonds a liveliness the trade calls \"fine water\" [10]. Its nearest visual match today is not a sapphire at all but [[gem:tanzanite|tanzanite]], discovered in 1967 [10]. Neither is the green shown here [10]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch is not the history",
+   "body": "The swatch is `#426C53`, ISCC-NBS \"moderate green\", within CIEDE2000 5.6 of the block center, with a Munsell reading of about 2.9G 4.1/4 [1]. It is dark and quiet, with lightness under half and low chroma [1]. Nearby named colors in our data include [[viridian]], 10.6 units away, and [[hunter-green]], 8.8 units away [1].\n\nNo passage in our books ties this green to a Kashmir dye, shawl or stone [1][2]. Treat it as a name borrowed for its mountain-valley feeling, not as a product of the place [1][2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, 168 contain this swatch, which is 0.71 percent, as photographed, and it is more common than 56 percent of the named colors [11]. Inside a painting it most often plays a shadow, in 30 percent of the 83 paintings where we can measure it [11].\n\nThe painter who leans on it most is [[painter:paul-cezanne|Cézanne]], with the color in 7 of his 50 works in the archive, 8.4 times the rate of the museums they come from [11]. It peaks in the 1900s, in 1.3 percent of the 1,674 paintings from then, 3.3 times the expected rate, and it is most over-represented in France, at 2.4 times [11]. The earliest dated match is a painting from 1480, but the early centuries are thin, so that is a floor, not a first [11]. A match is a look-alike hue in an aged, varnished photograph, not proof of any pigment [11]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the Himalayan region of Kashmir; reason for the green undocumented",
+   "first_recorded": "1930 (Maerz & Paul), first use given as 1925",
+   "source": "Maerz & Paul 1930 via ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "viridian",
+   "hunter-green",
+   "sage"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "indigo",
+    "gloss": "the shawl and cloth colors of Kashmir include indigo blues, not this green"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#426C53",
+   "de2000": 4,
+   "min_cover": 0.01
+  },
+  "n_present": 168,
+  "painters": [
+   "paul-cezanne"
+  ],
+  "role": "shadow",
+  "measured": {
+   "iscc": "moderate green, block 145",
+   "nearest": [
+    [
+     "Hunter Green",
+     8.8
+    ],
+    [
+     "Viridian",
+     10.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and graph nodes (Maerz & Paul 1930, plate 30 E8; ISCC-NBS 1955), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 331, \"Rajasthan reds\"",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Finlay, Fabric, p. 214",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Finlay, Fabric, p. 240",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Finlay, Fabric, pp. 240-242",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Finlay, Fabric, p. 249",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 126",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 191",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. \"Color\" (saffron section)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Finlay, Jewels, pp. 16, 18",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, as photographed (data/graph/fieldnotes/k.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What kind of cloth is Kashmir most famous for in the books?",
+   "choices": [
+    "Fine-wool shawls",
+    "Cotton calico",
+    "Silk velvet",
+    "Linen"
+   ],
+   "answer": "Fine-wool shawls",
+   "kind": "pick"
+  },
+  {
+   "q": "Which painter uses this green more than any other in the ColorHub archive?",
+   "choices": [
+    "Cézanne",
+    "Monet",
+    "Rembrandt",
+    "Vermeer"
+   ],
+   "answer": "Cézanne",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the books explain why this green is called Kashmir.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Kashmir shawls were woven so that one color slides into the next [5].",
+  "Cézanne uses this dark green in 7 of the 50 of his works we hold [11]."
+ ],
+ "words": 774,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Name origin undocumented; shawl/saffron/sapphire context is associative, not tied to this swatch",
+   "Finlay Fabric page numbers from concordance; sultan story marked legend by Finlay",
+   "Re-verified key claims against fact cards and book text; no changes needed"
+  ]
+ }
+}

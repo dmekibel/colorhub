@@ -17,7 +17,7 @@
   {
    "id": "dye",
    "title": "A dye before it was a craze",
-   "body": "Lilac was the plain-English word for the first result of Perkin's coal-tar experiment [6]. Greenfield reports that on silk the black residue gave a shimmering lilac, which Perkin called Tyrian purple and which became known as Perkin's mauve [6]. The chemistry is told in the [[mauve]] article; what matters here is that lilac was the plain-English description of the result.\n\nThe word appears in the dye trade before the craze had a name. A dye-trade correspondent wrote to Perkin that that the best lilac then available on cotton came from one house in the United Kingdom, Andrews of Manchester, who could charge any price because even theirs was not quite fast [5]. Perkin's dye, which stood up to the tests, filled exactly that gap [5].\n\nWhen the fashion arrived, the two words traveled together. The *Illustrated London News* described a royal dress as mauve, adding \"lilac\" in brackets, as though readers needed the older word to understand the new one [3]. A later report on the craze called mauve an exquisite shade of lilac [3]. Garfield counts seven fashionable shades in the dye's wake, including one sold as \"purple lilac\" [4]. Garfield also notes that mauve itself runs from lilac to lush purple depending on the speaker, which is why the two names are so often swapped [18]."
+   "body": "Lilac was the plain-English word Greenfield uses for the first result of Perkin's coal-tar experiment [6]. Greenfield reports that on silk the black residue gave a shimmering lilac, which Perkin called Tyrian purple and which became known as Perkin's mauve [6]. The chemistry is told in the [[mauve]] article; what matters here is that lilac was the everyday word for how the result looked.\n\nThe word appears in the dye trade before the craze had a name. A dye-trade correspondent wrote to Perkin that that the best lilac then available on cotton came from one house in the United Kingdom, Andrews of Manchester, who could charge any price because even theirs was not quite fast [5]. The letter says Perkin's dye stood up to tests that theirs did not [5].\n\nWhen the fashion arrived, the two words traveled together. The *Illustrated London News* described a royal dress as mauve, adding \"lilac\" in brackets, as though readers needed the older word to understand the new one [3]. A later report on the craze called mauve an exquisite shade of lilac [3]. Garfield reports that the British Colour Council later suggested seven fashionable shades based on Perkin's first color, including one called \"purple lilac\" [4]. Garfield also notes that mauve itself runs from lilac to lush purple depending on the speaker, which is why the two names are so often swapped [18]."
   },
   {
    "id": "which",
@@ -42,7 +42,7 @@
   {
    "id": "ancient",
    "title": "Lilac before lilac",
-   "body": "Long before the word, a few craftspeople made pale purple materials. The Pigment Compendium records that Spurrell, excavating Egyptian blue workshops at Tell el-Amarna in 1895, reported \"lilac\" traces among the debris, and that modern experiments suggest the pigment could be produced by varying the firing temperature [11]. The compendium notes the chemistry is unclear and that no such pigment has been identified in Mediterranean art [11].\n\nA better-documented purple is Han purple, a barium copper silicate found on Chinese artifacts of the Han dynasty and the Warring States period [11]. The compendium calls it almost unique as a pre-industrial, inorganic, true purple pigment [11]."
+   "body": "Long before the word, there are hints of pale purple materials. The Pigment Compendium records that Spurrell in 1895 reported \"lilac\" compounds from an Egyptian blue workshop at Tell el-Amarna, and that contemporary experiments suggested such a pigment could be made by varying the firing temperature [11]. The compendium notes the chemistry is unclear and that barium copper silicates have not been reported from Egypt [11].\n\nA better-documented purple is Han purple, a barium copper silicate found on Chinese artifacts of the Han dynasty and the Warring States period [11]. The compendium calls it almost unique as a pre-industrial, inorganic, true purple pigment [11]."
   },
   {
    "id": "field",
@@ -256,16 +256,15 @@
   "Lilac's family tree runs back to the Sanskrit word for dark blue, through the name for indigo plants.",
   "Look at a pale violet dress in a Rembrandt: it may contain no blue at all."
  ],
- "words": 1133,
+ "words": 1144,
  "status": "checked",
  "checked": {
-  "by": "claude-sonnet",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Etymology rests on Paterson alone",
-   "Rembrandt lilac is Ball's reading, not a pigment analysis",
-   "Mylonas and MacDonald proposal reported via Westland only",
-   "Impressionist lilac sentence is uncounted in our books"
+   "Softened 'plain-English word' and 'filled exactly that gap' claims",
+   "Seven shades credited to British Colour Council via Garfield",
+   "Egyptian lilac: source says barium copper silicates not reported from Egypt, not 'Mediterranean art'"
   ]
  }
 }

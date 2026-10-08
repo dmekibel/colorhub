@@ -1,227 +1,225 @@
 {
- "slug": "flesh-red",
- "name": "Flesh Red",
- "hex": "#E9C49D",
- "names": [
-  "Flesh Red"
- ],
- "tier": "nature",
- "depth": "medium",
- "lede": "Flesh red is a pinkish red from the colour charts of natural history, where Patrick Syme's edition of Werner's nomenclature named human skin, larkspur petals and baryte as its examples; on screens its swatch has aged into a pale peach.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A mineralogist's red",
-   "body": "Flesh red is number 88 among the reds of *Werner's Nomenclature of Colours*, the chart that Patrick Syme issued in 1814 and enlarged in 1821 [4][5]. Abraham Werner (1749-1817) was a mining-school mineralogist who proposed in 1774 that minerals be described by their visible properties, colour first, and his list ran to 54 colours under eight principal headings [1]. Each colour in Syme's chart came with an animal, a vegetable and a mineral example, so a reader could match a specimen by eye [2].\n\nFor flesh red the three were human skin, the larkspur and baryte, also called heavy spar, with limestone as a second mineral [2][4]. Werner's recipe blends rose red with some tile red and a touch of white [2]. Rose red is itself carmine red lightened with plenty of white and a hint of cochineal red [2]. Baty glosses flesh red as pinkish [3]. In Syme's numbering it sits between Arterial Blood Red at 87 and [[rose-red]] at 89 [4].\n\nThe name outlived the chart in dictionaries. Paterson still defines flesh-red as a red often used to describe minerals and crystals, while plain *flesh* there means a moderate pink [6]."
-  },
-  {
-   "id": "swatch",
-   "title": "The swatch is paler than the name",
-   "body": "The swatch on this page, #E9C49D, comes from a scan of an aged Werner chart, so it is approximate [8]. Read by the ISCC-NBS method it is a pale orange yellow, nowhere near a pink [8]. Its nearest named neighbor is [[peach]], 5.0 CIEDE2000 units away [8]. Maerz and Paul's dictionary lists two look-alikes, Crea, first recorded in 1590, and Peach Blow, first recorded in 1861 [8].\n\nTreat flesh red as Syme's pinkish red, and the swatch as what paper and light have done to it since [8]. Anyone matching a flower to the chart today would have to remember that the paper has moved."
-  },
-  {
-   "id": "skin",
-   "title": "A word that assumed one skin",
-   "body": "Werner's animal example, human skin, belongs to a longer and less comfortable history. In the tenth edition of his *Systema naturae* (1758-59), Linnaeus used skin colour as the first term for describing the human varieties, and Baty notes the shadow this cast over anthropology and biology [3]. The chart then turned that example into a single patch.\n\nSt Clair points out that *flesh* and *nude*, as colour words, presuppose a pale skin tone [7]. The colour became popular for women's underthings in the 1920s and 1930s, and Paterson dates *flesh-coloured* to pink silk stockings of the 1920s [6][7]. Crayola renamed its flesh crayon peach in 1962 [7].\n\nEarlier craftspeople used the word more literally. The twelfth-century monk Theophilus advised glaziers that a pot of glass which had turned tawny should be used for flesh colour, as Finlay quotes him [11]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, a color within six units of this swatch fills at least five per cent of the canvas in 813 works, or 3.4 per cent [9]. The rate is far higher in South Asian painting: 77 of 721 Indian works carry it, 3.1 times the archive rate, including 22 of 96 Kalighat paintings and 25 of 168 Mughal ones [9]. Among individual painters, [[painter:xugu|Xugu]] carries it in 9 of his 16 works [9].\n\nIt is almost always a light. About 95 per cent of its area plays highlight rather than shadow, which fits a color that is often the paper or silk itself [9]. The picture where it covers the most canvas is the thirteenth-century [[painting:cma-149391|White-Robed Guanyin]], at 98 per cent, and an Indian court portrait, [[painting:cma-153531|Maharaja Rai Singh of Bikaner]], follows at 89 per cent [9]. The decade with the highest rate is the 1710s, with 13 of 169 paintings [9]. In the same paintings it keeps company with [[tan]], [[beige]] and [[ecru]], each far more often than chance would suggest [9].\n\nIn Google Books, *flesh red* peaks around 1808, stands at 44 per cent of that peak by 1900 and at 2 per cent by 2000 [10]. All archive figures are photographs of aged, varnished paintings and silks, so a color match is not a pigment test [9]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "human skin, Werner's animal example (Syme's chart)",
-   "first_recorded": "Werner's nomenclature; Syme's editions of 1814 and 1821",
-   "source": "Baty, Nature's Palette, pp. 239-40"
-  },
-  "aka": [
-   "flesh-red",
-   "Werner no. 88"
+  "slug": "flesh-red",
+  "name": "Flesh Red",
+  "hex": "#E9C49D",
+  "names": [
+    "Flesh Red"
   ],
-  "siblings": [
-   "rose-red",
-   "peach",
-   "flesh-pink"
+  "tier": "nature",
+  "depth": "medium",
+  "lede": "Flesh red is a pinkish red from the colour charts of natural history, where Patrick Syme's edition of Werner's nomenclature named human skin, larkspur petals and baryte as its examples; on screens its swatch has aged into a pale peach.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A mineralogist's red",
+      "body": "Flesh red is number 88 among the reds of *Werner's Nomenclature of Colours*, the chart that Patrick Syme issued in 1814 and enlarged in 1821 [4][5]. Abraham Werner (1749-1817) was a mining-school mineralogist who proposed in 1774 that minerals be described by their visible properties, colour first, and his list ran to 54 colours under eight principal headings [1]. Each colour in Syme's chart came with an animal, a vegetable and a mineral example, so a reader could match a specimen by eye [2].\n\nFor flesh red the three were human skin, the larkspur and baryte, also called heavy spar, with limestone as a second mineral [2][4]. Werner's recipe blends rose red with some tile red and a touch of white [2]. Rose red is itself carmine red lightened with plenty of white and a hint of cochineal red [2]. Baty glosses flesh red as pinkish [3]. In Syme's numbering it sits between Arterial Blood Red at 87 and [[rose-red]] at 89 [4].\n\nThe name outlived the chart in dictionaries. Paterson still defines flesh-red as a red often used to describe minerals and crystals, while plain *flesh* there means a moderate pink [6]."
+    },
+    {
+      "id": "swatch",
+      "title": "The swatch is paler than the name",
+      "body": "The swatch on this page, #E9C49D, comes from a scan of an aged Werner chart, so it is approximate [8]. Read by the ISCC-NBS method it is a pale orange yellow, nowhere near a pink [8]. Its nearest named neighbor is [[peach]], 5.0 CIEDE2000 units away [8]. Maerz and Paul's dictionary lists two look-alikes, Crea, first recorded in 1590, and Peach Blow, first recorded in 1861 [8].\n\nTreat flesh red as Syme's pinkish red, and the swatch as what paper and light have done to it since [8]. Anyone matching a flower to the chart today would have to remember that the paper has moved."
+    },
+    {
+      "id": "skin",
+      "title": "A word that assumed one skin",
+      "body": "Werner's animal example, human skin, belongs to a longer and less comfortable history. In the tenth edition of his *Systema naturae* (1758-59), Linnaeus used skin colour as the first term for describing the human varieties, and Baty notes the shadow this cast over anthropology and biology [3]. The chart then turned that example into a single patch.\n\nSt Clair points out that *flesh* and *nude*, as colour words, presuppose a pale skin tone [7]. The colour became popular for women's underthings in the 1920s and 1930s, and Paterson dates *flesh-coloured* to pink silk stockings of the 1920s [6][7]. Crayola renamed its flesh crayon peach in 1962 [7].\n\nEarlier craftspeople used the word more literally. The twelfth-century monk Theophilus advised glaziers that a pot of glass which had turned tawny should be used for flesh colour, as Finlay quotes him [11]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, a color within six units of this swatch fills at least five per cent of the canvas in 813 works, or 3.4 per cent [9]. The rate is far higher in South Asian painting: 77 of 721 Indian works carry it, 3.1 times the archive rate, including 22 of 96 Kalighat paintings and 25 of 168 Mughal ones [9]. Among individual painters, [[painter:xugu|Xugu]] carries it in 9 of his 16 works [9].\n\nIt is almost always a light. About 95 per cent of its area plays highlight rather than shadow, which fits a color that is often the paper or silk itself [9]. The picture where it covers the most canvas is the thirteenth-century [[painting:cma-149391|White-Robed Guanyin]], at 98 per cent, and an Indian court portrait, [[painting:cma-153531|Maharaja Rai Singh of Bikaner]], follows at 89 per cent [9]. The decade with the highest rate is the 1710s, with 13 of 169 paintings [9]. In the same paintings it keeps company with [[tan]], [[beige]] and [[ecru]], each far more often than chance would suggest [9].\n\nIn Google Books, *flesh red* peaks around 1808, stands at 44 per cent of that peak by 1900 and at 2 per cent by 2000 [10]. All archive figures are photographs of aged, varnished paintings and silks, so a color match is not a pigment test [9]."
+    }
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [
-   {
-    "slug": "flesh-pink",
-    "gloss": "a modern pink swatch for the same word, not Werner's chart color"
-   }
-  ],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#E9C49D",
-   "de2000": 6,
-   "min_cover": 0.05
+  "aside": {
+    "origin": {
+      "named_after": "human skin, Werner's animal example (Syme's chart)",
+      "first_recorded": "Werner's nomenclature; Syme's editions of 1814 and 1821",
+      "source": "Baty, Nature's Palette, pp. 239-40"
+    },
+    "aka": [
+      "flesh-red",
+      "Werner no. 88"
+    ],
+    "siblings": [
+      "rose-red",
+      "peach",
+      "flesh-pink"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "flesh-pink",
+        "gloss": "a modern pink swatch for the same word, not Werner's chart color"
+      }
+    ],
+    "other_languages": []
   },
-  "n_present": 813,
-  "top_paintings": [
-   "cma-149391",
-   "cma-153531",
-   "cma-155799"
-  ],
-  "painters": [
-   "Xugu"
-  ],
-  "role": {
-   "highlight": 0.95,
-   "mid": 0.05
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#E9C49D",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 813,
+    "top_paintings": [
+      "cma-149391",
+      "cma-153531",
+      "cma-155799"
+    ],
+    "painters": [
+      "Xugu"
+    ],
+    "role": {
+      "highlight": 0.95,
+      "mid": 0.05
+    },
+    "ngram": {
+      "peak": 1808,
+      "rel_1900": 0.435,
+      "rel_2000": 0.022
+    },
+    "measured": {
+      "lch": [
+        81.4,
+        25.7,
+        72.7
+      ],
+      "nearest": [
+        [
+          "Peach",
+          5.0
+        ]
+      ]
+    }
   },
-  "ngram": {
-   "peak": 1808,
-   "rel_1900": 0.435,
-   "rel_2000": 0.022
-  },
-  "measured": {
-   "lch": [
-    81.4,
-    25.7,
-    72.7
-   ],
-   "nearest": [
-    [
-     "Peach",
-     5.0
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, p. 17",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, pp. 239-40 (no. 88, Flesh Red)",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, pp. 117-18",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, pp. 229, 242 (chart of reds)",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, pp. 34-35 (successive nomenclatures, Syme 1814 and 1821)",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, p. 173 (\"flesh\", \"flesh-coloured\", \"flesh-red\")",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, \"Nude\" and notes",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): Werner no. 88 aged swatch, ISCC-NBS reading, Maerz & Paul alternates, CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 10,
+      "kind": "data",
+      "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak",
+      "loc_kind": null,
+      "url": "https://books.google.com/ngrams"
+    },
+    {
+      "n": 11,
+      "kind": "book",
+      "cite": "Finlay, Colour, section \"Chartres blue\" (quoting Theophilus)",
+      "loc_kind": "entry",
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which human feature did Syme's chart give as the animal example for flesh red?",
+      "choices": [
+        "Human skin",
+        "Human hair",
+        "The white of the eye",
+        "A fingernail"
+      ],
+      "answer": "Human skin",
+      "kind": "pick"
+    },
+    {
+      "q": "Why does the Flesh Red swatch on this page read as a pale peach rather than a pink?",
+      "choices": [
+        "It comes from an aged chart, so it is approximate and paler than the name suggests",
+        "Syme chose a peach for the name",
+        "Pink is not a color in the Werner system",
+        "Screens cannot show pink"
+      ],
+      "answer": "It comes from an aged chart, so it is approximate and paler than the name suggests",
+      "kind": "pick"
+    },
+    {
+      "q": "In what year did Crayola rename its flesh crayon peach?",
+      "choices": [
+        "1928",
+        "1962",
+        "1985",
+        "2003"
+      ],
+      "answer": "1962",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Flesh red was a mineralogist's term: no. 88 in Werner's reds, with human skin, larkspur and baryte as its three examples.",
+    "Crayola renamed its flesh crayon peach in 1962; the Werner chart's flesh red had already aged into peach long before.",
+    "Look at Indian and Chinese painting on silk or paper: this color is often the ground itself, found in 3.1 times as many Indian works as the archive average."
+  ],
+  "words": 680,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Verified all claims against fact cards; no changes needed"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, p. 17",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, pp. 239-40 (no. 88, Flesh Red)",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, pp. 117-18",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, pp. 229, 242 (chart of reds)",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, pp. 34-35 (successive nomenclatures, Syme 1814 and 1821)",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, p. 173 (\"flesh\", \"flesh-coloured\", \"flesh-red\")",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, \"Nude\" and notes",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json): Werner no. 88 aged swatch, ISCC-NBS reading, Maerz & Paul alternates, CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 9,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 10,
-   "kind": "data",
-   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak",
-   "loc_kind": null,
-   "url": "https://books.google.com/ngrams"
-  },
-  {
-   "n": 11,
-   "kind": "book",
-   "cite": "Finlay, Colour, section \"Chartres blue\" (quoting Theophilus)",
-   "loc_kind": "entry",
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which human feature did Syme's chart give as the animal example for flesh red?",
-   "choices": [
-    "Human skin",
-    "Human hair",
-    "The white of the eye",
-    "A fingernail"
-   ],
-   "answer": "Human skin",
-   "kind": "pick"
-  },
-  {
-   "q": "Why does the Flesh Red swatch on this page read as a pale peach rather than a pink?",
-   "choices": [
-    "It comes from an aged chart, so it is approximate and paler than the name suggests",
-    "Syme chose a peach for the name",
-    "Pink is not a color in the Werner system",
-    "Screens cannot show pink"
-   ],
-   "answer": "It comes from an aged chart, so it is approximate and paler than the name suggests",
-   "kind": "pick"
-  },
-  {
-   "q": "In what year did Crayola rename its flesh crayon peach?",
-   "choices": [
-    "1928",
-    "1962",
-    "1985",
-    "2003"
-   ],
-   "answer": "1962",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Flesh red was a mineralogist's term: no. 88 in Werner's reds, with human skin, larkspur and baryte as its three examples.",
-  "Crayola renamed its flesh crayon peach in 1962; the Werner chart's flesh red had already aged into peach long before.",
-  "Look at Indian and Chinese painting on silk or paper: this color is often the ground itself, found in 3.1 times as many Indian works as the archive average."
- ],
- "words": 680,
- "status": "checked",
- "checked": {
-  "by": "Claude (batch 63 self-check: sentence-to-card trace, myth list, hedges)",
-  "date": "2026-10-08",
-  "issues": [
-   "Thin book coverage: Baty and Paterson carry the facts; a short honest article, not padded.",
-   "Swatch is an aged Werner scan, approximate; ISCC reads pale orange yellow.",
-   "Linnaeus skin-colour remark taken from Baty only; treated briefly and without endorsing it."
-  ]
- }
 }

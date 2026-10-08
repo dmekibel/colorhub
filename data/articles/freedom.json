@@ -27,7 +27,7 @@
   {
    "id": "field",
    "title": "Field notes",
-   "body": "Freedom appears in 182 of 23,781 paintings in our archive, 0.77 per cent, and is more common than 56 per cent of the named colors [7]. Counted by lightness rank inside each painting, which varnish cannot fake, it shows up in 82 works, most often as an accent (37 per cent of them) [7]. It peaks in the 1900s, in 1.6 per cent of the 1,674 paintings from that century, 3.4 times the baseline of the same museums [7].\n\nThe earliest match is a work of about 1350 by the Master of San Lucchese, 580 years before the name's first record [7]. That shows only that a dark blue in an aged photograph looks like this swatch. These are photographs of varnished paintings, so a match is a look-alike hue, not a pigment test [7]."
+   "body": "Freedom appears in 182 of 23,781 paintings in our archive, 0.77 per cent, and is more common than 56 per cent of the named colors [7]. Counted by lightness rank inside each painting, which varnish cannot fake, it shows up in 82 works, most often as an accent (37 per cent of them) [7]. It peaks in the 1900s, in 1.6 per cent of the 1,674 paintings from that century, 3.4 times the baseline of the same museums [7].\n\nThe earliest match is a work of about 1350 by the Master of San Lucchese, 570 years before the name's first record [7]. That shows only that a dark blue in an aged photograph looks like this swatch. These are photographs of varnished paintings, so a match is a look-alike hue, not a pigment test [7]."
   }
  ],
  "aside": {
@@ -178,15 +178,14 @@
  ],
  "openers": [
   "The color name Freedom is a 1919 dictionary entry for a deep blue, while the books link freedom with green and red.",
-  "A dark blue like this turns up in a work of about 1350, 580 years before the name existed."
+  "A dark blue like this turns up in a work of about 1350, 570 years before the name existed."
  ],
  "status": "checked",
  "checked": {
-  "by": "batch-50 writer self-check (sentence-to-card trace, myth list)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Books say nothing about Freedom as a color; article is short by design.",
-   "Coinage of the name undocumented. Book mentions of freedom (Pastoureau) are about green and red, not this color."
+   "Corrected 580 to 570 years (1350 to the 1919 first record)"
   ]
  },
  "words": 455

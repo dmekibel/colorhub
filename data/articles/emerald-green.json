@@ -32,7 +32,7 @@
   {
    "id": "wallpaper",
    "title": "Wallpaper, dresses and arsine",
-   "body": "Emerald green was cheap to make, so it spread through interior decoration [1]. Together with Scheele's green it was manufactured on an industrial scale in the middle of the nineteenth century [1]. St Clair reports that copper arsenite greens colored fabrics, wallpapers, artificial flowers, paper and even confectionery [8]. By 1858 an estimated 100 square miles of such wallpaper covered walls across Britain, in houses, hotels, hospitals and station waiting rooms, and in 1863 *The Times* put British output at 500 to 700 tons a year [8]. Greenfield notes that fashionable women of the 1860s competed to be the most brilliant in the room, in crinolines of emerald green, bright blue or magenta [18].\n\nThe danger was known early. Scheele himself wrote in 1777 that his pigment was poisonous [8]. Ball explains the mechanism: wallpaper printed in thick relief gives off a toxic dust when it is brushed, and in damp conditions the pigments break down to release arsine, a deadly gas [1]. St Clair counts a nineteen-year-old artificial-flower maker, Matilda Scheurer, who died in 1861, and the *British Medical Journal* reported in 1871 that a six-inch square of green wallpaper held enough arsenic to poison two adults [8].\n\nEven so, no law ever banned it [8]. In 1880 a researcher named Henry Carr showed the Society of Arts a nursery wallpaper that had, he said, killed a young relative, and a colleague answered that he much preferred the bright arsenical paper to the grey and brown ones [9]. Gurney and Finlay both note that the pigment was sold as an insecticide as well [17][10]. Jarman writes that the dangerous emerald green is no longer manufactured [16]."
+   "body": "Emerald green was cheap to make, so it spread through interior decoration [1]. Together with Scheele's green it was manufactured on an industrial scale in the middle of the nineteenth century [1]. St Clair reports that copper arsenite greens colored fabrics, wallpapers, artificial flowers, paper and even confectionery [8]. By 1858 an estimated 100 square miles of such wallpaper covered walls across Britain, in houses, hotels, hospitals and station waiting rooms, and in 1863 *The Times* put British output of Scheele's green alone at 500 to 700 tons a year [8]. Greenfield notes that fashionable women of the 1860s competed to be the most brilliant in the room, in crinolines of emerald green, bright blue or magenta [18].\n\nThe danger was known early. Scheele himself wrote in 1777 that his pigment was poisonous [8]. Ball explains the mechanism: wallpaper printed in thick relief gives off a toxic dust when it is brushed, and in damp conditions the pigments break down to release arsine, a deadly gas [1]. St Clair counts a nineteen-year-old artificial-flower maker, Matilda Scheurer, who died in 1861, and the *British Medical Journal* reported in 1871 that a six-inch square of green wallpaper held enough arsenic to poison two adults [8].\n\nEven so, no law ever banned it [8]. In 1880 a researcher named Henry Carr showed the Society of Arts a nursery wallpaper that had, he said, killed a young relative, and a colleague answered that he much preferred the bright arsenical paper to the grey and brown ones [9]. Gurney and Finlay both note that the pigment was sold as an insecticide as well [17][10]. Jarman writes that the dangerous emerald green is no longer manufactured [16]."
   },
   {
    "id": "myths",
@@ -341,16 +341,13 @@
   "Paolo Veronese died in 1588, two centuries before the green the French named after him was invented.",
   "In 1858 an estimated 100 square miles of British wallpaper were colored with arsenic greens."
  ],
- "words": 1590,
+ "words": 1594,
  "status": "checked",
  "checked": {
-  "by": "Sonnet 5.5 batch writer (self-check: sentence-to-note trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Paterson says Veronese used the pigment and gives 1822 as first commercial production; Ball's account of the name is used instead and the contradiction is explained in the text.",
-   "Napoleon wallpaper theory stated as unproven; 2008 hair study from St Clair only.",
-   "Archive matches are colors, not pigment identifications.",
-   "Swatch (RAL 6001) is darker than the historical pigment."
+   "Times 1863 tonnage was for Scheele's green, not all arsenic wallpaper: wording fixed"
   ]
  }
 }

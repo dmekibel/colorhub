@@ -1,0 +1,205 @@
+{
+ "slug": "mahogany",
+ "name": "Mahogany",
+ "hex": "#6C2E1F",
+ "names": [
+  "Mahogany"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Mahogany is the dark reddish brown of polished mahogany wood, a name that furniture makers, dyers and painters' colormen all borrowed.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A wood's name",
+   "body": "*Mahogany* is the reddish brown of the hardwood when it is polished [1]. Paterson also records the French *acajou* as a reddish brown from the same wood, and lists mahogany among the wood colors beside ebony, oak, pine, teak and walnut [2][3]. St Clair's glossary is shorter still: a red brown, after the hardwood [4].\n\nThe swatch here is a dark, moderate reddish brown, close to [[chestnut]], [[rosewood]] and [[burnt-umber]] and darker than [[russet]]. The ISCC-NBS system of 1955 files it in block 43, \"moderate reddish brown\", about six units away [5]. Our library gives the Maerz and Paul dictionary of 1930 as listing it from 1737, which is a first appearance in a record, not proof of where the word began [5]. Two online color lists put mahogany at very different screens, a bright #C04000 and a near-black #4A0100, so the word covers a wide stretch of red-brown [5]."
+  },
+  {
+   "id": "material",
+   "title": "In paint, fraud and polish",
+   "body": "Painters had their own mahogany. The Pigment Compendium lists mahogany lake as a red or brown lake made on a base of burnt sienna, also called cashew lake, citing Mayer (1991) [6]. The wood itself had a darker career in the color trade: in 1869 Salter named mahogany sawdust among the things added to commercial madder root to bulk it out [7].\n\nThe color could be faked as easily as the wood. Finlay describes a hall of yellow pine painted to pass for red mahogany, a fashion of the 1790s, and notes that Washington used the same trick in his study [8]. By the early twentieth century dyes had joined in: Garfield quotes a speaker who boasted that coal-tar colors could turn furniture into walnut or mahogany at will in the factories of Grand Rapids [9].\n\nWestland uses the word to make a point about color and emotion: a pale pink and a deep mahogany are both red, yet they convey different characters, which studies of saturated hues alone cannot capture [10]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 1,772 works, or 7.5 per cent [11]. It is a color of old paintings. In the 1400s 17.5 per cent of works carry it, against 5.0 per cent in the 1800s, and the peak decade is the 1450s, with 26 of 109 works [11]. Impressionism has it in one work of 140 [11].\n\nIt usually plays a middle tone: 74 per cent of the matching works use it as a mid-tone and 23 per cent as a shadow [11]. The largest areas are in van de Venne's 1625 portrait of [[painting:rijks-200108366|Prince Maurits on his deathbed]], at 59 per cent of the canvas, and Rembrandt's [[painting:commons-Q119889250|Portrait of a Boy]], at 54 per cent [11]. [[painter:edgar-degas|Degas]] shows it in [[painting:nga-46598|Achille De Gas in the Uniform of a Cadet]] of 1856, at 51 per cent [11]. [[painter:paolo-veronese|Veronese]] is among the painters with the highest rates [11]. These are photographs of aged, varnished paintings, so a match is a screen color and not a pigment test [11].\n\nThe word itself is old in print. In Google Books *mahogany* already stands at 31 per cent of its eventual peak in 1800, and it peaks around 1927 [12]. To train your eye, look at a dark wooden table or the background of an old portrait and ask whether it leans toward [[maroon]] or toward brown."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "mahogany wood (the tree and its polished timber)",
+   "first_recorded": "1737 in Maerz and Paul (1930), per our library",
+   "source": "Paterson, A Dictionary of Colour; ISCC-NBS 1955"
+  },
+  "aka": [
+   "acajou (French)",
+   "mahogany lake (the pigment)"
+  ],
+  "siblings": [
+   "chestnut",
+   "rosewood",
+   "maroon"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "acajou"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#6C2E1F",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1772,
+  "top_paintings": [
+   "rijks-200108366",
+   "commons-Q119889250",
+   "nga-46598"
+  ],
+  "role": {
+   "mid": 0.74,
+   "shadow": 0.23,
+   "highlight": 0.04
+  },
+  "company": [
+   "Maroon",
+   "Carmine",
+   "Oxblood"
+  ],
+  "ngram": {
+   "rel_1800": 0.309,
+   "rel_1920": 0.857,
+   "peak": 1927
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"mahogany\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"acajou\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"wood colours\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary, \"Mahogany\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Maerz and Paul 1930, xkcd and Wikipedia lists)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Mahogany lake\" (citing Mayer 1991)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Madder\" (citing Salter 1869)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 21 and notes",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 10",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Westland and others, Universal Principles of Color, ch. 40 (\"Emotion and Color\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "What was mahogany sawdust used for in the nineteenth-century color trade?",
+   "choices": [
+    "Adulterating commercial madder root",
+    "Making black ink",
+    "Fixing indigo",
+    "Sizing paper"
+   ],
+   "answer": "Adulterating commercial madder root",
+   "kind": "pick"
+  },
+  {
+   "q": "In our painting archive, which century has the highest share of works carrying mahogany?",
+   "choices": [
+    "The 1400s",
+    "The 1600s",
+    "The 1800s",
+    "The 1900s"
+   ],
+   "answer": "The 1400s",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Look for mahogany in 1400s portraits: 17.5 per cent of works from that century carry it, three times the rate of the 1900s.",
+  "In the 1790s a hall of pine could be painted to pass as red mahogany."
+ ],
+ "words": 572,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No fixes needed: 8 key claims verified against book text and fact cards; no myth-list or copied-phrasing problems."
+  ]
+ }
+}

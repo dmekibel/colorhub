@@ -251,13 +251,14 @@
  "words": 789,
  "status": "checked",
  "checked": {
-  "by": "L7 self-check (sentence-to-card trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
    "Hyacinth/jacinth gem identity shifts between texts: stated via Finlay's bracketed glosses (sapphire vs zircon), not asserted for Werner's mineral.",
    "Gage's 1601 physician unnamed (OCR garbled in source).",
    "Swatch is an aged-swatch approximation; Paterson's reddish orange is brighter: said in text.",
-   "Archive matches are colors, not pigment identifications (said in text)."
+   "Archive matches are colors, not pigment identifications (said in text).",
+   "Checker pass: key claims re-traced to fact cards and book text; no changes needed."
   ]
  }
 }

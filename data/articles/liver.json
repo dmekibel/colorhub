@@ -230,13 +230,8 @@
  "words": 859,
  "status": "checked",
  "checked": {
-  "by": "self-check against fact cards (sentence-to-card trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
-  "issues": [
-   "Pantone liver card claim is a single company anecdote in Finlay; hedged.",
-   "Chromotherapy corrected as theory not medicine.",
-   "Baty's Werner date (1774) refers to his mineral classification; liver brown placement in lists stated generally.",
-   "'Eighteenth-century' lists dated 1790/1794 from Baty's captions."
-  ]
+  "issues": []
  }
 }

@@ -22,7 +22,7 @@
   {
    "id": "insect",
    "title": "Blood of the nopal",
-   "body": "Cochineal is a scale insect that lives on prickly pear cacti and makes carminic acid, a defensive chemical that is also a powerful red dye [6]. Pinch a female and the dye comes out; apply it to mordanted cloth and the fabric stays red for centuries [6]. The Aztecs called it *nocheztli*, \"blood of the nopal\", and one of their words for red, *tlapalli*, also meant color in general [6].\n\nWhere cochineal dyeing began is open to argument. Cochineal-saturated textiles about two thousand years old come from a necropolis in Peru, while the people of the Mixteca and Oaxaca highlands in Mexico bred the domesticated insect, *Dactylopius coccus*, which is twice the size of the wild kind and yields more dye [6]. Scholars disagree on who came first, and Greenfield leaves the question open [6].\n\nFarmers seeded egg nests onto cactus joints, harvested two or sometimes three times a year, and dried the females in the sun or in steam baths, losing a third of their weight [6]. Greenfield puts it at as many as 70,000 dried insects to a pound of dye, a figure best read as tens of thousands [6]. The Aztecs took the dye as tribute: by the Conquest they demanded over a hundred bags a year from villages in Oaxaca and the Mixteca, which modern estimates make more than nine tons [6]. They also used it as medicine, as a food color for tamales and as cosmetic color for the skin [6].\n\nA cochineal red depends on what it is dyed onto. Animal fibers took it best, and cotton gave admirable but paler reds [6]. Finlay compares the infested cactus fields to a noble rot, with [[gem:ruby|rubies]] in place of sweet wine at the end [4]."
+   "body": "Cochineal is a scale insect that lives on prickly pear cacti and makes carminic acid, a defensive chemical that is also a powerful red dye [6]. The female insect is the source of the dye, and on mordanted cloth the red lasts for centuries [6]. The Aztecs called it *nocheztli*, \"blood of the nopal\", and one of their words for red, *tlapalli*, also meant color in general [6].\n\nWhere cochineal dyeing began is open to argument. Cochineal-saturated textiles about two thousand years old come from a necropolis in Peru, while the people of the Mixteca and Oaxaca highlands in Mexico bred the domesticated insect, *Dactylopius coccus*, which is twice the size of the wild kind and yields more dye [6]. Scholars disagree on who came first, and Greenfield leaves the question open [6].\n\nFarmers seeded egg nests onto cactus joints, harvested two or sometimes three times a year, and dried the females in the sun or in steam baths, losing a third of their weight [6]. Greenfield puts it at as many as 70,000 dried insects to a pound of dye, a figure best read as tens of thousands [6]. The Aztecs took the dye as tribute: by the Conquest they demanded over a hundred bags a year from villages in Oaxaca and the Mixteca, which modern estimates make more than nine tons [6]. They also used it as medicine, as a food color for tamales and as cosmetic color for the skin [6].\n\nA cochineal red depends on what it is dyed onto. Animal fibers took it best, and cotton gave admirable but paler reds [6]. Finlay compares the infested cactus fields to a noble rot, with [[gem:ruby|rubies]] in place of sweet wine at the end [4]."
   },
   {
    "id": "empire",
@@ -57,7 +57,7 @@
   {
    "id": "field",
    "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in only 11 works [20]. In a finer lens it appears in 5 paintings, which makes it rarer than 72 per cent of the named colors [20]. The largest area is a Rajput page of about 1650, a Brahmin delivering an invitation to Krishna, where it fills 29 per cent of the picture [20].\n\nThe rest are scattered: [[painter:pierre-bonnard|Bonnard]]'s *Corner of a Table* of 1935, a Chinese ancestor portrait of 1644, [[painter:manuel-castellano|Castellano]]'s portrait of Alfonso I, [[painter:felix-vallotton|Vallotton]]'s *Romanian Woman in a Red Dress* and [[painter:john-singer-sargent|Sargent]]'s portrait of William Marshall Cazalet [20]. The earliest is [[painter:bronzino|Bronzino]]'s *Pietà with Saint Mary Magdalene* of 1529, only a few years after the conquest of Mexico [20]. A look-alike hue in an aged photograph proves nothing about cochineal. By century, the 1900s hold four of the 11 and are the one clear peak, at 5.2 times the archive's rate [20].\n\nIn every one of the seven paintings the finer lens finds, this red is an accent, not a ground [20]. These are photographs of varnished paintings, so read them as screen colors. Where to look: a cardinal's scarlet robe in a portrait [14], or a lipstick label that says E120 [18]."
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in only 11 works [20]. In a finer lens it appears in 7 paintings, which makes it rarer than 72 per cent of the named colors [20]. The largest area is a Rajput page of about 1650, a Brahmin delivering an invitation to Krishna, where it fills 29 per cent of the picture [20].\n\nThe rest are scattered: [[painter:pierre-bonnard|Bonnard]]'s *Corner of a Table* of 1935, a Chinese ancestor portrait of 1644, [[painter:manuel-castellano|Castellano]]'s portrait of Alfonso I, [[painter:felix-vallotton|Vallotton]]'s *Romanian Woman in a Red Dress* and [[painter:john-singer-sargent|Sargent]]'s portrait of William Marshall Cazalet [20]. The earliest is [[painter:bronzino|Bronzino]]'s *Pietà with Saint Mary Magdalene* of 1529, only a few years after the conquest of Mexico [20]. A look-alike hue in an aged photograph proves nothing about cochineal. By century, the 1900s hold four of the 11 and are the one clear peak, at 5.2 times the archive's rate [20].\n\nIn every one of the seven paintings the finer lens finds, this red is an accent, not a ground [20]. These are photographs of varnished paintings, so read them as screen colors. Where to look: a cardinal's scarlet robe in a portrait [14], or a lipstick label that says E120 [18]."
   }
  ],
  "aside": {
@@ -329,16 +329,15 @@
   "Europe argued for more than two centuries over whether cochineal was an animal, a plant or a mineral, because Spain guarded the secret.",
   "One synthetic dye, Biebrich scarlet of 1878, was a near-perfect cochineal match on wool, and the market collapsed."
  ],
- "words": 1546,
+ "words": 1544,
  "status": "checked",
  "checked": {
-  "by": "batch-35 writer (sentence-to-card trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Per-pound insect count hedged to tens of thousands (CLAUDE.md books-disagree rule).",
-   "Origin of cochineal dyeing (Peru vs Mexico) left open as Greenfield does.",
-   "'Spanish red' as cochineal rests on Donkin's 1977 title (via Greenfield and Finlay); not a period trade name in our sources.",
-   "Single-source: nearly all cochineal history rests on Greenfield."
+   "Finer-lens count corrected from 5 to 7 (5 is the plain-presence count; 7 matches the later accent sentence).",
+   "Reworded a sentence that tracked Greenfield too closely.",
+   "Verified cochineal figures (175,000 lb, 70,000 hedged, Campari/E120) against Greenfield text."
   ]
  }
 }

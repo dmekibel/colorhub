@@ -17,7 +17,7 @@
   {
    "id": "face",
    "title": "Red for the face",
-   "body": "Medieval clerics and moralists condemned make-up on high-born women, because to the Church it falsified what God had made [6]. Pastoureau notes that a light red on the cheeks was sometimes tolerated as a sign of modesty, while red lips were condemned as an abomination that made a woman a witch or a prostitute [6]. Romances of the twelfth and thirteenth centuries still prized the contrast of white skin with red cheeks and lips [6].\n\nNew World cochineal changed the economics of the cosmetic [7]. Within a few years of the Conquest the Spanish had taken over the Mexican cochineal industry, and Finlay reports that in 1575 alone about 80 metric tons reached Spain [7]. Women wanted it as the ultimate cosmetic [7]. Finlay reads a line in *Twelfth Night*, in which Olivia says her portrait's red is \"in grain\", as a joke on the dye's name and the idea of a color that is ingrained [7]. Venice became the great market for red, and Finlay quotes Jan Morris for the figure that around 1700 the city held 2,508 nuns and 11,654 prostitutes: no wonder, he says, there was a market for rouge [7].\n\nRouge was not always from insects. Field in 1835 lists *rouge*, *rouge végétale*, Chinese rouge and pink saucers together as preparations of safflower [8]. Tingry in 1804 describes cosmetic rouge made from the mineral talc, here called Briançon chalk, as a base with carmine [8]. The modern dictionary still lists the red powder made from safflower under the same word [4]."
+   "body": "Medieval clerics and moralists condemned make-up on high-born women, because to the Church it falsified what God had made [6]. Pastoureau notes that a light red on the cheeks was sometimes tolerated as a sign of modesty, while red lips were condemned as an abomination that made a woman a witch or a prostitute [6]. Medieval ideals of beauty still prized the contrast of white skin with red cheeks and lips, even as clerics condemned the make-up that helped to achieve it [6].\n\nNew World cochineal changed the economics of the cosmetic [7]. Within a few years of the Conquest the Spanish had taken over the Mexican cochineal industry, and Finlay reports that in 1575 alone about 80 metric tons reached Spain [7]. Women wanted it as the ultimate cosmetic [7]. Finlay reads a line in *Twelfth Night*, in which Olivia says her portrait's red is \"in grain\", as a joke on the dye's name and the idea of a color that is ingrained [7]. Venice became the great market for red, and Finlay quotes Jan Morris for the figure that around 1700 the city held 2,508 nuns and 11,654 prostitutes: no wonder, he says, there was a market for rouge [7].\n\nRouge was not always from insects. Field in 1835 lists *rouge*, *rouge végétale*, Chinese rouge and pink saucers together as preparations of safflower [8]. Tingry in 1804 describes cosmetic rouge made from the mineral talc, here called Briançon chalk, as a base with carmine [8]. The modern dictionary still lists the red powder made from safflower under the same word [4]."
   },
   {
    "id": "court",
@@ -277,15 +277,14 @@
   "At Versailles, wearing red on the cheeks was so expected that leaving court was called quitting the red.",
   "Whitby jet workers were nicknamed red devils, and a tin of polish is how a modern jeweller explained why."
  ],
- "words": 1528,
+ "words": 1536,
  "status": "checked",
  "checked": {
-  "by": "batch-9 writer self-check",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Color name history thin: Maerz and Paul date 1839 via library note only.",
-   "Red devils explanation is one jeweller's reconstruction (Finlay).",
-   "Locators are chapter or entry, not pages."
+   "Softened the 'romances of the 12th-13th centuries' claim to Pastoureau's wider medieval beauty ideal (the specific romance dating was not in the text).",
+   "Verified 1575 cochineal fleet, Twelfth Night, Morris figures, Rouge Baiser 1927, bonnet rouge 1792, talons rouges legend, ceruse/cinnabar make-up, Greenfield madder vs cochineal."
   ]
  }
 }

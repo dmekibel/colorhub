@@ -1,0 +1,502 @@
+{
+ "slug": "vermilion",
+ "name": "Vermilion",
+ "hex": "#E34234",
+ "names": [
+  "Vermilion",
+  "Cinnabar"
+ ],
+ "tier": "pigment",
+ "depth": "epic",
+ "lede": "Vermilion is the hot orange-red of mercury sulfide: ground from the ore cinnabar by the Romans, cooked from mercury and sulfur by medieval alchemists, and for a thousand years the red that painters measured every other red against.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A little worm and a tangle of reds",
+   "body": "Vermilion is a historical name for mercury sulfide made by people, the twin of the natural red mineral cinnabar [1]. The word itself has nothing to do with mercury. It comes from Latin *vermiculum*, \"little worm\", which St Jerome used for the kermes insect that dyed cloth red [9][13]. The name later slid from the insect dye to the mineral pigment, a transfer Ball explains by the medieval habit of grouping things by color rather than by what they were made of [9].\n\nThe English record shows the slide in progress [1]. Wyclif's Bible of 1382 renders Jerome's Latin word as *vermycle*, a word for red cloth [1]. Maerz and Paul's 1930 dictionary dates the English color word to 1289, while Paterson puts its arrival in the fifteenth century, so the sources disagree by about two hundred years [31][10]. For centuries English used *cinnabar* and *vermilion* for either the ore or the manufactured pigment; only in the later eighteenth century did *cinnabar* settle on the raw mineral [1].\n\nOlder Latin terms were even more tangled [3]. To Pliny, *minium* meant cinnabar and red lead was a second-rate minium; by 1556 Agricola used *minium* for red lead alone, and Cennino's *cinabrese* was a red earth, not cinnabar at all [3]. When an old text says minium, it may mean any of three reds [3][5]."
+  },
+  {
+   "id": "material",
+   "title": "Mercury and sulfur",
+   "body": "Chemically vermilion is one atom of mercury bound to one of sulfur, HgS [8]. Pliny wrapped that union in a legend: cinnabar was the mingled blood of a dragon and an elephant that killed each other in battle [8]. It is a story, not a source, but Finlay notes that it is an apt picture of heavy metal meeting burning sulfur [8].\n\nThe ore was rare. The great Mediterranean source lay in the mountains of south-west Spain, at the place now called Almadén [1]. Theophrastus, writing about 315 BC, says cinnabar was first found near Ephesus, yet no cinnabar deposit is known there, and his account reads like a fine ore washed out of sediment [1]. Almadén is still the world's most productive mercury mine [8].\n\nThe same compound can crystallise in a second, black form called metacinnabar [2]. That fact runs through vermilion's whole history: it appears midway in most recipes for making the red, and it is what a blackened vermilion has turned into [4][2]."
+  },
+  {
+   "id": "history",
+   "title": "Rome's costly red",
+   "body": "Cinnabar was used in the East long before the West [9]. Paterson says the Chinese used it from the third millennium BC and that it was once called Chinese red, and Greenfield dates its discovery by painters in Asia to before the fifth century BC [11][13]. Books disagree on Egypt: Pastoureau lists cinnabar among the costly imported reds of pharaonic painters, while Ball writes that the Egyptians may not have known it [36][9].\n\nIn Rome it was a luxury with a legal price [1]. The cost of Spanish cinnabar was capped at 70 sesterces a pound, which was still ten times the price of good red ochre from Sinope [1][7]. Pastoureau reports Pliny's comparison differently, as fifteen times the price of African red ochre and equal to Egyptian blue, then the dearest pigment [5]. The raw ore came by sea from Almadén and was processed in noisy workshops at the foot of the Quirinal [5].\n\nThe Villa of the Mysteries at Pompeii, excavated in 1909, shows what that money bought: its painted frieze stands on a deep cinnabar-red ground [7][1]. Jarman passes on Pliny's report that painters wore bladders over their faces against the dust when they painted a statue of Jupiter [14]. In the early nineteenth century the chemist Humphry Davy found cinnabar on the walls of the Baths of Titus and took it as proof of imperial use [8].\n\nRoman writers already knew the weakness. Vitruvius and Pliny warned that cinnabar paint blackened outdoors in sunlight unless it was sealed with oil and wax, and Pompeii's red panels were waxed for that reason [1][4]."
+  },
+  {
+   "id": "discovery",
+   "title": "The alchemists' red",
+   "body": "The great change came when people learned to make the red instead of mining it. Ball suggests the synthesis may have begun in China; around AD 300 the alchemist Zosimus hints that he knew it, and the first clear recipe appears in a Latin manuscript, the *Compositiones ad tingenda*, written around 800 [3]. Pastoureau describes it as perfected in China, known to Arab alchemists and reaching the West between the eighth and eleventh centuries, while Coles credits an Arabic alchemist with bringing it to Europe around the eighth century [6][12]. It was, Pastoureau notes, the only new red pigment the Middle Ages added to the Roman list [6].\n\nAlchemists cared because of what went into it. In the tradition of the eighth-century alchemist Jabir, sulfur and mercury were the two principles of every metal, and gold, to them, was a red metal [3][7]. Ball cautions that vermilion itself was probably never mistaken for the Philosophers' Stone, since it was too easy to make [3].\n\nThe monk Theophilus, writing about 1122, sealed sulfur and mercury in a pot, buried it in hot coals and listened for the crash as they combined [3]. Vermilion is a little over six times more mercury than sulfur by weight, yet medieval recipes usually call for about two to one; Ball suggests the writers were following the alchemical idea of balance rather than making a mistake [3]. The fumes were deadly, and St Clair reports that Venice banned the process in 1294 [7].\n\nDaniel Thompson, the historian of medieval painting, called the synthesis the most important technical invention of the period [3]. Until at least the eleventh century it cost as much to cover a page with vermilion as with gold; by the early fifteenth it was used freely, and in the Renaissance it was everywhere [3]."
+  },
+  {
+   "id": "trade",
+   "title": "Guilds, factories and the mine",
+   "body": "Such a valuable red invited cheating. Cennino, writing around 1400, bought his vermilion ready-made and told painters to buy it in an unbroken lump, because apothecaries cut the powder with red lead or brick dust [3]. Sienese rules of 1355 forbade painters to pass off red earth or red lead as vermilion, and guilds in Florence and Perugia had similar clauses [15][35]. In Florence the Gesuati friars probably made fine vermilion, and Leonardo's contract for the *Adoration of the Magi* required him to buy his colors from them [16].\n\nFrom the sixteenth century vermilion became an industry, first in Venice and then in the Netherlands and Germany, and it helped push cheaper red lead out of use [6]. Holland led European production in the seventeenth century with a dry method that first made the black sulfide and then heated it until it turned red [3]. In 1687 the German chemist Gottfried Schulz found a wet method, and its finer orange-red powder is how most Western vermilion is made today; the older dry process gave a more bluish red [3]. By 1760 Amsterdam was shipping almost 32,000 pounds of it a year to England [7].\n\nThe ore that remained in demand came at a human cost. In 1566 the King of Spain began sending condemned prisoners to the Almadén mine, and in the later sixteenth century about a quarter of them died before their release [12]. Finlay writes that prisoners feared Almadén more than the galleys [8]."
+  },
+  {
+   "id": "art",
+   "title": "In the paintbox",
+   "body": "Medieval painters laid vermilion, ultramarine and gold in flat, unbroken fields, and the costly materials were the message [17]. The arrival of oil changed that. In oil, vermilion is less opaque than in egg tempera, so red lakes gained ground, and northern painters used vermilion mainly as an underlayer beneath lake glazes [15][9]. From the sixteenth century, glazes of cochineal lake over vermilion gave the deepest reds [6].\n\nTitian shows both uses at once. In [[art:commons-Q1206860|Bacchus and Ariadne]], Ariadne's scarf is opaque vermilion set against her ultramarine robe, then glazed to make it glow [15]. A remark attributed to him advised painting with cheap Venetian red but making it look like vermilion [15]. Caravaggio went the other way: his biographer Bellori says he toned down vermilion and bright blues, which he called the poison of color [18].\n\nThe pigment kept its place into the age of tubes. On a Royal Academy varnishing day, Turner added a single daub of red lead to a grey seascape, and it outshone the vermilion in Constable's picture next door; Constable said Turner had been there and fired a gun [19]. George Field's \"orange vermilion\", sold from the 1830s, was one of his most prized colors [19][10]. Conservators found that Monet's dark locomotives in the Gare Saint-Lazare are mixed from vermilion, ultramarine and emerald green, with almost no black [20]. Monet painted four views of the station in 1877, and one of the series, [[art:aic-16571|Arrival of the Normandy Train]], is in our gallery [34][32].\n\nAround 1904 Matisse handed Renoir a sample of the new cadmium red; Renoir refused it and kept his vermilion [21][7]. Anders Zorn limited his palette to four pigments, vermilion, ivory black, flake white and yellow ochre [22]. Cadmium red was first marketed in 1910 and steadily replaced the toxic mercury red [11][12]. Gurney suggests that the two precious pigments, vermilion and ultramarine, became our mental pictures of red and blue [23]."
+  },
+  {
+   "id": "chemistry",
+   "title": "Why vermilion turns black",
+   "body": "A darkened vermilion has changed into black metacinnabar [2]. Impurities such as alkali halides speed the change, and so does light between about 400 and 570 nanometres; it has been seen in egg tempera, oil, glue and church walls [2]. Ball points to Nardo di Cione's altarpiece of about 1365, where a red-lined gown is patched with dark stains [4]. Finlay adds that in Michelangelo's unfinished *Entombment* at the National Gallery, blackened vermilion now makes shadows where the painter meant highlights [25].\n\nBooks disagree on how fragile it is. Pastoureau calls vermilion a red that darkens in daylight, while Finlay calls it fairly resistant unless left in bright sun, which is why Turner could lay it on in thick slabs [6][8]. Conservators cited by Finlay found natural cinnabar less likely to darken than wet-process vermilion [24]. The Pigment Compendium reports a 2000 study tracing the blackening to traces of chlorine, and notes that Field in 1835 blamed it on adulteration [1].\n\nThe other danger is to people. Vermilion owes its red-orange to mercury, and Gurney lists it among the classic pigments that are genuinely poisonous [26]."
+  },
+  {
+   "id": "words",
+   "title": "Faces, flowers and knights",
+   "body": "In medieval French and English, vermilion was a word for living and precious things [28]. Pastoureau notes that the finest dyed cloth was called scarlet, while vermilion described flowers, stones and faces [28]. A Norman herald writing before the 1430s put vermilion first among the colors and gave its heraldic name, gules [27]. Arthurian romance has its vermilion knights, usually hostile strangers from another world, and Chrétien de Troyes has the young Perceval defeat one and take his red arms [27].\n\nThe red reached faces literally. At the French court of the eighteenth century, rouge made with lead oxide or cinnabar was almost compulsory, and leaving court was called quitting the red [29]. In 1912 Kandinsky described vermilion as a sharp red, like glowing steel that water could cool [7][17]."
+  },
+  {
+   "id": "myths",
+   "title": "Myths and loose ends",
+   "body": "The dragon and the elephant are a legend, and so is the idea that cinnabar comes from blood; it is a sulfide of mercury [8]. A National Gallery story that Michelangelo's *Entombment* once hung as a fishmonger's sign, its salt hastening the blackening, is called apocryphal [25].\n\nThe paint called \"cinnabar green\" contains no cinnabar: it was a cheap mixture of Prussian blue and chrome yellow [19]. As a young man Faber Birren tested the old saying that a dungeon painted red drives a prisoner mad by painting his own room vermilion, with red bulbs and red glass, and found it comfortable and cheerful [30]. One person's weeks in a red room prove little, but the saying has no better evidence behind it [30]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch and the paint",
+   "body": "The screen swatch, #E34234, is the color the ISCC-NBS system classes as a strong reddish orange [31]. Its nearest neighbors among our names are [[dusty-vermilion]], [[imperial-red]] and plain [[red]], all within about five units [31]. Real vermilion varied with how it was made: Field described Chinese vermilion as cooler and more crimson than the European kind [1], and the dry and wet processes give bluish and orange reds [3].\n\nThe older color charts used a darker swatch. Werner's nomenclature, as extended by Patrick Syme in 1814, called its [[vermilion-red]] a scarlet with a touch of brown, and gave natural cinnabar, the tomato and red coral as examples [37][31]. Beside them sit [[scarlet]], the cloth red, and [[english-vermilion]], a deeper paint name [31]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a screen color within six units of this swatch covers at least five per cent of the canvas in only 48 works [32]. Most are not European [32]. India supplies 32 of them, 22 times the archive's rate; Rajput court painting carries it 51 times as often as average and Kalighat bazaar painting from Bengal 31 times [32]. The painting where it covers the most is a portrait of Prince Sur Singh Rathor of Bikaner from about 1611, at 61 per cent of the surface, on a flat red ground [32].\n\nIn European painting it rarely reaches the five per cent mark [32]. The earliest dated example is Filippino Lippi's [[art:nga-20|Adoration of the Child]] of about 1475, and none of our 140 Impressionist paintings qualifies, though Monet and Renoir used the pigment [32][20][21]. A second lens, which ranks colors by lightness inside each painting, finds it in 60 works and, in 83 per cent of them, as an accent rather than a ground [32]. That fits the history: in oil, vermilion was a seasoning and an underlayer, not a field.\n\nThe usual caveats apply. These are photographs of aged, varnished paintings, and a color match is not a pigment test: an Indian red ground of this hue may be red lead or lac as easily as vermilion [32]. In Google Books the adjective *vermilion* is printed most in the 1880s and rises fastest in the 1840s [33]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Latin vermiculum, 'little worm', first the kermes insect dye, later the mercury sulfide pigment",
+   "first_recorded": "1289 (Maerz & Paul); 15th century (Paterson)",
+   "source": "Maerz & Paul 1930; Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "Cinnabar",
+   "Chinese red (old name)",
+   "Orange vermilion (Field)",
+   "vermeil (French)"
+  ],
+  "siblings": [
+   "vermilion-red",
+   "english-vermilion",
+   "chinese-red"
+  ],
+  "parent": "red",
+  "children": [
+   "dusty-vermilion"
+  ],
+  "disambiguation": [
+   {
+    "slug": "vermilion-red",
+    "gloss": "Werner and Syme's 1814 swatch, a darker brownish red"
+   },
+   {
+    "slug": "artificial-vermilion",
+    "gloss": "Maerz & Paul name for a greyed rose, not the color of the pigment"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "vermillon; vermeil (old)"
+   },
+   {
+    "lang": "de",
+    "name": "Zinnober"
+   },
+   {
+    "lang": "la",
+    "name": "minium (Pliny), cinnabaris"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#E34234",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 48,
+  "top_country": {
+   "name": "India",
+   "hits": 32,
+   "n": 721,
+   "lift": 22.0
+  },
+  "top_movements": [
+   {
+    "name": "Rajput",
+    "hits": 10,
+    "n": 97,
+    "lift": 51.1
+   },
+   {
+    "name": "Kalighat",
+    "hits": 6,
+    "n": 96,
+    "lift": 31.0
+   }
+  ],
+  "top_paintings": [
+   "cma-314494",
+   "cma-314464",
+   "cma-131671",
+   "cma-314115",
+   "cma-154764",
+   "cma-314462"
+  ],
+  "first_dated": {
+   "id": "nga-20",
+   "painter": "Filippino Lippi",
+   "year": 1475
+  },
+  "impressionism": {
+   "hits": 0,
+   "n": 140
+  },
+  "role_lens": {
+   "n": 60,
+   "accent": 0.83
+  },
+  "ngram": {
+   "adj_peak_decade": 1880,
+   "adj_rise_decade": 1840,
+   "all_peak": 1916
+  },
+  "measured": {
+   "lch": [
+    52.4,
+    75.5,
+    36.0
+   ],
+   "iscc_nbs": "strong reddish orange",
+   "contrast_white": 4.12,
+   "contrast_black": 5.1,
+   "nearest": [
+    [
+     "Dusty vermilion",
+     3.3
+    ],
+    [
+     "Imperial Red",
+     4.5
+    ],
+    [
+     "Red",
+     5.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, pp. 399-400 (\"Vermiculum\", \"Vermilion\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, pp. 272-273 (\"Mercury(II) sulfide\", \"Metacinnabar\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 12",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 19",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Red: The History of a Color, ch. 11",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, Red: The History of a Color, ch. 28",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Vermilion\" (and notes)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 4 (\"Red\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 11",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"vermilion\", \"orange-vermilion\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"cinnabar\", \"cadmium red\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, \"Vermilion\" and \"Cadmium\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, chs. 5 and 7",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 16",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 13",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 135",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 9",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 18,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 160",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 19,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 15",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 20,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 2 (\"Black and Brown\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 21,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 227",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 22,
+   "kind": "book",
+   "cite": "Westland, Universal Principles of Color, ch. 76",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 23,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 77",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 24,
+   "kind": "book",
+   "cite": "Finlay, Colour, notes to ch. 4 (\"Red\"), citing Gettens and Stout",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 25,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 8 (\"Blue\") and notes",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 26,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 92",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 27,
+   "kind": "book",
+   "cite": "Pastoureau, Red: The History of a Color, ch. 20",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 28,
+   "kind": "book",
+   "cite": "Pastoureau, Red: The History of a Color, ch. 23",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 29,
+   "kind": "book",
+   "cite": "Pastoureau, Red: The History of a Color, ch. 34",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 30,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, introduction to the revised edition",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 31,
+   "kind": "data",
+   "cite": "ColorHub color library and Color Graph (data/library.json, data/graph/nodes-v.json: ISCC-NBS 1955, Maerz & Paul 1930, Werner/Syme 1814), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 32,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas; data/graph/fieldnotes/v.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 33,
+   "kind": "data",
+   "cite": "Google Books Ngram, adjective use, relative to peak (data/graph/fieldnotes/v.json)",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  },
+  {
+   "n": 34,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 16",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 35,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 133",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 36,
+   "kind": "book",
+   "cite": "Pastoureau, Red: The History of a Color, ch. 9",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 37,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 229, 235",
+   "loc_kind": "pdf-page",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why do some vermilion reds in old paintings now look brown or black?",
+   "choices": [
+    "The mercury sulfide has changed into its black form, metacinnabar",
+    "The painters mixed it with soot",
+    "Varnish always turns red paint black",
+    "The red was a dye that washed out"
+   ],
+   "answer": "The mercury sulfide has changed into its black form, metacinnabar",
+   "kind": "pick"
+  },
+  {
+   "q": "Where does the word vermilion come from?",
+   "choices": [
+    "Latin for 'little worm', first used for the kermes insect dye",
+    "The Latin name of the mercury mine at Almadén",
+    "An Arabic word for mercury",
+    "The French word for fire"
+   ],
+   "answer": "Latin for 'little worm', first used for the kermes insect dye",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the paint sold as 'cinnabar green' was made from cinnabar.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Until the eleventh century it cost as much to cover a page with vermilion as with gold.",
+  "The word vermilion means 'little worm', and the worm was an insect dye, not the mercury red that took its name.",
+  "Look for vermilion as the small, hot orange-red accents in old paintings, and for dark patches where it has turned black."
+ ],
+ "words": 2276,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Zorn: fact card says he restricted his palette, not that he built whole portraits from it; reworded."
+  ]
+ }
+}

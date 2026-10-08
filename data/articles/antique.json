@@ -17,7 +17,7 @@
   {
    "id": "word",
    "title": "A modifier turned into a name",
-   "body": "In practice *antique* was a modifier before it was a color. Paterson defines it as a way of coloring that gives an object the look of an antique, used for brass, bronze and gold, and lists antique bronze, antique gold, antique green and antique red alongside antique ivory, the yellowish white of old ivory [2]. [[antique-white]] is the same word on the web: a yellowish white adopted as a color name by web page creators, with the hex code #FAEBD7 [2]. Related pages in our library include [[antique-brass]], [[antique-bronze]] and [[antique-fuchsia]].\n\nFabric and house paint used the word too. Paterson notes that fashion items given an \"antique look\" are made by acid-washing, bleaching or similar processes [2]. Batchelor quotes a 1960s list of paint names in New Jersey suburbs, among them petal-pink, buttercup, Cape Cod brown and antique green [3]. Garfield, citing a survey of 7,500 English color names by Judd, counts sixty names that came from old things, among them antique brown [4]."
+   "body": "In practice *antique* was a modifier before it was a color. Paterson defines it as a way of coloring that gives an object the look of an antique, used for brass, bronze and gold, and lists antique bronze, antique gold, antique green and antique red alongside antique ivory, the yellowish white of old ivory [2]. [[antique-white]] is the same word on the web: a yellowish white adopted as a color name by web page creators, with the hex code #FAEBD7 [2]. Related pages in our library include [[antique-brass]], [[antique-bronze]] and [[antique-fuchsia]].\n\nFabric and house paint used the word too. Paterson notes that fashion items given an \"antique look\" are made by acid-washing, bleaching or similar processes [2]. Batchelor quotes Robert Smithson's 1966 description of New Jersey suburbs, where houses are painted in shades such as petal-pink, buttercup, Cape Cod brown and antique green [3]. Garfield, citing a survey of 7,500 English color names by Judd, counts sixty names that came from old things, among them antique brown [4]."
   },
   {
    "id": "antiquity",
@@ -152,14 +152,13 @@
   "Antique in the color books mostly means made to look old, not brown.",
   "In our archive Antique brown-gold sits in 9 of every 100 paintings, often as the accent."
  ],
- "words": 478,
+ "words": 482,
  "status": "checked",
  "checked": {
-  "by": "L7 batch 26 self-check (sentence-to-card trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Name origin as a swatch is Maerz and Paul 1892; thin book evidence, so article is short.",
-   "Archive numbers use the fieldnotes lens."
+   "Reworded the Batchelor/Smithson 1966 New Jersey house-colors sentence to match the source."
   ]
  }
 }

@@ -1,0 +1,227 @@
+{
+ "slug": "almond",
+ "name": "Almond",
+ "hex": "#EED9C4",
+ "names": [
+  "Almond"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Almond is a pale, warm beige-pink named for the nut and the tree, but the word has never meant one color: dictionaries use it for pink, yellowish brown and even grey-green.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A word with no fixed color",
+   "body": "Paterson's dictionary defines the adjective almond as pink or yellowish brown, as in almond blossom [1]. It adds that the word is sometimes used for the greyish green of the underside of the almond tree's leaves, and that it is used to describe a variety of colors [1]. Werner's chart, as Syme and Baty present it, uses silver-leaved almond as one of its natural examples of a green [2].\n\nThe word also makes compounds. Paterson records *almond green* as a greyish green, *burnt-almond* as a light brown and *sugar-almond* as a way of describing pale colors, as in sugar-almond pastels [1]. So the swatch here, a pale warm beige, is one reading among several [1][3]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "Our swatch is a very light, low-chroma yellowish beige, with a lightness of 88 on the LCH scale [3]. Its nearest everyday name is [[ecru]], about five and a half units away in ΔE [3]. A near-duplicate in older charts is Tilleul Buff, only 2.1 units off [3].\n\nThe color appears in several sources in our library: Ridgway's 1912 plate XL, the 1955 ISCC-NBS system and the Maerz and Paul dictionary of 1930, which records one entry from 1920 [3]. Neighbors we can link to are [[blanched-almond]], [[beige]] and [[peach]] [3]."
+  },
+  {
+   "id": "other",
+   "title": "Dyes, blacks and a green",
+   "body": "The nut gave its name to colors beyond the pale beige. Almond shells were among the materials English and Italian writers advised charring for black pigment, Lomazzo and Haydocke in 1584 and 1598, and the Pigment Compendium lists almond stones among the chars [4][5]. Coles describes the family as impure carbon blacks from the shells or kernels of cherry, almond, walnut and coconut [5].\n\nAlmond green also turns up among the bright dye shades inspired by aldehyde green, with iodine green and methyl green, all cheaper than the empress's costly dye but more or less toxic [6]. Jarman adds a plainer note: the names of brown dyes are sweet and edible, and a coat could be bought in caramel, toffee, almond, coffee, chocolate or curry [7]."
+  },
+  {
+   "id": "shape",
+   "title": "The almond shape",
+   "body": "Almond is also a shape. A *mandorla* is an almond-shaped halo enclosing a sacred figure, and Nelson describes mosaics in which Christ stands in a blue one [8][9]. In Hindi and Urdu color vocabulary, a soft pink was called *post badami*, the shell of the almond [10]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The pale beige is common in the archive. In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 762 works, 3.2 per cent [11]. The largest patches are in Blake's *Evening* of 1820 and Min Zhen's *Su Dongpo* of 1788, both over 90 per cent of the picture [11]. The earliest match is an ostracon with a drawing of a king, dated to about 1295 BCE [11].\n\nIt belongs to paper and silk traditions: 126 of 635 Chinese works carry it, 6.2 times the archive rate, and the Rajput and Pahari schools of India about 6.4 times [11]. It is a highlight color in 98 per cent of cases, and it keeps company with ecru, peach and beige [11]. These are photographs of aged paper and silk, so part of this tone is the ground, not the paint [11]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the almond nut and tree (Prunus dulcis)",
+   "first_recorded": "Ridgway 1912, Maerz & Paul 1930 (plate 13 B 6, first recorded 1920)",
+   "source": "Paterson, A Dictionary of Colour; ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "blanched-almond",
+   "ecru",
+   "beige",
+   "peach"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "blanched-almond",
+    "gloss": "the CSS color, a little lighter and pinker than this almond"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "hi/ur",
+    "name": "post badami (shell of almond)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#EED9C4",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 762,
+  "top_paintings": [
+   "nga-71394",
+   "cma-152830"
+  ],
+  "role": {
+   "highlight": 0.98,
+   "mid": 0.02
+  },
+  "company": [
+   "Ecru",
+   "Peach",
+   "Beige"
+  ],
+  "measured": {
+   "lch": [
+    88,
+    14,
+    73
+   ],
+   "nearest": [
+    [
+     "Ecru",
+     5.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"almond\", \"almond green\", \"burnt-almond\", \"sugar-almond\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 141-142 (Werner green examples)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub library: Ridgway 1912 plate XL; ISCC-NBS 1955 blocks 31 and 76; Maerz & Paul 1930; aged plates, approximate",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"carbon-based blacks\", pp. 96 and 307",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 87",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, p. 40",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 44",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"mandorla\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Nelson, Bluets, p. 10",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Finlay, Fabric, p. 249",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is a mandorla?",
+   "choices": [
+    "An almond-shaped halo around a sacred figure",
+    "A kind of almond dye",
+    "A pale pink glaze",
+    "A tree"
+   ],
+   "answer": "An almond-shaped halo around a sacred figure",
+   "kind": "pick"
+  },
+  {
+   "q": "Which statement fits the word almond in color dictionaries?",
+   "choices": [
+    "It has covered pink, yellowish brown and grey-green",
+    "It always means a pale beige",
+    "It only names a black pigment",
+    "It was coined by Crayola"
+   ],
+   "answer": "It has covered pink, yellowish brown and grey-green",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: almond shells were used to make black pigments.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Almond is a pink, a brown and a grey-green depending on which dictionary entry you read.",
+  "Charred almond shells were an old source of black pigment.",
+  "Look for the almond shape: the mandorla halo around figures in medieval mosaics."
+ ],
+ "words": 547,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Jarman line reworded to match source."
+  ]
+ }
+}

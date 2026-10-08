@@ -1,0 +1,257 @@
+{
+ "slug": "light-grey",
+ "name": "Light Grey",
+ "hex": "#D3D3D3",
+ "names": [
+  "Light Grey"
+ ],
+ "tier": "standard",
+ "depth": "medium",
+ "lede": "Light Grey is the pale neutral that web designers know as `lightgrey`, and a plain descriptive name that the books use for mourning cloth, Vermeer's walls and overcast skies.",
+ "sections": [
+  {
+   "id": "standard",
+   "title": "A named grey in the standards",
+   "body": "The swatch is #D3D3D3, the value Paterson's dictionary gives for LightGrey, one of the colors in the X11 set [1]. The same dictionary lists Gainsboro, also described as a light grey, at #DCDCDC [1]. In our library the two are a near-duplicate pair, 2.1 units apart [2].\n\nOther systems land close by. RAL 7035, the German industrial light grey, sits near #CBD0CC on screen, and the xkcd color survey's version is #D8DCD6 [2]. The ISCC-NBS system of 1955 files this swatch in block 264 [2]. As a screen color, all of these are approximations."
+  },
+  {
+   "id": "words",
+   "title": "The words around it",
+   "body": "Paterson's dictionary shows how many older names crowd the same pale grey. Elephant is a light grey, though sometimes a dark one [3]. Oyster white is a light grey or a greyish white, and *oyster* as a color description is first recorded in 1922 on Fowler's authority [3]. Elephant's breath is a light grey that Maerz and Paul, according to Paterson, found hard to match to an authentic original [3].\n\nIts neighbors in our app are [[silver-grey]], [[pearl-grey]], [[dove-grey]] and [[silver]], and above it [[white]] [2]."
+  },
+  {
+   "id": "use",
+   "title": "Light grey in use",
+   "body": "Mourning gave light grey a ritual role. In Pastoureau's account of black, the clothing calendar for a death moved from black to purple, called half-mourning, and then to light gray, called quarter-mourning [4]. He adds that this strict color coding only became common in the nineteenth century [4].\n\nIn painting, Pastoureau argues that Vermeer's palette depends on grays, light gray above all, for the harmony of his pictures [5]. Gurney notes that under overcast light a sky often reads as light gray or white, and is usually the lightest note in the painting [6]. Linen shows the same pale grey in cloth: left natural, it ranges from off-white through brown or light gray[7]."
+  },
+  {
+   "id": "relative",
+   "title": "A grey that changes with its neighbors",
+   "body": "Albers uses light grey as his example of an unstable color. A light grey can look dark at one moment and almost white at another, because how we see it is relative [8]. In one of his plates, a very light grey and a near-black grey are made to look alike by changing what surrounds them [9]. He also warns that poor reproductions push their greys to the extremes, leaving too few of the middle ones [8].\n\nLivingstone makes the point from the other side. If the red and blue of a Lichtenstein cathedral are redrawn as light gray and black, the cathedral's shape appears at once, because the two now differ in lightness [10].\n\nA related myth says that Le Corbusier's buildings were all white [11]. Batchelor reports that his Pavilion of the New Spirit was painted in ten colors, light grey among them, and that Wigley counts only one white building in his career [11]. The all-white legend is not true."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 796 works, 3.3 per cent [12]. It is almost always a highlight, playing that role in 98 per cent of the paintings that carry it [12]. Its nearest company in the archive is white, silver and ecru [12].\n\nThe biggest examples are pale all over. [[painter:claude-monet|Monet's]] [[painting:nga-45872|Morning Haze]] of 1888 reads as this grey across the whole photograph, and [[painter:piet-mondrian|Mondrian's]] [[painting:aic-65821|Composition Gray-Red]] of 1935 holds it over 90 per cent of the canvas [12]. It grows more common over time: 112 of 1,674 works in the 1900s, 6.7 per cent, with the 1920s at 17 of 237 [12]. Impressionism has it in 10 of 140 works, and [[painter:carlos-de-haes|Carlos de Haes]] in 12 of 29 [12]. These are photographs of varnished paintings, so a color match is not a pigment test [12].\n\nThe spelling matters too. In Google Books, *grey* peaks around 1865, and by 2000 it stands at about 39 per cent of that peak [13]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the plain description: a pale grey (CSS/X11 LightGrey)",
+   "first_recorded": "descriptive name; the X11 value is #D3D3D3",
+   "source": "Paterson, A Dictionary of Colour; ColorHub library"
+  },
+  "aka": [
+   "lightgrey",
+   "light gray",
+   "RAL 7035 (approx.)"
+  ],
+  "siblings": [
+   "silver-grey",
+   "pearl-grey",
+   "dove-grey"
+  ],
+  "parent": "grey",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "silver",
+    "gloss": "a metal-named neighbor, a little darker than this swatch"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#D3D3D3",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 796,
+  "top_paintings": [
+   "nga-45872",
+   "aic-65821"
+  ],
+  "role": {
+   "highlight": 0.98,
+   "mid": 0.02
+  },
+  "peak_decade": {
+   "1920s": {
+    "hits": 17,
+    "n": 237,
+    "lift": 2.14
+   }
+  },
+  "company": [
+   "White",
+   "Periwinkle",
+   "Silver"
+  ],
+  "ngram": {
+   "word": "grey",
+   "peak": 1865,
+   "rel_2000": 0.385
+  },
+  "measured": {
+   "lch": [
+    85,
+    0,
+    297
+   ],
+   "nearest": [
+    [
+     "Gainsboro",
+     2.1
+    ],
+    [
+     "Silver",
+     4.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"LightGrey\" and \"Gainsboro\" (X11 colour set)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): CSS/X11, RAL 7035, xkcd, ISCC-NBS 1955 block 264; CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"elephant\", \"elephant's breath\", \"oyster\", \"oyster white\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Black: The History of a Color, p. 69 (mourning)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Blue: The History of a Color, ch. 9 (Vermeer)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Gurney, Colour and Light, p. 33",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pastoureau, White: The History of a Color, p. 43 (linen)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Albers, Interaction of Color, pp. 31 and 86",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Albers, Interaction of Color, p. 115 (plate VII-7)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Livingstone, Vision and Art, p. 20",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Batchelor, Chromophobia, p. 7",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "ColorHub archive field notes, tools/article_field.py, CIEDE2000 6, 5% cover. As photographed: museum photographs of aged, varnished paintings. A color match, not a pigment test.",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak (word: grey)",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "In the Victorian mourning calendar Pastoureau describes, what came after black and purple half-mourning?",
+   "choices": [
+    "Light gray, called quarter-mourning",
+    "White",
+    "Navy blue",
+    "Full black again"
+   ],
+   "answer": "Light gray, called quarter-mourning",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Le Corbusier painted his buildings white only.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Why does a light grey sometimes look dark and sometimes almost white?",
+   "choices": [
+    "Its look depends on its surroundings and on after-images",
+    "Light grey dyes fade in sunlight",
+    "The eye cannot see pale colors",
+    "Grey pigments change with temperature"
+   ],
+   "answer": "Its look depends on its surroundings and on after-images",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "A light grey and a near-black grey can be made to look alike, by changing only what surrounds them.",
+  "In the Victorian mourning calendar, light gray came after black and purple.",
+  "Vermeer's pictures depend on light grays, according to Pastoureau."
+ ],
+ "words": 646,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed after-image and other-hue claims not in the Albers card",
+   "Removed invented ecru/beige run in linen sentence",
+   "Removed unsupported 'rarer before 1800'"
+  ]
+ }
+}

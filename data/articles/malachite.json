@@ -1,0 +1,310 @@
+{
+ "slug": "malachite",
+ "name": "Malachite",
+ "hex": "#0BDA51",
+ "names": [
+  "Malachite"
+ ],
+ "tier": "pigment",
+ "depth": "epic",
+ "lede": "Malachite is a banded green copper mineral, ground as a pigment since ancient Egypt and named for the mallow leaf, that gave its name to a vivid green on screens and to a family of later greens.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A mallow-colored stone",
+   "body": "*Malachite* is a green copper mineral, and its name comes from a Greek word for the mallow plant, chosen for the leaf-green color [1]. [[mauve]] is also a mallow word, by way of French, so a bright green stone and a soft greyish purple share a plant [2]. In books and workshops the stone has gone by many other names, among them chrysocolla in classical and medieval writing, mountain green, *Berggrün*, *verde azzurro*, Hungarian green and mineral green [1]. Its manufactured twin was sold as Bremen green [12][1].\n\nPaterson calls it a very old bright green pigment or dye taken from the mineral [12]. St Clair's glossary describes it as glassy bright green [13]. The word has since moved well beyond the stone, first to other greens sold under its name and then to a synthetic dye, as later sections show."
+  },
+  {
+   "id": "mineral",
+   "title": "How a copper stone gets its green",
+   "body": "Malachite is a basic copper carbonate, with the composition Cu2CO3(OH)2 [1]. It forms as a secondary mineral in the upper, oxidized zones of copper ore deposits, laid down slowly from carbonate solutions that seep through fissures and cavities [1]. That slow deposition gives the banded structure, with fibrous masses in rounded, botryoidal lumps [1]. Finlay compares the lumps to a frog's back, and says that a slice through one shows the circle patterns that decorative stone-cutters prize [4].\n\nMalachite is found beside [[gem:azurite|azurite]], its blue chemical cousin, and it is the more abundant of the two [1]. The two minerals differ in the ratio of carbonate to hydroxide: azurite has as much hydroxide as carbonate, while malachite has twice as much [8]. Even a small change in that ratio shifts the color the copper gives [8]. So the same metal makes the blue and the green, and the two are usually dug up together. Finlay points out that azurite therefore leans toward the green side of the spectrum, which is why painters used ultramarine to lift a sky and azurite to deepen the sea [18].\n\nThe deposits are widespread. The Pigment Compendium lists Cornwall, Chessy in France, Attica, Saxony, the Urals, South Australia, Katanga, Namibia, Argentina and Utah, with smaller deposits in China and Japan [1]. Russia and the Congo have supplied most of the recent pigment [1]. In medieval times the source of pigment malachite is not well documented, and the copper mines of Hungary, central Europe and France may have supplied it [1]."
+  },
+  {
+   "id": "antiquity",
+   "title": "Egypt, Greece and Rome",
+   "body": "Malachite is among the oldest pigments. Ball's list of the Egyptian palette starts with ground natural minerals: the copper ores malachite, for green, and azurite, for blue, together with the arsenic sulphides orpiment and realgar, ochres, soot black and lime white [7]. Finlay thinks the Egyptians were probably the first to use it on paintings and also on their eyelids, as a pale eye paint that was believed, like black kohl, to protect the eyes from glare [4]. ColorHub's timeline marks Egyptian malachite mining at about 4000 BC, as an approximation [17]. Finlay's joke that it was the earliest sunglasses is hers and not a claim of the sources.\n\nMalachite also seeded another color. Egyptian blue, a calcium copper silicate made from lime, quartz and a copper mineral such as malachite, was fired at 800 to 900 degrees Celsius [7][13]. Ball dates that technology from about 2500 BC [7]. Blue-glazed soapstone ornaments imitating [[lapis-lazuli]] were made even earlier in the Middle East, from around 4500 BC, by heating powdered stone with copper minerals such as azurite or malachite [7]. In other words, the green mineral made the blue glaze.\n\nGreek and Roman painters used it widely [11]. Pastoureau notes that Greek painting used a wide range of green pigments, malachite among them, together with earth greens and artificial copper greens [11]. Roman garden scenes painted as trompe l'oeil, such as the one from the Villa Livia of about 20 BCE, get their many greens from natural pigments, earth greens and malachite, and from artificial copper greens [11]. A Roman list of colors that Jarman reproduces names malachite among the brilliant ones, beside cinnabar, vermilion, indigo and Tyrian purple [15]. Finlay adds that Pliny prized the stone because it was thought to guard against evil spirits, and that in Germany it was still called a *Schreckstein*, a scary stone used to frighten demons, until the late eighteenth century [4]."
+  },
+  {
+   "id": "asia",
+   "title": "Dunhuang and the Silk Road",
+   "body": "In Asia malachite stayed in use for centuries [4][5]. Finlay saw ancient Buddhas in the Dunhuang caves painted in bright malachite greens, their haloes picked out in blue or gold leaf [5]. In an ordinary year, the pigment merchants of Dunhuang, an important stop on the Silk Road, sold sachets of vermilion, malachite and orpiment [5]. Eighth-century Chinese artists ground the stone coarsely for the haloes of their Buddhas, and it stayed a popular pigment from Japan to Tibet for hundreds of years [4]. The seventeenth-century *Mustard Seed Garden Manual of Painting* says the best stone for paint is the color of a frog's back, to be ground and dissolved in water [4]."
+  },
+  {
+   "id": "grind",
+   "title": "Grind it coarse",
+   "body": "Malachite has a quirk that every painter's manual repeats: the finer the powder, the weaker the color. Cennino Cennini, the Italian craftsman whose handbook is the standard source for late medieval practice, warned that if it is ground too much it comes out dingy and ashy [4][10]. Coles describes the stages: the mineral is chosen, crushed and ground, and the green particles are floated off in swirling water, a method he likens to panning for gold [10]. A bright green needs a coarse grain, and each extra pass through the mill leaves a paler, more see-through powder [10]. Finlay makes the same point about the Egyptians' eye paint, which stayed a pretty pale green only if it was not ground too much [4].\n\nCennino's word *ashy* shows up elsewhere in the history of pigments. Low-grade ultramarine was called ultramarine ash, and a synthetic copper pigment in France was called *cendres bleus* [8]. Hoogstraten, a Dutch painter of the 1670s, complained that artists lacked a green as good as their red or yellow, because green earth was too weak, Spanish green too crude, and \"ashes\" insufficiently durable [8]. The [[ash]] page follows that thread.\n\nMalachite also behaves differently in different media. In oil its low refractive index leaves it fairly transparent, and Ball connects that with its decline [8]. Verdigris suffers in oil as well, so painters often added lead white or lead-tin yellow to give it opacity again [8]. By the end of the eighteenth century, Coles says, the mineral had been replaced by more easily obtained synthetic alternatives [10]."
+  },
+  {
+   "id": "europe",
+   "title": "In European painting",
+   "body": "In Europe malachite was usually the expensive green [8][11]. Ball and St Clair both cite a purchase by the Florentine painter Neri di Bicci in 1471: good azurite cost him two and a half times what he paid for a good green, *verde azzurro*, which was probably malachite [8][13]. On the same list, lead-tin yellow cost one-tenth of the azurite and white lead one-hundredth [8]. Paterson lists malachite among the pigments on Titian's palette [12]. Ball says that Titian's *Bacchus and Ariadne* contains almost every pigment known to the early sixteenth century, and its greens are malachite, green earth, verdigris and copper resinate [8]. [[painter:titian|Titian]] used ultramarine just as lavishly for the sky [8].\n\nFor Rembrandt the stone was one of a wide palette [14]. In the 1620s and early 1630s he worked with ten to a dozen pigments, including the very expensive azurite, vermilion and malachite green [14]. From about 1650 he used roughly half that number [14]. Pastoureau writes that [[painter:johannes-vermeer|Vermeer]] kept to the traditional greens of his contemporaries: earth greens, malachite, and copper greens softened with honey [11]. Poussin did too [11]. Neither mixed blue and yellow to make green [11].\n\nThat detail has a longer history. Pastoureau says that before the fifteenth century no collection of recipes explains green as a mixture of blue and yellow, because medieval people saw the two colors as very far apart [16]. In the 1740s some French painters, Oudry among them, still criticized their colleagues for mixing instead of using the traditional green pigments such as earth greens, malachite and copper greens [11]. Pastoureau sums up the problem: European painting had little luck with green pigments, because malachite was expensive and copper greens were corrosive and darkened over time [11]."
+  },
+  {
+   "id": "weather",
+   "title": "Blue that turned green",
+   "body": "The azurite and malachite twins share a destiny in old paintings. Azurite is almost identical in composition to malachite, and with time it can change into it [9]. Fresco is where this happens most, and Ball says medieval Italian churches are full of blues that have turned green [9]. Malachite itself is generally very stable [9]. The blue pigment is the one that acid pollution can destroy, since sulphurous pollution turns its copper carbonate into black copper oxide [9].\n\nSo a green in an old painting is not always the green the painter laid down. Treat a green in a very old fresco as a question and not an answer."
+  },
+  {
+   "id": "dye",
+   "title": "Malachite green, a name for many things",
+   "body": "By the nineteenth century the name was attached to several different materials. The Pigment Compendium says that the term could refer to a number of pigments, including paint made from the mineral [3]. Seward, writing in 1889, said that the artificial versions faded, and on his recommendation the colorman Rowney's used powdered mineral; Winsor and Newton also said they used the mineral in 1896 [3]. One catalogue of about 1898 listed a Malachite green \"now made from chromium and zinc oxides\" [3]. When van Gogh ordered paints from Arles in 1888, his malachite green was probably a copper aceto-arsenate, and Gage counts it among the most fugitive pigments then on sale [14].\n\nScheele's green, discovered in 1775, was invented to replace the old copper greens, verdigris and malachite, and [[emerald-green]], developed in 1808, followed [19]. Both were copper-and-arsenic compounds, hence deadly [19]. Finlay also records that a synthetic dye called malachite green was found twice, in 1877 and 1878, apparently independently [4]. It is still used against mold on goldfish [4]. Paterson's dictionary calls the dye toxic and possibly carcinogenic and mutagenic [12]."
+  },
+  {
+   "id": "russia",
+   "title": "The Malachite Chamber",
+   "body": "The most celebrated use of the stone is architectural. In the nineteenth century the Russian tsar Nicholas I held a monopoly on the world's best malachite, from the Urals [6]. His wife Alexandra commissioned in the 1830s a formal drawing room at the Winter Palace, furnished in green malachite veneer, which became known as the Malachite Chamber [6]. The Pigment Compendium confirms the Russian deposits as an important recent source [1]. Of all the places the stone has been used, this is the one where it is shown as itself, banded and polished."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch and the stone",
+   "body": "The swatch is `#0BDA51`, a vivid yellowish green, which is the nearest ISCC-NBS 1955 block at a distance of 4.2 [17]. It is a clean, bright screen color. The mineral, by contrast, varies from cold to bright yellow-green, according to Coles, and many specimens are much darker [10]. ColorHub's gem page pairs the swatch with a darker banded green, #355E3B [17]. The swatch is a symbol of the stone and not a measurement of it.\n\nThe color also serves as a lesson in names. Malachite is a mineral word, in the library's classification of pigment, dye or mineral names [17]. It has no entry in the old color atlases that supply most of the library's historical names, so its history is a pigment history and not a color-chart history [17]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In ColorHub's archive of 23,781 paintings, no painting has this color covering at least 1 per cent of its canvas within a CIEDE2000 distance of 4, as photographed [17]. The result is plausible. A painted malachite green would be darker and quieter than this swatch, would have aged under varnish, and, in oil, was often used transparently [8][17]. The archive describes photographs of paintings and not painting as a whole, so the absence does not tell us what painters used [17].\n\nOn the page, the swatch has a contrast ratio of 1.88 against white and 11.16 against black, so it reads well as a background for dark text [17]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a Greek word for the mallow plant, for the leaf-green color",
+   "first_recorded": "ancient Egyptian use as a pigment (ColorHub timeline, approximately 4000 BC)",
+   "source": "Pigment Compendium, \"Malachite\"; Finlay, Color, ch. 16"
+  },
+  "aka": [
+   "mineral green",
+   "mountain green",
+   "verde azzurro",
+   "Bremen green (synthetic)",
+   "Hungarian green",
+   "green bice"
+  ],
+  "siblings": [
+   "mountain-green",
+   "egyptian-blue",
+   "azurite-blue"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "it",
+    "name": "verde azzurro (medieval Italian name, 'blue-green')"
+   },
+   {
+    "lang": "de",
+    "name": "Berggrün"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#0BDA51",
+   "de2000": 4,
+   "min_cover": 0.01
+  },
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    76.6,
+    89.4,
+    143.1
+   ],
+   "contrast_white": 1.88,
+   "contrast_black": 11.16,
+   "nearest_iscc": [
+    "vivid yellowish green",
+    4.2
+   ]
+  },
+  "since": {
+   "y": -4000,
+   "what": "Egyptians mining malachite for green pigment",
+   "approx": true
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Malachite\" entry",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 6 (\"Mauve Measles\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Malachite green\" entry",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Finlay, Color: A Natural History of the Palette, ch. 16 (\"Green\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Finlay, Color: A Natural History of the Palette, ch. 12",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Finlay, Color: A Natural History of the Palette, ch. 21 (notes on the Malachite Chamber)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 11",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 13 and ch. 14",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 19",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, \"Malachite\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, ch. 9, 11, 33 (\"The green of painters\") and 41",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"malachite\", \"malachite green\", \"Bremen green\", \"Titian\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, ch. 23, ch. 88 and the glossary",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, on Rembrandt's palette and van Gogh's order of 1888",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Jarman, Chroma, the chapter \"Chroma Shadow Is the Queen of Colour\"",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "book",
+   "cite": "Pastoureau, Blue: The History of a Color, ch. 8",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "data",
+   "cite": "ColorHub library, gems page and archive, Malachite #0BDA51; archive of 23,781 paintings, as photographed",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 18,
+   "kind": "book",
+   "cite": "Finlay, Color: A Natural History of the Palette, ch. 17 (\"Blue\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 19,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, \"Emerald green\" and \"Chrysocolla\"",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why did Cennino Cennini tell painters to grind malachite coarsely?",
+   "choices": [
+    "Fine grinding makes it dingy, pale and ashy",
+    "Coarse grains dissolve in oil",
+    "Fine powder is poisonous",
+    "Coarse grains are cheaper"
+   ],
+   "answer": "Fine grinding makes it dingy, pale and ashy",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: malachite and azurite are chemically unrelated minerals.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Why are some blues in medieval Italian frescoes now green?",
+   "choices": [
+    "Azurite can turn into malachite over the years",
+    "The painter used the wrong pigment",
+    "Candle smoke stained them",
+    "Lime reacts with ultramarine"
+   ],
+   "answer": "Azurite can turn into malachite over the years",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Overground malachite turns dingy: the finer the powder, the paler the green.",
+  "Many of the blue skies in medieval Italian frescoes have turned green, because azurite weathers into malachite.",
+  "Vermeer and Poussin never mixed blue and yellow for green; they used earth greens, malachite and copper greens."
+ ],
+ "words": 1965,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Spot-verified name, Cu2CO3(OH)2, Neri di Bicci 1471, Hoogstraten, Cennino, Dunhuang, Rembrandt palette, Malachite Chamber, dye 1877/78 against book text; no changes needed."
+  ]
+ }
+}

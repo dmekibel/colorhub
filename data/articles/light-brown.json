@@ -1,0 +1,163 @@
+{
+ "slug": "light-brown",
+ "name": "Light Brown",
+ "hex": "#AD8150",
+ "names": [
+  "Light Brown"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Light brown is a plain description rather than a historic color name, and old color dictionaries use it as a gloss for dozens of earthy names from ochre to biscuit.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name that explains others",
+   "body": "Light brown has no inventor and no first date. It is brown with a modifier, and the ISCC-NBS naming system of 1955 includes it as one of its named blocks; the swatch here sits 5.8 CIEDE2000 units from that block [8]. A 1927 German RAL standard color and a 2010 online color survey each give a close value, which is how the swatch was settled [8].\n\nWhat the phrase does in books is more interesting. Paterson's *Dictionary of Colour* uses it to define many older names, among them [[avellaneous]], the light brown of the hazelnut or filbert; [[biscuit]], first recorded as a color in 1884; [[clay]]; savannah; pine, for the wood; suede; and ochre, which it also calls an orangey yellow [1]. [[beige]] is defined there as a light brown or a yellowish grey, a color that fashion keeps renaming camel, taupe, stone or sand [1]."
+  },
+  {
+   "id": "loose",
+   "title": "How loose the words are",
+   "body": "The same dictionary calls two screen colors from the X11 list light brown, Peru and DarkGoldenrod [1]. Topaz is described as the dark yellow or light brown of the gem [1]. The label holds a family of dull, warm, middling colors, not one point in a color space.\n\nColor theorists note the difficulty. Jarman, citing Wittgenstein, writes that brown is a kind of darkened yellow with no light of its own, and that there are more browns than greens [2]. Light brown is that darkened yellow at its lightest."
+  },
+  {
+   "id": "history",
+   "title": "In nature and in art",
+   "body": "A nineteenth-century color table reproduced by Baty names \"light brown spots on a guinea-pig\" and the breast of a hoopoe as examples of its yellowish brown, and gives wood brown as yellowish brown mixed with ash grey [3]. In the Church of Sinai mosaic of the Transfiguration, the tunics of Saints Peter and James are rendered in a light brown and a light purple that turn deep blue where Christ's rays touch them [4].\n\nPastoureau observes that Italian painters of the late 1500s used fewer true yellows, favoring ivory, beige, straw, russet and light brown [5]. Among pigments, [[ochre]] is the standard light-brown earth, and burnt ochre is glossed as a light brown made by heating [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Light brown is one of the commonest colors in the ColorHub archive: 3,081 of 23,781 paintings, about 13 percent, hold a color near this swatch over at least 5 percent of the canvas [6]. The archive's earliest example is a funerary papyrus from about 1069 BC [6]. Its rate peaks in the fourteenth century, at about 2.4 times the overall rate, and the 1390s are the strongest decade, with 11 of 25 works [6]. Mughal painting holds it in 65 of 168 works, three times the overall rate [6]. These are photographs of aged, varnished paintings, so the colors are as photographed. In printed books, the phrase *light brown* peaks about 1934 [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented; a modifier phrase (light + brown), standardized in ISCC-NBS 1955",
+   "first_recorded": "ISCC-NBS 1955; RAL 1927",
+   "source": "ColorHub library; Paterson, A Dictionary of Colour"
+  },
+  "aka": [],
+  "siblings": [
+   "avellaneous",
+   "biscuit",
+   "clay"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "ochre",
+    "gloss": "the earth pigment that dictionaries gloss as a light brown"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#AD8150",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 3081,
+  "peak_decade": {
+   "key": 1390,
+   "hits": 11,
+   "n": 25,
+   "lift": 3.4
+  },
+  "century_peak": {
+   "key": 1300,
+   "lift": 2.43
+  },
+  "ngram": {
+   "peak": 1934
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, entries \"avellaneous\", \"biscuit\", \"beige\", \"clay\", \"ochre\", \"savannah\", \"topaz\", \"DarkGoldenrod\", \"Peru\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 44",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 254, 259",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 64",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, p. 28",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas); Google Books Ngram, case-insensitive, 5-year smoothed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub color library and graph node (data/graph/nodes-l.json): ISCC-NBS 1955, RAL 1927, xkcd 2010, CIEDE2000 distance",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the old word avellaneous describe?",
+   "choices": [
+    "The light brown of the hazelnut",
+    "A pale blue-grey",
+    "A dark red-brown",
+    "A yellowish green"
+   ],
+   "answer": "The light brown of the hazelnut",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: light brown is the name of a historic pigment.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Light brown is mostly a gloss: dictionaries use it to define avellaneous, biscuit, clay and ochre.",
+  "About 13 percent of the paintings in the ColorHub archive hold a light brown, as photographed."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported claim that DarkGoldenrod is much darker than the swatch (lightness is close)."
+  ]
+ },
+ "words": 483
+}

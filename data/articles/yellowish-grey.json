@@ -1,0 +1,200 @@
+{
+ "slug": "yellowish-grey",
+ "name": "Yellowish Grey",
+ "hex": "#BAB191",
+ "names": [
+  "Yellowish Grey"
+ ],
+ "tier": "standard",
+ "depth": "medium",
+ "lede": "Yellowish grey is a plain descriptive name that became a numbered standard: entry 13 among the greys in Patrick Syme's 1821 edition of Werner's colour list.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A grey with a yellow lean",
+   "body": "Yellowish grey is a descriptive name, and it is also a numbered standard. It is entry 13 among the greys in Patrick Syme's 1821 edition of *Werner's Nomenclature of Colours*, a list built to describe minerals, plants and animals [1][4]. Abraham Gottlob Werner began the list in 1774 with 54 names, and Syme enlarged it to 110 and painted a swatch for each [1].\n\nThe name is plain on purpose. Werner's lists sort greys by the hue they lean toward, so that yellowish grey sits beside [[bluish-grey]], [[greenish-grey]], [[pearl-grey]] and [[french-grey]] [2][4]."
+  },
+  {
+   "id": "recipe",
+   "title": "Syme's recipe and examples",
+   "body": "Syme gave it as a recipe: ash grey, with lemon yellow added and a very small amount of brown [4]. His three examples were the vent coverts of the \"White Rump\" (Baty's gloss: the hen harrier), the stems of the barberry, and the mineral common chalcedony [4]. Patrick Baty's modern edition pairs these with drawings from Gould's *Birds of Europe* (1832 to 1837), a botanical watercolour of 1765 and a mineral catalogue of 1797 [4].\n\nSyme also used it as a building block for other colours. Two of his greens list it among the parts: oil green combines emerald green, lemon yellow, chesnut brown and yellowish grey, and mountain green takes emerald green, plenty of blue and a little yellowish grey [5]. A flat grey with a bit of yellow does the work of dulling a bright green into a natural one."
+  },
+  {
+   "id": "use",
+   "title": "Where the name spread",
+   "body": "The term was not Syme's invention [2]. Yellowish grey appears in several of the colour lists that Baty tabulates, and in Syme's editions of both 1814 and 1821 [2][3]. Baty's index gives six page references for it, among them the lists of terms and the entry for the colour itself [6].\n\nOutside the Werner tradition the plain words are common [7]. The dictionary entry for beige gives a light brown or yellowish grey, the entry for stone calls it a yellowish grey colour, and *fulvid* is an old term for reddish yellow, tawny or yellowish grey [7][8]. In those uses the phrase is a description, not a standard. Close modern names are [[beige]], [[stone]], [[taupe]], [[putty]] and [[tan]] [9]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "Our swatch is Werner's no. 13, taken from an aged scan, so it is approximate [9]. It is a light, soft olive-tan, lighter and yellower than most things called grey today [9]. Syme's plates have muted with age, and the original may have been fresher [1].\n\nThat matters for a colour defined by a recipe. A mix of ash grey, lemon yellow and brown is sensitive to the pigments chosen, and nothing in the lists fixes them [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive the colour appears in 3,537 of 23,781 paintings, about 15 per cent, within CIEDE2000 distance 6 and at least 5 per cent of the canvas [10]. That is common because it is the colour of aged paper, canvas and varnished lights, and 89 per cent of the matching area sits in the highlights [10]. Read this as photographed: museum photographs of aged, varnished paintings, not pigment tests [10].\n\nIt is strongest in Dutch landscape and sea painting [10]. Willem van de Velde the Elder has 12 of 14 paintings in the match, including [[painting:rijks-20026834|Ships after the Battle]], where it covers 86 per cent of the picture [10]. Meindert Hobbema has 11 of 16 and Jan van Goyen 12 of 22 [10]. By century the rate rises from about 11 per cent in the 1500s to 17 per cent in the 1700s and 1800s [10].\n\nThe words nearest to it in the archive are sage, beige, tan, ash and khaki [10]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a descriptive name: a grey leaning yellow",
+   "first_recorded": "in Werner's lists and Syme's 1814 and 1821 editions",
+   "source": "Baty, Nature's Palette, p. 56"
+  },
+  "aka": [
+   "Yellowish-grey (Syme's spelling)"
+  ],
+  "siblings": [
+   "greenish-grey",
+   "bluish-grey",
+   "pearl-grey",
+   "french-grey"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "putty",
+    "gloss": "a modern tan-grey that sits very close on screen"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#BAB191",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 3537,
+  "peak_decade": {
+   "decade": 1790,
+   "hits": 86,
+   "n": 385
+  },
+  "top_paintings": [
+   "rijks-20026834"
+  ],
+  "measured": {
+   "lch": [
+    72,
+    18,
+    97
+   ],
+   "nearest": [
+    [
+     "Tan",
+     8.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, introduction, pp. 7-8",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 14 and 32 (colour lists)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 34 (Syme 1814 and 1821 lists)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, \"13. Yellowish Grey\", pp. 56-57",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, \"Mountain Green\" and \"Oil Green\", pp. 142 and 159",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, index",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"beige\" p. 45, \"stone\" p. 378",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"fulvid\" p. 180",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Werner no. 13, ISCC-NBS 1955; aged swatch, approximate",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py, CIEDE2000 6, 5% cover)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How did Syme describe yellowish grey?",
+   "choices": [
+    "Ash grey mixed with lemon yellow and a minute portion of brown",
+    "Black mixed with ochre",
+    "Lead white with a touch of indigo"
+   ],
+   "answer": "Ash grey mixed with lemon yellow and a minute portion of brown",
+   "kind": "pick"
+  },
+  {
+   "q": "Syme used yellowish grey as an ingredient in other colours, such as oil green.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Syme defined yellowish grey in 1821 as ash grey, lemon yellow and a touch of brown.",
+  "About one painting in seven in our archive holds this colour, mostly as pale skies, paper and highlights."
+ ],
+ "words": 601,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Identified Syme's 'White Rump' as the hen harrier per Baty's gloss",
+   "Verified Syme recipe, three examples, fulvid/beige/stone entries"
+  ]
+ }
+}

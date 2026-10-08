@@ -1,0 +1,187 @@
+{
+ "slug": "pansy",
+ "name": "Pansy",
+ "hex": "#3C2E73",
+ "names": [
+  "Pansy"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Pansy is a deep violet-blue named for the flower; the older \"pansy purple\" was a naturalist's color in Patrick Syme's 1814 chart, and a different shade again.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Which pansy",
+   "body": "The swatch is a deep violet-blue, #3C2E73, the color Maerz and Paul's *Dictionary of Color* calls Pansy [1]. The NBS cited that book in 1955, and our library's note gives 1705 as its first recorded date, a date we could not check [1]. The nearest ISCC-NBS category is deep purplish blue, and the nearest learnable color is [[indigo]], 5.2 units away [1].\n\nPaterson's dictionary defines pansy simply as a deep violet or purple, and also files it among the blues [2]."
+  },
+  {
+   "id": "syme",
+   "title": "Syme's pansy purple",
+   "body": "The older use is Patrick Syme's [3]. In his 1814 *Werner's Nomenclature of Colours* he kept most of Abraham Werner's names but added two principal colors, purple and orange, and renamed Werner's violet blue and plum blue as violet purple and plum purple [3]. Syme was a flower painter, and his knowledge of flowers shows in pansy purple and auricula purple [3]. His book grew from 108 colors to 110 in the 1821 edition [3].\n\nBaty's modern edition gives his recipe for pansy purple as a mix of indigo blue, carmine red and a faint touch of raven black [3]. It illustrates the color with the petals of a sweet violet, the back of a small bloody-nosed beetle and a fluorite crystal [3]. In Syme's order it sits between violet purple and campanula purple [3]."
+  },
+  {
+   "id": "swatch",
+   "title": "Three pansies, three colors",
+   "body": "The word does not fix one color. Our library carries Syme's swatch, as taken from Werner's tradition, as #39334A, a dark grey-violet [4]. Ridgway's Pansy Purple, from 1912, is #843751, a wine red-purple, and the library's own modern Pansy Purple is #78184A, close to [[byzantium]] [4]. The article's Pansy, from Maerz and Paul, is the bluest and most saturated of the three [1][4].\n\nPaterson's two filings, among the purples and among the blues, fit this spread [2]. If a source says pansy, check which book it means before picturing the color. The color of that name has its own page: [[pansy-purple]]."
+  },
+  {
+   "id": "green",
+   "title": "Pansy green",
+   "body": "The odd fact is that a pansy name once meant green. The Pigment Compendium cites Hilliard, who in 1624 described a pansy green, and a recipe in a British Library manuscript for making it from violet petals [5]. Thompson thinks the coloring matter in such plant greens is most likely chlorophyll [5]. Pansy green belongs with iris green and [[sap-green]] among the plant greens the Compendium lists [5]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, as photographed, a color within six units of #3C2E73 covers at least five per cent of the canvas in only 3 [6]. The largest share is Louis Welden Hawkins's *[[painting:commons-Q17492409|The Eiffel Tower]]* of 1900, at 22 per cent [6]. The others are Matisse's *Seville Still Life* of 1910, at 8 per cent, and an 1850 portrait of Berenguela of Leon by Francisco Prats y Velasco, at 6 per cent [6]. Two of the three are from the 1900s, a rate 9.5 times the archive's, though from so few paintings that it proves little [6]. In these paintings the color is a shadow tone about two times in three and a midtone the rest [6]. The caveat is the usual one: these are photographs of aged, varnished canvases, so a match is a screen color, not a pigment test [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the pansy flower",
+   "first_recorded": "Maerz & Paul 1930 (library note says 1705, unchecked); Syme's pansy purple, 1814",
+   "source": "ColorHub library; Baty, Nature's Palette"
+  },
+  "aka": [
+   "Pansy Purple (Syme)"
+  ],
+  "siblings": [
+   "pansy-purple",
+   "violet-purple",
+   "campanula-purple"
+  ],
+  "parent": "purple",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "pansy-purple",
+    "gloss": "a wine red-purple in the library, nothing like this violet-blue"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#3C2E73",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 3,
+  "top_paintings": [
+   "commons-Q17492409",
+   "commons-Q21729783",
+   "commons-Q59825529"
+  ],
+  "role": {
+   "shadow": 0.67,
+   "mid": 0.33
+  },
+  "measured": {
+   "lch": [
+    24,
+    45,
+    304
+   ],
+   "nearest": [
+    [
+     "Indigo",
+     5.2
+    ]
+   ],
+   "iscc": [
+    "deep purplish blue",
+    5.8
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library: Pansy (Maerz & Paul 1930, plate 43 K 11, cited by NBS Circular 553, 1955; first recorded 1705 per library note); measured nearest ISCC-NBS and learnable color",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"pansy\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 84, 91, 108-113 (Syme, Werner's Nomenclature of Colours, 1814, 1821)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub library: Pansy Purple alternates (Werner/Syme #39334A, Ridgway 1912 #843751, modern #78184A)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"pansy green\", on green plant pigments (Harley 1982; Hilliard 1624; Thompson)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (DE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which naturalist-painter put pansy purple and auricula purple into his color nomenclature?",
+   "choices": [
+    "Patrick Syme",
+    "Abraham Werner",
+    "Robert Jameson",
+    "Michel Eugene Chevreul"
+   ],
+   "answer": "Patrick Syme",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: a recorded pansy green was made from violet petals.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "Why check which book a source means by 'pansy'?",
+   "choices": [
+    "Different authorities gave it quite different colors",
+    "It always means yellow",
+    "It only exists on screens",
+    "It was invented in 1955"
+   ],
+   "answer": "Different authorities gave it quite different colors",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "A pansy name once meant green: a 1600s recipe made pansy green from violet petals.",
+  "Syme, a flower painter, gave pansy purple a recipe: indigo, carmine and a touch of black."
+ ],
+ "words": 538,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported claim that pansy green belongs to juice colors made before and after the age of mineral greens"
+  ]
+ }
+}

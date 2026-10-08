@@ -1,0 +1,238 @@
+{
+ "slug": "amulet",
+ "name": "Amulet",
+ "hex": "#205047",
+ "names": [
+  "Amulet"
+ ],
+ "tier": "standard",
+ "depth": "medium",
+ "lede": "Amulet is a dark bluish green from the Maerz and Paul dictionary of color, named for the protective charm; the name's maker is undocumented, but the history of amulet colors is not.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name from a dictionary of color",
+   "body": "Amulet is a dark bluish green from the Maerz and Paul dictionary of color: our library places it on plate 30, row L7, of the 1930 edition, and records its first appearance as 1923 [1]. The ISCC-NBS category closest to the swatch is \"dark bluish green\" [1]. Why the compilers chose the word is undocumented in our data, and none of the 29 books describes a color called Amulet [1].\n\nWhat the books do discuss is the object. An amulet is a charm worn to ward off harm, and its color was often part of its power. That history is worth telling, because it shows which colors people trusted, and a dark green was one of them."
+  },
+  {
+   "id": "colors",
+   "title": "What color is protection?",
+   "body": "Faber Birren's survey of old charms lists five favorite amulet colors: red, blue, yellow, green and white [2]. Red stones were believed to guard against disease, fire and lightning, blue and violet to give virtue and faith, yellow to bring prosperity, white to turn away the evil eye, and green to bring fertility and strength [2]. Birren's claims are old opinion rather than modern evidence, but his list is a record of what people believed [2].\n\nEgypt gives the clearest cases. In Birren's account, the *tjet* amulet was a red stone, the *ab* or heart amulet was also red, the *udjat* was gold, and the *sma* was brownish [2]. Pastoureau adds that red jasper amulets were thought to hold the blood or tears of the goddess Isis, and that red stones and pierced shells were already worn as ornaments in the Paleolithic period [3]."
+  },
+  {
+   "id": "green",
+   "title": "Green and blue amulets",
+   "body": "Green belongs here as well. The Egyptian Book of the Dead, as Birren quotes it, tells the maker to cut a scarab of green stone and place it on the breast of the dead, where it would restore the dead person's speech [2]. Our name list keeps a lighter green called [[scarab]] [1].\n\nBlue was another protective color. The earliest known uses of Egyptian blue, from the fourth dynasty, around 2613 to 2494 BC, include small molded amulets as well as pigment on painted sculptures [6]. Budge, quoted by Birren, saw large blue-glazed pottery beads sold in Cairo bazaars to caravan men, who tied them to the foreheads of their camels, because the beads were thought to draw the evil eye away from the animals [2]. In the Arab world, Balfour-Paul reports, blue amulets and beads were worn to deflect the evil eye, especially on children and pregnant women who wore blue clothes [5]. See [[egyptian-blue]] for the pigment.\n\nBlack has its own logic. Pastoureau notes the old idea that black fends off black, so a black stone or an amulet is worn against bad luck [4]. Amber, too, was credited with curing madness when carried as an amulet [8]. An Egyptian storehouse manager mummified around 1975 BC had amulets and trinkets tucked between his linen layers, and a hematite-red cloth wrapped last [7]."
+  },
+  {
+   "id": "claims",
+   "title": "Does the color do anything?",
+   "body": "The belief that colors heal is a myth, and amulets show why people held it. Birren, writing sympathetically, still suspects that optimism and confidence, not color, were the good fairy at work in charms and aural healing [10]. He notes that Christianity disdained the amulet, and that those drawn to it were called creatures of the devil [2]. Protective color is about belief, and belief is real even where the physics is not."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "We searched our archive of 23,781 paintings for this swatch [9]. A color within six units of it covers at least five per cent of the canvas in 62 of them, about 0.3 per cent [9]. All of this is as photographed: museum photographs of aged, varnished paintings, so a match is a screen color and not a pigment test [9].\n\nIt peaks in the 1890s, in 11 of 1,173 paintings, 3.6 times the archive rate [9]. [[painter:paul-gauguin|Gauguin]] has it in 6 of his 50 works, 46 times the archive rate, and [[painter:paul-cezanne|Cézanne]] in 3 of 50, among them [[painting:cma-135173|The Brook]] of 1895, where it covers 26 per cent of the canvas [9]. In Gauguin's [[painting:nga-46624|Fatata te Miti]] of 1892 it covers 28 per cent [9]. The earliest dated match is Masolino's *The Virgin Annunciate*, about 1430, but early centuries are thin, so this is a floor and not a first [9].\n\nWithin a painting it is mostly a shadow, in 45 per cent of the 69 paintings that carry it by the within-painting lens [9]. Its usual company is [[petrol]], which turns up beside it about 40 times more often than chance, and [[hunter-green]] [9]. Nearest named colors are [[brunswick-green]], [[dark-blue-green]] and [[msu-green]], at 3.0, 3.2 and 3.6 CIEDE2000 units [1]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the amulet (protective charm); reason for the name undocumented",
+   "first_recorded": "1923, as cited in Maerz and Paul (1930), plate 30 L7",
+   "source": "ColorHub library; Birren, Color Psychology and Color Therapy"
+  },
+  "aka": [],
+  "siblings": [
+   "brunswick-green",
+   "dark-blue-green",
+   "dark-teal"
+  ],
+  "parent": "dark-green",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "dark-teal",
+    "gloss": "our alias list points Amulet to Dark Teal, a bluer green"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#205047",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 62,
+  "top_paintings": [
+   "commons-Q110278110",
+   "smk-KMS1536",
+   "nga-46624",
+   "cma-135173"
+  ],
+  "painters": [
+   {
+    "name": "Paul Gauguin",
+    "hits": 6,
+    "of": 50
+   },
+   {
+    "name": "Paul Cezanne",
+    "hits": 3,
+    "of": 50
+   }
+  ],
+  "peak_decade": {
+   "decade": 1890,
+   "hits": 11,
+   "of": 1173
+  },
+  "role": "shadow",
+  "company": [
+   "Petrol",
+   "Hunter green"
+  ],
+  "measured": {
+   "nearest": [
+    [
+     "Brunswick Green",
+     3.0
+    ],
+    [
+     "Dark Blue Green",
+     3.2
+    ],
+    [
+     "MSU Green",
+     3.6
+    ],
+    [
+     "Dark Teal",
+     5.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library and name graph (data/library.json, data/graph/): Maerz and Paul 1930, plate 30 L7, first recorded 1923; ISCC-NBS category; nearest names by CIEDE2000",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 3 (\"The Amulet Wearers\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Red: The History of a Color, pp. 9, 14",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Black: The History of a Color, p. 99",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 228",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"Egyptian blue\", p. 160",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Hematite\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 146",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py, within six units, at least five per cent of the canvas; data/graph/fieldnotes)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 4 (\"The Aural Healers\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "According to Birren, which amulet color was linked with fertility and strength?",
+   "choices": [
+    "Green",
+    "Red",
+    "White",
+    "Blue"
+   ],
+   "answer": "Green",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the Maerz and Paul dictionary explains why this color was named Amulet.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "What protective job did blue beads and amulets have in much of the Arab world?",
+   "choices": [
+    "Deflecting the evil eye",
+    "Keeping fire away",
+    "Preserving the dead",
+    "Marking royalty"
+   ],
+   "answer": "Deflecting the evil eye",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Egyptians placed a green stone scarab on the breast of the dead to restore their speech.",
+  "Look for Amulet in Gauguin's Tahitian paintings: it covers up to a third of the canvas.",
+  "Blue beads were sold in Cairo bazaars to caravan men, who tied them to their foreheads."
+ ],
+ "words": 787,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Budge's blue beads were tied to camels' foreheads, not the men's: fixed",
+   "Church disdain sentence narrowed to Birren's wording (Christianity)",
+   "Birren amulet list, Egyptian amulets, Balfour-Paul evil eye, Pastoureau black verified"
+  ]
+ }
+}

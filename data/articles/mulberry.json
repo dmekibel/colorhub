@@ -27,12 +27,12 @@
   {
    "id": "cloth",
    "title": "In the dye trade",
-   "body": "In the cloth trade the word named a dyed result. Greenfield notes that fine woolens called scarlet were sometimes dyed other colors, producing mulberrys, grays, blacks and even greens, and that in some places these were still sold as scarlets [7]. Color words in the cloth trade named a material and a quality as much as a hue [7].\n\nBalfour-Paul counts mulberries among the medieval dyer's results when woad was paired with madder, kermes or even a lichen purple, alongside purples, pinks, violets and scarlets [8]. In other words a mulberry was a blue-over-red color, which fits a purplish red [8]. Compare [[madder]], the red half of that pair, and [[crimson]] and [[scarlet]], the other reds the trade named for their dyes [7][8]."
+   "body": "In the cloth trade the word named a dyed result. Greenfield notes that fine woolens called scarlet were sometimes dyed other colors, producing mulberrys, grays, blacks and even greens, and that in some places these were still sold as scarlets [7]. Color words in the cloth trade named a material and a quality as much as a hue [7].\n\nBalfour-Paul counts mulberries among the medieval dyer's results when woad was paired with madder, kermes or even a lichen purple, alongside purples, pinks, violets and scarlets [8]. Woad is blue and madder and kermes are red, so these mixed dyes sit between red and violet, which fits a purplish red [8]. Compare [[madder]], the red half of that pair, and [[crimson]] and [[scarlet]], the other reds the trade named for their dyes [7][8]."
   },
   {
    "id": "tree",
    "title": "The tree and the silk",
-   "body": "The color comes from the fruit, but the tree has its own history. Silkworms feed on the leaves of the white mulberry, *Morus alba*, and can eat little else [9]. James VI and I wanted an English silk industry, and in 1607 owners of large estates were told to plant ten thousand mulberry trees each; a four-acre garden was planted where Buckingham Palace stands today, tended by the King's Mulberry Men [10]. Finlay reports that the king was wrongly advised, because most of the trees sent from France were black mulberries, and silkworms do not like their leaves [10].\n\nAncient story gives the fruit a color too. As Finlay retells Ovid, the lovers Pyramus and Thisbe die under a mulberry tree, and their blood turns its white fruit red [11]. It is a poet's tale, not botany. See the [[flower:mulberry|mulberry tree]] for the plant itself."
+   "body": "The color comes from the fruit, but the tree has its own history. Silkworms feed on the leaves of the white mulberry, *Morus alba*, and the leaves of that tree are about the only food they can eat without getting sick [9]. James VI and I wanted an English silk industry, and in 1607 owners of large estates were told to plant ten thousand mulberry trees each; a four-acre garden was planted where Buckingham Palace stands today, tended by the King's Mulberry Men [10]. Finlay reports that the king was wrongly advised, because most of the trees sent from France were black mulberries, and silkworms do not like their leaves [10].\n\nAncient story gives the fruit a color too. As Finlay retells Ovid, the lovers Pyramus and Thisbe die under a mulberry tree, and their blood turns its white fruit red [11]. It is a poet's tale, not botany. See the [[flower:mulberry|mulberry tree]] for the plant itself."
   },
   {
    "id": "confusion",
@@ -232,15 +232,14 @@
   "Murrey, an old English color word, is just \"mulberry\" cut short: a dark purplish red.",
   "\"Mulberry yellow\" was a real dye name, and it points to fustic, not to the fruit."
  ],
- "words": 824,
+ "words": 845,
  "status": "checked",
  "checked": {
-  "by": "L7 self-check",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Books treat mulberry mostly in passing (dictionary entries, heraldry, trade lists); no book gives a history of the color itself.",
-   "Swatch is a bright magenta; old murrey was darker. Said in the article.",
-   "Ovid tale is Finlay's retelling, hedged."
+   "Softened inference about blue-over-red dyeing",
+   "Silkworm diet wording matched to Finlay"
   ]
  }
 }
