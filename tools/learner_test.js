@@ -33,12 +33,14 @@ const DAY = 864e5, NOW = Date.now();
 
 // ---------- 1. migrateState keeps every unknown key, adds S.learn, never downgrades a newer save ----------
 {
-  const ctx = vm.createContext({ Math, Object, Array, JSON, Date, String, Number });
+  const ctx = vm.createContext({ Math, Object, Array, JSON, Date, String, Number, Map });
+  vm.runInContext("const ALL = [{ id: 'u1:Teal', n: 'Teal', h: '#008080' }];", ctx);   // the v3 step backfills unit cards from ALL
   vm.runInContext(slice("const KEY = ", "let S;"), ctx);
   const old = { v: 1, placed: { at: "2026-09-01" }, cards: { "u1:Teal": { b: 2, due: "2026-10-09" } }, someFutureKey: { keep: [1, 2] }, hm: { zoom: 1.4 }, palettes: [{ cols: ["#112233"] }] };
   ctx.__d = JSON.parse(JSON.stringify(old));
   const s = run(ctx, "migrateState(__d)");
-  ok(s.v === 2, "migrate: v1 -> v2");
+  ok(s.v === 3, "migrate: v1 -> current");
+  ok(s.cards["u1:Teal"].n === "Teal" && s.cards["u1:Teal"].h === "#008080", "migrate: v3 backfills a unit card's name and hex");
   ok(s.someFutureKey && s.someFutureKey.keep.length === 2, "migrate: an unknown key survives");
   ok(s.hm && s.hm.zoom === 1.4, "migrate: other lanes' keys survive");
   ok(s.cards["u1:Teal"].b === 2, "migrate: cards untouched");
