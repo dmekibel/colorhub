@@ -537,6 +537,7 @@ function glPage(i, d, fromHex) {
     <div class="palette" data-glswatches></div>
     <div class="pal-names" data-glrows></div>
     <p class="fine">Computed by ColorHub, not by the museum: colors found in its small photo, each sized by its share of the picture and given the nearest of 1,000 named colors. Screen approximations; old varnish and the photograph shift color.</p>
+    <div data-awan></div>
     <div class="sec-head gl-sim-h"><b>Similar palettes</b><span>by color, not subject</span></div>
     <div class="gl-rail" data-glsim></div>
     <section class="srcs"><h3>Image and data</h3><ul><li>${d.rec ? `<a href="${esc(d.rec)}" target="_blank" rel="noopener">${esc(src.name)}</a>` : esc(src.name)}${src.credit ? ` · ${esc(src.credit)}` : ""}</li><li>Palette and color names computed by ColorHub from the museum's image</li></ul></section>
@@ -560,8 +561,10 @@ function glPage(i, d, fromHex) {
       const nm = near ? nameOf(pal[near.i].h) : null;
       arrive.hidden = false; arrive.textContent = nm ? `No close swatch; the nearest is ${nm.text}, ${pctDiff(near.de)}.` : "No close swatch in this palette.";
     }
+    if (el._awPal) el._awPal(pal);   // the Analysis readings follow the 3/6/12/20 size (js/artwiki.js)
   };
   drawPalette();
+  if (typeof awPaintingHook === "function") awPaintingHook(el, i, d, { pool, curPal });
   if (pool.length) el.querySelector("[data-glsizes]").onclick = e => {
     const b = e.target.closest("[data-glk]"); if (!b) return;
     curK = +b.dataset.glk;

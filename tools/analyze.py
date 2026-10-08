@@ -667,6 +667,28 @@ def main():
         corpus = corpus[:args.limit]
     print(f"{len(corpus)} paintings", flush=True)
 
+    # Movements beyond the AIC/CMA rows' own (tools/wikidata_artists.py -> data/artists/movements-wd.json):
+    # tier 1 = Wikidata records the movement for the painting itself; tier 2 = the painter's single recorded
+    # movement. tier 0 = the museum's own. A row keeps its museum movement when it has one.
+    mv_tier = {}
+    mvwd = ROOT / "data" / "artists" / "movements-wd.json"
+    if mvwd.exists():
+        wd = json.loads(mvwd.read_text())
+        for x in corpus:
+            if x.get("mv"):
+                mv_tier[x["id"]] = 0
+                continue
+            m = wd["tier1"].get(x["id"])
+            if m:
+                x["mv"], mv_tier[x["id"]] = m, 1
+                continue
+            m = wd["tier2"].get(x["id"])
+            if m:
+                x["mv"], mv_tier[x["id"]] = m, 2
+        print(f"movements: {sum(1 for t in mv_tier.values() if t == 0)} museum, "
+              f"{sum(1 for t in mv_tier.values() if t == 1)} Wikidata painting, "
+              f"{sum(1 for t in mv_tier.values() if t == 2)} via the painter", flush=True)
+
     print("loading pools...", flush=True)
     pools, fallback_flags, n_fallback = load_pools(raw_dir, corpus)
     print(f"{n_fallback} paintings fell back to the 6-color corpus palette (no cached pool image)", flush=True)
@@ -988,6 +1010,11 @@ def main():
         bySource=group_block(source_idx, MIN_N["source"], lambda k: GAL.SOURCES.get(k, {}).get("short", k)),
         byMovement=group_block(movement_idx, MIN_N["movement"]),
     )
+    # how each movement's paintings were tagged: by the museum (0), by Wikidata on the painting (1), or only
+    # through the painter's recorded movement (2). The UI says which, so the page never overstates.
+    for key, g in groups_out["byMovement"].items():
+        tiers = Counter(mv_tier.get(corpus[i]["id"], 0) for i in movement_idx[key])
+        g["tiers"] = [tiers.get(0, 0), tiers.get(1, 0), tiers.get(2, 0)]
 
     # time trend: mean Lmean / vivid / warmFrac by century, for the index-level overview
     century_idx = defaultdict(list)
