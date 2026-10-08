@@ -453,7 +453,7 @@ Explore is unmistakably ColorHub because every screen is led by one great image 
 
 ## 14. Night Gallery: tokens, components and icons (built 2026-10-08)
 
-David chose direction A, Night Gallery (design/VISUAL-DIRECTION.md). Where that file and this one disagree on a visual token, VISUAL-DIRECTION.md wins: §6's radii, §3's surfaces and §13's "mono only on numbers" are replaced by what follows. The tokens live in one place, the COMPONENT TOKENS block in `css/menus2.css`.
+David chose direction A, Night Gallery (design/VISUAL-DIRECTION.md). Where that file and this one disagree on a visual token, VISUAL-DIRECTION.md wins: §6's radii, §3's surfaces and §13's "mono only on numbers" are replaced by what follows. The tokens live in one place, the COMPONENT TOKENS block in `css/menus2.css` (the older names `--surface-1..3`, `--r-1..3` and `--rule-2` follow them). The screen-by-screen conversion lives in `css/ng.css`, loaded last and grouped by screen. Add a new screen's overrides there. Don't add them to the screen's own file.
 
 **Tokens**
 - Surfaces: `--ground` #0E0D0B, `--s1` #171512 (sheets, panels, row groups), `--s2` #201E1A (tiles, chips, corner buttons), `--s3` #2B2823 (raised = selected or pressed). Edges: `--line` (.10) and `--line-2` (.22).
@@ -464,7 +464,8 @@ David chose direction A, Night Gallery (design/VISUAL-DIRECTION.md). Where that 
 
 **Components**
 - *Corner button*: a 56 pt circle at `--s2` with a `--line-2` edge. When open, it shows ✕ on `--s3`.
-- *Menu panel*: both corners open it (js/core.js toggleStem, js/home.js doMenu; `.rooms-stem.mn-panel`). It's a floating `--s1` panel inset 12 above its corner, radius 28, with a serif title, one italic note and a 3-column grid of 108 pt tiles. Each tile has its picture top-left and its name and note bottom-left. The current room is raised, ringed and dotted. On Home, Colors is the wide tile and Search is a field along the bottom. Scrim tap, Escape and Back close it.
+- *Corner stacks*: both corners open a straight vertical stack up their side (js/core.js toggleStem, js/home.js doMenu; `.rooms-stem`). David chose this over a tile panel on 2026-10-08. Each capsule is a solid `--s2` pill, 56 pt tall, with a `--line-2` edge. Its picture sits centered over the corner, and its serif name and Geist note are on the inner side. The room you're in is raised, ringed and dotted. The map's stack holds Search and Colors. The scrim leaves a clear disc over the open corner, so the ✕ is never dimmed. Scrim tap, Escape and Back close it. Every sheet or stack close calls `cornersBack()`, so a pan fade never outlives it.
+- *Sliders and choices*: every `<input type=range>` gets the Night Gallery track. `ngRange` in js/core.js keeps `--ngp` filled to the thumb. Radio choices (`.opt`) are 24 px discs, and checkboxes are 24 px squares. Both turn `--good` when on.
 - *Rows* (`.mn-group`/`.mn-row`): a group is one `--s1` card with 56 pt rows and inset hairlines. A row has a 32 px leading disc, a serif name, a Geist sub-label, a value on the right, and a chevron only when it navigates.
 - *Segmented control*: a pill track. The chosen segment is a raised, ringed pill.
 - *Tiles* (arrangement and Look pictures, stage rungs, families): `--s2`, radius 18. Selected: raised, ringed and dotted.
