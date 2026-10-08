@@ -242,6 +242,156 @@ def clean_jp_meaning(meaning):
     return m[0].upper() + m[1:].lower()
 
 
+MODS = {"light", "pale", "dark", "deep", "dusky", "bright", "dusty", "dull", "vivid", "neon", "electric",
+        "medium", "soft", "muted", "pastel", "greyish", "grayish", "reddish", "yellowish", "greenish", "bluish",
+        "purplish", "orangish", "pinkish", "brownish", "very", "rich", "warm", "cool", "faded"}
+HUE_SUFFIX = {"green", "blue", "red", "pink", "purple", "yellow", "orange", "brown", "grey", "gray", "violet"}
+
+
+def slug(s):
+    return re.sub(r"[^a-z0-9]+", "-", re.sub(r"[\u0300-\u036f]", "", __import__("unicodedata").normalize("NFKD", str(s)).lower())).strip("-")
+
+
+def apply_quality_fixes(out, ov):
+    """tools/core-name-overrides.json sections (all optional):
+       _fixes:   {old_hex: {h?: new_hex, n?: new_name, move_old_to?: name, why: str}} -- a wrong hex or a name that
+                 contradicts its hex. A hex fix re-homes any synonym whose own library hex is >5 dE from the new
+                 hex onto the nearest other entry (the synonyms described the old color, not the new one).
+                 `drop_also: [names]` removes synonyms from just this entry.
+       _typos:   {wrong: right} applied word-wise to every primary and synonym; a synonym that then equals another
+                 entry's primary is dropped.
+       _drop_also: [names] garbage synonyms removed outright.
+    Then flags compound/modifier names: `compound: true` + `base: <slug of the root color>`."""
+    fixes = ov.get("_fixes", {})
+    typos = {k.lower(): v for k, v in ov.get("_typos", {}).items()}
+    drop = {LIB.key(x) for x in ov.get("_drop_also", [])}
+    by_hex = {e["h"].upper(): e for e in out}
+    lib = {}
+    for le in LIB.load_library():
+        lib.setdefault(LIB.key(le["n"]), le)
+    labs = {e["h"]: LIB.labs([e["h"]])[0] for e in out}
+    log = []
+
+    def nearest_other(hexv, exclude):
+        lab = LIB.labs([hexv])[0]
+        best, bd = None, 1e9
+        for e in out:
+            if e is exclude:
+                continue
+            d = float(LIB.de2000(lab[None], labs[e["h"]][None])[0][0])
+            if d < bd:
+                best, bd = e, d
+        return best
+
+    for old_hex, f in fixes.items():
+        e = by_hex.get(old_hex.upper())
+        if not e:
+            print("FIX NOT APPLIED (hex not found):", old_hex)
+            continue
+        before = (e["n"], e["h"])
+        old_name = e["n"]
+        if f.get("h"):
+            e["h"] = f["h"].upper()
+            labs[e["h"]] = LIB.labs([e["h"]])[0]
+            keep, move = [], []
+            for a in e.get("also", []):
+                le = lib.get(LIB.key(a))
+                if le and float(LIB.de2000(labs[e["h"]][None], LIB.labs([le["h"]]))[0][0]) > 5:
+                    move.append((a, le["h"]))
+                else:
+                    keep.append(a)
+            for a, ah in move:
+                tgt = nearest_other(ah, e)
+                tgt["also"] = (tgt.get("also") or []) + [a]
+            e["also"] = keep
+            if not e["also"]:
+                e.pop("also")
+        if f.get("drop_also"):
+            e["also"] = [a for a in (e.get("also") or []) if LIB.key(a) not in {LIB.key(x) for x in f["drop_also"]}]
+            if not e["also"]:
+                e.pop("also")
+        if f.get("n") and f["n"] != e["n"]:
+            e["n"] = f["n"]
+            tgt = next((x for x in out if x["n"].lower() == f.get("move_old_to", "").lower()), None) if f.get("move_old_to") else None
+            if tgt is not None:
+                tgt["also"] = (tgt.get("also") or []) + [old_name]
+            elif not f.get("drop_old"):
+                e["also"] = [old_name] + [a for a in (e.get("also") or []) if a.lower() != e["n"].lower()]
+        log.append((before[0], before[1], e["n"], e["h"], f.get("why", "")))
+
+    def fix_typos(name):
+        def sub(m):
+            w = m.group(0)
+            r = typos.get(w.lower())
+            if not r:
+                return w
+            return r[0].upper() + r[1:] if w[0].isupper() else r
+        return re.sub(r"[A-Za-z]+", sub, name)
+
+    prim_keys = {}
+    for e in out:
+        e["n"] = fix_typos(e["n"])
+        prim_keys[LIB.key(e["n"])] = e
+    for e in out:
+        if e.get("also"):
+            seen, res = set(), []
+            for a in e["also"]:
+                if LIB.key(a) in drop:
+                    continue
+                a2 = fix_typos(a)
+                k = LIB.key(a2)
+                other = prim_keys.get(k)
+                if (other is not None and other is not e) or k == LIB.key(e["n"]) or k in seen:
+                    continue
+                seen.add(k)
+                res.append(a2)
+            if res:
+                e["also"] = res[:ALSO_CAP]
+            else:
+                e.pop("also")
+
+    # compound / modifier flags: `base` is the slug of the root color the name varies (Light Seafoam -> seafoam)
+    prim_keys = {LIB.key(e["n"]): e for e in out}
+    alias_keys = {}
+    for e in out:
+        for a in e.get("also", []):
+            alias_keys.setdefault(LIB.key(a), e)
+
+    def base_of(name):
+        toks = re.split(r"[\s-]+", name.strip())
+        if len(toks) >= 2 and toks[0].lower() in MODS:
+            rest = LIB.key(" ".join(toks[1:]))
+            b = prim_keys.get(rest) or alias_keys.get(rest)   # "Dark Fuchsia" -> Magenta (Fuchsia is its synonym)
+            if b is not None and b["n"] != name:
+                return b
+        if len(toks) >= 2 and toks[-1].lower() in HUE_SUFFIX and toks[-2].lower() not in HUE_SUFFIX:
+            b = prim_keys.get(LIB.key(" ".join(toks[:-1])))
+            if b is not None and b["n"] != name:
+                return b
+        return None
+
+    n_comp = 0
+    for e in out:
+        e.pop("compound", None)
+        e.pop("base", None)
+        b = base_of(e["n"])
+        hops = 0
+        while b is not None and hops < 4:
+            nb = base_of(b["n"])
+            if nb is None:
+                break
+            b, hops = nb, hops + 1
+        if b is not None:
+            e["compound"] = True
+            e["base"] = slug(b["n"])
+            n_comp += 1
+    print(f"\nQuality pass: {len(log)} fixes applied, {n_comp} compound names flagged")
+    if log:
+        print("\nFixes (before -> after):")
+        for bn, bh, an, ah, why in log:
+            print(f"  {bn:24s} {bh}  ->  {an:24s} {ah}  {why}")
+
+
 def main():
     report = "--report" in sys.argv[1:]
     app_rows = LIB.load_app()  # [{n, h, src}], curriculum order: basics, then every unit's colors in order
@@ -370,7 +520,7 @@ def main():
 
     out = []
     for i, c in enumerate(final):
-        also = sorted(set(a[0] for a in c["also"]) - {c["n"]}, key=lambda n: next((a[2] for a in c["also"] if a[0] == n), 99))[:ALSO_CAP]
+        also = sorted(set(a[0] for a in c["also"]) - {c["n"]}, key=lambda n: (next((a[2] for a in c["also"] if a[0] == n), 99), n))[:ALSO_CAP]
         entry = {"n": c["n"], "h": c["h"], "src": c["src"], "rank": i}
         if also:
             entry["also"] = also
@@ -385,6 +535,9 @@ def main():
         if nn and nn != e["n"]:
             e["also"] = [e["n"]] + [a for a in (e.get("also") or []) if a.lower() != nn.lower()][:9]
             e["n"] = nn
+
+    # data-quality pass (L15, 2026-10-08): hex fixes, typos, bad synonyms, compound flags
+    apply_quality_fixes(out, ov)
 
     # sanity check: no two primaries are now identical
     seen_names = {}
