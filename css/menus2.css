@@ -243,3 +243,40 @@ html.booth .toast{background:var(--booth-2);box-shadow:none;border-color:var(--b
    below its edge (a solid offset shadow is never clipped by the sheet's overflow), so no band can show. */
 .sheet{box-shadow:0 -16px 48px rgba(0,0,0,.45),0 160px 0 0 var(--surface-1)}
 .room-sheet{box-shadow:0 160px 0 0 var(--ground)}
+
+/* ============================================================ COMPONENT TOKENS (2026-10-08, one place for the identity pass)
+   David: "Selecting a button turns it white — ugly; and the button shape." A selected control never flips to a paper
+   fill. It keeps its shape and gets a light tint, a crisp 1.5 px ring and full ink; unselected text is soft. Shapes go
+   by size: small chips are pills, controls 44-60 px tall are 12 px squircles, tiles 16 px, sheets 24 px. Every target
+   is at least 44 px tall; body type 15 px or more, captions 13 px or more. Documented in DESIGN-SYSTEM.md §14. */
+:root{
+  --ctl-fill:var(--surface-2); --ctl-fill-press:var(--surface-3); --ctl-ink:var(--soft);
+  --sel-fill:rgba(236,232,223,.09); --sel-ring:inset 0 0 0 1.5px rgba(236,232,223,.82); --sel-ink:var(--ink);
+  --r-chip:var(--r-pill); --r-ctl:12px; --r-tile:16px; --r-sheet:var(--r-3);
+  --tap:44px; --type-body:15px; --type-cap:13px;
+}
+/* segmented controls: one opaque track, the chosen segment a tinted, ringed thumb */
+.seg button.on,.seg-t.on,.xb-seg button.on,.pt-seg button.on,.pm-view button.on,.cx-ns button.on,
+.hm-seg button.on,.oo-pk-seg button.on,.oo-pk-ch button.on,.xb-cents button.on{
+  background:var(--sel-fill);color:var(--sel-ink);box-shadow:var(--sel-ring);border-color:transparent}
+.seg button,.seg-t{min-height:var(--tap)}
+/* chips and option pills */
+.xb-fc.on,.xb-presets button.on,.gl-chips button.on,.pt-chips button.on,.pt-ar-map.on,.chd-eras button.on,.tz-opts button.on,
+.tw-chips button.on,.lx-bet-b.on,.screen.learnit .lx-bet-b.on,.sq-key.on,.ms-mode.on,.rc-pal-tabs button.on,.xb-optrow .xb-opt.on,.lr-tick.on{
+  background:var(--sel-fill);color:var(--sel-ink);box-shadow:var(--sel-ring);border-color:transparent}
+/* tiles with a title and a caption */
+.hm-rung.on,.hm-fam.on,.ms-lv.on,.ms-set.on,.snd-sw.on,.cx-chip.on{background:var(--sel-fill);box-shadow:var(--sel-ring);border-color:transparent}
+.hm-rung.on b,.hm-fam.on b,.ms-lv.on b,.ms-set.on b,.snd-sw.on{color:var(--sel-ink)}
+.hm-rung.on small,.ms-lv.on small,.ms-set.on small,.snd-sw.on span,.hm-fam.on em{color:var(--soft)}
+.hm-seg-n button.on{background:var(--sel-fill);color:var(--sel-ink);box-shadow:var(--sel-ring)}
+.hm-seg-n button.on em{color:var(--soft);opacity:1}
+/* shapes by size */
+.hm-seg button,.hm-seg-n button,.hm-rung,.hm-fam,.ms-lv,.ms-set,.ms-mode{border-radius:var(--r-ctl)}
+.hm-seg button{min-height:var(--tap);height:auto}
+.cx-chip{border-radius:var(--r-ctl);border-color:transparent;background:var(--ctl-fill)}
+.cx-chip small{font:400 var(--type-cap)/1 var(--sans);letter-spacing:0;color:var(--soft)}
+/* the open corner (✕) is a quiet solid button, not a white disc */
+.corner.on{background:var(--surface-3);color:var(--ink);border-color:rgba(236,232,223,.22)}
+/* the iOS-like switch: green track, white thumb, a haptic in JS */
+.mn-sw.on{background:#4E9A6A}
+.mn-sw i{box-shadow:0 2px 4px rgba(0,0,0,.3)}
