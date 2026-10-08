@@ -29,14 +29,31 @@ function openTappedColor(hex) {
   const entry = (CORE_NAMES || coreFallback()).find(e => e.n.toLowerCase() === nm.n.toLowerCase()) || { n: nm.n, h: nm.h, src: ["app"], rank: null };
   namePage(entry, true, tapped);
 }
+// Double-tap to like (Instagram-style, David 2026-10-08): an ancestor marked [data-dbltap] wants its swatches to
+// wait a beat for a second tap before opening — the first tap of a pair is swallowed, the second fires a
+// "swatch-dbltap" event (bubbles) instead of opening the page, for the page itself to catch and act on (a heart
+// burst, a keep). A single tap still opens, just ~280ms later than elsewhere, only inside such an ancestor.
+const SW_DBL_MS = 300, SW_OPEN_DELAY = 280, SW_LAST = new Map(), SW_TIMER = new Map();
+function openNow(hex) {
+  if (typeof CORE_NAMES !== "undefined" && !CORE_NAMES) loadCoreNames().then(() => openTappedColor(hex), () => openTappedColor(hex));
+  else openTappedColor(hex);
+}
 document.addEventListener("click", e => {
   const sw = e.target.closest("[data-swatch]");
   if (!sw || e.target.closest("[data-node],[data-nb],a")) return;
   e.stopPropagation(); e.preventDefault();
-  // wait for the ~1,000-word list (a moment, once) so the first tap already names the color precisely
   const hex = sw.dataset.swatch;
-  if (typeof CORE_NAMES !== "undefined" && !CORE_NAMES) loadCoreNames().then(() => openTappedColor(hex), () => openTappedColor(hex));
-  else openTappedColor(hex);
+  const dbl = sw.closest("[data-dbltap]");
+  if (!dbl) return openNow(hex);
+  const last = SW_LAST.get(sw) || 0, now = performance.now();
+  if (now - last < SW_DBL_MS) {
+    SW_LAST.delete(sw);
+    clearTimeout(SW_TIMER.get(sw)); SW_TIMER.delete(sw);
+    sw.dispatchEvent(new CustomEvent("swatch-dbltap", { bubbles: true, detail: { hex, x: e.clientX, y: e.clientY } }));
+    return;
+  }
+  SW_LAST.set(sw, now);
+  SW_TIMER.set(sw, setTimeout(() => { SW_LAST.delete(sw); SW_TIMER.delete(sw); openNow(hex); }, SW_OPEN_DELAY));
 }, true);
 
 // The color link sheet (DESIGN-SYSTEM.md §12 "The color sheet"): a hero, the name, a row of near-name
