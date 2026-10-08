@@ -156,7 +156,7 @@ function awSearchHTML(s, again) {
 function awPainter(slug, push = true) {
   if (!AW.ready || !AW.P.has(slug)) return awWait(awPainter, [slug, push], () => awPainterLoad(slug));
   const m = AW.meta.a[slug], { A, P } = AW.P.get(slug);
-  if (!m) { toast("No data for this painter"); return go(xFallbackTab()); }
+  if (!m) { toast("No data for this painter"); return xToOrigin(); }
   if (push) XSTACK.push("aw:painter:" + slug);
   const n = A.n, small = n < 10, fileUrl = m.img ? "https://commons.wikimedia.org/wiki/Special:FilePath/" + encodeURIComponent(m.img) + "?width=320" : "";
   const dates = m.b != null ? `${awY(m.b)}–${m.d != null ? awY(m.d) : ""}` : (m.y0 ? `works dated ${m.y0}–${m.y1}` : "");
@@ -499,7 +499,7 @@ function awGroup(kind, key, push = true) {
   if (!AW.ready) return awWait(awGroup, [kind, key, push]);
   const gs = kind === "movement" ? AW.grp.byMovement : kind === "decade" ? AW.grp.byDecade : AW.grp.byCountry, ges = kind === "movement" ? AW.ge.byMovement : kind === "decade" ? AW.ge.byDecade : AW.ge.byCountry;
   const g = gs[String(key)], x = ges[String(key)];
-  if (!g || !x) { toast("No page for that"); return go(xFallbackTab()); }
+  if (!g || !x) { toast("No page for that"); return xToOrigin(); }
   if (push) XSTACK.push("aw:group:" + kind + ":" + key);
   const title = kind === "decade" ? awDec(key) : String(key), n = g.n;
   let dek = `${n.toLocaleString()} paintings, as photographed`;

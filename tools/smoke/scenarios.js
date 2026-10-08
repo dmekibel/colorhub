@@ -920,3 +920,141 @@ scenario("pages", "a fresh load of #/painter/<slug> opens that painter, not Home
   t.expect(!t.$(".hm canvas"), "a direct painter address landed on Home");
   t.expect(t.w.location.hash === "#/painter/abraham-bloemaert", `the address changed to ${t.w.location.hash}`);
 });
+
+// ================================================================== THE TRAIL (js/trail.js: one Back for everything, the map glyph)
+const TRL = {
+  // a placed learner (so the map, not the welcome, is the floor), with nothing else in the save
+  placed(t) { try { localStorage.clear(); localStorage.setItem("colorhub-v1", JSON.stringify({ v: 3, placed: { tier: 1, at: "2026-10-01" }, tlHint: 1 })); } catch (e) {} },
+  async open(t, hash) { TRL.placed(t); await t.open(hash, { settle: 600, keepState: true }); },
+  hash: t => decodeURIComponent(t.w.location.hash),
+  depth: t => t.ev("XSTACK.length"),
+  screenBack: t => t.$("#app .screen [data-back]"),
+  async atHash(t, re, msg) { return t.waitFor(() => re.test(TRL.hash(t)) && t.$("#app .screen [data-back]") && !t.$(".screen.waiting"), 20000, msg); },
+  async tap(t, sel, msg) { const e = await t.waitFor(() => t.$$(sel).find(x => x.getBoundingClientRect().width), 20000, msg); await t.click(e, { wait: 500 }); return e; },
+  // color (cobalt) > a painting with it > its painter > another of their paintings > a color in it > a gem near that color
+  async chain(t) {
+    const seen = [];
+    const note = () => seen.push({ hash: TRL.hash(t), y: Math.round(t.w.scrollY), n: TRL.depth(t) });
+    await TRL.atHash(t, /^#\/color\/cobalt/, "the cobalt page");
+    // 2. a painting from its In paintings rail (the tap scrolls the rail into view, so the page's scroll is remembered)
+    const sec = await t.waitFor("[data-glin]", 12000, "the In paintings section");
+    const fold = sec.closest("details:not([open])"); if (fold) await t.click(fold.querySelector("summary"), { wait: 300 });   // the shelf may sit in a folded section
+    sec.scrollIntoView(); t.w.dispatchEvent(new t.w.Event("scroll")); await t.sleep(300);
+    const pin = await t.waitFor(() => { sec.scrollIntoView(); t.w.dispatchEvent(new t.w.Event("scroll")); return t.$$("[data-pt-rail] .gl-pin, [data-pt-rail] .pin, [data-glin] [data-gi]")[0]; }, 25000, "a painting in cobalt's In paintings rail");
+    pin.scrollIntoView({ block: "center" }); await t.sleep(200);
+    note(); await t.click(pin, { wait: 600 });
+    await TRL.atHash(t, /^#\/gallery\/\d+/, "the painting page");
+    // 3. its painter
+    const painter = await t.waitFor(() => t.$("#app .screen [data-awpainter]"), 20000, "the painter link on the painting");
+    note(); await t.click(painter, { wait: 600 });
+    await TRL.atHash(t, /^#\/painter\//, "the painter page");
+    // 4. another painting of theirs
+    const other = await t.waitFor(() => t.$$("#app .screen [data-gi]").find(x => +x.dataset.gi >= 0 && !seen.some(s => s.hash.includes("/gallery/" + x.dataset.gi + "?") || s.hash.endsWith("/gallery/" + x.dataset.gi))), 20000, "another painting on the painter page");
+    note(); await t.click(other, { wait: 600 });
+    await TRL.atHash(t, /^#\/gallery\/\d+/, "the second painting");
+    note();
+    // 5 + 6. a color in it whose page has a gem: try the palette's colors until one does
+    const nSw = (await t.waitFor(() => t.$$("[data-glswatches] [data-swatch]").length && t.$$("[data-glswatches] [data-swatch]"), 15000, "the painting's palette")).length;
+    let gem = null;
+    for (let i = 0; i < nSw && !gem; i++) {
+      await t.click(t.$$("[data-glswatches] [data-swatch]")[i], { wait: 600 });
+      await TRL.atHash(t, /^#\/(color|name)\//, "a color page from the palette");
+      gem = await t.waitFor(() => t.$("#app .screen [data-to^='gm:gem:']"), 2500, "a gem", 1500).catch(() => null);
+      if (!gem) { await t.click(TRL.screenBack(t), { wait: 500 }); await TRL.atHash(t, /^#\/gallery\//, "back on the second painting"); }
+    }
+    t.expect(gem, "no color in the second painting has a gem on its page");
+    seen.push({ hash: TRL.hash(t), y: 0, n: TRL.depth(t) });
+    const gf = gem.closest("details:not([open])"); if (gf) await t.click(gf.querySelector("summary"), { wait: 300 });
+    await t.click(gem, { wait: 600 });
+    await TRL.atHash(t, /^#\/gem\//, "the gem page");
+    seen.push({ hash: TRL.hash(t), y: 0, n: TRL.depth(t) });
+    return seen;
+  },
+};
+
+scenario("trail", "a 6-deep chain (color, painting, painter, painting, color, gem) backs out one step at a time", async t => {
+  await TRL.open(t, "#/color/cobalt");
+  const seen = await TRL.chain(t);
+  t.expect(seen.length === 6, `the chain is ${seen.length} deep, not 6`);
+  t.expect(TRL.depth(t) === 6, `the trail holds ${TRL.depth(t)} pages at depth 6: ${t.ev("XSTACK.join(' , ')")} // ${seen.map(s => s.hash + "@" + s.n).join(" ")}`);
+  t.expect(t.$("#app .screen [data-tl-exit]"), "the gem page has no map glyph");
+  // one step at a time: the ‹ button, then the browser's own Back (the iOS edge swipe does the same), alternating
+  for (let i = seen.length - 2; i >= 0; i--) {
+    if (i % 2) await t.click(TRL.screenBack(t), { wait: 600 });
+    else { t.w.history.back(); await t.sleep(700); }
+    await t.waitFor(() => TRL.hash(t) === seen[i].hash && !t.$(".screen.waiting"), 15000, `Back to land on ${seen[i].hash} (on ${TRL.hash(t)})`);
+    t.expect(TRL.depth(t) === i + 1, `after Back to ${seen[i].hash} the trail holds ${TRL.depth(t)}, expected ${i + 1}`);
+    if (seen[i].y > 200) { await t.sleep(400); t.check(Math.abs(t.w.scrollY - seen[i].y) < 60, `${seen[i].hash} came back at scroll ${Math.round(t.w.scrollY)}, left at ${seen[i].y}`); }
+  }
+  // the trail ran out: a page opened from an address goes back to the map
+  await t.click(TRL.screenBack(t), { wait: 700 });
+  await t.waitFor(".hm canvas", 10000, "the map after the trail ran out");
+  t.expect(!t.$(".room-sheet"), "the trail ran out into a room instead of the map");
+});
+
+scenario("trail", "long-press ‹ shows the trail; a row jumps there; the map glyph exits with the map's pan and zoom kept", async t => {
+  await TRL.open(t, "#/home");
+  const cv = await t.waitFor(".hm canvas", 12000, "the map");
+  await t.sleep(600);
+  // pan the map, so there's a position to keep
+  const r = cv.getBoundingClientRect(), o = (x, y) => ({ bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: 7, pointerType: "touch", isPrimary: true, view: t.w });
+  cv.dispatchEvent(new t.w.PointerEvent("pointerdown", o(r.width * .5, r.height * .6)));
+  for (let k = 1; k <= 6; k++) { cv.dispatchEvent(new t.w.PointerEvent("pointermove", o(r.width * .5 - k * 14, r.height * .6 - k * 10))); await t.sleep(30); }
+  cv.dispatchEvent(new t.w.PointerEvent("pointerup", o(r.width * .5 - 84, r.height * .6 - 60)));
+  await t.sleep(900);
+  // a bubble's tap is hmOpenColor (the bubble tap itself is the home group's job): a trail rooted on the map
+  t.ev("hmOpenColor(BYNAME.get('cobalt'))");
+  const seen = await TRL.chain(t);
+  const pan = JSON.stringify(t.ev("HONEY_PAN"));
+  t.expect(pan && pan !== "null", "the map has no remembered pan");
+  // long-press ‹: the trail sheet, newest first, and the release doesn't also go back
+  const back = TRL.screenBack(t), br = back.getBoundingClientRect(), bo = { bubbles: true, cancelable: true, clientX: br.left + 10, clientY: br.top + 10, pointerId: 9, pointerType: "touch", isPrimary: true, view: t.w };
+  back.dispatchEvent(new t.w.PointerEvent("pointerdown", bo));
+  await t.sleep(700);
+  t.w.dispatchEvent(new t.w.PointerEvent("pointerup", bo)); back.click();
+  await t.waitFor(".tl-sheet", 4000, "the trail sheet after a long press on ‹");
+  t.expect(/^#\/gem\//.test(TRL.hash(t)), "the long press also went back");
+  const rows = t.$$(".tl-sheet .tl-row");
+  t.expect(rows.length >= 7, `the trail sheet shows ${rows.length} rows, expected 6 pages and the map`);
+  t.expect(rows[0].classList.contains("here"), "the first row isn't where you are");
+  t.expect(t.$$(".tl-sheet .tl-row .tl-th img, .tl-sheet .tl-row .tl-th[style]").length >= 4, "the trail rows have no pictures");
+  // jump to the painter (third from the start)
+  const painterRow = t.$$(".tl-sheet [data-tl-go]").find(b => b.dataset.tlGo === "2");
+  await t.click(painterRow, { wait: 700 });
+  await t.waitFor(() => TRL.hash(t) === seen[2].hash && !t.$(".sheet"), 12000, "the painter page from its trail row");
+  t.expect(TRL.depth(t) === 3, `after the jump the trail holds ${TRL.depth(t)}, expected 3`);
+  // the map glyph: straight to the map, its pan and zoom as they were
+  await t.click("#app .screen [data-tl-exit]", { wait: 900 });
+  await t.waitFor(".hm canvas", 10000, "the map after the map glyph");
+  await t.sleep(500);
+  t.expect(TRL.depth(t) === 0, "the trail wasn't cleared by the map glyph");
+  const after = t.ev("HONEY_PAN"), before = JSON.parse(pan);
+  t.expect(after && Math.abs(after.x - before.x) < 1 && Math.abs(after.y - before.y) < 1 && after.z === before.z, `the map moved: ${pan} -> ${JSON.stringify(after)}`);
+});
+
+// fresh loads of shared addresses: each opens its page, and Back goes to the map (not a room)
+[["#/painter/abraham-bloemaert", /Bloemaert/], ["#/gallery/15146?c=0047ab", null], ["#/pair/c2412d+4f6b3a", null], ["#/look/rococo", /Rococo/], ["#/hub/source:crayola", /Crayola/i]].forEach(([hash, re]) => {
+  scenario("trail-links", `a fresh ${hash.split("/")[1].split("?")[0]} address opens it; Back goes to the map`, async t => {
+    await TRL.open(t, hash);
+    await t.waitFor(() => t.$("#app .screen [data-back]") && !t.$(".screen.waiting") && t.$("#app").innerText.length > 120, 20000, `the page at ${hash}`);
+    t.expect(TRL.hash(t) === decodeURIComponent(hash), `the address changed to ${TRL.hash(t)}`);
+    if (re) t.expect(re.test(t.$("#app").innerText), `${hash} doesn't show what it names`);
+    t.expect(t.$("#app .screen [data-tl-exit]"), `${hash} has no map glyph`);
+    await t.click(TRL.screenBack(t), { wait: 700 });
+    await t.waitFor(".hm canvas", 10000, `the map after Back from ${hash}`);
+  });
+});
+
+scenario("trail-links", "the Museum: its own address, the old one still works, and a part's trail runs out back into it", async t => {
+  await TRL.open(t, "#/museum");
+  await t.waitFor(".xp-pager", 15000, "the Museum's covers at #/museum");
+  t.expect(/^Museum/.test(t.d.title), `the title is "${t.d.title}"`);
+  await TRL.open(t, "#/explore/ideas");
+  await t.waitFor(".x-feed", 15000, "Ideas at the old #/explore/ideas");
+  t.expect(TRL.hash(t) === "#/museum/ideas", `the old address became ${TRL.hash(t)}`);
+  const pin = await t.waitFor(() => t.$$(".x-feed [data-pin]")[0], 10000, "a pin in Ideas");
+  await t.click(pin, { wait: 600 });
+  await t.waitFor(() => t.$(".screen[data-tl] [data-back]"), 10000, "a closeup on the trail");
+  await t.click(TRL.screenBack(t), { wait: 700 });
+  await t.waitFor(".x-feed", 10000, "Ideas again after the trail ran out (not the map, not another room)");
+});

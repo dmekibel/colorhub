@@ -33,10 +33,10 @@ This is the most important section. It replaces the current mix: the Today tab t
 ### Places and names
 | Place | What it is | Route | Name on screen |
 |---|---|---|---|
-| **Home** | The full-screen honeycomb, always underneath everything | `#/` | No label. It's the floor. |
+| **Explore** (the map) | The full-screen honeycomb, always underneath everything | `#/home` | "Explore · Every color" on the stem; no label on the floor itself. (Was "Home" until 2026-10-08.) |
 | **Learn** | Today (what's due, Today's three), then the path, then your collection | `#/learn` (`#/today` opens Learn at Today) | "Learn". Its first block is about today, with no "Today" heading needed. |
 | **Train** | The eye gym: stations, levels, check-ins | `#/train` | "Train" |
-| **Explore** | Four full-bleed covers: For you, Art, Ideas, World | `#/explore[/art|ideas|world]` | "Explore" |
+| **Museum** | Four full-bleed covers: For you, Art, Ideas, World | `#/museum[/art|ideas|world]` (old `#/explore…` still works) | "Museum" (was "Explore" until 2026-10-08) |
 | **Studio** | Making: the gamut wheel, the camera, photo palettes, taste | `#/studio` | "Studio" |
 
 ### The pieces

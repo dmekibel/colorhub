@@ -363,6 +363,7 @@ function show(html, cls = "", tab = null) {
   document.body.classList.remove("scrolled");
   const el = app.querySelector(".screen");
   const mb = tab && el.querySelector("[data-menu]"); if (mb) mb.onclick = () => menu();
+  if (typeof tlNote === "function") tlNote(el, tab, backNav);   // the one trail, the map glyph, the pull-down (js/trail.js)
   el.querySelectorAll("img").forEach(i => { if (i.complete && i.naturalWidth) i.classList.add("ld"); });
   requestAnimationFrame(() => { runMorph(el); reveal(el); countUp(el); });
   return el;
@@ -370,7 +371,7 @@ function show(html, cls = "", tab = null) {
 // Every tab's home opens with the same line: the brand on the left, the tab's own actions and the menu (⋯) on the right.
 // Kept for the rooms that still build their own header this way (Train, Explore, Studio); Learn builds the new
 // Room header (.room-head) directly. The brand is still a quick way home, same as the Rooms corner's Home bubble.
-const tabHead = (acts = "") => `<header class="bar"><button class="brand" data-hm-brand aria-label="Back to the honeycomb">${LOGO}<span>ColorHub</span></button><span class="bar-r">${acts}<button class="icon-btn" data-menu aria-label="Settings and more">${ICON.dots}</button></span></header>`;
+const tabHead = (acts = "") => `<header class="bar"><button class="brand" data-hm-brand aria-label="Back to the map">${LOGO}<span>ColorHub</span></button><span class="bar-r">${acts}<button class="icon-btn" data-menu aria-label="Settings and more">${ICON.dots}</button></span></header>`;
 // Every inner screen: back (or close, for a task) on the left, the title in the middle, an optional action on the right.
 const navTop = (title = "", o = {}) => `<header class="nav-top"><button class="icon-btn" ${o.close ? `data-close aria-label="Close">${ICON.x}` : `data-back aria-label="Back">${ICON.back}`}</button><span class="nav-title">${title}</span><span class="nav-r">${o.right || ""}</span></header>`;
 
@@ -379,7 +380,12 @@ const navTop = (title = "", o = {}) => `<header class="nav-top"><button class="i
 // over it. No tab bar anywhere. The left corner — present on the honeycomb and inside every room, always the
 // same 56px spot — raises "the stem": Learn / Train / Explore / Studio (plus Home, at the foot, inside a room).
 // ================================================================
-const ROOMS_LIST = [["learn", "Learn"], ["gym", "Train"], ["explore", "Explore"], ["studio", "Studio"], ["you", "You"]];   // You: js/you.js
+// The names of places (David, 2026-10-08: "Explore and Home ... should be kind of the same thing"). The honeycomb floor
+// is the explorable map of every color, so it carries the name Explore; the room of paintings, poems, ideas and the
+// world is the Museum (its internal id stays "explore", so saves and old #/explore links keep working). One constant
+// each, so a rename is one line.
+const NAV_MAP = "Explore", NAV_MAP_NOTE = "Every color", NAV_MUSEUM = "Museum";
+const ROOMS_LIST = [["learn", "Learn"], ["gym", "Train"], ["explore", NAV_MUSEUM], ["studio", "Studio"], ["you", "You"]];   // You: js/you.js
 const ROOMS_GLYPH = sv('<circle cx="5.5" cy="18.5" r="2.4"/><circle cx="7.5" cy="11.2" r="2.4"/><circle cx="12.6" cy="6" r="2.4"/><circle cx="19.5" cy="4.6" r="2.4"/>', 24, 1.6);
 const HOME_GLYPH = sv('<path d="M12 3l7 4v10l-7 4-7-4V7z"/>', 24, 1.6);
 // a cheap, decorative stand-in for "a strip of the dimmed honeycomb" above a room (the real canvas doesn't
@@ -415,9 +421,9 @@ function roomsNote(id) {
   try {
     if (id === "learn") { const n = dueList().length, nu = !n && typeof nextUnit === "function" && nextUnit(); return n ? `${n} to recall` : nu ? `${nu.colors.length} new names` : "All caught up"; }
     if (id === "gym" && typeof todayTrain === "function") return todayTrain().what;
-    if (id === "explore") return "Browse by color";
+    if (id === "explore") return "Paintings, poems, the world";
     if (id === "studio") return "Wheel, camera, palettes";
-    if (id === "home") return "Back to the honeycomb";
+    if (id === "home") return NAV_MAP_NOTE;
     if (id === "you" && typeof ymNote === "function") return ymNote();   // js/you.js
   } catch (e) {}
   return "";
@@ -446,7 +452,7 @@ function toggleStem(cornerEl) {
   STEM_OPEN = true;
   document.body.classList.add("stem-open");
   const roomEl = document.querySelector(".room-sheet"), here = roomEl && roomEl.dataset.room;
-  const items = (roomEl ? [["home", "Home"]] : []).concat(ROOMS_LIST);
+  const items = (roomEl ? [["home", NAV_MAP]] : []).concat(ROOMS_LIST);
   const scrim = document.createElement("div");
   scrim.className = "rm-scrim";
   // a tap outside only closes: it never reaches the page underneath, and the page never scrolls or re-renders

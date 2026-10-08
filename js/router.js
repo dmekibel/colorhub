@@ -1,6 +1,7 @@
 "use strict";
 // Addresses. Every meaningful screen has a hash route, so it can be shared, bookmarked and reloaded:
-//   #/today  #/train  #/studio  #/explore  #/explore/<art|ideas|world|saved>
+//   #/today  #/train  #/studio  #/museum  #/museum/<art|ideas|world|saved>  #/home (the map)
+//   (the Museum was called Explore until 2026-10-08: every #/explore… address still opens it)
 //   (older #/explore/paintings and #/explore/poems open Art; #/explore/colors and #/explore/spectrum open
 //   the pager itself — js/explore.js dropped the "Colors" lens and merged Paintings + Poems into Art)
 //   #/color/<slug>  #/page/<id>  #/painting/<slug>  #/story/<id>     (add /more for the "More like this" closeup)
@@ -21,7 +22,7 @@
 
 const routeSlug = s => String(s).normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 const APP_BASE = () => location.origin + location.pathname.replace(/[^/]*$/, "");
-const TAB_ROUTE = { learn: ["today", "Learn"], gym: ["train", "Train"], explore: ["explore", "Explore"], studio: ["studio", "Studio"], you: ["you", "You"] };   // you: js/you.js
+const TAB_ROUTE = { learn: ["today", "Learn"], gym: ["train", "Train"], explore: ["museum", NAV_MUSEUM], studio: ["studio", "Studio"], you: ["you", "You"] };   // you: js/you.js
 const LENS_ROUTE = { art: "art", ideas: "ideas", world: "world", saved: "saved" };   // "For you" (the pager) is plain #/explore
 const LENS_TITLE = { art: "Art", ideas: "Ideas", world: "World", saved: "Saved" };
 // legacy lens tokens, from before Paintings/Poems merged into Art and Colors was dropped (links, bookmarks, S.lens left over from an old save)
@@ -75,7 +76,7 @@ function routeWrap(host, key, toRoute) {
   if (typeof orig !== "function" || orig.__routed) return;   // not defined yet (a later script), or already wrapped
   host[key] = function (...a) {
     let r = null; try { r = toRoute(...a); } catch (e) {}
-    if (r) ROUTE_NEXT = r;
+    if (r) { ROUTE_NEXT = r; if (typeof tlCallNote === "function") tlCallNote(host[key], this, a); }   // js/trail.js: how to draw it again
     try { return orig.apply(this, a); } finally { if (r) ROUTE_NEXT = null; }
   };
   host[key].__routed = true;
@@ -95,7 +96,7 @@ const ROUTED = [["colorPage", (n, tapped) => n && n.id ? routed(n.title, nodeRou
   ["favShelf", () => routed("Your colors", "favorites")], ["favTaste", () => routed("Your taste", "favorites/taste")],   // js/favs.js, js/favprofile.js
   ["frStart", (m, c) => routed("Rank your colors", "favorites/rank/" + (m || "bws"))],   // js/favrank.js
   ["tasteIntro", k => k === "palette" ? routed("Find your palette", "taste/palette") : routed("Find your color", "taste/color")],
-  ["glPage", (i, d, fromHex, tol) => routed(d && d.t || "Painting", "gallery/" + i + (fromHex ? "?c=" + String(fromHex).replace("#", "") + (tol != null ? "&t=" + tol : "") : ""))],
+  ["glPage", (i, d, fromHex, tol) => routed(d && d.t || "Painting", "gallery/" + i + (fromHex ? "?c=" + String(fromHex).replace("#", "").toLowerCase() + (tol != null ? "&t=" + tol : "") : ""))],
   ["paintingsOfPage", (hexes, o) => { const h = typeof ptHexList === "function" ? ptHexList(hexes) : []; return h.length ? routed("Color in paintings", ptPath(h, { ...PT_PREF, mode: "all", sort: "cover", source: "paintings", ...(o || {}) })) : null; }],   // js/paintingsof.js (L26)
   ["chordsPage", () => routed("Masters' chords", "chords")],   // js/chords.js (L26)
   ["poemPage", id => id != null ? routed("Poem", "poem/" + id) : null],   // js/poems.js   // a museum painting (js/gallery.js); i = its place in the gallery index
@@ -149,10 +150,12 @@ function openRoute(hash, initial = false) {
   }
   // "learn" is kept as a working alias for "today" (DESIGN-SYSTEM.md §2: Learn is the room's real name now;
   // #/today still opens it, since that address is already shared and bookmarked).
-  const tabs = { today: "learn", learn: "learn", train: "gym", studio: "studio", explore: "explore", you: "you" };
+  // "museum" is the room's address now (core.js NAV_MUSEUM); the older #/explore… addresses still open it
+  const tabs = { today: "learn", learn: "learn", train: "gym", studio: "studio", explore: "explore", museum: "explore", you: "you" };
   // hoisted above the tabs[kind] check below, since studio/wheel and studio/palette/<id> are Studio sub-screens,
   // not the tab home itself, and need it too (js/studio.js)
   const base = () => {
+    X_ROOT = "home";   // a page opened from an address: Back unwinds to the map (js/trail.js), not to a room
     if (!initial) return;
     try { history.replaceState({ ch: 1, tab: S.tab || "learn" }, "", "#/" + tabRoute(S.tab || "learn").path); } catch (e) {}
     ROUTE_REPLACE = false;   // the screen itself goes on top
@@ -163,7 +166,7 @@ function openRoute(hash, initial = false) {
   // the floor (the honeycomb, js/home.js): not a tab, so it's its own address
   if (kind === "home" && typeof hmHome === "function") { base(); XSTACK = []; hmHome(); return true; }
   if (tabs[kind]) {
-    if (kind === "explore") S.lens = LENS_LEGACY[id] || Object.keys(LENS_ROUTE).find(k => LENS_ROUTE[k] === id) || "all";
+    if (kind === "explore" || kind === "museum") S.lens = LENS_LEGACY[id] || Object.keys(LENS_ROUTE).find(k => LENS_ROUTE[k] === id) || "all";
     go(tabs[kind]);
     return true;
   }
@@ -175,7 +178,7 @@ function openRoute(hash, initial = false) {
     ROUTE_NEXT = routed(kind === "color" ? routeColor(id).n : "", parts.slice(0, more === "more" ? 3 : 2).join("/"));
     whenWiki(() => {
       const n = node();
-      if (!n) return go(S.tab || "learn");
+      if (!n) return xToOrigin();
       XSTACK = [];
       if (more === "more") return closeup(n);
       return n.kind === "story" ? storyPlayer(n) : openNode(n, true, kind === "color" ? tappedHex : null);
@@ -186,10 +189,10 @@ function openRoute(hash, initial = false) {
     base(); XSTACK = []; poemPage(id); return true;
   }
   if (kind === "passage" && id && typeof passagePage === "function") {
-    base(); XSTACK = []; archWhen(() => { const p = PSG && PSG.byId.get(id); if (p) passagePage(p); else go(S.tab || "learn"); }); return true;
+    base(); XSTACK = []; archWhen(() => { const p = PSG && PSG.byId.get(id); if (p) passagePage(p); else xToOrigin(); }); return true;
   }
   if (kind === "film" && id && typeof filmPage === "function") {
-    base(); XSTACK = []; archWhen(() => { const f = (window.FILMS || []).find(x => x.id === id); if (f) filmPage(f); else go(S.tab || "learn"); }); return true;
+    base(); XSTACK = []; archWhen(() => { const f = (window.FILMS || []).find(x => x.id === id); if (f) filmPage(f); else xToOrigin(); }); return true;
   }
   if (kind === "look" && id && typeof lkOpenRoute === "function") { base(); XSTACK = []; lkOpenRoute(id); return true; }   // js/looks.js
   if (kind === "botany" && id && typeof btOpenRoute === "function") { base(); btOpenRoute(id); return true; }   // js/botany.js
@@ -202,7 +205,7 @@ function openRoute(hash, initial = false) {
     base();
     if (!CORE_NAMES) { ROUTE_NEXT = routed("", "name/" + id); waitScreen(); ROUTE_REPLACE = true; }
     XSTACK = [];
-    loadCoreNames().then(() => { const e = routeName(id); if (e) namePage(e, true, tappedHex); else go(S.tab || "learn"); });
+    loadCoreNames().then(() => { const e = routeName(id); if (e) namePage(e, true, tappedHex); else xToOrigin(); });
     return true;
   }
   if (kind === "line" && typeof ooAcross === "function") { base(); XSTACK = []; ooAcross(); return true; }   // js/games/line.js
@@ -234,13 +237,13 @@ function openRoute(hash, initial = false) {
   if (["painter", "movement", "decade", "country", "arthistory", "painters"].includes(kind) && typeof awOpenRoute === "function") { base(); XSTACK = []; awOpenRoute(kind, id, more); return true; }   // js/artwiki.js
   const simple = { daily: () => daily(), challenge: () => challenge(),
     taste: () => tasteIntro(id === "palette" ? "palette" : "color"),
-    favorites: () => typeof favShelf !== "function" ? go(S.tab || "learn") : id === "taste" ? favTaste() : id === "rank" ? frStart(more || "bws", "all") : favShelf(),   // js/favs.js
+    favorites: () => typeof favShelf !== "function" ? xToOrigin() : id === "taste" ? favTaste() : id === "rank" ? frStart(more || "bws", "all") : favShelf(),   // js/favs.js
     lab: () => id === "sounds" && typeof sndLab === "function" ? sndLab() : id === "honey" && typeof labHoney === "function" ? labHoney() : (LAB[id] && ["harmony", "contrast"].includes(id) ? LAB[id] : LAB.harmony)(),
     fashion: () => typeof fashionPage === "function" && fashionPage(id),
-    mapstudy: () => typeof msOpen === "function" ? msOpen() : go(S.tab || "learn"),   // js/mapstudy.js
+    mapstudy: () => typeof msOpen === "function" ? msOpen() : xToOrigin(),   // js/mapstudy.js
     // the honeycomb home's instant mini-lesson (js/learnit.js): #/learnit/<color>
-    learnit: () => { const c = id && routeColor(id); if (c && typeof hmLearnIt === "function") hmLearnIt(c); else if (id && typeof lxRouteLearnIt === "function") lxRouteLearnIt(id); else go(S.tab || "learn"); },
-    practice: () => typeof prOpenRoute === "function" ? prOpenRoute(id) : go(S.tab || "learn") };   // js/practice.js: #/practice, #/practice/<method>
+    learnit: () => { const c = id && routeColor(id); if (c && typeof hmLearnIt === "function") hmLearnIt(c); else if (id && typeof lxRouteLearnIt === "function") lxRouteLearnIt(id); else xToOrigin(); },
+    practice: () => typeof prOpenRoute === "function" ? prOpenRoute(id) : xToOrigin() };   // js/practice.js: #/practice, #/practice/<method>
   if (simple[kind]) { base(); simple[kind](); return true; }
   return false;
 }
@@ -248,5 +251,5 @@ function openRoute(hash, initial = false) {
 addEventListener("hashchange", () => {
   if (SHOT || location.hash === ROUTE_NOW || !/^#\/./.test(location.hash)) return;
   ROUTE_REPLACE = true;   // the browser already made the history entry
-  if (!openRoute(location.hash)) go(S.tab || "learn");
+  if (!openRoute(location.hash)) xToOrigin();
 });

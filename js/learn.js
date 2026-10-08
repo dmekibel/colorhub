@@ -380,7 +380,7 @@ function unitDone(u, right, total) {
     <div class="stack">
       ${nu ? `<button class="btn" data-next>Next: ${esc(nu.title)} ${ICON.arrow}</button>` : ""}
       ${expNudge()}
-      <button class="btn ghost" data-home>Home</button>
+      <button class="btn ghost" data-home>Back to Learn</button>
     </div>
   `, "result");
   expWireNudge(el);
@@ -407,7 +407,7 @@ function reviewDone(right, total) {
     <div class="stack">
       ${nu ? `<button class="btn" data-next>Continue: ${esc(nu.title)} ${ICON.arrow}</button>` : ""}
       ${expNudge()}
-      <button class="btn ghost" data-home>Home</button>
+      <button class="btn ghost" data-home>Back to Learn</button>
     </div>
   `, "result");
   expWireNudge(el);
