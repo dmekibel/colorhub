@@ -7,6 +7,8 @@ Feel: inspired by the warm, bubbly feel of early-2010s console menus (marimba, k
 - `navigator.audioSession.type = "ambient"`: mixes with the user's music and follows the silent switch.
 - One sound per gesture: everything in one task is queued and the most meaningful sound wins. At most one sound per 60 ms unless the newer one matters more.
 - Every envelope starts from 0 with a linear attack and falls to silence before it stops (no clicks). A compressor sits on the master. UI sounds stay under ~600 ms; only the fanfares and the ambient bed run longer.
+- UI sounds are muffled (David, 2026-10-08: too sharp): lowpass at or under 1.5 kHz, attack 6-10 ms, no noise clicks, low pitch, small glides. Covers tap, tick, select, back, open, close, reveal and tuck. Game feedback (right, wrong, flourishes) is deliberately untouched.
+- Drawers: a click on `<summary>` inside `<details>` plays `reveal` (a very quiet low filtered-noise breath) when opening and `tuck` (softer, falling) when closing. The click fires before the toggle, so the open state is read inverted.
 - Settings: Sound (default on, quiet), Calm music (default off), and volume. They live in S.sound, S.music and S.vol. These are additive keys, so migrateState doesn't need a step.
 
 ## Central hooks (the games needed no edits)
