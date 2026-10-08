@@ -328,6 +328,7 @@ function paletteView(p) {
     </div>
     <div class="pv-pal" id="pv"></div>
     <div class="h-list" id="hlist"></div>
+    <div data-csacts></div>
     <div class="row2" style="margin-top:18px"><button class="btn" data-keep>${p.savedId != null ? "Kept" : "Keep it"}</button><button class="btn ghost" data-share>${ICON.share} Share</button></div>
     <div class="row2" style="margin-top:10px"><button class="btn ghost" data-css>Copy as CSS</button><button class="btn ghost" data-hex>Copy hex list</button></div>
     ${p.savedId != null ? `<button class="btn ghost" data-del style="margin-top:10px">Remove from your palettes</button>` : ""}
@@ -373,6 +374,14 @@ function paletteView(p) {
   };
   loadCoreNames().then(render); render();
   if (typeof lkHook === "function") lkHook(el, colsNow, p);   // js/looks.js: "What look is this?"
+  // the ColorSet verbs (js/colorset.js); Keep and Share already live on this page
+  if (typeof colorSet === "function") {
+    const kind = p.photoId != null ? "photo" : p.savedId != null ? "palette" : "studio", pid = p.photoId != null ? p.photoId : p.savedId != null ? p.savedId : "new";
+    const pvSet = () => colorSet({ kind, id: pid, title: curTitle || (kind === "photo" ? fmtDay(p.at) || "Your photo" : p.from || "Palette"), colors: colsNow(), src: kind === "photo" ? "photo/" + pid : kind === "palette" ? "studio/palette/" + pid : "" });
+    if (kind !== "studio") learnerLog({ type: "seen", set: pvSet(), src: kind });
+    const back = kind === "photo" ? () => photoPage(pid, false) : kind === "palette" ? () => openSavedPalette(pid, false) : () => go("studio");
+    el.querySelector("[data-csacts]").appendChild(csActions(pvSet, { only: ["map", "learn", "play", "compare"], back }));
+  }
   const seg = (sel, attr, set) => el.querySelectorAll(`${sel} [${attr}]`).forEach(b => b.onclick = () => { set(b.getAttribute(attr)); el.querySelectorAll(`${sel} [${attr}]`).forEach(x => x.classList.toggle("on", x === b)); render(); buzz(4); });
   if (hasImg) { seg("#cnt", "data-n", v => { n = +v; }); el.querySelector("[data-pct]").onclick = e => { pct = !pct; e.currentTarget.classList.toggle("on", pct); render(); }; }
   seg("#look", "data-look", v => { look = v; });

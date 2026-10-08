@@ -193,7 +193,7 @@ def t_index_counts():
         print("  skip  index.json counts (not built)")
         return
     idx = json.loads(p.read_text())
-    check("index.json n matches the documented corpus size (23,531)", idx["n"] == 23531)
+    check("index.json n matches the documented corpus size (23,531 + 250 Sargent watercolors/plein-air oils from tools/sargent_extra.py = 23,781)", idx["n"] == 23781)
     check("index.json nArtists matches research/STATS-FINDINGS.md's 837 (+Commons) count", idx["nArtists"] == 837)
     check("total build stays under the ~15 MB budget", True)  # printed by analyze.py itself; see its own report
 
