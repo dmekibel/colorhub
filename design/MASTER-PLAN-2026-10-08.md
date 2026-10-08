@@ -190,6 +190,7 @@ The full-screen color, then a one-line definition with its source, then the **Re
 5. L23 taste and favorites (design/lanes/L23-taste.md): honeycomb multi-select, a favorites shelf, rankings that aren't tournaments, a taste profile.
 
 ## Progress log
+- 14:4x: David approved the article voice ("keep it as is: grounded, encyclopedic, sourced") and likes the name **The Color Library** (trademark and domain checks not done). The article workflow is launched: 190 batches (110 epic, 45 medium, 35 short; 944 colors), Opus writers plus Sonnet adversarial checkers. Articles land uncommitted in data/articles/, and the conductor commits and ships them periodically.
 - 13:xx: David chose "go with your recs" on the 5 Journey decisions (recorded at the top of design/JOURNEY.md). L9 is unblocked once Practice merges.
 - 12:4x: L1 ledger landed (design/REQUESTS-LEDGER.md: 111 done, 43 partial, 45 not started). ECC patterns adopted as files (no plugin). L19 design-history corpus started. L6 also computes per-color superlatives (rarest, peak decade, loyal painters).
 - 12:0x: Wave 0 launched: L1 ledger, L2 concordance, L3 smoke harness, L4 Practice resume, L5 rich pages resume.

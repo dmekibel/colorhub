@@ -1,0 +1,36 @@
+{
+ "slug": "fiery-rose",
+ "name": "Fiery Rose",
+ "names": ["Fiery Rose"],
+ "hex": "#FF5470",
+ "tier": "commercial",
+ "status": "fixture",
+ "lede": "A hot, slightly blue pink that sits between coral and a cut rose, used here to test the reference cards.",
+ "sections": [
+  {
+   "id": "in-stone",
+   "title": "In stone",
+   "body": "The nearest cut stone is [[gem:spinel|spinel]], whose pink shade is a close neighbor of this color, and [[gem:ruby|ruby]] sits a little further off, darker and bluer.\n\nA second paragraph with no reference at all, so the page shows that a card follows only the paragraph that names it."
+  },
+  {
+   "id": "on-the-wall",
+   "title": "In paint",
+   "body": "A painter who gave the color away to a cool wall: [[painting:nga-72328|Roses]], and the whole [[painter:john-singer-sargent|Sargent]] shelf, where the pink is a rare guest.\n\nThe same hue turns up in a [[look:art-nouveau|Art Nouveau]] palette and in the lantern red of [[film:raise-the-red-lantern]]."
+  },
+  {
+   "id": "in-the-garden",
+   "title": "In the garden",
+   "body": "Dyers took [[flower:madder|madder]] root to this red end of the scale, and a plain [[flower:mauve|mallow]] is nowhere near it."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is a fixture, not a reading."
+  }
+ ],
+ "aside": { "siblings": ["coral", "crimson"], "children": [], "parent": null },
+ "field": { "a": 1, "b": 2, "c": 3 },
+ "notes": [],
+ "questions": [],
+ "openers": []
+}

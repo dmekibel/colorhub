@@ -508,18 +508,18 @@ function glRange(el, val, ramp, onInput) {
 // fromHex: the color the visitor arrived from (a search, a color page's "In paintings", a name page, or the
 // color sheet's "More paintings with this color") — ROADMAP §13 "arrive from a color and see it". Carried in
 // the address (?c=<hex>, js/router.js) so it survives reload and Back.
-function galleryPage(i, push = true, fromHex = null) {
-  if (!GAL) return loadGallery().then(() => galleryPage(i, push, fromHex)).catch(() => toast("The gallery didn't load"));
+function galleryPage(i, push = true, fromHex = null, tol = null) {
+  if (!GAL) return loadGallery().then(() => galleryPage(i, push, fromHex, tol)).catch(() => toast("The gallery didn't load"));
   if (!(i >= 0 && i < GAL.n)) return;
   // already loaded (always the case going back): draw now, so the phone's back gesture handling stays in step
   const now = glDetailNow(i);
-  if (now) { if (push) XSTACK.push("g:" + i); return glPage(i, now, fromHex); }
+  if (now) { if (push) XSTACK.push("g:" + i); return glPage(i, now, fromHex, tol); }
   glDetail(i).then(d => {
     if (push) XSTACK.push("g:" + i);
-    glPage(i, d, fromHex);
+    glPage(i, d, fromHex, tol);
   }).catch(() => toast("This painting didn't load"));
 }
-function glPage(i, d, fromHex) {
+function glPage(i, d, fromHex, tol) {
   const G = GAL, src = G.src[G.mus[i]] || { name: "Museum", short: "Museum", credit: "" }, pal6 = glPal(i), yr = glYear(i), ar = G.ar[i];
   const pool = glPoolDecode(d.pl);
   let curK = 6;   // the dynamic-palette control's current size; 6 with a pool shows the same algorithm as 3/12/20
@@ -533,7 +533,7 @@ function glPage(i, d, fromHex) {
     <p class="p-dek">${esc([d.a || "Artist unknown", d.co, d.mv].filter(Boolean).join(" · "))}</p>
     <div class="sec-head gl-pal-h"><b>Computed palette</b><span data-glpaln>6 colors, by area</span></div>
     ${pool.length ? `<div class="seg gl-sizes" data-glsizes>${GL_SIZES.map(k => `<button class="${k === curK ? "on" : ""}" data-glk="${k}">${k}</button>`).join("")}</div>` : ""}
-    <p class="fine gl-arrive" data-glarrive hidden></p>
+    <div class="pt-arrive gl-arrive" data-glarrive hidden></div>
     <div class="palette" data-glswatches></div>
     <div class="pal-names" data-glrows></div>
     <div data-csacts></div>
@@ -554,7 +554,8 @@ function glPage(i, d, fromHex) {
       return `<button class="pal-name${near && near.i === j ? " on" : ""}" data-swatch="${p.h}"><i style="--c:${p.h}"></i><b>${esc(nm.text)}</b><span>${fam ? esc(fam.head.n) + " family · " : ""}${Math.round(p.share * 100)}%</span><em class="mono">${p.h}</em></button>`;
     }).join("");
     const arrive = el.querySelector("[data-glarrive]");
-    if (!fromHex) { arrive.hidden = true; }
+    if (typeof ptArrival === "function") { /* the arriving color is drawn by js/paintingsof.js (L26) */ }
+    else if (!fromHex) { arrive.hidden = true; }
     else if (near && near.de < NEAR_DE) {
       const p = pal[near.i], nm = nameOf(p.h);
       arrive.hidden = false; arrive.innerHTML = `<i style="--c:${p.h}" class="gl-arrive-sw"></i>≈ ${esc(nm.text)} · ${Math.round(p.share * 100)}% of the canvas · nearest swatch`;
@@ -589,11 +590,14 @@ function glPage(i, d, fromHex) {
   // copies under img/gallery/, and CORS-enabled hosts like Wikimedia). Tested once per image; the affordance
   // (cursor, marker) simply never appears where it's blocked — no error, no explanation needed on screen.
   const heroSpan = el.querySelector(".gl-hero > span");
-  let sampleImg = el.querySelector(".gl-hero img"), canSample = false;
+  let sampleImg = el.querySelector(".gl-hero img"), canSample = false, arrival = null;
   const testSample = img => { try { const c = document.createElement("canvas"); c.width = c.height = 1; const cx = c.getContext("2d"); cx.drawImage(img, 0, 0, 1, 1); cx.getImageData(0, 0, 1, 1); return true; } catch (e) { return false; } };
-  function armSample(img) { sampleImg = img; canSample = testSample(img); heroSpan.classList.toggle("gl-tap", canSample); }
+  function armSample(img) { sampleImg = img; canSample = testSample(img); heroSpan.classList.toggle("gl-tap", canSample); if (arrival) arrival.image(img, canSample); }
+  // the arriving color: pinned above the palette, with how much of this canvas it covers and where (js/paintingsof.js, L26)
+  if (fromHex && typeof ptArrival === "function") arrival = ptArrival(el, { i, hex: fromHex, tol, pool, heroSpan, getImg: () => sampleImg, why: "This museum's image server doesn't let ColorHub read its pixels, so the map isn't available for this painting." });
   if (sampleImg.complete && sampleImg.naturalWidth) armSample(sampleImg); else sampleImg.addEventListener("load", () => armSample(sampleImg), { once: true });
   heroSpan.addEventListener("click", e => {
+    if (arrival && arrival.tap(e)) return;
     if (!canSample || e.target.closest("a")) return;
     const r = sampleImg.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
     if (x < 0 || y < 0 || x > r.width || y > r.height || !sampleImg.naturalWidth) return;
@@ -650,7 +654,10 @@ function glCORS(url) {
 }
 
 // ---------- "In paintings" on a color page ----------
+// The section itself lives in js/paintingsof.js (lane L26): the finer color index, the two sliders and "Often paired
+// with". This stays as the name explore.js calls; the old six-color row is the fallback if that file didn't load.
 function galleryColorRow(host, c) {
+  if (typeof paintingsOfSection === "function") return paintingsOfSection(c.h, host, { name: c.n });
   const head = `<h3>In paintings</h3>`;
   const draw = () => {
     if (!host.isConnected) return;

@@ -243,6 +243,45 @@ scenario("learn", "a due review starts a deck", async t => {
   for (let i = 0; i < 4; i++) { const rev = t.$("[data-reveal]"); if (!rev) break; await t.click(rev, { wait: 80 }); const y = t.$("[data-yes]"); if (y) await t.click(y, { wait: 400 }); }
 });
 
+// ================================================================== THE DAILIES (js/challenge.js, js/colordle.js)
+scenario("daily", "Today row: both tiles show their art and open their games", async t => {
+  await t.open("#shot=learn", { settle: 600 });
+  await t.waitFor("#dlPaintArt img", 8000, "the painting tile's thumbnail");
+  await t.waitFor(() => !t.$("#dlColorArt.dl-ph"), 8000, "the color tile's swatch");
+  await t.click("[data-dpaint]", { wait: 500 });
+  await t.waitFor("#dpFrame", 8000, "Today's painting after tapping its tile");
+});
+scenario("daily", "Name today's color: a typed guess draws a row, a second says which way", async t => {
+  await t.open("#/daily", { settle: 600 });
+  const inp = await t.waitFor(".dn-in", 10000, "the guess field");
+  const t0 = t.ev("dnTarget()"), names = t.ev("nearestCore(dnTarget().h, CORE_NAMES, 6).map(x => x.n)").filter(n => n !== t0.n);
+  for (const n of names.slice(0, 2)) {
+    inp.value = n; inp.dispatchEvent(new t.w.Event("input", { bubbles: true }));
+    t.$("#dnForm").dispatchEvent(new t.w.Event("submit", { bubbles: true, cancelable: true }));
+    await t.sleep(300);
+  }
+  t.expect(t.$$(".dn-row").length === 2, `expected 2 guess rows, got ${t.$$(".dn-row").length}`);
+  t.expect(/than/.test(t.text("#dnMsg")), `the newest guess has no direction sentence: "${t.text("#dnMsg")}"`);
+  t.expect(t.$$(".dn-row .dn-cell").length >= 6, "the rows have no axis cells");
+  inp.value = t0.n; inp.dispatchEvent(new t.w.Event("input", { bubbles: true }));
+  t.$("#dnForm").dispatchEvent(new t.w.Event("submit", { bubbles: true, cancelable: true }));
+  await t.waitFor(".dn-hero.named", 4000, "the named reveal after the right guess");
+  t.expect(t.$("[data-share]") && t.$("[data-page]"), "the finish has no share or page button");
+});
+scenario("daily", "Today's painting: a tap answers round 1, Next opens round 2's names", async t => {
+  await t.open("#/challenge", { settle: 600 });
+  const f = await t.waitFor("#dpFrame", 10000, "the painting");
+  await t.stable(f);
+  await t.waitFor(() => t.ev("S.dpNow && S.dpNow.p"), 6000, "the round state");
+  const r = f.getBoundingClientRect();
+  f.dispatchEvent(new t.w.MouseEvent("click", { bubbles: true, clientX: r.left + r.width * .5, clientY: r.top + r.height * .5 }));
+  await t.waitFor("[data-next]", 4000, "Next after the tap");
+  t.expect(t.$(".dp-ring"), "no ring where the tap landed");
+  await t.click("[data-next]", { wait: 400 });
+  await t.waitFor("#dpFoot [data-o]", 4000, "round 2's four names");
+  t.expect(t.$$("#dpFoot [data-o]").length === 4, "round 2 doesn't have four names");
+});
+
 // ================================================================== TRAIN
 scenario("train", "check-in card opens the drill", async t => {
   await t.open("#shot=gx:due", { settle: 600 });
@@ -282,7 +321,7 @@ scenario("train", "Odd one out: tap tiles through a whole round", async t => {
 });
 
 // ================================================================== EXPLORE
-for (const [part, expect] of [["all", ".x-feed .pin, .x-feed [data-pin]"], ["art", ".art-bubbles"], ["ideas", ".x-feed .pin, .x-feed [data-pin]"], ["world", "#world *"]]) {
+for (const [part, expect] of [["all", ".x-feed .pin, .x-feed [data-pin]"], ["art", ".xb-pick"], ["ideas", ".x-feed .pin, .x-feed [data-pin]"], ["world", "#world *"]]) {
   scenario("explore", `${part} cover opens and goes back`, async t => {
     await t.open("#shot=explore:all", { settle: 600 });
     const cover = await t.waitFor(`.xp-cover[data-part="${part}"]`, 8000, `the ${part} cover`);
@@ -306,16 +345,42 @@ for (const [part, expect] of [["all", ".x-feed .pin, .x-feed [data-pin]"], ["art
   });
 }
 
-scenario("explore", "Art with a color shows pins", async t => {
+scenario("explore", "Art with a color shows tiles", async t => {
   await t.open("#shot=explore:art:Denim", { settle: 600 });
   await t.waitFor(".art-band", 8000, "the Art screen");
-  t.expect(/denim/i.test(t.text(".art-band .p-dek")), `Art's line says "${t.text(".art-band .p-dek")}"`);
-  const pins = await t.waitFor(() => { const p = t.$$(".art-feed .pin"); return p.length >= 6 && p; }, 25000, "painting pins in the Art feed");
-  t.notes.push(`${pins.length} pins`);
-  const gi = t.$(".art-feed [data-gi]");
-  t.expect(gi, "no painting pin to open");
-  await t.click(gi, { force: true, wait: 600 });
-  await t.waitFor(() => t.$(".gl-page, .cp-page, .article") && !t.$(".art-feed"), 12000, "a painting page after tapping a pin");
+  await t.waitFor(() => /denim/i.test(t.text(".art-band .p-dek")), 15000, "Art's line to name denim");
+  const tiles = await t.waitFor(() => { const p = t.$$(".xb-body .xb-t"); return p.length >= 6 && p; }, 25000, "painting tiles in the Art grid");
+  t.notes.push(`${tiles.length} tiles`);
+  await t.click(tiles[0], { force: true, wait: 600 });
+  await t.waitFor(() => t.$(".gl-page") && !t.$(".xb-screen"), 12000, "a painting page after tapping a tile");
+  await t.click(".gl-page [data-back]", { wait: 600 });
+  await t.waitFor(() => t.$(".xb-screen") && /denim/i.test(t.text(".xb-crumbs")), 12000, "Art again, still on denim, after Back");
+});
+
+// Explore 2.0 (js/browse-ui.js): a facet sheet narrows the count, the crumb's x and Back unwind, every view draws
+scenario("explore", "Art facets, views and Back", async t => {
+  await t.open("#shot=explore:art", { settle: 600 });
+  await t.waitFor(".xb-screen [data-xbn]", 25000, "the Art count");
+  const count = () => H.num(t.text("[data-xbn]"));
+  const all = count();
+  t.expect(all > 20000, `Art starts with ${all} paintings`);
+  await t.click('.xb-facets [data-xbfacet="mood"]', { wait: 500 });
+  await t.waitFor(".xb-sheet", 4000, "the Mood sheet");
+  await t.click('.xb-sheet [data-xbopt="key"][data-v="2"]', { wait: 400 });
+  const light = count();
+  t.expect(light > 0 && light < all, `Light key: ${light} of ${all}`);
+  await t.click(".xb-sheet [data-xbshgo]", { wait: 500 });
+  t.expect(/light key/i.test(t.text(".xb-crumbs")), `the breadcrumb says "${t.text(".xb-crumbs")}"`);
+  for (const v of ["river", "painters", "wall", "grid"]) {
+    await t.click(`[data-xbview="${v}"]`, { wait: 600 });
+    await t.waitFor({ river: ".xb-river, .xb-empty", painters: ".xb-pr", wall: ".xb-wall canvas", grid: ".xb-t" }[v], 8000, `the ${v} view`);
+  }
+  await t.click('[data-xbx="key"]', { wait: 500 });
+  t.expect(count() === all, `removing the crumb brings back all ${all} (now ${count()})`);
+  await t.click(".art-top [data-back]", { wait: 500 });
+  t.expect(count() === light, `Back unwinds to the light-key filter (${count()})`);
+  await t.click(".art-top [data-back]", { wait: 500 });
+  t.expect(count() === all, `Back again unwinds to everything (${count()})`);
 });
 
 // ================================================================== COLOR PAGES
@@ -352,6 +417,24 @@ scenario("pages", "namePage x3: renders, a near name opens another, Back works",
     t.expect(!t.$(".cp-page"), `Back from ${n} left a page open`);
     t.notes.push(`${n} > ${other}`);
   }
+});
+
+// js/article-refs.js: the figure cards in an article (Mauve has an article, a twin gem, a film and paintings that hold the color)
+scenario("pages", "article figure cards: Mauve draws them, a card opens its page, Back returns to the article", async t => {
+  await H.openPage(t, "#/color/mauve", "Mauve");
+  await t.waitFor(() => t.$$(".ar-fig").length >= 2, 25000, "the article's figure cards");
+  const figs = t.$$(".ar-fig");
+  t.expect(figs.length <= 5, `${figs.length} auto-figures, the limit is 5`);
+  t.expect(figs.every(f => /\d+% match to Mauve/.test(t.text(f.querySelector(".ar-fig-m")))), "a card is missing its '% match to Mauve' line");
+  t.expect(figs.every(f => [112, 88].includes(f.querySelector(".ar-fig-im").getBoundingClientRect().width)), "a card's picture box lost its fixed size");
+  const secs = figs.map(f => (f.closest("[data-ar-sec]") || {}).id || "seen").filter(x => x !== "seen");
+  t.expect(new Set(secs).size === secs.length, "two figures landed in one section");
+  const card = t.$('.ar-fig[data-kind="gem"] .ar-fig-b') || t.$(".ar-fig .ar-fig-b");
+  const title = t.text(card.querySelector(".ar-fig-n"));
+  await t.click(card, { wait: 700 });
+  await t.waitFor(() => !t.$(".ar") && t.$(".p-title, .cp-hero-foot h1, .gl-page, .film-page"), 10000, `the page for "${title}"`);
+  await t.click("[data-back]", { wait: 600 });
+  await t.waitFor(() => t.$(".ar") && t.$$(".ar-fig").length >= 2, 20000, "the article and its figures after Back");
 });
 
 scenario("pages", "a tapped in-between hex opens its nearest name with 'Your color'", async t => {
@@ -749,4 +832,70 @@ scenario("learn", "Learn it done: the group joins review as core cards, due tomo
   t.expect(t.ev("cardsAll().some(c => c.id === 'core:chestnut') && !dueList().some(c => c.id === 'core:chestnut')"), "cardsAll covers it, due tomorrow, not today");
   await t.click("[data-lt-back]", { wait: 700 });
   await t.waitFor(".cp-page", 8000, "the name page after Done");
+});
+
+// ================================================================== PAINTINGS (lane L26: color in paintings)
+const PT = {
+  num: t => H.num(t.text("[data-finding]")),
+  async count(t) { await t.waitFor(() => !/Measuring/.test(t.text("[data-finding]")) && t.text("[data-finding]"), 20000, "the finding line"); return PT.num(t); },
+  slide(t, k, v) { const r = t.$$(".pt-range")[k]; r.value = v; r.dispatchEvent(new t.w.Event("input", { bubbles: true })); },
+};
+scenario("paintings", "paintings-of: looser tolerance never finds fewer; a second color joins; chips drop it", async t => {
+  await t.open("#/paintings-of/8a6b52?t=3&m=1", { settle: 600 });
+  await t.waitFor(".pt-page .pt-range", 12000, "the two sliders");
+  const a = await PT.count(t);
+  t.expect(a > 0, "no paintings for a common brown at 3% / 1%");
+  PT.slide(t, 0, 8); await t.sleep(300);                      // How close: index 8 = 10%
+  const b = await PT.count(t);
+  t.expect(b >= a, `looser tolerance found fewer paintings (${a} then ${b})`);
+  PT.slide(t, 1, 9); await t.sleep(300);                      // How much: stricter
+  await t.waitFor(() => PT.num(t) !== b, 15000, "the count to change after the coverage slider");
+  const c = PT.num(t);
+  t.expect(c <= b, `stricter coverage found more paintings (${b} then ${c})`);
+  t.expect(t.$$(".pt-results .pin, .pt-results .gl-pin").length > 0, "no painting tiles under the count");
+  await t.click("[data-add]", { wait: 500 });
+  await t.waitFor(".sheet .pt-add-sw button", 6000, "the add-a-color sheet");
+  await t.click(".sheet .pt-add-sw button", { force: true, wait: 700 });
+  await t.waitFor(() => t.$$(".pt-chip").length === 2, 6000, "two color chips");
+  t.expect(t.$$("[data-mode]").length === 3, "no All / Any / As a palette switch with two colors");
+  await t.click('[data-mode="any"]', { wait: 600 });
+  await PT.count(t);
+  await t.click("[data-drop]", { force: true, wait: 600 });
+  await t.waitFor(() => t.$$(".pt-chip").length === 1, 4000, "the chip to drop");
+});
+scenario("paintings", "a pair page, the masters' chords, and a painting with its color pinned", async t => {
+  await t.open("#/pair/c2412d+4f6b3a", { settle: 600 });
+  await t.waitFor(".pt-finding", 12000, "the pair page");
+  await PT.count(t);
+  t.expect(t.$$(".pt-chip").length === 2, "the pair page doesn't show two colors");
+  await t.open("#/chords", { settle: 600 });
+  await t.waitFor(".chd-row", 12000, "chord rows");
+  t.expect(t.$$(".chd-row").length >= 10, "fewer than ten chords");
+  await t.click('[data-kind="avoid"]', { wait: 400 });
+  t.expect(t.$$(".chd-row").length >= 5, "no pairs painters keep apart");
+  await t.click('[data-kind="pairs"]', { wait: 300 });
+  await t.click(".chd-row", { force: true, wait: 700 });
+  await t.waitFor(".pt-page .pt-chip", 12000, "a pair opened from a chord");
+  await t.open("#/gallery/15146?c=0047ab&t=3", { settle: 800 });
+  await t.waitFor(() => /covers/.test(t.text(".pt-arrive")), 14000, "the pinned coverage line");
+  t.expect(t.$(".pt-arrive [data-t]"), "no tolerance switch on the arrival");
+});
+scenario("paintings", "a color page's In paintings section: presets re-run the query; Fine-tune opens the sliders", async t => {
+  await t.open("#/color/cobalt", { settle: 800 });
+  const sec = await t.waitFor("[data-glin]", 12000, "the In paintings section");
+  sec.scrollIntoView();
+  await t.waitFor("[data-pt-quick] [data-pre-tol]", 15000, "the tolerance presets");
+  await t.waitFor(() => t.$$("[data-pt-rail] .gl-pin, [data-pt-rail] .pin").length > 0 || /No painting/.test(t.text("[data-pt-lead]")), 20000, "the rail or an honest empty line");
+  await t.click('[data-pt-quick] [data-pre-tol="10"]', { force: true, wait: 600 });
+  await t.click("[data-pt-tune]", { force: true, wait: 400 });
+  t.expect(t.$$("[data-pt-tuner] .pt-range").length === 2, "Fine-tune doesn't open two sliders");
+});
+
+// ================================================================== DIRECT LOADS (a typed or shared address on a fresh load)
+scenario("pages", "a fresh load of #/painter/<slug> opens that painter, not Home", async t => {
+  await t.open("#/painter/abraham-bloemaert", { settle: 600 });
+  await t.waitFor(".aw-page, [data-awpainter-page], .screen.aw", 15000, "the painter page on a direct load");
+  t.expect(/Bloemaert/.test(t.$("#app").innerText), "the painter's page doesn't name the painter");
+  t.expect(!t.$(".hm canvas"), "a direct painter address landed on Home");
+  t.expect(t.w.location.hash === "#/painter/abraham-bloemaert", `the address changed to ${t.w.location.hash}`);
 });

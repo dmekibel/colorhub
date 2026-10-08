@@ -217,6 +217,7 @@ function hmHome() {
     </div>
     <button class="corner l" data-rooms-corner aria-label="Rooms">${ROOMS_GLYPH}</button>
     <button class="corner r" id="hmView" aria-label="View">${HM_SLIDERS}</button>
+    ${typeof msHomeButton === "function" ? msHomeButton() : ""}
     ${typeof prQuick === "function" ? `<button class="corner r pr-study-corner" data-pr-study aria-label="Study">${PR_ICON.cards}</button>` : ""}
     ${typeof FV_HEART === "string" ? `<button class="corner r fv-corner" id="hmFav" aria-label="Pick favorites">${FV_HEART}</button>` : ""}
   `, "fixed cx hm");
@@ -412,6 +413,7 @@ function hmHome() {
     cv.addEventListener("pointercancel", () => hmShowChrome());
   }
   hmShowChrome();
+  { const ms = $("#hmMapStudy"); if (ms) ms.onclick = () => { buzz(6); msOpen({ from: "home" }); }; }   // js/mapstudy.js
 
   // the Rooms corner (left, shared chrome: js/core.js toggleStem) raises the stem; the View corner (right)
   // opens the chooser — a tap for "Show", a long-press (480ms) jumps straight to "Look"
@@ -501,19 +503,19 @@ function hmPullClose(screen, close) {
   let y0 = null, x0 = 0, dy = 0, t0 = 0, on = false, lastScroll = 0;
   const born = performance.now();
   const onScroll = () => { lastScroll = performance.now(); if (!screen.isConnected) removeEventListener("scroll", onScroll); };
-  addEventListener("scroll", onScroll, { passive: true });
+  addEventListener("scroll", onScroll, { passive: true, capture: true });
   const reset = () => { screen.style.transition = "transform .35s var(--ease)"; screen.style.transform = ""; };
   screen.addEventListener("touchstart", e => {
     // arm only when the page is resting at the top: not mid-fling (a scroll in the last 180 ms means the finger is
     // catching a page that's still moving), and not in the first moments after the page opened
-    if (e.touches.length !== 1 || scrollY > 0 || document.querySelector(".sheet") || performance.now() - lastScroll < 180 || performance.now() - born < 350) { y0 = null; return; }
+    if (e.touches.length !== 1 || pageScrollTop() > 0 || document.querySelector(".sheet") || performance.now() - lastScroll < 180 || performance.now() - born < 350) { y0 = null; return; }
     y0 = e.touches[0].clientY; x0 = e.touches[0].clientX; dy = 0; on = false; t0 = performance.now();
   }, { passive: true });
   screen.addEventListener("touchmove", e => {
     if (y0 == null) return;
     const d = e.touches[0].clientY - y0, dx = e.touches[0].clientX - x0;
     if (!on) {
-      if (d > 14 && d > Math.abs(dx) * 1.5 && scrollY <= 0) on = true;
+      if (d > 14 && d > Math.abs(dx) * 1.5 && pageScrollTop() <= 0) on = true;
       else if (Math.abs(dx) > 10 || d < -6) { y0 = null; return; } else return;
     }
     e.preventDefault();

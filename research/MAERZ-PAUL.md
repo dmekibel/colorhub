@@ -199,3 +199,48 @@ specifically catches cross-cell text bleed (the "Maracail Domingc" failure mode 
 be rejecting any name whose cell crop's OCR bounding box extends unusually far past the cell's own interior
 region) or a manual pass over the 825 names before merging into the live library. Running `python3
 tools/library.py --build` after either of those would perform the merge; it is not done as part of this pass.
+
+## 8. Round 2 (2026-10-08): the Index of Color Names, a corrected grid, and a real color fit
+
+Round 1 read only the names printed on the plate key pages. The book's **Index of Color Names** (printed pp. 189-207, leaves 199-217 of
+the same Internet Archive scan) is the valuable part: every name with the **year it was first recorded**, a code for its trade
+(textile, pigment, vegetable dye...), a translation when it is foreign, sometimes an etymology, and the plate, column and row of its chip.
+Public domain, same legal basis as s1. Code: `tools/mp_index_ocr.py` (OCR), `tools/mp_parse.py` (entries), `tools/mp_chips.py` (all chips),
+`tools/mp_dictionary.py` (mapping, color fit, outputs), `tools/mp_notes_data.py` (the Notes section, paraphrased by hand);
+merge: `merge_maerz_paul_dictionary()` in `tools/library.py`.
+
+**Text.** The Internet Archive's own OCR text interleaves the three columns line by line and misreads the bold plate references, so the
+index was re-read from the original camera JP2s: deskew, find the column edges, cut each column into lines by its ink profile, and OCR
+every line three ways with tesseract (the whole line, the date field, and a digits-and-A-L-only crop of the plate reference). 3,870 index
+entries (2,783 point at a chip; 1,087 are obsolete synonyms with no chip), 4,014 rows once "Fesse, Fess" style lists are split.
+Names are checked against the ISCC-NBS 1955 dictionary: 2,705 of 4,014 rows are names it also lists (flag `verified`).
+
+**Plate references.** The two reads of each reference are compared; an impossible one (plate over 56, the bold 3 read as 8) is repaired
+against the round-1 key-page name at that cell and the ISCC-NBS block color of the name. Entries whose reads agree are the
+fit's ground truth, so the fit never depends on the color it is fitted to. 1,710 distinct chips carry a name; 87 rows point at
+**plate 2, which is missing from the scan**: they keep name, date and note but no color.
+
+**A grid bug in round 1.** Round 1's grid finder took the black edge of the book cradle for the first ruled line on most plates, so
+all 12 columns were sampled about half a column to the left, and column A on 40 plates sampled the grey board strip (a flat
+(120,120,118)). `tools/mp_chips.py` finds the 13 rules in each direction as a comb (dips of mean luminance plus dark-pixel mass,
+sub-pixel pitch) and all 7,920 cells are re-sampled; every plate now has a 2,484-2,520 x 3,212-3,252 px grid (checked by overlay on
+plates 4, 37, 56). Round-1 chip hexes in `maerz-paul-1930.json` are therefore off; the dictionary file supersedes them.
+
+**Color fit.** 1,029 chips whose name is an ISCC-NBS name sourced to Maerz & Paul (block centroid = target; 40 name collisions of more
+than dE00 25 trimmed). Model: a robust global affine in CIELAB plus a per-plate affine shrunk toward it (ridge 100), chosen by repeated
+80/20 cross-validation over five alternatives. **Held-out 20% (205 chips): median dE00 8.18 before, 6.07 after** (cross-validated
+8.53 to 6.30; all chips 8.44 to 5.52). The floor is the width of an ISCC-NBS block, not the scan: a centroid is not the chip. Chips more
+than dE00 15 from their block are `uncertain` (also name, plate-reference or date doubts); 1,312 of 4,014 rows carry the flag and
+`uncertain_why`.
+
+**Merge** (naming policy, CLAUDE.md 2026-10-08). A name already a card gains the date and chip in its note; a name already an alternate
+gains them on the alternate; a name whose own chip is >= dE00 2.5 from every card, verified and not foreign becomes a new card
+(274, best first: ALL CAPS constant-use names, then traditional over trade-code names, older first); the rest become alternates on
+the nearest card (foreign names only as alternates). Library 1,789 -> 1,934 cards (the 129 round-1 Maerz & Paul cards, whose hexes came
+from the shifted grid, are replaced by 274 from the dictionary).
+`data/sources/mp-etymology.json` holds 2,784 names: 2,746 with a first-recorded year, 1,140 with a short paraphrased origin
+(the index's own translation / etymology / trade code, plus the hand-paraphrased Notes facts).
+
+**Limits.** OCR of obscure obsolete words is the weak spot (a name with an unknown word is `suspect` and stays out of the library);
+the date column is "earliest date found" by the authors, not an independent first attestation; two dates conflict-read are flagged;
+`main`'s `python3 tools/library.py --paintings` already fails on a missing "Ink Black" card (not caused by this change).

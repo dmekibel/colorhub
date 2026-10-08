@@ -442,7 +442,7 @@ const weekdayName = () => new Date(Date.now() - 4 * 3600e3).toLocaleDateString(u
 // below it, "the path" draws every unit as its own color (ROADMAP §1, told in color instead of icons).
 function home() {
   if (!S.placed) return welcome();
-  const due = dueList(), nu = nextUnit(), owned = ownedCount(), dc = dailyColor(), dAns = S.daily[today()];
+  const due = dueList(), nu = nextUnit(), owned = ownedCount();
   const cards = cardsAll(), mine = cards.filter(c => isMine(S.cards[c.id])), lrn = cards.filter(c => !isMine(S.cards[c.id]));
   // the collection counts toward the next named checkpoint ("27 of 614 · Fluent"), never toward the first units
   const ck = typeof lxCheckpoint === "function" ? lxCheckpoint(owned) : { n: ALL.length, name: "", approx: false };
@@ -468,14 +468,7 @@ function home() {
   } else {
     h = { title: "Every name on the path, <em>met</em>", plates: mine.slice(0, 12), note: `${cards.length.toLocaleString("en-US")} names met. Reviews keep them yours.`, cta: "", act: "" };
   }
-  // Today's three: the same quiet tile for each, a small picture, a name, and a done / not done line
-  const chR = challengeRounds(), chD = chToday(), tr = todayTrain();
-  const tiles = [
-    { a: "data-challenge", done: !!chD, name: "Challenge", st: chD ? `${chD.hits.filter(Boolean).length} of 6 right` : chStreak() ? `${chStreak()}-day streak` : "6 rounds",
-      art: `<span class="tday-art tday-ch">${chR.map((x, i) => `<i style="--c:${x.base}"${chD ? ` class="${chD.hits[i] ? "hit" : "miss"}"` : ""}></i>`).join("")}</span>` },
-    { a: "data-daily", done: !!dAns, name: "Today's color", st: dAns ? esc(dc.n) : "Name it",
-      art: `<span class="tday-art" data-morph-src style="background:${dc.h}"></span>` },
-    { a: "data-train", done: tr.done, name: "Train", st: tr.done ? "Trained today" : esc(tr.what), art: `<span class="tday-art tday-sa">${tr.art}</span>` }];
+  // Today: the two dailies (Today's painting, Today's color) as two calm tiles with one streak (js/challenge.js)
   // the path: a column of units drawn as their own colors — finished (solid, "Yours"), current (large, named),
   // future (a thin line, waiting)
   const pathRows = UNITS.map(u => {
@@ -491,7 +484,7 @@ function home() {
     <h2 class="title-1" style="margin-top:18px">${h.title}</h2>
     <p class="note" style="margin-top:6px">${h.note}</p>
     ${h.cta ? `<button class="btn" data-${h.act} style="margin-top:20px">${h.cta} ${ICON.arrow}</button>` : ""}
-    <div class="trio" style="margin-top:32px">${tiles.map(t => `<button class="tday${t.done ? " done" : ""}" ${t.a}>${t.art}<b>${t.name}</b><span class="tday-st">${t.st}</span></button>`).join("")}</div>
+    ${dlTodayRow()}
     ${typeof prEntry === "function" ? prEntry() : ""}
     <h3 class="title-3" style="margin-top:32px">The path</h3>
     <div class="path-list">${typeof lxPathHtml === "function" ? lxPathHtml(nu) : pathRows}</div>
@@ -509,9 +502,7 @@ function home() {
   const go1 = () => due.length ? deck("review") : nu ? meet(nu) : null;
   el.querySelectorAll("[data-review],[data-learn],[data-go]").forEach(b => b.onclick = go1);
   el.querySelector("[data-palette]").onclick = () => { S.lens = "spectrum"; save(); go("explore"); };
-  el.querySelector("[data-daily]").onclick = () => daily();
-  el.querySelector("[data-challenge]").onclick = () => chToday() ? challengeDone() : challenge();
-  el.querySelector("[data-train]").onclick = tr.open;
+  dlWireToday(el);
   el.querySelector("[data-menu]").onclick = () => menu();
   onKey = e => { if (e.key === "Enter") go1(); };
 }

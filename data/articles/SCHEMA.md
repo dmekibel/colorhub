@@ -37,7 +37,19 @@ One file per article. Written by the article engine (lane L7), read by the artic
   - `` `text` ``: code (CSS keywords only, e.g. `darkslategray`).
   - `[[slug]]`: a link to a color. Resolves to an article if `data/articles/<slug>.json` exists, else to the color's page (`#/color/<slug>` for the app colors, `#/name/<slug>` for library names, the router decides). Label = that color's display name.
   - `[[slug|label]]`: same, with custom text.
-  - `[[art:<painting-id>|label]]`: a painting in data/gallery (`#/gallery/…`). The id is the gallery id (e.g. `nga-72328`).
+  - **Reference cards** (js/article-refs.js, David 2026-10-08: "every reference to every other thing should be part of the article"). Each draws a small inline chip with a line icon, and a **figure card** after its paragraph (the picture, its name, "94% match to Fiery Rose", one tap opens it; Back returns to the article) when the thing's closest palette color is within ΔE 15 of the article's color (an 85% match; paintings also need 2% of the canvas; a look's palette color must be within ΔE 8). A thing that is not close enough stays a chip: no picture beats a far one. At most two cards per paragraph, a thing gets a card only once per article. Always give a `|label` (the gate fails a painting or painter without one); without it the chip shows the thing's own name once its data loads.
+
+    | Syntax | Id | Source (the gate checks the id exists) |
+    |---|---|---|
+    | `[[gem:ruby\|ruby]]` | gem id | data/gems.js (`ruby`, `spinel`, `lapis-lazuli`…) |
+    | `[[flower:madder\|madder]]` | plant or dye-plant id | data/botany.js plants and dyes (`mauve`, `lavender`, `madder`, `indigo-woad`…) |
+    | `[[painting:nga-72328\|Roses]]` | the museum id (stable), or a gallery number | data/gallery (ids in `data/gallery/ids.txt`, one per line, in gallery order). `[[art:<id>\|label]]` is the older spelling of the same |
+    | `[[look:art-nouveau\|Art Nouveau]]` | look id | data/looks.js |
+    | `[[garment:cma-163622\|a textile]]` | garment id | data/fashion/garments.json |
+    | `[[film:vertigo\|Vertigo]]` | film id | data/films.js (no stills: the card shows the colors the text discusses) |
+    | `[[painter:john-singer-sargent\|Sargent]]` | painter slug | data/artists/meta.json (the card shows his most typical painting for the closest palette color) |
+
+    Use a reference when the sentence is about that thing ("the nearest cut stone is [[gem:spinel|spinel]]"), not as decoration: a card follows its paragraph. Writers do not need to place the **auto-figures**: the reader adds, at most, one painting, gem, flower, look and film per article from the color's nearest twins in `data/graph/` (gems, films, the paintings that hold the color) and the closest plants and looks, each after the section it belongs to ("In painting", "Gems", a plant section…), at most one per section, the rest in a closing "Seen in" strip. Sections named for them (an `art` / `gems` / `material` section) get them in the right place.
   - Never raw HTML.
 - Common section ids (use them when they fit, so the UI can give them icons): `name`, `material`, `chemistry`, `discovery`, `history`, `trade`, `art`, `painters`, `japan` (or another tradition), `myths`, `swatch`, `field`. **`field` is always last** and holds the "Field notes" prose (our own data, always with n and "as photographed").
 
@@ -104,6 +116,7 @@ The numbers the prose quotes, so the UI can draw them (charts, shelves) and late
 - A phrase from the CLAUDE.md myth list without a correcting cue (myth, legend, not, never, claim, rumor, disputed…) in the same sentence or the next.
 - The words "the 101".
 - A `[[slug]]` link, or an aside sibling/child/parent, that resolves to no slug in `data/graph/names.json` and no article; an `[[art:id|label]]` not in `data/gallery`.
+- A reference card (`[[gem:…]]` `[[flower:…]]` `[[painting:…]]` `[[look:…]]` `[[garment:…]]` `[[film:…]]` `[[painter:…]]`) whose id is not in its dataset, or a painting or painter reference with no `|label`. (`tools/article_test.js` repeats this against the real data and checks the closeness threshold and the auto-figure limits.)
 - Not 2–3 questions, a bad question kind, or an answer not among its choices.
 - Fewer than 4 connections (siblings + children + parent + `[[links]]`) or fewer than 3 `field` keys.
 

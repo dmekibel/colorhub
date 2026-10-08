@@ -5,13 +5,18 @@
 // Screenshot mode for design review: index.html#shot=<screen> renders one screen with sample progress
 // (in memory only; nothing is saved). Used by tools/shots.sh. It waits for the whole wiki first.
 const SHOT = location.hash.startsWith("#shot=") ? decodeURIComponent(location.hash.slice(6)) : null;
-if (SHOT) loadWiki().then(() => shot(SHOT));
-else {
+// Start once every script is in: js/artwiki.js, article.js, looks.js and friends load after this file, and a
+// first-load address like #/painter/<slug> or #/hub/<id> fell back to Home without them.
+function bootStart() {
+  if (typeof routeWrapAll === "function") routeWrapAll();   // js/router.js: wrap screens from scripts that loaded after it
+  if (SHOT) return loadWiki().then(() => shot(SHOT));
   ROUTE_REPLACE = true;   // the first screen takes over the page's own history entry
   // Home (the honeycomb) is the floor of the app (DESIGN-SYSTEM.md §2) and the default landing place, not a tab.
   if (!openRoute(location.hash, true)) S.placed ? hmHome() : welcome();
   prefetchWiki();
 }
+if (document.readyState === "loading") addEventListener("DOMContentLoaded", bootStart, { once: true });
+else bootStart();
 
 function shot(name) {
   S = Object.assign(fresh(), { placed: { tier: 2, at: today() }, done: { "t2-blues": today() }, profileAsked: true });
@@ -105,6 +110,7 @@ function shot(name) {
     case "page": return openNode(g().nodes.get(arg || "alchemy"));
     case "story": { const st = g().stories[+arg || 0]; return storyPlayer(st); }
     case "daily": S.daily = {}; return daily();
+    case "dl": return dlShot(arg);   // the two dailies (js/challenge.js): dl:row · dl:paint[:<round 0-4>|:end] · dl:name[:three|:hint|:won|:lost]
     case "lab": return LAB[arg || "harmony"]();
     case "honeylab": return labHoney();   // the honeycomb lab (#/lab/honey) — not reachable through the router in shot mode
     // archive (js/passages.js, js/films.js): passage:<id>, passages[:<family>], film:<id>, cpage:<color> (scrolled to In books), films (Ideas lens at Films)
