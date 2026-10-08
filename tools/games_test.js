@@ -139,7 +139,10 @@ for (const [j, truth, g] of [["hue", 1.4, 1 / 9], ["light", 2.1, 1 / 16], ["chro
     if (b === "sizes") { const area = g.cells.reduce((a, c) => a + c.w * c.h, 0); ok(Math.abs(area - 1) < 1e-9, "mixed sizes tile the whole board"); }
   }
   ok(E.ooCells("honey", 19, rnd).cells.length === 19 && E.ooCells("honey", 7, rnd).cells.length === 7, "honeycombs have 7 or 19 cells");
-  ok(E.OO_LEVELS.length === 24 && E.OO_LEVELS.every(l => l.news && l.name), "24 levels, each with a name and its news");
+  ok(E.OO_LEVELS.length === 20 && E.OO_GAPS.length === 20, "20 levels, each a gap");
+  ok(E.OO_GAPS.every((g, i) => i === 0 || g < E.OO_GAPS[i - 1]) && E.OO_GAPS[0] >= 11 && E.OO_GAPS[19] <= 0.7, "gaps fall from obvious (12) to the edge (0.6)");
+  ok(E.OO_LEVELS.every(l => l.v === undefined && l.b === undefined), "a level carries no layout: the layout is a separate axis");
+  ok(E.ooLevelOfGap(2.1) === E.OO_GAPS.indexOf(2.1) && E.ooLevelForTh(1.0, 2) === E.ooLevelOfGap(2), "a threshold maps onto the ladder");
   ok(E.ooTierAt(0, true) === "intro" && E.ooTierAt(1, true) === "intro" && E.ooTierAt(2, true) === "hard", "a new kind of round arrives easy");
   ok(E.OO_BREATH.join() === "easy,medium,hard,easy,harder,boss", "the set breathes easy, medium, hard, easy, harder, boss");
   const o = E.ooOrderRound(8, 3, rnd);
@@ -171,6 +174,60 @@ for (const [j, truth, g] of [["hue", 1.4, 1 / 9], ["light", 2.1, 1 / 16], ["chro
   }
   say(`Painters' pairs: ${n} rounds drawn, ${bad} not drawable`);
   ok(bad === 0, "every variant and tier can be drawn");
+}
+
+// ---------- 7. layouts: every layout can be drawn at every level it is offered at; moving up only shrinks the gap ----------
+{
+  let n = 0, bad = 0;
+  for (const l of E.OO_LAYOUTS) {
+    if (l.b === "painting") continue;
+    for (const i of [0, 5, 10, 15, 19]) {
+      const g = E.ooLevelGap(i);
+      if (l.gmax && g > l.gmax) continue;
+      for (let k = 0; k < 6; k++) {
+        const r = E.ooRound({ v: l.v, b: l.b, n: l.n, d: g * E.ooLayoutF(l), rnd, twist: l.tw });
+        n++; if (r.fallback) bad++;
+      }
+    }
+  }
+  ok(bad === 0, `every layout draws at every level it is offered at (${n} rounds, ${bad} fallbacks)`);
+  ok(E.ooLayoutsFor(0, 3).length >= 3 && E.ooLayoutsFor(0, 3).every(l => l.at === 0), "a new player sees only the first layouts");
+  ok(E.ooLayoutsFor(99, 12).every(l => !l.gmax || 12 <= l.gmax) && E.ooLayoutsFor(99, 1).length === E.OO_LAYOUTS.length, "gap-limited layouts drop out only where they can't be drawn");
+  const seen = {}; let last = null; const picked = [];
+  for (let k = 0; k < 40; k++) { const l = E.ooLayoutNext(E.ooLayoutsFor(99, 2), seen, last, rnd, k % 10); picked.push(l.id); if (l.id === last) bad++; last = l.id; }
+  ok(new Set(picked).size >= 8 && bad === 0, "rounds rotate through many layouts and never repeat one back to back");
+}
+
+// ---------- 8. For you or Choose, the level map, test-out and the edge estimate ----------
+{
+  ok(E.ooPickTier({}) === null && E.ooPickTier({ m: "pick", d: "hard" }) === "hard" && E.ooPickTier({ m: "pick", d: "expert" }) === "harder" && E.ooPickTier({ m: "pick", d: "edge" }) === "boss", "For you has no tier; Choose maps Easy..Edge onto the tiers");
+  ok(E.ooPrefNorm({ m: "pick", d: "bogus" }).d === "medium" && E.ooPrefNorm(null).m === "you", "a damaged preference is repaired");
+  const lv = d => E.ooPickLevel({ m: "pick", d }, 2);
+  ok(lv("easy") < lv("medium") && lv("medium") < lv("hard") && lv("hard") < lv("expert"), "Easy to Expert climb the ladder");
+  ok(E.ooPickLevel({ m: "pick", d: "edge" }, 1.0) === E.ooLevelOfGap(1.0) && E.ooPickLevel({}, 1) === null, "Edge of my eye sits at your measured threshold; For you has no pick");
+  ok(E.ooPickLevel({ m: "pick", d: "level", lv: 17 }) === 17, "a level tapped on the map is played as chosen");
+  ok(E.ooTestTier({ m: "pick", d: "easy" }) === "hard" && E.ooTestTier({ m: "pick", d: "expert" }) === "harder" && E.ooTestTier({}) === "hard", "a test-out is at least Hard");
+  const stars = { 0: [1, 0, 0], 1: [1, 0, 0] }, cl = {};
+  ok(E.ooFrontier(stars, cl) === 2, "the frontier is the first level not passed");
+  const k = E.ooTestOutMark(cl, 9);
+  ok(k === 9 && E.ooFrontier(stars, cl) === 9 && E.ooDoneAt(stars, cl, 4) && !E.ooDoneAt(stars, cl, 9), "a passed test-out clears every level below it, not itself");
+  ok(E.OO_LEVEL_PASS === 8 && E.OO_LEVEL_ROUNDS === 10, "a level is passed with 8 of 10");
+  // a chosen difficulty still teaches the model fairly: an observer playing only Easy or only Hard ends at the same threshold
+  const truth = 2, g = 0;
+  const run = tier => { const m = E.ooModel({}); for (let t = 0; t < 400; t++) { const d = E.ooTheta(m, "hue", "Blues") * E.OO_TIER[tier]; E.ooUpdate(m, "hue", "Blues", d, rnd() < E.ooP(d, truth, g), g); } return E.ooTheta(m, "hue", "Blues"); };
+  const easy = run("easy"), hard = run("hard"), edge = run("boss");
+  ok([easy, hard, edge].every(x => Math.abs(Math.log(x / truth)) < .35), `Easy (${easy.toFixed(2)}), Hard (${hard.toFixed(2)}) and Edge (${edge.toFixed(2)}) all find the true threshold ${truth}`);
+  // the edge estimate for the games without an eye model
+  for (const game of ["line", "pairs", "whose"]) {
+    const C = E.OO_EDGE[game], tr = C.th * 1.7, e = { r: NaN, n: 0 };
+    for (let t = 0; t < 300; t++) { const d = E.ooEdgeD(e, game, E.OO_BREATH[t % 6]); E.ooEdgeUpdate(e, game, d, rnd() < E.ooP(d, tr, C.g)); }
+    const th = E.ooEdgeTh(e, game);
+    ok(Math.abs(Math.log(th / Math.min(C.hi, Math.max(C.lo, tr)))) < .4, `${game}: the edge estimate finds the observer (${th.toFixed(2)} vs ${tr.toFixed(2)})`);
+  }
+  const wl = [1, 2, 3, 4, 5, 6, 7, 8], lo = [], hi = [];
+  for (let t = 0; t < 60; t++) { lo.push(E.ooWhoseAlts(wl, .1, rnd).alts[0]); hi.push(E.ooWhoseAlts(wl, .9, rnd).alts[0]); }
+  ok(lo.reduce((a, b) => a + b) / 60 < hi.reduce((a, b) => a + b) / 60 && E.ooWhoseAlts(wl, .5, rnd).alts.length === 2 && E.ooWhoseAlts([1, 2], .5, rnd).ease === null, "Whose palette?: higher ease draws farther decoys");
+  ok(E.ooPairRatioOf([0, 0, 0, 0, 3], [0, 0, 0, 0, 1.5]) === 2 || Math.abs(E.ooPairRatioOf([0, 0, 0, 0, 3], [0, 0, 0, 0, 1.5]) - 2) < 1e-9, "pair ratio is the larger lift over the smaller");
 }
 
 say(`\n${passes} passed, ${fails} failed`);

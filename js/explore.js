@@ -159,8 +159,10 @@ function exploreHome() {
 }
 // a part's cover opens the same way a honeycomb bubble or a painting thumbnail would (DESIGN-SYSTEM §8):
 // here, a plain lens switch, re-using the pattern every lens chip used before this redesign.
-function openPart(part) { S.lens = part; save(); exploreHome(); }
-function backToPager() { openPart("all"); }
+// (a part is inside the Museum room, so it carries the room's address even when a color page sent you here)
+function openPart(part) { S.lens = part; S.tab = "explore"; save(); exploreHome(); }
+// Back from a part: to the page that opened it, if a page did (js/trail.js tlBackUnder), else the Museum's covers
+function backToPager() { if (typeof tlBackUnder === "function" && tlBackUnder()) return; openPart("all"); }
 
 // ---------- tinting a cover or the Art header from its darkest dominant color (DESIGN-SYSTEM §3, §12) ----------
 // L* <= 18, chroma <= 20: dark and quiet enough that --ink text over it still clears 7:1.
@@ -227,7 +229,7 @@ function explorePager() {
     <div class="xp-wrap">
       <div class="xp-pager" id="xpPager">${covers.join("")}</div>
       <div class="xp-dots">${covers.map((_, i) => `<i class="${i === 0 ? "on" : ""}"></i>`).join("")}</div>
-      <button class="xp-search" data-search aria-label="Search Explore">${ICON.search}</button>
+      <button class="xp-search" data-search aria-label="Search the ${NAV_MUSEUM}">${ICON.search}</button>
     </div>
   `, "explore", "explore");
   const pager = el.querySelector("#xpPager"), dots = [...el.querySelectorAll(".xp-dots i")], sections = [...pager.querySelectorAll(".xp-cover")];
@@ -294,7 +296,7 @@ function exploreSaved() {
 let ART_UI = { hex: null, name: "" };   // the picked color, or none for "a new mix every day"
 // the shared entry point: "Paintings/poems with this color", from a color page, the color link sheet, or
 // anywhere else that used to send people to the old Paintings lens (js/gallery.js, js/swatch.js, js/poems.js).
-function artOpenColor(hex, name) { ART_UI = { hex, name: name || "" }; openPart("art"); }
+function artOpenColor(hex, name) { if (typeof tlKeepUnder === "function") tlKeepUnder(); ART_UI = { hex, name: name || "" }; openPart("art"); }
 // a plain gallery pin, built straight from the GAL corpus index (js/gallery.js) rather than a graph node, so
 // Art can show any of the ~40,000 paintings, not only the hand-written "Featured" ones pin() above knows.
 function artGalPinHTML(i) {
@@ -453,7 +455,7 @@ const orbit = id => closeup(graph().nodes.get(id));
 function openNode(n, push = true, tapped) {
   if (!n) return;
   if (n.kind === "story") return storyPlayer(n);
-  if (push) XSTACK.push("p:" + n.id);
+  if (push && XSTACK[XSTACK.length - 1] !== "p:" + n.id) XSTACK.push("p:" + n.id);   // one entry, even when two handlers open the same link
   if (n.kind === "color") return colorPage(n, tapped);
   if (n.kind === "painting") return paintingPage(n);
   if (n.page) return n.page(n);   // archive pages (passages, films) bring their own renderer
@@ -462,16 +464,22 @@ function openNode(n, push = true, tapped) {
 // Pinterest-style back (ROADMAP.md §17 job #2): XSTACK is the one shared crumb trail behind every screen this
 // app can open from the honeycomb, Explore, the gallery or Studio's photo shelf — whichever of those opened
 // the first screen in a chain, going back far enough always lands there, never on an unrelated tab.
-// The fallback when the trail runs out: whatever tab we're logically in (S.tab keeps whatever it was set to by
-// go()/hmHome() and never changes just from opening a page), so a chain rooted in the honeycomb or Studio
-// returns there instead of always landing on Explore.
-const xFallbackTab = () => ["learn", "gym", "studio"].includes(S.tab) ? S.tab : "explore";
+// When the trail runs out it goes back to where it started (X_ROOT, set by js/trail.js whenever a room or the map
+// shows, and by router.js for a page opened from an address): that room, or else the map. Never a guessed room
+// (David, 2026-10-08: "sometimes the app takes you to the Explore page without you wanting to").
+const xFallbackTab = () => ["learn", "gym", "explore", "studio"].includes(X_ROOT) ? X_ROOT : null;
+function xToOrigin() {
+  const r = xFallbackTab();
+  if (r) return go(r);
+  X_ROOT = null;
+  return typeof hmHome === "function" ? hmHome() : go("learn");
+}
 // Where a chain of pages started when that wasn't a room: "home" when a bubble on the honeycomb opened it. Home is its
 // own floor now (not a tab), so without this the trail ran out onto whatever room S.tab last pointed at, and a pull-down
 // on a color opened from Home dropped you into Studio (David). go() clears it.
 let X_ROOT = null;
 function xStep(prev) {
-  if (!prev) return X_ROOT === "home" && typeof hmHome === "function" ? (X_ROOT = null, hmHome()) : go(xFallbackTab());
+  if (!prev) return xToOrigin();
   // Studio screens (ROADMAP.md §17 job #1): plain tokens (no ":"), since each reopens from its own remembered
   // state rather than an id. Checked before the generic node lookup at the bottom, which would otherwise treat
   // "harmony" etc. as a (nonexistent) graph node id and silently do nothing.
@@ -486,17 +494,18 @@ function xStep(prev) {
   if (prev === "harmony") return LAB.harmony(LAB_HARMONY_STATE && LAB_HARMONY_STATE.base, LAB_HARMONY_STATE && LAB_HARMONY_STATE.scheme, false);
   if (prev === "contrast") return LAB.contrast(LAB_CONTRAST_STATE && LAB_CONTRAST_STATE.set, LAB_CONTRAST_STATE && LAB_CONTRAST_STATE.slot, false);
   if (prev.startsWith("pal:")) return openSavedPalette(prev.slice(4), false);   // a saved palette (js/studio.js)
-  if (prev.startsWith("g:")) return galleryPage(+prev.slice(2), false);   // a gallery painting (js/gallery.js)
+  if (prev.startsWith("g:")) return galleryPage(+prev.slice(2), false, ...(typeof tlTapped === "function" ? [tlTapped(prev), tlTol(prev)] : []));   // with the color that brought you (js/trail.js)   // a gallery painting (js/gallery.js)
   if (prev.startsWith("ar:") && typeof arStep === "function") return arStep(prev.slice(3));   // a hub or "which" page (js/article.js)
   if (prev.startsWith("ph:")) return photoPage(prev.slice(3), false);   // a saved photo (js/photos.js)
   if (prev.startsWith("poem:")) return poemPage(prev.slice(5), { back: true });   // a poem (js/poems.js)
   // a library color's own page, not one of the 101 (js/names.js): it isn't a graph node, so look it up by name
   if (prev.startsWith("n:")) {
     const nm = decodeURIComponent(prev.slice(2));
-    return loadCoreNames().then(() => { const e = (CORE_NAMES || []).find(x => x.n === nm); e ? namePage(e, false) : go(xFallbackTab()); });
+    return loadCoreNames().then(() => { const e = (CORE_NAMES || []).find(x => x.n === nm); e ? namePage(e, false, typeof tlTapped === "function" ? tlTapped(prev) : null) : xToOrigin(); });
   }
+  if (prev.startsWith("r:") && typeof tlReplay === "function") return tlReplay(prev);   // any other addressed screen (js/trail.js)
   const node = graph().nodes.get(prev.replace(/^[zp]:/, ""));
-  return prev.startsWith("z:") ? closeup(node, { back: true }) : openNode(node, false);
+  return prev.startsWith("z:") ? closeup(node, { back: true }) : openNode(node, false, typeof tlTapped === "function" ? tlTapped(prev) : null);   // the exact tapped color too (js/trail.js)
 }
 function xBack() { XSTACK.pop(); BACK_RENDER = true; xStep(XSTACK[XSTACK.length - 1]); }
 // links inside any article
@@ -719,6 +728,8 @@ function paintingPage(n) {
     ${n.commons ? `<section class="srcs"><h3>Image</h3><ul><li><a href="${esc(n.commons)}" target="_blank" rel="noopener">Wikimedia Commons</a> · ${esc(n.license || "Public domain")}</li></ul></section>` : ""}
   `, "article");
   wireArticle(el, n);
+  // L18 H4: the ColorSet verbs for this painting, "On the map" first (js/home.js hmPaintingSet, js/colorset.js csActions)
+  if (pal.length && typeof hmPaintingSet === "function" && typeof csActions === "function") { const fine = el.querySelector(".pal-names + .fine"); if (fine) fine.after(csActions(hmPaintingSet(n), { only: ["map", "learn", "play"], back: () => paintingPage(n) })); }
   // highlight where a palette color sits, using the index map
   const img = el.querySelector("#pimg"), cv = el.querySelector("#pmask");
   let mapData = null;

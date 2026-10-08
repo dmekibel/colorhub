@@ -52,7 +52,7 @@ let SHOW_N = 0;   // bumped by every show(): a later screen cancels a pending on
 function waitScreen(tab) {
   const blocks = Array.from({ length: 6 }, (_, k) => `<i style="--k:${k};height:${[150, 210, 180, 240, 170, 200][k]}px"></i>`).join("");
   const body = tab === "explore"
-    ? `<header class="x-head"><div class="x-row"><h1 class="tab-title">Explore</h1></div></header><div class="wait-grid">${blocks}</div>`
+    ? `<header class="x-head"><div class="x-row"><h1 class="tab-title">${NAV_MUSEUM}</h1></div></header><div class="wait-grid">${blocks}</div>`
     : `<header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button></header><div class="wait-hero"></div><div class="wait-lines"><i></i><i></i><i></i><i></i></div>`;
   const el = show(`${body}<p class="wait-note" role="status">Loading the color wiki…</p>`, tab === "explore" ? "explore waiting" : "article waiting", tab || null);
   const b = el.querySelector("[data-back]"); if (b) b.onclick = () => go(S.tab || "learn");

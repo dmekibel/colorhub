@@ -7,13 +7,20 @@
 
 // ---------- state: S.games.oo (lazily created; unknown keys are kept; malformed parts are repaired) ----------
 // { lv: highest unlocked level index, stars: { i: [finish, fast, noHint] }, best: { i: points }, model: {j, f},
-//   seen: { kind: n }, daily: { day: [{ok, ms, act}] }, mix: { id: { stars, best } }, snaps: [[day, {axis: th}]], sets: n }
+//   seen: { kind: n }, daily: { day: [{ok, ms, act}] }, mix: { id: { stars, best } }, snaps: [[day, {axis: th}]], sets: n,
+//   cleared: { i: 1 } (levels a test-out cleared), pref: { game: { m: "you" | "pick", d } } (For you or Choose, per game),
+//   line / pairs / whose: { edge: { r, n } } (the edge estimate of the games without an eye model) }
+// you: the level For you plays now (starts near your measured threshold, moves with every set you pass or miss);
+// stars[i] / cleared[i] are per ladder level (design/ODD-ONE-OUT.md); old: the stars of the old 24-kind levels, kept.
+// Every level is open to jump into.
 const ooObj = x => x && typeof x === "object" && !Array.isArray(x);
 function ooS() {
   if (!ooObj(S.games)) S.games = {};
   const o = ooObj(S.games.oo) ? S.games.oo : (S.games.oo = {});
-  o.lv = Number.isInteger(o.lv) ? clamp(o.lv, 0, OO_LEVELS.length - 1) : 0;
-  ["stars", "best", "seen", "daily", "mix"].forEach(k => { if (!ooObj(o[k])) o[k] = {}; });
+  ["stars", "best", "seen", "daily", "mix", "cleared", "pref"].forEach(k => { if (!ooObj(o[k])) o[k] = {}; });
+  // levels used to be 24 different kinds of board; they are now a ladder of gaps. The old stars are kept, not reused.
+  if (!o.v3) { if (Object.keys(o.stars).length || o.lv) o.old = { stars: o.stars, best: o.best, lv: o.lv }; o.stars = {}; o.best = {}; o.cleared = {}; o.v3 = 1; delete o.lv; }
+  if (Number.isInteger(o.you)) o.you = clamp(o.you, 0, OO_LEVEL_N - 1);
   o.model = ooModel(ooObj(o.model) ? o.model : {});
   if (!Array.isArray(o.snaps)) o.snaps = [];
   o.sets = +o.sets || 0;
@@ -22,8 +29,67 @@ function ooS() {
 const ooStars = i => { const s = ooS().stars[i]; return Array.isArray(s) ? s : [0, 0, 0]; };
 const ooStarCount = () => Object.values(ooS().stars).reduce((a, s) => a + (Array.isArray(s) ? s.filter(Boolean).length : 0), 0)
   + Object.values(ooS().mix).reduce((a, m) => a + (m && Array.isArray(m.stars) ? m.stars.filter(Boolean).length : 0), 0);
-const ooMixOpen = () => ooS().lv > OO_MIX_AT - 1 || !!(ooStars(OO_MIX_AT - 1)[0]);
+const ooMixOpen = () => { const st = ooS(); return ooDoneAt(st.stars, st.cleared, OO_MIX_AT - 1); };
+// the level For you plays: it starts at twice your measured threshold (a comfortable gap just above your edge), or level 1 for a new eye
+function ooYou() {
+  const st = ooS();
+  if (!Number.isInteger(st.you)) { const e = ooEye(st.model, null, null); st.you = e.th && e.n >= 6 ? ooLevelForTh(e.th, 2) : 0; }
+  return st.you;
+}
+// the level your threshold sits at (the Edge of my eye), or null before you have been measured
+function ooEdgeLevel() { const e = ooEye(ooS().model, null, null); return e.th && e.n >= 6 ? ooLevelForTh(e.th, 1) : null; }
+// the level a Choose pick plays
+const ooPickLv = () => { const e = ooEye(ooS().model, null, null); return ooPickLevel(ooPref("oo"), e.th); };
+const ooDone = i => { const st = ooS(); return ooDoneAt(st.stars, st.cleared, i); };
 const ooShotMode = () => typeof SHOT !== "undefined" && !!SHOT;
+
+// ======================================================================
+// For you or Choose: one compact control, the same on every game, remembered per game (S.games.oo.pref[game]).
+// For you adapts, as it always did. Choose pins the game at a difficulty (Easy to Expert, or the Edge of my eye,
+// which sits right at your measured threshold). Chosen rounds are still drawn from your own estimate, and every
+// answer updates it by the difference actually drawn, so a chosen difficulty never skews the eye profile.
+// Games: "oo" (Odd one out and its Mix), "line" (Across the line), "pairs" (Painters' pairs), "whose" (Whose palette?).
+// ======================================================================
+const ooPref = game => { const p = ooS().pref; return (p[game] = ooPrefNorm(p[game])); };
+const ooPickFor = game => ooPickTier(ooPref(game));   // the tier to draw at, or null for For you
+const ooTierLabel = t => (OO_DIFFS.find(d => d[2] === t) || OO_DIFFS[2])[1];
+const OO_PK_ABOUT = {
+  easy: "Wide gaps: a calm warm-up.", medium: "A fair gap: a quick look finds it.",
+  hard: "A narrow gap: you'll miss some.", expert: "Narrower still, close to your limit.",
+};
+const OO_PK_YOU = {
+  oo: "Adapts to your eye, and starts gently on anything new.", line: "Adapts: the push past the line shrinks as you improve.",
+  pairs: "Adapts: the two pairs sit closer together as you improve.", whose: "Adapts: the other painters get closer to the right one as you improve.",
+};
+function ooPickNote(game, p) {
+  if (p.m !== "pick") return game === "oo" ? `Next for you: level ${ooYou() + 1}, a ${pctFmt(ooLevelGap(ooYou()))} gap. It moves with your results.` : OO_PK_YOU[game] || "";
+  if (game === "oo") {
+    const lv = ooPickLv(), e = ooEye(ooS().model, null, null), at = `Level ${lv + 1}, a ${pctFmt(ooLevelGap(lv))} gap.`;
+    if (p.d === "edge") return e.th && e.n >= 6 ? `${at} Right at your limit, from ${e.n} answers.` : `${at} Not measured yet, so this is a first guess; it sharpens as you play.`;
+    return p.d === "level" ? at : `${at} ${OO_PK_ABOUT[p.d]}`;
+  }
+  if (p.d !== "edge") return OO_PK_ABOUT[p.d] || "";
+  const e = (ooS()[game] || {}).edge;
+  return e && e.n ? `Right at your limit, from ${e.n} answers.` : "Right at your limit. Not measured yet: it sharpens as you play.";
+}
+function ooPickHTML(game) {
+  const p = ooPref(game), pick = p.m === "pick";
+  return `<div class="oo-pk">
+    <div class="oo-pk-seg" role="radiogroup" aria-label="Difficulty">${[["you", "For you"], ["pick", "Choose"]].map(([m, l]) => `<button class="${p.m === m ? "on" : ""}" role="radio" aria-checked="${p.m === m}" data-pk-m="${m}">${l}</button>`).join("")}</div>
+    ${pick ? `<div class="oo-pk-ch" role="radiogroup" aria-label="Pick a difficulty">${OO_DIFFS.map(([id, name]) => `<button class="${p.d === id ? "on" : ""}" role="radio" aria-checked="${p.d === id}" data-pk-d="${id}">${name}</button>`).join("")}</div>` : ""}
+    <p class="oo-pk-note">${esc(ooPickNote(game, p))}</p></div>`;
+}
+// fills host with the control and keeps it in step with the saved choice; onChange runs after a tap
+function ooPickMount(host, game, onChange) {
+  const draw = () => {
+    host.innerHTML = ooPickHTML(game);
+    host.querySelectorAll("[data-pk-m]").forEach(b => b.onclick = () => { ooPref(game).m = b.dataset.pkM; save(); buzz(4); draw(); if (onChange) onChange(); });
+    host.querySelectorAll("[data-pk-d]").forEach(b => b.onclick = () => { ooPref(game).d = b.dataset.pkD; save(); buzz(4); draw(); if (onChange) onChange(); });
+  };
+  draw();
+}
+// a line for the results: what the set was drawn at (null in For you)
+const ooPickLine = game => { const p = ooPref(game); return p.m === "pick" ? `Played at ${ooDiffName(p.d)}, your choice.` : null; };
 
 // ---------- the reader other screens use: can this person see a difference? ----------
 // ooEyeInfo(family, axis): family like "Blues" (or "blue"), axis "light" | "chroma" | "hue" (or "lightness",
@@ -77,7 +143,9 @@ function ooSpec(L, i, o = {}) {
   const judg = tw === "flash" ? "memory" : ["busy", "sizes", "mosaic", "gradient", "painting"].includes(b) ? "context" : axis || "any";
   const th = judg === "any" ? Math.exp(OO_AXES.reduce((a, j) => a + Math.log(ooTheta(m, j, fam)), 0) / 3) : ooTheta(m, judg, fam);
   const cols = ooCols(b, n), bf = (OO_BF[b] || 1) * (["grid", "busy", "gradient"].includes(b) ? (cols <= 4 ? 1 : cols === 5 ? 1.1 : cols === 6 ? 1.2 : 1.28) : 1);
-  const d = clamp(o.d != null ? o.d : th * OO_TIER[tier] * (OO_VF[v] || 1) * bf * (tw === "breathe" ? 1.1 : 1), OO_MIN, OO_MAX);
+  // o.gap: a ladder level's gap, drawn through the layout's modifier so every layout sits at the same perceptual level
+  const jit = o.gap != null ? .94 + (o.rnd || Math.random)() * .12 : 1, ease = o.gap != null && novel && !o.noEase ? 1.6 : 1;
+  const d = clamp(o.d != null ? o.d : o.gap != null ? o.gap * jit * ease * (OO_VF[v] || 1) * bf * (tw === "breathe" ? 1.1 : 1) : th * OO_TIER[tier] * (OO_VF[v] || 1) * bf * (tw === "breathe" ? 1.1 : 1), OO_MIN, OO_MAX);
   const illusion = tw === "illusion" && !novel && rnd() < .25;
   return { v, b, n, tw, d, axis, fam, rnd, tier, novel, kind, illusion, base: o.base || null, set: o.set || null, pool: o.set ? null : ooPool() };
 }
@@ -325,7 +393,7 @@ function ooRun(cfg) {
     showCombo(moment);
     save();
     const fb = kind === "board" ? ooLine(r, res) : { html: res.line || "", cmp: res.cmp || null };
-    const last = (cfg.endOnMiss && !res.ok) || (cfg.lives && st.lives <= 0) || (!cfg.lives && !cfg.endOnMiss && st.i >= cfg.total) || st.i >= (cfg.max || 99);
+    const last = (cfg.endOnMiss && !res.ok) || (cfg.lives && st.lives <= 0) || (!cfg.lives && !cfg.endOnMiss && st.i >= cfg.total) || st.i >= (cfg.max || 99) || (cfg.endWhen && cfg.endWhen(st));
     const cmp = fb.cmp ? `<div class="oo-cmp">${fb.cmp.map(([h, w]) => `<span><i style="--c:${h}"></i><em>${esc(w)}</em></span>`).join("")}</div>` : "";
     if (res.ok && !last && !it.hold) {
       ui.foot.innerHTML = `<p class="oo-fb ok oo-in">${fb.html}</p>`;
@@ -360,81 +428,115 @@ function ooLine(r, res) {
 }
 
 // ======================================================================
-// Levels
+// Levels: a ladder of gaps (design/ODD-ONE-OUT.md). A level is one number, the gap between the odd tile and the
+// rest. Rounds inside it rotate through the layouts you've met; a level is passed by accuracy, 8 of 10.
 // ======================================================================
-function ooPlayLevel(i) {
-  if (!S.scr && !ooShotMode() && typeof screenCheck === "function") return screenCheck(() => ooPlayLevel(i));
-  const L = OO_LEVELS[i];
-  if (!L) return ooMap();
-  const st = ooS(), tw = L.tw, survival = tw === "survival", grow = tw === "grow";
-  const first = st.sets === 0 && i === 0, warm = !!st.last && st.last !== today();
-  let stair = null, n = L.n, chainBase = null;
-  const tierFor = (k, novel, run) => warm && k === 0 ? "easy" : ooAdjTier(ooTierAt(k, novel), run);
+// opt.test: three rounds at this gap, all right, and every level below counts as cleared. opt.layout pins one layout.
+function ooPlayLevel(i, opt = {}) {
+  if (!S.scr && !ooShotMode() && typeof screenCheck === "function") return screenCheck(() => ooPlayLevel(i, opt));
+  i = clamp(i | 0, 0, OO_LEVEL_N - 1);
+  const st = ooS(), gap = ooLevelGap(i), test = !!opt.test, rounds = test ? OO_TEST_ROUNDS : OO_LEVEL_ROUNDS, need = test ? OO_TEST_ROUNDS : OO_LEVEL_PASS;
+  const first = !test && st.sets === 0 && i === ooYou() && !opt.layout, warm = !test && !opt.layout && !!st.last && st.last !== today();
+  let last = null, chainBase = null;
   const gen = (k, run) => {
-    if (survival || grow) {
-      // the board grows; in survival the difference also follows a 2-down / 1-up staircase
-      if (!stair) { const sp0 = ooSpec(L, 0, { tier: "medium" }); stair = ooStair(sp0.d); }
-      else if (run.prev) ooStairStep(stair, !!run.prev.res.ok);
-      n = Math.min(7, 3 + (survival ? Math.floor(run.hits / 2) : run.hits));
-      const sp = ooSpec(L, k, { n, tw: null, d: survival ? stair.d : null, tier: grow ? "medium" : null });
-      const r = ooRound(sp); Object.assign(r, { tw, kindKey: ooKindKey(L.v, L.b, tw), fam: sp.fam || r.fam });
-      return { r, o: { hint: true }, note: k > 0 && n > 3 && (survival ? run.hits % 2 === 0 : true) && run.prev && run.prev.res.ok ? `${n} × ${n}` : null };
-    }
-    if (L.v === "mixed") {
-      const [v, b, nn, t] = ooPick(OO_KINDS, Math.random), sp0 = ooSpec(L, k, { v, b, n: nn, tw: t || null }), sp = { ...sp0, tier: tierFor(k, sp0.novel, run) };
-      sp.d = ooSpec(L, k, { v, b, n: nn, tw: t || null, tier: sp.tier }).d;
-      const r = ooRound({ ...sp, twist: t }); Object.assign(r, { tw: t, kindKey: sp.kind });
-      return { r, o: { flash: t === "flash", none: b === "busy", hint: true, nudge: sp.novel && k === 0 ? 6000 : 0 } };
-    }
-    const novel = (st.seen[ooKindKey(L.v, L.b, tw)] || 0) < 2;
-    const sp = ooSpec(L, k, { base: tw === "chain" ? chainBase : null, tier: tierFor(k, novel, run) });
+    const lay = opt.layout ? ooLayout(opt.layout) : first && k < 3 ? ooLayout("grid3") : ooLayoutNext(ooLayoutsFor(st.sets, gap), st.seen, last, Math.random, k);
+    last = lay.id;
+    const kind = ooKindKey(lay.v, lay.b, lay.tw), seen = st.seen[kind] || 0;
+    const sp = ooSpec(lay, k, { gap, base: lay.tw === "chain" ? chainBase : null, tw: lay.tw });
     let r;
-    if (L.b === "painting") { r = ooPaintRound(sp); r.v = L.v; }
-    else r = ooRound({ ...sp, twist: tw });
-    Object.assign(r, { tw, kindKey: sp.kind, fam: sp.fam || r.fam, rnd: sp.rnd });
-    if (tw === "chain") chainBase = r.odd && !r.none ? r.odd : chainBase;
-    return { r, o: { flash: tw === "flash", breathe: tw === "breathe", none: L.b === "busy", hint: !(first && k < 3),
-      teach: first && k === 0 ? "One tile is a little different. Tap it." : null, nudge: first && k < 2 ? 3500 : novel && k === 0 ? 6000 : 0 },
-      note: warm && k === 0 ? "Warm-up" : tw === "chain" && k > 0 ? "The odd color is the new base" : null };
+    if (lay.b === "painting") { r = ooPaintRound(sp); r.v = lay.v; }
+    else r = ooRound({ ...sp, twist: lay.tw });
+    Object.assign(r, { tw: lay.tw, kindKey: kind, fam: sp.fam || r.fam, rnd: sp.rnd, layout: lay.id, level: i });
+    chainBase = lay.tw === "chain" && r.odd && !r.none ? r.odd : null;
+    return { r, o: { flash: lay.tw === "flash", breathe: lay.tw === "breathe", none: lay.b === "busy", hint: !(first && k < 3),
+      teach: first && k === 0 ? "One tile is a little different. Tap it." : null, nudge: first && k < 2 ? 3500 : seen < 2 ? 6000 : 0 },
+      note: warm && k === 0 ? "Warm-up" : seen === 0 && !first ? (lay.news || `New layout: ${lay.name}`) : lay.tw === "chain" && k > 0 ? "The odd color is the new base" : null };
   };
   ooRun({
-    label: `Level ${i + 1}`, total: survival ? 0 : grow ? 8 : OO_ROUNDS, max: survival ? 30 : grow ? 8 : OO_ROUNDS, lives: survival ? 3 : 0, endOnMiss: grow,
-    combo: i >= 5, gen, onEnd: s => ooLevelDone(i, s),
+    label: test ? "Test out" : `Level ${i + 1}`, total: rounds, max: rounds, combo: true, gen,
+    // the set ends the moment it's decided: 8 right (passed), or too many misses to reach 8
+    endWhen: s => s.hits >= need || (s.i - s.hits) > rounds - need,
+    onEnd: s => test ? ooTestDone(i, s) : ooLevelDone(i, s),
   });
 }
 function ooLevelDone(i, s) {
-  const L = OO_LEVELS[i], st = ooS(), tw = L.tw;
-  const finish = tw === "survival" ? s.total >= 10 : tw === "grow" ? s.hits >= 4 : s.hits >= OO_PASS;
-  const fast = finish && s.med != null && s.med <= (tw === "flash" ? 3000 : OO_FAST_MS), nohint = finish && !s.hint;
+  const st = ooS(), mix0 = ooMixOpen(), gap = ooLevelGap(i);
+  const finish = s.hits >= OO_LEVEL_PASS, clean = finish && s.hits === s.total;
+  const fast = finish && s.med != null && s.med <= OO_FAST_MS, nohint = finish && !s.hint;
   const old = ooStars(i), stars = [finish || old[0], fast || old[1], nohint || old[2]].map(x => x ? 1 : 0);
   st.stars[i] = stars;
   const pb = s.pts > (st.best[i] || 0) && s.pts > 0; if (pb) st.best[i] = s.pts;
-  const unlocked = finish && st.lv === i && i < OO_LEVELS.length - 1;
-  if (finish && st.lv <= i) { st.lv = Math.min(OO_LEVELS.length - 1, i + 1); st.fresh = st.lv; }
+  // For you follows the result: a pass at or above your level lifts it (two levels for a clean sweep); a rough set at your level eases it
+  const you0 = ooYou();
+  let moved = 0;
+  if (finish && i >= you0) { st.you = Math.min(OO_LEVEL_N - 1, i + (clean ? 2 : 1)); moved = 1; st.fresh = st.you; }
+  else if (!finish && i === you0 && s.hits <= 5 && you0 > 0) { st.you = you0 - 1; moved = -1; }
   const mastered = stars.every(Boolean) && !old.every(Boolean);
   save();
-  ooResults({ title: `Level ${i + 1} · ${L.name}`, s, finish, stars, got: [finish, fast, nohint], pb, unlocked, mastered, world: L.w,
-    next: finish && i < OO_LEVELS.length - 1 ? i + 1 : null, again: () => ooPlayLevel(i), mixNew: unlocked && i === OO_MIX_AT - 1,
-    score: tw === "survival" ? `${s.total} rounds survived` : tw === "grow" ? `${s.hits} right · reached ${Math.min(7, 3 + s.hits)} × ${Math.min(7, 3 + s.hits)}` : `${s.hits} of ${s.total} right` });
+  const you = ooYou(), pct = pctFmt(ooLevelGap(you));
+  const lede = mastered ? `All three stars. ${OO_WORLDS[OO_LEVELS[i].w].mile}`
+    : finish ? (moved > 0 ? `Next for you: level ${you + 1}, a ${pct} gap.` : `Level ${i + 1} is passed. Next for you is still level ${you + 1}, a ${pct} gap.`)
+    : moved < 0 ? `You need ${OO_LEVEL_PASS} of ${OO_LEVEL_ROUNDS} at ${pctFmt(gap)}. Next for you: level ${you + 1}, a ${pct} gap.`
+    : `You need ${OO_LEVEL_PASS} of ${OO_LEVEL_ROUNDS} at ${pctFmt(gap)}. Try again, or pick another level on the map.`;
+  ooResults({ title: `Level ${i + 1} · ${pctFmt(gap)} different`, s, finish, stars, got: [finish, fast, nohint], pb, unlocked: false, mastered, world: OO_LEVELS[i].w, lede,
+    head: mastered ? null : finish ? (pb ? "A new <em>best.</em>" : "Level <em>passed.</em>") : null,
+    next: finish && i < OO_LEVEL_N - 1 ? i + 1 : null, again: () => ooPlayLevel(i), mixNew: !mix0 && ooMixOpen(),
+    score: `${s.hits} of ${s.total} right` });
+}
+// the end of a test-out: all three right and every level below counts as cleared (played levels keep their stars)
+function ooTestDone(i, s) {
+  const st = ooS(), pass = s.hits >= OO_TEST_ROUNDS, mix0 = ooMixOpen(), gap = ooLevelGap(i);
+  if (pass) { ooTestOutMark(st.cleared, i); if (ooYou() < i) st.you = i; st.fresh = st.you; }
+  save();
+  const upTo = i === 1 ? "Level 1" : `Levels 1 to ${i}`;
+  ooResults({ title: `Test out · Level ${i + 1} · ${pctFmt(gap)} different`, s, finish: pass, test: true, stars: [0, 0, 0], got: [0, 0, 0], pb: false, mixNew: pass && !mix0 && ooMixOpen(),
+    head: pass ? `${upTo} <em>cleared.</em>` : "Not <em>yet.</em>",
+    lede: pass ? `Three of three at a ${pctFmt(gap)} gap. ${i === 1 ? "It shows" : "They show"} as cleared on the map, and level ${i + 1} is next for you. It still needs playing for its stars.`
+      : `You need all three. Play level ${i + 1} from the start, or test out again when you're ready.`,
+    next: pass ? i : null, again: () => ooPlayLevel(i, { test: true }), againText: pass ? "Test again" : "Try again", back: "Back to the map",
+    score: `${s.hits} of ${s.total} right` });
+}
+// Survival and the Growing board: two stand-alone games beside the ladder (the Mix lists them). Their difference follows
+// your own estimate and a staircase, not a level.
+function ooPlayExtra(id) {
+  if (!S.scr && !ooShotMode() && typeof screenCheck === "function") return screenCheck(() => ooPlayExtra(id));
+  const survival = id === "survival", lay = ooLayout("grid3");
+  let stair = null;
+  const gen = (k, run) => {
+    if (!stair) { const sp0 = ooSpec(lay, 0, { tier: "medium" }); stair = ooStair(sp0.d); }
+    else if (run.prev) ooStairStep(stair, !!run.prev.res.ok);
+    const n = Math.min(7, 3 + (survival ? Math.floor(run.hits / 2) : run.hits));
+    const sp = ooSpec(lay, k, { n, tw: null, d: survival ? stair.d : null, tier: survival ? null : "medium" });
+    const r = ooRound(sp); Object.assign(r, { tw: survival ? "survival" : "grow", kindKey: ooKindKey("one", "grid", id), fam: sp.fam || r.fam });
+    return { r, o: { hint: true }, note: k > 0 && n > 3 && (survival ? run.hits % 2 === 0 : true) && run.prev && run.prev.res.ok ? `${n} × ${n}` : null };
+  };
+  ooRun({ label: survival ? "Survival" : "Growing board", total: survival ? 0 : 8, max: survival ? 30 : 8, lives: survival ? 3 : 0, endOnMiss: !survival, combo: true, gen,
+    onEnd: s => {
+      const st = ooS(), finish = survival ? s.total >= 10 : s.hits >= 4, old = (st.mix[id] || {}).stars || [0, 0, 0];
+      const got = [finish, finish && s.med != null && s.med <= OO_FAST_MS, finish && !s.hint], stars = got.map((x, i) => x || old[i] ? 1 : 0), pb = s.pts > ((st.mix[id] || {}).best || 0);
+      st.mix[id] = { stars, best: Math.max(s.pts, (st.mix[id] || {}).best || 0) }; save();
+      ooResults({ title: survival ? "Survival" : "Growing board", s, finish, stars, got, pb, next: null, again: () => ooPlayExtra(id),
+        score: survival ? `${s.total} rounds survived` : `${s.hits} right · reached ${Math.min(7, 3 + s.hits)} × ${Math.min(7, 3 + s.hits)}` });
+    } });
 }
 // ---------- results: every end of a set is designed (cleared, mastered, a best, not yet) ----------
 function ooResults(o) {
   const s = o.s, misses = s.res.filter(x => !x.ok && x.base && x.odd && x.base !== x.odd && !x.none).slice(0, 8);
-  const starRow = ["Finished", "Quick", "No hints"].map((w, k) => `<span class="oo-star${o.stars[k] ? " on" : ""}${o.got[k] && o.stars[k] ? " new" : ""}" style="--k:${k}"><i></i>${w}</span>`).join("");
+  const starRow = ["Passed", "Quick", "No hints"].map((w, k) => `<span class="oo-star${o.stars[k] ? " on" : ""}${o.got[k] && o.stars[k] ? " new" : ""}" style="--k:${k}"><i></i>${w}</span>`).join("");
   const nx = o.next != null ? OO_LEVELS[o.next] : null;
-  const head = o.mastered ? "Level <em>mastered.</em>" : o.unlocked ? "Level <em>cleared.</em>" : o.finish ? (o.pb ? "A new <em>best.</em>" : "Well <em>seen.</em>") : "Not <em>yet.</em>";
+  const head = o.head ? o.head : o.mastered ? "Level <em>mastered.</em>" : o.unlocked ? "Level <em>cleared.</em>" : o.finish ? (o.pb ? "A new <em>best.</em>" : "Well <em>seen.</em>") : "Not <em>yet.</em>";
   // the honest eye line: the judgment that moved most during this set
   const moved = s.th0 && s.th1 ? Object.keys(s.th1).filter(j => s.th0[j] && Math.abs(Math.log(s.th1[j] / s.th0[j])) > .04).sort((a, b) => Math.abs(Math.log(s.th1[b] / s.th0[b])) - Math.abs(Math.log(s.th1[a] / s.th0[a])))[0] : null;
-  const lede = o.mastered ? `All three stars. ${o.world != null ? esc(OO_WORLDS[o.world].mile) : ""}`
-    : o.unlocked && nx ? `Level ${o.next + 1} is open: ${esc(nx.news.charAt(0).toLowerCase() + nx.news.slice(1))}.`
+  const lede = o.lede ? o.lede : o.mastered ? `All three stars. ${o.world != null ? esc(OO_WORLDS[o.world].mile) : ""}`
     : o.finish ? "Every round was drawn near your own limit, so this is your eye working at its edge."
     : `You need ${OO_PASS} of ${OO_ROUNDS}. Every round is drawn near your own limit, so misses mean you're at your edge; the next set starts from where you are now.`;
   const el = show(`
     <div style="flex:1"></div>
     <p class="eyebrow">${esc(o.title)}</p>
     <h1>${head}</h1>
-    <div class="oo-stars-row">${starRow}</div>
+    ${o.test ? "" : `<div class="oo-stars-row">${starRow}</div>`}
     <p class="lede">${lede}</p>
+    ${o.diff ? `<p class="note oo-dline">${esc(o.diff)}</p>` : ""}
     <div class="res-list">
       <div class="res"><span>This set</span><b class="mono">${esc(o.score)}</b><span></span></div>
       ${s.pts ? `<div class="res"><span>Points</span><b class="mono">${s.pts.toLocaleString()}</b>${o.pb ? "<em>best</em>" : "<span></span>"}</div>` : ""}
@@ -447,7 +549,7 @@ function ooResults(o) {
     ${misses.length ? `<div class="sec-head"><b>Your misses</b><span>tap a color to open it</span></div><div class="oo-miss">${misses.map(m => `<span><i style="--c:${m.base}" data-swatch="${m.base}"></i><i style="--c:${m.odd}" data-swatch="${m.odd}"></i><em class="mono">${pctFmt(m.act || 0)}</em></span>`).join("")}</div>` : ""}
     <p class="fine">Differences are measured on the colors as your screen drew them (CIEDE2000: 100% is black against white, and about 1% is the smallest difference most people see side by side). Phone screens and room light vary.</p>
     <div class="stack">
-      ${o.next != null && o.finish ? `<button class="btn" data-nextlv>Level ${o.next + 1} ${ICON.arrow}</button><button class="btn ghost" data-again>Play again</button>` : `<button class="btn" data-again>${o.finish ? "Play again" : "Try again"} ${ICON.arrow}</button>`}
+      ${o.next != null && o.finish ? `<button class="btn" data-nextlv>Level ${o.next + 1} ${ICON.arrow}</button><button class="btn ghost" data-again>${esc(o.againText || "Play again")}</button>` : `<button class="btn" data-again>${esc(o.againText || (o.finish ? "Play again" : "Try again"))} ${ICON.arrow}</button>`}
       <button class="btn ghost" data-map>${o.back || "Back to the map"}</button>
     </div>`, "result oo-res");
   const nb = el.querySelector("[data-nextlv]"); if (nb) nb.onclick = () => ooPlayLevel(o.next);
@@ -461,11 +563,12 @@ function ooResults(o) {
 // The journey map (#/odd)
 // ======================================================================
 // a tiny picture of a level's board: its own geometry, one tile off
-function ooMini(L, i) {
-  const rnd = ooRnd(ooHash("mini" + i)), b = L.v === "mixed" ? "honey" : L.b, geo = ooCells(b === "painting" ? "grid" : b, b === "honey" ? 7 : b === "grid" ? Math.min(L.n, 4) : L.n, rnd);
-  const H = [215, 150, 30, 290][L.w], base = lchHex(60, 30, H), odd = lchHex(70, 30, H), at = Math.floor(rnd() * geo.cells.length);
+function ooMini(i) {
+  // a 3 x 3 board with one tile off by this level's gap, as this screen draws it (so the top levels honestly look alike)
+  const rnd = ooRnd(ooHash("mini" + i)), geo = ooCells("grid", 3, rnd), H = [215, 150, 30, 290][OO_LEVELS[i].w], base = lchHex(60, 30, H);
+  const m = ooMove(base, "light", 1, ooLevelGap(i)), odd = m ? m.hex : base, at = Math.floor(rnd() * geo.cells.length);
   const pct = x => (x * 100).toFixed(1) + "%";
-  return `<span class="oo-mini oo-b-${b}" style="--ar:${geo.aspect}">${geo.cells.map((c, k) => `<i class="oo-${c.shape}" style="left:${pct(c.x)};top:${pct(c.y)};width:${pct(c.w)};height:${pct(c.h)};--c:${k === at ? odd : base}"></i>`).join("")}</span>`;
+  return `<span class="oo-mini oo-b-grid" style="--ar:${geo.aspect}">${geo.cells.map((c, k) => `<i class="oo-${c.shape}" style="left:${pct(c.x)};top:${pct(c.y)};width:${pct(c.w)};height:${pct(c.h)};--c:${k === at ? odd : base}"></i>`).join("")}</span>`;
 }
 const ooStarHTML = s => `<span class="oo-st" aria-label="${s.filter(Boolean).length} of 3 stars">${s.map(x => `<i class="${x ? "on" : ""}"></i>`).join("")}</span>`;
 function ooEyeLine() {
@@ -476,55 +579,98 @@ function ooEyeLine() {
 }
 function ooMap() {
   eyeNamesReady();
-  const st = ooS(), cur = st.lv, fresh = st.fresh, back = st.last && st.last !== today();
+  const st = ooS(), cur = ooYou(), edge = ooEdgeLevel(), fresh = st.fresh, back = st.last && st.last !== today();
   delete st.fresh;
   const worldDone = w => OO_LEVELS.every((L, i) => L.w !== w || ooStars(i).every(Boolean));
+  // every level is open: tap one to jump in. A level ahead of you offers a test-out first (ooLevelTap)
   const rows = OO_LEVELS.map((L, i) => {
-    const locked = i > cur, s = ooStars(i), done = !!s[0], mast = s.every(Boolean);
-    const row = `<button class="oo-node${locked ? " locked" : ""}${i === cur ? " cur" : ""}${done ? " done" : ""}${i === fresh ? " fresh" : ""}" data-lv="${i}"${locked ? ` data-locked="Clear level ${i} to unlock this one"` : ""}>
-      ${ooMini(L, i)}<span class="oo-nt"><b><span class="mono">${i + 1}</span>${esc(L.name)}</b><em>${esc(mast ? "Mastered" : L.news)}</em></span>${ooStarHTML(s)}</button>`;
-    const world = i === 0 || OO_LEVELS[i - 1].w !== L.w ? `<div class="oo-world${worldDone(L.w) ? " lit" : ""}"><b>${esc(OO_WORLDS[L.w].name)}</b><span>${esc(OO_WORLDS[L.w].mile)}</span></div>` : "";
+    const s = ooStars(i), done = !!s[0], clr = !done && !!st.cleared[i], mast = s.every(Boolean);
+    const tags = [mast ? "Mastered" : done ? "Passed" : clr ? "Cleared by test out" : null, i === cur ? "Next for you" : null, i === edge ? "Your edge" : null].filter(Boolean);
+    const row = `<button class="oo-node${i === cur ? " cur" : ""}${done ? " done" : ""}${clr ? " clr" : ""}${i === fresh ? " fresh" : ""}" data-lv="${i}">
+      ${ooMini(i)}<span class="oo-nt"><b><span class="mono">${i + 1}</span>${esc(pctFmt(L.gap))} different</b><em>${esc([ooGapWord(i), ...tags].join(" · "))}</em></span>${ooStarHTML(s)}</button>`;
+    const world = i % 5 === 0 ? `<div class="oo-world${worldDone(L.w) ? " lit" : ""}"><b>${esc(OO_WORLDS[L.w].name)}</b><span>${esc(OO_WORLDS[L.w].mile)}</span></div>` : "";
     return world + row + (i === OO_MIX_AT - 1 ? ooMixBlock() : "");
   }).join("");
   const el = show(`
     <header class="deck-top"><button class="icon-btn" data-close aria-label="Back to Train">${ICON.back}</button><span style="flex:1"></span><span class="mono oo-tot">${ooStarCount()} ★</span></header>
     <h1 class="title-1 oo-title">Odd one out</h1>
-    <p class="note">${back ? "Welcome back. Your first round today is a warm-up." : st.sets ? `Level ${cur + 1} of ${OO_LEVELS.length}. Every round is drawn near your own limit.` : "Find the tile that's different. Each level adds a new twist."}</p>
+    <p class="note">${back ? "Welcome back. Your first round today is a warm-up." : st.sets ? `Level ${cur + 1} of ${OO_LEVEL_N} is next for you.` : "Find the tile that's different. Each level makes the gap smaller."}</p>
     <button class="oo-eyeline" data-eye><span>${esc(ooEyeLine())}</span><b>Your eye ${ICON.chev}</b></button>
+    <div class="oo-pk-host" data-pk-host></div>
+    <p class="note oo-jumpnote">Every level is open: tap one to jump in. Stars still need playing.</p>
     <div class="oo-path">${rows}</div>
-    <p class="fine">How it works: every answer updates a hidden estimate of the smallest difference you can see, for hue, lightness, vividness, colors in context and colors from memory, and for each color family. Rounds are drawn from it, so a set breathes: easy, medium, hard, easy, harder, then a boss near your limit. A miss makes the next round gentler and a streak makes it harder; new kinds of rounds start easy. Stars: finish the level, answer quickly, use no hints.</p>
+    <p class="fine">How it works: a level is one number, the gap between the odd tile and the rest, from 12% down to about 0.6%, the edge of what a screen can show. Nothing else changes from level to level; the layouts (grids, rings, honeycombs, colored grounds, hidden shapes, paintings) rotate inside every level. Pass a level with 8 of 10 right. Every answer also updates a hidden estimate of the smallest difference you can see, for hue, lightness, vividness, colors in context and colors from memory, and for each color family. For you starts near that estimate and moves with your results; Choose pins the level yourself, and it keeps learning from your answers. Stars: pass the level, answer quickly, use no hints.</p>
     <div class="oo-go"><button class="btn" data-play>${st.sets ? `Play level ${cur + 1}` : "Start"} ${ICON.arrow}</button></div>
   `, "oo-map");
+  const play = el.querySelector("[data-play]"), paintPlay = () => {
+    const lv = ooPickLv(), pk = ooPref("oo").m === "pick" && lv != null;
+    play.innerHTML = `${st.sets || pk ? `Play level ${(pk ? lv : cur) + 1}` : "Start"} ${ICON.arrow}`;
+  };
   el.querySelector("[data-close]").onclick = () => go("gym");
-  el.querySelector("[data-play]").onclick = () => ooPlayLevel(cur);
+  play.onclick = () => ooPlayLevel(ooPref("oo").m === "pick" ? ooPickLv() : cur);
   el.querySelector("[data-eye]").onclick = ooEyePage;
-  el.querySelectorAll("[data-lv]").forEach(b => b.onclick = () => b.dataset.locked ? toast(b.dataset.locked) : ooPlayLevel(+b.dataset.lv));
+  ooPickMount(el.querySelector("[data-pk-host]"), "oo", paintPlay);
+  paintPlay();
+  el.querySelectorAll("[data-lv]").forEach(b => b.onclick = () => ooLevelTap(+b.dataset.lv));
   el.querySelectorAll("[data-mix]").forEach(b => b.onclick = () => b.dataset.locked ? toast(b.dataset.locked) : ooPlayMix(b.dataset.mix));
   const cn = el.querySelector(".oo-node.fresh") || el.querySelector(".oo-node.cur");
   if (cn && cur > 2 && !ooShotMode()) later(() => cn.scrollIntoView({ block: "center", behavior: reduceMotion ? "auto" : "smooth" }), 250);
 }
+// a tap on a level: play it (and, in Choose, remember it as your pick). A level ahead of the one you're on offers a
+// test-out as well: three rounds, all right, and every level below counts as cleared
+function ooLevelTap(i) {
+  const st = ooS(), L = OO_LEVELS[i], below = OO_LEVELS.map((_, j) => j).filter(j => j < i && !ooDone(j)).length;
+  if (!L) return;
+  const pf = ooPref("oo");
+  if (pf.m === "pick") { pf.d = "level"; pf.lv = i; save(); }
+  if (i <= ooYou() || ooDone(i) || !below) return ooPlayLevel(i);
+  const upTo = i === 1 ? "level 1" : `levels 1 to ${i}`;
+  const { close } = sheet(`<div class="oo-jump">
+    <h2 class="title-3">Level ${i + 1} · ${esc(pctFmt(L.gap))} different</h2>
+    <p class="note">${esc(ooGapWord(i))}. ${below === 1 ? "One level before it isn't" : `${below} levels before it aren't`} cleared yet.</p>
+    <div class="stack"><button class="btn" data-jp>Play level ${i + 1} ${ICON.arrow}</button><button class="btn ghost" data-jt>Test out of ${upTo}</button></div>
+    <p class="fine">Test out: three rounds at this gap. Get all three right and ${upTo} count as cleared. Stars still need playing.</p></div>`);
+  const sh = document.querySelector(".sheet .oo-jump");
+  sh.querySelector("[data-jp]").onclick = () => { close(); ooPlayLevel(i); };
+  sh.querySelector("[data-jt]").onclick = () => { close(); ooPlayLevel(i, { test: true }); };
+}
+const OO_EXTRAS = [["survival", "Survival", "Three lives. The board grows and the gap shrinks"], ["grow", "Growing board", "Every right answer adds tiles, until a miss"]];
 function ooMixBlock() {
   const open = ooMixOpen(), st = ooS();
-  const tiles = [["set", "Mixed set", "One of each, shuffled"], ...OO_MIX.map(m => [m.id, m.name, m.what])].map(([id, name, what]) => {
+  const tiles = [["set", "Mixed set", "One of each, shuffled"], ...OO_MIX.map(m => [m.id, m.name, m.what]), ...OO_EXTRAS].map(([id, name, what]) => {
     const ms = st.mix[id] || {}, s = Array.isArray(ms.stars) ? ms.stars : [0, 0, 0];
-    return `<button class="oo-mx${open ? "" : " locked"}" data-mix="${id}"${open ? "" : ` data-locked="Clear level ${OO_MIX_AT} to unlock the Mix"`}><b>${esc(name)}</b><em>${esc(what)}</em>${ooStarHTML(s)}</button>`;
+    return `<button class="oo-mx${open ? "" : " locked"}" data-mix="${id}"${open ? "" : ` data-locked="Pass level ${OO_MIX_AT}, or test out above it, to open the Mix"`}><b>${esc(name)}</b><em>${esc(what)}</em>${ooStarHTML(s)}</button>`;
   }).join("");
-  return `<div class="oo-mixblock${open ? "" : " locked"}"><div class="oo-world"><b>The Mix</b><span>${open ? "Odd one out crossed with memory and rearranging." : `Opens after level ${OO_MIX_AT}: odd one out crossed with memory and rearranging.`}</span></div><div class="oo-mxgrid">${tiles}</div></div>`;
+  return `<div class="oo-mixblock${open ? "" : " locked"}"><div class="oo-world"><b>The Mix</b><span>${open ? "Odd one out crossed with memory and rearranging." : `Opens once level ${OO_MIX_AT} is passed or cleared: odd one out crossed with memory and rearranging.`}</span></div><div class="oo-mxgrid">${tiles}</div></div>`;
 }
 
 // ======================================================================
 // Eye profile (#/odd/eye): honest, with the caveats
 // ======================================================================
+// where a threshold sits on the ladder: "level 17"
+const ooLvOf = th => `level ${ooLevelOfGap(th) + 1}`;
+const OO_AXIS_WORD = { light: "lightness", chroma: "vividness", hue: "hue" };
+// the sharpest and the softest spot in the profile, on the ladder: "Sharpest: lightness in blues, level 17. Softest: hue in yellows, level 11."
+function ooEyeLevels() {
+  const m = ooS().model, found = [];
+  OO_AXES.forEach(a => { const e = ooEye(m, null, a); if (e.th && e.n >= 8) found.push({ th: e.th, t: `${OO_AXIS_WORD[a]} differences` }); });
+  Object.keys(OO_FAMS).filter(f => f !== "Greys").forEach(f => OO_AXES.forEach(a => { if ((m.f[f + ":" + a] || {}).n >= 6) { const e = ooEye(m, f, a); if (e.th) found.push({ th: e.th, t: `${OO_AXIS_WORD[a]} in ${f.toLowerCase()}` }); } }));
+  if (found.length < 2) return "";
+  found.sort((x, y) => x.th - y.th);
+  const b = found[0], w = found[found.length - 1];
+  return `Sharpest: ${b.t}, ${ooLvOf(b.th)}. Softest: ${w.t}, ${ooLvOf(w.th)}.`;
+}
 function ooEyePage() {
-  const m = ooS().model, cell = e => e.th == null ? `<td class="na">–</td>` : `<td class="${e.sure ? "" : "thin"}">${pctFmt(e.th)}</td>`;
+  const m = ooS().model, cell = e => e.th == null ? `<td class="na">–</td>` : `<td class="${e.sure ? "" : "thin"}">${pctFmt(e.th)}<small>${ooLvOf(e.th).replace("level ", "level ")}</small></td>`;
   const rows = Object.keys(OO_FAMS).map(f => { const es = ["light", "chroma", "hue"].map(a => (m.f[f + ":" + a] || {}).n ? ooEye(m, f, a) : { th: null }); return es.some(e => e.th != null) ? `<tr><th><i style="--c:${ooFamHex(f)}"></i>${esc(f)}</th>${es.map(cell).join("")}</tr>` : ""; }).join("");
-  const js = Object.keys(OO_JUDG).map(j => { const r = m.j[j]; return r && r.n ? `<div class="ey-row"><span>${esc(OO_JUDG[j])}</span><i style="--w:${clamp(100 - Math.log(Math.exp(r.r) / OO_MIN) / Math.log(OO_MAX / OO_MIN) * 100, 4, 100).toFixed(0)}%"></i><b>${pctFmt(Math.exp(r.r))}</b></div>` : ""; }).join("");
+  const js = Object.keys(OO_JUDG).map(j => { const r = m.j[j]; return r && r.n ? `<div class="ey-row"><span>${esc(OO_JUDG[j])}</span><i style="--w:${clamp(100 - Math.log(Math.exp(r.r) / OO_MIN) / Math.log(OO_MAX / OO_MIN) * 100, 4, 100).toFixed(0)}%"></i><b>${pctFmt(Math.exp(r.r))}<small>${ooLvOf(Math.exp(r.r))}</small></b></div>` : ""; }).join("");
   const sn = ooS().snaps, first = sn.length >= 2 ? sn[0] : null, last = sn[sn.length - 1];
   const trend = first && last ? Object.keys(last[1]).filter(j => first[1][j]).map(j => `${OO_JUDG[j].toLowerCase()} ${pctFmt(first[1][j])} → ${pctFmt(last[1][j])}`).slice(0, 3).join(" · ") : "";
   const el = show(`
     <header class="deck-top"><button class="icon-btn" data-close aria-label="Back">${ICON.back}</button></header>
     <h1 class="title-1 oo-title">Your eye</h1>
     <p class="lede">${esc(ooEyeLine())}</p>
+    ${ooEyeLevels() ? `<p class="note oo-lvs">${esc(ooEyeLevels())}</p>` : ""}
     ${js ? `<div class="sec-head"><b>By judgment</b><span>smaller is sharper</span></div><div class="ey-rows oo-ey">${js}</div>` : `<p class="note oo-empty">Play a level of Odd one out and your profile starts here: one number for hue, lightness and vividness, then one for each color family.</p>`}
     ${rows ? `<div class="sec-head"><b>By family and axis</b><span>lightness · vividness · hue</span></div>
       <table class="oo-eyet"><thead><tr><th></th><th>Lightness</th><th>Vividness</th><th>Hue</th></tr></thead><tbody>${rows}</tbody></table>
@@ -574,11 +720,11 @@ function playSet(set, task = "odd") { return ooPlaySet(set, task === "odd" ? "on
 // The Train shelf (gym.js hook), the old stations it replaces, and routes (router.js hook)
 // ======================================================================
 function ooShelf() {
-  const st = ooS(), L = OO_LEVELS[st.lv], ln = st.line || {};
+  const st = ooS(), lv = ooYou(), ln = st.line || {};
   return `<div class="sec-head"><b>Odd one out</b><span>a game of its own</span></div>
     <button class="oo-shelf" data-oo-map>
-      ${ooMini(L, st.lv)}
-      <span class="oo-nt"><b>${st.sets ? `Level ${st.lv + 1} · ${esc(L.name)}` : "Find the different tile"}</b><em>${st.sets ? esc(L.news) : "Twenty-four levels, from a 3 × 3 grid to paintings cut into tiles."}</em></span>
+      ${ooMini(lv)}
+      <span class="oo-nt"><b>${st.sets ? `Level ${lv + 1} · ${esc(pctFmt(ooLevelGap(lv)))} different` : "Find the different tile"}</b><em>${st.sets ? esc(`${ooGapWord(lv)}. For you, or choose your own level.`) : "Twenty levels, from an obvious difference to the edge of what you can see. Pick your own difficulty any time."}</em></span>
       <span class="mono oo-tot">${st.sets ? `${ooStarCount()} ★` : ""}</span>
     </button>
     <button class="play-row" data-oo-line><span><b>Across the line</b><span>Three of these are Teal. Which one isn't?</span></span><em class="lt-best">${ln.best ? `<b>${ln.best}</b>best` : "new"}</em></button>
@@ -586,7 +732,7 @@ function ooShelf() {
     <button class="play-row" data-oo-whose><span><b>Whose palette?</b><span>Five colors from a painter's work: whose are they?</span></span><em class="lt-best">${st.mix.whose && st.mix.whose.best ? `<b>${st.mix.whose.best}</b>best` : "new"}</em></button>`;
 }
 // the first tap on Odd one out goes straight into level 1 (taught by doing); after that, the map
-const ooEnter = () => ooS().sets ? ooMap() : ooPlayLevel(0);
+const ooEnter = () => ooS().sets ? ooMap() : ooPlayLevel(ooYou());
 function ooWire(el) {
   const m = el.querySelector("[data-oo-map]"); if (m) m.onclick = ooEnter;
   const l = el.querySelector("[data-oo-line]"); if (l) l.onclick = () => ooAcross();

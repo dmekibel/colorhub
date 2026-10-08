@@ -33,10 +33,10 @@ function openCoreName(hex, name) {
   return namePage(entry);
 }
 
-// ---------- which stage a name belongs to (js/home.js HM_STAGES: 25/50/101/150/250/400/600/800/1,000) ----------
+// ---------- which stage a name belongs to (js/home.js HM_STAGES: 25/50/100/150/250/400/600/800/1,000) ----------
 function npStage(rank) {
   if (rank == null || typeof HM_STAGES === "undefined") return null;
-  for (let i = 0; i < HM_STAGES.length; i++) { if (rank < (HM_STAGES[i] === 100 ? 101 : HM_STAGES[i])) return i + 1; }
+  for (let i = 0; i < HM_STAGES.length; i++) { if (rank < HM_STAGES[i]) return i + 1; }
   return HM_STAGES.length;
 }
 
@@ -104,7 +104,7 @@ function namePage(entry, push = true, tapped) {
   // every color page is rich (ROADMAP, David 2026-10-08): famC is a fallback family head for the shelves
   // below that would otherwise go quiet on a thin name — reuses `fam` above rather than calling familyOf twice.
   const famC = fam ? { n: fam.head.n, h: fam.head.h } : null;
-  const stage = npStage(entry.rank);
+  const stage = npStage(entry.useRank != null ? entry.useRank : entry.rank);   // the stage order is useRank (js/home.js hmStageItems)
   const taught = BYNAME.get(name.toLowerCase());   // true only if routing ever lands here for one of the 101 (see router.js)
   // Learn it works on any name, not only the first units (js/learnmore.js lxLearnable: its card id and look-alikes)
   const learnC = taught || (typeof lxLearnable === "function" ? lxLearnable(entry) : null);

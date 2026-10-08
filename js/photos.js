@@ -75,10 +75,10 @@ function phCaptureAndOpen(canvas, from) {
 // the photo, and use xStep() for its own Back instead of always landing on the Studio tab.
 function photoPage(id, push = true) {
   phGet(id).then(rec => {
-    if (!rec) { toast("That photo isn't here anymore"); return go(xFallbackTab()); }
+    if (!rec) { toast("That photo isn't here anymore"); return xToOrigin(); }
     if (push) XSTACK.push("ph:" + id);
     phOpenRecord(id, rec);
-  }).catch(() => { toast("Photos aren't available here"); go(xFallbackTab()); });
+  }).catch(() => { toast("Photos aren't available here"); xToOrigin(); });
 }
 // the actual renderer (what router.js gives an address): kept separate from photoPage so going back to an
 // already-fetched record (xStep's "ph:" case) doesn't need to touch IndexedDB again.

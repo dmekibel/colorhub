@@ -47,6 +47,7 @@ function diskColor(x, y) {
 
 // ---------- Studio home ----------
 function studio() {
+  if (typeof r2StudioHome === "function") return r2StudioHome();   // design round 2: js/rooms2.js
   // Studio is a room like Explore (ROADMAP.md §17 job #1): entering it fresh (the tab, not a Back) starts its
   // own back chain over, so a trail from another tab never leaks in here.
   XSTACK = [];
@@ -235,7 +236,7 @@ function plRename(id, name) {
 // the palette page: an address, and one step at a time Back (ROADMAP.md §17 job #1, same pattern as photoPage).
 function openSavedPalette(id, push = true) {
   const p = plGet(id);
-  if (!p) { toast("That palette isn't here anymore"); return go(xFallbackTab()); }
+  if (!p) { toast("That palette isn't here anymore"); return xToOrigin(); }
   if (push && XSTACK[XSTACK.length - 1] !== "pal:" + id) XSTACK.push("pal:" + id);
   paletteView({ cols: p.cols.map(h => ({ h })), from: p.from, title: p.name || "", savedId: id });
 }

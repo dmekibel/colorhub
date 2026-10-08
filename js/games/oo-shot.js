@@ -5,7 +5,7 @@
 //   mix-<id>[-ans] · step-<kind>
 function ooShotState() {
   const st = ooS(), day = today();
-  st.lv = 12; st.sets = 31; st.last = today();
+  st.you = 12; st.v3 = 1; st.sets = 31; st.last = today();
   for (let i = 0; i < 12; i++) st.stars[i] = [1, i % 3 !== 1 ? 1 : 0, i % 4 !== 2 ? 1 : 0];
   st.best = { 0: 2140, 5: 3900 };
   const m = st.model;
@@ -15,7 +15,7 @@ function ooShotState() {
     "Reds:hue": { o: 0, n: 12 }, "Reds:light": { o: -.15, n: 12 }, "Yellows:light": { o: .3, n: 8 }, "Yellows:chroma": { o: .2, n: 7 }, "Purples:hue": { o: .1, n: 6 } });
   st.snaps = [[addDays(day, -14), { hue: 3.1, light: 2.2, chroma: 4.2 }], [day, { hue: 1.9, light: 1.4, chroma: 2.8 }]];
   OO_KINDS.forEach(k => { st.seen[ooKindKey(k[0], k[1], k[3] || "")] = 3; });
-  OO_LEVELS.forEach(L => { st.seen[ooKindKey(L.v, L.b, L.tw)] = 3; });
+  OO_LAYOUTS.forEach(L => { st.seen[ooKindKey(L.v, L.b, L.tw)] = 3; });
   S.scr = { ok: true, t: day };
 }
 // tap the answer of the round on screen (right, or a wrong tile)
@@ -31,7 +31,7 @@ function ooShotTap(right, then) {
 }
 function ooShot(arg) {
   document.documentElement.classList.add("oo-shotmode");   // headless screenshots don't run entrance animations
-  const [what, a, b] = (arg || "map").split("-");
+  const [what, a, b, c] = (arg || "map").split("-");
   if (what === "fresh") { if (S.games) delete S.games.oo; S.scr = { ok: true, t: today() }; return ooMap(); }
   // the very first tap: straight into level 1, taught by doing (first-nudge waits for the nudge)
   if (what === "first") { if (S.games) delete S.games.oo; S.scr = { ok: true, t: today() }; return ooEnter(); }
@@ -57,9 +57,9 @@ function ooShot(arg) {
     if (a === "ans") setTimeout(() => { const b = document.querySelector(".oo-pc"); if (b) b.click(); }, 400); });
   if (what === "wplay") return ooWhoseLoad().then(() => ooRun({ label: "Painters", total: 6, combo: true, cls: "oo-whose", gen: () => ({ kind: "whose", record: false, hold: true }), onEnd: () => ooMap() }));
   if (what === "lv") {
-    const i = clamp((+a || 1) - 1, 0, OO_LEVELS.length - 1), L = OO_LEVELS[i];
-    ooPlayLevel(i);
-    const wait = L.tw === "flash" ? 1400 : L.b === "painting" ? 1800 : 500;
+    const i = clamp((+a || 1) - 1, 0, OO_LEVEL_N - 1);
+    ooPlayLevel(i, { layout: { g3: "grid3", ring: "ring", hc: "honey", st: "strip" }[c] || undefined });
+    const wait = 1800;
     if (b === "ans") return setTimeout(() => ooShotTap(true), wait);
     if (b === "miss") return setTimeout(() => ooShotTap(false), wait);
     if (b === "dir") return setTimeout(() => { const r = OO_LAST, t = document.querySelectorAll(".oo-board .oo-t")[r.ans[0]]; if (t) t.click(); }, wait);

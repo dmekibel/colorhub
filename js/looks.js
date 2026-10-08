@@ -130,7 +130,7 @@ function lkOpen(id, opts = {}) {
     el.querySelectorAll("[data-pi]").forEach(b => b.classList.toggle("on", +b.dataset.pi === pi));
   };
   draw();
-  const back = () => (LK_BACK || (() => go("explore")))();
+  const back = () => (LK_BACK || xToOrigin)();
   el.querySelector("[data-back]").onclick = back;
   onKey = e => { if (e.key === "Escape") back(); };
   el.querySelectorAll("[data-pi]").forEach(b => b.onclick = () => { pi = +b.dataset.pi; draw(); buzz(4); });
@@ -161,9 +161,7 @@ function lkRewire(to) {
 }
 function lkNode(nodeId, lookId, pi) {
   const n = graph().nodes.get(nodeId); if (!n) return;
-  XSTACK = [];
-  openNode(n);
-  lkRewire(() => lkOpen(lookId, { keep: true, pi }));
+  openNode(n);   // onto the one trail: its ‹ comes back to this look (js/trail.js)
 }
 // closest public-domain paintings (data/paintings.js), each scored by the look's best palette
 function lkPaintings(look) {
@@ -220,7 +218,7 @@ document.addEventListener("click", e => {
 
 // a typed or linked #/look/<id> address (js/router.js openRoute)
 function lkOpenRoute(id) {
-  lkWhen(() => { if (lkGet(id)) lkOpen(id, { back: () => { S.lens = "ideas"; go("explore"); } }); else go(S.tab || "learn"); });
+  lkWhen(() => { if (lkGet(id)) lkOpen(id, { back: xToOrigin }); else xToOrigin(); });
 }
 
 // ---------- "In looks" on a color page: the looks whose palettes hold a color close to this one ----------

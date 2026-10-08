@@ -30,7 +30,7 @@
 .corner svg{width:20px;height:20px}
 /* Home's other corner buttons keep their row on the new size (12 px apart), and the heart sits above View */
 .corner.r.pr-study-corner{right:calc(16px + var(--corner) + 12px)}
-.corner.r2{right:calc(16px + (var(--corner) + 12px) * 2)}
+.corner.ms-corner{right:calc(16px + (var(--corner) + 12px) * 2)}
 .corner.fv-corner{bottom:calc(var(--corner-b) + var(--corner) + 12px);width:var(--corner);height:var(--corner)}
 .sheet{bottom:calc(-1 * var(--vb));padding-bottom:calc(var(--bottom) + 20px)}
 .sheet:focus{outline:none}

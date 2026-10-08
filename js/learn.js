@@ -380,7 +380,7 @@ function unitDone(u, right, total) {
     <div class="stack">
       ${nu ? `<button class="btn" data-next>Next: ${esc(nu.title)} ${ICON.arrow}</button>` : ""}
       ${expNudge()}
-      <button class="btn ghost" data-home>Home</button>
+      <button class="btn ghost" data-home>Back to Learn</button>
     </div>
   `, "result");
   expWireNudge(el);
@@ -407,7 +407,7 @@ function reviewDone(right, total) {
     <div class="stack">
       ${nu ? `<button class="btn" data-next>Continue: ${esc(nu.title)} ${ICON.arrow}</button>` : ""}
       ${expNudge()}
-      <button class="btn ghost" data-home>Home</button>
+      <button class="btn ghost" data-home>Back to Learn</button>
     </div>
   `, "result");
   expWireNudge(el);
@@ -517,11 +517,13 @@ function menu() {
     <button class="item" data-a="restore">Restore a backup ${ICON.chev}</button>
     <button class="item" data-a="about">About the colors ${ICON.chev}</button>
     <button class="item" data-a="haptics">Haptics: ${S.haptics === false ? "off" : "on"} ${ICON.chev}</button>
+    ${typeof sndMenuRows === "function" ? sndMenuRows() : ""}
     <button class="item" data-a="quick">Quick mode, no typing: ${S.quick ? "on" : "off"} ${ICON.chev}</button>
     <button class="item danger" data-a="reset">Reset all progress</button>`);
   sh.onclick = e => {
     const a = e.target.closest("[data-a]"); if (!a) return;
     close();
+    if (typeof sndMenuAct === "function" && sndMenuAct(a.dataset.a)) return;
     if (a.dataset.a === "profile") profileSetup(() => go(S.tab || "learn"));
     if (a.dataset.a === "backup") backupProgress();
     if (a.dataset.a === "restore") restoreProgress();

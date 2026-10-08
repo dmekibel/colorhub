@@ -216,7 +216,7 @@ async function poemPage(id, opts = {}) {
       ${hasOrig && poem.ourl ? `<li>Original: <a href="${esc(poem.ourl)}" target="_blank" rel="noopener">${esc((() => { try { return decodeURIComponent(poem.ourl); } catch (e) { return poem.ourl; } })().replace(/^https?:\/\/(www\.)?/, "").replace(/_/g, " "))}</a></li>` : ""}
       <li>Public domain in the United States. Hex values are screen approximations of the words, not measurements.</li></ul></section>
   `, "article poem");
-  const back = () => { if (XSTACK.length <= 1) { XSTACK = []; return go(POEM_ORIGIN || "explore"); } xBack(); };
+  const back = () => { if (XSTACK.length <= 1) { XSTACK = []; return xToOrigin(); } xBack(); };
   el.querySelector("[data-back]").onclick = back;
   onKey = e => { if (e.key === "Escape") back(); };
   el.querySelectorAll("[data-view]").forEach(b => b.onclick = () => {
