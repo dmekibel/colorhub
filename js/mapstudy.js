@@ -423,6 +423,7 @@ function msOpen(o = {}) {
     if (fr) {
       fr.oninput = () => { const l = MS_LEVELS[+fr.value]; panel.querySelector("[data-fieldv]").textContent = l === "all" ? "All" : l; panel.querySelector("[data-fieldhint]").textContent = l === "all" ? "Every name, about 2,700. The deep end." : `The first ${l} names of the Learn list.`; buzz(3); };
       fr.onchange = () => { re("level", MS_LEVELS[+fr.value]); setup(); };
+      stepify(fr, panel.querySelector("[data-fieldv]"));   // −/+: one stop at a time (core.js)
     }
     const hr = panel.querySelector("[data-help]");
     if (hr) {

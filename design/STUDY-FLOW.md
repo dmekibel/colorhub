@@ -19,7 +19,7 @@ Each color climbs rungs; a right answer climbs one, a miss drops one.
 | 0 | see the color, pick its name | 3, far apart within its family (ΔE ≥ 14) |
 | 1 | see the color, pick its name | 4 same-family neighbors (the usual) |
 | 2 | see the name, find the color, or odd one out | 4 neighbors |
-| 3 | type the name (or a recall flashcard when typing is off) | none |
+| 3 | recall: the color alone, its name among 6 to 8 close names (typing only when asked for; design/LEARN-ROOM-2.md has the full format library per rung) | 6-8 neighbors |
 | 4 | climbed | |
 
 - Start rung: new 0, `learning` 1, `yours` 3 (straight to recall). In "Choose · Test me" everything starts at 2 and Meet is skipped.

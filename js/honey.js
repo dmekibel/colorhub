@@ -921,8 +921,8 @@ function honeyLitBar() {
         return `<button class="cs-hl-c" data-h="${esc(c.h)}" data-n="${esc(nm)}"><i style="background:${esc(c.h)}"></i><span>${esc(nm)}</span>${pc != null ? `<em>${pc >= 9.5 ? Math.round(pc) : pc >= .95 ? pc.toFixed(1).replace(/\.0$/, "") : "<1"}%</em>` : ""}</button>`; }).join("");
     };
     paint();
-    input.addEventListener("input", () => { honeyLitSize(+input.value); paint(); });
-    input.addEventListener("change", () => { buzz(3); honeyLitSize(+input.value, true); });
+    // stops on a long range, every number on a short one, and −/+ for an exact count (countify, core.js)
+    countify(input, { min: HONEY_LIT_MIN, max: set.max, value: cs.length, out: kOut, onSet: (v, final) => { honeyLitSize(v, final); paint(); if (final) buzz(3); } });
     cols.addEventListener("click", e => {
       const b = e.target.closest(".cs-hl-c"); if (!b) return; e.stopPropagation(); buzz(4);
       if (typeof openTappedColor === "function") openTappedColor(b.dataset.h, b.dataset.n);

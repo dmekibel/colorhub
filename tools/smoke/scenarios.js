@@ -369,38 +369,44 @@ for (const [shot, id, label, needs] of [["learn", "learn", "Learn", ".plates, .b
 }
 
 // ================================================================== LEARN
-scenario("learn", "Begin starts the lesson and the deck runs to the end", async t => {
-  await t.open("#shot=learn", { settle: 600 });
-  await t.waitFor(".room-learn", 6000, "the Learn room");
-  const begin = t.$("[data-learn],[data-review],[data-go].btn");
-  t.expect(begin, "Learn has no Begin / Continue button");
-  await t.click(begin, { wait: 500 });
-  await t.waitFor("#pager", 5000, "the meet pager after Begin");
-  t.expect(t.$$("#pager .page").length >= 4, "the meet pager has too few pages");
-  await t.click("#pager .ready [data-go]", { force: true, wait: 500 });
-  await t.waitFor(".deck .card", 5000, "the deck's first card");
-  let swiped = 0;
-  for (let i = 0; i < 80 && !t.$(".result"); i++) {
-    const rev = t.$("[data-reveal]");
-    if (rev) await t.click(rev, { wait: 80 });
-    const yes = t.$("[data-yes]");
-    if (yes) { await t.click(yes, { wait: 350 }); swiped++; } else await t.sleep(200);
-  }
-  await t.waitFor(".result h1", 5000, "the unit-done screen");
-  t.expect(/named/i.test(t.text(".result h1")), `unit-done says "${t.text(".result h1")}"`);
-  t.notes.push(`${swiped} cards swiped`);
+// Screenshot mode never auto-advances a right answer (prAuto), so a Study run takes the shot's sample progress, saves
+// it, and reopens the real Learn room with it
+async function lrReal(t, shot, js) {
+  await t.open(shot, { settle: 700 });
+  if (shot === "#shot=lx:room") await t.waitFor(".room-learn", 10000, "the sample Learn room");
+  if (js) t.ev(js);
+  t.ev("save()");
+  await t.open("#/today", { settle: 800, keepState: true });
+}
+scenario("learn", "Study on the Learn room opens the Study sheet then meets the new colors and plays the games", async t => {
+  await lrReal(t, "#shot=learn");
+  await t.waitFor(".room-learn [data-study]", 6000, "the Learn room's Study button");
+  t.expect(!t.$(".room-learn [data-learn]"), "the old linear Begin is still there");
+  await t.click(".room-learn [data-study]", { wait: 600 });
+  await t.waitFor(".ls-sheet", 6000, "the same Study sheet as the map");
+  t.expect(/for you/i.test(t.text(".ls-sheet [data-qtitle]")), `the sheet's title ("${t.text(".ls-sheet [data-qtitle]")}")`);
+  t.expect(t.$(".ls-sheet .cnt-b[data-cnt='-1']") && t.$(".ls-sheet .cnt-b[data-cnt='1']"), "How many has its − and + steppers");
+  t.ev("document.querySelector('.ls-sheet [data-size]')._countTo(4)");
+  await t.click(".ls-sheet [data-go]", { force: true, wait: 700 });
+  await t.waitFor(".ls-study .ls-meet, .ls-study .pr-step", 6000, "Study begins");
+  const log = [];
+  for (let i = 0; i < 150 && !t.$(".ls-res"); i++) { const k = t.ev(LS_SOLVE); log.push(k); await t.sleep(k === "wait" ? 300 : 260); }
+  t.notes.push("steps: " + log.length + " · " + [...new Set(log)].join(","));
+  if (!t.$(".ls-res")) t.notes.push("last: " + log.slice(-6).join(",") + " · " + (t.$(".ls-study .pr-stage .pr-step") || {}).className);
+  await t.waitFor(".ls-res", 8000, "the Study results");
 });
-
-scenario("learn", "a due review starts a deck", async t => {
-  await t.open("#shot=learn", { settle: 600 });
-  await t.waitFor(".room-learn", 6000, "the Learn room");
-  t.ev("Object.values(S.cards).forEach(c => { c.due = addDays(today(), -1); }); home();");
-  await t.waitFor("[data-review]", 4000, "a Begin button for reviews");
-  t.expect(/to recall/i.test(t.text(".room-learn h2")), `the headline says "${t.text(".room-learn h2")}"`);
-  await t.click("[data-review]", { wait: 600 });
-  await t.waitFor(".deck", 5000, "the review deck");
-  await t.waitFor(".deck .card, .deck .pi-board, .deck [data-pick], .deck .pick", 5000, "the first review card");
-  for (let i = 0; i < 4; i++) { const rev = t.$("[data-reveal]"); if (!rev) break; await t.click(rev, { wait: 80 }); const y = t.$("[data-yes]"); if (y) await t.click(y, { wait: 400 }); }
+scenario("learn", "due reviews come first in Study and are asked from memory before anything new is met", async t => {
+  await lrReal(t, "#shot=learn", "Object.values(S.cards).slice(0, 3).forEach(c => { c.due = addDays(today(), -1); });");
+  await t.waitFor(".room-learn [data-study]", 6000, "the Learn room");
+  t.expect(/to recall/i.test(t.text(".lh-hero-t")), `the headline says "${t.text(".lh-hero-t")}"`);
+  await t.click(".room-learn [data-study]", { wait: 600 });
+  await t.waitFor(".ls-sheet", 6000, "the Study sheet");
+  t.expect(/to recall/.test(t.text(".ls-sheet [data-why]")), `the sheet says what's due ("${t.text(".ls-sheet [data-why]")}")`);
+  await t.click(".ls-sheet [data-go]", { force: true, wait: 700 });
+  await t.waitFor(".ls-study .pr-step", 6000, "the first step");
+  t.expect(!t.$(".ls-study .ls-meet") && !t.$(".ls-study .ls-story-bars"), "a due review was shown before it was asked");
+  const due = t.ev("dueList().map(c => c.n.toLowerCase())"), first = t.ev("(() => { const s = document.querySelector('.ls-study .pr-stage'); return s._lsIt ? s._lsIt.key : ''; })()");
+  t.expect(due.includes(first), `the first question is a due review (${first})`);
 });
 
 // ================================================================== THE DAILIES (js/challenge.js, js/colordle.js)
@@ -866,7 +872,7 @@ scenario("pages", "Learn opens the instant deck; Start plays flashcards to the r
   await H.openPage(t, "#/color/teal", "Teal");
   await t.click("[data-learnit]", { wait: 600 });
   await t.waitFor(".pr-quick", 4000, "the Learn sheet (Learn it opens it directly now)");
-  t.ev("(() => { const r = document.querySelector('.pr-quick [data-size]'); r.value = 5; r.dispatchEvent(new Event('input', { bubbles: true })); })()");
+  t.ev("(() => { const r = document.querySelector('.pr-quick [data-size]'); r._countTo(5); })()");
   await t.click('.pr-quick [data-method="cards"]', { wait: 600 });
   await t.waitFor(".pr-play .pr-card", 4000, "the flashcard");
   for (let i = 0; i < 20 && !t.$(".pr-res"); i++) {
@@ -899,6 +905,7 @@ const LS_SOLVE = `(() => {
     const j = tiles.findIndex(t => t.sw && t.i === tiles[k].i); btns[k].click(); btns[j].click(); return 'match';
   }
   if (st.querySelector('.pr-s-odd')) { st._prChoose(st._prOpts.findIndex(o => !o.same)); return 'odd'; }
+  if (st.querySelector('.pr-s-edge') && st._prEdge) { st._prChoose(st._prEdge.last); return 'edge'; }
   if (st.querySelector('.pr-s-quiz')) { st._prChoose([...st.querySelectorAll('.pr-opt')].findIndex(b => b.textContent.trim() === nm)); return 'qn'; }
   if (st.querySelector('.pr-s-qc')) { st._prChoose([...st.querySelectorAll('.pr-cell .pr-tag')].findIndex(b => b.textContent.trim() === nm)); return 'qc'; }
   if (st.querySelector('.pr-s-type input') && !st.querySelector('.pr-typef.done')) { st._prType(nm); return 'type'; }
@@ -910,7 +917,7 @@ scenario("learnset", "Learn sheet: live preview, size and closeness sliders, Loo
   await t.click("[data-learnit]", { wait: 600 });
   await t.waitFor(".ls-sheet", 4000, "Learn it opens the Learn sheet directly");
   t.expect(t.$(".ls-sheet [data-look]") && t.$(".ls-sheet [data-go]"), "Look and Study are both on the sheet");
-  const set = v => t.ev(`(() => { const r = document.querySelector('.ls-sheet [data-size]'); r.value = ${v}; r.dispatchEvent(new Event('input', { bubbles: true })); return document.querySelectorAll('.ls-prev i').length; })()`);
+  const set = v => t.ev(`(() => { const r = document.querySelector('.ls-sheet [data-size]'); r._countTo(${v}); return document.querySelectorAll('.ls-prev i').length; })()`);
   t.expect(await set(4) === 4, "the preview follows the size slider (4)");
   t.expect(await set(14) === 14, "the preview follows the size slider (14)");
   const before = t.ev("[...document.querySelectorAll('.ls-prev i')].map(i => i.style.cssText).join()");
@@ -955,7 +962,7 @@ scenario("learnset", "Study: a mixed session runs to the results", async t => {
   await H.openPage(t, "#/color/teal", "Teal");
   await t.click("[data-learnit]", { wait: 600 });
   await t.waitFor(".ls-sheet", 4000, "Learn it opens the Learn sheet directly");
-  t.ev("(() => { const r = document.querySelector('.ls-sheet [data-size]'); r.value = 4; r.dispatchEvent(new Event('input', { bubbles: true })); })()");
+  t.ev("(() => { const r = document.querySelector('.ls-sheet [data-size]'); r._countTo(4); })()");
   await t.click(".ls-sheet [data-go]", { wait: 600 });
   await t.waitFor(".ls-study .pr-stage .pr-step", 6000, "the first question");
   const kinds = new Set();
@@ -992,7 +999,7 @@ scenario("learnset", "Meet plays as a story pager: right taps advance, left taps
   await H.openPage(t, "#/color/teal", "Teal");
   await t.click("[data-learnit]", { wait: 600 });
   await t.waitFor(".ls-sheet", 4000, "the Learn sheet");
-  t.ev("(() => { const r = document.querySelector('.ls-sheet [data-size]'); r.value = 4; r.dispatchEvent(new Event('input', { bubbles: true })); })()");
+  t.ev("(() => { const r = document.querySelector('.ls-sheet [data-size]'); r._countTo(4); })()");
   await t.click(".ls-sheet [data-go]", { wait: 600 });
   await t.waitFor(".ls-study .ls-story-bars", 6000, "the story's segmented bars over the first Meet card");
   await t.sleep(350);   // past the beat that guards a fast double tap from skipping a card unseen
@@ -1046,7 +1053,7 @@ scenario("learnset", "Study: wrong answers and touch-only Next play a 3-color se
   t.ev("window.__lsN = 0; window.__lsW = false");
   await t.click("[data-learnit]", { wait: 600 });
   await t.waitFor(".ls-sheet", 4000, "the Learn sheet");
-  t.ev("(() => { const r = document.querySelector('.ls-sheet [data-size]'); r.value = 3; r.dispatchEvent(new Event('input', { bubbles: true })); })()");
+  t.ev("(() => { const r = document.querySelector('.ls-sheet [data-size]'); r._countTo(3); })()");
   await t.click(".ls-sheet [data-go]", { wait: 600 });
   await t.waitFor(".ls-study", 6000, "the Study screen");
   const seen = [];
@@ -1069,7 +1076,7 @@ scenario("learnset", "Study: new colors are met (a Meet card each, then the clos
   await t.waitFor(".ls-sheet", 4000, "Learn it opens the Learn sheet directly");
   t.expect(t.$$(".ls-sheet [data-pace]").length === 4 && t.$(".ls-sheet [data-pace].on"), "the pace chips, one on");
   t.expect(/new ones? first|Nothing new/.test(t.text(".ls-sheet [data-pacesay]")), "the pace line says what Study will do");
-  t.ev("(() => { const r = document.querySelector('.ls-sheet [data-size]'); r.value = 4; r.dispatchEvent(new Event('input', { bubbles: true })); })()");
+  t.ev("(() => { const r = document.querySelector('.ls-sheet [data-size]'); r._countTo(4); })()");
   await t.click(".ls-sheet [data-go]", { wait: 600 });
   await t.waitFor(".ls-study .ls-meet", 6000, "a Meet card first");
   t.expect(/Meet/.test(t.text(".ls-study [data-status]")), "the status says Meet");
@@ -1096,7 +1103,7 @@ scenario("learnset", "Study: stop part-way, Keep going picks each color up at it
   await H.openPage(t, "#/color/teal", "Teal");
   await t.click("[data-learnit]", { wait: 600 });
   await t.waitFor(".ls-sheet", 4000, "Learn it opens the Learn sheet directly");
-  t.ev("(() => { const r = document.querySelector('.ls-sheet [data-size]'); r.value = 4; r.dispatchEvent(new Event('input', { bubbles: true })); })()");
+  t.ev("(() => { const r = document.querySelector('.ls-sheet [data-size]'); r._countTo(4); })()");
   await t.click(".ls-sheet [data-go]", { wait: 600 });
   await t.waitFor(".ls-study .pr-stage .pr-step", 6000, "the first question");
   const lvSum = () => t.ev("[...document.querySelectorAll('.ls-prog i')].reduce((s, i) => s + (+i.style.getPropertyValue('--lv') || 0), 0)");
@@ -1448,7 +1455,7 @@ scenario("map", "On the map: a painting page lights its colors on Home; #/map/ga
   // How many: the measured pool, not a fixed six; the lit set and the named chips follow the slider
   const nIn = t.$$(".cs-hl-n input").pop();
   t.expect(nIn && +nIn.max > 6, "a museum painting on the map has no How many slider over its pool");
-  nIn.value = 12; nIn.dispatchEvent(new t.w.Event("input", { bubbles: true })); nIn.dispatchEvent(new t.w.Event("change", { bubbles: true }));
+  nIn._countTo(12);
   await t.waitFor(() => { const bs = t.$$(".cs-hl-bar"), bb = bs[bs.length - 1]; return bb && bb.querySelectorAll(".cs-hl-c").length === t.ev("HONEY_HL.hexes.length") && t.ev("HONEY_HL.hexes.length") > 6; }, 4000, "the named chips to follow the How many slider").catch(() => {});
   const bars = t.$$(".cs-hl-bar"), bar = bars[bars.length - 1], lit = t.ev("HONEY_HL.hexes.length"), chips = bar.querySelectorAll(".cs-hl-c").length;
   t.expect(lit > 6 && lit <= 12 && chips === lit, `How many 12 lit ${lit} colors and named ${chips}`);
@@ -1556,31 +1563,21 @@ scenario("map", "one right corner: its menu holds every verb, and closes on a ta
 
 
 // ================================================================== LEARN (past the first units: js/learnmore.js)
-scenario("learn", "the path goes past the first units: Begin teaches a generated unit as core cards", async t => {
-  await t.open("#shot=lx:room", { settle: 600 });
-  await t.waitFor(".lx-words .lx-bar-fill", 10000, "the Your words bar");
-  t.expect(/Next stop · 150 words/.test(t.text(".lx-words-head")), `the bar names the next stop ("${t.text(".lx-words-head")}")`);
+scenario("learn", "For you reaches past the first units: Study makes core cards due tomorrow", async t => {
+  await lrReal(t, "#shot=lx:room");
+  await t.waitFor(".room-learn [data-study]", 10000, "the Learn room");
   t.expect(!/the 101|\/101/.test(t.text("#app")), "the Learn room mentions the 101");
   const before = t.ev("Object.keys(S.cards).filter(k => k.startsWith('core:')).length");
-  await t.click("[data-learn]", { wait: 600 });
-  await t.waitFor("#pager", 6000, "the meet pager for the generated unit");
-  t.expect(/Unit \d+ · to /.test(t.text("#pager .eyebrow")), `the unit label ("${t.text("#pager .eyebrow")}")`);
-  const pager = t.$("#pager");
-  pager.scrollTop = pager.scrollHeight; await t.tick(); await t.sleep(300);
-  await t.click("[data-go]", { wait: 600 });
-  await t.waitFor(".deck .card", 6000, "the swipe deck");
-  for (let i = 0; i < 60 && !t.$(".result"); i++) {
-    const rev = t.$("[data-reveal]"); if (rev) await t.click(rev, { wait: 60 });
-    const yes = t.$("[data-yes]"); if (yes) await t.click(yes, { wait: 350 }); else await t.sleep(150);
-  }
-  await t.waitFor(".result", 6000, "the unit-done screen");
-  const after = t.ev("Object.keys(S.cards).filter(k => k.startsWith('core:') && S.cards[k].n && S.cards[k].h).length");
-  t.expect(after >= before + 4, `the unit's colors became core:<slug> cards with their own name and hex (${before} -> ${after})`);
-  const bet = t.$(".lx-bet-b[data-n='2']"); t.expect(bet, "the bet-on-tomorrow row");
-  await t.click(bet, { wait: 200 });
-  t.expect(t.ev("!!(S.bets && S.bets[today()] && S.bets[today()].n === 2)"), "the bet was kept");
-  await t.click("[data-next]", { wait: 600 });
-  await t.waitFor("#pager", 6000, "the next generated unit");
+  await t.click(".room-learn [data-study]", { wait: 600 });
+  await t.waitFor(".ls-sheet", 6000, "the Study sheet");
+  t.ev("document.querySelector('.ls-sheet [data-size]')._countTo(3)");
+  await t.click(".ls-sheet [data-go]", { force: true, wait: 700 });
+  const log = [];
+  for (let i = 0; i < 150 && !t.$(".ls-res"); i++) { const k = t.ev(LS_SOLVE); log.push(k); await t.sleep(k === "wait" ? 300 : 260); }
+  if (!t.$(".ls-res")) t.notes.push("last: " + log.slice(-6).join(",") + " · " + (t.$(".ls-study .pr-stage .pr-step") || {}).className);
+  await t.waitFor(".ls-res", 8000, "the Study results");
+  const after = t.ev("Object.keys(S.cards).filter(k => k.startsWith('core:') && S.cards[k].n && S.cards[k].h && S.cards[k].due > today()).length");
+  t.expect(after > before, `the new colors became core:<slug> cards due later (${before} -> ${after})`);
 });
 scenario("learn", "Learn it opens on a name past the first units", async t => {
   await t.open("#/name/chestnut", { settle: 600 });
@@ -2146,26 +2143,34 @@ scenario("learnroom", "placement lands on the map with a one-line hint that leav
   await t.sleep(500);
   t.expect(!t.$(".lr-maphint") && !t.ev("S.mapHint"), "the hint stayed after the first touch");
 });
-scenario("learnroom", "day one: five blocks or fewer, no grid, no stage rows, no Settings", async t => {
+scenario("learnroom", "day one: For you and the wheel and the choices and Today with one filled button and nothing locked", async t => {
   await t.open("#shot=learn", { settle: 600 });
   t.ev("S = Object.assign(fresh(), { placed: { tier: 2, at: today() }, profileAsked: true }); home();");
-  await t.waitFor(".room-learn .lx-words", 8000, "the Your words bar");
+  await t.waitFor(".room-learn .lh-wheel", 8000, "the color wheel");
   const room = t.$(".room-learn");
   t.expect(!t.$(".quilt", room) && !t.$(".path-list", room) && !t.$("[data-menu]", room), "the grid, the stage rows or Settings are still in the room");
   t.expect(t.$$(".lr-today", room).length === 1 && !t.$(".dl-row", room), "Today is not one card");
-  const blocks = [".btn[data-learn], .btn[data-review]", ".lr-today", ".pr-entry", ".lx-words", ".inst", ".keep"].filter(s => t.$(s, room)).length;
+  const blocks = [".lh-hero", ".lh-wheel-sec", ".lh-choose", ".lr-today", ".inst", ".keep"].filter(s => t.$(s, room)).length;
   t.expect(blocks <= 5, `${blocks} blocks on day one`);
-  t.expect(!/units? to|the 101/i.test(room.innerText), "old path copy is still there");
-  t.expect(!t.$("[data-words-map]", room), "See them on the map shows with nothing to see");
+  t.expect(t.$$(".btn", room).filter(b => !b.classList.contains("ghost")).length === 1, "more than one filled button");
+  t.expect(t.$$(".lh-w", room).length === 9, "the wheel doesn't show nine families");
+  t.expect(!/units? to|the 101|locked/i.test(room.innerText), "old path copy is still there");
+  t.expect(!t.$("[data-lh-map]", room), "See them on the map shows with nothing to see");
+  t.expect(/Your first/.test(t.text(".lh-hero-t")), `the new user's headline ("${t.text(".lh-hero-t")}")`);
 });
-scenario("learnroom", "Your words names the next stop and opens the map on the Learned view", async t => {
+scenario("learnroom", "a wedge of the wheel studies that family at your level and the map link opens your colors", async t => {
   await t.open("#shot=lx:room", { settle: 600 });
-  await t.waitFor(".lx-words .lx-bar-fill", 10000, "the Your words bar");
-  t.expect(/Next stop · 150 words/.test(t.text(".lx-words-head")), `next stop ("${t.text(".lx-words-head")}")`);
-  t.expect(/\d+ names? to go/.test(t.text(".lx-words-foot")), `what's left ("${t.text(".lx-words-foot")}")`);
-  await t.click("[data-words-map]", { wait: 900 });
+  await t.waitFor(".room-learn .lh-wheel", 10000, "the color wheel");
+  t.expect(/\d+ of \d+ met/.test(t.text(".lh-wheel-n")), `the stage line ("${t.text(".lh-wheel-n")}")`);
+  t.ev("document.querySelector('.lh-w[data-fam=Greens]').dispatchEvent(new MouseEvent('click', { bubbles: true }))");
+  await t.waitFor(".ls-sheet", 6000, "the Study sheet for greens");
+  t.expect(/greens/i.test(t.text(".ls-sheet [data-qtitle]")), `the sheet's title ("${t.text(".ls-sheet [data-qtitle]")}")`);
+  t.expect(t.ev("(() => { const o = lhFamily(lhStats(), 'Greens').out; return o.length >= 3 && o.every(it => prFam9(it.h) === 'Greens'); })()"), "the family's picks aren't all greens");
+  t.expect(t.ev("(S.lh && S.lh.fam && S.lh.fam.Greens) === 1"), "the family tap wasn't kept for For you");
+  await t.open("#shot=lx:room", { settle: 600 });
+  await t.click(await t.waitFor("[data-lh-map]", 10000, "See them on the map"), { wait: 900 });
   await t.waitFor(".hm canvas", 8000, "the map from See them on the map");
-  t.expect(t.ev("S.hm.filter") === "learned" && /^stage:\d+$/.test(t.ev("S.hm.src")), `the map's view (${t.ev("S.hm.src")} · ${t.ev("S.hm.filter")})`);
+  t.expect(t.ev("S.hm.filter") === "learned", `the map's view (${t.ev("S.hm.src")} · ${t.ev("S.hm.filter")})`);
 });
 scenario("learnroom", "the Today card shows the painting and opens both of its parts", async t => {
   await t.open("#shot=learn", { settle: 600 });

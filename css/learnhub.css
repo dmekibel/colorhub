@@ -1,0 +1,62 @@
+/* The Learn room, version 2 (js/learnhub.js, design/LEARN-ROOM-2.md): For you, your color wheel, Or choose, Today.
+   Plus the new Study formats (js/studyformats.js): two to pick from, spot it among 6 to 10, the flash, the edge. */
+
+/* ---------- For you ---------- */
+.lh-hero{display:flex;flex-direction:column}
+.lh-hero .plates{border:0;padding:0;width:100%;cursor:pointer;background:none}
+.lh-hero-t{margin-top:18px}
+.lh-hero-n{margin-top:6px;max-width:34em}
+.lh-hero .btn{margin-top:20px}
+.lh-wait{margin-top:24px}
+
+/* ---------- the wheel: a rose of the nine families ---------- */
+.lh-wheel-sec{margin-top:var(--s6)}
+.lh-wheel{display:block;width:100%;max-width:420px;height:auto;margin:10px auto 0;overflow:visible;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.lh-w{cursor:pointer;outline:none;transform-origin:0 0;transition:transform var(--dur-1) var(--spring)}
+.lh-w-hit{fill:transparent}
+.lh-w path:not(.lh-w-hit){transition:opacity var(--dur-1)}
+.lh-w:hover .lh-w-track{opacity:.85}
+.lh-w:active,.lh-w.tap{transform:scale(1.035)}
+.lh-w:focus-visible .lh-w-track{stroke:var(--ink);stroke-width:1.5}
+.lh-w-yours,.lh-w-learn{animation:lhGrow .7s var(--ease-grow) both;animation-delay:calc(var(--k) * 40ms);transform-origin:0 0}
+@keyframes lhGrow{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
+.lh-w-t{font:400 15px/1 var(--serif);fill:var(--ink);letter-spacing:0;pointer-events:none}
+.lh-hub{fill:var(--surface-1);stroke:var(--rule)}
+.lh-hub-n{font:400 30px/1 var(--serif);fill:var(--ink);font-variant-numeric:tabular-nums}
+.lh-hub-t{font:italic 400 14px/1 var(--serif);fill:var(--soft)}
+.lh-wheel-n{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 14px;margin-top:6px}
+.lh-map{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0;border:0;background:none;color:var(--ink);font:400 16px/1 var(--sans);cursor:pointer}
+.lh-map svg{width:16px;height:16px}
+
+/* ---------- Or choose: a short labeled list ---------- */
+.lh-choose{margin-top:var(--s6)}
+.lh-rows{margin-top:6px;border-top:1px solid var(--rule)}
+.lh-row{display:flex;align-items:center;gap:14px;width:100%;min-height:64px;padding:10px 0;border:0;border-bottom:1px solid var(--rule);background:none;color:var(--ink);text-align:left;cursor:pointer;transition:background var(--dur-0)}
+.lh-row:active{background:var(--surface-2)}
+.lh-row>svg{flex:none;color:var(--soft)}
+.lh-row-art{flex:none;display:flex;gap:2px;width:56px;height:40px}
+.lh-row-art i{flex:1;background:var(--c)}
+.lh-row-art i:first-child{border-radius:4px 0 0 4px}.lh-row-art i:last-child{border-radius:0 4px 4px 0}
+.lh-row-t{flex:1;display:flex;flex-direction:column;gap:2px;min-width:0}
+.lh-row-t b{font:400 21px/1.15 var(--serif);letter-spacing:-.01em;font-weight:400;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lh-row-t small{font:400 14px/1.35 var(--sans);color:var(--soft);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* ---------- Study formats ---------- */
+.pr-grid4.pr-gn2{grid-template-rows:1fr}
+.pr-grid4.pr-gn6{grid-template-columns:repeat(3,1fr)}
+.pr-grid4.pr-gn8{grid-template-columns:repeat(4,1fr)}
+.pr-grid4.pr-gn10{grid-template-columns:repeat(5,1fr);gap:10px 8px}
+.pr-grid4.pr-gn8 .pr-tag,.pr-grid4.pr-gn10 .pr-tag{font-size:15px}
+.pr-s-flash{display:flex;flex-direction:column;flex:1;min-height:0}
+.sf-flash{flex:1;min-height:200px;margin-top:12px;border-radius:var(--r-1);background:var(--c);display:flex;align-items:flex-end;padding:20px;animation:sfFlash 1.4s var(--ease) both}
+.sf-flash b{font:400 44px/1 var(--serif);letter-spacing:-.02em;font-weight:400}
+@keyframes sfFlash{0%{opacity:0;transform:scale(.98)}12%{opacity:1;transform:none}85%{opacity:1}100%{opacity:.15}}
+.pr-s-edge{display:flex;flex-direction:column;flex:1;min-height:0}
+.sf-edge-ask{margin-top:6px;font:400 18px/1.3 var(--serif);color:var(--b-soft,var(--soft))}
+.sf-edge{display:grid;grid-template-columns:repeat(9,1fr);gap:3px;margin-top:18px;height:min(34dvh,240px)}
+.sf-edge-b{border:0;padding:0;background:var(--c);border-radius:2px;cursor:pointer;outline:3px solid transparent;outline-offset:2px;transition:transform var(--dur-0),outline-color var(--dur-1)}
+.sf-edge-b:active{transform:scaleY(.97)}
+.sf-edge-b.on{outline-color:#fff}
+.sf-edge.revealed .sf-edge-b.border{box-shadow:6px 0 0 -2px var(--b-ink,#fff)}
+.sf-edge-ends{display:flex;justify-content:space-between;gap:12px;margin-top:8px;font:400 17px/1.2 var(--serif)}
+.cs-hl-nl .cnt-step{opacity:1;font:inherit}
