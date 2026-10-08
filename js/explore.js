@@ -120,7 +120,7 @@ function lensSections(lens) {
     }
     default: {
       // For you: colors shuffled by day, with a painting, a story or a page every few pins
-      const day = today(), cs = seeded(colors, day), others = seeded([...paintings, ...stories, ...pages.filter(p => p.dek)], day);
+      const day = today(), cs = typeof fvForYou === "function" ? fvForYou(seeded(colors, day)) : seeded(colors, day), others = seeded([...paintings, ...stories, ...pages.filter(p => p.dek)], day);
       const out = [];
       cs.forEach((c, i) => { out.push(pin(c)); if (i % 3 === 2 && others.length) out.push(pin(others.shift())); });
       others.forEach(o => out.push(pin(o)));
@@ -474,9 +474,12 @@ function xStep(prev) {
   // Studio screens (ROADMAP.md §17 job #1): plain tokens (no ":"), since each reopens from its own remembered
   // state rather than an id. Checked before the generic node lookup at the bottom, which would otherwise treat
   // "harmony" etc. as a (nonexistent) graph node id and silently do nothing.
+  if (prev === "favs") return favShelf();   // your colors (js/favs.js)
+  if (prev === "favs-taste") return favTaste();   // your taste (js/favprofile.js)
   if (prev.startsWith("aw:") && typeof awStep === "function") return awStep(prev);   // the art wiki (js/artwiki.js)
   if (prev === "wheel") return gamutWheel(GW_LAST && GW_LAST.preset, GW_LAST && GW_LAST.pts, false);
   if (prev === "wheelview") return gwReopenView();
+  if (prev === "namer") return LAB.namer(NMR_LAST.hex, false);   // Name any color (js/namer.js), with the color you left it on
   if (prev === "harmony") return LAB.harmony(LAB_HARMONY_STATE && LAB_HARMONY_STATE.base, LAB_HARMONY_STATE && LAB_HARMONY_STATE.scheme, false);
   if (prev === "contrast") return LAB.contrast(LAB_CONTRAST_STATE && LAB_CONTRAST_STATE.set, LAB_CONTRAST_STATE && LAB_CONTRAST_STATE.slot, false);
   if (prev.startsWith("pal:")) return openSavedPalette(prev.slice(4), false);   // a saved palette (js/studio.js)
@@ -575,7 +578,7 @@ function colorPage(n, tapped) {
   const heroHex = tapped || c.h;
   const status = tapped ? `Your color · ${pctMatch(de2000(tapped, c.h))} to ${c.n}`
     : c.basic ? "A basic color word" : st ? (mine ? "Yours" : st.own || st.placed ? "In your reviews" : "Learning") : `New to you${c.unit ? ", from " + unitLabel(c.unit) : ""}`;
-  const saved = isSaved(n.id);
+  const saved = isSaved(n.id) || (typeof fvHas === "function" && fvHas(c.h));   // the heart is also "your colors" (js/favs.js)
   // the strip: a tapped color compares against the page it landed on; otherwise this color, its authored
   // neighbor (c.vs) if it has one, then its nearest taught look-alikes, deduped — up to 3 swatches, the first
   // (this color, or your color) wider
@@ -588,13 +591,14 @@ function colorPage(n, tapped) {
       <button class="cp-close" data-back aria-label="Back">${ICON.back}</button>
       <div class="cp-hero-foot">
         <span class="cp-chip">${esc(status)}</span>
+        ${typeof fvPageChip === "function" ? fvPageChip(c.h) : ""}
         <h1>${esc(c.n)}</h1>
         <button class="mono cp-hex" data-copy="${heroHex}">${heroHex}</button>
       </div>
       <span class="cp-scroll-hint" aria-hidden="true">${ICON.up}</span>
     </div>
     <div class="cp-primary-row">
-      ${typeof hmLearnIt === "function" ? `<button class="cp-primary" data-learnit>${mine ? "Review it" : "Learn it"}${mine ? "" : `<em>2 min</em>`}${ICON.arrow}</button>` : ""}
+      ${typeof prQuick === "function" || typeof hmLearnIt === "function" ? `<button class="cp-primary" data-learnit>${mine ? "Review it" : "Learn it"}${mine ? "" : `<em>2 min</em>`}${ICON.arrow}</button>` : ""}
       <button class="icon-btn cp-icon${saved ? " saved" : ""}" data-save aria-label="Save">${saved ? "♥" : "♡"}</button>
       <button class="icon-btn cp-icon" data-share aria-label="Share">${ICON.share}</button>
     </div>
@@ -636,8 +640,13 @@ function colorPage(n, tapped) {
   wireLinks(el); wireSections(el);
   if (typeof articleRender === "function") articleRender(routeSlug(c.n), el.querySelector("[data-ar-slot]"), { n: c.n, h: c.h });   // js/article.js (lane L8): draws nothing when data/articles/<slug>.json is missing
   onKey = e => { if (e.key === "Escape") xBack(); };
-  const li = el.querySelector("[data-learnit]"); if (li) li.onclick = () => hmLearnIt(c);
-  el.querySelector("[data-save]").onclick = e => { const on = toggleSave(n.id); e.currentTarget.textContent = on ? "♥" : "♡"; e.currentTarget.classList.toggle("saved", on); };
+  const li = el.querySelector("[data-learnit]"); if (li) li.onclick = () => typeof prQuick === "function" ? prQuick({ seed: c }) : hmLearnIt(c);   // js/practice.js: the instant-deck sheet
+  el.querySelector("[data-save]").onclick = e => {
+    const b = e.currentTarget, want = !b.classList.contains("saved");
+    if (isSaved(n.id) !== want) toggleSave(n.id);
+    if (typeof fvPageSet === "function") fvPageSet(el, c.h, c.n, want);   // js/favs.js: the same heart fills "Your colors"
+    b.textContent = want ? "♥" : "♡"; b.classList.toggle("saved", want);
+  };
   el.querySelector("[data-share]").onclick = () => {
     const url = shareURL("color/" + routeSlug(c.n)), text = `${c.n} · ColorHub`;
     if (navigator.share) navigator.share({ text, url }).catch(() => {});
@@ -692,7 +701,7 @@ function paintingPage(n) {
     <p class="p-dek">${esc(n.artist || "")}${n.place ? ` · ${esc(n.place)}` : ""}</p>
     ${pal.length ? `<div class="palette">${pal.map((p, i) => `<button class="pal" data-pi="${i}" data-swatch="${p.h}" style="--c:${p.h};flex:${Math.max(p.share, .08)}" data-ink="${ink(p.h)}"><span>${Math.round(p.share * 100)}%</span></button>`).join("")}</div>
       <div class="pal-names">${pal.map((p, i) => { const fam = typeof familyOf === "function" && familyOf(p.h); return `<button class="pal-name" data-pi="${i}" data-swatch="${p.h}"><i style="--c:${p.h}"></i><b>${esc(p.name)}</b>${fam ? `<span>${esc(fam.head.n)} family</span>` : ""}<em class="mono">${p.h}</em></button>`; }).join("")}</div>
-      <p class="fine">Tap a swatch to open its page.</p>` : `<p class="fine">This painting's palette is being extracted.</p>`}
+      <p class="fine">Tap a swatch to open its page.</p>${typeof prLearnBtn === "function" ? prLearnBtn(".palette", n.title) : ""}` : `<p class="fine">This painting's palette is being extracted.</p>`}
     ${n.note ? `<p class="p-body">${linkText(n.note)}</p>` : ""}
     ${connSection(n)}
     ${n.commons ? `<section class="srcs"><h3>Image</h3><ul><li><a href="${esc(n.commons)}" target="_blank" rel="noopener">Wikimedia Commons</a> · ${esc(n.license || "Public domain")}</li></ul></section>` : ""}
