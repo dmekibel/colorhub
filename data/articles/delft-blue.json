@@ -1,0 +1,205 @@
+{
+ "slug": "delft-blue",
+ "name": "Delft Blue",
+ "hex": "#5E7A8A",
+ "names": [
+  "Delft Blue"
+ ],
+ "tier": "place",
+ "depth": "medium",
+ "lede": "Delft blue is named after the blue-and-white pottery of Delft in Holland, Europe's answer to Chinese porcelain; as a color name it has drifted from the pottery's bright cobalt to a soft, greyed blue.",
+ "sections": [
+  {
+   "id": "pottery",
+   "title": "The pottery",
+   "body": "The name comes from the blue-and-white wares of Delft, which copied a color and a look that came originally from China [1][2]. In the early seventeenth century the Dutch East India Company shipped Chinese porcelain to Europe by the million; when the Wanli emperor died in 1620 and the supply was interrupted, Dutch potters set out to imitate it [3]. What they made was not porcelain at all but earthenware, coated in a white tin glaze and painted in cobalt blue, the one blue that survived the heat of the kiln [3].\n\nThe best Delftware dates from about 1640 to 1740, when around thirty potteries worked in the town [3]. A gunpowder explosion in 1654 destroyed part of Delft and freed old brewery buildings that potters took over; the Rijksmuseum painting of that explosion is in our archive, as *[[art:rijks-20015852|The explosion of the powder magazine in Delft]]* [3][7]. Before 1800 the potteries had lost their market to English porcelain and the new white earthenware, and only one firm of that era, De Porceleyne Fles, founded in 1653, still works today [3]. Paterson and St Clair both date the color name to the pottery of the eighteenth century [1][2]."
+  },
+  {
+   "id": "swatch",
+   "title": "A name that faded",
+   "body": "If you picture Delftware you picture a saturated cobalt blue on white [3], but the color name has gone somewhere quieter. St Clair calls it an inky shade [2]. Our swatch is Ridgway's 1912 *Delft Blue*, from plate XLII of his color standards: a soft greyish mid blue, which the ISCC-NBS later filed under greyish blue [4]. Ridgway also gave a Dark and a Deep Delft Blue, both darker and greener [4].\n\nIts nearest named neighbors are [[deep-orient-blue]], [[steel-grey]] and [[slate]], all within about five units, which tells you how far it is from a painter's [[cobalt]] [4]. In Google Books the phrase *Delft blue* barely exists before the 1880s and is printed most in the late 1920s, so the name is much younger than the pottery [8]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Greyed blues of this kind are common in paintings of sea, sky and distance. In our archive of 23,531 works, a color within six units of Delft Blue covers at least five per cent of the canvas in 243 [5]. The painter most devoted to it is Claude Monet: nine of his fifty paintings in the archive carry it, seventeen times the archive's rate, with *Low Tide at Pourville, near Dieppe* of 1882 the strongest example at over seventy per cent of the canvas [5]. It peaks in paintings of the 1920s and most often shares a canvas with [[slate]] and [[denim]] [5].\n\nOne small irony: Willem de Zwart's *[[art:rijks-20028535|Still Life with Apples in a Delft Blue Bowl]]* is so dark as photographed that no blue makes it into the painting's six main colors [6]. These are photographs of aged, varnished paintings, so read every number as a screen color [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Delft, Netherlands (Delftware pottery)",
+   "first_recorded": "Ridgway 1912 as a standard color; the phrase rare in print before the 1880s",
+   "source": "Paterson, A Dictionary of Colour; Ridgway 1912"
+  },
+  "aka": [
+   "Delfts blauw (Dutch, the pottery)"
+  ],
+  "siblings": [
+   "deep-orient-blue"
+  ],
+  "parent": null,
+  "children": [
+   "dark-delft-blue",
+   "deep-delft-blue"
+  ],
+  "disambiguation": [
+   {
+    "slug": "cobalt",
+    "gloss": "the Delft pottery itself is painted in a much more saturated cobalt blue; the Ridgway color Delft Blue is a greyed blue"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "nl",
+    "name": "Delfts blauw"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,531 paintings, as photographed",
+  "match": {
+   "hex": "#5E7A8A",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 243,
+  "top_painter": {
+   "name": "Claude Monet",
+   "hits": 9,
+   "n": 50,
+   "lift": 17.4
+  },
+  "peak_decade": 1920,
+  "company": [
+   {
+    "word": "Slate",
+    "lift": 16.2
+   },
+   {
+    "word": "Denim",
+    "lift": 7.6
+   }
+  ],
+  "ngram": {
+   "first_5pct": "1880s",
+   "peak": 1928
+  },
+  "measured": {
+   "lch": [
+    49.7,
+    13.4,
+    243
+   ],
+   "contrast_white": 4.54,
+   "nearest": [
+    [
+     "Deep Orient Blue",
+     3.2
+    ],
+    [
+     "Steel Grey",
+     5.1
+    ],
+    [
+     "Slate",
+     5.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Delft blue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary, \"Delft blue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "web",
+   "cite": "Wikipedia, \"Delftware\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/Delftware"
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XLII, via data/library.json (ISCC-NBS 1955 block 204); CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,531 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, rijks-20028535 six-color reading",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub archive, rijks-20015852 (Egbert van der Poel, 1654)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "What were Delft's potters imitating?",
+   "choices": [
+    "Chinese porcelain",
+    "Italian marble",
+    "Persian carpets",
+    "Venetian glass"
+   ],
+   "answer": "Chinese porcelain",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Delftware is true porcelain.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Delftware is not porcelain: it is earthenware pretending, in tin glaze and cobalt.",
+  "Monet carries this greyed blue seventeen times more often than the average painter in our archive.",
+  "The pottery is bright cobalt; the color name has faded to a soft grey-blue."
+ ],
+ "words": 497,
+ "status": "pilot",
+ "checked": {
+  "by": "L7 self-check (sentence-to-card trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "Pottery history from Wikipedia (web); books (Paterson, St Clair) only give the 18th-century pottery origin.",
+   "Swatch is Ridgway's greyed Delft Blue, not the pottery's cobalt: said in text."
+  ]
+ }
+}

@@ -1,0 +1,340 @@
+{
+ "slug": "mauve",
+ "name": "Mauve",
+ "hex": "#A8778F",
+ "names": [
+  "Mauve"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Mauve is the French name of the mallow flower, borrowed for a soft greyish purple; in 1856 an 18-year-old chemist made a coal-tar dye that took the name and turned it into a craze.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A flower's name",
+   "body": "*Mauve* is the French word for the common mallow, and the color is its petal color [1][2]. English took it over in the 1850s, and Victorians said it the French way, closer to \"morv\" [1][2]. In the old language of flowers, the mallow stood for mildness [17], which suits the color as most people now use the word: a soft, greyish pink-purple, lighter and duller than [[purple]] and less blue than [[lilac]].\n\nThe swatch here is the modern dictionary mauve, ISCC-NBS block 217 [16]. It is not the color of 1856 [7]. Perkin's dye was a vivid, saturated purple, and the word has drifted paler and greyer since; Garfield notes that mauve has never been one fixed color, running from lilac to lush purple [2][4]. Its nearest named neighbors today are [[eupatorium-purple]], [[mountbatten-pink]] and [[opera-mauve]] [16]."
+  },
+  {
+   "id": "before-perkin",
+   "title": "A fashion before the dye",
+   "body": "The popular story has Perkin's dye launching the fashion, but the order was really the reverse [3][5]. A purple from lichens, sold as French purple, was hugely popular in the 1850s, and it is the reason the word mauve moved from naming a dye to naming a color [6]. The Paris fashion for mauve took hold during late 1857 and crossed to London in 1858, and it ran at first on French lichen purples and murexide, a purple made from bird guano [2][3]. In Britain murexide was sold as Roman purple; the old claim that it came from serpent excrement is a myth [3][7].\n\nEmpress Eugénie's fondness for the color was noted in late 1857, and in January 1858 Queen Victoria wore mauve velvet to her daughter's wedding [2][8]. Perkin's aniline purple rode a wave that was already rising [5]."
+  },
+  {
+   "id": "perkin",
+   "title": "Perkin's purple",
+   "body": "At Easter 1856 William Henry Perkin, eighteen years old and a student of August Hofmann, was working in a makeshift laboratory at home [3][7]. He was trying to make quinine, the malaria drug, from a coal-tar chemical called allyltoluidine, and got only a reddish powder [7]. He tried again with plain aniline and potassium dichromate, and this time the flask held a black sludge [3][7]. Washed with spirits of wine, about five per cent of it gave up a purple that dyed silk and stood up to light [7][3]. Quinine itself was not synthesized until 1944 [9].\n\nIt was not luck alone. Perkin's later admirers called mauve the least accidental of discoveries, given how systematically he chased the residue, though *Nature* suggested in 1956 that someone else would have found aniline dyes within a few years [10]. A later legend says he got the idea from the rainbow film of tar on a puddle; at the 1906 jubilee the chemist Raphael Meldola denied it outright [11].\n\nPerkin patented the process in August 1856, at an age when patents were normally granted only to adults [7]. His father put up the money for a factory at Greenford Green, near Harrow, which opened in 1857 [12]. The yields were tiny: about a hundred pounds of coal gave a quarter of an ounce of dye [12][8]. He first sold it as Tyrian purple, borrowing the prestige of the imperial shellfish dye, and by 1859 had switched to the French fashion name, mauve; in the journals he called the compound mauveine [3][7][1]."
+  },
+  {
+   "id": "craze",
+   "title": "Mauve measles",
+   "body": "By 1859 the color was everywhere [5]. *Punch* that August joked about an epidemic of \"mauve measles\" sweeping London [2][3]. The word first appeared in *The Times* that July, in a notice about a lost parasol [2]. Within about two years the boom was over, and buyers moved on to the next aniline sensations, magenta first among them [2]. At the 1862 International Exhibition Perkin and Sons still showed off a pillar of solid mauve [12].\n\nThe color then found a quieter, longer career in mourning. Victorian etiquette moved a widow from black through grey or mauve in the last months of mourning [13][14]. Queen Victoria herself had exchanged black for mauve less than four years after Prince Albert died [12], and mauve was still allowed for half-mourning at the British court around 1952 [15]."
+  },
+  {
+   "id": "legacy",
+   "title": "What mauve started",
+   "body": "Perkin's discovery is usually summed up as the first aniline dye, and that is the safe description [3][7][18]. Calling it the first synthetic dye is wrong: picric acid, a coal-tar yellow, was dyeing silk in Lyon from 1845 [3]. Whether mauve was at least the first *commercial* synthetic dye is something the books disagree on, Garfield saying yes and Ball pointing to picric acid [7][3][18].\n\nWhat is not in doubt is what followed. Aniline reds, violets and blues came within a few years, and the small dye works that made them grew into BASF, Bayer and Ciba [1][6]. By the mauve jubilee in 1906 about two thousand artificial colors existed [7]. Biologists borrowed the new dyes to stain cells; mauve was among the first used, in the early 1860s [19]."
+  },
+  {
+   "id": "art",
+   "title": "Mauve in paint and words",
+   "body": "Painters mostly mixed their mauves rather than buying one. The Impressionists glazed cobalt or ultramarine with a red lake, and used the new cobalt and manganese violets less often [20]. In Monet's *Lavacourt under Snow*, the blue snow is tinted mauve with ultramarine and red lake [20].\n\nWriters reached for the word as soon as it existed. Proust described asparagus stippled in mauve and azure [21], and Huysmans listed mauve among the soft derivatives of blue that suit dreamers [21]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "As a painted color the dusty modern mauve is rare. In our archive of 23,531 paintings, a color within six units of this swatch covers at least five per cent of the canvas in only five works [22]. Four of them date from 1892 to 1913: Gauguin's *Fatata te Miti*, Kirchner's *Two Girls under an Umbrella*, Klimt's *The Maiden* and an Indian goddess painting of about 1900 [22]. As always these are photographs of varnished paintings, so read them as screen colors [22].\n\nThe word is easier to date than the paint. In Google Books, *mauve* is almost absent before the late 1850s, jumps to about 40 per cent of its eventual peak by 1860, and peaks around 1925 [23]. It is one of the few color words whose birth you can see in the data."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the mallow flower (French mauve, Malva)",
+   "first_recorded": "English color word by 1857; The Times, July 1859",
+   "source": "Ball, Bright Earth, ch. 17; Garfield, Mauve, ch. 6"
+  },
+  "aka": [
+   "mauveine (the dye)",
+   "Perkin's purple",
+   "aniline purple"
+  ],
+  "siblings": [
+   "mallow-purple",
+   "french-mauve",
+   "opera-mauve"
+  ],
+  "parent": null,
+  "children": [
+   "light-mauve",
+   "pale-mauve",
+   "old-mauve",
+   "mauvette"
+  ],
+  "disambiguation": [
+   {
+    "slug": "mallow-purple",
+    "gloss": "Ridgway's Mallow Purple is a bright pink-purple, much closer to Perkin's dye than modern mauve"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "mauve (the mallow)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,531 paintings, as photographed",
+  "match": {
+   "hex": "#A8778F",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 5,
+  "top_paintings": [
+   "cma-164466",
+   "nga-76206",
+   "nga-46624",
+   "commons-Q5967091"
+  ],
+  "ngram": {
+   "rel_1840": 0.009,
+   "rel_1860": 0.4,
+   "peak": 1925
+  },
+  "measured": {
+   "lch": [
+    55.6,
+    23.6,
+    347
+   ],
+   "lightness_pct_core": 52,
+   "chroma_pct_core": 34,
+   "contrast_white": 3.68,
+   "nearest": [
+    [
+     "Eupatorium Purple",
+     2.6
+    ],
+    [
+     "Mountbatten Pink",
+     4.8
+    ],
+    [
+     "Opera Mauve",
+     6.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 10 (\"Violet\") and notes",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 6 (\"Mauve Measles\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 17",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Garfield, Mauve, author's note",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 22",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, pp. 28, 177",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 4 (\"The Recipe\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Mauve\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 14",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 12",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 10",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 5 and ch. 7",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Finlay, Fabric, pp. 12, 332",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 53",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 10 (\"Violet\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "book",
+   "cite": "Greenaway, Language of Flowers (1884), \"Mallow\" (public domain)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 18,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 1 and ch. 13",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 19,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 11",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 20,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 8",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 21,
+   "kind": "data",
+   "cite": "ColorHub passages: Proust, Swann's Way (1913); Huysmans, Against the Grain (1884) (data/passages.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 22,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,531 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 23,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "What was Perkin trying to make when he found his purple?",
+   "choices": [
+    "Quinine, a malaria drug",
+    "A red dye",
+    "Synthetic indigo",
+    "Soap"
+   ],
+   "answer": "Quinine, a malaria drug",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: mauveine was the first synthetic dye.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Where does the word mauve come from?",
+   "choices": [
+    "The French name of the mallow flower",
+    "Perkin's middle name",
+    "A town in France",
+    "Latin for purple"
+   ],
+   "answer": "The French name of the mallow flower",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "The fashion came first and the dye second: Paris was already wearing mauve when Perkin's factory opened.",
+  "You can watch the word mauve being born in Google Books: almost nothing, then a spike in 1859.",
+  "Look at a mallow flower and you are looking at the original mauve."
+ ],
+ "words": 1007,
+ "status": "pilot",
+ "checked": {
+  "by": "L7 self-check (sentence-to-card trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "'first synthetic dye' avoided; 'first aniline dye' used; 'first commercial' given as books disagree (Garfield vs Ball).",
+   "Puddle story corrected (Meldola 1906). 'Mauve Decade' not used.",
+   "Murexide serpent-excrement myth corrected."
+  ]
+ }
+}

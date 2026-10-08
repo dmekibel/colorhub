@@ -91,3 +91,95 @@ requests **500px**. All five were checked with a direct HTTP request before bein
 `data/fashion.js` isn't read by `check_wiki.js`, by design — it has its own shape, not the wiki-node schema),
 `node --check` on every `.js` file, and a handful of direct HTTP checks on the five hotlinked image URLs
 above (first attempt used non-standard widths and got Wikimedia 400s; fixed to the 500px step).
+
+---
+
+## Second fashion job, merged in (recovered 2026-10-08)
+
+A second, separate fashion job (David: "fashion history ... can be a very complicated, nuanced thing") was cut off before it committed. It had 25 history pages as wiki nodes, a garment archive from museum open access, and its own Ideas section. It overlapped this one: ten of its pages are the same ten as above. The merge kept the World screens above as the one place for fashion and added what was new.
+
+### What the merge added
+
+Fashion lives in **Explore → World → Fashion** (`js/world.js`, data `data/fashion.js`): Decades, Pantone Color of the Year, Houses and History. This recovery merged a second, separate fashion job into those screens instead of adding a duplicate section.
+
+- **History** (`data/fashion-history.js`, lazy): the 25 fashion pages below, in titled sections, chronological. Ten of them are the same pages the first job wrote into `data/fashion.js` (same ids; the longer version replaces the shorter one and the existing photos are kept); fifteen are new. Links in the text use the color web (`[[Name|label]]`) and `[[#history:id|label]]` between pages.
+- **Garments** (`js/fashion.js`, `css/fashion.css`, `data/fashion/garments.json`, lazy): a fifth tile in World's Fashion section. The browser searches 991 museum pieces by color (a ribbon of the app's colors; the score is how much of the garment's measured area lies within CIEDE2000 6 of the color, fading to zero at 16), era and culture group, and text. The grid is virtualized. A garment page shows the photograph (hotlinked from the museum), six measured colors with shares (each one tap to its color page), date, culture, medium, maker, museum credit and record link, and similar palettes.
+- **"In fashion" row** on every color page now holds both: decades and houses close to the color (`worldColorRow`), then a strip of garments where that color covers the most cloth (score 0.3 or more).
+- Addresses: `#/fashion/garments`, `#/fashion/garment-<id>`, `#/fashion/history-<id>`. Screenshot hooks: `garments[:Color]`, `garment[:id]`, `fxcolor[:Color]`, `fashionhistory[:id]`.
+
+#### The 25 history pages (ids in data/fashion-history.js)
+
+1. Purple and the law (Rome, Byzantium) · 2. Who could wear scarlet (medieval and Tudor sumptuary law) ·
+3. Forty-eight browns, a hundred greys (Edo) · 4. Kasane: colors in layers (Heian) · 5. Imperial yellow and the dragon
+robe · 6. Indian cotton: chintz, madder and indigo · 7. Batik and ikat · 8. Wax prints · 9. Kente and adinkra ·
+10. Andean cloth · 11. Black in fashion · 12. White: muslin, laundry and the wedding dress · 13. Mourning dress in the
+1800s · 14. The aniline craze · 15. Arsenic green dresses · 16. Khaki, field grey and camouflage · 17. Navy blue and
+the uniform · 18. Denim: work clothes first · 19. Pink and blue for babies · 20. Schiaparelli and shocking pink ·
+21. Dior's New Look and postwar color · 22. 1960s: mod, space age and psychedelia · 23. Punk and black ·
+24. Who decides next year's colors? (forecasting) · 25. Fast fashion and the cost of dye.
+
+Skipped: **hijab and modest-fashion color**. There was not enough solid, citable scholarship on color specifically
+(as opposed to modest fashion generally) to write an honest page; it waits for better sources.
+
+#### Honesty notes
+- Myths from CLAUDE.md are only stated to be corrected: "Queen Victoria started the white wedding dress" (she
+  popularized it; Mary, Queen of Scots wore white in 1558 and French and Italian brides wore white in the 1830s,
+  per Pastoureau), "pink was always for girls" (Paoletti; Del Giudice 2012 on the thin evidence for a full reversal),
+  "jeans were always rebel clothing" (Pastoureau), Napoleon and arsenic wallpaper (unproven), mauveine as "first
+  synthetic dye" (only "first aniline dye"), the navy-blue "king's favorite" story (legend), the "half the world wears
+  jeans" line (not used).
+- Hedged: Edo "48 browns, 100 greys" is a saying (numbers mean "countless"); kasane lists were written down after the
+  Heian period and disagree; kente color-meaning lists are recent and loose (Ross); the adinkra Gyaman legend vs. the
+  1817 Bowdich cloth; the denim and jeans etymologies; the Gold Coast soldiers as one factor in wax-print taste;
+  Chanel did not invent the black dress; the "20% of industrial water pollution" figure is widely cited but poorly
+  sourced; Pantone's influence is unmeasured.
+- Facts come from the private book notes (`../color-kb/books/notes.jsonl`) where two books agree, and from web checks
+  for the rest (kasane, Edo edicts, Qing 1759 regulations, wax-print history, adinkra, khaki 1846, Royal Navy 1748,
+  Schiaparelli 1937, Pink/blue 1918 and Del Giudice, EMF 2017). Prose is original; no quotation over 15 words.
+
+### The garment archive (tools/fashion.py → data/fashion/garments.json)
+
+Run `python3 tools/fashion.py ids | meta | images | palettes | build | figs | check`. Raw caches live in
+`research/_raw/fashion/` (gitignored). Every request sends `ColorHubBot/1.0 (https://github.com/dmekibel/colorhub)`.
+
+| Source | Route | License kept | Notes |
+|---|---|---|---|
+| The Met | Collection API: v1.1 search (60 queries across cultures), then /objects/{id} | isPublicDomain + image | Its Incapsula bot shield returned 403 to 6 and then 2 parallel threads; the tool now runs one thread with a 2 s gap and pauses 10 minutes on a 403. That pace (~17 records a minute) limited how many of the 6,773 candidate ids were fetched (see counts). Images: "mobile-large" (~360px) for analysis and grids, "web-large" on the garment page. |
+| Cleveland Museum of Art | Open Access API, type Textile, cc0, has_image | CC0 | 2,137 textiles; capped per culture group so fragments don't swamp the set. Mummy wrappings dropped. |
+| Art Institute of Chicago | API search (7,485 PD textiles and costume) | — | **Off.** Its IIIF image server now answers scripts with a Cloudflare bot challenge (403, `cf-mitigated: challenge`); the tool does not try to get past it. |
+| Rijksmuseum, Cooper Hewitt, Smithsonian, LACMA | — | — | Skipped: no simple key-free image route (Rijksmuseum), API key required (Cooper Hewitt, Smithsonian), no public API (LACMA). No accounts were created. |
+
+Selection: Met records must be public domain with an image, a garment or textile by object name (accessories such as
+shoes, hats, fans, jewelry, buttons, bags, prints and dolls are dropped), and a fabric medium. Culture group comes from
+the culture, country, region, period and dynasty fields (regex table `GROUP_RX`), falling back to the department
+(Costume Institute → Europe and North America) or the search that found it. Era is the mid-point of the date range.
+
+#### Palette method (and how the studio backdrop is removed)
+Reuses `tools/corpus.py` (color math, `autotrim`, k-means). Per image: trim uniform border bands, shrink to 120px on the
+long side by area averaging, convert to CIELAB (D65). Garment photographs are mostly a dress on a form against flat
+studio paper (white, grey or black, often with a soft gradient), so the backdrop is estimated and masked before
+clustering (`backdrop()`):
+
+1. **Ring test.** The backdrop color is the median of the outer 2-pixel ring. A real backdrop is flat: at least 70% of
+   ring pixels within ΔE76 10 of the median and a median distance under 6. Textiles shot edge to edge have a busy ring
+   and get no mask (a 2% inset is dropped instead, as corpus.py does).
+2. **Region growing.** Seeds are ring pixels within 10 of the median. The region grows to 4-neighbors whose color is
+   within ΔE 2.6 of the neighbor that reached them (so a smooth light-to-dark sweep of paper is followed) and within 20
+   of the ring median (so it never wanders deep into a garment of similar color). Garment edges are a sharp step, so
+   growth stops there.
+3. **Sanity.** Masks under 3% are ignored. Over 88% means a pale garment leaked into a pale backdrop: the growth is redone
+   with half the limits, and if it still covers over 88%, no mask.
+
+Then k-means (k = 6, k-means++ seeding, best of 4, a*/b* weighted 1.5 for clustering only); each color is the plain Lab
+mean of its pixels, share = pixel area. Contact sheets (`python3 tools/fashion.py sheet`) show image | kept mask |
+palette for spot checks. Known limits: dress forms, stands and shadows can survive as greys or browns; faded or
+discolored textiles are measured as they look now; museum photo lighting varies.
+
+### Counts
+- 991 garments and textiles: 825 from the Cleveland Museum of Art (CC0), 166 from the Met (public domain). Culture groups: Europe and North America 343, Indigenous Americas 163, India 160, Middle East and Central Asia 90, China 90, Japan 90, Indonesia and Southeast Asia 53, Africa 14, Korea 5. Africa and Korea are thin: the open-access collections hold little there.
+- 17 rows whose titles name a mummy (linen wrappings, bundles, masks) were removed at recovery: they are human remains, and the method above says they are dropped. `tools/fashion.py` is not changed, so a rebuild would bring them back unless its title filter is tightened.
+- `data/fashion/garments.json` is 0.56 MB, fetched on first use of Garments or a color page's garments strip, never at start.
+
+### Known gaps after the merge
+- `tools/fashion.py figs` and the page half of `check` were written for the pages as wiki nodes (`data/wiki-nodes.js` plus photographs in `data/images.js`). The pages now live in `data/fashion-history.js`. Only the four that already had a Commons photograph in `data/fashion.js` (Tudor scarlet, Edo, mourning dress, pink and blue) show one; the rest have none yet. The garment half of the tool (`ids`, `meta`, `images`, `palettes`, `build`) is unaffected.
+

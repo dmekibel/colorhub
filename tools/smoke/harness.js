@@ -97,7 +97,7 @@
       if (!opt.force) {
         // a finger can only hit what is on screen and on top: give a sheet or a page up to ~2s to slide in, then fail
         let why = "";
-        for (let i = 0; i < 40; i++) {
+        for (let i = 0; i < 120; i++) {   // up to ~6 s: the Mac is heavily loaded when many lanes run, and a sheet can still be sliding in
           try { e.scrollIntoView({ block: "center", inline: "nearest" }); } catch (er) {}
           why = this.reachable(e);
           if (!why) break;

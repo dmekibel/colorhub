@@ -58,6 +58,19 @@ function worldMount(host) {
   host.querySelectorAll("[data-wd-jump]").forEach(a => a.onclick = () => { const t = host.querySelector("#wd-sec-" + a.dataset.wdJump); if (t) t.scrollIntoView({ block: "start", behavior: reduceMotion ? "auto" : "smooth" }); });
 }
 
+// ---------------------------------------------------------------- Fashion history (data/fashion-history.js, lazy)
+// 25 pages in titled sections. Ten replace the shorter pages of the same id in data/fashion.js (their photos are kept);
+// fifteen are new. Until the file arrives (or if it can't), the ten short pages are what the list shows.
+DATA_SRC["fashion-history"] = "data/fashion-history.js";
+const worldHistory = () => {
+  const old = new Map(FASHION.history.map(h => [h.id, h]));
+  if (!window.FASHION_HISTORY) return FASHION.history;
+  const merged = window.FASHION_HISTORY.map(h => ({ ...(old.get(h.id) || {}), ...h, img: (old.get(h.id) || {}).img }));
+  FASHION.history.forEach(h => { if (!merged.some(x => x.id === h.id)) merged.push(h); });
+  return merged;
+};
+const worldWhenHistory = fn => window.FASHION_HISTORY ? fn() : loadData("fashion-history").then(() => fn());
+
 // ---------------------------------------------------------------- Fashion: the section inside World
 // A contents row of its own four parts; each opens a list screen, which opens a detail screen.
 // A World tile is a small cover: a picture or a color graphic on top, the title and a line under it.
@@ -72,11 +85,14 @@ function worldFashionSection(host) {
     ["decades", "Decades", `${FASHION.decades.length} decades, 1900s–2020s`, wdStripes(FASHION.decades.map(d => d.swatches.map(s => s[0])))],
     ["coty", "Color of the year", "Pantone's picks, 2000–present", wdGrid(FASHION.coty.map(c => c.hex))],
     ["houses", "Houses", `${FASHION.houses.length} signature colors`, wdBars(FASHION.houses.map(h => h.hex))],
-    ["history", "History", `${FASHION.history.length} pages`, wdImg(histImg, wdBars(["#4B1E4F", "#16171A", "#F3EFE6", "#6B7A3A", "#1C2B5A"]))]
+    ["history", "History", `${FASHION.history.length} pages`, wdImg(histImg, wdBars(["#4B1E4F", "#16171A", "#F3EFE6", "#6B7A3A", "#1C2B5A"]))],
+    ["garments", "Garments", "Museum pieces, searchable by color", wdBars(["#7A2C55", "#C9A54A", "#1C2B5A", "#A33B4B", "#6B7A3A", "#EFEBE3"])]
   ];
   host.innerHTML = `<p class="x-sub">${esc(FASHION.dek)}</p>
-    <div class="wd-tiles">${tiles.map(([k, t, s, art]) => wdTile(`data-wd="${k}"`, t, s, art)).join("")}</div>`;
+    <div class="wd-tiles">${tiles.map(([k, t, s, art]) => wdTile(`data-wd="${k}"`, t, s, art).replace("wd-tile", k === "garments" ? "wd-tile wd-wide" : "wd-tile")).join("")}</div>`;
   host.querySelectorAll("[data-wd]").forEach(b => b.onclick = () => fashionPage(b.dataset.wd));
+  if (typeof fxTileArt === "function") fxTileArt(host.querySelector('[data-wd="garments"]'));   // js/fashion.js: photos and the count, once the archive is in
+  worldWhenHistory(() => { const t = host.querySelector('[data-wd="history"] .wd-sub'); if (t && window.FASHION_HISTORY) t.textContent = `${worldHistory().length} pages`; });
 }
 WORLD_SECTIONS.push({ key: "fashion", title: "Fashion", render: worldFashionSection });
 
@@ -91,7 +107,9 @@ function worldRouteTitle(slug) {
   if (kind === "houses") return "Houses and signature colors";
   if (kind === "house") { const h = FASHION.houses.find(x => x.id === id); return h ? h.house : "House"; }
   if (kind === "history" && !id) return "Fashion history";
-  if (kind === "history") { const h = FASHION.history.find(x => x.id === id); return h ? h.title : "Fashion history"; }
+  if (kind === "history") { const h = worldHistory().find(x => x.id === id); return h ? h.title : "Fashion history"; }
+  if (kind === "garments") return "Garments";
+  if (kind === "garment") { const r = typeof FX !== "undefined" && FX && FX.byId.get(id); return r ? r.t : "Garment"; }
   return "Fashion";
 }
 function fashionPage(slug, opts = {}) {
@@ -104,6 +122,8 @@ function fashionPage(slug, opts = {}) {
   if (kind === "house" && id) return fashionHouseDetail(id, opts);
   if (kind === "history" && !id) return fashionList("history", opts);
   if (kind === "history" && id) return fashionHistoryDetail(id, opts);
+  if (kind === "garments" && typeof fxBrowser === "function") return fxBrowser(opts);   // js/fashion.js
+  if (kind === "garment" && id && typeof fxGarment === "function") return fxGarment(id, opts);
   return fashionFallback();
 }
 function fashionFallback() { S.lens = "world"; go("explore"); }
@@ -112,7 +132,7 @@ function fashionFallback() { S.lens = "world"; go("explore"); }
 const FASHION_LIST_META = {
   decade: { title: "Decades", dek: "The defining colors of each decade's fashion, from the Edwardian 1900s to the still-unfinished 2020s." },
   house: { title: "Houses and signature colors", dek: "Fifteen colors fashion houses made their own, with the story behind each and how firm the claim really is." },
-  history: { title: "Fashion history", dek: "How color in dress has carried law, rank, grief, war and fast-changing taste." }
+  history: { title: "Fashion history", dek: "How color in dress has carried law, rank, grief, war and fast-changing taste, from Roman purple to fast fashion." }
 };
 function fashionCardHTML(kind, it) {
   const sw = kind === "house" ? [[it.hex]] : it.swatches;
@@ -125,7 +145,11 @@ function fashionCardHTML(kind, it) {
   </button>`;
 }
 function fashionList(kind, opts = {}) {
-  const items = kind === "decade" ? FASHION.decades : kind === "house" ? FASHION.houses : FASHION.history;
+  if (kind === "history" && !window.FASHION_HISTORY) { const el = fashionListDraw(kind, opts); worldWhenHistory(() => { if (window.FASHION_HISTORY && el.isConnected) { const y = scrollY; fashionListDraw(kind, opts); scrollTo(0, y); } }); return el; }
+  return fashionListDraw(kind, opts);
+}
+function fashionListDraw(kind, opts = {}) {
+  const items = kind === "decade" ? FASHION.decades : kind === "house" ? FASHION.houses : worldHistory();
   const meta = FASHION_LIST_META[kind];
   const el = show(`
     ${worldTop("Fashion")}
@@ -181,7 +205,15 @@ function fashionHouseDetail(id, opts = {}) {
 
 // ---------------------------------------------------------------- detail: a history page
 function fashionHistoryDetail(id, opts = {}) {
-  const h = FASHION.history.find(x => x.id === id);
+  if (!window.FASHION_HISTORY) {   // the long versions load lazily: draw the short page now, the full one when it lands
+    const el = fashionHistoryDraw(id, opts);
+    worldWhenHistory(() => { if (window.FASHION_HISTORY && el && el.isConnected) { const y = scrollY; ROUTE_REPLACE = true; fashionHistoryDraw(id, opts); scrollTo(0, y); } });
+    return el;
+  }
+  return fashionHistoryDraw(id, opts);
+}
+function fashionHistoryDraw(id, opts = {}) {
+  const h = worldHistory().find(x => x.id === id);
   if (!h) return fashionList("history", opts);
   const self = () => fashionHistoryDetail(id, opts);
   const sw = h.swatches || [];
@@ -192,7 +224,9 @@ function fashionHistoryDetail(id, opts = {}) {
     <h1 class="p-title">${esc(h.title)}</h1>
     ${h.dek ? `<p class="p-dek">${worldLinkText(h.dek)}</p>` : ""}
     ${worldImgHTML(h.img)}
-    ${(h.body || []).map(p => `<p class="wd-p">${worldLinkText(p)}</p>`).join("")}
+    ${(h.lead || h.body || []).map(p => `<p class="wd-p">${worldLinkText(p)}</p>`).join("")}
+    ${(h.sections || []).map(x => `<section class="wd-sec"><h3>${esc(x.title)}</h3>${x.text.map(p => `<p class="wd-p">${worldLinkText(p)}</p>`).join("")}</section>`).join("")}
+    ${(h.colors || []).length ? `<section class="wd-sec"><h3>Colors in this story</h3><div class="chips-wrap">${h.colors.map(cn => { const x = graph().resolve(cn); return x ? `<button class="pchip" data-to="${esc(x.id)}"><i style="--c:${x.h}"></i>${esc(x.title)}</button>` : ""; }).join("")}</div></section>` : ""}
     ${h.facts && h.facts.length ? `<dl class="facts">${h.facts.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl>` : ""}
     ${sourcesHTML(h.sources)}
   `, "article wd");
@@ -225,10 +259,11 @@ function worldColorRow(el, n) {
   const seenDecades = new Set(), seenHouses = new Set();
   FASHION.decades.forEach(d => { d.swatches.forEach(([h, label]) => { if (!seenDecades.has(d.id) && de2000(n.h, h) < 9) { seenDecades.add(d.id); hits.push({ slug: "decade-" + d.id, title: d.label, sub: label, h }); } }); });
   FASHION.houses.forEach(h => { if (!seenHouses.has(h.id) && de2000(n.h, h.hex) < 11) { seenHouses.add(h.id); hits.push({ slug: "house-" + h.id, title: h.house, sub: h.label, h: h.hex }); } });
-  if (hits.length < 2) return;
+  if (hits.length < 2) { if (typeof fxColorStrip === "function") fxColorStrip(host, n); return; }   // js/fashion.js adds the garments strip
   host.innerHTML = `<h3>In fashion</h3><p class="fx-in-sub">Decades and houses whose signature color is close to ${esc(n.title)}.</p>
     <div class="wd-in-strip">${hits.slice(0, 8).map(x => `<button class="wd-in" data-wd-open="${esc(x.slug)}"><i style="--c:${x.h}"></i><b>${esc(x.title)}</b><small>${esc(x.sub)}</small></button>`).join("")}</div>`;
   host.querySelectorAll("[data-wd-open]").forEach(b => b.onclick = () => fashionPage(b.dataset.wdOpen, { back: () => openNode(n, false) }));
+  if (typeof fxColorStrip === "function") fxColorStrip(host, n);
 }
 
 // ---------------------------------------------------------------- screenshot hooks (index.html#shot=...)
@@ -238,4 +273,7 @@ function worldShot(kind, arg) {
   if (kind === "fashioncoty") return fashionCoty();
   if (kind === "fashionhouse") return fashionHouseDetail(arg || FASHION.houses[0].id);
   if (kind === "fashionhistory") return fashionHistoryDetail(arg || FASHION.history[0].id);
+  if (kind === "garments") { const c = arg && [...BASICS, ...ALL].find(x => x.n.toLowerCase() === arg.toLowerCase()); Object.assign(FX_UI, { color: c ? c.h : null, era: "all", g: "all", q: "", y: 0 }); return fxBrowser(); }   // js/fashion.js
+  if (kind === "garment") return fxLoad().then(d => d && fxGarment(arg || d.rows[Math.floor(d.rows.length / 2)].id));
+  if (kind === "fxcolor") { const n = graph().resolve(arg || "Crimson"); openNode(n); later(() => { const h = document.querySelector("[data-world-in]"); if (h) scrollTo(0, h.getBoundingClientRect().top + scrollY - 200); }, 900); }
 }
