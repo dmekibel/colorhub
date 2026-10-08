@@ -384,40 +384,69 @@ function ooPaintShift(meanLab, axis, sign, d) {
   return { delta: to.map((x, i) => x - meanLab[i]), act: m.act, to: m.hex, from: meanHex, dir: ooDirWord(meanHex, m.hex) };
 }
 
-// ---------- the ladder: 24 levels in four worlds, then the Mix set (after level 10) ----------
-// v: variant · b: board · n: size · tw: twist · news: what's new (shown on the map and the first round)
+// ---------- the ladder: 20 levels of perceptual difficulty, and the layouts that rotate inside them ----------
+// design/ODD-ONE-OUT.md has the full model. A LEVEL is one number: the gap (ΔE00, as drawn on this screen) between the
+// odd tile and the rest, log-spaced from 12 (obvious) down to 0.6 (the edge of what a screen can show). Nothing else
+// changes from level to level. A LAYOUT (grid, ring, honeycomb, a colored ground, a hidden shape...) is a separate
+// axis: rounds inside a level rotate through the layouts you have met, so moving up a level only ever means a smaller gap.
+const OO_LEVEL_N = 20, OO_GAP_TOP = 12, OO_GAP_END = .6;
+const OO_GAPS = Array.from({ length: OO_LEVEL_N }, (_, i) => +(OO_GAP_TOP * Math.pow(OO_GAP_END / OO_GAP_TOP, i / (OO_LEVEL_N - 1))).toPrecision(2));
 const OO_WORLDS = [
-  { name: "First look", mile: "You can find one tile in a crowd, in any arrangement." },
-  { name: "In context", mile: "You can see past the ground, the size and the strip around a color." },
-  { name: "Under pressure", mile: "You can hold a color for a second and spot it inside a painting." },
-  { name: "Mastery", mile: "Every judgment at once, near your own limit." },
+  { name: "Plain sight", mile: "You can find a clear difference in any arrangement." },
+  { name: "A good look", mile: "You can find a difference that takes a second look." },
+  { name: "Fine detail", mile: "You can find a difference most people miss." },
+  { name: "The edge", mile: "You can find a difference at the edge of what this screen shows." },
 ];
-const OO_LEVELS = [
-  { w: 0, v: "one", b: "grid", n: 3, name: "Odd one", news: "Find the tile that's different" },
-  { w: 0, v: "one", b: "grid", n: 4, name: "Bigger board", news: "Sixteen tiles: sweep row by row" },
-  { w: 0, v: "pair", b: "grid", n: 4, name: "Odd pair", news: "Two tiles are different: find both" },
-  { w: 0, v: "one", b: "ring", n: 10, name: "Ring", news: "Tiles in a ring" },
-  { w: 0, v: "count", b: "grid", n: 4, name: "How many?", news: "Count the different tiles. Zero is sometimes right" },
-  { w: 0, v: "one", b: "honey", n: 19, tw: "combo", name: "Honeycomb", news: "A honeycomb, and a combo for quick answers" },
-  { w: 1, v: "one", b: "strip", n: 8, name: "Paint strip", news: "One chip in the strip is off" },
-  { w: 1, v: "twins", b: "grid", n: 3, name: "Twins", news: "Every tile differs except two: find the twins" },
-  { w: 1, v: "one", b: "sizes", n: 4, name: "Mixed sizes", news: "Big and small tiles (size changes how a color looks)" },
-  { w: 1, v: "one", b: "busy", n: 4, tw: "illusion", name: "Busy ground", news: "Colored grounds. Sometimes none is different" },
-  { w: 1, v: "which", b: "grid", n: 3, name: "Which way?", news: "Find it, then say how it differs" },
-  { w: 1, v: "group", b: "grid", n: 6, name: "Hidden shape", news: "A few tiles form a hidden shape" },
-  { w: 2, v: "one", b: "grid", n: 4, tw: "flash", name: "Flash", news: "The board shows for one second: tap where it was" },
-  { w: 2, v: "one", b: "grid", n: 3, tw: "grow", name: "Growing board", news: "Every right answer adds tiles, until a miss" },
-  { w: 2, v: "one", b: "gradient", n: 4, name: "Gradient", news: "The tiles drift smoothly; one breaks the pattern" },
-  { w: 2, v: "one", b: "grid", n: 4, tw: "chain", name: "Chain", news: "The odd tile becomes the next board's color" },
-  { w: 2, v: "one", b: "honey", n: 19, tw: "breathe", name: "Breathing", news: "Every tile breathes, each at its own pace" },
-  { w: 2, v: "one", b: "painting", n: 4, name: "Painting", news: "A painting cut into tiles; one patch is recolored" },
-  { w: 3, v: "count", b: "mosaic", n: 16, name: "Mosaic count", news: "How many, on a scattered mosaic" },
-  { w: 3, v: "twins", b: "ring", n: 10, name: "Twin ring", news: "Twins in a ring" },
-  { w: 3, v: "which", b: "busy", n: 4, tw: "illusion", name: "Which way, in context", news: "Which way, on colored grounds" },
-  { w: 3, v: "one", b: "grid", n: 3, tw: "survival", name: "Survival", news: "Three lives. The board grows and the difference shrinks" },
-  { w: 3, v: "which", b: "painting", n: 4, name: "Painter's eye", news: "Which way, inside a painting" },
-  { w: 3, v: "mixed", b: "grid", n: 4, name: "Grand boss", news: "A bit of everything, near your limit" },
+const OO_LEVELS = OO_GAPS.map((gap, i) => ({ gap, w: Math.floor(i / 5) }));
+const ooLevelGap = i => OO_GAPS[ooLim(i | 0, 0, OO_LEVEL_N - 1)];
+// the level whose gap is nearest a difference (on a log scale): where a threshold sits on the ladder
+const ooLevelOfGap = g => { let best = 0, bd = Infinity; OO_GAPS.forEach((x, i) => { const d = Math.abs(Math.log(x / Math.max(g, 1e-3))); if (d < bd) { bd = d; best = i; } }); return best; };
+// the plain word for a gap, for the map and the eye profile
+const ooGapWord = i => i < 4 ? "Obvious" : i < 8 ? "Clear" : i < 12 ? "Subtle" : i < 16 ? "Fine" : i < 19 ? "Very fine" : "Almost imperceptible";
+// "Choose" shortcuts: fixed levels (Edge of my eye is dynamic: the level at your own threshold)
+const OO_PRESET_LV = { easy: 3, medium: 7, hard: 11, expert: 15 };
+// the level a threshold th (ΔE00) sits at; mult > 1 aims easier than the threshold (For you starts at 2×)
+const ooLevelForTh = (th, mult = 1) => ooLevelOfGap(th * mult);
+const OO_LEVEL_ROUNDS = 10, OO_LEVEL_PASS = 8;   // a level is passed by accuracy: 8 of 10
+// Layouts. v: the task, b: the board, n: its size, tw: a twist. at: how many sets you have played before it can
+// appear (novelty over time, never tied to a level). gmax: the largest gap it is offered at (a board whose tiles must
+// all differ cannot be drawn when the gap is huge).
+const OO_LAYOUTS = [
+  { id: "grid3", name: "3 × 3 squares", v: "one", b: "grid", n: 3, at: 0 },
+  { id: "grid4", name: "4 × 4 squares", v: "one", b: "grid", n: 4, at: 0 },
+  { id: "ring", name: "A ring", v: "one", b: "ring", n: 10, at: 0 },
+  { id: "pair", name: "Odd pair", v: "pair", b: "grid", n: 4, at: 1, news: "Two tiles are different: find both" },
+  { id: "strip", name: "Paint strip", v: "one", b: "strip", n: 8, at: 1 },
+  { id: "honey", name: "Honeycomb", v: "one", b: "honey", n: 19, at: 2 },
+  { id: "grid5", name: "5 × 5 squares", v: "one", b: "grid", n: 5, at: 2 },
+  { id: "count", name: "How many?", v: "count", b: "grid", n: 4, at: 3, news: "Count the different tiles. Zero is sometimes right" },
+  { id: "sizes", name: "Mixed sizes", v: "one", b: "sizes", n: 4, at: 3, news: "Big and small tiles (size changes how a color looks)" },
+  { id: "ground", name: "On a colored ground", v: "one", b: "busy", n: 4, tw: "illusion", at: 4, news: "Colored grounds. Sometimes none is different" },
+  { id: "twins", name: "Twins", v: "twins", b: "grid", n: 3, at: 4, gmax: 6.5, news: "Every tile differs except two: find the twins" },
+  { id: "which", name: "Which way?", v: "which", b: "grid", n: 3, at: 5, news: "Find it, then say how it differs" },
+  { id: "shape", name: "Hidden shape", v: "group", b: "grid", n: 6, at: 5, news: "A few tiles form a hidden shape" },
+  { id: "gradient", name: "A gradient field", v: "one", b: "gradient", n: 4, at: 6, news: "The tiles drift smoothly; one breaks the pattern" },
+  { id: "flash", name: "A one-second flash", v: "one", b: "grid", n: 4, tw: "flash", at: 7, news: "The board shows for one second: tap where it was" },
+  { id: "mosaic", name: "A scattered mosaic", v: "count", b: "mosaic", n: 16, at: 8 },
+  { id: "twinring", name: "Twin ring", v: "twins", b: "ring", n: 10, at: 9, gmax: 6.5 },
+  { id: "painting", name: "A painting", v: "one", b: "painting", n: 4, at: 10, news: "A painting cut into tiles; one patch is recolored" },
+  { id: "whichground", name: "Which way, on a ground", v: "which", b: "busy", n: 4, tw: "illusion", at: 11 },
+  { id: "chain", name: "A chain", v: "one", b: "grid", n: 4, tw: "chain", at: 12, news: "The odd tile becomes the next board's color" },
+  { id: "breathe", name: "A breathing honeycomb", v: "one", b: "honey", n: 19, tw: "breathe", at: 12, news: "Every tile breathes, each at its own pace" },
+  { id: "whichpaint", name: "Which way, in a painting", v: "which", b: "painting", n: 4, at: 13 },
 ];
+const ooLayout = id => OO_LAYOUTS.find(l => l.id === id) || OO_LAYOUTS[0];
+// the layouts that can show on a level: met-able by now (sets played) and drawable at this gap
+const ooLayoutsFor = (sets, gap) => OO_LAYOUTS.filter(l => l.at <= sets && (!l.gmax || gap <= l.gmax));
+// the next layout: one you haven't met yet comes first (once per set), then a random one that isn't the last
+function ooLayoutNext(avail, seen, lastId, rnd, k) {
+  const fresh = avail.filter(l => !(seen[ooKindKey(l.v, l.b, l.tw)] > 0));
+  if (fresh.length && k === 0) return ooPick(fresh, rnd);
+  const pool = avail.filter(l => l.id !== lastId);
+  return ooPick(pool.length ? pool : avail, rnd);
+}
+// a gap's per-layout multiplier: a layout is a small modifier, never a difficulty (see design/ODD-ONE-OUT.md)
+const ooLayoutF = l => (OO_VF[l.v] || 1) * (OO_BF[l.b] || 1) * (["grid", "busy", "gradient"].includes(l.b) ? ooSizeF(l.n) : 1) * (l.tw === "breathe" ? 1.1 : 1);
 // the grand boss and the daily board draw their rounds from these (variant, board, size, twist)
 const OO_KINDS = [
   ["one", "grid", 4], ["pair", "grid", 4], ["one", "ring", 10], ["count", "grid", 4], ["one", "honey", 19], ["one", "strip", 8],
@@ -425,7 +454,7 @@ const OO_KINDS = [
   ["one", "gradient", 4], ["count", "mosaic", 16], ["twins", "ring", 10],
 ];
 const OO_ROUNDS = 6;
-const OO_MIX_AT = 10;    // the Mix set unlocks once level 10 is cleared
+const OO_MIX_AT = 8;     // the Mix opens once level 8 is passed or cleared
 const OO_MIX = [
   { id: "changed", name: "What changed?", what: "See the board, a blink, then tap the tile that changed", judg: "memory" },
   { id: "outoforder", name: "Out of order", what: "One tile in the gradient is misplaced: find it, then drag it home", judg: "context" },
@@ -576,7 +605,7 @@ const OO_LINE_P0 = 5, OO_LINE_MIN = 1;
 // together at most half as often as chance): which? Only clearly separated pairs are played:
 // |ln L1 − ln L2| ≥ 3 standard errors (SE ≈ sqrt(1/n1 + 1/n2), n = paintings with both, or expected for a
 // stranger) and a lift ratio of at least the tier's (easy 3, medium 2, hard 1.5).
-const OO_PAIR_RATIO = { intro: 3, easy: 3, medium: 2, hard: 1.5, harder: 1.5, boss: 1.5 };
+const OO_PAIR_RATIO = { intro: 3, easy: 3, medium: 2, hard: 1.5, harder: 1.5, boss: 1.5, expert: 1.3 };
 const ooPairSE = p => 1 / Math.max(p[2], p[4] < 1 ? p[3] : 1, 1);
 function ooPairClear(p, q, ratio) {
   const d = Math.abs(Math.log(Math.max(p[4], .02) / Math.max(q[4], .02)));
@@ -588,7 +617,7 @@ function ooPairsRound(P, rnd, o = {}) {
   const groups = Object.keys(P.groups).filter(g => g !== "all" && P.groups[g].pairs.filter(p => p[4] >= 1.2).length >= 4);
   // a small group may have no clear pair at this tier: try the others, then a gentler ratio (still 3 SE apart)
   const order = v === "group" ? [...(o.group && P.groups[o.group] ? [o.group] : []), ...ooShuf(groups, rnd)] : ["all"];
-  for (const ratio of [OO_PAIR_RATIO[o.tier || "medium"] || 2, 1.5]) for (const g of order) { const r = ooPairsIn(P, rnd, v, g, ratio); if (r) return r; }
+  for (const ratio of [o.ratio || OO_PAIR_RATIO[o.tier || "medium"] || 2, 1.5]) for (const g of order) { const r = ooPairsIn(P, rnd, v, g, ratio); if (r) return r; }
   return null;
 }
 function ooPairsIn(P, rnd, v, g, ratio) {
@@ -604,9 +633,78 @@ function ooPairsIn(P, rnd, v, g, ratio) {
   return null;
 }
 
+// ---------- difficulty: "For you" or "Choose" (the same control on every game) ----------
+// For you adapts, as before. Choose pins the game at Easy, Medium, Hard, Expert or "Edge of my eye": the same
+// tiers the sets already breathe through (easy, medium, hard, harder, boss), as multiples of your own estimate,
+// so a chosen difficulty is still drawn from your eye and every answer at it updates the estimate fairly (the
+// update uses the difference actually drawn, never the label). Edge is the boss tier: a round right at your
+// measured threshold.
+const OO_DIFFS = [["easy", "Easy", "easy"], ["medium", "Medium", "medium"], ["hard", "Hard", "hard"], ["expert", "Expert", "harder"], ["edge", "Edge of my eye", "boss"]];
+const OO_DIFF_IDS = OO_DIFFS.map(d => d[0]);
+const OO_DIFF_TIER = Object.fromEntries(OO_DIFFS.map(d => [d[0], d[2]]));
+const ooDiffName = id => (OO_DIFFS.find(d => d[0] === id) || OO_DIFFS[1])[1];
+const ooLim = (v, a, b) => Math.max(a, Math.min(b, v));
+function ooPrefNorm(p) {
+  p = p && typeof p === "object" && !Array.isArray(p) ? p : {};
+  // d: a preset id, or "level" (you tapped a level on the map: lv is the one to play)
+  return { m: p.m === "pick" ? "pick" : "you", d: OO_DIFF_IDS.includes(p.d) || p.d === "level" ? p.d : "medium", lv: Number.isInteger(p.lv) ? ooLim(p.lv, 0, OO_LEVEL_N - 1) : null };
+}
+// Odd one out: the ladder level a Choose pick plays, or null for For you. th is your threshold (ΔE00) for Edge of my eye.
+function ooPickLevel(p, th) {
+  p = ooPrefNorm(p);
+  if (p.m !== "pick") return null;
+  if (p.d === "level") return p.lv != null ? p.lv : OO_PRESET_LV.medium;
+  return p.d === "edge" ? ooLevelForTh(th || 6.3) : OO_PRESET_LV[p.d];
+}
+// the tier a game draws at when you chose a difficulty, else null (For you)
+const ooPickTier = p => { p = ooPrefNorm(p); return p.m === "pick" ? OO_DIFF_TIER[p.d] : null; };
+// test-out rounds are Hard, or your chosen difficulty when that is harder still
+const ooTestTier = p => { const t = ooPickTier(p); return t && OO_TIER[t] <= OO_TIER.hard ? t : "hard"; };
+
+// ---------- the level map: every level is open; clearing is playing it or testing out ----------
+const ooDoneAt = (stars, cleared, i) => !!((stars && Array.isArray(stars[i]) && stars[i][0]) || (cleared && cleared[i]));
+// the first level that is neither played through nor cleared: where For you picks up
+function ooFrontier(stars, cleared, n = OO_LEVELS.length) { for (let i = 0; i < n; i++) if (!ooDoneAt(stars, cleared, i)) return i; return n - 1; }
+// passing a test-out at level i (0-based) marks every level below it cleared; returns how many were newly marked
+function ooTestOutMark(cleared, i) { let k = 0; for (let j = 0; j < i; j++) if (!cleared[j]) { cleared[j] = 1; k++; } return k; }
+const OO_TEST_ROUNDS = 3;
+
+// ---------- the edge estimate for the games that have no eye model (Across the line, Painters' pairs, Whose palette?) ----------
+// Each game has one number on its own scale where a round is "easy" when its difficulty d is large (p: ΔE past the
+// line; lift ratio minus 1; how far down the list the nearer decoy sits). The same item-response update as
+// ooUpdate, on the log of a threshold th: the round is drawn at th × tier, and every answer, whatever the mode,
+// moves th by how surprising it was.
+const OO_EDGE = { line: { th: 2.5, lo: .5, hi: 8, g: .25 }, pairs: { th: .7, lo: .15, hi: 2, g: .5 }, whose: { th: .5, lo: .05, hi: 1, g: 1 / 3 } };
+const ooEdgeTh = (e, game) => e && isFinite(e.r) ? Math.exp(e.r) : OO_EDGE[game].th;
+const ooEdgeD = (e, game, tier) => ooLim(ooEdgeTh(e, game) * OO_TIER[tier], OO_EDGE[game].lo, OO_EDGE[game].hi);
+function ooEdgeUpdate(e, game, d, ok) {
+  const C = OO_EDGE[game];
+  if (!isFinite(e.r)) e.r = Math.log(C.th);
+  e.n = e.n | 0;
+  const err = (ok ? 1 : 0) - ooP(Math.max(d, 1e-3), Math.exp(e.r), C.g), K = Math.max(.07, .55 / Math.sqrt(1 + e.n / 3));
+  e.r = ooLim(e.r - K * err, Math.log(C.lo), Math.log(C.hi)); e.n++;
+  return e;
+}
+// how far apart two pairs' lifts are, as the ratio the tiers talk about (always at least 1)
+const ooPairRatioOf = (a, b) => Math.exp(Math.abs(Math.log(Math.max(a[4], .02) / Math.max(b[4], .02))));
+// Whose palette?: a round lists its decoy painters nearest (hardest) first. ease 0..1 says where in that list the
+// nearer of the two decoys sits (1 = the farthest, easiest). Returns { alts: [two entries], ease } or ease null when
+// the list is too short for the choice to matter.
+function ooWhoseAlts(list, ease, rnd) {
+  const L = list.length;
+  if (L <= 2) return { alts: list.slice(0, 2), ease: null };
+  let j = Math.round(ooLim(ease, 0, 1) * (L - 1) + (rnd() - .5) * 1.4);
+  j = ooLim(j, 0, L - 1);
+  const k = j >= L - 1 ? j - 1 : j + 1, lo = Math.min(j, k);
+  return { alts: [list[j], list[k]], ease: lo / (L - 1) };
+}
+
 if (typeof module !== "undefined") module.exports = {
   ooHash, ooRnd, ooShuf, OO_JUDG, OO_AXES, OO_START, OO_MIN, OO_MAX, OO_SLOPE, ooP, OO_TIER, OO_BREATH, OO_VF, OO_BF, ooModel, ooTheta, ooTheta0, ooUpdate, ooEye,
   ooStair, ooStairStep, ooStairScore, ooFam, OO_FAMS, ooBase, ooMove, ooMoveDir, ooDirWord, ooHuePair, ooDirChoices, OO_DIR_WORDS, ooCells, OO_SHAPES, ooRound, ooBand, ooPaintShift,
-  OO_WORLDS, OO_LEVELS, OO_KINDS, OO_ROUNDS, OO_MIX_AT, OO_MIX, OO_PASS, OO_FAST_MS, ooTierAt, ooKindKey, OO_DAILY_D, ooDaily, ooDayNum, ooShareText,
+  OO_WORLDS, OO_LEVELS, OO_LEVEL_N, OO_GAPS, ooLevelGap, ooLevelOfGap, ooGapWord, OO_PRESET_LV, ooLevelForTh, OO_LEVEL_ROUNDS, OO_LEVEL_PASS,
+  OO_LAYOUTS, ooLayout, ooLayoutsFor, ooLayoutNext, ooLayoutF, OO_KINDS, OO_ROUNDS, OO_MIX_AT, OO_MIX, OO_PASS, OO_FAST_MS, ooTierAt, ooKindKey, OO_DAILY_D, ooDaily, ooDayNum, ooShareText,
+  OO_DIFFS, OO_DIFF_IDS, OO_DIFF_TIER, ooDiffName, ooPrefNorm, ooPickLevel, ooPickTier, ooTestTier, ooDoneAt, ooFrontier, ooTestOutMark, OO_TEST_ROUNDS,
+  OO_EDGE, ooEdgeTh, ooEdgeD, ooEdgeUpdate, ooPairRatioOf, ooWhoseAlts,
   ooPairsRound, ooPairClear, OO_PAIR_RATIO, ooLineRound, OO_LINE_P0, OO_LINE_MIN, ooGradStrip, ooOrderRound, ooChangedRound, ooWasRound, ooNbackSeq, ooCountPick,
 };
