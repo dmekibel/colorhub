@@ -216,6 +216,7 @@ function hmHome() {
     </div>
     <button class="corner l" data-rooms-corner aria-label="Rooms">${ROOMS_GLYPH}</button>
     <button class="corner r" id="hmView" aria-label="View">${HM_SLIDERS}</button>
+    ${typeof FV_HEART === "string" ? `<button class="corner r fv-corner" id="hmFav" aria-label="Pick favorites">${FV_HEART}</button>` : ""}
   `, "fixed cx hm");
   const $ = s => el.querySelector(s), viewEl = $(".cx-view"), title = $(".hm-title");
   loadLongNames();
@@ -264,7 +265,9 @@ function hmHome() {
     if (ctrl) ctrl.update({ items, soft });
     else ctrl = honeycomb(viewEl, { items, style: v.style, tweak: hmTweakFor(v.style), zoom: S.hm.zoom || 1, pick, onPeek, centerFirst: true,
       onZoom: z => { S.hm.zoom = Math.round(z * 100) / 100; save(); } });
+    window.HM_CTRL = ctrl;   // the map, for js/polish.js flyToMap()
     hmWireChrome();
+    if (typeof fvHomeReady === "function") fvHomeReady(el, ctrl);   // js/favs.js: open straight into pick mode when asked
   }
   function applyView(k, val) { S.hm[k] = val; save(); buzz(4); }
 
@@ -413,6 +416,7 @@ function hmHome() {
     viewBtn.addEventListener("pointerdown", () => { longFired = false; clearTimeout(holdT); holdT = setTimeout(() => { longFired = true; buzz(6); chooser("look"); }, 480); });
     ["pointerup", "pointercancel", "pointerleave"].forEach(ev => viewBtn.addEventListener(ev, () => clearTimeout(holdT)));
     viewBtn.onclick = () => { if (longFired) { longFired = false; return; } chooser("show"); };
+    const favBtn = $("#hmFav"); if (favBtn) favBtn.onclick = () => { if (typeof hmDismissHint === "function") hmDismissHint(); buzz(6); fvPickStart(el, ctrl); };   // js/favs.js: Pick favorites
   }
   // swipe up from the bottom edge of Home opens Learn straight away (DESIGN-SYSTEM §2 "the shortcut"): the
   // honeycomb keeps a short drag (bubbles near the bottom stay tappable), but a real upward swipe wins.

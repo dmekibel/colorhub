@@ -65,6 +65,7 @@ function studio() {
       <button class="st-tile" data-taste="color"><span class="st-art st-duel"><i style="--c:#C8553D"></i><i style="--c:#3F7C8C"></i></span><b>Find your color</b><small>${S.fav ? `Yours: ${esc(S.fav.n)}-ish` : "About 20 taps. A map of the colors you love."}</small></button>
       <button class="st-tile" data-taste="palette"><span class="st-art st-duel st-duel-pal">${[["#EFE6D2", "#C8553D", "#E0A458", "#5B7F6E"], ["#1F2A44", "#4F6D7A", "#C0D6DF", "#EAEAEA"]].map(p => `<i>${p.map(h => `<b style="--c:${h}"></b>`).join("")}</i>`).join("")}</span><b>Find your palette</b><small>About 15 taps. Your palette dials and painters.</small></button>
     </div>
+    ${typeof fvStudioRow === "function" ? fvStudioRow() : ""}
     ${phShelfHTML()}
     <div class="sec-head"><b>Your palettes</b><span>${saved.length || ""}</span></div>
     ${saved.length ? `<div class="st-saved">${saved.map(p => `<button class="st-pal" data-id="${esc(p.id)}"><span class="strip">${p.cols.map(h => `<i style="--c:${h}"></i>`).join("")}</span><span class="st-meta"><b>${esc(p.name || p.from || "Palette")}</b><em>${esc(p.at || "")}</em></span></button>`).join("")}</div>`
@@ -72,6 +73,7 @@ function studio() {
   `, "studio", "studio");
   el.querySelectorAll("[data-lab]").forEach(b => b.onclick = () => LAB[b.dataset.lab]());
   el.querySelectorAll("[data-taste]").forEach(b => b.onclick = () => tasteIntro(b.dataset.taste));
+  const fvRow = el.querySelector("[data-fv-row]"); if (fvRow) fvRow.onclick = () => favShelf(() => go("studio"));   // js/favs.js
   el.querySelector("[data-wheel]").onclick = () => gamutWheel();
   el.querySelector("[data-eye]").onclick = () => eye();
   el.querySelector("#file").onchange = e => { const f = e.target.files[0]; if (f) loadImage(f, c => phCaptureAndOpen(c, "From a photo")); };
@@ -328,6 +330,7 @@ function paletteView(p) {
     </div>
     <div class="pv-pal" id="pv"></div>
     <div class="h-list" id="hlist"></div>
+    <div data-csacts></div>
     <div class="row2" style="margin-top:18px"><button class="btn" data-keep>${p.savedId != null ? "Kept" : "Keep it"}</button><button class="btn ghost" data-share>${ICON.share} Share</button></div>
     <div class="row2" style="margin-top:10px"><button class="btn ghost" data-css>Copy as CSS</button><button class="btn ghost" data-hex>Copy hex list</button></div>
     ${p.savedId != null ? `<button class="btn ghost" data-del style="margin-top:10px">Remove from your palettes</button>` : ""}
@@ -372,6 +375,15 @@ function paletteView(p) {
     if (hasImg) el.querySelector("#dots").innerHTML = cols.map(c => `<i style="--c:${c.h};left:${c.at[0] * 100}%;top:${c.at[1] * 100}%" data-swatch="${c.h}"></i>`).join("");
   };
   loadCoreNames().then(render); render();
+  if (typeof lkHook === "function") lkHook(el, colsNow, p);   // js/looks.js: "What look is this?"
+  // the ColorSet verbs (js/colorset.js); Keep and Share already live on this page
+  if (typeof colorSet === "function") {
+    const kind = p.photoId != null ? "photo" : p.savedId != null ? "palette" : "studio", pid = p.photoId != null ? p.photoId : p.savedId != null ? p.savedId : "new";
+    const pvSet = () => colorSet({ kind, id: pid, title: curTitle || (kind === "photo" ? fmtDay(p.at) || "Your photo" : p.from || "Palette"), colors: colsNow(), src: kind === "photo" ? "photo/" + pid : kind === "palette" ? "studio/palette/" + pid : "" });
+    if (kind !== "studio") learnerLog({ type: "seen", set: pvSet(), src: kind });
+    const back = kind === "photo" ? () => photoPage(pid, false) : kind === "palette" ? () => openSavedPalette(pid, false) : () => go("studio");
+    el.querySelector("[data-csacts]").appendChild(csActions(pvSet, { only: ["map", "learn", "play", "compare"], back }));
+  }
   const seg = (sel, attr, set) => el.querySelectorAll(`${sel} [${attr}]`).forEach(b => b.onclick = () => { set(b.getAttribute(attr)); el.querySelectorAll(`${sel} [${attr}]`).forEach(x => x.classList.toggle("on", x === b)); render(); buzz(4); });
   if (hasImg) { seg("#cnt", "data-n", v => { n = +v; }); el.querySelector("[data-pct]").onclick = e => { pct = !pct; e.currentTarget.classList.toggle("on", pct); render(); }; }
   seg("#look", "data-look", v => { look = v; });

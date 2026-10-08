@@ -206,6 +206,7 @@ function archiveRows(c, kind, famC) {
     if (kind === "films") box.innerHTML = typeof inFilmsRow === "function" ? inFilmsRow(c, famC) : "";
     else if (kind === "books") box.innerHTML = inBooksRow(c, famC);
     else box.innerHTML = inBooksRow(c, famC) + (typeof inFilmsRow === "function" ? inFilmsRow(c, famC) : "");
+    if (kind !== "books" && typeof lkRowInto === "function") lkRowInto(box, c);   // js/looks.js: "In looks"
   }));
   return `<div class="arch-rows" id="${id}"></div>`;
 }
