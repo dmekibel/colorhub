@@ -715,6 +715,14 @@ function hmHome() {
     const lift = () => { p0 = null; clearTimeout(chromeT); chromeT = setTimeout(() => el.classList.remove("chrome-hide"), 220); };
     cv.addEventListener("pointerup", () => { lift(); if (typeof hmDismissHint === "function") hmDismissHint(); });
     cv.addEventListener("pointercancel", lift);
+    // David: "sometimes the bottom corner buttons disappear". A pan whose finger lifts off the canvas (over a corner, a
+    // sheet, outside the window) never sent the canvas its pointerup, so the corners stayed faded and untappable. The
+    // lift is heard on the window too, and losing focus or the page counts as a lift (cornersBack in js/core.js is the
+    // one place every sheet and menu close also brings them back).
+    const winLift = () => { if (p0 || el.classList.contains("chrome-hide")) lift(); };
+    ["pointerup", "pointercancel", "blur"].forEach(k => addEventListener(k, winLift, true));
+    document.addEventListener("visibilitychange", winLift);
+    cleanup.push(() => { ["pointerup", "pointercancel", "blur"].forEach(k => removeEventListener(k, winLift, true)); document.removeEventListener("visibilitychange", winLift); });
   }
   hmShowChrome();
   // ---------- the right corner: ONE button (PLAN.md decision #2; David: "Study the map is a mini game that belongs with
@@ -751,16 +759,15 @@ function hmHome() {
       { id: "arrange", t: "Arrange", n: `${hmArrLabel()} · ${(HM_LOOKS.find(l => l[0] === v.style) || [, ""])[1]}`, art: ic(HM_SLIDERS), attr: "data-do-arrange" },
     ].filter(Boolean);
     const n = rows.length;
-    const scrim = document.createElement("div"); scrim.className = "rm-scrim";
+    const scrim = document.createElement("div"); scrim.className = "rm-scrim rm-scrim-r";
     scrim.addEventListener("pointerdown", e => { e.preventDefault(); e.stopPropagation(); buzz(4); closeStem(); });
     scrim.addEventListener("click", e => { e.preventDefault(); e.stopPropagation(); });
     scrim.addEventListener("touchmove", e => e.preventDefault(), { passive: false });
     const stem = document.createElement("div");
-    stem.className = "rooms-stem hm-do-stem mn-panel mn-panel-r"; stem.setAttribute("role", "menu"); stem.setAttribute("aria-label", "Home menu");
+    stem.className = "rooms-stem hm-do-stem"; stem.setAttribute("role", "menu"); stem.setAttribute("aria-label", "Home menu");
     stem.style.setProperty("--n", n);
-    // the menu panel (design/VISUAL-DIRECTION.md component 2): a tile grid at the thumb, Search as a field along the bottom
-    stem.innerHTML = `<div class="mn-ph"><h3>The map</h3><p>What you see, and what to do with it</p></div>` + rows.map((r, k) => {
-      const i = k;
+    stem.innerHTML = rows.map((r, k) => {
+      const i = n - 1 - k;   // a straight stack up the right edge (David preferred it over the tile panel), pictures centered over the corner
       return `<button class="rm-bubble" role="menuitem" data-do="${r.id}" ${r.attr || ""} style="--i:${i}">
         ${r.art}<span class="rm-label"><b>${esc(r.t)}</b><em>${esc(r.n)}</em></span></button>`;
     }).join("");

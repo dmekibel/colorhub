@@ -113,6 +113,48 @@ scenario("home", "chrome buttons stay tappable after a touch", async t => {
   }
 });
 
+// David: "Sometimes when you click a setting and choose it, the bottom corner buttons disappear." Pick options in each
+// corner sheet, close it every way (the ✕, a tap outside, Escape, Back), also after a drag that ends off the map, and
+// both corners must be visible and tappable every time.
+scenario("home", "corners always come back after a sheet or a drag", async t => {
+  const corners = async why => {
+    await t.sleep(500);
+    for (const sel of ["#hmDo", "[data-rooms-corner]"]) {
+      const e = t.$(sel); t.expect(e, `${sel} is missing ${why}`);
+      if (!e) continue;
+      const cs = getComputedStyle(e);
+      t.expect(+cs.opacity > .9 && cs.visibility !== "hidden" && cs.pointerEvents !== "none", `${sel} is hidden ${why} (opacity ${cs.opacity}, pointer-events ${cs.pointerEvents})`);
+      const r = t.reachable(e); t.expect(!r, `${sel} ${r} ${why}`);
+    }
+  };
+  const cv = await H.homeReady(t);
+  const closers = [["the close button", async () => t.click("[data-sheet-close]", { wait: 300 })],
+    ["a tap outside", async () => { const s = t.$(".scrim"); s.dispatchEvent(new t.w.PointerEvent("pointerdown", { bubbles: true, cancelable: true, clientX: 30, clientY: 80, pointerId: 1, pointerType: "touch", isPrimary: true, view: t.w })); await t.sleep(400); }],
+    ["Escape", async () => H.keys(t, "Escape")],
+    ["Back", async () => { t.w.dispatchEvent(new t.w.PopStateEvent("popstate", { state: { ch: 1 } })); await t.sleep(500); }]];
+  for (const which of ["colors", "arrange"]) {
+    for (const [how, close] of closers) {
+      await H.sheet(t, which);
+      const opts = t.$$(which === "colors" ? '.hm-chooser [data-src^="stage:"]:not(.on), .hm-chooser .hm-fam:not(.on)' : ".hm-chooser .hm-look-chip:not(.on), .hm-chooser .hm-arr-b:not(.on)");
+      if (opts[0]) await t.click(opts[0], { wait: 400 });
+      if (opts[1]) await t.click(opts[1], { wait: 400 });
+      if (t.$(".sheet")) await close();
+      await t.waitFor(() => !t.$(".sheet"), 4000, `the ${which} sheet to close with ${how}`);
+      await corners(`after picking in ${which} and closing with ${how}`);
+    }
+  }
+  // a pan that ends off the canvas (the finger lifts over a corner or outside the window): the chrome still comes back
+  const c2 = t.$("canvas"), r = c2.getBoundingClientRect(), o = { bubbles: true, clientX: r.left + r.width / 2, clientY: r.top + r.height / 2, pointerId: 1, pointerType: "touch", isPrimary: true, view: t.w };
+  c2.dispatchEvent(new t.w.PointerEvent("pointerdown", o));
+  c2.dispatchEvent(new t.w.PointerEvent("pointermove", { ...o, clientX: o.clientX - 60, clientY: o.clientY + 40 }));
+  t.d.body.dispatchEvent(new t.w.PointerEvent("pointerup", { ...o, clientX: 10, clientY: 10 }));
+  await corners("after a pan that ended off the map");
+  // the menu, opened and closed with its own corner
+  await H.menu(t); { const r2 = t.$("#hmDo").getBoundingClientRect(); await t.tapAt(t.d.elementFromPoint(r2.left + r2.width / 2, r2.top + r2.height / 2), r2.left + r2.width / 2, r2.top + r2.height / 2, { wait: 500 }); }
+  await corners("after the corner menu opened and closed");
+  t.expect(cv, "no canvas");
+});
+
 scenario("home", "View sheet opens; stage chips change the count", async t => {
   await H.homeReady(t);
   await H.sheet(t, "colors");
