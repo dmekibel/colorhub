@@ -1399,6 +1399,8 @@ function prOpenRoute(id) { if (id && PR_METHODS[id]) prPlay(id); else prHome(); 
 let PR_SHOT_ON = false;
 function prShot(arg) {
   PR_SHOT_ON = true;
+  // sample progress only: never write it over real progress on this device
+  try { const set = localStorage.setItem.bind(localStorage); localStorage.setItem = (k, v) => { if (k !== KEY) set(k, v); }; } catch (e) {}
   document.documentElement.classList.add("pr-shot");
   const t = today(), [what, st] = String(arg).split(":");
   S = Object.assign(fresh(), { placed: { tier: 2, at: t }, done: { "t2-blues": t }, profileAsked: true });

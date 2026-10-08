@@ -289,7 +289,7 @@ html:has(#app > .screen.pr-booth) body::after{display:none}
 .pr-tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .pr-tile-m{display:flex;flex-direction:column;align-items:stretch;text-align:left;border-radius:var(--r-2,14px);background:var(--surface-2,#1F1D18);overflow:hidden;padding-bottom:14px;min-height:150px;transition:transform var(--dur-0,.12s)}
 .pr-tile-m:active{transform:scale(.97)}
-.pr-tile-m b{font:400 22px/1.12 var(--serif);letter-spacing:-.01em;font-weight:400;margin:12px 14px 0}
+.pr-tile-m>b{font:400 22px/1.12 var(--serif);letter-spacing:-.01em;font-weight:400;margin:12px 14px 0}
 .pr-tile-m>span:not(.pr-art){font:italic 400 15px/1.28 var(--serif);color:var(--soft);margin:4px 14px 0;text-wrap:pretty}
 .pr-tile-m.last{box-shadow:inset 0 0 0 1px rgba(236,232,223,.42)}
 .pr-more{margin-top:6px}
