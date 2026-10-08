@@ -67,7 +67,7 @@ function xbHome() {
     <div class="art-band xb-band" data-xbband>
       <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><button class="icon-btn glass" data-search aria-label="Search">${ICON.search}</button></header>
       <h1 class="p-title">Art</h1>
-      <p class="p-dek" data-xbdek>${XB.f.hexes.length && XB.f.name ? `In ${esc(XB.f.name.toLowerCase())}, from 23,531 paintings.` : "23,531 paintings and 11,440 poems, found by their colors."}</p>
+      <p class="p-dek" data-xbdek>${XB.f.hexes.length && XB.f.name ? `In ${esc(XB.f.name.toLowerCase())}, from ${GAL ? xbNum(GAL.n) : "over 23,000"} paintings.` : `${GAL ? xbNum(GAL.n) : "Over 23,000"} paintings and 11,440 poems, found by their colors.`}</p>
       <div class="xb-pick" data-xbpick></div>
     </div>
     <div class="xb-facets" data-xbfacets></div>

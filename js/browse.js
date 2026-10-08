@@ -1,5 +1,5 @@
 "use strict";
-// Explore 2.0: Art, browsing 23,531 paintings without getting lost (lane L16, design/lanes/L16-explore-browse.md).
+// Explore 2.0: Art, browsing ~24,000 paintings without getting lost (lane L16, design/lanes/L16-explore-browse.md).
 // Art's old long row of ~100 color bubbles and its one endless feed are replaced by:
 //  - reaching any color in two seconds: a color dial (hue ring x a lightness/chroma square, nearest name live),
 //    typing a name (app colors, ~1,000 core names and their aliases, the 2,700-name library), a photo or the

@@ -213,9 +213,9 @@ function explorePager() {
   const covers = [
     coverHTML("all", "For you", "A new pick of colors, paintings and stories every day.", `Today, ${c.n}`,
       tintFromHex(c.h), flatHeroHTML(c.h, c.n), forYouSeam),
-    art ? coverHTML("art", "Art", "23,531 paintings and 11,440 poems, found by their colors.", artCoverNote(art),
+    art ? coverHTML("art", "Art", `${typeof GAL !== "undefined" && GAL ? GAL.n.toLocaleString("en-US") : "Over 23,000"} paintings and 11,440 poems, found by their colors.`, artCoverNote(art),
       tintFromPalette(art.palette), `<img src="${esc(art.img)}" alt="${esc(art.title)}">`, sixSwatchHTML(art.palette.map(p => p.h), art.palette.map(p => p.share)))
-      : coverHTML("art", "Art", "23,531 paintings and 11,440 poems, found by their colors.", "", null, `<div class="xp-flat" style="background:var(--lift-2)"></div>`, ""),
+      : coverHTML("art", "Art", `${typeof GAL !== "undefined" && GAL ? GAL.n.toLocaleString("en-US") : "Over 23,000"} paintings and 11,440 poems, found by their colors.`, "", null, `<div class="xp-flat" style="background:var(--lift-2)"></div>`, ""),
     story ? coverHTML("ideas", "Ideas", "Short stories, systems and history, read through color.", `Today, ${story.title}`,
       tintFromHexList(story.cover), `<div class="xp-flat" style="background:linear-gradient(135deg,${story.cover.join(",")})"></div>`, sixSwatchHTML(story.cover))
       : coverHTML("ideas", "Ideas", "Short stories, systems and history, read through color.", "", null, `<div class="xp-flat" style="background:var(--lift-2)"></div>`, ""),

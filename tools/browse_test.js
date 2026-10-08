@@ -28,7 +28,7 @@ const n = f => q(f).list.length;
 const sum = a => Array.from(a).reduce((x, y) => x + y, 0);
 
 // ---------- 0. the index is in step ----------
-ok(N === 23531 && run("F.meta.n") === N, `facets cover the whole gallery (${N})`);
+ok(N === head.n && run("F.meta.n") === N, `facets cover the whole gallery (${N})`);
 ok(n({}) === N, "no filter returns every painting");
 ok(run("F.meta.artists.length") > 5000 && run("F.meta.artists.filter(a => a[3]).length") === 837, "artists listed, 837 with painter pages");
 
