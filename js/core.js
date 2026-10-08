@@ -31,11 +31,16 @@ const isIOS = () => /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.pla
 // (David's iPhone 16 Pro Max screenshot, 2026-10-08). --vb is that missing strip (0 everywhere else); the shell
 // in css/menus2.css reaches through it.
 function vbFix() {
-  let gap = 0;
-  try { if (standalone() && isIOS()) { const full = innerHeight > innerWidth ? Math.max(screen.width, screen.height) : Math.min(screen.width, screen.height); gap = full - innerHeight; if (gap < 1 || gap > 80) gap = 0; } } catch (e) {}
-  gap = 0;   // disabled 2026-10-08: on David's phone it pushed Home's bottom edge into a black bar; needs a device test before re-enabling
+  let gap = 0, full = 0;
+  try { if (standalone() && isIOS()) { full = innerHeight > innerWidth ? Math.max(screen.width, screen.height) : Math.min(screen.width, screen.height); gap = full - innerHeight; if (gap < 1 || gap > 80) gap = 0; } } catch (e) {}
+  // (re-enabled 2026-10-08. It once "pushed Home into a black bar": .fixed screens are 100dvh with overflow:hidden, so
+  // the stage reached into the strip but was clipped there. The map screens now size to the whole screen themselves
+  // (--app-full, css/menus2.css), whichever of innerHeight or 100dvh is the short one. David's 16 Pro Max screenshot:
+  // the strip is the status bar, 62 px.)
   document.documentElement.style.setProperty("--vb", gap + "px");
+  if (full) document.documentElement.style.setProperty("--app-full", full + "px"); else document.documentElement.style.removeProperty("--app-full");
 }
+
 vbFix(); addEventListener("resize", vbFix); addEventListener("orientationchange", () => setTimeout(vbFix, 300));
 
 // ---------- color math (CIELAB, D65) ----------

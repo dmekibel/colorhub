@@ -232,4 +232,7 @@ html.booth .toast{background:var(--booth-2);box-shadow:none;border-color:var(--b
 .rm-art-you{position:relative}
 .rm-art-you i{position:absolute;inset:38%;border-radius:50%;background:var(--surface-2)}
 /* the honeycomb reaches through the strip an iPhone Home Screen app leaves below its viewport (js/core.js vbFix) */
-.cx-stage{bottom:calc(-1 * var(--vb,0px))}
+.cx-stage{bottom:0}
+/* the map screens (Home, Study the map) are the whole screen on an iPhone Home Screen app: its layout viewport (and
+   100dvh) stop a status bar short of the bottom, and a .fixed screen clips at its own height (js/core.js vbFix) */
+.screen.fixed.cx{position:fixed;top:0;left:0;right:0;height:var(--app-full,100dvh)}

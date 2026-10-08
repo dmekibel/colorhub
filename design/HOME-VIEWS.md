@@ -78,11 +78,11 @@ Picked for: strong meaning, neighbors always related, works from 25 to 2,700 nam
 | `map` | Hue map | hue across, light→dark down | existing bounded map |
 | `wheel` | Color wheel | greys center, hue around, stronger outward | rings (rank = chroma, angle = hue) |
 | `light` | Light to dark | white center → black rim, hue around (greys form one quiet spoke) | rings (rank = 100 − L, angle = hue) |
-| `families` | Families | one island per family, Greys in the middle | islands (hue × lightness inside) |
-| `temp` | Warm and cool | warm left → cool right, light→dark down | grid (x = temperature, y = lightness) |
-| `strength` | Muted to vivid | greys left → vivid right, light→dark down | grid (x = chroma, y = lightness) |
+| `families` | Families | a region per family, Greys in the middle, the rest clockwise in hue order | regions of small grids (hue × lightness inside) |
+| `pages` | Hue pages | a page per family: muted→vivid across, light→dark down (the Munsell book) | regions of small grids |
+| `temp` | Warm and cool | the color plane from above: warm left → cool right, greens up, magentas down, greys in the middle | grid (x = temperature, y = the other hue axis) |
 | `path` | Path rings | first words center, a ring per stage, hue around | rings (rank = useRank, angle = hue) + stage rings drawn on the ground |
-| `known` | What you know | Learned center → Learning → New, hue around | rings (rank = knowledge tier then useRank) + tier rings |
+| `known` | Your words | Learned center → Learning → New, hue around | rings (rank = knowledge tier then useRank) + tier rings |
 | `sunflower` | Sunflower | golden-angle disc, hue then lightness | existing |
 
 Every arrangement places each color exactly once (bounded, finite), so switching is a **morph**: each bubble keeps its identity and flies from where it was to its new place (`l18MorphApply`, 650 ms for an arrangement change), the middle color stays in the middle.
@@ -99,15 +99,34 @@ Next candidates (need data or a second step): 4 One hue's page, 15 Distance from
 - **Knowledge** (All, Learned, Learning, New) combines with both.
 - Every chip shows its count with the other filters applied, so a choice never lands on an empty map; an empty result says so and offers "Clear filters".
 
-## 5. The View sheet
+## 5. One corner, two focused sheets (as built)
 
-One sheet, three parts, map always visible above it and recentered live:
-1. Header: "View", a one-line summary ("Pinks · 166 colors"), Search, Surprise me, and a clear ✕.
-2. **Arrange by**: a strip of live thumbnails, each drawn from the *actual* colors in the actual arrangement; the current one is ringed. One tap morphs the map.
-3. Tabs **Colors** (How many · Family · Tone · Knowledge · Collections) and **Look** (Bubbles / Honeycomb / Magnifier, then Magnify, Spacing and Bubble size sliders with word ends, no numbers, a Reset, and the two map-edge toggles).
-
-Leaving is always easy: ✕, a tap on the map above, a swipe down on the header or the grab bar, Escape, and Back. The sheet never dims the map (it's the thing you're adjusting).
+- **One right-corner button** (four dots, the due count in a paper badge) opens a labeled arc, the rooms stem's mirror:
+  Recall (only when due) · Learn these · Study the map · Favorites · Search · Colors · Arrange. A tap outside, Escape and Back close it (it rides the stem's own STEM_OPEN / closeStem). The study-cards, Study the map, View and heart buttons are gone from Home.
+- **Colors** sheet: How many · Family · Tone · Your words · Collections, every chip counted, Clear filters. Search, Name any color and Surprise me in its header.
+- **Arrange** sheet: the strip of live pictures, a line saying what position means, then the Look (Bubbles / Honeycomb / Magnifier), Magnify / Spacing / Bubble size with words at the ends, Reset the feel, and the map's Edges.
+- No tabs. Both sheets leave the map clear above them (no dim), recentered live; ✕, a tap on the map, a swipe down on the header, Escape and Back close them.
+- The zoomed-out family-name pills and their toggle are removed (David: "they don't add anything"). Where direction means something, a quiet edge caption says so (Warm and cool: "Warmer" / "Cooler").
 
 ## 6. The feel
 
-`S.hm.feel = { mag, space, size }` (0–1). Defaults tuned at 440×956: mag .62 (a clear fisheye, the middle bubble ~3.5x the edge), space .2, size .5. Magnify drives the center-to-edge ratio (flat at 0), Spacing the seam, Bubble size both ends together. Reset returns to the defaults. Lab tweaks stay in the lab.
+`S.hm.feel = { mag, space, size }` (0 to 1). Defaults: mag .62 (a clear fisheye), space .15, size .5. Magnify drives the middle-to-edge size ratio (flat at 0, the Look's preset at .5), Spacing the seam (0 to 8 px), Bubble size both ends. Families and Hue pages use a gentler start (x .45) so the whole book reads. Lab tweaks (`S.hm.tweaks`) stay in the lab; on Home they had silently kept an old low "Center size", the flat feel David noticed.
+
+## 7. Layout quality (neighbor similarity)
+
+After each arrangement places its colors, a local swap pass (neighbors and neighbors' neighbors, never across a stage, tier or family) lowers each bubble's mean OKLab difference (x100) to the bubbles touching it. 11 to 25 ms on 2,020 names (desktop), cached with the layout. Mean neighbor dE, every name, before → after:
+
+| Arrangement | before | after |
+|---|---|---|
+| Hue map | 8.0 | 5.4 |
+| Color wheel | 18.1 | 9.6 |
+| Light to dark | 7.6 | 5.7 |
+| Families | 8.6 | 5.8 |
+| Hue pages | 7.4 | 5.1 |
+| Warm and cool | 17.9 | 9.0 |
+| Path rings | 20.8 | 12.9 |
+| Your words | 20.8 | 11.7 |
+| Sunflower | 21.2 | 12.7 |
+
+Worst remaining outliers are the extreme near-blacks and near-whites (Rich Black FOGRA29/39, Almost Black, Ghost White) in the ring and spiral arrangements, where few neighbors are like them. Niagara Green now sits between Dark Bluish Glaucous (2.9), Ash (5.1), Celandine Green (5.7) and Hathi Grey (8.1); two vivid greens still touch it at the grey block's edge.
+

@@ -279,9 +279,9 @@ function honeyRegions(items, sub, order = HONEY_PAGE_ORDER) {
   return { pts: honeyCenterPts(pts), finite: true, regions: true };
 }
 // Families: inside each region, hue across and light to dark down
-const honeyIslands = items => honeyRegions(items, a => honeyGridArr(a, honeyHueKey, it => 100 - it.L, 1.1));
+const honeyIslands = items => honeyRegions(items, a => honeyGridArr(a, honeyHueKey, it => 100 - it.L, 2.4));   // tall regions: the book is phone-shaped
 // Pages by hue (a page of the Munsell book per family): inside each region, muted to vivid across, light to dark down
-const honeyPages = items => honeyRegions(items, a => honeyGridArr(a, it => it.C, it => 100 - it.L, 1.1));
+const honeyPages = items => honeyRegions(items, a => honeyGridArr(a, it => it.C, it => 100 - it.L, 2.4));
 // warm (+1, orange-yellow) to cool (-1, blue), scaled by strength so greys sit in the seam
 const honeyTemp = it => it.C < 6 ? 0 : it.C / (it.C + 18) * Math.cos((it.H - 60) * Math.PI / 180);
 const honeyTier = it => { const c = typeof hmCard === "function" ? hmCard(it.o) : null; return !c ? 2 : typeof isMine === "function" && isMine(c) ? 0 : 1; };

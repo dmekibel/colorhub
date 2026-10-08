@@ -111,7 +111,9 @@ function hmFeelTweak(style, feel) {
 }
 // the layout the arrangement asks for (the Hue map keeps its Look's own map shape)
 const hmLayoutKey = (arr, style) => arr === "map" || !HONEY_ARR[arr] ? ((HONEY_STYLES[style] || {}).cfg || {}).layout || "mapTall" : arr;
-const hmLiveTweak = v => ({ ...hmFeelTweak(v.style, v.feel), layout: hmLayoutKey(v.arr, v.style) });
+// regions (Families, Hue pages) read as a whole book, so the lens is gentler there: a strong fisheye shrank the outer
+// regions to specks. Your Magnify still moves it, from a calmer start.
+const hmLiveTweak = v => { const a = HONEY_ARR[v.arr], feel = a && a.fit ? { ...v.feel, mag: v.feel.mag * .45 } : v.feel; return { ...hmFeelTweak(v.style, feel), layout: hmLayoutKey(v.arr, v.style) }; };
 
 // ---------- the Tweak panel: live sliders over whatever preset is active, saved in S.hm.tweak ----------
 // A compact, opaque, non-modal sheet (~45dvh): the honeycomb above it keeps running and repainting as the
@@ -402,7 +404,7 @@ function hmHome() {
     // the map is what you're adjusting: the area above the sheet stays clear (a tap there still closes it)
     const scrim = sh.previousElementSibling; if (scrim && scrim.classList.contains("scrim")) scrim.classList.add("hm-scrim-clear");
     const q = s2 => sh.querySelector(s2), qa = s2 => [...sh.querySelectorAll(s2)];
-    const applyInset = () => requestAnimationFrame(() => { if (ctrl) { const r = sh.getBoundingClientRect(); ctrl.setInset({ bottom: Math.max(0, innerHeight - r.top) }); } });
+    const applyInset = () => requestAnimationFrame(() => { if (ctrl) { const r = sh.getBoundingClientRect(); ctrl.setInset({ bottom: Math.max(0, viewEl.getBoundingClientRect().bottom - r.top) }); } });   // measured to the map's own bottom (it reaches past innerHeight on an iPhone Home Screen app)
     const mo = new MutationObserver(() => { if (!sh.isConnected) { if (ctrl) ctrl.setInset({ bottom: 0 }); mo.disconnect(); } });
     mo.observe(document.body, { childList: true });
     q("[data-sheet-close]").onclick = () => { buzz(4); close(); };
@@ -444,7 +446,7 @@ function hmHome() {
         if (ctrl) ctrl.update({ items, soft: true, style: b.dataset.style, tweak: hmLiveTweak(hmView()) });
       });
       let saveT = 0;
-      const feelNow = () => hmFeelTweak(hmView().style, S.hm.feel);
+      const feelNow = () => { const t = hmLiveTweak(hmView()); delete t.layout; return t; };
       qa("[data-feel]").forEach(row => {
         const k = row.dataset.feel, input = row.querySelector("input");
         input.addEventListener("input", () => {
