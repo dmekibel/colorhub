@@ -1,0 +1,198 @@
+{
+ "slug": "liberty",
+ "name": "Liberty",
+ "hex": "#545AA7",
+ "names": [
+  "Liberty"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Liberty is a mid blue-violet that has a place in three color lists and in none of the color books; its name has no documented story, while the idea it names has been given red, green, buff and blue.",
+ "sections": [
+  {
+   "id": "swatch",
+   "title": "The swatch and its names",
+   "body": "Liberty is a mid blue-violet, #545AA7 [1]. Our library files it among the purples, but it measures closer to blue: lightness 41, chroma 47, hue angle 295 [1].\n\nThe name comes from the Wikipedia color list and from two older standards, the ISCC-NBS system of 1955 and Maerz and Paul's *Dictionary of Color* of 1930, which gives 1918 as its first record [1]. Where the name comes from is not documented in any source we hold, so we do not guess [1]. The nearest everyday name is [[denim]], 8.8 units away in ΔE; [[periwinkle]], [[royal-blue]] and [[majorelle-blue]] sit in the same region of the wheel [1].\n\nThe older standards give the same swatch other names: Della Robbia (first recorded 1925) and Luxor (1923) in Maerz and Paul, and Bluebird Blue and Steeplechase in the ISCC-NBS lists [2]."
+  },
+  {
+   "id": "books",
+   "title": "What the books say",
+   "body": "None of the 29 color books we work from describes a color called Liberty [3]. The word appears 37 times in our concordance, almost always as the political idea, and once as the name of a company that a trend forecaster advises [3][9].\n\nThe idea has had its own colors. The red Phrygian or liberty cap was already the attribute of Liberty in American Revolution propaganda from 1775 to 1783, and in Cesare Ripa's *Iconologia*, first published in Rome in 1593; the French revolutionaries invented little here [5]. In July 1789 green ribbons briefly became the badge of the Third Estate, until it was learned that green was also the color of the detested Comte d'Artois, and the blue, white and red cockade took over [4]. Buff, one of the colors of the new United States, graduated to a symbol of liberty, and the Whigs in Britain adopted Washington's colors in support of American independence [7].\n\nBlue's own rise is tied to liberty as well. Pastoureau links the late eighteenth-century promotion of blue to progress, enlightenment, dreams and liberty, helped by Romanticism and the two revolutions [4]. The Liberty swatch is a blue, so that tradition is its nearest cultural neighbor, but nothing in our sources says the name was chosen with it in mind [1][4].\n\nThe best-known liberty in color is not on this list: the Statue of Liberty, made of copper in 1886, was originally brown and turned green as the metal oxidized [8]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Liberty is rare in painting. In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in only 12 works [10]. The century counts are small but lean late: 2 works from the 1500s and 5 from the 1900s, which is 5 of 1,674 and a rate nearly six times the archive's [10].\n\nThe largest match is Matisse's [[painting:commons-Q1853880|Blue Nude IV]] of 1952, where this blue covers 46 per cent of the picture [10]. Edvard Munch supplies three of the twelve: *Workers on their Way Home* (1914), *Forest on the Way to Borre* (1901) and *A Pine* (1892), which is 3 of the 50 Munch works in the archive [10]. The earliest is Titian's *Bacchus and Ariadne* of 1520, at 13 per cent [10].\n\nThese are photographs of aged, varnished paintings, so a match is a screen color and not a pigment test [10]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented",
+   "first_recorded": "Maerz and Paul, 1918",
+   "source": "ColorHub library (ISCC-NBS 1955; Maerz and Paul 1930)"
+  },
+  "aka": [
+   "Della Robbia",
+   "Luxor",
+   "Bluebird Blue",
+   "Steeplechase"
+  ],
+  "siblings": [
+   "denim",
+   "periwinkle",
+   "royal-blue",
+   "majorelle-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#545AA7",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 12,
+  "top_paintings": [
+   "commons-Q1853880",
+   "smk-KMS3823",
+   "commons-Q18889878",
+   "commons-Q1206860",
+   "commons-Q18889262"
+  ],
+  "painters": [
+   {
+    "key": "Edvard Munch",
+    "n": 50,
+    "hits": 3
+   }
+  ],
+  "measured": {
+   "lch": [
+    41,
+    47,
+    295
+   ],
+   "nearest": [
+    [
+     "Denim",
+     8.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library, entry \"Liberty\" (sources: Wikipedia color list, ISCC-NBS 1955 block 178, Maerz and Paul 1930)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library, alternate names for Liberty (ISCC-NBS 1955; Maerz and Paul 1930, plate 43)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "Concordance of 29 color books, matches for \"liberty\" (37 hits)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Blue: The History of a Color, final chapter on blue's rise and the Revolution",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Red: The History of a Color, section on the red cap (bonnet rouge)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Buff\"",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Westland and others, Universal Principles of Color, entry on weathering and permanence",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Garfield, Mauve, chapter on color forecasting",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py, ΔE 6, 5% cover)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What do our sources say about where the color name Liberty comes from?",
+   "choices": [
+    "Its origin is not documented",
+    "It was named for the Statue of Liberty",
+    "It was named after a French revolutionary badge",
+    "It was named for a Whig party color"
+   ],
+   "answer": "Its origin is not documented",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the red liberty cap was invented by the French revolutionaries.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which painting in our archive has the largest share of Liberty blue?",
+   "choices": [
+    "Matisse's Blue Nude IV",
+    "Titian's Bacchus and Ariadne",
+    "Munch's A Pine",
+    "Munch's Workers on their Way Home"
+   ],
+   "answer": "Matisse's Blue Nude IV",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "The red cap of liberty was already a symbol in American Revolution prints before the French wore it.",
+  "In our archive, the painting that is most Liberty blue is a Matisse cut-out from 1952."
+ ],
+ "words": 563,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Verified red cap, green ribbons, buff, blue-liberty, Statue of Liberty against sources; no changes needed."
+  ]
+ }
+}

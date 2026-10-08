@@ -252,13 +252,10 @@
  "words": 1049,
  "status": "checked",
  "checked": {
-  "by": "epic batch 16 writer self-check",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Book reports of 1453 differ (craft lost vs trade closed); both given.",
-   "Cardinals: Greenfield 1295 vs Gage 1464; safe wording used.",
-   "Porphyrogenitus origin hedged (Finlay vs St Clair).",
-   "Swatch is a 20th-century magenta, not the historical dye; stated."
+   "Verified Finlay, Greenfield, St Clair, Gage, Coles against book text: supported; 1453 and cardinals disagreements already hedged."
   ]
  }
 }

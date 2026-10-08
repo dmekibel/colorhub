@@ -27,7 +27,7 @@
   {
    "id": "pigments",
    "title": "Maroons from the factory",
-   "body": "Most maroon pigments are twentieth-century chemistry. In cadmium red, a cadmium sulfide-selenide, more selenium moves the color from orange toward dark maroon [6]. The Pigment Compendium gives selenium-to-cadmium ratios of 10:90 for orange, 20:80 for bright red and 30:70 for dark maroon [7]. Ball says the compound now called cadmium red was not available commercially until 1910, and Bayer made it more reliably in 1919 [6].\n\nThe cadmium mercury sulfides run from orange to maroon as the mercury sulfide share rises from 11 to 26 per cent, and are said to have been developed after a shortage of selenium in the later 1940s [7]. Organic chemists reached maroon too. Benzimidazolone pigments give maroons as well as yellows and oranges, and lithol maroon is a barium lithol red bound with rosin, from the lithol red discovered by P. Julius in 1899 [8]. Perylene pigments were found in 1912 and 1913 but came into general use only after 1950, and perylene maroon is listed among artists' pigments [8]."
+   "body": "Many maroon pigments come from modern chemistry. In cadmium red, a cadmium sulfide-selenide, more selenium moves the color from orange toward dark maroon [6]. The Pigment Compendium gives selenium-to-cadmium ratios of 10:90 for orange, 20:80 for bright red and 30:70 for dark maroon [7]. Ball says the compound now called cadmium red was not available commercially until 1910, and Bayer made it more reliably in 1919 [6].\n\nThe cadmium mercury sulfides run from orange to maroon as the mercury sulfide share rises from 11 to 26 per cent, and are said to have been developed after a shortage of selenium in the later 1940s [7]. Organic chemists reached maroon too. Benzimidazolone pigments give maroons as well as yellows and oranges, and lithol maroon is a barium lithol red bound with rosin, from the lithol red discovered by P. Julius in 1899 [8]. Perylene pigments were found in 1912 and 1913 but came into general use only after 1950, and perylene maroon is listed among artists' pigments [8]."
   },
   {
    "id": "art",
@@ -258,13 +258,11 @@
  ],
  "status": "checked",
  "checked": {
-  "by": "batch-50 writer self-check (sentence-to-card trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Hebrew etymology is Paterson's 'perhaps': hedged.",
-   "X11 maroon value differs between Paterson (#800000) and our library (#B03060): stated as a disagreement.",
-   "Paterson's burglary/front-door survey left out as unreliable."
+   "Softened \"most maroon pigments are twentieth-century chemistry\" (lithol red is 1899)"
   ]
  },
- "words": 807
+ "words": 808
 }

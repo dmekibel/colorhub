@@ -1,0 +1,245 @@
+{
+ "slug": "honey-yellow",
+ "name": "Honey Yellow",
+ "hex": "#A77D35",
+ "names": [
+  "Honey Yellow"
+ ],
+ "tier": "standard",
+ "depth": "long",
+ "lede": "Honey yellow is a name from Werner's nineteenth-century colour list for minerals and animals, painted as a brownish gold by Patrick Syme in 1821.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Which honey yellow",
+   "body": "The name belongs to a list before it belongs to a paint chart. Honey yellow is entry 70 in the yellows of Patrick Syme's 1821 edition of *Werner's Nomenclature of Colours*, a standard for describing minerals, plants and animals by colour [1][5]. Our swatch comes from an aged scan of that plate, so it is a muted, brownish gold, not the bright yellow of the word [10].\n\nThree other swatches carry the same name. Robert Ridgway's 1912 plate XXX gives a lighter, greyer tan, and the RAL paint system lists a stronger orange-gold as RAL 1005 [10]. The words are shared; the colors are not."
+  },
+  {
+   "id": "werner",
+   "title": "A mineralogist's colour",
+   "body": "Abraham Gottlob Werner devised his colour nomenclature in 1774 to help identify minerals by their outward appearance, and began with 54 names [1]. He revised the list over the next forty or so years, and passed updated copies to his students, who added terms of their own [1]. Which terms were Werner's own is hard to say, because the lists circulated through pupils and translations [1][2].\n\nHoney yellow was already in use among them. Johann Georg Lenz, professor of mining at Jena, used Werner's terms in his handbook of 1791, and later lists built on his work include honey yellow among the yellows [2][4]. In Britain, Robert Jameson, who had studied under Werner at Freiberg from 1800, published colour lists in 1804 and 1805 that he said came from Werner [2]. In 1815 the chemist Arthur Aikin described flinty chert as wax and honey yellow, which shows the term at work in an ordinary mineralogy text [3]."
+  },
+  {
+   "id": "syme",
+   "title": "Syme's swatch and recipe",
+   "body": "Patrick Syme (1774 to 1845), an Edinburgh flower painter, did what the earlier lists could not: he painted a swatch for each name [2]. His first edition of 1814 had 108 colours, and the second, of 1821, had 110 [1][2]. He added a mineral, plant and animal example for most of them, and marked with [W] each name that appeared in Werner's lists [1][5].\n\nSyme's own description of honey yellow is a recipe: sulphur yellow mixed with chesnut brown [5]. His examples were the lower neck of a bird of paradise and the mineral fluor spar, now called fluorite [5][10]. Syme's other yellows lean on it as an ingredient, since his gallstone yellow is gamboge with a little Dutch orange and a minute proportion of honey yellow [5]. Next to it in the book are [[sulphur-yellow]], [[gallstone-yellow]], [[saffron-yellow]] and [[ochre-yellow]] [5].\n\nA modern edition, Patrick Baty's *Nature's Palette*, notes that Syme's swatches have faded and muted with age [1]. It also fills gaps with examples of its own, marked by an asterisk, and the pineapple fruit under honey yellow is one of these, not Syme's choice [5]."
+  },
+  {
+   "id": "darwin",
+   "title": "Colour as a field instrument",
+   "body": "The system was meant to be used outdoors. A copy of the second edition travelled on HMS Beagle, and Charles Darwin took his colour terms for animals from it during the voyage of 1831 to 1836 [6]. Colours fade fast in dead specimens, and the book let a naturalist write down a standard name before the colour was gone [6].\n\nThe method has a limit: a printed swatch is a stand-in for a colour, and the plates have muted with age, so a name like honey yellow tells a later reader only as much as the plate does [1][6]. Werner himself conceded that colour alone cannot identify a mineral [1]. Once the plate ages, the name outlives its own colour."
+  },
+  {
+   "id": "before",
+   "title": "Older honey words",
+   "body": "Honey is one of the oldest yellow comparisons in the West [7]. Pastoureau places the first yellow similes in the late Neolithic and the age of metals, with honey, wax, ripe wheat and blond hair among them [7]. Greek had a word for honey-yellow, *melinos*, but it was one of several rarely used terms beside the common *xanthos*, and its exact shade is uncertain [8].\n\nThe Werner list took an old, familiar comparison and fixed it to a swatch [1][7]. That is why the name sounds natural while the colour is specific."
+  },
+  {
+   "id": "pigment",
+   "title": "A lab name for a hidden compound",
+   "body": "Honey yellow turns up in analytical reports. The Pigment Compendium describes a lead, iron and arsenic compound from a Corinth fresco of the mid-first century AD, found in a red underlayer and described as honey-yellow [9]. The authors reported about 28 per cent lead, 19 per cent iron and 14 per cent arsenic, and speculated that it was an unintended by-product of making another pigment [9]. The same book says the zinc ore known as zinc blende varies from white and honey yellow to brown or reddish [11]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive reads Werner's honey yellow as a gold-brown ground color [12]. Within CIEDE2000 distance 6 and at least 5 per cent of the canvas, it appears in 1,659 of 23,781 paintings, about 7 per cent [12]. It is far more common before 1700: 18 per cent of paintings from the 1300s match, against 6 per cent in the 1800s [12]. The peak decade is the 1390s, with 9 of 25 paintings, and the painters with the highest rates include Fra Angelico (6 of 16) and Giovanni di Paolo (5 of 12) [12].\n\nOutside Europe the match is strong too [12]. It covers 83 per cent of *Eight Views of Xiao-Xiang*, a Japanese work dated 1615 in our records, and 76 per cent of the Chinese [[painting:cma-149125|Leaping Carp]] [12]. Those are aged grounds and gilded surfaces more than yellow paint, so read them as photographed: museum photographs of aged, varnished paintings, not pigment tests [12]. The match looks for this exact browned gold; it says nothing about the word.\n\nIn books, the phrase peaks in 1885 in Google Books Ngram data, and in 1820, the year before Syme's second edition, it stood at two thirds of that peak [13]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "honey, as an old comparison for yellow; the fixed colour term comes from Werner's mineral lists",
+   "first_recorded": "in Lenz's and Jameson's mineral lists by the 1790s to 1800s; painted by Syme in 1814 and 1821",
+   "source": "Baty, Nature's Palette, introduction and p. 209"
+  },
+  "aka": [
+   "Honey Yellow (RAL 1005 paint)"
+  ],
+  "siblings": [
+   "gallstone-yellow",
+   "saffron-yellow",
+   "ochre-yellow"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "amber",
+    "gloss": "a resin and a warmer, more orange color; honey yellow here is Werner's browner gold"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#A77D35",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1659,
+  "peak_decade": {
+   "decade": 1390,
+   "hits": 9,
+   "n": 25
+  },
+  "top_paintings": [
+   "cma-161447",
+   "cma-149125"
+  ],
+  "ngram": {
+   "peak": 1885,
+   "rel_1820": 0.666
+  },
+  "measured": {
+   "lch": [
+    55,
+    45,
+    79
+   ],
+   "nearest": [
+    [
+     "Ochre",
+     10.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, introduction, pp. 7-8",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, introduction (Lenz, Jameson, Syme), pp. 23-27",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 24",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 32 and 34 (colour-list tables)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, \"70. Honey Yellow\", pp. 196-197 and 209",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, ch. 2 (Darwin), pp. 126-127",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 10 (\"The Yellow Metal\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 16 (\"The Lessons of the Lexicon\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Pigment Compendium (Dictionary of Historical Pigments), p. 235",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Werner no. 70, Ridgway 1912 plate XXX, RAL 1005, aged swatches, approximate",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Pigment Compendium (Dictionary of Historical Pigments), p. 66",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py, CIEDE2000 6, 5% cover)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "data",
+   "cite": "Google Books Ngram, \"honey yellow\", case-insensitive, 5-year smoothed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did Patrick Syme add to the colour lists he inherited from Werner?",
+   "choices": [
+    "A painted swatch and examples from animals, plants and minerals",
+    "A new chemical test for pigments",
+    "A rule that only seven colours may be named"
+   ],
+   "answer": "A painted swatch and examples from animals, plants and minerals",
+   "kind": "pick"
+  },
+  {
+   "q": "Syme's recipe for honey yellow is sulphur yellow mixed with chesnut brown.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "Why is a colour name from an old swatch book hard to use today?",
+   "choices": [
+    "The printed swatches have aged and muted",
+    "The names were never used outdoors",
+    "They all describe the same colour"
+   ],
+   "answer": "The printed swatches have aged and muted",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Honey yellow is entry 70 in Syme's 1821 colour book, defined as sulphur yellow mixed with chesnut brown.",
+  "Charles Darwin recorded animal colours on the Beagle with the same book that names honey yellow."
+ ],
+ "words": 941,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported claim that Syme himself admitted the swatch limit (Baty has Werner conceding colour alone cannot identify a mineral)",
+   "Kept earlier hedges on Werner-vs-pupil terms and as-photographed archive figures"
+  ]
+ }
+}

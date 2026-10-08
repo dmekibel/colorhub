@@ -1,0 +1,173 @@
+{
+ "slug": "pinkish",
+ "name": "Pinkish",
+ "hex": "#D46A7E",
+ "names": [
+  "Pinkish"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Pinkish is a modifier more than a color: a mid-light rose, in our library from a color survey, standing for anything that leans toward pink.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "What the suffix does",
+   "body": "Pinkish is [[pink]] with the suffix -ish, which Paterson's dictionary lists as an -ish form [1]. The same dictionary defines a run of colors with the word in them: a pinkish red for a Burmese ruby, a pinkish purple for clover, and the pinkish shades of human skin [1].\n\nSo the word is a qualifier, not a name. Baty describes an eighteenth-century color nomenclature that used human skin as its animal example of flesh red, which amounts to pinkish [8]. No book in our collection fixes the word to one shade."
+  },
+  {
+   "id": "books",
+   "title": "Where the books use it",
+   "body": "Writers reach for pinkish when a color has partly gone, or when pink is hiding in something else. Brazilwood dyes ran from deep crimson and purple down to a dowdy pinkish brown as they faded [3]. In old paintings, Finlay says, pinkish flesh pigments have faded and left faces a sickly green [2]. Pastoureau counts pinkish among the many whites painters used for snow and linen [4]. Among stones, a pinkish garnet is called rhodolite and a pinkish tourmaline is rubellite [5]. See [[gem:garnet|garnet]] and [[gem:tourmaline|tourmaline]]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch here, #D46A7E, comes from the xkcd color survey, where people named colors in their own words [6]. It is a mid-light rose, closer to [[rose-pink]] and [[old-rose]] than to a pale baby pink. Our app's nearest named color is [[puce]], 8.6 units away [6]. Puce in Paterson's dictionary is a dull purple or brownish purple, so the match is arithmetic, not description [1][6]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Pinkish, matched within six units of CIEDE2000 and covering at least five per cent of the canvas, appears in 1 of 23,781 paintings: Botticelli's *Baptism of Saint Zenobius*, dated about 1500, where it covers 5.6 per cent [7]. It is a highlight color there, as it is in every match [7]. These are photographs of aged, varnished paintings, so a match is not a pigment test [7].\n\nWhere to look: at flesh in an old painting. Finlay says Roman and Byzantine artists welcomed that cooling look: face mosaics set green stones among the pink to tone down a ruddy complexion [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "pink plus the suffix -ish; no single coiner",
+   "first_recorded": "undocumented",
+   "source": "Paterson, Dictionary of Colour, p. 313"
+  },
+  "aka": [],
+  "siblings": [
+   "pink",
+   "rose-pink"
+  ],
+  "parent": "pink",
+  "children": [
+   "pinkish-red",
+   "pinkish-orange"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#D46A7E",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1,
+  "top_paintings": [
+   "commons-Q3636752"
+  ],
+  "role": {
+   "highlight": 1.0
+  },
+  "measured": {
+   "lch": [
+    58,
+    44,
+    11
+   ],
+   "nearest": [
+    [
+     "Puce",
+     8.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 313 (\"pinkish\"), p. 82 (\"Burmese ruby\"), p. 107 (\"clover\"), p. 173 (\"flesh-toned\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 21 (faded flesh pigments)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 7 (brazilwood)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, White: The History of a Color, pp. 179 and 182",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Finlay, Jewels, ch. 20",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Pinkish entry (xkcd survey); nearest app color by CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py \"#D46A7E\", CIEDE2000 within 6, at least 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 117-118",
+   "loc_kind": "pdf-page",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What do the books show happening to pinkish flesh pigments in old paintings?",
+   "choices": [
+    "They faded, leaving faces greenish",
+    "They darkened to brown",
+    "They turned blue",
+    "They stayed unchanged"
+   ],
+   "answer": "They faded, leaving faces greenish",
+   "kind": "pick"
+  },
+  {
+   "q": "In our library the Pinkish swatch comes from a color survey and not from a historical dye.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pinkish is a hedge word: books use it for faded dyes, snow whites and the skin tone of a Burmese ruby."
+ ],
+ "words": 359,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Mosaic claim corrected to match Finlay (green stones mixed with pink, not green shadows)",
+   "Softened 'nobody holds the word' and Baty gloss"
+  ]
+ }
+}

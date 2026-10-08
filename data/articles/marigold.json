@@ -1,0 +1,234 @@
+{
+ "slug": "marigold",
+ "name": "Marigold",
+ "hex": "#EAA221",
+ "names": [
+  "Marigold"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Marigold is the warm orange-yellow of the garden flower, a color that naturalists once used as a standard for orange, that a pigment maker used as a shade name, and that got a Nuremberg saffron dealer burned for fraud in 1444, according to one book.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A flower's name",
+   "body": "*Marigold* in the dictionaries is the orange-yellow of the flower of that name [1]. Paterson's index of colour names files it among the yellows [2]. The swatch here is a deep, warm yellow, more orange than [[mustard]], less red than [[cadmium-orange]] and close to [[amber]], [[ochre]] and [[golden-yellow]]. How the flower came by its name is not covered in the books we hold, so the origin stays undocumented here."
+  },
+  {
+   "id": "syme",
+   "title": "A standard in the naturalists' charts",
+   "body": "Before paint companies named colors, naturalists pinned them to living things. In Syme's 1821 edition of Werner's color nomenclature, the standard for Dutch orange lists the crest of the goldcrest, the common marigold, the seedpod of the spindle tree and the streak of red orpiment [4]. Syme defined that orange as gamboge yellow with carmine red, and renamed Werner's \"orange yellow\" to get it [4].\n\nThe same flower appears a second time, in the red-brown chart. The brown disk at the centre of a common marigold, which the book tags *Calendula*, is the plant example for chocolate red [5]. One flower therefore holds two of Syme's colors, orange in the petals and dark brown-red in the middle [4][5]. An apple variety called the Marigold serves as the plant example for gallstone yellow, a gamboge yellow with a little Dutch orange and a trace of honey yellow [4]."
+  },
+  {
+   "id": "pigment",
+   "title": "A shade of zinc chromate",
+   "body": "The pigment books give the word a second job. According to Remington (1944), the Scottish chemist Murdock found zinc chromate in 1847 and made three shades of it, called marigold, lemon and pale primrose [3]. The credit is disputed. Mellor (1931) and Brown (1944) give the discovery to earlier workers, Thomson in 1825 and Lampidus in 1829, and Leclaire is strongly linked with introducing it as a pigment [3].\n\nBooks disagree on the date, then, and the *Pigment Compendium* does not settle it [3]. It does note that art literature and technical dictionaries published before 1850 never mention the pigment [3]."
+  },
+  {
+   "id": "saffron",
+   "title": "The cheat's flower",
+   "body": "Marigold petals have a darker history as a counterfeit. St Clair reports that Jobst Finderlers died at the stake in Nuremberg in 1444, punished for cutting saffron with marigold [6]. The spice was dear enough that in 1374 the hijacking of 800 pounds of it on the road to Basel set off the 14-month Saffron War [6]. Both stories rest on a single book, so read the details as hers.\n\nFinlay describes an orange flower, rather like a marigold, on sale in the covered bazaars of North Africa, and goes on to safflower, a dye plant often substituted for dearer yellows [7]. Its dye broth is yellow with alkali and crimson pink with acid [7]."
+  },
+  {
+   "id": "rites",
+   "title": "On altars, in prizes, in jewellery",
+   "body": "Jarman records that marigolds figure on Mexican altars for the dead on the Day of the Dead, and reads orange as the color of maturity and abundance [8]. The Floral Games of Toulouse, founded in 1323, later gave a marigold to the author of the best ballad, according to a note in Pastoureau [9].\n\nIn the diamond trade the word names a cut, not a color. Finlay's jeweller says the trade would probably call his brown ring a \"marigold-cut brown\", a stone she compares to tobacco, tea and smoke [10]. Do not look for orange there."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 134 works [11]. It lives mostly in India: 39 of 721 Indian works carry it, 9.6 times the archive rate [11]. Among court-painting schools, 17 of 118 Pahari works and 11 of 97 Rajput works qualify, such as [[painting:cma-155590|Vishnu and Lakshmi on Garuda]], where it fills well over half the picture [11].\n\nThe decade that stands out is the 1820s, with 28 of 731 works; six of the 50 by George Dawe in the archive are among them [11]. In 92 per cent of the matching works this color belongs to the lightest tier of the painting, so it reads as a glow, not a shadow [11]. These are photographs of aged, varnished paintings, so the match is a screen color, not a pigment test [11].\n\nThe word itself is steady. In Google Books, *marigold* sits at about half its eventual peak as early as 1800 and peaks in 2018, with no birth moment to date [12]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the marigold flower (origin of the word undocumented in our sources)",
+   "first_recorded": "undocumented in our sources",
+   "source": "Paterson, A Dictionary of Colour, \"marigold\""
+  },
+  "aka": [
+   "pot marigold (Calendula)"
+  ],
+  "siblings": [
+   "mustard",
+   "amber",
+   "golden-yellow"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "mustard",
+    "gloss": "a duller, greener yellow"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#EAA221",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 134,
+  "top_paintings": [
+   "cma-155590",
+   "smk-KMS1401",
+   "cma-314236"
+  ],
+  "countries": {
+   "India": {
+    "n": 721,
+    "hits": 39,
+    "lift": 9.6
+   }
+  },
+  "peak_decade": {
+   "decade": 1820,
+   "n": 731,
+   "hits": 28
+  },
+  "role": {
+   "highlight": 0.92,
+   "mid": 0.08
+  },
+  "ngram": {
+   "rel_1800": 0.55,
+   "peak": 2018
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 256, \"marigold\"",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, pp. 469, 512 (index of colour names, yellows)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 422 (zinc chromate)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 196-207 (Syme's 1821 yellows and oranges)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 243-251 (Syme's reds and browns)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, \"Saffron\"",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 14",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 52",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Pastoureau, Green, notes (note 31)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Finlay, Jewels, ch. 18 (\"Jewels\")",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "ColorHub archive: 23,781 paintings, color within six units, at least five per cent of the canvas (as photographed)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "Google Books Ngram, \"marigold\", 5-year smoothed, relative to peak",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What got Jobst Finderlers burned in Nuremberg in 1444, according to St Clair?",
+   "choices": [
+    "Adulterating saffron with marigold",
+    "Selling a forged pigment",
+    "Dyeing cloth without a licence",
+    "Poisoning a rival dyer"
+   ],
+   "answer": "Adulterating saffron with marigold",
+   "kind": "pick"
+  },
+  {
+   "q": "Which tradition of painting carries this marigold yellow far more often than the archive average?",
+   "choices": [
+    "Pahari and Rajput court painting",
+    "Dutch still life",
+    "French Impressionism",
+    "Flemish portraiture"
+   ],
+   "answer": "Pahari and Rajput court painting",
+   "kind": "pick"
+  },
+  {
+   "q": "The earliest scientific color charts used only paint chips, never living things.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Look for marigold yellow as the glow in Pahari and Rajput court paintings: in 92 per cent of our matches it is in the lightest tier, and 39 of 721 Indian works carry it."
+ ],
+ "words": 733,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Lede: 'medieval court' replaced with Nuremberg 1444, single-source",
+   "Opener garbled stat fixed (92% lightest tier)",
+   "Safflower sentence aligned with Finlay (marigold-like flower, then safflower)"
+  ]
+ }
+}

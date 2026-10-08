@@ -1,0 +1,180 @@
+{
+ "slug": "sandy",
+ "name": "Sandy",
+ "hex": "#F1DA7A",
+ "names": [
+  "Sandy"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Sandy is a light, warm yellow named for sand; the books say more about the word, which in ochre digging, indigo grading and Pliny's pigment trade mostly meant grain, than about the color.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The color and the word",
+   "body": "Sandy is a warm, light yellow, named for beach and desert sand. Our library files the swatch as ISCC-NBS \"moderate yellow\" and records a first use in Maerz and Paul's dictionary of color in 1915 [7]. Close neighbors are Flax and Jasmine, each less than two units away, while the nearest plain color word is [[yellow]], at a difference of 8.9 [7]. Its darker cousin [[sandy-brown]] and the paler [[sand]], [[desert-sand]] and [[buff]] sit nearby.\n\nBeyond that the books say little about the color. What they say a good deal about is the word *sandy*, which describes ground and grain before it describes a hue."
+  },
+  {
+   "id": "ground",
+   "title": "Sand in the supply chain",
+   "body": "For artists, sandy mostly meant a coarse, gritty material. Pastoureau explains that yellow ocher, one of the oldest pigments, is found in sandy strata that can be up to 80 per cent quartz, so the clay has to be washed free of sand before use [1]. Weld, the main yellow dye plant, grew wild along paths in rocky or sandy soil [2].\n\nTrade used the word as a grade. Balfour-Paul lists the categories of indigo in order of merit, starting with sandy, ribboned and spotted, and the worst Manila indigo went to laundry blueing [3]. In the Pigment Compendium's account of Pliny, a sandy form of azurite from Spain flooded the market and pushed the price down to six denarii, and *miltos* is read as an earthy or sandy red ochre [4]. In each case sandy is a texture, and the color is whatever the ground happens to be."
+  },
+  {
+   "id": "land",
+   "title": "The color of the land",
+   "body": "Sandy is also camouflage. Finlay observes that the colors of the snow leopard, grey, white, sandy and black, are the colors of the Ladakh wool: colors that blend with the land [5]. Birren notes that flatfishes such as plaice, sole and flounder shift their pattern and hue to resemble sandy or rocky ocean bottoms [6].\n\nA good eye-training exercise follows. Next to a beach or dry field, compare the sand with a pale yellow: compare how far the sand is from this yellow swatch."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, 88 contain this sandy yellow on at least five per cent of the canvas, within six color-distance units [8]. These are photographs of aged, varnished paintings, and a match is not a pigment test [8].\n\nThe earliest is Fra Angelico's Coronation of the Virgin of 1434 (24 per cent of the picture) [8]. The 1830s peak at 9 of 663 paintings, 3.67 times the archive rate [8]. India stands out, with 16 of 721 paintings (six times the rate), and the Kalighat school accounts for 10 of its 96 [8]. In such pictures the match may be paper or ground rather than a painted sand. The largest single match is the Indian [[painting:cma-162430|Manasa, The Snake Goddess]] of about 1890, about 69 per cent of the sheet [8]. Every match sits in the highlights [8]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "sand",
+   "first_recorded": "1915 (Maerz and Paul's chart)",
+   "source": "ColorHub library"
+  },
+  "aka": [
+   "sandy yellow"
+  ],
+  "siblings": [
+   "sandy-brown",
+   "sand",
+   "desert-sand",
+   "buff"
+  ],
+  "parent": null,
+  "children": [
+   "sandy-brown"
+  ],
+  "disambiguation": [
+   {
+    "slug": "sandy-brown",
+    "gloss": "a much darker, orange-brown color with a similar name"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#F1DA7A",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 88,
+  "first": "commons-Q3797771",
+  "top_paintings": [
+   "cma-162430"
+  ],
+  "role": {
+   "highlight": 1.0
+  },
+  "measured": {
+   "nearest": [
+    [
+     "Yellow",
+     8.9
+    ]
+   ],
+   "iscc": "moderate yellow"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. \"The Ochers of the Paleolithic Period\"",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. \"Dyeing in Yellow\"",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 122",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"azurite\", p. 46, and \"ochre\", p. 334",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Finlay, Fabric, p. 216",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 8",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub library: ISCC-NBS 1955; Maerz & Paul 1930; Wikipedia color list",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did 'sandy' mean in the indigo trade?",
+   "choices": [
+    "A grade of indigo",
+    "A way of dyeing",
+    "A plant",
+    "A shade of blue"
+   ],
+   "answer": "A grade of indigo",
+   "kind": "pick"
+  },
+  {
+   "q": "Why must yellow ocher be washed before it is used as a pigment?",
+   "choices": [
+    "It is found in sandy strata and must be separated from the sand",
+    "It is poisonous",
+    "It is mined wet",
+    "It is a dye, not a pigment"
+   ],
+   "answer": "It is found in sandy strata and must be separated from the sand",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Sandy was a trade grade for indigo before it was a color.",
+  "Snow leopards and Ladakh wool share a palette of grey, white, sandy and black."
+ ],
+ "words": 501,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported claim that real sand is paler and greyer than the swatch"
+  ]
+ }
+}

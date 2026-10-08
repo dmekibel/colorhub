@@ -17,7 +17,8 @@ const H = {
   // Tap something on a color/name page that should open another page (a swatch, a near color, a palette chip).
   async tapSwatch(t) {
     const before = H.title(t) + "|" + H.chip(t);
-    const sels = ["[data-swatch]", ".lk-row[data-cp-near]", ".lk-row[data-np-near]", ".pchip[data-node]", ".kin[data-node]"];
+    // the Walk's honeycomb is a color page's one neighbor list now (it absorbed Nearest names, 2026-10-08)
+    const sels = ["[data-swatch]", ".lk-row[data-cp-near]", ".lk-row[data-np-near]", ".rp-hc-c[data-rc-open]", ".pchip[data-node]", ".kin[data-node]"];
     let target = null, used = "";
     for (const s of sels) { const e = t.$$(s, t.$("#app"))[0]; if (e) { target = e; used = s; break; } }
     t.expect(target, "no swatch / near-color / palette chip on the page to tap");
@@ -595,6 +596,12 @@ scenario("pages", "namePage x3: renders, a near name opens another, Back works",
 // js/article-refs.js: the figure cards in an article (Mauve has an article, a twin gem, a film and paintings that hold the color)
 scenario("pages", "article figure cards: Mauve draws them, a card opens its page, Back returns to the article", async t => {
   await H.openPage(t, "#/color/mauve", "Mauve");
+  // a long story is a door on the page (chapters, minutes); Begin reading opens the book on its own screen
+  const door = await t.waitFor(".ar-door [data-ar-begin]", 20000, "Mauve's story door");
+  t.expect(!t.$(".cp-page .ar-sec"), "the long story is drawn inline on the color page, not behind its door");
+  t.expect(t.$$(".ar-door [data-ar-chap]").length >= 2, "the door lists no chapters");
+  await t.click(door, { wait: 700 });
+  await t.waitFor(() => t.$(".ar-read .ar") && /#\/read\/mauve/.test(decodeURIComponent(t.w.location.hash)), 15000, "the book at #/read/mauve");
   await t.waitFor(() => t.$$(".ar-fig").length >= 2, 25000, "the article's figure cards");
   const figs = t.$$(".ar-fig");
   t.expect(figs.length <= 5, `${figs.length} auto-figures, the limit is 5`);
@@ -607,7 +614,9 @@ scenario("pages", "article figure cards: Mauve draws them, a card opens its page
   await t.click(card, { wait: 700 });
   await t.waitFor(() => !t.$(".ar") && t.$(".p-title, .cp-hero-foot h1, .gl-page, .film-page"), 10000, `the page for "${title}"`);
   await t.click("[data-back]", { wait: 600 });
-  await t.waitFor(() => t.$(".ar") && t.$$(".ar-fig").length >= 2, 20000, "the article and its figures after Back");
+  await t.waitFor(() => t.$(".ar-read .ar") && t.$$(".ar-fig").length >= 2, 20000, "the book and its figures after Back");
+  await t.click("[data-back]", { wait: 600 });
+  await t.waitFor(() => t.$(".cp-page .cp-hero-foot h1") && H.title(t) === "Mauve" && t.$(".ar-door"), 15000, "Back from the book to Mauve's page and its door");
 });
 
 scenario("pages", "a tapped in-between hex opens its nearest name with 'Your color'", async t => {
@@ -810,7 +819,7 @@ scenario("studio", "gamut wheel: presets, mask, keep, swatch tap", async t => {
   await t.click("[data-wheel]", { wait: 700 });
   await t.waitFor("canvas.gw-wheel", 6000, "the gamut wheel");
   const presets = t.$$("[data-m]");
-  t.expect(presets.length === 5, `${presets.length} mask presets instead of 5`);
+  t.expect(presets.length === 7, `${presets.length} mask presets instead of 7`);
   const sw0 = t.$$("i[data-swatch]").map(e => e.dataset.swatch).join();
   for (const p of presets) await t.click(p, { wait: 250 });
   const sw1 = t.$$("i[data-swatch]").map(e => e.dataset.swatch).join();
@@ -1307,11 +1316,11 @@ scenario("paintings", "paintings-of: looser tolerance never finds fewer; a secon
   await t.click("[data-drop]", { force: true, wait: 600 });
   await t.waitFor(() => t.$$(".pt-chip").length === 1, 4000, "the chip to drop");
 });
-scenario("paintings", "a pair page, the masters' chords, and a painting with its color pinned", async t => {
-  await t.open("#/pair/c2412d+4f6b3a", { settle: 600 });
-  await t.waitFor(".pt-finding", 12000, "the pair page");
+scenario("paintings", "a pair's paintings, the masters' chords, and a painting with its color pinned", async t => {
+  await t.open("#/paintings-of/c2412d+4f6b3a?t=4&m=1", { settle: 600 });
+  await t.waitFor(".pt-finding", 12000, "the pair's paintings");
   await PT.count(t);
-  t.expect(t.$$(".pt-chip").length === 2, "the pair page doesn't show two colors");
+  t.expect(t.$$(".pt-chip").length === 2, "the pair's paintings don't show two colors");
   await t.open("#/chords", { settle: 600 });
   await t.waitFor(".chd-row", 12000, "chord rows");
   t.expect(t.$$(".chd-row").length >= 10, "fewer than ten chords");
@@ -1319,7 +1328,7 @@ scenario("paintings", "a pair page, the masters' chords, and a painting with its
   t.expect(t.$$(".chd-row").length >= 5, "no pairs painters keep apart");
   await t.click('[data-kind="pairs"]', { wait: 300 });
   await t.click(".chd-row", { force: true, wait: 700 });
-  await t.waitFor(".pt-page .pt-chip", 12000, "a pair opened from a chord");
+  await t.waitFor(".sp-page .sp-pair", 12000, "a pair page opened from a chord");
   await t.open("#/gallery/15146?c=0047ab&t=3", { settle: 800 });
   await t.waitFor(() => /covers/.test(t.text(".pt-arrive")), 14000, "the pinned coverage line");
   t.expect(t.$(".pt-arrive [data-t]"), "no tolerance switch on the arrival");
@@ -1336,6 +1345,79 @@ scenario("paintings", "a color page's In paintings section: presets re-run the q
   await t.click('[data-pt-quick] [data-pre-tol="10"]', { force: true, wait: 600 });
   await t.click("[data-pt-tune]", { force: true, wait: 400 });
   t.expect(t.$$("[data-pt-tuner] .pt-range").length === 2, "Fine-tune doesn't open two sliders");
+});
+
+// ================================================================== SET PAGES (js/settray.js, js/setpage.js: a page for every pair and palette)
+const SP = {
+  placed() { try { localStorage.clear(); localStorage.setItem("colorhub-v1", JSON.stringify({ v: 3, placed: { tier: 1, at: "2026-10-01" }, tlHint: 1 })); } catch (e) {} },
+  async lead(t) { await t.waitFor(() => t.text("[data-lead]") && !/Reading the paintings/.test(t.text("[data-lead]")), 25000, "the pair's headline finding"); return t.text("[data-lead]"); },
+};
+scenario("sets", "Pair with on a color page: picker suggests and searches and a tap opens the pair page", async t => {
+  SP.placed();
+  await t.open("#/color/teal", { settle: 800, keepState: true });
+  const btn = await t.waitFor("[data-sx-pair]", 12000, "the Pair with… button");
+  await t.click(btn, { wait: 600 });
+  await t.waitFor(".sheet.sx-sheet .sx-opt", 6000, "the picker's suggestions");
+  t.expect(t.$$(".sx-sheet .sx-sec").length >= 2, "fewer than two suggestion rows");
+  const q = t.$(".sx-sheet [data-sx-q]"); q.value = "rose"; q.dispatchEvent(new t.w.Event("input", { bubbles: true })); await t.sleep(200);
+  await t.waitFor(".sx-sheet .sx-li", 6000, "search results for rose");
+  q.value = ""; q.dispatchEvent(new t.w.Event("input", { bubbles: true })); await t.sleep(200);
+  await t.click(".sx-sheet [data-sx-any]", { force: true, wait: 400 });
+  t.expect(t.$(".sx-sheet .sx-picker .cp"), "Any color didn't open the ring picker");
+  await t.click(".sx-sheet .sx-opt", { force: true, wait: 800 });
+  await t.waitFor(".sp-page .sp-pair .sp-plate", 12000, "the pair page");
+  t.expect(/^#\/pair\/[0-9a-f]{6}\+[0-9a-f]{6}$/.test(t.w.location.hash), `the pair's address is ${t.w.location.hash}`);
+  await SP.lead(t);
+  t.expect(t.$$(".sp-fact").length >= 5, "the relationship facts are missing");
+});
+scenario("sets", "a pair page: facts and paintings and Add a color makes a trio", async t => {
+  SP.placed();
+  await t.open("#/pair/4f6b3a+c2412d", { settle: 800, keepState: true });
+  await t.waitFor(".sp-page .sp-plate", 12000, "the pair page");
+  await SP.lead(t);
+  await t.waitFor(() => t.$("[data-ptg] .gl-pin") || /too few|No painting/.test(t.text("[data-ptg]")), 25000, "paintings or an honest line");
+  t.expect(/:1 contrast/.test(t.text(".sp-facts")), "no contrast ratio");
+  await t.click('.cs-act[data-sp-add]', { wait: 600 });
+  await t.waitFor(".sheet.sx-sheet .sx-opt", 6000, "the add-a-color picker");
+  await t.click(".sx-sheet .sx-opt", { force: true, wait: 800 });
+  await t.waitFor(() => /^#\/set\//.test(t.w.location.hash) && t.$(".sp-page .sp-strip"), 12000, "the trio page");
+  t.expect(t.$$(".sp-names .sp-name").length === 3, "the trio doesn't list three colors");
+  await t.click(".sp-page .sp-plus ~ button, .sp-names [data-swatch]", { force: true, wait: 800 });
+  await t.waitFor(".cp-page .cp-hero-foot h1", 12000, "a color page from the trio");
+});
+scenario("sets", "a set page: pairs inside and Improve with Apply and Undo", async t => {
+  SP.placed();
+  await t.open("#/set/2b2a4c-b85c38-e0c097-6f8f72", { settle: 800, keepState: true });
+  await t.waitFor(".sp-page .sp-strip", 12000, "the set page");
+  await SP.lead(t);
+  await t.waitFor(() => t.$$("[data-pairs] .sp-prow").length === 6, 25000, "six pairs inside a four-color set");
+  for (const k of ["subtle", "bold", "clear"]) await t.click(`[data-str="${k}"]`, { force: true, wait: 150 });
+  const ap = t.$("[data-apply]");
+  if (ap) {
+    const before = t.w.location.hash;
+    await t.click(ap, { force: true, wait: 800 });
+    await t.waitFor(() => t.$("[data-undo]") && t.w.location.hash !== before, 8000, "the applied palette with Undo");
+    await t.click("[data-undo]", { force: true, wait: 800 });
+    await t.waitFor(() => t.w.location.hash === before, 8000, "Undo to restore the palette");
+  } else t.expect(/Nothing the numbers call for/.test(t.text("[data-impbody]")), "no suggestion and no honest line");
+  await t.click(".sp-names .sp-drop", { force: true, wait: 800 });
+  await t.waitFor(() => t.$$(".sp-names .sp-name").length === 3, 8000, "a color to drop");
+});
+scenario("sets", "long-press a swatch adds it to the tray and the tray opens the set", async t => {
+  SP.placed();
+  // long-press a palette chip on a painting: it joins the set, the tray shows, the page stays; the tray opens the pair
+  await t.open("#/gallery/15146", { settle: 800, keepState: true });
+  t.ev('sxSetTray(["#C9A227"])');
+  const sw = await t.waitFor(() => t.$$("#app .pal[data-swatch], #app .pal-name[data-swatch]").find(e => e.getBoundingClientRect().width > 10 && t.ev("de2000")(e.dataset.swatch, "#C9A227") > 3), 15000, "a palette chip on the painting");
+  sw.scrollIntoView({ block: "center" }); await t.sleep(400);   // let the scroll settle: a scroll cancels a hold
+  const r = sw.getBoundingClientRect(), o = { bubbles: true, cancelable: true, clientX: r.left + r.width / 2, clientY: r.top + r.height / 2, pointerId: 1, pointerType: "touch", isPrimary: true, view: t.w };
+  const n0 = t.ev("sxTray().length"), page = t.w.location.hash;
+  sw.dispatchEvent(new t.w.PointerEvent("pointerdown", o)); await t.sleep(700); sw.dispatchEvent(new t.w.PointerEvent("pointerup", o)); sw.click(); await t.sleep(400);
+  t.expect(t.ev("sxTray().length") === n0 + 1, `the long-press didn't add the color (${n0} then ${t.ev("sxTray().length")})`);
+  t.expect(t.w.location.hash === page, `the long-press also opened ${t.w.location.hash}`);
+  await t.waitFor(() => t.$(".sx-tray:not([hidden])"), 6000, "the tray pill");
+  await t.click(".sx-tray-main", { wait: 800 });
+  await t.waitFor(".sp-page .sp-pair", 12000, "the tray to open the pair");
 });
 
 // ================================================================== DIRECT LOADS (a typed or shared address on a fresh load)
@@ -1471,7 +1553,7 @@ scenario("trail", "long-press ‹ shows the trail; a row jumps there; the map gl
 });
 
 // fresh loads of shared addresses: each opens its page, and Back goes to the map (not a room)
-[["#/painter/abraham-bloemaert", /Bloemaert/], ["#/gallery/15146?c=0047ab", null], ["#/pair/c2412d+4f6b3a", null], ["#/look/rococo", /Rococo/], ["#/hub/source:crayola", /Crayola/i]].forEach(([hash, re]) => {
+[["#/painter/abraham-bloemaert", /Bloemaert/], ["#/gallery/15146?c=0047ab", null], ["#/pair/4f6b3a+c2412d", null], ["#/set/2b2a4c-b85c38-e0c097", null], ["#/look/rococo", /Rococo/], ["#/hub/source:crayola", /Crayola/i]].forEach(([hash, re]) => {
   scenario("trail-links", `a fresh ${hash.split("/")[1].split("?")[0]} address opens it; Back goes to the map`, async t => {
     await TRL.open(t, hash);
     await t.waitFor(() => t.$("#app .screen [data-back]") && !t.$(".screen.waiting") && t.$("#app").innerText.length > 120, 20000, `the page at ${hash}`);

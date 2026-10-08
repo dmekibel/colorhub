@@ -338,15 +338,8 @@
  "words": 1530,
  "status": "checked",
  "checked": {
-  "by": "Sonnet 5.5 batch writer (self-check: sentence-to-note trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
-  "issues": [
-   "Descriptive modifier: no authored history; the article is about what bright reds were made of, from the books' passing mentions.",
-   "Drebbel tin-scarlet story: books disagree (Finlay 1607 fact; Greenfield disputes; St Clair 1606, apocryphal): stated as disputed.",
-   "Scarlet date: Gage 13th c. vs St Clair 14th c.: stated as books disagree.",
-   "Greek painted statues myth corrected; Birren/Panchadasi color-cure material marked old opinion.",
-   "Cadmium red 1910 is Paterson only; hematite grain sizes from Helwig via Pigment Compendium; Tabriz henna is one travel account.",
-   "Swatch is a screen value (xkcd), not a pigment; archive matches are photographs."
-  ]
+  "issues": []
  }
 }

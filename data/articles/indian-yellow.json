@@ -7,7 +7,7 @@
  ],
  "tier": "pigment",
  "depth": "epic",
- "lede": "Indian yellow is a deep, glowing golden yellow watercolor pigment that came from India in hard, foul-smelling balls, and its reputed source, the urine of mango-fed cows, is the most famous story in the history of color.",
+ "lede": "Indian yellow is a deep, glowing golden yellow watercolor pigment that came from India in hard, foul-smelling balls, and its reputed source, the urine of mango-fed cows, is one of the best-known stories in the history of color, and one of the shakiest.",
  "sections": [
   {
    "id": "name",
@@ -32,7 +32,7 @@
   {
    "id": "europe",
    "title": "Into Europe",
-   "body": "Ball says it is not known exactly when Dutch traders began to import the golden material [1]. It appears in some Dutch paintings of the seventeenth century, but it seems to have found wider use in Europe only in the late eighteenth [1]. St Clair, by contrast, dates its journey to Europe to the late 1700s [3]. The two accounts are compatible if early use was rare, but the first Western date is not settled [1][3].\n\nIt arrived as a trade good alongside gamboge, which Ball says the East India Company imported from about 1615 and which came from the resin of *Garcinia* trees in South-East Asia [1]. The two yellows were rivals. St Clair calls Indian yellow a product of trade and empire that closely resembled gamboge [3]. Both fade, and both work best as watercolors [1].\n\nThe shipments arrived in parcels at London docks from Calcutta, addressed to colormen such as George Field and Winsor and Newton [2]. St Clair adds that the recipients could guess the contents the moment they began unwrapping, because of the ammonia smell [3]."
+   "body": "Ball says it is not known exactly when Dutch traders began to import the golden material [1]. Some Dutch paintings of the 1600s contain it, but it seems to have spread more widely through Europe only in the late 1700s [1]. St Clair, by contrast, dates its journey to Europe to the late 1700s [3]. The two accounts are compatible if early use was rare, but the first Western date is not settled [1][3].\n\nIt arrived as a trade good alongside gamboge, which Ball says the East India Company imported from about 1615 and which came from the resin of *Garcinia* trees in South-East Asia [1]. The two yellows were rivals. St Clair calls Indian yellow a product of trade and empire that closely resembled gamboge [3]. Both fade, and both work best as watercolors [1].\n\nThe shipments arrived in parcels at London docks from Calcutta, addressed to colormen such as George Field and Winsor and Newton [2]. St Clair adds that the recipients could guess the contents the moment they began unwrapping, because of the ammonia smell [3]."
   },
   {
    "id": "mystery",
@@ -296,17 +296,19 @@
   "Nobody has found the law that supposedly banned Indian yellow for cruelty, and Mirzapur has no memory of making it [2][3].",
   "Look for it in Rajput and Pahari miniatures: it covers 12 of 97 Rajput works in our archive, about six times the baseline [15]."
  ],
- "words": 2215,
+ "words": 2219,
  "status": "checked",
  "checked": {
-  "by": "claude-sonnet-5-5",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
    "Origin date: Ball says 15th c. India, Finlay late 16th c. Persian invention",
    "First Western use: Ball 17th c. Dutch, St Clair late 1700s",
    "Ban: Ball and Jarman assert; Finlay, St Clair, Compendium cannot find records",
    "Mukharji account single-source; Finlay found no local memory",
-   "Archive 1300s peak is a look-alike (gold/varnish), not the pigment"
+   "Archive 1300s peak is a look-alike (gold/varnish), not the pigment",
+   "Reworded phrase shared with Ball (Dutch 17th c.)",
+   "Lede softened: 'most famous story' was an overstatement"
   ]
  }
 }

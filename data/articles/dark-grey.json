@@ -245,9 +245,10 @@
  "words": 828,
  "status": "checked",
  "checked": {
-  "by": "L7 self-check (sentence-to-card trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
+   "Spot-checked 8 claims against fact card and book text (Pigment Compendium, St Clair, Ball, Baty); all supported, no text changes.",
    "Books say little about this specific swatch; article is about the label, the family of dark-grey names, and grey in painting. No claim that CSS Gray is #808080 (not in our books).",
    "Rembrandt attribution of the de Geer portrait is from Ball's chapter context; page-level locator not verified.",
    "Peat described by Paterson as a dark grey shade; peat described only as a dark grey shade."

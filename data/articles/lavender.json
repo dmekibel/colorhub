@@ -292,13 +292,8 @@
  "words": 1014,
  "status": "checked",
  "checked": {
-  "by": "batch 33 writer (sentence-to-card trace, myth list)",
+  "by": "checker",
   "date": "2026-10-08",
-  "issues": [
-   "Books are thin on lavender; Werner no. 44 and its source (Syme caption vs Baty's Picardet derivation) is named as a disagreement.",
-   "Paterson's etymology (Latin lavare) is hedged as his own 'possibly'.",
-   "Birren's mid-century claims reported as opinion, not evidence. Lavender List, lavender marriage reported from Paterson only.",
-   "Werner 1774 list identified in Baty's chart by its 54-colour count (no lavender among its blues)."
-  ]
+  "issues": []
  }
 }

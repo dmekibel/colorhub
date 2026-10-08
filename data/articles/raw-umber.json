@@ -1,0 +1,293 @@
+{
+ "slug": "raw-umber",
+ "name": "Raw Umber",
+ "hex": "#826644",
+ "names": [
+  "Raw Umber"
+ ],
+ "tier": "pigment",
+ "depth": "long",
+ "lede": "Raw umber is the untreated form of umber, a dark brown earth pigment whose color comes from manganese as well as iron; its name most likely means shadow, and painters used it for shadows for about five centuries.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name from shadow",
+   "body": "*Umber* most likely comes from the Latin *umbra*, shadow, because the earth was used to paint shadows [1][2][3]. Many people assume it is named for Umbria, and some older sources say so, but the Pigment Compendium calls the shadow origin the generally accepted one and notes that Umbria is not known as a source of the pigment [1]. Ball adds that European umber came mostly from the eastern Mediterranean, which weakens the Umbria idea further [2]. Finlay and St Clair both hedge, writing \"probably\" and \"more likely\" [3][4]. The French name, *terre d'ombre*, keeps the shadow [5].\n\nThe word *raw* only means that the earth is used untreated [6]. In the old trade the same earth was sold as Cyprus umber, Turkey umber or Levant umber, after where it was dug [1], and a 1991 list by Mayer gives *terra ombre* and Sicilian brown as other names for raw umber [14]. It is a pigment name more than a color word: what you get in the tube depends on the pit [1]."
+  },
+  {
+   "id": "earth",
+   "title": "The earth itself",
+   "body": "Umber is a very fine-grained sedimentary rock made of manganese and iron minerals. The Pigment Compendium puts manganese compounds at 5 to 20 per cent of the rock and iron oxides at 45 to 70 per cent [1]. The manganese is what sets umber apart from ochre, and the Compendium rejects the common line that umber is simply a kind of ochre [1]. Coles gives the same chemistry in one sentence: the greenish-brown cast of umbers comes from manganese oxide mixed in with the iron [7]. Pastoureau, by contrast, still calls it an ochre that contains manganese oxide as well as iron, so the books do not use one definition [5][1].\n\nThe best umber came from Cyprus, above all the deposits at Margi, west of Nicosia [1]. Cyprus-type umbers have an olive-greenish cast and make by far the best pigment; Terry, writing in 1893, called the Margi material the darkest and richest, a warm violet brown that fetched a higher price than other umbers [1]. Church analyzed a choice Cyprus sample in 1901 and found 19 per cent manganese oxide, in the form of hausmannite [1]. Because the rock formed on the deep sea floor, it can carry the silica skeletons of tiny marine microfossils, and analysis has even found gold scattered through the Margi umbers, far too fine to see [1].\n\nEnglish umbers are a different thing geologically. They formed in the limestones around the lead mines of Derbyshire, with smaller occurrences in Devon and North Wales [1]. Terry found the Derbyshire material gritty and reddish, and said it was sometimes darkened with a little lamp black to pass for Cyprus umber [1]. A reddish brown called Cappagh brown came from the south-west of Ireland, and by Weber's account it was being mined in Cork in 1814 [1]."
+  },
+  {
+   "id": "raw-burnt",
+   "title": "Raw and burnt",
+   "body": "Roasting raw umber drives the water out of its iron hydroxides and turns them into oxides, which gives a warm reddish brown: burnt umber [13]. The roasted pigment keeps raw umber's usefulness as a drier in oil paint [13]. Jarman lists burnt umber with burnt ochre and burnt sienna as earths cooked to red heat [10].\n\nThe distinction was not always kept. Harley found that English documents of the sixteenth and seventeenth centuries largely ignore it, and that a plain \"umber\" was often burnt umber [13]. Pastoureau says painters of those two centuries preferred the manganese-bearing earth and could burn it for the darker, redder effect [5]. For the unroasted pigment, see [[umber]]; for the roasted one, [[burnt-umber]]."
+  },
+  {
+   "id": "lookalikes",
+   "title": "Look-alikes and misnomers",
+   "body": "Umber is easily confused with browns made from lignite, a low-grade brown coal, which look much the same. Tingry's 1804 description of umber fits the lignite pigment called Cologne earth better than a true umber [1]. The names Cassel umber and Cologne umber belong to the lignite-based Vandyke brown, and are misnomers when applied to umbers in the geological sense [1]. Church added that inorganic umbers were occasionally adulterated with a ferruginous brown coal [1].\n\nMummy brown, a pigment ground from Egyptian mummies, is another brown altogether; St Clair says it was used in oil glazes from the twelfth century into the twentieth, by Delacroix among others [11]. The resemblance in color has led to guesses: the Compendium warns that several brown pigments in old paintings have been called umber on assumption, without a clear identification [1]."
+  },
+  {
+   "id": "art",
+   "title": "In painting",
+   "body": "The earliest identified use cited by the Compendium is in the Ajanta frescoes, dated between 200 BC and AD 600 [1]. In European painting Ball dates its arrival to about 1500 [2]. By the eighteenth century umber was a standard color on the palette, rated above Cologne earth and Vandyke brown for stability, inertness and its ability to dry oil [1]. It has been identified in [[painter:johannes-vermeer|Vermeer]], was in widespread use in eighteenth-century Dutch landscape painting, and turns up on nineteenth-century religious paintings from New Mexico [1].\n\nBy the 1650s [[painter:rembrandt-van-rijn|Rembrandt]] worked with about half a dozen mostly earthy pigments, umbers among them, and his pictures have aged well because he knew what was stable [2]. After his bankruptcy in 1656 he relied on cheap earths, umber above all, for the dark grounds around the lit faces of his late self-portraits [4]. St Clair names the Nativity that [[painter:caravaggio|Caravaggio]] painted in 1609 as another picture that leaned on umber [4]. Earth browns of this family built the shadows of Baroque painting [17], the world of [[look:baroque-chiaroscuro|Baroque chiaroscuro]] and the [[look:dutch-golden-age|Dutch Golden Age]].\n\nTheorists used it too. Late in life, Sir Joshua Reynolds based his pictures on underpaintings of white, black, Indian red and raw umber, which one commentator took for stand-ins for the three primary colors [8]. In the 1720s Castel proposed Prussian blue, red lake and umber as the primaries [9]. Umber is not always what it seems, though. Seccaroni found manganese-oxide browns in Correggio's allegories of Virtue and Vice that raw umber could not explain, and the Compendium reads this as a sign that the line between a natural umber and a prepared manganese pigment is blurrier than the labels suggest [1]."
+  },
+  {
+   "id": "tube",
+   "title": "On the tube today",
+   "body": "Gurney's charts give raw umber, burnt umber and burnt sienna the same Colour Index name, PBr 7, and list raw sienna as PBr 7 or PBr 101 [12]. The code does not separate them; the tube names do. His example of a transparent oil wash over a pencil drawing, a dinosaur, uses only raw umber, burnt sienna and cobalt blue [12]. That is the classic job of the color: a quiet, cool-leaning brown for drawing in paint and for darkening [[sienna]] and [[sepia]] without pushing toward black."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch is not the pit",
+   "body": "Our swatch, #826644, lies within 1.3 units of the ISCC-NBS category \"moderate yellowish brown\", block 77, a block whose names include Cyprus umber, Roman umber and Sicilian umber [15]. The same color is listed under RAL 1036 [15]. The xkcd color survey's raw umber is quite different, an orange-brown at #A75E09, about 35 units away [15]. Real pigment varies with its source: Cyprus-type umber has an olive cast and English-type umber leans reddish [1]. Near neighbors in our library include [[dark-taupe]], [[olive-brown]] and [[bistre]], and the family word is [[brown]] [15]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color near raw umber appears in 5,617, or 23.6 per cent of them, and in 3,323 by the stricter test that compares colors within each painting [16]. That makes it more common than 99 per cent of the colors we have names for [16]. Inside a painting it most often plays a light, in 34 per cent of the 3,323, judged by lightness rank within each picture so that varnish cannot fake it [16].\n\nIt peaks in the 1100s, where it turns up in 21 of the 50 paintings we have from that century, 2.1 times the rate expected from the same museums [16]. The most devoted painter is [[painter:maarten-van-heemskerck|Maarten van Heemskerck]], with the color in 7 of his 12 works here, 3.1 times the baseline [16]. It shares canvases with [[isabella-color]] and [[musk]] more than chance would predict [16].\n\nThe caveat matters. These are photographs of aged, varnished paintings, and a brown this common is as much the color of old varnish as of any pigment [16]. The earliest dated match is from the year 799 and the third-earliest from 960, so the early centuries are thin [16]. The name's earliest record in our sources is 1927, in the RAL list, and a match 1,128 years earlier is a look-alike hue, not proof of the pigment [16]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "probably Latin umbra, shadow (not Umbria); \"raw\" means unroasted",
+   "first_recorded": "earliest identified use: Ajanta frescoes, 200 BC-AD 600; in European painting from about 1500; name in RAL list 1927",
+   "source": "Pigment Compendium, \"Umber\"; Ball, Bright Earth, ch. 6"
+  },
+  "aka": [
+   "Cyprus umber",
+   "Turkey umber",
+   "Levant umber",
+   "terra ombra",
+   "Sicilian brown"
+  ],
+  "siblings": [
+   "umber",
+   "raw-sienna",
+   "sienna"
+  ],
+  "parent": null,
+  "children": [
+   "burnt-umber"
+  ],
+  "disambiguation": [
+   {
+    "slug": "burnt-umber",
+    "gloss": "the roasted form: warmer, redder and darker"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "terre d'ombre"
+   },
+   {
+    "lang": "it",
+    "name": "terra d'ombra"
+   },
+   {
+    "lang": "es",
+    "name": "tierra de sombra"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 5617,
+  "n_within_painting": 3323,
+  "rank_pct": 99,
+  "peak_century": 1100,
+  "peak_rate": "21 of 50 paintings, 2.1x baseline",
+  "painters": [
+   "maarten-van-heemskerck"
+  ],
+  "company": [
+   "isabella-color",
+   "musk"
+  ],
+  "role": "light 34%",
+  "measured": {
+   "lch": [
+    45.2,
+    24.3,
+    74.4
+   ],
+   "nearest": [
+    [
+     "moderate yellowish brown (ISCC-NBS 77)",
+     1.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Umber\" (pdf pp. 390-391; Cyprus, English and Irish umbers, burnt umber, Cologne earth)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 6",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 11 (\"Black and Brown\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, ch. 111 (\"Umber\")",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 28 (\"The Yellow of Painters\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"raw\", \"raw umber\", p. 332",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 37",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 41",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 225",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 44",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, ch. 112 (\"Mummy\")",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Gurney, Colour and Light, pp. 106 and 220",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Burnt umber\" (pdf p. 79)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Sicilian brown\" and \"Terra ombre\" (pdf pp. 352, 373)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "data",
+   "cite": "ColorHub library and graph: ISCC-NBS 1955 block 77, RAL 1036, xkcd survey; screen values are approximate",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "data",
+   "cite": "ColorHub archive of 23,781 paintings, as photographed (fieldnotes r)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, ch. 105 (\"Brown\")",
+   "loc_kind": "epub-chapter",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does the name umber most likely come from?",
+   "choices": [
+    "Latin umbra, meaning shadow",
+    "The Italian region of Umbria",
+    "A river in Cyprus",
+    "Greek for brown earth"
+   ],
+   "answer": "Latin umbra, meaning shadow",
+   "kind": "pick"
+  },
+  {
+   "q": "Umber is simply a kind of ochre.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "What turns raw umber into burnt umber?",
+   "choices": [
+    "Roasting it",
+    "Mixing it with lamp black",
+    "Washing it in acid",
+    "Grinding it finer"
+   ],
+   "answer": "Roasting it",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "After his 1656 bankruptcy, Rembrandt relied on cheap umber for the dark grounds around the lit faces of his late self-portraits [4].",
+  "Umber's olive-brown cast comes from manganese, 5 to 20 per cent of the rock [1]."
+ ],
+ "words": 1407,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Softened 'Umbria was never a known source' to match the Compendium's 'not known as a source'",
+   "Other claims verified against Pigment Compendium, Ball, St Clair"
+  ]
+ }
+}

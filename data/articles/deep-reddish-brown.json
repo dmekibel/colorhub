@@ -1,0 +1,228 @@
+{
+ "slug": "deep-reddish-brown",
+ "name": "Deep Reddish Brown",
+ "hex": "#553D3A",
+ "names": [
+  "Deep Reddish Brown"
+ ],
+ "tier": "standard",
+ "depth": "medium",
+ "lede": "Deep Reddish Brown is a dark chestnut with a trace of red, number 101 in the brown series of a nineteenth-century color chart for naturalists, and now also a plain descriptive name.",
+ "sections": [
+  {
+   "id": "lineage",
+   "title": "Werner's browns, Syme's number 101",
+   "body": "The name comes from Patrick Syme's *Werner's Nomenclature of Colours*, a chart for naturalists [1]. Abraham Gottlob Werner had listed 54 colors in 1774 to identify minerals, and Syme, an Edinburgh flower painter, expanded the list to 108 colors in 1814 and 110 in 1821, adding a painted swatch for each [1][2]. Werner treated brown as one of eight principal colors [2].\n\nSyme's browns run in sequence from number 100, [[deep-orange-coloured-brown]], through Deep Reddish Brown at 101 and [[umber-brown]] at 102 to Chesnut Brown at 103 [3]. Chesnut Brown was the characteristic brown of Werner's series, described as deep reddish brown and yellowish brown together [3]. Syme's recipe for number 101 is chesnut brown with a little chocolate red, so the color is defined by other browns and a red, not by a pigment [3]. His red is the same [[chocolate-red]] that sits beside it in our library [8]."
+  },
+  {
+   "id": "examples",
+   "title": "Where Syme found it",
+   "body": "A color chart for naturalists had to point at nature, so each entry names an animal and a plant. For number 101 Syme gave the breast of the pochard and the neck of the teal drake, and the dead leaves of a green panic grass [3]. Baty's plate adds brown blende, the zinc sulphide mineral now called sphalerite [3].\n\nNaturalists used the numbers as shorthand. William Chapman Hewitson's *British Oology* of 1833 describes birds' eggs by Syme's colors, and matches the eggs of the kite and the common buzzard to number 101 [4]. Darwin carried Syme on the *Beagle*, where a copy was in the ship's library, and wrote of a cuttlefish passing from hyacinth red to chesnut brown, terms Charwat traces to Syme [5]."
+  },
+  {
+   "id": "swatch",
+   "title": "The name in plain English",
+   "body": "Deep reddish brown is also an ordinary English phrase [7]. Paterson's dictionary uses it to define rosewood, the colour of polished rosewood [7]. Our library merges the Syme color with the ISCC-NBS 1955 color of the same name, which sits in block 44, and with a near-duplicate from the horse-coat names, Dark Liver, about two units away [8].\n\nThe swatch is an aged one and approximate [8]. Baty warns that surviving Syme swatches have grown more muted, so the original was likely a little richer [6]. Its nearest named colors in our library are [[umber]], about eight units away, and [[dark-umber]] [8]. Beyond that chart and one dictionary line, the books we hold say little else about this color, and no dye or pigment is attached to the name."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 1,111 works, or 4.7 per cent [9]. The match rate is highest in the 1900s, at 8.2 per cent (138 of 1,674 paintings), and lowest in the 1700s, at 3.4 per cent (116 of 3,449) [9]. The peak decade is the 1580s, when 18 of 166 paintings match, 2.3 times the archive-wide rate [9]. The earliest match is a Medicine Buddha mandala painting of about 1201, where it covers 19 per cent of the image [9].\n\nThe widest matches are [[painter:eugene-carriere|Carrière]]'s [[painting:commons-Q27119753|Woman Leaning on a Table]], of 1890, at 79 per cent of the image, [[painter:adriaen-van-ostade|Ostade]]'s [[painting:smk-KMSsp752|A Room in a Cottage]], of 1636, at 70 per cent, and the Japanese painter Rosetsu's [[painting:cma-160688|Snails]], of 1788, also at 70 per cent [9]. Cranach's [[painting:commons-Q113465666|Eve]], of 1528, reaches 68 per cent [9].\n\nDanish painters dominate the list. [[painter:wilhelm-marstrand|Marstrand]] has 9 matching paintings out of 36, [[painter:kristian-zahrtmann|Zahrtmann]] 6 out of 18 and Carl Bloch 5 out of 15, and Denmark as a whole matches in 161 of its 1,676 paintings (9.6 per cent) [9]. Tibetan paintings do better still, with 9 of 47 (19.1 per cent) [9]. Our archive holds many Danish paintings [9], so read the country figures as a property of the archive as well as of the painters.\n\nIn the paintings that contain it, the color falls in the shadows 64 times in 100, in the mid-tones 35 times and in the highlights 1 time [9]. It is a color of interiors, hair and dark wood. As always these are photographs of aged, varnished paintings, so a match is a screen color, not a pigment test [9]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a descriptive Werner/Syme name: chesnut brown with a little chocolate red",
+   "first_recorded": "Syme, Werner's Nomenclature of Colours, 1814 (no. 101 in the 1821 edition)",
+   "source": "Baty, Nature's Palette, pp. 7, 268-271; ColorHub library"
+  },
+  "aka": [
+   "Syme no. 101",
+   "Dark Liver (horses)"
+  ],
+  "siblings": [
+   "deep-orange-coloured-brown",
+   "umber-brown",
+   "chocolate-red"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "dark-umber",
+    "gloss": "Nearly the same screen color, unrelated name"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#553D3A",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1111,
+  "rate": 0.0467,
+  "peak_decade": {
+   "decade": 1580,
+   "hits": 18,
+   "n": 166,
+   "lift": 2.32
+  },
+  "by_century": {
+   "1900": [
+    138,
+    1674
+   ],
+   "1700": [
+    116,
+    3449
+   ]
+  },
+  "top_paintings": [
+   "commons-Q27119753",
+   "smk-KMSsp752",
+   "cma-160688",
+   "commons-Q113465666"
+  ],
+  "role": {
+   "shadow": 0.64,
+   "mid": 0.35,
+   "highlight": 0.01
+  },
+  "countries": {
+   "Denmark": [
+    161,
+    1676
+   ],
+   "Tibet": [
+    9,
+    47
+   ]
+  },
+  "measured": {
+   "lch": [
+    28,
+    12,
+    31
+   ],
+   "nearest": [
+    [
+     "Umber",
+     8.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 7 (introduction)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 16",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 268-271 (reds and browns, plates)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 136-137",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 126",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 7",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"rosewood\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub library: Werner no. 101 (Browns), aged swatch, approximate; ISCC-NBS 1955 block 44; near-duplicates (data/library.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How did Syme define Deep Reddish Brown?",
+   "choices": [
+    "Chesnut brown with a little chocolate red",
+    "Burnt sienna ground with linseed oil",
+    "A dye from madder roots",
+    "Black mixed with carmine"
+   ],
+   "answer": "Chesnut brown with a little chocolate red",
+   "kind": "pick"
+  },
+  {
+   "q": "In paintings that contain this color, where does it usually sit?",
+   "choices": [
+    "In the shadows",
+    "In the highlights",
+    "Only in skies",
+    "Only in frames"
+   ],
+   "answer": "In the shadows",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: in Syme's chart, Deep Reddish Brown is defined by a particular pigment.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Syme matched this brown to the breast of a pochard, the neck of a teal drake and the dead leaves of a grass.",
+  "Darwin's field notes on the Beagle borrowed their brown names from Syme's chart.",
+  "In paintings this color lives in the shadows: 64 times in 100, almost never in the highlights."
+ ],
+ "words": 715,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

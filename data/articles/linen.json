@@ -37,7 +37,7 @@
   {
    "id": "dyed",
    "title": "Dyed linen, and the guilds",
-   "body": "Dyers in medieval Europe were divided by fiber [10]. In most textile towns the dyeing corporations were strictly separated by whether they worked wool, linen, silk or, in certain Italian towns, cotton, and a dyer could not work outside a licensed range of colors [10]. Guilds tested candidates hard, and one exam for a master dyer set forty-eight yards of blue linen as the test piece, plus wool thread dyed blue and green [12].\n\nIndigo and woad did not always mix with linen. A Florentine wool corporation forbade tropical indigo in 1317, yet by the early fifteenth century the indigo vat was allowed for linens, next to the woad vat kept for wools [11]. In Valencia a statute of 1322 let woad and indigo vats co-exist but forbade combining them [11]. Islamic Spain used the stronger indigo vat for linens and for fustian, a mixed cotton and linen cloth, as early as the mid-thirteenth century [11].\n\nSome colors were hard to get onto linen. Pastoureau reports that Roman women's tunics were of wool and linen, and also of cotton and silk, the two fabrics that took green dyes better [13]. Purple was used on wool and silk, rarely on cotton and never on linen [16]. Indigo, then, was the classic linen color, as the Egyptian stripes suggest [5]."
+   "body": "Dyers in medieval Europe were divided by fiber [10]. In most textile towns the dyeing corporations were strictly separated by whether they worked wool, linen, silk or, in certain Italian towns, cotton, and a dyer could not work outside a licensed range of colors [10]. Guilds tested candidates hard, and one exam for a master dyer set forty-eight yards of blue linen as the test piece, plus wool thread dyed blue and green [12].\n\nIndigo and woad did not always mix with linen. A Florentine wool corporation forbade tropical indigo in 1317, yet by the early fifteenth century the indigo vat was allowed for linens, next to the woad vat kept for wools [11]. In Valencia a statute of 1322 let woad and indigo vats co-exist but forbade combining them [11]. Islamic Spain used the stronger indigo vat for linens and for fustian, a mixed cotton and linen cloth, as early as the mid-thirteenth century [11].\n\nSome colors were hard to get onto linen. Pastoureau reports that Roman women's tunics were of wool and linen, and also of cotton and silk, the two fabrics that took green dyes better [13]. In antiquity purple dyes went onto wool and silk, only rarely onto cotton and never onto linen [16]. Indigo, then, was the classic linen color, as the Egyptian stripes suggest [5]."
   },
   {
    "id": "canvas",
@@ -304,16 +304,14 @@
   "In Pliny's day the best linen cost twice as much as any other, and its whiteness was part of the price.",
   "Look at a worn linen shirt next to a bleached one: you are seeing the difference between ecru and the swatch on this page."
  ],
- "words": 1482,
+ "words": 1485,
  "status": "checked",
  "checked": {
-  "by": "Sonnet 5.5 writer (batch 24)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Georgia cave flax: Finlay 30,000 vs Pastoureau 35,000 years; both given.",
-   "Isabelline origin story is corrected as a legend (St Clair); Finlay's view in CONFLICTS not re-read.",
-   "Sections on the X11 swatch rely on Paterson only; adoption date undocumented.",
-   "Bian Shoumin top match presumed paper (title only, not inspected)."
+   "Purple-dye line now says 'in antiquity' (source scope: ancient dyers).",
+   "Spot-checked Pliny prices, Georgia cave dates, indigo vat statutes, Egyptian stripes, guild exam, Isabelline: all supported."
   ]
  }
 }

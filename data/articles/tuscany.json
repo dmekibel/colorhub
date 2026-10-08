@@ -1,0 +1,213 @@
+{
+ "slug": "tuscany",
+ "name": "Tuscany",
+ "hex": "#C09999",
+ "names": [
+  "Tuscany"
+ ],
+ "tier": "place",
+ "depth": "medium",
+ "lede": "Tuscany is a dusty pink-brown named for the Italian region, a name whose maker and reason are undocumented, in a region known for its earth, cloth and reds.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A color named for a region",
+   "body": "Tuscany is a dusty pink-brown, close to [[rosy-brown]] [1]. It is named for the region of Italy around Florence and Siena, but who first applied the name, and why, is undocumented in the books we read [1]. Our library traces it to Maerz and Paul's *A Dictionary of Color* of 1930, which records it as first used in 1922, and to the ISCC-NBS system of 1955 [1].\n\nThe books do not explain the choice, so this article does not either. What they do show is how much color history Tuscany holds, in earth, dye and cloth [2][5]."
+  },
+  {
+   "id": "earth",
+   "title": "The earth of Siena",
+   "body": "The most direct Tuscan contribution to color is an earth [2]. Sienna is named for Siena in Tuscany, and the English spelling differs from the Italian *terra di Siena* [2]. The Pigment Compendium says the original pigment came from Siena, and quotes a report of 1893 that places the deposits on the western slopes of Monte Amiata [3].\n\nOchre had a Tuscan reputation too [4]. Cennino Cennini described finding seams of yellow, red, blue and white earth in a steep valley as a boy walking with his father, in a handbook that Finlay says was probably written in the 1390s [4]. The family of [[sienna]], [[raw-sienna]] and [[ochre]] begins here."
+  },
+  {
+   "id": "dyers",
+   "title": "Florence and its reds",
+   "body": "Florence was a city of dyers who were strictly divided by color and by dye. Red dyers could not dye blue or black, and they worked in separate shops depending on whether they used madder or kermes [5]. They shared the water of the Arno, and a municipal calendar governed who could use the river when, since red dyeing left the water reddish and dirty [5].\n\nA document from 1343 to 1345, the *Prammatica del vestire*, lists the wardrobes of the city's wealthy women for a sumptuary tax [5]. It has 3,257 notices covering 6,874 dresses and coats owned by more than 2,420 women [5]. Reds dominate it, and the lawyers who wrote it used a wide vocabulary for them: light and dark, bright and drab, and reds tending toward pink, orange, purple, russet, fawn or brown [5]. A dusty pinkish red like this one falls within that range, although no source names it.\n\nYellow was also worn by Tuscan women then, but not two centuries later [6]. Blue was minor: a Florentine dyers' manual of the fifteenth century treated blue cloth as hardly worth mentioning, and dyeing it cost nearly half as much as crimson [7]. Crimson was the most prized and most expensive cloth in fifteenth-century Tuscany, and the sumptuary regulations of 1464 named it [7]."
+  },
+  {
+   "id": "cochineal",
+   "title": "Cochineal and a Medici",
+   "body": "In the early 1540s a Tuscan dyer, Lapo da Diacceto, applied the new American dyestuff cochineal to silk and got vivid results [8]. The Medici duke Cosimo sponsored the dyer, who went on experimenting in secret under that name [8]. Greenfield tells this as the start of cochineal's European career, and the trial was one of several Italian experiments, with Venetian dyers also testing it in 1543 [8].\n\nWoad, the blue dye plant, was grown in Tuscany too, and several regions profited from it, according to Balfour-Paul [9]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The screen color is a light, muted pink-brown, closest to [[rosy-brown]] and [[puce]] among named colors, though it is paler and softer than either [1].\n\nNothing in this color is Tuscan in the way that sienna is [2]. It is a name, not a material or a dye [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is a rare color in the archive. Within CIEDE2000 distance 6 and at least 5 per cent of the canvas, it appears in 66 of 23,781 paintings, about 0.3 per cent [10]. It does not come from Italy: Italy is absent from the top five countries, which are led by Nepal, Iran and India, with 15 of 721 Indian paintings matching [10]. Within India the Pahari school has 7 of 118 and the Rajput school 5 of 97 [10].\n\nIn the West it rises late [10]. Of the 1,674 paintings from the 1900s in our records, 14 match, a rate three times the average, and Gustave Caillebotte has 3 of his 22 [10]. Manet's [[painting:nga-53034|Plum Brandy]] of 1877 has the color over 28 per cent of the canvas [10].\n\nThese are photographs of aged, varnished paintings, so the figures describe how the pictures look today, not pigments [10]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the Italian region of Tuscany (reason undocumented)",
+   "first_recorded": "Maerz & Paul, 1922 (as recorded in the 1930 dictionary); ISCC-NBS 1955",
+   "source": "ColorHub library note"
+  },
+  "aka": [],
+  "siblings": [
+   "rosy-brown",
+   "puce",
+   "old-rose"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "sienna",
+    "gloss": "the real Tuscan color material, a yellow-brown earth from Siena"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#C09999",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 66,
+  "peak_decade": {
+   "decade": 1810,
+   "hits": 5,
+   "n": 438
+  },
+  "top_paintings": [
+   "nga-53034",
+   "smk-KMS7644"
+  ],
+  "measured": {
+   "lch": [
+    67,
+    16,
+    21
+   ],
+   "nearest": [
+    [
+     "Puce",
+     8.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Tuscany; ISCC-NBS 1955 block 43; Maerz & Paul 1930, first recorded 1922, plate 7 L 11",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"sienna\", p. 364",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium (Dictionary of Historical Pigments), \"sienna\", p. 352",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 10 (\"Color\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Red, ch. 23 (\"The Wardrobes of Beautiful Florentine Ladies\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 25 (\"The Robes of Jan Hus and of Judas\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 133",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 11 (\"A Perfect Red\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 45",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py, CIEDE2000 6, 5% cover)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which Tuscan material gave English its sienna colors?",
+   "choices": [
+    "An earth from Siena",
+    "A dye from Florence",
+    "A stone from Lucca"
+   ],
+   "answer": "An earth from Siena",
+   "kind": "pick"
+  },
+  {
+   "q": "In the Florentine wardrobe inventory of 1343 to 1345, which color range dominated women's dress?",
+   "choices": [
+    "Reds",
+    "Blues",
+    "Blacks"
+   ],
+   "answer": "Reds",
+   "kind": "pick"
+  },
+  {
+   "q": "Books document why this color was named Tuscany.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The Florentine wardrobe inventory of 1343 to 1345 counted 6,874 dresses and coats, with red shades dominating.",
+  "Sienna is named for Siena in Tuscany; the pink-brown called Tuscany has no documented link to the place."
+ ],
+ "words": 717,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Verified Florentine 1343-45 counts, Lapo da Diacceto, Gage blue-cost line, Monte Amiata; no changes needed",
+   "Name reason stays undocumented; pink link to Florentine reds stays flagged as inference"
+  ]
+ }
+}

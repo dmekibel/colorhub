@@ -1,0 +1,168 @@
+{
+ "slug": "purple-violet",
+ "name": "Purple Violet",
+ "hex": "#4A203B",
+ "names": [
+  "Purple Violet"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Purple Violet is a very dark, reddish plum named in an industrial color standard, and it shows how loosely the words purple and violet are used.",
+ "sections": [
+  {
+   "id": "swatch",
+   "title": "The name and the swatch",
+   "body": "Purple Violet is the English name of RAL 4007, a color in the German RAL standard that our data dates to 1927 [1]. The name is a modifier pair, purple plus violet, and our library files the Japanese name *kakitsubata*, the rabbit-ear iris, under the same screen color [1]. The RAL value is approximate on screen [1].\n\nThe swatch does not look violet at all. The ISCC-NBS system of 1955 places it in block 260, \"very dark purplish red\", about five units away, and its Munsell value, 4.1RP 1.9/5.2, is a deep red-purple [1]. It lies near [[aubergine]], [[plum]] and [[dark-purple]], and well away from the bright [[violet]] of the spectrum [1]."
+  },
+  {
+   "id": "words",
+   "title": "Purple, violet and the old lists",
+   "body": "The two words were never one color. Eckstut and Eckstut explain that violet is a range of short wavelengths, while purple is a mixture of long red and short blue wavelengths, so a purple is not a spectral color [2]. Jarman, in a more poetic mood, says violet has the shortest wavelength of the visible spectrum, that Jupiter was violet and not imperial purple, and that violet paint is rarely used [3].\n\nAncient writers listed them separately and did not agree on the rainbow. Seneca names purple, violet, green, orange and red, while Ammianus Marcellinus adds yellow, and Lucretius mentions only red, yellow and violet [4]. Syme's nineteenth-century botanical color chart, built on Werner's nomenclature, has a whole series of purples that Baty lists, among them Violet Purple, Pansy Purple, Plum Purple and [[imperial-purple]] [5].\n\nThe prestige color behind many of these names was [[tyrian-purple]]. Paterson says it came from the *purpura* shellfish of Tyre, took about 60,000 of the creatures for half a pint of dye, and disappeared in the fifteenth century [6]. The mid-nineteenth-century synthetic dyes called Tyrian purple could not match it [6]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is a very rare painted color. In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in only nine works [7]. The first is Jacopo Tintoretto's [[painting:commons-Q131613891|Portrait of a man]] of 1546, where it covers 36 per cent, followed by Kristian Zahrtmann's [[painting:smk-KMS7474|Self-portrait by Lamplight]] of 1914 [7]. [[painter:jacopo-tintoretto|Tintoretto]] also appears in the other Venetian entries, and Medici portraits of 1586 and 1686 complete the list [7].\n\nIn 89 per cent of these works the color is a shadow tone [7]. That suggests where to look for it: in the dark fabric of portraits, where black meets wine. As always these are photographs of aged, varnished paintings, so read the match as a screen color [7]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a RAL industrial standard name (RAL 4007), combining the words purple and violet",
+   "first_recorded": "1927 (RAL), per our data",
+   "source": "ColorHub library; RAL"
+  },
+  "aka": [
+   "RAL 4007",
+   "Purpurviolett (German)"
+  ],
+  "siblings": [
+   "aubergine",
+   "plum",
+   "dark-purple"
+  ],
+  "parent": "violet",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "violet",
+    "gloss": "the spectral violet is bright and blue; this color is a dark reddish purple"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "kakitsubata (rabbit-ear iris), same screen color in our library"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#4A203B",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 9,
+  "top_paintings": [
+   "commons-Q131613891",
+   "smk-KMS7474",
+   "commons-Q69108258"
+  ],
+  "role": {
+   "shadow": 0.89,
+   "mid": 0.11
+  },
+  "measured": {
+   "iscc": "very dark purplish red",
+   "munsell": "4.1RP 1.9/5.2"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, RAL, Japanese color names), approximate screen value",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Eckstut and Eckstut, What Is Color?, \"Purple? Violet?\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 72",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Blue, p. 7",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 34 and 107 (Syme's color chart in botany)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Tyrian purple\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which of these is a spectral color, made of a single range of wavelengths?",
+   "choices": [
+    "Violet",
+    "Purple",
+    "Both",
+    "Neither"
+   ],
+   "answer": "Violet",
+   "kind": "pick"
+  },
+  {
+   "q": "In the ISCC-NBS system, how is our Purple Violet swatch described?",
+   "choices": [
+    "Very dark purplish red",
+    "Bright violet",
+    "Pale lilac",
+    "Dark blue"
+   ],
+   "answer": "Very dark purplish red",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Purple Violet is not violet: the 1955 ISCC-NBS system calls it a very dark purplish red.",
+  "Only nine of 23,781 paintings in our archive carry it at scale, and it is almost always a shadow."
+ ],
+ "words": 447,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No fixes needed: 8 key claims verified against book text and fact cards; no myth-list or copied-phrasing problems."
+  ]
+ }
+}

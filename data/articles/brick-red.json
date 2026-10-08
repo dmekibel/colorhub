@@ -1,0 +1,292 @@
+{
+ "slug": "brick-red",
+ "name": "Brick Red",
+ "hex": "#CB4154",
+ "names": [
+  "Brick Red"
+ ],
+ "tier": "commercial",
+ "depth": "medium",
+ "lede": "Brick Red is a color named for a building material, used by naturalists and dictionary-makers long before it became a paint-chart name, and its screen swatch is much pinker than any brick.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A color named for a thing",
+   "body": "Paterson defines brick as the deep orange-red of brick, and brick-red as the color of red brick, adding that in the United States it means a brownish or yellowish red [1]. That is a real disagreement over the word: the British sense is orange-leaning, the American one browner and duller [1]. The dictionary also gives older, learned equivalents, *lateritious* and *testaceous* (the last described as the reddish-brown of unglazed tiles or flowerpots) [1].\n\nThe name is old in the lists of naturalists. In the chart published by Schäffer in 1769, number 76, brick red, was a mixture of minium, lead white, orpiment and English red [2]. Brick-red then sits among the reds in the Werner-family lists reproduced by Baty, those of Lenz, Widenmann and Syme among them [3]. When Jameson revised Werner's terms in the early 1800s he renamed it tile red, a change Syme's 1821 list echoes [4]. Maerz and Paul's 1930 dictionary dates the English color word to 1667 [5].\n\nGarfield, reporting a tally of about 7,500 English color names, files brick red among the 149 taken from common things, far behind the 528 flowers [6]. Most names, in other words, borrow from something people already knew by sight."
+  },
+  {
+   "id": "swatch",
+   "title": "Which brick red",
+   "body": "The swatch here, #CB4154, is a strong crimson-leaning red, and Wikipedia's version of it cites Crayola [5]. Ridgway's 1912 *Color Standards and Color Nomenclature* shows a much browner, darker Brick Red, near #915248, which is closer to the word as Paterson's American sense describes it [5]. The nearest named color to the swatch is [[cerise]], 5.5 units away, and a RAL paint, strawberry red (RAL 3018), is practically the same screen color [5]. Real fired brick sits closer to the colors we name [[brick]] and [[terracotta]].\n\nSo the name and the swatch have drifted apart. Read the swatch as a bright red filed under a familiar word, and keep Ridgway's browner color in mind as the brick it was named for [5]."
+  },
+  {
+   "id": "dye-paint",
+   "title": "In dye, paint and cloth",
+   "body": "Madder dyeing was unreliable. Greenfield notes that madder reds tended toward orange, and that dyers often ended with corals, russets and brick reds [7]. Only dyers in the Ottoman Empire, India and other Eastern countries could consistently get a rich red, the Turkey red of Europe, a process of more than a dozen steps over three or four months [7].\n\nBrick red meant something else to the pigment trade: brick dust was a known cheat. Cennino advised buying vermilion in one unbroken lump because apothecaries diluted it with red lead or brick dust [8], and indigo was adulterated with brick dust too [9]. Riffault described a dark brick-red mercury chromate in 1874, and Salter in 1869 said red precipitate could be made in brick-red or orange-yellow forms [10].\n\nIn nineteenth-century dress it was a respectable color. English fashion manuals condemned scarlet and crimson as vulgar, but allowed a married lady dark reds, brick reds and maroon [11]. Some dictionaries have kin: Morocco is a brick red that was originally the color of painted leather, and Pompeian red is a dark brick red named for the houses found at Pompeii [12]. Our nearest named neighbor of that kind is [[pompeian-red]]."
+  },
+  {
+   "id": "seeing",
+   "title": "Where to look",
+   "body": "Brick shows one of the best-known lessons about color context. Albers described a student's demonstration that the same light red bricks look much lighter with white mortar than with black [13]. The Symbolist painter Sérusier thought warm and cool colors could not share a composition, and once told the dealer Ambroise Vollard that a violet coat beside Vollard's brick-colored overcoat made the two colors scream [14].\n\nIn medicine, Birren quotes a nineteenth-century style of listing in which a brick-red face goes with Osler's disease in warm weather [15]. Read it as a period diagnostic habit, not as evidence about the color."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 12 works, or 0.05 per cent [16]. The earliest is Gillis Peeters's *Watermill by a Wooded Outcrop*, of 1633, at 5.2 per cent [16]. Bonnard's *The Red Blouse*, of 1925, reaches 12.4 per cent [16].\n\nThe surprise is where it clusters. Seven of the 12 are Kalighat paintings from Calcutta, a movement with 7 hits in 96 works; the three largest, at 15 to 20 per cent each, are Kalighat gods and heroes from about 1890 [16]. That makes India the leading country, 7 of 721 [16]. These are photographs of varnished paintings, so the match is to the screen, not to a pigment [16].\n\nThe word is steady in print. In Google Books, *brick red* stood at about a third of its peak in 1800 and peaked around 1948 [17]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the building material, red clay brick",
+   "first_recorded": "Maerz and Paul date the English color word to 1667; Schäffer's chart of 1769 lists it",
+   "source": "Paterson, A Dictionary of Colour; Baty, Nature's Palette; ColorHub library"
+  },
+  "aka": [
+   "brique",
+   "lateritious",
+   "testaceous (older, learned)"
+  ],
+  "siblings": [
+   "brick",
+   "pompeian-red",
+   "terracotta"
+  ],
+  "parent": "red",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "brick",
+    "gloss": "our darker, browner Brick, #A03623, closer to the word's American sense"
+   },
+   {
+    "slug": "cerise",
+    "gloss": "the nearest named color on screen, but a cherry pink-red"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "brique"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#CB4154",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 12,
+  "top_paintings": [
+   "cma-162529",
+   "cma-162493",
+   "cma-162525",
+   "cma-162491"
+  ],
+  "peak_decade": {
+   "1890s": {
+    "hits": 7,
+    "n": 1173
+   }
+  },
+  "movement": {
+   "Kalighat": {
+    "hits": 7,
+    "n": 96
+   }
+  },
+  "role": {
+   "shadow": 0.5,
+   "mid": 0.42,
+   "highlight": 0.08
+  },
+  "ngram": {
+   "peak": 1948,
+   "rel_1800": 0.334
+  },
+  "measured": {
+   "lch": [
+    48,
+    59,
+    20
+   ],
+   "nearest": [
+    [
+     "Cerise",
+     5.5
+    ]
+   ],
+   "ridgway": "#915248"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"brick\", \"brick-red\", \"lateritious\", \"testaceous\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 18, 214 (Schäffer's chart)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, the lists of Lenz, Widenmann and Syme (pp. 32-35)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 26 (Jameson's revisions)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub library, entry Brick Red: Wikipedia citing Crayola; Ridgway 1912 plate XIII; ISCC-NBS 1955 block 55; Maerz & Paul 1930 (first recorded 1667, plate 6 B 11); RAL 3018; swatches are approximate screen values",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 23",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 7",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 4",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 122",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Mercuric chromate\" and \"Red precipitate\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 21",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary, \"Morocco\" and \"Pompeian red\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Albers, Interaction of Color, p. 124",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 192",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 18",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "data",
+   "cite": "ColorHub archive field notes, tools/article_field.py, CIEDE2000 6, 5% cover. As photographed: museum photographs of aged, varnished paintings. A color match, not a pigment test.",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "data",
+   "cite": "Google Books Ngram, \"brick red\", 5-year smoothed, relative to peak",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What do Paterson's dictionary and common use disagree about in the word brick-red?",
+   "choices": [
+    "Whether it is orange-leaning (British) or browner and yellower (American)",
+    "Whether it is a pigment or a dye",
+    "Whether it was named in the twentieth century",
+    "Whether it is a warm or cool color"
+   ],
+   "answer": "Whether it is orange-leaning (British) or browner and yellower (American)",
+   "kind": "pick"
+  },
+  {
+   "q": "Why did cautious paint buyers in Cennino's day want vermilion in one unbroken lump?",
+   "choices": [
+    "Apothecaries diluted ground vermilion with red lead or brick dust",
+    "Lumps dried faster",
+    "Grinding made it turn black",
+    "Lumps were cheaper"
+   ],
+   "answer": "Apothecaries diluted ground vermilion with red lead or brick dust",
+   "kind": "pick"
+  },
+  {
+   "q": "Our swatch for Brick Red is browner and darker than the Ridgway 1912 color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Brick dust was a known cheat in the paint trade: sellers cut vermilion and indigo with it.",
+  "Where to look: the same red brick looks lighter beside white mortar than beside black."
+ ],
+ "words": 788,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Sérusier anecdote: the brick-colored overcoat was Vollard's, not Sérusier's; sentence corrected.",
+   "Source base thin and Paterson sense single-source; kept hedged.",
+   "Birren medical list is a period source, quoted for flavor only."
+  ]
+ }
+}

@@ -1,0 +1,209 @@
+{
+ "slug": "asparagus-green",
+ "name": "Asparagus Green",
+ "hex": "#C2C190",
+ "names": [
+  "Asparagus Green"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Asparagus green is a pale, greyed yellow-green from Werner's 1774 colour nomenclature for mineralogists, named for the vegetable but much quieter than a fresh spear.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A vegetable's name",
+   "body": "Paterson defines asparagus as the green of the vegetable and notes that the color is also written asparagus-green [1]. In English a 1790s list that Baty reproduces carries both *asparagus-green* and *sparrow-grass-green* [2]. Baty reports that the second term was new in Kirwan's mineralogy of 1794, and calls it debatable whether it matched grass green [3]."
+  },
+  {
+   "id": "werner",
+   "title": "Werner's number 58",
+   "body": "Abraham Gottlob Werner, a German mineralogist, published a standard list of colour names in 1774 so that students could describe specimens the same way [3][4]. In 1814 the Scottish artist Patrick Syme expanded it to 108 terms [5]. His edition of 1821 reached 110, and he added animal and vegetable examples to Werner's minerals, and a painted swatch for each [5].\n\nIn Syme's 1821 edition asparagus green is number 58, defined as pistachio green mixed with much greyish white [6]. His three examples are the wings of the brimstone butterfly, the leaves of the variegated horse-shoe geranium *Pelargonium zonale*, and the mineral beryl [6]. Beryl is the species that also gives [[gem:emerald|emerald]] its name [6]. The name appears in several other lists printed by Baty: Lenz, Cleaveland in 1816 with 80 colours, and Syme's editions of 1814 and 1821 [2]."
+  },
+  {
+   "id": "swatch",
+   "title": "Four systems, one name",
+   "body": "Our library carries four sources for the name. The Werner swatch is an aged plate, so its color is approximate [7]. Maerz and Paul's dictionary of 1930 records the term as first used in 1805, on plate 19 C 3 [7]. The ISCC-NBS system of 1955 files it in block 121, and Ridgway's 1912 plate XXXII shows a near-duplicate, Light Turtle Green, at a distance of only 1.0 [7].\n\nThe swatch is a light, muted yellow-green, lightness 77 and chroma 26, closest to [[khaki]] at 6.6 [7]. A modern survey color called Asparagus is much stronger, chroma 50, and a freshly cut spear is nearer that [7]. So the historical asparagus green is the greyed, milky side of the vegetable, in line with Syme's \"much greyish white\" [6][7]. Its neighbors are [[pistachio]], [[olive-green]], [[siskin-green]] and [[apple-green]] [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "At least five per cent of the canvas within a color distance of six, the swatch appears in 728 of the 23,781 paintings in our archive, 3.1 per cent, as photographed [8]. It is more common than average in the 1800s, with a lift of 1.4 over the same museums' baseline [8].\n\nSome painters return to it again and again. It appears in 17 of 50 paintings by Arnoud van Halen, 11 of 28 by [[painter:paulus-potter|Paulus Potter]] and 5 of 12 by [[painter:johan-hendrik-weissenbruch|Weissenbruch]] [8]. The colors that keep it company are [[khaki]], [[sage]] and [[moss]] [8]. These are photographs of aged, varnished paintings, so a match is a look-alike hue and not a pigment test [8]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the vegetable asparagus",
+   "first_recorded": "Werner nomenclature (1774); 1805 per Maerz and Paul (1930)",
+   "source": "Baty, Nature's Palette; ColorHub library"
+  },
+  "aka": [
+   "sparrow-grass green (a related old name)"
+  ],
+  "siblings": [
+   "pistachio",
+   "olive-green",
+   "siskin-green",
+   "apple-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "asparagus",
+    "gloss": "the modern survey color is a much stronger green"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#C2C190",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 728,
+  "painters": [
+   {
+    "key": "Arnoud van Halen",
+    "n": 50,
+    "hits": 17
+   },
+   {
+    "key": "Paulus Potter",
+    "n": 28,
+    "hits": 11
+   },
+   {
+    "key": "Weissenbruch",
+    "n": 12,
+    "hits": 5
+   }
+  ],
+  "measured": {
+   "lch": [
+    77,
+    26,
+    107
+   ],
+   "nearest": [
+    [
+     "Khaki",
+     6.6
+    ]
+   ]
+  },
+  "company": [
+   "Khaki",
+   "Sage",
+   "Beige",
+   "Moss"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"asparagus\", p. 34",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, colour-term tables, pp. 32-34",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, introduction, pp. 7, 16, 20",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, introduction, p. 16",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, introduction, p. 7",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, plate 58, pp. 157-167",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub color library (Werner no. 58; ISCC-NBS 1955 block 121; Maerz and Paul 1930 plate 19 C 3; Ridgway 1912 plate XXXII), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive field notes, 23,781 paintings, as photographed; tools/article_field.py",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Who first fixed the colour names that asparagus green comes from?",
+   "choices": [
+    "Abraham Gottlob Werner, a mineralogist",
+    "Isaac Newton",
+    "A paint manufacturer",
+    "Johannes Itten"
+   ],
+   "answer": "Abraham Gottlob Werner, a mineralogist",
+   "kind": "pick"
+  },
+  {
+   "q": "How did Syme's 1821 edition define asparagus green?",
+   "choices": [
+    "Pistachio green mixed with much greyish white",
+    "Grass green mixed with brown",
+    "Emerald with black",
+    "Pure yellow"
+   ],
+   "answer": "Pistachio green mixed with much greyish white",
+   "kind": "pick"
+  },
+  {
+   "q": "Historical asparagus green is as strong a green as a fresh spear.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Asparagus green was a mineralogist's name: Syme's 1821 plate shows it on a butterfly's wing, a geranium leaf and a beryl.",
+  "The historical color is a chalky, greyed green, much quieter than the vegetable."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported claim that the term entered geologists' vocabularies.",
+   "Removed folk-name gloss on sparrow-grass (not from sources).",
+   "Removed editorial beryl/emerald comparison."
+  ]
+ },
+ "words": 460
+}

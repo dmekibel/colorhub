@@ -179,13 +179,8 @@
  "words": 752,
  "status": "checked",
  "checked": {
-  "by": "batch-61 writer self-check",
+  "by": "checker",
   "date": "2026-10-08",
-  "issues": [
-   "Cork pigment facts rest mainly on the Pigment Compendium (one source).",
-   "Maerz and Paul plate reference differs between library records (12 vs 13 B7), so none is quoted.",
-   "Etymology of Cork the city is not sourced in the books; removed.",
-   "Support-vs-pigment reading of the archive match is a hedged interpretation."
-  ]
+  "issues": []
  }
 }

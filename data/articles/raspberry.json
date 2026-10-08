@@ -1,0 +1,215 @@
+{
+ "slug": "raspberry",
+ "name": "Raspberry",
+ "hex": "#B00149",
+ "names": [
+  "Raspberry"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Raspberry is the red of the berry, a vivid purplish red, and one that naturalists were matching to fruit long before it was an everyday color name.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A fruit's name",
+   "body": "*Raspberry* is the berry's name used for its color. Paterson's dictionary defines the French *framboise* as the red of the raspberry [1]. In English, Maerz and Paul's 1930 dictionary dates the color name to 1892, and the ISCC-NBS system of 1955 files it as block 256, a vivid purplish red [6]. St Clair's glossary calls it a rich pinky red, the color of the berry [5].\n\nNot every raspberry is the same one. The swatch here is #B00149, while Wikipedia's raspberry is a brighter, pinker #E30B5D [6]. Its nearest named neighbors are [[amaranth-purple]] (duller), [[cranberry]] (darker), [[rose-red]], [[rouge]] and the redder [[raspberry-red]], all within about 5 units [6]."
+  },
+  {
+   "id": "werner",
+   "title": "The berry as a yardstick",
+   "body": "Naturalists used the berry as a reference long before the dictionaries did. In Syme's 1821 edition of Werner's color nomenclature, carmine red, number 91, is illustrated among plants by [[flower:raspberry|raspberry]], cockscomb and carnation pink, and among minerals by the Oriental [[gem:ruby|ruby]] [2]. The next red, lake red, is shown by the red tulip, the rose and [[gem:spinel|spinel]] [2]. A fruit and a stone stood side by side as the same red."
+  },
+  {
+   "id": "stones",
+   "title": "Berries, stones and dyes",
+   "body": "Jewelers borrowed the berry as well. Finlay lists rhodolite, a pinkish [[gem:garnet|garnet]], among the stones sometimes called raspberry garnets [3].\n\nSt Clair mentions amaranth, an azo dye first made in the 1880s and described as raspberry-hued [5]. By her account it still colors maraschino cherries in Europe as E123, and it has been banned in America over cancer concerns [5]. As a color word, she adds, amaranth has lost any consensus, and may now mean cherry, grape or plum [5]. The nearest of our colors, [[amaranth-purple]], is exactly this kind of drifted name.\n\nPastoureau, explaining why green stands for youth, points to ripening: berries and cherries pass from green to red, and plums and blackberries go on to blue or black [4]. Raspberries are among the fruits he names at the red stage."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, one work has a color within six units of this swatch over at least five per cent of the canvas: Kirchner's [[painting:nga-76206|Two Girls under an Umbrella]] (1910), where it covers 13 per cent [7]. That makes it rarer than 86 per cent of the named colors we track [7].\n\nThe word has a long, uneven history in print: used as an adjective in Google Books, it peaks in the 2010s [8]. As always these are photographs of aged, varnished paintings, so read them as screen colors [7]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the raspberry fruit (Rubus idaeus)",
+   "first_recorded": "Maerz and Paul 1930 date the color name to 1892 (per the library notes); ISCC-NBS 1955",
+   "source": "Paterson, A Dictionary of Colour; library notes"
+  },
+  "aka": [
+   "framboise (French)"
+  ],
+  "siblings": [
+   "raspberry-red",
+   "cranberry",
+   "amaranth-purple"
+  ],
+  "parent": null,
+  "children": [
+   "raspberry-red"
+  ],
+  "disambiguation": [
+   {
+    "slug": "raspberry-red",
+    "gloss": "a redder, more orange raspberry from another list"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "framboise"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#B00149",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1,
+  "top_paintings": [
+   "nga-76206"
+  ],
+  "ngram": {
+   "adjective_peak": 2010
+  },
+  "measured": {
+   "lch": [
+    37.4,
+    64.0,
+    10.1
+   ],
+   "nearest": [
+    [
+     "Amaranth Purple",
+     2.7
+    ],
+    [
+     "Cranberry",
+     4.3
+    ],
+    [
+     "Rose Red",
+     4.9
+    ],
+    [
+     "Rouge",
+     5.1
+    ],
+    [
+     "Raspberry Red",
+     5.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"framboise\", p. 176",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 243-244 (Syme's 1821 edition of Werner)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Finlay, Jewels: A Secret History, ch. \"Jewels\" (garnet list), p. 20",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, p. 20",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Amaranth\" and glossary",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Maerz & Paul 1930 as cited there) and Color Graph look-alikes, CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "Google Books Ngram, adjective use, case-insensitive, 5-year smoothing, relative to peak",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "In Syme's 1821 edition of Werner, which plants illustrate carmine red?",
+   "choices": [
+    "Raspberry, cockscomb and carnation pink",
+    "Red tulip and rose",
+    "Cherry and plum",
+    "Poppy and madder"
+   ],
+   "answer": "Raspberry, cockscomb and carnation pink",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: every raspberry swatch in our sources is the same color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which garnet is sometimes called the raspberry garnet?",
+   "choices": [
+    "Rhodolite",
+    "Almandine",
+    "Pyrope",
+    "Tsavorite"
+   ],
+   "answer": "Rhodolite",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Before dictionaries listed raspberry as a color, Werner's red chart used the berry to show carmine.",
+  "Raspberry garnets exist: rhodolite is a pinkish garnet sometimes sold under that name.",
+  "Only one painting in our archive of 23,781 has a big patch of this exact raspberry, as photographed."
+ ],
+ "words": 421,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported 'Werner's own reds'",
+   "Removed unsupported fabric/sweets generalization",
+   "Fixed Pastoureau 'middle stage' inference: he lists raspberries at the red stage"
+  ]
+ }
+}

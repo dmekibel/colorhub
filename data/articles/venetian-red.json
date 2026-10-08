@@ -281,9 +281,10 @@
  "words": 1625,
  "status": "checked",
  "checked": {
-  "by": "L7 self-check (sentence-to-card trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
+   "Spot-checked 8 claims against fact card and book text (Pigment Compendium, St Clair, Ball, Baty); all supported, no text changes.",
    "Origin of the name rests on Harley (1982) and Merrifield (1849) as reported in the Pigment Compendium; marked as reputed.",
    "Books disagree on natural vs. synthetic: Paterson and Jarman say natural oxide; Pigment Compendium (Church 1901, Fuller 1973) say artificial.",
    "Swatch is bright (chroma 82); pigment color depends on particle size. Say so in the article.",

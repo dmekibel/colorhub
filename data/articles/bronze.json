@@ -12,12 +12,12 @@
   {
    "id": "name",
    "title": "A metal's name, a brown's swatch",
-   "body": "*Bronze* names an alloy of copper first, and a color second. Paterson's dictionary defines the color as the brilliant brown of the metal, and traces the word to Brindisi, the Italian town [1]. Clair's list of color names gives a plainer gloss: the color of the metal, darker and duller than gold [2].\n\nThe swatch on this page is not shiny. #756033 is a dark olive-brown, filed by the ISCC-NBS names of 1955 as a moderate yellowish brown, and it traces back to Ridgway's atlas of 1912 and the Maerz and Paul dictionary of 1930 [6]. A screen cannot show the gleam that makes metal read as metal. What remains is the flat brown a bronze has when the highlights are taken away.\n\nThat gap between a metal and its flat swatch matters for the name's use in fashion too. In the 1880s Clair notes \"art bronze\" among the combinations offered with heliotrope, alongside canary yellow, eucalyptus green and peacock blue [3]. The word then meant a dull, antique finish, much like the \"antique bronze\" Paterson defines: a color imitating very old objects [1]."
+   "body": "*Bronze* names an alloy of copper first, and a color second. Paterson's dictionary defines the color as the brilliant brown of the metal, and traces the word to Brindisi, the Italian town [1]. Clair's list of color names gives a plainer gloss: the color of the metal, darker and duller than gold [2].\n\nThe swatch on this page is not shiny. #756033 is a dark olive-brown, filed by the ISCC-NBS names of 1955 as a moderate yellowish brown, and it traces back to Ridgway's atlas of 1912 and the Maerz and Paul dictionary of 1930 [6]. A screen cannot show the gleam that makes metal read as metal. What remains is the flat brown a bronze has when the highlights are taken away.\n\nThat gap between a metal and its flat swatch matters for the name's use in fashion too. In the 1880s Clair notes \"art bronze\" among the combinations offered with heliotrope, alongside canary yellow, eucalyptus green and peacock blue [3]. Paterson defines \"antique bronze\" separately, as a color imitating very old objects [1]."
   },
   {
    "id": "material",
    "title": "From alloy to paint",
-   "body": "Bronze reached the painter's shop as a metal powder. The Pigment Compendium records that metallic bronze of a grey color was found on three paintings by Perugino, with an alloy of tin to copper in the ratio 1:2, which appears grey when ground dry [14]. The same entry notes brass powders as metallic pigments on Japanese artifacts [14].\n\n\"Bronzing\" became a trade term: in Paterson's definition it is a pigment added in manufacturing paint to give a metallic lustre, and also also the process of dusting or leafing a surface with imitation gold [1]. The word then spread to other metals: the Compendium observes that \"aluminium bronze powder\" took its name by association with powders made from copper alloys, even though aluminium powder was probably available only from the mid-nineteenth century [15].\n\nThere was also a paint called bronze green, and the books disagree about what it was. Salter in 1869 described it as a kind of Prussian green, a dull blue-black that looks like greenish-black with a coppery cast in deep washes [16]. Linke and Adam in 1913 treat it as a trade name for cinnabar green or chrome green, and Heaton in 1928 as a variety of Brunswick green [16]. Winsor and Newton's 1938 water-color of the name was a mixed chrome green [16]. The name stayed the same while the recipe changed; the modern color is [[bronze-green]].\n\nA sheen can be called bronze without any metal in it. Coles notes that Prussian blue, as a concentrated pigment, has a bronze sheen [4]. That sheen belongs to the surface of the dense pigment, not to its hue [4]."
+   "body": "Bronze reached the painter's shop as a metal powder. The Pigment Compendium records that metallic bronze of a grey color was found on three paintings by Perugino, with an alloy of tin to copper in the ratio 1:2, which appears grey when ground dry [14]. The same entry notes brass powders as metallic pigments on Japanese artifacts [14].\n\n\"Bronzing\" became a trade term: in Paterson's definition it is a pigment added in manufacturing paint to give a metallic lustre, and also the process of dusting or leafing a surface with imitation gold [1]. The word then spread to other metals: the Compendium observes that \"aluminium bronze powder\" took its name by association with powders made from copper alloys, even though aluminium powder was probably available only from the mid-nineteenth century [15].\n\nThere was also a paint called bronze green, and the books disagree about what it was. Salter in 1869 described it as a kind of Prussian green, a dull blue-black that looks like greenish-black with a coppery cast in deep washes [16]. Linke and Adam in 1913 treat it as a trade name for cinnabar green or chrome green, and Heaton in 1928 as a variety of Brunswick green [16]. Winsor and Newton's 1938 water-color of the name was a mixed chrome green [16]. The name stayed the same while the recipe changed; the modern color is [[bronze-green]].\n\nA sheen can be called bronze without any metal in it. Coles notes that Prussian blue, as a concentrated pigment, has a bronze sheen [4]. That sheen belongs to the surface of the dense pigment, not to its hue [4]."
   },
   {
    "id": "age",
@@ -234,13 +234,13 @@
   "A screen cannot show the gleam of bronze; the swatch is just the flat brown beneath it."
  ],
  "checked": {
-  "by": "batch-21 writer",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Books say little about bronze as a pure color; sources are entries and passing mentions. Honest medium article.",
-   "Gladstone/Greek-blue myth corrected, not asserted. Ball's copper smelting link hedged as inference."
+   "Typo 'also also'",
+   "Removed unsupported inference that 'art bronze' meant a dull antique finish"
   ]
  },
  "status": "checked",
- "words": 1046
+ "words": 1036
 }

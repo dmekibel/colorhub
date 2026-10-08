@@ -1,0 +1,271 @@
+{
+ "slug": "greyish-white",
+ "name": "Greyish White",
+ "hex": "#E2DDC6",
+ "names": [
+  "Greyish White"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Greyish White is a color from the age of Werner's mineralogy: the eighth white on Syme's chart, defined as snow white with a touch of ash grey and illustrated with a kittiwake's feathers.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A mineralogist's white",
+   "body": "Greyish White is number 8 among the whites in the color chart of Werner's *Nomenclature of Colours* as Patrick Syme published it in Edinburgh [1][2]. His recipe is plain: snow white mixed with a little ash grey [1]. For each color the chart gave three real examples, one from the animal, one from the vegetable and one from the mineral kingdom, and for greyish white they were the inside of a kittiwake's quill feathers, White Hamburgh grapes and granular limestone [1][3].\n\nThe purpose of such a chart was practical. Before the late eighteenth century, Baty explains, mineralogists described stones in vague and conflicting words, and a fixed list of colors with examples was meant to let a stone be identified from a description [2]. Werner's list of 1774 had 54 colors grouped under eight principal colors, starting with white, grey and black and ending with red and brown [2]. Syme's edition of 1814 grew it to 108 examples and added purple and orange [4]."
+  },
+  {
+   "id": "lenz",
+   "title": "The white Werner did not name",
+   "body": "The odd fact about this color is that it is not in Werner's own list [3][7]. The whites that Syme took straight from Werner were numbers 1, 2, 4, 6 and 7, with two of them renamed; number 8, greyish white, came from the system of Johann Georg Lenz, whose handbook of 1791 applied Werner's method with identical terminology [3][5]. Two other whites, numbers 3 and 5, came from Syme's own 1814 edition [3].\n\nThe path from Lenz to Syme can be traced through the surviving lists [6][7]. The German mineralogist Widenmann, in a work of 1794 that added the first colored chart, brought the total to 74 colors by adding greyish white and two browns that appear to come from Lenz [6]. Syme's count of 79 original colors matches only Estner's mineralogy of 1794, but Estner counted seven whites, not eight, and Baty finds that the greyish white Syme added first appeared in Lenz in 1791 [7]. The lists differed by a color here and a color there, and greyish white was one of the migrants.\n\nBaty thinks it highly likely that Charles Darwin met the system as a student in Edinburgh, and he would use it on HMS Beagle [8]."
+  },
+  {
+   "id": "recipes",
+   "title": "A reducing white",
+   "body": "In Syme's chart, greyish white works more as an ingredient than as a color to be matched [9]. Apple green is emerald green with a little greyish white [9]. Asparagus green takes much of it, blended into pistachio green, and straw yellow is sulphur yellow lightened with much greyish white and a little ochre [9]. French grey, which Syme says is nearly the steel grey of Werner without the luster, is greyish white tinged slightly with black and carmine [10]. Greyish white appears in the recipes for [[apple-green]], [[asparagus-green]] and [[french-grey]] as the softener that turns a strong color into a pale one [9][10]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch and the word",
+   "body": "The swatch here is not grey. It is a pale, slightly yellow cream (ISCC-NBS calls it a yellowish white, block 92), at lightness 88 out of 100 [11]. Our notes record the Werner no. 8 swatch as aged and approximate [11]. Its near-duplicates are Skimmed Milk White at 0.9 units, Purplish White at 2.2, and the named color [[ecru]] at 3.7 [11]. Maerz and Paul's *Oyster*, first recorded in 1893, is listed as a near-duplicate [11].\n\nThe modern word for the same idea is oyster. Paterson defines oyster as a greyish white, first used as a color description in 1922 according to Fowler's *English Usage*, and oyster white as a light grey or greyish white [12]. Paterson also records *deathly white*, used for the complexion of someone who has had a shock [12]. In materials science the phrase is still in use: the Pigment Compendium describes quicklime as white or greyish white lumps and bauxite as ranging from greyish white to brown [13]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Greyish White is one of the most common colors in our archive of 23,781 paintings [14]. A screen color within six units of this swatch covers at least five per cent of the canvas in 1,213 works, or about five per cent of the whole archive [14]. It is far more common in Chinese painting, where 148 of 635 works carry it, about four and a half times the archive's rate [14]. The six paintings where it covers the most canvas are album leaves by Bian Shoumin, Shitao and Hua Yan, with the color over 90 per cent of the image in each, which suggests bare paper or silk [14].\n\nAmong painters, Willem van de Velde the Elder has it in 8 of his 14 works here, eleven times the archive's rate [14]. These are photographs of aged, varnished paintings, so a match is a screen color, not a pigment test [14].\n\nThe name has a short, sharp history. In Google Books, *greyish white* peaks in the 1810s, the decade of Syme's book, and by the 2010s stands at about 7 per cent of that peak [15]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Werner-style mineralogical colour lists; Lenz 1791, then Syme",
+   "first_recorded": "Lenz's Mineralogisches Handbuch (1791), per Baty; Syme (Edinburgh, 1814)",
+   "source": "Baty, Nature's Palette, pp. 22, 28, 41"
+  },
+  "aka": [
+   "Syme's no. 8 white"
+  ],
+  "siblings": [
+   "greenish-white",
+   "pearl-grey",
+   "french-grey"
+  ],
+  "parent": "white",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "french-grey",
+    "gloss": "Syme defines French Grey as greyish white with a tinge of black and carmine"
+   },
+   {
+    "slug": "ecru",
+    "gloss": "a modern named color about 4 units away, a warmer cream"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#E2DDC6",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1213,
+  "top_country": {
+   "name": "China",
+   "hits": 148,
+   "lift": 4.57
+  },
+  "top_painter": {
+   "name": "Willem van de Velde (I)",
+   "hits": 8,
+   "n": 14,
+   "lift": 11.2
+  },
+  "top_paintings": [
+   "cma-161025",
+   "cma-161016",
+   "cma-161023"
+  ],
+  "ngram": {
+   "peak": 1810,
+   "rel_2010": 0.07
+  },
+  "measured": {
+   "lch": [
+    87.9,
+    12.1,
+    100.3
+   ],
+   "contrast_white": 1.36,
+   "nearest": [
+    [
+     "Skimmed Milk White",
+     0.9
+    ],
+    [
+     "Purplish White",
+     2.2
+    ],
+    [
+     "Ecru",
+     3.7
+    ]
+   ]
+  }
+ },
+ "questions": [
+  {
+   "q": "What was Syme's recipe for Greyish White?",
+   "choices": [
+    "Snow white mixed with a little ash grey",
+    "Black mixed with cream",
+    "Lead white and a touch of blue",
+    "Skimmed milk and chalk"
+   ],
+   "answer": "Snow white mixed with a little ash grey",
+   "kind": "pick"
+  },
+  {
+   "q": "Which mineralogist's system did Greyish White come from, not Werner's own list?",
+   "choices": [
+    "Lenz, in 1791",
+    "Darwin, in 1839",
+    "Jameson, in 1805",
+    "Estner, in 1794"
+   ],
+   "answer": "Lenz, in 1791",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: in Syme's chart greyish white is also used as an ingredient in other colors.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The eighth white on Syme's chart used a kittiwake's feathers, white grapes and limestone as its examples.",
+  "Greyish white was not in Werner's own list: it came from a rival mineralogist in 1791.",
+  "Where our archive shows this color most strongly, it is likely the bare paper or silk of Chinese album leaves."
+ ],
+ "words": 829,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Spot-checked claims traced to Baty/Paterson cards; no edits needed"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 49 (\"Greyish White\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 16-17 (introduction)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 41-42 (Syme's 1821 whites)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 26",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 20",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 22",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 28",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 26",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 148, 157, 199 (\"Apple Green\", \"Asparagus Green\", \"Straw Yellow\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 54 (\"French Grey\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json, data/graph/nodes-g.json), CIEDE2000 distances; Werner no. 8 aged swatch",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"oyster\", \"oyster white\", \"deathly white\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, pp. 55, 91 (\"bauxite\", \"calcium oxide\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "data",
+   "cite": "ColorHub graph fieldnotes (data/graph/fieldnotes/g.json), Google Books Ngram",
+   "loc_kind": null,
+   "url": null
+  }
+ ]
+}

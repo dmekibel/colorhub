@@ -32,7 +32,7 @@
   {
    "id": "aniline",
    "title": "Aniline and cadmium",
-   "body": "The nineteenth century added a new red-purple from coal tar. In 1858 the French chemist François-Emmanuel Verguin mixed aniline with tin chloride and made a strong dye that sits where red turns to purple, which he called fuchsine, after the flower [13]. A British firm, Simpson, Maule and Nicholson, hit on an aniline red almost at the same time [13]. Accounts of who deserves credit for magenta differ, and St Clair names Verguin [13]. The color's descendant is [[magenta]].\n\nThe twentieth century added a mineral one. Cadmium reds were introduced in 1910 and range from warm light reds through to red-purples, and they replaced the toxic vermilion [14]. Look at a printed photograph: the printing trio is cyan, magenta and yellow, and the magenta is a red-purple [1]. Compare [[purple]] and [[tyrian-purple]] for the older, darker end of the same family."
+   "body": "The nineteenth century added a new red-purple from coal tar. In 1858 the French chemist François-Emmanuel Verguin mixed aniline with tin chloride and made a strong dye that sits where red turns to purple, which he called fuchsine, after the flower [13]. A British firm, Simpson, Maule and Nicholson, hit on an aniline red almost at the same time [13]. Accounts of who deserves credit for magenta differ, and St Clair names Verguin [13]. The color's descendant is [[magenta]].\n\nThe twentieth century added a mineral one. Coles dates cadmium reds to 1910, with shades running as far as red-purple, and says they displaced toxic vermilion [14]. Look at a printed photograph: the printing trio is cyan, magenta and yellow [1]. Compare [[purple]] and [[tyrian-purple]] for the older, darker end of the same family."
   },
   {
    "id": "field",
@@ -245,15 +245,14 @@
   "A Venetian recipe of 1540 made archil purple from lichen and urine, kneaded for up to 70 days.",
   "Red-purple has two meanings in our data: ISCC's vivid pink-red and xkcd's dark wine."
  ],
- "words": 917,
+ "words": 909,
  "status": "checked",
  "checked": {
-  "by": "Claude (batch 63 self-check: sentence-to-card trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "A hue-wheel name, not a historical color: the article is organised by wheel, perception, dyes and pigments filed under the label.",
-   "Magenta credit hedged (books differ); no 'first synthetic' claim.",
-   "Livingstone locator is chapter-level only."
+   "Removed claim that printer magenta is a red-purple (Gurney does not say it)",
+   "Reworded cadmium sentence to clear book-phrase overlap"
   ]
  }
 }
