@@ -577,5 +577,5 @@ function arStep(spec) {
   const [kind, ...rest] = spec.split("/"), id = rest.join("/");
   if (kind === "hub") return arHubPage(id, false);
   if (kind === "which") return arWhichPage(id, false);
-  return go(xFallbackTab());
+  return xToOrigin();
 }

@@ -444,7 +444,7 @@ function colorExplorer(opts = {}) {
   }
 
   // ---- wiring ----
-  const back = () => { CX_BACK = null; if (tune) tune.close(); persist(true); (opts.back || (() => go("explore")))(); };
+  const back = () => { CX_BACK = null; if (tune) tune.close(); persist(true); (opts.back || xToOrigin)(); };
   $("[data-back]").onclick = back;
   title.onclick = () => chooser();
   $("[data-tune]").onclick = () => fineTune();
