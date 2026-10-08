@@ -649,7 +649,7 @@ scenario("pages", "colorPage x3: renders, swatch opens another, Back works", asy
 });
 
 scenario("pages", "nearest stories: a name without an article offers the nearest ones, a tap opens another page", async t => {
-  await H.openPage(t, "#/name/cinnamon-buff");
+  await H.openPage(t, "#/name/pale-aqua");
   const first = H.title(t);
   await t.waitFor(".rp-ns-row", 10000, "a nearest-story row on a color with no article of its own");
   const rows = t.$$(".rp-ns-row", t.$("#app"));
