@@ -176,7 +176,12 @@ function xbSections(F, res, sort, seed) {
       if (byLetter) push("l" + L, a ? L : "Artist unknown", L, i);
       else push("a" + a, a ? xbArtistName(F, a) : "Artist unknown", L, i);
     }
-    else { const y = G.year[i]; if (y === GL_UNDATED) push("u", "Undated", "?", i); else { const d = Math.floor(y / 10) * 10; push("d" + d, y < 0 ? `${-y} BCE` : d + "s", String(Math.floor(y / 100) * 100), i); } }
+    else {   // decades; the thin early centuries (a few hundred works before 1200) share one section
+      const y = G.year[i];
+      if (y === GL_UNDATED) push("u", "Undated", "?", i);
+      else if (y < 1200) push("e", "Before 1200", "<1200", i);
+      else { const d = Math.floor(y / 10) * 10; push("d" + d, d + "s", String(Math.floor(y / 100) * 100), i); }
+    }
   });
   return secs;
 }

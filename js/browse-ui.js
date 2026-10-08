@@ -76,7 +76,6 @@ function xbHome() {
     <div class="xb-rooms" data-xbrooms></div>
     <div class="xb-views" data-xbviews></div>
     <div class="xb-body" data-xbbody>${xbSkeleton()}</div>
-    <nav class="xb-jump" data-xbjump hidden aria-label="Jump to a section"></nav>
   `, "article xb-screen");
   el.querySelector("[data-back]").onclick = xbBack;
   onKey = e => { if (e.key === "Escape" && !document.querySelector(".sheet")) xbBack(); };
@@ -92,7 +91,7 @@ function xbClick(e) {
   const t = e.target;
   if (t.closest("[data-swatch]")) return;   // js/swatch.js opens the color page
   const gi = t.closest("[data-gi]");
-  if (gi) { XB.y = scrollY; XB.back = true; return galleryPage(+gi.dataset.gi, true, XB.f.hexes[0] || null); }
+  if (gi) { XB.y = xbSY(); XB.back = true; return galleryPage(+gi.dataset.gi, true, XB.f.hexes[0] || null); }
   const x = t.closest("[data-xbx]"); if (x) { e.stopPropagation(); return xbSet(xbWithout(XB.f, x.dataset.xbx)); }
   const fc = t.closest("[data-xbfacet]"); if (fc) return xbFacetSheet(fc.dataset.xbfacet);
   const bub = t.closest("[data-xbhex]"); if (bub) return xbPickColor(bub.dataset.xbhex, bub.dataset.xbname || "");
@@ -109,10 +108,15 @@ function xbClick(e) {
   const only = t.closest("[data-xbonly]"); if (only) return xbOnlySection(only.dataset.xbonly);
   const lo = t.closest("[data-xbloosen]"); if (lo) return xbSet(JSON.parse(lo.dataset.xbloosen));
   const pr = t.closest("[data-xbpainter]"); if (pr) return xbOpenPainter(+pr.dataset.xbpainter);
-  const pm = t.closest("[data-poem]"); if (pm) { POEM_ORIGIN = "explore"; XB.y = scrollY; XB.back = true; return poemPage(pm.dataset.poem); }
+  const pm = t.closest("[data-poem]"); if (pm) { POEM_ORIGIN = "explore"; XB.y = xbSY(); XB.back = true; return poemPage(pm.dataset.poem); }
   if (t.closest("[data-xbretry]")) return xbHome();
   if (t.closest("[data-xbshuffle]")) { XB.seed = (XB.seed * 48271 + 11) % 2147483647 || 7; XB.sort = "shuffle"; XB.view = "grid"; XB.show = {}; buzz(6); return xbRender(false, false, true); }
 }
+
+// The page scrolls either the window or <body> (app.css: html and body both overflow-x:hidden with body at
+// height:100%, which makes body the scroller in Chrome), so every read, write and listener here handles both.
+const xbSY = () => window.scrollY || document.body.scrollTop || 0;
+function xbTo(y) { y = Math.max(0, y); window.scrollTo(0, y); if (document.body.scrollHeight > document.body.clientHeight + 1) document.body.scrollTop = y; }
 
 // ---------- render: everything below the header redraws from XB in one go ----------
 let XB_RES = null;
@@ -121,7 +125,7 @@ function xbRender(toTop, bodyOnly = false, keepScroll = false) {
   const F = XBF, f = XB.f, t0 = performance.now();
   const res = xbQuery(F, f);
   XB_RES = res;
-  const n = res.list.length, y = scrollY;
+  const n = res.list.length, y = xbSY();
   if (!bodyOnly) {
     el.querySelector("[data-xbband]").style.setProperty("--tint", f.hexes.length ? tintFromHex(f.hexes[0]) : "var(--ground)");
     el.querySelector("[data-xbdek]").textContent = f.hexes.length
@@ -145,9 +149,9 @@ function xbRender(toTop, bodyOnly = false, keepScroll = false) {
   else xbGrid(body, F, res);
   XB.ms = Math.round(performance.now() - t0);
   if (document.documentElement.classList.contains("sheet-open")) return;   // a sheet holds the page still; leave the scroll alone
-  if (XB.back) { XB.back = false; const to = XB.y; requestAnimationFrame(() => scrollTo(0, to)); }
-  else if (keepScroll) scrollTo(0, y);
-  else if (toTop) { const fa = el.querySelector("[data-xbfacets]"); const top = fa ? scrollY + fa.getBoundingClientRect().top - 8 : 0; if (scrollY > top) scrollTo(0, top); }
+  if (XB.back) { XB.back = false; const to = XB.y; requestAnimationFrame(() => xbTo(to)); }
+  else if (keepScroll) xbTo(y);
+  else if (toTop) { const fa = el.querySelector("[data-xbfacets]"); const top = fa ? xbSY() + fa.getBoundingClientRect().top - 8 : 0; if (xbSY() > top) xbTo(top); }
 }
 // the query, with L26's paintingsFor() standing in for the six-color coverage when it exists
 function xbQuery(F, f) {
@@ -210,10 +214,10 @@ function xbBarHTML(F, f, n) {
   const act = special ? `<button class="xb-link" data-xbclear>All paintings</button>`
     : chips.length ? (room && room.mine ? `<button class="xb-link" data-xbunsave>Remove this room</button>` : `<button class="xb-link" data-xbsave>Save as a room</button>`) + `<button class="xb-link" data-xbclear>Clear</button>`
     : `<button class="xb-link" data-xbshuffle>Shuffle</button>`;
-  return `${room ? `<p class="xb-roomname">${esc(room.name)}${room.recipe ? ` <em>· our recipe</em>` : ""}</p>` : ""}${crumbs ? `<div class="xb-crumbs">${crumbs}</div>` : ""}<p class="xb-count">${what}<span class="xb-acts">${act}</span></p>`;
+  return `${room && !special ? `<p class="xb-roomname">${esc(room.name)}${room.recipe ? ` <em>· our recipe</em>` : ""}</p>` : ""}${crumbs ? `<div class="xb-crumbs">${crumbs}</div>` : ""}<p class="xb-count">${what}<span class="xb-acts">${act}</span></p>`;
 }
 function xbViewsHTML() {
-  const sort = xbSortNow(), sortName = (XB_SORTS.find(s => s[0] === sort) || ["", ""])[1];
+  const sort = xbSortNow(), sortName = { most: "Most of it", closest: "Closest", date: "Date", painter: "Painter", shuffle: "Shuffle" }[sort] || "";
   return `<div class="xb-seg" role="tablist">${XB_VIEWS.map(([k, t]) => `<button role="tab" aria-selected="${XB.view === k}" class="${XB.view === k ? "on" : ""}" data-xbview="${k}">${t}</button>`).join("")}</div>
     ${XB.view === "grid" ? `<button class="xb-sortbtn" data-xbsort aria-label="Sort: ${esc(sortName)}">${esc(sortName)}${XB_IC_DOWN}</button>` : ""}`;
 }
@@ -266,7 +270,7 @@ function xbLive(full) {
   const sum = el.querySelector("[data-xbsum]"); if (sum) sum.textContent = xbTuneSum(XB.f, n);
   el.querySelector("[data-xbbar]").innerHTML = xbBarHTML(XBF, XB.f, n);
   el.querySelectorAll(".xb-presets [data-xbpreset]").forEach(b => { const p = XB_PRESETS.find(x => x[0] === b.dataset.xbpreset)[2]; b.classList.toggle("on", p.tol === XB.f.tol && p.cover === XB.f.cover && p.coverMax === XB.f.coverMax); });
-  const y = scrollY, body = el.querySelector("[data-xbbody]");
+  const y = xbSY(), body = el.querySelector("[data-xbbody]");
   el.querySelector("[data-xbviews]").innerHTML = n ? xbViewsHTML() : "";
   xbJumpOff();
   if (!n) xbZero(body, XBF, XB.f);
@@ -274,7 +278,7 @@ function xbLive(full) {
   else if (XB.view === "painters") xbPainters(body, XBF, res);
   else if (XB.view === "wall") xbWall(body, XBF, res);
   else xbGrid(body, XBF, res);
-  scrollTo(0, y);
+  xbTo(y);
 }
 // one discrete slider: a track of stops, one knob, a tick at each stop. o: { title, stops, value, text, ends, ramp }
 function xbStepper(el, o, onInput, onCommit) {
@@ -302,8 +306,8 @@ function xbStepper(el, o, onInput, onCommit) {
 
 // ---------- rooms: smart collections as ways in ----------
 const XB_ROOMS = [
-  { id: "learning", name: "Colors you're learning", note: "Paintings that hold the colors in your reviews", dyn: () => { const L = xbLearning(); return L.length ? { hexes: L.slice(0, 12).map(c => c.h), name: "Colors you're learning", tol: 4, cover: 5 } : null; }, sort: "most" },
-  { id: "favorites", name: "In your favorite colors", note: "The colors you saved and made yours", dyn: () => { const L = xbFavorites(); return L.length ? { hexes: L.slice(0, 12).map(c => c.h), name: "Your favorite colors", tol: 4, cover: 5 } : null; }, sort: "most" },
+  { id: "learning", name: "Colors you're learning", note: "Paintings that hold the colors in your reviews", dyn: () => { const L = xbLearning(); return L.length ? { hexes: L.slice(0, 12).map(c => c.h), name: "Colors you're learning", tol: 8, cover: 2 } : null; }, sort: "most" },
+  { id: "favorites", name: "In your favorite colors", note: "The colors you saved and made yours", dyn: () => { const L = xbFavorites(); return L.length ? { hexes: L.slice(0, 12).map(c => c.h), name: "Your favorite colors", tol: 8, cover: 2 } : null; }, sort: "most" },
   { id: "blue1700", name: "Blue before 1700", note: "Blues over a tenth of the canvas, before 1700", f: { hexes: ["#3A5A8C"], name: "Blue", tol: 15, cover: 10, y1: 1699 }, sort: "date" },
   { id: "twins", name: "Twins across time", note: "The same palette, a century or more apart", special: "twins" },
   { id: "mono", name: "Monochrome masterpieces", note: "The fewest effective colors, and muted", f: { size: 0, chroma: 0 }, sort: "date" },
@@ -346,6 +350,7 @@ function xbRooms(host, F) {
       else {
         const rf = r.mine ? { ...xbFresh(), ...r.f, hexes: (r.f.hexes || []).slice() } : xbRoomF(r); if (!rf) return;
         const res = xbRun(F, rf), sorted = xbSort(F, res, rf.hexes.length ? "most" : "date");
+        if (!res.list.length && !r.mine) { const card = im.closest(".xb-room"); if (card) card.remove(); return; }   // a room with nothing in it isn't a way in
         cnt.textContent = xbNum(res.list.length);
         cover = sorted.length ? sorted[Math.min(sorted.length - 1, rf.hexes.length ? 0 : Math.floor(sorted.length / 2))] : -1;
         cols = xbSetColors(F, res.list, 6);
@@ -390,14 +395,39 @@ function xbSetBlock(F, list) {
   const cols = xbSetColors(F, list, 8);
   if (!cols.length) return "";
   XB.setCols = cols;
-  return `<div class="xb-set"><div class="xb-set-strip">${cols.map(c => `<button data-swatch="${c.h}" style="--c:${c.h};flex:${Math.max(.07, c.share).toFixed(3)}" aria-label="${esc(nameOf(c.h).text)}"></button>`).join("")}</div>
+  const tot = cols.reduce((s, c) => s + c.share, 0) || 1;
+  return `<div class="xb-set"><div class="xb-set-strip">${cols.map(c => `<button data-swatch="${c.h}" style="--c:${c.h};flex:${Math.max(.07, c.share / tot).toFixed(3)}" aria-label="${esc(nameOf(c.h).text)}"></button>`).join("")}</div>
     <p class="xb-set-cap">The colors of ${list.length === F.N ? "the whole archive" : `these ${xbPaint(list.length)}`}, pooled and named: ${cols.slice(0, 3).map(c => esc(nameOf(c.h).text.toLowerCase())).join(", ")}…</p><div data-xbacts></div></div>`;
 }
 function xbWireSet(host) {
   const box = host.querySelector("[data-xbacts]"); if (!box || typeof csActions !== "function") return;
   const F = XBF, title = xbChips(F, XB.f).map(c => c.text).slice(0, 3).join(", ") || "Paintings";
   const set = () => colorSet({ kind: "search", id: xbChips(F, XB.f).map(c => c.dim + ":" + c.text).join("|"), title, colors: (XB.setCols || []).map(c => ({ h: c.h, share: c.share })), src: "explore/art" });
-  box.appendChild(csActions(set, { only: ["map", "learn", "play", "keep", "share"], back: () => { XB.back = false; xbHome(); } }));
+  box.appendChild(csActions(set, { only: ["map", "learn", "play"], back: () => { XB.back = false; xbHome(); } }));
+}
+
+// Lazy work for elements near the screen. A scroll listener, not IntersectionObserver: body{overflow-x:hidden}
+// makes the body a clipping box, so an observer's rootMargin never reaches below the fold (js/gallery.js glGrid
+// works the same way). els are in document order, so the walk stops at the first one past the screen.
+function xbLazy(els, fn, margin) {
+  let pending = els.slice(), raf = 0;
+  const check = () => {
+    raf = 0;
+    if (!pending.length || !pending[0].isConnected) return off();
+    const lo = -margin, hi = innerHeight + margin, keep = [];
+    for (let k = 0; k < pending.length; k++) {
+      const el = pending[k], r = el.getBoundingClientRect();
+      if (r.top > hi) { keep.push(...pending.slice(k)); break; }
+      if (r.bottom >= lo) fn(el); else keep.push(el);
+    }
+    pending = keep;
+    if (!pending.length) off();
+  };
+  const on = () => { if (!raf) raf = requestAnimationFrame(check); };
+  const off = () => { removeEventListener("scroll", on, true); removeEventListener("resize", on); cancelAnimationFrame(raf); };
+  addEventListener("scroll", on, { passive: true, capture: true }); addEventListener("resize", on);
+  cleanup.push(off);
+  check();
 }
 
 // ---------- Grid: sticky sections, a jump bar, paged sections ----------
@@ -429,7 +459,7 @@ function xbGrid(body, F, res) {
     return `<section class="xb-sec" data-xbsec="${k}">${sectional ? `<h3 class="xb-sec-h"><b>${esc(s.label)}</b><span>${xbNum(s.items.length)}</span></h3>` : ""}
       <div class="xb-tiles" data-xbtiles="${k}" style="--cols:${cols};height:${h.toFixed(1)}px"></div>
       ${left > 0 || (sectional && s.items.length > 24 && sort !== "painter" || sectional && sort === "painter" && s.key[0] === "a" && s.items.length > 24) ? `<div class="xb-sec-more">
-        ${left > 0 ? `<button class="xb-link" data-xbmore="${esc(s.key)}" data-base="${base}">Show ${Math.min(60, left)} more</button><span class="xb-left">${xbNum(left)} more here</span>` : ""}
+        ${left > 0 ? `<button class="xb-link" data-xbmore="${esc(s.key)}" data-base="${base}">Show ${Math.min(60, left)} more</button>${left > 60 ? `<span class="xb-left">${xbNum(left)} left</span>` : ""}` : ""}
         ${sectional && s.items.length > 24 && (sort === "date" || sort === "painter" && s.key[0] === "a") ? `<button class="xb-link" data-xbonly="${esc(s.key)}">Only ${esc(s.label)}</button>` : ""}</div>` : ""}
     </section>`;
   };
@@ -446,11 +476,7 @@ function xbGrid(body, F, res) {
     xbFillTiles(el);
   };
   const tilesEls = [...body.querySelectorAll("[data-xbtiles]")];
-  if ("IntersectionObserver" in window) {
-    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { io.unobserve(e.target); fill(e.target); } }), { rootMargin: "900px 0px" });
-    tilesEls.forEach(t => io.observe(t));
-    cleanup.push(() => io.disconnect());
-  } else tilesEls.forEach(fill);
+  xbLazy(tilesEls, fill, 900);
   xbJumpBar(body, secs);
   xbPoemsRail(body.querySelector("[data-xbpoems]"));
 }
@@ -463,12 +489,14 @@ function xbOnlySection(key) {
 }
 // the jump bar: labels down the right edge, iOS-style; drag along it to fly through the sections
 function xbJumpBar(body, secs) {
-  const nav = document.querySelector("[data-xbjump]"); if (!nav) return;
+  // fixed to the viewport, so it lives on body: .screen animates a transform, which would trap a fixed child
+  let nav = document.querySelector("body > [data-xbjump]");
+  if (!nav) { nav = document.createElement("nav"); nav.className = "xb-jump"; nav.dataset.xbjump = ""; nav.setAttribute("aria-label", "Jump to a section"); nav.hidden = true; document.body.appendChild(nav); cleanup.push(() => nav.remove()); }
   const targets = xbJumpTargets(secs);
   if (secs.length < 5 || targets.length < 3) { nav.hidden = true; return; }
   // more than ~22 labels won't fit: keep every nth label, but every label still maps to its own section
   const step = Math.ceil(targets.length / 22), shown = targets.filter((_, k) => k % step === 0);
-  nav.innerHTML = `${shown.map(t => `<span data-sec="${t.sec}">${esc(t.label.length > 4 ? t.label.slice(0, 2) : t.label)}</span>`).join("")}<b class="xb-jump-bub" hidden></b>`;
+  nav.innerHTML = `${shown.map(t => `<span data-sec="${t.sec}">${esc(t.label.length > 5 ? t.label.slice(0, 3) : t.label)}</span>`).join("")}<b class="xb-jump-bub" hidden></b>`;
   const bub = nav.querySelector(".xb-jump-bub");
   const go = (clientY) => {
     const r = nav.getBoundingClientRect(), p = clamp((clientY - r.top) / r.height, 0, .9999), t = targets[Math.floor(p * targets.length)];
@@ -476,7 +504,7 @@ function xbJumpBar(body, secs) {
     nav._at = t.sec;
     const el = body.querySelector(`[data-xbsec="${t.sec}"]`); if (!el) return;
     const stick = parseFloat(getComputedStyle(document.querySelector(".xb-screen")).getPropertyValue("--xbstick")) || 0;
-    scrollTo(0, scrollY + el.getBoundingClientRect().top - stick + 1);
+    xbTo(xbSY() + el.getBoundingClientRect().top - stick + 1);
     bub.hidden = false; bub.textContent = secs[t.sec].label; bub.style.top = (clientY - r.top) + "px";
     buzz(4);
   };
@@ -486,8 +514,8 @@ function xbJumpBar(body, secs) {
   let raf = 0;
   const vis = () => { raf = 0; if (!body.isConnected) return; const r = body.getBoundingClientRect(); nav.hidden = !(r.top < innerHeight * .5 && r.bottom > innerHeight * .6); };
   const on = () => { if (!raf) raf = requestAnimationFrame(vis); };
-  addEventListener("scroll", on, { passive: true });
-  XB_JUMP = () => { removeEventListener("scroll", on); cancelAnimationFrame(raf); nav.hidden = true; nav.onpointerdown = null; };
+  addEventListener("scroll", on, { passive: true, capture: true });
+  XB_JUMP = () => { removeEventListener("scroll", on, true); cancelAnimationFrame(raf); nav.hidden = true; nav.onpointerdown = null; };
   cleanup.push(() => { if (XB_JUMP) XB_JUMP(); });
   vis();
 }
@@ -551,7 +579,7 @@ function xbRiver(body, F, res) {
   body.innerHTML = xbSetBlock(F, list) + `
     <div class="xb-river" data-xbriver>
       <svg viewBox="0 0 ${W} ${H + 22}" width="${W}" height="${H + 22}" aria-label="Color families by decade, ${XB_DEC0 + d0 * 10}s to ${XB_DEC0 + d1 * 10}s">
-        <defs>${defs}<pattern id="xbhatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="5" height="5" fill="rgba(14,13,11,.42)"/><line x1="0" y1="0" x2="0" y2="5" stroke="rgba(236,232,223,.18)" stroke-width="1.2"/></pattern></defs>
+        <defs>${defs}<pattern id="xbhatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="5" height="5" fill="rgba(14,13,11,.18)"/><line x1="0" y1="0" x2="0" y2="5" stroke="rgba(236,232,223,.12)" stroke-width="1.2"/></pattern></defs>
         ${paths}${hatch}
         ${ticks.filter((_, k) => k % tickStep === 0).map(d => `<text x="${x(d).toFixed(1)}" y="${H + 16}" text-anchor="middle">${XB_DEC0 + d * 10}</text>`).join("")}
         <line class="xb-rv-line" data-xbrvline x1="0" x2="0" y1="0" y2="${H}"/>
@@ -568,11 +596,13 @@ function xbRiver(body, F, res) {
     sel = d; XB.riverSel = d;
     line.setAttribute("x1", x(d)); line.setAttribute("x2", x(d)); knob.style.left = x(d) + "px";
     const yr = XB_DEC0 + d * 10, items = xbSort(F, { list: list.filter(i => F.dec[i] === d), col: res.col }, res.col ? "most" : "date");
-    const top = (arr, names) => { const c = new Map(); items.forEach(i => { const v = arr[i]; c.set(v, (c.get(v) || 0) + 1); }); const [k, v] = [...c.entries()].sort((a, b) => b[1] - a[1])[0] || [0, 0]; return k && v ? `${esc(names(k))} ${Math.round(v / items.length * 100)}%` : ""; };
-    const mk = [top(F.country, k => F.meta.countries[k - 1]), top(G.mus, k => G.src[k].short)].filter(Boolean).join(", ");
+    // the decade's makeup, so collecting bias stays visible: its biggest country and its biggest museum
+    const top = (arr, skip0) => { const c = new Map(); items.forEach(i => { const v = arr[i]; if (!(skip0 && !v)) c.set(v, (c.get(v) || 0) + 1); }); const e = [...c.entries()].sort((a, b) => b[1] - a[1])[0]; return e ? { k: e[0], pct: Math.round(e[1] / items.length * 100) } : null; };
+    const tc = top(F.country, true), tm = top(G.mus, false);
+    const mk = items.length ? [tc ? `${tc.pct}% from ${esc(F.meta.countries[tc.k - 1])}` : "", tm ? `${tm.pct}% from ${esc(G.src[tm.k].name)}` : ""].filter(Boolean).join("; ") : "";
     const dist = items.length ? xbSetColors(F, items, 5, base) : [];
     panel.innerHTML = `<div class="xb-rv-head"><b>${yr}s</b><span>${xbPaint(items.length)}</span></div>
-      ${mk ? `<p class="xb-rv-mk">Mostly ${mk}${items.length < 25 ? ". A thin decade here, so read it lightly." : "."}</p>` : ""}
+      ${mk ? `<p class="xb-rv-mk">${mk.charAt(0).toUpperCase() + mk.slice(1)}.${items.length < 25 ? ` Only ${items.length} here, so read this decade lightly.` : ""}</p>` : ""}
       ${dist.length ? `<p class="xb-rv-sub">Colors this decade holds more of than the rest:</p><div class="xb-rv-cols">${dist.map(c => `<button class="xb-chip" data-swatch="${c.h}"><i style="--c:${c.h}"></i><span>${esc(nameOf(c.h).text)}</span><em class="mono">${c.lift >= 10 ? "10×+" : c.lift.toFixed(1) + "×"}</em></button>`).join("")}</div>` : `<p class="xb-rv-sub">No color stands out from the rest here.</p>`}
       <div class="xb-rail">${items.slice(0, 12).map(i => xbTileHTML(i, F, res)).join("")}</div>
       ${items.length > 1 ? `<button class="btn ghost" data-xbonly="d${yr}">Only the ${yr}s, in the grid ${ICON.arrow}</button>` : ""}`;
@@ -618,14 +648,12 @@ function xbPainters(body, F, res) {
       pal.forEach(p => { const hh = p.share / tot * cv.height; cx.fillStyle = p.h; cx.fillRect(Math.floor(k * cw), Math.floor(y), Math.ceil(cw) - (cols > 40 ? 0 : 1), Math.ceil(hh)); y += hh; });
     }
   };
-  const io = "IntersectionObserver" in window ? new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { io.unobserve(e.target); draw(e.target); } }), { rootMargin: "300px 0px" }) : null;
-  body.querySelectorAll("[data-xbstrip]").forEach(cv => io ? io.observe(cv) : draw(cv));
-  if (io) cleanup.push(() => io.disconnect());
+  xbLazy([...body.querySelectorAll("[data-xbstrip]")], draw, 400);
 }
 // a painter: their page (L11's painter pages) when it exists, else this archive filtered to them
 function xbOpenPainter(a) {
   const F = XBF, m = F && F.meta.artists[a - 1]; if (!m) return;
-  if (m[3] && typeof painterPage === "function") { XB.y = scrollY; XB.back = true; return painterPage(m[1]); }
+  if (m[3] && typeof painterPage === "function") { XB.y = xbSY(); XB.back = true; return painterPage(m[1]); }
   const f = xbCopy(XB.f); f.painter = a;
   xbSet(f, { view: "grid", sort: "date" });
 }
@@ -659,21 +687,19 @@ function xbWall(body, F, res) {
   };
   const chunks = Math.ceil(rows / CH);
   wall.innerHTML = Array.from({ length: chunks }, (_, k) => `<canvas data-r0="${k * CH}" style="top:${(k * CH * cell).toFixed(1)}px"></canvas>`).join("");
-  const io = "IntersectionObserver" in window ? new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { io.unobserve(e.target); drawChunk(e.target, +e.target.dataset.r0); } }), { rootMargin: "600px 0px" }) : null;
-  wall.querySelectorAll("canvas").forEach(cv => io ? io.observe(cv) : drawChunk(cv, +cv.dataset.r0));
-  if (io) cleanup.push(() => io.disconnect());
+  xbLazy([...wall.querySelectorAll("canvas")], cv => drawChunk(cv, +cv.dataset.r0), 700);
   wall.onclick = e => {
     const r = wall.getBoundingClientRect(), c = Math.floor((e.clientX - r.left) / cell), rr = Math.floor((e.clientY - r.top) / cell), q = rr * cols + c;
     if (c < 0 || c >= cols || q < 0 || q >= N) return;
-    if (close) { XB.y = scrollY; XB.back = true; buzz(6); return galleryPage(order[q], true, XB.f.hexes[0] || null); }
+    if (close) { XB.y = xbSY(); XB.back = true; buzz(6); return galleryPage(order[q], true, XB.f.hexes[0] || null); }
     XB.wall = { level: 1, at: q }; buzz(6);
     xbRender(false, true, true);
     const w2 = document.querySelector("[data-xbwall]"); if (!w2) return;
-    const cols2 = W >= 470 ? 10 : 8, cell2 = W / cols2, y = w2.getBoundingClientRect().top + scrollY + Math.floor(q / cols2) * cell2 - innerHeight / 2;
-    scrollTo(0, Math.max(0, y));
+    const cols2 = W >= 470 ? 10 : 8, cell2 = W / cols2, y = w2.getBoundingClientRect().top + xbSY() + Math.floor(q / cols2) * cell2 - innerHeight / 2;
+    xbTo(Math.max(0, y));
   };
   const out = body.querySelector("[data-xbwallout]");
-  if (out) out.onclick = () => { const at = XB.wall.at; XB.wall = { level: 0, at: -1 }; buzz(5); xbRender(false, true, true); const w2 = document.querySelector("[data-xbwall]"); if (w2 && at >= 0) { const c2 = Math.max(24, Math.floor(W / (N > 6000 ? 6 : N > 1500 ? 9 : 14))); scrollTo(0, Math.max(0, w2.getBoundingClientRect().top + scrollY + Math.floor(at / c2) * (W / c2) - innerHeight / 2)); } };
+  if (out) out.onclick = () => { const at = XB.wall.at; XB.wall = { level: 0, at: -1 }; buzz(5); xbRender(false, true, true); const w2 = document.querySelector("[data-xbwall]"); if (w2 && at >= 0) { const c2 = Math.max(24, Math.floor(W / (N > 6000 ? 6 : N > 1500 ? 9 : 14))); xbTo(Math.max(0, w2.getBoundingClientRect().top + xbSY() + Math.floor(at / c2) * (W / c2) - innerHeight / 2)); } };
 }
 
 // ---------- the special rooms ----------
@@ -763,7 +789,6 @@ function xbWhenBox(box, F, f, c, redraw) {
   let a = f.y0 != null ? clamp(Math.floor((f.y0 - XB_DEC0) / 10), lo, hi) : lo, b = f.y1 != null ? clamp(Math.floor((f.y1 - XB_DEC0) / 10), lo, hi) : hi;
   const cents = []; for (let d = lo; d <= hi; d++) if ((XB_DEC0 + d * 10) % 100 === 0 || d === lo) cents.push(Math.floor((XB_DEC0 + d * 10) / 100) * 100);
   const uniq = [...new Set(cents)];
-  const sel = () => { let s = 0; for (let d = a; d <= b; d++) s += c.when[d]; return s; };
   box.innerHTML = `<p class="xb-when-v" data-xbwv></p>
     <div class="xb-hist" data-xbhist>${Array.from({ length: span }, (_, k) => `<i style="height:${Math.max(2, Math.sqrt(c.when[lo + k] / max) * 100).toFixed(1)}%"></i>`).join("")}<span class="xb-hk" data-k="0"></span><span class="xb-hk" data-k="1"></span></div>
     <div class="xb-hist-ax"><span>${XB_DEC0 + lo * 10}</span><span>${XB_DEC0 + hi * 10 + 9}</span></div>
@@ -773,7 +798,7 @@ function xbWhenBox(box, F, f, c, redraw) {
   const place = () => {
     ks[0].style.left = (a / span * 100) + "%"; ks[1].style.left = ((b + 1) / span * 100) + "%";
     bars.forEach((el, k) => el.classList.toggle("in", lo + k >= a && lo + k <= b));
-    v.innerHTML = `<b>${XB_DEC0 + a * 10}–${XB_DEC0 + b * 10 + 9}</b><span>${xbPaint(sel())}</span>`;
+    v.innerHTML = `<b>${XB_DEC0 + a * 10}–${XB_DEC0 + b * 10 + 9}</b>`;
   };
   const commit = () => {
     const g = xbCopy(XB.f);
@@ -897,7 +922,7 @@ function xbDial(o = {}) {
     if (IX) return IX;
     const rows = [], seen = new Set(), add = (n, h, note) => { const k = n.toLowerCase() + h; if (!seen.has(k) && /^#[0-9a-f]{6}$/i.test(h)) { seen.add(k); rows.push({ n, h: h.toUpperCase(), note, s: n.normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase() }); } };
     EVERY().forEach(c => add(c.n, c.h, "ColorHub"));
-    (CORE_NAMES || []).forEach(e => { add(e.n, e.h, ""); (e.also || []).forEach(a => add(a, e.h, `also called, for ${e.n}`)); });
+    (CORE_NAMES || []).forEach(e => { add(e.n, e.h, ""); (e.also || []).forEach(a => add(a, e.h, `another name for ${e.n}`)); });
     // the 2,700-name library, through js/colorsets.js's csItems() (the naming gate keeps the raw list in naming/graph)
     (typeof csItems === "function" ? csItems() : []).forEach(e => { if (!e.c) add(e.n, e.h, ((e.lib && e.lib.src) || []).filter(s => s !== "app").map(s => (typeof SRC_LABEL !== "undefined" && SRC_LABEL[s]) || s).slice(0, 1).join("")); });
     return (IX = rows);
