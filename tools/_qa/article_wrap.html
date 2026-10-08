@@ -1,0 +1,53 @@
+<!doctype html>
+<!-- QA wrapper for the article reader (lane L8): the app in a 375x812 iframe (headless Chrome will not go below ~500px),
+     pointed at the fixtures, then driven into one scene. Serve the repo (node tools/serve.js <port>), then:
+       chrome --headless=new --window-size=375,812 --force-device-scale-factor=2 --virtual-time-budget=9000 \
+              --screenshot=out.png "http://localhost:<port>/tools/_qa/article_wrap.html?scene=top&slug=cobalt"
+     scenes: top toc fn myth books tree q duel you hub which   (slug= picks the article; learner=1 stubs a Learner Model) -->
+<meta charset="utf-8">
+<style>html,body{margin:0;background:#000;overflow:hidden}iframe{border:0;display:block;width:375px;height:812px}</style>
+<iframe id="f"></iframe>
+<script>
+const q = new URLSearchParams(location.search), scene = q.get("scene") || "top", slug = q.get("slug") || "cobalt";
+const f = document.getElementById("f");
+f.src = "../../index.html?qa=" + Date.now();
+const wait = ms => new Promise(r => setTimeout(r, ms));
+const werrs = []; addEventListener("unhandledrejection", e => werrs.push(String(e.reason))); addEventListener("error", e => werrs.push(String(e.message)));
+f.onload = async () => {
+  const w = f.contentWindow, d = () => w.document, $ = s => d().querySelector(s), $$ = s => [...d().querySelectorAll(s)];
+  w.addEventListener("error", e => (w.__errs = w.__errs || []).push(String(e.message)));
+  w.addEventListener("unhandledrejection", e => (w.__errs = w.__errs || []).push("rej " + String(e.reason)));
+  w.AR_CFG = { articles: "tools/fixtures/articles/", hubs: "tools/fixtures/hubs.json" };
+  if (q.get("learner")) {
+    w.lmPairs = s => s === "cobalt" ? [{ a: "cobalt", b: "navy", n: 4 }] : s === "navy" ? [{ a: "cobalt", b: "navy", n: 4 }] : [];
+    w.lmStatus = s => ({ cerulean: "yours", azure: "met", blue: "yours", navy: "met" })[s] || "unmet";
+    w.lmLog = r => { (w.__lmlog = w.__lmlog || []).push(r); };
+  }
+  await wait(600);
+  w.location.hash = scene === "hub" ? "#/hub/pigments-that-changed-painting" : scene === "which" ? "#/which/blue" : "#/color/" + slug;
+  await wait(2200);
+  // the page may scroll on the window or on <body> (body is height:100% with overflow-x:hidden): move whichever one is the scroller
+  const scroller = () => { const b = d().body, se = d().scrollingElement; return b.scrollHeight > b.clientHeight + 4 && getComputedStyle(b).overflowY !== "visible" ? b : se; };
+  const to = el => { if (!el) throw new Error("scene target missing"); const s = scroller(); s.scrollTop = el.getBoundingClientRect().top + s.scrollTop - (el.matches("h2,.ar-sec") ? 70 : 90); };
+  if (q.get("dbg")) { await wait(300); }
+  try {
+  if (scene === "top") to($(".ar-kind"));
+  if (scene === "toc") { to($$(".ar-sec")[2]); await wait(400); $("[data-ar-bar]").click(); }
+  if (scene === "fn") { to($(".ar-lede")); await wait(300); $(".ar-fn").click(); }
+  if (scene === "myth") to($(".ar-myth"));
+  if (scene === "books") to($(".ar-books"));
+  if (scene === "tree") to($(".ar-fam"));
+  if (scene === "q") { const qs = $(".ar-qs"); $$(".ar-q")[0].querySelectorAll(".ar-choice")[1].click(); $$(".ar-q")[1].querySelectorAll(".ar-choice")[2].click(); to(qs); }
+  if (scene === "duel") { const b = $('[data-ar-act="duel"]'); to(b.closest(".ar-sec")); await wait(300); b.click(); await wait(300); scroller().scrollTop += 260; const t = $$(".ar-dtile button"); if (q.get("answer")) t[0].click(); }
+  if (scene === "you") { const y = $(".ar-you"); to(y); await wait(200); const b = $('[data-ar-act="duel3"]'); if (b) b.click(); to(y); }
+  } catch (e) { werrs.push("scene: " + e.message); }
+  document.title = "ready";
+  // ?dbg=1 + --dump-dom prints what the app saw (errors, slot size, scroll) in <body data-dbg>
+  if (q.get("dbg")) {
+    const o = document.createElement("pre");
+    o.style.cssText = "position:fixed;left:0;right:0;bottom:0;margin:0;padding:6px;background:#fff;color:#000;font:11px/1.3 monospace;white-space:pre-wrap;z-index:9";
+    o.textContent = JSON.stringify({ errs: (w.__errs || []).concat(werrs), slot: ($(".ar-slot") || {}).innerHTML ? $(".ar-slot").innerHTML.length : -1, y: w.scrollY, by: d().body.scrollTop, bsh: d().body.scrollHeight, bch: d().body.clientHeight, ov: getComputedStyle(d().body).overflowY, h: w.location.hash });
+    document.body.appendChild(o);
+  }
+};
+</script>

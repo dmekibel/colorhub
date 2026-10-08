@@ -476,6 +476,7 @@ function xStep(prev) {
   if (prev === "contrast") return LAB.contrast(LAB_CONTRAST_STATE && LAB_CONTRAST_STATE.set, LAB_CONTRAST_STATE && LAB_CONTRAST_STATE.slot, false);
   if (prev.startsWith("pal:")) return openSavedPalette(prev.slice(4), false);   // a saved palette (js/studio.js)
   if (prev.startsWith("g:")) return galleryPage(+prev.slice(2), false);   // a gallery painting (js/gallery.js)
+  if (prev.startsWith("ar:") && typeof arStep === "function") return arStep(prev.slice(3));   // a hub or "which" page (js/article.js)
   if (prev.startsWith("ph:")) return photoPage(prev.slice(3), false);   // a saved photo (js/photos.js)
   if (prev.startsWith("poem:")) return poemPage(prev.slice(5), { back: true });   // a poem (js/poems.js)
   // a library color's own page, not one of the 101 (js/names.js): it isn't a graph node, so look it up by name
@@ -599,6 +600,7 @@ function colorPage(n, tapped) {
       </div>
       <p class="cp-diff">${esc(stripDiff)}</p>
     </section>` : ""}
+    <div class="ar-slot" data-ar-slot hidden></div>
     ${c.o && !(w && w.facets.some(f => f.k === "language")) ? `<p class="lead">${esc(c.o)}</p>` : ""}
     ${figHTML(c.n)}
     <section class="gl-in" data-glin></section>
@@ -625,6 +627,7 @@ function colorPage(n, tapped) {
   `, "article cp-page");
   el.querySelector("[data-back]").onclick = xBack;
   wireLinks(el); wireSections(el);
+  if (typeof articleRender === "function") articleRender(routeSlug(c.n), el.querySelector("[data-ar-slot]"), { n: c.n, h: c.h });   // js/article.js (lane L8): draws nothing when data/articles/<slug>.json is missing
   onKey = e => { if (e.key === "Escape") xBack(); };
   const li = el.querySelector("[data-learnit]"); if (li) li.onclick = () => hmLearnIt(c);
   el.querySelector("[data-save]").onclick = e => { const on = toggleSave(n.id); e.currentTarget.textContent = on ? "♥" : "♡"; e.currentTarget.classList.toggle("saved", on); };

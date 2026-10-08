@@ -1,0 +1,175 @@
+/* The article reader (js/article.js, lane L8). DESIGN-SYSTEM.md §4 type: the serif carries the hierarchy (lede 28,
+   section 32), Geist is the long text (16/1.65), mono only on numbers. No boxes: hairlines and whitespace; the one
+   deliberate card is the Myth callout. Controls are opaque. Everything is scoped under .ar / .ar-* so nothing else
+   changes. Loaded after colorpage.css. */
+:root{
+  --ar-body:#D9D4C8;        /* long text, a notch under --ink (still 12:1 on the ground) */
+  --ar-hex-w:76px; --ar-hex-h:88px;
+  --ar-clip:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);
+}
+.ar-slot{display:block}
+.ar-slot[hidden]{display:none}
+
+.ar{margin-top:34px;padding-bottom:8px}
+.ar-kind{font:italic 400 16px/1.3 var(--serif);color:var(--soft)}
+.ar-lede{font:400 28px/1.2 var(--serif);letter-spacing:-.015em;color:var(--paper);margin-top:12px;text-wrap:pretty}
+.ar-draft{font:italic 400 15px/1.4 var(--serif);color:var(--soft);margin-top:14px}
+
+/* ---------- origin facts + also called ---------- */
+.ar-facts{margin:22px 0 0;border-top:1px solid var(--rule)}
+.ar-facts>div{display:grid;grid-template-columns:104px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--rule)}
+.ar-facts dt{font:italic 400 16px/1.35 var(--serif);color:var(--soft)}
+.ar-facts dd{margin:0;font:400 15px/1.5 var(--sans);color:var(--ar-body)}
+.ar-aka{font:italic 400 17px/1.35 var(--serif);color:var(--soft);margin-top:14px}
+
+/* ---------- the sticky contents bar: one opaque line that stays while you read ---------- */
+.ar-bar{position:sticky;top:var(--top);z-index:5;display:flex;align-items:center;gap:12px;width:100%;min-height:48px;margin:26px 0 0;padding:0 2px;background:var(--ground);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);text-align:left;overflow:hidden}
+.ar-bar-l{font:400 18px/1 var(--serif);flex:none}
+.ar-bar-c{flex:1;min-width:0;font:italic 400 17px/1 var(--serif);color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ar-bar-n{flex:none;font-size:12px;color:var(--soft)}
+.ar-bar::after{content:"";width:9px;height:9px;flex:none;border-right:1px solid var(--soft);border-bottom:1px solid var(--soft);transform:rotate(45deg) translate(-2px,-2px)}
+.ar-bar-p{position:absolute;left:0;bottom:0;height:2px;width:100%;background:var(--ink);transform-origin:0 50%;transform:scaleX(0);opacity:.7}
+
+/* ---------- reading ---------- */
+.ar-sec{padding-top:6px;scroll-margin-top:64px}
+.ar-sec h2,.ar-qs h2,.ar-notes h2,.ar-fam h2{font:400 32px/1.04 var(--serif);letter-spacing:-.02em;margin:46px 0 16px;text-wrap:balance}
+.ar-sec>p,.ar-hubi>p{font:400 16px/1.66 var(--sans);color:var(--ar-body);margin:0 0 1.05em;text-wrap:pretty}
+.ar-sec>p:last-of-type{margin-bottom:0}
+.ar-sec em,.ar-hubi em{font-family:var(--serif);font-style:italic;font-size:1.08em;letter-spacing:0}
+.ar-sec strong{font-weight:600;color:var(--ink)}
+
+/* footnote refs: small mono numbers with a 44px-ish touch area that doesn't push the line apart */
+.ar-fnw{font-size:0;line-height:0;vertical-align:baseline;white-space:nowrap}
+.ar-fn{position:relative;display:inline-block;min-width:18px;margin:0 1px;padding:0 3px;vertical-align:super;font:500 11px/1 var(--mono);color:var(--ink);background:var(--surface-3);border-radius:var(--r-1);height:16px;text-align:center}
+.ar-fn::after{content:"";position:absolute;inset:-14px -6px}
+.ar-fn:active{background:var(--ink);color:var(--ground)}
+
+/* a [[link]]: a small swatch and the name, one tap opens that color */
+.ar-link{display:inline;font:inherit;color:var(--ink);text-decoration:underline;text-decoration-color:rgba(236,232,223,.35);text-decoration-thickness:1px;text-underline-offset:3px;white-space:normal;padding:2px 0}
+.ar-link i{display:inline-block;width:.72em;height:.72em;margin:0 .32em 0 .02em;border-radius:2px;background:var(--c);vertical-align:-.03em;box-shadow:0 0 0 1px rgba(255,255,255,.12)}
+.ar-x{text-decoration:none;color:var(--ar-body)}
+.ar-link:active{opacity:.7}
+
+/* ---------- callouts ---------- */
+.ar-call{margin:24px 0}
+.ar-tag{font:italic 400 18px/1.2 var(--serif);color:var(--ink);margin:0 0 6px}
+.ar-books{padding:2px 0 2px 16px;border-left:2px solid var(--rule-strong)}
+.ar-books>p:not(.ar-tag){font:400 15px/1.6 var(--sans);color:var(--ar-body);margin:0;text-wrap:pretty}
+.ar-myth{padding:18px 18px 20px;background:var(--surface-1);border-radius:var(--r-2);border:1px solid var(--rule)}
+.ar-myth .ar-tag{color:var(--soft)}
+.ar-myth p{margin:0}
+.ar-say{font:400 17px/1.5 var(--serif);color:var(--soft);text-wrap:pretty}
+.ar-say em,.ar-rec em{display:block;font:italic 400 15px/1.2 var(--serif);color:var(--faint);margin-bottom:3px;letter-spacing:0}
+.ar-rec{font:400 16px/1.6 var(--sans);color:var(--ink);margin-top:14px!important;padding-top:14px;border-top:1px solid var(--rule);text-wrap:pretty}
+.ar-rec em{color:var(--soft)}
+
+/* ---------- actions next to their facts ---------- */
+.ar-acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.ar-act{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 18px 0 20px;border:1px solid var(--rule-strong);border-radius:var(--r-pill);font:italic 400 18px/1 var(--serif);color:var(--ink);background:none}
+.ar-act svg{flex:none;opacity:.7}
+.ar-act:active{background:var(--ink);color:var(--ground)}
+.ar-slotpanel{margin-top:14px}
+
+/* the inline duel: judged swatches sit on booth grey with 16px of grey around, feedback is a ring outside */
+.ar-duel{background:var(--booth);color:var(--b-ink);padding:18px 16px 14px;border-radius:var(--r-2)}
+.ar-dq{font:400 24px/1.1 var(--serif);letter-spacing:-.01em}
+.ar-dq b{font-weight:400;font-style:italic}
+.ar-dt{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.ar-dtile{display:flex;flex-direction:column;gap:8px}
+.ar-dtile button{display:block;width:100%;height:104px;background:var(--c);border-radius:var(--r-1);outline:3px solid transparent;outline-offset:3px}
+.ar-dtile button.ok{outline-color:var(--good)}
+.ar-dtile button.no{outline-color:var(--bad)}
+.ar-dn{font:400 17px/1.1 var(--serif);text-align:center;min-height:19px;color:var(--b-ink)}
+.ar-df{font:400 14px/1.45 var(--sans);color:var(--b-soft);margin-top:12px;min-height:20px}
+.ar-dfoot{display:flex;align-items:center;gap:14px;margin-top:10px;min-height:44px}
+.ar-dcount{font-size:12px;color:var(--b-soft);margin-right:auto}
+.ar-dnext{min-height:44px;padding:0 22px;border-radius:var(--r-pill);background:var(--paper);color:var(--paper-ink);font:400 18px/1 var(--serif)}
+.ar-dlink{font:italic 400 17px/1 var(--serif);color:var(--b-ink);text-decoration:underline;text-underline-offset:3px;min-height:44px}
+
+/* ---------- family: the honeycomb strip, disambiguation ---------- */
+.ar-fam h2{margin-top:50px}
+.ar-tree{display:flex;flex-direction:column;align-items:center;margin:8px 0 0}
+.ar-trow{display:flex;justify-content:center;gap:3px;margin-top:calc(var(--ar-hex-h) * -.25 + 2px)}
+.ar-trow:first-child{margin-top:0}
+.ar-trow.shift-r{transform:translateX(calc(var(--ar-hex-w) / 2 + 1px))}
+.ar-trow.shift-l{transform:translateX(calc(var(--ar-hex-w) / -2 - 1px))}
+.ar-hex{position:relative;flex:none;width:var(--ar-hex-w);height:var(--ar-hex-h);clip-path:var(--ar-clip);background:var(--c);display:block;transition:transform .2s var(--spring)}
+.ar-hex>span{position:absolute;inset:0;clip-path:var(--ar-clip);background:var(--c);display:grid;place-items:center;padding:0 10px}
+.ar-hex b{font:400 13px/1.05 var(--serif);text-align:center;text-wrap:balance;color:#fff;overflow-wrap:anywhere}
+.ar-hex[data-ink="dark"] b{color:#141311}
+.ar-hex[data-know="met"]{background:var(--ink)}
+.ar-hex[data-know="met"]>span{inset:3px}
+.ar-hex[data-know="unmet"]{opacity:.5}
+.ar-hex.self{background:var(--paper)}
+.ar-hex.self>span{inset:4px}
+.ar-hex:not(.self):active{transform:scale(.94)}
+.ar-tnote{font:italic 400 15px/1.4 var(--serif);color:var(--soft);margin-top:14px;text-wrap:pretty}
+.ar-h3{font:400 22px/1.12 var(--serif);letter-spacing:-.01em;margin:34px 0 4px}
+.ar-rows{display:flex;flex-direction:column}
+.ar-row{display:grid;grid-template-columns:30px 1fr;column-gap:12px;align-items:center;width:100%;text-align:left;padding:12px 0;border-bottom:1px solid var(--rule);min-height:56px}
+.ar-row i{grid-row:1/3;width:30px;height:30px;border-radius:var(--r-1);background:var(--c)}
+.ar-row b{font:400 20px/1.05 var(--serif)}
+.ar-row span{grid-column:2;font:400 13px/1.4 var(--sans);color:var(--soft);margin-top:2px}
+.ar-row:not(:has(span)) i{grid-row:1}
+.ar-more{margin-top:14px}
+.ar-more a{font:italic 400 17px/1 var(--serif);color:var(--soft);text-decoration:underline;text-decoration-color:rgba(236,232,223,.3);text-underline-offset:4px;padding:10px 0;display:inline-block}
+
+/* ---------- you and this color ---------- */
+.ar-you{margin-top:44px;padding:18px 0 4px;border-top:1px solid var(--rule-strong)}
+.ar-you-line{font:400 22px/1.22 var(--serif);letter-spacing:-.01em;margin-bottom:16px;text-wrap:pretty}
+.ar-you-line .ar-link{font:inherit}
+
+/* ---------- check yourself ---------- */
+.ar-qs h2{margin-top:50px}
+.ar-q{padding:18px 0 22px;border-top:1px solid var(--rule)}
+.ar-qt{font:400 22px/1.2 var(--serif);letter-spacing:-.01em;text-wrap:pretty}
+.ar-qc{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.ar-choice{display:block;width:100%;min-height:48px;padding:12px 16px;border:1px solid var(--rule-strong);border-radius:var(--r-2);font:400 15px/1.35 var(--sans);color:var(--ink);text-align:left}
+.ar-choice:active:not(:disabled){background:var(--surface-3)}
+.ar-choice:disabled{color:var(--soft)}
+.ar-choice.ok{border-color:var(--good);color:var(--ink);background:rgba(154,212,174,.1)}
+.ar-choice.no{border-color:var(--bad);background:rgba(240,154,134,.1)}
+.ar-qf{font:400 14px/1.55 var(--sans);color:var(--ar-body);margin-top:12px;text-wrap:pretty}
+.ar-qf:empty{display:none}
+.ar-qscore{font:italic 400 18px/1.35 var(--serif);color:var(--soft);margin-top:6px;text-wrap:pretty}
+.ar-qscore:empty{display:none}
+
+/* ---------- notes ---------- */
+.ar-notes h2{margin-top:50px}
+.ar-notes ol{list-style:none;margin:0;padding:0}
+.ar-notes li{display:grid;grid-template-columns:28px 1fr;gap:10px;padding:11px 0;border-top:1px solid var(--rule);font:400 14px/1.5 var(--sans);color:var(--ar-body)}
+.ar-nn{font:500 12px/1.9 var(--mono);color:var(--soft)}
+.ar-nc em{font:italic 400 15px/1 var(--serif);color:var(--soft)}
+.ar-nc a{color:var(--ink);text-decoration:underline;text-decoration-color:rgba(236,232,223,.3);text-underline-offset:3px;white-space:nowrap}
+
+/* ---------- sheets: a footnote, the contents ---------- */
+.ar-ns-k{font:italic 400 16px/1 var(--serif)!important;color:var(--soft)!important;margin:0 0 10px!important}
+.ar-ns-k .mono{font-style:normal;font-size:13px}
+.ar-ns-c{font:400 22px/1.25 var(--serif)!important;color:var(--ink)!important;margin:0 0 18px!important;text-wrap:pretty}
+.ar-ns-a{display:inline-flex;align-items:center;min-height:44px;font:italic 400 18px/1 var(--serif);color:var(--ink);text-decoration:underline;text-underline-offset:4px}
+.ar-toc-h{font:italic 400 16px/1 var(--serif)!important;color:var(--soft)!important;margin:0 0 6px!important}
+.ar-toc-row{display:grid;grid-template-columns:28px 1fr;align-items:baseline;width:100%;min-height:52px;padding:14px 0;border-bottom:1px solid var(--rule);text-align:left}
+.ar-toc-row .mono{font-size:12px;color:var(--soft)}
+.ar-toc-row b{font:400 22px/1.12 var(--serif)}
+
+/* ---------- hub + which pages ---------- */
+.ar-page{padding-bottom:calc(var(--tabh) + 24px)}
+.ar-hubband{position:relative;display:flex;margin:calc(-1 * (var(--top) + 12px)) calc(-1 * var(--g)) 0;width:calc(100% + var(--g) * 2);height:34dvh;min-height:200px;background:var(--surface-1)}
+.ar-hubband>i{flex:1;background:var(--c)}
+.ar-hubband.ar-flat{height:calc(var(--top) + 64px);min-height:0;background:none}
+.ar-back{background:var(--surface-2);border-radius:50%;color:var(--ink)}
+.ar-hubt{font:400 56px/.92 var(--serif);letter-spacing:-.035em;margin-top:22px;text-wrap:balance}
+.ar-hubt em{font-style:italic}
+.ar-hubd{font:400 22px/1.28 var(--serif);color:var(--paper);margin-top:14px;text-wrap:pretty}
+.ar-hubn{font:italic 400 16px/1 var(--serif);color:var(--soft);margin-top:12px}
+.ar-hubi{margin-top:22px}
+.ar-page .ar-rows{margin-top:24px}
+.ar-all{margin-top:20px}
+.ar-plates{display:flex;flex-direction:column;gap:2px;margin:28px 0 0}
+.ar-plate{display:flex;flex-direction:column;justify-content:flex-end;gap:4px;min-height:104px;padding:16px;background:var(--c);border-radius:var(--r-1);text-align:left}
+.ar-plate b{font:400 30px/1 var(--serif);letter-spacing:-.02em}
+.ar-plate span{font:400 14px/1.4 var(--sans);opacity:1;max-width:30ch}
+.ar-plate[data-ink="dark"]{color:#141311}
+.ar-plate[data-ink="light"]{color:#fff}
+
+@media (prefers-reduced-motion:reduce){.ar-hex{transition:none}}

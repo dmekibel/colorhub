@@ -1,0 +1,59 @@
+{
+  "slug": "cobalt",
+  "name": "Cobalt",
+  "hex": "#0047AB",
+  "tier": "pigment",
+  "status": "fixture",
+  "lede": "A deep, clean blue that leans toward neither green nor violet, named for the metal it comes from and sold to painters as a tube color since the early nineteenth century.[1]",
+  "sections": [
+    {
+      "id": "the-metal",
+      "title": "The metal behind the blue",
+      "body": "The word comes from the German *Kobold*, a mine goblin. Miners in the Saxon silver country blamed the spirit for ores that looked promising, then ruined the smelting and gave off poisonous fumes.[2] The ore was not silver at all. It carried the metal we now call cobalt, and long before anyone could name it, glassmakers had found that a pinch of it turned molten glass an intense blue.\n\nThat blue glass, ground to a powder, became **smalt**, the painter's blue of the fifteenth to seventeenth centuries. It is gritty, pale when thin, and it browns in oil. It is a different material from the pigment sold today as cobalt blue, though both owe their color to the same metal.[3]"
+    },
+    {
+      "id": "the-pigment",
+      "title": "Becoming a tube color",
+      "body": "In 1802 the French chemist Louis Jacques Thénard heated cobalt salts with alumina and got a stable, luminous blue: cobalt aluminate.[1] It was expensive to make and slow to reach artists' shops, but it did what the older blues could not. It did not fade in light, it did not turn green in a mixture, and it dried well in oil.\n\nBooks disagree: some histories credit Thénard alone, others point to the earlier cobalt glass makers and call his work a refinement. The difference is largely one of definition, since smalt is glass and Thénard's blue is a crystalline oxide.\n\n!books Dates for the first sales to artists run from about 1807 to the 1820s, depending on whether a book counts a first batch, a trade announcement or a color-merchant's catalogue.[3]"
+    },
+    {
+      "id": "look-alikes",
+      "title": "Cobalt and its look-alikes",
+      "body": "Set cobalt beside [[cerulean]] and the difference is plain: cerulean is greener, lighter and quieter, a sky color where cobalt is a deep-water one. Beside [[azure]], cobalt is darker and less electric. Beside [[navy]] it is far brighter, and many people confuse the two on a phone screen in dim light.[4]\n\nThe relationship with cerulean is more than a resemblance. Cerulean blue is a cobalt compound too (a stannate), so the two belong to one chemical family even though they look like neighbors rather than twins."
+    },
+    {
+      "id": "in-paintings",
+      "title": "Where painters used it",
+      "body": "Once cobalt blue was cheap enough, it became the sky blue of the nineteenth century, and it is easy to spot in landscapes where the upper sky is a clean, saturated blue shading to paler at the horizon. In our archive of museum paintings, the colors nearest to cobalt cluster in skies, in drapery and in the deep shadows of water.\n\n!myth The story says Rubens painted with cobalt blue. The record shows the pigment was not made until 1802, more than a century and a half after his death in 1640; the blues in his work came from other materials such as ultramarine, azurite and smalt.[5]"
+    },
+    {
+      "id": "reading-the-screen",
+      "title": "A note on the screen color",
+      "body": "The swatch above is a screen approximation. A real cobalt blue paint reads differently on the canvas, and the same paint looks different under north light and under lamplight. Use the hex as a guide, and trust a tube of paint, a color card or a real painting before you trust any monitor."
+    }
+  ],
+  "aside": {
+    "origin": { "named_after": "the metal cobalt, itself from German *Kobold*, a mine spirit", "first_recorded": "As a pigment, 1802 (Thénard)[1]", "source": "Fixture source for tests, not a real citation" },
+    "aka": ["Cobalt blue", "Thénard's blue"],
+    "parent": "blue",
+    "siblings": ["cerulean", "azure"],
+    "children": ["royal-blue", "navy", "teal"],
+    "disambiguation": [{ "slug": "navy", "gloss": "darker, and named for a uniform" }, { "slug": "royal-blue", "gloss": "brighter, more violet" }]
+  },
+  "field": {},
+  "notes": [
+    { "n": 1, "kind": "book", "cite": "Fixture A: a general history of pigments, the chapter on blues.", "url": "https://example.org/fixture-a" },
+    { "n": 2, "kind": "book", "cite": "Fixture B: a dictionary of word origins, entry for cobalt.", "url": "" },
+    { "n": 3, "kind": "paper", "cite": "Fixture C: a technical paper on smalt and cobalt aluminate, with a table of dates.", "url": "https://example.org/fixture-c" },
+    { "n": 4, "kind": "data", "cite": "Our own measurement: CIEDE2000 distances from cobalt to its nearest names." },
+    { "n": 5, "kind": "museum", "cite": "Fixture D: a museum conservation note on Rubens's blue pigments.", "url": "" }
+  ],
+  "questions": [
+    { "q": "Which blue did painters use before cobalt blue existed as a tube color?", "choices": ["Smalt, powdered cobalt glass", "Cerulean", "Phthalo blue"], "answer": 0, "kind": "recall", "why": "Smalt is glass colored by cobalt. It is a different material from Thénard's pigment." },
+    { "q": "Cobalt is darker and less electric than which neighbor?", "choices": ["Navy", "Cerulean", "Azure"], "answer": 2, "kind": "compare", "why": "Azure is the brighter, more electric one; cobalt is deeper." },
+    { "q": "In what year did Thénard make cobalt aluminate?", "choices": ["1702", "1802", "1902"], "answer": "1802", "kind": "fact" }
+  ],
+  "openers": [],
+  "words": 0,
+  "checked": {}
+}
