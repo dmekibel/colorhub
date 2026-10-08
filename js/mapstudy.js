@@ -171,10 +171,12 @@ function msState() {
   return m;
 }
 const msLevelKey = l => "L" + l;
+// "on your map": lit here, taught by the path, or anything the Learner Model says you've met or better
 function msKnown() {
   const m = msState(), k = new Set(Object.keys(m.lit));
   ALL.forEach(c => { if (S.cards[c.id]) k.add(msLow(c.n)); });
   BASICS.forEach(c => k.add(msLow(c.n)));
+  if (typeof knowState === "function") msCore().forEach(e => { if (!k.has(msLow(e.n)) && knowState(e.n) !== "none") k.add(msLow(e.n)); });
   return k;
 }
 let MS_CORE = null, MS_CORE_SRC = null;
@@ -196,17 +198,21 @@ function msItemOf(n, h) {
 function msMixNames() {
   const out = [];
   if (typeof confusions === "function") {
-    try { (confusions() || []).forEach(e => [].concat(Array.isArray(e) ? e : [e.a, e.b, e.n, e.m, e.x, e.y, e.with]).forEach(v => { if (typeof v === "string") out.push(v); else if (v && v.n) out.push(v.n); })); } catch (e) {}
+    try { (confusions(null, 40) || []).forEach(e => [].concat(Array.isArray(e) ? e : [e.a, e.b, e.n, e.m, e.x, e.y, e.with]).forEach(v => { if (typeof v === "string") out.push(v); else if (v && v.n) out.push(v.n); })); } catch (e) {}
   }
   Object.entries(msState().mix).sort((a, b) => b[1] - a[1]).forEach(([k]) => out.push(...k.split("|")));
   return [...new Set(out.map(msLow))];
 }
+// favorites: S.favs when a lane keeps one, plus every color you've liked (the Learner Model's "like" events)
 function msFavNames() {
-  const f = S.favs;
-  if (Array.isArray(f)) return f.map(x => typeof x === "string" ? x : x && (x.n || x.name)).filter(Boolean);
-  if (f && typeof f === "object") return Object.keys(f);
-  return [];
+  const f = S.favs, out = [];
+  if (Array.isArray(f)) f.forEach(x => { const n = typeof x === "string" ? x : x && (x.n || x.name); if (n) out.push(n); });
+  else if (f && typeof f === "object") out.push(...Object.keys(f));
+  if (typeof lnIndex === "function") { try { Object.values(lnIndex().c || {}).forEach(x => { if (x && x.l > 0 && x.n) out.push(x.n); }); } catch (e) {} }
+  return [...new Set(out)];
 }
+// any ColorSet (js/colorset.js) can be studied on the map: msOpen({ set: colorSet(...) }) -> set "custom"
+let MS_CUSTOM = null;
 // the targets a set asks about (null set or "level" = the level itself)
 function msSetItems(spec, levelItems) {
   const s = spec.set || "level";
@@ -214,6 +220,7 @@ function msSetItems(spec, levelItems) {
   if (s === "today") { const t = today(); return msUniq(ALL.filter(c => { const st = S.cards[c.id]; return st && (st.since === t || st.due <= t); }).map(c => msItemOf(c.n, c.h))); }
   if (s === "mix") return msUniq(msMixNames().map(n => msItemOf(n)).filter(Boolean));
   if (s === "favs") return msUniq(msFavNames().map(n => msItemOf(n)).filter(Boolean));
+  if (s === "custom") return msUniq((MS_CUSTOM ? MS_CUSTOM.colors : []).map(c => msItemOf(c.n || "", c.h)).filter(Boolean));
   if (s.startsWith("fam:")) return levelItems.filter(it => msFam(it.h) === s.slice(4));
   if (s.startsWith("ptg:")) {
     const p = (window.PAINTINGS || []).find(x => x.id === s.slice(4));
@@ -226,6 +233,7 @@ function msSetLabel(s) {
   if (s === "today") return "Today's words";
   if (s === "mix") return "Your mix-ups";
   if (s === "favs") return "Your favorites";
+  if (s === "custom") return MS_CUSTOM && MS_CUSTOM.title || "Your set";
   if (s.startsWith("fam:")) return s.slice(4);
   if (s.startsWith("ptg:")) { const p = (window.PAINTINGS || []).find(x => x.id === s.slice(4)); return p ? p.title : "A painting"; }
   return "This level";
@@ -238,8 +246,10 @@ function msToday5() {
   m.day = { d: t, names: next, done: false }; save();
   return m.day;
 }
-function msLog(entry) {
-  if (typeof learnerLog === "function") { try { learnerLog({ src: "mapstudy", ...entry }); } catch (e) {} }
+// the Learner Model (js/learner.js): every answer, every mix-up, every color met
+function msLog(type, color, o = {}) {
+  if (typeof learnerLog !== "function" || !color) return;
+  try { learnerLog({ type, color: { n: color.n, h: color.h }, src: "mapstudy", ...o }); } catch (e) {}
 }
 
 // ======================================================================
@@ -256,6 +266,8 @@ function msOpenColor(o) {
 function msOpen(o = {}) {
   const M = msState(), spec = M.spec;
   if (o.mode && MS_MODES.some(m => m[0] === o.mode)) spec.mode = o.mode;
+  if (o.set && o.set.colors && o.set.colors.length) { MS_CUSTOM = { title: o.set.title || "", colors: o.set.colors.slice(0, 60) }; spec.set = "custom"; if (spec.mode === "light") spec.mode = "find"; }
+  else if (spec.set === "custom" && !MS_CUSTOM) spec.set = "level";
   const from = o.from || (S.tab === "gym" ? "gym" : "home");
   const el = show(`
     <div class="cx-stage ms-stage"><div class="cx-view"></div></div>
@@ -291,7 +303,7 @@ function msOpen(o = {}) {
   function centerBoard(n) {
     const sp = ctrl.studyPoints(); if (!sp || !sp.pts.length) return;
     const k = sp.pts.length, x = sp.pts.reduce((s, p) => s + p.x, 0) / k, y = sp.pts.reduce((s, p) => s + p.y, 0) / k;
-    ctrl.studyFlyTo({ x, y }, n <= 4 ? 1.45 : n <= 6 ? 1.3 : 1.1);
+    ctrl.studyFlyTo({ x, y }, n <= 4 ? 1.2 : n <= 6 ? 1.1 : 1);
   }
   function setAsk(html) { ask.innerHTML = html; ask.hidden = !html; }
   function setProg(html) { prog.innerHTML = html || ""; }
@@ -365,7 +377,7 @@ function msOpen(o = {}) {
       <label class="ms-fog"><span><b>Your map</b><small>Veil the colors you haven't met yet. A view only; off unless you turn it on.</small></span><input type="checkbox" switch data-fog${spec.fog ? " checked" : ""}></label>
       ${empty ? `<p class="ms-line ms-warn">${esc(emptyLine)}</p>` : ""}
       ${best && !light ? `<p class="ms-best">Best here ${msStarRow(best.stars || 0)} ${best.r} of ${best.n}${best.streak > 2 ? ` · ${best.streak} in a row` : ""}</p>` : ""}
-      <button class="btn ms-go" data-go${empty || (light && day && (!day.names.length)) ? " disabled" : ""}>${light ? (day && day.done ? "Find today's five again" : "Light up 5") : "Start"} <small>${esc(rounds)}</small>${ICON.arrow}</button>
+      <div class="ms-foot"><button class="btn ms-go" data-go${empty || (light && day && (!day.names.length)) ? " disabled" : ""}>${light ? (day && day.done ? "Find today's five again" : "Light up 5") : "Start"} <small>${esc(rounds)}</small>${ICON.arrow}</button></div>
     </div>`;
     const re = (k, v) => { spec[k] = v; save(); buzz(4); };
     panel.querySelectorAll("[data-mode]").forEach(b => b.onclick = () => { re("mode", b.dataset.mode); setup(); });
@@ -397,9 +409,9 @@ function msOpen(o = {}) {
   // first answer per color per session counts (scheduling, found, mix-ups, the learner log)
   function record(it, res, by, said) {
     const k = msLow(it.n), ok = res === "right";
-    msLog({ mode: spec.mode, n: it.n, h: it.h, ok, close: res === "close", said: said ? { n: said.n, h: said.h } : null, level: spec.level, ms: Math.round(performance.now() - (P.tq || P.t0)) });
-    if (said && !ok) { const pair = [k, msLow(said.n)].sort().join("|"); M.mix[pair] = (M.mix[pair] || 0) + 1; }
     if (P.first.has(k)) return false;
+    msLog("answer", it, { ok, by: by || "game", ms: Math.round(performance.now() - (P.tq || P.t0)) });
+    if (said && !ok && said.h) { msLog("confuse", it, { b: { n: said.n, h: said.h } }); const pair = [k, msLow(said.n)].sort().join("|"); M.mix[pair] = (M.mix[pair] || 0) + 1; }
     P.first.set(k, { it, res });
     msApply(it.c ? it : { ...it, c: BYNAME.get(k) || null }, ok, by);
     const f = M.found[P.lk] = M.found[P.lk] || [], ms = M.miss[P.lk] = M.miss[P.lk] || {};
@@ -707,7 +719,7 @@ function msOpen(o = {}) {
     buzz(after < before ? 8 : [6, 30, 6]);
     pathPaint();
     pathLine(`<b>${esc(words[0].toUpperCase() + words.slice(1))}:</b> ${esc(it.n)}${after < before ? ", closer." : after > before ? ", a step away from it." : ", no closer."}`);
-    msLog({ mode: "path", n: it.n, h: it.h, from: prev.n, ok: after < before });
+    msLog("seen", it);
   }
   function pathEnd(shown) {
     const extra = P.steps - P.best, stars = shown ? 0 : extra <= 0 ? 3 : extra <= 2 ? 2 : 1;
@@ -753,7 +765,8 @@ function msOpen(o = {}) {
   }
   function lightMeet() {
     if (P.i >= P.list.length) { P.i = 0; P.stage = "find"; return lightFind(); }
-    const t = P.list[P.i], g = graph(), nb = [...(g.get(msLow(t.n)) || [])].map(k => mapItems.find(it => msLow(it.n) === k)).filter(Boolean);
+    const t = P.list[P.i]; msLog("seen", t);
+    const g = graph(), nb = [...(g.get(msLow(t.n)) || [])].map(k => mapItems.find(it => msLow(it.n) === k)).filter(Boolean);
     const anchors = nb.filter(x => P.known.has(msLow(x.n))).concat(nb.filter(x => !P.known.has(msLow(x.n)))).slice(0, 2);
     // your map so far keeps its names; today's new one shows its own
     reveal.clear(); P.known.forEach(k => reveal.add(k)); P.list.slice(0, P.i + 1).forEach(it => reveal.add(msLow(it.n)));
@@ -776,7 +789,7 @@ function msOpen(o = {}) {
     reveal.add(msLow(t.n)); if (res !== "right") reveal.add(msLow(x.n));
     const marks = [{ n: t.n, kind: res === "right" ? "right" : "true" }]; if (res !== "right") marks.push({ n: x.n, kind: "wrong" });
     ctrl.study({ marks });
-    msLog({ mode: "light", n: t.n, h: t.h, ok: res === "right", close: res === "close", said: res === "right" ? null : { n: x.n, h: x.h } });
+    msLog("answer", t, { ok: res === "right", by: "pick" }); if (res !== "right") msLog("confuse", t, { b: { n: x.n, h: x.h } });
     if (res === "right") { buzz(12); say(`<b>${esc(t.n)}.</b> On your map.`); later(lightNext, 950); return; }
     buzz([10, 40, 10]); ctrl.studyFlyTo(t);
     say(`<b>${res === "close" ? "Next door." : `${esc(t.n)} is here.`}</b> You picked ${esc(x.n.toLowerCase())}: ${esc(msDir(x, t))}.`);
@@ -810,10 +823,16 @@ function msOpen(o = {}) {
       <h3 class="title-2">Your map holds ${total.toLocaleString()} color${total === 1 ? "" : "s"} now.</h3>
       <p class="ms-line">${r} of ${n} found again from memory. Five more tomorrow${M.days > 1 ? `; ${M.days} days of lighting so far` : ""}.</p>
       <label class="ms-fog"><span><b>See your map</b><small>Veil everything you haven't met.</small></span><input type="checkbox" switch data-fog-end></label>
-      <button class="btn" data-done>Done ${ICON.arrow}</button>
+      <div class="ms-chips" data-lit>${P.list.map(msChip).join("")}</div>
+      <button class="btn" data-done>Put them on my map ${ICON.arrow}</button>
       <div class="ms-acts"><button class="btn ghost" data-setup>Study more</button></div></div>`;
     panel.querySelector("[data-fog-end]").onchange = e => { buzz(4); ctrl.study({ fog: e.target.checked ? (o => msKnown().has(msLow(o.n))) : null, marks: [] }); };
-    panel.querySelector("[data-done]").onclick = () => $("[data-close]").click();
+    const lit = P.list.slice();
+    panel.querySelector("[data-done]").onclick = () => {
+      buzz(8);
+      if (typeof flyToMap === "function") flyToMap(lit.map(it => ({ n: it.n, h: it.h })), [...panel.querySelectorAll("[data-lit] .ms-chip i")]);
+      else $("[data-close]").click();
+    };
     wireEnd();
     buzz([12, 60, 12]);
   }
