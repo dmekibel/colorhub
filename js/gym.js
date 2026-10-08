@@ -13,7 +13,6 @@
 const AFTER = { name: "Afterimage", what: "Stare for 20 seconds, then look at white" };
 const AIM_LINE = "Aim for about 7 in 10. Misses mean you're at your edge.";
 const skillState = k => S.gym.skills[k] || (S.gym.skills[k] = { level: SKILLS[k].start, best: null, hist: [], fam: {} });
-const fmt = d => d >= 10 ? d.toFixed(0) : d.toFixed(1);
 const lastScore = k => { const h = (S.gym.skills[k] || {}).hist || []; return h.length ? h[h.length - 1][1] : null; };
 const levelOf = (k, v) => levelFor(SKILLS[k], v);
 const ladder = (lv, cls = "") => `<span class="ladder ${cls}" aria-label="Level ${lv} of 20">${Array.from({ length: 20 }, (_, i) => `<i${i < lv ? ' class="on"' : ""}></i>`).join("")}</span>`;
@@ -313,7 +312,7 @@ function gymHome() {
     ${typeof matchShelves === "function" ? matchShelves() : ""}
     <div class="sec-head"><b>Game</b><span>for fun</span></div>
     <button class="play-row" data-lightning><span><b>Lightning round</b><span>Forty-five seconds. Name as many colors as you can.</span></span><em class="lt-best">${S.best.lightning ? `<b>${S.best.lightning}</b>best` : "new"}</em></button>
-    <p class="fine">Scores are color differences: ΔE (CIEDE2000), and ΔL* for lightness. About 1 is the smallest difference most people can see side by side. Every swatch is at least a quarter of the screen wide, because small patches look less colorful. Practice sharpens these judgments; it isn't a brain-training claim.</p>
+    <p class="fine">Scores are shown as a percent of the full black-to-white range: 100% is the difference between black and white, and about 1% is the smallest difference most people can see side by side. Every swatch is at least a quarter of the screen wide, because small patches look less colorful. Practice sharpens these judgments; it isn't a brain-training claim.</p>
   `, "gym", "gym");
   el.querySelectorAll("[data-st]").forEach(b => b.onclick = () => b.dataset.locked ? toast(b.dataset.locked) : runDrill(b.dataset.st));
   const ck = el.querySelector("[data-checkin]"); if (ck) ck.onclick = runCheckin;
@@ -334,7 +333,7 @@ function plainMeaning(k, est) {
   const sk = SKILLS[k], noun = sk.unit === "ΔL*" ? "lightness" : sk.unit === "ΔE step" ? "steps" : "colors";
   const cmp = est <= JND_REF * 1.6 ? "close to the limit of human vision under good conditions"
     : est <= JND_REF * 4 ? "a small, trained difference" : "a difference most people would also notice";
-  return `You can tell ${noun} apart about ${fmt(est)} ${sk.unit} apart, ${cmp}.`;
+  return `You can tell ${noun} apart about ${pctFmt(est)} different, ${cmp}.`;
 }
 // The hex you picked and the hex that was right, for the station kinds that log both (hue, value, shade, memory).
 // Adjust stations (neutral, vanish, match) and order don't log a clean pair, so they're left out of the strip.
@@ -361,7 +360,7 @@ function missCard(k, t) {
       <span class="gy-miss-sw bad" style="--c:${pr.picked}"><b>Picked</b></span>
       <span class="gy-miss-sw good" style="--c:${pr.correct}"><b>${k === "memory" ? "It was" : "Odd one"}</b></span>
     </div>
-    <div class="gy-miss-meta"><b class="mono">${fmt(dist)} <small>${esc(sk.unit)}</small></b>${why ? `<span>${esc(why)}</span>` : ""}</div>
+    <div class="gy-miss-meta"><b class="mono">${pctFmt(dist)}</b> <small>${unitWord(sk.unit)}</small>${why ? `<span>${esc(why)}</span>` : ""}</div>
   </div>`;
 }
 // A short set built from exactly the missed pairs, at the same difference each was drawn at.
@@ -404,7 +403,7 @@ function stationDone(r) {
     ${ladder(lvA, "big")}
     ${(r.news || []).map(([l, n]) => `<p class="gy-news"><b>New at level ${l}</b> ${esc(n)}</p>`).join("")}
     <div class="res-list">
-      <div class="res"><span>This set</span><b class="mono">${r.before != null ? fmt(r.before) + " → " : ""}${fmt(r.est)} <small>${esc(sk.unit)}</small></b>${r.pb ? "<em>best</em>" : ""}</div>
+      <div class="res"><span>This set</span><b class="mono">${r.before != null ? pctFmt(r.before) + " → " : ""}${pctFmt(r.est)} <small>${unitWord(sk.unit)}</small></b>${r.pb ? "<em>best</em>" : ""}</div>
       ${r.due != null ? `<div class="res"><span>Next session</span><b class="mono">${dueWords(r.due)}</b><span></span></div>` : ""}
     </div>
     ${r.weak ? `<p class="gy-weak">${esc(r.weak)}.</p>` : ""}
@@ -511,12 +510,12 @@ function runSession(o) {
       : it.rp ? `${sk.name} · one you were sure about` : it.news ? `${sk.name} · Level ${it.lv} · ${it.news}` : kind === "fix" ? `${sk.name} · fix it` : sk.name;
     why.classList.remove("show");
     why.textContent = kind === "intro" ? "First look: just guess, quickly. The why comes after." : kind === "checkin" ? "No feedback during the check-in. Answer and move on." : sk.why;
-    if (lvl) lvl.textContent = adj || kind === "checkin" ? `${n + 1}/${total}` : `${fmt(d)} ${sk.unit}`;
+    if (lvl) lvl.textContent = adj || kind === "checkin" ? `${n + 1}/${total}` : pctFmt(d);
     foot.innerHTML = ""; stopClock();
     const want = it.want !== undefined ? it.want : o.want && o.want[k] && Math.random() < .4 ? o.want[k] : null;
     cur = { id: n, done: false, conf: !adj && (kind === "station" || kind === "mixed") && !it.rp && (n > 0 || o.confAll) && Math.random() < (o.confAll ? 1 : .25) };
     const P = k === "memory" ? memParams(MEM.lv) : it.P || dialPlan(k, 1);
-    const shown = act => { if (!(act > 0)) return; cur.act = act; if (lvl && !adj && kind !== "checkin") lvl.textContent = `${fmt(act)} ${sk.unit}`; };
+    const shown = act => { if (!(act > 0)) return; cur.act = act; if (lvl && !adj && kind !== "checkin") lvl.textContent = pctFmt(act); };
     DRILLS[k]({ stage, foot, q, el, k, d, P, want, fix: it.fix || {}, rp: it.rp || null, check: kind === "checkin", intro: kind === "intro", pick, settle, clock, shown });
   }
   trial();
@@ -728,7 +727,7 @@ const DRILLS = {
     ctx.stage.innerHTML = `<div class="grid" style="--n:${n}">${Array.from({ length: cells }, (_, i) =>
       `<button class="tile" data-i="${i}" style="--c:${i === at ? oddHex : baseHex}" aria-label="Tile ${i + 1}"></button>`).join("")}</div>`;
     tilePick(ctx, () => ctx.stage.querySelector(`[data-i="${at}"]`).classList.add("ring"), at,
-      { ...bandsOf(baseHex), rp: { a: baseHex, b: oddHex } }, `The ringed one was off by <b>${fmt(de2000(baseHex, oddHex))}</b>`);
+      { ...bandsOf(baseHex), rp: { a: baseHex, b: oddHex } }, `The ringed one was off by <b>${pctFmt(de2000(baseHex, oddHex))}</b>`);
   },
 
   // Which is lighter? Two hues, different lightness (L*). Dials: the hues move apart, then their strength differs.
@@ -810,7 +809,7 @@ const DRILLS = {
           b.classList.remove("picked");
           const up = ctx.intro ? false : memStep(ok);
           ctx.stage.querySelector(`[data-i="${right}"]`).classList.add("ring");
-          if (!ok) { b.classList.add("miss"); ctx.foot.innerHTML = `<p class="note">The ringed one was it, <b>${fmt(de2000(hex, opts[+b.dataset.i]))}</b> ΔE from your pick</p>`; }
+          if (!ok) { b.classList.add("miss"); ctx.foot.innerHTML = `<p class="note">The ringed one was it, <b>${pctFmt(de2000(hex, opts[+b.dataset.i]))}</b> different from your pick</p>`; }
           else if (up) { ctx.foot.innerHTML = `<p class="note mem-up">Level ${MEM.lv} · ${esc(memParams(MEM.lv).news || "")}</p>`; buzz([8, 30, 8, 30, 14]); }
         }, { ...bandsOf(hex), s: ok ? undefined : { dC: +(Cp - Ct).toFixed(1), dL: +(Lp - Lt).toFixed(1) }, rp: { h: hex, pk: opts[+b.dataset.i] } });
       });
@@ -903,7 +902,7 @@ const DRILLS = {
       // which way the miss leaned: toward the ground's hue, and warm (reds to yellows) or cool (greens to blues)
       const rh = ((t >= 0 ? H : H + 180) % 360 + 360) % 360, warm = Math.abs(t) < 1 ? 0 : (rh >= 330 || rh < 100) ? 1 : (rh >= 150 && rh < 300) ? -1 : 0;
       const lean = err < 1.2 ? "Spot on: you corrected for the ground." : t > 0 ? "You leaned toward the ground's own hue: the ground tints true grey the other way, and you pushed back against it." : "You leaned away from the ground's hue.";
-      return { err, note: `Off by <b>${fmt(err)}</b> ΔE. ${lean} The right half is true grey; on this ground it looks faintly tinted.`, meta: { ...bandsOf(ground), s: { err: +err.toFixed(2), tw: Math.sign(t), warm, gH: Math.round(H) } } };
+      return { err, note: `Off by <b>${pctFmt(err)}</b>. ${lean} The right half is true grey; on this ground it looks faintly tinted.`, meta: { ...bandsOf(ground), s: { err: +err.toFixed(2), tw: Math.sign(t), warm, gH: Math.round(H) } } };
     });
   },
 
@@ -926,7 +925,7 @@ const DRILLS = {
       // the reveal: both turn to their greys, which is what the lightness system sees
       fld.classList.add("rev"); fld.style.setProperty("--g", lchHex(Lgm, 0, 0)); dEl.style.setProperty("--c", lchHex(Ld, 0, 0));
       fld.querySelector("#tags").dataset.ink = ink(lchHex(Lgm, 0, 0));
-      return { err, note: `Disc ${Ld.toFixed(0)}, ground ${Lgm.toFixed(0)} (L*): <b>${fmt(err)}</b> apart. ${err < 3 ? "In grey they nearly merge: that's equal lightness." : "In grey you can see which is lighter."} L* is a standard model; your own equal point can sit a little off it.`,
+      return { err, note: `Disc ${Ld.toFixed(0)}, ground ${Lgm.toFixed(0)} (L*): <b>${pctFmt(err)}</b> different in lightness. ${err < 3 ? "In grey they nearly merge: that's equal lightness." : "In grey you can see which is lighter."} L* is a standard model; your own equal point can sit a little off it.`,
         meta: { ...bandsOf(ground), s: { dL: +(Ld - Lgm).toFixed(1), H: Math.round(H) } } };
     });
   },
@@ -954,7 +953,7 @@ const DRILLS = {
     gyLock(ctx, "They match", () => {
       const mine = at(v("sl"), v("sh"), v("sc")), err = de2000(mine, ref);
       pb.style.setProperty("--c", ref); ctx.stage.querySelector("#fb").classList.add("rev");
-      return { err, note: `Off by <b>${fmt(err)}</b> ΔE. The right half is the real color: on this ground it looks wrong, which is the ground at work.`,
+      return { err, note: `Off by <b>${pctFmt(err)}</b>. The right half is the real color: on this ground it looks wrong, which is the ground at work.`,
         meta: { ...bandsOf(ref), s: { dL: +(lab(mine)[0] - lab(ref)[0]).toFixed(1), gd: Math.sign(lab(gB)[0] - lab(gA)[0]) } } };
     });
   },

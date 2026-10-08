@@ -558,7 +558,7 @@ function glPage(i, d, fromHex) {
       arrive.hidden = false; arrive.innerHTML = `<i style="--c:${p.h}" class="gl-arrive-sw"></i>≈ ${esc(nm.text)} · ${Math.round(p.share * 100)}% of the canvas · nearest swatch`;
     } else {
       const nm = near ? nameOf(pal[near.i].h) : null;
-      arrive.hidden = false; arrive.textContent = nm ? `No close swatch; the nearest is ${nm.text}, ΔE ${near.de.toFixed(1)}.` : "No close swatch in this palette.";
+      arrive.hidden = false; arrive.textContent = nm ? `No close swatch; the nearest is ${nm.text}, ${pctDiff(near.de)}.` : "No close swatch in this palette.";
     }
   };
   drawPalette();
@@ -600,7 +600,7 @@ function glPage(i, d, fromHex) {
       heroSpan.querySelectorAll(".gl-tap-dot").forEach(nd => nd.remove());
       const dot = document.createElement("span"); dot.className = "gl-tap-dot"; dot.style.left = x + "px"; dot.style.top = y + "px";
       heroSpan.appendChild(dot);
-      buzz(6); nameSheet(hex);
+      buzz(6); openTappedColor(hex);   // David, 2026-10-07: tap anywhere on the painting opens that color's page, not the sheet
     } catch (e) { canSample = false; heroSpan.classList.remove("gl-tap"); }   // tainted after all: quietly give up
   });
   el.querySelector("[data-back]").onclick = xBack;
@@ -658,18 +658,14 @@ function galleryColorRow(host, c) {
     }
   }
 }
-// open the gallery searched by one color
-function galleryOpenColor(hex, name) {
-  GLQ = { ...glFresh(), hex, name };
-  GLV = { key: glKey(GLQ), head: true };
-  S.lens = "paintings"; save();
-  go("explore");
-}
+// open Art (js/explore.js) searched by one color: the Paintings lens merged into it (DESIGN-SYSTEM §12),
+// so the old GLQ/GLV gallery-search state no longer applies here — Art picks its color from its own bubble row.
+function galleryOpenColor(hex, name) { artOpenColor(hex, name); }
 
 // ---------- screenshot hooks (index.html#shot=gallery..., see js/boot.js) ----------
 function galleryShot(arg) {
   const [spec, down] = String(arg || "").replace(/^:/, "").split("@"), [k, v] = spec.split("=");
-  const lens = () => { S.lens = "paintings"; go("explore"); };
+  const lens = () => artOpenColor(GLQ.hex || null, GLQ.name || "");
   const after = (f, ms = 500) => loadGallery().then(() => setTimeout(f, ms));
   if (down) after(() => scrollBy(0, +down), 1100);   // "...@600": then scroll down 600px
   if (!k) return lens();

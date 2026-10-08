@@ -15,7 +15,20 @@ saved photos + Pinterest-style Back · equal-count taste pairs · honeycomb styl
 seams, no overlap, real magnified honeycomb · crash fix for big sets · photo palettes that keep vivid colors ·
 sheets close on swipe-down
 
-## Next (in order)
+## RESUME HERE (paused 2026-10-08, out of credits)
+Two jobs were stopped mid-work. Their files are uncommitted in their worktrees, so nothing is lost:
+- **Practice (~85%, screenshots mostly done):** `.claude/worktrees/agent-a647b2e173d35a651`. It has js/practice.js, css/practice.css, tools/practice_test.js, plus edits to index.html, js/learn.js and js/router.js. To finish:
+  1. Run tools/practice_test.js and the gates.
+  2. Screenshot at 375 px.
+  3. Commit, then merge into main.
+- **Rich pages for every color (~30%):** `.claude/worktrees/agent-a5d6b6e560ac09fa8`. Done so far: data/analysis/color-artists.json, color-pairs.json and tools/build_richdata.py. Still to do: the page sections in js/names.js and colorPage, per the brief in this session (≥8 sections for any color, no "101" links).
+- **After both:** learning beyond the 101, then the Journey (waiting on David's 5 decisions in design/JOURNEY.md).
+
+**Top (David, 2026-10-08: "I don't like that you're stuck on the 101 to learn"; "I want to be able to learn more colors"):** learning beyond the 101. Starts the moment the color page and Practice merge, since they share files:
+- Learn it works on every one of the 1,000 names, with look-alikes drawn from the 1,000 within the family.
+- Cards for those names get real ids (`core:<slug>`), and dueList() and review include them.
+- The path continues past the 101 through the stages (150 / 250 / 400 / 600 / 800 / 1,000), in mixed lessons (ROADMAP §1).
+
 | # | Note | Where | Size |
 |---|---|---|---|
 | 0 | Honeycomb up to ~9,000 (David, 2026-10-08: "Let's do 9k"; explorer's map only, lessons stay on the 1,000): the 1,000 core names + the ~2,700 library names + described colors built from the modifier grammar ("Pale salmon", "Deep teal", "Greyish lilac"), generated only where they fill real gaps (≥ ΔE 3 from every name), each one guaranteed to read back the same through nameOf(). Described names are labeled as descriptions, not established names. New scrubber stops after Stage 9: "Every name" (~2,700) and "Every shade" (~9,000). A gate fails if any shade doesn't read back its own name through nameOf(); block odd combos ("reddish teal"). Every name findable in search, alternate names open their color's page. Runs right after the names cleanup and the style lab (both touch the same files) | tools + data + home.js | M |
@@ -77,6 +90,13 @@ sheets close on swipe-down
 - the color mind profile; an adaptive coach ("you confuse teal and cerulean"); explain my miss
 
 ## Smaller fixes noted
+- **Core-names quality pass:**
+  - "Seafoam Green" is #E9E0B7, a pale cream (its alternate names include Lemon Meringue), so the name and the color disagree.
+  - Typos: "Liliac", "Terracota".
+  - About 386 compound names (Light X, Dark X, repeats).
+  - The draft teaching order goes alphabetical after word ~140.
+- **Maerz & Paul:** 825 chips are extracted, but OCR merged some neighboring cells into fake names ("Maracail Domingc"). Add a filter that catches text bleeding in from a neighboring cell, or do a manual pass, then run merge_maerz_paul() (a trial merge added 212 new colors).
+- **The analysis engine is too dark for Sargent.** His 37 archive paintings are mostly dark portraits (no watercolors), so his signature reads "Ink". Add more sources, e.g. watercolors from the Brooklyn Museum and the Met.
 - Globe style (lab only for now): colors bunch up on the sphere and leave bare patches. Fix: place points evenly (a Fibonacci sphere) and assign colors to them by hue → longitude, lightness → latitude, then bring it back to the home styles.
 - Gamut wheel and saved-palette screens don't join the one-step Back yet; photos can't be renamed yet.
 - Rerun "Every shade" after the dictionary import (the tool is ready; the stop appears when data exists).
@@ -89,8 +109,26 @@ sheets close on swipe-down
 ## Later (approved, not scheduled)
 - Multilingual names (the 1905 six-language atlas) and the Russian edition, after the English app is finished.
 - Business: Plus subscription, a free atlas website; Colordle (a daily color word game).
+- Shop in this color (David's sister's idea, 2026-10-08), one quiet "Get it in this color" row on color, palette and painting pages, with an affiliate disclosure. Order: (1) print-on-demand posters and cards of palettes, painting palettes and "your color" via Printful or Gelato; (2) art-supply affiliate links for real pigments and paints (Jackson's, Blick), paired with the Mix lab; (3) fashion and home affiliates (ShopStyle/LTK, Etsy via Awin) by matching product colors. Never sell trademarked colors (Tiffany blue, Pantone names). Say screen colors are approximate. Worth building once the crawlable pages bring traffic.
 - Accounts (sync photos/progress across devices) + the anonymous scores service for world percentiles.
 - Reaching out to Peter Donahue (Color Nerd) once the paint features ship (Claude drafts, David sends).
+
+- **Film color archive (David, 2026-10-08; build when credits allow).** Directors get the same treatment as painters, e.g. Kubrick:
+  - a palette for each film (one for the whole film, or 10 across its running time, in order);
+  - his films compared with each other;
+  - his color evolving from his first color film to his last;
+  - signature colors and favorite combinations.
+
+  **Copyright:** frames from films under copyright are not ours to host or re-publish, and screenshot sites (IMDb, film-stills and Blu-ray screenshot galleries) have terms against scraping. So we store only computed color data (palettes and stats, which are facts), never the frames, and link out to where the stills live.
+
+  **Sources:** public-domain films (before 1930, plus some later ones whose copyright lapsed) can show frames. For others, frames we sample ourselves from a copy David owns, kept private and used only for analysis.
+
+  Reuses the §21 analysis engine. Today data/films.js holds 32 films with written text and "colors discussed", no frame palettes.
+- **The film strip (David, 2026-10-08):**
+  - Every shot in order becomes a progression through the running time, the "movie barcode" idea. It is modular: show 1 color per shot (the most-used one), or a palette of 3, 5 or 10 per shot.
+  - Zoom from the whole film down to one scene.
+  - Also: acts and turning points visible as color shifts, the film's overall palette, and films compared side by side.
+  - A shot-gallery page (e.g. Barry Lyndon on beautifulfilmframes.com, about 180 stills) is the kind of source, read for color only.
 
 ## Ideas only (not planned)
 - Nail-polish style names: maybe a playful game or a fashion/beauty culture note; no brand catalogs.

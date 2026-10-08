@@ -1,0 +1,42 @@
+/* Explore, redesigned (DESIGN-SYSTEM.md §12): the top-level pager of four full-bleed covers (For you, Art,
+   Ideas, World), and the Art feed (the old Paintings + Poems lenses merged). New file, so app.css stays
+   untouched (js/explore.js, js/gallery.js, js/poems.js). Same "museum editorial" tokens as app.css:
+   var(--serif)/var(--mono), the warm-black ground, hairline rules instead of boxes. */
+
+/* ---------- the pager: a vertical scroll-snap of covers, one great image each ---------- */
+.xp-wrap{position:relative;margin:0 calc(-1 * var(--g))}
+.xp-pager{height:calc(100dvh - var(--top) - 12px - var(--tabh) - 20px);overflow-y:auto;overflow-x:hidden;scroll-snap-type:y mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;touch-action:pan-y}
+.xp-pager::-webkit-scrollbar{display:none}
+.xp-cover{position:relative;height:calc(100% - 30px);scroll-snap-align:start;scroll-snap-stop:always;display:flex;flex-direction:column;overflow:hidden;background:var(--tint,var(--lift));text-align:left}
+.xp-img{position:relative;flex:none;height:calc(62% - 92px);min-height:150px;background:var(--lift)}
+.xp-img img,.xp-flat{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.xp-flat-label{position:absolute;left:18px;right:18px;bottom:16px;font:400 38px/1 var(--serif);letter-spacing:-.02em;text-wrap:balance}
+.xp-flat-label[data-ink="dark"]{color:#141311}
+.xp-flat-label[data-ink="light"]{color:#fff}
+.xp-seam{display:flex;height:12px;flex:none}
+.xp-seam i{display:block;min-width:2px}
+.xp-body{flex:1;min-height:0;padding:18px var(--g) 0;display:flex;flex-direction:column}
+.xp-name{font:400 64px/.88 var(--serif);letter-spacing:-.03em;color:#fff;margin:0}
+.xp-lead{font:400 19px/1.3 var(--serif);color:rgba(255,255,255,.88);margin:10px 0 0;max-width:34ch;text-wrap:pretty}
+.xp-note{font:400 italic 15px/1.3 var(--serif);color:rgba(255,255,255,.62);margin:10px 0 0}
+
+/* dots on the right edge, a floating search button top-right — no tab row, no cards, no other labels */
+.xp-dots{position:absolute;right:10px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:9px;z-index:7;pointer-events:none}
+.xp-dots i{width:6px;height:6px;border-radius:50%;background:rgba(236,232,223,.32);transition:background .25s,transform .25s}
+.xp-dots i.on{background:#fff;transform:scale(1.35)}
+.xp-search{position:absolute;right:var(--g);top:calc(var(--top) + 14px);z-index:8;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:rgba(14,13,11,.62);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);color:#fff}
+.xp-search svg{width:20px;height:20px}
+.xp-search:active{transform:scale(.94)}
+
+/* ---------- Art: the merged Paintings + Poems feed ---------- */
+.art-band{margin:0 calc(-1 * var(--g));padding:0 var(--g) 20px;background:linear-gradient(180deg,var(--tint,var(--ground)) 0%,var(--ground) 280px)}
+.art-band .art-top{background:none;position:static;padding-top:calc(var(--top) + 10px)}
+.art-band .p-title{margin-top:2px}
+.art-bubbles{display:flex;gap:10px;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;margin:18px calc(-1 * var(--g)) 0;padding:2px var(--g) 6px;scrollbar-width:none}
+.art-bubbles::-webkit-scrollbar{display:none}
+.art-bubble{flex:none;width:46px;height:46px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(236,232,223,.14);transition:transform .2s var(--spring)}
+.art-bubble:active{transform:scale(.92)}
+.art-bubble.on{box-shadow:0 0 0 2px var(--ground),0 0 0 4px var(--ink)}
+.art-feed{margin-top:28px}
+.art-feed .masonry{margin-top:0}
+.art-feed .pm-q{padding-top:0}

@@ -70,11 +70,13 @@ function npPaintingsSection(host, hex) {
   if (!host) return;
   const render = () => {
     if (!host.isConnected) return;
-    const hits = npGalleryHits(hex);
-    host.innerHTML = `<h3>In paintings</h3>` + (hits.length
-      ? `<p class="gl-in-sub">Paintings with a color close to this one, by how much of the canvas it covers.</p>
+    // a strip of (up to) 6 real thumbnails, the paintings that use this color most (David, 2026-10-07:
+    // "the paintings that use it most, as a strip of 6 thumbnails") — no empty section when there are none.
+    const hits = npGalleryHits(hex).slice(0, 6);
+    host.innerHTML = hits.length
+      ? `<h3>In paintings</h3><p class="gl-in-sub">Paintings with a color close to this one, by how much of the canvas it covers.</p>
          <div class="gl-rail">${hits.map(([i, w]) => glPinHTML(i, { badge: `${Math.max(1, Math.round(w * 100))}% of the canvas` })).join("")}</div>`
-      : `<p class="fine">No painting in the gallery has much of this color.</p>`);
+      : "";
     glFill(host);
   };
   host.onclick = e => { const p = e.target.closest("[data-gi]"); if (p) galleryPage(+p.dataset.gi, true, hex); };
@@ -84,31 +86,56 @@ function npPaintingsSection(host, hex) {
 }
 
 // ---------- the page ----------
-function namePage(entry, push = true) {
+// Same archetype as js/explore.js's colorPage: a full-bleed hero (solid ‹, a state chip), one primary when
+// there's a real task (Learn it, for one of the 101), then its family link and the picture shelves, then the
+// nearest-names/look-alikes depth at the end (DESIGN-SYSTEM.md §12 lists these name-page specifics: "the
+// same archetype, with their family link and paintings").
+//
+// `tapped`: an exact hex that landed here as its nearest name but isn't quite it (js/swatch.js
+// openTappedColor, David 2026-10-07) — the hero shows that exact color with a "Your color" note, and a
+// your-color-vs-this-name strip stands in for the usual "between/pale X" description line.
+function namePage(entry, push = true, tapped) {
   const name = entry.n, hex = entry.h;
-  if (push) XSTACK.push("n:" + encodeURIComponent(name));
+  tapped = tapped ? String(tapped).toUpperCase() : null;
+  const heroHex = tapped || hex;
+  if (push) XSTACK.push("n:" + encodeURIComponent(name));   // the in-session back-trail; `tapped` only ever lives in the address bar (router.js)
   const fam = familyOf(hex);
   const stage = npStage(entry.rank);
   const taught = BYNAME.get(name.toLowerCase());   // true only if routing ever lands here for one of the 101 (see router.js)
+  const mine = taught && taught.id && isMine(S.cards[taught.id]);
   const also = entry.also || [];
   const notes = entry.notes || [];
   // a computed shade (js/home.js hmShadeItems): a description, not an established name (ROADMAP: never taught,
   // always says so) — its own base is one of the ~1,000 core names, looked up here for the "See <base>" link.
   const shade = entry.shade || null;
   const shadeBase = shade && (CORE_NAMES || coreFallback()).find(e => e.n.toLowerCase() === shade.base.toLowerCase());
-  const nearCore = nearestCore(hex, CORE_NAMES || coreFallback(), 7).filter(x => x.n.toLowerCase() !== name.toLowerCase()).slice(0, 6);
+  const nearCore = nearestCore(tapped || hex, CORE_NAMES || coreFallback(), 7).filter(x => x.n.toLowerCase() !== name.toLowerCase()).slice(0, 6);
   const likes = typeof lookalikes === "function" ? lookalikes({ n: name, h: hex }, 6) : [];
+  // a small codes block at the end (David, 2026-10-07): HEX/RGB/HSL from js/explore.js's codes() (shared, not
+  // reimplemented here), plus Lab, which that one doesn't carry (it's CMYK there, for print; a library name
+  // has no print context, so Lab — the space every ΔE/closeness number on this page is already computed in —
+  // is the more honest fourth row).
+  const Lab = lab(heroHex);
+  const codeRows = (typeof codes === "function" ? codes(heroHex).slice(0, 3) : [["HEX", heroHex]]).concat([["LAB", `${Lab[0].toFixed(1)} ${Lab[1].toFixed(1)} ${Lab[2].toFixed(1)}`]]);
+  const status = tapped ? `Your color · ${pctMatch(de2000(tapped, hex))} to ${name}` : stage ? `Stage ${stage} of 9` : shade ? "A described shade" : "Library color";
   const el = show(`
-    <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button></header>
-    <div class="c-hero" style="--c:${hex}" data-ink="${ink(hex)}">
-      <p class="eyebrow">${stage ? `Stage ${stage}` : shade ? "A described shade" : "Library color"}</p>
-      <h1>${esc(name)}</h1><span class="mono">${hex}</span>
-      ${taught && typeof hmLearnIt === "function" ? `<button class="c-learnit" data-learnit>${ICON.bolt} Learn it <small>~2 min</small></button>` : ""}
+    <div class="c-hero cp-hero cp-hero-full" style="--c:${heroHex}" data-ink="${ink(heroHex)}">
+      <button class="cp-close" data-back aria-label="Back">${ICON.back}</button>
+      <div class="cp-hero-foot">
+        <span class="cp-chip">${esc(status)}</span>
+        <h1>${esc(name)}</h1>
+        <button class="mono cp-hex" data-copy="${heroHex}">${heroHex}</button>
+      </div>
+      <span class="cp-scroll-hint" aria-hidden="true">${ICON.up}</span>
     </div>
+    ${taught && typeof hmLearnIt === "function" ? `<div class="cp-primary-row"><button class="cp-primary" data-learnit>${mine ? "Review it" : "Learn it"}${mine ? "" : `<em>2 min</em>`}${ICON.arrow}</button></div>` : ""}
+    ${tapped ? `<section class="cp-strip-sec">
+      <div class="cp-strip"><div style="--c:${tapped}" data-ink="${ink(tapped)}"><b>Your color</b></div><div style="--c:${hex}" data-ink="${ink(hex)}"><b>${esc(name)}</b></div></div>
+      <p class="cp-diff">${esc(lookDiff({ h: tapped, n: "Your color" }, { h: hex, n: name }))}</p>
+    </section>` : ""}
     ${shade ? `<p class="fine np-shade">A described shade: ${esc(shade.base)} made ${esc(shade.mod)}${shadeBase ? `. <button class="link" data-shade-base>See ${esc(shade.base)}</button>` : "."}</p>` : ""}
     ${also.length ? `<p class="fine np-also">Also called ${also.map(esc).join(", ")}.</p>` : ""}
     ${notes.length ? `<p class="fine np-jp">${jpNoteLine(notes)}</p>` : ""}
-    ${fam ? npFamilyHTML(fam) : ""}
     <section class="gl-in" data-npgal></section>
     <div class="c-poems"></div>
     ${typeof archiveRows === "function" ? archiveRows(entry) : ""}
@@ -116,20 +143,26 @@ function namePage(entry, push = true) {
     ${typeof gmRow === "function" ? gmRow(entry) : ""}
     <section class="fx-in" data-world-in></section>
     ${nearCore.length ? `<div class="sec-head"><b>Nearest names</b><span>of about 1,000</span></div>
-      <div class="lk-list">${nearCore.map(x => `<button class="lk-row" data-np-near="${esc(x.n)}" data-h="${x.h}"><i style="--c:${x.h}"></i><b>${esc(x.n)}</b><span>${closeness(x.de)} · ΔE ${x.de.toFixed(1)}</span></button>`).join("")}</div>` : ""}
-    ${likes.length ? `<div class="sec-head"><b>Look-alikes</b><span>among the 101 taught colors</span></div>
-      <div class="lk-list">${likes.map(o => `<button class="lk-row" data-np-near="${esc(o.x.n)}" data-h="${o.x.h}"><i style="--c:${o.x.h}"></i><b>${esc(o.x.n)}</b><span>${esc(lookDiff({ n: name, h: hex }, o.x))}</span></button>`).join("")}</div>` : ""}
+      <div class="lk-list">${nearCore.map(x => `<button class="lk-row" data-np-near="${esc(x.n)}" data-h="${x.h}"><i style="--c:${x.h}" data-morph-src></i><b>${esc(x.n)}</b><span>${pctMatch(x.de)} · ${esc(lookDiff({ n: name, h: hex }, x))}</span></button>`).join("")}</div>` : ""}
+    <div class="sec-head"><b>Codes</b></div>
+    <div class="cp-codes">${codeRows.map(([k, v]) => `<button class="cp-code-row" data-copy="${esc(v)}"><span>${esc(k)}</span><b class="mono">${esc(v)}</b></button>`).join("")}</div>
     <p class="fine">Nearest of about 1,000 primary names (CIEDE2000). Hex values are screen approximations.</p>
-  `, "article names");
+  `, "article cp-page names");
   el.querySelector("[data-back]").onclick = xBack;
   onKey = e => { if (e.key === "Escape") xBack(); };
+  wireLinks(el);
   const li = el.querySelector("[data-learnit]"); if (li) li.onclick = () => hmLearnIt(taught);
-  const famBtn = el.querySelector("[data-fam-open]"); if (famBtn) famBtn.onclick = () => openNode(colorNode(fam.head));
+  
   const shBtn = el.querySelector("[data-shade-base]"); if (shBtn) shBtn.onclick = () => openCoreName(shadeBase.h, shadeBase.n);
-  el.querySelectorAll("[data-np-near]").forEach(b => b.onclick = () => openCoreName(b.dataset.h, b.dataset.npNear));
+  // a tap anywhere on the row grows its little swatch into the next page's hero (the whole row is the hit
+  // target, not just the 28px chip, so this calls morphFrom itself rather than relying on the generic
+  // [data-morph-src] delegated listener, which only catches a tap exactly on the marked element).
+  el.querySelectorAll("[data-np-near]").forEach(b => b.onclick = () => { morphFrom(b.querySelector("i")); openCoreName(b.dataset.h, b.dataset.npNear); });
   npPaintingsSection(el.querySelector("[data-npgal]"), hex);
   colorPoems(el.querySelector(".c-poems"), entry);
   if (typeof worldColorRow === "function") worldColorRow(el, { kind: "color", h: hex, title: name });
+  el.querySelectorAll("[data-copy]").forEach(b => b.onclick = () => { try { navigator.clipboard.writeText(b.dataset.copy); toast("Copied " + b.dataset.copy); } catch (e) {} });
+  return el;   // so growFrom (js/core.js, js/home.js hmOpenName) can grow this page from the tapped honeycomb bubble
 }
 
 // ---------- screenshot hook: #shot=name:<slug>[@scrolldown] ----------

@@ -275,7 +275,7 @@ function honeyWrap(ctx, name) {
 function honeyWhere(it) {
   if (it.c) {
     const u = UNITS.find(u => u.colors.includes(it.c)), s = it.c.id && S.cards[it.c.id];
-    return [u ? `Unit ${u.i + 1} of the 101` : "A basic word", s ? (isMine(s) ? "you know it" : "learning") : ""].filter(Boolean).join(" · ");
+    return [u ? `Unit ${u.i + 1}` : "A basic word", s ? (isMine(s) ? "you know it" : "learning") : ""].filter(Boolean).join(" · ");
   }
   return (it.lib && srcLine(it.lib)) || "Name library";
 }
@@ -434,7 +434,7 @@ function honeycomb(host, opts = {}) {
   let Plag = [0, 0], lastInput = performance.now(), driftT0 = 0, driftTeff = 0, driftAnchor = [0, 0], touchXY = null, ripples = [];
   let insetBottom = 0, insetCur = 0;
   // per-bubble size memory, so a bubble never snaps to a new size (cells change as neighbors come and go): sizes ease
-  let sizeMem = new Map(), sizeT = 0;
+  let sizeMem = new Map(), sizeT = 0, sizeRaf = 0, glided = null;   // glided: the item a tap last brought to the middle
   const vy = () => Math.max(60, Hh - insetCur);   // the visible height above whatever panel is inset
   const vcy = () => vy() / 2;
 
@@ -618,18 +618,24 @@ function honeycomb(host, opts = {}) {
     // No snapping (David): a bubble's size eases to its new value over ~120 ms instead of jumping when its cell
     // changes. New bubbles (just entered the screen) start at their size; growth eases too.
     const dt = sizeT ? Math.min(100, t - sizeT) : 0; sizeT = t;
+    // Only growth eases: a bubble whose cell just got smaller (a slider, a zoom) takes its new size at once, so two
+    // bubbles never overlap mid-change (David: sliding the center size overlapped until the next pan). And while
+    // any bubble is still growing toward its size, keep drawing frames so it finishes even when nothing else moves.
     const ease = RM ? 1 : 1 - Math.exp(-dt / 120), mem = new Map();
+    let easing = false;
     for (const b of drawn) {
       if (!b.k) continue;
       const prev = sizeMem.get(b.k);
-      if (prev != null && dt > 0) {
+      if (prev != null && dt > 0 && prev < b.rin) {
         const r = prev + (b.rin - prev) * ease, f = b.rin > 0 ? r / b.rin : 1;
+        if (b.rin - r > .3) easing = true;
         if (b.poly && Math.abs(f - 1) > .001) b.poly = b.poly.map(q => [q[0] * f, q[1] * f]);
         b.rin = r; b.d = 2 * r;
       }
       mem.set(b.k, b.rin);
     }
     sizeMem = mem;
+    if (easing && !sizeRaf) sizeRaf = requestAnimationFrame(() => { sizeRaf = 0; if (!raf) draw(); });
     let pb = null;
     if (pressed) { const i = drawn.findIndex(b => b.it === pressed.it && Math.abs(b.x - pressed.x) < 3 && Math.abs(b.y - pressed.y) < 3); if (i >= 0) { pb = drawn.splice(i, 1)[0]; drawn.push(pb); } }
     for (const b of drawn) {
@@ -826,7 +832,7 @@ function honeycomb(host, opts = {}) {
     }
     if (!down) return;
     const dx = x - down.x, dy = y - down.y;
-    if (!down.moved && Math.hypot(dx, dy) > 7) { down.moved = true; pressed = null; kick(); }
+    if (!down.moved && Math.hypot(dx, dy) > 10) { down.moved = true; pressed = null; glided = null; kick(); }
     if (!down.moved) return;
     const now = performance.now();
     if (lay.globe) { P = [down.P0[0] + dx / GLOBE_ROT_K, clamp(down.P0[1] - dy / GLOBE_ROT_K, -1.5, 1.5)]; }
@@ -865,8 +871,16 @@ function honeycomb(host, opts = {}) {
       lastTap = { t: now, x: d.x, y: d.y };
       if (p && e.type === "pointerup") {
         if (!RM && !SHOOT && cfg.alive > 0) { ripples.push({ x: p.x, y: p.y, t0: now, sigma: Math.max(22, p.b.d * .85) }); if (ripples.length > 4) ripples.shift(); }
-        const far = opts.centerFirst && Math.hypot(p.x - W / 2, p.y - vcy()) > p.b.d * .55;
-        tapTimer = setTimeout(() => { pressed = null; kick(); if (far) { lay.globe ? glideToGlobe(p.it) : glideTo(p.x, p.y); } else open(p.it, p.b); }, far ? 0 : 240);
+        // centerFirst: a tap on an off-center bubble glides it to the middle; a tap on the middle one opens it.
+        // "The middle one" is the bubble the view itself calls its center (the caption's), or the one we just glided
+        // there. Distance alone wasn't enough: idle drift, the panel inset and the lens could leave the centered
+        // bubble a few px off, so a tap on it only glided again and never opened (David).
+        // The open zone (David): the center bubble AND the ring touching it open on one tap; only bubbles further out
+        // glide to the middle first. The ring's reach is measured from the center bubble's edge, one tapped-bubble wide.
+        const cb = drawn.find(q => q.it === center), cd = cb ? cb.d : p.b.d;
+        const reach = Math.max(cd * .5 + p.b.d * .95, Math.min(W, vy()) * .16);
+        const far = opts.centerFirst && p.it !== center && p.it !== glided && Math.hypot(p.x - W / 2, p.y - vcy()) > reach;
+        tapTimer = setTimeout(() => { pressed = null; kick(); if (far) { glided = p.it; lay.globe ? glideToGlobe(p.it) : glideTo(p.x, p.y); } else { glided = null; open(p.it, p.b); } }, far ? 0 : 220);
         return;
       }
       pressed = null; kick();
@@ -898,13 +912,17 @@ function honeycomb(host, opts = {}) {
 
   function open(it, b) {
     remember();
-    const morph = () => {
-      if (!b) return;
+    // a small positioned element standing in for the tapped bubble — the honeycomb itself is a canvas, so
+    // there's no real DOM element at the bubble's spot for growFrom()/morphFrom() to read a rect from.
+    const mkSrc = () => {
+      if (!b) return null;
       const m = document.createElement("div"), r = b.d * 1.06;
       m.className = "hc-morph"; Object.assign(m.style, { left: b.x - r / 2 + "px", top: b.y - r / 2 + "px", width: r + "px", height: r + "px", background: it.h });
-      cv.parentNode.appendChild(m); morphFrom(m); m.remove();
+      cv.parentNode.appendChild(m);
+      return m;
     };
-    if (opts.pick) opts.pick(it.o, { morph });
+    const morph = () => { const m = mkSrc(); if (m) { morphFrom(m); m.remove(); } };
+    if (opts.pick) opts.pick(it.o, { morph, srcEl: mkSrc });
   }
 
   // ---- contents ----

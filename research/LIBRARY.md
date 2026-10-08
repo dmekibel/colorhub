@@ -250,3 +250,23 @@ Added by `load_pigments()` in `tools/library.py`, per the plan in NOTES-TRACKER.
 Checked and skipped for having no public hex anywhere (Wikipedia article, Wikipedia "List of colors", or Wikidata P465): Orpiment, Realgar, Antimony Vermilion, Asphaltum, Atacamite, Azurite, Bice, Bideford Black, Chrysocolla, Flake White, Garancine, Greenockite, Han Blue, Han Purple, Iodine Scarlet, Lazurite, Lead White, Lead-Tin Yellow, Manganese Blue, Mauveine (no hex distinct from Mauve), Potter's Pink, Pyrrole Red, Vantablack, Vine Black, Bone Black/Ivory Black. Several of these (Orpiment, Realgar, Egyptian Blue, Smalt before this pass) were already *searchable* only as ISCC-NBS `altn` synonyms attached to an unrelated nearby color by block-centroid proximity, not a value sourced to that pigment specifically -- adding Egyptian Blue and Smalt as their own entries let the next `--build` reattach their ISCC-NBS block citation to the real pigment color instead (see each entry's `note`).
 
 **Before -> after:** 2,711 -> **2,716** entries (+5), 792 KB -> 794 KB.
+
+## 10. Maerz & Paul 1930 plate digitization (2026-10-07) -- extracted, not yet merged
+
+Follows the plan in this file's own §1 recommendation and `research/NAME-SOURCES.md` ("flag as a future
+digitization project"). Full detail -- the source hunt (the only usable scan is IA's *un*processed original JP2
+tar, not its own desaturated derivative), the grid-reading and white-balance method, the ISCC-NBS independent
+accuracy check, the paper-transmission gamma fit, and the spot check -- is in `research/MAERZ-PAUL.md`.
+Extraction: `tools/maerz_paul.py` -> `data/sources/maerz-paul-1930.json`. Merge code: `merge_maerz_paul()` in
+`tools/library.py` (same 3-way rule as ISCC-NBS's own merge, but with a tighter ΔE00 2.5 "new color" threshold,
+since these are real per-chip measurements rather than coarse block centroids).
+
+**55 of 56 plates recovered** (Plate 2 is missing from the only available scan -- two physical pages never
+photographed), **825 named chips extracted**, **374 independently cross-checked** against the 1955 ISCC-NBS
+dictionary's own Maerz & Paul-sourced names: 37% agree within ΔE00 8 of their assigned block, median ΔE00 9.7;
+58 chips (16% of the 374) are flagged `"uncertain"` and excluded from any merge. A direct 30-name spot check
+(`research/MAERZ-PAUL.md` §7) found a handful of plausible-looking but fabricated names the ISCC-NBS check
+cannot catch (two different cells' text merged by OCR, e.g. "Maracail Domingc") — **this import did not cleanly
+pass its own "reads right" bar, so `data/library.json` was left untouched (still 2,711 entries) rather than
+merged.** The extraction, its documentation and the merge code all ship from this pass; running the merge is
+left for a follow-up once the extraction has either a tighter cross-cell-bleed filter or a manual review pass.

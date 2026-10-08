@@ -8,7 +8,8 @@ const SHOT = location.hash.startsWith("#shot=") ? decodeURIComponent(location.ha
 if (SHOT) loadWiki().then(() => shot(SHOT));
 else {
   ROUTE_REPLACE = true;   // the first screen takes over the page's own history entry
-  if (!openRoute(location.hash, true)) S.placed ? go(S.tab || "learn") : welcome();
+  // Home (the honeycomb) is the floor of the app (DESIGN-SYSTEM.md §2) and the default landing place, not a tab.
+  if (!openRoute(location.hash, true)) S.placed ? hmHome() : welcome();
   prefetchWiki();
 }
 
@@ -65,7 +66,7 @@ function shot(name) {
         if (tw === "tweak") later2(() => hmOpenTweak(ctrl), 200);
         if (act) host.dispatchEvent(new CustomEvent("honeyshot", { detail: act }));
       }); }
-    // the Learn it mini-lesson (js/learnit.js): learnit:<meet|tell|sort|pick|memory|done>
+    // the Learn it mini-lesson (js/learnit.js): learnit:<meet|recall|tell|done>
     case "learnit": return hmLearnitShot(arg || "meet");
     case "gym": return go("gym");
     case "studio": return go("studio");
@@ -78,7 +79,17 @@ function shot(name) {
        ["#3F7C8C", 100, 110, 100, 90], ["#8C5E58", 200, 110, 100, 90]].forEach(([h, bx, by, bw, bh]) => { x.fillStyle = h; x.fillRect(bx, by, bw, bh); });
       return studioFromImage(c, "From a photo");
     }
-    case "explore": S.lens = arg || "all"; return go("explore");
+    // explore[:<all|art|ideas|world|saved>][:<n>|<ColorName>]: the pager lens, plus for design-review
+    // screenshots only, either a cover index to scroll the pager to ("all:2") or a color to preselect in Art
+    // ("art:Denim", js/explore.js's ART_UI) -- there's no interactive way to scroll or pick a bubble in shot mode.
+    case "explore": {
+      const [lens, extra] = (arg || "all").split(":");
+      S.lens = lens;
+      if (lens === "art" && extra) { const c = BYNAME.get(extra.toLowerCase()); if (c) ART_UI = { hex: c.h, name: c.n }; }
+      go("explore");
+      if (lens === "all" && /^\d+$/.test(extra || "")) later2(() => { const s = document.querySelectorAll(".xp-cover")[+extra]; if (s) s.scrollIntoView({ block: "start" }); }, 500);
+      return;
+    }
     case "meet": meet(UNITS[1]); if (arg) later2(() => { const p = document.getElementById("pager"); p.scrollTop = p.clientHeight * +arg; }, 300); return;
     case "deck": deck("learn", { unit: UNITS[1] }); later2(() => dispatchEvent(new KeyboardEvent("keydown", { key: " " })), 600); return;
     case "drill": return runDrill(arg || "hue", { trials: 10, noIntro: true, done: () => {} });

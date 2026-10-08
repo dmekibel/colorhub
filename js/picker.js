@@ -66,7 +66,7 @@ function colorPicker(host, opts) {
     const inp = $("[data-hex]"); if (document.activeElement !== inp) inp.value = x;
     const [near] = nearestColors(x, 1);
     $(".cp-name").textContent = near ? "≈ " + near[0].n : x;
-    $(".cp-near").textContent = near ? `${closeness(near[1])} · ΔE ${near[1].toFixed(1)}` : "";
+    $(".cp-near").textContent = near ? `${closeness(near[1])} · ${pctDiff(near[1])}` : "";
     if (opts.marks) {
       $(".cp-marks").innerHTML = opts.marks(x).map((m, i) => { const mh = rgb2hsv(rgb(m))[0], ma = (mh - 90) * Math.PI / 180, mr = 50 - 13 / wheel.clientWidth * 100;
         return `<circle cx="${(50 + mr * Math.cos(ma)).toFixed(2)}" cy="${(50 + mr * Math.sin(ma)).toFixed(2)}" r="${i ? 3.6 : 0}" fill="${m}" stroke="#F3F3F1" stroke-width=".9"/>`; }).join("");

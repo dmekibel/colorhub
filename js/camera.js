@@ -55,7 +55,7 @@ function eye() {
     cur = { hex, nm, m };
     ret.style.setProperty("--c", hex); $("#chip").style.setProperty("--c", hex);
     $("#big").textContent = nm.text;
-    $("#src").textContent = nm.met ? `A lesson word · ${lessonStatus(nm.n)}` : nm.de < VERY_CLOSE_DE ? "Nearest of about 1,000 names" : `Nearest of about 1,000 names · ΔE ${nm.de}`;
+    $("#src").textContent = nm.met ? `A lesson word · ${lessonStatus(nm.n)}` : nm.de < VERY_CLOSE_DE ? "Nearest of about 1,000 names" : `Nearest of about 1,000 names · ${pctDiff(nm.de)}`;
     // second line: the nearest of the colors the lessons teach (hidden when the big name already is one)
     $("#mine").innerHTML = m && m.n.toLowerCase() !== nm.n.toLowerCase() ? `<i style="--c:${m.h}" data-swatch="${m.h}"></i><span>Nearest lesson word <b>${esc(m.n)}</b></span><em>${lessonStatus(m.n)}</em>` : "";
   };
@@ -113,7 +113,7 @@ function eye() {
     if (frozen) return stream ? live() : null;
     if (vid.videoWidth) freeze(vid, vid.videoWidth, vid.videoHeight);
   };
-  $("#nm").onclick = () => cur && nameSheet(cur.hex);
+  $("#nm").onclick = () => cur && openTappedColor(cur.hex);   // David, 2026-10-07: one tap opens the page, not the sheet
   $("#mine").onclick = () => { if (cur && cur.m) { stop(); XSTACK = []; openNode(graph().nodes.get("c:" + cur.m.n)); } };
   const fromFile = f => {
     if (!f) return;

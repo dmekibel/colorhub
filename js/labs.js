@@ -179,7 +179,7 @@ LAB.namer = (hex = "#5F8C8A") => {
   const out = el.querySelector("#nout");
   const render = h => {
     const nm = nameOf(h);
-    out.innerHTML = `<section class="facet"><h3>Nearest names · tap any</h3>${nm.near.map(x => `<button class="kin" data-swatch="${esc(x.h)}"><i style="--c:${x.h}"></i><b>${esc(x.n)}</b><span>${swCloseness(x.de)} · ΔE ${x.de.toFixed(1)}</span></button>`).join("")}</section>`;
+    out.innerHTML = `<section class="facet"><h3>Nearest names · tap any</h3>${nm.near.map(x => `<button class="kin" data-swatch="${esc(x.h)}"><i style="--c:${x.h}"></i><b>${esc(x.n)}</b><span>${closeness(x.de)} · ${pctDiff(x.de)}</span></button>`).join("")}</section>`;
   };
   wireLinks(out);
   const picker = colorPicker(el.querySelector("#pick"), { hex, onChange: render });
