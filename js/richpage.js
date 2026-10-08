@@ -162,7 +162,8 @@ function rpDrawersWire(el, name, hex) {
   const drawers = [...el.querySelectorAll(".rp-drawer")];
   const open = (id, scroll) => { drawers.forEach(d => { const on = d.dataset.rpDrawer === id; if (on) d.open = true; else if (d.open) d.open = false; if (on && scroll) setTimeout(() => d.scrollIntoView({ block: "start", behavior: reduceMotion ? "auto" : "smooth" }), 30); }); };
   drawers.forEach(d => d.querySelector("summary").addEventListener("click", () => { if (!d.open) drawers.forEach(o => { if (o !== d) o.open = false; }); }));
-  el.addEventListener("click", e => { const b = e.target.closest("[data-rp-door]"); if (!b) return; open(b.dataset.rpDoor, true); });
+  // a paintings figure is a door to its evidence: the color's own In paintings page (js/paintingsof.js); other cards open their drawer
+  el.addEventListener("click", e => { const b = e.target.closest("[data-rp-door]"); if (!b) return; if (b.dataset.rpDoor === "paint" && typeof paintingsOfPage === "function") return paintingsOfPage([hex], { back: true }); open(b.dataset.rpDoor, true); });
   // headlines, and a drawer with nothing in it is not drawn
   const head = (id, t) => { const h = el.querySelector(`[data-rp-head="${id}"]`); if (h && t && !h.textContent) h.textContent = t; };
   rpGraph(name).then(g => {
