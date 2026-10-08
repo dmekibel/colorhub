@@ -9,7 +9,7 @@ Records: Commons keeps posters and stamps in year categories ("1925 posters", "1
 Kept:    files whose extmetadata LicenseShortName reads as public domain or CC0 (PD-old, PD-US, Public domain, PDM,
          CC0 ...). CC BY / CC BY-SA files are dropped even where Commons allows them: this corpus shows only thumbnails
          that need no attribution. Bitmap images only (jpeg/png/gif/tiff).
-Images:  Commons' own 500 px thumbnail URL (upload.wikimedia.org/.../500px-<file>); only a 200 px copy is cached.
+Images:  Commons' own 330 px thumbnail URL (upload.wikimedia.org/.../330px-<file>); only a 200 px copy is cached.
 Maker:   the file's Artist field as plain text, when it is short and not "unknown" (often the poster's designer or the
          stamp's engraver).
 Pace:    one request every 0.3 s to the API and the thumbnail server, three threads sharing that gap.
@@ -22,7 +22,7 @@ from html import unescape
 from . import common
 
 API = "https://commons.wikimedia.org/w/api.php"
-INFO = dict(gap=0.3, workers=3, name="Wikimedia Commons (posters and stamps by year)", api=API,
+INFO = dict(gap=0.7, workers=3, name="Wikimedia Commons (posters and stamps by year)", api=API,
             license="Public domain / CC0 files only (per-file license read from Commons)")
 YEARS = range(1850, 1980)
 PER_CAT = 100
@@ -70,10 +70,10 @@ def plain(html):
     return re.sub(r"\s+", " ", unescape(re.sub(r"<[^>]+>", " ", html or ""))).strip()
 
 
-def thumb_url(ii, width=500):
-    """Commons' own thumbnail URL (a standard step, 500 px), built from the file URL: the API only makes thumbnails on
+def thumb_url(ii, width=330):
+    """Commons' own thumbnail URL (a standard step, 330 px; Commons refuses other widths), built from the file URL: the API only makes thumbnails on
     request (iiurlwidth), which costs ~20 s a call; the thumbnail server makes it when the image is first fetched."""
-    url, w = ii.get("url"), ii.get("width") or 0
+    url, w = (ii.get("url") or "").split("?")[0], ii.get("width") or 0
     if not url or w <= width:
         return url
     m = re.match(r"(https://upload\.wikimedia\.org/wikipedia/commons)/(\w/\w\w)/(.+)$", url)
@@ -153,7 +153,8 @@ def group_key(C, x):
 
 
 def image_urls(x):
-    return [x["thumb"]]
+    t = re.sub(r"\?utm_source=[^/]*?original", "", x["thumb"])   # an early run kept the API's tracking query
+    return [re.sub(r"/\d+px-", "/330px-", t)]
 
 
 def norm(C, x):
@@ -163,4 +164,4 @@ def norm(C, x):
           "advert": "advertisement"}[x["kind"]]
     return dict(id="commonsd-" + re.sub(r"\W+", "_", x["title"].split(":", 1)[-1])[:60], src="commonsd",
                 t=C.clean_title(x["name"]), a=x["artist"], y=x["year"], co=C.country_of(ctry.group(1)) if ctry else None,
-                cat=cat, ty=ty[:30], img=x["thumb"], url=x["url"], lic=x["license"])
+                cat=cat, ty=ty[:30], img=image_urls(x)[0], url=x["url"], lic=x["license"])

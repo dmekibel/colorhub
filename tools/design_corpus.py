@@ -23,7 +23,7 @@ seeded shuffle. So a prolific designer or a big museum cannot outweigh a decade.
 
 Palette (step 4): as tools/corpus.py palette_of() (auto-trim of frames and scanner bed, 2% inset, ~120 px area average,
 CIELAB k-means k=6 with a*/b* x1.5, share = pixel area), plus for objects photographed on a studio backdrop (ceramics,
-glass, furniture, product, costume) a flood-fill of the backdrop color from the picture edge, so a white vase on white
+glass, furniture, product, costume, stamps) a flood-fill of the backdrop color from the picture edge, so a white vase on white
 paper is read as its glaze and not as 80% white.
 
 Honest limits: every color is "as photographed" (studio light, fading, scanner; some of these are 150-year-old dyes).
@@ -209,7 +209,7 @@ def cmd_images(srcs):
 # ---------------------------------------------------------------------------------------------
 # 4. palettes
 # ---------------------------------------------------------------------------------------------
-def object_mask(X, h, w, tol=13.0, ring_min=0.4, lo=2.0, hi=0.95):
+def object_mask(X, h, w, tol=22.0, ring_min=0.3, lo=2.0, hi=0.92):
     """Studio backdrop of a photographed object: pixels connected to the picture edge whose Lab color is within
     `tol` (dE76) of the median edge color, when at least `ring_min` of the edge ring matches it. Unlike
     corpus.backdrop_mask this accepts a tinted or graded backdrop (cream paper, grey sweep); a painted ground that
@@ -251,7 +251,7 @@ def palette_of(path, cat):
         im = im.resize((max(1, round(im.width * s)), max(1, round(im.height * s))), Image.BOX)
     X = C.rgb_to_lab(np.asarray(im, dtype=np.float64).reshape(-1, 3))
     bg = C.backdrop_mask(X, im.height, im.width)
-    if bg is None and cat in OBJECT_CATS:
+    if bg is None and (cat in OBJECT_CATS or cat == "stamps"):   # stamps sit on a black or grey photo backdrop
         bg = object_mask(X, im.height, im.width)
     if bg is not None:
         X = X[~bg]
@@ -276,7 +276,7 @@ def _job(args):
         return nid, None, str(e)
 
 
-def cmd_palettes(workers=6):
+def cmd_palettes(workers=3):
     done = {r["key"] for r in C.jsonl_read(PAL)} if hasattr(C, "jsonl_read") else set()
     if not done and PAL.exists():
         done = {json.loads(l)["key"] for l in PAL.read_text().splitlines() if l.strip()}
