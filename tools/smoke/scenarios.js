@@ -1070,8 +1070,8 @@ scenario("map", "Look: family names when zoomed out is off by default and toggle
 // ================================================================== LEARN (past the first units: js/learnmore.js)
 scenario("learn", "the path goes past the first units: Begin teaches a generated unit as core cards", async t => {
   await t.open("#shot=lx:room", { settle: 600 });
-  await t.waitFor(".path-list .lx-stage-h", 10000, "the path's current stage header");
-  t.expect(/of 655 · Fluent/.test(t.text(".coll-n")), `the collection counts toward Fluent ("${t.text(".coll-n")}")`);
+  await t.waitFor(".lx-words .lx-bar-fill", 10000, "the Your words bar");
+  t.expect(/Next stop · 150 words/.test(t.text(".lx-words-head")), `the bar names the next stop ("${t.text(".lx-words-head")}")`);
   t.expect(!/the 101|\/101/.test(t.text("#app")), "the Learn room mentions the 101");
   const before = t.ev("Object.keys(S.cards).filter(k => k.startsWith('core:')).length");
   await t.click("[data-learn]", { wait: 600 });
@@ -1404,4 +1404,51 @@ scenario("mapstudy", "Name it, Neighborhood and Wander all play; Choose shows bo
   t.expect(t.ev("S.mapstudy.spec.level") === 25 && t.ev("S.mapstudy.spec.help") === 6, `the dials didn't save (${t.ev("JSON.stringify(S.mapstudy.spec)")})`);
   t.expect(t.$("[data-test]"), "no test-out under Choose");
   await t.click('[data-dm="you"]', { wait: 300 });
+});
+
+// ================================================================== THE LEARN ROOM, DECLUTTERED (PLAN.md lane C)
+scenario("learnroom", "placement lands on the map with a one-line hint that leaves at the first touch", async t => {
+  await t.open("#shot=place:result", { settle: 600 });
+  await t.click(await t.waitFor(".result [data-go]", 8000, "the placement result's button"), { wait: 900 });
+  const cv = await t.waitFor(".hm canvas", 8000, "the map after placement");
+  t.expect(!t.$(".room-learn"), "placement opened the Learn room instead of the map");
+  await t.waitFor(".lr-maphint", 3000, "the first-run hint");
+  t.expect(/Tap any color/.test(t.text(".lr-maphint")) && t.ev("S.mapHint") === 1, "the hint's words or its flag");
+  const r = cv.getBoundingClientRect();
+  await t.tapAt(cv, r.left + r.width / 2, r.top + r.height / 3);
+  await t.sleep(500);
+  t.expect(!t.$(".lr-maphint") && !t.ev("S.mapHint"), "the hint stayed after the first touch");
+});
+scenario("learnroom", "day one: five blocks or fewer, no grid, no stage rows, no Settings", async t => {
+  await t.open("#shot=learn", { settle: 600 });
+  t.ev("S = Object.assign(fresh(), { placed: { tier: 2, at: today() }, profileAsked: true }); home();");
+  await t.waitFor(".room-learn .lx-words", 8000, "the Your words bar");
+  const room = t.$(".room-learn");
+  t.expect(!t.$(".quilt", room) && !t.$(".path-list", room) && !t.$("[data-menu]", room), "the grid, the stage rows or Settings are still in the room");
+  t.expect(t.$$(".lr-today", room).length === 1 && !t.$(".dl-row", room), "Today is not one card");
+  const blocks = [".btn[data-learn], .btn[data-review]", ".lr-today", ".pr-entry", ".lx-words", ".inst", ".keep"].filter(s => t.$(s, room)).length;
+  t.expect(blocks <= 5, `${blocks} blocks on day one`);
+  t.expect(!/units? to|the 101/i.test(room.innerText), "old path copy is still there");
+  t.expect(!t.$("[data-words-map]", room), "See them on the map shows with nothing to see");
+});
+scenario("learnroom", "Your words names the next stop and opens the map on the Learned view", async t => {
+  await t.open("#shot=lx:room", { settle: 600 });
+  await t.waitFor(".lx-words .lx-bar-fill", 10000, "the Your words bar");
+  t.expect(/Next stop · 150 words/.test(t.text(".lx-words-head")), `next stop ("${t.text(".lx-words-head")}")`);
+  t.expect(/\d+ names? to go/.test(t.text(".lx-words-foot")), `what's left ("${t.text(".lx-words-foot")}")`);
+  await t.click("[data-words-map]", { wait: 900 });
+  await t.waitFor(".hm canvas", 8000, "the map from See them on the map");
+  t.expect(t.ev("S.hm.filter") === "learned" && /^stage:\d+$/.test(t.ev("S.hm.src")), `the map's view (${t.ev("S.hm.src")} · ${t.ev("S.hm.filter")})`);
+});
+scenario("learnroom", "the Today card shows the painting and opens both of its parts", async t => {
+  await t.open("#shot=learn", { settle: 600 });
+  await t.waitFor(".lr-today #dlPaintArt img", 8000, "Today's painting in the card");
+  await t.waitFor(() => t.$("#lrTcSw.on"), 8000, "today's color swatch");
+  t.expect(/,/.test(t.text("#lrTcTitle")) && t.text("#lrTcSub").length > 3, `the card's title ("${t.text("#lrTcTitle")}")`);
+  if (t.ev("typeof todayPick") !== "function") t.expect(!t.$(".lr-tc-chip.on"), "a color chip sits on a painting it isn't linked to");
+  await t.click(".lr-tc-act[data-daily]", { wait: 600 });
+  await t.waitFor(".dn-in", 10000, "Name it in six from the card");
+  await t.open("#shot=learn", { settle: 600 });
+  await t.click(await t.waitFor(".lr-tc-act[data-dpaint]", 8000, "the Look row"), { wait: 600 });
+  await t.waitFor("#dpFrame", 8000, "Today's painting from the card");
 });
