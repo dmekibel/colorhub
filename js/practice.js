@@ -536,6 +536,24 @@ if (typeof document !== "undefined") document.addEventListener("click", e => {
   if (Math.hypot(e.clientX - s.x, e.clientY - s.y) > 40) return;
   PR_SWALLOW = null; e.stopPropagation(); e.preventDefault();
 }, true);
+// Names sit ON the tiles (David, 2026-10-09: "maybe it should be on the colors themselves so the eye doesn't move
+// far"): bottom-left, in the tile's own readable ink, body size. prTag is the label; prTagLine adds the one-line
+// difference to a tile (the odd one, or the right one) instead of a small line under the board.
+const prTag = (h, n) => `<span class="pr-tag" style="--tag-ink:${ink(h) === "dark" ? "#141210" : "#FFFFFF"}"><b>${esc(n)}</b><em class="pr-tagfb"></em></span>`;
+function prTagLine(btn, line, name) {
+  const em = btn && btn.querySelector(".pr-tagfb"); if (!em || !line) return;
+  // "Jade is bluer and lighter than Green." reads on the Jade tile as "bluer and lighter than Green"
+  let t = String(line).replace(/\.$/, "");
+  if (name && t.toLowerCase().startsWith(name.toLowerCase() + " is ")) t = t.slice(name.length + 4);
+  em.textContent = t;
+}
+// after a named answer: Next, or a tap anywhere on the step; nothing advances by itself (no flash)
+function prHold(box, foot, go) {
+  let gone = false;
+  const once = () => { if (gone) return; gone = true; go(); };
+  prNextBtn(foot, once);
+  later(() => { if (box.isConnected) box.addEventListener("click", e => { if (!e.target.closest("[data-next]")) once(); }); }, 250);
+}
 function prNextBtn(foot, go, label = "Next") {
   foot.innerHTML = prPrimary(label, "", "data-next");
   const b = foot.querySelector("[data-next]");
@@ -591,7 +609,7 @@ PR_STEPS["quiz-color"] = { by: "pick", render(box, it, ctx = {}) {
     box.innerHTML = `<div class="pr-step pr-s-qc">
       ${ctx.note ? `<p class="pr-stepnote">${esc(ctx.note)}</p>` : ""}
       <div class="pr-q"><span class="pr-note">Which one is</span><b class="pr-t1" style="${prFit(nm, 44)}">${esc(nm)}?</b></div>
-      <div class="pr-grid4">${opts.map((o, i) => `<button class="pr-cell" data-i="${i}" aria-label="Option ${i + 1}"><i class="pr-swc" style="--c:${o.h}"></i><span class="pr-tag">${esc(prName(o))}</span></button>`).join("")}</div>
+      <div class="pr-grid4">${opts.map((o, i) => `<button class="pr-cell" data-i="${i}" aria-label="Option ${i + 1}"><i class="pr-swc" style="--c:${o.h}"></i>${prTag(o.h, prName(o))}</button>`).join("")}</div>
       <div class="pr-fb" aria-live="polite"></div>
       <div class="pr-foot"><p class="pr-hint">Tap its color</p></div></div>`;
     const fb = box.querySelector(".pr-fb"), foot = box.querySelector(".pr-foot");
@@ -606,9 +624,10 @@ PR_STEPS["quiz-color"] = { by: "pick", render(box, it, ctx = {}) {
       box.querySelectorAll(".pr-cell").forEach((b, k) => { b.classList.toggle("ok", opts[k] === it); b.disabled = true; });
       if (!ok) btn.classList.add("bad");
       buzz(ok ? 12 : [10, 40, 10]);
-      if (ok) { foot.innerHTML = `<p class="pr-hint pr-good">Right</p>`; return prAuto(() => resolve(res), 800); }
-      prFeedback(fb, it, o);
-      prNextBtn(foot, () => resolve(res));
+      if (ok) { prHold(box, foot, () => resolve(res)); prKeyer(ctx)(e => { if (e.key === "Enter" || e.key === " " || e.key === "ArrowRight") { e.preventDefault(); resolve(res); } }); return; }
+      // the difference sits on the right tile, next to its name (not in a small line under the board)
+      prTagLine(box.querySelector(`[data-i="${opts.indexOf(it)}"]`), prDiff(it, o), prName(it));
+      prHold(box, foot, () => resolve(res));
       prMiss(it, o, btn, () => resolve(res));
       prKeyer(ctx)(e => { if (e.key === "Enter" || e.key === " " || e.key === "ArrowRight") { e.preventDefault(); resolve(res); } });
     };
@@ -1004,7 +1023,7 @@ PR_STEPS["odd-one-out"] = { by: "pick", render(box, it, ctx = {}) {
     const opts = prShuffle([{ h: it.h, same: true }, ...shades.map(h => ({ h, same: true })), { h: odd.h, same: false, it: odd }]);
     box.innerHTML = `<div class="pr-step pr-s-qc pr-s-odd">
       <div class="pr-q"><span class="pr-note">Three of these are</span><b class="pr-t1" style="${prFit(nm, 44)}">${esc(nm)}</b></div>
-      <div class="pr-grid4">${opts.map((o, i) => `<button class="pr-cell" data-i="${i}" aria-label="Option ${i + 1}"><i class="pr-swc" style="--c:${o.h}"></i><span class="pr-tag">${esc(o.same ? nameOf(o.h).text : prName(o.it))}</span></button>`).join("")}</div>
+      <div class="pr-grid4">${opts.map((o, i) => `<button class="pr-cell" data-i="${i}" aria-label="Option ${i + 1}"><i class="pr-swc" style="--c:${o.h}"></i>${prTag(o.h, o.same ? nameOf(o.h).text : prName(o.it))}</button>`).join("")}</div>
       <div class="pr-fb" aria-live="polite"></div>
       <div class="pr-foot"><p class="pr-hint">Tap the one that isn't</p></div></div>`;
     const fb = box.querySelector(".pr-fb"), foot = box.querySelector(".pr-foot");
@@ -1020,9 +1039,9 @@ PR_STEPS["odd-one-out"] = { by: "pick", render(box, it, ctx = {}) {
       if (!ok) btn.classList.add("bad");
       buzz(ok ? 12 : [10, 40, 10]);
       const bigMiss = !ok && typeof mcShow === "function";
-      fb.innerHTML = `${bigMiss ? "" : `<span class="pr-pair"><i style="--c:${it.h}"></i><i style="--c:${odd.h}"></i></span>`}<p>${esc(prDiff(odd, it))}</p>`;
-      if (ok) return prAuto(() => resolve(res), 1100);
-      prNextBtn(foot, () => resolve(res));
+      // the difference rides on the odd tile itself: "Jade · bluer and lighter than Green"
+      prTagLine(box.querySelector(`[data-i="${opts.findIndex(x => !x.same)}"]`), prDiff(odd, it), prName(odd));
+      prHold(box, foot, () => resolve(res));
       if (bigMiss) {   // you took one of the three; the odd one was the answer
         const pk = { n: nameOf(o.h).n, h: o.h };
         later(() => { if (btn.isConnected) mcShow({ you: pk, was: { n: prName(odd), h: odd.h }, line: prDiff(odd, pk), from: btn, go: () => resolve(res), wasLabel: "The odd one" }); }, 380);

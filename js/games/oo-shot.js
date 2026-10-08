@@ -26,7 +26,7 @@ function ooShotTap(right, then) {
   if (r.none) { const b = document.querySelector("[data-none]"); if (b && right) b.click(); else tiles[0].click(); return then && then(); }
   const ans = r.ans || [];
   if (!right) { const w = [...tiles].find((t, i) => !ans.includes(i)); if (w) w.click(); return then && then(); }
-  ans.slice(0, r.v === "pair" || r.v === "twins" ? 2 : 1).forEach(i => tiles[i] && tiles[i].click());
+  ans.slice(0, r.v === "pair" || r.v === "twins" ? 2 : r.k > 1 ? r.k : 1).forEach(i => tiles[i] && tiles[i].click());
   if (then) then();
 }
 function ooShot(arg) {
@@ -56,6 +56,22 @@ function ooShot(arg) {
   if (what === "pairs") return ooPairsLoad().then(() => { ooRun({ label: "Pairs", total: 6, combo: true, cls: "oo-pairsrun", gen: () => ({ kind: "pairs", variant: a === "ans" ? "love" : "group", tier: "easy", record: false, hold: true }), onEnd: () => ooMap() });
     if (a === "ans") setTimeout(() => { const b = document.querySelector(".oo-pc"); if (b) b.click(); }, 400); });
   if (what === "wplay") return ooWhoseLoad().then(() => ooRun({ label: "Painters", total: 6, combo: true, cls: "oo-whose", gen: () => ({ kind: "whose", record: false, hold: true }), onEnd: () => ooMap() }));
+  // sessions: cl-<n>-<k>[-ans|-miss] (a Classic n × n grid with k odd tiles, at level 10), hard (Choose level 18),
+  // setup-shuffle / setup-choose (the setup in those states), end (a finished 30-round session against last time)
+  if (what === "cl" || what === "hard") {
+    const pf = ooPref("oo"), n = what === "hard" ? 3 : +a || 3, k = what === "hard" ? 1 : +b || 1, act = what === "hard" ? a : c;
+    Object.assign(pf, { mode: "classic", grid: n, odd: k, m: "pick", d: "level", lv: what === "hard" ? 17 : 9 });
+    ooPlay({ lv: what === "hard" ? 17 : 9 });
+    if (act === "ans" || act === "miss") return setTimeout(() => ooShotTap(act === "ans"), 1800);
+    return;
+  }
+  if (what === "setup") { const pf = ooPref("oo"); if (a === "shuffle") pf.mode = "shuffle"; if (a === "choose") Object.assign(pf, { m: "pick", d: "level", lv: 15, grid: 8, odd: 2 }); return ooMap(); }
+  if (what === "end") {
+    const sess = Object.assign(ooSess(9), { mode: "classic", lay: ooClassic(4, 1) }), rnd = ooRnd(7), res = [];
+    ooS().edge = { x: 11.2, day: addDays(today(), -2), n: 30 };
+    for (let t = 0; t < 30; t++) { const ok = rnd() < ooP(ooGapAt(sess.x), 1.6, 1 / 16); res.push({ ok: ok ? 1 : 0, ms: 1800 + rnd() * 2400, act: ooGapAt(sess.x), base: "#5B7FA6", odd: "#5E86AE" }); ooSessStep(sess, ok); }
+    return ooSessDone(sess, { res, hits: res.filter(x => x.ok).length, maxCombo: 6, hint: false, min: 1.3, minPair: ["#5B7FA6", "#5D84AC"], total: 30 });
+  }
   if (what === "lv") {
     const i = clamp((+a || 1) - 1, 0, OO_LEVEL_N - 1);
     ooPlayLevel(i, { layout: { g3: "grid3", ring: "ring", hc: "honey", st: "strip" }[c] || undefined });

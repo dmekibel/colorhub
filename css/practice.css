@@ -128,16 +128,20 @@ html:has(#app > .screen.pr-booth) body::after{display:none}
 .pr-q{flex:none;margin-top:6px}
 .pr-q .pr-t1{display:block;margin-top:2px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;padding-bottom:4px}
 .pr-grid4{flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:12px 12px;margin-top:12px}
-.pr-cell{display:flex;flex-direction:column;gap:6px;min-height:0;padding:0}
+.pr-cell{position:relative;display:flex;flex-direction:column;gap:6px;min-height:0;padding:0}
 .pr-swc{flex:1;min-height:40px;display:block;background:var(--c);border-radius:var(--r-1,4px);outline:3px solid transparent;outline-offset:3px;transition:outline-color .2s,transform var(--dur-0,.12s)}
 .pr-cell:active .pr-swc{transform:scale(.97)}
-.pr-tag{flex:none;height:20px;font:400 17px/20px var(--serif);color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;visibility:hidden;text-align:left}
+.pr-tag{position:absolute;left:12px;right:12px;bottom:10px;display:block;font:400 19px/1.2 var(--serif);color:var(--tag-ink,#fff);visibility:hidden;text-align:left;pointer-events:none;opacity:0;transform:translateY(4px);transition:opacity .25s var(--ease,ease),transform .25s var(--ease,ease)}
+.pr-tag b{font-weight:400;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pr-tagfb{display:block;margin-top:3px;font:400 17px/1.25 var(--sans);font-style:normal;color:var(--tag-ink,#fff);opacity:.9;text-wrap:pretty}
+.pr-tagfb:empty{display:none}
+.pr-grid4.named .pr-tag{opacity:1;transform:none}
 .pr-grid4.named .pr-tag{visibility:visible}
 .pr-cell.chosen .pr-swc{outline-color:#fff}
 .pr-cell.ok .pr-swc{outline-color:var(--good)}
 .pr-cell.bad .pr-swc{outline-color:var(--bad)}
-.pr-cell.ok .pr-tag::before{content:"";display:inline-block;width:.8em;height:.8em;margin-right:.3em;vertical-align:-.05em;background:var(--good);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/contain no-repeat}
-.pr-cell.bad .pr-tag::before{content:"";display:inline-block;width:.8em;height:.8em;margin-right:.3em;vertical-align:-.05em;background:var(--bad);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.6' stroke-linecap='round'%3E%3Cpath d='M6.5 6.5l11 11M17.5 6.5l-11 11'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.6' stroke-linecap='round'%3E%3Cpath d='M6.5 6.5l11 11M17.5 6.5l-11 11'/%3E%3C/svg%3E") center/contain no-repeat}
+.pr-cell.ok .pr-tag b::before{content:"";display:inline-block;width:.8em;height:.8em;margin-right:.3em;vertical-align:-.05em;background:var(--good);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/contain no-repeat}
+.pr-cell.bad .pr-tag b::before{content:"";display:inline-block;width:.8em;height:.8em;margin-right:.3em;vertical-align:-.05em;background:var(--bad);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.6' stroke-linecap='round'%3E%3Cpath d='M6.5 6.5l11 11M17.5 6.5l-11 11'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.6' stroke-linecap='round'%3E%3Cpath d='M6.5 6.5l11 11M17.5 6.5l-11 11'/%3E%3C/svg%3E") center/contain no-repeat}
 
 /* ---------- type ---------- */
 .pr-typef{flex:none;display:flex;align-items:center;border-bottom:1px solid rgba(255,255,255,.9)}

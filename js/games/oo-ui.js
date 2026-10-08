@@ -30,14 +30,15 @@ const ooStars = i => { const s = ooS().stars[i]; return Array.isArray(s) ? s : [
 const ooStarCount = () => Object.values(ooS().stars).reduce((a, s) => a + (Array.isArray(s) ? s.filter(Boolean).length : 0), 0)
   + Object.values(ooS().mix).reduce((a, m) => a + (m && Array.isArray(m.stars) ? m.stars.filter(Boolean).length : 0), 0);
 const ooMixOpen = () => { const st = ooS(); return ooDoneAt(st.stars, st.cleared, OO_MIX_AT - 1); };
-// the level For you plays: it starts at twice your measured threshold (a comfortable gap just above your edge), or level 1 for a new eye
+// where For you starts a session: a little below your last edge (ooSessStart), else below your measured threshold,
+// else level 1 for a new eye. st.you keeps it between visits.
 function ooYou() {
   const st = ooS();
-  if (!Number.isInteger(st.you)) { const e = ooEye(st.model, null, null); st.you = e.th && e.n >= 6 ? ooLevelForTh(e.th, 2) : 0; }
+  if (!Number.isInteger(st.you)) { const e = ooEye(st.model, null, null); st.you = st.edge && isFinite(st.edge.x) ? ooSessStart({ edge: st.edge.x }) : e.th && e.n >= 6 ? ooSessStart({ th: e.th }) : 0; }
   return st.you;
 }
-// the level your threshold sits at (the Edge of my eye), or null before you have been measured
-function ooEdgeLevel() { const e = ooEye(ooS().model, null, null); return e.th && e.n >= 6 ? ooLevelForTh(e.th, 1) : null; }
+// the level of your edge (the last session's, else the level your measured threshold sits at), or null before you have been measured
+function ooEdgeLevel() { const st = ooS(); if (st.edge && isFinite(st.edge.x)) return Math.round(st.edge.x); const e = ooEye(st.model, null, null); return e.th && e.n >= 6 ? ooLevelForTh(e.th, 1) : null; }
 // the level a Choose pick plays
 const ooPickLv = () => { const e = ooEye(ooS().model, null, null); return ooPickLevel(ooPref("oo"), e.th); };
 const ooDone = i => { const st = ooS(); return ooDoneAt(st.stars, st.cleared, i); };
@@ -147,7 +148,7 @@ function ooSpec(L, i, o = {}) {
   const weak = ooWeakFam(m), fam = o.set ? null : weak && rnd() < .35 ? weak : null;
   const judg = tw === "flash" ? "memory" : ["busy", "sizes", "mosaic", "gradient", "painting"].includes(b) ? "context" : axis || "any";
   const th = judg === "any" ? Math.exp(OO_AXES.reduce((a, j) => a + Math.log(ooTheta(m, j, fam)), 0) / 3) : ooTheta(m, judg, fam);
-  const cols = ooCols(b, n), bf = (OO_BF[b] || 1) * (["grid", "busy", "gradient"].includes(b) ? (cols <= 4 ? 1 : cols === 5 ? 1.1 : cols === 6 ? 1.2 : 1.28) : 1);
+  const cols = ooCols(b, n), bf = (OO_BF[b] || 1) * (["grid", "busy", "gradient"].includes(b) ? ooSizeF(cols) : 1);
   // o.gap: a ladder level's gap, drawn through the layout's modifier so every layout sits at the same perceptual level
   const jit = o.gap != null ? .94 + (o.rnd || Math.random)() * .12 : 1, ease = o.gap != null && novel && !o.noEase ? 1.6 : 1;
   const d = clamp(o.d != null ? o.d : o.gap != null ? o.gap * jit * ease * (OO_VF[v] || 1) * bf * (tw === "breathe" ? 1.1 : 1) : th * OO_TIER[tier] * (OO_VF[v] || 1) * bf * (tw === "breathe" ? 1.1 : 1), OO_MIN, OO_MAX);
@@ -178,10 +179,13 @@ function ooSnap() {
 // The round renderer. ui = { q, stage, foot }. r = a round from ooRound (or a painting spec). o = { flash,
 // breathe, hint, none (show a "None" answer), feedback }. Resolves with { ok, ms, picked, right, act, hint, dir }.
 // ======================================================================
+const OO_NUM_W = ["", "One", "Two", "Three", "Four"];
 const OO_Q = { one: "Which tile is different?", pair: "Two tiles are different. Find both.", group: "Find the hidden shape.",
   count: "How many tiles are different?", twins: "Find the two identical tiles.", which: "Which tile is different?" };
 function ooBoardHTML(r, o = {}) {
-  const gap = r.b === "strip" ? .008 : r.b === "honey" || r.b === "ring" ? 0 : r.b === "mosaic" ? 0 : .016;
+  // big Classic grids (up to 16 × 16) keep about a 2 px seam and small corners, so the tiles stay big enough to see
+  const dense = r.cols > 6 && (r.b === "grid" || r.b === "busy");
+  const gap = r.b === "strip" ? .008 : r.b === "honey" || r.b === "ring" ? 0 : r.b === "mosaic" ? 0 : dense ? Math.min(.016, .09 / r.cols) : .016;
   const g = r.ground, bg = !g ? "" : g.split === "v" ? `background:linear-gradient(90deg,${g.a} 50%,${g.c} 50%)` : g.split === "h" ? `background:linear-gradient(180deg,${g.a} 50%,${g.c} 50%)`
     : g.split === "d" ? `background:linear-gradient(135deg,${g.a} 50%,${g.c} 50%)` : `background:conic-gradient(${g.a} 0 25%,${g.c} 0 50%,${g.a} 0 75%,${g.c} 0)`;
   const pct = x => (x * 100).toFixed(3) + "%";
@@ -191,7 +195,7 @@ function ooBoardHTML(r, o = {}) {
     const st = `left:${pct(x)};top:${pct(y)};width:${pct(w)};height:${pct(h)};--c:${r.colors[i]}${c.rot ? `;--rot:${c.rot.toFixed(1)}deg` : ""}${o.breathe ? `;--bd:-${(Math.random() * 3.4).toFixed(2)}s;--bp:${(2.8 + Math.random() * 1.4).toFixed(2)}s` : ""}${img}`;
     return `<button class="oo-t oo-${c.shape}${r.paint ? " oo-pt" : ""}" data-i="${i}" style="${st}" aria-label="Tile ${i + 1}"></button>`;
   }).join("");
-  return `<div class="oo-board oo-b-${r.b}${o.breathe ? " oo-breathe" : ""}${g ? " oo-ground" : ""}" style="--ar:${r.aspect};${bg}">${tiles}</div>`;
+  return `<div class="oo-board oo-b-${r.b}${o.breathe ? " oo-breathe" : ""}${g ? " oo-ground" : ""}${dense ? " oo-dense" : ""}" style="--ar:${r.aspect};${bg}">${tiles}</div>`;
 }
 // a ripple across the board from the tapped tile (calm: a small dip and lift, in order of distance)
 function ooRipple(board, from) {
@@ -204,13 +208,13 @@ let OO_LAST = null;   // the round on screen (screenshot mode taps its answer: j
 function ooAsk(ui, r, o = {}) {
   if (r.b === "painting" && !r.paint) return ooPaintPrep(r).then(ok => {
     // no readable pixels (a file:// page): the same round on a plain board, filed as context
-    if (!ok) Object.assign(r, ooRound({ ...r.spec, b: "grid" }), { judg: "context", bf: 1, noPaint: 1 });
+    if (!ok) Object.assign(r, ooRound({ ...r.spec, b: "grid", d: r.spec.d / OO_BF.painting }), { judg: "context", bf: 1, noPaint: 1 });
     return ooAsk(ui, r, o);
   });
   OO_LAST = r;
   return new Promise(resolve => {
     const { q, stage, foot } = ui, v = r.v, tap = ["one", "pair", "group", "twins", "which"].includes(v);
-    q.textContent = o.teach ? o.teach : r.b === "painting" ? "Which patch was recolored?" : o.flash ? "Remember the board" : OO_Q[v] || OO_Q.one;
+    q.textContent = o.teach ? o.teach : r.b === "painting" ? "Which patch was recolored?" : o.flash ? "Remember the board" : v === "one" && r.k > 1 ? `${OO_NUM_W[r.k] || r.k} tiles are different. Find them all.` : OO_Q[v] || OO_Q.one;
     stage.innerHTML = ooBoardHTML(r, o);
     const board = stage.querySelector(".oo-board"), tiles = [...board.querySelectorAll(".oo-t")];
     let t0 = performance.now(), done = false, hint = false, sel = [];
@@ -234,6 +238,8 @@ function ooAsk(ui, r, o = {}) {
       buzz(ok ? 10 : [10, 40, 10]);
       if (!ok || o.feedback === false) reveal(); else (r.ans || []).forEach(i => tiles[i] && tiles[i].classList.add("ring"));
       if (ok && extra.el) ooRipple(board, extra.el);
+      if (r.k > 1 && v === "one") q.textContent = ok ? `Found all ${OO_NUM_W[r.k].toLowerCase()}.` : `${OO_NUM_W[r.k]} tiles were different.`;
+      if (o.feedback !== false) ooTileNames(board, tiles, r, extra.picked);
       resolve({ ok: ok ? 1 : 0, ms, hint, act: r.act, right: r.odd, dir: r.dir, ...extra });
     };
     // which way: after the right tile, the six words (one gesture: a tap)
@@ -249,11 +255,12 @@ function ooAsk(ui, r, o = {}) {
       const i = +t.dataset.i, inAns = (r.ans || []).includes(i);
       t.classList.remove("tap"); void t.offsetWidth; t.classList.add("tap");
       if (v === "count") return;
-      if (v === "pair" || v === "twins") {
+      if (v === "pair" || v === "twins" || (r.ans || []).length > 1 && v === "one") {
         if (sel.includes(i)) return;
         if (!inAns) { t.classList.add("miss"); return finish(false, { picked: r.colors[i] }); }
         sel.push(i); t.classList.add("sel"); buzz(6);
-        if (sel.length === 2) finish(true, { el: t, picked: r.colors[i] });
+        if (sel.length === r.ans.length) finish(true, { el: t, picked: r.colors[i] });
+        else if (r.k > 1) q.textContent = `${r.ans.length - sel.length} more to find.`;
         return;
       }
       if (v === "which" && inAns) { done = false; tiles.forEach(x => x.disabled = true); foot.querySelectorAll("[data-hint],[data-none]").forEach(b => b.remove()); return askDir(t); }
@@ -275,6 +282,22 @@ function ooAsk(ui, r, o = {}) {
       later(() => { board.classList.add("oo-hide"); q.textContent = v === "count" ? "How many were different?" : "Where was the different one?"; tiles.forEach(t => t.disabled = false); t0 = performance.now(); }, o.flashMs || 1000);
     }
   });
+}
+
+// The names go ON the tiles (David, 2026-10-09: "maybe it should be on the colors themselves so the eye doesn't move
+// far"): the odd tile carries its name and the way it differs ("Jade · lighter"), one plain tile beside it carries the
+// rest's name. Only when a tile is wide enough for a body-size word (about 84 px); tiny tiles keep the line below.
+function ooTileNames(board, tiles, r, picked) {
+  if (typeof nameOf !== "function" || !r.base || !r.odd || r.base === r.odd || r.none || r.b === "painting" || !(r.ans || []).length) return;
+  const odd = r.v === "twins" ? null : tiles[r.ans[0]];
+  if (!odd || odd.getBoundingClientRect().width < 84) return;
+  const nb = nameOf(r.base).n, no = nameOf(r.odd).n;
+  const put = (t, html, hex) => { if (t && !t.querySelector(".oo-tn")) t.insertAdjacentHTML("beforeend", `<span class="oo-tn" data-ink="${ink(hex)}">${html}</span>`); };
+  put(odd, `${esc(no)}${r.dir ? `<em>${esc(r.dir)}</em>` : ""}`, r.odd);
+  // the nearest plain tile, so the two names sit side by side
+  const oc = r.cells[r.ans[0]], plain = tiles.map((t, i) => [t, i]).filter(([, i]) => !r.ans.includes(i) && r.colors[i] === r.base)
+    .sort((a, b) => Math.hypot(r.cells[a[1]].x - oc.x, r.cells[a[1]].y - oc.y) - Math.hypot(r.cells[b[1]].x - oc.x, r.cells[b[1]].y - oc.y))[0];
+  if (plain) put(plain[0], esc(nb), r.base);
 }
 
 // ---------- painting tiles: a painting cut into tiles, one patch recolored by d ----------
@@ -317,7 +340,7 @@ function ooPaintPrep(r) {
         cx.putImageData(id, c.gx * T, c.gy * T);
         const after = mean(c.gx * T, c.gy * T);
         r.paint = { url: cv.toDataURL("image/jpeg", .92), title: p.title, artist: p.artist };
-        r.ans = [at]; r.act = de2000(before, after); r.base = labHex(...before); r.odd = labHex(...after); r.dir = ooDirWord(r.base, r.odd);
+        r.ans = [at]; r.act = ooGapDE(before, after); r.base = labHex(...before); r.odd = labHex(...after); r.dir = ooDirWord(r.base, r.odd);
         r.colors = r.cells.map(() => "#5F5F5F"); r.fam = ooFam(r.base);
         res(true);
       } catch (e) { res(false); }   // file:// pages can't read pixels: fall back to a plain board
@@ -351,12 +374,16 @@ function ooAdjTier(tier, run) {
 const ooThNow = () => { const m = ooS().model, o = {}; Object.keys(OO_JUDG).forEach(j => { if (m.j[j] && m.j[j].n) o[j] = Math.exp(m.j[j].r); }); return o; };
 function ooRun(cfg) {
   eyeNamesReady();
-  const st = { i: 0, hits: 0, res: [], combo: 0, maxCombo: 0, pts: 0, lives: cfg.lives || 0, hint: false, prev: null, th0: ooThNow() };
+  // i0: rounds already played in this session (Keep going continues a session: the bar picks up where it was)
+  const st = { i: cfg.i0 || 0, hits: 0, res: [], combo: 0, maxCombo: 0, pts: 0, lives: cfg.lives || 0, hint: false, prev: null, th0: ooThNow() };
+  // a long session gets one thin bar instead of 30 segments
+  const bar = !cfg.lives && cfg.total > 12;
   const segs = cfg.lives ? `<div class="oo-hearts" aria-label="${cfg.lives} lives">${Array.from({ length: cfg.lives }, () => `<i></i>`).join("")}</div>`
+    : bar ? `<div class="oo-prog" role="progressbar" aria-valuemin="0" aria-valuemax="${cfg.total}"><i style="--w:${(st.i / cfg.total * 100).toFixed(1)}%"></i></div>`
     : `<div class="segs">${Array.from({ length: cfg.total }, () => `<i style="--c:var(--ink)"></i>`).join("")}</div>`;
   const html = `
-    <header class="deck-top">${cfg.box ? "" : `<button class="icon-btn" data-close aria-label="Close">${ICON.x}</button>`}${segs}<span class="left mono oo-lvl">${esc(cfg.label || "")}</span></header>
-    <div class="drill-head oo-head"><h2 id="ooq"></h2><p class="oo-combo" id="oocombo"></p></div>
+    <header class="deck-top">${cfg.box ? "" : `<button class="icon-btn" data-close aria-label="Close">${ICON.x}</button>`}${segs}<span class="left mono oo-lvl">${esc(cfg.labelOf ? cfg.labelOf() : cfg.label || "")}</span></header>
+    <div class="drill-head oo-head"><h2 id="ooq"></h2>${cfg.meter ? `<div class="oo-meter" id="oometer">${cfg.meter()}</div>` : ""}<p class="oo-combo" id="oocombo"></p></div>
     <div class="drill-stage oo-stage" id="oostage"></div>
     <div class="drill-foot oo-foot" id="oofoot"></div>`;
   let el;
@@ -367,7 +394,7 @@ function ooRun(cfg) {
   const quit = () => cfg.onQuit ? cfg.onQuit() : ooMap();
   const cb = el.querySelector("[data-close]"); if (cb) cb.onclick = quit;
   if (!cfg.box) onKey = e => { if (e.key === "Escape") quit(); };
-  const segEls = el.querySelectorAll(".segs i"), hearts = el.querySelectorAll(".oo-hearts i");
+  const segEls = el.querySelectorAll(".segs i"), hearts = el.querySelectorAll(".oo-hearts i"), progEl = el.querySelector(".oo-prog i"), lvlEl = el.querySelector(".oo-lvl"), meterEl = el.querySelector("#oometer");
   const showCombo = (moment) => {
     if (moment) { comboEl.innerHTML = `<em class="oo-streak">${moment}</em>`; return; }
     comboEl.innerHTML = cfg.combo && st.combo >= 2 ? `<span class="mono">×${Math.min(st.combo, 5)}</span><i style="--w:${Math.min(st.combo, 5) / 5 * 100}%"></i><span class="mono">${st.pts.toLocaleString()}</span>` : "";
@@ -391,10 +418,15 @@ function ooRun(cfg) {
       st.pts += Math.round((100 + clamp((6000 - res.ms) / 50, 0, 100)) * Math.min(Math.max(st.combo, 1), 5));
       if (cfg.combo && [3, 5, 8, 12].includes(st.combo)) { moment = `${st.combo} in a row`; buzz([8, 50, 8]); }
     } else { st.combo = 0; if (cfg.lives) { st.lives--; if (hearts[st.lives]) hearts[st.lives].classList.add("gone"); } }
+    // a session's own beat (the staircase): a level-up is the bigger moment, with its own sound
+    if (cfg.onAnswer) { const m = cfg.onAnswer(res, st); if (m) { moment = m; if (lvlEl) { lvlEl.classList.remove("up"); void lvlEl.offsetWidth; lvlEl.classList.add("up"); } } }
+    if (lvlEl && cfg.labelOf) lvlEl.textContent = cfg.labelOf();
+    if (meterEl && cfg.meter) meterEl.innerHTML = cfg.meter();
     st.res.push({ ...res, base: r.base || res.base, odd: r.odd || res.right, v: r.v || kind, b: r.b, none: r.none, count: r.count, dir: res.dir || r.dir, d: r.d });
     if (segEls[st.i]) { segEls[st.i].classList.add("on"); segEls[st.i].style.setProperty("--c", res.ok ? "var(--good)" : "var(--bad)"); }
     st.prev = { r, res };
     st.i++;
+    if (progEl) progEl.style.setProperty("--w", (Math.min(1, st.i / cfg.total) * 100).toFixed(1) + "%");
     showCombo(moment);
     save();
     const fb = kind === "board" ? ooLine(r, res) : { html: res.line || "", cmp: res.cmp || null };
@@ -403,14 +435,15 @@ function ooRun(cfg) {
     const big = !res.ok && typeof mcShow === "function" && (res.mc || (kind === "board" && fb.cmp && res.picked && res.right && res.picked !== res.right ? { you: { h: res.picked }, was: { h: res.right } } : null));
     if (big) fb.cmp = null;
     const cmp = fb.cmp ? `<div class="oo-cmp">${fb.cmp.map(([h, w]) => `<span><i style="--c:${h}"></i><em>${esc(w)}</em></span>`).join("")}</div>` : "";
-    if (res.ok && !last && !it.hold) {
-      // right: a short auto-advance, but a tap on the line or the board holds it, and Next goes on whenever you're ready
+    if (res.ok && !last) {
+      // right: the names stay on the tiles and the line stays put until you go on (David, 2026-10-09: no flash).
+      // Next, or a tap anywhere on the board, goes on.
       ui.foot.innerHTML = `<div class="oo-rev oo-in"><p class="oo-fb ok">${fb.html}</p><button class="btn ghost" data-next>Next ${ICON.arrow}</button></div>`;
-      let tm = later(round, fb.html.length > 120 ? 2400 : 1500), gone = false;
-      const hold = () => { if (tm) { clearTimeout(tm); tm = 0; } };
-      const go1 = () => { if (gone) return; gone = true; hold(); round(); };
+      let gone = false;
+      const go1 = () => { if (gone) return; gone = true; round(); };
       ui.foot.querySelector("[data-next]").onclick = go1;
-      ui.foot.addEventListener("pointerdown", hold, { once: true }); ui.stage.addEventListener("pointerdown", hold, { once: true });
+      later(() => { if (!gone && ui.stage.isConnected) ui.stage.addEventListener("click", e => { if (!e.target.closest("[data-swatch],.oo-ladd,[data-ladd],a")) go1(); }); }, 300);
+      if (!cfg.box) onKey = e => { if (e.key === "Escape") quit(); else if (e.key === "Enter" || e.key === " " || e.key === "ArrowRight") { e.preventDefault(); go1(); } };
       return;
     }
     ui.foot.innerHTML = `<div class="oo-rev oo-in">${res.ok ? "" : cmp}<p class="oo-fb${res.ok ? " ok" : ""}">${fb.html}</p><button class="btn" data-next>${last ? (cfg.box ? "Done" : "See how you did") : "Next"} ${ICON.arrow}</button></div>`;
@@ -443,73 +476,120 @@ function ooLine(r, res) {
 }
 
 // ======================================================================
-// Levels: a ladder of gaps (design/ODD-ONE-OUT.md). A level is one number, the gap between the odd tile and the
-// rest. Rounds inside it rotate through the layouts you've met; a level is passed by accuracy, 8 of 10.
+// A session (design/ODD-ONE-OUT.md): one staircase that climbs to the edge of your eye. 30 rounds (Keep going adds
+// 10). Classic keeps one square grid the whole time (your size, your number of odd tiles); Shuffle rotates the layouts
+// you have met. The level moves with every answer (ooSessStep, js/games/oo-engine.js): a whole level per right answer
+// until the first miss, then half a level up for a right one and one and a half down for a miss, so it settles where
+// you get about three in four. The level climbs on screen, a new level gets the level-up sound, and the end names
+// your edge today against last time.
 // ======================================================================
-// opt.test: three rounds at this gap, all right, and every level below counts as cleared. opt.layout pins one layout.
-function ooPlayLevel(i, opt = {}) {
-  if (!S.scr && !ooShotMode() && typeof screenCheck === "function") return screenCheck(() => ooPlayLevel(i, opt));
-  i = clamp(i | 0, 0, OO_LEVEL_N - 1);
-  const st = ooS(), gap = ooLevelGap(i), test = !!opt.test, rounds = test ? OO_TEST_ROUNDS : OO_LEVEL_ROUNDS, need = test ? OO_TEST_ROUNDS : OO_LEVEL_PASS;
-  const first = !test && st.sets === 0 && i === ooYou() && !opt.layout, warm = !test && !opt.layout && !!st.last && st.last !== today();
+// opt: { lv (start level; a Choose pick or a level tapped on the ladder), layout (pin one Shuffle layout: screenshots),
+//        sess (a session to continue: Keep going), mode ("classic" | "shuffle", else your saved choice) }
+function ooPlay(opt = {}) {
+  if (!S.scr && !ooShotMode() && typeof screenCheck === "function") return screenCheck(() => ooPlay(opt));
+  const st = ooS(), pf = ooPref("oo"), mode = opt.layout ? "shuffle" : opt.mode || (opt.sess && opt.sess.mode) || pf.mode;
+  const lay0 = mode === "classic" ? (opt.sess && opt.sess.lay) || ooClassic(pf.grid, pf.odd) : null;
+  const first = !opt.sess && st.sets === 0 && !opt.layout && opt.lv == null && pf.m !== "pick";
+  const lv = opt.lv != null ? opt.lv : pf.m === "pick" ? ooPickLv() : ooYou();
+  const sess = opt.sess || Object.assign(ooSess(lv), { mode, lay: lay0, pick: pf.m === "pick" || opt.lv != null });
+  if (opt.sess) sess.n += OO_SESSION_MORE;
+  const warm = !opt.sess && !opt.layout && !!st.last && st.last !== today();
   let last = null, chainBase = null;
-  const gen = (k, run) => {
-    const lay = opt.layout ? ooLayout(opt.layout) : first && k < 3 ? ooLayout("grid3") : ooLayoutNext(ooLayoutsFor(st.sets, gap), st.seen, last, Math.random, k);
+  const gen = k => {
+    if (sess.i >= sess.n) return null;
+    const lay = opt.layout ? ooLayout(opt.layout) : lay0 ? lay0 : first && sess.i < 3 ? ooLayout("grid3") : ooLayoutNext(ooLayoutsFor(st.sets, ooGapAt(sess.x)), st.seen, last, Math.random, sess.i % 10);
     last = lay.id;
     const kind = ooKindKey(lay.v, lay.b, lay.tw), seen = st.seen[kind] || 0;
-    const sp = ooSpec(lay, k, { gap, base: lay.tw === "chain" ? chainBase : null, tw: lay.tw });
+    const sp = ooSpec(lay, k, { d: ooSessD(sess, lay), base: lay.tw === "chain" ? chainBase : null, tw: lay.tw });
     let r;
     if (lay.b === "painting") { r = ooPaintRound(sp); r.v = lay.v; }
-    else r = ooRound({ ...sp, twist: lay.tw });
-    Object.assign(r, { tw: lay.tw, kindKey: kind, fam: sp.fam || r.fam, rnd: sp.rnd, layout: lay.id, level: i });
+    else r = ooRound({ ...sp, twist: lay.tw, k: lay.k });
+    Object.assign(r, { tw: lay.tw, kindKey: kind, fam: sp.fam || r.fam, rnd: sp.rnd, layout: lay.id, level: Math.floor(sess.x) });
     chainBase = lay.tw === "chain" && r.odd && !r.none ? r.odd : null;
-    return { r, o: { flash: lay.tw === "flash", breathe: lay.tw === "breathe", none: lay.b === "busy", hint: !(first && k < 3),
-      teach: first && k === 0 ? "One tile is a little different. Tap it." : null, nudge: first && k < 2 ? 3500 : seen < 2 ? 6000 : 0 },
-      note: warm && k === 0 ? "Warm-up" : seen === 0 && !first ? (lay.news || `New layout: ${lay.name}`) : lay.tw === "chain" && k > 0 ? "The odd color is the new base" : null };
+
+    return { r, o: { flash: lay.tw === "flash", breathe: lay.tw === "breathe", none: lay.b === "busy", hint: !(first && sess.i < 3),
+      teach: first && sess.i === 0 ? "One tile is a little different. Tap it." : null, nudge: first && sess.i < 2 ? 3500 : !lay0 && seen < 2 ? 6000 : 0 },
+      note: warm && k === 0 ? "Warm-up" : !lay0 && seen === 0 && !first ? (lay.news || `New layout: ${lay.name}`) : lay.tw === "chain" && k > 0 ? "The odd color is the new base" : null };
   };
+  const lvWord = () => `Level ${Math.floor(sess.x) + 1}`;
   ooRun({
-    label: test ? "Test out" : `Level ${i + 1}`, total: rounds, max: rounds, combo: true, gen,
-    // the set ends the moment it's decided: 8 right (passed), or too many misses to reach 8
-    endWhen: s => s.hits >= need || (s.i - s.hits) > rounds - need,
-    onEnd: s => test ? ooTestDone(i, s) : ooLevelDone(i, s),
+    label: lvWord(), labelOf: lvWord, total: sess.n, i0: sess.i, combo: true, gen, cls: lay0 && lay0.n >= 9 ? "oo-dense" : "",
+    meter: () => ooMeter(sess),
+    // every answer moves the staircase; reaching a new level is the big moment (the level-up sound)
+    onAnswer: res => { const up = ooSessStep(sess, !!res.ok); if (!up) return null; later(() => buzz([10, 30, 10, 30, 24]), 120); return `Level ${Math.floor(sess.x) + 1}`; },
+    onEnd: s => ooSessDone(sess, s),
   });
 }
-function ooLevelDone(i, s) {
-  const st = ooS(), mix0 = ooMixOpen(), gap = ooLevelGap(i);
-  const finish = s.hits >= OO_LEVEL_PASS, clean = finish && s.hits === s.total;
-  const fast = finish && s.med != null && s.med <= OO_FAST_MS, nohint = finish && !s.hint;
-  const old = ooStars(i), stars = [finish || old[0], fast || old[1], nohint || old[2]].map(x => x ? 1 : 0);
-  st.stars[i] = stars;
-  const pb = s.pts > (st.best[i] || 0) && s.pts > 0; if (pb) st.best[i] = s.pts;
-  // For you follows the result: a pass at or above your level lifts it (two levels for a clean sweep); a rough set at your level eases it
-  const you0 = ooYou();
-  let moved = 0;
-  if (finish && i >= you0) { st.you = Math.min(OO_LEVEL_N - 1, i + (clean ? 2 : 1)); moved = 1; st.fresh = st.you; }
-  else if (!finish && i === you0 && s.hits <= 5 && you0 > 0) { st.you = you0 - 1; moved = -1; }
-  const mastered = stars.every(Boolean) && !old.every(Boolean);
-  save();
-  const you = ooYou(), pct = pctFmt(ooLevelGap(you));
-  const lede = mastered ? `All three stars. ${OO_WORLDS[OO_LEVELS[i].w].mile}`
-    : finish ? (moved > 0 ? `Next for you: level ${you + 1}, a ${pct} gap.` : `Level ${i + 1} is passed. Next for you is still level ${you + 1}, a ${pct} gap.`)
-    : moved < 0 ? `You need ${OO_LEVEL_PASS} of ${OO_LEVEL_ROUNDS} at ${pctFmt(gap)}. Next for you: level ${you + 1}, a ${pct} gap.`
-    : `You need ${OO_LEVEL_PASS} of ${OO_LEVEL_ROUNDS} at ${pctFmt(gap)}. Try again, or pick another level on the map.`;
-  ooResults({ title: `Level ${i + 1} · ${pctFmt(gap)} different`, s, finish, stars, got: [finish, fast, nohint], pb, unlocked: false, mastered, world: OO_LEVELS[i].w, lede,
-    head: mastered ? null : finish ? (pb ? "A new <em>best.</em>" : "Level <em>passed.</em>") : null,
-    next: finish && i < OO_LEVEL_N - 1 ? i + 1 : null, again: () => ooPlayLevel(i), mixNew: !mix0 && ooMixOpen(),
-    score: `${s.hits} of ${s.total} right` });
+// the old entry points (screenshots, older links): a level is a starting point now
+function ooPlayLevel(i, opt = {}) { return ooPlay({ ...opt, lv: clamp(i | 0, 0, OO_LEVEL_N - 1) }); }
+// the level meter under the question: where you are on the 20 levels, the gap in words, your high-water mark
+function ooMeter(sess) {
+  const w = x => (x / (OO_LEVEL_N - 1) * 100).toFixed(1) + "%";
+  return `<span class="oo-mtrack" aria-hidden="true"><i class="oo-mfill" style="--w:${w(sess.x)}"></i><b class="oo-mhi" style="--l:${w(sess.hi)}"></b></span>
+    <span class="oo-mtxt"><b class="mono">${pctFmt(ooGapAt(sess.x))}</b> apart</span>`;
 }
-// the end of a test-out: all three right and every level below counts as cleared (played levels keep their stars)
-function ooTestDone(i, s) {
-  const st = ooS(), pass = s.hits >= OO_TEST_ROUNDS, mix0 = ooMixOpen(), gap = ooLevelGap(i);
-  if (pass) { ooTestOutMark(st.cleared, i); if (ooYou() < i) st.you = i; st.fresh = st.you; }
+// the climb: the level of every round as a line (rights as filled dots, misses open), today's edge as a dashed line
+function ooClimbSVG(sess, edgeX) {
+  const h = sess.hist, n = Math.max(h.length, 2), W = 320, H = 120, P = 8;
+  const lo = Math.max(0, Math.floor(Math.min(...h.map(x => x.x), edgeX) - 1)), hi = Math.min(OO_LEVEL_N - 1, Math.ceil(Math.max(...h.map(x => x.x), edgeX) + 1));
+  const X = i => P + i / (n - 1) * (W - 2 * P), Y = x => H - P - (x - lo) / Math.max(1, hi - lo) * (H - 2 * P);
+  const pts = h.map((e, i) => `${X(i).toFixed(1)},${Y(e.x).toFixed(1)}`).join(" ");
+  const dots = h.map((e, i) => `<circle cx="${X(i).toFixed(1)}" cy="${Y(e.x).toFixed(1)}" r="3.2" class="${e.ok ? "ok" : "no"}"/>`).join("");
+  return `<figure class="oo-climb"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Your level, round by round">
+    <line x1="${P}" x2="${W - P}" y1="${Y(edgeX).toFixed(1)}" y2="${Y(edgeX).toFixed(1)}" class="edge"/>
+    <polyline points="${pts}" class="path"/>${dots}</svg>
+    <figcaption><span>Round by round</span><span>Levels ${lo + 1} to ${hi + 1} · dashed: your edge</span></figcaption></figure>`;
+}
+// the end of a session: your edge today, honest, against last time
+function ooSessDone(sess, s) {
+  const st = ooS(), mix0 = ooMixOpen(), edgeX = ooSessEdge(sess), gap = ooGapAt(edgeX), lvN = Math.round(edgeX) + 1;
+  const prev = st.edge && isFinite(st.edge.x) ? st.edge : null;
+  if (sess.i >= 8) {
+    st.edge = { x: +edgeX.toFixed(2), day: today(), n: sess.i };
+    if (!Array.isArray(st.edges)) st.edges = [];
+    const le = st.edges[st.edges.length - 1];
+    if (le && le[0] === today()) le[1] = st.edge.x; else st.edges.push([today(), st.edge.x]);
+    if (st.edges.length > 90) st.edges.splice(0, st.edges.length - 90);
+    st.you = ooSessStart({ edge: edgeX });
+  }
+  // the ladder: the highest level you answered right is reached (its first star), the levels below it count as cleared
+  const top = sess.top, rights = s.res.filter(x => x.ok).map(x => x.ms).sort((a, b) => a - b), med = rights.length ? rights[rights.length >> 1] : null;
+  let newTop = false;
+  if (top >= 0) {
+    const old = ooStars(top);
+    newTop = !old[0] && !st.cleared[top];
+    st.stars[top] = [1, old[1] || (med != null && med <= OO_FAST_MS) ? 1 : 0, old[2] || !s.hint ? 1 : 0];
+    ooTestOutMark(st.cleared, top);
+    st.fresh = top;
+  }
   save();
-  const upTo = i === 1 ? "Level 1" : `Levels 1 to ${i}`;
-  ooResults({ title: `Test out · Level ${i + 1} · ${pctFmt(gap)} different`, s, finish: pass, test: true, stars: [0, 0, 0], got: [0, 0, 0], pb: false, mixNew: pass && !mix0 && ooMixOpen(),
-    head: pass ? `${upTo} <em>cleared.</em>` : "Not <em>yet.</em>",
-    lede: pass ? `Three of three at a ${pctFmt(gap)} gap. ${i === 1 ? "It shows" : "They show"} as cleared on the map, and level ${i + 1} is next for you. It still needs playing for its stars.`
-      : `You need all three. Play level ${i + 1} from the start, or test out again when you're ready.`,
-    next: pass ? i : null, again: () => ooPlayLevel(i, { test: true }), againText: pass ? "Test again" : "Try again", back: "Back to the map",
-    score: `${s.hits} of ${s.total} right` });
+  const rightPct = sess.i ? Math.round(sess.hits / sess.i * 100) : 0;
+  const pg = prev ? ooGapAt(prev.x) : null, better = prev && edgeX - prev.x >= .5, worse = prev && prev.x - edgeX >= .5;
+  const vs = !prev ? "Your first measured edge." : better ? `Up from ${pctFmt(pg)} last time.` : worse ? `Last time ${pctFmt(pg)}. Light, screen and tired eyes move it from day to day.` : `About the same as last time (${pctFmt(pg)}).`;
+  const misses = s.res.filter(x => !x.ok && x.base && x.odd && x.base !== x.odd && !x.none).slice(-6);
+  const board = sess.mode === "classic" && sess.lay ? `Classic · ${sess.lay.n} × ${sess.lay.n}${sess.lay.k > 1 ? ` · ${sess.lay.k} odd tiles` : ""}` : "Shuffle";
+  const el = show(`
+    <p class="eyebrow">${esc(board)} · ${sess.i} rounds</p>
+    <h1>Your edge today: <em>${pctFmt(gap)}</em></h1>
+    <p class="lede">Level ${lvN}. ${esc(vs)}</p>
+    ${sess.hist.length >= 4 ? ooClimbSVG(sess, edgeX) : ""}
+    <div class="res-list">
+      <div class="res"><span>Right</span><b class="mono">${sess.hits} of ${sess.i}</b><span class="oo-rp">${rightPct}%</span></div>
+      ${top >= 0 ? `<div class="res"><span>Highest level</span><b class="mono">Level ${top + 1} · ${pctFmt(OO_GAPS[top])}</b>${newTop ? "<em>new</em>" : "<span></span>"}</div>` : ""}
+      ${s.maxCombo >= 3 ? `<div class="res"><span>Longest streak</span><b class="mono">${s.maxCombo} in a row</b><span></span></div>` : ""}
+      ${s.minPair ? `<div class="res"><span>Smallest you spotted</span><b class="mono">${pctFmt(s.min)}</b><span class="oo-pair"><i style="--c:${s.minPair[0]}" data-swatch="${s.minPair[0]}"></i><i style="--c:${s.minPair[1]}" data-swatch="${s.minPair[1]}"></i></span></div>` : ""}
+    </div>
+    ${!mix0 && ooMixOpen() ? `<p class="gy-news"><b>Unlocked</b> The Mix: What changed?, Out of order, Rebuild, Was it there?, Imposter and n-back.</p>` : ""}
+    ${misses.length ? `<div class="sec-head"><b>Your misses</b><span>tap a color to open it</span></div><div class="oo-miss">${misses.map(m => `<span><i style="--c:${m.base}" data-swatch="${m.base}"></i><i style="--c:${m.odd}" data-swatch="${m.odd}"></i><em class="mono">${pctFmt(m.act || 0)}</em></span>`).join("")}</div>` : ""}
+    <p class="fine">Your edge is where you get about three in four right, measured on this screen.</p>
+    <div class="stack">
+      <button class="btn" data-more>Keep going ${ICON.arrow}</button>
+      <button class="btn ghost" data-map>Done</button>
+    </div>`, "result oo-res oo-sres");
+  el.querySelector("[data-more]").onclick = () => ooPlay({ sess });
+  el.querySelector("[data-map]").onclick = () => ooMap();
+  onKey = e => { if (e.key === "Enter") el.querySelector("[data-more]").click(); };
+  later(() => buzz(better || newTop ? [12, 60, 12] : 12), 450);
 }
 // Survival and the Growing board: two stand-alone games beside the ladder (the Mix lists them). Their difference follows
 // your own estimate and a staircase, not a level.
@@ -592,62 +672,97 @@ function ooEyeLine() {
   const any = ooEye(m, null, null);
   return any.th ? `About ${pctFmt(any.th)} so far. Your eye profile fills in as you play.` : "Your eye profile fills in as you play.";
 }
+// The setup (David, 2026-10-09: "make the setup simpler"): two boards and two ways in, then Start.
+//   Board: Classic (one square grid all session: a Grid slider from 2 × 2 to 16 × 16 and an Odd tiles slider, 1 to 4,
+//          with a live preview) or Shuffle (a new layout every round).
+//   Start: For you (a little below your edge) or Choose (a Level slider: round 1 is drawn at exactly that gap).
+// Below it, your ladder: the 20 levels with what you've reached; a tap starts there.
+function ooSetupHTML() {
+  const pf = ooPref("oo"), classic = pf.mode === "classic", pick = pf.m === "pick", lv = pick ? ooPickLv() : ooYou();
+  const seg = (attr, cur, opts) => `<div class="oo-pk-seg" role="radiogroup">${opts.map(([v, l]) => `<button class="${cur === v ? "on" : ""}" role="radio" aria-checked="${cur === v}" ${attr}="${v}">${l}</button>`).join("")}</div>`;
+  const row = (label, val, input) => `<label class="oo-sl"><span class="oo-sl-h"><span>${label}</span><b class="mono" data-val>${val}</b></span>${input}</label>`;
+  return `
+    ${seg("data-mode", pf.mode, [["classic", "Classic"], ["shuffle", "Shuffle"]])}
+    ${classic ? `<div class="oo-prev" data-prev>${ooPreviewHTML(pf.grid, pf.odd)}</div>
+      ${row("Grid", `${pf.grid} × ${pf.grid}`, `<input type="range" min="${OO_GRID_MIN}" max="${OO_GRID_MAX}" step="1" value="${pf.grid}" data-grid aria-label="Grid size">`)}
+      ${row("Odd tiles", pf.odd, `<input type="range" min="1" max="${OO_ODD_MAX}" step="1" value="${pf.odd}" data-odd aria-label="How many odd tiles">`)}`
+    : `<p class="oo-pk-note">A new layout every round: rings, honeycombs, paint strips, colored grounds, paintings.</p>`}
+    <div class="oo-setgap"></div>
+    ${seg("data-pk-m", pf.m, [["you", "For you"], ["pick", "Choose"]])}
+    ${pick ? row("Start at", `Level ${lv + 1} · ${pctFmt(ooLevelGap(lv))}`, `<input type="range" min="1" max="${OO_LEVEL_N}" step="1" value="${lv + 1}" data-lv aria-label="Starting level">`) : ""}
+    <p class="oo-pk-note" data-note>${pick ? "Round 1 is drawn at exactly this gap. Then it climbs or eases with you." : `Starts at level ${lv + 1}, a ${pctFmt(ooLevelGap(lv))} gap, just below your edge, and climbs as you get them right.`}</p>`;
+}
+// the live preview: the grid you'll play, its odd tiles a clear step off (so you can see what you set)
+function ooPreviewHTML(n, k) {
+  const rnd = ooRnd(ooHash("prev" + n + ":" + k)), base = lchHex(58, 30, 215), m = ooMove(base, "light", 1, 9), odd = m ? m.hex : base;
+  const at = new Set(ooShuf([...Array(n * n).keys()], rnd).slice(0, k)), g = n > 8 ? 1 : n > 4 ? 2 : 4;
+  return `<div class="oo-prevg" style="--n:${n};--gg:${g}px" aria-hidden="true">${Array.from({ length: n * n }, (_, i) => `<i style="--c:${at.has(i) ? odd : base}"></i>`).join("")}</div>`;
+}
+function ooSetupMount(host, onChange) {
+  const draw = () => {
+    host.innerHTML = ooSetupHTML();
+    const pf = ooPref("oo"), tap = f => () => { f(); save(); buzz(4); draw(); onChange(); };
+    host.querySelectorAll("[data-mode]").forEach(b => b.onclick = tap(() => { pf.mode = b.dataset.mode; }));
+    host.querySelectorAll("[data-pk-m]").forEach(b => b.onclick = tap(() => {
+      pf.m = b.dataset.pkM;
+      // an old preset (Easy..Edge) becomes its level on the slider; a first Choose starts the slider where For you would
+      if (pf.m === "pick" && (pf.d !== "level" || pf.lv == null)) { const lv = pf.d !== "level" ? ooPickLevel({ m: "pick", d: pf.d }, ooEye(ooS().model, null, null).th) : ooYou(); pf.d = "level"; pf.lv = lv; }
+    }));
+    // sliders: the value and the preview follow the thumb; the choice is saved when you let go
+    const slide = (sel, set, label) => { const inp = host.querySelector(sel); if (!inp) return;
+      const val = inp.closest(".oo-sl").querySelector("[data-val]");
+      inp.oninput = () => { set(+inp.value); val.textContent = label(+inp.value); const pv = host.querySelector("[data-prev]"); if (pv) pv.innerHTML = ooPreviewHTML(pf.grid, Math.min(pf.odd, pf.grid * pf.grid - 1)); buzz(3); onChange(); };
+      inp.onchange = () => save(); };
+    slide("[data-grid]", v => { pf.grid = v; }, v => `${v} × ${v}`);
+    slide("[data-odd]", v => { pf.odd = v; }, v => String(v));
+    slide("[data-lv]", v => { pf.d = "level"; pf.lv = v - 1; }, v => `Level ${v} · ${pctFmt(ooLevelGap(v - 1))}`);
+  };
+  draw();
+}
 function ooMap() {
   eyeNamesReady();
   const st = ooS(), cur = ooYou(), edge = ooEdgeLevel(), fresh = st.fresh, back = st.last && st.last !== today();
   delete st.fresh;
   const worldDone = w => OO_LEVELS.every((L, i) => L.w !== w || ooStars(i).every(Boolean));
-  // every level is open: tap one to jump in. A level ahead of you offers a test-out first (ooLevelTap)
   const rows = OO_LEVELS.map((L, i) => {
     const s = ooStars(i), done = !!s[0], clr = !done && !!st.cleared[i], mast = s.every(Boolean);
-    const tags = [mast ? "Mastered" : done ? "Passed" : clr ? "Cleared by test out" : null, i === cur ? "Next for you" : null, i === edge ? "Your edge" : null].filter(Boolean);
-    const row = `<button class="oo-node${i === cur ? " cur" : ""}${done ? " done" : ""}${clr ? " clr" : ""}${i === fresh ? " fresh" : ""}" data-lv="${i}">
-      ${ooMini(i)}<span class="oo-nt"><b><span class="mono">${i + 1}</span>${esc(pctFmt(L.gap))} different</b><em>${esc([ooGapWord(i), ...tags].join(" · "))}</em></span>${ooStarHTML(s)}</button>`;
+    const tags = [mast ? "Mastered" : done ? "Reached" : clr ? "Cleared" : null, i === edge ? "Your edge" : null].filter(Boolean);
+    const row = `<button class="oo-node${i === edge ? " cur" : ""}${done ? " done" : ""}${clr ? " clr" : ""}${i === fresh ? " fresh" : ""}" data-lv="${i}">
+      ${ooMini(i)}<span class="oo-nt"><b><span class="mono">${i + 1}</span>${esc(pctFmt(L.gap))} apart</b><em>${esc([ooGapWord(i), ...tags].join(" · "))}</em></span>${ooStarHTML(s)}</button>`;
     const world = i % 5 === 0 ? `<div class="oo-world${worldDone(L.w) ? " lit" : ""}"><b>${esc(OO_WORLDS[L.w].name)}</b><span>${esc(OO_WORLDS[L.w].mile)}</span></div>` : "";
     return world + row + (i === OO_MIX_AT - 1 ? ooMixBlock() : "");
   }).join("");
+  const eg = st.edge && isFinite(st.edge.x) ? st.edge : null;
   const el = show(`
     <header class="deck-top"><button class="icon-btn" data-close aria-label="Back to Train">${ICON.back}</button><span style="flex:1"></span><span class="mono oo-tot">${ooStarCount()} ${icon("starOn", 14)}</span></header>
     <h1 class="title-1 oo-title">Odd one out</h1>
-    <p class="note">${back ? "Welcome back. Your first round today is a warm-up." : st.sets ? `Level ${cur + 1} of ${OO_LEVEL_N} is next for you.` : "Find the tile that's different. Each level makes the gap smaller."}</p>
+    <p class="note">${back ? "Welcome back. Your first round today is a warm-up." : eg ? `Your edge: ${pctFmt(ooGapAt(eg.x))}, level ${Math.round(eg.x) + 1}.` : "Find the tile that's different. Each right answer makes the gap smaller."}</p>
+    <div class="oo-setup" data-setup></div>
     <button class="oo-eyeline" data-eye><span>${esc(ooEyeLine())}</span><b>Your eye ${ICON.chev}</b></button>
-    <div class="oo-pk-host" data-pk-host></div>
-    <p class="note oo-jumpnote">Every level is open: tap one to jump in. Stars still need playing.</p>
+    <div class="sec-head oo-ladhead"><b>Your ladder</b><span>tap a level to start there</span></div>
     <div class="oo-path">${rows}</div>
-    <p class="fine">How it works: a level is one number, the gap between the odd tile and the rest, from 12% down to about 0.6%, the edge of what a screen can show. Nothing else changes from level to level; the layouts (grids, rings, honeycombs, colored grounds, hidden shapes, paintings) rotate inside every level. Pass a level with 8 of 10 right. Every answer also updates a hidden estimate of the smallest difference you can see, for hue, lightness, vividness, colors in context and colors from memory, and for each color family. For you starts near that estimate and moves with your results; Choose pins the level yourself, and it keeps learning from your answers. Stars: pass the level, answer quickly, use no hints.</p>
-    <div class="oo-go"><button class="btn" data-play>${st.sets ? `Play level ${cur + 1}` : "Start"} ${ICON.arrow}</button></div>
+    <p class="fine">A level is one number: the gap between the odd tile and the rest, from 12% down to 0.6%. A session climbs a level for each right answer and eases after a miss, so it settles where you get about three in four.</p>
+    <div class="oo-go"><button class="btn" data-play></button></div>
   `, "oo-map");
   const play = el.querySelector("[data-play]"), paintPlay = () => {
-    const lv = ooPickLv(), pk = ooPref("oo").m === "pick" && lv != null;
-    play.innerHTML = `${st.sets || pk ? `Play level ${(pk ? lv : cur) + 1}` : "Start"} ${ICON.arrow}`;
+    const pf = ooPref("oo"), lv = pf.m === "pick" ? ooPickLv() : cur;
+    play.innerHTML = `${st.sets || pf.m === "pick" ? `Start at level ${lv + 1}` : "Start"} ${ICON.arrow}`;
   };
   el.querySelector("[data-close]").onclick = () => go("gym");
-  play.onclick = () => ooPlayLevel(ooPref("oo").m === "pick" ? ooPickLv() : cur);
+  play.onclick = () => ooPlay();
   el.querySelector("[data-eye]").onclick = ooEyePage;
-  ooPickMount(el.querySelector("[data-pk-host]"), "oo", paintPlay);
+  ooSetupMount(el.querySelector("[data-setup]"), paintPlay);
   paintPlay();
   el.querySelectorAll("[data-lv]").forEach(b => b.onclick = () => ooLevelTap(+b.dataset.lv));
   el.querySelectorAll("[data-mix]").forEach(b => b.onclick = () => b.dataset.locked ? toast(b.dataset.locked) : ooPlayMix(b.dataset.mix));
-  const cn = el.querySelector(".oo-node.fresh") || el.querySelector(".oo-node.cur");
-  if (cn && cur > 2 && !ooShotMode()) later(() => cn.scrollIntoView({ block: "center", behavior: reduceMotion ? "auto" : "smooth" }), 250);
+  const cn = el.querySelector(".oo-node.fresh");
+  if (cn && !ooShotMode()) later(() => cn.scrollIntoView({ block: "center", behavior: reduceMotion ? "auto" : "smooth" }), 250);
 }
-// a tap on a level: play it (and, in Choose, remember it as your pick). A level ahead of the one you're on offers a
-// test-out as well: three rounds, all right, and every level below counts as cleared
+// a tap on the ladder: Choose that level and start there (the staircase takes it from there; no test-out needed)
 function ooLevelTap(i) {
-  const st = ooS(), L = OO_LEVELS[i], below = OO_LEVELS.map((_, j) => j).filter(j => j < i && !ooDone(j)).length;
-  if (!L) return;
-  const pf = ooPref("oo");
-  if (pf.m === "pick") { pf.d = "level"; pf.lv = i; save(); }
-  if (i <= ooYou() || ooDone(i) || !below) return ooPlayLevel(i);
-  const upTo = i === 1 ? "level 1" : `levels 1 to ${i}`;
-  const { close } = sheet(`<div class="oo-jump">
-    <h2 class="title-3">Level ${i + 1} · ${esc(pctFmt(L.gap))} different</h2>
-    <p class="note">${esc(ooGapWord(i))}. ${below === 1 ? "One level before it isn't" : `${below} levels before it aren't`} cleared yet.</p>
-    <div class="stack"><button class="btn" data-jp>Play level ${i + 1} ${ICON.arrow}</button><button class="btn ghost" data-jt>Test out of ${upTo}</button></div>
-    <p class="fine">Test out: three rounds at this gap. Get all three right and ${upTo} count as cleared. Stars still need playing.</p></div>`);
-  const sh = document.querySelector(".sheet .oo-jump");
-  sh.querySelector("[data-jp]").onclick = () => { close(); ooPlayLevel(i); };
-  sh.querySelector("[data-jt]").onclick = () => { close(); ooPlayLevel(i, { test: true }); };
+  if (!OO_LEVELS[i]) return;
+  const pf = ooPref("oo"); pf.m = "pick"; pf.d = "level"; pf.lv = i; save();
+  ooPlay({ lv: i });
 }
 const OO_EXTRAS = [["survival", "Survival", "Three lives. The board grows and the gap shrinks"], ["grow", "Growing board", "Every right answer adds tiles, until a miss"]];
 function ooMixBlock() {
@@ -746,8 +861,8 @@ function ooShelf() {
     <button class="play-row" data-oo-pairs><span><b>Painters' pairs</b><span>Which colors did painters put together?</span></span><em class="lt-best">${st.pairs && st.pairs.best ? `<b>${st.pairs.best}</b>best` : "new"}</em></button>
     <button class="play-row" data-oo-whose><span><b>Whose palette?</b><span>Five colors from a painter's work: whose are they?</span></span><em class="lt-best">${st.mix.whose && st.mix.whose.best ? `<b>${st.mix.whose.best}</b>best` : "new"}</em></button>`;
 }
-// the first tap on Odd one out goes straight into level 1 (taught by doing); after that, the map
-const ooEnter = () => ooS().sets ? ooMap() : ooPlayLevel(ooYou());
+// the first tap on Odd one out goes straight into a Classic 3 × 3 session from level 1 (taught by doing); after that, the setup
+const ooEnter = () => ooS().sets ? ooMap() : ooPlay();
 function ooWire(el) {
   const m = el.querySelector("[data-oo-map]"); if (m) m.onclick = ooEnter;
   const l = el.querySelector("[data-oo-line]"); if (l) l.onclick = () => ooAcross();

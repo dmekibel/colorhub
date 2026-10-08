@@ -214,7 +214,8 @@ for (const [j, truth, g] of [["hue", 1.4, 1 / 9], ["light", 2.1, 1 / 16], ["chro
   ok(E.OO_LEVEL_PASS === 8 && E.OO_LEVEL_ROUNDS === 10, "a level is passed with 8 of 10");
   // a chosen difficulty still teaches the model fairly: an observer playing only Easy or only Hard ends at the same threshold
   const truth = 2, g = 0;
-  const run = tier => { const m = E.ooModel({}); for (let t = 0; t < 400; t++) { const d = E.ooTheta(m, "hue", "Blues") * E.OO_TIER[tier]; E.ooUpdate(m, "hue", "Blues", d, rnd() < E.ooP(d, truth, g), g); } return E.ooTheta(m, "hue", "Blues"); };
+  // read as the mean over the last 200 of 600 answers (a single final value is one noisy step)
+  const run = tier => { const m = E.ooModel({}); let acc = 0; for (let t = 0; t < 600; t++) { const d = E.ooTheta(m, "hue", "Blues") * E.OO_TIER[tier]; E.ooUpdate(m, "hue", "Blues", d, rnd() < E.ooP(d, truth, g), g); if (t >= 400) acc += Math.log(E.ooTheta(m, "hue", "Blues")); } return Math.exp(acc / 200); };
   const easy = run("easy"), hard = run("hard"), edge = run("boss");
   ok([easy, hard, edge].every(x => Math.abs(Math.log(x / truth)) < .35), `Easy (${easy.toFixed(2)}), Hard (${hard.toFixed(2)}) and Edge (${edge.toFixed(2)}) all find the true threshold ${truth}`);
   // the edge estimate for the games without an eye model
@@ -228,6 +229,75 @@ for (const [j, truth, g] of [["hue", 1.4, 1 / 9], ["light", 2.1, 1 / 16], ["chro
   for (let t = 0; t < 60; t++) { lo.push(E.ooWhoseAlts(wl, .1, rnd).alts[0]); hi.push(E.ooWhoseAlts(wl, .9, rnd).alts[0]); }
   ok(lo.reduce((a, b) => a + b) / 60 < hi.reduce((a, b) => a + b) / 60 && E.ooWhoseAlts(wl, .5, rnd).alts.length === 2 && E.ooWhoseAlts([1, 2], .5, rnd).ease === null, "Whose palette?: higher ease draws farther decoys");
   ok(E.ooPairRatioOf([0, 0, 0, 0, 3], [0, 0, 0, 0, 1.5]) === 2 || Math.abs(E.ooPairRatioOf([0, 0, 0, 0, 3], [0, 0, 0, 0, 1.5]) - 2) < 1e-9, "pair ratio is the larger lift over the smaller");
+}
+
+// ---------- 9. sessions (David, 2026-10-09): honest difficulty, Classic boards, a staircase that converges ----------
+{
+  const de76 = (a, b) => { const A = lab(a), B = lab(b); return Math.hypot(A[0] - B[0], A[1] - B[1], A[2] - B[2]); };
+  // the gap metric: lightness, vividness and hue moves at one level look about equally big (ΔE76 medians within 25%),
+  // so a chosen level never hides easy vividness rounds on saturated colors (the "super hard is still easy" bug)
+  const med = a => { a = a.slice().sort((x, y) => x - y); return a[a.length >> 1]; }, by = {};
+  for (const axis of ["light", "chroma", "hue"]) {
+    by[axis] = [];
+    for (let k = 0; by[axis].length < 200 && k < 2000; k++) {
+      const base = lchHex(25 + rnd() * 65, 20 + rnd() * 50, rnd() * 360), m = E.ooMove(base, axis, rnd() < .5 ? 1 : -1, 1.1);
+      if (m && Math.abs(m.act - 1.1) < .15) by[axis].push(de76(base, m.hex));
+    }
+  }
+  const meds = Object.values(by).map(med), spread = Math.max(...meds) / Math.min(...meds);
+  say(`Gap metric: ΔE76 at level 16 (1.1): lightness ${meds[0].toFixed(2)}, vividness ${meds[1].toFixed(2)}, hue ${meds[2].toFixed(2)}`);
+  ok(spread < 1.25, `the three axes look about equally hard at one gap (spread ${spread.toFixed(2)})`);
+  ok(E.ooGapDE("#808080", "#808080") === 0 && Math.abs(E.ooGapDE("#000000", "#FFFFFF") - 100) < .5, "the gap reads as % of black-to-white");
+  // Choose: a session started at Expert, or at level 18, draws round 1 at exactly that level's gap (no easing at all)
+  for (const [pref, want] of [[{ m: "pick", d: "expert" }, E.OO_PRESET_LV.expert], [{ m: "pick", d: "level", lv: 17 }, 17]]) {
+    const lv = E.ooSessStart({ pick: E.ooPickLevel(pref, 2) });
+    ok(lv === want, `Choose ${pref.d}${pref.lv != null ? " " + (pref.lv + 1) : ""} starts at level ${want + 1} (got ${lv + 1})`);
+    for (const lay of [E.ooClassic(3, 1), E.ooClassic(8, 2), E.ooClassic(16, 1), E.ooLayout("ring"), E.ooLayout("honey")]) {
+      const s = E.ooSess(lv), d = E.ooSessD(s, lay), gap = E.OO_GAPS[lv];
+      ok(Math.abs(d / E.ooLayoutF(lay) - gap) < 1e-9, `${lay.id} ${lay.n}: the target is the level's gap through the layout's modifier`);
+      // 8-bit hex codes can't hit every gap: at most 1 round in 20 may land just outside ±15%, never easier than +30%
+      let inBand = 0, worst = 0;
+      for (let k = 0; k < 40; k++) {
+        const r = E.ooRound({ v: lay.v, b: lay.b, n: lay.n, k: lay.k, d, rnd });
+        const eff = r.act / E.ooLayoutF(lay);
+        ok(!r.fallback, `level ${lv + 1} on ${lay.name}: no fallback round`);
+        if (eff >= gap * .85 && eff <= gap * 1.15) inBand++;
+        worst = Math.max(worst, eff / gap);
+      }
+      ok(inBand >= 38 && worst < 1.3, `level ${lv + 1} on ${lay.name}: ${inBand} of 40 rounds at the level's gap (±15%), the easiest ${worst.toFixed(2)}× it`);
+    }
+  }
+  // Classic: k odd tiles, all the same odd color, every grid size from 2 × 2 to 16 × 16
+  for (const n of [2, 3, 8, 12, 16]) for (const k of [1, 2, 4]) {
+    const lay = E.ooClassic(n, k), r = E.ooRound({ v: lay.v, b: lay.b, n: lay.n, k: lay.k, d: 3, rnd });
+    ok(r.colors.length === n * n && r.ans.length === lay.k && r.ans.every(i => r.colors[i] === r.odd) && r.colors.filter(c => c === r.odd).length === lay.k, `Classic ${n} × ${n} with ${lay.k} odd tiles`);
+  }
+  ok(E.ooClassic(2, 4).k === 3, "a 2 × 2 grid leaves at least one plain tile");
+  const pn = E.ooPrefNorm({ m: "pick", d: "level", lv: 17, mode: "shuffle", grid: 40, odd: 9 });
+  ok(pn.mode === "shuffle" && pn.grid === 16 && pn.odd === 4 && pn.lv === 17 && E.ooPrefNorm({}).mode === "classic" && E.ooPrefNorm({}).grid === 3, "the board choice is kept and repaired");
+  // the staircase: climbs a level per right answer at first, then settles near the observer's 75% point and stays there
+  {
+    const s = E.ooSess(4); E.ooSessStep(s, 1); E.ooSessStep(s, 1);
+    ok(s.x === 6 && s.ups === 2, "the run-up climbs a whole level per right answer, each one a level-up");
+    E.ooSessStep(s, 0); ok(s.x === 4.5 && !s.rush, "a miss drops a level and a half and ends the run-up");
+    E.ooSessStep(s, 1); ok(s.x === 5, "after that a right answer climbs half a level");
+  }
+  for (const truth of [.9, 2, 4.5]) {
+    // the observer's 75%-right gap on a 3 × 3 board (guessing 1 in 9)
+    const g = 1 / 9; let lo = .01, hi = 50; for (let i = 0; i < 60; i++) { const mid = (lo + hi) / 2; if (E.ooP(mid, truth, g) < .75) lo = mid; else hi = mid; }
+    const want = E.ooXOfGap(lo), edges = []; let hits = 0, n = 0;
+    for (let rep = 0; rep < 80; rep++) {
+      const s = E.ooSess(E.ooSessStart({ th: truth }));
+      for (let t = 0; t < E.OO_SESSION_N; t++) { const ok1 = rnd() < E.ooP(E.ooGapAt(s.x), truth, g); E.ooSessStep(s, ok1); if (t >= 10) { hits += ok1; n++; } }
+      edges.push(E.ooSessEdge(s));
+    }
+    const mean = edges.reduce((a, x) => a + x, 0) / edges.length;
+    say(`  session vs observer at ${truth}: edge level ${(mean + 1).toFixed(1)} (75% point ${(want + 1).toFixed(1)}), ${(hits / n * 100).toFixed(0)}% right after the run-up`);
+    ok(Math.abs(mean - want) < 1.2, `a 30-round session finds the 75% point within a level (${(mean + 1).toFixed(1)} vs ${(want + 1).toFixed(1)})`);
+    ok(hits / n > .66 && hits / n < .86, `a session keeps you near three in four right (${(hits / n).toFixed(2)})`);
+  }
+  ok(E.ooSessStart({ edge: 12.4 }) === 9 && E.ooSessStart({}) === 0 && E.ooSessStart({ pick: 17 }) === 17, "For you starts three levels below your last edge; Choose starts at the pick");
+  ok(Math.abs(E.ooGapAt(15) - E.OO_GAPS[15]) / E.OO_GAPS[15] < .05 && Math.abs(E.ooXOfGap(E.ooGapAt(7.5)) - 7.5) < 1e-9, "the continuous ladder matches the 20 levels");
 }
 
 say(`\n${passes} passed, ${fails} failed`);
