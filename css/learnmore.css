@@ -1,13 +1,57 @@
-/* The path past the first units (js/learnmore.js lxPathHtml). Builds on app.css's .path-* rows. */
-.lx-stage-h{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:10px;padding-top:14px;border-top:1px solid rgba(236,232,223,.1);font:400 15px/1.3 var(--sans);color:var(--ink)}
-.lx-stage-h .note{font-size:14px;white-space:nowrap}
-.lx-more{margin-top:-4px}
-.lx-stage-done .path-band{height:18px;opacity:.9}
-.lx-stage-next .path-band{opacity:.45}
-.lx-band-wait{background:var(--surface-2)}
-.lx-stage-next .path-cap .note{white-space:nowrap}
-.path-list .path-cap{gap:12px}
-.path-list .path-cap .note{flex:none}
+/* The Learn room, decluttered (js/learn.js home(), js/learnmore.js lxWordsHtml; PLAN.md lane C) */
+/* Today: one card. The painting with its color as a chip, a title, then two parts with their own ticks. */
+.lr-today{margin-top:var(--s6)}
+.lr-tcard{margin-top:var(--s3)}
+.lr-tc-art{position:relative;display:block;width:100%;padding:0;border:0;background:none;cursor:pointer;border-radius:var(--r-2);overflow:hidden;transition:transform .2s var(--ease)}
+.lr-tc-art:active{transform:scale(.985)}
+.lr-tc-img{display:block;aspect-ratio:16/9;border-radius:0;background:var(--surface-2)}
+.lr-tc-img img{width:100%;height:100%;object-fit:cover;object-position:50% 28%;display:block}
+.lr-tc-chip{position:absolute;right:12px;bottom:12px;min-width:56px;height:56px;padding:0 12px;border-radius:var(--r-pill);background:var(--c,var(--surface-3));box-shadow:0 0 0 2px rgba(14,13,11,.55),0 6px 18px rgba(0,0,0,.35);display:flex;align-items:center;opacity:0;transform:scale(.6);transition:opacity .35s var(--ease),transform .45s var(--spring)}
+.lr-tc-chip.on{opacity:1;transform:none}
+.lr-tc-chip span{font:400 18px/1 var(--serif);white-space:nowrap}
+.lr-tc-chip span[data-ink="dark"]{color:#141311}.lr-tc-chip span[data-ink="light"]{color:#F4F1EA}
+.lr-tc-text{margin-top:var(--s3)}
+.lr-tc-title{font:400 24px/1.15 var(--serif);letter-spacing:-.01em;color:var(--ink);text-wrap:balance}
+.lr-tc-title em{font-style:italic}
+.lr-tc-sub{margin-top:4px;min-height:1.3em}
+.lr-tc-acts{margin-top:var(--s3);border-top:1px solid var(--rule)}
+.lr-tc-act{display:flex;align-items:center;gap:12px;width:100%;min-height:56px;padding:6px 0;border-bottom:1px solid var(--rule);color:var(--ink);text-align:left;cursor:pointer}
+.lr-tc-act:active{opacity:.6}
+.lr-tc-act:last-child{border-bottom:0}
+.lr-tc-act b{font:400 20px/1.1 var(--serif);font-weight:400}
+.lr-tc-act .lr-tc-st{margin-left:auto;font:italic 400 16px/1.2 var(--serif);color:var(--soft);text-align:right}
+.lr-tc-act svg:last-child{width:16px;height:16px;flex:none;color:var(--faint)}
+.lr-tc-sw{width:18px;height:18px;flex:none;border-radius:var(--r-1);background:var(--surface-2);box-shadow:inset 0 0 0 1px rgba(236,232,223,.14);opacity:0;transition:opacity .3s}
+.lr-tc-sw.on{opacity:1}
+.lr-tick{width:22px;height:22px;flex:none;border-radius:50%;border:1.5px solid var(--faint);display:grid;place-items:center}
+.lr-tick.on{background:var(--ink);border-color:var(--ink);color:var(--ground)}
+.lr-tick svg{width:12px;height:12px}
+.lr-tc-act.done b{color:var(--soft)}
+/* Your words: one bar to the next stop, then the map */
+.lx-words{margin-top:var(--s6);padding-bottom:var(--s4)}
+.lx-words-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.lx-words-head .title-3{margin:0}
+.lx-words-head .note{white-space:nowrap}
+.lx-words-head .note b{font:inherit;color:var(--ink)}
+.lx-words-n{display:flex;align-items:baseline;gap:10px;margin-top:var(--s3)}
+.lx-words-n b{font:400 56px/.85 var(--serif);letter-spacing:-.035em;font-variant-numeric:tabular-nums}
+.lx-words-n span{font:italic 400 18px/1.2 var(--serif);color:var(--soft)}
+.lx-bar{position:relative;height:14px;margin-top:var(--s4);border-radius:var(--r-pill);background:var(--surface-2);overflow:hidden}
+.lx-bar-fill{position:absolute;left:0;top:0;bottom:0;border-radius:inherit;background-color:var(--soft);transform-origin:left center;animation:lxBarIn .9s var(--ease) .15s both}
+@keyframes lxBarIn{from{transform:scaleX(0)}to{transform:none}}
+.lx-words-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:var(--s3);flex-wrap:wrap}
+.lx-words-foot .note{flex:1 1 140px}
+.lx-words-map{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0;font:italic 400 18px/1 var(--serif);color:var(--ink);cursor:pointer;white-space:nowrap}
+.lx-words-map svg{width:16px;height:16px}
+.lx-words-map:active{opacity:.6}
+/* The map's first-run hint after placement (js/learn.js lrMapHint): one line, gone at the first touch */
+.lr-maphint{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 112px);z-index:6;display:flex;align-items:center;gap:10px;max-width:calc(100% - 32px);padding:12px 18px;border-radius:var(--r-pill);background:var(--surface-2);border:1px solid rgba(236,232,223,.14);color:var(--ink);font:400 17px/1.2 var(--sans);white-space:nowrap;pointer-events:none;box-shadow:0 10px 30px rgba(0,0,0,.45);transform:translateX(-50%);animation:lrHintIn .5s var(--spring) .6s both}
+.lr-maphint i{width:10px;height:10px;border-radius:50%;background:var(--ink);flex:none;animation:lrHintPulse 1.6s ease-in-out 1.1s infinite}
+.lr-maphint.out{animation:lrHintOut .3s var(--ease) both}
+@keyframes lrHintIn{from{opacity:0;transform:translate(-50%,14px) scale(.96)}to{opacity:1;transform:translateX(-50%)}}
+@keyframes lrHintOut{to{opacity:0;transform:translate(-50%,8px)}}
+@keyframes lrHintPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.6);opacity:.35}}
+@media (prefers-reduced-motion:reduce){.lx-bar-fill,.lr-maphint,.lr-maphint i,.lr-maphint.out{animation:none}.lr-tc-chip{transition:none}}
 
 /* Edges inside Learn it (js/learnit.js hmLtEdge): nine steps from a name to its look-alike, on the booth grey */
 .screen.learnit .lt-edge-q{font:400 clamp(26px,7.4vw,34px)/1.08 var(--serif);letter-spacing:-.015em;margin-top:18px;text-wrap:pretty;flex:none}

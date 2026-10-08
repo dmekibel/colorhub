@@ -41,7 +41,7 @@ function profileSetup(next, o = {}) {
     <div class="opt-list" data-q="cvd">${VISION.map(([k, t, d]) => `<button class="opt${p.cvd === k ? " on" : ""}" data-v="${k}"><i></i><span><b>${t}</b>${d ? `<small>${d}</small>` : ""}</span></button>`).join("")}</div>
     <p class="sec-head"><b>The colors you care about</b><span>pick any</span></p>
     <div class="opt-list" data-q="media">${MEDIA.map(([k, t, d]) => `<button class="opt multi${p.media.includes(k) ? " on" : ""}" data-v="${k}"><i></i><span><b>${t}</b><small>${d}</small></span></button>`).join("")}</div>
-    <p class="fine">Not a test or a diagnosis. Change these any time from the ⋯ menu.</p>
+    <p class="fine">Not a test or a diagnosis. Change these any time in Settings, on You.</p>
     <button class="btn" data-go style="margin-top:20px">Continue ${ICON.arrow}</button>
     ${first ? `<button class="btn ghost" data-skip>Not now</button>` : ""}
   `, "profile");
@@ -298,12 +298,28 @@ function placed(log) {
     <p class="eyebrow">Your starting point</p>
     <h1><em>${esc(D.tiers[tier].name)}</em></h1>
     <p class="lede">${esc(lede)}</p>
-    <button class="btn" data-go>Start learning ${ICON.arrow}</button>
+    <button class="btn" data-go>Open the map ${ICON.arrow}</button>
   `, "result");
-  // Straight to the honeycomb home (ROADMAP.md §12): "First tap opens its page; first Learn it is guided."
-  const goHome = () => go("learn");
+  // Straight to the map (PLAN.md lane C; ROADMAP.md §12), with a one-line first-run hint: "Tap any color".
+  // S.tab stays "learn", so the Rooms corner's quick-resume still opens the Learn room with your first unit.
+  const goHome = () => { S.tab = "learn"; S.mapHint = 1; save(); hmHome(); lrMapHint(); };
   el.querySelector("[data-go]").onclick = goHome;
   onKey = e => { if (e.key === "Enter") goHome(); };
+}
+// The map's first-run hint, once, right after placement: one quiet line that leaves at the first touch.
+// S.mapHint marks it pending (a later Home lane can show it again if the app closed before that first touch).
+function lrMapHint() {
+  const scr = S.mapHint && app.querySelector(".hm"); if (!scr) return;
+  const tip = document.createElement("div");
+  tip.className = "lr-maphint"; tip.setAttribute("role", "status");
+  tip.innerHTML = `<i aria-hidden="true"></i><span>Tap any color to open it</span>`;
+  scr.appendChild(tip);
+  const done = () => {
+    document.removeEventListener("pointerdown", done, true);
+    delete S.mapHint; save();
+    tip.classList.add("out"); later(() => tip.remove(), reduceMotion ? 0 : 320);
+  };
+  document.addEventListener("pointerdown", done, true);
 }
 
 // ======================================================================
@@ -438,20 +454,14 @@ function todayTrain() {
 // late-night session still shows the day it feels like.
 const weekdayName = () => new Date(Date.now() - 4 * 3600e3).toLocaleDateString(undefined, { weekday: "long" });
 // Today folds into Learn (DESIGN-SYSTEM.md §2, §12): this is the Learn room, entered by the signature motion
-// from the Rooms stem or a swipe up from Home. Its first block is what used to be the separate "Today" screen;
-// below it, "the path" draws every unit as its own color (ROADMAP §1, told in color instead of icons).
+// from the Rooms stem or a swipe up from Home. Decluttered (design/IMPROVE-2026-10-08/PLAN.md, lane C): the
+// primary card, one Today card, the Practice row, and one "Your words" bar with its next stop named. The stage
+// rows, the 655-square collection grid and the Settings row are gone: the map is the collection (one tap away
+// from the bar), and Settings lives on You.
 function home() {
   if (!S.placed) return welcome();
-  const due = dueList(), nu = nextUnit(), owned = ownedCount();
-  const cards = cardsAll(), mine = cards.filter(c => isMine(S.cards[c.id])), lrn = cards.filter(c => !isMine(S.cards[c.id]));
-  // the collection counts toward the next named checkpoint ("27 of 614 · Fluent"), never toward the first units
-  const ck = typeof lxCheckpoint === "function" ? lxCheckpoint(owned) : { n: ALL.length, name: "", approx: false };
-  const qN = Math.max(ck.n, mine.length + lrn.length), qCols = qN > 1200 ? 60 : qN > 700 ? 40 : qN > 260 ? 30 : 15;
-  const hueKey = c => { const [L, C, H] = lch(c.h); return C < 12 ? 1000 + (100 - L) : (H + 330) % 360 + (100 - L) / 400; };
-  mine.sort((a, b) => hueKey(a) - hueKey(b)); lrn.sort((a, b) => hueKey(a) - hueKey(b));
-  // the collection: owned names fill a quilt from the top in hue order; names in review follow, faint
-  const quilt = Array.from({ length: qN }, (_, i) => mine[i] ? `<i class="o" style="--c:${mine[i].h};--k:${i}"></i>`
-    : lrn[i - mine.length] ? `<i class="l" style="--c:${lrn[i - mine.length].h}"></i>` : "<i></i>").join("");
+  const due = dueList(), nu = nextUnit();
+  const cards = cardsAll(), mine = cards.filter(c => isMine(S.cards[c.id]));
   let h;
   if (due.length) {
     const p = due.slice(0, 12);
@@ -468,43 +478,86 @@ function home() {
   } else {
     h = { title: "Every name on the path, <em>met</em>", plates: mine.slice(0, 12), note: `${cards.length.toLocaleString("en-US")} names met. Reviews keep them yours.`, cta: "", act: "" };
   }
-  // Today: the two dailies (Today's painting, Today's color) as two calm tiles with one streak (js/challenge.js)
-  // the path: a column of units drawn as their own colors — finished (solid, "Yours"), current (large, named),
-  // future (a thin line, waiting)
-  const pathRows = UNITS.map(u => {
-    const cols = u.colors.map(c => c.h);
-    const band = (extra) => `<div class="path-band ${extra}">${cols.map(hx => `<i style="background:${hx}"></i>`).join("")}</div>`;
-    if (S.done[u.id]) return `<div class="path-row path-done">${band("path-band-done")}<div class="path-cap"><span class="title-3">${esc(u.title)}</span><span class="note">Yours</span></div></div>`;
-    if (nu && u.id === nu.id) return `<div class="path-row path-current">${band("path-band-current")}<div class="path-cap"><span class="title-2">${esc(u.title)}</span><span class="note">Next, about ${Math.max(2, Math.round(u.colors.length * 15 / 60))} min</span></div></div>`;
-    return `<div class="path-row path-future">${band("path-band-future")}<div class="path-cap"><span class="title-3 path-future-name">${esc(u.title)}</span></div></div>`;
-  }).join("");
+  const words = () => typeof lxWordsHtml === "function" ? lxWordsHtml(nextUnit()) : "";
   const el = show(`
     <header class="room-head"><h1 class="title-1">Learn</h1><span class="note">${esc(weekdayName())}</span></header>
     ${h.plates.length ? `<button class="plates" data-go aria-label="Start">${h.plates.map((c, k) => `<i style="--c:${c.h};--k:${k}"></i>`).join("")}</button>` : ""}
     <h2 class="title-1" style="margin-top:18px">${h.title}</h2>
     <p class="note" style="margin-top:6px">${h.note}</p>
     ${h.cta ? `<button class="btn" data-${h.act} style="margin-top:20px">${h.cta} ${ICON.arrow}</button>` : ""}
-    ${dlTodayRow()}
+    ${lrTodayHtml()}
     ${typeof prEntry === "function" ? prEntry() : ""}
-    <h3 class="title-3" style="margin-top:32px">The path</h3>
-    <div class="path-list">${typeof lxPathHtml === "function" ? lxPathHtml(nu) : pathRows}</div>
-    <button class="collection" data-palette aria-label="Your collection">
-      <div class="coll-head"><span class="note">Your collection</span><span class="coll-n"><b data-count="${owned}">${owned}</b><small> of ${ck.approx ? "about " : ""}${ck.n.toLocaleString("en-US")}${ck.name ? ` · ${esc(ck.name)}` : ""}</small></span></div>
-      <div class="quilt" style="grid-template-columns:repeat(${qCols},1fr)">${quilt}</div>
-      <div class="coll-foot"><span>${ownFoot()}</span><span>Spectrum →</span></div>
-    </button>
+    <div class="lr-words-slot">${words()}</div>
     ${installHint()}
-    <button class="qrow" data-menu style="margin-top:8px">Settings & more<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
   `, "home room-learn", "learn");
   wireInstall(el);
-  // the path past the first units draws once the ~1,000-name list is in (usually already prefetched)
-  if (typeof lxPlan === "function" && !lxPlan().ready) loadCoreNames().then(() => { const pl = el.querySelector(".path-list"); if (pl && pl.isConnected) pl.innerHTML = lxPathHtml(nextUnit()); });
+  const wireWords = () => { if (typeof lxWordsWire === "function") lxWordsWire(el); };
+  // the stages past the first units are known once the ~1,000-name list is in (usually already prefetched)
+  if (typeof lxPlan === "function" && !lxPlan().ready) loadCoreNames().then(() => { const sl = el.querySelector(".lr-words-slot"); if (sl && sl.isConnected) { sl.innerHTML = words(); wireWords(); } });
+  wireWords();
   const go1 = () => due.length ? deck("review") : nu ? meet(nu) : null;
   el.querySelectorAll("[data-review],[data-learn],[data-go]").forEach(b => b.onclick = go1);
-  el.querySelector("[data-palette]").onclick = () => { S.lens = "spectrum"; save(); go("explore"); };
-  dlWireToday(el);
-  el.querySelector("[data-menu]").onclick = () => menu();
+  lrTodayWire(el);
   onKey = e => { if (e.key === "Enter") go1(); };
+}
+
+// ---------- Today: one card (PLAN.md decision 5) ----------
+// One color and one painting that holds it: todayPick() (js/today.js, lane B) when it's in. Until then the card
+// falls back to the two dailies as they are (Today's painting, and the color behind Name it in six), which aren't
+// linked, so the title doesn't pretend they are. The color's name never shows before it's named (it's the answer
+// to Name it in six). Two parts, each with its own tick: Look (Today's painting) and Name it in six.
+function lrPick() {
+  try { if (typeof todayPick === "function") { const p = todayPick(today()); if (p && p.color && p.color.h) return p; } } catch (e) {}
+  return null;
+}
+const lrName = n => { const s = typeof lxLower === "function" ? lxLower(n) : String(n); return s.charAt(0).toUpperCase() + s.slice(1); };
+function lrTodayHtml() {
+  const k = today(), p = typeof chToday === "function" ? chToday() : null, now = S.dpNow && S.dpNow.k === k ? S.dpNow : null;
+  const d = S.daily && S.daily[k], dr = d && d.g ? d : null, n = typeof chStreak === "function" ? chStreak() : 0;
+  const pDone = !!p, dDone = typeof dnDone === "function" && dnDone(k);
+  const pSt = p ? `${(p.hits || []).filter(Boolean).length} of ${(p.hits || []).length || 5} seen` : now ? `Round ${now.i + 1} of 5` : "Five ways to look";
+  const dSt = dr ? (dr.done ? (dr.ok ? (dr.hint ? "Named, with choices" : `Named in ${dr.g.length}`) : "Missed today") : `${dr.g.length} ${dr.g.length === 1 ? "guess" : "guesses"} so far`) : d ? "Named" : "Six guesses";
+  const tick = on => `<span class="lr-tick${on ? " on" : ""}" aria-hidden="true">${on ? ICON.checkS : ""}</span>`;
+  return `<section class="lr-today">
+    <div class="dl-head"><h3 class="title-3">Today</h3><span class="note">${n > 1 ? `${n}-day streak` : ""}</span></div>
+    <div class="lr-tcard${pDone && dDone ? " done" : ""}">
+      <button class="lr-tc-art" data-dpaint aria-label="Today's painting"><span class="dl-art dl-ph lr-tc-img" id="dlPaintArt"></span><span class="lr-tc-chip" id="dlColorArt"></span></button>
+      <div class="lr-tc-text"><p class="lr-tc-title" id="lrTcTitle">Today's painting <em>and color</em></p><p class="note lr-tc-sub" id="lrTcSub">&nbsp;</p></div>
+      <div class="lr-tc-acts">
+        <button class="lr-tc-act${pDone ? " done" : ""}" data-dpaint>${tick(pDone)}<b>Look</b><span class="lr-tc-st">${esc(pSt)}</span>${ICON.chev}</button>
+        <button class="lr-tc-act${dDone ? " done" : ""}" data-daily>${tick(dDone)}<b>Name it in six</b><i class="lr-tc-sw" id="lrTcSw" aria-hidden="true"></i><span class="lr-tc-st" id="dlColorSt">${esc(dSt)}</span>${ICON.chev}</button>
+      </div>
+    </div></section>`;
+}
+function lrTodayWire(el) {
+  el.querySelectorAll("[data-dpaint]").forEach(b => b.onclick = () => challenge());
+  el.querySelectorAll("[data-daily]").forEach(b => b.onclick = () => daily());
+  const tok = SHOW_N, k = today(), $ = s => el.querySelector(s);
+  const paint = (e, c, linked) => {
+    if (SHOW_N !== tok || !el.isConnected) return;
+    const named = typeof dnDone === "function" && dnDone(k);
+    const t = $("#lrTcTitle"), sub = $("#lrTcSub"), art = $("#dlPaintArt"), chip = $("#dlColorArt");
+    if (e && art) { art.classList.remove("dl-ph"); art.innerHTML = `<img src="${esc(dpThumb(e))}" alt="">`; }
+    const sw = $("#lrTcSw"); if (c && sw) { sw.style.background = c.h; sw.classList.add("on"); }
+    // the chip sits on the painting only when the color really is in it (todayPick); the fallback pair isn't linked
+    if (c && chip && linked) {
+      chip.style.setProperty("--c", c.h); chip.classList.add("on");
+      chip.innerHTML = named ? `<span data-ink="${ink(c.h)}">${esc(lrName(c.n))}</span>` : "";
+    }
+    if (!t || !e) return;
+    const pt = `<em>${esc(e.t)}</em>`;
+    t.innerHTML = linked
+      ? (named && c ? `${esc(lrName(c.n))}, in ${pt}` : `Today's color hides in ${pt}`)
+      : (named && c ? `${pt}, and ${esc(lrName(c.n))}` : `${pt}, and a color to name`);
+    if (sub) sub.textContent = [e.a, e.yr].filter(Boolean).join(", ");
+  };
+  const pk = lrPick();
+  const color = pk ? Promise.resolve(pk.color) : loadCoreNames().then(() => typeof dnTarget === "function" ? dnTarget() : null).catch(() => null);
+  Promise.all([dpLoad().catch(() => null), color]).then(([e, c]) => {
+    // linked only when todayPick() named this very painting (its painting may be an id or an object)
+    const pid = pk && pk.painting && (pk.painting.id || pk.painting.node || pk.painting);
+    paint(e, c, !!(pk && e && (!pid || pid === e.id || pid === e.node)));
+  });
 }
 
 function menu() {
