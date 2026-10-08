@@ -451,6 +451,70 @@ scenario("studio", "photo palette: controls work and a chip opens its page", asy
   t.expect(t.$("#app").innerText.length > 60, "Back from the color page landed on an empty screen");
 });
 
+// ---- L13 Studio: Name any color, the Isolator, the Export sheet, Closest in the archive ----
+scenario("studio", "Name any color: tabs, drag, save, a name opens its page", async t => {
+  await t.open("#/studio/namer?c=5F8C8A", { settle: 600 });
+  await t.waitFor(".nmr-hero", 8000, "the namer");
+  const n0 = t.text("#name");
+  t.expect(n0.length > 2 && t.$$(".nmr-row").length === 4, "the namer shows a name and four next names");
+  for (const k of ["plane", "field", "type", "eye", "ring"]) { await t.click(`[data-tab='${k}']`, { force: true, wait: 350 }); t.expect(t.$("#pane").children.length, `the ${k} tab is empty`); }
+  await t.click("[data-tab='type']", { force: true, wait: 300 });
+  const hx = t.$("#hx"); hx.value = "#C8553D"; hx.dispatchEvent(new t.w.Event("input", { bubbles: true }));
+  await t.waitFor(() => t.text("#name") !== n0, 6000, "the name to follow a typed hex");
+  await t.click("#acts [data-save]", { force: true, wait: 300 });
+  t.expect(t.$$(".nmr-chips button").length === 1, "Save did not add the color to the tray");
+  await t.click(".nmr-row", { force: true, wait: 500 });
+  await t.waitFor(".cp-page", 8000, "a color page after tapping a near name");
+  await H.back(t);
+  await t.waitFor(".nmr-hero", 6000, "the namer again after Back");
+  await t.click("[data-back]", { force: true, wait: 700 });
+  await t.waitFor(() => !t.$(".nmr-hero") && t.$("#app").innerText.length > 60, 6000, "a room after Back from the namer (opened by address, so it falls back to the current room)");
+});
+
+scenario("home", "View sheet: the picker icon opens Name any color", async t => {
+  await t.open("#shot=home:views", { settle: 1500 });
+  await t.waitFor("[data-namer]", 8000, "the picker icon in the View sheet");
+  await t.click("[data-namer]", { force: true, wait: 800 });
+  await t.waitFor(".nmr-hero", 6000, "Name any color from Home");
+});
+
+scenario("studio", "Isolator: guess, reveal alone, hold to see it back, try another", async t => {
+  await t.open("#shot=studiopv", { settle: 900 });
+  const img = await t.waitFor(() => { const i = t.$(".pv-img img"); return i && i.complete && i.naturalWidth ? i : null; }, 8000, "the photo");
+  const r = img.getBoundingClientRect();
+  img.dispatchEvent(new t.w.MouseEvent("click", { bubbles: true, clientX: r.left + r.width * .5, clientY: r.top + r.height * .5, view: t.w }));
+  await t.waitFor(".iso .iso-opts button", 6000, "the four options");
+  t.expect(t.$$(".iso-opts button").length >= 3, "fewer than three options");
+  await t.click(".iso-opts button", { force: true, wait: 700 });
+  await t.waitFor(".iso.isolated .iso-name", 4000, "the reveal");
+  const f = t.$("#isoFrame"), fr = f.getBoundingClientRect(), w = t.w, o = { bubbles: true, cancelable: true, clientX: fr.left + 30, clientY: fr.top + 30, pointerId: 1, pointerType: "touch", isPrimary: true, view: w };
+  f.dispatchEvent(new w.PointerEvent("pointerdown", o)); await t.sleep(450);
+  t.expect(t.$(".iso.peek"), "holding the picture did not bring the surroundings back");
+  f.dispatchEvent(new w.PointerEvent("pointerup", o)); await t.sleep(300);
+  t.expect(!t.$(".iso.peek"), "letting go did not isolate again");
+  await t.click("[data-again]", { force: true, wait: 400 });
+  t.expect(t.$(".iso-opts"), "Try another spot did not ask again");
+  await t.click("[data-iso-close]", { force: true, wait: 300 });
+  t.expect(!t.$(".iso"), "the Isolator did not close");
+});
+
+scenario("studio", "Export sheet opens and Closest in the archive switches metric", async t => {
+  await t.open("#shot=studiopv", { settle: 900 });
+  await t.waitFor("[data-export]", 8000, "the Export button");
+  await t.click("[data-export]", { force: true, wait: 500 });
+  await t.waitFor(".ex-sheet [data-ex-copy='css']", 4000, "the Export sheet");
+  t.expect(t.$$(".ex-sheet [data-ex-row]").length === 6, "the sheet should list six formats");
+  await t.click(".ex-sheet [data-ex-tints]", { force: true, wait: 200 });
+  t.$("#twins").scrollIntoView();
+  await t.waitFor(".tw-card", 20000, "the closest paintings");
+  t.expect(t.$$(".tw-chips button").length >= 6, "the metric chips are missing");
+  for (const m of ["dominant", "mood", "light"]) {
+    await t.click(`.tw-chips [data-m='${m}']`, { force: true, wait: 300 });
+    await t.waitFor(() => t.$(".tw-out .tw-card .tw-why"), 25000, `results for ${m}`);
+    t.expect(t.text(".tw-why").length > 12, `${m}: a result has no reason`);
+  }
+});
+
 // ================================================================== YOUR COLORS (L23: favorites, ranking, taste)
 scenario("favs", "Home pick mode: tap and hold-sweep heart colors, Save keeps them", async t => {
   const cv = await H.homeReady(t);

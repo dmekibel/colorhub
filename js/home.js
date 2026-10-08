@@ -298,6 +298,7 @@ function hmHome() {
     const { sh, close } = sheet(`<div class="cx-sh hm-chooser">
       <div class="hm-chooser-top"><h3 class="title-2">View</h3><span class="hm-chooser-acts">
         <button class="iconq" data-search aria-label="Search">${ICON.search}</button>
+        ${typeof NMR_ICON !== "undefined" ? `<button class="iconq" data-namer aria-label="Name any color">${NMR_ICON}</button>` : ""}
         <button class="iconq" data-surprise aria-label="Surprise me">${ICON.dice}</button>
       </span></div>
       <div class="hm-tabs" data-tabs><button class="on" data-tab="show">Show</button><button data-tab="look">Look</button></div>
@@ -367,6 +368,7 @@ function hmHome() {
     });
     sh.querySelector("[data-lab-open]").onclick = () => { close(); labHoney(); };
     sh.querySelector("[data-search]").onclick = () => { close(); openSearch(); };
+    const nmBtn = sh.querySelector("[data-namer]"); if (nmBtn) nmBtn.onclick = () => { close(); XSTACK = []; X_ROOT = "home"; LAB.namer(); };   // Name any color (js/namer.js)
     sh.querySelector("[data-surprise]").onclick = () => { close(); hmDice(); };
     applyInset();
   }
