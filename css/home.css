@@ -138,6 +138,27 @@
 .hm-chooser-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
 .hm-chooser-top .title-2{margin:0}
 .hm-chooser-acts{display:flex;gap:8px}
+.hm-l18-fam{margin:8px 0 6px}
+.hm-l18-fam button{height:32px;font-size:14px}
+/* L18 B3: the search hint, one paper row under the field; Return or a tap travels */
+.hm-l18-hint{display:flex;align-items:center;gap:10px;width:100%;margin-top:8px;min-height:44px;padding:8px 16px;border-radius:var(--r-pill);background:var(--paper);color:var(--paper-ink);font:400 16px/1.2 var(--serif);text-align:left}
+.hm-l18-hint[hidden]{display:none}
+.hm-l18-hint b{font-weight:400;font-style:italic}
+.hm-l18-hint span:last-child{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hm-l18-sw{flex:none;display:flex}
+.hm-l18-sw i{width:22px;height:22px;border-radius:50%;margin-left:-6px;box-shadow:0 0 0 2px var(--paper)}
+.hm-l18-sw i:first-child{margin-left:0}
+/* L18 B2: the live stem (what is inside each room today) and the real floor under a solid scrim (no blur) */
+.rm-art-img img{display:block;width:100%;height:100%;object-fit:cover}
+.rm-art-station{display:grid;place-items:center;background:var(--surface-2)}
+.rm-art-station .sa{width:100%;height:100%;aspect-ratio:auto;border-radius:0}
+.room-floor-snap{background-size:cover;background-position:center 42%}
+.room-floor-snap i{position:absolute;inset:0;top:0;width:auto;height:auto;transform:none;opacity:1;background:rgba(14,13,11,.58)}
+/* L18: a lit constellation pill sits above the favorites heart on Home */
+.hm .cs-hl-pill{bottom:calc(var(--bottom) + 140px)}
+.hm-look-spiral{background:radial-gradient(circle at 50% 50%,#E7C35C 0 18%,#2A2822 19% 22%,#4C9F70 23% 44%,#2A2822 45% 48%,#4C7FD1 49% 72%,#2A2822 73% 76%,#8C5AC2 77%)}
+/* L18: every Home corner fades together while you drag, and returns together (David: only the Study corner stayed) */
+.hm.chrome-hide .corner{opacity:0;pointer-events:none}
 /* pull-down-to-close hint (js/home.js hmPullClose): says what letting go will do, so a close is never a surprise */
 .hm-pullpill{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + 14px);transform:translate(-50%,-8px);z-index:90;padding:8px 14px;border-radius:var(--r-pill,999px);background:rgba(20,19,17,.82);color:#ECE8DF;font:500 14px/1 var(--sans);letter-spacing:.01em;opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
 .hm-pullpill.on{opacity:1;transform:translate(-50%,0)}

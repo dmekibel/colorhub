@@ -19,10 +19,12 @@ const HM_SLIDERS = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
 // The nine stages of the path (ROADMAP §14): stage N shows the first N names of the core list (data/core-names.json,
 // ordered by `rank` until the stage ordering exists), so you can preview what any stage holds.
 const HM_STAGES = [25, 50, 100, 150, 250, 400, 600, 800, 1000];
+// The order is useRank (data/core-names.json: usefulness for learning; the path's own first words keep their
+// place), so every stage is exactly its round number, stage 3 included (X19: no list has special status).
+const hmUseRank = e => e.useRank != null ? e.useRank : e.rank != null ? e.rank : 1e9;
 function hmStageItems(n) {
-  return (CORE_NAMES || []).slice().sort((a, b) => a.rank - b.rank).slice(0, n === 100 ? 101 : n)   // stage 3 = the 101 the path teaches today
-    .map(e => ({ n: e.n, h: e.h, c: BYNAME.get(e.n.toLowerCase()) || null }))
-    ;
+  return (CORE_NAMES || []).slice().sort((a, b) => hmUseRank(a) - hmUseRank(b)).slice(0, n)
+    .map(e => ({ n: e.n, h: e.h, c: BYNAME.get(e.n.toLowerCase()) || null, rank: hmUseRank(e) }));
 }
 // Two stops after Stage 9 (NOTES-TRACKER.md item 0): "Every name" (core + library, every primary and library
 // name with no repeats) and "Every shade" (+ the computed shades, js/naming.js loadShades()). Browse views, not
@@ -30,12 +32,12 @@ function hmStageItems(n) {
 // still empty (David, 2026-10-09: paused pending a library import of more real names).
 const hmCoreNameSet = () => new Set((CORE_NAMES || []).map(e => e.n.toLowerCase()));
 function hmCoreItems() {
-  return (CORE_NAMES || []).map(e => ({ n: e.n, h: e.h, c: BYNAME.get(e.n.toLowerCase()) || null, rank: e.rank }));
+  return (CORE_NAMES || []).map(e => ({ n: e.n, h: e.h, c: BYNAME.get(e.n.toLowerCase()) || null, rank: hmUseRank(e) }));
 }
 function hmEveryNameItems() {
   const set = hmCoreNameSet();
   // library-only entries (never folded into a core primary): csItems() already shapes these as {n,h,c:null,lib}
-  const libOnly = csItems().filter(x => !x.c && !set.has(x.n.toLowerCase()));
+  const libOnly = csItems().filter(x => !x.c && !set.has(x.n.toLowerCase())).map(x => ({ ...x, rank: 1e6 + (x.rank || 0) }));   // after every core name (the spiral's order)
   return hmCoreItems().concat(libOnly);
 }
 function hmShadeItems() {
@@ -134,15 +136,15 @@ function hmOpenTweak(ctrl, opts = {}) {
 // ---------- the honeycomb lab (#/lab/honey): one preset and one size at a time, so David can rate each on his
 // phone. Ratings (a heart + 1-5) save in S.hmLab, keyed "style|size". "Copy my ratings" puts a compact JSON
 // summary on the clipboard to paste back to us. The Tweak panel (above) opens here too, over the same honeycomb. ----------
-const HM_LAB_SIZES = [25, 50, 101, 150, 250, 400, 600, 1000, 2700];
+const HM_LAB_SIZES = [25, 50, 100, 150, 250, 400, 600, 1000, 2700];
 async function labItems(n) {
-  if (n <= 1000) { if (!CORE_NAMES) await loadCoreNames(); return hmStageItems(n === 101 ? 100 : n); }
+  if (n <= 1000) { if (!CORE_NAMES) await loadCoreNames(); return hmStageItems(n); }
   if (!LONG_NAMES) await loadLongNames();
   return csItems().slice().sort((a, b) => a.rank - b.rank).slice(0, n).map(e => ({ n: e.n, h: e.h, c: e.c || null, lib: e.lib || null }));
 }
 function labHoney() {
   S.hmLab = S.hmLab || {}; S.hm = S.hm || {};
-  let pi = (window.HM_LAB_LAST_P || 0) % HONEY_STYLE_LIST.length, si = HM_LAB_SIZES.indexOf(window.HM_LAB_LAST_N || 101); if (si < 0) si = 2;
+  let pi = (window.HM_LAB_LAST_P || 0) % HONEY_STYLE_LIST.length, si = HM_LAB_SIZES.indexOf(window.HM_LAB_LAST_N || 100); if (si < 0) si = 2;
   const el = show(`<div class="hm-lab"><div class="hm-lab-view"></div>
     <button class="icon-btn glass hm-lab-back" data-back aria-label="Back">${ICON.back}</button>
     <div class="hm-lab-bar">
@@ -213,7 +215,8 @@ function hmHome() {
       <button class="cx-title glass-box hm-title" aria-haspopup="dialog" aria-label="Which colors you see"><b><span></span>${CX_ICON.down}</b><small></small></button>
     </header>
     <div class="hm-search" id="hmSearch" hidden>
-      <label class="search"><span>${ICON.search}</span><input id="hmq" type="search" placeholder="sea, rust, Monet…" autocomplete="off" enterkeyhint="search"></label>
+      <label class="search"><span>${ICON.search}</span><input id="hmq" type="search" placeholder="a color, a hex, a painter, a decade…" autocomplete="off" enterkeyhint="go"></label>
+      <button class="hm-l18-hint" id="hmqHint" hidden></button>
     </div>
     <button class="corner l" data-rooms-corner aria-label="Rooms">${ROOMS_GLYPH}</button>
     <button class="corner r" id="hmView" aria-label="View">${HM_SLIDERS}</button>
@@ -244,11 +247,14 @@ function hmHome() {
     else { if (fx && fx.morph) fx.morph(); open(); }
     if (src) src.remove();
   };
+  let hlAll = false;
+  if (typeof HONEY_LIVE !== "undefined") HONEY_LIVE.add(() => { if (!el.isConnected) return false; if (hlAll && !HONEY_HL) { hlAll = false; render(true); } return true; });
   function paintTitle(loading) {
-    title.querySelector("span").textContent = hmViewLabel();
-    title.querySelector("small").textContent = loading ? "Loading…" : `${items.length.toLocaleString()} color${items.length === 1 ? "" : "s"} · swipe or tap`;
+    title.querySelector("span").textContent = hlAll ? "Every name" : hmViewLabel();
+    title.querySelector("small").textContent = loading ? "Loading…" : `${items.length.toLocaleString()} color${items.length === 1 ? "" : "s"}`;
   }
   async function render(soft) {
+    HONEY_ENDLESS = !!S.hm.endless;
     const g = ++gen, v = hmView(), stage = /^stage:/.test(v.src) ? +v.src.slice(6) : 0, every = HM_EVERY.includes(v.src), set = !stage && !every ? hmSet(v.src) : null;
     if (stage) { if (!CORE_NAMES) { paintTitle(true); await loadCoreNames(); if (!el.isConnected || g !== gen) return; } items = hmStageItems(stage); }
     else if (every) {
@@ -263,10 +269,17 @@ function hmHome() {
       if (csNeedsLib(set.state) && !LONG_NAMES) { paintTitle(true); await loadLongNames(); if (!el.isConnected || g !== gen) return; }
       items = set.get();
     }
-    items = items.filter(HM_KEEP[v.filter]);
+    // L18 H4: a fresh constellation (a painting, a painter, a decade...) lights up among every name, so each of its
+    // colors finds its own bubble instead of all collapsing onto the few a small stage holds. Not saved; clearing the
+    // constellation (its pill) brings your own view back.
+    if (typeof HONEY_HL !== "undefined" && HONEY_HL && HONEY_HL.fresh && !every) {
+      if (!LONG_NAMES || !CORE_NAMES) { await Promise.all([loadCoreNames(), loadLongNames()]); if (!el.isConnected || g !== gen) return; }
+      items = hmEveryNameItems(); hlAll = true;
+    } else if (!(typeof HONEY_HL !== "undefined" && HONEY_HL)) hlAll = false;
+    if (!hlAll) items = items.filter(HM_KEEP[v.filter]);
     paintTitle();
     if (ctrl) ctrl.update({ items, soft });
-    else ctrl = honeycomb(viewEl, { items, style: v.style, tweak: hmTweakFor(v.style), zoom: S.hm.zoom || 1, pick, onPeek, centerFirst: true,
+    else ctrl = honeycomb(viewEl, { items, style: v.style, tweak: hmTweakFor(v.style), zoom: S.hm.zoom || 1, pick, onPeek, centerFirst: true, famNames: !!S.hm.famNames,
       onZoom: z => { S.hm.zoom = Math.round(z * 100) / 100; save(); } });
     window.HM_CTRL = ctrl;   // the map, for js/polish.js flyToMap()
     hmWireChrome();
@@ -309,7 +322,7 @@ function hmHome() {
       <div class="hm-tab-panel" data-panel="show">
         <div class="cx-sh-head"><h3>What to show</h3></div>
         <div class="cx-sec"><b>Stage</b><span>the colors each stage of the path teaches</span></div>
-        <div class="cx-chips hm-stages">${HM_STAGES.map((n, i) => `<button class="cx-chip${v.src === "stage:" + n ? " on" : ""}" data-src="stage:${n}"><b>${i + 1}</b><em>${(n === 100 ? 101 : n).toLocaleString()}</em></button>`).join("")}
+        <div class="cx-chips hm-stages">${HM_STAGES.map((n, i) => `<button class="cx-chip${v.src === "stage:" + n ? " on" : ""}" data-src="stage:${n}"><b>${i + 1}</b><em>${n.toLocaleString()}</em></button>`).join("")}
           <button class="cx-chip${v.src === "every-name" ? " on" : ""}" data-src="every-name"><b>Name</b><em>${everyNameCount.toLocaleString()}</em></button>
           ${shadeCount ? `<button class="cx-chip${v.src === "every-shade" ? " on" : ""}" data-src="every-shade"><b>Shade</b><em>${(everyNameCount + shadeCount).toLocaleString()}</em></button>` : ""}</div>
         <div class="cx-sec"><b>Show</b><span>from your own reviews</span></div>
@@ -319,6 +332,9 @@ function hmHome() {
       </div>
       <div class="hm-tab-panel hm-look-panel" data-panel="look" hidden>
         <div class="hm-look-row">${HM_HOME_STYLES.map(id => `<button class="hm-look-chip${v.style === id ? " on" : ""}" data-style="${id}"><i class="hm-look-ic hm-look-${id}"></i><b>${esc((HONEY_STYLES[id] || {}).title || id)}</b></button>`).join("")}</div>
+        <div class="cx-sec hm-l18-sec"><b>Zoomed out</b><span>name each family's region</span></div>
+        <div class="hm-seg hm-l18-fam" data-l18-fam aria-label="Zoomed out">${[["", "Just colors"], ["1", "Family names"]].map(([k, l]) => `<button class="${!!S.hm.famNames === !!k ? "on" : ""}" data-fam="${k}">${l}</button>`).join("")}</div>
+        <div class="hm-seg hm-l18-fam" aria-label="Map edges">${[["", "One map"], ["1", "Endless"]].map(([k, l]) => `<button class="${!!S.hm.endless === !!k ? "on" : ""}" data-endless="${k}">${l}</button>`).join("")}</div>
         <div class="hm-look-sliders">${HM_FINE_SPECS.map(s => `<label class="hm-tweak-row" data-key="${s.key}"><span>${s.label}</span><input type="range" min="${s.min}" max="${s.max}" step="${s.step}" value="${twVal(s.key)}"><b>${(+twVal(s.key)).toFixed(2)}</b></label>`).join("")}</div>
         <button class="link" data-lab-open>Rate every preset (honeycomb lab) →</button>
       </div>
@@ -342,7 +358,7 @@ function hmHome() {
       if (S.hm.filter !== "all") { applyView("filter", "all"); sh.querySelectorAll('.hm-seg[data-key="filter"] button').forEach(x => x.classList.toggle("on", x.dataset.val === "all")); }
       render(true).then(paintCount);
     });
-    sh.querySelectorAll(".hm-seg").forEach(g => g.querySelectorAll("button").forEach(b => b.onclick = () => {
+    sh.querySelectorAll(".hm-seg[data-key]").forEach(g => g.querySelectorAll("button").forEach(b => b.onclick = () => {
       applyView(g.dataset.key, b.dataset.val); g.querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b)); render(true).then(paintCount);
     }));
     paintCount();
@@ -369,6 +385,14 @@ function hmHome() {
         if (ctrl) { hmSetTweak(ctrl.getStyle(), { [k]: val }); ctrl.tweak({ [k]: val }); }
       });
     });
+    // zoomed out: just the colors (default), or family names over each region (L18 H1)
+    sh.querySelectorAll("[data-endless]").forEach(b => b.onclick = () => {
+      applyView("endless", !!b.dataset.endless); sh.querySelectorAll("[data-endless]").forEach(x => x.classList.toggle("on", x === b)); render(true);
+    });
+    sh.querySelectorAll("[data-fam]").forEach(b => b.onclick = () => {
+      applyView("famNames", !!b.dataset.fam); sh.querySelectorAll("[data-fam]").forEach(x => x.classList.toggle("on", x === b));
+      if (ctrl && ctrl.famNames) ctrl.famNames(S.hm.famNames);
+    });
     sh.querySelector("[data-lab-open]").onclick = () => { close(); labHoney(); };
     sh.querySelector("[data-search]").onclick = () => { close(); openSearch(); };
     const nmBtn = sh.querySelector("[data-namer]"); if (nmBtn) nmBtn.onclick = () => { close(); XSTACK = []; X_ROOT = "home"; LAB.namer(); };   // Name any color (js/namer.js)
@@ -376,17 +400,35 @@ function hmHome() {
     applyInset();
   }
   // ---------- search: a tap (from the View panel's header) reveals the field; typing filters the honeycomb ----------
-  const searchBox = $("#hmSearch"), searchInput = $("#hmq");
+  const searchBox = $("#hmSearch"), searchInput = $("#hmq"), searchHint = $("#hmqHint");
   function openSearch() { searchBox.hidden = false; hmShowChrome(true); searchInput.focus(); }
-  searchInput.addEventListener("blur", () => { if (!searchInput.value.trim()) { searchBox.hidden = true; render(true); } });
+  searchInput.addEventListener("blur", () => { if (!searchInput.value.trim()) { searchBox.hidden = true; l18Pending = null; searchHint.hidden = true; if (l18Filtered) { l18Filtered = false; render(true); } } });
+  // ---- L18 B3: search 2.0. Typing still filters; Return travels: a color (a name, a hex, "dusty pink", "between
+  // teal and navy") flies the map there, a decade or a painter lights up as a constellation (csOnMap). ----
+  let l18Pending = null, l18Filtered = false, l18Seq = 0;
+  const l18ShowHint = r => { l18Pending = r; searchHint.hidden = !r; if (r) searchHint.innerHTML = r.hint; };
+  searchInput.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); l18Go(); } });
+  function l18Go() {
+    const r = l18Pending; if (!r || !ctrl) return;
+    buzz(6); searchInput.blur(); searchBox.hidden = true; searchInput.value = ""; searchHint.hidden = true; l18Pending = null;
+    if (r.set) return csOnMap(r.set);
+    const fly = () => { const o = ctrl.flyToColor(r.h); if (o) toast(r.say(o)); };
+    if (l18Filtered) { l18Filtered = false; ctrl.update({ items, focus: { h: r.h }, soft: true }); const o = ctrl.current(); if (o) toast(r.say(o)); }
+    else fly();
+  }
+  searchHint.addEventListener("click", l18Go);
   searchInput.addEventListener("input", () => {
-    const q = searchInput.value.trim();
-    if (!q) return render(true);
+    const q = searchInput.value.trim(), seq = ++l18Seq;
+    l18ShowHint(null);
+    if (!q) { l18Filtered = false; return render(true); }
+    l18Resolve(q).then(r => { if (seq === l18Seq && el.isConnected && r) l18ShowHint(r); });
     // every core name, every library name (an alternate/library hit opens its color's page, "also called" shown
     // there — js/names.js namePage) and every shade (dormant while data/shades.json is empty)
     Promise.all([loadLongNames(), loadCoreNames(), loadShades()]).then(() => {
       if (!el.isConnected) return;
       const hits = searchColors((SHADES || []).length ? hmEveryShadeItems() : hmEveryNameItems(), q);
+      if (seq !== l18Seq || /^#?[0-9a-f]{3,6}$|^rgb|^between /i.test(q)) return;   // a hex or a road filters nothing; Return flies
+      l18Filtered = !!hits.length;
       if (ctrl) ctrl.update({ items: hits.length ? hits : items, soft: true });
     });
   });
@@ -408,9 +450,14 @@ function hmHome() {
   function hmShowChrome() { el.classList.remove("chrome-hide"); clearTimeout(chromeT); }
   function hmWireChrome() {
     const cv = viewEl.querySelector("canvas"); if (!cv || cv.dataset.hmWired) return; cv.dataset.hmWired = "1";
-    cv.addEventListener("pointerdown", () => { el.classList.add("chrome-hide"); clearTimeout(chromeT); });
-    cv.addEventListener("pointerup", () => { hmShowChrome(); if (typeof hmDismissHint === "function") hmDismissHint(); });
-    cv.addEventListener("pointercancel", () => hmShowChrome());
+    // L18 (David: "everything disappears except the flashcards"): every corner fades together (css/home.css), only
+    // once a drag really moves (a tap never blinks them), and they return a beat after the finger lifts
+    let p0 = null;
+    cv.addEventListener("pointerdown", e => { p0 = [e.clientX, e.clientY]; clearTimeout(chromeT); });
+    cv.addEventListener("pointermove", e => { if (p0 && Math.hypot(e.clientX - p0[0], e.clientY - p0[1]) > 10) { el.classList.add("chrome-hide"); clearTimeout(chromeT); } });
+    const lift = () => { p0 = null; clearTimeout(chromeT); chromeT = setTimeout(() => el.classList.remove("chrome-hide"), 220); };
+    cv.addEventListener("pointerup", () => { lift(); if (typeof hmDismissHint === "function") hmDismissHint(); });
+    cv.addEventListener("pointercancel", lift);
   }
   hmShowChrome();
   { const ms = $("#hmMapStudy"); if (ms) ms.onclick = () => { buzz(6); msOpen({ from: "home" }); }; }   // js/mapstudy.js
@@ -425,45 +472,28 @@ function hmHome() {
     const favBtn = $("#hmFav"); if (favBtn) favBtn.onclick = () => { if (typeof hmDismissHint === "function") hmDismissHint(); buzz(6); fvPickStart(el, ctrl); };   // js/favs.js: Pick favorites
   }
   { const study = $("[data-pr-study]"); if (study) study.onclick = () => { const mid = ctrl && ctrl.current(); prQuick({ seed: mid ? { n: mid.n, h: mid.h } : null, items: items.slice(0, 400).map(x => x.h), label: hmViewLabel(), source: mid ? "alike" : "these" }); }; }   // js/practice.js
-  // swipe up from the bottom edge of Home opens Learn straight away (DESIGN-SYSTEM §2 "the shortcut"): the
-  // honeycomb keeps a short drag (bubbles near the bottom stay tappable), but a real upward swipe wins.
-  let edge = null;
-  const EDGE = 120;
-  viewEl.addEventListener("pointerdown", e => {
-    edge = e.isPrimary && e.clientY > innerHeight - EDGE ? { x0: e.clientX, y0: e.clientY, on: false } : null;
-  }, true);
+  // (the swipe-up-from-the-bottom shortcut to Learn is gone: David, 2026-10-08, a scroll near the bottom kept landing
+  // in Learn. The rooms button is the way in.)
+  // L18 B3: the mirror gesture, a pull down from the top of Home opens search (View's magnifier stays the second way in)
+  let l18Pull = null;
+  viewEl.addEventListener("pointerdown", e => { l18Pull = e.isPrimary && e.clientY < viewEl.getBoundingClientRect().top + 100 ? { x0: e.clientX, y0: e.clientY, on: false } : null; }, true);
   viewEl.addEventListener("pointermove", e => {
-    if (!edge) return;
-    const dx = e.clientX - edge.x0, dy = e.clientY - edge.y0;
-    if (!edge.on) {
-      if (dy < -14 && -dy > Math.abs(dx) * 1.5) {
-        edge.on = true;
-        const cv = viewEl.querySelector("canvas");   // end the honeycomb's own drag cleanly
-        const ours = edge; edge = null;   // (so edgeEnd below ignores this synthetic cancel)
+    if (!l18Pull) return;
+    const dx = e.clientX - l18Pull.x0, dy = e.clientY - l18Pull.y0;
+    if (!l18Pull.on) {
+      if (dy > 34 && dy > Math.abs(dx) * 1.5) {
+        l18Pull.on = true;
+        const cv = viewEl.querySelector("canvas"), ours = l18Pull; l18Pull = null;
         if (cv) cv.dispatchEvent(new PointerEvent("pointercancel", { pointerId: e.pointerId, bubbles: true, clientX: e.clientX, clientY: e.clientY }));
-        edge = ours;
-      } else { if (Math.hypot(dx, dy) > 14) edge = null; return; }
+        l18Pull = ours;
+      } else { if (Math.hypot(dx, dy) > 34 || dy < -10) l18Pull = null; return; }
     }
     e.stopPropagation();
   }, true);
-  const edgeEnd = e => {
-    if (!edge) return; const was = edge.on; edge = null;
-    if (!was) return;
-    e.stopPropagation();
-    buzz(6);
-    hmEdgeOpenLearn();
-  };
-  viewEl.addEventListener("pointerup", edgeEnd, true); viewEl.addEventListener("pointercancel", edgeEnd, true);
-  // the signature motion needs a source shape; a swipe has none, so grow from a thin strip at the very bottom
-  // edge — content rising up from where the finger was, same spirit as a bubble growing from where it was tapped
-  function hmEdgeOpenLearn() {
-    const src = document.createElement("div");
-    Object.assign(src.style, { position: "fixed", left: "0", right: "0", bottom: "0", height: "2px" });
-    document.body.appendChild(src);
-    growFrom(src, () => go("learn"));
-    src.remove();
-  }
+  const l18PullEnd = e => { if (!l18Pull) return; const was = l18Pull.on; l18Pull = null; if (!was) return; e.stopPropagation(); buzz(6); openSearch(); };
+  viewEl.addEventListener("pointerup", l18PullEnd, true); viewEl.addEventListener("pointercancel", l18PullEnd, true);
 
+  window.HM_SEARCH = q => { openSearch(); searchInput.value = q; searchInput.dispatchEvent(new Event("input")); };   // #shot=home:find:<q>
   window.HM_CHOOSER = chooser;   // #shot=home:look hook (tools/shots.sh): drive the Show/Look sheet without a tap
   render(false);
 }
@@ -541,6 +571,126 @@ function hmPullClose(screen, close) {
 }
 
 // A tap, as a real pointer sequence: the grab handle and the title read pointerdown/up, not click.
+// ---------- L18 B3: search 2.0's resolver. l18Resolve(q) -> Promise of null, a color to fly to { h, hint, say(o) },
+// or a set to light up { set, hint }. Modifiers are fixed Lab shifts, so the result is approximate and says so
+// ("dusty pink ≈ Ash rose"). Painter and decade sets are measured from photographs of paintings: "as photographed".
+const L18_MOD = { pale: { dL: 15, k: .5 }, light: { dL: 10, k: .85 }, dark: { dL: -14, k: 1 }, deep: { dL: -12, k: 1.15 }, dusty: { k: .6 },
+  muted: { k: .55 }, greyish: { k: .4 }, grayish: { k: .4 }, bright: { dL: 3, k: 1.3 }, vivid: { dL: 2, k: 1.35 }, warm: { to: 60 }, cool: { to: 250 } };
+const l18Get = p => fetch(p + (typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : "")).then(r => r.ok ? r.json() : null).catch(() => null);
+let L18_NAMES = null, L18_PAINTERS = null, L18_GROUPS = null;
+function l18NameMap() {
+  const key = (CORE_NAMES || []).length + "|" + (LONG_NAMES ? 1 : 0);
+  if (L18_NAMES && L18_NAMES.key === key) return L18_NAMES.m;
+  const m = new Map();
+  hmEveryNameItems().forEach(e => { const k = e.n.toLowerCase(); if (!m.has(k)) m.set(k, { n: e.n, h: e.h }); });
+  (CORE_NAMES || []).forEach(e => (e.also || []).forEach(a => { const k = String(a).toLowerCase(); if (!m.has(k)) m.set(k, { n: e.n, h: e.h }); }));
+  L18_NAMES = { key, m };
+  return m;
+}
+const l18Color = q => l18NameMap().get(String(q).toLowerCase().trim()) || null;
+function l18Hex(q) {
+  let m = /^#?([0-9a-f]{6})$/i.exec(q); if (m) return "#" + m[1].toUpperCase();
+  m = /^#([0-9a-f])([0-9a-f])([0-9a-f])$/i.exec(q); if (m) return ("#" + m[1] + m[1] + m[2] + m[2] + m[3] + m[3]).toUpperCase();
+  m = /^rgb\(?\s*(\d{1,3})[\s,]+(\d{1,3})[\s,]+(\d{1,3})\s*\)?$/i.exec(q);
+  if (m && [m[1], m[2], m[3]].every(v => +v <= 255)) return "#" + [m[1], m[2], m[3]].map(v => (+v).toString(16).padStart(2, "0")).join("").toUpperCase();
+  return null;
+}
+const l18Sw = hs => `<span class="hm-l18-sw">${hs.slice(0, 6).map(h => `<i style="background:${h}"></i>`).join("")}</span>`;
+const l18Hexes = names => [...new Set(names.map(n => (l18Color(n) || {}).h).filter(Boolean))];
+async function l18Resolve(q) {
+  await Promise.all([loadCoreNames(), loadLongNames()]);
+  const ql = q.toLowerCase().replace(/\s+/g, " ").trim();
+  const hx = l18Hex(ql);
+  if (hx) return { h: hx, hint: `${l18Sw([hx])}<span>Fly to <b>${hx}</b></span>`, say: o => `${hx} ≈ ${o.n}` };
+  let m = /^between (.+?) and (.+)$/.exec(ql);
+  if (m) {
+    const a = l18Color(m[1]), b = l18Color(m[2]); if (!a || !b) return null;
+    const A = lab(a.h), B = lab(b.h), road = Array.from({ length: 7 }, (_, i) => labHex(...A.map((v, k) => v + (B[k] - v) * i / 6)));
+    const mid = road[3], colors = [mid].concat(road.filter(h => h !== mid)).map(h => ({ h }));
+    return { set: colorSet({ kind: "road", id: a.n + "|" + b.n, title: `Between ${a.n} and ${b.n}`, colors }), hint: `${l18Sw(road)}<span>The road from <b>${esc(a.n)}</b> to <b>${esc(b.n)}</b></span>` };
+  }
+  m = /^(1[3-9]\d0)s?$/.exec(ql);
+  if (m) {
+    L18_GROUPS = L18_GROUPS || await l18Get("data/analysis/groups.json");
+    const g = L18_GROUPS && L18_GROUPS.byDecade && L18_GROUPS.byDecade[m[1]]; if (!g) return null;
+    const hs = l18Hexes((g.distinctive || []).concat(g.top || []).map(x => x.name)); if (!hs.length) return null;
+    const title = `${m[1]}s · ${g.n.toLocaleString()} painting${g.n === 1 ? "" : "s"} · as photographed`;
+    return { set: colorSet({ kind: "decade", id: m[1], title, colors: hs.map(h => ({ h })) }), hint: `${l18Sw(hs)}<span>Light up the <b>${m[1]}s</b></span>` };
+  }
+  const exact = l18Color(ql);
+  if (exact) return { h: exact.h, hint: `${l18Sw([exact.h])}<span>Fly to <b>${esc(exact.n)}</b></span>`, say: o => o.n.toLowerCase() === exact.n.toLowerCase() ? exact.n : `${exact.n} · nearest here: ${o.n}` };
+  const words = ql.split(" "), mod = L18_MOD[words[0]], base = mod && words.length > 1 && l18Color(words.slice(1).join(" "));
+  if (base) {
+    let [L, C, H] = lch(base.h);
+    if (mod.dL) L = clamp(L + mod.dL, 2, 98);
+    if (mod.k) C *= mod.k;
+    if (mod.to != null) { const d = ((mod.to - H + 540) % 360) - 180; H += Math.sign(d) * Math.min(15, Math.abs(d)); }
+    const h = lchHex(L, C, H);
+    return { h, hint: `${l18Sw([h])}<span>Fly to <b>${esc(ql)}</b></span>`, say: o => `${ql} ≈ ${o.n}` };
+  }
+  if (ql.length < 3) return null;
+  L18_PAINTERS = L18_PAINTERS || await l18Get("data/artists/meta.json").then(d => d && d.a ? Object.entries(d.a).map(([slug, a]) => ({ slug, n: a.n, k: a.k || 0, w: a.n.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").split(/[\s.-]+/) })) : []);
+  const qw = ql.normalize("NFD").replace(/[̀-ͯ]/g, "").split(" ");
+  const p = L18_PAINTERS.filter(a => qw.every(x => a.w.some(w => w.startsWith(x)))).sort((a, b) => b.k - a.k)[0];
+  if (!p) return null;
+  const A = await l18Get(`data/analysis/artists/${p.slug}.json`); if (!A) return null;
+  const names = (A.signature || []).map(x => x.name).concat(...(A.clusters || []).map(c => c.colors || []));
+  const hs = l18Hexes(names); if (!hs.length) return null;
+  const short = p.n.split(" ").slice(-1)[0], n = A.n || p.k;
+  const title = `${short} · ${n.toLocaleString()} painting${n === 1 ? "" : "s"} · as photographed${n < 15 ? " · few paintings" : ""}`;
+  return { set: colorSet({ kind: "painter", id: p.slug, title, colors: hs.map(h => ({ h })) }), hint: `${l18Sw(hs)}<span>Light up <b>${esc(p.n)}</b>'s colors</span>` };
+}
+
+// ---------- L18 H4: any painting on the map. Its measured colors, merged by name (shares added), biggest first, lit as
+// a constellation on Home (csOnMap). Addresses: #/map/gallery/<i> (a museum painting), #/map/painting/<slug>. ----------
+function hmPaintingSet(n) {
+  const by = new Map();
+  (n.palette || []).forEach(p => { const nm = p.name || (typeof nameOf === "function" ? nameOf(p.h).text : p.h), o = by.get(nm); if (o) o.share += p.share || 0; else by.set(nm, { h: p.h, n: nm, share: p.share || 0 }); });
+  const colors = [...by.values()].sort((a, b) => b.share - a.share);
+  return colorSet({ kind: "painting", id: n.id || n.title, title: `${n.title} · ${colors.length} named color${colors.length === 1 ? "" : "s"} · as photographed`, colors, src: n.src || "painting/" + routeSlug(String(n.id || "").replace(/^painting-/, "")) });
+}
+function hmMapRoute(kind, id) {
+  if (kind === "gallery" && /^\d+$/.test(id) && typeof loadGallery === "function") {
+    const i = +id;
+    return loadGallery().then(() => glDetail(i)).then(d => {
+      const pal = glPal(i).map(p => ({ ...p, name: nameOf(p.h).text }));
+      csOnMap(hmPaintingSet({ id: "g" + i, title: d.t || "Painting", palette: pal, src: "gallery/" + i }));
+    }).catch(() => { hmHome(); toast("That painting didn't load"); });
+  }
+  if (kind === "painting") return loadWiki().then(() => { const n = graph().nodes.get("painting-" + id); if (n && (n.palette || []).length) csOnMap(hmPaintingSet(n)); else hmHome(); });
+  hmHome();
+}
+
+// ---------- L18 B2: the real floor. Just before a room rises over Home, keep a snapshot of the map exactly as you
+// left it; the strip above every room (js/core.js roomChrome) shows it, dimmed by a solid scrim, never blurred. ----------
+let ROOM_FLOOR_IMG = null;
+function hmSnapFloor() {
+  const c = window.HM_CTRL; if (!c || !c.snapshot || !document.querySelector(".screen.hm canvas")) return;
+  const u = c.snapshot(390); if (u) ROOM_FLOOR_IMG = u;
+}
+// the stem's live art (js/core.js roomsBubbleArt/roomsNote ask here first): today's painting for Explore, today's
+// station for Train, your last palette (or the gamut wheel) for Studio
+// "Jan van Eyck" -> "van Eyck", "Claude Monet" -> "Monet"
+function l18Surname(full) {
+  const w = String(full || "").trim().split(/\s+/); if (!w[0]) return "";
+  let i = w.length - 1; while (i > 0 && /^(van|von|de|der|den|da|del|della|di|du|la|le|ter)$/i.test(w[i - 1])) i--;
+  return w.slice(i).join(" ");
+}
+function hmStemToday() {
+  const out = {};
+  try {
+    let art = null;
+    try { art = typeof coverData === "function" ? coverData().art : null; } catch (e) { art = null; }
+    if (!art && window.PAINTINGS && PAINTINGS.length && typeof seeded === "function") art = seeded(PAINTINGS.filter(p => p.thumb || p.img), "artcover" + today())[0];
+    if (art) out.explore = { art: `<span class="rm-art rm-art-img"><img src="${esc(art.thumb || art.img)}" alt="" loading="lazy"></span>`, note: [l18Surname(art.artist), art.title].filter(Boolean).join(", ") };
+  } catch (e) {}
+  try { const tt = typeof todayTrain === "function" ? todayTrain() : null; if (tt && tt.art) out.gym = { art: `<span class="rm-art rm-art-station">${tt.art}</span>`, note: tt.what }; } catch (e) {}
+  const pal = (S.palettes || [])[0], cols = pal && (pal.cols || pal.colors || []).map(c => typeof c === "string" ? c : c && c.h).filter(Boolean);
+  if (cols && cols.length) out.studio = { art: `<span class="rm-art rm-art-strip">${cols.slice(0, 8).map(h => `<i style="background:${h}"></i>`).join("")}</span>`, note: `Your last palette · ${cols.length} color${cols.length === 1 ? "" : "s"}` };
+  else out.studio = { note: "Make a palette from a photo" };
+  return out;
+}
+
 function hmTap(el) {
   if (!el) return;
   const r = el.getBoundingClientRect(), x = r.left + r.width / 2, y = r.top + r.height / 2, o = { bubbles: true, clientX: x, clientY: y, pointerId: 1 };
@@ -551,8 +701,15 @@ function hmTap(el) {
 // ---------- screenshot hooks: #shot=home (bar fades, the default) · home:bar (forced back on) ----------
 //   home:rooms (the stem) · home:views · home:look · home:search
 function hmShot(arg) {
+  // L18: home:far (stage 9, all the way out) · home:fam (the same, with family names on)
+  if (arg === "far" || arg === "fam") S.hm = Object.assign(S.hm || {}, { src: "stage:1000", filter: "all", zoom: .01, famNames: arg === "fam" });
+  if (arg === "zin") S.hm = Object.assign(S.hm || {}, { zoom: 2.1 });   // L18: the double-tap zoom-in level
+  if (/^spiral/.test(arg)) S.hm = Object.assign(S.hm || {}, { src: "stage:1000", filter: "all", style: "spiral", zoom: arg === "spiral:out" ? .01 : 1 });   // L18 H5
   hmHome();
   if (arg === "bar") setTimeout(() => { const s = document.querySelector(".screen.hm"); if (s) s.classList.remove("chrome-hide"); }, 3200);
+  if (arg === "floor") setTimeout(() => { hmSnapFloor(); go("gym"); }, 600);   // L18 B2: a room over the real floor
+  if (/^route:/.test(arg)) setTimeout(() => openRoute("#" + arg.slice(6)), 300);   // e.g. home:route:/map/painting/starry-night
+  if (/^find:/.test(arg)) setTimeout(() => window.HM_SEARCH && window.HM_SEARCH(arg.slice(5)), 300);
   if (arg === "rooms") setTimeout(() => hmTap(document.querySelector("[data-rooms-corner]")), 150);
   if (arg === "views") setTimeout(() => hmTap(document.getElementById("hmView")), 150);
   if (arg === "look") setTimeout(() => window.HM_CHOOSER && window.HM_CHOOSER("look"), 150);   // the long-press shortcut, without the long-press

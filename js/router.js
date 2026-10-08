@@ -166,6 +166,7 @@ function openRoute(hash, initial = false) {
   if (kind === "studio" && id === "palette" && more && typeof openSavedPalette === "function") { base(); XSTACK = []; openSavedPalette(more); return true; }
   // the floor (the honeycomb, js/home.js): not a tab, so it's its own address
   if (kind === "home" && typeof hmHome === "function") { base(); XSTACK = []; hmHome(); return true; }
+  if (kind === "map" && id && more != null && typeof hmMapRoute === "function") { base(); XSTACK = []; hmMapRoute(id, more); return true; }   // js/home.js: #/map/gallery/<i>, #/map/painting/<slug>
   if (tabs[kind]) {
     if (kind === "explore" || kind === "museum") S.lens = LENS_LEGACY[id] || Object.keys(LENS_ROUTE).find(k => LENS_ROUTE[k] === id) || "all";
     go(tabs[kind]);
