@@ -3,7 +3,7 @@
    this file only adds the bits that are new here: the search pulldown, the View panel and its Look page, the
    honeycomb lab, and the Learn it lesson screens. The Rooms corner and the stem it raises are shared chrome
    (js/core.js, app.css .corner / .rooms-stem) — Home just marks its left corner [data-rooms-corner] and keeps
-   its own right corner (#hmView) for the chooser below. */
+   its own right corner (#hmDo), one button whose menu holds every verb (js/home.js doMenu). */
 
 /* ---------- search (reached from the View panel's header, chooser() below) ---------- */
 .hm-search[hidden]{display:none}
@@ -15,8 +15,8 @@
 
 /* full screen: no title bar and no name caption (the names are already on the bubbles) */
 .hm .hm-top,.hm .hc-cap{display:none}
-.hm.chrome-hide [data-rooms-corner],.hm.chrome-hide #hmView{opacity:0;pointer-events:none}
-[data-rooms-corner],.hm #hmView{transition:opacity .4s var(--ease)}
+.hm.chrome-hide [data-rooms-corner],.hm.chrome-hide #hmDo{opacity:0;pointer-events:none}
+[data-rooms-corner],.hm #hmDo{transition:opacity .4s var(--ease)}
 
 /* ---------- the "Learn it" button on a color page (js/explore.js, colorPage only) ---------- */
 .c-learnit{display:inline-flex;align-items:center;gap:8px;margin-top:14px;height:40px;padding:0 16px 0 13px;border:1px solid var(--rule-2);border-radius:var(--r-pill);
@@ -53,10 +53,7 @@
 .lt-done h1{font:400 clamp(34px,9vw,46px)/1.1 var(--serif);letter-spacing:-.01em}
 .lt-done p{color:var(--soft);font-size:15.5px;line-height:1.5}
 
-/* the nine stage chips in the view chooser: a number and how many colors */
-.hm-stages{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.hm-stages .cx-chip{justify-content:space-between}
-.hm-stages .cx-chip em{font:500 11px/1 var(--mono);font-style:normal;color:var(--faint)}
+/* the lab lens row and the one-of-several segmented controls (the Arrange sheet, the lab) */
 .hm-lens{display:flex;align-items:center;gap:12px;margin:4px 0 14px;font:500 11px/1 var(--mono);letter-spacing:.06em;color:var(--faint)}
 .hm-lens input{flex:1;accent-color:var(--ink)}
 /* the view chooser's one-of-several controls (Show, Layout) */
@@ -68,15 +65,7 @@
 .hm-tweak-row{display:flex;align-items:center;justify-content:space-between;width:100%;height:48px;margin-top:14px;padding:0 4px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);font:400 17px/1 var(--serif);color:var(--ink)}
 .hm-tweak-row svg{width:16px;height:16px;color:var(--soft)}
 
-/* ---------- "Show" / "Look" tabs (one sheet, two panels): Look stays compact (no scroll) so the honeycomb
-   above it — recentered live via ctrl.setInset — is always visible while you pick a style or drag a slider ---------- */
-/* Show / Look: one solid segmented control (DESIGN-SYSTEM §1.2: no outline-only controls), paper when chosen */
-.hm-tabs{display:flex;gap:0;margin:2px 0 14px;padding:3px;border-radius:var(--r-pill);background:var(--surface-2)}
-.hm-tabs button{flex:1;height:38px;text-align:center;border:0;border-radius:var(--r-pill);font:400 19px/1 var(--serif);letter-spacing:-.01em;text-transform:none;color:var(--soft);transition:background var(--dur-1),color var(--dur-1)}
-.hm-tabs button.on{background:var(--paper);color:var(--paper-ink)}
-.hm-tab-panel[hidden]{display:none}
-.hm-sheet-panel.hm-sheet-compact{max-height:40vh;overflow:hidden}
-.hm-look-panel{padding-bottom:0}
+/* ---------- the Look chips (the Arrange sheet; the lab keeps its own) ---------- */
 .hm-look-row{display:flex;gap:7px;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;padding-bottom:2px;margin-bottom:4px}
 .hm-look-chip{flex:none;width:59px;display:flex;flex-direction:column;align-items:center;gap:4px;padding:5px 2px;border-radius:var(--r-2);border:1px solid transparent}
 .hm-look-chip.on{border-color:var(--rule-2);background:rgba(236,232,223,.05)}
@@ -85,8 +74,6 @@
 .hm-look-ic{width:32px;height:32px;border-radius:50%;display:block;box-shadow:inset 0 0 0 1px rgba(236,232,223,.14)}
 .hm-look-original{background:linear-gradient(135deg,#D9654F 0%,#E7C35C 35%,#4C9F70 60%,#4C7FD1 100%)}
 .hm-look-honeycomb{background:radial-gradient(circle at 32% 30%,#E7C35C,#4C9F70 55%,#2E3B52 100%);clip-path:polygon(25% 4%,75% 4%,100% 50%,75% 96%,25% 96%,0% 50%)}
-.hm-look-sunflower{background:conic-gradient(from -20deg,#D9654F,#E7C35C,#4C9F70,#4C7FD1,#8C5AC2,#D9654F)}
-.hm-look-globe{background:radial-gradient(circle at 32% 28%,#F3EFE4,#4C7FD1 45%,#1B2740 85%)}
 .hm-look-magnifier{background:radial-gradient(circle at 50% 50%,#F3EFE4 0%,#E7C35C 30%,#4C9F70 58%,#2E3B52 100%)}
 
 /* ---------- the Tweak panel: a compact, opaque, non-modal sheet over the live honeycomb (home + #/lab/honey) ---------- */
@@ -171,9 +158,108 @@
 .cs-hl-act{flex:1;min-height:46px;display:flex;align-items:center;justify-content:center;padding:0 12px;border-radius:var(--r-pill,999px);font:500 16px/1 var(--sans);color:inherit;box-shadow:inset 0 0 0 1px rgba(20,19,17,.22);transition:transform .12s ease-out}
 .cs-hl-act.on{background:var(--paper-ink);color:var(--paper);box-shadow:none}
 .cs-hl-act:active,.cs-hl-x:active,.cs-hl-bar .cs-hl-back:active{transform:scale(.96)}
-.hm-look-spiral{background:radial-gradient(circle at 50% 50%,#E7C35C 0 18%,#2A2822 19% 22%,#4C9F70 23% 44%,#2A2822 45% 48%,#4C7FD1 49% 72%,#2A2822 73% 76%,#8C5AC2 77%)}
 /* L18: every Home corner fades together while you drag, and returns together (David: only the Study corner stayed) */
 .hm.chrome-hide .corner{opacity:0;pointer-events:none}
 /* pull-down-to-close hint (js/home.js hmPullClose): says what letting go will do, so a close is never a surprise */
 .hm-pullpill{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + 14px);transform:translate(-50%,-8px);z-index:90;padding:8px 14px;border-radius:var(--r-pill,999px);background:rgba(20,19,17,.82);color:#ECE8DF;font:500 14px/1 var(--sans);letter-spacing:.01em;opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
 .hm-pullpill.on{opacity:1;transform:translate(-50%,0)}
+
+/* ---------- the View sheet (design/HOME-VIEWS.md §5): Arrange by on top, then Colors / Look. A fixed-height,
+   opaque sheet whose own body scrolls, so the map above it stays in view and recentered (ctrl.setInset) ---------- */
+.scrim.hm-scrim-clear{background:transparent;animation:none}
+.sheet.hm-sheet-panel{display:flex;flex-direction:column;height:min(56dvh,540px);max-height:min(56dvh,540px);overflow:hidden;padding-left:0;padding-right:0;padding-bottom:0}
+.hm-sheet-panel>.grab{flex:none}
+.hm-sheet-panel .hm-chooser{flex:1;min-height:0;display:flex;flex-direction:column}
+.hm-ch-head{flex:none;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:0 16px 12px;touch-action:none}
+.hm-ch-t{min-width:0}
+.hm-ch-t .title-2{margin:0 0 4px!important}
+.hm-ch-head .hm-count{margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.hm-chooser-acts{flex:none;display:flex;gap:6px}
+.hm-chooser-acts .iconq{width:44px;height:44px}
+.hm-ch-x{background:var(--surface-2)}
+/* Arrange by: a strip of live pictures, the current one ringed in paper */
+.hm-arr{flex:none;display:flex;gap:10px;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;scroll-snap-type:x proximity;padding:2px 16px 4px;scrollbar-width:none}
+.hm-arr::-webkit-scrollbar{display:none}
+.hm-arr-b{flex:none;width:76px;display:flex;flex-direction:column;align-items:center;gap:6px;scroll-snap-align:center;transition:transform var(--dur-0,.12s) ease-out}
+.hm-arr-b:active{transform:scale(.94)}
+.hm-arr-pic{display:block;width:72px;height:72px;border-radius:18px;background:#0E0D0B;box-shadow:inset 0 0 0 1px var(--rule);overflow:hidden;transition:box-shadow .2s}
+.hm-arr-pic canvas{display:block;width:72px;height:72px}
+.hm-arr-b b{font:400 13px/1.15 var(--sans);color:var(--soft);text-align:center;width:100%;min-height:2.3em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.hm-arr-b.on .hm-arr-pic{box-shadow:0 0 0 2px var(--paper),0 0 0 4px var(--surface-1)}
+.hm-arr-b.on b{color:var(--ink)}
+.hm-arr-sub{flex:none;margin:4px 0 12px;padding:0 16px;font:italic 400 16px/1.3 var(--serif);color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hm-arr-sub b{font-weight:400;font-style:normal;color:var(--ink)}
+.hm-ch-scroll{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:0 16px calc(var(--bottom,0px) + 24px);-webkit-overflow-scrolling:touch}
+.hm-ch-scroll .cx-sec{margin-top:18px}
+/* How many: one row of rungs, the count big */
+.hm-ladder{display:flex;gap:6px;overflow-x:auto;padding:12px 0 2px;scrollbar-width:none;overscroll-behavior-x:contain}
+.hm-ladder::-webkit-scrollbar{display:none}
+.hm-rung{flex:none;min-width:70px;min-height:56px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:4px;padding:8px 12px;border-radius:var(--r-2);background:var(--surface-2);transition:background .2s,color .2s}
+.hm-rung b{font:400 20px/1 var(--serif);color:var(--ink)}
+.hm-rung small{font:400 12.5px/1 var(--sans);color:var(--soft);white-space:nowrap}
+.hm-rung.on{background:var(--paper)}
+.hm-rung.on b,.hm-rung.on small{color:var(--paper-ink)}
+/* Family: three real samples per family (lightest, middle, darkest), its name and its count */
+.hm-fams{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;padding-top:12px}
+.hm-fam{display:flex;align-items:center;gap:10px;min-height:50px;padding:0 12px;border-radius:var(--r-2);background:var(--surface-2);text-align:left;transition:background .2s,transform .2s var(--spring,ease-out)}
+.hm-fam:active{transform:scale(.97)}
+.hm-fam b{flex:1;min-width:0;font:400 18px/1.1 var(--serif);color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hm-fam em{font:400 14px/1 var(--sans);font-style:normal;color:var(--soft);font-variant-numeric:tabular-nums}
+.hm-fam-dots{flex:none;display:flex}
+.hm-fam-dots i{width:18px;height:18px;border-radius:50%;margin-left:-6px;box-shadow:0 0 0 2px var(--surface-2)}
+.hm-fam-dots i:first-child{margin-left:0}
+.hm-fam-dots:empty{width:18px;height:18px;border-radius:50%;background:conic-gradient(#D9654F,#E7C35C,#4C9F70,#4C7FD1,#8C5AC2,#D9654F)}
+.hm-fam.on{background:var(--paper)}
+.hm-fam.on b,.hm-fam.on em{color:var(--paper-ink)}
+.hm-fam.on .hm-fam-dots i{box-shadow:0 0 0 2px var(--paper)}
+.hm-fam.off,.hm-seg-n button.off{opacity:.38;pointer-events:none}
+/* Tone and Your words: segmented, each with its count under the word */
+.hm-seg-n{margin:12px 0 2px;flex-wrap:nowrap}
+.hm-seg-n button{flex:1;min-width:0;height:auto;min-height:52px;flex-direction:column;gap:4px;padding:6px 2px;border:0;background:var(--surface-2);border-radius:var(--r-2);font:400 16px/1 var(--serif);color:var(--ink)}
+.hm-seg-n button span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.hm-seg-n button em{font:400 12.5px/1 var(--sans);font-style:normal;color:var(--soft);font-variant-numeric:tabular-nums}
+.hm-seg-n button.on{background:var(--paper);color:var(--paper-ink)}
+.hm-seg-n button.on em{color:var(--paper-ink);opacity:.7}
+.hm-clear{display:block;margin:14px 0 0;min-height:44px;padding:0 18px;border-radius:var(--r-pill);background:var(--surface-2);font:400 16px/1 var(--sans);color:var(--ink)}
+.hm-clear[hidden]{display:none}
+/* Look: three chips, then the feel sliders on one line each, words at both ends (no numbers) */
+.hm-sheet-panel .hm-look-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;overflow:visible;padding-top:12px}
+.hm-sheet-panel .hm-look-chip{width:auto;min-height:74px;justify-content:center;gap:6px;padding:10px 6px;border-radius:var(--r-2);background:var(--surface-2);border:0}
+.hm-sheet-panel .hm-look-chip b{font:400 16px/1.1 var(--serif);color:var(--soft)}
+.hm-sheet-panel .hm-look-chip .hm-look-ic{width:32px;height:32px}
+.hm-sheet-panel .hm-look-chip.on{background:var(--paper)}
+.hm-sheet-panel .hm-look-chip.on b{color:var(--paper-ink)}
+.hm-feel{margin-top:10px;display:flex;flex-direction:column}
+.hm-feel-row{display:grid;grid-template-columns:96px 1fr;align-items:center;gap:8px;min-height:48px}
+.hm-feel-l{font:400 17px/1.1 var(--serif);color:var(--ink)}
+.hm-feel-r{display:flex;align-items:center;gap:8px;min-width:0}
+.hm-feel-r i{flex:none;font:400 13px/1 var(--sans);font-style:normal;color:var(--soft)}
+.hm-feel-r input{flex:1;min-width:0;height:32px;accent-color:var(--paper);touch-action:pan-x}
+.hm-feel-reset{align-self:flex-start;margin-top:6px;min-height:40px;padding:0 16px;border-radius:var(--r-pill);background:var(--surface-2);font:400 15px/1 var(--sans);color:var(--ink)}
+.hm-look-original{background:radial-gradient(circle at 50% 50%,#E7C35C 0 22%,transparent 23%),radial-gradient(circle at 18% 30%,#D9654F 0 14%,transparent 15%),radial-gradient(circle at 82% 30%,#4C7FD1 0 14%,transparent 15%),radial-gradient(circle at 20% 76%,#8C5AC2 0 13%,transparent 14%),radial-gradient(circle at 80% 76%,#4C9F70 0 13%,transparent 14%);box-shadow:none!important}
+@media (max-width:360px){.hm-fam b{font-size:16px}.hm-seg-n button{font-size:14.5px}.hm-arr-b{width:68px}.hm-arr-pic,.hm-arr-pic canvas{width:64px;height:64px}.hm-feel-row{grid-template-columns:80px 1fr}}
+/* Arrange: one focused sheet, no taller than its content (the map keeps most of the screen) */
+.sheet.hm-sheet-panel.hm-sheet-arrange{height:auto}
+.hm-sheet-arrange .hm-arr{margin:0 -16px;padding-top:4px}
+.hm-sheet-arrange .hm-arr-sub{padding:0;margin-top:2px}
+
+/* ---------- the right corner: one button and its labeled arc (js/home.js doMenu; PLAN.md decision #2) ---------- */
+.hm-do{overflow:visible}
+.hm-do svg{width:20px;height:20px}
+.hm-do-n{position:absolute;top:-5px;right:-5px;min-width:22px;height:22px;padding:0 6px;border-radius:11px;background:var(--paper);color:var(--paper-ink);
+  font:500 12.5px/22px var(--sans);font-style:normal;text-align:center;font-variant-numeric:tabular-nums;box-shadow:0 0 0 2px var(--ground)}
+/* the stem's mirror: capsules rise from the right corner, picture on the right, words right-aligned */
+.rooms-stem.hm-do-stem .rm-bubble{left:auto;right:calc(11px + var(--x,0px));flex-direction:row-reverse;padding:3px 3px 3px 22px;text-align:right;
+  transform-origin:calc(100% - 30px) 100%;transform:translate(var(--x,0px),calc(var(--step) * (var(--i) + 1) * .55)) scale(.55)}
+.rooms-stem.hm-do-stem.on .rm-bubble{transform:none}
+.rooms-stem.hm-do-stem .rm-label{align-items:flex-end}
+.hm-do-ic{display:grid!important;place-items:center;background:var(--surface-3,#2A2822);border-radius:50%;color:var(--ink)}
+.hm-do-ic svg{width:22px;height:22px}
+.hm-do-dots{grid-template-columns:1fr 1fr;gap:3px;padding:12px}
+.hm-do-dots i{display:block;width:100%;height:100%;border-radius:50%}
+/* a quiet caption at the edges for an arrangement whose direction means something (Warm and cool) */
+.hm-axes{position:absolute;inset:0;pointer-events:none;z-index:2;transition:opacity .4s var(--ease)}
+.hm.chrome-hide .hm-axes{opacity:0}
+.hm-ax{position:absolute;top:50%;padding:5px 10px;border-radius:var(--r-pill);background:rgba(14,13,11,.72);font:italic 400 14px/1 var(--serif);color:var(--soft)}
+.hm-ax-l{left:8px;transform:translateY(-50%)}
+.hm-ax-r{right:8px;transform:translateY(-50%)}

@@ -507,7 +507,7 @@ function lxWordsHtml(nu) {
 function lxWordsWire(el) {
   const b = el.querySelector("[data-words-map]"); if (!b) return;
   b.onclick = () => {
-    S.hm = S.hm || {}; S.hm.src = b.dataset.src; S.hm.filter = b.dataset.filter; save();
+    S.hm = S.hm || {}; S.hm.src = b.dataset.src; S.hm.filter = b.dataset.filter; S.hm.fam = ""; S.hm.tone = ""; save();   // exactly your words: no family or tone left over
     buzz(6); hmHome();
   };
 }

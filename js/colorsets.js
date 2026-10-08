@@ -29,6 +29,70 @@ function setFamily(h) {
   return L > 72 ? "Pinks" : "Purples";
 }
 
+// ---------- families that tell the truth (design/HOME-VIEWS.md §4) ----------
+// One rule for the map's family filter, the explorer's family sets and the Families arrangement. setFamily()
+// above stays as the gym's own hue-box rule. The old family sets were hue boxes with hard lightness cut-offs (Pinks =
+// L >= 70), so Hot pink, Rose, Fuchsia and every dusky or dark pink landed in Reds or Purples.
+//  1. the name's head word decides when it names a family ("Salmon pink" -> Pinks, "Deep rose red" -> Reds);
+//  2. otherwise LCh decides; pink vs red uses lightness AND chroma (a vivid magenta-pink stays pink at L 55);
+//  3. csFamilyHas() also counts a name that carries the family's word anywhere, when its LCh family is a neighbor.
+const CS_FAMS = ["Reds", "Pinks", "Oranges", "Yellows", "Browns", "Greens", "Blues", "Purples", "Greys"];
+const CS_FAM_WORDS = {
+  Reds: "red reds scarlet crimson vermilion vermillion carmine cardinal ruby cherry maroon oxblood burgundy wine claret cinnabar madder garnet",
+  Pinks: "pink pinks pinkish rose roses rosy fuchsia magenta cerise blush carnation flamingo bubblegum salmon raspberry",
+  Oranges: "orange oranges orangish apricot tangerine peach coral persimmon pumpkin mandarin marigold",
+  Yellows: "yellow yellows yellowish lemon canary gold golden mustard saffron maize butter jasmine straw citrine",
+  Browns: "brown browns brownish umber sienna chocolate coffee tan taupe sepia chestnut mahogany rust camel cocoa mocha bronze copper fawn russet hazel walnut khaki beige ochre",
+  Greens: "green greens greenish olive sage mint emerald jade lime moss viridian celadon chartreuse pistachio fern forest pine malachite",
+  Blues: "blue blues bluish navy azure cyan teal turquoise cobalt cerulean ultramarine sapphire denim aqua sky indigo petrol periwinkle cornflower",
+  Purples: "purple purples purplish violet lilac lavender mauve plum orchid amethyst aubergine eggplant heliotrope wisteria grape mulberry byzantium thistle lavendar lavender",
+  Greys: "grey gray greys grays greyish grayish silver ash slate charcoal pewter smoke white ivory cream black ebony",
+};
+const CS_FAM_WORD = new Map(); Object.entries(CS_FAM_WORDS).forEach(([f, s]) => s.split(" ").forEach(w => CS_FAM_WORD.set(w, f)));
+const CS_FAM_NEAR = { Reds: ["Pinks", "Oranges", "Browns", "Purples"], Pinks: ["Reds", "Purples", "Oranges", "Greys"], Oranges: ["Reds", "Pinks", "Yellows", "Browns"],
+  Yellows: ["Oranges", "Browns", "Greens", "Greys"], Browns: ["Reds", "Oranges", "Yellows", "Greys", "Greens"], Greens: ["Yellows", "Blues", "Browns", "Greys"],
+  Blues: ["Greens", "Purples", "Greys"], Purples: ["Blues", "Pinks", "Reds", "Greys"], Greys: CS_FAMS.slice(0, 8) };
+const csWords = n => String(n || "").toLowerCase().split(/[^a-z]+/).filter(Boolean);
+// the LCh-only family (step 2)
+function csFamilyLch(L, C, H) {
+  if (C < 10 || (C < 14 && (L < 22 || L > 88))) return "Greys";
+  if (H >= 345 || H < 40) {
+    if (H >= 28 && L >= 62 && C >= 30) return "Oranges";   // corals and salmons with real orange in them
+    return L >= 62 || (L >= 52 && C >= 55 && (H >= 345 || H < 10)) || (L >= 56 && C < 34) ? "Pinks" : "Reds";
+  }
+  if (H < 70) return L < 50 ? "Browns" : "Oranges";
+  if (H < 100) return L < 57 ? (C > 45 && L > 45 ? "Yellows" : "Browns") : "Yellows";
+  if (H < 195) return "Greens";
+  if (H < 290) return "Blues";
+  if (H < 320) return "Purples";   // pale lavenders and periwinkles are light purples, not pinks
+  return L >= 55 || (L >= 42 && C >= 60) ? "Pinks" : "Purples";
+}
+const CS_FAM_MEMO = new Map();
+function csFamily(it) {
+  const n = it.n || "", h = it.h, k = n + "|" + h;
+  let f = CS_FAM_MEMO.get(k); if (f) return f;
+  const w = csWords(n), head = w.length ? CS_FAM_WORD.get(w[w.length - 1]) : null;
+  if (head) f = head;
+  else { const [L, C, H] = it.L != null && it.C != null && it.H != null ? [it.L, it.C, it.H] : lch(h); f = csFamilyLch(L, C, H); }
+  if (CS_FAM_MEMO.size > 20000) CS_FAM_MEMO.clear();
+  CS_FAM_MEMO.set(k, f);
+  return f;
+}
+// in a family's filter: its own family, or a name that carries the family's word when its color is a neighbor
+function csFamilyHas(it, fam) {
+  const own = csFamily(it); if (own === fam) return true;
+  if (!csWords(it.n).some(w => CS_FAM_WORD.get(w) === fam)) return false;
+  const [L, C, H] = it.L != null && it.C != null && it.H != null ? [it.L, it.C, it.H] : lch(it.h), lf = csFamilyLch(L, C, H);
+  return lf === fam || (CS_FAM_NEAR[fam] || []).includes(lf);
+}
+// tone, within any family: overlapping on purpose (a light vivid pink is both)
+const CS_TONES = [["light", "Light", x => x.L >= 70], ["vivid", "Vivid", x => x.C >= 48], ["muted", "Muted", x => x.C >= 6 && x.C < 26], ["dark", "Dark", x => x.L < 40]];
+function csTone(it, tone) {
+  const t = CS_TONES.find(x => x[0] === tone); if (!t) return true;
+  const x = it.L != null && it.C != null ? it : (() => { const [L, C] = lch(it.h); return { L, C }; })();
+  return t[2](x);
+}
+
 // ---------- every color, with an evenly spread order ----------
 let CS_ALL = null;
 function csItems() {
@@ -86,7 +150,7 @@ function filterColors(items, f = {}) {
   const src = f.sources && f.sources.length ? f.sources : null, q = f.q ? String(f.q).trim().toLowerCase() : "";
   let out = items.filter(it => {
     const x = csInfo(it);
-    return x.L >= l0 && x.L <= l1 && x.C >= c0 && x.C <= c1 && (!hue || (x.C >= 6 && hueIn(x.H, hue)))
+    return (!f.fam || csFamilyHas(x, f.fam)) && x.L >= l0 && x.L <= l1 && x.C >= c0 && x.C <= c1 && (!hue || (x.C >= 6 && hueIn(x.H, hue)))
       && (!src || src.some(s => x.src.includes(s))) && (!q || csMatch(x, q));
   });
   if (f.n && f.n < out.length) out = out.slice().sort((a, b) => csInfo(a).rank - csInfo(b).rank).slice(0, f.n);
@@ -120,15 +184,8 @@ const COLOR_SETS = [
   csSet("darks", "Darks", "Character", { L: [0, 30] }),
   csSet("earth", "Earth tones", "Character", { hue: [25, 95], L: [20, 68], C: [8, 50] }),
   csSet("neutrals", "Neutrals", "Character", { C: [0, 8] }),
-  csSet("reds", "Reds", "Families", { hue: [345, 40], L: [0, 72], C: [12, CS_CMAX] }),
-  csSet("pinks", "Pinks", "Families", { hue: [290, 40], L: [70, 100], C: [12, CS_CMAX] }),
-  csSet("oranges", "Oranges", "Families", { hue: [40, 70], L: [48, 100], C: [12, CS_CMAX] }),
-  csSet("browns", "Browns", "Families", { hue: [40, 100], L: [0, 55], C: [12, CS_CMAX] }),
-  csSet("yellows", "Yellows", "Families", { hue: [70, 105], L: [55, 100], C: [12, CS_CMAX] }),
-  csSet("greens", "Greens", "Families", { hue: [100, 195], C: [12, CS_CMAX] }),
-  csSet("blues", "Blues", "Families", { hue: [195, 290], C: [12, CS_CMAX] }),
-  csSet("purples", "Purples", "Families", { hue: [290, 345], L: [0, 72], C: [12, CS_CMAX] }),
-  csSet("greys", "Greys", "Families", { C: [0, 12] }),
+  // families: the shared name-aware rule (csFamily above), not hue boxes
+  ...CS_FAMS.map(f => csSet(f.toLowerCase(), f, "Families", { fam: f })),
   ...CS_SRC.map(([k, l]) => csSet("src-" + k, { jp: "Japanese traditional", werner: "Werner, 1821", ridgway: "Ridgway, 1912", ral: "RAL paint", css: "Web colors" }[k] || l, "Sources", { sources: [k] })),
 ];
 const getSet = id => { const s = COLOR_SETS.find(x => x.id === id); return s ? s.get() : []; };

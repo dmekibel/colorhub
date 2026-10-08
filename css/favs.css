@@ -3,9 +3,7 @@
    viewing-booth grey, like the decks and drills (css/booth.css). Controls are solid. Serif for words, mono only for numbers. */
 
 /* ---------- Home: the heart corner and pick mode ---------- */
-.fv-corner{bottom:calc(var(--bottom) + 12px + 56px + 12px);right:20px;width:48px;height:48px;transition:opacity .4s var(--ease),transform .3s var(--spring)}
-.fv-corner svg{width:22px;height:22px}
-.hm.chrome-hide .fv-corner,.hm.fv-picking .corner{opacity:0;pointer-events:none}
+.hm.fv-picking .corner{opacity:0;pointer-events:none}
 .fv-bar{position:fixed;left:16px;right:16px;bottom:calc(var(--bottom) + 12px);z-index:18;max-width:508px;margin:0 auto;min-height:64px;padding:8px;display:flex;align-items:center;gap:10px;
   background:var(--surface-2);border:1px solid rgba(236,232,223,.14);border-radius:var(--r-pill);box-shadow:0 8px 24px rgba(0,0,0,.5);animation:fvUp .34s var(--ease-grow) both}
 .fv-x{flex:none;height:48px;min-width:48px;padding:0;border-radius:var(--r-pill);background:var(--surface-3);color:var(--ink);display:grid;place-items:center;transition:transform .2s var(--spring)}

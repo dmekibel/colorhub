@@ -443,6 +443,8 @@ function closeStem(instant) {
   document.body.classList.remove("stem-open");
   if (STEM_KEY) { removeEventListener("keydown", STEM_KEY, true); STEM_KEY = null; }
   document.querySelectorAll("[data-rooms-corner]").forEach(b => { b.classList.remove("on"); b.innerHTML = ROOMS_GLYPH; b.setAttribute("aria-expanded", "false"); });
+  // Home's right-corner menu (js/home.js doMenu) rides the same stem: its button gets its own face back
+  document.querySelectorAll("[data-do-corner]").forEach(b => { b.classList.remove("on"); b.setAttribute("aria-expanded", "false"); if (b._html) b.innerHTML = b._html; });
   const gone = () => { if (s) s.remove(); if (sc) sc.remove(); };
   if (instant === true || (!s && !sc)) return gone();
   if (s) s.classList.remove("on");
@@ -627,11 +629,18 @@ function sheet(html) {
     on = false; sh.style.transition = "transform .3s var(--ease)"; sh.style.transform = "";
   };
   // a drag that starts while the sheet is scrolled (or still gliding to the top) is scrolling, never a close
-  const start = (x, y, target) => { if (target.closest("input,textarea,select,input[type=range]") || ((sh.scrollTop > 0 || performance.now() - lastScroll < 700) && !target.closest(".grab"))) return; grab = !!target.closest(".grab"); y0 = y; x0 = x; dy = 0; on = false; t0 = performance.now(); };
+  // a sheet with its own inner scroller ([data-sheet-scroll]) closes from there only at that scroller's top; a
+  // [data-sheet-grab] header closes with any quick drag, like the grab bar (js/home.js View sheet)
+  const start = (x, y, target) => {
+    const isc = target.closest("[data-sheet-scroll]"), g = !!target.closest(".grab,[data-sheet-grab]");
+    if (target.closest("input,textarea,select,input[type=range]") || (isc && isc.scrollTop > 0) || ((sh.scrollTop > 0 || performance.now() - lastScroll < 700) && !g)) return;
+    grab = g; y0 = y; x0 = x; dy = 0; on = false; t0 = performance.now();
+  };
+  sh.addEventListener("scroll", () => { lastScroll = performance.now(); }, { passive: true, capture: true });   // an inner scroller counts too
   const move = (x, y, e) => {
     if (y0 == null) return;
     const d = y - y0;
-    if (!on) { if (d > (grab ? 12 : 24) && d > Math.abs(x - x0) * 1.5 && sh.scrollTop <= 0) on = true; else if (d < -6 || Math.abs(x - x0) > 10) { y0 = null; return; } else return; }
+    if (!on) { if (d > (grab ? 12 : 24) && d > Math.abs(x - x0) * 1.5 && (grab || sh.scrollTop <= 0)) on = true; else if (d < -6 || Math.abs(x - x0) > 10) { y0 = null; return; } else return; }
     if (e && e.cancelable) e.preventDefault();
     dy = Math.max(0, d); sh.style.transition = "none"; sh.style.transform = `translateY(${dy}px)`;
   };
