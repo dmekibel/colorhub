@@ -21,6 +21,9 @@ Depends on L13's shared patch sampler (Isolator), so start after L13 merges. Rea
 - **Views:** value only (squint), posterize to N, chroma map, temperature map, hue only, and the mask of any color.
 - The same component powers painting pages (pixel-exact where the image can be read), so paintings and photos share one analysis UI.
 
+## 2b. Closest painting by any metric (David)
+From a photo or any painting: the closest paintings by overall palette, dominant colors, accents, mood (key, chroma, warmth, contrast), light structure, one chosen color, or layout (a 4×4 spatial grid, only where the image can be read). L13 builds the search; L27 adds the layout metric from its image buffer and puts the metric chips in the analysis screen.
+
 ## 3. Connections
 Saved photos get their analysis stored, become ColorSets with every verb, and feed the Learner Model ("words you didn't have": unnamed colors in your photos become next words). Uploaded-photo results can rank against "your own photos" over time.
 
