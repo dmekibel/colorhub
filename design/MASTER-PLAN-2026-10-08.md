@@ -179,6 +179,7 @@ The full-screen color, then a one-line definition with its source, then the **Re
 
 ## Launch queue (start as slots free; 20 subagents can run at once)
 0. R1 competitor teardown (design/lanes/R1-competitors.md): first free slot.
+0b. L16 Explore 2.0 browsing (design/lanes/L16-explore-browse.md): the color dial, facet chips with counts, views (grid with a jump bar, Decade River, by painter, wall), smart collections. Second free slot; pairs with L26.
 1. L22 Maerz & Paul round 2: the dictionary index (~4,000 names, plate/cell, origin and date), per-plate color correction, a clean merge.
 2. L9 learning beyond the 101 + the Journey, after Practice (L4) merges.
 3. Ideas synthesis, after the 7 IDEAS-10X panels report.
