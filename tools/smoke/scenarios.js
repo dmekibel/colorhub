@@ -2514,3 +2514,21 @@ scenario("trail", "Close from color > painting > color: the map as it was, the t
   t.w.history.back(); await t.sleep(800);
   t.expect(t.$(".screen.hm canvas") && !t.$(".cp-page") && !t.$(".room-sheet"), `Back after Close left the map (${TRL.hash(t)})`);
 });
+
+// David's iPhone (2026-10-09): on a color's cover, ‹ and Close sat on the status bar. With an iPhone's safe area (59px,
+// simulated here), every inner page's ‹ and Close sit below it.
+scenario("pages", "with an iPhone safe area, ‹ and Close sit below the status bar on every kind of inner page", async t => {
+  const INSET = 59, bad = [];
+  for (const hash of ["#/color/cobalt", "#/name/rose-pink", "#/read/mauve", "#/hub/source:crayola", "#/gallery/15146", "#/pair/4f6b3a+c2412d"]) {
+    await t.open(hash, { settle: 300 });
+    { const st = t.w.document.createElement("style"); st.textContent = `:root{--top:${INSET}px !important}`; t.w.document.head.appendChild(st); }   // a simulated iPhone safe area
+    t.w.location.hash = "#/home"; await t.sleep(300); t.w.location.hash = hash; await t.sleep(300);   // drawn again with the inset in place
+    await t.waitFor(() => t.$("#app .screen [data-back]") && t.$("#app .screen [data-tl-exit]") && !t.$(".screen.waiting"), 15000, `‹ and Close on ${hash}`);
+    t.w.scrollTo(0, 0); await t.sleep(80);
+    for (const sel of ["[data-back]", "[data-tl-exit]"]) {
+      const r = t.$("#app .screen " + sel).getBoundingClientRect();
+      if (r.top < INSET + 6) bad.push(`${hash} ${sel} at ${Math.round(r.top)}px`);
+    }
+  }
+  t.expect(!bad.length, `on the status bar: ${bad.join(", ")}`);
+});

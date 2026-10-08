@@ -18,7 +18,9 @@
 .cp-page .cp-hero{
   position:relative;
   /* bleed past the screen's own top-and-side padding, so the swatch reaches every edge */
-  margin:calc(-1 * (var(--top) + 12px)) calc(-1 * var(--g)) 0;
+  /* (a cp-page is always an .article, whose screen has no top padding: app.css .article. Pulling the cover up by the
+     safe area again put it 59 + 12 px above the screen on an iPhone, so its ‹ and Close sat on the status bar) */
+  margin:0 calc(-1 * var(--g)) 0;
   width:calc(100% + var(--g) * 2);
   border-radius:0;
   padding:16px var(--g) 22px;
