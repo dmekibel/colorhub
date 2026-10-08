@@ -1483,7 +1483,7 @@ scenario("learnroom", "the Today card shows the painting and opens both of its p
   await t.open("#shot=learn", { settle: 600 });
   await t.waitFor(".lr-today #dlPaintArt img", 8000, "Today's painting in the card");
   await t.waitFor(() => t.$("#lrTcSw.on"), 8000, "today's color swatch");
-  t.expect(/,/.test(t.text("#lrTcTitle")) && t.text("#lrTcSub").length > 3, `the card's title ("${t.text("#lrTcTitle")}")`);
+  t.expect(/,|hides in/.test(t.text("#lrTcTitle")) && t.text("#lrTcSub").length > 3, `the card's title ("${t.text("#lrTcTitle")}")`);
   if (t.ev("typeof todayPick") !== "function") t.expect(!t.$(".lr-tc-chip.on"), "a color chip sits on a painting it isn't linked to");
   await t.click(".lr-tc-act[data-daily]", { wait: 600 });
   await t.waitFor(".dn-in", 10000, "Name it in six from the card");
@@ -1506,4 +1506,20 @@ scenario("you-coverage", "You: Untangle on a mix-up opens the Learn sheet on tha
   await t.click(u, { wait: 700 });
   await t.waitFor(".ls-sheet", 4000, "the Learn sheet");
   t.expect(/Teal/i.test(t.text(".ls-sheet")) && /Petrol/i.test(t.text(".ls-sheet")), "the sheet isn't on the pair");
+});
+
+// ================================================================== ONE TODAY (PLAN.md lane B)
+scenario("one-today", "todayPick names a color and the painting that holds it; the Museum Art cover, Today's painting and the Learn card all quote it", async t => {
+  await t.open("#/explore", { settle: 600 });
+  t.expect(t.ev("typeof todayPick") === "function", "todayPick isn't loaded");
+  const pk = t.ev(`(() => { const p = todayPick(); return p && { c: p.color.n, h: p.color.h, id: p.painting.id, s: p.painting.share, bs: p.board.seed, bp: p.board.painting, dc: dailyColor().n, same: JSON.stringify(todayPick()) === JSON.stringify(todayPick(today())) }; })()`);
+  t.expect(pk && pk.c && pk.id && pk.s >= 2 && pk.bs === pk.h && pk.bp === pk.id && pk.same, "todayPick isn't {color, painting at 2%+, board}: " + JSON.stringify(pk));
+  t.expect(pk.dc.toLowerCase() === pk.c.toLowerCase(), `dailyColor is ${pk.dc}, not ${pk.c}`);
+  const note = () => t.text('.xp-cover[data-part="art"] .xp-note');
+  await t.waitFor(() => new RegExp(pk.c, "i").test(note()) && / in /.test(note()), 8000, "the Art cover to name today's color and painting");
+  const e = await t.ev(`dpLoad().then(e => ({ id: e.id, t: e.t }))`);
+  t.expect(e && e.id === pk.id, `Today's painting is ${e && e.id}, not ${pk.id}`);
+  t.expect(note().includes(e.t), "the Art cover doesn't name today's painting");
+  await t.open("#shot=learn", { settle: 600 });
+  await t.waitFor(".lr-tc-chip.on", 8000, "the Learn card's color chip on the painting");
 });

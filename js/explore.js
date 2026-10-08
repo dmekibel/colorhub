@@ -187,12 +187,16 @@ function coverData() {
   const day = today(), g = graph();
   const c = dailyColor(day);
   const paintings = [...g.nodes.values()].filter(x => x.kind === "painting" && !x.stub && x.img && (x.palette || []).length);
-  const art = paintings.length ? seeded(paintings, "artcover" + day)[0] : null;
+  // one Today (js/today.js): the painting that holds today's color, when the graph has it
+  const tp = typeof todayPick === "function" ? todayPick(day) : null, tn = tp && tp.painting && g.nodes.get(tp.painting.node);
+  const art = tn && tn.kind === "painting" && !tn.stub && tn.img && (tn.palette || []).length ? tn : tp ? null : paintings.length ? seeded(paintings, "artcover" + day)[0] : null;
   const story = g.stories.length ? seeded(g.stories, "ideacover" + day)[0] : null;
   const coty = window.FASHION && FASHION.coty && FASHION.coty[FASHION.coty.length - 1];
-  return { c, art, story, coty };
+  return { c, art, story, coty, tp };
 }
 function artCoverNote(art) {
+  const tp = typeof todayPick === "function" ? todayPick() : null;
+  if (tp && tp.painting && tp.painting.node === art.id) return `Today, ${tp.color.n.toLowerCase()} in ${art.title}`;
   const pal = art.palette, dom = pal.reduce((a, b) => b.share > a.share ? b : a), dark = pal.reduce((a, b) => lch(b.h)[0] < lch(a.h)[0] ? b : a);
   const names = [dom.name, dark.name].filter((n, i, arr) => n && arr.indexOf(n) === i);
   return `Today, ${art.title}${names.length ? `, in ${names.map(n => n.toLowerCase()).join(" and ")}` : ""}`;
@@ -210,18 +214,18 @@ function coverHTML(part, name, lead, note, tint, heroHTML, seamHTML) {
 }
 function explorePager() {
   XSTACK = [];
-  const { c, art, story, coty } = coverData();
+  const { c, art, story, coty, tp } = coverData();
   const forYouSeam = sixSwatchHTML([c.h, ...nearestColors(c.h, 5, c.n).map(x => x[0].h)]);
   const covers = [
     coverHTML("all", "For you", "A new pick of colors, paintings and stories every day.", `Today, ${c.n}`,
       tintFromHex(c.h), flatHeroHTML(c.h, c.n), forYouSeam),
     art ? coverHTML("art", "Art", `${typeof GAL !== "undefined" && GAL ? GAL.n.toLocaleString("en-US") : "Over 23,000"} paintings and 11,440 poems, found by their colors.`, artCoverNote(art),
       tintFromPalette(art.palette), `<img src="${esc(art.img)}" alt="${esc(art.title)}">`, sixSwatchHTML(art.palette.map(p => p.h), art.palette.map(p => p.share)))
-      : coverHTML("art", "Art", `${typeof GAL !== "undefined" && GAL ? GAL.n.toLocaleString("en-US") : "Over 23,000"} paintings and 11,440 poems, found by their colors.`, "", null, `<div class="xp-flat" style="background:var(--lift-2)"></div>`, ""),
-    story ? coverHTML("ideas", "Ideas", "Short stories, systems and history, read through color.", `Today, ${story.title}`,
+      : coverHTML("art", "Art", `${typeof GAL !== "undefined" && GAL ? GAL.n.toLocaleString("en-US") : "Over 23,000"} paintings and 11,440 poems, found by their colors.`, tp ? `Today, ${tp.color.n.toLowerCase()}` : "", null, `<div class="xp-flat" style="background:var(--lift-2)"></div>`, ""),
+    story ? coverHTML("ideas", "Ideas", "Short stories, systems and history, read through color.", story.title,
       tintFromHexList(story.cover), `<div class="xp-flat" style="background:linear-gradient(135deg,${story.cover.join(",")})"></div>`, sixSwatchHTML(story.cover))
       : coverHTML("ideas", "Ideas", "Short stories, systems and history, read through color.", "", null, `<div class="xp-flat" style="background:var(--lift-2)"></div>`, ""),
-    coty ? coverHTML("world", "World", "Fashion, gems and growing things, in color.", `Today, ${coty.name} · ${coty.year}`,
+    coty ? coverHTML("world", "World", "Fashion, gems and growing things, in color.", `${coty.name} · ${coty.year}`,
       tintFromHex(coty.hex), flatHeroHTML(coty.hex, coty.name), sixSwatchHTML(FASHION.coty.slice(-6).map(y => y.hex)))
       : coverHTML("world", "World", "Fashion, gems and growing things, in color.", "", null, `<div class="xp-flat" style="background:var(--lift-2)"></div>`, ""),
   ];
@@ -242,6 +246,15 @@ function explorePager() {
   // (the "For you" cover opens its feed directly: openPart("all") is the pager itself, so it used to just redraw the pager)
   pager.addEventListener("click", e => { const s = e.target.closest("[data-part]"); if (s) s.dataset.part === "all" ? exploreForYou() : openPart(s.dataset.part); });
   el.querySelector("[data-search]").onclick = () => exploreSearchSheet();
+  // today's painting isn't a graph node (most of the daily set isn't): draw it onto the Art cover when it loads
+  if (!art && tp && typeof dpLoad === "function") dpLoad().then(e => {
+    const cv = e && el.isConnected && el.querySelector('.xp-cover[data-part="art"]'); if (!cv) return;
+    cv.querySelector(".xp-img").innerHTML = `<img src="${esc(e.img)}" alt="${esc(e.t)}">`;
+    const nt = cv.querySelector(".xp-note"); if (nt) nt.textContent = `Today, ${tp.color.n.toLowerCase()} in ${e.t}`;
+    const pool = e.pool.slice(0, 6); cv.style.setProperty("--tint", tintFromPalette(pool.map(p => ({ h: p[0] })))  || "");
+    const seam = cv.querySelector(".xp-seam") || cv.insertBefore(Object.assign(document.createElement("div"), { className: "xp-seam" }), cv.querySelector(".xp-body"));
+    seam.innerHTML = sixSwatchHTML(pool.map(p => p[0]), pool.map(p => p[1]));
+  }).catch(() => {});
 }
 
 // ---------- the generic feed: For you, Ideas and Saved share this (plain {title, sub, pins} sections) ----------

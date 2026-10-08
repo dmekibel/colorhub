@@ -169,6 +169,11 @@ const closeness = d => d < VERY_CLOSE_DE ? "very close" : d < NEAR_DE ? "close" 
 
 // ---------- daily color: the same color for everyone on a given day ----------
 function dailyColor(k = today()) {
+  // one Today (js/today.js): the same color every room quotes, as an app color when it is one
+  try {
+    const t = typeof todayPick === "function" ? todayPick(k) : null;
+    if (t && t.color) { const nm = t.color.n.toLowerCase(); return [...ALL, ...BASICS].find(c => c.n.toLowerCase() === nm) || { n: t.color.n, h: t.color.h, id: "core:" + nm }; }
+  } catch (e) {}
   let h = 2166136261; for (const ch of k) { h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619); }
   const pool = ALL;
   return pool[(h >>> 0) % pool.length];
