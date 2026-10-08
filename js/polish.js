@@ -58,7 +58,7 @@ function relDecorate(root) {
 // Turning it off restores every original. Images that can't be read (no CORS) fall back to CSS grayscale.
 let SQUINT = false;
 const SQ_GLYPH = `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 12c2.6-4 5.6-6 9-6s6.4 2 9 6c-2.6 4-5.6 6-9 6s-6.4-2-9-6z"/><path d="M12 9a3 3 0 0 0 0 6z" fill="currentColor"/><circle cx="12" cy="12" r="3"/></svg>`;
-const SQ_SEL = "[data-squint], .gl-hero > span, .pv-img, .z-art";
+const SQ_SEL = "[data-squint], .pv-img";   // not on paintings (David, 2026-10-08: the painting stays full and clear)
 const sqGrey = css => {
   const m = String(css).match(/^#([0-9a-f]{6})$/i) ? css : (() => { const r = String(css).match(/rgba?\((\d+)[, ]+(\d+)[, ]+(\d+)/); return r ? "#" + [r[1], r[2], r[3]].map(v => (+v).toString(16).padStart(2, "0")).join("") : null; })();
   return m ? lchHex(lch(m)[0], 0, 0) : null;

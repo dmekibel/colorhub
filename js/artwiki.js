@@ -211,6 +211,7 @@ function awPainter(slug, push = true) {
     ${A.barcode.length ? `<div class="aw-bcwrap"><div class="aw-bc ${A.barcode.length > 90 ? "tight" : ""}" role="img" aria-label="Every painting, oldest to newest, three main colors each">${A.barcode.map((b, k) => `<button data-gi="${P.ix.length === A.barcode.length ? P.ix[k] : -1}" title="${esc(b[1])}">${b[2].map(nm => `<i style="--c:${awHex(nm)}"></i>`).join("")}</button>`).join("")}</div>
       <div class="aw-bcax"><span>${bcYears.length ? bcYears[0] : ""}</span><em>${n} paintings · as photographed</em><span>${bcYears.length ? bcYears[bcYears.length - 1] : ""}</span></div>
       ${clusters.length > 1 ? `<div class="aw-rooms">${clusters.map((c, k) => `<button class="aw-room" data-awpal>${awStrip(c.colors.slice(0, 3).map(awHex), 8)}<b data-glroom="${P.ctyp[k]}">Palette ${k + 1}</b><em>${awPct(c.pct / 100)}%</em></button>`).join("")}</div>` : ""}</div>` : ""}
+    ${n >= 2 ? `<button class="gl-pmap aw-pmap" data-pmap="arr=color&p=${esc(slug)}">${GL_ICON_MAP}<span>See all ${n} as a map</span>${ICON.chev}</button>` : ""}
     ${finds}
     <div data-awbio></div>
     <div class="aw-you" data-aw-you></div>

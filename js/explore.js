@@ -235,15 +235,15 @@ function coverHTML(o) {
       <p class="xp-lead">${esc(o.lead)}</p>
       ${o.note ? `<p class="xp-note">${o.dot ? `<i style="background:${o.dot}"></i>` : ""}${esc(o.note)}</p>` : ""}
     </div>
-    <div class="xp-act"><button class="btn xp-go" data-go="${esc(o.goTo || o.part)}">${esc(o.go)}${ICON.arrow}</button></div>
+    <div class="xp-act"><button class="btn xp-go" data-go="${esc(o.goTo || o.part)}">${esc(o.go)}${ICON.arrow}</button>${o.alt ? `<button class="btn ghost xp-alt" data-pmap="${esc(o.alt.pmap)}">${esc(o.alt.t)}</button>` : ""}</div>
   </section>`;
 }
 const artLead = () => `${typeof GAL !== "undefined" && GAL ? GAL.n.toLocaleString("en-US") : "Over 23,000"} paintings and 11,440 poems, by color.`;
 // the Art cover from today's painting, whichever way it arrived: a graph node, or dpLoad's daily-set entry
 function artCoverHTML(p, note, dot) {
-  if (!p) return coverHTML({ part: "art", name: "Art", lead: artLead(), note, dot, wash: dot ? tintFromHex(dot) : null, hero: `<div class="xp-wait"></div>`, go: "Enter Art" });
+  if (!p) return coverHTML({ part: "art", name: "Art", lead: artLead(), note, dot, wash: dot ? tintFromHex(dot) : null, hero: `<div class="xp-wait"></div>`, go: "Enter Art", alt: { t: "See them all on a map", pmap: "arr=color" } });
   return coverHTML({ part: "art", name: "Art", lead: artLead(), note, dot, tint: tintFromHexList(p.hexes), wash: domHex(p.hexes, p.shares),
-    hero: photoHeroHTML(p.img, p.title), seam: sixSwatchHTML(p.hexes, p.shares), go: "Enter Art" });
+    hero: photoHeroHTML(p.img, p.title), seam: sixSwatchHTML(p.hexes, p.shares), go: "Enter Art", alt: { t: "See them all on a map", pmap: "arr=color" } });
 }
 // Saved: a mosaic of what you've kept (each thing by its first color), or a calm empty state that says how to keep
 function savedCoverHTML(saved) {

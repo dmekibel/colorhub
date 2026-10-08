@@ -99,6 +99,7 @@ function xbClick(e) {
   if (t.closest("[data-xbtype]")) return xbDial({ type: true });
   const ph = t.closest("[data-xbphoto]"); if (ph) return xbPhoto(ph.dataset.xbphoto === "camera");
   const v = t.closest("[data-xbview]"); if (v) { if (XB.view === v.dataset.xbview) return; XB.view = v.dataset.xbview; XB.wall = { level: 0, at: -1 }; buzz(5); return xbRender(false, true, true); }
+  if (t.closest("[data-xbmap]")) { buzz(6); return pmGo({ arr: "color", f: xbCopy(XB.f) }); }   // the painting map (js/paintmap.js), these filters
   if (t.closest("[data-xbsort]")) return xbSortSheet();
   const rm = t.closest("[data-xbroom]"); if (rm) return xbOpenRoom(rm.dataset.xbroom);
   if (t.closest("[data-xbsave]")) return xbSaveRoom();
@@ -226,7 +227,7 @@ function xbBarHTML(F, f, n) {
 }
 function xbViewsHTML() {
   const sort = xbSortNow(), sortName = { most: "Most of it", closest: "Closest", date: "Date", painter: "Painter", shuffle: "Shuffle" }[sort] || "";
-  return `<div class="xb-seg" role="tablist">${XB_VIEWS.map(([k, t]) => `<button role="tab" aria-selected="${XB.view === k}" class="${XB.view === k ? "on" : ""}" data-xbview="${k}">${t}</button>`).join("")}</div>
+  return `<div class="xb-seg" role="tablist">${XB_VIEWS.map(([k, t]) => `<button role="tab" aria-selected="${XB.view === k}" class="${XB.view === k ? "on" : ""}" data-xbview="${k}">${t}</button>`).join("")}<button role="tab" aria-selected="false" data-xbmap aria-label="See these paintings as a map">Map</button></div>
     ${XB.view === "grid" ? `<button class="xb-sortbtn" data-xbsort aria-label="Sort: ${esc(sortName)}">${esc(sortName)}${XB_IC_DOWN}</button>` : ""}`;
 }
 
