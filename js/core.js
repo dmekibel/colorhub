@@ -549,20 +549,22 @@ function sheet(html) {
   // drag the sheet down (from the grab bar, or anywhere once it's scrolled to the top) to close. Touch uses touch events
   // and claims the gesture (preventDefault) only for a downward drag at the top: with pointer events alone, iOS starts
   // its own scrolling, cancels the pointer, and the sheet snaps back (David: "swiping down doesn't close it").
-  let y0 = null, x0 = 0, dy = 0, t0 = 0, on = false, lastScroll = 0;
+  // Same rule as hmPullClose (js/home.js): from the body of the sheet it arms only after resting at the top for 700 ms and
+  // needs a long pull, so scrolling back up through a long sheet never closes it; the grab bar closes with any quick drag.
+  let y0 = null, x0 = 0, dy = 0, t0 = 0, on = false, lastScroll = 0, grab = false;
   sh.addEventListener("scroll", () => { lastScroll = performance.now(); }, { passive: true });
   const end = () => {
     if (y0 == null) return; y0 = null;
-    const fast = dy > 60 && dy / Math.max(1, performance.now() - t0) > .7;
-    if (on && (dy > 120 || fast)) return close();
+    const fast = grab && dy > 60 && dy / Math.max(1, performance.now() - t0) > .7;
+    if (on && (dy > (grab ? 120 : 180) || fast)) return close();
     on = false; sh.style.transition = "transform .3s var(--ease)"; sh.style.transform = "";
   };
   // a drag that starts while the sheet is scrolled (or still gliding to the top) is scrolling, never a close
-  const start = (x, y, target) => { if (target.closest("input,textarea,select,input[type=range]") || ((sh.scrollTop > 0 || performance.now() - lastScroll < 180) && !target.closest(".grab"))) return; y0 = y; x0 = x; dy = 0; on = false; t0 = performance.now(); };
+  const start = (x, y, target) => { if (target.closest("input,textarea,select,input[type=range]") || ((sh.scrollTop > 0 || performance.now() - lastScroll < 700) && !target.closest(".grab"))) return; grab = !!target.closest(".grab"); y0 = y; x0 = x; dy = 0; on = false; t0 = performance.now(); };
   const move = (x, y, e) => {
     if (y0 == null) return;
     const d = y - y0;
-    if (!on) { if (d > 12 && d > Math.abs(x - x0) * 1.5 && sh.scrollTop <= 0) on = true; else if (d < -6 || Math.abs(x - x0) > 10) { y0 = null; return; } else return; }
+    if (!on) { if (d > (grab ? 12 : 24) && d > Math.abs(x - x0) * 1.5 && sh.scrollTop <= 0) on = true; else if (d < -6 || Math.abs(x - x0) > 10) { y0 = null; return; } else return; }
     if (e && e.cancelable) e.preventDefault();
     dy = Math.max(0, d); sh.style.transition = "none"; sh.style.transform = `translateY(${dy}px)`;
   };

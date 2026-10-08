@@ -345,7 +345,7 @@ function artHome() {
     <div class="art-band" style="${tint ? `--tint:${tint}` : ""}">
       <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><button class="icon-btn glass" data-search aria-label="Search">${ICON.search}</button></header>
       <h1 class="p-title">Art</h1>
-      <p class="p-dek">${hex ? `In ${esc(name.toLowerCase())}, from 23,531 paintings and eleven thousand poems.` : "23,531 paintings and eleven thousand poems, found by their colors."} <button class="aw-link" data-awindex>Art history by color</button></p>
+      <p class="p-dek">${hex ? `In ${esc(name.toLowerCase())}, from 23,781 paintings and eleven thousand poems.` : "23,781 paintings and eleven thousand poems, found by their colors."} <button class="aw-link" data-awindex>Art history by color</button></p>
       <div class="art-bubbles" role="tablist">${colors.map(c => `<button class="art-bubble${c.n === name ? " on" : ""}" data-hex="${c.h}" data-name="${esc(c.n)}" style="--c:${c.h}" aria-label="${esc(c.n)}"></button>`).join("")}</div>
     </div>
     <div class="art-feed" id="artFeed"><p class="fine">Loading the gallery…</p></div>
