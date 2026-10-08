@@ -211,7 +211,7 @@ function lsStudy(items, o = {}) {
   const pop = (txt, cls = "") => { const p = el.querySelector("[data-pop]"); p.className = "ls-pop " + cls; p.textContent = txt; void p.offsetWidth; p.classList.add("go"); };
   const bump = ok => {
     combo = ok ? combo + 1 : 0; bestCombo = Math.max(bestCombo, combo);
-    comboEl.querySelector("b").textContent = combo; comboEl.classList.toggle("hot", combo >= 3); comboEl.classList.toggle("fire", combo >= 10);
+    comboEl.querySelector("b").textContent = combo; comboEl.classList.toggle("on", combo >= 2); comboEl.classList.toggle("hot", combo >= 3); comboEl.classList.toggle("fire", combo >= 10);
     comboEl.classList.remove("tick"); void comboEl.offsetWidth; if (ok) comboEl.classList.add("tick");
     if (ok && LS_COMBO.includes(combo)) { pop(`${combo} in a row`, "streak"); buzz([8, 30, 8, 30, 16]); }
   };
@@ -229,6 +229,7 @@ function lsStudy(items, o = {}) {
     while (queue.length < LS_INPLAY && fresh.length) queue.push(lvOf.get(fresh.shift().key));
     return queue.shift() || null;
   };
+  el._lsFx = { bump, graduate };   // screenshot hook
   const ctx = extra => ({ deck: items, feedback: true, setKey, screen: el, ...extra });
   el.querySelector("[data-close]").onclick = () => { stopped = true; sess.ended = true; if (sess.first.size) lsResults(sess, { items, o, stopped: true, bestCombo, mastered, lvOf }); else (o.back || lsExitTo(""))(); };
   const coachDone = () => { const c = el.querySelector(".pr-coach"); if (c && !c.hidden) { c.hidden = true; const p = prState(); p.seen.learnset = today(); save(); } };
@@ -343,7 +344,7 @@ function lsShot(arg) {
     const stage = el.querySelector(".pr-stage");
     setTimeout(() => {
       if (st === "wrong" && stage._prChoose) { const i = [...stage.querySelectorAll(".pr-opt")].findIndex(b => b.textContent.trim() !== prName(stage._lsIt)); stage._prChoose(i); }
-      if (st === "grad") { const nm = prName(stage._lsIt); if (stage._prType && stage.querySelector(".pr-s-type")) stage._prType(nm); else if (stage.querySelector(".pr-s-card")) { stage._prReveal(); setTimeout(() => stage.querySelector("[data-yes]").click(), 100); } }
+      if (st === "grad") { const nm = prName(stage._lsIt); setTimeout(() => { el._lsFx.bump(true); el._lsFx.graduate(stage._lsIt); }, 200); if (stage._prType && stage.querySelector(".pr-s-type")) stage._prType(nm); else if (stage.querySelector(".pr-s-card")) { stage._prReveal(); setTimeout(() => stage.querySelector("[data-yes]").click(), 100); } }
       if (st === "match" && stage._prMatch) { const { tiles } = stage._prMatch, b = [...stage.querySelectorAll(".pr-tile")], k = tiles.findIndex(t => !t.sw), j = tiles.findIndex(t => t.sw && t.i === tiles[k].i); b[k].click(); b[j].click(); const k2 = tiles.findIndex((t, x) => !t.sw && x !== k); b[k2].click(); }
     }, 700);
     return;
