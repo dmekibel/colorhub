@@ -720,6 +720,11 @@ function hgWire(el) {
   const m = el.querySelector("[data-hg-map]"); if (m) m.onclick = hgEnter;
   const d = el.querySelector("[data-hg-daily]"); if (d) d.onclick = () => hgDaily();
 }
+// Train room tiles (js/rooms2.js reads window.TRAIN_TILES when it draws; meta is read live through getters)
+window.TRAIN_TILES = window.TRAIN_TILES || [];
+window.TRAIN_TILES.push(
+  { id: "hue", icon: "gradient", name: "Gradients", get meta() { const st = hgS(), nx = hgNext(); return st.plays ? `${HG_WORLDS[nx.w].name} ${nx.i + 1}${hgStarTotal() ? ` · ${hgStarTotal()} ★` : ""}` : "Put the colors back"; }, open: () => hgEnter() },
+  { id: "hue-daily", icon: "gradient", name: "Today's gradient", get meta() { const d = hgS().daily[today()]; return d ? `${d.moves} moves` : "Same board for all"; }, open: () => hgDaily() });
 function hgOpenRoute(id) {
   if (id === "daily") return hgDaily();
   return hgMap();

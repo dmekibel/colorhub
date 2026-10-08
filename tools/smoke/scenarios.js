@@ -352,20 +352,20 @@ const hgSolveByTaps = async t => {
 };
 scenario("train", "Gradients: teaching board then level 1 by taps", async t => {
   await t.open("#shot=gx:home", { settle: 600 });
-  const shelf = await t.waitFor("[data-hg-map]", 6000, "the Gradients shelf");
+  const shelf = await t.waitFor("[data-hg-map], [data-r2-extra=hue]", 6000, "the Gradients tile");
   await t.click(shelf, { wait: 600 });
   await t.waitFor(".hg-board .hg-s", 6000, "the teaching board");
   t.expect(/swapped/i.test(t.text("#hgq")), `the first board teaches by doing ("${t.text("#hgq")}")`);
   await hgSolveByTaps(t);
-  await t.waitFor("[data-go]", 6000, "Play level 1 after the teaching board");
+  await t.waitFor(".hg-foot [data-go]", 6000, "Play level 1 after the teaching board");
   await t.sleep(400);
   await t.sleep(600);
-  await t.click("[data-go]", { force: true, wait: 700 });
-  await t.waitFor(".hg-board .hg-s:not(.fix)", 6000, "level 1");
+  await t.click(".hg-foot [data-go]", { force: true, wait: 700 });
+  await t.waitFor(() => !/game|swapped/i.test(t.text("#app #hgq")) && t.$("#app .hg-board .hg-s:not(.fix)"), 6000, "level 1");
   const moves0 = t.text(".hg-moves");
   await hgSolveByTaps(t);
   t.expect(t.text(".hg-moves") !== moves0, "tapping tiles did not count a move");
-  const go = await t.waitFor("[data-go]", 8000, "the reveal after solving");
+  const go = await t.waitFor("#app .hg-foot [data-go]", 8000, "the reveal after solving");
   t.expect(t.text("#hgq").length > 2, "the source's name did not come up");
   await t.click(go, { wait: 700 });
   await t.waitFor(".hg-res", 6000, "the results screen");
