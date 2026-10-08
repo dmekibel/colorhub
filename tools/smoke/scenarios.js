@@ -920,8 +920,9 @@ const TRL = {
     await TRL.atHash(t, /^#\/color\/cobalt/, "the cobalt page");
     // 2. a painting from its In paintings rail (the tap scrolls the rail into view, so the page's scroll is remembered)
     const sec = await t.waitFor("[data-glin]", 12000, "the In paintings section");
-    sec.scrollIntoView(); await t.sleep(300);
-    const pin = await t.waitFor(() => t.$$("[data-pt-rail] .gl-pin, [data-pt-rail] .pin, [data-glin] [data-gi]")[0], 25000, "a painting in cobalt's In paintings rail");
+    const fold = sec.closest("details:not([open])"); if (fold) await t.click(fold.querySelector("summary"), { wait: 300 });   // the shelf may sit in a folded section
+    sec.scrollIntoView(); t.w.dispatchEvent(new t.w.Event("scroll")); await t.sleep(300);
+    const pin = await t.waitFor(() => { sec.scrollIntoView(); t.w.dispatchEvent(new t.w.Event("scroll")); return t.$$("[data-pt-rail] .gl-pin, [data-pt-rail] .pin, [data-glin] [data-gi]")[0]; }, 25000, "a painting in cobalt's In paintings rail");
     pin.scrollIntoView({ block: "center" }); await t.sleep(200);
     note(); await t.click(pin, { wait: 600 });
     await TRL.atHash(t, /^#\/gallery\/\d+/, "the painting page");
@@ -945,6 +946,7 @@ const TRL = {
     }
     t.expect(gem, "no color in the second painting has a gem on its page");
     seen.push({ hash: TRL.hash(t), y: 0, n: TRL.depth(t) });
+    const gf = gem.closest("details:not([open])"); if (gf) await t.click(gf.querySelector("summary"), { wait: 300 });
     await t.click(gem, { wait: 600 });
     await TRL.atHash(t, /^#\/gem\//, "the gem page");
     seen.push({ hash: TRL.hash(t), y: 0, n: TRL.depth(t) });
