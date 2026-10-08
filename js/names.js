@@ -135,6 +135,7 @@ function namePage(entry, push = true, tapped) {
       <div class="cp-strip"><div style="--c:${tapped}" data-ink="${ink(tapped)}"><b>Your color</b></div><div style="--c:${hex}" data-ink="${ink(hex)}"><b>${esc(name)}</b></div></div>
       <p class="cp-diff">${esc(lookDiff({ h: tapped, n: "Your color" }, { h: hex, n: name }))}</p>
     </section>` : ""}
+    <div class="ar-slot" data-ar-slot hidden></div>
     ${shade ? `<p class="fine np-shade">A described shade: ${esc(shade.base)} made ${esc(shade.mod)}${shadeBase ? `. <button class="link" data-shade-base>See ${esc(shade.base)}</button>` : "."}</p>` : ""}
     ${also.length ? `<p class="fine np-also">Also called ${also.map(esc).join(", ")}.</p>` : ""}
     ${notes.length ? `<p class="fine np-jp">${jpNoteLine(notes)}</p>` : ""}
@@ -153,6 +154,7 @@ function namePage(entry, push = true, tapped) {
   el.querySelector("[data-back]").onclick = xBack;
   onKey = e => { if (e.key === "Escape") xBack(); };
   wireLinks(el);
+  if (typeof articleRender === "function") articleRender(routeSlug(name), el.querySelector("[data-ar-slot]"), { n: name, h: hex });   // js/article.js (lane L8)
   const li = el.querySelector("[data-learnit]"); if (li) li.onclick = () => hmLearnIt(taught);
   if (typeof fvWireHeart === "function") fvWireHeart(el, hex, name);   // js/favs.js
   const shBtn = el.querySelector("[data-shade-base]"); if (shBtn) shBtn.onclick = () => openCoreName(shadeBase.h, shadeBase.n);

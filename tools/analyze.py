@@ -63,6 +63,7 @@ WARM_LO, WARM_HI = -30.0, 100.0              # warm hue arc (wraps); cool is the
                                               # family-rule boundary (greens start at h=100; corpus.py doc).
 MIN_N = dict(artist_include=6, artist_cluster=12, artist_finding=10, decade=25, country=25, movement=20,
              source=25, pair_support=3)
+WITHIN_MIN_SHARE, WITHIN_BAND, ACCENT_DC, NEUTRAL_C = 0.03, 8.0, 12.0, 10.0   # within-painting roles; near-grey = chroma < 10
 NN_K = 8                                     # neighbors checked for the "nearest painting, another century" finding
 
 
@@ -456,6 +457,26 @@ def analyze_painting(x, pool_named, core_meta, pool_fallback):
         local_findings.append(f"{pigment_name} is consistent with pigments available from the "
                               f"{pigment_hint['since']}s (screen color only; a pigment hint, not a lab test).")
 
+    # ---- within-painting view (genius panel 2026-10-08): a color's role RELATIVE to its own canvas, so a museum's
+    # camera or an aged varnish (which shift every pixel of a painting together) cannot make it a painter's signature.
+    # lrank = share of the canvas that is darker than this color (0 = the darkest, 1 = the lightest).
+    order = np.argsort(L)
+    cum = np.cumsum(s[order]) - s[order] / 2
+    lrank = np.empty(n)
+    lrank[order] = cum / max(float(s.sum()), 1e-9)
+    Cmean_w = float((C * s).sum())
+    within = []
+    for i in range(n):
+        if s[i] < WITHIN_MIN_SHARE:
+            continue
+        rel = float(L[i] - Lmean)
+        role = "shadow" if rel < -WITHIN_BAND else ("light" if rel > WITHIN_BAND else "mid")
+        if s[i] < 0.1 and C[i] > Cmean_w + ACCENT_DC and dist(i, int(np.argmax(s))) > 15:
+            role = "accent"
+        within.append((names_str[i], role, float(s[i]), float(lrank[i])))
+    neutral_ok = (C < NEUTRAL_C) & (L > 25) & (L < 85)
+    neutral = (float(s[neutral_ok].sum()), float((a * s)[neutral_ok].sum()), float((b * s)[neutral_ok].sum()))
+
     rec = dict(
         id=x["id"], n=n, fb=pool_fallback,
         nm=[pool_named[i]["name"]["ci"] for i in range(n)],      # core-name index per pool position
@@ -473,6 +494,9 @@ def analyze_painting(x, pool_named, core_meta, pool_fallback):
         # internal only (not shipped): (name, share) for every color with share >= 5%, still pool-order
         # (share-descending), used by artist/group lift + co-occurrence aggregation below.
         _topNames=[(names_str[i], float(s[i])) for i in range(n) if s[i] >= 0.05],
+        _within=within,
+        _lab=(Lmean, float((a * s).sum()), float((b * s).sum())),   # share-weighted mean Lab of the whole canvas
+        _neutral=neutral,                                           # (share, sum share*a, sum share*b) of its near-greys
         # scalar feature vector reused for percentiles / clustering / nearest-neighbor search
         fv=[Lmean, Cmean, warm_frac, vivid, muted, ent],
     )
@@ -601,10 +625,15 @@ def finding_artist(a_rec):
         return out
     for sig in a_rec["signature"][:3]:
         if sig["lift"] >= 1.3:
-            out.append(f"Uses {sig['name'].lower()} {sig['lift']:.1f}x more than painters of the same decade and "
-                       f"country (from {n} paintings here).")
+            out.append(f"Uses {sig['name'].lower()} {sig['lift']:.1f}x more than the other paintings from the same "
+                       f"museum(s), so camera and varnish are held equal (from {n} paintings here).")
+    for role, verb in (("accent", "as a small accent"), ("light", "as the lightest note"), ("shadow", "as the shadow")):
+        w = (a_rec.get("within") or {}).get(role) or []
+        if w and w[0]["lift"] >= 1.6:
+            out.append(f"Within his own canvases, {w[0]['name'].lower()} turns up {verb} in {w[0]['rate'] * 100:.0f}% of the "
+                       f"paintings that hold it, {w[0]['lift']:.1f}x the archive's rate (from {n} paintings here).")
     for av in a_rec["avoided"][:2]:
-        out.append(f"Rarely uses {av['name'].lower()}, common among peers of the same decade and country "
+        out.append(f"Rarely uses {av['name'].lower()}, common in the same museum(s)' other paintings "
                    f"(from {n} paintings here).")
     for pr in a_rec["pairs"][:2]:
         if pr["lift"] >= 1.5 and pr["count"] >= MIN_N["pair_support"]:
@@ -651,6 +680,66 @@ def finding_group(label, kind, n, lmean_pct=None, vivid=None):
 # =================================================================================================================
 # Main pipeline
 # =================================================================================================================
+def estimate_museum_bias(corpus, records):
+    """Per-source color cast, in CIELAB (dL, da, db), as an additive offset fitted on groups of paintings by the same artist
+    in the same decade that appear in 2+ museums (alternating least squares: y[g,s] = mu[g] + off[s], offsets centered on the
+    painting-weighted mean). Also each source's NEUTRAL cast: the mean (a*, b*) of its near-grey pool colors (chroma < 10),
+    relative to all sources, which is the 'grey is not grey' bias a camera or varnish leaves. 'residual' is the RMS of the
+    fit; 'overlap' the number of artist-decade groups that tie this source to the others. Without overlap a source's offset is 0."""
+    srcs = sorted({x["src"] for x in corpus})
+    cell = defaultdict(lambda: defaultdict(list))
+    for i, x in enumerate(corpus):
+        if x.get("a") and x.get("y") is not None:
+            cell[(x["a"], x["y"] // 10 * 10)][x["src"]].append(i)
+    groups = []
+    for g, d in cell.items():
+        if len(d) >= 2:
+            groups.append({s: (np.mean([records[i]["_lab"] for i in idx], axis=0), len(idx)) for s, idx in d.items()})
+    out = {}
+    offs = {s: np.zeros(3) for s in srcs}
+    if groups:
+        for _ in range(80):
+            mu = []
+            for g in groups:
+                w = np.array([min(n, 5) for _, n in g.values()], float)
+                mu.append(sum(w[k] * (v[0] - offs[s]) for k, (s, v) in enumerate(g.items())) / w.sum())
+            num = {s: np.zeros(3) for s in srcs}
+            den = {s: 0.0 for s in srcs}
+            for g, m in zip(groups, mu):
+                for s, (v, n) in g.items():
+                    w = min(n, 5)
+                    num[s] += w * (v - m); den[s] += w
+            offs = {s: (num[s] / den[s] if den[s] else np.zeros(3)) for s in srcs}
+        n_by = Counter(x["src"] for x in corpus)
+        tot = sum(n_by.values())
+        center = sum(offs[s] * n_by[s] for s in srcs) / tot
+        offs = {s: offs[s] - center for s in srcs}
+        resid = []
+        for g, m in zip(groups, mu):
+            for s, (v, n) in g.items():
+                resid.append(float(np.linalg.norm(v - m - offs[s])))
+        rms = float(np.sqrt(np.mean(np.square(resid)))) if resid else 0.0
+    else:
+        rms = 0.0
+    overlap = Counter()
+    for g in groups:
+        for s in g:
+            overlap[s] += 1
+    neu = defaultdict(lambda: np.zeros(3))
+    for i, x in enumerate(corpus):
+        neu[x["src"]] += np.array(records[i]["_neutral"])
+    allneu = sum(neu.values()) if neu else np.zeros(3)
+    ga, gb = (allneu[1] / allneu[0], allneu[2] / allneu[0]) if allneu[0] else (0.0, 0.0)
+    for s in srcs:
+        n_s = sum(1 for x in corpus if x["src"] == s)
+        na, nb = (neu[s][1] / neu[s][0], neu[s][2] / neu[s][0]) if neu[s][0] else (ga, gb)
+        out[s] = dict(short=GAL.SOURCES.get(s, {}).get("short", s), n=n_s, overlap=int(overlap[s]),
+                      dL=round(float(offs[s][0]), 2), da=round(float(offs[s][1]), 2), db=round(float(offs[s][2]), 2),
+                      neutralA=round(float(na - ga), 2), neutralB=round(float(nb - gb), 2),
+                      neutralWarmth=round(float((nb - gb) + 0.5 * (na - ga)), 2), fitRMS=round(rms, 2))
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--raw")
@@ -666,6 +755,28 @@ def main():
     if args.limit:
         corpus = corpus[:args.limit]
     print(f"{len(corpus)} paintings", flush=True)
+
+    # Movements beyond the AIC/CMA rows' own (tools/wikidata_artists.py -> data/artists/movements-wd.json):
+    # tier 1 = Wikidata records the movement for the painting itself; tier 2 = the painter's single recorded
+    # movement. tier 0 = the museum's own. A row keeps its museum movement when it has one.
+    mv_tier = {}
+    mvwd = ROOT / "data" / "artists" / "movements-wd.json"
+    if mvwd.exists():
+        wd = json.loads(mvwd.read_text())
+        for x in corpus:
+            if x.get("mv"):
+                mv_tier[x["id"]] = 0
+                continue
+            m = wd["tier1"].get(x["id"])
+            if m:
+                x["mv"], mv_tier[x["id"]] = m, 1
+                continue
+            m = wd["tier2"].get(x["id"])
+            if m:
+                x["mv"], mv_tier[x["id"]] = m, 2
+        print(f"movements: {sum(1 for t in mv_tier.values() if t == 0)} museum, "
+              f"{sum(1 for t in mv_tier.values() if t == 1)} Wikidata painting, "
+              f"{sum(1 for t in mv_tier.values() if t == 2)} via the painter", flush=True)
 
     print("loading pools...", flush=True)
     pools, fallback_flags, n_fallback = load_pools(raw_dir, corpus)
@@ -741,6 +852,26 @@ def main():
             pct["_n_art"] = len(a_idx)
         r["pct"] = pct
         r["finding"] = (r.get("_localFindings") or []) + finding_painting(r, pct, x)
+
+    # ---- museum camera bias: per-source cast, fitted on artist x decade groups that appear in 2+ museums ----
+    print("museum camera bias...", flush=True)
+    bias = estimate_museum_bias(corpus, records)
+    off_L = {k: v["dL"] for k, v in bias.items()}
+
+    # per-source name baseline (so a painter is measured against the SAME museum's other paintings)
+    names_in_src = defaultdict(lambda: {"n": 0, "share": Counter()})
+    names_by_painter_src = defaultdict(lambda: defaultdict(lambda: {"n": 0, "share": Counter()}))
+    for i, x in enumerate(corpus):
+        t = names_in_src[x["src"]]
+        t["n"] += 1
+        for nm, sh in records[i]["_topNames"]:
+            t["share"][nm] += sh
+    # archive-wide within-painting role counts per name
+    arch_role = defaultdict(Counter)
+    for r in records:
+        for nm, role, sh, lr in r["_within"]:
+            arch_role[nm][role] += 1
+            arch_role[nm]["_n"] += 1
 
     # ---- artist aggregates ----
     print("artist aggregates...", flush=True)
@@ -828,9 +959,60 @@ def main():
             sigs.append(dict(name=nm, lift=round(lf, 2), ownShare=round(obs, 3), baselineShare=round(exp, 3),
                               support=own_n_with.get(nm, 0)))
         sigs_support = [s for s in sigs if s["support"] >= 2 and s["ownShare"] >= 0.03 and s["lift"] >= 1.15]
-        signature = sorted(sigs_support, key=lambda s: -s["lift"])[:6]
+        signature_all = sorted(sigs_support, key=lambda s: -s["lift"])[:6]
         avoided_cands = [s for s in sigs if s["baselineShare"] >= 0.02 and s["lift"] <= 0.6]
-        avoided = sorted(avoided_cands, key=lambda s: s["lift"])[:6]
+        avoided_all = sorted(avoided_cands, key=lambda s: s["lift"])[:6]
+
+        # museum-adjusted: the baseline is the same museum's OTHER paintings (this painter's own held out), so aged varnish and
+        # a museum's camera, which move every painting from that source together, cannot become his "signature"
+        own_by_src = defaultdict(lambda: {"n": 0, "share": Counter()})
+        for i in idxs:
+            t = own_by_src[corpus[i]["src"]]
+            t["n"] += 1
+            for nm, sh in painting_top_names[i]:
+                t["share"][nm] += sh
+        sigs_adj = []
+        for nm in candidates:
+            obs = own_names.get(nm, 0.0) / n
+            exp_acc, w_acc = 0.0, 0
+            for src_k, own_t in own_by_src.items():
+                tot = names_in_src[src_k]
+                n2 = tot["n"] - own_t["n"]
+                if n2 >= 15:
+                    e2 = (tot["share"][nm] - own_t["share"][nm]) / n2
+                else:                                   # too few other paintings from that museum: the whole archive, painter held out
+                    n2 = all_names_global["n"] - own_t["n"]
+                    e2 = (all_names_global["share"][nm] - own_t["share"][nm]) / max(n2, 1)
+                exp_acc += e2 * own_t["n"]; w_acc += own_t["n"]
+            exp_s = exp_acc / max(w_acc, 1)
+            sigs_adj.append(dict(name=nm, lift=round(lift(obs, exp_s), 2), ownShare=round(obs, 3), baselineShare=round(exp_s, 3),
+                                 support=own_n_with.get(nm, 0)))
+        signature = sorted([q for q in sigs_adj if q["support"] >= 2 and q["ownShare"] >= 0.03 and q["lift"] >= 1.15], key=lambda q: -q["lift"])[:6]
+        avoided = sorted([q for q in sigs_adj if q["baselineShare"] >= 0.02 and q["lift"] <= 0.6], key=lambda q: q["lift"])[:6]
+
+        # within-painting view: how each color behaves RELATIVE to its own canvas (role + relative lightness rank), vs the archive
+        own_role = defaultdict(Counter)
+        own_rank = defaultdict(list)
+        for i in idxs:
+            for nm, role, sh, lr in records[i]["_within"]:
+                own_role[nm][role] += 1
+                own_role[nm]["_n"] += 1
+                own_rank[nm].append(lr)
+        within = {"accent": [], "light": [], "shadow": []}
+        for nm, cnt in own_role.items():
+            m = cnt["_n"]
+            if m < 4 or arch_role[nm]["_n"] < 40:      # too few of his, or too rare in the archive to call a lift real
+                continue
+            for role, floor in (("accent", 0.35), ("light", 0.5), ("shadow", 0.5)):
+                rate = cnt[role] / m
+                base_n = arch_role[nm]["_n"]
+                base = (arch_role[nm][role] - cnt[role]) / max(base_n - m, 1)
+                lf = lift(rate, base, eps=0.05)
+                if rate >= floor and lf >= 1.4:
+                    within[role].append(dict(name=nm, rate=round(rate, 2), baseline=round(base, 2), lift=round(lf, 2), support=m,
+                                             lrank=round(float(np.mean(own_rank[nm])), 2)))
+        for role in within:
+            within[role] = sorted(within[role], key=lambda q: -q["lift"])[:4]
 
         # favorite pairs / triads (co-occurrence lift among the artist's own top-share names)
         pair_count, single_count = Counter(), Counter()
@@ -904,7 +1086,10 @@ def main():
             name=name, slug=slug(name), n=n, country=own_country,
             Lmean=round(float(X[:, 0].mean()), 1), Cmean=round(float(X[:, 1].mean()), 1),
             warmFrac=round(float(X[:, 2].mean()), 3),
-            clusters=clusters, signature=signature, avoided=avoided, pairs=pairs[:8],
+            LmeanAdj=round(float(np.mean([records[i]["fv"][0] - off_L.get(corpus[i]["src"], 0.0) for i in idxs])), 1),
+            sources=sorted(Counter(corpus[i]["src"] for i in idxs).items(), key=lambda kv: -kv[1]),
+            clusters=clusters, signature=signature, avoided=avoided, signatureAll=signature_all, avoidedAll=avoided_all,
+            within=within, pairs=pairs[:8],
             byDecade=decade_series, changePoint=change_point,
             typical=corpus[typical_i]["id"], atypical=corpus[atypical_i]["id"],
             barcode=barcode,
@@ -972,11 +1157,12 @@ def main():
                         dist.append(dict(name=nm, lift=round(lf, 2), share=round(own, 3)))
             dist.sort(key=lambda d: -d["lift"])
             Lmean_g = float(fv[idxs, 0].mean())
+            Lmean_adj = float(np.mean([fv[i, 0] - off_L.get(corpus[i]["src"], 0.0) for i in idxs]))
             vivid_g = float(fv[idxs, 3].mean())
             pct = percentile_rank(sorted_cols["Lmean"], Lmean_g)
             label = label_fn(key)
             out[str(key)] = dict(key=key if not isinstance(key, tuple) else list(key), n=n,
-                                 Lmean=round(Lmean_g, 1), vivid=round(vivid_g, 3), LmeanPct=pct,
+                                 Lmean=round(Lmean_g, 1), LmeanAdj=round(Lmean_adj, 1), vivid=round(vivid_g, 3), LmeanPct=pct,
                                  top=top, distinctive=dist[:8],
                                  findings=finding_group(label, "decade" if min_n == MIN_N["decade"] else "country",
                                                         n, pct, vivid_g))
@@ -987,7 +1173,13 @@ def main():
         byCountry=group_block(country_idx, MIN_N["country"]),
         bySource=group_block(source_idx, MIN_N["source"], lambda k: GAL.SOURCES.get(k, {}).get("short", k)),
         byMovement=group_block(movement_idx, MIN_N["movement"]),
+        museumBias=bias,
     )
+    # how each movement's paintings were tagged: by the museum (0), by Wikidata on the painting (1), or only
+    # through the painter's recorded movement (2). The UI says which, so the page never overstates.
+    for key, g in groups_out["byMovement"].items():
+        tiers = Counter(mv_tier.get(corpus[i]["id"], 0) for i in movement_idx[key])
+        g["tiers"] = [tiers.get(0, 0), tiers.get(1, 0), tiers.get(2, 0)]
 
     # time trend: mean Lmean / vivid / warmFrac by century, for the index-level overview
     century_idx = defaultdict(list)
@@ -1084,6 +1276,10 @@ def main():
             "Pigment hints are hedged and screen-color-only: a name whose PIGMENT_SINCE year is plausibly close "
             "to the work's date, never a claim about the actual paint used.",
             "Small groups are anecdotes: artist entries start at 6 works; treat anything under ~15 as noise.",
+            "Museum cameras differ: groups.json museumBias has each source's fitted cast (dL/da/db from artist-decade groups held by "
+            "2+ museums) and its neutral-grey bias. Artist 'signature'/'avoided' are measured against the SAME museum's other "
+            "paintings (signatureAll/avoidedAll keep the decade+country baseline), and 'within' reports each color's role "
+            "relative to its own canvas (accent / lightest / shadow), which camera and varnish cannot move. LmeanAdj subtracts the museum's dL.",
             "Size tradeoff (ROADMAP §21's ~15 MB budget): each painting ships percentiles vs the whole archive "
             "and vs its own painter only, not vs its decade or movement too -- that comparison is still real, "
             "just computed once per group in groups.json instead of being repeated on all 23k+ painting records.",

@@ -212,9 +212,9 @@ function explorePager() {
   const covers = [
     coverHTML("all", "For you", "A new pick of colors, paintings and stories every day.", `Today, ${c.n}`,
       tintFromHex(c.h), flatHeroHTML(c.h, c.n), forYouSeam),
-    art ? coverHTML("art", "Art", "Fourteen thousand paintings and eleven thousand poems, found by their colors.", artCoverNote(art),
+    art ? coverHTML("art", "Art", "23,531 paintings and eleven thousand poems, found by their colors.", artCoverNote(art),
       tintFromPalette(art.palette), `<img src="${esc(art.img)}" alt="${esc(art.title)}">`, sixSwatchHTML(art.palette.map(p => p.h), art.palette.map(p => p.share)))
-      : coverHTML("art", "Art", "Fourteen thousand paintings and eleven thousand poems, found by their colors.", "", null, `<div class="xp-flat" style="background:var(--lift-2)"></div>`, ""),
+      : coverHTML("art", "Art", "23,531 paintings and eleven thousand poems, found by their colors.", "", null, `<div class="xp-flat" style="background:var(--lift-2)"></div>`, ""),
     story ? coverHTML("ideas", "Ideas", "Short stories, systems and history, read through color.", `Today, ${story.title}`,
       tintFromHexList(story.cover), `<div class="xp-flat" style="background:linear-gradient(135deg,${story.cover.join(",")})"></div>`, sixSwatchHTML(story.cover))
       : coverHTML("ideas", "Ideas", "Short stories, systems and history, read through color.", "", null, `<div class="xp-flat" style="background:var(--lift-2)"></div>`, ""),
@@ -343,7 +343,7 @@ function artHome() {
     <div class="art-band" style="${tint ? `--tint:${tint}` : ""}">
       <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><button class="icon-btn glass" data-search aria-label="Search">${ICON.search}</button></header>
       <h1 class="p-title">Art</h1>
-      <p class="p-dek">${hex ? `In ${esc(name.toLowerCase())}, from fourteen thousand paintings and eleven thousand poems.` : "Fourteen thousand paintings and eleven thousand poems, found by their colors."}</p>
+      <p class="p-dek">${hex ? `In ${esc(name.toLowerCase())}, from 23,531 paintings and eleven thousand poems.` : "23,531 paintings and eleven thousand poems, found by their colors."} <button class="aw-link" data-awindex>Art history by color</button></p>
       <div class="art-bubbles" role="tablist">${colors.map(c => `<button class="art-bubble${c.n === name ? " on" : ""}" data-hex="${c.h}" data-name="${esc(c.n)}" style="--c:${c.h}" aria-label="${esc(c.n)}"></button>`).join("")}</div>
     </div>
     <div class="art-feed" id="artFeed"><p class="fine">Loading the gallery…</p></div>
@@ -376,11 +376,13 @@ function exploreSearchSheet() {
     <div id="xresults">${saved.length ? `<div class="sec-head"><b>Saved</b><span>${saved.length}</span></div>${masonry(saved.map(n => pin(n)))}` : `<p class="fine">Tap ${ICON_HEART} on anything to keep it here, or start typing to search.</p>`}</div>
   `);
   const q = sh.querySelector("#xq"), results = sh.querySelector("#xresults");
+  if (typeof awLoad === "function") awLoad().catch(() => {});
   q.addEventListener("input", () => {
     const s = q.value.trim().toLowerCase();
     if (!s) { results.innerHTML = saved.length ? `<div class="sec-head"><b>Saved</b><span>${saved.length}</span></div>${masonry(saved.map(n => pin(n)))}` : `<p class="fine">Tap ${ICON_HEART} on anything to keep it here, or start typing to search.</p>`; return; }
     const hits = [...graph().nodes.values()].filter(n => (n.title || "").toLowerCase().includes(s)).slice(0, 40);
-    results.innerHTML = hits.length ? masonry(hits.map(n => pin(n))) : `<p class="fine">Nothing called that yet.</p>`;
+    const painters = typeof awSearchHTML === "function" ? awSearchHTML(s, () => q.dispatchEvent(new Event("input"))) : "";   // painters, from the art wiki (js/artwiki.js)
+    results.innerHTML = painters + (hits.length ? masonry(hits.map(n => pin(n))) : painters ? "" : `<p class="fine">Nothing called that yet.</p>`);
   });
   results.addEventListener("click", e => { const p = e.target.closest("[data-pin]"); if (p) { close(); closeup(graph().nodes.get(p.dataset.pin)); } });
   setTimeout(() => q.focus(), 260);
@@ -473,12 +475,14 @@ function xStep(prev) {
   // "harmony" etc. as a (nonexistent) graph node id and silently do nothing.
   if (prev === "favs") return favShelf();   // your colors (js/favs.js)
   if (prev === "favs-taste") return favTaste();   // your taste (js/favprofile.js)
+  if (prev.startsWith("aw:") && typeof awStep === "function") return awStep(prev);   // the art wiki (js/artwiki.js)
   if (prev === "wheel") return gamutWheel(GW_LAST && GW_LAST.preset, GW_LAST && GW_LAST.pts, false);
   if (prev === "wheelview") return gwReopenView();
   if (prev === "harmony") return LAB.harmony(LAB_HARMONY_STATE && LAB_HARMONY_STATE.base, LAB_HARMONY_STATE && LAB_HARMONY_STATE.scheme, false);
   if (prev === "contrast") return LAB.contrast(LAB_CONTRAST_STATE && LAB_CONTRAST_STATE.set, LAB_CONTRAST_STATE && LAB_CONTRAST_STATE.slot, false);
   if (prev.startsWith("pal:")) return openSavedPalette(prev.slice(4), false);   // a saved palette (js/studio.js)
   if (prev.startsWith("g:")) return galleryPage(+prev.slice(2), false);   // a gallery painting (js/gallery.js)
+  if (prev.startsWith("ar:") && typeof arStep === "function") return arStep(prev.slice(3));   // a hub or "which" page (js/article.js)
   if (prev.startsWith("ph:")) return photoPage(prev.slice(3), false);   // a saved photo (js/photos.js)
   if (prev.startsWith("poem:")) return poemPage(prev.slice(5), { back: true });   // a poem (js/poems.js)
   // a library color's own page, not one of the 101 (js/names.js): it isn't a graph node, so look it up by name
@@ -599,10 +603,12 @@ function colorPage(n, tapped) {
     ${stripOthers.length && stripDiff ? `<section class="cp-strip-sec">
       <div class="cp-strip"${tapped ? "" : ` data-nb="${esc(c.n)}"`}>
         <div style="--c:${heroHex}" data-ink="${ink(heroHex)}"><b>${tapped ? "Your color" : esc(c.n)}</b></div>
-        ${stripOthers.map(x => `<div style="--c:${x.h}" data-ink="${ink(x.h)}"><b>${esc(x.n)}</b></div>`).join("")}
+        ${stripOthers.map(x => `<div style="--c:${x.h}" data-ink="${ink(x.h)}"><b>${esc(x.n)}</b>${typeof relMarkHTML === "function" ? relMarkHTML(x) : ""}</div>`).join("")}
       </div>
       <p class="cp-diff">${esc(stripDiff)}</p>
+      ${tapped ? "" : `<div data-csacts></div>`}
     </section>` : ""}
+    <div class="ar-slot" data-ar-slot hidden></div>
     ${c.o && !(w && w.facets.some(f => f.k === "language")) ? `<p class="lead">${esc(c.o)}</p>` : ""}
     ${figHTML(c.n)}
     <section class="gl-in" data-glin></section>
@@ -629,6 +635,7 @@ function colorPage(n, tapped) {
   `, "article cp-page");
   el.querySelector("[data-back]").onclick = xBack;
   wireLinks(el); wireSections(el);
+  if (typeof articleRender === "function") articleRender(routeSlug(c.n), el.querySelector("[data-ar-slot]"), { n: c.n, h: c.h });   // js/article.js (lane L8): draws nothing when data/articles/<slug>.json is missing
   onKey = e => { if (e.key === "Escape") xBack(); };
   const li = el.querySelector("[data-learnit]"); if (li) li.onclick = () => hmLearnIt(c);
   el.querySelector("[data-save]").onclick = e => {
@@ -645,6 +652,10 @@ function colorPage(n, tapped) {
   // a tap anywhere on a near-name row grows its chip into the next page (js/core.js's morphFrom/runMorph)
   el.querySelectorAll("[data-cp-near]").forEach(b => b.onclick = () => { morphFrom(b.querySelector("i")); openCoreName(b.dataset.h, b.dataset.cpNear); });
   const gi = el.querySelector("[data-glin]"); if (gi) galleryColorRow(gi, c);
+  // the Learner Model (js/learner.js) and the ColorSet verbs on the look-alike strip (js/colorset.js)
+  if (typeof learnerLog === "function" && !tapped) learnerLog({ type: "seen", color: c, src: "page" });
+  const csHost = el.querySelector("[data-csacts]");
+  if (csHost && typeof colorSet === "function") csHost.appendChild(csActions(colorSet({ kind: "lookalikes", id: routeSlug(c.n), title: `${c.n} and its look-alikes`, colors: [c, nb, ...likes].filter(Boolean), src: "color/" + routeSlug(c.n) }), { only: ["play", "map"], back: () => colorPage(n) }));
   colorPoems(el.querySelector(".c-poems"), c);
   if (typeof worldColorRow === "function") worldColorRow(el, n);
   el.querySelectorAll("[data-copy]").forEach(b => b.onclick = () => { try { navigator.clipboard.writeText(b.dataset.copy); toast("Copied " + b.dataset.copy); } catch (e) {} });
