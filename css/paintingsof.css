@@ -23,7 +23,7 @@
 .pt-range::-moz-range-thumb{width:28px;height:28px;border-radius:50%;background:var(--ink);border:0;box-shadow:0 0 0 4px var(--ground),0 2px 10px rgba(0,0,0,.6)}
 .pt-range:focus-visible{outline:none}
 .pt-range:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 4px var(--ground),0 0 0 6px var(--ink)}
-.pt-ticks{position:relative;height:16px;margin:-4px 14px 6px;font:500 11px/16px var(--sans);color:var(--faint)}
+.pt-ticks{position:relative;height:16px;margin:-4px 14px 6px;font:500 13px/16px var(--sans);color:var(--faint)}
 .pt-ticks span{position:absolute;top:0;transform:translateX(-50%);white-space:nowrap}
 .pt-ticks span:first-child{transform:none}
 .pt-ticks span:last-child{transform:translateX(-100%)}
@@ -39,7 +39,7 @@
 .pt-fan .ring{display:flex;align-items:center;gap:5px;flex:none}
 .pt-fan i{width:20px;height:20px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(236,232,223,.18);flex:none}
 .pt-fan i.c{width:34px;height:34px}
-.pt-fan span{font:400 12.5px/1.35 var(--sans);color:var(--soft);min-width:0}
+.pt-fan span{font:400 13px/1.35 var(--sans);color:var(--soft);min-width:0}
 
 /* ---------- the section on a color page ---------- */
 .pt-wait{font:400 13px/1.4 var(--sans);color:var(--faint);padding:8px 0}
@@ -56,7 +56,7 @@
 .pt-pair{flex:none;width:150px;display:flex;flex-direction:column;align-items:flex-start;text-align:left;scroll-snap-align:start}
 .pt-pair i{display:block;width:100%;height:58px;border-radius:var(--r-1);background:var(--c);box-shadow:inset 0 0 0 1px rgba(236,232,223,.1)}
 .pt-pair b{display:block;width:100%;margin-top:9px;font:400 18px/1.2 var(--serif);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pt-pair span{margin-top:3px;font:400 12px/1.3 var(--sans);color:var(--soft)}
+.pt-pair span{margin-top:3px;font:400 13px/1.3 var(--sans);color:var(--soft)}
 .pt-pair:active i{opacity:.8}
 
 /* ---------- the full screen ---------- */
@@ -81,7 +81,7 @@
 .pt-stats[hidden]{display:none}
 .pt-st-lead{margin:0 0 12px;font:400 15px/1.5 var(--sans);color:var(--ink)}
 .pt-st{display:grid;grid-template-columns:84px minmax(0,1fr);gap:10px;padding:10px 0;border-top:1px solid var(--rule)}
-.pt-st>span{font:500 12px/1.5 var(--sans);color:var(--faint)}
+.pt-st>span{font:500 13px/1.5 var(--sans);color:var(--faint)}
 .pt-st p{margin:0 0 5px;font:400 14px/1.45 var(--sans);color:var(--soft)}
 .pt-st p b{font:400 17px/1.3 var(--serif);color:var(--ink);margin-right:6px}
 .pt-early{text-align:left;font:400 14px/1.45 var(--sans);color:var(--soft)}
@@ -101,7 +101,7 @@
 .pt-ar-sw{display:block;width:44px;height:44px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(236,232,223,.22),0 0 0 3px var(--ground),0 0 0 4px rgba(236,232,223,.5)}
 .pt-ar-line{display:block;font:400 22px/1.3 var(--serif);letter-spacing:-.005em}
 .pt-ar-line b{font-weight:400}
-.pt-ar-body small{display:block;margin-top:6px;font:400 12.5px/1.45 var(--sans);color:var(--soft)}
+.pt-ar-body small{display:block;margin-top:6px;font:400 13px/1.45 var(--sans);color:var(--soft)}
 .pt-ar-tools{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:14px}
 .pt-ar-map{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px 0 12px;border:1px solid var(--rule);border-radius:var(--r-pill);font:500 13px/1 var(--sans);color:var(--ink);transition:background .2s,color .2s}
 .pt-ar-map.on{background:var(--paper);border-color:var(--paper);color:var(--paper-ink)}
@@ -133,7 +133,7 @@
 .chd-sw i{display:block;width:26px;height:48px;background:var(--c)}
 .chd-t{flex:1;min-width:0}
 .chd-t b{display:block;font:400 20px/1.2 var(--serif);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.chd-t small{display:block;margin-top:4px;font:400 12.5px/1.35 var(--sans);color:var(--soft)}
+.chd-t small{display:block;margin-top:4px;font:400 13px/1.35 var(--sans);color:var(--soft)}
 .chd-row svg{width:16px;height:16px;flex:none;color:var(--faint)}
 .chd-row:active .chd-sw{opacity:.8}
 .chd-theory{margin-top:30px}
@@ -146,4 +146,4 @@
 .pt-design .pt-dstrip i{flex:1;background:var(--c)}
 .pt-design em{font:italic 400 13px/1.3 var(--serif);color:var(--soft);margin-top:8px}
 .pt-design b{font:400 17px/1.2 var(--serif);margin-top:2px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.pt-design small{font:400 12.5px/1.35 var(--sans);color:var(--faint);margin-top:3px}
+.pt-design small{font:400 13px/1.35 var(--sans);color:var(--faint);margin-top:3px}

@@ -24,7 +24,7 @@ html:has(#app > .screen.pr-booth) body::after{display:none}
 .pr-notep{margin:10px 0 0;text-wrap:pretty;max-width:40ch}
 .pr-note em,.pr-notep em{font-style:normal}
 .pr-lead{font:400 20px/1.32 var(--serif);color:var(--ink);margin:14px 0 0;text-wrap:pretty;max-width:34ch}
-.pr-code{font:400 12px/1 var(--mono);letter-spacing:.02em;font-variant-numeric:tabular-nums}
+.pr-code{font:400 13px/1 var(--mono);letter-spacing:.02em;font-variant-numeric:tabular-nums}
 .pr-notep .pr-code,.pr-note .pr-code{font-size:13px;font-style:normal;color:var(--ink)}
 .pr-grow{flex:1}
 
@@ -322,7 +322,7 @@ html:has(#app > .screen.pr-booth) body::after{display:none}
 .pr-art .a-test em{width:48px;height:4px;border-radius:2px;background:rgba(236,232,223,.2)}
 .pr-art .a-say{color:var(--ink);display:grid;place-items:center}
 .pr-art .a-yn{display:flex;gap:6px}
-.pr-art .a-yn b{width:24px;height:24px;border-radius:50%;background:#2E2C26;display:grid;place-items:center;font:600 12px/1 var(--sans);color:var(--good)}
+.pr-art .a-yn b{width:24px;height:24px;border-radius:50%;background:#2E2C26;display:grid;place-items:center;font:600 13px/1 var(--sans);color:var(--good)}
 .pr-art .a-yn b+b{color:var(--bad)}
 .pr-art .a-yn b svg{width:14px;height:14px}
 .pr-art .a-rain{position:relative;width:76px;height:50px}

@@ -23,7 +23,7 @@
   font:italic 400 15px/1.2 var(--serif);letter-spacing:0;text-transform:none;color:inherit;transition:transform .3s var(--spring)}
 .c-learnit:active{transform:scale(.95)}
 .c-learnit svg{width:16px;height:16px}
-.c-learnit small{font:500 9.5px/1 var(--mono);letter-spacing:.06em;text-transform:none;opacity:.7}
+.c-learnit small{font:500 13px/1 var(--mono);letter-spacing:.06em;text-transform:none;opacity:.7}
 
 /* ---------- the lesson itself (js/learnit.js): one step at a time, booth grey (it judges swatches) ---------- */
 .lt-steps{display:flex;gap:5px;flex:1;justify-content:center}
@@ -43,7 +43,7 @@
 .lt-strip{display:flex;flex-direction:column;gap:8px;width:100%;max-width:340px}
 .lt-strip button{display:flex;align-items:center;gap:12px;height:56px;padding:0 14px;border-radius:var(--r-2);background:rgba(236,232,223,.04);border:1px solid var(--rule)}
 .lt-strip button i{width:36px;height:36px;border-radius:var(--r-1);background:var(--c);flex:none}
-.lt-strip button b{font:500 12px/1 var(--mono);color:var(--soft);min-width:18px}
+.lt-strip button b{font:500 13px/1 var(--mono);color:var(--soft);min-width:18px}
 .lt-strip button.set{border-color:var(--rule-2)}
 .lt-strip.done button{pointer-events:none}
 .lt-strip.done button.ok{box-shadow:inset 0 0 0 1px var(--good)}
@@ -54,7 +54,7 @@
 .lt-done p{color:var(--soft);font-size:15.5px;line-height:1.5}
 
 /* the lab lens row and the one-of-several segmented controls (the Arrange sheet, the lab) */
-.hm-lens{display:flex;align-items:center;gap:12px;margin:4px 0 14px;font:500 11px/1 var(--mono);letter-spacing:.06em;color:var(--faint)}
+.hm-lens{display:flex;align-items:center;gap:12px;margin:4px 0 14px;font:500 13px/1 var(--mono);letter-spacing:.06em;color:var(--faint)}
 .hm-lens input{flex:1;accent-color:var(--ink)}
 /* the view chooser's one-of-several controls (Show, Layout) */
 .hm-seg{display:flex;gap:6px;margin:2px 0 14px}
@@ -88,9 +88,9 @@
 .hm-tweak-scroll{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:10px 16px 6px}
 .hm-tweak-lens{margin-bottom:10px}
 .hm-tweak-row{display:grid;grid-template-columns:118px 1fr 42px;align-items:center;gap:10px;height:34px}
-.hm-tweak-row span{font:500 10.5px/1.2 var(--mono);letter-spacing:.04em;color:var(--soft)}
+.hm-tweak-row span{font:500 13px/1.2 var(--mono);letter-spacing:.04em;color:var(--soft)}
 .hm-tweak-row input{width:100%;accent-color:var(--ink)}
-.hm-tweak-row b{text-align:right;font:500 11px/1 var(--mono);color:var(--faint)}
+.hm-tweak-row b{text-align:right;font:500 13px/1 var(--mono);color:var(--faint)}
 .hm-tweak-foot{flex:none;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 16px calc(10px + var(--bottom));border-top:1px solid var(--rule)}
 .cx-pill{height:38px;padding:0 16px;border:1px solid var(--rule-2);border-radius:var(--r-pill);font:italic 400 15px/1.2 var(--serif);letter-spacing:0;text-transform:none;color:var(--ink)}
 
@@ -163,7 +163,7 @@
 .cs-hl-sw i:only-child{grid-column:1/-1}
 .cs-hl-t{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
 .cs-hl-t b{font:400 20px/1.1 var(--serif);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.cs-hl-t small{font:400 12.5px/1.2 var(--sans);opacity:.64;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cs-hl-t small{font:400 13px/1.2 var(--sans);opacity:.64;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .cs-hl-sep{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}   /* read aloud and copied as one line: "The Milkmaid · 7 named colors" */
 .cs-hl-x{flex:none;width:44px;height:44px;display:grid;place-items:center;color:inherit;border-radius:50%}
 .cs-hl-x svg{width:18px;height:18px}
@@ -209,7 +209,7 @@
 .hm-ladder::-webkit-scrollbar{display:none}
 .hm-rung{flex:none;min-width:70px;min-height:56px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:4px;padding:8px 12px;border-radius:var(--r-2);background:var(--surface-2);transition:background .2s,color .2s}
 .hm-rung b{font:400 20px/1 var(--serif);color:var(--ink)}
-.hm-rung small{font:400 12.5px/1 var(--sans);color:var(--soft);white-space:nowrap}
+.hm-rung small{font:400 13px/1 var(--sans);color:var(--soft);white-space:nowrap}
 .hm-rung.on{background:var(--paper)}
 .hm-rung.on b,.hm-rung.on small{color:var(--paper-ink)}
 /* Family: three real samples per family (lightest, middle, darkest), its name and its count */
@@ -230,7 +230,7 @@
 .hm-seg-n{margin:12px 0 2px;flex-wrap:nowrap}
 .hm-seg-n button{flex:1;min-width:0;height:auto;min-height:52px;flex-direction:column;gap:4px;padding:6px 2px;border:0;background:var(--surface-2);border-radius:var(--r-2);font:400 16px/1 var(--serif);color:var(--ink)}
 .hm-seg-n button span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
-.hm-seg-n button em{font:400 12.5px/1 var(--sans);font-style:normal;color:var(--soft);font-variant-numeric:tabular-nums}
+.hm-seg-n button em{font:400 13px/1 var(--sans);font-style:normal;color:var(--soft);font-variant-numeric:tabular-nums}
 .hm-seg-n button.on{background:var(--paper);color:var(--paper-ink)}
 .hm-seg-n button.on em{color:var(--paper-ink);opacity:.7}
 .hm-clear{display:block;margin:14px 0 0;min-height:44px;padding:0 18px;border-radius:var(--r-pill);background:var(--surface-2);font:400 16px/1 var(--sans);color:var(--ink)}

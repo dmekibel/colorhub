@@ -1,0 +1,66 @@
+/* Night Gallery: the screen conversion (design/VISUAL-DIRECTION.md, DESIGN-SYSTEM.md §14). Loaded last, so each
+   screen's older rules settle into the shared tokens of css/menus2.css's COMPONENT TOKENS block without rewriting them.
+   The grammar, everywhere: solid controls (rest --s2, no outline), a selection is raised (--s3), ringed (1.5 px --line-2,
+   or the item's own color when it is a color) and, on tiles, dotted; never a paper or white fill or frame. Radii 6 / 18
+   / 28 / pill. 44 pt hits, 56 pt primaries. Serif names, Geist controls and numbers. Grouped by screen. */
+
+/* ============================================================ shared: sliders, chips, answer tiles */
+/* every slider (except the color-mixing tracks, which paint their own gradient): a 6 px --s3 track, an ink fill up to
+   the thumb (--ngp, set by js/core.js ngRange) and a 28 px ink thumb with a 44 pt hit */
+input[type=range]:not(.mt-sl *):not(.mt-wh *):not(.pt-range){-webkit-appearance:none;appearance:none;background:none;height:var(--tap);margin:0;cursor:pointer}
+input[type=range]:not(.mt-sl *):not(.mt-wh *):not(.pt-range)::-webkit-slider-runnable-track{height:6px;border-radius:3px;
+  background:linear-gradient(90deg,var(--ink) var(--ngp,0%),var(--s3) var(--ngp,0%))}
+input[type=range]:not(.mt-sl *):not(.mt-wh *):not(.pt-range)::-moz-range-track{height:6px;border-radius:3px;background:var(--s3)}
+input[type=range]:not(.mt-sl *):not(.mt-wh *):not(.pt-range)::-moz-range-progress{height:6px;border-radius:3px;background:var(--ink)}
+input[type=range]:not(.mt-sl *):not(.mt-wh *):not(.pt-range)::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;margin-top:-11px;border:0;border-radius:50%;
+  background:var(--ink);box-shadow:0 2px 8px rgba(0,0,0,.45)}
+input[type=range]:not(.mt-sl *):not(.mt-wh *):not(.pt-range)::-moz-range-thumb{width:28px;height:28px;border:0;border-radius:50%;background:var(--ink);box-shadow:0 2px 8px rgba(0,0,0,.45)}
+
+/* ============================================================ Learn room (js/learn.js, js/learnmore.js) */
+/* Today's two parts (Look, Name it in six) are one grouped row card: 56 pt rows, a 32 px leading disc, inset hairline */
+.lr-tc-acts{border-top:0;background:var(--s1);border-radius:var(--r-card);overflow:hidden}
+.lr-tc-act{min-height:var(--tap-l);padding:8px 16px;border-bottom:0;position:relative;gap:14px}
+.lr-tc-act:not(:last-child)::after{content:"";position:absolute;left:62px;right:0;bottom:0;height:1px;background:var(--line)}
+.lr-tc-act:active{opacity:1;background:var(--s2)}
+.lr-tick{width:32px;height:32px;border:0;border-radius:50%;background:var(--s3);color:var(--ink)}
+.lr-tick svg{width:18px;height:18px}
+.lr-tick.on{background:var(--good);color:var(--ground);box-shadow:none}
+.lr-tick.on svg{width:16px;height:16px}
+.lr-tc-act b{font:400 21px/1.1 var(--serif)}
+.lr-tc-act .lr-tc-st{font:400 14px/1.2 var(--sans);font-style:normal;color:var(--soft)}
+.lr-tc-sw{width:20px;height:20px;border-radius:50%}
+.lr-tc-act svg:last-child{color:var(--faint)}
+/* the bet: how many will you name tomorrow (solid pills, the chosen one raised and ringed) */
+.lx-bet-b,.screen.learnit .lx-bet-b{border:0;background:var(--s2);border-radius:var(--r-pill);font:500 16px/1 var(--sans);font-variant-numeric:tabular-nums;max-width:64px;height:var(--tap)}
+.screen.learnit .lx-bet-b{background:rgba(14,13,11,.28)}
+
+/* ============================================================ Learn sheet, Study, Practice (js/learnset.js, js/practice.js) */
+/* Look's views (Grid, Strip, Pairs…): a pill row whose chosen view is raised and ringed, never paper */
+.ls-vb{height:var(--tap);border:0;background:var(--s2);color:var(--soft);font:500 var(--type-ui)/1 var(--sans)}
+.ls-vb.on{background:var(--sel-fill);color:var(--sel-ink);box-shadow:var(--sel-ring)}
+/* option chips (Which colors, Only, Order, Ask): solid at rest, raised + ringed when chosen */
+.pr-chip{height:var(--tap);border:0;background:var(--s2);color:var(--soft);font:500 var(--type-ui)/1 var(--sans)}
+.pr-chip.on{background:var(--sel-fill);color:var(--sel-ink);box-shadow:var(--sel-ring);border-color:transparent}
+.pr-listmode [data-row="range"] .pr-chip.on{background:var(--s2);box-shadow:none;color:var(--soft)}
+.pr-chip em,.pr-chip small{font-style:normal;color:var(--faint)}
+/* the switch: on = --good track with a ground knob; off = --s3 with a soft knob */
+.pr-switch i{background:var(--s3)}
+.pr-switch i::after{background:var(--soft)}
+.pr-switch input:checked + i{background:var(--good)}
+.pr-switch input:checked + i::after{background:var(--ground)}
+/* the climbed rings on Results: a 14 px ring that fills in --good once it's named on a later day */
+.ls-ring{width:14px;height:14px;box-shadow:inset 0 0 0 1.5px var(--faint)}
+.ls-ring.on{background:var(--good)}
+/* answer tiles in a game: the pick is raised and ringed (never a white frame); a color tile rings in its own color */
+.pr-opt{border-radius:var(--r-card);min-height:var(--tap-l)}
+.pr-opt.chosen,.pr-blind .pr-opt.chosen{outline-color:transparent;background:#666461;box-shadow:inset 0 0 0 1.5px rgba(236,232,223,.5)}
+.pr-tile{border-radius:var(--r-tile)}
+.pr-tile.nm{border-radius:var(--r-card)}
+.pr-tile.on{outline-color:transparent;transform:scale(.97);box-shadow:inset 0 0 0 1.5px rgba(236,232,223,.5)}
+.pr-tile.nm.on{background:#666461}
+.pr-tile.sw.on{outline:2px solid var(--c);outline-offset:3px;box-shadow:none}
+/* the flashcard's Again / Got it: solid 64 pt discs, the verdict in the icon's color */
+.act{border:0;background:var(--s2);box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.act:active{background:var(--s3)}
+/* the sheet's secondary (Look) is a solid pill beside the one paper primary (Study) */
+.ls-look{border:0;background:var(--s2)}

@@ -297,6 +297,13 @@ const ICON = {
   star: icon("star", 22), starOn: icon("starOn", 22), map: icon("map", 22), colors: icon("colors", 22), arrange: icon("arrange", 22),
   sound: icon("sound", 22), compare: icon("compare", 22), you: icon("you", 24),
 };
+// Night Gallery sliders (css/ng.css): every range input's track fills in ink up to its thumb. --ngp is kept in step on
+// input and change, and for sliders that arrive with a screen or have their value set in code (a Reset), on the next frame.
+function ngRange(r) { const lo = +r.min || 0, hi = r.max === "" ? 100 : +r.max, v = +r.value; r.style.setProperty("--ngp", (hi > lo ? Math.max(0, Math.min(1, (v - lo) / (hi - lo))) * 100 : 0).toFixed(2) + "%"); }
+["input", "change"].forEach(k => document.addEventListener(k, e => { if (e.target && e.target.type === "range") ngRange(e.target); }, true));
+let NG_RANGE_T = 0;
+new MutationObserver(() => { if (NG_RANGE_T) return; NG_RANGE_T = requestAnimationFrame(() => { NG_RANGE_T = 0; document.querySelectorAll('input[type="range"]').forEach(ngRange); }); })
+  .observe(document.documentElement, { childList: true, subtree: true });
 const LOGO = `<svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">${["#E34234", "#FFBF00", "#50C878", "#007FFF"].map((c, i) =>
   `<rect x="9" y="1.5" width="8" height="22" rx="2.2" fill="${c}" stroke="#121212" stroke-width="1.4" transform="rotate(${-33 + i * 22} 13 22)"/>`).join("")}</svg>`;
 
