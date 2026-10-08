@@ -587,13 +587,14 @@ PR_STEPS["quiz-name"] = { by: "pick", render(box, it, ctx = {}) {
 // ---------- quiz-color: a name, four same-family swatches ----------
 PR_STEPS["quiz-color"] = { by: "pick", render(box, it, ctx = {}) {
   return new Promise(resolve => {
-    const t0 = performance.now(), opts = prShuffle([it, ...(ctx.wrong && ctx.wrong.length === 3 ? ctx.wrong : prNear(it, 3, ctx.deck))]), nm = prName(it);
-    box.innerHTML = `<div class="pr-step pr-s-qc">
+    // ctx.wrong: any number of wrong options (Study's echo has one, its spot-it round up to nine; js/studyformats.js)
+    const t0 = performance.now(), opts = prShuffle([it, ...(ctx.wrong && ctx.wrong.length && (ctx.anyN || ctx.wrong.length === 3) ? ctx.wrong : prNear(it, 3, ctx.deck))]), nm = prName(it);
+    box.innerHTML = `<div class="pr-step pr-s-qc${ctx.cls ? " " + ctx.cls : ""}">
       ${ctx.note ? `<p class="pr-stepnote">${esc(ctx.note)}</p>` : ""}
-      <div class="pr-q"><span class="pr-note">Which one is</span><b class="pr-t1" style="${prFit(nm, 44)}">${esc(nm)}?</b></div>
-      <div class="pr-grid4">${opts.map((o, i) => `<button class="pr-cell" data-i="${i}" aria-label="Option ${i + 1}"><i class="pr-swc" style="--c:${o.h}"></i><span class="pr-tag">${esc(prName(o))}</span></button>`).join("")}</div>
+      <div class="pr-q"><span class="pr-note">${esc(ctx.ask || "Which one is")}</span><b class="pr-t1" style="${prFit(nm, 44)}">${esc(nm)}?</b></div>
+      <div class="pr-grid4 pr-gn${opts.length}">${opts.map((o, i) => `<button class="pr-cell" data-i="${i}" aria-label="Option ${i + 1}"><i class="pr-swc" style="--c:${o.h}"></i><span class="pr-tag">${esc(prName(o))}</span></button>`).join("")}</div>
       <div class="pr-fb" aria-live="polite"></div>
-      <div class="pr-foot"><p class="pr-hint">Tap its color</p></div></div>`;
+      <div class="pr-foot"><p class="pr-hint">${esc(ctx.hint || "Tap its color")}</p></div></div>`;
     const fb = box.querySelector(".pr-fb"), foot = box.querySelector(".pr-foot");
     let done = false;
     const choose = i => {
@@ -1484,7 +1485,7 @@ function prHome(o = {}) {
       b.classList.toggle("on", on); b.setAttribute("aria-pressed", on);
     });
     el.classList.toggle("pr-listmode", spec.src === "list");
-    slider.value = spec.n; sliderN.textContent = spec.n.toLocaleString();
+    cnt.set(spec.n); sliderN.textContent = spec.n.toLocaleString();
   };
   el.addEventListener("click", e => {
     const b = e.target.closest(".pr-chip"); if (!b) return;
@@ -1497,8 +1498,8 @@ function prHome(o = {}) {
     else if (d.round != null) spec.round = +d.round;
     buzz(4); prSaveSpec(spec); paint();
   });
-  slider.addEventListener("input", () => { spec.src = "first"; spec.list = ""; spec.n = +slider.value; sliderN.textContent = spec.n.toLocaleString(); paint(); });
-  slider.addEventListener("change", () => { buzz(4); prSaveSpec(spec); });
+  // stops on the track (5, 6, 8, 10 … 1,000) and −/+ for an exact count (countify, core.js)
+  const cnt = countify(slider, { min: 5, max: 1000, value: spec.n, out: sliderN, onSet: (v, final) => { spec.src = "first"; spec.list = ""; spec.n = v; sliderN.textContent = v.toLocaleString(); paint(); if (final) { buzz(4); prSaveSpec(spec); } } });
   el.querySelector("[data-more]").onclick = () => { showAll = true; buzz(4); paint(); };
   el.querySelector("[data-back]").onclick = () => (typeof home === "function" ? home() : go("learn"));
   onKey = e => { if (e.key === "Enter" && !(e.target && e.target.tagName === "INPUT")) prPlay(spec.method); };

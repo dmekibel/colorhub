@@ -988,3 +988,16 @@ body.stem-open .screen,body.stem-open .hc,body.stem-open .hm-stage{filter:bright
 .path-future .path-band{height:8px}
 .path-cap{display:flex;justify-content:space-between;align-items:baseline;margin-top:8px}
 .path-future-name{color:var(--soft);font-weight:400}
+
+/* ---------- How many: −/+ steppers beside a count slider (js/core.js countify, stepify). Row one: the label and
+   −  N  +; row two: the slider, full width. Opaque buttons, 44 px targets. ---------- */
+.cnt-wrap.cnt-wrap{display:grid;grid-template-columns:1fr auto;align-items:center;column-gap:12px;row-gap:2px}
+.cnt-wrap>input[type=range]{grid-column:1/-1;grid-row:2;width:100%;min-width:0}
+.cnt-wrap>:first-child:not(input){grid-column:1;grid-row:1}
+.cnt-step{grid-column:2;grid-row:1;display:inline-flex;align-items:center;gap:6px}
+.cnt-step>b,.cnt-step>span{min-width:3.2ch;text-align:center !important;font-variant-numeric:tabular-nums}
+.cnt-b{flex:none;width:44px;height:44px;border-radius:50%;border:1px solid var(--rule);background:var(--surface-3);color:var(--ink);display:grid;place-items:center;padding:0;cursor:pointer;touch-action:manipulation;-webkit-user-select:none;user-select:none;transition:transform var(--dur-0) var(--ease),background var(--dur-0)}
+.cnt-b:active:not(:disabled){transform:scale(.9);background:var(--ink);color:var(--ground)}
+.cnt-b:disabled{opacity:.32;cursor:default}
+.cnt-b:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.cs-hl-bar .cnt-b{background:var(--paper-line);color:var(--paper-ink);border-color:transparent}

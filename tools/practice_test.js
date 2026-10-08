@@ -356,7 +356,8 @@ run(`S.cards = {}; S.practice = undefined; var KNOWN = new Set(); var knowState 
   r = run(`(() => { const r = spSim(SP_SET, ${JSON.stringify(mixed)}, {}, .8); return { firstKind: r.firstKind, met: r.log.filter(x => x === "meet").length, unmet: [...r.P.qs.values()].filter(q => q.__unmet).map(q => q.k) }; })()`);
   ok(r.met === 4, `only the 4 new colors are met (${r.met})`);
   ok(r.unmet.every(k => k === "yours" || k === "learning"), "only known colors are asked without a Meet");
-  ok(["type", "card", "quiz-color"].includes(r.firstKind[keys[0]]) && ["type", "card", "quiz-color"].includes(r.firstKind[keys[1]]), `a color that's yours starts at recall (${r.firstKind[keys[0]]}, ${r.firstKind[keys[1]]})`);
+  const RECALL = ["type", "recall", "spot", "quiz-color"];
+  ok(RECALL.includes(r.firstKind[keys[0]]) && RECALL.includes(r.firstKind[keys[1]]), `a color that's yours starts at recall (${r.firstKind[keys[0]]}, ${r.firstKind[keys[1]]})`);
   ok(run(`spNew(SP_SET, { know: new Map(${JSON.stringify(Object.entries(mixed))}) }).qs.get(SP_SET[0].key).lv`) === 3, "yours starts on rung 3 (recall)");
   // Test me: no Meet, everything from rung 2
   r = run(`(() => { const r = spSim(SP_SET, ${JSON.stringify(none)}, { pace: "test" }, .8); return { met: r.log.filter(x => x === "meet").length, first: r.log[0] }; })()`);
@@ -373,6 +374,20 @@ run(`S.cards = {}; S.practice = undefined; var KNOWN = new Set(); var knowState 
   // quick (Learn it): climbs to rung 3, never types
   r = run(`(() => { const r = spSim(SP_SET.slice(0, 4), ${JSON.stringify(none)}, { quick: true }, .85); return { top: r.P.top, kinds: [...new Set(r.log)], n: r.n }; })()`);
   ok(r.top === 3 && !r.kinds.includes("type"), `a quick session climbs to recall without typing (${r.n} questions)`);
+  // Learn room 2 (design/LEARN-ROOM-2.md): due reviews are asked before anything new is met, never shown first
+  r = run(`(() => { const know = new Map(SP_SET.map((x, i) => [x.key, i < 2 ? "learning" : "none"])), due = new Set(SP_SET.slice(0, 2).map(x => x.key));
+    const P = spNew(SP_SET, { know, due, de: de2000, mix: [[SP_SET[0].key, SP_SET[2].key]] }), seq = [];
+    for (let i = 0; i < 4; i++) { const a = spNext(P); seq.push(a.t + ":" + (a.q ? a.q.it.key : "")); if (a.t === "ask") spAnswer(P, a.q, true); }
+    return seq; })()`);
+  ok(r[0] === "ask:" + keys[0] || r[0] === "ask:" + keys[1], `a due review is the first thing asked (${r[0]})`);
+  ok(r.slice(0, 2).every(x => x.startsWith("ask:")) && !r.slice(0, 2).some(x => x.startsWith("pair")), `both due reviews come before any Meet or pair (${r.join(" ")})`);
+  // the format library: a session of new colors changes shape (echo first, then many kinds), and never types by default
+  r = run(`(() => { const P = spNew(SP_SET, { know: new Map(SP_SET.map(x => [x.key, "none"])), de: de2000 }), kinds = [], first = {};
+    let a, n = 0; while ((a = spNext(P)) && n++ < 400) { if (a.t === "ask") { kinds.push(a.kind); if (!(a.q.it.key in first)) first[a.q.it.key] = a.kind; spAnswer(P, a.q, spRnd() < .85); } if (a.t === "match") a.qs.forEach(q => spAnswer(P, q, true)); }
+    return { kinds: [...new Set(kinds)], first: Object.values(first) }; })()`);
+  ok(r.kinds.length >= 6, `a lesson uses many formats (${r.kinds.join(", ")})`);
+  ok(!r.kinds.includes("type") && r.kinds.includes("recall"), "the top rung is tap recall, not typing, unless typing is asked for");
+  ok(r.first.filter(k => k === "echo").length >= 3, `a just-met color's first question is mostly the two-choice echo (${r.first.join(", ")})`);
   // far options: the same family, well apart
   const far = run(`(() => { const it = prByKey("teal"), w = spFar(it, 3, prCore(), de2000, prFam9); return { fam: w.every(x => prFam9(x.h) === prFam9(it.h)), d: w.map(x => de2000(it.h, x.h)), sep: w.every((a, i) => w.every((b, j) => i === j || de2000(a.h, b.h) >= 10)), n: w.length }; })()`);
   ok(far.n === 3 && far.fam && far.sep && far.d.every(d => d >= 14), `far options are same-family, ≥ 14 from the answer and ≥ 10 apart (${far.d.map(d => d.toFixed(0)).join(", ")})`);

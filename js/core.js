@@ -320,6 +320,71 @@ function ngRange(r) { const lo = +r.min || 0, hi = r.max === "" ? 100 : +r.max, 
 let NG_RANGE_T = 0;
 new MutationObserver(() => { if (NG_RANGE_T) return; NG_RANGE_T = requestAnimationFrame(() => { NG_RANGE_T = 0; document.querySelectorAll('input[type="range"]').forEach(ngRange); }); })
   .observe(document.documentElement, { childList: true, subtree: true });
+// How many (David, 2026-10-09: "2 vs 5 vs 10 is a big difference, but the slider goes up to ~1,000"): a count slider
+// runs on stops, so small sizes get most of the track, and −/+ steppers beside the number move it by exactly one
+// (hold to repeat). countify(input, { min, max, value, onSet(v, final) }) turns any range input into one: the input
+// moves along countStops(min, max); the number between the steppers is the caller's own element (o.out), kept in
+// place. Returns { set(v), range(min, max), value() }. Its DOM order keeps the slider the label's first control.
+const COUNT_STOPS = [2, 3, 4, 5, 6, 8, 10, 12, 15, 20, 25, 30, 40, 50, 75, 100, 150, 200, 250, 300, 400, 500, 600, 750, 1000, 1500, 2000, 3000];
+// a short range (30 or fewer steps) keeps every number on the track; a long one runs on COUNT_STOPS
+const countStops = (lo, hi) => hi <= lo ? [lo] : hi - lo <= 30 ? Array.from({ length: hi - lo + 1 }, (_, i) => lo + i) : [lo, ...COUNT_STOPS.filter(v => v > lo && v < hi), hi];
+const countIdx = (stops, v) => { let k = 0; stops.forEach((s, i) => { if (s <= v) k = i; }); return k; };
+const COUNT_BTNS = `<button type="button" class="cnt-b" data-cnt="-1" aria-label="One fewer"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M6 12h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button><button type="button" class="cnt-b" data-cnt="1" aria-label="One more"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M6 12h12M12 6v12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>`;
+// hold to repeat on a −/+ pair: step(d) once at once, then faster and faster until the finger lifts; done() after
+function countHold(grp, step, done) {
+  let rep = 0;
+  const stop = () => { if (rep) { clearTimeout(rep); rep = 0; if (done) done(); } };
+  grp.querySelectorAll(".cnt-b").forEach(b => {
+    const d = +b.dataset.cnt;
+    b.addEventListener("pointerdown", e => {
+      e.preventDefault(); e.stopPropagation(); if (b.disabled) return;
+      if (!step(d)) return; if (typeof buzz === "function") buzz(3);
+      let wait = 380;
+      const go = () => { if (!step(d)) { rep = rep || 1; return stop(); } wait = Math.max(50, wait * .8); rep = setTimeout(go, wait); };
+      rep = setTimeout(go, wait);
+    });
+    ["pointerup", "pointerleave", "pointercancel"].forEach(k => b.addEventListener(k, stop));
+    // a keyboard press (no pointer) steps once; a pointer's own click was already counted on pointerdown
+    b.addEventListener("click", e => { e.preventDefault(); e.stopPropagation(); if (e.detail === 0 && !b.disabled && step(d)) { if (typeof buzz === "function") buzz(3); if (done) done(); } });
+  });
+}
+// −/+ on a slider that already runs on its own stops (Study the map's How many): one press moves one stop, through
+// the slider's own input and change handlers, so nothing else has to change
+function stepify(input, out) {
+  const wrap = input.parentElement, grp = document.createElement("span");
+  wrap.classList.add("cnt-wrap"); grp.className = "cnt-step"; grp.innerHTML = COUNT_BTNS;
+  input.insertAdjacentElement("afterend", grp);
+  if (out) grp.insertBefore(out, grp.lastElementChild);
+  const lo = () => +input.min || 0, hi = () => +input.max;
+  const paint = () => { grp.querySelector('[data-cnt="-1"]').disabled = +input.value <= lo(); grp.querySelector('[data-cnt="1"]').disabled = +input.value >= hi(); };
+  input.addEventListener("input", paint);
+  countHold(grp, d => { const v = +input.value, n = Math.max(lo(), Math.min(hi(), v + d)); if (n === v) return false; input.value = n; input.dispatchEvent(new Event("input", { bubbles: true })); paint(); return true; },
+    () => input.dispatchEvent(new Event("change", { bubbles: true })));
+  paint();
+  return grp;
+}
+function countify(input, o = {}) {
+  let lo = o.min != null ? o.min : 2, hi = o.max != null ? o.max : 100, v = o.value != null ? o.value : lo, stops = countStops(lo, hi);
+  const wrap = o.wrap || input.parentElement;
+  wrap.classList.add("cnt-wrap");
+  const grp = document.createElement("span");
+  grp.className = "cnt-step";
+  grp.innerHTML = COUNT_BTNS;
+  input.insertAdjacentElement("afterend", grp);
+  if (o.out) grp.insertBefore(o.out, grp.lastElementChild);
+  const paint = () => {
+    input.min = 0; input.max = stops.length - 1; input.step = 1; input.value = countIdx(stops, v);
+    if (typeof ngRange === "function") ngRange(input);
+    grp.querySelector('[data-cnt="-1"]').disabled = v <= lo; grp.querySelector('[data-cnt="1"]').disabled = v >= hi;
+  };
+  const to = (nv, final) => { nv = Math.max(lo, Math.min(hi, Math.round(nv))); if (nv === v && !final) return; v = nv; paint(); if (o.onSet) o.onSet(v, !!final); };
+  input.addEventListener("input", e => { e.stopImmediatePropagation(); const s = stops[+input.value]; if (s !== v) { v = s; grp.querySelector('[data-cnt="-1"]').disabled = v <= lo; grp.querySelector('[data-cnt="1"]').disabled = v >= hi; if (o.onSet) o.onSet(v, false); } }, true);
+  input.addEventListener("change", e => { e.stopImmediatePropagation(); if (o.onSet) o.onSet(v, true); }, true);
+  countHold(grp, d => { const was = v; to(v + d); return v !== was; }, () => { if (o.onSet) o.onSet(v, true); });
+  paint();
+  input._countTo = nv => to(nv, true);   // tests and screenshots: set the count as if stepped there
+  return { set: nv => { v = Math.max(lo, Math.min(hi, nv)); paint(); }, range: (a, b) => { lo = a; hi = Math.max(a, b); stops = countStops(lo, hi); v = Math.max(lo, Math.min(hi, v)); paint(); }, value: () => v, el: grp };
+}
 const LOGO = `<svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">${["#E34234", "#FFBF00", "#50C878", "#007FFF"].map((c, i) =>
   `<rect x="9" y="1.5" width="8" height="22" rx="2.2" fill="${c}" stroke="#121212" stroke-width="1.4" transform="rotate(${-33 + i * 22} 13 22)"/>`).join("")}</svg>`;
 
