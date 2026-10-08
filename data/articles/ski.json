@@ -1,0 +1,131 @@
+{
+ "slug": "ski",
+ "name": "Ski",
+ "hex": "#3A6F3F",
+ "names": [
+  "Ski"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Ski is a dark yellowish green from the Maerz and Paul dictionary of color, most over-represented in paintings made in early-1900s France.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A green from plate 29",
+   "body": "Maerz and Paul's 1930 dictionary places this hue on plate 29, swatch D12, first recorded in 1916, and the ISCC-NBS circular of 1955 cites the same entry, classing it a dark yellowish green, Munsell notation 0.4G 4.1/5.8 [1]. The same dictionary separately records a near-duplicate swatch under the name Paradise Green, on a different plate, a reminder that the 1916-1930 dictionaries often named very similar hues more than once [1].\n\nThe books read give no story for why this particular green took the name *Ski*, and its origin is undocumented here [1]. The nearest named colors on file are [[emerald-green]], [[windsor-green]] and [[dark-spring-green]], at 2.6, 3.3 and 4.5 ΔE [1]. It also sits near [[pine-green]] and [[moss-green]] in our library, two other dark, yellow-leaning greens [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Ski covers at least one per cent of the canvas in 69 paintings, about 0.29 per cent overall, rarer than 57 per cent of the named colors we track; the within-painting lens finds it in 30 [2]. It peaks in the 1900s, in 12 of 1,674 paintings, present in 0.7 per cent of the 1,674 paintings (12 of them) we hold from that century, 4.5 times the archive's overall rate [2]. Inside a painting it most often plays a shadow, in 40 per cent of its 30 appearances [2].\n\nIt is over-represented in France, 17 of 3,443 paintings, 2.8 times expected [2]. The earliest dated painting to carry it is from 1783, 147 years before the name's own 1930 record, a short gap by the standards, but still no proof that any particular pigment was in use that early, a floor and not a first, since the archive's early centuries are thin [2]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1916 (Maerz and Paul)",
+   "source": "data/library.json; data/graph/nodes-s.json"
+  },
+  "aka": [],
+  "siblings": [
+   "emerald-green",
+   "windsor-green",
+   "dark-spring-green",
+   "meadow"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 69,
+  "measured": {
+   "lch": [
+    42.2,
+    35.9,
+    143.4
+   ],
+   "nearest": [
+    [
+     "Emerald Green",
+     2.6
+    ],
+    [
+     "Windsor Green",
+     3.3
+    ],
+    [
+     "Dark Spring Green",
+     4.5
+    ],
+    [
+     "Meadow",
+     5.1
+    ]
+   ]
+  },
+  "countries": [
+   {
+    "name": "France",
+    "hits": 17,
+    "n": 3443,
+    "lift": 2.8
+   }
+  ],
+  "first_seen": {
+   "year": 1783
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-s.json, data/library.json): Maerz & Paul 1930 plate 29 D 12, cited by ISCC-NBS Circular 553 (1955); CIEDE2000 nearest-name match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (data/graph/fieldnotes/s.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which country's paintings are most over-represented in Ski, in our archive?",
+   "choices": [
+    "France",
+    "Norway",
+    "India",
+    "Spain"
+   ],
+   "answer": "France",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our library records only one swatch close to this color in the 1916-1930 dictionaries.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Ski peaks in early-1900s French paintings at more than four times the rate you'd expect by chance."
+ ],
+ "words": 338,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

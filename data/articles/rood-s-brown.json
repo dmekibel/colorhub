@@ -1,0 +1,138 @@
+{
+ "slug": "rood-s-brown",
+ "name": "Rood's Brown",
+ "hex": "#8F6852",
+ "names": [
+  "Rood's Brown"
+ ],
+ "tier": "person",
+ "depth": "short",
+ "lede": "Rood's Brown is a warm, mid-toned brown from Robert Ridgway's 1912 color standards, also recorded as Wood Rose in Maerz and Paul's 1930 dictionary, and no book we hold says who Rood was.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name the books leave open",
+   "body": "Ridgway catalogued this brown on plate XXVIII of his 1912 *Color Standards and Color Nomenclature* [1]. Maerz and Paul's 1930 dictionary lists the same color under a different name, Wood Rose, first recorded in 1926 on their plate 6 [1]. No book we hold explains who Rood was, or whether the two names share a common source [1][2].\n\nIts nearest library neighbor is [[sandalwood|Sandalwood]], about 2.5 units away, close to the paler [[sepia]] [3]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "Measured in LCH terms it sits at lightness 47, chroma 22, hue 56 degrees, a warm, medium brown leaning toward red rather than yellow [3]. Next to [[sepia]] it reads as the pinker, less grey one, and sits between that and the paler [[pale-brown|Pale Brown]] [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this brown, as photographed, in 1,644 of 23,781 paintings, about 6.9 percent [4]. It covers almost three-quarters of the canvas in a tenth-century Chinese ink painting, *Snow Plum*, and over 60 percent in a 1618 Mughal portrait of Raja Jagat Singh [4]. The earliest dated match is an ancient Egyptian funerary papyrus, where it covers 45 percent of the surviving fragment, a floor and not a first, since the archive's early centuries are thin [4]. It sits closer to this warm red-brown than to the yellower [[beige-brown|Beige Brown]] [3]. These are computed color matches on aged, varnished or painted surfaces, not pigment identifications [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1912, Ridgway; also Wood Rose, 1926, Maerz & Paul",
+   "source": "Ridgway, Color Standards and Color Nomenclature (1912)"
+  },
+  "aka": [
+   "Wood Rose"
+  ],
+  "siblings": [
+   "sandalwood",
+   "sepia",
+   "pale-brown"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1644,
+  "top_paintings": [
+   "met-51654",
+   "cma-170834",
+   "nga-72165"
+  ],
+  "measured": {
+   "lch": [
+    47,
+    22,
+    56
+   ],
+   "nearest": [
+    [
+     "Sandalwood",
+     2.5
+    ],
+    [
+     "Sepia",
+     3.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Ridgway 1912, plate XXVIII; Maerz & Paul 1930, plate 6 B 9",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty et al. (eds.), Nature's Palette, preface on Ridgway's sources",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): CIEDE2000 distances to named neighbors",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings as photographed (data/graph/fieldnotes; within the archive's match threshold, at least 5% of the canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "True or false: the books consulted explain who Rood's Brown was named for.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "What name does Maerz and Paul's 1930 dictionary give the same color?",
+   "choices": [
+    "Wood Rose",
+    "Terra Umber",
+    "Sepia",
+    "Raw"
+   ],
+   "answer": "Wood Rose",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Rood's Brown goes by a second name, Wood Rose, in a different 1930 dictionary, with no book tying the two together."
+ ],
+ "words": 253,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "Naming origin undocumented in the books consulted.",
+   "lint 2026-10-09"
+  ]
+ }
+}

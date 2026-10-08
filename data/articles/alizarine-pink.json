@@ -1,0 +1,112 @@
+{
+ "slug": "alizarine-pink",
+ "name": "Alizarine Pink",
+ "hex": "#E4979F",
+ "names": [
+  "Alizarine Pink"
+ ],
+ "tier": "pigment",
+ "depth": "brief",
+ "lede": "Alizarine Pink is a soft, warm pink from Ridgway's 1912 chart, one of the rarest colors in our painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A rare pink",
+   "body": "Ridgway's 1912 plate XIII gives this pink the name Alizarine Pink, hue 1′, tone d, and the ISCC-NBS system of 1955 files a close match in its block 2 [1]. The nearest named colors on file are [[jasper-pink]], [[mauvelous]], [[faded-pink]] and [[dusty-pink]], at 3.4, 3.5, 4, 3.5, 4 and 4 ΔE [1]. Among named pinks it sits near [[rose]] and [[pink]] itself [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to Alizarine Pink in only 7 of 23,781 paintings, about 0.03 percent, one of the rarer colors we track, as photographed [2]. The earliest dated match is a Virgin and Child with the Young Saint John the Baptist, from 1525, a floor and not a first, since the archive's early centuries are thin [2]. With so few matches, the data cannot support a reliable peak decade or painter; inside a painting it most often sits as a highlight, in 71 percent of its appearances [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; not confirmed to reference alizarin",
+   "first_recorded": "Ridgway 1912, plate XIII",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "jasper-pink",
+   "mauvelous",
+   "faded-pink",
+   "dusty-pink"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 7,
+  "measured": {
+   "lch": [
+    70,
+    31,
+    15
+   ],
+   "nearest": [
+    [
+     "Jasper Pink",
+     3.4
+    ]
+   ]
+  },
+  "role": {
+   "highlight": 0.71,
+   "mid": 0.29
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912 plate XIII, ISCC-NBS 1955 block 2",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "About how many of our 23,781 archive paintings carry a close match to Alizarine Pink?",
+   "choices": [
+    "7",
+    "700",
+    "70",
+    "7,000"
+   ],
+   "answer": "7",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources confirm Alizarine Pink is named for alizarin.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "One of the rarest named colors in our whole archive: just 7 paintings."
+ ],
+ "words": 176,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

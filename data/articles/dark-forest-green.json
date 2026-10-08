@@ -1,0 +1,141 @@
+{
+ "slug": "dark-forest-green",
+ "name": "Dark Forest Green",
+ "hex": "#002D04",
+ "names": [
+  "Dark Forest Green"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Dark Forest Green is a near-black green from the 2010 xkcd color survey, a darker sibling of Forest Green that four separate 1955 ISCC-NBS names also crowd around within a few units.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "One shade, five names",
+   "body": "The xkcd survey records this as *dark* plus the existing name [[forest-green]], while its sibling Light Forest Green adds the opposite modifier to the same base [1]. The 1955 ISCC-NBS system independently crowds four of its own names into the same small patch of color space: Dark Bottle Green, Dark Hunter Green, Elephant Green and Winter, all cataloguing shades close enough to be called the same color [2]. The color library finds the closest ISCC-NBS block, very dark yellowish green, only 2.2 units away, a tight match [2]. In Munsell terms it sits at 8.1GY 1.4/5.0, and in LCH at lightness 15, chroma 32, hue 142 degrees, among the darkest, most saturated greens in the library [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our 23,781-painting archive, a color within six units of Dark Forest Green covers at least one per cent of the canvas in 13 paintings, about 0.05 percent of the archive, as photographed, rarer than 77 percent of the named colors tracked [3]. Its earliest match, Jean Hey's panel dated 1490, is 520 years before the xkcd name itself was recorded in 2010; that gap only shows a look-alike hue in an aged photograph, since near-black greens like this are common in old varnished shadows regardless of what anyone called them, a floor and not a first, since the archive's early centuries are thin [3]. In printed English the phrase rose fastest in the 1990s and peaked in the 2010s, tracking the rise of web color names generally [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: dark + forest-green",
+   "first_recorded": "xkcd color survey, 2010",
+   "source": "ColorHub color library and Color Graph"
+  },
+  "aka": [],
+  "siblings": [
+   "phthalo-green",
+   "sacramento-state-green",
+   "evergreen",
+   "racing-green"
+  ],
+  "parent": "forest-green",
+  "children": [
+   "light-forest-green"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 13,
+  "measured": {
+   "lch": [
+    14.9,
+    31.7,
+    142.0
+   ],
+   "munsell": "8.1GY 1.4/5.0",
+   "iscc_nbs": {
+    "name": "very dark yellowish green",
+    "de2000": 2.2
+   },
+   "nearest": [
+    [
+     "Phthalo Green",
+     8.0
+    ],
+    [
+     "Sacramento State Green",
+     8.3
+    ],
+    [
+     "Evergreen",
+     9.0
+    ],
+    [
+     "Racing Green",
+     9.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "xkcd color survey (2010), crowdsourced color-name list",
+   "loc_kind": null,
+   "url": "https://blog.xkcd.com/2010/05/03/color-survey-results/"
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library and Color Graph (data/library.json, data/graph): ISCC-NBS block, Munsell notation, LCH values",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive fieldnotes, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "web",
+   "cite": "Google Books Ngram, case-insensitive",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1955 ISCC-NBS name comes closest to Dark Forest Green's measured color?",
+   "choices": [
+    "Very dark yellowish green",
+    "Vivid purplish blue",
+    "Light orange",
+    "Pinkish white"
+   ],
+   "answer": "Very dark yellowish green",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: four different 1955 ISCC-NBS names crowd near this same shade of green.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Four separate 1955 color-standard names crowd around the same dark green."
+ ],
+ "words": 279,
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

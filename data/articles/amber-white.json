@@ -1,0 +1,111 @@
+{
+ "slug": "amber-white",
+ "name": "Amber White",
+ "hex": "#E0D4A1",
+ "names": [
+  "Amber White"
+ ],
+ "tier": "pigment",
+ "depth": "brief",
+ "lede": "Amber White is a pale, warm cream from Maerz and Paul's 1930 dictionary, and in our archive it almost always plays the highlight.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A cream from one dictionary",
+   "body": "Maerz and Paul's 1930 dictionary records Amber White, plate 11 C 1, first recorded in 1500 [1]. No other system in our library carries the name, and who first used it beyond that 1500 record is undocumented here [1].\n\nThe nearest named colors on file are [[glass-green]], [[lion]], [[baryta-yellow]] and [[seafoam-green]], at 2.8, 2.8, 3.5 and 3.8 ΔE [1]. Among pale yellows it sits beside [[amber]] and [[tan]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this cream in 802 of 23,781 paintings, 3.4 percent, as photographed [2]. The earliest dated match is a page from a copy of the Qur'an, dated 799 in our archive, seven centuries before the name's 1500 record, a floor and not a first, since the archive's early centuries are thin [2]. It peaks in the 1840s, in 46 of 699 paintings, at 1.95 times the archive's overall rate, and Pieter Gerardus van Os carries it in four of his 13 paintings here [2]. Inside a painting it is overwhelmingly a highlight, in 98 percent of its appearances [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented beyond the English words amber and white",
+   "first_recorded": "Maerz & Paul 1930, first recorded 1500, plate 11 C 1",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "glass-green",
+   "lion",
+   "baryta-yellow",
+   "seafoam-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 802,
+  "measured": {
+   "lch": [
+    85,
+    27,
+    98
+   ],
+   "nearest": [
+    [
+     "Glass Green",
+     2.8
+    ]
+   ]
+  },
+  "role": {
+   "highlight": 0.98
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz & Paul 1930, plate 11 C 1, first recorded 1500",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which single source does our library give for the name Amber White?",
+   "choices": [
+    "Maerz and Paul, 1930",
+    "Ridgway, 1912",
+    "ISCC-NBS, 1955",
+    "RAL"
+   ],
+   "answer": "Maerz and Paul, 1930",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: inside a painting, Amber White is almost always a highlight.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A pale cream that, in our archive, is a highlight 98 percent of the time it appears."
+ ],
+ "words": 195,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

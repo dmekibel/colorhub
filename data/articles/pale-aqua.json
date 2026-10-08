@@ -1,0 +1,128 @@
+{
+ "slug": "pale-aqua",
+ "name": "Pale Aqua",
+ "hex": "#BED3E5",
+ "names": [
+  "Pale Aqua"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Pale Aqua is a soft, greyed blue first fixed by the ISCC-NBS 1955 color charts, and one of the most common light blues in our painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier, charted in 1955",
+   "body": "The library's earliest source for Pale Aqua is the ISCC-NBS 1955 charts, where it sits in the \"very pale green\" block; Wikipedia separately cites the Plochere system, and the xkcd 2010 survey recorded the name again as a crowd label [1]. It is built on the modifier grammar *pale* + *aqua*, so [[aqua|Aqua]] itself is the more saturated color this one lightens [1]. At hex #BED3E5 it measures lightness 84 and chroma just 12 in LCH, close to grey [1].\n\nIts nearest named neighbors are [[columbia-blue|Columbia Blue]], 3.6 CIEDE2000 units off and bluer, and [[cloudy-blue|Cloudy Blue]], 4.6 units off and darker; [[pastel-blue|Pastel Blue]] sits 5.8 units off, bluer and darker [2]. The library separately logs Beau Blue as a near-duplicate, just 1.0 unit away [1]. A treated \"sky\" blue [[gem:topaz|topaz]] sits 7.9 units off, and the color shows up again in the hand-painted skies of [[film:the-grand-budapest-hotel|The Grand Budapest Hotel]], 4.8 units away [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this pale blue in 121 of 23,781 paintings, about 0.51%, as photographed, more common than 56% of the named colors here [4]. The earliest match is a 1450 painting by Andrea del Castagno, 505 years before the ISCC-NBS charts fixed the name, which only shows an aged photograph can resemble this hue, not that anyone named it so early, a floor and not a first, since the archive's early centuries are thin [4]. It peaks in the 1900s, in 13 of 1,674 paintings, at 1.7 times the archive's overall rate, and inside a painting it most often plays a light, in 58% of its matches [4]. John Singer Sargent carries it in 4 of his 287 works here, 3.1 times the baseline [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a modifier of aqua: pale + aqua",
+   "first_recorded": "1955 (ISCC-NBS charts)",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "Beau Blue"
+  ],
+  "siblings": [
+   "aqua",
+   "columbia-blue",
+   "cloudy-blue",
+   "pastel-blue"
+  ],
+  "parent": "aqua",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+  "n_present": 121,
+  "pct": 0.51,
+  "measured": {
+   "lch": [
+    83.5,
+    11.7,
+    253.5
+   ],
+   "nearest": [
+    [
+     "Columbia Blue",
+     3.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-p.json): ISCC-NBS 1955, Wikipedia (citing Plochere), xkcd 2010",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph look-alikes (data/graph/edges-p.json), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph twins, gems and film cross-references (data/graph/edges-p.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which chart first fixes the name Pale Aqua in our sources?",
+   "choices": [
+    "ISCC-NBS, 1955",
+    "Ridgway, 1912",
+    "Maerz & Paul, 1930",
+    "CSS/X11"
+   ],
+   "answer": "ISCC-NBS, 1955",
+   "kind": "pick"
+  },
+  {
+   "q": "Inside a painting, what role does Pale Aqua most often play?",
+   "choices": [
+    "Light",
+    "Shadow",
+    "Accent",
+    "Mid-tone"
+   ],
+   "answer": "Light",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Pale Aqua shows up in a 1450 painting, 500 years before the 1955 charts that first fixed its name."
+ ],
+ "words": 306,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance hits; written from ColorHub library/graph/archive data only. Left out the gendered pink/blue fashion twin to stay clear of the color-myth list.",
+   "lint 2026-10-09"
+  ]
+ }
+}

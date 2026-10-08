@@ -1,0 +1,140 @@
+{
+ "slug": "maroon-x11",
+ "name": "Maroon (X11)",
+ "hex": "#B03060",
+ "names": [
+  "Maroon (X11)"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Maroon (X11) is a bright, purplish-red variant of the more familiar [[maroon|Maroon]], defined by the X11 window-system color list rather than by any dye or pigment history.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two colors sharing one name",
+   "body": "Our library and Wikipedia trace this value to X11's rgb.txt, the color list shipped with the X Window System, where it sits as a separate entry from the web-standard Maroon used in CSS [1]. The two are not close: the CSS Maroon is a dark brownish red, while the X11 variant is a strong purplish red, roughly thirty units apart in hue, which the ISCC-NBS system would classify under entirely different color blocks [1][2]. Neither name is documented beyond the lists themselves, so which one is the \"real\" Maroon is a matter of which specification a given program follows, not a settled history [1].\n\nIn Japan, the same hue value is recorded under a traditional name, Bōtan (牡丹), meaning tree peony, an unrelated naming tradition that happens to land close to the same color [3]. This X11 red's library neighbor is [[raspberry|Raspberry]], about 6 units off, with [[carmine-red|Carmine Red]] and [[mayflower|Mayflower]] on the same purplish-red stretch of the chart [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Maroon (X11) covers at least five per cent of the canvas in only 2 works, both from India around 1900, as photographed [4]. That scarcity, over thirty times rarer than Maroon (X11)'s expected rate for Indian paintings generally, suggests this particular bright purplish red is closer to a modern specification than to any historical pigment family [4]. It functions purely as a shadow color in both cases [4]. These remain photographs of aged, varnished canvases read as screen colors, not pigment tests [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented beyond the X11 rgb.txt list",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library (X11 rgb.txt; Wikipedia)"
+  },
+  "aka": [
+   "Bōtan"
+  ],
+  "siblings": [
+   "maroon",
+   "raspberry",
+   "carmine-red",
+   "mayflower"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "maroon",
+    "gloss": "the darker, brownish-red Maroon used by CSS and most dictionaries"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Bōtan (牡丹)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#B03060",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 2,
+  "countries": [
+   {
+    "key": "India",
+    "lift": 32.98
+   }
+  ],
+  "role": "shadow 100%",
+  "measured": {
+   "lch": [
+    42,
+    55,
+    3
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "Wikipedia, \"X11 color names\" (Maroon)",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/X11_color_names"
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: ISCC-NBS block, nearest-match field (data/graph/nodes-m.json; data/library.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library, Japanese cross-reference field (data/library.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why do CSS Maroon and X11's Maroon look so different?",
+   "choices": [
+    "The two color specifications define separate, unrelated values under the same name",
+    "The X11 value is simply a typo",
+    "CSS later darkened the original X11 value",
+    "Screens render the two identically"
+   ],
+   "answer": "The two color specifications define separate, unrelated values under the same name",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: a dye or pigment history documents where Maroon (X11) got its name.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "CSS Maroon and X11's Maroon are two unrelated colors sharing one name."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 276
+}

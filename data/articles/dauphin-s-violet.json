@@ -1,0 +1,125 @@
+{
+ "slug": "dauphin-s-violet",
+ "name": "Dauphin's Violet",
+ "hex": "#725C92",
+ "names": [
+  "Dauphin's Violet"
+ ],
+ "tier": "person",
+ "depth": "short",
+ "lede": "Dauphin's Violet is a medium, blue-leaning violet from Robert Ridgway's 1912 color dictionary, named for the old French title for the heir to the throne, with no king or prince identified.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A title, in Ridgway's person group",
+   "body": "Ridgway's 1912 “Color Standards and Color Nomenclature” lists Dauphin's Violet at hex #725C92 among the names he credits to a person [1]. The Dauphin was the title of the heir to the French throne, used from the fourteenth century until the French monarchy ended, but Ridgway names no particular dauphin, so the exact link is undocumented in our sources [1]. The 1955 Inter-Society Color Council catalog repeats the name in the block it calls moderate purple [1].\n\nIts nearest neighbor in our color graph is [[litho-purple|Litho Purple]], only 2.8 units away and almost the same [1]. [[blanc-s-violet|Blanc's Violet]], another Ridgway name from the same person-named group, is close behind at 3.2 units, with [[foxglove|Foxglove]] a touch further out and more vivid [1]. Against the basic color words it reads closest to [[purple|Purple]], 10.1 units off [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive matches this violet in only 0.01% of 23,781 paintings, 3 of them, as photographed; the within-painting lens finds it in just 1 [2]. That makes it rarer than 86% of the named colors in our set, too thin a sample for a reliable century, painter or country figure [2]. The handful of matches we do have run from 1900 to 1908, and every figure here is a computed color match in an aged photograph, not proof of a pigment or dye [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the French royal title",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955"
+  },
+  "aka": [],
+  "siblings": [
+   "litho-purple",
+   "blanc-s-violet",
+   "deep-soft-bluish-violet",
+   "foxglove"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 3,
+  "measured": {
+   "lch": [
+    43.2,
+    33.5,
+    307.8
+   ],
+   "nearest": [
+    [
+     "Litho Purple",
+     2.8
+    ],
+    [
+     "Blanc's Violet",
+     3.2
+    ],
+    [
+     "Deep Soft Bluish Violet",
+     3.3
+    ],
+    [
+     "Foxglove",
+     4.0
+    ]
+   ]
+  },
+  "iscc_nbs": {
+   "name": "moderate purple",
+   "de": 5.5
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912 (plate XXIII), ISCC-NBS 1955 (block 211)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does \"Dauphin\" refer to in Dauphin's Violet?",
+   "choices": [
+    "The old French title for the heir to the throne",
+    "A pigment maker's surname",
+    "A town in France",
+    "A painter's nickname"
+   ],
+   "answer": "The old French title for the heir to the throne",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dauphin's Violet is common in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dauphin's Violet turns up in only 3 of our 23,781 archive paintings."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "Very thin archive sample (n=3); no century, painter or country facts reported.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 247
+}

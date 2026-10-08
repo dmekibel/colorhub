@@ -1,0 +1,111 @@
+{
+ "slug": "laelia-pink",
+ "name": "Laelia Pink",
+ "hex": "#D09AAA",
+ "names": [
+  "Laelia Pink"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Laelia Pink is a moderate, purplish pink named for the orchid genus Laelia, rare in our painting archive and usually hidden there.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "An orchid's name",
+   "body": "The library records Laelia Pink from the 1912 Ridgway atlas, plate XXXVIII, hue 67, tone d; the ISCC-NBS system placed it in block 251 in 1955, and Maerz and Paul's 1930 dictionary carries it too, first recorded 1905, at plate 43 G 2 [1]. The name pairs the orchid genus Laelia with [[pink]]; Laelia itself is not a color name in our library, so it is named here but not linked [1]. In LCH terms it measures lightness 69, chroma 23, hue 359 degrees, the ISCC-NBS \"moderate purplish pink\" block, Munsell 5.7RP 6.8/5.6, than to plain pink [1]. The nearest named color in the library is [[puce|Puce]], about 5.2 units away by CIEDE2000, a visible difference [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in just 18 of 23,781 paintings, 0.08 percent, as photographed; the within-painting lens finds it in 10 [2]. That makes it rarer than 68 percent of the named colors we track [2]. Inside a painting it most often sits as a hidden color, in 40 percent of its appearances, by lightness rank rather than by eye [2].\n\nThe earliest match is dated 1531, by Lucas van Leyden; that is 381 years before the name's own first record, in 1912, so the match is a look-alike hue in an aged photograph, not evidence of the actual paint, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "pairs the orchid genus Laelia with pink",
+   "first_recorded": "1905 (Maerz & Paul); plate published 1912 (Ridgway)",
+   "source": "Ridgway 1912; ISCC-NBS 1955; Maerz & Paul 1930"
+  },
+  "aka": [],
+  "siblings": [
+   "pink",
+   "puce",
+   "purple",
+   "faded-pink"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 18,
+  "measured": {
+   "lch": [
+    69,
+    23,
+    359
+   ],
+   "nearest": [
+    [
+     "Puce",
+     5.2
+    ]
+   ]
+  },
+  "role": {
+   "hidden": 40
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912 plate XXXVIII (hue 67, tone d); ISCC-NBS 1955 block 251; Maerz & Paul 1930, first recorded 1905, plate 43 G 2; nearest library match Puce, ΔE 5.2",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What plant gives Laelia Pink its name?",
+   "choices": [
+    "An orchid genus",
+    "A rose variety",
+    "A type of grass",
+    "A fruit tree"
+   ],
+   "answer": "An orchid genus",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Laelia Pink is one of the more common named colors in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "When Laelia Pink shows up in a painting, it is usually hidden rather than on display."
+ ],
+ "words": 253,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

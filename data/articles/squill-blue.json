@@ -1,0 +1,140 @@
+{
+ "slug": "squill-blue",
+ "name": "Squill Blue",
+ "hex": "#72AFD7",
+ "names": [
+  "Squill Blue"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Squill Blue is a light, airy blue named for the squill flower and first fixed by Robert Ridgway's 1912 systematic color atlas.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Ridgway's plate XX, by way of a flower",
+   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* places this hue on plate XX, hue 45 prime, tone b, and the ISCC-NBS circular of 1955 cites the same block, classing it a light blue [1]. Maerz and Paul's 1930 dictionary records the same name, also dated to 1912, confirming Ridgway as the earliest source among the systems our library tracks [1]. The books read do not explain the name beyond the plant it is presumably drawn from, the blue-flowered squill, and that link is undocumented here as a stated fact rather than an inference [1].\n\nThe nearest named colors on file are [[iceberg]], [[aero]] and [[blue-jeans]], at 3.3, 3.4 and 4.2 ΔE [1]. It also sits near [[cornflower]] in our library, a slightly more saturated relative [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Squill Blue covers at least one per cent of the canvas in 48 paintings, about 0.2 per cent overall, rarer than 59 per cent of the named colors we track; the within-painting lens finds it in 25 [2]. It peaks in the 1900s, in 5 of 1,674 paintings, present in 0.3 per cent of the 1,674 paintings (5 of them) we hold from that century, 2.2 times the archive's overall rate [2]. Inside a painting it most often sits as a mid-tone, in 36 per cent of its 25 appearances [2].\n\nIt is over-represented in France, 11 of 3,443 paintings, 2.5 times expected [2]. The earliest dated painting to carry it is from 1482, by Piero di Cosimo, 430 years before Ridgway's own 1912 record, a floor and not a first, since the archive's early centuries are thin [2]. In printed English the phrase *squill blue* peaks in the 1930s and rose fastest in the 1920s, by Google Books' count of every sense of the words [3]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the squill flower (link stated by inference, not documented as fact in the sources read)",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "data/library.json; data/graph/nodes-s.json"
+  },
+  "aka": [],
+  "siblings": [
+   "iceberg",
+   "aero",
+   "blue-jeans",
+   "air-superiority-blue"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 48,
+  "measured": {
+   "lch": [
+    68.9,
+    27.8,
+    251.2
+   ],
+   "nearest": [
+    [
+     "Iceberg",
+     3.3
+    ],
+    [
+     "Aero",
+     3.4
+    ],
+    [
+     "Blue Jeans",
+     4.2
+    ],
+    [
+     "Air Superiority Blue",
+     4.8
+    ]
+   ]
+  },
+  "countries": [
+   {
+    "name": "France",
+    "hits": 11,
+    "n": 3443,
+    "lift": 2.5
+   }
+  ],
+  "first_seen": {
+   "year": 1482,
+   "painting": "rijks-200107876",
+   "painter": "Piero di Cosimo"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-s.json, data/library.json): Ridgway 1912 plate XX hue 45′ tone b (scan of an aged plate, approximate); ISCC-NBS Circular 553 (1955) block 181 (M); Maerz & Paul 1930; CIEDE2000 nearest-name match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (data/graph/fieldnotes/s.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "Google Books Ngram, \"squill blue\", case-insensitive, 5-year smoothing",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1912 publication first fixes Squill Blue?",
+   "choices": [
+    "Ridgway's atlas",
+    "Maerz and Paul's dictionary",
+    "the ISCC-NBS circular",
+    "RAL"
+   ],
+   "answer": "Ridgway's atlas",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the sources read confirm Squill Blue is named directly for the squill flower.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Squill Blue appears in French paintings at roughly two and a half times the rate you'd expect by chance."
+ ],
+ "words": 342,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

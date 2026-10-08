@@ -1,0 +1,133 @@
+{
+ "slug": "oil-yellow",
+ "name": "Oil Yellow",
+ "hex": "#CCD366",
+ "names": [
+  "Oil Yellow"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Oil Yellow is a light, greenish yellow from Maerz and Paul's 1930 color dictionary, first recorded on their chip in 1843, decades before the dictionary itself was published.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A chip dated to 1843",
+   "body": "Maerz and Paul's *A Dictionary of Color* (1930) places this color at plate 12, chip L1, and dates the chip's first record to 1843, nearly ninety years before the book appeared [1]. The ISCC-NBS system did not coin a separate name; it only classifies the chip as a light greenish yellow [1]. Our library notes a later synonym on a nearby chip, Liqueur Green, first recorded in 1927 [2].\n\nIn our color graph its closest named relatives are [[lumiere-green]], duller, and [[siskin-green]], also duller, with [[citronelle]] and [[june-bud]], both more vivid, close behind [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, as photographed, a color within six units of Oil Yellow covers at least five per cent of a canvas in only 17 works, rarer than 64 per cent of our named colors [4]. It peaks in the 1800s, in 9 of 8,345 paintings, found in 0.1 per cent of our paintings from that century, 1.6 times the archive's overall rate [4]. The earliest dated appearance in our archive is 1642, about two centuries before the 1930 dictionary recorded it, a look-alike hue, not proof of pigment, a floor and not a first, since the archive's early centuries are thin [4]. These remain photographs of aged, varnished paintings, read as screen colors [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented beyond the dictionary chip",
+   "first_recorded": "Maerz and Paul, A Dictionary of Color (1930), plate 12, chip L1, dated by the dictionary to 1843",
+   "source": "ColorHub color library (Maerz and Paul 1930; ISCC-NBS 1955)"
+  },
+  "aka": [
+   "Liqueur Green"
+  ],
+  "siblings": [
+   "lumiere-green",
+   "siskin-green",
+   "citronelle",
+   "june-bud"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#CCD366",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 17,
+  "measured": {
+   "lch": [
+    82.0,
+    55.3,
+    108.3
+   ],
+   "nearest": [
+    [
+     "Lumiere Green",
+     3.6
+    ],
+    [
+     "Siskin Green",
+     4.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-o.json): Maerz & Paul 1930, plate 12 L1, first recorded 1843; ISCC-NBS 1955 classification cites the same chip",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): alternate dictionary name Liqueur Green, first recorded 1927, plate 18 K2",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-o.json), CIEDE2000 look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "To what year does Maerz and Paul's dictionary date this color chip's first record?",
+   "choices": [
+    "1843",
+    "1930",
+    "1912",
+    "1700"
+   ],
+   "answer": "1843",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Oil Yellow is one of the more common colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Oil Yellow's own dictionary dates its chip to 1843, nearly ninety years before the dictionary that recorded it."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 239
+}

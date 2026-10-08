@@ -1,0 +1,136 @@
+{
+ "slug": "shell-pink",
+ "name": "Shell pink",
+ "hex": "#DCC5B8",
+ "names": [
+  "Shell pink"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Shell pink is a pale yellowish pink that Werner's 1821 color guide compared to a peach blossom, and it shares its exact hex with another library name, Pale Greyish Vinaceous.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Peach blossom and red cobalt ore",
+   "body": "Werner's 1821 *Nomenclature of Colours* compares this shade to the vegetable *Peach Blossom* and the mineral *Red Cobalt Ore* [1]. Ridgway's 1912 plates give it at hue 11′′, tone f, on plate XXVIII, and the Inter-Society Color Council's 1955 census files it, in block 26, as a pale yellowish pink, Munsell 3.8YR 8.1/2.2 [1]. Maerz and Paul trace the name itself to 1865 [1].\n\nThe nearest named colors on file are [[iris-mauve]] and [[sandust]], at Its catalogued near-duplicate, *Peach Blossom Red*, comes from Werner directly, within about 1.2 units [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds Shell pink in 697 of 23,781 paintings, about 2.9 percent, almost always as a highlight [2]. It peaks in the 1910s, twice its average rate, and concentrates in Xugu's hand, 8 of his 16 dated works, and Niels Skovgaard's, 4 of 14 [2]. Nepalese and Indian paintings carry it far above the archive's base rate [2]. It shares canvases with [[peach]], [[baby-pink]], and [[ecru]] far more than chance alone predicts [2]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the seashell",
+   "first_recorded": "1865, per Maerz & Paul (1930)",
+   "source": "Werner (1821) / Ridgway (1912) via ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "iris-mauve",
+   "sandust",
+   "pale-congo-pink",
+   "tussore"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "seashell-pink",
+    "gloss": "a warmer, more orange pink in the same batch"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 697,
+  "measured": {
+   "lch": [
+    81,
+    11,
+    58
+   ],
+   "nearest": [
+    [
+     "Iris Mauve",
+     2.6
+    ],
+    [
+     "Sandust",
+     3.5
+    ],
+    [
+     "Pale Congo Pink",
+     3.7
+    ],
+    [
+     "Tussore",
+     4.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Werner 1821, Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930 entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1821 book compares this color to the vegetable Peach Blossom?",
+   "choices": [
+    "Werner's Nomenclature of Colours",
+    "Ridgway's Color Standards",
+    "Maerz and Paul's Dictionary",
+    "Paterson's Dictionary"
+   ],
+   "answer": "Werner's Nomenclature of Colours",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Shell pink shares its exact hex with another library name, Pale Greyish Vinaceous.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which painter's work carries Shell pink in half his dated paintings?",
+   "choices": [
+    "Xugu",
+    "Rembrandt",
+    "Caravaggio",
+    "Turner"
+   ],
+   "answer": "Xugu",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Werner's 1821 color guide compared this pink to a peach blossom and to the mineral red cobalt ore."
+ ],
+ "words": 209,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

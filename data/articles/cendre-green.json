@@ -1,0 +1,137 @@
+{
+ "slug": "cendre-green",
+ "name": "Cendre Green",
+ "hex": "#7DC18B",
+ "names": [
+  "Cendre Green"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Cendre Green is a light yellowish green from Ridgway's 1912 plates, and the exact same swatch our library also files, under a different name, as Mint Leaf.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "One swatch, two names",
+   "body": "Ridgway's 1912 nomenclature plates it at plate VI, hue 35, tone b, hex #7DC18B [1]. The ISCC-NBS committee's 1955 match places it in block 130 among the \"brilliant yellowish green\" names, 3.8 units away [1]. The library carries an identical hex, rgb and Munsell notation, 1.7G 7.2/6.3, under a second name, [[mint-leaf|Mint Leaf]], which the ISCC-NBS committee separately filed in block 132, a plant-derived name rather than a dictionary one [1]. Two names, two ISCC-NBS blocks, one exact color: the dictionaries did not always agree on which named swatch belonged to which category [1].\n\nIts other nearby library names are [[neuwieder-green|Neuwieder Green]] and [[arcadian-green|Arcadian Green]], both about three units away [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within six units of Cendre Green covers at least five per cent of the canvas in only 5 of 23,781 paintings, as photographed [2]. Its earliest and largest appearance is a 1795 *Portrait of Emperor Jahangir*, where it covers 51 per cent of the canvas [2]. It also turns up twice in Vincent van Gogh's paintings, *Roulin's Baby* (1888) and a still life of oranges and lemons (1889) [2]. These are photographs of varnished paintings, read as screen colors; five matches is too few to draw a pattern from [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "Ridgway, 1912, plate VI",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "neuwieder-green",
+   "arcadian-green",
+   "dark-sea-green",
+   "imperial-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "mint-leaf",
+    "gloss": "Mint Leaf is the exact same hex, filed under a different ISCC-NBS block (132, a plant-derived name) instead of Cendre Green's block 130"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#7DC18B",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 5,
+  "painters": [],
+  "measured": {
+   "rgb": [
+    125,
+    193,
+    139
+   ],
+   "lch": [
+    72.5,
+    38.7,
+    148.0
+   ],
+   "nearest": [
+    [
+     "Neuwieder Green",
+     3.1
+    ],
+    [
+     "Arcadian Green",
+     3.5
+    ],
+    [
+     "Dark Sea Green",
+     4.0
+    ],
+    [
+     "Imperial Green",
+     4.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912 (plate VI), ISCC-NBS 1955 (blocks 130 and 132) entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match within ΔE 6, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What other name in our library shares the exact same hex as Cendre Green?",
+   "choices": [
+    "Mint Leaf",
+    "Imperial Green",
+    "Arcadian Green",
+    "Neuwieder Green"
+   ],
+   "answer": "Mint Leaf",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Cendre Green and Mint Leaf were filed in the same ISCC-NBS 1955 block.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Cendre Green and Mint Leaf are, pixel for pixel, the exact same color under two different names."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "nearest-neighbor distance (and, for cattleya, the named color) did not match data/graph/edges-*.json 'la' / a direct CIEDE2000 recomputation; corrected.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 227
+}

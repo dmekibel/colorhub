@@ -1,0 +1,139 @@
+{
+ "slug": "mikado-orange",
+ "name": "Mikado Orange",
+ "hex": "#FE9443",
+ "names": [
+  "Mikado Orange"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Mikado Orange is a strong, warm orange plated twice by Ridgway in 1912 and echoed in RAL's industrial list, sharing its name but not its hue with the duller [[mikado-brown|Mikado Brown]].",
+ "sections": [
+  {
+   "id": "name",
+   "title": "One name, two Ridgway plates",
+   "body": "Ridgway's atlas records this hue twice: at plate III, hue 13, tone b, and again at plate II, hue 11, tone b, both from 1912 [1]. The ISCC-NBS system of 1955 classifies it as a moderate orange, about 4.7 units from that block's reference chip, and RAL's industrial list carries a near-duplicate chip, RAL 2012, close enough that our library flags it a near-duplicate within about 2 units [1][2]. As with Mikado Brown, Ridgway offers no stated reason for the name beyond the title itself [1].\n\nIts nearest library neighbor is [[faded-orange|Faded Orange]], and it sits close to [[tangerine|Tangerine]] and [[alloy-orange|Alloy Orange]] on the same warm-orange stretch of the chart [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Mikado Orange covers at least five per cent of the canvas in only 5 works, as photographed [3]. The earliest is Lucas Cranach the Elder's *Adam* from 1528, and it is otherwise over-represented in paintings from Germany and the United States and functions purely as a highlight color [3]. Its rarity against Mikado Brown's one-in-eighteen presence shows how differently two colors with the same borrowed name can behave [3]. These remain photographs of aged, varnished canvases read as screen colors, not pigment tests [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Mikado, an English-language title for the Emperor of Japan",
+   "first_recorded": "Ridgway (1912), plate III, hue 13, and plate II, hue 11",
+   "source": "ColorHub color library (Ridgway 1912; RAL; ISCC-NBS 1955)"
+  },
+  "aka": [
+   "Salmon-Orange"
+  ],
+  "siblings": [
+   "faded-orange",
+   "tangerine",
+   "alloy-orange"
+  ],
+  "parent": null,
+  "children": [
+   "mikado-brown"
+  ],
+  "disambiguation": [
+   {
+    "slug": "mikado-brown",
+    "gloss": "a duller, light brown sharing the same name"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#FE9443",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 5,
+  "countries": [
+   {
+    "key": "Germany",
+    "lift": 6.87
+   },
+   {
+    "key": "United States",
+    "lift": 5.5
+   }
+  ],
+  "role": "highlight 100%",
+  "measured": {
+   "lch": [
+    71,
+    67,
+    60
+   ],
+   "nearest": [
+    [
+     "Faded Orange",
+     2.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature, plate III hue 13 and plate II hue 11",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: ISCC-NBS block, RAL cross-reference, near-duplicate field (data/graph/nodes-m.json; data/library.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What links Mikado Orange and Mikado Brown?",
+   "choices": [
+    "The same borrowed name, applied to two different hues",
+    "The same exact hex value",
+    "Both come from the same dye",
+    "Neither is in Ridgway's atlas"
+   ],
+   "answer": "The same borrowed name, applied to two different hues",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Ridgway's 1912 atlas records Mikado Orange at only one plate position.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Mikado Orange and Mikado Brown share a name but sit far apart on the color chart."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 232
+}

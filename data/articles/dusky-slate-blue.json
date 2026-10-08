@@ -1,0 +1,112 @@
+{
+ "slug": "dusky-slate-blue",
+ "name": "Dusky Slate-Blue",
+ "hex": "#334953",
+ "names": [
+  "Dusky Slate-Blue"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Dusky Slate-Blue is a dark, muted blue-grey that our library finds almost identical to plain Charcoal.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A slate word, close to charcoal",
+   "body": "Ridgway's 1912 nomenclature gives the swatch as plate XLIII, hue 49′′′, tone m, and the ISCC-NBS system of 1955 reads it as a dark grayish blue, about 4 units from the block center [1]. Our library names [[charcoal]] as this color's nearest match, under 3 units away, which is closer than it is to most blues [1][2].\n\nFurther out are [[dark-payne-s-grey]] and [[dark-delft-blue]], both under 5 units away, placing this swatch in a tight cluster of near-black blue-greys [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This color, as photographed, appears in 425 of 23,781 paintings, about 1.79 percent, more common than 69 percent of the named colors we track [3]. It peaks in the 1900s, in 34 of 1,674 paintings, at 2.0 percent of that period's paintings, 2.4 times the overall rate [3]. Inside a painting it most often plays a hidden color [3]. Its most devoted painter is Gustav Klimt, carrying it in 4 of 50 works here, 4.7 times the baseline for his museums [3]. The earliest match in the archive is a 1260 painting, 652 years before the name's 1912 record, so this is a look-alike hue in an aged photograph, not a pigment identification, a floor and not a first, since the archive's early centuries are thin [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "slate, in a dusky blue reading",
+   "first_recorded": "1912, Ridgway plate XLIII",
+   "source": "data/library.json"
+  },
+  "aka": [],
+  "siblings": [
+   "charcoal",
+   "dark-payne-s-grey",
+   "dark-delft-blue",
+   "blue-violet-black"
+  ],
+  "parent": "slate",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 425,
+  "pct": 1.79,
+  "peak": "1900s, 2.0% of this period's paintings, 2.4x expected",
+  "painter": [
+   "Gustav Klimt",
+   4,
+   50
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930 and other name sources; CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub Color Graph look-alikes (data/graph), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5 per cent of canvas); data/graph/fieldnotes",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which plain named color is our library's closest match to Dusky Slate-Blue?",
+   "choices": [
+    "Charcoal",
+    "Navy",
+    "Denim",
+    "Indigo"
+   ],
+   "answer": "Charcoal",
+   "kind": "pick"
+  },
+  {
+   "q": "In which decade does this color peak in the archive?",
+   "choices": [
+    "1900s",
+    "1470s",
+    "1700s",
+    "2000s"
+   ],
+   "answer": "1900s",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Dusky Slate-Blue is, in our library, almost the same color as plain Charcoal."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Fixed: the field-notes paragraph (and the matching \"field\" object) invented painter names (\"Guercino and George Bellows\") that do not appear anywhere in this slug's painter data (the real most-devoted painter is Gustav Klimt, 4 of 50 works, 4.7x) and an earliest-match painter (\"Master of the Franciscan Crucifixes\") not supported by the data (fs.fa is null). The presence count (318) and peak-decade stat (1470s/5.8%/4.3x, also baked into the \"field\" object) didn't match any real field either (real: 425 as-photographed; peak is the 1900s century fact, 2.0%/2.4x). Rewrote the paragraph directly from data/graph/fieldnotes for this slug; removed every unsupported claim rather than inventing a replacement for it.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 225
+}

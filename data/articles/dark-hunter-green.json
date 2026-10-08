@@ -1,0 +1,107 @@
+{
+ "slug": "dark-hunter-green",
+ "name": "Dark Hunter Green",
+ "hex": "#224634",
+ "names": [
+  "Dark hunter green"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Dark Hunter Green is a deep, blackish green, ColorHub's English name for Birōdo, a Japanese traditional color whose name means \"velvet.\"",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A velvet color",
+   "body": "The Japanese name, written びろうど and romanized Birōdo, is listed among Japan's traditional colors on Wikipedia, where it is glossed simply as \"velvet\" [1]. ColorHub translates it into English as Dark Hunter Green, filing it under the family of this near-black, [[hunter-green|hunter green]]-leaning shade, since \"velvet\" names a fabric rather than a hue a reader could picture directly [1]. The sources consulted do not say when the name was first recorded, or whether it described the color of a particular dyed velvet cloth [1].\n\nThe closest named neighbor on file is [[chasseur]] (French for \"hunter\"), almost indistinguishable from it, with [[shirvan]] and [[bakst-green]] a little greener [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color near this swatch in 77 of 23,781 paintings, about 0.32 per cent, as photographed [2]. It is rare before 1900, then rises sharply in the 1910s, and is markedly over-represented among Post-Impressionist painters in our sample, including Paul Cézanne and Paul Gauguin [2]. Switzerland and the United States also show it above their average rates in our sample [2]. These are computed color matches to photographed, varnished paintings, not pigment identifications [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Birōdo, meaning \"velvet\"",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "Wikipedia, Traditional colors of Japan"
+  },
+  "aka": [
+   "Birōdo"
+  ],
+  "siblings": [
+   "chasseur",
+   "shirvan",
+   "bakst-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Birōdo (びろうど)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 77,
+  "pct_archive": 0.32,
+  "peak_decade": 1910
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "Wikipedia, \"Traditional colors of Japan\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/Traditional_colors_of_Japan"
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph, nearest-neighbor color distances (data/graph/edges-d.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the Japanese name Birōdo mean?",
+   "choices": [
+    "Velvet",
+    "Forest",
+    "Midnight"
+   ],
+   "answer": "Velvet",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources explain exactly when the name Birōdo was first recorded.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A near-black green whose Japanese name simply means \"velvet.\""
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": []
+ },
+ "words": 200
+}

@@ -1,0 +1,127 @@
+{
+ "slug": "autumn-oak",
+ "name": "Autumn Oak",
+ "hex": "#744641",
+ "names": [
+  "Autumn Oak"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Autumn Oak is a dark reddish brown first dated by Maerz and Paul to 1927, close to Mahogany but a little warmer.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A 1927 landscape word",
+   "body": "ColorHub's library traces Autumn Oak to Maerz and Paul's 1930 dictionary, which puts its first record in 1927 and locates it on plate 7, swatch H9 [1]. The 1955 ISCC-NBS system, which cites the same dictionary, classes it as a grayish reddish brown [1]. It is built on a season and a tree, not a dye or pigment: our tagging calls it a landscape word rather than a material [1]. The nearest named colors on file are [[bole]] and [[tuscan-red]], at Both sit in and [[carbuncle]], two names that keep it company on canvas more often than chance [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to Autumn Oak in 440 of 23,781 paintings (1.85 percent), as photographed, with the stricter within-painting reading at 232 [2]. It is more common than 73 percent of our named colors [2]. It peaks in the 1400s, in 21 of 945 paintings, at twice the archive's overall rate for that century [2].\n\nInside a painting it most often plays an accent, by lightness rank, so varnish and glare cannot fake the finding [2]. The earliest dated match in the archive is from 1100, eight centuries before the name itself was recorded, which only shows a similar hue was photographed there, not that anyone called it Autumn Oak, or used a matching pigment, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "autumn and the oak tree",
+   "first_recorded": "Maerz and Paul, 1930 (plate 7, swatch H9; first recorded 1927)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "bole",
+   "tuscan-red",
+   "madder-brown",
+   "brownish-red"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 440,
+  "role": {
+   "accent": 0.37
+  },
+  "company": [
+   "Sandalwood",
+   "Carbuncle"
+  ],
+  "measured": {
+   "lch": [
+    35,
+    22,
+    31
+   ],
+   "nearest": [
+    [
+     "Bole",
+     2.6
+    ],
+    [
+     "Tuscan Red",
+     3.0
+    ],
+    [
+     "Madder Brown",
+     4.3
+    ],
+    [
+     "Brownish Red",
+     4.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: name records, plate and block locators, tier classification",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which dictionary first records the name Autumn Oak, and when?",
+   "choices": [
+    "Maerz and Paul, 1927",
+    "Ridgway, 1912",
+    "Werner, 1821",
+    "CSS, 1996"
+   ],
+   "answer": "Maerz and Paul, 1927",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Autumn Oak's archive matches from before 1927 prove the pigment existed that early.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Autumn Oak is a 1927 name for a dark reddish brown close to mahogany."
+ ],
+ "words": 247,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

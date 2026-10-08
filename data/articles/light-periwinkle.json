@@ -1,0 +1,149 @@
+{
+ "slug": "light-periwinkle",
+ "name": "Light Periwinkle",
+ "hex": "#C5CBE1",
+ "names": [
+  "Light Periwinkle"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Light Periwinkle is a pale greyish blue-violet that four separate systems have recorded since 1912, and one of our museum archive's more common named colors.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A light build of periwinkle",
+   "body": "The nearest named colors on file are [[lavender-grey]], [[pallid-blue-violet]], [[pale-neropalin-blue]] and [[pale-greyish-blue]], at 4.5, 4.7, 4.8 and 5.6 ΔE [1]. It is the oldest-recorded : Ridgway's 1912 color plates give it on plate XXIV, at hue 55 degrees, tone f, though that plate is a scan of an aged original and only approximate [1]. The ISCC-NBS system of 1955 lists it as block 198, Wikipedia and the xkcd survey of 2010 also carry the name, and xkcd's own version of the hex runs slightly bluer, #C1C6FC [1]. \n\nFive ISCC-NBS near-duplicates cluster close to this swatch: Pale Campanula Blue, Periwinkle (Crayola), Fidelity, Fountain Blue and Pale Periwinkle Blue, the closest only 0.7 units away [2]. See [[periwinkle]] for the plant and the deeper blue it is usually named for."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Within CIEDE2000 4, Light Periwinkle appears in 122 of our 23,781 archive paintings (0.51%), making it more common than 56% of our named colors, as photographed [3]. It peaks in the 1900s, present in 14 of 1,674 paintings from that century, about 1.8 times the archive's overall rate [3]. Within a painting it most often sits in the lights, in 53% of the 83 paintings where our within-painting lens finds it [3]. John Singer Sargent carries it in 4 of his 287 archive paintings, the most of any single painter, though not enough to stand out against the museum baseline [3]. The earliest match is a 1414 panel by Lorenzo Monaco, nearly five centuries before the name's earliest record in our sources (1912); that gap marks a look-alike hue in an aged photograph, not proof that anyone called it Light Periwinkle at the time, a floor and not a first, since the archive's early centuries are thin [3]. In print, the word rose fastest in the 2000s, across all its senses, including the plant and the place as well as the color [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the base color periwinkle, lightened",
+   "first_recorded": "Ridgway, 1912, plate XXIV",
+   "source": "ColorHub Color Graph"
+  },
+  "aka": [
+   "Pale Campanula Blue",
+   "Periwinkle (Crayola)",
+   "Fidelity",
+   "Fountain Blue"
+  ],
+  "siblings": [
+   "lavender-grey",
+   "pallid-blue-violet",
+   "pale-neropalin-blue",
+   "pale-greyish-blue"
+  ],
+  "parent": "periwinkle",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 122,
+  "rate": 0.0051,
+  "rank_pct": 56,
+  "role": {
+   "light": 0.53
+  },
+  "painters": [
+   [
+    "John Singer Sargent",
+    4,
+    287
+   ]
+  ],
+  "first": {
+   "id": "commons-Q3797775",
+   "year": 1414,
+   "painter": "Lorenzo Monaco"
+  },
+  "match": {
+   "hex": "#C5CBE1",
+   "de_max": 4
+  },
+  "measured": {
+   "nearest": [
+    [
+     "Lavender Grey",
+     4.5
+    ],
+    [
+     "Pallid Blue-Violet",
+     4.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub Color Graph: node record (hex, LCH, Munsell, ISCC-NBS block, recorded sources)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): nearest named match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (data/graph/fieldnotes), 23,781 paintings, CIEDE2000 <= 4, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1912 source first gives a plate for Light Periwinkle in our data?",
+   "choices": [
+    "Ridgway's color plates",
+    "Maerz and Paul's dictionary",
+    "The xkcd survey"
+   ],
+   "answer": "Ridgway's color plates",
+   "kind": "pick"
+  },
+  {
+   "q": "Inside a painting, where does Light Periwinkle most often sit?",
+   "choices": [
+    "In the lights",
+    "In the shadows",
+    "As the main accent"
+   ],
+   "answer": "In the lights",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the earliest archive match for Light Periwinkle predates the name's earliest recorded use.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Light Periwinkle's earliest archive match is a 1414 panel, about five centuries before the name itself is first recorded."
+ ],
+ "words": 341,
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

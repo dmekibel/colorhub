@@ -1,0 +1,134 @@
+{
+ "slug": "falu-red",
+ "name": "Falu Red",
+ "hex": "#801818",
+ "names": [
+  "Falu Red"
+ ],
+ "tier": "place",
+ "depth": "short",
+ "lede": "Falu Red takes its name from the Falun copper mine in Sweden, whose iron-rich waste became the pigment behind the deep red barns of Scandinavia, and it is one of the most common reds in our entire archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A mine, not a flower",
+   "body": "Our library overrides the usual naming rule for this one: Falu Red is named directly for the Falun copper mine in Sweden, the source of the iron-oxide pigment, rather than for any plant, place-as-landscape or dye trade route [1]. The ISCC-NBS system of 1955 classifies it as a deep red [2]. Two American university colors sit close enough in our data to be flagged as near-duplicates of Falu Red, within 1.4 and 0.9 CIEDE2000 units, a reminder that the same iron-oxide red keeps getting rediscovered under new names [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Falu Red appears in 2.86 percent of the 23,781 paintings in our archive, 679 of them as photographed, more common than 84 percent of the named colors we track [3]. It peaks in the 1400s, in 82 of 945 paintings, found in 8.7 percent of the 945 paintings (82 of them) we have from that century, 3.4 times the baseline, and inside a painting it most often plays an accent, in 80 percent of its 546 clearest appearances [3].\n\n[[painter:sandro-botticelli|Botticelli]] is its most devoted painter, using it in 9 of 48 works here, 4.3 times his own museums' baseline [3]. It is also over-represented in paintings from Belgium, 2.2 times expected, and shares canvases with Black Bean and Medium Carmine more than chance, with lifts of 6.7 and 4.9 [3]. The earliest match is dated 1150, long before the Falun mine's dye reached Scandinavian barns, so the match is a look-alike hue, not proof of the Swedish pigment itself, a floor and not a first, since the archive's early centuries are thin [3]. It belongs to the [[red]] family, deep and brick-toned rather than a bright [[scarlet]] [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the Falun copper mine, Sweden, source of the iron-oxide pigment",
+   "first_recorded": "undocumented in the books consulted",
+   "source": "ColorHub color graph"
+  },
+  "aka": [],
+  "siblings": [
+   "oxheart",
+   "persian-plum",
+   "carmine",
+   "maroon"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 679,
+  "painters": [
+   "sandro-botticelli",
+   "jan-brueghel-the-elder",
+   "albrecht-durer"
+  ],
+  "role": "accent",
+  "measured": {
+   "lch": [
+    28,
+    52,
+    33
+   ],
+   "iscc": "deep red",
+   "nearest": [
+    [
+     "Oxheart",
+     3.0
+    ],
+    [
+     "Persian Plum",
+     3.8
+    ],
+    [
+     "Carmine",
+     4.3
+    ],
+    [
+     "Maroon",
+     4.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph: manual override, named for the Falun copper mine, Sweden; near-duplicate university colors on file",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS 1955 block 13 entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is Falu Red named for?",
+   "choices": [
+    "A flower",
+    "The Falun copper mine in Sweden",
+    "A French dye house",
+    "A painter's palette"
+   ],
+   "answer": "The Falun copper mine in Sweden",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: inside a painting, Falu Red most often plays a hidden, buried color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Falu Red, the color behind Scandinavia's red barns, traces to a Swedish copper mine, not a dye plant."
+ ],
+ "words": 316,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

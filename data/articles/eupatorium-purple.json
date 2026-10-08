@@ -1,0 +1,140 @@
+{
+ "slug": "eupatorium-purple",
+ "name": "Eupatorium Purple",
+ "hex": "#A87797",
+ "names": [
+  "Eupatorium Purple"
+ ],
+ "tier": "traditional",
+ "depth": "brief",
+ "lede": "Eupatorium Purple is a soft, greyed purple-pink carried into our library from a Japanese traditional color name, and it sits only 2.6 color-distance units from the common [[mauve]].",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Usu-iro, a \"thin color\"",
+   "body": "Our library lists this color under the Japanese name Usu-iro, written 薄色, which it glosses as \"thin color\" [1]. The Wikipedia survey \"Traditional colors of Japan\" is the only record we have for the name, and no book consulted for this project independently confirms when it entered use, so its coinage beyond that gloss is undocumented here [1].\n\nOur graph data also ties this swatch to three published systems: Ridgway's *Color Standards and Color Nomenclature* (1912), plate XXXVIII, hue 67′′; the ISCC-NBS block 241 of 1955, whose centroid name is \"moderate reddish purple,\" 4.8 units away; and Maerz and Paul's *A Dictionary of Color* (1930), plate 43 J4, which gives 1912 as the first recorded date [2]. In Munsell notation it falls at 1.2RP 5.5/6.1 [2]. The nearest color already named in our library is [[mauve]], only 2.6 units off, close enough that most eyes would call them the same [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within range of this swatch appears in 4 of the 23,781 paintings in our archive, about 0.02 percent, as photographed; the stricter within-painting test finds it in 1 [3]. That makes it rarer than 86 percent of the named colors we track [3]. The earliest dated appearance is 1892, in a painting by Paul Gauguin; the one other dated painting we have is from 1896 [3]. The archive's early centuries are thin, so this is a floor on the color's history, not a first sighting [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "\"thin color,\" from 薄 (thin, pale) and 色 (color)",
+   "first_recorded": "1912, per Ridgway's plate XXXVIII (our graph data)",
+   "source": "ColorHub color library/graph (Wikipedia \"Traditional colors of Japan\"; Ridgway 1912; ISCC-NBS 1955; Maerz & Paul 1930)"
+  },
+  "aka": [
+   "Usu-iro",
+   "薄色"
+  ],
+  "siblings": [
+   "faded-purple",
+   "opera-mauve",
+   "bishop-s-purple"
+  ],
+  "parent": "mauve",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Usu-iro (薄色), \"thin color\""
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 4,
+  "rank_pct": 86,
+  "first_seen": {
+   "year": 1892,
+   "painter": "Paul Gauguin"
+  },
+  "measured": {
+   "lch": [
+    56,
+    26,
+    338
+   ],
+   "munsell": "1.2RP 5.5/6.1",
+   "nearest": [
+    [
+     "Mauve",
+     2.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional color names (Wikipedia, \"Traditional colors of Japan\")",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: Ridgway, Color Standards and Color Nomenclature (1912), plate XXXVIII; ISCC-NBS, 1955, block 241; Maerz and Paul, A Dictionary of Color (1930), plate 43 J4",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the Japanese name Usu-iro literally mean?",
+   "choices": [
+    "Thin color",
+    "Tatarian aster color",
+    "Green bamboo color",
+    "Mousy indigo"
+   ],
+   "answer": "Thin color",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the hex value given here is a direct measurement of a surviving dyed textile.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which already-named library color sits closest to Eupatorium Purple?",
+   "choices": [
+    "Mauve",
+    "Umber",
+    "Navy",
+    "Sage"
+   ],
+   "answer": "Mauve",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Eupatorium Purple carries a Japanese name that just means \"thin color,\" and it sits barely three units from plain mauve."
+ ],
+ "words": 267,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No book text confirms the name's coinage beyond the library gloss and the Ridgway/ISCC-NBS/Maerz & Paul dataset tags; stated as undocumented.",
+   "lint 2026-10-09"
+  ]
+ }
+}

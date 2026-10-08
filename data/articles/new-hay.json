@@ -1,0 +1,125 @@
+{
+ "slug": "new-hay",
+ "name": "New Hay",
+ "hex": "#4A5634",
+ "names": [
+  "New Hay"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "New Hay is a dark, grayish olive green dated by Maerz and Paul to 1892, a name that sounds like pale cut grass but names a shadowed olive instead.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A pale word, a dark color",
+   "body": "Maerz and Paul's 1930 dictionary dates New Hay to 1892, plate 24, row J, column 3, and records a close neighbor on an adjoining plate from the same year, Sage Drab [1]. The ISCC-NBS system of 1955 places it in block 127, \"grayish olive green\", 4.1 units from that block's center [1]. No book held in color-kb discusses this name [4].\n\nFreshly cut hay, as a material, is usually pale gold; this color is instead dark and desaturated, lightness 35 against a maximum of 100, so the name describes an association rather than the literal straw color [1]. Its nearest distinct named neighbor is [[greenish-hunter-green]], 2.7 units off, \"almost the same\" by our graph [3]. Set beside plain [[olive]], New Hay reads as the darker, greener member of that family [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds New Hay in 563 of 23,781 paintings, about 2.4 percent, as photographed, rising through the nineteenth century and peaking in the 1910s at 2.4 times the overall rate [2]. Henri Rousseau's works carry it 13 times the archive's base rate, the highest of any painter we track for this color [2]. Counts are computed matches on varnished, photographed paintings, not pigment identifications [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; the material is pale, this color is dark",
+   "first_recorded": "1892, Maerz & Paul 1930",
+   "source": "Maerz & Paul 1930"
+  },
+  "aka": [
+   "Sage Drab"
+  ],
+  "siblings": [
+   "greenish-hunter-green",
+   "pine-needle",
+   "sage",
+   "olive"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 563,
+  "measured": {
+   "lch": [
+    34.7,
+    21.5,
+    121.8
+   ],
+   "nearest": [
+    [
+     "Greenish hunter green",
+     2.7
+    ]
+   ]
+  }
+ },
+ "questions": [
+  {
+   "q": "Which dictionary dates New Hay to 1892?",
+   "choices": [
+    "Maerz and Paul's A Dictionary of Color",
+    "Ridgway's Color Standards",
+    "Pantone",
+    "Crayola"
+   ],
+   "answer": "Maerz and Paul's A Dictionary of Color",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: New Hay, the color, is a pale gold like real cut hay.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "New Hay names a dark, shadowed olive green, not the pale gold of real cut hay."
+ ],
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes, data/library.json): ISCC-NBS 1955, Maerz & Paul 1930, Ridgway 1912, RAL, Munsell and CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match (ΔE2000 ≤ 6, ≥ 5% of canvas), as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph: nearest named neighbors and cross-domain twin matches (gems, films, fashion decades, Werner 1821 cross-reference), computed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "Concordance of the 29 color books held in color-kb for this name: no hits",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No book concordance hits for this name; sourced from ColorHub's own color library and archive data.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 224
+}

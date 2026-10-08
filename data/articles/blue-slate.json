@@ -1,0 +1,117 @@
+{
+ "slug": "blue-slate",
+ "name": "Blue slate",
+ "hex": "#5F686F",
+ "names": [
+  "Blue slate"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Blue slate is a cool grey named for the roofing stone, documented in Ridgway's 1912 standards and the 1955 ISCC-NBS system.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The stone, greyed down",
+   "body": "Our library carries Blue slate from Ridgway's 1912 color standards and the 1955 ISCC-NBS system, which classes it as a grayish blue [1]. It is a modifier on [[slate]], the rock split into roofing tiles, rather than a separate material [1]. Two near-duplicates from the same Ridgway plates sit close by in hue: [[deep-slate-blue]] and [[dusky-slate-blue]], both darker [1].\n\nAt LCH lightness 44 and chroma 5, it reads as almost neutral; our library's closest match by distance is [[black-coral]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to Blue slate in 474 of 23,781 paintings (1.99 percent), as photographed [2]. It peaks in the 1900s, in 30 of 1,674 paintings, at twice the archive's overall rate for that century, and Claude Monet used it most, 5.4 times what his home museums' baseline predicts [2]. It most often plays a mid-tone inside a painting, and keeps company with Squirrel Grey far more than chance would suggest [2]. The earliest dated match, from 1100, is eight centuries older than the 1912 record, a floor set by a thin early archive, not a claim about the pigment's age [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "slate, the roofing and writing stone",
+   "first_recorded": "Ridgway, 1912",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "slate",
+   "black-coral"
+  ],
+  "parent": "slate",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "deep-slate-blue",
+    "gloss": "a darker Ridgway near-duplicate"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 474,
+  "role": {
+   "mid": 0.34
+  },
+  "company": [
+   "Squirrel Grey"
+  ],
+  "measured": {
+   "lch": [
+    44,
+    5,
+    250
+   ],
+   "nearest": [
+    [
+     "Black Coral",
+     6.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: name records, plate and block locators, tier classification",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which painter is most associated with Blue slate relative to his own museums' baseline?",
+   "choices": [
+    "Claude Monet",
+    "John Singer Sargent",
+    "Paul Cezanne",
+    "Henri Matisse"
+   ],
+   "answer": "Claude Monet",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Blue slate is named for a fabric dye.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Blue slate takes its name from the roofing stone, not a dye or pigment."
+ ],
+ "words": 207,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

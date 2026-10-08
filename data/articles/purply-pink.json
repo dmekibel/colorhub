@@ -1,0 +1,120 @@
+{
+ "slug": "purply-pink",
+ "name": "Purply Pink",
+ "hex": "#F075E6",
+ "names": [
+  "Purply Pink"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Purply Pink is a bright, purple-leaning pink from the xkcd color survey, close in hue to orchid but pulled warmer and brighter.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A crowd name, not a system name",
+   "body": "Purply Pink is built from ordinary English grammar, not a dye or a pigment: \"purply\" plus \"pink\" [1]. It comes from the xkcd color survey of 2010, where over two million online respondents typed free-text names for randomly shown swatches, and this phrase was common enough to be kept as its own entry [1][2].\n\nThe ISCC-NBS system, built from older paint and textile samples, calls this hue block a brilliant purple, and our library's nearest professionally named neighbor is [[orchid]], 4.1 CIEDE2000 units away, a close but not identical match [2][3]. Unlike [[pink]] or [[purple]], which are among the eleven basic English color words, Purply Pink has no dictionary entry, no plate number and no recorded first use [1]. It sits on the [[magenta]] side of the pink-purple boundary that separates the two parent families [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive shows this color covering at least 1 percent of its canvas, within CIEDE2000 4 of it, as photographed [4]. That describes the gap between a 2010 internet-survey hue and five centuries of oil paint, not the color itself [4]. Measured in LCH, it is lightness 67, chroma 72, hue 330 degrees [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive combination of purple and pink",
+   "first_recorded": "xkcd color survey, 2010",
+   "source": "ColorHub color graph"
+  },
+  "aka": [],
+  "siblings": [
+   "orchid",
+   "magenta"
+  ],
+  "parent": "pink",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    67,
+    72,
+    330
+   ],
+   "nearest": [
+    [
+     "Orchid",
+     4.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph: xkcd 2010 survey entry, modifier grammar (purply + pink)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS 1955 block 217 entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph: measured LCH and nearest-name match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does the name Purply Pink come from?",
+   "choices": [
+    "A 1912 Ridgway plate",
+    "A paint company catalog",
+    "The xkcd online color survey",
+    "A medieval dye recipe"
+   ],
+   "answer": "The xkcd online color survey",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Purply Pink has a recorded first-use date in an English dictionary.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Purply Pink is just two ordinary words glued together by an internet survey."
+ ],
+ "words": 210,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

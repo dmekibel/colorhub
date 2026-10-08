@@ -1,0 +1,122 @@
+{
+ "slug": "pale-flesh-color",
+ "name": "Pale Flesh Color",
+ "hex": "#F5CEC0",
+ "names": [
+  "Pale Flesh Color"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Pale Flesh Color is a light yellowish pink from Ridgway's 1912 color plates, one of a small family of \"flesh\" names.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A lighter cousin",
+   "body": "The library plots this color on Ridgway's 1912 plate XIV, hue 7 prime, tone f, and classifies it under the ISCC-NBS 1955 lists as a light yellowish pink [1]. It is one of a small family of \"flesh\" names in our data, all built on the same old convention of naming a pale tan after light skin; this library keeps the name as historical, not as a claim about real skin tones [1]. The nearest named color is Pale Vinaceous-Pink, about 1.5 units away by CIEDE2000, close enough that the two are hard to tell apart on screen [1].\n\nAmong clearly distinct colors, [[pale-congo-pink|Pale Congo Pink]] sits about 3.2 units off, with [[shrimp-pink|Shrimp Pink]] and [[flesh-pink|Flesh Pink]] close behind it [1]. In LCH terms it measures lightness 86, chroma 17, hue 46 degrees, Munsell 0.6YR 8.5/3.3 [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in only 45 of 23,781 paintings, 0.19 percent, as photographed [2]. It is most over-represented in the 1830s, in 5 of that decade's 663 paintings, about 4 times the expected rate [2]. Korea accounts for the largest single-country share, 1 of the 45, and no painter here carries it more than once [2]. These are photographs of aged, varnished paintings, so a color match is not a pigment test [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a conventional pale skin tone, lighter than Pale flesh",
+   "first_recorded": "1912 (Ridgway, plate XIV)",
+   "source": "Ridgway, Color Standards and Color Nomenclature (1912); ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "pale-congo-pink",
+   "shrimp-pink",
+   "flesh-pink",
+   "unbleached-silk"
+  ],
+  "parent": null,
+  "children": [
+   "pale-congo-pink"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 45,
+  "measured": {
+   "lch": [
+    86,
+    17,
+    46
+   ],
+   "nearest": [
+    [
+     "Pale Congo Pink",
+     3.2
+    ],
+    [
+     "Shrimp Pink",
+     3.3
+    ],
+    [
+     "Flesh Pink",
+     3.8
+    ],
+    [
+     "Unbleached Silk",
+     4.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912, plate XIV, hue 7′, tone f; ISCC-NBS 1955 block 28; nearest library match Pale Vinaceous-Pink, ΔE 1.5; nearest distinct match Pale Congo Pink, ΔE 3.2",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does Pale Flesh Color compare to Pale flesh?",
+   "choices": [
+    "Lighter and pinker",
+    "Darker and greener",
+    "Exactly the same color",
+    "Much more saturated"
+   ],
+   "answer": "Lighter and pinker",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Pale Flesh Color is common in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pale Flesh Color sits within a hair of Pale Vinaceous-Pink, close enough that the two are hard to tell apart on screen."
+ ],
+ "words": 232,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

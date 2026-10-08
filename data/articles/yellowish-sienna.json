@@ -1,0 +1,162 @@
+{
+ "slug": "yellowish-sienna",
+ "name": "Yellowish sienna",
+ "hex": "#B14A30",
+ "names": [
+  "Yellowish sienna"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Yellowish sienna is ColorHub's name for Kabacha (樺茶), a traditional Japanese color glossed as \"birch brown.\"",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Kabacha, a birch brown",
+   "body": "Our library lists this color from the Wikipedia survey *Traditional colors of Japan*, under the romanized name Kabacha, written 樺茶 [1]. The kanji combine a word for birch with the general word for brown, and the library glosses the pair as \"birch brown\" [1]. The books consulted for this project give no further date or dyeing detail, so the naming story beyond that gloss is undocumented here [1].\n\nIn our library the nearest already-named color is [[sienna]], at a computed distance of 5.8, close enough that most eyes would call them the same warm reddish-brown [1]. By the numbers, though, yellowish sienna leans redder, at a hue angle of 42 degrees against sienna's 51, while plain sienna leans a touch more orange [1]. The hex given here, #B14A30, is a modern screen reading chosen to match the library's gloss, not a measurement of any pigment or dyed cloth, so treat it as approximate [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color within range of this swatch in 427 of the 23,781 paintings we have, about 1.8 percent, as photographed [2]. It peaks in the 1400s, present in 67 of 945 paintings from that century, 3.95 times the rate expected from the century mix, and it appears in 68 of 721 Indian works, 5.25 times the expected rate [2]. The earliest dated appearance we have is a Tibetan votive card from the year 1000, though the archive's early centuries are thin, so this is a floor and not a true first sighting [2].\n\nInside a painting it most often sits as a midtone, in 68 percent of the paintings that carry it, with a shadow role in 17 percent [2]. Measured values are screen approximations of varnished, photographed canvases, not a pigment identification [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the Japanese traditional color Kabacha (樺茶), glossed as \"birch brown\"",
+   "first_recorded": "undocumented beyond its listing in Japan's traditional color system",
+   "source": "ColorHub color library (Wikipedia, \"Traditional colors of Japan\")"
+  },
+  "aka": [
+   "Kabacha",
+   "樺茶"
+  ],
+  "siblings": [
+   "brazil-red",
+   "dusty-rust",
+   "vermilion-red",
+   "hyacinth-red"
+  ],
+  "parent": "sienna",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Kabacha (樺茶), \"birch brown\""
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 427,
+  "rate_pct": 1.8,
+  "century_peak": {
+   "century": 1400,
+   "hits": 67,
+   "of": 945,
+   "lift": 3.95
+  },
+  "country_lift": {
+   "country": "India",
+   "hits": 68,
+   "of": 721,
+   "lift": 5.25
+  },
+  "role": {
+   "mid_pct": 68,
+   "shadow_pct": 17,
+   "highlight_pct": 16
+  },
+  "first_seen": {
+   "year": 1000,
+   "title": "Votive initiation card (tsakali) with preaching Buddha Shakyamuni"
+  },
+  "measured": {
+   "lch": [
+    44.9,
+    54.1,
+    41.7
+   ],
+   "nearest": [
+    [
+     "Brazil Red",
+     2.7
+    ],
+    [
+     "Dusty rust",
+     2.8
+    ],
+    [
+     "Vermilion Red",
+     3.4
+    ],
+    [
+     "Hyacinth Red",
+     4.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional color names (Wikipedia, \"Traditional colors of Japan\")",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the Japanese name for this swatch, Kabacha, gloss as?",
+   "choices": [
+    "Birch brown",
+    "Sienna clay",
+    "Evening rust",
+    "Temple red"
+   ],
+   "answer": "Birch brown",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the hex value given here is a direct measurement of a surviving pigment sample.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "In which century does yellowish sienna peak in our painting archive?",
+   "choices": [
+    "The 1400s",
+    "The 1600s",
+    "The 1800s",
+    "The 1900s"
+   ],
+   "answer": "The 1400s",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Yellowish sienna comes from a Japanese name that just means \"birch brown,\" and it reads redder than plain sienna."
+ ],
+ "words": 301,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No book-level source for the name's history beyond the library gloss; stated as undocumented rather than guessed.",
+   "lint 2026-10-09"
+  ]
+ }
+}

@@ -1,0 +1,137 @@
+{
+ "name": "Livid Violet",
+ "hex": "#7B5E79",
+ "names": [
+  "Livid Violet"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Livid Violet is a dark, greyed purple recorded by Ridgway in 1912 and classed by the ISCC-NBS system in 1955 as a light grayish red.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dark, bruised purple",
+   "body": "Our data files this under the violet family rather than from a pigment or a place [1]. Ridgway's 1912 atlas plots it on plate XXXVII at hue 61″, tone i, and the ISCC-NBS system of 1955 files the same area as block 18, \"light grayish red\" [1]. The Maerz and Paul dictionary of 1930 separately gives it a first record of 1905 [1]. In LCH terms it reads as lightness 44, chroma 20, hue 328 degrees: dark and low in saturation [1].\n\nIts nearest computed neighbors are [[dusky-mauve|Dusky Mauve]] and [[livid-purple|Livid Purple]], both 3.1 units off and redder, and [[deep-hyssop-violet|Deep Hyssop Violet]], 3.7 units off and purpler [2]. The closest everyday name is [[plum]], about 10.9 units away [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a close match covers enough of the canvas in 19, as photographed (11 by the stricter within-painting measure), which makes it rarer than 67 percent of the named colors we track [4]. It peaks in paintings from the 1900s, at 4.0 times the rate expected from that century's share of the archive, though on a small base of 6 paintings [4]. Inside a painting it most often plays a hidden color, in 36 percent of its matches, by lightness rank within the canvas; varnish cannot fake that ranking [4]. The earliest match is a 1490 painting by Bartolomeo Vivarini, 422 years before the name's first record in 1912; that only shows the hue existed long before anyone wrote it down, not that any pigment did, a floor and not a first, since the archive's early centuries are thin [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented beyond the violet family",
+   "first_recorded": "Ridgway, 1912 (Maerz & Paul give 1905)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "dusky-mauve",
+   "livid-purple",
+   "deep-hyssop-violet",
+   "slate-purple"
+  ],
+  "parent": "violet",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 19,
+  "measured": {
+   "lch": [
+    44,
+    20,
+    328
+   ],
+   "nearest": [
+    [
+     "Dusky mauve",
+     3.1
+    ],
+    [
+     "Livid Purple",
+     3.1
+    ],
+    [
+     "Deep Hyssop Violet",
+     3.7
+    ],
+    [
+     "Slate-Purple",
+     4.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/nodes-l.json): Livid Violet — Ridgway 1912, plate XXXVII, hue 61″, tone i; ISCC-NBS 1955, block 18; Maerz & Paul 1930, first recorded 1905",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-l.json): nearest distinct neighbors by CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Livid Violet entry",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings, as photographed, data/graph/fieldnotes/l.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1912 atlas first plots Livid Violet, on plate XXXVII?",
+   "choices": [
+    "Ridgway",
+    "Maerz and Paul",
+    "Munsell",
+    "Pantone"
+   ],
+   "answer": "Ridgway",
+   "kind": "pick"
+  },
+  {
+   "q": "Inside a painting, which role does Livid Violet most often play?",
+   "choices": [
+    "A hidden color",
+    "The brightest highlight",
+    "The sky",
+    "A skin tone"
+   ],
+   "answer": "A hidden color",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Its earliest match in our archive is a 1490 painting, more than four centuries before the name was first recorded."
+ ],
+ "words": 284,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No book concordance hits for this slug; written from the color graph, library and archive data only.",
+   "lint 2026-10-09"
+  ]
+ },
+ "slug": "livid-violet"
+}

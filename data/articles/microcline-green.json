@@ -1,0 +1,131 @@
+{
+ "slug": "microcline-green",
+ "name": "Microcline Green",
+ "hex": "#C1E4D4",
+ "names": [
+  "Microcline Green"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Microcline Green is a very pale green named for microcline, a feldspar mineral whose green variety is better known by its own name, amazonite.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A feldspar's pale green",
+   "body": "Ridgway's 1912 color book places this value on plate XIX, hue 39′, tone f, and the ISCC-NBS dictionary of 1955 files it as block 148, very pale green, a block so crowded it also covers names such as Cabbage, Ice Tint and Water Green [1]. Maerz and Paul date a related entry to 1912 as well [1]. Microcline is a common rock-forming feldspar; its green form, colored by trace lead, is better known by its own gem name, amazonite, though this particular library name is undocumented beyond the 1912 citation [1].\n\nThe nearest named colors on file are [[dull-opaline-green]], [[pale-nile-blue]] and [[lichen-green]], at 3.6, 3.8 and 4.3 ΔE [1]. Compare [[sage|Sage]], [[mint-turquoise|Mint Turquoise]] and [[jade|Jade]], other pale or mineral-named greens [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings finds a color within six units of this one in only 23, about 0.1 percent, as photographed [2]. It covers over half the canvas in Michele Marieschi's 1740 view of Santa Maria della Salute and in Canaletto's 1748 Warwick Castle, both pale Venetian or English skies [2]. It is 15 times more common in Impressionist paintings than in the archive overall, a small but notable lift [2]. These are photographs of aged, varnished paintings, and the match is not a mineral or pigment test [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "microcline, a feldspar mineral",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "dull-opaline-green",
+   "pale-nile-blue",
+   "lichen-green",
+   "pale-blue-green"
+  ],
+  "parent": null,
+  "children": [
+   "mint-turquoise"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 23,
+  "match": {
+   "hex": "#C1E4D4",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "measured": {
+   "lch": [
+    88,
+    15,
+    165
+   ],
+   "nearest": [
+    [
+     "Dull Opaline Green",
+     3.6
+    ],
+    [
+     "Pale Nile Blue",
+     3.8
+    ],
+    [
+     "Lichen Green",
+     4.3
+    ],
+    [
+     "Pale Blue-Green",
+     6.0
+    ]
+   ]
+  },
+  "surprises": [
+   "Impressionism: 2 of 140 works carry it, 14.77x the archive rate"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912, Maerz and Paul 1930, ISCC-NBS 1955",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Microcline is a type of what?",
+   "choices": [
+    "Feldspar mineral",
+    "Dye plant",
+    "Seashell",
+    "Coal-tar chemical"
+   ],
+   "answer": "Feldspar mineral",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Microcline Green is one of the most common colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Named for a feldspar whose green form is better known as amazonite."
+ ],
+ "words": 236,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits in color-kb for this slug; written from library and archive data only.",
+   "lint 2026-10-09"
+  ]
+ }
+}

@@ -1,0 +1,110 @@
+{
+ "slug": "irisglow",
+ "name": "Irisglow",
+ "hex": "#A19A9E",
+ "names": [
+  "Irisglow"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Irisglow is a pale, faintly purple grey that Maerz and Paul recorded in 1930, and no other system in our library repeats it.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A fashion-dictionary name",
+   "body": "Maerz and Paul's *A Dictionary of Color* places Irisglow on plate 44, swatch B3, first recorded in 1928 [1]. A color this close would be filed by the ISCC-NBS system as a pale purple [1]. Its nearest named neighbor in our library is [[platinum-grey|Platinum Grey]], and the closest common color word is [[grey|Grey]] itself, under seven units away in CIEDE2000 [1]. It sits in our library's Neutrals family not far from [[ash]] and [[taupe]], though neither is a precise match [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within six units of Irisglow covers at least five percent of the canvas in 230 of our 23,781 paintings, 0.97 percent, as photographed; the within-painting lens finds it in 131 [2]. That ranks it ahead of 63 percent of the named colors we track [2]. It peaks in the 1900s, in 31 of 1,674 paintings, at 1.9 percent of that decade's paintings, 2.3 times the archive's overall rate, and it most often plays a light, in 46 percent of its 131 appearances [2].\n\nClaude Monet is its most devoted painter, in four of his 50 paintings here, six times the rate of the museums those works come from [2]. The earliest matching painting dates to 1119, 811 years before Maerz and Paul recorded the name in 1930 — a look-alike hue in an aged photograph, not proof the color existed as a dye that early, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1928, per Maerz and Paul (1930)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "platinum-grey",
+   "pale-purple",
+   "ash",
+   "taupe"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 131,
+  "pct": 0.97,
+  "rank_percentile": 63,
+  "measured": {
+   "lch": [
+    64.3,
+    3.5,
+    340.2
+   ],
+   "munsell": "N 6.3",
+   "app": [
+    "Grey",
+    6.9
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and graph data: Ridgway 1912 / ISCC-NBS 1955 / Maerz & Paul 1930 / RAL entries (data/library.json, data/graph/)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, computed color match, as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which year does Maerz and Paul give for Irisglow's first record?",
+   "choices": [
+    "1928",
+    "1912",
+    "1955",
+    "1886"
+   ],
+   "answer": "1928",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the ISCC-NBS and Ridgway systems both independently list the name Irisglow.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Irisglow is a 1930 fashion-dictionary name with no second record anywhere else in our library."
+ ],
+ "words": 260,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance hits; etymology of the coined name 'Irisglow' marked undocumented.",
+   "lint 2026-10-09"
+  ]
+ }
+}

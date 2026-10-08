@@ -1,0 +1,145 @@
+{
+ "slug": "medici-blue",
+ "name": "Medici Blue",
+ "hex": "#74908F",
+ "names": [
+  "Medici Blue"
+ ],
+ "tier": "person",
+ "depth": "short",
+ "lede": "Medici Blue is a greyed, muted blue-green from Robert Ridgway's 1912 color standards, and no book we hold confirms whether the name points to the Florentine family or to someone else entirely.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name the books leave open",
+   "body": "Ridgway placed this color on plate XLVIII of his 1912 *Color Standards and Color Nomenclature*, and Maerz and Paul's 1930 dictionary dates it to 1905 on their plate 37 [1]. A darker variant, [[deep-medici-blue|Deep Medici Blue]], sits two plates away and is listed as a near-duplicate of the ISCC-NBS block \"Greyish Blue-Green\" [1][2]. Whether the name honors the Medici banking family, famous for patronizing Florentine art and fashion, or some other namesake, is undocumented in the sources we hold [1][3].\n\nThe ISCC-NBS system of 1955 also files it close to its own \"Greyish Blue-Green\" and \"Deep Bluish Grey-Green\" blocks, suggesting it was treated as one of a small family of muted blue-greens rather than a singular shade [2]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "Measured in LCH terms it is lightness 58, chroma 10, hue 195 degrees: a pale, low-saturation blue-green closer to grey than to any pure blue [3]. Its nearest library neighbor is [[titmouse-blue|Titmouse Blue]], about 3.2 units away, with the paler [[celestial-blue|Celestial Blue]] close behind [3]. Next to [[slate]] or [[petrol]] it reads as the greyer, quieter one [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this blue-green, as photographed, in 303 of 23,781 paintings, about 1.3 percent [4]. Its heaviest use is in watercolor sketches and marine scenes: a John Singer Sargent Alpine study from 1870, P. S. Krøyer's 1899 beach painting *Boys Bathing at Skagen*, and Monet's 1904 *Waterloo Bridge, London, at Dusk* [4]. These are computed color matches on aged, varnished paintings, not pigment identifications [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1905, Maerz & Paul; catalogued by Ridgway in 1912",
+   "source": "Ridgway, Color Standards and Color Nomenclature (1912)"
+  },
+  "aka": [],
+  "siblings": [
+   "titmouse-blue",
+   "deep-medici-blue",
+   "celestial-blue",
+   "bluish-grey-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 303,
+  "top_paintings": [
+   "commons-Q20178957",
+   "smk-KMS1658",
+   "nga-61377"
+  ],
+  "measured": {
+   "lch": [
+    58,
+    10,
+    195
+   ],
+   "nearest": [
+    [
+     "Titmouse Blue",
+     3.2
+    ],
+    [
+     "Deep Medici Blue",
+     4.3
+    ],
+    [
+     "Celestial Blue",
+     4.6
+    ],
+    [
+     "Bluish Grey-Green",
+     4.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Ridgway 1912, plate XLVIII; Maerz & Paul 1930, plate 37 E 3",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955 blocks 191 and 150",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): CIEDE2000 distances to named neighbors",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes; within the archive's match threshold, at least 5% of the canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "True or false: the books consulted confirm Medici Blue is named for the Florentine Medici family.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which color is listed as a near-duplicate of Medici Blue in the ISCC-NBS system?",
+   "choices": [
+    "Greyish Blue-Green",
+    "Bright Teal",
+    "Navy",
+    "Peacock"
+   ],
+   "answer": "Greyish Blue-Green",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Medici Blue has carried its name since at least 1905, and no book we hold says for certain who or what it honors."
+ ],
+ "words": 267,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "Naming origin undocumented in the books consulted.",
+   "lint 2026-10-09"
+  ]
+ }
+}

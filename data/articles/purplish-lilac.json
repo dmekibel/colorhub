@@ -1,0 +1,158 @@
+{
+ "slug": "purplish-lilac",
+ "name": "Purplish Lilac",
+ "hex": "#C3A1B3",
+ "names": [
+  "Purplish Lilac"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Purplish Lilac is a purplish shade of [[lilac|lilac]], one of Robert Ridgway's working names built by the plain grammar of modifier plus base color.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier, not a new color",
+   "body": "Purplish Lilac joins the modifier *purplish* to the base color [[lilac]], named for the flower [1][4]. Ridgway's 1912 plate XXXVII, hue 65-double-prime, places it high in lightness and low to moderate in chroma, LCH lightness 70 and chroma 16 [1][4]. The ISCC-NBS system calls the matching block, 240, 'grayish purplish pink,' close to Ridgway's point at a Delta-E of 3.1 [2]. The nearest named colors on file are [[deep-vinaceous-lavender]], [[dawn]] and [[french-white]], at 4.6, 4.8 and 5.1 ΔE [1][4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this shade, as photographed, in 0.08% of 23,781 paintings, just 18 paintings; within a single canvas it reads as a distinct area in 9 of them[3]. That makes it rarer than 69% of the archive's named colors [3]. It peaks in the 1900s, found in 0.3% of that century's 1,674 paintings, 3.8 times the expected rate, though the count behind that peak is small, 5 paintings [3]. Inside a painting, where it appears at all, it plays a light more often than a hidden color, 56% against 44% of its 9 appearances [3]. The earliest dated appearance is a 1600 painting, 312 years before the name's first documented record in 1912; the archive's early centuries are thin, so this is a floor and not a first [3]. In printed English the word 'purplish' peaks in the 1870s and rose fastest in the 1840s, counting every sense of the word [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the base color lilac, with the modifier 'purplish'",
+   "first_recorded": "1912 (Ridgway, Color Standards and Nomenclature)",
+   "source": "Ridgway, Color Standards and Nomenclature"
+  },
+  "aka": [],
+  "siblings": [
+   "deep-vinaceous-lavender",
+   "dawn",
+   "french-white",
+   "laelia-pink"
+  ],
+  "parent": "lilac",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "measured": {
+   "lch": [
+    69.7,
+    16.2,
+    343.5
+   ],
+   "nearest_iscc": [
+    "grayish purplish pink",
+    3.1
+   ],
+   "nearest": [
+    [
+     "Deep Vinaceous-Lavender",
+     4.6
+    ],
+    [
+     "Dawn",
+     4.8
+    ],
+    [
+     "French White",
+     5.1
+    ],
+    [
+     "Laelia Pink",
+     5.3
+    ]
+   ]
+  },
+  "n_present": 9,
+  "role_top": {
+   "role": "light",
+   "pct": 56
+  },
+  "first_seen": {
+   "year": 1600,
+   "years_before_record": 312
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Nomenclature, 1912, plate XXXVII, hue 65 double-prime",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "ISCC-NBS, National Bureau of Standards Circular 553, 1955, block 240 (\"grayish purplish pink\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color graph: computed LCH/Munsell values and modifier-name cross-reference",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which flower names the base color behind Purplish Lilac?",
+   "choices": [
+    "Lilac",
+    "Lavender",
+    "Iris",
+    "Violet"
+   ],
+   "answer": "Lilac",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Purplish Lilac is the rarest named color in this batch of twelve.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "Inside a painting, where it appears at all, which role does Purplish Lilac most often play?",
+   "choices": [
+    "Light",
+    "Hidden color",
+    "Shadow",
+    "Accent"
+   ],
+   "answer": "Light",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Purplish Lilac is the rarest named color, found in only 18 of 23,781 paintings.",
+  "Where it appears at all, it is usually a light, not a shadow."
+ ],
+ "words": 259,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

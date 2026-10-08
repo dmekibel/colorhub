@@ -1,0 +1,133 @@
+{
+ "slug": "silver-fern",
+ "name": "Silver Fern",
+ "hex": "#9A8A37",
+ "names": [
+  "Silver Fern"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Silver Fern is a dulled olive-gold from the Maerz and Paul dictionary, a shade [[warbler-green]] practically owns on screen but Silver Fern is read in roughly one painting in fifty in our archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dictionary olive-gold",
+   "body": "Maerz and Paul give Silver Fern as plate 14 J2, first recorded in 1927, three years before their 1930 dictionary was printed [1]. The ISCC-NBS system files the nearest block as light yellow, about 5 units off in color difference, and the Munsell notation reads 6.8Y 5.6/6.2 [1]. Nothing in the library record explains why a fern would be called silver rather than green; the plant word sits beside the mineral word in and [[silver-pink]], two other names in this same batch [1]. The closest named color on screen is [[warbler-green]], a color difference of only 2.8, described here as more vivid; [[old-moss-green]] sits a little further off at 4.9 [3]. That 2.8 gap reads as duller and a touch lighter than Warbler Green [3], the kind of olive that looks washed rather than leafy."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 2.09 percent of 23,781 paintings, 498 of them, and within those canvases the dominant-area lens isolates it in 366, as photographed [2]. That puts it ahead of 79 percent of the named colors we track for frequency [2]. It peaks in the 1700s, in 83 of 3,449 paintings, present in 2.4 percent of the 3,449 paintings (83 of them) dated to that century, 1.5 times the rate its home museums would predict [2].\n\nInside a painting it is most often an accent, 64 percent of its 366 appearances, by lightness rank rather than by eye [2]. Paulus Potter is its most devoted painter, carrying it in 9 of his 28 works here, 10 times the baseline rate of the museums those paintings come from, 12.5 times once the match is measured as photographed [2]. The color turns up in our archive as far back as 1285, in a panel by Duccio di Buoninsegna, 645 years before Maerz and Paul's 1927 record of the name [2]. That gap is a look-alike hue in an aged photograph, not proof the pigment or dye existed that early [2]. It is also over-represented in Indian painting, 2.8 times the expected rate, 29 of 721 Indian works in the archive [2]. On canvas it keeps company with Greenish Yellow and Metallic Green more than chance would predict, with lift of 16.8 and 13.7 [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented beyond the plant and mineral word \"silver\"",
+   "first_recorded": "1927 (Maerz and Paul, 1930)",
+   "source": "Maerz and Paul, A Dictionary of Color"
+  },
+  "aka": [],
+  "siblings": [
+   "silver-green",
+   "silver-pink",
+   "warbler-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 498,
+  "n_within": 366,
+  "measured": {
+   "lch": [
+    57.4,
+    45.5,
+    95.4
+   ],
+   "nearest": [
+    [
+     "Warbler Green",
+     2.8
+    ],
+    [
+     "Old Moss Green",
+     4.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz and Paul (1930) entry for Silver Fern, plate 14 J2; ISCC-NBS and Munsell cross-reference",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub graph: nearest named colors (look-alike) and co-occurring colors (companion data)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which dictionary first records Silver Fern, and in what year?",
+   "choices": [
+    "Maerz and Paul, 1927",
+    "Ridgway, 1912",
+    "ISCC-NBS, 1955",
+    "Crayola, undocumented"
+   ],
+   "answer": "Maerz and Paul, 1927",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Silver Fern is most often the brightest, lightest color in the paintings where it appears.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which painter in our archive uses Silver Fern far more than his peers?",
+   "choices": [
+    "Paulus Potter",
+    "Gustav Klimt",
+    "Alfred Sisley",
+    "John Singer Sargent"
+   ],
+   "answer": "Paulus Potter",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Silver Fern sits only 2.8 color-units from Warbler Green — close enough that most eyes read them as the same olive.",
+  "Paulus Potter carried this dulled gold-olive in a third of his paintings here, ten times his museums' baseline."
+ ],
+ "words": 411,
+ "status": "checked",
+ "checked": {
+  "by": "claude",
+  "date": "2026-10-08",
+  "issues": [
+   "Only one book source (Maerz and Paul); no etymology for the name is documented.",
+   "The 1285 first-seen painting is a look-alike match, not evidence of the actual pigment.",
+   "lint 2026-10-09"
+  ]
+ }
+}

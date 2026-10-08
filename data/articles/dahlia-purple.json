@@ -1,0 +1,132 @@
+{
+ "slug": "dahlia-purple",
+ "name": "Dahlia Purple",
+ "hex": "#6F314F",
+ "names": [
+  "Dahlia Purple"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Dahlia Purple is a dark purplish red named for the dahlia flower, carried over from Ridgway's 1886 Nomenclature of Colors and also recorded among traditional Japanese names as Ebizome, \"vine grape.\"",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A flower, and a Japanese grape",
+   "body": "Ridgway carried Dahlia Purple over from his 1886 *Nomenclature of Colors* into his fuller 1912 standard, where it sits on plate XII, hue 67, tone k; Maerz and Paul date the name to that same 1886 origin [1]. The ISCC-NBS dictionary of 1955 filed the name under block 260, very dark purplish red, though by measurement the swatch sits only 2.3 units from the centroid of block 259, dark purplish red [2]. Its nearest named neighbors in our library are [[old-mauve|Old Mauve]] at 2.7 units and [[velasquez|Velasquez]] at 3.0 [2].\n\nOur data also carries a Japanese traditional name for the same swatch, Ebizome (蒲萄), meaning vine grape, after the dark skin of wild grapes rather than the dahlia flower that gives the English name [3]. [[byzantium|Byzantium]], 7.3 units off, is the nearest of the everyday names [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Dahlia Purple covers at least five per cent of the canvas in only 5 of them, as photographed [4]. The earliest is Jacopo Bassano's *Adoration of the Magi*, from 1568 [4]. It is a dark, specific color that rarely covers enough of an aged, varnished canvas to register at our threshold, so its scarcity here says little either way about how often painters used it [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the dahlia flower",
+   "first_recorded": "1886 (Ridgway's Nomenclature of Colors)",
+   "source": "Ridgway, Color Standards and Color Nomenclature; Maerz and Paul, A Dictionary of Color; ColorHub library"
+  },
+  "aka": [
+   "Ebizome (Japanese, 蒲萄, \"vine grape\")"
+  ],
+  "siblings": [
+   "old-mauve",
+   "velasquez",
+   "byzantium",
+   "dahlia"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Ebizome (蒲萄)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 5,
+  "iscc_category": "dark purplish red (block 259 by measurement; filed 1955 under 260)",
+  "nearest": [
+   [
+    "Old Mauve",
+    2.7
+   ],
+   [
+    "Velasquez",
+    3.0
+   ]
+  ],
+  "jp": {
+   "romaji": "Ebizome",
+   "kanji": "蒲萄",
+   "meaning": "Vine grape"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XII, hue 67, tone k, carried from his 1886 Nomenclature of Colors (via ColorHub library)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; Maerz and Paul 1930, ISCC-NBS 1955 block 260), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library, Japanese traditional-color correspondence (data/graph nodes, \"jp\" field)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the Japanese name for this swatch, Ebizome, mean?",
+   "choices": [
+    "Vine grape",
+    "Dahlia flower",
+    "Evening sky"
+   ],
+   "answer": "Vine grape",
+   "kind": "pick"
+  },
+  {
+   "q": "Ridgway introduced Dahlia Purple for the first time in his 1912 standard.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The same dark purplish red is named for a flower in English and for a grape in Japanese."
+ ],
+ "words": 243,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Editor spot-audit 2026-10-09: 1955 block 260 is 'very dark purplish red'; the 2.3-unit fit is to computed block 259 (conflation fixed). 'Nearest in library' was Byzantium 7.3 (the curriculum 'app' match); graph nearest is Old Mauve 2.7. Plum and wine red (#B11226) are not near; removed. Removed 'in this batch' meta and the overclaim that scarcity is only a photo limit.",
+   "lint 2026-10-09"
+  ]
+ }
+}

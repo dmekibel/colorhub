@@ -1,0 +1,138 @@
+{
+ "slug": "greenish-bottle-green",
+ "name": "Greenish bottle green",
+ "hex": "#006442",
+ "names": [
+  "Greenish bottle green"
+ ],
+ "tier": "traditional",
+ "depth": "brief",
+ "lede": "Greenish bottle green is a deep, cool green carried into our library from the Japanese traditional color Aotake-iro, named for green bamboo, and it sits only 3.0 units from the plain [[bottle-green]].",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Aotake-iro, green bamboo",
+   "body": "Our library lists this color under the Japanese name Aotake-iro, written 青竹色, glossed as \"green bamboo color\" [1]. No book consulted for this project independently dates the name beyond that gloss, so its coinage is undocumented here [1].\n\nThe library's swatch measures lightness 37, chroma 36 and hue 160 degrees, and it files under the Greens family, used chiefly in fashion and textile contexts [1]. At 3.0 color-distance units from [[bottle-green]], the two are close enough that most eyes would call them the same bottle green, and the library also flags [[spruce]] as a nearby neighbor [1]. Within this same batch of traditional names, [[greenish-sage]] and [[greenish-umber]] sit in neighboring hue families."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within range of this swatch appears in 8 of the 23,781 paintings in our archive, about 0.03 percent, as photographed [2]. Half of its appearances sit in shadow areas, a quarter in mid-tones and a quarter in highlights [2]. The earliest dated match is T. Davies's *Ship in Full Sail*, 1827; the heaviest use we found is in Mary Susan Collins's 1929 *Primrose*, where it covers 29 percent of the canvas [2]. The archive's early centuries are thin, so this is a floor on the color's history, not a first sighting [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "青竹 (aotake), green bamboo, + 色 (iro), color",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library (Wikipedia, \"Traditional colors of Japan\")"
+  },
+  "aka": [
+   "Aotake-iro",
+   "青竹色"
+  ],
+  "siblings": [
+   "bottle-green",
+   "spruce",
+   "greenish-sage",
+   "greenish-umber"
+  ],
+  "parent": "bottle-green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Aotake-iro (青竹色), \"green bamboo color\""
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 8,
+  "first_seen": {
+   "year": 1827,
+   "painter": "T. Davies"
+  },
+  "top_painting": {
+   "title": "Primrose",
+   "painter": "Mary Susan Collins",
+   "year": 1929,
+   "cover": 0.292
+  },
+  "measured": {
+   "lch": [
+    37,
+    36,
+    160
+   ],
+   "nearest": [
+    [
+     "Bottle green",
+     3.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional color names (Wikipedia, \"Traditional colors of Japan\")",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, as photographed (data/graph/fieldnotes, tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the Japanese name Aotake-iro refer to?",
+   "choices": [
+    "Green bamboo",
+    "A beetle's wing",
+    "A moss-covered roof tile",
+    "A dyer's vat"
+   ],
+   "answer": "Green bamboo",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Greenish bottle green and plain Bottle green are close enough that most eyes would call them the same.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "In our painting archive, where in a canvas does this color most often sit?",
+   "choices": [
+    "Evenly split between shadow, mid-tone and highlight",
+    "Always in highlights",
+    "Always in shadow",
+    "Never present"
+   ],
+   "answer": "Evenly split between shadow, mid-tone and highlight",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Greenish bottle green takes its name from green bamboo, and sits close enough to plain bottle green that most eyes see no difference."
+ ],
+ "words": 238,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No book consulted independently dates the name Aotake-iro beyond the library's own gloss; stated as undocumented.",
+   "lint 2026-10-09"
+  ]
+ }
+}

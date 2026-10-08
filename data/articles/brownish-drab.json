@@ -1,0 +1,136 @@
+{
+ "slug": "brownish-drab",
+ "name": "Brownish Drab",
+ "hex": "#947D71",
+ "names": [
+  "Brownish Drab"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Brownish Drab is a light, dusty brown from Ridgway's 1912 nomenclature, one of fourteen names the ISCC-NBS system later gathered into the same color block.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "One of fourteen names in a single block",
+   "body": "Ridgway's *Color Standards and Color Nomenclature* (1912) lists Brownish Drab on plate XLV, hue 9′′′′ [1]. The ISCC-NBS system placed it in its 1955 block 45, *light grayish reddish brown*, a block our library also finds carrying names such as Buckskin, Autumn Blonde, Deauville Sand, Sorghum Brown and Alesan, each recorded from the dictionaries at different dates between about 1850 and 1927 [1]. That crowding is typical of the mid-century block system, which absorbed many older dictionary names that had drifted close to one another [1].\n\nThe library's measurements place its nearest named neighbor as [[beaver|Beaver]], 3.4 units off, and it sits about 4.2 units from the everyday name [[taupe|Taupe]] [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color match to this swatch in 642 of 23,781 paintings, 2.7 percent, as photographed; the within-painting lens finds it in 384, more common than 80 percent of the named colors we track [3]. Maurice Denis is its most devoted painter, carrying it in 5 of the 43 [[painter:maurice-denis|Denis]] paintings in the archive, 4.0 times the rate expected from the museums his works come from, with John Singer Sargent close behind [3].\n\nThe color peaks in the 1900s, 1.9 times the expected rate across 1,674 paintings from that decade, and inside a painting it most often plays a hidden color, sitting low in the painting's own lightness order (43 percent of its 384 within-painting matches) [3]. The earliest match dates to the year 1000, more than 900 years before the name's 1912 record, which shows only that a similar-looking hue existed in paint long before the word did, a floor and not a first, since the archive's early centuries are thin [3]. It shares canvases with Sweet Pea and Plain Mouse far more than chance would predict [3]. These are photographs of varnished paintings, read as screen colors [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "drab (a dull light brown) with a reddish-brown lean",
+   "first_recorded": "Ridgway, 1912, plate XLV, hue 9′′′′",
+   "source": "Ridgway, Color Standards and Color Nomenclature (1912)"
+  },
+  "aka": [],
+  "siblings": [
+   "beaver",
+   "taupe",
+   "sweet-pea"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#947D71",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 642,
+  "painters": [
+   {
+    "name": "Maurice Denis",
+    "hits": 5,
+    "n": 43,
+    "lift": 4.0
+   }
+  ],
+  "measured": {
+   "lch": [
+    54.2,
+    12.0,
+    55.0
+   ],
+   "nearest": [
+    [
+     "Beaver",
+     3.4
+    ],
+    [
+     "Taupe",
+     4.2
+    ]
+   ]
+  },
+  "iscc_nbs": {
+   "block": 45,
+   "name": "light grayish reddish brown"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature, plate XLV, hue 9′′′′; ISCC-NBS 1955 block 45",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "About how many separate dictionary names did the ISCC-NBS system gather into this color's block?",
+   "choices": [
+    "About fourteen",
+    "Exactly two",
+    "Over a hundred",
+    "None; it stands alone"
+   ],
+   "answer": "About fourteen",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: inside a painting, this color usually turns up as a hidden, low-lightness area.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Fourteen different dictionary names, recorded across eighty years, all landed in the same ISCC-NBS color block as this one."
+ ],
+ "words": 325,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "field.measured.nearest had a null distance (or, for bokhara/buffy-brown, named a color that was not actually the nearest) against data/graph/edges-*.json 'la'; filled in / corrected against that source.",
+   "lint 2026-10-09"
+  ]
+ }
+}

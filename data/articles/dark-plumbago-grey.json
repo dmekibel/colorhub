@@ -1,0 +1,132 @@
+{
+ "slug": "dark-plumbago-grey",
+ "name": "Dark Plumbago Grey",
+ "hex": "#787A87",
+ "names": [
+  "Dark Plumbago Grey"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dark Plumbago Grey darkens [[plumbago-grey]], named for the blue-grey mineral plumbago, and it is unusually common in the work of the painter Albert Marquet.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A darkened mineral grey",
+   "body": "The name pairs dark with [[plumbago-grey]]. Plumbago is an old name for graphite and for the blue-flowered shrub of the same name, both lending their cool grey-blue to the color word [1]. Ridgway charted this darker tone in his 1912 *Color Standards and Color Nomenclature*, plate L, hue 61′′′′, and the ISCC-NBS *Dictionary of Color Names* carried it forward in 1955 as block 228 [1].\n\nIts nearest measured neighbors are [[purple-slate]] and [[lavender-purple]], each about 3.3 units away and almost the same color; [[madder-blue]] is a little more vivid, and [[crayon-blue]] sits further out at 5.1 units, also close to the same color [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A match for this color covers at least five per cent of the canvas in 250 of 23,781 paintings, about 1.1 per cent, as photographed [3]. It is strongest in the work of Albert Marquet, 3 of his 16 paintings, nearly 17.8 times the archive's overall rate, and in Theodor Philipsen's, 5 of 29 [3]. The earliest dated match, Gentile da Fabriano's *Adoration of the Three Kings*, dates to 1423, a floor on the color's age in painting rather than a claim of its first appearance [3]. As photographed: these are computed color matches on museum photographs of aged, varnished paintings, not a pigment test [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the mineral and plant plumbago, darkened",
+   "first_recorded": "1912 (Ridgway, plate L); 1955 (ISCC-NBS, block 228)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "purple-slate",
+   "lavender-purple",
+   "madder-blue"
+  ],
+  "parent": "plumbago-grey",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#787A87",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 250,
+  "rate": 0.0105,
+  "painters": [
+   [
+    "Albert Marquet",
+    16,
+    3,
+    17.84
+   ],
+   [
+    "Theodor Philipsen",
+    29,
+    5,
+    16.4
+   ]
+  ],
+  "measured": {
+   "lch": [
+    51.5,
+    7.6,
+    285.4
+   ],
+   "nearest": [
+    [
+     "Purple slate",
+     3.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Ridgway 1912, plate L, hue 61′′′′; ISCC-NBS 1955, block 228",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub Color Graph look-alikes (data/graph/edges-d.json), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Plumbago, the root of this color's parent name, refers to what?",
+   "choices": [
+    "Graphite and a blue-flowered shrub",
+    "A Roman emperor's cloak",
+    "A dye from lead ore",
+    "A French painter's surname"
+   ],
+   "answer": "Graphite and a blue-flowered shrub",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Albert Marquet's paintings carry this color far above our archive's average rate.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Named for graphite and a blue shrub, and a favorite of the painter Albert Marquet."
+ ],
+ "words": 238,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}

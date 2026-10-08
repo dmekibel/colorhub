@@ -1,0 +1,126 @@
+{
+ "slug": "deep-cerise",
+ "name": "Deep Cerise",
+ "hex": "#DA3287",
+ "names": [
+  "Deep Cerise"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Deep Cerise darkens cerise, the French word for cherry, into a strong purplish red that our archive has caught in oil paint exactly once.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Cherry, made deeper",
+   "body": "Cerise is simply the French word for cherry, and the OED's first English citation for it as a color word is 1858, in *The Times* [1]. Deep Cerise adds the usual darkening modifier on top of [[cerise]] [1]. Wikipedia's source for this exact shade is Crayola, which places it among the commercial, catalog-born names rather than the older dye or dictionary tradition [2].\n\nThe ISCC-NBS system of 1955 classifies it as a strong purplish red, and its nearest named neighbor in our library is [[mulberry]], 4.3 CIEDE2000 units away [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds Deep Cerise in exactly 1 of 23,781 paintings, as photographed, rarer than 86 percent of the named colors we track [4]. In printed English the word's all-sense use peaks in the 1910s, decades before the Crayola crayon that popularized this exact hex value [4]. It sits firmly in the [[red]] family, tipped toward [[magenta]] rather than toward orange [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "cerise, French for cherry, darkened",
+   "first_recorded": "cerise as a color word, 1858",
+   "source": "ColorHub color graph"
+  },
+  "aka": [],
+  "siblings": [
+   "mulberry",
+   "magenta"
+  ],
+  "parent": "cerise",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "cerise (cherry)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1,
+  "measured": {
+   "lch": [
+    51,
+    70,
+    354
+   ],
+   "iscc": "strong purplish red",
+   "nearest": [
+    [
+     "Mulberry",
+     4.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph: modifier grammar (deep + cerise); Cerise first recorded as a color word, 1858, The Times",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: Wikipedia cites Crayola for this shade",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS 1955 block 255 entries; measured LCH and nearest-name match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed; Ngram cache, term 'deep cerise'",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does \"cerise\" mean in French?",
+   "choices": [
+    "Flower",
+    "Cherry",
+    "Deep",
+    "Silk"
+   ],
+   "answer": "Cherry",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Deep Cerise is common throughout our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Deep Cerise is just the French word for cherry, darkened."
+ ],
+ "words": 171,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

@@ -1,0 +1,133 @@
+{
+ "slug": "folkstone",
+ "name": "Folkstone",
+ "hex": "#987A5E",
+ "names": [
+  "Folkstone"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Folkstone is a light brown from Maerz and Paul's 1930 dictionary, first recorded in 1928, its spelling a step away from the English town of Folkestone.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name close to, but not quite, a town's",
+   "body": "Maerz and Paul's 1930 dictionary lists Folkstone on plate 13, swatch A3, first recorded in 1928 [1]. The spelling drops the middle e of Folkestone, the Kentish port town, and the dictionary does not confirm or deny a connection [1]. Our own classification places the hue in the ISCC-NBS region called light brown, Munsell notation 8.2YR 5.2/3.4 [2].\n\nThe nearest named colors on file are [[buffy-brown]], [[mocha]], [[ormond]] and [[doe]], at 2.7, 3.5, 3.6 and 4 ΔE [2]. Folkstone sits between [[brown]] and [[tan]], warmer and more orange than a plain sepia ink-brown [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Folkstone covers at least five percent of the canvas in 3,732 of them, about 15.7 percent overall, as photographed [3]. Its rate is highest in the oldest material, 56 percent of eleventh-century works and declining steadily toward the present, before settling near 14 to 16 percent from the 1600s on [3]. It is strongest in Korean, Tibetan and Japanese paintings, and its single leading companion word is Sepia [3]. These counts read photographs of varnished and aged works, not pigments [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; possibly echoing Folkestone, Kent, but the dictionary neither confirms nor explains it",
+   "first_recorded": "1928 (Maerz and Paul, 1930)",
+   "source": "Maerz and Paul, A Dictionary of Color"
+  },
+  "aka": [],
+  "siblings": [
+   "buffy-brown",
+   "mocha",
+   "ormond",
+   "doe"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 3732,
+  "measured": {
+   "lch": [
+    53,
+    21,
+    69
+   ],
+   "nearest": [
+    [
+     "Buffy Brown",
+     2.7
+    ]
+   ]
+  },
+  "countries": [
+   {
+    "name": "Korea",
+    "rate": 0.413,
+    "lift": 2.63
+   },
+   {
+    "name": "Tibet",
+    "rate": 0.404,
+    "lift": 2.58
+   }
+  ],
+  "company": [
+   {
+    "word": "Sepia",
+    "lift": 1.53
+   }
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Maerz and Paul, A Dictionary of Color (1930), \"Folkstone\", plate 13 A3",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz and Paul, Ridgway, ISCC-NBS and RAL entries, computed LCH/Munsell/nearest-name match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "True or false: Maerz and Paul confirm that Folkstone is named after the town of Folkestone.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Folkstone's closest core-color match in our library is:",
+   "choices": [
+    "Sepia",
+    "Umber",
+    "Ochre",
+    "Camel"
+   ],
+   "answer": "Sepia",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Folkstone's rate in our archive runs highest in the oldest paintings and drops steadily toward the present."
+ ],
+ "words": 215,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

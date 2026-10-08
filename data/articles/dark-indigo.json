@@ -1,0 +1,100 @@
+{
+ "slug": "dark-indigo",
+ "name": "Dark Indigo",
+ "hex": "#1F0954",
+ "names": [
+  "Dark Indigo"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dark Indigo is a near-black violet-blue, ColorHub's library name for a darkened shade of [[indigo]], recorded only in the xkcd color survey of 2010.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A darkened indigo",
+   "body": "The name follows ColorHub's modifier grammar, \"dark\" plus the parent color [[indigo]] [1]. Unlike many of the library's darkened shades, it carries no Ridgway or ISCC-NBS filing; its only source is the crowd-sourced xkcd color survey of 2010, so its boundary against neighboring purples and blues rests on informal usage rather than an official dictionary [1]. On a monitor it reads as a deep violet rather than the blue-leaning indigo of the dye itself, which the [[indigo]] article covers separately [1].\n\nThe closest named neighbor on file is [[paua]], named for the iridescent shell, with [[midnight-blue]] and [[deep-blue]] both more vivid [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color near this swatch in only 7 of 23,781 paintings, among the rarer named shades in the collection, as photographed [2]. Every match comes from eighteenth-century British portrait miniatures, and the color plays only a shadow role where it appears [2]. The United Kingdom accounts for most of the matches, well above its average rate in our sample, which fits the concentration of matches in a single genre and period [2]. These are computed color matches to photographed, varnished paintings, not pigment identifications [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a darkened shade of Indigo",
+   "first_recorded": "xkcd color survey, 2010",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "paua",
+   "midnight-blue",
+   "deep-blue"
+  ],
+  "parent": "indigo",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 7,
+  "pct_archive": 0.03,
+  "role": "shadow"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; xkcd color survey 2010)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph, nearest-neighbor color distances (data/graph/edges-d.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which source first records the name \"Dark Indigo\" in our library?",
+   "choices": [
+    "The xkcd color survey (2010)",
+    "Ridgway's 1912 nomenclature",
+    "The ISCC-NBS dictionary (1955)"
+   ],
+   "answer": "The xkcd color survey (2010)",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: on screen, Dark Indigo reads closer to violet than to blue.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Every match in our archive comes from eighteenth-century British portrait miniatures."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": []
+ },
+ "words": 209
+}

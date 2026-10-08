@@ -1,0 +1,142 @@
+{
+ "slug": "light-orange-yellow",
+ "name": "Light Orange-Yellow",
+ "hex": "#FECF55",
+ "names": [
+  "Light Orange-Yellow"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Light Orange-Yellow is a bright, warm yellow from Ridgway's 1912 atlas, filed by our library as a lighter child of Light Orange rather than a color with its own separate naming history.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A bright child of Light Orange",
+   "body": "Ridgway's 1912 atlas carries this tone on plate III, hue 17, notated 2.7Y 8.5/9.5 in the Munsell system [1]. The 1955 ISCC-NBS dictionary groups it under block 71, naming it moderate orange yellow, 4.0 units from Ridgway's reading [1].\n\nOur library files it as a family variant under [[light-orange]], and its closest neighbors by measured distance are [[sunglow]], about 2.8 units away and more vivid, and [[dandelion]], almost the same color at 3.0 units [2]. [[mustard-yellow]] sits a little further, about 3.1 units off and duller [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive matches this tone in 123 of 23,781 paintings, about 0.52 percent, as photographed, more common than 60 percent of the named colors tracked [3]. It peaks in the 1400s, present in 1.0 percent of the 945 paintings from that century, 1.7 times its museums' expected rate [3].\n\nInside a painting it most often plays an accent, in 66 percent of its 111 clearly-ranked appearances, a rank computed within each canvas so varnish cannot fake it [3]. George Dawe carries it most, in 6 of his 50 works here, 6.5 times his museums' baseline rate, and it is also most over-represented in Indian paintings, 3.1 times the expected rate [3]. These are photographs of aged, varnished paintings, and the match is a computed color reading, not a pigment identification [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a brighter modifier of the Light Orange family; undocumented beyond the naming system",
+   "first_recorded": "1912 (Ridgway); carried into the 1955 ISCC-NBS dictionary",
+   "source": "Ridgway, Color Standards and Color Nomenclature; ISCC-NBS, NBS Circular 553"
+  },
+  "aka": [],
+  "siblings": [
+   "sunglow",
+   "dandelion",
+   "mustard-yellow",
+   "yellow"
+  ],
+  "parent": "light-orange",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#FECF55",
+   "de2000": 4.0,
+   "min_cover": 0.02
+  },
+  "n_present": 123,
+  "painters": [
+   {
+    "name": "George Dawe",
+    "hits": 6,
+    "n": 50,
+    "lift": 6.5
+   }
+  ],
+  "measured": {
+   "lch": [
+    85.2,
+    64.8,
+    86.4
+   ],
+   "nearest": [
+    [
+     "Sunglow",
+     2.8
+    ],
+    [
+     "Dandelion",
+     3.0
+    ],
+    [
+     "Mustard Yellow",
+     3.1
+    ],
+    [
+     "Yellow",
+     4.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate III, hue 17; cited in ISCC-NBS, NBS Circular 553 (1955), block 71, \"brilliant orange yellow\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library and graph: computed LCH and nearest-neighbor distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Our library files Light Orange-Yellow as a variant of which family color?",
+   "choices": [
+    "Light Orange",
+    "Dandelion",
+    "Mustard Yellow",
+    "Saffron Yellow"
+   ],
+   "answer": "Light Orange",
+   "kind": "pick"
+  },
+  {
+   "q": "Inside a painting, Light Orange-Yellow most often plays which role?",
+   "choices": [
+    "An accent",
+    "A shadow",
+    "A light",
+    "A hidden color"
+   ],
+   "answer": "An accent",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Light Orange-Yellow shows up as an accent color two times out of three, more than any other role."
+ ],
+ "words": 257,
+ "status": "checked",
+ "checked": {
+  "by": "batch-36",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

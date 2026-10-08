@@ -1,0 +1,114 @@
+{
+ "slug": "dahlia-carmine",
+ "name": "Dahlia Carmine",
+ "hex": "#76404D",
+ "names": [
+  "Dahlia Carmine"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Dahlia Carmine is a dark, muted purplish red named for carmine, the red dye made from cochineal insects, and recorded by Ridgway in 1912.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dye-insect's name",
+   "body": "The nearest named colors on file are [[corinthian-purple]], [[dark-vinaceous-purple]], [[perilla-purple]] and [[purple-brown]], at 3.9, 4, 4.2 and 4.6 ΔE [1]. Ridgway's 1912 standards place it on plate XXVI, hue 71′, tone k, Maerz and Paul separately date a close match to 1912 on plate 46 L 3 of their 1930 dictionary, and the 2010 xkcd color survey carries a near-duplicate under the name Brownish Purple, only 0.7 units of ΔE away [1]. In LCH terms it is dark and moderately saturated: lightness 34, chroma 25, hue 6 degrees [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings finds a close match to Dahlia Carmine in 37, about 0.2 percent, as photographed [2]. Its earliest appearance, a Roman-period portrait the archive dates to about 100, is the same picture that carries the earliest match to [[copper-rose]], a floor and not a first, since the archive's early centuries are thin [2]. Its heaviest use, relative to his own baseline, falls to Henri Matisse, nearly 39 times expected, and the archive's use of it peaks in the 1910s, in 5 of 523 paintings [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the dye carmine",
+   "first_recorded": "1912 (Ridgway, plate XXVI, hue 71′)",
+   "source": "Ridgway, Color Standards and Color Nomenclature; ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "corinthian-purple",
+   "dark-vinaceous-purple",
+   "perilla-purple",
+   "purple-brown"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 37,
+  "match": {
+   "hex": "#76404D",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "measured": {
+   "lch": [
+    34,
+    25,
+    6
+   ],
+   "nearest": [
+    [
+     "Corinthian Purple",
+     3.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: name records, plate and block locators, tier classification",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Carmine, the dye Dahlia Carmine is named for, comes from what source?",
+   "choices": [
+    "Cochineal insects",
+    "A flower",
+    "A mineral",
+    "Tree bark"
+   ],
+   "answer": "Cochineal insects",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: carmine and madder are made from the same source.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dahlia Carmine's earliest archive match shares a single Roman-period portrait with Copper Rose."
+ ],
+ "words": 208,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Field notes claimed the earliest Dahlia Carmine match was also the earliest match for Copper Penny; the archive's earliest Copper Penny match is a different painting (aic-14968, c. 500), not the Roman-period portrait (nga-43626, c. 100) shared with Copper Rose. Removed the incorrect Copper Penny claim.",
+   "lint 2026-10-09"
+  ]
+ }
+}

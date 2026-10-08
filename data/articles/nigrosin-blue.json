@@ -1,0 +1,131 @@
+{
+ "slug": "nigrosin-blue",
+ "name": "Nigrosin Blue",
+ "hex": "#445067",
+ "names": [
+  "Nigrosin Blue"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Nigrosin Blue is a grayish purplish blue named for nigrosine, a family of synthetic black dyes whose diluted shades run toward blue and violet rather than true black.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dilute black",
+   "body": "Ridgway's 1912 color book places this value on plate XXXV, hue 49″, tone m, and the ISCC-NBS dictionary of 1955 files it as block 204, grayish purplish blue [1]. Nigrosine dyes, developed in the late 1800s from aniline black chemistry, are usually sold and used as deep blacks; a weak or thinned mixture can read as this kind of blue-grey, which is likely how the name reached a color dictionary, though the exact history is undocumented here [1]. The same dye family still colors printer ink and shoe polish today [1].\n\nThe nearest named colors on file are [[diamin-azo-blue]] and [[glacier]], at Compare [[gunmetal|Gunmetal]], another near-black with a blue cast [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings finds a color within six units of this one in 225, about 0.9 percent, as photographed [2]. The earliest is Duccio's Nativity with the Prophets Isaiah and Ezekiel (1308), and the color is over three times more common in 1300s and 1900s paintings than the archive's overall rate [2]. Henri-Edmond Cross and Vilhelm Lundstrøm each carry it well above that rate [2]. These are matches in photographed, varnished paintings, not a claim that nigrosine dye itself appears in any of them [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "nigrosine, a synthetic black dye family",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "diamin-azo-blue",
+   "glacier",
+   "independence",
+   "acetin-blue"
+  ],
+  "parent": null,
+  "children": [
+   "gunmetal"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 225,
+  "match": {
+   "hex": "#445067",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "measured": {
+   "lch": [
+    34,
+    15,
+    275
+   ],
+   "nearest": [
+    [
+     "Diamin-Azo Blue",
+     3.1
+    ],
+    [
+     "Glacier",
+     3.4
+    ],
+    [
+     "Independence",
+     4.3
+    ],
+    [
+     "Acetin Blue",
+     5.1
+    ]
+   ]
+  },
+  "surprises": [
+   "1900s: 3.28x the archive rate (52 of 1674)"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Nigrosine dyes are usually used to make what color?",
+   "choices": [
+    "Black",
+    "Scarlet",
+    "Gold",
+    "White"
+   ],
+   "answer": "Black",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: nigrosine dye is only ever blue.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A blue named after a dye family that is really used to make black."
+ ],
+ "words": 222,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits in color-kb for this slug; written from library and archive data only.",
+   "lint 2026-10-09"
+  ]
+ }
+}

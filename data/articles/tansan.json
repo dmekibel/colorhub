@@ -1,0 +1,109 @@
+{
+ "slug": "tansan",
+ "name": "Tansan",
+ "hex": "#B7916F",
+ "names": [
+  "Tansan"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Tansan is a light yellowish brown from the Maerz and Paul color dictionary, and it is among the most common named hues in our painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dictionary tan",
+   "body": "Maerz and Paul record Tansan at #B7916F, first dated 1928, on plate 12 B6 of their 1930 dictionary [1]. The ISCC-NBS system, drawn from that same plate in 1955, calls the block a light brown, within about 5 units of this exact value [1]. The books give no account of where the name comes from, so it stays undocumented here [1].\n\nIts nearest named neighbor in our library is [[camel]], a slightly cooler, less reddish tan [1]. The swatch is a screen approximation of an aged dictionary plate, not a measured pigment [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this tan, as photographed, in 2,561 of 23,781 paintings (10.77 percent), more common than 94 percent of the named colors we track [2]. It peaks in the 1200s, in 22 of 142 paintings, at 1.5 times the expected rate for the 142 paintings we have from that century [2]. Inside a painting it most often plays a light, in 41 percent of its 1,590 occurrences [2].\n\n[[painter:maarten-van-heemskerck|Maarten van Heemskerck]] is its most devoted painter, carrying it in 5 of 12 of his works here, 4.6 times his home museums' baseline [2]. The earliest matching painting is dated 900, long before Maerz and Paul named Tansan in 1930, which only shows the hue itself is ancient, a floor and not a first, since the archive's early centuries are thin [2]. It shares canvases more than chance with [[dusty-peach]] and [[sandalwood]] [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1928, per Maerz and Paul (1930)",
+   "source": "Maerz and Paul, A Dictionary of Color"
+  },
+  "aka": [],
+  "siblings": [
+   "camel",
+   "sandalwood",
+   "tussore"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2561,
+  "pct": 10.77,
+  "rank_pct": 94,
+  "measured": {
+   "lch": [
+    62.9,
+    25.4,
+    67.7
+   ],
+   "nearest": [
+    [
+     "Camel",
+     4.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "Maerz and Paul, A Dictionary of Color (1930), plate 12 B6; cited in ISCC-NBS Circular 553 (1955)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Tansan is closest in our library to which name?",
+   "choices": [
+    "Camel",
+    "Tussore",
+    "Umber",
+    "Sandalwood"
+   ],
+   "answer": "Camel",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Tansan is one of the rarest named colors in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Tansan is more common in our archive than 94 percent of the named colors we track."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 258
+}

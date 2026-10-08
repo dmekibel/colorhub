@@ -1,0 +1,165 @@
+{
+ "slug": "dusky-blue",
+ "name": "Dusky Blue",
+ "hex": "#35405E",
+ "names": [
+  "Dusky Blue"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dusky Blue is a dark, greyed [[blue]] with three separate sources on file, from Ridgway's 1912 plates to the 2010 xkcd survey.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Three systems, one dark blue",
+   "body": "Robert Ridgway's 1912 color nomenclature, built for naturalists describing birds and eggs, places this color on plate XXII at hue 49, tone \"m\" for medium; Ridgway's plates are scans of an aged printed swatch book, so the reading is approximate [1]. The ISCC-NBS 1955 dictionary separately lists it in block 185, among colors called \"pale blue\", 5.0 units away in our conversion [2]. The 2010 xkcd survey records the same word again, decades later [3].\n\nIn Munsell terms it reads about 6.1PB 2.7/4.1, a dark, fairly desaturated blue leaning toward purple [2]. The xkcd survey's own swatch for the phrase runs slightly more purple than our main value, by a visible but modest margin [3]. The nearest named colors on file are [[colonial]], [[freedom]] and [[flag]], at 2.8, 2.9 and 4 ΔE [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 162 of 23,781 paintings, about 0.7 percent, the most of any color, as photographed [4]. The earliest dated match is Taddeo Gaddi's 1355 *Madonna and Child Enthroned with Angels and Saints*, a floor and not a first, since the archive's early centuries are thin [4]. The 1900s rise to nearly five times the archive's overall rate, a sharper jump than the smoother climb across the centuries before it, our clearest surprise in this group [4]. [[painter:henri-matisse|Henri Matisse]] and the Danish painter Vilhelm Lundstrøm both used it heavily, Lundstrøm at close to 43 times the baseline rate [4]. Across its matches it plays a shadow more than two-thirds of the time, almost never a highlight [4]. It keeps company most with [[navy]] and [[slate]] on the same canvases [4]. These counts are computed color matches on photographs of aged, varnished paintings, not pigment identifications [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "Ridgway, 1912, plate XXII",
+   "source": "ColorHub library and graph nodes"
+  },
+  "aka": [],
+  "siblings": [
+   "colonial",
+   "freedom",
+   "flag",
+   "atlantis"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 162,
+  "first_painting": [
+   "commons-Q3842751",
+   1355
+  ],
+  "painters": [
+   [
+    "Vilhelm Lundstrøm",
+    43.18
+   ],
+   [
+    "Henri Matisse",
+    23.49
+   ]
+  ],
+  "role": {
+   "shadow": 0.69,
+   "mid": 0.3,
+   "highlight": 0.01
+  },
+  "measured": {
+   "mu": "6.1PB 2.7/4.1",
+   "nearest_iscc": [
+    "grayish purplish blue",
+    5.0
+   ],
+   "nearest": [
+    [
+     "Colonial",
+     2.8
+    ],
+    [
+     "Freedom",
+     2.9
+    ],
+    [
+     "Flag",
+     4.0
+    ],
+    [
+     "Atlantis",
+     4.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway, Color Standards and Color Nomenclature, 1912, plate XXII",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub graph nodes: Munsell conversion, ISCC-NBS 1955 block 185",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (xkcd 2010 source and alternate swatch)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1912 reference first records a version of Dusky Blue in our data?",
+   "choices": [
+    "Ridgway's color nomenclature",
+    "The ISCC-NBS dictionary",
+    "The xkcd survey",
+    "Maerz and Paul's dictionary"
+   ],
+   "answer": "Ridgway's color nomenclature",
+   "kind": "pick"
+  },
+  {
+   "q": "In our archive, Dusky Blue most often plays which role in a painting?",
+   "choices": [
+    "A shadow",
+    "A highlight",
+    "It never appears",
+    "A background wash only"
+   ],
+   "answer": "A shadow",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dusky Blue's rate in paintings rises sharply in the 1900s compared to earlier centuries.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dusky Blue plays the darkest shadow in a painting more than two-thirds of the time it appears in our archive."
+ ],
+ "words": 301,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); Ridgway plate reading noted as approximate per an aged scan.",
+   "lint 2026-10-09"
+  ]
+ }
+}

@@ -1,0 +1,137 @@
+{
+ "slug": "dusky-plum",
+ "name": "Dusky plum",
+ "hex": "#734A65",
+ "names": [
+  "Dusky plum"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dusky plum is a dark, muted reddish purple, the 2010 xkcd survey's shaded take on the fruit color [[plum]].",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A fruit, dimmed",
+   "body": "Our only recorded source for this name is the 2010 xkcd crowd color survey, with nothing earlier on file [1]. In the ISCC-NBS 1955 system it falls nearest the block the dictionary calls \"dark reddish purple\", 7.8 units off, one of the looser matches in our library [2]. In Munsell terms it reads about 1.8RP 3.6/4.7, a dark, moderately saturated red-purple [2].\n\nThe word \"dusky\" lowers the color's lightness and takes some of the shine off the ripe plum it is named for, pushing it toward grey [2]. The nearest named colors on file are [[dull-dark-purple]], [[raisin-purple]] and [[old-lilac]], at 2.6, 4.4 and 4.7 ΔE [2]. Who first wrote the pairing down is undocumented in the sources we hold [1][2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in only 12 of 23,781 paintings, about one in two thousand, as photographed; this is one of the rarer matches among our color names [3]. The earliest dated match is Jacopo Bassano's *Adoration of the Magi*, from 1568, a floor and not a first, since the archive's early centuries are thin [3]. Of its matches, about a third sit as the darkest shadow area in their painting, more often than most colors in our archive play that role [3]. Too few paintings share it to name a leading painter or decade with confidence [3]. These counts are a computed color match on photographs of aged, varnished paintings, not a pigment test [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "xkcd survey, 2010",
+   "source": "ColorHub library and graph nodes"
+  },
+  "aka": [],
+  "siblings": [
+   "dull-dark-purple",
+   "raisin-purple",
+   "old-lilac",
+   "claret-cup"
+  ],
+  "parent": "plum",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 12,
+  "first_painting": [
+   "commons-Q21716222",
+   1568
+  ],
+  "role": {
+   "shadow": 0.33,
+   "mid": 0.58,
+   "highlight": 0.08
+  },
+  "measured": {
+   "mu": "1.8RP 3.6/4.7",
+   "nearest_iscc": [
+    "dark reddish purple",
+    7.8
+   ],
+   "nearest": [
+    [
+     "Dull Dark Purple",
+     2.6
+    ],
+    [
+     "Raisin Purple",
+     4.4
+    ],
+    [
+     "Old Lilac",
+     4.7
+    ],
+    [
+     "Claret Cup",
+     4.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (xkcd 2010 source)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub graph nodes: Munsell conversion, ISCC-NBS 1955 nearest block",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the word \"dusky\" do to the fruit color plum here?",
+   "choices": [
+    "Lowers its lightness, toward grey",
+    "Makes it brighter and pinker",
+    "Turns it yellow",
+    "Nothing; the two names are identical in color"
+   ],
+   "answer": "Lowers its lightness, toward grey",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dusky plum is one of the more common colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dusky plum turns up in only about 1 painting in 2,000 in our archive, and often as the darkest shadow in the scene."
+ ],
+ "words": 258,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); very low archive count, no painter or decade claimed.",
+   "lint 2026-10-09"
+  ]
+ }
+}

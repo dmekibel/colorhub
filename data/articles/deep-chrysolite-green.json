@@ -1,0 +1,144 @@
+{
+ "slug": "deep-chrysolite-green",
+ "name": "Deep Chrysolite Green",
+ "hex": "#AFB565",
+ "names": [
+  "Deep Chrysolite Green"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Deep Chrysolite Green is a dull yellow-green from Ridgway's 1912 chart, named for the gem chrysolite rather than measured from one.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Named for a gem, not matched to one",
+   "body": "Ridgway's 1912 plate XXXI gives this hue the name Deep Chrysolite Green, hue 27′′, and the ISCC-NBS system of 1955 files the nearest category as \"moderate yellow green\" in its block 120 [1]. Chrysolite is an old name for the gem now usually called peridot or olivine, and Ridgway's chart borrowed gem and mineral words freely for its yellow-greens; nothing in our sources says the swatch was measured against an actual stone [1][2]. It is the only chrysolite color in our name list, so it stands without a lighter or plainer sibling on file [1].\n\nIn LCH terms it measures lightness 72, chroma 42, hue 109 degrees, Munsell 2.1GY 7.1/5.8 [1]. Its closest match in the library is [[olive-green]], about 2.7 CIEDE2000 units away, with [[absinthe-green]] close behind at 2.9 units [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A match within six CIEDE2000 units covering at least five percent of the canvas turns up in 99 of our 23,781 archive paintings, about 0.42 percent, as photographed [4]. It peaks in the 1910s, in 12 of 523 paintings, at 5.1 times the overall rate, and is most loved by Edvard Munch, in four of his fifty paintings here, nineteen times his own museums' baseline; it most often plays a highlight, in 71 percent of its appearances [4].\n\nThe earliest dated match is Giovanni di Niccolò Mansueti's *Madonna and Child with St John the Evangelist and Unknown Saint*, 1506, four centuries before Ridgway recorded the name in 1912; early centuries are thin in the archive, so this is a floor, not a first, and a photograph of an aged canvas is a screen color, not a pigment test [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the gem chrysolite (now usually called peridot or olivine); not measured against a stone",
+   "first_recorded": "1912, Ridgway, plate XXXI",
+   "source": "ColorHub color library; Ridgway, Color Standards and Color Nomenclature (1912)"
+  },
+  "aka": [],
+  "siblings": [
+   "olive-green",
+   "absinthe-green",
+   "scheele-s-green",
+   "khaki"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#AFB565",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 99,
+  "painters": [
+   {
+    "name": "Edvard Munch",
+    "hits": 4,
+    "of": 50,
+    "lift": 19.22
+   }
+  ],
+  "peak_decade": {
+   "decade": 1910,
+   "lift": 5.05
+  },
+  "role": "highlight",
+  "measured": {
+   "lch": [
+    72,
+    42,
+    109
+   ],
+   "nearest": [
+    [
+     "Olive Green",
+     2.7
+    ],
+    [
+     "Absinthe Green",
+     2.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway, Color Standards and Color Nomenclature (1912), plate XXXI, hue 27′′; ISCC-NBS, NBS Circular 553 (1955), block 120",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "Color-kb concordance of the 29 color books for this name: no hits",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which gem gives Deep Chrysolite Green its name?",
+   "choices": [
+    "Chrysolite, now usually called peridot",
+    "Emerald",
+    "Jade",
+    "Amber"
+   ],
+   "answer": "Chrysolite, now usually called peridot",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Ridgway measured this swatch against an actual chrysolite gem.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A 1912 yellow-green named for a gem it was never measured against."
+ ],
+ "words": 295,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

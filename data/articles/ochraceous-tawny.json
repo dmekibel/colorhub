@@ -1,0 +1,120 @@
+{
+ "slug": "ochraceous-tawny",
+ "name": "Ochraceous-Tawny",
+ "hex": "#C68545",
+ "names": [
+  "Ochraceous-Tawny"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Ochraceous-Tawny is a warm, dark orange-yellow, a tawny color pushed toward ochre, and it shares its exact screen color with a second library name, Tawny orange.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Tawny, by way of ochre",
+   "body": "The library files Ochraceous-Tawny from Robert Ridgway's 1912 *Color Standards and Color Nomenclature*, plate XV, hue 15 prime, tone i [1]. The ISCC-NBS 1955 lists give the same swatch's descriptive name as a dark orange yellow [1]. *Ochraceous* means the color of [[ochre]], a family of iron-oxide earth pigments, paired here with *tawny*, the older word for a dark, animal brown-orange [1]. The nearest named colors on file are [[dusty-bronze]] and [[dull-orange]], at The nearest distinct neighbor is Dusty bronze, about 2.7 units away by CIEDE2000, [1]. In LCH terms it measures lightness 61, chroma 48, hue 67 degrees, Munsell 6.7YR 6.0/7.9 [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 819 of 23,781 paintings, 3.44 percent, as photographed [2]. It peaks in the 1450s, in 13 of that decade's 109 paintings, about 3.5 times the expected rate [2]. Giovanni Bellini is its most devoted painter here, carrying it in 5 of his 17 works, over 8 times the baseline [2]. These are photographs of aged, varnished paintings, so a color match is not a pigment test [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "ochre + tawny, a descriptive pairing",
+   "first_recorded": "1912 (Ridgway, plate XV)",
+   "source": "Ridgway, Color Standards and Color Nomenclature (1912); ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "dusty-bronze",
+   "dull-orange",
+   "chamoline",
+   "cinnamon"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 819,
+  "measured": {
+   "lch": [
+    61,
+    48,
+    67
+   ],
+   "nearest": [
+    [
+     "Dusty bronze",
+     2.7
+    ],
+    [
+     "Dull Orange",
+     4.0
+    ],
+    [
+     "Chamoline",
+     4.5
+    ],
+    [
+     "Cinnamon",
+     4.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912, plate XV, hue 15′, tone i; ISCC-NBS 1955 block 72; nearest library match Dusty bronze, ΔE 2.7",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Ochraceous-Tawny shares its exact screen color with which other library name?",
+   "choices": [
+    "Tawny orange",
+    "Olive-Buff",
+    "Dusty bronze",
+    "Field Drab"
+   ],
+   "answer": "Tawny orange",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: \"ochraceous\" refers to the color of ochre.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Ochraceous-Tawny and Tawny orange are two library names for the exact same color."
+ ],
+ "words": 203,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

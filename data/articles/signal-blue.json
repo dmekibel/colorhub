@@ -1,0 +1,112 @@
+{
+ "slug": "signal-blue",
+ "name": "Signal Blue",
+ "hex": "#154889",
+ "names": [
+  "Signal Blue"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Signal Blue is a deep, saturated blue from the RAL industrial color system, built for visibility on signs and machinery rather than for any painter's palette.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "An industrial blue, not a painter's blue",
+   "body": "RAL, the German industrial color-matching system founded in 1927, lists this hue as RAL 5005, and our hex value is an approximate screen conversion of that standard [1]. The ISCC-NBS circular of 1955 would class the same region a deep greenish blue, Munsell notation 5.6PB 3.1/9.5 [1]. RAL names its colors for function and visibility, signal colors among them, not for painters' pigments, so the word *signal* here is a safety term, not a reference to any flag or semaphore code [1].\n\nThe library's nearest everyday match is [[cobalt]], under five units away, and its closest library neighbor is a hue called [[twilight-blue|Twilight Blue]] [1]. It also sits near [[azure]] in our library, a brighter, less saturated relative [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Signal Blue covers at least one per cent of the canvas in 56 paintings, about 0.24 per cent overall, rarer than 55 per cent of the named colors we track; the within-painting lens finds it in 34 [2]. It peaks in the 1900s, in 13 of 1,674 paintings, present in 0.8 per cent of the 1,674 paintings (13 of them) we hold from that century, 4.1 times the archive's overall rate [2]. Inside a painting it most often plays an accent, in 76 per cent of its 34 appearances, never dominating a canvas [2].\n\nThe earliest dated painting to carry it is from 1426, by Fra Angelico, 501 years before RAL's own 1927 record, a reminder that the match is a look-alike hue caught in an aged photograph, not evidence of an industrial paint on a fifteenth-century panel, a floor and not a first, since the archive's early centuries are thin [2]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "RAL's industrial signal-color category",
+   "first_recorded": "1927 (RAL)",
+   "source": "data/library.json; data/graph/nodes-s.json"
+  },
+  "aka": [],
+  "siblings": [
+   "cobalt",
+   "twilight-blue",
+   "azure"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 56,
+  "measured": {
+   "lch": [
+    30.9,
+    41.9,
+    282.3
+   ],
+   "nearest": [
+    [
+     "Cobalt",
+     4.7
+    ]
+   ]
+  },
+  "first_seen": {
+   "year": 1426,
+   "painting": "commons-Q22082602",
+   "painter": "Fra Angelico"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-s.json, data/library.json): RAL 5005 (1927), approximate screen value; cross-referenced to ISCC-NBS Circular 553 (1955) block 170; CIEDE2000 nearest-name match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (data/graph/fieldnotes/s.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What kind of system first lists Signal Blue?",
+   "choices": [
+    "An industrial color-matching system (RAL)",
+    "A Renaissance pigment guide",
+    "A Japanese textile list",
+    "A flower dictionary"
+   ],
+   "answer": "An industrial color-matching system (RAL)",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Signal Blue usually dominates a painting's canvas when it appears.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Signal Blue, an industrial safety color, is rarer in our painting archive than most named colors."
+ ],
+ "words": 324,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

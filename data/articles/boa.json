@@ -1,0 +1,139 @@
+{
+ "slug": "boa",
+ "name": "Boa",
+ "hex": "#99AB77",
+ "names": [
+  "Boa"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Boa is a soft yellow-green that Maerz and Paul's 1930 dictionary dates to 1892, close enough to the library's Asphodel Green and Sage that only a few measured units tell them apart.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A 1892 name, origin unexplained",
+   "body": "Maerz and Paul's *A Dictionary of Color* (1930) places Boa on plate 19, position B5, and dates its first recorded use to 1892 [1]. The dictionary does not explain why the word *boa*, which also names a feathered scarf and the snake, was attached to this shade of green, so its origin is undocumented here [1]. The ISCC-NBS 1955 lists do not carry the name separately; the National Bureau of Standards circular cites only Maerz and Paul's entry [1].\n\nThe library's measurements put this swatch closest to [[asphodel-green|Asphodel Green]], 3.0 units off, and within about 3.7 units of [[sage|Sage]], a cooler, greyer green that is one of the more common names in everyday use [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color match to this swatch in 193 of 23,781 paintings, 0.81 percent, as photographed; the within-painting lens finds it in 110, more common than 60 percent of the named colors we track [3]. Pierre-Auguste Renoir is its most devoted painter, carrying it in 4 of the 50 [[painter:auguste-renoir|Renoir]] paintings in the archive, 5.1 times the rate expected from the museums his works come from [3].\n\nThe color peaks in the 1910s, 2.5 times the expected rate across 523 paintings from that decade, and inside a painting it most often sits as a light tone (40 percent of its 110 within-painting matches) [3]. The earliest match dates to 1420, nearly five centuries before the name's 1892 record, which shows only that a similar-looking hue existed in paint long before the word did, a floor and not a first, since the archive's early centuries are thin [3]. India is the most over-represented country, at 2.7 times its expected share, and the Rajput and Impressionist schools both carry it well above the archive's average [3]. These are photographs of varnished paintings, read as screen colors [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "Maerz and Paul, 1930 (recorded use from 1892, plate 19 B5)",
+   "source": "Maerz and Paul, A Dictionary of Color (1930)"
+  },
+  "aka": [],
+  "siblings": [
+   "asphodel-green",
+   "sage",
+   "moss"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#99AB77",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 193,
+  "painters": [
+   {
+    "name": "Pierre-Auguste Renoir",
+    "hits": 4,
+    "n": 50,
+    "lift": 5.1
+   }
+  ],
+  "countries": {
+   "India": {
+    "n": 721,
+    "hits": 13,
+    "lift": 2.7
+   }
+  },
+  "measured": {
+   "lch": [
+    67.4,
+    29.2,
+    121.9
+   ],
+   "nearest": [
+    [
+     "Asphodel Green",
+     3.0
+    ],
+    [
+     "Sage",
+     3.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Maerz and Paul, A Dictionary of Color, \"Boa\", plate 19 B5",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1930 dictionary records Boa as a color name from 1892?",
+   "choices": [
+    "Maerz and Paul's A Dictionary of Color",
+    "Ridgway's Color Standards and Color Nomenclature",
+    "Paterson's A Dictionary of Colour",
+    "The ISCC-NBS 1955 circular"
+   ],
+   "answer": "Maerz and Paul's A Dictionary of Color",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the dictionary explains why the word boa was given to this green.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A soft green named after a word that also means a snake and a feathered scarf."
+ ],
+ "words": 331,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "field.measured.nearest had a null distance (or, for bokhara/buffy-brown, named a color that was not actually the nearest) against data/graph/edges-*.json 'la'; filled in / corrected against that source.",
+   "lint 2026-10-09"
+  ]
+ }
+}

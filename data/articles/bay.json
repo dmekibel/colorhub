@@ -1,0 +1,124 @@
+{
+ "slug": "bay",
+ "name": "Bay",
+ "hex": "#744B39",
+ "names": [
+  "Bay"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Bay is a moderate reddish brown recorded across six color systems since 1821.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Six systems, one brown",
+   "body": "Bay is the rare case among nature names with a paper trail. Our library lists it in Werner's 1821 nomenclature, Ridgway's 1886 and 1912 color standards, the 1955 ISCC-NBS system, Maerz and Paul's 1930 dictionary, and the RAL system of 1927, with Ridgway's 1912 plate II, hue 7, as the best-documented swatch [1]. Werner's chart, by Syme's account, ties no. 103 of the Browns to three everyday things: the neck and breast of the red grouse, chestnuts, and Egyptian jasper [3].\n\nRidgway's own 1912 swatch runs a little darker than ours (#6F574C), and RAL's is darker still (#633A34); our library lists Chestnut Brown and Signal Brown as near-duplicates, 2.0 and 2.4 ΔE away [1]. The nearest named colors on file are [[tortoise]], [[auburn]], [[coffee]] and [[mahogany-red]], at 2.7, 4, 4 and 4.3 ΔE [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to Bay in 1,836 of 23,781 paintings (7.72 percent), as photographed, the within-painting reading at 904, making it more common than 89 percent of our named colors [2]. It peaks in the 1400s, in 55 of 945 paintings, at 1.6 times the overall rate, and it is over-represented in paintings from Tibet, at 5.5 times the expected rate [2].\n\nGeorge Catlin, who painted Native American subjects, used it most: 9 of his 50 works here, 4.4 times his home museums' baseline [2]. It most often plays an accent inside a painting, and keeps company with [[brownish]] and [[chocolate-red]] more than chance [2]. These are screen approximations of aged, varnished canvases, not pigment identifications [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the reddish-brown coat color, recorded across several nomenclature systems",
+   "first_recorded": "Werner, 1821 (no. 103, Browns)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "tortoise",
+   "auburn",
+   "coffee",
+   "mahogany-red"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1836,
+  "role": {
+   "accent": 0.28
+  },
+  "company": [
+   "Brownish",
+   "Chocolate Red"
+  ],
+  "measured": {
+   "lch": [
+    36,
+    23,
+    50
+   ],
+   "nearest": [
+    [
+     "Tortoise",
+     2.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: name records, plate and block locators, tier classification",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Werner (ed. Syme), Nomenclature of Colours, 1821, no. 103 (Browns)",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Werner's 1821 chart ties Bay (no. 103) to which three things?",
+   "choices": [
+    "Red grouse, chestnuts, Egyptian jasper",
+    "Oak leaves, acorns, slate",
+    "Cedar wood, nutmeg, tussore silk",
+    "Chicory flower, olive oil, cork"
+   ],
+   "answer": "Red grouse, chestnuts, Egyptian jasper",
+   "kind": "pick"
+  },
+  {
+   "q": "Which painter used Bay most often relative to his own museums' baseline?",
+   "choices": [
+    "George Catlin",
+    "Claude Monet",
+    "Paul Cezanne",
+    "Henri Matisse"
+   ],
+   "answer": "George Catlin",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Bay is documented across six color systems since 1821."
+ ],
+ "words": 270,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

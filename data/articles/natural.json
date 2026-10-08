@@ -1,0 +1,138 @@
+{
+ "slug": "natural",
+ "name": "Natural",
+ "hex": "#DBC39E",
+ "names": [
+  "Natural"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Natural is a pale, warm tan from Maerz and Paul's 1930 dictionary, a name so generic it describes almost any unbleached or undyed fiber rather than one specific thing.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name that describes a category, not a thing",
+   "body": "Maerz and Paul place this value at plate 11, position A 2, first recorded in 1928 [1]. The same plate position also carries another name in their records, Belleek, from the same year, which our library notes without saying which name came first in use [1]. The ISCC-NBS system of 1955 classifies it as a yellowish gray, about 5.8 units from that block's reference chip [2]. Unlike most entries in the dictionary, *natural* names no plant, place or person; it is a trade description, the color of raw linen, wool or paper before dyeing, which is why so many unrelated materials can plausibly claim the name [1].\n\nIts nearest library neighbor is [[tan|Tan]], and it sits close to [[beige|Beige]], [[khaki|Khaki]] and [[camel|Camel]] on the same pale, undyed stretch of the chart [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Natural covers at least five per cent of the canvas in 2,448 works, over one in ten, one of the most common matches we track [3]. It is strongest in paintings from Iran, India, Japan and China, and the painter Xugu carries it in 11 of his 16 archived works [3]. That breadth likely reflects how generic a pale, unbleached tan is at matching aged, varnished grounds and paper, not one pigment or fiber [3]. These remain photographs read as screen colors, not pigment or fiber tests [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the natural, undyed color of raw fiber such as linen, wool or paper",
+   "first_recorded": "Maerz & Paul, A Dictionary of Color (1930), plate 11 A 2, first recorded 1928",
+   "source": "ColorHub color library (Maerz & Paul 1930; ISCC-NBS 1955)"
+  },
+  "aka": [
+   "Belleek"
+  ],
+  "siblings": [
+   "tan",
+   "beige",
+   "khaki",
+   "camel"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#DBC39E",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 2448,
+  "painters": [
+   {
+    "key": "Xugu",
+    "n": 16,
+    "hits": 11,
+    "lift": 6.68
+   }
+  ],
+  "countries": [
+   {
+    "key": "Iran",
+    "lift": 4.69
+   },
+   {
+    "key": "India",
+    "lift": 2.83
+   },
+   {
+    "key": "Japan",
+    "lift": 2.57
+   }
+  ],
+  "measured": {
+   "lch": [
+    80,
+    22,
+    82
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Maerz & Paul, A Dictionary of Color, plate 11 A 2, first recorded 1928 (alternate name Belleek, plate 11 B 3, also 1928)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: ISCC-NBS block, nearest-match field (data/graph/nodes-m.json; data/library.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the name Natural describe, unlike most other colors in the 1930 dictionary?",
+   "choices": [
+    "The undyed color of raw fiber, not one plant, place or person",
+    "A specific flower",
+    "A French dye works",
+    "An English king"
+   ],
+   "answer": "The undyed color of raw fiber, not one plant, place or person",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Natural is among the rarest colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Natural describes the undyed color of raw fiber, which is why it matches so many unrelated materials."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 255
+}

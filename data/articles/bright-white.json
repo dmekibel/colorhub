@@ -1,0 +1,139 @@
+{
+ "slug": "bright-white",
+ "name": "Bright white",
+ "hex": "#EBF6F7",
+ "names": [
+  "Bright white"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Bright white is a pale, slightly greenish white whose Japanese library name, Aijiro, means \"indigo white\": the faintest trace of blue a dye vat can leave on cloth, and it reads only about 5 units from plain [[white]].",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Aijiro, the whitest shade of indigo",
+   "body": "The Wikipedia survey \"Traditional colors of Japan\" lists this color under the romanized name Aijiro, written 藍白 [1]. 藍 names [[indigo]], the dye plant and its blue, and 白 is \"white\"; together the library glosses it as \"indigo white,\" the near-colorless end of a dipped indigo gradation [1]. No book consulted here independently confirms a date, so the craft story beyond the gloss is undocumented [1].\n\nOur library's own ISCC-NBS block for this swatch groups it with several other English near-white names, among them Birch and Surf Spray, which is a reminder of how many different names a single pale block of color can carry [1]. The nearest already-named color here is [[white]] itself, at a color-distance of 5.4 [1]. The hex, #EBF6F7, is a modern screen approximation, not a measurement of dyed cloth [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within range of this swatch appears in 79 of the 23,781 paintings in our archive, about 0.33 percent, as photographed; the within-painting lens finds it in 54 [2]. That is more common than 51 percent of the named colors we track, so this pale white sits roughly in the middle of our rarity scale [2].\n\nIt peaks in the 1900s, present in 9 of 1,674 paintings from that century, 1.9 times the expected rate [2]. Inside a painting it most often plays a light, in nearly three-quarters of the paintings that carry it [2]. The earliest dated appearance we have is Ambrogio Lorenzetti, 1332, though the archive's early centuries are thin, so this is a floor and not a true first sighting [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "indigo white, from 藍 (indigo) and 白 (white)",
+   "first_recorded": "undocumented beyond its listing in Japan's traditional color system",
+   "source": "ColorHub color library (Wikipedia, \"Traditional colors of Japan\")"
+  },
+  "aka": [
+   "Aijiro",
+   "藍白"
+  ],
+  "siblings": [
+   "mint-cream",
+   "alice-blue",
+   "traffic-white",
+   "pale-grey"
+  ],
+  "parent": "white",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Aijiro (藍白), \"indigo white\""
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 79,
+  "rank_pct_more_common_than": 51,
+  "century_peak": {
+   "century": 1900,
+   "hits": 9,
+   "of": 1674,
+   "lift": 1.9
+  },
+  "role": {
+   "kind": "light",
+   "pct": 72
+  },
+  "first_seen": {
+   "year": 1332,
+   "painter": "Ambrogio Lorenzetti"
+  },
+  "measured": {
+   "nearest": [
+    [
+     "Mint Cream",
+     3.4
+    ],
+    [
+     "Alice Blue",
+     3.7
+    ],
+    [
+     "Traffic White",
+     4.3
+    ],
+    [
+     "Pale Grey",
+     5.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional color names (Wikipedia, \"Traditional colors of Japan\"); ISCC-NBS 1955 block 153",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Aijiro literally mean?",
+   "choices": [
+    "Indigo white",
+    "Winter white",
+    "Rice-paper white",
+    "Snow blossom"
+   ],
+   "answer": "Indigo white",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: bright white is among the rarest colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Bright white's Japanese name, Aijiro, means \"indigo white\": the faintest trace of blue left by a dye vat, not a true neutral white."
+ ],
+ "words": 292,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No book-level source for the dyeing craft beyond the library gloss; stated as undocumented rather than guessed.",
+   "lint 2026-10-09"
+  ]
+ }
+}

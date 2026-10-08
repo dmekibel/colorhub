@@ -1,0 +1,130 @@
+{
+ "name": "Chamoline",
+ "hex": "#BC8944",
+ "names": [
+  "Chamoline"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Chamoline is a dark orange-yellow from Maerz and Paul's 1930 dictionary of color names, close to camel.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A plate name from 1930",
+   "body": "Maerz and Paul's *A Dictionary of Color* places Chamoline on plate 13, cell L8, with a first-recorded date of 1902 [1]. The ISCC-NBS system later filed the same block of color as a dark orange yellow [2].\n\nThe same plate cell also carries the name Buckthorn Brown, first recorded in 1912 [1]. The dictionary gives no origin for either word, so the source of the name is undocumented here [1]. The nearest named colors on file are [[pinchbeck-brown]], [[dusty-bronze]], [[dark-tan]] and [[ochraceous-tawny]], at 3.2, 3.4, 3.5 and 4.5 ΔE [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "ColorHub's archive finds this color in 1,657 of 23,781 paintings, about 7 percent, as photographed [4]. Bernardo Strozzi and Pietro Perugino carry it more than most painters in the set [4]. In our own [[ochre]]-to-[[tan]] range it reads as one of the darker, more orange members [4]. The match is computed from photographed, varnished canvases, not a pigment identification [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1902, Maerz & Paul 1930",
+   "source": "Maerz & Paul, A Dictionary of Color"
+  },
+  "aka": [],
+  "siblings": [
+   "pinchbeck-brown",
+   "dusty-bronze",
+   "dark-tan",
+   "ochraceous-tawny"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1657,
+  "match": {
+   "nearest_library": "Camel",
+   "de2000": 6.9
+  },
+  "measured": {
+   "lch": [
+    61,
+    46,
+    74
+   ],
+   "nearest": [
+    [
+     "Pinchbeck Brown",
+     3.2
+    ],
+    [
+     "Dusty bronze",
+     3.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz & Paul, A Dictionary of Color (1930), plate 13, cell L8",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS (1955) block entry",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library: nearest named color by CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1930 dictionary first records Chamoline?",
+   "choices": [
+    "Maerz and Paul's A Dictionary of Color",
+    "Ridgway's Color Standards",
+    "The ISCC-NBS report",
+    "Pantone"
+   ],
+   "answer": "Maerz and Paul's A Dictionary of Color",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the dictionary explains where the name Chamoline comes from.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Chamoline shares its 1930 dictionary cell with a color called Buckthorn Brown."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "slug": "chamoline",
+ "words": 168
+}

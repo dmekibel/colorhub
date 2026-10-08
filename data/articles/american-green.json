@@ -1,0 +1,134 @@
+{
+ "slug": "american-green",
+ "name": "American Green",
+ "hex": "#6F8D72",
+ "names": [
+  "American Green"
+ ],
+ "tier": "place",
+ "depth": "short",
+ "lede": "American Green is a muted sage first plated by Ridgway in 1912, a color Gustav Klimt used nearly nine times more than his museums' baseline rate, despite its being filed under a place word on the other side of the Atlantic from Vienna.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A place word, no documented story",
+   "body": "Ridgway's 1912 atlas plates this sage at plate XLI, hue 33 triple-prime, tone i, a scan of an aged plate treated here as approximate [1]. The 1955 ISCC-NBS circular later classed it as moderate yellowish green, 6.1 units from its block center, and Maerz and Paul's 1930 dictionary separately dates the name to 1905, plate 22 A7 [1]. The Munsell notation is 1.0G 5.5/3.1 [1]. Our sources classify \"American\" here only as a place word; nothing in the books consulted explains why this particular sage carries it [1].\n\nThe closest named color on screen is [[slate-green]], 2.8 units away and described as almost the same; [[green-grey]] follows at 3.3, read as yellower, [[sage-green]] at 4.4, lighter, and [[french-green]] at 4.8, greener and more vivid [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this sage in 1.01 percent of 23,781 paintings, 241 of them, and the within-painting lens isolates it as a dominant area in 111, as photographed [2]. That ranks it ahead of 60 percent of the named colors we track [2]. It peaks in the 1900s, in 22 of 1,674 paintings, present in 1.3 percent of the 1,674 paintings (22 of them) dated to that century, 2.5 times its museums' baseline rate [2].\n\nInside a painting it most often plays a hidden color, 29 percent of its 111 appearances by lightness rank, meaning it is more often tucked into shadow than shown plainly [2]. Gustav Klimt is its most devoted painter here, carrying it in 6 of his 50 works, 8.7 times the baseline rate of the museums those paintings come from [2]; Camille Pissarro follows at 6.1 times, and the color is also over-represented in the Impressionist movement generally, 5.0 times its baseline [2]. It is further over-represented in Austrian painting specifically, 5.9 times the expected rate, 6 of 121 Austrian works, which lines up with Klimt's own home city [2]. The earliest match in our archive is a painting dated to 1401, 511 years before Ridgway's 1912 record of the name; that gap marks a look-alike hue in an aged photograph, not the pigment itself, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented beyond its tag as a place word",
+   "first_recorded": "1905 or 1912, depending on source",
+   "source": "Maerz and Paul (1930); Ridgway (1912)"
+  },
+  "aka": [],
+  "siblings": [
+   "slate-green",
+   "green-grey",
+   "sage-green",
+   "french-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 241,
+  "n_within": 111,
+  "measured": {
+   "lch": [
+    55.7,
+    19.6,
+    145.9
+   ],
+   "nearest": [
+    [
+     "Slate Green",
+     2.8
+    ],
+    [
+     "Green Grey",
+     3.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway (1912) plate XLI, hue 33‴; Maerz and Paul (1930), plate 22 A7; ISCC-NBS cross-reference",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub graph: nearest named colors (look-alike data)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which painter in our archive carries American Green far more than his peers?",
+   "choices": [
+    "Gustav Klimt",
+    "John Singer Sargent",
+    "Alfred Sisley",
+    "Paulus Potter"
+   ],
+   "answer": "Gustav Klimt",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our books agree on a single year when American Green was first recorded.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Inside a painting, what role does American Green most often play?",
+   "choices": [
+    "A hidden color",
+    "An accent",
+    "A shadow",
+    "The dominant light"
+   ],
+   "answer": "A hidden color",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Gustav Klimt used this muted sage nearly nine times more than his museums' baseline rate.",
+  "American Green is most often tucked into shadow in a painting rather than shown plainly — a hidden color 29 percent of the time."
+ ],
+ "words": 411,
+ "status": "checked",
+ "checked": {
+  "by": "claude",
+  "date": "2026-10-08",
+  "issues": [
+   "Maerz and Paul (1905) and Ridgway (1912) give different first-recorded years; both are kept, unresolved.",
+   "No source explains why \"American\" names this particular sage.",
+   "lint 2026-10-09"
+  ]
+ }
+}

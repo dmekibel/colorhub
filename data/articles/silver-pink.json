@@ -1,0 +1,145 @@
+{
+ "slug": "silver-pink",
+ "name": "Silver Pink",
+ "hex": "#C4AEAD",
+ "names": [
+  "Silver Pink"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Silver Pink is a greyed-out pink first filed by the ISCC-NBS system in 1955, so close to [[black-shadows]] on screen that the two are nearly indistinguishable, with a darker variant of its own called Dark Silver Pink.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A grey pink with a dark child",
+   "body": "The 1955 ISCC-NBS circular places Silver Pink in its grayish pink block, less than 1 color-unit from that block's own center, among the tightest fits in the system [1]. The Munsell notation is 3.8R 7.2/2.2 [1]. Our library carries several older names it has been sold or printed under, including Cloud Pink, Pinkish Grey and Light Heliotrope-Grey, though none of our sources dates them [1].\n\nSilver Pink has one documented child in the library, Dark Silver Pink, a deeper version of the same grey-pink [1]. It shares its family word, \"silver,\" with [[silver-fern]] and [[silver-green]] from this same batch, though the three are not otherwise linked [1]. On screen, Black Shadows sits only 2.7 units away, described here as almost the same [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this grey pink in 0.53 percent of 23,781 paintings, 127 of them, and the within-painting lens isolates it as a dominant area in 74, as photographed [2]. That ranks it ahead of 55 percent of the named colors we track [2]. It peaks in the 1900s, in 22 of 1,674 paintings, present in 1.3 percent of the 1,674 paintings (22 of them) dated to that century, 3.0 times its museums' baseline rate [2].\n\nInside a painting it most often plays a light, 61 percent of its 74 appearances by lightness rank [2]. The earliest match in our archive is a 1452 panel by Bartolomeo Caporali, 503 years before the ISCC-NBS system's 1955 record of the name; that gap marks a look-alike hue in an aged photograph, not the pigment itself, a floor and not a first, since the archive's early centuries are thin [2]. It is also over-represented in French painting, 2.3 times the expected rate, 27 of 3,443 French works in the archive [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented beyond the word \"silver\"",
+   "first_recorded": "1955 (ISCC-NBS)",
+   "source": "ISCC-NBS, 1955 circular"
+  },
+  "aka": [
+   "Cloud Pink",
+   "Pinkish Grey",
+   "Light Heliotrope-Grey",
+   "Fantasy Rose"
+  ],
+  "siblings": [
+   "silver-fern",
+   "silver-green",
+   "black-shadows"
+  ],
+  "parent": null,
+  "children": [
+   "dark-silver-pink"
+  ],
+  "disambiguation": [
+   {
+    "slug": "silver",
+    "gloss": "shares a root word, not the same color as plain Silver"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 127,
+  "n_within": 74,
+  "measured": {
+   "lch": [
+    72.9,
+    8.5,
+    23.7
+   ],
+   "nearest": [
+    [
+     "Black Shadows",
+     2.7
+    ],
+    [
+     "Light Brownish Vinaceous",
+     3.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS (1955) entry for Silver Pink, block 8; Munsell cross-reference and alternate names",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub graph: nearest named colors (look-alike data)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which system first records Silver Pink, and in what year?",
+   "choices": [
+    "ISCC-NBS, 1955",
+    "Maerz and Paul, 1930",
+    "Ridgway, 1912",
+    "Crayola, undocumented"
+   ],
+   "answer": "ISCC-NBS, 1955",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Silver Pink has a darker named variant in our library.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "Where is Silver Pink most over-represented in our archive?",
+   "choices": [
+    "France",
+    "India",
+    "Austria",
+    "Japan"
+   ],
+   "answer": "France",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Silver Pink sits only 2.7 color-units from Black Shadows, a name that sounds nothing like it.",
+  "This greyed pink peaks in 1900s French painting, three times its museums' expected rate."
+ ],
+ "words": 332,
+ "status": "checked",
+ "checked": {
+  "by": "claude",
+  "date": "2026-10-08",
+  "issues": [
+   "The older alternate names (Cloud Pink, Pinkish Grey) carry no documented date in our sources.",
+   "The 1452 first-seen painting is a look-alike match, not evidence the color system existed then.",
+   "lint 2026-10-09"
+  ]
+ }
+}

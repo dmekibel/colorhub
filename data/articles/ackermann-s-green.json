@@ -1,0 +1,125 @@
+{
+ "slug": "ackermann-s-green",
+ "name": "Ackermann's Green",
+ "hex": "#528565",
+ "names": [
+  "Ackermann's Green"
+ ],
+ "tier": "person",
+ "depth": "short",
+ "lede": "Ackermann's Green is a moderate, cool green that Robert Ridgway's 1912 dictionary files among the colors he names for a person, though which Ackermann he meant is undocumented in our sources.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Named for someone, unrecorded",
+   "body": "Ridgway's 1912 “Color Standards and Color Nomenclature” lists Ackermann's Green at hex #528565 and groups it with the names he credits to a person rather than a place, plant or pigment [1]. The 1955 Inter-Society Color Council catalog repeats the name, placing it in the block it calls moderate green, and that circular also cites Maerz and Paul's 1930 dictionary [1]. Ridgway gives no first name, trade or story for Ackermann, and we found no mention of this color in the 29 books behind our concordance, so the person honored is undocumented here [1].\n\nIts nearest neighbor in our color graph is [[hay-s-green|Hay's Green]], another name from the same “named for a person” group in Ridgway's dictionary, 3.4 units away and a touch yellower [1]. The next-closest named colors are [[emeraude|Emeraude]] and [[french-green|French Green]], both within 4 units [1]. Against the basic color words it reads closest to [[viridian|Viridian]], 5.0 units off, a cooler and more muted shade of the same family [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive matches this green in 0.35% of 23,781 paintings, 83 of them, as photographed, with the within-painting lens counting 32 [2]. That rank puts it among the rarer named colors, behind 56% of our set [2]. It peaks in the 1900s, present in 0.8% of the 1,674 paintings from that century, 4.8 times the rate its museums would predict [2]. Inside a painting it most often sits as a mid-tone, in 31% of its 32 appearances [2]. Paul Cezanne is its most devoted painter, holding it in 4 of 50 works here, 6.0 times the baseline of the museums his paintings come from [2]. Our earliest match dates to 1565, by Luis de Morales, 347 years before Ridgway's 1912 book recorded the name, a floor rather than a first, since a color match in an aged photograph is not proof of a pigment [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930"
+  },
+  "aka": [],
+  "siblings": [
+   "hay-s-green",
+   "emeraude",
+   "french-green",
+   "scarab"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 83,
+  "measured": {
+   "lch": [
+    51.3,
+    27.3,
+    154.1
+   ],
+   "nearest": [
+    [
+     "Hay's Green",
+     3.4
+    ],
+    [
+     "Emeraude",
+     3.4
+    ],
+    [
+     "French Green",
+     3.6
+    ],
+    [
+     "Scarab",
+     3.9
+    ]
+   ]
+  },
+  "iscc_nbs": {
+   "name": "moderate green",
+   "de": 6.2
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912 (plate XVIII), ISCC-NBS 1955 (block 137), Maerz & Paul 1930",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Ridgway's 1912 dictionary say about who Ackermann was?",
+   "choices": [
+    "Nothing; the person is undocumented in our sources",
+    "That he was a pigment maker",
+    "That he was a painter",
+    "That he was a dye merchant"
+   ],
+   "answer": "Nothing; the person is undocumented in our sources",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Ackermann's Green is one of the more common named colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Ridgway named this green for a person in 1912, but never says which Ackermann he meant."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits; origin of the personal name is undocumented in our sources.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 335
+}

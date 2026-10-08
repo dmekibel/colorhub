@@ -1,0 +1,120 @@
+{
+ "slug": "buffy-citrine",
+ "name": "Buffy Citrine",
+ "hex": "#98834A",
+ "names": [
+  "Buffy Citrine"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Buffy Citrine is a dull gold-brown named for citrine, the yellow gem, and recorded by Ridgway in 1912 under the Japanese name Yanagicha, or willow tea.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A gem's name, with a Japanese twin",
+   "body": "The nearest named colors on file are [[rustic-drab]], [[metallic-sunburst]], [[dusty-hazel-tone]] and [[dull-citrine]], at 3, 4.4, 4.4 and 4.7 ΔE [1]. The same library entry carries the Japanese name Yanagicha, written 柳茶 and meaning willow tea [1].\n\nA near-duplicate swatch in our data, Olive Lake, sits only 2.2 units off under a different name [1]. A second library color, [[citrine-drab]], is built on the same gem word but reads paler and greyer [1]. In LCH terms Buffy Citrine is mid-toned and moderately chromatic: lightness 55, chroma 34, hue 90 degrees [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings finds a close match to Buffy Citrine in 2,417, about 10.2 percent, as photographed [2]. It covers most of the frame in Chinese and Japanese works, including an undated bird-and-branch painting and John Singer Sargent's *Study of Two Bedouins* of 1905, where it fills about 77 percent of the canvas [2]. Its heaviest use, relative to each painter's own baseline, falls to Paulus Potter, Johan Hendrik Weissenbruch and Mariano Fortuny Marsal, and the archive's use of it peaks in paintings from around 1400 [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the gem citrine",
+   "first_recorded": "1912 (Ridgway, plate XVI, hue 19′)",
+   "source": "Ridgway, Color Standards and Color Nomenclature; ColorHub library"
+  },
+  "aka": [
+   "Yanagicha"
+  ],
+  "siblings": [
+   "rustic-drab",
+   "metallic-sunburst",
+   "dusty-hazel-tone",
+   "dull-citrine"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Yanagicha (柳茶), willow tea"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2417,
+  "match": {
+   "hex": "#98834A",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "measured": {
+   "lch": [
+    55,
+    34,
+    90
+   ],
+   "nearest": [
+    [
+     "Rustic Drab",
+     3.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: name records, plate and block locators, tier classification",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the Japanese name for Buffy Citrine, Yanagicha, mean?",
+   "choices": [
+    "Willow tea",
+    "Morning sun",
+    "Autumn leaf",
+    "Golden sand"
+   ],
+   "answer": "Willow tea",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Buffy Citrine and Citrine-Drab are both named for the same gem.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Buffy Citrine carries a Japanese name, Yanagicha, that means willow tea."
+ ],
+ "words": 210,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

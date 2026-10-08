@@ -1,0 +1,114 @@
+{
+ "slug": "platinum-grey",
+ "name": "Platinum Grey",
+ "hex": "#9A9697",
+ "names": [
+  "Platinum Grey"
+ ],
+ "tier": "pigment",
+ "depth": "brief",
+ "lede": "Platinum Grey is a near-neutral medium grey taken from RAL 7036, named for the pale metal platinum rather than any platinum-based pigment.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A metal's name, not its pigment",
+   "body": "Our library lists Platinum Grey as RAL 7036 [1]. RAL, the German industrial color standard, began in 1927 with a first set of forty swatches, RAL 840, issued so that paint could be specified by number instead of by physical sample [2]. Platinum, the metal, is itself a near-white, slightly grey metal, and the name here borrows that association rather than describing any pigment made from it: no platinum compound is a common artist's or industrial colorant [1][2].\n\nIn Munsell terms the library records this grey as N 6.1, a pure neutral with almost no color cast (LCH chroma just 1.7) [1]. That puts it a step darker than [[silver|Silver]] and close to [[irisglow|Irisglow]] and [[plumbago-grey|Plumbago Grey]] in our data, though all are simply shades of neutral grey [1]. Beyond the RAL code, no further naming history is documented here [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A screen match for this grey appears in 921 of 23,781 paintings, about 3.9 percent, as photographed, with its highest coverage in Christen Købke's 1831 cloud study *Studie af skyer*, where it fills most of the canvas [1]. It is nearly two and a half times more common in paintings from the 1900s than the archive average, often in skies, stone and fabric rather than skin [1]. The match is computed from photographs of aged, varnished paintings and never identifies a pigment [1]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "platinum, the pale grey-white metal",
+   "first_recorded": "undocumented beyond its RAL 7036 code",
+   "source": "RAL color standard"
+  },
+  "aka": [
+   "RAL 7036"
+  ],
+  "siblings": [
+   "silver",
+   "irisglow"
+  ],
+  "parent": "grey",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 921,
+  "rate": 0.0387,
+  "measured": {
+   "lch": [
+    62,
+    2,
+    0
+   ],
+   "nearest": [
+    [
+     "Irisglow",
+     2.82
+    ],
+    [
+     "Plumbago Grey",
+     3.61
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and archive (23,781 paintings): RAL 7036 entry, Munsell and LCH values, computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "web",
+   "cite": "Wikipedia, \"RAL colour standard\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/RAL_colour_standard"
+  }
+ ],
+ "questions": [
+  {
+   "q": "Platinum Grey is named after what?",
+   "choices": [
+    "A pigment made from platinum",
+    "The pale metal's color",
+    "A Victorian dress fabric",
+    "A camera film stock"
+   ],
+   "answer": "The pale metal's color",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Platinum Grey has a noticeable warm or cool color cast.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Platinum Grey borrows a metal's name for its color, though no pigment here is actually made from platinum."
+ ],
+ "words": 241,
+ "status": "checked",
+ "checked": {
+  "by": "batch-23",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits; RAL founding history from one web source, hedged. No documentation found for the specific naming of 7036.",
+   "lint 2026-10-09"
+  ]
+ }
+}

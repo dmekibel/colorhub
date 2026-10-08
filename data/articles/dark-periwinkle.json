@@ -1,0 +1,116 @@
+{
+ "slug": "dark-periwinkle",
+ "name": "Dark Periwinkle",
+ "hex": "#665FD1",
+ "names": [
+  "Dark Periwinkle"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Dark Periwinkle is a deep, saturated blue-violet, a shade down from [[periwinkle]] and classed by the ISCC-NBS system as a strong purplish blue.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "The ISCC-NBS system of 1955 carries a block at this position, number 186, which covers several related moderate, pale, reddish, strong and light purplish blues [1]. The xkcd survey of 2010 later collected the plain descriptive phrase \"dark periwinkle\" from the public, and Wikipedia's own color list cites the ISCC-NBS block for its entry near this swatch [1].\n\nNo book in our library records who first drew the line at this exact depth of blue-violet, so its coinage as a named color stays undocumented here [1]. The nearest named colors on file are [[iris]], [[warm-blue]] and [[majorelle-blue]], at 2.9, 4.5 and 4.6 ΔE [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds no match for this exact swatch in its 23,781 paintings, using the standard CIEDE2000 and coverage test [2]. Saturated blue-violets of this depth are themselves rare in museum paint: many of the pigments that reach this chroma, such as synthetic ultramarine and some modern violets, postdate most of the archive or fade unevenly [2]. These are photographs of aged, varnished paintings, so an absence here says the shade is rare on surviving canvas, not that it was never mixed [2]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "periwinkle, the flower, darkened",
+   "first_recorded": "ISCC-NBS 1955, block 186; xkcd color survey 2010",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "iris",
+   "warm-blue",
+   "majorelle-blue",
+   "violet-blue"
+  ],
+  "parent": "periwinkle",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+  "n_present": 0,
+  "rate": 0.0,
+  "measured": {
+   "nearest": [
+    [
+     "Iris",
+     2.9
+    ],
+    [
+     "Warm Blue",
+     4.5
+    ],
+    [
+     "Majorelle Blue",
+     4.6
+    ],
+    [
+     "Violet blue",
+     5.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955 block 186, xkcd color survey 2010)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "True or false: our painting archive finds many examples of this exact shade of Dark Periwinkle.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which 1955 reference system carries a block at this position?",
+   "choices": [
+    "ISCC-NBS",
+    "Munsell Book of Color",
+    "Pantone"
+   ],
+   "answer": "ISCC-NBS",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Dark Periwinkle's exact shade turns up in none of our 23,781 archived paintings."
+ ],
+ "words": 223,
+ "status": "checked",
+ "checked": {
+  "by": "writer-lane",
+  "date": "2026-10-08",
+  "issues": [
+   "No book source for the English name itself; ISCC-NBS block and xkcd survey only",
+   "lint 2026-10-09"
+  ]
+ }
+}

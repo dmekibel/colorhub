@@ -1,0 +1,119 @@
+{
+ "slug": "dark-cadet-blue",
+ "name": "Dark Cadet Blue",
+ "hex": "#476181",
+ "names": [
+  "Dark Cadet Blue"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dark Cadet Blue is a muted, darker modifier on [[cadet-blue|cadet blue]] — itself named for the grayish blue of a military cadet's uniform — scanned from Ridgway's 1912 plates and filed by the ISCC-NBS system in 1955.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A darker cadet blue",
+   "body": "The name follows the library's modifier grammar, *dark* plus [[cadet-blue|cadet blue]], whose own name comes from the grayish blue of a military cadet's uniform [1]. Ridgway's 1912 *Color Standards and Color Nomenclature* records this hue twice, at plate XXI, hue 49′ and again at plate XXXIV, hue 47″, both scans of aged plates and so only approximate; the ISCC-NBS system filed the chip in 1955 as a moderate blue [1].\n\nIts nearest named neighbors are [[newport]], almost the same at 3.0 units, and [[denim]], a touch more vivid at 3.2 [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color this close to Dark Cadet Blue is common in our archive: 210 of 23,781 paintings, as photographed, about 0.88 percent, more common than 58 percent of the named colors [3]. It peaks in paintings from the 1900s, at 2.9 times the expected rate, and most often plays an accent, 34 percent of the time [3]. The earliest match dates to 1350, by the Master of San Lucchese, 562 years before the name's own 1912 record [3]. That is centuries before the name's own record, a floor on the hue's age, not a first use of either the name or a pigment."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a modifier on cadet blue, itself named for a military cadet's uniform",
+   "first_recorded": "Ridgway, Color Standards and Color Nomenclature (1912), plate XXI, hue 49′",
+   "source": "ColorHub color library (Ridgway 1912; ISCC-NBS 1955)"
+  },
+  "aka": [],
+  "siblings": [
+   "newport",
+   "denim",
+   "acetin-blue"
+  ],
+  "parent": "cadet-blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 210,
+  "n_within": 97,
+  "role": "accent 34%",
+  "century_peak": "1900s, 2.9x expected",
+  "measured": {
+   "lch": [
+    40.4,
+    20.9,
+    268.6
+   ],
+   "nearest": [
+    [
+     "Newport",
+     3.0
+    ],
+    [
+     "Denim",
+     3.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-d.json): Ridgway 1912, plate XXI, hue 49′ and plate XXXIV, hue 47″; ISCC-NBS 1955, block 182",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph, look-alike edges (data/graph/edges-d.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes); counts are computed color matches on photographs of varnished, aged canvases, not pigment identifications",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the name \"cadet blue\" originally refer to?",
+   "choices": [
+    "The grayish blue of a military cadet's uniform",
+    "A naval flag",
+    "A French dye works",
+    "A gemstone"
+   ],
+   "answer": "The grayish blue of a military cadet's uniform",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Ridgway's 1912 plates record this hue only once.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Cadet blue takes its name from a military cadet's uniform; this is its darker reading."
+ ],
+ "words": 228,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}

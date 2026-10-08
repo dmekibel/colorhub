@@ -1,0 +1,116 @@
+{
+ "slug": "deep-plumbago-blue",
+ "name": "Deep Plumbago Blue",
+ "hex": "#A7A7BB",
+ "names": [
+  "Deep Plumbago Blue"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Deep Plumbago Blue is a pale, grayed violet-blue named for the plumbago flower, recorded in Ridgway's 1912 atlas and carried into the ISCC-NBS system of 1955 as a pale purple.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Named for a garden flower",
+   "body": "Our data traces the name to plumbago, a garden flowering shrub whose blooms run from pale to deep blue-violet, a plant-and-landscape word rather than a pigment [1]. Ridgway's 1912 atlas plots it on plate XLIII at hue 53′′′, tone d, and the ISCC-NBS system of 1955 files the same area as block 227, \"pale purple,\" despite the name's claim to blue [1]. In LCH terms it measures lightness 69, chroma 11, hue 291 degrees: light, lightly saturated, and leaning violet more than true blue [1].\n\nIts nearest distinct neighbor by computed color distance is [[deep-greyish-lavender|Deep Greyish Lavender]], 3.7 units away and read in our data as \"purpler\" [2]. [[manatee|Manatee]] sits a little further, 4.8 units off, called \"darker\" [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a close match covers enough of the canvas in 105, as photographed, more common than 59 percent of the named colors we track [3]. It peaks in paintings from the 1900s, at 1.5 times the rate expected from that century's share of the archive [3]. Claude Monet is its most devoted painter here, with the color present in 6 of 50 of his works, more than nine times the baseline of the museums those works come from [3]. Inside a painting it most often plays a light, in 42 percent of its matches, by lightness rank within the canvas [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "plumbago, the garden flower",
+   "first_recorded": "Ridgway, 1912",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "deep-greyish-lavender",
+   "manatee",
+   "light-blue-grey",
+   "dark-greyish-lavender"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 105,
+  "measured": {
+   "lch": [
+    69,
+    11,
+    291
+   ],
+   "nearest": [
+    [
+     "Deep Greyish Lavender",
+     3.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/nodes-d.json): Deep Plumbago Blue — Ridgway 1912, plate XLIII, hue 53′′′, tone d; ISCC-NBS 1955, block 227",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-d.json): nearest distinct neighbors by CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings, as photographed, data/graph/fieldnotes/d.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "True or false: the ISCC-NBS system classes Deep Plumbago Blue's block as a pale purple, not a blue.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which painter in our archive is most devoted to Deep Plumbago Blue?",
+   "choices": [
+    "Claude Monet",
+    "Eugène Boudin",
+    "Pierre Puvis de Chavannes",
+    "Eastman Johnson"
+   ],
+   "answer": "Claude Monet",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Despite its name, the ISCC-NBS system calls this shade's block a pale purple, not a blue."
+ ],
+ "words": 250,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No book concordance hits for this slug; written from the color graph, library and archive data only.",
+   "lint 2026-10-09"
+  ]
+ }
+}

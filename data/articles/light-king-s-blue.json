@@ -1,0 +1,132 @@
+{
+ "slug": "light-king-s-blue",
+ "name": "Light King's Blue",
+ "hex": "#9EB4CC",
+ "names": [
+  "Light King's Blue"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Light King's Blue is a soft, greyed sky blue from Ridgway's 1912 atlas, a lightened version of the pigment name King's Blue rather than a blue with its own separate history.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A paled pigment name",
+   "body": "Ridgway's 1912 atlas carries this tone on plate XXII, hue 47* [1]. The 1955 ISCC-NBS dictionary lists it simply as pale blue, without a block number in our source, 6.3 units from Ridgway's reading, its Munsell notation given as 3.5PB 7.2/4.1 [1].\n\nIts closest neighbor in our library is [[light-columbia-blue]], about 2.7 units away, almost the same color, followed by [[light-grey-blue]], about 3.4 units off and more blue [2]. [[cloudy-blue]] and [[burn-blue]] sit a little further, about 3.8 to 4.7 units off [2]. \"King's Blue\" was itself an artists' pigment name; what the unmodified pigment owes its name to is undocumented here [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive matches this tone in 222 of 23,781 paintings, about 0.93 percent, as photographed, more common than 65 percent of the named colors tracked [3]. It peaks in the 1900s, present in 1.2 percent of the 1,674 paintings from that decade, 1.4 times its museums' expected rate [3].\n\nInside a painting it most often hides, in 50 percent of its 145 clearly-ranked appearances, a rank computed within each canvas so varnish cannot fake it [3]. C. W. Eckersberg carries it most often by raw count, in 5 of his 50 works here, though no painter stands out once measured against their own museums' baseline [3]. These are photographs of aged, varnished paintings, and the match is a computed color reading, not a pigment identification [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "King's Blue, an artists' pigment name; origin of that name undocumented here",
+   "first_recorded": "1912 (Ridgway); carried into the 1955 ISCC-NBS dictionary",
+   "source": "Ridgway, Color Standards and Color Nomenclature; ISCC-NBS, NBS Circular 553"
+  },
+  "aka": [],
+  "siblings": [
+   "light-columbia-blue",
+   "light-grey-blue",
+   "cloudy-blue",
+   "burn-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#9EB4CC",
+   "de2000": 6.3,
+   "min_cover": 0.02
+  },
+  "n_present": 222,
+  "measured": {
+   "lch": [
+    72.4,
+    14.8,
+    261.1
+   ],
+   "nearest": [
+    [
+     "Light Columbia Blue",
+     2.7
+    ],
+    [
+     "Light Grey Blue",
+     3.4
+    ],
+    [
+     "Cloudy Blue",
+     3.8
+    ],
+    [
+     "Burn Blue",
+     4.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XXII, hue 47*; cited in ISCC-NBS, NBS Circular 553 (1955), \"pale blue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library and graph: computed LCH and nearest-neighbor distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "True or false: \"King's Blue\" in this name refers to an older artists' pigment.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "Inside a painting, Light King's Blue most often plays which role?",
+   "choices": [
+    "A hidden color",
+    "A light",
+    "An accent",
+    "A shadow"
+   ],
+   "answer": "A hidden color",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Light King's Blue is a muted, greyed-down version of the old pigment name King's Blue."
+ ],
+ "words": 270,
+ "status": "checked",
+ "checked": {
+  "by": "batch-36",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

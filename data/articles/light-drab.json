@@ -1,0 +1,152 @@
+{
+ "slug": "light-drab",
+ "name": "Light Drab",
+ "hex": "#AC9880",
+ "names": [
+  "Light Drab"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Light Drab is a pale yellowish tan from Ridgway's 1912 atlas, one of the closest matches between Ridgway's original reading and the 1955 dictionary that filed it, and one of the most common tones in our painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A near-exact match across two books",
+   "body": "Ridgway's 1912 atlas carries this tone on plate XLVI, hue 17‴‴, notated 9.8YR 6.3/2.4 in the Munsell system [1]. The 1955 ISCC-NBS dictionary groups it under block 79, naming it light grayish yellowish brown, only 0.9 units from Ridgway's reading, among the closer matches in this naming lineage [1].\n\nIts closest neighbors in our library are [[grey-beige]] and [[flint-grey]], each about 3.2 to 3.7 units away, close enough to pass for the same color [2]. [[mauve-blush]] and [[dusty-cinnamon]] sit a little further, about 4.0 to 4.5 units off, lighter and redder [2]. The name is a plain \"light\" modifier on Ridgway's drab family, not a word chosen for its own associations [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive matches this tone in 3,453 of 23,781 paintings, about 14.5 percent, as photographed, more common than 96 percent of the named colors we track [3]. It peaks oddly early, in the 1200s, present in 23.2 percent of the 142 paintings we have from that century, though that century's sample is thin [3].\n\nInside a painting it most often hides, in 37 percent of its 2,358 clearly-ranked appearances, a rank computed within each canvas so varnish cannot fake it [3]. The earliest match in the archive is a 900s painting by Zhao Guangfu, 1,012 years before the name itself was recorded in 1912, a reminder that the match is a look-alike hue in an aged photograph, not proof of any pigment, a floor and not a first, since the archive's early centuries are thin [3]. Dutch marine painter Willem van de Velde (II) favors it most, in 6 of his 15 works here, 4.3 times his museums' baseline rate [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a modifier of Ridgway's drab family; undocumented beyond the naming system",
+   "first_recorded": "1912 (Ridgway); carried into the 1955 ISCC-NBS dictionary",
+   "source": "Ridgway, Color Standards and Color Nomenclature; ISCC-NBS, NBS Circular 553"
+  },
+  "aka": [],
+  "siblings": [
+   "grey-beige",
+   "flint-grey",
+   "mauve-blush",
+   "dusty-cinnamon"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#AC9880",
+   "de2000": 0.9,
+   "min_cover": 0.02
+  },
+  "n_present": 3453,
+  "painters": [
+   {
+    "name": "Willem van de Velde (II)",
+    "hits": 6,
+    "n": 15,
+    "lift": 4.3
+   }
+  ],
+  "measured": {
+   "lch": [
+    64.0,
+    15.8,
+    76.9
+   ],
+   "nearest": [
+    [
+     "Grey Beige",
+     3.2
+    ],
+    [
+     "Flint Grey",
+     3.7
+    ],
+    [
+     "Mauve Blush",
+     4.0
+    ],
+    [
+     "Dusty cinnamon",
+     4.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XLVI, hue 17‴‴; cited in ISCC-NBS, NBS Circular 553 (1955), block 79, \"light grayish yellowish brown\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library and graph: computed LCH and nearest-neighbor distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "By how many units did Ridgway's 1912 reading and the 1955 ISCC-NBS block differ for Light Drab?",
+   "choices": [
+    "0.9",
+    "4.8",
+    "9.2",
+    "14.5"
+   ],
+   "answer": "0.9",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Light Drab is one of the rarer colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "A 900s painting by Zhao Guangfu matches Light Drab. What does that match prove?",
+   "choices": [
+    "A look-alike hue in a photograph, not a pigment",
+    "That the pigment existed in the 900s",
+    "That Ridgway copied an older Chinese color",
+    "Nothing; the match is an error"
+   ],
+   "answer": "A look-alike hue in a photograph, not a pigment",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Light Drab turns up in nearly one painting in seven, more often than 96 percent of the named colors we track.",
+  "Ridgway's 1912 reading and the 1955 dictionary's block agree on Light Drab to within one unit, an unusually tight match."
+ ],
+ "words": 321,
+ "status": "checked",
+ "checked": {
+  "by": "batch-36",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

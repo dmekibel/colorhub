@@ -1,0 +1,121 @@
+{
+ "slug": "meadow-violet",
+ "name": "Meadow Violet",
+ "hex": "#793178",
+ "names": [
+  "Meadow Violet"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Meadow Violet is a deep, saturated reddish purple built on the landscape word *meadow*, dated by Maerz and Paul to 1928 and absent from our own painting archive entirely.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A landscape word, a deep purple",
+   "body": "Maerz and Paul's 1930 dictionary records Meadow Violet as first recorded in 1928, on plate 51, row A, column 9 [1]. The ISCC-NBS system of 1955 places it in block 238, \"strong purple\", but only loosely, 4.9 units from that block's own center, so the fit is approximate [1]. No book held in color-kb mentions this name [4].\n\nDespite the meadow in its name, nothing in the sources we hold ties it to a flower, grass or season; *meadow* here functions only as a family word, the way [[mauve]] or [[mushroom]] does for other names in this group [1]. Its nearest distinct named neighbor is [[hyacinth-violet]], 3.9 units away and \"more vivid\" by our graph's measure [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Meadow Violet is absent from our archive: zero of 23,781 paintings carry a matching patch at the usual match threshold (ΔE2000 ≤ 6, at least 5 percent of the canvas) [2]. That is a genuine absence, not a small count, and it is worth saying plainly rather than padding around it [2]. The nearest comparable colors in our data skew toward 1980s fashion purple and gem-trade \"Oriental amethyst\" sapphire, both outside the painting record [3]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented beyond the family word meadow",
+   "first_recorded": "1928, Maerz & Paul 1930",
+   "source": "Maerz & Paul 1930"
+  },
+  "aka": [],
+  "siblings": [
+   "hyacinth-violet",
+   "mauve-taupe"
+  ],
+  "parent": "meadow",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    33.2,
+    49.0,
+    327.7
+   ],
+   "nearest": [
+    [
+     "Hyacinth Violet",
+     3.9
+    ]
+   ]
+  }
+ },
+ "questions": [
+  {
+   "q": "Which dictionary dates Meadow Violet to 1928?",
+   "choices": [
+    "Maerz and Paul's A Dictionary of Color",
+    "Ridgway's Color Standards",
+    "Pantone",
+    "Werner's Nomenclature"
+   ],
+   "answer": "Maerz and Paul's A Dictionary of Color",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our 23,781-painting archive finds Meadow Violet in at least a handful of works.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Meadow Violet does not turn up anywhere in our 23,781-painting archive."
+ ],
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No book concordance hits; zero archive presence stated plainly rather than padded.",
+   "lint 2026-10-09"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes, data/library.json): ISCC-NBS 1955, Maerz & Paul 1930, Ridgway 1912, RAL, Munsell and CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match (ΔE2000 ≤ 6, ≥ 5% of canvas), as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph: nearest named neighbors and cross-domain twin matches (gems, films, fashion decades, Werner 1821 cross-reference), computed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "Concordance of the 29 color books held in color-kb for this name: no hits",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "status": "checked",
+ "words": 230
+}

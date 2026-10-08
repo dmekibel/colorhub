@@ -1,0 +1,150 @@
+{
+ "slug": "nickle-green",
+ "name": "Nickle Green",
+ "hex": "#324238",
+ "names": [
+  "Nickle Green"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Nickle Green is a dark, greyish forest green from Maerz and Paul's 1930 color dictionary, one of four near-identical names the dictionary recorded for the same hue between 1912 and 1928.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "One hue, four names",
+   "body": "Maerz and Paul's *A Dictionary of Color* (1930) places this color at plate 31, chip E7, and dates its own first record to 1912 [1]. The ISCC-NBS system did not coin a separate name for it; it only cites Maerz and Paul's chip when classifying the color as a dark grayish green [1]. Our library notes three other dictionary names landing on the same chip at different dates: Juniper in 1919, Kabistan in 1925, and Frosty Green in 1928, so the trade named this one green at least four times in sixteen years [2].\n\nIn our color graph its closest named relatives are [[insect-screen]] and [[fir-green]], both within 3.3 units, with [[greyish-hunter-green]] and [[black-green]] close behind [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, as photographed, a color within six units of Nickle Green covers at least five per cent of a canvas in 635 works, more common than 79 per cent of our named colors [4]. The 1900s carry it at 1.8 times the archive's overall rate, and Paul Cezanne returns to it in 8 of his 50 paintings here, about 4.2 times his museums' baseline [4]. It most often shares a canvas with Empire Green, at nearly 12 times the expected rate [4]. These remain photographs of aged, varnished paintings, read as screen colors [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented beyond the dictionary chip",
+   "first_recorded": "Maerz and Paul, A Dictionary of Color (1930), plate 31, chip E7, dated by the dictionary to 1912",
+   "source": "ColorHub color library (Maerz and Paul 1930; ISCC-NBS 1955)"
+  },
+  "aka": [
+   "Juniper",
+   "Kabistan",
+   "Frosty Green"
+  ],
+  "siblings": [
+   "insect-screen",
+   "fir-green",
+   "greyish-hunter-green",
+   "black-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#324238",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 635,
+  "painters": [
+   {
+    "key": "Paul Cezanne",
+    "n": 50,
+    "hits": 8,
+    "lift": 4.2
+   }
+  ],
+  "company": [
+   {
+    "word": "Empire Green",
+    "lift": 11.8
+   }
+  ],
+  "measured": {
+   "lch": [
+    26.3,
+    9.7,
+    155.8
+   ],
+   "nearest": [
+    [
+     "Insect Screen",
+     3.2
+    ],
+    [
+     "Fir Green",
+     3.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-n.json): Maerz & Paul 1930, plate 31 E7, first recorded 1912; ISCC-NBS 1955 classification cites the same chip",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): alternate dictionary names Juniper (1919), Kabistan (1925), Frosty Green (1928) on the same chip",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-n.json), CIEDE2000 look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How many different dictionary names did Maerz and Paul record on this same color chip between 1912 and 1928?",
+   "choices": [
+    "Four",
+    "One",
+    "Two",
+    "Nine"
+   ],
+   "answer": "Four",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the ISCC-NBS system gave Nickle Green its own independent classification, separate from Maerz and Paul's chip.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Trade dictionaries named this same dark green at least four separate times in sixteen years."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No source in our records documents why the name chose the nickel spelling \"Nickle\".",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 248
+}

@@ -1,0 +1,136 @@
+{
+ "slug": "dusty-hazel-tone",
+ "name": "Dusty hazel tone",
+ "hex": "#8B7D3A",
+ "names": [
+  "Dusty hazel tone"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Dusty hazel tone is a dull yellow-green, ColorHub's English name for the Japanese traditional color Koke-iro, literally \"moss color.\"",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Moss color",
+   "body": "Koke-iro (苔色) is listed among Japan's traditional colors on Wikipedia, where the kanji are glossed simply as \"moss color\" [1]. The name describes the color of moss itself rather than a dye or a place [1]. The nearest named colors on file are [[warbler-green]], [[spanish-bistre]], [[serpentine-green]] and [[buffy-citrine]], at 3.3, 3.5, 4.2 and 4.4 ΔE [1][3]. 3, 3.5, 4.2 and 4.4 ΔE [3]. A fifth, slightly farther neighbor is [[dull-citrine]], 4.8 ΔE away, duller [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 868 of 23,781 paintings, about 3.7 percent, as photographed [2]. The earliest match is Simone Martini's *Saint Matthew*, dated to 1315, though the matching area covers only about a quarter of the canvas, a floor and not a first, since the archive's early centuries are thin [2]. The rate is highest in a sample of 416 paintings from the 1770s, where it appears in 38, about two and a half times the archive's overall rate [2]. Among sampled painters, Paulus Potter's twenty-eight paintings contain it twelve times, the highest rate recorded [2]. These are computed matches to photographed, varnished paintings, not pigment identifications [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "moss",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "Wikipedia, Traditional colors of Japan"
+  },
+  "aka": [
+   "Koke-iro"
+  ],
+  "siblings": [
+   "warbler-green",
+   "spanish-bistre",
+   "serpentine-green",
+   "buffy-citrine"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Koke-iro (苔色)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 868,
+  "measured": {
+   "lch": [
+    52,
+    38,
+    95
+   ],
+   "nearest": [
+    [
+     "Warbler Green",
+     3.3
+    ],
+    [
+     "Spanish Bistre",
+     3.5
+    ],
+    [
+     "Serpentine Green",
+     4.2
+    ],
+    [
+     "Buffy Citrine",
+     4.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "Wikipedia, \"Traditional colors of Japan\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/Traditional_colors_of_Japan"
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional list, ISCC-NBS 1955, Maerz & Paul 1930 entries",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Koke-iro literally mean?",
+   "choices": [
+    "Moss color",
+    "Dried grass",
+    "Pine needle",
+    "Wet stone"
+   ],
+   "answer": "Moss color",
+   "kind": "pick"
+  },
+  {
+   "q": "Which painter's sampled works show the highest rate of this color?",
+   "choices": [
+    "Paulus Potter",
+    "Simone Martini",
+    "Jean Honoré Fragonard",
+    "Jules Dupré"
+   ],
+   "answer": "Paulus Potter",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "A moss-named green-brown, most common in paintings from the 1770s."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 209
+}

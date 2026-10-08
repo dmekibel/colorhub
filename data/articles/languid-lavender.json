@@ -1,0 +1,111 @@
+{
+ "slug": "languid-lavender",
+ "name": "Languid Lavender",
+ "hex": "#D6CADD",
+ "names": [
+  "Languid Lavender"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Languid Lavender is a very pale purple named for the lavender plant, one of several near-duplicate names the ISCC-NBS system lists for roughly the same pale purple.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "One of many pale purples",
+   "body": "The library records Languid Lavender from the ISCC-NBS system's 1955 block 213 [1]. The name pairs [[lavender]] with \"languid\"; the ISCC-NBS lists for this stretch of pale purple are unusually crowded with commercial names, which our library does not treat as separate colors here [1]. In LCH terms it measures lightness 83, chroma 11, hue 314 degrees, the ISCC-NBS \"very pale purple\" block, Munsell 5.6P 8.2/3.2, and [[violet]] than to plain grey [1]. The nearest named color in the library is [[thistle|Thistle]], about 5.2 units away by CIEDE2000 [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 32 of 23,781 paintings, 0.13 percent, as photographed; the within-painting lens finds it in 22 [2]. That makes it rarer than 60 percent of the named colors we track [2]. It peaks in the 1900s, in 5 of 1,674 paintings, at 0.3 percent of that century's paintings, 2.1 times the expected rate [2]. Inside a painting it most often sits as a light, in 59 percent of its appearances [2].\n\nThe earliest match is dated 1515, by Andrea del Sarto; that is 440 years before the name's own first record, in 1955, so the match is a look-alike hue in an aged photograph, not evidence of the actual paint, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "pairs the lavender plant with \"languid\"",
+   "first_recorded": "1955 (ISCC-NBS, block 213)",
+   "source": "ISCC-NBS 1955"
+  },
+  "aka": [],
+  "siblings": [
+   "lavender",
+   "thistle",
+   "purple",
+   "violet"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 32,
+  "measured": {
+   "lch": [
+    83,
+    11,
+    314
+   ],
+   "nearest": [
+    [
+     "Thistle",
+     5.2
+    ]
+   ]
+  },
+  "role": {
+   "light": 59
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS 1955 block 213; nearest library match Thistle, ΔE 5.2",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which plant gives Languid Lavender its name?",
+   "choices": [
+    "Lavender",
+    "Heliotrope",
+    "Iris",
+    "Heather"
+   ],
+   "answer": "Lavender",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: inside a painting, Languid Lavender most often plays a shadow.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Languid Lavender is one of many near-duplicate names the ISCC-NBS system lists for the same pale purple."
+ ],
+ "words": 246,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

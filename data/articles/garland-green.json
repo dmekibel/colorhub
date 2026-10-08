@@ -1,0 +1,109 @@
+{
+ "slug": "garland-green",
+ "name": "Garland Green",
+ "hex": "#6B834F",
+ "names": [
+  "Garland Green"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Garland Green is a muted yellowish green that Maerz and Paul recorded in their 1930 color dictionary, and no other system in our library has repeated the name since.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A 1930 dictionary entry",
+   "body": "Maerz and Paul's *A Dictionary of Color* places Garland Green on plate 22, swatch H7, first recorded in 1928 [1]. A color this close would be filed by the ISCC-NBS system as a moderate yellowish green, with a Munsell notation of 6.4GY 5.1/4.7 [1]. No other system in our library repeats the name, so it carries no plate numbers beyond Maerz and Paul's own [1].\n\nIt sits in our library's Greens family alongside [[khaki-green]] and [[moss-green]], and the closest common color word is [[moss|Moss]], about nine units away in CIEDE2000 [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within six units of Garland Green covers at least five percent of the canvas in 226 of the 23,781 paintings in our archive, about 0.95 percent, as photographed; the within-painting lens narrows that to 96 [2]. That puts it ahead of 58 percent of the named colors we track by presence [2]. It peaks in the 1900s, in 26 of 1,674 paintings, at 1.6 percent of that decade's paintings, 3.4 times the archive's overall rate, and it plays an accent, rather than a shadow or mid-tone, in 40 percent of its 96 appearances [2].\n\nGeorges Seurat is its most devoted painter here, using it in nine of his 41 paintings in the archive, 12.1 times the rate of the museums those works come from [2]. It is also most over-represented in French paintings, at 2.3 times the expected rate [2]. The earliest matching painting dates to 1390, nearly 540 years before Maerz and Paul recorded the name in 1930 — a look-alike hue in an aged photograph, not proof that the color existed as a material that early, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1928, per Maerz and Paul (1930)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "khaki-green",
+   "moss-green",
+   "green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 96,
+  "pct": 0.95,
+  "rank_percentile": 58,
+  "measured": {
+   "lch": [
+    51.7,
+    31.3,
+    125.9
+   ],
+   "munsell": "6.4GY 5.1/4.7",
+   "app": [
+    "Moss",
+    9.3
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and graph data: Ridgway 1912 / ISCC-NBS 1955 / Maerz & Paul 1930 / RAL entries (data/library.json, data/graph/)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, computed color match, as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which system first recorded the name Garland Green?",
+   "choices": [
+    "Maerz and Paul's 1930 dictionary",
+    "Ridgway's 1912 nomenclature",
+    "The ISCC-NBS 1955 lists",
+    "RAL"
+   ],
+   "answer": "Maerz and Paul's 1930 dictionary",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: no painting in our archive matches this color before Maerz and Paul recorded the name in 1930.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A color match in our archive beats the name's 1930 record by nearly five centuries — a look-alike hue, not proof of the paint."
+ ],
+ "words": 316,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance hits for this slug; the name's component etymology is marked undocumented rather than guessed.",
+   "lint 2026-10-09"
+  ]
+ }
+}

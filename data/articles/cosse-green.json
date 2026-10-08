@@ -1,0 +1,126 @@
+{
+ "slug": "cosse-green",
+ "name": "Cosse Green",
+ "hex": "#AAAE46",
+ "names": [
+  "Cosse Green"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Cosse Green is a moderate yellow green that Ridgway's 1912 dictionary and the 1955 ISCC-NBS circular both catalog, its name likely from the French *cosse* for a seed pod, though no source we checked confirms it.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A pod-colored yellow-green",
+   "body": "Ridgway's 1912 \"Color Standards and Color Nomenclature\" lists Cosse Green at #AAAE46, plate V, hue 29, tone i [1]. The 1955 ISCC-NBS circular repeats it in its \"moderate yellow green\" block, and Maerz and Paul's 1930 dictionary separately dates a first recorded use to 1905, seven years before Ridgway's own book [1]. *Cosse* is French for a pea pod or husk, a plausible source for the name, but none of the 29 books behind our concordance confirms the connection, so it stays undocumented here [1].\n\nThe nearest named colors on file are [[olive-green]] and [[russet-green]], at A little further, at 8.5 units, is [[greenish-yellow|Greenish Yellow]], the plainer name for the same family [1]. The Munsell notation is 1.5GY 6.8/7.3, and the swatch sits with our [[yellow|yellow]] family, close enough to its green modifier to also sit near [[green|green]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 0.26% of 23,781 paintings, 62 of them, as photographed, with the within-painting lens counting 51 [2]. It peaks in the 1900s, present in 1.1% of the 1,674 paintings from that century, 3.8 times the rate its museums would predict [2]. Within a painting it most often sits as an accent, in 75% of its 51 appearances [2]. Georges Seurat is its most devoted painter, holding it in 4 of 41 works here, 6.4 times the baseline of the museums his paintings come from [2]. It is most over-represented in France, 2.1 times the expected rate [2]. The earliest match dates to 1500, by Hieronymus Bosch, 412 years before Ridgway recorded the name, a floor rather than a first [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1912 (ridgway)",
+   "source": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930"
+  },
+  "aka": [],
+  "siblings": [
+   "olive-green",
+   "russet-green",
+   "scheele-s-green",
+   "deep-chrysolite-green"
+  ],
+  "parent": "yellow",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 62,
+  "measured": {
+   "lch": [
+    68.9,
+    53.8,
+    106.6
+   ],
+   "nearest": [
+    [
+     "Olive Green",
+     3.3
+    ],
+    [
+     "Russet Green",
+     3.4
+    ],
+    [
+     "Scheele's Green",
+     3.7
+    ],
+    [
+     "Deep Chrysolite Green",
+     4.4
+    ]
+   ]
+  },
+  "iscc_nbs": {
+   "name": "moderate greenish yellow",
+   "de": 4.0
+  },
+  "munsell": "1.5GY 6.8/7.3"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and name graph (data/library.json, data/graph/): Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930; nearest names by Lab-space distance",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed color match, as photographed",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does *cosse* mean in French, the likely source of this name?",
+   "choices": [
+    "A seed pod or husk",
+    "A dye vat",
+    "A type of silk",
+    "A green stone"
+   ],
+   "answer": "A seed pod or husk",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: a book in our concordance confirms the pod origin of Cosse Green's name.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Georges Seurat used Cosse Green more than six times as often as the museums holding his work would predict."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits; the *cosse* (pod) etymology is a plausible reading, not a confirmed one.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 303
+}

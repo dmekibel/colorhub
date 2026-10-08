@@ -1,0 +1,128 @@
+{
+ "slug": "pale-rhodonite-pink",
+ "name": "Pale Rhodonite Pink",
+ "hex": "#EEC6CA",
+ "names": [
+  "Pale Rhodonite Pink"
+ ],
+ "tier": "pigment",
+ "depth": "brief",
+ "lede": "Pale Rhodonite Pink is a soft purplish pink named for rhodonite, the rose-colored manganese mineral, and recorded by Robert Ridgway in 1912.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A mineral's pale cousin",
+   "body": "Ridgway's 1912 plate XXXVIII gives this hue as \"pale rhodonite pink,\" one of several tones he built around the mineral name rhodonite [1]. The nearest named colors on file are [[baby-pink]] and [[pale-laelia-pink]], at Beyond the plate itself, who at Ridgway's office chose the modifier \"pale\" is undocumented here [1].\n\nRhodonite itself is a pink-to-red manganese silicate, first described from Russia's Ural Mountains in 1790, where it was carved into vases, columns and even an empress's sarcophagus [3]. The mineral's rose color comes from manganese ions, often cut through with dark, almost black veins of manganese oxide, which the pale, even swatch here does not show [3].\n\nThe ISCC-NBS 1955 revision of Ridgway's system calls this block 252, \"pale purplish pink,\" measuring 4.0 units from the chip center in their system [1][2]. In LCH terms it sits at lightness 83, chroma 15, hue 13 degrees, close enough to [[baby-pink|Baby Pink]] to be mistaken for it at a glance, and only a little paler than [[queen-pink|Queen Pink]] [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a screen match for this pink in only 6 of 23,781 paintings, as photographed, mostly nineteenth- and twentieth-century portraits and interiors [2]. That scarcity is typical of a pale, low-chroma tone: it blends into skin and fabric highlights rather than standing out as a named color [2]. The count is a computed color match, not a pigment identification, and every value here is a screen approximation of an aged printed plate [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "rhodonite, the pink manganese mineral",
+   "first_recorded": "1912, Ridgway plate XXXVIII",
+   "source": "Ridgway, Color Standards and Color Nomenclature (1912)"
+  },
+  "aka": [],
+  "siblings": [
+   "baby-pink",
+   "pale-laelia-pink",
+   "light-rose",
+   "queen-pink"
+  ],
+  "parent": "pink",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 6,
+  "measured": {
+   "lch": [
+    83,
+    15,
+    13
+   ],
+   "nearest": [
+    [
+     "Baby pink",
+     3.0
+    ],
+    [
+     "Pale Laelia Pink",
+     4.1
+    ],
+    [
+     "Light Rose",
+     4.4
+    ],
+    [
+     "Queen Pink",
+     4.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XXXVIII, hue 71″, tone f",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library and archive (23,781 paintings): ISCC-NBS 1955 block 252, LCH and nearest-neighbor values, computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "web",
+   "cite": "Geology.com, \"Rhodonite: A pink gem mineral and minor ore of manganese\"",
+   "loc_kind": null,
+   "url": "https://geology.com/minerals/rhodonite.shtml"
+  }
+ ],
+ "questions": [
+  {
+   "q": "Pale Rhodonite Pink is named for what kind of thing?",
+   "choices": [
+    "A flower",
+    "A mineral",
+    "A fabric dye",
+    "A paint brand"
+   ],
+   "answer": "A mineral",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: raw rhodonite mineral looks like an even, pale pink with no markings.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "This pale pink is named for a mineral that's usually shot through with near-black veins — nothing like the smooth swatch here."
+ ],
+ "words": 260,
+ "status": "checked",
+ "checked": {
+  "by": "batch-23",
+  "date": "2026-10-08",
+  "issues": [
+   "Concordance file for this slug is empty; no book-sourced facts beyond the Ridgway/ISCC-NBS library entries. Rhodonite mineral history from one web source (Geology.com), hedged as single-source.",
+   "lint 2026-10-09"
+  ]
+ }
+}

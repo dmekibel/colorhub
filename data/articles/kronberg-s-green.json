@@ -1,0 +1,132 @@
+{
+ "slug": "kronberg-s-green",
+ "name": "Kronberg's Green",
+ "hex": "#7C7D52",
+ "names": [
+  "Kronberg's Green"
+ ],
+ "tier": "person",
+ "depth": "brief",
+ "lede": "Kronberg's Green is a muted, olive-leaning green from Robert Ridgway's 1912 color standards, and the books we hold do not say whom it was named for.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name the books leave open",
+   "body": "Ridgway catalogued this green in his 1912 *Color Standards and Color Nomenclature*, on plate XXXI, and Maerz and Paul's 1930 *Dictionary of Color* repeats it on plate 22, dated to 1912 [1]. Ridgway drew his roughly 4,000 named samples from many older sources, including Werner and Syme's 1821 nomenclature, his own 1886 book, the mycologist Saccardo's *Chromotaxia*, and a florists' color chart, so a name in his book is not necessarily his own coinage [2]. Who Kronberg was, and whether the name honors a person or the German town of the same name, is undocumented in the sources we hold [1][2].\n\nIt is one of several near-identical greens the ISCC-NBS system later folded in: Ridgway's plate also carried [[reed-green|Reed Green]], now treated as its nearest neighbor, and sits not far from the yellower [[baiko-brown|Baiko brown]] and the everyday [[olive]] [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Measured in LCH terms, Kronberg's Green sits at lightness 51, chroma 25, hue 108 degrees, close to [[reed-green|Reed Green]] and the darker, warmer [[yellowish-olive|Yellowish Olive]] [3]. In our archive of 23,781 paintings, as photographed, it appears in 1,009, about 4.2 percent, with its heaviest use in Chinese and Japanese ink paintings such as the 1501 *Bamboo and Plum* and Klimt's 1898 *After the Rain* [4]. These are computed color matches on aged, varnished paintings, never a claim about the actual pigment used [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1912, Ridgway",
+   "source": "Ridgway, Color Standards and Color Nomenclature (1912)"
+  },
+  "aka": [],
+  "siblings": [
+   "reed-green",
+   "yellowish-olive",
+   "baiko-brown",
+   "olive"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1009,
+  "top_paintings": [
+   "aic-20631",
+   "commons-Q28006328",
+   "cma-131793"
+  ],
+  "measured": {
+   "lch": [
+    51,
+    25,
+    108
+   ],
+   "nearest": [
+    [
+     "Reed Green",
+     2.7
+    ],
+    [
+     "Yellowish Olive",
+     3.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Ridgway 1912, plate XXXI; Maerz & Paul 1930, plate 22 K 2",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty et al. (eds.), Nature's Palette, \"Werner's Mineralogical System\" chapter and preface on Ridgway's sources",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): CIEDE2000 distances to named neighbors",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes; within the archive's match threshold, at least 5% of the canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "True or false: the books consulted explain who Kronberg's Green is named for.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which 1912 reference first catalogs Kronberg's Green?",
+   "choices": [
+    "Ridgway's Color Standards and Color Nomenclature",
+    "The CSS color list",
+    "Crayola's catalog",
+    "The Munsell Book of Color"
+   ],
+   "answer": "Ridgway's Color Standards and Color Nomenclature",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Kronberg's Green has been in print since 1912, and nobody has recorded who Kronberg was."
+ ],
+ "words": 246,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "Naming origin undocumented in the books consulted.",
+   "lint 2026-10-09"
+  ]
+ }
+}

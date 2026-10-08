@@ -1,0 +1,126 @@
+{
+ "slug": "army-brown",
+ "name": "Army Brown",
+ "hex": "#926142",
+ "names": [
+  "Army Brown"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Army Brown is a medium, warm brown recorded by Maerz and Paul in 1912, and among the most common colors in our entire painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name in the library",
+   "body": "Maerz and Paul's 1930 dictionary dates this brown to 1912, plate 6, swatch A 10, and separately catalogues a close match as \"Rosario\" in 1927 [1]. Despite the name, nothing in the sources here ties the color to any military use; the word may simply describe a drab, practical brown [1]. The nearest color-graph neighbor is [[cocoa]], 3.0 units away, with [[dusty-sienna]] close behind at 3.5, and [[rood-s-brown]] and [[yellowish-brown]] almost as close [2].\n\nMunsell notation gives 4.8YR 4.5/5.1, a mid-lightness, moderately saturated yellow-brown [1]. The hex #926142 is a screen approximation; no dye or pigment sample survives in the record [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is an unusually common color in our archive: 2,067 of 23,781 paintings, about 8.7 percent, as photographed [3]. It peaks in the medieval and early Renaissance centuries, with the 1200s and 1300s both showing roughly two and a half times the archive's average rate [3]. The single sharpest concentration is the 1270s, nearly four and a half times average [3]. Pontormo, Otto van Veen, Christen Dalsgaard, Rosa Bonheur and Filippo Lippi all use it well above their peers' rates [3]. The strongest individual matches include Japanese ink paintings: Konoe Nobutada's *Tenjin Traveling to China* (1610) and two works by Shokadō Shōjō from 1600 [3]. All counts are computed matches on photographed, varnished canvases [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "cocoa",
+   "dusty-sienna",
+   "rood-s-brown",
+   "yellowish-brown"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2067,
+  "measured": {
+   "lch": [
+    45.7,
+    30.4,
+    57.5
+   ],
+   "nearest": [
+    [
+     "Cocoa",
+     3.0
+    ]
+   ]
+  },
+  "iscc": {
+   "name": "moderate yellowish brown",
+   "de": 7.0
+  },
+  "peak_decade": {
+   "key": 1270,
+   "lift": 4.31
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz & Paul 1930, Ridgway 1912, ISCC-NBS 1955, RAL entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE Lab ΔE)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Roughly what share of our archive's 23,781 paintings carries Army Brown?",
+   "choices": [
+    "About 9 percent",
+    "About 50 percent",
+    "Under 1 percent",
+    "About 25 percent"
+   ],
+   "answer": "About 9 percent",
+   "kind": "pick"
+  },
+  {
+   "q": "In which centuries does Army Brown appear most above the archive's average rate?",
+   "choices": [
+    "The 1200s–1300s",
+    "The 1900s",
+    "The 1700s",
+    "The 1500s"
+   ],
+   "answer": "The 1200s–1300s",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Nearly 9 paintings in 100 in our archive carry this brown, far more than most named colors."
+ ],
+ "words": 244,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Nearest-neighbor claim (name and/or distance) in the 'name' section and field.measured.nearest did not match data/graph/edges-*.json 'la' (the cited color-graph computation); corrected to the true nearest colors and distances, and updated aside.siblings to match.",
+   "lint 2026-10-09"
+  ]
+ }
+}

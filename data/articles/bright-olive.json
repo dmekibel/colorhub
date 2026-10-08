@@ -1,0 +1,113 @@
+{
+ "slug": "bright-olive",
+ "name": "Bright Olive",
+ "hex": "#9CBB04",
+ "names": [
+  "Bright Olive"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Bright Olive is a vivid yellow-green, one of several near-identical clusters the 2010 xkcd color survey recorded independently under different names.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Four names, one cluster",
+   "body": "The xkcd survey logged this exact shade, or something within about two CIEDE2000 units of it, under at least three other labels besides Bright Olive: Gross Green, Pea, and Sick Green [1]. That scatter is typical of the survey's method; thousands of people typing free-text names for the same swatch rarely agree on one word, and \"olive\" itself reads very differently to different eyes [1].\n\nThe nearest named colors on file are [[sickly-green]], [[snot]], [[acid-green]] and [[puke-green]], at 2.9, 3.4, 3.7 and 3.8 ΔE [1]. Siblings are [[olive]], [[kelly-green|Kelly green]], [[chartreuse]], and [[army-green|Army Green]], all crowded into the same yellow-green corner [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings, as photographed, has no painting where this vivid yellow-green covers five percent or more of the canvas [2]. A green this saturated and this light together is rare in aged, varnished oil paint; most archive greens of comparable hue sit darker or duller [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: bright + olive",
+   "first_recorded": "2010, xkcd color survey",
+   "source": "xkcd (Munroe 2010)"
+  },
+  "aka": [
+   "Gross Green (xkcd, near-duplicate)",
+   "Pea (xkcd, near-duplicate)",
+   "Sick Green (xkcd, near-duplicate)"
+  ],
+  "siblings": [
+   "sickly-green",
+   "snot",
+   "acid-green",
+   "puke-green"
+  ],
+  "parent": "olive",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    71,
+    78,
+    113
+   ],
+   "nearest": [
+    [
+     "Sickly Green",
+     2.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: xkcd 2010 survey, near-duplicate cluster entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Besides Bright Olive, which other xkcd survey names landed within about two CIEDE2000 units of this swatch?",
+   "choices": [
+    "Gross Green, Pea, and Sick Green",
+    "Mauve and Isabelline",
+    "Prussian Blue and Indigo",
+    "Burlywood and Tan"
+   ],
+   "answer": "Gross Green, Pea, and Sick Green",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: thousands of people in the xkcd survey tended to agree on one name per swatch.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The same swatch behind Bright Olive was also typed in as Gross Green, Pea, and Sick Green."
+ ],
+ "words": 174,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No private fact-card file for this slug.",
+   "lint 2026-10-09"
+  ]
+ }
+}

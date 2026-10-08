@@ -1,0 +1,113 @@
+{
+ "slug": "cosmic-cobalt",
+ "name": "Cosmic Cobalt",
+ "hex": "#2E2D88",
+ "names": [
+  "Cosmic Cobalt"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Cosmic Cobalt is a deep, dark blue-violet named for cobalt, the mineral behind cobalt blue pigment, and one of the rarest matches in our painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The pigment's mineral, pushed darker",
+   "body": "Our library files Cosmic Cobalt as a pigment-and-mineral word built on [[cobalt]], with Wikipedia citing Crayola as the source of the swatch [1]. The 1955 ISCC-NBS system would class a close match as deep purplish blue, 7.5 units of ΔE away [1].\n\nThe closest named color in our whole library is [[indigo]], only 2.8 units off, and a near-duplicate swatch, Picotee Blue, sits 1.7 units away under a different name [1]. In LCH terms it is dark and very strongly saturated: lightness 24, chroma 59, hue 301 degrees[1]. A fifth, slightly farther neighbor is [[st-patrick-s-blue]], 2.7 ΔE away, duller [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings finds a close match to Cosmic Cobalt in only 2, as photographed[2]. Both are modern: Louis Welden Hawkins's *The Eiffel Tower* of 1900 and Vilhelm Lundstrøm's *Seated Female Nude* of 1950, 50 years apart and both European [2]. No match appears anywhere in the archive before 1900, though with only two paintings this says more about the color's intensity than about any date it came into use [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the mineral cobalt",
+   "first_recorded": "undocumented in our library beyond the Wikipedia/Crayola record",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "cobalt",
+   "indigo",
+   "navy",
+   "blue-violet"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2,
+  "match": {
+   "hex": "#2E2D88",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "measured": {
+   "lch": [
+    24,
+    59,
+    301
+   ],
+   "nearest": [
+    [
+     "Indigo",
+     2.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: name records, plate and block locators, tier classification",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What mineral is Cosmic Cobalt named for?",
+   "choices": [
+    "Cobalt",
+    "Lapis lazuli",
+    "Azurite",
+    "Sapphire"
+   ],
+   "answer": "Cobalt",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Cosmic Cobalt is one of the most common colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Cosmic Cobalt matches only 2 of 23,781 paintings in our archive."
+ ],
+ "words": 201,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

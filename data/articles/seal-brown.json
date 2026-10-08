@@ -1,0 +1,131 @@
+{
+ "slug": "seal-brown",
+ "name": "Seal Brown",
+ "hex": "#59260B",
+ "names": [
+  "Seal Brown"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Seal Brown carries over from Ridgway's 1886 Nomenclature of Colors, and ColorHub's warm screen swatch sits about 18 color-distance units from Ridgway's own cooler, grayer plate.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A swatch warmer than the plate",
+   "body": "Ridgway's plates give Seal Brown at hue 5‴, tone m, on plate XXXIX, and the name carries over from his earlier 1886 *Nomenclature of Colors* [1]. The Inter-Society Color Council's 1955 census files it, in block 81, as a deep brown, Munsell 4.2YR 2.2/6.0 [1].\n\nColorHub's screen swatch, #59260B, is a warm, saturated red-brown, but Ridgway's own plate reads as a cooler, grayer #574C46, about 18 color-distance units apart[1]. The closest other library name is [[dusty-mahogany]], just under 5.7 units off, with [[mahogany]] a touch further at 6.3 [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds Seal Brown in 1,561 of 23,781 paintings, 6.6 percent, more often as a mid-tone or shadow than a highlight [2]. It peaks in the 1540s, in 23 of 163 paintings, more than double its average rate, and favors court portraitists: Jean Baptiste Vanmour carries it in 16 of 29 dated works [2]. Spanish and Italian paintings carry it a little above the archive's base rate [2]. It shares canvases with [[maroon]], [[oxblood]], and [[mahogany]] far more than chance alone predicts [2]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the seal, for its dark coat",
+   "first_recorded": "1886, Ridgway's Nomenclature of Colors",
+   "source": "Ridgway (1886, 1912) via ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "dusty-mahogany",
+   "mahogany",
+   "chestnut-leather-brown",
+   "nut-brown"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1561,
+  "measured": {
+   "lch": [
+    22,
+    35,
+    52
+   ],
+   "nearest": [
+    [
+     "Dusty mahogany",
+     5.7
+    ],
+    [
+     "Mahogany",
+     6.3
+    ],
+    [
+     "Chestnut-leather brown",
+     6.5
+    ],
+    [
+     "Nut Brown",
+     7.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1886/1912, ISCC-NBS 1955 entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which earlier Ridgway book does Seal Brown's name carry over from?",
+   "choices": [
+    "Nomenclature of Colors (1886)",
+    "Color Standards and Nomenclature (1912)",
+    "A Dictionary of Colour (1932)",
+    "Werner's Nomenclature (1821)"
+   ],
+   "answer": "Nomenclature of Colors (1886)",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: ColorHub's screen swatch for Seal Brown matches Ridgway's own plate almost exactly.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "In which decade does Seal Brown peak in our painting archive?",
+   "choices": [
+    "1540s",
+    "1850s",
+    "1200s",
+    "1900s"
+   ],
+   "answer": "1540s",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Seal Brown's screen swatch is a warm red-brown, but Ridgway's own 1912 plate reads as a cooler, grayer tan — about 18 units apart."
+ ],
+ "words": 216,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

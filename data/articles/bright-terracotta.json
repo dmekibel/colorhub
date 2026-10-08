@@ -1,0 +1,135 @@
+{
+ "slug": "bright-terracotta",
+ "name": "Bright terracotta",
+ "hex": "#F7665A",
+ "names": [
+  "Bright terracotta"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Bright terracotta is a strong coral-red whose Japanese library name, Jinzamomi, means \"thrice-dyed crimson,\" and it sits under 5 units from plain [[terracotta]].",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Jinzamomi, dyed three times",
+   "body": "The Wikipedia survey \"Traditional colors of Japan\" lists this color under the romanized name Jinzamomi, written 甚三紅 [1]. The library glosses the kanji as \"thrice-dyed crimson\": a dye bath repeated to deepen the red, rather than a single quick dip [1]. No book consulted here independently confirms a date, dyer, or dyestuff, so the craft detail behind the gloss is undocumented [1].\n\nThe nearest already-named color in our library is [[terracotta]], at a color-distance of 4.8 by the CIEDE2000 formula, and the library also lists [[grapefruit]] as a close neighbor [1]. The hex given here, #F7665A, is a modern screen approximation fit to that gloss, not a measurement of any dyed cloth [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within range of this swatch appears in 11 of the 23,781 paintings in our archive by the painting-level count, about 0.05 percent; the within-painting lens, which can count a color more than once per canvas, finds it 15 times, as photographed [2]. That makes it rarer than 64 percent of the named colors we track [2].\n\nIt peaks mildly in the 1800s, present in 6 of 8,345 paintings from that century, close to the expected rate [2]. Inside the paintings that carry it, it plays only one role: an accent, never a dominant field or a shadow [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "thrice-dyed crimson, from 甚三 (a count of three) and 紅 (crimson)",
+   "first_recorded": "undocumented beyond its listing in Japan's traditional color system",
+   "source": "ColorHub color library (Wikipedia, \"Traditional colors of Japan\")"
+  },
+  "aka": [
+   "Jinzamomi",
+   "甚三紅"
+  ],
+  "siblings": [
+   "grapefruit",
+   "bittersweet",
+   "red-orange",
+   "light-coral-red"
+  ],
+  "parent": "terracotta",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Jinzamomi (甚三紅), \"thrice-dyed crimson\""
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 11,
+  "rank_pct": 64,
+  "century_peak": {
+   "century": 1800,
+   "hits": 6,
+   "of": 8345,
+   "lift": 1.1
+  },
+  "role": {
+   "kind": "accent",
+   "pct": 100
+  },
+  "measured": {
+   "nearest": [
+    [
+     "Grapefruit",
+     2.5
+    ],
+    [
+     "Bittersweet",
+     2.5
+    ],
+    [
+     "Red-Orange",
+     3.4
+    ],
+    [
+     "Light Coral Red",
+     3.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional color names (Wikipedia, \"Traditional colors of Japan\")",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Jinzamomi literally describe?",
+   "choices": [
+    "A crimson dyed three times",
+    "A red clay roof tile",
+    "A coral reef color",
+    "A sunset over the sea"
+   ],
+   "answer": "A crimson dyed three times",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: bright terracotta turns up as a shadow color in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Bright terracotta's Japanese name, Jinzamomi, means \"thrice-dyed crimson\": a red bath repeated to build up the color."
+ ],
+ "words": 231,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No book-level source for the dyeing craft beyond the library gloss; stated as undocumented rather than guessed.",
+   "lint 2026-10-09"
+  ]
+ }
+}

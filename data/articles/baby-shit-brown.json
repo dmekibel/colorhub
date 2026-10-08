@@ -1,0 +1,107 @@
+{
+ "slug": "baby-shit-brown",
+ "name": "Baby Shit Brown",
+ "hex": "#AD900D",
+ "names": [
+  "Baby Shit Brown"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Baby Shit Brown is a mustard-brown named, bluntly, for the color of an infant's stool, one of several near-identical names the 2010 xkcd color survey gave to this stretch of yellow-brown.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A crowd name for a plain comparison",
+   "body": "The name comes from Randall Munroe's 2010 xkcd color survey, where visitors typed a word next to a swatch and the most common label for each cluster of clicks won [1]. Who typed it first is undocumented; the survey records only the winning name [1]. ISCC-NBS 1955 would file the same patch as a deep yellow, about 1.8 units off, the closest match of any of this cluster's names, with Munsell notation 5.0Y 6.0/8.9 [1].\n\nThe vote also produced near-duplicates for closely related shades, including [[baby-poo|Baby Poo]] and [[baby-poop|Baby Poop]], all naming the same comparison rather than a dye or a place [1]. The closest look-alikes in our data are [[dark-mustard|Dark Mustard]] and [[brown-yellow|Brown-Yellow]], both within 2.4 units [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings, as photographed, finds this mustard-brown in 105 of them, about 0.44 percent, more common than 59 percent of our named colors [2]. It peaks in the 1700s, at 1.6 times the expected rate for that century (25 of 3,449 paintings from then), and inside a painting it is almost always an accent, 77 percent of the time, by lightness rank rather than raw area [2].\n\nLuis Egidio Meléndez is its most devoted painter, carrying it in 5 of his 39 works here, 7.3 times the baseline rate for the museums those works come from [2]. It is also over-represented in paintings from India, at 5.1 times the expected rate [2]. The earliest match in our archive is dated 1403, by Gherardo Starnina, 607 years before the name itself appears in 2010; our archive's early centuries are thin, so that date is a floor, not a first [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the color of an infant's stool",
+   "first_recorded": "2010, xkcd color survey",
+   "source": "xkcd (Munroe 2010)"
+  },
+  "aka": [],
+  "siblings": [
+   "dark-mustard",
+   "brown-yellow"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 105,
+  "measured": {
+   "lch": [
+    60.7,
+    63.0,
+    90.6
+   ],
+   "nearest": [
+    [
+     "Dark Mustard",
+     2.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: xkcd 2010 color survey entry, ISCC-NBS and Munsell mapping",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which painter is most devoted to Baby Shit Brown in our archive?",
+   "choices": [
+    "Luis Egidio Meléndez",
+    "Sandro Botticelli",
+    "Pietro Lorenzetti",
+    "Gherardo Starnina"
+   ],
+   "answer": "Luis Egidio Meléndez",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our painting archive's 1403 match for this color proves the name already existed then.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Luis Egidio Meléndez painted Baby Shit Brown more often than any other artist in our archive, at over seven times the expected rate."
+ ],
+ "words": 304,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No private fact-card file for this slug.",
+   "Who coined the name is undocumented; the survey records only the winning label."
+  ]
+ }
+}

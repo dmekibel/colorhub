@@ -1,0 +1,129 @@
+{
+ "slug": "orient-red",
+ "name": "Orient Red",
+ "hex": "#AC323B",
+ "names": [
+  "Orient Red"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Orient Red is a vivid red from the German RAL industrial color system, with Maerz and Paul's dictionary separately dating the hue to 1905, over two decades before RAL assigned it a number.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "An industrial red, dated twice",
+   "body": "The German RAL system assigns this color its number 3031, first published in 1927 for paints and signage, though the exact screen value is only an approximation of the printed swatch [1]. The ISCC-NBS system later filed it as a vivid red, and Maerz and Paul's 1930 dictionary separately dated the hue's first record to 1905, more than twenty years earlier [1]. Where the name \"Orient\" itself comes from is not documented in the sources we checked, undocumented here [1].\n\nIts nearest relatives in our color graph are [[english-vermilion]], almost the same, and [[purple-madder]] and [[levant-red]], both close behind [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, as photographed, a color within six units of Orient Red covers at least five per cent of a canvas in 108 works, more common than 59 per cent of our named colors [3]. It peaks in the 1400s, in 15 of 945 paintings, at 2.7 times the archive's overall rate, and is most over-represented in paintings from India, at 2.2 times expected [3]. The earliest dated appearance in our archive is 1375, more than five centuries before RAL's 1927 record, a look-alike hue, not proof of pigment, a floor and not a first, since the archive's early centuries are thin [3]. These remain photographs of aged, varnished paintings, read as screen colors [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "RAL 3031 (1927); Maerz and Paul's dictionary separately dates the hue to 1905",
+   "source": "ColorHub color library (RAL 1927; Maerz and Paul 1930; ISCC-NBS 1955)"
+  },
+  "aka": [],
+  "siblings": [
+   "english-vermilion",
+   "purple-madder",
+   "levant-red",
+   "japanese-carmine"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#AC323B",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 108,
+  "countries": [
+   {
+    "key": "India",
+    "n": 721,
+    "hits": 19,
+    "lift": 2.2
+   }
+  ],
+  "measured": {
+   "lch": [
+    40.2,
+    55.2,
+    25.4
+   ],
+   "nearest": [
+    [
+     "English Vermilion",
+     2.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-o.json): RAL 3031 (1927), approximate screen value; ISCC-NBS 1955 block 12 (H/M); Maerz & Paul 1930, first recorded 1905",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-o.json), CIEDE2000 look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which industrial color system assigned Orient Red its reference number?",
+   "choices": [
+    "RAL",
+    "CSS/X11",
+    "Pantone",
+    "Munsell"
+   ],
+   "answer": "RAL",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Maerz and Paul's dictionary dates this hue earlier than RAL's own 1927 record.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A trade dictionary dated this red to 1905, more than twenty years before the German RAL system gave it a number."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-08",
+  "issues": [
+   "Where \"Orient\" in the name comes from is not documented in the sources checked here.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 250
+}

@@ -1,0 +1,151 @@
+{
+ "slug": "pale-glaucous-green",
+ "name": "Pale Glaucous-Green",
+ "hex": "#D6DDCC",
+ "names": [
+  "Pale Glaucous-Green"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Pale Glaucous-Green is a pale, greenish white from Ridgway's 1912 plates, measured in our color graph as identical to a separately sourced Pale Sage, and most loved by Paul Signac.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A near-white green, named twice",
+   "body": "*Glaucous* describes a pale bluish or greyish green, like the bloom on a grape, and Ridgway's 1912 *Color Standards and Color Nomenclature* places this hue at plate XXXIII, hue 39′′, tone f, scanned from an aged plate and so approximate [1]. The ISCC-NBS system later filed it in its own block, classifying it as a greenish white [1]. Our color graph finds a separately recorded name, Pale Sage, at zero units of difference, an exact duplicate under a different name [2].\n\nIts nearest distinct relatives in the graph are [[pale-niagara-green]], greener, and [[grey-white]] and [[pale-olivine]], close behind [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, as photographed, a color within six units of Pale Glaucous-Green covers at least five per cent of a canvas in 421 works, more common than 76 per cent of our named colors [4]. The painter most devoted to it is Paul Signac, in 5 of his 18 works here, about 6.1 times his museums' baseline [4]. It most often shares a canvas with [[charcoal-grey]] and [[leek-green]], at 5.0 and 4.2 times the expected rate [4]. The earliest dated appearance in our archive is 1256, over six centuries before the name's own 1912 record, a look-alike hue, not proof of pigment, a floor and not a first, since the archive's early centuries are thin [4]. These remain photographs of aged, varnished paintings, read as screen colors [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "glaucous (a pale bluish-green bloom, as on grapes or certain leaves)",
+   "first_recorded": "Ridgway, Color Standards and Color Nomenclature (1912), plate XXXIII, hue 39′′, tone f",
+   "source": "ColorHub color library (Ridgway 1912; ISCC-NBS 1955)"
+  },
+  "aka": [
+   "Pale Sage"
+  ],
+  "siblings": [
+   "pale-sage",
+   "pale-niagara-green",
+   "grey-white",
+   "pale-olivine"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#D6DDCC",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 421,
+  "painters": [
+   {
+    "key": "Paul Signac",
+    "n": 18,
+    "hits": 5,
+    "lift": 6.1
+   }
+  ],
+  "company": [
+   {
+    "word": "Charcoal Grey",
+    "lift": 5.0
+   },
+   {
+    "word": "Leek Green",
+    "lift": 4.2
+   }
+  ],
+  "measured": {
+   "lch": [
+    87.2,
+    9.2,
+    125.6
+   ],
+   "nearest": [
+    [
+     "Pale Sage",
+     0.0
+    ],
+    [
+     "Pale Niagara Green",
+     3.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-p.json): Ridgway 1912, plate XXXIII, hue 39′′, tone f; ISCC-NBS 1955 block 148 (R)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-p.json), exact-duplicate note, CIEDE2000 0.0 to Pale Sage",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-p.json), CIEDE2000 look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does \"glaucous\" describe?",
+   "choices": [
+    "A pale bluish or greyish green, like the bloom on grapes",
+    "A bright, saturated emerald",
+    "A warm golden yellow",
+    "A deep forest shadow"
+   ],
+   "answer": "A pale bluish or greyish green, like the bloom on grapes",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Pale Glaucous-Green and a separately named Pale Sage measure exactly the same color in our data.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pale Glaucous-Green and a separately named Pale Sage measure exactly the same color."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 261
+}

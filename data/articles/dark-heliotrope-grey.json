@@ -1,0 +1,101 @@
+{
+ "slug": "dark-heliotrope-grey",
+ "name": "Dark Heliotrope Grey",
+ "hex": "#7F777D",
+ "names": [
+  "Dark Heliotrope Grey"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dark Heliotrope Grey is a dim, purplish grey, ColorHub's library name for a darkened shade of [[heliotrope-grey]], traced to Ridgway's 1912 color atlas.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A darkened heliotrope grey",
+   "body": "The name follows ColorHub's modifier grammar, \"dark\" plus the parent color [[heliotrope-grey]], itself named for the pale purple of the heliotrope flower, muted toward grey [1]. The library dates the swatch to Ridgway's *Color Standards and Color Nomenclature* of 1912, plate L, and again places it in the ISCC-NBS Dictionary of Color Names of 1955, in the block for purplish gray [1]. Ridgway's plates survive only as scans of an aged, printed chart, so the hex value is an approximation of the original ink, not a measurement of it [1].\n\nThe closest named neighbors on file are [[purple-slate]] and [[lavender-purple]], both almost indistinguishable from it [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color near this swatch in 288 of 23,781 paintings, about 1.21 per cent, as photographed [2]. It is rare before 1800, then rises through the nineteenth and twentieth centuries, peaking in a small sample of 1940s paintings [2]. Danish painters Peter Hansen, Niels Larsen Stevns and Theodor Philipsen all have it well above the archive's average rate [2]. These are computed color matches to photographed, varnished paintings, not pigment identifications [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a darkened shade of Heliotrope Grey",
+   "first_recorded": "Ridgway, 1912, plate L",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "purple-slate",
+   "lavender-purple",
+   "zircon-grey"
+  ],
+  "parent": "heliotrope-grey",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 288,
+  "pct_archive": 1.21,
+  "role": "mid",
+  "peak_decade": 1940
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; Ridgway 1912, plate L; ISCC-NBS 1955)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph, nearest-neighbor color distances (data/graph/edges-d.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Dark Heliotrope Grey's parent color, Heliotrope Grey, is named for which flower?",
+   "choices": [
+    "Heliotrope",
+    "Lavender",
+    "Violet"
+   ],
+   "answer": "Heliotrope",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: this color is rare in paintings before 1800 in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Almost absent before 1800, then a repeated choice of several Danish painters a century later."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": []
+ },
+ "words": 202
+}

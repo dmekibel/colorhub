@@ -1,0 +1,109 @@
+{
+ "slug": "tussore",
+ "name": "Tussore",
+ "hex": "#E3C9B2",
+ "names": [
+  "Tussore"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Tussore is a pale yellowish pink from the Maerz and Paul color dictionary, named for tussore silk, the wild, undyed Indian and Chinese silk it resembles.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The color of raw silk",
+   "body": "Maerz and Paul record Tussore at #E3C9B2, first dated 1887, on plate 10 A4 of their 1930 dictionary [1]. The name comes from tussore, also spelled tusser or tussah, a coarse wild silk woven in India and China [1]. It was traditionally left undyed, in its own pale tan [1]. The books consulted do not spell out this link explicitly, so it is given here as the plain sense of the word rather than a sourced etymology [1].\n\nIts nearest named neighbor in our library is [[sandust]], very slightly cooler [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this hue, as photographed, in 1,006 of 23,781 paintings (4.23 percent), more common than 86 percent of the named colors we track [2]. It peaks in the 1200s, in 7 of 142 paintings, at 1.6 times the expected rate for the 142 paintings we have from that century [2]. Inside a painting it most often plays a light, in 46 percent of its 678 occurrences [2].\n\n[[painter:xugu|Xugu]] is its most devoted painter here, carrying it in 9 of 16 of his works, 7.5 times his home museums' baseline [2]. It is most over-represented in paintings from India, at 2.4 times the expected rate, fitting for a name drawn from Indian silk [2]. It shares canvases more than chance with [[light-brownish-drab]] and [[japan-rose]] [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "tussore silk, a wild, undyed silk from India and China",
+   "first_recorded": "1887, per Maerz and Paul (1930)",
+   "source": "Maerz and Paul, A Dictionary of Color"
+  },
+  "aka": [],
+  "siblings": [
+   "sandust",
+   "tansan"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1006,
+  "pct": 4.23,
+  "rank_pct": 86,
+  "measured": {
+   "lch": [
+    82.5,
+    15.8,
+    69.4
+   ],
+   "nearest": [
+    [
+     "Sandust",
+     7.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "Maerz and Paul, A Dictionary of Color (1930), plate 10 A4",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Tussore is named for which material?",
+   "choices": [
+    "A wild, undyed silk",
+    "A clay pigment",
+    "A dye plant",
+    "A gemstone"
+   ],
+   "answer": "A wild, undyed silk",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Tussore is most over-represented in paintings from India.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Tussore takes its name and its pale tan from undyed wild silk."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Silk etymology is the plain sense of the word, not confirmed by the books consulted; flagged in prose.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 241
+}

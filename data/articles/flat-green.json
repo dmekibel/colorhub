@@ -1,0 +1,121 @@
+{
+ "slug": "flat-green",
+ "name": "Flat Green",
+ "hex": "#699D4C",
+ "names": [
+  "Flat Green"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Flat Green is a muted, medium olive-green, named by the modifier \"flat\" the same way a paint chip is called flat rather than glossy.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier name",
+   "body": "The 2010 xkcd color survey is the only source we hold for this exact word pairing, and the survey's log does not say who first typed it or why \"flat\" was chosen over \"dull\" or \"muted\" [1]. Two very close crowd labels, Muted Green and Off Green, sit within 2.4 units of the same swatch, which is typical of how many near-identical names the survey collected for one region of green [1].\n\nISCC-NBS 1955 would call the same patch a strong yellowish green, and its nearest library neighbors are [[sage|Sage]] and [[olive|Olive]], both somewhat less yellow [2]. It reads as a [[green|green]] with the shine and the pure saturation both turned down [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings, as photographed, holds this color in 12 paintings at five percent coverage or more [3]. The earliest is Paul Cézanne's 1873 [[painting:nga-46577|House of Père Lacroix]], and the strongest match is Vincent van Gogh's 1890 [[painting:nga-163323|Green Wheat Fields, Auvers]], where it covers about 36 percent of the canvas [3]. These are museum photographs of aged, varnished paintings, so a match is a screen color near this one, not a pigment test [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; a modifier on green",
+   "first_recorded": "2010, xkcd color survey",
+   "source": "ColorHub library: xkcd 2010"
+  },
+  "aka": [],
+  "siblings": [
+   "sage",
+   "olive",
+   "green",
+   "dull-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 12,
+  "nearest_iscc": [
+   "strong yellowish green",
+   6.4
+  ],
+  "first_source": [
+   "xkcd",
+   2010
+  ],
+  "measured": {
+   "lch": [
+    59.6,
+    48.9,
+    131.4
+   ]
+  },
+  "top_paintings": [
+   "nga-163323",
+   "nga-46577"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and graph nodes: xkcd 2010 color survey entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: nearest standard names and ISCC-NBS 1955 distance",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1890 Van Gogh painting carries the strongest match to Flat Green in our archive?",
+   "kind": "pick",
+   "choices": [
+    "Green Wheat Fields, Auvers",
+    "The Starry Night",
+    "Sunflowers",
+    "Irises"
+   ],
+   "answer": "Green Wheat Fields, Auvers"
+  },
+  {
+   "q": "True or false: our data explains why \"flat\" rather than \"dull\" was chosen for this name.",
+   "kind": "true-false",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False"
+  }
+ ],
+ "openers": [
+  "Flat Green's strongest match in our archive covers over a third of a 1890 Van Gogh wheat field."
+ ],
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "status": "checked",
+ "words": 208
+}

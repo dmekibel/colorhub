@@ -1,0 +1,116 @@
+{
+ "slug": "greyish-brownish-olive",
+ "name": "Greyish brownish olive",
+ "hex": "#5C584A",
+ "names": [
+  "Greyish brownish olive"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Greyish brownish olive is a muted, dark khaki, the library's double-modified variant of plain [[olive]], and it is one of the more common named colors in our archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier on an existing name",
+   "body": "The library stacks two modifiers at once on the base entry [[olive]], filing \"greyish brownish\" as a single combined variant alongside siblings such as [[pale-olive]], [[deep-olive]] and [[olive-brown]] [1]. The ISCC-NBS system of 1955 files the same patch as olive gray, only 2.2 units away in CIEDE2000, the closest match of any color, and Ridgway's 1912 atlas lists a corresponding block too [1]. Measured in LCH it has lightness 37, chroma 9 and hue 97 degrees, and [[gunmetal]] than to a bright olive [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive, a match appears in 2,887 of 23,781 paintings, about 12.1 percent, as photographed, making it one of the most frequent named colors we track; the within-painting lens finds it in 1,761 [2]. That is ahead of 94 percent of our named colors [2]. It most often plays a mid-tone, in 30 percent of its appearances [2]. It peaks in the 1100s, in 6 of 50 paintings, 12.0 percent of the 50 paintings (6 of them) we have from that century, about 1.2 times the archive's typical rate, though that century is thinly represented in the archive [2]. Philips Wouwerman is its most devoted painter, carrying it in 11 of his 36 archived works, 3.7 times the typical rate [2]. It shares canvases more than chance would predict with [[mouse-grey]] and [[cannon]] [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: greyish brownish + olive",
+   "first_recorded": "Ridgway, Color Standards and Nomenclature, 1912; ISCC-NBS, 1955",
+   "source": "ColorHub color library and Color Graph"
+  },
+  "aka": [],
+  "siblings": [
+   "pale-olive",
+   "deep-olive",
+   "dark-olive",
+   "olive-brown",
+   "olive-grey"
+  ],
+  "parent": "olive",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2887,
+  "painters": [
+   {
+    "name": "Philips Wouwerman",
+    "hits": 11,
+    "n": 36,
+    "lift": 3.7
+   }
+  ],
+  "measured": {
+   "lch": [
+    37.4,
+    8.8,
+    96.9
+   ],
+   "iscc_nbs": {
+    "name": "olive gray",
+    "de2000": 2.2
+   }
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and Color Graph (data/library.json, data/graph): ISCC-NBS block, Munsell notation, LCH values",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive fieldnotes, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which ISCC-NBS name is closest, by CIEDE2000, to Greyish brownish olive?",
+   "choices": [
+    "Olive gray",
+    "Dark grayish purple",
+    "Pale blue",
+    "Grayish red"
+   ],
+   "answer": "Olive gray",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Greyish brownish olive is a rare color in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Greyish brownish olive is the closest ISCC-NBS match, only 2.2 CIEDE2000 units from olive gray."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Field notes named the wrong painter and stat (claimed Dirck van Delen, 8/13; real fieldnotes data show Philips Wouwerman, 11/36, 3.7x), a wrong painting count/role breakdown (claimed 4,196 paintings and 'shadows close behind at 30%'; real is 2,887/17.6%, shadow is 17% not 30%), a fabricated 'Tibetan paintings' claim with no supporting country data, and the wrong companion colors; corrected to the real counts, painter, role and companions.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 250
+}

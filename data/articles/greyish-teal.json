@@ -1,0 +1,161 @@
+{
+ "slug": "greyish-teal",
+ "name": "Greyish Teal",
+ "hex": "#719F91",
+ "names": [
+  "Greyish Teal"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Greyish Teal is a soft, desaturated blue-green that our painting archive finds far more often than most crowd-survey colors, especially in Matisse and Klimt.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier, and a Japanese near-twin",
+   "body": "The 2010 xkcd color survey carries this name, and our library separately holds a Japanese traditional color, *Mizu'asagi* (水浅葱), that lands close to the same hue; its kanji read literally as \"pale green onion\" [1]. The two names were coined independently, by different systems centuries apart, and we hold no evidence either influenced the other [1].\n\nISCC-NBS 1955 would file the swatch as a light bluish green, and the nearest library neighbor is [[dull-teal|Dull Teal]] [2]. It sits as a muted, greyed-down [[teal|teal]], paler and softer than the saturated web color of the same family name [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings, as photographed, carries this color in 81 paintings at five percent coverage or more[3]. The strongest single match is Claude Monet's 1904 [[painting:nga-61377|Waterloo Bridge, London, at Dusk]], where it covers about 60 percent of the canvas [3]. Henri Matisse carries it at nearly thirty times the archive's overall rate across his dated works, and Gustav Klimt at over seventeen times that rate [3]. In the paintings that hold it, this color sits as a highlight three times out of five, more often than as a shadow [3]. It also shares canvases with [[viridian|Viridian]] and [[sage|Sage]] far more than chance would predict [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; a modifier on teal",
+   "first_recorded": "2010, xkcd color survey",
+   "source": "ColorHub library: xkcd 2010; ColorHub graph (Japanese traditional color)"
+  },
+  "aka": [],
+  "siblings": [
+   "dull-teal",
+   "teal",
+   "viridian"
+  ],
+  "parent": "teal",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Mizu'asagi (水浅葱)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 81,
+  "nearest_iscc": [
+   "light bluish green",
+   6.4
+  ],
+  "first_source": [
+   "xkcd",
+   2010
+  ],
+  "measured": {
+   "lch": [
+    62.0,
+    18.7,
+    172.9
+   ]
+  },
+  "role": {
+   "highlight": 0.6,
+   "mid": 0.36,
+   "shadow": 0.04
+  },
+  "painters": [
+   {
+    "key": "Henri Matisse",
+    "lift": 29.36
+   },
+   {
+    "key": "Gustav Klimt",
+    "lift": 17.62
+   }
+  ],
+  "top_paintings": [
+   "nga-61377"
+  ],
+  "company": [
+   {
+    "word": "Viridian",
+    "lift": 17.44
+   },
+   {
+    "word": "Sage",
+    "lift": 13.01
+   }
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and graph nodes: xkcd 2010 survey; Japanese traditional color list",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: nearest standard names and ISCC-NBS 1955 distance",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which painter's dated work carries Greyish Teal at the highest multiple of the archive's base rate?",
+   "kind": "pick",
+   "choices": [
+    "Henri Matisse",
+    "Claude Monet",
+    "Gustav Klimt",
+    "Vincent van Gogh"
+   ],
+   "answer": "Henri Matisse"
+  },
+  {
+   "q": "True or false: in the paintings that carry it, Greyish Teal sits in shadow more often than as a highlight.",
+   "kind": "true-false",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False"
+  },
+  {
+   "q": "What does the kanji for the Japanese near-twin *Mizu'asagi* literally mean?",
+   "kind": "pick",
+   "choices": [
+    "Pale green onion",
+    "Morning mist",
+    "Shallow river",
+    "Spring bamboo"
+   ],
+   "answer": "Pale green onion"
+  }
+ ],
+ "openers": [
+  "Greyish Teal's strongest match in our archive covers 60 percent of a 1904 Monet twilight bridge scene.",
+  "Henri Matisse's dated paintings carry Greyish Teal at nearly thirty times the archive's overall rate."
+ ],
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "status": "checked",
+ "words": 221
+}

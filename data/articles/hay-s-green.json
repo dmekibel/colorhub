@@ -1,0 +1,116 @@
+{
+ "slug": "hay-s-green",
+ "name": "Hay's Green",
+ "hex": "#5C825D",
+ "names": [
+  "Hay's Green"
+ ],
+ "tier": "person",
+ "depth": "short",
+ "lede": "Hay's Green is a moderate, yellow-leaning green, one of six colors Robert Ridgway's 1912 dictionary names for a person called only Hay, and its closest color-graph match is another of the six, Ackermann's Green.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "One of six colors named Hay's",
+   "body": "Ridgway's 1912 “Color Standards and Color Nomenclature” lists Hay's Green at hex #5C825D among the names he credits to a person [1]. It shares its possessive with five other colors in the same book, among them [[hay-s-brown|Hay's Brown]], [[hay-s-maroon|Hay's Maroon]] and [[hay-s-russet|Hay's Russet]], but Ridgway never names the Hay he means, so the connection is undocumented in our sources [1]. The 1955 Inter-Society Color Council catalog repeats the name in the block it calls moderate yellowish green [1].\n\nIts nearest neighbor in our color graph is [[dark-sage|Dark Sage]], only 2.8 units away and more vivid [1]. Closer still, within 3.4 units, sits [[ackermann-s-green|Ackermann's Green]], another name from Ridgway's same person-named group [1]. Against the basic color words it reads closest to [[viridian|Viridian]], 8.0 units off [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive matches this green in 0.59% of 23,781 paintings, 141 of them, as photographed; the within-painting lens finds it in 65 [2]. That makes it more common than 53% of the named colors in our set [2]. It peaks in the 1900s, present in 1.6% of the 1,674 paintings from that century, 5.1 times the rate its museums would predict [2]. Inside a painting it most often plays an accent, in 26% of its 65 appearances [2]. Gustav Klimt is its most devoted painter here, holding it in 6 of 50 works, 10.2 times the baseline of the museums those paintings come from, and the color is also over-represented in Austria, 7.7 times the expected rate [2]. Our earliest match dates to 1445, by Dieric Bouts, 467 years before Ridgway's 1912 book recorded the name, a floor rather than a first, since a color match in an aged photograph is not proof of a pigment [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955"
+  },
+  "aka": [],
+  "siblings": [
+   "ackermann-s-green",
+   "dark-sage",
+   "hay-s-brown"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 141,
+  "measured": {
+   "lch": [
+    50.7,
+    26.5,
+    143.2
+   ],
+   "nearest": [
+    [
+     "Dark Sage",
+     2.8
+    ],
+    [
+     "Viridian",
+     8.0
+    ]
+   ]
+  },
+  "iscc_nbs": {
+   "name": "moderate yellowish green",
+   "de": 5.9
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912 (plate XVIII), ISCC-NBS 1955 (block 136)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which other Ridgway color is closest to Hay's Green in our color graph?",
+   "choices": [
+    "Ackermann's Green",
+    "Hay's Lilac",
+    "Davy's Grey",
+    "Yew Green"
+   ],
+   "answer": "Ackermann's Green",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Gustav Klimt's paintings hold Hay's Green far more often than the museums that keep them would predict.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Gustav Klimt's paintings hold Hay's Green more than ten times as often as chance would predict."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits; origin of \"Hay\" is undocumented in our sources.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 315
+}

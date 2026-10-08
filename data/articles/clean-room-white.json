@@ -1,0 +1,121 @@
+{
+ "name": "Clean Room White",
+ "hex": "#FFFDE6",
+ "names": [
+  "Clean Room White"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Clean Room White is a pale yellowish white matched to the industrial standard RAL 9012, about 3 units from ivory.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "An industrial white",
+   "body": "This white is filed against RAL 9012 in the German RAL registry, founded in 1927 for coatings and signage [1]. The ISCC-NBS system classes the hue as a yellowish white [2]. \"Clean room\" names the dust-controlled manufacturing spaces this white is associated with, rather than a dye, pigment or place, and no source consulted gives an exact coining date [1].\n\nIn our library the nearest named color is [[ivory]], about 3 units away by CIEDE2000, with [[cream]] close behind on the warmer side [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "ColorHub's archive finds this near-white in 69 of 23,781 paintings, as photographed [4]. It peaks in paintings from Nepal, Iran, Korea and China, and in the 1850s decade specifically [4]. A pale wash like this is as likely to come from aged varnish or a lit sky as from any single pigment [4]. The match is computed, not a pigment identification [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the dust-controlled manufacturing space",
+   "first_recorded": "undocumented",
+   "source": "RAL registry"
+  },
+  "aka": [],
+  "siblings": [
+   "ivory",
+   "cream",
+   "light-yellow",
+   "linen"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 69,
+  "match": {
+   "nearest_library": "Ivory",
+   "de2000": 2.9,
+   "ral": "RAL 9012"
+  },
+  "measured": {
+   "lch": [
+    99,
+    12,
+    106
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: RAL 9012, approximate screen value (RAL registry founded 1927)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS (1955) block entry",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library: nearest named colors by CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which registry carries Clean Room White as RAL 9012?",
+   "choices": [
+    "The German RAL registry",
+    "Ridgway's 1912 atlas",
+    "The ISCC-NBS report alone",
+    "Crayola"
+   ],
+   "answer": "The German RAL registry",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: a source confirms exactly when the name Clean Room White was coined.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Clean Room White is named for dust-controlled manufacturing spaces, not for a dye or a place."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "slug": "clean-room-white",
+ "words": 159
+}

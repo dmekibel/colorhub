@@ -1,0 +1,122 @@
+{
+ "slug": "fiery-rose",
+ "name": "Fiery Rose",
+ "hex": "#FF5470",
+ "names": [
+  "Fiery Rose"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Fiery Rose is a hot, saturated pink-red from Crayola's crayon list, close enough to Neon Fuchsia and Begonia Rose that only a careful eye tells them apart, and too bright for any painting in our archive to match.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A Crayola pink",
+   "body": "Wikipedia's color lists carry Fiery Rose at #FF5470 and credits Crayola as the source [1]. Measured against the ISCC-NBS block system it falls nearest to block 3, \"deep pink,\" though 5.4 units off that block's center, which is why the name reads as its own shade rather than a textbook pink [2]. In Munsell terms it sits near 2.3R 6.0/15.5: very high chroma, tipped slightly toward orange [2].\n\nTwo neighbors mark the edges of the same small patch of color space. [[neon-fuchsia|Neon Fuchsia]] sits 2.9 units away and reads more vivid; [[begonia-rose|Begonia Rose]] sits 3.2 units away and reads duller [2]. Crayola's own Radical Red lands close enough to confuse without a swatch in hand [1]. Who coined \"Fiery Rose,\" and when, is undocumented here [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive carries a match for Fiery Rose, as photographed [3]. That says more about the archive than the color: oil and tempera pigments, even fresh and unvarnished, rarely reach the saturation a modern print color can hold [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a hot, rose-colored pink; undocumented beyond the plain words",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "Wikipedia list of web colors, citing Crayola"
+  },
+  "aka": [
+   "Radical Red"
+  ],
+  "siblings": [
+   "neon-fuchsia",
+   "begonia-rose",
+   "ultra-red",
+   "warm-pink"
+  ],
+  "parent": null,
+  "children": null,
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    61,
+    70,
+    18
+   ],
+   "nearest": [
+    [
+     "Neon Fuchsia",
+     2.9
+    ],
+    [
+     "Begonia Rose",
+     3.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Wikipedia list of web colors, citing Crayola",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: computed ISCC-NBS block, Munsell notation and look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which crayon company does Wikipedia credit for the name Fiery Rose?",
+   "choices": [
+    "Crayola",
+    "Pantone",
+    "RAL",
+    "Winsor & Newton"
+   ],
+   "answer": "Crayola",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: at least one painting in the ColorHub archive closely matches Fiery Rose.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Fiery Rose is so saturated that no painting in our archive comes close to it."
+ ],
+ "words": 207,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Editor spot-audit 2026-10-09: tier was 'nature' (a Crayola name is commercial); aka listed Neon Fuchsia and Begonia Rose, which are distinct neighbors, not aliases (kept Radical Red, a mapped alias).",
+   "lint 2026-10-09"
+  ]
+ }
+}

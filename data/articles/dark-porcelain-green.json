@@ -1,0 +1,126 @@
+{
+ "slug": "dark-porcelain-green",
+ "name": "Dark Porcelain Green",
+ "hex": "#4D6F62",
+ "names": [
+  "Dark Porcelain Green"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dark Porcelain Green darkens [[porcelain-green]], named for the celadon glaze on East Asian porcelain, and in our archive it runs at over three times its normal rate in paintings from the 1900s.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A darkened glaze green",
+   "body": "The name pairs dark with [[porcelain-green]], which takes its own name from the grey-green celadon glazes fired onto East Asian porcelain [1]. Ridgway charted this darker tone in 1912 on plate XXXIII, hue 39′′, tone k, and the ISCC-NBS *Dictionary of Color Names* carried it forward in 1955 as block 163 [1].\n\nMeasured against our Color Graph, its nearest neighbor is [[japanese-blue]], 2.9 units away and a touch bluer; [[nickel-green]] is greener, and [[dark-russian-green]], a Japanese traditional color, is nearly the same, 3.3 units off [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A match for this color covers at least five per cent of the canvas in 193 of 23,781 paintings in our archive, about 0.8 per cent, as photographed [3]. Impressionist paintings carry it at 8.8 times the archive's overall rate, 10 of 140, and Jean-Jacques Henner's work at over 20 times, 3 of his 18 paintings [3]. The earliest dated match is Andrea di Bartolo's *Presentation of the Virgin in the Temple*, 1400, a floor on the color's age in painting rather than a claim of its first appearance [3]. As photographed: these are computed color matches on museum photographs of aged, varnished paintings, not a pigment test [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "celadon-glazed porcelain's grey-green, darkened",
+   "first_recorded": "1912 (Ridgway, plate XXXIII); 1955 (ISCC-NBS, block 163)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "japanese-blue",
+   "nickel-green",
+   "dark-russian-green"
+  ],
+  "parent": "porcelain-green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#4D6F62",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 193,
+  "rate": 0.0081,
+  "movements": [
+   [
+    "Impressionism",
+    140,
+    10,
+    8.8
+   ]
+  ],
+  "measured": {
+   "lch": [
+    44.0,
+    15.6,
+    167.7
+   ],
+   "nearest": [
+    [
+     "Japanese Blue",
+     2.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Ridgway 1912, plate XXXIII, hue 39′′, tone k; ISCC-NBS 1955, block 163",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub Color Graph look-alikes (data/graph/edges-d.json), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Porcelain Green, the parent of this color, is named for what?",
+   "choices": [
+    "Celadon glaze on East Asian porcelain",
+    "A French porcelain factory",
+    "A green clay body",
+    "A mineral pigment"
+   ],
+   "answer": "Celadon glaze on East Asian porcelain",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Impressionist paintings in our archive carry this color well above the archive's average rate.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A celadon green from a 1912 atlas, unusually common in Impressionist paintings."
+ ],
+ "words": 231,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}

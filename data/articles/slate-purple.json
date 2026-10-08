@@ -1,0 +1,120 @@
+{
+ "slug": "slate-purple",
+ "name": "Slate-Purple",
+ "hex": "#786070",
+ "names": [
+  "Slate-Purple"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Slate-Purple is a grayish purple first dated by Ridgway in 1912, the rarest of the library's three slate colors in our painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The rarest of the three",
+   "body": "Ridgway's 1912 standard places this hue on plate XLIV, and the 1955 ISCC-NBS system classes it as a dark grayish purple, block 229 [1]. The nearest named colors on file are [[old-lavender]], [[dull-indian-purple]], [[livid-violet]] and [[purplish-grey]], at 3.5, 3.7, 5, 3.7, 4.1 and 4.5 ΔE [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to Slate-Purple in just 33 of 23,781 paintings, about 0.1 percent, as photographed, too rare for any painter or color pairing to stand out reliably [2]. The earliest dated match is a 1491 Chinese handscroll, Shen Zhou's *Twelve Views of Tiger Hill*, four centuries before Ridgway's plate, which only shows a similar screen color was photographed there, not that the name existed that early, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "slate, the rock",
+   "first_recorded": "Ridgway, 1912 (plate XLIV, hue 65′′′)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "old-lavender",
+   "dull-indian-purple",
+   "livid-violet",
+   "purplish-grey"
+  ],
+  "parent": "slate",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 33,
+  "measured": {
+   "lch": [
+    44,
+    14,
+    337
+   ],
+   "nearest": [
+    [
+     "Old Lavender",
+     3.5
+    ],
+    [
+     "Dull Indian Purple",
+     3.7
+    ],
+    [
+     "Livid Violet",
+     4.1
+    ],
+    [
+     "Purplish Grey",
+     4.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955, Maerz and Paul 1930 and other name records, with plate/block locators and nearest-name match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Slate-Purple shares its name's root with which other two library colors?",
+   "choices": [
+    "Slate-Green and Slate-Olive",
+    "Mauve and Lilac",
+    "Plum and Violet",
+    "Taupe-Brown and Taupe-Grey"
+   ],
+   "answer": "Slate-Green and Slate-Olive",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Mauve is a close color match to Slate-Purple.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Slate-Purple is so rare in our archive that no painter or color pairing stands out for it."
+ ],
+ "words": 161,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

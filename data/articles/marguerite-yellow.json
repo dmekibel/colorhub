@@ -1,0 +1,150 @@
+{
+ "slug": "marguerite-yellow",
+ "name": "Marguerite Yellow",
+ "hex": "#F4E5BD",
+ "names": [
+  "Marguerite Yellow"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Marguerite Yellow is a pale, buttery yellow first plated by Ridgway in 1912, and so close to a color Wikipedia lists as Lemon Meringue that the two amount to the same paint.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A 1912 plate, a modern duplicate",
+   "body": "Ridgway's atlas places this value at plate XXX, hue 23′′, tone f, first recorded in 1912 [1]. Maerz and Paul's own 1930 dictionary independently lands on the same plate position and the same year, 10 C 3, and the ISCC-NBS system of 1955 classifies it as a pale yellow green [1][2]. The flower marguerite, a kind of daisy, gives the name, though neither book explains why this particular pale shade was chosen for it rather than a brighter one [1].\n\nOur library's own color match finds a near-duplicate, Lemon Meringue, within about 2 units, close enough that the two likely read as identical on any screen [3]. Its listed neighbor is [[seafoam-green|Seafoam Green]], an unrelated cool color that happens to sit nearby in lightness and saturation rather than in hue [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Marguerite Yellow covers at least five per cent of the canvas in 441 works, about one in fifty, as photographed [4]. It is most over-represented in paintings from Iran, China and Switzerland, and John Singer Sargent carries it in 14 of his 287 archived paintings [4]. The painter most strongly tied to it, relative to his output, is Pieter Gerardus van Os, at over sixteen times the expected rate [4]. These remain photographs of aged, varnished canvases read as screen colors, not pigment tests [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the marguerite daisy",
+   "first_recorded": "Ridgway (1912), plate XXX, hue 23′′; Maerz & Paul (1930), plate 10 C 3",
+   "source": "ColorHub color library (Ridgway 1912; Maerz & Paul 1930; ISCC-NBS 1955; Wikipedia)"
+  },
+  "aka": [
+   "Lemon Meringue"
+  ],
+  "siblings": [
+   "seafoam-green",
+   "lemon-meringue",
+   "beige",
+   "pale-peach"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#F4E5BD",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 441,
+  "painters": [
+   {
+    "key": "Pieter Gerardus van Os",
+    "lift": 16.59
+   },
+   {
+    "key": "John Singer Sargent",
+    "n": 287,
+    "hits": 14
+   }
+  ],
+  "countries": [
+   {
+    "key": "Iran",
+    "lift": 7.44
+   },
+   {
+    "key": "China",
+    "lift": 3.57
+   }
+  ],
+  "measured": {
+   "lch": [
+    91,
+    21,
+    93
+   ],
+   "nearest": [
+    [
+     "Lemon Meringue",
+     2.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature, plate XXX, hue 23′′, tone f",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: ISCC-NBS 1955 block assignment, Maerz & Paul cross-reference (data/graph/nodes-m.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library, near-duplicate and nearest-match fields (data/library.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which flower gives Marguerite Yellow its name?",
+   "choices": [
+    "A daisy",
+    "A tulip",
+    "A sunflower",
+    "A marigold"
+   ],
+   "answer": "A daisy",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our library finds another listed color, Lemon Meringue, close enough to Marguerite Yellow to be a near-duplicate.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Marguerite Yellow and a color called Lemon Meringue are close enough to be the same paint."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 252
+}

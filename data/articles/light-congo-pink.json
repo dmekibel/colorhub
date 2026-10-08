@@ -1,0 +1,132 @@
+{
+ "slug": "light-congo-pink",
+ "name": "Light Congo Pink",
+ "hex": "#E3B09F",
+ "names": [
+  "Light Congo Pink"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Light Congo Pink is a soft apricot pink from Ridgway's 1912 atlas, a lighter sibling of the deeper Congo Pink rather than a color with its own separate history.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A lighter Congo Pink",
+   "body": "Ridgway's 1912 atlas carries this tone on plate XXVIII, hue 7″, notated 0.1YR 7.5/4.4 in the Munsell system [1]. The 1955 ISCC-NBS dictionary groups it under block 28, naming it light yellowish pink, 2.6 units from Ridgway's reading [1].\n\nIts closest neighbor in our library is [[rose-dawn]], about 2.7 units away, close enough to pass for the same color [2]. [[indian-pink]] sits about 3.8 units off and darker, and [[flesh-pink]] and [[flesh-color]] about 5.2 to 5.5 units off and lighter [2]. \"Congo\" names the base color this one lightens; what made the base color Congo in the first place is not explained in Ridgway's text [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive matches this tone in 148 of 23,781 paintings, about 0.62 percent, as photographed, more common than 54 percent of the named colors tracked [3]. It peaks in the 1900s, present in 1.1 percent of the 1,674 paintings from that decade, 3.3 times its museums' expected rate [3].\n\nInside a painting it most often plays a light tone, in 40 percent of its 72 clearly-ranked appearances, a rank computed within each canvas so varnish cannot fake it [3]. In printed English the phrase's use peaked in the 1940s, though that Ngram count covers every sense of the words, not only the color [3]. These are photographs of aged, varnished paintings, and the match is a computed color reading, not a pigment identification [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a lighter variant of Congo Pink; the origin of \"Congo\" itself is undocumented here",
+   "first_recorded": "1912 (Ridgway); carried into the 1955 ISCC-NBS dictionary",
+   "source": "Ridgway, Color Standards and Color Nomenclature; ISCC-NBS, NBS Circular 553"
+  },
+  "aka": [],
+  "siblings": [
+   "rose-dawn",
+   "indian-pink",
+   "flesh-pink",
+   "flesh-color"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#E3B09F",
+   "de2000": 2.6,
+   "min_cover": 0.02
+  },
+  "n_present": 148,
+  "measured": {
+   "lch": [
+    76.0,
+    22.7,
+    44.4
+   ],
+   "nearest": [
+    [
+     "Rose Dawn",
+     2.7
+    ],
+    [
+     "Indian Pink",
+     3.8
+    ],
+    [
+     "Flesh Pink",
+     5.2
+    ],
+    [
+     "Flesh Color",
+     5.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XXVIII, hue 7″; cited in ISCC-NBS, NBS Circular 553 (1955), block 28, \"moderate yellowish pink\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library and graph: computed LCH and nearest-neighbor distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed, with Google Books Ngram",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Light Congo Pink is Ridgway's lighter version of which color?",
+   "choices": [
+    "Congo Pink",
+    "Indian Pink",
+    "Rose Dawn",
+    "Flesh Pink"
+   ],
+   "answer": "Congo Pink",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Ridgway's text explains why the base color is called Congo.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Light Congo Pink is close enough to Rose Dawn that the two are nearly interchangeable on screen."
+ ],
+ "words": 267,
+ "status": "checked",
+ "checked": {
+  "by": "batch-36",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

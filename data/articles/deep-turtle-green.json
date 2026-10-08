@@ -1,0 +1,113 @@
+{
+ "slug": "deep-turtle-green",
+ "name": "Deep Turtle Green",
+ "hex": "#89AB74",
+ "names": [
+  "Deep Turtle Green"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Deep Turtle Green is a muted, yellow-leaning green, named for the animal rather than a plant.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A shell, not a leaf",
+   "body": "Ridgway's 1912 nomenclature places the swatch at plate XXXII, hue 31′′, and the ISCC-NBS system of 1955 reads it as a strong yellowish green, several units from the block center [1]. Our library files the name among animal words rather than plant words, alongside other shell- and hide-toned greens [1].\n\nThe nearest named color in our data is [[dusty-green]], about 6.5 units off, with [[boa]], [[malachite-green]] and [[sage]] close behind [2]. All sit in the same soft, grey-yellow-green range as sage and moss."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The archive finds this color, as photographed, in 70 of 23,781 paintings, rarer than 53 percent of the named colors we track [3]. It peaks in the 1900s, in 12 of 1,674 paintings, at 0.7 per cent of that century's paintings, 3.8 times the overall rate [3]. Inside a painting it most often plays an accent [3]. It is also over-represented in Impressionist work, at 6 of 140 paintings, 5.1 times the overall rate [3]. The earliest match is a 1513 painting, 399 years before Ridgway's 1912 record, so this is a look-alike hue in an old photograph, not a pigment identification, a floor and not a first, since the archive's early centuries are thin [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the turtle (shell colouring)",
+   "first_recorded": "1912, Ridgway plate XXXII",
+   "source": "data/library.json"
+  },
+  "aka": [],
+  "siblings": [
+   "dusty-green",
+   "boa",
+   "malachite-green",
+   "sage"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 70,
+  "pct": 0.29,
+  "peak": "1900s, 0.7% of 1,674 paintings, 3.8x expected",
+  "movement": [
+   "Impressionism",
+   6,
+   140,
+   5.1
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930 and other name sources; CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub Color Graph look-alikes (data/graph), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5 per cent of canvas); data/graph/fieldnotes",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is Deep Turtle Green named after?",
+   "choices": [
+    "The turtle",
+    "A leaf",
+    "A gemstone",
+    "A flower"
+   ],
+   "answer": "The turtle",
+   "kind": "pick"
+  },
+  {
+   "q": "Which movement is Deep Turtle Green most over-represented in?",
+   "choices": [
+    "Impressionism",
+    "Cubism",
+    "Surrealism",
+    "Fauvism"
+   ],
+   "answer": "Impressionism",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Deep Turtle Green is named for the animal's shell, not a plant."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Fixed: the field-notes paragraph invented a painter claim (\"Gustav Klimt, 6 of 50 sampled paintings\"; \"Vincent van Gogh's Girl in White, 1890\") with no basis — ar.pa and ar.pn are both empty for this slug. The peak-decade stat (1910s, 1.9%, 8.4x) does not match any real field (century fact is 1900s/0.7%/3.8x; the raw pd field is 1890/0.9%/4.2x) and the earliest-match sentence named a '1600 Mughal court painting' that isn't in the data (first-seen is an unattributed 1513 painting; 1600 is only the third-earliest). Rewrote from the real presence, century, role, movement (Impressionism) and first-seen facts, and swapped the decade-trivia question for one on the movement fact. Removed the unsupported painter and attribution claims rather than inventing replacements.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 215
+}

@@ -1,0 +1,134 @@
+{
+ "slug": "olive-buff",
+ "name": "Olive-Buff",
+ "hex": "#CFC2A1",
+ "names": [
+  "Olive-Buff"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Olive-Buff is a descriptive pairing of olive and buff, carried forward from Ridgway's 1886 Nomenclature of Colors.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two pale nature words, paired",
+   "body": "The library carries this name forward from Ridgway's 1886 *Nomenclature of Colors*, and it is also plotted on Ridgway's 1912 plate XL, hue 21 triple-prime, tone d [1]. The ISCC-NBS 1955 lists classify it as a pale yellow, lighter and flatter than either word alone would suggest [1]. [[olive]] usually reads as a muted green and [[buff]] as a warm tan; paired and paled together, the result sits closer to a dusty beige than to either source word [1].\n\nThe nearest named color in the library is Pale Olive-Buff, about 4.2 units away by CIEDE2000, with [[natural|Natural]] and [[lion|Lion]] not far behind [1]. In LCH terms it measures lightness 79, chroma 18, hue 92 degrees, Munsell 3.5Y 7.8/2.5 [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 3,241 of 23,781 paintings, 13.63 percent, as photographed [2]. That makes it one of the more common named colors we track, not a rarity [2]. It peaks in the 1790s, in 102 of that decade's 385 paintings, about 1.9 times the expected rate [2]. Willem van de Velde the Elder is its most devoted painter here, carrying it in 12 of his 14 works, over 6 times the baseline [2]. These are photographs of aged, varnished paintings, so a color match is not a pigment test [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "olive + buff, a descriptive pairing",
+   "first_recorded": "1886 (Ridgway, Nomenclature of Colors)",
+   "source": "Ridgway, Color Standards and Color Nomenclature (1912); ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "pale-olive-buff",
+   "natural",
+   "lion",
+   "yellowish-grey"
+  ],
+  "parent": null,
+  "children": [
+   "pale-olive-buff"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 3241,
+  "measured": {
+   "lch": [
+    79,
+    18,
+    92
+   ],
+   "nearest": [
+    [
+     "Pale Olive-Buff",
+     4.2
+    ],
+    [
+     "Natural",
+     4.3
+    ],
+    [
+     "Lion",
+     4.7
+    ],
+    [
+     "Yellowish Grey",
+     5.0
+    ]
+   ]
+  },
+  "painter": "Willem van de Velde (I)"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1886, Nomenclature of Colors; Ridgway 1912, plate XL, hue 21‴, tone d; ISCC-NBS 1955 block 89; nearest library match Pale Olive-Buff, ΔE 4.2",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Roughly how common is Olive-Buff in our painting archive?",
+   "choices": [
+    "About one in seven paintings",
+    "One in ten thousand",
+    "It never appears",
+    "Only in the 1900s"
+   ],
+   "answer": "About one in seven paintings",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Olive-Buff is named for a single nature word.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which painter here is most strongly associated with Olive-Buff?",
+   "choices": [
+    "Willem van de Velde (I)",
+    "Giovanni Bellini",
+    "Amedeo Modigliani",
+    "Xugu"
+   ],
+   "answer": "Willem van de Velde (I)",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Olive-Buff pairs two nature words and turns up in more than one painting in eight here."
+ ],
+ "words": 228,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

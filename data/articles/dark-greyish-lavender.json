@@ -1,0 +1,162 @@
+{
+ "slug": "dark-greyish-lavender",
+ "name": "Dark Greyish Lavender",
+ "hex": "#9694AE",
+ "names": [
+  "Dark Greyish Lavender"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dark Greyish Lavender is a dark greyish shade of [[lavender|lavender]], one of Robert Ridgway's working names built by the plain grammar of modifier plus base color.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier, not a new color",
+   "body": "Dark Greyish Lavender stacks two modifiers, *dark* and *greyish*, onto the base color [[lavender]], named for the flower [1][4]. Ridgway's 1912 plate XLIII, hue 57-triple-prime, is also reached by a near neighbor on the same plate, hue 53-triple-prime, in our sources [1]. The ISCC-NBS system calls the matching block, 214, 'pale violet,' the closest match of any name, a Delta-E of just 1.8 [2]. The nearest named colors on file are [[light-dull-bluish-violet]], [[manatee]] and [[light-hyssop-violet]], at 3.5, 5.1 and 5.3 ΔE [1][4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this shade, as photographed, in 0.35% of 23,781 paintings, 84 paintings; within a single canvas it reads as a distinct area in 37 of them [3]. That makes it rarer than 54% of the archive's named colors [3]. It peaks in the 1900s, found in 0.5% of that century's 1,674 paintings, 2.0 times the expected rate [3]. Inside a painting it most often plays a hidden color, by lightness rank, in 41% of its 37 appearances [3]. The earliest dated appearance is a 1520 painting by Antonio da Correggio, 392 years before the name's first documented record in 1912; the archive's early centuries are thin, so this is a floor and not a first [3]. It is most over-represented in paintings from France, 2.3 times the expected rate, 13 of 3,443 French paintings in our archive [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the base color lavender, with the modifier 'dark greyish'",
+   "first_recorded": "1912 (Ridgway, Color Standards and Nomenclature)",
+   "source": "Ridgway, Color Standards and Nomenclature"
+  },
+  "aka": [],
+  "siblings": [
+   "light-dull-bluish-violet",
+   "manatee",
+   "light-hyssop-violet",
+   "ontario-violet"
+  ],
+  "parent": "lavender",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "measured": {
+   "lch": [
+    62.3,
+    14.6,
+    294.6
+   ],
+   "nearest_iscc": [
+    "pale violet",
+    1.8
+   ],
+   "nearest": [
+    [
+     "Light Dull Bluish Violet",
+     3.5
+    ],
+    [
+     "Manatee",
+     5.1
+    ],
+    [
+     "Light Hyssop Violet",
+     5.3
+    ],
+    [
+     "Ontario Violet",
+     5.8
+    ]
+   ]
+  },
+  "n_present": 37,
+  "role_top": {
+   "role": "hidden",
+   "pct": 41
+  },
+  "country": {
+   "name": "France",
+   "lift": 2.3
+  },
+  "first_seen": {
+   "year": 1520,
+   "years_before_record": 392
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Nomenclature, 1912, plate XLIII, hue 57 triple-prime",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "ISCC-NBS, National Bureau of Standards Circular 553, 1955, block 214 (\"pale violet\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color graph: computed LCH/Munsell values and modifier-name cross-reference",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which flower names the base color behind Dark Greyish Lavender?",
+   "choices": [
+    "Lavender",
+    "Lilac",
+    "Violet",
+    "Iris"
+   ],
+   "answer": "Lavender",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dark Greyish Lavender has the closest match of any name in this batch to its ISCC-NBS block, a Delta-E of under 2.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "In which country's paintings is Dark Greyish Lavender most over-represented?",
+   "choices": [
+    "France",
+    "India",
+    "Norway",
+    "United Kingdom"
+   ],
+   "answer": "France",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Dark Greyish Lavender has the closest match to its ISCC-NBS block of any name, a Delta-E of under 2.",
+  "Its earliest dated match is a 1520 painting by Antonio da Correggio."
+ ],
+ "words": 254,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

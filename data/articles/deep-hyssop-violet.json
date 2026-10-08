@@ -1,0 +1,115 @@
+{
+ "slug": "deep-hyssop-violet",
+ "name": "Deep Hyssop Violet",
+ "hex": "#796583",
+ "names": [
+  "Deep Hyssop Violet"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Deep Hyssop Violet is a muted, lighter cousin of Dark Hyssop Violet, both named for the herb and both recorded by Ridgway in 1912 and classed by the ISCC-NBS system in 1955.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A lighter hyssop",
+   "body": "Deep Hyssop Violet shares its root with [[dark-hyssop-violet|Dark Hyssop Violet]]: both trace to hyssop, the aromatic herb, in our data [1]. Ridgway's 1912 atlas plots this lighter member on the same plate, XXXVI, at hue 59′′, tone i, one step up from its darker sibling's tone k, and the ISCC-NBS system of 1955 files it as block 223, a neighbor of that sibling's block 224 [1]. In LCH terms it measures lightness 46, chroma 20, hue 316 degrees, noticeably lighter than Dark Hyssop Violet's lightness of 39 [1].\n\nIts nearest distinct neighbor by computed color distance is [[purplish-grey|Purplish Grey]], 2.6 units away and read in our data as \"almost the same\" [2]. [[aster|Aster]] sits almost as close, 2.9 units off, also \"almost the same\" [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a close match covers enough of the canvas in only 9, as photographed, rarer than 69 percent of the named colors we track [3]. It peaks in paintings from the 1800s, at 1.7 times the rate expected from that century's share of the archive [3]. Its earliest archive match is a painting from 1842 by the Danish painter Kølle, and its latest is from 1915, a narrow 73-year window compared to the centuries-long spans of some other colors in this family [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "hyssop, the aromatic herb",
+   "first_recorded": "Ridgway, 1912",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "dark-hyssop-violet",
+   "purplish-grey",
+   "aster"
+  ],
+  "parent": "violet",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 9,
+  "measured": {
+   "lch": [
+    46,
+    20,
+    316
+   ],
+   "nearest": [
+    [
+     "Purplish Grey",
+     2.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/nodes-d.json): Deep Hyssop Violet — Ridgway 1912, plate XXXVI, hue 59′′, tone i; ISCC-NBS 1955, block 223",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-d.json): nearest distinct neighbors by CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings, as photographed, data/graph/fieldnotes/d.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Deep Hyssop Violet and Dark Hyssop Violet are both named for which plant?",
+   "choices": [
+    "Hyssop",
+    "Lavender",
+    "Violet",
+    "Plum"
+   ],
+   "answer": "Hyssop",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Deep Hyssop Violet is lighter than Dark Hyssop Violet.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Every archive match for this color falls in a narrow 73-year window, 1842 to 1915."
+ ],
+ "words": 241,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No book concordance hits for this slug; written from the color graph, library and archive data only.",
+   "lint 2026-10-09"
+  ]
+ }
+}

@@ -1,0 +1,116 @@
+{
+ "slug": "bright-aqua",
+ "name": "Bright Aqua",
+ "hex": "#0BF9EA",
+ "names": [
+  "Bright Aqua"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Bright Aqua is a vivid, near-neon aqua: the modifier \"bright\" on top of the base color, close enough to [[turquoise]] that several sources record the two as the same cluster.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Three sources, one shade",
+   "body": "The 2010 xkcd survey, Wikipedia's color list, and a 1927 RAL paint standard all converge on essentially this hue, within about a CIEDE2000 unit of each other, close enough that our library records them as a near-duplicate it calls Turquoise Blue [1]. The ISCC-NBS 1955 dictionary places it in block 159, described as a vivid, light bluish green [2].\n\nThe name itself is plain modifier grammar, \"bright\" plus [[aqua]], and its closest learnable word in our library is Aqua itself, about 5 units away in CIEDE2000 [1]. Siblings in the family are [[turquoise]], [[teal]], and [[mint]], all in the blue-green range this color sits at the saturated edge of [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings, as photographed, has no painting where this near-neon aqua covers five percent or more of the canvas [3]. A color this bright and this light at once is outside the range historical pigments reach once mixed, applied, and aged under varnish [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: bright + aqua",
+   "first_recorded": "1927, RAL Classic (as a paint standard close to this hue)",
+   "source": "ColorHub color library (xkcd, Wikipedia, RAL, ISCC-NBS)"
+  },
+  "aka": [],
+  "siblings": [
+   "aqua",
+   "turquoise",
+   "teal",
+   "mint"
+  ],
+  "parent": "aqua",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    89,
+    52,
+    187
+   ],
+   "nearest": [
+    [
+     "Aqua",
+     4.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: xkcd 2010 survey, Wikipedia List of colors, RAL Classic 1927 entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS 1955 dictionary, block 159",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which existing name do several sources place within one CIEDE2000 unit of Bright Aqua?",
+   "choices": [
+    "Turquoise Blue",
+    "Prussian Blue",
+    "Isabelline",
+    "Mauve"
+   ],
+   "answer": "Turquoise Blue",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Bright Aqua appears often in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Three independent color lists, a 2010 web survey, Wikipedia, and a 1927 paint standard, land on nearly the same aqua."
+ ],
+ "words": 182,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No private fact-card file for this slug.",
+   "lint 2026-10-09"
+  ]
+ }
+}

@@ -1,0 +1,136 @@
+{
+ "slug": "saccardo-s-slate",
+ "name": "Saccardo's Slate",
+ "hex": "#3D585D",
+ "names": [
+  "Saccardo's Slate"
+ ],
+ "tier": "person",
+ "depth": "short",
+ "lede": "Saccardo's Slate is a dark, blue-grey standard from Robert Ridgway's 1912 color book, most likely named for the Italian mycologist Pier Andrea Saccardo, whose own color chart was one of Ridgway's sources.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A mycologist's color chart",
+   "body": "Ridgway built his 1912 *Color Standards and Color Nomenclature* from about 4,000 named samples gathered from earlier systems [1]. Among them was Saccardo's *Chromotaxia*, a reference work by the Italian mycologist Pier Andrea Saccardo for naming fungus colors [1]. Saccardo's Slate and the related [[saccardo-s-violet|Saccardo's Violet]] most likely trace to that source, though no book we hold confirms this directly for either name [1][2].\n\nRidgway catalogued this slate on plate XLVIII, and the ISCC-NBS system of 1955 carries it as block 192 [2]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "Measured in LCH terms it is dark and low-saturation, lightness 36, chroma 11, hue 215 degrees [3]. Its nearest library neighbor is [[pale-charcoal|Pale charcoal]], about 2.8 units away, with the bluer [[dark-delft-blue|Dark Delft Blue]] close behind [3]. Next to [[slate]] it reads as the darker, bluer one [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this slate, as photographed, in 295 of 23,781 paintings, about 1.2 percent, including Cezanne's 1899 *The Bathers* and a 1640 Indian miniature of Krishna diving into the river [4]. The earliest dated match is a 1270 Italian crucifix panel, a floor and not a first, since the archive's early centuries are thin [4]. These are computed color matches on aged, varnished paintings, not pigment identifications [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "most likely Pier Andrea Saccardo, Italian mycologist (1845-1920), author of Chromotaxia",
+   "first_recorded": "1912, Ridgway",
+   "source": "Ridgway, Color Standards and Color Nomenclature (1912)"
+  },
+  "aka": [],
+  "siblings": [
+   "saccardo-s-violet",
+   "pale-charcoal",
+   "dark-delft-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 295,
+  "top_paintings": [
+   "cma-314425",
+   "aic-45240",
+   "commons-Q21715893"
+  ],
+  "measured": {
+   "lch": [
+    36,
+    11,
+    215
+   ],
+   "nearest": [
+    [
+     "Pale charcoal",
+     2.8
+    ],
+    [
+     "Dark Delft Blue",
+     3.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty et al. (eds.), Nature's Palette, preface on Ridgway's sources, citing Saccardo's Chromotaxia",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Ridgway 1912, plate XLVIII; ISCC-NBS 1955 block 192",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): CIEDE2000 distances to named neighbors",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes; within the archive's match threshold, at least 5% of the canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Saccardo's color chart, one of Ridgway's sources, was built to name the colors of what?",
+   "choices": [
+    "Fungi",
+    "Birds",
+    "Flowers",
+    "Minerals"
+   ],
+   "answer": "Fungi",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: a book directly confirms Saccardo's Slate is named for Pier Andrea Saccardo.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Saccardo's Slate likely traces to a chart built for naming the colors of fungi, not paintings."
+ ],
+ "words": 226,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "Naming tied to Saccardo's Chromotaxia by inference (Ridgway cites it as a source), not a direct book statement.",
+   "lint 2026-10-09"
+  ]
+ }
+}

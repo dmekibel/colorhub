@@ -1,0 +1,112 @@
+{
+ "slug": "alizarine-blue",
+ "name": "Alizarine Blue",
+ "hex": "#42577D",
+ "names": [
+  "Alizarine Blue"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Alizarine Blue is a darker, more saturated blue from Ridgway's 1912 plates, close kin to Acetin Blue.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two plates, one block",
+   "body": "Ridgway's 1912 chart carries this blue on two plates, XXI and XXII, hue 51′ and 47*, and the ISCC-NBS system of 1955 files close matches in its blocks 182 and 164 [1]. Despite the name, our sources do not connect it to alizarin, the madder dye's coloring molecule; the origin is otherwise undocumented here [1].\n\nThe nearest named colors on file are [[acetin-blue]], [[dark-cadet-blue]], [[indigo-blue]] and [[azurite-blue]], at 3.4, 4.3, 4.6 and 4.6 ΔE [1]. The library also records a close duplicate called Gendarme Blue, about 2.2 units away, though that name is not in our color list [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this blue in 121 of 23,781 paintings, 0.51 percent, as photographed [2]. The earliest dated match is the same 1350 Madonna and Child Enthroned that also carries [[acetin-blue]], a floor and not a first, since the archive's early centuries are thin [2]. It peaks in the 1920s, in 6 of 237 paintings, at 8.3 times the archive's overall rate, and Edvard Munch carries it in four of his 50 paintings here, well above his own museums' baseline [2]. Inside a painting it splits between shadow and mid-tone roles, 46 and 51 percent of its appearances [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; not confirmed to reference alizarin",
+   "first_recorded": "Ridgway 1912, plates XXI and XXII",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "acetin-blue",
+   "dark-cadet-blue",
+   "indigo-blue",
+   "azurite-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 121,
+  "measured": {
+   "lch": [
+    37,
+    24,
+    277
+   ],
+   "nearest": [
+    [
+     "Acetin Blue",
+     3.4
+    ]
+   ]
+  },
+  "role": {
+   "shadow": 0.46,
+   "mid": 0.51
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912 plates XXI/XXII, ISCC-NBS 1955 blocks 182/164, near-duplicate Gendarme Blue",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which painter is most over-represented relative to his own baseline for Alizarine Blue?",
+   "choices": [
+    "Edvard Munch",
+    "Claude Monet",
+    "Rembrandt",
+    "Titian"
+   ],
+   "answer": "Edvard Munch",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources confirm Alizarine Blue is named for the dye molecule alizarin.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A saturated 1912 blue, recorded on two Ridgway plates at once."
+ ],
+ "words": 221,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

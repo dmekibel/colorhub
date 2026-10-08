@@ -1,0 +1,126 @@
+{
+ "slug": "seafoam",
+ "name": "Seafoam",
+ "hex": "#80F9AD",
+ "names": [
+  "Seafoam"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Seafoam is a brilliant yellowish green that Maerz and Paul date to 1920, and it is too bright and saturated to appear in any of our 23,781 archive paintings.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A bright green, independently named four times",
+   "body": "The ISCC-NBS 1955 census files Seafoam as a brilliant green in block 140 [1]. Maerz and Paul trace the name to 1920, on their plate 17 A 9 [1]. xkcd's 2010 color survey lists two near-identical shades, within 1.1 and 1.7 units, called *Light Blue Green* and *Light Bluish Green* [1].\n\nColorHub's own library places its nearest distinctly-named neighbor at [[light-greenish-blue]], about 3.3 units off, with [[light-seafoam]] and [[baby-green]] close behind [1]. ColorHub's broader palette map also groups it loosely with [[mint]], nearly 9 units away, a looser family match than a true twin [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this bright green-mint in none of the 23,781 paintings, as photographed [2]. No museum photograph in our set carries a patch this bright and saturated across at least 5 percent of its canvas [2]. That absence is itself the finding: Seafoam, unlike the paler greens around it, reads as a modern, high-saturation color rather than a historical pigment match [2]. The absence is a property of the archive's older, varnished paintings, not proof the hue never existed [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented beyond the word itself, sea foam",
+   "first_recorded": "1920, per Maerz & Paul (1930)",
+   "source": "Maerz & Paul / ISCC-NBS via ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "light-greenish-blue",
+   "mint"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "seafoam-green",
+    "gloss": "a pale yellow-beige in this same batch, despite the shared name"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    90,
+    57,
+    153
+   ],
+   "nearest": [
+    [
+     "Light Greenish Blue",
+     3.33
+    ],
+    [
+     "Light Seafoam",
+     3.76
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS 1955, Maerz & Paul 1930, xkcd 2010 entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What year does Maerz and Paul give as Seafoam's first record?",
+   "choices": [
+    "1920",
+    "1955",
+    "2010",
+    "1886"
+   ],
+   "answer": "1920",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our painting archive finds Seafoam in a large share of paintings.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which modern survey lists two near-identical names within about 2 units of Seafoam?",
+   "choices": [
+    "xkcd",
+    "Pantone",
+    "Crayola",
+    "Benjamin Moore"
+   ],
+   "answer": "xkcd",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Seafoam never once turns up in our 23,781-painting archive — too bright and saturated for any varnished, centuries-old canvas."
+ ],
+ "words": 205,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

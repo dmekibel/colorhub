@@ -1,0 +1,143 @@
+{
+ "slug": "deep-glaucous-green",
+ "name": "Deep Glaucous-Green",
+ "hex": "#9AB69B",
+ "names": [
+  "Deep Glaucous-Green"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Deep Glaucous-Green is a soft, dusty green from Ridgway's 1912 chart, named for the pale bluish bloom botanists call glaucous, like the waxy coating on a cabbage leaf or a plum.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A botanist's word for a bloom",
+   "body": "Ridgway's 1912 plate XXXIII gives this hue the name Deep Glaucous-Green, hue 39′′, tone b, and the ISCC-NBS system of 1955 files the nearest category as \"light green\" in its block 144 [1]. *Glaucous* is a botanical term for the dull, waxy, bluish-grey bloom on leaves, stems and fruit, such as a cabbage or a plum, and Ridgway used the word across a run of greens and blues on his chart [1]. A lighter [[dark-bluish-glaucous]] and a plainer [[glaucous-green]] sit nearby in our name list, part of the same family [1].\n\nIn LCH terms it measures lightness 71, chroma 18, hue 145 degrees, Munsell 0.9G 7.0/2.7 [1]. Its closest match in the library is [[cameo-green]], about 2.9 CIEDE2000 units away, with [[rejane-green]] close behind at 3.4 units [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A match within six CIEDE2000 units covering at least five percent of the canvas turns up in 134 of our 23,781 archive paintings, about 0.56 percent, as photographed [4]. It peaks in the 1770s, in 8 of 416 paintings, at 3.4 times the overall rate, and is most loved by Vincent van Gogh, in five of his forty-nine paintings here, eighteen times his own museums' baseline; it most often plays a highlight, in 81 percent of its appearances [4].\n\nThe earliest dated match is Sandro Botticelli's *The Triumph of Mordecai*, 1475, more than four centuries before Ridgway recorded the name in 1912; early centuries are thin in the archive, so this is a floor, not a first, and a photograph of an aged canvas is a screen color, not a pigment test [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "glaucous, the botanical term for a dull bluish bloom on leaves or fruit",
+   "first_recorded": "1912, Ridgway, plate XXXIII",
+   "source": "ColorHub color library; Ridgway, Color Standards and Color Nomenclature (1912)"
+  },
+  "aka": [],
+  "siblings": [
+   "glaucous-green",
+   "dark-bluish-glaucous",
+   "glaucous-grey"
+  ],
+  "parent": "glaucous-green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#9AB69B",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 134,
+  "painters": [
+   {
+    "name": "Vincent van Gogh",
+    "hits": 5,
+    "of": 49,
+    "lift": 18.11
+   }
+  ],
+  "peak_decade": {
+   "decade": 1770,
+   "lift": 3.41
+  },
+  "role": "highlight",
+  "measured": {
+   "lch": [
+    71,
+    18,
+    145
+   ],
+   "nearest": [
+    [
+     "Cameo Green",
+     2.9
+    ],
+    [
+     "Rejane Green",
+     3.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway, Color Standards and Color Nomenclature (1912), plate XXXIII, hue 39′′, tone b; ISCC-NBS, NBS Circular 553 (1955), block 144",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "Color-kb concordance of the 29 color books for this name: no hits",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does \"glaucous\" describe in botany?",
+   "choices": [
+    "A dull, waxy, bluish-grey bloom on leaves or fruit",
+    "A glossy, shiny leaf surface",
+    "A bright, saturated green",
+    "A striped leaf pattern"
+   ],
+   "answer": "A dull, waxy, bluish-grey bloom on leaves or fruit",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: this color is most common on screen in Vincent van Gogh's paintings in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Named for the waxy bloom on a plum or a cabbage leaf, botanists call it glaucous."
+ ],
+ "words": 298,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

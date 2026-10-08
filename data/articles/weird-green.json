@@ -1,0 +1,123 @@
+{
+ "slug": "weird-green",
+ "name": "Weird Green",
+ "hex": "#3AE57F",
+ "names": [
+  "Weird Green"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Weird Green is a bright, slightly minty green from the 2010 xkcd color survey, named with a plain subjective reaction rather than any object or place.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A reaction, not a reference",
+   "body": "Unlike a modifier such as *dark* or *light*, the word *weird* does not describe a hue or a lightness; it records a volunteer's impression of the swatch during the xkcd color survey of 2010 [1]. Who first typed it, and why this shade struck them as weird rather than merely bright, is not recorded [1]. Its origin is undocumented in our own data [2].\n\nIn the color library it falls among the greens at lightness 81, chroma 75, hue 150 degrees, close to [[malachite]] and [[teal]], and near a related xkcd entry the library calls Tealish Green, about two and a half units away [2]. The 1955 ISCC-NBS system would place the same hue in its \"brilliant yellowish green\" block, six units off [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive carries a color within four units of Weird Green covering at least one per cent of its canvas, as photographed [3]. Bright, cool, minty greens like this are rare in historical pigments, which tend toward duller earths and verdigris rather than this clean a mint [3]. In printed English the exact phrase *weird green* is uncommon; it appears sporadically from the 1890s with no clear peak [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; a subjective reaction, not an object or modifier",
+   "first_recorded": "xkcd color survey, 2010",
+   "source": "ColorHub color library and Color Graph"
+  },
+  "aka": [],
+  "siblings": [
+   "malachite",
+   "teal",
+   "mint"
+  ],
+  "parent": null,
+  "children": [
+   "lime"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    81.0,
+    74.8,
+    149.7
+   ],
+   "iscc_nbs": {
+    "block": 130,
+    "name": "brilliant yellowish green",
+    "de2000": 6.0
+   }
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "xkcd color survey (2010), crowdsourced color-name list",
+   "loc_kind": null,
+   "url": "https://blog.xkcd.com/2010/05/03/color-survey-results/"
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library and Color Graph (data/library.json, data/graph): ISCC-NBS block, Munsell notation, LCH values",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive fieldnotes, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "web",
+   "cite": "Google Books Ngram, case-insensitive",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does the name \"Weird Green\" come from?",
+   "choices": [
+    "A volunteer's reaction in the 2010 xkcd color survey",
+    "A Pantone color of the year",
+    "A mineral pigment",
+    "A place name"
+   ],
+   "answer": "A volunteer's reaction in the 2010 xkcd color survey",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Weird Green turns up often in historical paintings.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Weird Green got its name from a feeling, not a thing: nobody recorded why."
+ ],
+ "words": 216,
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-08",
+  "issues": [
+   "Origin genuinely undocumented; no web source found beyond our own library's xkcd record.",
+   "lint 2026-10-09"
+  ]
+ }
+}

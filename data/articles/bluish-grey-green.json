@@ -1,0 +1,163 @@
+{
+ "slug": "bluish-grey-green",
+ "name": "Bluish Grey-Green",
+ "hex": "#779A93",
+ "names": [
+  "Bluish Grey-Green"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Bluish Grey-Green is a bluish shade of [[grey-green|grey-green]], one of Robert Ridgway's working names built by the plain grammar of modifier plus base color.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier, not a new color",
+   "body": "Bluish Grey-Green joins the modifier *bluish* to the base color [[grey-green]], itself a compound of two basic hue words [1][4]. Ridgway's 1912 plate XLII, hue 41-triple-prime, sets it at lightness 61 and a low-to-moderate chroma of 14 [1][4]. The ISCC-NBS system calls the matching block, 149, 'pale green,' a Delta-E of 5.3 from Ridgway's point [2]. The nearest named colors on file are [[greyish-teal]], [[medici-blue]] and [[grey-celadon]], at 4, 4.6 and 4.7 ΔE [1][4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this shade, as photographed, in 0.95% of 23,781 paintings, 226 paintings; within a single canvas it reads as a distinct area in 117 of them [3]. That ranks it more common than 61% of the archive's named colors [3]. It peaks in the 1900s, found in 1.4% of that century's 1,674 paintings, 3.0 times the expected rate [3]. Inside a painting it most often plays a hidden color, by lightness rank, in 38% of its 117 appearances [3]. Claude Monet paints it most often by count, 4 of his 50 works here, 8% of them, but no painter stands out against the museum baseline for it[3]. The earliest dated appearance is a 1400 painting by the Master of Rubielos de Mora, 512 years before the name's first documented record in 1912; the archive's early centuries are thin, so this is a floor and not a first [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the base color grey-green, with the modifier 'bluish'",
+   "first_recorded": "1912 (Ridgway, Color Standards and Nomenclature)",
+   "source": "Ridgway, Color Standards and Nomenclature"
+  },
+  "aka": [],
+  "siblings": [
+   "greyish-teal",
+   "medici-blue",
+   "grey-celadon",
+   "greenish-sage"
+  ],
+  "parent": "grey-green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "measured": {
+   "lch": [
+    60.9,
+    13.6,
+    181.2
+   ],
+   "nearest_iscc": [
+    "pale green",
+    5.3
+   ],
+   "nearest": [
+    [
+     "Greyish Teal",
+     4.0
+    ],
+    [
+     "Medici Blue",
+     4.6
+    ],
+    [
+     "Grey celadon",
+     4.7
+    ],
+    [
+     "Greenish sage",
+     4.7
+    ]
+   ]
+  },
+  "n_present": 117,
+  "role_top": {
+   "role": "hidden",
+   "pct": 38
+  },
+  "painter_count": {
+   "name": "Claude Monet",
+   "n": 4,
+   "of": 50
+  },
+  "first_seen": {
+   "year": 1400,
+   "years_before_record": 512
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Nomenclature, 1912, plate XLII, hue 41 triple-prime",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "ISCC-NBS, National Bureau of Standards Circular 553, 1955, block 149 (\"pale green\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color graph: computed LCH/Munsell values and modifier-name cross-reference",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which two basic hue words combine to form the base color behind Bluish Grey-Green?",
+   "choices": [
+    "Grey and green",
+    "Blue and grey",
+    "Green and blue",
+    "Grey and olive"
+   ],
+   "answer": "Grey and green",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: unlike most names in this batch, no painter in our archive stands out from the museum baseline for Bluish Grey-Green.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which Ridgway plate and hue number does Bluish Grey-Green share with Dark Bluish Grey-Green?",
+   "choices": [
+    "Plate XLII, hue 41-triple-prime",
+    "Plate IV, hue 21",
+    "Plate XVI, hue 23-single-prime",
+    "Plate LIII, hue 75"
+   ],
+   "answer": "Plate XLII, hue 41-triple-prime",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Bluish Grey-Green and Dark Bluish Grey-Green share the exact same Ridgway plate and hue, differing only in tone.",
+  "No painter in our archive stands out for it."
+ ],
+ "words": 251,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

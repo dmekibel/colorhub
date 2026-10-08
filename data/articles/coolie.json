@@ -1,0 +1,130 @@
+{
+ "name": "Coolie",
+ "hex": "#3D4278",
+ "names": [
+  "Coolie"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Coolie is a moderate purplish blue from Maerz and Paul's 1930 dictionary, filed here as historical data under a name now recognized as an ethnic slur.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dated, offensive name",
+   "body": "Maerz and Paul's *A Dictionary of Color* dates this purplish blue to 1924, on plate 45, cell D12 [1]. In that period, \"coolie\" was a common but demeaning English word for indentured and low-wage Asian laborers; today it is widely recognized as an ethnic slur, and we record it here only as the historical dictionary entry, not as a name we recommend using [1]. The ISCC-NBS 1955 report classes the hue as a moderate purplish blue [2].\n\nThe nearest named colors on file are [[liberty-blue]], [[corsican-blue]], [[imperial-blue]] and [[azurite-blue]], at 2.7, 3, 3.3 and 3.8 ΔE [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "ColorHub's archive finds this blue in 50 of 23,781 paintings, about 0.2 percent, as photographed [4]. It peaks sharply in the 1910s decade, with Vilhelm Lundstrøm, Bronzino and Henri Matisse among the painters who carry it most [4]. The count is a computed color match on photographed, varnished canvases, not a pigment identification [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a now-offensive period term for indentured Asian laborers",
+   "first_recorded": "1924, Maerz & Paul 1930",
+   "source": "Maerz & Paul, A Dictionary of Color"
+  },
+  "aka": [],
+  "siblings": [
+   "liberty-blue",
+   "corsican-blue",
+   "imperial-blue",
+   "azurite-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 50,
+  "match": {
+   "nearest_library": "Navy",
+   "de2000": 8.2
+  },
+  "measured": {
+   "lch": [
+    30,
+    35,
+    294
+   ],
+   "nearest": [
+    [
+     "Liberty Blue",
+     2.7
+    ],
+    [
+     "Corsican Blue",
+     3.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz & Paul, A Dictionary of Color (1930), plate 45, cell D12",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS (1955) block entry",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library: nearest named colors by CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "True or false: \"coolie\" is recognized today as an ethnic slur.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which named color sits nearest to this blue in our library?",
+   "choices": [
+    "Navy",
+    "Chartreuse",
+    "Coral",
+    "Ivory"
+   ],
+   "answer": "Navy",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "This 1930 dictionary color carries a name now recognized as an ethnic slur; we record it as historical data, not a usage recommendation."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "slug": "coolie",
+ "words": 179
+}

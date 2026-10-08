@@ -1,0 +1,134 @@
+{
+ "slug": "dark-byzantium",
+ "name": "Dark Byzantium",
+ "hex": "#5D3954",
+ "names": [
+  "Dark Byzantium"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dark Byzantium is a muted plum, the shadowed half of Byzantium, the reddish purple the ISCC-NBS system named for the old empire's dye trade.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Dark plus a place",
+   "body": "The name follows the same grammar as most of our [1]. Byzantium itself is a place word, first recorded by Maerz and Paul in 1926 and classified by the ISCC-NBS in 1955 as a deep reddish purple [1][2]. Dark Byzantium sits only 2.0 CIEDE2000 units from its own ISCC-NBS reference sample, a close match [2]. Ridgway's 1912 atlas, scanned from an aged plate, places the same hue and tone nearby, so three separate systems converge on roughly the same patch of purple even though none of them coined this exact two-word name [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds Dark Byzantium in 0.11 percent of its 23,781 paintings, 25 of them as photographed, rarer than 66 percent of the named colors we track [3]. It peaks in the 1900s, in 5 of 1,674 paintings, at 3.3 times the rate its own museums would predict, and inside a painting it most often plays a shadow, in 33 percent of its 12 clearest appearances [3]. The earliest match is a 1550 painting by Annibale Carracci, 362 years before the name Byzantium was first recorded as a color word in 1912, a floor and not a first, since the archive's early centuries are thin [3]. That gap is a look-alike hue surviving in an aged photograph, not evidence the name or the dye existed that early [3]. Its muted tone keeps it than to any brighter [[magenta]] [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the Byzantine Empire, via the ISCC-NBS color-naming system",
+   "first_recorded": "1912, Ridgway (base color); 1926, Maerz & Paul",
+   "source": "ColorHub color graph"
+  },
+  "aka": [],
+  "siblings": [
+   "auricula-purple",
+   "japanese-violet",
+   "english-violet",
+   "eggplant"
+  ],
+  "parent": "byzantium",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 25,
+  "role": "shadow",
+  "first_seen": {
+   "year": 1550,
+   "painting": "commons-Q126180968",
+   "painter": "annibale-carracci"
+  },
+  "measured": {
+   "lch": [
+    29,
+    23,
+    335
+   ],
+   "iscc": "dark reddish purple",
+   "nearest": [
+    [
+     "Auricula Purple",
+     2.8
+    ],
+    [
+     "Japanese Violet",
+     3.2
+    ],
+    [
+     "English Violet",
+     3.9
+    ],
+    [
+     "Eggplant",
+     4.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph: modifier grammar (dark + byzantium); Maerz & Paul 1930, Byzantium first recorded 1926",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS 1955 block 238/242; Ridgway 1912 plate XI",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does the second half of the name Dark Byzantium come from?",
+   "choices": [
+    "A chemical compound",
+    "The Byzantine Empire",
+    "A painter's surname",
+    "A modern paint brand"
+   ],
+   "answer": "The Byzantine Empire",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the earliest painting matching Dark Byzantium in our archive postdates the color name's first record.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Our archive's oldest match for Dark Byzantium predates the name by over three centuries."
+ ],
+ "words": 252,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

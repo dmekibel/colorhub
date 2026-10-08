@@ -1,0 +1,131 @@
+{
+ "slug": "mint-turquoise",
+ "name": "Mint Turquoise",
+ "hex": "#478A84",
+ "names": [
+  "Mint Turquoise"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Mint Turquoise is a muted blue-green standardized as RAL 6033, a paint color shared with the stone that gives turquoise its name.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A standardized paint color",
+   "body": "Our library gives this color's primary source as RAL Classic, catalog number 6033, a German paint-matching standard founded in 1927, so the hex is an approximate screen value of a printed color card [1]. Maerz and Paul's 1930 dictionary separately lists a related name, Pacifie, first recorded in 1918, plate 36 J 1 [1]. The nearest named colors on file are [[porcelain-green]] and [[dusty-teal]], at \nThe nearest library neighbor is Dusty Teal [1]. Compare [[aquamarine|Aquamarine]] and [[mint|Mint]], two other pale colors it sits between [1]. A fifth, slightly farther neighbor is [[skobeloff-green]], 4.8 ΔE away, more vivid [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings finds a color within six units of this one in 26, about 0.1 percent, as photographed [2]. It covers the most canvas in Gustave Caillebotte's 1877 Skiffs and Édouard Manet's 1864 Sea View, Calm Weather, both paintings of open water [2]. It turns up about 13 times more often in Impressionist paintings than in the archive overall, consistent with the period's taste for pale sea and sky color [2]. These are matches in photographed, varnished paintings, not a claim that RAL 6033 paint was used [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a lighter, mint-leaning turquoise",
+   "first_recorded": "1927 (RAL Classic 6033)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "porcelain-green",
+   "dusty-teal",
+   "wintergreen-dream",
+   "jasper-green"
+  ],
+  "parent": null,
+  "children": [
+   "aquamarine"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 26,
+  "match": {
+   "hex": "#478A84",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "measured": {
+   "lch": [
+    53,
+    23,
+    188
+   ],
+   "nearest": [
+    [
+     "Porcelain Green",
+     2.8
+    ],
+    [
+     "Dusty Teal",
+     2.9
+    ],
+    [
+     "Wintergreen Dream",
+     3.4
+    ],
+    [
+     "Jasper Green",
+     4.7
+    ]
+   ]
+  },
+  "surprises": [
+   "Impressionism: 2 of 140 works carry it, 13.07x the archive rate"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: RAL Classic 1927, Maerz and Paul 1930",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which paint standard lists Mint Turquoise?",
+   "choices": [
+    "RAL Classic",
+    "Pantone",
+    "Crayola",
+    "Munsell"
+   ],
+   "answer": "RAL Classic",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: \"mint\" in this name refers to the herb's exact color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A German paint-standard color found most often in paintings of open water."
+ ],
+ "words": 208,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits in color-kb for this slug; written from library and archive data only.",
+   "lint 2026-10-09"
+  ]
+ }
+}

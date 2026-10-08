@@ -1,0 +1,112 @@
+{
+ "slug": "chartreuse-green",
+ "name": "Chartreuse Green",
+ "hex": "#C5BD5F",
+ "names": [
+  "Chartreuse Green"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Chartreuse Green is a yellow-green named for the French liqueur, and for the Carthusian monastery that still makes it, recorded by Maerz and Paul in 1926.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A liqueur's color",
+   "body": "Our library dates Chartreuse Green to Maerz and Paul's 1930 dictionary, with a first record of 1926 at plate 12, swatch L2 [1]. The word *chartreuse* names the yellow-green liqueur distilled by Carthusian monks, itself named for the Grande Chartreuse monastery; the color name modifies [[chartreuse]] with Green to mark it apart from chartreuse's pinker variants [1].\n\nOur library's nearest everyday match is [[khaki]], 3.3 units of ΔE away, with [[sulphur-yellow]] and [[olive]] listed as close neighbors [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to Chartreuse Green in only 140 of 23,781 paintings (0.59 percent), as photographed[2]. It peaks in the 1900s, in 27 of 1,674 paintings, at three times the archive's overall rate [2]. It is over-represented in paintings from India (3.2 times expected) and the Kalighat school especially (11.9 times) [2]. Émile Bernard used it most relative to his own museums' baseline, in 4 of his 22 works here, 6.8 times expected [2]. It most often plays an accent inside a painting [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the Carthusian liqueur chartreuse",
+   "first_recorded": "Maerz and Paul, 1930 (first recorded 1926, plate 12 L2)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "chartreuse",
+   "khaki",
+   "sulphur-yellow",
+   "olive"
+  ],
+  "parent": "chartreuse",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 140,
+  "role": {
+   "accent": 0.68
+  },
+  "company": [],
+  "measured": {
+   "lch": [
+    76,
+    49,
+    101
+   ],
+   "nearest": [
+    [
+     "Khaki",
+     3.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: name records, plate and block locators, tier classification",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is chartreuse named after?",
+   "choices": [
+    "A liqueur made by Carthusian monks",
+    "A French dye plant",
+    "A Crayola crayon",
+    "A gemstone"
+   ],
+   "answer": "A liqueur made by Carthusian monks",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Chartreuse Green is one of the more common colors in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Chartreuse Green is named for a liqueur still distilled by Carthusian monks."
+ ],
+ "words": 192,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

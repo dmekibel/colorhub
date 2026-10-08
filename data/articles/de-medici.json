@@ -1,0 +1,135 @@
+{
+ "slug": "de-medici",
+ "name": "De'Medici",
+ "hex": "#722E43",
+ "names": [
+  "De'Medici"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "De'Medici is a dark purplish red from Maerz and Paul's 1930 dictionary, named for the Florentine dynasty but with the exact reason undocumented in our sources.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dictionary name, a family nobody explains",
+   "body": "Maerz and Paul's *A Dictionary of Color* (1930), as cited by NBS Circular 553 (1955), records De'Medici on plate 54, row L, column 12, first appearing in print around 1924 [1]. The ISCC-NBS system reads the swatch as \"dark purplish red,\" its block 259 [1]. None of the 29 books in our concordance names this swatch, so whether the Medici connection is heraldic, a fashion-house reference, or a compiler's flourish is undocumented here [2].\n\nIn LCH terms it measures lightness 29, chroma 32, hue 4 degrees, Munsell 9.4RP 2.9/6.5 [1]. Its closest match in the library is [[bokhara]], about 3.1 CIEDE2000 units away, with [[velasquez]] close behind at 3.4 units [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A match within six CIEDE2000 units covering at least five percent of the canvas is rare: 15 of our 23,781 archive paintings, about 0.06 percent, as photographed [4]. It peaks in the 1900s, in 5 of 1,674 paintings, at 2.8 times the overall rate, and most often sits as a mid-tone, in 60 percent of its appearances [4].\n\nThe earliest dated match is Francisco de Osona's *Pontius Pilate Washing his Hands*, about 1500, four centuries before Maerz and Paul recorded the name in 1930; early centuries are thin in the archive, so this is a floor, not a first, and a photograph of an aged canvas is a screen color, not a pigment test [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the Medici family; the compilers' exact reason is undocumented",
+   "first_recorded": "about 1924, Maerz and Paul (1930), plate 54 L12",
+   "source": "ColorHub color library; Maerz & Paul, A Dictionary of Color (1930)"
+  },
+  "aka": [],
+  "siblings": [
+   "bordeaux",
+   "old-mauve",
+   "medici-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#722E43",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 15,
+  "peak_decade": {
+   "decade": 1900,
+   "lift": 2.84
+  },
+  "role": "mid",
+  "measured": {
+   "lch": [
+    29,
+    32,
+    4
+   ],
+   "nearest": [
+    [
+     "Bokhara",
+     3.1
+    ],
+    [
+     "Velasquez",
+     3.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz & Paul, A Dictionary of Color (1930), plate 54 L12, cited by NBS Circular 553 (1955), block 259",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "Color-kb concordance of the 29 color books for this name: no hits",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1930 dictionary records the name De'Medici?",
+   "choices": [
+    "Maerz and Paul's A Dictionary of Color",
+    "Ridgway's Color Standards and Color Nomenclature",
+    "Paterson's A Dictionary of Colour",
+    "A Crayola catalog"
+   ],
+   "answer": "Maerz and Paul's A Dictionary of Color",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources explain exactly why De'Medici was named for the Florentine family.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A 1930 dictionary red named for the Medici, with the exact reason left unrecorded."
+ ],
+ "words": 254,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

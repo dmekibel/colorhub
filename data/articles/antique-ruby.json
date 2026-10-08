@@ -1,0 +1,111 @@
+{
+ "slug": "antique-ruby",
+ "name": "Antique Ruby",
+ "hex": "#841B2D",
+ "names": [
+  "Antique Ruby"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Antique Ruby is a deep brownish red that the ISCC-NBS system groups with more than twenty other names, from Burnt Lake, recorded as early as 1598, to Hollywood.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "One block, two dozen names",
+   "body": "Wikipedia cites the ISCC-NBS system for this name, which files it in block 13, and Maerz and Paul's 1930 dictionary dates it to 1926 [1]. That single ISCC-NBS block groups over twenty near-duplicate names together: the earliest on record is Burnt Lake, from 1598, and a cluster of others dates to the 1920s, including Brickdust, Chimney Red and Garnet Red [1]. Our sources do not say which of these names was the first in common use, only which dates the library has for each [1].\n\nIn LCH terms it measures lightness 29, chroma 48, hue 21 degrees, and the nearest everyday name on file is [[burgundy]], about 3.3 units of ΔE away, a close match [1]. Among named reds it sits beside [[maroon]] and [[red]] itself [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this red in 82 of 23,781 paintings, 0.34 percent, as photographed [2]. The earliest dated match is A Bishop Saint with a Donor, from 1400, a floor and not a first, since the archive's early centuries are thin [2]. It peaks around 1470, at 9.3 times the archive's overall rate [2]. Inside a painting it most often plays a mid-tone, in 61 percent of its appearances [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented beyond the English words antique and ruby",
+   "first_recorded": "Maerz & Paul 1930, first recorded 1926",
+   "source": "ColorHub color library (citing Wikipedia, ISCC-NBS)"
+  },
+  "aka": [],
+  "siblings": [
+   "burgundy",
+   "maroon",
+   "red",
+   "sienna"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 82,
+  "measured": {
+   "lch": [
+    29,
+    48,
+    21
+   ],
+   "nearest": [
+    [
+     "Burgundy",
+     3.3
+    ]
+   ]
+  },
+  "role": {
+   "mid": 0.61
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Wikipedia citing ISCC-NBS 1955 block 13, Maerz & Paul 1930 (first recorded 1926) and its near-duplicate names",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which name in the same ISCC-NBS block as Antique Ruby is recorded earliest, in 1598?",
+   "choices": [
+    "Burnt Lake",
+    "Hollywood",
+    "Chianti",
+    "Mum"
+   ],
+   "answer": "Burnt Lake",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources say which of the block-13 names came into use first.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A deep red that shares its ISCC-NBS block with more than twenty other names, from 1598's Burnt Lake to Hollywood."
+ ],
+ "words": 220,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

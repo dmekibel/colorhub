@@ -1,0 +1,145 @@
+{
+ "slug": "scheele-s-green",
+ "name": "Scheele's Green",
+ "hex": "#A4AB59",
+ "names": [
+  "Scheele's Green"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Scheele's Green is a yellowish, slightly dulled green named for the Swedish chemist Carl Wilhelm Scheele, who discovered the copper-arsenite pigment behind it in 1775.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A bright green chemists learned to fear",
+   "body": "Scheele discovered the pigment in Sweden in 1775, though he did not publish his recipe until 1778 [3]. It is a copper arsenite, warm and opaque, and by the end of the nineteenth century it had largely replaced older copper-carbonate greens in paint [3]. It was never adopted widely as an artist's pigment, however, because it discolored in the presence of acid or sulfur fumes and, far more seriously, because it was toxic [3].\n\nThe toxicity made Scheele's Green notorious outside the studio [3]. In damp wallpaper, mould growing over the pigment could convert its copper arsenite into trimethylarsine gas, a volatile arsenic compound; families living in rooms papered with it suffered chronic poisoning from their own walls [3]. It fell out of favor after the 1860s as both its toxicity and its instability became impossible to ignore, and was gradually succeeded by other arsenic greens before synthetic, non-toxic pigments replaced the whole family [3].\n\nRidgway's 1912 atlas lists this exact hue on plate VI, hue 33, tone i, and Maerz and Paul's 1930 dictionary dates the name itself to 1778, Scheele's publication year [1]. In LCH terms it measures lightness 68, chroma 44, hue 110, close to [[russet-green|Russet Green]], [[deep-chrysolite-green|Deep Chrysolite Green]] and [[lily-green|Lily Green]] [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A screen match for this green turns up in 100 of 23,781 paintings, about 0.4 percent, as photographed, concentrated over four times above the archive's average in the 1900s decade [2]. Niels Larsen Stevns, Georges Seurat and Vincent van Gogh all carry it well above the archive's base rate [2]. The earliest dated match in our archive, a 1548 Lucas Cranach portrait, predates Scheele's own discovery by more than two centuries, a reminder that a screen-color match never proves which pigment a painter actually used, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Carl Wilhelm Scheele, Swedish chemist",
+   "first_recorded": "1778, per Maerz and Paul",
+   "source": "Maerz and Paul, A Dictionary of Color (1930)"
+  },
+  "aka": [],
+  "siblings": [
+   "russet-green",
+   "deep-chrysolite-green",
+   "lily-green",
+   "cosse-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 100,
+  "rate": 0.0042,
+  "peak_decade": {
+   "key": 1940,
+   "rate": 0.179,
+   "lift": 42.47
+  },
+  "measured": {
+   "lch": [
+    68,
+    44,
+    110
+   ],
+   "nearest": [
+    [
+     "Russet Green",
+     2.6
+    ],
+    [
+     "Deep Chrysolite Green",
+     3.0
+    ],
+    [
+     "Lily Green",
+     3.4
+    ],
+    [
+     "Cosse Green",
+     3.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate VI, hue 33, tone i; Maerz and Paul, A Dictionary of Color (1930), plate 19 L 8",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library and archive (23,781 paintings): ISCC-NBS 1955 block 117, LCH values, computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "web",
+   "cite": "MFA CAMEO, \"Scheele's green\"; Wikipedia, \"Scheele's green\"",
+   "loc_kind": null,
+   "url": "https://cameo.mfa.org/wiki/Scheele's_green"
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why did Scheele's Green fall out of use as a paint pigment?",
+   "choices": [
+    "It was toxic and unstable",
+    "It was too expensive",
+    "It faded too quickly in sunlight",
+    "It was banned by royal decree"
+   ],
+   "answer": "It was toxic and unstable",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: a screen color match for Scheele's Green in a 1548 painting proves Scheele's own pigment was used.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "What compound gave Scheele's Green its color?",
+   "choices": [
+    "Copper arsenite",
+    "Lead oxide",
+    "Chromium oxide",
+    "Cobalt silicate"
+   ],
+   "answer": "Copper arsenite",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Damp wallpaper painted in Scheele's Green could turn mouldy and release arsenic gas into the room."
+ ],
+ "words": 322,
+ "status": "checked",
+ "checked": {
+  "by": "batch-23",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits for this slug; pigment and toxicity history from web sources (MFA CAMEO, Wikipedia), which largely agree and are hedged as such.",
+   "lint 2026-10-09"
+  ]
+ }
+}

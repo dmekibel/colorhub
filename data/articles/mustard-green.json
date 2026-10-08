@@ -1,0 +1,125 @@
+{
+ "slug": "mustard-green",
+ "name": "Mustard Green",
+ "hex": "#A8B504",
+ "names": [
+  "Mustard Green"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Mustard Green is a sharp, acid yellow-green named for the condiment, almost identical on screen to Acid Green and rare in our painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A condiment word",
+   "body": "The library records Mustard Green only from the xkcd 2010 crowd survey, so an earlier coining of this exact compound is undocumented, though *mustard* itself is a much older color word built on the plant and condiment [1]. At hex #A8B504 it measures lightness 70 and chroma 75 in LCH, a bright, acid green-yellow [1].\n\nIts nearest named neighbor is [[acid-green|Acid Green]], only 2.7 CIEDE2000 units away and read as almost the same color, followed closely by [[bright-olive|Bright Olive]] at 3.8 [2]. The library separately logs Bile and Acid Green as near-duplicate crowd names [1]. Werner's 1821 nomenclature lists a snapdragon variety used for Sulphur Yellow, 8.2 units off, and the nearest gem comparison is common [[gem:peridot|peridot]], 9.0 units away [2][3]. It reads as a much sharper, more acid color than plain [[olive|Olive]] [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This color is one of the rarest in our archive, matching only 3 of 23,781 paintings, about 0.01%, as photographed, rarer than 77% of the named colors here [4]. The earliest is a 1888 painting by Paul Sérusier, and the other two date from around 1900, so every match here comes from the same narrow window [4]. That is too thin a sample for a reliable painter or country reading, and these are photographs of aged, varnished canvases, so a match is not a pigment test [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "mustard, the condiment",
+   "first_recorded": "2010 (xkcd color survey)",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "Bile"
+  ],
+  "siblings": [
+   "acid-green",
+   "bright-olive",
+   "olive"
+  ],
+  "parent": "mustard",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+  "n_present": 3,
+  "pct": 0.01,
+  "measured": {
+   "lch": [
+    70.4,
+    74.8,
+    107.3
+   ],
+   "nearest": [
+    [
+     "Acid Green",
+     2.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-m.json): xkcd 2010 crowd-sourced color survey",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph look-alikes and botanical twins (data/graph/edges-m.json): CIEDE2000; Werner's Nomenclature of Colours (1821)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph twins, gems cross-reference (data/graph/edges-m.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which named color is nearly identical to Mustard Green on screen?",
+   "choices": [
+    "Acid Green",
+    "Navy Green",
+    "Pale Aqua",
+    "Midnight Purple"
+   ],
+   "answer": "Acid Green",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Mustard Green is one of the most common colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Mustard Green sits only 2.7 CIEDE2000 units from Acid Green, close enough that most eyes read them as one color."
+ ],
+ "words": 242,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance hits; written from ColorHub library/graph/archive data only. Kept the Ngram/first-seen coincidence hedged, since n=3 is too small to support a stronger claim.",
+   "lint 2026-10-09"
+  ]
+ }
+}

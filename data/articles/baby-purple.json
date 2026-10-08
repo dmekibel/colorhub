@@ -1,0 +1,109 @@
+{
+ "slug": "baby-purple",
+ "name": "Baby Purple",
+ "hex": "#CA9BF7",
+ "names": [
+  "Baby Purple"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Baby Purple is a pale, slightly pink-leaning purple from the xkcd color survey, one of hundreds of crowd names for the pastel end of the purple family.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A crowd name, not a dictionary one",
+   "body": "Baby Purple comes from Randall Munroe's 2010 xkcd color survey, where hundreds of thousands of visitors typed a name next to a swatch and the most common labels for each cluster of clicks became its name [1]. Who first typed \"baby purple\" for this particular shade is undocumented: the survey only records which name won, not who wrote it first [1].\n\nThe \"baby\" here works the way it does in [[baby-blue-eyes|baby blue]] and baby pink: a light, washed-out version of the main color, not a reference to any specific object. Our library's closest standard name is [[lavender|Lavender]], about 4 points off in CIEDE2000, and the survey separately recorded a near-identical click cluster as \"Pastel Purple,\" less than 2 units away [1]. Nearby in the family are [[purple]] and [[violet]], both considerably more saturated."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings, as photographed, has no painting where this exact pale purple covers five percent or more of the canvas [2]. That is expected: Baby Purple is a 2010s screen color at full saturation and high lightness, well outside what historical pigments and aged varnish produce [2]. Measured values are a computed color match against museum photographs, not a pigment identification [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; a light, pastel-purple survey cluster",
+   "first_recorded": "2010, xkcd color survey",
+   "source": "xkcd (Munroe 2010)"
+  },
+  "aka": [],
+  "siblings": [
+   "lavender",
+   "purple",
+   "violet"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    71,
+    52,
+    311
+   ],
+   "nearest": [
+    [
+     "Lavender",
+     4.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: xkcd 2010 color survey entry",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does the name Baby Purple come from?",
+   "choices": [
+    "The xkcd color survey, a crowd-naming experiment",
+    "A pigment maker's catalog",
+    "Ridgway's 1912 color dictionary",
+    "A royal nursery tradition"
+   ],
+   "answer": "The xkcd color survey, a crowd-naming experiment",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our painting archive has several works where Baby Purple covers a large share of the canvas.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Baby Purple never once shows up covering real canvas in our archive of over 23,000 paintings."
+ ],
+ "words": 220,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No private fact-card file for this slug.",
+   "Origin of the specific coinage is undocumented; survey records only the winning label.",
+   "lint 2026-10-09"
+  ]
+ }
+}

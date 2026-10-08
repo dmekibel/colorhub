@@ -1,0 +1,137 @@
+{
+ "slug": "morocco-red",
+ "name": "Morocco Red",
+ "hex": "#823E30",
+ "names": [
+  "Morocco Red"
+ ],
+ "tier": "place",
+ "depth": "short",
+ "lede": "Morocco Red is a dark reddish brown named for Morocco, the North African country whose goatskin leather, tanned and dyed this color, gave English the word morocco for fine bookbinding leather.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Leather and a plate",
+   "body": "Morocco leather is a sumac-tanned goatskin long associated with Morocco and prized since at least the seventeenth century for bookbindings, often dyed a dark brownish red close to this swatch [3]. Ridgway's 1912 color standards plate this exact red on plate I, hue 5, with the Munsell notation 9.9R 3.4/6.4 [1]. The ISCC-NBS dictionary files it as a moderate reddish brown, only 2.5 units from that block's center[1].\n\nIts nearest named neighbors are Garnet Brown, 2.8 units away, and Deep Orange-Coloured Brown, 3.0 units away [1]. The plain name [[morocco]] in our library names a lighter, more orange leather tone than this darker red [1]. It sits close in hue to [[burnt-umber]] and [[bole]], two other brown-reds tied to dye and pigment history [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Morocco Red covers at least five percent of the canvas in 1,241 works, over five percent of the whole archive[2]. The earliest dated example is a mural fragment of a Maguey bloodletting ritual from around the year 500, a floor and not a first, since the archive's early centuries are thin [2]. It peaks in the 1450s, in 22 of 109 paintings, almost six times the archive's overall rate for that decade, and paintings from Tibet carry it four and a half times the baseline rate [2]. Filippino Lippi carries it in four of his fourteen paintings here and Albrecht Dürer in twelve of forty-seven, both well above the baseline [2]. It shares a canvas with [[brick]] more than any other color word, six and a half times the baseline [2]. These are computed color matches on photographs of aged, varnished paintings, not an identification of any specific pigment [2]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Morocco, via morocco leather",
+   "first_recorded": "1912 (Ridgway, plate I, hue 5)",
+   "source": "ColorHub color library (Ridgway 1912)"
+  },
+  "aka": [],
+  "siblings": [
+   "morocco",
+   "garnet-brown",
+   "burnt-umber"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "morocco",
+    "gloss": "a lighter, more orange leather tone in our library; this is the darker red"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#823E30",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1241,
+  "peak_decade": 1450,
+  "top_painter": {
+   "name": "Filippino Lippi",
+   "lift": 5.48
+  },
+  "company": [
+   {
+    "word": "Brick",
+    "lift": 6.64
+   }
+  ],
+  "measured": {
+   "lch": [
+    34.8,
+    35.7,
+    38.4
+   ],
+   "nearest": [
+    [
+     "Garnet Brown",
+     2.83
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS 1955, Maerz & Paul 1930, Ridgway 1912, Munsell notation entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "web",
+   "cite": "Wikipedia, \"Morocco leather\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/Morocco_leather"
+  }
+ ],
+ "questions": [
+  {
+   "q": "Morocco Red takes its name from a kind of:",
+   "choices": [
+    "leather",
+    "mineral",
+    "flower",
+    "fabric dye vat"
+   ],
+   "answer": "leather",
+   "kind": "pick"
+  },
+  {
+   "q": "Which 1912 plate carries Morocco Red?",
+   "choices": [
+    "Plate I, hue 5",
+    "Plate XLII",
+    "Plate XVIII",
+    "Plate XXXVI"
+   ],
+   "answer": "Plate I, hue 5",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Morocco Red is the single most common color, present in over five percent of our archive."
+ ],
+ "words": 331,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

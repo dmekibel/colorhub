@@ -1,0 +1,125 @@
+{
+ "slug": "bright-mauve",
+ "name": "Bright mauve",
+ "hex": "#BB7796",
+ "names": [
+  "Bright mauve"
+ ],
+ "tier": "traditional",
+ "depth": "brief",
+ "lede": "Bright mauve is a dusty pink-purple whose Japanese library name, Benifuji, means \"red wisteria,\" and it reads only about 4 units from plain [[mauve]] itself.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Benifuji, red wisteria",
+   "body": "Our library lists this color from the Wikipedia survey \"Traditional colors of Japan,\" under the romanized name Benifuji, written 紅藤 [1]. The kanji combine 紅 (crimson, or a safflower red) with 藤 (wisteria), and the library's own gloss reads \"red wisteria\" [1]. The books consulted here give no date or further story for the name, so anything past that gloss would be unsupported [1].\n\nThe nearest already-named color in our library is [[mauve]], at a color-distance of 4.4 by the CIEDE2000 formula, close enough that most eyes would not tell them apart side by side [1]. The hex given here, #BB7796, is a modern screen approximation chosen to fit that gloss, not a measured dye [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within range of this swatch is rare in our archive: it turns up in only 6 of the 23,781 paintings, about 0.03 percent, as photographed, rarer than 86 percent of the named colors we track [2]. The sample is too small here for century or role statistics [2]. As always, these are museum photographs of aged, varnished paintings, so a match is a screen color, not a pigment test [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "red wisteria, from 紅 (crimson/safflower red) and 藤 (wisteria)",
+   "first_recorded": "undocumented beyond its listing in Japan's traditional color system",
+   "source": "ColorHub color library (Wikipedia, \"Traditional colors of Japan\")"
+  },
+  "aka": [
+   "Benifuji",
+   "紅藤"
+  ],
+  "siblings": [
+   "cosmos",
+   "tourmaline-pink",
+   "mauve",
+   "eupatorium-purple"
+  ],
+  "parent": "mauve",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Benifuji (紅藤), \"red wisteria\""
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 6,
+  "rank_pct": 86,
+  "measured": {
+   "nearest": [
+    [
+     "Cosmos",
+     3.3
+    ],
+    [
+     "Tourmaline Pink",
+     3.9
+    ],
+    [
+     "Mauve",
+     4.4
+    ],
+    [
+     "Eupatorium Purple",
+     4.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional color names (Wikipedia, \"Traditional colors of Japan\")",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the Japanese name Benifuji literally mean?",
+   "choices": [
+    "Red wisteria",
+    "Purple mountain",
+    "Autumn dusk",
+    "Dyer's cloth"
+   ],
+   "answer": "Red wisteria",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: bright mauve is one of the more common colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Bright mauve's Japanese name, Benifuji, just means \"red wisteria.\""
+ ],
+ "words": 208,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-09",
+  "issues": [
+   "Archive count too small (n=6) for century/role breakdowns; left those out rather than over-claim.",
+   "lint 2026-10-09"
+  ]
+ }
+}

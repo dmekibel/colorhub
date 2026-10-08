@@ -1,0 +1,126 @@
+{
+ "slug": "amaranth-deep-purple",
+ "name": "Amaranth Deep Purple",
+ "hex": "#9F2B68",
+ "names": [
+  "Amaranth Deep Purple"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Amaranth Deep Purple is a dark magenta-pink from the Maerz and Paul color dictionary, naming a purplish-red that borrows its first word from the amaranth flower family of color names.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "From a dye-plant's family of names",
+   "body": "ColorHub's library notes that this name is cited by Wikipedia back to Maerz and Paul's 1930 dictionary, placing it in our standard-reference tier alongside other dictionary and ISCC-NBS names rather than in the everyday or nature lists [1]. The nearest named colors on file are [[traffic-purple]], [[maximum-red-purple]], [[dark-fuchsia]] and [[flirt]], at 4, 4.2, 4.2 and 4.3 ΔE [1]. The hex #9F2B68 measures a vivid purplish red by ISCC-NBS, 6.9 units from its nearest block, close to 5.3RP 3.8/11.5 in Munsell notation [2].\n\nIts closest listed library neighbor is [[plum]], 9.0 units away, which places it nearer to a true purple-red than to the brighter, pinker end of the amaranth family [2]. [[maroon]] sits just to the browner side of the same dark red-purple range [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to Amaranth Deep Purple in only 3 of 23,781 paintings, 0.01 percent, making it rarer than about 79 percent of the named colors we track [3]. Every one of the three dated matches comes from a single year, 1900, which is too small a sample to draw any century-level trend from, so we report it as a bare count rather than a lift [3]. All matches are computed against photographs of varnished, aged canvases, not pigment identifications [3]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the amaranth flower's deep pink-red color family",
+   "first_recorded": "1930 (Maerz and Paul, via Wikipedia)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "traffic-purple",
+   "maximum-red-purple",
+   "dark-fuchsia",
+   "flirt"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 3,
+  "n_within": 3,
+  "measured": {
+   "lch": [
+    38.0,
+    53.1,
+    351.2
+   ],
+   "munsell": "5.3RP 3.8/11.5",
+   "iscc_nbs": {
+    "name": "vivid purplish red",
+    "de": 6.9
+   },
+   "nearest": [
+    [
+     "Traffic Purple",
+     4.0
+    ],
+    [
+     "Maximum Red Purple",
+     4.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library, citing Wikipedia citing Maerz and Paul, A Dictionary of Color (1930)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: computed LCH, Munsell and ISCC-NBS nearest-block distance",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What plant gives \"amaranth\" its name as a color family?",
+   "choices": [
+    "The amaranth flower",
+    "The rose",
+    "The violet",
+    "The mulberry tree"
+   ],
+   "answer": "The amaranth flower",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Amaranth Deep Purple is common in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "All three matches for this color in our archive happen to date from the same single year."
+ ],
+ "words": 260,
+ "status": "checked",
+ "checked": {
+  "by": "batch-9 writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance file; Maerz and Paul attribution comes via our library's Wikipedia-sourced note, not a direct passage read.",
+   "lint 2026-10-09"
+  ]
+ }
+}

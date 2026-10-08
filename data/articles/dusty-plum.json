@@ -1,0 +1,158 @@
+{
+ "slug": "dusty-plum",
+ "name": "Dusty Plum",
+ "hex": "#6E5260",
+ "names": [
+  "Dusty Plum"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dusty Plum is a dusty shade of [[plum|plum]], one of Robert Ridgway's working names built by the plain grammar of modifier plus base color.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier, not a new color",
+   "body": "Dusty Plum joins the modifier *dusty* to the base color [[plum]], the fruit-named purple-red [1][4]. It appears in our core color set and in Ridgway and ISCC-NBS, but not in the separate commercial-and-design library we draw from for paint and print brands[1][2]. The ISCC-NBS system calls the matching block 'grayish reddish purple,' a Delta-E of 7.6 from this article's value [2]. The nearest named colors on file are [[dark-hyssop-violet]], [[dusky-auricula-purple]] and [[slate-purple]], at 4.7, 5 and 5.1 ΔE [1][4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this shade, as photographed, in 0.26% of 23,781 paintings, 62 paintings; within a single canvas it reads as a distinct area in 30 of them[3]. That makes it rarer than 57% of the archive's named colors [3]. It peaks in the 1900s, found in 0.6% of that century's 1,674 paintings, 3.2 times the expected rate [3]. Inside a painting it most often plays a hidden color, by lightness rank, in 53% of its 30 appearances [3]. No painter in our archive stands out against the museum baseline for it [3]. The earliest dated appearance is a 1375 painting by Agnolo Gaddi, 537 years before the name's first documented record in 1912; the archive's early centuries are thin, so this is a floor and not a first [3]. In printed English the word peaks in the 2010s and rose fastest in the 1980s, counting every sense of the word [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the base color plum, with the modifier 'dusty'",
+   "first_recorded": "1912 (Ridgway, Color Standards and Nomenclature)",
+   "source": "Ridgway, Color Standards and Nomenclature"
+  },
+  "aka": [],
+  "siblings": [
+   "dark-hyssop-violet",
+   "dusky-auricula-purple",
+   "slate-purple",
+   "perilla-purple"
+  ],
+  "parent": "plum",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "measured": {
+   "lch": [
+    38.2,
+    14.6,
+    345.8
+   ],
+   "nearest_iscc": [
+    "grayish reddish purple",
+    7.6
+   ],
+   "nearest": [
+    [
+     "Dark Hyssop Violet",
+     4.7
+    ],
+    [
+     "Dusky Auricula Purple",
+     5.0
+    ],
+    [
+     "Slate-Purple",
+     5.1
+    ],
+    [
+     "Perilla Purple",
+     5.3
+    ]
+   ]
+  },
+  "n_present": 30,
+  "role_top": {
+   "role": "hidden",
+   "pct": 53
+  },
+  "first_seen": {
+   "year": 1375,
+   "years_before_record": 537
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Nomenclature, 1912, an undated plate",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "ISCC-NBS, National Bureau of Standards Circular 553, 1955, block 245 (\"grayish reddish purple\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color graph: computed LCH/Munsell values and modifier-name cross-reference",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which fruit names the base color behind Dusty Plum?",
+   "choices": [
+    "Plum",
+    "Grape",
+    "Fig",
+    "Mulberry"
+   ],
+   "answer": "Plum",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dusty Plum is one of the more common names in our archive, appearing in over 10% of paintings.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "In printed English, when did use of the word 'dusty' rise fastest, counting every sense of the word?",
+   "choices": [
+    "The 1980s",
+    "The 1920s",
+    "The 1700s",
+    "The 2010s"
+   ],
+   "answer": "The 1980s",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Dusty Plum is one of the rarer names, appearing in under a third of a percent of our archive.",
+  "Its earliest dated match is a 1375 painting by Agnolo Gaddi."
+ ],
+ "words": 259,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

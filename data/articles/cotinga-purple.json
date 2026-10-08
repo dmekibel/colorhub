@@ -1,0 +1,108 @@
+{
+ "slug": "cotinga-purple",
+ "name": "Cotinga Purple",
+ "hex": "#683B67",
+ "names": [
+  "Cotinga Purple"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Cotinga Purple is a dark reddish purple named for the cotinga, a family of brightly colored tropical birds, recorded in Ridgway's 1912 standard.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Named for a tropical bird",
+   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* lists Cotinga Purple on plate XI, hue 63, tone k [1]. Maerz and Paul repeat the name in 1930, on their plate 45 L 10, and the ISCC-NBS system of 1955 assigns it block 219, deep purple, 5.1 units from that block's centroid [2]. The nearest other named color in our library is [[byzantium]], 5.2 units away [2].\n\nCotingas are a family of South and Central American birds, and several species, among them the purple-breasted cotinga, show the dark, slightly red-leaning purple this name describes; Ridgway drew on ornithology, not botany, for this plate [1]. It sits among the dark reddish purples near [[plum]] and [[mulberry]] [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Cotinga Purple covers at least five per cent of the canvas in only 2 of them, as photographed [3]. Both uses are as a shadow rather than a highlight, fitting a color this dark [3]. The earliest is an 1890 Indian painting, *Dusmanta Garlanding Shakumtala* [3]. A color this dark and specific rarely covers enough of an aged, varnished canvas to be detected at our threshold, which is why so few paintings register it [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the cotinga, a family of tropical birds",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "Ridgway, Color Standards and Color Nomenclature; ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "byzantium",
+   "eminence",
+   "plum",
+   "mulberry"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2,
+  "iscc_category": "dark reddish purple",
+  "nearest": [
+   [
+    "Byzantium",
+    5.2
+   ]
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XI, hue 63, tone k (via ColorHub library)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; Maerz and Paul 1930, ISCC-NBS 1955 block 219), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is Cotinga Purple named for?",
+   "choices": [
+    "A family of tropical birds",
+    "A flower",
+    "A wine"
+   ],
+   "answer": "A family of tropical birds",
+   "kind": "pick"
+  },
+  {
+   "q": "In the paintings where our archive finds Cotinga Purple, it plays a shadow rather than a highlight.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Cotinga Purple is named for a bird family, not a flower, unlike most of Ridgway's purples."
+ ],
+ "words": 218,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

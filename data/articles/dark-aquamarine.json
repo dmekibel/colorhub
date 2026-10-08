@@ -1,0 +1,124 @@
+{
+ "slug": "dark-aquamarine",
+ "name": "Dark Aquamarine",
+ "hex": "#017371",
+ "names": [
+  "Dark Aquamarine"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dark Aquamarine is a deep, bluish-green modifier on [[aquamarine]], scanned from Ridgway's 1912 plates and filed by the ISCC-NBS system in 1955.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A darker reading of aquamarine",
+   "body": "The name follows the library's modifier grammar, *dark* plus [[aquamarine]] [1]. Ridgway's 1912 *Color Standards and Color Nomenclature* places a close hue at plate VII, hue 39, a scan of an aged plate and so only approximate [1]. Our library's nearest computed ISCC-NBS block for this chip is a moderate bluish green, and Maerz and Paul's 1930 dictionary separately dates a hue this dark to 1912 as well [1].\n\nThe books do not explain why \"dark\" was chosen over another modifier for this reading [2]. Its nearest named neighbors by color distance are [[anthracene-green]] and [[deep-teal-green]], both almost indistinguishable at 3.1 units, with [[myrtle-green]] a little further at 3.5 [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color this close to Dark Aquamarine is rare in our archive: 20 of 23,781 paintings, as photographed, about 0.08 percent, rarer than 70 percent of the named colors [4]. The earliest match is a 1520 painting, 392 years before the name's earliest record [4]. That is centuries before the name's own record, a floor on the hue's age, not a first use of either the name or a pigment."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a modifier on aquamarine; the choice of \"dark\" is undocumented",
+   "first_recorded": "Ridgway, Color Standards and Color Nomenclature (1912), plate VII, hue 39",
+   "source": "ColorHub color library (Ridgway 1912; ISCC-NBS 1955; Maerz & Paul 1930)"
+  },
+  "aka": [],
+  "siblings": [
+   "anthracene-green",
+   "deep-teal-green",
+   "myrtle-green"
+  ],
+  "parent": "aquamarine",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 20,
+  "n_within": 8,
+  "measured": {
+   "lch": [
+    43.4,
+    28.1,
+    193.9
+   ],
+   "nearest": [
+    [
+     "Anthracene Green",
+     3.1
+    ],
+    [
+     "Deep teal green",
+     3.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-d.json): Ridgway 1912, plate VII, hue 39; ISCC-NBS 1955, block 160; Maerz & Paul 1930, plate 27",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "Color-kb concordance of the 29 color books for this name (no hits beyond the catalogue entries)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph, look-alike edges (data/graph/edges-d.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes); counts are computed color matches on photographs of varnished, aged canvases, not pigment identifications",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1912 source scans the plate behind Dark Aquamarine?",
+   "choices": [
+    "Ridgway's Color Standards and Color Nomenclature",
+    "Newton's Opticks",
+    "A Pantone guide",
+    "A Crayola box"
+   ],
+   "answer": "Ridgway's Color Standards and Color Nomenclature",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our archive's earliest match for Dark Aquamarine postdates the name's first record.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dark Aquamarine's earliest painting match in our archive predates the name by nearly four centuries."
+ ],
+ "words": 203,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}

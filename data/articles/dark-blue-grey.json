@@ -1,0 +1,128 @@
+{
+ "slug": "dark-blue-grey",
+ "name": "Dark Blue Grey",
+ "hex": "#1F3B4D",
+ "names": [
+  "Dark Blue Grey"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Dark Blue Grey is a deep, muted blue-grey from the 2010 xkcd color survey, built by adding *dark* to the already-compound name Blue Grey, and it reads as more blue than most greys of its depth.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Dark plus an existing compound",
+   "body": "The name is built in two steps: the xkcd survey already records a plain [[blue-grey]], and volunteers separately typed a darker version of it, which the library files as its own entry [1][2]. The 1955 ISCC-NBS system catalogues the same hue as dark grayish blue, four units away in CIEDE2000, close enough to call the same family [2]. In Munsell notation it falls at 9.7B 2.3/3.3, a dark, weakly chromatic blue [2]. Measured in LCH it has lightness 24, chroma 15 and hue 252 degrees, nearer to [[slate]] and [[navy]] than to [[charcoal]], though all three sit within a few units of it [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our 23,781-painting archive, a color within six units of Dark Blue Grey covers at least one per cent of the canvas in 264 paintings, about 1.1 percent of the archive, as photographed; the stricter within-painting lens, which asks whether it is one of a painting's dominant colors, finds it in 127 [3]. That makes it more common than 63 percent of the named colors the archive tracks [3]. It most often plays a hidden color, sitting in a painting's darker, less noticed areas in 55 percent of the 127 [3].\n\nIts earliest match in the archive, Master of the Franciscan Crucifixes' panel dated 1270, is 740 years before the name itself is recorded, in the 2010 survey; that gap is a look-alike hue in an aged photograph, not proof that the pigment or dye existed under this name, or at all, that early, a floor and not a first, since the archive's early centuries are thin [3]. Paul Gauguin is its most devoted painter here, carrying it in 6 of his 50 archived works, about 6.6 times the rate of the museums those paintings come from [3]. In printed English the phrase peaked in the 1940s [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: dark + blue-grey",
+   "first_recorded": "xkcd color survey, 2010",
+   "source": "ColorHub color library and Color Graph"
+  },
+  "aka": [],
+  "siblings": [
+   "slate",
+   "navy",
+   "charcoal"
+  ],
+  "parent": "blue-grey",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 264,
+  "painters": [
+   {
+    "name": "Paul Gauguin",
+    "hits": 6,
+    "n": 50,
+    "lift": 6.6
+   }
+  ],
+  "measured": {
+   "lch": [
+    23.5,
+    14.9,
+    252.4
+   ],
+   "munsell": "9.7B 2.3/3.3",
+   "iscc_nbs": {
+    "name": "dark grayish blue",
+    "de2000": 4.3
+   }
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "xkcd color survey (2010), crowdsourced color-name list",
+   "loc_kind": null,
+   "url": "https://blog.xkcd.com/2010/05/03/color-survey-results/"
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library and Color Graph (data/library.json, data/graph): ISCC-NBS block, Munsell notation, LCH values",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive fieldnotes, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "web",
+   "cite": "Google Books Ngram, case-insensitive",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "Dark Blue Grey is built by adding \"dark\" to which existing color name?",
+   "choices": [
+    "Blue Grey",
+    "Slate",
+    "Navy",
+    "Charcoal"
+   ],
+   "answer": "Blue Grey",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: a color like Dark Blue Grey shows up in paintings centuries before the name was recorded.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dark Blue Grey's look-alike hue turns up in a 1270 panel painting, 740 years before the name."
+ ],
+ "words": 336,
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

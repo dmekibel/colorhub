@@ -1,0 +1,136 @@
+{
+ "slug": "dusty-maroon",
+ "name": "Dusty maroon",
+ "hex": "#752E23",
+ "names": [
+  "Dusty maroon"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Dusty maroon is a dark reddish brown, ColorHub's English name for the Japanese traditional color Hihada-iro, \"cypress bark color.\"",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Cypress bark",
+   "body": "Hihada-iro (檜皮色) is named in the Wikipedia list of Japan's traditional colors for the bark of the Japanese cypress, *hinoki*, long used in Japan for roofing thatch [1]. The color recalls the bark's weathered reddish brown rather than the pale wood beneath it [1].\n\nThe nearest named colors on file are [[mahogany]] and [[oxheart]], at Both sit in the library's Reds family alongside the core color [[red|Red]] [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 1,280 of 23,781 paintings, about 5.4 percent, as photographed [2]. The earliest match is the same Maya mural fragment, dated to about 500, that also matches [[dusty-crimson|Dusty crimson]], here covering closer to two-fifths of the image, a floor and not a first, since the archive's early centuries are thin [2]. The rate peaks in a small sample of 109 paintings from the 1450s, more than four and a half times the archive's overall rate for that decade [2]. Among sampled painters, Andrea del Sarto's twenty-one paintings contain it eight times, ahead of Sandro Botticelli and Paolo Veronese [2]. It is also disproportionately present in paintings from Tibet and Italy [2]. These are computed color matches to photographed, varnished paintings, not pigment identifications [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Japanese cypress bark (hinoki)",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "Wikipedia, Traditional colors of Japan"
+  },
+  "aka": [
+   "Hihada-iro"
+  ],
+  "siblings": [
+   "mahogany",
+   "oxheart",
+   "garnet-brown",
+   "persian-plum"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Hihada-iro (檜皮色)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1280,
+  "measured": {
+   "lch": [
+    29,
+    38,
+    37
+   ],
+   "nearest": [
+    [
+     "Mahogany",
+     2.5
+    ],
+    [
+     "Oxheart",
+     2.8
+    ],
+    [
+     "Garnet Brown",
+     4.1
+    ],
+    [
+     "Persian Plum",
+     4.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "Wikipedia, \"Traditional colors of Japan\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/Traditional_colors_of_Japan"
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional list, ISCC-NBS 1955, Maerz & Paul 1930 entries",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Hihada-iro name this color after?",
+   "choices": [
+    "Japanese cypress bark",
+    "Dried persimmon skin",
+    "Roasted chestnut",
+    "Red clay"
+   ],
+   "answer": "Japanese cypress bark",
+   "kind": "pick"
+  },
+  {
+   "q": "Which library color sits closest to this one, at only 2.5 ΔE2000 units away?",
+   "choices": [
+    "Mahogany",
+    "Oxblood",
+    "Carbuncle",
+    "Red"
+   ],
+   "answer": "Mahogany",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Named for weathered cypress bark, and nearly indistinguishable from Mahogany on screen."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 210
+}

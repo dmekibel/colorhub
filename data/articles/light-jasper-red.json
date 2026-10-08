@@ -1,0 +1,114 @@
+{
+ "name": "Light Jasper Red",
+ "hex": "#E36D6D",
+ "names": [
+  "Light Jasper Red"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Light Jasper Red is a bright, coral-leaning pink named for jasper, close enough to our library's Rose Doree to be a near-duplicate.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A light jasper, twice plated",
+   "body": "Ridgway's 1912 atlas records this swatch twice: at plate XIII, hue 3′, tone b, and again at plate I, hue 3, tone b, both filed by the 1955 ISCC-NBS system in block 3, a deep pink [1]. Maerz and Paul's 1930 dictionary dates a close variant to about 1854, at plate 1, K 8 [1]. The library also records a third related name, Begonia, from 1892 [1].\n\nIts nearest library neighbor is [[candy-pink]], and the closest core app color is [[terracotta]], about seven units away [1]. Ridgway's plates carry a near-duplicate he called Rose Doree, little over one unit away, close enough to call the same color under a different name [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this pink in only 7 of 23,781 paintings, well under one tenth of one per cent [2]. The earliest match is a 1500 Baptism of Saint Zenobius by Sandro Botticelli, more than three centuries before Ridgway's plate, so that is a lookalike hue and not a pigment record, a floor and not a first, since the archive's early centuries are thin [2]. With so few matches, no century or country pattern here is reliable [2]. These are photographs of aged, varnished paintings, and a match this rare is as much a coincidence of measurement as a real signal [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "jasper, the stone",
+   "first_recorded": "1912 (Ridgway) / about 1854 (Maerz and Paul, close variant)",
+   "source": "ColorHub library (data/library.json)"
+  },
+  "aka": [],
+  "siblings": [
+   "candy-pink",
+   "terracotta",
+   "coral"
+  ],
+  "parent": "pink",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed",
+  "match": {
+   "hex": "#E36D6D",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 7,
+  "nearest": [
+   [
+    "Candy Pink",
+    null
+   ],
+   [
+    "Terracotta",
+    7.1
+   ],
+   [
+    "Rose Doree",
+    1.2
+   ]
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json) and name graph (data/graph/nodes): Ridgway (1912), ISCC-NBS (1955) and Maerz & Paul (1930) entries; Ridgway 1912 pl. XIII hue 3′ tone b and pl. I hue 3 tone b, ISCC-NBS 1955 block 3, Maerz & Paul 1930 pl. 1 K 8",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which library color is a near-duplicate of Light Jasper Red, just over one unit away?",
+   "choices": [
+    "Rose Doree",
+    "Candy Pink",
+    "Terracotta",
+    "Begonia"
+   ],
+   "answer": "Rose Doree",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Light Jasper Red is common in our painting archive, appearing in over one per cent of paintings.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Light Jasper Red appears in only 7 of our 23,781 archive paintings."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No book source found; article relies on library/graph data only. Field count is very small (n=7).",
+   "lint 2026-10-09"
+  ]
+ },
+ "slug": "light-jasper-red",
+ "words": 229
+}

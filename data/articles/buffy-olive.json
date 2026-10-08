@@ -1,0 +1,115 @@
+{
+ "slug": "buffy-olive",
+ "name": "Buffy Olive",
+ "hex": "#8C7C56",
+ "names": [
+  "Buffy Olive"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Buffy Olive is a muted grayish-olive brown, and one of the most common names in our painting archive, found in nearly one painting in five.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Buff meets olive",
+   "body": "Our library dates Buffy Olive to Ridgway's 1912 standards, plate XXX, hue 21′′, with the 1955 ISCC-NBS system classing a close match as a light olive [1]. The nearest named colors on file are [[citrine-drab]], [[gold-fusion]], [[baiko-brown]] and [[hair-brown]], at 2.6, 2.8, 6, 2.8, 3.2 and 3.2 ΔE [1]. A fifth, slightly farther neighbor is [[rustic-drab]], 3.4 ΔE away, more vivid [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to Buffy Olive in 4,476 of 23,781 paintings, 18.82 percent, as photographed[2]. It most often plays a light tone inside a painting (39 percent of appearances), rather than a shadow or accent [2].\n\nKristian Zahrtmann used it most relative to his own museums' baseline, in 7 of his 18 works here, 3.4 times expected [2]. It keeps company with Brownish Olive and Sand far more than chance, and the earliest dated match, from 916, is almost a thousand years before the 1912 record, a floor set by the archive's thin early coverage rather than a claim about the color's age [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "buff and olive combined",
+   "first_recorded": "Ridgway, 1912 (plate XXX, hue 21′′)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "citrine-drab",
+   "gold-fusion",
+   "baiko-brown",
+   "hair-brown"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 4476,
+  "role": {
+   "light": 0.39
+  },
+  "company": [
+   "Brownish Olive",
+   "Sand"
+  ],
+  "measured": {
+   "lch": [
+    53,
+    23,
+    89
+   ],
+   "nearest": [
+    [
+     "Citrine-Drab",
+     2.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: name records, plate and block locators, tier classification",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Buffy Olive combines which two family words?",
+   "choices": [
+    "Buff and olive",
+    "Beige and rose",
+    "Slate and blue",
+    "Buff and chartreuse"
+   ],
+   "answer": "Buff and olive",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Buffy Olive is one of the rarest colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Buffy Olive turns up in nearly one painting in five in our archive."
+ ],
+ "words": 203,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

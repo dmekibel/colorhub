@@ -1,0 +1,147 @@
+{
+ "slug": "brazen-yellow",
+ "name": "Brazen Yellow",
+ "hex": "#DDB55B",
+ "names": [
+  "Brazen Yellow"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Brazen Yellow is a warm, brassy yellow that Maerz and Paul's 1930 dictionary traces back to 1590, one of three names the dictionary records for nearly the same plate position.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "One plate, three names over three centuries",
+   "body": "Maerz and Paul's *A Dictionary of Color* (1930) places Brazen Yellow on plate 11, position L6, and gives it the earliest recorded use of the three names tied to this plate position, 1590 [1]. The same plate position carried the name *Brass* by 1654 and *Rattan* by 1921, so the dictionary shows the same color being renamed across three centuries without explaining why any one name displaced another [1]. The ISCC-NBS 1955 lists do not carry Brazen Yellow separately, and the National Bureau of Standards circular cites only Maerz and Paul's entry [1].\n\nThe nearest named colors on file are [[zedoary-wash]], [[popcorn]] and [[dusty-amber]], at 3.5, 3.5 and 3.8 ΔE [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color match to this swatch in 818 of 23,781 paintings, 3.44 percent, as photographed; the within-painting lens finds it in 673, more common than 86 percent of the named colors we track [3]. Sir Henry Raeburn is its most devoted painter, carrying it in 4 of the 12 [[painter:henry-raeburn|Raeburn]] paintings in the archive, 4.4 times the rate expected from the museums his works come from [3].\n\nThe color's deepest historical cluster is the 1300s, 3.1 times the expected rate across 251 paintings from that century, and inside a painting it most often plays an accent (60 percent of its 673 within-painting matches) [3]. The earliest match dates to 1236, more than three centuries before the name's 1590 record, which shows only that a similar-looking hue existed in paint long before the word did, a floor and not a first, since the archive's early centuries are thin [3]. India is the most over-represented country, at 2.2 times its expected share, with the Kalighat and Mughal schools both well above the archive's average [3]. These are photographs of varnished paintings, read as screen colors [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented beyond the plate position",
+   "first_recorded": "Maerz and Paul, 1930 (recorded use from 1590, plate 11 L6)",
+   "source": "Maerz and Paul, A Dictionary of Color (1930)"
+  },
+  "aka": [],
+  "siblings": [
+   "zedoary-wash",
+   "popcorn",
+   "dusty-amber",
+   "light-cadmium"
+  ],
+  "parent": "yellow",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#DDB55B",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 818,
+  "painters": [
+   {
+    "name": "Sir Henry Raeburn",
+    "hits": 4,
+    "n": 12,
+    "lift": 4.4
+   }
+  ],
+  "countries": {
+   "India": {
+    "n": 721,
+    "hits": 54,
+    "lift": 2.2
+   }
+  },
+  "measured": {
+   "lch": [
+    75.6,
+    50.7,
+    85.3
+   ],
+   "nearest": [
+    [
+     "Zedoary Wash",
+     3.5
+    ],
+    [
+     "Popcorn",
+     3.5
+    ],
+    [
+     "Dusty amber",
+     3.8
+    ],
+    [
+     "Light Cadmium",
+     4.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Maerz and Paul, A Dictionary of Color, \"Brazen Yellow\", \"Brass\", \"Rattan\", plate 11 L6/K6",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances and canvas co-occurrence",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which year does Maerz and Paul give for the first recorded use of Brazen Yellow?",
+   "choices": [
+    "1590",
+    "1654",
+    "1921",
+    "1930"
+   ],
+   "answer": "1590",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the dictionary records Brazen Yellow as the only name ever used for this exact plate position.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The same dictionary plate position carried three different names across more than three centuries."
+ ],
+ "words": 328,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

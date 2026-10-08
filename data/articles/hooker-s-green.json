@@ -1,0 +1,165 @@
+{
+ "slug": "hooker-s-green",
+ "name": "Hooker's Green",
+ "hex": "#49796B",
+ "names": [
+  "Hooker's Green"
+ ],
+ "tier": "person",
+ "depth": "short",
+ "lede": "Hooker's Green is a deep, cool watercolour green mixed from gamboge and Prussian blue or indigo, named for the English botanical artist who used it to paint leaves.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A painter's mixed green",
+   "body": "The pigment compendium groups Hooker's Green with the nineteenth-century \"mixed greens\": not one substance but a blend, in this case the yellow resin [[gamboge-yellow|gamboge]] cut with [[prussian-blue]] or [[indigo]] [1]. The nearest named color on file is [[light-danube-green]], 2.6 ΔE off [1][2].\n\nIt takes its name from William Hooker, a botanical artist for the Royal Horticultural Society, who mixed gamboge with a little Prussian blue to get a green suited to painting foliage [3]. The mix worked best as a watercolour; some Flemish oil painters used it too, and Rembrandt is said to have liked gamboge for the golden cast it took on in oil [4][5]. Gamboge's resin grains later had an odd second life: the physicist Jean Perrin used them in 1908 to demonstrate Brownian motion, part of the evidence for the existence of atoms [4]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "ColorHub's reference swatch sits at lightness 47, chroma 20, hue 173 degrees, a muted blue-green [6]. Its nearest library name is Light Danube Green, about 2.6 units away, with Jasper Green close behind [6]. Ridgway's 1912 standards list it on plate XIX, and the ISCC-NBS system of 1955 carries it as block 164 [6]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this green, as photographed, in 76 of 23,781 paintings, about 0.3 percent [7]. It covers nearly half the canvas in two Klimt garden paintings, *Avenue in the Park of Schloss Kammer* (1912) and *Park at Kammer Castle* (1909), and almost 40 percent of Caillebotte's *Skiffs* (1877) [7]. The earliest dated match is Hans Memling's 1480 portrait of an unknown man with a letter, where it covers 16 percent of the canvas, a floor and not a first, since the archive's early centuries are thin [7]. These are computed color matches on aged, varnished paintings, not pigment identifications [7]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "William Hooker, Royal Horticultural Society botanical artist",
+   "first_recorded": "18th century, as a watercolour mix; catalogued by Ridgway in 1912",
+   "source": "St Clair, The Secret Lives of Color"
+  },
+  "aka": [],
+  "siblings": [
+   "light-danube-green",
+   "jasper-green",
+   "dark-porcelain-green",
+   "patina-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 76,
+  "top_paintings": [
+   "commons-Q19912810",
+   "commons-Q121841008",
+   "nga-66404"
+  ],
+  "measured": {
+   "lch": [
+    47,
+    20,
+    173
+   ],
+   "nearest": [
+    [
+     "Light Danube Green",
+     2.6
+    ],
+    [
+     "Jasper Green",
+     3.0
+    ],
+    [
+     "Dark Porcelain Green",
+     4.3
+    ],
+    [
+     "Patina Green",
+     4.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Chelsea (ed.), The Pigment Compendium, \"Varley's Green\" and \"Hooker's Green\" entries, citing Field (1835)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 133",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, \"H\" glossary entry",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 14",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 133 (Turner and Flemish oil use)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Ridgway 1912, ISCC-NBS 1955, CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes; within the archive's match threshold, at least 5% of the canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What two pigments is Hooker's Green traditionally mixed from?",
+   "choices": [
+    "Gamboge and Prussian blue or indigo",
+    "Ochre and lampblack",
+    "Ultramarine and lead white",
+    "Madder and gamboge"
+   ],
+   "answer": "Gamboge and Prussian blue or indigo",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Hooker's Green is named for a British botanical artist.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Hooker's Green got an odd second career in 1908, when its gamboge grains helped prove atoms exist."
+ ],
+ "words": 315,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

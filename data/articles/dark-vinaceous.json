@@ -1,0 +1,120 @@
+{
+ "slug": "dark-vinaceous",
+ "name": "Dark Vinaceous",
+ "hex": "#A46464",
+ "names": [
+  "Dark Vinaceous"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Dark Vinaceous is a grayish red from Ridgway's 1912 dictionary, its name Latin for wine-colored, and it shares its exact hex with another of our names, Brick rose.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Wine-colored, by name",
+   "body": "Ridgway's 1912 dictionary lists Dark Vinaceous at #A46464, plate XXVII, hue 1″, and the ISCC-NBS circular of 1955 files it as \"grayish red\" [1]. *Vinaceous* comes from the Latin *vinum*, wine, describing the dull reddish color of diluted red wine[1].\n\nIn our color graph the exact same hex is also cataloged under [[brick-rose|Brick rose]], two names sharing one identical swatch [1]. The nearest distinct neighbors are [[hydrangea-red|Hydrangea Red]] and [[copper-penny|Copper Penny]], both 5.0 units away [1]. The Munsell notation is 4.2R 4.8/5.8, and the swatch sits with our [[red|red]] family, its gray modifier also pulling it toward [[grey|grey]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 0.46% of 23,781 paintings, 109 of them, as photographed, with the within-painting lens counting 44 [2]. That makes it rarer than 52% of our named colors [2]. It peaks in the 1900s, present in 0.4% of the 1,674 paintings from that century, 1.9 times the rate its museums would predict [2]. Within a painting it most often sits as an accent, in 50% of its 44 appearances [2]. It is most over-represented in India, 2.6 times the expected rate, 15 of 721 Indian paintings in the archive [2]. The earliest match dates to 1000, 912 years before Ridgway recorded the name, a floor rather than a first [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1912 (ridgway)",
+   "source": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930"
+  },
+  "aka": [],
+  "siblings": [
+   "brick-rose",
+   "hydrangea-red"
+  ],
+  "parent": "red",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 109,
+  "measured": {
+   "lch": [
+    49.4,
+    28.1,
+    23.0
+   ],
+   "nearest": [
+    [
+     "Brick rose",
+     0.0
+    ],
+    [
+     "Hydrangea Red",
+     5.0
+    ],
+    [
+     "Copper Penny",
+     5.0
+    ]
+   ]
+  },
+  "iscc_nbs": {
+   "name": "grayish red",
+   "de": 4.1
+  },
+  "munsell": "4.2R 4.8/5.8"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and name graph (data/library.json, data/graph/): Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930; nearest names by Lab-space distance",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed color match, as photographed",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does \"vinaceous\" mean, and what is it derived from?",
+   "choices": [
+    "Wine-colored, from the Latin for wine",
+    "Vine-colored, from the Latin for vine leaf",
+    "Vinegar-colored, from the Latin for vinegar",
+    "Berry-colored, from the Latin for berry"
+   ],
+   "answer": "Wine-colored, from the Latin for wine",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dark Vinaceous shares its exact hex with another name in our library.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dark Vinaceous and Brick rose are two different names for the exact same hex, #A46464."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "Confirmed the vinaceous/wine etymology, which is documented, unlike most names in this batch.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 242
+}

@@ -1,0 +1,127 @@
+{
+ "slug": "light-khaki",
+ "name": "Light Khaki",
+ "hex": "#E6F2A2",
+ "names": [
+  "Light Khaki"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Light Khaki is a pale, yellow-green khaki, built from the modifier \"light\" rather than drawn from any dated military or dye source.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A tint of khaki",
+   "body": "The 2010 xkcd color survey is the only source we hold for this exact word pairing [1]. Our library's plain [[khaki|Khaki]] entry traces to 1848 through Maerz and Paul, when the word still meant dust-colored cloth before it meant any particular hex, but Light Khaki itself carries no such date: it is simply that older color, lightened [2].\n\nISCC-NBS 1955 would file this pale tint as a light yellow green, and the nearest library neighbors are [[cream|Cream]] and [[key-lime|Key Lime]] [3]. It reads as [[khaki|khaki]] drained toward a pastel, with most of the brown pulled out and the green pushed forward [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings, as photographed, carries this color in 6 paintings at five percent coverage or more, the earliest a 1642 [[painting:rijks-200108812|Still Life]] by Gerret Willemsz Heda [4]. The strongest single match is a 19th-century painting, *The Cat*, covering about 28 percent of the canvas [4]. These are museum photographs of aged, varnished paintings, so a match is a screen color, not a pigment identification [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; a tint of khaki",
+   "first_recorded": "2010, xkcd color survey",
+   "source": "ColorHub library: xkcd 2010; Maerz & Paul 1930 (for the related Khaki entry)"
+  },
+  "aka": [],
+  "siblings": [
+   "khaki",
+   "cream",
+   "key-lime",
+   "tan"
+  ],
+  "parent": "khaki",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 6,
+  "nearest_iscc": [
+   "light yellow green",
+   4.3
+  ],
+  "first_source": [
+   "xkcd",
+   2010
+  ],
+  "measured": {
+   "lch": [
+    93.0,
+    40.7,
+    113.6
+   ]
+  },
+  "top_paintings": [
+   "rijks-200108812"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and graph nodes: xkcd 2010 color survey",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: Khaki entry, Maerz & Paul 1930, first recorded 1848",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library: nearest standard names and ISCC-NBS 1955 distance",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did the word \"khaki\" originally describe, before it meant a hex color?",
+   "kind": "pick",
+   "choices": [
+    "Dust-colored cloth",
+    "A military medal",
+    "A dye recipe",
+    "A type of varnish"
+   ],
+   "answer": "Dust-colored cloth"
+  },
+  {
+   "q": "True or false: Light Khaki has its own documented date of coinage separate from plain Khaki.",
+   "kind": "true-false",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False"
+  }
+ ],
+ "openers": [
+  "Light Khaki's earliest match in our archive is a 1642 Dutch still life."
+ ],
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "status": "checked",
+ "words": 186
+}

@@ -1,0 +1,139 @@
+{
+ "slug": "dark-chocolate-brown",
+ "name": "Dark chocolate brown",
+ "hex": "#2C1608",
+ "names": [
+  "Dark chocolate brown"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dark chocolate brown is almost black, a near-opaque version of chocolate brown, and it turns out to be one of the single most common colors in the history of Western and Islamic painting alike.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A brown, twice modified",
+   "body": "The name stacks two modifiers: \"dark\" on top of [[chocolate-brown]], which is itself \"chocolate\" turned into a neutral [1]. Our library traces the base color to RAL 8017, a German industrial standard from 1927, used here as an approximate screen value [1]. In Japan a nearby grayed-brown is called *Benikeshinezumi*, 紅消鼠, \"vanishing red mouse\" [1].\n\nThe ISCC-NBS system of 1955 files the color as a dark, grayish, reddish brown, two full steps toward black from [[chocolate]] itself [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Dark chocolate brown is startlingly common: it appears in 14.05 percent of the 23,781 paintings in our archive, 3,341 of them as photographed, more common than 97 percent of the named colors we track, among the highest ranks in our entire library [3]. It peaks in the 1600s, found in 15.5 percent of the 6,394 paintings from that century, 1.3 times the baseline [3]. Inside a painting it most often plays a shadow, in 43 percent of its 2,711 clearest appearances, the deep pool that var­nish and underpainting both tend to collect in [3].\n\nAlexandre-Gabriel Decamps is its most devoted painter, using it in 8 of 13 works here, 4.6 times his own museums' baseline [3]. It shares canvases with Seal Brown and Blood Red more than chance, with lifts of 3.4 and 3.3 [3]. The earliest match is a 1230 painting attributed to the Master of the Bigallo Crucifixion, a plausible age for a near-black brown that needs no exotic pigment to make, a floor and not a first, since the archive's early centuries are thin [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "chocolate, darkened toward black",
+   "first_recorded": "1927, RAL (as RAL 8017)",
+   "source": "ColorHub color graph"
+  },
+  "aka": [],
+  "siblings": [
+   "espresso",
+   "black-kite",
+   "pale-black-tone",
+   "armada"
+  ],
+  "parent": "chocolate-brown",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Benikeshinezumi (紅消鼠)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 3341,
+  "painters": [
+   "alexandre-gabriel-decamps",
+   "jean-baptiste-vanmour",
+   "jan-havicksz-steen"
+  ],
+  "role": "shadow",
+  "measured": {
+   "lch": [
+    10,
+    15,
+    51
+   ],
+   "iscc": "dark grayish reddish brown",
+   "nearest": [
+    [
+     "Espresso",
+     5.7
+    ],
+    [
+     "Black kite",
+     5.7
+    ],
+    [
+     "Pale black tone",
+     5.8
+    ],
+    [
+     "Armada",
+     6.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph: modifier grammar (dark + chocolate-brown); RAL 8017 (1927); Japanese library entry",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS 1955 block 61 entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is Dark chocolate brown's rank for commonness among our named colors?",
+   "choices": [
+    "Rarer than 97 percent",
+    "More common than 97 percent",
+    "Exactly average",
+    "Never found"
+   ],
+   "answer": "More common than 97 percent",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dark chocolate brown most often appears as a bright highlight.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dark chocolate brown is more common in our archive than all but 3 percent of named colors."
+ ],
+ "words": 292,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

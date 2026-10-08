@@ -1,0 +1,107 @@
+{
+ "slug": "baby-shit-green",
+ "name": "Baby Shit Green",
+ "hex": "#889717",
+ "names": [
+  "Baby Shit Green"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Baby Shit Green is a dull olive-green, the greener sibling of [[baby-shit-brown|Baby Shit Brown]] that the 2010 xkcd color survey's respondents named as a separate cluster.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A crowd name for a plain comparison",
+   "body": "The name comes from Randall Munroe's 2010 xkcd color survey, where visitors typed a word next to a swatch and the most common label for each cluster of clicks won [1]. Who typed it first is undocumented [1]. ISCC-NBS 1955 would file the same patch as a strong yellow green, about 3.9 units off, with Munsell notation 3.0GY 5.8/8.6 [1].\n\nThe closest look-alike in our data is [[baby-poop-green|Baby Poop Green]], just 2.2 units away, with [[pea-soup|Pea Soup]], [[avocado|Avocado]] and [[ugly-green|Ugly Green]] also close [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings, as photographed, finds this olive-green in 21 of them, about 0.09 percent, rarer than 63 percent of our named colors [2]. It peaks in the 1900s, at 4.7 times the expected rate for that century (8 of 1,674 paintings from then), and inside a painting it is most often an accent, 59 percent of the time, by lightness rank rather than raw area [2].\n\nThe earliest match in our archive is dated 1801, 209 years before the name itself appears in 2010 [2]. Our archive's early centuries are thin, so that date is a floor, not a first, and the match is only a look-alike hue, not proof the name or a matching dye existed then [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the color of an infant's stool (greener variant)",
+   "first_recorded": "2010, xkcd color survey",
+   "source": "xkcd (Munroe 2010)"
+  },
+  "aka": [],
+  "siblings": [
+   "baby-poop-green",
+   "pea-soup"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 21,
+  "measured": {
+   "lch": [
+    59.4,
+    62.0,
+    109.6
+   ],
+   "nearest": [
+    [
+     "Baby Poop Green",
+     2.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: xkcd 2010 color survey entry, ISCC-NBS and Munsell mapping",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does the name Baby Shit Green come from?",
+   "choices": [
+    "The 2010 xkcd crowd color-naming survey",
+    "A Victorian pigment maker's catalog",
+    "Ridgway's 1912 color dictionary",
+    "A Japanese traditional color list"
+   ],
+   "answer": "The 2010 xkcd crowd color-naming survey",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our painting archive's 1801 match for this color proves the name already existed then.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Baby Shit Green's closest named neighbor, at just 2.2 units off, is its own sibling cluster's Baby Poop Green."
+ ],
+ "words": 234,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No private fact-card file for this slug.",
+   "Who coined the name is undocumented; the survey records only the winning label."
+  ]
+ }
+}

@@ -1,0 +1,137 @@
+{
+ "slug": "dusty-orange",
+ "name": "Dusty Orange",
+ "hex": "#F0833A",
+ "names": [
+  "Dusty Orange"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Dusty Orange is a warm, slightly muted orange, ColorHub's English name for the Japanese traditional color Beni'ukon, \"red-bronze,\" literally red dye and turmeric.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Red dye and turmeric",
+   "body": "Beni'ukon (紅鬱金) is named in the Wikipedia list of Japan's traditional colors for two dye sources together: *beni*, safflower red, and *ukon*, turmeric [1]. Our library also places this color in ISCC-NBS block 53, a block of the 1955 color-naming system that groups it with Maerz and Paul's 1930 names Marygold Yellow, first recorded in 1705, and Damonico, first recorded in 1835 [3].\n\nThe nearest named colors on file are [[pastel-orange]] and [[orange]], at 2.6 and 3.3 ΔE [3]. A fifth, slightly farther neighbor is [[cadmium-orange]], 3.8 ΔE away, almost the same [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is the rarest color : our archive finds it in only 18 of 23,781 paintings, about 0.08 percent, as photographed [2]. The earliest match is a 1450 icon of Saints Theodore Stratelates and Theodore Tyron, a floor and not a first, since the archive's early centuries are thin [2]. With so few matches, no decade or painter stands out reliably, but the color is disproportionately present, relative to their size, in paintings from Norway and India [2]. These are computed color matches to photographed, varnished paintings, not pigment identifications [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "safflower red and turmeric dye (beni and ukon)",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "Wikipedia, Traditional colors of Japan"
+  },
+  "aka": [
+   "Beni'ukon"
+  ],
+  "siblings": [
+   "pastel-orange",
+   "orange",
+   "orangeish",
+   "bright-red-orange"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Beni'ukon (紅鬱金)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 18,
+  "measured": {
+   "lch": [
+    66,
+    67,
+    57
+   ],
+   "nearest": [
+    [
+     "Pastel Orange",
+     2.6
+    ],
+    [
+     "Orange",
+     3.3
+    ],
+    [
+     "Orangeish",
+     3.4
+    ],
+    [
+     "Bright Red Orange",
+     3.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "Wikipedia, \"Traditional colors of Japan\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/Traditional_colors_of_Japan"
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional list, ISCC-NBS 1955, Maerz & Paul 1930 entries",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which two dye sources does the name Beni'ukon combine?",
+   "choices": [
+    "Safflower and turmeric",
+    "Madder and saffron",
+    "Persimmon and ochre",
+    "Lacquer and amber"
+   ],
+   "answer": "Safflower and turmeric",
+   "kind": "pick"
+  },
+  {
+   "q": "About what share of our 23,781 sampled paintings show a close match to this color?",
+   "choices": [
+    "Under 0.1 percent",
+    "About 1 percent",
+    "About 5 percent",
+    "About 15 percent"
+   ],
+   "answer": "Under 0.1 percent",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Named for two dyes, safflower and turmeric."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "Very small archive count; no decade/painter claims made beyond raw counts.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 205
+}

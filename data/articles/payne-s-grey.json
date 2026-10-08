@@ -1,0 +1,152 @@
+{
+ "slug": "payne-s-grey",
+ "name": "Payne's Grey",
+ "hex": "#536878",
+ "names": [
+  "Payne's Grey"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Payne's Grey is a blue-grey mixed by watercolorists in place of plain black, named for the English painter William Payne around 1800.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A painter's substitute for black",
+   "body": "William Payne was a British watercolorist, born in Devon around 1760, who worked first as an engineer before teaching watercolor in London [3]. He is credited with mixing a softer, bluish grey to replace the flat, deadening black many of his students reached for in shadows [3]. His original recipe combined Prussian blue, yellow ochre and crimson lake, a far more complex mix than the name's later, simpler recipes suggest [3].\n\nThe nearest named colors on file are [[black-coral]] and [[delphinium]], at The ISCC-NBS 1955 revision places it in block 186, \"grayish blue,\" a near-exact match (ΔE 0.4) to the Ridgway chip [1][2]. Maerz and Paul's 1930 dictionary dates the name in English to 1835, decades after Payne's own death [1].\n\nTwentieth-century recipes for \"Payne's grey\" paint drifted from Payne's own mixture: one later formula swaps in indigo for Prussian blue, and most modern tubes now mix ultramarine with a carbon black instead [3]. The name has outlived the paint it first described."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A screen match for this grey-blue turns up in 270 of 23,781 paintings in our archive, about 1.1 percent, as photographed [2]. It is almost three times more common in paintings from the 1900s decade than the archive's average rate, and leans toward painters working in watery, atmospheric blues: Paul Signac, Paul Sérusier and Claude Monet all carry it well above the archive's base rate [2]. Its single most covered appearance is Whistler's *Violet and Silver—The Deep Sea* (1893), where it fills more than half the canvas [2]. These are computed color matches on photographs of aged, varnished paintings, not identifications of any pigment Payne, Whistler or Monet actually used [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "William Payne, English watercolorist",
+   "first_recorded": "1835, per Maerz and Paul",
+   "source": "Maerz and Paul, A Dictionary of Color (1930)"
+  },
+  "aka": [
+   "Payne's gray"
+  ],
+  "siblings": [
+   "black-coral",
+   "delphinium",
+   "dark-orient-blue",
+   "deep-slate-blue"
+  ],
+  "parent": "grey",
+  "children": [
+   "dark-payne-s-grey"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 270,
+  "rate": 0.0114,
+  "peak_decade": {
+   "key": 1910,
+   "rate": 0.038,
+   "lift": 3.37
+  },
+  "top_paintings": [
+   "aic-84088"
+  ],
+  "measured": {
+   "lch": [
+    43,
+    12,
+    252
+   ],
+   "nearest": [
+    [
+     "Black Coral",
+     3.0
+    ],
+    [
+     "Delphinium",
+     4.2
+    ],
+    [
+     "Dark Orient Blue",
+     4.3
+    ],
+    [
+     "Deep Slate-Blue",
+     4.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XLIX, hue 49‴; Maerz and Paul, A Dictionary of Color (1930), plate 47 A 9",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library and archive (23,781 paintings): ISCC-NBS 1955 block 186, LCH values, computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "web",
+   "cite": "Liquitex, \"The Story of Payne's Gray Color\"; Wikipedia, \"William Payne (painter)\"",
+   "loc_kind": null,
+   "url": "https://www.liquitex.com/blogs/uncapped/paynes-gray"
+  }
+ ],
+ "questions": [
+  {
+   "q": "Payne's Grey was originally mixed as a substitute for what?",
+   "choices": [
+    "Plain black",
+    "Sepia ink",
+    "Indigo dye",
+    "White lead"
+   ],
+   "answer": "Plain black",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: William Payne's original recipe is the same mix sold as Payne's Grey paint today.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which painting in our archive shows the most Payne's Grey by covered area?",
+   "choices": [
+    "Whistler's Violet and Silver—The Deep Sea",
+    "Monet's Water Lilies",
+    "A Caillebotte still life",
+    "A Toulouse-Lautrec dance hall scene"
+   ],
+   "answer": "Whistler's Violet and Silver—The Deep Sea",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Payne's Grey was invented so students would stop reaching for plain black — and the recipe has changed completely since."
+ ],
+ "words": 291,
+ "status": "checked",
+ "checked": {
+  "by": "batch-23",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits for this slug; biography and recipe history come from web sources (Liquitex, Wikipedia), hedged as not institutional. Our own library/archive data are the primary citations.",
+   "lint 2026-10-09"
+  ]
+ }
+}

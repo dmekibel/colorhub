@@ -1,0 +1,155 @@
+{
+ "slug": "midnight-green",
+ "name": "Midnight Green",
+ "hex": "#004953",
+ "names": [
+  "Midnight Green"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Midnight Green is a near-black teal, a landscape-and-time-of-day compound that our library files as the darkest member of the midnight family of names.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A midnight shade",
+   "body": "The nearest named colors on file are [[deep-teal]], [[dark-teal]] and [[dark-delft-blue]], at 5, 5 and 6.2 ΔE [2]. The hex #004953 measures a dark greenish blue in ISCC-NBS terms, 4.8 units from the nearest named block, and sits near 1.0B 2.7/4.1 in Munsell notation [2]. Who first paired \"midnight\" with \"green\" is not recorded in the sources we checked, so the coinage itself stays undocumented [1]. The closest listed library neighbor is [[petrol]], a similarly dark blue-green, 7.2 units away [2]. A nearer sibling in name is [[teal]], the hue family it sits within once the \"midnight\" modifier is stripped away [1].\n\nOn screen the color reads almost as a dark teal rather than true black. Its lightness value, 28 out of 100, puts it well above black [2]. It still reads as \"midnight\" because green light drops out fastest in low light, leaving blue to dominate what little color the eye can still register."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to Midnight Green in 61 of 23,781 paintings, 0.26 percent, with the within-painting test narrowing that to 28 [3]. That makes it rarer than roughly 58 percent of the named colors we track [3]. It peaks in the 1400s, in 6 of 945 paintings, present in 0.6 percent of our paintings from that century against a baseline that makes it 2.7 times more likely than chance, and the earliest match is a 1310 panel attributed to Giotto, a floor and not a first, since the archive's early centuries are thin [3]. Inside the paintings that carry it, the color plays a hidden color more than half the time, the kind of dark passage a painting's lightness order places near the bottom without the viewer necessarily noticing it as a distinct hue [3]. All of this describes photographs of aged, varnished panels, not a pigment identification [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the hour of midnight, paired with green",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "deep-teal",
+   "dark-teal",
+   "dark-delft-blue",
+   "dark-slate-grey"
+  ],
+  "parent": "midnight",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 61,
+  "n_within": 28,
+  "measured": {
+   "lch": [
+    27.8,
+    19.6,
+    216.4
+   ],
+   "munsell": "1.0B 2.7/4.1",
+   "iscc_nbs": {
+    "name": "dark greenish blue",
+    "de": 4.8
+   },
+   "nearest": [
+    [
+     "Deep Teal",
+     5.0
+    ],
+    [
+     "Dark Teal",
+     5.0
+    ],
+    [
+     "Dark Delft Blue",
+     6.2
+    ],
+    [
+     "Dark Slate Grey",
+     6.4
+    ]
+   ]
+  },
+  "century_peak": {
+   "year": 1400,
+   "lift": 2.7,
+   "n": 6
+  },
+  "ngram": {
+   "peak": 2010,
+   "rise": 1820,
+   "term": "midnight green"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph: family-word classification and Wikipedia-sourced name entry",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: computed LCH, Munsell and ISCC-NBS nearest-block distance",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Midnight Green is built the same way as which other name?",
+   "choices": [
+    "Midnight blue",
+    "Prussian blue",
+    "Rose taupe",
+    "Royal blue"
+   ],
+   "answer": "Midnight blue",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Midnight Green is pure black in our measurements.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Inside the paintings where it appears, Midnight Green most often plays:",
+   "choices": [
+    "A hidden, low-lightness passage",
+    "The brightest highlight",
+    "A focal accent",
+    "An underpainting layer"
+   ],
+   "answer": "A hidden, low-lightness passage",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "It only reads as black-adjacent because green is the first color the eye loses in low light."
+ ],
+ "words": 334,
+ "status": "checked",
+ "checked": {
+  "by": "batch-9 writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance file for this slug; origin of the compound name left undocumented.",
+   "lint 2026-10-09"
+  ]
+ }
+}

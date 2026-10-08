@@ -1,0 +1,143 @@
+{
+ "slug": "sky-grey",
+ "name": "Sky Grey",
+ "hex": "#B9C4CF",
+ "names": [
+  "Sky Grey"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Sky Grey is a pale bluish-white first dated by Ridgway in 1912, closest in our library to Silver and built on the same root word as Sky Blue.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A 1912 landscape word",
+   "body": "ColorHub's library traces Sky Grey to Ridgway's 1912 color standard (plate XXXIV, hue 45′′) and classes it, in the 1955 ISCC-NBS system, as a very pale green, block 148 [1]. Maerz and Paul's 1930 dictionary carries the same name on plate 34 B2, also dated to 1912 [1]. The nearest named colors on file are [[pale-neropalin-blue]], [[burn-blue]], [[pale-russian-blue]] and [[pale-aqua]], at 2.5, 3.9, 5, 3.9, 4.9 and 4.9 ΔE [1]. [[periwinkle]] and [[grey]] turn up far more often than chance in paintings that also carry this color, alongside [[slate-grey]] [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to Sky Grey in 357 of 23,781 paintings, about 1.5 percent, as photographed [2]. It plays a highlight in 94 percent of those appearances, the pale note at the top of a tone, not a shadow or a midtone [2]. Gaspard Dughet, Carlos de Haes and Camille Pissarro all use it well above the archive's average rate [2].\n\nThe earliest dated match is a 1401 Madonna and Child by Lorenzo di Niccolò, four centuries before Ridgway recorded the name, which only shows a similar screen color was photographed there, not that anyone called it Sky Grey, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the sky",
+   "first_recorded": "Ridgway, 1912 (plate XXXIV, hue 45′′)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "pale-neropalin-blue",
+   "burn-blue",
+   "pale-russian-blue",
+   "pale-aqua"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "sky-blue",
+    "gloss": "same root word, a saturated mid-blue rather than a near-white grey"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 357,
+  "role": {
+   "highlight": 0.94
+  },
+  "company": [
+   "Periwinkle",
+   "Grey",
+   "Slate"
+  ],
+  "measured": {
+   "lch": [
+    79,
+    7,
+    257
+   ],
+   "nearest": [
+    [
+     "Pale Neropalin Blue",
+     2.5
+    ],
+    [
+     "Burn Blue",
+     3.9
+    ],
+    [
+     "Pale Russian Blue",
+     4.9
+    ],
+    [
+     "Pale Aqua",
+     4.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955, Maerz and Paul 1930 and other name records, with plate/block locators and nearest-name match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which color standard first records the name Sky Grey, and when?",
+   "choices": [
+    "Ridgway, 1912",
+    "CSS, 1996",
+    "xkcd, 2010",
+    "RAL, 1927"
+   ],
+   "answer": "Ridgway, 1912",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Sky Grey and Sky Blue are the same color at different names.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "In our archive, Sky Grey most often appears as a:",
+   "choices": [
+    "highlight",
+    "shadow",
+    "midtone"
+   ],
+   "answer": "highlight",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Sky Grey is a near-white from 1912, built on the same word as the much bluer Sky Blue."
+ ],
+ "words": 240,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

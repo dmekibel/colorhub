@@ -1,0 +1,130 @@
+{
+ "slug": "dawn-grey",
+ "name": "Dawn Grey",
+ "hex": "#9FA49B",
+ "names": [
+  "Dawn Grey"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Dawn Grey is a soft, greenish grey named for first light, recorded in Ridgway's 1912 atlas, carried into the ISCC-NBS system of 1955, and one of the more common colors in our painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Named for first light",
+   "body": "Our data files \"dawn\" as a plant-and-landscape word, and Dawn Grey is a muted version of its parent family color, [[dawn]] [1]. Ridgway's 1912 atlas plots it on plate LII at hue 35′′′′′, tone d, reading from an aged scan, and notes it was also cited by the Maerz and Paul dictionary of 1930 and carried into the ISCC-NBS system of 1955 as block 190 [1]. In LCH terms it measures lightness 67, chroma 5, hue 131 degrees: a light, barely saturated green-grey [1].\n\nIts nearest distinct neighbor by computed color distance is [[pearl|Pearl]], 3.2 units away and read in our data as \"almost the same\" [2]. One step further is [[bluish-grey|Bluish Grey]], 4.3 units off, also \"almost the same\" [2]. Our library also notes a company it keeps on canvas, discussed below [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a close match covers enough of the canvas in 643, as photographed, more common than 86 percent of the named colors we track [3]. It peaks in paintings from the 1900s, at 1.7 times the rate expected from that century's share of the archive [3]. Eugène Boudin is its most devoted painter here, with the color present in 16 of 33 of his works, more than eight times the baseline of the museums those works come from [3]. It shares canvases more than chance with [[harbor-rat|Harbor Rat]] and [[deep-neutral-grey|Deep Neutral Grey]], a pairing of greys and dulled browns that fits a dawn light [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "dawn, first light",
+   "first_recorded": "Ridgway, 1912",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "pearl",
+   "bluish-grey",
+   "hathi-grey",
+   "cement"
+  ],
+  "parent": "dawn",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 643,
+  "measured": {
+   "lch": [
+    67,
+    5,
+    131
+   ],
+   "nearest": [
+    [
+     "Pearl",
+     3.2
+    ],
+    [
+     "Bluish Grey",
+     4.3
+    ],
+    [
+     "Hathi Grey",
+     4.4
+    ],
+    [
+     "Cement",
+     4.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/nodes-d.json): Dawn Grey — Ridgway 1912, plate LII, hue 35′′′′′, tone d; Maerz and Paul 1930; ISCC-NBS 1955, block 190",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-d.json): nearest distinct neighbors by CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings, as photographed, data/graph/fieldnotes/d.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which painter in our archive is most devoted to Dawn Grey?",
+   "choices": [
+    "Eugène Boudin",
+    "Claude Monet",
+    "Eastman Johnson",
+    "Henri de Toulouse-Lautrec"
+   ],
+   "answer": "Eugène Boudin",
+   "kind": "pick"
+  },
+  {
+   "q": "Dawn Grey is a muted version of which family color?",
+   "choices": [
+    "Dawn",
+    "Dark Teal",
+    "Dark Violet",
+    "Champagne"
+   ],
+   "answer": "Dawn",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Eugène Boudin, painter of misty harbor mornings, used this grey more than eight times as often as his peers."
+ ],
+ "words": 272,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No book concordance hits for this slug; written from the color graph, library and archive data only.",
+   "lint 2026-10-09"
+  ]
+ }
+}

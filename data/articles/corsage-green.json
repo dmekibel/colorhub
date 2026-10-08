@@ -1,0 +1,126 @@
+{
+ "slug": "corsage-green",
+ "name": "Corsage Green",
+ "hex": "#5F9C82",
+ "names": [
+  "Corsage Green"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Corsage Green is a light, muted green from Maerz and Paul's 1930 dictionary, named for the pinned flower arrangement though the dictionary never says which bloom it had in mind.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Named for a flower, unspecified",
+   "body": "Maerz and Paul list Corsage Green at #5F9C82 on plate 28, row G, column 6 of their 1930 dictionary, dating its first recorded use to 1927 [1]. The ISCC-NBS circular of 1955 files the same swatch as \"light green\" [1]. A corsage is a small bouquet pinned to clothing, but which flower or greenery gave the color its name is undocumented in the 29 books behind our concordance [1].\n\nIn our color graph the nearest named neighbor is [[bouquet-green|Bouquet Green]], 3.8 units away, a fitting companion given the shared floral naming [1]. A little further, at 5.2 units, is [[motmot-green|Motmot Green]] [1]. The Munsell notation is 6.3G 5.9/4.6, and the swatch sits with our [[green|green]] family; its de2000 distance from a teal reading would place it near [[teal|teal]] as well [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 0.17% of 23,781 paintings, 41 of them, as photographed, with the within-painting lens counting 19 [2]. It peaks in the 1900s, present in 0.5% of the 1,674 paintings from that century, 3.9 times the rate its museums would predict [2]. Within a painting it most often sits as a mid-tone, in 47% of its 19 appearances [2]. It is most over-represented in France, 3.1 times the expected rate, 11 of 3,443 French paintings in the archive [2]. The earliest match dates to 1514, by Juan de Flandes, 416 years before Maerz and Paul recorded the name, a floor rather than a first [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1930 (maerz-paul)",
+   "source": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930"
+  },
+  "aka": [],
+  "siblings": [
+   "bouquet-green",
+   "motmot-green",
+   "deep-malachite-green",
+   "dull-teal"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 41,
+  "measured": {
+   "lch": [
+    59.7,
+    26.9,
+    164.0
+   ],
+   "nearest": [
+    [
+     "Bouquet Green",
+     3.1
+    ],
+    [
+     "Motmot Green",
+     3.2
+    ],
+    [
+     "Deep Malachite Green",
+     4.1
+    ],
+    [
+     "Dull Teal",
+     4.1
+    ]
+   ]
+  },
+  "iscc_nbs": {
+   "name": "light green",
+   "de": 5.5
+  },
+  "munsell": "6.3G 5.9/4.6"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and name graph (data/library.json, data/graph/): Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930; nearest names by Lab-space distance",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed color match, as photographed",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "According to Maerz and Paul, in what year was Corsage Green first recorded?",
+   "choices": [
+    "1927",
+    "1912",
+    "1955",
+    "1888"
+   ],
+   "answer": "1927",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the dictionary names the specific flower behind Corsage Green.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Corsage Green turns up almost four times more often than expected in paintings from the 1900s."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits; which flower gave the name is undocumented in our sources.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 272
+}

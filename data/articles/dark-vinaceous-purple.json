@@ -1,0 +1,152 @@
+{
+ "slug": "dark-vinaceous-purple",
+ "name": "Dark Vinaceous-Purple",
+ "hex": "#7B4B51",
+ "names": [
+  "Dark Vinaceous-Purple"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Dark Vinaceous-Purple is a muted wine-brown from Ridgway's 1912 chart, close enough to Perilla Purple that the two are hard to tell apart on screen.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A chart color, not a word story",
+   "body": "Ridgway's 1912 plate XXXVIII gives this hue the name Dark Vinaceous-Purple, hue 67′′, tone k, and the ISCC-NBS system of 1955 files the nearest category as \"dark purplish red\" in its block 259 [1]. The nearest named colors on file are [[perilla-purple]], [[tuscan-red]] and [[dahlia-carmine]], at 2.6, 3.1 and 4 ΔE [1]. None of the 29 books in our concordance mentions this name on its own, so why \"purple\" was kept for a color the modern system reads as brown is undocumented [2].\n\nIn LCH terms it measures lightness 38, chroma 22, hue 13 degrees, Munsell 1.6R 3.7/4.2 [1]. Its closest match in the library is [[perilla-purple]], about 2.6 CIEDE2000 units away, and [[tuscan-red]] sits only slightly further at 3.1 units [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A match within six CIEDE2000 units covering at least five percent of the canvas turns up in 84 of our 23,781 archive paintings, about 0.35 percent, as photographed [4]. It peaks in the 1920s, in 6 of 237 paintings, at 7.2 times the overall rate, and Henri Matisse carries it in three of his fifty paintings here, seventeen times his own museums' baseline [4]. Inside a painting it most often sits as a mid-tone, in 56 percent of its appearances [4].\n\nThe earliest dated match is an anonymous *Portrait of a Woman* from the year 100, eighteen centuries before Ridgway recorded the name in 1912; the archive's early centuries are thin, so this is a floor, not a first, and a photograph of an aged canvas is a screen color, not a pigment test [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Ridgway's chart position; the family word is Latin for wine-colored",
+   "first_recorded": "1912, Ridgway, plate XXXVIII",
+   "source": "ColorHub color library; Ridgway, Color Standards and Color Nomenclature (1912)"
+  },
+  "aka": [],
+  "siblings": [
+   "perilla-purple",
+   "tuscan-red",
+   "dahlia-carmine",
+   "indian-lake"
+  ],
+  "parent": "dark-vinaceous",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#7B4B51",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 84,
+  "painters": [
+   {
+    "name": "Henri Matisse",
+    "hits": 3,
+    "of": 50,
+    "lift": 16.99
+   }
+  ],
+  "peak_decade": {
+   "decade": 1920,
+   "lift": 7.17
+  },
+  "role": "mid",
+  "measured": {
+   "lch": [
+    38,
+    22,
+    13
+   ],
+   "nearest": [
+    [
+     "Perilla Purple",
+     2.6
+    ],
+    [
+     "Tuscan Red",
+     3.1
+    ],
+    [
+     "Dahlia Carmine",
+     4.0
+    ],
+    [
+     "Indian Lake",
+     4.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway, Color Standards and Color Nomenclature (1912), plate XXXVIII, hue 67′′, tone k; ISCC-NBS, NBS Circular 553 (1955), block 259",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "Color-kb concordance of the 29 color books for this name: no hits",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1912 plate records Dark Vinaceous-Purple?",
+   "choices": [
+    "Plate XXXVIII",
+    "Plate XXI",
+    "Plate III",
+    "Plate LII"
+   ],
+   "answer": "Plate XXXVIII",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dark Vinaceous-Purple and Perilla Purple are close enough to be hard to tell apart on screen.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A 1912 chart color close enough to Perilla Purple to pass for it on screen."
+ ],
+ "words": 289,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

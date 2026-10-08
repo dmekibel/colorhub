@@ -1,0 +1,128 @@
+{
+ "slug": "tyrolite-green",
+ "name": "Tyrolite Green",
+ "hex": "#56AEA1",
+ "names": [
+  "Tyrolite Green"
+ ],
+ "tier": "pigment",
+ "depth": "brief",
+ "lede": "Tyrolite Green is a bluish teal first plated by Ridgway in 1912, named for tyrolite, a copper mineral, and sold under at least nine other trade names for nearly the same color.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A mineral teal with many aliases",
+   "body": "Ridgway's 1912 atlas plates this color at plate VII, hue 39, tone b, a scan of an aged plate treated here as approximate [1]. The 1955 ISCC-NBS circular later classed it as light bluish green, 1.8 units from its block center, and Maerz and Paul's 1930 dictionary cites the same 1912 source [1]. The Munsell notation is 3.8BG 6.5/5.7 [1]. Our library's classification tags the name as a mineral word, tyrolite, a copper arsenate; beyond that the books consulted do not explain who coined the color name or when [1].\n\nOur library also lists this exact hue under at least nine commercial names, including Aqua Sky, Beryl Green, Bridge Blue and Blue Turquoise, a sign that paint and ink makers rediscovered the same teal repeatedly under different brands [1]. The closest distinct named color on screen is [[keppel]], 3.0 units away and read as more vivid; [[verditter-blue]] and [[blue-turquoise]] both sit at 3.2, almost the same [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is a rare color in our painting archive: it appears in only 0.04 percent of 23,781 paintings, 10 of them, and the within-painting lens isolates it as a dominant area in just 6, as photographed [2]. That ranks it rarer than 73 percent of the named colors we track [2]. The earliest match is a 1640 painting by Louis Le Nain, 272 years before Ridgway's 1912 record of the name; that gap marks a look-alike hue in an aged photograph, not the pigment itself, and with only 8 dated matches the pattern is thin, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "tyrolite, a copper mineral",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "Ridgway, Color Standards and Color Nomenclature"
+  },
+  "aka": [
+   "Aqua Sky",
+   "Beryl Green",
+   "Bridge Blue",
+   "Blue Turquoise"
+  ],
+  "siblings": [
+   "keppel",
+   "verditter-blue",
+   "blue-turquoise",
+   "sky-steel"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 10,
+  "n_within": 6,
+  "measured": {
+   "lch": [
+    65.6,
+    29.7,
+    182.8
+   ],
+   "nearest": [
+    [
+     "Keppel",
+     3.0
+    ],
+    [
+     "Blue Turquoise",
+     3.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway (1912) plate VII, hue 39; ISCC-NBS and Maerz and Paul cross-reference; alternate commercial names",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub graph: nearest named colors (look-alike data)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What mineral gives Tyrolite Green its name?",
+   "choices": [
+    "Tyrolite, a copper mineral",
+    "Beryl",
+    "Turquoise, the gem",
+    "Jade"
+   ],
+   "answer": "Tyrolite, a copper mineral",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our library lists several other commercial names for the same teal hex as Tyrolite Green.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Our library lists at least nine other names — Aqua Sky, Beryl Green, Bridge Blue among them — for this same teal.",
+  "Tyrolite Green sits only 3.0 color-units from Keppel, close enough to read as the same hue."
+ ],
+ "words": 300,
+ "status": "checked",
+ "checked": {
+  "by": "claude",
+  "date": "2026-10-08",
+  "issues": [
+   "No source gives who coined the name or when, beyond the 1912 Ridgway plate.",
+   "Archive counts are very thin (n=6-10); the first-seen date is a look-alike match, not pigment evidence.",
+   "lint 2026-10-09"
+  ]
+ }
+}

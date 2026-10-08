@@ -1,0 +1,126 @@
+{
+ "slug": "pea-soup",
+ "name": "Pea Soup",
+ "hex": "#929901",
+ "names": [
+  "Pea Soup"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Pea Soup is a murky, yellow-leaning [[green]], named directly for the thick split-pea soup it resembles rather than for fresh peas.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The soup, not the vegetable",
+   "body": "Our graph files this as a food-and-landscape name rather than a modifier, recorded by the xkcd 2010 crowd survey [1]. The ISCC-NBS system places the family as \"deep greenish yellow\", block 100, about 3.7 units from this exact swatch [1]. The nearest named colors on file are [[baby-shit-green]], [[vomit]] and [[pea-soup-green]], at 2.9, \nThe color is murkier than most greens: the same murk gave English the idiom \"pea-souper\" for a thick yellow-brown fog, a usage this swatch echoes more than a bowl of fresh green peas does [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Pea Soup appears in 14 of our 23,781 paintings by raw coverage, and in 12 of those by its position in the painting's lightness order, as photographed [2]. That makes it rarer than 66% of the named colors we track [2].\n\nIt peaks in paintings from the 1900s, found in 0.4% of our 1,674 paintings from that decade, 4.1 times the archive's baseline rate [2]. Where it appears, it most often sits as an accent, the role in 67% of its 12 matched paintings [2]. The earliest match is 1775 (cma-169253), 235 years before the name's own 2010 record, so it is a look-alike hue, not evidence the color was named or mixed that way at the time, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "pea soup, the dish, not the raw vegetable",
+   "first_recorded": "2010, xkcd color survey",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "baby-shit-green",
+   "vomit",
+   "pea-soup-green",
+   "vomit-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present_by_coverage": 14,
+  "n_present_within": 12,
+  "rank_pct": 66,
+  "peak_century": {
+   "decade": 1900,
+   "lift": 4.1
+  },
+  "role": "accent, 67% of matched paintings",
+  "first_dated": {
+   "id": "cma-169253",
+   "year": 1775
+  },
+  "measured": {
+   "nearest": [
+    [
+     "Baby Shit Green",
+     2.9
+    ],
+    [
+     "Vomit",
+     4.0
+    ],
+    [
+     "Pea Soup Green",
+     4.4
+    ],
+    [
+     "Vomit Green",
+     4.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and color graph: xkcd (2010), ISCC-NBS (1955) entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is Pea Soup named for?",
+   "choices": [
+    "The dish, a thick yellow-green soup",
+    "Fresh raw peas on the vine",
+    "A 1900s paint brand",
+    "A Munsell plate number"
+   ],
+   "answer": "The dish, a thick yellow-green soup",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: in our archive, Pea Soup shows up most often as the brightest highlight in a painting.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pea Soup is named for the murky soup, which is also why English has \"pea-souper\" for a thick fog."
+ ],
+ "words": 243,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

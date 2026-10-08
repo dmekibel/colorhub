@@ -1,0 +1,156 @@
+{
+ "name": "Civette Green",
+ "hex": "#688462",
+ "names": [
+  "Civette Green"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Civette Green is a dark yellowish green recorded by Ridgway in 1912, filed by the ISCC-NBS in 1955, and matched today to the industrial RAL 6011.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Ridgway to RAL",
+   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* gives this hue on plate XVIII, hue 31 minutes, tone k [1]. Maerz and Paul's 1930 dictionary lists the same color, first recorded in 1905, and the ISCC-NBS 1955 report files it as a dark yellowish green [2][3]. The name likely points to *civet*, the small carnivore whose coat runs toward this muted olive-green, though none of the sources we checked states this directly, so the link is undocumented here [2].\n\nThe modern industrial palette RAL lists a near-duplicate, RAL 6011, about 2 units away [4]. The nearest named colors on file are [[hay-s-green]], [[slate-green]], [[american-green]] and [[dark-sage]], at 2.9, 4.1, 4.2 and 4.6 ΔE [5]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "ColorHub's archive finds this color in 186 of 23,781 paintings, as photographed [6]. It peaks in the 1930s, in 5 of 69 paintings, with a lift of more than nine times the archive's average rate for that decade [6]. Harald Giersing, Georges Seurat, Vincent van Gogh and Paul Cezanne each carry it more than most painters in the set [6]. The count is a computed match on photographed, varnished paint, not a pigment identification [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented (likely civet, the animal)",
+   "first_recorded": "1905, Maerz & Paul 1930",
+   "source": "Ridgway, Color Standards and Color Nomenclature; ISCC-NBS 1955"
+  },
+  "aka": [],
+  "siblings": [
+   "hay-s-green",
+   "slate-green",
+   "american-green",
+   "dark-sage"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 186,
+  "match": {
+   "nearest_library": "Sage Green",
+   "de2000": 7.6,
+   "ral_duplicate": "RAL 6011"
+  },
+  "measured": {
+   "lch": [
+    52,
+    23,
+    138
+   ],
+   "nearest": [
+    [
+     "Hay's Green",
+     2.9
+    ],
+    [
+     "Slate Green",
+     4.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway, Color Standards and Color Nomenclature (1912), plate XVIII, hue 31′, tone k",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz & Paul, A Dictionary of Color (1930), plate 2, cell E8",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS (1955), block 137",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color library: RAL 6011, approximate screen value",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub color library: nearest named colors by CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1912 nomenclature first places Civette Green on a plate?",
+   "choices": [
+    "Ridgway's Color Standards",
+    "Pantone",
+    "Crayola",
+    "The RAL registry"
+   ],
+   "answer": "Ridgway's Color Standards",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: a source we checked confirms Civette Green is named for the civet.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "In which decade does Civette Green peak in ColorHub's archive?",
+   "choices": [
+    "1930s",
+    "1500s",
+    "1700s",
+    "1800s"
+   ],
+   "answer": "1930s",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Civette Green has a near-duplicate in the modern industrial RAL palette, about 2 units away."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "slug": "civette-green",
+ "words": 215
+}

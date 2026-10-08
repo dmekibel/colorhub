@@ -1,0 +1,143 @@
+{
+ "slug": "old-pink",
+ "name": "Old pink",
+ "hex": "#CB9C9D",
+ "names": [
+  "Old pink"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Old pink is a moderate, dusty pink carried in Ridgway's 1912 nomenclature and the ISCC-NBS system of 1955, measured in our color graph as identical to a separately sourced name, Corinthian Pink.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The same pink, twice over",
+   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* records this hue, and the ISCC-NBS system later filed it as a moderate pink, both cited in our library alongside Maerz and Paul's 1930 dictionary [1]. Our color graph finds a separately recorded name, Corinthian Pink, at zero units of difference, an exact duplicate under a different name [2]. The library also lists eight further alternate names on nearby chips, among them Tuscany, Light Purplish Vinaceous and Mauve Mist, though only some resolve to colors in our data [2].\n\nIts nearest distinct relatives in the color graph are [[tuscany]], almost the same, and [[pastel-pink]] and [[rosy-brown]], both a little further off [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, as photographed, a color within six units of Old pink covers at least five per cent of a canvas in 76 works, rarer than 52 per cent of our named colors [4]. It peaks in the 1900s, in 6 of 1,674 paintings, at 1.8 times the archive's overall rate, and is most over-represented in paintings from India, at 3.9 times expected [4]. The earliest dated appearance in our archive is the year 1000, nine centuries before the name's own 1912 record, a look-alike hue, not proof of pigment or dye, a floor and not a first, since the archive's early centuries are thin [4]. These remain photographs of aged, varnished paintings, read as screen colors [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented beyond the catalogue entries",
+   "first_recorded": "Ridgway, Color Standards and Color Nomenclature (1912)",
+   "source": "ColorHub color library (Ridgway 1912; Maerz and Paul 1930; ISCC-NBS 1955)"
+  },
+  "aka": [
+   "Tuscany",
+   "Corinthian Pink",
+   "Light Purplish Vinaceous"
+  ],
+  "siblings": [
+   "corinthian-pink",
+   "tuscany",
+   "pastel-pink",
+   "rosy-brown"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#CB9C9D",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 76,
+  "countries": [
+   {
+    "key": "India",
+    "n": 721,
+    "hits": 22,
+    "lift": 3.9
+   }
+  ],
+  "measured": {
+   "lch": [
+    68.7,
+    18.7,
+    19.5
+   ],
+   "nearest": [
+    [
+     "Corinthian Pink",
+     0.0
+    ],
+    [
+     "Tuscany",
+     2.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-o.json): Ridgway 1912; ISCC-NBS 1955 block 57 (M); Maerz & Paul 1930, cited by NBS Circular 553 (1955)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json and data/graph/edges-o.json), exact-duplicate note, CIEDE2000 0.0 to Corinthian Pink; alternate names list",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-o.json), CIEDE2000 look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which separately named color is an exact duplicate of Old pink in our color graph?",
+   "choices": [
+    "Corinthian Pink",
+    "Rosy Brown",
+    "Pastel Pink",
+    "Mauve Mist"
+   ],
+   "answer": "Corinthian Pink",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Old pink is most over-represented in paintings from India in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Old pink and a separately named Corinthian Pink measure exactly the same color."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 261
+}

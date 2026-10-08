@@ -1,0 +1,126 @@
+{
+ "slug": "mars",
+ "name": "Mars",
+ "hex": "#E38F48",
+ "names": [
+  "Mars"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Mars is a warm orange named for the planet, one of a family of Mars pigments (Mars yellow, Mars red, Mars black) made from synthetic iron oxide rather than natural earths.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "An iron-oxide name",
+   "body": "The library dates this orange to Maerz and Paul's 1930 dictionary, first recorded in 1835, plate 11 L 9, with earlier alternate names Tron Yellow (1860) and Siderin Yellow also tied to the same plate [1]. The Mars pigments take their name from the alchemical sign for iron, which was also the sign for the planet and the god [1].\n\nThey were developed as a cheaper, more consistent substitute for natural ochres and siennas once chemists learned to precipitate synthetic iron oxide [1]. The ISCC-NBS dictionary of 1955 files this value as a moderate brown [1]. The nearest named colors on file are [[faded-orange]] and [[dull-orange]], at 2.7 and 3.1 ΔE [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings finds a color within six units of this one in 112, about 0.5 percent, as photographed [2]. The earliest is a 1415 panel by Martino di Bartolomeo, and it peaks in the 1500s, in 9 of 417 paintings, at 4.6 times the archive's overall rate [2]. It most often sits as a highlight rather than a shadow, and shares canvases with [[ochre|Ochre]] and [[sienna|Sienna]] more than chance would predict [2]. The match is a screen color, not proof of an actual iron-oxide pigment [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the alchemical and astrological sign for iron (and Mars)",
+   "first_recorded": "1835 (Maerz and Paul)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "faded-orange",
+   "dull-orange",
+   "persian-orange",
+   "cadmium-orange"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 112,
+  "match": {
+   "hex": "#E38F48",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "measured": {
+   "lch": [
+    67,
+    56,
+    63
+   ],
+   "nearest": [
+    [
+     "Faded Orange",
+     2.7
+    ],
+    [
+     "Dull Orange",
+     3.1
+    ],
+    [
+     "Persian Orange",
+     3.2
+    ],
+    [
+     "Cadmium Orange",
+     3.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz and Paul 1930, ISCC-NBS 1955",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the \"Mars\" in Mars pigments refer to?",
+   "choices": [
+    "The alchemical sign for iron",
+    "A paint company founder",
+    "A shade of red soil in France",
+    "The Roman color of war banners"
+   ],
+   "answer": "The alchemical sign for iron",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Mars pigments are made from the same natural earths as ochre.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Mars pigments are named for iron's old alchemical sign, not the red planet directly."
+ ],
+ "words": 230,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits in color-kb for this slug; written from library and archive data only.",
+   "lint 2026-10-09"
+  ]
+ }
+}

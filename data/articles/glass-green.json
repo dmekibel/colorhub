@@ -1,0 +1,128 @@
+{
+ "slug": "glass-green",
+ "name": "Glass Green",
+ "hex": "#D9D296",
+ "names": [
+  "Glass Green"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Glass Green is a pale, slightly yellow green first set down by Ridgway in 1912 and repeated independently in both the ISCC-NBS and Maerz and Paul dictionaries.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Three dictionaries, one green",
+   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* places Glass Green on plate XXXI, hue 29 double-prime, tone d [1]. Maerz and Paul's 1930 dictionary carries an independent record of the same name back to 1790, on plate 18, swatch F3 [1]. The ISCC-NBS system of 1955 files it as a light yellow green, block 119 [1]. Why the color was called 'glass' is undocumented in the sources we checked [1].\n\nThe nearest named colors on file are [[amber-white]], [[primrose-yellow]] and [[baryta-yellow]], at 2.8, 3.8 and 3.8 ΔE [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within six units of Glass Green covers at least five percent of the canvas in 528 of our 23,781 paintings, 2.22 percent, as photographed; the within-painting lens narrows that to 319 [2]. That ranks it ahead of 77 percent of the named colors we track [2]. It peaks in the 1900s, in 33 of 1,674 paintings, at 2.0 percent of that decade's paintings, 1.8 times the archive's overall rate, and it most often plays a light, in 67 percent of its 319 appearances [2].\n\nArnoud van Halen is its most devoted painter, using it in nine of his 50 paintings here, 4.9 times the rate of the museums those works come from [2]. It shares canvases with [[courge-green|Courge Green]] and [[dull-citrine|Dull Citrine]] more than chance would predict, with lifts of 8.7 and 5.7 [2]. The earliest matching painting dates to 1413, almost exactly 499 years before Ridgway recorded the name in 1912 — a look-alike hue in an aged photograph, not proof the color existed as a pigment that early, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1790, per Maerz and Paul (1930); standardized by Ridgway, 1912",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "amber-white",
+   "primrose-yellow",
+   "baryta-yellow",
+   "green-earth"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 319,
+  "pct": 2.22,
+  "rank_percentile": 77,
+  "measured": {
+   "lch": [
+    83.5,
+    31.4,
+    102.3
+   ],
+   "munsell": "8.3Y 8.3/4.0",
+   "app": [
+    "Beige",
+    7.3
+   ],
+   "nearest": [
+    [
+     "Amber White",
+     2.8
+    ],
+    [
+     "Primrose Yellow",
+     3.8
+    ],
+    [
+     "Baryta Yellow",
+     3.8
+    ],
+    [
+     "Green Earth",
+     3.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and graph data: Ridgway 1912 / ISCC-NBS 1955 / Maerz & Paul 1930 / RAL entries (data/library.json, data/graph/)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, computed color match, as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "According to Ridgway's 1912 nomenclature, where does Glass Green sit?",
+   "choices": [
+    "Plate XXXI, hue 29''",
+    "Plate II, hue 7",
+    "Plate XX, hue 43'",
+    "Plate XLVIII, hue 37''''"
+   ],
+   "answer": "Plate XXXI, hue 29''",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Ridgway's dictionary explains why the name 'Glass Green' was chosen.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Glass Green shares its canvases with Courge Green and Dull Citrine far more often than chance would allow."
+ ],
+ "words": 303,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance hits; etymology of 'glass' marked undocumented.",
+   "lint 2026-10-09"
+  ]
+ }
+}

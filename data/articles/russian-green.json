@@ -1,0 +1,138 @@
+{
+ "slug": "russian-green",
+ "name": "Russian Green",
+ "hex": "#679267",
+ "names": [
+  "Russian Green"
+ ],
+ "tier": "place",
+ "depth": "short",
+ "lede": "Russian Green is a muted, slightly grey-leaning green, recorded in color dictionaries since about 1834, and close enough to a traditional Japanese bamboo green that both land in the same small patch of the color space.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two naming systems, one green",
+   "body": "Maerz and Paul's 1930 dictionary dates the name Russian Green to about 1834, and Ridgway's 1912 standards plate a close relative on plate XLII, hue 37 triple-prime, tone i, with the Munsell notation 0.3G 5.5/4.8 [1]. The ISCC-NBS dictionary of 1955 files it as a moderate yellowish green, only 1.1 units from that block's center, one of the closest matches in this whole batch [1]. Our library separately lists Wakatake-iro, young bamboo color, from the traditional Japanese color system, whose own hex sits close enough to Russian Green to count among its listed sources here, though the two names come from unrelated traditions [4]. Its nearest named neighbor is Mineral Green, 2.7 units away, then Slate Green at 3.4 [1]. It belongs to, [[russian-violet]] and [[dark-russian-green]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Russian Green covers at least five percent of the canvas in 64 works, a little over a quarter of one percent [2]. The earliest dated example is Lucas Cranach the Elder's 1532 portrait of Martin Luther, a floor and not a first, since the archive's early centuries are thin [2]. It peaks in the 1910s, in 7 of 523 paintings, nearly five times the archive's overall rate for that decade, and Paul Cezanne and Gustav Klimt each carry it in five of their fifty paintings here, both over thirty-seven times the baseline rate [2]. It shares a canvas with [[viridian]] far more than any other color word, nearly twenty-three times the baseline [2]. These are screen-color matches on photographs of aged, varnished paintings, not pigment identifications [2]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Russia; the specific reason for this green is undocumented",
+   "first_recorded": "c. 1834 (Maerz & Paul, 1930, plate 30, swatch D7)",
+   "source": "ColorHub color library (Maerz & Paul 1930; Ridgway 1912)"
+  },
+  "aka": [
+   "Wakatake-iro (Japanese, a close but unrelated match)"
+  ],
+  "siblings": [
+   "russian-blue",
+   "russian-violet",
+   "dark-russian-green",
+   "mineral-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "若竹色 (Wakatake-iro), young bamboo color"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#679267",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 64,
+  "peak_decade": 1910,
+  "top_painter": {
+   "name": "Paul Cezanne",
+   "lift": 37.16
+  },
+  "company": [
+   {
+    "word": "Viridian",
+    "lift": 22.81
+   }
+  ],
+  "measured": {
+   "lch": [
+    56.5,
+    29.9,
+    142.5
+   ],
+   "nearest": [
+    [
+     "Mineral Green",
+     2.66
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS 1955, Maerz & Paul 1930, Ridgway 1912, Munsell notation entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color library: traditional Japanese color list (Wakatake-iro)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which traditional system names a close match to Russian Green \"young bamboo color\"?",
+   "choices": [
+    "Japanese traditional colors",
+    "RAL Classic",
+    "Pantone",
+    "Crayola"
+   ],
+   "answer": "Japanese traditional colors",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Russian Green and Wakatake-iro come from the same naming tradition.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Russian Green sits close enough to a traditional Japanese bamboo green, Wakatake-iro, that the two land in nearly the same spot in color space."
+ ],
+ "words": 317,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

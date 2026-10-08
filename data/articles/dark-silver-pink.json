@@ -1,0 +1,131 @@
+{
+ "slug": "dark-silver-pink",
+ "name": "Dark silver pink",
+ "hex": "#BAABA3",
+ "names": [
+  "Dark silver pink"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dark silver pink darkens [[silver-pink]], a muted grey-pink, and it is one of the more frequent colors in our archive, matched in over five per cent of paintings, mostly as a highlight.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A darkened grey-pink",
+   "body": "The name applies dark to [[silver-pink]], a grey-pink the ISCC-NBS *Dictionary of Color Names* filed in 1955 as block 8 [1]. Our data traces this darker form to Ridgway's 1912 color work and the 1955 dictionary as well, but the exact plate and block numbers for this specific darkened tone are not recorded in our sources, so they are left undocumented here [1].\n\nMeasured against our Color Graph, its nearest neighbors are [[pale-purple-drab]] and [[sweet-pea]], each about 3.5-3.8 units away and almost the same color; [[pale-ecru-drab]] is a touch lighter [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A match for this color covers at least five per cent of the canvas in 1,321 of 23,781 paintings, about 5.6 per cent, as photographed, mostly as a highlight (85 per cent of its appearances) [3]. It is especially frequent in Pahari paintings, 31 of 118, nearly 4.7 times the archive's overall rate, and in the work of Ming-dynasty painter Shen Zhou, 7 of his 12 paintings [3]. The earliest dated match is an Egyptian ostracon from around 1295 BCE, a floor on the color's age in painting rather than a claim of its first appearance [3]. As photographed: these are computed color matches on museum photographs of aged, varnished paintings, not a pigment test [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the parent color Silver Pink, darkened; the exact 1912/1955 plate and block are undocumented here",
+   "first_recorded": "undocumented beyond a general 1912/1955 listing in our sources",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "pale-purple-drab",
+   "sweet-pea",
+   "pale-ecru-drab"
+  ],
+  "parent": "silver-pink",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#BAABA3",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1321,
+  "rate": 0.0555,
+  "role": {
+   "highlight": 0.85,
+   "mid": 0.14,
+   "shadow": 0.01
+  },
+  "movements": [
+   [
+    "Pahari",
+    118,
+    31,
+    4.73
+   ]
+  ],
+  "measured": {
+   "lch": [
+    71.0,
+    7.3,
+    56.4
+   ],
+   "nearest": [
+    [
+     "Pale Purple-Drab",
+     3.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): modifier-grammar entry over the parent color Silver Pink (ISCC-NBS 1955, block 8; general Ridgway 1912 listing, plate/block for this darkened form undocumented)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub Color Graph look-alikes (data/graph/edges-d.json), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Dark silver pink is built by darkening which color?",
+   "choices": [
+    "Silver Pink",
+    "Rose Grey",
+    "Ash Pink",
+    "Dusty Pink"
+   ],
+   "answer": "Silver Pink",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: in paintings that carry Dark silver pink, it is usually a shadow color rather than a highlight.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Present in over one painting in twenty in our archive, almost always as a highlight."
+ ],
+ "words": 245,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}

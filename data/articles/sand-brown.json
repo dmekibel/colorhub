@@ -1,0 +1,139 @@
+{
+ "slug": "sand-brown",
+ "name": "Sand Brown",
+ "hex": "#CBA560",
+ "names": [
+  "Sand Brown"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Sand Brown is a dusty, golden-tan color named for dry sand, one of the most common colors in our painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A landscape word, not a modifier",
+   "body": "Our graph files this as a landscape word in its own right rather than a modifier of another name, recorded by the 2010 xkcd crowd survey [1]. The ISCC-NBS lists call its block a \"dark yellow\" [1]. In Munsell terms it sits near 1.5Y 6.9/6.2 [1].\n\nThe nearest named colors on file are [[sand-yellow]], [[olive-ocher]] and [[roe]], at 2.6, [[tan|Tan]] and [[khaki|Khaki]] sit close by in the same family [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Sand Brown is one of the most common colors in our archive: it covers at least 2% of the canvas in 2,092 of 23,781 paintings, as photographed [2]. By its position in each painting's lightness order it is found in 1,558, more common than 94% of the named colors we track [2]. It peaks in paintings from the 1300s, at nearly three times the archive's baseline rate, and is most over-represented in [[painter:francisco-de-zurbaran|Francisco de Zurbarán]]'s work, 25 times his museums' baseline across 10 of his 40 paintings here [2].\n\n[[painter:fritz-thomsen|Fritz Thomsen]] carries it even more densely, in 6 of his 18 works, and [[painter:john-singer-sargent|John Singer Sargent]] has it in 19 of his 287 [2]. The earliest match is 1150, 860 years before the name's own 2010 record, so it is a look-alike hue in an aged photograph, not proof anyone named or mixed it that way then, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "sand, the landscape material",
+   "first_recorded": "2010, xkcd color survey",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "sand-yellow",
+   "olive-ocher",
+   "roe",
+   "sandstone"
+  ],
+  "parent": "sand",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present_by_coverage": 2092,
+  "n_present_within": 1558,
+  "rank_pct": 94,
+  "top_painters": [
+   {
+    "name": "Francisco de Zurbarán",
+    "n": 10,
+    "of": 40,
+    "lift": 25
+   },
+   {
+    "name": "Fritz Thomsen",
+    "n": 6,
+    "of": 18
+   },
+   {
+    "name": "John Singer Sargent",
+    "n": 19,
+    "of": 287
+   }
+  ],
+  "first_dated": {
+   "id": "cma-135486",
+   "year": 1150
+  },
+  "measured": {
+   "nearest": [
+    [
+     "Sand Yellow",
+     2.6
+    ],
+    [
+     "Olive-Ocher",
+     3.7
+    ],
+    [
+     "Roe",
+     3.9
+    ],
+    [
+     "Sandstone",
+     4.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and color graph: xkcd (2010), ISCC-NBS (1955) entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is Sand Brown's rank among our named colors by presence in the archive?",
+   "choices": [
+    "More common than 94% of them",
+    "Rarer than 94% of them",
+    "Exactly average",
+    "Not present at all"
+   ],
+   "answer": "More common than 94% of them",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Sand Brown is especially over-represented in Zurbarán's paintings.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Sand Brown is more common than 94% of the named colors in our archive, and 25 times the baseline rate in Zurbarán's paintings."
+ ],
+ "words": 253,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

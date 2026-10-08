@@ -1,0 +1,126 @@
+{
+ "slug": "reddish-chestnut",
+ "name": "Reddish Chestnut",
+ "hex": "#A24F46",
+ "names": [
+  "Reddish Chestnut"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Reddish Chestnut is ColorHub's English name for Su'ōkō, a muted brick red that Japanese tradition names for the smoky, perfumed scent of sappanwood incense, not for a tree.",
+ "sections": [
+  {
+   "id": "japan",
+   "title": "An incense, not a nut",
+   "body": "Wikipedia's list of traditional Japanese colors gives this swatch as Su'ōkō (蘇芳香), combining suō, the sappanwood dye also used for a family of red-brown colors, with kō, \"incense\" or \"fragrance,\" naming a red tied to scent rather than sight alone [1]. ColorHub's English rendering, Reddish Chestnut, substitutes a tree and a nut for an aromatic wood dye [1]. The ISCC-NBS dictionary of 1955 places the swatch in block 15, \"moderate red,\" about 5.5 units from that block's centre [2]. The library's nearest other named color is [[pompeian-red]], 2.6 units away [2].\n\nMeasured in LCH it reads lightness 44, chroma 40, hue 33 degrees, a moderately bright, warm brick red [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match in 365 of 23,781 paintings, under 2 percent, as photographed [3]. It plays a mid-tone role in 62 percent of its occurrences [3]. Fra Angelico and Henri Matisse each carry it at nine times or more the archive's overall rate [3]. It shares canvases more than chance with the simple color word Red, at nearly 30 times the ordinary rate, and its presence peaks in the 1400s, in 47 of 945 paintings [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the sappanwood dye, by way of its incense (kō)",
+   "first_recorded": "undocumented in English; traditional Japanese usage",
+   "source": "ColorHub library (Wikipedia, \"Traditional colors of Japan\")"
+  },
+  "aka": [
+   "Su'ōkō"
+  ],
+  "siblings": [
+   "pompeian-red",
+   "redwood",
+   "acajou-red",
+   "levant-red"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Su'ōkō (蘇芳香)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 365,
+  "pct": 1.5,
+  "measured": {
+   "lch": [
+    43.8,
+    39.7,
+    32.5
+   ],
+   "nearest_iscc": [
+    "moderate red",
+    5.5
+   ],
+   "nearest": [
+    "Pompeian Red",
+    2.57
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; Wikipedia, \"Traditional colors of Japan\"; jp field)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (ISCC-NBS 1955 block 15), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23781 paintings), computed match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does kō, part of this color's Japanese name, mean?",
+   "choices": [
+    "Incense or fragrance",
+    "Chestnut",
+    "Bark",
+    "Ember"
+   ],
+   "answer": "Incense or fragrance",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: this color's name refers to a chestnut tree.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Reddish Chestnut has nothing to do with chestnuts: its Japanese name names a fragrant dyewood."
+ ],
+ "words": 212,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance hits (src empty); facts drawn from the library's own jp field, ISCC-NBS block data and the archive.",
+   "lint 2026-10-09"
+  ]
+ }
+}

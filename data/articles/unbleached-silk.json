@@ -1,0 +1,123 @@
+{
+ "slug": "unbleached-silk",
+ "name": "Unbleached Silk",
+ "hex": "#FFDDCA",
+ "names": [
+  "Unbleached Silk"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Unbleached Silk is a pale, warm cream, the color of raw silk before it is washed and whitened, and the same shade the Japanese tradition calls Shironeri.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Raw silk, two traditions",
+   "body": "Our color library carries this name from two independent sources: an English color-naming source and the Japanese traditional list, where it appears as *Shironeri* (白練), literally \"unbleached silk\" [1]. Both point to the same fact of the craft: silk fiber comes off the cocoon pale gold-cream, not white, and only turns bright white after it is boiled and bleached [1].\n\nIts nearest named neighbor in our library is [[alabaster]], a cooler, slightly less yellow cream (CIEDE2000 distance 2.9) [2]. Measured in LCH, Unbleached Silk sits at lightness 90, chroma 16 and hue 57 degrees, close to the pale end of the oranges family [2]. [[seashell-pink]], [[almond]] and [[desert-sand]] sit a little further off on the same warm, pale scale [2]. The ISCC-NBS system files the hue as \"pale yellowish pink\" (block 31) [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this cream in 57 of 23,781 paintings (0.24%, as photographed), rarer than about half the named colors we track [3]. It most often turns up as a light rather than a shadow or mid-tone, playing that role in 54% of its 39 strongest matches [3]. The earliest dated match is Filippo Lippi's work from 1441, with 42 dated paintings in all running up to 1940; the archive's early centuries are thin, so this is a floor, not a first [3]. In printed English the word pattern peaks in the 1890s, though that count mixes the color sense with silk itself as a material [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "raw, unwashed silk fiber",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "alabaster",
+   "seashell-pink",
+   "almond",
+   "desert-sand"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Shironeri (白練)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 57,
+  "measured": {
+   "lch": [
+    90,
+    16,
+    57
+   ],
+   "nearest": [
+    [
+     "Alabaster",
+     2.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Japanese traditional list, Shironeri (白練); Wikipedia",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library and Color Graph look-alikes (data/graph/), CIEDE2000, ISCC-NBS block 31",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why does raw silk start out cream-colored rather than white?",
+   "choices": [
+    "It has not yet been boiled and bleached",
+    "Silkworms only spin white thread when well fed",
+    "It is dyed cream before weaving",
+    "Sunlight slowly whitens it after weaving"
+   ],
+   "answer": "It has not yet been boiled and bleached",
+   "kind": "pick"
+  },
+  {
+   "q": "Which named color is closest to Unbleached Silk in our library?",
+   "choices": [
+    "Alabaster",
+    "Charcoal",
+    "Vermilion",
+    "Indigo"
+   ],
+   "answer": "Alabaster",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Unbleached Silk is named for raw silk fiber before it is boiled and bleached white."
+ ],
+ "words": 262,
+ "status": "checked",
+ "checked": {
+  "by": "batch-16",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); written from the color graph, library and archive only.",
+   "lint 2026-10-09"
+  ]
+ }
+}

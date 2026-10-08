@@ -1,0 +1,126 @@
+{
+ "slug": "grey-celadon",
+ "name": "Grey celadon",
+ "hex": "#819C8B",
+ "names": [
+  "Grey celadon"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Grey celadon is a soft, muted green that takes its name from celadon ware, the pale jade-green glazed pottery of East Asia, and that our library carries as a rendering of the traditional Japanese Seiji-iro.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A pottery green",
+   "body": "Our color library lists Grey celadon's source as the traditional Japanese name Seiji-iro (青磁色), glossed there as \"celadon color\" [1]. *Seiji* is the Japanese word for celadon ware itself, so the name describes the pottery glaze directly rather than a plant or landscape [1]. Celadon glazes, fired across China, Korea and Japan for centuries, range from pale jade to a deeper grey-green; this name sits toward the greyer end [2].\n\nThe nearest named color is [[surrey-green|Surrey Green]], 4.1 units away and greener; [[morning-blue|Morning Blue]] sits at 4.3, also greener [2]. In Munsell terms it sits near 3.8G 6.1/2.2: a pale, low-chroma green [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Grey celadon appears in 296 of our 23,781 paintings, as photographed, more common than 68 percent of the archive's named colors [3]. It peaks in the 1900s, in 32 of 1,674 paintings, at 2.7 times the expected rate, and Gustav Klimt is its most devoted painter, carrying it in 5 of his 50 works here, 6.7 times his museums' baseline [3]. Inside a painting it most often plays a hidden color [3]. The earliest match, dated 1470, sits within the archive's documented range for this name, with no earlier record to compare it against here, a floor and not a first, since the archive's early centuries are thin [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Seiji-iro (青磁色), named for celadon pottery glaze",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library, traditional Japanese colors list"
+  },
+  "aka": [
+   "Greenish sage"
+  ],
+  "siblings": [
+   "surrey-green",
+   "morning-blue",
+   "sage-green",
+   "bluish-grey-green"
+  ],
+  "parent": null,
+  "children": null,
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Seiji-iro (青磁色)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 296,
+  "measured": {
+   "lch": [
+    62,
+    14,
+    156
+   ],
+   "nearest": [
+    [
+     "Surrey Green",
+     4.1
+    ],
+    [
+     "Morning Blue",
+     4.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: traditional Japanese colors, Seiji-iro (青磁色)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: Munsell notation and look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Grey celadon is named for which kind of object?",
+   "choices": [
+    "Glazed pottery",
+    "A gemstone",
+    "A flower",
+    "A dye plant"
+   ],
+   "answer": "Glazed pottery",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: celadon ware comes from only one country.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Grey celadon is named directly for a pottery glaze, not a plant or a place."
+ ],
+ "words": 248,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

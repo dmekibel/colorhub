@@ -1,0 +1,132 @@
+{
+ "slug": "rinnemann-s-green",
+ "name": "Rinnemann's Green",
+ "hex": "#779064",
+ "names": [
+  "Rinnemann's Green"
+ ],
+ "tier": "person",
+ "depth": "brief",
+ "lede": "Rinnemann's Green is a soft, mid-toned green dated to about 1794 in Maerz and Paul's dictionary, and no book we hold explains whom it was named for.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name the books leave open",
+   "body": "Ridgway placed this green on plate XVIII of his 1912 *Color Standards and Color Nomenclature*, and the ISCC-NBS system of 1955 carries it as block 120 [1]. Maerz and Paul's 1930 dictionary dates the name to about 1794, decades before either standard, on their plate 20 [1]. Who Rinnemann was is undocumented in the sources we hold, and Ridgway drew his thousands of named samples from many older lists rather than coining every name himself [1][2].\n\nIts nearest library neighbors are [[chromium-green|Chromium Green]] and [[russian-green|Russian Green]], with [[grey-green|Grey Green]] close behind, and it reads greyer than the everyday [[moss]] [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Measured in LCH terms it sits at lightness 57, chroma 27, hue 130 degrees [3]. In our archive of 23,781 paintings, as photographed, it appears 169 times, about 0.7 percent, including in Julian Alden Weir's 1908 landscape *Obweebetuck* and Van Gogh's 1887 *Fishing in Spring, the Pont de Clichy* [4]. These are computed color matches on aged, varnished canvases, not pigment identifications [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "c. 1794, Maerz & Paul; catalogued by Ridgway in 1912",
+   "source": "Ridgway, Color Standards and Color Nomenclature (1912)"
+  },
+  "aka": [],
+  "siblings": [
+   "chromium-green",
+   "russian-green",
+   "grey-green",
+   "moss"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 169,
+  "top_paintings": [
+   "nga-176886",
+   "cma-98338",
+   "aic-109314"
+  ],
+  "measured": {
+   "lch": [
+    57,
+    27,
+    130
+   ],
+   "nearest": [
+    [
+     "Chromium Green",
+     3.6
+    ],
+    [
+     "Russian Green",
+     4.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Ridgway 1912, plate XVIII; ISCC-NBS 1955 block 120; Maerz & Paul 1930, plate 20 D 9",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty et al. (eds.), Nature's Palette, preface on Ridgway's sources",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): CIEDE2000 distances to named neighbors",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes; within the archive's match threshold, at least 5% of the canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "True or false: the books consulted explain who Rinnemann's Green was named for.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "About how old is the name Rinnemann's Green, by Maerz and Paul's dating?",
+   "choices": [
+    "About 230 years",
+    "About 30 years",
+    "About 500 years",
+    "It was coined in 1955"
+   ],
+   "answer": "About 230 years",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Rinnemann's Green has carried its name since about 1794, with no record of who Rinnemann was."
+ ],
+ "words": 185,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "Naming origin undocumented in the books consulted.",
+   "lint 2026-10-09"
+  ]
+ }
+}

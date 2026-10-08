@@ -1,0 +1,149 @@
+{
+ "slug": "bright-moss",
+ "name": "Bright moss",
+ "hex": "#7A942E",
+ "names": [
+  "Bright moss"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Bright moss is ColorHub's name for Hiwamo'egi (鶸萌黄), a traditional Japanese color meaning \"siskin sprout yellow-green,\" after the siskin finch and new plant shoots.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Hiwamo'egi, a finch's sprout-color",
+   "body": "The Wikipedia survey \"Traditional colors of Japan\" lists this color under the romanized name Hiwamo'egi, written 鶸萌黄 [1]. The library glosses the kanji as \"siskin sprout yellow\": 鶸 names the siskin, a small yellow-green finch, and 萌黄 is the yellow-green of a new plant shoot [1]. No book consulted here independently dates or expands the name, so its earlier history is undocumented [1].\n\nThe nearest named colors on file are [[dark-yellow-green]], [[ugly-green]], [[avocado]] and [[swedish-green]], at 3.6, 3.6, 3.6 and 4.2 ΔE [1]. The hex given here, #7A942E, is a modern screen approximation fit to that gloss, not a measured pigment or dye [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within range of this swatch appears in 33 of the 23,781 paintings in our archive, about 0.14 percent, as photographed; the within-painting lens finds it in 13 [2]. That makes it rarer than 65 percent of the named colors we track [2].\n\nIt peaks in the 1800s, present in 9 of 8,345 paintings from that century, 1.5 times the expected rate [2]. Inside a painting it most often plays an accent, in more than three-quarters of the paintings that carry it, never a dominant field [2]. The earliest dated appearance we have is 1840, though the archive's early centuries are thin, so this is a floor and not a true first sighting [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "siskin sprout yellow, from 鶸 (siskin finch) and 萌黄 (new-shoot yellow-green)",
+   "first_recorded": "undocumented beyond its listing in Japan's traditional color system",
+   "source": "ColorHub color library (Wikipedia, \"Traditional colors of Japan\")"
+  },
+  "aka": [
+   "Hiwamo'egi",
+   "鶸萌黄"
+  ],
+  "siblings": [
+   "dark-yellow-green",
+   "ugly-green",
+   "avocado",
+   "swedish-green"
+  ],
+  "parent": "moss",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Hiwamo'egi (鶸萌黄), \"siskin sprout yellow\""
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 33,
+  "rank_pct": 65,
+  "century_peak": {
+   "century": 1800,
+   "hits": 9,
+   "of": 8345,
+   "lift": 1.5
+  },
+  "role": {
+   "kind": "accent",
+   "pct": 77
+  },
+  "first_seen": {
+   "year": 1840
+  },
+  "measured": {
+   "nearest": [
+    [
+     "Dark Yellow Green",
+     3.6
+    ],
+    [
+     "Ugly Green",
+     3.6
+    ],
+    [
+     "Avocado",
+     3.6
+    ],
+    [
+     "Swedish Green",
+     4.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional color names (Wikipedia, \"Traditional colors of Japan\")",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the kanji 鶸 in Hiwamo'egi name?",
+   "choices": [
+    "A siskin finch",
+    "A moss species",
+    "A dye vat",
+    "A mountain pass"
+   ],
+   "answer": "A siskin finch",
+   "kind": "pick"
+  },
+  {
+   "q": "Inside a painting, which role does bright moss most often play?",
+   "choices": [
+    "An accent",
+    "A shadow",
+    "A hidden color",
+    "A light"
+   ],
+   "answer": "An accent",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: bright moss peaks in paintings from the 1800s in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Bright moss is named, in Japanese, for the yellow-green sprout color of a siskin finch."
+ ],
+ "words": 245,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No book-level source for the name's history beyond the library gloss; stated as undocumented rather than guessed.",
+   "lint 2026-10-09"
+  ]
+ }
+}

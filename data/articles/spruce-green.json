@@ -1,0 +1,128 @@
+{
+ "slug": "spruce-green",
+ "name": "Spruce green",
+ "hex": "#1B542C",
+ "names": [
+  "Spruce green"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Spruce Green is a dark, moderately saturated green from the 1927 RAL paint standard, and its screen value is an exact match for another RAL name, Pearl Green.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two RAL names, one screen value",
+   "body": "ColorHub's library traces Spruce Green to RAL 6035, a 1927 German paint standard, with no record in Ridgway, ISCC-NBS or Maerz and Paul [1]. The nearest named colors on file are [[cossack]] and [[spruce]], at The nearest distinct named color on file is [[hunter-green]], about 4.8 units of CIEDE2000 away [1]. Our own tagging files it under the Greens, alongside [[green]] and [[forest-green]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to Spruce Green in only 26 of 23,781 paintings, about 0.1 percent, as photographed [2]. It plays a shadow more often than a highlight, 54 percent of the time, consistent with how dark it is [2]. The earliest dated match is Lucas Cranach the Elder's 1522 *Portrait of a Woman*, four centuries before RAL's standard, which only shows a similar screen color was photographed there, not that the name or paint existed that early, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the spruce tree",
+   "first_recorded": "RAL, 1927 (RAL 6035)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "cossack",
+   "spruce",
+   "hunter-green",
+   "verdure"
+  ],
+  "parent": "spruce",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 26,
+  "role": {
+   "shadow": 0.54,
+   "mid": 0.42
+  },
+  "company": [
+   "Hunter Green"
+  ],
+  "measured": {
+   "lch": [
+    31,
+    34,
+    148
+   ],
+   "nearest": [
+    [
+     "Cossack",
+     3.9
+    ],
+    [
+     "Spruce",
+     4.2
+    ],
+    [
+     "Hunter green",
+     4.8
+    ],
+    [
+     "Verdure",
+     5.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955, Maerz and Paul 1930 and other name records, with plate/block locators and nearest-name match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which other RAL color shares Spruce Green's exact screen value?",
+   "choices": [
+    "Pearl Green",
+    "Fir Green",
+    "Moss Green",
+    "Juniper"
+   ],
+   "answer": "Pearl Green",
+   "kind": "pick"
+  },
+  {
+   "q": "In our archive, Spruce Green most often appears as a:",
+   "choices": [
+    "shadow",
+    "highlight",
+    "midtone"
+   ],
+   "answer": "shadow",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Spruce Green and Pearl Green are two different RAL paint names for the exact same screen color."
+ ],
+ "words": 185,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

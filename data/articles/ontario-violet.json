@@ -1,0 +1,128 @@
+{
+ "slug": "ontario-violet",
+ "name": "Ontario Violet",
+ "hex": "#9199C1",
+ "names": [
+  "Ontario Violet"
+ ],
+ "tier": "place",
+ "depth": "short",
+ "lede": "Ontario Violet is a light, greyed blue-violet named for Ontario, Canada's most populous province, and recorded as a color standard since 1912.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A province's name",
+   "body": "Ontario became a Canadian province at Confederation in 1867, taking its name from the lake on its southern border, itself said to come from an Iroquoian word for a large or beautiful lake [3]. Ridgway's 1912 standards plate this violet-blue on plate XXXVI, hue 55 double-prime, tone b [1]. The ISCC-NBS dictionary of 1955 later filed the same swatch, block 203, as a pale purplish blue, 3.4 units from that block's center[1]. Maerz and Paul give 1912 as its first recorded use and the Munsell notation 7.7PB 6.3/5.7 [1].\n\nIts nearest named neighbors are Chicory Blue, 4.0 units away, and Light Dull Bluish Violet, 4.2 units away [1]. It sits between the families of [[blue]] and [[violet]], close to [[chicory-blue]] and [[blue-bell]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Ontario Violet covers at least five percent of the canvas in 56 works, under a quarter of one percent[2]. The earliest dated example is Piero della Francesca's 1474 portrait of Battista Sforza, a floor and not a first, since the archive's early centuries are thin [2]. It peaks in the 1890s, in 11 of 1,173 paintings, nearly four times the archive's overall rate for that decade, and it turns up in Post-Impressionist paintings here almost nineteen times the baseline rate [2]. It shares a canvas with [[periwinkle]] far more than any other color word, over a hundred times the baseline[2]. These are screen-color matches on photographs of aged, varnished paintings, not pigment identifications [2]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Ontario, Canada",
+   "first_recorded": "1912 (Ridgway, plate XXXVI, hue 55″)",
+   "source": "ColorHub color library (Ridgway 1912; Maerz & Paul 1930)"
+  },
+  "aka": [],
+  "siblings": [
+   "chicory-blue",
+   "blue-bell",
+   "periwinkle"
+  ],
+  "parent": "violet",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#9199C1",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 56,
+  "peak_decade": 1890,
+  "company": [
+   {
+    "word": "Periwinkle",
+    "lift": 104.23
+   }
+  ],
+  "measured": {
+   "lch": [
+    63.9,
+    22.4,
+    285.6
+   ],
+   "nearest": [
+    [
+     "Chicory Blue",
+     4.01
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS 1955, Maerz & Paul 1930, Ridgway 1912, Munsell notation entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "web",
+   "cite": "Wikipedia, \"Ontario\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/Ontario"
+  }
+ ],
+ "questions": [
+  {
+   "q": "Ontario Violet is named for a Canadian:",
+   "choices": [
+    "province",
+    "river",
+    "mountain",
+    "city founded in 1912"
+   ],
+   "answer": "province",
+   "kind": "pick"
+  },
+  {
+   "q": "Which color word shares a canvas with Ontario Violet far more than chance would predict?",
+   "choices": [
+    "Periwinkle",
+    "Brick",
+    "Khaki",
+    "Navy"
+   ],
+   "answer": "Periwinkle",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Ontario Violet and Periwinkle turn up together in our archive over a hundred times more than chance."
+ ],
+ "words": 288,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

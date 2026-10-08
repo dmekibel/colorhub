@@ -1,0 +1,122 @@
+{
+ "slug": "rustic-drab",
+ "name": "Rustic Drab",
+ "hex": "#957E4F",
+ "names": [
+  "Rustic Drab"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Rustic Drab is a muted, greyish tan that Maerz and Paul recorded in 1902, one of our archive's most common named colors, present in nearly one painting in five.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "An old, plain name",
+   "body": "Maerz and Paul's 1930 dictionary gives plate 14 B5 and dates the name to 1902, among the older entries in this part of our library [1]. The nearest ISCC-NBS block by computed distance is 91, dark grayish yellow, 6.9 units from the hex #957E4F, a loose match [1]. \"Drab\" here keeps its old, literal sense, an undyed, dull brownish tone, the same sense that pairs it with [[quaker-drab|Quaker Drab]] from elsewhere in our library, though the two colors differ considerably [1].\n\nIts closest library neighbor is [[green-brown|Green Brown]], under five units away, with [[buffy-citrine|Buffy Citrine]] and [[lint|Lint]] close behind [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within six units of it covers at least five percent of the canvas in 4,526 of our 23,781 archive paintings, as photographed, more common than 97 percent of our named colors [2]. It most often plays a light tone, 40 percent of the 2,586 paintings our within-painting lens finds it in, and it peaks in paintings from the 1100s at 1.3 times the expected rate [2]. Jurriaan Andriessen is its most devoted painter, carrying it in 11 of his 21 works here, 3.4 times his era's baseline [2]. The earliest dated painting is from 799, more than a thousand years before the name's own 1902 record, a floor set by thin early coverage rather than a true first sighting [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a plain, country tone (\"rustic\") combined with an undyed drab",
+   "first_recorded": "1902 (Maerz & Paul, 1930)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "quaker-drab",
+   "green-brown",
+   "buffy-citrine",
+   "lint"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2586,
+  "n_present_painting_level": 4526,
+  "measured": {
+   "lch": [
+    53.9,
+    28.9,
+    85.5
+   ],
+   "nearest": [
+    [
+     "Green Brown",
+     5.1
+    ],
+    [
+     "Buffy Citrine",
+     5.4
+    ]
+   ]
+  },
+  "painters": [
+   {
+    "name": "Jurriaan Andriessen",
+    "hits": 11,
+    "n": 21,
+    "lift": 3.4
+   }
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz and Paul 1930, plate 14 B5, first recorded 1902; nearest ISCC-NBS 1955 block 91",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "About how common is Rustic Drab in our painting archive?",
+   "choices": [
+    "More common than 97 percent of our named colors",
+    "Among the rarest colors in our archive",
+    "Present in exactly one painting",
+    "Found only in 1900s paintings"
+   ],
+   "answer": "More common than 97 percent of our named colors",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Rustic Drab and Quaker Drab are the same color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Rustic Drab covers part of nearly one painting in five across our entire archive."
+ ],
+ "words": 249,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); sourced entirely from the ColorHub library and archive, not the 29 books.",
+   "lint 2026-10-09"
+  ]
+ }
+}

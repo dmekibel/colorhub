@@ -1,0 +1,129 @@
+{
+ "slug": "orange-citrine",
+ "name": "Orange-Citrine",
+ "hex": "#947629",
+ "names": [
+  "Orange-Citrine"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Orange-Citrine is a dark olive brown that borrows its second word from citrine, the pale yellow quartz, though this swatch is far browner than most cut citrine.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A gem word gone brown",
+   "body": "Ridgway's 1912 color book places this value on plate IV, hue 19, tone k, and the ISCC-NBS dictionary of 1955 files it as block 1, vivid pink [1]. [[gem:citrine|Citrine]] is usually a clear, pale to golden-yellow quartz; \"orange\" here marks a deeper, duskier reading than the stone typically shows, and which specimen or dye the namer had in mind is undocumented [1].\n\nThe nearest named colors on file are [[bistre-brown]] and [[metallic-sunburst]], at Compare [[mustard|Mustard]], [[ochre|Ochre]] and [[khaki|Khaki]], names our archive finds sharing its canvases most [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings finds a color within six units of this one in 934, about 3.9 percent, as photographed [2]. Paulus Potter carries it in 12 of his 28 dated works, over ten times the archive's rate, and it peaks in the 1820s, in 66 of 731 paintings, at over twice that rate [2]. The earliest match is a 1250 diptych by Bonaventura Berlinghieri, a floor and not a first, since the archive's early centuries are thin [2]. The match is a screen-color comparison on aged, varnished paintings, not a pigment or gem test [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "citrine, the quartz gem, in a deeper orange reading",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "bistre-brown",
+   "metallic-sunburst",
+   "hazel",
+   "imperial-stone"
+  ],
+  "parent": null,
+  "children": [
+   "ochre",
+   "khaki"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 934,
+  "match": {
+   "hex": "#947629",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "measured": {
+   "lch": [
+    51,
+    45,
+    86
+   ],
+   "nearest": [
+    [
+     "Bistre Brown",
+     2.9
+    ],
+    [
+     "Metallic Sunburst",
+     3.1
+    ],
+    [
+     "Hazel",
+     3.2
+    ],
+    [
+     "Imperial Stone",
+     3.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Citrine, the gem Orange-Citrine is named for, is usually what color?",
+   "choices": [
+    "Pale to golden yellow",
+    "Deep brown",
+    "Bright orange",
+    "Olive green"
+   ],
+   "answer": "Pale to golden yellow",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: this swatch is a close match to typical cut citrine.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A gem-named brown far duskier than the pale quartz it borrows its name from."
+ ],
+ "words": 208,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits in color-kb for this slug; written from library and archive data only.",
+   "lint 2026-10-09"
+  ]
+ }
+}

@@ -1,0 +1,131 @@
+{
+ "slug": "milk-chocolate",
+ "name": "Milk Chocolate",
+ "hex": "#7F4E1E",
+ "names": [
+  "Milk Chocolate"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Milk Chocolate is a warm mid-brown named for the candy bar, and one of the most common colors in our painting archive even though chocolate itself reached Europe only in the 1500s.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A candy-bar brown",
+   "body": "Our library records Milk Chocolate only from the xkcd 2010 crowd survey, so its coining is undocumented beyond that, but the word *chocolate* as a color term is older: it entered English in the early 1700s, soon after drinking chocolate reached fashionable Europe [1][2]. The hex #7F4E1E measures lightness 38 and chroma 39 in LCH, lighter and less red than plain [[chocolate|Chocolate]] itself [1].\n\nIts nearest named neighbors are [[medium-brown|Medium Brown]], 3.6 CIEDE2000 units away, and [[russet|Russet]], 3.8 units away, both read by the graph as almost the same color; plain [[chocolate|Chocolate]] sits a little further off at 5.1, redder and more vivid [3]. The color's own namesake plant is [[flower:chocolate|cacao]], whose raw beans are pale and mottled, not brown; the dark color only appears once they are roasted and fermented [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This brown is one of the most common colors in our archive, found in 2,929 of 23,781 paintings, 12.32%, as photographed, more common than 93% of the named colors here [5]. It peaks in the 1400s, in 98 of 945 paintings, present in 10.4% of paintings from that century, 1.9 times the archive's overall rate, and it most often plays an accent inside a painting [5]. Peter Paul Rubens carries it in 9 of his 46 works, 3.1 times the baseline, and it shares canvases with [[caramel|Caramel]] and [[seal-brown|Seal Brown]] more than chance would predict [5]. The earliest matching painting in our set is dated the year 1000, long before cacao reached Europe, which only shows that an aged, varnished brown can resemble this hue by chance, not that any medieval painter used chocolate, a floor and not a first, since the archive's early centuries are thin [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "chocolate, the food",
+   "first_recorded": "2010 (xkcd color survey); the word *chocolate* as a color term from the early 1700s",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "medium-brown",
+   "russet",
+   "caramel",
+   "seal-brown"
+  ],
+  "parent": "chocolate",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+  "n_present": 2929,
+  "pct": 12.32,
+  "measured": {
+   "lch": [
+    37.9,
+    39.3,
+    65.5
+   ],
+   "nearest": [
+    [
+     "Medium Brown",
+     3.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-m.json): xkcd 2010 crowd-sourced color survey",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub botany data (data/botany.js), \"chocolate\" plant entry: cacao, first recorded as a color word in English from the early 1700s",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph look-alikes (data/graph/edges-m.json), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub botany data (data/botany.js), \"chocolate\" plant entry",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why are the brown tones of raw cacao beans not a good guide to Milk Chocolate's color?",
+   "choices": [
+    "Raw beans are pale and mottled; the brown only develops during roasting and fermenting",
+    "Cacao beans are naturally this exact brown",
+    "Cacao beans are green",
+    "Cacao has never been brown"
+   ],
+   "answer": "Raw beans are pale and mottled; the brown only develops during roasting and fermenting",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: a 1000-year-old painting in our archive proves someone used real chocolate as a pigment.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Milk Chocolate is more common in our painting archive than 93% of the named colors, long before chocolate itself reached Europe."
+ ],
+ "words": 313,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance hits; written from ColorHub library/graph/botany/archive data only.",
+   "lint 2026-10-09"
+  ]
+ }
+}

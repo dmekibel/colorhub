@@ -1,0 +1,124 @@
+{
+ "slug": "dusty-teal",
+ "name": "Dusty Teal",
+ "hex": "#4C9085",
+ "names": [
+  "Dusty Teal"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dusty Teal is a mid-dark, muted [[teal]], recorded only by the 2010 xkcd crowd survey.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A deeper, greyer teal",
+   "body": "Our only recorded source for this name is the 2010 xkcd crowd color survey, with no earlier dictionary entry on file [1]. In the ISCC-NBS 1955 system it falls nearest the block called \"vivid bluish green\", 6.7 units off, one of the looser matches in our library, meaning no official 1955 name sits very close [2]. In Munsell terms it reads about 3.3BG 5.4/4.7, darker and slightly more saturated than its sibling [[dull-teal]] [2].\n\nThe two names sit close enough in hue that \"dusty\" and \"dull\" are doing similar work, muting a brighter [[viridian]]-leaning teal, though Dusty Teal reads a touch darker on screen [2]. Where the word was first used is undocumented in the sources we hold [1][2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 22 of 23,781 paintings, about 0.1 percent, as photographed [3]. The earliest dated match is an anonymous triptych by the Master of Delft, from about 1500, a floor and not a first, since the archive's early centuries are thin [3]. Its clearest peak is Impressionist painting, at more than fifteen times the archive's overall rate, including [[painter:gustave-caillebotte|Gustave Caillebotte]]'s 1877 *[[painting:nga-66404|Skiffs]]* and Édouard Manet's 1864 *[[painting:aic-81535|Sea View, Calm Weather]]* [3]. Across its matches it plays a mid-tone and a highlight in almost equal measure, and rarely a shadow [3]. These counts are computed color matches on photographs of aged, varnished paintings, not pigment identifications [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "xkcd survey, 2010",
+   "source": "ColorHub library and graph nodes"
+  },
+  "aka": [],
+  "siblings": [
+   "dull-teal",
+   "viridian",
+   "grey-teal"
+  ],
+  "parent": "teal",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 22,
+  "first_painting": [
+   "rijks-200109730",
+   1500
+  ],
+  "movements": [
+   [
+    "Impressionism",
+    15.44
+   ]
+  ],
+  "role": {
+   "mid": 0.45,
+   "highlight": 0.45,
+   "shadow": 0.09
+  },
+  "measured": {
+   "mu": "3.3BG 5.4/4.7",
+   "nearest_iscc": [
+    "vivid bluish green",
+    6.7
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (xkcd 2010 source)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub graph nodes: Munsell conversion, ISCC-NBS 1955 nearest block",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which movement shows Dusty Teal far above the archive's overall rate?",
+   "choices": [
+    "Impressionism",
+    "Cubism",
+    "Byzantine icon painting",
+    "Pop Art"
+   ],
+   "answer": "Impressionism",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: an official 1955 dictionary block sits very close to Dusty Teal.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dusty Teal shows up at more than fifteen times its usual rate in Impressionist paintings in our archive."
+ ],
+ "words": 242,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); article rests on ColorHub's own library, graph and archive data.",
+   "lint 2026-10-09"
+  ]
+ }
+}

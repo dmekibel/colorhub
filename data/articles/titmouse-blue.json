@@ -1,0 +1,108 @@
+{
+ "slug": "titmouse-blue",
+ "name": "Titmouse Blue",
+ "hex": "#778B86",
+ "names": [
+  "Titmouse Blue"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Titmouse Blue is a greenish grey from the Maerz and Paul color dictionary, named for the small songbird rather than for any true blue.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A bird that reads grey",
+   "body": "Maerz and Paul record Titmouse Blue at #778B86, first dated 1905, on plate 36 F1 of their 1930 dictionary [1]. Despite the name, the ISCC-NBS block built from that plate in 1955 calls it a pale green, not a blue [1]; several titmouse species do carry a blue-grey cap or back, which likely explains the naming even though the books do not spell it out [1].\n\nThe nearest named neighbor in our library is [[medici-blue]], a slightly cooler, more saturated grey-blue [1]. The hex value is a screen approximation of an aged dictionary plate [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this hue, as photographed, in 447 of 23,781 paintings (1.88 percent), more common than 73 percent of the named colors we track [2]. It peaks in the 1900s, in 32 of 1,674 paintings, at 2.0 times the expected rate for paintings from that century [2]. Inside a painting it most often plays a light, in 38 percent of its 239 occurrences [2].\n\n[[painter:paul-cezanne|Paul Cezanne]] is its most devoted painter here, carrying it in 6 of 50 of his works, 5.5 times his home museums' baseline [2]. The earliest matching painting is dated 1375, 555 years before Maerz and Paul recorded the name in 1930, a floor and not a first, since the archive's early centuries are thin [2]. It shares canvases more than chance with [[eucalyptus]] and [[brown-grey]] [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the titmouse, a small songbird with a blue-grey cap on several species",
+   "first_recorded": "1905, per Maerz and Paul (1930)",
+   "source": "Maerz and Paul, A Dictionary of Color"
+  },
+  "aka": [],
+  "siblings": [
+   "medici-blue",
+   "surrey-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 447,
+  "pct": 1.88,
+  "rank_pct": 73,
+  "measured": {
+   "lch": [
+    56.2,
+    8.2,
+    178.3
+   ],
+   "nearest": [
+    [
+     "Medici Blue",
+     10.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "Maerz and Paul, A Dictionary of Color (1930), plate 36 F1; cited in ISCC-NBS Circular 553 (1955)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the ISCC-NBS system call the block that holds Titmouse Blue?",
+   "choices": [
+    "Greenish gray",
+    "Pure blue",
+    "Olive brown",
+    "Violet grey"
+   ],
+   "answer": "Greenish gray",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Titmouse Blue measures as a true blue, not a grey.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Despite its name, Titmouse Blue measures as a greenish grey, not a blue."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 247
+}

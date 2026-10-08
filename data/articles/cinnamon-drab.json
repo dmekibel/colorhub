@@ -1,0 +1,130 @@
+{
+ "slug": "cinnamon-drab",
+ "name": "Cinnamon-Drab",
+ "hex": "#A38875",
+ "names": [
+  "Cinnamon-Drab"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Cinnamon-Drab is a muted, greyish brown, the duller cousin of Cinnamon-Buff in Robert Ridgway's 1912 color standard.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A quieter cinnamon",
+   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* lists Cinnamon-Drab on plate XLVI, hue 13′′′′ [1]. The ISCC-NBS system of 1955 places it in block 45, light grayish reddish brown, only 2.8 units from that block's centroid, closer than most Ridgway names come to their ISCC-NBS category [2]. The nearest named colors on file are [[beaver]], [[grey-beige]], [[dusty-cinnamon]] and [[ormond]], at 2.8, 3.7, \nThe word drab itself once named a dull, undyed wool cloth before it became a color word for dullness, so Ridgway's name doubles the word: a drab, dulled cinnamon [1]. 8, 3.7, 3.9 and 4 ΔE [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Cinnamon-Drab covers at least five per cent of the canvas in 2,015 of them, about 8.5 per cent, as photographed [3]. It is unusually common in Japanese and Chinese painting, 181 of 698 Japanese works and 127 of 635 Chinese works, and strongest of all in Nepal, 11 of 25 works [3]. It plays a highlight in 63 per cent of its appearances and a shadow in only 5 per cent [3]. These counts are museum photographs of aged, varnished paintings, and much of this brown may be the paper or silk ground rather than a painted choice [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "cinnamon, the spice, darkened and greyed to drab",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "Ridgway, Color Standards and Color Nomenclature; ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "beaver",
+   "grey-beige",
+   "dusty-cinnamon",
+   "ormond"
+  ],
+  "parent": "cinnamon",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2015,
+  "pct_archive": 8.5,
+  "role_highlight": 0.63,
+  "role_shadow": 0.05,
+  "nearest": [
+   [
+    "Taupe",
+    6.3
+   ]
+  ],
+  "measured": {
+   "nearest": [
+    [
+     "Beaver",
+     2.8
+    ],
+    [
+     "Grey Beige",
+     3.7
+    ],
+    [
+     "Dusty cinnamon",
+     3.9
+    ],
+    [
+     "Ormond",
+     4.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XLVI, hue 13′′′′ (via ColorHub library)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955 block 45), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Cinnamon-Drab is especially common in which country's paintings in our archive?",
+   "choices": [
+    "Nepal",
+    "Mexico",
+    "Sweden"
+   ],
+   "answer": "Nepal",
+   "kind": "pick"
+  },
+  {
+   "q": "Cinnamon-Drab sits closer to its ISCC-NBS block centroid than Cinnamon-Buff does to its own.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Cinnamon-Drab appears in nearly half of our Nepali paintings, as photographed."
+ ],
+ "words": 229,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

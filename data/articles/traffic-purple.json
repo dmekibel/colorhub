@@ -1,0 +1,111 @@
+{
+ "slug": "traffic-purple",
+ "name": "Traffic Purple",
+ "hex": "#992572",
+ "names": [
+  "Traffic Purple"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Traffic Purple is a deep reddish purple from the German RAL signage standard, and almost never a match in old paintings.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A signal purple",
+   "body": "RAL, founded in 1927, lists this hue as RAL 4006, a screen approximation of a spec that RAL issues as physical chips, so it will shift between displays [1]. When the number was added to the register is undocumented here [1]. Maerz and Paul separately recorded a very close tone in 1925, under the name Monsignor, on plate 41 K8 of their 1930 dictionary [1]. The two names come from different systems for different uses, so their closeness looks like coincidence rather than borrowing [1].\n\nThe nearest named neighbor in our library is [[flirt]], 2.9 units away and more vivid [2]. [[amaranth-deep-purple|Amaranth Deep Purple]] follows at 4.0, a touch redder, and Crayola's [[violet-crayola|Violet]] sits at 4.6, duller [2]. RAL also lists [[telemagenta]], RAL 4010, a pinker and lighter signal color in the same 4000 series [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this hue, as photographed, in only 2 of 23,781 paintings, rarer than 82 percent of the named colors we track [2]. Both are works dated about 1900 in the Cleveland Museum of Art's collection [2]. The sample is too small here for century, painter or company statistics [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "its use in industrial and traffic signage",
+   "first_recorded": "undocumented (RAL itself dates from 1927)",
+   "source": "RAL color standard"
+  },
+  "aka": [],
+  "siblings": [
+   "flirt",
+   "amaranth-deep-purple",
+   "telemagenta",
+   "violet-crayola"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2,
+  "rank_pct_rarer": 82,
+  "measured": {
+   "lch": [
+    36.6,
+    56.7,
+    342.9
+   ],
+   "nearest": [
+    [
+     "Flirt",
+     2.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "RAL color standard, RAL 4006, approximate screen value; Maerz and Paul, A Dictionary of Color (1930), plate 41 K8 (Monsignor, 1925)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed; color graph CIEDE2000 neighbors",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which industrial standard lists Traffic Purple?",
+   "choices": [
+    "RAL",
+    "ISCC-NBS",
+    "Crayola",
+    "Pantone"
+   ],
+   "answer": "RAL",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Traffic Purple is common in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Traffic Purple shows up in just 2 of our 23,781 archived paintings."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Field sample is n=2; no century/painter/company stats given.",
+   "Editor spot-audit 2026-10-09: 'first recorded 1927' and Telemagenta 'from the same 1927 standard' unsupported (RAL founded 1927; RAL 4010 is a much later addition), now undocumented; Flirt distance was 7.1 (Plum's curriculum distance), graph says 2.9; Flirt is 'more vivid', not 'pinker, less red'; 'darker and more saturated than red-purple' false (red-purple #E40078 is far more vivid), removed; speculative 'restored paint' line replaced with what the two hits are.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 202
+}

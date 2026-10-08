@@ -1,0 +1,117 @@
+{
+ "slug": "hay-s-lilac",
+ "name": "Hay's Lilac",
+ "hex": "#B398B7",
+ "names": [
+  "Hay's Lilac"
+ ],
+ "tier": "person",
+ "depth": "short",
+ "lede": "Hay's Lilac is a pale, dusty purple from Robert Ridgway's 1912 color dictionary, and our archive's earliest match comes from just 43 years before Ridgway wrote the name down, closer than any of its five Hay's siblings, a floor and not a first, since the archive's early centuries are thin.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "One of six colors named Hay's",
+   "body": "Ridgway's 1912 “Color Standards and Color Nomenclature” lists Hay's Lilac at hex #B398B7 among the names he credits to a person [1]. It shares its possessive with five other colors in the same book, among them [[hay-s-green|Hay's Green]], [[hay-s-brown|Hay's Brown]] and [[hay-s-maroon|Hay's Maroon]], but Ridgway never names the Hay he means, so the connection is undocumented in our sources [1]. The 1955 Inter-Society Color Council catalog repeats the name in the block it calls light purple [1].\n\nIts nearest neighbor in our color graph is [[phlox-pink|Phlox Pink]], only 3.8 units away and more vivid [1]. Against the basic color words it reads closest to the word it is named after, [[lilac|Lilac]] itself, 4.9 units off and lighter and more vivid than Ridgway's swatch [1]. [[heliotrope-grey|Heliotrope Grey]] and [[dusty-lavender|Dusty Lavender]] sit a little further out [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive matches this purple in only 0.04% of 23,781 paintings, 9 of them, as photographed; the within-painting lens finds it in 6 [2]. That makes it rarer than 73% of the named colors in our set, too thin a sample for a reliable century, painter or country figure [2]. Our earliest match dates to 1869, by Eugène Louis Boudin, with the latest in 1924 [2]. That earliest match sits just 43 years before Ridgway's 1912 book recorded the name, the smallest gap of any of the six Hay's colors, though it remains a computed color match in an aged photograph, not proof of a pigment or dye [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955"
+  },
+  "aka": [],
+  "siblings": [
+   "hay-s-green",
+   "hay-s-maroon",
+   "lilac"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 9,
+  "measured": {
+   "lch": [
+    66.1,
+    19.9,
+    321.7
+   ],
+   "nearest": [
+    [
+     "Phlox Pink",
+     3.8
+    ],
+    [
+     "Lilac",
+     4.9
+    ]
+   ]
+  },
+  "iscc_nbs": {
+   "name": "light purple",
+   "de": 5.1
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912 (plate XXXVII), ISCC-NBS 1955 (block 222)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which basic color word is Hay's Lilac named after and closest to among the basic words?",
+   "choices": [
+    "Lilac",
+    "Mauve",
+    "Purple",
+    "Rose"
+   ],
+   "answer": "Lilac",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our archive's earliest match to Hay's Lilac comes from centuries before Ridgway's 1912 book.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Hay's Lilac's earliest archive match comes from just 43 years before Ridgway named it."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits; origin of \"Hay\" is undocumented in our sources.",
+   "Very thin archive sample (n=9).",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 288
+}

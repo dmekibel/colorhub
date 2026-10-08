@@ -1,0 +1,131 @@
+{
+ "name": "Antique Brass",
+ "hex": "#C88A65",
+ "names": [
+  "Antique Brass"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Antique Brass pairs \"antique,\" meaning aged in look, with brass, the copper-and-zinc metal, for a dulled metallic tan named in the Crayola crayon line.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Aged metal, not aged color",
+   "body": "The name is a modifier plus a material: \"antique\" signals the dulled, oxidized look of old metal, attached to brass, an alloy of copper and zinc [1]. Wikipedia credits it to the Crayola crayon list, with no earlier dictionary record in the sources consulted here [1]. The ISCC-NBS system filed the same tone in 1955, block 109, a light grayish olive, and Maerz and Paul's 1930 dictionary dates it to 1913, plate 14 J 4 [2]. A Japanese library list carries the same hue as 白茶 (*shiracha*), \"white tea-colored\" [2]. Its nearest named look-alike is [[orange-cinnamon]], with [[raw-sienna]], [[light-cinnamon]] and [[beige-red]] close by in the same tan-brown family [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this tan-brown in 892 of 23,781 paintings (3.75 percent, as photographed), more common than 83 percent of named colors here [4]. It peaks in the 1500s, at 2.1 times the expected rate (109 of 2,231 paintings from that century), and plays an accent color in 62 percent of the paintings where it dominates [4]. It is most over-represented in Indian paintings (2.3 times expected) and shares canvases with Light Ochraceous-Salmon more than chance [4]. The earliest matching canvas dates to the year 900, centuries before the name was recorded; the archive's early centuries are thin, so this is a floor, not a first, and a look-alike hue, not the metal itself [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the aged look of brass metal",
+   "first_recorded": "1913 (Maerz & Paul, cited 1930)",
+   "source": "ColorHub color library (Wikipedia, citing Crayola)"
+  },
+  "aka": [],
+  "siblings": [
+   "orange-cinnamon",
+   "raw-sienna",
+   "light-cinnamon",
+   "beige-red"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "白茶 (Shiracha)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 892,
+  "rank_pct": 83,
+  "role": {
+   "accent_pct": 62
+  },
+  "measured": {
+   "lch": [
+    62.8,
+    35.1,
+    56.4
+   ],
+   "nearest": [
+    [
+     "Orange-Cinnamon",
+     3.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Wikipedia, citing Crayola",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS 1955 block 109; Maerz & Paul 1930, plate 14 J 4; Japanese library list",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE Lab ΔE)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "\"Antique\" in Antique Brass describes what?",
+   "choices": [
+    "The oxidized look of old metal",
+    "A specific mining town",
+    "A painter's surname",
+    "A dye recipe's age"
+   ],
+   "answer": "The oxidized look of old metal",
+   "kind": "pick"
+  },
+  {
+   "q": "Which crayon line does the library credit with the name?",
+   "choices": [
+    "Crayola",
+    "Caran d'Ache",
+    "Faber-Castell",
+    "RAL"
+   ],
+   "answer": "Crayola",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Antique Brass is more common in Indian paintings than its average share would predict."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-09",
+  "issues": []
+ },
+ "slug": "antique-brass",
+ "words": 248
+}

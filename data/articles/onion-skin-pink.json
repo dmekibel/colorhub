@@ -1,0 +1,125 @@
+{
+ "slug": "onion-skin-pink",
+ "name": "Onion-Skin Pink",
+ "hex": "#DA9678",
+ "names": [
+  "Onion-Skin Pink"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Onion-Skin Pink is a warm, muted terracotta pink named for the papery outer skin of a red onion, and it clusters hard around a single decade in our painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The onion's papery coat",
+   "body": "The library plots this color on Ridgway's 1912 plate XXVIII, hue 11 double-prime, tone b, and separately records it in Maerz and Paul's 1930 dictionary, plate 11 A 7, first recorded in 1912 [1]. The crowd-sourced xkcd color survey later landed on nearly the same hex under its own name, Pinkish Tan, about 2.1 units away by CIEDE2000 [1]. The name is literal: the thin, dry outer layer of a red or yellow onion's skin, a warm tan-pink rather than the flesh of the bulb [1].\n\nIn LCH terms it measures lightness 68, chroma 34, hue 50 degrees, Munsell 1.8YR 6.7/6.3, close to [[vinaceous-cinnamon|Vinaceous-Cinnamon]] and [[light-cinnamon|Light cinnamon]], both nearer to the warm [[cinnamon]] family than to true [[rose|Rose]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 141 of 23,781 paintings, 0.59 percent, as photographed [2]. It is sharply over-represented in the 1910s, in 12 of that decade's 523 paintings, about 3.9 times the expected rate [2]. Amedeo Modigliani is by far its most devoted painter here, carrying it in 4 of his 18 works, 37 times the baseline, well ahead of Lucas Cranach the Elder and Christen Købke [2]. These are photographs of aged, varnished paintings, so a color match is not a pigment test [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the papery outer skin of an onion",
+   "first_recorded": "1912 (Ridgway, plate XXVIII)",
+   "source": "Ridgway, Color Standards and Color Nomenclature (1912); ColorHub library"
+  },
+  "aka": [
+   "Pinkish Tan (xkcd)"
+  ],
+  "siblings": [
+   "pinkish-tan",
+   "vinaceous-cinnamon",
+   "light-cinnamon",
+   "beige-red"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 141,
+  "measured": {
+   "lch": [
+    68,
+    34,
+    50
+   ],
+   "nearest": [
+    [
+     "Pinkish Tan",
+     2.1
+    ],
+    [
+     "Vinaceous-Cinnamon",
+     3.3
+    ],
+    [
+     "Light cinnamon",
+     3.3
+    ],
+    [
+     "Beige Red",
+     3.5
+    ]
+   ]
+  },
+  "painter": "Amedeo Modigliani"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912, plate XXVIII, hue 11″, tone b; Maerz & Paul 1930, plate 11 A 7, first recorded 1912; xkcd color survey, nearest match Pinkish Tan, ΔE 2.1",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What part of the onion is Onion-Skin Pink named for?",
+   "choices": [
+    "The thin outer skin",
+    "The flesh of the bulb",
+    "The green stalk",
+    "The root"
+   ],
+   "answer": "The thin outer skin",
+   "kind": "pick"
+  },
+  {
+   "q": "Which decade is Onion-Skin Pink most over-represented in our archive?",
+   "choices": [
+    "The 1910s",
+    "The 1400s",
+    "The 1700s",
+    "The 1600s"
+   ],
+   "answer": "The 1910s",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Onion-Skin Pink is named for the papery outer skin of an onion, not its flesh."
+ ],
+ "words": 235,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

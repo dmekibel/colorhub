@@ -1,0 +1,126 @@
+{
+ "slug": "capucine-buff",
+ "name": "Capucine Buff",
+ "hex": "#FDCC98",
+ "names": [
+  "Capucine Buff"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Capucine Buff is a pale peach-buff named for capucine, the French word for nasturtium and for a Capuchin friar's robe, recorded by Ridgway in 1912.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Nasturtium or friar's robe",
+   "body": "Our library dates Capucine Buff to Ridgway's 1912 standards, plate III, hue 13, with Maerz and Paul's 1930 dictionary adding its own first record in 1912 at plate 9, swatch E5 [1]. *Capucine* is French for the nasturtium flower and, before that, for the hooded robe of a Capuchin friar; dictionaries use both senses for the family of orange-buff names, and our data does not settle which one this particular swatch follows [1].\n\nIt builds on [[buff]][1]. Our library's nearest everyday match is Peach, 4.2 units of ΔE away, with Warm Buff and Light Ochraceous-Buff listed as closer Ridgway near-duplicates [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to Capucine Buff in 283 of 23,781 paintings (1.19 percent), as photographed [2]. Henri Matisse used it most relative to his own museums' baseline, in 4 of his 50 works here, 4.7 times expected [2]. It most often plays a light tone inside a painting, and keeps company with Camel more than chance [2]. These are screen approximations of aged paintings, not pigment readings [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "capucine (French: nasturtium, or a Capuchin friar's robe) — which sense is undocumented here",
+   "first_recorded": "Ridgway, 1912 / Maerz and Paul, 1930",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "deep-champagne",
+   "buff",
+   "peach",
+   "sugar-cane"
+  ],
+  "parent": "buff",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 283,
+  "role": {
+   "light": 0.54
+  },
+  "company": [
+   "Camel"
+  ],
+  "measured": {
+   "lch": [
+    85,
+    34,
+    72
+   ],
+   "nearest": [
+    [
+     "Deep Champagne",
+     4.0
+    ],
+    [
+     "Buff",
+     4.0
+    ],
+    [
+     "Peach",
+     4.2
+    ],
+    [
+     "Sugar Cane",
+     4.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: name records, plate and block locators, tier classification",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the French word capucine refer to?",
+   "choices": [
+    "Nasturtium, or a Capuchin friar's robe",
+    "A dye plant from Peru",
+    "A kind of silk",
+    "A shade of Crayola orange"
+   ],
+   "answer": "Nasturtium, or a Capuchin friar's robe",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our data confirms which of capucine's two senses this name follows.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Capucine Buff's name could point to a nasturtium flower or a Capuchin friar's hooded robe."
+ ],
+ "words": 194,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

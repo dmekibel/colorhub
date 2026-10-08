@@ -1,0 +1,130 @@
+{
+ "name": "Citronelle",
+ "hex": "#D0CF44",
+ "names": [
+  "Citronelle"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Citronelle is a vivid greenish yellow from Maerz and Paul's 1930 dictionary, first recorded in 1928.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A 1928 dictionary name",
+   "body": "Maerz and Paul's *A Dictionary of Color* places Citronelle on plate 18, cell L2, first recorded in 1928 [1]. The ISCC-NBS system files the same block as a vivid greenish yellow [2]. The word echoes *citronella*, the lemon-scented grass and its oil, but the dictionary does not say the name was chosen for that reason, so the connection is undocumented here [1].\n\nThe nearest named colors on file are [[dijon]], [[dirty-yellow]], [[piss-yellow]] and [[oil-yellow]], at 4.1, 4.1, 4.3 and 4.4 ΔE [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "ColorHub's archive finds this exact match in only 6 of 23,781 paintings, as photographed [4]. Four of the six are 1890s Kalighat paper paintings from India; one is a Sargent still life and one a Bonnard landscape [4]. The small count fits a saturated, high-value yellow-green that is rare in oil but common in flat, modern dye work [4]. The match is computed, not a pigment test [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1928, Maerz & Paul 1930",
+   "source": "Maerz & Paul, A Dictionary of Color"
+  },
+  "aka": [],
+  "siblings": [
+   "dijon",
+   "dirty-yellow",
+   "piss-yellow",
+   "oil-yellow"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 6,
+  "match": {
+   "nearest_library": "Lemon Yellow",
+   "de2000": 9.2
+  },
+  "measured": {
+   "lch": [
+    81,
+    68,
+    104
+   ],
+   "nearest": [
+    [
+     "Dijon",
+     4.1
+    ],
+    [
+     "Dirty Yellow",
+     4.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz & Paul, A Dictionary of Color (1930), plate 18, cell L2",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS (1955) block entry",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library: nearest named colors by CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which year does Maerz and Paul first record Citronelle?",
+   "choices": [
+    "1928",
+    "1850",
+    "1955",
+    "1912"
+   ],
+   "answer": "1928",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the dictionary confirms Citronelle is named for citronella grass.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Citronelle turns up almost only in 1890s Kalighat paper paintings from India."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "slug": "citronelle",
+ "words": 166
+}

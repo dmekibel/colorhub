@@ -1,0 +1,140 @@
+{
+ "slug": "deep-saffron",
+ "name": "Deep Saffron",
+ "hex": "#FF9933",
+ "names": [
+  "Deep Saffron"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Deep Saffron is a strong, warm orange named for the dye and spice taken from crocus stigmas, and our archive's earliest match for it predates the color's own written record by nearly four centuries, a floor and not a first, since the archive's early centuries are thin.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A spice, by way of a flag",
+   "body": "Saffron comes from the dried stigmas of the saffron crocus, among the most labor-intensive dyes and spices ever traded, and Wikipedia's citation for this exact shade is the flag of India, whose top stripe is called saffron [1]. The nearest named colors on file are [[ochraceous-orange]], [[yellow-orange-color-wheel]], [[dark-orange]] and [[mikado-orange]], at 2.8, 3, 3.4 and 4 ΔE [1]. 68 among the Yellows, matched to the anthers of the saffron crocus and the tail coverts of the golden pheasant [2], a step short of [[yellow]] itself. 8, 3, 3.4 and 4 ΔE [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Deep Saffron appears in just 0.13 percent of the 23,781 paintings in our archive, 31 of them as photographed, rarer than 53 percent of the named colors we track [4]. Inside a painting it almost always plays an accent, in 98 percent of its 40 clearest appearances, never the body of a shadow or a light [4]. It peaks in the 1500s, in 6 of 2,231 paintings, at 1.5 times its own museums' baseline [4].\n\nThe earliest match is a 1445 painting by Michele Giambono, well before any of our Western sources first record the word saffron as an English color name; Werner's 1821 guide is the oldest system we hold that names this family at all [2][4]. It belongs to the [[orange]] family, sitting a step brighter than plain [[saffron-yellow]] [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "saffron, the dye and spice from crocus stigmas",
+   "first_recorded": "1821, Werner (as the paler Saffron Yellow)",
+   "source": "ColorHub color graph"
+  },
+  "aka": [],
+  "siblings": [
+   "ochraceous-orange",
+   "yellow-orange-color-wheel",
+   "dark-orange",
+   "mikado-orange"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 31,
+  "role": "accent",
+  "first_seen": {
+   "year": 1445,
+   "painting": "nga-221"
+  },
+  "measured": {
+   "lch": [
+    72,
+    73,
+    65
+   ],
+   "iscc": "strong orange",
+   "nearest": [
+    [
+     "Ochraceous-Orange",
+     2.8
+    ],
+    [
+     "Yellow Orange (Color Wheel)",
+     3.0
+    ],
+    [
+     "Dark Orange",
+     3.4
+    ],
+    [
+     "Mikado Orange",
+     4.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph: Wikipedia cites the flag of India for this shade",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: Werner's Nomenclature of Colours, 1821, no. 68 (Yellows)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS 1955 block 50 entries; measured LCH and nearest-name match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is saffron, the source of this color's name?",
+   "choices": [
+    "A mineral",
+    "A dye and spice from crocus stigmas",
+    "A copper mine",
+    "A paint company"
+   ],
+   "answer": "A dye and spice from crocus stigmas",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: inside a painting, Deep Saffron usually plays a shadow.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Deep Saffron almost never plays a shadow: it is an accent color, nearly every time it appears."
+ ],
+ "words": 276,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

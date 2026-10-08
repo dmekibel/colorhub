@@ -1,0 +1,137 @@
+{
+ "slug": "dusty-oxblood",
+ "name": "Dusty oxblood",
+ "hex": "#4C221B",
+ "names": [
+  "Dusty oxblood"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Dusty oxblood is a dark reddish brown, ColorHub's English name for the Japanese traditional color Tobi-iro, named for the kite, a bird of prey.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Named for a bird of prey",
+   "body": "Tobi-iro (鳶色) takes its name from *tobi*, the black kite, whose dark brown plumage the color recalls [1]. It was a common dye color for everyday clothing in old Japan, favored in part because its drabness attracted less attention under sumptuary rules that restricted bright colors to the wealthy, though the sources consulted here do not confirm that history for this exact shade [1].\n\nThe nearest named colors on file are [[carbuncle]] and [[dusty-mahogany]], at Our library's ISCC-NBS mapping also groups this color's block with over a dozen Maerz and Paul names from the 1920s, including Java, first recorded in 1921, Nomad Brown, 1926, Mirador and Argentina, both 1927, and Domingo Brown and Maracaibo, both 1928 [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 1,755 of 23,781 paintings, about 7.4 percent, as photographed [2]. The earliest match is a fragment of a carved beam dated to about 550, a floor and not a first, since the archive's early centuries are thin [2]. The rate peaks in a sample of 178 paintings from the 1530s, about two and a half times the archive's overall rate for that decade [2]. Among sampled painters, Bronzino's twenty-one paintings contain it nine times, ahead of Juan de Juanes, Pontormo and Paolo Veronese [2]. It is also disproportionately common in paintings from Austria, Spain and Italy [2]. These are computed color matches to photographed, varnished paintings, not pigment identifications [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the black kite (tobi), a bird of prey",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "Wikipedia, Traditional colors of Japan"
+  },
+  "aka": [
+   "Tobi-iro"
+  ],
+  "siblings": [
+   "carbuncle",
+   "dusty-mahogany",
+   "light-oxblood",
+   "chestnut-leather-brown"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Tobi-iro (鳶色)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1755,
+  "measured": {
+   "lch": [
+    19,
+    24,
+    36
+   ],
+   "nearest": [
+    [
+     "Carbuncle",
+     3.5
+    ],
+    [
+     "Dusty mahogany",
+     3.8
+    ],
+    [
+     "Light oxblood",
+     4.4
+    ],
+    [
+     "Chestnut-leather brown",
+     4.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "Wikipedia, \"Traditional colors of Japan\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/Traditional_colors_of_Japan"
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional list, ISCC-NBS 1955, Maerz & Paul 1930 entries",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What bird gives Tobi-iro its name?",
+   "choices": [
+    "The black kite",
+    "The crow",
+    "The heron",
+    "The sparrow"
+   ],
+   "answer": "The black kite",
+   "kind": "pick"
+  },
+  {
+   "q": "Which painter's sampled works show the highest rate of this color?",
+   "choices": [
+    "Bronzino",
+    "Paolo Veronese",
+    "Juan de Juanes",
+    "Pontormo"
+   ],
+   "answer": "Bronzino",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "A brown named for a bird of prey, shared by a dozen 1920s paint names in the same ISCC-NBS block."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "Sumptuary-rule history noted as unconfirmed for this specific shade.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 252
+}

@@ -1,0 +1,125 @@
+{
+ "slug": "safrano-pink",
+ "name": "Safrano Pink",
+ "hex": "#FFC4AD",
+ "names": [
+  "Safrano Pink"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Safrano Pink is a pale, warm pink from the Maerz and Paul dictionary of color, closer to peach than to a true pink.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A pink that leans toward peach",
+   "body": "Maerz and Paul's 1930 dictionary of color records this hue on plate 1, swatch B9, and the ISCC-NBS circular of 1955 cites the same entry and classifies it as a moderate yellowish pink, about two units from the block's center [1]. Its Munsell notation is 0.8YR 8.3/5.0, a very light, low-chroma hue sitting right at the border between the yellow-red and red hue families [1].\n\nThe books read give no story for the name itself, and its origin is undocumented here [1]. The nearest named colors on file are [[shrimp-pink]], [[melon]] and [[pale-salmon]], at 3.6, 4.9 and 5.3 ΔE [1]. The hue also sits near [[salmon]] and [[apricot]], two other pale, warm pinks in our library [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Safrano Pink covers at least one per cent of the canvas in 31 paintings, about 0.13 per cent overall; the within-painting lens, which looks at color role regardless of area, finds it in 14 [2]. That makes it rarer than about 65 per cent of the named colors in the archive [2]. When it does appear, it is most often cast as a light tone, in half of those 14 paintings, a pattern area alone could not fake [2].\n\nThe earliest dated painting to carry it is from 1495, by the Master of Apollo and Daphne, with the third-earliest from 1522 and the latest from 1941, 23 dated paintings in all, a floor and not a first, since the archive's early centuries are thin [2]. That is 435 years before the name's own earliest record, in 1930, so the match is a look-alike hue caught in an aged photograph, not evidence that Maerz and Paul's pigment or dye was already in use [2]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1930 (Maerz and Paul)",
+   "source": "data/library.json; data/graph/nodes-s.json"
+  },
+  "aka": [],
+  "siblings": [
+   "shrimp-pink",
+   "melon",
+   "pale-salmon",
+   "flesh-pink"
+  ],
+  "parent": "pink",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 31,
+  "measured": {
+   "lch": [
+    83.8,
+    26.7,
+    47.6
+   ],
+   "nearest": [
+    [
+     "Shrimp Pink",
+     3.6
+    ],
+    [
+     "Melon",
+     4.9
+    ],
+    [
+     "Pale Salmon",
+     5.3
+    ],
+    [
+     "Flesh Pink",
+     5.3
+    ]
+   ]
+  },
+  "first_seen": {
+   "year": 1495,
+   "painting": "aic-16218",
+   "painter": "Master of Apollo and Daphne"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-s.json, data/library.json): Maerz & Paul 1930 plate 1 B 9, cited by ISCC-NBS Circular 553 (1955) block 28; CIEDE2000 nearest-name match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (data/graph/fieldnotes/s.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1930 publication first records Safrano Pink?",
+   "choices": [
+    "Maerz and Paul's dictionary of color",
+    "Ridgway's atlas",
+    "the RAL system",
+    "Pantone"
+   ],
+   "answer": "Maerz and Paul's dictionary of color",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the books consulted explain where the name Safrano Pink comes from.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Safrano Pink is rarer in our painting archive than about two-thirds of the named colors we track."
+ ],
+ "words": 330,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

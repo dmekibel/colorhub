@@ -1,0 +1,129 @@
+{
+ "slug": "tea",
+ "name": "Tea",
+ "hex": "#65AB7C",
+ "names": [
+  "Tea"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Tea is a light green that Maerz and Paul date to 1829, and among the rarest colors in our painting archive, matching only seven paintings out of nearly 24,000.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A plant word, not the drink's own color",
+   "body": "Maerz and Paul's 1930 dictionary dates Tea to 1829 and places it on plate 19, swatch A4; the 1955 ISCC-NBS system classes it as a grayish yellow green, block 122 [1]. The xkcd survey and Wikipedia both independently land on a near-identical swatch, within about 1.4 units of CIEDE2000 [1]. The name describes the plant's leaf, not the brewed drink, or [[tan]] [1]. The nearest named color on file is [[verdigris-green]], 2.8 ΔE off [1]. A separate, paler library entry, [[tea-green]], names the same plant [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to Tea in only 7 of 23,781 paintings, about one in 3,400, as photographed, too rare for any reliable painter or color pairing [2]. It splits about evenly between highlight and midtone roles in those few appearances [2]. The earliest dated match is a painting cataloged as *Horizon of the New World*, from 1830, one year after Maerz and Paul's own date, an unusually close agreement for this library, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the tea plant",
+   "first_recorded": "Maerz and Paul, 1930 (first recorded 1829, plate 19 A4)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "verdigris-green",
+   "dusty-green",
+   "imperial-green",
+   "algae"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "tea-green",
+    "gloss": "a separate, paler library name for the same plant"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 7,
+  "role": {
+   "mid": 0.43,
+   "highlight": 0.43
+  },
+  "measured": {
+   "lch": [
+    64,
+    37,
+    152
+   ],
+   "nearest": [
+    [
+     "Verdigris Green",
+     2.8
+    ],
+    [
+     "Dusty Green",
+     4.0
+    ],
+    [
+     "Imperial Green",
+     4.5
+    ],
+    [
+     "Algae",
+     4.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955, Maerz and Paul 1930 and other name records, with plate/block locators and nearest-name match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the name Tea describe: the plant's leaf, or the brewed drink?",
+   "choices": [
+    "The plant's leaf",
+    "The brewed drink",
+    "Neither — it is a dye name",
+    "A teacup glaze"
+   ],
+   "answer": "The plant's leaf",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Tea is one of the more common colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Tea names the plant's green leaf, not the brown of the drink it's brewed into."
+ ],
+ "words": 203,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

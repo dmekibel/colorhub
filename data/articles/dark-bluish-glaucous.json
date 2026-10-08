@@ -1,0 +1,121 @@
+{
+ "slug": "dark-bluish-glaucous",
+ "name": "Dark Bluish Glaucous",
+ "hex": "#90AC9A",
+ "names": [
+  "Dark Bluish Glaucous"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dark Bluish Glaucous is a muted, pale green modifier on [[glaucous]] — itself named for the dusty bloom on grapes and some leaves — scanned from Ridgway's 1912 plates and filed by the ISCC-NBS system in 1955 as a light green.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A double modifier on an old botanical word",
+   "body": "The name stacks two modifiers, *dark bluish* plus [[glaucous]], onto a word botanists and naturalists use for the pale, waxy bloom on a grape skin or a cabbage leaf [1]. Ridgway's 1912 *Color Standards and Color Nomenclature* places a hue this muted at plate XLII, hue 37‴, a scan of an aged plate and so only approximate; the ISCC-NBS system filed the same chip in 1955 as a light green [1].\n\nIts nearest named neighbors by color distance are [[niagara-green]], at 3.3 units, and [[deep-glaucous-green]], at 4.1, both read as greener than this chip [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color this close to Dark Bluish Glaucous is common in our archive: 243 of 23,781 paintings, as photographed, about one percent, more common than 66 percent of the named colors [3]. Gustav Klimt is its most devoted painter, carrying it in four of fifty works here, 4.6 times the baseline for his museums, and Impressionist paintings run at 3.5 times the expected rate [3]. The earliest match dates to 1400, 512 years before the name's own 1912 record [3]. That is centuries before the name's own record, a floor on the hue's age, not a first use of either the name or a pigment."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a double modifier on glaucous, the dusty bloom on grapes and some leaves",
+   "first_recorded": "Ridgway, Color Standards and Color Nomenclature (1912), plate XLII, hue 37‴",
+   "source": "ColorHub color library (Ridgway 1912; ISCC-NBS 1955)"
+  },
+  "aka": [],
+  "siblings": [
+   "niagara-green",
+   "deep-glaucous-green",
+   "morning-blue"
+  ],
+  "parent": "glaucous",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 243,
+  "n_within": 148,
+  "painter": "Gustav Klimt, 4.6x",
+  "movement": "Impressionism, 3.5x",
+  "measured": {
+   "lch": [
+    67.8,
+    14.6,
+    155.5
+   ],
+   "nearest": [
+    [
+     "Niagara Green",
+     3.3
+    ],
+    [
+     "Deep Glaucous-Green",
+     4.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-d.json): Ridgway 1912, plate XLII, hue 37‴; ISCC-NBS 1955, block 144",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph, look-alike edges (data/graph/edges-d.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes); counts are computed color matches on photographs of varnished, aged canvases, not pigment identifications",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the word \"glaucous\" describe?",
+   "choices": [
+    "The dusty bloom on a grape or cabbage leaf",
+    "A metal alloy",
+    "A dye extracted from lichen",
+    "A kind of blue glass"
+   ],
+   "answer": "The dusty bloom on a grape or cabbage leaf",
+   "kind": "pick"
+  },
+  {
+   "q": "Which painter carries a color near Dark Bluish Glaucous far more than his museums' baseline?",
+   "choices": [
+    "Gustav Klimt",
+    "Amedeo Modigliani",
+    "John Singer Sargent",
+    "Robert Campin"
+   ],
+   "answer": "Gustav Klimt",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Glaucous describes the dusty bloom on a grape skin; this is a darker, bluer reading of it."
+ ],
+ "words": 241,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}

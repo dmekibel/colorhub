@@ -1,0 +1,142 @@
+{
+ "slug": "cafe-noir",
+ "name": "Café Noir",
+ "hex": "#4B3621",
+ "names": [
+  "Café Noir",
+  "Cafe Noir"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Café Noir is a dark, slightly reddish brown named for black coffee, and the ISCC-NBS dictionary files it as a dark yellowish brown.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "From a 1928 plate to a 1955 dictionary",
+   "body": "Maerz and Paul's 1930 dictionary of color dates the name to 1928, at plate 8, column H, chip 12, hex #4B3621 [1]. The ISCC-NBS committee cited the same swatch in 1955, in block 81 among the \"dark yellowish brown\" names, 3.1 units from that block's center [1]. The Munsell renotation is 9.5YR 2.4/2.9, a dark, fairly low-chroma brown [1]. Wikipedia's color-name list also cites the ISCC-NBS entry [1].\n\nThe nearest library names are [[ivory-brown]], about three units away, and [[falcon]], a touch darker and redder, at 4.8 units [1]. The French name itself is not explained beyond the obvious translation, \"black coffee\"; who coined the color name is undocumented here [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within six units of Café Noir covers at least five per cent of the canvas in 8,782 of 23,781 paintings, about 37 per cent, as photographed [2]. That is an unusually wide net for a single named brown: it is one of the most common shadow and underpainting tones in the archive, not a rare named hue [2]. It peaks in the 1630s, in 332 of 833 paintings, and Dutch painters dominate the top of the list: Otto van Veen, Nicolaes Maes and Jan Both each carry it in more than four out of five of their paintings, roughly twice the archive's overall rate [2]. Its earliest appearance is a Buddhist triad dated to around 900 [2]. These are photographs of varnished paintings, read as screen colors [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "café noir, French for black coffee",
+   "first_recorded": "Maerz & Paul, 1930 (dated 1928), plate 8 H 12",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "Cafe Noir"
+  ],
+  "siblings": [
+   "ivory-brown",
+   "falcon",
+   "autumn",
+   "nut-brown"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#4B3621",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 8782,
+  "painters": [
+   {
+    "name": "Otto van Veen",
+    "hits": 13,
+    "n": 15,
+    "lift": 2.35
+   },
+   {
+    "name": "Nicolaes Maes",
+    "hits": 18,
+    "n": 21,
+    "lift": 2.32
+   }
+  ],
+  "measured": {
+   "rgb": [
+    75,
+    54,
+    33
+   ],
+   "lch": [
+    24.5,
+    18.0,
+    69.1
+   ],
+   "nearest": [
+    [
+     "Ivory Brown",
+     3.2
+    ],
+    [
+     "Falcon",
+     4.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz & Paul 1930 (plate 8 H 12), ISCC-NBS 1955 (block 81), Wikipedia color-name list",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match within ΔE 6, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does café noir mean in French?",
+   "choices": [
+    "Black coffee",
+    "Dark night",
+    "Burnt wood",
+    "Noir film"
+   ],
+   "answer": "Black coffee",
+   "kind": "pick"
+  },
+  {
+   "q": "Why does Café Noir cover more of the archive than most named colors in this batch?",
+   "choices": [
+    "It is a very broad shadow and underpainting tone, not a rare hue",
+    "It is a myth color that was corrected later",
+    "It only appears in modern paintings",
+    "It is identical to black"
+   ],
+   "answer": "It is a very broad shadow and underpainting tone, not a rare hue",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Café Noir, a dark brown named for black coffee, turns up in more than a third of our archive's paintings."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "nearest-neighbor distance (and, for calliste-green, the named colors) did not match data/graph/edges-*.json 'la' / a direct CIEDE2000 recomputation; corrected.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 262
+}

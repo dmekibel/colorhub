@@ -1,0 +1,139 @@
+{
+ "slug": "dark-sienna",
+ "name": "Dark Sienna",
+ "hex": "#3C1414",
+ "names": [
+  "Dark Sienna"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dark Sienna pushes the earth pigment sienna almost to black-red, and it is one of the most common colors in our entire painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "An earth pigment, darkened",
+   "body": "The name follows the usual grammar for our [1]. Sienna itself is a natural iron-oxide earth pigment named for Siena, Italy, and English sources first use it as a color word around 1760 [1]. In Japan the same earthy hue family is called *Taisha-iro*, 代赭色, literally \"red ochre color\" [1]. The ISCC-NBS system of 1955 classifies Dark Sienna as a dark reddish brown, and Wikipedia's own citation for the color traces back to that same system [2]. The nearest named colors on file are [[black-bean]] and [[dusty-oxblood]], at 4.1 and 5.2 ΔE [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Dark Sienna appears in 5.16 percent of the 23,781 paintings in our archive, 1,227 of them as photographed, more common than 86 percent of the named colors we track [3]. It peaks in the 1500s, found in 5.2 percent of the 2,231 paintings from that century, 1.6 times its own museums' baseline [3]. Inside a painting it most often serves as a hidden color, in 46 percent of its 692 clearest appearances, buried in shadow rather than shown on the surface [3].\n\n[[painter:john-singer-sargent|Sargent]] uses it most by raw count, in 7 of his 287 works here, though no single painter stands out against the museum baseline the way some do for rarer colors [3]. It shares canvases with Blood Red and Deep Red far more than chance, with lifts of 8.2 and 6.6 [3]. The earliest match is dated 1210, a plausible age for an earth pigment that painters have ground for millennia, a floor and not a first, since the archive's early centuries are thin [3]. It sits deep in the [[brown]] family, far too red to pass for plain grey [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Siena, Italy, source of the natural earth pigment",
+   "first_recorded": "about 1760",
+   "source": "ColorHub color graph"
+  },
+  "aka": [],
+  "siblings": [
+   "black-bean",
+   "dusty-oxblood",
+   "dark-maroon",
+   "black-red"
+  ],
+  "parent": "sienna",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Taisha-iro (代赭色)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1227,
+  "painters": [
+   "john-singer-sargent",
+   "sandro-botticelli",
+   "paolo-veronese"
+  ],
+  "role": "hidden",
+  "measured": {
+   "lch": [
+    13,
+    22,
+    27
+   ],
+   "iscc": "dark reddish brown",
+   "nearest": [
+    [
+     "Black Bean",
+     4.1
+    ],
+    [
+     "Dusty oxblood",
+     5.2
+    ],
+    [
+     "Dark Maroon",
+     5.4
+    ],
+    [
+     "Black Red",
+     5.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph: modifier grammar (dark + sienna); Sienna first used as a color word, about 1760; Japanese library entry",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS 1955 block 44/58 entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Sienna, the word Dark Sienna darkens, is named for what?",
+   "choices": [
+    "A chemist",
+    "The Italian city of Siena",
+    "A flower",
+    "A Crayola product line"
+   ],
+   "answer": "The Italian city of Siena",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: inside a painting, Dark Sienna most often sits in plain view as a bright accent.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dark Sienna hides in shadow more often than it shows on the surface."
+ ],
+ "words": 300,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

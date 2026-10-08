@@ -1,0 +1,134 @@
+{
+ "slug": "biscay-green",
+ "name": "Biscay Green",
+ "hex": "#979E65",
+ "names": [
+  "Biscay Green"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Biscay Green is a muted yellow-green from Ridgway's 1912 systematic nomenclature, measured so close to the library's own Moss that the two sit about three units apart.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A Ridgway hue, later folded into ISCC-NBS",
+   "body": "Robert Ridgway's *Color Standards and Color Nomenclature* (1912) places Biscay Green on plate XVII, hue 27′, tone i [1]. A second, very close entry sits on plate XXXI, hue 29′′, also tone i [1]. The National Bureau of Standards folded both into its 1955 ISCC-NBS system as block 120, *moderate yellow green*, and Maerz and Paul's 1930 dictionary is cited for the same block by the 1955 circular [1]. Ridgway's own plates give no account of why he chose the name Biscay, and none is documented here [1].\n\nThe library's measurements put this swatch almost on top of [[moss|Moss]], about 3.3 units off, and it also sits near a second Ridgway and ISCC-NBS entry that our data groups as a near-duplicate, within about 2.3 units [2]. The painted hue most associated with the same shade cluster is [[roman-green|Roman Green]], which turns up on the same canvases more often than chance [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color match to this swatch in 361 of 23,781 paintings, 1.52 percent, as photographed; the within-painting lens finds it in 187, more common than 69 percent of the named colors we track [3]. Georges Seurat is its most devoted painter, carrying it in 8 of the 41 [[painter:georges-seurat|Seurat]] paintings in the archive, 8.9 times the rate expected from the museums his works come from [3].\n\nUsage peaks in the 1900s, with 35 of 1,674 paintings from that decade carrying it, 2.4 times the expected rate, and inside a painting it most often plays an accent (39 percent of its 187 within-painting matches) [3]. The earliest match dates to 916, nearly a thousand years before the name's 1912 record, which shows only that a similar-looking hue existed in paint long before the word did, a floor and not a first, since the archive's early centuries are thin [3]. India is the most over-represented country, at 2.1 times its expected share, and the color shares canvases with Roman Green far more than chance would predict [3]. These are photographs of varnished paintings, read as screen colors [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "Ridgway, 1912, plate XVII, hue 27′, tone i",
+   "source": "Ridgway, Color Standards and Color Nomenclature (1912)"
+  },
+  "aka": [],
+  "siblings": [
+   "moss",
+   "roman-green",
+   "sage"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#979E65",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 361,
+  "painters": [
+   {
+    "name": "Georges Seurat",
+    "hits": 8,
+    "n": 41,
+    "lift": 8.9
+   }
+  ],
+  "countries": {
+   "India": {
+    "n": 721,
+    "hits": 17,
+    "lift": 2.1
+   }
+  },
+  "measured": {
+   "lch": [
+    63.3,
+    31.3,
+    112.2
+   ],
+   "nearest": [
+    [
+     "Moss",
+     3.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature, plate XVII, hue 27′ and plate XXXI, hue 29′′",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances and near-duplicate grouping",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1912 work first records Biscay Green?",
+   "choices": [
+    "Ridgway's Color Standards and Color Nomenclature",
+    "Maerz and Paul's A Dictionary of Color",
+    "The ISCC-NBS 1955 circular",
+    "Pantone's color guide"
+   ],
+   "answer": "Ridgway's Color Standards and Color Nomenclature",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Biscay Green is almost identical to the library's Moss.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A moderate yellow-green that Ridgway charted twice, almost identically, on two different plates."
+ ],
+ "words": 363,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

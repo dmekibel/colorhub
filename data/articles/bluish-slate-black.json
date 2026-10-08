@@ -1,0 +1,117 @@
+{
+ "slug": "bluish-slate-black",
+ "name": "Bluish Slate-Black",
+ "hex": "#2F4649",
+ "names": [
+  "Bluish Slate-Black"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Bluish Slate-Black is a near-black green-blue from Ridgway's 1912 plates, and the swatch our library pairs with the Japanese word ai-iro, indigo color.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dark slate, and a Japanese pairing",
+   "body": "Ridgway's 1912 standards place this swatch on plate XLVIII, and the 1955 ISCC-NBS system classes a close match as a dark blue [1]. The nearest named colors on file are [[greenish-slate-black]], [[black-green]], [[dark-slate-grey]] and [[dark-delft-blue]], at 3.1, 4.3, 4.4 and 4.4 ΔE [1]. Our library also files it next to the Japanese term 藍色, romanized Ai-iro and meaning indigo color, though the pairing is by hue proximity, not a translation [1].\n\nA near-duplicate from the same Ridgway plate sits only 1.2 ΔE away: Dull Blue-Green Black [1]. The nearest everyday name on file is [[charcoal]], not far from [[denim]] and [[black-coral]] in the same dark, low-chroma corner of our library [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match in 431 of 23,781 paintings (1.81 percent), as photographed [2]. It peaks in the 1900s, in 45 of 1,674 paintings, at 2.9 times the archive's overall rate, is over-represented in paintings from Norway (4.0 times expected), and Paul Cezanne used it most, 5.4 times his museums' baseline [2]. Inside a painting it most often plays a shadow, which fits a near-black color [2]. The earliest dated match, from 1099, predates the 1912 record by eight centuries, which the archive's thin early coverage makes a floor, not a first sighting of the actual name [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "slate, darkened toward black",
+   "first_recorded": "Ridgway, 1912",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "greenish-slate-black",
+   "black-green",
+   "dark-slate-grey",
+   "dark-delft-blue"
+  ],
+  "parent": "slate",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Ai-iro (藍色), indigo color — paired by hue, not translation"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 431,
+  "role": {
+   "shadow": 0.33
+  },
+  "company": [],
+  "measured": {
+   "lch": [
+    28,
+    9,
+    210
+   ],
+   "nearest": [
+    [
+     "Greenish Slate-Black",
+     3.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: name records, plate and block locators, tier classification",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which Japanese term does our library pair with Bluish Slate-Black by hue?",
+   "choices": [
+    "Ai-iro (indigo color)",
+    "Sakura-iro (cherry blossom)",
+    "Kon-iro (navy)",
+    "Moegi-iro (onion sprout)"
+   ],
+   "answer": "Ai-iro (indigo color)",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the Japanese pairing means the Japanese word was translated directly into this English name.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Bluish Slate-Black sits, by hue alone, next to the Japanese word for indigo color."
+ ],
+ "words": 244,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

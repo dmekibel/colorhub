@@ -1,0 +1,146 @@
+{
+ "slug": "sailor-blue",
+ "name": "Sailor Blue",
+ "hex": "#565F96",
+ "names": [
+  "Sailor Blue"
+ ],
+ "tier": "place",
+ "depth": "medium",
+ "lede": "Sailor Blue is a muted purplish blue that Ridgway's 1912 color standards placed on plate XXI, and which our archive finds most often in paintings by Matisse and Munch.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "From Ridgway's plates to a dictionary entry",
+   "body": "Ridgway's *Color Standards and Color Nomenclature* (1912) gives this hue at plate XXI, hue 53′, tone k, scanned from an aged printed plate and so only approximate [1]. Maerz and Paul's 1930 dictionary records the same name at plate 44, position D 10, first listed in 1912, and the ISCC-NBS system later filed it as a grayish-to-moderate purplish blue [1]. Our library classes \"Sailor\" as a place-or-institution word, and the sources we have do not say more about the choice [2].\n\nThe closest named colors are [[greyish-violet-blue]], about 2.7 units away and duller, and [[dark-diva-blue]], almost the same at 3.2 units [3]. Sailor Blue also turns up, by coincidence of hue rather than any recorded link, close to a gemstone reading: azurite's classic blue sits about 7 units off [3].\n\nA little further off still are [[dark-soft-blue-violet]], almost the same at 3.3 units, and [[indigo-blue]], bluer and duller at 3.7 [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Across our 23,781-painting archive, as photographed, a color within six units of Sailor Blue covers at least five per cent of a canvas in 43 works [4]. It leans heavily toward the twentieth century, with the 1900s decade carrying it at more than three times the archive's overall rate [4]. The earliest known match is Fra Angelico's 1420 *Coronation of the Virgin*, where it covers about 14 per cent of the canvas [4]. Henri Matisse is the strongest match, present in four of his fifty archived paintings, over forty times the archive rate, including *Blue Nude IV* of 1952 at just over half the canvas [4]. It shares a canvas with denim-colored blue far more than chance would predict [4]. These are photographs of aged, varnished paintings, so every number is a screen color, not a pigment test [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; the place-or-institution word \"sailor\"",
+   "first_recorded": "Ridgway, Color Standards and Color Nomenclature (1912), plate XXI, hue 53′, tone k",
+   "source": "ColorHub color library (Ridgway 1912; Maerz & Paul 1930; ISCC-NBS 1955)"
+  },
+  "aka": [],
+  "siblings": [
+   "greyish-violet-blue",
+   "dark-diva-blue",
+   "dark-soft-blue-violet",
+   "indigo-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#565F96",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 43,
+  "painters": [
+   {
+    "name": "Henri Matisse",
+    "hits": 4,
+    "n": 50,
+    "lift": 44.24
+   }
+  ],
+  "company": [
+   {
+    "word": "Denim",
+    "lift": 67.72
+   }
+  ],
+  "measured": {
+   "lch": [
+    41.8,
+    33.3,
+    290.0
+   ],
+   "nearest": [
+    [
+     "Greyish Violet-Blue",
+     2.7
+    ],
+    [
+     "Dark Diva Blue",
+     3.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-s.json): Ridgway 1912, plate XXI, hue 53′, tone k; Maerz & Paul 1930, plate 44 D 10; ISCC-NBS 1955",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library, place/institution tier classification",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-s.json), CIEDE2000 look-alike and gem-twin distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which painter's work matches Sailor Blue most, relative to how often he appears in the archive?",
+   "choices": [
+    "Henri Matisse",
+    "Claude Monet",
+    "John Singer Sargent",
+    "Paul Cézanne"
+   ],
+   "answer": "Henri Matisse",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Ridgway's 1912 plate for this color is an exact, unfaded reading.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Sailor Blue shows up in Matisse's work more than forty times the rate you'd expect by chance."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-08",
+  "issues": [
+   "Ridgway's 1912 plate is a scan of an aged printed page; treated as approximate.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 320
+}

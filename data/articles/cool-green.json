@@ -1,0 +1,116 @@
+{
+ "slug": "cool-green",
+ "name": "Cool Green",
+ "hex": "#33B864",
+ "names": [
+  "Cool Green"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Cool Green is a vivid, blue-leaning modifier on [[green]], first recorded in the 2010 xkcd color survey, where thousands of internet users typed their own name for the hue they were shown.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A crowd-sourced modifier",
+   "body": "The name follows the library's plain modifier grammar: *cool* plus [[green]], marking it as the blue-leaning side of the green family rather than a historical or commercial name [1]. Its only record is the xkcd color survey of 2010, an open web poll with no earlier dictionary or standard behind it, so no coiner or date beyond that survey is documented [1]. Our library also groups it with [[emerald]] as a related name [1].\n\nIts nearest named neighbors are [[algae-green]], almost indistinguishable at 3.1 units, and [[shamrock]] and [[jade-green]], both a touch more vivid or duller at 3.6 [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive carries a color this close to Cool Green covering at least one percent of its canvas, as photographed [3]. That says more about this particular archive of old paintings than about green paint in general: a crowd-sourced web name like this one was never meant to describe historical pigments [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a modifier on green; coined by a respondent to the 2010 xkcd color survey",
+   "first_recorded": "2010, xkcd color survey",
+   "source": "ColorHub color library (xkcd 2010)"
+  },
+  "aka": [],
+  "siblings": [
+   "algae-green",
+   "shamrock",
+   "jade-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    66.4,
+    63.1,
+    148.9
+   ],
+   "nearest": [
+    [
+     "Algae green",
+     3.1
+    ],
+    [
+     "Shamrock",
+     3.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-c.json): xkcd color survey, 2010",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph, look-alike edges (data/graph/edges-c.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes); counts are computed color matches on photographs of varnished, aged canvases, not pigment identifications",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does the name Cool Green come from?",
+   "choices": [
+    "The 2010 xkcd color survey",
+    "Ridgway's 1912 plates",
+    "A Crayola crayon box",
+    "The ISCC-NBS 1955 system"
+   ],
+   "answer": "The 2010 xkcd color survey",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Cool Green covers at least one percent of the canvas in several paintings in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Cool Green comes from a 2010 internet survey, not a dictionary or a pigment."
+ ],
+ "words": 186,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}

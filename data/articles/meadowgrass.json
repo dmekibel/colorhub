@@ -1,0 +1,148 @@
+{
+ "slug": "meadowgrass",
+ "name": "Meadowgrass",
+ "hex": "#395931",
+ "names": [
+  "Meadowgrass"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Meadowgrass is a dark, yellowish green from Maerz and Paul's 1930 dictionary, close enough to [[hunter-green|Hunter Green]] that the two likely come from the same part of the chart.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A grass green, not a lawn green",
+   "body": "Maerz and Paul place this value at plate 23, position H 9, first recorded in 1924 [1]. The ISCC-NBS system of 1955 classifies it as a dark yellowish green, about 3.2 units from that block's reference chip [2]. Unlike many of the dictionary's flower and animal names, meadowgrass needs no explanation: it is simply the grass of an open field, read as darker and more shadowed than a bright lawn [1].\n\nIts nearest library neighbor is [[cossack|Cossack]], and it sits close to [[hunter-green|Hunter Green]], [[moss|Moss]] and [[olive-mud|Olive Mud]] on the same dark, muted stretch of the chart [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Meadowgrass covers at least five per cent of the canvas in 119 works, about one in two hundred, as photographed [3]. Van Gogh, Pissarro and Gauguin each carry it at roughly sixteen times the rate expected for their output, and it peaks in paintings from the 1920s, over five times expected [3]. It functions mostly as a shadow color, and its company on canvas is mostly other greens, led by Hunter Green [3]. These remain photographs of aged, varnished canvases read as screen colors, not pigment tests [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "meadow grass",
+   "first_recorded": "Maerz & Paul, A Dictionary of Color (1930), plate 23 H 9, first recorded 1924",
+   "source": "ColorHub color library (Maerz & Paul 1930; ISCC-NBS 1955)"
+  },
+  "aka": [],
+  "siblings": [
+   "cossack",
+   "hunter-green",
+   "moss",
+   "olive-mud"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#395931",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 119,
+  "painters": [
+   {
+    "key": "Vincent van Gogh",
+    "lift": 16.31
+   },
+   {
+    "key": "Camille Pissarro",
+    "lift": 15.99
+   },
+   {
+    "key": "Paul Gauguin",
+    "lift": 15.99
+   }
+  ],
+  "peak_decade": {
+   "key": 1920,
+   "lift": 5.06
+  },
+  "company": [
+   {
+    "word": "Hunter green",
+    "lift": 11.16
+   },
+   {
+    "word": "Moss",
+    "lift": 6.63
+   }
+  ],
+  "measured": {
+   "lch": [
+    34,
+    28,
+    136
+   ],
+   "nearest": [
+    [
+     "Cossack",
+     3.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Maerz & Paul, A Dictionary of Color, plate 23 H 9, first recorded 1924",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: ISCC-NBS block, nearest-match field (data/graph/nodes-m.json; data/library.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which three painters carry Meadowgrass at far above their expected rate in our archive?",
+   "choices": [
+    "Van Gogh, Pissarro and Gauguin",
+    "Monet, Renoir and Degas",
+    "Sargent, Whistler and Homer",
+    "Rembrandt, Vermeer and Hals"
+   ],
+   "answer": "Van Gogh, Pissarro and Gauguin",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Meadowgrass most often shares a canvas with bright pinks and reds.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "In our archive, Meadowgrass turns up far more than expected in Van Gogh, Pissarro and Gauguin."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 221
+}

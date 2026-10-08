@@ -1,0 +1,139 @@
+{
+ "slug": "beaucaire",
+ "name": "Beaucaire",
+ "hex": "#3D86AA",
+ "names": [
+  "Beaucaire"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Beaucaire is a muted greenish blue recorded in Maerz and Paul's 1930 color dictionary, close enough to the library's Dirty Blue and Cerulean that only a few measured units separate them.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A 1925 entry, no story behind it",
+   "body": "Maerz and Paul's *A Dictionary of Color* (1930) places Beaucaire on plate 35, position L4, and dates its first recorded use to 1925 [1]. The dictionary gives no account of where the name comes from, so its origin is undocumented here [1]. The ISCC-NBS lists of 1955 do not carry the name separately; the National Bureau of Standards circular only cites Maerz and Paul's entry [1].\n\nThe library's own measurements put this swatch closest to [[dirty-blue|Dirty Blue]], 3.2 units off, a slightly greyer, darker blue, and within a few units of [[cerulean|Cerulean]], which is brighter and leans more toward pure blue [2]. By the color-matching math it also sits near the ISCC-NBS block for *vivid greenish blue*, about five and a half units off, though no book files Beaucaire there directly [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color match to this swatch in 69 of 23,781 paintings, 0.29 percent, as photographed; the stricter within-painting lens finds it in 30 [3]. That makes it rarer than 57 percent of the named colors we track [3]. Claude Monet is its most devoted painter here, carrying it in 4 of the 50 [[painter:claude-monet|Monet]] paintings in the archive, 6.7 times the rate expected from the museums his works come from [3].\n\nUsage peaks in the 1900s, with 7 of 1,674 paintings from that decade carrying it, three times the expected rate, and inside a painting it most often sits as an accent rather than a dominant field (43 percent of its 30 within-painting matches) [3]. The earliest match is Marco Zoppo's panel of 1467, nearly five centuries before the name's 1925 record, which shows only that a similar-looking hue existed in paint long before the word did, not that the pigment or dye did, a floor and not a first, since the archive's early centuries are thin [3]. France is the most over-represented country, at 2.4 times its expected share [3]. These are photographs of varnished paintings, read as screen colors [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "Maerz and Paul, 1930 (recorded use from 1925, plate 35 L4)",
+   "source": "Maerz and Paul, A Dictionary of Color (1930)"
+  },
+  "aka": [],
+  "siblings": [
+   "dirty-blue",
+   "cerulean",
+   "teal"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#3D86AA",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 69,
+  "painters": [
+   {
+    "name": "Claude Monet",
+    "hits": 4,
+    "n": 50,
+    "lift": 6.7
+   }
+  ],
+  "countries": {
+   "France": {
+    "n": 3443,
+    "hits": 12,
+    "lift": 2.4
+   }
+  },
+  "measured": {
+   "lch": [
+    52.9,
+    28.2,
+    246.2
+   ],
+   "nearest": [
+    [
+     "Dirty Blue",
+     3.2
+    ],
+    [
+     "Cerulean",
+     5.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Maerz and Paul, A Dictionary of Color, \"Beaucaire\", plate 35 L4",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances and computed ISCC-NBS block",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1930 book first records the name Beaucaire?",
+   "choices": [
+    "Maerz and Paul's A Dictionary of Color",
+    "Ridgway's Color Standards and Color Nomenclature",
+    "The ISCC-NBS 1955 circular",
+    "Paterson's A Dictionary of Colour"
+   ],
+   "answer": "Maerz and Paul's A Dictionary of Color",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the dictionary explains where the name Beaucaire comes from.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A 1925 blue with a name no book explains."
+ ],
+ "words": 352,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "field.measured.nearest had a null distance (or, for bokhara/buffy-brown, named a color that was not actually the nearest) against data/graph/edges-*.json 'la'; filled in / corrected against that source.",
+   "lint 2026-10-09"
+  ]
+ }
+}

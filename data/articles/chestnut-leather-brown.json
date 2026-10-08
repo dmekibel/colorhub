@@ -1,0 +1,147 @@
+{
+ "slug": "chestnut-leather-brown",
+ "name": "Chestnut-leather brown",
+ "hex": "#60281E",
+ "names": [
+  "Chestnut-leather brown"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Chestnut-leather brown is a dark red-brown whose Japanese library name, Kurikawacha, describes exactly that: the color of a chestnut's outer skin, and it reads only about 3 units from plain [[mahogany]].",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Kurikawacha, a chestnut's skin",
+   "body": "The Wikipedia survey \"Traditional colors of Japan\" lists this color under the romanized name Kurikawacha, written 栗皮茶 [1]. The kanji read, in order, chestnut, skin, and brown (tea-color), and the library's own gloss, unusually, matches the English name word for word: \"chestnut-leather brown\" [1]. No book consulted here independently dates the name or names a dyer, so the earlier history is undocumented [1].\n\nThe nearest already-named color in our library is [[mahogany]], at a color-distance of 3.3, close enough that the two would be hard to tell apart on screen; the library also lists [[dusty-mahogany]] in the same neighborhood [1]. The hex, #60281E, is a modern screen approximation, not a measured dye or pigment [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within range of this swatch is common in our archive: it appears in 1,965 of the 23,781 paintings, about 8.26 percent, as photographed; the within-painting lens finds it 897 times [2]. That makes it more common than 89 percent of the named colors we track [2].\n\nIt peaks in the 1400s, present in 61 of 945 paintings from that century, 1.7 times the expected rate [2]. Inside a painting it most often plays an accent, in roughly half the paintings that carry it [2]. Juan de Juanes is its most devoted painter, using it in 6 of his 15 works here, nearly five times his museums' baseline rate [2]. The earliest dated appearance we have is 1150, though the archive's early centuries are thin, so this is a floor and not a true first sighting; it also shares canvases with [[espresso]] and [[brownish-orange]] more often than chance would predict [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a chestnut's skin, from 栗 (chestnut), 皮 (skin), and 茶 (brown, lit. tea-color)",
+   "first_recorded": "undocumented beyond its listing in Japan's traditional color system",
+   "source": "ColorHub color library (Wikipedia, \"Traditional colors of Japan\")"
+  },
+  "aka": [
+   "Kurikawacha",
+   "栗皮茶"
+  ],
+  "siblings": [
+   "mahogany",
+   "dusty-mahogany",
+   "chestnut"
+  ],
+  "parent": "mahogany",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Kurikawacha (栗皮茶), \"chestnut-leather brown\""
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1965,
+  "rank_pct": 89,
+  "century_peak": {
+   "century": 1400,
+   "hits": 61,
+   "of": 945,
+   "lift": 1.7
+  },
+  "role": {
+   "kind": "accent",
+   "pct": 49
+  },
+  "painters": {
+   "Juan de Juanes": [
+    6,
+    15,
+    4.8
+   ]
+  },
+  "first_seen": {
+   "year": 1150
+  },
+  "company": {
+   "Espresso": 3.3,
+   "Brownish Orange": 2.9
+  },
+  "measured": {
+   "nearest": [
+    [
+     "Mahogany",
+     3.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional color names (Wikipedia, \"Traditional colors of Japan\")",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Kurikawacha literally name?",
+   "choices": [
+    "A chestnut's outer skin",
+    "A tea ceremony bowl",
+    "A tanner's workshop",
+    "An autumn forest floor"
+   ],
+   "answer": "A chestnut's outer skin",
+   "kind": "pick"
+  },
+  {
+   "q": "Which painter in our archive is most devoted to chestnut-leather brown?",
+   "choices": [
+    "Juan de Juanes",
+    "John Singer Sargent",
+    "Paul Gauguin",
+    "Frans Hals"
+   ],
+   "answer": "Juan de Juanes",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: chestnut-leather brown is rare in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Chestnut-leather brown's Japanese name, Kurikawacha, translates almost word for word into its English name: the color of a chestnut's skin."
+ ],
+ "words": 294,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No book-level source for the name's history beyond the library gloss; stated as undocumented rather than guessed.",
+   "lint 2026-10-09"
+  ]
+ }
+}

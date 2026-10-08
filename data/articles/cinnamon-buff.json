@@ -1,0 +1,132 @@
+{
+ "slug": "cinnamon-buff",
+ "name": "Cinnamon-Buff",
+ "hex": "#D9A874",
+ "names": [
+  "Cinnamon-Buff"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Cinnamon-Buff is a warm, moderate orange yellow named for the spice, recorded in Robert Ridgway's 1912 color standard and carried into the ISCC-NBS system of 1955.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A Ridgway cinnamon",
+   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* lists Cinnamon-Buff on plate XXIX, hue 17′′, tone b [1]. The ISCC-NBS system of 1955 places the same swatch in block 71, the category it calls moderate orange yellow, 5.0 units from that block's centroid [2]. The nearest named colors on file are [[yellowish-camel]], [[peachbeige]], [[sand-yellow]] and [[saratoga]], at 2.8, 3.8, 8, 3.8, 4.1 and 4.4 ΔE [2]. All three borrow the word from [[cinnamon]], the spice [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Cinnamon-Buff covers at least five per cent of the canvas in 1,240 of them, about 5.2 per cent, as photographed [3]. It plays a highlight far more often than a shadow, in 91 per cent of its appearances [3]. It is especially common in Mughal painting, 69 of 168 works, 7.9 times the archive rate, and more broadly across Indian painting, 137 of 721 works [3]. These are museum photographs of aged, varnished paintings, so the match is a screen color, not a pigment identification [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "cinnamon, the spice",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "Ridgway, Color Standards and Color Nomenclature; ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "yellowish-camel",
+   "peachbeige",
+   "sand-yellow",
+   "saratoga"
+  ],
+  "parent": "cinnamon",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1240,
+  "pct_archive": 5.2,
+  "role_highlight": 0.91,
+  "nearest": [
+   [
+    "Camel",
+    5.3
+   ]
+  ],
+  "movement_lift": {
+   "Mughal": 7.88
+  },
+  "measured": {
+   "nearest": [
+    [
+     "Yellowish camel",
+     2.8
+    ],
+    [
+     "Peachbeige",
+     3.8
+    ],
+    [
+     "Sand Yellow",
+     4.1
+    ],
+    [
+     "Saratoga",
+     4.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XXIX, hue 17′′, tone b (via ColorHub library)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955 block 71), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1912 color standard lists Cinnamon-Buff on plate XXIX?",
+   "choices": [
+    "Ridgway's Color Standards and Color Nomenclature",
+    "Maerz and Paul's A Dictionary of Color",
+    "Munsell's Atlas of Color"
+   ],
+   "answer": "Ridgway's Color Standards and Color Nomenclature",
+   "kind": "pick"
+  },
+  {
+   "q": "In our painting archive, Cinnamon-Buff plays a highlight more often than a shadow.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Cinnamon-Buff turns up 7.9 times more often in Mughal painting than in the archive overall."
+ ],
+ "words": 203,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

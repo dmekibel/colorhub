@@ -1,0 +1,116 @@
+{
+ "slug": "pale-green-grey",
+ "name": "Pale green grey",
+ "hex": "#BECCB5",
+ "names": [
+  "Pale green grey"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Pale green grey is a soft, washed grey-green, the library's lightened variant of [[green-grey]], and on screen the exact swatch of [[greenish-glaucous]].",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier on an existing name",
+   "body": "The library builds the name in two parts: [[green-grey]] as the base, with \"pale\" as a modifier [1]. Our sources first record it in Ridgway's 1912 atlas, and the 1955 ISCC-NBS dictionary carries it too; our index has no plate number for it [1]. Its swatch, #BECCB5, is identical to Greenish Glaucous, another Ridgway-era name [1]. In LCH it has lightness 80, chroma 13 and hue 132 degrees, a light green barely tinted away from grey [1]. Its closest neighbors are [[corydalis-green]], 3.4 units away in CIEDE2000 and a little yellower, and [[pale-niagara-green]], 3.6 away and greener [1]. The nearest ISCC-NBS block is pale yellow green, 7.2 units off [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive a match appears in 280 of 23,781 paintings, about 1.2 percent, as photographed; the within-painting lens finds it in 220 [2]. That makes it more common than 72 percent of our named colors [2]. Inside a painting it most often plays a light, in 56 percent of those 220, and a hidden color in about a third [2]. It peaks in the 1800s, in 115 of 8,345 paintings, in 1.4 percent of the 8,345 paintings (115 of them) we have from that century, about 1.4 times the same museums' baseline [2]. [[painter:alfred-sisley|Alfred Sisley]] is its most devoted painter, carrying it in 8 of his 50 archived works, 7.5 times the baseline [2]. It shares canvases more than chance would predict with [[artichoke-green]] and [[amber-white]] [2]. The earliest match is a 1462 painting by Andrea Mantegna, 450 years before the name's first record: a look-alike hue in an aged photograph, not a pigment test, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: pale + green-grey",
+   "first_recorded": "Ridgway, Color Standards and Nomenclature, 1912; ISCC-NBS, 1955",
+   "source": "ColorHub color library and Color Graph"
+  },
+  "aka": [],
+  "siblings": [
+   "corydalis-green",
+   "pale-niagara-green",
+   "greenish-glaucous"
+  ],
+  "parent": "green-grey",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 280,
+  "painters": [
+   {
+    "name": "Alfred Sisley",
+    "hits": 8,
+    "n": 50,
+    "lift": 7.5
+   }
+  ],
+  "measured": {
+   "lch": [
+    80.4,
+    13.3,
+    132.3
+   ],
+   "iscc_nbs": {
+    "name": "pale yellow green",
+    "de2000": 7.2
+   }
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and Color Graph (data/library.json, data/graph): source years, ISCC-NBS block, LCH values, look-alikes and exact duplicates",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive fieldnotes, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Pale green grey is built by adding \"pale\" to which existing color name?",
+   "choices": [
+    "Green grey",
+    "Sage",
+    "Celadon",
+    "Ash"
+   ],
+   "answer": "Green grey",
+   "kind": "pick"
+  },
+  {
+   "q": "Inside the paintings in our archive, what role does Pale green grey most often play?",
+   "choices": [
+    "Light tone",
+    "Mid-tone",
+    "Shadow"
+   ],
+   "answer": "Light tone",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Pale green grey is a green so faint it reads as grey until you set it beside a true grey."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Field notes cited a fabricated painting count, an inflated painter stat and a fabricated British/country claim not present in the cited fieldnotes (data/graph/fieldnotes); corrected to the real counts, role and painter stat, and swapped the unsupported country claim for the real companion-color data.",
+   "Editor spot-audit 2026-10-09: removed 'almost always a light tone' (it is 56%), the 'ISCC-NBS files the same patch' misreading (7.2 is the distance to the nearest block, the name is only recorded there), the unsupported 'nearer to celadon and sage than grey' (sage is not nearer), and the Munsell cite (no Munsell value); added the real look-alikes, the identical Greenish Glaucous swatch, the varnish caveat and the Mantegna before-record note.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 307
+}

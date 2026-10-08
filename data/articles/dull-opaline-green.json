@@ -1,0 +1,125 @@
+{
+ "slug": "dull-opaline-green",
+ "name": "Dull Opaline Green",
+ "hex": "#C9E3CC",
+ "names": [
+  "Dull Opaline Green"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Dull Opaline Green is a very pale, slightly grayed green from Ridgway's 1912 atlas, closer to celadon porcelain than to any garden green.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A pale plate reference from 1912",
+   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* plots this color on plate XIX at hue 37′, tone f, among its lightest green swatches [1]. As with the rest of that atlas, the published scan is an aged plate and only an approximation of Ridgway's original pigment [1]. Our own classification places it in the ISCC-NBS region called very pale green, Munsell notation 1.8G 8.8/2.0 [2].\n\nThe nearest named colors on file are [[pale-blue-green]], [[microcline-green]], [[lichen-green]] and [[pale-niagara-green]], at 3.3, 3.6, 3.8 and 5.1 ΔE [2]. Both readings agree: this is a green pulled toward blue and almost all the way to white, distinct from a saturated [[green]] [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this one covers at least five percent of the canvas in 38 paintings, about 0.2 percent overall, as photographed [3]. Nearly all of those appearances are highlights rather than shadows or mid-tones, which fits a near-white green [3]. Use is highest in the 1860s, more than five times the archive's average rate for that decade, and the color's single strongest companion word is Celadon, at over two hundred times its average co-occurrence [3]. These counts come from photographs of varnished paintings, not from pigment analysis [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; a systematic grid name (Ridgway), not a place or substance",
+   "first_recorded": "1912 (Ridgway's atlas, plate XIX)",
+   "source": "Ridgway, Color Standards and Color Nomenclature"
+  },
+  "aka": [],
+  "siblings": [
+   "pale-blue-green",
+   "microcline-green",
+   "lichen-green",
+   "pale-niagara-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 38,
+  "measured": {
+   "lch": [
+    88,
+    15,
+    147
+   ],
+   "nearest": [
+    [
+     "Pale Blue-Green",
+     3.3
+    ]
+   ]
+  },
+  "role": {
+   "highlight": 0.97,
+   "mid": 0.03
+  },
+  "company": [
+   {
+    "word": "Celadon",
+    "lift": 238.41
+   }
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XIX, hue 37′, tone f",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz and Paul, Ridgway, ISCC-NBS and RAL entries, computed LCH/Munsell/nearest-name match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Dull Opaline Green's closest core-color match in our library is:",
+   "choices": [
+    "Celadon",
+    "Jade",
+    "Mint",
+    "Sage"
+   ],
+   "answer": "Celadon",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Ridgway's 1912 plate gives this color a descriptive name rather than a grid reference.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dull Opaline Green shows up in paintings almost only as a highlight, and its strongest companion word is Celadon, by a wide margin."
+ ],
+ "words": 236,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

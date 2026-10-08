@@ -1,0 +1,148 @@
+{
+ "slug": "shrimp-pink",
+ "name": "Shrimp Pink",
+ "hex": "#FDCABC",
+ "names": [
+  "Shrimp Pink"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Shrimp Pink is a light yellowish pink from Ridgway's 1912 plates, called sakura-iro — cherry blossom color — in Japan, and the English phrase peaked in print in 1929.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Cherry blossom color",
+   "body": "Ridgway's 1912 plates give Shrimp Pink at hue 5, tone f, on plate I, and the Inter-Society Color Council's 1955 census files it, in block 26, as a light yellowish pink [1]. The Ngram record shows the English phrase peaking in print in 1929, after a slow climb that began around 1879 [3].\n\nIn Japan, the same shade is called *sakura-iro* (桜色), cherry blossom color[1]. Its closest library neighbor is [[flesh-pink]], under 3 units away, with [[pale-flesh-color]] close behind; ColorHub's broader map also puts it near [[baby-pink]], a shade lighter still, and [[safrano-pink]] [1]. A fifth, slightly farther neighbor is [[pale-congo-pink]], 5.6 ΔE away, duller [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this pink in just 7 of 23,781 paintings, as photographed, always as a highlight [2]. Danish and French paintings carry it a little above the archive's base rate, though the sample is small [2]. The scarcity fits a bright, saturated pink: few aged, varnished canvases hold enough of a color this light and clean across 5 percent of their surface [2]. The count is a computed color match, never a pigment identification [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the shrimp",
+   "first_recorded": "undocumented in Ridgway or ISCC-NBS; the English phrase's print use peaked in 1929",
+   "source": "Ridgway (1912) via ColorHub library; Google Books Ngram"
+  },
+  "aka": [],
+  "siblings": [
+   "flesh-pink",
+   "pale-flesh-color",
+   "safrano-pink",
+   "melon"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Sakura-iro (桜色)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 7,
+  "measured": {
+   "lch": [
+    85,
+    21,
+    41
+   ],
+   "nearest": [
+    [
+     "Flesh Pink",
+     2.7
+    ],
+    [
+     "Pale Flesh Color",
+     3.3
+    ],
+    [
+     "Safrano Pink",
+     3.6
+    ],
+    [
+     "Melon",
+     4.8
+    ]
+   ]
+  },
+  "ngram": {
+   "word": "shrimp pink",
+   "peak": 1929,
+   "first_5pct": 1879
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955 entries, Japanese traditional-list data",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub Ngram cache (Google Books, case-insensitive, 5-year smoothed)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is Shrimp Pink called in Japan, according to ColorHub's data?",
+   "choices": [
+    "Sakura-iro (cherry blossom color)",
+    "Ai-iro (indigo color)",
+    "Momo-iro (peach color)",
+    "Kaki-iro (persimmon color)"
+   ],
+   "answer": "Sakura-iro (cherry blossom color)",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Shrimp Pink turns up in most of our archive's paintings.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "In which decade did the English phrase 'shrimp pink' peak in print, per the Ngram record?",
+   "choices": [
+    "1929",
+    "1850",
+    "1990",
+    "2010"
+   ],
+   "answer": "1929",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "In Japan."
+ ],
+ "words": 210,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

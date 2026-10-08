@@ -1,0 +1,136 @@
+{
+ "slug": "dusty-hunter-green",
+ "name": "Dusty hunter green",
+ "hex": "#3D5D42",
+ "names": [
+  "Dusty hunter green"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Dusty hunter green is a muted, dark green, ColorHub's English name for the Japanese traditional color Tokusa-iro, \"horsetail color,\" after the horsetail plant.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The horsetail plant",
+   "body": "Tokusa-iro (木賊色) is named in the Wikipedia list of Japan's traditional colors for *tokusa*, the horsetail (*Equisetum*), whose stiff dark-green stems the color recalls [1]. Horsetail stems were also used in Japan as a natural abrasive for polishing wood and metal, though the sources consulted do not say whether that use shaped the name [1].\n\nThe nearest named colors on file are [[hunter-green]] and [[empire-green]], at Both sit within the library's Greens family, alongside the core color [[green|Green]] [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 173 of 23,781 paintings, under one percent, as photographed [2]. The earliest match is a 1400 Rijksmuseum portrait group, *De heren van Montfoort*, a floor and not a first, since the archive's early centuries are thin [2]. The rate is highest in a sample of 523 paintings from the 1910s, nearly five times the archive average for that decade [2]. It is disproportionately present among Post-Impressionist painters sampled in our archive, including Henri Rousseau, Paul Gauguin, Camille Pissarro and Paul Cézanne [2]. The United States, Sweden, Norway, Switzerland and France all show it above their average rate [2]. These are computed color matches to photographed, varnished paintings, not pigment identifications [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the horsetail plant (tokusa)",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "Wikipedia, Traditional colors of Japan"
+  },
+  "aka": [
+   "Tokusa-iro"
+  ],
+  "siblings": [
+   "hunter-green",
+   "empire-green",
+   "meadowgrass",
+   "antique-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Tokusa-iro (木賊色)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 173,
+  "measured": {
+   "lch": [
+    36,
+    22,
+    147
+   ],
+   "nearest": [
+    [
+     "Hunter green",
+     3.0
+    ],
+    [
+     "Empire Green",
+     4.5
+    ],
+    [
+     "Meadowgrass",
+     4.5
+    ],
+    [
+     "Antique Green",
+     4.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "Wikipedia, \"Traditional colors of Japan\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/Traditional_colors_of_Japan"
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional list, ISCC-NBS 1955, Maerz & Paul 1930 entries",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What plant gives Tokusa-iro its name?",
+   "choices": [
+    "Horsetail",
+    "Bamboo",
+    "Pine",
+    "Moss"
+   ],
+   "answer": "Horsetail",
+   "kind": "pick"
+  },
+  {
+   "q": "This color is disproportionately common among which group of painters in our archive?",
+   "choices": [
+    "Post-Impressionists",
+    "Dutch Golden Age portraitists",
+    "Byzantine icon painters",
+    "Pre-Raphaelites"
+   ],
+   "answer": "Post-Impressionists",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Named for horsetail stems, and a favorite shade of several Post-Impressionists."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 213
+}

@@ -1,0 +1,101 @@
+{
+ "slug": "dark-coral",
+ "name": "Dark Coral",
+ "hex": "#CF524E",
+ "names": [
+  "Dark Coral"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dark Coral is a muted, brick-toned red, ColorHub's library name for a darkened shade of [[coral]], filed by the ISCC-NBS dictionary in 1955.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A darkened coral",
+   "body": "The name follows ColorHub's modifier grammar: \"dark\" plus the parent color [[coral]], the pink-red named for the marine animal and its skeleton [1]. The library records the swatch from the ISCC-NBS Dictionary of Color Names of 1955, in its block for strong red, and again from the xkcd color survey of 2010 [1]. No book in the ColorHub concordance treats \"Dark Coral\" as its own entry; the darkening is ColorHub's own description of where this shade sits relative to coral, not a historical name in its own right [1].\n\nThe nearest named neighbors on file are [[pastel-red]] and [[indian-red]], both close enough in hue and depth to be mistaken for it at a glance, with [[cedar-chest]] a shade duller [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color near this swatch in 88 of 23,781 paintings, about 0.37 per cent, as photographed [2]. It plays a mid-tone role in most of its appearances and peaks in paintings from the 1890s [2]. It is disproportionately common in Kalighat and Rajput paintings from India in our sample, and in the work of Henri Matisse [2]. These are computed color matches to photographed, varnished paintings, not pigment identifications [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a darkened shade of coral",
+   "first_recorded": "ISCC-NBS 1955",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "pastel-red",
+   "indian-red",
+   "cedar-chest"
+  ],
+  "parent": "coral",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 88,
+  "pct_archive": 0.37,
+  "role": "mid",
+  "peak_decade": 1890
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, xkcd color survey 2010)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph, nearest-neighbor color distances (data/graph/edges-d.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Dark Coral's name follows which rule?",
+   "choices": [
+    "Modifier (\"dark\") plus a parent color name",
+    "A painter's name",
+    "A place name"
+   ],
+   "answer": "Modifier (\"dark\") plus a parent color name",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dark Coral is one of the more common colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A darkened coral, most at home in 1890s paintings and in Indian miniature traditions."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": []
+ },
+ "words": 213
+}

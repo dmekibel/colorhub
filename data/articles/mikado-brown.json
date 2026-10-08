@@ -1,0 +1,167 @@
+{
+ "slug": "mikado-brown",
+ "name": "Mikado Brown",
+ "hex": "#AA7553",
+ "names": [
+  "Mikado Brown"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Mikado Brown is a light, tan-leaning brown from Ridgway's 1912 color atlas, named for the Japanese imperial title rather than for any dye or wood.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A title, used as a color word",
+   "body": "Ridgway's atlas places this value at plate XXIX, hue 13′′, tone i, first recorded in 1912 [1]. Maerz and Paul's 1930 dictionary lands on the same year at plate 14, position C 9, and the ISCC-NBS system of 1955 classifies the hue as a moderate brown [1][2]. *Mikado* was, at the time, a common English word for the Emperor of Japan; Ridgway gives no further reason for attaching it to this particular tan-brown rather than any other [1].\n\nThe nearest named colors on file are [[french-beige]], [[brown-sugar]] and [[india-spice]], at 3, 3.4 and 3.5 ΔE [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Mikado Brown covers at least five per cent of the canvas in 1,337 works, about one in eighteen, as photographed [3]. Its earliest match is an ancient Egyptian funerary papyrus; it peaks in the 1270s, in 13 of 48 paintings, and is strongest in Tibet, India and Iran, with Hans Memling, Albrecht Dürer and Lucas Cranach among the painters who carry it far above their average, a floor and not a first, since the archive's early centuries are thin [3]. That breadth across so many centuries and places likely reflects how common a light tan-brown is in aged parchment and varnish generally, not one pigment [3]. These remain photographs of aged, varnished works read as screen colors [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Mikado, an English-language title for the Emperor of Japan",
+   "first_recorded": "Ridgway (1912), plate XXIX, hue 13′′; Maerz & Paul (1930), plate 14 C 9",
+   "source": "ColorHub color library (Ridgway 1912; Maerz & Paul 1930; ISCC-NBS 1955)"
+  },
+  "aka": [],
+  "siblings": [
+   "french-beige",
+   "brown-sugar",
+   "india-spice",
+   "sunburn"
+  ],
+  "parent": null,
+  "children": [
+   "mikado-orange"
+  ],
+  "disambiguation": [
+   {
+    "slug": "mikado-orange",
+    "gloss": "a brighter, more saturated color sharing the same name"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#AA7553",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1337,
+  "peak_decade": {
+   "key": 1270,
+   "lift": 4.82
+  },
+  "painters": [
+   {
+    "key": "Hans Memling",
+    "lift": 5.62
+   },
+   {
+    "key": "Albrecht Dürer",
+    "lift": 4.16
+   },
+   {
+    "key": "Lucas Cranach",
+    "lift": 5.08
+   }
+  ],
+  "countries": [
+   {
+    "key": "Tibet",
+    "lift": 3.41
+   },
+   {
+    "key": "India",
+    "lift": 3.21
+   }
+  ],
+  "measured": {
+   "lch": [
+    54,
+    32,
+    58
+   ],
+   "nearest": [
+    [
+     "French Beige",
+     3.0
+    ],
+    [
+     "Brown Sugar",
+     3.4
+    ],
+    [
+     "India Spice",
+     3.5
+    ],
+    [
+     "Sunburn",
+     3.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature, plate XXIX, hue 13′′, tone i",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: ISCC-NBS block, Maerz & Paul cross-reference, nearest-match field (data/graph/nodes-m.json; data/library.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Mikado refer to in Mikado Brown?",
+   "choices": [
+    "A title for the Emperor of Japan",
+    "A river in Japan",
+    "A dye works",
+    "A wood species"
+   ],
+   "answer": "A title for the Emperor of Japan",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Mikado Brown and Mikado Orange are the same hue under two different names.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Mikado Brown is named for an old English title for the Emperor of Japan, not for any wood or dye."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 250
+}

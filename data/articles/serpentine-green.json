@@ -1,0 +1,129 @@
+{
+ "slug": "serpentine-green",
+ "name": "Serpentine Green",
+ "hex": "#8B8647",
+ "names": [
+  "Serpentine Green"
+ ],
+ "tier": "pigment",
+ "depth": "brief",
+ "lede": "Serpentine Green is a dark, dulled yellow-green named for serpentine, a usually green rock whose own name comes from its mottled, scaly resemblance to a serpent's skin, not from its color.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A rock, not a snake",
+   "body": "The serpentine group is a family of minerals, usually green, that make up the rock geologists call serpentinite; both words trace to the Latin *serpentinus*, \"resembling a serpent,\" for the rock's mottled, scaly surface rather than for any one color [3]. Fresh serpentinite ranges from soft yellow-green through rich emerald to nearly black, so no single swatch can stand for the stone, and this particular dark, muted tone is just one point in that range [3].\n\nRidgway's 1912 atlas lists this hue on plate XVI, hue 23′, tone k, and the ISCC-NBS 1955 revision calls the block \"light olive\" [1][2]. Maerz and Paul's 1930 dictionary dates the English name to 1912, the same year as Ridgway's own atlas [1]. In LCH terms it measures lightness 55, chroma 35, hue 102, close to [[dull-citrine|Dull Citrine]] and to [[parrot-green|Parrot Green]] and [[warbler-green|Warbler Green]] elsewhere in the library [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A screen match for this green turns up in 659 of 23,781 paintings, about 2.8 percent, as photographed [2]. Paulus Potter, a Dutch painter known for cattle and pasture scenes, carries it nearly thirteen times above the archive's average rate, and its single largest appearance is a 1700 Indian depiction of Shiva, where it covers nearly two-thirds of the canvas [2]. The match is a computed color on an aged, varnished painting, never a claim about the actual pigment used [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the serpentine mineral group, named for its snakeskin-like mottling",
+   "first_recorded": "1912, per Maerz and Paul",
+   "source": "Maerz and Paul, A Dictionary of Color (1930)"
+  },
+  "aka": [],
+  "siblings": [
+   "dull-citrine",
+   "parrot-green",
+   "warbler-green",
+   "dusty-hazel-tone"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 659,
+  "rate": 0.0277,
+  "measured": {
+   "lch": [
+    55,
+    35,
+    102
+   ],
+   "nearest": [
+    [
+     "Dull Citrine",
+     2.8
+    ],
+    [
+     "Parrot Green",
+     3.3
+    ],
+    [
+     "Warbler Green",
+     3.3
+    ],
+    [
+     "Dusty hazel tone",
+     4.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XVI, hue 23′, tone k; Maerz and Paul, A Dictionary of Color (1930), plate 14 K 3",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library and archive (23,781 paintings): ISCC-NBS 1955 block 106, LCH values, computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "web",
+   "cite": "Sandatlas, \"Serpentinite: A Green Rock Formed by Alteration\"; Wikipedia, \"Serpentine subgroup\"",
+   "loc_kind": null,
+   "url": "https://sandatlas.org/serpentinite/"
+  }
+ ],
+ "questions": [
+  {
+   "q": "The word \"serpentine\" describes the mineral's name because of its:",
+   "choices": [
+    "Mottled, scaly surface",
+    "Its single fixed green color",
+    "Its use in snake charming",
+    "Its shape when cut into beads"
+   ],
+   "answer": "Mottled, scaly surface",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: all serpentine mineral is the exact same shade of green.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Serpentine is named for its snakeskin texture, not for any single color — the real mineral ranges from yellow-green to nearly black."
+ ],
+ "words": 252,
+ "status": "checked",
+ "checked": {
+  "by": "batch-23",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits for this slug; mineral etymology from web sources, which agree and are hedged as such.",
+   "lint 2026-10-09"
+  ]
+ }
+}

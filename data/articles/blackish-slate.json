@@ -1,0 +1,176 @@
+{
+ "slug": "blackish-slate",
+ "name": "Blackish Slate",
+ "hex": "#404C49",
+ "names": [
+  "Blackish Slate"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Blackish Slate is a near-black shade of [[slate|slate]], one of Robert Ridgway's working names built by the plain grammar of modifier plus base color.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier, not a new color",
+   "body": "Blackish Slate pairs the modifier *blackish* with the base color [[slate]], Ridgway's plain naming grammar for a darker, less saturated member of a color family [1][4]. His 1912 *Color Standards and Nomenclature* gives it plate LIII, hue 75, close to neutral on his notation (Munsell-style N 3.1), with almost no measurable chroma [1]. The same pairing is not new to that plate: Ridgway had already used 'blackish slate' in his earlier 1886 *Nomenclature of Colors*, twenty-six years before [1].\n\nThe ISCC-NBS system filed the same block, 266, under the plain-language name 'dark grayish green,' close to Ridgway's hue at a Delta-E of 3.0 [2]. The nearest named colors on file are [[dusky-purplish-grey]] and [[blackish-plumbeous]], at 2.9 and 3.7 ΔE [1][4]. The color graph also cross-references a near Japanese shade, Onando-iro (御納戸色), literally 'storage-room color,' a name for a traditional grey once used for storeroom furnishings; it is a translation match on hue, not a claim that the two naming systems share a history [5]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this shade, as photographed, in 2.27% of 23,781 paintings, 540 paintings; within a single painting it reads as a distinct area in 259 of them [3]. That makes it more common than 75% of the archive's named colors [3]. It peaks in paintings from the 1900s, found in 3.2% of that century's 1,674 paintings, 2.7 times the expected rate against the same museums' baseline [3]. Inside a painting it most often plays a shadow, by lightness rank within the canvas, in 30% of its 259 appearances, a role varnish and photography cannot fake [3]. Paul Cezanne uses it most, in 8 of his 50 works in our archive, 7.4 times the baseline rate of the museums those paintings come from [3]. Its earliest dated appearance is a painting from 1099, 787 years before the name's first documented record in 1886 [3]. The archive's early centuries are thin, so this is a floor and not a first, and the match is a look-alike hue in an aged photograph, not proof of any pigment or dye [3]. It shares canvases with [[pale-umber]] more often than chance, a lift of 2.4 [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the base color slate, with the modifier 'near-black'",
+   "first_recorded": "1886 (Ridgway's earlier Nomenclature of Colors)",
+   "source": "Ridgway, Color Standards and Nomenclature"
+  },
+  "aka": [],
+  "siblings": [
+   "dusky-purplish-grey",
+   "blackish-plumbeous",
+   "blue-violet-black",
+   "dark-neutral-grey"
+  ],
+  "parent": "slate",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Onando-iro (御納戸色)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "measured": {
+   "lch": [
+    31.2,
+    5.5,
+    178.2
+   ],
+   "nearest_iscc": [
+    "dark grayish green",
+    3.0
+   ],
+   "nearest": [
+    [
+     "Dusky Purplish Grey",
+     2.9
+    ],
+    [
+     "Blackish Plumbeous",
+     3.7
+    ],
+    [
+     "Blue-Violet Black",
+     4.0
+    ],
+    [
+     "Dark Neutral Grey",
+     4.1
+    ]
+   ]
+  },
+  "n_present": 259,
+  "role_top": {
+   "role": "shadow",
+   "pct": 30
+  },
+  "painter": {
+   "name": "Paul Cezanne",
+   "n": 8,
+   "of": 50,
+   "lift": 7.4
+  },
+  "first_seen": {
+   "year": 1099,
+   "years_before_record": 787
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Nomenclature, 1912, plate LIII, hue 75",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "ISCC-NBS, National Bureau of Standards Circular 553, 1955, block 266 (\"dark grayish green\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color graph: computed LCH/Munsell values and modifier-name cross-reference",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub color graph: Japanese traditional color-name cross-reference",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which base color does the modifier 'blackish' attach to in Blackish Slate's name?",
+   "choices": [
+    "Slate",
+    "Citrine",
+    "Olive",
+    "Lavender"
+   ],
+   "answer": "Slate",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Ridgway had already paired 'blackish' with 'slate' in his earlier 1886 nomenclature, before the 1912 plate.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "Inside a painting, which role does Blackish Slate most often play, by lightness rank?",
+   "choices": [
+    "Shadow",
+    "Light",
+    "Accent",
+    "Mid-tone"
+   ],
+   "answer": "Shadow",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Blackish Slate's 'blackish' pairing is at least as old as Ridgway's 1886 nomenclature.",
+  "Paul Cezanne reaches for it more than seven times as often as his peers."
+ ],
+ "words": 381,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

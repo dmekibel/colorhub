@@ -1,0 +1,113 @@
+{
+ "slug": "big-dip-o-ruby",
+ "name": "Big Dip O’ruby",
+ "hex": "#9C2542",
+ "names": [
+  "Big Dip O’ruby"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Big Dip O’ruby is a dark, slightly brownish red named for the gem ruby, and one of the rarest named colors in our painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A gem-stone red",
+   "body": "Our library files Big Dip O’ruby as a pigment-and-mineral word, taking its name from ruby, the deep red gem, with Wikipedia citing Crayola as the source of the swatch [1]. The 1955 ISCC-NBS system would class a match to it as a deep red, about 6.6 units of ΔE from that block's center [1].\n\nThe nearest everyday name on file is [[raspberry]], 4.3 units away, with [[cranberry]] listed as its closer informal neighbor; a separate library entry, Red-Violet (Color Wheel), sits only 2.3 units off as a near-duplicate swatch under a different name [1]. Measured in LCH terms it is dark and richly saturated: lightness 36, chroma 52, hue 14 degrees, just on the red side of magenta [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings finds a close match to Big Dip O’ruby in only 7, as photographed, making it rarer than almost every other name we track [2]. The earliest is Vincenzo Frediani's *The Adoration of the Christ Child*, from about 1485, and the fullest is François Clouet's *A Lady in Her Bath* of 1571, where it covers about 17 percent of the canvas [2]. A match also turns up in Ernst Ludwig Kirchner's *Two Girls under an Umbrella* of 1910 and in undated Indian and Chinese works in the archive, so the small count spans five centuries rather than clustering in one [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the gem ruby",
+   "first_recorded": "undocumented in our library beyond the Wikipedia/Crayola record",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "raspberry",
+   "cranberry",
+   "maroon",
+   "crimson"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 7,
+  "match": {
+   "hex": "#9C2542",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "measured": {
+   "lch": [
+    36,
+    52,
+    14
+   ],
+   "nearest": [
+    [
+     "Raspberry",
+     4.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: name records, plate and block locators, tier classification",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What gem does Big Dip O’ruby take its name from?",
+   "choices": [
+    "Ruby",
+    "Garnet",
+    "Spinel",
+    "Carnelian"
+   ],
+   "answer": "Ruby",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Big Dip O’ruby is one of the most common colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Big Dip O’ruby turns up in only 7 of 23,781 paintings in our archive."
+ ],
+ "words": 246,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

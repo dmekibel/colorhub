@@ -1,0 +1,148 @@
+{
+ "slug": "deep-royal-blue",
+ "name": "Deep royal blue",
+ "hex": "#002366",
+ "names": [
+  "Deep royal blue"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Deep royal blue is exactly what its name describes: a darker-than-usual variant of [[royal-blue|royal blue]], built by the same \"intensity plus base color\" grammar as most of ColorHub's modifier names.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier, not a new color",
+   "body": "ColorHub's graph files Deep royal blue as a grammatical modifier of [[royal-blue]], its listed parent, the same pattern that produces names like Vivid royal blue or Dark royal blue from a single base hue [1]. The hex #002366 measures a deep purplish blue by ISCC-NBS, 5.5 units from its nearest block, close to 6.2PB 1.6/9.6 in Munsell notation [2]. Its lightness sits at only 16 out of 100, markedly darker than the brighter royal blue most people picture, which is the entire point of the \"deep\" modifier [2]. The nearest related name our library carries for this family is *Vivid navy*, listed alongside it as a web variant [1].\n\nNames built this way rarely carry their own coinage story; \"deep\" plus a base color is a descriptive label anyone could apply, so no single origin date or namer is recorded in the sources we checked [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to Deep royal blue in 14 of 23,781 paintings, 0.06 percent, with the within-painting test narrowing that to 8, making it rarer than about 70 percent of the named colors we track [3]. The earliest match, as photographed, dates to 1644, and inside the paintings that carry it the color plays an accent 88 percent of the time rather than a shadow or a base tone, a floor and not a first, since the archive's early centuries are thin [3]. In printed English the phrase rises fastest in the 1920s and peaks in the 2010s, a pattern typical of a descriptive compound that drifts in and out of fashion rather than one tied to a single historical event [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a darker variant of royal blue",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "Vivid navy"
+  ],
+  "siblings": [
+   "navy",
+   "st-patrick-s-blue",
+   "marine",
+   "regal"
+  ],
+  "parent": "royal-blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 14,
+  "n_within": 8,
+  "measured": {
+   "lch": [
+    16.3,
+    46.3,
+    293.9
+   ],
+   "munsell": "6.2PB 1.6/9.6",
+   "iscc_nbs": {
+    "name": "deep purplish blue",
+    "de": 5.5
+   },
+   "nearest": [
+    [
+     "Navy",
+     4.5
+    ],
+    [
+     "St. Patrick's Blue",
+     4.7
+    ],
+    [
+     "Marine",
+     4.7
+    ],
+    [
+     "Regal",
+     5.4
+    ]
+   ]
+  },
+  "ngram": {
+   "peak": 2010,
+   "rise": 1920,
+   "term": "deep royal blue"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: modifier-grammar classification and base relation to Royal blue",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: computed LCH, Munsell and ISCC-NBS nearest-block distance",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub Ngram cache (Google Books)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What kind of name is Deep royal blue?",
+   "choices": [
+    "A descriptive modifier of Royal blue",
+    "A pigment name",
+    "A name for a person",
+    "A place name"
+   ],
+   "answer": "A descriptive modifier of Royal blue",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Deep royal blue most often plays a shadow inside the paintings where it appears.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Its lightness score is less than a sixth of the scale, far darker than the royal blue most people picture."
+ ],
+ "words": 301,
+ "status": "checked",
+ "checked": {
+  "by": "batch-9 writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance file; a modifier name with no specific coinage story, left undocumented rather than invented.",
+   "lint 2026-10-09"
+  ]
+ }
+}

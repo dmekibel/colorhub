@@ -1,0 +1,158 @@
+{
+ "slug": "venetian-yellow",
+ "name": "Venetian Yellow",
+ "hex": "#E4C665",
+ "names": [
+  "Venetian Yellow"
+ ],
+ "tier": "place",
+ "depth": "medium",
+ "lede": "Venetian Yellow is a moderate yellow that Maerz and Paul's 1930 dictionary traces to about 1874, and in our archive it is disproportionately a color of Kalighat painting from Bengal, not of Venice.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "An 1874 entry, renamed again in 1924",
+   "body": "Maerz and Paul's *A Dictionary of Color* (1930) gives this hue at plate 10, position J 3, first recorded around 1874 [1]. The same catalogue later listed a second name, Snapdragon, at the neighboring position J 4 in 1924, so the plate held two yellow entries fifty years apart [1]. Our library classes \"Venetian\" as a place-or-institution word, and nothing in our sources explains why this particular yellow carries it [2].\n\nIts closest named relatives are [[sunbeam]], 2.5 units away and duller, and [[orpiment]], a touch more vivid at 3.4 units, named for the mineral pigment rather than a place [3].\n\nFurther out are [[mustard-yellow]], almost the same at 4 units, and [[gamboge-yellow]], more vivid at 4.4, named for a different pigment entirely [3]. Our library files the name under fashion and textiles rather than nature or pigment, a classification worth keeping in mind before assuming any link to actual Venetian paint practice [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Venetian Yellow is common in our archive of 23,781 paintings: a color within six units of it covers at least five per cent of a canvas in 256 works, as photographed [4]. It is strikingly overrepresented in Kalighat painting, at nearly 36 times the archive's overall rate, and in works from India generally, at over six times the rate [4]. Kishi Ganku's 1801 *Bamboo* carries it across three-quarters of the canvas [4]. It most often shares a canvas with other yellows, mustard and khaki [4]. These are screen colors read from photographs of varnished paintings, not pigment tests [4]. By decade, it peaks in the 1820s, in 30 of 731 paintings, at nearly four times the archive's overall rate [4]. George Dawe, a portraitist, also carries it well above the archive rate, at over seven times the expected level [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; the place-or-institution word \"Venetian\"",
+   "first_recorded": "Maerz & Paul, A Dictionary of Color (1930), plate 10 J 3, first recorded c. 1874",
+   "source": "ColorHub color library (Maerz & Paul 1930)"
+  },
+  "aka": [],
+  "siblings": [
+   "sunbeam",
+   "orpiment",
+   "mustard-yellow",
+   "gamboge-yellow"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#E4C665",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 256,
+  "movements": [
+   {
+    "key": "Kalighat",
+    "hits": 37,
+    "n": 96,
+    "lift": 35.8
+   }
+  ],
+  "countries": [
+   {
+    "key": "India",
+    "hits": 50,
+    "n": 721,
+    "lift": 6.44
+   }
+  ],
+  "company": [
+   {
+    "word": "Mustard",
+    "lift": 12.47
+   },
+   {
+    "word": "Khaki",
+    "lift": 11.95
+   }
+  ],
+  "measured": {
+   "lch": [
+    80.6,
+    51.8,
+    91.2
+   ],
+   "nearest": [
+    [
+     "Sunbeam",
+     2.5
+    ],
+    [
+     "Orpiment",
+     3.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Maerz & Paul, A Dictionary of Color (1930), plate 10 J 3 and J 4",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library, place/institution tier classification",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-v.json), CIEDE2000 look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which style of painting is Venetian Yellow most overrepresented in, in our archive?",
+   "choices": [
+    "Kalighat painting",
+    "Impressionism",
+    "Mughal painting",
+    "Post-Impressionism"
+   ],
+   "answer": "Kalighat painting",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the same catalogue plate later carried a second yellow, Snapdragon, fifty years after Venetian Yellow's own entry.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Venetian Yellow turns up almost 36 times more often than chance in Kalighat painting from Bengal."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No source documents why the name is 'Venetian'; stated as undocumented.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 320
+}

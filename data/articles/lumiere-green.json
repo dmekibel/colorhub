@@ -1,0 +1,136 @@
+{
+ "slug": "lumiere-green",
+ "name": "Lumiere Green",
+ "hex": "#CBD47E",
+ "names": [
+  "Lumiere Green"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Lumiere Green is a pale yellow-green from Ridgway's 1912 atlas, rare in our painting archive but matched in a Dutch still life painted 270 years before the name existed.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A pale yellow-green, with a paler child",
+   "body": "Ridgway's 1912 atlas carries this tone on plate XVII, hue 29′, notated 2.8GY 8.2/5.9 in the Munsell system [1]. The 1955 ISCC-NBS dictionary groups it under block 119, naming it light yellow green, 3.6 units from Ridgway's reading, and Maerz and Paul's 1930 dictionary lists the same swatch on plate 18, I 5 [1].\n\nIts closest neighbors in our library are [[oil-yellow]], about 3.6 units away and more vivid, and [[viridine-green]] and [[pale-lime]], each about 3.9 units off and lighter [2]. Our data also files a paler child variant, [[pale-lumiere-green]] [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive matches this tone in only 34 of 23,781 paintings, about 0.14 percent, as photographed, rarer than 59 percent of the named colors we track [3]. It peaks in the 1900s, present in 0.5 percent of the 1,674 paintings from that decade, 3.6 times its museums' expected rate [3].\n\nInside a painting it most often plays an accent, in 60 percent of its 25 clearly-ranked appearances, a rank computed within each canvas so varnish cannot fake it [3]. The earliest match in the archive is a 1642 still life by Gerret Willemsz Heda, 270 years before the name itself was recorded in 1912, a reminder that the match is a look-alike hue in an aged photograph, not proof of any pigment or dye, a floor and not a first, since the archive's early centuries are thin [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented beyond the naming system",
+   "first_recorded": "1912 (Ridgway); carried into the 1955 ISCC-NBS dictionary and the 1930 Maerz and Paul dictionary",
+   "source": "Ridgway, Color Standards and Color Nomenclature; ISCC-NBS, NBS Circular 553; Maerz and Paul, A Dictionary of Color"
+  },
+  "aka": [
+   "Greenish Beige"
+  ],
+  "siblings": [
+   "oil-yellow",
+   "viridine-green",
+   "pale-lime",
+   "siskin-green"
+  ],
+  "parent": null,
+  "children": [
+   "pale-lumiere-green"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#CBD47E",
+   "de2000": 3.6,
+   "min_cover": 0.02
+  },
+  "n_present": 34,
+  "measured": {
+   "lch": [
+    82.5,
+    44.4,
+    111.0
+   ],
+   "nearest": [
+    [
+     "Oil Yellow",
+     3.6
+    ],
+    [
+     "Viridine Green",
+     3.9
+    ],
+    [
+     "Pale lime",
+     3.9
+    ],
+    [
+     "Siskin Green",
+     3.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XVII, hue 29′; cited in ISCC-NBS, NBS Circular 553 (1955), block 119, \"light yellow green\"; Maerz and Paul, A Dictionary of Color (1930), plate 18, I 5",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library and graph: computed LCH and nearest-neighbor distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "True or false: a hue matching Lumiere Green appears in our archive earlier than the name itself was recorded.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "Inside a painting, Lumiere Green most often plays which role?",
+   "choices": [
+    "An accent",
+    "A light",
+    "A shadow",
+    "A hidden color"
+   ],
+   "answer": "An accent",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "A 1642 Dutch still life carries a hue matching Lumiere Green, 270 years before the name was ever recorded."
+ ],
+ "words": 267,
+ "status": "checked",
+ "checked": {
+  "by": "batch-36",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

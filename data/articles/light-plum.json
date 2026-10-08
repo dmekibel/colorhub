@@ -1,0 +1,124 @@
+{
+ "slug": "light-plum",
+ "name": "Light Plum",
+ "hex": "#9D5783",
+ "names": [
+  "Light Plum"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Light Plum is a muted reddish purple recorded only in the 2010 xkcd color survey, with ten alternate names clustered around the same hue in our library.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A light build of plum",
+   "body": "The nearest named colors on file are [[antique-fuchsia]], [[purpleish]], [[dull-magenta-purple]] and [[magenta-haze]], at 3.2, 3.6, 4.1 and 5 ΔE [1]. The ISCC-NBS system classes the hue as moderate reddish purple, about 2.2 units from that block's center [1]. Its Munsell notation is 2.2RP 4.6/8.1 and its LCH values are lightness 46, chroma 37, hue 341 degrees, a mid-toned, muted purple-red [1]. \n\nTen other names cluster around this same swatch in our library's alternate-name lists, among them Caprice Pink, Clover, Dahlia Mauve, Geisha and Verbena Lavender [2]. That crowd of names, all pointing at one muted purple-red, is typical of a color between two better-known families, rose and [[plum]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Within CIEDE2000 4, Light Plum appears in 4 of our 23,781 archive paintings (0.02%), rarer than 86% of our named colors, as photographed [3]. Our within-painting lens finds it in only 1 of those 4 [3]. The earliest match is dated 1900, with two dated paintings from that single year, a floor and not a first, since the archive's early centuries are thin [3]. In print, the word rose fastest in the 1890s, across all its senses, well before the xkcd survey gave it this exact hex [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the base color plum, lightened",
+   "first_recorded": "xkcd survey, 2010",
+   "source": "ColorHub Color Graph"
+  },
+  "aka": [
+   "Caprice Pink",
+   "Clover",
+   "Dahlia Mauve",
+   "Geisha"
+  ],
+  "siblings": [
+   "antique-fuchsia",
+   "purpleish",
+   "dull-magenta-purple",
+   "magenta-haze"
+  ],
+  "parent": "plum",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 4,
+  "rank_pct_rarer": 86,
+  "first_year": 1900,
+  "match": {
+   "hex": "#9D5783",
+   "de_max": 4
+  },
+  "measured": {
+   "nearest": [
+    [
+     "Antique Fuchsia",
+     3.2
+    ],
+    [
+     "Purpleish",
+     3.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub Color Graph: node record (hex, LCH, Munsell, ISCC-NBS block, recorded sources)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): nearest named match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (data/graph/fieldnotes), 23,781 paintings, CIEDE2000 <= 4, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does the ISCC-NBS system classify Light Plum's hue?",
+   "choices": [
+    "Moderate reddish purple",
+    "Vivid pink",
+    "Pale lavender"
+   ],
+   "answer": "Moderate reddish purple",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Light Plum is one of the more common named colors in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Ten different library names, from Caprice Pink to Verbena Lavender, cluster around the same muted purple-red as Light Plum."
+ ],
+ "words": 229,
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

@@ -1,0 +1,126 @@
+{
+ "slug": "crayon-blue",
+ "name": "Crayon Blue",
+ "hex": "#6C7989",
+ "names": [
+  "Crayon Blue"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Crayon Blue is a grayish blue from Maerz and Paul's 1930 dictionary, close enough to Slate that the two are barely distinguishable on screen, and the dictionary never explains the crayon reference.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A drawing-tool name, unexplained",
+   "body": "Maerz and Paul list Crayon Blue at #6C7989 on plate 36, row C, column 5 of their 1930 dictionary, dating its first recorded use to 1926 [1]. The ISCC-NBS circular of 1955 files it as \"grayish blue\" [1]. Why a muted slate-blue took the name of a wax or pastel crayon is undocumented in the 29 books behind our concordance [1].\n\nIn our color graph the nearest named neighbor is [[slate|Slate]], just 2.7 units away, close enough that the two names likely describe the same general shade to most eyes [1]. A little further, at 2.9 units, is [[pompeian-blue|Pompeian Blue]] [1]. The Munsell notation is 3.4PB 4.9/2.7, and the swatch sits with our [[blue|blue]] family, its gray modifier also pulling it toward [[grey|grey]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 1.66% of 23,781 paintings, 395 of them, as photographed, with the within-painting lens counting 146 [2]. That makes it more common than 65% of our named colors [2]. It peaks in the 1900s, present in 1.4% of the 1,674 paintings from that century, 1.8 times the rate its museums would predict [2]. Within a painting it most often sits as a light, in 31% of its 146 appearances [2]. Claude Monet is its most devoted painter, holding it in 4 of 50 works here, 5.6 times the baseline of the museums his paintings come from [2]. It is most over-represented in France, twice the expected rate, 45 of 3,443 French paintings [2]. The earliest match dates to 1424, 506 years before Maerz and Paul recorded the name, a floor rather than a first [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1930 (maerz-paul)",
+   "source": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930"
+  },
+  "aka": [],
+  "siblings": [
+   "slate",
+   "pompeian-blue",
+   "tyrian-blue",
+   "light-tyrian-blue"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 395,
+  "measured": {
+   "lch": [
+    50.3,
+    10.4,
+    263.8
+   ],
+   "nearest": [
+    [
+     "Slate",
+     2.8
+    ],
+    [
+     "Pompeian Blue",
+     3.2
+    ],
+    [
+     "Tyrian Blue",
+     4.3
+    ],
+    [
+     "Light Tyrian Blue",
+     4.4
+    ]
+   ]
+  },
+  "iscc_nbs": {
+   "name": "grayish blue",
+   "de": 7.9
+  },
+  "munsell": "3.4PB 4.9/2.7"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and name graph (data/library.json, data/graph/): Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930; nearest names by Lab-space distance",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed color match, as photographed",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which named color sits closest to Crayon Blue in our color graph?",
+   "choices": [
+    "Slate",
+    "Navy",
+    "Denim",
+    "Teal"
+   ],
+   "answer": "Slate",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Maerz and Paul explain the crayon reference in this name.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Crayon Blue sits only 2.7 units from Slate in our color graph, nearly a match to the eye."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits; the crayon reference is undocumented in our sources.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 296
+}

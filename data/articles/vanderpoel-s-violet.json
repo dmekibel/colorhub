@@ -1,0 +1,132 @@
+{
+ "slug": "vanderpoel-s-violet",
+ "name": "Vanderpoel's Violet",
+ "hex": "#7A719A",
+ "names": [
+  "Vanderpoel's Violet"
+ ],
+ "tier": "person",
+ "depth": "brief",
+ "lede": "Vanderpoel's Violet is a muted, greyed violet from Robert Ridgway's 1912 color book, and the clearest candidate for its namesake is Emily Noyes Vanderpoel, whose 1902 book *Color Problems* studied how colors advance and retire.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A candidate, not a confirmation",
+   "body": "Gage's survey of color theory illustrates a plate from Emily Noyes Vanderpoel's *Color Problems: A Practical Manual for the Lay Student of Color* (1902), on advancing and retiring colors [1]. No book we hold states outright that Ridgway's violet is named for her, so the connection stays a plausible candidate rather than a documented fact [1][2].\n\nRidgway catalogued the color on plate XXXVI, hue 55 double-prime, and the ISCC-NBS system of 1955 carries it as block 210 [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In LCH terms it measures lightness 50, chroma 24, hue 301 degrees [3]. Its nearest library neighbors are [[pearl-violet|Pearl Violet]] and [[rhythm|Rhythm]], with [[campanula-purple|Campanula Purple]] close behind, and not far from the brighter [[amethyst]] [3]. Our archive of 23,781 paintings, as photographed, finds 13 matches, the earliest a 1496 *Adoration of the Magi* by Filippino Lippi, and the most recent a 1915 Monet water-lily canvas [4]. These are computed color matches, not pigment identifications [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; possibly Emily Noyes Vanderpoel, author of Color Problems (1902)",
+   "first_recorded": "1912, Ridgway",
+   "source": "Ridgway, Color Standards and Color Nomenclature (1912)"
+  },
+  "aka": [],
+  "siblings": [
+   "pearl-violet",
+   "rhythm",
+   "campanula-purple",
+   "amethyst"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 13,
+  "top_paintings": [
+   "commons-Q19861902",
+   "commons-Q59844200",
+   "cma-136510"
+  ],
+  "measured": {
+   "lch": [
+    50,
+    24,
+    301
+   ],
+   "nearest": [
+    [
+     "Pearl Violet",
+     3.8
+    ],
+    [
+     "Rhythm",
+     3.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, illustration list (plate 203, from Vanderpoel, Color Problems, 1902)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Ridgway 1912, plate XXXVI, hue 55\"; ISCC-NBS 1955 block 210",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): CIEDE2000 distances to named neighbors",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes; within the archive's match threshold, at least 5% of the canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is the title of Emily Noyes Vanderpoel's 1902 book, the leading candidate for this color's namesake?",
+   "choices": [
+    "Color Problems: A Practical Manual for the Lay Student of Color",
+    "The Art of Color",
+    "A Dictionary of Color",
+    "Chromatics"
+   ],
+   "answer": "Color Problems: A Practical Manual for the Lay Student of Color",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: a book we hold directly states that Vanderpoel's Violet is named for Emily Noyes Vanderpoel.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Vanderpoel's Violet may be named for one of the few women color theorists of her era, though no book confirms it."
+ ],
+ "words": 182,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "Namesake is a plausible candidate (Emily Noyes Vanderpoel), not a confirmed naming.",
+   "lint 2026-10-09"
+  ]
+ }
+}

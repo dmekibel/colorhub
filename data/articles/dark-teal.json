@@ -1,0 +1,127 @@
+{
+ "slug": "dark-teal",
+ "name": "Dark Teal",
+ "hex": "#014D4E",
+ "names": [
+  "Dark Teal"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Dark Teal is a very deep blue-green, almost black, a shade down from [[teal]] and classed by the ISCC-NBS system as a dark bluish green.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "The ISCC-NBS system of 1955 carries a block at this position, number 165, dark bluish green, under 2 CIEDE2000 units from this swatch [1]. Wikipedia's own color list cites that ISCC-NBS block for its nearby entry, and the xkcd survey of 2010 later collected the plain descriptive phrase \"dark teal\" from the public [1].\n\nNo book in our library records who first drew the line at this exact depth of blue-green, so its coinage as a named color stays undocumented here [1]. The nearest named colors on file are [[kremlin]], [[deep-teal]] and [[samara]], at 2.9, 3.2 and 4.1 ΔE [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a match for this swatch in 29 of 23,781 paintings, as photographed [2]. Paul Gauguin's Tahiti scenes carry it most heavily, at nearly 66 times the archive's baseline rate, and his *Teuraheimata a Potoru* (1891) covers a third of its canvas with it [2]. It is most common in works from Realist and Post-Impressionist movements, and the word \"Petrol\" shares its canvases far more than chance [2]. Where it appears, it most often sits as a shadow color [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "teal, the duck, darkened",
+   "first_recorded": "ISCC-NBS 1955, block 165; xkcd color survey 2010",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "kremlin",
+   "deep-teal",
+   "samara",
+   "midnight-green"
+  ],
+  "parent": "teal",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+  "n_present": 29,
+  "rate": 0.0012,
+  "role": {
+   "shadow": 0.59,
+   "mid": 0.41
+  },
+  "top_painting": {
+   "id": "commons-Q110278110",
+   "title": "Teuraheimata a Potoru",
+   "painter": "Paul Gauguin",
+   "year": 1891,
+   "cover": 0.336
+  },
+  "measured": {
+   "nearest": [
+    [
+     "Kremlin",
+     2.9
+    ],
+    [
+     "Deep Teal",
+     3.2
+    ],
+    [
+     "Samara",
+     4.1
+    ],
+    [
+     "Midnight Green",
+     5.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955 block 165, xkcd color survey 2010), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which painter's works carry Dark Teal at far above the archive's baseline rate?",
+   "choices": [
+    "Paul Gauguin",
+    "Claude Monet",
+    "Giovanni di Paolo"
+   ],
+   "answer": "Paul Gauguin",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: where Dark Teal appears, it most often plays a highlight.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dark Teal shows up in Gauguin's Tahiti paintings at nearly 66 times our archive's baseline rate."
+ ],
+ "words": 204,
+ "status": "checked",
+ "checked": {
+  "by": "writer-lane",
+  "date": "2026-10-08",
+  "issues": [
+   "No book source for the English name itself; ISCC-NBS block and xkcd survey only",
+   "lint 2026-10-09"
+  ]
+ }
+}

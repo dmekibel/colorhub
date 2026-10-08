@@ -1,0 +1,131 @@
+{
+ "name": "Yellow Tan",
+ "hex": "#FFE36E",
+ "names": [
+  "Yellow Tan"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Yellow Tan is a bright, warm yellow catalogued twice over in Ridgway's 1912 atlas, and a name whose printed use peaked decades after painters stopped reaching for the color.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Catalogued twice",
+   "body": "Ridgway's 1912 systematic nomenclature places the hue on two separate plates, plate XVI (hue 23', tone b) and plate IV (hue 23, tone b), filed by the ISCC-NBS system of 1955 as two neighboring blocks, 86 and 101 [1]. The nearest named neighbor by measured color is [[pinard-yellow]], barely cooler [2]. In printed English, the phrase \"yellow tan\" itself rose fastest in the 1930s and peaked in the 1960s, in Google's scanned-book count of all senses of the words, which can mean the object or the place as easily as the color [3]. Further out, [[dull-yellow]] and [[gamboge-yellow]] sit in the same small cluster [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a match for Yellow Tan in only 46 of 23,781 paintings, about 0.2 percent, rarer than 52 percent of the named colors we track [3]. It peaks in the 1400s, in 6 of 945 paintings, 2.7 times the rate expected from that century's share of the archive [3]. Inside a painting it most often plays an accent, in 49 percent of its appearances [3]. The earliest match, from 1434, is a painting by Fra Angelico, nearly five centuries before Ridgway recorded the name in 1912, a floor and not a first, since the archive's early centuries are thin [3]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1912, Ridgway's systematic nomenclature",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "pinard-yellow",
+   "dandelion",
+   "dull-yellow",
+   "gamboge-yellow"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 46,
+  "measured": {
+   "lch": [
+    90.5,
+    59.8,
+    94.0
+   ],
+   "nearest": [
+    [
+     "Pinard Yellow",
+     6.5
+    ]
+   ]
+  },
+  "ngram": {
+   "peak_decade": 1960,
+   "rise_decade": 1930,
+   "caveat": "all senses of the words, not isolated to the color"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955 entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library, nearest-neighbor computation",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings) and Google Books Ngram cache, as photographed / as printed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How many separate plates in Ridgway's 1912 atlas carry Yellow Tan?",
+   "choices": [
+    "Two",
+    "One",
+    "Six",
+    "None"
+   ],
+   "answer": "Two",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the phrase \"yellow tan\" in printed English peaked in use well after painters mostly stopped using the color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "Who painted the earliest archive match for Yellow Tan, from 1434?",
+   "choices": [
+    "Fra Angelico",
+    "Camille Pissarro",
+    "John Singer Sargent",
+    "Paul Cezanne"
+   ],
+   "answer": "Fra Angelico",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Yellow Tan is rare in paintings but its name peaked in print three centuries after its best century on canvas."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "slug": "yellow-tan",
+ "words": 248
+}

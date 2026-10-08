@@ -1,0 +1,135 @@
+{
+ "slug": "brownish-vinaceous",
+ "name": "Brownish Vinaceous",
+ "hex": "#C28E88",
+ "names": [
+  "Brownish Vinaceous"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Brownish Vinaceous is a dusty pink-brown from Ridgway's 1912 nomenclature, built on *vinaceous*, Latin for wine-colored, with *brownish* pulling it away from true wine toward clay.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Wine-colored, pulled toward brown",
+   "body": "Ridgway's *Color Standards and Color Nomenclature* (1912) lists Brownish Vinaceous on plate XXXIX, hue 5′′′, tone b [1]. Ridgway used *vinaceous*, from the Latin for wine, as a base family for a whole run of pink-browns; *brownish* is one of the modifiers he used to walk a hue away from that base toward a neighboring family [1]. The ISCC-NBS system placed it in its 1955 block 18, *light grayish red* [1].\n\nThe library's measurements place its nearest named neighbor as [[rosy-brown|Rosy Brown]], about 3 units off (tied with a couple of other dictionary names at nearly the same distance), and it sits about 8.8 units from the everyday name [[puce|Puce]], a darker, more purplish brown-pink [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color match to this swatch in 129 of 23,781 paintings, 0.54 percent, as photographed; the within-painting lens finds it in 57, more common than 52 percent of the named colors we track [3]. The sample is too thin for a reliable single-painter figure, so none is claimed here [3].\n\nThe color peaks in the 1900s, 1.9 times the expected rate across 1,674 paintings from that decade, and inside a painting it most often plays a hidden color, sitting low in the painting's own lightness order (44 percent of its 57 within-painting matches) [3]. The earliest match dates to the year 1000, nearly a thousand years before the name's 1912 record, which shows only that a similar-looking hue existed in paint long before the word did, a floor and not a first, since the archive's early centuries are thin [3]. India is the most over-represented country, at 3.3 times its expected share, with Rajput paintings well above the archive's average [3]. These are photographs of varnished paintings, read as screen colors [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "vinaceous, Latin for wine-colored, pulled toward brown",
+   "first_recorded": "Ridgway, 1912, plate XXXIX, hue 5′′′, tone b",
+   "source": "Ridgway, Color Standards and Color Nomenclature (1912)"
+  },
+  "aka": [],
+  "siblings": [
+   "rosy-brown",
+   "puce",
+   "beaver"
+  ],
+  "parent": "red",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#C28E88",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 129,
+  "countries": {
+   "India": {
+    "n": 721,
+    "hits": 20,
+    "lift": 3.3
+   }
+  },
+  "measured": {
+   "lch": [
+    63.8,
+    21.8,
+    30.1
+   ],
+   "nearest": [
+    [
+     "Rosy Brown",
+     3.0
+    ],
+    [
+     "Puce",
+     8.8
+    ]
+   ]
+  },
+  "iscc_nbs": {
+   "block": 18,
+   "name": "dark yellowish pink"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature, plate XXXIX, hue 5′′′, tone b; ISCC-NBS 1955 block 18",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the Latin root of vinaceous, the base family for this name, mean?",
+   "choices": [
+    "Wine-colored",
+    "Leaden",
+    "Earthen",
+    "Golden"
+   ],
+   "answer": "Wine-colored",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Brownish Vinaceous is more common in our archive's Indian paintings than its overall average.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A wine-based color family, pulled toward brown by one of Ridgway's modifier words."
+ ],
+ "words": 313,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "field.measured.nearest had a null distance (or, for bokhara/buffy-brown, named a color that was not actually the nearest) against data/graph/edges-*.json 'la'; filled in / corrected against that source.",
+   "lint 2026-10-09"
+  ]
+ }
+}

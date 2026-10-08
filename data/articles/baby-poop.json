@@ -1,0 +1,110 @@
+{
+ "slug": "baby-poop",
+ "name": "Baby Poop",
+ "hex": "#937C00",
+ "names": [
+  "Baby Poop"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Baby Poop is a dark, mustard-olive brown named for the plain color of an infant's stool, one of a cluster of scatological names the 2010 xkcd color survey gave to this same patch of yellow-brown.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A crowd name for a plain comparison",
+   "body": "The name comes from Randall Munroe's 2010 xkcd color survey, where visitors typed a word next to a swatch and the most common label for each cluster of clicks won [1]. Who typed \"baby poop\" first for this shade is undocumented; the survey records only the winning name, not its author [1]. ISCC-NBS 1955 would file the same patch as a light olive, about 3.5 units off, with Munsell notation 5.9Y 5.1/8.1 [1].\n\nThe same vote also produced [[baby-poop-green|Baby Poop Green]], a cooler sibling just one step away, and separate entries for [[baby-poo|Baby Poo]], [[baby-shit-brown|Baby Shit Brown]] and [[baby-shit-green|Baby Shit Green]], all naming the same real-world comparison rather than a dye or a place [1]. The closest look-alikes in our data are [[puke-brown|Puke Brown]], about 2.6 units off, and [[hazel|Hazel]], with [[diarrhea|Diarrhea]] and [[poo|Poo]] nearby too [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings, as photographed, finds this mustard-brown in 114 of them, about 0.48 percent, and it is more common than 54 percent of our named colors [2]. It peaks in the 1700s, at 1.5 times the expected rate for that century (17 of 3,449 paintings from then), and inside a painting it is almost always an accent, 68 percent of the time, by lightness rank rather than raw area [2].\n\nIt is also over-represented in paintings from India, at 2.8 times the expected rate [2]. The earliest match in our archive is dated 1480, five hundred and thirty years before the name itself appears in 2010 [2]. Our archive's early centuries are thin, so that date is a floor, not a first, and the match is only a look-alike hue, not proof the name or a matching pigment existed then [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the color of an infant's stool",
+   "first_recorded": "2010, xkcd color survey",
+   "source": "xkcd (Munroe 2010)"
+  },
+  "aka": [],
+  "siblings": [
+   "puke-brown",
+   "hazel",
+   "poo"
+  ],
+  "parent": null,
+  "children": [
+   "baby-poop-green"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 114,
+  "measured": {
+   "lch": [
+    52.5,
+    58.0,
+    91.8
+   ],
+   "nearest": [
+    [
+     "Puke Brown",
+     2.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: xkcd 2010 color survey entry, ISCC-NBS and Munsell mapping",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does the name Baby Poop come from?",
+   "choices": [
+    "The 2010 xkcd crowd color-naming survey",
+    "A Victorian pigment maker's catalog",
+    "Ridgway's 1912 color dictionary",
+    "A Japanese traditional color list"
+   ],
+   "answer": "The 2010 xkcd crowd color-naming survey",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our painting archive's 1480 match for this color proves the name or a matching dye already existed then.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Baby Poop's earliest match in our painting archive is dated 1480, five hundred and thirty years before anyone gave it that name."
+ ],
+ "words": 317,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No private fact-card file for this slug.",
+   "Who coined the name is undocumented; the survey records only the winning label."
+  ]
+ }
+}

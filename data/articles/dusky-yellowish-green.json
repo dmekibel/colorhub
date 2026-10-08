@@ -1,0 +1,112 @@
+{
+ "slug": "dusky-yellowish-green",
+ "name": "Dusky Yellowish Green",
+ "hex": "#435948",
+ "names": [
+  "Dusky Yellowish Green"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Dusky Yellowish Green is a dim, greyed olive green, built by stacking the modifiers dusky and yellowish onto the base color green rather than naming anything in particular.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two modifiers on green",
+   "body": "Dusky Yellowish Green stacks two modifier words, dusky and yellowish, onto the base color [[green]], in the compound-modifier grammar ColorHub's library uses for names like this one rather than a borrowed object or place [1]. Ridgway's 1912 *Color Standards and Color Nomenclature* carries it as plate XLI, hue 29''', an aged plate scan read as approximate [1]. The ISCC-NBS dictionary of 1955 filed the same swatch under block 127, grayish olive green [1].\n\nIts nearest named neighbor is [[dusky-green]], 2.6 units off, close enough to read as the same color on screen [1]; [[bronze-green]] sits 2.9 off and [[empire-green]] 4.4 [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color within six units of this swatch in 458 of 23,781 paintings, 1.93 percent, as photographed; looking inside each painting for at least five percent coverage narrows that to 259 [2]. That makes it more common than 75 percent of the named colors in our library [2]. It peaks in the 1900s, present in 4.1 percent of our 1,674 paintings from that decade, 3.5 times the museums' baseline rate [2]. Inside a painting it most often sits as a hidden color, in 46 percent of its 259 appearances by lightness rank [2].\n\nPaul Gauguin is its most devoted painter on file, present in 7 of his 50 works here, several times the baseline rate for the museums that hold them [2]. The earliest match dates to 1301, six centuries before the name's 1912 record, so it marks a look-alike hue in an aged photograph, not a surviving pigment [2]. It is most over-represented in paintings from France, and shares canvases with [[deep-slate-olive|Deep Olive-Grey]] more often than chance [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: dusky yellowish + green",
+   "first_recorded": "Ridgway 1912, plate XLI; ISCC-NBS 1955, block 127",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "dusky-green",
+   "bronze-green",
+   "empire-green",
+   "antique-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 458,
+  "n_within_painting": 259,
+  "pct_archive": 1.93,
+  "rank_pct": 75,
+  "measured": {
+   "lch": [
+    36,
+    14,
+    150
+   ],
+   "nearest": [
+    [
+     "Dusky Green",
+     2.6
+    ],
+    [
+     "Bronze Green",
+     2.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; Ridgway 1912 plate XLI, ISCC-NBS 1955 block 127), CIEDE2000 distances",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which named color sits closest to Dusky Yellowish Green?",
+   "choices": [
+    "Dusky Green",
+    "Bronze Green",
+    "Empire Green"
+   ],
+   "answer": "Dusky Green",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: this color is more common in our archive than most named colors.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Turns up far more in paintings from the 1900s than the archive's average decade."
+ ],
+ "words": 300,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}

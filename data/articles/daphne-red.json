@@ -1,0 +1,126 @@
+{
+ "slug": "daphne-red",
+ "name": "Daphne Red",
+ "hex": "#A6677F",
+ "names": [
+  "Daphne Red"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Daphne Red is a grayish purplish red that Ridgway's 1912 dictionary names for the daphne shrub's pink-red flowers, one of our rarest named colors in the painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Named for the shrub's flowers",
+   "body": "Ridgway's 1912 dictionary lists Daphne Red at #A6677F, plate XXXVIII, hue 69″ [1]. The ISCC-NBS circular of 1955 repeats it in its \"moderate purplish red\" block, and Maerz and Paul's 1930 dictionary separately catalogs the name on plate 52, position I1 [1]. Daphne shrubs bear small, fragrant pink to red flowers, and Ridgway's own dictionary groups many of his color names after plants, which makes the daphne flower the likely, though unconfirmed, source here [1].\n\nIn our color graph the nearest named neighbor is [[rose-dust|Rose Dust]], 5.5 units away [1]. A little further, at 6.7 units, is [[light-perilla-purple|Light Perilla Purple]] [1]. The Munsell notation is 5.1RP 5.0/6.6, and the swatch sits with our [[red|red]] family, its purple modifier also pulling it toward [[purple|purple]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in just 0.06% of 23,781 paintings, 15 of them, as photographed, with the within-painting lens counting only 1 [2]. That makes it rarer than 86% of our named colors[2]. The earliest match dates to 1750, 162 years before Ridgway recorded the name, a floor rather than a first, since a color match in an aged photograph is not proof of a dye [2]. In printed English the word \"daphne red\" peaks in the 1930s and rose fastest in the 1920s, though Google Books tracks all senses of the phrase, so a flower name can mislead the trend [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1912 (ridgway)",
+   "source": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930"
+  },
+  "aka": [],
+  "siblings": [
+   "mallow-red",
+   "light-perilla-purple",
+   "rose-dust",
+   "japonica"
+  ],
+  "parent": "red",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 15,
+  "measured": {
+   "lch": [
+    51.1,
+    28.8,
+    354.8
+   ],
+   "nearest": [
+    [
+     "Mallow Red",
+     4.0
+    ],
+    [
+     "Light Perilla Purple",
+     4.1
+    ],
+    [
+     "Rose Dust",
+     4.4
+    ],
+    [
+     "Japonica",
+     5.1
+    ]
+   ]
+  },
+  "iscc_nbs": {
+   "name": "grayish purplish red",
+   "de": 5.9
+  },
+  "munsell": "5.1RP 5.0/6.6"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and name graph (data/library.json, data/graph/): Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930; nearest names by Lab-space distance",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed color match, as photographed",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What plant most likely gave Daphne Red its name?",
+   "choices": [
+    "The daphne shrub",
+    "The rose",
+    "The mauve flower",
+    "The hydrangea"
+   ],
+   "answer": "The daphne shrub",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Daphne Red is among the more common named colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Daphne Red appears in our within-painting lens just once across 23,781 paintings."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits; the daphne-flower source is likely but unconfirmed in our sources.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 254
+}

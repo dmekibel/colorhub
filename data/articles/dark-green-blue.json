@@ -1,0 +1,101 @@
+{
+ "slug": "dark-green-blue",
+ "name": "Dark Green Blue",
+ "hex": "#1F6357",
+ "names": [
+  "Dark Green Blue"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dark Green Blue is a deep teal, ColorHub's library name for a darkened shade of [[green-blue]], recorded only in the xkcd color survey of 2010.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A darkened green-blue",
+   "body": "The name follows ColorHub's modifier grammar, \"dark\" plus the parent color [[green-blue]] [1]. Unlike many of the library's darkened shades, it carries no Ridgway or ISCC-NBS filing; its only source is the crowd-sourced xkcd color survey of 2010, so the boundary between this swatch and its neighbors rests on informal usage rather than an official dictionary [1]. On a monitor it sits closer to teal than to either pure green or pure blue [1].\n\nThe closest named neighbors on file are [[opal-green]] and [[pearl-opal-green]], both close enough to be mistaken for it, with [[runnymede]] a touch greener [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color near this swatch in 20 of 23,781 paintings, about 0.08 per cent, as photographed [2]. It plays a shadow role more often than a mid-tone, is rare before 1900, and is markedly over-represented among Post-Impressionist paintings in our sample [2]. France shows the largest raw count of matches, though at a rate close to the archive's overall average, so its presence there is mostly a matter of sample size rather than special favor [2]. These are computed color matches to photographed, varnished paintings, not pigment identifications [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a darkened shade of Green Blue",
+   "first_recorded": "xkcd color survey, 2010",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "opal-green",
+   "pearl-opal-green",
+   "runnymede"
+  ],
+  "parent": "green-blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 20,
+  "pct_archive": 0.08,
+  "role": "shadow"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; xkcd color survey 2010)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph, nearest-neighbor color distances (data/graph/edges-d.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which source first records the name \"Dark Green Blue\" in our library?",
+   "choices": [
+    "The xkcd color survey (2010)",
+    "Ridgway's 1912 nomenclature",
+    "The ISCC-NBS dictionary (1955)"
+   ],
+   "answer": "The xkcd color survey (2010)",
+   "kind": "pick"
+  },
+  {
+   "q": "In our archive, Dark Green Blue is most often found playing which role in a painting?",
+   "choices": [
+    "Shadow",
+    "Highlight",
+    "Sky"
+   ],
+   "answer": "Shadow",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "A deep teal that turns up far more than usual in Post-Impressionist paintings in our archive."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": []
+ },
+ "words": 214
+}

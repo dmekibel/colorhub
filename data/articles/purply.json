@@ -1,0 +1,141 @@
+{
+ "slug": "purply",
+ "name": "Purply",
+ "hex": "#983FB2",
+ "names": [
+  "Purply"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Purply is a strong magenta-purple from the 2010 xkcd color survey, a casual *-y* coinage on the word *purple* rather than a modifier of any existing compound name.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A casual coinage",
+   "body": "The nearest named colors on file are [[purple-plum]], [[iris-purple]] and [[barney]], at 4.3, 4.5 and 4.5 ΔE [1][2]. Unlike the modifier compounds elsewhere in the xkcd survey, *purply* adds the informal suffix *-y* directly to the color word, the same pattern as calling something *bluey* or *greeny* [1]. The 1955 ISCC-NBS system's nearest block, strong purple, sits 5.8 units away, closer than some of the batch's other novelty names [2]. In LCH it measures lightness 43, chroma 71, hue 320 degrees, near [[plum]] and [[amethyst]] [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive carries a color within four units of Purply covering at least one per cent of its canvas, as photographed [3]. As with the other strongly saturated purples, that likely reflects how hard this exact magenta-purple is to reach with historical pigments rather than any property of painting as a whole [3]. In printed English the informal word *purply* appears only sporadically, peaking modestly around 1870, well before this specific hex value was ever recorded [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "casual \"-y\" coinage on purple",
+   "first_recorded": "xkcd color survey, 2010",
+   "source": "ColorHub color library and Color Graph"
+  },
+  "aka": [],
+  "siblings": [
+   "purple-plum",
+   "iris-purple",
+   "barney",
+   "dark-orchid"
+  ],
+  "parent": null,
+  "children": [
+   "orchid"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    43.4,
+    70.5,
+    320.5
+   ],
+   "munsell": "5.5P 4.3/15.7",
+   "iscc_nbs": {
+    "name": "strong purple",
+    "de2000": 5.8
+   },
+   "nearest": [
+    [
+     "Purple Plum",
+     4.3
+    ],
+    [
+     "Iris purple",
+     4.5
+    ],
+    [
+     "Barney",
+     4.5
+    ],
+    [
+     "Dark Orchid",
+     4.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "xkcd color survey (2010), crowdsourced color-name list",
+   "loc_kind": null,
+   "url": "https://blog.xkcd.com/2010/05/03/color-survey-results/"
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library and Color Graph (data/library.json, data/graph): ISCC-NBS block, Munsell notation, LCH values",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive fieldnotes, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "web",
+   "cite": "Google Books Ngram, case-insensitive",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "What kind of word-formation gives \"Purply\" its name?",
+   "choices": [
+    "A casual \"-y\" suffix added to \"purple\"",
+    "A place name",
+    "A Crayola naming contest",
+    "A 1912 color plate"
+   ],
+   "answer": "A casual \"-y\" suffix added to \"purple\"",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our own color library recommends \"Purply\" as a name worth teaching.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Purply is the color-naming version of calling something \"bluey\" instead of blue."
+ ],
+ "words": 195,
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

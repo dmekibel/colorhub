@@ -1,0 +1,131 @@
+{
+ "name": "Concrete Grey",
+ "hex": "#818479",
+ "names": [
+  "Concrete Grey"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Concrete Grey is a light olive grey matched to the industrial standard RAL 7023, named for the building material rather than any dye or place.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A material, not a dye",
+   "body": "This grey is filed against RAL 7023 in the German RAL registry, founded in 1927 for coatings, signage and industrial design [1]. The ISCC-NBS system classes the hue as a light olive grey [2]. Unlike most names in our library, which trace to a dye lot, a flower or a place, this one is named directly for poured concrete, so there is no coining story beyond the material itself [1].\n\nThe nearest named colors on file are [[greenish-grey]], [[cement-grey]], [[moss-grey]] and [[deep-olive-grey]], at 3.4, 3.6, 3.7 and 3.9 ΔE [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "ColorHub's archive finds this grey in 1,634 of 23,781 paintings, about 6.9 percent, as photographed [4]. It peaks in the 1920s, in 26 of 237 paintings, and Meindert Hobbema, Jacob van Ruisdael and Berthe Morisot carry it more than most painters in the set [4]. A grey this common is often weathered stone, shadow or aged varnish rather than any single pigment [4]. The count is a computed color match, not a pigment identification [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "poured concrete, the building material",
+   "first_recorded": "undocumented",
+   "source": "RAL registry"
+  },
+  "aka": [],
+  "siblings": [
+   "greenish-grey",
+   "cement-grey",
+   "moss-grey",
+   "deep-olive-grey"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1634,
+  "match": {
+   "nearest_library": "Taupe",
+   "de2000": 9.5,
+   "ral": "RAL 7023"
+  },
+  "measured": {
+   "lch": [
+    55,
+    6,
+    120
+   ],
+   "nearest": [
+    [
+     "Greenish Grey",
+     3.4
+    ],
+    [
+     "Cement Grey",
+     3.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: RAL 7023, approximate screen value (RAL registry founded 1927)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS (1955) block entry",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library: nearest named colors by CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is Concrete Grey named for?",
+   "choices": [
+    "Poured concrete, the building material",
+    "A French dye house",
+    "A 1912 flower",
+    "A painter's palette"
+   ],
+   "answer": "Poured concrete, the building material",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Concrete Grey is rare in ColorHub's painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Concrete Grey turns up in nearly 7 percent of our archive's paintings, more than most named colors."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "slug": "concrete-grey",
+ "words": 194
+}

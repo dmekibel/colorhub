@@ -1,0 +1,114 @@
+{
+ "slug": "merlot",
+ "name": "Merlot",
+ "hex": "#730039",
+ "names": [
+  "Merlot"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Merlot is a very dark purplish red named for the red wine grape, recorded in the 2010 xkcd color survey and also known in our library as Claret Violet.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A wine-grape name",
+   "body": "Our Color Graph files Merlot, #730039, as a plant, animal, food or landscape name, after the red wine grape merlot, recorded in the xkcd survey of 2010 [1]. Our sources do not trace how long the color name has paired with the grape name before that survey; the origin beyond the general naming category is undocumented here [1]. The ISCC-NBS system classes the hue as deep purplish red, about 5.1 units from that block's center [1]. Its Munsell notation is 0.7R 2.3/9.8 and its LCH values are lightness 24, chroma 47, hue 1 degree, one of the darkest colors in our library [1]. The library also files this same swatch under the name Claret Violet, and its nearest common match is [[burgundy]], a related wine-dark red [2].\n\nSee [[burgundy]] and [[claret]] for the better-documented wine-red names this color sits beside."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive has a color within CIEDE2000 4 of Merlot covering even 1% of its canvas, as photographed [3]. That describes this archive, not painting as a whole: a color this dark and this saturated is hard for any museum photograph of an aged, varnished canvas to hold onto [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the merlot red wine grape",
+   "first_recorded": "xkcd survey, 2010",
+   "source": "ColorHub Color Graph"
+  },
+  "aka": [
+   "Claret Violet"
+  ],
+  "siblings": [
+   "burgundy",
+   "claret",
+   "red",
+   "maroon"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "match": {
+   "hex": "#730039",
+   "de_max": 4,
+   "min_cover": 0.01
+  },
+  "nearest": [
+   [
+    "Burgundy",
+    11.2
+   ]
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub Color Graph: node record (hex, LCH, Munsell, ISCC-NBS block, recorded sources)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): nearest named match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (data/graph/fieldnotes), 23,781 paintings, CIEDE2000 <= 4, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is Merlot named after?",
+   "choices": [
+    "The merlot red wine grape",
+    "A French dye works",
+    "A 19th-century chemist"
+   ],
+   "answer": "The merlot red wine grape",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our library also files this swatch under the name Claret Violet.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Our library files the same dark wine-red swatch under two names: Merlot and Claret Violet."
+ ],
+ "words": 222,
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

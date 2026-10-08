@@ -1,0 +1,124 @@
+{
+ "slug": "mauve-grey",
+ "name": "Mauve grey",
+ "hex": "#A89BA0",
+ "names": [
+  "Mauve grey"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Mauve grey is a muted, greyed violet-pink, one of several modifiers built on the flower name [[mauve]], first charted by Ridgway in 1912 and picked up again in the ISCC-NBS system in 1955.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A grey cousin of mauve",
+   "body": "Ridgway's 1912 color nomenclature lists this tone, and the ISCC-NBS system revisited it in 1955, placing it in block 228, the \"pale purple\" region, about 5.3 units from that block's own center color [1]. The 29 color books held in color-kb do not mention Mauve grey by name [4].\n\nIn the ColorHub library the same point is also carried under Vinaceous-Grey, an exact duplicate name (ΔE 0.0) rather than a separate shade [1][3]. Its closest distinct neighbor is [[irisglow]], 2.8 units away and described in our graph as \"almost the same\" [3]. Both sit a step greyer and cooler than plain [[mauve]], which the name modifies [1].\n\nThe word mauve itself comes from the French name for the mallow flower, borrowed into English after William Perkin's 1856 dye made the color fashionable [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this tone in 246 of 23,781 paintings, about 1.0 percent, as photographed [2]. It is not common before the twentieth century: its presence roughly triples in paintings from the 1900s onward, and peaks in the 1910s, in 22 of 523 paintings [2]. Counts are computed color matches on varnished, photographed canvases, not pigment identifications [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the flower and dye color mauve, greyed down",
+   "first_recorded": "1912, Ridgway",
+   "source": "Ridgway 1912; ISCC-NBS 1955"
+  },
+  "aka": [
+   "Vinaceous-Grey"
+  ],
+  "siblings": [
+   "vinaceous-grey",
+   "irisglow",
+   "mauve-rose"
+  ],
+  "parent": "mauve",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 246,
+  "measured": {
+   "lch": [
+    65.2,
+    5.7,
+    351.0
+   ],
+   "nearest": [
+    [
+     "Irisglow",
+     2.8
+    ]
+   ]
+  }
+ },
+ "questions": [
+  {
+   "q": "Which 1912 source first lists this tone?",
+   "choices": [
+    "Ridgway's color nomenclature",
+    "A Crayola box",
+    "Newton's Opticks",
+    "A Pantone guide"
+   ],
+   "answer": "Ridgway's color nomenclature",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Mauve grey and Vinaceous-Grey are two different colors in the ColorHub library.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Mauve grey and Vinaceous-Grey are, in our library, the exact same point."
+ ],
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes, data/library.json): ISCC-NBS 1955, Maerz & Paul 1930, Ridgway 1912, RAL, Munsell and CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match (ΔE2000 ≤ 6, ≥ 5% of canvas), as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph: nearest named neighbors and cross-domain twin matches (gems, films, fashion decades, Werner 1821 cross-reference), computed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "Concordance of the 29 color books held in color-kb for this name: no hits",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No book concordance hits for this name; sourced from ColorHub's own color library and archive data.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 220
+}

@@ -1,0 +1,122 @@
+{
+ "slug": "rosebloom",
+ "name": "Rosebloom",
+ "hex": "#D79B91",
+ "names": [
+  "Rosebloom"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Rosebloom is a soft, dusty rose-pink that Maerz and Paul recorded in 1926, a compound of \"rose\" and \"bloom\" rather than a borrowed flower name of its own.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A compound, not a flower",
+   "body": "Maerz and Paul's 1930 dictionary gives plate 3 E 9 and dates the name to 1926 [1]. The nearest ISCC-NBS block by computed distance is 5, moderate pink, 5.1 units from the hex #D79B91, a reasonably close but not exact match [1]. The word compounds \"rose\" with \"bloom,\" the flush of color on a flower just opening, rather than naming one named rose variety [1].\n\nIts closest library neighbor is, by coincidence of letters as much as hue, [[indian-pink|Indian Pink]], under four units away; the resemblance in name is accidental, since \"Indian\" there names a different flower entirely [1]. [[grecian-rose|Grecian Rose]] sits a little further out, among the dozens of other \"rose\" compounds in our library, alongside the older [[old-rose|Old Rose]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within six units of it covers at least five percent of the canvas in 94 of our 23,781 archive paintings, as photographed, rarer than 53 percent of our named colors [2]. It most often plays a light tone, 28 percent of the 40 paintings our within-painting lens finds it in, and it peaks in the 1900s, in 5 of 1,674 paintings, at 1.6 times the expected rate [2]. The earliest dated example is from 1400, 530 years before the name's own 1926 record, a floor set by thin early coverage rather than a true first sighting [2]. It is also most over-represented in paintings from India, at 2.6 times the expected rate, a separate coincidence from its color neighbor Indian Pink [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a rose flower in bloom",
+   "first_recorded": "1926 (Maerz & Paul, 1930)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "indian-pink",
+   "grecian-rose",
+   "old-rose",
+   "pastel-pink"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 40,
+  "n_present_painting_level": 94,
+  "measured": {
+   "lch": [
+    69.4,
+    25.4,
+    33.8
+   ],
+   "nearest": [
+    [
+     "Indian Pink",
+     4.0
+    ],
+    [
+     "Grecian Rose",
+     6.1
+    ]
+   ]
+  },
+  "countries": [
+   {
+    "name": "India",
+    "hits": 12,
+    "n": 721,
+    "lift": 2.6
+   }
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz and Paul 1930, plate 3 E 9, first recorded 1926; nearest ISCC-NBS 1955 block 5",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does \"Rosebloom\" compound?",
+   "choices": [
+    "\"Rose\" and \"bloom\"",
+    "A named rose variety and a place",
+    "A pigment name and a painter's name",
+    "\"Rose\" and \"India\""
+   ],
+   "answer": "\"Rose\" and \"bloom\"",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Rosebloom's resemblance in name to Indian Pink reflects a shared color history.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Rosebloom and Indian Pink sit close in color, but their names share no real history."
+ ],
+ "words": 270,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); the India over-representation and the Indian Pink name resemblance are flagged as coincidental, not causally linked.",
+   "lint 2026-10-09"
+  ]
+ }
+}

@@ -1,0 +1,101 @@
+{
+ "slug": "dark-madder-blue",
+ "name": "Dark Madder Blue",
+ "hex": "#525C6A",
+ "names": [
+  "Dark Madder Blue"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dark Madder Blue is a dim, slate blue-grey, ColorHub's library name for a darkened shade of [[madder-blue]], traced to Ridgway's 1912 color atlas.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A darkened madder blue",
+   "body": "The name follows ColorHub's modifier grammar, \"dark\" plus the parent color [[madder-blue]], whose own name points to the madder plant family of dyes rather than to this grey-blue hue directly [1]. The library dates the swatch to Ridgway's *Color Standards and Color Nomenclature* of 1912, plate XLIII, and again places it in the ISCC-NBS Dictionary of Color Names of 1955, in the block for grayish blue [1]. Ridgway's plates survive only as scans of an aged, printed chart, so the hex value is an approximation of the original ink, not a measurement of it [1].\n\nThe closest named neighbor on file is [[black-coral]], with [[deep-slate-blue]] close behind [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color near this swatch in 331 of 23,781 paintings, about 1.39 per cent, as photographed [2]. It is fairly steady across the centuries, rises in the twentieth, and peaks in a small sample of 1930s paintings [2]. Henri-Edmond Cross, Karl Isakson and Pierre Puvis de Chavannes all have it well above the archive's average rate [2]. These are computed color matches to photographed, varnished paintings, not pigment identifications [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a darkened shade of Madder Blue",
+   "first_recorded": "Ridgway, 1912, plate XLIII",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "black-coral",
+   "deep-slate-blue",
+   "dark-blue-slate"
+  ],
+  "parent": "madder-blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 331,
+  "pct_archive": 1.39,
+  "peak_decade": 1930
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; Ridgway 1912, plate XLIII; ISCC-NBS 1955)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph, nearest-neighbor color distances (data/graph/edges-d.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1912 reference does ColorHub's library trace this swatch to?",
+   "choices": [
+    "Ridgway's Color Standards and Color Nomenclature",
+    "Maerz and Paul's Dictionary of Color",
+    "Werner's Nomenclature of Colours"
+   ],
+   "answer": "Ridgway's Color Standards and Color Nomenclature",
+   "kind": "pick"
+  },
+  {
+   "q": "Dark Madder Blue's parent color name points to which dye plant family?",
+   "choices": [
+    "Madder",
+    "Indigo",
+    "Woad"
+   ],
+   "answer": "Madder",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "A slate blue-grey favored by Henri-Edmond Cross and other Neo-Impressionist-adjacent painters."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": []
+ },
+ "words": 203
+}

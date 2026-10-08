@@ -1,0 +1,124 @@
+{
+ "slug": "pastel-yellow",
+ "name": "Pastel Yellow",
+ "hex": "#FDFD96",
+ "names": [
+  "Pastel Yellow"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Pastel Yellow is a pale, buttery [[yellow]] built by the modifier grammar \"pastel + yellow\", and our own sources disagree on exactly what it is.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two colors, one name",
+   "body": "Our color library carries two records under this name. One, closer to a muted [[apricot|apricot]] gold (#EB9C52), traces to the RAL paint catalog and is placed by the ISCC-NBS 1955 lists in block 84 [1]. The other, the pale lemon shown here, comes from the xkcd 2010 crowd-name survey and is placed by ISCC-NBS in a different block as a \"light greenish yellow\" [1].\n\nBooks and standards bodies do not agree on a single referent for \"pastel yellow\"; this article follows the crowd-survey swatch, the one most people now picture [1]. In Munsell terms a precise match is not recorded for this swatch [1]. The nearest named colors on file are [[banana]] and [[light-green-yellow]], at 3.4 and 3.5 ΔE [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This swatch is present, by lightness position within the painting, in 4 of our 23,781 paintings, with 6 found by raw coverage, as photographed [2]. That makes it rarer than 77% of the named colors we track [2].\n\nIn printed English, \"pastel yellow\" as a phrase peaks in the 2010s and rose fastest in the 2000s, matching its crowd-survey origin rather than any older paint-catalog use [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: pastel + yellow",
+   "first_recorded": "2010, xkcd color survey (RAL and ISCC-NBS carry a different swatch under the same name)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "banana",
+   "light-green-yellow",
+   "key-lime",
+   "pale-butter"
+  ],
+  "parent": "yellow",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "apricot",
+    "gloss": "RAL/ISCC-NBS list a deeper apricot-gold under the same name"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 4,
+  "n_present_by_coverage": 6,
+  "rank_pct": 77,
+  "measured": {
+   "iscc_nbs": "light greenish yellow, block 101, dE 5.7",
+   "nearest": [
+    [
+     "Banana",
+     3.4
+    ],
+    [
+     "Light Green-Yellow",
+     3.5
+    ],
+    [
+     "Key Lime",
+     3.7
+    ],
+    [
+     "Pale butter",
+     3.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: RAL, ISCC-NBS (1955) and xkcd (2010) entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why does this article hedge on what \"Pastel Yellow\" means?",
+   "choices": [
+    "Our own sources disagree: one catalog ties the name to an apricot gold, another to this pale lemon",
+    "The name has never appeared in any color list",
+    "The hex code changes every year",
+    "Munsell renamed the color in 1955"
+   ],
+   "answer": "Our own sources disagree: one catalog ties the name to an apricot gold, another to this pale lemon",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: this exact swatch is one of the more common colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Our own catalogs disagree on what Pastel Yellow is: a muted apricot gold in one, this pale lemon in another."
+ ],
+ "words": 208,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Library records two different hexes under 'Pastel Yellow'; flagged as a disagreement rather than silently picking one.",
+   "lint 2026-10-09"
+  ]
+ }
+}

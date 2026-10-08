@@ -1,0 +1,107 @@
+{
+ "slug": "barney-purple",
+ "name": "Barney Purple",
+ "hex": "#A00498",
+ "names": [
+  "Barney Purple"
+ ],
+ "tier": "person",
+ "depth": "brief",
+ "lede": "Barney Purple is a deep, darker magenta-purple named as a variant of [[barney|Barney]], a person-tier name the 2010 xkcd survey's crowd gave to this neighboring shade.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier on a person's name",
+   "body": "The name comes from Randall Munroe's 2010 xkcd color survey, where visitors typed a word next to a swatch and the most common label for each cluster of clicks won [1]. Our data treats it as a family word built on [[barney|Barney]], with \"purple\" marking the darker, more saturated member of that pair, 5.8 units apart in our measurements [1]. ISCC-NBS 1955 would file the same patch as a vivid purple, about 4.8 units off, with Munsell notation 9.2P 3.7/17.0 [1].\n\nThe closest other look-alikes in our data are [[warm-purple|Warm Purple]], 3.7 units away and duller, [[dark-magenta|Dark Magenta]], a darker neighbor, and [[iris-purple|Iris Purple]], more vivid and lighter [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive has this color covering at least 1 percent of its canvas, within a CIEDE2000 difference of 4, as photographed [2]. As with its sibling [[barney|Barney]], a magenta-purple this deep and saturated has no real counterpart among historical pigments [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a darker variant of Barney",
+   "first_recorded": "2010, xkcd color survey",
+   "source": "xkcd (Munroe 2010)"
+  },
+  "aka": [],
+  "siblings": [
+   "warm-purple",
+   "dark-magenta"
+  ],
+  "parent": "barney",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    37.5,
+    77.9,
+    330.3
+   ],
+   "nearest": [
+    [
+     "Warm Purple",
+     3.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: xkcd 2010 color survey entry, ISCC-NBS and Munsell mapping",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Barney Purple is treated in our data as a family word built on which other name?",
+   "choices": [
+    "Barney",
+    "Barbie Pink",
+    "Blackish Violet",
+    "Royal Purple"
+   ],
+   "answer": "Barney",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Barney Purple and Barney are close look-alikes in our data, about 5.8 units apart.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Barney Purple sits just 5.8 units from its own namesake, Barney, in our color measurements."
+ ],
+ "words": 182,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No private fact-card file for this slug.",
+   "Which person the family name refers to is undocumented in our data."
+  ]
+ }
+}

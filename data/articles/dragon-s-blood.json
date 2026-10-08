@@ -1,0 +1,116 @@
+{
+ "slug": "dragon-s-blood",
+ "name": "Dragon's Blood",
+ "hex": "#B25A4F",
+ "names": [
+  "Dragon's Blood"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Dragon's Blood is a brick red, catalogued by our library as a plant word and first recorded in print in 1599.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A resin's name",
+   "body": "Maerz and Paul's 1930 dictionary, by the account the NBS carried into its 1955 circular, puts the first printed record of the name at 1599, on plate 4 J 10 [1]. The ISCC-NBS system reads the swatch as a moderate red, about 6.2 units from the block center, and Munsell notation gives 7.3R 4.8/8.0 [1]. Our library classes the name with plant words, consistent with the long-standing use of \"dragon's blood\" for a dark red resin [1].\n\nThe nearest named color in our data is [[pompeian-red]], about 3.5 units off, with [[dusty-crimson]], [[reddish-chestnut]] and [[ferruginous]] close behind [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This color, as photographed, is common in the archive: 266 of 23,781 paintings, about 1.1 per cent, more common than 72 percent of the named colors we track [3]. It is over-represented in Indian painting, at 69 of 721 works, 3.2 times the overall rate, and further still in the Kalighat school, at 11 of 96 works, 3.1 times expected [3]. Its peak is the 1400s, at 2.9 percent of that century's paintings, 2.3 times the overall rate, and inside a painting it most often plays an accent [3]. The earliest match in the archive is a painting dated 1119, 811 years before the name's 1930 dictionary record, so this is a look-alike hue in an aged photograph, not a pigment identification, a floor and not a first, since the archive's early centuries are thin [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "dragon's blood resin",
+   "first_recorded": "1599 (Maerz & Paul 1930, via NBS Circular 553)",
+   "source": "data/library.json"
+  },
+  "aka": [],
+  "siblings": [
+   "pompeian-red",
+   "dusty-crimson",
+   "reddish-chestnut",
+   "ferruginous"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 266,
+  "pct": 1.12,
+  "country": [
+   "India",
+   69,
+   721,
+   3.2
+  ],
+  "movement": [
+   "Kalighat",
+   11,
+   96,
+   3.1
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930 and other name sources; CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub Color Graph look-alikes (data/graph), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5 per cent of canvas); data/graph/fieldnotes",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In which painting tradition is Dragon's Blood most over-represented in our archive?",
+   "choices": [
+    "Kalighat",
+    "Impressionism",
+    "Realism",
+    "Mughal"
+   ],
+   "answer": "Kalighat",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the archive's earliest match for this color predates the name's 1930 dictionary record by centuries.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dragon's Blood is over-represented more than 3-fold in the Kalighat painting school."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Fixed: the field-notes paragraph had several numbers not supported by data/graph/fieldnotes — the India over-representation (article said 116 of 721, 15x; the real fact is 69 of 721, 3.2x), the Kalighat figure (article said 42 of 96, 41x; the real fact is 11 of 96, 3.1x/4.2x), the invented 'peak decade 1460s' (no matching field; the real peak is the 1400s century fact, 2.9%/2.3x), and the closing sentence, which named a '≈500 CE Maya mural fragment' with no basis (fs.fa is null; the real first-seen record is an unattributed 1119 painting, 811 years before the name's 1930 record — not 'over a thousand years' before 1599). Rewrote the paragraph and the opener/question that repeated the 41x figure from the real country, movement, century, role and first-seen facts. Removed the unsupported numbers rather than inventing replacements.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 262
+}

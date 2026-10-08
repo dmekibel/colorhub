@@ -1,0 +1,123 @@
+{
+ "slug": "warbler-green",
+ "name": "Warbler Green",
+ "hex": "#908538",
+ "names": [
+  "Warbler Green"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Warbler Green is an olive-yellow, named by Ridgway in 1912 for the dull greenish-yellow plumage common across many warbler species rather than any one bird.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A bird-feather olive",
+   "body": "Ridgway plated this hue in 1912 at plate IV, hue 23, tone k; Maerz and Paul carried the same first-recorded date of 1912 into their 1930 dictionary, and the ISCC-NBS system later filed it as block 106, a light olive [1]. Warblers are a large, varied family, and many New World warblers share exactly this muted yellow-olive in their backs and wings, which is likely why Ridgway chose the group name rather than a single species [1].\n\nIts nearest look-alikes in our library are [[silver-fern]], almost the same at a distance of 2.8, [[serpentine-green]], a little duller, and [[dusty-hazel-tone]] at a similar distance [2]. The traditional Japanese list carries a related term, *Koke-iro* (苔色), \"moss color\" [2]. Measured in LCH it is lightness 55, chroma 42 and hue 98 degrees, a fairly saturated yellow-green [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this olive in 505 of 23,781 paintings (2.12%, as photographed), more common than 77% of the named colors we track [3]. It most often plays an accent, in 55% of its 310 strongest matches [3]. Paulus Potter is its most devoted painter, at 4.8 times the baseline rate across his 28 works here, and it is most over-represented in paintings from India, at 2.7 times the expected rate [3]. The earliest dated match runs to 1285, more than six centuries before Ridgway's own 1912 record; the match is a look-alike hue in an aged photograph, not proof the pigment was there, a floor and not a first, since the archive's early centuries are thin [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "warbler plumage (a bird family, not one species)",
+   "first_recorded": "1912 (Ridgway, plate IV)",
+   "source": "Ridgway, Color Standards and Color Nomenclature"
+  },
+  "aka": [],
+  "siblings": [
+   "silver-fern",
+   "serpentine-green",
+   "dusty-hazel-tone",
+   "old-moss-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Koke-iro (苔色, \"moss color\")"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 505,
+  "measured": {
+   "lch": [
+    55,
+    42,
+    98
+   ],
+   "nearest": [
+    [
+     "Silver Fern",
+     2.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Ridgway 1912, plate IV, hue 23, tone k; ISCC-NBS 1955 block 106; Maerz & Paul 1930, first recorded 1912",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library and Color Graph look-alikes and traditional names (data/graph/), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why did Ridgway likely choose \"warbler\" rather than one species' name?",
+   "choices": [
+    "Many warbler species share this muted yellow-olive",
+    "Only one warbler species exists",
+    "It was the brightest color in his plates",
+    "Warblers are extinct, so he could not be corrected"
+   ],
+   "answer": "Many warbler species share this muted yellow-olive",
+   "kind": "pick"
+  },
+  {
+   "q": "Which named color is closest to Warbler Green in our library?",
+   "choices": [
+    "Silver Fern",
+    "Vermilion",
+    "Indigo",
+    "Mauve"
+   ],
+   "answer": "Silver Fern",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Warbler Green is named for a whole family of birds, not one species."
+ ],
+ "words": 278,
+ "status": "checked",
+ "checked": {
+  "by": "batch-16",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); written from the color graph, library and archive only.",
+   "lint 2026-10-09"
+  ]
+ }
+}

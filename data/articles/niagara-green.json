@@ -1,0 +1,131 @@
+{
+ "slug": "niagara-green",
+ "name": "Niagara Green",
+ "hex": "#93B6A6",
+ "names": [
+  "Niagara Green"
+ ],
+ "tier": "place",
+ "depth": "short",
+ "lede": "Niagara Green is a pale, greyed blue-green named for Niagara Falls, the waterfalls on the border of Canada and the United States, and recorded as a color standard since 1912.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A waterfall's name",
+   "body": "Niagara Falls is the collective name for three waterfalls on the Niagara River between Lake Erie and Lake Ontario, one of them, Horseshoe Falls, among the highest-flow-rate waterfalls in the world [3]. Ridgway's 1912 standards plate this green on plate XXXIII, hue 41 double-prime, tone b, and the ISCC-NBS dictionary later filed the same swatch, block 163, as a pale green, 5.4 units from that block's center [1]. Our library gives it the Munsell notation 7.1G 7.0/2.6 [1].\n\nIts nearest named neighbors are Dark Bluish Glaucous, 3.3 units away, and Eggshell Green, 3.4 units away [1]. A paler member of the same name, [[pale-niagara-green]], sits in our library too, lighter and less saturated than this one [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Niagara Green covers at least five percent of the canvas in 109 works, under half of one percent [2]. The earliest dated example is Andrea del Castagno's 1450 portrait of a man, a floor and not a first, since the archive's early centuries are thin [2]. It peaks in the 1910s, in 8 of 523 paintings, more than three times the archive's overall rate for that decade, and it turns up in Gustav Klimt's paintings here thirteen times the baseline rate [2]. Eighty-one percent of its appearances sit in a painting's highlights rather than its mid-tones or shadows [2]. It shares a canvas with [[sage]] more than any other color word, over eleven times the baseline [2]. These are screen-color matches on photographs of aged, varnished paintings, not pigment identifications [2]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Niagara Falls, on the Canada-United States border",
+   "first_recorded": "1912 (Ridgway, plate XXXIII, hue 41″)",
+   "source": "ColorHub color library (Ridgway 1912; ISCC-NBS 1955)"
+  },
+  "aka": [],
+  "siblings": [
+   "pale-niagara-green",
+   "dark-bluish-glaucous",
+   "eggshell-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#93B6A6",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 109,
+  "peak_decade": 1910,
+  "role": {
+   "highlight": 0.81,
+   "mid": 0.17,
+   "shadow": 0.02
+  },
+  "company": [
+   {
+    "word": "Sage",
+    "lift": 11.35
+   }
+  ],
+  "measured": {
+   "lch": [
+    71.2,
+    15.7,
+    164.3
+   ],
+   "nearest": [
+    [
+     "Dark Bluish Glaucous",
+     3.29
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS 1955, Maerz & Paul 1930, Ridgway 1912, Munsell notation entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "web",
+   "cite": "Wikipedia, \"Niagara Falls\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/Niagara_Falls"
+  }
+ ],
+ "questions": [
+  {
+   "q": "Niagara Green is named for a:",
+   "choices": [
+    "waterfall",
+    "mountain range",
+    "river delta",
+    "glacier"
+   ],
+   "answer": "waterfall",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: most of Niagara Green's appearances in our archive fall in shadow.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Eighty-one percent of Niagara Green's appearances in our archive sit in a painting's highlights."
+ ],
+ "words": 303,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

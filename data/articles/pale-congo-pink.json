@@ -1,0 +1,137 @@
+{
+ "slug": "pale-congo-pink",
+ "name": "Pale Congo Pink",
+ "hex": "#E5C4B7",
+ "names": [
+  "Pale Congo Pink"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Pale Congo Pink is a pale, yellowish pink from Ridgway's 1912 plates, close kin to Hydrangea Pink, and over-represented in both Edvard Munch's paintings and our archive's paintings from India.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A pale pink from the 1912 plates",
+   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* places this hue at plate XXVIII, hue 7′′, tone f, scanned from an aged plate and so approximate [1]. The ISCC-NBS system later filed it in its own block [1]. It carries \"Congo\" in its name, but no source we checked documents why, so its origin stays undocumented here [1].\n\nIts nearest relatives in our color graph are [[hydrangea-pink]], redder, and [[pale-flesh-color]] and [[pale-greyish-vinaceous]], close behind, all within four units [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, as photographed, a color within six units of Pale Congo Pink covers at least five per cent of a canvas in 197 works, more common than 64 per cent of our named colors [3]. The painter most devoted to it is Edvard Munch, in 5 of his 50 works here, about 4.9 times his museums' baseline [3]. It is most over-represented in paintings from India, at 2.6 times expected [3]. The earliest dated appearance in our archive is 1375, over five centuries before the name's own 1912 record, a look-alike hue, not proof of pigment, a floor and not a first, since the archive's early centuries are thin [3]. These remain photographs of aged, varnished paintings, read as screen colors [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "Ridgway, Color Standards and Color Nomenclature (1912), plate XXVIII, hue 7′′, tone f",
+   "source": "ColorHub color library (Ridgway 1912; ISCC-NBS 1955)"
+  },
+  "aka": [],
+  "siblings": [
+   "hydrangea-pink",
+   "pale-flesh-color",
+   "pale-greyish-vinaceous",
+   "shell-pink"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#E5C4B7",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 197,
+  "painters": [
+   {
+    "key": "Edvard Munch",
+    "n": 50,
+    "hits": 5,
+    "lift": 4.9
+   }
+  ],
+  "countries": [
+   {
+    "key": "India",
+    "n": 721,
+    "hits": 18,
+    "lift": 2.6
+   }
+  ],
+  "measured": {
+   "lch": [
+    81.6,
+    14.5,
+    48.3
+   ],
+   "nearest": [
+    [
+     "Hydrangea Pink",
+     2.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-p.json): Ridgway 1912, plate XXVIII, hue 7′′, tone f; ISCC-NBS 1955 block 28 (R)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-p.json), CIEDE2000 look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which painter in our archive is most devoted to Pale Congo Pink?",
+   "choices": [
+    "Edvard Munch",
+    "Francisco Bayeu",
+    "Paul Cezanne",
+    "Henri Matisse"
+   ],
+   "answer": "Edvard Munch",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources document exactly why the name includes \"Congo\".",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Edvard Munch returns to this pale pink roughly five times more often than his museums' own paintings would predict."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-08",
+  "issues": [
+   "Why the name includes \"Congo\" is not documented in the sources checked here.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 234
+}

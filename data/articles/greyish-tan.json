@@ -1,0 +1,140 @@
+{
+ "slug": "greyish-tan",
+ "name": "Greyish tan",
+ "hex": "#B9A193",
+ "names": [
+  "Greyish tan"
+ ],
+ "tier": "traditional",
+ "depth": "brief",
+ "lede": "Shironezumi, white mouse",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Greyish tan is a soft, warm grey-beige carried into our library from the Japanese traditional color Shironezumi, literally \"white mouse,\" and it sits 10.5 units from the plain [[tan]].",
+   "body": "Our library lists this color under the Japanese name Shironezumi, written 白鼠, combining *shiro* (white) and *nezumi* (mouse), one of a family of Japanese grey names built on the mouse's coat [1]. No book consulted independently dates the coinage beyond that library gloss, so it is undocumented here [1].\n\nThe swatch measures lightness 68, chroma 12 and hue 58 degrees, in the Oranges family by our classification, read by most eyes as a warm beige rather than a true grey [1]. The nearest named colors on file are [[sweet-pea]], [[mushroom]], [[mauve-blush]] and [[light-cinnamon-drab]], at 2.9, 3.3, 3.5 and 3.6 ΔE [1]. A darker, more neutral cousin in the same descriptive family is [[greyish-umber]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within range of this swatch appears in 1,260 of the 23,781 paintings in our archive, about 5.3 percent, as photographed, most often as a highlight [2]. The earliest dated match is an Egyptian ostracon fragment dated to roughly 1295 BCE in the archive's year field, a floor and not a first, since the archive's early centuries are thin [2]. Among Pahari painters specifically, 32 of 118 works carry it, 5.1 times the archive's overall rate[2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "白 (shiro), white, + 鼠 (nezumi), mouse",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library (Wikipedia, \"Traditional colors of Japan\")"
+  },
+  "aka": [
+   "Shironezumi",
+   "白鼠"
+  ],
+  "siblings": [
+   "sweet-pea",
+   "mushroom",
+   "mauve-blush",
+   "light-cinnamon-drab"
+  ],
+  "parent": "tan",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Shironezumi (白鼠), \"white mouse\""
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1260,
+  "first_seen": {
+   "year": -1295,
+   "painter": null
+  },
+  "painters": [
+   {
+    "name": "Pahari (movement)",
+    "n": 118,
+    "hits": 32,
+    "lift": 5.12
+   }
+  ],
+  "measured": {
+   "lch": [
+    68,
+    12,
+    58
+   ],
+   "nearest": [
+    [
+     "Sweet Pea",
+     2.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional color names (Wikipedia, \"Traditional colors of Japan\")",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, as photographed (data/graph/fieldnotes, tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the Japanese name Shironezumi literally mean?",
+   "choices": [
+    "White mouse",
+    "Grey stone",
+    "Pale ash",
+    "Dust cloud"
+   ],
+   "answer": "White mouse",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our classification files this color under Greys rather than Oranges.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Pahari paintings carry this color at roughly what multiple of the archive's overall rate?",
+   "choices": [
+    "About 5 times",
+    "About 50 times",
+    "The same rate",
+    "Never"
+   ],
+   "answer": "About 5 times",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Greyish tan's Japanese name, shironezumi, literally means \"white mouse,\" part of a family of grey names built on a mouse's coat."
+ ],
+ "words": 200,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No book consulted independently dates the name Shironezumi beyond the library's own gloss; stated as undocumented.",
+   "lint 2026-10-09"
+  ]
+ }
+}

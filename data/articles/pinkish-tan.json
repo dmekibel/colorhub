@@ -1,0 +1,133 @@
+{
+ "slug": "pinkish-tan",
+ "name": "Pinkish Tan",
+ "hex": "#D99B82",
+ "names": [
+  "Pinkish Tan"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Pinkish Tan is a modifier-built name, \"pinkish\" plus \"tan,\" traced to Robert Ridgway's 1912 Color Standards and Color Nomenclature.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "From Ridgway to the crowd",
+   "body": "Our library traces this name to Robert Ridgway's 1912 *Color Standards and Color Nomenclature*, a book written for naturalists describing birds, mammals and plants [1]. The xkcd 2010 survey later recorded the same pairing of words independently [1]. The ISCC-NBS block for it reads \"moderate yellowish pink\" [1].\n\nIts Munsell notation is close to 1.3YR 6.8/5.7, a warm, medium-light hue [1]. Close cousins in our library are [[tan|Tan]], [[blush|Blush]] and [[dusty-rose|Dusty Rose]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Pinkish Tan is comfortably common in our archive: it covers at least 2% of the canvas in 312 of 23,781 paintings, as photographed [2]. By its position in each painting's lightness order it is found in 156 of those, more common than 67% of the named colors we track, close to [[beige|Beige]] in that respect [2]. It most often plays an accent, the role in 48% of those paintings [2].\n\nIt peaks in paintings from the 1900s, at 1.6 times the archive's baseline rate, and is most over-represented in paintings from India, at 2.6 times expected [2]. Maurice Denis is its most devoted painter here, carrying it in 5 of his 43 works, 6.1 times his museums' baseline [2]. The earliest match is 1230, in a work by Berlinghiero, 682 years before Ridgway's 1912 record of the name, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: pinkish + tan",
+   "first_recorded": "1912, Ridgway",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "onion-skin-pink",
+   "japan-rose",
+   "dark-salmon",
+   "beige-red"
+  ],
+  "parent": "tan",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present_by_coverage": 312,
+  "n_present_within": 156,
+  "rank_pct": 67,
+  "role": "accent, 48% of matched paintings",
+  "top_painter": {
+   "name": "Maurice Denis",
+   "n": 5,
+   "of": 43,
+   "lift": 6.1
+  },
+  "top_country": {
+   "name": "India",
+   "lift": 2.6
+  },
+  "first_dated": {
+   "id": "cma-142475",
+   "painter": "Berlinghiero",
+   "year": 1230
+  },
+  "measured": {
+   "nearest": [
+    [
+     "Onion-Skin Pink",
+     2.1
+    ],
+    [
+     "Japan Rose",
+     2.8
+    ],
+    [
+     "Dark Salmon",
+     4.1
+    ],
+    [
+     "Beige Red",
+     4.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway (1912), ISCC-NBS (1955) and xkcd (2010) entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which book first records the name Pinkish Tan, per our library?",
+   "choices": [
+    "Ridgway's 1912 Color Standards and Color Nomenclature",
+    "Werner's 1821 nomenclature",
+    "A Crayola color chart",
+    "The RAL paint catalog"
+   ],
+   "answer": "Ridgway's 1912 Color Standards and Color Nomenclature",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Pinkish Tan is rarer than most named colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pinkish Tan is most over-represented in paintings from India, at 2.6 times the expected rate."
+ ],
+ "words": 241,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

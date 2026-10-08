@@ -1,0 +1,120 @@
+{
+ "slug": "claret-violet",
+ "name": "Claret Violet",
+ "hex": "#691639",
+ "names": [
+  "Claret Violet"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Claret Violet is a very dark purplish red, one of the few colors in our library traced to the German RAL industrial standard rather than an English color dictionary.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A wine word, by way of a German standard",
+   "body": "Our library's only source for Claret Violet is the RAL color standard, catalogued in 1927 as RAL 4004, a screen approximation of that swatch [1]. The ISCC-NBS system of 1955 would place it in block 259, dark purplish red, 4.7 units from that block's centroid [2]. The nearest named colors on file are [[bokhara]], [[merlot]], [[tyrian-purple]] and [[pansy-purple]], at 2.6, 2.9, \nThe name joins *claret*, the English word for a dark red Bordeaux wine, with *violet* for its purple cast; it shares its first word with [[claret]] itself, a lighter, redder color in our library [1][2]. In feel it sits between [[merlot]] and [[burgundy]], two other wine-named reds in our data [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Claret Violet covers at least five per cent of the canvas in only one work, a *Saint Jerome* dated around 1600, as photographed [3]. Such a dark, specific purplish red rarely covers enough of a varnished, aged canvas to register at this threshold, so its near-absence here says more about the archive's photography than about the color's history [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "claret wine, with a violet cast",
+   "first_recorded": "1927 (RAL 4004)",
+   "source": "RAL color standard; ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "bokhara",
+   "merlot",
+   "tyrian-purple",
+   "pansy-purple"
+  ],
+  "parent": "claret",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1,
+  "iscc_category": "dark purplish red",
+  "nearest": [
+   [
+    "Byzantium",
+    10.7
+   ]
+  ],
+  "measured": {
+   "nearest": [
+    [
+     "Bokhara",
+     2.6
+    ],
+    [
+     "Merlot",
+     2.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "RAL Colour Standard, RAL 4004 (1927 ed.), via ColorHub library",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955 block 259), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which industrial color standard is the source for Claret Violet in our library?",
+   "choices": [
+    "RAL",
+    "Pantone",
+    "Munsell"
+   ],
+   "answer": "RAL",
+   "kind": "pick"
+  },
+  {
+   "q": "Claret Violet is one of the more isolated colors in our library, with its nearest neighbor over 10 units away.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Claret Violet's nearest named neighbor in our library sits over 10 color units away."
+ ],
+ "words": 212,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

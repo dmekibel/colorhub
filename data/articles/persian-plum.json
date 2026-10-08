@@ -1,0 +1,124 @@
+{
+ "slug": "persian-plum",
+ "name": "Persian Plum",
+ "hex": "#701C1C",
+ "names": [
+  "Persian Plum"
+ ],
+ "tier": "place",
+ "depth": "short",
+ "lede": "Persian Plum is a dark brownish red, one of a family of color names built on Persia, and old enough that Werner's 1821 nomenclature already compared it to a goldfinch's head and a cherry.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "An old red",
+   "body": "Werner's Nomenclature of Colours, edited by Patrick Syme in 1821, lists this red under its animal and vegetable comparisons as the head of the cock goldfinch among birds and corn poppy or cherry among plants [1]. Maerz and Paul's 1930 dictionary gives 1789 as its first recorded use under the Persian name, decades before Werner's book, and the ISCC-NBS dictionary of 1955 later filed it as a deep red with the Munsell notation 8.9R 2.5/8.0 [1]. Werner's hand-tinted plates are aged and approximate, so his color is a guide, not a measurement [1]. Its nearest named neighbor is Reddish Wine, 3.0 units away, then Falu Red at 3.8 [1]. It belongs to, [[persian-rose]] and [[persian-orange]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Persian Plum covers at least five percent of the canvas in 533 works, over two percent[2]. The earliest dated example is a mural fragment showing an elite man among maguey cactus leaves, from around the year 500, a floor and not a first, since the archive's early centuries are thin [2]. It peaks in the 1460s, in 9 of 71 paintings, over five and a half times the archive's overall rate for that decade, and Andrea del Sarto carries it in five of his twenty-one paintings here, over ten times the baseline rate [2]. It shares a canvas with [[burgundy]] far more than any other color word, over thirty times the baseline [2]. These are screen-color matches on photographs of aged, varnished paintings, not pigment identifications [2]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Persia (now Iran); the specific reason for this red is undocumented",
+   "first_recorded": "1789 (Maerz & Paul, 1930)",
+   "source": "ColorHub color library (Maerz & Paul 1930); Werner's Nomenclature of Colours, 1821, no. 87 (Reds)"
+  },
+  "aka": [],
+  "siblings": [
+   "persian-pink",
+   "persian-rose",
+   "persian-orange",
+   "reddish-wine"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#701C1C",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 533,
+  "peak_decade": 1460,
+  "top_painter": {
+   "name": "Andrea del Sarto",
+   "lift": 10.62
+  },
+  "company": [
+   {
+    "word": "Burgundy",
+    "lift": 30.38
+   }
+  ],
+  "measured": {
+   "lch": [
+    24.8,
+    42.7,
+    30.8
+   ],
+   "nearest": [
+    [
+     "Reddish wine",
+     3.02
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Werner (ed. Syme), Nomenclature of Colours, 1821, no. 87 (Reds)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Werner's 1821 nomenclature compares Persian Plum's hue to a bird and which fruit?",
+   "choices": [
+    "cherry",
+    "fig",
+    "plum",
+    "peach"
+   ],
+   "answer": "cherry",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Persian Plum peaks in our archive in paintings from the 1460s.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Werner's 1821 nomenclature compared this red to a goldfinch's head and a cherry, over a century before Maerz and Paul recorded the name Persian Plum."
+ ],
+ "words": 303,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

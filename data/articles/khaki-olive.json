@@ -1,0 +1,123 @@
+{
+ "slug": "khaki-olive",
+ "name": "Khaki olive",
+ "hex": "#746643",
+ "names": [
+  "Khaki olive"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Khaki olive is a moderate, yellowish brown named for the olive, and it is among the most common named colors in our painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "An olive, not a dust color",
+   "body": "The color library files Khaki olive from RAL, dated 1927, with no plate or hue note attached [1]. The nearest named colors on file are [[greyish-brown]] and [[bronze]], at \nIn LCH terms it measures lightness 44, chroma 22, hue 90 degrees, the ISCC-NBS \"moderate yellowish brown\" block, Munsell 4.5Y 4.3/3.1 [1]. This color is not carried in our color library's wider cross-reference set, so we cannot give it a precise nearest named neighbor here [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 4,828 of 23,781 paintings, 20.3 percent, as photographed; the within-painting lens finds it in 2,774 [2]. That makes it more common than 98 percent of the named colors we track [2]. It peaks in the 1700s, at 13.1 percent of that century's 3,449 paintings, 1.1 times the expected rate [2]. Inside a painting it most often sits as a light, in 31 percent of its appearances [2].\n\nSalomon van Ruysdael is its most devoted painter, carrying it in 7 of his 13 works here, 3.4 times the baseline [2]. The earliest match is dated 900, by Zhao Guangfu; that is 1,027 years before the name's own first record, in 1927, so the match is a look-alike hue in an aged photograph, not evidence of the actual paint, a floor and not a first, since the archive's early centuries are thin [2]. It shares canvases with [[water-grey|Water Grey]] and [[indigo-tea|Indigo tea]] more than chance would predict [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "pairs khaki, a word for dust-colored cloth, with olive; the pairing itself is undocumented",
+   "first_recorded": "1927 (RAL)",
+   "source": "RAL color standard"
+  },
+  "aka": [],
+  "siblings": [
+   "greyish-brown",
+   "bronze",
+   "medal-bronze",
+   "deep-olive"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 4828,
+  "measured": {
+   "lch": [
+    44,
+    22,
+    90
+   ],
+   "nearest": [
+    [
+     "Greyish Brown",
+     3.7
+    ],
+    [
+     "Bronze",
+     4.1
+    ],
+    [
+     "Medal Bronze",
+     4.1
+    ],
+    [
+     "Deep Olive",
+     4.1
+    ]
+   ]
+  },
+  "role": {
+   "light": 31
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: RAL (1927); ISCC-NBS \"moderate yellowish brown\", Munsell 4.5Y 4.3/3.1",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which painter is most associated with Khaki olive in our archive?",
+   "choices": [
+    "Salomon van Ruysdael",
+    "John Singer Sargent",
+    "Jan Brueghel the Elder",
+    "Meindert Hobbema"
+   ],
+   "answer": "Salomon van Ruysdael",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Khaki olive is one of the rarer named colors in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Khaki olive turns up in one painting in five in our archive."
+ ],
+ "words": 265,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

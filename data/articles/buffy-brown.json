@@ -1,0 +1,137 @@
+{
+ "slug": "buffy-brown",
+ "name": "Buffy Brown",
+ "hex": "#977D5D",
+ "names": [
+  "Buffy Brown"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Buffy Brown is a light tan-brown from Ridgway's 1912 nomenclature that turns out to be one of the most common colors in the whole ColorHub painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A buff tone, systematized",
+   "body": "Ridgway's *Color Standards and Color Nomenclature* (1912) lists Buffy Brown on plate XL, hue 17′′′, tone i, built on *buff*, the pale tan of undyed leather [1]. The ISCC-NBS system placed it in its 1955 block 76, *light yellowish brown* [1]. In printed English the phrase itself rose fastest in the 1900s and peaked in the 1940s, though that count mixes the color sense with the unrelated adjective *buffy* [1].\n\nThe library's measurements place its nearest named neighbor as [[folkstone|Folkstone]], 2.7 units off, with [[broccoli-brown|Broccoli Brown]] close behind at 3.5, and it sits about 6.9 units from the everyday name [[taupe|Taupe]] [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color match to this swatch in 4,639 of 23,781 paintings, 19.51 percent, as photographed; the within-painting lens finds it in 2,882, more common than 98 percent of the named colors we track [3]. George Catlin is its most devoted painter, carrying it in 21 of the 50 [[painter:george-catlin|Catlin]] paintings in the archive, 3.6 times the rate expected from the museums his works come from, with Martinus Rørbye, Kano Tan'yū and George Hendrik Breitner all well above average [3].\n\nThe color's deepest historical cluster is the 1100s, when it fills half of the 50 paintings we have from then, and inside a painting it most often plays a light tone (35 percent of its 2,882 within-painting matches) [3]. The earliest match dates to the year 900, more than a thousand years before the name's 1912 record, which shows only that a similar-looking hue existed in paint long before the word did, a floor and not a first, since the archive's early centuries are thin [3]. It shares canvases with Olive-Brown and Long Beach far more than chance [3]. These are photographs of varnished paintings, read as screen colors [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "buff, the pale tan of undyed leather",
+   "first_recorded": "Ridgway, 1912, plate XL, hue 17′′′, tone i",
+   "source": "Ridgway, Color Standards and Color Nomenclature (1912)"
+  },
+  "aka": [],
+  "siblings": [
+   "folkstone",
+   "broccoli-brown",
+   "taupe",
+   "olive-brown"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#977D5D",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 4639,
+  "painters": [
+   {
+    "name": "George Catlin",
+    "hits": 21,
+    "n": 50,
+    "lift": 3.6
+   }
+  ],
+  "measured": {
+   "lch": [
+    54.1,
+    21.9,
+    75.9
+   ],
+   "nearest": [
+    [
+     "Folkstone",
+     2.7
+    ],
+    [
+     "Taupe",
+     6.9
+    ]
+   ]
+  },
+  "ngram": {
+   "rise": 1900,
+   "peak": 1940
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature, plate XL, hue 17′′′, tone i; ISCC-NBS 1955 block 76; Google Books Ngram, 5-year smoothing",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does buff, the base word behind Buffy Brown, originally describe?",
+   "choices": [
+    "The pale tan of undyed leather",
+    "A polished metal",
+    "A type of clay",
+    "A dried flower"
+   ],
+   "answer": "The pale tan of undyed leather",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Buffy Brown is one of the rarest colors in the ColorHub archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A 1912 nomenclature entry that turns out to be one of the most common colors in our whole archive."
+ ],
+ "words": 320,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "field.measured.nearest had a null distance (or, for bokhara/buffy-brown, named a color that was not actually the nearest) against data/graph/edges-*.json 'la'; filled in / corrected against that source.",
+   "lint 2026-10-09"
+  ]
+ }
+}

@@ -1,0 +1,128 @@
+{
+ "slug": "dark-madder-violet",
+ "name": "Dark Madder Violet",
+ "hex": "#4A4559",
+ "names": [
+  "Dark Madder Violet"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Dark Madder Violet is a deep, greyed violet from Ridgway's 1912 nomenclature for naturalists, named for the dull red-purple of the madder dye rather than any violet pigment.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Madder's dark cousin",
+   "body": "Robert Ridgway recorded this color in 1912 as plate XXV, hue 63 prime, tone m, in his *Color Standards and Color Nomenclature*, a reference built for describing birds, insects and plants rather than paint [1]. The American ISCC-NBS dictionary later filed the same swatch as block 224, a grayish violet, and Werner's 1821 nomenclature lists a near-duplicate it calls Pale Blackish Purple, only 1.1 units away, tied to a mineral example, porcelain jasper [1].\n\nThe nearest named colors on file are [[inde-blue]], [[dusky-violet]], [[dark-bluish-violet]] and [[cathedral]], at 3.3, 3.7, 3.7 and 3.7 ΔE [1]. A second Ridgway-and-ISCC-NBS near-duplicate, Dark Nigrosin Violet, sits 2.5 units off [1]. 3, 3.7, 3.7 and 3.7 ΔE [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this dark violet in 132 of 23,781 paintings, 0.56 percent, more common than 54 percent of our named colors, as photographed [2]. It most often hides in shadow, in 44 percent of its appearances, rather than reading as a mid-tone or highlight [2]. It peaks in the 1900s, in 20 of 1,674 paintings, three times the archive's baseline for that century [2]. The earliest dated example, from 1099, sits more than seven centuries before Ridgway's 1912 record of the name, so the match is a look-alike hue in aged, varnished paint, never proof of the madder pigment, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "madder, the dye plant, darkened toward violet",
+   "first_recorded": "Ridgway, 1912 (plate XXV)",
+   "source": "ColorHub color library (Ridgway 1912; ISCC-NBS 1955, block 224; Werner 1821)"
+  },
+  "aka": [
+   "Dark Nigrosin Violet (near-duplicate)",
+   "Pale Blackish Purple (Werner, near-duplicate)"
+  ],
+  "siblings": [
+   "inde-blue",
+   "dusky-violet",
+   "dark-bluish-violet",
+   "cathedral"
+  ],
+  "parent": "madder-violet",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 132,
+  "rate": 0.0056,
+  "measured": {
+   "lch": [
+    30,
+    13,
+    301
+   ],
+   "nearest": [
+    [
+     "Inde Blue",
+     3.3
+    ],
+    [
+     "Dusky Violet",
+     3.7
+    ],
+    [
+     "Dark Bluish Violet",
+     3.7
+    ],
+    [
+     "Cathedral",
+     3.7
+    ]
+   ]
+  },
+  "first_seen": {
+   "year": 1099,
+   "painting": "aic-193241"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912, plate XXV, hue 63′, tone m; ISCC-NBS 1955, block 224 (R); Werner 1821, no. 45 (Purples)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is Dark Madder Violet named after?",
+   "choices": [
+    "A violet flower",
+    "The madder dye plant, darkened",
+    "A mineral",
+    "A painter's palette"
+   ],
+   "answer": "The madder dye plant, darkened",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Ridgway built his 1912 nomenclature for describing paintings.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dark Madder Violet is named for a red dye plant, even though the color itself is violet."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 262
+}

@@ -1,0 +1,119 @@
+{
+ "slug": "green-beige",
+ "name": "Green Beige",
+ "hex": "#CDBA88",
+ "names": [
+  "Green Beige"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Green Beige is a muted tan with a faint greenish cast, standardized by the German RAL system in 1927 as RAL 1000 and common enough in old paintings to show up in roughly one in nine.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A standard beige",
+   "body": "RAL 1000, issued in 1927, is the source for Green Beige here; the hex value is an approximation of the printed swatch on screen [1]. Despite the name, it reads to the eye mostly as a grayish yellow, filed by the ISCC-NBS system under that label; the \"green\" is a slight coolness rather than a visible green [2]. In Munsell terms it sits near 3.7Y 7.5/3.9: light, low chroma, barely tipped off true yellow [2].\n\nThe nearest named colors are [[sand|Sand]], 2.5 units away and almost identical, and [[very-light-brown|Very Light Brown]], 3.4 units away and also close [2]. RAL's own naming convention favors plain descriptive words over flower or place names, which is why this one reads as a compound rather than a story [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Green Beige appears in 2,603 of our 23,781 paintings, as photographed — about 11 percent, making it more common than 94 percent of the archive's named colors [3]. It peaks in the 1700s, and Arnoud van Halen is its most devoted painter, carrying it in 22 of his 50 works here, 4.4 times the baseline for his museums [3]. Inside a painting it most often plays a light [3]. The earliest match is dated 799, 1,128 years before RAL's 1927 standard — the archive's early centuries are thin, so this is a floor on how far back the look-alike hue goes, not proof of any pigment [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a descriptive compound: green-tinted beige",
+   "first_recorded": "1927, as RAL 1000",
+   "source": "RAL (Reichs-Ausschuss für Lieferbedingungen) color standard"
+  },
+  "aka": [],
+  "siblings": [
+   "sand",
+   "very-light-brown",
+   "sandstone",
+   "maple"
+  ],
+  "parent": null,
+  "children": null,
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2603,
+  "measured": {
+   "lch": [
+    76,
+    28,
+    91
+   ],
+   "nearest": [
+    [
+     "Sand",
+     2.5
+    ],
+    [
+     "Very Light Brown",
+     3.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: RAL 1000 (1927), approximate screen value",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: computed ISCC-NBS block, Munsell notation and look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which standard first issued Green Beige, in 1927?",
+   "choices": [
+    "RAL 1000",
+    "ISCC-NBS",
+    "Pantone",
+    "Crayola"
+   ],
+   "answer": "RAL 1000",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Green Beige looks visibly green to most viewers.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Despite its name, Green Beige reads mostly as a muted yellow, not a green."
+ ],
+ "words": 267,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

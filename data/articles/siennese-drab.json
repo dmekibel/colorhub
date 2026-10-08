@@ -1,0 +1,127 @@
+{
+ "slug": "siennese-drab",
+ "name": "Siennese Drab",
+ "hex": "#8E715E",
+ "names": [
+  "Siennese Drab"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Siennese Drab is a greyish yellowish brown from the Maerz and Paul dictionary of color, one of the most common screen-color matches in our entire painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "An obscure name on plate 14",
+   "body": "Maerz and Paul's 1930 dictionary places this hue on plate 14, swatch A6, with a first record around 1874, and the ISCC-NBS circular of 1955 cites the same entry, classing it a light grayish reddish brown, Munsell notation 5.7YR 4.9/2.9 [1]. Our own library flags it as an obscure, qualified or novelty name, one of many such dictionary entries that never caught on in everyday speech [1].\n\nThe books read give no story for the name itself beyond the adjective *Siennese*, and its origin is undocumented here [1]. The library's nearest everyday match is [[sepia]], only four units away [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Siennese Drab covers at least one per cent of the canvas in 1,313 paintings, about 5.52 per cent overall, making it more common than 88 per cent of the named colors we track; the within-painting lens finds it in 822 [2]. It peaked early, present in 8.5 per cent of the 142 paintings we hold from the 1200s, 1.7 times the archive's overall rate for that century [2]. Inside a painting it most often plays a hidden color, in 49 per cent of its 822 appearances [2].\n\nIts most devoted painter is Theodor Philipsen, carrying it in 10 of his 28 archived works, 4.3 times the baseline rate of the museums those works come from [2]. It shares canvases with [[light-cinnamon-drab|Light Cinnamon-Drab]] and [[umber]] far more than chance, lifts of 6.7 and 5.5 across 158 and 187 paintings [2]. The earliest dated painting to carry it is from the year 900, 1,030 years before the name's own 1930 record, a reminder that the match is a look-alike hue in an aged photograph, not proof any particular pigment was used, a floor and not a first, since the archive's early centuries are thin [2]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "c. 1874 (Maerz and Paul)",
+   "source": "data/library.json; data/graph/nodes-s.json"
+  },
+  "aka": [],
+  "siblings": [
+   "sepia",
+   "light-cinnamon-drab",
+   "umber"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1313,
+  "measured": {
+   "lch": [
+    49.9,
+    17.2,
+    60.2
+   ],
+   "nearest": [
+    [
+     "Sepia",
+     4.0
+    ]
+   ]
+  },
+  "painters": [
+   {
+    "name": "Theodor Philipsen",
+    "hits": 10,
+    "n": 28,
+    "lift": 4.3
+   }
+  ],
+  "company": [
+   {
+    "word": "Light Cinnamon-Drab",
+    "lift": 6.7,
+    "n": 158
+   },
+   {
+    "word": "Umber",
+    "lift": 5.5,
+    "n": 187
+   }
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-s.json, data/library.json): Maerz & Paul 1930 plate 14 A 6, cited by ISCC-NBS Circular 553 (1955); CIEDE2000 nearest-name match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (data/graph/fieldnotes/s.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does our own color library describe the name Siennese Drab?",
+   "choices": [
+    "An obscure, qualified or novelty dictionary name",
+    "A famous Renaissance pigment",
+    "A Crayola crayon name",
+    "A CSS keyword"
+   ],
+   "answer": "An obscure, qualified or novelty dictionary name",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Siennese Drab is one of the rarest colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Siennese Drab, despite its obscure dictionary name, matches more than one painting in twenty in our archive."
+ ],
+ "words": 349,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

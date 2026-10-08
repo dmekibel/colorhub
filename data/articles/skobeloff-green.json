@@ -1,0 +1,131 @@
+{
+ "slug": "skobeloff-green",
+ "name": "Skobeloff Green",
+ "hex": "#038C84",
+ "names": [
+  "Skobeloff Green"
+ ],
+ "tier": "person",
+ "depth": "brief",
+ "lede": "Skobeloff Green is a saturated teal catalogued by Ridgway in 1912 and again by Maerz and Paul in 1930, and no book we hold explains who or what Skobeloff was.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name the books leave open",
+   "body": "Ridgway placed this teal on plate VII of his 1912 *Color Standards and Color Nomenclature*, hue 39 [1]. Maerz and Paul's 1930 dictionary repeats it on their plate 25, dated to 1912, the same year as Ridgway's book [1]. The ISCC-NBS system of 1955 files it as block 160 [1]. No book we hold records who or what Skobeloff was [2].\n\nIts nearest library neighbor is [[dark-cyan|Dark Cyan]], about 3.2 units away, with the brighter [[mint-turquoise|Mint Turquoise]] close behind [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Measured in LCH terms it is strongly saturated, lightness 52, chroma 33, hue 188 degrees, close to [[teal]] but greener, and not far from the darker [[arsenate]] [3]. Our archive of 23,781 paintings, as photographed, finds only 2 matches, both twentieth-century: Odilon Redon's 1895 *Sommeil de Caliban* and a 1924 still life by Patrick Henry Bruce [4]. Such a saturated teal rarely survives as photographed on aged, varnished canvases [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1912, Ridgway and Maerz & Paul",
+   "source": "Ridgway, Color Standards and Color Nomenclature (1912)"
+  },
+  "aka": [],
+  "siblings": [
+   "dark-cyan",
+   "mint-turquoise",
+   "teal",
+   "arsenate"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2,
+  "top_paintings": [
+   "commons-Q17495668",
+   "nga-166434"
+  ],
+  "measured": {
+   "lch": [
+    52,
+    33,
+    188
+   ],
+   "nearest": [
+    [
+     "Dark Cyan",
+     3.2
+    ],
+    [
+     "Mint Turquoise",
+     4.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Ridgway 1912, plate VII, hue 39; Maerz & Paul 1930, plate 25 K 9; ISCC-NBS 1955 block 160",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty et al. (eds.), Nature's Palette, preface on Ridgway's sources",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): CIEDE2000 distances to named neighbors",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes; within the archive's match threshold, at least 5% of the canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "True or false: the books consulted explain who or what Skobeloff was.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which two 1912 reference books both catalog Skobeloff Green?",
+   "choices": [
+    "Ridgway and Maerz & Paul",
+    "Munsell and Pantone",
+    "Crayola and CSS",
+    "Werner and Syme"
+   ],
+   "answer": "Ridgway and Maerz & Paul",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Skobeloff Green turns up in two different 1912 color books, with no record of who Skobeloff was."
+ ],
+ "words": 174,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "Naming origin undocumented in the books consulted.",
+   "lint 2026-10-09"
+  ]
+ }
+}

@@ -1,0 +1,114 @@
+{
+ "slug": "bronze-lustre",
+ "name": "Bronze Lustre",
+ "hex": "#5B543B",
+ "names": [
+  "Bronze Lustre"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Bronze Lustre is a dark, olive-tinted brown named for the sheen of the metal bronze, found in one painting in five in our archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The metal's sheen, not its color",
+   "body": "The nearest named colors on file are [[beetle]], [[dusty-brown]], [[brownish-olive]] and [[dark-olive]], at 3.1, 3.6, 4.1 and 4.2 ΔE [1]. The 1955 ISCC-NBS system would class a close match as grayish olive, only 1.2 units of ΔE off[1]. A second library name, [[blast-off-bronze]], is built on the same metal word but reads as a warmer, redder brown, which shows how differently two colors can carry one material's name [1]. In LCH terms Bronze Lustre is dark and only weakly chromatic: lightness 36, chroma 16, hue 95 degrees [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings finds a close match to Bronze Lustre in 4,974, nearly 21 percent, as photographed[2]. Its earliest appearance, a Roman-period funerary portrait from about 138, predates the metal's documented use as a color name by almost eighteen centuries, a gap that reflects archive coverage rather than any claim about the name's history [2]. Its heaviest use, relative to each painter's own baseline, falls to Dutch landscape and portrait painters of the 1600s and 1800s, including Johan Heinrich Neuman, Meindert Hobbema and Anton Mauve, and the archive's use of it peaks in the 1730s, in 80 of 240 paintings [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the sheen of bronze",
+   "first_recorded": "1928 (Maerz and Paul, 1930 edition, plate 16 E 12)",
+   "source": "Maerz and Paul, A Dictionary of Color; ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "beetle",
+   "dusty-brown",
+   "brownish-olive",
+   "dark-olive"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 4974,
+  "match": {
+   "hex": "#5B543B",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "measured": {
+   "lch": [
+    36,
+    16,
+    95
+   ],
+   "nearest": [
+    [
+     "Beetle",
+     3.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: name records, plate and block locators, tier classification",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Bronze Lustre is named for what quality of the metal bronze?",
+   "choices": [
+    "Its sheen or lustre",
+    "Its weight",
+    "Its sound when struck",
+    "Its price"
+   ],
+   "answer": "Its sheen or lustre",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Bronze Lustre is rarer in our archive than Big Dip O’ruby.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Bronze Lustre turns up in nearly one painting in five in our archive, far more than most pigment names."
+ ],
+ "words": 222,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Field notes called the top painters 'Dutch and Danish'; no Danish painter appears in the archive's lift ranking for this color, and the top-ranked painter (Johan Heinrich Neuman, lift 3.98) was omitted. Corrected to 'Dutch' and added Neuman.",
+   "lint 2026-10-09"
+  ]
+ }
+}

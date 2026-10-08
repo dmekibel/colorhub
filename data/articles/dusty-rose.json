@@ -1,0 +1,139 @@
+{
+ "slug": "dusty-rose",
+ "name": "Dusty Rose",
+ "hex": "#C0737A",
+ "names": [
+  "Dusty Rose"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dusty Rose is a muted pink-red close to the color of a garnet, carried in the ISCC-NBS 1955 dictionary and, almost a century and a half earlier, in Werner's 1821 nomenclature.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "From a mineral to a modern pink",
+   "body": "Werner's 1821 nomenclature of colors, the system Charles Darwin carried on his travels, lists this point as its color number 93 among the reds, matched to Precious Garnet; Werner's plates are an aged, hand-colored swatch book, so the reading is approximate [1]. The ISCC-NBS 1955 dictionary separately places it in block 251, among colors it calls \"dark purplish pink\", 4.5 units away [2]. The 2010 xkcd survey records the everyday name \"dusty rose\" again, well over a century after Werner [3].\n\nIn Munsell terms it reads about 1.6R 5.6/7.1 [2]. Our library's nearest named neighbor is [[dirty-pink]], and a near-duplicate under Werner's own system is Crimson Red, only 2.2 units away [2][3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 23 of 23,781 paintings, about 0.1 percent, as photographed [4]. The earliest dated match is an anonymous *Bishop Saint with a Donor*, from about 1400, a floor and not a first, since the archive's early centuries are thin [4]. It turns up across widely different traditions, from Diego Velázquez's 1650 *[[painting:commons-Q118895689|Pope Innocent X]]* to Mughal and Rajput court paintings, where it appears at more than ten times the archive's overall rate [4]. Across its matches it plays a mid-tone over half the time, a highlight close to a third of the time, and rarely a shadow [4]. These counts are computed color matches on photographs of aged, varnished paintings, not pigment identifications [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the color of the mineral garnet, by Werner's 1821 system",
+   "first_recorded": "Werner, Nomenclature of Colours, 1821",
+   "source": "ColorHub library and graph nodes"
+  },
+  "aka": [
+   "Crimson Red (Werner)"
+  ],
+  "siblings": [
+   "dirty-pink",
+   "crimson",
+   "mauve"
+  ],
+  "parent": "rose",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 23,
+  "first_painting": [
+   "cma-109029",
+   1400
+  ],
+  "role": {
+   "mid": 0.57,
+   "shadow": 0.13,
+   "highlight": 0.3
+  },
+  "measured": {
+   "mu": "1.6R 5.6/7.1",
+   "nearest_iscc": [
+    "dark pink",
+    4.5
+   ],
+   "werner_mineral": "Precious Garnet"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Werner, Nomenclature of Colours, 1821, no. 93 (Reds)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub graph nodes: Munsell conversion, ISCC-NBS 1955 block 251",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (xkcd 2010; Werner near-duplicate names)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In Werner's 1821 system, which mineral is matched to this color?",
+   "choices": [
+    "Precious Garnet",
+    "Rose Quartz",
+    "Spinel",
+    "Carnelian"
+   ],
+   "answer": "Precious Garnet",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dusty Rose is recorded only in modern sources like the xkcd survey.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Where in our archive does Dusty Rose appear well above its overall rate?",
+   "choices": [
+    "Mughal and Rajput court paintings",
+    "Dutch still lifes",
+    "Abstract Expressionist works",
+    "Ancient Egyptian murals"
+   ],
+   "answer": "Mughal and Rajput court paintings",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Dusty Rose was matched to the mineral garnet in Werner's 1821 color system, the same one Darwin used in the field."
+ ],
+ "words": 261,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); Werner plate reading noted as approximate per an aged swatch.",
+   "lint 2026-10-09"
+  ]
+ }
+}

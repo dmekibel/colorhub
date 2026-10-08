@@ -1,0 +1,127 @@
+{
+ "slug": "easter-purple",
+ "name": "Easter Purple",
+ "hex": "#C071FE",
+ "names": [
+  "Easter Purple"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Easter Purple is a bright blue-violet from the 2010 xkcd color survey, close kin to lavender and ordinary purple, with no traceable coiner.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A crowd name, not a dictionary one",
+   "body": "The xkcd color survey asked visitors to type a name next to a random swatch, and \"Easter Purple\" was the winning label for this one [1]. The survey records only the winning name, not who typed it first or why, so any link to Easter-egg dyeing is a guess, not a documented fact [1]. Two other crowd labels sit almost on the same swatch, Light Purple and Light Urple, each under 2.5 CIEDE2000 units away, which shows how many separate names one patch of hue space can collect [1].\n\nThe nearest named colors on file are [[bright-lavender]], [[heliotrope]], [[lavender-floral]] and [[floral-lavender]], at 3.3, 5.5, 6.2 and 6.2 ΔE [1]. ISCC-NBS 1955 would file the swatch as a brilliant violet, about 10 units off [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings, as photographed, holds none where this exact violet covers five percent or more of the canvas [3]. That fits a pattern across the xkcd survey's most saturated purples: they sit outside what aged pigment and varnish typically produce [3]. A match here would be a computed color comparison, never a claim about pigment [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; possibly Easter-egg dyeing, unconfirmed",
+   "first_recorded": "2010, xkcd color survey",
+   "source": "xkcd (Munroe 2010)"
+  },
+  "aka": [],
+  "siblings": [
+   "bright-lavender",
+   "heliotrope",
+   "lavender-floral",
+   "floral-lavender"
+  ],
+  "parent": "purple",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "nearest_iscc": [
+   "brilliant violet",
+   10.1
+  ],
+  "first_source": [
+   "xkcd",
+   2010
+  ],
+  "measured": {
+   "lch": [
+    61.8,
+    80.8,
+    313.7
+   ],
+   "nearest": [
+    [
+     "Bright Lavender",
+     3.3
+    ],
+    [
+     "Heliotrope",
+     5.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and graph nodes: xkcd 2010 color survey entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: nearest standard names and ISCC-NBS 1955 distance",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does the name Easter Purple come from?",
+   "kind": "pick",
+   "choices": [
+    "The xkcd color survey, a crowd-naming experiment",
+    "A Victorian pigment maker's catalog",
+    "Ridgway's 1912 color dictionary",
+    "A royal Easter tradition"
+   ],
+   "answer": "The xkcd color survey, a crowd-naming experiment"
+  },
+  {
+   "q": "True or false: our data confirms Easter Purple is named for Easter-egg dyeing.",
+   "kind": "true-false",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False"
+  }
+ ],
+ "openers": [
+  "Easter Purple never once covers real canvas in our archive of over 23,000 paintings."
+ ],
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "status": "checked",
+ "words": 207
+}

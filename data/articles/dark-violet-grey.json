@@ -1,0 +1,128 @@
+{
+ "slug": "dark-violet-grey",
+ "name": "Dark Violet-Grey",
+ "hex": "#4C5357",
+ "names": [
+  "Dark Violet-Grey"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Dark Violet-Grey is a near-neutral, barely purple grey recorded by Ridgway in 1912 and classed by the ISCC-NBS system in 1955 as a dark bluish gray, despite its violet name.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A violet almost without color",
+   "body": "The name traces to violet, a plant-and-landscape word in our data, but by the time it reaches this dark a grey, almost none of that color remains [1]. Ridgway's 1912 atlas plots it on plate LII at hue 59′′′′′, tone k [1]. The ISCC-NBS system of 1955 files the same area as block 234, calling it a \"dark bluish gray\" rather than a violet, about 0.9 units from that block's reference point[1]. In LCH terms it measures lightness 35, chroma 4, hue 241 degrees: dark and almost without saturation [1].\n\nIts parent family word is [[dark-violet]], the fuller-colored version this grey mutes down [1]. Its nearest distinct neighbors by computed color distance are [[dark-violet-slate|Dark Violet-Slate]] and [[dark-blue-slate|Dark Blue-Slate]], both 3.1 units away and read in our data as \"almost the same\" [2]. A third close neighbor is [[blackish-plumbeous|Blackish Plumbeous]], 3.6 units off, also \"almost the same\" [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a close match covers enough of the canvas in 225, as photographed, more common than 72 percent of the named colors we track [3]. It peaks in paintings from the 1900s, at 2.4 times the rate expected from that century's share of the archive [3]. Henri de Toulouse-Lautrec is its most devoted painter here, with the color present in 4 of 36 of his works in the archive, well above the baseline of the museums those works come from [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "violet, muted down to a near-neutral grey",
+   "first_recorded": "Ridgway, 1912",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "dark-violet-slate",
+   "dark-blue-slate",
+   "blackish-plumbeous",
+   "slate-color"
+  ],
+  "parent": "dark-violet",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 225,
+  "measured": {
+   "lch": [
+    35,
+    4,
+    241
+   ],
+   "nearest": [
+    [
+     "Dark Violet-Slate",
+     3.1
+    ],
+    [
+     "Dark blue slate",
+     3.1
+    ],
+    [
+     "Blackish Plumbeous",
+     3.6
+    ],
+    [
+     "Slate Color",
+     3.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/nodes-d.json): Dark Violet-Grey — Ridgway 1912, plate LII, hue 59′′′′′, tone k; ISCC-NBS 1955, block 234",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-d.json): nearest distinct neighbors by CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings, as photographed, data/graph/fieldnotes/d.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "True or false: the ISCC-NBS system calls Dark Violet-Grey's block a violet.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which painter in our archive is most devoted to Dark Violet-Grey?",
+   "choices": [
+    "Henri de Toulouse-Lautrec",
+    "Claude Monet",
+    "Eugène Boudin",
+    "Eastman Johnson"
+   ],
+   "answer": "Henri de Toulouse-Lautrec",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Despite its name, the ISCC-NBS system classes this shade as a bluish gray, not a violet at all."
+ ],
+ "words": 260,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No book concordance hits for this slug; written from the color graph, library and archive data only.",
+   "lint 2026-10-09"
+  ]
+ }
+}

@@ -1,0 +1,132 @@
+{
+ "slug": "nickel-green",
+ "name": "Nickel Green",
+ "hex": "#506A59",
+ "names": [
+  "Nickel Green"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Nickel Green is a grayish green named for the metal, close enough to two other Ridgway plate colors that our library flags them as near-duplicates.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A metal's muted green",
+   "body": "Ridgway's 1912 color book places this value on plate XXXIII, hue 37″, tone k, filed by the ISCC-NBS dictionary of 1955 as block 140, brilliant green [1]. Our library also lists two near-duplicate Ridgway entries within about two units of this one, Dark American Green and Dark Yellowish Green, suggesting the 1912 plates drew several close grayish greens rather than one sharp standard [1]. Nickel itself colors several minerals, including garnierite ore, a pale apple green, though which association the namer intended is undocumented here [1].\n\nThe nearest named colors on file are [[dark-porcelain-green]], [[empire-green]] and [[antique-green]], at 3.2, 3.4 and 4.2 ΔE [1]. Compare [[moss|Moss]], [[sage|Sage]] and [[viridian|Viridian]], the names our archive finds sharing its canvases most [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings finds a color within six units of this one in 325, about 1.4 percent, as photographed [2]. It is nearly three times more common in paintings from the 1900s than across the archive overall, and Harald Giersing, Paul Cézanne and Camille Pissarro each carry it well above the archive's rate [2]. It covers over half the canvas in Berthe Morisot's 1873 Reading [2]. The count is a computed color match on aged, varnished paintings, not a claim about any pigment used [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "nickel, the metal",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "dark-porcelain-green",
+   "empire-green",
+   "antique-green",
+   "dark-russian-green"
+  ],
+  "parent": null,
+  "children": [
+   "sage"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 325,
+  "match": {
+   "hex": "#506A59",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "measured": {
+   "lch": [
+    42,
+    15,
+    154
+   ],
+   "nearest": [
+    [
+     "Dark Porcelain Green",
+     3.2
+    ],
+    [
+     "Empire Green",
+     3.4
+    ],
+    [
+     "Antique Green",
+     4.2
+    ],
+    [
+     "Dark Russian Green",
+     4.7
+    ]
+   ]
+  },
+  "surprises": [
+   "1900s: 3.15x the archive rate (72 of 1674)"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Nickel Green take its name from?",
+   "choices": [
+    "A metal",
+    "A plant",
+    "A gemstone cut",
+    "A paint brand"
+   ],
+   "answer": "A metal",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Ridgway's 1912 plates have only one green this close to Nickel Green.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Three Ridgway plate greens sit close enough to count as near-duplicates of this one."
+ ],
+ "words": 231,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits in color-kb for this slug; written from library and archive data only.",
+   "Removed a speculative garnierite-ore link inside the sentence; kept as plain text, not a [[slug]].",
+   "lint 2026-10-09"
+  ]
+ }
+}

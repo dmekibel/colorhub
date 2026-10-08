@@ -1,0 +1,161 @@
+{
+ "slug": "slate-navy",
+ "name": "Slate navy",
+ "hex": "#445067",
+ "names": [
+  "Slate navy"
+ ],
+ "tier": "place",
+ "depth": "medium",
+ "lede": "Slate navy is a muted blue-grey drawn from Ridgway's 1912 standards and the 1955 ISCC-NBS system, and in our color graph it is an exact duplicate, to the nearest measured unit, of a separately named color called Nigrosin Blue.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two names, one color",
+   "body": "Our library carries this hue from Ridgway's 1912 *Color Standards and Color Nomenclature* and from the 1955 ISCC-NBS system, filed as a grayish purplish blue, though neither source's plate or block number survives in our records [1]. The \"navy\" in the name marks it as a place-or-institution word, and nothing in our sources explains the choice further [2].\n\nIn our color graph, Slate navy measures a CIEDE2000 distance of exactly zero from a different catalogued name, Nigrosin Blue: the same color, reached twice under two names [3]. Its next-closest relatives are [[diamin-azo-blue]], a touch purpler, and [[glacier]], almost the same [3].\n\nA little further out are [[acetin-blue]], lighter at 5.1 units, and [[bruges]], bluer at 5.3 [3]. Our library records no first-recorded date for this entry either, unlike the plate-dated names elsewhere, a gap we note rather than paper over [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, as photographed, a color within six units of Slate navy covers at least five per cent of a canvas in 225 works, peaking in the 1920s at nearly six times the archive's overall rate [4]. It is disproportionately a Scandinavian color on these numbers: Henri-Edmond Cross, Karl Isakson and Vilhelm Lundstrøm all carry it at more than fifteen times their expected rate, and it covers 60 per cent of Balthasar Denner's 1700 *Portrait of Peder Tordenskjold* [4]. It most often shares a canvas with denim blue and charcoal grey [4]. As always, these are screen colors read from photographs of varnished paintings, not pigment identifications [4]. Across its matches, slightly more than half the coverage falls in shadow and most of the rest in mid-tones, with almost none as a highlight [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; the place-or-institution word \"navy\"",
+   "first_recorded": "Ridgway 1912; ISCC-NBS 1955 (plate and block not recorded in our data)",
+   "source": "ColorHub color library (Ridgway 1912; ISCC-NBS 1955)"
+  },
+  "aka": [],
+  "siblings": [
+   "nigrosin-blue",
+   "glacier",
+   "acetin-blue",
+   "bruges"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "nigrosin-blue",
+    "gloss": "a separately catalogued name for what our color graph measures as the identical color (ΔE 0.0)"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#445067",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 225,
+  "painters": [
+   {
+    "name": "Henri-Edmond Cross",
+    "hits": 3,
+    "n": 12,
+    "lift": 26.42
+   },
+   {
+    "name": "Isakson, Karl",
+    "hits": 5,
+    "n": 21,
+    "lift": 25.17
+   }
+  ],
+  "company": [
+   {
+    "word": "Denim",
+    "lift": 24.04
+   },
+   {
+    "word": "Charcoal",
+    "lift": 10.29
+   }
+  ],
+  "measured": {
+   "lch": [
+    33.9,
+    14.9,
+    275.4
+   ],
+   "nearest": [
+    [
+     "Nigrosin Blue",
+     0.0
+    ],
+    [
+     "Diamin-Azo Blue",
+     3.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-s.json): Ridgway 1912; ISCC-NBS 1955",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library, place/institution tier classification",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-s.json), CIEDE2000 duplicate and look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does our color graph say about Slate navy and Nigrosin Blue?",
+   "choices": [
+    "They measure as the identical color",
+    "They are opposite colors",
+    "One is a pigment and one is a dye",
+    "They come from different centuries"
+   ],
+   "answer": "They measure as the identical color",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Slate navy appears most often in Scandinavian painters' work, relative to how much of the archive they make up.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Slate navy and a separately named color, Nigrosin Blue, measure as exactly the same color."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-08",
+  "issues": [
+   "Ridgway/ISCC-NBS plate and block numbers are missing from our library data for this name; said so rather than guessed.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 313
+}

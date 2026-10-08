@@ -1,0 +1,134 @@
+{
+ "slug": "dark-beige",
+ "name": "Dark Beige",
+ "hex": "#AC9362",
+ "names": [
+  "Dark Beige"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dark Beige is a muted, yellowish modifier on [[beige]], recorded in the 2010 xkcd color survey and, under near-identical names like Dusky Yellow and Old Ivory, one of the most common colors in our painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier with many aliases",
+   "body": "The name follows the library's modifier grammar, *dark* plus [[beige]], and its only catalogue record is the 2010 xkcd color survey, an open web poll [1]. Our library groups a cluster of older, separately-sourced names as close enough on screen to call the same color: California Green, Dusky Yellow, Fog Yellow, Old Ivory and Powdered Gold among them, none of which share the xkcd survey's history [1]. Which, if any, came first is not something our sources settle [2].\n\nIts nearest named neighbors by color distance are [[dust]] and [[ecru-olive]], both almost indistinguishable at 2.6 to 3.0 units [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color this close to Dark Beige is one of the most common in our archive: 4,263 of 23,781 paintings, as photographed, almost 18 percent, more common than 97 percent of the named colors we track [4]. It peaks in paintings from the 1400s and is most overrepresented in paintings from Iran, at 3.1 times expected [4]. Cornelius Norbertus Gijsbrechts is its most devoted painter, carrying it in nine of nineteen works here, 3.3 times the baseline for his museums [4]. In printed English the phrase itself peaks in the 2010s, centuries after the hue was common in paint, since Ngram counts the words, not the color [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a modifier on beige",
+   "first_recorded": "2010, xkcd color survey",
+   "source": "ColorHub color library (xkcd 2010)"
+  },
+  "aka": [
+   "California Green",
+   "Dusky Yellow",
+   "Fog Yellow",
+   "Old Ivory",
+   "Powdered Gold"
+  ],
+  "siblings": [
+   "dust",
+   "ecru-olive",
+   "dark-olive-buff"
+  ],
+  "parent": "beige",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 4263,
+  "n_within": 2613,
+  "painter": "Cornelius Norbertus Gijsbrechts, 3.3x",
+  "country": "Iran, 3.1x",
+  "century_peak": "1400s",
+  "ngram_peak": "2010s",
+  "measured": {
+   "lch": [
+    62.1,
+    29.5,
+    85.2
+   ],
+   "nearest": [
+    [
+     "Dust",
+     2.6
+    ],
+    [
+     "Ecru-Olive",
+     3.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-d.json): xkcd color survey, 2010",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "Color-kb concordance of the 29 color books for this name (no book hits; names cross-referenced only in our library)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph, look-alike edges (data/graph/edges-d.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes); counts are computed color matches on photographs of varnished, aged canvases, not pigment identifications",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where is a color near Dark Beige most overrepresented, by country, in our archive?",
+   "choices": [
+    "Iran",
+    "France",
+    "Japan",
+    "Mexico"
+   ],
+   "answer": "Iran",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dark Beige is one of the rarest colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dark Beige, under one name or another, covers nearly one in five paintings in our archive."
+ ],
+ "words": 242,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}

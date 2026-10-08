@@ -1,0 +1,125 @@
+{
+ "slug": "bokhara",
+ "name": "Bokhara",
+ "hex": "#6E2341",
+ "names": [
+  "Bokhara"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Bokhara is a dark purplish wine red recorded in Maerz and Paul's 1930 color dictionary, close enough to the already-published Purplish Red that the two articles are each other's nearest listed neighbor.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A rare entry, lightly documented",
+   "body": "Maerz and Paul's *A Dictionary of Color* (1930) places Bokhara on plate 47, position L2, and dates its first recorded use to 1925 [1]. The dictionary gives no account of where the name comes from; its origin is undocumented here [1]. The ISCC-NBS 1955 lists do not carry the name separately, and the National Bureau of Standards circular cites only Maerz and Paul's entry [1].\n\nThe library's measurements place this swatch closest to [[claret-violet|Claret Violet]], 2.6 units off, with [[purplish-red|Purplish Red]], the dark wine red already carried as an article here, close behind at 3.4, and within about 9.7 units of the everyday name [[byzantium|Byzantium]], a brighter, more saturated purple [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is a rare painted color: our archive finds a match to this swatch in only 9 of 23,781 paintings, 0.04 percent, as photographed; the within-painting lens finds it in 3 [3]. That makes it rarer than 79 percent of the named colors we track [3]. The small sample is too thin to support a reliable century peak, painter or country figure, so none is claimed here [3].\n\nThe earliest match in the archive dates to about 1550, by Jacopo Tintoretto, well over three centuries before the name's 1925 record, which shows only that a similar-looking hue existed in paint long before the word did, not that any pigment or dye matched it, a floor and not a first, since the archive's early centuries are thin [3]. These are photographs of varnished paintings, read as screen colors [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "Maerz and Paul, 1930 (recorded use from 1925, plate 47 L2)",
+   "source": "Maerz and Paul, A Dictionary of Color (1930)"
+  },
+  "aka": [],
+  "siblings": [
+   "claret-violet",
+   "purplish-red",
+   "byzantium",
+   "raspberry"
+  ],
+  "parent": "red",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#6E2341",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 9,
+  "measured": {
+   "lch": [
+    26.4,
+    36.1,
+    358.6
+   ],
+   "nearest": [
+    [
+     "Claret Violet",
+     2.6
+    ],
+    [
+     "Byzantium",
+     9.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Maerz and Paul, A Dictionary of Color, \"Bokhara\", plate 47 L2",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which name is Bokhara's closest measured neighbor in the ColorHub library?",
+   "choices": [
+    "Purplish Red",
+    "Mustard",
+    "Teal",
+    "Ivory"
+   ],
+   "answer": "Purplish Red",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Bokhara is one of the more common colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A dark wine red so rare in the archive that only three paintings carry it as a real area of color."
+ ],
+ "words": 277,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "field.measured.nearest had a null distance (or, for bokhara/buffy-brown, named a color that was not actually the nearest) against data/graph/edges-*.json 'la'; filled in / corrected against that source.",
+   "lint 2026-10-09"
+  ]
+ }
+}

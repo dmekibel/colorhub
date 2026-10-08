@@ -1,0 +1,139 @@
+{
+ "slug": "ethereal-blue",
+ "name": "Ethereal Blue",
+ "hex": "#96B2C1",
+ "names": [
+  "Ethereal Blue"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Ethereal Blue is a pale, slightly grayed sky blue from Maerz and Paul's 1930 dictionary, first recorded in 1845 and closest to the core color sky blue.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Plate 33, first seen in 1845",
+   "body": "Maerz and Paul's 1930 dictionary lists Ethereal Blue on plate 33, swatch E6, and dates its earliest recorded use to 1845 [1]. The same plate carries a near neighbor, Twinkle Blue, first recorded in 1927, nearly a century later [1]. Our computed match places the hue in the ISCC-NBS region called pale blue, Munsell notation 9.6B 7.0/3.3 [2].\n\nThe nearest named colors on file are [[russian-blue]], [[light-alice-blue]], [[pewter-blue]] and [[watteau]], at 2.5, 3, 3 and 3.8 ΔE [2]. It reads paler and grayer than a plain [[blue]], closer to a hazy, overcast version of [[sky-blue]] [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Ethereal Blue covers at least five percent of the canvas in 248 of them, about 1 percent overall, as photographed [3]. Use rises sharply in the 1870s, over twice the archive average, and is strongest among Impressionists: Childe Hassam and Pierre Puvis de Chavannes each carry it well above twenty times the average rate [3]. Nearly four in five of its appearances are highlights rather than shadow, and it keeps company most with the company word Sky blue [3]. These counts are read from photographs of varnished paintings [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; a dictionary-of-color name, not a known place or substance",
+   "first_recorded": "1845 (Maerz and Paul, 1930)",
+   "source": "Maerz and Paul, A Dictionary of Color"
+  },
+  "aka": [],
+  "siblings": [
+   "russian-blue",
+   "light-alice-blue",
+   "pewter-blue",
+   "watteau"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 248,
+  "measured": {
+   "lch": [
+    71,
+    13,
+    240
+   ],
+   "nearest": [
+    [
+     "Russian Blue",
+     2.5
+    ]
+   ]
+  },
+  "peak_decade": {
+   "key": 1870,
+   "rate": 0.023,
+   "lift": 2.16
+  },
+  "painters": [
+   {
+    "name": "Childe Hassam",
+    "hits": 3,
+    "n": 13,
+    "lift": 22.13
+   },
+   {
+    "name": "Pierre Puvis de Chavannes",
+    "hits": 5,
+    "n": 25,
+    "lift": 19.18
+   }
+  ],
+  "role": {
+   "highlight": 0.79,
+   "mid": 0.2,
+   "shadow": 0.01
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Maerz and Paul, A Dictionary of Color (1930), \"Ethereal Blue\", plate 33 E6",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz and Paul, Ridgway, ISCC-NBS and RAL entries, computed LCH/Munsell/nearest-name match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In what year does Maerz and Paul first record Ethereal Blue?",
+   "choices": [
+    "1845",
+    "1912",
+    "1927",
+    "1955"
+   ],
+   "answer": "1845",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Ethereal Blue appears in paintings mostly as a shadow color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Ethereal Blue almost always shows up as a highlight, and Impressionists like Childe Hassam used it more than twenty times the archive's average rate."
+ ],
+ "words": 227,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

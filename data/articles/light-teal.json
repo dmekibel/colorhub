@@ -1,0 +1,112 @@
+{
+ "slug": "light-teal",
+ "name": "Light Teal",
+ "hex": "#90E4C1",
+ "names": [
+  "Light Teal"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Light Teal is a pale green recorded in Wikipedia's color lists and the 2010 xkcd survey, with nine near-duplicate names clustered in one ISCC-NBS block.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A light build of teal",
+   "body": "Our Color Graph gives Light Teal, #90E4C1, as modifier grammar: light plus the base name [[teal]], carried by Wikipedia's color lists and the xkcd survey of 2010 [1]. The ISCC-NBS system classes the hue as very light green, only 1.7 units from that block's center, the closest fit in this group [1]. Its Munsell notation is 7.1G 8.4/5.6 and its LCH values are lightness 85, chroma 34, hue 165 degrees [1]. The nearest common library name is [[mint]], 3.6 units away [2].\n\nNine ISCC-NBS block names cluster around this swatch, among them Aline Green, Ice Green, Icy Morn, Island Green, Jealousy and La Mer [2]. That is the largest such cluster, all filed under one ISCC-NBS block from 1955 [2]. See [[teal]] for the darker, bluer color this name lightens."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Within CIEDE2000 4, our within-painting lens finds no match for Light Teal in the 23,781-painting archive, though the broader whole-painting lens finds it once, in an 1825 painting, as photographed [3]. In print, the word rose fastest in the 1990s and peaked in the 2010s, across all its senses, including the plant and the fabric color as well as this exact pale green [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the base color teal, lightened",
+   "first_recorded": "xkcd survey, 2010 (also Wikipedia)",
+   "source": "ColorHub Color Graph"
+  },
+  "aka": [
+   "Aline Green",
+   "Ice Green",
+   "Icy Morn",
+   "Island Green"
+  ],
+  "siblings": [
+   "teal",
+   "mint",
+   "green",
+   "turquoise"
+  ],
+  "parent": "teal",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "nph": 1,
+  "first_year": 1825,
+  "match": {
+   "hex": "#90E4C1",
+   "de_max": 4
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub Color Graph: node record (hex, LCH, Munsell, ISCC-NBS block, recorded sources)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): nearest named match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (data/graph/fieldnotes), 23,781 paintings, CIEDE2000 <= 4, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How many near-duplicate ISCC-NBS block names cluster around Light Teal in our library?",
+   "choices": [
+    "Nine",
+    "Two",
+    "None"
+   ],
+   "answer": "Nine",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the word teal, in all its senses, peaked in print during the 2010s.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Nine different library names, from Aline Green to Zeal, all cluster around the same pale green as Light Teal."
+ ],
+ "words": 218,
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

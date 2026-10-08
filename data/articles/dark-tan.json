@@ -1,0 +1,128 @@
+{
+ "slug": "dark-tan",
+ "name": "Dark Tan",
+ "hex": "#AF884A",
+ "names": [
+  "Dark Tan"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Dark Tan is a deeper, more golden [[tan]], classed by the ISCC-NBS system as a dark orange yellow, and one of the most common swatches in our whole archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "No book in our library records a name at this position before the xkcd color survey of 2010, where the public supplied the plain descriptive phrase \"dark tan\" [1]. Its origin before that survey is undocumented here [1].\n\nThe nearest ISCC-NBS 1955 block is dark orange yellow, a little over 5 CIEDE2000 units away, with a Munsell reading near 0.7Y in hue [1]. The nearest named colors on file are [[pinchbeck-brown]], [[isabella-color]] and [[chamoline]], at 2.7, 2.8 and 3.5 ΔE [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a match for this swatch in 2,713 of 23,781 paintings, or about 11 per cent, as photographed [2]. That makes it one of the more common named colors in the whole archive, present across centuries from the 1100s to the 1900s with no sharp peak [2]. Giovanni di Paolo and Maarten van Heemskerck both carry it at over five times the baseline rate, and it is common across Iran, India, Korea and Japan alike [2]. The words \"Ochre\" and \"Camel\" share its canvases more than chance, and it plays a highlight role in most of its paintings [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "tan, the leather and skin tone, darkened",
+   "first_recorded": "xkcd color survey, 2010",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "pinchbeck-brown",
+   "isabella-color",
+   "chamoline",
+   "honey-yellow"
+  ],
+  "parent": "tan",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+  "n_present": 2713,
+  "rate": 0.1141,
+  "role": {
+   "highlight": 0.74,
+   "mid": 0.24,
+   "shadow": 0.02
+  },
+  "top_painting": {
+   "id": "cma-156866",
+   "title": "Minamoto no Nakakuni Visits Lady Kogō",
+   "painter": "Kiyohara Yukinobu",
+   "year": 1670,
+   "cover": 0.896
+  },
+  "measured": {
+   "nearest": [
+    [
+     "Pinchbeck Brown",
+     2.7
+    ],
+    [
+     "Isabella Color",
+     2.8
+    ],
+    [
+     "Chamoline",
+     3.5
+    ],
+    [
+     "Honey Yellow",
+     4.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, xkcd color survey 2010), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "About what share of our archived paintings carry a match for Dark Tan?",
+   "choices": [
+    "About 11 per cent",
+    "About 0.1 per cent",
+    "Essentially none"
+   ],
+   "answer": "About 11 per cent",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dark Tan has one sharp century where it peaks, and is rare elsewhere.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dark Tan appears in about one of every nine paintings in our archive, spread across eight centuries."
+ ],
+ "words": 211,
+ "status": "checked",
+ "checked": {
+  "by": "writer-lane",
+  "date": "2026-10-08",
+  "issues": [
+   "No book source for the name; xkcd survey only",
+   "lint 2026-10-09"
+  ]
+ }
+}

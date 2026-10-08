@@ -1,0 +1,126 @@
+{
+ "slug": "pine-needle",
+ "name": "Pine Needle",
+ "hex": "#454D32",
+ "names": [
+  "Pine Needle"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Pine Needle is ColorHub's English name for Matsuba-iro, a muted olive green that Japanese tradition names directly for pine needles, and the same hue was independently catalogued by Maerz and Paul in 1930.",
+ "sections": [
+  {
+   "id": "japan",
+   "title": "A literal pine-needle green",
+   "body": "Wikipedia's list of traditional Japanese colors gives this swatch as Matsuba-iro (松葉色), literally \"pine needle color\" [1]. The same shade was independently catalogued by Maerz and Paul in their 1930 *Dictionary of Color*, later cited by NBS Circular 553 in 1955 [2]. The ISCC-NBS dictionary of 1955 places it in block 127, \"grayish olive green,\" about 3.9 units from that block's centre [2]. The library's nearest other named color is [[rifle-green]], 2.6 units away [2].\n\nMeasured in LCH it reads lightness 31, chroma 17, hue 120 degrees, a dark, moderately saturated olive green, darker than most garden pine foliage appears to the eye [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match in 934 of 23,781 paintings, about 4 percent, as photographed [3]. It splits almost evenly between mid-tone and shadow roles, 46 and 47 percent, and is rarely a highlight [3]. Henri Rousseau carries it at nearly 12 times the archive's overall rate, fitting his jungle-foliage canvases [3]. It shares canvases more than chance with the color words Hunter Green and [[olive]], and its presence peaks in the 1920s, in 24 of 237 paintings [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the color of pine needles",
+   "first_recorded": "Maerz and Paul, A Dictionary of Color, 1930",
+   "source": "ColorHub library (Wikipedia, \"Traditional colors of Japan\"); Maerz and Paul, 1930"
+  },
+  "aka": [
+   "Matsuba-iro"
+  ],
+  "siblings": [
+   "rifle-green",
+   "new-hay",
+   "greenish-hunter-green",
+   "olive"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Matsuba-iro (松葉色)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 934,
+  "pct": 3.9,
+  "measured": {
+   "lch": [
+    31.4,
+    17.3,
+    119.8
+   ],
+   "nearest_iscc": [
+    "grayish olive green",
+    3.9
+   ],
+   "nearest": [
+    "Rifle Green",
+    2.63
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; Wikipedia, \"Traditional colors of Japan\"; jp field)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Maerz and Paul, A Dictionary of Color (1930), cited by NBS Circular 553 (1955); ColorHub color library (ISCC-NBS 1955 block 127)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23781 paintings), computed match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Matsuba-iro, this color's Japanese name, literally mean?",
+   "choices": [
+    "Pine needle color",
+    "Forest shadow",
+    "Moss green",
+    "Cedar bark"
+   ],
+   "answer": "Pine needle color",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Henri Rousseau used this color far more often than the archive average.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pine Needle is one of the few colors here where the Japanese name and the English name agree exactly."
+ ],
+ "words": 212,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance hits (src empty); facts drawn from the library's own jp field, Maerz and Paul 1930 citation, ISCC-NBS block data and the archive.",
+   "lint 2026-10-09"
+  ]
+ }
+}

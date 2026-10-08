@@ -1,0 +1,151 @@
+{
+ "slug": "lagoon-blue",
+ "name": "Lagoon blue",
+ "hex": "#0093AF",
+ "names": [
+  "Lagoon blue"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Lagoon blue is a saturated teal-blue named for the shallow, light-filled water of a lagoon, a vivid greenish blue by the ISCC-NBS classification.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A landscape word",
+   "body": "ColorHub's library carries Lagoon blue as a landscape name, grouped with words for a place or a body of water rather than a pigment or a person [1]. The nearest named colors on file are [[sky-steel]], [[bluish-steel-blue]], [[capri-blue]] and [[sea-teal]], at 5.5, 5.5, 6.4 and 6.5 ΔE [1]. The ISCC-NBS system would file the hex #0093AF as a vivid greenish blue, a measured distance of 7.4 units from its nearest official block [2]. In Munsell terms it lands near 4.9B 5.5/7.4, a mid-value, strongly saturated blue-green [2]. Who first wrote the two words together as a color name is not recorded in our sources, so the coinage stays undocumented here [1].\n\nThe word itself tracks a real body of water: a lagoon is shallow enough that sunlight reaches the pale sand below, which is what gives real lagoons their saturated turquoise-to-blue range rather than the deep navy of open ocean. Look for that same light-struck quality in [[turquoise]] and [[persian-green]], its closer relatives on the color wheel."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to Lagoon blue in 11 of 23,781 paintings, 0.05 percent, with the stricter within-painting test narrowing that to 4 [3]. That makes it rarer than about 77 percent of the named colors we track [3]. The earliest match, as photographed, is a 1528 painting attributed to Andrea del Sarto, though the archive's early centuries are thin enough that this is a floor, not a true first [3]. Inside the paintings that do carry it, the color most often sits as a mid-tone or a light passage rather than a shadow, about 75 percent of the time combined [3]. In printed English the phrase \"lagoon blue\" peaked in the 1960s, a rise Google's book scans tie to the all-senses use of the word, since lagoon is also a place name that can skew the count [4]. All matches are computed against photographs of varnished, aged canvases, not pigment identifications [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the shallow water of a lagoon",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "Light ocean"
+  ],
+  "siblings": [
+   "sky-steel",
+   "bluish-steel-blue",
+   "capri-blue",
+   "sea-teal"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 11,
+  "n_within": 4,
+  "measured": {
+   "lch": [
+    56.1,
+    32.8,
+    226.7
+   ],
+   "munsell": "4.9B 5.5/7.4",
+   "iscc_nbs": {
+    "name": "vivid greenish blue",
+    "de": 7.4
+   },
+   "nearest": [
+    [
+     "Sky steel",
+     5.5
+    ],
+    [
+     "Bluish steel blue",
+     5.5
+    ]
+   ]
+  },
+  "ngram": {
+   "peak": 1960,
+   "rise": 1960,
+   "term": "lagoon blue"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and graph: Wikipedia-sourced name entry",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: computed LCH, Munsell and ISCC-NBS nearest-block distance",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub Ngram cache (Google Books), all senses of the term",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is Lagoon blue named for?",
+   "choices": [
+    "A body of water",
+    "A flower",
+    "A pigment",
+    "A painter"
+   ],
+   "answer": "A body of water",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our archive finds Lagoon blue in most paintings.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Inside the paintings where it appears, Lagoon blue most often reads as:",
+   "choices": [
+    "A mid-tone or light passage",
+    "A deep shadow",
+    "The focal color",
+    "A hidden underlayer"
+   ],
+   "answer": "A mid-tone or light passage",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Real lagoons look this saturated because sunlight bounces off the pale sand underneath."
+ ],
+ "words": 351,
+ "status": "checked",
+ "checked": {
+  "by": "batch-9 writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance file for this slug; written from graph/library data only, origin left undocumented.",
+   "lint 2026-10-09"
+  ]
+ }
+}

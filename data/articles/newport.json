@@ -1,0 +1,143 @@
+{
+ "slug": "newport",
+ "name": "Newport",
+ "hex": "#395C7E",
+ "names": [
+  "Newport"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Newport is a deep, muted blue from Maerz and Paul's 1930 dictionary, close enough to [[denim|Denim]] that painted denim is its single strongest match in our archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A place name without a stated place",
+   "body": "Maerz and Paul place this value at plate 37, position L 7, first recorded in 1922 [1]. The ISCC-NBS system of 1955 classifies it as a dark greenish blue, about 5.4 units from that block's reference chip [2]. Several English-speaking cities and towns share the name Newport, and the dictionary does not say which one, if any, the color refers to [1].\n\nIts nearest library neighbor is [[denim|Denim]], within about 3 units, and it sits close to [[slate|Slate]] on the same deep, muted-blue stretch of the chart [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Newport covers at least five per cent of the canvas in 125 works, about one in two hundred, as photographed [3]. Vilhelm Lundstrøm carries it in 5 of his 17 archived paintings, and it peaks sharply in the 1920s decade, at eight times the expected rate [3]. Its company on canvas is overwhelmingly Denim, by far the strongest match of any word we track [3]. These remain photographs of aged, varnished canvases read as screen colors, not pigment tests [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a place named Newport, not otherwise specified",
+   "first_recorded": "Maerz & Paul, A Dictionary of Color (1930), plate 37 L 7, first recorded 1922",
+   "source": "ColorHub color library (Maerz & Paul 1930; ISCC-NBS 1955)"
+  },
+  "aka": [],
+  "siblings": [
+   "denim",
+   "slate",
+   "navy",
+   "napoleon-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#395C7E",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 125,
+  "painters": [
+   {
+    "key": "Vilhelm Lundstrøm",
+    "n": 17,
+    "hits": 5,
+    "lift": 55.96
+   }
+  ],
+  "peak_decade": {
+   "key": 1920,
+   "lift": 8.03
+  },
+  "company": [
+   {
+    "word": "Denim",
+    "lift": 62.68
+   },
+   {
+    "word": "Slate",
+    "lift": 4.48
+   }
+  ],
+  "measured": {
+   "lch": [
+    38,
+    23,
+    265
+   ],
+   "nearest": [
+    [
+     "Denim",
+     3.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Maerz & Paul, A Dictionary of Color, plate 37 L 7, first recorded 1922",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: ISCC-NBS block, nearest-match field (data/graph/nodes-m.json; data/library.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In our archive, which color most often shares a canvas with Newport?",
+   "choices": [
+    "Denim",
+    "Maize Yellow",
+    "Carmine Red",
+    "Beige"
+   ],
+   "answer": "Denim",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Maerz and Paul's dictionary states which Newport the color is named for.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Newport's single strongest match in our archive is painted denim."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-08",
+  "issues": [
+   "Which place called Newport the name refers to is undocumented in the sources consulted.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 201
+}

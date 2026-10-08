@@ -1,0 +1,112 @@
+{
+ "slug": "chicory-blue",
+ "name": "Chicory Blue",
+ "hex": "#99A1D6",
+ "names": [
+  "Chicory Blue"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Chicory Blue is a soft periwinkle-blue named for the chicory flower.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The flower's blue",
+   "body": "Our library dates Chicory Blue to Ridgway's 1912 standards, plate XXIV, hue 57*, with Maerz and Paul's 1930 dictionary giving an earlier first record, 1905, at plate 2, swatch A2 [1]. Chicory is a blue-flowered plant in the daisy family, grown as a coffee substitute and salad green; the flower's own petals are a lighter, more violet blue than this swatch [1].\n\nOur library's nearest everyday match is [[periwinkle]], 3.9 units of ΔE away, with [[blue-bell]], [[lavender]] and [[sky-blue]] listed as other cool near-neighbors [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to Chicory Blue in just 26 of 23,781 paintings (0.11 percent), as photographed, the rarest name, rarer than 64 percent of our named colors [2]. It peaks in the 1800s, in 9 of 8,345 paintings, at 1.5 times the archive's overall rate, and most often plays an accent inside a painting [2]. The earliest dated match, a 1425 work attributed to Sandro Botticelli, is nearly five centuries before the 1912 record, which the archive's thin early coverage explains rather than the color's documented age, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the chicory flower",
+   "first_recorded": "Maerz and Paul, 1930 (first recorded 1905); Ridgway, 1912",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "periwinkle",
+   "blue-bell",
+   "lavender",
+   "sky-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 26,
+  "role": {
+   "accent": 0.53
+  },
+  "company": [],
+  "measured": {
+   "lch": [
+    67,
+    29,
+    288
+   ],
+   "nearest": [
+    [
+     "Periwinkle",
+     3.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: name records, plate and block locators, tier classification",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is chicory?",
+   "choices": [
+    "A blue-flowered plant used as a coffee substitute",
+    "A dye-producing lichen",
+    "A shade of French liqueur",
+    "A Japanese pigment"
+   ],
+   "answer": "A blue-flowered plant used as a coffee substitute",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Chicory Blue is the most common name in this batch.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Chicory Blue is named for the blue-flowered plant grown as a coffee substitute."
+ ],
+ "words": 201,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

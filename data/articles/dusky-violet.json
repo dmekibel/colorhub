@@ -1,0 +1,112 @@
+{
+ "slug": "dusky-violet",
+ "name": "Dusky Violet",
+ "hex": "#4F4C67",
+ "names": [
+  "Dusky Violet"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Dusky Violet is a dim, greyed blue-violet, built by putting the modifier dusky in front of the base color violet rather than naming anything in particular.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier on violet",
+   "body": "Dusky Violet puts the modifier word dusky in front of the base color [[violet]], in the compound-modifier grammar ColorHub's library uses for descriptive names like this one [1]. Ridgway's 1912 *Color Standards and Color Nomenclature* carries the swatch as plate XXIII, hue 59', an aged plate scan read as approximate [1].\n\nIts nearest named neighbor is [[yvette-violet]], 3.0 units off [1]; [[dark-bluish-violet]] sits 3.2 off and [[dark-madder-violet]] 3.7 [1], all close enough on screen to blur together in low light."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color within six units of this swatch in 74 of 23,781 paintings, 0.31 percent, as photographed; looking inside each painting for at least five percent coverage narrows that to 42 [2]. That makes it rarer than 52 percent of the named colors in our library [2]. It peaks in the 1900s, present in 0.5 percent of our 1,674 paintings from that decade, 2.2 times the museums' baseline rate [2]. Inside a painting it most often sits as a hidden color, in 60 percent of its 42 appearances by lightness rank [2].\n\nThe earliest match, Bartolomeo Vivarini's work, dates to 1490, more than four centuries before the name's 1912 record, so it marks a look-alike hue in an aged photograph, not a surviving pigment [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: dusky + violet",
+   "first_recorded": "Ridgway 1912, plate XXIII",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "yvette-violet",
+   "dark-bluish-violet",
+   "dark-madder-violet",
+   "independence"
+  ],
+  "parent": "violet",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 74,
+  "n_within_painting": 42,
+  "pct_archive": 0.31,
+  "rank_pct": 52,
+  "measured": {
+   "lch": [
+    34,
+    17,
+    297
+   ],
+   "nearest": [
+    [
+     "Yvette Violet",
+     3.0
+    ],
+    [
+     "Dark Bluish Violet",
+     3.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; Ridgway 1912 plate XXIII), CIEDE2000 distances",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which named color sits closest to Dusky Violet?",
+   "choices": [
+    "Yvette Violet",
+    "Dark Bluish Violet",
+    "Dark Madder Violet"
+   ],
+   "answer": "Yvette Violet",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: this color most often appears as a bright, dominant area within a painting.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Most often hiding in shadow, not standing out, when it turns up in a painting."
+ ],
+ "words": 238,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}

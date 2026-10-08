@@ -1,0 +1,162 @@
+{
+ "slug": "dark-olive-brown",
+ "name": "Dark olive brown",
+ "hex": "#3C341F",
+ "names": [
+  "Dark olive brown"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dark olive brown is a muddy, near-black olive, built by modifier grammar from the base color [[olive]] and, by our archive's count, one of the single most common colors in Western painting.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier of olive",
+   "body": "ColorHub's graph lists Dark olive brown as a grammatical modifier, its base recorded as [[olive]], the same pattern behind related compounds like Olive Drab #7 and Dull Brownish Olive that our library carries nearby [1]. The hex #3C341F measures a dark grayish olive by ISCC-NBS, 3.5 units from its nearest block, close to 5.4Y 2.2/2.3 in Munsell notation [2]. In Japanese, our library cross-references *Aikobicha* (藍媚茶), literally \"indigo tea,\" as an equivalent name for a closely related brownish olive, though it is listed as a parallel name rather than a source for the English one [1]. No single coiner or date is recorded for \"dark olive brown\" itself in the sources we checked [1].\n\nThe nearest named colors on file are [[indigo-tea]], [[brown-olive]] and [[jacaranda-brown]], at 3.9, 6.2 and 6.4 ΔE [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to Dark olive brown in 5,220 of 23,781 paintings, nearly 22 percent, with the within-painting test still finding 4,378, making it more common than every other named color we track [3]. It peaks in the 1600s, in 1372 of 6,394 paintings, present in over 21 percent of our paintings from that century, and the earliest dated match, as photographed, comes from the year 900, a floor and not a first, since the archive's early centuries are thin [3]. The painter most devoted to it, relative to his peers, is Meindert Hobbema, carrying it in 11 of 16 works in the archive, about 3.3 times the baseline of the museums his paintings come from [3]. Inside the paintings that carry it, the color plays a hidden color 34 percent of the time, the most common of its five roles, followed closely by a mid-tone 33 percent of the time [3]. It also shares canvases with the color named Japanese bush warbler more often than chance, a lift of 2.4 [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a darker variant of olive",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "Olive Drab #7"
+  ],
+  "siblings": [
+   "indigo-tea",
+   "brown-olive",
+   "jacaranda-brown",
+   "autumn"
+  ],
+  "parent": "olive",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Aikobicha (藍媚茶)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 5220,
+  "n_within": 4378,
+  "measured": {
+   "lch": [
+    22.0,
+    14.6,
+    90.2
+   ],
+   "munsell": "5.4Y 2.2/2.3",
+   "iscc_nbs": {
+    "name": "dark grayish olive",
+    "de": 3.5
+   },
+   "nearest": [
+    [
+     "Indigo tea",
+     3.9
+    ],
+    [
+     "Brown Olive",
+     6.2
+    ],
+    [
+     "Jacaranda Brown",
+     6.4
+    ],
+    [
+     "Autumn",
+     6.5
+    ]
+   ]
+  },
+  "century_peak": {
+   "year": 1600,
+   "lift": 1.2,
+   "n": 1372
+  },
+  "top_painter": {
+   "artist": "Meindert Hobbema",
+   "n": 11,
+   "lift": 3.3
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: modifier-grammar classification, base relation to Olive, and Japanese cross-reference",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: computed LCH, Munsell and ISCC-NBS nearest-block distance",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is Dark olive brown built from, grammatically?",
+   "choices": [
+    "A modifier of Olive",
+    "A pigment name",
+    "A person's name",
+    "A place name"
+   ],
+   "answer": "A modifier of Olive",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dark olive brown is one of the rarest colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which painter in our archive uses Dark olive brown most, relative to his peers?",
+   "choices": [
+    "Meindert Hobbema",
+    "Jean-Baptiste-Camille Corot",
+    "John Singer Sargent",
+    "Nicolas Lancret"
+   ],
+   "answer": "Meindert Hobbema",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "By our count it is nearly as common in Western painting as true black itself."
+ ],
+ "words": 346,
+ "status": "checked",
+ "checked": {
+  "by": "batch-9 writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance file; the English compound's coinage is left undocumented rather than invented.",
+   "lint 2026-10-09"
+  ]
+ }
+}

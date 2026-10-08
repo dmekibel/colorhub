@@ -1,0 +1,130 @@
+{
+ "slug": "amaranth-pink",
+ "name": "Amaranth Pink",
+ "hex": "#F19CBB",
+ "names": [
+  "Amaranth Pink"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Amaranth Pink is a soft purplish pink named for the amaranth flower family, and recorded twice over in Robert Ridgway's 1912 color atlas.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name in the library",
+   "body": "Ridgway's 1912 nomenclature lists this hue on plate XII, hue 69, tone d, and again on plate XXVI, hue 71′, tone d, an unusual double entry in a single atlas [1]. Maerz and Paul's 1930 dictionary separately dates the name to 1905 on plate 49 and again to 1912 on plate 50, so the two systems do not agree on a single first date either [1]. The amaranth plant family, from the Greek *amarantos* (unfading), has lent its name to a cluster of library pinks and purples since the nineteenth century [4].\n\nIn the color graph, the nearest neighbor is [[carnation-pink]], 3.2 units away, with [[mallow-pink]], [[kobi]] and the plainer basic term [[pink]] all close behind, each about 3.5 units off [2]. The ISCC-NBS system of 1955 classes it as a deep purplish pink, in block 248 [1]. The hex #F19CBB is a screen approximation of the atlas plate, not a dye sample [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "At a looser match (ΔE 10), our archive finds this pink in only 3 of 23,781 paintings, as photographed [3]. The strongest is Henri Matisse's *Nymph and Satyr* (1908); the others are an 18th-century English portrait and a 19th-century American harbor scene [3]. The rarity reflects this hue's narrow, specific pastel range, not any claim about where such pinks were historically used [3]. All matches are computed on photographed, varnished canvases [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "carnation-pink",
+   "mallow-pink",
+   "kobi",
+   "pink"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 3,
+  "match": {
+   "de2000": 10.0
+  },
+  "measured": {
+   "lch": [
+    73.6,
+    35.9,
+    355.6
+   ],
+   "nearest": [
+    [
+     "Carnation Pink",
+     3.2
+    ]
+   ]
+  },
+  "iscc": {
+   "name": "moderate purplish pink",
+   "de": 3.7
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz & Paul 1930, Ridgway 1912, ISCC-NBS 1955, RAL entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE Lab ΔE)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "web",
+   "cite": "Wikipedia, \"Amaranth (color)\", on the amaranth plant family's Greek root amarantos (\"unfading\")",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/Amaranth_(color)"
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the Greek root of \"amaranth\" mean?",
+   "choices": [
+    "Unfading",
+    "Bright red",
+    "Flower of love",
+    "Royal"
+   ],
+   "answer": "Unfading",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Ridgway's 1912 atlas lists this hue only once.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Ridgway's own 1912 atlas lists Amaranth Pink's hue twice, on two different plates."
+ ],
+ "words": 244,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Nearest-neighbor claim (name and/or distance) in the 'name' section and field.measured.nearest did not match data/graph/edges-*.json 'la' (the cited color-graph computation); corrected to the true nearest colors and distances, and updated aside.siblings to match.",
+   "lint 2026-10-09"
+  ]
+ }
+}

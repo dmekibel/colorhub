@@ -1,0 +1,145 @@
+{
+ "slug": "blackish-plumbeous",
+ "name": "Blackish Plumbeous",
+ "hex": "#455254",
+ "names": [
+  "Blackish Plumbeous"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Blackish Plumbeous is a very dark bluish grey from Ridgway's 1912 nomenclature, built from *plumbeous*, Latin for leaden, with *blackish* marking how far down the scale it sits.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A leaden grey, darkened",
+   "body": "Ridgway's *Color Standards and Color Nomenclature* (1912) lists Blackish Plumbeous on plate LII, hue 49′′′′′, tone k, one of several modifier names built on *plumbeous* (lead-colored) [1]. The ISCC-NBS system carried it into its 1955 lists as block 192, *dark bluish gray* [1]. Ridgway's modifier words (*pale*, *light*, *dark*, *blackish*) step a base hue down a tonal ladder rather than naming a new color outright, and the books consulted do not explain why lead, rather than any other grey material, became the reference point [1].\n\nThe nearest named colors on file are [[pale-charcoal]], [[slate-color]] and [[blue-violet-black]], at 3.1, 3.3 and 3.5 ΔE [1]. It is also close to [[charcoal|Charcoal]], about 6.3 units off, a warmer, slightly darker grey with no blue lean [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color match to this swatch in 485 of 23,781 paintings, 2.04 percent, as photographed; the within-painting lens finds it in 210, more common than 72 percent of the named colors we track [3]. Paul Sérusier is its most devoted painter, carrying it in 4 of the 26 [[painter:paul-serusier|Sérusier]] paintings in the archive, 5.4 times the rate expected from the museums his works come from [3].\n\nUsage peaks in the 1900s, with 46 of 1,674 paintings from that decade carrying it, 2.6 times the expected rate, and inside a painting it most often sits in shadow (35 percent of its 210 within-painting matches), which fits a dark neutral grey [3]. The earliest match dates to 1099, more than eight centuries before the name's 1912 record, which shows only that a similar-looking hue existed in paint long before the word did, a floor and not a first, since the archive's early centuries are thin [3]. These are photographs of varnished paintings, read as screen colors [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "plumbeous, Latin for leaden, darkened by the modifier blackish",
+   "first_recorded": "Ridgway, 1912, plate LII, hue 49′′′′′, tone k",
+   "source": "Ridgway, Color Standards and Color Nomenclature (1912)"
+  },
+  "aka": [],
+  "siblings": [
+   "pale-charcoal",
+   "slate-color",
+   "blue-violet-black",
+   "dark-violet-grey"
+  ],
+  "parent": "grey",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#455254",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 485,
+  "painters": [
+   {
+    "name": "Paul Sérusier",
+    "hits": 4,
+    "n": 26,
+    "lift": 5.4
+   }
+  ],
+  "measured": {
+   "lch": [
+    33.9,
+    5.4,
+    212.1
+   ],
+   "nearest": [
+    [
+     "Pale charcoal",
+     3.1
+    ],
+    [
+     "Slate Color",
+     3.3
+    ],
+    [
+     "Blue-Violet Black",
+     3.5
+    ],
+    [
+     "Dark Violet-Grey",
+     3.6
+    ]
+   ]
+  },
+  "iscc_nbs": {
+   "block": 192,
+   "name": "dark bluish gray"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature, plate LII, hue 49′′′′′, tone k",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the Latin word plumbeous, the base of this name, mean?",
+   "choices": [
+    "Leaden",
+    "Blackened",
+    "Smoky",
+    "Stony"
+   ],
+   "answer": "Leaden",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: inside a painting, this color most often turns up as a shadow.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A grey named for lead, darkened a step further by the word blackish."
+ ],
+ "words": 322,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "field.measured.nearest had a null distance (or, for bokhara/buffy-brown, named a color that was not actually the nearest) against data/graph/edges-*.json 'la'; filled in / corrected against that source.",
+   "lint 2026-10-09"
+  ]
+ }
+}

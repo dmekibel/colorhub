@@ -1,0 +1,127 @@
+{
+ "slug": "cyan-process",
+ "name": "Cyan (Process)",
+ "hex": "#00B7EB",
+ "names": [
+  "Cyan (Process)"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Cyan (Process) is the bright, greenish blue standardized as one of the four printing inks in the CMYK model, named to distinguish it from other, differently-defined cyans.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "One of four printing inks",
+   "body": "Our record of this name traces to Wikipedia's article on the CMYK color model, where process cyan is one of the four standard printing inks, alongside magenta, yellow and black [1]. The \"(Process)\" label distinguishes it from other colors also called cyan, such as web or additive-light cyan, which are defined differently and can look a little different on screen [1]. Its nearest named neighbors by color distance are [[deep-sky-blue|Deep Sky Blue]], almost the same hue at 3.6 units, and [[maximum-blue|Maximum Blue]], [[bright-sky-blue|Bright Sky Blue]] and [[cyan-blue|Cyan blue]], each a little duller, lighter or bluer, all within about 5.4 to 6.6 units [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color this close to Cyan (Process) is essentially absent from our archive: only one of 23,781 paintings carries it, as photographed, and not even enough of that canvas to count by our within-painting measure [3]. That is expected: process cyan is a printing standard, not a historical pigment, so painters before modern printing had no reason to mix it [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "its role as one of the four standard inks in the CMYK printing model",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "Wikipedia, \"CMYK color model\""
+  },
+  "aka": [],
+  "siblings": [
+   "deep-sky-blue",
+   "maximum-blue",
+   "bright-sky-blue",
+   "cyan-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "cyan",
+    "gloss": "the plain web/additive-light cyan, defined differently from this printing-ink cyan"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1,
+  "n_within": 0,
+  "measured": {
+   "lch": [
+    69.4,
+    42.0,
+    240.9
+   ],
+   "nearest": [
+    [
+     "Deep Sky Blue",
+     3.6
+    ],
+    [
+     "Maximum Blue",
+     5.4
+    ],
+    [
+     "Bright Sky Blue",
+     5.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "Wikipedia, \"CMYK color model\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/CMYK_color_model"
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph, look-alike edges (data/graph/edges-c.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes); counts are computed color matches on photographs of varnished, aged canvases, not pigment identifications",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does \"(Process)\" mean in Cyan (Process)?",
+   "choices": [
+    "It is one of the four standard CMYK printing inks",
+    "It is a photographic process",
+    "It is a Crayola process color",
+    "It is a dye-making process"
+   ],
+   "answer": "It is one of the four standard CMYK printing inks",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: process cyan is common in our archive of old paintings.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Cyan (Process) is a printing-ink standard, one of the four colors in CMYK."
+ ],
+ "words": 190,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}

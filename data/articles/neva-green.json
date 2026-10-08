@@ -1,0 +1,144 @@
+{
+ "slug": "neva-green",
+ "name": "Neva Green",
+ "hex": "#A3B65C",
+ "names": [
+  "Neva Green"
+ ],
+ "tier": "place",
+ "depth": "short",
+ "lede": "Neva Green is a muted yellow-green named for the Neva, the short, fast river that carries Lake Ladoga's water through Saint Petersburg to the Gulf of Finland.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A river's name",
+   "body": "The Neva runs only about 74 kilometers, yet carries more water than any other river in Europe apart from the Volga, Danube and a handful of others, draining the whole Ladoga basin in its short course [3]. Ridgway's 1912 color standards plate this green on plate V, hue 29, and the ISCC-NBS dictionary of 1955 later filed the same swatch as a brilliant yellowish green, 6.9 units from that block's center [1]. Maerz and Paul's dictionary gives 1912 as the color's first recorded use and the Munsell notation 4.4GY 7.0/6.8 [1].\n\nIts nearest named neighbors are Light Olive, 2.6 units away, and Absinthe Green, 3.1 units away [1]. It sits in the same olive-green cluster as [[light-olive]] and the broader family of [[green]], without a sibling color sharing its own place-name [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Neva Green covers at least five percent of the canvas in only 35 works, about fifteen hundredths of one percent[2]. The earliest dated example is Lucas Cranach's 1548 portrait of a man, a floor and not a first, since the archive's early centuries are thin [2]. It peaks in the 1870s, in 6 of 1,065 paintings, nearly four times the archive's overall rate for that decade, and it turns up in Impressionist paintings fifteen times the baseline rate [2]. Fifty-seven percent of its appearances sit in a painting's highlights rather than its mid-tones or shadows [2]. It shares a canvas with [[khaki]] more than any other color word, eighteen times the baseline [2]. These are screen-color matches on photographs of aged, varnished paintings, not pigment identifications [2]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the Neva river, Saint Petersburg, Russia",
+   "first_recorded": "1912 (Maerz & Paul, citing Ridgway's plate V, hue 29)",
+   "source": "ColorHub color library (Ridgway 1912; Maerz & Paul 1930)"
+  },
+  "aka": [],
+  "siblings": [
+   "light-olive",
+   "absinthe-green",
+   "deep-chrysolite-green",
+   "scheele-s-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#A3B65C",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 35,
+  "peak_decade": 1870,
+  "role": {
+   "highlight": 0.57,
+   "mid": 0.34,
+   "shadow": 0.09
+  },
+  "company": [
+   {
+    "word": "Khaki",
+    "lift": 17.62
+   }
+  ],
+  "measured": {
+   "lch": [
+    70.9,
+    47.8,
+    115.2
+   ],
+   "nearest": [
+    [
+     "Light Olive",
+     2.6
+    ],
+    [
+     "Absinthe Green",
+     3.1
+    ],
+    [
+     "Deep Chrysolite Green",
+     3.4
+    ],
+    [
+     "Scheele's Green",
+     3.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS 1955, Maerz & Paul 1930, Ridgway 1912, Munsell notation entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "web",
+   "cite": "Wikipedia, \"Neva\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/Neva"
+  }
+ ],
+ "questions": [
+  {
+   "q": "The Neva river flows into the sea at which city?",
+   "choices": [
+    "Saint Petersburg",
+    "Moscow",
+    "Kyiv",
+    "Odesa"
+   ],
+   "answer": "Saint Petersburg",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Neva Green is one of the more common colors in this batch's archive match.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Neva Green is named for a river only 74 kilometers long that still outflows most of Europe's rivers."
+ ],
+ "words": 312,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

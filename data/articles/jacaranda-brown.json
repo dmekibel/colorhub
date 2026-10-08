@@ -1,0 +1,128 @@
+{
+ "slug": "jacaranda-brown",
+ "name": "Jacaranda Brown",
+ "hex": "#4E4334",
+ "names": [
+  "Jacaranda Brown"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Jacaranda Brown is a dark, grayish yellow-brown that Maerz and Paul recorded in 1930, and one of the most frequently matched colors in our entire painting archive, despite its name sitting in our Neutrals family rather than Browns.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A brown filed among the neutrals",
+   "body": "Maerz and Paul's *A Dictionary of Color* places Jacaranda Brown on plate 16, swatch A12, first recorded in 1892 [1]. The same plate carries several close variants under different names, among them Bronze Brown, Date, Bison and Owl, all cited to that same 1930 dictionary [1]. A color this close would be filed by the ISCC-NBS system as a dark grayish yellow brown [1]. Why 'jacaranda' was chosen is undocumented in the sources we checked [1].\n\nThe nearest named colors on file are [[indigo-tea]], [[musk]] and [[blackish-brown]], at 3.1, 3.5 and 3.9 ΔE [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within six units of Jacaranda Brown covers at least five percent of the canvas in 5,625 of our 23,781 paintings, 23.65 percent, as photographed; the within-painting lens finds it in 4,264, one of the most common matches in the entire archive [2]. That ranks it ahead of 99 percent of the named colors we track [2]. It most often plays a mid-tone, in 34 percent of its 4,264 appearances [2].\n\nJean Siméon Chardin is its most devoted painter, in seven of his 12 paintings here, 3.4 times the rate of the museums those works come from [2]. It shares canvases with [[greyish-brown|Greyish Brown]] and [[dark-gunmetal|Dark Gunmetal]] more than chance would predict, with lifts of 2.2 and 1.8 [2]. The earliest matching painting dates to 900, 1,030 years before Maerz and Paul recorded the name in 1930 — a look-alike hue in an aged photograph, not proof the color existed as a dye that early, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1892, per Maerz and Paul (1930)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "indigo-tea",
+   "musk",
+   "blackish-brown",
+   "autumn"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 4264,
+  "pct": 23.65,
+  "rank_percentile": 99,
+  "measured": {
+   "lch": [
+    29.1,
+    11.0,
+    79.3
+   ],
+   "munsell": null,
+   "app": [
+    "Umber",
+    7.6
+   ],
+   "nearest": [
+    [
+     "Indigo tea",
+     3.1
+    ],
+    [
+     "Musk",
+     3.5
+    ],
+    [
+     "Blackish Brown",
+     3.9
+    ],
+    [
+     "Autumn",
+     4.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and graph data: Ridgway 1912 / ISCC-NBS 1955 / Maerz & Paul 1930 / RAL entries (data/library.json, data/graph/)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, computed color match, as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "According to Maerz and Paul, when was Jacaranda Brown first recorded?",
+   "choices": [
+    "1892",
+    "1930",
+    "1912",
+    "1955"
+   ],
+   "answer": "1892",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our library files Jacaranda Brown under the Browns family.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Jacaranda Brown is one of the most frequently matched colors in our entire archive, closer to grey than to brown in our own data."
+ ],
+ "words": 304,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance hits; etymology of 'jacaranda' marked undocumented. 'Bronze Brown', 'Date', 'Bison' and 'Owl' are dictionary variants, not separate articles, so left unlinked.",
+   "lint 2026-10-09"
+  ]
+ }
+}

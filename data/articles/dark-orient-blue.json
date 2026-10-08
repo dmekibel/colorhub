@@ -1,0 +1,126 @@
+{
+ "slug": "dark-orient-blue",
+ "name": "Dark Orient Blue",
+ "hex": "#436677",
+ "names": [
+  "Dark Orient Blue"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Dark Orient Blue is a grayish blue that Ridgway's 1912 dictionary names for \"the Orient,\" a vague geographic gesture that the dictionary never narrows to a place, dye, or textile.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A vague place name",
+   "body": "Ridgway's 1912 dictionary lists Dark Orient Blue at #436677, plate XXXIV, hue 45″, tone k, and the ISCC-NBS circular of 1955 repeats it as \"grayish blue\" [1]. \"Orient\" in Ridgway-era English usage meant East or South Asia broadly, but no source we checked ties this swatch to a specific place, textile or dye tradition there, so the connection is undocumented [1].\n\nIn our color graph the nearest named neighbor is [[arno-blue|Arno Blue]], 4.6 units away [1]. A little further, at 4.7 units, is [[payne-s-grey|Payne's Grey]] [1]. The Munsell notation is 8.0B 4.1/3.6, and the swatch sits with our [[blue|blue]] family, its gray modifier also pulling it toward [[grey|grey]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 1.08% of 23,781 paintings, 258 of them, as photographed, with the within-painting lens counting 109 [2]. That makes it more common than 60% of our named colors [2]. It peaks in the 1900s, present in 1.4% of the 1,674 paintings from that century, 3.2 times the rate its museums would predict [2]. Within a painting it most often sits as a hidden color, in 59% of its 109 appearances, meaning it rarely reads as a dominant tone [2]. Claude Monet painted it most often among the artists in our archive, 4 of his 50 works here, though no painter stands out against the museum baseline [2]. The earliest match dates to 1301, 611 years before Ridgway recorded the name, a floor rather than a first [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1912 (ridgway)",
+   "source": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930"
+  },
+  "aka": [],
+  "siblings": [
+   "pavonine",
+   "deep-space-sparkle",
+   "arno-blue",
+   "pearl-gentian"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 258,
+  "measured": {
+   "lch": [
+    41.3,
+    15.5,
+    240.3
+   ],
+   "nearest": [
+    [
+     "Pavonine",
+     3.5
+    ],
+    [
+     "Deep Space Sparkle",
+     3.9
+    ],
+    [
+     "Arno Blue",
+     4.2
+    ],
+    [
+     "Pearl Gentian",
+     4.2
+    ]
+   ]
+  },
+  "iscc_nbs": {
+   "name": "grayish blue",
+   "de": 4.2
+  },
+  "munsell": "8.0B 4.1/3.6"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and name graph (data/library.json, data/graph/): Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930; nearest names by Lab-space distance",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed color match, as photographed",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did \"Orient\" broadly mean in Ridgway-era English, as used in this name?",
+   "choices": [
+    "East or South Asia",
+    "The Mediterranean coast",
+    "Eastern Europe",
+    "The Middle East only"
+   ],
+   "answer": "East or South Asia",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Ridgway's dictionary names a specific place behind Dark Orient Blue.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Inside a painting, Dark Orient Blue is usually a hidden color, playing that role in 59% of its appearances."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits; the specific place behind \"Orient\" is undocumented in our sources.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 271
+}

@@ -1,0 +1,137 @@
+{
+ "slug": "burn-blue",
+ "name": "Burn Blue",
+ "hex": "#B0BACB",
+ "names": [
+  "Burn Blue"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Burn Blue is a pale, slightly greyed blue-grey from the Ridgway and ISCC-NBS dictionaries, closer to a bluish white than to any strong blue.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A 1912 plate, carried forward",
+   "body": "Ridgway's 1912 color nomenclature lists it at plate XXXIV, hue 47'', with hex #B0BACB [1]. Maerz and Paul's 1930 dictionary of color repeats the same plate when the ISCC-NBS committee cited it in 1955, placing it in block 184 among the \"very pale blue\" names, 6.0 units from that category's center [1]. The Munsell renotation gives it as 5.4PB 7.5/2.9, a notation of low chroma that confirms how little blue is left in it once lightened this far [1].\n\nTwo near neighbors in the library sit within four units: [[pale-neropalin-blue|Pale Neropalin Blue]], 3.0 units away, and [[sky-grey|Sky Grey]], 3.9 units away, both slightly cooler and a touch lighter [1]. The name's own origin is not explained in the sources consulted here, and is undocumented [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within six units of Burn Blue covers at least five per cent of the canvas in 268 of 23,781 paintings, about 1.1 per cent, as photographed [2]. Its earliest appearance in the archive is a 1401 *Madonna and Child* by Lorenzo di Niccolò, where it covers only six per cent of the canvas [2]. It peaks in paintings from the 1510s, and Pierre Puvis de Chavannes and Alonso Cano use it far more than the archive average, each more than fourteen times the base rate [2]. These are photographs of varnished paintings, read as screen colors, not a pigment identification [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "Ridgway, 1912, plate XXXIV",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "pale-neropalin-blue",
+   "sky-grey",
+   "light-alice-blue",
+   "cloudy-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#B0BACB",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 268,
+  "painters": [
+   {
+    "name": "Pierre Puvis de Chavannes",
+    "hits": 4,
+    "n": 25,
+    "lift": 14.2
+   },
+   {
+    "name": "Alonso Cano",
+    "hits": 3,
+    "n": 19,
+    "lift": 14.01
+   }
+  ],
+  "measured": {
+   "rgb": [
+    176,
+    186,
+    203
+   ],
+   "lch": [
+    75.2,
+    9.7,
+    269.9
+   ],
+   "nearest": [
+    [
+     "Pale Neropalin Blue",
+     3.0
+    ],
+    [
+     "Sky Grey",
+     3.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912 (plate XXXIV), ISCC-NBS 1955 (block 184), Maerz & Paul 1930 entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match within ΔE 6, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which dictionary of color first plates Burn Blue, in 1912?",
+   "choices": [
+    "Ridgway",
+    "Maerz and Paul",
+    "Pantone",
+    "Crayola"
+   ],
+   "answer": "Ridgway",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the sources consulted explain where the name Burn Blue comes from.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Burn Blue turns up in barely one painting in a hundred in our archive."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "nearest-neighbor distance (and, for calliste-green, the named colors) did not match data/graph/edges-*.json 'la' / a direct CIEDE2000 recomputation; corrected.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 252
+}

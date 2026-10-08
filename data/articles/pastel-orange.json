@@ -1,0 +1,127 @@
+{
+ "slug": "pastel-orange",
+ "name": "Pastel Orange",
+ "hex": "#FA842B",
+ "names": [
+  "Pastel Orange"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Pastel Orange is ColorHub's English name for Kanzō-iro, a vivid orange that Japanese tradition names for the daylily, and the name also independently turns up as a plated hue in Ridgway's 1912 color standard.",
+ "sections": [
+  {
+   "id": "japan",
+   "title": "A daylily, independently plated",
+   "body": "Wikipedia's list of traditional Japanese colors gives this swatch as Kanzō-iro (萱草色), \"daylily-colored,\" after the orange flowers of the daylily (Hemerocallis) [1]. Despite the English name ColorHub carries, this is in fact a vivid, fully saturated orange, not a pale pastel [1][2]. The name is a mismatch the library notes rather than silently corrects [1]. The same hue range is independently plated in Ridgway's 1912 standard, plate II, hue 11, a scan of an aged plate read as approximate [2]. The ISCC-NBS dictionary of 1955 places it in block 48, \"moderate orange,\" about 3.2 units from that block's centre [2].\n\nMeasured in LCH it reads lightness 67, chroma 75, hue 58 degrees: a bright, highly saturated orange[2]. The library's nearest other named colors are [[dusty-orange]], [[heat-wave]] and [[cadmium-orange]], each within 4 units [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match in only 5 of 23,781 paintings, a vanishingly small fraction, as photographed [3]. With so few matches our data cannot support claims about painters or role patterns with any confidence; the honest finding is simply that this vivid an orange is rare across the archive's six centuries of painting [3]. The earliest match is a 1528 Adam by Lucas Cranach the Elder, a floor and not a first, since the archive's early centuries are thin [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the orange flower of the daylily (Hemerocallis)",
+   "first_recorded": "independently plated by Ridgway, 1912",
+   "source": "ColorHub library (Wikipedia, \"Traditional colors of Japan\"); Ridgway, 1912"
+  },
+  "aka": [
+   "Kanzō-iro"
+  ],
+  "siblings": [
+   "dusty-orange",
+   "heat-wave",
+   "orange",
+   "cadmium-orange"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Kanzō-iro (萱草色)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 5,
+  "pct": 0.02,
+  "measured": {
+   "lch": [
+    67.3,
+    75.1,
+    58.3
+   ],
+   "nearest_iscc": [
+    "vivid orange",
+    3.2
+   ],
+   "nearest": [
+    "Dusty Orange",
+    2.57
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; Wikipedia, \"Traditional colors of Japan\"; jp field)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate II, hue 11; scan of an aged plate, approximate; ColorHub color library (ISCC-NBS 1955 block 48)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23781 paintings), computed match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What flower does Kanzō-iro, this color's Japanese name, refer to?",
+   "choices": [
+    "The daylily",
+    "The marigold",
+    "The poppy",
+    "The saffron crocus"
+   ],
+   "answer": "The daylily",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: this color is actually a pale, muted orange.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pastel Orange's name is misleading: it is one of the most vivid oranges in the library."
+ ],
+ "words": 245,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "Only 5 archive matches; role/painter/company stats withheld as unreliable at that count.",
+   "English name 'Pastel' is a naming mismatch against the measured vivid chroma; flagged in body rather than silently corrected.",
+   "lint 2026-10-09"
+  ]
+ }
+}

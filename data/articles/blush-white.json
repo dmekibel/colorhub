@@ -1,0 +1,121 @@
+{
+ "slug": "blush-white",
+ "name": "Blush white",
+ "hex": "#FFF4F2",
+ "names": [
+  "Blush white"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Blush white is a near-white with a faint pink cast, a 2010 xkcd survey name that pairs the family word [[blush]] with *white* rather than naming a new hue outright.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Barely a color at all",
+   "body": "The xkcd survey files this as a family-word compound, built on the existing color [[blush]], and no other source in our library independently records the exact name [1][2]. Its origin beyond the 2010 survey entry is undocumented [2]. The 1955 ISCC-NBS system's nearest block, pinkish white, is 3.1 units away, a close match that confirms the color is barely past true white [2]. In LCH it measures lightness 97, chroma just 4, hue 34 degrees, among the lowest-chroma colors in the library, closer to [[linen]] and [[ivory]] than to any strong pink [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our 23,781-painting archive, a color within six units of Blush white covers at least one per cent of the canvas in 55 paintings, about 0.23 percent of the archive, as photographed [3]. It most often plays a light, sitting among a painting's brightest areas in 86 percent of its appearances, which fits a near-white used for highlights and skin [3]. Its earliest match dates to the year 960, 1,050 years before the name was recorded in 2010; a faintly pink near-white is one of the easiest colors for an old varnished highlight to drift into, so this gap reflects the hue's ordinariness, not any connection to the modern name, a floor and not a first, since the archive's early centuries are thin [3]. In printed English the phrase peaked in the 1860s [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "family-word compound: blush + white",
+   "first_recorded": "xkcd color survey, 2010",
+   "source": "ColorHub color library and Color Graph"
+  },
+  "aka": [],
+  "siblings": [
+   "linen",
+   "ivory",
+   "pink"
+  ],
+  "parent": "blush",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 55,
+  "measured": {
+   "lch": [
+    97.0,
+    4.0,
+    34.1
+   ],
+   "munsell": "7.1R 9.7/2.7",
+   "iscc_nbs": {
+    "name": "pinkish white",
+    "de2000": 3.1
+   }
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "xkcd color survey (2010), crowdsourced color-name list",
+   "loc_kind": null,
+   "url": "https://blog.xkcd.com/2010/05/03/color-survey-results/"
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library and Color Graph (data/library.json, data/graph): ISCC-NBS block, Munsell notation, LCH values",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive fieldnotes, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "web",
+   "cite": "Google Books Ngram, case-insensitive",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "Blush white is built as a compound of \"white\" and which other color name?",
+   "choices": [
+    "Blush",
+    "Pink",
+    "Linen",
+    "Ivory"
+   ],
+   "answer": "Blush",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: inside a painting, Blush white most often appears as one of the darker, shadowed areas.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Blush white is barely a color: it measures only 4 points of chroma, next to nothing."
+ ],
+ "words": 253,
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No source beyond our own library's xkcd record; origin said plainly as undocumented.",
+   "lint 2026-10-09"
+  ]
+ }
+}

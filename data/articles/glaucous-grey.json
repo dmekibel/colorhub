@@ -1,0 +1,110 @@
+{
+ "slug": "glaucous-grey",
+ "name": "Glaucous-Grey",
+ "hex": "#AAB5B2",
+ "names": [
+  "Glaucous-Grey"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Glaucous-Grey is a pale green-grey, the grey half of the same glaucous family that gives us Glaucous-Blue, standardized by Ridgway in 1912.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The grey side of glaucous",
+   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* places Glaucous-Grey on plate XLVIII, hue 37 (five primes), tone f [1]. Maerz and Paul's 1930 dictionary repeats it on plate 35, swatch B2, and the ISCC-NBS system of 1955 files it as a light bluish gray, block 190 [1]. Like [[glaucous-blue|Glaucous-Blue]], our data tags it as a modifier of the family word [[glaucous]] [1].\n\nThe closest common color word in our library is [[ash|Ash]], under four units away in CIEDE2000, and its nearest library neighbor is [[pale-green-blue-grey|Pale Green-Blue Grey]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within six units of Glaucous-Grey covers at least five percent of the canvas in 494 of our 23,781 paintings, 2.08 percent, as photographed; the within-painting lens finds it in 333 [2]. That ranks it ahead of 78 percent of the named colors we track [2]. It is most common in the Impressionist movement, twelve of 140 paintings there, 2.2 times the expected rate, and it most often plays a light, in 56 percent of its 333 appearances [2].\n\nPhilips Wouwerman is its most devoted painter, seven of his 36 paintings here, 7.5 times the rate of the museums those works come from [2]. It shares canvases with [[greenish-grey|Greenish Grey]] and [[greyish-white|Greyish White]] more than chance would predict, with lifts of 3.9 and 2.4 [2]. The earliest matching painting dates to 1320, 592 years before Ridgway recorded the name in 1912 — a look-alike hue in an aged photograph, not proof the color existed as a pigment that early, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the family word glaucous",
+   "first_recorded": "1912, Ridgway",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "glaucous-blue",
+   "pale-green-blue-grey",
+   "greenish-grey",
+   "greyish-white"
+  ],
+  "parent": "glaucous",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 333,
+  "pct": 2.08,
+  "rank_percentile": 78,
+  "measured": {
+   "lch": [
+    72.8,
+    4.4,
+    177.4
+   ],
+   "munsell": "N 7.2",
+   "app": [
+    "Ash",
+    3.7
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and graph data: Ridgway 1912 / ISCC-NBS 1955 / Maerz & Paul 1930 / RAL entries (data/library.json, data/graph/)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, computed color match, as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which ISCC-NBS block does Glaucous-Grey belong to?",
+   "choices": [
+    "Block 190, light greenish gray",
+    "Block 172, light greenish blue",
+    "Block 119, pale greenish yellow",
+    "Block 26, strong yellowish pink"
+   ],
+   "answer": "Block 190, light greenish gray",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Glaucous-Grey shares the family word glaucous with Glaucous-Blue.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Glaucous-Grey and Glaucous-Blue share more than a look: both carry the same family word in our data."
+ ],
+ "words": 279,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance hits for this slug.",
+   "lint 2026-10-09"
+  ]
+ }
+}

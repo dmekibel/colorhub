@@ -1,0 +1,107 @@
+{
+ "slug": "eggshell-green",
+ "name": "Eggshell Green",
+ "hex": "#8FBEAA",
+ "names": [
+  "Eggshell Green"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Eggshell Green is a pale, soft green, recorded by Maerz and Paul with a first-use date of about 1824.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A pale green, dated early",
+   "body": "Maerz and Paul's 1930 dictionary, by the account the NBS carried into its 1955 circular, puts the name's first printed record at about 1824, on plate 27 H 3 [1]. The ISCC-NBS system reads the swatch as a light green, about 7.3 units from the block center, a looser match than most names in our library [1].\n\nThe nearest named color in our data is [[niagara-green]], about 5.1 units off, with [[cambridge-blue]], [[cameo-green]] and [[deep-glaucous-green]] close behind [2]. The hue sits closer to blue-green than to the yellow-green of grass."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This color, as photographed, appears in 55 of 23,781 paintings, about 0.23 percent, rarer than 59 percent of the named colors we track [3]. It peaks in the 1800s, in 10 of 8,345 paintings, at 0.1 percent of that period's paintings, 1.0 times the overall rate [3]. Inside a painting it most often plays a light [3]. The earliest match in the archive is a 1480 painting by Bernardino Jacobi Butinone, 450 years before the name's 1930 record, so this is a look-alike hue in an aged photograph, not a pigment identification, a floor and not a first, since the archive's early centuries are thin [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the pale green-blue of an eggshell",
+   "first_recorded": "c. 1824 (Maerz & Paul 1930)",
+   "source": "data/library.json"
+  },
+  "aka": [],
+  "siblings": [
+   "niagara-green",
+   "cambridge-blue",
+   "cameo-green",
+   "deep-glaucous-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 55,
+  "pct": 0.23,
+  "peak": "1800s, 0.1% of this period's paintings, 1.0x expected"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930 and other name sources; CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub Color Graph look-alikes (data/graph), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5 per cent of canvas); data/graph/fieldnotes",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "According to Maerz and Paul, about when was Eggshell Green first recorded?",
+   "choices": [
+    "About 1824",
+    "About 1950",
+    "About 1700",
+    "About 1990"
+   ],
+   "answer": "About 1824",
+   "kind": "pick"
+  },
+  {
+   "q": "Which century shows this color's highest rate in the archive?",
+   "choices": [
+    "1800s",
+    "1600s",
+    "1990s",
+    "1300s"
+   ],
+   "answer": "1800s",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Eggshell Green was in print by about 1824, long before most museum matches for it."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Fixed: the field-notes paragraph (and the matching \"field\" object) invented a movement claim (\"over-represented in Mughal painting\") with no basis — ar.mv is empty for this slug — and a peak-decade stat (1870s/0.5%/4x) that doesn't match the real century fact (1800s/0.1%/1.0x). The presence count (30) also didn't match either real count (25 within-painting / 55 as-photographed). Rewrote the paragraph directly from data/graph/fieldnotes for this slug; removed every unsupported claim rather than inventing a replacement for it.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 220
+}

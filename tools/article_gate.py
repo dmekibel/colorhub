@@ -382,6 +382,12 @@ def check(path, names, gallery, slugs, write_words=False, res=None):
                 fails.append(f"{where}: quotation over 15 words: “{q.group(1)[:60]}…”")
         if re.search(r"\bthe 101\b", t, re.I):
             fails.append(f"{where}: says 'the 101'")
+        if re.search(r"\bour 101\b", t, re.I):
+            fails.append(f"{where}: says 'our 101'")
+        if re.search(r"\b101 learnable\b", t, re.I):
+            fails.append(f"{where}: says '101 learnable'")
+        if re.search(r"\bthis batch\b", t, re.I):
+            fails.append(f"{where}: says 'this batch'")
         sents = sentences(t)
         for i, s in enumerate(sents):
             xref = re.match(r"\W*see\b", plain(s), re.I) or re.search(r"\bsee \[\[", s, re.I)

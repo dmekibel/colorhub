@@ -1,0 +1,120 @@
+{
+ "slug": "strawberry-pink",
+ "name": "Strawberry Pink",
+ "hex": "#DC6862",
+ "names": [
+  "Strawberry Pink"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Strawberry Pink is a deep yellowish pink dated by Maerz and Paul to 1912, and one of the rarest colors in our painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A single-source name",
+   "body": "Maerz and Paul's 1930 dictionary is the only source our library has for Strawberry Pink, dating it to 1912 and placing it on plate 1, swatch H10 [1]. It does not appear in Ridgway's 1912 standard, the 1955 ISCC-NBS lists, or the xkcd survey, so treat the name as resting on one dictionary's word [1]. The nearest named color on file is [[light-jasper-red]], 2.8 ΔE off [1]. Our own tagging files it among the Reds, alongside [[salmon]], [[coral]] and [[pink]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to Strawberry Pink in only 19 of 23,781 paintings, about one in 1,250, as photographed, too rare for a reliable painter or company list [2]. The earliest dated match is a 1236 set of Tibetan lineage portraits, nearly seven centuries before Maerz and Paul's date, which only shows a similar screen color was photographed there, not that the name or a matching pigment existed that early, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the strawberry",
+   "first_recorded": "Maerz and Paul, 1930 (first recorded 1912, plate 1 H10)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "light-jasper-red",
+   "coralbell",
+   "pastel-red",
+   "indian-red"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 19,
+  "measured": {
+   "lch": [
+    58,
+    51,
+    29
+   ],
+   "nearest": [
+    [
+     "Light Jasper Red",
+     2.8
+    ],
+    [
+     "Coralbell",
+     3.5
+    ],
+    [
+     "Pastel Red",
+     3.6
+    ],
+    [
+     "Indian Red",
+     4.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955, Maerz and Paul 1930 and other name records, with plate/block locators and nearest-name match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which single source does our library cite for the name Strawberry Pink?",
+   "choices": [
+    "Maerz and Paul, 1930",
+    "Ridgway, 1912",
+    "ISCC-NBS, 1955",
+    "xkcd, 2010"
+   ],
+   "answer": "Maerz and Paul, 1930",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Strawberry Pink is one of the more common colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Strawberry Pink rests on a single 1930 dictionary, and shows up in only about one painting in 1,250."
+ ],
+ "words": 190,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

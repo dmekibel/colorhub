@@ -1,0 +1,101 @@
+{
+ "slug": "tree-green",
+ "name": "Tree Green",
+ "hex": "#2A7E19",
+ "names": [
+  "Tree Green"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Tree Green is a saturated, mid-dark [[green]] close to the Xbox brand's logo color, with its own origin undocumented in our sources.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Origin undocumented",
+   "body": "Our graph marks the origin of Tree Green as undocumented: it is recorded by the 2010 xkcd crowd survey and separately noted on Wikipedia, but neither source explains who coined the pairing or when [1]. The ISCC-NBS block for it reads \"deep yellowish green\" [1].\n\nWikipedia's entry for this hex notes it as a near-duplicate, about 2.3 units off by CIEDE2000, of the green used in the Xbox brand's logo [1]. Nearby names in our library are [[forest-green|Forest Green]], [[grass-green|Grass Green]] and [[kelly-green|Kelly Green]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Tree Green is one of the rarer matches in our archive, covering at least 2% of the canvas in only 3 of 23,781 paintings, as photographed [2]. By position in each painting's lightness order it is found in just 1, rarer than 86% of the named colors we track [2]. Where it does appear, it always sits as a shadow, not a highlight [2].\n\nIn printed English, \"tree green\" as a phrase peaked in the 1870s and rose fastest that same decade, well before the xkcd survey's 2010 record for this exact hex [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "2010, xkcd color survey",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "forest-green",
+   "grass-green",
+   "kelly-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present_by_coverage": 3,
+  "n_present_within": 1,
+  "rank_pct": 86,
+  "role": "shadow, 100% of matched paintings",
+  "ngram": {
+   "peak": 1870,
+   "rise": 1870
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and color graph: xkcd (2010), ISCC-NBS (1955) and a Wikipedia cross-reference",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does our data say about who coined the name Tree Green?",
+   "choices": [
+    "It is undocumented in our sources",
+    "Werner named it in 1821",
+    "A paint company trademarked it in the 1950s",
+    "It first appears in Ridgway's 1912 book"
+   ],
+   "answer": "It is undocumented in our sources",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: in our archive, Tree Green shows up mostly as a bright highlight.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Tree Green sits about 2.3 color units from the green in the Xbox logo, close enough to call a near-duplicate."
+ ],
+ "words": 195,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

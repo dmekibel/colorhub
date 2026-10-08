@@ -1,0 +1,137 @@
+{
+ "slug": "cameo-brown",
+ "name": "Cameo Brown",
+ "hex": "#886153",
+ "names": [
+  "Cameo Brown"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Cameo Brown is a muted reddish brown from Ridgway's 1912 plates, filed by the ISCC-NBS dictionary under grayish red rather than brown.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Named brown, classed as red",
+   "body": "Ridgway's 1912 nomenclature plates it at plate XXVIII, hue 7'', tone k, hex #886153 [1]. Maerz and Paul's 1930 dictionary also carries the name, on its own plate 6 F 9, dated 1912 [1]. The ISCC-NBS committee filed it in 1955 under block 19, grayish red, though the swatch sits a loose 7.4 units from that block's center [1]. The named brown is classed with the reds [1]. Its Munsell renotation is 1.9YR 4.4/3.5 [1]. The name's own origin is undocumented here [1].\n\nIts nearest library neighbor is [[prussian-red|Prussian Red]], 3.4 units away, a coincidence of hue and not a shared history with the pigment Prussian blue; [[sandalwood|Sandalwood]] follows at 3.7 [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within six units of Cameo Brown covers at least five per cent of the canvas in 834 of 23,781 paintings, about 3.5 per cent, as photographed [2]. Its earliest appearance is a Roman-era carved stone fragment, *Griffin Atop Entablature*, dated to around year 1, where it covers five per cent of the surface [2]. It peaks in paintings from the 1270s, and Pontormo and the Danish painter Niels Skovgaard carry it well above the archive average [2]. These are photographs of varnished paintings, read as screen colors [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "Ridgway, 1912, plate XXVIII",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "prussian-red",
+   "sandalwood",
+   "rose-brown",
+   "vinaceous-brown"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#886153",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 834,
+  "painters": [
+   {
+    "name": "Pontormo",
+    "hits": 5,
+    "n": 13,
+    "lift": 10.97
+   },
+   {
+    "name": "Niels Skovgaard",
+    "hits": 4,
+    "n": 14,
+    "lift": 8.15
+   }
+  ],
+  "measured": {
+   "rgb": [
+    136,
+    97,
+    83
+   ],
+   "lch": [
+    44.8,
+    19.9,
+    45.7
+   ],
+   "nearest": [
+    [
+     "Prussian Red",
+     3.4
+    ],
+    [
+     "Sandalwood",
+     3.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912 (plate XXVIII), ISCC-NBS 1955 (block 19), Maerz & Paul 1930 entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match within ΔE 6, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which ISCC-NBS family does the dictionary file Cameo Brown under?",
+   "choices": [
+    "Grayish red",
+    "Dark brown",
+    "Olive",
+    "Bluish gray"
+   ],
+   "answer": "Grayish red",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Cameo Brown's closeness to Prussian Red means it shares a history with Prussian blue pigment.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Cameo Brown is filed by the color dictionaries as a kind of red, not a kind of brown."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Editor spot-audit 2026-10-09: M&P plate 6 F 9 is not 'the same plate' as Ridgway XXVIII; removed 'widest gap in this batch' meta; nearest corrected to graph edges (Prussian Red 3.4, Sandalwood 3.7).",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 222
+}

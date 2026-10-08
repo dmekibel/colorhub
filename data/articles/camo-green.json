@@ -1,0 +1,127 @@
+{
+ "slug": "camo-green",
+ "name": "Camo Green",
+ "hex": "#526525",
+ "names": [
+  "Camo Green"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Camo Green is a muted olive-green from the X11 and CSS color keyword list, close enough to Dark Olive Green that Wikipedia records the two within 2.5 CIEDE2000 units of each other.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A web keyword with a near-twin",
+   "body": "Wikipedia's \"List of colors\" cites the X11/Web standard as its source, and our library finds the xkcd survey's version of the same cluster essentially unchanged [1]. The name describes camouflage patterning generically, not any single military fabric or dye [1]. The nearest named colors on file are [[army-green]], [[muddy-green]], [[velvet-green]] and [[mud-green]], at 3.1, 5.9, \nIts closest learnable match is [[hunter-green|Hunter green]], about 11 units off in CIEDE2000, a reminder that \"camo green\" sits at the darker, duller edge of the green family [1]. Family neighbors are [[olive]], [[hunter-green|Hunter green]], and [[khaki]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this olive in 121 of 23,781 paintings, about 0.5 percent, as photographed [2]. [[painter:vincent-van-gogh|Van Gogh]] carries it at 12 times the archive's rate and Edvard Weie at nearly 24 times; the earliest dated hit is a 1420 Crucifixion scene, a floor and not a first, since the archive's early centuries are thin [2].\n\nIt covers the most canvas in George Inness's *After a Summer Shower* (1894), followed by a Danish woodland study from 1847 [2]. United States paintings carry it 3.5 times the archive average [2]. These are computed color matches on aged, varnished photographs, not pigment identifications [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "camouflage patterning, generically",
+   "first_recorded": "undocumented in the sources consulted; carried by X11/Web",
+   "source": "ColorHub color library (Wikipedia, citing X11/Web)"
+  },
+  "aka": [
+   "Dark Olive Green (xkcd/CSS/Wikipedia, near-duplicate)"
+  ],
+  "siblings": [
+   "army-green",
+   "muddy-green",
+   "velvet-green",
+   "mud-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 121,
+  "top_paintings": [
+   "aic-64715",
+   "smk-KMS6758",
+   "nga-1113"
+  ],
+  "painters": [
+   "Edvard Weie",
+   "Vincent van Gogh",
+   "Camille Pissarro"
+  ],
+  "role": {
+   "mid": 0.55,
+   "shadow": 0.28,
+   "highlight": 0.17
+  },
+  "measured": {
+   "lch": [
+    40,
+    38,
+    118
+   ],
+   "nearest": [
+    [
+     "Army Green",
+     3.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Wikipedia List of colors (citing X11/Web), xkcd 2010 survey, near-duplicate entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which existing color name is a near-duplicate of Camo Green in our library, within 2.5 CIEDE2000 units?",
+   "choices": [
+    "Dark Olive Green",
+    "Burlywood",
+    "Mauve",
+    "Isabelline"
+   ],
+   "answer": "Dark Olive Green",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Camo Green appears in a painting dated before 1500.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Camo Green's earliest match in our archive is a Crucifixion scene from 1420, long before any military camouflage existed."
+ ],
+ "words": 229,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No private fact-card file for this slug.",
+   "Painter-citation name for Van Gogh used as a reference card; confirm it resolves against data/artists/meta.json.",
+   "lint 2026-10-09"
+  ]
+ }
+}

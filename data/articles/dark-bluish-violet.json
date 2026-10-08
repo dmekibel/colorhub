@@ -1,0 +1,119 @@
+{
+ "slug": "dark-bluish-violet",
+ "name": "Dark Bluish Violet",
+ "hex": "#454360",
+ "names": [
+  "Dark Bluish Violet"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dark Bluish Violet is a muted, dark modifier on [[violet]], scanned from Ridgway's 1912 plates and filed by the ISCC-NBS system in 1955 as a moderate violet.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A double modifier on violet",
+   "body": "The name stacks two modifiers, *dark bluish* plus [[violet]], onto the flower-derived color word rather than naming a separate hue [1]. Ridgway's 1912 *Color Standards and Color Nomenclature* places a hue this dark at plate X, hue 57, a scan of an aged plate and so only approximate; the ISCC-NBS system filed the same chip in 1955 as a moderate violet [1].\n\nIts nearest named neighbors by color distance are [[dusky-violet]], almost the same at 3.2 units, and [[dark-madder-violet]], a touch duller at 3.7 [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color this close to Dark Bluish Violet is moderately rare in our archive: 75 of 23,781 paintings, as photographed, about 0.3 percent, rarer than 56 percent of the named colors [3]. It peaks in paintings from the 1900s, at 3.3 times the expected rate, and most often plays a shadow, 48 percent of the time [3]. The earliest match dates to 1401, by Taddeo di Bartolo, 511 years before the name's own 1912 record [3]. That is centuries before the name's own record, a floor on the hue's age, not a first use of either the name or a pigment."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a double modifier on violet; the choice of \"dark bluish\" over another pairing is undocumented",
+   "first_recorded": "Ridgway, Color Standards and Color Nomenclature (1912), plate X, hue 57",
+   "source": "ColorHub color library (Ridgway 1912; ISCC-NBS 1955)"
+  },
+  "aka": [],
+  "siblings": [
+   "dusky-violet",
+   "dark-madder-violet",
+   "flag"
+  ],
+  "parent": "violet",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 75,
+  "n_within": 33,
+  "role": "shadow 48%",
+  "century_peak": "1900s, 3.3x expected",
+  "measured": {
+   "lch": [
+    29.7,
+    18.7,
+    295.9
+   ],
+   "nearest": [
+    [
+     "Dusky Violet",
+     3.2
+    ],
+    [
+     "Dark Madder Violet",
+     3.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-d.json): Ridgway 1912, plate X, hue 57; ISCC-NBS 1955, block 211",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph, look-alike edges (data/graph/edges-d.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes); counts are computed color matches on photographs of varnished, aged canvases, not pigment identifications",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How did the ISCC-NBS system classify Dark Bluish Violet in 1955?",
+   "choices": [
+    "A grayish violet",
+    "A vivid purple",
+    "A deep blue",
+    "A reddish violet"
+   ],
+   "answer": "A grayish violet",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: inside a painting, a color near Dark Bluish Violet most often reads as the brightest highlight.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dark Bluish Violet most often turns up as a shadow, not a highlight, in our archive."
+ ],
+ "words": 215,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}

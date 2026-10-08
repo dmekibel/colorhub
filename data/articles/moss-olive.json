@@ -1,0 +1,149 @@
+{
+ "slug": "moss-olive",
+ "name": "Moss olive",
+ "hex": "#667E2C",
+ "names": [
+  "Moss olive"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Moss olive is an xkcd survey name pairing two plant colors, the green of woodland moss and the duller yellow-green of olive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two plants in one name",
+   "body": "Our only recorded source for this exact name is the 2010 xkcd color survey, which asked thousands of people to name colors from swatches [1]. The name pairs two plant words rather than one: the green of woodland moss and the duller, yellow-green of an unripe or cured olive [1]. In the ISCC-NBS 1955 system the nearest block is \"deep yellow green\", a wider 8.3 units away than most of our matches, meaning no official dictionary entry sits very close [2]. In Munsell terms it reads about 5.1GY 4.8/6.6 [2].\n\nIts nearest siblings in our data are plain [[moss]], which is lighter and less yellow, and [[olive]] itself, which is duller and greyer [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 55 of 23,781 paintings, about 0.2 percent, as photographed [3]. The earliest dated match is Andrea del Sarto's 1512 *Archangel Raphael with Tobias, St. Laurentius and the donor Leonardo di Lorenzo Morelli*, a floor and not a first, since the archive's early centuries are thin [3]. Its clearest peak is the 1890s, at close to three times the archive's overall rate [3]. [[painter:georges-seurat|Georges Seurat]] used it far more than most painters, at about 32 times the baseline rate, including in a 1883 study for *[[painting:nga-164966|Bathers at Asnières]]* [3]. On the same canvases it most often keeps company with [[olive]] and [[moss]], exactly the two plants in its own name [3]. These counts are computed color matches on photographs of aged, varnished paintings, not pigment identifications [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the plant colors moss and olive",
+   "first_recorded": "xkcd survey, 2010",
+   "source": "ColorHub library and graph nodes"
+  },
+  "aka": [],
+  "siblings": [
+   "khaki-green",
+   "military-green",
+   "muddy-green",
+   "murky-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 55,
+  "first_painting": [
+   "commons-Q27978347",
+   1512
+  ],
+  "painters": [
+   [
+    "Georges Seurat",
+    31.64
+   ]
+  ],
+  "measured": {
+   "mu": "5.1GY 4.8/6.6",
+   "nearest_iscc": [
+    "deep yellow green",
+    8.3
+   ],
+   "nearest": [
+    [
+     "Khaki Green",
+     3.6
+    ],
+    [
+     "Military Green",
+     3.7
+    ],
+    [
+     "Muddy Green",
+     4.3
+    ],
+    [
+     "Murky Green",
+     4.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (xkcd 2010 source)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub graph nodes: Munsell conversion, ISCC-NBS 1955 nearest block",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which two plant colors does the name Moss olive combine?",
+   "choices": [
+    "Moss and olive",
+    "Fern and sage",
+    "Grass and lime",
+    "Ivy and basil"
+   ],
+   "answer": "Moss and olive",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: an official 1955 dictionary block sits very close to Moss olive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which painter used Moss olive far more than most, in our archive?",
+   "choices": [
+    "Georges Seurat",
+    "Rembrandt",
+    "Vermeer",
+    "Fra Angelico"
+   ],
+   "answer": "Georges Seurat",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Moss olive's own name doubles as a list of the two plants it keeps company with most in our archive."
+ ],
+ "words": 264,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); article rests on ColorHub's own library, graph and archive data.",
+   "lint 2026-10-09"
+  ]
+ }
+}

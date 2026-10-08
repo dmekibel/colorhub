@@ -1,0 +1,122 @@
+{
+ "slug": "dark-maroon",
+ "name": "Dark Maroon",
+ "hex": "#3C0008",
+ "names": [
+  "Dark Maroon"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dark Maroon darkens [[maroon]] toward black, a name built by ColorHub's own modifier grammar rather than borrowed from any dictionary, and it shows up almost only as shadow in paintings that carry it.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A darkened maroon",
+   "body": "Dark Maroon is not an old pigment or dye name: it is the word dark applied to [[maroon]], the brownish red named after the French *marron*, chestnut [1]. The parent color itself was crowdsourced in the xkcd online color survey of 2010, and our naming system darkens its lightness and saturates it slightly to produce this entry [1].\n\nIts nearest neighbor by measured color distance is [[dark-sienna]], about 5.4 units away and a duller version of the same dark red-brown [2]. [[oxblood]] sits a little further off, redder and more vivid, and [[black-bean]] redder still [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color, or something within six units of it, in 74 of 23,781 paintings, about 0.3 per cent, as photographed [3]. Where it appears, it sits in the shadows 77 per cent of the time, almost never as a highlight [3]. The 1500s carry it at roughly three times the archive's overall rate, 21 of 2,231 paintings from that century [3]. As photographed: these are computed color matches on museum photographs of aged, varnished paintings, not a pigment test [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the parent color maroon, darkened by ColorHub's modifier grammar",
+   "first_recorded": "2010 (xkcd color survey, for the parent maroon)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "dark-sienna",
+   "oxblood",
+   "black-bean"
+  ],
+  "parent": "maroon",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#3C0008",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 74,
+  "rate": 0.0031,
+  "role": {
+   "shadow": 0.77,
+   "mid": 0.23
+  },
+  "measured": {
+   "lch": [
+    8.8,
+    30.8,
+    20.2
+   ],
+   "nearest": [
+    [
+     "Dark Sienna",
+     5.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): modifier-grammar entry over the parent color Maroon (xkcd 2010 survey)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub Color Graph look-alikes (data/graph/edges-d.json), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Dark Maroon is built by darkening which color?",
+   "choices": [
+    "Maroon",
+    "Oxblood",
+    "Sienna",
+    "Burgundy"
+   ],
+   "answer": "Maroon",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: in paintings that carry Dark Maroon, it is usually a highlight rather than a shadow.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A darkened maroon that turns up almost only in the shadows of old paintings."
+ ],
+ "words": 210,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}

@@ -1,0 +1,119 @@
+{
+ "slug": "queen-pink",
+ "name": "Queen Pink",
+ "hex": "#E8CCD7",
+ "names": [
+  "Queen Pink"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Queen Pink is a pale, greyed pink that the ISCC-NBS dictionary of color names entered in 1955, unlike most of its neighbors with no earlier Maerz and Paul record behind it.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A 1955 name, not an older one",
+   "body": "ISCC-NBS block 252 places it as a pale purplish pink, and our library finds that reading within 1.0 unit of the hex value #E8CCD7, an unusually close match [1]. Most of our standard-dictionary pinks trace back to Maerz and Paul's 1930 catalog, but no such earlier record survives for this one, so 1955 is the earliest date we can give it [1].\n\nIn Lab terms it measures lightness 85 and a chroma of only 12, near the pale, muted end of the Pinks [1]. Its closest library neighbors are [[light-pinkish-lilac|Light Pinkish Lilac]] and [[pale-lilac|Pale Lilac]], both under five units away and both leaning slightly toward violet rather than pink [1]. Next to the brighter, warmer [[powder-pink|Powder Pink]] from the same era, Queen Pink reads flatter and greyer [1]. The library's other \"Queen\" name, [[queen-blue|Queen Blue]], shares nothing but the word, since it names a medium, dusty blue rather than a pink [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within six units of it covers at least five percent of the canvas in 16 of our 23,781 archive paintings, as photographed, rarer than 68 percent of our named colors [2]. Inside those paintings it most often plays a light tone, 90 percent of the 10 our within-painting lens finds [2]. The earliest dated example is a 1452 panel by Bartolomeo Caporali, 503 years before the name's 1955 record, a floor set by thin early coverage rather than proof the dye or mix existed then [2]. In printed English the phrase peaks in use in the 1940s and rises fastest in the 1990s, across all senses of the words, which can include the title and the object as much as the color [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1955 (ISCC-NBS)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "light-pinkish-lilac",
+   "pale-lilac",
+   "powder-pink",
+   "queen-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 10,
+  "n_present_painting_level": 16,
+  "measured": {
+   "lch": [
+    84.6,
+    11.8,
+    350.9
+   ],
+   "nearest": [
+    [
+     "Light Pinkish Lilac",
+     4.2
+    ],
+    [
+     "Pale Lilac",
+     4.6
+    ]
+   ]
+  },
+  "ngram": {
+   "term": "queen pink",
+   "peak": 1940,
+   "rise": 1990
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS 1955 block 252",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed; Google Books Ngram, all senses",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Unlike most of its library neighbors, Queen Pink has no record before which year?",
+   "choices": [
+    "1955",
+    "1930",
+    "1912",
+    "1892"
+   ],
+   "answer": "1955",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Queen Pink is a bright, saturated pink.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Queen Pink has no record in our sources before the 1955 ISCC-NBS dictionary itself."
+ ],
+ "words": 300,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); no Maerz and Paul record found for this name, flagged rather than assumed.",
+   "lint 2026-10-09"
+  ]
+ }
+}

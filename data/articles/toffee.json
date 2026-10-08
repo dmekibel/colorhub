@@ -1,0 +1,132 @@
+{
+ "slug": "toffee",
+ "name": "Toffee",
+ "hex": "#A36629",
+ "names": [
+  "Toffee"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Toffee is a warm, mid brown named for the boiled-sugar candy, recorded by Werner in 1821 among his examples but never explained there.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A candy's brown",
+   "body": "Our library records Toffee, #A36629, as a Werner name from 1821; the book gives natural examples for its colors but not a reason for this particular name, so its choice of \"toffee\" over any other brown is undocumented here [1]. The candy itself, a boiled mix of sugar and butter, was a known English sweet by the early nineteenth century, consistent with the date [1].\n\nThe nearest named colors on file are [[sudan-brown]], [[ochre-brown]] and [[colour]], at 3.2, 3.4 and 4.2 ΔE [1]. It also shares canvases more than chance would predict with [[chocolate]] and a color called Chamoline [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this brown in 1,391 of 23,781 paintings, 5.85 percent, more common than 88 percent of our named colors, as photographed [3]. It peaks in the 1300s, in 22 of 251 paintings, 8.8 percent of the paintings we have from that century, over three times the archive's rate [3]. Inside a painting it most often plays an accent, in 69 percent of its appearances, rather than a shadow or base tone [3]. The earliest dated example in our data is from the year 1000; that is centuries before the word \"toffee\" itself is recorded, so the match is a look-alike hue in an aged photograph, never a proof of toffee-colored paint, a floor and not a first, since the archive's early centuries are thin [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "toffee, the boiled-sugar candy",
+   "first_recorded": "Werner's Nomenclature of Colours, 1821 edition",
+   "source": "ColorHub color library (Werner 1821)"
+  },
+  "aka": [],
+  "siblings": [
+   "sudan-brown",
+   "ochre-brown",
+   "colour",
+   "orangey-brown"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1391,
+  "rate": 0.0585,
+  "measured": {
+   "lch": [
+    48.8,
+    47.2,
+    65.9
+   ],
+   "nearest": [
+    [
+     "Sudan Brown",
+     3.2
+    ],
+    [
+     "Ochre Brown",
+     3.4
+    ],
+    [
+     "Colour",
+     4.2
+    ],
+    [
+     "Orangey Brown",
+     4.8
+    ]
+   ]
+  },
+  "first_seen": {
+   "year": 1000,
+   "painting": "cma-161703"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Werner's Nomenclature of Colours, 1821 edition",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: lookalikes and duplicates by CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is Toffee named after?",
+   "choices": [
+    "A mineral",
+    "The boiled-sugar candy",
+    "A river",
+    "A dye plant"
+   ],
+   "answer": "The boiled-sugar candy",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Werner's 1821 book explains why he chose the name Toffee.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Toffee has sat almost exactly on top of a color called Gallstone Yellow in our library the whole time."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 251
+}

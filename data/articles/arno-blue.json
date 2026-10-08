@@ -1,0 +1,124 @@
+{
+ "slug": "arno-blue",
+ "name": "Arno Blue",
+ "hex": "#4B7180",
+ "names": [
+  "Arno Blue"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Arno Blue is a muted, greenish slate blue recorded by Maerz and Paul in 1928, its name recalling the river that runs through Florence and Pisa.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name in the library",
+   "body": "Maerz and Paul's 1930 dictionary dates this blue to 1928, plate 37, swatch J 6 [1]. The name's link to Italy's Arno River is a reasonable reading, given the hue, but the dictionary entry does not state it, so it stays undocumented here [1]. The nearest color-graph neighbor is [[teal-blue]], 4.1 units away, with [[dark-orient-blue]] close behind at 4.2, and [[venezia]] and [[delft-blue]] close by [2].\n\nMunsell gives 6.7B 4.5/3.5, a low-saturation, medium-dark blue-green [1]. The hex #4B7180 is a screen approximation of the dictionary plate [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this blue in 159 of 23,781 paintings, about 0.67 percent, as photographed [3]. It is strongest in work by Jean-Léon Gérôme (nearly 25 times the archive's base rate) and Claude Monet (almost 18 times), including Monet's *Low Tide at Pourville, near Dieppe* (1882) and Gérôme's *Head of an Italian Woman* (1847) [3]. James McNeill Whistler's *Violet and Silver—The Deep Sea* (1893) and Giovanni Battista Tiepolo's *Saint Roch Carried to Heaven by Angels* (1735) also carry it strongly [3]. The 1720s show the sharpest decade-level concentration, about four times average [3]. These are computed matches on photographed, varnished canvases [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "teal-blue",
+   "dark-orient-blue",
+   "venezia",
+   "delft-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 159,
+  "measured": {
+   "lch": [
+    45.4,
+    15.5,
+    233.6
+   ],
+   "nearest": [
+    [
+     "Teal Blue",
+     4.1
+    ]
+   ]
+  },
+  "iscc": {
+   "name": "moderate greenish blue",
+   "de": 5.6
+  },
+  "peak_decade": {
+   "key": 1720,
+   "lift": 4.07
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz & Paul 1930, Ridgway 1912, ISCC-NBS 1955, RAL entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE Lab ΔE)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which painter's work shows Arno Blue at nearly 25 times the archive's base rate?",
+   "choices": [
+    "Jean-Léon Gérôme",
+    "Claude Monet",
+    "Whistler",
+    "Tiepolo"
+   ],
+   "answer": "Jean-Léon Gérôme",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Maerz and Paul's dictionary entry states that Arno Blue is named for the Italian river.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Arno Blue's name points toward the river through Florence, but the dictionary never says so."
+ ],
+ "words": 218,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Nearest-neighbor claim (name and/or distance) in the 'name' section and field.measured.nearest did not match data/graph/edges-*.json 'la' (the cited color-graph computation); corrected to the true nearest colors and distances, and updated aside.siblings to match.",
+   "lint 2026-10-09"
+  ]
+ }
+}

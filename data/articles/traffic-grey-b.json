@@ -1,0 +1,108 @@
+{
+ "slug": "traffic-grey-b",
+ "name": "Traffic Grey B",
+ "hex": "#4E5451",
+ "names": [
+  "Traffic Grey B"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Traffic Grey B is a dark, slightly green grey from the German RAL road-and-signage standard, the darker half of a matched pair with Traffic Grey A.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The darker half",
+   "body": "RAL, founded in 1927, lists this hue as RAL 7043, a screen approximation of that spec [1]. It pairs with the lighter [[traffic-grey-a]], the two meant to work together in road markings and signage [1]. The books consulted do not explain why RAL split the traffic greys into two letters rather than two separate names, so that choice stays undocumented [1].\n\nIts nearest named neighbor in our library is [[dark-neutral-grey]], close enough to be mistaken for it on screen [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this hue, as photographed, in 615 of 23,781 paintings (2.59 percent), more common than 77 percent of the named colors we track [2]. It peaks in the 1900s, in 55 of 1,674 paintings, at 2.1 times the expected rate for paintings from that century [2]. Inside a painting it most often plays a mid-tone, in 40 percent of its 326 occurrences [2].\n\n[[painter:henri-matisse|Henri Matisse]] is its most devoted painter here, carrying it in 9 of 50 of his works, 6.7 times his home museums' baseline [2]. The earliest matching painting is dated 1099, 828 years before RAL recorded the standard in 1927, a floor and not a first, since the archive's early centuries are thin [2]. It shares canvases more than chance with [[nickel]] and [[deep-gull-grey]] [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "its use on traffic signs and road markings",
+   "first_recorded": "1927, per RAL",
+   "source": "RAL color standard"
+  },
+  "aka": [],
+  "siblings": [
+   "dark-neutral-grey",
+   "traffic-grey-a"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 615,
+  "pct": 2.59,
+  "rank_pct": 77,
+  "measured": {
+   "lch": [
+    35.1,
+    3.2,
+    163.2
+   ],
+   "nearest": [
+    [
+     "Dark Neutral Grey",
+     9.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "RAL color standard, RAL 7043, approximate screen value",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which RAL code is Traffic Grey B?",
+   "choices": [
+    "RAL 7043",
+    "RAL 7042",
+    "RAL 9016",
+    "RAL 4006"
+   ],
+   "answer": "RAL 7043",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Traffic Grey B is lighter than Traffic Grey A.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Henri Matisse used this dark road-sign grey nearly seven times as often as his peers."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 237
+}

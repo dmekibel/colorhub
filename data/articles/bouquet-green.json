@@ -1,0 +1,132 @@
+{
+ "slug": "bouquet-green",
+ "name": "Bouquet Green",
+ "hex": "#65A68A",
+ "names": [
+  "Bouquet Green"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Bouquet Green is a soft teal-green that Maerz and Paul's 1930 dictionary dates to 1927, measured about ten units from the everyday name Jade.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A 1927 entry, no story attached",
+   "body": "Maerz and Paul's *A Dictionary of Color* (1930) places Bouquet Green on plate 27, position H7, and dates its first recorded use to 1927 [1]. The dictionary does not explain the name beyond the plate position, and no connection to a specific flower arrangement is documented here [1]. The ISCC-NBS 1955 lists do not carry the name separately, and the National Bureau of Standards circular cites only Maerz and Paul's entry [1].\n\nThe nearest named colors on file are [[corsage-green]], [[verdigris-green]] and [[deep-malachite-green]], at 3.1, 3.2 and 3.8 ΔE [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is an uncommon painted color: our archive finds a match to this swatch in 26 of 23,781 paintings, 0.11 percent, as photographed; the within-painting lens finds it in 8, rarer than 70 percent of the named colors we track [3]. The sample is too small to support a reliable painter or country figure, so none is claimed here [3].\n\nThe color peaks in the 1900s, four times the expected rate across 1,674 paintings from that decade, though the count behind that figure is only 5 paintings [3]. The earliest match dates to 1857, by Alexander von Kotzebue, 73 years before the name's 1930 record, which shows only that a similar-looking hue existed in paint before the word did, a floor and not a first, since the archive's early centuries are thin [3]. These are photographs of varnished paintings, read as screen colors [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "Maerz and Paul, 1930 (recorded use from 1927, plate 27 H7)",
+   "source": "Maerz and Paul, A Dictionary of Color (1930)"
+  },
+  "aka": [],
+  "siblings": [
+   "corsage-green",
+   "verdigris-green",
+   "deep-malachite-green",
+   "motmot-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#65A68A",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 26,
+  "measured": {
+   "lch": [
+    63.2,
+    28.5,
+    163.7
+   ],
+   "nearest": [
+    [
+     "Corsage Green",
+     3.1
+    ],
+    [
+     "Verdigris Green",
+     3.2
+    ],
+    [
+     "Deep Malachite Green",
+     3.8
+    ],
+    [
+     "Motmot Green",
+     4.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Maerz and Paul, A Dictionary of Color, \"Bouquet Green\", plate 27 H7",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which everyday color name is closest in measured distance to Bouquet Green?",
+   "choices": [
+    "Jade",
+    "Mustard",
+    "Charcoal",
+    "Byzantium"
+   ],
+   "answer": "Jade",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Maerz and Paul explain where the name Bouquet Green comes from.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A soft teal-green first recorded in 1927, with no explanation of its name."
+ ],
+ "words": 259,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

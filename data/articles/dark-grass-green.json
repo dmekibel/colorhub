@@ -1,0 +1,100 @@
+{
+ "slug": "dark-grass-green",
+ "name": "Dark Grass Green",
+ "hex": "#388004",
+ "names": [
+  "Dark Grass Green"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dark Grass Green is a deep, vivid green, ColorHub's library name for a darkened shade of [[grass-green]], filed by the ISCC-NBS dictionary in 1955.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A darkened grass green",
+   "body": "The name follows ColorHub's modifier grammar, \"dark\" plus the parent color [[grass-green]], itself named plainly for the color of growing grass [1]. The ISCC-NBS Dictionary of Color Names of 1955 files \"Dark Grass Green\" in its block for dark yellowish green, and the library also carries the swatch from the xkcd color survey of 2010 [1]. Deepening the parent color here also adds saturation, so the result sits further from a plain mid green than the word \"dark\" alone might suggest [1].\n\nThe closest named neighbor on file is [[tree-green]], almost indistinguishable from it, with [[sap-green]] a shade duller [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color near this swatch in only 8 of 23,781 paintings, well under one per cent, among the rarer named shades in the collection, as photographed [2]. Where it appears it most often plays a mid-tone role, and it is disproportionately present in work from Austria, Germany, France and the United States [2]. No single painter in our sample has enough matches to stand out, which is consistent with how rarely the color appears at all [2]. These are computed color matches on photographs of aged, varnished paintings, not pigment identifications [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a darkened, more saturated shade of Grass Green",
+   "first_recorded": "ISCC-NBS 1955",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "tree-green",
+   "sap-green",
+   "forest-green"
+  ],
+  "parent": "grass-green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 8,
+  "pct_archive": 0.03,
+  "role": "mid"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, xkcd color survey 2010)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph, nearest-neighbor color distances (data/graph/edges-d.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Dark Grass Green mainly differs from Grass Green by being darker and also what?",
+   "choices": [
+    "More saturated",
+    "Bluer",
+    "Browner"
+   ],
+   "answer": "More saturated",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dark Grass Green is one of the more common colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A deep, vivid green rare enough in paintings that our archive finds it fewer than ten times."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": []
+ },
+ "words": 216
+}

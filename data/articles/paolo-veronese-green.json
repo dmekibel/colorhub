@@ -1,0 +1,147 @@
+{
+ "slug": "paolo-veronese-green",
+ "name": "Paolo Veronese Green",
+ "hex": "#009B7D",
+ "names": [
+  "Paolo Veronese Green"
+ ],
+ "tier": "person",
+ "depth": "short",
+ "lede": "Paolo Veronese Green is a vivid blue-green named for the sixteenth-century Venetian painter Paolo Veronese, whose paintings are known for exactly this cool, saturated green in drapery and foliage.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A painter's signature green",
+   "body": "Paolo Veronese (1528-1588) was a major painter of the Venetian Renaissance, celebrated for large, color-saturated canvases in which a cool, vivid green recurs often enough in costume and landscape that later writers attached his name to the hue [1]. Our library's related entry for this family, *Sulphate Green Roll*, is dated by Maerz and Paul to 1905, which tells us the family of names was already settled by the early twentieth century, well after the painter's own lifetime [2]. The hex #009B7D measures a vivid bluish green by ISCC-NBS, 6.5 units from its nearest block, close to 9.0G 5.6/7.8 in Munsell notation [3]. The nearest named colors on file are [[illuminating-emerald]], [[ocean-green]] and [[zomp]], at 3.8, \nWhether Veronese mixed a single, specific pigment that this name preserves, or whether later writers simply named a recurring effect in his paintings after him, is not settled in the sources we checked, so we leave the distinction open rather than claim one side as fact [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to Paolo Veronese Green in only 5 of 23,781 paintings, 0.02 percent, with the within-painting test narrowing that to 2, making it rarer than about 82 percent of the named colors we track [4]. The earliest dated match, as photographed, comes from 1827, nearly two and a half centuries after the painter's death, a floor and not a first, since the archive's early centuries are thin [4]. The three earliest matches are credited to T. Davies rather than to Veronese himself [4]. That gap is a reminder that a color named for a painter need not actually appear, by our photographic measure, in that painter's own surviving work [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the Venetian Renaissance painter Paolo Veronese (1528-1588)",
+   "first_recorded": "settled by 1905 (Maerz and Paul, related entry)",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "Sulphate Green Roll"
+  ],
+  "siblings": [
+   "illuminating-emerald",
+   "ocean-green",
+   "zomp",
+   "vivid-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 5,
+  "n_within": 2,
+  "measured": {
+   "lch": [
+    57.0,
+    42.4,
+    171.8
+   ],
+   "munsell": "9.0G 5.6/7.8",
+   "iscc_nbs": {
+    "name": "vivid bluish green",
+    "de": 6.5
+   },
+   "nearest": [
+    [
+     "Illuminating Emerald",
+     3.8
+    ],
+    [
+     "Ocean Green",
+     4.3
+    ],
+    [
+     "Zomp",
+     4.9
+    ],
+    [
+     "Vivid Green",
+     5.2
+    ]
+   ]
+  },
+  "first_seen": {
+   "year": 1827,
+   "attribution": "T. Davies"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "Wikipedia, \"Paolo Veronese\"",
+   "loc_kind": "entry",
+   "url": "https://en.wikipedia.org/wiki/Paolo_Veronese"
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library, related entry \"Sulphate Green Roll\", citing Maerz and Paul, A Dictionary of Color (1930), first recorded 1905, plate 26 J8",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph: computed LCH, Munsell and ISCC-NBS nearest-block distance",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Paolo Veronese Green is named for:",
+   "choices": [
+    "A Venetian Renaissance painter",
+    "A French garden",
+    "A dye plant",
+    "A fashion house"
+   ],
+   "answer": "A Venetian Renaissance painter",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our archive's earliest match for this color is credited to Paolo Veronese himself.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Its oldest match in our own archive isn't even attributed to the painter it's named for."
+ ],
+ "words": 309,
+ "status": "checked",
+ "checked": {
+  "by": "batch-9 writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance file; whether this preserves one of Veronese's actual pigments is left open, not asserted.",
+   "lint 2026-10-09"
+  ]
+ }
+}

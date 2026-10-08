@@ -1,0 +1,118 @@
+{
+ "slug": "amber-brown",
+ "name": "Amber Brown",
+ "hex": "#985B2C",
+ "names": [
+  "Amber Brown"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Amber Brown is a warm, reddish brown from Ridgway's 1912 chart, called Kitsune-iro, fox-color, in Japanese tradition.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A fox-colored brown",
+   "body": "Ridgway's 1912 plate III gives this brown the name Amber Brown, hue 13, tone k, and the ISCC-NBS system of 1955 files a close match in its block 54 [1]. Maerz and Paul's 1930 dictionary also carries it, first recorded in 1892 [1]. In Japan the same hue is called Kitsune-iro, written 狐色 and meaning fox-color, after the reddish coat of the Japanese fox [1].\n\nThe nearest named colors on file are [[orange-brown]], [[sudan-brown]], [[earth]] and [[army-brown]], at 3.6, 3.6, 4.5 and 4.8 ΔE [1]. Among named browns it sits beside [[amber]] and [[umber]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this brown in 1,371 of 23,781 paintings, 5.8 percent, among the more common matches we track, as photographed [2]. The earliest dated match is a funerary papyrus of Tayuhenutmut, dated to about 1069 BCE in our archive, nearly three thousand years before either the Ridgway or Maerz and Paul records, a floor and not a first, since the archive's early centuries are thin [2]. It peaks around 1420, at 3.8 times the archive's overall rate, and Otto van Veen carries it in seven of his 15 paintings here, far above his own museums' baseline [2]. Inside a painting it most often plays a mid-tone, in 53 percent of its appearances [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented beyond the English word amber",
+   "first_recorded": "Maerz & Paul 1930, first recorded 1892",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "Kitsune-iro"
+  ],
+  "siblings": [
+   "orange-brown",
+   "sudan-brown",
+   "earth",
+   "army-brown"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Kitsune-iro (狐色), fox-color"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1371,
+  "measured": {
+   "lch": [
+    45,
+    42,
+    61
+   ],
+   "nearest": [
+    [
+     "Orange Brown",
+     3.6
+    ]
+   ]
+  },
+  "role": {
+   "mid": 0.53
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912 plate III, ISCC-NBS 1955 block 54, Maerz & Paul 1930 (first recorded 1892), Japanese cross-reference Kitsune-iro",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Kitsune-iro, the Japanese name for this hue, mean?",
+   "choices": [
+    "Fox-color",
+    "Autumn-leaf",
+    "Tea-color",
+    "Earth-color"
+   ],
+   "answer": "Fox-color",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the earliest archive match to Amber Brown predates the 1892 Maerz & Paul record by about three thousand years.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Called fox-color in Japan, and found on a funerary papyrus three thousand years before its Western record."
+ ],
+ "words": 228,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

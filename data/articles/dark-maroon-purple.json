@@ -1,0 +1,138 @@
+{
+ "slug": "dark-maroon-purple",
+ "name": "Dark Maroon Purple",
+ "hex": "#64434D",
+ "names": [
+  "Dark Maroon Purple"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Dark Maroon Purple is a greyed, dark purplish red that ColorHub's library carries as an English rendering of Budōnezumi, a traditional Japanese name meaning \"grape mouse.\"",
+ "sections": [
+  {
+   "id": "japan",
+   "title": "A grape, greyed like a mouse",
+   "body": "Wikipedia's list of traditional Japanese colors gives this swatch as Budōnezumi (葡萄鼠), literally \"grape mouse\": budō names the dark reddish purple of a grape, and nezumi (\"mouse\") marks it as a muted, greyed version of that hue [1]. The same swatch independently turns up in Ridgway's 1912 standard, plate XXVI, hue 71′, tone m, an aged plate scan read as approximate [2]. Ridgway also carries a near-duplicate, Dark Livid Purple, only 2.3 units away on plate XXXVII [2].\n\nThe ISCC-NBS dictionary of 1955 places it in block 242, \"dark reddish purple,\" about 5.4 units from that block's centre [3]. Our library's nearest other named color is [[eggplant]], 3.1 units away, a close but distinct purple [3]. Measured in LCH it reads lightness 32, chroma 16, hue close to pure red (359°) [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 61 of 23,781 paintings, about a quarter of one percent, as photographed [4]. The earliest match is Ambrogio Lorenzetti's *St. John the Baptist*, from 1337, a floor and not a first, since the archive's early centuries are thin [4]. It is nearly always a shadow or a mid-tone (46 and 49 percent of its occurrences) and almost never a highlight, which fits a dark, desaturated hue [4]. It shares canvases more than chance with [[umber]] and [[taupe]] [4]. [[painter:john-singer-sargent|John Singer Sargent]]'s work carries it at four times the archive's overall rate, though only in three of his paintings [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the dark reddish purple of a grape, greyed (\"mouse\")",
+   "first_recorded": "undocumented in English; independently plated by Ridgway, 1912",
+   "source": "ColorHub library (Wikipedia, \"Traditional colors of Japan\"); Ridgway, 1912"
+  },
+  "aka": [
+   "Dark Livid Purple (Ridgway)"
+  ],
+  "siblings": [
+   "eggplant",
+   "umber",
+   "taupe",
+   "maroon"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Budōnezumi (葡萄鼠)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 61,
+  "pct": 0.26,
+  "measured": {
+   "lch": [
+    32,
+    16,
+    359
+   ],
+   "nearest_iscc": [
+    "dark grayish red",
+    5.4
+   ],
+   "nearest": [
+    "Eggplant",
+    3.1
+   ]
+  },
+  "jp": {
+   "romaji": "Budōnezumi",
+   "kanji": "葡萄鼠",
+   "meaning": "Grape mouse"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; Wikipedia, \"Traditional colors of Japan\"; jp field)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XXVI, hue 71′, tone m (and plate XXXVII, hue 63′′, tone m); scan of an aged plate, approximate",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (ISCC-NBS 1955 block 242), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the Japanese name Budōnezumi literally mean?",
+   "choices": [
+    "Grape mouse",
+    "Dark plum",
+    "Wine stain",
+    "Autumn grape"
+   ],
+   "answer": "Grape mouse",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: this color is usually a highlight in the paintings where our archive finds it.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dark Maroon Purple's Japanese name translates to \"grape mouse\": a grape-dark purple, greyed like a mouse's coat."
+ ],
+ "words": 256,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance hits (src empty); jp-English title cross-checked against Ridgway's independent 1912 plate.",
+   "lint 2026-10-09"
+  ]
+ }
+}

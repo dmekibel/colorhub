@@ -1,0 +1,126 @@
+{
+ "slug": "navy-green",
+ "name": "Navy Green",
+ "hex": "#35530A",
+ "names": [
+  "Navy Green"
+ ],
+ "tier": "place",
+ "depth": "brief",
+ "lede": "Navy Green is a dark, strong olive named after the institution rather than a place, and recorded by Maerz and Paul as early as about 1904, decades before the crowd survey that named this exact hex.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "An institution's word",
+   "body": "The library files Navy Green under the place-and-institution tier, built on *navy* the way the plain color [[navy|Navy]] is a manual override for the Royal Navy's dark blue officer's uniform, worn since 1748 [1]. Maerz and Paul's 1930 dictionary separately records a color word close to this one from about 1904, on plate 22, well before the xkcd 2010 survey that is our only source for the exact hex #35530A [1]. At that hex it measures lightness 32 and chroma 43 in LCH, a dark, strong olive [1].\n\nIts nearest named neighbors are [[army-green|Army Green]], 5.1 CIEDE2000 units off and lighter, and [[deep-green|Deep Green]], 7.3 units off and more vivid [2]. Werner's 1821 nomenclature lists the upper side of yew leaves for a color he called [[duck-green|Duck Green]], 8.3 units away, and the nearest gem comparison is a deep Colombian [[gem:emerald|emerald]], 8.4 units off [2][3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this dark olive in 37 of 23,781 paintings, about 0.16%, as photographed, rarer than 67% of the named colors here [4]. The earliest match is a 1400 painting, about 500 years before Maerz and Paul's circa-1904 record, which only shows an aged, varnished canvas can resemble this hue, not that anyone named it so early, a floor and not a first, since the archive's early centuries are thin [4]. It peaks in the 1800s, in 6 of 8,345 paintings, at 1.2 times the archive's overall rate, and inside a painting it most often plays a shadow, in 82% of its matches [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the Royal Navy, by way of the color word navy",
+   "first_recorded": "c. 1904 (Maerz & Paul, 1930, plate 22); this exact hex from the 2010 xkcd survey",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "navy",
+   "army-green",
+   "deep-green",
+   "duck-green"
+  ],
+  "parent": "navy",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+  "n_present": 37,
+  "pct": 0.16,
+  "measured": {
+   "lch": [
+    31.7,
+    42.5,
+    123.2
+   ],
+   "nearest": [
+    [
+     "Army Green",
+     5.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-n.json, data/library.json): xkcd 2010 survey; Maerz & Paul 1930, plate 22 L 12; ColorHub \"navy\" node (Royal Navy uniform, 1748)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph look-alikes and botanical twins (data/graph/edges-n.json): CIEDE2000; Werner's Nomenclature of Colours (1821)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph twins, gems cross-reference (data/graph/edges-n.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the name Navy Green refer back to?",
+   "choices": [
+    "The Royal Navy's dark-blue officer uniform word, navy",
+    "A place called Navy",
+    "A paint brand",
+    "A gemstone"
+   ],
+   "answer": "The Royal Navy's dark-blue officer uniform word, navy",
+   "kind": "pick"
+  },
+  {
+   "q": "Inside a painting, what role does Navy Green most often play?",
+   "choices": [
+    "Shadow",
+    "Highlight",
+    "Sky",
+    "Skin tone"
+   ],
+   "answer": "Shadow",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Navy Green borrows its name from the Royal Navy's dark-blue uniform word, even though the color itself is green."
+ ],
+ "words": 286,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance hits; written from ColorHub library/graph/archive data only.",
+   "lint 2026-10-09"
+  ]
+ }
+}

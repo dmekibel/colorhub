@@ -1,0 +1,139 @@
+{
+ "slug": "darkish-green",
+ "name": "Darkish Green",
+ "hex": "#287C37",
+ "names": [
+  "Darkish Green"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Darkish Green is a deep, leafy green from the 2010 xkcd color survey, hedged with the softening suffix *-ish* rather than the plainer modifier *dark*.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A hedge, not a plain modifier",
+   "body": "Most xkcd modifiers simply stack a word like *dark* onto a base color, but *darkish* adds the softer suffix *-ish*, a volunteer's way of saying the color leans dark without committing fully, distinct from how the survey separately names a plainer [[dark-forest-green]] [1][2]. The 1955 ISCC-NBS system's nearest block, strong green, sits a comparatively wide 7.8 units away[2]. The nearest named colors on file are [[imperial-jade]], [[emerald-green]] and [[tree-green]], at 3.2, 5 and 5.1 ΔE [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our 23,781-painting archive, a color within six units of Darkish Green covers at least one per cent of the canvas in 11 paintings, about 0.05 percent of the archive, as photographed, rarer than 72 percent of the named colors tracked [3]. Its earliest match, a painting dated 1800, is 210 years before the xkcd name was recorded in 2010, a reminder that a saturated mid-dark green is an old, ordinary mixture long before any modern survey labeled it, a floor and not a first, since the archive's early centuries are thin [3]. In printed English the phrase peaked in the 1800s and has not since matched that rate [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: darkish + green (a hedged \"-ish\" modifier)",
+   "first_recorded": "xkcd color survey, 2010",
+   "source": "ColorHub color library and Color Graph"
+  },
+  "aka": [],
+  "siblings": [
+   "imperial-jade",
+   "emerald-green",
+   "tree-green",
+   "fern-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 11,
+  "measured": {
+   "lch": [
+    45.8,
+    50.5,
+    143.3
+   ],
+   "munsell": "0.4G 4.5/8.2",
+   "iscc_nbs": {
+    "name": "strong green",
+    "de2000": 7.8
+   },
+   "nearest": [
+    [
+     "Imperial Jade",
+     3.2
+    ],
+    [
+     "Emerald Green",
+     5.0
+    ],
+    [
+     "Tree Green",
+     5.1
+    ],
+    [
+     "Fern Green",
+     5.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "xkcd color survey (2010), crowdsourced color-name list",
+   "loc_kind": null,
+   "url": "https://blog.xkcd.com/2010/05/03/color-survey-results/"
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library and Color Graph (data/library.json, data/graph): ISCC-NBS block, Munsell notation, LCH values",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive fieldnotes, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "web",
+   "cite": "Google Books Ngram, case-insensitive",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the \"-ish\" in \"Darkish Green\" signal, compared to a plain modifier like \"dark\"?",
+   "choices": [
+    "A hedge: the color leans dark without committing fully",
+    "A second, lighter green mixed in",
+    "A reference to a specific pigment",
+    "A translation from another language"
+   ],
+   "answer": "A hedge: the color leans dark without committing fully",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: printed use of the phrase \"darkish green\" peaked recently, in the 2010s.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "\"Darkish\" hedges on purpose: it is \"dark\" without fully committing."
+ ],
+ "words": 216,
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

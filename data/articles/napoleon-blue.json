@@ -1,0 +1,137 @@
+{
+ "slug": "napoleon-blue",
+ "name": "Napoleon Blue",
+ "hex": "#293471",
+ "names": [
+  "Napoleon Blue"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Napoleon Blue is a deep, violet-leaning blue that Maerz and Paul's 1930 dictionary dates to 1850, nearly thirty years after the emperor it is named for died.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name outliving its namesake",
+   "body": "Maerz and Paul place this value at plate 44, position C 11, first recorded in 1850 [1]. The dictionary's own records show the same plate position carrying another name, Bleu de Lyon, from 1928, almost eighty years later, which our library notes without saying which name came first in actual use [1]. The ISCC-NBS system of 1955 classifies it as a deep blue, about 5.4 units from that block's reference chip [2]. Napoleon Bonaparte died in 1821, so the color word postdates him by about three decades; whether it alludes to a uniform, a flag or simply the emperor's name as a byword for grandeur is not stated in the sources consulted [1].\n\nIts nearest library neighbor is [[navy|Navy]], and it sits near [[newport|Newport]], [[berlin-blue|Berlin Blue]] and [[cornflower|Cornflower]] on the same deep-blue stretch of the chart [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Napoleon Blue covers at least five per cent of the canvas in 32 works, as photographed [3]. It is strongly tied to two painters relative to their output, Vilhelm Lundstrøm and Henri Matisse, and it peaks in paintings from the 1900s decade, over four times expected [3]. It functions mostly as a shadow color and keeps company almost entirely with Navy [3]. These remain photographs of aged, varnished canvases read as screen colors, not pigment tests [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Napoleon Bonaparte",
+   "first_recorded": "Maerz & Paul, A Dictionary of Color (1930), plate 44 C 11, first recorded 1850",
+   "source": "ColorHub color library (Maerz & Paul 1930; ISCC-NBS 1955)"
+  },
+  "aka": [
+   "Bleu de Lyon"
+  ],
+  "siblings": [
+   "navy",
+   "newport",
+   "berlin-blue",
+   "cornflower"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#293471",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 32,
+  "painters": [
+   {
+    "key": "Vilhelm Lundstrøm",
+    "lift": 131.15
+   },
+   {
+    "key": "Henri Matisse",
+    "lift": 44.59
+   }
+  ],
+  "peak_decade": {
+   "key": 1900,
+   "lift": 4.59
+  },
+  "company": [
+   {
+    "word": "Navy",
+    "lift": 96.93
+   }
+  ],
+  "measured": {
+   "lch": [
+    24,
+    40,
+    294
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Maerz & Paul, A Dictionary of Color, plate 44 C 11, first recorded 1850 (alternate name Bleu de Lyon, plate 44 B 11, first recorded 1928)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: ISCC-NBS block, nearest-match field (data/graph/nodes-m.json; data/library.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "When did Maerz and Paul first record Napoleon Blue, relative to Napoleon's death in 1821?",
+   "choices": [
+    "About three decades later",
+    "The same year",
+    "A century later",
+    "Before he died"
+   ],
+   "answer": "About three decades later",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the same catalogue plate position that holds Napoleon Blue has carried another name, Bleu de Lyon.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Napoleon Blue is first recorded almost three decades after Napoleon himself died."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-08",
+  "issues": [
+   "Why the name attaches to Napoleon is not documented in the sources consulted; left as undocumented.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 246
+}

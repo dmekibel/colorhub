@@ -1,0 +1,115 @@
+{
+ "slug": "buff-yellow",
+ "name": "Buff-Yellow",
+ "hex": "#FBCD77",
+ "names": [
+  "Buff-Yellow"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Buff-Yellow is a light orange-yellow carried in Ridgway's standards since 1886.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "An 1886 record",
+   "body": "Our library's earliest citation for Buff-Yellow is Ridgway's 1886 Nomenclature of Colors, carried over into his fuller 1912 standards at plate IV, hue 19; the 1955 ISCC-NBS system classes a close match as a light yellow [1]. The nearest named colors on file are [[mustard-yellow]], [[ochre-yellow]], [[pale-orange-yellow]] and [[buff-orange]], at 3, 3.3, 3, 3.5 and 4.5 ΔE [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to Buff-Yellow in 341 of 23,781 paintings (1.43 percent), as photographed [2]. It peaks in the 1300s, in 5 of 251 paintings, at 1.5 times the archive's overall rate, and is over-represented in paintings from Japan (2.3 times expected) and the Mughal school especially (5.1 times) [2]. It most often plays an accent, and keeps company with Dusty Marigold and Pinchbeck Brown more than chance [2]. The earliest dated match, a 1326 work by Simone Martini, still comes 560 years before the 1886 record, which the archive's thin early coverage explains, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "buff, modified toward yellow",
+   "first_recorded": "Ridgway, 1886",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "mustard-yellow",
+   "ochre-yellow",
+   "pale-orange-yellow",
+   "buff-orange"
+  ],
+  "parent": "buff",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 341,
+  "role": {
+   "accent": 0.55
+  },
+  "company": [
+   "Dusty Marigold",
+   "Pinchbeck Brown"
+  ],
+  "measured": {
+   "lch": [
+    85,
+    49,
+    83
+   ],
+   "nearest": [
+    [
+     "Mustard Yellow",
+     3.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: name records, plate and block locators, tier classification",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which Ridgway publication first records Buff-Yellow, and when?",
+   "choices": [
+    "Nomenclature of Colors, 1886",
+    "Color Standards and Color Nomenclature, 1912",
+    "ISCC-NBS, 1955",
+    "Maerz and Paul, 1930"
+   ],
+   "answer": "Nomenclature of Colors, 1886",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: this batch contains three separate names built on the word buff.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Has three names built on buff: Buff-Yellow, Buffy Olive and Capucine Buff."
+ ],
+ "words": 187,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

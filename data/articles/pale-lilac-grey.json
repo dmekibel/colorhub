@@ -1,0 +1,113 @@
+{
+ "slug": "pale-lilac-grey",
+ "name": "Pale lilac grey",
+ "hex": "#BFBAC0",
+ "names": [
+  "Pale lilac grey"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Pale lilac grey is a near-neutral grey with a whisper of violet, recorded by Werner in 1821 and named with plain, descriptive words.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Barely a color at all",
+   "body": "Werner's 1821 nomenclature ties the near-duplicate of this swatch, a color it calls Red Lilac Purple, to a plant example: red lilac, which the book also calls pale purple primrose [1]. The nearest named colors on file are [[lavender-grey]], [[pale-violet-plumbeous]], [[silver]] and [[light-heliotrope-grey]], at 4.1, 4.3, \nIn ISCC-NBS terms it reads as a light purplish gray, and in Munsell notation N 7.5, a near-neutral with barely any hue at all; our library's own measurement puts it at CIEDE2000 1.0 from that ISCC-NBS block, among the closest matches in the whole library [1]. Close lookalikes include [[lavender-grey]], [[silver]] and [[light-heliotrope-grey]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this pale grey in 212 of 23,781 paintings, 0.89 percent, more common than 64 percent of our named colors, as photographed [2]. It most often reads as a light tone, in 68 percent of its appearances, rarely as a shadow [2]. Claude Monet favors it most, in 5 of his 50 catalogued works, nearly eight times the baseline for the museums those works come from [2]. The earliest dated example, from 1230, predates Werner's 1821 record of the name by almost six centuries, so the match is a look-alike hue in aged paint, not proof of any pigment, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "plain description: pale + lilac-grey",
+   "first_recorded": "Werner, 1821",
+   "source": "ColorHub color library (Werner 1821)"
+  },
+  "aka": [],
+  "siblings": [
+   "lavender-grey",
+   "pale-violet-plumbeous",
+   "silver",
+   "light-heliotrope-grey"
+  ],
+  "parent": "lilac-grey",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 212,
+  "rate": 0.0089,
+  "measured": {
+   "lch": [
+    76.1,
+    3.7,
+    319.9
+   ],
+   "nearest": [
+    [
+     "Lavender Grey",
+     4.1
+    ]
+   ]
+  },
+  "first_seen": {
+   "year": 1230,
+   "painting": "cma-159234"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Werner 1821 (Red Lilac Purple, near-duplicate, red lilac / pale purple primrose example); ISCC-NBS 1955, block 232",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Werner's 1821 book tie the near-duplicate of this grey to?",
+   "choices": [
+    "A mineral vein",
+    "A plant: red lilac",
+    "A dye from insects",
+    "A bird's feather"
+   ],
+   "answer": "A plant: red lilac",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: this color has almost no hue at all in Munsell notation.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pale lilac grey comes within one unit of its nearest ISCC-NBS block, one of the closest matches in our whole library."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 245
+}

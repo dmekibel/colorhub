@@ -1,0 +1,124 @@
+{
+ "slug": "rebecca-purple",
+ "name": "Rebecca Purple",
+ "hex": "#663399",
+ "names": [
+  "Rebecca Purple"
+ ],
+ "tier": "person",
+ "depth": "short",
+ "lede": "Rebecca Purple is a muted violet added to the CSS color standard in 2014 in memory of Rebecca Alison Meyer, the young daughter of web developer Eric Meyer, who died that year.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A memorial color",
+   "body": "Eric Meyer's daughter Rebecca, known to friends as Bekka, died in 2014 at the age of six from a brain tumor [1]. At the suggestion of fellow developer Shane Becker, the CSS Working Group added a new named color to the CSS Color Module Level 4 specification in her memory, using the hex value #663399, a shade she liked [1]. That makes Rebecca Purple one of the few CSS keyword colors tied to a named individual rather than to a historical pigment or a generic description [1]. Our library lists both the CSS and Wikipedia sources for the entry, and measures it as a strong violet, 4.2 units from its nearest ISCC-NBS block, close to 1.8P 3.3/13.5 in Munsell notation [2].\n\nIts closest listed library neighbor is plain [[purple]], 5.1 units away, and the color sits between [[byzantium]] and [[royal-purple]] on the wheel, all occupying the same muted violet range rather than the brighter [[amethyst]] or [[orchid]] family [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive carries a close match to Rebecca Purple covering at least one percent of its canvas, as photographed [3]. That is unsurprising for a color that only entered any naming system in 2014, long after every painting in the archive was made [3]. A more vivid relative of this same hue, filed in our graph as [[vivid-violet|Vivid rebecca purple]], exists as a separate named variant, one way the color has already begun generating its own family [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Rebecca Alison Meyer, daughter of web developer Eric Meyer",
+   "first_recorded": "2014, CSS Color Module Level 4",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "purple",
+   "byzantium",
+   "royal-purple"
+  ],
+  "parent": null,
+  "children": [
+   "vivid-violet"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    32.9,
+    63.7,
+    312.3
+   ],
+   "munsell": "1.8P 3.3/13.5",
+   "iscc_nbs": {
+    "name": "strong violet",
+    "de": 4.2
+   }
+  },
+  "standard": "CSS Color Module Level 4, added 2014"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "Wikipedia, \"Rebecca Purple\"",
+   "loc_kind": "entry",
+   "url": "https://en.wikipedia.org/wiki/Rebecca_Purple"
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: computed LCH, Munsell and ISCC-NBS nearest-block distance",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color graph: compound-name relation to Vivid violet",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why was Rebecca Purple added to the CSS color standard?",
+   "choices": [
+    "In memory of a developer's daughter who died in 2014",
+    "To mark a historical dye",
+    "As a joke color",
+    "To match a browser logo"
+   ],
+   "answer": "In memory of a developer's daughter who died in 2014",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Rebecca Purple is named after a historical pigment.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "This is one of the only web colors named for a real, specific person rather than a place or a pigment."
+ ],
+ "words": 273,
+ "status": "checked",
+ "checked": {
+  "by": "batch-9 writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance file; the memorial naming story is drawn from Wikipedia, which itself documents the CSS Working Group record.",
+   "lint 2026-10-09"
+  ]
+ }
+}

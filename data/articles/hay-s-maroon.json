@@ -1,0 +1,116 @@
+{
+ "slug": "hay-s-maroon",
+ "name": "Hay's Maroon",
+ "hex": "#654543",
+ "names": [
+  "Hay's Maroon"
+ ],
+ "tier": "person",
+ "depth": "short",
+ "lede": "Hay's Maroon is a dark, greyed reddish brown from Robert Ridgway's 1912 color dictionary, one of six colors he names for a person called only Hay.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "One of six colors named Hay's",
+   "body": "Ridgway's 1912 “Color Standards and Color Nomenclature” lists Hay's Maroon at hex #654543 among the names he credits to a person [1]. It shares its possessive with five other colors in the same book, among them [[hay-s-brown|Hay's Brown]], [[hay-s-green|Hay's Green]] and [[hay-s-russet|Hay's Russet]], but Ridgway never names the Hay he means, so the connection is undocumented in our sources [1]. The 1955 Inter-Society Color Council catalog repeats the name in the block it calls grayish reddish brown [1].\n\nIts nearest neighbor in our color graph is [[liver|Liver]], only 3.2 units away and redder [1]. [[dark-perilla-purple|Dark Perilla Purple]] sits almost as close [1]. Against the basic color words it reads closest to [[umber|Umber]], 8.4 units off [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive matches this color in 1.42% of 23,781 paintings, 338 of them, as photographed; the within-painting lens finds it in 214 [2]. That makes it more common than 72% of the named colors in our set [2]. It peaks in the 1900s, present in 2.6% of the 1,674 paintings from that century, 2.4 times the rate its museums would predict [2]. Inside a painting it most often sits hidden, in 61% of its 214 appearances [2]. John Singer Sargent holds it in 6 of his 287 works here, though at that rate no painter stands out sharply against the museum baseline [2]. Our earliest match dates to 1270, by the Master of the Franciscan Crucifixes, 642 years before Ridgway's 1912 book recorded the name, a floor rather than a first, since a color match in an aged photograph is not proof of a pigment [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955"
+  },
+  "aka": [],
+  "siblings": [
+   "hay-s-brown",
+   "hay-s-russet",
+   "liver"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 338,
+  "measured": {
+   "lch": [
+    32.8,
+    15.1,
+    26.5
+   ],
+   "nearest": [
+    [
+     "Liver",
+     3.2
+    ],
+    [
+     "Umber",
+     8.4
+    ]
+   ]
+  },
+  "iscc_nbs": {
+   "name": "grayish reddish brown",
+   "de": 2.4
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912 (plate XIII), ISCC-NBS 1955 (block 20)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which named color is closest to Hay's Maroon in our color graph?",
+   "choices": [
+    "Liver",
+    "Umber",
+    "Davy's Grey",
+    "Sienna"
+   ],
+   "answer": "Liver",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: inside a painting, Hay's Maroon most often plays a bright, obvious accent.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A match to Hay's Maroon turns up in our archive 642 years before Ridgway wrote the name down."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits; origin of \"Hay\" is undocumented in our sources.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 283
+}

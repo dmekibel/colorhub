@@ -1,0 +1,116 @@
+{
+ "slug": "vienna-smoke",
+ "name": "Vienna Smoke",
+ "hex": "#4F4E4C",
+ "names": [
+  "Vienna Smoke"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Vienna Smoke is a near-neutral charcoal grey, first recorded by Maerz and Paul in 1930 and named, like several of their plates, for a city rather than a pigment.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A city name on a grey",
+   "body": "Maerz and Paul's 1930 dictionary of color first records this grey, plate 16 A 2, though the underlying plate traces back to 1902 [1]. The dictionary pairs it in the same small family as Phantom (1923) and Asphalt (1922), two other smoke-toned greys from the same plate block [1]. Nothing in our sources explains why Vienna specifically [1]; the name sits in the dictionary's run of place-and-mood names rather than a documented reference to the city's own smoke or stone.\n\nIts nearest look-alike is [[davy-s-grey]], at a CIEDE2000 distance of only 2.7, with [[castor-grey]] and [[greyish-black]] close behind [2]. In LCH terms it measures lightness 33, chroma 1 and hue 91 degrees, essentially a neutral with only a faint warm cast [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this grey in 808 of 23,781 paintings (3.4%, as photographed), more common than 83% of the named colors we track [3]. It most often plays a mid-tone, in 48% of its 501 strongest matches [3]. Jacob Isaacksz van Ruisdael is its most devoted painter, at 5.3 times the baseline rate across his 18 works here [3]. The earliest dated match runs to 1225, seven centuries before the name's own 1930 record; the match is a look-alike hue in an aged photograph, not proof the pigment existed then, a floor and not a first, since the archive's early centuries are thin [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented beyond the city name",
+   "first_recorded": "1930 (Maerz & Paul, plate 16 A 2)",
+   "source": "Maerz & Paul, A Dictionary of Color"
+  },
+  "aka": [],
+  "siblings": [
+   "davy-s-grey",
+   "castor-grey",
+   "greyish-black",
+   "umbra-grey"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 808,
+  "measured": {
+   "lch": [
+    33,
+    1,
+    91
+   ],
+   "nearest": [
+    [
+     "Davy's Grey",
+     2.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Maerz & Paul 1930, plate 16 A 2, first recorded 1902",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library and Color Graph look-alikes (data/graph/), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "True or false: Maerz and Paul explain why this grey is named for Vienna.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which named grey is closest to Vienna Smoke in our library?",
+   "choices": [
+    "Davy's Grey",
+    "Vermilion",
+    "Mauve",
+    "Chartreuse"
+   ],
+   "answer": "Davy's Grey",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Vienna Smoke is a near-neutral grey whose city name is never explained in the dictionary that records it."
+ ],
+ "words": 254,
+ "status": "checked",
+ "checked": {
+  "by": "batch-16",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); written from the color graph, library and archive only.",
+   "lint 2026-10-09"
+  ]
+ }
+}

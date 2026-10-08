@@ -1,0 +1,131 @@
+{
+ "slug": "rose-hermosa",
+ "name": "Rose Hermosa",
+ "hex": "#FEB0AC",
+ "names": [
+  "Rose Hermosa"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Rose Hermosa is a strong, warm pink first recorded by Maerz and Paul in 1930, and in our archive it turns up in only two paintings, both French portraits.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A strong pink, rarely used",
+   "body": "Maerz and Paul's 1930 dictionary dates Rose Hermosa to 1905, printed on their plate 1 F 8, and the Inter-Society Color Council's 1955 census files it as a strong pink, Munsell 4.3R 7.9/6.8 [1]. ColorHub's own color-distance data puts its closest learnable neighbor at [[melon]], about 4.2 units away, with [[baby-pink]] a little further at 6.6 [1].\n\nTwo other library pinks sit nearly as close: [[light-pink]] and [[pastel-pink]], each within six units [1]. The word *hermosa* is Spanish for beautiful, paired here with the flower word *rose*, though none of the sources in our library say who made that pairing or when [1]. It ranks 1,742nd of roughly 2,000 names in ColorHub's library by use[1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this pink in just 2 of 23,781 paintings, as photographed [2]. Both are French portraits painted a half-century apart: Louis Gustave Ricard's *Portrait de l'artiste* of 1853 and André Derain's *Woman in a Chemise* of 1906, and in each the color reads as a highlight, never a shadow [2]. At under a quarter of either canvas, it is an accent, not a field [2]. The counts are a computed color match on varnished, photographed canvases, never a pigment identification [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; *rose* (the flower) plus Spanish *hermosa*, beautiful",
+   "first_recorded": "1905, per Maerz & Paul (1930)",
+   "source": "Maerz & Paul via ColorHub library (1930)"
+  },
+  "aka": [],
+  "siblings": [
+   "melon",
+   "light-pink",
+   "pastel-pink",
+   "baby-pink"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2,
+  "measured": {
+   "lch": [
+    79,
+    31,
+    26
+   ],
+   "nearest": [
+    [
+     "Melon",
+     4.2
+    ],
+    [
+     "Light Pink",
+     5.8
+    ],
+    [
+     "Pastel Pink",
+     6.0
+    ],
+    [
+     "Baby pink",
+     6.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz & Paul 1930, ISCC-NBS 1955 entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which year does Maerz and Paul give as the first record of Rose Hermosa's plate?",
+   "choices": [
+    "1905",
+    "1930",
+    "1873",
+    "1955"
+   ],
+   "answer": "1905",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Rose Hermosa's closest library neighbor is Baby Pink.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "In our archive, Rose Hermosa appears in about what share of paintings?",
+   "choices": [
+    "Less than 1 in 1,000",
+    "About 1 in 20",
+    "About half",
+    "Nearly all"
+   ],
+   "answer": "Less than 1 in 1,000",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Rose Hermosa turns up in only two of our 23,781 paintings, and both are French portraits a half-century apart."
+ ],
+ "words": 231,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

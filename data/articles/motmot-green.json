@@ -1,0 +1,127 @@
+{
+ "slug": "motmot-green",
+ "name": "Motmot Green",
+ "hex": "#669D7A",
+ "names": [
+  "Motmot Green"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Motmot Green is a muted yellowish green named for the motmot, a Central and South American bird with iridescent green-backed plumage, charted by Ridgway in 1912 and confirmed by the ISCC-NBS system in 1955.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A bird's back, charted twice",
+   "body": "Ridgway's 1912 color nomenclature lists this tone on plate XVIII, hue 35 prime [1]. The ISCC-NBS system of 1955 revisited it in block 136, \"moderate yellowish green\", and Maerz and Paul's 1930 dictionary dates it to the same year, 1912, plate 27 B 10 [1]. No book held in color-kb discusses \"Motmot Green\" itself [4].\n\nIts nearest distinct named neighbor is [[deep-malachite-green]], 2.6 units off, \"almost the same\" by our graph [3]. It sits between the brighter [[corsage-green]] and the duller [[grey-green]], both within 5 units [3]. A fourth, lighter cousin in the library is [[verdigris-green]], 4.9 units off and described as \"lighter and more vivid\" [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Motmot Green is rare in our archive: 38 of 23,781 paintings, about 0.16 percent, as photographed, concentrated almost entirely in the twentieth century [2]. Gustav Klimt's works carry it at 37.6 times the archive's base rate and Auguste Renoir's at 19.6 times, both well above the usual run of painters [2]. Counts are computed matches on varnished, photographed paintings, not pigment identifications [2]. The bird itself, native to Central and South American forests, is named in English after its soft, repeated call [1]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the motmot, a green-backed bird of Central and South America",
+   "first_recorded": "1912, Ridgway",
+   "source": "Ridgway 1912; ISCC-NBS 1955; Maerz & Paul 1930"
+  },
+  "aka": [
+   "Deep Malachite Green"
+  ],
+  "siblings": [
+   "deep-malachite-green",
+   "corsage-green",
+   "grey-green",
+   "verdigris-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 38,
+  "measured": {
+   "lch": [
+    60.2,
+    28.9,
+    154.0
+   ],
+   "nearest": [
+    [
+     "Deep Malachite Green",
+     2.6
+    ]
+   ]
+  }
+ },
+ "questions": [
+  {
+   "q": "Motmot Green is named for:",
+   "choices": [
+    "A bird with iridescent green-backed plumage",
+    "A tree",
+    "A gemstone",
+    "A French dye house"
+   ],
+   "answer": "A bird with iridescent green-backed plumage",
+   "kind": "pick"
+  },
+  {
+   "q": "Which painter's works carry Motmot Green at the highest rate above the archive average?",
+   "choices": [
+    "Gustav Klimt",
+    "John Singer Sargent",
+    "Vincent van Gogh",
+    "Claude Monet"
+   ],
+   "answer": "Gustav Klimt",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Motmot Green is named for a bird, and in our archive it is most overrepresented in Gustav Klimt's work."
+ ],
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes, data/library.json): ISCC-NBS 1955, Maerz & Paul 1930, Ridgway 1912, RAL, Munsell and CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match (ΔE2000 ≤ 6, ≥ 5% of canvas), as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph: nearest named neighbors and cross-domain twin matches (gems, films, fashion decades, Werner 1821 cross-reference), computed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "Concordance of the 29 color books held in color-kb for this name: no hits",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No book concordance hits for this name; sourced from ColorHub's own color library and archive data.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 225
+}

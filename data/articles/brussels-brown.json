@@ -1,0 +1,139 @@
+{
+ "slug": "brussels-brown",
+ "name": "Brussels Brown",
+ "hex": "#805B36",
+ "names": [
+  "Brussels Brown"
+ ],
+ "tier": "place",
+ "depth": "short",
+ "lede": "Brussels Brown is an ordinary mid-brown, first plated by Ridgway in 1912, that turns up in more than one of every five paintings in our entire archive, more of them than almost any other named color we track.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A city's name on a common brown",
+   "body": "Ridgway's 1912 atlas plates this brown at plate III, hue 15, tone m, a scan of an aged plate treated here as approximate [1]. The 1955 ISCC-NBS circular later classed it as moderate brown, 4.6 units from its block center, citing Maerz and Paul's 1930 dictionary for the same entry [1]. The Munsell notation is 8.3YR 4.1/4.6 [1]. Our sources do not explain why Brussels gave its name to this particular brown [1].\n\nOur library cross-references a Japanese traditional name at nearly this hue, Higosusutake (肥後煤竹), meaning \"Japanese iris and sooty bamboo,\" a very different image for a very similar color [1]. The closest named color on screen is [[bismarck-brown]], 2.9 units away and read as almost the same — itself a 19th-century aniline dye name, part of the first wave of synthetic dye colors that followed mauve [3]. [[brown]] and [[prout-s-brown]] both sit at 3.4, the latter read as duller [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this brown in 21.62 percent of 23,781 paintings, 5,141 of them, and the within-painting lens isolates it as a dominant area in 2,754, as photographed; that makes it more common than 98 percent of the named colors we track, one of the most widespread matches in the whole archive [2]. It peaks in the 1300s, in 75 of 251 paintings, present in 29.9 percent of the 251 paintings (75 of them) dated to that century, 2.7 times the baseline those museums would predict [2].\n\nInside a painting it most often plays a light, 32 percent of its 2,754 appearances by lightness rank, a counterintuitive role for a brown, which suggests it is doing double duty as varnish-toned highlight as much as shadow [2]. Maarten van Heemskerck is its most devoted painter here, carrying it in 8 of his 12 works, 3.5 times the baseline rate of the museums those paintings come from; Hubert Robert uses it in 38 percent of his 45 works, a lift of 3.2 [2]. The earliest match in our archive is a painting dated to 1000, 912 years before Ridgway's 1912 record of the name; with 3,748 dated matches in total, that gap is well established across the archive's whole span, not a fluke of one painting, a floor and not a first, since the archive's early centuries are thin [2]. It keeps company with Cork and Nut Brown on canvas more than chance predicts, lift of 3.0 and 2.1 [3]. In printed English the word rose fastest and peaked together in the 1920s [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented beyond the place word \"Brussels\"",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "Ridgway, Color Standards and Color Nomenclature"
+  },
+  "aka": [],
+  "siblings": [
+   "bismarck-brown",
+   "brown",
+   "prout-s-brown",
+   "cork"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Higosusutake (肥後煤竹)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 5141,
+  "n_within": 2754,
+  "measured": {
+   "lch": [
+    41.7,
+    29.2,
+    68.4
+   ],
+   "nearest": [
+    [
+     "Bismarck Brown",
+     2.9
+    ],
+    [
+     "Brown",
+     3.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway (1912) plate III, hue 15; ISCC-NBS and Maerz and Paul cross-reference; Japanese traditional-color link (Higosusutake)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed; Google Ngram word-frequency cache",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub graph: nearest named colors (look-alike) and co-occurring colors (companion data)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "About how many of our 23,781 archive paintings carry Brussels Brown?",
+   "choices": [
+    "More than one in five",
+    "About one in a hundred",
+    "Fewer than ten total",
+    "Exactly half"
+   ],
+   "answer": "More than one in five",
+   "kind": "pick"
+  },
+  {
+   "q": "Which 19th-century aniline dye name is Brussels Brown's nearest look-alike?",
+   "choices": [
+    "Bismarck Brown",
+    "Mauve",
+    "Prussian Blue",
+    "Indigo"
+   ],
+   "answer": "Bismarck Brown",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Brussels Brown most often appears as the darkest tone in a painting.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Brussels Brown is found in more than one of every five paintings in our 23,781-painting archive.",
+  "Its nearest named look-alike, Bismarck Brown, is a 19th-century aniline dye color — a coincidence of hue, not of history."
+ ],
+ "words": 459,
+ "status": "checked",
+ "checked": {
+  "by": "claude",
+  "date": "2026-10-08",
+  "issues": [
+   "No source explains why Brussels names this particular brown.",
+   "The very high archive presence reflects this being a broad, common mid-brown match, not a rare pigment.",
+   "lint 2026-10-09"
+  ]
+ }
+}

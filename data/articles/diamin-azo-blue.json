@@ -1,0 +1,111 @@
+{
+ "name": "Diamin-Azo Blue",
+ "hex": "#484D62",
+ "names": [
+  "Diamin-Azo Blue"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Diamin-Azo Blue is a dark, greyed purple-blue from Ridgway's 1912 color atlas, a shade close enough to the library's Independence that the two are only a few points apart.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dark plate blue",
+   "body": "Ridgway's 1912 atlas places this swatch at plate XXXV, hue 51″, tone m, and the ISCC-NBS system of 1955 files it in block 215 as a grayish violet [1]. In Munsell notation it is 6.7PB 3.3/2.7, a dark, low-chroma blue-violet [1]. Beyond the word diamin, short for diamine, a family of azo dyes used on cotton, what the name itself points to is undocumented in the sources checked here [1].\n\nThe nearest color in ColorHub's library is [[independence]], a few points off in grey and hue [1]. Ridgway's plates also carry a near-duplicate he called Dark Anthracene Violet, about two and a half units away, close enough to call the same color under a different name [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this dark blue-violet in 192 of 23,781 paintings, under one per cent [2]. Its single biggest spike is the 1900s, at roughly four times the paintings' overall baseline rate [2]. The earliest match is a 1350 Madonna and Child, centuries before any dye chemistry that could explain the name, so that is a lookalike hue, not a pigment, a floor and not a first, since the archive's early centuries are thin [2]. These are photographs of aged, varnished paintings, and a color match is never proof that a particular dye was used [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented beyond the dye word diamin",
+   "first_recorded": "1912 (Ridgway, as a color standard)",
+   "source": "ColorHub library (data/library.json)"
+  },
+  "aka": [],
+  "siblings": [
+   "independence",
+   "charcoal",
+   "navy"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed",
+  "match": {
+   "hex": "#484D62",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 192,
+  "nearest": [
+   [
+    "Independence",
+    null
+   ],
+   [
+    "Dark Anthracene Violet",
+    2.4
+   ]
+  ],
+  "peak_century": 1900
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json) and name graph (data/graph/nodes): Ridgway (1912), ISCC-NBS (1955) and Maerz & Paul (1930) entries; Ridgway 1912 pl. XXXV hue 51″ tone m, ISCC-NBS 1955 block 215",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which ISCC-NBS 1955 category does Diamin-Azo Blue fall into?",
+   "choices": [
+    "Grayish purplish blue",
+    "Vivid blue",
+    "Pale blue",
+    "Strong violet"
+   ],
+   "answer": "Grayish purplish blue",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Ridgway's 1912 atlas explains where the word \"diamin\" in Diamin-Azo Blue comes from.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Diamin-Azo Blue sits only a few points of grey away from Independence."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No book source found; article relies on library/graph data only.",
+   "lint 2026-10-09"
+  ]
+ },
+ "slug": "diamin-azo-blue",
+ "words": 238
+}

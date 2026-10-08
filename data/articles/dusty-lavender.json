@@ -1,0 +1,131 @@
+{
+ "slug": "dusty-lavender",
+ "name": "Dusty Lavender",
+ "hex": "#AC86A8",
+ "names": [
+  "Dusty Lavender"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dusty Lavender is a pale, greyed purple close to the real flower [[lavender]], listed in the ISCC-NBS 1955 dictionary as well as the 2010 xkcd survey.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Closer to the real flower",
+   "body": "The ISCC-NBS 1955 dictionary places this color in its block 214, among colors it calls \"pale violet\", 4.0 units away in our conversion, one of the closer matches in our library [1]. The 2010 xkcd crowd survey records the same word separately [2]. In Munsell terms it reads about 8.5P 6.0/5.8, a light, moderately desaturated purple [1].\n\nThe nearest named colors on file are [[heather]], [[opera-mauve]] and [[phlox-pink]], at 2.9, 3.1 and 4.2 ΔE [1]. Its nearest cousins in our data are [[mauve]], a touch pinker, and [[dusty-purple]], darker and greyer still [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in only 3 of 23,781 paintings, one of the rarer matches among our color names, as photographed [3]. All three are Post-Impressionist or early-modern works, including Henri-Edmond Cross's 1896 *[[painting:cma-84371|The Pink Cloud]]* and Paul Sérusier's 1894 *[[painting:commons-Q17493118|Le Pardon de Notre-Dame-des-Portes à Châteauneuf-du-Faou]]* [3]. In every match it plays a mid-tone, never a shadow or a highlight [3]. Too few paintings share it to name a leading country or decade with confidence beyond noting that all three sit in France [3]. These counts are a computed color match on photographs of aged, varnished paintings, not a pigment test [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the flower lavender, lightly greyed",
+   "first_recorded": "ISCC-NBS, 1955; xkcd survey, 2010",
+   "source": "ColorHub library and graph nodes"
+  },
+  "aka": [],
+  "siblings": [
+   "heather",
+   "opera-mauve",
+   "phlox-pink",
+   "vestal"
+  ],
+  "parent": "lavender",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 3,
+  "role": {
+   "mid": 1.0
+  },
+  "measured": {
+   "mu": "8.5P 6.0/5.8",
+   "nearest_iscc": [
+    "light reddish purple",
+    4.0
+   ],
+   "nearest": [
+    [
+     "Heather",
+     2.9
+    ],
+    [
+     "Opera Mauve",
+     3.1
+    ],
+    [
+     "Phlox Pink",
+     4.2
+    ],
+    [
+     "Vestal",
+     5.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub graph nodes: Munsell conversion, ISCC-NBS 1955 block 214",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (xkcd 2010 source)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which dictionary carries Dusty Lavender under the name \"light reddish purple\"?",
+   "choices": [
+    "ISCC-NBS, 1955",
+    "Werner, 1821",
+    "Maerz and Paul, 1930",
+    "Ridgway, 1912"
+   ],
+   "answer": "ISCC-NBS, 1955",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dusty Lavender is closer to a real lavender flower's color than Deep Lavender is.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Every one of the three paintings where our archive finds Dusty Lavender uses it as a mid-tone, never a shadow or a highlight."
+ ],
+ "words": 224,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); very low archive count, no painter or decade claimed.",
+   "lint 2026-10-09"
+  ]
+ }
+}

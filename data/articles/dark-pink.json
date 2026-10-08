@@ -1,0 +1,118 @@
+{
+ "slug": "dark-pink",
+ "name": "Dark Pink",
+ "hex": "#CB416B",
+ "names": [
+  "Dark Pink"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dark Pink darkens [[pink]] toward magenta, and despite the plainness of its name it is one of the rarest colors in our entire painting archive, matched in just two of 23,781 paintings.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A darkened pink",
+   "body": "Dark Pink applies our modifier grammar's dark to [[pink]], whose own name comes from the flower, not the other way round: *pinks* were a garden flower (Dianthus) centuries before pink named a color in English [1]. The parent entry here was crowdsourced in the 2010 xkcd color survey, where thousands of people were simply shown a swatch and asked to type a name for it [1].\n\nIts closest measured match is [[ruber]], only 2.6 units away and nearly the same color; [[telemagenta]] and [[cerise]] are both a touch more vivid, and [[razzmatazz]] sits a little further off at 4.1 units, also more vivid [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is one of the rarest matches in our archive: it covers at least five per cent of the canvas in only 2 of 23,781 paintings, about 0.01 per cent, as photographed [3]. Both matches date to the 1900s, roughly fourteen times that century's rate for the rest of the archive combined [3]. One of the two, an untitled Indian figure study, carries it over nearly 30 per cent of the canvas, far more than most matches of any color manage [3]. As photographed: these are computed color matches on museum photographs of aged, varnished paintings, not a pigment test [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the parent color pink, darkened by ColorHub's modifier grammar",
+   "first_recorded": "2010 (xkcd color survey, for the parent pink)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "ruber",
+   "telemagenta",
+   "cerise"
+  ],
+  "parent": "pink",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#CB416B",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 2,
+  "rate": 0.0001,
+  "measured": {
+   "lch": [
+    48.9,
+    57.8,
+    6.9
+   ],
+   "nearest": [
+    [
+     "Ruber",
+     2.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): modifier-grammar entry over the parent color Pink (xkcd 2010 survey)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub Color Graph look-alikes (data/graph/edges-d.json), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "The flower that gave pink its name is which plant?",
+   "choices": [
+    "Dianthus (garden pinks)",
+    "Peony",
+    "Carnation only in French",
+    "Rose"
+   ],
+   "answer": "Dianthus (garden pinks)",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dark Pink is one of the most common colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "One of the rarest matches in the whole archive: just two paintings out of 23,781."
+ ],
+ "words": 235,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}

@@ -1,0 +1,155 @@
+{
+ "name": "Light Hyssop Violet",
+ "hex": "#9E91B6",
+ "names": [
+  "Light Hyssop Violet"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Light Hyssop Violet is a pale, greyed violet named for the herb hyssop, recorded by Ridgway in 1912 and filed by the ISCC-NBS system in 1955 among ten different names for the same pale-violet block.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "One block, ten names",
+   "body": "Our data traces the name to hyssop, the aromatic herb, rather than a pigment or a place [1]. Ridgway's 1912 atlas plots it on plate XXXVI at hue 59″, and the ISCC-NBS system of 1955 files the same area as block 210, \"light violet\" [1]. In LCH terms it reads as lightness 62, chroma 21, hue 305 degrees: pale, low in saturation, and blue of true violet [1].\n\nThat ISCC-NBS block is unusually crowded: our library also lists Aniline Lilac, Chalk Violet, Daybreak, Good Omen, Light Chicory Blue, Light Lavender-Violet, Light Wistaria Violet, Minuet, Pale Wistaria Violet and Quality as other sources' names for the same small patch of color space [2]. The nearest named colors on file are [[light-dull-bluish-violet]], [[dark-greyish-lavender]] and [[dark-lavender]], at 4.6, 5.3 and 5.6 ΔE [2]. The closest everyday name is [[lilac]], about 9.8 units away [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a close match covers enough of the canvas in 17, as photographed (11 by the stricter within-painting measure), which makes it rarer than 67 percent of the named colors we track [5]. It peaks in paintings from the 1800s, at 1.7 times the rate expected from that century's share of the archive (8 of 8,345 paintings) [5]. Inside a painting it most often plays a hidden color, in 55 percent of its matches, by lightness rank within the canvas; varnish cannot fake that ranking [5]. The earliest match is a painting from 1854, by the painter Skovgaard, 58 years before the name's first record in 1912; that only shows the hue existed before anyone wrote it down, not that any pigment did, a floor and not a first, since the archive's early centuries are thin [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "hyssop, the aromatic herb",
+   "first_recorded": "Ridgway, 1912",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "Aniline Lilac",
+   "Chalk Violet",
+   "Daybreak",
+   "Good Omen",
+   "Light Chicory Blue",
+   "Light Lavender-Violet",
+   "Light Wistaria Violet",
+   "Minuet",
+   "Pale Wistaria Violet",
+   "Quality"
+  ],
+  "siblings": [
+   "light-dull-bluish-violet",
+   "dark-greyish-lavender",
+   "dark-lavender",
+   "hay-s-lilac"
+  ],
+  "parent": "violet",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 17,
+  "measured": {
+   "lch": [
+    62,
+    21,
+    305
+   ],
+   "nearest": [
+    [
+     "Light Dull Bluish Violet",
+     4.6
+    ],
+    [
+     "Dark Greyish Lavender",
+     5.3
+    ],
+    [
+     "Dark Lavender",
+     5.6
+    ],
+    [
+     "Hay's Lilac",
+     5.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/nodes-l.json): Light Hyssop Violet — Ridgway 1912, plate XXXVI, hue 59″; ISCC-NBS 1955, block 210",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub core names (data/core-names.json): Light Hyssop Violet \"also\" list, ISCC-NBS 1955 block 210",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-l.json): nearest distinct neighbors by CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Light Hyssop Violet entry",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings, as photographed, data/graph/fieldnotes/l.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Light Hyssop Violet is named for which plant?",
+   "choices": [
+    "Hyssop",
+    "Lilac",
+    "Hydrangea",
+    "Lavender"
+   ],
+   "answer": "Hyssop",
+   "kind": "pick"
+  },
+  {
+   "q": "Inside a painting, which role does Light Hyssop Violet most often play?",
+   "choices": [
+    "A hidden color",
+    "The brightest highlight",
+    "The sky",
+    "A skin tone"
+   ],
+   "answer": "A hidden color",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Ten different color-system names, from Daybreak to Quality, all land on the same small patch of pale violet as this one."
+ ],
+ "words": 321,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No book concordance hits for this slug; written from the color graph, core names and archive data only.",
+   "lint 2026-10-09"
+  ]
+ },
+ "slug": "light-hyssop-violet"
+}

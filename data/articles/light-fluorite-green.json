@@ -1,0 +1,128 @@
+{
+ "name": "Light Fluorite Green",
+ "hex": "#CAD3A4",
+ "names": [
+  "Light Fluorite Green"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Light Fluorite Green is a pale, yellow-leaning green named for fluorite, the mineral whose green variety can glow under ultraviolet light.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Named for a glowing mineral",
+   "body": "Ridgway's 1912 atlas gives this swatch at plate XXXII, hue 33″, tone d, and the 1955 ISCC-NBS system files it in block 119, a light yellow green [1]. In Munsell terms it reads 4.6GY 8.2/3.1 [1]. Fluorite is best known for the fluorescence that gave the phenomenon its name; the mineral's green variety is one of its more common colors, though this pale a tint has no separate record in Maerz and Paul's dictionary [1].\n\nThe nearest named colors on file are [[oural-green]], [[pale-turtle-green]] and [[pale-veronese-green]], at 4.5, \nIt sits between [[sage]] and [[celadon]] in tone, paler and more yellow than either [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this pale green in 166 of 23,781 paintings, about seven tenths of one per cent [2]. The earliest match is a 1413 landscape by the Japanese ink painter Oguri Sotan, five centuries before Ridgway's plate, so that is a lookalike hue and not a pigment record, a floor and not a first, since the archive's early centuries are thin [2]. The 1800s show the strongest lift, at nearly double the overall baseline rate [2]. These are photographs of aged, varnished paintings and ink works, and a match is not a test for fluorite or any other mineral [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "fluorite, the mineral",
+   "first_recorded": "1912 (Ridgway, as a color standard)",
+   "source": "ColorHub library (data/library.json)"
+  },
+  "aka": [],
+  "siblings": [
+   "oural-green",
+   "pale-turtle-green",
+   "pale-veronese-green",
+   "veronese-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed",
+  "match": {
+   "hex": "#CAD3A4",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 166,
+  "nearest": [
+   [
+    "Celadon",
+    9.1
+   ]
+  ],
+  "peak_century": 1800,
+  "measured": {
+   "nearest": [
+    [
+     "Oural Green",
+     4.5
+    ],
+    [
+     "Pale Turtle Green",
+     4.6
+    ],
+    [
+     "Pale Veronese Green",
+     4.7
+    ],
+    [
+     "Veronese Green",
+     4.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json) and name graph (data/graph/nodes): Ridgway (1912), ISCC-NBS (1955) and Maerz & Paul (1930) entries; Ridgway 1912 pl. XXXII hue 33″ tone d, ISCC-NBS 1955 block 119",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Fluorite, the mineral Light Fluorite Green is named for, is best known for which property?",
+   "choices": [
+    "Fluorescing under ultraviolet light",
+    "Conducting electricity",
+    "Floating on water",
+    "Turning black with age"
+   ],
+   "answer": "Fluorescing under ultraviolet light",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our archive's earliest match for Light Fluorite Green is a Japanese ink landscape from centuries before Ridgway's 1912 atlas.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Light Fluorite Green's earliest archive match is a 1413 Japanese ink landscape, five centuries before the name was recorded."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No book source found; article relies on library/graph data only.",
+   "lint 2026-10-09"
+  ]
+ },
+ "slug": "light-fluorite-green",
+ "words": 228
+}

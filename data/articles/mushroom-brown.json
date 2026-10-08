@@ -1,0 +1,124 @@
+{
+ "slug": "mushroom-brown",
+ "name": "Mushroom brown",
+ "hex": "#947D71",
+ "names": [
+  "Mushroom brown"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Mushroom brown is a light, grayish reddish brown charted by Ridgway in 1912 and matched closely, 2.1 units, by the ISCC-NBS system in 1955, a block that at least ten other twentieth-century trade names also claimed.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "One block, a dozen names",
+   "body": "Ridgway's 1912 nomenclature lists this tone, and the ISCC-NBS system of 1955 places it in block 45 with a close 2.1-unit fit [1]. In the ColorHub library the same point is also carried under Brownish Drab, an exact duplicate (ΔE 0.0), and the same block attracted a run of other twentieth-century trade names, among them Buckskin, Deauville Sand, Autumn Blonde and French Nude [1][3]. No book held in color-kb discusses \"Mushroom brown\" itself [4].\n\nIts nearest distinct neighbor is [[beaver]], 3.4 units off, \"almost the same\" by our graph, with [[taupe]] close by at 4.2 [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds Mushroom brown in 1,079 of 23,781 paintings, about 4.5 percent, one of the more common tones in this group, as photographed [2]. It appears across very different traditions: a Ming-dynasty Chinese scroll by Xu Ben, a seventeenth-century Japanese landscape by Iwasa Matabei, and a Redon panel, each with Mushroom brown covering most of the canvas [2]. Counts are computed matches on varnished, photographed paintings, not pigment identifications [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the color of a mushroom's cap or gills",
+   "first_recorded": "1912, Ridgway",
+   "source": "Ridgway 1912; ISCC-NBS 1955"
+  },
+  "aka": [
+   "Brownish Drab"
+  ],
+  "siblings": [
+   "beaver",
+   "taupe",
+   "brownish-drab"
+  ],
+  "parent": "mushroom",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1079,
+  "measured": {
+   "lch": [
+    54.2,
+    12.0,
+    55.0
+   ],
+   "nearest": [
+    [
+     "Beaver",
+     3.4
+    ]
+   ]
+  }
+ },
+ "questions": [
+  {
+   "q": "Which 1912 source lists Mushroom brown?",
+   "choices": [
+    "Ridgway's color nomenclature",
+    "A Crayola box",
+    "Pantone",
+    "Newton's Opticks"
+   ],
+   "answer": "Ridgway's color nomenclature",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Mushroom brown is one of the rarer colors in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Mushroom brown's ISCC-NBS block attracted at least a dozen other twentieth-century trade names."
+ ],
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes, data/library.json): ISCC-NBS 1955, Maerz & Paul 1930, Ridgway 1912, RAL, Munsell and CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match (ΔE2000 ≤ 6, ≥ 5% of canvas), as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph: nearest named neighbors and cross-domain twin matches (gems, films, fashion decades, Werner 1821 cross-reference), computed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "Concordance of the 29 color books held in color-kb for this name: no hits",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No book concordance hits for this name; sourced from ColorHub's own color library and archive data.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 204
+}

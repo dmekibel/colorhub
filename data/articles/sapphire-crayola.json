@@ -1,0 +1,157 @@
+{
+ "slug": "sapphire-crayola",
+ "name": "Sapphire (Crayola)",
+ "hex": "#2D5DA1",
+ "names": [
+  "Sapphire (Crayola)"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Sapphire (Crayola) is a mid, slightly violet blue from Crayola's color list, almost indistinguishable from the company's own B'dazzled Blue.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A qualified name in the Crayola list",
+   "body": "Wikipedia lists Sapphire as a Crayola color at #2D5DA1, citing the company directly [1]. Our library files it among the \"obscure, qualified or novelty\" names, since nobody reaches for plain *sapphire* the way they do for *blue* or *navy*; the qualifier \"(Crayola)\" is doing real work [1].\n\nIn ISCC-NBS terms it falls in block 182, \"moderate blue,\" with a looser-than-usual match, ΔE 5.2, and its Munsell notation is 5.7PB 3.9/10.0 [2]. Our graph files it, along with [[cerulean-blue|Cerulean Blue]] and [[marine|Marine]], under the general Blues family [2]."
+  },
+  {
+   "id": "swatch",
+   "title": "Its nearest neighbors",
+   "body": "The closest everyday name in our library is [[denim]], about 3.7 units away [1]. Closer still is Crayola's own [[b-dazzled-blue|B'dazzled Blue]], a separate crayon-box name for an almost identical blue, about 2.2 units off [3].\n\nThe mineral-named [[sapphire-blue|Sapphire Blue]] is a different color: lighter and more saturated, documented in Ridgway's 1912 plates and the 1955 ISCC-NBS list rather than in any crayon box [2][3]. The two \"Sapphire\" names share only a gemstone, not a common source [2][3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a match for this blue in 53 of 23,781 paintings, 0.22 percent, as photographed; a tighter within-painting read narrows that to 36 [4]. That makes it rarer than about 55 percent of the named colors we track [4].\n\nIt peaks in paintings from the 1900s decade, found in 0.5 percent of the 1,674 paintings on file from then, about 2.5 times the rate its neighbors get [4]. Within a painting it most often plays an accent, in 67 percent of its 36 appearances [4]. The earliest match on file is a 1426 panel by [[painter:fra-angelico|Fra Angelico]], though the archive's early centuries are thin, so that is a floor, not a first date [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the gem sapphire, as a qualified Crayola color name",
+   "first_recorded": "undocumented beyond Wikipedia's Crayola listing",
+   "source": "Wikipedia, citing Crayola"
+  },
+  "aka": [],
+  "siblings": [
+   "b-dazzled-blue",
+   "denim"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "sapphire-blue",
+    "gloss": "a separate, lighter and more saturated blue from Ridgway and the ISCC-NBS lists, not a Crayola name"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 53,
+  "n_present_within_painting": 36,
+  "first_seen": {
+   "year": 1426,
+   "id": "commons-Q22082602",
+   "painter": "Fra Angelico"
+  },
+  "role": {
+   "accent_pct": 67
+  },
+  "measured": {
+   "lch": [
+    39.5,
+    42.3,
+    280.2
+   ],
+   "nearest": [
+    [
+     "B'dazzled Blue",
+     2.2
+    ],
+    [
+     "Denim",
+     3.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Crayola color via Wikipedia, nearest match, name class",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub Color Graph (data/graph/nodes-s.json): ISCC-NBS block, Munsell notation, LCH",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub Color Graph look-alikes (data/graph) and sibling article B'dazzled Blue, CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive fieldnotes (data/graph/fieldnotes/s.json), computed matches, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which ColorHub color sits closest to Sapphire (Crayola)?",
+   "choices": [
+    "B'dazzled Blue",
+    "Sapphire Blue",
+    "Yale Blue",
+    "Cerulean Blue"
+   ],
+   "answer": "B'dazzled Blue",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Sapphire (Crayola) and Sapphire Blue are the same color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "In which decade does Sapphire (Crayola) turn up most often in our painting archive?",
+   "choices": [
+    "The 1900s",
+    "The 1600s",
+    "The 1800s",
+    "The 1700s"
+   ],
+   "answer": "The 1900s",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "A Crayola \"Sapphire\" lands within two units of the company's own B'dazzled Blue.",
+  "Two different \"Sapphire\" names, from unrelated sources, aren't the same color at all."
+ ],
+ "words": 299,
+ "status": "checked",
+ "checked": {
+  "by": "L7 self-check (sentence-to-card trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "No book or concordance hit for this slug; built from ColorHub's own color graph, library and archive data plus Wikipedia's Crayola listing.",
+   "Who at Crayola coined the name, and when, is undocumented in sources checked.",
+   "lint 2026-10-09"
+  ]
+ }
+}

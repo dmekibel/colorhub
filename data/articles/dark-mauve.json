@@ -1,0 +1,122 @@
+{
+ "slug": "dark-mauve",
+ "name": "Dark Mauve",
+ "hex": "#874C62",
+ "names": [
+  "Dark Mauve"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dark Mauve darkens [[mauve]], the dusty purple-pink named for the mallow flower, and in our painting archive it is rare everywhere except the 1900s, where it is about seven times more common than the archive's average rate.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A darkened mauve",
+   "body": "Dark Mauve applies the modifier dark to [[mauve]] in the same way as Dark Maroon or Dark Rose: it is our own grammar, not a name from a historical dictionary [1]. [[mauve]] itself takes its name from *mauve*, French for the mallow flower, and reached English through the mauve dye craze of the 1860s; the parent entry here comes from the 2010 xkcd color survey [1].\n\nMeasured against our Color Graph, its closest match is [[corinthian-purple]], only 3.2 units away and almost indistinguishable on screen [2]. [[twilight-lavender]] is a touch purpler and more vivid, and [[claret-cup]] duller and purpler still [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This color, or a close match, covers at least five per cent of the canvas in only 14 of 23,781 paintings in our archive, about 0.06 per cent, as photographed [3]. Nine of those fourteen are no earlier than 1800, and the 1900s alone carry it at about 7.1 times the archive's overall rate [3]. The earliest dated match, Tintoretto's *The Birth of John the Baptist* (1550), shows it only faintly, covering under 14 per cent of the canvas, a floor on the color's age in painting rather than a claim of its first appearance [3]. As photographed: these are computed color matches on museum photographs of aged, varnished paintings, not a pigment test [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the parent color mauve, darkened by ColorHub's modifier grammar",
+   "first_recorded": "2010 (xkcd color survey, for the parent mauve)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "corinthian-purple",
+   "twilight-lavender",
+   "claret-cup"
+  ],
+  "parent": "mauve",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#874C62",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 14,
+  "rate": 0.0006,
+  "by_century_peak": {
+   "decade": "1900s",
+   "lift": 7.1
+  },
+  "measured": {
+   "lch": [
+    39.9,
+    27.9,
+    356.1
+   ],
+   "nearest": [
+    [
+     "Corinthian Purple",
+     3.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): modifier-grammar entry over the parent color Mauve (xkcd 2010 survey)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub Color Graph look-alikes (data/graph/edges-d.json), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Dark Mauve is built by darkening which color?",
+   "choices": [
+    "Mauve",
+    "Lavender",
+    "Claret",
+    "Plum"
+   ],
+   "answer": "Mauve",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dark Mauve is more common in our archive's 1900s paintings than in its earlier centuries.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Rare everywhere in the archive except the 1900s, where it is seven times as common."
+ ],
+ "words": 252,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}

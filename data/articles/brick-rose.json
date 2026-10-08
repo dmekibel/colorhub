@@ -1,0 +1,116 @@
+{
+ "slug": "brick-rose",
+ "name": "Brick rose",
+ "hex": "#A46464",
+ "names": [
+  "Brick rose"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Brick rose is a dusty, reddish pink documented only in Ridgway's 1912 standards and the 1955 ISCC-NBS system, and rare in our painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A quiet modifier on rose",
+   "body": "Our library carries Brick rose from Ridgway's 1912 standards and the 1955 ISCC-NBS system, which classes a close match as a grayish red [1]. The nearest named colors on file are [[copper-rose]], [[marsh-rose]], [[hydrangea-red]] and [[swiss-rose]], at 3, 3.6, 3.9 and 4.5 ΔE [1]. In printed English the two-word phrase rose fastest in the 1850s and peaked in use in the 1920s, by our Ngram data, though that count mixes every sense of the words, including actual bricks and roses [2]. Our library lists no everyday near-duplicate for this swatch[1]. It sits in, [[dusty-rose]] and [[rosewood]], all darker, grayer cousins of plain [[rose]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to Brick rose in only 109 of 23,781 paintings (0.46 percent), as photographed[2]. It is over-represented in paintings from India (2.6 times expected) and in the Kalighat school especially, at 6.9 times its baseline [2]. It most often plays an accent inside a painting [2]. The earliest dated match, from 1000, is nine centuries before the 1912 record, a gap the archive's thin early coverage explains rather than the color's true age, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "brick, modifying rose toward a duller red",
+   "first_recorded": "Ridgway, 1912",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "copper-rose",
+   "marsh-rose",
+   "hydrangea-red",
+   "swiss-rose"
+  ],
+  "parent": "rose",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 109,
+  "role": {
+   "accent": 0.5
+  },
+  "company": [],
+  "measured": {
+   "lch": [
+    49,
+    28,
+    23
+   ],
+   "nearest": [
+    [
+     "Copper Rose",
+     3.0
+    ],
+    [
+     "Marsh Rose",
+     3.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: name records, plate and block locators, tier classification",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which art tradition is Brick rose most over-represented in, relative to its baseline?",
+   "choices": [
+    "Kalighat",
+    "Impressionism",
+    "Mughal",
+    "Rajput"
+   ],
+   "answer": "Kalighat",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Brick rose is one of the more common names in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Brick rose is one of the rarest names, found in under half a percent of our archive."
+ ],
+ "words": 225,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

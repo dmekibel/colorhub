@@ -1,0 +1,108 @@
+{
+ "slug": "telemagenta",
+ "name": "Telemagenta",
+ "hex": "#CF3476",
+ "names": [
+  "Telemagenta"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Telemagenta is a strong purplish red from the German RAL color system, used for signage and almost never seen in painting.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A signal color",
+   "body": "RAL, the German industrial color standard founded in 1927, lists Telemagenta as RAL 4010, and the hex value here is a screen approximation of that spec [1]. Wikipedia independently cites the same RAL entry, with no earlier source for the name [1]. The books consulted give no account of why it is named for telecommunications rather than any other field, so that origin is undocumented here [1].\n\nIts nearest named neighbor in our library is [[red-purple]], a slightly less pink, more violet hue [1]. The app's own closest common-name match is [[mulberry]], about 5.8 units away [1]. RAL also lists a second reddish-purple signal color, [[traffic-purple]], deeper and less pink than Telemagenta but from the same 1927 standard [1]; that color in turn sits near [[flirt]] in our library [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this exact hue, as photographed, in only 1 of 23,781 paintings, rarer than 86 percent of the named colors we track [2]. A strong, saturated magenta this close to a modern industrial standard is almost never a match for old pigments, so the single hit is likely a late or restored work rather than a historical dye [2]. Beyond that single painting, the sample is too small for century, painter or company statistics [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1927, per RAL",
+   "source": "RAL color standard"
+  },
+  "aka": [],
+  "siblings": [
+   "red-purple",
+   "traffic-purple"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1,
+  "rank_pct_rarer": 86,
+  "measured": {
+   "lch": [
+    48.3,
+    64.2,
+    359.5
+   ],
+   "nearest": [
+    [
+     "Red-Purple",
+     5.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "RAL color standard, RAL 4010, approximate screen value; cited by Wikipedia",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which industrial color system lists Telemagenta?",
+   "choices": [
+    "RAL",
+    "Pantone",
+    "Crayola",
+    "Maerz and Paul"
+   ],
+   "answer": "RAL",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Telemagenta is common in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Telemagenta is an RAL signal color that our archive finds in exactly one painting."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Field sample is n=1; no century/painter/company stats given.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 222
+}

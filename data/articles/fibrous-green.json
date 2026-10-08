@@ -1,0 +1,118 @@
+{
+ "slug": "fibrous-green",
+ "name": "Fibrous Green",
+ "hex": "#B3C43E",
+ "names": [
+  "Fibrous Green"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Fibrous Green is a vivid yellow-green matched to RAL 6039, the German industrial color standard, not a traditional dictionary-of-color name.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "An industrial standard, not a dictionary word",
+   "body": "RAL, the German standards body founded in 1927, assigns this hue the code 6039 in its classic color collection [1]. Unlike Maerz and Paul's or Ridgway's dictionaries, RAL colors are specified for paint and industrial coatings rather than drawn from everyday naming; our hex value is an approximate screen rendering of that paint standard [1]. Our own classification places it in the region the ISCC-NBS would call vivid yellow green, Munsell notation 3.2GY 7.5/9.1 [2].\n\nThe nearest named colors on file are [[acid-green]], [[baby-puke-green]], [[snot]] and [[snot-green]], at 2.8, 3.6, 3.6 and 4.4 ΔE [2]. Its nearest library neighbor is a hue called Acid Green, and it sits between [[green]] and [[yellow]] on the color wheel [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This hue is rare in our archive of 23,781 paintings: a match within six units covers at least five percent of the canvas in only 3 of them, all from the nineteenth and early twentieth centuries, as photographed [3]. All three are highlight-toned passages, including a 1910 still life of tulips and daisies [3]. A count this small cannot support a claim about any painter or period [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; a RAL industrial code (6039), not a place or substance",
+   "first_recorded": "RAL's classic collection (founded 1927); this swatch's own date is undocumented",
+   "source": "RAL color standards"
+  },
+  "aka": [],
+  "siblings": [
+   "acid-green",
+   "baby-puke-green",
+   "snot",
+   "snot-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 3,
+  "measured": {
+   "lch": [
+    76,
+    66,
+    110
+   ],
+   "nearest": [
+    [
+     "Acid Green",
+     2.8
+    ]
+   ]
+  },
+  "role": {
+   "highlight": 1.0
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "RAL classic color collection, RAL 6039",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz and Paul, Ridgway, ISCC-NBS and RAL entries, computed LCH/Munsell/nearest-name match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Fibrous Green's name and hex come from:",
+   "choices": [
+    "the RAL industrial color standard",
+    "Maerz and Paul's 1930 dictionary",
+    "Ridgway's 1912 atlas",
+    "Crayola"
+   ],
+   "answer": "the RAL industrial color standard",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Fibrous Green's closest core-color match is Olive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Fibrous Green comes from an industrial paint code, RAL 6039, not from a color dictionary."
+ ],
+ "words": 210,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

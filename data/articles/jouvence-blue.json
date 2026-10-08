@@ -1,0 +1,110 @@
+{
+ "slug": "jouvence-blue",
+ "name": "Jouvence Blue",
+ "hex": "#1B717A",
+ "names": [
+  "Jouvence Blue"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Jouvence Blue is a dark greenish blue that Ridgway standardized in 1912, repeated by Maerz and Paul in 1930, and rare in our painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two records, one blue",
+   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* places Jouvence Blue on plate XX, hue 43 prime, tone k, and again on plate VII, hue 41 [1]. Maerz and Paul's 1930 dictionary repeats it on plate 29, swatch L3, and the ISCC-NBS system of 1955 files it as a moderate bluish green, block 164 [1]. Jouvence is French for rejuvenation; whether that sense inspired this particular blue is undocumented in the sources we checked [1].\n\nIts closest named neighbor in our library is [[deep-aqua|Deep Aqua]]; the nearest common color word is [[petrol|Petrol]], about six units away in CIEDE2000, and it sits in our Blues family between [[blue]] and [[teal]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Jouvence Blue is rare in our painting archive: a color within six units of it covers at least five percent of the canvas in 33 of our 23,781 paintings, 0.14 percent, as photographed; the within-painting lens narrows that to nine [2]. That ranks it rarer than 69 percent of the named colors we track [2]. It peaks in the 1800s, in 5 of 8,345 paintings, at just 0.1 percent of that century's paintings, 1.2 times the expected rate [2]. The earliest matching painting dates to 1445, by Domenico Veneziano, 467 years before Ridgway recorded the name in 1912 — a look-alike hue in an aged photograph, not proof the color existed as a dye that early, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1912, Ridgway",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "deep-aqua",
+   "petrol",
+   "teal",
+   "blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 9,
+  "pct": 0.14,
+  "rank_percentile": 31,
+  "measured": {
+   "lch": [
+    43.4,
+    24.4,
+    209.8
+   ],
+   "munsell": "0.3B 4.3/5.1",
+   "app": [
+    "Petrol",
+    6.3
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and graph data: Ridgway 1912 / ISCC-NBS 1955 / Maerz & Paul 1930 / RAL entries (data/library.json, data/graph/)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, computed color match, as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does Ridgway's nomenclature place Jouvence Blue?",
+   "choices": [
+    "Plate XX, hue 43'",
+    "Plate II, hue 7",
+    "Plate XXXI, hue 29''",
+    "Plate LII, hue 35'''''"
+   ],
+   "answer": "Plate XX, hue 43'",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources confirm the name Jouvence Blue was chosen for the French meaning 'rejuvenation'.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Jouvence Blue is one of the rarest named colors we track in the entire painting archive."
+ ],
+ "words": 260,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance hits; link between the French word 'jouvence' and the color name is marked as unconfirmed, not asserted.",
+   "lint 2026-10-09"
+  ]
+ }
+}

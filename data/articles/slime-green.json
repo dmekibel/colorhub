@@ -1,0 +1,126 @@
+{
+ "slug": "slime-green",
+ "name": "Slime Green",
+ "hex": "#99CC04",
+ "names": [
+  "Slime Green"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Slime Green is a vivid yellow-green listed by CSS, RAL, Ridgway, the ISCC-NBS and xkcd's crowdsourced survey.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A vivid green with six names at once",
+   "body": "This exact hue is unusually well attested across systems: Ridgway's 1912 atlas lists it on plate VI as hue 31, RAL lists it as RAL 6018, the ISCC-NBS circular of 1955 places it in block 116 and calls it a vivid yellow green, and the crowdsourced xkcd color survey of 2010 names it too [1]. The ISCC-NBS block alone holds at least seven near-duplicate entries, among them Bright Chartreuse, Greenery and Night Green, a reminder that a vivid, saturated hue like this one tends to attract many names rather than one [1].\n\nThe books read give no coiner for the specific phrase *slime green*, and its origin is undocumented here [1]. The nearest named colors on file are [[sheen-green]], [[snot-green]] and [[yellowish-green]], at 2.8, 3.3 and 4.6 ΔE [1]. It also sits near [[chartreuse]] and [[lime-green]] in our library, two other vivid yellow-greens [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive has a color within four units of Slime Green covering even one per cent of its canvas, as photographed [2]. That describes this archive of historical museum paintings, not painting as a whole, and is itself informative: a color this vivid and this yellow-green rarely survived as a natural pigment or dye before synthetic colorants existed [2].\n\nIn printed English the phrase *slime green* is essentially absent before 1960, rises through the 1990s, and peaks around 2010, tracking its [2]. use as the name of a specific, brash shade in design and branding rather than any older sense of the words [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; a modern, brash green name",
+   "first_recorded": "1912 (Ridgway, as a swatch); the phrase \"slime green\" itself rises only after 1960",
+   "source": "data/library.json; data/graph/nodes-s.json; Google Books Ngram"
+  },
+  "aka": [],
+  "siblings": [
+   "sheen-green",
+   "snot-green",
+   "yellowish-green",
+   "bright-olive"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    76.0,
+    84.8,
+    117.6
+   ],
+   "nearest": [
+    [
+     "Sheen Green",
+     2.8
+    ],
+    [
+     "Snot Green",
+     3.3
+    ],
+    [
+     "Yellowish Green",
+     4.6
+    ],
+    [
+     "Bright Olive",
+     4.9
+    ]
+   ]
+  },
+  "ngram": {
+   "peak": 2010,
+   "rise": 1990,
+   "first": 1960,
+   "term": "slime green"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-s.json, data/library.json): Ridgway 1912 plate VI hue 31 (scan of an aged plate, approximate); RAL 6018; ISCC-NBS Circular 553 (1955) block 116 (R/S); xkcd color survey 2010; CIEDE2000 nearest-name match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed; Google Books Ngram, \"slime green\", case-insensitive, 5-year smoothing",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "How many of the 23,781 paintings in our archive carry a close match to Slime Green?",
+   "choices": [
+    "None",
+    "About 30",
+    "About 300",
+    "About 3,000"
+   ],
+   "answer": "None",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the phrase \"slime green\" was common in print well before 1900.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Slime Green is the one color that never once turns up in our 23,781-painting archive."
+ ],
+ "words": 268,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

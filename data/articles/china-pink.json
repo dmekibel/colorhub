@@ -1,0 +1,155 @@
+{
+ "name": "China Pink",
+ "hex": "#DE6FA1",
+ "names": [
+  "China Pink"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "China Pink is a deep purplish pink carried by Ridgway's 1912 nomenclature, the ISCC-NBS system and Maerz and Paul, and about 5.8 units from hot pink.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Three dictionaries, one pink",
+   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* gives this hue on plate XXVI, hue 67 minutes, tone b [1]. Wikipedia's page on the color cites Plochere as a source and notes the ISCC-NBS 1955 report files the same block, 248, as a deep purplish pink [2][3].\n\nMaerz and Paul's 1930 dictionary lists the color too, first recorded in 1912 [4]. The ISCC-NBS block 248 is crowded: our library lists ten other names filed in the same block, among them Rosebud (1925), Sweet Briar (1920) and Valencia (1925) [3][4]. The nearest named colors on file are [[light-rosolane-purple]], [[pale-violet-red]], [[cyclamen]] and [[violet-red-perbang]], at 2.7, 3.7, 4.4 and 4.5 ΔE [5]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "ColorHub's archive finds this exact match in only one of 23,781 paintings, Ernst Ludwig Kirchner's 1910 *Two Girls under an Umbrella*, as photographed [6]. A single hit is not a trend; the color is rare in paint even though it is common in dye and dress [6]. It is closer in our data to plain [[pink]] than to the cooler [[orchid]], which leans more purple [6]. The count is a computed color match, not a pigment identification [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1912, Ridgway 1912 and Maerz & Paul 1930",
+   "source": "Ridgway, Color Standards and Color Nomenclature; ISCC-NBS 1955"
+  },
+  "aka": [],
+  "siblings": [
+   "light-rosolane-purple",
+   "pale-violet-red",
+   "cyclamen",
+   "violet-red-perbang"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1,
+  "match": {
+   "nearest_library": "Hot Pink",
+   "de2000": 5.8
+  },
+  "measured": {
+   "lch": [
+    61,
+    49,
+    352
+   ],
+   "nearest": [
+    [
+     "Light Rosolane Purple",
+     2.7
+    ],
+    [
+     "Pale Violet Red",
+     3.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway, Color Standards and Color Nomenclature (1912), plate XXVI, hue 67′, tone b",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "web",
+   "cite": "Wikipedia, \"China Pink\", citing Plochere",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/China_pink"
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS (1955), block 248",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz & Paul, A Dictionary of Color (1930), plate 50, cell B9, and related plate entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub color library: nearest named colors by CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1955 report files China Pink in block 248?",
+   "choices": [
+    "The ISCC-NBS report",
+    "Pantone",
+    "Crayola",
+    "The RAL registry"
+   ],
+   "answer": "The ISCC-NBS report",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: China Pink is common in ColorHub's painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which named color in our library sits closest to China Pink?",
+   "choices": [
+    "Hot Pink",
+    "Navy",
+    "Olive",
+    "Charcoal"
+   ],
+   "answer": "Hot Pink",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "China Pink's dictionary block holds ten other near-twin names, from Rosebud to Valencia."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "slug": "china-pink",
+ "words": 215
+}

@@ -1,0 +1,137 @@
+{
+ "name": "Light Grape Green",
+ "hex": "#A4A67D",
+ "names": [
+  "Light Grape Green"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Light Grape Green is a muted, greyish yellow-green named for the grape, plotted by Ridgway in 1912 and classed by the ISCC-NBS system in 1955 as a moderate yellow green.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A grape, not a grape color",
+   "body": "Our data traces the name to the grape rather than to a pigment or a place [1]. Ridgway's 1912 atlas plots it on plate XLI at hue 25‴, and the ISCC-NBS system of 1955 files the same area as block 120, \"moderate yellow green,\" about 5.7 units from that block's reference point [1]. In LCH terms it reads as lightness 67, chroma 22, hue 110 degrees: soft, low in saturation, and closer to olive than to true green [1].\n\nIts nearest neighbors by computed color distance are almost indistinguishable: [[oyster-grey|Oyster Grey]] and [[eucalyptus|Eucalyptus]], each only 3.0 units off, and [[artichoke-green|Artichoke Green]], 3.4 units off [2]. The closest everyday name is Sage, about 5.9 units away [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a close match covers enough of the canvas in 901, as photographed (511 by the stricter within-painting measure), which makes it more common than 83 percent of the named colors we track [4]. It peaks in paintings from the 1900s, at 1.9 times the rate expected from that century's share of the archive (63 of 1,674 paintings) [4]. Inside a painting it most often plays a light, in 40 percent of its matches, by lightness rank within the canvas; varnish cannot fake that ranking [4].\n\n[[painter:niels-larsen-stevns|Niels Larsen Stevns]] used it most: it appears in 5 of his 22 works here, 5.9 times the rate of the museums those works come from, 5.8 times as photographed [4]. The earliest match is a painting from 916, nearly a thousand years before the name's first record in 1912; that only shows the hue existed long before anyone wrote it down, not that any pigment did, a floor and not a first, since the archive's early centuries are thin [4]. On canvas it keeps company with [[glass-green|Glass Green]] and [[kronberg-s-green|Kronberg's Green]] more often than chance [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the grape",
+   "first_recorded": "Ridgway, 1912",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "oyster-grey",
+   "eucalyptus",
+   "artichoke-green",
+   "vetiver-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 901,
+  "measured": {
+   "lch": [
+    67,
+    22,
+    110
+   ],
+   "nearest": [
+    [
+     "Oyster Grey",
+     3.0
+    ],
+    [
+     "Eucalyptus",
+     3.0
+    ],
+    [
+     "Artichoke Green",
+     3.4
+    ],
+    [
+     "Vetiver Green",
+     4.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/nodes-l.json): Light Grape Green — Ridgway 1912, plate XLI, hue 25‴; ISCC-NBS 1955, block 120",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-l.json): nearest distinct neighbors by CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Light Grape Green entry",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings, as photographed, data/graph/fieldnotes/l.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1912 atlas first plots Light Grape Green, on plate XLI?",
+   "choices": [
+    "Ridgway",
+    "Maerz and Paul",
+    "Munsell",
+    "Pantone"
+   ],
+   "answer": "Ridgway",
+   "kind": "pick"
+  },
+  {
+   "q": "Inside a painting, which role does Light Grape Green most often play?",
+   "choices": [
+    "A light",
+    "A shadow",
+    "The sky",
+    "A skin tone"
+   ],
+   "answer": "A light",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Its earliest match in our archive is a painting from 916, nearly a thousand years before the name itself was first recorded."
+ ],
+ "words": 332,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No book concordance hits for this slug; written from the color graph, library and archive data only.",
+   "lint 2026-10-09"
+  ]
+ },
+ "slug": "light-grape-green"
+}

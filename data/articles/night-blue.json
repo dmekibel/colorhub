@@ -1,0 +1,128 @@
+{
+ "slug": "night-blue",
+ "name": "Night Blue",
+ "hex": "#2F2A5A",
+ "names": [
+  "Night Blue"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Night Blue is a dark, muted violet-blue standardized as RAL 5022 in Germany's 1927 color system, and its nearest named neighbor in our graph is a color we have already written about, [[adelaide]].",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A paint standard, and a crowd-sourced cousin",
+   "body": "The German RAL system fixes Night Blue as RAL 5022, dated 1927 in our records; the ISCC-NBS lists of 1955 place the same region in block 174 [1]. The crowd-labeled xkcd color survey, run in 2010, uses the same name for a noticeably darker, more saturated point, hex #040348, a reminder that \"Night Blue\" is not one fixed color across sources [1].\n\nOur graph flags this name as contested, likely for the same reason: more than one modern source claims it for a different point [1]. Its nearest distinct named neighbor is [[adelaide]], 3.8 units off and \"almost the same,\" with [[china-blue]] and [[cobalt-blue]] close by [3]. Our graph's own cross-reference for this region also lands near [[prussian-blue]], a darker, more storied blue with its own article here [3]. No book held in color-kb discusses \"Night Blue\" by this exact name [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Night Blue is rare in our archive: 17 of 23,781 paintings, about 0.07 percent, as photographed, and concentrated in the twentieth century, 5 times the base rate [2]. Russian works carry it at 8.5 times the archive's overall rate, the highest lift of any country we track for this color [2]. Counts are computed matches on varnished, photographed paintings, not pigment identifications [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the color of a night sky; RAL 5022",
+   "first_recorded": "1927, RAL",
+   "source": "RAL 1927; ISCC-NBS 1955"
+  },
+  "aka": [],
+  "siblings": [
+   "adelaide",
+   "china-blue",
+   "cobalt-blue",
+   "prussian-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "navy",
+    "gloss": "a related but distinct dark blue, not the same RAL standard"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 17,
+  "measured": {
+   "lch": [
+    20.0,
+    32.6,
+    300.0
+   ],
+   "nearest": [
+    [
+     "Adelaide",
+     3.8
+    ]
+   ]
+  }
+ },
+ "questions": [
+  {
+   "q": "Night Blue is standardized in which national color system, as RAL 5022?",
+   "choices": [
+    "Germany's RAL system",
+    "France's Pantone",
+    "Japan's JIS",
+    "Britain's BS"
+   ],
+   "answer": "Germany's RAL system",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: every source we hold agrees on the exact hex value for \"Night Blue.\"",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Night Blue's nearest named cousin in our graph is Adelaide, a color our library also carries as its own article."
+ ],
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes, data/library.json): ISCC-NBS 1955, Maerz & Paul 1930, Ridgway 1912, RAL, Munsell and CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match (ΔE2000 ≤ 6, ≥ 5% of canvas), as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph: nearest named neighbors and cross-domain twin matches (gems, films, fashion decades, Werner 1821 cross-reference), computed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "Concordance of the 29 color books held in color-kb for this name: no hits",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No book concordance hits for this name; sourced from ColorHub's own color library and archive data.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 236
+}

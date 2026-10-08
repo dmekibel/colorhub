@@ -1,0 +1,124 @@
+{
+ "slug": "cameo-pink",
+ "name": "Cameo Pink",
+ "hex": "#EFBBCC",
+ "names": [
+  "Cameo Pink"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Cameo Pink is a light purplish pink from Ridgway's 1912 plates, so rare in our painting archive that it covers five per cent of the canvas in only one work.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two plates, two dates",
+   "body": "Ridgway's 1912 nomenclature plates it at plate XXVI, hue 71', tone f, hex #EFBBCC, though Ridgway's own printed swatch reads slightly differently, as #EEC8CD [1]. Maerz and Paul's 1930 dictionary cites that same 1912 plate at column C, chip 2 [1]. The library also carries a second Maerz and Paul citation dated 1925, plate 42, column G, chip 1; the two dictionaries disagree on which plate is the name's origin [1]. The ISCC-NBS committee's 1955 match places the color in block 253 among the \"grayish purplish pink\" names, 4.1 units away [1]. Its Munsell renotation is 4.7RP 8.0/5.4 [1].\n\nTwo library names sit at the same distance, 2.8 units: [[orchid-pink|Orchid pink]] and [[rosolane-pink|Rosolane Pink]], which are themselves the same hex as each other [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within six units of Cameo Pink covers at least five per cent of the canvas in only one of 23,781 paintings, Isaac Grünewald's 1917 *View of Stockholm*, where it covers 22 per cent of the canvas [2]. That makes it the rarest named color, and one of the rarest in the whole archive. These are photographs of varnished paintings, read as screen colors; a single match is not evidence of a pattern [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "Ridgway, 1912, plate XXVI",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "orchid-pink",
+   "rosolane-pink",
+   "light-rose",
+   "cotton-candy"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#EFBBCC",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1,
+  "painters": [],
+  "measured": {
+   "rgb": [
+    239,
+    187,
+    204
+   ],
+   "lch": [
+    80.9,
+    21.3,
+    356.4
+   ],
+   "nearest": [
+    [
+     "Orchid pink",
+     2.8
+    ],
+    [
+     "Rosolane Pink",
+     2.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912 (plate XXVI), ISCC-NBS 1955 (block 253), Maerz & Paul 1930 entries (two dated citations, 1912 and 1925)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match within ΔE 6, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In how many of our 23,781 archive paintings does Cameo Pink cover at least five per cent of the canvas?",
+   "choices": [
+    "1",
+    "100",
+    "1,000",
+    "10,000"
+   ],
+   "answer": "1",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources agree on exactly which year and plate Cameo Pink was first recorded.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Cameo Pink covers five per cent of the canvas in exactly one painting in our whole archive."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "nearest-neighbor distance (and, for calliste-green, the named colors) did not match data/graph/edges-*.json 'la' / a direct CIEDE2000 recomputation; corrected.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 228
+}

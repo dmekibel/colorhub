@@ -1,0 +1,143 @@
+{
+ "slug": "purple-mountain-majesty",
+ "name": "Purple Mountain Majesty",
+ "hex": "#9678B6",
+ "names": [
+  "Purple Mountain Majesty"
+ ],
+ "tier": "place",
+ "depth": "brief",
+ "lede": "Purple Mountain Majesty is a soft violet from Wikipedia's color lists, named for the phrase \"purple mountain majesties\" in the song \"America the Beautiful,\" and not to be confused with Crayola's own crayon of a similar name.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Not the Crayola crayon",
+   "body": "This color, #9678B6, is listed on Wikipedia as \"purple mountain majesty,\" a shade of lavender purple [1]. The name points to the lyric \"for purple mountain majesties\" in Katharine Lee Bates's 1893 hymn \"America the Beautiful,\" describing the hazy violet of mountains seen from a distance, though our sources do not confirm the color was picked to match that line [1][2].\n\nCrayola sells its own crayon under the related name \"Purple Mountains' Majesty,\" introduced in 1993 at #8071B4, a bluer, darker violet than this one [3]. The two are often confused online, but they are different swatches from different sources [1][3]. The nearest named colors on file are [[deep-lilac]], [[middle-blue-purple]], [[soft-purple]] and [[pearl-violet]], at 4.1, 4.4, 5.1 and 5.1 ΔE [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive carries this exact violet covering at least one percent of its canvas, as photographed [4]. That says more about the thinness of pure violets in old paint than about the color itself: aged varnish and fading pull violets toward brown and grey long before a photograph is taken [4]. The word itself, by contrast, has only grown in print since the 1950s, tracking tourism and patriotic songbooks rather than any painter's palette [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "\"purple mountain majesties,\" from \"America the Beautiful\" (1893)",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "Wikipedia, \"Lavender (color)\""
+  },
+  "aka": [],
+  "siblings": [
+   "deep-lilac",
+   "middle-blue-purple",
+   "soft-purple",
+   "pearl-violet"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "amethyst",
+    "gloss": "the nearest named color, not the gem-named Crayola crayon"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    55,
+    37,
+    310
+   ],
+   "nearest": [
+    [
+     "Deep Lilac",
+     4.1
+    ]
+   ]
+  },
+  "crayola_compare": {
+   "name": "Purple Mountains' Majesty",
+   "hex": "#8071B4",
+   "since": 1993
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "Wikipedia, \"Lavender (color)\", “lavender purple (purple mountain majesty)” entry",
+   "loc_kind": "entry",
+   "url": "https://en.wikipedia.org/wiki/Lavender_(color)"
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library and color graph: nearest named colors, Munsell and ISCC-NBS",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "web",
+   "cite": "Wikipedia, \"List of Crayola crayon colors,\" Purple Mountains' Majesty entry",
+   "loc_kind": "entry",
+   "url": "https://en.wikipedia.org/wiki/List_of_Crayola_crayon_colors"
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings) and Ngram word-frequency cache, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the name \"purple mountain majesty\" most likely refer to?",
+   "choices": [
+    "A pigment recipe",
+    "A line from \"America the Beautiful\"",
+    "A mountain range in France",
+    "A Renaissance fresco"
+   ],
+   "answer": "A line from \"America the Beautiful\"",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Crayola's crayon of a similar name is the exact same hex as this color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Why does our painting archive have no real match for this violet?",
+   "choices": [
+    "It was invented after photography existed",
+    "Old varnish and fading pull violets toward brown and grey",
+    "Violet paint was banned",
+    "No paintings survive from before 1900"
+   ],
+   "answer": "Old varnish and fading pull violets toward brown and grey",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Purple Mountain Majesty takes its name from a hymn lyric, and it isn't the Crayola crayon with the almost-identical name."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 239
+}

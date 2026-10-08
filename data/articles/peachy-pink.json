@@ -1,0 +1,103 @@
+{
+ "slug": "peachy-pink",
+ "name": "Peachy Pink",
+ "hex": "#FF9A8A",
+ "names": [
+  "Peachy Pink"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Peachy Pink is a warm, coral-leaning [[pink]] from the xkcd 2010 crowd-name survey, closest in our library to [[salmon|Salmon]].",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A crowd name, undocumented beyond the survey",
+   "body": "The xkcd 2010 survey is the only source our data carries for this exact pairing of words, and who coined it beyond the survey respondents is undocumented [1]. In Munsell terms it sits near 7.0R 7.3/8.9, and the ISCC-NBS lists call its block a \"strong yellowish pink\" [1].\n\nThe nearest standing color in our library is Salmon, about 5.9 units away by CIEDE2000, with [[peach|Peach]] and [[coral|Coral]] close family [1]. The hex is a screen value; no dye or pigment claim follows from the match [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Peachy Pink is one of the rarer matches in our archive, present in 10 of 23,781 paintings by raw coverage and in only 1 by its position in the painting's lightness order, as photographed, rarer than 86% of the named colors we track [2]. Where it does sit within a painting, it plays the midtone, in all 6 of the dated matches counted that way [2].\n\nThe earliest match is 1515, in Correggio's *Salvator Mundi* (nga-46167), with later ones running to 1911, 495 years before the name's own 2010 record, a floor and not a first, since the archive's early centuries are thin [2]. That is a resemblance in an aged photograph, not a claim that Correggio mixed this pink or that anyone used this name at the time [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented beyond the 2010 survey",
+   "first_recorded": "2010, xkcd color survey",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "salmon",
+   "peach",
+   "coral"
+  ],
+  "parent": "pink",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present_by_coverage": 10,
+  "n_present_within": 1,
+  "rank_pct": 86,
+  "role": "mid, 100% of dated matches",
+  "first_dated": {
+   "id": "nga-46167",
+   "title": "Salvator Mundi",
+   "painter": "Correggio",
+   "year": 1515
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and color graph: xkcd (2010), ISCC-NBS (1955) entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does the name Peachy Pink come from?",
+   "choices": [
+    "The 2010 xkcd crowd color-name survey; who first used it beyond that is undocumented",
+    "A 1912 Ridgway plate",
+    "A Crayola crayon from the 1950s",
+    "Werner's 1821 nomenclature"
+   ],
+   "answer": "The 2010 xkcd crowd color-name survey; who first used it beyond that is undocumented",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: when Peachy Pink appears in a painting, it is almost always the brightest highlight.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The earliest look-alike of Peachy Pink in our archive is Correggio's Salvator Mundi, 495 years before the name itself."
+ ],
+ "words": 233,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

@@ -1,0 +1,129 @@
+{
+ "slug": "deep-gull-grey",
+ "name": "Deep Gull Grey",
+ "hex": "#8B8F8B",
+ "names": [
+  "Deep Gull Grey"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Deep Gull Grey is a mid, barely green grey named for the seabird, recorded by Ridgway in 1912, carried into the ISCC-NBS system of 1955, and also an approximate match for a RAL paint color.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Named for the gull",
+   "body": "Our data traces the name to the gull, the seabird, a plant-and-landscape word rather than a pigment [1]. Ridgway's 1912 atlas plots it on plate LIII at hue 75, tone -7, read from an aged scan, and the same area was carried into the ISCC-NBS system of 1955 as block 265 [1]. The paint standard RAL also lists an approximate match, RAL 9007, under a different name [1]. In LCH terms it measures lightness 59, chroma 3, hue 144 degrees: a mid-value, almost unsaturated grey [1].\n\nIts nearest distinct neighbor by computed color distance is [[greenish-grey|Greenish Grey]], 2.6 units away and read in our data as \"almost the same\" [2]. The RAL match, Grey Aluminium, sits even closer at 2.3 units, also a near-duplicate [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a close match covers enough of the canvas in 386, as photographed, more common than 80 percent of the named colors we track [4]. It peaks in paintings from the 1900s, at 1.8 times the rate expected from that century's share of the archive [4]. Eugène Boudin is its most devoted painter here, with the color present in 6 of 33 of his works, nearly seven times the baseline of the museums those works come from [4]. It shares canvases more than chance with [[dim-grey|Dim Grey]] and [[agate-grey|Agate Grey]], two other quiet greys [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the gull, the seabird",
+   "first_recorded": "Ridgway, 1912",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "greenish-grey",
+   "dim-grey",
+   "agate-grey",
+   "traffic-grey-a"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 386,
+  "measured": {
+   "lch": [
+    59,
+    3,
+    144
+   ],
+   "nearest": [
+    [
+     "Greenish Grey",
+     2.6
+    ],
+    [
+     "Grey Aluminium",
+     2.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/nodes-d.json): Deep Gull Grey — Ridgway 1912, plate LIII, hue 75, tone -7; ISCC-NBS 1955, block 265; RAL 9007",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-d.json): nearest distinct neighbors by CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Deep Gull Grey near-duplicate Grey Aluminium (RAL)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings, as photographed, data/graph/fieldnotes/d.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which standard also lists an approximate match for Deep Gull Grey, under a different name?",
+   "choices": [
+    "RAL",
+    "Pantone",
+    "Crayola",
+    "CSS"
+   ],
+   "answer": "RAL",
+   "kind": "pick"
+  },
+  {
+   "q": "Which painter in our archive is most devoted to Deep Gull Grey?",
+   "choices": [
+    "Eugène Boudin",
+    "Claude Monet",
+    "Pierre Puvis de Chavannes",
+    "Eastman Johnson"
+   ],
+   "answer": "Eugène Boudin",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "This grey has a near-duplicate in the industrial RAL paint standard, under a completely different name."
+ ],
+ "words": 254,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No book concordance hits for this slug; written from the color graph, library and archive data only.",
+   "lint 2026-10-09"
+  ]
+ }
+}

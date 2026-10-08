@@ -1,0 +1,143 @@
+{
+ "slug": "cement-grey",
+ "name": "Cement Grey",
+ "hex": "#818979",
+ "names": [
+  "Cement Grey"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Cement Grey is a greenish grey that three separate systems named within a few decades of each other: Ridgway's 1912 plates, the 1927 RAL industrial standard, and the 1955 ISCC-NBS dictionary.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Three systems, one grey",
+   "body": "Ridgway's 1912 nomenclature plates a version of it at plate LII, hue 35''''', and Maerz and Paul's 1930 dictionary separately dates a plate to the same year, column C, chip 2 [1]. The German RAL industrial color standard also lists a near-identical grey, RAL 7033, from 1927, independently of either color dictionary [1]. The ISCC-NBS committee's 1955 match places the hex #818979 among the \"greenish gray\" names, 5.0 units away [1]. No Munsell renotation is recorded for this entry, unusually for a Ridgway-sourced color [1].\n\nIts closest library neighbors are [[deep-olive-grey|Deep Olive-Grey]], about 3.3 units away, and [[concrete-grey|Concrete Grey]], a near-twin at 3.7 units and an obvious partner in meaning, since cement and concrete are the same building material [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within six units of Cement Grey covers at least five per cent of the canvas in 1,077 of 23,781 paintings, about 4.5 per cent, as photographed [2]. It peaks in paintings from the 1940s, after the RAL industrial standard existed, though the archive cannot show whether that is cause or coincidence [2]. Berthe Morisot carries it nearly nine times the archive average, more than any other painter [2]. Its earliest appearance is a *Mahamayuri Vidyaraja* dated to around 916 [2]. These are photographs of varnished paintings, read as screen colors [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "cement, the building material",
+   "first_recorded": "Ridgway, 1912, plate LII; separately, RAL 7033, 1927",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "deep-olive-grey",
+   "concrete-grey",
+   "xanadu",
+   "greenish-grey"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "concrete-grey",
+    "gloss": "Concrete Grey is a near-identical grey named for the related building material, 3.7 units away"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#818979",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1077,
+  "painters": [
+   {
+    "name": "Berthe Morisot",
+    "hits": 10,
+    "n": 25,
+    "lift": 8.83
+   },
+   {
+    "name": "Johannes Lingelbach",
+    "hits": 6,
+    "n": 16,
+    "lift": 8.28
+   }
+  ],
+  "measured": {
+   "rgb": [
+    129,
+    137,
+    121
+   ],
+   "lch": [
+    56.0,
+    9.7,
+    128.6
+   ],
+   "nearest": [
+    [
+     "Deep Olive-Grey",
+     3.3
+    ],
+    [
+     "Concrete Grey",
+     3.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912 (plate LII), RAL 7033 (1927), ISCC-NBS 1955, Maerz & Paul 1930 entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match within ΔE 6, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which three different systems independently named a grey close to Cement Grey?",
+   "choices": [
+    "Ridgway (1912), RAL (1927), and ISCC-NBS (1955)",
+    "Pantone, Crayola, and X11",
+    "Munsell, CSS, and SVG",
+    "Maerz and Paul only"
+   ],
+   "answer": "Ridgway (1912), RAL (1927), and ISCC-NBS (1955)",
+   "kind": "pick"
+  },
+  {
+   "q": "What building material shares Cement Grey's closest named neighbor, Concrete Grey?",
+   "choices": [
+    "The same material, cement and concrete",
+    "Unrelated materials",
+    "Clay and brick",
+    "Steel and iron"
+   ],
+   "answer": "The same material, cement and concrete",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Three unrelated naming systems, decades apart, landed on nearly the same grey as Cement Grey."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 240
+}

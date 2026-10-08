@@ -1,0 +1,110 @@
+{
+ "slug": "faded-rosewood",
+ "name": "Faded rosewood",
+ "hex": "#86615E",
+ "names": [
+  "Faded rosewood"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Faded rosewood is a greyed, dusty red-brown, the library's washed-out variant of [[rosewood]], and it reads as a muted brick rather than as wood.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier on an existing name",
+   "body": "The library builds this name in two steps: a base entry for [[rosewood]], then \"faded\" catalogued as its own separate variant [1]. The 1955 ISCC-NBS system files the same patch as grayish red, about 4.7 units away in CIEDE2000, and Ridgway's 1912 color atlas lists a matching block too, though our index carries no plate number for this particular one [1]. In Munsell notation it sits at 6.2R 4.4/3.1, a dark, low-chroma red; measured in LCH it has lightness 45, chroma 16 and hue 28 degrees, and [[charcoal]] than to a true rosewood brown, and in the same ISCC-NBS \"grayish red\" block as [[rose-brown]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our 23,781-painting archive, a match to this color appears in 165 paintings, 0.69 percent, as photographed; the within-painting lens finds it in 93 [2]. That puts it ahead of 58 percent of our named colors [2]. It peaks in the 1900s, 1.2 percent of the 1,674 paintings we have from that century, 20 paintings, about 2.4 times the archive's typical rate [2]. Inside a painting it most often plays a hidden color, in 52 percent of its appearances [2]. It is also over-represented in Indian paintings, 11 of 721, about 2.6 times what would be expected [2]. The earliest example in our data is from the year 1000; that is nine centuries before the name's earliest record in our sources, 1912, so the match is a look-alike hue in an aged photograph, never proof of the pigment or dye that early [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: faded + rosewood",
+   "first_recorded": "Ridgway, Color Standards and Nomenclature, 1912; ISCC-NBS, 1955",
+   "source": "ColorHub color library and Color Graph"
+  },
+  "aka": [],
+  "siblings": [
+   "rose-taupe",
+   "prussian-red",
+   "vinaceous-brown",
+   "rose-brown"
+  ],
+  "parent": "rosewood",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 165,
+  "measured": {
+   "lch": [
+    44.8,
+    16.4,
+    27.6
+   ],
+   "munsell": "6.2R 4.4/3.1",
+   "iscc_nbs": {
+    "name": "grayish red",
+    "de2000": 4.7
+   }
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and Color Graph (data/library.json, data/graph): ISCC-NBS block, Munsell notation, LCH values",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive fieldnotes, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Faded rosewood is built by adding \"faded\" to which existing color name?",
+   "choices": [
+    "Rosewood",
+    "Terracotta",
+    "Mauve",
+    "Charcoal"
+   ],
+   "answer": "Rosewood",
+   "kind": "pick"
+  },
+  {
+   "q": "Inside a painting, faded rosewood most often plays which role?",
+   "choices": [
+    "A hidden color",
+    "A shadow",
+    "A highlight",
+    "A mid-tone"
+   ],
+   "answer": "A hidden color",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Faded rosewood is over-represented in Indian paintings, about 2.6 times what the archive's overall rate would predict."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Field notes cited fabricated painting counts, painter attributions and/or regional/companion-color claims not present in the cited fieldnotes (data/graph/fieldnotes); corrected to the real counts, roles, century peaks, and (where real) painter/place/companion data, or removed where no source data existed.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 275
+}

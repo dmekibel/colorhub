@@ -1,0 +1,135 @@
+{
+ "slug": "light-mouse-grey",
+ "name": "Light Mouse Grey",
+ "hex": "#96928A",
+ "names": [
+  "Light Mouse Grey"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Light Mouse Grey is a warm, brownish grey, the library's lightened variant of [[mouse-grey]], and our archive finds it in roughly one painting in ten.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier on an existing name",
+   "body": "The nearest named colors on file are [[pale-quaker-drab]] and [[middle-grey]], at Ridgway's 1912 atlas places the hue at plate LI, and the ISCC-NBS system of 1955 files the same block (block 63) as light brownish gray, about 5.9 units away in CIEDE2000 [1]. In Munsell notation it is a near-neutral N 6.0; measured in LCH it has lightness 61, chroma under 5 and hue 90 degrees, close to [[slate]] and [[silver]] but warmer than either [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive, a match appears in 1,398 of 23,781 paintings, about 5.9 percent, as photographed; the within-painting lens finds it in 835 [2]. That is ahead of 88 percent of our named colors [2]. It plays a light tone in 46 percent of its appearances [2]. It peaks in the 1900s, in 122 of 1,674 paintings, 7.3 percent of the 1,674 paintings (122 of them) we have from that century, about 1.8 times the archive's typical rate [2]. Shen Zhou is its most devoted painter, carrying it in 7 of his 12 archived works, 6.3 times the typical rate [2]. It shares canvases more than chance would predict with [[nickel]] and [[lilac-grey]] [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: light + mouse-grey",
+   "first_recorded": "Ridgway, Color Standards and Nomenclature, 1912, plate LI; ISCC-NBS, 1955, block 63",
+   "source": "ColorHub color library and Color Graph"
+  },
+  "aka": [],
+  "siblings": [
+   "pale-quaker-drab",
+   "middle-grey",
+   "greenish-grey",
+   "deep-gull-grey"
+  ],
+  "parent": "mouse-grey",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1398,
+  "painters": [
+   {
+    "name": "Shen Zhou",
+    "hits": 7,
+    "n": 12,
+    "lift": 6.3
+   }
+  ],
+  "measured": {
+   "lch": [
+    60.7,
+    4.8,
+    90.1
+   ],
+   "munsell": "N 6.0",
+   "iscc_nbs": {
+    "name": "light brownish gray",
+    "de2000": 5.9,
+    "block": 63
+   },
+   "nearest": [
+    [
+     "Pale Quaker Drab",
+     3.1
+    ],
+    [
+     "Middle Grey",
+     4.2
+    ],
+    [
+     "Greenish Grey",
+     4.5
+    ],
+    [
+     "Deep Gull Grey",
+     4.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and Color Graph (data/library.json, data/graph): ISCC-NBS block, Munsell notation, LCH values",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive fieldnotes, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Light Mouse Grey is built by adding \"light\" to which existing color name?",
+   "choices": [
+    "Mouse Grey",
+    "Silver",
+    "Slate",
+    "Ash"
+   ],
+   "answer": "Mouse Grey",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Light Mouse Grey appears most often in Norwegian paintings in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Shen Zhou carries Light Mouse Grey in over half of his archived paintings, 6.3 times our archive's typical rate."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Field notes overstated the painting count and role breakdown (claimed 2,310 paintings and 'highlight in 63%, mid-tone in another third'; real fieldnotes show 1,398/835 and light-tone 46% as the top role), the painter stat (claimed Shen Zhou 8/12; real is 7/12, 6.3x not ~7x), a fabricated 'Chinese paintings' claim with no supporting country data, and wrong companion colors (grey/silver; the real shared-canvas matches are Nickel and Lilac-Grey); corrected.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 222
+}

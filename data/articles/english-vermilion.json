@@ -1,0 +1,110 @@
+{
+ "name": "English Vermilion",
+ "hex": "#B9353E",
+ "names": [
+  "English Vermilion"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "English Vermilion is a dulled, brick-leaning red from Maerz and Paul's 1930 dictionary, a quieter cousin of true vermilion, the bright red mercury-sulfide pigment.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A national variant of vermilion",
+   "body": "Maerz and Paul's 1930 dictionary places English Vermilion at plate 3, L 10 [1]. The name marks it as a national variant of [[vermilion]], the pigment long made from mercury sulfide, the same naming pattern as other country-specific vermilions in the period's color trade [1]. The ISCC-NBS system of 1955 would call this family a strong red, though this exact entry has no ISCC-NBS block of its own in our library [1].\n\nIts nearest library neighbor is [[dull-red]], and the closest core app color is [[crimson]], about six units away [1]. Maerz and Paul also record a related name, Crimson Lake, first used around 1550, nearly four centuries before this entry's own 1930 date [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this red in 51 of 23,781 paintings, about a fifth of one per cent [2]. The earliest match is a 1324 Coronation of the Virgin, six centuries before the 1930 dictionary date, so that is a lookalike hue and not a record of any named pigment, a floor and not a first, since the archive's early centuries are thin [2]. The 1300s and 1400s show the strongest lift, each at more than triple the paintings' overall baseline [2]. These are photographs of aged, varnished paintings; a color match is not proof that vermilion, English or otherwise, was the pigment used [2]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "vermilion, with \"English\" marking a national variant",
+   "first_recorded": "1930 (Maerz and Paul)",
+   "source": "ColorHub library (data/library.json)"
+  },
+  "aka": [],
+  "siblings": [
+   "vermilion",
+   "dull-red"
+  ],
+  "parent": "red",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed",
+  "match": {
+   "hex": "#B9353E",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 51,
+  "nearest": [
+   [
+    "Dull Red",
+    null
+   ],
+   [
+    "Crimson",
+    6.1
+   ]
+  ],
+  "library_first_recorded": 1930
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json) and name graph (data/graph/nodes): Ridgway (1912), ISCC-NBS (1955) and Maerz & Paul (1930) entries; Maerz & Paul 1930 pl. 3 L 10",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What pigment does the name English Vermilion point back to?",
+   "choices": [
+    "Vermilion (mercury sulfide red)",
+    "Madder",
+    "Indigo",
+    "Ochre"
+   ],
+   "answer": "Vermilion (mercury sulfide red)",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our archive's earliest match for English Vermilion dates from after 1930, when Maerz and Paul recorded the name.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A 1324 Coronation of the Virgin reads as English Vermilion six centuries before the name was recorded."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No book source found; article relies on library/graph data only.",
+   "lint 2026-10-09"
+  ]
+ },
+ "slug": "english-vermilion",
+ "words": 250
+}

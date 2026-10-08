@@ -1,0 +1,110 @@
+{
+ "slug": "traffic-yellow",
+ "name": "Traffic Yellow",
+ "hex": "#F7B500",
+ "names": [
+  "Traffic Yellow"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Traffic Yellow is a brilliant orange-yellow from the German RAL signage standard, built to read as an accent, not a field color.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A signal yellow",
+   "body": "RAL, founded in 1927, lists this hue as RAL 1023, a screen approximation of that spec [1]. The books give no account of why this particular shade was chosen for signage over a purer yellow, so that design choice is undocumented here [1].\n\nIts nearest named neighbor in our library is [[amber]], just slightly less orange [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this hue, as photographed, in 71 of 23,781 paintings (0.3 percent), more common than 56 percent of the named colors we track [2]. It peaks in the 1900s, in 7 of 1,674 paintings, at 1.4 times the expected rate for paintings from that century [2]. Inside a painting it most often plays an accent, in 86 percent of its 84 occurrences[2].\n\n[[painter:george-dawe|George Dawe]] is its most devoted painter here, carrying it in 5 of 50 of his works, 7.6 times his home museums' baseline [2]. It is most over-represented in paintings from India, at 4.0 times the expected rate [2]. The earliest matching painting is dated 1400, 527 years before RAL recorded the standard in 1927, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "its use on traffic signs and road markings",
+   "first_recorded": "1927, per RAL",
+   "source": "RAL color standard"
+  },
+  "aka": [],
+  "siblings": [
+   "amber",
+   "traffic-white",
+   "traffic-purple",
+   "traffic-grey-a"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 71,
+  "pct": 0.3,
+  "rank_pct": 56,
+  "measured": {
+   "lch": [
+    77.8,
+    81.3,
+    81.4
+   ],
+   "nearest": [
+    [
+     "Amber",
+     2.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "RAL color standard, RAL 1023, approximate screen value",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Inside a painting, Traffic Yellow most often plays which role?",
+   "choices": [
+    "An accent",
+    "A mid-tone shadow",
+    "A hidden color",
+    "A background wash"
+   ],
+   "answer": "An accent",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Traffic Yellow is most over-represented in paintings from France.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Traffic Yellow plays an accent color in 86 percent of the paintings that carry it."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 210
+}

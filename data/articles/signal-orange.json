@@ -1,0 +1,128 @@
+{
+ "slug": "signal-orange",
+ "name": "Signal Orange",
+ "hex": "#D4652F",
+ "names": [
+  "Signal Orange"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Signal Orange is a strong reddish orange from the RAL industrial color system, listed for visibility rather than for any painter's palette.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A visibility orange",
+   "body": "RAL, the German industrial color-matching system founded in 1927, lists this hue as RAL 2010, and our hex value is an approximate screen conversion of that standard [1]. The ISCC-NBS circular of 1955 would class the same region a strong reddish orange, Munsell notation 1.4YR 5.5/11.5 [1]. As with its blue counterpart, *signal* is a safety term in RAL's naming, not a reference to flags or lights [1].\n\nThe nearest named colors on file are [[mandarin-orange]], [[rust-orange]] and [[orange-rufous]], at 2.8, 2.9 and 2.9 ΔE [1]. It also sits near [[tangerine]] in our library, a slightly yellower relative [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Signal Orange covers at least one per cent of the canvas in 132 paintings, about 0.56 per cent overall, more common than 63 per cent of the named colors we track; the within-painting lens finds it in 134 [2]. It peaked relatively early, present in 1.3 per cent of the 945 paintings we hold from the 1400s, 1.7 times the archive's overall rate for that century [2]. Inside a painting it almost always plays an accent, in 96 per cent of its 134 appearances, never a dominant tone [2].\n\nIt is markedly over-represented in India, 44 of 721 paintings, 4.0 times expected, and especially in Mughal painting, where it runs 4.4 times the baseline [2]. The earliest dated painting to carry it is from the year 1000, 927 years before RAL's own 1927 record, a reminder that the match is a look-alike hue, not proof of any particular pigment, a floor and not a first, since the archive's early centuries are thin [2]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "RAL's industrial signal-color category",
+   "first_recorded": "1927 (RAL)",
+   "source": "data/library.json; data/graph/nodes-s.json"
+  },
+  "aka": [],
+  "siblings": [
+   "mandarin-orange",
+   "rust-orange",
+   "orange-rufous",
+   "flame"
+  ],
+  "parent": "orange",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 132,
+  "measured": {
+   "lch": [
+    55.6,
+    63.8,
+    50.7
+   ],
+   "nearest": [
+    [
+     "Mandarin Orange",
+     2.8
+    ],
+    [
+     "Rust orange",
+     2.9
+    ],
+    [
+     "Orange-Rufous",
+     2.9
+    ],
+    [
+     "Flame",
+     3.8
+    ]
+   ]
+  },
+  "countries": [
+   {
+    "name": "India",
+    "hits": 44,
+    "n": 721,
+    "lift": 4.0
+   }
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-s.json, data/library.json): RAL 2010 (1927), approximate screen value; cross-referenced to ISCC-NBS Circular 553 (1955); CIEDE2000 nearest-name match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (data/graph/fieldnotes/s.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which country's paintings carry Signal Orange at roughly four times the expected rate?",
+   "choices": [
+    "India",
+    "France",
+    "Denmark",
+    "Netherlands"
+   ],
+   "answer": "India",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Signal Orange usually dominates a painting when it appears.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Signal Orange shows up almost exclusively as an accent in our painting archive, never as a dominant color."
+ ],
+ "words": 316,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

@@ -1,0 +1,130 @@
+{
+ "name": "Colewort Green",
+ "hex": "#75817C",
+ "names": [
+  "Colewort Green"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Colewort Green is a greenish grey from Maerz and Paul's 1930 dictionary, with a name that is older than the dictionary itself.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "An old name on a 1930 plate",
+   "body": "Maerz and Paul's *A Dictionary of Color* places this hue on plate 30, cell H1, but dates the name itself to 1705, far earlier than most of its plate-mates [1]. *Colewort* is an old word for a leafy brassica, a cabbage-family plant, and the dictionary separately lists the same plate cell under Cabbage Green, dated 1789 [1]. The ISCC-NBS 1955 report files the hue as a greenish grey [2].\n\nThe nearest named colors on file are [[harbor-rat]], [[titmouse-blue]], [[deep-medici-blue]] and [[concrete-grey]], at 2.5, 4.4, 4.7 and 5 ΔE [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "ColorHub's archive finds this muted green-grey in 783 of 23,781 paintings, about 3.3 percent, as photographed [4]. It is strongest in the 1940s decade and in painters such as Armand Guillaumin, Philips Wouwerman and Meindert Hobbema [4]. A grey this close to green often reads as shadow or weathered stone rather than a leaf itself [4]. The count is a computed match, not a pigment identification [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "colewort, an old word for a leafy cabbage-family plant",
+   "first_recorded": "1705, Maerz & Paul 1930",
+   "source": "Maerz & Paul, A Dictionary of Color"
+  },
+  "aka": [],
+  "siblings": [
+   "harbor-rat",
+   "titmouse-blue",
+   "deep-medici-blue",
+   "concrete-grey"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 783,
+  "match": {
+   "nearest_library": "Sage Green",
+   "de2000": 11.4
+  },
+  "measured": {
+   "lch": [
+    53,
+    6,
+    168
+   ],
+   "nearest": [
+    [
+     "Harbor rat",
+     2.5
+    ],
+    [
+     "Titmouse Blue",
+     4.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz & Paul, A Dictionary of Color (1930), plate 30, cell H1",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS (1955) block entry",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library: nearest named colors by CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does \"colewort\" mean?",
+   "choices": [
+    "An old word for a leafy cabbage-family plant",
+    "A dye imported from China",
+    "A shade of varnish",
+    "A tailor's term for grey wool"
+   ],
+   "answer": "An old word for a leafy cabbage-family plant",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Maerz and Paul date the name Colewort Green to the 1930s.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Colewort Green's name is dated to 1705, two centuries before the dictionary that lists it."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "slug": "colewort-green",
+ "words": 180
+}

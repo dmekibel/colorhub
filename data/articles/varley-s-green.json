@@ -1,0 +1,150 @@
+{
+ "slug": "varley-s-green",
+ "name": "Varley's Green",
+ "hex": "#55694C",
+ "names": [
+  "Varley's Green"
+ ],
+ "tier": "person",
+ "depth": "short",
+ "lede": "Varley's Green is a dark, muted olive green, one of the nineteenth-century \"mixed greens\" sold ready-made to artists alongside the related [[hooker-s-green|Hooker's Green]], and no book we hold names which Varley it honors.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A mixed green, an unnamed Varley",
+   "body": "Field's 1835 treatise groups Varley's Green with Hooker's Green as examples of \"mixed greens,\" blends of a blue and a yellow sold to artists as particular hues rather than single pigments [1]. The Pigment Compendium repeats this pairing, noting that Salter's 1869 revision of Field no longer mentioned the pigment, and that it is similar to a mix of Prussian or Antwerp blue with gamboge [1][2]. Several English watercolourists and theorists carried the Varley name in this period, most notably the landscape painter John Varley (1778-1842), but no book we hold states that the green is named for him specifically [3].\n\nRidgway catalogued the color in his 1912 standards, on plate XVIII, hue 31 prime [4]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "Measured in LCH terms it is lightness 42, chroma 14, hue 134 degrees, a dark, low-saturation green [5]. Its nearest library neighbor is [[empire-green|Empire Green]], about 2.9 units away, with [[yew-green|Yew Green]] close behind [5]. Next to [[hunter-green|Hunter green]] it reads as the duller, more olive one [5]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this green, as photographed, in 400 of 23,781 paintings, about 1.7 percent, including Berthe Morisot's 1873 *Reading* and Gauguin's 1899 still life [6]. The earliest dated match is Lorenzo di Credi's 1400 *Virgin and Child*, a floor and not a first, since the archive's early centuries are thin [6]. These are computed color matches on aged, varnished paintings, not pigment identifications [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; possibly the English watercolourist John Varley (1778-1842)",
+   "first_recorded": "early 19th century, as a mixed watercolour green; catalogued by Ridgway in 1912",
+   "source": "Field (1835), via The Pigment Compendium"
+  },
+  "aka": [],
+  "siblings": [
+   "hooker-s-green",
+   "empire-green",
+   "yew-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 400,
+  "top_paintings": [
+   "cma-128072",
+   "cma-159533",
+   "commons-Q76627696"
+  ],
+  "measured": {
+   "lch": [
+    42,
+    14,
+    134
+   ],
+   "nearest": [
+    [
+     "Empire Green",
+     2.9
+    ],
+    [
+     "Yew Green",
+     3.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "The Pigment Compendium, \"Varley's Green\" entry, p. 278, citing Field (1835)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "The Pigment Compendium, \"Varley's Green\" entry, p. 396, citing Field (1835) and Salter (1869)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "Color-kb concordance of the 29 color books for this name (checked one by one; no direct naming statement found)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Ridgway 1912, plate XVIII, hue 31'",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): CIEDE2000 distances to named neighbors",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes; within the archive's match threshold, at least 5% of the canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is Varley's Green, by Field's 1835 description?",
+   "choices": [
+    "A mixed green of a blue and gamboge",
+    "A single mineral pigment",
+    "A synthetic aniline dye",
+    "A fabric dye"
+   ],
+   "answer": "A mixed green of a blue and gamboge",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: a book we hold confirms Varley's Green is named for the painter John Varley.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Varley's Green was sold alongside Hooker's Green as a ready-mixed watercolour, and no book says which Varley it honors."
+ ],
+ "words": 255,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "Namesake is a plausible candidate (John Varley), not a confirmed naming.",
+   "lint 2026-10-09"
+  ]
+ }
+}

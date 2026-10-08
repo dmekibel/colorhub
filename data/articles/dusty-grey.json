@@ -1,0 +1,112 @@
+{
+ "slug": "dusty-grey",
+ "name": "Dusty Grey",
+ "hex": "#7C7F7E",
+ "names": [
+  "Dusty Grey"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Dusty Grey is a middle, nearly neutral grey, built by putting the modifier dusty in front of the base color grey rather than naming anything in particular.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier on grey",
+   "body": "Dusty Grey puts the modifier word dusty in front of the base color [[grey]], in the compound-modifier grammar ColorHub's library uses for descriptive names like this one [1]. Ridgway's 1912 *Color Standards and Color Nomenclature* carries a close swatch on plate LII, hue 59'''', an aged plate scan read as approximate; the RAL system of 1927 later filed near matches too, RAL 7037 and RAL 9023, themselves screen approximations [1].\n\nIts nearest named neighbor is [[battleship-grey]], 2.6 units off, close enough to read as the same grey on screen [1]; [[deep-plumbeous]] sits 4.2 off and [[nickel]] 4.4 [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color within six units of this swatch in 524 of 23,781 paintings, 2.2 percent, as photographed; looking inside each painting for at least five percent coverage narrows that to 268 [2]. That makes it more common than 75 percent of the named colors in our library [2]. It peaks in the 1900s, present in 2.0 percent of our 1,674 paintings from that decade, 1.5 times the museums' baseline rate [2]. Inside a painting it most often sits as a mid-tone, in 39 percent of its 268 appearances by lightness rank [2].\n\nPhilips Wouwerman is its most devoted painter on file, present in 6 of his 36 works here, more than seven times the baseline rate for the museums that hold them [2]. The earliest match dates to 1278, more than six centuries before the name's 1912 record, so it marks a look-alike hue in an aged photograph, not a surviving pigment [2]. It shares canvases with [[blackish-slate|Blackish Grey]] and Dark Grey more often than chance [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: dusty + grey",
+   "first_recorded": "Ridgway 1912, plate LII; RAL 1927",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "battleship-grey",
+   "deep-plumbeous",
+   "nickel",
+   "harbor-rat"
+  ],
+  "parent": "grey",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 524,
+  "n_within_painting": 268,
+  "pct_archive": 2.2,
+  "rank_pct": 75,
+  "measured": {
+   "lch": [
+    53,
+    1,
+    174
+   ],
+   "nearest": [
+    [
+     "Battleship Grey",
+     2.6
+    ],
+    [
+     "Deep Plumbeous",
+     4.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; Ridgway 1912 plate LII, RAL 1927 7037/9023), CIEDE2000 distances",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which named color sits closest to Dusty Grey?",
+   "choices": [
+    "Battleship Grey",
+    "Deep Plumbeous",
+    "Nickel"
+   ],
+   "answer": "Battleship Grey",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dusty Grey is named after a specific object or place.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "One painter, Philips Wouwerman, uses this grey far more than most."
+ ],
+ "words": 294,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}

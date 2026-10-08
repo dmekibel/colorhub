@@ -1,0 +1,109 @@
+{
+ "slug": "deep-lilac",
+ "name": "Deep Lilac",
+ "hex": "#966EBD",
+ "names": [
+  "Deep Lilac"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Deep Lilac is a saturated violet-purple, the 2010 xkcd survey's darker, richer version of plain [[lilac]].",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Lilac, intensified",
+   "body": "Our only recorded source for this name is the 2010 xkcd crowd color survey; no book or earlier dictionary in our data carries it [1]. Converted to the ISCC-NBS 1955 system, it falls nearest to the block the dictionary calls \"brilliant violet\", though 7.5 units away, a looser match than most names in our library [2]. In Munsell terms it reads about 3.2P 5.2/11.0, a mid-dark, strongly saturated purple [2].\n\nThe lilac flower itself is pale and slightly pink-grey; \"deep\" here, as with its sibling [[deep-lavender]], moves the word away from the real flower toward a bolder purple [2]. The two names sit only a few color units apart, close enough to be mistaken for each other on screen [2]. Where exactly this modifier pairing was first used is undocumented in the sources we hold [1][2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "As with Deep Lavender, this exact shade does not turn up in any of the 23,781 paintings in our archive within our matching threshold, as photographed [3]. Vivid, fully saturated violets like this are uncommon in historical paint, which leaned on greyer, earthier purple pigments [3]. The absence is a computed color comparison against museum photographs, not proof that no painter ever mixed anything like it [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "xkcd survey, 2010",
+   "source": "ColorHub library and graph nodes"
+  },
+  "aka": [],
+  "siblings": [
+   "deep-lavender",
+   "amethyst",
+   "dusty-purple"
+  ],
+  "parent": "lilac",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "mu": "3.2P 5.2/11.0",
+   "nearest_iscc": [
+    "brilliant violet",
+    7.5
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (xkcd 2010 source)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub graph nodes: Munsell conversion, ISCC-NBS 1955 nearest block",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is our only recorded source for the name Deep Lilac?",
+   "choices": [
+    "The 2010 xkcd survey",
+    "Werner's 1821 nomenclature",
+    "The ISCC-NBS 1955 dictionary",
+    "Maerz and Paul, 1930"
+   ],
+   "answer": "The 2010 xkcd survey",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Deep Lilac is close in color to its sibling Deep Lavender.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Deep Lilac sits only a few color units from Deep Lavender, close enough to confuse on screen."
+ ],
+ "words": 217,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); zero archive matches reported honestly.",
+   "lint 2026-10-09"
+  ]
+ }
+}

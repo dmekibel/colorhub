@@ -1,0 +1,114 @@
+{
+ "slug": "cerulean-sea",
+ "name": "Cerulean sea",
+ "hex": "#0087BD",
+ "names": [
+  "Cerulean sea"
+ ],
+ "tier": "pigment",
+ "depth": "brief",
+ "lede": "Cerulean sea is a vivid greenish blue built on cerulean, the sky-blue pigment first sold under that name by the paint company Rowney in 1860.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Sky-blue, named for the sea",
+   "body": "[[cerulean|Cerulean]] itself comes from the Latin *caelum*, sky, and Rowney began selling a cobalt-based cerulean blue paint under the name \"coeruleum\" around 1860, though Maerz and Paul trace an earlier recorded use to 1590 [1]. Cerulean sea pairs that pigment word with a landscape word, in the same descriptive pattern as many of our compound ocean and sky names [1]. The ISCC-NBS system of 1955 classifies it as a vivid greenish blue [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds Cerulean sea in 0.05 percent of its 23,781 paintings, 13 of them as photographed, rarer than 75 percent of the named colors we track [3]. Inside a painting it most often plays an accent, in 80 percent of its 5 clearest appearances [3]. The earliest match is a 1482 painting by [[painter:piero-di-cosimo|Piero di Cosimo]], well before Rowney's 1860 paint, as photographed, a floor and not a first, since the archive's early centuries are thin [3]. It belongs to the [[blue]] family, pulled toward green rather than toward violet, nearer [[sky-blue]] than any deep [[navy]] [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "cerulean, the sky-blue pigment, paired with sea",
+   "first_recorded": "cerulean blue paint sold by Rowney, about 1860",
+   "source": "ColorHub color graph"
+  },
+  "aka": [],
+  "siblings": [
+   "cerulean",
+   "turquoise"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 13,
+  "role": "accent",
+  "first_seen": {
+   "year": 1482,
+   "painting": "rijks-200107877",
+   "painter": "piero-di-cosimo"
+  },
+  "measured": {
+   "lch": [
+    53,
+    38,
+    254
+   ],
+   "iscc": "vivid greenish blue"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph: cerulean from Latin caelum, sky; Rowney cerulean blue paint, about 1860; Maerz & Paul 1930, earlier use 1590",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS 1955 block 167 entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What Latin word is cerulean built on?",
+   "choices": [
+    "Caelum, sky",
+    "Mare, sea",
+    "Aqua, water",
+    "Lapis, stone"
+   ],
+   "answer": "Caelum, sky",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Cerulean sea's earliest archive match comes after the Rowney paint of 1860.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Cerulean sea's oldest match in our archive predates the paint company that first sold the pigment by nearly four centuries."
+ ],
+ "words": 192,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

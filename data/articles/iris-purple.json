@@ -1,0 +1,122 @@
+{
+ "slug": "iris-purple",
+ "name": "Iris purple",
+ "hex": "#AC1DB8",
+ "names": [
+  "Iris purple"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Iris purple is a vivid, reddish purple named for the iris flower, whose petals range far wider than any one swatch could show.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A flower with many purples",
+   "body": "The name comes from [[iris]], a genus of several hundred species whose flowers run from near-white through yellow to the deep violets and purples the genus is best known for [1]. Our color library does not carry an entry for this exact xkcd-survey shade, so it has no recorded first-use date or dictionary pedigree beyond the 2010 crowd survey that coined it [1].\n\nAgainst our own data, Iris purple sits at lightness 43 and a high chroma of 86, closer to magenta-red than to the blue-violet most people picture when they hear \"iris\" [1]. The nearest named colors on file are [[purple-munsell]], [[purply]] and [[dark-orchid]], at 4.3, 4.5 and 5.3 ΔE [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings, as photographed, has no painting where this saturated purple covers five percent or more of the canvas [2]. Pigments able to reach this chroma at this darkness are a modern, synthetic achievement; historical purples came from madder, cochineal, or orchil, and none hold this hue at this strength once varnished and aged [2]. The absence is a property of the pigments available to painters, not of the flower."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the iris flower",
+   "first_recorded": "2010, xkcd color survey (this specific shade)",
+   "source": "xkcd (Munroe 2010)"
+  },
+  "aka": [],
+  "siblings": [
+   "purple-munsell",
+   "purply",
+   "dark-orchid",
+   "vibrant-purple"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    43,
+    86,
+    325
+   ],
+   "nearest": [
+    [
+     "Purple (Munsell)",
+     4.3
+    ],
+    [
+     "Purply",
+     4.5
+    ],
+    [
+     "Dark Orchid",
+     5.3
+    ],
+    [
+     "Vibrant Purple",
+     5.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph: xkcd 2010 color survey entry, naming source \"iris\"",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is Iris purple named after?",
+   "choices": [
+    "The iris flower",
+    "The iris of the human eye",
+    "A Greek goddess's robe",
+    "A French dye house"
+   ],
+   "answer": "The iris flower",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: every iris flower is this exact shade of purple.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Iris flowers run from near-white to yellow; only some reach a purple this strong."
+ ],
+ "words": 208,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No private fact-card file for this slug.",
+   "Not in data/library.json; dated only to its 2010 survey appearance.",
+   "lint 2026-10-09"
+  ]
+ }
+}

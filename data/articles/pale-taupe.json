@@ -1,0 +1,126 @@
+{
+ "slug": "pale-taupe",
+ "name": "Pale Taupe",
+ "hex": "#97867C",
+ "names": [
+  "Pale Taupe"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Pale Taupe is ColorHub's English name for Gin-nezumi, a light warm grey that Japanese tradition names \"silver mouse,\" one of a large family of named greys built on the word for mouse.",
+ "sections": [
+  {
+   "id": "japan",
+   "title": "Silver, and a mouse",
+   "body": "Wikipedia's list of traditional Japanese colors gives this swatch as Gin-nezumi (銀鼠), literally \"silver mouse\": gin names the metal's pale sheen, and nezumi (\"mouse\") marks it as one of a family of muted greys graded by how dark or light the mouse coat runs [1]. ColorHub's English rendering, Pale Taupe, keeps the warmth but drops the silver and the mouse [1]. The ISCC-NBS dictionary of 1955 places the swatch in block 63, \"light brownish gray,\" about 2.9 units from that block's centre[2]. The library's nearest other named color is [[warm-grey]], 2.5 units away [2].\n\nMeasured in LCH it reads lightness 57, chroma 9, hue 59 degrees, light and only mildly warm [2]. At that lightness the color reads as a pale neutral on most screens, closer to the \"silver\" half of its Japanese name than to any mouse-dark shade [1][2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match in 1,455 of 23,781 paintings, about 6 percent, as photographed [3]. Unusually for a grey this light, it plays a highlight role slightly more often than a mid-tone, 51 against 39 percent, and is rarely a shadow [3]. The Chinese painter Xugu carries it at more than ten times the archive's overall rate [3]. It shares canvases more than chance with the color words Silver and [[taupe]], and its presence peaks in the 1460s, in 10 of 71 paintings [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the pale, silvery grade of the traditional \"mouse\" grey family",
+   "first_recorded": "undocumented in English; traditional Japanese usage",
+   "source": "ColorHub library (Wikipedia, \"Traditional colors of Japan\")"
+  },
+  "aka": [
+   "Gin-nezumi"
+  ],
+  "siblings": [
+   "warm-grey",
+   "taupe",
+   "light-brownish-drab",
+   "mushroom-brown"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Gin-nezumi (銀鼠)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1455,
+  "pct": 6.1,
+  "measured": {
+   "lch": [
+    57.2,
+    9.0,
+    58.6
+   ],
+   "nearest_iscc": [
+    "light brownish gray",
+    2.9
+   ],
+   "nearest": [
+    "Warm Grey",
+    2.54
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; Wikipedia, \"Traditional colors of Japan\"; jp field)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (ISCC-NBS 1955 block 63), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23781 paintings), computed match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Gin-nezumi, this color's Japanese name, literally mean?",
+   "choices": [
+    "Silver mouse",
+    "Pale ash",
+    "Grey pearl",
+    "Winter fog"
+   ],
+   "answer": "Silver mouse",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: this color is usually a shadow in the paintings where our archive finds it.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pale Taupe's Japanese name, \"silver mouse,\" belongs to a whole family of named greys."
+ ],
+ "words": 254,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance hits (src empty); facts drawn from the library's own jp field, ISCC-NBS block data and the archive.",
+   "lint 2026-10-09"
+  ]
+ }
+}

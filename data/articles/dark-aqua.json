@@ -1,0 +1,114 @@
+{
+ "slug": "dark-aqua",
+ "name": "Dark Aqua",
+ "hex": "#05696B",
+ "names": [
+  "Dark Aqua"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Dark Aqua is a deep, muted blue-green closer in our data to [[petrol|Petrol]] than to its own parent color, [[aqua]].",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier that lands on a different name",
+   "body": "The name is ordinary grammar, \"dark\" plus [[aqua]], recorded by the 2010 xkcd color survey and otherwise undocumented in the older dictionaries and standards our library draws on [1]. No CSS, Wikipedia, Ridgway, or ISCC-NBS entry shares this exact value [1].\n\nMeasured in our library, its closest learnable match is [[petrol|Petrol]], about 5.5 CIEDE2000 units away, nearer than its own base name [[aqua]] [1]. Siblings in the same muted blue-green range are [[aqua]], [[petrol|Petrol]], [[teal]], and [[dark-slate-grey|Dark Slate Grey]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this deep blue-green in just 13 of 23,781 paintings, as photographed, about 0.05 percent, one of the rarest matches in this color's part of the archive [2]. The earliest and largest match is Raphael's *The Niccolini-Cowper Madonna* (1508); the only painter with more than one hit is unrecorded, so no painter stands out at a meaningful count [2]. Switzerland's paintings carry it over fourteen times the archive average, though on a very small base [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: dark + aqua",
+   "first_recorded": "2010, xkcd color survey",
+   "source": "xkcd (Munroe 2010)"
+  },
+  "aka": [],
+  "siblings": [
+   "aqua",
+   "petrol",
+   "teal",
+   "dark-slate-grey"
+  ],
+  "parent": "aqua",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 13,
+  "top_paintings": [
+   "nga-59894",
+   "nga-27"
+  ],
+  "measured": {
+   "lch": [
+    40,
+    25,
+    199
+   ],
+   "nearest": [
+    [
+     "Petrol",
+     5.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: xkcd 2010 survey entry, nearest-match computation",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which learnable color is Dark Aqua's closest match in our library, by measured CIEDE2000 distance?",
+   "choices": [
+    "Petrol",
+    "Aqua",
+    "Black",
+    "Navy"
+   ],
+   "answer": "Petrol",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dark Aqua is one of the more common matches in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dark Aqua's closest learnable neighbor is Petrol, not its own base color, Aqua."
+ ],
+ "words": 174,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No private fact-card file for this slug.",
+   "Painter list from the archive query was empty at the support threshold; no painter claim made.",
+   "lint 2026-10-09"
+  ]
+ }
+}

@@ -1,0 +1,114 @@
+{
+ "slug": "citrine-drab",
+ "name": "Citrine-Drab",
+ "hex": "#908260",
+ "names": [
+  "Citrine-Drab"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Citrine-Drab is a muted, grayish gold, a paler relative of the gem-named citrine family, recorded by Ridgway in 1912.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A paler citrine",
+   "body": "The nearest named colors on file are [[buffy-olive]], [[brown-grey]], [[baiko-brown]] and [[hair-brown]], at 2.6, 2.7, 4.1 and 4.4 ΔE [1]. A second library color, [[buffy-citrine]], is built on the same gem word but reads warmer and more saturated [1]. In LCH terms it is mid-toned and only mildly chromatic: lightness 55, chroma 20, hue 90 degrees [1]. A fifth, slightly farther neighbor is [[rustic-drab]], 4.6 ΔE away, more vivid [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings finds a close match to Citrine-Drab in 4,290, about 18 percent, as photographed[2]. Its earliest appearance, a piece from China the archive dates to roughly 202 BCE, comes from centuries before the word's 1912 record, a gap set by thin early coverage rather than a claim about the color's age [2]. Its heaviest use, relative to each painter's own baseline, falls to painters as different as the Japanese screen painter Kanō Tan’yū and the Dutch marine painter Willem van de Velde the Elder, and the archive's use of it peaks in the 1730s, in 68 of 240 paintings [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the gem citrine",
+   "first_recorded": "1912 (Ridgway, plate XL, hue 21′′′)",
+   "source": "Ridgway, Color Standards and Color Nomenclature; ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "buffy-olive",
+   "brown-grey",
+   "baiko-brown",
+   "hair-brown"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 4290,
+  "match": {
+   "hex": "#908260",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "measured": {
+   "lch": [
+    55,
+    20,
+    90
+   ],
+   "nearest": [
+    [
+     "Buffy Olive",
+     2.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: name records, plate and block locators, tier classification",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Citrine-Drab shares its root gem-name with which other library color?",
+   "choices": [
+    "Buffy Citrine",
+    "Bronze Lustre",
+    "Big Dip O’ruby",
+    "Chalcedony Yellow"
+   ],
+   "answer": "Buffy Citrine",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Citrine-Drab is one of the rarest colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Citrine-Drab's archive record stretches back to a piece from China dated by the archive to roughly 202 BCE."
+ ],
+ "words": 200,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Field notes and opener called the earliest match 'an undated Mexican mural fragment'; the archive record (cma-124754) is a dated (-202) piece from China, not Mexico. Also claimed Willem van de Velde the Elder (a Dutch marine painter) worked in 'East Asian ink and screen traditions'; corrected both.",
+   "lint 2026-10-09"
+  ]
+ }
+}

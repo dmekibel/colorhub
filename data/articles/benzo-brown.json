@@ -1,0 +1,118 @@
+{
+ "slug": "benzo-brown",
+ "name": "Benzo Brown",
+ "hex": "#817164",
+ "names": [
+  "Benzo Brown"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Benzo Brown is a muted taupe-brown from Ridgway's 1912 chart, called Aku-iro, lye-colored, in Japanese tradition, and the single most common of these twelve colors in our painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A taupe called lye-colored",
+   "body": "Ridgway's 1912 chart carries this brown on two plates, XLVI and XLV, both tone i, and the ISCC-NBS system of 1955 files a close match in block 61 [1]. In Japan the same hue is called Aku-iro, written 灰汁色 and meaning lye-colored, after the alkaline ash-water once used in dyeing and cooking [1]. The library's closest recorded duplicate is Deep Brownish Drab, about 2.4 units away [1].\n\nIn LCH terms it measures lightness 49, chroma 10, hue 67 degrees, and the nearest everyday name on file is [[taupe]], about 5.4 units of ΔE away, a close match [1]. Among named neutrals it sits beside [[umber]] and [[sepia]], and shares its Japanese cross-reference with [[amber-brown]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this brown in 2,436 of 23,781 paintings, 10.2 percent, the most common of any color, as photographed [2]. The earliest dated match, a Chinese painting called The Kill, is dated to about 300 BCE in our archive, more than two thousand years before either the Ridgway chart or the Japanese name are recorded, a floor and not a first, since the archive's early centuries are thin [2]. It peaks around 1270, at 3.5 times the archive's overall rate, and the painter Shen Zhou carries it in eight of his twelve paintings here, two-thirds of his output [2]. Inside a painting it most often plays a mid-tone, in 49 percent of its appearances [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented beyond the chemical-sounding prefix benzo",
+   "first_recorded": "Ridgway 1912, plates XLVI and XLV",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "Aku-iro"
+  ],
+  "siblings": [
+   "taupe",
+   "umber",
+   "sepia",
+   "amber-brown"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Aku-iro (灰汁色), lye-colored"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2436,
+  "measured": {
+   "lch": [
+    49,
+    10,
+    67
+   ],
+   "nearest": [
+    [
+     "Taupe",
+     5.4
+    ]
+   ]
+  },
+  "role": {
+   "mid": 0.49
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912 plates XLVI/XLV, ISCC-NBS 1955 block 61, Japanese cross-reference Aku-iro, near-duplicate Deep Brownish Drab",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Aku-iro, the Japanese name for this hue, mean?",
+   "choices": [
+    "Lye-colored",
+    "Ash-colored",
+    "Tea-colored",
+    "Mud-colored"
+   ],
+   "answer": "Lye-colored",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: of the twelve colors in this batch, Benzo Brown is the most common in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Named lye-colored in Japan, and the single most common color of its batch in our archive."
+ ],
+ "words": 258,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

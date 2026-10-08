@@ -1,0 +1,131 @@
+{
+ "slug": "tumbleweed",
+ "name": "Tumbleweed",
+ "hex": "#DEAA88",
+ "names": [
+  "Tumbleweed"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Tumbleweed is a pale yellow classed in the 1955 ISCC-NBS system, named for the dried, rolling plant rather than any living green.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dried plant, not a green one",
+   "body": "The 1955 ISCC-NBS system places Tumbleweed in block 89, a pale yellow, with Wikipedia as the library's other cited source and no record in Ridgway or Maerz and Paul [1]. The name describes the plant once it has dried, broken loose and rolled, bleached tan rather than green, which the warm, dusty hue reflects [1]. The nearest named colors on file are [[peachbeige]] and [[pinkish-cinnamon]], at \n[[peach]], [[apricot]] and [[terracotta]] all turn up far more often than chance in paintings that also carry this color, alongside [[sienna]] and [[brick]] [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to Tumbleweed in 427 of 23,781 paintings, about 1.8 percent, as photographed [2]. It plays a highlight in 90 percent of its appearances, almost never a shadow [2]. Amedeo Modigliani, André Derain and Georges Seurat all use it well above the archive's average rate, with a 1710 stenciled scene of a lion and gazelle its strongest single match [2].\n\nThe earliest dated match is a Tibetan votive card from around 1000, nine and a half centuries before the ISCC-NBS classification, which only shows a similar screen color was photographed there, not that the name existed that early, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the tumbleweed plant",
+   "first_recorded": "ISCC-NBS, 1955 (block 89)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "peachbeige",
+   "pinkish-cinnamon",
+   "pastel-parchment",
+   "light-ochraceous-salmon"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 427,
+  "role": {
+   "highlight": 0.9
+  },
+  "company": [
+   "Peach",
+   "Apricot",
+   "Terracotta",
+   "Sienna",
+   "Brick"
+  ],
+  "measured": {
+   "lch": [
+    74,
+    29,
+    60
+   ],
+   "nearest": [
+    [
+     "Peachbeige",
+     2.6
+    ],
+    [
+     "Pinkish Cinnamon",
+     3.9
+    ],
+    [
+     "Pastel Parchment",
+     4.4
+    ],
+    [
+     "Light Ochraceous-Salmon",
+     4.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955, Maerz and Paul 1930 and other name records, with plate/block locators and nearest-name match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why is Tumbleweed a warm tan-pink rather than green?",
+   "choices": [
+    "It names the plant once dried and rolling, not alive",
+    "It names a sunset",
+    "It is a dye color",
+    "It is a clay mineral"
+   ],
+   "answer": "It names the plant once dried and rolling, not alive",
+   "kind": "pick"
+  },
+  {
+   "q": "In our archive, Tumbleweed most often appears as a:",
+   "choices": [
+    "highlight",
+    "shadow",
+    "midtone"
+   ],
+   "answer": "highlight",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Tumbleweed is named for the plant once it has dried and rolled loose, not for any green growing version."
+ ],
+ "words": 225,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

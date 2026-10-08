@@ -1,0 +1,134 @@
+{
+ "slug": "primuline-yellow",
+ "name": "Primuline Yellow",
+ "hex": "#EFB83E",
+ "names": [
+  "Primuline Yellow"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Primuline Yellow is a warm orange-yellow named for primuline, a coal-tar dye the chemist Arthur George Green discovered in London in 1887.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dye chemist's accidental yellow",
+   "body": "Arthur George Green discovered primuline in 1887 while working for the dye firm Brooke, Simpson and Spiller in London [3]. The dye belongs to the thiazole family of synthetic colorants, part of the wave of coal-tar chemistry that followed William Henry Perkin's [[mauve]] three decades earlier [3]. Green later ran tinctorial chemistry research at the University of Leeds, and his primuline was reportedly copied by German firms once his own patent protection lapsed [3].\n\nMaerz and Paul's 1930 dictionary dates the color name itself to 1905, roughly two decades after the dye's discovery, and Ridgway's 1912 atlas lists it as plate XVI, hue 19′ [1]. The ISCC-NBS 1955 revision calls the block \"strong yellow,\" a close match (ΔE 3.4) to Ridgway's chip [1][2]. In LCH terms it sits at lightness 78, chroma 67, hue 83, close to [[amber|Amber]] but noticeably brighter and more saturated [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A screen match for this yellow turns up in 139 of 23,781 paintings, about 0.6 percent, as photographed, concentrated nine times above the archive's average rate in paintings from the 1820s decade [2]. George Dawe, a portraitist working in Russia in that period, carries it well above the archive's base rate, as does Pierre Bonnard nearly a century later [2]. India and the United Kingdom are its strongest countries by lift [2]. The figure is a computed screen match on aged, varnished paintings, not a pigment identification [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "primuline, Arthur George Green's 1887 thiazole dye",
+   "first_recorded": "1905, per Maerz and Paul",
+   "source": "Maerz and Paul, A Dictionary of Color (1930)"
+  },
+  "aka": [],
+  "siblings": [
+   "dusty-amber",
+   "zedoary-wash",
+   "traffic-yellow",
+   "amber"
+  ],
+  "parent": "yellow",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 139,
+  "rate": 0.0058,
+  "peak_decade": {
+   "key": 1820,
+   "rate": 0.053,
+   "lift": 9.13
+  },
+  "measured": {
+   "lch": [
+    78,
+    67,
+    83
+   ],
+   "nearest": [
+    [
+     "Dusty amber",
+     2.6
+    ],
+    [
+     "Zedoary Wash",
+     3.5
+    ],
+    [
+     "Traffic Yellow",
+     3.5
+    ],
+    [
+     "Amber",
+     4.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XVI, hue 19′; Maerz and Paul, A Dictionary of Color (1930), plate 10 L 5",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library and archive (23,781 paintings): ISCC-NBS 1955 block 84, LCH values, computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "web",
+   "cite": "Wikipedia, \"Arthur George Green\"; Wikipedia, \"Primuline\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/Arthur_George_Green"
+  }
+ ],
+ "questions": [
+  {
+   "q": "Primuline was discovered as what kind of substance?",
+   "choices": [
+    "A coal-tar dye",
+    "A mineral pigment",
+    "A plant extract",
+    "A metal oxide"
+   ],
+   "answer": "A coal-tar dye",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the color name Primuline Yellow was recorded the same year the dye was discovered.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Primuline Yellow's name is nearly two decades younger than the dye it was named for."
+ ],
+ "words": 248,
+ "status": "checked",
+ "checked": {
+  "by": "batch-23",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits for this slug; Green's biography from one web source (Wikipedia), hedged.",
+   "lint 2026-10-09"
+  ]
+ }
+}

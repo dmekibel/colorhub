@@ -1,0 +1,125 @@
+{
+ "slug": "monkey-skin",
+ "name": "Monkey Skin",
+ "hex": "#9B7469",
+ "names": [
+  "Monkey Skin"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Monkey Skin is a light reddish brown dated by Maerz and Paul to 1927, and our graph's nearest named neighbor for it, Reddish Grey, differs mainly by being a touch redder.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A 1927 trade name, undocumented further",
+   "body": "Maerz and Paul's 1930 dictionary dates Monkey Skin to 1927, plate 5, row B, column 9, and separately records a close neighbor on the same plate, Rose Blush, from a year earlier [1]. Why the animal was chosen as the reference, rather than any of the many other brown-naming conventions in the same dictionary, is undocumented in the sources we hold [1][4]. No book held in color-kb discusses this name [4].\n\nIts nearest distinct named neighbor is [[reddish-grey]], 2.7 units off and \"redder\" by our graph's own description, with [[rose-brown]] and [[vinaceous-brown]] close by at 4.0 [3]. A fourth cousin in the library, slightly cooler and greyer, is [[taupe]] [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds Monkey Skin in 360 of 23,781 paintings, about 1.5 percent, as photographed [2]. Its rate is unusually high in a narrow fifteenth-century window, the 1420s, 8.6 times the archive's overall rate, alongside a broader twentieth-century rise [2]. Counts are computed matches on varnished, photographed paintings, not pigment identifications [2]. Its company in the 1420s window is mostly devotional and portrait painting, not a single workshop or region we can name from the data alone [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; a 1927 Maerz & Paul trade name",
+   "first_recorded": "1927, Maerz & Paul 1930",
+   "source": "Maerz & Paul 1930"
+  },
+  "aka": [
+   "Rose Blush"
+  ],
+  "siblings": [
+   "reddish-grey",
+   "rose-brown",
+   "vinaceous-brown",
+   "taupe"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 360,
+  "measured": {
+   "lch": [
+    52.4,
+    18.3,
+    41.3
+   ],
+   "nearest": [
+    [
+     "Reddish Grey",
+     2.7
+    ]
+   ]
+  }
+ },
+ "questions": [
+  {
+   "q": "Which dictionary dates Monkey Skin to 1927?",
+   "choices": [
+    "Maerz and Paul's A Dictionary of Color",
+    "Pantone",
+    "Crayola",
+    "Ridgway's Color Standards"
+   ],
+   "answer": "Maerz and Paul's A Dictionary of Color",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the sources we hold explain why the name Monkey Skin was chosen for this color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Why Monkey Skin was named for the animal rather than another brown convention is undocumented."
+ ],
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes, data/library.json): ISCC-NBS 1955, Maerz & Paul 1930, Ridgway 1912, RAL, Munsell and CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match (ΔE2000 ≤ 6, ≥ 5% of canvas), as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph: nearest named neighbors and cross-domain twin matches (gems, films, fashion decades, Werner 1821 cross-reference), computed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "Concordance of the 29 color books held in color-kb for this name: no hits",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No book concordance hits for this name; sourced from ColorHub's own color library and archive data.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 218
+}

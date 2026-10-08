@@ -1,0 +1,132 @@
+{
+ "slug": "june-bud",
+ "name": "June Bud",
+ "hex": "#BDDA57",
+ "names": [
+  "June Bud"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "June Bud is a yellow-green named for the color of a leaf bud opening in early summer.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The color of a new leaf",
+   "body": "Our library traces the name only to a Wikipedia color list, which gives no date or coiner [1]. The ISCC-NBS system of 1955 lists eight near-synonyms in the same measured block, including Brill, Glory Green and Jade Lime, a sign this general shade of yellow-green had many competing commercial names [1].\n\nIts nearest named neighbor is [[yellowish-green]], 4.8 units of CIEDE2000 away and more vivid [1]. [[oil-yellow]] sits at the same distance but duller, and [[inchworm]] a little farther at 5.6, more vivid and lighter [1]. Measured in LCH, June Bud sits at lightness 83 with a strong yellow-green hue, among the brightest, most saturated colors in our library [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This exact swatch is one of the rarest in our archive: only 2 of 23,781 paintings match it, rarer than 82 percent of the named colors, as photographed [2]. Both are from a single 1910 painting by Othon Friesz [2]. Werner's 1821 nomenclature, built from mineral, animal and plant examples rather than museum paintings, lists a close match within 8.3 units at its Siskin Green entry, exemplified by a ripening pear and the Irish pitcher apple [3]. These are photographs of varnished paintings, so a color match is not a pigment test [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a leaf bud opening in June",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub library (a Wikipedia list)"
+  },
+  "aka": [],
+  "siblings": [
+   "yellowish-green",
+   "oil-yellow",
+   "inchworm",
+   "pear"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings, as photographed",
+  "n_present": 2,
+  "rank_pct_rare": 82,
+  "measured": {
+   "lch": [
+    83,
+    66,
+    115
+   ],
+   "nearest": [
+    [
+     "Yellowish Green",
+     4.8
+    ],
+    [
+     "Oil Yellow",
+     4.8
+    ],
+    [
+     "Inchworm",
+     5.6
+    ]
+   ]
+  },
+  "werner_1821": {
+   "entry": "Siskin Green",
+   "de": 8.3,
+   "examples": "ripe coalmar pear, Irish pitcher apple"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and graph (data/library.json, data/graph/nodes and edges): name source, ISCC-NBS block, CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub graph twin match to Werner, Nomenclature of Colours (1821), Siskin Green entry (data/graph edges)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is June Bud named after?",
+   "choices": [
+    "A leaf bud opening in early summer",
+    "A beetle common in June",
+    "A fabric dye",
+    "A painter's surname"
+   ],
+   "answer": "A leaf bud opening in early summer",
+   "kind": "pick"
+  },
+  {
+   "q": "Werner's 1821 nomenclature lists a close match to June Bud under which entry?",
+   "choices": [
+    "Siskin Green",
+    "Blood Red",
+    "Celandine Green",
+    "Prussian Blue"
+   ],
+   "answer": "Siskin Green",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "June Bud is one of the rarest colors in our painting archive, matched in only two paintings."
+ ],
+ "words": 217,
+ "status": "checked",
+ "checked": {
+  "by": "batch-10",
+  "date": "2026-10-09",
+  "issues": [
+   "Only one painter (Othon Friesz, 1910) found; too thin to claim any wider pattern.",
+   "lint 2026-10-09"
+  ]
+ }
+}

@@ -1,0 +1,120 @@
+{
+ "slug": "wisteria-blue",
+ "name": "Wisteria blue",
+ "hex": "#8F8CE7",
+ "names": [
+  "Wisteria blue"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Wisteria Blue is a soft, periwinkle-leaning violet, a bluer modifier of the wisteria flower's family name, with no named sibling in our library closer than a light violet.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A bluer wisteria",
+   "body": "Our color library lists this hue under Ridgway's 1912 sources alongside the ISCC-NBS system of 1955 and the crowdsourced xkcd color survey of 2010, though none of them records a precise plate or hue number here [1]. It sits as a child of the \"wisteria\" family word, pulling the flower's usual soft purple further toward blue [1]; it also carries the older ISCC-NBS alternate name Light Bluish Violet [1].\n\nIts nearest look-alike in our library is [[light-violet]], duller by a CIEDE2000 distance of 3.8, with [[deep-chicory-blue]] and [[periwinkle-blue]] not far behind [2]. Measured in LCH it is lightness 62, chroma 51 and hue 296 degrees, a fairly saturated blue-violet, notably more saturated than most named nature colors in this family [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this blue-violet in only 3 of 23,781 paintings (0.01%, as photographed), rarer than 79% of the named colors we track, making it one of the least-matched hues in the whole archive [3]. The only two dated matches run from 1905 to 1909, both by Albert Marquet [3]. In printed English the word pattern for \"wisteria blue\" peaks in the 1950s and rose fastest in the 1940s, decades after the ISCC-NBS and Ridgway records our library cites, so the color name likely spread later than its first listing [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the wisteria flower, modified toward blue",
+   "first_recorded": "1912 (Ridgway, via ColorHub library; precise plate undocumented)",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "Light Bluish Violet"
+  ],
+  "siblings": [
+   "light-violet",
+   "deep-chicory-blue",
+   "periwinkle-blue",
+   "wisteria"
+  ],
+  "parent": "wisteria",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 3,
+  "measured": {
+   "lch": [
+    62,
+    51,
+    296
+   ],
+   "nearest": [
+    [
+     "Light Violet",
+     3.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Ridgway 1912, ISCC-NBS 1955, xkcd 2010 color survey",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library and Color Graph look-alikes (data/graph/), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (data/graph/fieldnotes); Google Books Ngram word pattern",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How many paintings in our archive match Wisteria Blue?",
+   "choices": [
+    "3",
+    "300",
+    "3,000",
+    "30"
+   ],
+   "answer": "3",
+   "kind": "pick"
+  },
+  {
+   "q": "Which named color is closest to Wisteria Blue in our library?",
+   "choices": [
+    "Light Violet",
+    "Vermilion",
+    "Mauve",
+    "Chartreuse"
+   ],
+   "answer": "Light Violet",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Wisteria Blue is one of the rarest named colors in our painting archive, matched in only 3 works."
+ ],
+ "words": 239,
+ "status": "checked",
+ "checked": {
+  "by": "batch-16",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); no precise plate/hue locator in the graph source list, so the origin note says so plainly.",
+   "lint 2026-10-09"
+  ]
+ }
+}

@@ -1,0 +1,135 @@
+{
+ "slug": "flint-grey",
+ "name": "Flint Grey",
+ "hex": "#9F917B",
+ "names": [
+  "Flint Grey"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Flint Grey is a light, grayish yellowish brown from Maerz and Paul's 1930 dictionary, placed at the very start of their plate sequence with a first-recorded date of 1000.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Plate 14, dated to the year 1000",
+   "body": "Maerz and Paul's 1930 dictionary lists Flint Grey on plate 14, swatch A1, with a first-recorded date of 1000, far earlier than most of their entries and without a cited source for that date [1]. Two close neighbors on a nearby plate, Flesh Blonde and Touquet, are instead dated to the 1920s, in the book's usual range [1]. Our own classification places the hue in the ISCC-NBS region called light grayish yellowish brown, Munsell notation 1.5Y 6.0/2.0 [2]. The nearest named colors on file are [[grey-beige]], [[light-drab]], [[light-greyish-olive]] and [[pearl-beige]], at 3.6, 3.7, 4.6 and 5 ΔE [2]. Despite its name, Flint Grey reads as a warm, muted tan rather than a true gray, [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Flint Grey covers at least five percent of the canvas in 4,533 of them, about 19.1 percent overall, the single most common color, as photographed [3]. It is strongest in East Asian paintings, appearing in 48.1 percent of Japanese and 46.6 percent of Chinese works, well above the archive average [3]. Shen Zhou carries it in 11 of his 12 archived paintings, and its leading companion word is Taupe [3]. These counts read photographs of varnished paintings, not pigments [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; a dictionary-of-color name, not a documented place or substance, despite sharing a word with the mineral flint",
+   "first_recorded": "dated to 1000 in Maerz and Paul (1930), without a cited source for that date",
+   "source": "Maerz and Paul, A Dictionary of Color"
+  },
+  "aka": [],
+  "siblings": [
+   "grey-beige",
+   "light-drab",
+   "light-greyish-olive",
+   "pearl-beige"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 4533,
+  "measured": {
+   "lch": [
+    61,
+    14,
+    84
+   ],
+   "nearest": [
+    [
+     "Grey Beige",
+     3.6
+    ]
+   ]
+  },
+  "countries": [
+   {
+    "name": "Japan",
+    "rate": 0.481,
+    "lift": 2.53
+   },
+   {
+    "name": "China",
+    "rate": 0.466,
+    "lift": 2.45
+   }
+  ],
+  "painters": [
+   {
+    "name": "Shen Zhou",
+    "hits": 11,
+    "n": 12,
+    "lift": 4.81
+   }
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Maerz and Paul, A Dictionary of Color (1930), \"Flint Grey\", plate 14 A1",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz and Paul, Ridgway, ISCC-NBS and RAL entries, computed LCH/Munsell/nearest-name match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "True or false: Flint Grey is, in LCH terms, closer to a warm brown than to a true neutral gray.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "Flint Grey is most common, in our archive, among paintings from:",
+   "choices": [
+    "Japan and China",
+    "France and Italy",
+    "the United States",
+    "the Netherlands"
+   ],
+   "answer": "Japan and China",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Flint Grey is the single most common color in this group, covering about a fifth of our archived paintings, and it is strongest in Japanese and Chinese work."
+ ],
+ "words": 244,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

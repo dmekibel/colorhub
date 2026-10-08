@@ -1,0 +1,128 @@
+{
+ "slug": "slate-green",
+ "name": "Slate Green",
+ "hex": "#658D6D",
+ "names": [
+  "Slate Green"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Slate Green is a muted, moderate yellowish green first dated by Ridgway in 1912, one of three slate colors in ColorHub's library alongside Slate-Olive and Slate-Purple.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "One of three slate colors",
+   "body": "Ridgway's 1912 standard records this hue on plate XVIII, and the 1955 ISCC-NBS system classes it as a moderate yellowish green, block 150 [1]. Maerz and Paul's 1930 dictionary dates the name to the same year, 1912 [1]. The nearest named colors on file are [[french-green]], [[american-green]], [[russian-green]] and [[civette-green]], at 2.6, 2.8, 6, 2.8, 3.4 and 4.1 ΔE [1]. Our library also carries at least two other ISCC-NBS names within about 2 units of this exact swatch, a reminder that these old block systems often label the same small patch of color space twice [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to Slate Green in only 85 of 23,781 paintings, about 0.4 percent, as photographed [2]. Inside a painting it plays a midtone more often than a highlight or a shadow, 61 percent of the time [2]. Childe Hassam, Gustav Klimt, Auguste Renoir and Paul Cezanne all use it well above the archive's average rate, with Cezanne's *House of Père Lacroix* (1873) its strongest single match [2].\n\nThe earliest dated match is a 1401 painting cataloged only as *King of Hell*, five centuries before Ridgway's plate, which only shows a similar screen color was photographed there, not that anyone used this name or pigment that early, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "slate, the rock",
+   "first_recorded": "Ridgway, 1912 (plate XVIII, hue 33′)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "french-green",
+   "american-green",
+   "russian-green",
+   "civette-green"
+  ],
+  "parent": "slate",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 85,
+  "role": {
+   "mid": 0.61
+  },
+  "company": [
+   "Viridian",
+   "Sage",
+   "Moss"
+  ],
+  "measured": {
+   "lch": [
+    55,
+    24,
+    149
+   ],
+   "nearest": [
+    [
+     "French Green",
+     2.6
+    ],
+    [
+     "American Green",
+     2.8
+    ],
+    [
+     "Russian Green",
+     3.4
+    ],
+    [
+     "Civette Green",
+     4.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955, Maerz and Paul 1930 and other name records, with plate/block locators and nearest-name match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which rock gives Slate Green, Slate-Olive and Slate-Purple their shared name?",
+   "choices": [
+    "Slate",
+    "Granite",
+    "Basalt",
+    "Marble"
+   ],
+   "answer": "Slate",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: an archive match to Slate Green in a 1401 painting proves the name existed by then.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Slate Green is one of three muted colors our library names after a rock, not a plant."
+ ],
+ "words": 250,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

@@ -1,0 +1,114 @@
+{
+ "slug": "bistre-green",
+ "name": "Bistre Green",
+ "hex": "#C4A954",
+ "names": [
+  "Bistre Green"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Bistre Green is a muted golden yellow, named for bistre, the brown soot pigment artists once drew with, and first recorded by Maerz and Paul in 1905.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A drawing pigment's name",
+   "body": "The nearest named colors on file are [[olive-ocher]], [[light-cadmium]], [[pyrite-yellow]] and [[tennis]], at 2.7, 2.9, 2.9 and 3.5 ΔE [1]. The 1955 ISCC-NBS system would class a close match as dark yellow, about 2.3 units of ΔE away [1]. The swatch is a yellow, not the brown of bistre itself, so the name points to the pigment family rather than its color [1]. In LCH terms it is a mid-light, strongly chromatic gold: lightness 70, chroma 47, hue 91 degrees [1]. A fifth, slightly farther neighbor is [[popcorn]], 4.1 ΔE away, lighter [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings finds a close match to Bistre Green in 774, about 3.3 percent, as photographed [2]. It covers most of the frame in Japanese woodblock prints: Hiroshige's *Matsuchiyama on the Sumida River* (1833) at 77 percent and Hokusai's *Moon, Pine and Maple* at 73 percent [2]. Among Western painters it is used most, relative to their own baselines, by Henry Raeburn and Paul Sérusier, and its peak decade is the 1930s, though only 7 of 69 paintings from then carry it [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the pigment bistre",
+   "first_recorded": "1905 (Maerz and Paul, 1930 edition, plate 13 L 5)",
+   "source": "Maerz and Paul, A Dictionary of Color; ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "olive-ocher",
+   "light-cadmium",
+   "pyrite-yellow",
+   "tennis"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 774,
+  "match": {
+   "hex": "#C4A954",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "measured": {
+   "lch": [
+    70,
+    47,
+    91
+   ],
+   "nearest": [
+    [
+     "Olive-Ocher",
+     2.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: name records, plate and block locators, tier classification",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Bistre Green takes its name from what kind of material?",
+   "choices": [
+    "A soot-based drawing pigment",
+    "A gemstone",
+    "A flower",
+    "A metal"
+   ],
+   "answer": "A soot-based drawing pigment",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Bistre Green is more common in our archive than most names we track.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Bistre Green fills three-quarters of the frame in two Japanese woodblock prints in our archive."
+ ],
+ "words": 209,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Editor spot-audit 2026-10-09: lede said 'dark, dull gold' but LCH is 70/47 (light, strongly chromatic); nearest neighbors corrected to graph edges (Olive-Ocher 2.7); 1930s peak qualified with n=7/69; added swatch-vs-name line.",
+   "lint 2026-10-09"
+  ]
+ }
+}

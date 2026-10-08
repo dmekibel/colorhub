@@ -1,0 +1,143 @@
+{
+ "slug": "deep-orient-blue",
+ "name": "Deep Orient Blue",
+ "hex": "#638195",
+ "names": [
+  "Deep Orient Blue"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Deep Orient Blue is a greyed, dusty blue from Ridgway's 1912 chart, its name a reference to the East Asian porcelain and textile blues the nineteenth century called \"oriental,\" not a measured match to any one craft.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A trade word, not a recipe",
+   "body": "Ridgway's 1912 plate XXXIV gives this hue the name Deep Orient Blue, hue 45′′, tone i, and the ISCC-NBS system of 1955 files the nearest category as \"grayish blue\" in its block 186 [1]. \"Orient\" and \"oriental\" were common nineteenth-century trade words for blues associated with East Asian porcelain, lacquer and dyed cloth; Ridgway's chart carries a small family of them, including the lighter [[dark-orient-blue]] and the brighter [[dusky-orient-blue]] [1]. None of our sources ties this particular swatch to a named porcelain or dye [2].\n\nIn LCH terms it measures lightness 52, chroma 15, hue 249 degrees, Munsell 0.4PB 5.1/3.8 [1]. Its closest match in the library is [[delft-blue]], about 3.2 CIEDE2000 units away, with [[light-tyrian-blue]] close behind at 3.9 units [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A match within six CIEDE2000 units covering at least five percent of the canvas turns up in 237 of our 23,781 archive paintings, about one percent, as photographed [4]. It peaks in the 1920s, in 6 of 237 paintings, at 3.4 times the overall rate, and is most loved by Claude Monet, in seven of his fifty paintings here, fourteen times his own museums' baseline; it most often plays a mid-tone, in 55 percent of its appearances [4].\n\nThe earliest dated match is Michele Giambono's *Saint Peter*, 1445, more than four and a half centuries before Ridgway recorded the name in 1912; early centuries are thin in the archive, so this is a floor, not a first, and a photograph of an aged canvas is a screen color, not a pigment test [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "\"oriental,\" a nineteenth-century trade word for East Asian porcelain and textile blues",
+   "first_recorded": "1912, Ridgway, plate XXXIV",
+   "source": "ColorHub color library; Ridgway, Color Standards and Color Nomenclature (1912)"
+  },
+  "aka": [],
+  "siblings": [
+   "dark-orient-blue",
+   "dusky-orient-blue",
+   "delft-blue"
+  ],
+  "parent": "dark-orient-blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#638195",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 237,
+  "painters": [
+   {
+    "name": "Claude Monet",
+    "hits": 7,
+    "of": 50,
+    "lift": 14.05
+   }
+  ],
+  "peak_decade": {
+   "decade": 1920,
+   "lift": 3.39
+  },
+  "role": "mid",
+  "measured": {
+   "lch": [
+    52,
+    15,
+    249
+   ],
+   "nearest": [
+    [
+     "Delft Blue",
+     3.2
+    ],
+    [
+     "Light Tyrian Blue",
+     3.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway, Color Standards and Color Nomenclature (1912), plate XXXIV, hue 45′′, tone i; ISCC-NBS, NBS Circular 553 (1955), block 186",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "Color-kb concordance of the 29 color books for this name: no hits",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did \"orient\" or \"oriental\" usually signal in a nineteenth-century color name?",
+   "choices": [
+    "East Asian porcelain, lacquer or dyed cloth",
+    "A specific gemstone mine",
+    "A sunrise over the ocean",
+    "A French fashion house"
+   ],
+   "answer": "East Asian porcelain, lacquer or dyed cloth",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources name the specific porcelain or dye Deep Orient Blue was matched to.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "\"Orient\" in an old color name usually meant East Asian porcelain or dyed cloth, not a sunrise."
+ ],
+ "words": 299,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

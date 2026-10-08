@@ -1,0 +1,112 @@
+{
+ "slug": "jay-blue",
+ "name": "Jay Blue",
+ "hex": "#566D93",
+ "names": [
+  "Jay Blue"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Jay Blue is a moderate, slightly greyed blue named for the jay bird, and it most often plays an accent color inside a painting.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A bird's name",
+   "body": "The library records Jay Blue from the 1912 Ridgway atlas, plate XXII, hue 47, tone i, carried into the ISCC-NBS system's block 182 in 1955 [1]. The nearest named colors on file are [[azure-blue]], [[chapman-s-blue]], [[stardew]] and [[indigo-blue]], at 2.6, 2.6, \nIn LCH terms it measures lightness 46, chroma 24, hue 274 degrees, the ISCC-NBS \"moderate blue\" block, Munsell 5.2PB 4.5/5.6, close to [[azure-blue|Azure Blue]] and [[steel-blue|Steel Blue]] [1]. 6, 2.6, 3.7 and 3.8 ΔE [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 175 of 23,781 paintings, 0.74 percent, as photographed; the within-painting lens finds it in 83 [2]. That makes it more common than 56 percent of the named colors we track [2]. It peaks in the 1900s, in 20 of 1,674 paintings, at 1.2 percent of that century's paintings, 2.5 times the expected rate, and it is over-represented in French paintings, 2.3 times expected, 29 of 3,443 [2]. Inside a painting it most often sits as an accent, in 48 percent of its appearances [2].\n\nThe earliest match is dated 1420, by Fra Angelico; that is 492 years before the name's own first record, in 1912, so the match is a look-alike hue in an aged photograph, not evidence of the actual paint, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "pairs the jay bird with blue; the library does not say which jay species, if any, it intends",
+   "first_recorded": "1912 (Ridgway, plate XXII)",
+   "source": "Ridgway, Color Standards and Color Nomenclature (1912); ISCC-NBS 1955"
+  },
+  "aka": [],
+  "siblings": [
+   "azure-blue",
+   "chapman-s-blue",
+   "stardew",
+   "indigo-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 175,
+  "measured": {
+   "lch": [
+    46,
+    24,
+    274
+   ],
+   "nearest": [
+    [
+     "Azure Blue",
+     2.6
+    ]
+   ]
+  },
+  "role": {
+   "accent": 48
+  },
+  "country": "France, 2.3x expected (29 of 3443)"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912 plate XXII (hue 47, tone i); ISCC-NBS 1955 block 182; nearest library match Denim, ΔE 6.0",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Inside a painting, what role does Jay Blue most often play?",
+   "choices": [
+    "An accent",
+    "The background",
+    "A shadow",
+    "A highlight on skin"
+   ],
+   "answer": "An accent",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the library names which jay species gave Jay Blue its name.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Jay Blue plays an accent color in nearly half the paintings where it appears."
+ ],
+ "words": 254,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

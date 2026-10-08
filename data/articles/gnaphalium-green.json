@@ -1,0 +1,121 @@
+{
+ "slug": "gnaphalium-green",
+ "name": "Gnaphalium Green",
+ "hex": "#9DAC9C",
+ "names": [
+  "Gnaphalium Green"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Gnaphalium Green is a soft, pale grey-green named for Gnaphalium, the everlasting or cudweed genus whose leaves carry that same dusty tone, and recorded by Ridgway in 1912.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "An everlasting's green",
+   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* gives this hue at plate XLVII, hue 29″″, tone d, and it is also the color's first recorded date in Maerz and Paul's 1930 dictionary [1]. The ISCC-NBS system of 1955 placed it in block 149, a pale green [2]. Gnaphalium is the botanical genus name for the everlastings and cudweeds, small-flowered plants whose grey-green, felted leaves this color is built to describe, so the name skips an English common word for the Latin one [2].\n\nThe nearest named color is [[bluish-green|Bluish Green]], just 2.9 units away and almost indistinguishable; [[pale-oak|Pale Oak]] sits 4.2 units off, more vivid and yellower [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Gnaphalium Green appears in 543 of our 23,781 paintings, as photographed, more common than 79 percent of the archive's named colors [3]. It peaks in the 1900s, in 44 of 1,674 paintings, at 1.8 times the expected rate, and Niels Larsen Stevns is its most devoted painter, carrying it in 4 of his 22 works here at 5.8 times the baseline for his museums [3]. Inside a painting it most often plays a light rather than a shadow [3]. The earliest match is dated 1301, 611 years before Ridgway's 1912 record — a look-alike hue in an aged photograph, not proof that the pigment was lifted from any plant, a floor and not a first, since the archive's early centuries are thin [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Gnaphalium, the everlasting and cudweed genus",
+   "first_recorded": "1912, per Ridgway",
+   "source": "Ridgway, Color Standards and Color Nomenclature (1912), plate XLVII"
+  },
+  "aka": [
+   "Bluish Green"
+  ],
+  "siblings": [
+   "bluish-green",
+   "pale-oak",
+   "dusty-sage",
+   "morning-blue"
+  ],
+  "parent": null,
+  "children": null,
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 543,
+  "measured": {
+   "lch": [
+    69,
+    11,
+    142
+   ],
+   "nearest": [
+    [
+     "Bluish Green",
+     2.9
+    ],
+    [
+     "Pale Oak",
+     4.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XLVII, hue 29″″",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS 1955 block 149, look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Gnaphalium Green is named for a plant genus also called:",
+   "choices": [
+    "Everlastings and cudweeds",
+    "Roses",
+    "Ferns",
+    "Lichens"
+   ],
+   "answer": "Everlastings and cudweeds",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: no painter in our archive favors Gnaphalium Green more than the baseline.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Gnaphalium Green is named for a Latin plant genus, not an English flower word."
+ ],
+ "words": 256,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

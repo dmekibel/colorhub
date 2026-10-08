@@ -1,0 +1,119 @@
+{
+ "slug": "dark-neutral-grey",
+ "name": "Dark Neutral Grey",
+ "hex": "#4C5751",
+ "names": [
+  "Dark Neutral Grey"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Dark Neutral Grey is a plainly descriptive name: Ridgway's 1912 dictionary uses it for a dark greenish gray, one of the more common named colors in our painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A descriptive, not a borrowed, name",
+   "body": "Ridgway's 1912 dictionary lists Dark Neutral Grey at #4C5751, plate LIII, hue 73, tone k, and the ISCC-NBS circular of 1955 repeats it in the block it calls \"dark greenish gray\" [1]. Unlike most names, this one needs no etymology: it describes the swatch directly, and Ridgway's own system records no plant, place or person behind it [1]. The dictionary gives no Munsell notation for this particular swatch [1].\n\nIn our color graph the nearest named neighbor is [[traffic-grey-b|Traffic Grey B]], 2.9 units away [1]. A little further, at 4.8 units, is [[pelican|Pelican]] [1]. The swatch sits with our [[grey|grey]] family, its green modifier also pulling it toward [[green|green]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 2.58% of 23,781 paintings, 614 of them, as photographed, with the within-painting lens counting 293 [2]. That makes it more common than 76% of our named colors [2]. It peaks in the 1900s, present in 2.9% of the 1,674 paintings from that century, 2.2 times the rate its museums would predict [2]. Within a painting it most often sits as a mid-tone, in 32% of its 293 appearances [2]. Paul Sérusier is its most devoted painter, holding it in 4 of 26 works here, 5.0 times the baseline of the museums his paintings come from [2]. It is most over-represented in Norway, 3.1 times the expected rate [2]. It shares canvases with [[moss-grey|Moss Grey]] and [[black-grey|Black Grey]] more often than chance, at 3.3 and 2.9 times the expected rate [2]. The earliest match dates to 1099, 813 years before Ridgway recorded the name, a floor rather than a first [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1912 (ridgway)",
+   "source": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930"
+  },
+  "aka": [],
+  "siblings": [
+   "traffic-grey-b",
+   "pelican"
+  ],
+  "parent": "grey",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 614,
+  "measured": {
+   "lch": [
+    35.9,
+    6.0,
+    160.4
+   ],
+   "nearest": [
+    [
+     "Traffic Grey B",
+     2.9
+    ],
+    [
+     "Pelican",
+     4.8
+    ],
+    [
+     "Blackish Slate",
+     5.0
+    ]
+   ]
+  },
+  "iscc_nbs": {
+   "name": "dark greenish gray",
+   "de": 1.5
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and name graph (data/library.json, data/graph/): Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930; nearest names by Lab-space distance",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed color match, as photographed",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why is Dark Neutral Grey's name undocumented as a mystery, unlike Corinthian Purple or Cossack?",
+   "choices": [
+    "It is plainly descriptive, with no person, place or plant behind it",
+    "It is named for a painter",
+    "It is named for a mineral",
+    "It is a trade secret"
+   ],
+   "answer": "It is plainly descriptive, with no person, place or plant behind it",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dark Neutral Grey is one of the rarer named colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dark Neutral Grey turns up in more than one painting in forty across our archive."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "Descriptive name, no etymology question; confirmed no Munsell notation recorded for this swatch.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 292
+}

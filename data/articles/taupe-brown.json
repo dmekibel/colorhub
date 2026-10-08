@@ -1,0 +1,132 @@
+{
+ "slug": "taupe-brown",
+ "name": "Taupe Brown",
+ "hex": "#4E4242",
+ "names": [
+  "Taupe Brown"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Taupe Brown is a dark reddish gray first dated by Ridgway in 1912, the darker of the library's two taupe variants and one of the more common colors in our archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The darker of two taupe colors",
+   "body": "Ridgway's 1912 standard places this hue on plate XLIV, and the 1955 ISCC-NBS system classes it as a dark grayish purple, block 229 [1]. The nearest named colors on file are [[dark-umber]], [[reddish-black]], [[warm-blackish-brown]] and [[log-cabin]], at 3.5, 4, 5, 4, 4.1 and 4.7 ΔE [1].\n\n[[denim]], [[navy]] and [[terracotta]] all turn up more often than chance in paintings that also carry this color, alongside [[slate]] and [[charcoal]] [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to Taupe Brown in 1,117 of 23,781 paintings, about 4.7 percent, as photographed [2]. It plays a shadow in 68 percent of its appearances, the dark note in a composition rather than a highlight [2]. Jerichau, José Gutiérrez de la Vega and several Danish painters of the 1800s all use it well above the archive's average rate, with Jan Asselijn's *Nocturnal Crayfishing* (1610) its strongest single match [2].\n\nThe earliest dated match is Juran's *Buddhist Retreat by Stream and Mountains*, from the year 960, nine and a half centuries before Ridgway's plate, which only shows a similar screen color was photographed there, not that the name existed that early, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "taupe, French for mole",
+   "first_recorded": "Ridgway, 1912 (plate XLIV, hue 69′′′)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "dark-umber",
+   "reddish-black",
+   "warm-blackish-brown",
+   "log-cabin"
+  ],
+  "parent": "taupe",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1117,
+  "role": {
+   "shadow": 0.68,
+   "mid": 0.3
+  },
+  "company": [
+   "Denim",
+   "Navy",
+   "Terracotta",
+   "Slate",
+   "Charcoal"
+  ],
+  "measured": {
+   "lch": [
+    29,
+    5,
+    20
+   ],
+   "nearest": [
+    [
+     "Dark umber",
+     3.5
+    ],
+    [
+     "Reddish Black",
+     4.0
+    ],
+    [
+     "Warm Blackish Brown",
+     4.1
+    ],
+    [
+     "Log Cabin",
+     4.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955, Maerz and Paul 1930 and other name records, with plate/block locators and nearest-name match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What animal does the word \"taupe\" come from?",
+   "choices": [
+    "The mole",
+    "The squirrel",
+    "The badger",
+    "The otter"
+   ],
+   "answer": "The mole",
+   "kind": "pick"
+  },
+  {
+   "q": "In our archive, Taupe Brown most often appears as a:",
+   "choices": [
+    "shadow",
+    "highlight",
+    "midtone"
+   ],
+   "answer": "shadow",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Taupe Brown, like Taupe Grey, is named for the mole; this is the darker, more common of the two."
+ ],
+ "words": 233,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

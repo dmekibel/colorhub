@@ -1,0 +1,128 @@
+{
+ "slug": "dark-fuchsia",
+ "name": "Dark Fuchsia",
+ "hex": "#9D0759",
+ "names": [
+  "Dark Fuchsia"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Dark Fuchsia is a dark, strongly saturated purplish red that our data files under the fuchsia flower, filed by Plochere's 1955 ISCC-NBS color dictionary and sitting almost on top of two other names in our library.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A fuchsia word",
+   "body": "Our naming data groups Dark Fuchsia with the plant-and-landscape words, tracing it to the fuchsia flower rather than to a pigment or a place [1]. The Plochere Color System filed this name in 1955 under ISCC-NBS block 237, \"strong reddish purple\"; by computed color distance, the hex itself reads closest to a different ISCC-NBS reference point, block 256's \"deep purplish red,\" about 5 units away [1]. Wikipedia and the xkcd color survey of 2010 both carry the same name at the same hex, #9D0759 [1].\n\nTwo other names in our library sit close enough to count as near-duplicates: Deep Magenta, 0.8 units away, and Jazzberry Jam, 1.7 units away [2]. The nearest name that reads as a genuinely different color is [[berry]], 3.8 units off, which our computed comparison calls \"almost the same\" [3]. Measured in LCH terms, Dark Fuchsia sits at lightness 34, chroma 59 and hue 356 degrees: dark, strongly saturated, and just past red into purple [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a close match to Dark Fuchsia covers enough of the canvas in only 3, as photographed, which makes it rarer than 79 percent of the named colors we track [4]. In printed English the word peaked in the 2010s, though it rose fastest in the 1850s; because fuchsia is also a plant and not only a color word, that curve may track the flower as much as the shade [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the fuchsia flower; a plant-word name in our data, not a pigment or place",
+   "first_recorded": "ISCC-NBS, 1955 (block 237)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "berry",
+   "deep-magenta",
+   "raspberry",
+   "amaranth-deep-purple"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 3,
+  "measured": {
+   "lch": [
+    34,
+    59,
+    356
+   ],
+   "nearest": [
+    [
+     "Deep Magenta",
+     0.8
+    ],
+    [
+     "Berry",
+     3.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph and library (data/graph/nodes-d.json; data/library.json): Dark Fuchsia — ISCC-NBS 1955 block 237, Wikipedia, xkcd 2010",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Dark Fuchsia near-duplicates Deep Magenta and Jazzberry Jam, CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-d.json): nearest distinct neighbors by CIEDE2000, with a plain-word description of the difference",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings, as photographed) and Google Books Ngram data (data/graph/fieldnotes/d.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which system placed Dark Fuchsia in block 237 in 1955?",
+   "choices": [
+    "ISCC-NBS",
+    "CSS",
+    "RAL",
+    "Pantone"
+   ],
+   "answer": "ISCC-NBS",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dark Fuchsia is one of the more common colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Two other library names, Deep Magenta and Jazzberry Jam, sit almost exactly on top of Dark Fuchsia."
+ ],
+ "words": 268,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No book concordance hits for this slug; written from the color graph, library and archive data only.",
+   "Fixed: the name-text conflated two unrelated node fields — it attributed the computed-nearest-centroid description ('deep purplish red', de 5.1, actually block 256) to block 237, the block Plochere actually filed the name under (whose centroid name is 'strong reddish purple', per data/sources/iscc-nbs-centroids.json). Rewrote to keep the two facts separate.",
+   "lint 2026-10-09"
+  ]
+ }
+}

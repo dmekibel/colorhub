@@ -1,0 +1,111 @@
+{
+ "slug": "heliotrope-grey",
+ "name": "Heliotrope Grey",
+ "hex": "#AA98A9",
+ "names": [
+  "Heliotrope Grey"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Heliotrope Grey is a pale, greyed purple named for the heliotrope flower, present in a small slice of our painting archive since the 1400s.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A greyed heliotrope",
+   "body": "The library files Heliotrope Grey from the 1912 Ridgway atlas, plate L, hue 65, tone d; the ISCC-NBS system placed it in block 227 in 1955, and Maerz and Paul's 1930 dictionary also carries it, at plate 44 C3 [1]. The nearest named colors on file are [[deep-vinaceous-lavender]], [[catalpa]], [[deep-greyish-lavender]] and [[dark-lavender]], at 3, 3.5, \nIn LCH terms it measures lightness 65, chroma 12, hue 327 degrees, the ISCC-NBS \"pale purple\" block, Munsell 7.8P 6.4/3.1, a step between [[purple]] and [[violet]] [1]. 5, 4.7 and 5.4 ΔE [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 48 of 23,781 paintings, 0.2 percent, as photographed; the within-painting lens finds it in 24 [2]. That makes it rarer than 59 percent of the named colors we track [2]. It peaks in the 1900s, in 8 of 1,674 paintings, at 0.5 percent of that century's paintings, 3.1 times the expected rate [2]. Inside a painting it most often sits as a mid-tone, in 38 percent of its appearances, by lightness rank rather than by eye [2].\n\nThe earliest match in our archive is dated 1474, by Piero della Francesca; the name's own first record comes 438 years later, in 1912, so the match is a look-alike hue in an aged photograph, not evidence the pigment itself is that old, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "pairs the heliotrope flower with a grey modifier",
+   "first_recorded": "1912 (Ridgway, plate L)",
+   "source": "Ridgway, Color Standards and Color Nomenclature (1912); ISCC-NBS 1955; Maerz & Paul 1930"
+  },
+  "aka": [],
+  "siblings": [
+   "deep-vinaceous-lavender",
+   "catalpa",
+   "deep-greyish-lavender",
+   "dark-lavender"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 48,
+  "measured": {
+   "lch": [
+    65,
+    12,
+    327
+   ],
+   "nearest": [
+    [
+     "Deep Vinaceous-Lavender",
+     3.0
+    ]
+   ]
+  },
+  "role": {
+   "mid-tone": 38
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912 plate L (hue 65, tone d); ISCC-NBS 1955 block 227; Maerz & Paul 1930 plate 44 C3; nearest library match Lilac, ΔE 9.5",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which flower gives Heliotrope Grey its name?",
+   "choices": [
+    "Heliotrope",
+    "Lavender",
+    "Violet",
+    "Iris"
+   ],
+   "answer": "Heliotrope",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the earliest painting that matches Heliotrope Grey in our archive predates the name's first recorded use.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Heliotrope Grey turns up in a 1474 painting, four centuries before its own name was recorded."
+ ],
+ "words": 261,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

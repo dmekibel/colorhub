@@ -1,0 +1,131 @@
+{
+ "slug": "dark-olive-buff",
+ "name": "Dark Olive-Buff",
+ "hex": "#B69F67",
+ "names": [
+  "Dark Olive-Buff"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dark Olive-Buff darkens [[olive-buff]], a muted yellow-brown Ridgway plotted in 1912, and it is one of the most common colors in our painting archive, present in about one painting in eight.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A Ridgway hue, darkened",
+   "body": "The name applies dark to [[olive-buff]], which Robert Ridgway placed on plate XL of his 1912 *Color Standards and Color Nomenclature*, hue 21′′′ [1]. Buff names a pale yellowish tan, after the color of buffalo hide leather, and olive shifts it toward green-grey [1]. The ISCC-NBS *Dictionary of Color Names* later filed this darkened form in 1955 as block 91 [1].\n\nIts closest measured neighbor is [[ecru-olive]], only 3.0 units away and almost the same color; [[dust]] is a little duller and [[dark-beige]] darker [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is a common match in our archive: 2,924 of 23,781 paintings, 12.3 per cent, carry it, almost always as a highlight rather than a shadow (83 per cent of its appearances) [3]. It is especially frequent in Kalighat paintings, 43 of 96, 3.6 times the archive's overall rate, and in works by the Dutch portraitist Jan Maurits Quinkhard, 19 of his 40 paintings [3]. The earliest dated match is a Roman-period Egyptian funerary portrait from around the year 25, a floor on the color's age in painting rather than a claim of its first appearance [3]. As photographed: these are computed color matches on museum photographs of aged, varnished paintings, not a pigment test [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the parent hue Olive-Buff, darkened",
+   "first_recorded": "1912 (Ridgway, plate XL); 1955 (ISCC-NBS, block 91)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "ecru-olive",
+   "dust",
+   "dark-beige"
+  ],
+  "parent": "olive-buff",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#B69F67",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 2924,
+  "rate": 0.123,
+  "role": {
+   "highlight": 0.83,
+   "mid": 0.16,
+   "shadow": 0.01
+  },
+  "movements": [
+   [
+    "Kalighat",
+    96,
+    43,
+    3.64
+   ]
+  ],
+  "measured": {
+   "lch": [
+    66.3,
+    32.3,
+    88.9
+   ],
+   "nearest": [
+    [
+     "Ecru-Olive",
+     3.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Ridgway 1912, plate XL, hue 21′′′; ISCC-NBS 1955, block 91",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub Color Graph look-alikes (data/graph/edges-d.json), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does 'buff', the base of this color's parent name, originally refer to?",
+   "choices": [
+    "Buffalo hide leather",
+    "A polishing cloth",
+    "A pale flower",
+    "A Ridgway surname"
+   ],
+   "answer": "Buffalo hide leather",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: in paintings that carry Dark Olive-Buff, it most often sits as a highlight rather than a shadow.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Present in about one painting in eight in our archive, almost always as a highlight."
+ ],
+ "words": 233,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}

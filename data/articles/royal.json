@@ -1,0 +1,119 @@
+{
+ "slug": "royal",
+ "name": "Royal",
+ "hex": "#0C1793",
+ "names": [
+  "Royal"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Royal is a dark, vivid blue-violet from the ISCC-NBS dictionary of color names, and a far darker, more saturated color than the familiar web color Royal Blue despite the shared word.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Not the same blue as its namesake",
+   "body": "ISCC-NBS block 146 places it as a dark green in the 1955 dictionary, 7.1 units from the hex #0C1793, a loose match, and Maerz and Paul's earlier 1930 catalog is cited as a source without a specific plate recorded here [1]. No Munsell notation survives for it in our library, unusual among its neighbors [1].\n\nDespite the name, it sits roughly 34 units away in Lab space from [[royal-blue|Royal Blue]] (#4169E1), the much lighter, more familiar web and Crayola color, and about the same distance from [[royal-purple|Royal Purple]] [1]. Its closer library neighbor is plain [[dark-blue|Dark Blue]] (#00008B), 8.0 units off, still a visibly different, more neutral blue, with [[zaffre|Zaffre]] and [[egyptian-blue|Egyptian Blue]] both a little further out again [1]. The word \"royal\" has long attached to deep, costly-looking blues and purples without settling on one exact mix, and this dictionary entry is one of several competing claims to the name [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within six units of it covers at least five percent of the canvas in just 1 of our 23,781 archive paintings, as photographed, rarer than 82 percent of our named colors [2]. In that single painting it plays an accent role rather than a shadow or a light [2]. The sample is too small here for a reliable first-seen date or century pattern, which is itself a finding: this exact mix is close to absent from our painting record [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the association of deep blue and purple with royalty",
+   "first_recorded": "1930 (Maerz & Paul); 1955 (ISCC-NBS block 146)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "royal-blue",
+   "royal-purple",
+   "dark-blue",
+   "zaffre"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "royal-blue",
+    "gloss": "Royal Blue (#4169E1) is a much lighter, more familiar blue despite the shared name"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2,
+  "n_present_painting_level": 1,
+  "measured": {
+   "lch": [
+    19.2,
+    79.6,
+    303.7
+   ],
+   "nearest": [
+    [
+     "Dark Blue",
+     8.0
+    ],
+    [
+     "Royal Blue",
+     33.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS 1955 block 146; Maerz and Paul 1930 cited as source, no plate recorded",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How far apart are Royal and the familiar web color Royal Blue?",
+   "choices": [
+    "About 34 Lab units, a visibly different color",
+    "Under 1 unit, essentially identical",
+    "Exactly the same hex",
+    "About 8 units, a close match"
+   ],
+   "answer": "About 34 Lab units, a visibly different color",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Royal is a common color in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Royal and Royal Blue share a name but sit 34 Lab units apart, further than most named color pairs in our library."
+ ],
+ "words": 260,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); archive presence is too thin (1 painting) for century or first-seen claims, so none are made.",
+   "lint 2026-10-09"
+  ]
+ }
+}

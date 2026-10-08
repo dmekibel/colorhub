@@ -1,0 +1,115 @@
+{
+ "slug": "cedar-chest",
+ "name": "Cedar Chest",
+ "hex": "#C95A49",
+ "names": [
+  "Cedar Chest"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Cedar Chest is a warm reddish orange named for cedar wood, listed in the Crayola range by way of Wikipedia rather than a standards body.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A furniture-wood name",
+   "body": "Our library's only source for Cedar Chest is Wikipedia, which in turn credits the Crayola crayon line; it carries no Ridgway, ISCC-NBS or Maerz and Paul record[1]. The name points to cedar wood furniture, the kind used to line chests for its scent and insect resistance, rather than to the tree's own bark or foliage color [1].\n\nThe nearest named colors on file are [[coral-red]], [[dark-coral]], [[dusty-vermilion]] and [[dragon-s-blood]], at 3.8, 3.9, 4 and 5.2 ΔE [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to Cedar Chest in 213 of 23,781 paintings (0.9 percent), as photographed [2]. It is heavily over-represented in paintings from India (3.4 times expected) and especially in the Kalighat school, at 7.4 times its baseline [2]. It most often plays an accent inside a painting, in 89 percent of appearances, and keeps company with [[tussore]] and [[camel]] more than chance [2]. Unlike most names, its earliest archive match, from 1236, does not run ahead of any documented first-recorded year, since Crayola and Wikipedia give none [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "cedar-wood furniture",
+   "first_recorded": "undocumented in our sources",
+   "source": "Wikipedia, citing Crayola"
+  },
+  "aka": [],
+  "siblings": [
+   "coral-red",
+   "dark-coral",
+   "dusty-vermilion",
+   "dragon-s-blood"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 213,
+  "role": {
+   "accent": 0.89
+  },
+  "company": [
+   "Tussore",
+   "Camel"
+  ],
+  "measured": {
+   "lch": [
+    52,
+    53,
+    36
+   ],
+   "nearest": [
+    [
+     "Coral Red",
+     3.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: name records, plate and block locators, tier classification",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which commercial line is Cedar Chest associated with?",
+   "choices": [
+    "Crayola",
+    "RAL",
+    "Pantone",
+    "Benjamin Moore"
+   ],
+   "answer": "Crayola",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Cedar Chest appears in Ridgway's 1912 color standards.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Unlike most names, Cedar Chest has no Ridgway or ISCC-NBS record, only a Crayola-era citation."
+ ],
+ "words": 200,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

@@ -1,0 +1,132 @@
+{
+ "slug": "dark-perilla-purple",
+ "name": "Dark Perilla Purple",
+ "hex": "#654044",
+ "names": [
+  "Dark Perilla Purple"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dark Perilla Purple darkens [[perilla-purple]], named for the red-leaved perilla herb, and Albrecht Dürer's paintings carry it at nearly thirteen times our archive's average rate.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A darkened herb color",
+   "body": "The name pairs dark with [[perilla-purple]], named for *Perilla*, a mint-family herb grown for its deep red-purple leaves and used in East Asian cooking, medicine and dye [1]. Ridgway charted this darker tone in *Color Standards and Color Nomenclature* (1912), plate XXXVII, hue 65′′, tone m, and the ISCC-NBS *Dictionary of Color Names* carried it forward in 1955 as block 259 [1].\n\nIts nearest measured neighbor is [[purple-brown]], 2.7 units off and almost the same color; [[dark-maroon-purple]] and [[hay-s-maroon]] sit close behind, both a little redder, and [[umber-brown]] a touch further still at 4.2 units [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A match for this color covers at least five per cent of the canvas in 158 of 23,781 paintings in our archive, about 0.7 per cent, as photographed [3]. It is strongest in Albrecht Dürer's work, 4 of his 47 paintings, nearly 12.8 times the archive's overall rate, and in Henri Matisse's, 3 of 50, about nine times the rate [3]. The earliest dated match is a Roman-period portrait from around the year 100, a floor on the color's age in painting rather than a claim of its first appearance [3]. As photographed: these are computed color matches on museum photographs of aged, varnished paintings, not a pigment test [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the perilla plant's red-purple leaves, darkened",
+   "first_recorded": "1912 (Ridgway, plate XXXVII); 1955 (ISCC-NBS, block 259)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "purple-brown",
+   "dark-maroon-purple",
+   "hay-s-maroon"
+  ],
+  "parent": "perilla-purple",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#654044",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 158,
+  "rate": 0.0066,
+  "painters": [
+   [
+    "Albrecht Dürer",
+    47,
+    4,
+    12.81
+   ],
+   [
+    "Henri Matisse",
+    50,
+    3,
+    9.03
+   ]
+  ],
+  "measured": {
+   "lch": [
+    31.5,
+    17.3,
+    14.2
+   ],
+   "nearest": [
+    [
+     "Purple Brown",
+     2.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Ridgway 1912, plate XXXVII, hue 65′′, tone m; ISCC-NBS 1955, block 259",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub Color Graph look-alikes (data/graph/edges-d.json), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Perilla, the plant behind this color's parent name, is grown mainly for its what?",
+   "choices": [
+    "Red-purple leaves",
+    "Blue flowers",
+    "Orange roots",
+    "Yellow seeds"
+   ],
+   "answer": "Red-purple leaves",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Albrecht Dürer's paintings carry this color far above our archive's average rate.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Named for a red-leaved herb, and unusually common in Dürer's paintings."
+ ],
+ "words": 237,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}

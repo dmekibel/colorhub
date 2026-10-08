@@ -1,0 +1,138 @@
+{
+ "slug": "raisin-black",
+ "name": "Raisin Black",
+ "hex": "#242124",
+ "names": [
+  "Raisin Black"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Raisin Black is a near-black with a faint purple cast, named for dried fruit and tracked across five different color systems since Werner's 1821 nomenclature.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A black measured five ways",
+   "body": "Werner's 1821 *Nomenclature of Colours*, the system Patrick Syme expanded from Abraham Werner's original, paired its blacks with natural analogs [1]. Werner's no. 22 gives the berry of deadly nightshade as a plant match for this one, and olivine ore as a mineral match, both read from an aged, scanned swatch, so the comparison is approximate [1]. Ridgway's 1912 atlas lists a near reading at plate XLIV, hue 65''', and Maerz and Paul's 1930 dictionary dates its own record of the name to 1905, at plate 40 C 7 [1]. ISCC-NBS folded it into block 235 in 1955, calling it a purplish black, and RAL later gave it an approximate equivalent, RAL 8022 [1].\n\nIn Lab terms it sits at lightness 13, barely off true black, with a slight violet lean [1]. Its nearest library neighbors are [[dark-gunmetal|Dark gunmetal]] and [[eerie-black|Eerie Black]], both under five units away [1]. [[raisin-purple|Raisin Purple]] carries the same \"Raisin\" word toward a much lighter, visibly purple cousin [1]. A third library entry, [[vivid-black|Vivid black]], sits only slightly further out, among the handful of near-blacks this close together [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within six units of it covers at least five percent of the canvas in 1,897 of our 23,781 archive paintings, as photographed, more common than 94 percent of our named colors [2]. It most often serves as a shadow, 56 percent of the 1,688 paintings our within-painting lens finds it in, and it peaks in the 1500s, in 173 of 2,231 paintings, at 1.3 times the expected rate [2]. Pieter van der Werff is its most devoted painter, carrying it in 19 of his 35 works here, 11.7 times his era's baseline [2]. The earliest dated painting is from 1201, 620 years before Werner's 1821 record, a floor set by thin early coverage, not a true first sighting; in printed English the phrase itself peaks in the 1920s [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "dried, dark grapes",
+   "first_recorded": "1821 (Werner)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "raisin-purple",
+   "dark-gunmetal",
+   "eerie-black",
+   "vivid-black"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1688,
+  "n_present_painting_level": 1897,
+  "measured": {
+   "lch": [
+    13.2,
+    2.6,
+    324.8
+   ],
+   "nearest": [
+    [
+     "Dark gunmetal",
+     3.6
+    ],
+    [
+     "Eerie Black",
+     4.3
+    ]
+   ]
+  },
+  "painters": [
+   {
+    "name": "Pieter van der Werff",
+    "hits": 19,
+    "n": 35,
+    "lift": 11.7
+   }
+  ],
+  "ngram": {
+   "term": "raisin black",
+   "peak": 1920,
+   "rise": 1910
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Werner 1821, no. 22 (Blacks); Ridgway 1912, plate XLIV; Maerz and Paul 1930, plate 40 C 7, first recorded 1905; ISCC-NBS 1955 block 235; RAL 8022",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed; Google Books Ngram, all senses",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In Werner's 1821 nomenclature, what mineral is matched to this black?",
+   "choices": [
+    "Olivine ore",
+    "Hematite",
+    "Obsidian",
+    "Jet"
+   ],
+   "answer": "Olivine ore",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Raisin Black and Raisin Purple are close in color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which painter in our archive carries this color far above his own era's baseline?",
+   "choices": [
+    "Pieter van der Werff",
+    "Rembrandt van Rijn",
+    "John Singer Sargent",
+    "Amedeo Modigliani"
+   ],
+   "answer": "Pieter van der Werff",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Werner's 1821 nomenclature matched this near-black to the berry of deadly nightshade and to olivine ore."
+ ],
+ "words": 333,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); Werner's plant/mineral analogs read from an aged, scanned swatch, flagged as approximate.",
+   "lint 2026-10-09"
+  ]
+ }
+}

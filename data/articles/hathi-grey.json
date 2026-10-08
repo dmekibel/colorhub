@@ -1,0 +1,109 @@
+{
+ "slug": "hathi-grey",
+ "name": "Hathi Grey",
+ "hex": "#8F9891",
+ "names": [
+  "Hathi Grey"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Hathi Grey is a soft greenish grey that Ridgway standardized in 1912, and our archive finds a close match in roughly one painting in thirty-four.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A 1912 standard with an undocumented word",
+   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* places Hathi Grey on plate LII, hue 35 (five primes), tone b [1]. The ISCC-NBS system of 1955 files it as a greenish gray, block 155, the same descriptive term as our own [[greenish-grey]] entry; Maerz and Paul's 1930 dictionary cites that same ISCC-NBS circular rather than giving an independent record [1]. Why 'hathi' was chosen is undocumented in the sources we checked [1].\n\nThe closest common color word in our library is [[grey|Grey]] itself, about eight units away in CIEDE2000 [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within six units of Hathi Grey covers at least five percent of the canvas in 699 of our 23,781 paintings, 2.94 percent, as photographed; the within-painting lens finds it in 430 [2]. That ranks it ahead of 81 percent of the named colors we track [2]. It most often plays a light, in 47 percent of its 430 appearances [2].\n\nHenri Matisse is its most devoted painter, in nine of his 50 paintings here, 6.9 times the rate of the museums those works come from [2]. It shares canvases with [[deep-neutral-grey|Deep Neutral Grey]] and [[french-grey|French Grey]] more than chance would predict, with lifts of 6.5 and 4.6 [2]. The earliest matching painting dates to 1399, 513 years before Ridgway recorded the name in 1912 — a look-alike hue in an aged photograph, not proof the color existed as a pigment that early, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1912, Ridgway",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "deep-neutral-grey",
+   "french-grey",
+   "greenish-grey"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 430,
+  "pct": 2.94,
+  "rank_percentile": 81,
+  "measured": {
+   "lch": [
+    61.9,
+    5.3,
+    151.0
+   ],
+   "munsell": "N 6.1",
+   "app": [
+    "Grey",
+    8.3
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and graph data: Ridgway 1912 / ISCC-NBS 1955 / Maerz & Paul 1930 / RAL entries (data/library.json, data/graph/)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, computed color match, as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which system first recorded the name Hathi Grey?",
+   "choices": [
+    "Ridgway, 1912",
+    "Maerz and Paul, 1930 (independently)",
+    "ISCC-NBS, 1955",
+    "RAL, 1927"
+   ],
+   "answer": "Ridgway, 1912",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the sources we checked explain where the word 'hathi' comes from.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Hathi Grey shares canvases with Deep Neutral Grey and French Grey far more than chance would allow."
+ ],
+ "words": 267,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance hits; etymology of 'hathi' marked undocumented.",
+   "lint 2026-10-09"
+  ]
+ }
+}

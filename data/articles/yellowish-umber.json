@@ -1,0 +1,160 @@
+{
+ "slug": "yellowish-umber",
+ "name": "Yellowish umber",
+ "hex": "#5E5545",
+ "names": [
+  "Yellowish umber"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Yellowish umber is a muted, olive-leaning brown carried into our library from a Japanese traditional color name, and it is one of the more common swatches in our painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Iwaicha, an Iwai brown",
+   "body": "Our library lists this color from the Wikipedia survey *Traditional colors of Japan*, under the romanized name Iwaicha, written 岩井茶 [1]. The library glosses the pair as \"Iwai brown\"; no further date or dyeing detail is given, and what \"Iwai\" itself refers to is undocumented here [1].\n\nThe nearest named colors on file are [[fuscous]], [[greyish-brownish-olive]] and [[guinea-hen]], at 3, 3 and 4.2 ΔE [1]. By the numbers, yellowish umber leans more yellow-green, at a hue angle of 86 degrees against umber's 56, while plain umber leans warmer and more orange [1]. The hex given here, #5E5545, is a modern screen reading chosen to match the library's gloss, not a measurement of dyed cloth or a pigment sample, so treat it as approximate [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color within range of this swatch in 5,763 of the 23,781 paintings we have, about 24 percent, as photographed[2]. It holds fairly steady across centuries, from roughly one painting in five to one in four, from the 1100s through the 1900s [2]. It turns up somewhat more in Korean and Chinese works than the archive average, at 1.77 and 1.4 times the expected rate [2].\n\nInside a painting it most often sits as a midtone, in 56 percent of the paintings that carry it [2]. It also plays a shadow role nearly a third of the time, in 31 percent, more often than it serves as a highlight, at 13 percent [2]. Measured values are screen approximations of varnished, photographed canvases, not a pigment identification [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the Japanese traditional color Iwaicha (岩井茶), glossed as \"Iwai brown\"",
+   "first_recorded": "undocumented beyond its listing in Japan's traditional color system",
+   "source": "ColorHub color library (Wikipedia, \"Traditional colors of Japan\")"
+  },
+  "aka": [
+   "Iwaicha",
+   "岩井茶"
+  ],
+  "siblings": [
+   "fuscous",
+   "greyish-brownish-olive",
+   "guinea-hen",
+   "bronze-lustre"
+  ],
+  "parent": "umber",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Iwaicha (岩井茶), \"Iwai brown\""
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 5763,
+  "rate_pct": 24.2,
+  "country_lift": [
+   {
+    "country": "Korea",
+    "hits": 27,
+    "of": 63,
+    "lift": 1.77
+   },
+   {
+    "country": "China",
+    "hits": 216,
+    "of": 635,
+    "lift": 1.4
+   }
+  ],
+  "role": {
+   "mid_pct": 56,
+   "shadow_pct": 31,
+   "highlight_pct": 13
+  },
+  "measured": {
+   "lch": [
+    36.6,
+    10.7,
+    85.7
+   ],
+   "nearest": [
+    [
+     "Fuscous",
+     3.0
+    ],
+    [
+     "Greyish brownish olive",
+     3.0
+    ],
+    [
+     "Guinea Hen",
+     4.2
+    ],
+    [
+     "Bronze Lustre",
+     4.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional color names (Wikipedia, \"Traditional colors of Japan\")",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the Japanese name for this swatch, Iwaicha, gloss as?",
+   "choices": [
+    "Iwai brown",
+    "Rock brown",
+    "River brown",
+    "Deep umber"
+   ],
+   "answer": "Iwai brown",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: this swatch is one of the rarest colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Inside paintings that carry it, yellowish umber most often plays which role?",
+   "choices": [
+    "A midtone",
+    "A highlight",
+    "A shadow",
+    "An outline"
+   ],
+   "answer": "A midtone",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Yellowish umber comes from a Japanese name glossed as \"Iwai brown,\" and it turns up in about a quarter of the paintings in our archive."
+ ],
+ "words": 282,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No book-level source for the name's history beyond the library gloss; stated as undocumented rather than guessed.",
+   "lint 2026-10-09"
+  ]
+ }
+}

@@ -1,0 +1,126 @@
+{
+ "name": "Mallow Pink",
+ "hex": "#E194B7",
+ "names": [
+  "Mallow Pink"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Mallow Pink is a soft purplish pink named for the mallow flower, recorded by the Maerz and Paul dictionary in 1930 with a first use in 1912.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A flower pink",
+   "body": "Our data traces the name to mallow, the flowering plant, rather than a pigment or a place [1]. The Maerz and Paul dictionary of 1930 plots it on plate 49 A7 and gives it a first recorded use of 1912, and the ISCC-NBS system files the same area as \"moderate purplish pink\" [1]. In LCH terms it reads as lightness 70, chroma 34, hue 350 degrees: a soft, moderately saturated pink leaning purple [1].\n\nIts nearest computed neighbors are [[kobi|Kobi]] and [[amaranth-pink|Amaranth Pink]], both close by distance, and [[pink|Pink]] itself, 4.0 units off and more vivid [2]. Its sibling in our nature-tier set, [[light-mallow-purple|Light Mallow Purple]], shares the same plant root but reads as a brighter, more purple hue [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a close match covers enough of the canvas in only 3, as photographed (1 by the stricter within-painting measure), which makes it rarer than 86 percent of the named colors we track; this is one of the least-represented colors in our data [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the mallow flower",
+   "first_recorded": "Maerz & Paul, 1930 (first used 1912)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "kobi",
+   "amaranth-pink",
+   "light-mallow-purple"
+  ],
+  "parent": "pink",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 3,
+  "measured": {
+   "lch": [
+    70,
+    34,
+    350
+   ],
+   "nearest": [
+    [
+     "Kobi",
+     3.0
+    ],
+    [
+     "Amaranth Pink",
+     3.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/nodes-m.json): Mallow Pink — Maerz & Paul 1930, plate 49 A7, first recorded 1912",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-m.json): nearest distinct neighbors by CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/nodes-l.json): Light Mallow Purple entry, shared plant root",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings, as photographed, data/graph/fieldnotes/m.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Mallow Pink is named for which plant?",
+   "choices": [
+    "Mallow",
+    "Rose",
+    "Hyssop",
+    "Lupine"
+   ],
+   "answer": "Mallow",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Mallow Pink is one of the most common colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Only 3 paintings in our 23,781-painting archive carry a close match to Mallow Pink, making it one of the rarest named colors we track."
+ ],
+ "words": 192,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No book concordance hits for this slug; written from the color graph, library and archive data only.",
+   "lint 2026-10-09"
+  ]
+ },
+ "slug": "mallow-pink"
+}

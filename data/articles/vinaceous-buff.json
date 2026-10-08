@@ -1,0 +1,118 @@
+{
+ "slug": "vinaceous-buff",
+ "name": "Vinaceous-Buff",
+ "hex": "#CEB29A",
+ "names": [
+  "Vinaceous-Buff"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Vinaceous-Buff is a wine-tinted tan, one of a long family of \"vinaceous\" names Robert Ridgway coined for naturalists describing birds and mammals with a faint reddish-purple cast.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Wine plus tan",
+   "body": "Ridgway carried this name over from his own 1886 *Nomenclature of Colors*, then replated it in 1912 at plate XL, hue 17''', tone d [1]. \"Vinaceous\" is Ridgway's own coinage, built from *vinaceus*, Latin for wine-colored, and used across dozens of his plates to mark a hue leaning toward wine-red rather than true brown [1]. The ISCC-NBS system later filed it as block 28, a brownish pink [1].\n\nThe nearest named colors on file are [[sandust]], [[dusty-peach]], [[pastel-parchment]] and [[pale-blush]], at 3.5, 4.4, 4.5 and 4.8 ΔE [1]. Measured in LCH it is lightness 74, chroma 17 and hue 68 degrees, a muted, pale orange-brown [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this tan in 1,487 of 23,781 paintings (6.25%, as photographed), more common than 90% of the named colors we track [3]. It most often plays a hidden color, found this way in 41% of its 1,006 strongest matches [3]. It is most over-represented in paintings from Nepal, at 3.8 times the expected rate [3]. Ludolf Bakhuysen is its most devoted painter, at 5.0 times the baseline rate across his 20 works here [3]. The earliest dated match runs to the year 900, nearly a thousand years before Ridgway's 1886 record; the match is a look-alike hue in an aged photograph, not proof the pigment was there, a floor and not a first, since the archive's early centuries are thin [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "wine-color (vinaceus) plus buff",
+   "first_recorded": "1886 (Ridgway, Nomenclature of Colors)",
+   "source": "Ridgway, Color Standards and Color Nomenclature (1912), carried over from 1886"
+  },
+  "aka": [],
+  "siblings": [
+   "sandust",
+   "dusty-peach",
+   "pastel-parchment",
+   "pale-blush"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1487,
+  "measured": {
+   "lch": [
+    74,
+    17,
+    68
+   ],
+   "nearest": [
+    [
+     "Sandust",
+     3.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Ridgway 1886 Nomenclature of Colors, carried to Ridgway 1912 plate XL; ISCC-NBS 1955 block 28",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library and Color Graph look-alikes (data/graph/), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does \"vinaceous\" describe in Ridgway's naming system?",
+   "choices": [
+    "A hue leaning toward wine-red",
+    "A color only found in grapes",
+    "A fully saturated purple",
+    "A color used only for wine bottles"
+   ],
+   "answer": "A hue leaning toward wine-red",
+   "kind": "pick"
+  },
+  {
+   "q": "Which named color is an exact match to Vinaceous-Buff in our library?",
+   "choices": [
+    "Biscuit",
+    "Indigo",
+    "Vermilion",
+    "Chartreuse"
+   ],
+   "answer": "Biscuit",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Vinaceous-Buff shares Robert Ridgway's wine-colored naming scheme with dozens of other bird and mammal hues."
+ ],
+ "words": 259,
+ "status": "checked",
+ "checked": {
+  "by": "batch-16",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); written from the color graph, library and archive only.",
+   "lint 2026-10-09"
+  ]
+ }
+}

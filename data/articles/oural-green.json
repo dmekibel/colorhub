@@ -1,0 +1,145 @@
+{
+ "slug": "oural-green",
+ "name": "Oural Green",
+ "hex": "#D0E0BA",
+ "names": [
+  "Oural Green"
+ ],
+ "tier": "place",
+ "depth": "short",
+ "lede": "Oural Green is a pale, chalky yellow-green named with the French spelling of the Urals, the mountain range that marks the traditional line between Europe and Asia.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A mountain range's name",
+   "body": "The Ural Mountains run roughly north to south for about 2,500 kilometers through Russia and are conventionally treated as the boundary between the European and Asian continents, a convention rather than a geological fact [3]. Oural is the French spelling of Ural, consistent with how Maerz and Paul's 1930 dictionary borrowed several European place names in their French form [1]. Ridgway's 1912 standards plate this green on plate XVIII, hue 35 prime, tone f, and the ISCC-NBS dictionary of 1955 later filed the same swatch, block 135, as a light yellowish green, 3.9 units from that block's center [1]. Our library gives it the Munsell notation 6.7GY 8.7/2.5 [1].\n\nIts nearest named neighbors are Pale Olivine, 3.8 units away, and Pale Veronese Green, 3.8 units away [1]. It sits in the same pale, chalky cluster as [[pale-olivine]] and [[tea-green]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Oural Green covers at least five percent of the canvas in 65 works, a little over a quarter of one percent [2]. The earliest dated example is Antonello da Messina's 1475 Dead Christ supported by an angel, a floor and not a first, since the archive's early centuries are thin [2]. It peaks in the 1860s, in 6 of 926 paintings, three and a half times the archive's overall rate for that decade, and Vincent van Gogh carries it in three of his forty-nine paintings here, over twenty times the baseline rate [2]. Ninety-eight percent of its appearances sit in a painting's highlights rather than its mid-tones or shadows[2]. It shares a canvas with [[celadon]] far more than any other color word, over a hundred and fifty times the baseline[2]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the Ural Mountains, Russia (French spelling)",
+   "first_recorded": "1912 (Ridgway, plate XVIII, hue 35′)",
+   "source": "ColorHub color library (Ridgway 1912; ISCC-NBS 1955)"
+  },
+  "aka": [
+   "Ural Green"
+  ],
+  "siblings": [
+   "pale-olivine",
+   "pale-veronese-green",
+   "light-fluorite-green",
+   "pale-blue-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#D0E0BA",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 65,
+  "peak_decade": 1860,
+  "role": {
+   "highlight": 0.98,
+   "mid": 0.02
+  },
+  "company": [
+   {
+    "word": "Celadon",
+    "lift": 150.99
+   }
+  ],
+  "measured": {
+   "lch": [
+    87.1,
+    20.7,
+    125.4
+   ],
+   "nearest": [
+    [
+     "Pale Olivine",
+     3.8
+    ],
+    [
+     "Pale Veronese Green",
+     3.8
+    ],
+    [
+     "Light Fluorite Green",
+     4.5
+    ],
+    [
+     "Pale Blue-Green",
+     4.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS 1955, Maerz & Paul 1930, Ridgway 1912, Munsell notation entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "web",
+   "cite": "Wikipedia, \"Ural Mountains\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/Ural_Mountains"
+  }
+ ],
+ "questions": [
+  {
+   "q": "Oural is the French spelling of which mountain range?",
+   "choices": [
+    "the Urals",
+    "the Alps",
+    "the Carpathians",
+    "the Caucasus"
+   ],
+   "answer": "the Urals",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: nearly all of Oural Green's appearances in our archive fall in shadow.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Oural Green and Celadon appear together in our archive over 150 times more than chance would predict."
+ ],
+ "words": 325,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

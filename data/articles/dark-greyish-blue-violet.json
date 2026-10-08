@@ -1,0 +1,101 @@
+{
+ "slug": "dark-greyish-blue-violet",
+ "name": "Dark Greyish Blue-Violet",
+ "hex": "#4D4E75",
+ "names": [
+  "Dark Greyish Blue-Violet"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dark Greyish Blue-Violet is a dim, muted violet-blue, ColorHub's library name for a darkened, greyed shade of [[blue-violet]], traced to Ridgway's 1912 color atlas.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A darkened, greyed blue-violet",
+   "body": "The name follows ColorHub's modifier grammar, \"dark greyish\" plus the parent color [[blue-violet]] [1]. The library dates the swatch to Ridgway's *Color Standards and Color Nomenclature* of 1912, plate XXIV, and again places it in the ISCC-NBS Dictionary of Color Names of 1955, in the block for greyish purplish blue [1]. Ridgway's plates survive only as scans of an aged, printed chart, so the hex value is an approximation of the original ink, not a measurement of it [1].\n\nThe closest named neighbor on file is [[dusk]], almost indistinguishable from it, with [[azurite-blue]] close behind [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color near this swatch in 54 of 23,781 paintings, about 0.23 per cent, as photographed [2]. It is rare before 1900, then rises sharply in the 1910s, nearly eight times that decade's average rate, led by Gustav Klimt and Henri Matisse [2]. Austria and Norway both show it well above their average rates in our sample, consistent with its concentration in early-twentieth-century portraits rather than any earlier period in the archive [2]. These are computed color matches to photographed, varnished paintings, not pigment identifications [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a darkened, greyed shade of Blue-Violet",
+   "first_recorded": "Ridgway, 1912, plate XXIV",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "dusk",
+   "azurite-blue",
+   "independence"
+  ],
+  "parent": "blue-violet",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 54,
+  "pct_archive": 0.23,
+  "role": "shadow",
+  "peak_decade": 1910
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; Ridgway 1912, plate XXIV; ISCC-NBS 1955)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph, nearest-neighbor color distances (data/graph/edges-d.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1912 reference does ColorHub's library trace this swatch to?",
+   "choices": [
+    "Ridgway's Color Standards and Color Nomenclature",
+    "Maerz and Paul's Dictionary of Color",
+    "Werner's Nomenclature of Colours"
+   ],
+   "answer": "Ridgway's Color Standards and Color Nomenclature",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: this color is more common in paintings before 1900 than after.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Nearly absent from paintings before 1900, then a favorite of Klimt and Matisse in the 1910s."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": []
+ },
+ "words": 206
+}

@@ -1,0 +1,132 @@
+{
+ "slug": "castor-grey",
+ "name": "Castor Grey",
+ "hex": "#54534D",
+ "names": [
+  "Castor Grey"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Castor Grey is a true neutral, olive-leaning grey from Maerz and Paul's 1930 dictionary, common in the archive as a shadow and underpainting tone.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A neutral grey from 1912",
+   "body": "Maerz and Paul's 1930 dictionary of color dates the name to 1912, at plate 31, column C, chip 2, hex #54534D [1]. The ISCC-NBS committee's 1955 match places it among the \"dark greenish gray\" names, 2.6 units away[1]. Its Munsell notation is recorded simply as N 3.5, a dark neutral with no measurable hue, confirming how close to true grey it sits [1]. Whether the name recalls castor, the Latin word for beaver, is not explained in the sources consulted here, and is undocumented [1].\n\nIts nearest library neighbor is [[pelican|Pelican]], about three units away and barely distinguishable on screen [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within six units of Castor Grey covers at least five per cent of the canvas in 2,735 of 23,781 paintings, about 11.5 per cent, as photographed [2]. It peaks in paintings from the 1270s, and Frederic Remington and the Danish painter Erik Pauelsen carry it well above the archive average, each more than four and a half times the base rate [2]. Its earliest appearance is a *Still Life with Plums* attributed to the early 1600s [2]. These are photographs of varnished paintings, read as screen colors [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "Maerz & Paul, 1930 (dated 1912), plate 31 C 2",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "pelican",
+   "vienna-smoke",
+   "umbra-grey",
+   "greyish-umber"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#54534D",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 2735,
+  "painters": [
+   {
+    "name": "Frederic Remington",
+    "hits": 9,
+    "n": 16,
+    "lift": 4.89
+   },
+   {
+    "name": "Erik Pauelsen",
+    "hits": 8,
+    "n": 15,
+    "lift": 4.64
+   }
+  ],
+  "measured": {
+   "rgb": [
+    84,
+    83,
+    77
+   ],
+   "lch": [
+    35.2,
+    3.7,
+    102.8
+   ],
+   "nearest": [
+    [
+     "Pelican",
+     3.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz & Paul 1930 (plate 31 C 2), ISCC-NBS 1955 entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match within ΔE 6, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Castor Grey's Munsell notation, N 3.5, tell us about the color?",
+   "choices": [
+    "It has almost no measurable hue, a true neutral",
+    "It is a very bright color",
+    "It is a named pigment, not a dictionary entry",
+    "It only exists in RAL's industrial standard"
+   ],
+   "answer": "It has almost no measurable hue, a true neutral",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources confirm Castor Grey is named after castor, the Latin word for beaver.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Castor Grey's Munsell notation carries no hue at all; it is about as neutral as grey gets."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 212
+}

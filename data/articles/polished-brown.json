@@ -1,0 +1,126 @@
+{
+ "slug": "polished-brown",
+ "name": "Polished Brown",
+ "hex": "#985538",
+ "names": [
+  "Polished Brown"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Polished Brown is ColorHub's direct English rendering of Tonocha, a reddish brown that Japanese tradition names for a kind of polished, whetstone-smoothed tea-brown surface.",
+ "sections": [
+  {
+   "id": "japan",
+   "title": "A whetstone-smooth brown",
+   "body": "Wikipedia's list of traditional Japanese colors gives this swatch as Tonocha (礪茶), combining tono, a word tied to grinding or whetstones, with cha, \"tea-brown,\" naming a smooth, burnished reddish brown [1]. ColorHub's English name, Polished Brown, translates the sense directly rather than loosely [1]. The ISCC-NBS dictionary of 1955 places the swatch in block 38, \"dark reddish orange,\" about 6.3 units from that block's centre [2]. The library's nearest other named colors are [[dusty-sienna]] and [[sienna]], each under 3 units away [2].\n\nMeasured in LCH it reads lightness 43, chroma 38, hue 49 degrees, a moderately bright, warm reddish brown [2]. The library also records a second, greener alternate value for this name (#5A6457), a reminder that more than one reference swatch has carried the same Japanese name over time [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match in 1,092 of 23,781 paintings, about 5 percent, as photographed [3]. It plays a mid-tone role most often, 64 percent of its occurrences [3]. The Master of Alkmaar and Filippo Lippi each carry it at ten times or more the archive's overall rate [3]. It shares canvases more than chance with the color word [[sienna]] at nearly ten times the ordinary rate, and its presence peaks in the 1440s, in 16 of 58 paintings [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a smooth, whetstone-polished reddish-brown surface",
+   "first_recorded": "undocumented in English; traditional Japanese usage",
+   "source": "ColorHub library (Wikipedia, \"Traditional colors of Japan\")"
+  },
+  "aka": [
+   "Tonocha"
+  ],
+  "siblings": [
+   "dusty-sienna",
+   "sienna",
+   "hyacinth-red",
+   "vassar-tan"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Tonocha (礪茶)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1092,
+  "pct": 4.6,
+  "measured": {
+   "lch": [
+    43.4,
+    38.1,
+    49.0
+   ],
+   "nearest_iscc": [
+    "dark reddish orange",
+    6.3
+   ],
+   "nearest": [
+    "Dusty sienna",
+    2.78
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; Wikipedia, \"Traditional colors of Japan\"; jp field)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (ISCC-NBS 1955 block 38), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23781 paintings), computed match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Tonocha, this color's Japanese name, describe?",
+   "choices": [
+    "A polished, whetstone-smoothed brown",
+    "A burnt tea leaf",
+    "A rusted blade",
+    "A clay roof tile"
+   ],
+   "answer": "A polished, whetstone-smoothed brown",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the library records only one reference swatch for this Japanese name.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Polished Brown's Japanese name describes a whetstone-smoothed surface, and the library keeps two different reference swatches for it."
+ ],
+ "words": 230,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance hits (src empty); facts drawn from the library's own jp field (including its alternate hex value), ISCC-NBS block data and the archive.",
+   "lint 2026-10-09"
+  ]
+ }
+}

@@ -1,0 +1,122 @@
+{
+ "slug": "shadow-blue",
+ "name": "Shadow Blue",
+ "hex": "#778BA5",
+ "names": [
+  "Shadow Blue"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Shadow Blue is a muted, pale blue from the 1955 ISCC-NBS color-name dictionary, named for the hazy blue cast of shadow rather than for any single pigment.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dictionary name for a shadow's cast",
+   "body": "The ISCC-NBS circular of 1955 assigns this hue to block 185, classed a pale blue, Munsell notation 4.1PB 5.6/4.2 [1]. Its name is descriptive rather than historical: the books consulted give no coiner or date beyond the 1955 circular, and its origin is undocumented here [1].\n\nThe library's nearest everyday match is [[slate]], about five and a half units away [1]. It also sits near [[powder-blue]] in our library, a paler, less grey relative [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Shadow Blue covers at least one per cent of the canvas in 280 paintings, about 1.18 per cent overall, more common than 67 per cent of the named colors we track; the within-painting lens finds it in 157 [2]. It peaks in the 1900s, in 21 of 1,674 paintings, present in 1.3 per cent of the 1,674 paintings (21 of them) we hold from that century, 1.4 times the archive's overall rate [2]. Inside a painting it most often plays a hidden color, tucked in the darkest half of the canvas in half of its 157 appearances, a pattern area alone could not fake [2].\n\nClaude Monet is its most devoted painter, carrying it in 6 of his 50 archived works, 8.2 times the baseline rate of the museums those works come from [2]. The earliest dated painting to carry it is from 1405, by Spinello Aretino, 550 years before the name's own 1955 record, a floor and not a first, since the archive's early centuries are thin [2]. In printed English the phrase *shadow blue* peaks in the 1980s and rose fastest in the 1920s, by Google Books' count of every sense of the words, so a name that is also a plain description can mislead [3]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; a descriptive dictionary-of-color name (ISCC-NBS)",
+   "first_recorded": "1955 (ISCC-NBS circular)",
+   "source": "data/library.json; data/graph/nodes-s.json"
+  },
+  "aka": [],
+  "siblings": [
+   "slate",
+   "stardew",
+   "powder-blue"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 280,
+  "measured": {
+   "lch": [
+    57.2,
+    16.1,
+    266.4
+   ],
+   "nearest": [
+    [
+     "Slate",
+     5.5
+    ]
+   ]
+  },
+  "painters": [
+   {
+    "name": "Claude Monet",
+    "hits": 6,
+    "n": 50,
+    "lift": 8.2
+   }
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-s.json, data/library.json): ISCC-NBS Circular 553 (1955) block 185 (P/T); CIEDE2000 nearest-name match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (data/graph/fieldnotes/s.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "Google Books Ngram, \"shadow blue\", case-insensitive, 5-year smoothing",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1955 publication assigns Shadow Blue its name?",
+   "choices": [
+    "the ISCC-NBS color-name circular",
+    "Maerz and Paul's dictionary",
+    "Ridgway's atlas",
+    "RAL"
+   ],
+   "answer": "the ISCC-NBS color-name circular",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: inside a painting, Shadow Blue most often shows up as a bright highlight.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Claude Monet used Shadow Blue far more than the average painter in our archive."
+ ],
+ "words": 338,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

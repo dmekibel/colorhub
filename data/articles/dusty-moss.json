@@ -1,0 +1,135 @@
+{
+ "slug": "dusty-moss",
+ "name": "Dusty moss",
+ "hex": "#8C9C76",
+ "names": [
+  "Dusty moss"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Dusty moss is a muted sage green, ColorHub's English name for the Japanese traditional color Usu'ao, whose name literally means \"pale blue.\"",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A \"pale blue\" that reads as green",
+   "body": "Usu'ao (薄青) is listed in the Wikipedia catalog of Japan's traditional colors with the literal meaning \"pale blue\" [1]. On today's screens the swatch reads as a muted sage green, not blue; older Japanese color vocabulary grouped blue and green more loosely than modern English does, and the name has outlasted that shift [1].\n\nThe nearest named colors on file are [[celadon-green]] and [[asphodel-green]], at 2.7 and 3.4 ΔE [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 305 of 23,781 paintings, about 1.3 percent, as photographed [2]. The earliest match is a Buddhist painting of Mahamayuri Vidyaraja dated to 916, where it covers about a quarter of the image, a floor and not a first, since the archive's early centuries are thin [2]. The rate is highest in a sample of 258 paintings from the 1740s, more than three and a half times the archive's overall rate for that decade [2]. It is unusually common among painters working in the late 1800s sampled in our archive, including Gustav Klimt, Camille Pissarro, Paul Cézanne, Berthe Morisot and Vincent van Gogh [2]. It is also disproportionately present in paintings from Nepal, Austria, Tibet and India [2]. These are computed color matches to photographed, varnished paintings, not pigment identifications [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; the name literally means \"pale blue\"",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "Wikipedia, Traditional colors of Japan"
+  },
+  "aka": [
+   "Usu'ao"
+  ],
+  "siblings": [
+   "celadon-green",
+   "asphodel-green",
+   "silver-green",
+   "artichoke-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Usu'ao (薄青)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 305,
+  "measured": {
+   "lch": [
+    62,
+    22,
+    125
+   ],
+   "nearest": [
+    [
+     "Celadon Green",
+     2.7
+    ],
+    [
+     "Asphodel Green",
+     3.4
+    ],
+    [
+     "Silver Green",
+     3.7
+    ],
+    [
+     "Artichoke Green",
+     3.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "Wikipedia, \"Traditional colors of Japan\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/Traditional_colors_of_Japan"
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional list, ISCC-NBS 1955, Maerz & Paul 1930 entries",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the name Usu'ao literally mean?",
+   "choices": [
+    "Pale blue",
+    "Light moss",
+    "Young bamboo",
+    "Faded jade"
+   ],
+   "answer": "Pale blue",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: this \"pale blue\"-named color reads as green on today's screens.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A color whose name means \"pale blue\" but reads today as sage green."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "Flagged, not hidden, the blue-named/green-reading gap.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 225
+}

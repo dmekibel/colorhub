@@ -1,0 +1,155 @@
+{
+ "slug": "windsor-tan",
+ "name": "Windsor Tan",
+ "hex": "#A75502",
+ "names": [
+  "Windsor Tan"
+ ],
+ "tier": "place",
+ "depth": "medium",
+ "lede": "Windsor Tan is a deep orange-brown that Maerz and Paul recorded in 1925, sharing the \"Windsor\" family name with an unrelated dark purple of the same catalogue rather than with any tan.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A 1925 entry in the Windsor family",
+   "body": "Maerz and Paul's 1930 dictionary records Windsor Tan as first listed in 1925, and the ISCC-NBS system later filed it as a deep orange [1]. Our records for this entry do not preserve a plate position, unlike several of its Windsor-family neighbors [1]. As with [[windsor-green|Windsor Green]], the shared \"Windsor\" word is a family label across several catalogue names, not a description of hue: the base color Windsor itself, also from Maerz and Paul, is a dark grayish purple [2].\n\nIts closest named relatives by measured color are [[warm-brown]] and [[orangey-brown]], both within about 4 units [3].\n\nFurther out are [[burnt-siena]], more vivid at 4.4 units, and [[orange-brown]], duller at 5.6 [3]. Our library files the color under fashion and textiles[1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, as photographed, a color within six units of Windsor Tan covers at least five per cent of a canvas in 188 works, peaking in the 1820s at over six times the archive's overall rate [4]. George Dawe is the strongest match, present in six of his fifty archived paintings, over fifteen times the expected rate, and a 1680 Ragamala page carries it across nearly 60 per cent of the canvas [4]. It most often shares a canvas with marigold and sienna [4]. These remain photographs of aged, varnished paintings, read as screen colors, not pigment tests [4]. Across its matches, coverage splits almost evenly between mid-tone and highlight, with very little in shadow [4]. By century, the color is present even in the 1200s, well before Maerz and Paul's own 1925 record date, at over two and a half times the archive's overall rate for that period [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the family word \"Windsor\"; the base color Windsor itself is an unrelated dark purple",
+   "first_recorded": "Maerz & Paul, A Dictionary of Color (1930), first recorded 1925 (plate not recorded in our data)",
+   "source": "ColorHub color library (Maerz & Paul 1930; Wikipedia; ISCC-NBS 1955)"
+  },
+  "aka": [],
+  "siblings": [
+   "warm-brown",
+   "orangey-brown",
+   "burnt-siena",
+   "orange-brown"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "windsor",
+    "gloss": "the base color Windsor (#443349) is a dark grayish purple, unrelated in hue to this tan"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#A75502",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 188,
+  "painters": [
+   {
+    "name": "George Dawe",
+    "hits": 6,
+    "n": 50,
+    "lift": 15.18
+   }
+  ],
+  "company": [
+   {
+    "word": "Marigold",
+    "lift": 14.34
+   },
+   {
+    "word": "Sienna",
+    "lift": 10.55
+   }
+  ],
+  "measured": {
+   "lch": [
+    45.2,
+    61.3,
+    61.4
+   ],
+   "nearest": [
+    [
+     "Warm Brown",
+     4.1
+    ],
+    [
+     "Orangey Brown",
+     4.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-w.json): Maerz & Paul, A Dictionary of Color (1930); ISCC-NBS 1955, block 54 (M)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph, family-word grouping; Maerz & Paul 1930, plate 47 J 10 for the base color Windsor",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-w.json), CIEDE2000 look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Windsor Tan shares its family name with which other catalogue color, a dark purple unrelated in hue?",
+   "choices": [
+    "Windsor",
+    "Acanthe",
+    "Persimmon",
+    "Sailor Blue"
+   ],
+   "answer": "Windsor",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Windsor Tan's strongest painter match is George Dawe.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Windsor Tan's own catalogue family is named for a dark purple, not a tan."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-08",
+  "issues": [
+   "Plate position for this entry is missing from our library data; said so rather than guessed.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 303
+}

@@ -1,0 +1,113 @@
+{
+ "slug": "persian-rose",
+ "name": "Persian Rose",
+ "hex": "#FE28A2",
+ "names": [
+  "Persian Rose"
+ ],
+ "tier": "place",
+ "depth": "short",
+ "lede": "Persian Rose is a vivid magenta pink, the most saturated member of a small family of color names built on Persia, first recorded in 1922.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A vivid member of the family",
+   "body": "Maerz and Paul's 1930 dictionary records Persian Rose from 1922, on plate 50, swatch K7 [1]. The ISCC-NBS dictionary of 1955 files it as a vivid reddish purple, but the fit is loose, 9.0 units from that block's center, our swatch sitting toward the saturated edge of the block rather than its middle [1]. Our library gives it the Munsell notation 4.7RP 5.7/19.4[1].\n\nIts nearest named neighbors are Deep Pink, 2.8 units away, then Barbie Pink at 3.0 [1]. It shares its first word with [[persian-pink]], [[persian-plum]] and [[persian-orange]], a small family that spans pink, red and orange without a documented reason for any one of them [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Like its family member [[persian-pink]], Persian Rose's hue does not come within six units of any area color in our archive of 23,781 paintings, so it has no measurable presence there [2]. Both are far more saturated than oil paint pigments typically reach, which is why neither turns up as a dominant canvas color even once [2]. That absence is itself a kind of field note: the most vivid names in a color dictionary are often the ones photographs of old paintings never confirm [2]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Persia (now Iran); the specific reason for this pink is undocumented",
+   "first_recorded": "1922 (Maerz & Paul, 1930, plate 50, swatch K7)",
+   "source": "ColorHub color library (Maerz & Paul 1930)"
+  },
+  "aka": [],
+  "siblings": [
+   "persian-pink",
+   "persian-plum",
+   "persian-orange",
+   "deep-pink"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#FE28A2",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    57.3,
+    83.7,
+    351.3
+   ],
+   "nearest": [
+    [
+     "Deep Pink",
+     2.83
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS 1955, Maerz & Paul 1930, Ridgway 1912, Munsell notation entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which plate and swatch does Maerz and Paul give for Persian Rose?",
+   "choices": [
+    "Plate 50, K7",
+    "Plate 3, H4",
+    "Plate I, hue 5",
+    "Plate 44, B10"
+   ],
+   "answer": "Plate 50, K7",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Persian Rose turns up as a dominant area color in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Persian Rose is so saturated that, like Persian Pink, it never once turns up as a dominant color in our 23,781-painting archive."
+ ],
+ "words": 237,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

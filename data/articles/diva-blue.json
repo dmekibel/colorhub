@@ -1,0 +1,136 @@
+{
+ "slug": "diva-blue",
+ "name": "Diva Blue",
+ "hex": "#5A70B5",
+ "names": [
+  "Diva Blue"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Diva Blue is a strong purplish blue recorded on both Ridgway's 1912 chart and in Maerz and Paul's 1930 dictionary, with no book in our library explaining the theatrical name.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name two dictionaries agreed on",
+   "body": "Ridgway's 1912 plate XXI gives this hue the name Diva Blue, hue 51′, tone i, and Maerz and Paul's *A Dictionary of Color* separately records it in 1930, on plate 43, row B, column 10 [1]. The ISCC-NBS system of 1955 reads the swatch as \"strong blue,\" its block 178 [1]. *Diva* means a celebrated female singer, but neither source says whether the name honors a performer, a costume, or simply a feeling of drama; it is undocumented here [2]. A darker [[dark-diva-blue]] sits nearby on the same chart [1].\n\nIn LCH terms it measures lightness 48, chroma 41, hue 286 degrees, Munsell 7.0PB 4.8/9.8, one of the more saturated colors in this group [1]. Its closest match in the library is [[gentian-blue]], about 3.2 CIEDE2000 units away, with [[chapman-s-blue]] close behind at 3.6 units [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A match within six CIEDE2000 units covering at least five percent of the canvas is rare: 38 of our 23,781 archive paintings, about 0.16 percent, as photographed [4]. It peaks in the 1910s, in 6 of 523 paintings, at 7.2 times the overall rate, and most often plays a mid-tone, in 66 percent of its appearances, with no single painter standing out against the museum baseline [4].\n\nThe earliest dated match is Fra Angelico's *Madonna of the Pomegranate*, 1426, nearly five centuries before Ridgway recorded the name in 1912; early centuries are thin in the archive, so this is a floor, not a first, and a photograph of an aged canvas is a screen color, not a pigment test [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "diva, a celebrated female singer; the specific reason is undocumented",
+   "first_recorded": "1912, Ridgway, plate XXI",
+   "source": "ColorHub color library; Ridgway, Color Standards and Color Nomenclature (1912); Maerz & Paul, A Dictionary of Color (1930)"
+  },
+  "aka": [],
+  "siblings": [
+   "dark-diva-blue",
+   "gentian-blue",
+   "chapman-s-blue",
+   "windows-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#5A70B5",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 38,
+  "peak_decade": {
+   "decade": 1910,
+   "lift": 7.18
+  },
+  "role": "mid",
+  "measured": {
+   "lch": [
+    48,
+    41,
+    286
+   ],
+   "nearest": [
+    [
+     "Gentian Blue",
+     3.2
+    ],
+    [
+     "Chapman's Blue",
+     3.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway, Color Standards and Color Nomenclature (1912), plate XXI, hue 51′, tone i; Maerz & Paul, A Dictionary of Color (1930), plate 43 B10; ISCC-NBS, NBS Circular 553 (1955), block 178",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "Color-kb concordance of the 29 color books for this name: no hits",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which two separate sources both record the name Diva Blue?",
+   "choices": [
+    "Ridgway (1912) and Maerz and Paul (1930)",
+    "Pantone and Crayola",
+    "CSS and X11",
+    "Paterson and Ball"
+   ],
+   "answer": "Ridgway (1912) and Maerz and Paul (1930)",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources explain why this blue is named for a diva.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Two separate color dictionaries, decades apart, agreed on the name Diva Blue; neither says why."
+ ],
+ "words": 291,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

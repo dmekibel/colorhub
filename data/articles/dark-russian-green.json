@@ -1,0 +1,140 @@
+{
+ "slug": "dark-russian-green",
+ "name": "Dark Russian Green",
+ "hex": "#41685E",
+ "names": [
+  "Dark Russian Green"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Dark Russian Green translates Seiheki (青碧), a traditional Japanese name meaning blue-green, and in our archive it is unusually common in French Impressionist paintings.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A Japanese blue-green",
+   "body": "Despite its English name, this color is filed under the traditional Japanese color system: it renders *Seiheki* (青碧), whose kanji mean blue-green [1]. The English label Dark Russian Green is the name under which Ridgway's 1912 plotting of the same hue circulated, plate XLII, hue 37′′′, tone k, later carried into the 1955 ISCC-NBS *Dictionary of Color Names* as block 150 [1]. Despite the English name, it has no documented connection to [[russian-green]], the lighter, unrelated color it happens to share a word with [1].\n\nIts nearest measured neighbor is [[dark-porcelain-green]], almost the same color at 3.3 units; [[invisible-green]] is a touch bluer, and [[antique-green]] greener [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A match for this color covers at least five per cent of the canvas in 150 of 23,781 paintings in our archive, about 0.6 per cent, as photographed [3]. Paul Cézanne and Berthe Morisot both carry it at over 19 times the archive's overall rate, each in a handful of their paintings, and the 1900s run at 3.2 times the rate [3]. The earliest dated match is a Tibetan Buddhist initiation card from around the year 1000, a floor on the color's age in painting rather than a claim of its first appearance [3]. As photographed: these are computed color matches on museum photographs of aged, varnished paintings, not a pigment test [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Seiheki (青碧), a traditional Japanese blue-green",
+   "first_recorded": "1912 (Ridgway, plate XLII); 1955 (ISCC-NBS, block 150)",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "Seiheki"
+  ],
+  "siblings": [
+   "dark-porcelain-green",
+   "invisible-green",
+   "antique-green",
+   "russian-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Seiheki (青碧), blue-green"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#41685E",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 150,
+  "rate": 0.0063,
+  "painters": [
+   [
+    "Paul Cezanne",
+    50,
+    6,
+    19.02
+   ],
+   [
+    "Berthe Morisot",
+    25,
+    3,
+    19.02
+   ]
+  ],
+  "measured": {
+   "lch": [
+    40.9,
+    16.4,
+    175.6
+   ],
+   "nearest": [
+    [
+     "Dark Porcelain Green",
+     3.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Ridgway 1912, plate XLII, hue 37′′′, tone k; ISCC-NBS 1955, block 150; traditional Japanese name Seiheki (青碧)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub Color Graph look-alikes (data/graph/edges-d.json), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Seiheki (青碧), the Japanese name behind Dark Russian Green, mean?",
+   "choices": [
+    "Blue-green",
+    "Dark forest",
+    "Night water",
+    "Mountain shadow"
+   ],
+   "answer": "Blue-green",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Paul Cézanne's paintings carry this color far above our archive's average rate.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A Japanese blue-green name, unexpectedly common in Cézanne's paintings."
+ ],
+ "words": 245,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}

@@ -1,0 +1,107 @@
+{
+ "slug": "clay-pink",
+ "name": "Clay pink",
+ "hex": "#B77E6C",
+ "names": [
+  "Clay pink"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Clay pink is a greyish, reddish orange named for the color of clay earth, recorded in both Ridgway's 1912 standard and the ISCC-NBS system of 1955.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Earth, not flower",
+   "body": "Our library records Clay pink from the ISCC-NBS system of 1955 and from Ridgway's 1912 *Color Standards and Color Nomenclature*, where it is grouped with his other clay-family names [1][2]. The ISCC-NBS block for this swatch is grayish reddish orange, only 3.0 units from that block's centroid [2]. It is a family-word variant built on [[clay]] itself, in our data's naming tree, rather than a separate coinage [2].\n\nThe name points to the color of fired or wet clay earth, not to a flower or fruit, which puts it among the mineral and landscape words in Ridgway's system alongside names like [[ochre]], [[terracotta]] and [[adobe]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Clay pink covers at least five per cent of the canvas in 326 of them, about 1.4 per cent, as photographed [3]. It is strikingly concentrated outside Europe: 80 of 721 Indian paintings, 5 of 25 Nepali paintings and 5 of 47 Tibetan paintings carry it, each several times the archive's overall rate [3]. Pontormo is its most devoted single painter here, in 3 of his 13 works [3]. As always, these are museum photographs of aged, varnished paintings, so the match is a screen color, not a pigment test [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "clay, the earth material",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "Ridgway, Color Standards and Color Nomenclature; ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "clay",
+   "ochre",
+   "terracotta",
+   "adobe"
+  ],
+  "parent": "clay",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 326,
+  "pct_archive": 1.4,
+  "country_lift": {
+   "India": 8.09,
+   "Nepal": 14.59,
+   "Tibet": 7.76
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), \"Clay pink\" (via ColorHub library)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph nodes; ISCC-NBS 1955), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is Clay pink named for?",
+   "choices": [
+    "Clay earth",
+    "A clay-colored bird",
+    "A pink clay flower"
+   ],
+   "answer": "Clay earth",
+   "kind": "pick"
+  },
+  {
+   "q": "Clay pink appears at several times the archive's overall rate in Indian, Nepali and Tibetan painting.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Clay pink appears at over 14 times the archive rate in our Nepali paintings."
+ ],
+ "words": 230,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

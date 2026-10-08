@@ -1,0 +1,120 @@
+{
+ "slug": "raisin-purple",
+ "name": "Raisin Purple",
+ "hex": "#7E4165",
+ "names": [
+  "Raisin Purple"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Raisin Purple is a dark, muted purplish red that Ridgway's 1912 atlas placed at two separate tones on one plate, and that the 1955 dictionary filed as a reddish purple.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "One name, two tones",
+   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* gives hue 65 on plate XI at tone k for a reading close to this hex [1]. A second reading of the same hue appears nearby at tone i, both read from a scan of an aged printed plate, so both are approximate [1]. The ISCC-NBS dictionary of 1955 filed the name under block 242, dark reddish purple, but the swatch measures nearer block 259, dark purplish red, and still 8.0 units off its center, a loose fit either way [1].\n\nIts nearest library neighbors are [[dull-dark-purple|Dull Dark Purple]] at 3.1 units and [[twilight-lavender|Twilight Lavender]] at 3.4, near twins on a screen [1]. Set beside [[raisin-black|Raisin Black]], which carries the same \"Raisin\" word toward near-total darkness, this one keeps far more visible purple and red [1]. [[rubient|Rubient]], a darker, browner red, measures into the same block 259 [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within six units of it covers at least five percent of the canvas in only 7 of our 23,781 archive paintings, as photographed, rarer than 75 percent of our named colors [2]. The earliest dated example is from 1600, and the latest from 1915, across 6 dated paintings total, 312 years before Ridgway's 1912 record, a floor set by thin coverage rather than a true first sighting [2]. In printed English the phrase peaks in use in the 1920s and rises fastest in that same decade, across all senses of the words [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "dried, dark grapes",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "raisin-black",
+   "rubient",
+   "twilight-lavender",
+   "dull-dark-purple"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 5,
+  "n_present_painting_level": 7,
+  "measured": {
+   "lch": [
+    36.3,
+    32.6,
+    343.3
+   ],
+   "nearest": [
+    [
+     "Dull Dark Purple",
+     3.1
+    ],
+    [
+     "Twilight Lavender",
+     3.4
+    ]
+   ]
+  },
+  "ngram": {
+   "term": "raisin purple",
+   "peak": 1920,
+   "rise": 1920
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912, plate XI, hue 65, tones i and k; ISCC-NBS 1955 block 242; computed nearest ISCC-NBS centroid and CIEDE2000 neighbors (data/graph)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed; Google Books Ngram, all senses",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Under which ISCC-NBS category did the 1955 dictionary file Raisin Purple?",
+   "choices": [
+    "Dark reddish purple",
+    "Vivid purple",
+    "Dark grayish brown",
+    "Deep pink"
+   ],
+   "answer": "Dark reddish purple",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Raisin Purple is one of the more common colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Raisin Purple and Twilight Lavender are near twins on a screen, barely three units apart."
+ ],
+ "words": 265,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); Ridgway's two tone readings for one plate hue are both approximate, from a scanned plate.",
+   "Editor spot-audit 2026-10-09: article claimed ISCC-NBS 1955 put it in block 259 shared with Rubient; library src says 1955 block 242 (dark reddish purple); 259 is only the computed nearest centroid, and Rubient has no 1955 entry. Rewrote section, lede, question, opener. Neighbor distances corrected to graph edges (Dull Dark Purple 3.1, Twilight Lavender 3.4).",
+   "lint 2026-10-09"
+  ]
+ }
+}

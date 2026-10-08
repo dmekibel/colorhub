@@ -1,0 +1,116 @@
+{
+ "slug": "citron-green",
+ "name": "Citron Green",
+ "hex": "#C7B96F",
+ "names": [
+  "Citron Green"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Citron Green is a moderate greenish yellow named for the citron, a fragrant citrus fruit, recorded in Ridgway's 1912 color standard and again by Maerz and Paul in 1930.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Named for a fruit, not a color family",
+   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* lists Citron Green on plate XXXI, hue 25′′, tone b [1]. The ISCC-NBS system of 1955 places it in block 102, moderate greenish yellow, 4.2 units from that block's centroid, and Maerz and Paul's 1930 *A Dictionary of Color* records the same name on their plate 19 K 2 [2]. Two near-duplicates sit within 2.5 units of it in our library, Light Greenish Yellow and Pale Greenish Yellow, both also from Ridgway and the ISCC-NBS [2]. The nearest distinct named color is [[khaki]], 2.6 units away [2].\n\nThe citron is a citrus fruit grown mainly for its thick, fragrant rind rather than its juice, and the color borrows its pale yellow-green skin rather than its flesh [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Citron Green covers at least five per cent of the canvas in 628 of them, about 2.6 per cent, as photographed [3]. It is strongest by far in Kalighat painting, 51 of 96 works, over 20 times the archive rate, and common across Indian painting generally, 61 of 721 works [3]. It plays a highlight in 92 per cent of its appearances and peaks in paintings from the 1890s [3]. These counts are museum photographs of aged, varnished paintings, not pigment identifications [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the citron, a citrus fruit",
+   "first_recorded": "1912 (Ridgway; Maerz & Paul)",
+   "source": "Ridgway, Color Standards and Color Nomenclature; Maerz and Paul, A Dictionary of Color; ColorHub library"
+  },
+  "aka": [
+   "Light Greenish Yellow (near-duplicate)",
+   "Pale Greenish Yellow (near-duplicate)"
+  ],
+  "siblings": [
+   "khaki",
+   "citrine",
+   "chartreuse",
+   "olive-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 628,
+  "pct_archive": 2.6,
+  "role_highlight": 0.92,
+  "movement_lift": {
+   "Kalighat": 20.12
+  },
+  "nearest": [
+   [
+    "Khaki",
+    2.6
+   ]
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XXXI, hue 25′′, tone b (via ColorHub library)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955 block 102; Maerz and Paul 1930), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What fruit is Citron Green named for?",
+   "choices": [
+    "The citron",
+    "The lime",
+    "The quince"
+   ],
+   "answer": "The citron",
+   "kind": "pick"
+  },
+  {
+   "q": "In which painting tradition does Citron Green appear at over 20 times the archive rate?",
+   "choices": [
+    "Kalighat",
+    "Baroque",
+    "Cubist"
+   ],
+   "answer": "Kalighat",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Citron Green turns up in over half of the Kalighat paintings in our archive."
+ ],
+ "words": 244,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

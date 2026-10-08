@@ -1,0 +1,122 @@
+{
+ "slug": "new-york-pink",
+ "name": "New York Pink",
+ "hex": "#D7837F",
+ "names": [
+  "New York Pink"
+ ],
+ "tier": "place",
+ "depth": "brief",
+ "lede": "New York Pink is a dusty, brownish pink from Wikipedia's color lists, named for the city rather than any pigment or dye.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A city, not a hue",
+   "body": "New York Pink carries #D7837F, the exact value Wikipedia's color lists give for it, filed under \"shades of pink\" [1]. Our library finds no earlier record and no explanation of why New York earned a pink of its own; the name is a place word applied to a hue, not a dye or trade good [1][2].\n\nThe nearest named colors on file are [[grecian-rose]], [[pink-coral]], [[brownish-pink]] and [[orange-vinaceous]], at 3.2, 3.2, 4.3 and 4.3 ΔE [2]. In ISCC-NBS terms it reads as a dark yellowish pink, and in Munsell notation 4.9R 6.3/7.7 [2]. 2, 3.2, 4.3 and 4.3 ΔE [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this pink in 42 of 23,781 paintings, 0.18 percent, rarer than 65 percent of our named colors, as photographed [3]. It peaks in the 1900s, in 5 of 1,674 paintings, but on only five paintings, three times the same museums' baseline rate [3]. Where the within-painting lens finds it (14 paintings), it plays an accent in 64 percent of them rather than a light or shadow [3]. The earliest dated example is a 1398 panel by Paolo di Giovanni Fei and the latest is from 1916; our early centuries are thin, so that date is a floor, not a first [3]. These are color matches in photographs of aged, varnished paintings, not pigment identifications [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "New York (the city), origin otherwise undocumented",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "Wikipedia, \"Shades of pink\""
+  },
+  "aka": [],
+  "siblings": [
+   "grecian-rose",
+   "pink-coral",
+   "brownish-pink",
+   "orange-vinaceous"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 42,
+  "rate": 0.0018,
+  "measured": {
+   "lch": [
+    64,
+    36,
+    27
+   ],
+   "nearest": [
+    [
+     "Grecian Rose",
+     3.2
+    ]
+   ]
+  },
+  "first_seen": {
+   "year": 1398,
+   "painting": "nga-46103",
+   "painter": "Paolo di Giovanni Fei"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "Wikipedia, \"List of colors: N–Z\" / \"Shades of pink\", New York pink entry",
+   "loc_kind": "entry",
+   "url": "https://en.wikipedia.org/wiki/Shades_of_pink"
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library and color graph: ISCC-NBS block, Munsell notation, nearest named colors",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is New York Pink named after?",
+   "choices": [
+    "A pigment",
+    "The city of New York",
+    "A flower",
+    "A painter"
+   ],
+   "answer": "The city of New York",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources explain why this pink is tied to New York.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "New York Pink is named for a city, not for anything pink was ever made from."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Editor spot-audit 2026-10-09: added the n=5 behind the 1900s peak, the n=14 base for the accent share, the floor-not-first caveat on 1398, and fixed 'brownish-pink a shade duller still' (it is 4.3 away, not duller than Grecian Rose).",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 248
+}

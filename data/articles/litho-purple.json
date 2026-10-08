@@ -1,0 +1,135 @@
+{
+ "slug": "litho-purple",
+ "name": "Litho Purple",
+ "hex": "#78588D",
+ "names": [
+  "Litho Purple"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Litho Purple is a dusty, grayed purple named from the Greek root for stone, one of a scattered set of color words built on *litho-*.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A stone word",
+   "body": "The library records Litho Purple as a 1912 Ridgway name, plate XXV, hue 63′, tone i, carried into the ISCC-NBS dictionary of 1955 as block 223, moderate purple, and cited again by Maerz and Paul in 1930 [1][2]. Its root, *litho-*, is the Greek word for stone, the same root in lithography and lithium [1].\n\nWhich stone the namer had in mind is undocumented here [1]. The nearest named colors on file are [[dauphin-s-violet]] and [[haematoxylin-violet]], at Compare [[wisteria]] and [[mauve]] for other grayed purples [2]. A fifth, slightly farther neighbor is [[dusty-purple]], 4.8 ΔE away, purpler and duller [1]. Further out still, [[manganese-violet]] sits 4.3 ΔE away, more vivid [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings finds a color within six units of this one in only 2, about 0.01 percent, as photographed [3]. The earliest is Gervase Spencer's Portrait of a Lady (1760); the other is Paul Signac's Woman with a Parasol (1893) [3]. With so few matches, nothing here supports a claim about when or where the color was common [3]. The count is a screen-color match, not a pigment identification [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the Greek root litho-, \"stone\"",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "dauphin-s-violet",
+   "haematoxylin-violet",
+   "manganese-violet",
+   "blue-lilac"
+  ],
+  "parent": null,
+  "children": [
+   "mauve"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2,
+  "match": {
+   "hex": "#78588D",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "measured": {
+   "lch": [
+    43,
+    34,
+    314
+   ],
+   "nearest": [
+    [
+     "Dauphin's Violet",
+     2.8
+    ],
+    [
+     "Haematoxylin Violet",
+     3.0
+    ],
+    [
+     "Manganese Violet",
+     4.3
+    ],
+    [
+     "Blue Lilac",
+     4.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912, plate XXV, hue 63′",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS 1955 block 223, Maerz and Paul 1930",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the root *litho-* in Litho Purple mean?",
+   "choices": [
+    "Stone",
+    "Light",
+    "Leaf",
+    "River"
+   ],
+   "answer": "Stone",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the books consulted name the specific stone behind Litho Purple.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A purple named from the Greek word for stone, but no one wrote down which one."
+ ],
+ "words": 208,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits in color-kb for this slug; written from library and archive data only.",
+   "lint 2026-10-09"
+  ]
+ }
+}

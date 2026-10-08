@@ -1,0 +1,137 @@
+{
+ "slug": "hay-s-russet",
+ "name": "Hay's Russet",
+ "hex": "#92513E",
+ "names": [
+  "Hay's Russet"
+ ],
+ "tier": "person",
+ "depth": "short",
+ "lede": "Hay's Russet is a dark, reddish orange-brown from Robert Ridgway's 1912 color dictionary, over-represented in paintings from Tibet and carried under a different name in Japan's own color lists.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "One name in two systems",
+   "body": "Ridgway's 1912 “Color Standards and Color Nomenclature” lists Hay's Russet at hex #92513E among the names he credits to a person [1]. The nearest named colors on file are [[brownish-orange]], [[deep-orange-coloured-brown]] and [[polished-brown]], at 3.7, 3.7 and 3.8 ΔE [1]. The 1955 Inter-Society Color Council catalog repeats the name in the block it calls dark reddish orange [1]. Our Japanese traditional-color list carries the same hue as *Sōdenkaracha* (宗傳唐茶), meaning a faded, spicy red-brown, a separate naming line that reaches the same color by its own route [3].\n\nIts nearest neighbor in our color graph is [[brownish-orange|Brownish Orange]], only 3.7 units away and more vivid [1]. Against the basic color words it reads closest to [[sienna|Sienna]], 6.2 units off [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive matches this color in 3.69% of 23,781 paintings, 877 of them, as photographed; the within-painting lens finds it in 564 [2]. That makes it more common than 84% of the named colors in our set [2]. Unusually, it peaks early rather than late: 10.6% of the 142 paintings we have from the 1200s carry it, 2.5 times the rate its museums would predict [2]. Inside a painting it most often plays an accent, in 74% of its 564 appearances [2]. John Singer Sargent holds it in 9 of 287 works here, and the color is sharply over-represented in Tibet, 8.1 times the expected rate [2]. Our earliest match dates to the year 1100, 812 years before Ridgway's 1912 book recorded the name, a floor rather than a first, since a color match in an aged photograph is not proof of a pigment [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955"
+  },
+  "aka": [],
+  "siblings": [
+   "brownish-orange",
+   "deep-orange-coloured-brown",
+   "polished-brown",
+   "chestnut"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Sōdenkaracha (宗傳唐茶)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 877,
+  "measured": {
+   "lch": [
+    41.8,
+    34.1,
+    42.4
+   ],
+   "nearest": [
+    [
+     "Brownish Orange",
+     3.7
+    ],
+    [
+     "Deep Orange-Coloured Brown",
+     3.7
+    ],
+    [
+     "Polished brown",
+     3.8
+    ],
+    [
+     "Chestnut",
+     3.9
+    ]
+   ]
+  },
+  "iscc_nbs": {
+   "name": "dark reddish orange",
+   "de": 5.3
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912 (plate XIV), ISCC-NBS 1955 (block 43)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional-color list",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where is Hay's Russet most over-represented in our painting archive?",
+   "choices": [
+    "Tibet",
+    "Austria",
+    "India",
+    "France"
+   ],
+   "answer": "Tibet",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Hay's Russet peaks later in our archive than most Ridgway colors, in the 1900s.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Hay's Russet is 8.1 times more common in our archive's Tibetan paintings than chance would predict."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits; origin of \"Hay\" is undocumented in our sources.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 297
+}

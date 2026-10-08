@@ -1,0 +1,157 @@
+{
+ "slug": "deep-vinaceous",
+ "name": "Deep Vinaceous",
+ "hex": "#AF7678",
+ "names": [
+  "Deep Vinaceous"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Deep Vinaceous is a dusty rose-pink from Ridgway's 1912 chart, sharing its exact hex with the later, separately named Antique Rose.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The same pink, two names",
+   "body": "Ridgway's 1912 plate XXVII gives this hue the name Deep Vinaceous, hue 1′′, tone b, and the ISCC-NBS system of 1955 files the nearest category as \"dark pink\" in its block 6 [1]. The nearest named colors on file are [[marsh-rose]], [[dusty-rose]] and [[copper-penny]], at 4.2, 4.2 and 4.2 ΔE [1]. Our library's exact match in the archive is [[antique-rose]], the identical hex under a later, unrelated name, which shows how two separate naming projects can land on the same pink by different routes [3].\n\nIn LCH terms it measures lightness 56, chroma 24, hue 20 degrees, Munsell 2.8R 5.5/5.2 [1]. The nearest distinct color beyond that exact match is [[marsh-rose]], about 4.2 CIEDE2000 units away [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A match within six CIEDE2000 units covering at least five percent of the canvas turns up in 57 of our 23,781 archive paintings, about 0.24 percent, as photographed [4]. It peaks in the 1910s, in 6 of 523 paintings, at 4.8 times the overall rate, and is most loved by Henri Matisse, in four of his fifty paintings here, thirty-three times his own museums' baseline; it most often plays a mid-tone, in 53 percent of its appearances [4].\n\nThe earliest dated match is Paolo di Giovanni Fei's *The Presentation of the Virgin in the Temple*, 1398, more than five centuries before Ridgway recorded the name in 1912; early centuries are thin in the archive, so this is a floor, not a first, and a photograph of an aged canvas is a screen color, not a pigment test [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "vinaceous, Latin vinaceus, \"wine-colored\"",
+   "first_recorded": "1912, Ridgway, plate XXVII",
+   "source": "ColorHub color library; Ridgway, Color Standards and Color Nomenclature (1912)"
+  },
+  "aka": [],
+  "siblings": [
+   "marsh-rose",
+   "dusty-rose",
+   "copper-penny",
+   "dusty-puce"
+  ],
+  "parent": "dark-vinaceous",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "antique-rose",
+    "gloss": "an unrelated name on the exact same hex, from a different list"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#AF7678",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 57,
+  "painters": [
+   {
+    "name": "Henri Matisse",
+    "hits": 4,
+    "of": 50,
+    "lift": 33.38
+   }
+  ],
+  "peak_decade": {
+   "decade": 1910,
+   "lift": 4.79
+  },
+  "role": "mid",
+  "measured": {
+   "lch": [
+    56,
+    24,
+    20
+   ],
+   "nearest": [
+    [
+     "Marsh Rose",
+     4.2
+    ],
+    [
+     "Dusty Rose",
+     4.2
+    ],
+    [
+     "Copper Penny",
+     4.2
+    ],
+    [
+     "Dusty puce",
+     4.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway, Color Standards and Color Nomenclature (1912), plate XXVII, hue 1′′, tone b; ISCC-NBS, NBS Circular 553 (1955), block 6",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "Color-kb concordance of the 29 color books for this name: no hits",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which color in our library shares the exact same hex as Deep Vinaceous?",
+   "choices": [
+    "Antique Rose",
+    "Doe",
+    "Bordeaux",
+    "Perilla Purple"
+   ],
+   "answer": "Antique Rose",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Antique Rose and Deep Vinaceous came from the same naming project.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Deep Vinaceous and Antique Rose are the exact same pink, named twice by two unrelated lists."
+ ],
+ "words": 284,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

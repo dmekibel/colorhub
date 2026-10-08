@@ -1,0 +1,108 @@
+{
+ "slug": "trooper",
+ "name": "Trooper",
+ "hex": "#192D45",
+ "names": [
+  "Trooper"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Trooper is a dark navy blue from the Maerz and Paul color dictionary, one of a cluster of near-identical navies the 1930 book recorded under different names.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "One navy among several",
+   "body": "Maerz and Paul record Trooper at #192D45, first dated 1919, on plate 40 L9 of their 1930 dictionary [1]. The same plate carries three other names within a few units of this value: Corsair (1920), Ispahan (1925) and Labrador, the oldest of the group at 1892 [1]. A fourth, Nippon (1921), sits close by as well [1]; the books do not explain why the dictionary split one dark navy into so many names, so that choice is undocumented here [1].\n\nIts nearest named neighbor in our library is [[bagdad]], a touch lighter and less blue [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this hue, as photographed, in 195 of 23,781 paintings (0.82 percent), more common than 60 percent of the named colors we track [2]. It peaks in the 1900s, in 22 of 1,674 paintings, at 2.5 times the expected rate for paintings from that century [2]. Inside a painting it most often turns up as a hidden color, in the darkest part of the canvas, in 53 percent of its 110 occurrences [2].\n\nThe earliest matching painting in our archive is dated 1099, 831 years before Maerz and Paul recorded the name in 1930, a floor and not a first, since the archive's early centuries are thin [2]. No single painter stands out here by a wide margin, so no devoted-painter figure is given [2]. It sits among the darkest named colors in our library, comparably dark to [[umbra-grey]] and to the RAL grey [[traffic-grey-b]], though neither is a close hue match [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1919, per Maerz and Paul (1930)",
+   "source": "Maerz and Paul, A Dictionary of Color"
+  },
+  "aka": [],
+  "siblings": [
+   "bagdad",
+   "navy"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 195,
+  "pct": 0.82,
+  "rank_pct": 60,
+  "measured": {
+   "lch": [
+    18.0,
+    17.5,
+    271.7
+   ],
+   "nearest": [
+    [
+     "Bagdad",
+     6.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "Maerz and Paul, A Dictionary of Color (1930), plate 40 L8-L12",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How many near-identical navy names does Maerz and Paul's plate 40 record close to Trooper?",
+   "choices": [
+    "Four",
+    "Zero",
+    "Fifty",
+    "One"
+   ],
+   "answer": "Four",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Trooper is the oldest-recorded of the navy names on that plate.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Trooper is one of five near-identical dark navies that Maerz and Paul recorded on a single 1930 plate."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 274
+}

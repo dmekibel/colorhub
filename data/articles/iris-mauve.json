@@ -1,0 +1,112 @@
+{
+ "slug": "iris-mauve",
+ "name": "Iris Mauve",
+ "hex": "#E1CDBE",
+ "names": [
+  "Iris Mauve"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Iris Mauve is a pale, yellowish pink named for the iris flower, common in Indian paintings in our archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A flower word, not the dye",
+   "body": "The library records Iris Mauve from Maerz and Paul's 1930 dictionary, plate 3 B 7, first recorded 1926 [1]. The nearest named colors on file are [[shell-pink]], [[pale-greyish-vinaceous]], [[tussore]] and [[almond]], at 2.6, 2.6, 3.3 and 3.7 ΔE [1]. In LCH terms it measures lightness 84, chroma 11, hue 66 degrees, the ISCC-NBS \"pale yellowish pink\" block, Munsell 5.6YR 8.3/2.0, [1]. 6, 2.6, 3.3 and 3.7 ΔE [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 771 of 23,781 paintings, 3.24 percent, as photographed; the within-painting lens finds it in 537 [2]. That makes it more common than 83 percent of the named colors we track [2]. It peaks in the 1900s, in 81 of 1,674 paintings, at 4.8 percent of that century's paintings, 2.0 times the expected rate, and it is over-represented in Indian paintings, 2.1 times expected, 91 of 721 [2]. Inside a painting it most often sits as a light, in 55 percent of its appearances [2].\n\nXugu is its most devoted painter, carrying it in 8 of his 16 works here, 7.4 times the baseline [2]. The earliest match is dated 1000; that is 930 years before the name's own first record, in 1930, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "pairs the iris flower with the word mauve, though the color itself is a pale neutral, not purplish",
+   "first_recorded": "1926 (Maerz & Paul, plate 3 B 7)",
+   "source": "Maerz & Paul, A Dictionary of Color (1930)"
+  },
+  "aka": [],
+  "siblings": [
+   "shell-pink",
+   "pale-greyish-vinaceous",
+   "tussore",
+   "almond"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 771,
+  "measured": {
+   "lch": [
+    84,
+    11,
+    66
+   ],
+   "nearest": [
+    [
+     "Shell pink",
+     2.6
+    ]
+   ]
+  },
+  "role": {
+   "light": 55
+  },
+  "country": "India, 2.1x expected (91 of 721)"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz & Paul 1930, plate 3 B 7, first recorded 1926; nearest library match Ecru, ΔE 7.8",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Despite its name, what kind of color is Iris Mauve?",
+   "choices": [
+    "A pale, yellowish pink",
+    "A deep purple",
+    "A bright violet",
+    "A dark grey"
+   ],
+   "answer": "A pale, yellowish pink",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Iris Mauve is over-represented in Indian paintings in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Despite the name, Iris Mauve is a pale pink, not a purple."
+ ],
+ "words": 240,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

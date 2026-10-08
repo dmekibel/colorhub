@@ -1,0 +1,132 @@
+{
+ "slug": "mud-green",
+ "name": "Mud Green",
+ "hex": "#606602",
+ "names": [
+  "Mud Green"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Mud Green is a dark, yellow-leaning olive named for wet earth, close enough to Brownish Green that the library files the two as near-duplicates.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A landscape word",
+   "body": "The ColorHub library classifies Mud Green as a nature-tier name, built on the landscape word *mud* the way [[midnight-purple|Midnight Purple]] and [[mustard-green|Mustard Green]] are built on *midnight* and *mustard* [1]. Its only recorded source is the xkcd 2010 crowd survey, so an earlier coining is undocumented [1]. At hex #606602 it measures lightness 41 and chroma 49 in LCH, a dark, muted yellow-green [1].\n\nIts nearest named neighbor is [[brownish-green|Brownish Green]], only 3.2 CIEDE2000 units away and logged in the library as a near-duplicate crowd name [1][2]. [[greenish-brown|Greenish Brown]] sits 4.8 units off, read as yellower and duller, and [[army-green|Army Green]] 6.8 units off, greener and duller [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 72 of 23,781 paintings, about 0.3%, as photographed, rarer than roughly half the named colors here [3]. The earliest match is a 1438 painting by Robert Campin, 572 years before the name's own 2010 record, which only means an aged photograph can resemble this hue, not that the painter mixed mud, a floor and not a first, since the archive's early centuries are thin [3]. It peaks in the 1900s, in 7 of 1,674 paintings, at 1.8 times the archive's overall rate, and inside a painting it most often plays an accent [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "mud, wet earth",
+   "first_recorded": "2010 (xkcd color survey)",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "Brownish Green",
+   "Browny Green"
+  ],
+  "siblings": [
+   "brownish-green",
+   "greenish-brown",
+   "antique-bronze",
+   "army-green"
+  ],
+  "parent": "mud",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+  "n_present": 72,
+  "pct": 0.3,
+  "measured": {
+   "lch": [
+    41.2,
+    49.0,
+    106.4
+   ],
+   "nearest": [
+    [
+     "Brownish Green",
+     3.2
+    ],
+    [
+     "Greenish Brown",
+     4.8
+    ],
+    [
+     "Antique Bronze",
+     6.5
+    ],
+    [
+     "Army Green",
+     6.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-m.json): xkcd 2010 crowd-sourced color survey",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph look-alikes (data/graph/edges-m.json), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which color does the library log as a near-duplicate of Mud Green?",
+   "choices": [
+    "Brownish Green",
+    "Midnight Purple",
+    "Pale Aqua",
+    "Neon Blue"
+   ],
+   "answer": "Brownish Green",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the earliest painting matching Mud Green in our archive predates the name itself by centuries.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Mud Green and Brownish Green are close enough on screen that the library treats them as near-duplicates."
+ ],
+ "words": 230,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance hits; written from ColorHub library/graph/archive data only.",
+   "lint 2026-10-09"
+  ]
+ }
+}

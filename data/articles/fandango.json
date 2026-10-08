@@ -1,0 +1,125 @@
+{
+ "slug": "fandango",
+ "name": "Fandango",
+ "hex": "#B53389",
+ "names": [
+  "Fandango"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Fandango is a strong reddish purple named for the Spanish dance, recorded in Maerz and Paul's 1930 dictionary and still listed as an X11 web color today.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Named for a dance, dated to 1925",
+   "body": "Wikipedia's account of Fandango, citing Maerz and Paul's 1930 dictionary, dates the name's first recorded use to 1925, on plate 52, swatch L10 [1]. The ISCC-NBS circular of 1955 places the hue in block 254, calling the region vivid purplish red, Munsell notation 2.8RP 4.4/14.1 [2]. The dance that gives the color its name is a lively, partnered Spanish and Portuguese form, but no source consulted here explains why this particular shade took the dance's name [1]. The nearest named colors on file are [[red-violet]], [[maximum-red-purple]], [[red-violet-crayola]] and [[rhodamine-purple]], at 3.6, 3.9, 4.5 and 4.8 ΔE [1]. Fandango sits brighter and more saturated than the dull reddish purples on, and [[magenta]] than to true red [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This hue is rare in our archive of 23,781 paintings: a match within six units covers at least five percent of the canvas in only 3 of them, all from a single early-1900s group of Indian devotional works, as photographed [4]. The small sample sits entirely in shadow regions of those paintings [4]. A count this low supports no claim about painters or periods beyond that one group [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the fandango, a Spanish and Portuguese partnered dance; the link between dance and color is undocumented here",
+   "first_recorded": "1925 (Maerz and Paul, 1930)",
+   "source": "Wikipedia, citing Maerz and Paul"
+  },
+  "aka": [],
+  "siblings": [
+   "red-violet",
+   "maximum-red-purple",
+   "red-violet-crayola",
+   "rhodamine-purple"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 3,
+  "measured": {
+   "lch": [
+    44,
+    63,
+    343
+   ],
+   "nearest": [
+    [
+     "Red-Violet",
+     3.6
+    ]
+   ]
+  },
+  "role": {
+   "shadow": 1.0
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Maerz and Paul, A Dictionary of Color (1930), \"Fandango\", plate 52 L10",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "ISCC-NBS, National Bureau of Standards Circular 553 (1955), block 254 (M)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz and Paul, Ridgway, ISCC-NBS and RAL entries, computed LCH/Munsell/nearest-name match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Fandango is named after:",
+   "choices": [
+    "a Spanish and Portuguese dance",
+    "a flower",
+    "a French dye maker",
+    "a mineral"
+   ],
+   "answer": "a Spanish and Portuguese dance",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: sources explain exactly why this shade was named after the dance.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Fandango takes its name from the Spanish dance, but no source says why this particular purple earned the name."
+ ],
+ "words": 219,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

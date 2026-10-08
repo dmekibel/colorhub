@@ -1,0 +1,128 @@
+{
+ "slug": "dull-magenta-purple",
+ "name": "Dull Magenta Purple",
+ "hex": "#944B76",
+ "names": [
+  "Dull Magenta Purple"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Dull Magenta Purple is a muted reddish purple plotted on Ridgway's 1912 color atlas and later absorbed into the ISCC-NBS dictionary as a moderate reddish purple.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A plate in Ridgway's atlas",
+   "body": "Robert Ridgway's 1912 *Color Standards and Color Nomenclature* places this hue on plate XXVI at hue 67′, tone i, a systematic grid reference rather than a descriptive name [1]. The scan of that aged printed plate is only an approximation of the original ink [1]. The ISCC-NBS circular of 1955 folds the same region into block 237, where it calls the family strong reddish purple, Munsell notation 3.0RP 4.2/8.2 [2].\n\nThe nearest named colors on file are [[magenta-haze]], [[twilight-lavender]], [[light-plum]] and [[razzmic-berry]], at 2.6, 3, 4.1 and 4.9 ΔE [2]. The name sits between [[purple]] and [[magenta]], closer to the dusty, grayed end of that range than to [[fandango]], a brighter purple from the same block [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This exact hue is rare in our archive of 23,781 paintings: a match within six units covers at least five percent of the canvas in only 2 of them, as photographed [4]. Both appear after 1850, one a devotional figure painting and one Paul Signac's *Women by the Well* from 1892 [4]. The color splits evenly between mid-tones and shadow in those two paintings, with no clear pattern beyond that small count [4]. A sample this small supports no broader claim about painters or periods [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; a systematic grid name (Ridgway) and a dictionary name (ISCC-NBS), not a place or substance",
+   "first_recorded": "1912 (Ridgway's atlas, plate XXVI)",
+   "source": "Ridgway, Color Standards and Color Nomenclature"
+  },
+  "aka": [],
+  "siblings": [
+   "magenta-haze",
+   "twilight-lavender",
+   "light-plum",
+   "razzmic-berry"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2,
+  "measured": {
+   "lch": [
+    42,
+    38,
+    344
+   ],
+   "nearest": [
+    [
+     "Magenta Haze",
+     2.6
+    ]
+   ]
+  },
+  "role": {
+   "mid": 0.5,
+   "shadow": 0.5
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XXVI, hue 67′, tone i",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "ISCC-NBS, National Bureau of Standards Circular 553 (1955), block 237 (R)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz and Paul, Ridgway, ISCC-NBS and RAL entries, computed LCH/Munsell/nearest-name match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1912 work plots Dull Magenta Purple on plate XXVI?",
+   "choices": [
+    "Ridgway's Color Standards and Color Nomenclature",
+    "Maerz and Paul's A Dictionary of Color",
+    "Munsell's Atlas of the Color Solid",
+    "Werner's Nomenclature of Colours"
+   ],
+   "answer": "Ridgway's Color Standards and Color Nomenclature",
+   "kind": "pick"
+  },
+  {
+   "q": "Which core color word is this hue's closest match in our library?",
+   "choices": [
+    "Plum",
+    "Magenta",
+    "Crimson",
+    "Lavender"
+   ],
+   "answer": "Plum",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Dull Magenta Purple comes from a 1912 grid reference, not a descriptive word, and shows up in our archive only twice."
+ ],
+ "words": 232,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

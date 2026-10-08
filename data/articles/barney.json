@@ -1,0 +1,109 @@
+{
+ "slug": "barney",
+ "name": "Barney",
+ "hex": "#AC1DB8",
+ "names": [
+  "Barney"
+ ],
+ "tier": "person",
+ "depth": "brief",
+ "lede": "Barney is a vivid magenta-purple named for a person: our data records it only as \"named for a person: barney,\" the kind of instant color comparison the 2010 xkcd survey's crowd reached for on sight.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A person's name for a color everyone recognizes",
+   "body": "The name comes from Randall Munroe's 2010 xkcd color survey, where visitors typed a word next to a swatch and the most common label for each cluster of clicks won [1]. Our data classifies it as a person-tier name but does not resolve which Barney respondents had in mind [1]. Pop culture's best-known Barney is the purple children's television dinosaur, though the survey record does not confirm that link [1]. ISCC-NBS 1955 would file the same patch as a vivid purple, about 5.6 units off, with Munsell notation 7.1P 4.3/19.2 [1].\n\nA closely related entry, [[barney-purple|Barney Purple]], names a duller and darker variant from the same vote, 5.8 units away [1]. The nearest other look-alikes in our data are [[purple-munsell|Purple-Munsell]], more vivid, [[purply|Purply]], a duller neighbor, and [[dark-orchid|Dark Orchid]], purpler [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive has this color covering at least 1 percent of its canvas, within a CIEDE2000 difference of 4, as photographed [2]. A magenta-purple this saturated has no real match among historical pigments, which painters could rarely mix this bright and this cool at once [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a person (undocumented which one in the survey record)",
+   "first_recorded": "2010, xkcd color survey",
+   "source": "xkcd (Munroe 2010)"
+  },
+  "aka": [],
+  "siblings": [
+   "purple-munsell",
+   "purply"
+  ],
+  "parent": null,
+  "children": [
+   "barney-purple"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    42.9,
+    86.3,
+    325.4
+   ],
+   "nearest": [
+    [
+     "Purple (Munsell)",
+     4.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: xkcd 2010 color survey entry, ISCC-NBS and Munsell mapping",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does the name Barney come from?",
+   "choices": [
+    "The 2010 xkcd crowd color-naming survey",
+    "A pigment maker's trade catalog",
+    "Ridgway's 1912 color dictionary",
+    "A Japanese traditional color list"
+   ],
+   "answer": "The 2010 xkcd crowd color-naming survey",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our data records exactly which person the name Barney refers to.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Barney is so saturated a magenta-purple that no painting in our 23,781-painting archive comes close to it."
+ ],
+ "words": 215,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No private fact-card file for this slug.",
+   "Which person the name refers to is undocumented in our data; the likely pop-culture association is noted as a hedge, not a cited fact."
+  ]
+ }
+}

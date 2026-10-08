@@ -1,0 +1,129 @@
+{
+ "slug": "baby-blue-eyes",
+ "name": "Baby Blue Eyes",
+ "hex": "#A1CAF1",
+ "names": [
+  "Baby Blue Eyes"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Baby Blue Eyes is a pale, soft blue listed by the ISCC-NBS system in 1955, sharing its name with a California wildflower.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name in the library",
+   "body": "The ISCC-NBS dictionary of 1955 lists this hue in block 180, among the very light blues [1]. Wikipedia's entry on the color cites the earlier Plochere system as its source, though no date survives in the library record for that citation [1]. The name is shared with *Nemophila menziesii*, a low, blue-flowered annual commonly called baby blue eyes, though no source here confirms this color name was drawn directly from the flower [4].\n\nThe nearest color-graph neighbor is [[pale-cerulean]], 3.2 units away, with the basic term [[sky]] and [[light-grey-blue]] close behind, and [[light-cornflower-blue]] and [[uranian-blue]] a touch further; [[aero]], a separate library entry, sits 9.6 units off [2]. Munsell gives 3.3PB 7.9/6.1, a light, moderately pale blue [1]. The hex #A1CAF1 is a screen approximation of the dictionary swatch [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this pale blue in 22 of 23,781 paintings, about 0.09 percent, as photographed [3]. The earliest dated match is Filippino Lippi's *The Meeting of Joachim and Anne outside the Golden Gate of Jerusalem* (1497), a floor and not a first, since the archive's early centuries are thin [3]. Later strong matches include Johan Jongkind's *Vue de Paris, la Seine, l'Estacade* (1853) and Piet Mondrian's early, representational *Polder Landscape with a Train and a Small Windmill on the Horizon* (1906), decades before his abstract grids [3]. Swedish and Danish paintings both show it well above the archive's average rate [3]. This is a computed color match, not a pigment test, on photographed, varnished canvases [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "pale-cerulean",
+   "sky",
+   "light-grey-blue",
+   "light-cornflower-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 22,
+  "measured": {
+   "lch": [
+    79.7,
+    24.0,
+    259.4
+   ],
+   "nearest": [
+    [
+     "Pale Cerulean",
+     3.2
+    ]
+   ]
+  },
+  "iscc": {
+   "name": "very light blue",
+   "de": 4.3
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz & Paul 1930, Ridgway 1912, ISCC-NBS 1955, RAL entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE Lab ΔE)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "web",
+   "cite": "Wikipedia, \"Nemophila menziesii\", on the common name \"baby blue eyes\" for the California wildflower",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/Nemophila_menziesii"
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is Baby Blue Eyes' name shared with?",
+   "choices": [
+    "A California wildflower",
+    "A gemstone",
+    "A fashion designer",
+    "A Japanese dye"
+   ],
+   "answer": "A California wildflower",
+   "kind": "pick"
+  },
+  {
+   "q": "Which early, later-abstract painter has a representational painting among the archive's matches for this blue?",
+   "choices": [
+    "Piet Mondrian",
+    "Henri Matisse",
+    "Claude Monet",
+    "Vincent van Gogh"
+   ],
+   "answer": "Piet Mondrian",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "One of our matches for this pale blue is a 1906 Mondrian landscape, painted before his grids and primary colors."
+ ],
+ "words": 272,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Nearest-neighbor claim (name and/or distance) in the 'name' section and field.measured.nearest did not match data/graph/edges-*.json 'la' (the cited color-graph computation); corrected to the true nearest colors and distances, and updated aside.siblings to match.",
+   "lint 2026-10-09"
+  ]
+ }
+}

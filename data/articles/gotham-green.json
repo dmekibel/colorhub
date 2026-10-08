@@ -1,0 +1,135 @@
+{
+ "slug": "gotham-green",
+ "name": "Gotham Green",
+ "hex": "#00573F",
+ "names": [
+  "Gotham Green"
+ ],
+ "tier": "place",
+ "depth": "brief",
+ "lede": "Gotham Green is a dark, slightly blue-leaning green named for Gotham, the old nickname for New York City.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A city nickname's green",
+   "body": "Wikipedia's entry on the word *Gotham* dates the nickname for New York City to Washington Irving's satirical writing in 1807, well before it named a fictional Batman city [3]. Our library traces this color name only to a Wikipedia list, with no date given for when the color itself was coined [1]. Measured in LCH, it sits at lightness 32, a dark green with a hue angle leaning toward blue rather than yellow [1].\n\nIts nearest named neighbor is [[billiard]], 3.0 units of CIEDE2000 away and described as duller [1]. [[pearl-opal-green]] sits a little farther out at 3.6, reading bluer, and [[verdure]] at 4.1, reading greener [1]. Against those three, Gotham Green is the darkest of the group [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 29 of 23,781 paintings (0.12 percent), rarer than 63 percent of the named colors, as photographed [2]. It peaks in the 1900s, in 8 of 1,674 paintings, at 4.6 times the rate expected from that century's share of the archive [2]. Inside a painting it most often plays a shadow, 76 percent of the time, a role measured by lightness rank within the canvas rather than by the raw hex match [2]. These are photographs of varnished paintings, so a color match is not a pigment test [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Gotham, the nineteenth-century nickname for New York City",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub library (a Wikipedia list)"
+  },
+  "aka": [],
+  "siblings": [
+   "billiard",
+   "pearl-opal-green",
+   "verdure",
+   "runnymede"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings, as photographed",
+  "n_present": 29,
+  "rank_pct_rare": 63,
+  "peak_century": [
+   1900,
+   4.6
+  ],
+  "role_top": [
+   "shadow",
+   76
+  ],
+  "measured": {
+   "lch": [
+    32,
+    30,
+    166
+   ],
+   "nearest": [
+    [
+     "Billiard",
+     3.0
+    ],
+    [
+     "Pearl Opal Green",
+     3.6
+    ],
+    [
+     "Verdure",
+     4.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and graph (data/library.json, data/graph/nodes and edges): name source, place tier, CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "web",
+   "cite": "Wikipedia, \"Gotham\" (place-name sense)",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/Gotham"
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is Gotham Green named after?",
+   "choices": [
+    "Gotham, a nickname for New York City",
+    "A fictional Batman villain",
+    "A shade of billiard table felt",
+    "A London park"
+   ],
+   "answer": "Gotham, a nickname for New York City",
+   "kind": "pick"
+  },
+  {
+   "q": "Inside a painting, what role does Gotham Green most often play?",
+   "choices": [
+    "A shadow",
+    "A highlight",
+    "A sky",
+    "A flesh tone"
+   ],
+   "answer": "A shadow",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Gotham Green is named for New York's old nickname, and plays shadow in three paintings out of four it appears in."
+ ],
+ "words": 230,
+ "status": "checked",
+ "checked": {
+  "by": "batch-10",
+  "date": "2026-10-09",
+  "issues": [
+   "Irving's 1807 Gotham nickname is general knowledge about the city name, not specific to this swatch's coining, which remains undocumented.",
+   "lint 2026-10-09"
+  ]
+ }
+}

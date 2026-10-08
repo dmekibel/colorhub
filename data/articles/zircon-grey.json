@@ -1,0 +1,124 @@
+{
+ "slug": "zircon-grey",
+ "name": "Zircon Grey",
+ "hex": "#807473",
+ "names": [
+  "Zircon Grey"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Zircon Grey is a warm, reddish grey first plated by Ridgway in 1912, a color that keeps turning up on the same canvases as [[dark-silver-pink]].",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A warm grey, named for a mineral",
+   "body": "Ridgway's 1912 atlas plates this grey, and the 1955 ISCC-NBS circular later classed it as reddish gray, 6.1 units from its own block center[1]. The Munsell notation is a neutral N 4.9, meaning the system records almost no hue at all for it, just a value step [1]. Our sources tag the name as a mineral word, zircon, but do not document who coined the color name or when [1].\n\nThe closest named color on screen is [[rose-castor]], 3.2 units away and described as almost the same; [[dark-heliotrope-grey]] and [[fontainebleau]] sit at the same distance [3]. More tellingly, our archive finds Zircon Grey sharing canvases with Dark Silver Pink far more than chance would predict, a lift of 12.6[3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this grey in 1.13 percent of 23,781 paintings, 269 of them, and the within-painting lens isolates it as a dominant area in 138, as photographed [2]. That ranks it ahead of 64 percent of the named colors we track [2]. It peaks in the 1900s, in 41 of 1,674 paintings, present in 2.4 percent of the 1,674 paintings (41 of them) dated to that century, 2.9 times its museums' baseline rate [2].\n\nInside a painting it most often plays a mid-tone, 33 percent of its 138 appearances by lightness rank [2]. The earliest match in our archive is a painting dated to 1279, 633 years before Ridgway's 1912 record of the name; that gap marks a look-alike hue in an aged photograph, not the pigment itself, a floor and not a first, since the archive's early centuries are thin [2]. It is also over-represented in French painting, 2.1 times the expected rate, 40 of 3,443 French works [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the mineral zircon",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "Ridgway, Color Standards and Color Nomenclature"
+  },
+  "aka": [
+   "Dark Vinaceous-Grey"
+  ],
+  "siblings": [
+   "rose-castor",
+   "dark-heliotrope-grey",
+   "dark-silver-pink"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 269,
+  "n_within": 138,
+  "measured": {
+   "lch": [
+    49.9,
+    5.0,
+    26.6
+   ],
+   "nearest": [
+    [
+     "Rose Castor",
+     3.2
+    ],
+    [
+     "Dark Heliotrope Grey",
+     4.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway (1912) entry for Zircon Grey; ISCC-NBS and Munsell cross-reference",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub graph: nearest named colors (look-alike) and co-occurring colors (companion data)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which color does Zircon Grey most often share a canvas with, more than chance predicts?",
+   "choices": [
+    "Dark Silver Pink",
+    "Rose Castor",
+    "Fontainebleau",
+    "Silver Fern"
+   ],
+   "answer": "Dark Silver Pink",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the Munsell system records a strong, clear hue for Zircon Grey.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Zircon Grey shares canvases with Dark Silver Pink far more than chance — and Dark Silver Pink is Silver Pink, one shade darker.",
+  "The Munsell system gives this grey almost no hue at all, just a neutral value step."
+ ],
+ "words": 313,
+ "status": "checked",
+ "checked": {
+  "by": "claude",
+  "date": "2026-10-08",
+  "issues": [
+   "No source gives the coining or etymology of the name beyond the mineral word \"zircon\".",
+   "The 1279 first-seen painting is a look-alike match, not evidence the pigment existed then.",
+   "lint 2026-10-09"
+  ]
+ }
+}

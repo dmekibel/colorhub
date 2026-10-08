@@ -1,0 +1,129 @@
+{
+ "slug": "light-lime",
+ "name": "Light Lime",
+ "hex": "#AEFD6C",
+ "names": [
+  "Light Lime"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Light Lime is a pale yellow-green built by adding the modifier light to lime, recorded in both the 1955 ISCC-NBS system and the 2010 xkcd color survey.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A light build of lime",
+   "body": "The nearest named colors on file are [[light-pea-green]], [[kiwi]], [[inchworm]] and [[celery]], at 3.2, 4.2, 4.2 and 5.2 ΔE [1]. It is recorded in the ISCC-NBS system of 1955, which gives it as block 131 and again as block 116, and separately in the xkcd color survey of 2010 [1]. In Munsell notation it sits at 7.7GY 9.1/12.5, and in LCH at lightness 92, chroma 77, hue 128 degrees, a bright, high-lightness green-yellow [1]. \n\nThe library records four near-duplicate names within a few units of this swatch: Pale Lime, Light Grass Green, Light Lime Green and Pale Lime Green, the closest only 1.1 units off [2]. That crowding is typical of a modifier name: many surveyed speakers reach for slightly different words to describe the same light yellow-green. Light Lime has no separate history of its own beyond the systems that recorded it; see [[lime]] for the base color's longer record."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive has a color within CIEDE2000 4 of Light Lime covering even 1% of its canvas, as photographed [3]. That describes this archive, not painting as a whole, and a near miss is likely hiding in paintings our color match does not catch [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the base color lime, lightened",
+   "first_recorded": "ISCC-NBS, 1955",
+   "source": "ColorHub Color Graph"
+  },
+  "aka": [
+   "Pale Lime",
+   "Light Grass Green",
+   "Light Lime Green",
+   "Pale Lime Green"
+  ],
+  "siblings": [
+   "light-pea-green",
+   "kiwi",
+   "inchworm",
+   "celery"
+  ],
+  "parent": "lime",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "match": {
+   "hex": "#AEFD6C",
+   "de_max": 4,
+   "min_cover": 0.01
+  },
+  "nearest": [
+   [
+    "Chartreuse",
+    6.4
+   ]
+  ],
+  "measured": {
+   "nearest": [
+    [
+     "Light Pea Green",
+     3.2
+    ],
+    [
+     "Kiwi",
+     4.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub Color Graph: node record (hex, LCH, Munsell, ISCC-NBS block, recorded sources)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): nearest named match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (data/graph/fieldnotes), 23,781 paintings, CIEDE2000 <= 4, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which two systems in our library record the name Light Lime?",
+   "choices": [
+    "ISCC-NBS (1955) and the xkcd survey (2010)",
+    "Crayola and Pantone",
+    "Ridgway (1912) and Maerz & Paul (1930)"
+   ],
+   "answer": "ISCC-NBS (1955) and the xkcd survey (2010)",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: at least one painting in our archive has Light Lime covering 1% or more of the canvas.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Light Lime has at least four near-duplicate names in our library, all within a couple of units of each other."
+ ],
+ "words": 233,
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

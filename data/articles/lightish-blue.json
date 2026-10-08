@@ -1,0 +1,114 @@
+{
+ "slug": "lightish-blue",
+ "name": "Lightish Blue",
+ "hex": "#3D7AFD",
+ "names": [
+  "Lightish Blue"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Lightish Blue is a vivid mid-blue recorded in Wikipedia's color lists, the 2010 xkcd survey and, by Wikipedia's account, Crayola, built from the hedging modifier lightish.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A hedged build on blue",
+   "body": "Our Color Graph gives Lightish Blue, #3D7AFD, as modifier grammar: lightish plus the base name [[blue]], recorded in Wikipedia's lists, the xkcd survey of 2010, and in a Crayola blue that Wikipedia cites as a near-duplicate [1]. Our data flags the name itself as obscure, qualified or novelty: lightish hedges light the way kind of and sort of hedge other words [1]. The ISCC-NBS system classes the hue as vivid blue, about 9.7 units from that block's center [1]. Its Munsell notation is 6.9PB 5.3/17.5 and its LCH values are lightness 54, chroma 75, hue 290 degrees [1]. The nearest common library name is [[azure]], 3.9 units away [2]. In sRGB its components run 61 red, 122 green and 253 blue, so blue leads by a wide margin while green sits at roughly twice red, the pattern of a strong, cool mid-blue [1].\n\nThe one near-duplicate on file is Blue (Crayola), 2.2 units off [2]. See [[blue]] for the primary color this hedged name lightens only slightly."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive has a color within CIEDE2000 4 of Lightish Blue covering even 1% of its canvas, as photographed [3]. That describes this archive, not painting as a whole [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the base color blue, hedged by lightish",
+   "first_recorded": "xkcd survey, 2010 (also Wikipedia, Crayola)",
+   "source": "ColorHub Color Graph"
+  },
+  "aka": [
+   "Blue (Crayola)"
+  ],
+  "siblings": [
+   "blue",
+   "azure",
+   "cobalt-blue",
+   "sky-blue"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "match": {
+   "hex": "#3D7AFD",
+   "de_max": 4,
+   "min_cover": 0.01
+  },
+  "nearest": [
+   [
+    "Azure",
+    3.9
+   ]
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub Color Graph: node record (hex, LCH, Munsell, ISCC-NBS block, recorded sources)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): nearest named match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (data/graph/fieldnotes), 23,781 paintings, CIEDE2000 <= 4, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does our data describe the word lightish itself?",
+   "choices": [
+    "Obscure, qualified or novelty",
+    "A standard dictionary modifier",
+    "A translation from French"
+   ],
+   "answer": "Obscure, qualified or novelty",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Lightish Blue's nearest common library name is Azure.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Lightish Blue is hedged twice over: lightish softens light, the way kind of softens a claim."
+ ],
+ "words": 226,
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

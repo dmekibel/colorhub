@@ -1,0 +1,135 @@
+{
+ "slug": "shirvan",
+ "name": "Shirvan",
+ "hex": "#304A37",
+ "names": [
+  "Shirvan"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Shirvan is a dark, slightly cool green from the Maerz and Paul dictionary of color, over-represented in early-1900s Norwegian painting.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dark green from plate 24",
+   "body": "Maerz and Paul's 1930 dictionary places this hue on plate 24, swatch C10, first recorded in 1925, and classes it a dark green, Munsell notation 1.4G 2.9/3.1 [1]. The books read give no story for the name itself, and its origin is undocumented here [1].\n\nThe nearest named colors on file are [[chasseur]], [[insect-screen]] and [[dark-hunter-green]], at 2.6, 2.8 and 3.2 ΔE [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Shirvan covers at least one per cent of the canvas in 313 paintings, about 1.32 per cent overall, more common than 69 per cent of the named colors we track; the within-painting lens finds it in 184 [2]. It peaks in the 1900s, in 47 of 1,674 paintings, present in 2.8 per cent of the 1,674 paintings (47 of them) we hold from that century, 3.5 times the archive's overall rate [2]. Inside a painting it most often plays a hidden color, in 43 per cent of its 184 appearances [2].\n\nIts most devoted painter is Harald Giersing, carrying it in 4 of his 23 archived works, 6.1 times the baseline rate of the museums those works come from [2]. It is also over-represented in Norway, 6 of 120 paintings, 4.8 times expected, and shares canvases with [[cedar-green|Cedar Green]] far more than chance, a lift of 11.5 across 31 paintings [2]. The earliest dated painting to carry it is from 1390, 540 years before the name's own 1930 record, a reminder that the match is a look-alike hue, not proof of any particular pigment, a floor and not a first, since the archive's early centuries are thin [2]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1925 (Maerz and Paul)",
+   "source": "data/library.json; data/graph/nodes-s.json"
+  },
+  "aka": [],
+  "siblings": [
+   "chasseur",
+   "insect-screen",
+   "dark-hunter-green",
+   "bakst-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 313,
+  "measured": {
+   "lch": [
+    28.9,
+    16.8,
+    150.5
+   ],
+   "nearest": [
+    [
+     "Chasseur",
+     2.6
+    ],
+    [
+     "Insect screen",
+     2.8
+    ],
+    [
+     "Dark hunter green",
+     3.2
+    ],
+    [
+     "Bakst Green",
+     4.7
+    ]
+   ]
+  },
+  "painters": [
+   {
+    "name": "Harald Giersing",
+    "hits": 4,
+    "n": 23,
+    "lift": 6.1
+   }
+  ],
+  "company": [
+   {
+    "word": "Cedar Green",
+    "lift": 11.5,
+    "n": 31
+   }
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-s.json, data/library.json): Maerz & Paul 1930 plate 24 C 10; CIEDE2000 nearest-name match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (data/graph/fieldnotes/s.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which country is Shirvan most over-represented in, in our archive?",
+   "choices": [
+    "Norway",
+    "France",
+    "India",
+    "Spain"
+   ],
+   "answer": "Norway",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Shirvan most often plays a bright highlight inside a painting.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Shirvan shows up in early-1900s Norwegian paintings at nearly five times the rate you'd expect by chance."
+ ],
+ "words": 317,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

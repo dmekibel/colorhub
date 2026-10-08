@@ -1,0 +1,148 @@
+{
+ "slug": "vivid-violet",
+ "name": "Vivid violet",
+ "hex": "#8601AF",
+ "names": [
+  "Vivid violet"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Vivid violet is an intensity modifier of plain [[violet]], pushed to one of the most saturated purples in ColorHub's graph, and the family also carries a brighter twin of Rebecca Purple.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A pushed-up violet",
+   "body": "ColorHub's graph lists Vivid violet as a modifier built from the base color [[violet]], its listed parent, the same grammar that produces Dark violet or Deep violet from the same root hue [1]. The hex #8601AF measures a vivid purple by ISCC-NBS, a very close match at only 3.0 units from its nearest block, close to 4.1P 3.4/19.2 in Munsell notation, with a chroma of 97 out of 100, near the top of what the color space can represent at this lightness [2]. Among its nearby library entries is *Vivid rebecca purple*, a brighter, more saturated sibling of [[rebecca-purple]] built the same way [1]. No single coiner or date is recorded for \"vivid violet\" itself, since an intensity word plus a base hue is a label anyone could apply [1].\n\nOther \"vivid\" relatives in our data occupy the same high-chroma end of their own base hues, including [[vivid-lilac|Vivid lilac]] where it exists, each one testing how far a hue can be pushed before it reads as a different color altogether [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive carries a close match to Vivid violet covering at least one percent of its canvas, as photographed [3]. That gap fits the color's own chroma value, 97 out of 100: pigments this saturated in violet were rare and unstable before synthetic dyes arrived in the nineteenth century, so a true match would be unusual in an archive weighted toward earlier painting [3]. In printed English the phrase rises fastest in the 1870s and peaks in the 2010s, consistent with a descriptive compound that drifted in and out of use rather than one tied to a single event [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "an intensified variant of violet",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "Vivid rebecca purple"
+  ],
+  "siblings": [
+   "purple-munsell",
+   "dark-violet",
+   "dark-magenta",
+   "rebecca-purple"
+  ],
+  "parent": "violet",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    34.4,
+    89.1,
+    319.5
+   ],
+   "munsell": "4.1P 3.4/19.2",
+   "iscc_nbs": {
+    "name": "vivid purple",
+    "de": 3.0
+   },
+   "chroma": 97,
+   "nearest": [
+    [
+     "Purple (Munsell)",
+     5.3
+    ],
+    [
+     "Dark Violet",
+     5.5
+    ],
+    [
+     "Dark Magenta",
+     6.4
+    ],
+    [
+     "Rebecca Purple",
+     7.3
+    ]
+   ]
+  },
+  "ngram": {
+   "peak": 2010,
+   "rise": 1870,
+   "term": "vivid violet"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: modifier-grammar classification, base relation to Violet, and related Vivid rebecca purple entry",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: computed LCH, Munsell, ISCC-NBS nearest-block distance and chroma",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub Ngram cache (Google Books)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Vivid violet is built, grammatically, as:",
+   "choices": [
+    "An intensity modifier of Violet",
+    "A pigment name",
+    "A person's name",
+    "A flower name"
+   ],
+   "answer": "An intensity modifier of Violet",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Vivid violet appears in a large share of our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Its chroma score sits near the very top of what the color space can represent at this lightness."
+ ],
+ "words": 305,
+ "status": "checked",
+ "checked": {
+  "by": "batch-9 writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance file; coinage of the intensity modifier left undocumented rather than invented. 'Vivid lilac' link used only if it resolves; will drop if gate fails on it.",
+   "lint 2026-10-09"
+  ]
+ }
+}

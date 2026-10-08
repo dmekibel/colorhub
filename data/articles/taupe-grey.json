@@ -1,0 +1,130 @@
+{
+ "slug": "taupe-grey",
+ "name": "Taupe Grey",
+ "hex": "#8B8589",
+ "names": [
+  "Taupe Grey"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Taupe Grey is a purplish gray classed in the 1955 ISCC-NBS system, so finely matched to plain Grey that our library puts them under 1 unit of CIEDE2000 apart.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "One name among twenty for the same patch",
+   "body": "The 1955 ISCC-NBS system places Taupe Grey in block 233, a purplish gray, and the library also cites Wikipedia for the name, with no record in Ridgway or Maerz and Paul for this exact word [1]. Block 233 is unusually crowded: our library files at least twenty other names, from Crane to Gull Grey to Wild Iris, into the same small region, several dated by Maerz and Paul to the 1910s and 1920s [1]. The nearest named colors on file are [[rocket-metallic]], [[deep-plumbago-grey]], [[dark-heliotrope-grey]] and [[battleship-grey]], at 3.2, 3.3, 2, 3.3, 5.3 and 5.4 ΔE [1]. [[slate]], [[denim]] and [[charcoal]] all turn up more often than chance in paintings that also carry this color [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to Taupe Grey in 462 of 23,781 paintings, about 1.9 percent, as photographed [2]. It plays a highlight slightly more often than a midtone, 50 percent against 43 percent [2]. Jerichau, Fritz Syberg and several other Danish painters use it well above the archive's average rate [2].\n\nThe earliest dated match is a 1119 Buddhist manuscript illumination, eight centuries before the ISCC-NBS classification, which only shows a similar screen color was photographed there, not that the name existed that early, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "taupe, French for mole",
+   "first_recorded": "ISCC-NBS, 1955 (block 233)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "rocket-metallic",
+   "deep-plumbago-grey",
+   "dark-heliotrope-grey",
+   "battleship-grey"
+  ],
+  "parent": "taupe",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 462,
+  "role": {
+   "highlight": 0.5,
+   "mid": 0.43
+  },
+  "company": [
+   "Grey",
+   "Slate",
+   "Denim",
+   "Charcoal"
+  ],
+  "measured": {
+   "lch": [
+    56,
+    3,
+    336
+   ],
+   "nearest": [
+    [
+     "Rocket Metallic",
+     3.2
+    ],
+    [
+     "Deep Plumbago Grey",
+     3.3
+    ],
+    [
+     "Dark Heliotrope Grey",
+     5.3
+    ],
+    [
+     "Battleship Grey",
+     5.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955, Maerz and Paul 1930 and other name records, with plate/block locators and nearest-name match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "About how many other names does our library file into the same ISCC-NBS block as Taupe Grey?",
+   "choices": [
+    "Around twenty",
+    "Two",
+    "None",
+    "A hundred"
+   ],
+   "answer": "Around twenty",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: a 1119 manuscript matching Taupe Grey proves the name is that old.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Taupe Grey shares its small patch of color space with at least twenty other names, from Crane to Wild Iris."
+ ],
+ "words": 249,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

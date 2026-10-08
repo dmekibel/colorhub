@@ -1,0 +1,145 @@
+{
+ "slug": "light-danube-green",
+ "name": "Light Danube Green",
+ "hex": "#457462",
+ "names": [
+  "Light Danube Green"
+ ],
+ "tier": "place",
+ "depth": "short",
+ "lede": "Light Danube Green is a muted, slightly blue-leaning green named for the Danube, the river that crosses central and southeastern Europe, and recorded as a color standard since at least 1912.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A river's name",
+   "body": "The Danube runs some 2,850 kilometers from Germany's Black Forest to the Black Sea, through or beside ten countries, more than any other river on Earth [3]. Ridgway's 1912 color standards give this green on plate XXXII, hue 35 double-prime, tone k, a scan of an aged printed plate and so only approximate [1]. The ISCC-NBS dictionary of 1955 files the same swatch, block 145, as a moderate green, and gives it the Munsell notation 7.1G 4.4/3.8 [1].\n\nIts nearest named neighbors in our library are Deep Jade and Diamine Green, both about 2.5 units away, then Hooker's Green at 2.6 [1]. The nearest named colors on file are [[diamine-green]], [[deep-jade]] and [[hooker-s-green]], at 2.5, 2.5 and 2.6 ΔE [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Light Danube Green covers at least five percent of the canvas in 92 works, under half of one percent [2]. The earliest dated example is Hans Memling's 1480 portrait of an unknown man with a letter, a floor and not a first, since the archive's early centuries are thin [2]. It peaks in the 1910s, in 9 of 523 paintings, more than four times the archive's overall rate for that decade [2]. Gustave Caillebotte carries it in three of his twenty-two paintings here and Vincent van Gogh in six of forty-nine, both well above the baseline, and French paintings as a group carry it three times the baseline rate [2]. It shares a canvas with [[viridian]] far more than chance, thirty-seven times the baseline [2]. As with every number here, this is a screen-color match on photographed, varnished canvases, not a pigment test [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the Danube river, Europe",
+   "first_recorded": "1912 (Ridgway, plate XXXII, hue 35″)",
+   "source": "ColorHub color library (Ridgway 1912; ISCC-NBS 1955)"
+  },
+  "aka": [],
+  "siblings": [
+   "diamine-green",
+   "deep-jade",
+   "hooker-s-green",
+   "patina-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#457462",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 92,
+  "peak_decade": 1910,
+  "top_painter": {
+   "name": "Gustave Caillebotte",
+   "lift": 35.25
+  },
+  "company": [
+   {
+    "word": "Viridian",
+    "lift": 36.85
+   }
+  ],
+  "measured": {
+   "lch": [
+    45.1,
+    21.1,
+    166.5
+   ],
+   "nearest": [
+    [
+     "Diamine Green",
+     2.5
+    ],
+    [
+     "Deep jade",
+     2.5
+    ],
+    [
+     "Hooker's Green",
+     2.6
+    ],
+    [
+     "Patina Green",
+     3.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS 1955, Maerz & Paul 1930, Ridgway 1912, Munsell notation entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "web",
+   "cite": "Wikipedia, \"Danube\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/Danube"
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1912 color standard first plates Light Danube Green?",
+   "choices": [
+    "Ridgway",
+    "Maerz and Paul",
+    "Werner",
+    "the ISCC-NBS"
+   ],
+   "answer": "Ridgway",
+   "kind": "pick"
+  },
+  {
+   "q": "Light Danube Green is named for a:",
+   "choices": [
+    "river",
+    "mountain range",
+    "city",
+    "gemstone"
+   ],
+   "answer": "river",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Light Danube Green is named for a river that touches ten countries."
+ ],
+ "words": 311,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

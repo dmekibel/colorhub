@@ -1,0 +1,132 @@
+{
+ "slug": "faded-pink",
+ "name": "Faded Pink",
+ "hex": "#DE9DAC",
+ "names": [
+  "Faded Pink"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Faded Pink is a dusty, muted rose, built from the modifier \"faded\" laid onto ordinary pink rather than from any single dated source.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier, not a coinage",
+   "body": "Three separate sources in our library land on close to this same hex: the 2010 xkcd survey, Ridgway's 1912 *Color Standards and Color Nomenclature*, and the ISCC-NBS 1955 dictionary [1]. Ridgway's plate XXXVIII gives a near match at hue 69, tone d, read from a scan of an aged printed plate, so the match is approximate, not exact [1]. ISCC-NBS 1955 files the same patch of color space as block 251, a moderate purplish pink [1].\n\nThe nearest named colors on file are [[laelia-pink]], [[mauvelous]], [[alizarine-pink]] and [[pig-pink]], at 3, 3.9, 4 and 4.7 ΔE [1]. A near-duplicate in our data, Persian Lilac, sits about 1.1 units away, close enough that the two names likely describe the same swatch to most eyes [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings, as photographed, carries this color in just 4 paintings at five percent coverage or more [3]. The earliest is Lucas van Leyden's 1531 [[painting:commons-Q117196346|Healing of the Blind Man of Jericho]], where it covers about 7 percent of the panel [3]. It also turns up in Henri Matisse's 1908 [[painting:commons-Q21723020|Nymph and Satyr]] and Raimundo de Madrazo y Garreta's 1877 [[painting:commons-Q27780861|Manuela de Errazu]], both well below that share [3]. These are museum photographs of aged, varnished paintings, so a match is a screen color, not a pigment identification [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; a modifier on pink",
+   "first_recorded": "Ridgway, 1912, plate XXXVIII",
+   "source": "ColorHub library: Ridgway 1912; ISCC-NBS 1955; xkcd 2010"
+  },
+  "aka": [],
+  "siblings": [
+   "laelia-pink",
+   "mauvelous",
+   "alizarine-pink",
+   "pig-pink"
+  ],
+  "parent": "pink",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 4,
+  "nearest_iscc": [
+   "moderate purplish pink",
+   4.1
+  ],
+  "first_source": [
+   "ridgway",
+   1912
+  ],
+  "measured": {
+   "lch": [
+    71.3,
+    26.4,
+    4.2
+   ],
+   "nearest": [
+    [
+     "Laelia Pink",
+     3.0
+    ],
+    [
+     "Mauvelous",
+     3.9
+    ]
+   ]
+  },
+  "top_paintings": [
+   "commons-Q117196346",
+   "commons-Q21723020",
+   "commons-Q27780861"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912 plate XXXVIII; ISCC-NBS 1955 block 251; xkcd 2010",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library and graph nodes: modifier-grammar classification",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1912 plate does Ridgway's dictionary place closest to Faded Pink?",
+   "kind": "pick",
+   "choices": [
+    "Plate XXXVIII",
+    "Plate XI",
+    "Plate XII",
+    "Plate XXXVI"
+   ],
+   "answer": "Plate XXXVIII"
+  },
+  {
+   "q": "True or false: our records name the person who first wrote \"Faded Pink\" as a color.",
+   "kind": "true-false",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False"
+  }
+ ],
+ "openers": [
+  "Faded Pink's nearest match in our archive is a 1531 panel by Lucas van Leyden."
+ ],
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "status": "checked",
+ "words": 236
+}

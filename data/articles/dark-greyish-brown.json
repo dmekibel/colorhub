@@ -1,0 +1,101 @@
+{
+ "slug": "dark-greyish-brown",
+ "name": "Dark Greyish Brown",
+ "hex": "#625E57",
+ "names": [
+  "Dark Greyish Brown"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dark Greyish Brown is a dim, olive-grey brown, ColorHub's library name for a darkened, greyed shade of [[brown]], and one of the more common dark colors in our painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A darkened, greyed brown",
+   "body": "The name follows ColorHub's modifier grammar, \"dark greyish\" plus the parent color [[brown]] [1]. The library's record for this swatch draws on both Ridgway's *Color Standards and Color Nomenclature* of 1912, plate XLV, and the ISCC-NBS Dictionary of Color Names of 1955, and our data computes its nearest 1955 block as olive gray [1]. Ridgway's plates survive only as scans of an aged, printed chart, so the hex value is an approximation of the original ink, not a measurement of it [1].\n\nThe closest named neighbors on file are [[grebe]] and [[pelican]], both almost indistinguishable from it, with [[pale-umber]] close behind [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color near this swatch in 2,726 of 23,781 paintings, about 11.46 per cent, more common than most of the library's named colors, as photographed [2]. It holds a fairly steady rate across every century on file, from medieval panels to the twentieth century, and peaks in a small sample of 1930s paintings [2]. Vilhelm Hammershøi has it in more than half of his sampled works, well above the archive's average [2]. These are computed color matches on photographs of aged, varnished paintings, not pigment identifications [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a darkened, greyed shade of Brown",
+   "first_recorded": "Ridgway, 1912, plate XLV",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "grebe",
+   "pelican",
+   "pale-umber"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2726,
+  "pct_archive": 11.46,
+  "role": "mid",
+  "peak_decade": 1930
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; Ridgway 1912, plate XLV; ISCC-NBS 1955)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph, nearest-neighbor color distances (data/graph/edges-d.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In the ISCC-NBS system, Dark Greyish Brown falls in which named block?",
+   "choices": [
+    "Olive gray",
+    "Vivid orange",
+    "Deep purple"
+   ],
+   "answer": "Olive gray",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dark Greyish Brown is rare in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Present in more than one painting in ten in our archive, and in over half of Vilhelm Hammershøi's sampled works."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": []
+ },
+ "words": 218
+}

@@ -1,0 +1,126 @@
+{
+ "slug": "oriental-fuchsia",
+ "name": "Oriental Fuchsia",
+ "hex": "#7C2D63",
+ "names": [
+  "Oriental Fuchsia"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Oriental Fuchsia is a dark, saturated reddish purple named for the fuchsia flower, and like its close neighbor [[orchid-purple|Orchid purple]], it does not appear in our painting archive at all.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A flower's name, darkened",
+   "body": "The library records Oriental Fuchsia from Maerz and Paul's 1930 dictionary, plate 53 E 12, first recorded in 1925 [1]. The ISCC-NBS lists classify its computed category as a deep reddish purple, far darker than the fuchsia flower's own bright pink-magenta [1]. \"Oriental\" here is a period marketing word rather than a documented link to any place; the books we checked do not explain it [1].\n\nThe nearest named color in the library is [[byzantium|Byzantium]], about 3.2 units away by CIEDE2000, with [[grape|Grape]] and [[bruise|Bruise]] close behind it [1]. In LCH terms it measures lightness 32, chroma 43, hue 340 degrees, Munsell 2.5RP 3.2/8.9 [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Oriental Fuchsia is not a painter's color [2]. No painting in our archive of 23,781, as photographed, has a color within a small distance of this swatch covering even five percent of the canvas [2]. That describes our own archive, not painting as a whole; a color this dark and this saturated in red-violet is rare among natural pigments [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the fuchsia flower, darkened; \"Oriental\" undocumented as a coinage",
+   "first_recorded": "1925 (Maerz & Paul, plate 53 E 12)",
+   "source": "Maerz & Paul, A Dictionary of Color (1930); ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "byzantium",
+   "grape",
+   "bruise",
+   "raisin-purple"
+  ],
+  "parent": null,
+  "children": [
+   "bruise"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "match": {
+   "hex": "#7C2D63",
+   "min_cover": 0.05
+  },
+  "measured": {
+   "lch": [
+    32,
+    43,
+    340
+   ],
+   "nearest": [
+    [
+     "Byzantium",
+     3.2
+    ],
+    [
+     "Grape",
+     3.9
+    ],
+    [
+     "Bruise",
+     4.8
+    ],
+    [
+     "Raisin Purple",
+     5.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz & Paul 1930, plate 53 E 12, first recorded 1925; nearest library match Byzantium, ΔE 3.2",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What flower is Oriental Fuchsia named for?",
+   "choices": [
+    "Fuchsia",
+    "Orchid",
+    "Lavender",
+    "Lilac"
+   ],
+   "answer": "Fuchsia",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Oriental Fuchsia appears in several paintings in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Oriental Fuchsia, like Orchid purple, never turns up in our archive of 23,781 paintings."
+ ],
+ "words": 193,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

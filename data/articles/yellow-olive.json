@@ -1,0 +1,118 @@
+{
+ "slug": "yellow-olive",
+ "name": "Yellow Olive",
+ "hex": "#444337",
+ "names": [
+  "Yellow Olive"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Yellow Olive is a dark, yellow-leaning olive grey, our library's approximation of RAL 6014, the German industrial color standard's own olive drab.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "An industrial olive",
+   "body": "Our library records this hue from RAL, the German standards body's paint system, first recorded here in 1927 as RAL 6014, with the screen value given as an approximation of the printed standard [1]. Unlike the naturalist \"vinaceous\" family, RAL's colors are specified for industrial paint rather than for describing birds or flowers, so this is an olive built for consistency across factories, not for matching any one leaf or fruit [1].\n\nThe nearest named colors on file are [[brown-olive]], [[grey-olive]], [[greenish-umber]] and [[black-olive]], at 2.5, 2.9, 3.4 and 3.9 ΔE [1]. Its nearest distinct neighbors are [[brown-olive]] and [[grey-olive]], both almost the same at under 3 units [2]. Measured in LCH it is lightness 28, chroma 8 and hue 105 degrees, dark and only lightly saturated [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this dark olive in 2,919 of 23,781 paintings (12.27%, as photographed), more common than 95% of the named colors we track, one of the most frequently matched hues in the whole archive [3]. It most often plays a mid-tone, in 40% of its 2,046 strongest matches [3]. John Singer Sargent is its heaviest user by raw count, with 31 matches, though Arnoud van Halen uses it most relative to his own output, at 3.2 times the baseline across 50 works [3]. The earliest dated match runs to 1099, more than eight centuries before RAL's own 1927 record; the match is a look-alike hue in an aged photograph, not proof the pigment was there, a floor and not a first, since the archive's early centuries are thin [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "an industrial olive-grey (RAL 6014)",
+   "first_recorded": "1927 (RAL 6014)",
+   "source": "ColorHub color library (RAL standard)"
+  },
+  "aka": [],
+  "siblings": [
+   "brown-olive",
+   "grey-olive",
+   "greenish-umber",
+   "black-olive"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2919,
+  "measured": {
+   "lch": [
+    28,
+    8,
+    105
+   ],
+   "nearest": [
+    [
+     "Brown Olive",
+     2.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): RAL 6014, approximate screen value, first recorded 1927",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library and Color Graph look-alikes (data/graph/), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What kind of standard is Yellow Olive's RAL 6014 source?",
+   "choices": [
+    "An industrial paint standard",
+    "A naturalist's bird-color guide",
+    "A fashion dye catalog",
+    "A gemstone grading chart"
+   ],
+   "answer": "An industrial paint standard",
+   "kind": "pick"
+  },
+  {
+   "q": "Which named color is an exact match to Yellow Olive in our library?",
+   "choices": [
+    "Dark Olive-Grey",
+    "Vermilion",
+    "Mauve",
+    "Indigo"
+   ],
+   "answer": "Dark Olive-Grey",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Yellow Olive comes from RAL, a paint standard for factories, not a naturalist's field guide."
+ ],
+ "words": 286,
+ "status": "checked",
+ "checked": {
+  "by": "batch-16",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); written from the color graph, library and archive only.",
+   "lint 2026-10-09"
+  ]
+ }
+}

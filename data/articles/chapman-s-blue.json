@@ -1,0 +1,125 @@
+{
+ "slug": "chapman-s-blue",
+ "name": "Chapman's Blue",
+ "hex": "#5C729E",
+ "names": [
+  "Chapman's Blue"
+ ],
+ "tier": "person",
+ "depth": "short",
+ "lede": "Chapman's Blue is a muted, mid-toned blue from Robert Ridgway's 1912 color dictionary, named for a person whose identity Ridgway never records.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A surname without a story",
+   "body": "Ridgway's 1912 “Color Standards and Color Nomenclature” lists Chapman's Blue at hex #5C729E among the names he credits to a person, rather than a place, dye or pigment [1]. Chapman is a common English surname, and Ridgway gives no first name, trade or date for his, so which Chapman the color honors is undocumented in our sources [1]. The 1955 Inter-Society Color Council catalog repeats the name in the block it calls moderate blue [1].\n\nIts nearest neighbor in our color graph is [[jay-blue|Jay Blue]], only 2.6 units away and almost the same [1]. [[stardew|Stardew]] sits almost as close, and [[azure-blue|Azure Blue]] is a near match as well [1]. Against the basic color words it reads closest to [[denim|Denim]], 8.1 units off, a cleaner, less grey blue than Chapman's own [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive matches this blue in 0.54% of 23,781 paintings, 128 of them, as photographed; the within-painting lens finds it in 64 [2]. That makes it more common than 53% of the named colors in our set [2]. It peaks in the 1900s, present in 0.5% of the 1,674 paintings from that century, 1.4 times the rate its museums would predict [2]. Inside a painting it most often plays an accent, in 58% of its 64 appearances, by lightness rank rather than by brand [2]. Titian is its most devoted painter here, holding it in 4 of 50 works, 6.2 times the baseline of the museums those paintings come from [2]. Our earliest match dates to 1426, by Fra Angelico, 486 years before Ridgway's 1912 book recorded the name, a floor rather than a first, since a color match in an aged photograph is not proof of a pigment [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955"
+  },
+  "aka": [],
+  "siblings": [
+   "jay-blue",
+   "stardew",
+   "diva-blue",
+   "azure-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 128,
+  "measured": {
+   "lch": [
+    48.0,
+    26.6,
+    278.1
+   ],
+   "nearest": [
+    [
+     "Jay Blue",
+     2.6
+    ],
+    [
+     "Stardew",
+     2.7
+    ],
+    [
+     "Diva Blue",
+     3.6
+    ],
+    [
+     "Azure Blue",
+     3.7
+    ]
+   ]
+  },
+  "iscc_nbs": {
+   "name": "moderate blue",
+   "de": 8.3
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912 (plate XXII), ISCC-NBS 1955 (block 182)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Our archive's earliest match to Chapman's Blue is from a painting by",
+   "choices": [
+    "Fra Angelico",
+    "Titian",
+    "Pietro Lorenzetti",
+    "Luis de Morales"
+   ],
+   "answer": "Fra Angelico",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: inside a painting, Chapman's Blue most often plays a hidden, barely-visible role.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Titian's paintings hold Chapman's Blue more than six times as often as the museums that keep them would predict."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits; origin of the personal name is undocumented in our sources.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 299
+}

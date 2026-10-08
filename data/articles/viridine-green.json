@@ -1,0 +1,130 @@
+{
+ "name": "Viridine Green",
+ "hex": "#DDE490",
+ "names": [
+  "Viridine Green"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Viridine Green is a pale yellow-green cataloged three separate times, in Ridgway's 1912 atlas, Maerz and Paul's 1930 dictionary and the ISCC-NBS system, all landing on the same chip our library also calls [[pale-lime]].",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Cataloged three times over",
+   "body": "Ridgway's 1912 systematic nomenclature places it on plate VI, hue 33, tone d [1]. Maerz and Paul's 1930 dictionary separately records it, with an earliest use they date to 1899, on plate 17, chip I6 [1]. The ISCC-NBS system of 1955 files the same chip as \"light yellow green,\" block 119 [1]. Our library's [[pale-lime]] sits at the identical measured hex; the next-nearest distinct neighbor is [[light-khaki]] [2]. Further out, [[lumiere-green]] and [[light-green-yellow]] sit in the same small cluster [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a match for Viridine Green in only 29 of 23,781 paintings, about 0.1 percent, rarer than 60 percent of the named colors we track [3]. It peaks weakly in the 1800s, only 1.2 times the rate expected from that century's share of the archive [3]. Inside a painting it most often plays a light tone, in half its appearances [3]. The earliest match, from 1605, is a painting by Francesc Ribalta, three centuries before Ridgway recorded the name in 1912 — a look-alike hue in an old photograph, not the name or the pigment, a floor and not a first, since the archive's early centuries are thin [3]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1899, per Maerz and Paul (1930)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "pale-lime",
+   "light-khaki",
+   "lumiere-green",
+   "light-green-yellow"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 29,
+  "measured": {
+   "lch": [
+    88.4,
+    42.9,
+    110.4
+   ],
+   "nearest": [
+    [
+     "Pale lime",
+     0.0
+    ],
+    [
+     "Light Khaki",
+     5.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912, Maerz & Paul 1930, ISCC-NBS 1955 entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library, nearest-neighbor computation",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How many of the three systems in our library separately catalog Viridine Green?",
+   "choices": [
+    "All three",
+    "Just one",
+    "Just two",
+    "None"
+   ],
+   "answer": "All three",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Viridine Green is one of the more common colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Who painted the earliest archive match for Viridine Green, from 1605?",
+   "choices": [
+    "Francesc Ribalta",
+    "John Singer Sargent",
+    "Caravaggio",
+    "Camille Pissarro"
+   ],
+   "answer": "Francesc Ribalta",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Three different color systems independently filed the same pale green under three names."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "slug": "viridine-green",
+ "words": 238
+}

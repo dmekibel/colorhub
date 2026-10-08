@@ -1,0 +1,132 @@
+{
+ "slug": "catalpa",
+ "name": "Catalpa",
+ "hex": "#A38F9B",
+ "names": [
+  "Catalpa"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Catalpa is a pale purple from Maerz and Paul's 1930 dictionary, far more common in Claude Monet's paintings than anywhere else in our archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dictionary name, 1892",
+   "body": "Maerz and Paul's 1930 dictionary of color dates the name to 1892, at plate 44, column D, chip 3, hex #A38F9B [1]. No Ridgway or ISCC-NBS plate is recorded for it independently in this library; the ISCC-NBS committee's 1955 match places it among the \"grayish purple\" names, 3.9 units away [1]. Its Munsell notation is 1.3RP 6.0/2.7 [1]. The catalpa tree carries pale, purple-spotted flowers, but the dictionary entry consulted here does not explain the name, so the link stays an open question rather than a claim [1].\n\nIts nearest library neighbor is [[pastel-violet|Pastel Violet]], about three units away [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within six units of Catalpa covers at least five per cent of the canvas in 63 of 23,781 paintings, about 0.3 per cent, as photographed [2]. It peaks in paintings from the 1910s, and Claude Monet carries it nearly thirty-eight times the archive average, far more than any other painter; John Singer Sargent follows well behind [2]. Its earliest appearance is a 1405 altarpiece, *Saint Dominic Guzmán and Four Saints* [2]. These are photographs of varnished paintings, read as screen colors [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented (name also carried by the catalpa tree, whose flowers are pale and purple-spotted)",
+   "first_recorded": "Maerz & Paul, 1930 (dated 1892), plate 44 D 3",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "pastel-violet",
+   "heliotrope-grey",
+   "dove-grey",
+   "mauve-grey"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#A38F9B",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 63,
+  "painters": [
+   {
+    "name": "Claude Monet",
+    "hits": 5,
+    "n": 50,
+    "lift": 37.75
+   },
+   {
+    "name": "John Singer Sargent",
+    "hits": 3,
+    "n": 287,
+    "lift": 3.95
+   }
+  ],
+  "measured": {
+   "rgb": [
+    163,
+    143,
+    155
+   ],
+   "lch": [
+    61.5,
+    10.3,
+    339.5
+   ],
+   "nearest": [
+    [
+     "Pastel Violet",
+     3.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz & Paul 1930 (plate 44 D 3), ISCC-NBS 1955 entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match within ΔE 6, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which painter uses Catalpa far more than anyone else in the archive?",
+   "choices": [
+    "Claude Monet",
+    "John Singer Sargent",
+    "Paul Gauguin",
+    "Vincent van Gogh"
+   ],
+   "answer": "Claude Monet",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the dictionary entry for Catalpa explicitly ties the name to the catalpa tree's flowers.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Catalpa shows up almost thirty-eight times more often than average in Monet's paintings."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 206
+}

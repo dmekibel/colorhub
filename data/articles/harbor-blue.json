@@ -1,0 +1,153 @@
+{
+ "slug": "harbor-blue",
+ "name": "Harbor blue",
+ "hex": "#3F829D",
+ "names": [
+  "Harbor blue"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Harbor blue is a muted, greenish [[blue]] whose name is undocumented: our sources record the color but not who named it or why.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A blue with no traced origin",
+   "body": "Our data carries this name from the 2010 xkcd crowd survey, and separately from Maerz and Paul's 1930 color dictionary, as cited by the ISCC-NBS circular of 1955, but neither source explains the choice of \"harbor\" [1]. In the ISCC-NBS system it falls nearest the block called \"strong greenish blue\", 4.5 units off [2]. In Munsell terms it reads about 7.6B 5.0/5.8, a mid-toned, moderately saturated blue leaning toward green [2].\n\nThe word suggests the grey-green water of a sheltered port rather than open ocean or sky, but that reading is ours, not a traced etymology [2]. The nearest named colors on file are [[chessylite-blue]], [[beaucaire]] and [[faience]], at 2.8, 3.2 and 4.3 ΔE [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 53 of 23,781 paintings, about 0.2 percent, as photographed [3]. The earliest dated match is Gerard David's *Lamentation over the Body of Christ*, from about 1490, a floor and not a first, since the archive's early centuries are thin [3]. Its clearest peak is the 1900s, at roughly four and a half times the archive's overall rate [3]. [[painter:claude-monet|Claude Monet]] used it far more than most painters, at about 45 times the baseline rate, including in his 1882 *[[painting:cma-125234|Low Tide at Pourville, near Dieppe]]* [3]. [[painter:john-singer-sargent|John Singer Sargent]] also reached for it, in works such as his 1892 *[[painting:commons-Q20771658|Pagan Deities]]* [3]. On the same canvases it most often keeps company with [[slate]] [3]. These counts are computed color matches on photographs of aged, varnished paintings, not pigment identifications [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "Maerz and Paul, 1930 (cited by ISCC-NBS Circular 553, 1955); xkcd survey, 2010",
+   "source": "ColorHub library and graph nodes"
+  },
+  "aka": [],
+  "siblings": [
+   "chessylite-blue",
+   "beaucaire",
+   "faience",
+   "bluish-steel-blue"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 53,
+  "first_painting": [
+   "aic-16261",
+   1490
+  ],
+  "painters": [
+   [
+    "Claude Monet",
+    44.87
+   ],
+   [
+    "John Singer Sargent",
+    4.69
+   ]
+  ],
+  "measured": {
+   "mu": "7.6B 5.0/5.8",
+   "nearest_iscc": [
+    "strong greenish blue",
+    4.5
+   ],
+   "nearest": [
+    [
+     "Chessylite Blue",
+     2.8
+    ],
+    [
+     "Beaucaire",
+     3.2
+    ],
+    [
+     "Faience",
+     4.3
+    ],
+    [
+     "Bluish steel blue",
+     4.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (Maerz and Paul 1930, cited by ISCC-NBS Circular 553, 1955; xkcd 2010)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub graph nodes: Munsell conversion, ISCC-NBS 1955 nearest block",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "True or false: our sources explain why this color is called Harbor blue.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which painter used Harbor blue far more than most, in our archive?",
+   "choices": [
+    "Claude Monet",
+    "Rembrandt",
+    "Jan van Eyck",
+    "Titian"
+   ],
+   "answer": "Claude Monet",
+   "kind": "pick"
+  },
+  {
+   "q": "What decade shows the sharpest rise in Harbor blue in our archive?",
+   "choices": [
+    "The 1900s",
+    "The 1500s",
+    "The 1700s",
+    "The 1200s"
+   ],
+   "answer": "The 1900s",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Monet reached for Harbor blue about 45 times more often than the average painter in our archive."
+ ],
+ "words": 272,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); name origin genuinely undocumented in our data, stated as such.",
+   "lint 2026-10-09"
+  ]
+ }
+}

@@ -1,0 +1,122 @@
+{
+ "name": "Jasper Pink",
+ "hex": "#E99193",
+ "names": [
+  "Jasper Pink"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Jasper Pink is a soft salmon-pink named for the stone jasper, and the English name ColorHub gives to a traditional Japanese color measured out by dye weight.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A pink measured in dye, not stone",
+   "body": "Ridgway's 1912 atlas gives this swatch at plate XIII, hue 3′, tone d, filed by the 1955 ISCC-NBS system in block 26, a deep pink [1]. Maerz and Paul's 1930 dictionary records the same name from 1912 [1]. ColorHub's library pairs it with a Japanese name, ikkonzome (一斤染), literally \"one-kin dye\", naming the pale shade by the single kin, about 0.6 kilograms, of safflower dye used to produce it [2]. Its nearest library neighbor is [[alizarine-pink]], and the closest core app color is [[salmon]], over eight units away [1]. It leans than to the more orange [[salmon]], despite the app field naming salmon as its nearest core color [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this pink in only 4 of 23,781 paintings[3]. All four matches are French paintings from the nineteenth century, including an 1853 self-portrait by Louis Gustave Ricard and an 1880 still life of flowers [3]. With so few matches, this French, nineteenth-century lean may be coincidence rather than pattern [3]. These are photographs of aged, varnished paintings, and a match this rare says little about where or how often the color was actually used [3]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "jasper, the stone",
+   "first_recorded": "1912 (Maerz and Paul / Ridgway)",
+   "source": "ColorHub library (data/library.json)"
+  },
+  "aka": [],
+  "siblings": [
+   "alizarine-pink",
+   "salmon",
+   "rose"
+  ],
+  "parent": "pink",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "ikkonzome (一斤染), \"one-kin dye\""
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed",
+  "match": {
+   "hex": "#E99193",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 4,
+  "nearest": [
+   [
+    "Alizarine Pink",
+    null
+   ],
+   [
+    "Salmon",
+    8.3
+   ]
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json) and name graph (data/graph/nodes): Ridgway (1912), ISCC-NBS (1955) and Maerz & Paul (1930) entries; Ridgway 1912 pl. XIII hue 3′ tone d, ISCC-NBS 1955 block 26, Maerz & Paul 1930, first recorded 1912",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library, Japanese traditional-name field (data/library.json, \"jp\")",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the Japanese name ikkonzome literally mean?",
+   "choices": [
+    "One-kin dye",
+    "Imperial pink",
+    "Cherry blossom",
+    "Morning light"
+   ],
+   "answer": "One-kin dye",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Jasper Pink is a common color in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Jasper Pink's Japanese name, ikkonzome, names the color by the weight of dye used to make it: one kin, about 0.6 kilograms."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No book source found; article relies on library/graph data only. Field count is very small (n=4).",
+   "lint 2026-10-09"
+  ]
+ },
+ "slug": "jasper-pink",
+ "words": 222
+}

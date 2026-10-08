@@ -1,0 +1,111 @@
+{
+ "slug": "imperial-stone",
+ "name": "Imperial Stone",
+ "hex": "#8B6E2B",
+ "names": [
+  "Imperial Stone"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Imperial Stone is a dark olive brown named for a landscape word, stone, and is among the most common named colors in our painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A landscape word",
+   "body": "The library records Imperial Stone from Maerz and Paul's 1930 dictionary, plate 14 K 7, first recorded about 1904 [1]. The nearest named colors on file are [[dusty-hazel]], [[antique]], [[orange-citrine]] and [[bistre-brown]], at 3.4, 3.5, \nIn LCH terms it measures lightness 48, chroma 41, hue 85 degrees, the ISCC-NBS \"light olive brown\" block, Munsell 3.0Y 4.7/5.8, between [[brown]] and [[yellow]] [1]. 4, 3.5, 3.5 and 4.1 ΔE [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 1,851 of 23,781 paintings, 7.78 percent, as photographed; the within-painting lens finds it in 1,071 [2]. That makes it more common than 91 percent of the named colors we track [2]. It peaks in the 1400s, in 52 of 945 paintings, at 5.5 percent of that century's paintings, 1.2 times the expected rate [2]. Inside a painting it most often sits as an accent, in 49 percent of its appearances, by lightness rank [2].\n\nPaulus Potter is its most devoted painter, carrying it in 10 of his 28 works here, 5.3 times the baseline of the museums those works come from [2]. The earliest match is dated 1125; that is 805 years before the name's own first record, in 1930, so the match is a look-alike hue, not evidence of the actual paint, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "pairs the landscape word stone with \"imperial\"; the second word is undocumented",
+   "first_recorded": "c. 1904 (Maerz & Paul, plate 14 K 7)",
+   "source": "Maerz & Paul, A Dictionary of Color (1930)"
+  },
+  "aka": [],
+  "siblings": [
+   "dusty-hazel",
+   "antique",
+   "orange-citrine",
+   "bistre-brown"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1851,
+  "measured": {
+   "lch": [
+    48,
+    41,
+    85
+   ],
+   "nearest": [
+    [
+     "Dusty hazel",
+     3.4
+    ]
+   ]
+  },
+  "role": {
+   "accent": 49
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz & Paul 1930, plate 14 K 7, first recorded c. 1904; nearest library match Sepia, ΔE 11.1",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which painter is most associated with Imperial Stone in our archive?",
+   "choices": [
+    "Paulus Potter",
+    "John Singer Sargent",
+    "George Catlin",
+    "Fritz Thomsen"
+   ],
+   "answer": "Paulus Potter",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Maerz and Paul's dictionary explains why Imperial Stone is called \"imperial\".",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Imperial Stone shows up in nearly one painting in thirteen in our archive."
+ ],
+ "words": 256,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

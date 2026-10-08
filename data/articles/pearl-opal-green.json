@@ -1,0 +1,120 @@
+{
+ "slug": "pearl-opal-green",
+ "name": "Pearl Opal Green",
+ "hex": "#005D4C",
+ "names": [
+  "Pearl Opal Green"
+ ],
+ "tier": "pigment",
+ "depth": "brief",
+ "lede": "Pearl Opal Green is a dark teal-green taken from RAL 6036, the German industrial standard, named for a pearl-flake finish rather than the gem opal itself.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A coating name, not a gem name",
+   "body": "Our library lists Pearl Opal Green as RAL 6036, one of the \"pearl\" finishes the RAL standard added as metallic-flake coatings became common in industrial paint [1]. RAL itself began in 1927 under the Reichs-Ausschuß für Lieferbedingungen, a German quality-assurance committee, which issued its first forty swatches as RAL 840 so that paint could be ordered by number rather than by sample [2]. \"Opal\" in the name points to the pearl sheen of true opal, the mineraloid prized for flashes of spectral color from its stacked silica spheres, not to any single hue the gem produces [3].\n\nIn LCH terms the color measures lightness 35, chroma 29, hue 174, close to [[opal-green|Opal Green]] in our library and to [[dark-green-blue|Dark Green Blue]] and [[gotham-green|Gotham Green]] nearby [1]. Beyond the RAL code, who chose this particular shade of green for the \"opal\" line is undocumented here [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A screen match for this teal-green is rare in our archive: just 6 of 23,781 paintings, as photographed, mostly from the 1800s and 1900s [1]. Its largest single appearance is a 1929 Mary Susan Collins painting, *Primrose*, where it covers nearly a third of the canvas [1]. The scarcity fits a saturated, dark green that real pigments rarely reached before stable synthetic colors arrived in the twentieth century [1]. Every figure here is a computed screen match on an aged, varnished painting, never a pigment identification [1]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a pearl-flake finish, loosely evoking the gem opal's sheen",
+   "first_recorded": "undocumented beyond its RAL 6036 code",
+   "source": "RAL color standard"
+  },
+  "aka": [
+   "RAL 6036"
+  ],
+  "siblings": [
+   "opal-green",
+   "opal"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 6,
+  "measured": {
+   "lch": [
+    35,
+    29,
+    174
+   ],
+   "nearest": [
+    [
+     "Opal Green",
+     2.51
+    ],
+    [
+     "Dark Green Blue",
+     3.56
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and archive (23,781 paintings): RAL 6036 entry, LCH values, computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "web",
+   "cite": "Wikipedia, \"RAL colour standard\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/RAL_colour_standard"
+  },
+  {
+   "n": 3,
+   "kind": "web",
+   "cite": "Science Museum / Finlay, Jewels: A Secret History, ch. 13, via Wikipedia, \"Opal\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/Opal"
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does \"opal\" refer to in the name Pearl Opal Green?",
+   "choices": [
+    "The gem's play-of-color sheen",
+    "A specific green the gem always shows",
+    "A dye made from crushed opal",
+    "A painter named Opal"
+   ],
+   "answer": "The gem's play-of-color sheen",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: RAL numbers let factories order paint by sample instead of by number.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pearl Opal Green borrows opal's sheen, not any single color the gem actually shows."
+ ],
+ "words": 250,
+ "status": "checked",
+ "checked": {
+  "by": "batch-23",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits; RAL and opal background from web sources, hedged. No documentation found for why this specific shade of green carries the opal name.",
+   "lint 2026-10-09"
+  ]
+ }
+}

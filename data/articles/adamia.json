@@ -1,0 +1,120 @@
+{
+ "slug": "adamia",
+ "name": "Adamia",
+ "hex": "#4E2C57",
+ "names": [
+  "Adamia"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Adamia is a dark, muted purple from the Maerz and Paul dictionary, so close to a handful of other library purples that they are nearly indistinguishable on screen.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name in the library",
+   "body": "Maerz and Paul's 1930 dictionary first records Adamia in 1928, on plate 45, swatch L 11 [1]. The ISCC-NBS system classes it as a dark purple, about 3.3 units from that block's center [1]. Who or what the name honors is not stated in the sources consulted [1].\n\nThe nearest named colors on file are [[light-aubergine]], [[imperial]], [[toga]] and [[japanese-violet]], at 3.6, 3.6, 3.9 and 4.3 ΔE [1]. All four share Adamia's low lightness and muted purple chroma; a reader would struggle to tell them apart without the labels [2]. Munsell notation places Adamia at 5.9P 2.4/6.3 [1]. The hex value, #4E2C57, is a screen approximation of the dictionary plate, not a measured pigment [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this purple in only 2 of 23,781 paintings, as photographed, a rate under one in ten thousand [3]. Both are a dark-purple accent rather than a dominant color: a mid-1800s royal portrait, Nicaise de Keyser's *Portrait of Grand Princess Anna Pavlovna* (1850), and Alfred Sisley's *The forge in Marly-le-Roi* (1875) [3]. The matches lean toward Belgian and French paintings, but the count is too small to generalize [3]. These are computed color matches on varnished, photographed canvases, not pigment identifications [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "light-aubergine",
+   "imperial",
+   "toga",
+   "japanese-violet"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2,
+  "measured": {
+   "lch": [
+    24.0,
+    31.0,
+    320.5
+   ],
+   "nearest": [
+    [
+     "Light aubergine",
+     3.6
+    ]
+   ]
+  },
+  "iscc": {
+   "name": "dark purple",
+   "de": 3.3
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz & Paul 1930, Ridgway 1912, ISCC-NBS 1955, RAL entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE Lab ΔE)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which library dictionary first records Adamia, and in what year?",
+   "choices": [
+    "Maerz and Paul, 1928",
+    "Ridgway, 1912",
+    "ISCC-NBS, 1955",
+    "RAL, 1927"
+   ],
+   "answer": "Maerz and Paul, 1928",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the sources consulted explain what Adamia is named after.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Adamia turns up in our archive only twice, in paintings nearly a century apart."
+ ],
+ "words": 228,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Nearest-neighbor claim (name and/or distance) in the 'name' section and field.measured.nearest did not match data/graph/edges-*.json 'la' (the cited color-graph computation); corrected to the true nearest colors and distances, and updated aside.siblings to match.",
+   "lint 2026-10-09"
+  ]
+ }
+}

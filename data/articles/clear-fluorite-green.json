@@ -1,0 +1,113 @@
+{
+ "slug": "clear-fluorite-green",
+ "name": "Clear Fluorite Green",
+ "hex": "#A7C18B",
+ "names": [
+  "Clear Fluorite Green"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Clear Fluorite Green is a light, muted green named for the transparent green form of fluorite, a mineral prized by collectors, recorded by Ridgway in 1912.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A collector's mineral",
+   "body": "Our library traces Clear Fluorite Green to fluorite, a mineral that forms transparent, often green or purple crystals, with Ridgway's 1912 standards placing it on plate XXXII, hue 33′′, tone b, and the 1955 ISCC-NBS system classing a close match as light yellowish green, 5.3 units of ΔE away [1].\n\nThe nearest everyday name on file is [[sage]], 5.8 units off, with [[malachite-green]], another mineral name, listed as the closer library neighbor [1]. In LCH terms it is light and moderately chromatic: lightness 75, chroma 31, hue 127 degrees [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings finds a close match to Clear Fluorite Green in only 50, as photographed[2]. It is used far more than chance by Vincent van Gogh and Edvard Munch, over 38 times each painter's own baseline, and appears in van Gogh's *[[painting:nga-72328|Roses]]* of 1890 at 44 percent coverage and in his *Roulin's Baby* of 1888 [2]. Its use across the archive also skews heavily toward Norway, nearly 16 times the expected rate, and peaks in the 1910s, in 5 of 523 paintings [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the mineral fluorite",
+   "first_recorded": "1912 (Ridgway, plate XXXII, hue 33′′)",
+   "source": "Ridgway, Color Standards and Color Nomenclature; ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "sage",
+   "malachite-green",
+   "jade",
+   "sand"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 50,
+  "match": {
+   "hex": "#A7C18B",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "measured": {
+   "lch": [
+    75,
+    31,
+    127
+   ],
+   "nearest": [
+    [
+     "Sage",
+     5.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: name records, plate and block locators, tier classification",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which two painters use a match to Clear Fluorite Green far more than chance in our archive?",
+   "choices": [
+    "Vincent van Gogh and Edvard Munch",
+    "Rembrandt and Vermeer",
+    "Hokusai and Hiroshige",
+    "Monet and Renoir"
+   ],
+   "answer": "Vincent van Gogh and Edvard Munch",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: a close match to Clear Fluorite Green appears in van Gogh's *Roses*.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Clear Fluorite Green turns up over 38 times its expected rate in paintings by van Gogh and Munch."
+ ],
+ "words": 201,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

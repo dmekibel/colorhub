@@ -1,0 +1,130 @@
+{
+ "name": "Vinaceous-Grey",
+ "hex": "#A89BA0",
+ "names": [
+  "Vinaceous-Grey"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Vinaceous-Grey is a pink-tinged grey from Ridgway's 1912 bird-color atlas, measured at the same hex as our library's [[mauve-grey]].",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two names, one hue",
+   "body": "Ridgway's 1912 systematic nomenclature places Vinaceous-Grey on plate L, hue 69'''', tone d [1]. The ISCC-NBS revision of 1955 groups the same chip as \"pale purple,\" block 227 [1]. Our library's [[mauve-grey]] sits at the identical measured hex, another case of two naming systems landing on the same color independently [2]. The next-nearest neighbor is [[irisglow]], a touch warmer [2]. Further out, [[platinum-grey]] and [[plumbago-grey]] sit in the same small cluster [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a match for Vinaceous-Grey in 149 of 23,781 paintings, about 0.6 percent, more common than 56 percent of the named colors we track [3]. It peaks in the 1900s, in 20 of 1,674 paintings, 2.4 times the rate expected from that century's share of the archive [3]. Inside a painting it most often sits as a light tone, in 45 percent of its appearances [3]. John Singer Sargent carries it most often by raw count, 5 of his 287 paintings here, though at 2 percent of his output it does not clear the bar for a standout against his peers [3]. The earliest archive match dates to 1119, nearly eight centuries before Ridgway recorded the name in 1912, a look-alike hue, not proof of the name or pigment [3]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1912, Ridgway's systematic nomenclature",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "mauve-grey",
+   "irisglow",
+   "platinum-grey",
+   "plumbago-grey"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 149,
+  "measured": {
+   "lch": [
+    65.2,
+    5.7,
+    351.0
+   ],
+   "nearest": [
+    [
+     "Mauve grey",
+     0.0
+    ],
+    [
+     "Irisglow",
+     2.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955 entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library, nearest-neighbor computation",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1912 atlas first catalogs Vinaceous-Grey?",
+   "choices": [
+    "Ridgway's systematic nomenclature",
+    "Maerz and Paul's dictionary",
+    "Pantone's formula guide",
+    "Pliny's Natural History"
+   ],
+   "answer": "Ridgway's systematic nomenclature",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Vinaceous-Grey and Mauve grey are measured at the same hex in our library.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "In our archive, roughly what share of paintings carry a match for Vinaceous-Grey?",
+   "choices": [
+    "About 0.6%",
+    "About 6%",
+    "About 60%",
+    "About 96%"
+   ],
+   "answer": "About 0.6%",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Vinaceous-Grey and Mauve grey are two names for the same measured color."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "slug": "vinaceous-grey",
+ "words": 235
+}

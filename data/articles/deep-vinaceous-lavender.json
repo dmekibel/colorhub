@@ -1,0 +1,111 @@
+{
+ "slug": "deep-vinaceous-lavender",
+ "name": "Deep Vinaceous-Lavender",
+ "hex": "#B5A1B0",
+ "names": [
+  "Deep Vinaceous-Lavender"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Deep Vinaceous-Lavender is a dusty, wine-tinted lavender, Ridgway's reading of a muted purplish grey.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Wine and lavender together",
+   "body": "Ridgway's 1912 nomenclature gives the swatch as plate XLIV, hue 65′′′, tone d, and the ISCC-NBS system of 1955 reads it as a pale reddish purple, about 3.1 units from the block center [1]. \"Vinaceous\" is the library's wine-toned branch of the purple family, paired here with [[lavender]] rather than left alone [1].\n\nThe nearest named color in our data is [[heliotrope-grey]], about 3.7 units off, which our library also names as its closest match; [[deep-greyish-lavender]] and [[purplish-lilac]] sit a little further out [1][2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This color, as photographed, appears in 58 of 23,781 paintings, about 0.24 percent, rarer than 57 percent of the named colors we track [3]. It peaks in the 1900s, in 8 of 1,674 paintings, at 0.5 percent of that period's paintings, 2.5 times the overall rate [3]. Inside a painting it most often plays a light [3]. It is most over-represented in France (2.6 times expected; 16 of 3443 paintings) [3]. The earliest match in the archive is a 1452 painting by Bartolomeo Caporali, 460 years before the name's 1912 record, so this is a look-alike hue in an aged photograph, not a pigment identification, a floor and not a first, since the archive's early centuries are thin [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "wine-toned lavender",
+   "first_recorded": "1912, Ridgway plate XLIV",
+   "source": "data/library.json"
+  },
+  "aka": [],
+  "siblings": [
+   "heliotrope-grey",
+   "french-white",
+   "purplish-lilac",
+   "deep-greyish-lavender"
+  ],
+  "parent": "lavender",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 58,
+  "pct": 0.24,
+  "peak": "1900s, 0.5% of this period's paintings, 2.5x expected",
+  "country": [
+   "France",
+   16,
+   3443,
+   2.6
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930 and other name sources; CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub Color Graph look-alikes (data/graph), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5 per cent of canvas); data/graph/fieldnotes",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which color does our library name as the closest match to Deep Vinaceous-Lavender?",
+   "choices": [
+    "Heliotrope Grey",
+    "Lilac",
+    "Charcoal",
+    "Olive"
+   ],
+   "answer": "Heliotrope Grey",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the archive's earliest match predates Ridgway's 1912 plate by over three centuries.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Deep Vinaceous-Lavender mixes a wine tint into lavender grey."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Fixed: the field-notes paragraph (and the matching \"field\" object) invented a painter claim (\"Harald Foss's Fra Mariager Fjord, 1867\") with no basis — ar.pa/ar.pn are empty for this slug — and the peak-decade stat (1860s/0.9%/6x) and the earliest-match painting+painter (\"a 1568 Jacopo Bassano Adoration of the Magi\") do not match any real field (real peak is the 1900s century fact, 0.5%/2.5x; real first-seen is a 1452 painting by Bartolomeo Caporali). The presence count (34) also didn't match either real count (31 within-painting / 58 as-photographed). Rewrote the paragraph directly from data/graph/fieldnotes for this slug; removed every unsupported claim rather than inventing a replacement for it.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 221
+}

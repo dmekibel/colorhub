@@ -1,0 +1,128 @@
+{
+ "slug": "mauve-taupe",
+ "name": "Mauve Taupe",
+ "hex": "#915F6D",
+ "names": [
+  "Mauve Taupe"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Mauve Taupe is a dusty, muted rose-brown on the dark side of the [[mauve]] family, dated by Maerz and Paul to about 1925 and confirmed in 1955 by the ISCC-NBS system, which lists it a close 1.1 units from its own \"dark reddish gray\" block.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dark mauve, many aliases",
+   "body": "Maerz and Paul's 1930 dictionary dates Mauve Taupe to about 1925, plate 7 C 8 [1]. The ISCC-NBS lists of 1955 attach a long run of other trade names to the very same block, among them Ashes of Rose, Aztec Maroon, Cineraria and Claret Cup, each a separate marketer's name landing on the same perceptual point [1]. The books held in color-kb do not mention \"Mauve Taupe\" itself [4]. Its nearest distinct neighbor by our graph is [[rose-dust]], 3.3 units off and described as \"more vivid\" [3]. Despite the modifier *taupe*, which usually names a flatter grey-brown, this color keeps real purple in it: hue angle 1.2 degrees, chroma 22.5, than to any grey [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds Mauve Taupe in 30 of 23,781 paintings, about 0.1 percent, as photographed, mostly in works from the 1900s onward [2]. On the canvases where it does appear, it shares space with plain [[mauve]] far more than chance alone would predict, a lift of over 150 times the base rate, which argues the two were often used as a pair [3]. Counts are computed matches on varnished, photographed canvases, not pigment identifications [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a taupe-darkened mauve",
+   "first_recorded": "c. 1925, Maerz & Paul 1930",
+   "source": "Maerz & Paul 1930; ISCC-NBS 1955"
+  },
+  "aka": [
+   "Ashes of Rose",
+   "Aztec Maroon",
+   "Claret Cup"
+  ],
+  "siblings": [
+   "rose-dust",
+   "mauve-rose",
+   "mauve-grey"
+  ],
+  "parent": "mauve",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 30,
+  "measured": {
+   "lch": [
+    46.1,
+    22.5,
+    1.2
+   ],
+   "nearest": [
+    [
+     "Rose Dust",
+     3.3
+    ]
+   ]
+  }
+ },
+ "questions": [
+  {
+   "q": "Which 1930 dictionary dates Mauve Taupe to about 1925?",
+   "choices": [
+    "Maerz and Paul's A Dictionary of Color",
+    "Pantone",
+    "Crayola",
+    "Newton's Opticks"
+   ],
+   "answer": "Maerz and Paul's A Dictionary of Color",
+   "kind": "pick"
+  },
+  {
+   "q": "On the canvases where it appears, Mauve Taupe keeps unusually close company with which other color?",
+   "choices": [
+    "Mauve",
+    "Prussian Blue",
+    "Madder",
+    "Burlywood"
+   ],
+   "answer": "Mauve",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Mauve Taupe turns up on the same canvases as plain Mauve far more than chance would predict."
+ ],
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes, data/library.json): ISCC-NBS 1955, Maerz & Paul 1930, Ridgway 1912, RAL, Munsell and CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match (ΔE2000 ≤ 6, ≥ 5% of canvas), as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph: nearest named neighbors and cross-domain twin matches (gems, films, fashion decades, Werner 1821 cross-reference), computed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "Concordance of the 29 color books held in color-kb for this name: no hits",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No book concordance hits for this name; sourced from ColorHub's own color library and archive data.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 234
+}

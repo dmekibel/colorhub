@@ -1,0 +1,124 @@
+{
+ "slug": "calamine-blue",
+ "name": "Calamine Blue",
+ "hex": "#81CCDC",
+ "names": [
+  "Calamine Blue"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Calamine Blue is a pale, greenish sky blue from the Ridgway and ISCC-NBS dictionaries, and one of the rarest named colors in our painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A 1912 plate",
+   "body": "Ridgway's 1912 nomenclature plates it at plate VIII, hue 43, tone d, hex #81CCDC [1]. The ISCC-NBS committee cited the same swatch in 1955, in block 172 among the \"very light greenish blue\" names, 3.2 units from that block's center, and Maerz and Paul's 1930 dictionary repeats it [1]. Its Munsell renotation is 4.4B 7.7/5.4 [1]. The sources consulted here do not explain the name; it recalls calamine, a pale blue-green zinc-carbonate mineral, but that link is not documented in this library entry, so it stays an open question rather than a claim [1].\n\nIts closest library neighbors are [[sky-blue-crayola|Sky Blue (Crayola)]], about three units lighter and greener, and [[bremen-blue|Bremen Blue]], a shade darker, at 4.6 units [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within six units of Calamine Blue covers at least five per cent of the canvas in only 11 of 23,781 paintings, about one in two thousand, as photographed [2]. That makes it one of the rarest named colors. Its earliest and largest appearance is Bernardo Bellotto's 1755 *View of Pirna with the Fortress of Sonnenstein*, where it covers 23 per cent of the canvas, a pale sky [2]. It shows up more in Russian and American paintings than the archive average, though the counts are too small to generalize from [2]. These are photographs of varnished paintings, read as screen colors [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "Ridgway, 1912, plate VIII",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "sky-blue-crayola",
+   "bremen-blue",
+   "sky-blue",
+   "non-photo-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#81CCDC",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 11,
+  "painters": [],
+  "measured": {
+   "rgb": [
+    129,
+    204,
+    220
+   ],
+   "lch": [
+    77.9,
+    24.5,
+    218.5
+   ],
+   "nearest": [
+    [
+     "Sky Blue (Crayola)",
+     3.3
+    ],
+    [
+     "Bremen Blue",
+     4.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912 (plate VIII), ISCC-NBS 1955 (block 172), Maerz & Paul 1930 entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match within ΔE 6, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "True or false: our sources confirm Calamine Blue is named for the mineral calamine.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "About how often does Calamine Blue appear in the painting archive?",
+   "choices": [
+    "About one painting in two thousand",
+    "About one painting in five",
+    "About one painting in two",
+    "Almost every painting"
+   ],
+   "answer": "About one painting in two thousand",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Calamine Blue is one of the rarest named colors in our whole painting archive."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "nearest-neighbor distance (and, for calliste-green, the named colors) did not match data/graph/edges-*.json 'la' / a direct CIEDE2000 recomputation; corrected.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 245
+}

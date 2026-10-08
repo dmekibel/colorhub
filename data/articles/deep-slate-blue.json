@@ -1,0 +1,130 @@
+{
+ "slug": "deep-slate-blue",
+ "name": "Deep Slate-Blue",
+ "hex": "#485B6C",
+ "names": [
+  "Deep Slate-Blue"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Deep Slate-Blue is a dark, muted blue named for slate stone, recorded in Ridgway's 1912 atlas, carried into the ISCC-NBS system of 1955, and most over-represented in paintings from India.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Named for the stone",
+   "body": "Our data traces the name to slate, the grey-blue rock split into roofing tiles, a plant-and-landscape word in our tier system rather than a dye or pigment [1]. Ridgway's 1912 atlas plots it on plate XLIII at hue 49′′′, tone k, and the ISCC-NBS system of 1955 files the same area as block 186, \"grayish blue\" [1]. In LCH terms it measures lightness 38, chroma 12, hue 257 degrees: dark, lightly saturated, and a true blue rather than violet [1].\n\nIts nearest distinct neighbor by computed color distance is [[dark-madder-blue|Dark Madder Blue]], 3.4 units away and read in our data as \"purpler\" [2]. [[black-coral|Black Coral]] sits almost as close, 3.4 units off as well, called \"almost the same\" [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a close match covers enough of the canvas in 140, as photographed, more common than 64 percent of the named colors we track [3]. It peaks in paintings from the 1900s, at 2.7 times the rate expected from that century's share of the archive [3]. Niels Larsen Stevns is its most devoted painter here, with the color present in 5 of 22 of his works, seven times the baseline of the museums those works come from [3]. It is also most over-represented by country in paintings from India, at 2.3 times the expected rate, 13 of 721 paintings from there [3]. Its earliest archive match goes back to 1100, as photographed [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "slate, the grey-blue roofing stone",
+   "first_recorded": "Ridgway, 1912",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "dark-madder-blue",
+   "black-coral",
+   "arona",
+   "bruges"
+  ],
+  "parent": "slate",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 140,
+  "measured": {
+   "lch": [
+    38,
+    12,
+    257
+   ],
+   "nearest": [
+    [
+     "Dark Madder Blue",
+     3.4
+    ],
+    [
+     "Black Coral",
+     3.4
+    ],
+    [
+     "Arona",
+     3.5
+    ],
+    [
+     "Bruges",
+     4.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/nodes-d.json): Deep Slate-Blue — Ridgway 1912, plate XLIII, hue 49′′′, tone k; ISCC-NBS 1955, block 186",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-d.json): nearest distinct neighbors by CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings, as photographed, data/graph/fieldnotes/d.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which country's paintings are most over-represented for Deep Slate-Blue in our archive?",
+   "choices": [
+    "India",
+    "Denmark",
+    "France",
+    "Japan"
+   ],
+   "answer": "India",
+   "kind": "pick"
+  },
+  {
+   "q": "Which painter in our archive is most devoted to Deep Slate-Blue?",
+   "choices": [
+    "Niels Larsen Stevns",
+    "Claude Monet",
+    "Eugène Boudin",
+    "Eastman Johnson"
+   ],
+   "answer": "Niels Larsen Stevns",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Paintings from India are more than twice as likely to hold this slate-blue as the archive average."
+ ],
+ "words": 262,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No book concordance hits for this slug; written from the color graph, library and archive data only.",
+   "lint 2026-10-09"
+  ]
+ }
+}

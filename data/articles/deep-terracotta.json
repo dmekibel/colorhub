@@ -1,0 +1,134 @@
+{
+ "slug": "deep-terracotta",
+ "name": "Deep Terracotta",
+ "hex": "#CB6843",
+ "names": [
+  "Deep terracotta"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Deep Terracotta is a dark, burnt orange-red close to the fired clay it is named for, and close to a hue Werner's 1821 nomenclature of colours called \"Tile Red\".",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Older than the modifier grammar",
+   "body": "The nearest named colors on file are [[copper-red]], [[adobe]] and [[signal-orange]], at 3, 3.3 and 4.1 ΔE [1]. Its ISCC-NBS block reads \"moderate reddish orange\" [1].\n\nThe closest match among older sources is plate 82 of Patrick Syme's 1821 edition of Werner's nomenclature of colours, \"Tile Red\", illustrated there with the breast of the cock bullfinch, shrubby pimpernel and porcelain jasper [2]. Werner's book predates the modern name by 189 years; the resemblance is of hue, not of name [2]. [[bright-terracotta|Bright Terracotta]], [[brick|Brick]] and [[rust|Rust]] sit nearby in our library [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Deep Terracotta covers at least 2% of the canvas in 231 of our 23,781 paintings, and by position in each painting's lightness order it is found in 205, more common than 71% of the named colors we track, as photographed [3]. It is most often an accent, the role in 91% of those matched paintings, and is most over-represented in paintings from India, at 3.2 times the expected rate [3].\n\nThe earliest match is the year 1000, 821 years before Werner's 1821 \"Tile Red\" and 821 years before the modern name, which again says only that a similar hue was photographed there, a floor and not a first, since the archive's early centuries are thin [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: deep + terracotta (fired clay)",
+   "first_recorded": "1821, Werner/Syme, as the nearby \"Tile Red\"",
+   "source": "Syme, Werner's Nomenclature of Colours, 2nd ed. (1821), plate 82"
+  },
+  "aka": [],
+  "siblings": [
+   "copper-red",
+   "adobe",
+   "signal-orange",
+   "deep-reddish-orange"
+  ],
+  "parent": "terracotta",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present_by_coverage": 231,
+  "n_present_within": 205,
+  "rank_pct": 71,
+  "role": "accent, 91% of matched paintings",
+  "top_country": {
+   "name": "India",
+   "lift": 3.2
+  },
+  "first_dated": {
+   "id": "cma-161703",
+   "year": 1000
+  },
+  "measured": {
+   "nearest": [
+    [
+     "Copper Red",
+     3.0
+    ],
+    [
+     "Adobe",
+     3.3
+    ],
+    [
+     "Signal Orange",
+     4.1
+    ],
+    [
+     "Deep Reddish Orange",
+     4.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and color graph: xkcd (2010), ISCC-NBS (1955) and a Japanese traditional list",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Syme, Werner's Nomenclature of Colours, 2nd ed. (1821), plate 82, \"Tile Red\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1821 color name sits closest to Deep Terracotta?",
+   "choices": [
+    "Tile Red, in Werner's nomenclature of colours",
+    "Isabelline",
+    "Prussian Blue",
+    "Mauve"
+   ],
+   "answer": "Tile Red, in Werner's nomenclature of colours",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: in our painting archive, Deep Terracotta most often appears as a shadow.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Deep Terracotta sits close to a hue Werner's 1821 nomenclature called Tile Red, illustrated with a bullfinch's breast and porcelain jasper."
+ ],
+ "words": 234,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Werner match is by hue proximity (CIEDE2000 on his digitized swatch), not a documented historical link to this exact name.",
+   "lint 2026-10-09"
+  ]
+ }
+}

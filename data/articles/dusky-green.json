@@ -1,0 +1,145 @@
+{
+ "slug": "dusky-green",
+ "name": "Dusky Green",
+ "hex": "#43594E",
+ "names": [
+  "Dusky Green"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dusky Green is a dusky shade of [[green|green]], one of Robert Ridgway's working names built by the plain grammar of modifier plus base color.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier, not a new color",
+   "body": "Dusky Green joins the modifier *dusky* to one of the eleven basic English color words, [[green]] [1][4]. Ridgway's 1912 plate XXXIII, hue 37-double-prime, sets it low on the value scale and low in chroma, LCH lightness 36 and chroma 12 [1][4]. The ISCC-NBS system calls the same block, 122, 'dark greenish gray,' a Delta-E of 6.6 from Ridgway's point [2]. *Dusky* pairs with other base colors in our naming graph too, among them [[dusky-plum]], applying the same darkening, desaturating grammar to a different hue family [1][4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this shade, as photographed, in 1.92% of 23,781 paintings, 457 paintings; within a single canvas it reads as a distinct area in 219 of them [3]. That ranks it more common than 72% of the archive's named colors [3]. It peaks in the 1900s, found in 2.8% of that century's 1,674 paintings, 2.8 times the expected rate [3]. Inside a painting it most often plays a hidden color, found by lightness rank but under 2% of the visible canvas, in 44% of its 219 appearances [3]. Paul Cezanne is its most devoted painter, using it in 8 of his 50 works here, 7.1 times the baseline rate of the museums those paintings come from [3]. The earliest dated appearance is a painting from 1301, 611 years before the name's first documented record in 1912; the archive's early centuries are thin, so this is a floor and not a first [3]. It is most over-represented in paintings from Norway, 3.5 times the expected rate, 6 of 120 Norwegian paintings in our archive [3]. In printed English the word peaks in the 1810s, counting every sense of the word [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the base color green, with the modifier 'dusky'",
+   "first_recorded": "1912 (Ridgway, Color Standards and Nomenclature)",
+   "source": "Ridgway, Color Standards and Nomenclature"
+  },
+  "aka": [],
+  "siblings": [
+   "dusky-plum",
+   "dark-lavender",
+   "dusky-bluish-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "measured": {
+   "lch": [
+    35.8,
+    11.6,
+    161.6
+   ],
+   "nearest_iscc": [
+    "dark greenish gray",
+    6.6
+   ]
+  },
+  "n_present": 219,
+  "role_top": {
+   "role": "hidden",
+   "pct": 44
+  },
+  "painter": {
+   "name": "Paul Cezanne",
+   "n": 8,
+   "of": 50,
+   "lift": 7.1
+  },
+  "country": {
+   "name": "Norway",
+   "lift": 3.5
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Nomenclature, 1912, plate XXXIII, hue 37 double-prime",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "ISCC-NBS, National Bureau of Standards Circular 553, 1955, block 122 (\"dark greenish gray\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color graph: computed LCH/Munsell values and modifier-name cross-reference",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which basic English color word does 'dusky' modify in this name?",
+   "choices": [
+    "Green",
+    "Blue",
+    "Brown",
+    "Violet"
+   ],
+   "answer": "Green",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: in our archive, Dusky Green is most over-represented in paintings from France.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Inside a painting, which role does Dusky Green most often play?",
+   "choices": [
+    "Hidden color",
+    "Light",
+    "Accent",
+    "Shadow"
+   ],
+   "answer": "Hidden color",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Dusky Green is most over-represented in paintings from Norway, 3.5 times the expected rate.",
+  "It usually hides, found under 2% of the visible canvas, far more often than it stands out."
+ ],
+ "words": 298,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

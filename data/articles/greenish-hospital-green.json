@@ -1,0 +1,108 @@
+{
+ "slug": "greenish-hospital-green",
+ "name": "Greenish hospital green",
+ "hex": "#A6D89C",
+ "names": [
+  "Greenish hospital green"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Greenish hospital green is a pale, cool green, the library's bluer-leaning variant of the institutional [[hospital-green]], and it is rare enough in our archive that five matches stand out.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier on an existing name",
+   "body": "The library catalogues this as \"greenish\" layered onto the base entry [[hospital-green]] [1]. The ISCC-NBS system of 1955 files the same patch as light yellowish green, about 4.6 units away in CIEDE2000, and Ridgway's 1912 atlas lists a corresponding hue, though our index carries no plate number for it [1]. In Munsell notation it falls at 9.8GY 8.1/5.4, a light, moderately saturated yellow-green,, [[celadon]] and [[sea-green]] than to the drab institutional shade its base name suggests [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a match in only 4 of 23,781 paintings, as photographed, too few for reliable painter or country patterns; the within-painting lens finds it in just 1 [2]. That makes it rarer than 86 percent of our named colors [2]. The one within-painting reading we have plays a mid-tone, not a shadow or a highlight [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: greenish + hospital-green",
+   "first_recorded": "Ridgway, Color Standards and Nomenclature, 1912; ISCC-NBS, 1955",
+   "source": "ColorHub color library and Color Graph"
+  },
+  "aka": [],
+  "siblings": [
+   "granny-smith-apple",
+   "light-grey-green",
+   "hospital-green",
+   "tiber-green"
+  ],
+  "parent": "hospital-green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 4,
+  "measured": {
+   "lch": [
+    81.6,
+    36.8,
+    138.3
+   ],
+   "munsell": "9.8GY 8.1/5.4",
+   "iscc_nbs": {
+    "name": "light yellowish green",
+    "de2000": 4.6
+   }
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and Color Graph (data/library.json, data/graph): ISCC-NBS block, Munsell notation, LCH values",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive fieldnotes, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Greenish hospital green is built by adding \"greenish\" to which existing color name?",
+   "choices": [
+    "Hospital green",
+    "Pistachio",
+    "Sea green",
+    "Sage"
+   ],
+   "answer": "Hospital green",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our archive finds this exact shade in hundreds of paintings.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Greenish hospital green is one of the rarest shades in our archive, found as photographed in only 4 of 23,781 paintings."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Field notes fabricated a specific attribution (claimed the top match was Vincent van Gogh's 'Roses'; the cited fieldnotes (data/graph/fieldnotes) actually tie that painting id to a different, unrelated artist field, and give no title), a wrong painting count (claimed 5; real is 4 as-photographed/1 within-painting), fabricated country/era claims ('Mughal court portrait', '1925 landscape') with no supporting data, and a fabricated canvas-coverage/role breakdown; rewritten to state only the two facts the source actually supports (presence, rank) plus the real role field (100% mid-tone for the single within-painting reading).",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 167
+}

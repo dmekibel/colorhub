@@ -1,0 +1,153 @@
+{
+ "slug": "windsor-green",
+ "name": "Windsor Green",
+ "hex": "#31673E",
+ "names": [
+  "Windsor Green"
+ ],
+ "tier": "place",
+ "depth": "medium",
+ "lede": "Windsor Green is a dark yellowish green recorded by Maerz and Paul around 1904, sharing its family name with a base color, Windsor, that is actually a dark grayish purple.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A family name that doesn't match its own base color",
+   "body": "Maerz and Paul's dictionary records Windsor Green at plate 22, position L 12, first listed around 1904, and the ISCC-NBS system later filed it as a dark yellowish green [1]. Our color graph treats \"Windsor\" as a family word shared across several named colors, but the base color actually called Windsor, also from Maerz and Paul, is a dark grayish purple nowhere near green [2]. Windsor Green shares only the family name with it, not the hue, the same way Dark Slate Grey is not simply a darker Slate Grey [2].\n\nIts closest named relatives by measured color, not by family name, are [[meadow]], almost indistinguishable at 3 units, and [[hunter-green]], a touch duller [3].\n\nFurther out are [[ski]], also almost the same at 3.3 units, and [[emerald-green]], more vivid at 4.1 [3]. Our library files the color under fashion and textiles, the same field as its Windsor Tan neighbor, rather than under nature or pigment [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, as photographed, a color within six units of Windsor Green covers at least five per cent of a canvas in 39 works, peaking in the 1910s at nearly six times the archive's overall rate [4]. Paul Gauguin is the strongest match, present in three of his fifty archived paintings, almost 37 times the expected rate, including an 1899 still life where it covers 45 per cent of the canvas [4]. It is also linked to Post-Impressionism generally, and often shares a canvas with hunter green [4]. These remain photographs of varnished paintings, read as screen colors [4]. Beyond Gauguin, it is disproportionately present in paintings from Korea, Sweden, Norway and Austria, though each of those counts rests on a single matching work [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the family word \"Windsor\"; the base color Windsor itself is an unrelated dark purple",
+   "first_recorded": "Maerz & Paul, A Dictionary of Color (1930), plate 22 L 12, first recorded c. 1904",
+   "source": "ColorHub color library (Maerz & Paul 1930; ISCC-NBS 1955)"
+  },
+  "aka": [],
+  "siblings": [
+   "meadow",
+   "hunter-green",
+   "ski",
+   "emerald-green"
+  ],
+  "parent": "windsor",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "windsor",
+    "gloss": "the base color Windsor (#443349) is a dark grayish purple; Windsor Green shares only the family name"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#31673E",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 39,
+  "painters": [
+   {
+    "name": "Paul Gauguin",
+    "hits": 3,
+    "n": 50,
+    "lift": 36.59
+   }
+  ],
+  "movements": [
+   {
+    "key": "Post-Impressionism",
+    "hits": 1,
+    "n": 45,
+    "lift": 13.55
+   }
+  ],
+  "measured": {
+   "lch": [
+    39.1,
+    33.1,
+    147.5
+   ],
+   "nearest": [
+    [
+     "Meadow",
+     3.0
+    ],
+    [
+     "Hunter Green",
+     3.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Maerz & Paul, A Dictionary of Color (1930), plate 22 L 12; ISCC-NBS 1955",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/nodes-w.json), family-word grouping; Maerz & Paul 1930, plate 47 J 10 for the base color Windsor",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-w.json), CIEDE2000 look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What color is the base entry \"Windsor\", which gives Windsor Green its family name?",
+   "choices": [
+    "A dark grayish purple",
+    "A bright green",
+    "A pale yellow",
+    "A deep red"
+   ],
+   "answer": "A dark grayish purple",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Windsor Green is a darker version of the base color Windsor.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Windsor Green shares its name, but not its hue, with a separately catalogued dark purple called simply Windsor."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-08",
+  "issues": [
+   "Family-name link to 'windsor' is structural (data/graph par field), not a documented naming story.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 310
+}

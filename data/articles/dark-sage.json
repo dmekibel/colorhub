@@ -1,0 +1,128 @@
+{
+ "slug": "dark-sage",
+ "name": "Dark Sage",
+ "hex": "#598556",
+ "names": [
+  "Dark Sage"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Dark Sage is a muted, greyish green, a shade down from [[sage]] and classed by the ISCC-NBS system as a moderate yellowish green.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "No book in our library records a name at this position before the xkcd color survey of 2010, where the public supplied the plain descriptive phrase \"dark sage\" [1]. Its origin before that survey is undocumented here [1].\n\nThe nearest ISCC-NBS 1955 block is moderate yellowish green, under 5 CIEDE2000 units away, with a Munsell reading near 9.9GY in hue [1]. The nearest named colors on file are [[hay-s-green]], [[mineral-green]] and [[emeraude]], at 2.8, 3.9 and 4.2 ΔE [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a match for this swatch in 57 of 23,781 paintings, as photographed [2]. Félix Vallotton's *Corn Fields* (1900) carries the most of it, covering 50 per cent of the canvas, and Claude Monet's own works carry it 25 times the archive's baseline rate [2]. Its peak decade is the 1910s, and the word \"Viridian\" shares its canvases far more than chance [2]. Where it appears, it most often sits as a mid-tone rather than a shadow or a highlight [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "sage, the herb, darkened",
+   "first_recorded": "xkcd color survey, 2010",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "hay-s-green",
+   "mineral-green",
+   "emeraude",
+   "pauncy-green"
+  ],
+  "parent": "sage",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+  "n_present": 57,
+  "rate": 0.0024,
+  "role": {
+   "mid": 0.72,
+   "highlight": 0.05,
+   "shadow": 0.23
+  },
+  "top_painting": {
+   "id": "cma-83462",
+   "title": "Corn Fields",
+   "painter": "Félix Vallotton",
+   "year": 1900,
+   "cover": 0.504
+  },
+  "measured": {
+   "nearest": [
+    [
+     "Hay's Green",
+     2.8
+    ],
+    [
+     "Mineral Green",
+     3.9
+    ],
+    [
+     "Emeraude",
+     4.2
+    ],
+    [
+     "Pauncy Green",
+     4.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, xkcd color survey 2010), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which painting carries the most Dark Sage in our archive?",
+   "choices": [
+    "Félix Vallotton's Corn Fields",
+    "A Rajput miniature",
+    "A Gauguin Tahiti scene"
+   ],
+   "answer": "Félix Vallotton's Corn Fields",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: where Dark Sage appears, it is usually a shadow color rather than a mid tone.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dark Sage shares its canvases with Viridian far more often than chance would predict."
+ ],
+ "words": 185,
+ "status": "checked",
+ "checked": {
+  "by": "writer-lane",
+  "date": "2026-10-08",
+  "issues": [
+   "No book source for the name; xkcd survey only",
+   "lint 2026-10-09"
+  ]
+ }
+}

@@ -1,0 +1,119 @@
+{
+ "name": "Haematoxylin Violet",
+ "hex": "#705089",
+ "names": [
+  "Haematoxylin Violet"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Haematoxylin Violet is a moderate purple named for haematoxylin, the logwood-tree compound better known today as a laboratory stain than a painter's color.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A stain, not a painter's pigment",
+   "body": "Ridgway's 1912 atlas gives this swatch at plate XXV, hue 61′, tone i, and the 1955 ISCC-NBS system files it in block 223, a moderate purple [1]. In Munsell terms it reads 3.7P 3.9/8.0 [1]. Haematoxylin is extracted from logwood heartwood and is still used today chiefly to stain cell nuclei in microscopy, not to color paintings, which may explain why this entry has no separate record in Maerz and Paul's dictionary of trade and fashion names [1].\n\nThe nearest named colors on file are [[litho-purple]], [[dauphin-s-violet]], [[blanc-s-violet]] and [[nuremberg-violet]], at 3, 4.1, \nIt sits between [[amethyst]] and plain [[violet]] in hue, closer to violet in how dark and muted it reads [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this exact purple in only 2 of 23,781 paintings[2]. Both matches, an 1893 Paul Signac and a 1760 portrait by Gervase Spencer, cover only a small corner of their canvases [2]. With so few matches, no century, painter or country pattern is reliable [2]. These are photographs of aged, varnished paintings, and a match this rare is a coincidence of measurement as much as anything else [2]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "haematoxylin, the logwood-tree staining compound",
+   "first_recorded": "1912 (Ridgway, as a color standard)",
+   "source": "ColorHub library (data/library.json)"
+  },
+  "aka": [],
+  "siblings": [
+   "litho-purple",
+   "dauphin-s-violet",
+   "blanc-s-violet",
+   "nuremberg-violet"
+  ],
+  "parent": "purple",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed",
+  "match": {
+   "hex": "#705089",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 2,
+  "nearest": [
+   [
+    "Purple",
+    7.6
+   ]
+  ],
+  "measured": {
+   "nearest": [
+    [
+     "Litho Purple",
+     3.0
+    ],
+    [
+     "Dauphin's Violet",
+     4.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json) and name graph (data/graph/nodes): Ridgway (1912), ISCC-NBS (1955) and Maerz & Paul (1930) entries; Ridgway 1912 pl. XXV hue 61′ tone i, ISCC-NBS 1955 block 223",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is haematoxylin mainly used for today?",
+   "choices": [
+    "Staining cell nuclei under a microscope",
+    "Dyeing cotton cloth",
+    "Tinting house paint",
+    "Coloring glass"
+   ],
+   "answer": "Staining cell nuclei under a microscope",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Haematoxylin Violet is a common color in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Haematoxylin Violet turns up in only 2 of our 23,781 archive paintings."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No book source found; article relies on library/graph data only. Field count is very small (n=2).",
+   "lint 2026-10-09"
+  ]
+ },
+ "slug": "haematoxylin-violet",
+ "words": 225
+}

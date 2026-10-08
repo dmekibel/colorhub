@@ -1,0 +1,144 @@
+{
+ "name": "Japanese Carmine",
+ "hex": "#9D2933",
+ "names": [
+  "Japanese Carmine"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Japanese Carmine is a vivid, slightly brownish red, close kin to the dye word carmine, and the English name under which ColorHub files the Japanese color enji-iro.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Carmine, and its Japanese name",
+   "body": "The 1955 ISCC-NBS system would call this swatch's family a vivid red, its Munsell notation reading 5.4R 3.6/10.3 [1]. The nearest named colors on file are [[orient-red]], [[purple-madder]] and [[rouge]], at 3.7, \nColorHub's library pairs it with a traditional Japanese name, enji-iro (臙脂色), meaning cochineal red or rouge, the same dye tradition under a different, older naming system [2]. The closest core app color is [[carmine]], about six units away, and the library also notes a near-duplicate it calls Crimson (UA), under two and a half units off [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this red in 102 of 23,781 paintings, a little over four tenths of one per cent [3]. The earliest match is a 1260 Green Tara thangka, centuries before any dated record of this color name, so that is a lookalike hue and not a pigment record, a floor and not a first, since the archive's early centuries are thin [3]. The 1400s show the strongest lift, at more than four times the overall baseline [3]. These are photographs of aged, varnished paintings and thangkas, and a match says nothing about whether cochineal or any other dye was actually used [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "carmine, the cochineal dye, with \"Japanese\" marking a regional naming",
+   "first_recorded": "undocumented in the sources checked here",
+   "source": "ColorHub library (data/library.json)"
+  },
+  "aka": [],
+  "siblings": [
+   "orient-red",
+   "purple-madder",
+   "rouge",
+   "wine-red"
+  ],
+  "parent": "red",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "enji-iro (臙脂色), \"cochineal red/rouge\""
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed",
+  "match": {
+   "hex": "#9D2933",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 102,
+  "nearest": [
+   [
+    "Carmine",
+    6.2
+   ],
+   [
+    "Crimson (UA)",
+    2.3
+   ]
+  ],
+  "peak_century": 1400,
+  "measured": {
+   "nearest": [
+    [
+     "Orient Red",
+     3.7
+    ],
+    [
+     "Purple Madder",
+     3.7
+    ],
+    [
+     "Rouge",
+     4.3
+    ],
+    [
+     "Wine Red",
+     5.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json) and name graph (data/graph/nodes): Ridgway (1912), ISCC-NBS (1955) and Maerz & Paul (1930) entries; ISCC-NBS category and Munsell notation",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library, Japanese traditional-name field (data/library.json, \"jp\"), citing Wikipedia via the University of Alabama's color-name list",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the Japanese name enji-iro mean?",
+   "choices": [
+    "Cochineal red / rouge",
+    "Imperial purple",
+    "Autumn leaf",
+    "Deep indigo"
+   ],
+   "answer": "Cochineal red / rouge",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: enji-iro and Japanese Carmine point to the same cochineal dye tradition.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Japanese Carmine's own Japanese name, enji-iro, translates simply as \"cochineal red\"."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No book source found; article relies on library/graph data only.",
+   "lint 2026-10-09"
+  ]
+ },
+ "slug": "japanese-carmine",
+ "words": 220
+}

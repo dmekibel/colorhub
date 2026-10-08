@@ -1,0 +1,130 @@
+{
+ "slug": "slate-olive",
+ "name": "Slate-Olive",
+ "hex": "#657465",
+ "names": [
+  "Slate-Olive"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Slate-Olive is a grayish green first dated by Ridgway in 1912, the darkest and least saturated of the library's three slate colors.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The least saturated of the three",
+   "body": "Ridgway's 1912 standard places this hue on plate XLVII, and the 1955 ISCC-NBS system classes it as a dark greenish gray, block 156 [1]. Maerz and Paul's 1930 dictionary is cited by the same 1955 circular, without a separate date of its own [1]. The nearest named colors on file are [[serpent]], [[saul]], [[deep-greyish-blue-green]] and [[nickel-green]], at 5.4, 5.5, 4, 5.5, 5.7 and 6.1 ΔE [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to Slate-Olive in 610 of 23,781 paintings, about 2.6 percent, as photographed [2]. It plays a midtone more than half the time, 55 percent, with highlight and shadow uses roughly split the rest of the way [2]. Henri Rousseau, Francesco Guardi and Berthe Morisot all use it well above the archive's average rate, and its strongest single match is a 1588 handscroll, Song Xu's *Eighteen Views of Huzhou*, where it covers 72 percent of the canvas [2].\n\nThe earliest dated match is a 1275 Japanese Buddhist painting, *Monju with Five Hair Knots*, more than six centuries before Ridgway's plate, which only shows a similar screen color was photographed there, not that the name or a matching pigment existed that early, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "slate, the rock",
+   "first_recorded": "Ridgway, 1912 (plate XLVII, hue 29′′′′)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "serpent",
+   "saul",
+   "deep-greyish-blue-green",
+   "nickel-green"
+  ],
+  "parent": "slate",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 610,
+  "role": {
+   "mid": 0.55,
+   "highlight": 0.29,
+   "shadow": 0.17
+  },
+  "company": [
+   "Viridian",
+   "Hunter Green",
+   "Sage"
+  ],
+  "measured": {
+   "lch": [
+    47,
+    11,
+    144
+   ],
+   "nearest": [
+    [
+     "Serpent",
+     5.4
+    ],
+    [
+     "Saul",
+     5.5
+    ],
+    [
+     "Deep Greyish Blue-Green",
+     5.7
+    ],
+    [
+     "Nickel Green",
+     6.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955, Maerz and Paul 1930 and other name records, with plate/block locators and nearest-name match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is Slate-Olive's nearest named color in our library, and how close is it?",
+   "choices": [
+    "Viridian, 12.1 ΔE — not a close match",
+    "Olive, 1.0 ΔE — nearly identical",
+    "Sage, 0.5 ΔE — nearly identical",
+    "Jade, 2.0 ΔE — a near-duplicate"
+   ],
+   "answer": "Viridian, 12.1 ΔE — not a close match",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Slate-Olive is named after a plant.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Slate-Olive is so muted that nothing in our library sits genuinely close to it."
+ ],
+ "words": 232,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

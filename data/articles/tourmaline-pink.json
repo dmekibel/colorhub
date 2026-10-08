@@ -1,0 +1,131 @@
+{
+ "slug": "tourmaline-pink",
+ "name": "Tourmaline Pink",
+ "hex": "#C18095",
+ "names": [
+  "Tourmaline Pink"
+ ],
+ "tier": "pigment",
+ "depth": "brief",
+ "lede": "Tourmaline Pink is a dusty rose first plated by Ridgway in 1912, close enough to [[puce]] on screen that the two are nearly interchangeable to the eye.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dusty rose, rarely used",
+   "body": "Ridgway's 1912 color atlas plates this rose at plate XXXVIII, hue 67 double-prime, tone b, a scan of an aged plate that our sources treat as approximate [1]. The 1955 ISCC-NBS circular later classed it as grayish purplish red, within 1.0 unit of its block center, and Maerz and Paul's 1930 dictionary cites the same 1912 record rather than adding a new one [1]. The Munsell notation is 5.8RP 6.0/6.7 [1]. Our sources say nothing about why the name pairs \"tourmaline\" with pink; the gemstone itself runs from pink to green to black, and the color-word classification here only files Tourmaline Pink as a mineral name, with no documented coiner [1].\n\nThe closest named color on screen is [[puce]], 3.2 units away and described as almost the same; [[cosmos]] and [[bright-mauve]] follow at 3.4 and 3.9, both read as purpler; [[dusky-pink]] sits at 4.1, redder and more vivid [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is a rare color in our painting archive: it appears in only 0.06 percent of 23,781 paintings, 15 of them, and the within-painting lens isolates it as a dominant area in just 4, as photographed [2]. That ranks it rarer than 77 percent of the named colors we track [2]. The earliest match is a painting dated to 1560, 352 years before Ridgway's 1912 record of the name; that gap marks a look-alike hue in an aged photograph, not the pigment itself, and with only 7 dated matches in total the pattern is thin, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the gemstone tourmaline",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "Ridgway, Color Standards and Color Nomenclature"
+  },
+  "aka": [],
+  "siblings": [
+   "puce",
+   "cosmos",
+   "bright-mauve",
+   "dusky-pink"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 15,
+  "n_within": 4,
+  "measured": {
+   "lch": [
+    60.7,
+    28.1,
+    358.2
+   ],
+   "nearest": [
+    [
+     "Puce",
+     3.2
+    ],
+    [
+     "Cosmos",
+     3.4
+    ],
+    [
+     "Bright mauve",
+     3.9
+    ],
+    [
+     "Dusky Pink",
+     4.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway (1912) plate XXXVIII, hue 67″; ISCC-NBS and Maerz and Paul cross-reference",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub graph: nearest named colors (look-alike data)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1912 atlas first plates Tourmaline Pink?",
+   "choices": [
+    "Ridgway",
+    "Maerz and Paul",
+    "ISCC-NBS",
+    "Crayola"
+   ],
+   "answer": "Ridgway",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Tourmaline Pink is one of the most common colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Tourmaline Pink sits only 3.2 color-units from Puce — close enough that the eye barely tells them apart.",
+  "Our archive finds this dusty rose in just 15 of 23,781 paintings, one of the rarer named colors we track."
+ ],
+ "words": 290,
+ "status": "checked",
+ "checked": {
+  "by": "claude",
+  "date": "2026-10-08",
+  "issues": [
+   "No source explains why \"tourmaline\" was paired with pink rather than another tourmaline hue.",
+   "Archive counts are very thin (n=4-15); the first-seen date is a look-alike match, not pigment evidence.",
+   "lint 2026-10-09"
+  ]
+ }
+}

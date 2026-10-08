@@ -1,0 +1,143 @@
+{
+ "slug": "bluish-steel-blue",
+ "name": "Bluish steel blue",
+ "hex": "#4D8FAC",
+ "names": [
+  "Bluish steel blue"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Bluish Steel Blue is ColorHub's name for Sora-iro (空色), a traditional Japanese color whose name simply means \"sky color.\"",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Sora-iro, the color of sky",
+   "body": "The Wikipedia survey \"Traditional colors of Japan\" lists this color under the romanized name Sora-iro, written 空色 [1]. The kanji are the plain words for \"sky\" and \"color,\" and the library's gloss reads \"sky blue color\" without further embellishment [1]. No book consulted for this project independently dates the name, so any claim beyond that gloss would be invented [1].\n\nThe nearest named colors on file are [[beaucaire]], [[dusty-steel-blue]], [[dirty-blue]] and [[harbor-blue]], at 3.9, 4.6, 4.9 and 4.9 ΔE [1]. The hex given here, #4D8FAC, is a modern screen approximation chosen to match the gloss, not a measurement of any dyed or painted object [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within range of this swatch appears in 97 of the 23,781 paintings in our archive, about 0.41 percent, as photographed; the within-painting lens finds it in 43 [2]. That is rarer than 52 percent of the named colors we track [2].\n\nIt peaks twice: in paintings dated to the 1900s, at 2.8 times the expected rate, and again in the decade 1910, at 3.6 times the rate for that decade alone [2]. Inside a painting it most often plays a mid-tone, in 30 percent of the paintings that carry it [2]. It is also over-represented in French paintings, at 2.5 times the expected rate across 3,443 French works in the archive [2]. The earliest dated appearance we have is Marco Zoppo, 1467, though the archive's early centuries are thin, so this is a floor and not a true first sighting [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "sky color, from 空 (sky) and 色 (color)",
+   "first_recorded": "undocumented beyond its listing in Japan's traditional color system",
+   "source": "ColorHub color library (Wikipedia, \"Traditional colors of Japan\")"
+  },
+  "aka": [
+   "Sora-iro",
+   "空色"
+  ],
+  "siblings": [
+   "beaucaire",
+   "dusty-steel-blue",
+   "dirty-blue",
+   "harbor-blue"
+  ],
+  "parent": "steel-blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Sora-iro (空色), \"sky blue color\""
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 97,
+  "rank_pct": 52,
+  "century_peak": {
+   "century": 1900,
+   "lift": 2.8
+  },
+  "decade_peak": {
+   "decade": 1910,
+   "lift": 3.6
+  },
+  "role": {
+   "kind": "mid-tone",
+   "pct": 30
+  },
+  "country": {
+   "France": 2.5
+  },
+  "first_seen": {
+   "year": 1467,
+   "painter": "Marco Zoppo"
+  },
+  "measured": {
+   "nearest": [
+    [
+     "Beaucaire",
+     3.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional color names (Wikipedia, \"Traditional colors of Japan\")",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Sora-iro literally mean?",
+   "choices": [
+    "Sky color",
+    "Sea color",
+    "Steel color",
+    "Winter color"
+   ],
+   "answer": "Sky color",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: bluish steel blue is most over-represented in French paintings in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which role does bluish steel blue most often play inside a painting?",
+   "choices": [
+    "A mid-tone",
+    "A hidden color",
+    "A light",
+    "A shadow"
+   ],
+   "answer": "A mid-tone",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Bluish steel blue's Japanese name just means \"sky color,\" and it turns up over twice as often in French paintings as chance would predict."
+ ],
+ "words": 270,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No book-level source for the name's history beyond the library gloss; stated as undocumented rather than guessed.",
+   "lint 2026-10-09"
+  ]
+ }
+}

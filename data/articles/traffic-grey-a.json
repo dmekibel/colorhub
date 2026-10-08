@@ -1,0 +1,108 @@
+{
+ "slug": "traffic-grey-a",
+ "name": "Traffic Grey A",
+ "hex": "#8F9695",
+ "names": [
+  "Traffic Grey A"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Traffic Grey A is a bluish grey from the German RAL road-and-signage standard, one of a matched pair with Traffic Grey B.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "One of a RAL pair",
+   "body": "RAL, founded in 1927, lists this hue as RAL 7042, and the hex value here is a screen approximation of that spec [1]. It is paired in the standard with the darker [[traffic-grey-b]], the two meant to read together on road markings and signage [1]. The books give no account of why RAL split its traffic greys into an A and a B rather than naming them separately, so that choice is undocumented [1].\n\nThe nearest named neighbor in our library is [[hathi-grey]], close enough that the two are easy to confuse on screen [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this hue, as photographed, in 526 of 23,781 paintings (2.21 percent), more common than 75 percent of the named colors we track [2]. It peaks in the 1600s, in 88 of 6,394 paintings, at 1.2 times the expected rate for the 6,394 paintings we have from that century [2]. Inside a painting it most often plays a light, in 51 percent of its 272 occurrences [2].\n\n[[painter:bernardo-bellotto|Bernardo Bellotto]] is its most devoted painter here, carrying it in 5 of 20 of his works, 7.2 times his home museums' baseline [2]. The earliest matching painting is dated 1360, 567 years before RAL recorded the standard in 1927, a floor and not a first, since the archive's early centuries are thin [2]. It shares canvases more than chance with [[nickel]] and [[french-grey]] [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "its use on traffic signs and road markings",
+   "first_recorded": "1927, per RAL",
+   "source": "RAL color standard"
+  },
+  "aka": [],
+  "siblings": [
+   "hathi-grey",
+   "traffic-grey-b"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 526,
+  "pct": 2.21,
+  "rank_pct": 75,
+  "measured": {
+   "lch": [
+    61.5,
+    2.7,
+    187.5
+   ],
+   "nearest": [
+    [
+     "Hathi Grey",
+     4.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "RAL color standard, RAL 7042, approximate screen value",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Traffic Grey A is paired in the RAL standard with which other color?",
+   "choices": [
+    "Traffic Grey B",
+    "Traffic White",
+    "Hathi Grey",
+    "Umbra Grey"
+   ],
+   "answer": "Traffic Grey B",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Traffic Grey A was designed for use on road signs.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Bernardo Bellotto used this RAL road-sign grey more than seven times as often as his peers."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 251
+}

@@ -1,0 +1,124 @@
+{
+ "slug": "courge-green",
+ "name": "Courge Green",
+ "hex": "#A19F63",
+ "names": [
+  "Courge Green"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Courge Green is a moderate yellow green named for the French word for gourd or squash, recorded twice by Ridgway in 1912 and again by Maerz and Paul in 1930.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A French gourd, twice over",
+   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* lists Courge Green twice, on plate XVII, hue 25′, tone i, and again on plate XXXI, hue 27′′, tone i, suggesting he saw it as common enough in nature to warrant two swatches [1]. Maerz and Paul repeat the name in 1930, and the ISCC-NBS system of 1955 assigns it block 103, dark greenish yellow, 6.3 units from that block's centroid [2]. The nearest named colors on file are [[biscay-green]], [[reseda]], [[lettuce-green]] and [[russet-green]], at 3.1, 3.3, \n*Courge* is simply French for gourd or squash, and the color names the dusty yellow-green of a gourd's rind rather than its flesh or flower [1]. It sits among the muted yellow greens near [[olive-green]] and [[sage]] [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Courge Green covers at least five per cent of the canvas in 618 of them, about 2.6 per cent, as photographed [3]. It is strongly tied to Paulus Potter, 10 of his 28 works, far above the archive rate, and comparatively frequent in Indian painting, 46 of 721 works [3]. It plays a highlight in 67 per cent of its appearances and peaks in paintings from the 1930s [3]. These are museum photographs of aged, varnished paintings, so the match is a screen color, not a pigment test [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "courge, French for gourd or squash",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "Ridgway, Color Standards and Color Nomenclature; Maerz and Paul, A Dictionary of Color; ColorHub library"
+  },
+  "aka": [
+   "Rainette Green (near-duplicate)"
+  ],
+  "siblings": [
+   "biscay-green",
+   "reseda",
+   "lettuce-green",
+   "russet-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 618,
+  "pct_archive": 2.6,
+  "role_highlight": 0.67,
+  "peak_decade": 1930,
+  "nearest": [
+   [
+    "Moss",
+    5.9
+   ]
+  ],
+  "measured": {
+   "nearest": [
+    [
+     "Biscay Green",
+     3.1
+    ],
+    [
+     "Reseda",
+     3.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XVII, hue 25′, tone i; and plate XXXI, hue 27′′, tone i (via ColorHub library)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; Maerz and Paul 1930, ISCC-NBS 1955 block 103), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the French word \"courge\" mean?",
+   "choices": [
+    "Gourd or squash",
+    "Grape",
+    "Reed"
+   ],
+   "answer": "Gourd or squash",
+   "kind": "pick"
+  },
+  {
+   "q": "Ridgway's 1912 standard lists Courge Green on only one plate.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Ridgway placed Courge Green on two different plates in his 1912 standard."
+ ],
+ "words": 254,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

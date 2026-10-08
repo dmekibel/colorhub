@@ -1,0 +1,138 @@
+{
+ "slug": "bluish-petrol",
+ "name": "Bluish petrol",
+ "hex": "#1D697C",
+ "names": [
+  "Bluish petrol"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Bluish petrol is a deep, muted teal-blue carried into our library from a Japanese traditional color name, and it sits only a short step from plain [[petrol]].",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Hanaasagi, a flower's light blue",
+   "body": "Our library lists this color from the Wikipedia survey \"Traditional colors of Japan,\" under the romanized name Hanaasagi, written 花浅葱 [1]. The kanji combine \"flower\" with a word for a pale, pale-indigo blue, and the library glosses the whole as \"light blue flower\" [1]. The books consulted for this project do not independently confirm a date or a specific flower, so the naming story beyond that gloss is undocumented here [1].\n\nIn our color library the nearest already-named neighbor is [[petrol]], a color-distance of 5.5 by the CIEDE2000 formula, close enough that most eyes would call them the same blue-green [1]. The hex given here, #1D697C, is a modern screen reading chosen to match that gloss; it is not a measurement of dyed cloth or any surviving object, so treat it as approximate [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within range of this swatch appears in 68 of the 23,781 paintings in our archive, about 0.29 percent, as photographed; a looser within-painting test finds it in 33 [2]. That makes it rarer than 56 percent of the named colors we track [2].\n\nIt peaks in the 1900s, present in 6 of 1,674 paintings from that century, 2.3 times the rate expected from the museums those works come from [2]. Inside a painting it most often sits as a hidden color, in a third of the paintings that carry it, the kind of tone that lightness alone would not single out [2]. The earliest dated appearance we have is Quentin Massys, 1500, though the archive's early centuries are thin, so this is a floor and not a true first sighting [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "flower blue, from 花 (flower) and 浅葱 (a pale indigo blue)",
+   "first_recorded": "undocumented beyond its listing in Japan's traditional color system",
+   "source": "ColorHub color library (Wikipedia, \"Traditional colors of Japan\")"
+  },
+  "aka": [
+   "Hanaasagi",
+   "花浅葱"
+  ],
+  "siblings": [
+   "petrol",
+   "steel-blue",
+   "sky-blue",
+   "aqua-blue"
+  ],
+  "parent": "petrol",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Hanaasagi (花浅葱), \"light blue flower\""
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 68,
+  "rank_pct": 56,
+  "century_peak": {
+   "century": 1900,
+   "hits": 6,
+   "of": 1674,
+   "lift": 2.3
+  },
+  "role": {
+   "kind": "hidden",
+   "pct": 33
+  },
+  "first_seen": {
+   "year": 1500,
+   "painter": "Quentin Massys"
+  },
+  "measured": {
+   "nearest": [
+    [
+     "Petrol",
+     5.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional color names (Wikipedia, \"Traditional colors of Japan\")",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the Japanese name Hanaasagi literally point to?",
+   "choices": [
+    "A flower's light blue",
+    "A dyer's workshop",
+    "A kind of pottery glaze",
+    "A river in Kyoto"
+   ],
+   "answer": "A flower's light blue",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the hex value given here is a direct measurement of a surviving dyed textile.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "In which century does bluish petrol peak in our painting archive?",
+   "choices": [
+    "The 1900s",
+    "The 1500s",
+    "The 1700s",
+    "The 1200s"
+   ],
+   "answer": "The 1900s",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Bluish petrol comes from a Japanese name that just means \"a flower's light blue,\" and it sits a short color-distance from plain petrol."
+ ],
+ "words": 289,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No book-level source for the name's history beyond the library gloss; stated as undocumented rather than guessed.",
+   "lint 2026-10-09"
+  ]
+ }
+}

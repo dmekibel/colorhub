@@ -1,0 +1,139 @@
+{
+ "slug": "ormond",
+ "name": "Ormond",
+ "hex": "#967F6B",
+ "names": [
+  "Ormond"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Ormond is a light, greyish brown from Maerz and Paul's 1930 color dictionary, dated by the dictionary itself to 1920, and one of the more common named colors in our painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A trade name from 1920",
+   "body": "Maerz and Paul's *A Dictionary of Color* (1930) places this color at plate 14, chip A4, and dates its own first record to 1920, a decade before the dictionary itself was published [1]. The ISCC-NBS system did not coin a separate name; it only cites the same chip when classifying the color as a light grayish brown [1]. Where the name \"Ormond\" comes from is not documented in the sources we checked, undocumented here [1].\n\nIn our color graph its closest named relatives are [[broccoli-brown]], almost the same, and [[taupe]] and [[folkstone]], both close behind [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, as photographed, a color within six units of Ormond covers at least five per cent of a canvas in 2,115 works, more common than 93 per cent of our named colors [3]. The painter most devoted to it is Francisco Bayeu, in 5 of his 13 works here, about 3.3 times his museums' baseline [3]. It most often shares a canvas with [[plain-mouse]] and [[vinaceous-buff]], at 5.2 and 4.5 times the expected rate [3]. The earliest dated appearance in our archive is the year 900, a millennium before the name's own 1920 record, a look-alike hue, not proof of pigment, a floor and not a first, since the archive's early centuries are thin [3]. These remain photographs of aged, varnished paintings, read as screen colors [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "Maerz and Paul, A Dictionary of Color (1930), plate 14, chip A4, dated by the dictionary to 1920",
+   "source": "ColorHub color library (Maerz and Paul 1930; ISCC-NBS 1955)"
+  },
+  "aka": [],
+  "siblings": [
+   "broccoli-brown",
+   "taupe",
+   "folkstone",
+   "plain-mouse"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#967F6B",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 2115,
+  "painters": [
+   {
+    "key": "Francisco Bayeu",
+    "n": 13,
+    "hits": 5,
+    "lift": 3.3
+   }
+  ],
+  "company": [
+   {
+    "word": "Plain mouse",
+    "lift": 5.2
+   },
+   {
+    "word": "Vinaceous-Buff",
+    "lift": 4.5
+   }
+  ],
+  "measured": {
+   "lch": [
+    54.8,
+    15.2,
+    68.2
+   ],
+   "nearest": [
+    [
+     "Broccoli Brown",
+     3.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-o.json): Maerz & Paul 1930, plate 14 A4, first recorded 1920; ISCC-NBS 1955 classification cites the same chip",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-o.json), CIEDE2000 look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "To what year does Maerz and Paul's dictionary date this color chip's first record?",
+   "choices": [
+    "1920",
+    "1930",
+    "1900",
+    "1955"
+   ],
+   "answer": "1920",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Ormond is one of the rarer colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Ormond appears in more than nine per cent of our 23,781-painting archive, among the most common of our named colors."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-08",
+  "issues": [
+   "Where the name \"Ormond\" comes from is not documented in the sources checked here.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 259
+}

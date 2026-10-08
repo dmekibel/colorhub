@@ -1,0 +1,127 @@
+{
+ "slug": "roman-silver",
+ "name": "Roman Silver",
+ "hex": "#838996",
+ "names": [
+  "Roman Silver"
+ ],
+ "tier": "pigment",
+ "depth": "brief",
+ "lede": "Roman Silver is a muted blue-grey listed in Ridgway's 1912 color atlas as a silver-metal tone, its exact Roman connection undocumented.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A silver with an unexplained adjective",
+   "body": "The nearest named colors on file are [[deep-plumbago-grey]] and [[grey]], at Why Ridgway called this particular shade \"Roman,\" rather than simply \"silver\" or another modifier, is not explained in the sources consulted here [1]. The ISCC-NBS 1955 revision files it as block 203, \"bluish gray\" [1][2].\n\nIn LCH terms the color measures lightness 57, chroma 8, hue 274, placing it between the plainer tone [[silver|Silver]] and [[deep-plumbago-grey|Deep Plumbago Grey]], close to [[warm-silver|Warm Silver]] and to [[light-slate-grey|Light Slate Grey]] elsewhere in the library [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A screen match for this grey-blue appears in 365 of 23,781 paintings, about 1.5 percent, as photographed, nearly three times the archive's average rate in work from the 1930s decade [2]. André Derain, Theodor Philipsen and Claude Monet all carry it well above the archive's base rate, often in overcast skies and shadowed fabric rather than skin [2]. Every figure here is a computed color match on an aged, varnished painting, not a pigment identification [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "silver, the metal; the \"Roman\" qualifier is undocumented here",
+   "first_recorded": "1912, Ridgway plate XLIX",
+   "source": "Ridgway, Color Standards and Color Nomenclature (1912)"
+  },
+  "aka": [],
+  "siblings": [
+   "deep-plumbago-grey",
+   "grey",
+   "deep-plumbeous",
+   "light-slate-grey"
+  ],
+  "parent": "silver",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 365,
+  "rate": 0.0153,
+  "peak_decade": {
+   "key": 1930,
+   "rate": 0.087,
+   "lift": 5.67
+  },
+  "measured": {
+   "lch": [
+    57,
+    8,
+    274
+   ],
+   "nearest": [
+    [
+     "Deep Plumbago Grey",
+     3.3
+    ],
+    [
+     "Grey",
+     4.1
+    ],
+    [
+     "Deep Plumbeous",
+     4.4
+    ],
+    [
+     "Light Slate Grey",
+     4.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XLIX, hue 53‴, tone b",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library and archive (23,781 paintings): ISCC-NBS 1955 block 203, LCH values, computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1912 color atlas first records Roman Silver?",
+   "choices": [
+    "Ridgway",
+    "Munsell's own 1905 atlas",
+    "Pantone",
+    "Crayola"
+   ],
+   "answer": "Ridgway",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Ridgway's books explain why he called this grey \"Roman.\"",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "No source consulted here explains why Ridgway called this particular grey \"Roman.\""
+ ],
+ "words": 178,
+ "status": "checked",
+ "checked": {
+  "by": "batch-23",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits and no web source found explaining the \"Roman\" qualifier; left as undocumented per CLAUDE.md honesty rule.",
+   "lint 2026-10-09"
+  ]
+ }
+}

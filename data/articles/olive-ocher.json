@@ -1,0 +1,133 @@
+{
+ "slug": "olive-ocher",
+ "name": "Olive-Ocher",
+ "hex": "#C6A34C",
+ "names": [
+  "Olive-Ocher"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Olive-Ocher is a dark, muted yellow that pairs two of the oldest color words in the language: olive, the fruit, and ocher, the earth pigment.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Fruit and earth together",
+   "body": "Ridgway's 1912 color book places this value on plate XXX, hue 21″, and our library carries no later citation for it, so it was not picked up by the 1930 or 1955 dictionaries [1]. The nearest named colors on file are [[light-cadmium]], [[bistre-green]] and [[tennis]], at 2.6, 2.7 and 2.8 ΔE [1]. The hyphen marks a deliberate blend of the two older words rather than a single new source [1].\n\nThe nearest library neighbor is Light Cadmium [1]. Compare [[khaki|Khaki]] and [[marigold|Marigold]], names our archive finds sharing its canvases most [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings finds a color within six units of this one in 920, about 3.9 percent, as photographed [2]. It is strongly concentrated in Indian painting: 112 of 721 Indian works carry it, over four times the archive rate, and Kalighat works carry it in 41 of 96, eleven times the rate [2]. The earliest dated match is a 1230 crucifix panel, a floor and not a first, since the archive's early centuries are thin [2]. The match is a screen-color comparison on aged, varnished paintings, not a pigment test [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "olive (the fruit) and ocher (the earth pigment)",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "light-cadmium",
+   "bistre-green",
+   "tennis",
+   "satin-sheen-gold"
+  ],
+  "parent": null,
+  "children": [
+   "marigold",
+   "ochre"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 920,
+  "match": {
+   "hex": "#C6A34C",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "measured": {
+   "lch": [
+    69,
+    49,
+    87
+   ],
+   "nearest": [
+    [
+     "Light Cadmium",
+     2.6
+    ],
+    [
+     "Bistre Green",
+     2.7
+    ],
+    [
+     "Tennis",
+     2.8
+    ],
+    [
+     "Satin Sheen Gold",
+     3.1
+    ]
+   ]
+  },
+  "surprises": [
+   "India: 112 of 721 works carry it, 4.02x the archive rate",
+   "Kalighat: 41 of 96 works carry it, 11.04x the archive rate"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which two older words does Olive-Ocher combine?",
+   "choices": [
+    "Olive and ocher",
+    "Olive and amber",
+    "Mustard and ocher",
+    "Olive and sienna"
+   ],
+   "answer": "Olive and ocher",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Olive-Ocher turns up far more often in Indian paintings than in the archive overall.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Over four times more common in Indian paintings than in our archive overall."
+ ],
+ "words": 208,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits in color-kb for this slug; written from library and archive data only.",
+   "lint 2026-10-09"
+  ]
+ }
+}

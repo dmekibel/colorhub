@@ -1,0 +1,140 @@
+{
+ "slug": "greenish-hunter-green",
+ "name": "Greenish hunter green",
+ "hex": "#52593B",
+ "names": [
+  "Greenish hunter green"
+ ],
+ "tier": "traditional",
+ "depth": "brief",
+ "lede": "Greenish hunter green is ColorHub's name for Aoni (青丹), a traditional Japanese color whose name, \"blue-black clay,\" reflects an older sense of *ao* spanning blue, green and grey.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Aoni, blue-black clay",
+   "body": "Our library lists this color under the Japanese name Aoni, written 青丹, glossed as \"blue-black clay\" [1]. In older Japanese, *ao* covers a wider span than modern \"blue,\" reaching into greens and greys, which is why a clay-based name lands on a green swatch here [1]. No book consulted independently dates the name beyond the library's gloss, so its coinage is undocumented here [1].\n\nThe swatch measures lightness 36, chroma 19 and hue 117 degrees, in the Greens family, and the library's nearest fashion neighbor is [[new-hay]] [1]. At 9.8 units from [[hunter-green]] it is a visible but moderate shift, used chiefly in fashion and textile contexts [1]. A greyer version of the same base name, [[greyish-hunter-green]], sits darker and less saturated."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within range of this swatch appears in 1,005 of the 23,781 paintings in our archive, about 4.2 percent, as photographed, roughly evenly split between mid-tone and shadow use [2]. The earliest dated match is a 1190 painting attributed to Wu Bing, *Bamboo and Insects*, a floor and not a first, since the archive's early centuries are thin [2]. Henri Rousseau carries it in 6 of 13 dated paintings, 10.9 times the archive's overall rate [2]. The archive's photographs are of aged, varnished canvases, so a match is a screen color near this one, not a pigment identification [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "青 (ao), blue/green, + 丹 (ni), clay or red earth",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library (Wikipedia, \"Traditional colors of Japan\")"
+  },
+  "aka": [
+   "Aoni",
+   "青丹"
+  ],
+  "siblings": [
+   "new-hay",
+   "yew-green",
+   "ivy-green",
+   "pine-needle"
+  ],
+  "parent": "hunter-green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Aoni (青丹), \"blue-black clay\""
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1005,
+  "first_seen": {
+   "year": 1190,
+   "painter": "Wu Bing"
+  },
+  "painters": [
+   {
+    "name": "Henri Rousseau",
+    "n": 13,
+    "hits": 6,
+    "lift": 10.92
+   }
+  ],
+  "measured": {
+   "lch": [
+    36,
+    19,
+    117
+   ],
+   "nearest": [
+    [
+     "New Hay",
+     2.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional color names (Wikipedia, \"Traditional colors of Japan\")",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, as photographed (data/graph/fieldnotes, tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the Japanese name Aoni literally mean?",
+   "choices": [
+    "Blue-black clay",
+    "Green bamboo",
+    "Thousand-year green",
+    "Mousy indigo"
+   ],
+   "answer": "Blue-black clay",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the archive's word \"as photographed\" means the color was measured directly from a surviving pigment sample.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which painter's work carries this color far above the archive's average rate?",
+   "choices": [
+    "Henri Rousseau",
+    "Vincent van Gogh",
+    "Rembrandt",
+    "Monet"
+   ],
+   "answer": "Henri Rousseau",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Greenish hunter green comes from a Japanese name that literally means \"blue-black clay,\" because older Japanese ao stretched across blue, green and grey."
+ ],
+ "words": 250,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No book consulted independently dates the name Aoni beyond the library's own gloss; stated as undocumented.",
+   "lint 2026-10-09"
+  ]
+ }
+}

@@ -1,0 +1,126 @@
+{
+ "slug": "dark-naphthalene-violet",
+ "name": "Dark Naphthalene Violet",
+ "hex": "#554149",
+ "names": [
+  "Dark Naphthalene Violet"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dark Naphthalene Violet darkens [[naphthalene-violet]], a hue Robert Ridgway plotted on plate XXXVII of his 1912 color atlas, and the darkened form was itself picked up as its own named block in the 1955 ISCC-NBS dictionary.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A Ridgway hue, darkened",
+   "body": "The name pairs the modifier dark with [[naphthalene-violet]], one of the dye-derived violet hues Ridgway charted in *Color Standards and Color Nomenclature* (1912), plate XXXVII, hue 61′′, tone m [1]. Naphthalene violet itself is named for a coal-tar (naphthalene) dye family, part of the wave of synthetic colorants that followed mauveine [1].\n\nUnlike most of our dark-modifier names, this darkened tone was filed in its own right: the ISCC-NBS *Dictionary of Color Names* carried it forward in 1955 as block 229 [1]. Its nearest measured neighbor is [[dark-umber]], 4.3 units off and redder; [[plum-grey]] and [[anthracene-purple]] sit about as close, both lighter and redder [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A match for this color covers at least five per cent of a canvas in 182 of 23,781 paintings in our archive, about 0.8 per cent, as photographed [3]. Edvard Munch's work carries it almost eight times the archive's average rate, in 3 of his 50 paintings, and the 1900s overall run at 3.4 times the archive rate [3]. The earliest dated match is a *Jingoji Sutra and Wrapper*, 1099, a floor on the color's age in painting rather than a claim of its first appearance [3]. As photographed: these are computed color matches on museum photographs of aged, varnished paintings, not a pigment test [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the parent hue Naphthalene Violet, darkened",
+   "first_recorded": "1912 (Ridgway, plate XXXVII); 1955 (ISCC-NBS, block 229)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "dark-umber",
+   "plum-grey",
+   "anthracene-purple"
+  ],
+  "parent": "naphthalene-violet",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#554149",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 182,
+  "rate": 0.0077,
+  "painters": [
+   [
+    "Edvard Munch",
+    50,
+    3,
+    7.84
+   ]
+  ],
+  "measured": {
+   "lch": [
+    29.9,
+    10.3,
+    351.5
+   ],
+   "nearest": [
+    [
+     "Dark umber",
+     4.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Ridgway 1912, plate XXXVII, hue 61′′, tone m; ISCC-NBS 1955, block 229",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub Color Graph look-alikes (data/graph/edges-d.json), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1912 color atlas first plotted the hue behind Dark Naphthalene Violet's parent color?",
+   "choices": [
+    "Ridgway's Color Standards and Color Nomenclature",
+    "Munsell's Atlas of the Munsell Color System",
+    "Maerz and Paul's A Dictionary of Color",
+    "Newton's Opticks"
+   ],
+   "answer": "Ridgway's Color Standards and Color Nomenclature",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Edvard Munch's paintings carry this color at well above the archive's average rate.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A coal-tar violet from 1912 that got its own entry in the 1955 color dictionary."
+ ],
+ "words": 248,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}

@@ -1,0 +1,123 @@
+{
+ "slug": "macaroni-and-cheese",
+ "name": "Macaroni and Cheese",
+ "hex": "#FFBD88",
+ "names": [
+  "Macaroni and Cheese"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Macaroni and Cheese is a warm, pale orange named for the baked pasta dish, recorded by both Wikipedia and the 2010 xkcd color survey as the same hue.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Named for a dish, not a crayon",
+   "body": "The color library cites both Wikipedia and the xkcd survey for this exact name and hex, #FFBD88, with the xkcd community separately logging an alternate, more saturated version at #EFB435 under the same name [1][2]. Unlike Crayola's similarly food-named crayons, which the company documents with release years and naming contests, no source here gives a date or an author for when this orange was first called Macaroni and Cheese, so its coining is undocumented [1][2].\n\nThe 1955 ISCC-NBS system's closest block is plainly \"light orange,\" only 2.1 units away[2]. In Munsell terms it sits at 5.4YR 8.1/6.8, and it falls close to [[apricot]], [[peach]] and [[orange]] in the library, all within a narrow range [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our 23,781-painting archive, a color within six units of Macaroni and Cheese covers at least one per cent of the canvas in 103 paintings, as photographed, more common than half the named colors tracked [3]. It most often plays an accent, in 52 percent of its appearances, and peaks modestly in paintings from the 1900s [3]. Its earliest match dates to 1150, 860 years before the name was recorded in 2010; pale warm oranges like this are common in aged varnish and skin tones alike, so the match says nothing about what any painter actually mixed, a floor and not a first, since the archive's early centuries are thin [3]. In printed English the phrase rose fastest in the 2000s and peaked in the 2010s [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the baked pasta dish",
+   "first_recorded": "undocumented; recorded by Wikipedia and the xkcd color survey, 2010",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "apricot",
+   "peach",
+   "orange",
+   "wheat"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 103,
+  "measured": {
+   "lch": [
+    81.5,
+    40.1,
+    64.0
+   ],
+   "munsell": "5.4YR 8.1/6.8",
+   "iscc_nbs": {
+    "name": "light orange",
+    "de2000": 2.1
+   }
+  },
+  "alt_hex": "#EFB435 (a separate, more saturated xkcd entry under the same name)"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "xkcd color survey (2010), crowdsourced color-name list",
+   "loc_kind": null,
+   "url": "https://blog.xkcd.com/2010/05/03/color-survey-results/"
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library and Color Graph (data/library.json, data/graph): ISCC-NBS block, Munsell notation, LCH values",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive fieldnotes, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "web",
+   "cite": "Google Books Ngram, case-insensitive",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is Macaroni and Cheese named after?",
+   "choices": [
+    "The baked pasta dish",
+    "A Crayola crayon contest",
+    "A 1912 color plate",
+    "A Japanese dye"
+   ],
+   "answer": "The baked pasta dish",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the xkcd color survey records only one hex value for \"Macaroni and Cheese.\"",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Two different oranges share the name Macaroni and Cheese in the xkcd survey's own data."
+ ],
+ "words": 269,
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No dated source for the name's coining; said plainly as undocumented rather than guessed.",
+   "lint 2026-10-09"
+  ]
+ }
+}

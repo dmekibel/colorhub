@@ -1,0 +1,125 @@
+{
+ "slug": "bishop-s-purple",
+ "name": "Bishop's Purple",
+ "hex": "#9B688B",
+ "names": [
+  "Bishop's Purple"
+ ],
+ "tier": "person",
+ "depth": "short",
+ "lede": "Bishop's Purple is a muted, reddish purple from Robert Ridgway's 1912 color dictionary, and it is one of the rarest colors in our painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A title, not a named man",
+   "body": "Ridgway's 1912 “Color Standards and Color Nomenclature” lists Bishop's Purple at hex #9B688B among the names he credits to a person [1]. Here the word is a church office rather than a surname, and Ridgway does not say which bishop, or whose vestments, he had in mind, so the connection is undocumented in our sources [1]. The 1955 Inter-Society Color Council catalog repeats the name in the block it calls moderate reddish purple [1].\n\nIts nearest neighbor in our color graph is [[antique-fuchsia|Antique Fuchsia]], 4.4 units away and darker [1]. [[light-perilla-purple|Light Perilla Purple]] and [[aconite-violet|Aconite Violet]] sit just beyond that, both redder [1]. Against the basic color words it reads closest to [[mauve|Mauve]], 6.1 units off, though Bishop's Purple carries more grey and less pink [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive matches this purple in only 0.03% of 23,781 paintings, 6 of them, as photographed; the within-painting lens finds it in just 1 [2]. That makes it rarer than 86% of the named colors in our set, too thin a sample for a reliable century, painter or country figure [2]. The handful of matches we do have run from 1889 to 1892, among them a work by Henri de Toulouse-Lautrec, but with so few paintings this is a curiosity, not a trend, and every figure here is a computed color match in an aged photograph, not proof of a pigment or dye [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955"
+  },
+  "aka": [],
+  "siblings": [
+   "antique-fuchsia",
+   "light-perilla-purple",
+   "aconite-violet",
+   "daphne-red"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 6,
+  "measured": {
+   "lch": [
+    50.4,
+    28.3,
+    337.2
+   ],
+   "nearest": [
+    [
+     "Antique Fuchsia",
+     4.4
+    ],
+    [
+     "Light Perilla Purple",
+     4.5
+    ],
+    [
+     "Aconite Violet",
+     4.9
+    ],
+    [
+     "Daphne Red",
+     5.3
+    ]
+   ]
+  },
+  "iscc_nbs": {
+   "name": "moderate reddish purple",
+   "de": 5.1
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912 (plate XXXVII), ISCC-NBS 1955 (block 216)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In Ridgway's dictionary, \"bishop\" in Bishop's Purple is",
+   "choices": [
+    "a church title, with no named individual recorded",
+    "the name of a pigment maker",
+    "the name of a dye house",
+    "a place name"
+   ],
+   "answer": "a church title, with no named individual recorded",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Bishop's Purple is one of the rarest colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Bishop's Purple turns up in only 6 of our 23,781 archive paintings."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "Very thin archive sample (n=6); no century, painter or country facts reported.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 250
+}

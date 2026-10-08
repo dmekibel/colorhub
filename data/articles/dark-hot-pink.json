@@ -1,0 +1,147 @@
+{
+ "slug": "dark-hot-pink",
+ "name": "Dark Hot Pink",
+ "hex": "#D90166",
+ "names": [
+  "Dark Hot Pink"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Dark Hot Pink is a deep magenta-pink recorded on Robert Ridgway's 1912 color plates decades before the 2010 xkcd survey gave it this exact modern name, and the two sources' hues sit close together.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A 1912 plate and a 2010 name",
+   "body": "Ridgway's *Color Standards and Color Nomenclature* (1912) plates a closely matching hue on plate XII, hue 69 [5]. The color library separately dates the first recorded use of a near-identical name to 1905, via Maerz and Paul's 1930 dictionary, which cites earlier sources [2]. Nearly a century later, the xkcd survey of 2010 recorded *dark hot pink* as a modifier built on the existing name [[hot-pink]], from thousands of volunteers naming swatches on screen [1].\n\nRidgway's plate is a scan of an aged printed page, so its color is approximate, while the xkcd hex value, #D90166, comes from a monitor swatch; the two measuring methods should not be expected to match exactly [2][5]. The 1955 ISCC-NBS system separately places the hue in its vivid purplish red block, 5.4 units off [2]. The nearest named colors on file are [[rubine-red]], [[razzmatazz]] and [[red-purple]], at 3.7, 3.9 and 4 ΔE [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our 23,781-painting archive, a color within six units of Dark Hot Pink covers at least one per cent of the canvas in just 1 painting, as photographed, rarer than 86 percent of the named colors tracked [3]. A pink this saturated and dark is hard for most historical pigments to reach; where it does appear, it is more likely a trick of varnish and lighting than a deliberate match to either Ridgway's plate or the modern crayon-box pink [3]. The Ngram data does not find a clean peak for the exact phrase, which stays rare throughout the record [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: dark + hot-pink; closely related to a Ridgway 1912 plate color",
+   "first_recorded": "1912 (Ridgway plate); as this exact xkcd name, 2010",
+   "source": "Ridgway, Color Standards and Color Nomenclature; ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "rubine-red",
+   "razzmatazz",
+   "red-purple",
+   "telemagenta"
+  ],
+  "parent": "hot-pink",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1,
+  "measured": {
+   "lch": [
+    46.6,
+    74.7,
+    5.4
+   ],
+   "munsell": "9.3RP 4.6/16.6",
+   "iscc_nbs": {
+    "name": "vivid purplish red",
+    "de2000": 5.4
+   },
+   "nearest": [
+    [
+     "Rubine Red",
+     3.7
+    ],
+    [
+     "Razzmatazz",
+     3.9
+    ],
+    [
+     "Red-Purple",
+     4.0
+    ],
+    [
+     "Telemagenta",
+     4.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "xkcd color survey (2010), crowdsourced color-name list",
+   "loc_kind": null,
+   "url": "https://blog.xkcd.com/2010/05/03/color-survey-results/"
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library and Color Graph (data/library.json, data/graph): ISCC-NBS block, Munsell notation, LCH values",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive fieldnotes, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "web",
+   "cite": "Google Books Ngram, case-insensitive",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XII, hue 69",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "A hue close to Dark Hot Pink appears on which 1912 color reference?",
+   "choices": [
+    "Ridgway's Color Standards and Color Nomenclature",
+    "The Pantone guide",
+    "The Munsell Book of Color",
+    "Crayola's color list"
+   ],
+   "answer": "Ridgway's Color Standards and Color Nomenclature",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dark Hot Pink is common in our museum-painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A near-match to Dark Hot Pink was already on a printed color plate in 1912."
+ ],
+ "words": 281,
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-08",
+  "issues": [
+   "Ridgway plate hue and xkcd hex are two different measuring methods; treated as close, not identical.",
+   "lint 2026-10-09"
+  ]
+ }
+}

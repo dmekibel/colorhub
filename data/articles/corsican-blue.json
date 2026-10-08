@@ -1,0 +1,126 @@
+{
+ "slug": "corsican-blue",
+ "name": "Corsican Blue",
+ "hex": "#454172",
+ "names": [
+  "Corsican Blue"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Corsican Blue is a moderate purplish blue from Maerz and Paul's 1930 dictionary, and like most of their place names, the dictionary does not say what on Corsica it was meant to match.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A place name, unexplained",
+   "body": "Maerz and Paul catalog Corsican Blue at #454172 on plate 45, row H, column 12 of their 1930 dictionary, dating its first recorded use to 1928 [1]. The same volume also lists a related swatch they call Intense Blue on plate 45, row F, column 12, a close cousin by page position [1]. The island of Corsica gives the name its adjective, but no source we checked explains the connection to sea, sky, or dye, so it is undocumented here [1].\n\nIn our color graph the nearest named neighbor is [[coolie|Coolie]], 4.0 units away [1]. A little further, at 4.5 units, is [[china-blue|China Blue]] [1]. The Munsell notation is 8.9PB 3.0/6.4, in the purple-blue wedge the ISCC-NBS calls \"moderate purplish blue,\" which puts it near both our [[blue|blue]] and [[purple|purple]] families [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 0.13% of 23,781 paintings, 30 of them, as photographed, with the within-painting lens counting 15 [2]. Inside a painting it most often sits as a shadow, in 40% of its 15 appearances [2]. The earliest match dates to 1340, by Pietro Lorenzetti, 590 years before Maerz and Paul recorded the name, a floor rather than a first, since a color match in an aged photograph is not proof of a pigment [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1930 (maerz-paul)",
+   "source": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930"
+  },
+  "aka": [],
+  "siblings": [
+   "coolie",
+   "china-blue",
+   "blackish-violet",
+   "hyacinth-blue"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 30,
+  "measured": {
+   "lch": [
+    30.1,
+    31.4,
+    298.1
+   ],
+   "nearest": [
+    [
+     "Coolie",
+     3.0
+    ],
+    [
+     "China Blue",
+     3.4
+    ],
+    [
+     "Blackish Violet",
+     4.3
+    ],
+    [
+     "Hyacinth Blue",
+     4.6
+    ]
+   ]
+  },
+  "iscc_nbs": {
+   "name": "moderate purplish blue",
+   "de": 5.0
+  },
+  "munsell": "8.9PB 3.0/6.4"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and name graph (data/library.json, data/graph/): Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930; nearest names by Lab-space distance",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed color match, as photographed",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which dictionary first catalogs Corsican Blue, and in what decade?",
+   "choices": [
+    "Maerz and Paul, the 1920s",
+    "Ridgway, the 1910s",
+    "Pantone, the 1960s",
+    "ISCC-NBS, the 1950s"
+   ],
+   "answer": "Maerz and Paul, the 1920s",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources explain what on Corsica inspired this blue.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Corsican Blue's earliest archive match predates the name itself by nearly six centuries."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits; the Corsica connection is undocumented in our sources.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 242
+}

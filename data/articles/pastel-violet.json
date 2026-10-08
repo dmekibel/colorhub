@@ -1,0 +1,129 @@
+{
+ "slug": "pastel-violet",
+ "name": "Pastel Violet",
+ "hex": "#A38995",
+ "names": [
+  "Pastel Violet"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Pastel Violet is a dusty, muted mauve fixed by the German RAL paint system in 1927 and also recorded twice more in the American ISCC-NBS dictionary of 1955, under the separate names Argyle Purple and Charm School.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Three names, one block",
+   "body": "This color is RAL 4009 in the German RAL paint system, dated to 1927 [1]. The ISCC-NBS dictionary places the same swatch block (244, a pale reddish purple) under two further names: Argyle Purple, first recorded in 1912, and Charm School, both independent commercial names landing on the same block rather than copies of the RAL name [1]. This is common for pale, low-chroma colors: the color space runs out of room before the naming systems do [1].\n\nThe nearest named colors on file are [[catalpa]], [[dove-grey]] and [[anemone]], at 2.6, 3.1 and 3.2 ΔE [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this muted violet in 46 of 23,781 paintings, 0.19 percent, rarer than 58 percent of our named colors, as photographed [2]. It peaks in the 1900s, in 10 of 1,674 paintings, over three times the archive's baseline rate for that century, and most often sits as a mid-tone rather than a shadow or highlight [2]. The earliest dated example is a 1425 panel attributed to Sandro Botticelli, five centuries before RAL's 1927 record of the name, so the match is a look-alike hue, not a trace of any real pigment, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Violet, softened by the modifier \"pastel\"",
+   "first_recorded": "RAL, 1927 (RAL 4009)",
+   "source": "ColorHub color library (RAL; ISCC-NBS 1955, block 244)"
+  },
+  "aka": [
+   "Argyle Purple",
+   "Charm School"
+  ],
+  "siblings": [
+   "catalpa",
+   "dove-grey",
+   "anemone",
+   "vestal"
+  ],
+  "parent": "violet",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 46,
+  "rate": 0.0019,
+  "measured": {
+   "lch": [
+    60,
+    12,
+    347
+   ],
+   "nearest": [
+    [
+     "Catalpa",
+     2.6
+    ],
+    [
+     "Dove Grey",
+     3.1
+    ],
+    [
+     "Anemone",
+     3.2
+    ],
+    [
+     "Vestal",
+     4.2
+    ]
+   ]
+  },
+  "first_seen": {
+   "year": 1425,
+   "painting": "commons-Q134545198",
+   "painter": "Sandro Botticelli"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: RAL 1927 (RAL 4009); ISCC-NBS 1955, block 244 (M/P), Argyle Purple (1912) and Charm School",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Besides Pastel Violet, what other two names does the ISCC-NBS dictionary give this same color block?",
+   "choices": [
+    "Lilac and Heather",
+    "Argyle Purple and Charm School",
+    "Mauve and Puce",
+    "Dusk and Twilight"
+   ],
+   "answer": "Argyle Purple and Charm School",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Argyle Purple and Charm School are both copies of the RAL name Pastel Violet.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pastel Violet shares its exact color block with two other names, Argyle Purple and Charm School, that have nothing to do with RAL."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 240
+}

@@ -1,0 +1,132 @@
+{
+ "name": "Garnet Brown",
+ "hex": "#813932",
+ "names": [
+  "Garnet Brown"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Garnet Brown is a dark, reddish brown named for the gem rather than its namesake's usual red, close enough to our library's Ox-Blood Red to be a near-duplicate.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A gem name turned brown",
+   "body": "Ridgway's 1912 atlas gives this swatch at plate I, hue 3, tone k, and the 1955 ISCC-NBS system files it in block 16, a dark red [1]. Maerz and Paul's 1930 dictionary dates the same name to 1905, at plate 6, L 9 [1]. [[gem:garnet|garnet]] stones usually read as a deep brownish red, so the brown here leans the name's gem a shade further from pure red than the stone itself [1].\n\nThe nearest named colors on file are [[morocco-red]], [[dusty-maroon]] and [[oxheart]], at 2.8, 4.1 and 4.2 ΔE [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this reddish brown in 785 of 23,781 paintings, close to three and a half per cent, one of the more common colors in this group [2]. It peaks in the 1400s, in 73 of 945 paintings, at four times the overall baseline rate [2]. The earliest match is a Maya mural fragment from around the year 500, well over a thousand years before Ridgway named the color, so that is a lookalike hue, not evidence of garnet pigment, a floor and not a first, since the archive's early centuries are thin [2]. These are photographs of aged, varnished paintings and murals, and a match says nothing about the materials actually used [2]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the garnet gem",
+   "first_recorded": "1905 (Maerz and Paul) / 1912 (Ridgway)",
+   "source": "ColorHub library (data/library.json)"
+  },
+  "aka": [],
+  "siblings": [
+   "morocco-red",
+   "dusty-maroon",
+   "oxheart",
+   "bole"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed",
+  "match": {
+   "hex": "#813932",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 785,
+  "nearest": [
+   [
+    "Mahogany",
+    6.1
+   ],
+   [
+    "Ox-Blood Red",
+    2.3
+   ]
+  ],
+  "peak_century": 1400,
+  "measured": {
+   "nearest": [
+    [
+     "Morocco Red",
+     2.8
+    ],
+    [
+     "Dusty maroon",
+     4.1
+    ],
+    [
+     "Oxheart",
+     4.2
+    ],
+    [
+     "Bole",
+     4.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json) and name graph (data/graph/nodes): Ridgway (1912), ISCC-NBS (1955) and Maerz & Paul (1930) entries; Ridgway 1912 pl. I hue 3 tone k, ISCC-NBS 1955 block 16, Maerz & Paul 1930 pl. 6 L 9",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What gem does Garnet Brown take its name from?",
+   "choices": [
+    "Garnet",
+    "Ruby",
+    "Jasper",
+    "Jade"
+   ],
+   "answer": "Garnet",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Garnet Brown is one of the rarer colors in our archive, appearing in under one per cent of paintings.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A Maya mural over a thousand years old reads as Garnet Brown, long before Ridgway named the color."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No book source found; article relies on library/graph data only.",
+   "lint 2026-10-09"
+  ]
+ },
+ "slug": "garnet-brown",
+ "words": 245
+}

@@ -1,0 +1,112 @@
+{
+ "slug": "anthracene-violet",
+ "name": "Anthracene Violet",
+ "hex": "#5D4973",
+ "names": [
+  "Anthracene Violet"
+ ],
+ "tier": "pigment",
+ "depth": "brief",
+ "lede": "Anthracene Violet is a dark, dusky violet from Ridgway's 1912 chart, rare enough in our archive to appear in only eleven paintings.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A rare dusky violet",
+   "body": "Ridgway's 1912 plate XXV gives this color the name Anthracene Violet, hue 61′, tone k, and the ISCC-NBS system of 1955 files a close match in its block 211 [1]. The nearest named colors on file are [[imperial-purple]], [[madder-violet]], [[dusty-purple-tone]] and [[mulberry-purple]], at 2.6, 2.9, 6, 2.9, 3.4 and 4.3 ΔE [1]. The library's closest recorded neighbor is [[imperial-purple]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to Anthracene Violet in only 11 of 23,781 paintings, as photographed [2]. The earliest dated match is Filippo Lippi's Coronation of the Virgin, from 1441, a floor and not a first, since the archive's early centuries are thin [2]. With so few matches, the data cannot support a reliable peak decade or painter; inside a painting it most often sits in shadow, in 64 percent of its appearances [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "Ridgway 1912, plate XXV",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "imperial-purple",
+   "madder-violet",
+   "dusty-purple-tone",
+   "mulberry-purple"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 11,
+  "measured": {
+   "lch": [
+    35,
+    27,
+    310
+   ],
+   "nearest": [
+    [
+     "Imperial Purple",
+     2.6
+    ]
+   ]
+  },
+  "role": {
+   "shadow": 0.64,
+   "mid": 0.36
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912 plate XXV, ISCC-NBS 1955 block 211, near neighbor Imperial Purple",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which painter's 1441 Coronation of the Virgin is the earliest archive match to Anthracene Violet?",
+   "choices": [
+    "Filippo Lippi",
+    "Fra Angelico",
+    "Giotto",
+    "Titian"
+   ],
+   "answer": "Filippo Lippi",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Anthracene Violet appears in more than a thousand of our archive's paintings.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A dusky 1912 violet so rare it turns up in just eleven archive paintings."
+ ],
+ "words": 163,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

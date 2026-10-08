@@ -1,0 +1,132 @@
+{
+ "slug": "greenish-pistachio",
+ "name": "Greenish pistachio",
+ "hex": "#8DB255",
+ "names": [
+  "Greenish pistachio"
+ ],
+ "tier": "traditional",
+ "depth": "brief",
+ "lede": "Usumo'egi, pale young onion-green",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Greenish pistachio is a bright yellow-green carried into our library from the Japanese traditional color Usumo'egi, \"pale young green onion,\" and it sits 6.0 units from the plain [[pistachio]].",
+   "body": "Our library lists this color under the Japanese name Usumo'egi, written 淡萌黄, glossed as \"pale young green onion\" [1]. The first element, *usu*, means pale or thin, and *moegi* names the bright green of a sprouting onion or leek shoot [1]. No book consulted independently dates the coinage beyond that library gloss, so it is undocumented here [1].\n\nThe swatch measures lightness 68, chroma 51 and hue 123 degrees, in the Greens family, used chiefly in fashion and textile contexts [1]. The nearest named colors on file are [[neva-green]], [[asparagus]], [[nasty-green]] and [[leaf]], at 4.4, 4.5, 5 and 5.3 ΔE [1]. A darker member of the same batch of traditional names is [[greenish-umber]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within range of this swatch appears in 19 of the 23,781 paintings in our archive, about 0.08 percent, as photographed, mostly as a highlight rather than a shadow [2]. The earliest dated match is Salomon van Ruysdael's 1652 *The Road along the River*, a floor and not a first, since the archive's early centuries are thin [2]. The archive's photographs are of aged, varnished canvases, so a match is a nearby screen color, not a pigment identification [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "淡 (usu), pale, + 萌黄 (moegi), sprouting-onion green",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library (Wikipedia, \"Traditional colors of Japan\")"
+  },
+  "aka": [
+   "Usumo'egi",
+   "淡萌黄"
+  ],
+  "siblings": [
+   "neva-green",
+   "asparagus",
+   "nasty-green",
+   "leaf"
+  ],
+  "parent": "pistachio",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Usumo'egi (淡萌黄), \"pale young green onion\""
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 19,
+  "first_seen": {
+   "year": 1652,
+   "painter": "Salomon van Ruysdael"
+  },
+  "measured": {
+   "lch": [
+    68,
+    51,
+    123
+   ],
+   "nearest": [
+    [
+     "Neva Green",
+     4.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional color names (Wikipedia, \"Traditional colors of Japan\")",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, as photographed (data/graph/fieldnotes, tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the Japanese name Usumo'egi describe?",
+   "choices": [
+    "A pale young green onion shoot",
+    "A bamboo grove",
+    "A dyed silk sash",
+    "A moss-covered stone"
+   ],
+   "answer": "A pale young green onion shoot",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: this color appears mostly in shadow areas of the paintings that carry it.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which already-named library color sits closest to Greenish pistachio?",
+   "choices": [
+    "Pistachio",
+    "Navy",
+    "Umber",
+    "Tan"
+   ],
+   "answer": "Pistachio",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Greenish pistachio is named for the bright green of a sprouting onion shoot in Japanese, usumo'egi."
+ ],
+ "words": 197,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No book consulted independently dates the name Usumo'egi beyond the library's own gloss; stated as undocumented.",
+   "lint 2026-10-09"
+  ]
+ }
+}

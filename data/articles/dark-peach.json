@@ -1,0 +1,112 @@
+{
+ "slug": "dark-peach",
+ "name": "Dark Peach",
+ "hex": "#DE7E5D",
+ "names": [
+  "Dark Peach"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Dark Peach is a deep, reddish version of [[peach]], closer to terracotta than to the pale fruit tone most people picture.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "No Western book in our library records a name at this exact position before the xkcd color survey of 2010, where the public supplied the plain descriptive phrase \"dark peach\" [1]. The ISCC-NBS system classes the nearest block as a moderate reddish orange, about 6 CIEDE2000 units away, with a Munsell reading near 0.1YR in hue [1].\n\nOur library's cross-reference to Japanese traditional color names pairs this position with *tokigaracha* (ときがら茶), glossed as \"brewed mustard-brown\": that is an approximate color match across two naming systems, not a claim that the Japanese name and \"dark peach\" share a history [1]. Its nearest English neighbors in our library are [[peach]], [[terracotta]] and [[camel]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a match for this swatch in 50 of 23,781 paintings, as photographed [2]. A Dutch portrait of a puppy from 1850 carries the most of it, covering 42 per cent of the canvas, and Amedeo Modigliani's paintings carry it 79 times the archive's baseline rate [2]. It is also common in Rajput, Kalighat and Mughal miniature painting, and the word \"Terracotta\" shares its canvases far more than chance [2]. Where it appears, it splits fairly evenly between a mid-tone and a highlight [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "peach, the fruit, darkened",
+   "first_recorded": "xkcd color survey, 2010",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "terracotta",
+   "camel",
+   "pale-peach"
+  ],
+  "parent": "peach",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "tokigaracha (ときがら茶), approximate cross-reference"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+  "n_present": 50,
+  "rate": 0.0021,
+  "role": {
+   "mid": 0.46,
+   "highlight": 0.42,
+   "shadow": 0.12
+  },
+  "top_painting": {
+   "id": "rijks-20027480",
+   "title": "Portrait of a Puppy",
+   "painter": "Guillaume Anne van der Brugghen",
+   "year": 1850,
+   "cover": 0.424
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Japanese traditional color cross-reference, xkcd color survey 2010), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which painter's works carry Dark Peach at far above the archive's baseline rate?",
+   "choices": [
+    "Amedeo Modigliani",
+    "Claude Monet",
+    "Paulus Potter"
+   ],
+   "answer": "Amedeo Modigliani",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the Japanese name paired with this swatch in our library shares a documented history with the English name \"dark peach\".",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dark Peach shows up in Modigliani's paintings at 79 times our archive's baseline rate."
+ ],
+ "words": 213,
+ "status": "checked",
+ "checked": {
+  "by": "writer-lane",
+  "date": "2026-10-08",
+  "issues": [
+   "Japanese cross-reference hedged as approximate, not a shared history claim",
+   "lint 2026-10-09"
+  ]
+ }
+}

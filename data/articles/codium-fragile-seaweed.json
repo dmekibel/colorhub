@@ -1,0 +1,161 @@
+{
+ "slug": "codium-fragile-seaweed",
+ "name": "Codium fragile seaweed",
+ "hex": "#524B2A",
+ "names": [
+  "Codium fragile seaweed"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Codium fragile seaweed is ColorHub's name for Miru-iro (海松色), a traditional Japanese color named for a spongy green seaweed also called dead man's fingers.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Miru-iro, a seaweed's color",
+   "body": "The Wikipedia survey \"Traditional colors of Japan\" lists this color under the romanized name Miru-iro, written 海松色 [1]. 海松 names *Codium fragile*, a spongy, branching green seaweed also called dead man's fingers in English, and 色 is simply \"color\"; the library's gloss keeps the biological name intact as \"Codium fragile seaweed color\" [1]. No book consulted here independently confirms a date for the name [1].\n\nThe nearest named colors on file are [[dusty-brown]], [[bronze-lustre]], [[gull]] and [[japanese-bush-warbler]], at 3.5, 4.3, 5.3 and 5.4 ΔE [1]. The hex, #524B2A, is a modern screen approximation, not a measurement of dried or living seaweed [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within range of this swatch is one of the most common in our archive: it appears in 3,151 of the 23,781 paintings, about 13.25 percent, as photographed; the within-painting lens finds it 2,073 times [2]. That makes it more common than 96 percent of the named colors we track [2].\n\nIt peaks in the 1700s, present in 422 of 3,449 paintings from that century, 1.4 times the expected rate [2]. Inside a painting it most often plays a mid-tone, in just over a third of the paintings that carry it [2]. Shibata Zeshin is its most devoted painter, using it in 9 of his 15 works here, well above his museums' baseline rate [2]. The earliest dated appearance we have is 1100, though the archive's early centuries are thin, so this is a floor and not a true first sighting; it also shares canvases with Dark Citrine and Dull Citrine more often than chance would predict [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a seaweed, from 海松 (*Codium fragile*) and 色 (color)",
+   "first_recorded": "undocumented beyond its listing in Japan's traditional color system",
+   "source": "ColorHub color library (Wikipedia, \"Traditional colors of Japan\")"
+  },
+  "aka": [
+   "Miru-iro",
+   "海松色"
+  ],
+  "siblings": [
+   "dusty-brown",
+   "bronze-lustre",
+   "gull",
+   "japanese-bush-warbler"
+  ],
+  "parent": "umber",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Miru-iro (海松色), \"*Codium fragile* seaweed color\""
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 3151,
+  "rank_pct": 96,
+  "century_peak": {
+   "century": 1700,
+   "hits": 422,
+   "of": 3449,
+   "lift": 1.4
+  },
+  "role": {
+   "kind": "mid-tone",
+   "pct": 36
+  },
+  "painters": {
+   "Shibata Zeshin": [
+    9,
+    15,
+    5.5
+   ]
+  },
+  "first_seen": {
+   "year": 1100
+  },
+  "company": {
+   "Dark Citrine": 4.5,
+   "Dull Citrine": 3.8
+  },
+  "measured": {
+   "nearest": [
+    [
+     "Dusty brown",
+     3.5
+    ],
+    [
+     "Bronze Lustre",
+     4.3
+    ],
+    [
+     "Gull",
+     5.3
+    ],
+    [
+     "Japanese bush warbler",
+     5.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional color names (Wikipedia, \"Traditional colors of Japan\")",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Miru-iro name the color of?",
+   "choices": [
+    "A branching green seaweed, *Codium fragile*",
+    "A pine forest floor",
+    "A dried persimmon",
+    "A copper roof"
+   ],
+   "answer": "A branching green seaweed, *Codium fragile*",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: codium fragile seaweed is one of the rarer colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which painter in our archive is most devoted to this color?",
+   "choices": [
+    "Shibata Zeshin",
+    "John Singer Sargent",
+    "Jean-Baptiste-Camille Corot",
+    "Nicolas Lancret"
+   ],
+   "answer": "Shibata Zeshin",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Codium fragile seaweed is named for a real, branching green alga, and it is one of the most common colors in our painting archive."
+ ],
+ "words": 288,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No book-level source for the name's history beyond the library gloss; stated as undocumented rather than guessed.",
+   "Umber given as nearest common English name but flagged as a loose match (dE 13.7), with dusty-brown noted as the closer library suggestion.",
+   "lint 2026-10-09"
+  ]
+ }
+}

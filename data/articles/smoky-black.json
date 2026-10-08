@@ -1,0 +1,144 @@
+{
+ "slug": "smoky-black",
+ "name": "Smoky Black",
+ "hex": "#100C08",
+ "names": [
+  "Smoky Black"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Smoky Black is a near-black with a faint warm cast, close enough to true black that our own library flags it as an obscure, qualified name rather than a mainstream one.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Barely a color apart from black",
+   "body": "ColorHub's library records Smoky Black with a usage rank near the bottom of its list and tags it directly as \"obscure, qualified or novelty\" [1]. By ISCC-NBS classification it reads as a brownish black, only 3.6 units from its nearest block and 4.8 units from plain [[black]] itself, which is a small enough gap that most eyes would not separate the two without a side-by-side swatch [2]. Who coined \"smoky black\" and when is not recorded in the sources we checked, so its origin stays undocumented here [1]. Our library also cross-references the Japanese name *Kokushoku* (黒色), meaning simply \"black,\" as an equivalent rather than a source for the English name [1].\n\nThe word \"smoky\" is doing real descriptive work even at this extreme: real smoke rising against a dark background reads with exactly this kind of warm, slightly brown-grey cast rather than pure neutral black, the same quality separating [[charcoal]] from [[ebony]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to Smoky Black in 6,180 of 23,781 paintings, nearly 26 percent, with the within-painting test still finding 5,487, making it more common than every other named color we track [3]. It peaks in the 1600s, in 1948 of 6,394 paintings, the century of deep Baroque shadow painting, present in over 30 percent of our paintings from then [3]. The painter most devoted to it, relative to his peers, is Nicolaes Maes, carrying it in 18 of 21 works in the archive, about 2.9 times the rate of the museums his paintings come from [3]. Inside the paintings that carry it, the color plays a shadow 68 percent of the time, exactly what its name and its ubiquity in dark Baroque backgrounds would predict [3]. All counts are matches in photographs of aged, varnished canvases, not pigment identifications [3]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "Kokushoku"
+  ],
+  "siblings": [
+   "black",
+   "charcoal",
+   "ebony",
+   "jet"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Kokushoku (黒色)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 6180,
+  "n_within": 5487,
+  "measured": {
+   "lch": [
+    3.5,
+    2.1,
+    70.2
+   ],
+   "munsell": "N 0.3",
+   "iscc_nbs": {
+    "name": "brownish black",
+    "de": 3.6
+   }
+  },
+  "century_peak": {
+   "year": 1600,
+   "lift": 1.2,
+   "n": 1948
+  },
+  "top_painter": {
+   "artist": "Nicolaes Maes",
+   "n": 18,
+   "lift": 2.9
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: usage rank, obscure/qualified tag, and Japanese cross-reference",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: computed LCH, Munsell and ISCC-NBS nearest-block distance",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does our library classify Smoky Black?",
+   "choices": [
+    "An obscure, qualified or novelty name",
+    "A mainstream household name",
+    "A CSS keyword",
+    "A pigment name"
+   ],
+   "answer": "An obscure, qualified or novelty name",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Smoky Black is the most common color in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which painter in our archive uses Smoky Black most, relative to his peers?",
+   "choices": [
+    "Nicolaes Maes",
+    "Rembrandt van Rijn",
+    "John Singer Sargent",
+    "Frans Hals"
+   ],
+   "answer": "Nicolaes Maes",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "It is, by our count, the single most common color in 23,781 paintings."
+ ],
+ "words": 340,
+ "status": "checked",
+ "checked": {
+  "by": "batch-9 writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance file; origin of the English name is left undocumented rather than guessed.",
+   "lint 2026-10-09"
+  ]
+ }
+}

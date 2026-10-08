@@ -1,0 +1,113 @@
+{
+ "slug": "dusty-red",
+ "name": "Dusty Red",
+ "hex": "#B9484E",
+ "names": [
+  "Dusty Red"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dusty Red is a muted brick red that comes from the 2010 xkcd color-naming survey, where it was simply \"dusty\" put in front of [[red]].",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A survey name, not a dye",
+   "body": "Our color library traces Dusty Red to the xkcd color survey of 2010, Randall Munroe's crowd-sourced exercise in which tens of thousands of volunteers typed free-text names for randomly shown colors, later cleaned into a standard list [1]. \"Dusty\" works the same way across that list, a grammar move that greys a base hue rather than a dye, place, or person behind the name [1].\n\nThe nearest named color in our graph is [[english-red]], at a color distance (ΔE2000) of 3.2, a slightly duller shade; its own near-twin [[dusty-crimson]] sits 4.0 away and reads duller still, while [[brick-red]] at 3.9 is more vivid [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this brick red in 71 of 23,781 paintings, about 0.3 percent, as photographed [3]. It is strongest in Indian and Nepali painting, where the rate runs more than fifteen times the archive average, and in Kalighat work specifically, where it reaches nearly one painting in six [3]. These are photographs of aged, varnished paintings, so the figures are a computed color match, not a pigment test [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the modifier \"dusty\" plus the color word red",
+   "first_recorded": "2010, xkcd color survey",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "english-red",
+   "dusty-crimson",
+   "brick-red"
+  ],
+  "parent": "red",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 71,
+  "rate": 0.003,
+  "match": {
+   "hex": "#B9484E",
+   "de2000": 6.0,
+   "min_cover": 0.05
+  },
+  "nearest": [
+   [
+    "English red",
+    3.2
+   ]
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: traditional-Japanese-color entries (kanji, romaji, meaning)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: look-alike edges (ΔE2000)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does the name Dusty Red come from?",
+   "choices": [
+    "The 2010 xkcd color-naming survey",
+    "A Renaissance pigment recipe",
+    "A Japanese traditional color list",
+    "A paint company catalogue"
+   ],
+   "answer": "The 2010 xkcd color-naming survey",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dusty Red is most common in our archive among Kalighat paintings.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dusty Red comes from a 2010 online survey where volunteers just typed color names."
+ ],
+ "words": 201,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance hits; sourced from library src=xkcd and graph/archive data only."
+  ]
+ }
+}

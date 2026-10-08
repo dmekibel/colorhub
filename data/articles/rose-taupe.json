@@ -1,0 +1,148 @@
+{
+ "slug": "rose-taupe",
+ "name": "Rose Taupe",
+ "hex": "#905D5D",
+ "names": [
+  "Rose Taupe"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Rose Taupe is a greyed, brownish pink, first recorded by Maerz and Paul in 1930 as a cross between the warmth of rose and the muted grey of taupe.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Between rose and taupe",
+   "body": "Our library ties Rose Taupe to Maerz and Paul's *A Dictionary of Color*, recording it as first used in 1924 and plotting it on plate 16, position A4 [1]. Taupe itself comes from the French word for mole, after the animal's grey-brown fur, so Rose Taupe names a color that leans that grey-brown tone toward pink without losing its mutedness [1]. ColorHub's ISCC-NBS mapping calls it a grayish red, a very close match at only 1.1 units from the nearest block, close to 4.2R 4.4/4.5 in Munsell notation [2]. The 1955 ISCC-NBS lists also carry several near-synonyms for the same small block of color, including Antique Rose, Appleblossom Pink and Ash Rose, all grouped within a couple of units of this hue [1].\n\nIts closest listed library neighbor is [[mauve]], 14.1 units away, and nearby sit [[taupe]] itself and [[copper-rose|Copper Rose]], the clearest sibling in both name and hue [2]. [[dusty-rose|Dusty Rose]] sits just to the pinker side of the same family [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to Rose Taupe in 139 of 23,781 paintings, 0.58 percent, with the within-painting test narrowing that to 57, making it more common than roughly 52 percent of the named colors we track [3]. It peaks in the 1900s, in 9 of 1,674 paintings, present in 0.5 percent of our paintings from that century, 1.9 times the expected rate, and the earliest match, as photographed, is a painting dated to the year 1000, a floor and not a first, since the archive's early centuries are thin [3]. Inside the paintings that carry it, the color most often plays an accent, 42 percent of the time, rather than a shadow or a highlight [3]. In printed English the phrase itself only takes off in the 1920s, which fits Maerz and Paul's 1924 date closely [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the color between rose and taupe (French *taupe*, mole)",
+   "first_recorded": "1924 (Maerz and Paul, 1930)",
+   "source": "ColorHub color library, citing Maerz and Paul"
+  },
+  "aka": [
+   "Antique Rose",
+   "Appleblossom Pink",
+   "Ash Rose"
+  ],
+  "siblings": [
+   "taupe",
+   "copper-rose",
+   "mauve",
+   "dusty-rose"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 139,
+  "n_within": 57,
+  "measured": {
+   "lch": [
+    45.0,
+    22.6,
+    22.5
+   ],
+   "munsell": "4.2R 4.4/4.5",
+   "iscc_nbs": {
+    "name": "grayish red",
+    "de": 1.1
+   }
+  },
+  "century_peak": {
+   "year": 1900,
+   "lift": 1.9,
+   "n": 9
+  },
+  "ngram": {
+   "peak": 1920,
+   "rise": 1920,
+   "term": "rose taupe"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library, citing Maerz and Paul, A Dictionary of Color (1930), plate 16 A4, and ISCC-NBS (1955) block 19",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: computed LCH, Munsell and ISCC-NBS nearest-block distance",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub Ngram cache (Google Books)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does \"taupe\" originally mean in French?",
+   "choices": [
+    "Mole",
+    "Dust",
+    "Stone",
+    "Ash"
+   ],
+   "answer": "Mole",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Rose Taupe is one of the rarer colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Inside the paintings where it appears, Rose Taupe most often plays:",
+   "choices": [
+    "An accent",
+    "A deep shadow",
+    "The brightest highlight",
+    "A hidden underlayer"
+   ],
+   "answer": "An accent",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Its French root word is the same as the word for mole, the animal."
+ ],
+ "words": 332,
+ "status": "checked",
+ "checked": {
+  "by": "batch-9 writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance file for this slug; Maerz and Paul date comes from our precomputed library note, not a direct passage read.",
+   "lint 2026-10-09"
+  ]
+ }
+}

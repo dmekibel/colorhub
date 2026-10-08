@@ -1,0 +1,128 @@
+{
+ "slug": "dark-lavender",
+ "name": "Dark Lavender",
+ "hex": "#9A89A0",
+ "names": [
+  "Dark Lavender"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Dark Lavender is a muted, greyed purple, a shade down from [[lavender]] and classed by two older systems as a pale reddish purple.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "The swatch sits in Ridgway's 1912 plate XLIV, under a hue the plate calls 61 triple-prime, tone b, and the ISCC-NBS system of 1955 places it in block 222, light purple [1]. A second, nearby Ridgway entry on plate XXXVII carries the same hue number and lands in ISCC-NBS block 228, a related moderate reddish purple [1]. Both plate readings are scans of aged printed color, so treat them as approximate [1]. The Maerz and Paul dictionary of 1930 first records a name at this position in 1905, on its plate 43, patch E6 [1].\n\nThe xkcd survey of 2010 later collected the plain descriptive phrase \"dark lavender\" from the public, which is the name this article uses [1]. In the ISCC-NBS system itself the block is called pale reddish purple, about 5 CIEDE2000 units from this swatch [1]. The nearest named colors on file are [[purpley-grey]], [[vestal]] and [[catalpa]], at 3.9, 4.7 and 4.8 ΔE [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color near this swatch in 31 of 23,781 paintings, as photographed [2]. Claude Monet's *Stacks of Wheat (Sunset, Snow Effect)* (1890) carries the most of it, covering 45 per cent of the canvas, and Monet's own works carry it 46 times the archive's overall rate [2]. The decade around 1910 is its peak, at 8.8 times the baseline rate, and it is most common in paintings from Denmark and France [2]. Where it appears, it most often sits as a mid-tone, and the word \"Grey\" shares its canvases far more than chance [2]. These are photographs of aged, varnished paintings, so read the hex as a screen approximation [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "lavender, darkened",
+   "first_recorded": "Ridgway 1912, plate XLIV; Maerz and Paul 1930 give 1905",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "purpley-grey",
+   "vestal",
+   "catalpa",
+   "pastel-violet"
+  ],
+  "parent": "lavender",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+  "n_present": 31,
+  "rate": 0.0013,
+  "role": {
+   "mid": 0.55,
+   "highlight": 0.35,
+   "shadow": 0.1
+  },
+  "top_painting": {
+   "id": "aic-81545",
+   "title": "Stacks of Wheat (Sunset, Snow Effect)",
+   "painter": "Claude Monet",
+   "year": 1890,
+   "cover": 0.452
+  },
+  "measured": {
+   "nearest": [
+    [
+     "Purpley Grey",
+     3.9
+    ],
+    [
+     "Vestal",
+     4.7
+    ],
+    [
+     "Catalpa",
+     4.8
+    ],
+    [
+     "Pastel Violet",
+     5.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; Ridgway 1912, ISCC-NBS 1955, Maerz and Paul 1930, xkcd color survey 2010), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which museum work carries the most Dark Lavender in our archive?",
+   "choices": [
+    "Monet's Stacks of Wheat (Sunset, Snow Effect)",
+    "A Gauguin Tahiti scene",
+    "A Rajput miniature"
+   ],
+   "answer": "Monet's Stacks of Wheat (Sunset, Snow Effect)",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Ridgway's 1912 plate reading for this swatch is an exact, unambiguous match.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dark Lavender peaks in paintings from around 1910, at nearly nine times its usual rate."
+ ],
+ "words": 287,
+ "status": "checked",
+ "checked": {
+  "by": "writer-lane",
+  "date": "2026-10-08",
+  "issues": [
+   "Ridgway plate readings are scans of an aged plate; treated as approximate per the book's own caveat",
+   "lint 2026-10-09"
+  ]
+ }
+}

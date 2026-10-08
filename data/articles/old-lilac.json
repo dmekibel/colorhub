@@ -1,0 +1,120 @@
+{
+ "slug": "old-lilac",
+ "name": "Old Lilac",
+ "hex": "#794F77",
+ "names": [
+  "Old Lilac"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Old Lilac is a dulled, greyed lilac first recorded in Maerz and Paul's 1930 dictionary, dated to 1926.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Lilac, muted",
+   "body": "The library records Old Lilac from Maerz and Paul's 1930 dictionary, plate 45 H 6, first recorded in 1926 [1]. Our computed classification gives it a moderate purple, darker and less saturated than the flower word [[lilac]] it is built from [1]. As with [[old-lavender|Old Lavender]], \"old\" here marks a dulled, worn-looking cast rather than any real age [1].\n\nThe nearest named color in the library is Dull Dark Purple, about 3.3 units away by CIEDE2000, close to [[plum]] but darker than either [[dahlia-purple|Dahlia Purple]] or [[purplish-red|Purplish Red]] [1]. In LCH terms it measures lightness 40, chroma 29, hue 328 degrees, Munsell 8.5P 3.9/6.2 [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in only 3 of 23,781 paintings, well under one tenth of one percent, as photographed [2]. All three are from the 1800s and 1900s; none appears before then [2]. France and the United States each account for one of the three, and no single painter here carries it more than once [2]. These are photographs of aged, varnished paintings, so a color match is not a pigment test [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "lilac, with \"old\" marking a dulled, greyed version",
+   "first_recorded": "1926 (Maerz & Paul, plate 45 H 6)",
+   "source": "Maerz & Paul, A Dictionary of Color (1930); ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "dull-dark-purple",
+   "dull-purple",
+   "dusky-plum",
+   "dirty-purple"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 3,
+  "measured": {
+   "lch": [
+    40,
+    29,
+    328
+   ],
+   "nearest": [
+    [
+     "Dull Dark Purple",
+     3.3
+    ],
+    [
+     "Dull Purple",
+     3.8
+    ],
+    [
+     "Dusky plum",
+     4.7
+    ],
+    [
+     "Dirty Purple",
+     4.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz & Paul 1930, plate 45 H 6, first recorded 1926; nearest library match Dull Dark Purple, ΔE 3.3",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "About how many of our 23,781 archive paintings carry a color close to Old Lilac?",
+   "choices": [
+    "3",
+    "300",
+    "3,000",
+    "Half of them"
+   ],
+   "answer": "3",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: in a name like Old Lilac, \"old\" means the color is ancient.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Old Lilac appears in just three of our 23,781 archive paintings."
+ ],
+ "words": 194,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

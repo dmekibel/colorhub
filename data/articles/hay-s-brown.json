@@ -1,0 +1,117 @@
+{
+ "slug": "hay-s-brown",
+ "name": "Hay's Brown",
+ "hex": "#755B4E",
+ "names": [
+  "Hay's Brown"
+ ],
+ "tier": "person",
+ "depth": "short",
+ "lede": "Hay's Brown is a muted, warm brown that Robert Ridgway's 1912 color dictionary names for a person, one of six Hay's colors in his book, and the only one the Inter-Society Color Council never repeated.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "One of six colors named Hay's",
+   "body": "Ridgway's 1912 “Color Standards and Color Nomenclature” lists Hay's Brown at hex #755B4E among the names he credits to a person [1]. It shares its possessive with five other colors in the same book: [[hay-s-green|Hay's Green]], [[hay-s-lilac|Hay's Lilac]], [[hay-s-maroon|Hay's Maroon]] and [[hay-s-russet|Hay's Russet]], but Ridgway never names the Hay he means, so the connection is undocumented in our sources [1]. Unlike those five, the 1955 Inter-Society Color Council catalog does not repeat Hay's Brown; by our own nearest match to its 1955 color blocks it would fall closest to grayish brown, 4.8 units off, but that block itself carries a different name [1].\n\nIts nearest neighbor in our color graph is [[pale-brown|Pale Brown]], only 3.1 units away and yellower [1]. [[sandalwood|Sandalwood]] and [[nutmeg|Nutmeg]] sit a little further out [1]. Against the basic color words it reads closest to [[umber|Umber]], 5.3 units off [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive matches this brown in 4.38% of 23,781 paintings, 1,042 of them, as photographed; the within-painting lens finds it in 647 [2]. That makes it more common than 86% of the named colors in our set [2]. It peaks in the 1900s, present in 5.6% of the 1,674 paintings from that century, 1.6 times the rate its museums would predict [2]. Inside a painting it most often sits hidden, in 48% of its 647 appearances, by lightness rank rather than by brand [2]. Henri de Toulouse-Lautrec is its most devoted painter here, holding it in 6 of 36 works, 4.5 times the baseline of the museums those paintings come from; John Singer Sargent carries it in 19 of his 287 [2]. Our earliest match dates to the year 960, 952 years before Ridgway's 1912 book recorded the name, a floor rather than a first, since a color match in an aged photograph is not proof of a pigment [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "ColorHub color library: Ridgway 1912"
+  },
+  "aka": [],
+  "siblings": [
+   "hay-s-green",
+   "hay-s-maroon",
+   "pale-brown"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1042,
+  "measured": {
+   "lch": [
+    40.9,
+    14.4,
+    53.3
+   ],
+   "nearest": [
+    [
+     "Pale Brown",
+     3.1
+    ],
+    [
+     "Umber",
+     5.3
+    ]
+   ]
+  },
+  "iscc_nbs": {
+   "name": "grayish brown (nearest block; not an ISCC-NBS entry for this name)",
+   "de": 4.8
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912 (plate XXXIX)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How many colors in Ridgway's 1912 dictionary carry the possessive \"Hay's\"?",
+   "choices": [
+    "Six, including Hay's Brown",
+    "Two",
+    "One, just Hay's Brown",
+    "Ten"
+   ],
+   "answer": "Six, including Hay's Brown",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the 1955 ISCC-NBS catalog repeats the name Hay's Brown.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Hay's Brown is one of six Ridgway colors sharing the same unnamed \"Hay.\""
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits; origin of \"Hay\" is undocumented in our sources.",
+   "ISCC-NBS block cited is our own nearest match, not a direct listing of this name.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 336
+}

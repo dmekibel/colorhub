@@ -1,0 +1,112 @@
+{
+ "slug": "dusky-purplish-grey",
+ "name": "Dusky Purplish Grey",
+ "hex": "#3D4543",
+ "names": [
+  "Dusky Purplish Grey"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Dusky Purplish Grey is a dark, near-neutral grey, built by stacking the modifiers dusky and purplish onto the base color grey rather than naming anything in particular.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two modifiers on grey",
+   "body": "Dusky Purplish Grey stacks two modifier words, dusky and purplish, onto the base color [[grey]], in the compound-modifier grammar ColorHub's library uses for names like this one rather than a borrowed object or place [1]. Ridgway's 1912 *Color Standards and Color Nomenclature* carries it as plate LIII, hue 67'''', an aged plate scan read as approximate [1]. The ISCC-NBS dictionary of 1955 filed the same swatch under block 229, though by measurement it sits nearer block 151, dark grayish green [1]. In Munsell terms it reads as N 2.8, close to a true neutral with almost no hue of its own, which is why the \"purplish\" in its name barely shows on screen [1].\n\nIts nearest named neighbors are [[blackish-slate]], 2.9 units off, and [[charcoal-grey]], 3.0 off [1], both close enough on screen to pass for the same dark ink."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color within six units of this swatch in 632 of 23,781 paintings, 2.66 percent, as photographed; looking inside each painting for at least five percent coverage narrows that to 361 [2]. That makes it more common than 79 percent of the named colors in our library [2]. It peaks in the 1900s, present in 3.8 percent of our 1,674 paintings from that decade, 2.2 times the museums' baseline rate [2]. Inside a painting it most often sits as a mid-tone, in 42 percent of its 361 appearances by lightness rank [2].\n\nAndré Derain is its most devoted painter on file, present in 5 of his 22 works here, several times the baseline rate for the museums that hold them [2]. The earliest match dates to 1099, eight centuries before the name's 1912 record, so it marks a look-alike hue in an aged photograph, not a surviving pigment [2]. It is most over-represented in paintings from the United Kingdom, and shares canvases with [[deep-neutral-grey|Deep Neutral Grey]] and [[moss-grey|Moss Grey]] more often than chance [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: dusky purplish + grey",
+   "first_recorded": "Ridgway 1912, plate LIII; ISCC-NBS 1955, block 229",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "blackish-slate",
+   "charcoal-grey",
+   "blue-violet-black",
+   "deep-neutral-grey"
+  ],
+  "parent": "grey",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 632,
+  "n_within_painting": 361,
+  "pct_archive": 2.66,
+  "rank_pct": 79,
+  "measured": {
+   "lch": [
+    29,
+    4,
+    179
+   ],
+   "nearest": [
+    [
+     "Blackish Slate",
+     2.9
+    ],
+    [
+     "Charcoal Grey",
+     3.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; Ridgway 1912 plate LIII, ISCC-NBS 1955 block 229), CIEDE2000 distances",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does the name Dusky Purplish Grey come from?",
+   "choices": [
+    "Modifier words stacked onto the base color grey",
+    "A dye plant",
+    "A painter's name"
+   ],
+   "answer": "Modifier words stacked onto the base color grey",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the Munsell reading for this swatch shows a strong purple hue.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Named \"purplish,\" but the Munsell reading calls it almost hueless."
+ ],
+ "words": 342,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}

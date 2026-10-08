@@ -1,0 +1,169 @@
+{
+ "slug": "dark-delft-blue",
+ "name": "Dark Delft Blue",
+ "hex": "#315159",
+ "names": [
+  "Dark Delft Blue"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Dark Delft Blue is a dark, greyed blue-green carried in our library by three independent systems at once: Ridgway's 1912 naturalist chart, the 1955 ISCC-NBS standard, and a Japanese traditional name, Noshimehana-iro.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Three systems, one block of color",
+   "body": "Robert Ridgway's 1912 *Color Standards and Color Nomenclature*, a chart built for naturalists describing specimens, plots a swatch in this neighborhood on plate XLII, hue 45, tone m, and again on plate XLVIII at a slightly different hue and tone; both plates in our scanned copy have aged, so the readings are approximate [1]. The 1955 ISCC-NBS system separately classes the same block of color, under its block 183, as a dark blue [2].\n\nOur library also carries the Japanese name Noshimehana-iro for a very close color, written 熨斗目花色; the kanji combine a term for a striped kimono weave (*noshime*) with \"flower color,\" and the library glosses the whole, a little literally, as \"iron head flower color\" [3]. No book consulted here independently confirms when that Japanese name entered use, so its date is undocumented [3]. The nearest named colors on file are [[dark-teal-grey]], [[saccardo-s-slate]] and [[dusky-orient-blue]], at 3, 3 and 3.7 ΔE [1][2][3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within range of this swatch appears in 310 of the 23,781 paintings in our archive, about 1.3 percent, as photographed; the within-painting lens finds it in 134 [4]. That makes it more common than 63 percent of the named colors we track [4].\n\nIt peaks in the 1400s, present in 14 of 945 paintings from that century, 2.2 times the expected rate [4]. Inside a painting it most often plays a hidden color, in nearly half the paintings that carry it, the kind of tone lightness ranking alone would not flag [4]. The earliest dated appearance we have is 1260, 652 years before Ridgway's 1912 chart, which is a reminder that a color match in an old, varnished photograph is a look-alike hue, not proof that anyone at the time used this name or dye, a floor and not a first, since the archive's early centuries are thin [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "iron head flower color, from a striped kimono weave term and 花色 (flower color)",
+   "first_recorded": "Ridgway, 1912, plate XLII",
+   "source": "ColorHub color library (Ridgway 1912; ISCC-NBS 1955; Wikipedia, \"Traditional colors of Japan\")"
+  },
+  "aka": [
+   "Noshimehana-iro",
+   "熨斗目花色",
+   "Dark Green-Blue Slate"
+  ],
+  "siblings": [
+   "dark-teal-grey",
+   "saccardo-s-slate",
+   "dusky-orient-blue",
+   "dark-payne-s-grey"
+  ],
+  "parent": "charcoal",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Noshimehana-iro (熨斗目花色), \"iron head flower color\""
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 310,
+  "rank_pct": 63,
+  "century_peak": {
+   "century": 1400,
+   "hits": 14,
+   "of": 945,
+   "lift": 2.2
+  },
+  "role": {
+   "kind": "hidden",
+   "pct": 46
+  },
+  "first_seen": {
+   "year": 1260
+  },
+  "measured": {
+   "nearest": [
+    [
+     "Dark teal grey",
+     3.0
+    ],
+    [
+     "Saccardo's Slate",
+     3.0
+    ],
+    [
+     "Dusky Orient Blue",
+     3.7
+    ],
+    [
+     "Dark Payne's Grey",
+     3.8
+    ]
+   ],
+   "near_duplicate": [
+    "Dark Green-Blue Slate",
+    0.7
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway, Color Standards and Color Nomenclature (1912), plates XLII and XLVIII; scan of an aged plate, approximate",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS 1955, block 183",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional color names (Wikipedia, \"Traditional colors of Japan\")",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which naturalist's 1912 chart lists a swatch in this color's neighborhood?",
+   "choices": [
+    "Robert Ridgway",
+    "Patrick Syme",
+    "Albert Munsell",
+    "Werner"
+   ],
+   "answer": "Robert Ridgway",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the earliest painting match for dark Delft Blue in our archive predates Ridgway's 1912 chart by over 600 years, which proves the dye was used that early.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Inside a painting, which role does dark Delft Blue most often play?",
+   "choices": [
+    "A hidden color",
+    "A dominant field",
+    "A light",
+    "An accent"
+   ],
+   "answer": "A hidden color",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Dark Delft Blue is catalogued three separate ways: a 1912 naturalist's plate, a 1955 US color standard, and a Japanese name meaning roughly \"iron head flower color.\""
+ ],
+ "words": 337,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-09",
+  "issues": [
+   "Ridgway plate readings are from an aged scan and given as approximate, per library note.",
+   "Framed the 1260 archive match explicitly as a look-alike hue, not evidence of the pigment's early use.",
+   "lint 2026-10-09"
+  ]
+ }
+}

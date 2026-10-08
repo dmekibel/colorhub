@@ -1,0 +1,138 @@
+{
+ "name": "Vassar Tan",
+ "hex": "#8F4E2B",
+ "names": [
+  "Vassar Tan"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Vassar Tan is a warm orange-brown from Maerz and Paul's 1930 color dictionary, close enough to [[polished-brown]] that the two sit side by side in our archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A 1925 brown",
+   "body": "Maerz and Paul record Vassar Tan in their 1930 dictionary as first appearing in 1925, on plate 6, chip A11 [1]. The ISCC-NBS revision of 1955 files the same chip under block 55, described as \"strong brown\" [1]. Our library's nearest named neighbor is [[polished-brown]], a touch darker and less orange; [[sienna]] and [[russet]] sit close behind it [2]. A fourth close match, [[fuzzy-wuzzy]], sits between the two [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a match for Vassar Tan in 1,442 of 23,781 paintings, about 6.1 percent, more common than 89 percent of the named colors we track [3]. It peaks in the 1500s, in 139 of 2,231 paintings, 2.3 times the rate expected from that century's share of the archive [3]. Inside a painting it most often plays an accent rather than a dominant tone, in 71 percent of its appearances [3]. George Catlin used it most: it appears in 8 of his 50 paintings here, 3.1 times his peers' rate [3]. The earliest match in the archive dates to 1119, eight centuries before Maerz and Paul recorded the name, which only shows a similar hue surviving in an old, varnished canvas, not the pigment or the name itself, a floor and not a first, since the archive's early centuries are thin [3]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1925, per Maerz and Paul (1930)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "polished-brown",
+   "fuzzy-wuzzy",
+   "dusty-sienna",
+   "sienna"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1442,
+  "measured": {
+   "lch": [
+    40.3,
+    40.3,
+    53.0
+   ],
+   "nearest": [
+    [
+     "Polished brown",
+     3.5
+    ],
+    [
+     "Fuzzy Wuzzy",
+     3.7
+    ],
+    [
+     "Dusty sienna",
+     3.8
+    ],
+    [
+     "Sienna",
+     3.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz & Paul 1930, ISCC-NBS 1955 entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library, nearest-neighbor computation",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1930 color dictionary lists Vassar Tan?",
+   "choices": [
+    "Maerz and Paul",
+    "Pantone",
+    "Crayola",
+    "Munsell"
+   ],
+   "answer": "Maerz and Paul",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: inside a painting, Vassar Tan usually plays a dominant color rather than an accent.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "About what share of our painting archive carries a match for Vassar Tan?",
+   "choices": [
+    "About 6%",
+    "About 60%",
+    "About 0.6%",
+    "About 96%"
+   ],
+   "answer": "About 6%",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Vassar Tan plays an accent, not a main color, in about seven of ten paintings that carry it."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "slug": "vassar-tan",
+ "words": 253
+}

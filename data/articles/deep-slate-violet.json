@@ -1,0 +1,111 @@
+{
+ "slug": "deep-slate-violet",
+ "name": "Deep Slate-Violet",
+ "hex": "#685D6F",
+ "names": [
+  "Deep Slate-Violet"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Deep Slate-Violet is a muted purple-grey, filed by our library as a slate word rather than a violet one.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A slate word",
+   "body": "Ridgway's 1912 nomenclature plate XLIV gives this swatch as hue 61′′′, tone i, and the ISCC-NBS system of 1955 files it under grayish purple, about 5.1 units away [1]. Our library groups the name with the \"slate\" family rather than with [[violet]] or [[lavender]], since slate is the landscape word the compilers used [1]. In the Munsell notation it reads 4.7P 4.0/2.4, a dark, low-chroma purple [1].\n\nThe nearest named color in our data is [[dark-hyssop-violet]], about 4.4 units off, with [[plumbago-slate]] close behind at 4.5 [2]. Both sit in the same dim, bluish-purple neighborhood."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The archive holds this color, as photographed, in 78 of 23,781 paintings, rarer than 54 percent of the named colors we track [3]. It peaks in the 1900s, in 11 of 1,674 paintings, at 0.7 per cent of that century's paintings, 2.7 times the overall rate [3]. Inside a painting it most often plays a shadow [3]. It is most over-represented in France, 2.3 times expected, 14 of 3,443 paintings [3]. The earliest match is a 1441 painting by Filippo Lippi, 471 years before Ridgway's 1912 record, so it is a look-alike hue in an old photograph, not a pigment identification, a floor and not a first, since the archive's early centuries are thin [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "slate, the grey-purple rock",
+   "first_recorded": "1912, Ridgway plate XLIV",
+   "source": "data/library.json"
+  },
+  "aka": [],
+  "siblings": [
+   "dark-hyssop-violet",
+   "plumbago-slate",
+   "del-monte",
+   "old-lavender"
+  ],
+  "parent": "slate",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 78,
+  "pct": 0.33,
+  "peak": "1900s, 0.7% of 1,674 paintings, 2.7x expected",
+  "country": [
+   "France",
+   14,
+   3443,
+   2.3
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930 and other name sources; CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub Color Graph look-alikes (data/graph), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5 per cent of canvas); data/graph/fieldnotes",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which family does our library file Deep Slate-Violet under?",
+   "choices": [
+    "Slate",
+    "Violet",
+    "Lavender",
+    "Grey"
+   ],
+   "answer": "Slate",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the archive's earliest match for this color predates Ridgway's 1912 plate.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Deep Slate-Violet is filed under slate, not violet."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Fixed: the field-notes paragraph was fabricated against data/graph/fieldnotes — presence count (71, should be 78), peak-decade stat (1.4%/4.6x, should be 0.7%/2.7x per the century fact), a painter claim (\"Henri Matisse, 3 of 50 works\") with no painter data for this slug at all (ar.pa and ar.pn are both empty), and a country claim misattributed to \"Danish paintings\" that was actually the France over-representation fact (14 of 3,443, 2.3x). The earliest-match sentence also named the wrong painting (a 1425 Botticelli predella; the real first-seen record is a 1441 painting by Filippo Lippi). Also fixed the name section: it called plumbago-slate the nearest neighbor at 4.6 units, but dark-hyssop-violet is actually nearest at 4.4 (plumbago-slate is second, at 4.5). Rewrote both passages from the real fieldnotes/graph data; removed the unsupported painter claim rather than inventing a replacement.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 236
+}

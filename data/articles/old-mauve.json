@@ -1,0 +1,106 @@
+{
+ "slug": "old-mauve",
+ "name": "Old Mauve",
+ "hex": "#673147",
+ "names": [
+  "Old Mauve"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Old Mauve is a dark, dusky purplish red, [[mauve]] gone deep and worn rather than bright, and it shares its exact screen color with a second library name, Wine Dregs.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Mauve, darkened",
+   "body": "The library records Old Mauve from Maerz and Paul's 1930 dictionary, plate 46 I 5, first recorded in 1925 [1]. The ISCC-NBS 1955 lists classify it as a dark grayish purple, far from the pale pink-violet most people picture when they hear [[mauve]] [1]. At this hex our library also files a second name, Wine Dregs, at an identical value, the way sediment left in a glass darkens past the wine's own color [1].\n\nThe nearest distinct neighbor is Dahlia Purple, about 2.7 units away by CIEDE2000, close behind it [[purplish-red|Purplish Red]] and [[gooseberry|Gooseberry]] [1]. In LCH terms it measures lightness 28, chroma 27, hue 355 degrees, Munsell 7.0RP 2.8/5.4 [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in only 10 of 23,781 paintings, 0.04 percent, as photographed [2]. Italy accounts for 4 of the 10, the largest single share by country [2]. No painter here carries it more than once, so no single artist's name stands out [2]. These are photographs of aged, varnished paintings, so a color match is not a pigment test [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "mauve, darkened; shares its exact screen color with Wine Dregs",
+   "first_recorded": "1925 (Maerz & Paul, plate 46 I 5)",
+   "source": "Maerz & Paul, A Dictionary of Color (1930); ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "mauve",
+   "dahlia-purple"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 10,
+  "measured": {
+   "lch": [
+    28,
+    27,
+    355
+   ],
+   "nearest": [
+    [
+     "Dahlia Purple",
+     2.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz & Paul 1930, plate 46 I 5, first recorded 1925; ISCC-NBS 1955; near-duplicate match Wine Dregs, ΔE 0.0; nearest distinct match Dahlia Purple, ΔE 2.7",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Old Mauve shares its exact screen color with which other library name?",
+   "choices": [
+    "Wine Dregs",
+    "Dahlia Purple",
+    "Old Lilac",
+    "Byzantium"
+   ],
+   "answer": "Wine Dregs",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Old Mauve looks like the pale pink-violet most people picture when they hear \"mauve\".",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Old Mauve and Wine Dregs are two library names for the exact same dark, dusky color."
+ ],
+ "words": 202,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

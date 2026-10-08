@@ -1,0 +1,164 @@
+{
+ "slug": "dark-bluish-grey-green",
+ "name": "Dark Bluish Grey-Green",
+ "hex": "#3D6769",
+ "names": [
+  "Dark Bluish Grey-Green"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dark Bluish Grey-Green is a dark bluish shade of [[grey-green|grey-green]], one of Robert Ridgway's working names built by the plain grammar of modifier plus base color.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier, not a new color",
+   "body": "Dark Bluish Grey-Green stacks three modifiers in sequence, *dark* and *bluish*, onto the compound base color [[grey-green]] [1][4]. The nearest named colors on file are [[michigan]], [[invisible-green]] and [[dusky-bluish-green]], at 3, 4.1 and 5.4 ΔE [1][4]. The ISCC-NBS system calls this darker block, 150, 'grayish green,' a Delta-E of 8.1 from Ridgway's point [2]. A still-darker sibling, [[deep-bluish-grey-green]], extends the same grammar one tone further [1][4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this shade, as photographed, in 0.83% of 23,781 paintings, 197 paintings; within a single canvas it reads as a distinct area in 83 of them [3]. That ranks it more common than 56% of the archive's named colors [3]. It peaks in the 1900s, found in 1.2% of that century's 1,674 paintings, 3.4 times the expected rate[3]. Inside a painting it most often plays a hidden color, by lightness rank, in 55% of its 83 appearances [3]. Gustav Klimt is its most devoted painter, using it in 4 of his 50 works here, 6.3 times the baseline rate of the museums those paintings come from [3]. The earliest dated appearance is a painting from the year 1000[3]. That is 912 years before the name's first documented record in 1912, but the archive's early centuries are thin, so this is a floor and not a first [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the base color grey-green, with the modifier 'dark bluish'",
+   "first_recorded": "1912 (Ridgway, Color Standards and Nomenclature)",
+   "source": "Ridgway, Color Standards and Nomenclature"
+  },
+  "aka": [],
+  "siblings": [
+   "michigan",
+   "invisible-green",
+   "dusky-bluish-green",
+   "ming"
+  ],
+  "parent": "grey-green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "measured": {
+   "lch": [
+    40.8,
+    15.2,
+    202.3
+   ],
+   "nearest_iscc": [
+    "grayish green",
+    8.1
+   ],
+   "nearest": [
+    [
+     "Michigan",
+     3.0
+    ],
+    [
+     "Invisible Green",
+     4.1
+    ],
+    [
+     "Dusky Bluish Green",
+     5.4
+    ],
+    [
+     "Ming",
+     5.7
+    ]
+   ]
+  },
+  "n_present": 83,
+  "role_top": {
+   "role": "hidden",
+   "pct": 55
+  },
+  "painter": {
+   "name": "Gustav Klimt",
+   "n": 4,
+   "of": 50,
+   "lift": 6.3
+  },
+  "first_seen": {
+   "year": 1000,
+   "years_before_record": 912
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Nomenclature, 1912, plate XLII, hue 41 triple-prime",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "ISCC-NBS, National Bureau of Standards Circular 553, 1955, block 150 (\"grayish green\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color graph: computed LCH/Munsell values and modifier-name cross-reference",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which painter in our archive paints Dark Bluish Grey-Green far more often than his peers?",
+   "choices": [
+    "Gustav Klimt",
+    "Paul Signac",
+    "Claude Monet",
+    "Georges Seurat"
+   ],
+   "answer": "Gustav Klimt",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dark Bluish Grey-Green and Bluish Grey-Green come from the same Ridgway plate and hue number.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "In our archive, which name in this batch has the earliest first-seen painting, from the year 1000?",
+   "choices": [
+    "Dark Bluish Grey-Green",
+    "Pale Sage",
+    "Yellowish Citrine",
+    "Purplish Lilac"
+   ],
+   "answer": "Dark Bluish Grey-Green",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Dark Bluish Grey-Green and Bluish Grey-Green read off the exact same Ridgway hue card, one lighter and one darker.",
+  "Its earliest dated match, from the year 1000."
+ ],
+ "words": 248,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

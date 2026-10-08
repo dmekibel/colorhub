@@ -1,0 +1,140 @@
+{
+ "slug": "stone",
+ "name": "Stone",
+ "hex": "#ADA587",
+ "names": [
+  "Stone"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Stone is a grayish yellow that Maerz and Paul trace back to 1663, far older than most of ColorHub's landscape names, and one of the most common colors in our painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name four centuries old",
+   "body": "Maerz and Paul's 1930 dictionary dates Stone to 1663, long before most other names in this library; the 1955 ISCC-NBS system classes the color as a pale orange yellow, block 73 [1]. The xkcd color survey of 2010 independently landed on nearly the same swatch, under its own crowd-sourced name [1]. The nearest named colors on file are [[yellowish-grey]] and [[eucalyptus]], at \n[[sage]], [[ash]], [[khaki]] and [[taupe]] all turn up far more often than chance in paintings that also carry this color [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to Stone in 3,575 of 23,781 paintings, about 15 percent, roughly one painting in seven, as photographed [2]. It plays a highlight in 83 percent of its appearances, the light note in a composition rather than the shadow [2]. Its presence barely shifts century by century, staying within about 20 percent of the archive's overall rate from the 1100s to the 1900s, an unusually flat curve for a color this common [2].\n\nThe earliest dated match is a work cataloged to around 300 BCE, *The Kill*, twenty centuries before Maerz and Paul's date, which only shows a similar screen color was photographed there, not that the name or a matching material existed that early, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "stone",
+   "first_recorded": "Maerz and Paul, 1930 (first recorded 1663)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "yellowish-grey",
+   "eucalyptus",
+   "putty",
+   "cement"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 3575,
+  "role": {
+   "highlight": 0.83
+  },
+  "company": [
+   "Sage",
+   "Ash",
+   "Tan",
+   "Khaki",
+   "Taupe"
+  ],
+  "measured": {
+   "lch": [
+    68,
+    17,
+    97
+   ],
+   "nearest": [
+    [
+     "Yellowish Grey",
+     3.5
+    ],
+    [
+     "Eucalyptus",
+     3.6
+    ],
+    [
+     "Putty",
+     4.6
+    ],
+    [
+     "Cement",
+     4.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955, Maerz and Paul 1930 and other name records, with plate/block locators and nearest-name match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "According to Maerz and Paul, when was the name Stone first recorded?",
+   "choices": [
+    "1663",
+    "1912",
+    "1930",
+    "1955"
+   ],
+   "answer": "1663",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: a match to Stone in a painting from 300 BCE proves the name existed that early.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "In our archive, Stone most often appears as a:",
+   "choices": [
+    "highlight",
+    "shadow",
+    "midtone"
+   ],
+   "answer": "highlight",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Stone is one of the oldest landscape names in this library, dated to 1663, and one of the most common colors in our archive."
+ ],
+ "words": 245,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

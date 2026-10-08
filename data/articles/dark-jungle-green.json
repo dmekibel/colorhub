@@ -1,0 +1,100 @@
+{
+ "slug": "dark-jungle-green",
+ "name": "Dark Jungle Green",
+ "hex": "#1A2421",
+ "names": [
+  "Dark Jungle Green"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dark Jungle Green is a near-black, greenish grey, ColorHub's library name for a darkened shade of [[jungle-green]], one of the more common dark colors in our painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A darkened jungle green",
+   "body": "The name follows ColorHub's modifier grammar, \"dark\" plus the parent color [[jungle-green]] [1]. The library's note on this entry points to Wikipedia, which in turn cites the ISCC-NBS Dictionary of Color Names of 1955 as the swatch's source; ColorHub has not independently verified the block [1]. At this depth the color sits close to black on screen, with only a faint green cast visible against a neutral background [1].\n\nThe closest named neighbors on file are [[pale-gunmetal]] and [[vivid-gunmetal]], both lighter, with [[eerie-black]] close by on the dark side [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color near this swatch in 1,341 of 23,781 paintings, about 5.64 per cent, more common than most of the library's named colors, as photographed [2]. It is present across every century on file, from the 1200s onward, and peaks in a sample of paintings from the 1490s [2]. Juan de Flandes, Thomas Gainsborough and Jacob Eichholtz all have it well above the archive's average rate, mostly as deep shadow in portraits [2]. These are computed color matches on photographs of aged, varnished paintings, not pigment identifications [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a darkened shade of Jungle Green",
+   "first_recorded": "ISCC-NBS 1955 (via Wikipedia, unverified)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "pale-gunmetal",
+   "vivid-gunmetal",
+   "eerie-black"
+  ],
+  "parent": "jungle-green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1341,
+  "pct_archive": 5.64,
+  "peak_decade": 1490
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "Wikipedia, \"Dark jungle green\" (citing ISCC-NBS 1955)",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/Shades_of_green"
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph, nearest-neighbor color distances (data/graph/edges-d.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Dark Jungle Green look closest to at a glance on screen?",
+   "choices": [
+    "Black, with a faint green cast",
+    "Bright emerald green",
+    "Pale grey"
+   ],
+   "answer": "Black, with a faint green cast",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dark Jungle Green is rare in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Reads as near-black on screen, but shows up in paintings from every century in our archive."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": []
+ },
+ "words": 209
+}

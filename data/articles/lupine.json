@@ -1,0 +1,144 @@
+{
+ "name": "Lupine",
+ "hex": "#85A6CA",
+ "names": [
+  "Lupine"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Lupine is a soft, slightly greyed blue named for the lupine flower, recorded by the Maerz and Paul dictionary in 1930 with a first use in 1922.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A flower spike, not a pigment",
+   "body": "Our data traces the name to the lupine, the flowering plant, rather than a pigment or a place [1]. The Maerz and Paul dictionary of 1930 plots it on plate 34 D7 and gives it a first recorded use of 1922, and the ISCC-NBS system of 1955 files the same area as block 181, \"light blue\" [1]. In LCH terms it reads as lightness 67, chroma 22, hue 263 degrees: soft, moderately saturated, and leaning a little purple of true blue [1].\n\nThe same Maerz and Paul plate carries two other names for nearby shades: Zenith, first recorded in 1892, and Blue Lotus, in 1923 [2]. Lupine's nearest computed neighbor is [[iceberg|Iceberg]], 4.1 units off and more vivid, followed by [[air-superiority-blue|Air Superiority Blue]] and [[watteau|Watteau]] [3]. The closest everyday name is [[cornflower]], about 7.4 units away [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a close match covers enough of the canvas in 164, as photographed (110 by the stricter within-painting measure), which makes it more common than 60 percent of the named colors we track [5]. It peaks in paintings from the 1800s, at 1.2 times the rate expected from that century's share of the archive (51 of 8,345 paintings) [5]. Inside a painting it most often plays a hidden color, in 30 percent of its matches, by lightness rank within the canvas; varnish cannot fake that ranking [5]. [[painter:alfred-sisley|Alfred Sisley]] used it most: it appears in 4 of his 50 works here, 5.5 times the rate of the museums those works come from [5]. The earliest match is a 1440 painting by Rogier van der Weyden, 490 years before the name's first record in 1930, a floor and not a first, since the archive's early centuries are thin [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the lupine flower",
+   "first_recorded": "Maerz & Paul, 1930 (first used 1922)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "iceberg",
+   "air-superiority-blue",
+   "watteau",
+   "little-boy-blue"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 164,
+  "measured": {
+   "lch": [
+    67,
+    22,
+    263
+   ],
+   "nearest": [
+    [
+     "Iceberg",
+     4.1
+    ],
+    [
+     "Air Superiority Blue",
+     4.6
+    ],
+    [
+     "Watteau",
+     4.8
+    ],
+    [
+     "Little Boy Blue",
+     5.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/nodes-l.json): Lupine — Maerz & Paul 1930, plate 34 D7, first recorded 1922",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Lupine entry, alternate names Zenith and Blue Lotus",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-l.json): nearest distinct neighbors by CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Lupine entry, nearest everyday name",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings, as photographed, data/graph/fieldnotes/l.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which dictionary first records Lupine, with a first use of 1922?",
+   "choices": [
+    "Maerz and Paul, 1930",
+    "Ridgway, 1912",
+    "ISCC-NBS, 1955",
+    "Pantone"
+   ],
+   "answer": "Maerz and Paul, 1930",
+   "kind": "pick"
+  },
+  {
+   "q": "Which painter used Lupine most often in our archive?",
+   "choices": [
+    "Alfred Sisley",
+    "Claude Monet",
+    "John Singer Sargent",
+    "Rogier van der Weyden"
+   ],
+   "answer": "Alfred Sisley",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "The same 1930 chart plate that names Lupine also names two nearby blues, Zenith and Blue Lotus."
+ ],
+ "words": 312,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No book concordance hits for this slug; written from the color graph, library and archive data only.",
+   "lint 2026-10-09"
+  ]
+ },
+ "slug": "lupine"
+}

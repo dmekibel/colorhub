@@ -1,0 +1,161 @@
+{
+ "slug": "dull-teal",
+ "name": "Dull Teal",
+ "hex": "#5F9E8F",
+ "names": [
+  "Dull Teal"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dull Teal is a greyed, muted [[teal]], recorded in both Wikipedia's color list and the 2010 xkcd survey.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Teal with the shine taken off",
+   "body": "Our data traces this name to Wikipedia's color list and separately to the 2010 xkcd crowd survey [1]. In the ISCC-NBS 1955 system it falls nearest the block called \"light bluish green\", 5.4 units off [2]. In Munsell terms it reads about 1.7BG 6.0/4.3, a mid-light, moderately desaturated blue-green [2]. The nearest named colors on file are [[montpellier-green]], [[greyish-teal]] and [[venet]], at 3.1, 3.3 and 3.8 ΔE [2]. Maerz and Paul's 1930 dictionary separately lists a color called Cabaret at this same point, first recorded in 1925, on plate 27 I 6 [3]. The word \"dull\" marks the color as teal with its saturation turned down, [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 31 of 23,781 paintings, about 0.1 percent, as photographed [4]. The earliest dated match is Bernardino Jacobi Butinone's *The Descent from the Cross*, from about 1480, a floor and not a first, since the archive's early centuries are thin [4]. Its clearest peak is the 1900s, at more than seven times the archive's overall rate [4]. [[painter:henri-matisse|Henri Matisse]] used it far more than most painters, including in his 1905 *[[painting:smk-KMSr171|Portrait of Madame Matisse, The Green Line]]* [4]. Unlike most colors in our archive, it plays a highlight more often than a mid-tone, over half the time, rather than sitting in a painting's shadows [4]. These counts are computed color matches on photographs of aged, varnished paintings, not pigment identifications [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "Wikipedia; xkcd survey, 2010",
+   "source": "ColorHub library and graph nodes"
+  },
+  "aka": [],
+  "siblings": [
+   "montpellier-green",
+   "greyish-teal",
+   "venet",
+   "sulphate-green"
+  ],
+  "parent": "teal",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 31,
+  "first_painting": [
+   "aic-16137",
+   1480
+  ],
+  "painters": [
+   [
+    "Henri Matisse",
+    61.37
+   ]
+  ],
+  "role": {
+   "highlight": 0.52,
+   "shadow": 0.06,
+   "mid": 0.42
+  },
+  "measured": {
+   "mu": "1.7BG 6.0/4.3",
+   "nearest_iscc": [
+    "light bluish green",
+    5.4
+   ],
+   "nearest": [
+    [
+     "Montpellier Green",
+     3.1
+    ],
+    [
+     "Greyish Teal",
+     3.3
+    ],
+    [
+     "Venet",
+     3.8
+    ],
+    [
+     "Sulphate Green",
+     3.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (Wikipedia; xkcd 2010)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub graph nodes: Munsell conversion, ISCC-NBS 1955 nearest block",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library: near-duplicate names (xkcd; Maerz and Paul 1930)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1930 dictionary name sits at almost the same point as Dull Teal?",
+   "choices": [
+    "Cabaret",
+    "Harbor rat",
+    "Isabelline",
+    "B'dazzled Blue"
+   ],
+   "answer": "Cabaret",
+   "kind": "pick"
+  },
+  {
+   "q": "In our archive, Dull Teal most often plays which role in a painting?",
+   "choices": [
+    "A highlight",
+    "The darkest shadow",
+    "It is never present",
+    "A background wash only"
+   ],
+   "answer": "A highlight",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dull Teal and Grey Teal are nearly the same color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dull Teal plays a highlight more often than a shadow in our archive, unusual for a muted color."
+ ],
+ "words": 251,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); article rests on ColorHub's own library, graph and archive data.",
+   "lint 2026-10-09"
+  ]
+ }
+}

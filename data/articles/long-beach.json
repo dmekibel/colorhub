@@ -1,0 +1,140 @@
+{
+ "slug": "long-beach",
+ "name": "Long Beach",
+ "hex": "#BDA57E",
+ "names": [
+  "Long Beach"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Long Beach is a light yellowish tan from the Maerz and Paul color dictionary, and the single most common color matched in our entire painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dictionary tan, densely surrounded",
+   "body": "Maerz and Paul's 1930 *A Dictionary of Color* carries this tone on plate 12, B 4, first recorded there in 1922 [1]. The 1955 ISCC-NBS circular cites the same entry, naming it light yellowish brown, 4.5 units from Maerz and Paul's reading, notated 1.4Y 6.8/3.5 in the Munsell system [1].\n\nIt sits inside a dense cluster of tan and khaki neighbors: [[toupe]] and [[manila]] are each about 2.9 to 3.0 units away, almost indistinguishable, and [[putty]] and [[dust]] about 3.8 units off [2]. The name plausibly echoes the California city, but no source consulted here documents that connection, so it is left undocumented [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive matches this tone in 4,380 of 23,781 paintings, about 18.4 percent, the single highest share of any color, more common than 98 percent of the named colors we track [3]. It peaks early, in the 1100s, present in 16.0 percent of the 50 paintings we have from that century, though that century's sample is thin [3].\n\nInside a painting it most often plays a light tone, in 44 percent of its 2,787 clearly-ranked appearances, a rank computed within each canvas so varnish cannot fake it [3]. Flemish still-life painter Cornelius Norbertus Gijsbrechts favors it most, in 10 of his 19 works here, 4.1 times his museums' baseline rate, and it is also most over-represented in Iranian paintings, 2.8 times the expected rate [3]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented in the sources consulted here; possibly the California city, unconfirmed",
+   "first_recorded": "1922, in Maerz and Paul's dictionary (published 1930); cited in the 1955 ISCC-NBS circular",
+   "source": "Maerz and Paul, A Dictionary of Color; ISCC-NBS, NBS Circular 553"
+  },
+  "aka": [],
+  "siblings": [
+   "toupe",
+   "manila",
+   "putty",
+   "dust"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#BDA57E",
+   "de2000": 4.5,
+   "min_cover": 0.02
+  },
+  "n_present": 4380,
+  "painters": [
+   {
+    "name": "Cornelius Norbertus Gijsbrechts",
+    "hits": 10,
+    "n": 19,
+    "lift": 4.1
+   }
+  ],
+  "measured": {
+   "lch": [
+    68.9,
+    23.7,
+    82.8
+   ],
+   "nearest": [
+    [
+     "Toupe",
+     2.9
+    ],
+    [
+     "Manila",
+     3.0
+    ],
+    [
+     "Putty",
+     3.8
+    ],
+    [
+     "Dust",
+     3.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Maerz and Paul, A Dictionary of Color (1930), plate 12, B 4; cited in ISCC-NBS, NBS Circular 553 (1955), \"light yellowish brown\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library and graph: computed LCH and nearest-neighbor distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What share of the archive's 23,781 paintings carries a color matching Long Beach?",
+   "choices": [
+    "About 18 percent",
+    "About 2 percent",
+    "About 50 percent",
+    "About 1 percent"
+   ],
+   "answer": "About 18 percent",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the sources consulted here confirm Long Beach is named for the California city.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Long Beach is the single most common color matched anywhere in our 23,781-painting archive."
+ ],
+ "words": 276,
+ "status": "checked",
+ "checked": {
+  "by": "batch-36",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

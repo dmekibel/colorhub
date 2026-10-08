@@ -1,0 +1,125 @@
+{
+ "slug": "blanc-s-violet",
+ "name": "Blanc's Violet",
+ "hex": "#665888",
+ "names": [
+  "Blanc's Violet"
+ ],
+ "tier": "person",
+ "depth": "short",
+ "lede": "Blanc's Violet is a dim, blue-leaning violet from Robert Ridgway's 1912 color dictionary, and its closest relative in our whole color graph is another color from the very same book, Dauphin's Violet.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A pair from the same book",
+   "body": "Ridgway's 1912 “Color Standards and Color Nomenclature” lists Blanc's Violet at hex #665888 among the names he credits to a person [1]. Blanc is a French surname, and several nineteenth-century writers on color and art carried it, but Ridgway names none of them, so which Blanc the color honors is undocumented in our sources [1]. The 1955 Inter-Society Color Council catalog repeats the name in the block it calls moderate violet [1].\n\nIts nearest neighbor in our color graph is not a basic hue word at all but [[dauphin-s-violet|Dauphin's Violet]], only 3.2 units away and almost the same, another Ridgway name from the same person-named group [1]. [[deep-soft-bluish-violet|Deep Soft Bluish Violet]] and [[haematoxylin-violet|Haematoxylin Violet]] sit a little further out [1]. Against the basic color words it reads closest to [[purple|Purple]], 11.2 units off, a wider gap than most of its named neighbors [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive matches this violet in 0.05% of 23,781 paintings, 12 of them, as photographed; the within-painting lens finds it in 5 [2]. That makes it rarer than 75% of the named colors in our set [2]. The sample is too thin for a reliable century, painter or country figure [2]. Our earliest match dates to 1340, by Pietro Lorenzetti, 572 years before Ridgway's 1912 book recorded the name, a floor rather than a first, since the archive's early centuries are thin and a color match in an aged photograph is not proof of a pigment [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955"
+  },
+  "aka": [],
+  "siblings": [
+   "dauphin-s-violet",
+   "deep-soft-bluish-violet",
+   "haematoxylin-violet",
+   "dark-soft-blue-violet"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 12,
+  "measured": {
+   "lch": [
+    40.5,
+    29.7,
+    303.9
+   ],
+   "nearest": [
+    [
+     "Dauphin's Violet",
+     3.2
+    ],
+    [
+     "Deep Soft Bluish Violet",
+     4.5
+    ],
+    [
+     "Haematoxylin Violet",
+     4.6
+    ],
+    [
+     "Dark Soft Blue-Violet",
+     4.6
+    ]
+   ]
+  },
+  "iscc_nbs": {
+   "name": "moderate violet",
+   "de": 4.8
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912 (plate XXIII), ISCC-NBS 1955 (block 215)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which other Ridgway color is closest to Blanc's Violet in our color graph?",
+   "choices": [
+    "Dauphin's Violet",
+    "Hay's Lilac",
+    "Davy's Grey",
+    "Chapman's Blue"
+   ],
+   "answer": "Dauphin's Violet",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Ridgway's dictionary names the specific Blanc the color honors.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Blanc's Violet's closest color-match is another name from the very same 1912 dictionary, Dauphin's Violet."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits; origin of the personal name is undocumented in our sources.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 266
+}

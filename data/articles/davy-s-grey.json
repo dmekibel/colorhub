@@ -1,0 +1,125 @@
+{
+ "slug": "davy-s-grey",
+ "name": "Davy's Grey",
+ "hex": "#555555",
+ "names": [
+  "Davy's Grey"
+ ],
+ "tier": "person",
+ "depth": "short",
+ "lede": "Davy's Grey is a neutral, mid-dark grey from Robert Ridgway's 1912 color dictionary, and its hex value is within half a unit of the Inter-Society Color Council's own definition of dark gray.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A surname, unexplained",
+   "body": "Ridgway's 1912 “Color Standards and Color Nomenclature” lists Davy's Grey at hex #555555 among the names he credits to a person [1]. Ridgway does not give a first name or a reason for the name, so whether it honors a particular Davy, as some painters' color names do for a pigment maker or a colorist, is undocumented in our sources [1]. The 1955 Inter-Society Color Council catalog repeats the name, and that circular's block for dark gray matches this swatch within 0.4 color-difference units, closer than almost any other name in our library [1].\n\nIts nearest neighbor in our color graph is [[vienna-smoke|Vienna Smoke]], only 2.7 units away and almost the same [1]. [[greyish-black|Greyish Black]] and [[pelican|Pelican]] sit almost as close [1]. Against the basic color words it reads closest to [[umber|Umber]], 9.6 units off, though Davy's Grey carries no warmth that umber has [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive matches this grey in 2.28% of 23,781 paintings, 543 of them, as photographed; the within-painting lens finds it in 302 [2]. That makes it more common than 77% of the named colors in our set [2]. It peaks in the 1900s, present in 2.8% of the 1,674 paintings from that century, 1.9 times the rate its museums would predict [2]. Inside a painting it most often sits as a mid-tone, in 46% of its 302 appearances, by lightness rank rather than by brand [2]. Henri Matisse is its most devoted painter here, holding it in 5 of 50 works, 3.8 times the baseline of the museums those paintings come from [2]. Our earliest match dates to 1235, by the Master of the Bigallo Crucifix, 677 years before Ridgway's 1912 book recorded the name, a floor rather than a first, since a color match in an aged photograph is not proof of a pigment [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955"
+  },
+  "aka": [],
+  "siblings": [
+   "vienna-smoke",
+   "greyish-black",
+   "pelican",
+   "castor-grey"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 543,
+  "measured": {
+   "lch": [
+    36.1,
+    0.0,
+    296.8
+   ],
+   "nearest": [
+    [
+     "Vienna Smoke",
+     2.7
+    ],
+    [
+     "Greyish Black",
+     2.8
+    ],
+    [
+     "Pelican",
+     3.6
+    ],
+    [
+     "Castor Grey",
+     3.6
+    ]
+   ]
+  },
+  "iscc_nbs": {
+   "name": "dark gray",
+   "de": 0.4
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955 (block 266), Maerz & Paul 1930",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How close is Davy's Grey's hex value to the ISCC-NBS 1955 block it falls in?",
+   "choices": [
+    "Within 0.4 color-difference units, an unusually tight match",
+    "About 10 units off, a loose match",
+    "It falls outside every ISCC-NBS block",
+    "Exactly 0 units, an identical match"
+   ],
+   "answer": "Within 0.4 color-difference units, an unusually tight match",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Ridgway's dictionary explains which Davy the color is named for.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Davy's Grey sits within half a color-difference unit of the ISCC-NBS 1955 definition of plain dark gray."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits; origin of the personal name is undocumented in our sources.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 330
+}

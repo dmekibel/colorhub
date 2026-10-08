@@ -1,0 +1,123 @@
+{
+ "slug": "flax-flower-blossom",
+ "name": "Flax-Flower Blossom",
+ "hex": "#4D6B89",
+ "names": [
+  "Flax-Flower Blossom"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Flax-Flower Blossom is a dusty, moderate blue named for the small sky-colored flowers of the flax plant, first recorded by Maerz and Paul in 1930 and distinguished from its closest neighbor by being a shade bluer.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A flax-blue",
+   "body": "Maerz and Paul's 1930 dictionary records this hue at plate 36 F 7, with a first recorded date of 1705 [1]. The flax plant's flowers, which give us linen and linseed oil, open a pale, clear blue; this name takes that flower's color and pushes it a step darker and greyer, into what the ISCC-NBS system would call a moderate blue [2]. In Munsell terms it sits near 2.8PB 4.3/4.9: low chroma, tipped toward violet [2].\n\nThe nearest named color is [[queen-blue|Queen Blue]], 3.0 units away and more vivid; [[dark-cadet-blue|Dark Cadet Blue]] sits almost on top of it, 3.9 units off, in nearly the same place [2]. Maerz and Paul's own plate also carries Orient Blue, Firmament and Milano Blue as later variants on the same page [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Flax-Flower Blossom appears in 204 of our 23,781 paintings, as photographed, more common than 59 percent of the archive's named colors [3]. It peaks in the 1900s, in 26 of 1,674 paintings, at 2.8 times the expected rate for that century, and is most over-represented in French paintings, at 2.2 times expected [3]. Inside a painting it most often sits as a hidden color, tucked into shadow rather than carrying the light [3]. The earliest match is dated 1405, 525 years before Maerz and Paul's 1930 record of the name — a look-alike hue in an aged photograph, not proof of the flax dye itself, a floor and not a first, since the archive's early centuries are thin [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the flower of the flax plant",
+   "first_recorded": "1705, per Maerz and Paul",
+   "source": "Maerz and Paul, A Dictionary of Color (1930), plate 36 F 7"
+  },
+  "aka": [
+   "Orient Blue",
+   "Firmament",
+   "Milano Blue"
+  ],
+  "siblings": [
+   "queen-blue",
+   "dark-cadet-blue",
+   "denim",
+   "jay-blue"
+  ],
+  "parent": null,
+  "children": null,
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 204,
+  "measured": {
+   "lch": [
+    44,
+    20,
+    263
+   ],
+   "nearest": [
+    [
+     "Queen Blue",
+     3.0
+    ],
+    [
+     "Dark Cadet Blue",
+     3.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Maerz and Paul, A Dictionary of Color (1930), plate 36 F 7",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: computed ISCC-NBS block, Munsell notation and look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What plant gives Flax-Flower Blossom its name?",
+   "choices": [
+    "Flax",
+    "Lavender",
+    "Cornflower",
+    "Woad"
+   ],
+   "answer": "Flax",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Flax-Flower Blossom most often appears as the brightest highlight in a painting.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Flax-Flower Blossom is named for a flower paler and clearer than the color itself."
+ ],
+ "words": 283,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

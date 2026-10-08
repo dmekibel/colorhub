@@ -1,0 +1,138 @@
+{
+ "slug": "ochraceous-orange",
+ "name": "Ochraceous-Orange",
+ "hex": "#F0953B",
+ "names": [
+  "Ochraceous-Orange"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Ochraceous-Orange is a strong, ochre-tinted orange from Ridgway's 1912 plates, close kin to Deep Saffron, and over-represented in paintings from the United Kingdom in our archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Named for ochre, placed by Ridgway",
+   "body": "The name joins *ochraceous*, meaning ochre-colored, to orange, and Ridgway's 1912 *Color Standards and Color Nomenclature* places it at plate XV, hue 15′, scanned from an aged plate and so approximate [1]. The ISCC-NBS system later filed it in its strong-orange block [1]. Our library notes a separately recorded name, Deep Saffron, measuring only 2.8 units away, close enough to call the two nearly the same orange under different catalogues [2].\n\nIts other close relatives in our color graph are [[faded-orange]] and [[mars]], both duller, and [[cadmium-orange]], almost the same, all within four units [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, as photographed, a color within six units of Ochraceous-Orange covers at least five per cent of a canvas in 88 works [4]. It peaks in the 1500s, in 17 of 2,231 paintings, found in 0.8 per cent of our paintings from that century, about 1.5 times the archive's overall rate, and it is most over-represented in paintings from the United Kingdom, at 3.1 times expected [4]. The earliest dated appearance in our archive is 1445, nearly five centuries before the name's own 1912 record, a look-alike hue, not proof of pigment, a floor and not a first, since the archive's early centuries are thin [4]. These remain photographs of aged, varnished paintings, read as screen colors [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "ochre (the pigment and earth color)",
+   "first_recorded": "Ridgway, Color Standards and Color Nomenclature (1912), plate XV, hue 15′",
+   "source": "ColorHub color library (Ridgway 1912; ISCC-NBS 1955)"
+  },
+  "aka": [
+   "Moorish Red",
+   "Jacinthe"
+  ],
+  "siblings": [
+   "deep-saffron",
+   "faded-orange",
+   "mars",
+   "cadmium-orange"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#F0953B",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 88,
+  "countries": [
+   {
+    "key": "United Kingdom",
+    "n": 593,
+    "hits": 8,
+    "lift": 3.1
+   }
+  ],
+  "measured": {
+   "lch": [
+    69.7,
+    65.3,
+    65.3
+   ],
+   "nearest": [
+    [
+     "Deep Saffron",
+     2.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-o.json): Ridgway 1912, plate XV, hue 15′; ISCC-NBS 1955 block 68 (R)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), near-duplicate note, CIEDE2000 2.8 to Deep Saffron",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-o.json), CIEDE2000 look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the \"ochraceous\" part of the name refer to?",
+   "choices": [
+    "Ochre, the earth pigment",
+    "A French textile town",
+    "A chemical dye process",
+    "A painter's surname"
+   ],
+   "answer": "Ochre, the earth pigment",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: a separately sourced name, Deep Saffron, is nearly the same color as Ochraceous-Orange.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Ochraceous-Orange is just 2.8 units from a different catalogue's Deep Saffron, essentially the same orange twice."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 244
+}

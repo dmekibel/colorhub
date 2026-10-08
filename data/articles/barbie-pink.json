@@ -1,0 +1,108 @@
+{
+ "slug": "barbie-pink",
+ "name": "Barbie Pink",
+ "hex": "#FE46A5",
+ "names": [
+  "Barbie Pink"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Barbie Pink is a vivid magenta-pink linked to Mattel's Barbie doll brand, a deep purplish pink by the 1955 ISCC-NBS standard even though the brand name itself only spread widely decades later.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A brand name for a vivid pink",
+   "body": "Our data carries this as a manual override tied to Mattel's Barbie brand pink, filed by ISCC-NBS in 1955 as a deep purplish pink, about 6.9 units from the historical reference, with Munsell notation 4.7RP 5.9/18.0 [1]. Maerz and Paul's 1930 dictionary records a close match first appearing in 1926, at plate 6, swatch K5, decades before the Barbie doll itself existed (Mattel introduced Barbie in 1959) [1]. The 2010 xkcd crowd survey later gave the same stretch of pink its own popular vote [1].\n\nGoogle's Ngram data shows the phrase \"barbie pink\" barely used before 1990, rising through the 2000s and peaking around 2010 [1]. The closest look-alike in our data is [[persian-rose|Persian Rose]], 3.0 units away and more vivid, with [[french-fuchsia|French Fuchsia]] close too and [[hot-pink|Hot Pink]] a duller, lighter neighbor [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive has this color covering at least 1 percent of its canvas, within a CIEDE2000 difference of 4, as photographed [2]. A color this saturated and this tied to twentieth-century plastics has no real counterpart in historical pigments, which is exactly what the absence shows [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Mattel's Barbie doll brand",
+   "first_recorded": "1955, ISCC-NBS (as deep purplish pink); the brand association follows",
+   "source": "ISCC-NBS 1955; ColorHub manual override"
+  },
+  "aka": [],
+  "siblings": [
+   "persian-rose",
+   "french-fuchsia",
+   "rose-color"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    60.0,
+    76.2,
+    352.3
+   ],
+   "nearest": [
+    [
+     "Persian Rose",
+     3.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: xkcd 2010 color survey entry, ISCC-NBS and Munsell mapping",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1955 standard first filed the swatch now called Barbie Pink, as a deep purplish pink?",
+   "choices": [
+    "ISCC-NBS",
+    "Pantone",
+    "Crayola",
+    "RAL"
+   ],
+   "answer": "ISCC-NBS",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the phrase \"barbie pink\" was common in print well before Mattel's Barbie doll existed.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Barbie Pink's underlying swatch was filed by ISCC-NBS in 1955, four years before Mattel's Barbie doll existed at all."
+ ],
+ "words": 217,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No private fact-card file for this slug.",
+   "No archive presence at the match threshold, so field notes are limited to that absence."
+  ]
+ }
+}

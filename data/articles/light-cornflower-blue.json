@@ -1,0 +1,111 @@
+{
+ "slug": "light-cornflower-blue",
+ "name": "Light Cornflower Blue",
+ "hex": "#93CCEA",
+ "names": [
+  "Light Cornflower Blue"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Light Cornflower Blue is a very light blue named for the cornflower, close enough to Sky Blue in our library that the two are almost interchangeable.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Lighter than the flower",
+   "body": "The library records Light Cornflower Blue from the ISCC-NBS system's 1955 block 199, and from the 1912 Ridgway atlas, plate VIII, hue 45, tone d [1]. The nearest named colors on file are [[sky-blue]], [[pale-cerulean]], [[uranian-blue]] and [[sky]], at 2.5, 3.7, \nIn LCH terms it measures lightness 79, chroma 23, hue 242 degrees, the ISCC-NBS \"very light blue\" block, Munsell 9.8B 7.9/5.7, between plain [[blue]] and [[azure-blue|Azure Blue]] [1]. The nearest named color in the library is [[sky-blue|Sky Blue]], about 2.5 units away by CIEDE2000, close enough that most people would call them the same color [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in just 24 of 23,781 paintings, 0.1 percent, as photographed; the within-painting lens finds it in 14 [2]. That makes it rarer than 65 percent of the named colors we track [2]. It peaks in the 1800s, at 0.1 percent of that century's 8,345 paintings, 1.5 times the expected rate [2]. Inside a painting it most often sits as a light, in 50 percent of its appearances [2].\n\nThe earliest match is dated 1425, by Sandro Botticelli; that is 487 years before the name's own first record, in 1912, so the match is a look-alike hue in an aged photograph, not evidence of the actual paint, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "pairs the cornflower plant with \"light\", marking a paler version of the flower's blue",
+   "first_recorded": "1912 (Ridgway, plate VIII)",
+   "source": "Ridgway 1912; ISCC-NBS 1955"
+  },
+  "aka": [],
+  "siblings": [
+   "sky-blue",
+   "pale-cerulean",
+   "uranian-blue",
+   "sky"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 24,
+  "measured": {
+   "lch": [
+    79,
+    23,
+    242
+   ],
+   "nearest": [
+    [
+     "Sky blue",
+     2.5
+    ]
+   ]
+  },
+  "role": {
+   "light": 50
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912 plate VIII (hue 45, tone d); ISCC-NBS 1955 block 199; nearest library match Sky Blue, ΔE 2.5",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How close is Light Cornflower Blue to Sky Blue in our library, measured by CIEDE2000?",
+   "choices": [
+    "About 2.5 units, very close",
+    "About 25 units, very different",
+    "Identical, zero units",
+    "Too far apart to measure"
+   ],
+   "answer": "About 2.5 units, very close",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Light Cornflower Blue is darker than the cornflower's own blue.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Light Cornflower Blue sits so close to Sky Blue in our library that most people would call them the same color."
+ ],
+ "words": 255,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

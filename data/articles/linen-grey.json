@@ -1,0 +1,159 @@
+{
+ "slug": "linen-grey",
+ "name": "Linen grey",
+ "hex": "#BBAC99",
+ "names": [
+  "Linen grey"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Linen grey is a warm, dusty neutral from the Ridgway and ISCC-NBS naming lineage, so close to pink in the 1955 dictionary's own categories that it was filed as a shade of brownish pink, not grey.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A grey filed as a pink",
+   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* and the 1955 ISCC-NBS dictionary both carry this tone, though neither locator, the exact plate or block, is recorded in our source [1]. What is recorded is a mismatch: the ISCC-NBS category nearest this swatch is brownish pink, about 3.7 units away, not any of the dictionary's grey blocks [1].\n\nThe nearest named colors on file are [[mauve-blush]] and [[khaki-web]], at [[khaki-web]] sits a little further off, about 4.3 units away and more vivid [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive matches this tone in 2,538 of 23,781 paintings, about 10.67 percent, as photographed, more common than 95 percent of the named colors we track [3]. It peaks early, in the 1100s, present in 16.0 percent of the 50 paintings we have from that century, though that century's sample is thin [3].\n\nInside a painting it most often plays a light tone, in 42 percent of its 1,800 clearly-ranked appearances, a rank computed within each canvas so varnish cannot fake it [3]. Dutch marine painter Willem van de Velde (I) favors it most, in 5 of his 14 works here, 4.5 times his museums' baseline rate, and it shares canvases with Taupe more than chance alone would predict [3]. In printed English the word \"linen grey\" peaked in use in the 1870s, though that Ngram count covers every sense of the words, not only the color [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "linen, the woven fabric; the exact Ridgway plate and ISCC-NBS block are not recorded in our source",
+   "first_recorded": "1912 (Ridgway, undocumented locator); carried into the 1955 ISCC-NBS dictionary",
+   "source": "Ridgway, Color Standards and Color Nomenclature; ISCC-NBS, NBS Circular 553"
+  },
+  "aka": [
+   "Greyish Putty"
+  ],
+  "siblings": [
+   "mauve-blush",
+   "khaki-web",
+   "pale-ecru-drab",
+   "pale-brownish-drab"
+  ],
+  "parent": "linen",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "drab-grey",
+    "gloss": "an older alternate name for this same swatch"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#BBAC99",
+   "de2000": 3.7,
+   "min_cover": 0.02
+  },
+  "n_present": 2538,
+  "painters": [
+   {
+    "name": "Willem van de Velde (I)",
+    "hits": 5,
+    "n": 14,
+    "lift": 4.5
+   }
+  ],
+  "measured": {
+   "lch": [
+    71.1,
+    11.9,
+    79.2
+   ],
+   "nearest": [
+    [
+     "Mauve Blush",
+     3.5
+    ],
+    [
+     "Khaki (Web)",
+     4.3
+    ],
+    [
+     "Pale Ecru-Drab",
+     4.8
+    ],
+    [
+     "Pale Brownish Drab",
+     5.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912); cited in ISCC-NBS, NBS Circular 553 (1955), nearest category \"brownish pink\"; exact plate/block not recorded in our source",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library and graph: computed LCH and nearest-neighbor distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed, with Google Books Ngram",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "True or false: the 1955 ISCC-NBS dictionary's nearest category for Linen grey is itself a shade of grey.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which decade did printed use of \"linen grey\" peak in, by Google Books Ngram?",
+   "choices": [
+    "1870s",
+    "1900s",
+    "1950s",
+    "1990s"
+   ],
+   "answer": "1870s",
+   "kind": "pick"
+  },
+  {
+   "q": "Inside a painting, Linen grey most often plays which role?",
+   "choices": [
+    "A light",
+    "A shadow",
+    "An accent",
+    "A hidden color"
+   ],
+   "answer": "A light",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Despite its name, the dictionary category closest to Linen grey is a pink, not a grey.",
+  "Linen grey turns up in more than one painting in ten, more common than 95 percent of named colors."
+ ],
+ "words": 269,
+ "status": "checked",
+ "checked": {
+  "by": "batch-36",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

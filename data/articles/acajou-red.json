@@ -1,0 +1,150 @@
+{
+ "slug": "acajou-red",
+ "name": "Acajou Red",
+ "hex": "#A15252",
+ "names": [
+  "Acajou Red"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Acajou Red is a grayish red from Ridgway's 1912 plates, filed by the ISCC-NBS system in 1955, and measured in our color graph as nearly identical to a different Wikipedia-sourced name, Middle Red Purple.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two catalogues, one near-identical red",
+   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* places this hue at plate XIII, hue 1′, tone i, scanned from an aged plate and so approximate [1]. The ISCC-NBS system later filed it as a moderate red [1]. Our library notes that a separately sourced name, Middle Red Purple, measures only 0.9 units away, close enough to call the two the same color under different catalogues [2].\n\nIts closest named relatives in our color graph are [[english-red]] and [[pompeian-red]], both more vivid and within 3.6 units [3].\n\nFurther out are [[redwood]], almost the same at 3.6 units, and [[reddish-chestnut]], also almost the same [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, as photographed, a color within six units of Acajou Red covers at least five per cent of a canvas in 148 works, with the 1400s carrying it at nearly four times the archive's overall rate [4]. It is strikingly linked to Kalighat painting, at nearly 42 times the expected rate, and to works from India and Tibet generally [4]. A 1720 Rasikapriya page carries it across more than 40 per cent of the canvas [4]. It most often shares a canvas with brick and terracotta [4]. These remain photographs of aged, varnished paintings, read as screen colors [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented beyond the 1912/1955 catalogue entries",
+   "first_recorded": "Ridgway, Color Standards and Color Nomenclature (1912), plate XIII, hue 1′, tone i",
+   "source": "ColorHub color library (Ridgway 1912; Wikipedia; ISCC-NBS 1955)"
+  },
+  "aka": [],
+  "siblings": [
+   "english-red",
+   "pompeian-red",
+   "redwood",
+   "reddish-chestnut"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#A15252",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 148,
+  "movements": [
+   {
+    "key": "Kalighat",
+    "hits": 25,
+    "n": 96,
+    "lift": 41.84
+   }
+  ],
+  "company": [
+   {
+    "word": "Brick",
+    "lift": 12.25
+   },
+   {
+    "word": "Terracotta",
+    "lift": 9.87
+   }
+  ],
+  "measured": {
+   "lch": [
+    44.5,
+    35.9,
+    24.8
+   ],
+   "nearest": [
+    [
+     "Middle Red Purple",
+     0.9
+    ],
+    [
+     "English Red",
+     3.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-a.json): Ridgway 1912, plate XIII, hue 1′, tone i; ISCC-NBS 1955, block 19 (R)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), near-duplicate note, CIEDE2000 0.9 to Middle Red Purple",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-a.json), CIEDE2000 look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which separately named color is a near-exact match for Acajou Red?",
+   "choices": [
+    "Middle Red Purple",
+    "Windsor Tan",
+    "Spanish Orange",
+    "Acanthe"
+   ],
+   "answer": "Middle Red Purple",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Acajou Red is strongly overrepresented in Kalighat painting from Bengal.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Acajou Red is just 0.9 units from a different catalogue's Middle Red Purple, essentially the same color twice."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No source in our records documents the choice of the name \"Acajou\" beyond the catalogue entries.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 238
+}

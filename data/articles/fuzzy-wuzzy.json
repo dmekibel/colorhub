@@ -1,0 +1,134 @@
+{
+ "slug": "fuzzy-wuzzy",
+ "name": "Fuzzy Wuzzy",
+ "hex": "#87421F",
+ "names": [
+  "Fuzzy Wuzzy"
+ ],
+ "tier": "commercial",
+ "depth": "short",
+ "lede": "Fuzzy Wuzzy is a warm, reddish brown whose playful, reduplicated name has no documented origin in our sources, even though the color itself turns out to be common in old paintings.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name with no paper trail",
+   "body": "Our data carries only a Wikipedia citation for Fuzzy Wuzzy, and nothing behind it: who coined the name, and why, is undocumented here [1]. The nearest named colors on file are [[red-oxide]] and [[saddle-brown]], at 2.8 and 3.7 ΔE [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Fuzzy Wuzzy appears in 5.94 percent of the 23,781 paintings in our archive, 1,412 of them as photographed, more common than 89 percent of the named colors we track [3]. It peaks in the 1300s, in 13 of 251 paintings, found in 5.2 percent of the 251 paintings (13 of them) we have from that century, 1.8 times the baseline, and inside a painting it most often plays an accent, in 73 percent of its 872 clearest appearances [3]. [[painter:otto-van-veen|Otto van Veen]] is its most devoted painter, using it in 5 of 15 works here, 4.5 times his own museums' baseline [3]. It shares canvases with Dusty mahogany and plain Colour more than chance, with lifts of 2.9 and 3.4 [3]. The earliest match is dated 1000, a plausible age for a common reddish brown that needs no rare pigment to make, a floor and not a first, since the archive's early centuries are thin [3]. In printed English the word peaks in the 1940s, decades before any crayon or paint chip would need to explain where the name came from [3]. It sits in the [[brown]] family, than to near-black [[chocolate]] [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "undocumented in the books consulted",
+   "source": "ColorHub color graph"
+  },
+  "aka": [],
+  "siblings": [
+   "red-oxide",
+   "saddle-brown",
+   "vassar-tan",
+   "russet"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1412,
+  "painters": [
+   "otto-van-veen",
+   "john-singer-sargent",
+   "pierre-auguste-renoir"
+  ],
+  "role": "accent",
+  "measured": {
+   "lch": [
+    36,
+    43,
+    52
+   ],
+   "iscc": "strong brown",
+   "nearest": [
+    [
+     "Red Oxide",
+     2.8
+    ],
+    [
+     "Saddle Brown",
+     3.7
+    ],
+    [
+     "Vassar Tan",
+     3.7
+    ],
+    [
+     "Russet",
+     3.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph: origin undocumented; Wikipedia is the only source on file",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS 1955 block 55 entries; measured LCH and nearest-name match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed; Ngram cache, term 'fuzzy wuzzy'",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does our data say about who coined the name Fuzzy Wuzzy?",
+   "choices": [
+    "A 1912 Ridgway entry",
+    "A named chemist",
+    "It is undocumented",
+    "A Werner nomenclature plate"
+   ],
+   "answer": "It is undocumented",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Fuzzy Wuzzy is rare in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Fuzzy Wuzzy's name has no paper trail in our sources, but the color itself is common in old paintings."
+ ],
+ "words": 267,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

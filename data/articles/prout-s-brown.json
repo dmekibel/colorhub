@@ -1,0 +1,146 @@
+{
+ "slug": "prout-s-brown",
+ "name": "Prout's Brown",
+ "hex": "#78593E",
+ "names": [
+  "Prout's Brown"
+ ],
+ "tier": "person",
+ "depth": "short",
+ "lede": "Prout's Brown is a warm, transparent watercolour brown named for the English artist Samuel Prout, sold in the nineteenth century under the name Liquid Prout's Brown.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A painter's ink-brown",
+   "body": "John Scoffern Salter's 1869 revision of Field's treatise describes, under indelible brown inks, \"a beautiful transparent brown for water-colour artists, known as Liquid Prout's Brown\" [1]. Salter records that it was seemingly named for the English topographical artist Samuel Prout (1783 to 1852), known for architectural watercolours of continental cities [1]. He suggests it was built on bistre or sepia, two older brown pigments, but used with less binding medium, closer to an ink than a paint [1][2].\n\nRidgway catalogued it in 1912 on plate XV, hue 15 prime, and Maerz and Paul's 1930 dictionary lists two further names on the same plate: Raw, dated to 1600, and Terra Umber, dated to 1738 [3]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "In LCH terms the swatch measures lightness 40, chroma 23, hue 66 degrees, a warm, medium-dark brown [4]. Its nearest library neighbor is [[beige-brown|Beige Brown]], about 2.5 units away, with [[pale-brown|Pale Brown]] close behind [4]. Next to [[sepia]] or [[bistre]] it reads as the warmer, more orange one [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this brown, as photographed, in 5,091 of 23,781 paintings, about 21 percent, making it one of the most common tones in the set [5]. It covers over 90 percent of the canvas in several Chinese and Japanese ink landscapes, including a 1279 painting of geese in flight and a 1680 landscape by Kano Chikanobu [5]. These counts are computed color matches on aged, varnished paintings, not pigment identifications [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Samuel Prout, English topographical watercolourist (1783-1852)",
+   "first_recorded": "mid-19th century, as a watercolour ink; catalogued by Ridgway in 1912",
+   "source": "Salter (ed.), Field's Chromatography (1869)"
+  },
+  "aka": [
+   "Liquid Prout's Brown",
+   "Raw",
+   "Terra Umber"
+  ],
+  "siblings": [
+   "beige-brown",
+   "pale-brown",
+   "sepia"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 5091,
+  "top_paintings": [
+   "aic-79716",
+   "cma-149142",
+   "cma-152557"
+  ],
+  "measured": {
+   "lch": [
+    40,
+    23,
+    66
+   ],
+   "nearest": [
+    [
+     "Beige Brown",
+     2.5
+    ],
+    [
+     "Pale Brown",
+     3.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Salter (ed. of Field), Field's Chromatography, entry \"Prout's Brown\" (via The Pigment Compendium, p. 321)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "The Pigment Compendium, \"Prout's Brown\" entry, p. 321",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Ridgway 1912, plate XV; Maerz & Paul 1930, plate 15 L 12",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): CIEDE2000 distances to named neighbors",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes; within the archive's match threshold, at least 5% of the canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Who was Prout's Brown named for?",
+   "choices": [
+    "Samuel Prout, an English topographical watercolourist",
+    "A Dutch pigment merchant",
+    "A character in a novel",
+    "An ISCC-NBS committee member"
+   ],
+   "answer": "Samuel Prout, an English topographical watercolourist",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Prout's Brown was originally sold as a paint, not an ink.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Prout's Brown started life as an ink, not a paint, named for a watercolourist famous for cathedrals and old streets."
+ ],
+ "words": 254,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

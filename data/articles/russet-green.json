@@ -1,0 +1,131 @@
+{
+ "slug": "russet-green",
+ "name": "Russet Green",
+ "hex": "#ABA956",
+ "names": [
+  "Russet Green"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Russet Green is a moderate greenish yellow that Maerz and Paul trace to 1731, the oldest first-recorded date, and it leans toward Scheele's Green rather than any true russet.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "An old name, a green that isn't russet",
+   "body": "Maerz and Paul date Russet Green to 1731, printed on their plate 20 K 1[1]. The Inter-Society Color Council's 1955 census calls it a moderate greenish yellow, Munsell 0.4GY 6.7/5.9 [1].\n\nIts nearest library neighbor is [[scheele-s-green]], a pigment name, only 2.6 color-distance units away, with [[olive-green]] close behind at 2.9 [1]. Two other greens sit almost as close: [[reseda]] and [[cosse-green]], each within 3.4 units [1]. *Russet* is an old word for a coarse reddish-brown wool, which makes this yellow-green a departure from its own family's usual warmth, something no book in our collection explains [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds Russet Green in 171 of 23,781 paintings, about 0.7 percent, as photographed [2]. It peaks in the 1910s, in 11 of 523 paintings, at three and a half times its average rate, and favors Pointillist and Post-Impressionist hands: Niels Larsen Stevns carries it in 5 of 22 dated works, Georges Seurat in 7 of 41 [2]. Switzerland's painters use it four times the archive's base rate [2]. The counts are a computed color match on varnished, photographed canvases, never a pigment identification [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; *russet* is an old reddish-brown cloth word",
+   "first_recorded": "1731, per Maerz & Paul (1930)",
+   "source": "Maerz & Paul via ColorHub library (1930)"
+  },
+  "aka": [],
+  "siblings": [
+   "scheele-s-green",
+   "olive-green",
+   "reseda",
+   "cosse-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 171,
+  "measured": {
+   "lch": [
+    68,
+    44,
+    105
+   ],
+   "nearest": [
+    [
+     "Scheele's Green",
+     2.6
+    ],
+    [
+     "Olive Green",
+     2.9
+    ],
+    [
+     "Reseda",
+     3.3
+    ],
+    [
+     "Cosse Green",
+     3.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz & Paul 1930, ISCC-NBS 1955 entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What year does Maerz and Paul give for Russet Green's first record?",
+   "choices": [
+    "1731",
+    "1830",
+    "1912",
+    "1955"
+   ],
+   "answer": "1731",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Russet Green's nearest library neighbor is Olive Green.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which painter's work shows Russet Green far more than the archive average?",
+   "choices": [
+    "Niels Larsen Stevns",
+    "Rembrandt",
+    "Titian",
+    "Vermeer"
+   ],
+   "answer": "Niels Larsen Stevns",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Russet Green peaks in paintings from the 1910s, three and a half times its average rate."
+ ],
+ "words": 217,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

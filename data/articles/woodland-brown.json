@@ -1,0 +1,126 @@
+{
+ "name": "Woodland Brown",
+ "hex": "#41352E",
+ "names": [
+  "Woodland Brown"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Woodland Brown is a near-black brown that our archive finds in more paintings than any other color, nearly one in six.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A near-black brown",
+   "body": "Maerz and Paul's 1930 dictionary dates Woodland Brown to 1925, plate 8, chip H8 [1]. The ISCC-NBS revision of 1955 files the same chip as \"dark grayish yellow brown,\" block 81 [1]. Its nearest named neighbor is [[blackish-brown]], barely distinguishable by eye, with [[chocolate-brown]] close behind [2]. Further out, [[reddish-black]] and [[brown-olive]] sit in the same small cluster [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a match for Woodland Brown in 3,602 of 23,781 paintings, about 15.2 percent, more common than 98 percent of the named colors we track [3]. It peaks in the 1600s, in 816 of 6,394 paintings, though only 1.2 times the rate expected from that century's share of the archive, since it is common throughout [3]. Inside a painting it most often sits as a mid-tone, in 44 percent of its appearances [3]. It is most over-represented in paintings of Tibet, 3.1 times the expected rate, though the sample is small, 12 of 47 [3]. The earliest archive match dates to 1099, eight centuries before Maerz and Paul recorded the name in 1930 [3]. It also shares canvases more than chance with colors we call Plain mouse and Coffee, a pairing common in interiors and still lifes [3]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1925, per Maerz and Paul (1930)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "blackish-brown",
+   "chocolate-brown",
+   "reddish-black",
+   "brown-olive"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 3602,
+  "measured": {
+   "lch": [
+    23.2,
+    7.6,
+    57.7
+   ],
+   "nearest": [
+    [
+     "Blackish Brown",
+     2.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz & Paul 1930, ISCC-NBS 1955 entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library, nearest-neighbor computation",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "About how common is Woodland Brown in our painting archive?",
+   "choices": [
+    "About one in six paintings",
+    "About one in sixty paintings",
+    "About one in six hundred paintings",
+    "It never appears"
+   ],
+   "answer": "About one in six paintings",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: inside a painting, Woodland Brown is usually a bright highlight.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which near-black library color sits nearest to Woodland Brown?",
+   "choices": [
+    "Blackish Brown",
+    "Dandelion",
+    "Pale lime",
+    "Fiery Rose"
+   ],
+   "answer": "Blackish Brown",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Woodland Brown turns up in close to one painting in six in our archive, more than almost any other named color."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "slug": "woodland-brown",
+ "words": 234
+}

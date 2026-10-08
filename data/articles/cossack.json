@@ -1,0 +1,126 @@
+{
+ "slug": "cossack",
+ "name": "Cossack",
+ "hex": "#2F512A",
+ "names": [
+  "Cossack"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Cossack is a dark yellowish green from Maerz and Paul's 1930 dictionary, apparently borrowed from the name for the horsemen of the Eurasian steppe, though the dictionary gives no reason for the pairing.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A borrowed name, unexplained",
+   "body": "Maerz and Paul list Cossack at #2F512A on plate 38, row K, column 2 of their 1930 dictionary, dating its first recorded use to 1892, decades before the dictionary itself [1]. The ISCC-NBS circular of 1955 files the swatch as \"grayish green\" [1]. Why a dark green took the name of the Cossacks, horsemen historically associated with the Russian and Ukrainian steppe, is undocumented in the 29 books behind our concordance; dark greens were a common dye color for military and riding coats, but no source we checked ties this swatch to that practice [1].\n\nIn our color graph the nearest named neighbor is [[meadowgrass|Meadowgrass]], 3.6 units away [1]. A little further, at 6.3 units, is [[hunter-green|Hunter green]], a fellow dark green with a similarly outdoor name [1]. The Munsell notation is 8.8GY 3.1/4.9, and the swatch sits with our [[green|green]] family, close enough to the yellow modifier in its ISCC name to also sit near [[yellow|yellow]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 0.61% of 23,781 paintings, 146 of them, as photographed, with the within-painting lens counting 61 [2]. That is more common than 52% of our named colors [2]. It peaks in the 1800s, present in 0.6% of the 8,345 paintings from that century, twice the rate its museums would predict [2]. Within a painting it most often sits as a shadow, in 51% of its 61 appearances [2]. Camille Pissarro is its most devoted painter, holding it in 4 of 50 works here, 5.3 times the baseline of the museums his paintings come from [2]. The earliest match dates to 1530, by Girolamo da Carpi, 400 years before Maerz and Paul recorded the name, a floor rather than a first [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1930 (maerz-paul)",
+   "source": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930"
+  },
+  "aka": [],
+  "siblings": [
+   "meadowgrass",
+   "pearl-green",
+   "spruce-green",
+   "hunter-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 146,
+  "measured": {
+   "lch": [
+    31.0,
+    28.6,
+    138.1
+   ],
+   "nearest": [
+    [
+     "Meadowgrass",
+     2.8
+    ],
+    [
+     "Pearl Green",
+     3.9
+    ],
+    [
+     "Spruce green",
+     3.9
+    ],
+    [
+     "Hunter green",
+     4.7
+    ]
+   ]
+  },
+  "iscc_nbs": {
+   "name": "dark yellowish green",
+   "de": 4.6
+  },
+  "munsell": "8.8GY 3.1/4.9"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and name graph (data/library.json, data/graph/): Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930; nearest names by Lab-space distance",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed color match, as photographed",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the ISCC-NBS circular call the Cossack swatch?",
+   "choices": [
+    "Dark yellowish green",
+    "Moderate olive",
+    "Deep forest green",
+    "Dusky green"
+   ],
+   "answer": "Dark yellowish green",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources explain why this green is named Cossack.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Camille Pissarro used Cossack more than five times as often as the museums holding his work would predict."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits; the Cossack reference is undocumented in our sources.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 316
+}

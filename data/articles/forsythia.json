@@ -1,0 +1,132 @@
+{
+ "slug": "forsythia",
+ "name": "Forsythia",
+ "hex": "#D8A142",
+ "names": [
+  "Forsythia"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Forsythia is a moderate orange yellow named for the flowering shrub, recorded in Maerz and Paul's 1930 dictionary and brighter than its archive namesake would suggest.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Named for the shrub, dated to 1925",
+   "body": "Maerz and Paul's 1930 dictionary lists Forsythia on plate 9, swatch K6, first recorded in 1925 [1]. The flowering shrub forsythia, in turn, is named for the Scottish botanist William Forsyth, who helped found what became the Royal Horticultural Society [1]. Our own classification places the color hue in the ISCC-NBS region called moderate orange yellow, Munsell notation 0.3Y 6.9/8.8 [2].\n\nThe closest core-color match in our library is [[marigold]], about five LCH units away [2]. Forsythia sits between [[yellow]] and [[orange]], slightly duller than the shrub's own vivid spring bloom, which runs closer to a pure, saturated yellow [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Forsythia covers at least five percent of the canvas in 606 of them, about 2.5 percent overall, as photographed [3]. It peaks in the 1820s, in 72 of 731 paintings, almost four times the archive's average rate for that decade, and is strongest among Rajput and Pahari Indian court paintings, nearly nine times the average rate [3]. George Dawe carries it in 14 of his 50 archived paintings, and its leading companion word is Marigold [3]. These counts read photographs of varnished paintings, not pigments [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the forsythia shrub, itself named for the Scottish botanist William Forsyth",
+   "first_recorded": "1925 (Maerz and Paul, 1930)",
+   "source": "Maerz and Paul, A Dictionary of Color"
+  },
+  "aka": [],
+  "siblings": [
+   "marigold",
+   "yellow",
+   "orange",
+   "gold"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 606,
+  "measured": {
+   "lch": [
+    70,
+    57,
+    79
+   ],
+   "nearest": [
+    [
+     "Marigold",
+     4.6
+    ]
+   ]
+  },
+  "peak_decade": {
+   "key": 1820,
+   "rate": 0.094,
+   "lift": 3.7
+  },
+  "movements": [
+   {
+    "name": "Rajput",
+    "rate": 0.227,
+    "lift": 8.9
+   },
+   {
+    "name": "Pahari",
+    "rate": 0.203,
+    "lift": 7.98
+   }
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Maerz and Paul, A Dictionary of Color (1930), \"Forsythia\", plate 9 K6",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz and Paul, Ridgway, ISCC-NBS and RAL entries, computed LCH/Munsell/nearest-name match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "The forsythia shrub is named for:",
+   "choices": [
+    "the Scottish botanist William Forsyth",
+    "a French dye house",
+    "the Latin word for yellow",
+    "a Japanese garden"
+   ],
+   "answer": "the Scottish botanist William Forsyth",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Forsythia is most common, in our archive, among Rajput and Pahari Indian court paintings.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Forsythia's color is named for the shrub, which is itself named for a Scottish botanist, two steps removed from any flower at all."
+ ],
+ "words": 221,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

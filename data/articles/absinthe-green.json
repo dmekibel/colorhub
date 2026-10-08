@@ -1,0 +1,155 @@
+{
+ "slug": "absinthe-green",
+ "name": "Absinthe Green",
+ "hex": "#A6B46C",
+ "names": [
+  "Absinthe Green"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Absinthe Green is a moderate yellow green from Ridgway's 1912 plates, filed by the ISCC-NBS system in 1955, and strongly overrepresented in Impressionist and Rajput painting in our archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A 1912 plate, a 1955 filing",
+   "body": "Ridgway's *Color Standards and Color Nomenclature* (1912) places this hue at plate XXXI, hue 29″, a scan of an aged printed page and so only approximate [1]. The ISCC-NBS system later filed it as a grayish greenish yellow [1]. Our sources do not document why the name invokes the drink absinthe rather than simply describing the hue; that connection is left unconfirmed here [2].\n\nIts closest named relatives are [[deep-chrysolite-green]], almost indistinguishable at 2.9 units, and [[neva-green]], a touch more vivid [3].\n\nFurther out are [[lily-green]], darker at 3.5 units, and [[light-olive]], more vivid at 3.6 [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, as photographed, a color within six units of Absinthe Green covers at least five per cent of a canvas in 87 works, two-thirds of that as highlight rather than mid-tone or shadow [4]. Auguste Renoir is the strongest painter match, present in five of his ninety-six archived paintings, over fourteen times the expected rate, and the style of Rajput painting carries it at over fourteen times the archive's rate too [4]. It most often shares a canvas with khaki and sage [4]. These are photographs of aged, varnished paintings, read as screen colors [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; possibly evokes the drink absinthe, but our sources do not confirm this",
+   "first_recorded": "Ridgway, Color Standards and Color Nomenclature (1912), plate XXXI, hue 29″",
+   "source": "ColorHub color library (Ridgway 1912; ISCC-NBS 1955)"
+  },
+  "aka": [],
+  "siblings": [
+   "deep-chrysolite-green",
+   "neva-green",
+   "lily-green",
+   "light-olive"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#A6B46C",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 87,
+  "role": {
+   "highlight": 0.66,
+   "mid": 0.31,
+   "shadow": 0.03
+  },
+  "painters": [
+   {
+    "name": "Auguste Renoir",
+    "hits": 5,
+    "n": 96,
+    "lift": 14.24
+   }
+  ],
+  "company": [
+   {
+    "word": "Khaki",
+    "lift": 16.45
+   },
+   {
+    "word": "Sage",
+    "lift": 8.95
+   }
+  ],
+  "measured": {
+   "lch": [
+    70.8,
+    38.7,
+    115.1
+   ],
+   "nearest": [
+    [
+     "Deep Chrysolite Green",
+     2.9
+    ],
+    [
+     "Neva Green",
+     3.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-a.json): Ridgway 1912, plate XXXI, hue 29″; ISCC-NBS 1955",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library, standard-system tier classification",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-a.json), CIEDE2000 look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which painter's work is most strongly linked to Absinthe Green, relative to how much of the archive he makes up?",
+   "choices": [
+    "Auguste Renoir",
+    "John Singer Sargent",
+    "Claude Monet",
+    "Paul Gauguin"
+   ],
+   "answer": "Auguste Renoir",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources confirm Absinthe Green is named for the drink.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Absinthe Green shows up over fourteen times more than chance in Rajput painting."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-08",
+  "issues": [
+   "Connection to the drink absinthe is plausible by name alone but unconfirmed in our sources.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 226
+}

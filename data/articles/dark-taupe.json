@@ -1,0 +1,107 @@
+{
+ "slug": "dark-taupe",
+ "name": "Dark Taupe",
+ "hex": "#7F684E",
+ "names": [
+  "Dark Taupe"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Dark Taupe is a deep, warm grey-brown, a shade down from [[taupe]] and classed by the ISCC-NBS system as a grayish yellowish brown, one of the most common swatches in our archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "No book in our library records a name at this position before the xkcd color survey of 2010, where the public supplied the plain descriptive phrase \"dark taupe\" [1]. Its origin before that survey is undocumented here [1].\n\nThe nearest ISCC-NBS 1955 block is grayish yellowish brown, a little over 3 CIEDE2000 units away, with a Munsell reading near 9.8YR in hue [1]. Its nearest named neighbors in our library are [[taupe]], [[sepia]] and [[umber]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a match for this swatch in 5,350 of 23,781 paintings, or about 22 per cent, as photographed [2]. It is far more common in early paintings, running 3.4 times the archive's baseline rate in the 1270s and still over 3 times the baseline across the whole 1100s [2]. It is especially common in Korean, Japanese and Chinese works, and the word \"Sepia\" shares its canvases more than chance [2]. Across all the paintings that carry it, it splits fairly evenly between a mid-tone and a highlight [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "taupe, darkened",
+   "first_recorded": "xkcd color survey, 2010",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "sepia",
+   "umber",
+   "pale-taupe"
+  ],
+  "parent": "taupe",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+  "n_present": 5350,
+  "rate": 0.225,
+  "role": {
+   "mid": 0.5,
+   "highlight": 0.36,
+   "shadow": 0.14
+  },
+  "top_painting": {
+   "id": "aic-13954",
+   "title": "Visiting Dai Kui on a Snowy Night",
+   "painter": "Xia Kui",
+   "year": 1368,
+   "cover": 0.924
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, xkcd color survey 2010), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "About what share of our archived paintings carry a match for Dark Taupe?",
+   "choices": [
+    "About 22 per cent",
+    "About 2 per cent",
+    "Essentially none"
+   ],
+   "answer": "About 22 per cent",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dark Taupe is rarer in paintings from the 1100s than in later centuries.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dark Taupe appears in over a fifth of our archived paintings, and more so the further back you go."
+ ],
+ "words": 194,
+ "status": "checked",
+ "checked": {
+  "by": "writer-lane",
+  "date": "2026-10-08",
+  "issues": [
+   "No book source for the name; xkcd survey only",
+   "lint 2026-10-09"
+  ]
+ }
+}

@@ -1,0 +1,120 @@
+{
+ "slug": "dark-walnut",
+ "name": "Dark Walnut",
+ "hex": "#352925",
+ "names": [
+  "Dark walnut"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Dark Walnut is a near-black brown named for the wood, listed in our data only through a Japanese traditional color source, and one of the most common colors in our painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A wood's name, thinly recorded",
+   "body": "Our naming data classes Dark Walnut as a plant-and-landscape word, after the tree and its wood, rather than a pigment [1]. As with [[dark-peacock|Dark Peacock]], it is not recorded in Ridgway's 1912 atlas or the ISCC-NBS lists of 1955; our only traced source is a Japanese traditional color list, undated in that source [1]. The hex, #352925, maps to a computed ISCC-NBS-style classification of \"dark grayish brown,\" about 5.1 units from that block's center, even though no ISCC-NBS entry carries this exact name [1]. In LCH terms it measures lightness 18, chroma 7, hue 45 degrees: very dark and only lightly saturated [1].\n\nIts nearest distinct neighbor by computed color distance is [[pale-black-tone|Pale Black-Tone]], 2.8 units away and read in our data as \"almost the same\" [2]. One step further is [[zulu|Zulu]], 3.2 units off, also \"almost the same\" [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a close match covers enough of the canvas in 2,803, as photographed, which puts it above 98 percent of the named colors we track by frequency, among the most common in the whole archive [3]. It peaks in paintings from the 1600s, where it is found at 1.2 times the rate expected from that century's share of the archive [3]. Eastman Johnson is its most devoted painter here, with the color present in 6 of 18 of his works, well above the baseline of the museums those works come from [3]. Inside a painting it most often plays a mid-tone, in 44 percent of its matches, by lightness rank within the canvas [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "walnut wood",
+   "first_recorded": "undocumented in the sources consulted beyond a Japanese traditional list",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "pale-black-tone",
+   "zulu",
+   "woodland-brown",
+   "chocolate-brown"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2803,
+  "measured": {
+   "lch": [
+    18,
+    7,
+    45
+   ],
+   "nearest": [
+    [
+     "Pale Black-Tone",
+     2.8
+    ],
+    [
+     "Zulu",
+     3.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/nodes-d.json): Dark Walnut — tier classification, Japanese traditional color source, computed ISCC-NBS-style block",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-d.json): nearest distinct neighbors by CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings, as photographed, data/graph/fieldnotes/d.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "True or false: Dark Walnut is among the most common colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which painter in our archive is most devoted to Dark Walnut?",
+   "choices": [
+    "Eastman Johnson",
+    "Claude Monet",
+    "Eugène Boudin",
+    "Henri de Toulouse-Lautrec"
+   ],
+   "answer": "Eastman Johnson",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Dark Walnut is one of the most common colors in our entire 23,781-painting archive, found in nearly 14 percent of them."
+ ],
+ "words": 287,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No book concordance hits; the name is thinly documented in our sources, said plainly in the article.",
+   "lint 2026-10-09"
+  ]
+ }
+}

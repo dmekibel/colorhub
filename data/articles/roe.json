@@ -1,0 +1,129 @@
+{
+ "slug": "roe",
+ "name": "Roe",
+ "hex": "#C09D67",
+ "names": [
+  "Roe"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Roe is a light yellowish brown that Maerz and Paul recorded in 1916; whether the name points to fish roe or to a roe deer's coat is undocumented in our sources.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name without a stated origin",
+   "body": "Maerz and Paul's 1930 dictionary gives plate 12 H 6 and dates the name to 1916, but does not explain which sense of the word \"roe\" it intends [1]. Fish roe and the coat of a roe deer are both plausible readings for a tan this warm, but neither is confirmed here, so the origin stays undocumented [1]. The nearest ISCC-NBS block by computed distance is 76, light yellowish brown, 2.4 units from the hex #C09D67, a close match even without a direct 1955 listing [1].\n\nIts closest library neighbor is [[camel|Camel]], under four units away, with [[dark-olive-buff|Dark Olive-Buff]] a little further out [1]. Beside [[rustic-drab|Rustic Drab]], a cooler, greyer tan from the same batch of dictionary names, Roe reads noticeably warmer and more golden [1]. [[yellowish-camel|Yellowish camel]] sits a little past Camel in the same tight cluster of tans [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within six units of it covers at least five percent of the canvas in 3,515 of our 23,781 archive paintings, as photographed, more common than 96 percent of our named colors [2]. It most often plays a light tone, 42 percent of the 2,327 paintings our within-painting lens finds it in, and it is strongly over-represented in Mughal painting, at 2.8 times the expected rate [2]. It peaks in paintings from the 1300s and 1400s alike, both well above baseline, and John Singer Sargent carries it in 34 of his 287 works here [2]. The earliest dated painting is from 799, far earlier than the name's own 1916 record, a floor set by thin early coverage rather than a true first sighting [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; possibly fish roe or a roe deer's coat",
+   "first_recorded": "1916 (Maerz & Paul, 1930)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "camel",
+   "dark-olive-buff",
+   "rustic-drab",
+   "yellowish-camel"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2327,
+  "n_present_painting_level": 3515,
+  "measured": {
+   "lch": [
+    66.7,
+    33.6,
+    79.9
+   ],
+   "nearest": [
+    [
+     "Camel",
+     3.9
+    ],
+    [
+     "Dark Olive-Buff",
+     5.4
+    ]
+   ]
+  },
+  "movements": [
+   {
+    "name": "Mughal",
+    "hits": 65,
+    "n": 168,
+    "lift": 2.8
+   }
+  ],
+  "painters": [
+   {
+    "name": "John Singer Sargent",
+    "hits": 34,
+    "n": 287
+   }
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz and Paul 1930, plate 12 H 6, first recorded 1916; nearest ISCC-NBS 1955 block 76",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does our library record about the source of the name \"Roe\"?",
+   "choices": [
+    "Nothing; the origin is undocumented",
+    "It names a pigment made from fish roe",
+    "It is a Ridgway 1912 coinage",
+    "It is named after a painter called Roe"
+   ],
+   "answer": "Nothing; the origin is undocumented",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Roe is one of the rarer colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Roe covers part of nearly one painting in six in our archive, yet no source explains its name."
+ ],
+ "words": 292,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); the fish-roe / roe-deer readings are offered as plausible, not confirmed.",
+   "lint 2026-10-09"
+  ]
+ }
+}

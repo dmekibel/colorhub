@@ -1,0 +1,115 @@
+{
+ "slug": "yew-green",
+ "name": "Yew Green",
+ "hex": "#556147",
+ "names": [
+  "Yew Green"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Yew Green is a dull, dark olive green from Robert Ridgway's 1912 “Color Standards and Color Nomenclature,” and our archive finds it in paintings six centuries before Ridgway wrote the name down.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A tree's name for a drab green",
+   "body": "Ridgway's 1912 dictionary lists Yew Green at hex #556147, grouped with the plant, animal and landscape names rather than the pigment or person names [1]. The Inter-Society Color Council's 1955 catalog of American color names repeats it, filing it in the block it calls grayish olive green [1]. Maerz and Paul's 1930 dictionary is also cited by that 1955 circular as recording the name [1].\n\nIts nearest neighbor in our color graph is [[ivy-green|Ivy Green]], 2.9 units away in color difference and yellower [1]. To the eye it sits closest to the basic term [[hunter-green|Hunter green]], 8.8 units off, with [[old-bamboo|Old Bamboo]] and [[varley-s-green|Varley's Green]] almost indistinguishable neighbors on either side [1]. The yew itself is a dark, dense evergreen, and Ridgway's swatch reads as a greyed-down version of its foliage rather than a bright leaf green [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to this green in 3.35% of 23,781 paintings, 796 of them, as photographed; the stricter within-painting lens counts it in 478 [2]. That makes it more common than 82% of the named colors in our set [2]. It peaks in the 1900s, in 84 of 1,674 paintings, present in 5.0% of the 1,674 paintings (84 of them) we have from that century, 2.4 times the rate its museums would predict [2]. Inside a painting it most often turns up as a hidden color, in 45% of its 478 appearances, by lightness rank rather than by brand [2]. Henri Rousseau is its most devoted painter here, holding it in 6 of his 13 works, 7.6 times the baseline of the museums those paintings come from [2]. The earliest match we have is from 1275, thirty-seven years before Ridgway's earliest dated plate, and 637 years before his 1912 book wrote the name down, a floor rather than a first, since the archive's early centuries are thin and a color match in an aged photograph is not proof of a pigment [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the yew tree",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930"
+  },
+  "aka": [],
+  "siblings": [
+   "ivy-green",
+   "hunter-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 796,
+  "measured": {
+   "lch": [
+    39.5,
+    16.6,
+    126.5
+   ],
+   "nearest": [
+    [
+     "Ivy Green",
+     2.9
+    ],
+    [
+     "Hunter green",
+     8.8
+    ]
+   ]
+  },
+  "iscc_nbs": {
+   "name": "grayish olive green",
+   "de": 3.7
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912 (plate XXXI), ISCC-NBS 1955 (block 125), Maerz & Paul 1930",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does Ridgway file Yew Green in his 1912 dictionary?",
+   "choices": [
+    "With plant, animal and landscape names",
+    "With named persons",
+    "With pigment names",
+    "With trade names"
+   ],
+   "answer": "With plant, animal and landscape names",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our archive's earliest match to Yew Green comes from after Ridgway's 1912 book.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A match to Yew Green turns up in our archive 637 years before Ridgway wrote the name down."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits in the 29 books; written from ColorHub library and archive data only.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 352
+}

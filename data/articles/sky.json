@@ -1,0 +1,138 @@
+{
+ "slug": "sky",
+ "name": "Sky",
+ "hex": "#82CAFC",
+ "names": [
+  "Sky"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Sky is a pale blue whose 'sky blue' phrasing Maerz and Paul trace to 1586, the earliest date, though the exact swatch itself turns up in only six of our archive's paintings.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The oldest name in this batch",
+   "body": "Maerz and Paul trace a 'sky blue' phrasing back to 1586, the earliest first-recorded date anywhere, and the Inter-Society Color Council's 1955 census files related Sky-family blues across two neighboring blocks, 181 and 185 [1]. This exact swatch, #82CAFC, is also independently listed by xkcd's 2010 crowd-sourced survey, the CSS color keywords, and Wikipedia, which is why ColorHub's library cites all four sources together [1].\n\nIts closest library neighbor, within two units, is a near-duplicate name, *Light Sky Blue* [1]. Among colors with their own distinct name and page, the nearest are [[aero]], [[light-cornflower-blue]], and [[baby-blue-eyes]], each four to five units off, with [[sky-blue]] a little further at just over six [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this exact shade in only 6 of 23,781 paintings, as photographed, reading as a highlight two-thirds of the time [2]. The small sample makes any painter or country pattern unreliable here [2]. Michel Pastoureau's history of blue argues that pale, sky-toned blues were long a minor color in Europe, overtaken in status by black, white, and red [3]. He dates its rise to a favorite only to the eighteenth century, a claim about the real sky's place in culture, not a measurement of this specific library swatch [3]. The archive count is a computed color match on varnished, photographed canvases, never a pigment identification [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the sky",
+   "first_recorded": "1586, per Maerz & Paul (1930)",
+   "source": "Maerz & Paul (1930) / ISCC-NBS (1955) via ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "aero",
+   "light-cornflower-blue",
+   "baby-blue-eyes",
+   "pale-cerulean"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 6,
+  "measured": {
+   "lch": [
+    79,
+    33,
+    254
+   ],
+   "nearest": [
+    [
+     "Aero",
+     4.5
+    ],
+    [
+     "Light Cornflower Blue",
+     4.8
+    ],
+    [
+     "Baby Blue Eyes",
+     5.3
+    ],
+    [
+     "Pale Cerulean",
+     5.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz & Paul 1930, ISCC-NBS 1955, CSS, xkcd 2010, Wikipedia entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Blue, ch. 10 (\"4 The Favorite Color: The Eighteenth to the Twentieth Century\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What year does Maerz and Paul give for a 'sky blue' phrasing — the earliest date in this batch?",
+   "choices": [
+    "1586",
+    "1912",
+    "1955",
+    "1821"
+   ],
+   "answer": "1586",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our archive finds this exact shade of Sky in dozens of paintings.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "According to Pastoureau, when did pale blue become a favorite color in Europe, after centuries as a minor one?",
+   "choices": [
+    "The eighteenth century",
+    "The Renaissance",
+    "Ancient Rome",
+    "The twentieth century"
+   ],
+   "answer": "The eighteenth century",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Sky's 1586 first record is the earliest date anywhere of twelve colors, but the exact swatch itself turns up in only 6 of our 23,781 paintings."
+ ],
+ "words": 249,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

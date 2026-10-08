@@ -1,0 +1,143 @@
+{
+ "slug": "calliste-green",
+ "name": "Calliste Green",
+ "hex": "#92A03F",
+ "names": [
+  "Calliste Green"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Calliste Green is a strong yellow-green from a 1912 color plate, closest in our archive to the greens Georges Seurat and Paul Gauguin reached for.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A plate from 1912, filed by Maerz and Paul",
+   "body": "Maerz and Paul's 1930 dictionary of color dates the name to 1912, at plate 19, column L, chip 6, hex #92A03F [1]. No Ridgway or ISCC-NBS citation is recorded for it in this library, so the dictionary entry is its only documented source [1]. Its Munsell renotation is 3.2GY 6.2/7.1, a strong, fairly saturated yellow-green [1]. The sources consulted here do not explain the name \"Calliste,\" and its origin is undocumented [1].\n\nThe nearest library names are [[lettuce-green|Lettuce Green]], a duller, more olive green about 4.3 units away, and [[reseda|Reseda]], also duller, at 4.5 units [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within six units of Calliste Green covers at least five per cent of the canvas in 51 of 23,781 paintings, about 0.2 per cent, as photographed [2]. It peaks in paintings from the 1900s decade, and three painters carry it far above the archive average: Niels Larsen Stevns, Georges Seurat and Paul Gauguin, each more than twenty-five times the base rate [2]. Its earliest appearance is a 1613 *Crucifixion* by Luis Tristán, where it covers only eight per cent of the canvas [2]. These are photographs of varnished paintings, read as screen colors [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "Maerz & Paul, 1930 (dated 1912), plate 19 L 6",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "lettuce-green",
+   "reseda",
+   "neva-green",
+   "scheele-s-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#92A03F",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 51,
+  "painters": [
+   {
+    "name": "Niels Larsen Stevns",
+    "hits": 3,
+    "n": 22,
+    "lift": 63.59
+   },
+   {
+    "name": "Georges Seurat",
+    "hits": 4,
+    "n": 41,
+    "lift": 45.49
+   },
+   {
+    "name": "Paul Gauguin",
+    "hits": 3,
+    "n": 50,
+    "lift": 27.98
+   }
+  ],
+  "measured": {
+   "rgb": [
+    146,
+    160,
+    63
+   ],
+   "lch": [
+    63.0,
+    51.2,
+    111.6
+   ],
+   "nearest": [
+    [
+     "Lettuce Green",
+     4.3
+    ],
+    [
+     "Reseda",
+     4.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz & Paul 1930 (plate 19 L 6) entry",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match within ΔE 6, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which two Post-Impressionist painters use Calliste Green far above the archive average?",
+   "choices": [
+    "Seurat and Gauguin",
+    "Monet and Renoir",
+    "Van Gogh and Cezanne",
+    "Klimt and Munch"
+   ],
+   "answer": "Seurat and Gauguin",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Calliste Green is also recorded in the ISCC-NBS 1955 dictionary.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Calliste Green shows up far more in Seurat's and Gauguin's paintings than almost anywhere else in the archive."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "nearest-neighbor distance (and, for calliste-green, the named colors) did not match data/graph/edges-*.json 'la' / a direct CIEDE2000 recomputation; corrected.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 216
+}

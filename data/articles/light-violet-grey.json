@@ -1,0 +1,130 @@
+{
+ "name": "Light Violet-Grey",
+ "hex": "#8B8E8F",
+ "names": [
+  "Light Violet-Grey"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Light Violet-Grey is a near-neutral medium grey, filed by Ridgway in 1912 under the violet family though its measured chroma is almost zero.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A violet with almost no color left",
+   "body": "Our naming data files this as a family-word variant of [[light-violet|Light Violet]], the way a modifier like \"light\" or \"dark\" extends a base name, rather than from a separate source [1]. Ridgway's 1912 atlas plots it on plate LII at hue 59⁵, and its Munsell notation reads N 5.8, meaning neutral: the recorded chroma is close enough to zero that the \"violet\" in the name barely survives measurement [1]. In LCH terms it is lightness 59, chroma just 1, hue 226 degrees [1].\n\nIts nearest computed neighbors are, unsurprisingly, named grey: [[grey|Grey]] itself, 2.8 units off, and [[deep-gull-grey|Deep Gull Grey]] and [[traffic-grey-a|Traffic Grey A]], both close [2]. Maerz and Paul's 1930 dictionary separately recorded a near match as Puritan Grey in 1912 [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a close match covers enough of the canvas in 468, as photographed (255 by the stricter within-painting measure), which makes it more common than 74 percent of the named colors we track [4]. [[painter:pierre-puvis-de-chavannes|Pierre Puvis de Chavannes]] used it most: it appears in 5 of his 25 works here, 6.6 times the rate of the museums those works come from [4]. On canvas it keeps company with [[dim-grey|Dim Grey]] and [[greyish-black|Greyish Black]] far more than chance, at 16.1 and 11.5 times the expected rate [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a modifier on Light Violet; measured as a near-neutral grey",
+   "first_recorded": "Ridgway, 1912",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "Puritan Grey"
+  ],
+  "siblings": [
+   "grey",
+   "deep-gull-grey",
+   "dim-grey"
+  ],
+  "parent": "light-violet",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 468,
+  "measured": {
+   "lch": [
+    59,
+    1,
+    226
+   ],
+   "nearest": [
+    [
+     "Grey",
+     2.8
+    ],
+    [
+     "Deep Gull Grey",
+     3.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/nodes-l.json): Light Violet-Grey — Ridgway 1912, plate LII, hue 59⁵, Munsell N 5.8",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-l.json): nearest distinct neighbors by CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Light Violet-Grey entry, Maerz & Paul 1930 cross-reference",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings, as photographed, data/graph/fieldnotes/l.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the Munsell notation \"N 5.8\" indicate about Light Violet-Grey?",
+   "choices": [
+    "It is a neutral, with almost no measured chroma",
+    "It is a strong violet",
+    "It is a warm brown",
+    "It is a bright green"
+   ],
+   "answer": "It is a neutral, with almost no measured chroma",
+   "kind": "pick"
+  },
+  {
+   "q": "Which painter used Light Violet-Grey most often in our archive?",
+   "choices": [
+    "Pierre Puvis de Chavannes",
+    "Claude Monet",
+    "Alfred Sisley",
+    "John Singer Sargent"
+   ],
+   "answer": "Pierre Puvis de Chavannes",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Despite the name, Light Violet-Grey measures as a near-neutral grey, with a chroma close enough to zero that its Munsell notation drops the hue altogether."
+ ],
+ "words": 235,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No book concordance hits for this slug; written from the color graph, library and archive data only.",
+   "lint 2026-10-09"
+  ]
+ },
+ "slug": "light-violet-grey"
+}

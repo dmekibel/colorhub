@@ -1,0 +1,119 @@
+{
+ "slug": "greenish-slate-black",
+ "name": "Greenish Slate-Black",
+ "hex": "#324947",
+ "names": [
+  "Greenish Slate-Black"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Greenish Slate-Black is a very dark, greened grey named for the rock, slate, standing almost on top of Dark Slate Grey and Bluish Slate-Black in the ISCC-NBS system's 1955 list.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A near-black slate",
+   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* records this hue at plate XLVIII, hue 37″″, tone m [1]. The ISCC-NBS system of 1955 filed it in block 151, a dark grayish green, alongside several near-identical dark slates [2]. Slate, the fine-grained rock split into thin dark sheets for roofing, is dark grey with a slight cast of color depending on the quarry; this name leans that cast toward green [2].\n\nThe nearest named colors are [[dark-slate-grey|Dark Slate Grey]], 3.0 units away, and [[bluish-slate-black|Bluish Slate-Black]], 3.1 units away and bluer; at this lightness, 29 on a 0–100 scale, small shifts in hue produce several different names for what the eye reads as one near-black [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Greenish Slate-Black appears in 421 of our 23,781 paintings, as photographed, more common than 70 percent of the archive's named colors [3]. It peaks in the 1900s, in 45 of 1,674 paintings, at 3.0 times the expected rate, and Paul Cézanne is its most devoted painter, carrying it in 8 of his 50 works here, 7.4 times his museums' baseline [3]. Inside a painting it most often plays a hidden color, buried in shadow [3]. The earliest match is dated 1099, 813 years before Ridgway's 1912 record — a look-alike hue in an aged photograph, not proof that slate pigment reached that canvas, a floor and not a first, since the archive's early centuries are thin [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "slate, the dark roofing rock",
+   "first_recorded": "1912, per Ridgway",
+   "source": "Ridgway, Color Standards and Color Nomenclature (1912), plate XLVIII"
+  },
+  "aka": [],
+  "siblings": [
+   "dark-slate-grey",
+   "bluish-slate-black",
+   "black-green",
+   "dusky-dull-green"
+  ],
+  "parent": null,
+  "children": null,
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 421,
+  "measured": {
+   "lch": [
+    29,
+    10,
+    190
+   ],
+   "nearest": [
+    [
+     "Dark Slate Grey",
+     3.0
+    ],
+    [
+     "Bluish Slate-Black",
+     3.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XLVIII, hue 37″″",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS 1955 block 151, look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What material gives Greenish Slate-Black its name?",
+   "choices": [
+    "Slate, a roofing rock",
+    "Charcoal",
+    "Volcanic ash",
+    "Peat"
+   ],
+   "answer": "Slate, a roofing rock",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Greenish Slate-Black is easy to tell apart from every other named dark slate color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "At this darkness, a 3-unit shift in hue is enough to earn a whole new name."
+ ],
+ "words": 259,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

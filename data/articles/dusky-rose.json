@@ -1,0 +1,112 @@
+{
+ "slug": "dusky-rose",
+ "name": "Dusky Rose",
+ "hex": "#BA6873",
+ "names": [
+  "Dusky Rose"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Dusky Rose is a muted, slightly brownish pink, built by putting the modifier dusky in front of the base color rose rather than naming anything in particular.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier on rose",
+   "body": "Dusky Rose puts the modifier word dusky in front of the base color [[rose]], in the compound-modifier grammar ColorHub's library uses for descriptive names like this one [1]. The name entered the xkcd color survey of 2010, where volunteers labeled a swatch grid with whatever words they chose, rather than any older dictionary or standard [1].\n\nIts nearest named neighbor is [[dusty-rose]], only 3.5 units off, close enough on screen to read as the same pink [1]; [[mayflower]] sits 4.8 units off, and [[antique-rose]] 5.5 [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color within six units of this swatch in only 34 of 23,781 paintings, 0.14 percent, as photographed; looking inside each painting for at least five percent coverage narrows that to 11 [2]. That makes it rarer than 67 percent of the named colors in our library [2]. Inside a painting it most often plays an accent, in 55 percent of its 11 appearances by lightness rank [2].\n\nThe earliest match dates to the year 1000, a thousand years before the name's 2010 record, so it marks a look-alike hue in an aged photograph, not a surviving pigment or dye [2]. In printed English the word rose fastest in the 1920s, well before the name reached xkcd's volunteers, a reminder that a search for \"dusky rose\" in that era is catching the flower and the general phrase, not yet this specific color [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: dusky + rose",
+   "first_recorded": "xkcd color survey, 2010",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "dusty-rose",
+   "mayflower",
+   "antique-rose",
+   "swiss-rose"
+  ],
+  "parent": "rose",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 34,
+  "n_within_painting": 11,
+  "pct_archive": 0.14,
+  "rank_pct": 67,
+  "measured": {
+   "lch": [
+    54,
+    35,
+    14
+   ],
+   "nearest": [
+    [
+     "Dusty Rose",
+     3.5
+    ],
+    [
+     "Mayflower",
+     4.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; xkcd color survey 2010), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which named color sits closest to Dusky Rose?",
+   "choices": [
+    "Dusty Rose",
+    "Mayflower",
+    "Antique Rose"
+   ],
+   "answer": "Dusty Rose",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dusky Rose comes from a sourced historical color standard.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dusky Rose and Dusty Rose sit close enough to pass for the same pink."
+ ],
+ "words": 257,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}

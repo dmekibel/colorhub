@@ -1,0 +1,122 @@
+{
+ "slug": "copper-crayola",
+ "name": "Copper (Crayola)",
+ "hex": "#DA8A67",
+ "names": [
+  "Copper (Crayola)"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Copper (Crayola) is a muted orange-brown from Crayola's crayon list, named for the metal but noticeably lighter and pinker than metallic copper itself.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A crayon named for a metal",
+   "body": "Our record of this name traces to Wikipedia's inventory of Crayola crayon colors, which names it as a Crayola variant of [[copper]] rather than citing a dictionary or standard [1]. Crayola does not publish when the crayon entered the box or who chose it, so both are undocumented here [1]. The parenthetical \"(Crayola)\" marks it apart from the plainer, more metallic [[copper]] in our library [1]. Its nearest named neighbors by color distance are [[onion-skin-pink|Onion-Skin Pink]], a duller rose at 3.6 units, and [[dark-peach|Dark Peach]], a more vivid version at 3.8 [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color this close to Copper (Crayola) is unusually common in our archive: 212 of 23,781 paintings, as photographed, about 0.89 percent, more common than 64 percent of the named colors we track [3]. It peaks in paintings from the 1500s, at 2.2 times the expected rate, and it is most often an accent, in 71 percent of its matches [3]. Amedeo Modigliani is its most devoted painter, carrying it in four of his eighteen works here, 5.7 times the baseline for the museums those paintings come from [3]. The earliest match dates to 1150, long before Crayola existed [3]. That is centuries before the name's own record, a floor on the hue's age, not a first use of either the name or a pigment."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the metal copper",
+   "first_recorded": "undocumented in the sources consulted (a Crayola crayon name)",
+   "source": "Wikipedia, list of Crayola crayon colors"
+  },
+  "aka": [],
+  "siblings": [
+   "onion-skin-pink",
+   "dark-peach",
+   "testaceous"
+  ],
+  "parent": "copper",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 212,
+  "n_within": 139,
+  "role": "accent 71%",
+  "century_peak": "1500s, 2.2x expected",
+  "painter": "Amedeo Modigliani, 5.7x",
+  "measured": {
+   "lch": [
+    65.0,
+    41.4,
+    49.4
+   ],
+   "nearest": [
+    [
+     "Onion-Skin Pink",
+     3.6
+    ],
+    [
+     "Dark Peach",
+     3.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "Wikipedia, \"List of Crayola crayon colors\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/List_of_Crayola_crayon_colors"
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph, look-alike edges (data/graph/edges-c.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes); counts are computed color matches on photographs of varnished, aged canvases, not pigment identifications",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What metal does Copper (Crayola) take its name from?",
+   "choices": [
+    "Copper",
+    "Bronze",
+    "Brass",
+    "Iron"
+   ],
+   "answer": "Copper",
+   "kind": "pick"
+  },
+  {
+   "q": "Which painter in our archive carries a color near Copper (Crayola) far more than the baseline for his museums?",
+   "choices": [
+    "Amedeo Modigliani",
+    "Claude Monet",
+    "Gustav Klimt",
+    "John Singer Sargent"
+   ],
+   "answer": "Amedeo Modigliani",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Copper (Crayola) is a crayon color that Amedeo Modigliani's paintings carry far more than most."
+ ],
+ "words": 238,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}

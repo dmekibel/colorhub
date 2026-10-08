@@ -1,0 +1,118 @@
+{
+ "slug": "dirty-yellow",
+ "name": "Dirty Yellow",
+ "hex": "#CDC50A",
+ "names": [
+  "Dirty Yellow"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Dirty Yellow is a dense, greenish yellow named by the 2010 xkcd color survey, and one of the rarest colors we can match in painting.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A survey name for a vivid, murky yellow",
+   "body": "The only recorded source for Dirty Yellow is the xkcd survey of 2010, following the plain modifier grammar *dirty* plus [[yellow]] [1]. At hex #CDC50A it measures lightness 78 and chroma 79 in LCH, close in strength to the nearest ISCC-NBS block, a vivid greenish yellow only 1.1 units off, despite the word *dirty* in its name [1].\n\nIts closest named neighbor is [[puke-yellow|Puke Yellow]], 2.3 units away and almost the same color, another xkcd name from the same 2010 survey [2]. Further out sit [[piss-yellow|Piss Yellow]], 4.1 units off and lighter, and [[citrine|Citrine]], 4.4 units off and lighter still [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this yellow in only 2 of 23,781 paintings, as photographed, making it one of the rarest matches in the whole set [3]. Both are from Asian art: an 1700 Pahari court scene of King Bali and a Bonnard interior of 1891, a combination too thin to support any claim about era or region [3]. These are screen matches on photographs of varnished paintings, not a record of any pigment, and a count this small is closer to noise than to a pattern [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a modifier of yellow: dirty + yellow",
+   "first_recorded": "2010 (xkcd color survey)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "yellow",
+   "puke-yellow",
+   "piss-yellow",
+   "citrine"
+  ],
+  "parent": "yellow",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+  "n_present": 2,
+  "pct": 0.01,
+  "measured": {
+   "lch": [
+    77.8,
+    78.9,
+    100.4
+   ],
+   "nearest": [
+    [
+     "Puke Yellow",
+     2.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-d.json): xkcd color survey, 2010",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph look-alikes (data/graph/edges-d.json), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which survey first records the name Dirty Yellow in our library?",
+   "choices": [
+    "The 2010 xkcd color survey",
+    "Ridgway's 1912 atlas",
+    "The ISCC-NBS charts of 1955",
+    "Maerz and Paul's 1930 dictionary"
+   ],
+   "answer": "The 2010 xkcd color survey",
+   "kind": "pick"
+  },
+  {
+   "q": "About how many of our 23,781 archive paintings match Dirty Yellow?",
+   "choices": [
+    "2",
+    "200",
+    "2,000",
+    "20"
+   ],
+   "answer": "2",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Dirty Yellow is a vivid color despite its name, and one of the rarest matches in our whole painting archive."
+ ],
+ "words": 210,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance hits; written from ColorHub library/graph/archive data only. n_present=2 is too small to support any era or region claim, so field notes stay descriptive only."
+  ]
+ }
+}

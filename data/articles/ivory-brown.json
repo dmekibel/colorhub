@@ -1,0 +1,111 @@
+{
+ "slug": "ivory-brown",
+ "name": "Ivory Brown",
+ "hex": "#523E25",
+ "names": [
+  "Ivory Brown"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Ivory Brown is a dark, yellowish brown named for ivory, and it is the single most common named color in our painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Ivory at its darkest",
+   "body": "The library records Ivory Brown from Maerz and Paul's 1930 dictionary, plate 8 C 12, first recorded about 1804 [1]. The nearest named colors on file are [[autumn]], [[cafe-noir]], [[musk]] and [[japanese-bush-warbler-brown]], at 2.8, 3.2, \nIn LCH terms it measures lightness 28, chroma 19, hue 75 degrees, the ISCC-NBS \"dark yellowish brown\" block, Munsell 0.8Y 2.7/3.1, between brown and [[yellow]] [1]. 8, 3.2, 3.8 and 4.3 ΔE [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 7,673 of 23,781 paintings, 32.27 percent, as photographed; the within-painting lens finds it in 5,767 [2]. That makes it more common than every other named color we track [2]. It peaks in the 1600s, at 32.6 percent of that century's 6,394 paintings, 1.4 times the expected rate [2]. Inside a painting it most often sits as a mid-tone, in 38 percent of its appearances [2].\n\nJuan de Valdés Leal is its most devoted painter, carrying it in 11 of his 16 works here, 2.5 times the baseline [2]. The earliest match is dated 799; that is 1,131 years before the name's own first record, in 1930, so the match is a look-alike hue in an aged photograph, not evidence of the actual paint, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "pairs the material word ivory with brown, naming its darkest end",
+   "first_recorded": "c. 1804 (Maerz & Paul, plate 8 C 12)",
+   "source": "Maerz & Paul, A Dictionary of Color (1930)"
+  },
+  "aka": [],
+  "siblings": [
+   "autumn",
+   "cafe-noir",
+   "musk",
+   "japanese-bush-warbler-brown"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 7673,
+  "measured": {
+   "lch": [
+    28,
+    19,
+    75
+   ],
+   "nearest": [
+    [
+     "Autumn",
+     2.8
+    ]
+   ]
+  },
+  "role": {
+   "mid-tone": 38
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz & Paul 1930, plate 8 C 12, first recorded c. 1804; nearest library match Umber, ΔE 9.5",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How common is Ivory Brown in our painting archive, compared to other named colors?",
+   "choices": [
+    "The most common of all",
+    "One of the rarest",
+    "About average",
+    "Only found in one century"
+   ],
+   "answer": "The most common of all",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Ivory Brown is a pale color, like the ivory material its name comes from.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Ivory Brown, the darkest end of the ivory family, is the single most common named color in our archive."
+ ],
+ "words": 247,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

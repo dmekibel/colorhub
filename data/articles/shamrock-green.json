@@ -1,0 +1,121 @@
+{
+ "slug": "shamrock-green",
+ "name": "Shamrock Green",
+ "hex": "#009E60",
+ "names": [
+  "Shamrock Green"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Shamrock Green is a vivid green from Ridgway's 1912 plates that appears in just one of our 23,781 archive paintings, too saturated for most aged, varnished canvases.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A vivid green, named for Ireland's emblem",
+   "body": "Ridgway's 1912 plates give Shamrock Green at hue 33′′, tone i, on plate XXXII, and the Inter-Society Color Council's 1955 census files it, in block 131, as a vivid green, Munsell 3.0G 5.6/9.4 [1]. The same ISCC-NBS block also holds Irish-themed near-duplicates, *Blarney*, *Killarney*, and *Emerald Isle*, and Maerz and Paul date Killarney to 1912 [1].\n\nIts nearest library neighbor is [[jade]], about 3.2 units away, with the generic names [[greenish]] and [[green]] close behind [1]. The name follows [[shamrock]], Ireland's three-leafed emblem, though none of our sources date the pairing itself, and the hex code alone cannot settle it [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this saturated green in a single one of 23,781 paintings, as photographed [2]. That one case, Félix Vallotton's 1917 *Church ruins in Hurlus*, a Swiss scene, uses it as a mid-tone, not a highlight or shadow [2]. A color this vivid rarely survives on an aged, varnished canvas, which is the likely reason for its near-absence rather than any rarity in nature [2]. The count is a computed color match, never a pigment identification [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the shamrock, Ireland's three-leafed emblem",
+   "first_recorded": "undocumented for this exact name; a Killarney near-duplicate dates to 1912",
+   "source": "Ridgway (1912) / ISCC-NBS (1955) via ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "jade",
+   "shamrock"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1,
+  "measured": {
+   "lch": [
+    57,
+    55,
+    156
+   ],
+   "nearest": [
+    [
+     "Jade",
+     3.21
+    ],
+    [
+     "Greenish",
+     3.53
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930 entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which Irish-themed near-duplicate name does Maerz and Paul date to 1912?",
+   "choices": [
+    "Killarney",
+    "Blarney",
+    "Emerald Isle",
+    "Merry Green"
+   ],
+   "answer": "Killarney",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our archive finds Shamrock Green in many paintings.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "What is Shamrock Green's nearest library neighbor?",
+   "choices": [
+    "Jade",
+    "Mahogany",
+    "Ecru",
+    "Peach"
+   ],
+   "answer": "Jade",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Shamrock Green appears in just one of our 23,781 paintings — a 1917 Swiss ruin scene, used as a mid-tone."
+ ],
+ "words": 205,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

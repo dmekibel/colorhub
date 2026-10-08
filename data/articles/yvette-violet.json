@@ -1,0 +1,111 @@
+{
+ "slug": "yvette-violet",
+ "name": "Yvette Violet",
+ "hex": "#59516A",
+ "names": [
+  "Yvette Violet"
+ ],
+ "tier": "person",
+ "depth": "brief",
+ "lede": "Yvette Violet is a dark, greyed violet-purple recorded by Ridgway in 1912; who Yvette was is undocumented in the sources we hold.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A violet with a woman's name",
+   "body": "The library dates Yvette Violet to Ridgway's 1912 color chart, plate XXXVI, hue 55′′, tone k, and to the ISCC-NBS block 228 of 1955 [1]. Maerz and Paul's 1930 dictionary lists it too, first recorded in 1912, the same year as Ridgway's plate [1]. None of our sources explain who Yvette was, so the name's origin is undocumented here [1].\n\nIn LCH terms it measures lightness 36, chroma 16, hue 304 degrees, a dark, muted violet [1]. The nearest named colors on file are [[dusky-violet]], [[del-monte]], [[dusty-purple-tone]] and [[dark-madder-violet]], at 3, 3.2, 4.5 and 5 ΔE [1]. Closer kin by name alone are [[violet]], [[mauve]] and [[grape]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to Yvette Violet in 55 of 23,781 paintings, about 0.23 percent, as photographed [2]. The earliest dated match is Taddeo di Bartolo's The Crucifixion, from 1401, five centuries before the name was recorded, a floor and not a first, since the archive's early centuries are thin [2]. It peaks in the 1900s, in 8 of 1,674 paintings, at 5.3 times the archive's overall rate for that century, and John Singer Sargent carries it in three of his 287 paintings here [2]. Inside a painting it most often sits in shadow, in 60 percent of its appearances [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; a woman's first name, per Ridgway 1912",
+   "first_recorded": "Ridgway 1912, plate XXXVI",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "dusky-violet",
+   "del-monte",
+   "dusty-purple-tone",
+   "dark-madder-violet"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 55,
+  "measured": {
+   "lch": [
+    36,
+    16,
+    304
+   ],
+   "nearest": [
+    [
+     "Dusky Violet",
+     3.0
+    ]
+   ]
+  },
+  "role": {
+   "shadow": 0.6
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912 plate XXXVI, ISCC-NBS 1955 block 228, Maerz & Paul 1930",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1912 color chart records Yvette Violet?",
+   "choices": [
+    "Ridgway",
+    "Crayola",
+    "Pantone",
+    "RAL"
+   ],
+   "answer": "Ridgway",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources explain who Yvette was.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A dark, greyed violet named for an unknown woman, recorded by Ridgway in 1912."
+ ],
+ "words": 235,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

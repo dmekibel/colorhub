@@ -1,0 +1,144 @@
+{
+ "slug": "dusky-orient-blue",
+ "name": "Dusky Orient Blue",
+ "hex": "#2E5967",
+ "names": [
+  "Dusky Orient Blue"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Dusky Orient Blue is a dark, greenish blue plotted in Ridgway's 1912 atlas and later carried into the ISCC-NBS dictionary, close to the blue called petrol.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "From Ridgway's plate to the 1955 dictionary",
+   "body": "Ridgway's 1912 atlas places this hue on plate XXXIV at hue 45′′, tone m [1]. The scan of that plate is aged and only an approximation of the original pigment [1]. The ISCC-NBS circular of 1955 absorbs it into block 186, naming the region grayish blue, Munsell notation 5.1B 3.5/3.5 [2]. The nearest named colors on file are [[dark-chessylite-blue]], [[connor-s-lakefront]], [[dark-delft-blue]] and [[patent-blue]], at 2.5, 2.8, 3.7 and 3.9 ΔE [2]. Dusky Orient Blue sits darker and greener than a plain [[blue]], on the green side [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this one covers at least five percent of the canvas in 133 paintings, about 0.6 percent overall, as photographed [4]. It is strongest in the 1530s, at five times the archive's average rate, and again among Post-Impressionists, where Paul Cezanne and Auguste Renoir each use it well above average [4]. It shares a canvas most often with [[petrol]], and after that with charcoal grays [4]. These counts read photographs of varnished paintings, not pigments [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; a systematic grid name (Ridgway) and a dictionary name (ISCC-NBS), not a documented place",
+   "first_recorded": "1912 (Ridgway's atlas, plate XXXIV)",
+   "source": "Ridgway, Color Standards and Color Nomenclature"
+  },
+  "aka": [],
+  "siblings": [
+   "dark-chessylite-blue",
+   "connor-s-lakefront",
+   "dark-delft-blue",
+   "patent-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 133,
+  "measured": {
+   "lch": [
+    35,
+    17,
+    230
+   ],
+   "nearest": [
+    [
+     "Dark Chessylite Blue",
+     2.5
+    ]
+   ]
+  },
+  "painters": [
+   {
+    "name": "Paul Cezanne",
+    "hits": 3,
+    "n": 50,
+    "lift": 10.73
+   },
+   {
+    "name": "Auguste Renoir",
+    "hits": 5,
+    "n": 96,
+    "lift": 9.31
+   }
+  ],
+  "company": [
+   {
+    "word": "Petrol",
+    "lift": 42.19
+   }
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XXXIV, hue 45′′, tone m",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "ISCC-NBS, National Bureau of Standards Circular 553 (1955), block 186 (R)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz and Paul, Ridgway, ISCC-NBS and RAL entries, computed LCH/Munsell/nearest-name match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Dusky Orient Blue's closest match among the core colors is:",
+   "choices": [
+    "Petrol",
+    "Navy",
+    "Teal",
+    "Indigo"
+   ],
+   "answer": "Petrol",
+   "kind": "pick"
+  },
+  {
+   "q": "Which painters use this blue well above the archive's average rate?",
+   "choices": [
+    "Paul Cezanne and Auguste Renoir",
+    "Vincent van Gogh and Paul Gauguin",
+    "Rembrandt and Vermeer",
+    "Monet and Sisley"
+   ],
+   "answer": "Paul Cezanne and Auguste Renoir",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Dusky Orient Blue peaked in the 1530s, then resurfaced three centuries later in Cezanne and Renoir, each using it well above the archive average."
+ ],
+ "words": 208,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

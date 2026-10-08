@@ -1,0 +1,128 @@
+{
+ "slug": "drabolve",
+ "name": "Drabolve",
+ "hex": "#6F6018",
+ "names": [
+  "Drabolve"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Drabolve is a dull, dark yellow-olive from Maerz and Paul's 1930 dictionary of color, filed by later standards as a moderate olive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "An 1789 name on plate 15",
+   "body": "Maerz and Paul's 1930 *A Dictionary of Color* lists Drabolve on plate 15, swatch J5, and dates its first recorded use to 1789 [1]. That is one of the older dates on its plate, and the book does not explain what the name describes [1]. The National Bureau of Standards' 1955 circular, which cross-indexes the dictionary, places it inside the block it calls moderate olive, with a measured Munsell notation of 6.5Y 4.0/5.8 [2]. The nearest named colors on file are [[greenish-brown]], [[antique-bronze]], [[mud]] and [[metallic-green]], at 2.7, 3, 3.1 and 3.5 ΔE [2]. Drabolve sits further toward brown and further from green than plain olive, and [[brown]] on the same dull-yellow axis [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Drabolve covers at least five percent of the canvas in 532 of them, about 2.2 percent overall, as photographed [3]. Its rate climbs through the nineteenth century and peaks in the 1830s, in 23 of 663 paintings, when it covers 5.1 percent of paintings, more than double the archive average [3]. Paulus Potter carries it most, in 9 of his 28 archived paintings, over fourteen times the average rate, and it most often keeps company with [[olive]] and [[khaki]] [3]. These are computed color matches on photographs of varnished paintings, not pigment identifications [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; a dictionary-of-color name, not a known place or substance",
+   "first_recorded": "1789 (Maerz and Paul, 1930)",
+   "source": "Maerz and Paul, A Dictionary of Color"
+  },
+  "aka": [],
+  "siblings": [
+   "greenish-brown",
+   "antique-bronze",
+   "mud",
+   "metallic-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 532,
+  "measured": {
+   "lch": [
+    41,
+    41,
+    93
+   ],
+   "nearest": [
+    [
+     "Greenish Brown",
+     2.7
+    ]
+   ]
+  },
+  "peak_decade": {
+   "key": 1830,
+   "rate": 0.051,
+   "lift": 2.29
+  },
+  "painters": [
+   {
+    "name": "Paulus Potter",
+    "hits": 9,
+    "n": 28,
+    "lift": 14.37
+   }
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Maerz and Paul, A Dictionary of Color (1930), \"Drabolve\", plate 15 J5",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz and Paul, Ridgway, ISCC-NBS and RAL entries, computed LCH/Munsell/nearest-name match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1930 dictionary first records the name Drabolve?",
+   "choices": [
+    "Maerz and Paul's A Dictionary of Color",
+    "Ridgway's Color Standards and Color Nomenclature",
+    "the ISCC-NBS circular",
+    "Crayola's color list"
+   ],
+   "answer": "Maerz and Paul's A Dictionary of Color",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Drabolve's nearest core color word is Olive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Drabolve peaks in 1830s paintings, where it covers at least five percent of the canvas more than twice as often as the archive average."
+ ],
+ "words": 246,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

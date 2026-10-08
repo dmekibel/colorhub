@@ -1,0 +1,126 @@
+{
+ "slug": "pale-gunmetal",
+ "name": "Pale Gunmetal",
+ "hex": "#2B3733",
+ "names": [
+  "Pale Gunmetal"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Pale Gunmetal is ColorHub's English name for Tetsu-iro, a dark grey-green that the traditional Japanese color list names for iron, not for the gun metal alloy.",
+ "sections": [
+  {
+   "id": "japan",
+   "title": "Iron, not gun metal",
+   "body": "Wikipedia's list of traditional Japanese colors gives this swatch as Tetsu-iro (鉄色), literally \"iron color,\" describing the dull grey-green sheen of unpolished iron [1]. ColorHub's English rendering, Pale Gunmetal, reaches for a related Western metal word; the Japanese source names the raw ore's surface, not a cast alloy [1]. The ISCC-NBS dictionary of 1955 places the swatch in block 151, \"dark grayish green,\" about 4.9 units from that block's centre [2]. The library's nearest other named colors are [[vivid-gunmetal]], 3.0 units away, and [[black-green]], just beyond it [2].\n\nMeasured in LCH it reads lightness 22, chroma 6, hue 172 degrees, a dark, barely saturated green [2]. The low chroma keeps the swatch close to neutral on screen, which is why the gunmetal association holds even though the Japanese name is about iron ore rather than a forged alloy [1][2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match in 792 of 23,781 paintings, about 3 percent, as photographed [3]. It plays a shadow role in 77 percent of its occurrences, fitting a dark, low-chroma hue [3]. Juan de Flandes and Harald Giersing each carry it at more than nine times the archive's overall rate [3]. It shares canvases more than chance with the color word Gunmetal itself, and its presence peaks around the 1470s [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the dull grey-green sheen of unpolished iron",
+   "first_recorded": "undocumented in English; traditional Japanese usage",
+   "source": "ColorHub library (Wikipedia, \"Traditional colors of Japan\")"
+  },
+  "aka": [
+   "Tetsu-iro"
+  ],
+  "siblings": [
+   "vivid-gunmetal",
+   "black-green",
+   "outer-space-crayola",
+   "dark-spruce"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Tetsu-iro (鉄色)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 792,
+  "pct": 3.3,
+  "measured": {
+   "lch": [
+    21.9,
+    6.1,
+    172.0
+   ],
+   "nearest_iscc": [
+    "dark grayish green",
+    4.9
+   ],
+   "nearest": [
+    "Vivid gunmetal",
+    2.99
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; Wikipedia, \"Traditional colors of Japan\"; jp field)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (ISCC-NBS 1955 block 151), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23781 paintings), computed match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Tetsu-iro, this color's Japanese name, literally mean?",
+   "choices": [
+    "Iron color",
+    "Gunmetal grey",
+    "Dark forest",
+    "Steel blade"
+   ],
+   "answer": "Iron color",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: this color is usually a highlight in the paintings where our archive finds it.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pale Gunmetal's Japanese name is about raw iron ore, not a forged alloy."
+ ],
+ "words": 233,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance hits (src empty); facts drawn from the library's own jp field, ISCC-NBS block data and the archive.",
+   "lint 2026-10-09"
+  ]
+ }
+}

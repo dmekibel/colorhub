@@ -1,0 +1,116 @@
+{
+ "slug": "squirrel-grey",
+ "name": "Squirrel Grey",
+ "hex": "#7E8B92",
+ "names": [
+  "Squirrel Grey"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Squirrel Grey is a bluish gray first dated by Ridgway in 1912, close enough to the everyday word Grey that the two are hard to tell apart on screen.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A 1912 animal word",
+   "body": "Ridgway's 1912 standard places this hue on plate XLIX, and the 1955 ISCC-NBS system classes it as a bluish gray, block 186 [1]. The RAL paint system also carries an approximate screen match at RAL 7000 [1]. Unlike the slate and taupe colors in this library, Squirrel Grey is not grouped with other named variants; it stands on the animal's coat alone [1].\n\nThe nearest everyday name on file is plain [[grey]], only 4.6 units of CIEDE2000 away, a close match [1]. [[slate-grey]], [[charcoal]] and [[silver]] are the other names that turn up far more often than chance in paintings that also carry this color [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to Squirrel Grey in 564 of 23,781 paintings, about 2.4 percent, as photographed [2]. It plays a highlight slightly more often than a midtone, 54 percent against 41 percent [2]. Salomon van Ruysdael, Bernardo Bellotto and Vincent van Gogh all use it well above the archive's average rate, with Peder Severin Krøyer's 1899 *Boys Bathing at Skagen* its strongest single match [2].\n\nThe earliest dated match is a 1430 Madonna and Child attributed to Bicci di Lorenzo, five centuries before Ridgway's plate, which only shows a similar screen color was photographed there, not that the name existed that early, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the squirrel",
+   "first_recorded": "Ridgway, 1912 (plate XLIX, hue 49′′′′)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "grey",
+   "slate-grey",
+   "silver"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 564,
+  "role": {
+   "highlight": 0.54,
+   "mid": 0.41
+  },
+  "company": [
+   "Grey",
+   "Slate",
+   "Charcoal"
+  ],
+  "measured": {
+   "lch": [
+    57,
+    6,
+    239
+   ],
+   "nearest": [
+    [
+     "Grey",
+     4.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955, Maerz and Paul 1930 and other name records, with plate/block locators and nearest-name match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How close is Squirrel Grey to plain Grey in CIEDE2000 units?",
+   "choices": [
+    "4.6, a close match",
+    "15, a loose match",
+    "0, identical",
+    "25, unrelated"
+   ],
+   "answer": "4.6, a close match",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Squirrel Grey is grouped with other slate or taupe variants in our library.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Squirrel Grey sits only 4.6 CIEDE2000 units from plain Grey, a genuinely close match."
+ ],
+ "words": 249,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

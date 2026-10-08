@@ -1,0 +1,134 @@
+{
+ "slug": "dusty-khaki",
+ "name": "Dusty khaki",
+ "hex": "#BCB58C",
+ "names": [
+  "Dusty khaki"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Dusty khaki is a pale, greyed yellow-green, ColorHub's English name for the Japanese traditional color Urahayanagi, \"the underside of willow leaves.\"",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The underside of a willow leaf",
+   "body": "Urahayanagi (裏柳) is listed among Japan's traditional colors on Wikipedia, where the kanji translate as \"underside of willow leaves,\" the paler, more silvery face of the leaf compared with its darker top side [1]. No date for the name is given in the sources consulted, so its age here is undocumented [1].\n\nThe nearest named colors on file are [[yellowish-grey]] and [[sand]], at 3 and 3.8 ΔE [3]. A fifth, slightly farther neighbor is [[misty-moss]], 4.8 ΔE away, more vivid [3]. Further out still, [[asparagus-green]] sits 4.1 ΔE away, almost the same [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 2,156 of 23,781 paintings, about 9.1 percent, as photographed [2]. It is most common in a sample of 416 paintings from the 1770s, where it appears in 56, about one and a half times the archive's overall rate for that decade [2]. Among sampled painters, Alexander von Kotzebue's twelve paintings contain it in eight, the highest rate recorded [2]. It also shows up above average in paintings from Iran, Tibet, Switzerland, the United Kingdom and the United States [2]. These are computed color matches to photographed, varnished paintings, not pigment identifications [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the underside of willow leaves",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "Wikipedia, Traditional colors of Japan"
+  },
+  "aka": [
+   "Urahayanagi"
+  ],
+  "siblings": [
+   "yellowish-grey",
+   "sand",
+   "asparagus-green",
+   "putty"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Urahayanagi (裏柳)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2156,
+  "measured": {
+   "lch": [
+    73,
+    22,
+    101
+   ],
+   "nearest": [
+    [
+     "Yellowish Grey",
+     3.0
+    ],
+    [
+     "Sand",
+     3.8
+    ],
+    [
+     "Asparagus Green",
+     4.1
+    ],
+    [
+     "Putty",
+     4.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "Wikipedia, \"Traditional colors of Japan\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/Traditional_colors_of_Japan"
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional list, ISCC-NBS 1955, Maerz & Paul 1930 entries",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Urahayanagi literally describe?",
+   "choices": [
+    "The underside of willow leaves",
+    "A pale lake surface",
+    "Dried rice straw",
+    "Spring bamboo shoots"
+   ],
+   "answer": "The underside of willow leaves",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources give a specific date for when Urahayanagi was first used.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Named for the pale side of a willow leaf, turned away from the sun."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 211
+}

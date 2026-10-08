@@ -1,0 +1,106 @@
+{
+ "slug": "ugly-blue",
+ "name": "Ugly Blue",
+ "hex": "#31668A",
+ "names": [
+  "Ugly Blue"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Ugly Blue is a dim, grey-leaning [[blue]] from the xkcd 2010 crowd-name survey, one of several judgmental names ordinary respondents volunteered rather than a modifier of another word.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A judgment, not a description",
+   "body": "The 2010 xkcd survey let respondents type any name for a swatch, and a number of them reached for blunt opinions like this one instead of a hue word; who first used it beyond the survey is undocumented [1]. The ISCC-NBS block for the region reads \"moderate blue\" [1].\n\nIts closest standing color in our library is [[peacock-blue|Peacock Blue]], about 3.6 units away by CIEDE2000, with [[denim|Denim]] and [[steel-blue|Steel Blue]] nearby in the same muted-blue family [1]. The hex is a screen value, carrying no judgment of its own [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Ugly Blue covers at least 2% of the canvas in 104 of our 23,781 paintings, and by position in each painting's lightness order it is found in 54, more common than 51% of the named colors we track, as photographed [2]. It peaks in paintings from the 1900s, at 4.0 times the archive's baseline rate for that decade, and most often plays an accent, the role in 43% of matched paintings [2].\n\nThe earliest match is 1400, in a work by the Master of Saint Veronica, 610 years before the name's own 2010 record, a resemblance of hue in an aged photograph and no judgment on the painting itself, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a judgmental crowd name, undocumented beyond the 2010 survey",
+   "first_recorded": "2010, xkcd color survey",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "peacock-blue",
+   "denim",
+   "steel-blue"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present_by_coverage": 104,
+  "n_present_within": 54,
+  "rank_pct": 51,
+  "role": "accent, 43% of matched paintings",
+  "peak_decade_century": {
+   "century": 1900,
+   "lift": 4.0
+  },
+  "first_dated": {
+   "id": "nga-46128",
+   "painter": "Master of Saint Veronica",
+   "year": 1400
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and color graph: xkcd (2010), ISCC-NBS (1955) entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does the name Ugly Blue come from?",
+   "choices": [
+    "A respondent's blunt opinion in the 2010 xkcd crowd survey",
+    "A 1912 Ridgway plate",
+    "A paint brand's marketing copy",
+    "Werner's 1821 nomenclature"
+   ],
+   "answer": "A respondent's blunt opinion in the 2010 xkcd crowd survey",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Ugly Blue is rarer than most named colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Ugly Blue is a judgment, not a hue word: a crowd respondent's opinion from the 2010 xkcd survey."
+ ],
+ "words": 237,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

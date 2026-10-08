@@ -1,0 +1,118 @@
+{
+ "slug": "pale-butter",
+ "name": "Pale Butter",
+ "hex": "#FFF39A",
+ "names": [
+  "Pale Butter"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Pale Butter is a soft, pale yellow named for the food, close to the pale rind of a fresh stick of dairy butter.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A food name",
+   "body": "The name comes from the xkcd color survey of 2010, where volunteers typed in names for a grid of random swatches, and \"pale butter\" was common enough to make the final list [1]. No book in our library records the phrase before that, so its coinage is undocumented here [1].\n\nThe ISCC-NBS system classifies the nearest block as a light greenish yellow, 4.7 units away by CIEDE2000, and the Munsell notation for that block runs close to 2.5Y in hue [1]. The nearest named colors on file are [[light-green-yellow]], [[light-chalcedony-yellow]], [[lemon-yellow-crayola]] and [[pastel-yellow]], at 2.9, 3.2, 3.8 and 3.9 ΔE [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a match for Pale Butter in just 8 of 23,781 paintings, as photographed [2]. Émile Bernard's *La Moisson* (1888) carries the most of it, covering about 20 per cent of the canvas [2]. Where it appears, it plays the brightest of a painting's six sampled colors every time, never a shadow or a mid tone [2]. These are photographs of aged, varnished paintings, so read the hex as a screen approximation, not a pigment match [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "butter, the dairy food",
+   "first_recorded": "xkcd color survey, 2010",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "light-green-yellow",
+   "light-chalcedony-yellow",
+   "lemon-yellow-crayola",
+   "pastel-yellow"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+  "n_present": 8,
+  "rate": 0.0003,
+  "role": {
+   "highlight": 1.0
+  },
+  "top_painting": {
+   "id": "commons-Q17492114",
+   "title": "La Moisson",
+   "painter": "Émile Bernard",
+   "year": 1888,
+   "cover": 0.204
+  },
+  "measured": {
+   "nearest": [
+    [
+     "Light Green-Yellow",
+     2.9
+    ],
+    [
+     "Light Chalcedony Yellow",
+     3.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, xkcd color survey 2010), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "True or false: a book in our library records who first used the name \"pale butter\".",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "In the paintings where our archive finds Pale Butter, what role does it play?",
+   "choices": [
+    "Always the brightest of the six sampled colors",
+    "Always the darkest, a shadow color",
+    "Usually a mid-tone, never a highlight"
+   ],
+   "answer": "Always the brightest of the six sampled colors",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Pale Butter plays the brightest color in every one of the handful of paintings our archive finds it in."
+ ],
+ "words": 209,
+ "status": "checked",
+ "checked": {
+  "by": "writer-lane",
+  "date": "2026-10-08",
+  "issues": [
+   "xkcd-survey name only; no book source found for 'pale butter' itself",
+   "lint 2026-10-09"
+  ]
+ }
+}

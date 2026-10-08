@@ -1,0 +1,136 @@
+{
+ "slug": "liberty-blue",
+ "name": "Liberty Blue",
+ "hex": "#344478",
+ "names": [
+  "Liberty Blue"
+ ],
+ "tier": "place",
+ "depth": "short",
+ "lede": "Liberty Blue is a dark, slightly purplish blue first recorded in the 1930 Maerz and Paul dictionary, named for the word liberty for reasons no source consulted here explains.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A 1930 blue",
+   "body": "Maerz and Paul's 1930 dictionary of color lists Liberty Blue on plate 44, swatch B10, first recorded in 1927, with the Munsell notation 6.7PB 3.0/7.2 [1]. The ISCC-NBS system files the same swatch as a moderate purplish blue, 5.2 units from that block's center [1]. Neither source says why the color carries the word liberty, and the reason is undocumented here [1].\n\nOur library's nearest named neighbor is Coolie, a warm-grey blue only 2.7 units away, then Cyanine Blue and Imperial Blue, both about 3 units off [1]. The plain name [[liberty]] belongs to a brighter, more violet-leaning blue in the same library, not a darker relative of this one [1]. Liberty Blue sits closest in hue to [[cyanine-blue]] and [[imperial-blue]], two names from the same mid-century color dictionaries [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Liberty Blue covers at least five percent of the canvas in 70 works, about three tenths of one percent [2]. It peaks in the 1920s, in 5 of 237 paintings, seven times the archive's overall rate for that decade [2]. Vilhelm Lundstrøm carries it in four of his seventeen paintings here, eighty times the baseline rate, and Henri Matisse in four of fifty, twenty-seven times the baseline [2]. It shares a canvas with [[navy]] far more than chance would predict, fifty-six times the baseline [2]. These are computed color matches on photographs of aged, varnished paintings, never a pigment identification [2]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; Maerz and Paul give no reason for the word liberty",
+   "first_recorded": "1927 (Maerz & Paul, 1930, plate 44, swatch B10)",
+   "source": "ColorHub color library (Maerz & Paul 1930)"
+  },
+  "aka": [],
+  "siblings": [
+   "coolie",
+   "cyanine-blue",
+   "imperial-blue",
+   "azurite-blue"
+  ],
+  "parent": "liberty",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#344478",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 70,
+  "peak_decade": 1920,
+  "top_painter": {
+   "name": "Vilhelm Lundstrøm",
+   "lift": 79.94
+  },
+  "company": [
+   {
+    "word": "Navy",
+    "lift": 56.13
+   }
+  ],
+  "measured": {
+   "lch": [
+    30.0,
+    33.3,
+    287.8
+   ],
+   "nearest": [
+    [
+     "Coolie",
+     2.7
+    ],
+    [
+     "Cyanine Blue",
+     3.0
+    ],
+    [
+     "Imperial Blue",
+     3.7
+    ],
+    [
+     "Azurite Blue",
+     3.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS 1955, Maerz & Paul 1930, Ridgway 1912, Munsell notation entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1930 color dictionary first records Liberty Blue?",
+   "choices": [
+    "Maerz and Paul",
+    "Ridgway",
+    "Werner",
+    "the ISCC-NBS"
+   ],
+   "answer": "Maerz and Paul",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Maerz and Paul explain why Liberty Blue is named for liberty.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Liberty Blue has carried its name since 1927, with no recorded reason why."
+ ],
+ "words": 284,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

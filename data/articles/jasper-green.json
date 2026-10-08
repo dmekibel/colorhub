@@ -1,0 +1,111 @@
+{
+ "name": "Jasper Green",
+ "hex": "#4E8075",
+ "names": [
+  "Jasper Green"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Jasper Green is a muted, blue-leaning green named for jasper, the banded quartz usually associated with reds and browns rather than green.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A less typical jasper",
+   "body": "Ridgway's 1912 atlas gives this swatch at plate XXXIII, hue 37″, tone i, placed by the 1955 ISCC-NBS system in block 145, a moderate green [1]. Maerz and Paul's 1930 dictionary records a close variant, at plate 29, H 7, first used in 1905 [1]. Jasper is better known as a red or brown stone, so the green reading here is one of its less typical colors, closer to our library's Hooker's Green than to any red jasper [1].\n\nThe closest core app color is [[viridian]], under five units away, and Ridgway's plates also carry a near-duplicate he called Terre Verte, under two units off [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this green in 50 of 23,781 paintings, about a fifth of one per cent [2]. It peaks in the 1900s, in 9 of 1,674 paintings, at more than five times the overall baseline rate [2]. The earliest match is an undated 1490 Virgin and Child with Saint Anne, four centuries before Ridgway's plate, so that is a lookalike hue and not a pigment record, a floor and not a first, since the archive's early centuries are thin [2]. These are photographs of aged, varnished paintings, and a match is not evidence that jasper, or any mineral, was ground into the paint [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "jasper, the banded quartz",
+   "first_recorded": "1905 (Maerz and Paul) / 1912 (Ridgway)",
+   "source": "ColorHub library (data/library.json)"
+  },
+  "aka": [],
+  "siblings": [
+   "viridian",
+   "emerald",
+   "sage"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed",
+  "match": {
+   "hex": "#4E8075",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 50,
+  "nearest": [
+   [
+    "Viridian",
+    4.5
+   ],
+   [
+    "Terre Verte",
+    1.7
+   ]
+  ],
+  "peak_century": 1900
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json) and name graph (data/graph/nodes): Ridgway (1912), ISCC-NBS (1955) and Maerz & Paul (1930) entries; Ridgway 1912 pl. XXXIII hue 37″ tone i, ISCC-NBS 1955 block 145, Maerz & Paul 1930 pl. 29 H 7",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Jasper, the stone Jasper Green is named for, is usually better known as which colors?",
+   "choices": [
+    "Red and brown",
+    "Blue and violet",
+    "Pure white",
+    "Black only"
+   ],
+   "answer": "Red and brown",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Jasper Green is a very close near-duplicate of a color our library calls Terre Verte.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Jasper Green names a stone usually known for reds and browns, not green."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No book source found; article relies on library/graph data only.",
+   "lint 2026-10-09"
+  ]
+ },
+ "slug": "jasper-green",
+ "words": 227
+}

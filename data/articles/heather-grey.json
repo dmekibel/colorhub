@@ -1,0 +1,122 @@
+{
+ "slug": "heather-grey",
+ "name": "Heather grey",
+ "hex": "#6B6880",
+ "names": [
+  "Heather grey"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Heather grey is a dusty, purplish grey standardized by RAL in 1927, named after the small flowering shrub whose dried blooms turn this same muted purple-grey rather than the bright pink of its fresh flowers.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dried flower's grey",
+   "body": "RAL 1927 is the source given for Heather grey here, with the hex value an approximate screen rendering of the printed standard [1]. The plant heather flowers in a vivid magenta-pink, but its clipped and dried sprigs, long sold for mourning wreaths and wall decoration, fade toward the grey-purple this name captures; the color library groups it under \"heather\" as a family word alongside brighter heather shades [2]. In Munsell terms it sits near 9.8PB 4.4/3.2: a dark, low-chroma violet-grey [2].\n\nThe nearest named colors are [[plumbago-slate|Plumbago Slate]], 5.4 units away and duller, and [[deep-slate-violet|Deep Slate-Violet]], 5.5 units away, purpler and darker [2]. The library also lists Greyish Campanula Purple and Pearl Blackberry as alternate names landing in the same spot [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Heather grey appears in 77 of our 23,781 paintings, as photographed, rarer than 53 percent of the archive's named colors [3]. It peaks in the 1900s, in 12 of 1,674 paintings, at 2.9 times the expected rate, and is most over-represented in French paintings, at 2.3 times expected [3]. Inside a painting it most often plays a hidden color [3]. The earliest match, in a work by Filippo Lippi, is dated 1460, 467 years before RAL's 1927 standard — a look-alike hue in an aged photograph, not proof that any heather-based dye was used, a floor and not a first, since the archive's early centuries are thin [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "heather, the flowering shrub, in its dried and faded state",
+   "first_recorded": "1927, as a RAL standard",
+   "source": "RAL color standard (1927)"
+  },
+  "aka": [
+   "Greyish campanula purple",
+   "Pearl Blackberry"
+  ],
+  "siblings": [
+   "plumbago-slate",
+   "deep-slate-violet",
+   "campanula-purple",
+   "purplish-grey"
+  ],
+  "parent": "heather",
+  "children": null,
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 77,
+  "measured": {
+   "lch": [
+    45,
+    14,
+    297
+   ],
+   "nearest": [
+    [
+     "Plumbago Slate",
+     5.4
+    ],
+    [
+     "Deep Slate-Violet",
+     5.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: RAL standard (1927), approximate screen value",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: Munsell notation and look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why does Heather grey look grey rather than the plant's bright pink?",
+   "choices": [
+    "It is named for heather's dried, faded sprigs",
+    "Heather flowers are naturally grey",
+    "It is an unrelated word that only sounds like heather",
+    "It is named for a grey heath landscape, not the flower"
+   ],
+   "answer": "It is named for heather's dried, faded sprigs",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Heather grey most often appears as the brightest area of a painting.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Heather grey is a flower color, but it's the dried flower's color, not the fresh one."
+ ],
+ "words": 265,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

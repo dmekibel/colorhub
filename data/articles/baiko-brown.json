@@ -1,0 +1,134 @@
+{
+ "name": "Baiko brown",
+ "hex": "#857C55",
+ "names": [
+  "Baiko brown",
+  "Baikōcha"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Baiko brown is a muted olive-brown from Japan's traditional color list, one of the most frequent named colors in our entire painting archive.",
+ "sections": [
+  {
+   "id": "japan",
+   "title": "In Japan: Baikōcha",
+   "body": "The name is written 梅幸茶, romanized Baikōcha, listed among Japan's traditional colors [1]. Who it was named for is undocumented in the sources we have; traditional Japanese color names often carried the stage name of a kabuki actor, and *Baikō* was used as such a name, though we cannot confirm the link here [1]. The nearest named neighbor by measured color is [[yellowish-olive]], barely greener [2]. Further out, [[gold-fusion]] and [[citrine-drab]] sit in the same small cluster [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a match for Baiko brown in 2,896 of 23,781 paintings, about 12.2 percent, more common than 94 percent of the named colors we track [3]. It peaks in the 1700s, in 300 of 3,449 paintings, 1.3 times the rate expected from that century's share of the archive [3]. Inside a painting it most often sits as a light tone, in 38 percent of its appearances [3]. Nicolas Lancret used it most: 7 of his 16 paintings here carry it, 4.9 times his peers' rate [3]. It shares canvases more than chance with colors we call Eucalyptus and Gull [3]. The earliest archive match dates to 916, and our sources give no Western first-recorded date for this traditional Japanese name to compare it against [3]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "undocumented in the sources we have",
+   "source": "ColorHub color library: traditional colors of Japan"
+  },
+  "aka": [
+   "Baikōcha"
+  ],
+  "siblings": [
+   "yellowish-olive",
+   "buffy-olive",
+   "gold-fusion",
+   "citrine-drab"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "梅幸茶 (Baikōcha)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2896,
+  "measured": {
+   "lch": [
+    51.9,
+    22.7,
+    97.1
+   ],
+   "nearest": [
+    [
+     "Yellowish Olive",
+     3.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: traditional colors of Japan (Wikipedia)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library, nearest-neighbor computation",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the kanji 茶 (cha) in Baikōcha signal about the name?",
+   "choices": [
+    "It marks it as a brown/tea-toned color",
+    "It means the color is a true tea leaf green",
+    "It is a painter's name",
+    "It marks a bright red"
+   ],
+   "answer": "It marks it as a brown/tea-toned color",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources confirm exactly who Baiko brown was named for.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which painter used Baiko brown most often in our archive?",
+   "choices": [
+    "Nicolas Lancret",
+    "John Singer Sargent",
+    "Arnoud van Halen",
+    "George Hendrik Breitner"
+   ],
+   "answer": "Nicolas Lancret",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Baiko brown turns up in more than one painting in ten in our archive, one of the most frequent named colors we track."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "slug": "baiko-brown",
+ "words": 241
+}

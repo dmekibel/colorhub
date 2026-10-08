@@ -1,0 +1,171 @@
+{
+ "slug": "dark-gunmetal",
+ "name": "Dark gunmetal",
+ "hex": "#252321",
+ "names": [
+  "Dark gunmetal"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Dark gunmetal is a near-black brown-grey whose Japanese library name, Kurotsurubami, means \"black chestnut oak,\" after a dye bark darkened almost to black, and it appears in one fifth of all the paintings in our archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Kurotsurubami, a blackened oak dye",
+   "body": "The Wikipedia survey \"Traditional colors of Japan\" lists this color under the romanized name Kurotsurubami, written 黒橡 [1]. 黒 is \"black\" and 橡 names *tsurubami*, the sawtooth oak whose acorn-cap dye gives the ordinary, lighter *tsurubami-iro*; adding \"black\" marks the same dye bath taken further, toward near-black [1]. The library separately lists a second close Japanese name for this block of color, Sumi-iro, \"ink color,\" written 墨色 [1]. Neither name is independently dated in the books consulted here [1].\n\nThe nearest already-named color in our library is simply [[black]], at a color-distance of 5.4, and the library flags a near-duplicate entry, \"Ink,\" at just 2.0 [1]. The hex, #252321, is a modern screen approximation, not a measurement of dyed cloth or ink [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within range of this swatch is the single most common in our archive: it appears in 4,907 of the 23,781 paintings, about 20.6 percent, as photographed; the within-painting lens finds it 4,532 times [2]. No other named color in our set reaches a higher share [2].\n\nIt peaks in the 1600s, present in 1,545 of 6,394 paintings from that century, 1.2 times the expected rate [2]. Inside a painting it most often plays a shadow, in just over half the paintings that carry it, which fits a near-black tone [2]. Pieter van der Werff is its most devoted painter, using it in 27 of his 35 works here, nearly four times his museums' baseline rate [2]. The earliest dated appearance we have is 1175, and it shares canvases with two colors our data calls Vienna Smoke and Jacaranda Brown more often than chance would predict, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "black chestnut oak, from 黒 (black) and 橡 (sawtooth oak dye)",
+   "first_recorded": "undocumented beyond its listing in Japan's traditional color system",
+   "source": "ColorHub color library (Wikipedia, \"Traditional colors of Japan\")"
+  },
+  "aka": [
+   "Kurotsurubami",
+   "黒橡",
+   "Sumi-iro",
+   "Ink"
+  ],
+  "siblings": [
+   "eerie-black",
+   "raisin-black",
+   "black",
+   "jet"
+  ],
+  "parent": "black",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Kurotsurubami (黒橡), \"black chestnut oak\""
+   },
+   {
+    "lang": "ja",
+    "name": "Sumi-iro (墨色), \"ink color\""
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 4907,
+  "rank_pct_more_common_than": 100,
+  "century_peak": {
+   "century": 1600,
+   "hits": 1545,
+   "of": 6394,
+   "lift": 1.2
+  },
+  "role": {
+   "kind": "shadow",
+   "pct": 52
+  },
+  "painters": {
+   "Pieter van der Werff": [
+    27,
+    35,
+    3.8
+   ]
+  },
+  "first_seen": {
+   "year": 1175
+  },
+  "company": {
+   "Vienna Smoke": 1.8,
+   "Jacaranda Brown": 1.8
+  },
+  "measured": {
+   "nearest": [
+    [
+     "Eerie Black",
+     3.1
+    ],
+    [
+     "Raisin Black",
+     3.9
+    ],
+    [
+     "Black",
+     5.4
+    ],
+    [
+     "Jet",
+     5.6
+    ]
+   ],
+   "near_duplicate": [
+    "Ink",
+    2.0
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional color names (Wikipedia, \"Traditional colors of Japan\")",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Kurotsurubami literally name?",
+   "choices": [
+    "A chestnut oak dye darkened to black",
+    "A blacksmith's forge",
+    "A moonless night sky",
+    "A squid-ink dish"
+   ],
+   "answer": "A chestnut oak dye darkened to black",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: dark gunmetal is the single most common color in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which painter in our archive is most devoted to dark gunmetal?",
+   "choices": [
+    "Pieter van der Werff",
+    "Frans Hals",
+    "Amedeo Modigliani",
+    "John Singer Sargent"
+   ],
+   "answer": "Pieter van der Werff",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Dark gunmetal is the single most common color in our 23,781-painting archive, found in about one painting in five.",
+  "Its Japanese name, Kurotsurubami, names a chestnut-oak dye taken all the way to near-black."
+ ],
+ "words": 317,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No book-level source for the dyeing craft beyond the library gloss; stated as undocumented rather than guessed.",
+   "lint 2026-10-09"
+  ]
+ }
+}

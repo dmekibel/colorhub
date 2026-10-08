@@ -1,0 +1,116 @@
+{
+ "slug": "persian-indigo",
+ "name": "Persian Indigo",
+ "hex": "#32127A",
+ "names": [
+  "Persian Indigo"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Persian Indigo is a deep blue-violet filed among ColorHub's pigment and dye names, a darker, more purple cousin of the indigo dye family rather than a measured historical pigment.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dye-family name",
+   "body": "ColorHub's library classifies Persian Indigo as a pigment, dye or mineral word, listed under the \"painter's pigments\" field rather than the everyday or nature lists [1]. The hex #32127A reads as a deep violet by ISCC-NBS, 6.2 units from its nearest block, close to 8.6PB 1.8/14.0 in Munsell notation [2]. Who first attached \"Persian\" to indigo, and when, is not recorded in the sources we checked [1]. Historically Persia sat on long-distance indigo trade routes between South Asia and the Mediterranean, a plausible route for the name, but our data does not confirm that this specific color word traces to it [1].\n\nIts closest listed library neighbor is [[midnight-blue]], 4.3 units away, a reminder that this is a much bluer, less violet color than its name's \"indigo\" might suggest to someone picturing the traditional dye [2]. The real dye [[indigo]] itself photographs as a dark grey-blue rather than this saturated violet, so treat the two as cousins in name only, not in hue [2]. [[byzantium|Byzantium]] sits in the same deep-violet neighborhood on our wheel [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive carries a close match to Persian Indigo covering at least one percent of its canvas, as photographed [3]. A color this dark and this saturated in violet is rare among historical pigments generally, since violet pigments stable enough to use undiluted were scarce before synthetic dyes arrived in the nineteenth century, which is consistent with, though it does not prove, the absence here [3]. The gap says more about what our archive happens to hold than about whether painters ever mixed a color like it."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; Persia was a historical hub of the indigo trade",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "midnight-blue",
+   "indigo",
+   "persian-blue",
+   "byzantium"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    18.0,
+    66.8,
+    308.3
+   ],
+   "munsell": "8.6PB 1.8/14.0",
+   "iscc_nbs": {
+    "name": "deep violet",
+    "de": 6.2
+   }
+  },
+  "field_category": "painter's pigments"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: pigment/dye classification and Wikipedia-sourced entry",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: computed LCH, Munsell and ISCC-NBS nearest-block distance",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does Persian Indigo compare to the historical indigo dye?",
+   "choices": [
+    "Much more violet and saturated",
+    "Nearly identical",
+    "Much paler",
+    "Greener"
+   ],
+   "answer": "Much more violet and saturated",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our data confirms exactly when and why \"Persian\" was attached to this color name.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Despite the name, this color sits much closer to violet than the actual indigo dye ever did."
+ ],
+ "words": 294,
+ "status": "checked",
+ "checked": {
+  "by": "batch-9 writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance file; the historical Persia-indigo trade link is given as plausible context, not a documented etymology.",
+   "lint 2026-10-09"
+  ]
+ }
+}

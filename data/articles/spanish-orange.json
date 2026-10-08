@@ -1,0 +1,154 @@
+{
+ "slug": "spanish-orange",
+ "name": "Spanish Orange",
+ "hex": "#E86100",
+ "names": [
+  "Spanish Orange"
+ ],
+ "tier": "place",
+ "depth": "medium",
+ "lede": "Spanish Orange is a strong orange from the 1955 ISCC-NBS system, almost indistinguishable from the separately named Persimmon, and in our painting archive it shows up almost always as a highlight, not a shadow.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A vivid orange, barely distinct from Persimmon",
+   "body": "The ISCC-NBS system of 1955 files this hue as a strong orange, and our library also carries it from Wikipedia's color lists; the sources we have say nothing about why \"Spanish\" was attached to it [1]. It is a place-or-institution name by our own classification, built on the adjective rather than any documented event [2].\n\nIts nearest named relative, [[persimmon]], sits only 2.6 units away, close enough to call the two almost the same color under a different name [3]. A touch further off are [[safety-orange-blaze-orange]] and [[bright-orange]], both more vivid [3].\n\nFurther out again are [[bright-orange]], more vivid at 4.6 units, and [[bright-red-orange]], duller and lighter at 5.2 [3]. Unlike several of its neighbors, no Ridgway or Maerz and Paul plate reference survives for this entry in our library, only the ISCC-NBS filing and a Wikipedia source [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Spanish Orange is rare in our archive of 23,781 paintings: a color within six units of it covers at least five per cent of a canvas in just 11 works, as photographed [4]. Nearly two-thirds of its coverage in those works sits in the highlights rather than the mid-tones or shadows [4]. It is disproportionately an Indian subject: works from India carry it at nine times the archive's overall rate, and Rajput painting at over twenty-two times, including a 1745 Jaipur ragamala page where it covers nearly a fifth of the canvas [4]. These remain photographs of aged, varnished paintings, read as screen colors [4]. The earliest of those matches is an unidentified 1526 work attributed to Albrecht Dürer, where the color covers about 11 per cent of the canvas [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; the place-or-institution word \"Spanish\"",
+   "first_recorded": "ISCC-NBS 1955, block 50 (H)",
+   "source": "ColorHub color library (Wikipedia; ISCC-NBS 1955)"
+  },
+  "aka": [],
+  "siblings": [
+   "persimmon",
+   "safety-orange-blaze-orange",
+   "bright-orange",
+   "bright-red-orange"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "persimmon",
+    "gloss": "a separately named color only 2.6 units away, close enough to read as the same orange"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#E86100",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 11,
+  "role": {
+   "highlight": 0.64,
+   "mid": 0.18,
+   "shadow": 0.18
+  },
+  "countries": [
+   {
+    "key": "India",
+    "hits": 3,
+    "n": 721,
+    "lift": 9.0
+   }
+  ],
+  "movements": [
+   {
+    "key": "Rajput",
+    "hits": 1,
+    "n": 97,
+    "lift": 22.29
+   }
+  ],
+  "measured": {
+   "lch": [
+    57.8,
+    82.9,
+    53.8
+   ],
+   "nearest": [
+    [
+     "Persimmon",
+     2.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-s.json): Wikipedia; ISCC-NBS 1955, block 50 (H)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library, place/institution tier classification",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-s.json), CIEDE2000 look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which separately named color is almost indistinguishable from Spanish Orange?",
+   "choices": [
+    "Persimmon",
+    "Windsor Tan",
+    "Acajou Red",
+    "Venetian Yellow"
+   ],
+   "answer": "Persimmon",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: in our archive, Spanish Orange appears mostly in shadow.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Spanish Orange and the separately named Persimmon are only 2.6 units apart, close to the same color."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-08",
+  "issues": [
+   "Small sample (11 archive matches) noted; no claim of strong statistical confidence beyond the counted matches.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 304
+}

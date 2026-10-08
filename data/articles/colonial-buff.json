@@ -1,0 +1,131 @@
+{
+ "slug": "colonial-buff",
+ "name": "Colonial Buff",
+ "hex": "#EBCE91",
+ "names": [
+  "Colonial Buff"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Colonial Buff is a pale orange-yellow traced furthest back of any color, to Patrick Syme's 1821 edition of Werner's Nomenclature of Colours, and later repeated by Ridgway, Maerz and Paul, and the ISCC-NBS.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Four books, one swatch",
+   "body": "Our library's earliest source for this name is Werner's *Nomenclature of Colours*, no. 71 among the yellows, from an aged swatch dated 1821 [1]. Ridgway's 1912 standard places the same name on plate XXX, hue 21′′, tone d, and Maerz and Paul repeat it in 1930; the ISCC-NBS system of 1955 assigns it block 86, light yellow, 5.2 units from that block's centroid [2]. The nearest named colors on file are [[ochre-yellow]], [[leghorn]] and [[baryta-yellow]], at 2.6, \nWerner ties the same swatch to three things from nature: the fur of a polar bear, oat straw, and the minerals schorlite and calamine, a reminder that one 1821 color served every one of his readers' purposes at once [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Colonial Buff covers at least five per cent of the canvas in 705 of them, about 3.0 per cent, as photographed [3]. It plays a highlight in 97 per cent of its appearances, almost never a shadow, and peaks in paintings from the 1840s [3]. It is most devotedly used by Johan Hendrik Weissenbruch, in 3 of his 12 works [3]. These are museum photographs of aged, varnished paintings, so the match is a screen color, not a pigment identification [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; \"colonial\" plus the earlier color word buff",
+   "first_recorded": "1821 (Werner)",
+   "source": "Werner's Nomenclature of Colours (Syme ed.); Ridgway; Maerz and Paul; ColorHub library"
+  },
+  "aka": [
+   "Straw Yellow (near-duplicate)"
+  ],
+  "siblings": [
+   "ochre-yellow",
+   "leghorn",
+   "baryta-yellow",
+   "maple"
+  ],
+  "parent": "colonial",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 705,
+  "pct_archive": 3.0,
+  "role_highlight": 0.97,
+  "peak_decade": 1840,
+  "werner": {
+   "animal": "Polar Bear",
+   "vegetable": "Oat Straw",
+   "mineral": "Schorlite, Calamine"
+  },
+  "measured": {
+   "nearest": [
+    [
+     "Ochre Yellow",
+     2.6
+    ],
+    [
+     "Leghorn",
+     3.2
+    ],
+    [
+     "Baryta Yellow",
+     3.3
+    ],
+    [
+     "Maple",
+     3.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Werner, Werner's Nomenclature of Colours (Syme ed., 1821), no. 71 (via ColorHub library)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; Ridgway 1912, Maerz and Paul 1930, ISCC-NBS 1955 block 86), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which book is the earliest source in our library for Colonial Buff?",
+   "choices": [
+    "Werner's Nomenclature of Colours (1821)",
+    "Ridgway's Color Standards (1912)",
+    "Maerz and Paul's A Dictionary of Color (1930)"
+   ],
+   "answer": "Werner's Nomenclature of Colours (1821)",
+   "kind": "pick"
+  },
+  {
+   "q": "Werner linked Colonial Buff's swatch to a polar bear, oat straw and two minerals.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Colonial Buff reaches back to 1821."
+ ],
+ "words": 242,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

@@ -1,0 +1,150 @@
+{
+ "slug": "doe",
+ "name": "Doe",
+ "hex": "#A17D55",
+ "names": [
+  "Doe"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Doe is a light, warm tan from Maerz and Paul's 1930 dictionary, named for the female deer, and one of the most common colors in our entire painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The color of a deer's coat",
+   "body": "Maerz and Paul's *A Dictionary of Color* (1930), as cited by NBS Circular 553 (1955), records Doe on plate 13, row B, column 6, first appearing in print around 1902 [1]. The ISCC-NBS system reads the swatch as \"light brown,\" its block 57 [1]. The name is a plain animal reference, the female deer's tan coat, and none of the 29 books in our concordance adds more to that [2].\n\nIn LCH terms it measures lightness 55, chroma 29, hue 72 degrees, Munsell 9.0YR 5.4/4.5 [1]. Its closest match in the library is [[cork]], about 2.8 CIEDE2000 units away, with [[mocha]] tied at the same distance [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A match within six CIEDE2000 units covering at least five percent of the canvas turns up in 4,115 of our 23,781 archive paintings, about 17.3 percent, one of the most common colors we track [4]. It is strongest in the 1300s, at 2.4 times the overall rate, and carried by painters across eras: Peter Paul Rubens in twenty-seven of his fifty-five paintings here, Maarten van Heemskerck in eight of twelve [4]. It most often plays a highlight, in 65 percent of its appearances, and is especially common in Japanese and Korean paintings in the archive [4].\n\nThe earliest dated match is the *Funerary Papyrus of Tayuhenutmut*, from about 1069 BC, nearly three thousand years before Maerz and Paul recorded the name in 1930; early centuries are thin in the archive, so this is a floor, not a first, and a photograph of an aged canvas is a screen color, not a pigment test [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the doe, the female deer, for its tan coat",
+   "first_recorded": "about 1902, Maerz and Paul (1930), plate 13 B6",
+   "source": "ColorHub color library; Maerz & Paul, A Dictionary of Color (1930)"
+  },
+  "aka": [],
+  "siblings": [
+   "cork",
+   "mocha",
+   "light-brown",
+   "camel"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#A17D55",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 4115,
+  "painters": [
+   {
+    "name": "Peter Paul Rubens",
+    "hits": 27,
+    "of": 55,
+    "lift": 2.84
+   },
+   {
+    "name": "Maarten van Heemskerck",
+    "hits": 8,
+    "of": 12,
+    "lift": 3.85
+   }
+  ],
+  "peak_decade": {
+   "decade": 1390,
+   "lift": 2.77
+  },
+  "role": "highlight",
+  "measured": {
+   "lch": [
+    55,
+    29,
+    72
+   ],
+   "nearest": [
+    [
+     "Cork",
+     2.8
+    ],
+    [
+     "Mocha",
+     2.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz & Paul, A Dictionary of Color (1930), plate 13 B6, cited by NBS Circular 553 (1955), block 57",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "Color-kb concordance of the 29 color books for this name: no hits",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What animal gives Doe its name?",
+   "choices": [
+    "The female deer",
+    "The fawn-colored rabbit",
+    "The camel",
+    "The antelope"
+   ],
+   "answer": "The female deer",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Doe is one of the rarest colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Named for a deer's coat, Doe turns up in roughly one painting in six."
+ ],
+ "words": 290,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

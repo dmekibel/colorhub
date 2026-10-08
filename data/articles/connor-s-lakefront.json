@@ -1,0 +1,120 @@
+{
+ "slug": "connor-s-lakefront",
+ "name": "Connor's Lakefront",
+ "hex": "#175A6C",
+ "names": [
+  "Connor's Lakefront"
+ ],
+ "tier": "place",
+ "depth": "short",
+ "lede": "Connor's Lakefront is a dark, greenish teal blue that our sources trace only to Wikipedia's list of Sherwin-Williams paint names, with no record of who or where Connor's lakefront was.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A paint-chip place name",
+   "body": "Our only record of this name is a Wikipedia listing that credits it to Sherwin-Williams, the paint company; the books we hold do not mention it at all [1]. A name built from a person's name and a landscape feature reads as a paint-brand evocation rather than a documented place, so who Connor was and which lakefront is meant are both undocumented here [1].\n\nIts nearest named neighbors by color distance are [[patent-blue]] and [[dusky-orient-blue]], both about 2.6 to 2.8 units away and close enough to call the same dark teal-blue on screen [2]. [[dark-chessylite-blue|Dark Chessylite Blue]] sits a little further at 3.5 units, and [[pearl-gentian|Pearl Gentian]] a touch lighter at 3.9 units,; the two names, both dark, muted blues of the same family, are themselves near twins of each other [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color this close to Connor's Lakefront appears in 100 of 23,781 paintings in our archive, as photographed, about 0.42 percent, rarer than 52 percent of the named colors [3]. It peaks in paintings from the 1900s, at 2.6 times the expected rate [3]. Inside a painting it most often sits as a hidden color, 55 percent of the time, meaning it rarely covers much of the canvas on its own [3]. The earliest match is a 1375 painting, far earlier than any record of the name [3]. That is centuries before the name's own record, a floor on the hue's age, not a first use of either the name or a pigment."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; a Sherwin-Williams paint name, per Wikipedia",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "Wikipedia, list of Sherwin-Williams paint colors"
+  },
+  "aka": [],
+  "siblings": [
+   "patent-blue",
+   "dusky-orient-blue",
+   "dark-chessylite-blue",
+   "pearl-gentian"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 100,
+  "n_within": 42,
+  "role": "hidden 55%",
+  "century_peak": "1900s, 2.6x expected",
+  "measured": {
+   "lch": [
+    35.2,
+    21.3,
+    229.6
+   ],
+   "nearest": [
+    [
+     "Patent Blue",
+     2.6
+    ],
+    [
+     "Dusky Orient Blue",
+     2.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "Wikipedia, list of Sherwin-Williams paint colors",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/List_of_Sherwin-Williams_paint_colors"
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph, look-alike edges (data/graph/edges-c.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes); counts are computed color matches on photographs of varnished, aged canvases, not pigment identifications",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which company does our only source credit for the name Connor's Lakefront?",
+   "choices": [
+    "Sherwin-Williams",
+    "Crayola",
+    "Pantone",
+    "Benjamin Moore"
+   ],
+   "answer": "Sherwin-Williams",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources document who Connor was.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Connor's Lakefront is a Sherwin-Williams paint name with no record of who Connor was."
+ ],
+ "words": 277,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}

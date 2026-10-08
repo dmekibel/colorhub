@@ -1,0 +1,134 @@
+{
+ "slug": "warm-silver",
+ "name": "Warm silver",
+ "hex": "#C9C0BB",
+ "names": [
+  "Warm silver"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Warm silver takes the cool metal gray of silver and tips it toward pink, the ISCC-NBS system's \"pinkish gray,\" and it turns out to be one of the more common neutrals in Western and Indian painting alike.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Warm plus silver",
+   "body": "The name is built the plain way: \"warm\" modifying [[silver]] [1]. Maerz and Paul first recorded Silver as a color word in 1481, and the ISCC-NBS system of 1955 classifies this particular gray as pinkish [1][2]. It is close enough to that system's reference sample to sit only 2.8 CIEDE2000 units away [2].\n\nRidgway's 1912 atlas, scanned from an aged plate, lists a near neighbor at the same hue family, so the two systems agree on roughly where this gray sits even though neither invented the two-word name itself [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Warm silver appears in 2.33 percent of the 23,781 paintings in our archive, 555 of them, as photographed, more common than 80 percent of the named colors we track [3]. It peaks in the 1900s, in 75 of 1,674 paintings, found in 4.5 percent of the 1,674 paintings (75 of them) we have from that century, 2.2 times the rate its own museums would predict [3]. Inside a painting it most often serves as a light, not a shadow or an accent, in 66 percent of its 387 clearest appearances [3].\n\n[[painter:xugu|Xugu]] is its most devoted painter, using it in 5 of his 16 works here, 7.1 times his museums' baseline [3]. It is also over-represented in paintings from India, 2.1 times expected, and shares canvases with Warm Grey and Dark Vinaceous-Drab far more than chance, with lifts of 10.2 and 4.6 [3]. The nearest named colors on file are [[lilac-grey]] and [[pale-ecru-drab]], at The earliest match in our archive is dated 1000, nine centuries before the name's first recorded use in 1912, a gap that marks a look-alike hue in aged photographs rather than proof the name is older than it is, a floor and not a first, since the archive's early centuries are thin [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "warm variant of the metal silver",
+   "first_recorded": "1912, Ridgway",
+   "source": "ColorHub color graph"
+  },
+  "aka": [],
+  "siblings": [
+   "lilac-grey",
+   "pale-ecru-drab",
+   "silver",
+   "oatmeal"
+  ],
+  "parent": "silver",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 555,
+  "painters": [
+   "xugu",
+   "john-singer-sargent",
+   "gustav-klimt"
+  ],
+  "role": "light",
+  "measured": {
+   "lch": [
+    78,
+    4,
+    58
+   ],
+   "iscc": "pinkish gray",
+   "nearest": [
+    [
+     "Lilac-Grey",
+     3.3
+    ],
+    [
+     "Pale Ecru-Drab",
+     3.3
+    ],
+    [
+     "Silver",
+     4.5
+    ],
+    [
+     "Oatmeal",
+     4.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph: modifier grammar (warm + silver); Maerz & Paul 1930, Silver first recorded 1481",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS 1955 pinkish-gray block; Ridgway 1912 plate",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What role does Warm silver most often play inside a painting?",
+   "choices": [
+    "Shadow",
+    "Light",
+    "Accent",
+    "Hidden color"
+   ],
+   "answer": "Light",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our archive's earliest match for Warm silver predates the name's first recorded use.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Warm silver plays a light in two paintings out of three where it shows up."
+ ],
+ "words": 338,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

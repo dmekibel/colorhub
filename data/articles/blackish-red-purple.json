@@ -1,0 +1,106 @@
+{
+ "slug": "blackish-red-purple",
+ "name": "Blackish Red-Purple",
+ "hex": "#5B3644",
+ "names": [
+  "Blackish Red-Purple"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Blackish Red-Purple is a dark, muted plum, [[red-purple|Red-Purple]] darkened almost to black by the modifier \"blackish,\" the kind of compound name Robert Ridgway's 1912 nomenclature system built in long, regular families.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier on a named hue",
+   "body": "The name follows the grammar \"blackish\" plus the parent hue [[red-purple|Red-Purple]]: the modifier marks a darkened, desaturated version of that base color, not a separate pigment or dye [1]. Robert Ridgway's *Color Standards and Color Nomenclature* (1912) first records a close match, at plate XII, hue 67, tone m [1]. The ISCC-NBS system picked it up again in 1955, filing it in block 259 under this same reddish-purple family [1].\n\nMeasured, the swatch reads as a dark grayish red by ISCC-NBS terms, about 5.5 units from the historical plate color, with Munsell notation 7.0RP 2.7/3.6 [1]. The closest look-alikes in our data are [[gooseberry|Gooseberry]], 3.4 units away, [[eggplant|Eggplant]], a purpler neighbor, and [[old-mauve|Old Mauve]], more vivid [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings, as photographed, finds this dark plum in 60 of them, about 0.25 percent, rarer than 58 percent of our named colors [2]. It peaks in the 1500s, at 1.5 times the expected rate for that century (5 of 2,231 paintings from then), and inside a painting it most often plays a hidden color, 43 percent of the time, by lightness rank rather than raw area [2].\n\nThe earliest match in our archive is dated 1405, by the painter Starnina (Gherardo di Jacopo), 507 years before Ridgway's 1912 record [2]. Our archive's early centuries are thin, so that date is a floor, not a first, and the match is only a look-alike hue, not proof a matching dye or pigment existed then [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the modifier \"blackish\" applied to Red-Purple",
+   "first_recorded": "1912, Ridgway's Color Standards and Color Nomenclature",
+   "source": "Ridgway 1912; ISCC-NBS 1955"
+  },
+  "aka": [],
+  "siblings": [
+   "gooseberry",
+   "eggplant"
+  ],
+  "parent": "red-purple",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 60,
+  "measured": {
+   "lch": [
+    27.5,
+    18.8,
+    355.0
+   ],
+   "nearest": [
+    [
+     "Gooseberry",
+     3.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912 plate entry, ISCC-NBS 1955 block mapping",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which parent color does the modifier \"blackish\" darken in this name?",
+   "choices": [
+    "Red-Purple",
+    "Violet",
+    "Eggplant",
+    "Maroon"
+   ],
+   "answer": "Red-Purple",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Blackish Red-Purple names a separate dye or pigment, distinct from Red-Purple.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Blackish Red-Purple's earliest match in our painting archive, from 1405, predates Ridgway's 1912 record of the name by five hundred years."
+ ],
+ "words": 276,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No private fact-card file for this slug."
+  ]
+ }
+}

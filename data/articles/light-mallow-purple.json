@@ -1,0 +1,129 @@
+{
+ "name": "Light Mallow Purple",
+ "hex": "#E989CE",
+ "names": [
+  "Light Mallow Purple"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Light Mallow Purple is a bright pink-purple named for the mallow flower, recorded by Ridgway in 1912 and classed by the ISCC-NBS system in 1955 as a deep purplish pink.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A flower, not a pigment",
+   "body": "Our data files the name under mallow, the flower, rather than a pigment or a place [1]. Ridgway's 1912 atlas plots it on plate XII at hue 67, and the ISCC-NBS system of 1955 files the same area as block 248, \"deep purplish pink\" [1]. In LCH terms it reads as lightness 69, chroma 50, hue 337 degrees: bright and strongly saturated, close to magenta [1].\n\nIts nearest computed neighbors are [[lavender-pink|Lavender Pink]], 4.0 units off, and [[persian-pink|Persian Pink]] and [[orchid-crayola|Orchid (Crayola)]], both a little duller [2]. The closest everyday name is [[orchid]], about 7.8 units away [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our 23,781-painting archive has no painting where a close match covers at least one percent of the canvas, as photographed; that describes this archive, not painting as a whole [4]. Our data groups the name under \"magenta\" for naming purposes, alongside its sibling [[light-hortense-violet|Light Hortense Violet]] [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the mallow flower",
+   "first_recorded": "Ridgway, 1912",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "lavender-pink",
+   "persian-pink",
+   "light-hortense-violet"
+  ],
+  "parent": "purple",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    69,
+    50,
+    337
+   ],
+   "nearest": [
+    [
+     "Lavender Pink",
+     4.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/nodes-l.json): Light Mallow Purple — Ridgway 1912, plate XII, hue 67; ISCC-NBS 1955, block 248",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-l.json): nearest distinct neighbors by CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Light Mallow Purple entry",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings, as photographed, data/graph/fieldnotes/l.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub core names (data/core-names.json): Light Mallow Purple, base \"magenta\"",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Light Mallow Purple is named for which flower?",
+   "choices": [
+    "Mallow",
+    "Orchid",
+    "Hyssop",
+    "Lavender"
+   ],
+   "answer": "Mallow",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our painting archive finds a close match to Light Mallow Purple covering at least one percent of some canvas.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Light Mallow Purple and Light Hortense Violet are grouped under the same \"magenta\" family in our naming data, though one is named for a flower and the other for hydrangea."
+ ],
+ "words": 171,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No book concordance hits for this slug; written from the color graph and library data only; no archive matches.",
+   "lint 2026-10-09"
+  ]
+ },
+ "slug": "light-mallow-purple"
+}

@@ -1,0 +1,106 @@
+{
+ "slug": "old-lavender",
+ "name": "Old Lavender",
+ "hex": "#796878",
+ "names": [
+  "Old Lavender"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Old Lavender is a muted, greyed purple, [[lavender]] with the brightness taken out, and it is a rare color in our painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Lavender, dimmed",
+   "body": "The library records Old Lavender from Maerz and Paul's 1930 dictionary, plate 56 A 7, first recorded in 1924 [1]. The ISCC-NBS 1955 lists classify it as a purplish black, between [[lavender]] and [[purplish-grey]] [1]. *Old* here works the way it does across this family of names: not an age, but a cue that the hue has been pulled toward grey, the way a worn fabric or a faded [[plum]] might look [1]. The nearest named color in the library is Purplish Grey, about 2.7 units away by CIEDE2000, than to a true [[purple]] [1]. In LCH terms it measures lightness 46, chroma 12, hue 327 degrees, Munsell 8.3P 4.5/2.5 [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in only 49 of 23,781 paintings, 0.21 percent, as photographed [2]. It is most over-represented in the 1910s, in 6 of that decade's 523 paintings, about 5.6 times the expected rate [2]. No single painter here reaches our 3-painting threshold for this color, so no painter stands out as its champion [2]. These are photographs of aged, varnished paintings, so a color match is not a pigment test [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "lavender, with \"old\" marking a greyed, muted version",
+   "first_recorded": "1924 (Maerz & Paul, plate 56 A 7)",
+   "source": "Maerz & Paul, A Dictionary of Color (1930); ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "lavender",
+   "purplish-grey"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 49,
+  "measured": {
+   "lch": [
+    46,
+    12,
+    327
+   ],
+   "nearest": [
+    [
+     "Purplish Grey",
+     2.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz & Paul 1930, plate 56 A 7, first recorded 1924; ISCC-NBS 1955; nearest library match Purplish Grey, ΔE 2.7",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does \"old\" signal in a name like Old Lavender?",
+   "choices": [
+    "The hue has been pulled toward grey",
+    "The color is literally antique",
+    "It is the oldest recorded lavender",
+    "It belongs to a historical costume"
+   ],
+   "answer": "The hue has been pulled toward grey",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Old Lavender is a common color in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Old Lavender turns up in barely one painting in five hundred of our archive."
+ ],
+ "words": 208,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

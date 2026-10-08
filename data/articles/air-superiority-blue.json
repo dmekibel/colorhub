@@ -1,0 +1,126 @@
+{
+ "name": "Air Superiority Blue",
+ "hex": "#72A0C1",
+ "names": [
+  "Air Superiority Blue"
+ ],
+ "tier": "place",
+ "depth": "medium",
+ "lede": "Air Superiority Blue is a muted sky blue named for the military doctrine of controlling the air over a battlefield, standardized on United States Federal Standard 595 paint chips.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A military paint chip",
+   "body": "\"Air superiority\" is a doctrine term for one side controlling the skies over a battle, and the color takes its name from paint used on aircraft under that doctrine [1]. Wikipedia traces the name to Federal Standard 595, the United States government's paint-chip standard for military equipment, rather than to any older dictionary [1]. No earlier record turns up in the pigment and color-name books consulted here, so the word's exact coining date is undocumented [1].\n\nThat gap between a military paint standard and a dictionary entry is typical of newer color names: they arrive through industry catalogs and style guides rather than through the pigment and dye trade that produced older names [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this blue in 138 of 23,781 paintings (0.58 percent, as photographed), more common than 58 percent of named colors here [2]. It peaks in paintings from the 1900s, at 1.4 times the expected rate for that century [2]. Alfred Sisley is its most devoted painter, using it in 5 of his 50 works here, nearly seven times the rate of the museums his paintings come from [2]. The earliest matching canvas dates to 1482, nearly four centuries before the name existed; the archive's early centuries are thin, so this is a floor, not a first, and a look-alike hue, not a sign the paint itself is old [2]. It is most over-represented in French paintings, at 2.3 times the expected share [2]. The nearest named look-alikes are [[iceberg]] and [[carolina-blue]], with [[grey-blue]] and [[squill-blue]] a little further off [3]. None of that painting-archive presence has anything to do with the Air Force: it simply shows that muted sky blues of this kind recur across centuries of landscape and portrait painting [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the air-superiority military doctrine; the paint chip is Federal Standard 595",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library (a Wikipedia list)"
+  },
+  "aka": [],
+  "siblings": [
+   "iceberg",
+   "carolina-blue",
+   "grey-blue",
+   "squill-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 138,
+  "rank_pct": 58,
+  "measured": {
+   "lch": [
+    63.8,
+    22.9,
+    252.5
+   ],
+   "nearest": [
+    [
+     "Iceberg",
+     3.2
+    ],
+    [
+     "Carolina Blue",
+     4.5
+    ]
+   ]
+  },
+  "painter": {
+   "name": "Alfred Sisley",
+   "n": 5,
+   "of": 50,
+   "lift": 6.9
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Wikipedia, citing US Federal Standard 595",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE Lab ΔE)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does the name \"Air Superiority Blue\" come from?",
+   "choices": [
+    "A military paint standard",
+    "A 19th-century dye house",
+    "A gemstone",
+    "A painter's own mixture"
+   ],
+   "answer": "A military paint standard",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: finding this blue in a painting from 1482 proves the color existed under this name then.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "This sky blue's name comes from a military paint chip, not a dictionary."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-09",
+  "issues": [
+   "Exact coining date undocumented; stated as such rather than guessed."
+  ]
+ },
+ "slug": "air-superiority-blue",
+ "words": 313
+}

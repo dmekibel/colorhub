@@ -1,0 +1,145 @@
+{
+ "slug": "greyish-umber",
+ "name": "Greyish umber",
+ "hex": "#5C544E",
+ "names": [
+  "Greyish umber"
+ ],
+ "tier": "traditional",
+ "depth": "brief",
+ "lede": "Ainezumi, mousy indigo",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Greyish umber is a dark, neutral grey-brown carried into our library from the Japanese traditional color Ainezumi, \"mousy indigo,\" and it sits in a crowded ISCC-NBS neighborhood that also holds names like Argali, Goat and Mordore.",
+   "body": "The nearest named colors on file are [[bone-brown]], [[grebe]], [[zinc-grey]] and [[starling]], at 2.8, 2.9, 2.9 and 3.4 ΔE [1]. No book consulted independently dates the coinage beyond that library gloss, so it is undocumented here [1].\n\nThe swatch measures lightness 36, chroma 5 and hue 66 degrees, filed under Neutrals and used chiefly for painter's pigments, 4.9 units from [[umber]] [1]. The ISCC-NBS 1955 block that covers this neighborhood (block 64) carries two dozen other alternate names for nearby shades, including Goat and Mordore, both dated by Maerz and Paul to 1930 as first recorded in 1705 and 1791 respectively, and Argali, first recorded 1925 [1]. A greener cousin at the same depth is [[greenish-umber]] [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within range of this swatch appears in 2,775 of the 23,781 paintings in our archive, about 11.7 percent, as photographed, chiefly in mid-tones [2]. Vilhelm Hammershøi carries it in 26 of 50 dated paintings, 4.5 times the archive's overall rate[2]. A date of 17 recorded for one early match, Jacques Linard's *Still Life with Plums*, is a known gap in the archive's date field and is not used here as a reliable year [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "藍 (ai), indigo, + 鼠 (nezumi), mouse",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library (Wikipedia, \"Traditional colors of Japan\"; ISCC-NBS 1955, block 64; Maerz & Paul 1930)"
+  },
+  "aka": [
+   "Ainezumi",
+   "藍鼠"
+  ],
+  "siblings": [
+   "bone-brown",
+   "grebe",
+   "zinc-grey",
+   "starling"
+  ],
+  "parent": "umber",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Ainezumi (藍鼠), \"mousy indigo\""
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2775,
+  "painters": [
+   {
+    "name": "Vilhelm Hammershøi",
+    "n": 50,
+    "hits": 26,
+    "lift": 4.46
+   }
+  ],
+  "iscc_nbs_block": 64,
+  "measured": {
+   "lch": [
+    36,
+    5,
+    66
+   ],
+   "nearest": [
+    [
+     "Bone Brown",
+     2.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional color names (Wikipedia, \"Traditional colors of Japan\")",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, as photographed (data/graph/fieldnotes, tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS (1955), block 64; Maerz and Paul, A Dictionary of Color (1930)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the Japanese name Ainezumi combine?",
+   "choices": [
+    "Indigo and mouse",
+    "White and stone",
+    "Soot and bamboo",
+    "Tea and garden"
+   ],
+   "answer": "Indigo and mouse",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: all two dozen alternate names in ISCC-NBS block 64 share the same first-recorded date.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which painter's archive matches for this color are far above the overall rate?",
+   "choices": [
+    "Vilhelm Hammershøi",
+    "Caravaggio",
+    "Turner",
+    "Botticelli"
+   ],
+   "answer": "Vilhelm Hammershøi",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Greyish umber's Japanese name, ainezumi, means \"mousy indigo,\" and it shares a crowded ISCC-NBS neighborhood with names like Goat and Mordore."
+ ],
+ "words": 201,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No book consulted independently dates the name Ainezumi beyond the library's own gloss; stated as undocumented.",
+   "One archive match carries a corrupted year (17) and is cited only by painter and title, not by date.",
+   "lint 2026-10-09"
+  ]
+ }
+}

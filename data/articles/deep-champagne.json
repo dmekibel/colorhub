@@ -1,0 +1,116 @@
+{
+ "slug": "deep-champagne",
+ "name": "Deep Champagne",
+ "hex": "#FAD6A5",
+ "names": [
+  "Deep Champagne"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Deep Champagne is a pale, warm orange-yellow named for the wine, a CSS keyword also carried by the ISCC-NBS system in 1955, and the first-seen match in our archive goes back to the year 1000.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Named for the wine",
+   "body": "Our data traces the name to champagne, the sparkling wine, a plant-and-landscape word rather than a pigment [1]. It is a CSS color keyword, and Wikipedia's entry for it cites the ISCC-NBS system of 1955, which files the hue as block 73, \"pale orange yellow\" [1]. That single ISCC-NBS block holds dozens of other names besides Deep Champagne, among them Almond Cream, Apricot Cream and Bath Stone, which gives a sense of how finely that one pale tan region has been subdivided by different namers over time [1].\n\nIts nearest distinct neighbor by computed color distance is [[leghorn|Leghorn]], 3.4 units away and read in our data as \"darker\" [2]. [[wheat|Wheat]] sits a touch further, 4.2 units off, called \"duller\" [2]. In LCH terms Deep Champagne measures lightness 88, chroma 29, hue 79 degrees: light, moderately saturated, and warm [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a close match covers enough of the canvas in 566, as photographed, more common than 76 percent of the named colors we track [3]. It peaks in paintings from the 1400s, at 1.2 times the rate expected from that century's share of the archive [3]. Pierre Puvis de Chavannes is its most devoted painter here, with the color present in 4 of 25 of his works, well above the baseline of the museums those works come from [3]. Its earliest archive match is a painting dated to the year 1000, nine centuries before champagne itself existed as a sparkling wine; the match is a look-alike hue in an aged photograph, not evidence of the drink or the name [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "champagne, the sparkling wine",
+   "first_recorded": "ISCC-NBS, 1955 (block 73); also a CSS keyword",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "leghorn",
+   "wheat",
+   "capucine-buff",
+   "pale-orange-yellow"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 566,
+  "measured": {
+   "lch": [
+    88,
+    29,
+    79
+   ],
+   "nearest": [
+    [
+     "Leghorn",
+     3.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph and library (data/graph/nodes-d.json; data/library.json): Deep Champagne — CSS keyword; Wikipedia citing ISCC-NBS 1955, block 73",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-d.json): nearest distinct neighbors by CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings, as photographed, data/graph/fieldnotes/d.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "True or false: Deep Champagne's earliest archive match predates the sparkling wine itself.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which painter in our archive is most devoted to Deep Champagne?",
+   "choices": [
+    "Pierre Puvis de Chavannes",
+    "Eugène Boudin",
+    "Claude Monet",
+    "Eastman Johnson"
+   ],
+   "answer": "Pierre Puvis de Chavannes",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Its earliest archive match dates to the year 1000, nine centuries before champagne the wine existed."
+ ],
+ "words": 293,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No book concordance hits for this slug; written from the color graph, library and archive data only.",
+   "lint 2026-10-09"
+  ]
+ }
+}

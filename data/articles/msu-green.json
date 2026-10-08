@@ -1,0 +1,132 @@
+{
+ "slug": "msu-green",
+ "name": "MSU Green",
+ "hex": "#18453B",
+ "names": [
+  "MSU Green"
+ ],
+ "tier": "place",
+ "depth": "brief",
+ "lede": "MSU Green is a very dark, slightly blue green used as a school color, its initials standing for a state university rather than any pigment or dye.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "An institution's green",
+   "body": "Our library traces the name only to a Wikipedia color list, which does not say which of several schools using the initials MSU it names, or when the color was adopted [1]. The near-duplicate name Zydeco appears in the same library entry at a distance of only 1.5, suggesting two independent namings landed on almost the same dark green [1].\n\nIts nearest named neighbor is [[brunswick-green]], 3.3 units of CIEDE2000 away and described as almost the same [1]. [[amulet]] sits a little farther out at 3.6, lighter, and [[dark-hunter-green]] at 3.9, greener [1]. Measured in LCH, it sits at lightness 26, among the darkest greens in our library [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 119 of 23,781 paintings (0.5 percent), more common than 55 percent of the named colors, as photographed [2]. Paul Gauguin is its most devoted painter, using it in 5 of the 50 Gauguin works in our archive, a rate 6.8 times the baseline of the museums those works come from [2]. It peaks in the 1900s, in 19 of 1,674 paintings, at 3.5 times the expected rate [2]. Inside a painting it most often plays a shadow, 47 percent of the time, or a hidden color, 45 percent, a role measured by lightness rank within the canvas [2]. These are photographs of varnished paintings, so a color match is not a pigment test [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a university's initials (MSU); the specific school is undocumented in the sources consulted",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub library (a Wikipedia list)"
+  },
+  "aka": [],
+  "siblings": [
+   "brunswick-green",
+   "amulet",
+   "dark-hunter-green",
+   "bakst-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings, as photographed",
+  "n_present": 119,
+  "rank_pct": 55,
+  "peak_century": [
+   1900,
+   3.5
+  ],
+  "role_top": [
+   "shadow",
+   47
+  ],
+  "top_painter": [
+   "Paul Gauguin",
+   6.8
+  ],
+  "measured": {
+   "lch": [
+    26,
+    18,
+    175
+   ],
+   "nearest": [
+    [
+     "Brunswick Green",
+     3.3
+    ],
+    [
+     "Amulet",
+     3.6
+    ],
+    [
+     "Dark Hunter Green",
+     3.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and graph (data/library.json, data/graph/nodes and edges): name source, place tier, near-duplicate, CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What do the initials MSU in this color's name refer to?",
+   "choices": [
+    "A university; which one is undocumented here",
+    "A paint manufacturer",
+    "A museum's storage unit",
+    "A meteorological survey"
+   ],
+   "answer": "A university; which one is undocumented here",
+   "kind": "pick"
+  },
+  {
+   "q": "Which painter uses this color far above the rate of his peers in our archive?",
+   "choices": [
+    "Paul Gauguin",
+    "Claude Monet",
+    "Rembrandt",
+    "Georgia O'Keeffe"
+   ],
+   "answer": "Paul Gauguin",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "MSU Green has a near-duplicate called Zydeco, just 1.5 units away, two names for almost the same dark green."
+ ],
+ "words": 258,
+ "status": "checked",
+ "checked": {
+  "by": "batch-10",
+  "date": "2026-10-09",
+  "issues": [
+   "Which MSU (university) the name refers to is not documented in our sources; left unresolved rather than guessed.",
+   "lint 2026-10-09"
+  ]
+ }
+}

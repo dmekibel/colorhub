@@ -1,0 +1,137 @@
+{
+ "slug": "dusty-purple",
+ "name": "Dusty Purple",
+ "hex": "#825F87",
+ "names": [
+  "Dusty Purple"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dusty Purple is a muted, mid-dark [[purple]], carried by four separate sources on file, from the ISCC-NBS dictionary to a traditional Japanese name.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "One color, four records",
+   "body": "The ISCC-NBS 1955 dictionary places this color in its crowded block 223, among more than fifty related names it calls \"moderate purple\", only 2.5 units away, one of the closest matches in our library [1]. Wikipedia, the 2010 xkcd survey and Maerz and Paul's 1930 dictionary all separately carry versions of the same point [1][2]. In Munsell terms it reads about 6.9P 4.4/6.0 [1].\n\nOur data also carries a traditional Japanese name at this color, *Hashita-iro*, written 半色 and meaning \"half color\", a shade once worn between the fully permitted and the restricted purples of the old court dress code [3]. Related names on file include [[dusty-lavender]], paler, and [[dull-purple]], its nearest named neighbor [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in only 3 of 23,781 paintings, one of the rarer matches among our color names, as photographed [4]. The clearest is Paul Signac's 1893 *[[painting:commons-Q17491415|Woman with a Parasol]]* [4]. In every match it plays the darkest shadow in its painting, never a mid-tone or a highlight [4]. Too few paintings share it to name a leading painter or decade with confidence [4]. These counts are a computed color match on photographs of aged, varnished paintings, not a pigment test [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented in Western sources; the Japanese Hashita-iro, 半色, \"half color\"",
+   "first_recorded": "ISCC-NBS, 1955; Maerz and Paul, 1930",
+   "source": "ColorHub library and graph nodes"
+  },
+  "aka": [
+   "Hashita-iro"
+  ],
+  "siblings": [
+   "dusty-lavender",
+   "dull-purple",
+   "amethyst"
+  ],
+  "parent": "purple",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Hashita-iro (半色)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 3,
+  "role": {
+   "shadow": 1.0
+  },
+  "measured": {
+   "mu": "6.9P 4.4/6.0",
+   "nearest_iscc": [
+    "moderate purple",
+    2.5
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub graph nodes: Munsell conversion, ISCC-NBS 1955 block 223",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (Wikipedia; xkcd 2010; Maerz and Paul 1930)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional color names (jp source)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the Japanese name for this color, Hashita-iro, mean?",
+   "choices": [
+    "Half color",
+    "Evening purple",
+    "Wisteria shade",
+    "Royal thread"
+   ],
+   "answer": "Half color",
+   "kind": "pick"
+  },
+  {
+   "q": "In our archive, Dusty Purple most often plays which role in a painting?",
+   "choices": [
+    "The darkest shadow",
+    "A bright highlight",
+    "It never appears",
+    "A background wash only"
+   ],
+   "answer": "The darkest shadow",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: four separate sources in our data carry a version of this color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dusty Purple carries a Japanese name, Hashita-iro, meaning simply \"half color\"."
+ ],
+ "words": 221,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); very low archive count, no painter or decade claimed.",
+   "lint 2026-10-09"
+  ]
+ }
+}

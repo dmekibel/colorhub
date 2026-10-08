@@ -1,0 +1,116 @@
+{
+ "slug": "ecru-olive",
+ "name": "Ecru-Olive",
+ "hex": "#AA9760",
+ "names": [
+  "Ecru-Olive"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Ecru-Olive is a muted tan-olive that shares its ISCC-NBS block with at least ten other named colors.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "One block, many names",
+   "body": "Ridgway's 1912 nomenclature places the swatch at plate XXX, hue 21′′, and the ISCC-NBS system of 1955 reads it as a dark yellow, under 2 units from the block center, among the closer matches in our library [1]. The same ISCC-NBS region also covers names such as Sudan, Russet Leaf, Middle Stone and Light Yellowish Olive, the last under 1.1 units from this hex [1].\n\nOur library's own nearest match is [[dark-beige]], with [[dark-olive-buff]] and [[water-grey]] close by [1][2]. The name pairs \"ecru\", an unbleached linen tone, with \"olive\" [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This color, as photographed, appears in 2,718 of 23,781 paintings, about 11.43 percent, more common than 94 percent of the named colors we track [3]. It peaks in the 1700s, in 314 of 3,449 paintings, at 9.1 percent of that period's paintings, 1.3 times the overall rate [3]. Inside a painting it most often plays a light [3]. Its most devoted painter is Arnoud van Halen, carrying it in 27 of 50 works here, 5.0 times the baseline for his museums [3]. It is most over-represented in Iran (3.5 times expected; 10 of 29 paintings) [3]. The earliest match in the archive is a 799 painting, 1113 years before the name's 1912 record, so this is a look-alike hue in an aged photograph, not a pigment identification, a floor and not a first, since the archive's early centuries are thin [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "ecru (unbleached linen) and olive",
+   "first_recorded": "1912, Ridgway plate XXX",
+   "source": "data/library.json"
+  },
+  "aka": [],
+  "siblings": [
+   "dark-beige",
+   "dark-olive-buff",
+   "water-grey",
+   "oil-green"
+  ],
+  "parent": "olive",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2718,
+  "pct": 11.43,
+  "peak": "1700s, 9.1% of this period's paintings, 1.3x expected",
+  "painter": [
+   "Arnoud van Halen",
+   27,
+   50
+  ],
+  "country": [
+   "Iran",
+   10,
+   29,
+   3.5
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930 and other name sources; CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub Color Graph look-alikes (data/graph), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5 per cent of canvas); data/graph/fieldnotes",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "About what share of the archive's paintings contain Ecru-Olive?",
+   "choices": [
+    "Over 11 percent",
+    "Under 1 percent",
+    "Exactly 50 percent",
+    "0.01 percent"
+   ],
+   "answer": "Over 11 percent",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Ecru-Olive shares its ISCC-NBS region with several other named colors.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Ecru-Olive turns up in more than one painting in nine in our archive."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Fixed: the field-notes paragraph (and the matching \"field\" object) invented an earliest-match claim (\"a Roman funerary portrait from about 25 CE\") that doesn't match the real first-seen record (a 799 painting, no painter attributed) and borrowed a Paulus Potter painter stat (13 of 28) that belongs to a different slug (fallen-leaf, 11 of 28) — this slug's real most-devoted painter is Arnoud van Halen (27 of 50, 5.0x). The Iran over-representation count was also off (13 of 29, should be 10 of 29) and the presence count (2,709) didn't exactly match the real count (2,718 as-photographed). Rewrote the paragraph directly from data/graph/fieldnotes for this slug; removed every unsupported claim rather than inventing a replacement for it.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 251
+}

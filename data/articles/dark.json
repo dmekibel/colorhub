@@ -1,0 +1,126 @@
+{
+ "slug": "dark",
+ "name": "Dark",
+ "hex": "#1B2431",
+ "names": [
+  "Dark"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Dark is a near-black blue first recorded by Maerz and Paul's 1930 dictionary in 1915, later folded into one ISCC-NBS 1955 block under several other names.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dictionary word, not a description",
+   "body": "Maerz and Paul's *A Dictionary of Color* first records this name in 1915, on plate 6, position L 8 [1]. The ISCC-NBS 1955 dictionary lists the same block under three separate names, Mascot Blackish, Semi-Gloss, and Transatlantic Blue, all pointing at the same small, blackish-blue region [1].\n\nThe nearest named colors on file are [[black-blue]], [[midnight-navy]], [[greyish-navy]] and [[bagdad]], at 3.7, 4.1, 4.1 and 4.9 ΔE [1]. It has no Munsell notation on file, and the nearest family colors are [[black]], [[dark-green|Dark Green]], [[navy]], and [[charcoal]], all occupying the same low-lightness end of the wheel [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this near-black in 482 of 23,781 paintings, about 2 percent, as photographed [2]. It sits almost entirely in the shadows: 95 percent of its appearances rank as the darkest tone in their painting's six-color palette [2]. [[painter:johannes-vermeer|Vermeer]] carries it nearly seven times the archive's average rate, and the earliest dated hit is a 1325 altarpiece by Ugolino di Nerio, a floor and not a first, since the archive's early centuries are thin [2]. It covers the most canvas in John Neagle's 1836 *Thomas W. Dyott*, a near-black coat against a near-black ground [2]. These are computed color matches on aged, varnished photographs, not pigment identifications [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a plain descriptive dictionary entry; not named after a person or place",
+   "first_recorded": "1915 (Maerz and Paul, 1930 dictionary, plate 6)",
+   "source": "Maerz and Paul, A Dictionary of Color (1930)"
+  },
+  "aka": [
+   "Mascot Blackish (ISCC-NBS, near-duplicate)",
+   "Semi-Gloss (ISCC-NBS, near-duplicate)",
+   "Transatlantic Blue (ISCC-NBS, near-duplicate)"
+  ],
+  "siblings": [
+   "black-blue",
+   "midnight-navy",
+   "greyish-navy",
+   "bagdad"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 482,
+  "top_paintings": [
+   "nga-34126",
+   "smk-KMSsp618",
+   "commons-Q18222990"
+  ],
+  "painters": [
+   "Johannes Vermeer"
+  ],
+  "role": {
+   "shadow": 0.95,
+   "mid": 0.05
+  },
+  "measured": {
+   "lch": [
+    14,
+    10,
+    271
+   ],
+   "nearest": [
+    [
+     "Black Blue",
+     3.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz and Paul 1930, plate 6 L 8, first recorded 1915; ISCC-NBS 1955 dictionary, block 188",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does the name \"Dark\" first appear, by our library's dating?",
+   "choices": [
+    "Maerz and Paul's 1930 color dictionary, dated to 1915",
+    "The CSS Color 4 specification",
+    "Ridgway's 1912 plates",
+    "A 19th-century French dye house"
+   ],
+   "answer": "Maerz and Paul's 1930 color dictionary, dated to 1915",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: almost all of Dark's appearances in our archive sit in a painting's lightest areas.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The 1955 ISCC-NBS dictionary gives this same small blackish-blue region three different names: Mascot Blackish, Semi-Gloss, and Transatlantic Blue."
+ ],
+ "words": 230,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No private fact-card file for this slug.",
+   "Concordance hits for \"dark\" in color-kb are all generic uses of the word, not references to this dictionary name; not used as sources.",
+   "lint 2026-10-09"
+  ]
+ }
+}

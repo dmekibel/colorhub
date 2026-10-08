@@ -1,0 +1,139 @@
+{
+ "slug": "light-forest-green",
+ "name": "Light Forest Green",
+ "hex": "#4F9153",
+ "names": [
+  "Light Forest Green"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Light Forest Green is a mid, leafy green from the 2010 xkcd color survey, the lighter counterpart to Dark Forest Green, both built as modifiers on the same base name.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The lighter half of a pair",
+   "body": "Where volunteers in the xkcd survey added *dark* to [[forest-green]] for one entry, they added *light* to the same base for this one, and our library files them as a matched pair [1][2]. Wikipedia separately lists the same hex value, #4F9153 [2]. The nearest 1955 ISCC-NBS block, strong yellowish green, sits 4.4 units away, close enough to call a near match [2]. The nearest named colors on file are [[mineral-green]], [[may-green]] and [[green]], at 3, 3.5 and 4.6 ΔE [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our 23,781-painting archive, a color within six units of Light Forest Green covers at least one per cent of the canvas in 23 paintings, about 0.1 percent of the archive, as photographed, rarer than 65 percent of the named colors tracked [3]. It peaks in paintings from the 1900s, at 4.2 times the archive's overall rate for that century, and most often plays an accent rather than a dominant color, in 62 percent of its appearances [3]. Its earliest match, Francis Alexander's portrait dated 1835, sits 175 years before the xkcd name was recorded, which only shows the hue existed long before the modern label, a floor and not a first, since the archive's early centuries are thin [3]. In printed English the phrase rose fastest and peaked in the 1930s [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: light + forest-green",
+   "first_recorded": "xkcd color survey, 2010",
+   "source": "ColorHub color library and Color Graph"
+  },
+  "aka": [],
+  "siblings": [
+   "mineral-green",
+   "may-green",
+   "green",
+   "sea-green"
+  ],
+  "parent": "forest-green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 23,
+  "measured": {
+   "lch": [
+    54.6,
+    43.6,
+    142.6
+   ],
+   "munsell": "0.4G 5.3/7.0",
+   "iscc_nbs": {
+    "name": "strong yellowish green",
+    "de2000": 4.4
+   },
+   "nearest": [
+    [
+     "Mineral Green",
+     3.0
+    ],
+    [
+     "May Green",
+     3.5
+    ],
+    [
+     "Green",
+     4.6
+    ],
+    [
+     "Sea Green",
+     5.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "xkcd color survey (2010), crowdsourced color-name list",
+   "loc_kind": null,
+   "url": "https://blog.xkcd.com/2010/05/03/color-survey-results/"
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library and Color Graph (data/library.json, data/graph): ISCC-NBS block, Munsell notation, LCH values",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive fieldnotes, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "web",
+   "cite": "Google Books Ngram, case-insensitive",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "Light Forest Green and Dark Forest Green are both modifiers built on which base name?",
+   "choices": [
+    "Forest Green",
+    "Hunter Green",
+    "Olive",
+    "Pine Green"
+   ],
+   "answer": "Forest Green",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: inside a painting, Light Forest Green usually dominates the canvas rather than acting as an accent.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Light Forest Green usually plays a supporting accent, not the lead color, in our painting archive."
+ ],
+ "words": 244,
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

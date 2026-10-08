@@ -1,0 +1,127 @@
+{
+ "slug": "pale-teal",
+ "name": "Pale Teal",
+ "hex": "#82CBB2",
+ "names": [
+  "Pale Teal"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Pale Teal is a washed-out, bluish green built by the modifier grammar \"pale + [[teal]]\", closest in our library to Celadon.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A paler teal",
+   "body": "Pale Teal comes from the xkcd 2010 color-name survey, where crowd respondents paired a shade word with a family name rather than coining something new [1]. The ISCC-NBS block for it reads \"very light bluish green\" [1]. In Munsell terms it sits near 9.1G 7.6/5.0, a light, moderately saturated green [1].\n\nThe nearest named colors on file are [[light-sulphate-green]] and [[medium-aquamarine]], at The hex is a screen approximation; no pigment or dye is implied by the match [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Pale Teal is one of our rarer matches: it covers at least 2% of the canvas in 7 of 23,781 paintings, rarer than 82% of the named colors we track, close in family to [[aquamarine]], as photographed [2]. The within-painting lens, which asks where a color sits by lightness rather than by raw coverage, finds it in only 2 of those [2].\n\nThe earliest match is 1825 (nga-43713), with later ones running to 1940, 185 years before the name's own earliest record in 2010, a floor and not a first, since the archive's early centuries are thin [2]. A match this old says only that a similar-looking green was photographed there, not that the painter or anyone else used this name or mixed it the same way [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: pale + teal",
+   "first_recorded": "2010, xkcd color survey",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "light-sulphate-green",
+   "medium-aquamarine",
+   "cobalt-green",
+   "eggshell-green"
+  ],
+  "parent": "teal",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 7,
+  "n_present_within": 2,
+  "rank_pct": 82,
+  "first_dated": {
+   "id": "nga-43713",
+   "year": 1825
+  },
+  "years_before_record": 185,
+  "measured": {
+   "lch": [
+    76.5,
+    28.8,
+    169.4
+   ],
+   "nearest": [
+    [
+     "Light Sulphate Green",
+     3.5
+    ],
+    [
+     "Medium Aquamarine",
+     4.2
+    ],
+    [
+     "Cobalt Green",
+     4.3
+    ],
+    [
+     "Eggshell Green",
+     5.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and color graph: xkcd (2010), ISCC-NBS (1955) entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which survey first recorded the name Pale Teal?",
+   "choices": [
+    "The xkcd 2010 color-name survey",
+    "The RAL 1927 standard",
+    "Ridgway's 1912 color nomenclature",
+    "Werner's 1821 nomenclature"
+   ],
+   "answer": "The xkcd 2010 color-name survey",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Pale Teal is more common than most named colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pale Teal is rarer than 82% of the named colors in our 23,781-painting archive."
+ ],
+ "words": 226,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

@@ -1,0 +1,114 @@
+{
+ "slug": "light-ivory",
+ "name": "Light Ivory",
+ "hex": "#E6D2B5",
+ "names": [
+  "Light Ivory"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Light Ivory is a pale, warm beige standardized by the German RAL paint system in 1927 and later carried into the American ISCC-NBS color dictionary, grammatically a lighter version of Ivory rather than its own invention.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A lighter Ivory",
+   "body": "Light Ivory is RAL 1015, one of the original RAL 840 colors fixed by Germany's RAL paint-naming body in 1927, and it also appears as block 89 in the ISCC-NBS color-name dictionary of 1955, filed there as a pale yellow [1]. Its name is built or [[wheat]]: a brightness word in front of an existing color name, [[ivory]], rather than a name coined on its own [1]. In Munsell notation it sits at 0.1Y 8.5/2.5, and the nearest named color in our library, Beige, is only 3.4 units away [1]. Close lookalikes include [[cream]] and [[antique-white]], both warmer, paler neutrals from the same family [1]. As with any RAL swatch, the hex value here is a screen approximation of a printed paint chip, not a measured pigment [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this beige in 1,830 of 23,781 paintings, 7.7 percent, more common than 92 percent of our named colors, as photographed [2]. It plays a highlight in just over half of its appearances and peaks, unusually, in paintings from the 1100s, 14 percent of the handful we have from that century [2]. Xugu paints it most devotedly, in 9 of his 16 catalogued works [2]. The earliest dated example is from the year 900, more than a thousand years before RAL fixed the name in 1927; that gap is a reminder that the match is a look-alike hue, not proof of the paint itself, a floor and not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Ivory, lightened; a RAL standard-system name",
+   "first_recorded": "RAL, 1927 (RAL 1015)",
+   "source": "ColorHub color library (RAL; ISCC-NBS 1955, block 89)"
+  },
+  "aka": [],
+  "siblings": [
+   "ivory",
+   "beige",
+   "cream",
+   "antique-white"
+  ],
+  "parent": "ivory",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1830,
+  "rate": 0.077,
+  "measured": {
+   "lch": [
+    85,
+    17,
+    82
+   ],
+   "nearest": [
+    [
+     "Beige",
+     3.4
+    ]
+   ]
+  },
+  "first_seen": {
+   "year": 900,
+   "painting": "cma-134789",
+   "painter": "Zhao Guangfu"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: RAL 1927 (RAL 1015); ISCC-NBS 1955, block 89 (F/T)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which paint standard first fixed Light Ivory as RAL 1015?",
+   "choices": [
+    "Pantone",
+    "The German RAL system",
+    "Crayola",
+    "Munsell"
+   ],
+   "answer": "The German RAL system",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Light Ivory was coined as its own independent name, unrelated to Ivory.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Light Ivory turns up in nearly 8 of every 100 paintings in our archive."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 284
+}

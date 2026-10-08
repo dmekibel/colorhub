@@ -1,0 +1,116 @@
+{
+ "slug": "vetiver-green",
+ "name": "Vetiver Green",
+ "hex": "#989973",
+ "names": [
+  "Vetiver Green"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Vetiver Green is a dusty, grey-tinged olive, named for the fragrant tropical grass whose roots are used in perfume and thatch, first plated by Ridgway in 1912.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A grass root's grey-green",
+   "body": "Robert Ridgway recorded this hue in 1912, plate XLVII, hue 25'''', and both the ISCC-NBS block list of 1955 and Maerz and Paul's 1930 dictionary carry it on from there [1]. Vetiver is a perennial grass grown for its roots, which are distilled into a smoky, earthy perfume oil rather than for any green part of the plant, so the name borrows the plant's identity, not a leaf or root color actually matched to it [1].\n\nThe nearest named colors on file are [[silver-green]], [[artichoke-green]], [[eucalyptus]] and [[celadon-green]], at 2.8, 2.8, [[eucalyptus]] sits only slightly further off, duller and greyer again [2]. Measured in LCH it is lightness 62, chroma 21, hue 109 degrees, a muted yellow-green with little saturation [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this olive in 1,173 of 23,781 paintings (4.93%, as photographed), more common than 86% of the named colors we track [3]. It most often plays a light within a painting, in 35% of its 660 strongest matches [3]. Christen Købke is its most devoted painter, appearing in 6 of his 50 works at 4.0 times the baseline rate [3]. The earliest dated match runs back to 916, nearly a thousand years before the name itself was recorded in 1912; the match is a look-alike hue in an aged photograph, not proof that the pigment was there, a floor and not a first, since the archive's early centuries are thin [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "vetiver grass",
+   "first_recorded": "1912 (Ridgway, plate XLVII)",
+   "source": "Ridgway, Color Standards and Color Nomenclature"
+  },
+  "aka": [],
+  "siblings": [
+   "silver-green",
+   "artichoke-green",
+   "eucalyptus",
+   "celadon-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1173,
+  "measured": {
+   "lch": [
+    62,
+    21,
+    109
+   ],
+   "nearest": [
+    [
+     "Silver Green",
+     2.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Ridgway 1912 plate XLVII, hue 25''''; ISCC-NBS 1955 block 109; Maerz & Paul 1930, plate 22 G 1",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library and Color Graph look-alikes (data/graph/), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What part of the vetiver plant is actually used for its scent?",
+   "choices": [
+    "Its roots",
+    "Its flowers",
+    "Its seeds",
+    "Its bark"
+   ],
+   "answer": "Its roots",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the color's first archive appearance (916) proves the pigment existed then.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Vetiver Green is named for a grass grown for its roots, not its color."
+ ],
+ "words": 262,
+ "status": "checked",
+ "checked": {
+  "by": "batch-16",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); written from the color graph, library and archive only.",
+   "lint 2026-10-09"
+  ]
+ }
+}

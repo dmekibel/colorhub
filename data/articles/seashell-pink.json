@@ -1,0 +1,126 @@
+{
+ "slug": "seashell-pink",
+ "name": "Seashell Pink",
+ "hex": "#F6D6BC",
+ "names": [
+  "Seashell Pink"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Seashell Pink is a pale yellowish pink that Maerz and Paul trace to 1901, and in our archive it concentrates heavily in the work of a single painter, Xugu.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A pale pink among many pale pinks",
+   "body": "Ridgway's 1912 plates give Seashell Pink at hue 11′, tone f, on plate XIV, and the Inter-Society Color Council's 1955 census files it, in block 28, as a pale yellowish pink, Munsell 6.0YR 8.7/3.1 [1]. Maerz and Paul trace the name to 1901, on their plate 10 A 4 [1].\n\nColorHub's library places its nearest neighbor at [[desert-sand]], about 3.2 units away, with [[alabaster]] and [[unbleached-silk]] almost as close [1]. *Seashell* joins a small family of shell-named pinks, including [[shell-pink]], a cooler, grayer cousin rather than a twin [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds Seashell Pink in 203 of 23,781 paintings, about 0.9 percent, almost always as a highlight [2]. It peaks around 1900, twice its average rate, and concentrates heavily in one painter's hand: Xugu carries it in 7 of his 16 dated works [2]. Chinese paintings carry it nearly six times the archive's base rate, with Nepal and India also above average [2]. It shares canvases with [[peach]] far more than chance alone predicts, and with [[ecru]] and [[beige]] as well [2]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the seashell",
+   "first_recorded": "1901, per Maerz & Paul (1930)",
+   "source": "Ridgway (1912) / Maerz & Paul via ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "desert-sand",
+   "shell-pink"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "shell-pink",
+    "gloss": "a cooler, grayer pink in the same batch, not identical despite the shared root"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 203,
+  "measured": {
+   "lch": [
+    88,
+    18,
+    67
+   ],
+   "nearest": [
+    [
+     "Desert Sand",
+     3.18
+    ],
+    [
+     "Alabaster",
+     3.33
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930 entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What year does Maerz and Paul give for Seashell Pink's name?",
+   "choices": [
+    "1901",
+    "1930",
+    "1912",
+    "1955"
+   ],
+   "answer": "1901",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Seashell Pink and Shell Pink are exactly the same color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which painter's work shows Seashell Pink far above the archive's average?",
+   "choices": [
+    "Xugu",
+    "Rembrandt",
+    "Vermeer",
+    "Titian"
+   ],
+   "answer": "Xugu",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Seashell Pink concentrates heavily in one painter's hand in our archive: Xugu carries it in 7 of his 16 dated works."
+ ],
+ "words": 217,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

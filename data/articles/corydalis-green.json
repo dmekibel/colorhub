@@ -1,0 +1,122 @@
+{
+ "slug": "corydalis-green",
+ "name": "Corydalis Green",
+ "hex": "#BAC4A6",
+ "names": [
+  "Corydalis Green"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Corydalis Green is a pale yellow green named for corydalis, a genus of flowering plants, recorded in Ridgway's 1912 standard and repeated by Maerz and Paul in 1930.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Named for a flowering plant",
+   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* lists Corydalis Green on plate XLI, hue 29′′′, tone d [1]. Maerz and Paul repeat the same name in 1930, on their plate 19 B 4, and the ISCC-NBS system of 1955 assigns it block 122, grayish yellow green, 7.1 units from that block's centroid, a wider gap than most Ridgway names show [2]. The nearest named colors on file are [[pale-green-grey]], [[greenish-glaucous]], [[pale-olive-grey]] and [[yellowish-glaucous]], at 3.4, 3.4, \nCorydalis is a genus of several hundred flowering plants, many with feathery blue-green leaves, grown in gardens and found wild across the Northern Hemisphere; the color borrows the foliage's pale, slightly grey green rather than the flowers' usual yellow or pink [1]. It sits among the muted greens near [[apple-green]] and [[moss]] [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Corydalis Green covers at least five per cent of the canvas in 473 of them, about 2.0 per cent, as photographed [3]. It plays a highlight in 94 per cent of its appearances and peaks in paintings from the 1860s [3]. Johan Hendrik Weissenbruch is its most devoted painter here, in 3 of his 12 works, and it is comparatively frequent in Rajput painting, 7 of 97 works [3]. These are museum photographs of aged, varnished paintings, so the match is a screen color, not a pigment test [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "corydalis, a genus of flowering plants",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "Ridgway, Color Standards and Color Nomenclature; Maerz and Paul, A Dictionary of Color; ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "pale-green-grey",
+   "greenish-glaucous",
+   "pale-olive-grey",
+   "yellowish-glaucous"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 473,
+  "pct_archive": 2.0,
+  "role_highlight": 0.94,
+  "peak_decade": 1860,
+  "nearest": [
+   [
+    "Celadon",
+    7.5
+   ]
+  ],
+  "measured": {
+   "nearest": [
+    [
+     "Pale green grey",
+     3.4
+    ],
+    [
+     "Greenish Glaucous",
+     3.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XLI, hue 29′′′, tone d (via ColorHub library)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; Maerz and Paul 1930, ISCC-NBS 1955 block 122), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is Corydalis Green named for?",
+   "choices": [
+    "A genus of flowering plants",
+    "A bird",
+    "A mineral"
+   ],
+   "answer": "A genus of flowering plants",
+   "kind": "pick"
+  },
+  {
+   "q": "Corydalis Green plays a highlight in most of its appearances in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Corydalis Green borrows a garden plant's feathery leaves, not its flowers."
+ ],
+ "words": 262,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

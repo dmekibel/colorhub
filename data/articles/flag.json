@@ -1,0 +1,134 @@
+{
+ "slug": "flag",
+ "name": "Flag",
+ "hex": "#373957",
+ "names": [
+  "Flag"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Flag is a dark, grayish purplish blue from Maerz and Paul's 1930 dictionary, first recorded in 1918 and closest to navy among the core colors.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A 1918 name, no documented origin",
+   "body": "Maerz and Paul's 1930 dictionary lists Flag on plate 46, swatch I12, first recorded in 1918 [1]. The book gives no reason for the name, and whether it refers to a national flag, a flagstone, or the flag-shaped iris flower is undocumented here [1]. The same plate carries two close neighbors, Grape Blue and Roma Blue, both first recorded nearly a decade later, in 1927 and 1928 [1]. Our own classification places the hue in the ISCC-NBS region called grayish purplish blue, Munsell notation 7.8PB 2.5/3.9 [2].\n\nThe nearest named colors on file are [[colonial]], [[bramble]], [[dark-bluish-violet]] and [[dusky-blue]], at 2.8, 3.7, 3.8 and 4 ΔE [2]. Flag reads more purple and less black than true [[navy]], and sits near [[blue]] and [[purple]] on the same dark axis [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Flag covers at least five percent of the canvas in 90 of them, about 0.4 percent overall, as photographed [3]. Use spikes in the 1910s, over six times the archive's average rate for that decade, driven in part by Henri Matisse, who carries it in 4 of his 50 archived paintings, over twenty times the average rate [3]. Its single strongest companion word is Navy, at over eighty times the average co-occurrence [3]. These counts read photographs of varnished paintings, not pigments [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; possibly a flag, a flagstone, or the flag iris, but the dictionary does not say",
+   "first_recorded": "1918 (Maerz and Paul, 1930)",
+   "source": "Maerz and Paul, A Dictionary of Color"
+  },
+  "aka": [],
+  "siblings": [
+   "colonial",
+   "bramble",
+   "dark-bluish-violet",
+   "dusky-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 90,
+  "measured": {
+   "lch": [
+    25,
+    20,
+    292
+   ],
+   "nearest": [
+    [
+     "Colonial",
+     2.8
+    ]
+   ]
+  },
+  "peak_decade": {
+   "key": 1910,
+   "rate": 0.023,
+   "lift": 6.06
+  },
+  "painters": [
+   {
+    "name": "Henri Matisse",
+    "hits": 4,
+    "n": 50,
+    "lift": 21.14
+   }
+  ],
+  "company": [
+   {
+    "word": "Navy",
+    "lift": 81.57
+   }
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Maerz and Paul, A Dictionary of Color (1930), \"Flag\", plate 46 I12",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz and Paul, Ridgway, ISCC-NBS and RAL entries, computed LCH/Munsell/nearest-name match",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "True or false: Maerz and Paul explain where the name Flag comes from.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which painter uses Flag at over twenty times the archive's average rate?",
+   "choices": [
+    "Henri Matisse",
+    "Paul Cezanne",
+    "Claude Monet",
+    "Vincent van Gogh"
+   ],
+   "answer": "Henri Matisse",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Flag's origin is undocumented, but it spikes in the 1910s, largely through Henri Matisse, who used it over twenty times the archive's average rate."
+ ],
+ "words": 251,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

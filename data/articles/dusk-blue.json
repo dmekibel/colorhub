@@ -1,0 +1,109 @@
+{
+ "slug": "dusk-blue",
+ "name": "Dusk Blue",
+ "hex": "#26538D",
+ "names": [
+  "Dusk Blue"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Dusk Blue is a deep, slightly greenish blue that our library finds under three other names within two units of distance.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A crowded corner of blue",
+   "body": "The ISCC-NBS system of 1955 reads the swatch as a pale purplish blue, about 7.1 units from the block center, and it is also carried in Wikipedia's X11 list and the 2010 xkcd color survey [1]. Our library ties the name to Crayola's list through a Wikipedia citation, and to the \"dusk\" family of names generally [1].\n\nThe closest near-duplicates, each under 2.4 units away, are [[b-dazzled-blue]], Munsell's YInMn Blue and USAFA Blue [1]. The next distinct named color is [[light-navy]], about 4.8 units off, with [[cyanine-blue]] and [[lapis-lazuli]] further out [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This color, as photographed, appears in 86 of 23,781 paintings, about 0.36 percent, more common than 50 percent of the named colors we track [3]. It peaks in the 1900s, in 15 of 1,674 paintings, at 0.9 percent of that period's paintings, 3.6 times the overall rate [3]. Inside a painting it most often plays an accent [3]. The earliest match in the archive is a 1400 painting by Master of Heiligenkreuz, 555 years before the name's 1955 record, so this is a look-alike hue in an aged photograph, not a pigment identification, a floor and not a first, since the archive's early centuries are thin [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the colour of the sky at dusk",
+   "first_recorded": "1955, ISCC-NBS (library record)",
+   "source": "data/library.json"
+  },
+  "aka": [],
+  "siblings": [
+   "b-dazzled-blue",
+   "light-navy",
+   "cyanine-blue"
+  ],
+  "parent": "dusk",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "b-dazzled-blue",
+    "gloss": "a near-duplicate screen color, under 2 units away"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 86,
+  "pct": 0.36,
+  "peak": "1900s, 0.9% of this period's paintings, 3.6x expected"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930 and other name sources; CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub Color Graph look-alikes (data/graph), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5 per cent of canvas); data/graph/fieldnotes",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which named color is a near-duplicate of Dusk Blue, under 2 units away?",
+   "choices": [
+    "B'dazzled Blue",
+    "Cobalt",
+    "Teal",
+    "Indigo"
+   ],
+   "answer": "B'dazzled Blue",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dusk Blue's earliest archive match is older than its first library record.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dusk Blue sits within two units of three other named blues."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Fixed: the field-notes paragraph (and the matching \"field\" object) invented a country claim (\"over-represented in Norwegian painting\") with no basis — ar.co is empty for this slug — and the earliest-match painting+painter (\"Giovanni di Paolo's Adoration of the Magi, 1450\") doesn't match the real first-seen record (a 1400 painting by Master of Heiligenkreuz). The presence count (51) and peak stat (1910s/1.3%/6x+) also didn't match the real data (86 as-photographed; 1900s/0.9%/3.6x). Rewrote the paragraph directly from data/graph/fieldnotes for this slug; removed every unsupported claim rather than inventing a replacement for it.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 225
+}

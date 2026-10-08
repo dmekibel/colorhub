@@ -1,0 +1,141 @@
+{
+ "slug": "orange-rufous",
+ "name": "Orange-Rufous",
+ "hex": "#CB6325",
+ "names": [
+  "Orange-Rufous"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Orange-Rufous is a deep, burnt orange carried over from Ridgway's 1886 color nomenclature into his fuller 1912 system, and measured in our color graph as identical to a separately sourced Rust Orange.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "From an 1886 list to 1912's plates",
+   "body": "The name first appears in Ridgway's 1886 *Nomenclature of Colors for Naturalists*, and was carried over into his fuller 1912 *Color Standards and Color Nomenclature* at plate II, hue 11, tone i [1]. The ISCC-NBS system later filed it as a deep orange, and Maerz and Paul's 1930 dictionary separately dated a chip for it to 1886 as well [1]. Our color graph finds a separately recorded name, Rust Orange, at zero units of difference, an exact duplicate under a different name [2].\n\nIts nearest distinct relatives in the graph are [[signal-orange]], almost the same, and [[alloy-orange]] and [[burnt-orange]], both close behind [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, as photographed, a color within six units of Orange-Rufous covers at least five per cent of a canvas in 163 works, more common than 66 per cent of our named colors [4]. It peaks in the 1300s, in 5 of 251 paintings, at 2.2 times the archive's overall rate, and is most over-represented in paintings from India, at 4.0 times expected [4]. The earliest dated appearance in our archive is the year 1000, nearly nine centuries before the name's own 1886 record, a look-alike hue, not proof of pigment, a floor and not a first, since the archive's early centuries are thin [4]. These remain photographs of aged, varnished paintings, read as screen colors [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented beyond the catalogue entries",
+   "first_recorded": "Ridgway, Nomenclature of Colors for Naturalists (1886); carried into Color Standards and Color Nomenclature (1912), plate II, hue 11",
+   "source": "ColorHub color library (Ridgway 1886 and 1912; Maerz and Paul 1930; ISCC-NBS 1955)"
+  },
+  "aka": [
+   "Rust Orange"
+  ],
+  "siblings": [
+   "rust-orange",
+   "signal-orange",
+   "alloy-orange",
+   "burnt-orange"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#CB6325",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 163,
+  "countries": [
+   {
+    "key": "India",
+    "n": 721,
+    "hits": 24,
+    "lift": 4.0
+   }
+  ],
+  "measured": {
+   "lch": [
+    53.8,
+    63.9,
+    54.0
+   ],
+   "nearest": [
+    [
+     "Rust Orange",
+     0.0
+    ],
+    [
+     "Signal Orange",
+     2.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-o.json): Ridgway 1886, carried into Ridgway 1912, plate II, hue 11, tone i; ISCC-NBS 1955 block 50 (M/R); Maerz & Paul 1930, first recorded 1886",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-o.json), exact-duplicate note, CIEDE2000 0.0 to Rust Orange",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-o.json), CIEDE2000 look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which earlier Ridgway catalogue first carried this name, before his 1912 plates?",
+   "choices": [
+    "Nomenclature of Colors for Naturalists (1886)",
+    "A Dictionary of Color (1930)",
+    "The ISCC-NBS report (1955)",
+    "Werner's Nomenclature (1821)"
+   ],
+   "answer": "Nomenclature of Colors for Naturalists (1886)",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Orange-Rufous and a separately named Rust Orange measure exactly the same color in our data.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "This burnt orange was named once in 1886 and carried, unchanged, into Ridgway's bigger 1912 system."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 254
+}
