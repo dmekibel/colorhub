@@ -46,7 +46,7 @@ OO_MIXPLAY.pairs = function (ui, it) {
         const ex = ui.stage.querySelector(".oo-pex");
         if (!ex) return;
         ex.innerHTML = `<p class="oo-pexh">${rd.variant === "avoided" ? `Where ${esc(nm(l[0]).toLowerCase())} and ${esc(nm(l[1]).toLowerCase())} do meet` : `${esc(nm(w[0]))} with ${esc(nm(w[1]).toLowerCase())}`}${era ? `, ${esc(era)}` : ""}</p>
-          <div class="oo-pexr">${show3.map(e => `<button class="oo-pp" data-gi="${e[5]}"><img src="${esc(e[3])}" alt="" loading="lazy"><span>${esc(e[0])}</span><em>${esc(e[1] || "")}${e[2] != null ? `, ${e[2]}` : ""}</em></button>`).join("")}</div>`;
+          <div class="oo-pexr">${show3.map(e => `<button class="oo-pp" data-gi="${e[5]}"><img src="${esc(e[3])}" alt="" loading="lazy"><span>${esc(e[0])}</span><em>${esc([e[1], e[2] != null ? e[2] : null].filter(x => x != null && x !== "").join(", "))}</em></button>`).join("")}</div>`;
         ex.classList.add("oo-in");
         ex.querySelectorAll("[data-gi]").forEach(x => x.onclick = () => { if (typeof galleryPage === "function") galleryPage(+x.dataset.gi); });
       }, 300);
@@ -86,7 +86,7 @@ function ooPairs() {
         s.res.forEach(r => { if (r.ratio) ooEdgeUpdate(edge, "pairs", r.ratio - 1, !!r.ok); });
         pr.n = (pr.n || 0) + 1; const pb = s.hits > (pr.best || 0); pr.best = Math.max(pr.best || 0, s.hits); save();
         const nx = OO_PAIR_VARIANTS.find(v => v.at === pr.n);
-        ooResults({ title: "Painters' pairs", s, finish: s.hits >= OO_PASS, stars: [s.hits >= OO_PASS, s.hits >= 5, s.hits === 6].map(Number), got: [1, 1, 1], pb, next: null,
+        ooResults({ title: "Painters' pairs", s, finish: s.hits >= OO_PASS, stars: [s.hits >= OO_PASS, s.hits >= 5, s.hits === 6].map(Number), got: [1, 1, 1], labels: ["Passed", "5 right", "Perfect"], lede: s.hits >= OO_PASS ? "You know how these painters tend to use color." : `You need ${OO_PASS} of ${OO_ROUNDS}. These are measured habits of each painter, so every round teaches one.`, pb, next: null,
           again: ooPairs, diff: ooPickLine("pairs"), score: `${s.hits} of ${s.total} right`, back: "Back to Train", onBack: () => go("gym"), unlockLine: nx ? nx.news : null });
       } });
   });

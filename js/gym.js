@@ -1114,7 +1114,7 @@ function lightning() {
   const pool = met.length >= 8 ? met : [...met, ...(nu ? nu.colors : []), ...UNITS.filter(u => S.done[u.id]).flatMap(u => u.colors)];
   const qpool = pool.length >= 4 ? pool : ALL;
   const everyone = [...BASICS, ...ALL];
-  let score = 0, combo = 0, end = Date.now() + 45000, over = false;
+  let score = 0, named = 0, combo = 0, end = Date.now() + 45000, over = false;
   const el = show(`
     <header class="deck-top">
       <button class="icon-btn" data-close aria-label="Close">${ICON.x}</button>
@@ -1132,8 +1132,8 @@ function lightning() {
     if (pb) { S.best.lightning = score; save(); }
     const r = show(`
       <div style="flex:1"></div><p class="eyebrow">Lightning round</p>
-      <h1>${score} <em>named.</em></h1>
-      <p class="lede">${pb ? "A new best." : `Your best is ${best}.`} Questions come from colors you've met, with the three closest names as decoys.</p>
+      <h1>${named} <em>${named === 1 ? "name" : "names"}.</em></h1>
+      <p class="lede">${score !== named ? `${score} points, with a bonus for streaks of five. ` : ""}${pb ? "A new best." : `Your best is ${best} points.`} Questions come from colors you've met, with the three closest names as decoys.</p>
       <div class="stack"><button class="btn" data-again>Again ${ICON.bolt}</button><button class="btn ghost" data-home>Back to Train</button></div>`, "result");
     r.querySelector("[data-again]").onclick = lightning;
     r.querySelector("[data-home]").onclick = () => go("gym");
@@ -1149,7 +1149,7 @@ function lightning() {
     box.querySelectorAll("[data-i]").forEach(b => b.onclick = () => {
       if (over || box.dataset.lock) return;
       const ok = opts[+b.dataset.i] === c;
-      if (ok) { combo++; score += combo >= 5 ? 2 : 1; scoreEl.textContent = score; buzz(8); b.classList.add("right"); later(ask, 160); }
+      if (ok) { combo++; named++; score += combo >= 5 ? 2 : 1; scoreEl.textContent = score; buzz(8); b.classList.add("right"); later(ask, 160); }
       else {
         combo = 0; buzz([10, 40, 10]); b.classList.add("wrong");
         box.querySelector(`[data-i="${opts.indexOf(c)}"]`).classList.add("right");
