@@ -465,6 +465,17 @@ scenario("studio", "Name any color: tabs, drag, save, a name opens its page", as
   t.expect(t.$$(".nmr-chips button").length === 1, "Save did not add the color to the tray");
   await t.click(".nmr-row", { force: true, wait: 500 });
   await t.waitFor(".cp-page", 8000, "a color page after tapping a near name");
+  await H.back(t);
+  await t.waitFor(".nmr-hero", 6000, "the namer again after Back");
+  await t.click("[data-back]", { force: true, wait: 700 });
+  await t.waitFor(() => !t.$(".nmr-hero") && t.$("#app").innerText.length > 60, 6000, "a room after Back from the namer (opened by address, so it falls back to the current room)");
+});
+
+scenario("home", "View sheet: the picker icon opens Name any color", async t => {
+  await t.open("#shot=home:views", { settle: 1500 });
+  await t.waitFor("[data-namer]", 8000, "the picker icon in the View sheet");
+  await t.click("[data-namer]", { force: true, wait: 800 });
+  await t.waitFor(".nmr-hero", 6000, "Name any color from Home");
 });
 
 scenario("studio", "Isolator: guess, reveal alone, hold to see it back, try another", async t => {
