@@ -246,3 +246,4 @@
 .aw-page details.aw-note>summary::after{content:" ›";color:var(--faint)}
 .aw-page details.aw-note[open]>summary::after{content:""}
 .aw-page details.aw-note>p{margin:8px 0 0}
+.aw-room{background:none;border:0;padding:0;text-align:left;font:inherit;cursor:pointer}

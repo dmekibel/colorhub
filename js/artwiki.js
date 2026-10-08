@@ -210,7 +210,7 @@ function awPainter(slug, push = true) {
     <div class="aw-head"><div><p class="eyebrow p-type">Painter</p><h1 class="p-title">${esc(A.name)}</h1><p class="p-dek">${dek}</p></div>${fileUrl ? `<img class="aw-portrait" src="${esc(fileUrl)}" alt="" loading="lazy" onerror="this.remove()">` : ""}</div>
     ${A.barcode.length ? `<div class="aw-bcwrap"><div class="aw-bc ${A.barcode.length > 90 ? "tight" : ""}" role="img" aria-label="Every painting, oldest to newest, three main colors each">${A.barcode.map((b, k) => `<button data-gi="${P.ix.length === A.barcode.length ? P.ix[k] : -1}" title="${esc(b[1])}">${b[2].map(nm => `<i style="--c:${awHex(nm)}"></i>`).join("")}</button>`).join("")}</div>
       <div class="aw-bcax"><span>${bcYears.length ? bcYears[0] : ""}</span><em>${n} paintings · as photographed</em><span>${bcYears.length ? bcYears[bcYears.length - 1] : ""}</span></div>
-      ${clusters.length > 1 ? `<div class="aw-rooms">${clusters.map((c, k) => `<a class="aw-room" href="#aw-pal">${awStrip(c.colors.slice(0, 3).map(awHex), 8)}<b data-glroom="${P.ctyp[k]}">Room ${k + 1}</b><em>${awPct(c.pct / 100)}%</em></a>`).join("")}</div>` : ""}</div>` : ""}
+      ${clusters.length > 1 ? `<div class="aw-rooms">${clusters.map((c, k) => `<button class="aw-room" data-awpal>${awStrip(c.colors.slice(0, 3).map(awHex), 8)}<b data-glroom="${P.ctyp[k]}">Palette ${k + 1}</b><em>${awPct(c.pct / 100)}%</em></button>`).join("")}</div>` : ""}</div>` : ""}
     ${finds}
     <div data-awbio></div>
     <div class="aw-you" data-aw-you></div>
@@ -226,6 +226,7 @@ function awPainter(slug, push = true) {
   awWire(el);
   if (typeof ptPainterColors === "function") ptPainterColors(el, A.name);   // js/paintingsof.js (L26): colors used in a quarter of the works
   // titles and images of the clusters' typical paintings
+  el.querySelectorAll("[data-awpal]").forEach(b => b.onclick = () => { const t = el.querySelector("#aw-pal"); if (t) t.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" }); });
   el.querySelectorAll("[data-gltitle]").forEach(t => { const i = +t.dataset.gltitle; if (i >= 0) glDetail(i).then(d => { if (t.isConnected) t.textContent = "The " + d.t.replace(/^(the|a|an)\s+/i, "") + " palette"; const im = el.querySelector(`[data-glimg="${i}"]`); if (im) { im.src = d.img; } }).catch(() => {}); });
   el.querySelectorAll("[data-glroom]").forEach(t => { const i = +t.dataset.glroom; if (i >= 0) glDetail(i).then(d => { if (t.isConnected) t.textContent = d.t.length > 26 ? d.t.slice(0, 25) + "…" : d.t; }).catch(() => {}); });
   el.querySelectorAll("[data-glimg]").forEach(im => { const i = +im.dataset.glimg; if (i >= 0) glDetail(i).then(d => { if (im.isConnected) im.src = d.img; }).catch(() => {}); });

@@ -134,6 +134,45 @@ routeWrap(LAB, "namer", () => routed("Name any color", "studio/namer"));   // js
 const routeColor = slug => [...BASICS, ...ALL].find(c => routeSlug(c.n) === slug) || null;
 // a library color that isn't one of the 101 (js/names.js): CORE_NAMES loads lazily, so this only resolves once it has
 const routeName = slug => (CORE_NAMES || []).find(e => routeSlug(e.n) === slug) || null;
+// Any address #/name/<slug> must open: the ~1,000 core names, then the 2,700-name library, then an alias (a synonym
+// slug in data/aliases.json, or an "also called" of a core or library name), which opens its color with the alias
+// as the first "Also called". Resolves { color } (one of the 101), { entry } or null.
+let ROUTE_ALIASES = null;
+function routeNameAsync(slug) {
+  const aliases = ROUTE_ALIASES || (ROUTE_ALIASES = fetch("data/aliases.json").then(r => r.ok ? r.json() : {}).catch(() => ({})));
+  return Promise.all([loadCoreNames(), loadLongNames(), aliases]).then(([, long, al]) => {
+    const core = routeName(slug), lib = !core && findLongName(slug);
+    if (core) return { entry: core };
+    if (lib) return { entry: npEntryFor({ n: lib.n, h: lib.h, lib }) };
+    const open = (target, alias) => {
+      const t = routeSlug(target), c = routeColor(t), e = routeName(t), l = !e && findLongName(t);
+      if (c) return { color: c };
+      const entry = e || (l && npEntryFor({ n: l.n, h: l.h, lib: l }));
+      return entry ? { entry: alias ? { ...entry, also: [alias, ...(entry.also || []).filter(a => routeSlug(a) !== routeSlug(alias))] } : entry } : null;
+    };
+    const to = al && al.slugs && al.slugs[slug];
+    if (to) {
+      const nm = (Object.keys(al.names || {}).find(k => routeSlug(k) === slug) || slug.replace(/-/g, " ")).replace(/\b\w/g, m => m.toUpperCase());
+      const r = open(to, nm); if (r) return r;
+    }
+    const has = e => (e.also || []).find(a => routeSlug(a) === slug);
+    const host = (CORE_NAMES || []).find(has) || (long || []).find(has);
+    if (host) { const r = open(host.n, has(host)); if (r) return r; }
+    return null;
+  });
+}
+// an address that matches no color: say so, with the closest names, never Home
+function routeNoName(slug) {
+  const words = slug.split("-").filter(w => w.length > 2);
+  const list = (CORE_NAMES || []).map(e => ({ e, k: words.filter(w => routeSlug(e.n).includes(w)).length })).filter(x => x.k).sort((a, b) => b.k - a.k || (a.e.rank || 0) - (b.e.rank || 0)).slice(0, 3).map(x => x.e);
+  ROUTE_NEXT = routed("No color by that name", "name/" + slug); ROUTE_REPLACE = true;
+  const el = show(`<header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span class="eyebrow">Color</span><span style="width:44px"></span></header>
+    <h2 style="margin:24px 16px 8px">No color by that name</h2>
+    <p class="fine" style="margin:0 16px 16px">We don't have a color called "${esc(slug.replace(/-/g, " "))}".${list.length ? " These are the closest names." : ""}</p>
+    ${list.length ? `<div class="lk-list">${list.map(e => `<button class="lk-row" data-nn="${esc(e.n)}" data-h="${e.h}"><i style="--c:${e.h}"></i><b>${esc(e.n)}</b></button>`).join("")}</div>` : ""}`, "article");
+  el.querySelectorAll("[data-nn]").forEach(b => b.onclick = () => openCoreName(b.dataset.h, b.dataset.nn));
+  const bk = el.querySelector("[data-back]"); if (bk) bk.onclick = () => xBack();
+}
 // initial: first load. The address is opened on top of its tab's home, so Back lands somewhere sensible.
 function openRoute(hash, initial = false) {
   if (!/^#\/./.test(hash || "")) return false;
@@ -207,7 +246,11 @@ function openRoute(hash, initial = false) {
     base();
     if (!CORE_NAMES) { ROUTE_NEXT = routed("", "name/" + id); waitScreen(); ROUTE_REPLACE = true; }
     XSTACK = [];
-    loadCoreNames().then(() => { const e = routeName(id); if (e) namePage(e, true, tappedHex); else xToOrigin(); });
+    routeNameAsync(id).then(r => {
+      if (r && r.color) { XSTACK = []; openNode(colorNode(r.color), true, tappedHex); }
+      else if (r && r.entry) namePage(r.entry, true, tappedHex);
+      else routeNoName(id);
+    });
     return true;
   }
   if (kind === "line" && typeof ooAcross === "function") { base(); XSTACK = []; ooAcross(); return true; }   // js/games/line.js
