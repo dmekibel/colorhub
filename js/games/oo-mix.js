@@ -222,7 +222,8 @@ const OO_MIXPLAY = {
       const pi = it.painter ? W.painters.findIndex(p => p[0] === it.painter) : -1, own = pi >= 0 ? W.rounds.filter(r => r[0] === pi) : [];
       const pool = own.length ? own : W.rounds, rd = pool[Math.floor(rnd() * pool.length)], P = i => W.painters[i];
       const hexes = s => (s.match(/.{6}/g) || []).map(x => "#" + x);
-      const alts = ooShuf(rd[3], rnd).slice(0, 2);
+      // Choose: the decoys sit as far down the list (nearest first) as your edge times the tier says
+      const wa = it.ease != null ? ooWhoseAlts(rd[3], it.ease, rnd) : null, alts = wa ? wa.alts : ooShuf(rd[3], rnd).slice(0, 2);
       const opts = ooShuf([{ i: rd[0], strip: hexes(rd[2]), right: 1 }, ...alts.map(a => ({ i: a, strip: hexes(P(a)[5]) }))], rnd);
       ui.q.textContent = "Whose palette is this?";
       ui.stage.innerHTML = `<div class="oo-wh"><div class="oo-whp">${hexes(rd[1]).map(h => `<i style="--c:${h}"></i>`).join("")}</div>
@@ -233,7 +234,7 @@ const OO_MIXPLAY = {
         const ok = !!opts[k].right, ri = opts.findIndex(o => o.right); btns[ri].classList.add("ring"); if (!ok) b.classList.add("miss");
         buzz(ok ? 10 : [10, 40, 10]);
         const p = P(rd[0]);
-        resolve({ ok: ok ? 1 : 0, ms: performance.now() - t0, act: 0, noModel: true, hold: true,
+        resolve({ ok: ok ? 1 : 0, ms: performance.now() - t0, act: 0, noModel: true, hold: true, ease: wa ? wa.ease : null,
           line: `${ok ? "Right: " : ""}<b>${esc(p[1])}</b>, from ${p[2]} paintings here. ${esc(p[4])}` });
       });
     });
@@ -243,16 +244,20 @@ const OO_MIXPLAY = {
 // ---------- a Mix set: six rounds of one game, or one of each ("set") ----------
 function ooMixIt(id, k, o = {}) {
   const m = ooS().model, g = OO_MIX.find(x => x.id === id) || {}, judg = g.judg;
-  const novel = (ooS().seen["mix/" + id] || 0) < 2, tier = ooTierAt(k, novel);
+  const novel = (ooS().seen["mix/" + id] || 0) < 2, tier = o.tier || ooTierAt(k, novel);
   const th = judg ? ooTheta(m, judg, null) : ooTheta(m, "hue", null);
-  const d = clamp(th * OO_TIER[tier] * (OO_MIXF[id] || 1), OO_MIN, OO_MAX);
+  // a chosen level (o.gap) sets the gap itself; For you draws from your own estimate
+  const d = clamp(o.gap != null ? o.gap * (OO_MIXF[id] || 1) : th * OO_TIER[tier] * (OO_MIXF[id] || 1), OO_MIN, OO_MAX);
   return { kind: id, d, judg, vf: OO_MIXF[id] || 1, set: o.set || null, rnd: Math.random, record: !!judg, g: id === "changed" ? 1 / 16 : id === "wasthere" ? .2 : 0, n: tier === "intro" ? 3 : 4 };
 }
 function ooPlayMix(id, opts = {}) {
   if (!S.scr && !ooShotMode() && typeof screenCheck === "function") return screenCheck(() => ooPlayMix(id, opts));
+  if (id === "survival" || id === "grow") return ooPlayExtra(id);
+  // from the map the Mix follows the Odd one out difficulty (For you or Choose); a set of your own colors stays For you
+  const lv = opts.set ? null : ooPickLv(), gapOpt = lv != null ? { gap: ooLevelGap(lv) } : {};
   const order = id === "set" ? ooShuf(OO_MIX.map(m => m.id), Math.random) : null, name = id === "set" ? "Mixed set" : (OO_MIX.find(m => m.id === id) || {}).name || "Mix";
   ooRun({ label: opts.title ? (opts.title.length > 14 ? opts.title.slice(0, 13) + "…" : opts.title) : "Mix", total: OO_ROUNDS, combo: true, onQuit: opts.onQuit || (() => ooMap()),
-    gen: k => { const g = order ? order[k % order.length] : id, it = ooMixIt(g, k, opts); ooS().seen["mix/" + g] = (ooS().seen["mix/" + g] || 0) + 1; if (g === "nback") it.hold = true; return it; },
+    gen: k => { const g = order ? order[k % order.length] : id, it = ooMixIt(g, k, { ...opts, ...gapOpt }); ooS().seen["mix/" + g] = (ooS().seen["mix/" + g] || 0) + 1; if (g === "nback") it.hold = true; return it; },
     onEnd: s => {
       const st = ooS(), old = (st.mix[id] || {}).stars || [0, 0, 0], finish = s.hits >= OO_PASS;
       const got = [finish, finish && s.med != null && s.med <= OO_FAST_MS * 1.6, finish && !s.hint];
@@ -272,6 +277,7 @@ function ooWhoseLoad() {
 }
 // js/artwiki.js offers this on a painter's page: the set opens with that painter's own round
 function whosePalette(slug) { return ooWhose(slug); }
+const st0 = () => ooS();
 function ooWhose(painter = null) {
   ooWhoseLoad().then(ok => {
     if (!ok) return toast("Couldn't load the painters");
@@ -280,11 +286,14 @@ function ooWhose(painter = null) {
       <h1 class="title-1 oo-title">Whose palette?</h1>
       <p class="lede">Five colors from one group of a painter's works. Pick the painter: each choice shows a strip of colors from their paintings.</p>
       <p class="fine">Every round is checked to be solvable: the five colors sit clearly nearer the right painter's strip than either other painter's, and the right strip never repeats a shown color. These are photographs of varnished paintings, so the colors are as photographed and lean brown. From ${window.OO_WHOSE.painters.length} painters with at least 12 paintings in the archive.</p>
+      <div class="oo-pk-host" data-pk-host style="margin-top:22px"></div>
       <div class="stack" style="margin-top:28px"><button class="btn" data-go>Play six rounds ${ICON.arrow}</button></div>`, "oo-eye");
     el.querySelector("[data-close]").onclick = () => go("gym");
+    ooPickMount(el.querySelector("[data-pk-host]"), "whose");
+    const wh = st0().whose = st0().whose || {}, edge = wh.edge = wh.edge && typeof wh.edge === "object" ? wh.edge : { r: NaN, n: 0 };
     el.querySelector("[data-go]").onclick = () => ooRun({ label: "Painters", total: OO_ROUNDS, combo: true, cls: "oo-whose", onQuit: () => go("gym"),
-      gen: k => ({ kind: "whose", record: false, hold: true, painter: k === 0 && painter ? painter : null }),
-      onEnd: s => { const st = ooS(), best = Math.max(s.hits, (st.mix.whose || {}).best || 0); st.mix.whose = { best, stars: [s.hits >= OO_PASS, 0, 0].map(Number) }; save();
-        ooResults({ title: "Whose palette?", s, finish: s.hits >= OO_PASS, stars: [s.hits >= OO_PASS ? 1 : 0, 0, 0], got: [1, 0, 0], pb: false, next: null, again: () => ooWhose(), score: `${s.hits} of ${s.total} painters`, back: "Back to Train", onBack: () => go("gym") }); } });
+      gen: k => { const t = ooPickFor("whose"); return { kind: "whose", record: false, hold: true, painter: k === 0 && painter ? painter : null, ease: t ? ooEdgeD(edge, "whose", t) : null }; },
+      onEnd: s => { s.res.forEach(r => { if (r.ease != null) ooEdgeUpdate(edge, "whose", Math.max(r.ease, .05), !!r.ok); }); const st = ooS(), best = Math.max(s.hits, (st.mix.whose || {}).best || 0); st.mix.whose = { best, stars: [s.hits >= OO_PASS, 0, 0].map(Number) }; save();
+        ooResults({ title: "Whose palette?", s, finish: s.hits >= OO_PASS, stars: [s.hits >= OO_PASS ? 1 : 0, 0, 0], got: [1, 0, 0], pb: false, next: null, again: () => ooWhose(), diff: ooPickLine("whose"), score: `${s.hits} of ${s.total} painters`, back: "Back to Train", onBack: () => go("gym") }); } });
   });
 }

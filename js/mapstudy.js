@@ -58,7 +58,20 @@ function msLevelItems(level, src) {
 }
 const msLevelLabel = l => l === "all" ? "Every name" : `${l}`;
 const msDefaultDiff = l => l === "all" || l >= 250 ? "hard" : l >= 50 ? "medium" : "easy";
-const msBand = diff => MS_BANDS[diff] || MS_BANDS.easy;
+// For you: a two-step window that follows your skill (0..3, kept per level). Expert: the whole level from the first round.
+// Edge of my eye: pinned at your skill, no breathing. Easy, Medium and Hard are the fixed windows.
+const MS_DIFFS = [["easy", "Easy"], ["medium", "Medium"], ["hard", "Hard"], ["expert", "Expert"], ["edge", "Edge of my eye"]];
+function msBand(diff, skill) {
+  const s = Math.max(0, Math.min(3, isFinite(skill) ? skill : 1));
+  if (diff === "you") { const f = Math.min(2, Math.floor(s)); return [f, f + 1]; }
+  if (diff === "edge") { const r = Math.round(s); return [r, r]; }
+  if (diff === "expert") return [3, 3];
+  return MS_BANDS[diff] || MS_BANDS.easy;
+}
+// what a session teaches For you: 8 of 10 or better lifts it, half or worse eases it
+const msSkillNext = (skill, r, n) => { const a = n ? r / n : 0, s = isFinite(skill) ? skill : 1; return Math.max(0, Math.min(3, s + (a >= .8 ? .75 : a <= .5 ? -.75 : 0))); };
+// a level counts as cleared when a test-out above it passed, or nearly all its colors are found
+const msCleared = (M, l, n) => !!(M.cleared && M.cleared[msLevelKey(l)]) || (n > 0 && (M.found[msLevelKey(l)] || []).length >= n * .9);
 
 // Same-family neighbors (CLAUDE.md: "three blues", never obviously different colors), each at least MS_MIN_DE from
 // the answer and from each other so every round is fair: nearest first, then a little shuffle among the closest.
@@ -78,8 +91,8 @@ function msDistractors(t, pool, k, rnd = Math.random) {
   return picked.slice(0, k);
 }
 // difficulty breathes: a miss eases one step, every third right in a row opens one step, inside the chosen band
-function msBreathNext(b, ok, streak, diff) {
-  const [lo, hi] = msBand(diff);
+function msBreathNext(b, ok, streak, diff, skill) {
+  const [lo, hi] = msBand(diff, skill);
   if (!ok) return Math.max(lo, b - 1);
   return streak > 0 && streak % 3 === 0 ? Math.min(hi, b + 1) : clamp(b, lo, hi);
 }
@@ -166,11 +179,14 @@ function msState() {
   const m = S.mapstudy = S.mapstudy || {};
   m.spec = Object.assign({ mode: "find", level: 10, set: "level", diff: "easy", fog: false }, m.spec || {});
   if (!MS_LEVELS.includes(m.spec.level)) m.spec.level = 10;
-  if (!MS_BANDS[m.spec.diff]) m.spec.diff = msDefaultDiff(m.spec.level);
-  ["best", "lit", "mix", "found", "miss"].forEach(k => { if (!m[k] || typeof m[k] !== "object") m[k] = {}; });
+  if (!MS_BANDS[m.spec.diff] && !["you", "expert", "edge"].includes(m.spec.diff)) m.spec.diff = "you";
+  if (!MS_DIFFS.some(d => d[0] === m.spec.pick)) m.spec.pick = MS_BANDS[m.spec.diff] || ["expert", "edge"].includes(m.spec.diff) ? m.spec.diff : "medium";
+  ["best", "lit", "mix", "found", "miss", "skill", "cleared"].forEach(k => { if (!m[k] || typeof m[k] !== "object") m[k] = {}; });
   return m;
 }
 const msLevelKey = l => "L" + l;
+// For you's skill at a level: starts where the level always started (easy, medium, hard)
+const msSkillOf = (M, l) => { const v = M.skill[msLevelKey(l)]; return isFinite(v) ? v : { easy: 0, medium: 1, hard: 2 }[msDefaultDiff(l)]; };
 // "on your map": lit here, taught by the path, or anything the Learner Model says you've met or better
 function msKnown() {
   const m = msState(), k = new Set(Object.keys(m.lit));
@@ -344,7 +360,7 @@ function msOpen(o = {}) {
     const best = M.best[`${spec.mode}|${spec.level}|${spec.set}`];
     const lvChips = MS_LEVELS.map(l => {
       const n = l === "all" ? null : l, f = (M.found[msLevelKey(l)] || []).length;
-      return `<button class="ms-lv${spec.level === l ? " on" : ""}" data-lv="${l}"><b>${l === "all" ? "All" : l}</b><small>${f ? `${f.toLocaleString()} found` : n ? "" : "~2,700"}</small></button>`;
+      return `<button class="ms-lv${spec.level === l ? " on" : ""}" data-lv="${l}"><b>${l === "all" ? "All" : l}</b><small>${msCleared(M, l, n || 0) ? "cleared" : f ? `${f.toLocaleString()} found` : n ? "" : "~2,700"}</small></button>`;
     }).join("");
     const mixN = msMixNames().length, favN = msFavNames().length, t = today();
     const todayN = ALL.filter(c => { const st = S.cards[c.id]; return st && (st.since === t || st.due <= t); }).length;
@@ -363,7 +379,7 @@ function msOpen(o = {}) {
       <div class="ms-modes" role="radiogroup" aria-label="Mode">${MS_MODES.map(([id, name]) => `<button class="ms-mode${spec.mode === id ? " on" : ""}" data-mode="${id}" role="radio" aria-checked="${spec.mode === id}">${name}</button>`).join("")}</div>
       <p class="ms-what">${esc((MS_MODES.find(m => m[0] === spec.mode) || MS_MODES[0])[2])}</p>
       ${light ? `<p class="ms-line">${esc(lightLine)}</p>` : `
-      <div class="ms-sec"><b>Level</b><span>how much of the map you search</span></div>
+      <div class="ms-sec"><b>Level</b><span>tap any to jump in</span></div>
       <div class="ms-lvs">${lvChips}</div>
       <div class="ms-sec"><b>Colors</b><span>${esc(msSetLabel(spec.set))} · ${nT.toLocaleString()}</span></div>
       <div class="ms-sets">
@@ -372,19 +388,23 @@ function msOpen(o = {}) {
       </div>
       <div class="ms-sub" data-sub="fam"${sOpen === "fam" ? "" : " hidden"}>${MS_FAMS.map(f => `<button class="ms-set${spec.set === "fam:" + f ? " on" : ""}" data-set="fam:${f}"><b>${f}</b></button>`).join("")}</div>
       <div class="ms-sub ms-ptgs" data-sub="ptg"${sOpen === "ptg" ? "" : " hidden"}>${ptgs.map(p => `<button class="ms-ptg${spec.set === "ptg:" + p.id ? " on" : ""}" data-set="ptg:${esc(p.id)}" aria-label="${esc(p.title)}"><img src="${esc(p.thumb)}" alt="" loading="lazy"><span>${p.palette.slice(0, 5).map(e => `<i style="--c:${e.h}"></i>`).join("")}</span></button>`).join("")}</div>
-      ${spec.mode === "light" ? "" : `<div class="ms-sec"><b>Difficulty</b><span>${spec.diff === "easy" ? "4 to 6 bubbles, nearly multiple choice" : spec.diff === "medium" ? "6 to 10 bubbles, then the whole map" : "10 bubbles to the whole map"}</span></div>
-      <div class="hm-seg ms-diff">${["easy", "medium", "hard"].map(d => `<button class="${spec.diff === d ? "on" : ""}" data-diff="${d}">${d[0].toUpperCase() + d.slice(1)}</button>`).join("")}</div>`}`}
+      <div class="ms-sec"><b>Difficulty</b><span>${spec.diff === "you" ? "adapts to you" : "your choice"}</span></div>
+      <div class="hm-seg ms-diff" role="radiogroup" aria-label="Difficulty">${[["you", "For you"], ["pick", "Choose"]].map(([m, l]) => `<button class="${(m === "you") === (spec.diff === "you") ? "on" : ""}" role="radio" data-dm="${m}">${l}</button>`).join("")}</div>
+      ${spec.diff === "you" ? "" : `<div class="hm-seg ms-diff ms-picks" role="radiogroup" aria-label="Pick a difficulty">${MS_DIFFS.map(([d, l]) => `<button class="${spec.diff === d ? "on" : ""}" role="radio" data-diff="${d}">${l}</button>`).join("")}</div>`}
+      <p class="ms-what">${esc(spec.diff === "you" ? "Adapts to you: it starts where you left off and opens up as you find more." : spec.diff === "easy" ? "4 to 6 bubbles, nearly multiple choice." : spec.diff === "medium" ? "6 to 10 bubbles, then the whole map." : spec.diff === "hard" ? "10 bubbles to the whole map." : spec.diff === "expert" ? "The whole level, from the first round." : "Pinned at your edge: not easier after a miss, not harder after a streak.")}</p>`}
       <label class="ms-fog"><span><b>Your map</b><small>Veil the colors you haven't met yet. A view only; off unless you turn it on.</small></span><input type="checkbox" switch data-fog${spec.fog ? " checked" : ""}></label>
       ${empty ? `<p class="ms-line ms-warn">${esc(emptyLine)}</p>` : ""}
       ${best && !light ? `<p class="ms-best">Best here ${msStarRow(best.stars || 0)} ${best.r} of ${best.n}${best.streak > 2 ? ` · ${best.streak} in a row` : ""}</p>` : ""}
-      <div class="ms-foot"><button class="btn ms-go" data-go${empty || (light && day && (!day.names.length)) ? " disabled" : ""}>${light ? (day && day.done ? "Find today's five again" : "Light up 5") : "Start"} <small>${esc(rounds)}</small>${ICON.arrow}</button></div>
+      <div class="ms-foot"><button class="btn ms-go" data-go${empty || (light && day && (!day.names.length)) ? " disabled" : ""}>${light ? (day && day.done ? "Find today's five again" : "Light up 5") : "Start"} <small>${esc(rounds)}</small>${ICON.arrow}</button>${!light && spec.diff !== "you" && spec.level !== 10 && (spec.mode === "find" || spec.mode === "name") ? `<button class="btn ghost ms-test" data-test>Test out: 3 rounds clears every level below</button>` : ""}</div>
     </div>`;
     const re = (k, v) => { spec[k] = v; save(); buzz(4); };
     panel.querySelectorAll("[data-mode]").forEach(b => b.onclick = () => { re("mode", b.dataset.mode); setup(); });
-    panel.querySelectorAll("[data-lv]").forEach(b => b.onclick = () => { const v = b.dataset.lv === "all" ? "all" : +b.dataset.lv; spec.diff = msDefaultDiff(v); re("level", v); setup(); });
+    panel.querySelectorAll("[data-lv]").forEach(b => b.onclick = () => { const v = b.dataset.lv === "all" ? "all" : +b.dataset.lv; re("level", v); setup(); });
     panel.querySelectorAll("[data-set]").forEach(b => b.onclick = () => { re("set", b.dataset.set); setup(); });
     panel.querySelectorAll("[data-open-sub]").forEach(b => b.onclick = () => { const s = panel.querySelector(`[data-sub="${b.dataset.openSub}"]`); panel.querySelectorAll(".ms-sub").forEach(x => { if (x !== s) x.hidden = true; }); s.hidden = !s.hidden; buzz(4); });
-    panel.querySelectorAll("[data-diff]").forEach(b => b.onclick = () => { re("diff", b.dataset.diff); paintSetup(); });
+    panel.querySelectorAll("[data-diff]").forEach(b => b.onclick = () => { spec.pick = b.dataset.diff; re("diff", b.dataset.diff); paintSetup(); });
+    panel.querySelectorAll("[data-dm]").forEach(b => b.onclick = () => { re("diff", b.dataset.dm === "you" ? "you" : spec.pick || "medium"); paintSetup(); });
+    const tb = panel.querySelector("[data-test]"); if (tb) tb.onclick = () => { buzz(8); start(true); };
     panel.querySelector("[data-fog]").onchange = e => { spec.fog = !!e.target.checked; save(); buzz(4); ctrl.study({ fog: msFogFor(spec, "preview", msKnown()) }); };
     panel.querySelector("[data-go]").onclick = () => { buzz(8); start(); };
   }
@@ -392,18 +412,22 @@ function msOpen(o = {}) {
   // ---------------------------------------------------------------- play
   function newSession(kind, list, extra = {}) {
     const lk = msLevelKey(spec.level);
-    P = { kind, list, i: 0, first: new Map(), right: 0, close: 0, streak: 0, bestStreak: 0, breath: msBand(spec.diff)[0], misses: [], marksAll: [], t0: performance.now(), lk, ...extra };
-    if (spec.mode === "find" || spec.mode === "name") P.breath = msBand(spec.diff)[0];
+    P = { kind, list, i: 0, first: new Map(), right: 0, close: 0, streak: 0, bestStreak: 0, breath: bandNow()[0], test: testing, misses: [], marksAll: [], t0: performance.now(), lk, ...extra };
+    if (spec.mode === "find" || spec.mode === "name") P.breath = bandNow()[0];
     reveal.clear();
     ctrl.study({ fog: null, label: labelFn, marks: [], hit: (x, at) => onHit(x, at) });
     return P;
   }
-  function start() {
+  // a test-out plays three Hard rounds; everything else follows the chosen difficulty and, for For you, your skill here
+  let testing = false;
+  const bandNow = () => msBand(testing ? "hard" : spec.diff, msSkillOf(M, spec.level));
+  function start(test) {
+    testing = test === true;
     if (spec.mode === "light") return lightUp();
     const due = new Set(dueList().map(c => msLow(c.n))), miss = new Set(Object.keys(M.miss[msLevelKey(spec.level)] || {})), found = new Set(M.found[msLevelKey(spec.level)] || []);
     if (spec.mode === "hood") return hood();
     if (spec.mode === "path") return walk();
-    newSession(spec.mode, msQueue(targets, MS_ROUNDS, { due, miss, found }));
+    newSession(spec.mode, msQueue(targets, testing ? 3 : MS_ROUNDS, { due, miss, found }));
     round();
   }
   // first answer per color per session counts (scheduling, found, mix-ups, the learner log)
@@ -421,7 +445,7 @@ function msOpen(o = {}) {
   }
   function streakAfter(ok) {
     P.streak = ok ? P.streak + 1 : 0; P.bestStreak = Math.max(P.bestStreak, P.streak);
-    const b0 = P.breath; P.breath = msBreathNext(P.breath, ok, P.streak, spec.diff);
+    const b0 = P.breath; P.breath = msBreathNext(P.breath, ok, P.streak, testing ? "hard" : spec.diff, msSkillOf(M, spec.level));
     return P.breath > b0 ? "up" : P.breath < b0 ? "down" : "";
   }
   function dots() {
@@ -563,7 +587,11 @@ function msOpen(o = {}) {
   function finish() {
     const n = P.first.size, r = [...P.first.values()].filter(f => f.res === "right").length, stars = msStars(r + P.close * .5, n);
     const key = `${spec.mode}|${spec.level}|${spec.set}`, old = M.best[key], isBest = !old || r > old.r || (r === old.r && P.bestStreak > (old.streak || 0));
-    if (isBest) M.best[key] = { r, n, streak: P.bestStreak, stars, at: today() };
+    if (isBest && !P.test) M.best[key] = { r, n, streak: P.bestStreak, stars, at: today() };
+    // For you learns from the set; a passed test-out (all 3 right) clears every level below this one
+    if (!P.test && spec.diff === "you") M.skill[P.lk] = msSkillNext(msSkillOf(M, spec.level), r, n);
+    const li0 = MS_LEVELS.indexOf(spec.level), tpass = P.test && n >= 3 && r === n;
+    if (tpass) MS_LEVELS.slice(0, li0).forEach(l => { M.cleared[msLevelKey(l)] = 1; });
     save();
     const misses = [...P.first.values()].filter(f => f.res !== "right").map(f => f.it);
     const lvAll = levelItems.length, found = (M.found[P.lk] || []).length, mastered = spec.set === "level" && found >= lvAll;
@@ -578,7 +606,7 @@ function msOpen(o = {}) {
     P.kind = "done";
     panel.innerHTML = `<div class="ms-end">
       <div class="ms-end-top">${msStarRow(stars)}${isBest && old ? `<span class="ms-new">New best</span>` : ""}</div>
-      <h3 class="title-2">${r === n ? "A clean sweep." : `${r} of ${n} on the first try`}</h3>
+      <h3 class="title-2">${P.test ? (tpass ? `Every level below ${esc(msLevelLabel(spec.level))} is cleared.` : "Not this time: all three to clear the levels below.") : r === n ? "A clean sweep." : `${r} of ${n} on the first try`}</h3>
       <p class="ms-line">${P.close ? `${P.close} next door. ` : ""}${P.bestStreak > 1 ? `Longest run: ${P.bestStreak}. ` : ""}${spec.set === "level" ? `${found.toLocaleString()} of ${lvAll.toLocaleString()} on this level found so far.` : ""}</p>
       ${mastered ? `<p class="ms-line ms-good">Level ${esc(msLevelLabel(spec.level))} mastered: every color found on a first try.</p>` : ""}
       ${misses.length ? `<div class="ms-sec"><b>Look again</b><span>tap one for its page</span></div><div class="ms-chips">${misses.map(msChip).join("")}</div>` : ""}
@@ -587,18 +615,19 @@ function msOpen(o = {}) {
     </div>`;
     wireEnd();
     buzz(stars >= 3 ? [12, 60, 12] : 10);
+    testing = false;
   }
   function wireEnd() {
     panel.querySelectorAll("[data-open]").forEach(b => b.onclick = () => msOpenColor(msItemOf(b.dataset.open) || mapItems.find(x => x.n === b.dataset.open)));
     const a = panel.querySelector("[data-again]"); if (a) a.onclick = () => { buzz(8); setup().then(start); };
-    const nl = panel.querySelector("[data-nextlv]"); if (nl) nl.onclick = () => { const li = MS_LEVELS.indexOf(spec.level); spec.level = MS_LEVELS[li + 1]; spec.diff = msDefaultDiff(spec.level); save(); buzz(8); setup(); };
+    const nl = panel.querySelector("[data-nextlv]"); if (nl) nl.onclick = () => { const li = MS_LEVELS.indexOf(spec.level); spec.level = MS_LEVELS[li + 1]; save(); buzz(8); setup(); };
     const st = panel.querySelector("[data-setup]"); if (st) st.onclick = () => { buzz(4); setup(); };
   }
 
   // ---- neighborhood recall
   function hood() {
     if (!P || !P.mapShown) mapUpdate(mapItems);
-    const g = graph(), tset = new Set(targets.map(it => msLow(it.n))), b0 = msBand(spec.diff)[0];
+    const g = graph(), tset = new Set(targets.map(it => msLow(it.n))), b0 = bandNow()[0];
     const found = new Set(M.found[msLevelKey(spec.level)] || []);
     const centers = msShuffle(targets.filter(it => g.has(msLow(it.n))));
     const center = centers.find(it => !found.has(msLow(it.n))) || centers[0];
@@ -684,7 +713,7 @@ function msOpen(o = {}) {
   // ---- path walk
   function walk() {
     if (!P || !P.mapShown) mapUpdate(mapItems);
-    const g = graph(), b0 = msBand(spec.diff)[0], tset = new Set(targets.map(it => msLow(it.n)));
+    const g = graph(), b0 = bandNow()[0], tset = new Set(targets.map(it => msLow(it.n)));
     const byName = new Map(mapItems.map(it => [msLow(it.n), it]));
     let pick = null, start = null;
     for (const s of msShuffle(targets.filter(it => g.has(msLow(it.n)))).slice(0, 12)) { pick = msPathPick(g, s.n, MS_PATH[b0], tset); if (pick) { start = s; break; } }

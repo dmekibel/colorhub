@@ -55,22 +55,39 @@ OO_MIXPLAY.across = function (ui, it) {
   });
 };
 // the station: eight rounds; the push past the line follows a 2-down / 1-up staircase that carries over
+// the setup: For you or Choose, then Start
 function ooAcross() {
   if (!S.scr && !ooShotMode() && typeof screenCheck === "function") return screenCheck(ooAcross);
+  const el = show(`
+    <header class="deck-top"><button class="icon-btn" data-close aria-label="Back">${ICON.back}</button></header>
+    <h1 class="title-1 oo-title">Across the line</h1>
+    <p class="lede">Three of these are Teal. Which one isn't? Look for the word's edge, not the biggest difference.</p>
+    <div class="oo-pk-host" data-pk-host></div>
+    <div class="stack" style="margin-top:28px"><button class="btn" data-go>Play eight rounds ${ICON.arrow}</button></div>`, "oo-eye");
+  el.querySelector("[data-close]").onclick = () => go("gym");
+  ooPickMount(el.querySelector("[data-pk-host]"), "line");
+  el.querySelector("[data-go]").onclick = ooAcrossRun;
+}
+function ooAcrossRun() {
   const go2 = () => {
     const st = ooS(), ln = st.line && typeof st.line === "object" ? st.line : (st.line = {}), cats = ooLineCats();
-    const stair = ooStair(clamp(+ln.p || OO_LINE_P0, OO_LINE_MIN, 8), .35);
-    ooRun({ label: "Words", total: 8, combo: true, cls: "oo-line", onQuit: () => go("gym"),
+    const stair = ooStair(clamp(+ln.p || OO_LINE_P0, OO_LINE_MIN, 8), .35), pk = ooPickFor("line"), ps = [];
+    const edge = ln.edge = ln.edge && typeof ln.edge === "object" ? ln.edge : { r: NaN, n: 0 };
+    ooRun({ label: "Words", total: 8, combo: true, cls: "oo-line", onQuit: () => ooAcross(),
       gen: (k, run) => {
         if (run.prev) ooStairStep(stair, !!run.prev.res.ok, OO_LINE_MIN, 8);
-        const p = stair.d;
+        // Choose draws at your edge estimate times the tier; For you follows the staircase
+        const p = pk ? ooEdgeD(edge, "line", pk) : stair.d;
+        ps[k] = p;
         return { kind: "across", p, k: p < 3 ? 6 : 4, cats, record: false, hold: true, note: k === 0 && !ln.n ? "Look for the word's edge, not the biggest difference" : null };
       },
       onEnd: s => {
+        // every answer, in either mode, moves the edge estimate by the push actually drawn
+        s.res.forEach((r, k) => { if (ps[k] != null) ooEdgeUpdate(edge, "line", ps[k], !!r.ok); });
         ln.p = +stair.d.toFixed(2); ln.n = (ln.n || 0) + 1; const pb = s.hits > (ln.best || 0); ln.best = Math.max(ln.best || 0, s.hits); save();
         const finish = s.hits >= 6;
         ooResults({ title: "Across the line", s, finish, stars: [finish, finish && s.med != null && s.med <= 4500, finish].map(Number), got: [1, 1, 1], pb, next: null,
-          again: ooAcross, score: `${s.hits} of ${s.total} right`, back: "Back to Train", onBack: () => go("gym") });
+          again: ooAcrossRun, diff: ooPickLine("line"), score: `${s.hits} of ${s.total} right`, back: "Back to Train", onBack: () => go("gym") });
       } });
   };
   eyeNamesReady().then(go2, go2);
