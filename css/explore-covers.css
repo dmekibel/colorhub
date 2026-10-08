@@ -82,3 +82,5 @@
 .art-feed{margin-top:28px}
 .art-feed .masonry{margin-top:0}
 .art-feed .pm-q{padding-top:0}
+/* the Art cover's second way in: the painting map (js/paintmap.js), a quiet line under the primary */
+.xp-act .xp-alt{display:block;width:100%;min-height:44px;margin-top:6px;border:0;background:none;font:italic 400 18px/44px var(--serif);color:var(--soft);text-decoration:underline;text-underline-offset:4px;text-decoration-color:rgba(236,232,223,.3)}

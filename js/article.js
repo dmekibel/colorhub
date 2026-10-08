@@ -158,17 +158,9 @@ function arRefsHTML(body, art) {
 // ---------- reference chips: [[gem:spinel]], [[painting:nga-72328|Roses]] ... (the figure cards are js/article-refs.js) ----------
 const AR_REF_KINDS = { gem: "Gem", flower: "Flower", painting: "Painting", look: "Look", garment: "Garment", film: "Film", painter: "Painter" };
 const AR_REF_SRC = "\\[\\[(gem|flower|painting|art|look|garment|film|painter):([A-Za-z0-9._-]+)(?:\\|([^\\]]+))?\\]\\]";
-const AR_REF_ICON = {   // 12px line icons, one per kind (stroke only, so they take the text color)
-  gem: '<path d="M3 9l3-5h12l3 5-9 11z"/><path d="M3 9h18M9 4l3 5 3-5M12 9v11"/>',
-  flower: '<circle cx="12" cy="12" r="2.2"/><path d="M12 9.8C9.5 6 10 3.5 12 3.5s2.5 2.5 0 6.3zM14.2 12c3.8-2.5 6.3-2 6.3 0s-2.5 2.5-6.3 0zM12 14.2c2.5 3.8 2 6.3 0 6.3s-2.5-2.5 0-6.3zM9.8 12c-3.8 2.5-6.3 2-6.3 0s2.5-2.5 6.3 0z"/>',
-  painting: '<rect x="3.5" y="4.5" width="17" height="15" rx="1"/><path d="M3.5 16l5-5 4 4 3-3 5 5"/>',
-  look: '<path d="M4 6h16M4 12h16M4 18h16"/><path d="M9 4v4M15 10v4M8 16v4"/>',
-  garment: '<path d="M9 4l-6 3 2 4 2-1v10h10V10l2 1 2-4-6-3c-.5 1.5-1.5 2.5-3 2.5S9.5 5.5 9 4z"/>',
-  film: '<rect x="3.5" y="5" width="17" height="14" rx="1.5"/><path d="M7.5 5v14M16.5 5v14M3.5 9.5h4M3.5 14.5h4M16.5 9.5h4M16.5 14.5h4"/>',
-  painter: '<path d="M4 20c0-3 3-3 3-6 0-1.5-1-2.5-1-4 0-3.5 3-6 7-6s7 2.5 7 5.5c0 3-2.5 4-5 4-1.5 0-2 .8-2 1.8 0 2-2 3.7-5 3.7-2 0-3 1-4 1.8"/><circle cx="9" cy="9" r=".8"/><circle cx="13" cy="7.5" r=".8"/><circle cx="16.5" cy="10" r=".8"/>'
-};
+const AR_REF_ICON = { gem: "gem", flower: "flower", painting: "painting", look: "look", garment: "garment", film: "film", painter: "painter" };   // js/core.js ICON_PATHS
 const arRefKind = k => { k = String(k || "").toLowerCase(); return k === "art" ? "painting" : k; };
-const arRefIcon = k => `<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${AR_REF_ICON[k] || ""}</svg>`;
+const arRefIcon = k => AR_REF_ICON[k] ? icon(AR_REF_ICON[k], 13) : "";
 // a chip's text before its data lands: the writer's label, else a plain guess (the real name replaces a guess once the data is in)
 const arRefGuess = (k, id) => k === "painting" ? "A painting" : k === "painter" ? arPretty(id) : arPretty(id);
 function arRefChipHTML(kind, id, label) {

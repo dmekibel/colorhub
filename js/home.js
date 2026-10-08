@@ -16,7 +16,7 @@
 
 const HM_SUN = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></svg>`;
 // the right corner's one button: four quiet dots (a menu), the due count beside it when reviews wait
-const HM_DO_GLYPH = `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="8" cy="8" r="1.9"/><circle cx="16" cy="8" r="1.9"/><circle cx="8" cy="16" r="1.9"/><circle cx="16" cy="16" r="1.9"/></svg>`;
+const HM_DO_GLYPH = icon("grid", 22);
 const HM_SLIDERS = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 6h10M18 6h2M4 12h3M11 12h9M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>`;
 // The nine stages of the path (ROADMAP §14): stage N shows the first N names of the core list (data/core-names.json,
 // ordered by `rank` until the stage ordering exists), so you can preview what any stage holds.
@@ -59,6 +59,60 @@ const HM_KEEP = { all: () => true, learned: it => isMine(hmCard(it)), learning: 
 // (David, 2026-10-08: magnification applies to either, so the Magnifier is no longer a Look: it's the Magnify slider
 // turned up, and an old "Magnifier" save becomes Bubbles with a strong Magnify)
 const HM_LOOKS = [["original", "Bubbles"], ["honeycomb", "Honeycomb"]];
+// ---- the Arrange sheet's pictures (David, 2026-10-08: "the previews need to be simple icon versions"): one flat,
+// iconic diagram per arrangement, same 64 px grid, same dot size, a fixed calm palette (never the live colors, which
+// read as noise at this size). Short one-line labels; the full title and its line show under the strip. ----------
+const HM_ARR_SHORT = { map: "Map", rings: "Rings", sunflower: "Spiral", families: "Families", temp: "Warm–cool" };
+const hmHue = (h, l = 60, c = 62) => `hsl(${Math.round(h)} ${c}% ${l}%)`;
+function hmArrIcon(id) {
+  const dot = (x, y, r, f, extra = "") => `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r}" fill="${f}"${extra}/>`;
+  const ring = (n, R, r, fill, a0 = -90) => Array.from({ length: n }, (_, i) => { const a = (a0 + i * 360 / n) * Math.PI / 180; return dot(32 + R * Math.cos(a), 32 + R * Math.sin(a), r, fill(i)); }).join("");
+  const G = "hsl(40 6% 62%)";
+  let b = "";
+  if (id === "map") {   // hue across, light to dark down
+    for (let r = 0; r < 4; r++) for (let c = 0; c < 5; c++) b += `<rect x="${7 + c * 10.4}" y="${11 + r * 10.4}" width="8.4" height="8.4" rx="2.6" fill="${hmHue(c * 62, 78 - r * 15, 58)}"/>`;
+  } else if (id === "wheel") {   // a ring of hues, muted inside, grey at the heart
+    b = ring(12, 22, 4.2, i => hmHue(i * 30)) + ring(6, 11.5, 3.6, i => hmHue(i * 60, 62, 26)) + dot(32, 32, 3.6, G);
+  } else if (id === "light") {   // white in the middle, black at the rim
+    b = dot(32, 32, 4.6, "hsl(40 30% 96%)") + ring(6, 11.5, 3.9, i => hmHue(i * 60, 80, 45)) + ring(12, 22, 4.2, i => hmHue(i * 30, 30, 55));
+  } else if (id === "families") {   // a region per family, greys in the middle
+    const fam = [[0, 14, 14], [45, 42, 12], [120, 46, 40], [210, 16, 42], [290, 30, 52]];
+    fam.forEach(([h, x, y]) => { b += dot(x, y, 4.2, hmHue(h, 56)) + dot(x + 7.6, y + 1, 3.2, hmHue(h, 72)) + dot(x + 2.6, y + 7.4, 3.2, hmHue(h, 40)); });
+    b += dot(30, 31, 3.4, G) + dot(35.5, 28, 2.6, "hsl(40 6% 78%)");
+  } else if (id === "pages") {   // a small page per family
+    [[0, 8, 8], [45, 34, 8], [150, 8, 34], [225, 34, 34]].forEach(([h, x, y]) => {
+      b += `<rect x="${x}" y="${y}" width="22" height="22" rx="4" fill="rgba(236,232,223,.07)"/>`;
+      for (let r = 0; r < 2; r++) for (let c = 0; c < 2; c++) b += `<rect x="${x + 3 + c * 8.5}" y="${y + 3 + r * 8.5}" width="7" height="7" rx="2" fill="${hmHue(h, 72 - r * 26, 30 + c * 36)}"/>`;
+    });
+  } else if (id === "temp") {   // warm left, cool right, greys down the middle
+    for (let r = 0; r < 4; r++) for (let c = 0; c < 5; c++) {
+      const x = 12 + c * 10, y = 17 + r * 10;
+      b += dot(x, y, 3.8, c === 2 ? `hsl(40 5% ${76 - r * 12}%)` : c < 2 ? hmHue(4 + c * 24 + r * 6, 72 - r * 9) : hmHue(170 + (c - 3) * 44 + r * 6, 72 - r * 9));
+    }
+  } else if (id === "path" || id === "rings") {   // rings from the middle out, hue going round
+    b = `<circle cx="32" cy="32" r="11.5" fill="none" stroke="rgba(236,232,223,.18)" stroke-width="1"/><circle cx="32" cy="32" r="22" fill="none" stroke="rgba(236,232,223,.18)" stroke-width="1"/>`
+      + dot(32, 32, 4.4, hmHue(24, 64)) + ring(6, 11.5, 3.4, i => hmHue(30 + i * 60, 62)) + ring(12, 22, 3.4, i => hmHue(i * 30 + 15, 60));
+  } else if (id === "known") {   // learned in the middle, then learning, then new
+    b = dot(32, 32, 5, "#9AD4AE") + ring(6, 12, 3.6, () => "rgba(236,232,223,.9)")
+      + Array.from({ length: 12 }, (_, i) => { const a = (-90 + i * 30) * Math.PI / 180; return dot(32 + 22.5 * Math.cos(a), 32 + 22.5 * Math.sin(a), 3.2, "none", ` stroke="rgba(236,232,223,.5)" stroke-width="1.3"`); }).join("");
+  } else if (id === "sunflower") {   // a golden-angle spiral by hue
+    for (let i = 1; i <= 40; i++) { const a = i * 137.508 * Math.PI / 180, R = 3.75 * Math.sqrt(i); b += dot(32 + R * Math.cos(a), 32 + R * Math.sin(a), (2.5 + i / 40 * 1.1).toFixed(2), hmHue(i * 9, 62)); }
+  }
+  return `<svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">${b}</svg>`;
+}
+// the Look icons in the same style: bubbles of mixed size, seven hexes, a grid swelling in the middle
+function hmLookIcon(id) {
+  const d = (x, y, r, h) => `<circle cx="${x}" cy="${y}" r="${r}" fill="${hmHue(h, 60)}"/>`;
+  let b = "";
+  if (id === "original") b = d(13, 16, 6, 10) + d(28, 12, 5, 45) + d(24, 28, 8, 140) + d(10, 31, 4.5, 290) + d(35, 30, 4.5, 210);
+  else if (id === "honeycomb") {
+    const hex = (cx, cy, h) => `<path d="${Array.from({ length: 6 }, (_, i) => { const a = (i * 60 + 30) * Math.PI / 180; return (i ? "L" : "M") + (cx + 6.2 * Math.cos(a)).toFixed(1) + " " + (cy + 6.2 * Math.sin(a)).toFixed(1); }).join("")}Z" fill="${hmHue(h, 58)}"/>`;
+    b = hex(22, 22, 40) + [0, 60, 120, 180, 240, 300].map((a, i) => hex(22 + 11.4 * Math.cos(a * Math.PI / 180), 22 + 11.4 * Math.sin(a * Math.PI / 180), i * 60 + 10)).join("");
+  } else {
+    for (let r = 0; r < 5; r++) for (let c = 0; c < 5; c++) { const x = 6 + c * 8, y = 6 + r * 8, dd = Math.hypot(c - 2, r - 2); b += d(x, y, Math.max(1.4, 4.3 - dd * 1.15).toFixed(1), c * 50 + r * 18); }
+  }
+  return `<svg viewBox="0 0 44 44" aria-hidden="true" focusable="false">${b}</svg>`;
+}
 // the three friendly sliders (0..1). Defaults tuned at 440x956: a clear fisheye (the middle ~4x the edge), thin seams.
 const HM_FEEL0 = { mag: .62, space: .15, size: .5 };
 // the old one-set-per-view saves: a family or character collection becomes a filter over every name
@@ -246,8 +300,8 @@ function labHoney() {
       <div class="hm-lab-row"><button class="hm-lab-step" data-p-1>${ICON.chev}</button><b data-p-label></b><button class="hm-lab-step" data-p1>${ICON.chev}</button></div>
       <div class="hm-lab-row"><button class="hm-lab-step" data-n-1>${ICON.chev}</button><b data-n-label></b><button class="hm-lab-step" data-n1>${ICON.chev}</button></div>
       <div class="hm-lab-row hm-lab-rate">
-        <button class="hm-lab-heart" data-heart aria-label="Favorite">♥</button>
-        <span class="hm-lab-stars" data-stars>${[1, 2, 3, 4, 5].map(n => `<button data-star="${n}">★</button>`).join("")}</span>
+        <button class="hm-lab-heart" data-heart aria-label="Favorite">${ICON.heartOn}</button>
+        <span class="hm-lab-stars" data-stars>${[1, 2, 3, 4, 5].map(n => `<button data-star="${n}" aria-label="${n} star${n > 1 ? "s" : ""}">${ICON.starOn}</button>`).join("")}</span>
       </div>
       <div class="hm-lab-row"><button class="link" data-tweak>Tweak…</button><button class="cx-pill" data-copy>Copy my ratings</button></div>
     </div>
@@ -419,11 +473,11 @@ function hmHome() {
     if (arrange) {
       body = `${head("Arrange", "")}
       <div class="hm-ch-scroll" data-sheet-scroll>
-        <div class="hm-arr" role="radiogroup" aria-label="Arrange by">${HONEY_ARR_IDS.map(id => `<button class="hm-arr-b${v.arr === id ? " on" : ""}" data-arr="${id}" role="radio" aria-checked="${v.arr === id}" aria-label="${esc(HONEY_ARR[id].title)}: ${esc(HONEY_ARR[id].sub)}"><span class="hm-arr-pic"><canvas width="128" height="128"></canvas></span><b>${esc(HONEY_ARR[id].title)}</b></button>`).join("")}</div>
+        <div class="hm-arr" role="radiogroup" aria-label="Arrange by">${HONEY_ARR_IDS.map(id => `<button class="hm-arr-b${v.arr === id ? " on" : ""}" data-arr="${id}" role="radio" aria-checked="${v.arr === id}" aria-label="${esc(HONEY_ARR[id].title)}: ${esc(HONEY_ARR[id].sub)}"><span class="hm-arr-pic">${hmArrIcon(id)}</span><b>${esc(HM_ARR_SHORT[id] || HONEY_ARR[id].title)}</b></button>`).join("")}</div>
         <div class="hm-ladder hm-ord" data-ord-row role="radiogroup"></div>
         <p class="hm-arr-sub" data-arr-sub></p>
         <div class="cx-sec"><b>Look</b></div>
-        <div class="hm-look-row">${HM_LOOKS.map(([id, t]) => `<button class="hm-look-chip${v.style === id ? " on" : ""}" data-style="${id}"><i class="hm-look-ic hm-look-${id}"></i><b>${esc(t)}</b></button>`).join("")}</div>
+        <div class="hm-look-row" role="radiogroup" aria-label="Look">${HM_LOOKS.map(([id, t]) => `<button class="hm-look-chip${v.style === id ? " on" : ""}" data-style="${id}" role="radio" aria-checked="${v.style === id}"><i class="hm-look-ic">${hmLookIcon(id)}</i><b>${esc(t)}</b></button>`).join("")}</div>
         <div class="hm-feel">${HM_FEEL_SPECS.map(([k, label, lo, hi]) => `<label class="hm-feel-row" data-feel="${k}"><span class="hm-feel-l">${label}</span><span class="hm-feel-r"><i>${lo}</i><input type="range" min="0" max="1" step="0.01" value="${v.feel[k]}" aria-label="${label}"><i>${hi}</i></span></label>`).join("")}
           <button class="hm-feel-reset" data-feel-reset>Reset the feel</button></div>
         <div class="cx-sec"><b>Edges</b></div>
@@ -470,14 +524,7 @@ function hmHome() {
     paintCount();
 
     if (arrange) {
-      // ---- Arrange by: the live pictures are drawn one per frame from the colors on the map right now ----
-      let picGen = 0;
-      const paintPics = () => {
-        const my = ++picGen, its = items.slice(), st = hmView().style, btns = qa("[data-arr]");
-        let i = 0;
-        const step = () => { if (my !== picGen || !sh.isConnected || i >= btns.length) return; const b = btns[i++]; try { honeyPreview(b.querySelector("canvas"), its, hmLayoutKey(b.dataset.arr, st, hmOrd(b.dataset.arr))); } catch (e) {} requestAnimationFrame(step); };
-        requestAnimationFrame(step);
-      };
+      // ---- Arrange by: flat iconic pictures (hmArrIcon), drawn once with the sheet ----
       // ---- the order inside the shape: Center on (radial shapes) or Sort by (grids), one row of small chips ----
       const ordRow = q("[data-ord-row]");
       const paintOrd = () => {
@@ -527,17 +574,19 @@ function hmHome() {
       });
       paintOrd();
       { const cur = q(".hm-arr-b.on"); if (cur) cur.scrollIntoView({ block: "nearest", inline: "center" }); }
-      paintArr(); paintPics();
+      paintArr();
       // ---- Look: the lens and the cells, then the feel ----
       qa(".hm-look-chip").forEach(b => b.onclick = () => {
-        applyView("style", b.dataset.style); qa(".hm-look-chip").forEach(x => x.classList.toggle("on", x === b));
+        applyView("style", b.dataset.style); qa(".hm-look-chip").forEach(x => { x.classList.toggle("on", x === b); x.setAttribute("aria-checked", x === b); });
         if (ctrl) ctrl.update({ items, soft: true, style: b.dataset.style, tweak: hmLiveTweak(hmView()) });
       });
       let saveT = 0;
       const feelNow = () => { const t = hmLiveTweak(hmView()); delete t.layout; return t; };
       qa("[data-feel]").forEach(row => {
         const k = row.dataset.feel, input = row.querySelector("input");
+        input.style.setProperty("--p", input.value);   // the filled part of the track (css/home.css)
         input.addEventListener("input", () => {
+          input.style.setProperty("--p", input.value);
           S.hm.feel = { ...S.hm.feel, [k]: +input.value };
           if (ctrl) ctrl.tweak(feelNow());
           clearTimeout(saveT); saveT = setTimeout(save, 250);
@@ -546,7 +595,7 @@ function hmHome() {
       });
       q("[data-feel-reset]").onclick = () => {
         S.hm.feel = { ...HM_FEEL0 }; save(); buzz(6);
-        qa("[data-feel]").forEach(row => row.querySelector("input").value = HM_FEEL0[row.dataset.feel]);
+        qa("[data-feel]").forEach(row => { const inp = row.querySelector("input"); inp.value = HM_FEEL0[row.dataset.feel]; inp.style.setProperty("--p", inp.value); });
         if (ctrl) ctrl.tweak(feelNow());
       };
       qa("[data-endless]").forEach(b => b.onclick = () => {
@@ -666,6 +715,14 @@ function hmHome() {
     const lift = () => { p0 = null; clearTimeout(chromeT); chromeT = setTimeout(() => el.classList.remove("chrome-hide"), 220); };
     cv.addEventListener("pointerup", () => { lift(); if (typeof hmDismissHint === "function") hmDismissHint(); });
     cv.addEventListener("pointercancel", lift);
+    // David: "sometimes the bottom corner buttons disappear". A pan whose finger lifts off the canvas (over a corner, a
+    // sheet, outside the window) never sent the canvas its pointerup, so the corners stayed faded and untappable. The
+    // lift is heard on the window too, and losing focus or the page counts as a lift (cornersBack in js/core.js is the
+    // one place every sheet and menu close also brings them back).
+    const winLift = () => { if (p0 || el.classList.contains("chrome-hide")) lift(); };
+    ["pointerup", "pointercancel", "blur"].forEach(k => addEventListener(k, winLift, true));
+    document.addEventListener("visibilitychange", winLift);
+    cleanup.push(() => { ["pointerup", "pointercancel", "blur"].forEach(k => removeEventListener(k, winLift, true)); document.removeEventListener("visibilitychange", winLift); });
   }
   hmShowChrome();
   // ---------- the right corner: ONE button (PLAN.md decision #2; David: "Study the map is a mini game that belongs with
@@ -702,7 +759,7 @@ function hmHome() {
       { id: "arrange", t: "Arrange", n: `${hmArrLabel()} · ${(HM_LOOKS.find(l => l[0] === v.style) || [, ""])[1]}`, art: ic(HM_SLIDERS), attr: "data-do-arrange" },
     ].filter(Boolean);
     const n = rows.length;
-    const scrim = document.createElement("div"); scrim.className = "rm-scrim";
+    const scrim = document.createElement("div"); scrim.className = "rm-scrim rm-scrim-r";
     scrim.addEventListener("pointerdown", e => { e.preventDefault(); e.stopPropagation(); buzz(4); closeStem(); });
     scrim.addEventListener("click", e => { e.preventDefault(); e.stopPropagation(); });
     scrim.addEventListener("touchmove", e => e.preventDefault(), { passive: false });
@@ -710,8 +767,8 @@ function hmHome() {
     stem.className = "rooms-stem hm-do-stem"; stem.setAttribute("role", "menu"); stem.setAttribute("aria-label", "Home menu");
     stem.style.setProperty("--n", n);
     stem.innerHTML = rows.map((r, k) => {
-      const i = n - 1 - k, t = (i + 1) / n;
-      return `<button class="rm-bubble" role="menuitem" data-do="${r.id}" ${r.attr || ""} style="--i:${i};--x:${(26 * t * t).toFixed(1)}px">
+      const i = n - 1 - k;   // a straight stack up the right edge (David preferred it over the tile panel), pictures centered over the corner
+      return `<button class="rm-bubble" role="menuitem" data-do="${r.id}" ${r.attr || ""} style="--i:${i}">
         ${r.art}<span class="rm-label"><b>${esc(r.t)}</b><em>${esc(r.n)}</em></span></button>`;
     }).join("");
     document.body.append(scrim, stem);
@@ -909,7 +966,7 @@ function hmStudyCorner(ctrl, items) {
   const mid = ctrl && ctrl.current();
   const basic = x => { const a = x && x.n && BYNAME.get(String(x.n).toLowerCase()); return !!(a && a.basic); };
   const unknown = x => typeof knowState !== "function" || knowState({ n: x.n, h: x.h }) !== "yours";
-  if (mid && mid.n && !basic(mid) && unknown(mid)) return prQuick({ seed: { n: mid.n, h: mid.h }, src: "map", source: "alike" });
+  if (mid && mid.n && !basic(mid) && unknown(mid)) return prQuick({ seed: { n: mid.n, h: mid.h }, src: "map", source: "alike", sheet: true });
   const edge = typeof edgeOfMap === "function" ? edgeOfMap(10) : [];
   if (edge.length >= 3) return prQuick({ items: edge.map(x => ({ n: x.n, h: x.h })), label: "Next door to what you know", src: "map", source: "these" });
   // nearest on the map itself (the bubbles you see around the middle); by color distance when the layout can't say.

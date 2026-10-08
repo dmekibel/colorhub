@@ -113,6 +113,48 @@ scenario("home", "chrome buttons stay tappable after a touch", async t => {
   }
 });
 
+// David: "Sometimes when you click a setting and choose it, the bottom corner buttons disappear." Pick options in each
+// corner sheet, close it every way (the ✕, a tap outside, Escape, Back), also after a drag that ends off the map, and
+// both corners must be visible and tappable every time.
+scenario("home", "corners always come back after a sheet or a drag", async t => {
+  const corners = async why => {
+    await t.sleep(500);
+    for (const sel of ["#hmDo", "[data-rooms-corner]"]) {
+      const e = t.$(sel); t.expect(e, `${sel} is missing ${why}`);
+      if (!e) continue;
+      const cs = getComputedStyle(e);
+      t.expect(+cs.opacity > .9 && cs.visibility !== "hidden" && cs.pointerEvents !== "none", `${sel} is hidden ${why} (opacity ${cs.opacity}, pointer-events ${cs.pointerEvents})`);
+      const r = t.reachable(e); t.expect(!r, `${sel} ${r} ${why}`);
+    }
+  };
+  const cv = await H.homeReady(t);
+  const closers = [["the close button", async () => t.click("[data-sheet-close]", { wait: 300 })],
+    ["a tap outside", async () => { const s = t.$(".scrim"); s.dispatchEvent(new t.w.PointerEvent("pointerdown", { bubbles: true, cancelable: true, clientX: 30, clientY: 80, pointerId: 1, pointerType: "touch", isPrimary: true, view: t.w })); await t.sleep(400); }],
+    ["Escape", async () => H.keys(t, "Escape")],
+    ["Back", async () => { t.w.dispatchEvent(new t.w.PopStateEvent("popstate", { state: { ch: 1 } })); await t.sleep(500); }]];
+  for (const which of ["colors", "arrange"]) {
+    for (const [how, close] of closers) {
+      await H.sheet(t, which);
+      const opts = t.$$(which === "colors" ? '.hm-chooser [data-src^="stage:"]:not(.on), .hm-chooser .hm-fam:not(.on)' : ".hm-chooser .hm-look-chip:not(.on), .hm-chooser .hm-arr-b:not(.on)");
+      if (opts[0]) await t.click(opts[0], { wait: 400 });
+      if (opts[1]) await t.click(opts[1], { wait: 400 });
+      if (t.$(".sheet")) await close();
+      await t.waitFor(() => !t.$(".sheet"), 4000, `the ${which} sheet to close with ${how}`);
+      await corners(`after picking in ${which} and closing with ${how}`);
+    }
+  }
+  // a pan that ends off the canvas (the finger lifts over a corner or outside the window): the chrome still comes back
+  const c2 = t.$("canvas"), r = c2.getBoundingClientRect(), o = { bubbles: true, clientX: r.left + r.width / 2, clientY: r.top + r.height / 2, pointerId: 1, pointerType: "touch", isPrimary: true, view: t.w };
+  c2.dispatchEvent(new t.w.PointerEvent("pointerdown", o));
+  c2.dispatchEvent(new t.w.PointerEvent("pointermove", { ...o, clientX: o.clientX - 60, clientY: o.clientY + 40 }));
+  t.d.body.dispatchEvent(new t.w.PointerEvent("pointerup", { ...o, clientX: 10, clientY: 10 }));
+  await corners("after a pan that ended off the map");
+  // the menu, opened and closed with its own corner
+  await H.menu(t); { const r2 = t.$("#hmDo").getBoundingClientRect(); await t.tapAt(t.d.elementFromPoint(r2.left + r2.width / 2, r2.top + r2.height / 2), r2.left + r2.width / 2, r2.top + r2.height / 2, { wait: 500 }); }
+  await corners("after the corner menu opened and closed");
+  t.expect(cv, "no canvas");
+});
+
 scenario("home", "View sheet opens; stage chips change the count", async t => {
   await H.homeReady(t);
   await H.sheet(t, "colors");
@@ -167,7 +209,9 @@ scenario("home", "Arrange sheet: the strip morphs the map and keeps every color"
   await H.sheet(t, "arrange");
   const arrs = t.$$(".hm-chooser [data-arr]");
   t.expect(arrs.length >= 5, `only ${arrs.length} shapes`);
-  await t.waitFor(() => arrs.every(b => { const c = b.querySelector("canvas"), d = c.getContext("2d").getImageData(0, 0, c.width, c.height).data; for (let i = 3; i < d.length; i += 16) if (d[i]) return true; return false; }), 6000, "every arrangement picture to draw");
+  // each shape has its own flat icon (js/home.js hmArrIcon) and a one-line label
+  t.expect(arrs.every(b => b.querySelectorAll(".hm-arr-pic svg circle, .hm-arr-pic svg rect, .hm-arr-pic svg path").length >= 6), "an arrangement picture is empty");
+  t.expect(arrs.every(b => b.querySelector("b").scrollWidth <= b.querySelector("b").clientWidth + 1), "an arrangement label is cut off");
   const n0 = H.num(t.text("[data-count]"));
   for (const b of arrs.filter(b => !b.classList.contains("on"))) {
     await t.click(b, { wait: 120 });
@@ -712,6 +756,7 @@ scenario("pages", "hold the cover: the flower rises, dragging lights a hex, lett
 scenario("pages", "Learn it runs meet > recall from a color page", async t => {
   await H.openPage(t, "#/color/teal", "Teal");
   await t.click("[data-learnit]", { wait: 600 });
+  await t.waitFor("[data-adjust]", 4000, "Learn it starts straight into Study"); await t.click("[data-adjust]", { wait: 600 });   // Adjust opens the full sheet
   // the Learn button opens the instant-deck sheet (js/practice.js); Learn it is one of its methods
   if (t.$(".pr-quick")) await t.click('[data-method="lesson"]', { wait: 600 });
   await t.waitFor("#ltPager", 6000, "the Learn it meet pager");
@@ -735,6 +780,7 @@ scenario("pages", "Learn it runs meet > recall from a color page", async t => {
 scenario("pages", "Learn opens the instant deck; Start plays flashcards to the results", async t => {
   await H.openPage(t, "#/color/teal", "Teal");
   await t.click("[data-learnit]", { wait: 600 });
+  await t.waitFor("[data-adjust]", 4000, "Learn it starts straight into Study"); await t.click("[data-adjust]", { wait: 600 });   // Adjust opens the full sheet
   await t.waitFor(".pr-quick", 4000, "the instant-deck sheet");
   t.ev("(() => { const r = document.querySelector('.pr-quick [data-size]'); r.value = 5; r.dispatchEvent(new Event('input', { bubbles: true })); })()");
   await t.click('.pr-quick [data-method="cards"]', { wait: 600 });
@@ -778,6 +824,7 @@ const LS_SOLVE = `(() => {
 scenario("learnset", "Learn sheet: live preview, size and closeness sliders, Look and Study both there", async t => {
   await H.openPage(t, "#/color/teal", "Teal");
   await t.click("[data-learnit]", { wait: 600 });
+  await t.waitFor("[data-adjust]", 4000, "Learn it starts straight into Study"); await t.click("[data-adjust]", { wait: 600 });   // Adjust opens the full sheet
   await t.waitFor(".ls-sheet", 4000, "the Learn sheet");
   t.expect(t.$(".ls-sheet [data-look]") && t.$(".ls-sheet [data-go]"), "Look and Study are both on the sheet");
   const set = v => t.ev(`(() => { const r = document.querySelector('.ls-sheet [data-size]'); r.value = ${v}; r.dispatchEvent(new Event('input', { bubbles: true })); return document.querySelectorAll('.ls-prev i').length; })()`);
@@ -791,6 +838,7 @@ scenario("learnset", "Learn sheet: live preview, size and closeness sliders, Loo
 scenario("learnset", "Look: every view draws, a tile opens its page", async t => {
   await H.openPage(t, "#/color/teal", "Teal");
   await t.click("[data-learnit]", { wait: 600 });
+  await t.waitFor("[data-adjust]", 4000, "Learn it starts straight into Study"); await t.click("[data-adjust]", { wait: 600 });   // Adjust opens the full sheet
   await t.waitFor(".ls-sheet", 4000, "the Learn sheet");
   await t.click(".ls-sheet [data-look]", { wait: 600 });
   await t.waitFor(".ls-lookscr", 4000, "the Look screen");
@@ -805,6 +853,7 @@ scenario("learnset", "Look: every view draws, a tile opens its page", async t =>
 scenario("learnset", "Study: a mixed session runs to the results", async t => {
   await H.openPage(t, "#/color/teal", "Teal");
   await t.click("[data-learnit]", { wait: 600 });
+  await t.waitFor("[data-adjust]", 4000, "Learn it starts straight into Study"); await t.click("[data-adjust]", { wait: 600 });   // Adjust opens the full sheet
   await t.waitFor(".ls-sheet", 4000, "the Learn sheet");
   t.ev("(() => { const r = document.querySelector('.ls-sheet [data-size]'); r.value = 4; r.dispatchEvent(new Event('input', { bubbles: true })); })()");
   await t.click(".ls-sheet [data-go]", { wait: 600 });
@@ -821,6 +870,27 @@ scenario("learnset", "Study: a mixed session runs to the results", async t => {
   t.expect(t.ev("Object.values(S.cards).filter(c => c.from && c.due > today()).length") >= 1, "the Study colors are in spaced review");
   await t.click(".ls-res [data-a=look]", { wait: 500 });
   await t.waitFor(".ls-lookscr", 4000, "Look again from the results");
+});
+// Lane E (David, 2026-10-08): Learn it starts now. One tap on a color page's Learn it is a quick Study of the color
+// and its 3 closest neighbors: Meet the new ones, a few questions, no final round, then "N climbed", the fly to the
+// map, and back on the page you came from.
+scenario("learnset", "Learn it starts now: Meet at once, Adjust, 4 colors, a short climb, then back to the page", async t => {
+  await H.openPage(t, "#/color/teal", "Teal");
+  await t.click(".cp-page [data-learnit]", { wait: 400 });
+  await t.waitFor(".ls-study .pr-stage .pr-step", 3000, "Study (a Meet card or a question) within seconds");
+  t.expect(t.$(".ls-study [data-adjust]"), "the quiet Adjust link on a quick Study");
+  t.expect(t.$$(".ls-prog i").length === 4, `${t.$$(".ls-prog i").length} colors in the quick set, expected 4`);
+  t.expect(t.$(".ls-study .ls-meet"), "a new color is met before it's asked");
+  const kinds = new Set();
+  for (let i = 0; i < 160 && !t.$(".ls-res"); i++) { const k = t.ev(LS_SOLVE); kinds.add(k); await t.sleep(k === "wait" ? 300 : 250); }
+  await t.waitFor(".ls-qend", 6000, "the Learn it ending");
+  t.notes.push("kinds: " + [...kinds].join(","));
+  t.expect(!kinds.has("boss"), "no final round in a quick session");
+  t.expect(!kinds.has("type"), "no typing in a quick session");
+  t.expect(/4\s*climbed/.test(t.text(".ls-qend h1")), `ending title "${t.text(".ls-qend h1")}"`);
+  t.expect(/Back tomorrow/.test(t.text(".ls-qend")), "the ending says back tomorrow");
+  await t.waitFor(".cp-page", 9000, "back on the color page after the fly to the map");
+  t.expect(H.title(t) === "Teal", `back on Teal, got "${H.title(t)}"`);
 });
 // Answer wrong (every other question, so the session can end) and press Next the way an iPhone does: a touch
 // pointerdown/pointerup with no click after it (iOS can drop the synthesized click), or the miss compare's Got it.
@@ -854,6 +924,7 @@ scenario("learnset", "Study: wrong answers and touch-only Next play a 3-color se
   if (t.ev("typeof lsQuick === 'function'")) { t.ev("lsQuick({ seed: prByKey('teal') })"); }
   else {
     await t.click("[data-learnit]", { wait: 600 });
+    await t.waitFor("[data-adjust]", 4000, "Learn it starts straight into Study"); await t.click("[data-adjust]", { wait: 600 });   // Adjust opens the full sheet
     await t.waitFor(".ls-sheet", 4000, "the Learn sheet");
     t.ev("(() => { const r = document.querySelector('.ls-sheet [data-size]'); r.value = 3; r.dispatchEvent(new Event('input', { bubbles: true })); })()");
     await t.click(".ls-sheet [data-go]", { wait: 600 });
@@ -876,6 +947,7 @@ scenario("learnset", "Study: wrong answers and touch-only Next play a 3-color se
 scenario("learnset", "Study: new colors are met (a Meet card each, then the closest two) before any question; Test me skips Meet", async t => {
   await H.openPage(t, "#/color/teal", "Teal");
   await t.click("[data-learnit]", { wait: 600 });
+  await t.waitFor("[data-adjust]", 4000, "Learn it starts straight into Study"); await t.click("[data-adjust]", { wait: 600 });   // Adjust opens the full sheet
   await t.waitFor(".ls-sheet", 4000, "the Learn sheet");
   t.expect(t.$$(".ls-sheet [data-pace]").length === 4 && t.$(".ls-sheet [data-pace].on"), "the pace chips, one on");
   t.expect(/new ones? first|Nothing new/.test(t.text(".ls-sheet [data-pacesay]")), "the pace line says what Study will do");
@@ -905,6 +977,7 @@ scenario("learnset", "Study: new colors are met (a Meet card each, then the clos
 scenario("learnset", "Study: stop part-way, Keep going picks each color up at its level", async t => {
   await H.openPage(t, "#/color/teal", "Teal");
   await t.click("[data-learnit]", { wait: 600 });
+  await t.waitFor("[data-adjust]", 4000, "Learn it starts straight into Study"); await t.click("[data-adjust]", { wait: 600 });   // Adjust opens the full sheet
   await t.waitFor(".ls-sheet", 4000, "the Learn sheet");
   t.ev("(() => { const r = document.querySelector('.ls-sheet [data-size]'); r.value = 4; r.dispatchEvent(new Event('input', { bubbles: true })); })()");
   await t.click(".ls-sheet [data-go]", { wait: 600 });
@@ -1370,6 +1443,7 @@ scenario("learn", "Learn it opens on a name past the first units", async t => {
   await t.open("#/name/chestnut", { settle: 600 });
   await t.waitFor(".cp-page [data-learnit]", 10000, "Learn it on the Chestnut name page");
   await t.click("[data-learnit]", { wait: 600 });
+  await t.waitFor("[data-adjust]", 4000, "Learn it starts straight into Study"); await t.click("[data-adjust]", { wait: 600 });   // Adjust opens the full sheet
   await t.waitFor(".pr-quick [data-method='lesson']", 6000, "Practice's sheet offering Learn it for a name past the first units");
   await t.click("[data-method='lesson']", { wait: 700 });
   await t.waitFor("#ltPager", 6000, "the Learn it meet pager");
@@ -1927,4 +2001,68 @@ scenario("one-today", "todayPick names a color and the painting that holds it; t
   t.expect(note().includes(e.t), "the Art cover doesn't name today's painting");
   await t.open("#shot=learn", { settle: 600 });
   await t.waitFor(".lr-tc-chip.on", 8000, "the Learn card's color chip on the painting");
+});
+
+// ---- the painting map (js/paintmap.js) and painting favorites (js/favs.js §4–5) ----
+scenario("paintmap", "the map lays out, a tap glides a painting to the middle, the middle one opens, Back lands on it again", async t => {
+  await t.open("#/paintings/map?arr=color", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000 && t.w.PM_CTRL.drawn > 30, 20000, "the map to lay out thousands of paintings");
+  const cv = t.$(".pmx-cv"), r = cv.getBoundingClientRect(), c0 = t.w.PM_CTRL.center;
+  t.expect(c0 >= 0, "nothing in the middle");
+  await t.tapAt(cv, r.left + r.width / 2, r.top + r.height / 2 - 210, { wait: 900 });
+  await t.waitFor(() => t.w.PM_CTRL.center !== c0, 6000, "a tap above the middle to glide that painting to the middle");
+  const c1 = t.w.PM_CTRL.center;
+  await t.tapAt(cv, r.left + r.width / 2, r.top + r.height / 2, { wait: 900 });
+  await t.waitFor(() => /#\/gallery\//.test(t.w.location.hash), 10000, "the middle painting to open");
+  t.expect(t.w.location.hash.startsWith("#/gallery/" + c1), `opened ${t.w.location.hash}, not the painting in the middle (${c1})`);
+  await t.waitFor("[data-fva]", 8000, "the heart under the painting");
+  t.expect(!t.$(".gl-hero .sq-key"), "the black-and-white button is still on the painting");
+  await t.click("[data-back]", { wait: 900 });
+  await t.waitFor(() => t.w.PM_CTRL && t.$(".pmx-cv") && t.w.PM_CTRL.center === c1, 12000, "Back to the map, with the same painting in the middle");
+});
+scenario("paintmap", "arrange by time and painter and around the middle one then filter by century (counts and address follow)", async t => {
+  await t.open("#/paintings/map?arr=color&co=France", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 100, 20000, "the map of France");
+  const n = t.w.PM_CTRL.count;
+  for (const k of ["time", "painter"]) {
+    await t.click(".pmx-do", { wait: 300 });
+    await t.waitFor(`.pmx-stem [data-pmdo="${k}"]`, 4000, "the corner's arc");
+    await t.click(`.pmx-stem [data-pmdo="${k}"]`, { force: true, wait: 600 });
+    await t.waitFor(() => t.w.PM_CTRL.spec.arr === k && t.w.PM_CTRL.drawn > 0, 8000, `the ${k} arrangement`);
+    t.expect(t.w.PM_CTRL.count === n, `${k} shows ${t.w.PM_CTRL.count} paintings, not the same ${n}`);
+    t.expect(t.text("[data-pmwhy]").length > 10, `${k}: no line saying what position means`);
+  }
+  const mid = t.w.PM_CTRL.center;
+  await t.click(".pmx-do", { wait: 300 });
+  await t.waitFor('.pmx-stem [data-pmdo="similar"]', 4000, "the corner's arc");
+  await t.click('.pmx-stem [data-pmdo="similar"]', { force: true, wait: 900 });
+  await t.waitFor(() => t.w.PM_CTRL.spec.arr === "similar" && t.w.PM_CTRL.center === mid, 8000, "the painting in the middle to stay there as the seed");
+  t.expect(/arr=similar/.test(t.w.location.hash) && /seed=/.test(t.w.location.hash), `the address doesn't carry the arrangement: ${t.w.location.hash}`);
+  await t.click("[data-pmfilter]", { wait: 600 });
+  await t.waitFor(".pmx-sheet [data-pmcent]", 6000, "the filter sheet");
+  const chip = t.$$(".pmx-sheet [data-pmcent]").find(b => !b.disabled && +(b.querySelector("em") || { textContent: "0" }).textContent.replace(/\D/g, "") > 20);
+  t.expect(chip, "no century with paintings");
+  await t.click(chip, { force: true, wait: 400 });
+  const want = +t.text(".pmx-sheet [data-pmn]").replace(/\D/g, "");
+  t.expect(want > 0 && want < n, `a century didn't narrow the count (${want} of ${n})`);
+  await t.click(".pmx-sheet [data-pmgo]", { force: true, wait: 900 });
+  await t.waitFor(() => Math.abs(t.w.PM_CTRL.count - want) <= 1, 8000, "the map to show the filtered paintings");
+  t.expect(/y0=\d+/.test(t.w.location.hash), `the address doesn't carry the years: ${t.w.location.hash}`);
+});
+scenario("favs", "a painting's heart keeps it; the shelf sorts favorites into kinds with counts, remembered", async t => {
+  await t.open("#/gallery/8136", { settle: 800 });
+  await t.waitFor("[data-fva]", 14000, "the heart under the painting");
+  await t.click("[data-fva]", { wait: 400 });
+  t.expect(t.$("[data-fva]").getAttribute("aria-pressed") === "true", "the heart didn't fill");
+  t.expect(t.ev("Object.keys(S.favArt || {}).length") === 1, "the painting isn't in favorites");
+  t.ev(`S.favs = { "#008080": { n: "Teal", at: today() }, "#4682B4": { n: "Steel blue", at: today() } }; S.fvCat = "all"; save(); favShelf()`);
+  await t.waitFor(".fv-cats [data-fvcat]", 6000, "the kinds on the shelf");
+  const kinds = t.$$(".fv-cats [data-fvcat]").map(b => b.dataset.fvcat).join(",");
+  t.expect(kinds === "all,colors,paintings", `the shelf's kinds are ${kinds}`);
+  t.expect(t.$$(".fv-group").length === 2, "All doesn't show one section per kind");
+  await t.click('.fv-cats [data-fvcat="paintings"]', { wait: 400 });
+  await t.waitFor(".fva-grid .fva-pin", 4000, "the paintings grid");
+  t.expect(t.ev("S.fvCat") === "paintings", "the chosen kind isn't remembered");
+  await t.click(".fva-grid .fva-pin", { wait: 900 });
+  await t.waitFor(() => /#\/gallery\/8136/.test(t.w.location.hash), 10000, "a kept painting to open");
 });

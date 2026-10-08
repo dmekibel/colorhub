@@ -448,3 +448,32 @@ Explore is unmistakably ColorHub because every screen is led by one great image 
 - [ ] No empty section headings. No label repeating visible text.
 - [ ] Back goes down exactly one layer.
 - [ ] Reduce Motion: every move becomes a cross-fade.
+
+---
+
+## 14. Night Gallery: tokens, components and icons (built 2026-10-08)
+
+David chose direction A, Night Gallery (design/VISUAL-DIRECTION.md). Where that file and this one disagree on a visual token, VISUAL-DIRECTION.md wins: §6's radii, §3's surfaces and §13's "mono only on numbers" are replaced by what follows. The tokens live in one place, the COMPONENT TOKENS block in `css/menus2.css`.
+
+**Tokens**
+- Surfaces: `--ground` #0E0D0B, `--s1` #171512 (sheets, panels, row groups), `--s2` #201E1A (tiles, chips, corner buttons), `--s3` #2B2823 (raised = selected or pressed). Edges: `--line` (.10) and `--line-2` (.22).
+- Radii: `--r-tile` 6 (swatches, game tiles), `--r-card` 18 (tiles, cards, row groups), `--r-sheet` 28 (sheets, the menu panel), `--r-pill` (buttons, segments, chips, search, corners).
+- Selected: `--sel-fill` (`--s3`), `--sel-ring` (1.5 px inset `--line-2`; a color item uses its own `--c`), and on tiles an 8 px `--sel-dot`. Text stays ink. **Never a paper or white fill.** Paper is only the one primary button per screen.
+- Sizes: `--tap` 44 (minimum hit), `--tap-l` 56 (rows, corners, primaries). Type: `--type-body` 16, `--type-ui` 15, `--type-cap` 13 (the floor).
+- Type families: Instrument Serif for names, Geist for controls and numbers (tabular). Geist Mono is retired: `--mono` now points to Geist.
+
+**Components**
+- *Corner button*: a 56 pt circle at `--s2` with a `--line-2` edge. When open, it shows ✕ on `--s3`.
+- *Menu panel*: both corners open it (js/core.js toggleStem, js/home.js doMenu; `.rooms-stem.mn-panel`). It's a floating `--s1` panel inset 12 above its corner, radius 28, with a serif title, one italic note and a 3-column grid of 108 pt tiles. Each tile has its picture top-left and its name and note bottom-left. The current room is raised, ringed and dotted. On Home, Colors is the wide tile and Search is a field along the bottom. Scrim tap, Escape and Back close it.
+- *Rows* (`.mn-group`/`.mn-row`): a group is one `--s1` card with 56 pt rows and inset hairlines. A row has a 32 px leading disc, a serif name, a Geist sub-label, a value on the right, and a chevron only when it navigates.
+- *Segmented control*: a pill track. The chosen segment is a raised, ringed pill.
+- *Tiles* (arrangement and Look pictures, stage rungs, families): `--s2`, radius 18. Selected: raised, ringed and dotted.
+- *Slider*: a 6 px `--s3` track with an ink fill up to the thumb (`--p`, set by JS) and a 28 px ink thumb with a 44 pt hit. End labels are 13 px Geist.
+- *Switch*: on is a `--good` track with a ground knob; off is `--s3` with a soft knob. Native `<input type=checkbox>` becomes a 24 px rounded square (on = `--good` with a ground tick), and `<input switch>` becomes the switch. Every toggle buzzes.
+- *Arrange pictures*: flat, iconic diagrams, one per arrangement (js/home.js `hmArrIcon`), on a 64 grid with a fixed calm palette and one-line labels. The live colors are never used: at this size they read as noise.
+
+**Icons** (js/core.js `ICON_PATHS`, `icon(name, size)`, `ICON`)
+- Line icons on a 24 px grid with a 2 px keyline and round caps and joins. Optical stroke: they render at about 1.75 px at any size (`ICON_STROKE`).
+- One metaphor per concept: map (a hexagon with its center), learn (cards), train (eye), museum (a framed picture), studio (palette), you (a person), rooms (a little stack), colors (three overlapping discs), arrange (sliders), heart (keep, favorite, save), share, search, back, close, more, play, camera, compare (two panels), sound, mic, pipette, shuffle, star, dice, bolt, and the kinds of things (gem, flower, painting, film, garment, painter).
+- No emoji and no unicode stand-ins (♥ ★ ‹ › ✓ ✕) for controls. CSS ticks and crosses use the same paths as masks. A new icon goes into `ICON_PATHS`; a screen never draws its own copy of a shared concept.
+- Icon-only buttons always carry an `aria-label`. The SVG itself is `aria-hidden`.

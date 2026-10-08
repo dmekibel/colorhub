@@ -88,7 +88,7 @@
 
 /* the map */
 .hg-map .oo-world .mono{font:500 11px/1 var(--mono);color:var(--faint);margin-left:6px;font-style:normal}
-.hg-map .oo-world.lit b::after{content:" ★";color:#E8C66B;font-size:.7em;vertical-align:.2em}
+.hg-map .oo-world.lit b::after{content:"";display:inline-block;width:.7em;height:.7em;margin-left:.25em;vertical-align:.1em;background:#E8C66B;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.8l2.45 5.1 5.6.75-4.1 3.9 1.03 5.55L12 16.4l-4.98 2.7 1.03-5.55-4.1-3.9 5.6-.75z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.8l2.45 5.1 5.6.75-4.1 3.9 1.03 5.55L12 16.4l-4.98 2.7 1.03-5.55-4.1-3.9 5.6-.75z'/%3E%3C/svg%3E") center/contain no-repeat}
 .hg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
 .hg-lv{display:flex;flex-direction:column;gap:9px;padding:12px 10px 11px;background:var(--surface-2);border-radius:var(--r-2);text-align:left;min-width:0;transition:transform .25s var(--spring),opacity .25s}
 .hg-lv:active{transform:scale(.97)}

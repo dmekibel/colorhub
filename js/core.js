@@ -32,16 +32,33 @@ const isIOS = () => /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.pla
 // in css/menus2.css reaches through it.
 function vbFix() {
   let gap = 0, full = 0;
-  try { if (standalone() && isIOS()) { full = innerHeight > innerWidth ? Math.max(screen.width, screen.height) : Math.min(screen.width, screen.height); gap = full - innerHeight; if (gap < 1 || gap > 80) gap = 0; } } catch (e) {}
+  try {
+    if (standalone() && isIOS()) {
+      full = innerHeight > innerWidth ? Math.max(screen.width, screen.height) : Math.min(screen.width, screen.height);
+      // measure where bottom:0 really lands, not just innerHeight: on iOS 26 a Home Screen app can report innerHeight
+      // as the whole screen while fixed layers still stop a status bar short (David's Arrange-sheet screenshot,
+      // 2026-10-08: --vb came out 0 and the sheet ended 61 px above the edge). The larger of the two is the strip.
+      const pr = document.createElement("div");
+      pr.style.cssText = "position:fixed;left:0;bottom:0;width:1px;height:1px;visibility:hidden;pointer-events:none";
+      document.documentElement.appendChild(pr);
+      const pb = pr.getBoundingClientRect().bottom; pr.remove();
+      gap = Math.round(Math.max(full - innerHeight, full - pb));
+      if (gap < 1 || gap > 120) gap = 0;
+    }
+  } catch (e) {}
   // (re-enabled 2026-10-08. It once "pushed Home into a black bar": .fixed screens are 100dvh with overflow:hidden, so
   // the stage reached into the strip but was clipped there. The map screens now size to the whole screen themselves
   // (--app-full, css/menus2.css), whichever of innerHeight or 100dvh is the short one. David's 16 Pro Max screenshot:
   // the strip is the status bar, 62 px.)
-  document.documentElement.style.setProperty("--vb", gap + "px");
-  if (full) document.documentElement.style.setProperty("--app-full", full + "px"); else document.documentElement.style.removeProperty("--app-full");
+  const de = document.documentElement;
+  de.style.setProperty("--vb", gap + "px");
+  if (full) de.style.setProperty("--app-full", full + "px"); else de.style.removeProperty("--app-full");
+  de.classList.toggle("ios-app", !!full);
 }
 
-vbFix(); addEventListener("resize", vbFix); addEventListener("orientationchange", () => setTimeout(vbFix, 300));
+vbFix(); addEventListener("resize", vbFix); addEventListener("load", vbFix); setTimeout(vbFix, 600);
+try { visualViewport && visualViewport.addEventListener("resize", vbFix); } catch (e) {}
+ addEventListener("orientationchange", () => setTimeout(vbFix, 300));
 
 // ---------- color math (CIELAB, D65) ----------
 const rgb = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
@@ -213,30 +230,72 @@ const nextUnit = () => typeof lxNextUnit === "function" ? lxNextUnit() : UNITS.f
 const unitLabel = u => u.label || `Unit ${u.i + 1} · ${D.tiers[u.tier].short}`;
 
 // ---------- icons ----------
-const sv = (d, s = 22, w = 2) => `<svg viewBox="0 0 24 24" width="${s}" height="${s}" fill="none" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+// ---------- the one icon system (2026-10-08; DESIGN-SYSTEM.md §14) ----------
+// Hand-tuned line icons on a 24 px grid: a 2 px keyline, round caps and joins, one metaphor per concept, used
+// everywhere (no emoji, no unicode stand-ins). Optical sizing: the stroke is drawn so it lands at ~1.75 px on screen
+// at any size (heavier in grid units when small, lighter when large). icon(name, size) is the one door; ICON keeps
+// the old keys and sizes so every caller still fits. A `w` passed to sv() is ignored in favour of the optical stroke
+// unless `exact` is set (some drawings need their own weight).
+const ICON_STROKE = 1.75;
+const sv = (d, s = 22, w, exact) => `<svg viewBox="0 0 24 24" width="${s}" height="${s}" fill="none" stroke="currentColor" stroke-width="${exact && w ? w : Math.max(1.3, Math.min(3.2, ICON_STROKE * 24 / s)).toFixed(2)}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${d}</svg>`;
+const ICON_PATHS = {
+  // actions
+  x: '<path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/>',
+  check: '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+  back: '<path d="M14.5 5.5L8 12l6.5 6.5"/>',
+  chev: '<path d="M9.5 5.5L16 12l-6.5 6.5"/>',
+  up: '<path d="M5.5 14.5L12 8l6.5 6.5"/>',
+  down: '<path d="M5.5 9.5L12 16l6.5-6.5"/>',
+  arrow: '<path d="M4.5 12h15M13.5 6l6 6-6 6"/>',
+  more: '<circle cx="5.5" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="18.5" cy="12" r="1.5" fill="currentColor" stroke="none"/>',
+  share: '<path d="M12 3.5v11M8 7.5l4-4 4 4"/><path d="M8.5 10.5H7a2 2 0 0 0-2 2V19a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6.5a2 2 0 0 0-2-2h-1.5"/>',
+  search: '<circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.3 15.3L20 20"/>',
+  play: '<path d="M8 5.8v12.4a1 1 0 0 0 1.5.86l9.7-6.2a1 1 0 0 0 0-1.72L9.5 4.94A1 1 0 0 0 8 5.8z" fill="currentColor"/>',
+  shuffle: '<path d="M4 7h3c4.5 0 5.5 10 10 10h3M4 17h3c1.6 0 2.7-1.3 3.6-3M13.4 10C14.3 8.3 15.4 7 17 7h3M17.5 4.5L20 7l-2.5 2.5M17.5 14.5L20 17l-2.5 2.5"/>',
+  dice: '<rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="8.6" cy="8.6" r="1.25" fill="currentColor" stroke="none"/><circle cx="15.4" cy="8.6" r="1.25" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.25" fill="currentColor" stroke="none"/><circle cx="8.6" cy="15.4" r="1.25" fill="currentColor" stroke="none"/><circle cx="15.4" cy="15.4" r="1.25" fill="currentColor" stroke="none"/>',
+  tune: '<path d="M4 7h9M17.5 7H20M4 17h2.5M11 17h9"/><circle cx="15.2" cy="7" r="2.3"/><circle cx="8.8" cy="17" r="2.3"/>',
+  heart: '<path d="M12 19.5S4.5 15 4.5 9.6A4.1 4.1 0 0 1 12 7.4a4.1 4.1 0 0 1 7.5 2.2c0 5.4-7.5 9.9-7.5 9.9z"/>',
+  heartOn: '<path d="M12 19.5S4.5 15 4.5 9.6A4.1 4.1 0 0 1 12 7.4a4.1 4.1 0 0 1 7.5 2.2c0 5.4-7.5 9.9-7.5 9.9z" fill="currentColor"/>',
+  star: '<path d="M12 3.8l2.45 5.1 5.6.75-4.1 3.9 1.03 5.55L12 16.4l-4.98 2.7 1.03-5.55-4.1-3.9 5.6-.75z"/>',
+  starOn: '<path d="M12 3.8l2.45 5.1 5.6.75-4.1 3.9 1.03 5.55L12 16.4l-4.98 2.7 1.03-5.55-4.1-3.9 5.6-.75z" fill="currentColor"/>',
+  compare: '<rect x="3.5" y="5" width="7.5" height="14" rx="2"/><rect x="13" y="5" width="7.5" height="14" rx="2"/>',
+  sound: '<path d="M4.5 9.5h3l4.5-4v13l-4.5-4h-3z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6M18 6.5a7.8 7.8 0 0 1 0 11"/>',
+  mic: '<rect x="9" y="3.5" width="6" height="10.5" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V20.5"/>',
+  camera: '<path d="M4 8.5a2 2 0 0 1 2-2h1.3l1.2-2h7l1.2 2H18a2 2 0 0 1 2 2V18a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><circle cx="12" cy="13" r="3.5"/>',
+  pipette: '<path d="M14.5 5.5l4 4M16.6 3.4a2.1 2.1 0 0 1 3 0l1 1a2.1 2.1 0 0 1 0 3L18 10l-4-4zM13 8l-8 8v3h3l8-8"/>',
+  bolt: '<path d="M13 3L5 13.5h6.5L10.5 21 19 10.5h-6.5z"/>',
+  // places (the rooms and the map)
+  map: '<path d="M12 3.2l7.6 4.4v8.8L12 20.8l-7.6-4.4V7.6z"/><circle cx="12" cy="12" r="2.2"/>',
+  learn: '<rect x="7.5" y="3.5" width="12" height="15" rx="2.5"/><path d="M4.5 7.5V18a3 3 0 0 0 3 3h8"/>',
+  train: '<path d="M2.8 12S6.2 5.8 12 5.8 21.2 12 21.2 12 17.8 18.2 12 18.2 2.8 12 2.8 12z"/><circle cx="12" cy="12" r="3"/>',
+  museum: '<rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M3.5 15.5l4.5-4.5 4 4 3-3 5.5 5.5"/><circle cx="15.5" cy="8.8" r="1.4"/>',
+  studio: '<path d="M12 3.5a8.5 8.5 0 1 0 0 17c1.3 0 1.9-.9 1.6-2-.4-1.4.4-2.6 1.9-2.6H17a3.5 3.5 0 0 0 3.5-3.5c0-4.9-3.8-8.9-8.5-8.9z"/><circle cx="7.8" cy="11.2" r="1.1" fill="currentColor" stroke="none"/><circle cx="10.5" cy="7.6" r="1.1" fill="currentColor" stroke="none"/><circle cx="14.8" cy="7.9" r="1.1" fill="currentColor" stroke="none"/>',
+  you: '<circle cx="12" cy="8.5" r="3.7"/><path d="M5 20c.8-3.8 3.6-5.6 7-5.6s6.2 1.8 7 5.6"/>',
+  rooms: '<circle cx="6" cy="6" r="2"/><circle cx="6" cy="12" r="2"/><circle cx="6" cy="18" r="2"/><path d="M11 6h8M11 12h8M11 18h8"/>',
+  colors: '<circle cx="12" cy="8.7" r="4.7"/><circle cx="8.7" cy="14.6" r="4.7"/><circle cx="15.3" cy="14.6" r="4.7"/>',
+  arrange: '<path d="M4 7h9M17.5 7H20M4 17h2.5M11 17h9"/><circle cx="15.2" cy="7" r="2.3"/><circle cx="8.8" cy="17" r="2.3"/>',
+  grid: '<circle cx="8" cy="8" r="2" fill="currentColor" stroke="none"/><circle cx="16" cy="8" r="2" fill="currentColor" stroke="none"/><circle cx="8" cy="16" r="2" fill="currentColor" stroke="none"/><circle cx="16" cy="16" r="2" fill="currentColor" stroke="none"/>',
+  today: '<rect x="4.5" y="5" width="15" height="15" rx="2.5"/><path d="M4.5 10h15M8.5 3v4M15.5 3v4"/>',
+  compass: '<circle cx="12" cy="12" r="8.5"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>',
+  wheel: '<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="2.4"/><path d="M12 3.5v3M12 17.5v3M3.5 12h3M17.5 12h3"/>',
+  // kinds of things (article references, cards)
+  gem: '<path d="M3.5 9l3-4.5h11l3 4.5L12 20z"/><path d="M3.5 9h17M9 4.5L12 9l3-4.5M12 9v11"/>',
+  flower: '<circle cx="12" cy="10" r="2.2"/><path d="M12 7.8C10 5.6 10.4 3.5 12 3.5s2 2.1 0 4.3zM14.2 10c2.2-2 4.3-1.6 4.3 0s-2.1 2-4.3 0zM12 12.2c2 2.2 1.6 4.3 0 4.3s-2-2.1 0-4.3zM9.8 10c-2.2 2-4.3 1.6-4.3 0s2.1-2 4.3 0zM12 16.5v4"/>',
+  painting: '<rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M3.5 15.5l4.5-4.5 4 4 3-3 5.5 5.5"/><circle cx="15.5" cy="8.8" r="1.4"/>',
+  film: '<rect x="3.5" y="5" width="17" height="14" rx="2"/><path d="M7.5 5v14M16.5 5v14M3.5 9.5h4M3.5 14.5h4M16.5 9.5h4M16.5 14.5h4"/>',
+  garment: '<path d="M9 4L3.5 6.8l2 4 1.9-.9V20h9.2V9.9l1.9.9 2-4L15 4c-.5 1.4-1.5 2.4-3 2.4S9.5 5.4 9 4z"/>',
+  painter: '<path d="M14.5 4.5l5 5L10 19H5v-5z"/><path d="M12.5 6.5l5 5"/>',
+  look: '<path d="M4 6h16M4 12h16M4 18h16"/><path d="M9 4v4M15 10v4M8 16v4"/>',
+};
+const icon = (name, size = 22) => sv(ICON_PATHS[name] || "", size);
 const ICON = {
-  x: sv('<path d="M6 6l12 12M18 6L6 18"/>'),
-  xBig: sv('<path d="M6 6l12 12M18 6L6 18"/>', 30, 2.4),
-  check: sv('<path d="M4.5 12.5l5 5L19.5 7"/>', 30, 2.4),
-  checkS: sv('<path d="M4.5 12.5l5 5L19.5 7"/>', 13, 3.2),
-  xS: sv('<path d="M6 6l12 12M18 6L6 18"/>', 13, 3.2),
-  dots: sv('<circle cx="5" cy="12" r="1.3" fill="currentColor"/><circle cx="12" cy="12" r="1.3" fill="currentColor"/><circle cx="19" cy="12" r="1.3" fill="currentColor"/>'),
-  arrow: sv('<path d="M5 12h14M13 6l6 6-6 6"/>', 20),
-  up: sv('<path d="M6 15l6-6 6 6"/>', 18),
-  chev: sv('<path d="M9 6l6 6-6 6"/>', 18),
-  back: sv('<path d="M15 6l-6 6 6 6"/>'),
-  share: sv('<path d="M12 3v12M7 8l5-5 5 5M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/>', 20),
-  learn: sv('<rect x="7" y="3" width="12" height="15" rx="2.5"/><path d="M4 7.5V18a3 3 0 0 0 3 3h8.5"/>', 24, 1.8),
-  gym: sv('<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3.2"/>', 24, 1.8),
-  explore: sv('<circle cx="6" cy="7" r="2.6"/><circle cx="18" cy="6" r="2.6"/><circle cx="13" cy="18" r="2.6"/><path d="M8.5 6.7l6.9-.5M7.3 9.3l4.4 6.4M17 8.5l-2.9 7"/>', 24, 1.8),
-  search: sv('<circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.3-4.3"/>', 20),
-  play: sv('<path d="M8 5.5v13l10-6.5z" fill="currentColor"/>', 18),
-  today: sv('<rect x="6.5" y="3.5" width="11" height="17" rx="2"/><path d="M6.5 14.5h11"/><path d="M9.5 17.5h5"/>', 24, 1.7),
-  compass: sv('<circle cx="12" cy="12" r="8.5"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>', 24, 1.7),
-  palette: sv('<path d="M12 3.5a8.5 8.5 0 1 0 0 17c1.3 0 1.9-.9 1.6-2-.4-1.4.4-2.6 1.9-2.6H17a3.5 3.5 0 0 0 3.5-3.5c0-4.9-3.8-8.9-8.5-8.9z"/><circle cx="7.8" cy="11.2" r="1.1" fill="currentColor"/><circle cx="10.5" cy="7.6" r="1.1" fill="currentColor"/><circle cx="14.8" cy="7.9" r="1.1" fill="currentColor"/>', 24, 1.7),
-  bolt: sv('<path d="M13 2.5L4.5 13.5H11l-1 8 8.5-11H12z"/>', 20),
-  camera: sv('<path d="M4 8.5a2 2 0 0 1 2-2h1.2l1-2h7.6l1 2H18a2 2 0 0 1 2 2V18a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><circle cx="12" cy="13" r="3.6"/>', 22, 1.7),
-  dice: sv('<rect x="4" y="4" width="16" height="16" rx="3.5"/><circle cx="8.4" cy="8.4" r="1.3" fill="currentColor"/><circle cx="15.6" cy="8.4" r="1.3" fill="currentColor"/><circle cx="12" cy="12" r="1.3" fill="currentColor"/><circle cx="8.4" cy="15.6" r="1.3" fill="currentColor"/><circle cx="15.6" cy="15.6" r="1.3" fill="currentColor"/>', 22, 1.6),
+  x: icon("x"), xBig: icon("x", 30), check: icon("check", 30), checkS: icon("check", 13), xS: icon("x", 13),
+  dots: icon("more"), more: icon("more"), arrow: icon("arrow", 20), up: icon("up", 18), down: icon("down", 18), chev: icon("chev", 18), back: icon("back"),
+  share: icon("share", 20), learn: icon("learn", 24), gym: icon("train", 24), train: icon("train", 24), explore: icon("museum", 24), museum: icon("museum", 24),
+  search: icon("search", 20), play: icon("play", 18), today: icon("today", 24), compass: icon("compass", 24), palette: icon("studio", 24),
+  bolt: icon("bolt", 20), camera: icon("camera", 22), dice: icon("dice", 22), heart: icon("heart", 22), heartOn: icon("heartOn", 22),
+  star: icon("star", 22), starOn: icon("starOn", 22), map: icon("map", 22), colors: icon("colors", 22), arrange: icon("arrange", 22),
+  sound: icon("sound", 22), compare: icon("compare", 22), you: icon("you", 24),
 };
 const LOGO = `<svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">${["#E34234", "#FFBF00", "#50C878", "#007FFF"].map((c, i) =>
   `<rect x="9" y="1.5" width="8" height="22" rx="2.2" fill="${c}" stroke="#121212" stroke-width="1.4" transform="rotate(${-33 + i * 22} 13 22)"/>`).join("")}</svg>`;
@@ -396,8 +455,8 @@ const navTop = (title = "", o = {}) => `<header class="nav-top"><button class="i
 // each, so a rename is one line.
 const NAV_MAP = "Explore", NAV_MAP_NOTE = "Every color", NAV_MUSEUM = "Museum";
 const ROOMS_LIST = [["learn", "Learn"], ["gym", "Train"], ["explore", NAV_MUSEUM], ["studio", "Studio"], ["you", "You"]];   // You: js/you.js
-const ROOMS_GLYPH = sv('<circle cx="5.5" cy="18.5" r="2.4"/><circle cx="7.5" cy="11.2" r="2.4"/><circle cx="12.6" cy="6" r="2.4"/><circle cx="19.5" cy="4.6" r="2.4"/>', 24, 1.6);
-const HOME_GLYPH = sv('<path d="M12 3l7 4v10l-7 4-7-4V7z"/>', 24, 1.6);
+const ROOMS_GLYPH = icon("rooms", 24);   // a little stack: the rooms rise from it in a straight column
+const HOME_GLYPH = icon("map", 24);
 // a cheap, decorative stand-in for "a strip of the dimmed honeycomb" above a room (the real canvas doesn't
 // survive a screen swap, since #app is fully re-rendered each time — see show() above)
 // spread across the strip (each bar needs its own left; without it all 16 stacked into one bright slash at the left edge)
@@ -446,9 +505,12 @@ function roomsNote(id) {
 // it was under a solid dimming scrim; the rooms rise as opaque capsules in a low arc from the corner, under the
 // thumb. A tap anywhere outside (or the ✕, Escape, Back) sinks them back into the corner and nothing else moves.
 let STEM_KEY = null;
+// The one source of truth for the corners coming back: a pan fade (.chrome-hide on Home) never outlives a closed
+// sheet or menu. Called by closeStem and every sheet() close (David: "the bottom corner buttons disappear").
+function cornersBack() { document.querySelectorAll(".chrome-hide").forEach(n => n.classList.remove("chrome-hide")); }
 function closeStem(instant) {
   const s = document.querySelector(".rooms-stem"), sc = document.querySelector(".rm-scrim");
-  STEM_OPEN = false;
+  STEM_OPEN = false; cornersBack();
   document.body.classList.remove("stem-open");
   if (STEM_KEY) { removeEventListener("keydown", STEM_KEY, true); STEM_KEY = null; }
   document.querySelectorAll("[data-rooms-corner]").forEach(b => { b.classList.remove("on"); b.innerHTML = ROOMS_GLYPH; b.setAttribute("aria-expanded", "false"); });
@@ -471,7 +533,7 @@ function toggleStem(cornerEl) {
   if (!roomEl && typeof hmSnapFloor === "function") hmSnapFloor();   // L18 B2: the floor as you leave it
   const items = (roomEl ? [["home", NAV_MAP]] : []).concat(ROOMS_LIST);
   const scrim = document.createElement("div");
-  scrim.className = "rm-scrim";
+  scrim.className = "rm-scrim rm-scrim-l";
   // a tap outside only closes: it never reaches the page underneath, and the page never scrolls or re-renders
   scrim.addEventListener("pointerdown", e => { e.preventDefault(); e.stopPropagation(); buzz(4); closeStem(); });
   scrim.addEventListener("click", e => { e.preventDefault(); e.stopPropagation(); });
@@ -481,10 +543,10 @@ function toggleStem(cornerEl) {
   stem.setAttribute("role", "menu"); stem.setAttribute("aria-label", "Rooms");
   const n = items.length;
   stem.style.setProperty("--n", n);   // short screens tighten the step so the top capsule stays low (css/menus2.css)
-  // a gentle arc: each capsule a little further right as it rises (x grows with the square of its height)
+  // a straight stack up the left edge (David, 2026-10-08: "straight up along the side", and again over the tile panel)
   stem.innerHTML = items.map(([id, label], i) => {
-    const t = (i + 1) / n, cur = id === here;
-    return `<button class="rm-bubble${cur ? " cur" : ""}" role="menuitem" data-room="${id}" style="--i:${i};--x:${(26 * t * t).toFixed(1)}px">
+    const cur = id === here;
+    return `<button class="rm-bubble${cur ? " cur" : ""}" role="menuitem" data-room="${id}" style="--i:${i}">
       ${roomsBubbleArt(id)}<span class="rm-label"><b>${esc(label)}</b><em>${esc(cur ? "You're here" : roomsNote(id))}</em></span>
     </button>`;
   }).join("");
@@ -615,7 +677,7 @@ function sheet(html) {
   sh.innerHTML = `<div class="grab"></div>${html}`;
   let gone = false;
   const close = () => {
-    if (gone) return; gone = true; unlockScroll(); if (sh._esc) removeEventListener("keydown", sh._esc, true);
+    if (gone) return; gone = true; unlockScroll(); cornersBack(); if (sh._esc) removeEventListener("keydown", sh._esc, true);
     if (reduceMotion) { scrim.remove(); sh.remove(); return; }
     scrim.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 200, fill: "forwards" }).onfinish = () => scrim.remove();
     sh.animate([{ transform: getComputedStyle(sh).transform === "none" ? "none" : getComputedStyle(sh).transform }, { transform: "translateY(105%)" }], { duration: 240, easing: "cubic-bezier(.3,0,.8,.2)", fill: "forwards" }).onfinish = () => sh.remove();

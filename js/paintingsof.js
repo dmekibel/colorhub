@@ -242,6 +242,7 @@ function paintingsOfPage(hexes, o = {}) {
     <p class="pt-take" data-take hidden></p>
     <div data-sliders></div>
     <div class="pt-acts" data-acts></div>
+    <button class="gl-pmap pt-pmap" data-pmap="arr=color&c=${hexes.map(h => h.slice(1).toLowerCase()).join(",")}&t=${st.tol}&m=${st.minCover || 0}">${GL_ICON_MAP}<span>See them as a map</span>${ICON.chev}</button>
     <details class="pt-stats" data-stats hidden><summary>What the numbers say</summary><div data-statsbody></div></details>
     <div class="pt-sortrow" data-sortrow><div class="pt-seg">${PT_SORTS.map(([k, t]) => `<button data-sort="${k}">${t}</button>`).join("")}</div></div>
     <div class="pt-results" data-results><p class="fine">Finding paintings…</p></div>
@@ -406,7 +407,7 @@ function ptArrival(el, o) {
       <div class="pt-ar-tools"><div class="pt-seg pt-ar-tol">${[0, 3, 10].map(t => `<button data-t="${t}" class="${st.tol === t ? "on" : ""}">${t ? t + "%" : "Exact"}</button>`).join("")}</div>
       ${readable && res && !res.coarse ? `<button class="pt-ar-map${on ? " on" : ""}" data-map aria-pressed="${on}">${PT_ICON_MAP}<span>${on ? "Hide map" : "Where it lives"}</span></button>` : ""}
       <button class="pt-ar-all" data-all>All paintings like this</button></div>
-      ${on && mask ? `<div class="pt-ar-reg"><button data-prev aria-label="Previous place">‹</button><span>${mask.regions.length ? (sel < 0 ? `${mask.regions.length} ${mask.regions.length === 1 ? "place" : "places"}, tap one` : `Place ${sel + 1} of ${mask.regions.length} · ${ptPct(mask.regions[sel].share * 100)} of the canvas`) : "No place is large enough to map"}</span><button data-next aria-label="Next place">›</button></div>` : ""}
+      ${on && mask ? `<div class="pt-ar-reg"><button data-prev aria-label="Previous place">${ICON.back}</button><span>${mask.regions.length ? (sel < 0 ? `${mask.regions.length} ${mask.regions.length === 1 ? "place" : "places"}, tap one` : `Place ${sel + 1} of ${mask.regions.length} · ${ptPct(mask.regions[sel].share * 100)} of the canvas`) : "No place is large enough to map"}</span><button data-next aria-label="Next place">${ICON.chev}</button></div>` : ""}
       ${known && !readable && res && res.cover > 0 && !res.coarse ? `<small class="pt-ar-why">${o.why ? esc(o.why) : ""}</small>` : ""}
     </div>`;
   };

@@ -124,6 +124,7 @@ const ROUTED = [["colorPage", (n, tapped) => n && n.id ? routed(n.title, nodeRou
   ["ooMap", () => routed("Odd one out", "odd")], ["ooEyePage", () => routed("Your eye", "odd/eye")],   // js/games/oo-ui.js
   ["hgMap", () => routed("Gradients", "hue")], ["hgDaily", () => routed("Today's gradient", "hue/daily")],   // js/games/hue-ui.js
   ["ooWhose", () => routed("Whose palette?", "odd/whose")], ["ooAcross", () => routed("Across the line", "line")], ["ooPairs", () => routed("Painters' pairs", "odd/pairs")],
+  ["pmOpen", spec => typeof pmRouteOf === "function" ? pmRouteOf(spec) : null],   // js/paintmap.js: #/paintings/map?arr=…&co=…
   ["arHubPage", id => id ? routed(arPretty(id), "hub/" + id) : null], ["arWhichPage", name => name ? routed(arPretty(name), "which/" + name) : null],
   ["arReadPage", (slug, ch) => slug ? routed(AR_READING.has(slug) ? AR_READING.get(slug).art.name : arPretty(slug), "read/" + slug + (ch ? "/" + ch : "")) : null]];   // js/article.js: the book, #/read/<slug>[/<chapter>]   // js/article.js: #/hub/<id>, #/which/<name>
 // Scripts loaded after router.js (artwiki.js, article.js, looks.js, fashion.js...) aren't defined yet when this runs, so boot.js
@@ -274,6 +275,7 @@ function openRoute(hash, initial = false) {
     galleryPage(+id, true, fromHex, tappedTol);
     return true;
   }
+  if (kind === "paintings" && /^map\b/.test(id || "")) { base(); XSTACK = []; pmGo(hash.includes("?") ? hash.slice(hash.indexOf("?") + 1) : "", true); return true; }   // the painting map (js/paintmap.js)
   if (kind === "chords" && typeof chordsPage === "function") { base(); XSTACK = []; chordsPage(); return true; }   // js/chords.js (L26)
   if ((kind === "pair" || kind === "set") && id && typeof spPage === "function") {   // js/setpage.js: #/pair/<a>+<b>, #/set/<a>-<b>-<c>…
     const hs = spCanon(id);
@@ -299,6 +301,27 @@ function openRoute(hash, initial = false) {
   if (simple[kind]) { base(); simple[kind](); return true; }
   return false;
 }
+// ---------- the painting map (js/paintmap.js + css/paintmap.css) ----------
+// Listed in index.html once the conductor adds the tags; until then (and for a cached index.html) both load here,
+// once, on first use. pmGo(spec): spec is the map's query ("arr=color&co=France&y0=1880&y1=1889") or a spec object.
+// Any element with data-pmap="<query>" opens it (the Art cover, Art's views, painter pages, a painting, a color's paintings).
+let PM_LOAD = null;
+function pmLoad() {
+  if (typeof pmOpen === "function") return Promise.resolve();
+  const v = typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : "";
+  return PM_LOAD || (PM_LOAD = new Promise((res, rej) => {
+    if (!document.querySelector('link[href^="css/paintmap.css"]')) { const l = document.createElement("link"); l.rel = "stylesheet"; l.href = "css/paintmap.css" + v; document.head.appendChild(l); }
+    const s = document.createElement("script"); s.src = "js/paintmap.js" + v; s.onload = res; s.onerror = () => { PM_LOAD = null; s.remove(); rej(new Error("paintmap")); }; document.head.appendChild(s);
+  }));
+}
+function pmGo(spec, fromAddress) {
+  return pmLoad().then(() => pmOpen(spec, { address: !!fromAddress, fresh: true })).catch(e => { console.warn(e); toast("The painting map didn't load"); if (fromAddress) xToOrigin(); });
+}
+document.addEventListener("click", e => {
+  const b = e.target.closest && e.target.closest("[data-pmap]"); if (!b) return;
+  e.preventDefault(); e.stopPropagation(); buzz(6); pmGo(b.dataset.pmap);
+}, true);
+
 // a typed or linked #/ address while the app is open (Back between our own entries is handled in core.js)
 addEventListener("hashchange", () => {
   if (SHOT || location.hash === ROUTE_NOW || !/^#\/./.test(location.hash)) return;

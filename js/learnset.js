@@ -3,6 +3,7 @@
 // phases always there: Look (nothing hidden, six views) and Study (the mixed, adaptive session, like Quizlet Learn).
 //   lsOpen({ seed, items, label, back })   the sheet: live preview, a size slider and a closeness slider
 //   lsLook(items, { label, view, back })    the Look screen
+//   lsQuick({ seed, back })                 Learn it: the color + 3 neighbors straight into a quick Study
 //   lsStudy(items, { label, back, src, route }, resume)   the mixed session, then its results (lsKeep: cards + the set)
 // Builds on js/practice.js (the PR_STEPS step contract, prRecord for the Learner Model and honest scheduling).
 
@@ -68,6 +69,23 @@ function lsSrcOf(o, from, route) {
   if (o.src) return String(o.src);
   const m = typeof route === "string" && route.match(/^#\/(painting|gallery|color|page|story|palette|photo|today|daily|explore)\b/);
   return m ? (m[1] === "gallery" ? "painting" : m[1] === "page" ? "color" : m[1]) : "set";
+}
+
+// ======================================================================
+// Learn it, straight away (Lane E): the color plus its 3 closest Learn-layer neighbors (ΔE00 ≥ 4 apart), into Study
+// at once in quick mode (js/studypace.js: Meet only the ones you can't name yet, a few questions, no final round, no
+// typing). A quiet "Adjust" link opens the full sheet; the end is "4 climbed · back tomorrow", the colors fly to the
+// map, then you land back on the page you came from. Calls with items still open the sheet (prQuick).
+// ======================================================================
+const LS_QUICK_N = 4, LS_QUICK_GAP = 4;
+function lsQuick(o = {}) {
+  if (typeof CORE_NAMES !== "undefined" && !CORE_NAMES && typeof loadCoreNames === "function") return void loadCoreNames().then(() => lsQuick(o));
+  const seed = prSeed(o.seed);
+  if (!seed) return lsOpen(o);
+  const items = lsAlike(seed, LS_QUICK_N, LS_QUICK_GAP);
+  const backTo = o.back || (typeof ROUTE_NOW !== "undefined" ? ROUTE_NOW : "");
+  const sheetOpts = { ...o, back: backTo };
+  lsStudy(items, { label: `${prName(seed)} and its look-alikes`, back: lsExitTo(backTo), route: typeof backTo === "string" ? backTo : "", src: "alike", quick: true, adjust: () => { lsExitTo(backTo)(); setTimeout(() => lsOpen(sheetOpts), 60); } });   // the sheet opens over the page you came from
 }
 
 // ======================================================================
@@ -140,7 +158,7 @@ function lsOpen(o = {}) {
     const pc = e.target.closest("[data-pace]"); if (pc) { ls.pace = pc.dataset.pace; save(); buzz(4); paint(); return; }
     const m = e.target.closest("[data-method]"); if (!m || !items.length) return;
     remember(); close(); buzz(8);
-    if (m.dataset.method === "lesson") return hmLearnIt(app);
+    if (m.dataset.method === "lesson") return hmLearnIt(app, { lesson: true });
     prPlay(m.dataset.method, { items: prShuffle(items), label: label(), exit, other: () => { exit(); again(); } });
   });
   $s("[data-look]").onclick = () => { if (!items.length) return; remember(); close(); buzz(8); lsLook(items, setOpts()); };
@@ -169,10 +187,7 @@ function lsHexLabel(name, x, y, fill) {
   const y0 = y + .04 - (lines.length - 1) * lh / 2;
   return `<text x="${x}" fill="${fill}" font-size="${fs.toFixed(3)}">${lines.map((l, i) => `<tspan x="${x}" y="${(y0 + i * lh).toFixed(3)}">${esc(l)}</tspan>`).join("")}</text>`;
 }
-const LS_ICON = {
-  eye: sv('<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/>', 22, 1.6),
-  map: sv('<path d="M12 3l7.8 4.5v9L12 21l-7.8-4.5v-9z"/>', 18, 1.6),
-};
+const LS_ICON = { eye: icon("train", 22), map: icon("map", 18) };   // js/core.js ICON_PATHS
 
 // ======================================================================
 // Look: no hiding, many views
@@ -319,7 +334,7 @@ function lsStudy(items, o = {}, resume = null) {
       <div class="ls-prog">${items.map(it => `<i data-k="${esc(it.key)}" style="--c:${it.h}"></i>`).join("")}</div>
       <span class="ls-combo" data-combo aria-live="polite"><b>0</b><span>in a row</span></span>${o.adjust ? `<button class="pr-text ls-adjust" data-adjust>Adjust</button>` : ""}</header>
     <p class="ls-status"><span data-status></span><span class="ls-pop" data-pop></span></p>
-    <p class="pr-coach"${prState().seen.learnset ? " hidden" : ""}>Meet each color first. Then each one climbs from picking to typing.</p>
+    <p class="pr-coach"${prState().seen.learnset ? " hidden" : ""}>Meet each color first. Then ${o.quick ? "a few quick questions on each" : "each one climbs from picking to typing"}.</p>
     <div class="pr-stage"></div><div class="ls-grad" data-grad></div>`, "fixed pr-play pr-booth pr-m-learn ls-study");
   const stage = el.querySelector(".pr-stage"), comboEl = el.querySelector("[data-combo]");
   let stepKey = null;
@@ -447,6 +462,21 @@ function lsStudy(items, o = {}, resume = null) {
 // ======================================================================
 // Results
 // ======================================================================
+// the short ending of Learn it: "4 climbed · back tomorrow", the colors fly to the map, then back to the page
+function lsQuickEnd(o, climbedList) {
+  const n = climbedList.length, exit = o.back || lsExitTo("");
+  const el = show(`<div class="ls-qend"><div class="ls-qfan">${climbedList.map((it, k) => `<i style="--c:${it.h};--k:${k}"></i>`).join("")}</div>
+    <h1 class="pr-t1 pr-res-t"><em>${n}</em> climbed</h1><p class="pr-notep">Back tomorrow, after a night's sleep. Name ${n === 1 ? "it" : "them"} then and ${n === 1 ? "it's" : "they're"} yours.</p>
+    <button class="pr-text" data-skip>Skip</button></div>`, "pr-res pr-booth ls-res ls-qres");
+  buzz([10, 30, 10, 30, 24]); lsSfx("sfxChord", climbedList.map(it => it.h));
+  let done = false;
+  const fin = () => { if (done) return; done = true; exit(); };
+  const fly = () => { if (done || !el.isConnected) return; if (typeof flyToMap === "function") { try { flyToMap(climbedList.map(it => ({ n: it.n, h: it.h })), [...el.querySelectorAll(".ls-qfan i")]); } catch (e) { console.error("flyToMap failed", e); } setTimeout(fin, 2600); } else fin(); };
+  el.querySelector("[data-skip]").onclick = fin;
+  setTimeout(fly, reduceMotion ? 600 : 1500);
+  onKey = e => { if (e.key === "Escape" || e.key === "Enter") fin(); };
+  return el;
+}
 function lsResults(sess, r) {
   sess.ended = true;
   const { items, o } = r, firsts = [...sess.first.values()], right = firsts.filter(f => f.ok).length, total = firsts.length;
@@ -457,6 +487,7 @@ function lsResults(sess, r) {
   // everything answered is in spaced review now (lsKeep); the ring on each climbed color fills only when it's yours,
   // which takes a check a day or more later (isMine, js/pickit.js), never this session
   lsKeep(sess, items, o, r.lvOf);
+  if (o.quick && !r.stopped && climbedList.length) return lsQuickEnd(o, climbedList);
   const t = today(), cardOf = it => it.c && it.c.id ? S.cards[it.c.id] : null;
   const isYours = it => lsKnow(it) === "yours";
   const back = firsts.map(f => f.it).filter(it => { const c = cardOf(it); return c && c.due === addDays(t, 1) && !isYours(it); });

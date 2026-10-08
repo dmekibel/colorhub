@@ -116,7 +116,7 @@ function lensSections(lens) {
     }
     case "saved": {
       const list = (S.saved || []).map(id => g.nodes.get(id)).filter(Boolean);
-      return [{ title: "Saved", sub: list.length ? `${list.length} kept` : "Tap ♡ on anything to keep it here.", pins: list.map(n => pin(n)) }];
+      return [{ title: "Saved", sub: list.length ? `${list.length} kept` : "Tap the heart on anything to keep it here.", pins: list.map(n => pin(n)) }];
     }
     default: {
       // For you: colors shuffled by day, with a painting, a story or a page every few pins
@@ -235,15 +235,15 @@ function coverHTML(o) {
       <p class="xp-lead">${esc(o.lead)}</p>
       ${o.note ? `<p class="xp-note">${o.dot ? `<i style="background:${o.dot}"></i>` : ""}${esc(o.note)}</p>` : ""}
     </div>
-    <div class="xp-act"><button class="btn xp-go" data-go="${esc(o.goTo || o.part)}">${esc(o.go)}${ICON.arrow}</button></div>
+    <div class="xp-act"><button class="btn xp-go" data-go="${esc(o.goTo || o.part)}">${esc(o.go)}${ICON.arrow}</button>${o.alt ? `<button class="btn ghost xp-alt" data-pmap="${esc(o.alt.pmap)}">${esc(o.alt.t)}</button>` : ""}</div>
   </section>`;
 }
 const artLead = () => `${typeof GAL !== "undefined" && GAL ? GAL.n.toLocaleString("en-US") : "Over 23,000"} paintings and 11,440 poems, by color.`;
 // the Art cover from today's painting, whichever way it arrived: a graph node, or dpLoad's daily-set entry
 function artCoverHTML(p, note, dot) {
-  if (!p) return coverHTML({ part: "art", name: "Art", lead: artLead(), note, dot, wash: dot ? tintFromHex(dot) : null, hero: `<div class="xp-wait"></div>`, go: "Enter Art" });
+  if (!p) return coverHTML({ part: "art", name: "Art", lead: artLead(), note, dot, wash: dot ? tintFromHex(dot) : null, hero: `<div class="xp-wait"></div>`, go: "Enter Art", alt: { t: "See them all on a map", pmap: "arr=color" } });
   return coverHTML({ part: "art", name: "Art", lead: artLead(), note, dot, tint: tintFromHexList(p.hexes), wash: domHex(p.hexes, p.shares),
-    hero: photoHeroHTML(p.img, p.title), seam: sixSwatchHTML(p.hexes, p.shares), go: "Enter Art" });
+    hero: photoHeroHTML(p.img, p.title), seam: sixSwatchHTML(p.hexes, p.shares), go: "Enter Art", alt: { t: "See them all on a map", pmap: "arr=color" } });
 }
 // Saved: a mosaic of what you've kept (each thing by its first color), or a calm empty state that says how to keep
 function savedCoverHTML(saved) {
@@ -501,7 +501,7 @@ function closeup(n, opts = {}) {
     : `<div class="z-hero z-page">${(n.swatches || []).length ? n.swatches.slice(0, 7).map(x => `<i style="--c:${x.h}"><span data-ink="${ink(x.h)}">${esc(x.label || "")}</span></i>`).join("") : `<i style="--c:${nodeColor(n) || "#2c2c2c"}"></i>`}</div><p class="eyebrow z-type">${esc(TYPE_LABEL[n.type] || "Page")}</p><h1 class="z-title">${esc(n.title)}</h1>`;
   const el = show(`
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button>
-      <div class="z-actions"><button class="icon-btn glass${saved ? " saved" : ""}" data-save aria-label="Save">${saved ? "♥" : "♡"}</button></div></header>
+      <div class="z-actions"><button class="icon-btn glass${saved ? " saved" : ""}" data-save aria-label="Save" aria-pressed="${saved}">${saved ? ICON.heartOn : ICON.heart}</button></div></header>
     ${hero}
     ${sum ? `<p class="z-sum">${linkText(sum)}</p>` : ""}
     <div class="row2 z-btns">${n.kind === "story" ? `<button class="btn" data-play>${ICON.play} Play story</button>` : `<button class="btn" data-read>Read the page ${ICON.arrow}</button>`}</div>
@@ -511,7 +511,7 @@ function closeup(n, opts = {}) {
     <div id="more"></div>
   `, "article closeup");
   el.querySelector("[data-back]").onclick = xBack;
-  el.querySelector("[data-save]").onclick = e => { const on = toggleSave(n.id); e.currentTarget.textContent = on ? "♥" : "♡"; e.currentTarget.classList.toggle("saved", on); };
+  el.querySelector("[data-save]").onclick = e => { const on = toggleSave(n.id); e.currentTarget.innerHTML = on ? ICON.heartOn : ICON.heart; e.currentTarget.setAttribute("aria-pressed", on); e.currentTarget.classList.toggle("saved", on); };
   const rd = el.querySelector("[data-read]"); if (rd) rd.onclick = () => openNode(n);
   const pl = el.querySelector("[data-play]"); if (pl) pl.onclick = () => storyPlayer(n);
   el.querySelectorAll("[data-zl]").forEach(b => b.onclick = () => closeup(n, { back: true, lens: b.dataset.zl }));
@@ -689,7 +689,7 @@ function colorPage(n, tapped) {
   const entry = { n: c.n, h: c.h, src: (coreSelf && coreSelf.src) || ["app"], also: (coreSelf && coreSelf.also) || [], notes: (coreSelf && coreSelf.notes) || [] };
   const primary = `<div class="cp-primary-row">
       ${typeof prQuick === "function" || typeof hmLearnIt === "function" ? `<button class="cp-primary" data-learnit>${mine ? "Review it" : "Learn it"}${mine ? "" : `<em>2 min</em>`}${ICON.arrow}</button>` : ""}
-      <button class="icon-btn cp-icon${saved ? " saved" : ""}" data-save aria-label="Save">${saved ? "♥" : "♡"}</button>
+      <button class="icon-btn cp-icon${saved ? " saved" : ""}" data-save aria-label="Save" aria-pressed="${saved}">${saved ? ICON.heartOn : ICON.heart}</button>
       <button class="icon-btn cp-icon" data-share aria-label="Share">${ICON.share}</button>
     </div>`;
   const el = colorDossier(entry, { tapped, node: n, primary, paintHost: `<section class="gl-in" data-glin></section>`,
@@ -699,7 +699,7 @@ function colorPage(n, tapped) {
     const b = e.currentTarget, want = !b.classList.contains("saved");
     if (isSaved(n.id) !== want) toggleSave(n.id);
     if (typeof fvPageSet === "function") fvPageSet(el, c.h, c.n, want);   // js/favs.js: the same heart fills "Your colors"
-    b.textContent = want ? "♥" : "♡"; b.classList.toggle("saved", want);
+    b.innerHTML = want ? ICON.heartOn : ICON.heart; b.setAttribute("aria-pressed", want); b.classList.toggle("saved", want);
   };
   el.querySelector("[data-share]").onclick = () => {
     const url = shareURL("color/" + routeSlug(c.n)), text = `${c.n} · ColorHub`;

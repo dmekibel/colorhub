@@ -231,7 +231,7 @@
 /* the movement caveat: one calm line, the tagging counts one tap away */
 .aw-page details.aw-note>summary{list-style:none;cursor:pointer;font:italic 400 16px/1.35 var(--serif);color:var(--soft)}
 .aw-page details.aw-note>summary::-webkit-details-marker{display:none}
-.aw-page details.aw-note>summary::after{content:" ›";color:var(--faint)}
+.aw-page details.aw-note>summary::after{content:"";display:inline-block;width:.75em;height:.75em;margin-left:.3em;vertical-align:-.05em;background:var(--faint);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9.5 5.5L16 12l-6.5 6.5'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9.5 5.5L16 12l-6.5 6.5'/%3E%3C/svg%3E") center/contain no-repeat}
 .aw-page details.aw-note[open]>summary::after{content:""}
 .aw-page details.aw-note>p{margin:8px 0 0}
 .aw-room{background:none;border:0;padding:0;text-align:left;font:inherit;cursor:pointer}

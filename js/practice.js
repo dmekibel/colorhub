@@ -406,18 +406,12 @@ const prStarred = it => prState().star.includes(it.key);
 // ======================================================================
 // Small view helpers
 // ======================================================================
-const PR_ICON = {
-  star: sv('<path d="M12 3.6l2.5 5.3 5.8.7-4.3 4 1.1 5.7L12 16.5l-5.1 2.8 1.1-5.7-4.3-4 5.8-.7z"/>', 22, 1.6),
-  starOn: sv('<path d="M12 3.6l2.5 5.3 5.8.7-4.3 4 1.1 5.7L12 16.5l-5.1 2.8 1.1-5.7-4.3-4 5.8-.7z" fill="currentColor"/>', 22, 1.6),
-  shuffle: sv('<path d="M4 7h3.5c4 0 5 10 9 10H20M4 17h3.5c1.6 0 2.7-1.6 3.6-3.4M14 9.6C14.9 8 15.9 7 17.5 7H20M17.5 4.5 20 7l-2.5 2.5M17.5 14.5 20 17l-2.5 2.5"/>', 22, 1.6),
-  mic: sv('<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/>', 22, 1.6),
-  back: sv('<path d="M15 6l-6 6 6 6"/>', 22, 1.8),
-  chev: sv('<path d="M9 6l6 6-6 6"/>', 16, 1.8),
-  arrow: sv('<path d="M5 12h14M13 6l6 6-6 6"/>', 20, 1.6),
-  cards: sv('<rect x="7.5" y="4" width="11" height="15" rx="2"/><path d="M5 7.5v11a2 2 0 0 0 2 2h8"/>', 24, 1.6),
+const PR_ICON = {   // js/core.js ICON_PATHS
+  star: icon("star", 22), starOn: icon("starOn", 22), shuffle: icon("shuffle", 22), mic: icon("mic", 22),
+  back: icon("back", 22), chev: icon("chev", 16), arrow: icon("arrow", 20), cards: icon("learn", 24),
 };
-const prX = () => sv('<path d="M6 6l12 12M18 6L6 18"/>', 22, 1.8);
-const prCheck = () => sv('<path d="M5 12.5l4.5 4.5L19 7.5"/>', 24, 2);
+const prX = () => icon("x", 22);
+const prCheck = () => icon("check", 24);
 // Names are long ("Purple Mountain Majesty"): a display size that still fits two lines on a 320 px phone
 function prFit(name, big = 72) {
   const n = String(name).length, s = n <= 7 ? big : n <= 10 ? big * .84 : n <= 14 ? big * .7 : n <= 18 ? big * .6 : big * .54;
@@ -1427,7 +1421,7 @@ function prArt(m, cols) {
     learn: `<span class="a-steps">${[0, 1, 2].map(i => `<i style="--c:${c(i)};height:${30 + i * 12}%"></i>`).join("")}</span>`,
     test: `<span class="a-test">${[0, 1, 2].map(i => `<b><i style="--c:${c(i)}"></i><em></em></b>`).join("")}</span>`,
     say: `<i class="a-sw a-round" style="--c:${c(3)}"></i><span class="a-say">${PR_ICON.mic}</span>`,
-    blitz: `<i class="a-sw" style="--c:${c(1)}"></i><span class="a-yn"><b>✓</b><b>✕</b></span>`,
+    blitz: `<i class="a-sw" style="--c:${c(1)}"></i><span class="a-yn"><b>${icon("check", 18)}</b><b>${icon("x", 18)}</b></span>`,
     pairs: `<span class="a-grid">${[0, 1, 2, 3, 4, 5].map(i => i === 1 ? `<i style="--c:${c(0)}"></i>` : i === 4 ? `<b class="p"></b>` : `<b class="d"></b>`).join("")}</span>`,
     rain: `<span class="a-rain"><i style="--c:${c(2)}"></i><b></b><b></b><b></b></span>`,
     odd: `<span class="a-odd"><i style="--c:${c(0)}"></i><i style="--c:${c(0)}"></i><i style="--c:${c(0)}"></i><i style="--c:${c(1)}"></i></span>`,
@@ -1594,6 +1588,7 @@ function prInstantDeck(o = {}) {
 // The quick sheet. Smart defaults are already chosen, so one tap on Start begins; chips change them; it remembers.
 function prQuick(o = {}) {
   // every "Learn" with a color or a set opens the Learn sheet (js/learnset.js): Look and Study, always both
+  if (typeof lsQuick === "function" && !o.legacy && !o.sheet && o.seed && !(o.items && o.items.length)) return lsQuick(o);   // Learn it starts now (js/learnset.js)
   if (typeof lsOpen === "function" && !o.legacy && ((o.items && o.items.length) || o.seed)) return lsOpen(o);
   if (typeof CORE_NAMES !== "undefined" && !CORE_NAMES && typeof loadCoreNames === "function") return void loadCoreNames().then(() => prQuick(o));
   const p = prState(), last = p.quick || {};
@@ -1631,7 +1626,7 @@ function prQuick(o = {}) {
   function start() {
     if (!deck || !deck.items.length) return;
     remember(); close(); buzz(8);
-    if (st.method === "lesson") return hmLearnIt(app);
+    if (st.method === "lesson") return hmLearnIt(app, { lesson: true });
     const exit = () => { if (typeof backTo === "function") backTo(); else if (backTo && /^#\/./.test(backTo)) { if (!openRoute(backTo)) go(S.tab || "learn"); } else prHome(); };
     prPlay(st.method, { items: deck.items, label: deck.label, exit, other: () => { exit(); setTimeout(() => prQuick({ ...o, back: backTo }), 60); } });
   }

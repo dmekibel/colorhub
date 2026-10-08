@@ -26,10 +26,12 @@ function hmLtHome(c) {
   return hmOpenColor(c);
 }
 
-function hmLearnIt(c) {
+function hmLearnIt(c, o = {}) {
   if (!c) return;
+  // Learn it starts now (js/learnset.js lsQuick); the full lesson stays for the sheet's "Learn it" method ({ lesson: true })
+  if (!o.lesson && typeof lsQuick === "function") return lsQuick({ seed: c, back: typeof ROUTE_NOW === "string" && ROUTE_NOW && !/^#\/learnit\//.test(ROUTE_NOW) ? ROUTE_NOW : () => hmLtHome(c) });
   // the group draws on the ~1,000-name list: wait for it the first time (it's usually prefetched already)
-  if (typeof CORE_NAMES !== "undefined" && !CORE_NAMES && typeof loadCoreNames === "function") return loadCoreNames().then(() => hmLearnIt(c));
+  if (typeof CORE_NAMES !== "undefined" && !CORE_NAMES && typeof loadCoreNames === "function") return loadCoreNames().then(() => hmLearnIt(c, o));
   const near = hmLearnGroup(c);
   if (!near.length) { toast("No close look-alikes to compare yet"); return hmLtHome(c); }
   const group = [c, ...near];
