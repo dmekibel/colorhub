@@ -17,14 +17,15 @@ f.onload = async () => {
   const w = f.contentWindow, d = () => w.document, $ = s => d().querySelector(s), $$ = s => [...d().querySelectorAll(s)];
   w.addEventListener("error", e => (w.__errs = w.__errs || []).push(String(e.message)));
   w.addEventListener("unhandledrejection", e => (w.__errs = w.__errs || []).push("rej " + String(e.reason)));
-  w.AR_CFG = { articles: "tools/fixtures/articles/", hubs: "tools/fixtures/hubs.json" };
-  if (q.get("learner")) {
-    w.lmPairs = s => s === "cobalt" ? [{ a: "cobalt", b: "navy", n: 4 }] : s === "navy" ? [{ a: "cobalt", b: "navy", n: 4 }] : [];
-    w.lmStatus = s => ({ cerulean: "yours", azure: "met", blue: "yours", navy: "met" })[s] || "unmet";
-    w.lmLog = r => { (w.__lmlog = w.__lmlog || []).push(r); };
+  w.AR_CFG = { articles: "tools/fixtures/articles/" };   // hubs and disambiguation read the real data/graph files unless fix=1
+  if (q.get("fix")) { w.AR_CFG.hubs = "tools/fixtures/hubs.json"; w.AR_CFG.disambig = "tools/fixtures/none.json"; }
+  if (q.get("learner")) {   // a believable learner, through the real js/learner.js
+    const c = w.learnerLog; for (let i = 0; i < 4; i++) c({ type: "confuse", color: "Cobalt", b: "Navy", src: "game" });
+    c({ type: "seen", color: "Azure" }); c({ type: "seen", color: "Navy" }); c({ type: "seen", color: "Teal" });
+    w.eval('S.placed = { at: "2026-01-01" }');   // S is a let, not a window property
   }
   await wait(600);
-  w.location.hash = scene === "hub" ? "#/hub/pigments-that-changed-painting" : scene === "which" ? "#/which/blue" : "#/color/" + slug;
+  w.location.hash = scene === "hub" ? "#/hub/" + (q.get("fix") ? "pigments-that-changed-painting" : "family:blues") : (scene === "which" || scene === "backnav") ? "#/which/" + (q.get("id") || (q.get("fix") ? "blue" : "silver")) : "#/color/" + slug;
   await wait(2200);
   // the page may scroll on the window or on <body> (body is height:100% with overflow-x:hidden): move whichever one is the scroller
   const scroller = () => { const b = d().body, se = d().scrollingElement; return b.scrollHeight > b.clientHeight + 4 && getComputedStyle(b).overflowY !== "visible" ? b : se; };
@@ -34,6 +35,7 @@ f.onload = async () => {
   if (scene === "top") to($(".ar-kind"));
   if (scene === "toc") { to($$(".ar-sec")[2]); await wait(400); $("[data-ar-bar]").click(); }
   if (scene === "fn") { to($(".ar-lede")); await wait(300); $(".ar-fn").click(); }
+  if (scene === "backnav") { $(".ar-plate:nth-child(2)").click(); await wait(1500); $("[data-back]").click(); await wait(1500); }   // which > a color > Back lands on which again
   if (scene === "myth") to($(".ar-myth"));
   if (scene === "books") to($(".ar-books"));
   if (scene === "tree") to($(".ar-fam"));

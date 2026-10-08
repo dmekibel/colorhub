@@ -89,7 +89,7 @@ function gyFit(L, C, H) {
   while (C > 0 && !inGamut(L, C * Math.cos(r), C * Math.sin(r))) C -= 1;
   return lchHex(L, Math.max(C, 0), H);
 }
-const metColors = () => { if (GY_FIXED) return ALL; const m = ALL.filter(c => S.cards[c.id]); return m.length >= 6 ? m : ALL; };
+const metColors = () => { if (GY_FIXED) return ALL; if (typeof CS_PLAY_POOL !== "undefined" && CS_PLAY_POOL && CS_PLAY_POOL.length) return CS_PLAY_POOL; const m = ALL.filter(c => S.cards[c.id]); return m.length >= 6 ? m : ALL; };
 const gyBtw = (a, b) => a + gR() * (b - a);
 // Aim a trial at a weak band (or anywhere when want is null). Families aren't targeted for color-blind players.
 function wantHue(want) {

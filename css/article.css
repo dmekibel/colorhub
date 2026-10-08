@@ -173,3 +173,4 @@
 .ar-plate[data-ink="light"]{color:#fff}
 
 @media (prefers-reduced-motion:reduce){.ar-hex{transition:none}}
+.ar-act[hidden],.ar-slotpanel[hidden]{display:none}

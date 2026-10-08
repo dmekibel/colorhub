@@ -236,7 +236,8 @@ function explorePager() {
     sections.forEach(s => io.observe(s));
     cleanup.push(() => io.disconnect());
   }
-  pager.addEventListener("click", e => { const s = e.target.closest("[data-part]"); if (s) openPart(s.dataset.part); });
+  // (the "For you" cover opens its feed directly: openPart("all") is the pager itself, so it used to just redraw the pager)
+  pager.addEventListener("click", e => { const s = e.target.closest("[data-part]"); if (s) s.dataset.part === "all" ? exploreForYou() : openPart(s.dataset.part); });
   el.querySelector("[data-search]").onclick = () => exploreSearchSheet();
 }
 
@@ -596,9 +597,10 @@ function colorPage(n, tapped) {
     ${stripOthers.length && stripDiff ? `<section class="cp-strip-sec">
       <div class="cp-strip"${tapped ? "" : ` data-nb="${esc(c.n)}"`}>
         <div style="--c:${heroHex}" data-ink="${ink(heroHex)}"><b>${tapped ? "Your color" : esc(c.n)}</b></div>
-        ${stripOthers.map(x => `<div style="--c:${x.h}" data-ink="${ink(x.h)}"><b>${esc(x.n)}</b></div>`).join("")}
+        ${stripOthers.map(x => `<div style="--c:${x.h}" data-ink="${ink(x.h)}"><b>${esc(x.n)}</b>${typeof relMarkHTML === "function" ? relMarkHTML(x) : ""}</div>`).join("")}
       </div>
       <p class="cp-diff">${esc(stripDiff)}</p>
+      ${tapped ? "" : `<div data-csacts></div>`}
     </section>` : ""}
     <div class="ar-slot" data-ar-slot hidden></div>
     ${c.o && !(w && w.facets.some(f => f.k === "language")) ? `<p class="lead">${esc(c.o)}</p>` : ""}
@@ -639,6 +641,10 @@ function colorPage(n, tapped) {
   // a tap anywhere on a near-name row grows its chip into the next page (js/core.js's morphFrom/runMorph)
   el.querySelectorAll("[data-cp-near]").forEach(b => b.onclick = () => { morphFrom(b.querySelector("i")); openCoreName(b.dataset.h, b.dataset.cpNear); });
   const gi = el.querySelector("[data-glin]"); if (gi) galleryColorRow(gi, c);
+  // the Learner Model (js/learner.js) and the ColorSet verbs on the look-alike strip (js/colorset.js)
+  if (typeof learnerLog === "function" && !tapped) learnerLog({ type: "seen", color: c, src: "page" });
+  const csHost = el.querySelector("[data-csacts]");
+  if (csHost && typeof colorSet === "function") csHost.appendChild(csActions(colorSet({ kind: "lookalikes", id: routeSlug(c.n), title: `${c.n} and its look-alikes`, colors: [c, nb, ...likes].filter(Boolean), src: "color/" + routeSlug(c.n) }), { only: ["play", "map"], back: () => colorPage(n) }));
   colorPoems(el.querySelector(".c-poems"), c);
   if (typeof worldColorRow === "function") worldColorRow(el, n);
   el.querySelectorAll("[data-copy]").forEach(b => b.onclick = () => { try { navigator.clipboard.writeText(b.dataset.copy); toast("Copied " + b.dataset.copy); } catch (e) {} });

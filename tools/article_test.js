@@ -14,6 +14,8 @@ const norm = s => String(s).normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCas
 
 const core = JSON.parse(fs.readFileSync(path.join(root, "data/core-names.json"), "utf8"));
 const known = new Map(core.map(e => [norm(e.n), e]));
+const gnPath = path.join(root, "data/graph/names.json");
+if (fs.existsSync(gnPath)) JSON.parse(fs.readFileSync(gnPath, "utf8")).forEach(r => { if (!known.has(r[0])) known.set(r[0], r); });   // every name in the graph
 
 // ---- sandbox ----
 let fetchTable = {};
@@ -101,6 +103,18 @@ ok(count >= 2, "at least 2 articles tested (found " + count + ")");
   Object.entries(hubs.which).forEach(([k, w]) => w.senses.forEach(s => ok(known.has(norm(s.slug)), `hubs fixture which/${k}: sense "${s.slug}" does not resolve`)));
   ok(ar.arHubEntry(hubs, "purples-and-lilacs").title.startsWith("Purples"), "hub lookup by id");
   ok(ar.arWhichEntry(hubs, "blue").senses.length === 4, "which lookup by name");
+  // the real graph files (lane L6), when present: every hub member and every "which" sense resolves, and lookups work
+  const hp = path.join(root, "data/graph/hubs.json"), dp = path.join(root, "data/graph/disambig.json");
+  if (fs.existsSync(hp)) {
+    const real = JSON.parse(fs.readFileSync(hp, "utf8")); let n = 0, miss = 0;
+    Object.entries(real.hubs).forEach(([id, h]) => { ok(ar.arHubEntry(real, id).title === h.title, "real hub lookup " + id); h.members.forEach(m => { n++; if (!known.has(m)) miss++; }); });
+    ok(miss === 0, `real hubs: ${miss} of ${n} members do not resolve to a graph name`);
+  }
+  if (fs.existsSync(dp)) {
+    const real = JSON.parse(fs.readFileSync(dp, "utf8")); let miss = 0;
+    real.groups.forEach(g => { const e = ar.arWhichEntry(real, g.id); ok(e && e.senses.length === g.members.length, "real which lookup " + g.id); g.members.forEach(m => { if (!known.has(m.s)) miss++; }); });
+    ok(miss === 0, `real disambig: ${miss} senses do not resolve`);
+  }
   console.log(fails ? `article_test: ${fails} FAIL` : `article_test: ok (${count} articles)`);
   process.exit(fails ? 1 : 0);
 })();

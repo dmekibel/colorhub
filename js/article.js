@@ -21,10 +21,10 @@
 //     duel     always (an inline round, built here; logs to the Learner Model when it exists)
 //     painting galleryPage + npGalleryHits (js/gallery.js, js/names.js): opens the painting that holds this color most
 //     mix      a global mixLab(hex, name) (lane L14): link only
-//     map      csOnMap(hex, name) / onMap(set) (js/colorsets.js): "On the map"
-// Learner Model readers are all feature-detected (js/learner.js, lane L19): lmStatus/relMark/knowState (a color's
-// state: yours, met, unmet), lmPairs(slug) (confusion pairs), lmLog/learnerLog (one write call). Without them the
-// family tree falls back to the 101's own cards (S.cards, isMine) and the mix-up card simply doesn't appear.
+//     map      csOnMap(colorSet(...)) (js/colorset.js): "On the map", lit with the color and its family
+// The Learner Model (js/learner.js) is feature-detected: knowState(color) lights the family tree (yours, met, unmet),
+// confusions(color) feeds the mix-up card, learnerLog(evt) records duel and question answers. Without it the tree
+// falls back to the 101's own cards (S.cards, isMine) and the mix-up card simply doesn't appear.
 // All top-level names here start with "ar" (one shared global scope).
 
 const AR_WPM = 220;
@@ -37,7 +37,7 @@ const arCfg = () => (typeof window !== "undefined" && window.AR_CFG) || {};
 const arVer = () => (typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : "");
 const arFetchJSON = url => fetch(url + arVer()).then(r => r.ok ? r.json() : null).catch(() => null);
 const AR_CACHE = new Map();
-function arPretty(s) { return String(s || "").replace(/[-_]+/g, " ").replace(/\b[a-z]/g, m => m.toUpperCase()).trim(); }
+function arPretty(s) { return String(s || "").replace(/^[a-z]+:/, "").replace(/[-_]+/g, " ").replace(/\b[a-z]/g, m => m.toUpperCase()).trim(); }
 // plain paragraphs -> blocks (see the callout markers in the header)
 function arBlock(t) {
   let m;
@@ -86,6 +86,11 @@ function arIndex() {
   return AR_IDX;
 }
 // slug | name | {slug, name, hex, gloss} -> { slug, n, h, gloss? } or null. The 101 first, then the ~1,000 core names.
+let AR_GN = null;   // data/graph/names.json rows [slug, name, hex, ...]: every name in the graph, for slugs the ~1,000 core list lacks
+function arLoadNames() {
+  if (AR_GN) return Promise.resolve(AR_GN);
+  return arFetchJSON(arCfg().names || "data/graph/names.json").then(rows => (AR_GN = new Map((Array.isArray(rows) ? rows : []).map(r => [r[0], r]))));
+}
 function arColor(ref) {
   if (!ref) return null;
   if (typeof ref === "object") {
@@ -99,7 +104,9 @@ function arColor(ref) {
   const c = typeof routeColor === "function" ? routeColor(slug) : null;
   if (c) return { slug, n: c.n, h: c.h, c };
   const e = arIndex().get(slug);
-  return e ? { slug, n: e.n, h: e.h } : null;
+  if (e) return { slug, n: e.n, h: e.h };
+  const g = AR_GN && AR_GN.get(slug);
+  return g ? { slug, n: g[1], h: g[2] } : null;
 }
 function arOpenColor(slug, srcEl) {
   const c = arColor(slug); if (!c) return;
@@ -149,10 +156,8 @@ const arMinutes = art => Math.max(1, Math.round((art.words || arWords(art)) / AR
 // "yours" | "met" | "unmet". The Learner Model's readers when they exist, else the 101's own cards.
 function arKnow(c) {
   if (!c) return "unmet";
-  const norm = v => { if (v && typeof v === "object") v = v.state || v.status || v.s || v.rel; v = String(v == null ? "" : v).toLowerCase();
-    return /^(un|not|new|none)/.test(v) ? "unmet" : /own|yours|known|solid/.test(v) ? "yours" : /met|seen|learn|outline|found/.test(v) ? "met" : null; };
-  for (const fn of ["lmStatus", "relMark", "knowState"]) {
-    if (typeof globalThis[fn] === "function") { try { const r = norm(globalThis[fn](c.slug)); if (r) return r; } catch (e) {} }
+  if (typeof knowState === "function") {
+    try { const k = knowState({ n: c.n, h: c.h }); return k === "yours" ? "yours" : k === "met" || k === "learning" ? "met" : "unmet"; } catch (e) {}
   }
   const t = typeof BYNAME !== "undefined" ? BYNAME.get(String(c.n).toLowerCase()) : null;
   if (!t) return "unmet";
@@ -161,12 +166,9 @@ function arKnow(c) {
   return st ? (typeof isMine === "function" && isMine(st) ? "yours" : "met") : "unmet";
 }
 const AR_KNOW_WORD = { yours: "yours", met: "met", unmet: "not met yet" };
-function arLog(rec) {
-  try {
-    if (typeof lmLog === "function") lmLog({ t: Date.now(), surf: "article", ...rec });
-    else if (typeof learnerLog === "function") learnerLog({ t: Date.now(), surf: "article", ...rec });
-  } catch (e) {}
-}
+// one write call into the Learner Model (js/learner.js learnerLog), never throws
+function arLog(evt) { try { if (typeof learnerLog === "function") learnerLog({ src: "page", ...evt }); } catch (e) {} }
+const arLogAnswer = (color, ok, other) => { arLog({ type: "answer", color: { n: color.n, h: color.h }, ok, by: "pick" }); if (!ok && other) arLog({ type: "confuse", color: { n: color.n, h: color.h }, b: { n: other.n, h: other.h } }); };
 
 // ---------- the family tree: a small honeycomb ----------
 function arHexHTML(c, o = {}) {
@@ -204,7 +206,7 @@ const AR_INFER = [["duel", /look.?alike|confus|mistak|mix(?:ed)? up|apart|differ
 const AR_ACT_LABEL = { duel: "Duel the look-alike", painting: "See it in this painting", mix: "Mix it", map: "On the map" };
 function arActionAvailable(k) {
   return k === "duel" ? true : k === "painting" ? typeof galleryPage === "function" && typeof npGalleryHits === "function" && typeof loadGallery === "function"
-    : k === "mix" ? typeof mixLab === "function" : k === "map" ? typeof csOnMap === "function" || typeof onMap === "function" : false;
+    : k === "mix" ? typeof mixLab === "function" : k === "map" ? typeof csOnMap === "function" && typeof colorSet === "function" : false;
 }
 function arActionsFor(sec) {
   let kinds = Array.isArray(sec.actions) ? sec.actions.map(a => typeof a === "string" ? a : a && a.kind).filter(Boolean)
@@ -225,16 +227,18 @@ function arDisambHTML(self, aside) {
     <p class="ar-more"><a href="#/which/${esc(self.slug)}" data-ar-which="${esc(self.slug)}">All the meanings of ${esc(self.n)}</a></p>`;
 }
 // "You and this color": the Learner Model's confusion pair for this color, with an inline duel.
-function arPairFor(slug) {
-  if (typeof lmPairs !== "function") return null;
-  let ps; try { ps = lmPairs(slug); } catch (e) { return null; }
+function arPairFor(self) {
+  if (typeof confusions !== "function") return null;
+  let ps; try { ps = confusions({ n: self.n, h: self.h }, 3); } catch (e) { return null; }
   if (!Array.isArray(ps)) return null;
-  let best = null;
-  ps.forEach(p => { const other = p.a === slug ? p.b : p.b === slug ? p.a : p.other || p.with; const n = p.n || p.count || 1; const o = other && arColor(other); if (o && o.slug !== slug && (!best || n > best.n)) best = { o, n }; });
-  return best;
+  for (const p of ps) {
+    const o = arColor(p.b) || (p.hb ? { slug: routeSlug(p.b || ""), n: p.b, h: p.hb } : null);
+    if (o && o.slug !== self.slug) return { o, n: p.n || 1 };
+  }
+  return null;
 }
 function arYouHTML(self) {
-  const pr = arPairFor(self.slug); if (!pr) return "";
+  const pr = arPairFor(self); if (!pr) return "";
   const diff = typeof lookDiff === "function" ? lookDiff(self, pr.o) : "";
   return `<section class="ar-you" data-ar-you="${esc(pr.o.slug)}"><p class="ar-you-line">You mix this up with ${arLinkHTML(pr.o.slug)}${pr.n > 1 ? `, ${pr.n} times` : ""}.${diff ? ` ${esc(pr.o.n)} is ${esc(diff)} than ${esc(self.n.toLowerCase())}.` : ""}</p>
     <button type="button" class="ar-act" data-ar-act="duel3">Settle it, 3 rounds<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
@@ -283,7 +287,7 @@ function arDuel(host, A, B, rounds) {
       if (locked) return; locked = true;
       const pick = sides[+b.dataset.arD], ok = pick === ask; if (ok) right++;
       host.querySelectorAll("[data-ar-d]").forEach((x, i) => { const own = sides[i] === ask; x.classList.toggle("ok", own); x.classList.toggle("no", !own && x === b); x.disabled = true; x.parentNode.querySelector(".ar-dn").textContent = sides[i].n; });
-      arLog({ k: ok ? "recall_ok" : "recall_miss", c: ask.slug, ...(ok ? {} : { as: (ask === A ? B : A).slug }), ref: A.slug });
+      arLogAnswer(ask, ok, ask === A ? B : A);
       host.querySelector(".ar-df").textContent = (ok ? "Yes. " : "Not that one. ") + diffLine();
       const foot = host.querySelector(".ar-dfoot");
       r++;
@@ -345,7 +349,7 @@ function arWire(root, art, self) {
       cur.textContent = idx >= 0 && started ? secsEl[idx].querySelector("h2").textContent : "";
       pos.textContent = idx >= 0 && started ? `${idx + 1}/${secsEl.length}` : "";
       bar.classList.toggle("on", idx >= 0 && started);
-      if (!readLogged && done > .92) { readLogged = true; arLog({ k: "read", c: self.slug, ref: art.slug }); }
+      if (!readLogged && done > .92) { readLogged = true; arLog({ type: "seen", color: { n: self.n, h: self.h } }); }
     };
     const onScroll = () => { if (!raf) raf = requestAnimationFrame(tick); };
     document.addEventListener("scroll", onScroll, { passive: true, capture: true }); addEventListener("resize", onScroll);   // capture: scroll does not bubble, and the scroller is <body>
@@ -385,8 +389,8 @@ function arAct(root, art, self, btn) {
   }
   if (kind === "mix") return mixLab(self.h, self.n);
   if (kind === "map") {
-    if (typeof csOnMap === "function") return csOnMap(self.h, self.n);
-    return onMap({ id: "color:" + self.slug, kind: "color", title: self.n, colors: [{ slug: self.slug, hex: self.h }] });
+    const kin = [self, ...arList(art.aside.siblings).map(arColor), ...arList(art.aside.children).map(arColor)].filter(Boolean);
+    return csOnMap(colorSet({ kind: "color", id: self.slug, title: self.n, colors: kin.map(c => ({ h: c.h, n: c.n })) }));
   }
 }
 function arAnswer(root, art, self, btn) {
@@ -397,7 +401,7 @@ function arAnswer(root, art, self, btn) {
   qEl.querySelectorAll("[data-ar-ch]").forEach((b, i) => { b.disabled = true; b.classList.toggle("ok", i === ans); b.classList.toggle("no", i === j && j !== ans); });
   const ok = j === ans; qEl.dataset.ok = ok ? "1" : "0";
   qEl.querySelector(".ar-qf").innerHTML = (ok ? "Yes. " : "Not quite. ") + (q.why || q.explain ? arInline(q.why || q.explain, art) : (ans >= 0 ? `It is <b>${esc(typeof q.choices[ans] === "string" ? q.choices[ans] : q.choices[ans].text)}</b>.` : ""));
-  arLog({ k: ok ? "recall_ok" : "recall_miss", c: self.slug, ref: art.slug, q: +qEl.dataset.qi });
+  arLogAnswer(self, ok, null);
   const all = [...root.querySelectorAll("[data-qi]")];
   if (all.every(x => x.dataset.done)) {
     const right = all.filter(x => x.dataset.ok === "1").length;
@@ -410,7 +414,7 @@ function arAnswer(root, art, self, btn) {
 function articleRender(slug, host, ctx) {
   const none = () => { if (host) { host.innerHTML = ""; host.hidden = true; } return false; };
   if (!host || !slug) return Promise.resolve(false);
-  const names = typeof loadCoreNames === "function" ? loadCoreNames() : Promise.resolve();
+  const names = Promise.all([typeof loadCoreNames === "function" ? loadCoreNames() : null, arLoadNames()]);
   return Promise.all([arLoad(slug), names]).then(([art]) => {
     if (!art || (host.isConnected === false)) return none();
     const self = arColor(slug) || (ctx && ctx.h ? { slug, n: ctx.n || art.name, h: ctx.h } : art.hex ? { slug, n: art.name, h: art.hex } : null);
@@ -421,13 +425,15 @@ function articleRender(slug, host, ctx) {
   }).catch(e => { try { console.warn("article render failed:", slug, e); } catch (_) {} return none(); });
 }
 
-// ---------- hubs (#/hub/<id>) and disambiguation (#/which/<name>) ----------
-// data/graph/hubs.json: { hubs: [{ id, title, dek, intro, members: [slug | {slug, note}] }], which: { "<name>": { title, dek, senses: [{ slug, gloss }] } } }
-// (an object keyed by id works too). A "which" page with no entry falls back to that article's aside.disambiguation.
-let AR_HUBS = null;
+// ---------- hubs (#/hub/<id>) and disambiguation (#/which/<id>) ----------
+// data/graph/hubs.json: { hubs: { "<id>": { title, kind, n, blurb, members: [slug] } } } (the real file; an array of
+// { id, title, dek, intro, members: [slug | {slug, note}] } works too). data/graph/disambig.json: { groups: [{ id, base,
+// members: [{ s, n, h, kind, q, tier }] }] }. A "which" page with no group falls back to that article's aside.disambiguation.
+let AR_HUBS = null, AR_WHICH = null;
 function arLoadHubs() {
   if (AR_HUBS) return Promise.resolve(AR_HUBS);
-  return Promise.all([arFetchJSON(arCfg().hubs || "data/graph/hubs.json"), typeof loadCoreNames === "function" ? loadCoreNames() : null]).then(([d]) => (AR_HUBS = d && typeof d === "object" ? d : {}));
+  return Promise.all([arFetchJSON(arCfg().hubs || "data/graph/hubs.json"), arFetchJSON(arCfg().disambig || "data/graph/disambig.json"), arLoadNames(),
+    typeof loadCoreNames === "function" ? loadCoreNames() : null]).then(([h, w]) => { AR_WHICH = w && typeof w === "object" ? w : {}; return (AR_HUBS = h && typeof h === "object" ? h : {}); });
 }
 function arHubEntry(data, id) {
   const h = data.hubs;
@@ -435,11 +441,12 @@ function arHubEntry(data, id) {
   if (h && typeof h === "object") return h[id] ? { id, ...h[id] } : null;
   return Array.isArray(data) ? data.find(x => x && x.id === id) || null : null;
 }
+const AR_KIND_WORD = { primary: "The main name", "family-word": "A related name" };
 function arWhichEntry(data, name) {
-  const w = data.which || data.disambig || data.disambiguation;
-  if (w && !Array.isArray(w) && w[name]) return { name, ...w[name] };
-  if (Array.isArray(w)) { const f = w.find(x => x && (x.id === name || x.name === name || routeSlug(x.name || "") === name)); if (f) return f; }
-  return null;
+  const g = data && Array.isArray(data.groups) ? data.groups.find(x => x && (x.id === name || routeSlug(x.base || "") === name)) : null;
+  if (g) return { name, title: g.base, senses: arList(g.members).map(m => ({ slug: m.s, name: m.n, hex: m.h, gloss: m.q ? arPretty(m.q) + " version" : AR_KIND_WORD[m.kind] || (m.tier ? arPretty(m.tier) : "") })) };
+  const w = data && (data.which || data.disambiguation);   // the fixture shape: { which: { "<name>": { title, dek, senses } } }
+  return w && !Array.isArray(w) && w[name] ? { name, ...w[name] } : null;
 }
 const arBack = () => `<button class="cp-close ar-back" data-back aria-label="Back">${ICON.back}</button>`;
 function arRowsHTML(list) {
@@ -455,15 +462,16 @@ function arShell(html, cls, id) {
 function arMissing(what) {
   arShell(`<div class="ar-hubband ar-flat">${arBack()}</div><h1 class="ar-hubt">Not written yet</h1><p class="ar-hubd">${esc(what)} isn't in the collection yet. Nothing is lost: colors keep their own pages.</p>`, "ar-missing");
 }
+const arSpread = (list, n) => list.length <= n ? list : Array.from({ length: n }, (_, i) => list[Math.floor(i * list.length / n)]);   // an even sample, so a long hub's band shows its range
 function arHubDraw(id, push) {
   const hub = arHubEntry(AR_HUBS || {}, id);
   if (push) XSTACK.push("ar:hub/" + id);
   if (!hub) return arMissing("This collection");
   const members = arList(hub.members).map(arColor).filter(Boolean);
   const title = hub.title || arPretty(id), per = 60, shown = members.slice(0, per);
-  const el = arShell(`<div class="ar-hubband" aria-hidden="true">${arBack()}${members.slice(0, 24).map(c => `<i style="--c:${c.h}"></i>`).join("")}</div>
+  const el = arShell(`<div class="ar-hubband" aria-hidden="true">${arBack()}${arSpread(members, 24).map(c => `<i style="--c:${c.h}"></i>`).join("")}</div>
     <h1 class="ar-hubt">${esc(title)}</h1>
-    ${hub.dek ? `<p class="ar-hubd">${arInline(hub.dek, null)}</p>` : ""}
+    ${hub.dek || hub.blurb ? `<p class="ar-hubd">${arInline(hub.dek || hub.blurb, null)}</p>` : ""}
     <p class="ar-hubn">${members.length} color${members.length === 1 ? "" : "s"}</p>
     ${arList(hub.intro).length ? `<div class="ar-hubi">${arBlocks(hub.intro).map(b => arBlockHTML(b, null)).join("")}</div>` : ""}
     <div data-ar-list>${arRowsHTML(shown)}</div>
@@ -477,7 +485,7 @@ function arHubPage(id, push = true) {
   arLoadHubs().then(() => { if (SHOW_N !== tok) return; ROUTE_REPLACE = true; ROUTE_NEXT = routed(arPretty(id), "hub/" + id); arHubDraw(id, push); });
 }
 function arWhichDraw(name, push, art) {
-  const ent = arWhichEntry(AR_HUBS || {}, name);
+  const ent = arWhichEntry(AR_WHICH || AR_HUBS || {}, name) || arWhichEntry(AR_HUBS || {}, name);
   const senses = ent ? arList(ent.senses) : art ? arList(art.aside.disambiguation).concat([name]) : [];
   const list = senses.map(arColor).filter(Boolean).filter((c, i, a) => a.findIndex(x => x.slug === c.slug) === i);
   if (push) XSTACK.push("ar:which/" + name);
@@ -489,7 +497,7 @@ function arWhichDraw(name, push, art) {
     <div class="ar-plates">${list.map(c => `<button type="button" class="ar-plate" style="--c:${c.h}" data-ink="${ink(c.h)}" data-ar-open="${esc(c.slug)}"><i hidden></i><b>${esc(c.n)}</b>${c.gloss ? `<span>${esc(c.gloss)}</span>` : ""}</button>`).join("")}</div>`, "ar-which");
 }
 function arWhichPage(name, push = true) {
-  if (AR_HUBS && arWhichEntry(AR_HUBS, name)) { arWhichDraw(name, push, null); return; }
+  if (AR_HUBS && (arWhichEntry(AR_WHICH, name) || arWhichEntry(AR_HUBS, name))) { arWhichDraw(name, push, null); return; }
   waitScreen(); const tok = SHOW_N;
   Promise.all([arLoadHubs(), arLoad(name)]).then(([, art]) => { if (SHOW_N !== tok) return; ROUTE_REPLACE = true; ROUTE_NEXT = routed(arPretty(name), "which/" + name); arWhichDraw(name, push, art); });
 }

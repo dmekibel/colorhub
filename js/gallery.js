@@ -536,6 +536,7 @@ function glPage(i, d, fromHex) {
     <p class="fine gl-arrive" data-glarrive hidden></p>
     <div class="palette" data-glswatches></div>
     <div class="pal-names" data-glrows></div>
+    <div data-csacts></div>
     <p class="fine">Computed by ColorHub, not by the museum: colors found in its small photo, each sized by its share of the picture and given the nearest of 1,000 named colors. Screen approximations; old varnish and the photograph shift color.</p>
     <div class="sec-head gl-sim-h"><b>Similar palettes</b><span>by color, not subject</span></div>
     <div class="gl-rail" data-glsim></div>
@@ -562,6 +563,12 @@ function glPage(i, d, fromHex) {
     }
   };
   drawPalette();
+  // the ColorSet verbs (js/colorset.js): this painting's palette, at whatever size the slider shows
+  if (typeof colorSet === "function") {
+    const glSet = () => colorSet({ kind: "painting", id: "g" + i, title: d.t, colors: curPal().map(p => ({ h: p.h, share: p.share })), src: "gallery/" + i });
+    learnerLog({ type: "seen", set: glSet(), src: "painting" });
+    el.querySelector("[data-csacts]").appendChild(csActions(glSet, { back: () => galleryPage(i, false) }));
+  }
   if (pool.length) el.querySelector("[data-glsizes]").onclick = e => {
     const b = e.target.closest("[data-glk]"); if (!b) return;
     curK = +b.dataset.glk;
