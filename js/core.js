@@ -116,6 +116,9 @@ function migrateState(d) {
   s.gym.skills = s.gym.skills || {}; s.gym.workouts = s.gym.workouts || {};
   // a saved palette from before it had a stable id (for its own address and the one-step Back chain): give it one
   if (Array.isArray(s.palettes)) s.palettes.forEach(p => { if (p && !p.id) p.id = "pl" + Date.now().toString(36) + Math.random().toString(36).slice(2, 7); });
+  // L23 favorites: S.favs { "#HEX": {n, at} } and S.pref { v, ctx, cmp } (js/favs.js); repaired here, never wiped
+  if (!s.favs || typeof s.favs !== "object" || Array.isArray(s.favs)) s.favs = {};
+  if (!s.pref || typeof s.pref !== "object" || Array.isArray(s.pref)) s.pref = { v: 1, ctx: {}, cmp: {} };
   if (!(s.v >= 1)) s.v = 1;   // unversioned saves had the v1 shape
   // future steps go here: if (s.v < 2) { …; s.v = 2; }
   return s;

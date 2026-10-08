@@ -450,3 +450,113 @@ scenario("studio", "photo palette: controls work and a chip opens its page", asy
   t.expect(!t.$(".cp-page"), "Back left the color page open");
   t.expect(t.$("#app").innerText.length > 60, "Back from the color page landed on an empty screen");
 });
+
+// ================================================================== YOUR COLORS (L23: favorites, ranking, taste)
+scenario("favs", "Home pick mode: tap and hold-sweep heart colors, Save keeps them", async t => {
+  const cv = await H.homeReady(t);
+  await t.click("#hmFav", { wait: 500 });
+  await t.waitFor(".fv-bar", 4000, "the pick bar");
+  const count = () => +t.text(".fv-count b");
+  t.expect(count() === 0, "pick mode starts with picks already made");
+  const r = cv.getBoundingClientRect(), o = (x, y) => ({ bubbles: true, cancelable: true, clientX: r.left + x, clientY: r.top + y, pointerId: 5, pointerType: "touch", isPrimary: true, view: t.w });
+  await t.tapAt(cv, r.left + r.width / 2, r.top + r.height / 2, { wait: 300 });
+  t.expect(count() === 1, `a tap should heart one bubble (count ${count()})`);
+  // hold still, then drag across a run
+  cv.dispatchEvent(new t.w.PointerEvent("pointerdown", o(r.width * .25, r.height * .72)));
+  await t.sleep(420);
+  for (const x of [.32, .4, .5, .6, .7]) { cv.dispatchEvent(new t.w.PointerEvent("pointermove", o(r.width * x, r.height * .72))); await t.sleep(40); }
+  cv.dispatchEvent(new t.w.PointerEvent("pointerup", o(r.width * .7, r.height * .72)));
+  await t.sleep(300);
+  t.expect(count() >= 4, `hold-then-drag should sweep a run (count ${count()})`);
+  const n = count();
+  await t.click(".fv-save", { wait: 400 });
+  t.expect(t.ev("fvCount()") === n, `Save kept ${t.ev("fvCount()")} colors, expected ${n}`);
+  t.expect(t.$(".fv-bar[data-mode=saved]"), "no saved state after Save");
+  await t.click("[data-shelf]", { wait: 800 });
+  await t.waitFor(".fv-shelf .fv-top5", 6000, "the shelf after Save");
+});
+
+scenario("favs", "shelf: top five, a plate opens its page, Back returns, a row heart removes with Undo", async t => {
+  await t.open("#shot=favs:shelf", { settle: 900 });
+  await t.waitFor(".fv-shelf .fv-top5 .fv-plate", 6000, "the shelf");
+  t.expect(t.$$(".fv-top5 .fv-plate").length === 5, "the shelf should show a top five");
+  t.expect(t.$("#fvHero canvas"), "no honeycomb of your colors");
+  await t.click(".fv-top5 .fv-plate", { wait: 500 });
+  await t.waitFor(".cp-page", 8000, "a color page from the top plate");
+  t.expect(t.$("[data-fv-chip]") && !t.$("[data-fv-chip]").hidden, "the page doesn't show your rank for a favorite");
+  await H.back(t);
+  await t.waitFor(".fv-shelf", 6000, "the shelf after Back");
+  const n = t.ev("fvCount()");
+  await t.click(".fv-un", { wait: 700 });
+  t.expect(t.ev("fvCount()") === n - 1, "the row heart didn't remove the color");
+  const undo = t.$(".fv-toast button"); t.expect(undo, "no Undo after removing");
+  await t.click(undo, { wait: 700 });
+  t.expect(t.ev("fvCount()") === n, "Undo didn't bring the color back");
+  // the share card draws without throwing (the real share sheet is replaced by a canvas run)
+  t.ev("window.__card = false; window.tzShareCanvas = d => { const c = document.createElement('canvas'); c.width = 1080; c.height = 1350; d(c.getContext('2d')); window.__card = true; }");
+  await t.click("[data-v=share]", { wait: 300 });
+  t.expect(t.ev("window.__card"), "the My colors card didn't draw");
+  // the verbs: Learn opens a deck (and Close comes back), Rank opens a ranking screen, Map opens Home in pick mode
+  await t.click("[data-v=learn]", { wait: 600 });
+  await t.waitFor(".screen.deck", 6000, "the Learn my favorites deck");
+  await t.click("[data-close]", { wait: 500 });
+  await t.waitFor(".fv-shelf", 6000, "the shelf after closing the deck");
+  await t.click("[data-v=rank]", { wait: 500 });
+  await t.waitFor(".screen.fv-run", 6000, "a ranking screen");
+  await t.click("[data-close]", { wait: 500 });
+  await t.waitFor(".fv-shelf", 6000, "the shelf after closing the ranking");
+  await t.click("[data-v=map]", { wait: 900 });
+  await t.waitFor(".fv-bar", 15000, "Home in pick mode");
+  t.expect(+t.text(".fv-count b") === n, `the map should show your ${n} hearts as picked (shows ${t.text(".fv-count b")})`);
+});
+
+scenario("favs", "best of three: keep one, drop one, a new set arrives; Undo takes it back", async t => {
+  await t.open("#shot=favs:rank:bws", { settle: 700 });
+  await t.waitFor(".fv-tri .fv-p", 6000, "three plates");
+  const c0 = t.ev("fvChoices('all')"), first = t.$$(".fv-tri .fv-p").map(p => p.dataset.k).join();
+  await t.click(".fv-tri .fv-p:nth-child(1)", { wait: 300 });
+  t.expect(t.$(".fv-tri .fv-p.kept"), "keeping a plate showed no heart");
+  await t.click(".fv-tri .fv-p:nth-child(3)", { wait: 900 });
+  t.expect(t.ev("fvChoices('all')") === c0 + 2, `two taps should add two choices (${c0} to ${t.ev("fvChoices('all')")})`);
+  t.expect(t.$$(".fv-tri .fv-p").length === 3, "no new set of three");
+  await t.click("[data-undo]", { wait: 500 });
+  t.expect(t.ev("fvChoices('all')") === c0, "Undo didn't restore the choice count");
+  t.expect(t.$$(".fv-tri .fv-p").map(p => p.dataset.k).join() === first, "Undo didn't bring the same set back");
+});
+
+scenario("favs", "tier board, swipe stack, ten drops and drag-to-order each take input and end on the summary", async t => {
+  await t.open("#shot=favs:rank:tiers", { settle: 700 });
+  await t.waitFor(".fv-chip", 6000, "the tier chips");
+  const k0 = t.$$(".fv-chip").length;
+  await t.click(".fv-chip", { pointer: true, wait: 200 });
+  await t.click(".fv-tier[data-t='0']", { wait: 500 });
+  t.expect(t.$$(".fv-chip").length === k0 - 1 && t.$$(".fv-tier[data-t='0'] .fv-dot").length === 1, "tap a chip, tap a tier: the color didn't land in Love");
+  await t.click(".fv-tier .fv-dot", { wait: 400 });
+  t.expect(t.$$(".fv-chip").length === k0, "tapping a placed dot didn't take it back");
+  await t.open("#shot=favs:rank:swipe", { settle: 700 });
+  await t.waitFor(".fv-card", 6000, "the swipe card");
+  for (let i = 0; i < 20 && t.$(".fv-card"); i++) { await t.click(i % 2 ? "[data-no]" : "[data-yes]", { force: true, wait: 450 }); }
+  await t.waitFor(".fv-settle", 8000, "the summary after the stack");
+  await t.open("#shot=favs:rank:budget", { settle: 700 });
+  await t.waitFor("[data-add]", 6000, "the budget plates");
+  for (let i = 0; i < 10; i++) await t.click("[data-add]", { force: true, wait: 120 });
+  t.expect(t.text("#frLeft") === "0", "ten drops didn't spend to zero");
+  await t.click("[data-go]", { force: true, wait: 600 });
+  await t.waitFor(".fv-settle", 6000, "the summary after the drops");
+  await t.open("#shot=favs:rank:order", { settle: 700 });
+  await t.waitFor(".fv-or", 6000, "the order rows");
+  await t.click("[data-go]", { force: true, wait: 600 });
+  await t.waitFor(".fv-settle", 6000, "the summary after ordering");
+  await t.click("[data-again]", { force: true, wait: 600 });
+});
+
+scenario("favs", "taste profile: findings, the painter match and a palette from the top five", async t => {
+  await t.open("#shot=favs:taste", { settle: 900 });
+  await t.waitFor(".fp-find", 10000, "the findings");
+  t.expect(t.$$(".fp-find").length >= 3, "fewer than three findings");
+  t.expect(/lean|spans/.test(t.text(".fp-lead")), "no headline sentence");
+  await t.waitFor(".fp-painter", 10000, "the painter match");
+  const n = t.ev("(S.palettes||[]).length");
+  await t.click("[data-pal]", { wait: 800 });
+  t.expect(t.ev("(S.palettes||[]).length") === n + 1, "no palette saved from the top five");
+});
