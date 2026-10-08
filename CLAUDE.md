@@ -26,6 +26,7 @@ Nothing ships that feels basic, thin or unthought. Every game, screen and featur
   - a reason to replay (bests, stars, a daily board);
   - mastery you can see (the eye profile, honest numbers);
   - and a connection to the rest of the app (the Learner Model, color pages, the map).
+- **Every game offers two ways in (David, 2026-10-08):** "For you" (adaptive, the default) and "Choose" (pick any difficulty or jump to any level, with a quick "test out"). In-game text is never smaller than body size.
 - **Details:** real copy (no placeholders, no emoji squares, no shouting mono labels); numbers formatted; spacing and type from DESIGN-SYSTEM; works at 320 px and with very light or very dark colors.
 - **Benchmark:** would this hold up next to Duolingo, I Love Hue, Wordle, Monument Valley and Apple Fitness? If a screen feels like a prototype, it isn't done.
 - **Process:** lanes with UI get a fresh-context craft critique (design/CRAFT-RUBRIC.md) before merge, and they fix what it finds.

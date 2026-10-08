@@ -148,6 +148,11 @@ function loadLongNames() {
   return LONG_LOADING || (LONG_LOADING = fetch("data/library.json").then(r => r.ok ? r.json() : []).catch(() => [])
     .then(list => (LONG_NAMES = list.filter(x => !x.crude && /^#[0-9A-Fa-f]{6}$/.test(x.h)).map(x => ({ ...x, lab: lab(x.h) })))));
 }
+// A library-only entry by slug or exact name (tools/check.js's naming gate keeps LONG_NAMES itself out of
+// every file but this one and js/colorsets.js/js/home.js/js/honey.js — js/names.js's namesShot test hook
+// calls this instead of touching LONG_NAMES directly, for a library name with no #/name/<slug> route of its
+// own, David 2026-10-08).
+const findLongName = slug => (LONG_NAMES || []).find(e => routeSlug(e.n) === slug) || (LONG_NAMES || []).find(e => e.n.toLowerCase() === slug.toLowerCase()) || null;
 function nameColor(hex, n = 5) {
   const L = lab(hex);
   const mine = EVERY().map(x => ({ n: x.n, h: x.h, mine: true, d: de2000(L, x.lab || (x.lab = lab(x.h))) }));
