@@ -241,9 +241,11 @@ const SND_FX = {
   // a set or a lesson done (without a result screen): three notes up and a soft chord
   done: t => { [0, 2, 4].forEach((d, i) => sndInst("marimba", sndDeg(d), t + i * .07, { vel: .1, dur: .45, verb: .15 })); [261.63, 392].forEach(f => sndInst("felt", f, t + .22, { vel: .05, dur: .8, verb: .25 })); },
   color: (t, a) => sndColorAt(a.hex, t, a),
+  // a solved gradient played as a rising scale: its colors' own notes, low to high
+  scale: (t, a) => { const l = [], seen = new Set(); (a.hexes || []).forEach(h => { if (!/^#[0-9a-f]{6}$/i.test(h || "")) return; const tn = colorTone(h); if (!seen.has(tn.semi)) { seen.add(tn.semi); l.push({ h, f: tn.f }); } }); l.sort((x, y) => x.f - y.f); const n = Math.min(l.length, 10), step = n > 1 ? l.length / n : 1; for (let i = 0; i < n; i++) sndColorAt(l[Math.min(l.length - 1, Math.floor(i * step))].h, t + i * .075, { vel: .09, long: i === n - 1, verb: .2 }); },
   chord: (t, a) => sndChordAt(a.hexes, t, a),
 };
-const SND_PRI = { tick: 1, tap: 1, select: 2, color: 2, flip: 3, next: 3, back: 3, open: 3, close: 3, rooms: 3, chord: 4, near: 4, right: 5, wrong: 5, knew: 5, again: 5, combo: 6, done: 7, settle: 8, complete: 8, levelup: 9, best: 9 };
+const SND_PRI = { scale: 7, tick: 1, tap: 1, select: 2, color: 2, flip: 3, next: 3, back: 3, open: 3, close: 3, rooms: 3, chord: 4, near: 4, right: 5, wrong: 5, knew: 5, again: 5, combo: 6, done: 7, settle: 8, complete: 8, levelup: 9, best: 9 };
 function sndColorAt(hex, t, o = {}) {
   const tn = colorTone(hex), P = SND_INST[tn.inst];
   sndFM(tn.f, t, { ...P, index: P.index * (.3 + .9 * tn.bright), lp: P.lp * (.45 + .55 * tn.bright), vel: o.vel != null ? o.vel : .12, pan: tn.pan, verb: o.verb != null ? o.verb : .16, dur: P.dur * (o.long ? 1.6 : 1) });
@@ -310,13 +312,15 @@ function sndBuzz(ms) {
   // the result screen's flourish is already on its way: no tick under it
   if ((name === "tick" || name === "select") && now - SND.flourishT < 400) return;
   // a tick or a select on a color answers with that color's own note
-  if ((name === "tick" || name === "select") && SND.press && now - SND.pressT < 600) { const h = sndHexOf(SND.press); if (h) return sndQ("color", { hex: h, vel: name === "tick" ? .08 : .11 }); }
+  if ((name === "tick" || name === "select") && SND.press && now - SND.pressT < 600 && !(SND.press.closest && SND.press.closest(SND_QUIET))) { const h = sndHexOf(SND.press); if (h) return sndQ("color", { hex: h, vel: name === "tick" ? .08 : .11 }); }
   sndQ(name, name === "levelup" || name === "best" ? sndScreenHexes() : undefined);
 }
 
 // ---------- reading colors off the page ----------
 const SND_HEXRE = /^#?[0-9a-f]{6}$/i;
 const sndNormHex = v => v ? (v[0] === "#" ? v : "#" + v).toUpperCase() : null;
+// tiles whose own note would give the answer away (lightness is pitch): an unsolved Gradients board, Odd one out's tiles
+const SND_QUIET = ".hg-board:not(.solved) .hg-s, .oo-t, [data-nosnd]";
 const SND_CLICKABLE = "button, a[href], [role=button], [data-swatch], [data-to], label, summary, .oo-t, .pchip, .kin";
 function sndHexOf(el) {
   const stop = el && el.closest ? el.closest(SND_CLICKABLE) : null;
@@ -355,7 +359,7 @@ document.addEventListener("click", e => {
   if (t.closest("input, textarea, select, .scrim")) return;
   const hit = t.closest(SND_CLICKABLE) || (getComputedStyle(t).cursor === "pointer" ? t : null);
   if (!hit) return;
-  const h = sndHexOf(t);
+  const h = t.closest(SND_QUIET) ? null : sndHexOf(t);
   if (h) return sndQ("color", { hex: h, vel: .11 });
   sndQ("tap");
 }, { capture: true, passive: true });
