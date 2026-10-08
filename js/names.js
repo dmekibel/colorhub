@@ -58,7 +58,7 @@ function npGalleryHits(hex, R = 6) {
     let w = 0;
     for (let j = 0; j < 6; j++) {
       const k = i * 6 + j, o = k * 3, dL = G.lab[o] - tL;
-      if (dL > 21 || dL < -21) continue;   // ΔE00 is at least |ΔL| / 1.75, so this one can't be within R
+      if (dL > R * 1.75 || dL < -R * 1.75) continue;   // ΔE00 is at least |ΔL| / 1.75, so this one can't be within R
       const d = glDE(tL, ta, tb, G.lab[o], G.lab[o + 1], G.lab[o + 2]);
       if (d < R) { const q = d / R; w += G.sh[k] * (1 - q * q); }
     }

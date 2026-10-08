@@ -175,8 +175,29 @@ function xbQuery(F, f) {
       }
     } catch (e) { cov = null; XB.fine = false; }
   }
-  return xbRun(F, f, cov ? { cov } : {});
+  const res = xbRun(F, f, cov ? { cov } : {});
+  // never empty: with one color and fewer than 12 paintings, rank the whole archive by how much of the color each holds
+  if (cov && XB.fine && res.list.length < 12 && !f.painter && !f.mv && !f.co && f.y0 == null && f.y1 == null && f.mus < 0 && typeof ciClosest === "function") {
+    const key = JSON.stringify([f.hexes[0], f.tol]), hit = XB_CLOSE.get(key);
+    if (hit && hit.rows) {
+      const c2 = { cov: Float32Array.from(cov.cov), near: Float32Array.from(cov.near) };
+      hit.rows.forEach((r, k) => { if (r.i < F.N) { c2.cov[r.i] = Math.max(r.cover / 100, 1e-6) + (1 - k / hit.rows.length) * 1e-7; c2.near[r.i] = r.de; } });
+      const r2 = xbRun(F, f, { cov: c2, loose: true });
+      r2.ranked = true;
+      return r2;
+    }
+    if (!hit) {
+      const want = JSON.stringify([f.hexes, f.tol]);
+      XB_CLOSE.set(key, {});
+      paintingsFor(f.hexes[0], { tol: f.tol, minCover: .05, sort: "cover" }).then(r0 => ciClosest([f.hexes[0]], r0, { max: 60, tol: f.tol })).then(cl => {
+        XB_CLOSE.set(key, cl);
+        if (XBF && JSON.stringify([XB.f.hexes, XB.f.tol]) === want && document.querySelector(".xb-screen")) xbLive(true);
+      }).catch(() => XB_CLOSE.delete(key));
+    }
+  }
+  return res;
 }
+const XB_CLOSE = new Map();
 // ---------- the color row: dial, type, photo, camera, then recent and favorite colors ----------
 const XB_RING = `<span class="xb-ring" aria-hidden="true"></span>`;
 const XB_IC_TYPE = sv('<path d="M4 18l5-12 5 12M5.8 14h6.4M15 9.5h5M17.5 9.5V18"/>', 20, 1.8);
@@ -553,7 +574,7 @@ function xbPoemsRail(host) {
 // nothing matches: say so, and offer the nearest loosenings with their counts
 function xbZero(body, F, f) {
   const tries = xbLoosen(F, f);
-  body.innerHTML = `<div class="xb-empty"><b>No painting matches all of that.</b><p>${tries.length ? "The nearest ways back:" : "Try fewer filters."}</p>
+  body.innerHTML = `<div class="xb-empty"><b>Nothing matches every filter at once.</b><p>${tries.length ? "The nearest ways back:" : "Try fewer filters."}</p>
     ${tries.map(t => `<button class="xb-loosen" data-xbloosen='${esc(JSON.stringify(t.f))}'><span>${esc(t.label)}</span><em class="mono">${xbNum(t.n)}</em></button>`).join("")}</div>`;
 }
 // ---------- River: five centuries of color, scrubbed ----------

@@ -269,7 +269,7 @@ function spPage(hexes, o = {}) {
   // ---- paintings: the pair (or set) together, the rail, who and when ----
   Promise.all([loadGallery().catch(() => null), spQuery(q, "paintings")]).then(async ([, res]) => {
     if (!live()) return;
-    const looseNote = res.loose ? ` At the standard measure (within 4%, covering 1% of the canvas) ${res.strict ? `only ${res.strict} ${res.strict === 1 ? "painting holds" : "paintings hold"}` : "no painting holds"} ${pair ? "both" : "all of them"}, so this is measured loosely.` : "";
+    const looseNote = res.loose ? ` At the standard measure (within 4%, covering 1% of the canvas) ${res.strict ? `only ${res.strict} ${res.strict === 1 ? "painting holds" : "paintings hold"}` : "nothing holds"} ${pair ? "both" : "all of them"}, so this is measured loosely.` : "";
     const st = res.count ? await ciSetStats(res, q) : null;
     if (!live()) return;
     const box = $("[data-ptg]"), n = res.count, N = res.n, lift = res.lift;
@@ -279,7 +279,7 @@ function spPage(hexes, o = {}) {
     $("[data-lead]").textContent = lead + looseNote + qNote;
     let big = n && lift != null && n >= SP_MIN_N && res.expected >= 1
       ? `<div class="sp-big"><b>${spTimes(lift)}</b><span>${lift >= 1.25 ? "more often than chance" : lift <= .8 ? "of what chance predicts: painters keep these apart" : "about as often as chance"}</span><em>${spNum(n)} of ${spNum(N)} paintings hold ${pair ? "both" : "all of them"}, about ${ciFmt(res.expected)} expected</em></div>`
-      : `<p class="sp-say">${n ? `${n === 1 ? "One painting holds" : spNum(n) + " paintings hold"} ${pair ? "both" : "all of them"} out of ${spNum(N)}: too few to say anything about painters' habits.` : `No painting holds ${pair ? "both" : "all of them"}, even measured loosely.`}</p>`;
+      : `<p class="sp-say">${n ? `${n === 1 ? "One painting holds" : spNum(n) + " paintings hold"} ${pair ? "both" : "all of them"} out of ${spNum(N)}: too few to say anything about painters' habits.` : `Not one of ${spNum(N)} paintings holds ${pair ? "both" : "all of them"}, even measured loosely, so there is nothing to say about painters' habits.`}</p>`;
     if (res.loose && n) big += `<p class="sp-sub">Measured loosely: each within ${SP_LOOSE.tol}%, covering at least ${SP_LOOSE.minCover}% of the canvas.</p>`;
     let body = big;
     if (st && n >= 12) {
@@ -292,6 +292,12 @@ function spPage(hexes, o = {}) {
     }
     if (n) body += `<div class="gl-rail sp-rail" data-rail>${res.rows.slice(0, 10).map(r => glPinHTML(r.i, { badge: `${ptPct(r.cover)} of the canvas${pair ? ", the lesser" : ", least of them"}` })).join("")}</div>
       <button class="btn ghost gl-all" data-all>See all ${spNum(n)} ${ICON.arrow}</button>`;
+    if (n < 10) {
+      const cl = await ciClosest(q, res, { max: 10 - n }).catch(() => null);
+      if (!live()) return;
+      if (cl && cl.rows.length) body += `<h4 class="sp-h4">Closest in the archive</h4><p class="sp-sub">${n ? "The nearest others" : "Nothing holds " + (pair ? "both" : "all of them") + " at this measure, so these come nearest"}, best first: how much of the canvas each holds, as photographed.</p>
+      <div class="gl-rail sp-rail" data-rail3>${cl.rows.map(r => glPinHTML(r.i, { badge: ciNearWords(r) })).join("")}</div>${n ? "" : `<button class="btn ghost gl-all" data-all>See the closest ${ICON.arrow}</button>`}`;
+    }
     // a set: the closest paintings as a palette, and the proportions painters used
     if (!pair) {
       const pal = await paintingsWith(q, { ...CI_STD, mode: "palette" }).catch(() => null);
@@ -307,7 +313,7 @@ function spPage(hexes, o = {}) {
       }
     }
     box.innerHTML = `<h3>Together in paintings</h3>${body}`;
-    box.querySelectorAll("[data-rail],[data-rail2]").forEach(glFill);
+    box.querySelectorAll("[data-rail],[data-rail2],[data-rail3]").forEach(glFill);
     box._rows = res.rows; box._res = res;
     // the top painter, for "as they would"
     const P = st && st.painters[0];
