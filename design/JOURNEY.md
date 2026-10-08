@@ -1,3 +1,10 @@
+> **Decisions (David, 2026-10-08: "go with your recs"):**
+> 1. **Revised by David (same day):** the path continues to all ~2,700 distinct colors. 614 real words is one checkpoint ("Fluent"), then the stages continue: 1,000 ("Expert"), ~1,600, ~2,200 and ~2,700 ("Master"). Past 614, chapters are grouped by field (painter's pigments, fashion and textiles, interiors and paint, design and print, nature) and teach finer distinctions between neighbors. Near-duplicates (ΔE < ~2.5) merge into one card with aliases, so you never learn the same color twice. Compounds are still taught as variations of their base word.
+> 2. About 25 words per chapter, roughly 40 chapters.
+> 3. Cabinet pieces unlock when you meet a color, and get marked when it becomes Yours.
+> 4. Interests default to all on except Science.
+> 5. Films in lessons use our text, swatches and real-place photos, never stills.
+
 # The Journey: ColorHub's learning path
 
 Design and content map. Status: **draft for David's review (2026-10-08)**. Nothing here is built. Mockups are in `design/journey-mockups.html` (screenshots in `design/journey-shots/`). Coverage numbers come from `tools/journey_coverage.py`.
