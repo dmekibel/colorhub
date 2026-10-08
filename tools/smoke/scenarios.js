@@ -2195,3 +2195,122 @@ scenario("favs", "a painting's heart keeps it; the shelf sorts favorites into ki
   await t.click(".fva-grid .fva-pin", { wait: 900 });
   await t.waitFor(() => /#\/gallery\/8136/.test(t.w.location.hash), 10000, "a kept painting to open");
 });
+
+// ---------- the bubble <-> page move and the exact return (js/mapxfer.js, honey.js HONEY_RET; David, 2026-10-08) ----------
+const MXT = {
+  // both corners drawn, opaque and the top thing under a finger
+  corners(t, when) {
+    for (const sel of ["[data-rooms-corner]", "#hmDo"]) {
+      const b = t.$(".screen.hm " + sel); t.expect(b, `${when}: no ${sel}`);
+      const cs = t.w.getComputedStyle(b);
+      t.expect(+cs.opacity > .95 && cs.visibility !== "hidden" && cs.pointerEvents !== "none", `${when}: ${sel} is hidden (opacity ${cs.opacity}, ${cs.pointerEvents})`);
+      t.expect(!t.reachable(b), `${when}: ${sel} ${t.reachable(b)}`);
+    }
+    t.expect(!t.$(".chrome-hide"), `${when}: .chrome-hide left on`);
+  },
+  async pan(t, dx, dy) {
+    const cv = t.$(".screen.hm canvas"), r = cv.getBoundingClientRect();
+    const o = (x, y) => ({ bubbles: true, cancelable: true, clientX: r.left + x, clientY: r.top + y, pointerId: 21, pointerType: "touch", isPrimary: true, view: t.w });
+    cv.dispatchEvent(new t.w.PointerEvent("pointerdown", o(190, 480)));
+    for (let i = 1; i <= 12; i++) { cv.dispatchEvent(new t.w.PointerEvent("pointermove", o(190 + dx * i / 12, 480 + dy * i / 12))); await t.sleep(16); }
+    await t.sleep(200);
+    cv.dispatchEvent(new t.w.PointerEvent("pointerup", o(190 + dx, 480 + dy)));
+    await t.sleep(700);
+  },
+  // tap the middle bubble (it opens on one tap), check the page grew from it, go Back, check the view came back exactly
+  async roundTrip(t, when) {
+    // the pan at rest (a pan's release springs onto a bubble for a moment)
+    t.ev("HM_CTRL._settle()");   // the pan at rest (a release springs onto a bubble; headless frames may not run it)
+    let before, cur, at;
+    // a tap may first zoom onto a small bubble (the zoomed-out rule): then the next tap on the same one opens it
+    for (let k = 0; k < 3 && !t.$(".cp-page [data-back]"); k++) {
+      t.ev("HM_CTRL._settle()");
+      before = t.ev("HM_CTRL.panValue()"); cur = t.ev("HM_CTRL.current()"); at = t.ev(`HM_CTRL.locate(${JSON.stringify(cur.h)})`);
+      t.expect(at && at.d > 20, `${when}: no middle bubble to tap`);
+      await t.tapAt(t.$(".screen.hm canvas"), at.x, at.y, { wait: 30 });
+      try { await t.waitFor(".cp-page [data-back]", 1500, "", 600); } catch (e) {}
+    }
+    await t.waitFor(".cp-page [data-back]", 10000, `${when}: the page for ${cur.n}`);
+    await t.waitFor(() => !t.$(".mx") && !t.$(".mx-hold"), 6000, `${when}: the grow to finish`);
+    t.expect(t.$(".cp-hero").style.getPropertyValue("--c").trim().toUpperCase() === String(cur.h).toUpperCase(), `${when}: the page's color is not the tapped bubble's`);
+    await t.click(".cp-page [data-back]", { wait: 60 });
+    await t.waitFor(() => t.$$(".screen.hm canvas").length === 1 && !t.$(".mx") && !t.$(".mx-floor"), 8000, `${when}: back on the map with the shrink done`);
+    await t.sleep(120);
+    const after = t.ev("HM_CTRL.panValue()"), at2 = t.ev(`HM_CTRL.locate(${JSON.stringify(cur.h)})`);
+    t.expect(Math.hypot(after[0] - before[0], after[1] - before[1]) < .01 && Math.abs(after[2] - before[2]) < .01, `${when}: the view moved: ${before.map(v => v.toFixed(3))} -> ${after.map(v => v.toFixed(3))}`);
+    t.expect(at2 && Math.hypot(at2.x - at.x, at2.y - at.y) < 1, `${when}: ${cur.n} came back at ${at2 && [at2.x, at2.y].map(Math.round)}, was ${[at.x, at.y].map(Math.round)}`);
+    MXT.corners(t, when);
+    return cur.n;
+  },
+};
+scenario("map-return", "exact return after pan and zoom", async t => {
+  await H.homeReady(t);
+  await MXT.pan(t, -95, -80);
+  t.ev("HM_CTRL.zoom(0.8, false)");
+  await t.sleep(150);
+  const n1 = await MXT.roundTrip(t, "after a pan and zoom");
+  await MXT.pan(t, 70, 110);   // pan again from the restored view, tap, Back
+  const n2 = await MXT.roundTrip(t, "after a second pan");
+  t.notes.push(`${n1}, ${n2}: same view within .01, same spot within 1px`);
+});
+scenario("map-return", "exact return in a lit set", async t => {
+  await H.homeReady(t);
+  t.ev("csOnMap(colorSet({ kind: 'color', id: 'mx-teal', title: 'Teals', colors: [{ h: '#008080' }, { h: '#367588' }, { h: '#00827F' }, { h: '#4E8975' }] }))");
+  await t.waitFor(() => t.$(".screen.hm canvas") && t.ev("typeof HONEY_HL !== 'undefined' && !!HONEY_HL"), 12000, "the map with the set lit");
+  await t.sleep(900);
+  const n = await MXT.roundTrip(t, "a lit set");
+  t.expect(t.ev("typeof HONEY_HL !== 'undefined' && !!HONEY_HL"), "the lit set went out on the way back");
+  t.notes.push(`${n} in a lit set`);
+});
+scenario("map-return", "exact return in Rings", async t => {
+  await H.homeReady(t);
+  t.ev("S.hm.arr = 'rings'; save(); hmHome()");
+  await t.waitFor(() => t.$(".screen.hm canvas") && t.ev("S.hm.arr === 'rings' && !!HM_CTRL.studyPoints()"), 10000, "the map in Rings");
+  await t.sleep(500);
+  await MXT.pan(t, -40, -60);
+  const n = await MXT.roundTrip(t, "Rings");
+  t.notes.push(`${n} in Rings`);
+});
+scenario("map-return", "set changed: tapped color under the same point", async t => {
+  await H.homeReady(t);
+  await MXT.pan(t, -60, -50);
+  t.ev("HM_CTRL._settle()");
+  const cur = t.ev("HM_CTRL.current()"), at = t.ev(`HM_CTRL.locate(${JSON.stringify(cur.h)})`);
+  await t.tapAt(t.$(".screen.hm canvas"), at.x, at.y, { wait: 30 });
+  await t.waitFor(".cp-page [data-back]", 10000, "the page");
+  t.ev("S.hm.src = S.hm.src === 'stage:400' ? 'stage:800' : 'stage:400'; save()");   // a different set of colors
+  await t.click(".cp-page [data-back]", { wait: 60 });
+  await t.waitFor(() => t.$$(".screen.hm canvas").length === 1 && !t.$(".mx"), 10000, "back on the map");
+  await t.sleep(200);
+  const at2 = t.ev(`HM_CTRL.locate(${JSON.stringify(cur.h)})`);
+  t.expect(at2 && Math.hypot(at2.x - at.x, at2.y - at.y) < 3, `${cur.n} came back at ${at2 && [at2.x, at2.y].map(Math.round)}, was ${[at.x, at.y].map(Math.round)}`);
+  MXT.corners(t, "after the set changed");
+});
+scenario("map-return", "corners back after the Colors sheet", async t => {
+  await H.homeReady(t);
+  await MXT.pan(t, -50, -30);
+  await H.menu(t, "colors");
+  await t.waitFor(".hm-chooser", 6000, "the Colors sheet");
+  const b = t.$('.hm-chooser [data-src^="stage:"]:not(.on)'); t.expect(b, "no other stage to pick");
+  await t.click(b, { wait: 500 });
+  await t.click(".hm-chooser [data-sheet-close]", { wait: 600 });
+  await t.waitFor(() => !t.$(".sheet"), 4000, "the sheet to close");
+  MXT.corners(t, "after the Colors sheet");
+});
+scenario("pages", "double-tap the cover to favorite", async t => {
+  await H.openPage(t, "#/color/teal");
+  const hero = t.$(".cp-hero"), r = hero.getBoundingClientRect(), h = t.$(".cp-hex").dataset.copy;
+  const tap = () => { const o = { bubbles: true, cancelable: true, clientX: r.left + r.width / 2, clientY: r.top + 160, pointerId: 31, pointerType: "touch", isPrimary: true, view: t.w }; hero.dispatchEvent(new t.w.PointerEvent("pointerdown", o)); hero.dispatchEvent(new t.w.PointerEvent("pointerup", o)); };
+  const has = () => t.ev(`fvHas(${JSON.stringify(h)})`), was = has();
+  tap(); await t.sleep(60);
+  t.expect(has() === was && !t.$(".rp-like"), "a single tap changed the favorite");
+  tap(); await t.sleep(80);
+  t.expect(has() === !was, "a double tap did not toggle the favorite");
+  t.expect(t.$(".cp-hero .rp-like"), "no heart bloomed where you tapped");
+  await t.sleep(400);
+  tap(); await t.sleep(60); tap(); await t.sleep(80);
+  t.expect(has() === was, "a second double tap did not undo it");
+  const hx = t.$(".cp-hex"), up = () => hx.dispatchEvent(new t.w.PointerEvent("pointerup", { bubbles: true, clientX: 10, clientY: 10, isPrimary: true, view: t.w }));
+  up(); up();
+  t.expect(has() === was, "a double tap on the hex button toggled the favorite");
+});

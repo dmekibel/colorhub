@@ -357,3 +357,7 @@
 /* ---------- the Walk: nothing under 13px in a hex (#2) ---------- */
 .rp-hex small{font-size:13px}.rp-hex em{font-size:13px}
 .rp-split .cp-hero-foot{position:relative;z-index:1}
+/* double-tap the cover to keep the color (js/richpage.js rpCoverLike): the heart blooms where you tapped */
+.cp-hero{touch-action:manipulation}
+.cp-hero .rp-like{z-index:2;filter:drop-shadow(0 6px 18px rgba(0,0,0,.3))}
+.cp-hero .rp-like.off{animation-duration:.6s;opacity:.8}

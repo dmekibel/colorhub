@@ -515,7 +515,14 @@ function roomsNote(id) {
 let STEM_KEY = null;
 // The one source of truth for the corners coming back: a pan fade (.chrome-hide on Home) never outlives a closed
 // sheet or menu. Called by closeStem and every sheet() close (David: "the bottom corner buttons disappear").
-function cornersBack() { document.querySelectorAll(".chrome-hide").forEach(n => n.classList.remove("chrome-hide")); }
+// It is the single state function for the corners: called on every way into Home (hmHome), at the end of a bubble <->
+// page transition both ways (js/mapxfer.js mxKill), on a sheet or stem close, and when a pan lifts.
+function cornersBack() {
+  document.querySelectorAll(".chrome-hide").forEach(n => n.classList.remove("chrome-hide"));
+  if (!STEM_OPEN) document.body.classList.remove("stem-open");
+  // nothing may leave a corner drawn but faded or untappable (a transition's inline style)
+  document.querySelectorAll("[data-rooms-corner],[data-do-corner]").forEach(b => ["opacity", "visibility", "pointerEvents"].forEach(k => { b.style[k] = ""; }));
+}
 function closeStem(instant) {
   const s = document.querySelector(".rooms-stem"), sc = document.querySelector(".rm-scrim");
   STEM_OPEN = false; cornersBack();

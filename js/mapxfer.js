@@ -82,6 +82,7 @@ function mxKill() {
   [m.ov, m.floor, m.pageGhost].forEach(n => n && n.remove());
   if (m.page) m.page.classList.remove("mx-hold");
   if (m.mapEl) m.mapEl.style.transformOrigin = "";
+  if (typeof cornersBack === "function") cornersBack();   // the corners are back, whichever way it ended
 }
 const mxAnim = (m, el, frames, o) => { const a = el.animate(frames, { fill: "forwards", ...o }); m.anims.push(a); return a; };
 
@@ -91,6 +92,7 @@ function mxGrow(geo, open) {
   mxKill();
   MX_LAST = { h: geo.h, x: geo.x, y: geo.y };
   const ov = mxOverlay(), mapEl = app.querySelector(".screen.hm");
+  ov.classList.add("mx-block");   // the map under the growing color takes no more taps
   const m = MX = { dir: "in", ov, geo, mapEl, page: null, floor: null, pageGhost: null, landed: false, flying: 0, timers: [], anims: [], t0: performance.now() };
   const S = mxShape(ov, geo, geo.h);
   m.lbl = mxLabel(ov, geo);

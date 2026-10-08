@@ -947,7 +947,8 @@ function honeycomb(host, opts = {}) {
   const vig = host.querySelector(".hc-vig"), cv = host.querySelector("canvas"), ctx = cv.getContext("2d"), cap = host.querySelector(".hc-cap");
   const RM = reduceMotion, SHOOT = typeof SHOT !== "undefined" && !!SHOT, ZMAX = 2.5, ABS_ZMIN = .04, M = 2.2;
   const isHome = !!(host.closest && host.closest(".hm"));   // the Home map: the one whose view a page returns to
-  let frozen = false;   // a bubble just opened a page: the view saved at that moment must not be overwritten on the way out
+  let springTo = null, zTo = null;   // the glide (and zoom) a touch interrupted, while that touch is still a tap
+  let frozen = 0;   // when a bubble opened a page (0: none): the view saved at that moment must not be overwritten on the way out
   let vigK = -1, vigOpSet = -1;
   let styleId = typeof opts.style === "string" ? opts.style : "current", liveTweak = opts.tweak ? { ...opts.tweak } : null;
   // back-compat: callers that still pass layout/lens/lensMode directly (colorsets.js, and any legacy caller).
@@ -1539,11 +1540,13 @@ function honeycomb(host, opts = {}) {
   const GLOBE_ROT_K = 150;
   cv.addEventListener("pointerdown", e => {
     if (!lay) return;
-    frozen = false;   // still here (an open that never left): the view is yours to move again
+    if (frozen && performance.now() - frozen > 1500) frozen = 0;   // still here long after an open that never left: the view is yours again
     lastInput = performance.now();
     const [x, y] = local(e); ptrs.set(e.pointerId, [x, y]); touchXY = [x, y];
     try { cv.setPointerCapture(e.pointerId); } catch (er) {}
     if (phase === "spring" || zAnim) loop(performance.now());
+    // a tap that catches a glide opens where the glide was going (open() saves that view, not the half-way one)
+    springTo = phase === "spring" && spring ? spring.X.slice() : null; zTo = zAnim ? zAnim.to : null;
     phase = "drag"; spring = null; zAnim = null; fly = null; touched = true;
     if (ptrs.size === 2) {
       const [a, b] = [...ptrs.values()], mid = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2], o = lay.globe ? [0, 0] : offAt(mid[0], mid[1], lens(0));
@@ -1579,7 +1582,7 @@ function honeycomb(host, opts = {}) {
     if (!down) return;
     if (paint) { const pb = hit(x, y); if (pb) selSet(pb.it, paint.on); return; }
     const dx = x - down.x, dy = y - down.y;
-    if (!down.moved && Math.hypot(dx, dy) > 10) { down.moved = true; pressed = null; glided = null; clearTimeout(holdT); kick(); }
+    if (!down.moved && Math.hypot(dx, dy) > 10) { down.moved = true; springTo = zTo = null; pressed = null; glided = null; clearTimeout(holdT); kick(); }
     if (!down.moved) return;
     const now = performance.now();
     if (lay.globe) { P = [down.P0[0] + dx / GLOBE_ROT_K, clamp(down.P0[1] - dy / GLOBE_ROT_K, -1.5, 1.5)]; }
@@ -1683,13 +1686,15 @@ function honeycomb(host, opts = {}) {
     return { x: r.left + b.x, y: r.top + b.y, d: b.d, rays, label, h: it.h, n: it.n };
   }
   function open(it, b) {
+    if (frozen && isHome) return;   // one tap, one page: a second tap while the first page is on its way does nothing
     // the exact view at this moment (a glide in flight counts as where it was going), kept as is until the map is
     // built again: nothing on the way out (a settling spring, destroy) may overwrite it
-    const gliding = phase === "spring" && spring, at = gliding ? spring.X.slice() : P.slice(), z = zAnim ? zAnim.to : Z;
+    const gliding = !!(phase === "spring" && spring) || !!springTo, at = phase === "spring" && spring ? spring.X.slice() : springTo ? springTo.slice() : P.slice(), z = zAnim ? zAnim.to : zTo != null ? zTo : Z;
+    springTo = zTo = null;
     if (lay && isHome) {
       HONEY_PAN = { key: lay.key, x: at[0], y: at[1], z, name: it.n };
       HONEY_RET = { key: lay.key, x: at[0], y: at[1], z, n: it.n, h: it.h, sx: b && !gliding ? b.x : null, sy: b && !gliding ? b.y : null };
-      frozen = true;
+      frozen = performance.now();
     } else remember();
     // a small positioned element standing in for the tapped bubble — the honeycomb itself is a canvas, so
     // there's no real DOM element at the bubble's spot for growFrom()/morphFrom() to read a rect from.
@@ -1913,6 +1918,8 @@ function honeycomb(host, opts = {}) {
     },
     zoomValue: () => Z,
     panValue: () => [P[0], P[1], Z],   // QA: the pan a return to Home must keep
+    // QA (tools/smoke map-return): finish a spring or zoom in flight at once (headless frames don't always run)
+    _settle() { if (phase === "spring" && spring) { P = spring.X.slice(); spring = null; phase = "idle"; } if (zAnim) { Z = zAnim.to; zAnim = null; } Plag = P.slice(); draw(); return [P[0], P[1], Z]; },
     _morphCheck: items => l18MorphCheck(items),
     // QA (tools/smoke map group): the median seam between each readable bubble and its nearest neighbor, in px
     _gapStat() {

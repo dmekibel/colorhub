@@ -169,3 +169,4 @@
 .mx-title{position:absolute;margin:0;text-wrap:balance;will-change:transform,opacity}
 .mx-floor{position:fixed;left:0;right:0;z-index:0;pointer-events:none}
 .screen.mx-hold{visibility:hidden}
+.mx.mx-block{pointer-events:auto}

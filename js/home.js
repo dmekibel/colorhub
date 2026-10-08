@@ -386,6 +386,7 @@ function hmHome() {
   // full screen"; 2026-10-08: "it should fully expand until it transitions into the color page"): mxGrow
   // (js/mapxfer.js) grows the bubble's exact outline into the page's cover. Back shrinks it home (hmHome below).
   const pick = (o, fx) => {
+    if (typeof MX !== "undefined" && MX && MX.dir === "in") return;   // a bubble is already becoming its page: one tap, one page
     if (typeof hmDismissHint === "function") hmDismissHint();
     const open = () => (o.c ? hmOpenColor(o.c) : hmOpenName(o));
     // the bubble becomes its page (js/mapxfer.js): it grows from its exact shape into the cover, sync or async page alike
@@ -716,7 +717,7 @@ function hmHome() {
     let p0 = null;
     cv.addEventListener("pointerdown", e => { p0 = [e.clientX, e.clientY]; clearTimeout(chromeT); });
     cv.addEventListener("pointermove", e => { if (p0 && Math.hypot(e.clientX - p0[0], e.clientY - p0[1]) > 10) { el.classList.add("chrome-hide"); clearTimeout(chromeT); } });
-    const lift = () => { p0 = null; clearTimeout(chromeT); chromeT = setTimeout(() => el.classList.remove("chrome-hide"), 220); };
+    const lift = () => { p0 = null; clearTimeout(chromeT); chromeT = setTimeout(() => { el.classList.remove("chrome-hide"); if (!document.querySelector(".sheet") && !STEM_OPEN) cornersBack(); }, 220); };
     cv.addEventListener("pointerup", () => { lift(); if (typeof hmDismissHint === "function") hmDismissHint(); });
     cv.addEventListener("pointercancel", lift);
     // David: "sometimes the bottom corner buttons disappear". A pan whose finger lifts off the canvas (over a corner, a
@@ -728,7 +729,7 @@ function hmHome() {
     document.addEventListener("visibilitychange", winLift);
     cleanup.push(() => { ["pointerup", "pointercancel", "blur"].forEach(k => removeEventListener(k, winLift, true)); document.removeEventListener("visibilitychange", winLift); });
   }
-  hmShowChrome();
+  hmShowChrome(); cornersBack();   // every way into Home starts with both corners drawn and tappable
   // ---------- the right corner: ONE button (PLAN.md decision #2; David: "Study the map is a mini game that belongs with
   // learning, inside a menu, not its own button"). It shows how many names are due, and opens a labeled arc of verbs,
   // the rooms stem's mirror: Recall · Learn these · Study the map · Favorites · Search · Colors · Arrange. The arc is
