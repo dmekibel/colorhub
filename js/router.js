@@ -217,7 +217,7 @@ function openRoute(hash, initial = false) {
     fashion: () => typeof fashionPage === "function" && fashionPage(id),
     mapstudy: () => typeof msOpen === "function" ? msOpen() : go(S.tab || "learn"),   // js/mapstudy.js
     // the honeycomb home's instant mini-lesson (js/learnit.js): #/learnit/<color>
-    learnit: () => { const c = id && routeColor(id); if (c && typeof hmLearnIt === "function") hmLearnIt(c); else go(S.tab || "learn"); },
+    learnit: () => { const c = id && routeColor(id); if (c && typeof hmLearnIt === "function") hmLearnIt(c); else if (id && typeof lxRouteLearnIt === "function") lxRouteLearnIt(id); else go(S.tab || "learn"); },
     practice: () => typeof prOpenRoute === "function" ? prOpenRoute(id) : go(S.tab || "learn") };   // js/practice.js: #/practice, #/practice/<method>
   if (simple[kind]) { base(); simple[kind](); return true; }
   return false;
