@@ -1,3 +1,10 @@
+> **Decisions (David, 2026-10-08: "go with your recs"):**
+> 1. Stages count the ~614 real words. Compounds (Light X, Dark X, repeats) are taught as quick variations of their base word.
+> 2. About 25 words per chapter, roughly 40 chapters.
+> 3. Cabinet pieces unlock when you meet a color, and get marked when it becomes Yours.
+> 4. Interests default to all on except Science.
+> 5. Films in lessons use our text, swatches and real-place photos, never stills.
+
 # The Journey: ColorHub's learning path
 
 Design and content map. Status: **draft for David's review (2026-10-08)**. Nothing here is built. Mockups are in `design/journey-mockups.html` (screenshots in `design/journey-shots/`). Coverage numbers come from `tools/journey_coverage.py`.
