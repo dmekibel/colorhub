@@ -139,7 +139,7 @@ scenario("home", "Arrange sheet: Looks and the feel sliders", async t => {
   await H.sheet(t, "arrange");
   t.expect(!t.$(".hm-tabs, [data-tab]"), "the Arrange sheet still has tabs");
   const styles = t.$$(".hm-look-chip");
-  t.expect(styles.length >= 3, `only ${styles.length} style chips`);
+  t.expect(styles.length === 2, `${styles.length} Look chips (Bubbles and Honeycomb; magnification is the Magnify slider)`);
   const n0 = H.num(t.text("[data-count]"));
   for (const s of styles.filter(s => !s.classList.contains("on")).slice(0, 3)) {
     await t.click(s, { wait: 300 });
@@ -165,7 +165,7 @@ scenario("home", "Arrange sheet: the strip morphs the map and keeps every color"
   await H.homeReady(t);
   await H.sheet(t, "arrange");
   const arrs = t.$$(".hm-chooser [data-arr]");
-  t.expect(arrs.length >= 8, `only ${arrs.length} arrangements`);
+  t.expect(arrs.length >= 5, `only ${arrs.length} shapes`);
   await t.waitFor(() => arrs.every(b => { const c = b.querySelector("canvas"), d = c.getContext("2d").getImageData(0, 0, c.width, c.height).data; for (let i = 3; i < d.length; i += 16) if (d[i]) return true; return false; }), 6000, "every arrangement picture to draw");
   const n0 = H.num(t.text("[data-count]"));
   for (const b of arrs.filter(b => !b.classList.contains("on"))) {
@@ -175,9 +175,9 @@ scenario("home", "Arrange sheet: the strip morphs the map and keeps every color"
     t.expect(H.num(t.text("[data-count]")) === n0, `arrangement "${b.dataset.arr}" changed the count`);
     t.expect(/\S/.test(t.text("[data-arr-sub]")), "no line says what the arrangement means");
   }
-  // every color exactly once in each arrangement
-  const dupes = t.ev("HONEY_ARR_IDS.filter(id => { const its = hmStageItems(250); const l = honeyLayout(its, hmLayoutKey(id, 'original')); return new Set(l.pts.map(p => p.it.n)).size !== its.length || l.pts.length !== its.length; })");
-  t.expect(!dupes.length, `arrangements that drop or repeat colors: ${dupes.join(", ")}`);
+  // every color exactly once in each shape, in every order
+  const dupes = t.ev("HONEY_ARR_IDS.flatMap(id => (honeyOrdersOf(id).length ? honeyOrdersOf(id) : ['']).map(o => [id, o])).filter(([id, o]) => { const its = hmStageItems(250); const l = honeyLayout(its, hmLayoutKey(id, 'original', o)); return new Set(l.pts.map(p => p.it.n)).size !== its.length || l.pts.length !== its.length; }).map(x => x.join(':'))");
+  t.expect(!dupes.length, `shape and order pairs that drop or repeat colors: ${dupes.join(", ")}`);
   // leaving: the clear ✕, and a tap on the map above the sheet
   await t.click("[data-sheet-close]", { wait: 450 });
   t.expect(!t.$(".hm-chooser"), "✕ did not close the Arrange sheet");
@@ -187,6 +187,40 @@ scenario("home", "Arrange sheet: the strip morphs the map and keeps every color"
   scrim.dispatchEvent(new t.w.PointerEvent("pointerdown", { bubbles: true, cancelable: true }));
   await t.sleep(450);
   t.expect(!t.$(".hm-chooser"), "a tap on the map did not close the View sheet");
+});
+
+scenario("home", "Arrange sheet: Center on and Sort by change the order inside a shape, and are kept", async t => {
+  await H.homeReady(t);
+  await H.sheet(t, "arrange");
+  const n0 = H.num(t.text("[data-count]"));
+  await t.click('.hm-chooser [data-arr="rings"]', { wait: 150 });
+  t.expect(/Center on/.test(t.text("[data-ord-row]")), "Rings has no Center on row");
+  for (const id of ["vivid", "muted", "dark", "known", "near", "today"]) {
+    await t.click(`[data-ord="${id}"]`, { wait: 120 });
+    t.expect(t.ev("hmOrd('rings')") === id && t.$(`[data-ord="${id}"]`).classList.contains("on"), `Center on ${id} did not turn on`);
+    t.expect(t.ev("HM_CTRL.getCfg().resolved.layout").startsWith("rings~" + id), `the map did not take Center on ${id}`);
+    t.expect(/Middle: .+ Edge: /.test(t.text("[data-arr-sub]")), `no line says what the middle and edge mean (${id})`);
+    t.expect(H.num(t.text("[data-count]")) === n0, `Center on ${id} changed the count`);
+  }
+  await t.click('[data-ord="vivid"]', { wait: 120 });
+  // the most vivid sits in the middle: the middle bubble is stronger than the average
+  const midC = t.ev("(() => { const l = honeyLayout(hmStageItems(100), 'rings~vivid'); const s = l.pts.slice().sort((a, b) => Math.hypot(a.x, a.y) - Math.hypot(b.x, b.y)); return [s[0].it.C, s.reduce((t, p) => t + p.it.C, 0) / s.length]; })()");
+  t.expect(midC[0] > midC[1] * 1.5, `Center on Vivid put a weak color in the middle (${midC.map(x => x.toFixed(0)).join(" vs ")})`);
+  await t.click('.hm-chooser [data-arr="map"]', { wait: 150 });
+  t.expect(/Sort by/.test(t.text("[data-ord-row]")), "the Map has no Sort by row");
+  await t.click('[data-ord="light"]', { wait: 150 });
+  t.expect(t.ev("HM_CTRL.getCfg().resolved.layout") === "map~light", "the Map did not take Sort by lightness");
+  t.expect(t.$$(".hm-ax-l, .hm-ax-r").length === 2, "no edge captions for a sorted Map");
+  await t.click('[data-ord="painted"]', { wait: 400 });
+  await t.waitFor(() => t.ev("!!HONEY_PAINTED") && t.ev("HM_CTRL.getCfg().resolved.layout") === "map~painted", 6000, "the painting counts to load");
+  await t.click('[data-ord="hue"]', { wait: 150 });
+  t.expect(t.ev("S.hm.ord.rings") === "vivid" && t.ev("S.hm.ord.map") === "hue", "the orders were not kept per shape");
+  await t.click('.hm-chooser [data-arr="temp"]', { wait: 150 });
+  t.expect(t.$("[data-ord-row]").hidden, "Warm and cool shows an order row (its plane has no order)");
+  // an old save upgrades: Color wheel = Rings centered on greys; the Magnifier = Bubbles with a strong Magnify
+  t.ev("S.hm.arr = 'wheel'; S.hm.style = 'magnifier'; S.hm.feel.mag = .5; hmView()");
+  t.expect(t.ev("S.hm.arr") === "rings" && t.ev("S.hm.ord.rings") === "muted" && t.ev("S.hm.style") === "original" && t.ev("S.hm.feel.mag") >= .9, "an old save did not upgrade");
+  t.ev("S.hm.arr = 'map'; S.hm.ord = {}; S.hm.feel.mag = HM_FEEL0.mag");
 });
 
 scenario("home", "View sheet: families tell the truth and combine with tone and your words", async t => {
@@ -1078,6 +1112,14 @@ scenario("map", "On the map: a painting page lights its colors on Home; #/map/ga
   t.notes.push(t.text(".cs-hl-pill"));
   await H.homeReady(t); t.ev("openRoute('#/map/gallery/3')");
   await t.waitFor(() => /named colou?rs? · as photographed/.test(t.text(".cs-hl-pill")), 20000, "a museum painting's constellation from its address");
+  // How many: the measured pool, not a fixed six; the lit set and the named chips follow the slider
+  const nIn = t.$$(".cs-hl-n input").pop();
+  t.expect(nIn && +nIn.max > 6, "a museum painting on the map has no How many slider over its pool");
+  nIn.value = 12; nIn.dispatchEvent(new t.w.Event("input", { bubbles: true })); nIn.dispatchEvent(new t.w.Event("change", { bubbles: true }));
+  await t.sleep(200);
+  const bars = t.$$(".cs-hl-bar"), bar = bars[bars.length - 1], lit = t.ev("HONEY_HL.hexes.length"), chips = bar.querySelectorAll(".cs-hl-c").length;
+  t.expect(lit > 6 && lit <= 12 && chips === lit, `How many 12 lit ${lit} colors and named ${chips}`);
+  t.expect(/%/.test(bar.querySelector(".cs-hl-c").textContent), "the named chips don't say their share of the canvas");
 });
 scenario("map", "panning keeps the resting seams, and fast pans and pinches at every size never blank the canvas", async t => {
   const cv = await H.homeReady(t), r = cv.getBoundingClientRect();

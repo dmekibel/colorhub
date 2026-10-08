@@ -673,7 +673,8 @@ function glPage(i, d, fromHex, tol) {
   if (typeof awPaintingHook === "function") awPaintingHook(el, i, d, { pool, curPal });
   // the ColorSet verbs (js/colorset.js): this painting's palette, at whatever size the slider shows
   if (typeof colorSet === "function") {
-    const glSet = () => colorSet({ kind: "painting", id: "g" + i, title: d.t, colors: curPal().map(p => ({ h: p.h, share: p.share })), src: "gallery/" + i });
+    const glSet = () => colorSet({ kind: "painting", id: "g" + i, title: d.t, colors: curPal().map(p => ({ h: p.h, share: p.share })), src: "gallery/" + i,
+      ...(pool.length > 3 && typeof csPoolPick === "function" ? { pick: csPoolPick(pool), max: pool.length } : {}) });
     learnerLog({ type: "seen", set: glSet(), src: "painting" });
     el.querySelector("[data-csacts]").appendChild(csActions(glSet, { back: () => galleryPage(i, false) }));
   }

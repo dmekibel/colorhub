@@ -130,3 +130,75 @@ After each arrangement places its colors, a local swap pass (neighbors and neigh
 
 Worst remaining outliers are the extreme near-blacks and near-whites (Rich Black FOGRA29/39, Almost Black, Ghost White) in the ring and spiral arrangements, where few neighbors are like them. Niagara Green now sits between Dark Bluish Glaucous (2.9), Ash (5.1), Celandine Green (5.7) and Hathi Grey (8.1); two vivid greens still touch it at the grey block's edge.
 
+
+## 8. Shape × order (2026-10-08, second pass)
+
+David: "A single view style and shape could still have many ways to arrange the colors. In one arrangement all the greys are in the middle and it doesn't make sense why. In the flower, something is in the middle and something on the outskirts and it's not clear why."
+
+The nine arrangements were really a few **shapes** each locked to one **order**. They are split now (`HONEY_ARR` = shape, `HONEY_CENTER` / `HONEY_SORT` = order, in js/honey.js; a layout key is `shape~order`):
+
+| Shape | Order control | Choices |
+|---|---|---|
+| Map (grid) | **Sort by** (what runs left to right; each column light to dark, or by hue when Lightness leads) | Hue · Lightness · Vividness · Warmth · Painted · First met |
+| Rings (hex rings) | **Center on** (what sits in the middle; the rest ring outward in that order, hue going round each ring) | Vivid · Greys · Light · Dark · Your words · Everyday · Painted · Today's color · Around this color |
+| Sunflower (golden spiral) | **Center on**, same choices; the disc is cut into one-unit bands filled in that order, hue round each band | as Rings |
+| Families (a region per family) | **Sort by**, inside each family | as Map |
+| Warm and cool | none: both axes are the color itself | |
+
+The old arrangements are all still here: Color wheel = Rings · Greys, Light to dark = Rings · Light, Path rings = Rings · Everyday (stage seams still drawn), Your words = Rings · Your words (tier seams), Hue pages = Families · Vividness. Old saves upgrade (`HONEY_ARR_OLD`), and each shape keeps its own order (`S.hm.ord`).
+
+- **Painted** = how many of the 23,781 paintings hold the color (within 4% different over at least 1% of the picture), from `data/colorindex/painted.json` (984 names, built by `tools/painted_counts.js` from the affinity table). Other names borrow the count of their nearest counted name. Loaded only when chosen.
+- **First met** = the date on your card; colors you haven't met follow, by hue, kept apart from the met ones.
+- **Around this color** centers on whatever is in the middle of the map when you tap it ("Around Ivory"), and everything rings out by OKLab distance. **Today's color** does the same around today's color.
+
+**Defaults, and why**
+- Map → **Hue**: the approved map, unchanged (same layout key, same endless option). Hue is the first thing people group color names by.
+- Rings → **Light** (white middle, black rim): lightness is the axis everyone reads without being told, and it gives Rings its calmest neighbors (5.7 against 9.6 for greys in the middle, the order David found arbitrary).
+- Sunflower → **Vivid** (the brightest colors at the heart, fading to greys at the petals): a bloom, so the flower means something different from the rings, and the lens magnifies the most colorful part.
+- Families → **Hue** inside each family (as before).
+
+**Legible meaning.** The sheet says it in one line under the chips ("Rings · Middle: the most vivid. Edge: greys."; "Map · Warm to cool across, light to dark down."). On the map, a radial shape shows the same line at the top for 4.5 s after Home opens or the order changes, then it fades; a sorted grid gets quiet edge captions (Lighter / Darker, Muted / Vivid, Warmer / Cooler, Most painted / Rarely painted, Met first / Not met yet). A new order glides (the arrangement morph) and travels to the middle.
+
+**Mean neighbor ΔE (OKLab ×100), every name (2,020), before → after the swap pass, and layout time (desktop Chrome)**
+
+| Layout | before | after | ms |
+|---|---|---|---|
+| Map · Hue | 8.0 | 5.4 | 36 |
+| Map · Lightness | 7.4 | 5.0 | 36 |
+| Map · Vividness | 10.9 | 6.3 | 26 |
+| Map · Warmth | 10.5 | 6.4 | 29 |
+| Map · Painted | 12.4 | 8.1 | 38 |
+| Map · First met | 8.0 | 5.8 | 45 |
+| Rings · Vivid | 19.0 | 10.0 | 27 |
+| Rings · Greys | 18.1 | 9.6 | 26 |
+| Rings · Light | 7.6 | 5.7 | 25 |
+| Rings · Dark | 7.4 | 5.4 | 30 |
+| Rings · Your words | 20.8 | 11.7 | 51 |
+| Rings · Everyday | 20.8 | 12.9 | 23 |
+| Rings · Painted | 18.2 | 10.5 | 25 |
+| Rings · Around a color | 13.9 | 8.2 | 31 |
+| Sunflower · Vivid | 18.4 | 9.9 | 33 |
+| Sunflower · Greys | 18.3 | 9.8 | 27 |
+| Sunflower · Light | 7.5 | 5.5 | 20 |
+| Sunflower · Dark | 7.5 | 5.4 | 20 |
+| Sunflower · Your words | 20.4 | 11.6 | 44 |
+| Sunflower · Everyday | 20.4 | 12.5 | 20 |
+| Sunflower · Painted | 18.5 | 10.5 | 25 |
+| Sunflower · Around a color | 13.7 | 8.4 | 24 |
+| Families · Hue | 8.3 | 5.8 | 28 |
+| Families · Lightness | 7.7 | 6.0 | 21 |
+| Families · Vividness | 6.8 | 4.8 | 19 |
+| Families · Warmth | 8.0 | 5.5 | 20 |
+| Families · Painted | 8.6 | 5.8 | 21 |
+| Families · First met | 8.3 | 5.8 | 34 |
+| Warm and cool | 17.9 | 9.0 | 30 |
+
+Layout runs once per change and is cached; drawing is unchanged (a pan frame stays ~1–2 ms on desktop). Orders by chroma, rank or progress are noisier by nature (a vivid ring holds every hue at the same strength); lightness orders are the calmest.
+
+## 9. Look and Magnify (2026-10-08)
+
+David: magnification should apply to either tile style. The Look is now **Bubbles | Honeycomb**; **Magnify** (Flat → Fisheye) is the one lens control for both. Above .75 it climbs on to the old Magnifier's strength (about 9× middle to edge, with its tighter falloff) at 1. An old "Magnifier" save becomes Bubbles with Magnify .92.
+
+## 10. A lit set: How many (2026-10-08)
+
+David: a painting on the map showed 6 colors, "an arbitrary number". A set drawn from a bigger pool (a museum painting's ~24 measured colors, a painter's palettes) carries `pick(k)` (js/colorset.js `csPoolPick`: biggest share first, merged by nearest name). The lit-set bar gets **How many** (3 → the pool, up to 30): the lit bubbles follow live, release reframes them, and a row of chips names each one with its share of the canvas ("Near black 19%"); one tap opens its page. The subline keeps "as photographed". The Arrange sheet works while a set is lit (any shape, order or Look), and the set stays framed after each change.
