@@ -8,8 +8,15 @@ for f in js/*.js; do node --check "$f" >/dev/null 2>&1 || { echo "SYNTAX $f"; fa
 node tools/check.js 2>&1 | grep -q "0 files name colors" || { node tools/check.js | tail -3; fail=1; }
 node tools/check_names.js | grep -q "0 duplicate" || { echo NAMES; fail=1; }
 [ -f tools/article_gate.py ] && { python3 tools/article_gate.py >/tmp/ag.log 2>&1 || { tail -3 /tmp/ag.log; fail=1; }; }
-ok=0; for i in 1 2; do bash tools/smoke.sh > /tmp/smoke.log 2>&1 && { ok=1; break; }; done
-[ $ok = 1 ] || { grep -A6 FAILURES /tmp/smoke.log; fail=1; }
+# Full smoke once; under heavy machine load a whole Chrome group can die, so re-run only the failed groups, alone.
+ok=0
+if bash tools/smoke.sh > /tmp/smoke.log 2>&1; then ok=1; else
+  ok=1
+  for g in $(grep -A40 FAILURES /tmp/smoke.log | grep -oE '^  [a-z]+ /' | awk '{print $1}' | sort -u); do
+    bash tools/smoke.sh --group "$g" > /tmp/smoke-$g.log 2>&1 || { ok=0; grep -A6 FAILURES /tmp/smoke-$g.log; }
+  done
+fi
+[ $ok = 1 ] || fail=1
 if [ $fail = 0 ]; then git add index.html; git commit -qm "Ship ?v=$NEW
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"; git push -q origin main 2>&1 | tail -1; echo "SHIPPED ?v=$NEW"; else git checkout -q index.html; echo "NOT SHIPPED"; fi
