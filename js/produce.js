@@ -133,7 +133,8 @@ function prodMix(queue, force) {
 // The cards
 // ======================================================================
 let PROD_POOL = null, PROD_PICKER = null;
-const prodPool = () => PROD_POOL || (PROD_POOL = [...BASICS, ...ALL]);
+// every core name once the list has loaded (js/learnmore.js lxLookPool): typing "dark teal" for teal reads as close
+const prodPool = () => typeof lxLookPool === "function" && lxLookPool().length > BASICS.length + ALL.length ? lxLookPool() : PROD_POOL || (PROD_POOL = [...BASICS, ...ALL]);
 const speechCtor = () => typeof window !== "undefined" && (window.SpeechRecognition || window.webkitSpeechRecognition) || null;
 const ICON_MIC = sv('<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/>', 22, 1.8);
 const shotMode = () => typeof SHOT !== "undefined" && !!SHOT;
@@ -189,7 +190,7 @@ function prodIntro(card, kind, foot, go) {
 // The paper label that slides up with the answer. vs: the neighbor to show beside it, line: how they differ.
 function prodLabel(c, verdict, cls, vs, line, meta) {
   return `<div class="label">
-    <div class="meta"><span>${esc(meta || c.unit.title)}</span><span>${c.h}</span></div>
+    <div class="meta"><span>${esc(meta || (c.unit && c.unit.title) || "")}</span><span>${c.h}</span></div>
     <p class="verdict ${cls}">${verdict}</p>
     <h2>${esc(c.n)}</h2>
     ${line ? `<div class="vs">${vs ? `<span class="pair"><i style="--c:${c.h}"></i><i style="--c:${vs.h}"></i></span>` : ""}<p>${esc(line)}</p></div>` : ""}
@@ -248,6 +249,7 @@ function sayCard(card, c, foot, o) {
     if (rec) try { rec.abort(); } catch (e) {}
     inp.blur(); unfit();
     const ok = j.r === "right", nb0 = neighbor(c);
+    if (typeof learnerLog === "function" && j.r !== "empty") { learnerLog({ type: "answer", color: c, ok, by: "say", src: "deck" }); const as = j.nb || j.said; if (!ok && as && as.n) learnerLog({ type: "confuse", color: c, b: as, src: "say" }); }   // js/learner.js
     let verdict, cls, vs = nb0, line = c.d;
     if (ok) { verdict = `${ICON.checkS} Right${j.typo ? " · check the spelling" : ""}`; cls = "ok"; }
     else if (j.r === "close") {
@@ -328,6 +330,7 @@ function makeCard(card, c, foot, o) {
   function finish() {
     if (done) return; done = true;
     const user = PROD_PICKER.get(), d = de2000(user, c.h), res = d <= MAKE_OK ? "right" : d <= MAKE_CLOSE ? "close" : "wrong", ok = res === "right";
+    if (typeof learnerLog === "function") learnerLog({ type: "answer", color: c, ok, by: "make", src: "deck" });   // js/learner.js
     const verdict = ok ? `${ICON.checkS} Right` : res === "close" ? "Close" : `${ICON.xS} Not quite`;
     card.innerHTML = `<div class="mk-split"><div style="--c:${user}"><span class="p-tag">Yours</span></div><div style="--c:${c.h}"><span class="p-tag">${esc(c.n)}</span></div></div>
       ${prodLabel(c, verdict, ok ? "ok" : res === "close" ? "close" : "miss", null, makeRead(user, c.h), `${pctDiff(d)}`)}`;

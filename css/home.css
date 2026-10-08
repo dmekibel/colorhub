@@ -8,7 +8,7 @@
 /* ---------- search (reached from the View panel's header, chooser() below) ---------- */
 .hm-search[hidden]{display:none}
 .hm-search{position:absolute;z-index:3;left:max(12px,calc(50% - 258px));right:max(12px,calc(50% - 258px));top:calc(var(--top) + 12px)}
-.hm-search .search{display:flex;align-items:center;gap:10px;height:48px;padding:0 16px;border-radius:24px;background:var(--surface-2);border:1px solid var(--rule)}
+.hm-search .search{display:flex;align-items:center;gap:10px;height:48px;padding:0 16px;border-radius:var(--r-pill);background:var(--surface-2);border:1px solid var(--rule)}
 .hm-search .search svg{flex:none;width:18px;height:18px;color:var(--soft)}
 .hm-search input{flex:1;min-width:0;background:none;border:0;font:400 17px/1 var(--serif);color:var(--ink)}
 .hm-search input::placeholder{color:var(--faint)}
@@ -19,30 +19,30 @@
 [data-rooms-corner],.hm #hmView{transition:opacity .4s var(--ease)}
 
 /* ---------- the "Learn it" button on a color page (js/explore.js, colorPage only) ---------- */
-.c-learnit{display:inline-flex;align-items:center;gap:8px;margin-top:14px;height:40px;padding:0 16px 0 13px;border:1px solid var(--rule-2);border-radius:20px;
-  font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:inherit;transition:transform .3s var(--spring)}
+.c-learnit{display:inline-flex;align-items:center;gap:8px;margin-top:14px;height:40px;padding:0 16px 0 13px;border:1px solid var(--rule-2);border-radius:var(--r-pill);
+  font:italic 400 15px/1.2 var(--serif);letter-spacing:0;text-transform:none;color:inherit;transition:transform .3s var(--spring)}
 .c-learnit:active{transform:scale(.95)}
 .c-learnit svg{width:16px;height:16px}
 .c-learnit small{font:500 9.5px/1 var(--mono);letter-spacing:.06em;text-transform:none;opacity:.7}
 
 /* ---------- the lesson itself (js/learnit.js): one step at a time, booth grey (it judges swatches) ---------- */
 .lt-steps{display:flex;gap:5px;flex:1;justify-content:center}
-.lt-steps i{width:20px;height:3px;border-radius:2px;background:var(--rule-2)}
+.lt-steps i{width:20px;height:3px;border-radius:var(--r-1);background:var(--rule-2)}
 .lt-steps i.on{background:var(--ink)}
 .lt-steps i.now{background:var(--soft)}
 .lt-card{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;text-align:center}
-.lt-sw{width:100%;max-width:300px;aspect-ratio:1;border-radius:4px;background:var(--c);box-shadow:inset 0 0 0 1px rgba(236,232,223,.1)}
+.lt-sw{width:100%;max-width:300px;aspect-ratio:1;border-radius:var(--r-1);background:var(--c);box-shadow:inset 0 0 0 1px rgba(236,232,223,.1)}
 .lt-card h1{font:400 clamp(36px,10vw,52px)/1 var(--serif);letter-spacing:-.02em;margin:0}
 .lt-card .mono{font:500 13px/1 var(--mono);letter-spacing:.1em;color:var(--soft)}
 .lt-card p{margin:0;color:var(--soft);font-size:15px;max-width:320px}
 .lt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:100%;max-width:360px}
-.lt-grid button{aspect-ratio:1;background:var(--c);border-radius:3px;transition:transform .2s var(--spring)}
+.lt-grid button{aspect-ratio:1;background:var(--c);border-radius:var(--r-1);transition:transform .2s var(--spring)}
 .lt-grid button:active{transform:scale(.93)}
 .lt-grid button.right{box-shadow:0 0 0 3px #17160F,0 0 0 5px var(--good)}
 .lt-grid button.wrong{box-shadow:0 0 0 3px #17160F,0 0 0 5px var(--bad);opacity:.5}
 .lt-strip{display:flex;flex-direction:column;gap:8px;width:100%;max-width:340px}
-.lt-strip button{display:flex;align-items:center;gap:12px;height:56px;padding:0 14px;border-radius:8px;background:rgba(236,232,223,.04);border:1px solid var(--rule)}
-.lt-strip button i{width:36px;height:36px;border-radius:4px;background:var(--c);flex:none}
+.lt-strip button{display:flex;align-items:center;gap:12px;height:56px;padding:0 14px;border-radius:var(--r-2);background:rgba(236,232,223,.04);border:1px solid var(--rule)}
+.lt-strip button i{width:36px;height:36px;border-radius:var(--r-1);background:var(--c);flex:none}
 .lt-strip button b{font:500 12px/1 var(--mono);color:var(--soft);min-width:18px}
 .lt-strip button.set{border-color:var(--rule-2)}
 .lt-strip.done button{pointer-events:none}
@@ -61,7 +61,7 @@
 .hm-lens input{flex:1;accent-color:var(--ink)}
 /* the view chooser's one-of-several controls (Show, Layout) */
 .hm-seg{display:flex;gap:6px;margin:2px 0 14px}
-.hm-seg button{flex:1;display:flex;align-items:center;justify-content:center;height:38px;border:1px solid var(--rule);border-radius:19px;font:400 16px/1 var(--serif);color:var(--soft)}
+.hm-seg button{flex:1;display:flex;align-items:center;justify-content:center;height:38px;border:1px solid var(--rule);border-radius:var(--r-pill);font:400 16px/1 var(--serif);color:var(--soft)}
 .hm-seg button.on{background:var(--ink);border-color:var(--ink);color:#0E0D0B}
 .hm-chooser .hm-sub{margin-top:6px}
 .hm-styles{grid-template-columns:repeat(2,1fr)}
@@ -70,14 +70,15 @@
 
 /* ---------- "Show" / "Look" tabs (one sheet, two panels): Look stays compact (no scroll) so the honeycomb
    above it — recentered live via ctrl.setInset — is always visible while you pick a style or drag a slider ---------- */
-.hm-tabs{display:flex;gap:6px;margin:2px 0 12px}
-.hm-tabs button{flex:1;height:36px;border:1px solid var(--rule);border-radius:18px;font:500 12px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--soft)}
-.hm-tabs button.on{background:var(--ink);border-color:var(--ink);color:#0E0D0B}
+/* Show / Look: one solid segmented control (DESIGN-SYSTEM §1.2: no outline-only controls), paper when chosen */
+.hm-tabs{display:flex;gap:0;margin:2px 0 14px;padding:3px;border-radius:var(--r-pill);background:var(--surface-2)}
+.hm-tabs button{flex:1;height:38px;text-align:center;border:0;border-radius:var(--r-pill);font:400 19px/1 var(--serif);letter-spacing:-.01em;text-transform:none;color:var(--soft);transition:background var(--dur-1),color var(--dur-1)}
+.hm-tabs button.on{background:var(--paper);color:var(--paper-ink)}
 .hm-tab-panel[hidden]{display:none}
 .hm-sheet-panel.hm-sheet-compact{max-height:40vh;overflow:hidden}
 .hm-look-panel{padding-bottom:0}
 .hm-look-row{display:flex;gap:7px;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;padding-bottom:2px;margin-bottom:4px}
-.hm-look-chip{flex:none;width:59px;display:flex;flex-direction:column;align-items:center;gap:4px;padding:5px 2px;border-radius:12px;border:1px solid transparent}
+.hm-look-chip{flex:none;width:59px;display:flex;flex-direction:column;align-items:center;gap:4px;padding:5px 2px;border-radius:var(--r-2);border:1px solid transparent}
 .hm-look-chip.on{border-color:var(--rule-2);background:rgba(236,232,223,.05)}
 .hm-look-chip b{font:400 10.5px/1.1 var(--serif);color:var(--soft);text-align:center}
 .hm-look-chip.on b{color:var(--ink)}
@@ -100,7 +101,7 @@
   box-shadow:0 -16px 44px rgba(0,0,0,.5);transform:translateY(100%);transition:transform .32s var(--ease)}
 .hm-tweak-panel.on{transform:translateY(0)}
 .hm-tweak-grab{flex:none;display:flex;align-items:center;justify-content:center;height:16px}
-.hm-tweak-grab::before{content:"";width:36px;height:4px;border-radius:2px;background:var(--rule-2)}
+.hm-tweak-grab::before{content:"";width:36px;height:4px;border-radius:var(--r-1);background:var(--rule-2)}
 .hm-tweak-head{flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 16px 8px;border-bottom:1px solid var(--rule)}
 .hm-tweak-head b{font:400 20px/1 var(--serif)}
 .hm-tweak-scroll{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:10px 16px 6px}
@@ -110,7 +111,7 @@
 .hm-tweak-row input{width:100%;accent-color:var(--ink)}
 .hm-tweak-row b{text-align:right;font:500 11px/1 var(--mono);color:var(--faint)}
 .hm-tweak-foot{flex:none;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 16px calc(10px + var(--bottom));border-top:1px solid var(--rule)}
-.cx-pill{height:38px;padding:0 16px;border:1px solid var(--rule-2);border-radius:19px;font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+.cx-pill{height:38px;padding:0 16px;border:1px solid var(--rule-2);border-radius:var(--r-pill);font:italic 400 15px/1.2 var(--serif);letter-spacing:0;text-transform:none;color:var(--ink)}
 
 /* ---------- the honeycomb lab (#/lab/honey): full-screen preview, two steppers and a rating row at the bottom ---------- */
 .hm-lab{position:relative;height:100%}
@@ -118,7 +119,7 @@
 .hm-lab-view .hc-cap{display:none}
 .hm-lab-back{position:fixed;left:16px;top:calc(var(--top) + 10px);z-index:5}
 .hm-lab-bar{position:fixed;left:16px;right:16px;bottom:calc(var(--bottom) + 14px);z-index:5;display:flex;flex-direction:column;gap:8px;
-  padding:12px 14px calc(14px + var(--bottom-extra,0px));border-radius:18px;background:#17160F;border:1px solid var(--rule);box-shadow:0 10px 30px rgba(0,0,0,.45)}
+  padding:12px 14px calc(14px + var(--bottom-extra,0px));border-radius:var(--r-3);background:#17160F;border:1px solid var(--rule);box-shadow:0 10px 30px rgba(0,0,0,.45)}
 .hm-lab-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .hm-lab-step{width:34px;height:34px;flex:none;display:grid;place-items:center;border-radius:50%;color:var(--soft)}
 .hm-lab-step:first-child svg{transform:rotate(180deg)}
@@ -137,3 +138,27 @@
 .hm-chooser-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
 .hm-chooser-top .title-2{margin:0}
 .hm-chooser-acts{display:flex;gap:8px}
+.hm-l18-fam{margin:8px 0 6px}
+.hm-l18-fam button{height:32px;font-size:14px}
+/* L18 B3: the search hint, one paper row under the field; Return or a tap travels */
+.hm-l18-hint{display:flex;align-items:center;gap:10px;width:100%;margin-top:8px;min-height:44px;padding:8px 16px;border-radius:var(--r-pill);background:var(--paper);color:var(--paper-ink);font:400 16px/1.2 var(--serif);text-align:left}
+.hm-l18-hint[hidden]{display:none}
+.hm-l18-hint b{font-weight:400;font-style:italic}
+.hm-l18-hint span:last-child{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hm-l18-sw{flex:none;display:flex}
+.hm-l18-sw i{width:22px;height:22px;border-radius:50%;margin-left:-6px;box-shadow:0 0 0 2px var(--paper)}
+.hm-l18-sw i:first-child{margin-left:0}
+/* L18 B2: the live stem (what is inside each room today) and the real floor under a solid scrim (no blur) */
+.rm-art-img img{display:block;width:100%;height:100%;object-fit:cover}
+.rm-art-station{display:grid;place-items:center;background:var(--surface-2)}
+.rm-art-station .sa{width:100%;height:100%;aspect-ratio:auto;border-radius:0}
+.room-floor-snap{background-size:cover;background-position:center 42%}
+.room-floor-snap i{position:absolute;inset:0;top:0;width:auto;height:auto;transform:none;opacity:1;background:rgba(14,13,11,.58)}
+/* L18: a lit constellation pill sits above the favorites heart on Home */
+.hm .cs-hl-pill{bottom:calc(var(--bottom) + 140px)}
+.hm-look-spiral{background:radial-gradient(circle at 50% 50%,#E7C35C 0 18%,#2A2822 19% 22%,#4C9F70 23% 44%,#2A2822 45% 48%,#4C7FD1 49% 72%,#2A2822 73% 76%,#8C5AC2 77%)}
+/* L18: every Home corner fades together while you drag, and returns together (David: only the Study corner stayed) */
+.hm.chrome-hide .corner{opacity:0;pointer-events:none}
+/* pull-down-to-close hint (js/home.js hmPullClose): says what letting go will do, so a close is never a surprise */
+.hm-pullpill{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + 14px);transform:translate(-50%,-8px);z-index:90;padding:8px 14px;border-radius:var(--r-pill,999px);background:rgba(20,19,17,.82);color:#ECE8DF;font:500 14px/1 var(--sans);letter-spacing:.01em;opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.hm-pullpill.on{opacity:1;transform:translate(-50%,0)}

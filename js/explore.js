@@ -82,7 +82,8 @@ function lensSections(lens) {
       return [{ honey: true }, ...lensSections("origins").map(sec => ({ ...sec, title: sec.title === "Still being traced" ? sec.title : "Named after · " + sec.title }))];
     case "ideas": {
       const sys = pages.filter(p => (p.swatches || []).length >= 3), ideas = pages.filter(p => !sys.includes(p) && ["concept", "person", "work", "tradition", "culture"].includes(p.type));
-      return [{ title: "Stories", sub: "Short reads, a few swipes each.", pins: stories.map(n => pin(n)) },
+      return [...(typeof lkSections === "function" ? lkSections() : []),   // js/looks.js: visual styles, each a family of palettes
+        { title: "Stories", sub: "Short reads, a few swipes each.", pins: stories.map(n => pin(n)) },
         { title: "Color systems", sub: "Traditions that gave each color a meaning.", pins: sys.map(n => pin(n, { system: true })) },
         { title: "Ideas and people", pins: seeded(ideas, today()).map(n => pin(n)) },
         ...[window.passagesSection, window.filmsSection].filter(f => typeof f === "function").flatMap(f => f()),   // js/passages.js, js/films.js
@@ -119,7 +120,7 @@ function lensSections(lens) {
     }
     default: {
       // For you: colors shuffled by day, with a painting, a story or a page every few pins
-      const day = today(), cs = seeded(colors, day), others = seeded([...paintings, ...stories, ...pages.filter(p => p.dek)], day);
+      const day = today(), cs = typeof fvForYou === "function" ? fvForYou(seeded(colors, day)) : seeded(colors, day), others = seeded([...paintings, ...stories, ...pages.filter(p => p.dek)], day);
       const out = [];
       cs.forEach((c, i) => { out.push(pin(c)); if (i % 3 === 2 && others.length) out.push(pin(others.shift())); });
       others.forEach(o => out.push(pin(o)));
@@ -158,8 +159,10 @@ function exploreHome() {
 }
 // a part's cover opens the same way a honeycomb bubble or a painting thumbnail would (DESIGN-SYSTEM §8):
 // here, a plain lens switch, re-using the pattern every lens chip used before this redesign.
-function openPart(part) { S.lens = part; save(); exploreHome(); }
-function backToPager() { openPart("all"); }
+// (a part is inside the Museum room, so it carries the room's address even when a color page sent you here)
+function openPart(part) { S.lens = part; S.tab = "explore"; save(); exploreHome(); }
+// Back from a part: to the page that opened it, if a page did (js/trail.js tlBackUnder), else the Museum's covers
+function backToPager() { if (typeof tlBackUnder === "function" && tlBackUnder()) return; openPart("all"); }
 
 // ---------- tinting a cover or the Art header from its darkest dominant color (DESIGN-SYSTEM §3, §12) ----------
 // L* <= 18, chroma <= 20: dark and quiet enough that --ink text over it still clears 7:1.
@@ -212,9 +215,9 @@ function explorePager() {
   const covers = [
     coverHTML("all", "For you", "A new pick of colors, paintings and stories every day.", `Today, ${c.n}`,
       tintFromHex(c.h), flatHeroHTML(c.h, c.n), forYouSeam),
-    art ? coverHTML("art", "Art", "Fourteen thousand paintings and eleven thousand poems, found by their colors.", artCoverNote(art),
+    art ? coverHTML("art", "Art", `${typeof GAL !== "undefined" && GAL ? GAL.n.toLocaleString("en-US") : "Over 23,000"} paintings and 11,440 poems, found by their colors.`, artCoverNote(art),
       tintFromPalette(art.palette), `<img src="${esc(art.img)}" alt="${esc(art.title)}">`, sixSwatchHTML(art.palette.map(p => p.h), art.palette.map(p => p.share)))
-      : coverHTML("art", "Art", "Fourteen thousand paintings and eleven thousand poems, found by their colors.", "", null, `<div class="xp-flat" style="background:var(--lift-2)"></div>`, ""),
+      : coverHTML("art", "Art", `${typeof GAL !== "undefined" && GAL ? GAL.n.toLocaleString("en-US") : "Over 23,000"} paintings and 11,440 poems, found by their colors.`, "", null, `<div class="xp-flat" style="background:var(--lift-2)"></div>`, ""),
     story ? coverHTML("ideas", "Ideas", "Short stories, systems and history, read through color.", `Today, ${story.title}`,
       tintFromHexList(story.cover), `<div class="xp-flat" style="background:linear-gradient(135deg,${story.cover.join(",")})"></div>`, sixSwatchHTML(story.cover))
       : coverHTML("ideas", "Ideas", "Short stories, systems and history, read through color.", "", null, `<div class="xp-flat" style="background:var(--lift-2)"></div>`, ""),
@@ -226,7 +229,7 @@ function explorePager() {
     <div class="xp-wrap">
       <div class="xp-pager" id="xpPager">${covers.join("")}</div>
       <div class="xp-dots">${covers.map((_, i) => `<i class="${i === 0 ? "on" : ""}"></i>`).join("")}</div>
-      <button class="xp-search" data-search aria-label="Search Explore">${ICON.search}</button>
+      <button class="xp-search" data-search aria-label="Search the ${NAV_MUSEUM}">${ICON.search}</button>
     </div>
   `, "explore", "explore");
   const pager = el.querySelector("#xpPager"), dots = [...el.querySelectorAll(".xp-dots i")], sections = [...pager.querySelectorAll(".xp-cover")];
@@ -236,7 +239,8 @@ function explorePager() {
     sections.forEach(s => io.observe(s));
     cleanup.push(() => io.disconnect());
   }
-  pager.addEventListener("click", e => { const s = e.target.closest("[data-part]"); if (s) openPart(s.dataset.part); });
+  // (the "For you" cover opens its feed directly: openPart("all") is the pager itself, so it used to just redraw the pager)
+  pager.addEventListener("click", e => { const s = e.target.closest("[data-part]"); if (s) s.dataset.part === "all" ? exploreForYou() : openPart(s.dataset.part); });
   el.querySelector("[data-search]").onclick = () => exploreSearchSheet();
 }
 
@@ -292,7 +296,7 @@ function exploreSaved() {
 let ART_UI = { hex: null, name: "" };   // the picked color, or none for "a new mix every day"
 // the shared entry point: "Paintings/poems with this color", from a color page, the color link sheet, or
 // anywhere else that used to send people to the old Paintings lens (js/gallery.js, js/swatch.js, js/poems.js).
-function artOpenColor(hex, name) { ART_UI = { hex, name: name || "" }; openPart("art"); }
+function artOpenColor(hex, name) { if (typeof tlKeepUnder === "function") tlKeepUnder(); ART_UI = { hex, name: name || "" }; openPart("art"); }
 // a plain gallery pin, built straight from the GAL corpus index (js/gallery.js) rather than a graph node, so
 // Art can show any of the ~40,000 paintings, not only the hand-written "Featured" ones pin() above knows.
 function artGalPinHTML(i) {
@@ -335,6 +339,7 @@ async function artFeedPins(hex, name) {
   return out;
 }
 function artHome() {
+  if (typeof xbHome === "function") return xbHome();   // Explore 2.0 (js/browse-ui.js, lane L16): facets, views, rooms; the feed below is the fallback
   XSTACK = [];
   const { hex, name } = ART_UI, tint = hex ? tintFromHex(hex) : null;
   const colors = glHueOrder([...BASICS, ...ALL]);
@@ -342,7 +347,7 @@ function artHome() {
     <div class="art-band" style="${tint ? `--tint:${tint}` : ""}">
       <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><button class="icon-btn glass" data-search aria-label="Search">${ICON.search}</button></header>
       <h1 class="p-title">Art</h1>
-      <p class="p-dek">${hex ? `In ${esc(name.toLowerCase())}, from fourteen thousand paintings and eleven thousand poems.` : "Fourteen thousand paintings and eleven thousand poems, found by their colors."}</p>
+      <p class="p-dek">${hex ? `In ${esc(name.toLowerCase())}, from 23,781 paintings and eleven thousand poems.` : "23,781 paintings and eleven thousand poems, found by their colors."} <button class="aw-link" data-awindex>Art history by color</button></p>
       <div class="art-bubbles" role="tablist">${colors.map(c => `<button class="art-bubble${c.n === name ? " on" : ""}" data-hex="${c.h}" data-name="${esc(c.n)}" style="--c:${c.h}" aria-label="${esc(c.n)}"></button>`).join("")}</div>
     </div>
     <div class="art-feed" id="artFeed"><p class="fine">Loading the gallery…</p></div>
@@ -375,11 +380,13 @@ function exploreSearchSheet() {
     <div id="xresults">${saved.length ? `<div class="sec-head"><b>Saved</b><span>${saved.length}</span></div>${masonry(saved.map(n => pin(n)))}` : `<p class="fine">Tap ${ICON_HEART} on anything to keep it here, or start typing to search.</p>`}</div>
   `);
   const q = sh.querySelector("#xq"), results = sh.querySelector("#xresults");
+  if (typeof awLoad === "function") awLoad().catch(() => {});
   q.addEventListener("input", () => {
     const s = q.value.trim().toLowerCase();
     if (!s) { results.innerHTML = saved.length ? `<div class="sec-head"><b>Saved</b><span>${saved.length}</span></div>${masonry(saved.map(n => pin(n)))}` : `<p class="fine">Tap ${ICON_HEART} on anything to keep it here, or start typing to search.</p>`; return; }
     const hits = [...graph().nodes.values()].filter(n => (n.title || "").toLowerCase().includes(s)).slice(0, 40);
-    results.innerHTML = hits.length ? masonry(hits.map(n => pin(n))) : `<p class="fine">Nothing called that yet.</p>`;
+    const painters = typeof awSearchHTML === "function" ? awSearchHTML(s, () => q.dispatchEvent(new Event("input"))) : "";   // painters, from the art wiki (js/artwiki.js)
+    results.innerHTML = painters + (hits.length ? masonry(hits.map(n => pin(n))) : painters ? "" : `<p class="fine">Nothing called that yet.</p>`);
   });
   results.addEventListener("click", e => { const p = e.target.closest("[data-pin]"); if (p) { close(); closeup(graph().nodes.get(p.dataset.pin)); } });
   setTimeout(() => q.focus(), 260);
@@ -448,7 +455,7 @@ const orbit = id => closeup(graph().nodes.get(id));
 function openNode(n, push = true, tapped) {
   if (!n) return;
   if (n.kind === "story") return storyPlayer(n);
-  if (push) XSTACK.push("p:" + n.id);
+  if (push && XSTACK[XSTACK.length - 1] !== "p:" + n.id) XSTACK.push("p:" + n.id);   // one entry, even when two handlers open the same link
   if (n.kind === "color") return colorPage(n, tapped);
   if (n.kind === "painting") return paintingPage(n);
   if (n.page) return n.page(n);   // archive pages (passages, films) bring their own renderer
@@ -457,34 +464,48 @@ function openNode(n, push = true, tapped) {
 // Pinterest-style back (ROADMAP.md §17 job #2): XSTACK is the one shared crumb trail behind every screen this
 // app can open from the honeycomb, Explore, the gallery or Studio's photo shelf — whichever of those opened
 // the first screen in a chain, going back far enough always lands there, never on an unrelated tab.
-// The fallback when the trail runs out: whatever tab we're logically in (S.tab keeps whatever it was set to by
-// go()/hmHome() and never changes just from opening a page), so a chain rooted in the honeycomb or Studio
-// returns there instead of always landing on Explore.
-const xFallbackTab = () => ["learn", "gym", "studio"].includes(S.tab) ? S.tab : "explore";
+// When the trail runs out it goes back to where it started (X_ROOT, set by js/trail.js whenever a room or the map
+// shows, and by router.js for a page opened from an address): that room, or else the map. Never a guessed room
+// (David, 2026-10-08: "sometimes the app takes you to the Explore page without you wanting to").
+const xFallbackTab = () => ["learn", "gym", "explore", "studio"].includes(X_ROOT) ? X_ROOT : null;
+function xToOrigin() {
+  const r = xFallbackTab();
+  if (r) return go(r);
+  X_ROOT = null;
+  return typeof hmHome === "function" ? hmHome() : go("learn");
+}
 // Where a chain of pages started when that wasn't a room: "home" when a bubble on the honeycomb opened it. Home is its
 // own floor now (not a tab), so without this the trail ran out onto whatever room S.tab last pointed at, and a pull-down
 // on a color opened from Home dropped you into Studio (David). go() clears it.
 let X_ROOT = null;
 function xStep(prev) {
-  if (!prev) return X_ROOT === "home" && typeof hmHome === "function" ? (X_ROOT = null, hmHome()) : go(xFallbackTab());
+  if (!prev) return xToOrigin();
   // Studio screens (ROADMAP.md §17 job #1): plain tokens (no ":"), since each reopens from its own remembered
   // state rather than an id. Checked before the generic node lookup at the bottom, which would otherwise treat
   // "harmony" etc. as a (nonexistent) graph node id and silently do nothing.
+  if (prev === "chords") return chordsPage({ push: false });   // the masters' chords (js/chords.js)
+  if (prev.startsWith("pt:")) { const q = ptParse(prev.slice(3)); return paintingsOfPage(q.hexes, { ...q.st, push: false }); }   // color in paintings (js/paintingsof.js)
+  if (prev === "favs") return favShelf();   // your colors (js/favs.js)
+  if (prev === "favs-taste") return favTaste();   // your taste (js/favprofile.js)
+  if (prev.startsWith("aw:") && typeof awStep === "function") return awStep(prev);   // the art wiki (js/artwiki.js)
   if (prev === "wheel") return gamutWheel(GW_LAST && GW_LAST.preset, GW_LAST && GW_LAST.pts, false);
   if (prev === "wheelview") return gwReopenView();
+  if (prev === "namer") return LAB.namer(NMR_LAST.hex, false);   // Name any color (js/namer.js), with the color you left it on
   if (prev === "harmony") return LAB.harmony(LAB_HARMONY_STATE && LAB_HARMONY_STATE.base, LAB_HARMONY_STATE && LAB_HARMONY_STATE.scheme, false);
   if (prev === "contrast") return LAB.contrast(LAB_CONTRAST_STATE && LAB_CONTRAST_STATE.set, LAB_CONTRAST_STATE && LAB_CONTRAST_STATE.slot, false);
   if (prev.startsWith("pal:")) return openSavedPalette(prev.slice(4), false);   // a saved palette (js/studio.js)
-  if (prev.startsWith("g:")) return galleryPage(+prev.slice(2), false);   // a gallery painting (js/gallery.js)
+  if (prev.startsWith("g:")) return galleryPage(+prev.slice(2), false, ...(typeof tlTapped === "function" ? [tlTapped(prev), tlTol(prev)] : []));   // with the color that brought you (js/trail.js)   // a gallery painting (js/gallery.js)
+  if (prev.startsWith("ar:") && typeof arStep === "function") return arStep(prev.slice(3));   // a hub or "which" page (js/article.js)
   if (prev.startsWith("ph:")) return photoPage(prev.slice(3), false);   // a saved photo (js/photos.js)
   if (prev.startsWith("poem:")) return poemPage(prev.slice(5), { back: true });   // a poem (js/poems.js)
   // a library color's own page, not one of the 101 (js/names.js): it isn't a graph node, so look it up by name
   if (prev.startsWith("n:")) {
     const nm = decodeURIComponent(prev.slice(2));
-    return loadCoreNames().then(() => { const e = (CORE_NAMES || []).find(x => x.n === nm); e ? namePage(e, false) : go(xFallbackTab()); });
+    return loadCoreNames().then(() => { const e = (CORE_NAMES || []).find(x => x.n === nm); e ? namePage(e, false, typeof tlTapped === "function" ? tlTapped(prev) : null) : xToOrigin(); });
   }
+  if (prev.startsWith("r:") && typeof tlReplay === "function") return tlReplay(prev);   // any other addressed screen (js/trail.js)
   const node = graph().nodes.get(prev.replace(/^[zp]:/, ""));
-  return prev.startsWith("z:") ? closeup(node, { back: true }) : openNode(node, false);
+  return prev.startsWith("z:") ? closeup(node, { back: true }) : openNode(node, false, typeof tlTapped === "function" ? tlTapped(prev) : null);   // the exact tapped color too (js/trail.js)
 }
 function xBack() { XSTACK.pop(); BACK_RENDER = true; xStep(XSTACK[XSTACK.length - 1]); }
 // links inside any article
@@ -492,8 +513,12 @@ function wireLinks(el) {
   el.addEventListener("click", e => {
     const a = e.target.closest("[data-to],[data-node]");
     if (!a) return;
+    // a node the graph doesn't hold yet (a gem or flower page registered by its own file, after the wiki rebuilt
+    // the graph) is left for js/swatch.js's fallback, which waits for it: never a silent dead tap
+    const node = graph().nodes.get(a.dataset.to || a.dataset.node);
+    if (!node) return;
     e.preventDefault();
-    openNode(graph().nodes.get(a.dataset.to || a.dataset.node));
+    openNode(node);
   });
 }
 
@@ -569,7 +594,7 @@ function colorPage(n, tapped) {
   const heroHex = tapped || c.h;
   const status = tapped ? `Your color · ${pctMatch(de2000(tapped, c.h))} to ${c.n}`
     : c.basic ? "A basic color word" : st ? (mine ? "Yours" : st.own || st.placed ? "In your reviews" : "Learning") : `New to you${c.unit ? ", from " + unitLabel(c.unit) : ""}`;
-  const saved = isSaved(n.id);
+  const saved = isSaved(n.id) || (typeof fvHas === "function" && fvHas(c.h));   // the heart is also "your colors" (js/favs.js)
   // the strip: a tapped color compares against the page it landed on; otherwise this color, its authored
   // neighbor (c.vs) if it has one, then its nearest taught look-alikes, deduped — up to 3 swatches, the first
   // (this color, or your color) wider
@@ -577,57 +602,70 @@ function colorPage(n, tapped) {
   const seenN = new Set([c.n]);
   const stripOthers = tapped ? [c] : [nb, ...likes].filter(x => x && !seenN.has(x.n) && (seenN.add(x.n), true)).slice(0, 2);
   const stripDiff = tapped ? lookDiff({ h: tapped, n: "Your color" }, c) : c.d;
+  // every color page is rich (ROADMAP, David 2026-10-08): famC is a fallback family head for the shelves
+  // below that would otherwise go quiet on a thin name — a no-op for one of the 101 themselves (their own
+  // family head is always themselves, de 0).
+  const famC = typeof rcFamC === "function" ? rcFamC(tapped || c.h) : null;
+  const cover = rpCoverFoot(c.n, c.h, tapped, c);
   const el = show(`
     <div class="c-hero cp-hero cp-hero-full" style="--c:${heroHex}" data-ink="${ink(heroHex)}">
       <button class="cp-close" data-back aria-label="Back">${ICON.back}</button>
       <div class="cp-hero-foot">
-        <span class="cp-chip">${esc(status)}</span>
-        <h1>${esc(c.n)}</h1>
-        <button class="mono cp-hex" data-copy="${heroHex}">${heroHex}</button>
+        ${cover.html}
+        ${typeof fvPageChip === "function" ? fvPageChip(c.h) : ""}
       </div>
-      <span class="cp-scroll-hint" aria-hidden="true">${ICON.up}</span>
     </div>
+    ${typeof rpGlanceHTML === "function" ? rpGlanceHTML(c.n, c.h) : ""}
     <div class="cp-primary-row">
-      ${typeof hmLearnIt === "function" ? `<button class="cp-primary" data-learnit>${mine ? "Review it" : "Learn it"}${mine ? "" : `<em>2 min</em>`}${ICON.arrow}</button>` : ""}
+      ${typeof prQuick === "function" || typeof hmLearnIt === "function" ? `<button class="cp-primary" data-learnit>${mine ? "Review it" : "Learn it"}${mine ? "" : `<em>2 min</em>`}${ICON.arrow}</button>` : ""}
       <button class="icon-btn cp-icon${saved ? " saved" : ""}" data-save aria-label="Save">${saved ? "♥" : "♡"}</button>
       <button class="icon-btn cp-icon" data-share aria-label="Share">${ICON.share}</button>
     </div>
     ${stripOthers.length && stripDiff ? `<section class="cp-strip-sec">
       <div class="cp-strip"${tapped ? "" : ` data-nb="${esc(c.n)}"`}>
         <div style="--c:${heroHex}" data-ink="${ink(heroHex)}"><b>${tapped ? "Your color" : esc(c.n)}</b></div>
-        ${stripOthers.map(x => `<div style="--c:${x.h}" data-ink="${ink(x.h)}"><b>${esc(x.n)}</b></div>`).join("")}
+        ${stripOthers.map(x => `<div style="--c:${x.h}" data-ink="${ink(x.h)}"><b>${esc(x.n)}</b>${typeof relMarkHTML === "function" ? relMarkHTML(x) : ""}</div>`).join("")}
       </div>
       <p class="cp-diff">${esc(stripDiff)}</p>
+      ${tapped ? "" : `<div data-csacts></div>`}
     </section>` : ""}
     ${c.o && !(w && w.facets.some(f => f.k === "language")) ? `<p class="lead">${esc(c.o)}</p>` : ""}
     ${figHTML(c.n)}
-    <section class="gl-in" data-glin></section>
-    <div class="c-poems"></div>
-    ${typeof archiveRows === "function" ? archiveRows(c) : ""}
-    ${typeof btRow === "function" ? btRow(c) : ""}
-    ${typeof gmRow === "function" ? gmRow(c) : ""}
-    <section class="fx-in" data-world-in></section>
+    ${rpPageBody(c, c.n, c.h, heroHex, famC, `<section class="gl-in" data-glin></section>`)}
     ${(() => {
-      const secs = (w ? w.facets : []).map((f, i) => [f.k + i, FACET_LABEL[f.k] || f.k, `<p>${linkText(f.text)}</p>` + (i === 0 ? figHTML(c.n, 1) : "")]);
+      const secs = (w ? w.facets : []).map((f, i) => [f.k + i, FACET_LABEL[f.k] || f.k, `<p>${linkText(f.text)}</p>` + figHTML(c.n, i + 1)]);
       if (w && w.related && w.related.length) secs.push(["kin", "Kin", w.related.map(r => { const x = graph().resolve(r.to); return x ? `<button class="kin" data-node="${esc(x.id)}"><i style="--c:${x.h}"></i><b>${esc(x.title)}</b><span>${esc(r.why)}</span></button>` : ""; }).join("")]);
       // the sheet used to be the only place these lived (David, 2026-10-07: "everything the sheet had moves
-      // onto the page") — the nearest of the ~1,000 core names, same list js/names.js's own pages show.
+      // onto the page") — the nearest of the ~1,000 core names, same list js/names.js's own pages show. A
+      // nearby name that already has a full written article reads naturally here (never "closest of the
+      // 101", David 2026-10-08) rather than as a separate list.
       if (typeof nearestCore === "function") {
         const list = CORE_NAMES || (typeof coreFallback === "function" ? coreFallback() : []);
         const near = nearestCore(tapped || c.h, list, 7).filter(x => x.n.toLowerCase() !== c.n.toLowerCase()).slice(0, 6);
-        if (near.length) secs.push(["nearnames", "Nearest names", `<div class="lk-list">${near.map(x => `<button class="lk-row" data-cp-near="${esc(x.n)}" data-h="${x.h}"><i style="--c:${x.h}"></i><b>${esc(x.n)}</b><span>${closeness(x.de)} · ${pctDiff(x.de)}</span></button>`).join("")}</div>`]);
+        if (near.length) secs.push(["nearnames", "Nearest names", `<div class="lk-list">${near.map(x => `<button class="lk-row" data-cp-near="${esc(x.n)}" data-h="${x.h}"><i style="--c:${x.h}"></i><b>${esc(x.n)}</b><span>${closeness(x.de)} · ${pctDiff(x.de)}${rcHasArticle(x.n) ? " · has its own story" : ""}</span></button>`).join("")}</div>`]);
+      }
+      const coreSelf = (CORE_NAMES || (typeof coreFallback === "function" ? coreFallback() : [])).find(e => e.n.toLowerCase() === c.n.toLowerCase());
+      if (coreSelf && ((coreSelf.also || []).length || (coreSelf.src || []).length)) {
+        secs.push(["names", "Also called", `${(coreSelf.also || []).length ? `<p>${(coreSelf.also || []).map(esc).join(", ")}.</p>` : ""}${rcPassportHTML(coreSelf.src || [])}`]);
       }
       secs.push(["codes", "Codes", `<div class="cp-codes">${codeRows(c.h).map(([k, v]) => `<button class="cp-code-row" data-copy="${esc(v)}"><span>${esc(k)}</span><b class="mono">${esc(v)}</b></button>`).join("")}</div>${codeRows(c.h).some(r => r[0].startsWith("CMYK")) ? `<p class="fine cp-codes-fine">CMYK here is a rough formula, not a print profile: real values depend on the paper and press, so check them in a print workflow with a proof.</p>` : ""}`]);
-      return (w ? "" : `<p class="fine">The full page for ${esc(c.n)} is being written. Its connections below are already live.</p>`) + tocHTML(secs.map(x => [x[0], x[1]])) + secs.map(x => secHTML(x[0], x[1], x[2], false)).join("");
+      return tocHTML(secs.map(x => [x[0], x[1]])) + secs.map(x => secHTML(x[0], x[1], x[2], false)).join("");
     })()}
+    ${typeof wgColorTail === "function" ? wgColorTail(c, w) : ""}
     ${connSection(n)}
     ${w && w.sources ? secHTML("src", "Sources", sourcesHTML(w.sources), false) : ""}
   `, "article cp-page");
   el.querySelector("[data-back]").onclick = xBack;
   wireLinks(el); wireSections(el);
+  if (typeof articleRender === "function") articleRender(routeSlug(c.n), el.querySelector("[data-ar-slot]"), { n: c.n, h: c.h });   // js/article.js (lane L8): draws nothing when data/articles/<slug>.json is missing
   onKey = e => { if (e.key === "Escape") xBack(); };
-  const li = el.querySelector("[data-learnit]"); if (li) li.onclick = () => hmLearnIt(c);
-  el.querySelector("[data-save]").onclick = e => { const on = toggleSave(n.id); e.currentTarget.textContent = on ? "♥" : "♡"; e.currentTarget.classList.toggle("saved", on); };
+  const li = el.querySelector("[data-learnit]"); if (li) li.onclick = () => typeof prQuick === "function" ? prQuick({ seed: c }) : hmLearnIt(c);   // js/practice.js: the instant-deck sheet
+  el.querySelector("[data-save]").onclick = e => {
+    const b = e.currentTarget, want = !b.classList.contains("saved");
+    if (isSaved(n.id) !== want) toggleSave(n.id);
+    if (typeof fvPageSet === "function") fvPageSet(el, c.h, c.n, want);   // js/favs.js: the same heart fills "Your colors"
+    b.textContent = want ? "♥" : "♡"; b.classList.toggle("saved", want);
+  };
   el.querySelector("[data-share]").onclick = () => {
     const url = shareURL("color/" + routeSlug(c.n)), text = `${c.n} · ColorHub`;
     if (navigator.share) navigator.share({ text, url }).catch(() => {});
@@ -636,8 +674,14 @@ function colorPage(n, tapped) {
   // a tap anywhere on a near-name row grows its chip into the next page (js/core.js's morphFrom/runMorph)
   el.querySelectorAll("[data-cp-near]").forEach(b => b.onclick = () => { morphFrom(b.querySelector("i")); openCoreName(b.dataset.h, b.dataset.cpNear); });
   const gi = el.querySelector("[data-glin]"); if (gi) galleryColorRow(gi, c);
-  colorPoems(el.querySelector(".c-poems"), c);
-  if (typeof worldColorRow === "function") worldColorRow(el, n);
+  rpCoverFill(el, c.n, c.h, heroHex, c); rpDrawersWire(el, c.n, heroHex); rpHoldWalk(el, c.n, heroHex);
+  // the Learner Model (js/learner.js) and the ColorSet verbs on the look-alike strip (js/colorset.js)
+  if (typeof learnerLog === "function" && !tapped) learnerLog({ type: "seen", color: c, src: "page" });
+  const csHost = el.querySelector("[data-csacts]");
+  if (csHost && typeof colorSet === "function") csHost.appendChild(csActions(colorSet({ kind: "lookalikes", id: routeSlug(c.n), title: `${c.n} and its look-alikes`, colors: [c, nb, ...likes].filter(Boolean), src: "color/" + routeSlug(c.n) }), { only: ["play", "map"], back: () => colorPage(n) }));
+  colorPoems(el.querySelector(".c-poems"), c, famC);
+  if (typeof worldColorRow === "function") worldColorRow(el, n, famC);
+  if (typeof rcWireOpen === "function") rcWireOpen(el, tapped || c.h);
   el.querySelectorAll("[data-copy]").forEach(b => b.onclick = () => { try { navigator.clipboard.writeText(b.dataset.copy); toast("Copied " + b.dataset.copy); } catch (e) {} });
   return el;   // so growFrom (js/core.js, js/home.js hmOpenColor) can grow this page from the tapped honeycomb bubble
 }
@@ -656,11 +700,12 @@ function wikiPage(n) {
       if (n.stub) return `<p class="fine">This page is being written. Its connections are already live.</p>`;
       const body = n.body || [];
       // pages written with sections use them; older pages get a lead paragraph and a folding "full story"
-      const secs = n.sections && n.sections.length ? n.sections.map((x, i) => ["p" + i, x.title, (Array.isArray(x.text) ? x.text : [x.text]).map(t => `<p>${linkText(t)}</p>`).join("") + (x.img != null ? figHTML(n.id, x.img) : "")])
-        : body.length > 1 ? [["story", "The full story", body.slice(1).map(t => `<p>${linkText(t)}</p>`).join("") + figHTML(n.id, 1)]] : [];
+      const secs = n.sections && n.sections.length ? n.sections.map((x, i) => ["p" + i, x.title, (Array.isArray(x.text) ? x.text : [x.text]).map(t => `<p>${linkText(t)}</p>`).join("") + figHTML(n.id, x.img != null ? x.img : i + 1)])
+        : body.length > 1 ? [["story", "The full story", body.slice(1).map((t, i) => `<p>${linkText(t)}</p>` + figHTML(n.id, i + 1)).join("")]] : [];
       if (n.colors && n.colors.length) secs.push(["colors", "Colors", `<div class="chips-wrap">${n.colors.map(cn => { const x = graph().resolve(cn); return x ? `<button class="pchip" data-node="${esc(x.id)}"><i style="--c:${x.h}"></i>${esc(x.title)}</button>` : ""; }).join("")}</div>`]);
       return (body[0] && !(n.sections && n.sections.length) ? `<p class="lead">${linkText(body[0])}</p>` : "") + tocHTML(secs.map(x => [x[0], x[1]])) + secs.map((x, i) => secHTML(x[0], x[1], x[2], i === 0)).join("");
     })()}
+    ${typeof wgWikiTail === "function" ? wgWikiTail(n) : ""}
     ${connSection(n)}
     ${n.sources ? secHTML("src", "Sources", sourcesHTML(n.sources), false) : ""}
   `, "article");
@@ -677,12 +722,14 @@ function paintingPage(n) {
     <p class="p-dek">${esc(n.artist || "")}${n.place ? ` · ${esc(n.place)}` : ""}</p>
     ${pal.length ? `<div class="palette">${pal.map((p, i) => `<button class="pal" data-pi="${i}" data-swatch="${p.h}" style="--c:${p.h};flex:${Math.max(p.share, .08)}" data-ink="${ink(p.h)}"><span>${Math.round(p.share * 100)}%</span></button>`).join("")}</div>
       <div class="pal-names">${pal.map((p, i) => { const fam = typeof familyOf === "function" && familyOf(p.h); return `<button class="pal-name" data-pi="${i}" data-swatch="${p.h}"><i style="--c:${p.h}"></i><b>${esc(p.name)}</b>${fam ? `<span>${esc(fam.head.n)} family</span>` : ""}<em class="mono">${p.h}</em></button>`; }).join("")}</div>
-      <p class="fine">Tap a swatch to open its page.</p>` : `<p class="fine">This painting's palette is being extracted.</p>`}
+      <p class="fine">Tap a swatch to open its page.</p>${typeof prLearnBtn === "function" ? prLearnBtn(".palette", n.title) : ""}` : `<p class="fine">This painting's palette is being extracted.</p>`}
     ${n.note ? `<p class="p-body">${linkText(n.note)}</p>` : ""}
     ${connSection(n)}
     ${n.commons ? `<section class="srcs"><h3>Image</h3><ul><li><a href="${esc(n.commons)}" target="_blank" rel="noopener">Wikimedia Commons</a> · ${esc(n.license || "Public domain")}</li></ul></section>` : ""}
   `, "article");
   wireArticle(el, n);
+  // L18 H4: the ColorSet verbs for this painting, "On the map" first (js/home.js hmPaintingSet, js/colorset.js csActions)
+  if (pal.length && typeof hmPaintingSet === "function" && typeof csActions === "function") { const fine = el.querySelector(".pal-names + .fine"); if (fine) fine.after(csActions(hmPaintingSet(n), { only: ["map", "learn", "play"], back: () => paintingPage(n) })); }
   // highlight where a palette color sits, using the index map
   const img = el.querySelector("#pimg"), cv = el.querySelector("#pmask");
   let mapData = null;
@@ -709,69 +756,4 @@ function paintingPage(n) {
   }));
 }
 
-// ======================================================================
-// Color of the day: guess its name from four close ones, then read about it
-// ======================================================================
-function daily() {
-  const c = dailyColor(), k = today(), ans = S.daily[k];
-  const decoys = nearestColors(c.h, 3, c.n).map(x => x[0]);
-  const opts = ans ? null : shuffle([c, ...decoys]);
-  const n = colorNode(c), w = n.wiki;
-  const dateStr = new Date(Date.now() - 4 * 3600e3).toLocaleDateString(undefined, { month: "long", day: "numeric" });
-  const el = show(`
-    <header class="deck-top"><button class="icon-btn" data-close aria-label="Close">${ICON.x}</button><span class="eyebrow" style="flex:1;text-align:center">Color of the day · ${esc(dateStr)}</span><span style="width:44px"></span></header>
-    <div class="d-swatch" style="--c:${c.h}" data-ink="${ink(c.h)}"><span class="mono">${c.h}</span>${ans ? `<h1>${esc(c.n)}</h1>` : ""}</div>
-    <div class="d-body" id="dbody"></div>
-  `, "fixed daily");
-  const body = el.querySelector("#dbody");
-  el.querySelector("[data-close]").onclick = () => go(S.tab || "learn");
-  const reveal = ok => {
-    const sw = el.querySelector(".d-swatch");
-    if (!sw.querySelector("h1")) sw.insertAdjacentHTML("beforeend", `<h1>${esc(c.n)}</h1>`);
-    body.innerHTML = `
-      <p class="d-verdict ${ok ? "y" : "n"}">${ok ? "You named it." : `It's ${esc(c.n)}.`}</p>
-      <p class="d-text">${w && w.facets[0] ? linkText(w.facets[0].text) : esc(c.o || c.d || "")}</p>
-      <div class="stack">
-        <button class="btn" data-share>${ICON.share} Share today's color</button>
-        <div class="row2"><button class="btn ghost" data-page>Its page</button><button class="btn ghost" data-web>More like this</button></div>
-      </div>`;
-    wireLinks(body);
-    body.querySelector("[data-share]").onclick = () => shareCard(c, ok, dateStr);
-    body.querySelector("[data-page]").onclick = () => { XSTACK = []; openNode(n); };
-    body.querySelector("[data-web]").onclick = () => closeup(n);
-  };
-  if (ans) return reveal(ans.ok);
-  body.innerHTML = `<p class="d-q">What's this color called?</p><div class="d-opts">${opts.map((o, i) => `<button data-i="${i}">${esc(o.n)}</button>`).join("")}</div>`;
-  body.querySelectorAll("[data-i]").forEach(b => b.onclick = () => {
-    const ok = opts[+b.dataset.i] === c;
-    S.daily[k] = { n: c.n, ok }; save();
-    buzz(ok ? 12 : [10, 40, 10]);
-    b.classList.add(ok ? "right" : "wrong");
-    body.querySelector(`[data-i="${opts.indexOf(c)}"]`).classList.add("right");
-    later(() => reveal(ok), 650);
-  });
-}
-
-// A 1080x1350 card: the color, its name and the date. Shared as an image where the browser allows it.
-function shareCard(c, ok, dateStr) {
-  const W = 1080, H = 1350, cv = document.createElement("canvas"); cv.width = W; cv.height = H;
-  const x = cv.getContext("2d");
-  x.fillStyle = "#121212"; x.fillRect(0, 0, W, H);
-  x.fillStyle = c.h; x.beginPath(); x.roundRect(60, 60, W - 120, 900, 48); x.fill();
-  x.fillStyle = "#F5F4F0"; x.beginPath(); x.roundRect(60, 920, W - 120, 370, [0, 0, 48, 48]); x.fill();
-  x.fillRect(60, 920, W - 120, 60);
-  x.fillStyle = "#66665F"; x.font = "600 30px Geist, system-ui, sans-serif"; x.fillText(`COLOR OF THE DAY · ${dateStr.toUpperCase()}`, 110, 1000);
-  x.fillStyle = "#141414"; x.font = "400 130px 'Instrument Serif', Georgia, serif"; x.fillText(c.n, 104, 1150);
-  x.fillStyle = "#66665F"; x.font = "500 32px 'Geist Mono', monospace"; x.fillText(`${c.h}   ·   ${ok ? "named it" : "learned it"} on ColorHub`, 110, 1230);
-  const text = `Today's color: ${c.n} ${ok ? "(I named it)" : ""} · ColorHub`;
-  const url = shareURL("color/" + routeSlug(c.n));   // the color's own page, with a preview card
-  cv.toBlob(async blob => {
-    const file = new File([blob], `colorhub-${c.n.toLowerCase().replace(/\s+/g, "-")}.png`, { type: "image/png" });
-    try {
-      if (navigator.canShare && navigator.canShare({ files: [file] })) return await navigator.share({ files: [file], text, url });
-      if (navigator.share) return await navigator.share({ text, url });
-    } catch (e) { if (e && e.name === "AbortError") return; }
-    const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = file.name; a.click();
-    toast("Saved the card");
-  }, "image/png");
-}
+// (The color of the day, daily(), is now "Name today's color" in js/colordle.js; its share card is js/sharecard.js.)

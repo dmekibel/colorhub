@@ -27,7 +27,9 @@ const RULES = {
   calmer: (a, b) => a[1] < b[1] - M,
   quieter: (a, b) => a[1] < b[1] - M,
   stronger: (a, b) => a[1] > b[1] + M,
-  brighter: (a, b) => a[1] > b[1] + M || a[0] > b[0] + M,
+  // "brighter" is banned (David/L15 2026-10-08): it means lighter to some readers and more vivid to others. Say lighter/darker or
+  // more vivid/duller, whichever the Lab difference actually is.
+  brighter: () => false,
   "more vivid": (a, b) => a[1] > b[1] + M,
   "more intense": (a, b) => a[1] > b[1] + M,
   richer: (a, b) => a[1] > b[1] + M,
@@ -81,4 +83,10 @@ for (const f of fs.readdirSync(path.join(__dirname, "../js")).filter(f => f.ends
 }
 nameErrors.forEach(f => console.log(`FAIL  js/${f}: names a color outside js/naming.js's nameOf() (LONG_NAMES, nameColor(, or library.json)`));
 console.log(`naming gate: ${nameErrors.length} files name colors outside the one naming system`);
-process.exit(errors.length || nameErrors.length ? 1 : 0);
+
+// Index-alignment gate (tools/check_ids.js): every file keyed by a gallery index must agree with the corpus.
+const idsGate = require("./check_ids.js").checkIds();
+idsGate.warnings.forEach(w => console.log("warn  " + w));
+idsGate.errors.forEach(e => console.log("FAIL  " + e));
+console.log(`ids gate: ${idsGate.N} paintings, ${idsGate.errors.length} files out of step with the corpus`);
+process.exit(errors.length || nameErrors.length || idsGate.errors.length ? 1 : 0);

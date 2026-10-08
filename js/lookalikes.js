@@ -4,8 +4,11 @@
 // difference ("lighter and greener"). Learning a word at its borders, against several neighbors at once, is faster than
 // one pair at a time. Tap a look-alike to see the two side by side.
 
-// The nearest taught names to a color (CIEDE2000), never itself.
+// The nearest names to a color (CIEDE2000), never itself: from all ~1,000 core names in the same family, at least
+// 5% different so every pair can be told apart (js/learnmore.js lxLookalikes). Before that list has loaded (or
+// without that file), the first units and the basics.
 function lookalikes(c, n = 6) {
+  if (typeof lxLookalikes === "function" && typeof lxCore === "function" && lxCore()) return lxLookalikes(c, n);
   const L = lab(c.h);
   return [...BASICS, ...ALL].filter(x => x.n !== c.n).map(x => ({ x, d: de2000(L, x.lab || (x.lab = lab(x.h))) }))
     .sort((a, b) => a.d - b.d).slice(0, n);
@@ -35,8 +38,8 @@ function lookSheet(c) {
     <p class="eyebrow">Look-alikes</p>
     <div class="lk-ring"><div class="lk-mid" style="--c:${c.h}" data-ink="${ink(c.h)}"><b>${esc(c.n)}</b></div>${ring}</div>
     <div class="lk-cmp" id="lkcmp"></div>
-    <div class="lk-list">${near.map((o, i) => `<button class="lk-row" data-lk="${i}"><i style="--c:${o.x.h}"></i><b>${esc(o.x.n)}</b><span>${esc(lookDiff(c, o.x))}</span>${typeof isMine === "function" && o.x.id && isMine(o.x) ? "<em>yours</em>" : ""}</button>`).join("")}</div>
-    <p class="fine">The closest names the lessons teach, by perceived difference (CIEDE2000). Hex values are screen approximations.</p>`);
+    <div class="lk-list">${near.map((o, i) => `<button class="lk-row" data-lk="${i}"><i style="--c:${o.x.h}"></i><b>${esc(o.x.n)}</b><span>${esc(lookDiff(c, o.x))}</span>${typeof isMine === "function" && o.x.id && isMine(S.cards[o.x.id]) ? "<em>yours</em>" : ""}</button>`).join("")}</div>
+    <p class="fine">The closest names in the same family, of about 1,000, by perceived difference (CIEDE2000). Hex values are screen approximations.</p>`);
   sh.classList.add("lk-sheet");
   const cmp = sh.querySelector("#lkcmp");
   const pick = i => {
@@ -54,5 +57,5 @@ document.addEventListener("click", e => {
   // on a flashcard, only after the name is showing (recall before reveal)
   const card = box.closest(".card"); if (card && !card.classList.contains("revealed")) return;
   e.stopPropagation(); e.preventDefault();
-  lookSheet(BYNAME.get(box.dataset.nb.toLowerCase()));
+  lookSheet(BYNAME.get(box.dataset.nb.toLowerCase()) || (typeof lxByName === "function" ? lxByName(box.dataset.nb) : null));
 }, true);

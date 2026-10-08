@@ -1,0 +1,201 @@
+/* Design round 2: the Train and Studio room homes (js/rooms2.js). Everything is r2-prefixed and scoped to .r2.
+   DESIGN-SYSTEM tokens only: radii 4/14/pill, spacing 4·8·12·16·24·32·48, serif speaks and mono only counts,
+   one paper element per screen, opaque controls, press = scale .97 at --dur-0. The room shell, the Rooms button
+   and the safe areas belong to the shell (app.css / polish.css); this file only lays out the content and makes
+   sure the last line clears the Rooms button. */
+
+.r2{--r2-gap:12px;width:100%;min-width:0;padding-bottom:calc(var(--bottom) + 56px + 16px + 48px) !important}
+.r2 .room-head,.r2>.room-head{margin-bottom:var(--s4)}
+
+/* ---------------------------------------------------------------- shared: block heads, rails, text links */
+.r2-sh{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:0 0 var(--s3)}
+.r2-sh .title-3{margin:0}
+.r2-sh .note{font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.r2-blk{margin-top:var(--s6)}
+.r2-text{display:inline-flex;align-items:center;min-height:44px;background:none;border:0;padding:0;color:var(--soft);cursor:pointer;
+  font:italic 400 17px/1 var(--serif);text-decoration:underline;text-decoration-color:rgba(236,232,223,.3);text-underline-offset:4px}
+.r2-fine{margin:var(--s6) 0 0;font:400 13px/1.5 var(--sans);color:var(--faint);max-width:44ch}
+.r2-rail{display:flex;gap:var(--r2-gap);overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scrollbar-width:none;
+  width:calc(100% + 2 * var(--g));min-width:0;contain:inline-size;margin:0 calc(-1 * var(--g));padding:0 var(--g);scroll-padding:0 var(--g);touch-action:pan-x}
+.r2-blk,.r2-hero{min-width:0;max-width:100%}
+.r2-rail::-webkit-scrollbar{display:none}
+.r2-rail>*{scroll-snap-align:start;flex:none}
+
+/* ---------------------------------------------------------------- Train: the icon set */
+.r2-ic{display:grid;place-items:center;background:var(--surface-2);border-radius:var(--r-2);position:relative}
+.r2-ic svg{width:52px;height:52px;overflow:visible;fill:none;stroke:var(--ink);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.r2-ic .a{fill:var(--a)}.r2-ic .b{fill:var(--b)}.r2-ic .c{fill:var(--c)}
+.r2-ic .ab{fill:color-mix(in oklab,var(--a) 66%,var(--b))}.r2-ic .bb{fill:color-mix(in oklab,var(--a) 33%,var(--b))}
+.r2-ic .g{fill:#8C8C88}.r2-ic .ok{stroke:var(--good);stroke-width:2}.r2-ic .ln{stroke:var(--a);stroke-width:2}
+.r2-ic.sm{width:44px;height:44px;flex:none;border-radius:var(--r-1)}
+.r2-ic.sm svg{width:30px;height:30px;stroke-width:1.7}
+
+/* ---------------------------------------------------------------- Train: the games grid (first thing in the room) */
+.r2-games{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s4) var(--r2-gap)}
+.r2-g{display:flex;flex-direction:column;align-items:stretch;min-width:0;padding:0;background:none;border:0;color:var(--ink);text-align:left;cursor:pointer;
+  transition:transform var(--dur-0) ease-out;animation:r2Rise var(--grow) var(--ease-grow) both;animation-delay:calc(min(var(--k,0),12) * 22ms)}
+.r2-g:active{transform:scale(.97)}
+.r2-g .r2-ic{aspect-ratio:16/11;width:100%}
+.r2-g b{margin-top:8px;font:400 18px/1.08 var(--serif);letter-spacing:-.01em;text-wrap:balance;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.r2-g em{margin-top:3px;font:italic 400 14px/1.2 var(--serif);color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* played today: a small paper dot in the icon's corner */
+.r2-g.done .r2-ic::after,.r2-li.done .r2-ic::after{content:"";position:absolute;top:8px;right:8px;width:7px;height:7px;border-radius:50%;background:var(--paper)}
+.r2-li.done .r2-ic::after{top:4px;right:4px;width:6px;height:6px}
+@keyframes r2Rise{from{opacity:0;transform:translateY(8px)}}
+
+/* ---------------------------------------------------------------- Train: today (one paper card) + the check-in banner */
+.r2-todayblk{margin-top:var(--s6);display:flex;flex-direction:column;gap:var(--s3)}
+.r2-today{display:flex;align-items:center;gap:14px;width:100%;min-height:84px;padding:10px 18px 10px 10px;border:0;border-radius:var(--r-2);
+  background:var(--paper);color:var(--paper-ink);text-align:left;cursor:pointer;transition:transform var(--dur-0) ease-out}
+.r2-today:active{transform:scale(.98)}
+.r2-today-pic{position:relative;flex:none;width:64px;height:64px;border-radius:var(--r-1);overflow:hidden;background:var(--paper-line)}
+.r2-today-pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.r2-today-band{position:absolute;left:0;right:0;bottom:0;height:9px;display:flex}
+.r2-today-band.full{top:0;height:auto}
+.r2-today-band i{flex:1;background:var(--c)}
+.r2-loading{animation:r2Pulse 1.6s ease-in-out infinite}
+@keyframes r2Pulse{50%{opacity:.55}}
+.r2-today-t{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.r2-today-t b{font:400 26px/1 var(--serif);letter-spacing:-.015em}
+.r2-today-t b em{font-style:italic}
+.r2-today-t small{font:italic 400 15px/1.25 var(--serif);color:var(--paper-soft)}
+.r2-today-go{flex:none;display:flex;align-items:center;gap:6px;font:400 21px/1 var(--serif)}
+.r2-today-go svg,.r2-today>svg{width:18px;height:18px}
+.r2-today.played{background:var(--surface-2);color:var(--ink)}
+.r2-today.played .r2-today-t small{color:var(--soft)}
+.r2-today.played>svg{color:var(--faint)}
+
+/* ---------------------------------------------------------------- Train: list rows (drills, checks, the banner) */
+.r2-more{margin-top:var(--s6)}
+.r2-more .r2-sh+.r2-list{margin-bottom:var(--s6)}
+.r2-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s2) var(--r2-gap)}
+.r2-li{display:flex;align-items:center;gap:10px;min-width:0;min-height:52px;padding:0;background:none;border:0;color:var(--ink);text-align:left;cursor:pointer;transition:opacity var(--dur-0) ease-out}
+.r2-li:active{opacity:.6}
+.r2-li>span:not(.r2-ic){display:flex;flex-direction:column;min-width:0}
+.r2-li b{font:400 17px/1.08 var(--serif);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.r2-li em{margin-top:2px;font:italic 400 13.5px/1.2 var(--serif);color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.r2-ci-banner{padding:10px 14px 10px 10px;border-radius:var(--r-2);background:var(--surface-2)}
+.r2-ci-banner .r2-ic{background:var(--surface-3)}
+.r2-ci-banner>span:not(.r2-ic){flex:1}
+.r2-ci-banner em{white-space:normal}
+.r2-ci-banner>svg{width:16px;height:16px;color:var(--faint);flex:none}
+
+/* ---------------------------------------------------------------- Train: your eye */
+.r2-eye{display:block;width:100%;margin-top:var(--s6);padding:0;background:none;border:0;color:var(--ink);text-align:left;cursor:pointer;transition:opacity var(--dur-0)}
+.r2-eye:active{opacity:.7}
+.r2-eye-h{display:flex;align-items:baseline;justify-content:space-between}
+.r2-eye-h .title-3{margin:0}.r2-eye-h svg{width:16px;height:16px;color:var(--faint);align-self:center}
+.r2-fams{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:4px;margin-top:var(--s3)}
+.r2-fam{display:flex;flex-direction:column;align-items:center;gap:6px}
+.r2-fam i{width:100%;max-width:30px;aspect-ratio:1;border-radius:50%;background:var(--c)}
+.r2-fam b{font:400 11px/1 var(--mono);color:var(--soft);letter-spacing:0}
+.r2-fam.thin i{opacity:.6}.r2-fam.na i{opacity:.18}.r2-fam.na b{color:var(--faint)}
+.r2-eye-l{display:block;margin-top:var(--s3);font:italic 400 17px/1.3 var(--serif);color:var(--soft);text-wrap:pretty}
+
+/* ---------------------------------------------------------------- Studio: capture (the hero) */
+.r2-hero{display:flex;flex-direction:column}
+.r2-hpic{position:relative;display:block;width:100%;padding:0;border:0;border-radius:var(--r-2);overflow:hidden;background:var(--surface-2);cursor:pointer;
+  aspect-ratio:16/9;max-height:28dvh;transition:transform var(--dur-0) ease-out}
+.r2-hpic:active{transform:scale(.98)}
+.r2-ht{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-top:var(--s4)}
+.r2-ht .title-2{margin:0}.r2-ht .title-2 em{font-style:italic}
+.r2-hn{margin:6px 0 var(--s4);font:italic 400 17px/1.32 var(--serif);color:var(--soft);text-wrap:pretty}
+.r2-cap .btn{margin:0}
+.r2-cap .r2-text{align-self:center;margin-top:4px}
+.r2-vf-img{position:absolute;inset:0;overflow:hidden}
+.r2-vf-blur{position:absolute;inset:-14%;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:1fr 1fr;filter:blur(18px) saturate(1.05)}
+.r2-vf-blur i{background:var(--c)}
+.r2-vf-mid{position:absolute;left:50%;top:50%;width:30%;height:44%;transform:translate(-50%,-50%);border-radius:50%;background:var(--c);filter:blur(16px)}
+.r2-vf-img.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.r2-reticle{position:absolute;left:50%;top:50%;width:58px;height:58px;margin:-29px 0 0 -29px;border-radius:50%;border:2px solid #F3F1EC;box-shadow:0 0 0 1px rgba(0,0,0,.25),inset 0 0 0 1px rgba(0,0,0,.25)}
+.r2-vf-tag{position:absolute;left:50%;top:calc(50% + 40px);transform:translateX(-50%);max-width:80%;padding:6px 12px;border-radius:var(--r-pill);
+  background:var(--c);font:400 17px/1 var(--serif);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 0 0 1.5px #F3F1EC}
+.r2-vf-tag[data-ink="dark"]{color:var(--paper-ink)}.r2-vf-tag[data-ink="light"]{color:#fff}
+
+/* ---------------------------------------------------------------- Studio: Name (one wide row) */
+.r2-wide{display:flex;align-items:center;gap:16px;width:100%;padding:12px 16px 12px 12px;border:0;border-radius:var(--r-2);background:var(--surface-2);color:var(--ink);text-align:left;cursor:pointer;transition:transform var(--dur-0) ease-out}
+.r2-wide:active{transform:scale(.98)}
+.r2-wide>svg{width:16px;height:16px;flex:none;color:var(--faint)}
+.r2-wide-t{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.r2-wide-t b{font:400 22px/1.1 var(--serif)}
+.r2-wide-t em{font:italic 400 15px/1.3 var(--serif);color:var(--soft)}
+.r2-namer{position:relative;flex:none;width:72px;height:72px;display:grid;place-items:center}
+.r2-namer .ring{position:absolute;inset:0;border-radius:50%;-webkit-mask:radial-gradient(circle,transparent 55%,#000 56%);mask:radial-gradient(circle,transparent 55%,#000 56%)}
+.r2-namer i{width:52%;aspect-ratio:1;border-radius:50%;background:var(--c);box-shadow:0 0 0 2px var(--surface-2),0 0 0 3.5px #F3F1EC}
+
+/* ---------------------------------------------------------------- Studio: Make + taste tiles */
+.r2-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s4) var(--r2-gap)}
+.r2-tile{display:flex;flex-direction:column;min-width:0;padding:0;background:none;border:0;color:var(--ink);text-align:left;cursor:pointer;transition:transform var(--dur-0) ease-out}
+.r2-tile:active{transform:scale(.97)}
+.r2-tile.wide2{grid-column:1/-1}
+.r2-pic{position:relative;display:block;width:100%;aspect-ratio:4/3;border-radius:var(--r-2);overflow:hidden;background:var(--surface-2)}
+.r2-tile.wide2 .r2-pic{aspect-ratio:auto;height:132px}
+.r2-tn{margin-top:8px;font:400 20px/1.1 var(--serif)}
+.r2-tm{margin-top:3px;font:italic 400 14.5px/1.25 var(--serif);color:var(--soft);text-wrap:pretty}
+.r2-wheelpic{display:flex;align-items:center;gap:20px;padding:0 20px}
+.r2-mini{position:relative;flex:none;width:104px;height:104px}
+.r2-mini canvas,.r2-mini svg{position:absolute;inset:0;width:100% !important;height:100% !important;border-radius:50%}
+.r2-wheelpal{flex:1;display:flex;height:40px;border-radius:var(--r-1);overflow:hidden}
+.r2-wheelpal i{flex:1;background:var(--c)}
+.r2-harm{display:grid;place-items:center}
+.r2-harm .ring{position:absolute;width:64%;aspect-ratio:1;left:18%;top:50%;transform:translateY(-50%);border-radius:50%;
+  -webkit-mask:radial-gradient(circle,transparent 62%,#000 63%);mask:radial-gradient(circle,transparent 62%,#000 63%);left:50%;transform:translate(-50%,-50%)}
+.r2-harm svg{position:absolute;width:64%;aspect-ratio:1;left:50%;top:50%;transform:translate(-50%,-50%);overflow:visible}
+.r2-harm polygon{fill:none;stroke:#F3F1EC;stroke-width:1.4;stroke-linejoin:round}
+.r2-harm circle{stroke:#F3F1EC;stroke-width:1.6}
+.r2-albers{display:grid;grid-template-columns:1fr 1fr}
+.r2-albers>span{display:grid;place-items:center;background:var(--g)}
+.r2-albers b{width:38%;aspect-ratio:1;background:var(--c)}
+.r2-duel{display:flex;align-items:center;justify-content:center;gap:8px}
+.r2-duel>i{width:30%;height:66%;border-radius:var(--r-1);background:var(--c)}
+.r2-duel>i:first-child{transform:rotate(-5deg)}.r2-duel>i:last-child{transform:rotate(5deg)}
+.r2-duel>i.one{width:50%;transform:none;border-radius:50%;height:auto;aspect-ratio:1}
+.r2-duel-pal>i{display:flex;flex-direction:column;overflow:hidden;background:none}
+.r2-duel-pal>i b{flex:1;background:var(--c)}
+.r2-taste{margin-top:var(--s5)}
+
+/* ---------------------------------------------------------------- Studio: Yours */
+.r2-phs{margin-bottom:var(--s4)}
+.r2-ph,.r2-ph-wait{width:128px;display:flex;flex-direction:column;padding:0;background:none;border:0;color:var(--ink);text-align:left;cursor:pointer;transition:transform var(--dur-0) ease-out}
+.r2-ph:active{transform:scale(.97)}
+.r2-ph-wait{height:166px;border-radius:var(--r-2);background:var(--surface-2);animation:r2Pulse 1.6s ease-in-out infinite}
+.r2-ph-img{position:relative;display:block;width:100%;aspect-ratio:4/5;border-radius:var(--r-2) var(--r-2) 0 0;overflow:hidden;background:var(--surface-2)}
+.r2-ph-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.r2-ph-band{display:flex;height:10px;border-radius:0 0 var(--r-1) var(--r-1);overflow:hidden}
+.r2-ph-band i{background:var(--c)}
+.r2-ph small{margin-top:6px;font:italic 400 14px/1.2 var(--serif);color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.r2-empty{display:flex;flex-direction:column;gap:6px;padding:var(--s2) 0 var(--s5)}
+.r2-empty[hidden]{display:none}
+.r2-empty .title-3{margin:0}
+.r2-empty span{font:400 14px/1.5 var(--sans);color:var(--soft);max-width:36ch}
+.r2-pals{display:flex;flex-direction:column}
+.r2-pal{display:flex;align-items:center;gap:14px;min-height:60px;padding:8px 0;background:none;border:0;border-top:1px solid var(--rule);color:var(--ink);text-align:left;cursor:pointer;transition:opacity var(--dur-0)}
+.r2-pal:active{opacity:.6}
+.r2-pal-s{flex:none;display:flex;width:44%;max-width:180px;height:36px;border-radius:var(--r-1);overflow:hidden}
+.r2-pal-s i{flex:1;background:var(--c)}
+.r2-pal-t{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.r2-pal-t b{font:400 19px/1.1 var(--serif);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.r2-pal-t em{font:italic 400 14px/1.2 var(--serif);color:var(--soft)}
+.r2-palmore[hidden]{display:none}
+.r2-yours .fv-st-row{margin-top:var(--s2)}
+.r2-yours .fv-st-row small{font:italic 400 15px/1.25 var(--serif);color:var(--soft)}
+.r2-export{margin-top:0}
+.r2-ex-t{flex:1;display:flex;flex-direction:column;gap:3px}
+.r2-ex-t b{font:400 22px/1.1 var(--serif)}
+.r2-ex-t em{font:italic 400 15px/1.2 var(--serif);color:var(--soft)}
+.r2-ex-sheet .r2-ex-item{display:flex;align-items:center;gap:14px}
+.r2-ex-sheet .r2-pal-s{width:120px}
+
+/* ---------------------------------------------------------------- small and short screens */
+@media (max-width:359px){
+  .r2{--r2-gap:10px}
+  .r2-g b{font-size:16px}.r2-g em{font-size:13px}
+  .r2-ic svg{width:42px;height:42px}
+  .r2-list{grid-template-columns:1fr}
+  .r2-today-t b{font-size:23px}.r2-today-go{font-size:19px}
+  .r2-fam b{font-size:9.5px}
+  .r2-wheelpic{gap:14px;padding:0 14px}.r2-mini{width:92px;height:92px}
+}
+@media (min-width:430px){ .r2-g .r2-ic{aspect-ratio:3/2} .r2-g .r2-ic svg{width:58px;height:58px} }
+@media (prefers-reduced-motion:reduce){ .r2-g{animation:none} .r2-loading,.r2-ph-wait{animation:none} }

@@ -100,7 +100,7 @@ function gmListNodes(kind) {
   if (kind === "essays") return G.essays.map(e => gmNode("gm:essay:" + e.id));
   return G.gems.map(g => gmNode("gm:gem:" + g.id));
 }
-function gmFallback() { S.lens = "world"; go("explore"); }
+function gmFallback() { xToOrigin(); }   // where the trail started (js/explore.js), never a guessed room
 function gmListPage(kind, opts = {}) {
   if (!window.GEMS) return gmFallback();
   gmBuildNodes();
@@ -122,6 +122,9 @@ function gmListPage(kind, opts = {}) {
 // Two kinds of hit: a color this gem actually gave its name to (data/gems.js's own `colors` list), and a
 // color that simply sits close (by CIEDE2000) to one of the gem's typical palette shades — the same
 // proximity trick js/world.js's worldColorRow uses for Fashion's "In fashion" row.
+// ΔE cap widened from 10 to 15 (David, 2026-10-08: "a random color shouldn't land on an almost empty page") —
+// still a real match (about the same gap the app calls "close" elsewhere, js/graph.js's closeness()), just not
+// so tight that only the ~101 taught colors ever hit one of the ~30 gems.
 function gmRowHits(c) {
   if (!window.GEMS) return [];
   const hits = [];
@@ -130,20 +133,21 @@ function gmRowHits(c) {
     const named = (gm.colors || []).some(n => n.toLowerCase() === c.n.toLowerCase());
     let best = null;
     (gm.palette || []).forEach(([h]) => { const d = de2000(c.h, h); if (!best || d < best.d) best = { h, d }; });
-    if (named || (best && best.d < 10)) hits.push({ id, title: gm.title, h: best ? best.h : c.h, named, d: best ? best.d : 0 });
+    if (named || (best && best.d < 15)) hits.push({ id, title: gm.title, h: best ? best.h : c.h, named, d: best ? best.d : 0 });
   });
   return hits.sort((a, b) => (a.named === b.named ? a.d - b.d : a.named ? -1 : 1)).slice(0, 6);
 }
-function gmRowHTML(c) {
-  const hits = gmRowHits(c);
+function gmRowHTML(c, famC) {
+  let hits = gmRowHits(c), note = "";
+  if (!hits.length && famC && famC.n.toLowerCase() !== c.n.toLowerCase()) { hits = gmRowHits(famC); if (hits.length) note = `<p class="fine">Nothing of ${esc(c.n.toLowerCase())}'s own; its nearest well-covered match, ${esc(famC.n)}, does.</p>`; }
   if (!hits.length) return "";
-  return `<section class="arch-row gm-row"><h3>In gems</h3>${hits.map(h => `<button class="kin" data-to="${esc(h.id)}"><i style="--c:${h.h}"></i><b>${esc(h.title)}</b><span>${h.named ? "Named after this color" : "A close match to one of its shades"}</span></button>`).join("")}</section>`;
+  return `<section class="arch-row gm-row"><h3>In gems</h3>${note}${hits.map(h => `<button class="kin" data-to="${esc(h.id)}"><i style="--c:${h.h}"></i><b>${esc(h.title)}</b><span>${h.named ? "Named after this color" : "A close match to one of its shades"}</span></button>`).join("")}</section>`;
 }
-function gmRow(c) {
+function gmRow(c, famC) {
   const id = "gm-row-" + Math.random().toString(36).slice(2, 8);
   gmWhen(() => requestAnimationFrame(() => {
     const box = document.getElementById(id); if (!box) return;
-    box.innerHTML = gmRowHTML(c);
+    box.innerHTML = gmRowHTML(c, famC);
     wireLinks(box);
   }));
   return `<div class="gm-rows" id="${id}"></div>`;

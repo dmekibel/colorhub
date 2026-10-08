@@ -75,10 +75,10 @@ function phCaptureAndOpen(canvas, from) {
 // the photo, and use xStep() for its own Back instead of always landing on the Studio tab.
 function photoPage(id, push = true) {
   phGet(id).then(rec => {
-    if (!rec) { toast("That photo isn't here anymore"); return go(xFallbackTab()); }
+    if (!rec) { toast("That photo isn't here anymore"); return xToOrigin(); }
     if (push) XSTACK.push("ph:" + id);
     phOpenRecord(id, rec);
-  }).catch(() => { toast("Photos aren't available here"); go(xFallbackTab()); });
+  }).catch(() => { toast("Photos aren't available here"); xToOrigin(); });
 }
 // the actual renderer (what router.js gives an address): kept separate from photoPage so going back to an
 // already-fetched record (xStep's "ph:" case) doesn't need to touch IndexedDB again.
@@ -91,6 +91,9 @@ function phRename(id, title) {
   return phGet(id).then(rec => { if (!rec) return; rec.title = (title || "").trim(); return phSave(rec); }).catch(() => {});
 }
 function phDeleteConfirm(id, after) {
+  // the menu family's confirm (js/you.js mnConfirm, design round 2); the old sheet below is the fallback
+  if (typeof mnConfirm === "function") return mnConfirm({ title: "Delete this photo?", body: "Its palettes go with it. This can't be undone.", yes: "Delete photo", no: "Keep it", danger: true })
+    .then(yes => { if (yes) phDelete(id).then(() => { phForgetURL(id); toast("Photo deleted"); after(); }).catch(() => toast("Couldn't delete it")); });
   const { sh, close } = sheet(`<div class="pk-hero" data-ink="light" style="--c:#3A3732"><h2>Delete this photo?</h2><small>Its palettes go with it. This can't be undone.</small></div>
     <div class="sw-acts"><button class="item" data-yes style="color:#D9664F">Delete photo</button><button class="item" data-no>Keep it</button></div>`);
   sh.querySelector("[data-no]").onclick = close;

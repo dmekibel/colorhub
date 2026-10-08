@@ -181,20 +181,32 @@ function psgForColor(name, n = 4) {
   scored.forEach(x => { if (out.length < n && !seen.has(x.p.author)) { seen.add(x.p.author); out.push(x); } });
   return out;
 }
-function inBooksRow(c) {
-  const hits = psgForColor(c.n);
+// A family fallback (David, 2026-10-08: no almost-empty pages): most passages are matched against one of the
+// app's own taught colors, so an untaught library name usually has nothing of its own -- retry with its
+// family head and say so, rather than quietly showing nothing.
+function inBooksRow(c, famC) {
+  let hits = psgForColor(c.n), matchName = c.n, note = "";
+  if (!hits.length && famC && famC.n.toLowerCase() !== c.n.toLowerCase()) {
+    const famHits = psgForColor(famC.n);
+    if (famHits.length) { hits = famHits; matchName = famC.n; note = `<p class="fine">Nothing of ${esc(c.n.toLowerCase())}'s own; its nearest well-covered match, ${esc(famC.n)}, does.</p>`; }
+  }
   if (!hits.length) return "";
-  return `<section class="arch-row"><h3>In books</h3>${hits.map(({ p, ms }) => {
+  return `<section class="arch-row"><h3>In books</h3>${note}${hits.map(({ p, ms }) => {
     const ex = psgExcerpt(p, ms[0], 200, true);
     return `<button class="arch-quote" data-arch="psg:${esc(p.id)}"><span class="psg-ex">${ex.html}</span><small>${esc(p.author)}, <i>${esc(p.work)}</i></small></button>`;
   }).join("")}</section>`;
 }
-// One hook for color pages: draws "In books" (and "In films", when js/films.js is loaded) once the data is in.
-function archiveRows(c) {
+// One hook for color pages: draws "In books" (kind "books", the default and legacy combined call) or "In
+// films" (kind "films", pulled out separately so js/richcolor.js can place it under "Found in the world"
+// instead of "In words") once the data is in. famC: the color's family head, for the fallback above.
+function archiveRows(c, kind, famC) {
   const id = "arch-" + Math.random().toString(36).slice(2, 8);
   archWhen(() => requestAnimationFrame(() => {
     const box = document.getElementById(id); if (!box) return;
-    box.innerHTML = inBooksRow(c) + (typeof inFilmsRow === "function" ? inFilmsRow(c) : "");
+    if (kind === "films") box.innerHTML = typeof inFilmsRow === "function" ? inFilmsRow(c, famC) : "";
+    else if (kind === "books") box.innerHTML = inBooksRow(c, famC);
+    else box.innerHTML = inBooksRow(c, famC) + (typeof inFilmsRow === "function" ? inFilmsRow(c, famC) : "");
+    if (kind !== "books" && typeof lkRowInto === "function") lkRowInto(box, c);   // js/looks.js: "In looks"
   }));
   return `<div class="arch-rows" id="${id}"></div>`;
 }

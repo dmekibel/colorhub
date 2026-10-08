@@ -107,7 +107,7 @@ const csNeedsLib = st => st.base === "all" || (st.sources && st.sources.length >
 function csApply(st) { return filterColors(csBase(st.base), st); }
 const csSet = (id, title, group, o) => ({ id, title, group, state: { ...CS_FULL, ...o }, get() { return csApply(this.state); } });
 const COLOR_SETS = [
-  csSet("101", "Lesson colors", "Collections", { base: "101" }),
+  csSet("101", "On your path", "Collections", { base: "101" }),
   csSet("all", "Every name", "Collections", {}),
   csSet("spread", "Even 500", "Collections", { n: 500 }),
   csSet("yours", "Yours", "Collections", { base: "yours" }),
@@ -365,7 +365,7 @@ function colorExplorer(opts = {}) {
     const { sh, close } = sheet(`<div class="cx-sh">
       <div class="cx-sh-head"><h3>What to show</h3><button class="cx-link" data-reset>Reset</button></div>
       <div class="cx-sec"><b>Which colors</b></div>
-      ${row("101", "Lesson colors", "The words the lessons teach now", pal({ which: "101" }, 5), 101)}
+      ${row("101", "On your path", "The words your path teaches now", pal({ which: "101" }, 5), 101)}
       ${LONG_NAMES ? row("all", "Every name", "The whole name library", lib, csItems().length.toLocaleString()) : ""}
       ${known ? row("yours", "The ones you know", "Every name you have learned, checked or not yet", pal({ which: "yours" }, 5), known) : ""}
       ${LONG_NAMES ? `<div class="cx-opt cx-spread${ch.which === "spread" && !tuned ? " on" : ""}"><span class="cx-opt-t"><b>An even spread</b><small>The widest range in fewer colors</small></span>
@@ -444,7 +444,7 @@ function colorExplorer(opts = {}) {
   }
 
   // ---- wiring ----
-  const back = () => { CX_BACK = null; if (tune) tune.close(); persist(true); (opts.back || (() => go("explore")))(); };
+  const back = () => { CX_BACK = null; if (tune) tune.close(); persist(true); (opts.back || xToOrigin)(); };
   $("[data-back]").onclick = back;
   title.onclick = () => chooser();
   $("[data-tune]").onclick = () => fineTune();

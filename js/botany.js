@@ -120,7 +120,7 @@ function btListNodes(kind) {
   if (kind === "dyes") return B.dyes.map(d => btNode("bt:dye:" + d.id));
   return B.essays.map(e => btNode("bt:essay:" + e.id));
 }
-function btFallback() { S.lens = "world"; go("explore"); }
+function btFallback() { xToOrigin(); }   // where the trail started (js/explore.js), never a guessed room
 function btListPage(kind, opts = {}) {
   if (!window.BOTANY) return btFallback();
   btBuildNodes();
@@ -143,10 +143,14 @@ function btDyeForPlant(text) {
   const t = text.toLowerCase();
   return (window.BOTANY.dyes || []).find(d => t.includes(d.id.split("-")[0]));
 }
-function btRowHTML(c) {
-  const entries = ((window.BOTANY || {}).byColor || {})[c.n] || [];
+function btRowHTML(c, famC) {
+  let entries = ((window.BOTANY || {}).byColor || {})[c.n] || [], note = "", nameFor = c.n;
+  if (!entries.length && famC && famC.n.toLowerCase() !== c.n.toLowerCase()) {
+    const famEntries = ((window.BOTANY || {}).byColor || {})[famC.n] || [];
+    if (famEntries.length) { entries = famEntries; nameFor = famC.n; note = `<p class="fine">Nothing of ${esc(c.n.toLowerCase())}'s own; its nearest well-covered match, ${esc(famC.n)}, does.</p>`; }
+  }
   if (!entries.length) return "";
-  const plantId = btPlantByColor.get(c.n);
+  const plantId = btPlantByColor.get(nameFor);
   const rows = entries.map(e => {
     if (e.link === "named" && plantId) {
       const n = btNode(plantId), sw = n.swatches[0];
@@ -158,13 +162,13 @@ function btRowHTML(c) {
     }
     return `<p class="bt-fact"><b>${esc(btLinkLabel[e.link] || "Also")}:</b> ${esc(e.plant)} — ${esc(e.detail)}</p>`;
   }).join("");
-  return `<section class="arch-row bt-row"><h3>In nature</h3>${rows}</section>`;
+  return `<section class="arch-row bt-row"><h3>In nature</h3>${note}${rows}</section>`;
 }
-function btRow(c) {
+function btRow(c, famC) {
   const id = "bt-row-" + Math.random().toString(36).slice(2, 8);
   btWhen(() => requestAnimationFrame(() => {
     const box = document.getElementById(id); if (!box) return;
-    box.innerHTML = btRowHTML(c);
+    box.innerHTML = btRowHTML(c, famC);
     wireLinks(box);
   }));
   return `<div class="bt-rows" id="${id}"></div>`;

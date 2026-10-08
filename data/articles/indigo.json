@@ -1,0 +1,365 @@
+{
+ "slug": "indigo",
+ "name": "Indigo",
+ "hex": "#3D2B8E",
+ "names": [
+  "Indigo",
+  "Indigo Dye",
+  "Ai-iro"
+ ],
+ "tier": "traditional",
+ "depth": "long",
+ "lede": "Indigo is two colors with one name: the deep, greyed blue of the oldest blue dye on earth, and the violet-blue band Newton squeezed into the rainbow. In Japan the dye is *ai*, and its blues have their own names.",
+ "sections": [
+  {
+   "id": "two-indigos",
+   "title": "Two indigos",
+   "body": "The swatch at the top of this page is the indigo of color charts and the rainbow, a strong violet-blue [16]. The dye called indigo is something else: a dark, slightly grey blue, closer to [[indigo-dye]] or the Japanese [[ai-iro]], about fifteen units away [16]. The split goes back to Isaac Newton, who first named five spectral colors, then added orange and indigo to make seven, probably to match the seven notes of the musical scale [8][9]. Indigo was then mainly a dyer's word, and what Newton called blue and indigo we would now call something like cyan and blue [10]. Many modern lists of the spectrum drop indigo altogether [11].\n\nThis page follows the dye, because that is where nearly all of indigo's history lives."
+  },
+  {
+   "id": "name",
+   "title": "From India",
+   "body": "*Indigo* comes from the Greek *indikon*, a substance from India [1][2]. The older name, Sanskrit *nila* for dark blue, travelled both ways: into Arabic as *an-nil*, into Spanish as *añil* and on to the Americas [1]. The chemical aniline, raw material of the coal-tar dye industry, is named after indigo too [1].\n\nThe Romans knew it came from India but thought it was a stone, because it arrived as hard dark cakes of dried paste [3]. Pliny described it as black as a powder and a marvellous purple-blue when diluted, and gave a test for fakes: burn it, and the real thing gives a purple flame [4]."
+  },
+  {
+   "id": "chemistry",
+   "title": "One blue, many plants",
+   "body": "Indigo is one molecule made by many plants: the tropical *Indigofera*, European woad, Japanese *Polygonum* and others all carry the same colorless precursor, and the blue they give cannot be told apart, even by specialists [5]. Natural and synthetic indigo are the same molecule [5][6]. The difference people argue about is impurities, such as the reddish indirubin, which some dyers say give natural indigo extra depth [6].\n\nIndigo needs no mordant, but it does need chemistry. In the vat it is reduced to a soluble, almost colorless form; cloth lifted out is yellowish green and turns blue in the air in a few minutes as the dye re-forms on the fiber [7][12]. Deep blues come from many dips, and the core of each thread stays undyed, which is why indigo fades but never changes hue, and why worn denim looks the way it does [13]."
+  },
+  {
+   "id": "history",
+   "title": "The devil's dye",
+   "body": "Blue stripes appear in Egyptian mummy cloth from about 2400 BC, and a Babylonian tablet of the seventh century BC gives recipes for wool dyed the color of lapis [14]. Indigo was probably cultivated in the Indus Valley more than 5,000 years ago [2].\n\nIn Europe, where woad was a protected local industry, imported indigo was fought with laws [15]. German authorities banned it as the devil's dye from 1577; France decreed death for using it in 1609; England called it food for the devil and banned it until 1660 [15]. The woad lobby claimed it was corrosive or poisonous, which was propaganda, not chemistry [12][15]. France finally legalized it in 1737 [3].\n\nIndigo's wealth had a brutal source. Colonial indigo was grown by enslaved people in the Caribbean and South Carolina, and in Bengal planters forced peasants to grow it, provoking the Blue Mutiny of 1860; Gandhi's first act of civil disobedience in India, in 1917, supported indigo farmers [2][17]. The trade collapsed after BASF launched synthetic indigo in 1897, having spent about eighteen million gold marks developing it [6][18]. India had 2,800 large indigo factories in the 1880s and 121 by 1911 [6].\n\nEighteenth-century English dyers named thirteen indigo shades, from milk-blue and pearl-blue to infernal or navy blue; [[royal-blue]] and [[navy]] both started on that ladder [19][2]."
+  },
+  {
+   "id": "japan",
+   "title": "In Japan: ai-iro",
+   "body": "In Japan indigo is *ai*, and the plant is not *Indigofera* but *Polygonum tinctorium*, which reached Japan from China sometime after the fifth century [20][21]. Its leaves are not fermented fresh but composted for about three months into *sukumo*, a dark mass with about five per cent indigo against woad's less than one [22]. Farmers liken the work to nursing a baby: the straw mats are its bedcovers, and rice wine is offered to the indigo god Aizen Shin each time the steaming heap is turned [22]. The Awa domain, now Tokushima on Shikoku, grew rich on it in the Edo period, and indigo still covered close to 40,000 acres there in 1903; today government support keeps about 50 acres in cultivation [22].\n\nFrom the eighteenth century indigo-dyed cotton was standard country clothing, and nearly all the country people in Hiroshige's and Hokusai's prints wear it [23]. The spoken word *ai* means both indigo and love [24]. Dyers call the froth on a healthy vat its flowers [24], and Japanese aesthetics prize indigo that has faded with age [25].\n\nJapanese dyers name their blues by depth, that is, by how many times the cloth went into the vat [19][21]. A single dip gives *mizu-iro*, water color; ten to twenty dips give the near-black *kon* and *kachi-iro* [21]. Our library holds several of these: [[aijiro]] (indigo white), [[kamenozoki]] (literally peering into the jar), [[mizu-iro]], [[hanada]], [[ai-iro]], [[kon]] and [[kachi-iro]], plus greyed mixtures such as [[ainezumi]], mouse-grey indigo [16]. The later Japanese blue, Prussian blue, is told on its own page; see [[prussian-blue]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The two indigos behave differently in paintings. In our archive of 23,531 works, the violet-blue swatch at the top of this page covers at least five per cent of a canvas exactly once, in Louis Welden Hawkins's *The Eiffel Tower* of about 1900 [26]. The dye's color, Indigo Dye, appears in 34 works, and in 71 per cent of them it is among the darkest colors on the canvas, a shadow color [26]. As always, these are photographs of varnished paintings, and a color match is not a pigment test [26].\n\nIn Google Books, *indigo* is printed most around 1830 and stays high until the 1860s, the decades of the great Bengal trade, before falling away as synthetic indigo took over [27]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "India (Greek indikon)",
+   "first_recorded": "classical Greek and Latin (indikon, indicum)",
+   "source": "Balfour-Paul, Indigo, p. 21"
+  },
+  "aka": [
+   "indigo blue",
+   "anil",
+   "nil"
+  ],
+  "siblings": [
+   "indigo-dye",
+   "ai-iro",
+   "indigo-blue"
+  ],
+  "parent": null,
+  "children": [
+   "dark-indigo",
+   "light-indigo",
+   "persian-indigo"
+  ],
+  "disambiguation": [
+   {
+    "slug": "indigo-dye",
+    "gloss": "the color of the actual dye: dark, greyed blue (as is Ai-iro)"
+   },
+   {
+    "slug": "indigo-blue",
+    "gloss": "Werner and Ridgway's mid greyish blue, from old color plates"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "ai, ai-iro (藍色)"
+   },
+   {
+    "lang": "sa",
+    "name": "nila"
+   },
+   {
+    "lang": "ar",
+    "name": "an-nil"
+   },
+   {
+    "lang": "es",
+    "name": "añil"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,531 paintings, as photographed",
+  "swatch_presence": {
+   "hex": "#3D2B8E",
+   "n_present": 1
+  },
+  "dye_presence": {
+   "hex": "#00416A",
+   "n_present": 34,
+   "shadow_share": 0.71
+  },
+  "de_swatch_to_dye": 15.1,
+  "ngram": {
+   "peak": 1830,
+   "rel_1860": 0.93,
+   "rel_1940": 0.2
+  },
+  "japanese_shades": [
+   "aijiro",
+   "kamenozoki",
+   "mizu-iro",
+   "hanada",
+   "ai-iro",
+   "kon",
+   "kachi-iro",
+   "ainezumi"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 21",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 9 (\"Indigo\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Blue: The History of a Color, ch. 7 and ch. 10",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pliny, Natural History, bk 35, ch. 27 (Bostock & Riley, 1857; public domain)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, pp. 22, 99",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, pp. 92-94, 142",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 17",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 232",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 2",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Westland, Universal Principles of Color, ch. 74",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Eckstut, What Is Color?, ch. 9",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Pastoureau, Blue: The History of a Color, ch. 8",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 127",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, pp. 23, 27",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, pp. 66-67",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json, incl. Japanese traditional names), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 70",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 18,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, pp. 194-195",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 19,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 188",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 20,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, pp. 36, 104",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 21,
+   "kind": "web",
+   "cite": "JAANUS (Japanese Architecture and Art Net Users System), \"ai\"",
+   "loc_kind": null,
+   "url": "https://projects.mcah.columbia.edu/jaanus/record/ai"
+  },
+  {
+   "n": 22,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, pp. 116-117",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 23,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 207",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 24,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, pp. 127, 131",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 25,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 19",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 26,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,531 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 27,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why does indigo-dyed cloth come out of the vat yellowish green?",
+   "choices": [
+    "The dye is in a reduced form that turns blue only when it meets air",
+    "It is dyed yellow first",
+    "Indigo is green until washed",
+    "The mordant is yellow"
+   ],
+   "answer": "The dye is in a reduced form that turns blue only when it meets air",
+   "kind": "pick"
+  },
+  {
+   "q": "In Japanese indigo dyeing, what mainly decides whether a blue is a pale mizu-iro or a near-black kon?",
+   "choices": [
+    "How many times the cloth is dipped",
+    "Which plant is used",
+    "The season",
+    "Adding black dye"
+   ],
+   "answer": "How many times the cloth is dipped",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: natural indigo and synthetic indigo are the same blue molecule.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The rainbow's indigo and the dyer's indigo are fifteen units apart.",
+  "In Japanese, ai means both indigo and love.",
+  "Look at a pair of worn jeans: the white thread showing through is indigo's whole chemistry."
+ ],
+ "words": 992,
+ "status": "pilot",
+ "checked": {
+  "by": "L7 self-check (sentence-to-card trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "Title is the English name per David's rule; Japanese names in a section and aside.",
+   "Swatch (#3D2B8E, violet-blue) is not the dye color; explained in the first section.",
+   "Indigo 'corrosive/poisonous' framed as propaganda; natural vs synthetic: same molecule, impurity debate stated.",
+   "Dip-count shade names from JAANUS (web), not the books."
+  ]
+ }
+}

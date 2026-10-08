@@ -148,6 +148,11 @@ function loadLongNames() {
   return LONG_LOADING || (LONG_LOADING = fetch("data/library.json").then(r => r.ok ? r.json() : []).catch(() => [])
     .then(list => (LONG_NAMES = list.filter(x => !x.crude && /^#[0-9A-Fa-f]{6}$/.test(x.h)).map(x => ({ ...x, lab: lab(x.h) })))));
 }
+// A library-only entry by slug or exact name (tools/check.js's naming gate keeps LONG_NAMES itself out of
+// every file but this one and js/colorsets.js/js/home.js/js/honey.js — js/names.js's namesShot test hook
+// calls this instead of touching LONG_NAMES directly, for a library name with no #/name/<slug> route of its
+// own, David 2026-10-08).
+const findLongName = slug => (LONG_NAMES || []).find(e => routeSlug(e.n) === slug) || (LONG_NAMES || []).find(e => e.n.toLowerCase() === slug.toLowerCase()) || null;
 function nameColor(hex, n = 5) {
   const L = lab(hex);
   const mine = EVERY().map(x => ({ n: x.n, h: x.h, mine: true, d: de2000(L, x.lab || (x.lab = lab(x.h))) }));
@@ -155,7 +160,7 @@ function nameColor(hex, n = 5) {
   return { mine: mine.sort((a, b) => a.d - b.d).slice(0, n), long: long.sort((a, b) => a.d - b.d).slice(0, n) };
 }
 // Where a library name comes from, in a few words
-const SRC_LABEL = { app: "ColorHub", css: "Web color", wiki: "Common name", xkcd: "xkcd survey", ridgway: "Ridgway, 1912", werner: "Werner, 1821", jp: "Japanese traditional", ral: "RAL paint", "iscc-nbs": "ISCC-NBS 1955" };
+const SRC_LABEL = { app: "ColorHub", css: "Web color", wiki: "Common name", xkcd: "xkcd survey", ridgway: "Ridgway, 1912", werner: "Werner, 1821", jp: "Japanese traditional", ral: "RAL paint", "iscc-nbs": "ISCC-NBS 1955", "maerz-paul": "Maerz & Paul, 1930" };
 const srcLine = x => x.jp ? `${x.jp.kanji} · ${x.jp.meaning}` : (x.src || []).filter(s => s !== "app").slice(0, 2).map(s => SRC_LABEL[s] || s).join(" · ");
 // ROADMAP §17 job #1: honest everywhere, and the same honest everywhere — these are js/naming.js's own
 // VERY_CLOSE_DE/NEAR_DE thresholds (a ΔE of 3.7 used to read "very close" here because this had its own,

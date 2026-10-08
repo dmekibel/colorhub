@@ -5,13 +5,18 @@
 // Screenshot mode for design review: index.html#shot=<screen> renders one screen with sample progress
 // (in memory only; nothing is saved). Used by tools/shots.sh. It waits for the whole wiki first.
 const SHOT = location.hash.startsWith("#shot=") ? decodeURIComponent(location.hash.slice(6)) : null;
-if (SHOT) loadWiki().then(() => shot(SHOT));
-else {
+// Start once every script is in: js/artwiki.js, article.js, looks.js and friends load after this file, and a
+// first-load address like #/painter/<slug> or #/hub/<id> fell back to Home without them.
+function bootStart() {
+  if (typeof routeWrapAll === "function") routeWrapAll();   // js/router.js: wrap screens from scripts that loaded after it
+  if (SHOT) return loadWiki().then(() => shot(SHOT));
   ROUTE_REPLACE = true;   // the first screen takes over the page's own history entry
   // Home (the honeycomb) is the floor of the app (DESIGN-SYSTEM.md §2) and the default landing place, not a tab.
   if (!openRoute(location.hash, true)) S.placed ? hmHome() : welcome();
   prefetchWiki();
 }
+if (document.readyState === "loading") addEventListener("DOMContentLoaded", bootStart, { once: true });
+else bootStart();
 
 function shot(name) {
   S = Object.assign(fresh(), { placed: { tier: 2, at: today() }, done: { "t2-blues": today() }, profileAsked: true });
@@ -68,6 +73,7 @@ function shot(name) {
       }); }
     // the Learn it mini-lesson (js/learnit.js): learnit:<meet|recall|tell|done>
     case "learnit": return hmLearnitShot(arg || "meet");
+    case "lx": return lxShot(arg || "room");   // js/learnmore.js: lx:<room|unit|meet|deck|learnit|learnitpage|edge>
     case "gym": return go("gym");
     case "studio": return go("studio");
     // a Studio photo palette, for design review (ROADMAP §17 job #1 screenshots): a synthetic canvas run
@@ -98,11 +104,13 @@ function shot(name) {
     case "gymres": return stationDone({ k: arg || "neutral", est: 3.2, before: 4.1, pb: true, best: 3.2 });
     case "closeup": return closeup(g().nodes.get(arg || "c:Cobalt"));
     case "name": return namesShot(arg);   // js/names.js: name:<slug>[@scrolldown], e.g. name:ecru or name:seafoam-green@700
+    case "tapped": return (CORE_NAMES ? Promise.resolve() : loadCoreNames()).then(() => { XSTACK = []; openTappedColor(arg || "#967989"); });   // an in-between hex, never an exact name: tapped:<hex>
     // a honeycomb tap on a non-101 bubble, from a bigger stage (js/home.js hmOpenName): hmname[:stage]
     case "hmname": { S.hm = S.hm || {}; S.hm.src = "stage:" + (arg || "400"); return loadCoreNames().then(() => { const item = hmStageItems(+(arg || 400)).find(it => !it.c); return item ? hmOpenName(item) : hmHome(); }); }
     case "page": return openNode(g().nodes.get(arg || "alchemy"));
     case "story": { const st = g().stories[+arg || 0]; return storyPlayer(st); }
     case "daily": S.daily = {}; return daily();
+    case "dl": return dlShot(arg);   // the two dailies (js/challenge.js): dl:row · dl:paint[:<round 0-4>|:end] · dl:name[:three|:hint|:won|:lost]
     case "lab": return LAB[arg || "harmony"]();
     case "honeylab": return labHoney();   // the honeycomb lab (#/lab/honey) — not reachable through the router in shot mode
     // archive (js/passages.js, js/films.js): passage:<id>, passages[:<family>], film:<id>, cpage:<color> (scrolled to In books), films (Ideas lens at Films)
@@ -122,6 +130,9 @@ function shot(name) {
         S.lens = "world"; go("explore");
       }); }
     case "taste": return tasteShot(arg);
+    case "you": return ymShot(arg);   // js/you.js: you[:empty|:card]
+    case "favs": return favShot(arg);   // js/favs.js: favs:<shelf|empty|pick|taste|rank:<method>>
+    case "look": case "looks": case "lookyours": case "lookmatch": return lkShot(screen, arg, name.split(":")[2]);   // js/looks.js
     case "poem": return poemPage(name.slice(5), {});   // poem:<poem id>
     case "poemcolor": { const n = g().nodes.get("c:" + (arg || "Crimson")); XSTACK = ["p:" + n.id]; colorPage(n); const x = document.querySelector(".c-poems"), h = document.querySelector(".c-hero"); if (x && h) h.after(x); return; }   // "In poems" moved up so one screen shows it
     case "potd": return show(`<div class="sec-head"><b>Today</b></div><div class="today">${poemOfTheDayCard()}</div>`, "", "learn");
@@ -142,7 +153,7 @@ function shot(name) {
       return colorExplorer({ focus: dailyColor(), pick: c => closeup(colorNode(c)), shot: ["wheel", "tuned"].includes(act) ? "" : act });
     }
     case "gallery": return galleryShot(name.slice(8));   // gallery, gallery:scroll=600, gallery:color=Cobalt, gallery:adjust=Cobalt, gallery:page=12, gallery:cpage=Cobalt
-    case "world": case "fashiondecade": case "fashioncoty": case "fashionhouse": case "fashionhistory":
+    case "world": case "fashiondecade": case "fashioncoty": case "fashionhouse": case "fashionhistory": case "garments": case "garment": case "fxcolor":
       return typeof worldShot === "function" && worldShot(screen, arg);   // js/world.js
     // the color link sheet (ROADMAP §13, js/swatch.js) opened over a real screen: swsheet:gallery|studio|fashion
     case "swsheet": {

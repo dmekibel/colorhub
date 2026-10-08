@@ -14,6 +14,23 @@ What that means in practice (the default, not something David should have to ask
 - **Grounded and honest.** Classical, sourced depth for those who want it (the Read side). Playful interaction for those who don't (the Explore side). No hype, no myths, no fake progress.
 - **Think like the most obsessive color nerd and the best museum curator at once,** then design it like Apple. When planning any feature, first ask: "what is every piece of color information we could derive or connect here?" List it all, then choose what to show.
 
+## The craft bar (David, 2026-10-08: "avoid anything that feels cheap and vibe-coded")
+Nothing ships that feels basic, thin or unthought. Every game, screen and feature is thought through to its logical conclusion, and still feels clean and calm. It doesn't pile on features.
+- **Every state is designed:** first time (taught by doing, no walls of text), normal, empty, loading, error, right, wrong, streak, level up, mastery, the end of a session, and coming back tomorrow.
+- **Every action gets feedback:** the visual, a haptic and the words, with anticipation → impact → settle. Never silent; never wiggly.
+- **Games have depth:**
+  - a real skill to master;
+  - a difficulty curve that breathes;
+  - variety that unlocks over time;
+  - meaningful choices and fair, solvable rounds;
+  - a reason to replay (bests, stars, a daily board);
+  - mastery you can see (the eye profile, honest numbers);
+  - and a connection to the rest of the app (the Learner Model, color pages, the map).
+- **Every game offers two ways in (David, 2026-10-08):** "For you" (adaptive, the default) and "Choose" (pick any difficulty or jump to any level, with a quick "test out"). In-game text is never smaller than body size.
+- **Details:** real copy (no placeholders, no emoji squares, no shouting mono labels); numbers formatted; spacing and type from DESIGN-SYSTEM; works at 320 px and with very light or very dark colors.
+- **Benchmark:** would this hold up next to Duolingo, I Love Hue, Wordle, Monument Valley and Apple Fitness? If a screen feels like a prototype, it isn't done.
+- **Process:** lanes with UI get a fresh-context craft critique (design/CRAFT-RUBRIC.md) before merge, and they fix what it finds.
+
 ## The four goals
 1. **Learn color words.** More color names lets you notice more colors. This is the goal of the learning/flashcard part only.
 2. **Train artists to see.** An eye-training gym modeled on ear-training apps for musicians, plus a paint-mixing simulator.
@@ -28,6 +45,10 @@ What that means in practice (the default, not something David should have to ask
 - Painting palettes must be exact: pull about 6 colors from the real image and give each the most precise name, like "salmon pink", not "pink".
 - Stories must be deep but honest. Every color gets a line on how it differs from its neighbor. Shared history lives at the family level, and only colors with a real history get a signature story.
 - Beautiful UI; most use is on David's phone.
+- Naming policy (David, 2026-10-08):
+  - Primary names are learnable English names. Japanese and other-language names are secondary: "also called", "in other languages", or a section of the article. They are never the title.
+  - The name set has three layers: **Learn** (~600 real words, plus compound variations, up to 1,000); **Archive** (~2,700 distinct colors, each with a page); **Search** (~4,300 alternate names that point to those colors).
+  - No growth to 9,000. Generated descriptions are not names.
 - The 101 are not a special list to users (David, 2026-10-08). Never say "the 101" in the UI, and never link a color to its "closest of the 101". Look-alikes and nearby names come from all ~1,000 names.
 - One tap on any color opens its page (David, 2026-10-08). That covers palette chips, photo palettes, painting analysis, hyperlinks and tiles, anywhere in the app. Never a sheet with an "Open page" button in between. An in-between color opens its nearest name's page with the exact color shown ("Your color · 97% match").
 
@@ -54,8 +75,10 @@ Checked against 18 modern color books (private notes in `../color-kb/books/`, se
 - Static site, no build tools needed yet. Deploy on GitHub Pages (same as `alter/`).
 - `prototype/` holds the last cloud prototype (v3, "Play + modes"). David rejected its structure, but it has reusable parts: Lab/ΔE color math, a lookalike finder, color-family classification, a spaced-repetition scheduler, a hex gym and the color data (~165 colors with stories and painting hooks in `prototype/src/data.js`). Rebuild with `prototype/build.sh`.
 - Before each push run `node tools/check.js`, `node tools/check_wiki.js` and `node tools/check_names.js` (all js files share one global scope; a duplicate top-level name breaks the whole app). Bump the `?v=` tag on every script and stylesheet in index.html (one shared value, e.g. the date plus a letter), so phones never mix new HTML with cached old scripts.
+- **Smoke test: run `tools/smoke.sh` before every push** (and after every merge of main). It scans js/*.js for names that are used but declared nowhere (`tools/undef_scan.js`), then drives the app in headless Chrome at 375x812 (real taps through Home, the View sheet, the four rooms, Learn, Train, Explore, color and name pages, Learn it, Studio) and fails on any window error, unhandled rejection or console.error. About 10 seconds; `--group home` runs one group; scenarios live in `tools/smoke/scenarios.js`.
 - Progress is stored in localStorage for now (key `colorhub-v1`). Accounts (e.g. Supabase) come later. Never wipe it: `migrateState()` in `js/core.js` upgrades old saves step by step (bump `STATE_V`, add a step), keeps unknown keys, keeps newer saves as they are, and copies an unreadable save to `colorhub-v1-unreadable`. A failed save shows one "isn't saving" bar with a backup button; Today shows a backup reminder every ~30 days and the iPhone Home Screen nudge.
-- **Addresses (`js/router.js`).** Every meaningful screen has a hash route: `#/today`, `#/train`, `#/studio`, `#/explore[/colors|paintings|ideas|saved]`, `#/color/<slug>`, `#/page/<id>`, `#/painting/<slug>`, `#/story/<id>` (each `+/more` for its "More like this" closeup), `#/daily`, `#/challenge`, `#/taste/color|palette`, `#/lab/harmony|contrast`, `#/gallery/<n>` (a museum painting). `show()` writes the address and `document.title`; tab homes replace the history entry, inner screens push one. A new screen gets an address by adding one line to the `ROUTED` wrap list in router.js (and a case in `openRoute()`). `#shot=…` screenshot mode is untouched. Share links come from `shareURL(path)`.
+- **Addresses (`js/router.js`).** Every meaningful screen has a hash route: `#/today`, `#/train`, `#/studio`, `#/home` (the map, named "Explore" on screen), `#/museum[/art|ideas|world|saved]` (the Museum room; the older `#/explore…` addresses still open it), `#/color/<slug>`, `#/page/<id>`, `#/painting/<slug>`, `#/story/<id>` (each `+/more` for its "More like this" closeup), `#/daily`, `#/challenge`, `#/taste/color|palette`, `#/lab/harmony|contrast`, `#/gallery/<n>` (a museum painting). `show()` writes the address and `document.title`; tab homes replace the history entry, inner screens push one. A new screen gets an address by adding one line to the `ROUTED` wrap list in router.js (and a case in `openRoute()`). `#shot=…` screenshot mode is untouched. Share links come from `shareURL(path)`.
+- **One trail (`js/trail.js`).** `XSTACK` is the one Back trail for every page opened from a link. A builder that knows its token pushes it (`p:`, `g:`, `aw:`…); any other addressed screen joins automatically as `r:<path>`. On a trail page ‹, Escape, the browser and the iOS back gesture all call `xBack()` (one step, scroll restored), whatever the page wires itself. Long-press ‹ opens the trail sheet. Every inner page gets the map glyph top-right (straight to the map, pan and zoom kept); a pull-down from the top goes to where the trail started. When the trail runs out it goes to `X_ROOT` (the room or the map it started from), never a guessed room: use `xToOrigin()`, not `go("explore")`, as a fallback. Place names live in core.js (`NAV_MAP`, `NAV_MUSEUM`).
 - **Lazy wiki (`js/loader.js`).** `data/wiki-colors.js`, `wiki-nodes.js`, `stories.js` and `images.js` are not in index.html (`paintings.js` is: Train shows its thumbnails): the first screen draws without them, then they're prefetched. A screen that needs them is wrapped with `needsWiki()` in router.js (it shows a quiet placeholder until they land); code that needs them elsewhere calls `loadWiki().then(…)`. Never read `window.WIKI_*` or `STORIES` at load time.
 - **Crawlable pages.** `python3 tools/pages.py` regenerates `c/<slug>/`, `p/<id>/`, `art/<slug>/` (static copies with title, description, Open Graph tags and text, which send people on into the app), the preview images in `og/`, `sitemap.xml` and `robots.txt`. Run it after any change to `data/colors.js`, the wiki, stories or paintings, and commit the output. It's deterministic (on a Mac: it draws with Georgia and Menlo).
 - Public-domain painting images come from Wikimedia Commons (upload.wikimedia.org). Hex values for Pantone, Crayola and pigments are screen approximations, and the UI should say so.

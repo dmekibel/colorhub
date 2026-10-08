@@ -130,11 +130,28 @@ function honeyWheel(items) {
 // golden-angle phyllotaxis disc: every item placed once, ordered by hue (so hue sweeps smoothly as the spiral
 // grows) then lightness (so lightness reads along the radius too). Never wraps — one cluster at any size.
 const HONEY_GA = Math.PI * (3 - Math.sqrt(5));
+// L18 (David, 2026-10-08: zooming in "increases the distance between things too much"): past the normal zoom the
+// plane spreads at 60% of the pinch, so a zoom-in enlarges the middle without flinging its neighbors apart.
+// Zoomed out (z <= 1) is untouched, so every floor and preset stays exactly where it was.
+const l18Spread = z => z <= 1 ? z : 1 + (z - 1) * .6;
+// and the lens widens its calm middle as you zoom in: the fisheye packs each ring tighter outward than around, and
+// that difference is what opened wide seams between neighbors when zoomed in. At z <= 1 nothing changes (the round
+// Apple Watch fisheye stays exactly as approved); at the double-tap zoom the ring spacing is within ~10% of even.
+const l18Flat = z => z <= 1 ? 1 : 1 + (z - 1) * .55;
+const L18_GROW = .52;
 function honeySunflower(items) {
   const N = items.length, c = .56;   // tuned so neighbor spacing (by index) is close to the lattice's unit spacing
   const ordered = items.slice().sort((a, b) => honeyHueKey(a) - honeyHueKey(b) || b.L - a.L);
   const pts = ordered.map((it, i) => { const r = c * Math.sqrt(i + .5), a = i * HONEY_GA; return { it, x: r * Math.cos(a), y: r * Math.sin(a) }; });
   return { pts, finite: true };
+}
+// L18 H5: the learning spiral. The same golden-angle disc, but ordered by how early the path teaches a name (rank,
+// i.e. useRank: the first words in the middle, rarer ones further out), so the stages are rings you can see.
+function honeySpiral(items) {
+  const c = .56, rk = it => it.o.rank != null ? +it.o.rank : 1e9;
+  const ordered = items.slice().sort((a, b) => rk(a) - rk(b) || honeyHueKey(a) - honeyHueKey(b));
+  const pts = ordered.map((it, i) => { const r = c * Math.sqrt(i + .5), a = i * HONEY_GA; return { it, x: r * Math.cos(a), y: r * Math.sin(a) }; });
+  return { pts, finite: true, spiral: true };
 }
 // a small set as one compact cluster: hue across, light to dark down, each color in the nearest free cell
 function honeyCluster(items) {
@@ -175,20 +192,32 @@ function honeySphere(items) {
   }
   return { pts, globe: true, finite: true, ext: 1 };
 }
+let HONEY_ENDLESS = false;   // L18: the endless mirrored map, opt-in (js/home.js sets it from S.hm.endless)
 const HONEY_MAP_K = { mapWide: 1 / 2.4, mapTall: .63 };
 function honeyLayout(raw, layoutKey) {
   let hs = 2166136261; for (const o of raw) for (let i = 0; i < o.n.length; i++) { hs ^= o.n.charCodeAt(i); hs = Math.imul(hs, 16777619); }
-  const key = `${layoutKey}|${raw.length}|${hs >>> 0}`;
+  const key = `${layoutKey}|${HONEY_ENDLESS ? "e" : "b"}|${raw.length}|${hs >>> 0}`;
   const hit = HONEY_LAYOUTS.get(key); if (hit && hit.raw === raw) return hit;
   const items = raw.map(honeyNorm);
   let lay;
   if (layoutKey === "globe") lay = honeySphere(items);
   else if (layoutKey === "sunflower") lay = honeySunflower(items);
+  else if (layoutKey === "spiral") lay = honeySpiral(items);
   // the wheel's own cut edges never match a neighboring copy's, so (David's wrap rule) it stays finite always,
   // not just for small sets
   else if (layoutKey === "wheel") lay = Object.assign(honeyWheel(items), { finite: true });
   else if (items.length < HONEY_FINITE) lay = honeyCluster(items);
-  else lay = honeyMap(items, HONEY_MAP_K[layoutKey] || HONEY_MAP_K.mapTall);
+  else {
+    // bounded, the map is one tile shaped like the phone (taller than the endless strip, which mirrored it)
+    lay = honeyMap(items, HONEY_ENDLESS ? HONEY_MAP_K[layoutKey] || HONEY_MAP_K.mapTall : 1.9);
+    // L18 (David: endless mirroring "makes it harder to find the color you need"): by default the map is ONE bounded
+    // world, each color exactly once, centered; panning rubber-bands at the edges and zoom-out fits the whole map.
+    // The old endless tiling stays behind HONEY_ENDLESS (View > Look, off by default).
+    if (!HONEY_ENDLESS) {
+      const one = lay.pts.filter(q => q.y >= 0), cx = one.reduce((t, q) => t + q.x, 0) / one.length, cy = one.reduce((t, q) => t + q.y, 0) / one.length;
+      lay = { pts: one.map(q => ({ it: q.it, x: q.x - cx, y: q.y - cy })), finite: true };
+    }
+  }
   if (lay.finite) { if (!lay.globe) lay.ext = Math.max(.5, ...lay.pts.map(p => Math.hypot(p.x, p.y))); }
   else { const [A, B] = [lay.A, lay.B], det = A[0] * B[1] - B[0] * A[1]; lay.inv = [B[1] / det, -B[0] / det, -A[1] / det, A[0] / det]; lay.per = Math.min(Math.hypot(...A), Math.hypot(...B)); lay.perX = lay.perX || lay.per; lay.perY = lay.perY || lay.per; }
   Object.assign(lay, { key, raw, items });
@@ -226,6 +255,8 @@ const HONEY_STYLES = {
     far: { m0: -1.8, sig: .5, labelMin: -4 } },
   honeycomb: { title: "Honeycomb", cfg: { layout: "mapTall", lensMode: "round", m0: 2.6, m1: 1, sig: 2.4, shape: 1, gap: .03, zMinUser: .08, labelMin: 30, drift: .4, vig: .6 },
     far: { m0: -.8, gap: -.02, labelMin: -6 } },
+  spiral: { title: "Spiral", cfg: { layout: "spiral", m0: 2.3, m1: 1, sig: 2.4, gap: .06, zMinUser: .18, labelMin: 24, vig: 0 },
+    far: { m0: .4, gap: -.03, labelMin: -4 } },
   globe: { title: "Globe", cfg: { layout: "globe", lensMode: "none", gap: .05, shape: 0, zMinUser: .5, labelMin: 32, vig: 0 },
     far: { labelMin: -8 } },
 };
@@ -238,7 +269,7 @@ const HONEY_ALIVE_MAX = 1500;   // above this many drawn bubbles: no idle drift 
 // Wheel, Tapestry) stay reachable only from the honeycomb lab (#/lab/honey), which still steps through all of them
 // The Globe stays in the lab until its colors are spread evenly over the sphere (today they bunch up and leave
 // bare patches); see NOTES-TRACKER.md.
-const HM_HOME_STYLES = ["original", "honeycomb", "sunflower", "magnifier"];
+const HM_HOME_STYLES = ["original", "honeycomb", "sunflower", "magnifier", "spiral"];
 const HONEY_STYLE_LIST = Object.keys(HONEY_STYLES).map(id => ({ id, title: HONEY_STYLES[id].title }));
 function honeyResolveCfg(styleId, tweak, N) {
   const preset = HONEY_STYLES[styleId] || HONEY_STYLES.current;
@@ -296,17 +327,17 @@ const honeyExtent = (theta, r, shapeAmt) => shapeAmt <= .02 ? r : r * (1 - shape
 //   shape 0 = the largest circle that fits in the cell (touching its nearest neighbors across the same gap)
 //   between = the circle blended toward the cell, so the corners round off
 // A bubble at the edge of what's drawn (neighbors culled) is also bounded by its own lens size, so it never balloons.
-function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52) {   // grow: how far a bubble may swell past its own lens size, as a fraction of its diameter
+function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52, clipAll = false) {   // clipAll (L18 glide): clip even tiny bubbles   // grow: how far a bubble may swell past its own lens size, as a fraction of its diameter
   if (!drawn.length) return;
   // Speed: the grid is sized to a TYPICAL bubble (not the biggest, which put thousands of tiny ones in every lookup),
   // and each bubble searches only as many cells as its own size needs. Tiny bubbles (under ~7 px) skip the cell
   // clipping altogether: at that size a slightly smaller circle is indistinguishable and costs nothing.
   const ds = drawn.map(b => b.d).sort((a, c) => a - c), typ = ds[Math.floor(ds.length / 2)] || 8, maxD = ds[ds.length - 1] || 8;
-  const cell = Math.max(4, typ * 1.3), grid = new Map(), key = (i, j) => i * 100003 + j;
+  const cell = Math.max(4, typ * 1.3, maxD * 1.5 / 12), grid = new Map(), key = (i, j) => i * 100003 + j;
   drawn.forEach((b, n) => { const k = key(Math.floor(b.x / cell), Math.floor(b.y / cell)); let a = grid.get(k); if (!a) grid.set(k, a = []); a.push(n); });
   const half = gapPx / 2;
   drawn.forEach((b, n) => {
-    if (b.d < 7) { b.poly = null; b.rin = Math.max(0, b.d * .44 - half); b.d0 = b.d; b.d = 2 * b.rin; return; }
+    if (b.d < 7 && !clipAll) { b.poly = null; b.rin = Math.max(0, b.d * .44 - half); b.d0 = b.d; b.d = 2 * b.rin; return; }
     const reach = Math.min(12, Math.ceil((b.d + maxD) * .75 / cell));
     // start from a 16-gon a little bigger than the bubble's own lens size
     const R0 = b.d * Math.max(.62, grow * 1.2); let poly = [];
@@ -395,6 +426,65 @@ function honeyCellPath(ctx, b, shapeAmt, grow = 1) {
   }
   ctx.closePath();
 }
+// Select mode (L23, js/favs.js): a picked bubble glows white and carries a small paper heart. Drawn after every
+// bubble, so a ring is never covered by its neighbor.
+function honeyPicked(ctx, b, shapeAmt, a) {
+  const d = b.d, r = d / 2;
+  ctx.save(); ctx.globalAlpha = a; ctx.lineJoin = "round";
+  honeyCellPath(ctx, b, shapeAmt, 1);
+  ctx.shadowColor = "rgba(255,255,255,.6)"; ctx.shadowBlur = Math.max(6, d * .2);
+  ctx.lineWidth = Math.max(2.5, d * .05); ctx.strokeStyle = "#FFFFFF"; ctx.stroke();
+  ctx.shadowBlur = 0;
+  const br = Math.max(6.5, Math.min(15, d * .15)), bx = b.x + r * .6, by = b.y - r * .6, s = br * .52;
+  ctx.fillStyle = "#EFEBE3"; ctx.beginPath(); ctx.arc(bx, by, br, 0, 6.2832); ctx.fill();
+  ctx.fillStyle = "#141311"; ctx.beginPath(); ctx.moveTo(bx, by + s * .95);
+  ctx.bezierCurveTo(bx - s * 1.4, by + s * .1, bx - s * 1, by - s, bx, by - s * .38);
+  ctx.bezierCurveTo(bx + s * 1, by - s, bx + s * 1.4, by + s * .1, bx, by + s * .95); ctx.fill();
+  ctx.restore();
+}
+// ---- L18 H1: family names at far zoom (an optional Look toggle, off by default; David 0c) ----
+// When the map is zoomed out (names are off), a paper pill names each family's region: Blues, Greens, Earths...
+// Pills sit on the ground over the region's middle, fade in as the bubble names fade out, and never overlap.
+function honeyFamOf(it) {
+  if (it.fam) return it.fam;
+  const L = it.L, C = it.C, H = it.H;
+  return (it.fam = C < 12 ? "Greys" : H >= 345 || H < 40 ? (L > 70 ? "Pinks" : "Reds") : H < 70 ? (L < 48 ? "Browns" : "Oranges")
+    : H < 100 ? (L < 55 ? "Browns" : "Yellows") : H < 195 ? "Greens" : H < 290 ? "Blues" : L > 72 ? "Pinks" : "Purples");
+}
+function honeyFamPills(ctx, drawn, W, H, alpha) {
+  if (alpha <= .01 || drawn.length < 24) return;
+  const x0 = W * .1, x1 = W * .9, y0 = H * .1, y1 = H * .9, bins = new Map(), cellN = new Map();
+  for (const b of drawn) {
+    if (b.x < x0 || b.x > x1 || b.y < y0 || b.y > y1) continue;
+    const f = honeyFamOf(b.it), k = f + "|" + Math.floor((b.x - x0) / (x1 - x0) * 3) + "|" + Math.floor((b.y - y0) / (y1 - y0) * 4);
+    let g = bins.get(k); if (!g) bins.set(k, g = { f, c: k.slice(f.length), n: 0, x: 0, y: 0 });
+    g.n++; g.x += b.x; g.y += b.y; cellN.set(g.c, (cellN.get(g.c) || 0) + 1);
+  }
+  // each family's bins, nearest the middle first; a family whose best spot is taken tries its next region
+  const fams = new Map();
+  for (const g of bins.values()) {
+    if (g.n < 12 || g.n < cellN.get(g.c) * .4) continue;   // the family has to own the region, not just pass through it
+    g.x /= g.n; g.y /= g.n; g.dc = Math.hypot(g.x - W / 2, g.y - H / 2);
+    let a = fams.get(g.f); if (!a) fams.set(g.f, a = []); a.push(g);
+  }
+  const list = [...fams.values()].map(a => a.sort((p, q) => p.dc - q.dc)).sort((a, b) => b.reduce((t, g) => t + g.n, 0) - a.reduce((t, g) => t + g.n, 0)), placed = [];
+  ctx.save(); ctx.font = `18px "Instrument Serif",Georgia,serif`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+  for (const cands of list) {
+    const f = cands[0].f, w = ctx.measureText(f).width + 20, h = 28;
+    let g = null, r = null;
+    for (const c of cands) {
+      const x = clamp(c.x, w / 2 + 12, W - w / 2 - 12), y = clamp(c.y, h / 2 + 12, H - h / 2 - 12), rr = { l: x - w / 2, t: y - h / 2, r: x + w / 2, b: y + h / 2 };
+      if (placed.some(q => rr.l < q.r + 6 && rr.r > q.l - 6 && rr.t < q.b + 6 && rr.b > q.t - 6)) continue;   // taken: try the next region
+      g = { f, x, y }; r = rr; break;
+    }
+    if (!g) continue;
+    placed.push(r);
+    ctx.globalAlpha = alpha; ctx.fillStyle = "#EFEBE3"; ctx.beginPath();
+    if (ctx.roundRect) ctx.roundRect(r.l, r.t, w, h, 999); else ctx.rect(r.l, r.t, w, h);
+    ctx.fill(); ctx.fillStyle = "#141311"; ctx.fillText(g.f, g.x, g.y + 1);
+  }
+  ctx.restore();
+}
 function honeyPath(ctx, cx, cy, r, shapeAmt) {
   ctx.beginPath();
   if (shapeAmt <= .02 || r < 3) { ctx.arc(cx, cy, r, 0, 6.2832); return; }
@@ -407,6 +497,49 @@ function honeyPath(ctx, cx, cy, r, shapeAmt) {
   ctx.closePath();
 }
 
+// ---- map study marks (js/mapstudy.js): calm rings over named bubbles, drawn after the bubbles themselves.
+// pulse: a slow breathing ring (the one to name) · right: a soft green glow that blooms out and fades (~0.9s) ·
+// wrong: a thin warm ring · true: a bright ring that stays (where the answer was) · ring: a quiet hairline (part of
+// this round) · start / goal: a ring with a small dot. Never a fill, never a dim: the bubble's own color stays true.
+const HONEY_MARK_ANIM = { pulse: Infinity, right: 900, true: 420 };
+function honeyStudyAnimating(marks, t) { for (const m of marks.values()) if (HONEY_MARK_ANIM[m.kind] && t - m.t0 < HONEY_MARK_ANIM[m.kind]) return true; return false; }
+function honeyStudyMarks(ctx, drawn, marks, t) {
+  ctx.save();
+  for (const b of drawn) {
+    const m = marks.get(b.it.n); if (!m || b.rin < 2) continue;
+    const age = t - m.t0, r = b.rin;
+    ctx.beginPath();
+    if (m.kind === "pulse") {
+      const k = .5 + .5 * Math.sin(age / 1000 * Math.PI * 2 / 1.8);
+      ctx.arc(b.x, b.y, r + 3 + 3 * k, 0, 6.2832); ctx.lineWidth = 3; ctx.strokeStyle = `rgba(239,235,227,${.55 + .4 * k})`; ctx.stroke();
+    } else if (m.kind === "right") {
+      const u = Math.min(1, age / 900), e = 1 - Math.pow(1 - u, 3);
+      ctx.arc(b.x, b.y, r + 2 + 10 * e, 0, 6.2832); ctx.lineWidth = 3 * (1 - u) + .5; ctx.strokeStyle = `rgba(154,212,174,${.95 * (1 - u)})`; ctx.stroke();
+      ctx.beginPath(); ctx.arc(b.x, b.y, r + 2.5, 0, 6.2832); ctx.lineWidth = 2; ctx.strokeStyle = "rgba(154,212,174,.9)"; ctx.stroke();
+    } else if (m.kind === "wrong") {
+      ctx.arc(b.x, b.y, r + 2.5, 0, 6.2832); ctx.lineWidth = 1.6; ctx.setLineDash([4, 4]); ctx.strokeStyle = "rgba(240,154,134,.9)"; ctx.stroke(); ctx.setLineDash([]);
+    } else if (m.kind === "true") {
+      const u = Math.min(1, age / 420);
+      ctx.arc(b.x, b.y, r + 3 + 8 * (1 - u), 0, 6.2832); ctx.lineWidth = 2.6; ctx.strokeStyle = `rgba(239,235,227,${.4 + .55 * u})`; ctx.stroke();
+    } else if (m.kind === "ring") {
+      ctx.arc(b.x, b.y, r + 2, 0, 6.2832); ctx.lineWidth = 1.2; ctx.strokeStyle = "rgba(239,235,227,.5)"; ctx.stroke();
+    } else if (m.kind === "start" || m.kind === "goal") {
+      ctx.arc(b.x, b.y, r + 3, 0, 6.2832); ctx.lineWidth = 2.2; ctx.strokeStyle = m.kind === "goal" ? "rgba(239,235,227,.95)" : "rgba(239,235,227,.55)"; ctx.stroke();
+      ctx.beginPath(); ctx.arc(b.x, b.y - r - 3, 3.2, 0, 6.2832); ctx.fillStyle = m.kind === "goal" ? "#EFEBE3" : "rgba(239,235,227,.6)"; ctx.fill();
+    }
+  }
+  ctx.restore();
+}
+// ---- a highlighted constellation (js/colorset.js csOnMap): any set of hexes lights up on the honeycomb home ----
+// honeyHighlight(hexes, { title }) dims every bubble but the nearest one to each hex; honeyHighlight(null) clears it.
+// Only the home honeycomb (inside .hm) listens; a pill at the bottom names the set and clears it on tap.
+let HONEY_HL = null, HONEY_HL_REV = 0;
+const HONEY_LIVE = new Set();
+function honeyHighlight(hexes, o = {}) {
+  const hs = (hexes || []).map(h => String(h).toUpperCase()).filter(h => /^#[0-9A-F]{6}$/.test(h));
+  HONEY_HL = hs.length ? { hexes: hs, title: o.title || "", rev: ++HONEY_HL_REV, fresh: true } : null;
+  HONEY_LIVE.forEach(f => { if (f() === false) HONEY_LIVE.delete(f); });
+}
 function honeycomb(host, opts = {}) {
   host.classList.add("hc");
   host.innerHTML = `<div class="hc-box"><div class="hc-vig"></div><canvas class="hc-cv" aria-label="Colors as bubbles: drag to browse, pinch to zoom, tap one to open it"></canvas></div>
@@ -417,7 +550,7 @@ function honeycomb(host, opts = {}) {
   let styleId = typeof opts.style === "string" ? opts.style : "current", liveTweak = opts.tweak ? { ...opts.tweak } : null;
   // back-compat: callers that still pass layout/lens/lensMode directly (colorsets.js, and any legacy caller).
   // These fold into liveTweak (not a one-off cfg mutation) so they survive setItems()'s re-resolve on every call.
-  if (opts.layout) liveTweak = { ...(liveTweak || {}), layout: ["wheel", "sunflower", "globe"].includes(opts.layout) ? opts.layout : "mapTall" };
+  if (opts.layout) liveTweak = { ...(liveTweak || {}), layout: ["wheel", "sunflower", "globe", "spiral"].includes(opts.layout) ? opts.layout : "mapTall" };
   if (opts.lensMode) liveTweak = { ...(liveTweak || {}), lensMode: opts.lensMode === "edges" ? "edges" : opts.lensMode === "none" ? "none" : "round" };
   if (opts.lens != null && !(liveTweak && liveTweak.m0 != null)) {
     const base0 = HONEY_STYLES[styleId] ? HONEY_STYLES[styleId].cfg : {}, pm0 = base0.m0 != null ? base0.m0 : HONEY_CFG_BASE.m0, pm1 = base0.m1 != null ? base0.m1 : HONEY_CFG_BASE.m1, lk = clamp(+opts.lens, 0, 2);
@@ -433,7 +566,12 @@ function honeycomb(host, opts = {}) {
   // water's tap ripples, and the panel inset (ctrl.setInset, so a bottom sheet never covers the magnified middle)
   let Plag = [0, 0], lastInput = performance.now(), driftT0 = 0, driftTeff = 0, driftAnchor = [0, 0], touchXY = null, ripples = [];
   let insetBottom = 0, insetCur = 0;
+  // ---- map study hooks (js/mapstudy.js), all inert until ctrl.study() sets them. hit(o, at): a tap answers instead
+  // of gliding/opening (and idle drift stays off); label(o) -> false hides that bubble's name; fog(o) -> false veils
+  // it (the opt-in "your map" view only, never a default); marks: name -> { kind, t0 } rings drawn over the bubbles.
+  const ST = { hit: null, label: null, fog: null, marks: new Map() };
   // per-bubble size memory, so a bubble never snaps to a new size (cells change as neighbors come and go): sizes ease
+  let famOn = !!opts.famNames;   // L18 H1: family-name pills when zoomed out (Look toggle, off by default)
   let sizeMem = new Map(), sizeT = 0, sizeRaf = 0, glided = null;   // glided: the item a tap last brought to the middle
   const vy = () => Math.max(60, Hh - insetCur);   // the visible height above whatever panel is inset
   const vcy = () => vy() / 2;
@@ -448,8 +586,8 @@ function honeycomb(host, opts = {}) {
   const unwarp = (v, a) => v <= a ? v : v >= .9999 ? 40 : a - (1 - a) * Math.log(1 - (v - a) / (1 - a));
   const lens = t => {
     const e = 1 - Math.pow(1 - bloom, 3), br = phase === "drift" ? 1 + .028 * Math.sin(t / 1000 * Math.PI * 2 / 3.8) : 1;
-    const s = (.72 + .28 * e) * Z;
-    return { s, a: e, m0: zc("m0") * br, m1: zc("m1"), sig: zc("sig"), K: base * s * M * br, inner: inner() };
+    const s = (.72 + .28 * e) * l18Spread(Z);
+    return { s, a: e, m0: zc("m0") * br, m1: zc("m1"), sig: zc("sig") * l18Flat(Z), K: base * s * M * br, inner: inner() };
   };
   const F = (z, l) => base * l.s * (l.m1 * z + (l.m0 - l.m1) * l.sig * .8862 * honeyErf(z / l.sig));
   const magR = (z, l) => l.m1 + (l.m0 - l.m1) * Math.exp(-((z / l.sig) ** 2));            // radial derivative (F')
@@ -586,6 +724,7 @@ function honeycomb(host, opts = {}) {
   // the field moves as one coherent sheet, never bubbles shaking independently.
   function applyMotion(l, t) {
     ripples = ripples.filter(r => t - r.t0 < 650);
+    if (pinch) return;   // L18: two fingers own the sheet; no lag or water wobble under them (David: pinch "wiggles")
     if (RM || SHOOT || cfg.alive <= 0 || !drawn.length || drawn.length > HONEY_MOTION_BUDGET) return;
     const lagX = P[0] - Plag[0], lagY = P[1] - Plag[1], kk = centerK(l);
     const lvx = lagX * kk, lvy = lagY * kk;
@@ -614,7 +753,7 @@ function honeycomb(host, opts = {}) {
   function finishFrame(l, t) {
     const shapeAmt = zc("shape");
     applyMotion(l, t);
-    honeyCells(drawn, gapPx(), shapeAmt);
+    honeyCells(drawn, gapPx(), shapeAmt, L18_GROW, !!morph);
     // No snapping (David): a bubble's size eases to its new value over ~120 ms instead of jumping when its cell
     // changes. New bubbles (just entered the screen) start at their size; growth eases too.
     const dt = sizeT ? Math.min(100, t - sizeT) : 0; sizeT = t;
@@ -626,7 +765,7 @@ function honeycomb(host, opts = {}) {
     for (const b of drawn) {
       if (!b.k) continue;
       const prev = sizeMem.get(b.k);
-      if (prev != null && dt > 0 && prev < b.rin) {
+      if (prev != null && dt > 0 && prev < b.rin && !pinch && b.rin - prev > Math.max(1.2, prev * .1)) {   // L18: jumps ease; motion's own small steps don't
         const r = prev + (b.rin - prev) * ease, f = b.rin > 0 ? r / b.rin : 1;
         if (b.rin - r > .3) easing = true;
         if (b.poly && Math.abs(f - 1) > .001) b.poly = b.poly.map(q => [q[0] * f, q[1] * f]);
@@ -638,9 +777,14 @@ function honeycomb(host, opts = {}) {
     if (easing && !sizeRaf) sizeRaf = requestAnimationFrame(() => { sizeRaf = 0; if (!raf) draw(); });
     let pb = null;
     if (pressed) { const i = drawn.findIndex(b => b.it === pressed.it && Math.abs(b.x - pressed.x) < 3 && Math.abs(b.y - pressed.y) < 3); if (i >= 0) { pb = drawn.splice(i, 1)[0]; drawn.push(pb); } }
+    const hlSet = hlItems();
+    if (lay.spiral && !hlSet) l18StageRings(l);
     for (const b of drawn) {
       const it = b.it, d = b.d * (b === pb ? 1 + .12 * pressK : 1), r = d / 2;
       honeyCellPath(ctx, b, shapeAmt, b === pb ? 1 + .12 * pressK : 1); ctx.fillStyle = it.h; ctx.fill();
+      if (ST.fog && !ST.fog(it.o)) { ctx.fillStyle = "rgba(14,13,11,.8)"; ctx.fill(); continue; }
+      if (ST.label && !ST.label(it.o)) { if (d >= 8 && it.L < 26) { ctx.lineWidth = Math.max(1, d * .025); ctx.strokeStyle = "rgba(236,232,223,.24)"; ctx.stroke(); } continue; }
+      if (hlSet) { if (!hlSet.has(it)) { ctx.fillStyle = "rgba(14,13,11,.8)"; ctx.fill(); continue; } ctx.lineWidth = Math.max(1.5, d * .03); ctx.strokeStyle = "rgba(239,235,227,.95)"; ctx.stroke(); }
       if (d < 8) continue;
       if (it.L < 26) { ctx.lineWidth = Math.max(1, d * .025); ctx.strokeStyle = `rgba(236,232,223,${it.L < 14 ? .34 : .24})`; ctx.stroke(); }
       const la = Math.min(1, Math.max(0, (d - zc("labelMin")) / 5));
@@ -659,6 +803,9 @@ function honeycomb(host, opts = {}) {
       }
     }
     ctx.globalAlpha = 1;
+    if (ST.marks.size) honeyStudyMarks(ctx, drawn, ST.marks, t);
+    if (sel) for (const b of drawn) if (b.d >= 10 && sel.isOn(b.it.o)) honeyPicked(ctx, b, shapeAmt, l.a);
+    if (famOn && !hlSet && !lay.globe) { const fa = l18FarAmount(cItemCur); if (fa > 0) honeyFamPills(ctx, drawn, W, vy(), fa * l.a); }
     if (ghost) {
       const a = 1 - (t - ghostT0) / 240;
       if (a > 0) { ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = a; ctx.drawImage(ghost, 0, 0); ctx.globalAlpha = 1; } else ghost.on = false;
@@ -684,12 +831,13 @@ function honeycomb(host, opts = {}) {
     if (!lay || !W || dead) return;
     const l = lens(t);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, Hh); ctx.globalAlpha = l.a;
-    if (lay.globe) buildGlobeDrawn(l, t); else buildFlatDrawn(l, t);
+    if (lay.globe) buildGlobeDrawn(l, t); else { buildFlatDrawn(l, t); if (morph) l18MorphApply(t); }
     finishFrame(l, t);
   }
   function caption() {
     const it = center; if (!it) return;
     cap.querySelector("i").style.setProperty("--c", it.h);
+    if (typeof relState === "function") cap.querySelector("i").dataset.rel = relState(it.c || it.h);   // the relation mark (js/polish.js)
     cap.querySelector("b").textContent = it.n;
     cap.querySelector("small").textContent = honeyWhere(it);
     cap.querySelector("em").textContent = it.h;
@@ -708,11 +856,12 @@ function honeycomb(host, opts = {}) {
     // formula's derivative, which can spike mid-ease), so it's hard-bounded at ~4.2px/s at alive 1, ~8.4px/s at
     // alive 2, measured in tools/_qa/drift_check.js. A globe instead just spins slowly (no wandering off a tilt).
     // Any touch changes `phase` away from "idle"/"drift" immediately, which stops this.
-    if (phase === "idle" && ALIVE && !down && !pinch && (t - lastInput) > 4000) { phase = "drift"; driftT0 = t; driftTeff = 0; driftAnchor = P.slice(); }
+    if (phase === "idle" && ALIVE && !ST.hit && !down && !pinch && (t - lastInput) > 4000) { phase = "drift"; driftT0 = t; driftTeff = 0; driftAnchor = P.slice(); }
+    if (fly && flyStep(t)) more = true;
     if (zAnim) {
       const nz = Math.abs(zAnim.to - Z) < .003 ? zAnim.to : Z + (zAnim.to - Z) * Math.min(1, dt * (RM ? 60 : 11));
       zoomAround(nz, zAnim.sx, zAnim.sy);
-      if (nz === zAnim.to) { zAnim = null; if (opts.onZoom) opts.onZoom(Z); if (!down && !pinch && !lay.globe) snap(); } else more = true;
+      if (nz === zAnim.to) { zAnim = null; if (opts.onZoom) opts.onZoom(Z); if (!down && !pinch && !lay.globe && phase !== "spring") snap(); } else more = true;
     }
     if (phase === "spring") {
       const s = spring, tau = (t - s.t0) / 1000, e = Math.exp(-s.w * tau);
@@ -740,7 +889,7 @@ function honeycomb(host, opts = {}) {
       more = true;
     }
     // the net's lag (Plag chases P) and water's breathing run all the time ALIVE is on, not just while idle
-    if (ALIVE) {
+    if (ALIVE && !pinch) {
       const tau = .1, a = 1 - Math.exp(-dt / tau);
       Plag = [Plag[0] + (P[0] - Plag[0]) * a, Plag[1] + (P[1] - Plag[1]) * a];
       more = true;
@@ -751,8 +900,9 @@ function honeycomb(host, opts = {}) {
     }
     const pt = pressed ? 1 : 0;
     if (Math.abs(pressK - pt) > .01) { pressK += (pt - pressK) * Math.min(1, dt * 18); more = true; } else pressK = pt;
+    if (ST.marks.size && honeyStudyAnimating(ST.marks, t)) more = true;
     if (bloom < 1) { bloom = Math.min(1, (t - bloomT0) / 700); more = true; }
-    if (ghost) more = true;
+    if (ghost || morph) more = true;
     draw(t);
     if (more) kick();
   }
@@ -787,6 +937,158 @@ function honeycomb(host, opts = {}) {
     const w = RM ? 30 : 4.5, X = [P[0] + V[0] / w, clamp(P[1] + V[1] / w, -1.5, 1.5)], A = [P[0] - X[0], P[1] - X[1]];
     spring = { t0: performance.now(), X, A, B: [0, 0], w }; phase = "spring"; kick();
   }
+  // ---- L18 fly: one calm move of pan AND zoom together (the zoomed-out tap rule, and search 2.0's "fly there").
+  // Zoom eases on a log scale (so a 10x zoom feels even); dip > 0 pulls back a little mid-flight so you see the
+  // distance traveled. A touch cancels it (pointerdown below), and it never snaps: honeyEaseS has 0 slope at both ends.
+  let fly = null;
+  function flyTo(X, z1, o = {}) {
+    if (!lay || lay.globe) return;
+    z1 = clamp(z1 == null ? Z : z1, ZMIN, ZMAX);
+    const dist = Math.hypot(X[0] - P[0], X[1] - P[1]);
+    fly = { t0: performance.now(), dur: RM ? 1 : o.dur || clamp(420 + dist * 14, 480, 900), P0: P.slice(), X: X.slice(), Z0: Z, Z1: z1, dip: RM ? 0 : o.dip || 0 };
+    spring = null; zAnim = null; phase = "fly"; if (o.buzz !== false) buzz(4);
+    if (SHOOT) { flyStep(fly.t0 + fly.dur); return; }   // screenshot/test runs land at once (headless has no frames)
+    kick();
+  }
+  function flyStep(t) {
+    const f = fly, u = clamp((t - f.t0) / f.dur, 0, 1), e = honeyEaseS(u);
+    const zz = f.Z0 * Math.pow(f.Z1 / f.Z0, e) * (1 - f.dip * Math.sin(Math.PI * u));
+    Z = Math.max(ZMIN, zz);
+    P = [f.P0[0] + (f.X[0] - f.P0[0]) * e, f.P0[1] + (f.X[1] - f.P0[1]) * e];
+    if (u < 1) return true;
+    fly = null; phase = "idle"; P = f.X.slice(); Z = clamp(f.Z1, ZMIN, ZMAX);
+    if (opts.onZoom) opts.onZoom(Z);
+    draw(t); settle();
+    return false;
+  }
+  // the zoomed-out tap rule (David, MASTER-PLAN 0c): when the map is zoomed out and bubbles are tiny, a tap zooms
+  // in to that bubble and centers it; the next tap (it's now the center) opens its page.
+  const L18_TINY_D = 46;
+  // 0 at normal zoom, 1 once the center bubble is too small for its name (a 12 px fade between, so nothing snaps)
+  function l18FarAmount(it) {
+    let cd = 0; for (const q of drawn) if (q.it === it && q.d > cd) cd = q.d;
+    return cd ? clamp((Math.max(L18_TINY_D, zc("labelMin") * 1.8) + 6 - cd) / 12, 0, 1) : 0;
+  }
+  function l18ZoomedOut() {
+    // the center's own copy (a wrapping map repeats it; a far copy is always tiny): the biggest one on screen
+    let cd = 0; for (const q of drawn) if (q.it === center && q.d > cd) cd = q.d;
+    return cd > 0 && cd < Math.max(L18_TINY_D, zc("labelMin") * 1.8);
+  }
+  function l18ZoomOnto(p) {
+    const o = offAt(p.x, p.y, lens(0)), X = [P[0] + o[0], P[1] + o[1]];
+    const pz = HONEY_STYLES[styleId], z0 = pz && pz.initialZoom ? pz.initialZoom(lay.raw.length) : 1;
+    flyTo(X, Math.max(Z * 1.6, Math.min(1, Math.max(z0, .7))));
+  }
+  // ---- L18 H3: the stage glide. Kept bubbles slide from where they were to where they now belong (shrinking
+  // a little mid-flight, so nothing collides), removed ones shrink away in the first 250 ms, then new ones bloom in
+  // between. Positions only: honeyCells still sizes every bubble from its real neighbors each frame, so the
+  // no-overlap guarantee holds at every moment of the glide.
+  let morph = null, l18ForceMorph = false;
+  const L18_MORPH_MS = 450;
+  function l18Snapshot() {
+    const old = new Map();
+    for (const b of drawn) { if (b.d < 1) continue; let a = old.get(b.it.n); if (!a) old.set(b.it.n, a = []); a.push({ x: b.x, y: b.y, d: b.d, it: b.it }); }
+    return old;
+  }
+  const l18MorphStart = old => ({ t0: performance.now(), old });
+  function l18MorphApply(t) {
+    const m = morph, u = clamp((t - m.t0) / L18_MORPH_MS, 0, 1);
+    if (u >= 1) { morph = null; return; }
+    const e = honeyEaseS(u), shrink = 1 - .15 * Math.sin(Math.PI * u), grow = honeyEaseS(clamp((u - .56) / .44, 0, 1));
+    const used = new Set();
+    for (const b of drawn) {
+      const a = m.old.get(b.it.n);
+      let o = null, bd = Infinity;
+      if (a) for (const q of a) { if (used.has(q)) continue; const d = (q.x - b.x) ** 2 + (q.y - b.y) ** 2; if (d < bd) { bd = d; o = q; } }
+      // new here: blooms in between once the leaving colors have gone (a new color often lands on the exact spot a
+      // leaving one held, so the two never share it)
+      if (!o) { b.d *= grow; continue; }
+      used.add(o);
+      b.x = o.x + (b.x - o.x) * e; b.y = o.y + (b.y - o.y) * e; b.d = (o.d + (b.d - o.d) * e) * shrink;
+      b.k = null;   // mid-glide sizes are the glide's, not the size memory's
+    }
+    if (grow <= 0) drawn = drawn.filter(b => b.d > 0);
+    // removed colors (and kept ones whose new place is off screen) shrink away where they were
+    const gu = 1 - honeyEaseS(clamp(u * L18_MORPH_MS / 250, 0, 1));
+    if (gu > 0) {
+      const here = new Set(); for (const b of drawn) here.add(b.it.n);
+      const n0 = drawn.length;
+      m.old.forEach((a, n) => { if (!here.has(n)) for (const o of a) drawn.push({ it: o.it, x: o.x, y: o.y, d: o.d * gu, z: 1e9 }); });
+      if (drawn.length > HONEY_MAX_DRAWN) drawn.length = Math.max(n0, HONEY_MAX_DRAWN);
+    }
+  }
+  // QA (tools/smoke map group): glide to a new set and scan for overlaps at u = .25, .5 and .75
+  function l18MorphCheck(items) {
+    l18ForceMorph = true; setItems(items, center && center.o, "soft"); l18ForceMorph = false;
+    const m = morph; if (!m) return { ok: false, why: "no glide" };
+    const out = [];
+    for (const u of [.25, .5, .75]) {
+      m.t0 = performance.now() - u * L18_MORPH_MS; morph = m; draw(performance.now());
+      let bad = 0;
+      for (let i = 0; i < drawn.length; i++) for (let j = i + 1; j < drawn.length; j++) {
+        const a = drawn[i], c = drawn[j], dd = Math.hypot(a.x - c.x, a.y - c.y); if (dd < (a.d + c.d) / 2 - .3) { bad++; if (bad < 4) out.ex = (out.ex || []).concat([[a.it.n, c.it.n, +dd.toFixed(2), +a.d.toFixed(2), +c.d.toFixed(2), a.z === 1e9, c.z === 1e9, !!a.poly, !!c.poly]]); }
+      }
+      out.push({ u, drawn: drawn.length, bad, ex: out.ex }); out.ex = null;
+    }
+    morph = null; draw();
+    return { ok: out.every(r => !r.bad), out };
+  }
+  // L18 H4: a freshly lit constellation is framed: centered on its middle and zoomed out just enough to hold it all
+  function l18FrameLit() {
+    if (!lay || lay.globe || !W) return;
+    const set = hlItems(); if (!set || set.size < 2) return;
+    const pts = [...set].map(l18WorldOf).filter(Boolean); if (pts.length < 2) return;
+    // the middle is the lit bubble closest to all the others (never an empty patch between them); the zoom holds
+    // the nearer two thirds big enough to read, and the outliers still show, smaller, toward the edge
+    const sum = p => pts.reduce((t, q) => t + Math.hypot(p[0] - q[0], p[1] - q[1]), 0), mid = pts.reduce((m, p) => sum(p) < sum(m) ? p : m, pts[0]);
+    const [cx, cy] = mid, ds = pts.map(p => Math.hypot(p[0] - cx, p[1] - cy)).sort((a, b) => a - b);
+    const dmax = ds[Math.min(ds.length - 1, Math.ceil(ds.length * .67))] + .8, R = Math.min(W, vy()) / 2 - 34;
+    const fits = z => cfg.lensMode === "round" ? F(dmax, { s: z, m0: cfg.m0, m1: cfg.m1, sig: cfg.sig }) <= R : dmax * base * z * M <= R;
+    let lo = ZMIN, hi = Math.max(ZMIN, Z);
+    if (!fits(lo)) hi = lo; else for (let i = 0; i < 20; i++) { const m = (lo + hi) / 2; if (fits(m)) lo = m; else hi = m; }
+    P = [cx, cy]; Plag = P.slice(); Z = clamp(Math.min(Z, lo), ZMIN, ZMAX); center = null; draw(); settled = center;
+  }
+  // L18 H5: the stage rings, on the ground between bubbles: a thin circle where each stage ends (the bubble at
+  // index i sits at .56*sqrt(i + .5), so a ring at .56*sqrt(n) falls in the seam between stage n's last name and the
+  // next one), mapped through the lens like everything else. No numbers: a label would have to sit on a bubble, and
+  // nothing marks a bubble (X7); the View sheet's stage chips name the rings.
+  function l18StageRings(l) {
+    if (typeof HM_STAGES === "undefined" || !lay.pts.length) return;
+    const N = lay.pts.length, cx = W / 2, cy = vcy(), round = cfg.lensMode === "round";
+    const scr = (wx, wy) => {
+      const ex = wx - P[0], ey = wy - P[1], z = Math.hypot(ex, ey);
+      if (round) { const k = z ? F(z, l) / z : base * l.s * l.m0; return [cx + ex * k, cy + ey * k]; }
+      return [cx + ex * l.K, cy + ey * l.K];
+    };
+    ctx.save(); ctx.lineWidth = 1.25; ctx.strokeStyle = "rgba(236,232,223,.3)";
+    HM_STAGES.forEach(n => {
+      if (n >= N) return;
+      const R = .56 * Math.sqrt(n);
+      ctx.beginPath();
+      for (let i = 0; i <= 96; i++) { const a = i / 96 * 6.2832, q = scr(R * Math.cos(a), R * Math.sin(a)); if (i) ctx.lineTo(q[0], q[1]); else ctx.moveTo(q[0], q[1]); }
+      ctx.stroke();
+    });
+    ctx.restore();
+  }
+  // where an item sits in the plane, the copy nearest the current pan (a wrapping map repeats every item)
+  function l18WorldOf(it) {
+    let best = null, bd = Infinity;
+    const R = lay.finite ? 1e9 : Math.max(2, lay.per) * 1.5;
+    for (const p of lay.pts) if (p.it === it) copies(p, P, R, (ex, ey) => { const d = ex * ex + ey * ey; if (d < bd) { bd = d; best = [P[0] + ex, P[1] + ey]; } });
+    return best;
+  }
+  function l18Nearest(x, y, rad) {
+    let best = null, bd = rad;
+    for (const q of drawn) { const d = Math.hypot(q.x - x, q.y - y) - q.d / 2; if (d < bd) { bd = d; best = q; } }
+    return best;
+  }
+  function l18ItemNear(h) {
+    if (!lay) return null;
+    const H = String(h || "").toUpperCase(), L = lab(H);
+    let best = null, bd = Infinity;
+    for (const it of lay.items) { if (String(it.h).toUpperCase() === H) return it; const d = (it.lab[0] - L[0]) ** 2 + (it.lab[1] - L[1]) ** 2 + (it.lab[2] - L[2]) ** 2; if (d < bd) { bd = d; best = it; } }
+    return best;
+  }
   function zoomAround(z, sx, sy) {
     if (lay && lay.globe) { Z = z; return; }   // the globe always centers at screen middle; nothing to re-anchor
     const l0 = lens(0), o0 = offAt(sx, sy, l0); Z = z;
@@ -798,6 +1100,9 @@ function honeycomb(host, opts = {}) {
 
   // ---- input: drag with momentum, pinch or ctrl-wheel to zoom, double-tap to zoom in (again to reset) ----
   let down = null, pinch = null, lastTap = null, tapTimer = 0;
+  // select mode (honeySelectMode below): a tap toggles a bubble; hold still ~260ms, then drag, to sweep a run of them.
+  let sel = null, paint = null, holdT = 0;
+  const selSet = (it, on) => { if (!sel || sel.isOn(it.o) === on) return; sel.onToggle(it.o, on); buzz(4); draw(); };
   const ptrs = new Map();
   const hit = (x, y) => { let best = null, bd = Infinity; for (const b of drawn) { const d = Math.hypot(b.x - x, b.y - y); if (d < b.d / 2 + 4 && d / b.d < bd) { bd = d / b.d; best = b; } } return best; };
   const local = e => { const r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
@@ -808,31 +1113,42 @@ function honeycomb(host, opts = {}) {
     const [x, y] = local(e); ptrs.set(e.pointerId, [x, y]); touchXY = [x, y];
     try { cv.setPointerCapture(e.pointerId); } catch (er) {}
     if (phase === "spring" || zAnim) loop(performance.now());
-    phase = "drag"; spring = null; zAnim = null; touched = true;
+    phase = "drag"; spring = null; zAnim = null; fly = null; touched = true;
     if (ptrs.size === 2) {
       const [a, b] = [...ptrs.values()], mid = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2], o = lay.globe ? [0, 0] : offAt(mid[0], mid[1], lens(0));
       pinch = { d0: Math.max(10, Math.hypot(a[0] - b[0], a[1] - b[1])), Z0: Z, W0: [P[0] + o[0], P[1] + o[1]], t0: performance.now(), moved: false };
-      pressed = null; down = null; clearTimeout(tapTimer); kick(); return;
+      pressed = null; down = null; paint = null; clearTimeout(holdT); clearTimeout(tapTimer); kick(); return;
     }
     if (ptrs.size > 2 || pinch) return;
-    const b = hit(x, y);
+    // zoomed out, bubbles are smaller than a fingertip: the nearest one within a finger's reach counts (L18)
+    const b = hit(x, y) || (!sel && l18ZoomedOut() ? l18Nearest(x, y, 22) : null);
     pressed = b ? { it: b.it, x: b.x, y: b.y, b } : null;
     down = { x, y, P0: P.slice(), moved: false, hist: [[performance.now(), P[0], P[1]]] };
+    clearTimeout(holdT);
+    if (sel && pressed) holdT = setTimeout(() => {
+      if (!sel || !down || down.moved || !pressed) return;
+      paint = { on: !sel.isOn(pressed.it.o) }; down.painted = true; buzz(8); selSet(pressed.it, paint.on);
+    }, 260);
     kick();
   });
   cv.addEventListener("pointermove", e => {
     if (!ptrs.has(e.pointerId)) return;
     const [x, y] = local(e); ptrs.set(e.pointerId, [x, y]); touchXY = [x, y];
     if (pinch && ptrs.size >= 2) {
-      const [a, b] = [...ptrs.values()], mid = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2], d = Math.hypot(a[0] - b[0], a[1] - b[1]);
-      if (Math.abs(d - pinch.d0) > 8) pinch.moved = true;
+      const [a, b] = [...ptrs.values()], mid0 = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2], d0 = Math.hypot(a[0] - b[0], a[1] - b[1]);
+      // L18: a light low-pass on the fingers (half a frame of lag), so pixel jitter never shakes the whole map
+      pinch.sd = pinch.sd == null ? d0 : pinch.sd + (d0 - pinch.sd) * .55;
+      pinch.sm = pinch.sm ? [pinch.sm[0] + (mid0[0] - pinch.sm[0]) * .55, pinch.sm[1] + (mid0[1] - pinch.sm[1]) * .55] : mid0;
+      const d = pinch.sd, mid = pinch.sm;
+      if (Math.abs(d0 - pinch.d0) > 8) pinch.moved = true;
       Z = rubber(pinch.Z0 * d / pinch.d0);
       if (!lay.globe) { const o = offAt(mid[0], mid[1], lens(0)); P = [pinch.W0[0] - o[0], pinch.W0[1] - o[1]]; }
       draw(); return;
     }
     if (!down) return;
+    if (paint) { const pb = hit(x, y); if (pb) selSet(pb.it, paint.on); return; }
     const dx = x - down.x, dy = y - down.y;
-    if (!down.moved && Math.hypot(dx, dy) > 10) { down.moved = true; pressed = null; glided = null; kick(); }
+    if (!down.moved && Math.hypot(dx, dy) > 10) { down.moved = true; pressed = null; glided = null; clearTimeout(holdT); kick(); }
     if (!down.moved) return;
     const now = performance.now();
     if (lay.globe) { P = [down.P0[0] + dx / GLOBE_ROT_K, clamp(down.P0[1] - dy / GLOBE_ROT_K, -1.5, 1.5)]; }
@@ -841,7 +1157,7 @@ function honeycomb(host, opts = {}) {
       P = [down.P0[0] - dx / k, down.P0[1] - dy / k];
       if (lay.finite) {
         const r = Math.hypot(P[0], P[1]), ext = lay.ext + .6;
-        if (r > ext) { const s = (ext + (r - ext) * .35) / r; P = [P[0] * s, P[1] * s]; }
+        if (r > ext) { const s = Math.min(ext + (r - ext) * .35, ext + 1.5) / r; P = [P[0] * s, P[1] * s]; }   // L18: a soft rubber band with a hard stop
       }
     }
     down.hist.push([now, P[0], P[1]]); while (down.hist.length > 2 && now - down.hist[0][0] > 100) down.hist.shift();
@@ -860,9 +1176,16 @@ function honeycomb(host, opts = {}) {
       return lay.globe ? void 0 : snap();
     }
     if (!down) return;
-    const d = down; down = null; phase = "idle";
+    const d = down; down = null; phase = "idle"; clearTimeout(holdT);
+    if (d.painted || paint) { paint = null; pressed = null; kick(); return; }
     if (!d.moved) {
       const now = performance.now(), p = pressed, held = now - d.hist[0][0];
+      if (ST.hit) {   // map study: a tap is an answer, at once (no double-tap wait, no glide, no peek)
+        pressed = null; kick();
+        if (p && e.type === "pointerup") { if (!RM && !SHOOT) ripples.push({ x: p.x, y: p.y, t0: now, sigma: Math.max(22, p.b.d * .85) }); ST.hit(p.it.o, { x: p.x, y: p.y, d: p.b.d }); }
+        return;
+      }
+      if (sel && p && e.type === "pointerup") { pressed = null; selSet(p.it, !sel.isOn(p.it.o)); kick(); return; }
       if (p && opts.onPeek && held >= 480) { pressed = null; kick(); return opts.onPeek(p.it.o); }
       if (lastTap && now - lastTap.t < 300 && Math.hypot(d.x - lastTap.x, d.y - lastTap.y) < 36) {
         clearTimeout(tapTimer); lastTap = null; pressed = null; kick();
@@ -877,6 +1200,10 @@ function honeycomb(host, opts = {}) {
         // bubble a few px off, so a tap on it only glided again and never opened (David).
         // The open zone (David): the center bubble AND the ring touching it open on one tap; only bubbles further out
         // glide to the middle first. The ring's reach is measured from the center bubble's edge, one tapped-bubble wide.
+        // zoomed out (L18): a tap on a tiny bubble zooms in onto it first; the next tap opens it
+        if (opts.centerFirst && !lay.globe && p.it !== glided && l18ZoomedOut()) {
+          glided = p.it; pressed = null; kick(); return l18ZoomOnto(p);
+        }
         const cb = drawn.find(q => q.it === center), cd = cb ? cb.d : p.b.d;
         const reach = Math.max(cd * .5 + p.b.d * .95, Math.min(W, vy()) * .16);
         const far = opts.centerFirst && p.it !== center && p.it !== glided && Math.hypot(p.x - W / 2, p.y - vcy()) > reach;
@@ -896,7 +1223,7 @@ function honeycomb(host, opts = {}) {
   let wheelT = 0;
   cv.addEventListener("wheel", e => {
     if (!lay) return;
-    lastInput = performance.now();
+    lastInput = performance.now(); fly = null;
     const [x, y] = local(e);
     if (e.ctrlKey) { e.preventDefault(); touched = true; phase = "idle"; spring = null; zAnim = null; zoomAround(rubber(clamp(Z * Math.exp(-e.deltaY * .012), ZMIN * .8, ZMAX * 1.2)), x, y); }
     else if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
@@ -928,22 +1255,26 @@ function honeycomb(host, opts = {}) {
   // ---- contents ----
   function setItems(raw, focus, how) {
     raw = raw && raw.length ? raw : EVERY().map(c => ({ n: c.n, h: c.h, c }));
-    if (how === "soft" && W && !RM) {
+    // L18 H3: a soft change between flat layouts glides instead of crossfading (Reduced Motion keeps the crossfade)
+    const snap0 = how === "soft" && W && !RM && (!SHOOT || l18ForceMorph) && lay && !lay.globe && drawn.length ? l18Snapshot() : null;
+    morph = null;
+    if (how === "soft" && W && !RM && !snap0) {
       ghost = ghost || document.createElement("canvas"); ghost.on = true;
       if (ghost.width !== cv.width || ghost.height !== cv.height) { ghost.width = cv.width; ghost.height = cv.height; }
       const g = ghost.getContext("2d"); g.clearRect(0, 0, ghost.width, ghost.height); g.drawImage(cv, 0, 0); ghostT0 = performance.now();
     }
     cfg = honeyResolveCfg(styleId, liveTweak, raw.length);
     lay = honeyLayout(raw, cfg.layout);
+    if (snap0 && !lay.globe) morph = l18MorphStart(snap0);
     ZMIN = zFloor(); Z = clamp(Z, ZMIN, ZMAX);
     if (lay.globe) {
       // P means [yaw, pitch] here, not a plane offset — see the pointer handlers above
-      if (how === "restore" && HONEY_PAN && HONEY_PAN.key === lay.key) { P = [HONEY_PAN.x, HONEY_PAN.y]; if (!opts.zoom && HONEY_PAN.z) Z = HONEY_PAN.z; }
+      if (how === "restore" && HONEY_PAN && HONEY_PAN.key === lay.key) { P = [HONEY_PAN.x, HONEY_PAN.y]; if (HONEY_PAN.z) Z = clamp(HONEY_PAN.z, ZMIN, ZMAX);   /* L18: the last zoom you left, always */ }
       else {
         const f = focus && (focus.h ? focus : BYNAME.get(String(focus.n || "").toLowerCase())), p = f && lay.pts.find(q => q.it.n === f.n);
         P = p ? [-p.lon, clamp(Math.asin(clamp(p.y, -1, 1)), -1.5, 1.5)] : [0, 0];
       }
-    } else if (how === "restore" && HONEY_PAN && HONEY_PAN.key === lay.key) { P = [HONEY_PAN.x, HONEY_PAN.y]; if (!opts.zoom && HONEY_PAN.z) Z = HONEY_PAN.z; }
+    } else if (how === "restore" && HONEY_PAN && HONEY_PAN.key === lay.key) { P = [HONEY_PAN.x, HONEY_PAN.y]; if (HONEY_PAN.z) Z = clamp(HONEY_PAN.z, ZMIN, ZMAX);   /* L18: the last zoom you left, always */ }
     else {
       const f = focus && (focus.h ? focus : BYNAME.get(String(focus.n || "").toLowerCase()));
       let p = f && lay.pts.find(q => q.it.n === f.n);
@@ -962,11 +1293,16 @@ function honeycomb(host, opts = {}) {
 
   // ---- size, visibility, teardown ----
   function resize() {
-    const r = cv.getBoundingClientRect(); dpr = Math.min(3, devicePixelRatio || 1);
+    // L18 (David: panning "goes completely white and breaks"): 2x is as sharp as a phone can show for bubbles, and
+    // a 3x full-screen canvas is 12 MB a copy; iOS blanks every canvas once their total passes its limit
+    const r = cv.getBoundingClientRect(); dpr = Math.min(2, devicePixelRatio || 1);
     W = r.width; Hh = r.height; cv.width = Math.round(W * dpr); cv.height = Math.round(Hh * dpr);
     base = clamp(W / 13, 26, 34); ghost = null; ZMIN = zFloor(); Z = clamp(Z, ZMIN, ZMAX); draw();
   }
   const ro = new ResizeObserver(resize); ro.observe(cv);
+  // L18: a canvas whose context the browser dropped (memory pressure) comes back drawn, not blank
+  cv.addEventListener("contextlost", e => e.preventDefault());
+  cv.addEventListener("contextrestored", () => { sizeMem = new Map(); draw(); });
   const io = "IntersectionObserver" in window ? new IntersectionObserver(es => { visible = es[0].isIntersecting && !document.hidden; if (visible) kick(); }) : null;
   if (io) io.observe(host);
   const vis = () => { visible = !document.hidden; if (visible) kick(); };
@@ -976,6 +1312,8 @@ function honeycomb(host, opts = {}) {
     if (dead) return;
     remember(); dead = true; clearTimeout(tapTimer); clearTimeout(wheelT);
     cancelAnimationFrame(raf); raf = 0; ro.disconnect(); if (io) io.disconnect();
+    // L18: give the canvas memory back now (iOS only frees it on a later GC, and every Home rebuild made a new one)
+    setTimeout(() => { try { cv.width = cv.height = 0; if (ghost) ghost.width = ghost.height = 0; ghost = null; } catch (e) {} }, 600);
     document.removeEventListener("visibilitychange", vis);
   }
   cleanup.push(destroy);
@@ -1014,7 +1352,31 @@ function honeycomb(host, opts = {}) {
   });
   resize();
   if (opts.style) { const p = HONEY_STYLES[styleId]; if (p && p.initialZoom && !opts.zoom) Z = p.initialZoom((opts.items && opts.items.length) || 101); }
-  setItems(opts.items, opts.focus || (HONEY_PAN && { n: HONEY_PAN.name }), "restore");
+  // the highlighted constellation (honeyHighlight above): the nearest bubble to each hex, worked out once per set of items
+  const hlOn = !!(host.closest && host.closest(".hm"));
+  let hlMemo = null;
+  function hlItems() {
+    if (!hlOn || !HONEY_HL || !lay) { if (hlPill) { hlPill.remove(); hlPill = null; } return null; }
+    if (hlMemo && hlMemo.lay === lay && hlMemo.rev === HONEY_HL.rev) return hlMemo.set;
+    const its = [...new Set(lay.pts.map(q => q.it).filter(Boolean))], set = new Set();
+    HONEY_HL.hexes.forEach(h => { const L = lab(h); let best = null, bd = Infinity; for (const it of its) { const dd = (it.lab[0] - L[0]) ** 2 + (it.lab[1] - L[1]) ** 2 + (it.lab[2] - L[2]) ** 2; if (dd < bd) { bd = dd; best = it; } } if (best) set.add(best); });
+    hlMemo = { lay, rev: HONEY_HL.rev, set };
+    hlShowPill();
+    return set;
+  }
+  let hlPill = null;
+  function hlShowPill() {
+    if (hlPill || !host.parentElement) return;
+    hlPill = document.createElement("button"); hlPill.className = "cs-hl-pill"; hlPill.setAttribute("aria-label", "Show every color again");
+    hlPill.innerHTML = `<span>${esc(HONEY_HL.title || "Your set")}</span>${ICON.x}`;
+    hlPill.onclick = e => { e.stopPropagation(); buzz(4); honeyHighlight(null); };
+    host.parentElement.appendChild(hlPill);
+  }
+  if (hlOn) HONEY_LIVE.add(() => { if (dead) return false; hlMemo = null; draw(); return true; });
+  let hlFocus = null;
+  if (hlOn && HONEY_HL && HONEY_HL.fresh) { HONEY_HL.fresh = false; hlFocus = { h: HONEY_HL.hexes[0] }; }
+  if (hlFocus) { setItems(opts.items, opts.focus || hlFocus, ""); l18FrameLit(); }
+  else setItems(opts.items, opts.focus || (HONEY_PAN && { n: HONEY_PAN.name }), "restore");
   // ---- the Tweak panel's API: live overrides on top of the active preset, saved by the caller (S.hm.tweak) ----
   function applyTweak(partial) {
     liveTweak = { ...(liveTweak || {}), ...partial };
@@ -1023,11 +1385,11 @@ function honeycomb(host, opts = {}) {
   }
   return {
     update(o = {}) {
-      if (o.layout) liveTweak = { ...(liveTweak || {}), layout: ["wheel", "sunflower", "globe"].includes(o.layout) ? o.layout : "mapTall" };
+      if (o.layout) liveTweak = { ...(liveTweak || {}), layout: ["wheel", "sunflower", "globe", "spiral"].includes(o.layout) ? o.layout : "mapTall" };
       if (o.style && HONEY_STYLES[o.style]) styleId = o.style;
       setItems(o.items || (lay && lay.raw), o.focus || (center && center.o), o.soft ? "soft" : "");
     },
-    zoom: (z, animate = true) => animate ? zoomTo(z) : (Z = clamp(z, ZMIN, ZMAX), draw()),
+    zoom: (z, animate = true) => animate ? zoomTo(z) : (Z = clamp(z, ZMIN, ZMAX), draw(), remember(), opts.onZoom && opts.onZoom(Z)),
     // so a bottom sheet never covers the magnified middle: the lens center, the "center" bubble and the
     // vignette all recenter into whatever's still visible above it. Animated (~300ms; see loop()'s insetCur tween).
     setInset({ bottom } = {}) { insetBottom = Math.max(0, +bottom || 0); kick(); },
@@ -1043,10 +1405,71 @@ function honeycomb(host, opts = {}) {
       if (p && p.initialZoom) Z = p.initialZoom(lay ? lay.raw.length : 101);
       setItems(lay && lay.raw, center && center.o, "soft");
     },
+    // Select mode (L23, js/favs.js "Pick favorites"): o = { isOn(item) -> bool, onToggle(item, on) } with item = the
+    // original { n, h, c?, lib? }. Off (null/false) clears it. Panning and pinch-zoom keep working; a tap toggles a
+    // bubble instead of opening it; hold still, then drag, to sweep a run (it turns ON, or OFF if the first bubble was on).
+    selectMode(on, o) { sel = on && o ? o : null; paint = null; clearTimeout(holdT); draw(); },
+    honeySelectMode(on, onToggle, isOn) { return this.selectMode(on, { onToggle, isOn }); },
+    redraw: () => draw(),
     getStyle: () => styleId,
     getCfg: () => ({ style: styleId, tweak: liveTweak, resolved: cfg }),
     getTweak: () => liveTweak,
     current: () => center && center.o,
+    // L18: fly the map to a color (a hex, or an item with .h) — the nearest bubble lands in the middle, ready to
+    // open on the next tap. o.zoom (default: in to at least the normal size), o.dip (the mid-flight pull-back).
+    flyToColor(h, o = {}) {
+      if (!lay || lay.globe) return null;
+      const it = l18ItemNear(h && h.h ? h.h : h); if (!it) return null;
+      const X = l18WorldOf(it); if (!X) return null;
+      glided = it;
+      flyTo(X, o.zoom != null ? o.zoom : Math.max(Z, .9), { dip: o.dip != null ? o.dip : .22 });
+      return it.o;
+    },
+    zoomValue: () => Z,
+    panValue: () => [P[0], P[1], Z],   // QA: the pan a return to Home must keep
+    famNames(on) { famOn = !!on; draw(); },
+    _morphCheck: items => l18MorphCheck(items),
+    // QA (tools/smoke map group): the median seam between each readable bubble and its nearest neighbor, in px
+    _gapStat() {
+      const big = drawn.filter(b => b.d >= 12), gs = [];
+      for (const b of big) { let g = Infinity; for (const o of drawn) { if (o === b) continue; const v = Math.hypot(o.x - b.x, o.y - b.y) - b.d / 2 - o.d / 2; if (v < g) g = v; } if (isFinite(g)) gs.push(g); }
+      gs.sort((x, y) => x - y);
+      return { n: drawn.length, w: cv.width, h: cv.height, gap: gs.length ? +gs[Math.floor(gs.length / 2)].toFixed(2) : null, p90: gs.length ? +gs[Math.floor(gs.length * .9)].toFixed(2) : null };
+    },
+    // L18 B2: a small JPEG of the map as it looks right now (the rooms' floor strip shows it under a solid scrim)
+    snapshot(w = 390) {
+      if (!W || !cv.width) return null;
+      try { const c = document.createElement("canvas"); c.width = Math.round(w); c.height = Math.round(Hh * w / W); const g = c.getContext("2d"); g.fillStyle = "#0E0D0B"; g.fillRect(0, 0, c.width, c.height); g.drawImage(cv, 0, 0, c.width, c.height); return c.toDataURL("image/jpeg", .7); } catch (e) { return null; }
+    },
+    isZoomedOut: () => l18ZoomedOut(),
+    // ---- map study (js/mapstudy.js) ----
+    study(o = {}) {
+      ["hit", "label", "fog"].forEach(k => { if (k in o) ST[k] = typeof o[k] === "function" ? o[k] : null; });
+      if ("marks" in o) { const t0 = performance.now(); ST.marks = new Map((o.marks || []).map(m => [m.n, { kind: m.kind, t0: m.t0 || t0 }])); }
+      draw(); kick();
+    },
+    // glide (the same spring a tap uses) so the nearest copy of o sits in the middle; z optionally eases the zoom too.
+    // o may also be a lattice point { x, y } (from studyPoints), e.g. the middle of a small cluster.
+    studyFlyTo(o, z) {
+      if (!lay || lay.globe || !o) return false;
+      let best = o.n == null && isFinite(o.x) && isFinite(o.y) ? [o.x, o.y] : null, bd = Infinity;
+      const R = lay.finite ? 1e9 : Math.max(2, lay.per * 1.5);
+      if (!best) for (const p of lay.pts) if (p.it.n === o.n) copies(p, P, R, (ex, ey) => { const dd = ex * ex + ey * ey; if (dd < bd) { bd = dd; best = [P[0] + ex, P[1] + ey]; } });
+      if (!best) return false;
+      if (z) zAnim = { to: clamp(z, ZMIN, ZMAX), sx: W / 2, sy: vcy() };
+      const A = [P[0] - best[0], P[1] - best[1]], w = RM ? 40 : 9;
+      spring = { t0: performance.now(), X: best, A, B: [w * A[0], w * A[1]], w }; phase = "spring"; glided = null; kick();
+      return true;
+    },
+    // ease the zoom about the middle without cancelling a glide in flight (ctrl.zoom would drop the spring)
+    studyZoom(z) { if (!lay || lay.globe) return; zAnim = { to: clamp(z, ZMIN, ZMAX), sx: W / 2, sy: vcy() }; kick(); },
+    // the lattice itself, for neighbors and paths: every point (an item can sit at two), and how the plane repeats
+    studyPoints() {
+      if (!lay || lay.globe) return null;
+      return { pts: lay.pts.map(p => ({ o: p.it.o, n: p.it.n, x: p.x, y: p.y })), finite: !!lay.finite, A: lay.A || null, B: lay.B || null };
+    },
+    // where a color sits on screen right now (js/polish.js flyToMap): the biggest drawn bubble with that hex, in viewport px
+    locate(h) { const H = String(h).toUpperCase(), b = drawn.filter(x => String(x.it.h).toUpperCase() === H).sort((x, y) => y.d - x.d)[0]; if (!b) return null; const r = cv.parentNode.getBoundingClientRect(); return { x: r.left + b.x, y: r.top + b.y, d: b.d }; },
     destroy,
   };
 }

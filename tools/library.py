@@ -623,7 +623,10 @@ MP_NEW_DE = 2.5  # CIEDE2000: tighter than ISCC_DE (8) on purpose -- these are r
 
 
 def load_maerz_paul_rows():
-    lines = (ROOT / "data" / "sources" / "maerz-paul-1930.json").read_text(encoding="utf-8").splitlines()
+    # the OCR'd names are noisy (research/MAERZ-PAUL.md s7); tools/maerz_filter.py writes the cleaned subset, which is what merges
+    clean = ROOT / "data" / "sources" / "maerz-paul-1930-clean.json"
+    raw = ROOT / "data" / "sources" / "maerz-paul-1930.json"
+    lines = (clean if clean.exists() else raw).read_text(encoding="utf-8").splitlines()
     return [json.loads(l) for l in lines[1:] if l.strip()]
 
 
@@ -681,6 +684,124 @@ def merge_maerz_paul(entries, app):
                 altn.append({"n": nm, "src": "maerz-paul", "note": r["note"]})
             rep["attached_as_alt"] += 1
 
+    if new_entries:
+        annotate(new_entries, app)
+        entries.extend(new_entries)
+    return entries, rep
+
+
+# Maerz & Paul 1930, round 2: the INDEX OF COLOR NAMES (data/sources/maerz-paul-1930-dictionary.json, built by
+# tools/mp_dictionary.py; method and numbers in research/MAERZ-PAUL.md s8).  Every row is a real index entry with its
+# plate cell, a hex from the corrected-grid, per-plate-corrected scan, a first-recorded date, and flags (clean, verified,
+# foreign, uncertain).  Naming policy (CLAUDE.md, 2026-10-08): English primary names; never grow past ~3,000 colors.
+#   1. name already a library color     -> its `src` gains "maerz-paul" and its `note` gains the date and chip.
+#   2. name already an alternate name   -> that altn gains the date and chip (no duplicate).
+#   3. truly distinct (CIEDE2000 >= MP_NEW_DE from every library color), clean, verified against ISCC-NBS, not foreign,
+#      not uncertain, within the budget -> a new library color, best candidates first.
+#   4. everything else with a usable name and chip -> an alternate name on its nearest color, citing Maerz & Paul and the date.
+#   Foreign names (the index marks them Fr./It./Ln./...) are never primary; a foreign name is only kept as an alternate.
+MP_MAX_COLORS = 3000
+
+
+def load_maerz_paul_dictionary():
+    lines = (ROOT / "data" / "sources" / "maerz-paul-1930-dictionary.json").read_text(encoding="utf-8").splitlines()
+    return [json.loads(l) for l in lines[1:] if l.strip()]
+
+
+def _mp_cite(r, with_chip=True):
+    bits = ["Maerz & Paul 1930"]
+    if r.get("date"):
+        bits.append(f"first recorded {'c. ' if r.get('date_approx') else ''}{r['date']}")
+    if with_chip and r.get("plate_cell") and not r.get("uncertain"):
+        bits.append(f"plate {r['plate_cell']}")
+    return ", ".join(bits)
+
+
+def merge_maerz_paul_dictionary(entries, app):
+    rows = load_maerz_paul_dictionary()
+    best = {}
+    for r in rows:
+        if not r.get("clean"):
+            continue
+        k = key(r["n"])
+        rank = (r.get("h") is not None and not r.get("uncertain"), r.get("verified", False), r["conf"], bool(r.get("date")))
+        if k not in best or rank > best[k][0]:
+            best[k] = (rank, r)
+    by_key = {e_key: pair[1] for e_key, pair in best.items()}
+    primary = {key(e["n"]): e for e in entries}
+    altmap = {}
+    for e in entries:
+        for a in e.get("altn", []):
+            altmap.setdefault(key(a["n"]), (e, a))
+    base = list(entries)
+    base_lab = labs([e["h"] for e in base])
+    rep = {"rows": len(rows), "clean_names": len(by_key), "primary_enriched": 0, "alt_enriched": 0, "new_colors": 0,
+           "attached_as_alt": 0, "skipped": 0, "foreign_alt_only": 0}
+    new_entries, todo = [], []
+    for k, r in by_key.items():
+        cite = _mp_cite(r)
+        e = primary.get(k)
+        if e is not None:
+            if "maerz-paul" not in e["src"]:
+                e["src"].append("maerz-paul")
+            if "Maerz & Paul 1930" not in (e.get("note") or ""):
+                e["note"] = (e["note"] + "; " + cite) if e.get("note") else cite
+            rep["primary_enriched"] += 1
+            continue
+        held = altmap.get(k)
+        usable_chip = r.get("h") is not None and not r.get("uncertain") and (r.get("verified") or r["conf"] >= 0.8)
+        if held is not None:
+            holder, a = held
+            # an alternate name stays an alternate unless its own measured chip is a distinct color (case 3 below,
+            # which then moves it out of `altn` into its own card)
+            Dn = de2000(labs([r["h"]]), base_lab)[0] if usable_chip and not r.get("foreign") else None
+            if Dn is None or float(Dn.min()) < MP_NEW_DE or len(base) >= MP_MAX_COLORS:
+                if "Maerz & Paul" not in a.get("note", ""):
+                    a["note"] = (a["note"] + "; " + cite) if a.get("note") else cite
+                if r.get("date") and "date" not in a:
+                    a["date"] = r["date"]
+                rep["alt_enriched"] += 1
+                continue
+            r = dict(r, _from_alt=(holder, a))
+            todo.append(r)
+            continue
+        usable = r.get("h") is not None and not r.get("uncertain") and (r.get("verified") or r["conf"] >= 0.8)
+        if not usable:
+            rep["skipped"] += 1
+            continue
+        todo.append(r)
+    # best candidates first: constant-use (ALL CAPS) names, then traditional (no trade code), then older, then surer
+    def prio(r):
+        return (-int(bool(r.get("caps"))), int(r.get("sup") in ("T", "M", "B", "F", "O", "R")), r.get("date") or 9999, -r["conf"])
+    todo.sort(key=prio)
+    for r in todo:
+        nm = title(r["n"])
+        lab = labs([r["h"]])
+        D = de2000(lab, base_lab)[0]
+        j = int(np.argmin(D))
+        eligible = (D[j] >= MP_NEW_DE and r.get("verified") and not r.get("foreign")
+                    and len(base) < MP_MAX_COLORS)
+        if eligible:
+            if r.get("_from_alt"):      # promote: drop the alias it was, the card replaces it
+                holder, a = r["_from_alt"]
+                holder["altn"] = [x for x in holder["altn"] if x is not a]
+                if not holder["altn"]:
+                    del holder["altn"]
+            new_e = {"n": nm, "h": r["h"], "src": ["maerz-paul"], "note": _mp_cite(r)}
+            new_entries.append(new_e)
+            base.append(new_e)
+            base_lab = np.vstack([base_lab, lab])
+            rep["new_colors"] += 1
+        else:
+            target = base[j]
+            altn = target.setdefault("altn", [])
+            if nm != target["n"] and nm not in {a["n"] for a in altn}:
+                alt = {"n": nm, "src": "maerz-paul", "note": _mp_cite(r)}
+                if r.get("date"):
+                    alt["date"] = r["date"]
+                altn.append(alt)
+                rep["attached_as_alt"] += 1
+                rep["foreign_alt_only"] += bool(r.get("foreign"))
     if new_entries:
         annotate(new_entries, app)
         entries.extend(new_entries)
@@ -762,11 +883,16 @@ def build():
     entries = annotate(merge(rows), app)
     entries, iscc_rep = merge_iscc_nbs(entries, app)
     mp_path = ROOT / "data" / "sources" / "maerz-paul-1930.json"
+    mp_dict = ROOT / "data" / "sources" / "maerz-paul-1930-dictionary.json"
     mp_rep = None
-    if mp_path.exists():
+    if mp_dict.exists():       # round 2 (index entries, corrected grid) supersedes the round-1 chip labels
+        entries, mp_rep = merge_maerz_paul_dictionary(entries, app)
+    elif mp_path.exists():
         entries, mp_rep = merge_maerz_paul(entries, app)
+    import library_final as LF   # canonical cards, English titles, field, useRank, teach flags (tools/library_final.py)
+    entries, _ = LF.finalize(entries, app_rows, report=True)
     entries.sort(key=sort_key)
-    order = ["n", "h", "src", "fam", "lch", "app", "alts", "altn", "approx", "werner", "jp", "note", "crude"]
+    order = LF.ORDER
     lines = [json.dumps({k: e[k] for k in order if k in e}, ensure_ascii=False, separators=(",", ":")) for e in entries]
     OUT.write_text("[\n" + ",\n".join(lines) + "\n]\n", encoding="utf-8")
     counts = {s: len(per[s]) for s in SOURCES}

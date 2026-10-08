@@ -1,0 +1,38 @@
+/* The Learner Model's relation mark (js/learner.js relMarkHTML) and the ColorSet verbs (js/colorset.js).
+   Minimal on purpose: the design lane (L12) owns .rel-mark's final look, and its CSS wins on merge. */
+
+/* the relation mark: nothing = unmet · ring = met · solid disc = yours · dashed red ring = you mixed it up */
+.rel-mark{display:inline-block;flex:none;width:8px;height:8px;margin-left:6px;border-radius:50%;vertical-align:middle;pointer-events:none}
+.rel-mark[data-s="met"]{box-shadow:inset 0 0 0 1.5px currentColor;opacity:.75}
+.rel-mark[data-s="yours"]{background:currentColor}
+.rel-mark[data-s="confused"]{border:1.5px dashed var(--bad)}
+
+/* one action row any page can drop in: opaque tiles, icon over a short label */
+.cs-acts{display:grid;grid-template-columns:repeat(var(--n,4),minmax(0,1fr));gap:6px;margin-top:14px}
+.cs-act{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:64px;padding:8px 2px;
+  border-radius:var(--r-2);background:var(--surface-2);color:var(--ink);font:500 12px/1.1 var(--sans);text-align:center}
+.cs-act svg{opacity:.9}
+.cs-act:active{background:var(--surface-3)}
+.cs-act span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.cs-acts[data-n="5"],.cs-acts[data-n="6"]{grid-template-columns:repeat(3,minmax(0,1fr))}   /* two rows of three on a phone, so labels never truncate */
+
+/* the compare sheet */
+.cs-cmp{display:grid;gap:18px;margin-top:8px}
+.cs-cmp h3{font:400 22px/1.1 var(--serif);margin:0 0 8px}
+.cs-strip{display:flex;gap:2px;height:52px;border-radius:var(--r-1);overflow:hidden}
+.cs-strip button{background:var(--c);min-width:0}
+.cs-chips{display:flex;flex-wrap:wrap;gap:6px 12px;margin-top:10px}
+.cs-chip{display:inline-flex;align-items:center;gap:6px;min-height:32px;font-size:13px;color:var(--soft)}
+.cs-chip i{width:16px;height:16px;border-radius:50%;background:var(--c);flex:none;box-shadow:inset 0 0 0 1px var(--rule)}
+.cs-chip .rel-mark{margin-left:0;color:var(--ink)}
+.cs-cmp-read{margin-top:18px;display:grid;gap:8px}
+.cs-cmp-read p{font:400 19px/1.25 var(--serif);margin:0}
+.cs-cmp-read b{font-weight:400;font-style:italic}
+.cs-cmp-sheet .fine{margin-top:16px}
+
+/* the constellation pill on Home (js/honey.js honeyHighlight): names the lit set, tap to show everything again */
+.cs-hl-pill{position:absolute;z-index:3;left:50%;transform:translateX(-50%);bottom:calc(var(--bottom) + 84px);display:flex;align-items:center;gap:8px;
+  max-width:calc(100% - 32px);min-height:44px;padding:0 14px 0 18px;border-radius:var(--r-pill);background:var(--paper);color:var(--paper-ink);
+  font:400 18px/1 var(--serif);box-shadow:0 10px 30px -12px rgba(0,0,0,.8)}
+.cs-hl-pill span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cs-hl-pill svg{flex:none;width:18px;height:18px}
