@@ -1,5 +1,5 @@
 > **Decisions (David, 2026-10-08: "go with your recs"):**
-> 1. Stages count the ~614 real words. Compounds (Light X, Dark X, repeats) are taught as quick variations of their base word.
+> 1. **Revised by David (same day):** the path continues to all ~2,700 distinct colors. 614 real words is one checkpoint ("Fluent"), then the stages continue: 1,000 ("Expert"), ~1,600, ~2,200 and ~2,700 ("Master"). Past 614, chapters are grouped by field (painter's pigments, fashion and textiles, interiors and paint, design and print, nature) and teach finer distinctions between neighbors. Near-duplicates (ΔE < ~2.5) merge into one card with aliases, so you never learn the same color twice. Compounds are still taught as variations of their base word.
 > 2. About 25 words per chapter, roughly 40 chapters.
 > 3. Cabinet pieces unlock when you meet a color, and get marked when it becomes Yours.
 > 4. Interests default to all on except Science.
