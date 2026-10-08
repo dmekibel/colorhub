@@ -87,9 +87,30 @@ function arIndex() {
 }
 // slug | name | {slug, name, hex, gloss} -> { slug, n, h, gloss? } or null. The 101 first, then the ~1,000 core names.
 let AR_GN = null;   // data/graph/names.json rows [slug, name, hex, ...]: every name in the graph, for slugs the ~1,000 core list lacks
+// Alias-aware resolving (the data-quality merge renamed and merged many colors). AR_AL maps an alias slug to { to: canonical slug, via: original word }:
+// data/graph/aliases.json { alias: {slug: canonical} } and data/aliases.json { slugs: {slug: canonical}, names: {Display name: Canonical name} }.
+// AR_LM is data/articles/link-map.json { links: { slug: { to: slug | null, label, reason } } }: explicit overrides, consulted first; to:null = plain text.
+let AR_AL = new Map(), AR_LM = new Map();
 function arLoadNames() {
   if (AR_GN) return Promise.resolve(AR_GN);
-  return arFetchJSON(arCfg().names || "data/graph/names.json").then(rows => (AR_GN = new Map((Array.isArray(rows) ? rows : []).map(r => [r[0], r]))));
+  return Promise.all([arFetchJSON(arCfg().names || "data/graph/names.json"), arFetchJSON(arCfg().gaiases || "data/graph/aliases.json"),
+    arFetchJSON(arCfg().aliases || "data/aliases.json"), arFetchJSON((arCfg().articles || "data/articles/") + "link-map.json")]).then(([rows, ga, da, lm]) => {
+    const al = new Map();
+    if (da && da.names) Object.keys(da.names).forEach(k => { const s = routeSlug(k); if (!al.has(s)) al.set(s, k); });   // slug -> the word as first written
+    if (da && da.slugs) Object.keys(da.slugs).forEach(s => al.set(s, { to: da.slugs[s], via: typeof al.get(s) === "string" ? al.get(s) : "" }));
+    if (ga && ga.alias) Object.keys(ga.alias).forEach(s => al.set(s, { to: ga.alias[s], via: "" }));
+    AR_AL = new Map([...al].filter(([, v]) => typeof v === "object"));
+    AR_LM = new Map(Object.entries((lm && lm.links) || {}));
+    return (AR_GN = new Map((Array.isArray(rows) ? rows : []).map(r => [r[0], r])));
+  });
+}
+function arDirect(slug) {
+  const c = typeof routeColor === "function" ? routeColor(slug) : null;
+  if (c) return { slug, n: c.n, h: c.h, c };
+  const e = arIndex().get(slug);
+  if (e) return { slug, n: e.n, h: e.h };
+  const g = AR_GN && AR_GN.get(slug);
+  return g ? { slug, n: g[1], h: g[2] } : null;
 }
 function arColor(ref) {
   if (!ref) return null;
@@ -101,12 +122,17 @@ function arColor(ref) {
     return h && n ? { slug: ref.slug || routeSlug(n), n, h, gloss } : null;
   }
   const slug = routeSlug(ref);
-  const c = typeof routeColor === "function" ? routeColor(slug) : null;
-  if (c) return { slug, n: c.n, h: c.h, c };
-  const e = arIndex().get(slug);
-  if (e) return { slug, n: e.n, h: e.h };
-  const g = AR_GN && AR_GN.get(slug);
-  return g ? { slug, n: g[1], h: g[2] } : null;
+  const lm = AR_LM.get(slug);
+  if (lm) {   // an explicit override: to:null is plain text, otherwise the target color with the original word kept as the label
+    if (!lm.to) return null;
+    const t = arDirect(lm.to);
+    return t ? { ...t, via: lm.label || arPretty(slug) } : null;
+  }
+  const d = arDirect(slug);
+  if (d) return d;
+  const a = AR_AL.get(slug);   // an alias: the canonical color, the word as first written kept as the label
+  const t = a && arDirect(a.to);
+  return t ? { ...t, via: a.via || arPretty(slug) } : null;
 }
 function arOpenColor(slug, srcEl) {
   const c = arColor(slug); if (!c) return;
@@ -117,8 +143,8 @@ function arOpenColor(slug, srcEl) {
 // ---------- inline text ----------
 function arLinkHTML(slug, label) {
   const c = arColor(slug);
-  if (!c) return `<span class="ar-link ar-x">${esc(label || arPretty(slug))}</span>`;
-  return `<button type="button" class="ar-link" data-ar-open="${esc(c.slug)}"><i style="--c:${c.h}"></i>${esc(label || c.n)}</button>`;
+  if (!c) { const lm = AR_LM.get(slug); return `<span class="ar-link ar-x">${esc(label || (lm && lm.label) || arPretty(slug))}</span>`; }
+  return `<button type="button" class="ar-link" data-ar-open="${esc(c.slug)}"><i style="--c:${c.h}"></i>${esc(label || c.via || c.n)}</button>`;
 }
 function arRefsHTML(body, art) {
   const ids = [];
@@ -494,7 +520,18 @@ function arWhichDraw(name, push, art) {
   return arShell(`<div class="ar-hubband ar-flat">${arBack()}</div>
     <h1 class="ar-hubt">Which <em>${esc(title)}</em>?</h1>
     <p class="ar-hubd">${esc((ent && ent.dek) || "Several colors go by this name. Each one opens its own page.")}</p>
-    <div class="ar-plates">${list.map(c => `<button type="button" class="ar-plate" style="--c:${c.h}" data-ink="${ink(c.h)}" data-ar-open="${esc(c.slug)}"><i hidden></i><b>${esc(c.n)}</b>${c.gloss ? `<span>${esc(c.gloss)}</span>` : ""}</button>`).join("")}</div>`, "ar-which");
+    <div class="ar-plates">${list.map((c, i) => `<button type="button" class="ar-plate" style="--c:${c.h}" data-ink="${ink(c.h)}" data-ar-open="${esc(c.slug)}"><i hidden></i><b>${esc(c.n)}</b>${c.gloss ? `<span>${esc(c.gloss)}</span>` : ""}${arWhichDiff(c, i ? list[0] : null)}</button>`).join("")}</div>`, "ar-which");
+}
+// every sense says how it differs from the main one (CLAUDE.md: "every color gets a line on how it differs"),
+// measured, e.g. "Lighter and bluer than lavender."
+function arWhichDiff(c, main) {
+  if (!main || typeof colorDiff !== "function" || typeof MORE === "undefined") return "";
+  try {
+    const p = colorDiff(c.h, main.h).slice(0, 2).filter(x => MORE[x.w]);
+    if (!p.length) return `<em>Almost the same as ${esc(main.n.toLowerCase())}.</em>`;
+    const w = MORE[p[0].w] + (p[1] ? " and " + MORE[p[1].w] : "");
+    return `<em>${esc(w.charAt(0).toUpperCase() + w.slice(1))} than ${esc(main.n.toLowerCase())}.</em>`;
+  } catch (e) { return ""; }
 }
 function arWhichPage(name, push = true) {
   if (AR_HUBS && (arWhichEntry(AR_WHICH, name) || arWhichEntry(AR_HUBS, name))) { arWhichDraw(name, push, null); return; }

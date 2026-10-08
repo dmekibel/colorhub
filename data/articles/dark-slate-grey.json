@@ -18,7 +18,7 @@
   {
    "id": "odd",
    "title": "Why it looks odd",
-   "body": "Its green and blue values are equal, so it leans toward teal, not blue [5]. Its supposed parent, `slategray` (#708090), is a lighter bluish grey, and the two sit about 23 units apart, with different hues [5]. The family names are a list of labels, not a system, and the web inherited worse: X11 *gray* was a light grey, while HTML's Gray was a mid grey, so in CSS `darkgray` is lighter than `gray` [1].\n\nIts nearest relatives in older systems are Ridgway's [[greenish-slate-black]], the ISCC-NBS [[dusky-dull-bluish-green]] and the Japanese [[omeshicha]], all within three units [5]. Paterson defines slate grey simply as the color of grey slate, a dark grey [4]."
+   "body": "Its green and blue values are equal, so it leans toward teal, not blue [5]. Its supposed parent, `slategray` (#708090), is a lighter bluish grey, and the two sit about 23 units apart, with different hues [5]. The family names are a list of labels, not a system, and the web inherited worse: X11 *gray* was a light grey, while HTML's Gray was a mid grey, so in CSS `darkgray` is lighter than `gray` [1].\n\nIts nearest relatives in older systems are Ridgway's [[greenish-slate-black]], and two older names now filed under this very color, the ISCC-NBS [[dusky-dull-bluish-green|dusky dull bluish green]] and the Japanese [[omeshicha|Omeshicha]], all within three units [5]. Paterson defines slate grey simply as the color of grey slate, a dark grey [4]."
   },
   {
    "id": "field",
@@ -39,13 +39,19 @@
   ],
   "siblings": [
    "slate-grey",
-   "light-slate-grey",
-   "dark-slate-blue"
+   "light-slate-grey"
   ],
   "parent": "slate-grey",
   "children": [],
   "disambiguation": [
-   "Slate Grey (#708090) is a lighter bluish grey; Dark Slate Grey is a dark teal-grey; Dark Slate Blue (#483D8B) is a violet blue."
+   {
+    "slug": "slate",
+    "gloss": "Slate (#708090) is a lighter bluish grey; Dark Slate Grey is a dark teal-grey"
+   },
+   {
+    "slug": "dark-slate-blue",
+    "gloss": "Dark Slate Blue (#483D8B) is a violet blue"
+   }
   ],
   "other_languages": []
  },
@@ -176,7 +182,7 @@
   "In CSS, darkgray is lighter than gray. Dark Slate Grey has its own family quirks.",
   "Some web color names were matched to a box of 72 crayons."
  ],
- "words": 414,
+ "words": 424,
  "status": "pilot",
  "checked": {
   "by": "L7 self-check (sentence-to-card trace, myth list, hedges)",

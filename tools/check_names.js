@@ -2,7 +2,9 @@
 // whole app at load. This lists any top-level const/let/function/class name declared in more than one file.
 const fs = require("fs"), path = require("path");
 const dir = path.join(__dirname, "..", "js"), seen = new Map();
-for (const f of fs.readdirSync(dir).filter(f => f.endsWith(".js"))) {
+// js/*.js plus one level of subfolders (js/games/*.js shares the same global scope)
+const files = fs.readdirSync(dir).flatMap(f => f.endsWith(".js") ? [f] : fs.statSync(path.join(dir, f)).isDirectory() ? fs.readdirSync(path.join(dir, f)).filter(g => g.endsWith(".js")).map(g => f + "/" + g) : []);
+for (const f of files) {
   for (const line of fs.readFileSync(path.join(dir, f), "utf8").split("\n")) {
     const m = line.match(/^(?:const|let|var|function\*?|class|async function)\s+([A-Za-z_$][\w$]*)/);
     if (m) (seen.get(m[1]) || seen.set(m[1], []).get(m[1])).push(f);

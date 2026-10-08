@@ -213,9 +213,9 @@ function explorePager() {
   const covers = [
     coverHTML("all", "For you", "A new pick of colors, paintings and stories every day.", `Today, ${c.n}`,
       tintFromHex(c.h), flatHeroHTML(c.h, c.n), forYouSeam),
-    art ? coverHTML("art", "Art", "23,531 paintings and eleven thousand poems, found by their colors.", artCoverNote(art),
+    art ? coverHTML("art", "Art", `${typeof GAL !== "undefined" && GAL ? GAL.n.toLocaleString("en-US") : "Over 23,000"} paintings and 11,440 poems, found by their colors.`, artCoverNote(art),
       tintFromPalette(art.palette), `<img src="${esc(art.img)}" alt="${esc(art.title)}">`, sixSwatchHTML(art.palette.map(p => p.h), art.palette.map(p => p.share)))
-      : coverHTML("art", "Art", "23,531 paintings and eleven thousand poems, found by their colors.", "", null, `<div class="xp-flat" style="background:var(--lift-2)"></div>`, ""),
+      : coverHTML("art", "Art", `${typeof GAL !== "undefined" && GAL ? GAL.n.toLocaleString("en-US") : "Over 23,000"} paintings and 11,440 poems, found by their colors.`, "", null, `<div class="xp-flat" style="background:var(--lift-2)"></div>`, ""),
     story ? coverHTML("ideas", "Ideas", "Short stories, systems and history, read through color.", `Today, ${story.title}`,
       tintFromHexList(story.cover), `<div class="xp-flat" style="background:linear-gradient(135deg,${story.cover.join(",")})"></div>`, sixSwatchHTML(story.cover))
       : coverHTML("ideas", "Ideas", "Short stories, systems and history, read through color.", "", null, `<div class="xp-flat" style="background:var(--lift-2)"></div>`, ""),
@@ -337,6 +337,7 @@ async function artFeedPins(hex, name) {
   return out;
 }
 function artHome() {
+  if (typeof xbHome === "function") return xbHome();   // Explore 2.0 (js/browse-ui.js, lane L16): facets, views, rooms; the feed below is the fallback
   XSTACK = [];
   const { hex, name } = ART_UI, tint = hex ? tintFromHex(hex) : null;
   const colors = glHueOrder([...BASICS, ...ALL]);
@@ -474,11 +475,14 @@ function xStep(prev) {
   // Studio screens (ROADMAP.md §17 job #1): plain tokens (no ":"), since each reopens from its own remembered
   // state rather than an id. Checked before the generic node lookup at the bottom, which would otherwise treat
   // "harmony" etc. as a (nonexistent) graph node id and silently do nothing.
+  if (prev === "chords") return chordsPage({ push: false });   // the masters' chords (js/chords.js)
+  if (prev.startsWith("pt:")) { const q = ptParse(prev.slice(3)); return paintingsOfPage(q.hexes, { ...q.st, push: false }); }   // color in paintings (js/paintingsof.js)
   if (prev === "favs") return favShelf();   // your colors (js/favs.js)
   if (prev === "favs-taste") return favTaste();   // your taste (js/favprofile.js)
   if (prev.startsWith("aw:") && typeof awStep === "function") return awStep(prev);   // the art wiki (js/artwiki.js)
   if (prev === "wheel") return gamutWheel(GW_LAST && GW_LAST.preset, GW_LAST && GW_LAST.pts, false);
   if (prev === "wheelview") return gwReopenView();
+  if (prev === "namer") return LAB.namer(NMR_LAST.hex, false);   // Name any color (js/namer.js), with the color you left it on
   if (prev === "harmony") return LAB.harmony(LAB_HARMONY_STATE && LAB_HARMONY_STATE.base, LAB_HARMONY_STATE && LAB_HARMONY_STATE.scheme, false);
   if (prev === "contrast") return LAB.contrast(LAB_CONTRAST_STATE && LAB_CONTRAST_STATE.set, LAB_CONTRAST_STATE && LAB_CONTRAST_STATE.slot, false);
   if (prev.startsWith("pal:")) return openSavedPalette(prev.slice(4), false);   // a saved palette (js/studio.js)
@@ -597,7 +601,7 @@ function colorPage(n, tapped) {
       <span class="cp-scroll-hint" aria-hidden="true">${ICON.up}</span>
     </div>
     <div class="cp-primary-row">
-      ${typeof hmLearnIt === "function" ? `<button class="cp-primary" data-learnit>${mine ? "Review it" : "Learn it"}${mine ? "" : `<em>2 min</em>`}${ICON.arrow}</button>` : ""}
+      ${typeof prQuick === "function" || typeof hmLearnIt === "function" ? `<button class="cp-primary" data-learnit>${mine ? "Review it" : "Learn it"}${mine ? "" : `<em>2 min</em>`}${ICON.arrow}</button>` : ""}
       <button class="icon-btn cp-icon${saved ? " saved" : ""}" data-save aria-label="Save">${saved ? "♥" : "♡"}</button>
       <button class="icon-btn cp-icon" data-share aria-label="Share">${ICON.share}</button>
     </div>
@@ -639,7 +643,7 @@ function colorPage(n, tapped) {
   wireLinks(el); wireSections(el);
   if (typeof articleRender === "function") articleRender(routeSlug(c.n), el.querySelector("[data-ar-slot]"), { n: c.n, h: c.h });   // js/article.js (lane L8): draws nothing when data/articles/<slug>.json is missing
   onKey = e => { if (e.key === "Escape") xBack(); };
-  const li = el.querySelector("[data-learnit]"); if (li) li.onclick = () => hmLearnIt(c);
+  const li = el.querySelector("[data-learnit]"); if (li) li.onclick = () => typeof prQuick === "function" ? prQuick({ seed: c }) : hmLearnIt(c);   // js/practice.js: the instant-deck sheet
   el.querySelector("[data-save]").onclick = e => {
     const b = e.currentTarget, want = !b.classList.contains("saved");
     if (isSaved(n.id) !== want) toggleSave(n.id);
@@ -700,7 +704,7 @@ function paintingPage(n) {
     <p class="p-dek">${esc(n.artist || "")}${n.place ? ` · ${esc(n.place)}` : ""}</p>
     ${pal.length ? `<div class="palette">${pal.map((p, i) => `<button class="pal" data-pi="${i}" data-swatch="${p.h}" style="--c:${p.h};flex:${Math.max(p.share, .08)}" data-ink="${ink(p.h)}"><span>${Math.round(p.share * 100)}%</span></button>`).join("")}</div>
       <div class="pal-names">${pal.map((p, i) => { const fam = typeof familyOf === "function" && familyOf(p.h); return `<button class="pal-name" data-pi="${i}" data-swatch="${p.h}"><i style="--c:${p.h}"></i><b>${esc(p.name)}</b>${fam ? `<span>${esc(fam.head.n)} family</span>` : ""}<em class="mono">${p.h}</em></button>`; }).join("")}</div>
-      <p class="fine">Tap a swatch to open its page.</p>` : `<p class="fine">This painting's palette is being extracted.</p>`}
+      <p class="fine">Tap a swatch to open its page.</p>${typeof prLearnBtn === "function" ? prLearnBtn(".palette", n.title) : ""}` : `<p class="fine">This painting's palette is being extracted.</p>`}
     ${n.note ? `<p class="p-body">${linkText(n.note)}</p>` : ""}
     ${connSection(n)}
     ${n.commons ? `<section class="srcs"><h3>Image</h3><ul><li><a href="${esc(n.commons)}" target="_blank" rel="noopener">Wikimedia Commons</a> · ${esc(n.license || "Public domain")}</li></ul></section>` : ""}
@@ -734,69 +738,4 @@ function paintingPage(n) {
   }));
 }
 
-// ======================================================================
-// Color of the day: guess its name from four close ones, then read about it
-// ======================================================================
-function daily() {
-  const c = dailyColor(), k = today(), ans = S.daily[k];
-  const decoys = nearestColors(c.h, 3, c.n).map(x => x[0]);
-  const opts = ans ? null : shuffle([c, ...decoys]);
-  const n = colorNode(c), w = n.wiki;
-  const dateStr = new Date(Date.now() - 4 * 3600e3).toLocaleDateString(undefined, { month: "long", day: "numeric" });
-  const el = show(`
-    <header class="deck-top"><button class="icon-btn" data-close aria-label="Close">${ICON.x}</button><span class="eyebrow" style="flex:1;text-align:center">Color of the day · ${esc(dateStr)}</span><span style="width:44px"></span></header>
-    <div class="d-swatch" style="--c:${c.h}" data-ink="${ink(c.h)}"><span class="mono">${c.h}</span>${ans ? `<h1>${esc(c.n)}</h1>` : ""}</div>
-    <div class="d-body" id="dbody"></div>
-  `, "fixed daily");
-  const body = el.querySelector("#dbody");
-  el.querySelector("[data-close]").onclick = () => go(S.tab || "learn");
-  const reveal = ok => {
-    const sw = el.querySelector(".d-swatch");
-    if (!sw.querySelector("h1")) sw.insertAdjacentHTML("beforeend", `<h1>${esc(c.n)}</h1>`);
-    body.innerHTML = `
-      <p class="d-verdict ${ok ? "y" : "n"}">${ok ? "You named it." : `It's ${esc(c.n)}.`}</p>
-      <p class="d-text">${w && w.facets[0] ? linkText(w.facets[0].text) : esc(c.o || c.d || "")}</p>
-      <div class="stack">
-        <button class="btn" data-share>${ICON.share} Share today's color</button>
-        <div class="row2"><button class="btn ghost" data-page>Its page</button><button class="btn ghost" data-web>More like this</button></div>
-      </div>`;
-    wireLinks(body);
-    body.querySelector("[data-share]").onclick = () => shareCard(c, ok, dateStr);
-    body.querySelector("[data-page]").onclick = () => { XSTACK = []; openNode(n); };
-    body.querySelector("[data-web]").onclick = () => closeup(n);
-  };
-  if (ans) return reveal(ans.ok);
-  body.innerHTML = `<p class="d-q">What's this color called?</p><div class="d-opts">${opts.map((o, i) => `<button data-i="${i}">${esc(o.n)}</button>`).join("")}</div>`;
-  body.querySelectorAll("[data-i]").forEach(b => b.onclick = () => {
-    const ok = opts[+b.dataset.i] === c;
-    S.daily[k] = { n: c.n, ok }; save();
-    buzz(ok ? 12 : [10, 40, 10]);
-    b.classList.add(ok ? "right" : "wrong");
-    body.querySelector(`[data-i="${opts.indexOf(c)}"]`).classList.add("right");
-    later(() => reveal(ok), 650);
-  });
-}
-
-// A 1080x1350 card: the color, its name and the date. Shared as an image where the browser allows it.
-function shareCard(c, ok, dateStr) {
-  const W = 1080, H = 1350, cv = document.createElement("canvas"); cv.width = W; cv.height = H;
-  const x = cv.getContext("2d");
-  x.fillStyle = "#121212"; x.fillRect(0, 0, W, H);
-  x.fillStyle = c.h; x.beginPath(); x.roundRect(60, 60, W - 120, 900, 48); x.fill();
-  x.fillStyle = "#F5F4F0"; x.beginPath(); x.roundRect(60, 920, W - 120, 370, [0, 0, 48, 48]); x.fill();
-  x.fillRect(60, 920, W - 120, 60);
-  x.fillStyle = "#66665F"; x.font = "600 30px Geist, system-ui, sans-serif"; x.fillText(`COLOR OF THE DAY · ${dateStr.toUpperCase()}`, 110, 1000);
-  x.fillStyle = "#141414"; x.font = "400 130px 'Instrument Serif', Georgia, serif"; x.fillText(c.n, 104, 1150);
-  x.fillStyle = "#66665F"; x.font = "500 32px 'Geist Mono', monospace"; x.fillText(`${c.h}   ·   ${ok ? "named it" : "learned it"} on ColorHub`, 110, 1230);
-  const text = `Today's color: ${c.n} ${ok ? "(I named it)" : ""} · ColorHub`;
-  const url = shareURL("color/" + routeSlug(c.n));   // the color's own page, with a preview card
-  cv.toBlob(async blob => {
-    const file = new File([blob], `colorhub-${c.n.toLowerCase().replace(/\s+/g, "-")}.png`, { type: "image/png" });
-    try {
-      if (navigator.canShare && navigator.canShare({ files: [file] })) return await navigator.share({ files: [file], text, url });
-      if (navigator.share) return await navigator.share({ text, url });
-    } catch (e) { if (e && e.name === "AbortError") return; }
-    const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = file.name; a.click();
-    toast("Saved the card");
-  }, "image/png");
-}
+// (The color of the day, daily(), is now "Name today's color" in js/colordle.js; its share card is js/sharecard.js.)
