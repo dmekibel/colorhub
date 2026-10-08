@@ -23,6 +23,8 @@ const lkStripes = (cols, cls = "lkx-str") => `<span class="${cls}">${cols.map(c 
 // weighted by A's proportions; the symmetric distance averages both directions, so a palette missing half of
 // a look's colors scores badly even if every color it has is in the look.
 const lkLabs = new Map();
+// a palette color is named from the ~1,000 learnable names (js/naming.js), never the library name stored with it (Japanese, Web, xkcd names)
+const lkColName = c => (nameOf(c[0]).n) || c[1];
 function lkPalLab(cols) {   // cols: [[hex, name, share]] or [{h, share}]
   const key = cols.map(c => (c[0] || c.h) + ":" + (c[2] != null ? c[2] : c.share)).join();
   if (lkLabs.has(key)) return lkLabs.get(key);
@@ -125,8 +127,8 @@ function lkOpen(id, opts = {}) {
   `, "article lkx-page");
   const draw = () => {
     const p = look.pals[pi];
-    el.querySelector("#lkh").innerHTML = p.c.map(c => `<i style="--c:${c[0]};flex:${Math.max(c[2], .06)}" data-ink="${ink(c[0])}" data-swatch="${c[0]}" role="button" aria-label="${esc(c[1])}"><span class="mono">${Math.round(c[2] * 100)}%</span></i>`).join("");
-    el.querySelector("#lkc").innerHTML = p.c.map((c, i) => { return `<button class="lkx-col" data-swatch="${c[0]}"><i style="--c:${c[0]}"></i><span><b>${esc(c[1])}</b><em class="mono">${c[0]} · ${Math.round(c[2] * 100)}%</em></span>${ICON.arrow}</button>`; }).join("");
+    el.querySelector("#lkh").innerHTML = p.c.map(c => `<i style="--c:${c[0]};flex:${Math.max(c[2], .06)}" data-ink="${ink(c[0])}" data-swatch="${c[0]}" role="button" aria-label="${esc(lkColName(c))}"><span class="mono">${Math.round(c[2] * 100)}%</span></i>`).join("");
+    el.querySelector("#lkc").innerHTML = p.c.map((c, i) => { return `<button class="lkx-col" data-swatch="${c[0]}"><i style="--c:${c[0]}"></i><span><b>${esc(lkColName(c))}</b><em class="mono">${c[0]} · ${Math.round(c[2] * 100)}%</em></span>${ICON.arrow}</button>`; }).join("");
     el.querySelectorAll("[data-pi]").forEach(b => b.classList.toggle("on", +b.dataset.pi === pi));
   };
   draw();

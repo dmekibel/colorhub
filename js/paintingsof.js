@@ -300,6 +300,7 @@ function paintingsOfPage(hexes, o = {}) {
       if (s.earliest) glDetail(s.earliest.i).then(d => { const e = body.querySelector("[data-early]"); if (e) e.textContent = d.t + (d.a ? ", " + d.a : ""); }).catch(() => {});
     });
   };
+  let autoWiden = true;   // the first empty result opens at the nearest setting that finds paintings, once
   const run = () => {
     const my = ++seq;
     ptSync();
@@ -313,6 +314,7 @@ function paintingsOfPage(hexes, o = {}) {
         // an empty result teaches: what would find something
         paintingsWith(hexes, { ...st, tol: Math.max(st.tol, 6), minCover: Math.min(st.minCover, 1), maxCover: null }).then(loose => {
           if (my !== seq) return;
+          if (autoWiden && loose.count) { autoWiden = false; Object.assign(st, { tol: Math.max(st.tol, 6), minCover: Math.min(st.minCover, 1), maxCover: null }); if (tuner) tuner.set(st); return run(); }
           const host = el.querySelector("[data-results]");
           host.innerHTML = loose.count ? `<p class="fine">Nothing at this setting.</p><button class="btn ghost gl-all" data-loosen>${ptNum(loose.count)} ${loose.count === 1 ? "painting is" : "paintings are"} within ${Math.max(st.tol, 6)}% and cover 1% ${ICON.arrow}</button>` : `<p class="fine">No painting in the gallery holds ${hexes.length > 1 ? "all of these" : "this color"}, even loosely. ${hexes.length > 1 ? "Try “Any”, or remove a color." : ""}</p>`;
         });
@@ -325,7 +327,7 @@ function paintingsOfPage(hexes, o = {}) {
   const ptSync = () => ptSyncURL(hexes, st);
   const sliderHost = el.querySelector("[data-sliders]");
   const tune = () => {
-    tuner = ptSliders(sliderHost, st, () => { ptSave(st); run(); }, { hex: hexes.length === 1 ? hexes[0] : null, noCount: true });
+    tuner = ptSliders(sliderHost, st, () => { autoWiden = false; ptSave(st); run(); }, { hex: hexes.length === 1 ? hexes[0] : null, noCount: true });
   };
   // source switch: only the sources that exist
   ciAvailable().then(keys => {
