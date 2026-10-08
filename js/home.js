@@ -499,6 +499,7 @@ function hmHome() {
     const src = document.createElement("div");
     Object.assign(src.style, { position: "fixed", left: "0", right: "0", bottom: "0", height: "2px" });
     document.body.appendChild(src);
+    hmSnapFloor();
     growFrom(src, () => go("learn"));
     src.remove();
   }
@@ -647,6 +648,36 @@ async function l18Resolve(q) {
   return { set: colorSet({ kind: "painter", id: p.slug, title, colors: hs.map(h => ({ h })) }), hint: `${l18Sw(hs)}<span>Light up <b>${esc(p.n)}</b>'s colors</span>` };
 }
 
+// ---------- L18 B2: the real floor. Just before a room rises over Home, keep a snapshot of the map exactly as you
+// left it; the strip above every room (js/core.js roomChrome) shows it, dimmed by a solid scrim, never blurred. ----------
+let ROOM_FLOOR_IMG = null;
+function hmSnapFloor() {
+  const c = window.HM_CTRL; if (!c || !c.snapshot || !document.querySelector(".screen.hm canvas")) return;
+  const u = c.snapshot(390); if (u) ROOM_FLOOR_IMG = u;
+}
+// the stem's live art (js/core.js roomsBubbleArt/roomsNote ask here first): today's painting for Explore, today's
+// station for Train, your last palette (or the gamut wheel) for Studio
+// "Jan van Eyck" -> "van Eyck", "Claude Monet" -> "Monet"
+function l18Surname(full) {
+  const w = String(full || "").trim().split(/\s+/); if (!w[0]) return "";
+  let i = w.length - 1; while (i > 0 && /^(van|von|de|der|den|da|del|della|di|du|la|le|ter)$/i.test(w[i - 1])) i--;
+  return w.slice(i).join(" ");
+}
+function hmStemToday() {
+  const out = {};
+  try {
+    let art = null;
+    try { art = typeof coverData === "function" ? coverData().art : null; } catch (e) { art = null; }
+    if (!art && window.PAINTINGS && PAINTINGS.length && typeof seeded === "function") art = seeded(PAINTINGS.filter(p => p.thumb || p.img), "artcover" + today())[0];
+    if (art) out.explore = { art: `<span class="rm-art rm-art-img"><img src="${esc(art.thumb || art.img)}" alt="" loading="lazy"></span>`, note: [l18Surname(art.artist), art.title].filter(Boolean).join(", ") };
+  } catch (e) {}
+  try { const tt = typeof todayTrain === "function" ? todayTrain() : null; if (tt && tt.art) out.gym = { art: `<span class="rm-art rm-art-station">${tt.art}</span>`, note: tt.what }; } catch (e) {}
+  const pal = (S.palettes || [])[0], cols = pal && (pal.cols || pal.colors || []).map(c => typeof c === "string" ? c : c && c.h).filter(Boolean);
+  if (cols && cols.length) out.studio = { art: `<span class="rm-art rm-art-strip">${cols.slice(0, 8).map(h => `<i style="background:${h}"></i>`).join("")}</span>`, note: `Your last palette · ${cols.length} color${cols.length === 1 ? "" : "s"}` };
+  else out.studio = { note: "Make a palette from a photo" };
+  return out;
+}
+
 function hmTap(el) {
   if (!el) return;
   const r = el.getBoundingClientRect(), x = r.left + r.width / 2, y = r.top + r.height / 2, o = { bubbles: true, clientX: x, clientY: y, pointerId: 1 };
@@ -661,6 +692,7 @@ function hmShot(arg) {
   if (arg === "far" || arg === "fam") S.hm = Object.assign(S.hm || {}, { src: "stage:1000", filter: "all", zoom: .01, famNames: arg === "fam" });
   hmHome();
   if (arg === "bar") setTimeout(() => { const s = document.querySelector(".screen.hm"); if (s) s.classList.remove("chrome-hide"); }, 3200);
+  if (arg === "floor") setTimeout(() => { hmSnapFloor(); go("gym"); }, 600);   // L18 B2: a room over the real floor
   if (/^find:/.test(arg)) setTimeout(() => window.HM_SEARCH && window.HM_SEARCH(arg.slice(5)), 300);
   if (arg === "rooms") setTimeout(() => hmTap(document.querySelector("[data-rooms-corner]")), 150);
   if (arg === "views") setTimeout(() => hmTap(document.getElementById("hmView")), 150);

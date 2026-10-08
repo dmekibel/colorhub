@@ -148,3 +148,9 @@
 .hm-l18-sw{flex:none;display:flex}
 .hm-l18-sw i{width:22px;height:22px;border-radius:50%;margin-left:-6px;box-shadow:0 0 0 2px var(--paper)}
 .hm-l18-sw i:first-child{margin-left:0}
+/* L18 B2: the live stem (what is inside each room today) and the real floor under a solid scrim (no blur) */
+.rm-art-img img{display:block;width:100%;height:100%;object-fit:cover}
+.rm-art-station{display:grid;place-items:center;background:var(--surface-2)}
+.rm-art-station .sa{width:100%;height:100%;aspect-ratio:auto;border-radius:0}
+.room-floor-snap{background-size:cover;background-position:center 42%}
+.room-floor-snap i{position:absolute;inset:0;top:0;width:auto;height:auto;transform:none;opacity:1;background:rgba(14,13,11,.58)}

@@ -367,7 +367,9 @@ const ROOM_NOTES = { gym: "Sharpen your eye", studio: "Make your own", explore: 
 const LEGACY_HEAD = /<header class="bar"><button class="brand" data-hm-brand[\s\S]*?<\/header>\s*<h1 class="tab-title">([\s\S]*?)<\/h1>/;
 function roomChrome(inner, tab) {
   inner = inner.replace(LEGACY_HEAD, (_, t) => `<header class="room-head rh-auto"><h1 class="title-1">${t}</h1>${ROOM_NOTES[tab] ? `<span class="note">${ROOM_NOTES[tab]}</span>` : ""}</header>`);
-  return `<div class="room-floor-peek" data-floor-peek>${ROOM_PEEK_BARS}</div><div class="room-sheet" data-room="${tab}">${inner}</div><button class="corner l" data-rooms-corner aria-label="Rooms">${ROOMS_GLYPH}</button>`;
+  // L18 B2: the real floor (js/home.js hmSnapFloor), dimmed by a solid scrim; the decorative bars only until one exists
+  const floor = typeof ROOM_FLOOR_IMG === "string" && ROOM_FLOOR_IMG ? `<div class="room-floor-peek room-floor-snap" data-floor-peek style="background-image:url('${ROOM_FLOOR_IMG}')"><i></i></div>` : `<div class="room-floor-peek" data-floor-peek>${ROOM_PEEK_BARS}</div>`;
+  return `${floor}<div class="room-sheet" data-room="${tab}">${inner}</div><button class="corner l" data-rooms-corner aria-label="Rooms">${ROOMS_GLYPH}</button>`;
 }
 let STEM_OPEN = false;
 function roomsBubbleArt(id) {
@@ -376,6 +378,7 @@ function roomsBubbleArt(id) {
     const cols = (due.length ? due : ALL.slice(0, 8)).map(c => c.h);
     return `<span class="rm-art rm-art-strip">${cols.map(h => `<i style="background:${h}"></i>`).join("")}</span>`;
   }
+  if (typeof hmStemToday === "function") { const t = hmStemToday()[id]; if (t && t.art) return t.art; }   // L18 B2: what's inside today
   if (id === "gym") return `<span class="rm-art" style="background:conic-gradient(from 0deg,#ff3b30,#ffcc00,#4cd964,#34c8e0,#3b5bff,#c644fc,#ff3b30)"></span>`;
   if (id === "explore") return `<span class="rm-art" style="background:linear-gradient(135deg,#2C4F6F,#8E9C8A 60%,#F0DFBC)"></span>`;
   return `<span class="rm-art" style="background:radial-gradient(circle,#8a8a8a 0,rgba(138,138,138,0) 68%),conic-gradient(#ff3b30,#ffcc00,#4cd964,#34c8e0,#3b5bff,#c644fc,#ff3b30)"></span>`;
@@ -383,6 +386,7 @@ function roomsBubbleArt(id) {
 function roomsNote(id) {
   try {
     if (id === "learn") { const n = dueList().length; return n ? `${n} to recall` : "All caught up"; }
+    if (id !== "learn" && typeof hmStemToday === "function") { const t = hmStemToday()[id]; if (t && t.note) return t.note; }   // L18 B2
     if (id === "gym" && typeof todayTrain === "function") return todayTrain().what;
     if (id === "explore") return "Browse by color";
     if (id === "studio") return "Wheel, camera, palettes";
@@ -406,6 +410,7 @@ function toggleStem(cornerEl) {
   STEM_OPEN = true;
   document.body.classList.add("stem-open");
   const inRoom = !!document.querySelector(".room-sheet");
+  if (!inRoom && typeof hmSnapFloor === "function") hmSnapFloor();   // L18 B2: the floor as you leave it
   const items = (inRoom ? [["home", "Home"]] : []).concat(ROOMS_LIST);
   const stem = document.createElement("div");
   stem.className = "rooms-stem";

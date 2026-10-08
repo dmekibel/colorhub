@@ -1301,6 +1301,11 @@ function honeycomb(host, opts = {}) {
     zoomValue: () => Z,
     famNames(on) { famOn = !!on; draw(); },
     _morphCheck: items => l18MorphCheck(items),
+    // L18 B2: a small JPEG of the map as it looks right now (the rooms' floor strip shows it under a solid scrim)
+    snapshot(w = 390) {
+      if (!W || !cv.width) return null;
+      try { const c = document.createElement("canvas"); c.width = Math.round(w); c.height = Math.round(Hh * w / W); const g = c.getContext("2d"); g.fillStyle = "#0E0D0B"; g.fillRect(0, 0, c.width, c.height); g.drawImage(cv, 0, 0, c.width, c.height); return c.toDataURL("image/jpeg", .7); } catch (e) { return null; }
+    },
     isZoomedOut: () => l18ZoomedOut(),
     // where a color sits on screen right now (js/polish.js flyToMap): the biggest drawn bubble with that hex, in viewport px
     locate(h) { const H = String(h).toUpperCase(), b = drawn.filter(x => String(x.it.h).toUpperCase() === H).sort((x, y) => y.d - x.d)[0]; if (!b) return null; const r = cv.parentNode.getBoundingClientRect(); return { x: r.left + b.x, y: r.top + b.y, d: b.d }; },
