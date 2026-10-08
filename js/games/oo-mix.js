@@ -218,7 +218,9 @@ const OO_MIXPLAY = {
     return new Promise(resolve => {
       const W = window.OO_WHOSE, rnd = it.rnd || Math.random;
       if (!W) return resolve({ ok: 0, ms: 0, act: 0, line: "The painter data didn't load." });
-      const rd = W.rounds[Math.floor(rnd() * W.rounds.length)], P = i => W.painters[i];
+      // it.painter (a slug): one of that painter's own solvable rounds, when there is one
+      const pi = it.painter ? W.painters.findIndex(p => p[0] === it.painter) : -1, own = pi >= 0 ? W.rounds.filter(r => r[0] === pi) : [];
+      const pool = own.length ? own : W.rounds, rd = pool[Math.floor(rnd() * pool.length)], P = i => W.painters[i];
       const hexes = s => (s.match(/.{6}/g) || []).map(x => "#" + x);
       const alts = ooShuf(rd[3], rnd).slice(0, 2);
       const opts = ooShuf([{ i: rd[0], strip: hexes(rd[2]), right: 1 }, ...alts.map(a => ({ i: a, strip: hexes(P(a)[5]) }))], rnd);
@@ -268,19 +270,21 @@ function ooWhoseLoad() {
   if (!OO_WHOSE_LOADING) OO_WHOSE_LOADING = new Promise(res => { const s = document.createElement("script"); s.src = "data/games/whose.js"; s.onload = () => res(true); s.onerror = () => { OO_WHOSE_LOADING = null; res(false); }; document.head.appendChild(s); });
   return OO_WHOSE_LOADING;
 }
-function ooWhose() {
+// js/artwiki.js offers this on a painter's page: the set opens with that painter's own round
+function whosePalette(slug) { return ooWhose(slug); }
+function ooWhose(painter = null) {
   ooWhoseLoad().then(ok => {
     if (!ok) return toast("Couldn't load the painters");
     const el = show(`
       <header class="deck-top"><button class="icon-btn" data-close aria-label="Back">${ICON.back}</button></header>
       <h1 class="title-1 oo-title">Whose palette?</h1>
       <p class="lede">Five colors from one group of a painter's works. Pick the painter: each choice shows a strip of colors from their paintings.</p>
-      <p class="fine">Every round is checked to be solvable: the five colors sit clearly nearer the right painter's strip than either other painter's, and the right strip never repeats a shown color. These are photographs of varnished paintings, so the colors are as photographed and lean brown. From ${OO_WHOSE.painters.length} painters with at least 12 paintings in the archive.</p>
+      <p class="fine">Every round is checked to be solvable: the five colors sit clearly nearer the right painter's strip than either other painter's, and the right strip never repeats a shown color. These are photographs of varnished paintings, so the colors are as photographed and lean brown. From ${window.OO_WHOSE.painters.length} painters with at least 12 paintings in the archive.</p>
       <div class="stack" style="margin-top:28px"><button class="btn" data-go>Play six rounds ${ICON.arrow}</button></div>`, "oo-eye");
     el.querySelector("[data-close]").onclick = () => go("gym");
     el.querySelector("[data-go]").onclick = () => ooRun({ label: "Painters", total: OO_ROUNDS, combo: true, cls: "oo-whose", onQuit: () => go("gym"),
-      gen: () => ({ kind: "whose", record: false, hold: true }),
+      gen: k => ({ kind: "whose", record: false, hold: true, painter: k === 0 && painter ? painter : null }),
       onEnd: s => { const st = ooS(), best = Math.max(s.hits, (st.mix.whose || {}).best || 0); st.mix.whose = { best, stars: [s.hits >= OO_PASS, 0, 0].map(Number) }; save();
-        ooResults({ title: "Whose palette?", s, finish: s.hits >= OO_PASS, stars: [s.hits >= OO_PASS ? 1 : 0, 0, 0], got: [1, 0, 0], pb: false, next: null, again: () => ooWhose(), score: `${s.hits} of ${s.total} painters` }); } });
+        ooResults({ title: "Whose palette?", s, finish: s.hits >= OO_PASS, stars: [s.hits >= OO_PASS ? 1 : 0, 0, 0], got: [1, 0, 0], pb: false, next: null, again: () => ooWhose(), score: `${s.hits} of ${s.total} painters`, back: "Back to Train", onBack: () => go("gym") }); } });
   });
 }

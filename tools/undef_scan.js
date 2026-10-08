@@ -27,7 +27,7 @@ const BROWSER = new Set(JSON.parse(fs.readFileSync(path.join(__dirname, "smoke",
 const NODE_IDIOM = new Set(["module", "exports", "require"]);   // `typeof module !== "undefined"` guards around a node-only export
 const GENERIC = new Set(["name", "status", "length", "event", "top", "parent", "opener", "closed", "external", "origin", "frames", "self"]);
 const list = dir => fs.readdirSync(path.join(ROOT, dir)).filter(f => f.endsWith(".js")).sort().map(f => dir + "/" + f);
-const CHECKED = list("js"), DATA = list("data");
+const CHECKED = [...list("js"), ...(fs.existsSync(path.join(ROOT, "js/games")) ? list("js/games") : [])], DATA = list("data");
 if (fs.existsSync(path.join(ROOT, "sw.js"))) DATA.push("sw.js");   // (own scope in a worker; only read for declarations)
 
 const parse = (src, file) => {

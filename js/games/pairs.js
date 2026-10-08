@@ -68,7 +68,7 @@ function ooPairs() {
       <h1 class="title-1 oo-title">Painters' pairs</h1>
       <p class="lede">Some colors keep company. Two pairs at a time: which pair did painters put together more often?</p>
       ${fresh ? `<p class="gy-news"><b>New</b> ${esc(fresh.news)}.</p>` : ""}
-      <p class="fine">Measured over ${OO_PAIRS.groups.all.m.toLocaleString()} paintings in the archive, six colors each, named to the nearest lesson color. "Lift" compares how often a pair shares a canvas with what chance predicts from how common each color is. Only pairs whose lifts are clearly apart are played, and near-identical colors are left out. These are photographs of varnished paintings, so they lean brown.</p>
+      <p class="fine">Measured over ${window.OO_PAIRS.groups.all.m.toLocaleString()} paintings in the archive, six colors each, named to the nearest lesson color. "Lift" compares how often a pair shares a canvas with what chance predicts from how common each color is. Only pairs whose lifts are clearly apart are played, and near-identical colors are left out. These are photographs of varnished paintings, so they lean brown.</p>
       <div class="stack" style="margin-top:28px"><button class="btn" data-go>${pr.n ? "Play six rounds" : "Start"} ${ICON.arrow}</button></div>`, "oo-eye");
     el.querySelector("[data-close]").onclick = () => go("gym");
     el.querySelector("[data-go]").onclick = () => ooRun({ label: "Pairs", total: OO_ROUNDS, combo: true, cls: "oo-pairsrun", onQuit: () => go("gym"),

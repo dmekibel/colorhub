@@ -309,7 +309,7 @@ function gymHome() {
     ${typeof ooShelf === "function" ? ooShelf() : ""}
     ${cvdOn() ? `<p class="x-sub" style="margin-top:12px">A simple adjustment for ${S.profile.cvd} color blindness, not a simulation of it: differences lean on lightness and on the colors you see best.</p>` : ""}
     ${SHELVES.map(([name, ks]) => `<div class="sec-head"><b>${name}</b><span>${name === "Applied" ? "built on the basics" : name === "In context" ? "color next to color" : "one judgment at a time"}</span></div>
-      <div class="gs-grid">${ks.map(stationTile).join("")}</div>`).join("")}
+      <div class="gs-grid">${ks.filter(k => typeof ooRetired !== "function" || !["hue", "memory", "order"].includes(k)).map(stationTile).join("")}</div>`).join("")}
     ${typeof matchShelves === "function" ? matchShelves() : ""}
     <div class="sec-head"><b>Game</b><span>for fun</span></div>
     <button class="play-row" data-lightning><span><b>Lightning round</b><span>Forty-five seconds. Name as many colors as you can.</span></span><em class="lt-best">${S.best.lightning ? `<b>${S.best.lightning}</b>best` : "new"}</em></button>

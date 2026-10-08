@@ -260,17 +260,20 @@ scenario("train", "check-in card opens the drill", async t => {
 });
 
 scenario("train", "Odd one out: tap tiles through a whole round", async t => {
+  // js/games: the Train shelf opens the Odd one out map (a played save), then level 1
   await t.open("#shot=gx:home", { settle: 600 });
-  const st = await t.waitFor('[data-st="hue"]', 6000, "the Odd one out tile");
-  await t.click(st, { wait: 500 });
-  await t.waitFor(".drill .tile", 6000, "the 3x3 grid of tiles");
-  t.expect(t.$$(".drill .tile").length === 9, `${t.$$(".drill .tile").length} tiles instead of 9`);
-  const first = t.$(".drill #dstage").innerHTML;
-  await t.click(".drill .tile", { wait: 1200 });
-  t.expect(t.$(".drill #dstage").innerHTML !== first || t.$(".result"), "tapping a tile changed nothing");
+  const st = await t.waitFor("[data-oo-map]", 6000, "the Odd one out shelf");
+  await t.click(st, { wait: 600 });
+  const play = await t.waitFor("[data-play], .oo-board", 6000, "the map or level 1");
+  if (play.matches("[data-play]")) await t.click(play, { wait: 600 });
+  await t.waitFor(".oo-board .oo-t", 6000, "the board");
+  t.expect(t.$$(".oo-board .oo-t").length >= 9, `${t.$$(".oo-board .oo-t").length} tiles`);
+  const first = t.$("#oostage").innerHTML;
+  await t.click(".oo-board .oo-t", { wait: 1200 });
+  t.expect(t.$("#oostage").innerHTML !== first || t.$(".result") || t.$("#oofoot").innerText.length > 5, "tapping a tile changed nothing");
   let taps = 1;
   for (let i = 0; i < 60 && !t.$(".result"); i++) {
-    const b = t.$("[data-cf]") || t.$("[data-next]") || t.$(".drill .tile:not(.ring):not(.miss):not(.picked)");
+    const b = t.$("[data-next]") || t.$("[data-w]") || t.$("[data-k]:not(:disabled)") || t.$(".oo-board .oo-t:not(.ring):not(.miss):not(.sel):not(:disabled)");
     if (b) { await t.click(b, { force: true, wait: 400 }); taps++; } else await t.sleep(300);
   }
   await t.waitFor(".result", 6000, "the station result screen");

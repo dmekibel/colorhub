@@ -40,7 +40,7 @@ function ooShot(arg) {
   if (what === "back") { ooS().last = addDays(today(), -1); ooS().fresh = 12; return ooMap(); }
   if (what === "line") {
     ooAcross();
-    if (a === "ans" || a === "miss") return setTimeout(() => { const r = OO_LAST, t = document.querySelectorAll(".oo-board .oo-t"); if (!r || !t.length) return; t[a === "ans" ? r.ans[0] : (r.ans[0] + 1) % t.length].click(); }, 2600);
+    if (a === "ans" || a === "miss") { const tap = (n = 0) => { const r = OO_LAST, t = document.querySelectorAll(".oo-line .oo-board .oo-t"); if (!r || !t.length) return n < 40 && setTimeout(() => tap(n + 1), 250); t[a === "ans" ? r.ans[0] : (r.ans[0] + 1) % t.length].click(); }; return setTimeout(tap, 900); }
     return;
   }
   if (what === "shelf") { go("gym"); return setTimeout(() => { const s = document.querySelector(".oo-shelf"); if (s) s.scrollIntoView({ block: "center" }); }, 300); }
@@ -52,6 +52,9 @@ function ooShot(arg) {
     return ooResults({ title: "Level 7 · Paint strip", s: { res, hits: 4, total: 6, pts: 3120, min: 2.2, med: 2400, hint: false }, finish: true, stars: [1, 1, 1], got: [1, 1, 1], pb: true, unlocked: true, next: 7, again: () => ooPlayLevel(6), score: "4 of 6 right" });
   }
   if (what === "whose") return ooWhose();
+  // Painters' pairs: pairs (first round), pairs-ans (answered: lifts and three paintings)
+  if (what === "pairs") return ooPairsLoad().then(() => { ooRun({ label: "Pairs", total: 6, combo: true, cls: "oo-pairsrun", gen: () => ({ kind: "pairs", variant: a === "ans" ? "love" : "group", tier: "easy", record: false, hold: true }), onEnd: () => ooMap() });
+    if (a === "ans") setTimeout(() => { const b = document.querySelector(".oo-pc"); if (b) b.click(); }, 400); });
   if (what === "wplay") return ooWhoseLoad().then(() => ooRun({ label: "Painters", total: 6, combo: true, cls: "oo-whose", gen: () => ({ kind: "whose", record: false, hold: true }), onEnd: () => ooMap() }));
   if (what === "lv") {
     const i = clamp((+a || 1) - 1, 0, OO_LEVELS.length - 1), L = OO_LEVELS[i];
