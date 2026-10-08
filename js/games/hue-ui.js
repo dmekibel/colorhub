@@ -29,18 +29,21 @@ const hgStarsOf = id => { const d = hgDone(id); return d && Array.isArray(d.s) ?
 const hgStarTotal = () => Object.values(hgS().done).reduce((a, d) => a + (d && Array.isArray(d.s) ? d.s.filter(Boolean).length : 0), 0);
 const hgCleared = w => { let n = 0; for (let i = 0; i < HG_WORLDS[w].n; i++) if (hgDone(HG_WORLDS[w].id + ":" + i)) n++; return n; };
 const hgLevelCount = w => w === 4 ? Math.min(HG_WORLDS[4].n, hgYours().length) : HG_WORLDS[w].n;
-// a world opens once five levels of the one before it are cleared; Your colors opens with Gems
-function hgWorldOpen(w) {
-  if (w === 0 || hgChoosing()) return true;
-  if (w === 4) return hgWorldOpen(2) || hgCleared(0) >= HG_OPEN_AT;
+// nothing is locked, in For you or Choose (David, 2026-10-08): every world and level is open. For you only RECOMMENDS:
+// a world is recommended once five levels of the one before it are cleared; Your colors comes with Gems
+const hgWorldOpen = w => w >= 0 && w < HG_WORLDS.length;
+const hgLevelOpen = (w, i) => hgWorldOpen(w) && i < hgLevelCount(w);
+function hgWorldRec(w) {
+  if (w === 0) return true;
+  if (w === 4) return hgWorldRec(2) || hgCleared(0) >= HG_OPEN_AT;
   return hgCleared(w - 1) >= Math.min(HG_OPEN_AT, hgLevelCount(w - 1));
 }
-const hgLevelOpen = (w, i) => hgWorldOpen(w) && i < hgLevelCount(w) && (hgChoosing() || i === 0 || !!hgDone(HG_WORLDS[w].id + ":" + (i - 1)));
+const hgLevelRec = (w, i) => hgWorldRec(w) && i < hgLevelCount(w) && (i === 0 || !!hgDone(HG_WORLDS[w].id + ":" + (i - 1)));
 // the level to offer next: the first uncleared open level, latest world first that still has one
 function hgNext() {
   for (let w = 0; w < HG_WORLDS.length; w++) {
-    if (!hgWorldOpen(w)) continue;
-    for (let i = 0; i < hgLevelCount(w); i++) if (!hgDone(HG_WORLDS[w].id + ":" + i)) { if (hgLevelOpen(w, i)) return { w, i }; break; }
+    if (!hgWorldRec(w)) continue;
+    for (let i = 0; i < hgLevelCount(w); i++) if (!hgDone(HG_WORLDS[w].id + ":" + i)) { if (hgLevelRec(w, i)) return { w, i }; break; }
   }
   return { w: 0, i: 0 };
 }
@@ -335,6 +338,7 @@ function hgPlayBoard(cfg) {
     slots.forEach(t => { t.classList.remove("sel", "nudge", "down", "hinted"); t.disabled = true; });
     bd.classList.add("solved");
     buzz([12, 60, 12]);
+    try { if (typeof sfx === "function") sfx("scale", { hexes: board.hex.slice() }); } catch (e) {}
     // the ripple runs out from the last tile placed, then the gaps close into one gradient
     const f = st.lastS != null ? slots[st.lastS].getBoundingClientRect() : bd.getBoundingClientRect();
     slots.forEach(t => { const r = t.getBoundingClientRect(), dd = Math.hypot(r.left - f.left, r.top - f.top); t.style.setProperty("--dl", Math.round(dd * 1.1) + "ms"); t.classList.add("rip"); });
@@ -428,9 +432,9 @@ function hgLevelDone(w, i, board, src, res, spec, po = {}) {
   }
   save();
   const worldDone = firstClear && hgCleared(w) === hgLevelCount(w);
-  const opened = firstClear ? HG_WORLDS.map((_, k) => k).filter(k => k !== w && hgWorldOpen(k) && !(st.seenOpen || []).includes(k)) : [];
+  const opened = firstClear ? HG_WORLDS.map((_, k) => k).filter(k => k !== w && hgWorldRec(k) && !(st.seenOpen || []).includes(k)) : [];
   if (opened.length) st.seenOpen = [...new Set([...(st.seenOpen || []), ...opened, 0])];
-  const nextOpen = i + 1 < hgLevelCount(w) && hgLevelOpen(w, i + 1);
+  const nextOpen = i + 1 < hgLevelCount(w);
   hgResults({ w, i, board, src, res, stars, tested, diff: spec.diff, got: [finish, few, noHint], pb, firstClear, worldDone, opened, mastered: stars.every(Boolean) && !was.every(Boolean),
     title: `${W.name} · level ${i + 1}`, next: nextOpen ? () => hgPlay(w, i + 1) : null, nextLabel: nextOpen ? `Level ${i + 2}` : null,
     again: () => hgPlay(w, i, { again: true }), back: () => hgMap(w) });
@@ -459,7 +463,7 @@ function hgResults(o) {
   const W = HG_WORLDS[o.w], nextR = o.next ? hgRung(o.w, o.i + 1) : null;
   const lede = o.tested ? `${o.tested === 1 ? "The level before it is" : `The ${o.tested} levels before it are`} cleared too. ${o.tested === 1 ? "Its stars are" : "Their stars are"} still there to earn.` : o.worldDone ? `All ${hgLevelCount(o.w)} boards, ${hgWorldStars(o.w)} of ${hgLevelCount(o.w) * 3} stars.${o.opened.length ? ` ${esc(HG_WORLDS[o.opened[0]].name)} is open.` : ""}`
     : !finish ? `Solved, but past the ${res.over === "time" ? "clock" : "move limit"}. Try again ${res.over === "time" ? `within ${Math.floor(res.clock / 60)}:${String(res.clock % 60).padStart(2, "0")}` : `in ${res.cap} moves or fewer`} to clear it.`
-    : o.opened.length ? `${esc(HG_WORLDS[o.opened[0]].name)} is open: ${esc(HG_WORLDS[o.opened[0]].line.charAt(0).toLowerCase() + HG_WORLDS[o.opened[0]].line.slice(1))}`
+    : o.opened.length ? `${esc(HG_WORLDS[o.opened[0]].name)} is next up: ${esc(HG_WORLDS[o.opened[0]].line.charAt(0).toLowerCase() + HG_WORLDS[o.opened[0]].line.slice(1))}`
     : nextR && o.firstClear ? `Level ${o.i + 2} is open: ${esc((HG_SHAPE_NAME[nextR.s] || "").toLowerCase())}${nextR.t && HG_TWIST[nextR.t] ? `, ${esc(HG_TWIST[nextR.t].name.toLowerCase())}` : ""}.`
     : o.diff ? `${HG_DIFF[o.diff].name}: every step on this board was ${hgPctDiff(board.step.med)}.`
     : hgEye() ? `Every step was ${hgPctDiff(board.step.med)}, about ${(board.step.med / hgEye()).toFixed(1)} times the smallest difference you reliably see.`
@@ -532,13 +536,13 @@ function hgMap(focusW) {
   const st = hgS(), day = today(), dd = st.daily[day], back = st.last && st.last !== day, nx = hgNext();
   const dspec = hgDailySpec(day, hgDailySrcs());
   const worlds = HG_WORLDS.map((W, w) => {
-    const open = hgWorldOpen(w), n = hgLevelCount(w), cleared = hgCleared(w);
+    const open = true, n = hgLevelCount(w), cleared = hgCleared(w);
     if (W.id === "yours" && open && !n) return `<section class="hg-world" data-w="${w}"><div class="oo-world"><b>${esc(W.name)}</b><span>${esc(W.line)}</span></div>
       <p class="note hg-empty">Heart a few colors, or keep a palette from a painting or a photo, and they become boards here.</p></section>`;
-    const tiles = Array.from({ length: open ? n : Math.min(W.n, 8) }, (_, i) => {
-      const id = W.id + ":" + i, lv = open && hgLevelOpen(w, i), d = hgDone(id), R = hgRung(w, i), s = hgStarsOf(id);
+    const tiles = Array.from({ length: n }, (_, i) => {
+      const id = W.id + ":" + i, lv = true, d = hgDone(id), R = hgRung(w, i), s = hgStarsOf(id);
       const name = d ? hgSrcName(w, i) : HG_SHAPE_NAME[R.s] + (R.t && HG_TWIST[R.t] && !["weave", "mirror"].includes(R.t) ? " · " + HG_TWIST[R.t].name.toLowerCase() : "");
-      const cur = open && nx.w === w && nx.i === i;
+      const cur = nx.w === w && nx.i === i;
       return `<button class="hg-lv${lv ? "" : " locked"}${d ? " done" : ""}${cur ? " cur" : ""}" data-lv="${w}:${i}"${lv ? "" : ` data-locked="${open ? `Clear level ${i} to open this one` : `Clear ${HG_OPEN_AT} levels of ${HG_WORLDS[Math.max(0, w - 1)].name} to open ${W.name}`}"`}>
         <span class="hg-lvart">${hgMiniHTML(R.s, lv || d ? hgMiniCorners(w, i) : null, { locked: !lv && !d })}</span>
         <span class="hg-lvt"><b><span class="mono">${i + 1}</span>${esc(name)}</b>${d ? `<span class="oo-st">${s.map(x => `<i class="${x ? "on" : ""}"></i>`).join("")}</span>` : ""}</span></button>`;
@@ -571,7 +575,7 @@ function hgMap(focusW) {
 // ---------- For you / Choose: the mode switch, remembered ----------
 function hgModeHTML() {
   const st = hgS(), ch = st.mode === "choose";
-  const line = ch ? `Every level is open. Each step stays at ${hgPctDiff(hgDiffT(st.diff))}, whatever your eye.` : `Steps follow your eye${hgEye() ? ` (about ${hgPctFmt(hgEye())} now)` : ""}, finer as you get sharper. Levels open one by one, or test out of them.`;
+  const line = ch ? `Every level is open. Each step stays at ${hgPctDiff(hgDiffT(st.diff))}, whatever your eye.` : `Steps follow your eye${hgEye() ? ` (about ${hgPctFmt(hgEye())} now)` : ""}, finer as you get sharper. Every level is open; this just suggests the next one.`;
   return `<div class="hg-modebox">
     <div class="hg-seg" role="radiogroup" aria-label="Difficulty"><button role="radio" aria-checked="${!ch}" class="${ch ? "" : "on"}" data-mode="you">For you</button><button role="radio" aria-checked="${ch}" class="${ch ? "on" : ""}" data-mode="choose">Choose</button></div>
     ${ch ? `<div class="hg-seg hg-diffs" role="radiogroup" aria-label="Pick a difficulty">${Object.entries(HG_DIFF).map(([k, d]) => `<button role="radio" aria-checked="${st.diff === k}" class="${st.diff === k ? "on" : ""}" data-diff="${k}">${d.name}</button>`).join("")}</div>` : ""}

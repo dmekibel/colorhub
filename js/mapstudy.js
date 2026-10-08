@@ -1,19 +1,20 @@
 "use strict";
-// Study the map (#/mapstudy): flashcards that use only the honeycomb itself. David, 2026-10-08: "it gives you a
-// color, then says try to find it on this map. It can start off easy with 10, multiple choice, and go all the way
-// up to all the colors."
+// Study the map (#/mapstudy): games that use only the honeycomb itself. Version 2 (design/MAP-STUDY-2.md, 2026-10-08).
 //
-// Five modes, one screen. The map is always the honeycomb (js/honey.js) and the panel at the foot changes:
-//   find   "Find celadon": tap it on the map. A miss glides you to the real one and says how yours differed.
-//   name   one bubble breathes; name it (four or six same-family names early, then typed or spoken).
-//   hood   a neighborhood with its names hidden: tap each bubble and name it, then see them all.
-//   path   walk from one color to another through map neighbors ("darker... bluer..."): the shape of color space.
-//   light  "Light up 5": five new colors placed on your map each day, then found again from memory.
+// Modes, one screen. The map is always the honeycomb (js/honey.js) and the panel at the foot changes:
+//   find    "Find celadon": tap it on the map. From 12 to pick from upward, a first miss is "warmer" (its
+//           neighborhood lights up and the words say which way); a second miss reveals it, naming the colors between.
+//   name    one bubble breathes; pick its name from names in the field (3, 4, then 6), typed only at the top.
+//   hood    a ringed corner with its names hidden: tap each bubble and match it to one of the ring's own names.
+//   light   "Today's five": five new colors placed on your map each day, then found again from memory.
+//   wander  no score: every name on, tap to hear a color's note and read how it differs from the last.
+// (v1's Path is gone: map neighbors come from how the layout packs, not from how we see.)
 //
-// Levels (the set the map shows): 10, 25, 50, 100, 250, 614 (the Learn layer) and every name (~2,700), in the
-// core list's stage order. A set (today's words, mix-ups, favorites, a family, a painting) picks the TARGETS; the
-// level is the field you search them in. Difficulty breathes inside a band: the board grows from 4 bubbles to 6,
-// 10 and the whole map after three right in a row, and eases one step after a miss.
+// Two dials replace v1's levels and difficulty words:
+//   How many colors (the field): 10 ... 614 (the Learn layer) and every name, in the core list's stage order.
+//   How much help (the board): 3, 4, 6, 8, 12 or 20 to pick from, or the whole field.
+// For you (the default) moves the help dial itself: two right in a row step up, a miss steps down, kept per field;
+// and once 90% of a field is found it offers to grow the field. Choose shows both dials and a test-out.
 //
 // Honest progress: Practice's policy (js/practice.js prApply when it's on main, a copy here otherwise). Objective
 // answers on learned cards that are due count as their review; a miss on a learned card makes it due tomorrow;
@@ -23,24 +24,24 @@
 // marks or dimming except the study rings during play and the opt-in "your map" fog, which is never on by default.
 
 // ---------- tunables ----------
-const MS_LEVELS = [10, 25, 50, 100, 250, 614, "all"];
-const MS_BOARD = [4, 6, 10, Infinity];               // bubbles on the board at breath 0..3 (3 = the whole level)
-const MS_BANDS = { easy: [0, 1], medium: [1, 2], hard: [2, 3] };
+const MS_LEVELS = [10, 15, 20, 25, 30, 40, 50, 60, 75, 100, 125, 150, 200, 250, 300, 400, 500, 614, "all"];
+const MS_HELP = [3, 4, 6, 8, 12, 20, Infinity];      // bubbles to pick from at help step 0..6 (6 = the whole field)
+const MS_WHOLE = MS_HELP.length - 1;
+const MS_WARM = 4;                                    // from this step a first miss is "warmer", not wrong
 const MS_ROUNDS = 10;
 const MS_MIN_DE = 4;                                  // distractors at least this far (ΔE00) from the answer and each other
 const MS_CLOSE_DE = 5;                                // "next door": a map neighbor, or this close
 const MS_MODES = [
   ["find", "Find it", "We name a color. You tap it on the map."],
-  ["name", "Name it", "One bubble breathes. You name it."],
-  ["hood", "Neighborhood", "A corner of the map with its names hidden. Name every one."],
-  ["path", "Path", "Walk from one color to another, one neighbor at a time."],
-  ["light", "Light up 5", "Five new colors placed on your map, every day."],
+  ["name", "Name it", "One bubble breathes. You pick its name."],
+  ["hood", "Neighborhood", "A corner of the map with its names hidden. Match each one."],
+  ["light", "Today's five", "Five new colors placed on your map, every day."],
+  ["wander", "Wander", "No score. Every name showing: tap to hear and compare."],
 ];
 const MS_FAMS = ["Reds", "Pinks", "Oranges", "Browns", "Yellows", "Greens", "Blues", "Purples", "Greys"];
-const MS_HOOD = [4, 5, 7, 10];                        // neighborhood size by breath
-const MS_PATH = [3, 4, 6, 8];                         // path length (shortest steps) by breath
 // three honeycomb cells, one of them marked: "find this one on the map". Never the single hexagon, which is the way back to the map (core.js HOME_GLYPH)
 const MS_ICON = sv('<path d="M7.9 4.2l3.64 2.1v4.2l-3.64 2.1-3.64-2.1V6.3z"/><path d="M16.1 4.2l3.64 2.1v4.2l-3.64 2.1-3.64-2.1V6.3z"/><path d="M12 11.3l3.64 2.1v4.2L12 19.7l-3.64-2.1v-4.2z"/><circle cx="12" cy="15.5" r="1.3" fill="currentColor" stroke="none"/>', 24, 1.5);
+const MS_HOOD = [4, 5, 6, 7, 8, 10, 12];              // neighborhood size by help step
 
 // ======================================================================
 // Pure parts (no DOM). Unit-tested by tools/mapstudy_test.js.
@@ -58,20 +59,20 @@ function msLevelItems(level, src) {
   return core.slice(0, +level);
 }
 const msLevelLabel = l => l === "all" ? "Every name" : `${l}`;
-const msDefaultDiff = l => l === "all" || l >= 250 ? "hard" : l >= 50 ? "medium" : "easy";
-// For you: a two-step window that follows your skill (0..3, kept per level). Expert: the whole level from the first round.
-// Edge of my eye: pinned at your skill, no breathing. Easy, Medium and Hard are the fixed windows.
-const MS_DIFFS = [["easy", "Easy"], ["medium", "Medium"], ["hard", "Hard"], ["expert", "Expert"], ["edge", "Edge of my eye"]];
-function msBand(diff, skill) {
-  const s = Math.max(0, Math.min(3, isFinite(skill) ? skill : 1));
-  if (diff === "you") { const f = Math.min(2, Math.floor(s)); return [f, f + 1]; }
-  if (diff === "edge") { const r = Math.round(s); return [r, r]; }
-  if (diff === "expert") return [3, 3];
-  return MS_BANDS[diff] || MS_BANDS.easy;
+const msLevelWord = l => l === "all" ? "every name" : `${l} colors`;
+const msNextLevel = l => { const i = MS_LEVELS.indexOf(l); return i >= 0 && i < MS_LEVELS.length - 1 ? MS_LEVELS[i + 1] : null; };
+// For you's first help step for a field: small fields start with few bubbles, big ones a little wider
+const msHelpStart = l => l === "all" || l >= 300 ? 3 : l >= 100 ? 2 : l >= 30 ? 1 : 0;
+// the board actually on screen: never more bubbles than the field holds
+const msBoardSize = (h, fieldN) => { const b = MS_HELP[Math.max(0, Math.min(MS_WHOLE, h | 0))]; return b >= fieldN ? Infinity : b; };
+const msHelpWord = (h, fieldN = Infinity) => { const b = msBoardSize(h, fieldN); return b === Infinity ? "the whole field" : `${b} to pick from`; };
+// the staircase: two right in a row step up, a miss steps down (For you only; Choose stays where you put it)
+function msHelpNext(h, ok, streak, adapt = true) {
+  if (!adapt) return h;
+  if (!ok) return Math.max(0, h - 1);
+  return streak > 0 && streak % 2 === 0 ? Math.min(MS_WHOLE, h + 1) : h;
 }
-// what a session teaches For you: 8 of 10 or better lifts it, half or worse eases it
-const msSkillNext = (skill, r, n) => { const a = n ? r / n : 0, s = isFinite(skill) ? skill : 1; return Math.max(0, Math.min(3, s + (a >= .8 ? .75 : a <= .5 ? -.75 : 0))); };
-// a level counts as cleared when a test-out above it passed, or nearly all its colors are found
+// a field counts as cleared when a test-out above it passed, or nearly all its colors are found
 const msCleared = (M, l, n) => !!(M.cleared && M.cleared[msLevelKey(l)]) || (n > 0 && (M.found[msLevelKey(l)] || []).length >= n * .9);
 
 // Same-family neighbors (CLAUDE.md: "three blues", never obviously different colors), each at least MS_MIN_DE from
@@ -91,21 +92,18 @@ function msDistractors(t, pool, k, rnd = Math.random) {
   if (picked.length < k) take(scored.filter(s => !s.f && !picked.includes(s.x)));
   return picked.slice(0, k);
 }
-// difficulty breathes: a miss eases one step, every third right in a row opens one step, inside the chosen band
-function msBreathNext(b, ok, streak, diff, skill) {
-  const [lo, hi] = msBand(diff, skill);
-  if (!ok) return Math.max(lo, b - 1);
-  return streak > 0 && streak % 3 === 0 ? Math.min(hi, b + 1) : clamp(b, lo, hi);
-}
+// where wrong options come from: the field you're studying (names you can know), topped up from the first names
+// of the core list only when the field is too small to make a fair round
+const msOptPool = (field, core, k) => field.length >= k * 3 + 1 ? field : msUniq(field.concat(core.slice(0, Math.max(60, k * 6))));
 // "lighter and greener": how a differs from b, in the app's own words (js/produce.js colorDiff / MORE)
 function msDir(a, b) {
   const p = colorDiff(a.h, b.h).slice(0, 2);
   return p.length ? p.map(x => MORE[x.w]).join(" and ") : "almost the same color";
 }
-// a tap on the map: right, next door (a map neighbor or nearly the same color, only on the whole map), or wrong
-function msGrade(picked, t, nbrs, breath) {
+// a tap on the map: right, next door (a map neighbor or nearly the same color, only on big boards), or wrong
+function msGrade(picked, t, nbrs, open) {
   if (msLow(picked.n) === msLow(t.n)) return "right";
-  if (breath >= 3 && ((nbrs && nbrs.has(msLow(picked.n))) || de2000(picked.h, t.h) < MS_CLOSE_DE)) return "close";
+  if (open && ((nbrs && nbrs.has(msLow(picked.n))) || de2000(picked.h, t.h) < MS_CLOSE_DE)) return "close";
   return "wrong";
 }
 const msStars = (r, n) => !n ? 0 : r / n >= .9 ? 3 : r / n >= .7 ? 2 : r / n >= .4 ? 1 : 0;
@@ -146,15 +144,15 @@ function msBfs(g, from) {
 }
 // a neighborhood: the center and its nearest map neighbors, ring by ring
 function msHood(g, center, k) { return [...msBfs(g, center).entries()].sort((a, b) => a[1] - b[1]).slice(0, k).map(e => e[0]); }
-// a path puzzle: from a start, a goal exactly L steps away (or as far as the map allows, at least 2)
-function msPathPick(g, start, L, prefer, rnd = Math.random) {
-  const d = msBfs(g, start), at = n => [...d.entries()].filter(e => e[1] === n).map(e => e[0]);
-  for (let n = L; n >= 2; n--) {
-    const c = at(n); if (!c.length) continue;
-    const good = c.filter(x => prefer && prefer.has(x)), pool = good.length ? good : c;
-    return { goal: pool[rnd() * pool.length | 0], len: n };
-  }
-  return null;
+// the colors between two bubbles on the map (the reveal path after a miss): the shortest walk's inner steps,
+// thinned evenly to at most max so the words stay short
+function msBetween(g, from, to, max = 4) {
+  const d = msBfs(g, to), a = msLow(from), b = msLow(to);
+  if (!d.has(a) || a === b) return [];
+  const way = []; let cur = a;
+  while (cur !== b && way.length < 60) { const k = d.get(cur), nx = [...(g.get(cur) || [])].find(n => d.get(n) === k - 1); if (!nx) break; if (nx !== b) way.push(nx); cur = nx; }
+  if (way.length <= max) return way;
+  return Array.from({ length: max }, (_, i) => way[Math.round((i + 1) * (way.length + 1) / (max + 1)) - 1]);
 }
 // the session's targets: due cards first, then this set's earlier misses, then never found, then the rest
 function msQueue(targets, n, o = {}, rnd = Math.random) {
@@ -172,22 +170,30 @@ function msApply(it, ok, by) {
   if (!ok) { st.due = addDays(t, 1); save(); return "tomorrow"; }
   return "none";
 }
+// sound (js/sound.js): an explicit effect, or a color's own note; both quiet no-ops when sound isn't loaded
+const msSfx = (name, arg) => { if (typeof sfx === "function") try { sfx(name, arg); } catch (e) {} };
+const msNote = h => { if (typeof sfxColor === "function") try { sfxColor(h); } catch (e) {} };
 
 // ======================================================================
 // State (S.mapstudy). Unknown keys survive migrateState, so this needs no migration step.
 // ======================================================================
 function msState() {
   const m = S.mapstudy = S.mapstudy || {};
-  m.spec = Object.assign({ mode: "find", level: 10, set: "level", diff: "easy", fog: false }, m.spec || {});
+  // fill defaults in place: the open screen holds this same spec object, so it must never be swapped for a copy
+  const d = { mode: "find", level: 10, set: "level", diff: "you", help: 1, fog: false };
+  if (!m.spec || typeof m.spec !== "object") m.spec = {};
+  for (const k in d) if (!(k in m.spec)) m.spec[k] = d[k];
   if (!MS_LEVELS.includes(m.spec.level)) m.spec.level = 10;
-  if (!MS_BANDS[m.spec.diff] && !["you", "expert", "edge"].includes(m.spec.diff)) m.spec.diff = "you";
-  if (!MS_DIFFS.some(d => d[0] === m.spec.pick)) m.spec.pick = MS_BANDS[m.spec.diff] || ["expert", "edge"].includes(m.spec.diff) ? m.spec.diff : "medium";
-  ["best", "lit", "mix", "found", "miss", "skill", "cleared"].forEach(k => { if (!m[k] || typeof m[k] !== "object") m[k] = {}; });
+  if (!MS_MODES.some(x => x[0] === m.spec.mode)) m.spec.mode = "find";          // v1's Path is gone
+  if (m.spec.diff !== "you" && m.spec.diff !== "pick") m.spec.diff = "you";        // v1's Easy...Edge words
+  if (!(m.spec.help >= 0 && m.spec.help <= MS_WHOLE)) m.spec.help = 1;
+  m.spec.help = Math.round(m.spec.help);
+  ["best", "lit", "mix", "found", "miss", "help", "cleared"].forEach(k => { if (!m[k] || typeof m[k] !== "object") m[k] = {}; });
   return m;
 }
 const msLevelKey = l => "L" + l;
-// For you's skill at a level: starts where the level always started (easy, medium, hard)
-const msSkillOf = (M, l) => { const v = M.skill[msLevelKey(l)]; return isFinite(v) ? v : { easy: 0, medium: 1, hard: 2 }[msDefaultDiff(l)]; };
+// For you's help step at a field: where you left it, else where the field starts
+const msHelpOf = (M, l) => { const v = M.help[msLevelKey(l)]; return v >= 0 && v <= MS_WHOLE ? Math.round(v) : msHelpStart(l); };
 // "on your map": lit here, taught by the path, or anything the Learner Model says you've met or better
 function msKnown() {
   const m = msState(), k = new Set(Object.keys(m.lit));
@@ -246,14 +252,14 @@ function msSetItems(spec, levelItems) {
   return levelItems;
 }
 function msSetLabel(s) {
-  if (!s || s === "level") return "This level";
+  if (!s || s === "level") return "All in the field";
   if (s === "today") return "Today's words";
   if (s === "mix") return "Your mix-ups";
   if (s === "favs") return "Your favorites";
   if (s === "custom") return MS_CUSTOM && MS_CUSTOM.title || "Your set";
   if (s.startsWith("fam:")) return s.slice(4);
   if (s.startsWith("ptg:")) { const p = (window.PAINTINGS || []).find(x => x.id === s.slice(4)); return p ? p.title : "A painting"; }
-  return "This level";
+  return "All in the field";
 }
 // today's five new colors: the next core names you haven't met, in stage order, fixed for the day
 function msToday5() {
@@ -280,10 +286,11 @@ function msOpenColor(o) {
   if (typeof hmOpenName === "function") return hmOpenName(o);
 }
 
+
 function msOpen(o = {}) {
   const M = msState(), spec = M.spec;
   if (o.mode && MS_MODES.some(m => m[0] === o.mode)) spec.mode = o.mode;
-  if (o.set && o.set.colors && o.set.colors.length) { MS_CUSTOM = { title: o.set.title || "", colors: o.set.colors.slice(0, 60) }; spec.set = "custom"; if (spec.mode === "light") spec.mode = "find"; }
+  if (o.set && o.set.colors && o.set.colors.length) { MS_CUSTOM = { title: o.set.title || "", colors: o.set.colors.slice(0, 60) }; spec.set = "custom"; if (spec.mode === "light" || spec.mode === "wander") spec.mode = "find"; }
   else if (spec.set === "custom" && !MS_CUSTOM) spec.set = "level";
   const from = o.from || (S.tab === "gym" ? "gym" : "home");
   const el = show(`
@@ -315,16 +322,17 @@ function msOpen(o = {}) {
     G = null;
   }
   const graph = () => G || (G = ctrl && ctrl.studyPoints() ? msGraph(ctrl.studyPoints()) : new Map());
+  const itemOf = k => (shownItems || mapItems).find(it => msLow(it.n) === k) || mapItems.find(it => msLow(it.n) === k) || null;
   // glide to the middle of the cluster (a board is one small cluster), a little closer for fewer bubbles: a calm
   // slide, never a jump
   function centerBoard(n) {
     const sp = ctrl.studyPoints(); if (!sp || !sp.pts.length) return;
     const k = sp.pts.length, x = sp.pts.reduce((s, p) => s + p.x, 0) / k, y = sp.pts.reduce((s, p) => s + p.y, 0) / k;
-    ctrl.studyFlyTo({ x, y }, n <= 4 ? 1.2 : n <= 6 ? 1.1 : 1);
+    ctrl.studyFlyTo({ x, y }, n <= 4 ? 1.2 : n <= 8 ? 1.1 : 1);
   }
   function setAsk(html) { ask.innerHTML = html; ask.hidden = !html; }
   function setProg(html) { prog.innerHTML = html || ""; }
-  const reveal = new Set();   // names shown on the map during play (answered, or the answer to a miss)
+  const reveal = new Set();   // names shown on the map during play (answered, landmarks, or the answer to a miss)
   const labelFn = x => reveal.has(msLow(x.n));
 
   async function load() {
@@ -349,85 +357,99 @@ function msOpen(o = {}) {
     if (ctrl) ctrl.study({ hit: null, label: null, marks: [], fog: null });
     const light = spec.mode === "light";
     targets = light ? [] : msSetItems(spec, levelItems);
-    mapItems = msUniq(levelItems.concat(targets));
+    mapItems = msUniq(levelItems.concat(spec.mode === "wander" ? [] : targets));
     mapUpdate(mapItems);
     const fog = msFogFor(spec, "preview", msKnown());
     ctrl.study({ fog, hit: null, label: null, marks: [] });
     paintSetup();
   }
+  const helpNow = () => testing ? MS_WHOLE : spec.diff === "you" ? msHelpOf(M, spec.level) : spec.help;
+  const helpLine = h => {
+    const b = msBoardSize(h, mapItems.length);
+    if (spec.mode === "name") return b === Infinity ? "Type or say the name, from memory." : `${h <= 0 ? 3 : h <= 2 ? 4 : 6} names to choose from, all from this field.`;
+    if (spec.mode === "hood") return `A corner of ${MS_HOOD[h]}; ${h >= MS_WHOLE ? "type each name" : "match each to its name"}.`;
+    return b === Infinity ? "Search the whole field. A first miss gets a warmer hint." : `${b} bubbles to pick from${h >= MS_WARM ? "; a first miss gets a warmer hint" : ""}.`;
+  };
   function paintSetup() {
-    const light = spec.mode === "light", day = light ? msToday5() : null, known = msKnown();
-    const found = new Set(M.found[msLevelKey(spec.level)] || []);
-    const best = M.best[`${spec.mode}|${spec.level}|${spec.set}`];
-    const lvChips = MS_LEVELS.map(l => {
-      const n = l === "all" ? null : l, f = (M.found[msLevelKey(l)] || []).length;
-      return `<button class="ms-lv${spec.level === l ? " on" : ""}" data-lv="${l}"><b>${l === "all" ? "All" : l}</b><small>${msCleared(M, l, n || 0) ? "cleared" : f ? `${f.toLocaleString()} found` : n ? "" : "~2,700"}</small></button>`;
-    }).join("");
+    const mode = spec.mode, light = mode === "light", wander = mode === "wander", day = light ? msToday5() : null, known = msKnown();
+    const best = M.best[`${mode}|${spec.level}|${spec.set}`];
+    const li = MS_LEVELS.indexOf(spec.level), lk = msLevelKey(spec.level), foundN = (M.found[lk] || []).length;
     const mixN = msMixNames().length, favN = msFavNames().length, t = today();
     const todayN = ALL.filter(c => { const st = S.cards[c.id]; return st && (st.since === t || st.due <= t); }).length;
-    const setChip = (id, label, n, off) => `<button class="ms-set${spec.set === id ? " on" : ""}" data-set="${id}"${off ? " disabled" : ""}><b>${esc(label)}</b>${n != null ? `<small>${n}</small>` : ""}</button>`;
+    const setChip = (id, label, n) => `<button class="ms-set${spec.set === id ? " on" : ""}" data-set="${id}"><b>${esc(label)}</b>${n != null ? `<small>${n}</small>` : ""}</button>`;
     const ptgs = (window.PAINTINGS || []).filter(p => p.palette && p.palette.length && p.thumb && !p.stub).slice(0, 14);
     const sOpen = spec.set.startsWith("fam:") ? "fam" : spec.set.startsWith("ptg:") ? "ptg" : "";
-    const nT = targets.length, empty = !light && nT < 3;
+    const nT = targets.length, empty = !light && !wander && nT < 3;
     const emptyLine = { today: "Nothing learned or due today yet. Today's words fill in as you learn and review.",
       mix: "No mix-ups yet. Play a few rounds; any two colors you confuse land here.",
-      favs: "No favorites yet. Heart a color on its page and it lands here." }[spec.set] || "Too few colors in this set for a round. Pick a bigger level or another set.";
+      favs: "No favorites yet. Heart a color on its page and it lands here." }[spec.set] || "Too few colors in this set for a round. Slide to more colors or pick another set.";
     const lightLine = day && (day.done ? `Today's five are on your map. Five more tomorrow.` : day.names.length ? `Today: ${day.names.length} new color${day.names.length > 1 ? "s" : ""} to place. About two minutes.` : `You've met every core name. Every one is on your map.`);
-    const rounds = spec.mode === "find" || spec.mode === "name" ? `${Math.min(MS_ROUNDS, nT)} rounds` : spec.mode === "hood" ? "one neighborhood" : spec.mode === "path" ? "one walk" : "";
+    const rounds = mode === "find" || mode === "name" ? `${Math.min(MS_ROUNDS, nT)} rounds` : mode === "hood" ? "one corner" : "";
+    const h = helpNow(), you = spec.diff === "you";
+    const fieldRow = `<label class="ms-slide"><span class="ms-sl-t">How many</span><input type="range" min="0" max="${MS_LEVELS.length - 1}" step="1" value="${li}" data-field aria-label="How many colors"><b class="ms-sl-v" data-fieldv>${spec.level === "all" ? "All" : spec.level}</b></label>
+      <p class="ms-hint" data-fieldhint>${msCleared(M, spec.level, levelItems.length) ? "Cleared. Slide right to grow the map." : foundN ? `${foundN.toLocaleString()} of ${levelItems.length.toLocaleString()} found here so far.` : spec.level === "all" ? "Every name, about 2,700. The deep end." : "The first names of the Learn list, in order."}</p>`;
     panel.innerHTML = `<div class="ms-setup">
       <div class="ms-grab"></div>
-      <div class="ms-head"><h2 class="title-2">Study the map</h2><span>${(Object.keys(M.lit).length + known.size > 0) ? `${known.size.toLocaleString()} on your map` : ""}</span></div>
-      <div class="ms-modes" role="radiogroup" aria-label="Mode">${MS_MODES.map(([id, name]) => `<button class="ms-mode${spec.mode === id ? " on" : ""}" data-mode="${id}" role="radio" aria-checked="${spec.mode === id}">${name}</button>`).join("")}</div>
-      <p class="ms-what">${esc((MS_MODES.find(m => m[0] === spec.mode) || MS_MODES[0])[2])}</p>
-      ${light ? `<p class="ms-line">${esc(lightLine)}</p>` : `
-      <div class="ms-sec"><b>Level</b><span>tap any to jump in</span></div>
-      <div class="ms-lvs">${lvChips}</div>
+      <div class="ms-head"><h2 class="title-2">Study the map</h2><span>${known.size ? `${known.size.toLocaleString()} on your map` : ""}</span></div>
+      <div class="ms-modes" role="radiogroup" aria-label="Mode">${MS_MODES.map(([id, name]) => `<button class="ms-mode${mode === id ? " on" : ""}" data-mode="${id}" role="radio" aria-checked="${mode === id}">${name}</button>`).join("")}</div>
+      <p class="ms-what">${esc((MS_MODES.find(m => m[0] === mode) || MS_MODES[0])[2])}</p>
+      ${light ? `<p class="ms-line">${esc(lightLine)}</p>` : wander ? fieldRow : `
       <div class="ms-sec"><b>Colors</b><span>${esc(msSetLabel(spec.set))} · ${nT.toLocaleString()}</span></div>
       <div class="ms-sets">
-        ${setChip("level", "This level", null)}${setChip("today", "Today's words", todayN)}${setChip("mix", "Mix-ups", mixN)}${favN || spec.set === "favs" ? setChip("favs", "Favorites", favN) : ""}
+        ${setChip("level", "All in the field", null)}${setChip("today", "Today's words", todayN)}${setChip("mix", "Mix-ups", mixN)}${favN || spec.set === "favs" ? setChip("favs", "Favorites", favN) : ""}
         <button class="ms-set${sOpen === "fam" ? " on" : ""}" data-open-sub="fam"><b>A family</b></button><button class="ms-set${sOpen === "ptg" ? " on" : ""}" data-open-sub="ptg"><b>A painting</b></button>
       </div>
       <div class="ms-sub" data-sub="fam"${sOpen === "fam" ? "" : " hidden"}>${MS_FAMS.map(f => `<button class="ms-set${spec.set === "fam:" + f ? " on" : ""}" data-set="fam:${f}"><b>${f}</b></button>`).join("")}</div>
       <div class="ms-sub ms-ptgs" data-sub="ptg"${sOpen === "ptg" ? "" : " hidden"}>${ptgs.map(p => `<button class="ms-ptg${spec.set === "ptg:" + p.id ? " on" : ""}" data-set="ptg:${esc(p.id)}" aria-label="${esc(p.title)}"><img src="${esc(p.thumb)}" alt="" loading="lazy"><span>${p.palette.slice(0, 5).map(e => `<i style="--c:${e.h}"></i>`).join("")}</span></button>`).join("")}</div>
-      <div class="ms-sec"><b>Difficulty</b><span>${spec.diff === "you" ? "adapts to you" : "your choice"}</span></div>
-      <div class="hm-seg ms-diff" role="radiogroup" aria-label="Difficulty">${[["you", "For you"], ["pick", "Choose"]].map(([m, l]) => `<button class="${(m === "you") === (spec.diff === "you") ? "on" : ""}" role="radio" data-dm="${m}">${l}</button>`).join("")}</div>
-      ${spec.diff === "you" ? "" : `<div class="hm-seg ms-diff ms-picks" role="radiogroup" aria-label="Pick a difficulty">${MS_DIFFS.map(([d, l]) => `<button class="${spec.diff === d ? "on" : ""}" role="radio" data-diff="${d}">${l}</button>`).join("")}</div>`}
-      <p class="ms-what">${esc(spec.diff === "you" ? "Adapts to you: it starts where you left off and opens up as you find more." : spec.diff === "easy" ? "4 to 6 bubbles, nearly multiple choice." : spec.diff === "medium" ? "6 to 10 bubbles, then the whole map." : spec.diff === "hard" ? "10 bubbles to the whole map." : spec.diff === "expert" ? "The whole level, from the first round." : "Pinned at your edge: not easier after a miss, not harder after a streak.")}</p>`}
+      <div class="ms-sec"><b>The field</b><span>the map you search</span></div>
+      ${fieldRow}
+      <div class="ms-sec"><b>Help</b><span>${you ? "adapts to you" : "your choice"}</span></div>
+      <div class="hm-seg ms-diff" role="radiogroup" aria-label="Help">${[["you", "For you"], ["pick", "Choose"]].map(([m, l]) => `<button class="${(m === "you") === you ? "on" : ""}" role="radio" aria-checked="${(m === "you") === you}" data-dm="${m}">${l}</button>`).join("")}</div>
+      ${you ? `<p class="ms-what">Right now: ${esc(msHelpWord(h, mapItems.length))}. Two right in a row widens it; a miss narrows it.</p>`
+        : `<label class="ms-slide"><span class="ms-sl-t">Pick from</span><input type="range" min="0" max="${MS_WHOLE}" step="1" value="${spec.help}" data-help aria-label="How many bubbles to pick from"><b class="ms-sl-v" data-helpv>${spec.help >= MS_WHOLE ? "All" : MS_HELP[spec.help]}</b></label>
+      <p class="ms-hint" data-helphint>${esc(helpLine(spec.help))}</p>`}`}
       <label class="ms-fog"><span><b>Your map</b><small>Veil the colors you haven't met yet. A view only; off unless you turn it on.</small></span><input type="checkbox" switch data-fog${spec.fog ? " checked" : ""}></label>
       ${empty ? `<p class="ms-line ms-warn">${esc(emptyLine)}</p>` : ""}
-      ${best && !light ? `<p class="ms-best">Best here ${msStarRow(best.stars || 0)} ${best.r} of ${best.n}${best.streak > 2 ? ` · ${best.streak} in a row` : ""}</p>` : ""}
-      <div class="ms-foot"><button class="btn ms-go" data-go${empty || (light && day && (!day.names.length)) ? " disabled" : ""}>${light ? (day && day.done ? "Find today's five again" : "Light up 5") : "Start"} <small>${esc(rounds)}</small>${ICON.arrow}</button>${!light && spec.diff !== "you" && spec.level !== 10 && (spec.mode === "find" || spec.mode === "name") ? `<button class="btn ghost ms-test" data-test>Test out: 3 rounds clears every level below</button>` : ""}</div>
+      ${best && !light && !wander ? `<p class="ms-best">Best here ${msStarRow(best.stars || 0)} ${best.r} of ${best.n}${best.streak > 2 ? ` · ${best.streak} in a row` : ""}</p>` : ""}
+      <div class="ms-foot"><button class="btn ms-go" data-go${empty || (light && day && (!day.names.length)) ? " disabled" : ""}>${light ? (day && day.done ? "Find today's five again" : "Light up 5") : wander ? "Wander" : "Start"} ${rounds ? `<small>${esc(rounds)}</small>` : ""}${ICON.arrow}</button>${!light && !wander && !you && li > 0 && (mode === "find" || mode === "name") ? `<button class="btn ghost ms-test" data-test>Test out: 3 with no help clears every field below</button>` : ""}</div>
     </div>`;
     const re = (k, v) => { spec[k] = v; save(); buzz(4); };
     panel.querySelectorAll("[data-mode]").forEach(b => b.onclick = () => { re("mode", b.dataset.mode); setup(); });
-    panel.querySelectorAll("[data-lv]").forEach(b => b.onclick = () => { const v = b.dataset.lv === "all" ? "all" : +b.dataset.lv; re("level", v); setup(); });
     panel.querySelectorAll("[data-set]").forEach(b => b.onclick = () => { re("set", b.dataset.set); setup(); });
     panel.querySelectorAll("[data-open-sub]").forEach(b => b.onclick = () => { const s = panel.querySelector(`[data-sub="${b.dataset.openSub}"]`); panel.querySelectorAll(".ms-sub").forEach(x => { if (x !== s) x.hidden = true; }); s.hidden = !s.hidden; buzz(4); });
-    panel.querySelectorAll("[data-diff]").forEach(b => b.onclick = () => { spec.pick = b.dataset.diff; re("diff", b.dataset.diff); paintSetup(); });
-    panel.querySelectorAll("[data-dm]").forEach(b => b.onclick = () => { re("diff", b.dataset.dm === "you" ? "you" : spec.pick || "medium"); paintSetup(); });
+    panel.querySelectorAll("[data-dm]").forEach(b => b.onclick = () => { if (b.dataset.dm === "pick" && spec.diff === "you") spec.help = msHelpOf(M, spec.level); re("diff", b.dataset.dm); paintSetup(); });
+    // the dials: a live label while dragging (a tick per stop), the map follows when you let go
+    const fr = panel.querySelector("[data-field]");
+    if (fr) {
+      fr.oninput = () => { const l = MS_LEVELS[+fr.value]; panel.querySelector("[data-fieldv]").textContent = l === "all" ? "All" : l; panel.querySelector("[data-fieldhint]").textContent = l === "all" ? "Every name, about 2,700. The deep end." : `The first ${l} names of the Learn list.`; buzz(3); };
+      fr.onchange = () => { re("level", MS_LEVELS[+fr.value]); setup(); };
+    }
+    const hr = panel.querySelector("[data-help]");
+    if (hr) {
+      const paint = () => { const v = +hr.value; panel.querySelector("[data-helpv]").textContent = v >= MS_WHOLE ? "All" : MS_HELP[v]; panel.querySelector("[data-helphint]").textContent = helpLine(v); };
+      hr.oninput = () => { paint(); buzz(3); };
+      hr.onchange = () => { re("help", +hr.value); paint(); };
+    }
     const tb = panel.querySelector("[data-test]"); if (tb) tb.onclick = () => { buzz(8); start(true); };
     panel.querySelector("[data-fog]").onchange = e => { spec.fog = !!e.target.checked; save(); buzz(4); ctrl.study({ fog: msFogFor(spec, "preview", msKnown()) }); };
     panel.querySelector("[data-go]").onclick = () => { buzz(8); start(); };
   }
 
   // ---------------------------------------------------------------- play
+  let testing = false;
   function newSession(kind, list, extra = {}) {
     const lk = msLevelKey(spec.level);
-    P = { kind, list, i: 0, first: new Map(), right: 0, close: 0, streak: 0, bestStreak: 0, breath: bandNow()[0], test: testing, misses: [], marksAll: [], t0: performance.now(), lk, ...extra };
-    if (spec.mode === "find" || spec.mode === "name") P.breath = bandNow()[0];
+    P = { kind, list, i: 0, first: new Map(), right: 0, close: 0, streak: 0, bestStreak: 0, help: helpNow(), test: testing, t0: performance.now(), lk, ...extra };
     reveal.clear();
     ctrl.study({ fog: null, label: labelFn, marks: [], hit: (x, at) => onHit(x, at) });
     return P;
   }
-  // a test-out plays three Hard rounds; everything else follows the chosen difficulty and, for For you, your skill here
-  let testing = false;
-  const bandNow = () => msBand(testing ? "hard" : spec.diff, msSkillOf(M, spec.level));
   function start(test) {
     testing = test === true;
     if (spec.mode === "light") return lightUp();
-    const due = new Set(dueList().map(c => msLow(c.n))), miss = new Set(Object.keys(M.miss[msLevelKey(spec.level)] || {})), found = new Set(M.found[msLevelKey(spec.level)] || []);
+    if (spec.mode === "wander") return wander();
     if (spec.mode === "hood") return hood();
-    if (spec.mode === "path") return walk();
+    const due = new Set(dueList().map(c => msLow(c.n))), miss = new Set(Object.keys(M.miss[msLevelKey(spec.level)] || {})), found = new Set(M.found[msLevelKey(spec.level)] || []);
     newSession(spec.mode, msQueue(targets, testing ? 3 : MS_ROUNDS, { due, miss, found }));
     round();
   }
@@ -444,47 +466,62 @@ function msOpen(o = {}) {
     save();
     return true;
   }
+  // For you widens and narrows the help as you go; Choose and a test-out stay put
   function streakAfter(ok) {
     P.streak = ok ? P.streak + 1 : 0; P.bestStreak = Math.max(P.bestStreak, P.streak);
-    const b0 = P.breath; P.breath = msBreathNext(P.breath, ok, P.streak, testing ? "hard" : spec.diff, msSkillOf(M, spec.level));
-    return P.breath > b0 ? "up" : P.breath < b0 ? "down" : "";
+    const h0 = P.help; P.help = msHelpNext(P.help, ok, P.streak, spec.diff === "you" && !testing);
+    return P.help > h0 ? "up" : P.help < h0 ? "down" : "";
   }
   function dots() {
     const n = P.list.length;
-    return `<span class="ms-dots">${P.list.map((it, i) => { const f = P.first.get(msLow(it.n)); return `<i class="${i === P.i ? "now" : f ? f.res === "right" ? "ok" : f.res === "close" ? "near" : "no" : ""}"></i>`; }).join("")}</span><span class="ms-n">${Math.min(P.i + 1, n)} of ${n}</span>`;
+    return `<span class="ms-dots">${P.list.map((it, i) => { const f = P.first.get(msLow(it.n)); return `<i class="${i === P.i ? "now" : f ? f.res === "right" ? "ok" : f.res === "close" ? "near" : "no" : ""}"></i>`; }).join("")}</span><span class="ms-n">${Math.min(P.i + 1, n)} of ${n}${P.streak >= 3 ? ` · ${P.streak} in a row` : ""}</span>`;
   }
-  const breathWord = b => b >= 3 ? "the whole map" : `${MS_BOARD[b]} bubbles`;
+  const liftWord = (lift, kind) => !lift ? "" : `<span class="ms-lift">${lift === "up"
+    ? (kind === "name" ? (msBoardSize(P.help, mapItems.length) === Infinity ? "Now from memory: type or say it." : "More names to choose from next.") : `The map opens up: ${msHelpWord(P.help, mapItems.length)} next.`)
+    : (kind === "name" ? "Fewer names next." : `A little more help next: ${msHelpWord(P.help, mapItems.length)}.`)}</span>`;
+  const optPool = k => msOptPool(mapItems, msCore(), k);
+  // landmarks: on a big board, the colors you've already found here keep their names (never the one asked)
+  function landmarks(t) {
+    if (P.help < MS_WARM || P.test) return;
+    const found = M.found[P.lk] || [], on = new Set((shownItems || mapItems).map(it => msLow(it.n)));
+    found.forEach(k => { if (k !== msLow(t.n) && on.has(k)) reveal.add(k); });
+  }
 
   // ---- find it / name it rounds
   function round() {
     if (P.i >= P.list.length) return finish();
-    const t = P.list[P.i]; P.t = t; P.tq = performance.now(); P.answered = false;
+    const t = P.list[P.i]; P.t = t; P.tq = performance.now(); P.answered = false; P.hinted = null;
     reveal.clear();
-    const pool = msUniq(msCore().slice(0, 614).concat(mapItems));
     if (P.kind === "find") {
-      if (P.breath < 3) {
-        const board = msShuffle([t].concat(msDistractors(t, pool, MS_BOARD[P.breath] - 1)));
+      const size = msBoardSize(P.help, mapItems.length);
+      if (size !== Infinity) {
+        const board = msShuffle([t].concat(msDistractors(t, optPool(size), size - 1)));
         P.board = board; mapUpdate(board); centerBoard(board.length);
-      } else if (P.board) { P.board = null; mapUpdate(mapItems); }
-      else if (!P.mapShown) { P.mapShown = true; mapUpdate(mapItems); }
+      } else if (P.board || !P.mapShown) { P.board = null; P.mapShown = true; mapUpdate(mapItems); }
+      landmarks(t);
       ctrl.study({ label: labelFn, marks: [] });
-      setAsk(`<small>Find</small><b>${esc(t.n)}</b>`);
-      panel.innerHTML = `<div class="ms-play"><p class="ms-say">${P.i === 0 && !M.seenFind ? "Tap it on the map. Drag to look around, pinch to zoom." : P.breath >= 3 ? "Somewhere on the map. Drag and pinch to search." : `One of these ${P.board ? P.board.length : ""}.`}</p>
+      setAsk(`<small>Find</small><b><span>${esc(t.n)}</span></b>`);
+      const n = P.board ? P.board.length : 0;
+      panel.innerHTML = `<div class="ms-play"><p class="ms-say">${P.i === 0 && !M.seenFind ? `Tap ${esc(t.n.toLowerCase())} on the map. Drag to look around, pinch to zoom.` : n ? `One of these ${n}.${reveal.size ? " The names showing are ones you've found before." : ""}` : `Somewhere on the map.${reveal.size ? " Names you've found before are showing as landmarks." : " Drag and pinch to search."}`}</p>
         <div class="ms-acts"><button class="btn ghost" data-show>Show me</button></div></div>`;
       panel.querySelector("[data-show]").onclick = () => answerFind(null);
     } else {
-      if (!P.mapShown) { P.mapShown = true; mapUpdate(mapItems); }
+      if (!P.mapShown || P.board) { P.board = null; P.mapShown = true; mapUpdate(mapItems); }
+      // context: with the most help, its neighbors keep their names while you choose
+      const typed = msBoardSize(P.help, mapItems.length) === Infinity;
+      if (P.help <= 2 && !P.test) (graph().get(msLow(t.n)) || []).forEach(k => reveal.add(k));
       ctrl.study({ label: labelFn, marks: [{ n: t.n, kind: "pulse" }] });
-      ctrl.studyFlyTo(t, P.breath >= 3 ? 1.05 : 1.2);
+      ctrl.studyFlyTo(t, typed ? 1.05 : 1.2);
       setAsk(`<small>Name the color</small><b>that breathes</b>`);
-      nameUI(t);
+      nameUI(t, typed);
     }
     setProg(dots());
   }
-  function nameUI(t) {
-    if (P.breath <= 1) {
-      const opts = msShuffle([t].concat(msDistractors(t, msUniq(msCore().slice(0, 614).concat(mapItems)), P.breath === 0 ? 3 : 5)));
-      panel.innerHTML = `<div class="ms-play"><div class="ms-opts n${opts.length}">${opts.map(o => `<button class="ms-opt" data-n="${esc(o.n)}">${esc(o.n)}</button>`).join("")}</div>
+  function nameUI(t, typed) {
+    if (!typed) {
+      const k = P.help <= 0 ? 2 : P.help <= 2 ? 3 : 5;
+      const opts = msShuffle([t].concat(msDistractors(t, optPool(k), k)));
+      panel.innerHTML = `<div class="ms-play"><p class="ms-say">${reveal.size ? "Its neighbors' names are showing. Which one is it?" : "Which name is it?"}</p><div class="ms-opts n${opts.length}">${opts.map(o => `<button class="ms-opt" data-n="${esc(o.n)}">${esc(o.n)}</button>`).join("")}</div>
         <div class="ms-acts"><button class="btn ghost" data-show>Show me</button></div></div>`;
       panel.querySelectorAll("[data-n]").forEach(b => b.onclick = () => { const o = opts.find(x => x.n === b.dataset.n); answerName(o, "pick", b); });
     } else {
@@ -519,37 +556,61 @@ function msOpen(o = {}) {
       if (P.answered) { if (msLow(x.n) === msLow(P.t.n)) next(); else buzz(4); return; }
       return answerFind(x);
     }
-    if (P.kind === "name") { if (P.answered && msLow(x.n) === msLow(P.t.n)) next(); else if (!P.answered) { buzz(4); say(`Name the breathing one: ${P.breath <= 1 ? "pick its name below" : "type or say it below"}.`); } return; }
+    if (P.kind === "name") { if (P.answered && msLow(x.n) === msLow(P.t.n)) next(); else if (!P.answered) { buzz(4); say(`Name the breathing one: ${msBoardSize(P.help, mapItems.length) === Infinity ? "type or say it below" : "pick its name below"}.`); } return; }
     if (P.kind === "hood") return hoodTap(x);
-    if (P.kind === "path") return pathTap(x);
     if (P.kind === "light") return lightTap(x);
+    if (P.kind === "wander") return wanderTap(x);
   }
   const say = html => { const s = panel.querySelector(".ms-say"); if (s) { s.innerHTML = html; s.classList.remove("in"); void s.offsetWidth; s.classList.add("in"); } };
   function answerFind(x) {
-    const t = P.t; P.answered = true; M.seenFind = 1;
-    const nb = P.breath >= 3 ? graph().get(msLow(t.n)) : null;
-    const res = x ? msGrade(x, t, nb, P.breath) : "wrong";
-    record(t, res, "pick", x && res !== "right" ? x : null);   // "Show me" is a miss, as in Practice
+    const t = P.t;
+    if (x) msNote(x.h);
+    const big = P.help >= MS_WARM && !P.test;
+    const nb = big ? graph().get(msLow(t.n)) : null;
+    let res = x ? msGrade(x, t, nb, big) : "wrong";
+    // warmer: on a big board the first miss lights the answer's corner and says which way, instead of failing
+    if (x && res !== "right" && big && !P.hinted) {
+      P.hinted = x;
+      const ring = [...(nb || [])].map(itemOf).filter(Boolean);
+      ctrl.study({ marks: ring.map(it => ({ n: it.n, kind: "ring" })).concat([{ n: t.n, kind: "ring" }, { n: x.n, kind: "wrong" }]) });
+      reveal.add(msLow(x.n)); ctrl.study({ label: labelFn });
+      // glide to a ringed neighbor, not to the answer itself (the middle of the screen would give it away)
+      ctrl.studyFlyTo(ring.length ? ring[Math.random() * ring.length | 0] : t);
+      msSfx("near"); buzz([6, 30, 6]);
+      say(`<b>Warmer.</b> ${esc(t.n)} is ${esc(msDir(t, x))} than ${esc(x.n.toLowerCase())}. It's one of the ringed ones.`);
+      return;
+    }
+    if (P.hinted && res === "right") res = "close";   // found after a hint: next door, not a first-try right
+    P.answered = true; M.seenFind = 1;
+    record(t, res, "pick", x && res !== "right" ? x : P.hinted || null);   // "Show me" is a miss, as in Practice
     if (res === "right") P.right++; else if (res === "close") P.close++;
     const lift = streakAfter(res === "right");
     reveal.add(msLow(t.n)); if (x) reveal.add(msLow(x.n));
     const marks = [{ n: t.n, kind: res === "right" ? "right" : "true" }];
-    if (x && res !== "right") marks.push({ n: x.n, kind: "wrong" });
-    ctrl.study({ marks });
-    P.marksAll.push({ n: t.n, ok: res === "right" });
+    // the reveal path: from your tap to the answer, the colors in between get their names and a quiet ring
+    const wrongAt = res === "right" ? null : (x && msLow(x.n) !== msLow(t.n) ? x : P.hinted);
+    let between = [];
+    if (wrongAt) {
+      marks.push({ n: wrongAt.n, kind: "wrong" });
+      between = msBetween(graph(), wrongAt.n, t.n, 4).map(itemOf).filter(Boolean);
+      between.forEach(b => { reveal.add(msLow(b.n)); marks.push({ n: b.n, kind: "ring" }); });
+    }
+    ctrl.study({ marks, label: labelFn });
     setProg(dots());
-    const lw = lift === "up" ? `<span class="ms-lift">The map opens up: ${breathWord(P.breath)} next.</span>` : lift === "down" ? `<span class="ms-lift">A little easier next: ${breathWord(P.breath)}.</span>` : "";
+    const lw = liftWord(lift, "find");
     if (res === "right") {
-      buzz(12);
+      msSfx(P.streak >= 3 && P.streak % 3 === 0 ? "combo" : "right"); buzz(12);
       panel.innerHTML = `<div class="ms-play ms-res ok"><p class="ms-say in"><b>${esc(t.n)}.</b> ${P.streak >= 3 ? `${P.streak} in a row.` : "Right."}</p>${lw}</div>`;
       later(next, lift ? 1500 : 950);
       return;
     }
-    buzz(res === "close" ? [8, 30, 8] : [10, 40, 10]);
-    ctrl.studyFlyTo(t);
-    const line = !x ? `Here it is. Look at its neighbors: that's where it lives.`
-      : res === "close" ? `You picked ${esc(x.n.toLowerCase())}, right next door: ${esc(msDir(x, t))}.`
-      : `You picked ${esc(x.n.toLowerCase())}: ${esc(msDir(x, t))}.`;
+    msSfx(res === "close" ? "near" : "wrong"); buzz(res === "close" ? [8, 30, 8] : [10, 40, 10]);
+    ctrl.studyFlyTo(t, between.length > 1 ? .85 : undefined);   // a little wider when there's a path to read
+    const path = between.length ? ` On the way: ${between.map(b => esc(b.n.toLowerCase())).join(", ")}.` : "";
+    const line = res === "close" && P.hinted && x && msLow(x.n) === msLow(t.n) ? `Found with the hint. ${esc(t.n)} is ${esc(msDir(t, P.hinted))} than ${esc(P.hinted.n.toLowerCase())}.`
+      : !wrongAt ? `Here it is. Look at its neighbors: that's where it lives.`
+      : res === "close" ? `You picked ${esc(wrongAt.n.toLowerCase())}, right next door: ${esc(t.n.toLowerCase())} is ${esc(msDir(t, wrongAt))}.`
+      : `You picked ${esc(wrongAt.n.toLowerCase())}. ${esc(t.n)} is ${esc(msDir(t, wrongAt))}.${path}`;
     panel.innerHTML = `<div class="ms-play ms-res ${res === "close" ? "near" : "no"}"><p class="ms-say in"><b>${res === "close" ? "Next door." : `${esc(t.n)} is here.`}</b> ${line}</p>${lw}
       <div class="ms-acts"><button class="btn" data-next>Next ${ICON.arrow}</button></div><p class="ms-fine">Or tap ${esc(t.n.toLowerCase())} to go on.</p></div>`;
     panel.querySelector("[data-next]").onclick = next;
@@ -567,20 +628,20 @@ function msOpen(o = {}) {
     const lift = streakAfter(res === "right");
     reveal.add(msLow(t.n)); if (said) reveal.add(msLow(said.n));
     const marks = [{ n: t.n, kind: res === "right" ? "right" : "true" }]; if (said) marks.push({ n: said.n, kind: "wrong" });
-    ctrl.study({ marks });
-    P.marksAll.push({ n: t.n, ok: res === "right" });
+    ctrl.study({ marks, label: labelFn });
     panel.querySelectorAll("[data-n]").forEach(b => { b.disabled = true; if (msLow(b.dataset.n) === msLow(t.n)) b.classList.add("ok"); else if (b === btn) b.classList.add("no"); });
     setProg(dots());
-    const lw = lift === "up" ? `<span class="ms-lift">${P.breath >= 2 ? "Now from memory: type or say it." : "Six names next."}</span>` : lift === "down" ? `<span class="ms-lift">Names to pick from next.</span>` : "";
+    const lw = liftWord(lift, "name");
     const body = res === "right" ? `<b>${esc(t.n)}.</b> ${P.streak >= 3 ? `${P.streak} in a row.` : "Right."}`
       : !o ? `<b>This is ${esc(t.n.toLowerCase())}.</b>`
       : said ? `<b>This is ${esc(t.n.toLowerCase())}.</b> ${esc(said.n)} is ${esc(msDir(said, t))}${res === "close" ? ", its neighbor" : ""}.`
       : `<b>This is ${esc(t.n.toLowerCase())}.</b> You wrote “${esc(String(o.n).slice(0, 28))}”.`;
+    msSfx(res === "right" ? (P.streak >= 3 && P.streak % 3 === 0 ? "combo" : "right") : res === "close" ? "near" : "wrong");
     buzz(res === "right" ? 12 : [10, 40, 10]);
     const resEl = document.createElement("div");
     resEl.className = `ms-res ${res === "right" ? "ok" : res === "close" ? "near" : "no"}`;
     resEl.innerHTML = `<p class="ms-say in">${body}</p>${lw}${res === "right" ? "" : `<div class="ms-acts"><button class="btn" data-next>Next ${ICON.arrow}</button></div>`}`;
-    const play = panel.querySelector(".ms-play"); play.querySelectorAll(".ms-acts,form").forEach(n => n.remove()); play.appendChild(resEl);
+    const play = panel.querySelector(".ms-play"); play.querySelectorAll(".ms-acts,form,.ms-say").forEach(n => n.remove()); play.appendChild(resEl);
     if (res === "right") later(next, lift ? 1500 : 1000); else resEl.querySelector("[data-next]").onclick = next;
   }
   function next() { if (!P || P.kind === "done") return; P.i++; round(); }
@@ -589,78 +650,84 @@ function msOpen(o = {}) {
     const n = P.first.size, r = [...P.first.values()].filter(f => f.res === "right").length, stars = msStars(r + P.close * .5, n);
     const key = `${spec.mode}|${spec.level}|${spec.set}`, old = M.best[key], isBest = !old || r > old.r || (r === old.r && P.bestStreak > (old.streak || 0));
     if (isBest && !P.test) M.best[key] = { r, n, streak: P.bestStreak, stars, at: today() };
-    // For you learns from the set; a passed test-out (all 3 right) clears every level below this one
-    if (!P.test && spec.diff === "you") M.skill[P.lk] = msSkillNext(msSkillOf(M, spec.level), r, n);
+    // For you keeps where the help ended; a passed test-out (all 3 right) clears every field below this one
+    if (!P.test && spec.diff === "you") M.help[P.lk] = P.help;
     const li0 = MS_LEVELS.indexOf(spec.level), tpass = P.test && n >= 3 && r === n;
     if (tpass) MS_LEVELS.slice(0, li0).forEach(l => { M.cleared[msLevelKey(l)] = 1; });
     save();
     const misses = [...P.first.values()].filter(f => f.res !== "right").map(f => f.it);
-    const lvAll = levelItems.length, found = (M.found[P.lk] || []).length, mastered = spec.set === "level" && found >= lvAll;
-    const li = MS_LEVELS.indexOf(spec.level), nextLv = li >= 0 && li < MS_LEVELS.length - 1 ? MS_LEVELS[li + 1] : null;
-    // the round, on the map: every target ringed where it lives, names on (earned, not decoration)
+    const lvAll = levelItems.length, foundL = M.found[P.lk] || [], found = foundL.length, cleared = msCleared(M, spec.level, lvAll), nextLv = msNextLevel(spec.level);
+    // the area you've conquered: every color found so far in this field, named and ringed; this round's on top
     if (P.board) { P.board = null; mapUpdate(mapItems); }
-    P.list.forEach(it => reveal.add(msLow(it.n)));
-    ctrl.study({ hit: null, label: labelFn, marks: P.list.map(it => ({ n: it.n, kind: (P.first.get(msLow(it.n)) || {}).res === "right" ? "right" : "true" })) });
+    reveal.clear(); foundL.forEach(k => reveal.add(k)); P.list.forEach(it => reveal.add(msLow(it.n)));
+    const sess = new Set(P.list.map(it => msLow(it.n)));
+    const marks = foundL.filter(k => !sess.has(k)).map(k => itemOf(k)).filter(Boolean).map(it => ({ n: it.n, kind: "ring" }))
+      .concat(P.list.map(it => ({ n: it.n, kind: (P.first.get(msLow(it.n)) || {}).res === "right" ? "right" : "true" })));
+    ctrl.study({ hit: null, label: labelFn, marks });
     ctrl.studyZoom(.75);
-    setAsk(`<small>${spec.mode === "find" ? "Find it" : "Name it"} · ${esc(msLevelLabel(spec.level))}</small><b>${r === n ? "Every one" : `${r} of ${n}`}</b>`);
+    setAsk(`<small>${spec.mode === "find" ? "Find it" : "Name it"} · ${esc(msLevelWord(spec.level))}</small><b>${r === n ? "Every one" : `${r} of ${n}`}</b>`);
     setProg("");
     P.kind = "done";
+    const nextStep = P.test ? "" : spec.diff === "you" ? (cleared && nextLv ? `This field is ${found >= lvAll ? "all" : "nearly all"} found. Ready to grow it.` : `Next time: ${msHelpWord(P.help, mapItems.length)}.`) : "";
     panel.innerHTML = `<div class="ms-end">
       <div class="ms-end-top">${msStarRow(stars)}${isBest && old ? `<span class="ms-new">New best</span>` : ""}</div>
-      <h3 class="title-2">${P.test ? (tpass ? `Every level below ${esc(msLevelLabel(spec.level))} is cleared.` : "Not this time: all three to clear the levels below.") : r === n ? "A clean sweep." : `${r} of ${n} on the first try`}</h3>
-      <p class="ms-line">${P.close ? `${P.close} next door. ` : ""}${P.bestStreak > 1 ? `Longest run: ${P.bestStreak}. ` : ""}${spec.set === "level" ? `${found.toLocaleString()} of ${lvAll.toLocaleString()} on this level found so far.` : ""}</p>
-      ${mastered ? `<p class="ms-line ms-good">Level ${esc(msLevelLabel(spec.level))} mastered: every color found on a first try.</p>` : ""}
+      <h3 class="title-2">${P.test ? (tpass ? `Every field below ${esc(msLevelWord(spec.level))} is cleared.` : "Not this time: all three to clear the fields below.") : r === n ? "A clean sweep." : `${r} of ${n} on the first try`}</h3>
+      <p class="ms-line">${P.close ? `${P.close} next door. ` : ""}${P.bestStreak > 1 ? `Longest run: ${P.bestStreak}. ` : ""}${found.toLocaleString()} of ${lvAll.toLocaleString()} in this field found so far; they're ringed on the map.</p>
+      ${nextStep ? `<p class="ms-line ms-good">${esc(nextStep)}</p>` : ""}
       ${misses.length ? `<div class="ms-sec"><b>Look again</b><span>tap one for its page</span></div><div class="ms-chips">${misses.map(msChip).join("")}</div>` : ""}
-      <button class="btn" data-again>Again <small>new colors first</small>${ICON.arrow}</button>
-      <div class="ms-acts">${nextLv && stars >= 2 ? `<button class="btn ghost" data-nextlv>Try ${nextLv === "all" ? "every name" : `level ${nextLv}`}</button>` : ""}<button class="btn ghost" data-setup>Change</button></div>
+      ${cleared && nextLv && !P.test ? `<button class="btn" data-nextlv>Grow the map to ${esc(msLevelWord(nextLv))} ${ICON.arrow}</button>` : ""}
+      <button class="btn${cleared && nextLv && !P.test ? " ghost" : ""}" data-again>Again <small>new colors first</small>${ICON.arrow}</button>
+      <div class="ms-acts"><button class="btn ghost" data-setup>Change</button></div>
     </div>`;
     wireEnd();
+    const hexes = P.list.map(it => it.h);
+    msSfx(stars >= 2 ? "complete" : "settle", hexes); if (isBest && old && stars >= 2) later(() => msSfx("best", hexes), 700);
     buzz(stars >= 3 ? [12, 60, 12] : 10);
     testing = false;
   }
   function wireEnd() {
     panel.querySelectorAll("[data-open]").forEach(b => b.onclick = () => msOpenColor(msItemOf(b.dataset.open) || mapItems.find(x => x.n === b.dataset.open)));
-    const a = panel.querySelector("[data-again]"); if (a) a.onclick = () => { buzz(8); setup().then(start); };
-    const nl = panel.querySelector("[data-nextlv]"); if (nl) nl.onclick = () => { const li = MS_LEVELS.indexOf(spec.level); spec.level = MS_LEVELS[li + 1]; save(); buzz(8); setup(); };
+    const a = panel.querySelector("[data-again]"); if (a) a.onclick = () => { buzz(8); setup().then(() => start()); };
+    const nl = panel.querySelector("[data-nextlv]"); if (nl) nl.onclick = () => { const nx = msNextLevel(spec.level); if (!nx) return; spec.level = nx; save(); buzz(8); msSfx("levelup"); setup(); };
     const st = panel.querySelector("[data-setup]"); if (st) st.onclick = () => { buzz(4); setup(); };
   }
 
-  // ---- neighborhood recall
+  // ---- neighborhood: a matching game in one corner of the map
   function hood() {
-    if (!P || !P.mapShown) mapUpdate(mapItems);
-    const g = graph(), tset = new Set(targets.map(it => msLow(it.n))), b0 = bandNow()[0];
+    if (!P || !P.mapShown || P.board) mapUpdate(mapItems);
+    const g = graph(), h0 = helpNow();
     const found = new Set(M.found[msLevelKey(spec.level)] || []);
     const centers = msShuffle(targets.filter(it => g.has(msLow(it.n))));
     const center = centers.find(it => !found.has(msLow(it.n))) || centers[0];
     if (!center) { toast("This set is too small for a neighborhood"); return setup(); }
-    const names = msHood(g, center.n, MS_HOOD[b0]);
-    const byName = new Map(mapItems.map(it => [msLow(it.n), it]));
-    const region = names.map(n => byName.get(n)).filter(Boolean);
-    newSession("hood", region, { center, region: new Set(names), cur: null, done: new Map(), breath: b0, mapShown: true });
+    const names = msHood(g, center.n, Math.min(MS_HOOD[h0], mapItems.length));
+    const region = names.map(itemOf).filter(Boolean);
+    newSession("hood", region, { center, region: new Set(names), cur: null, done: new Map(), help: h0, mapShown: true });
     ctrl.studyFlyTo(center, region.length > 6 ? 1.15 : 1.35);
     hoodPaint();
     setAsk(`<small>Neighborhood</small><b>Name these ${region.length}</b>`);
     panel.innerHTML = `<div class="ms-play"><p class="ms-say in">${!M.seenHood ? "Tap a ringed bubble, then pick its name." : "Tap a ringed bubble to name it."}</p>
       <div class="ms-opts ms-hood-opts"></div>
-      <div class="ms-acts"><button class="btn ghost" data-reveal>Reveal all</button></div></div>`;
+      <div class="ms-acts"><button class="btn ghost" data-reveal>Show the rest</button></div></div>`;
     panel.querySelector("[data-reveal]").onclick = () => hoodEnd(true);
     hoodProg();
   }
   function hoodPaint() {
     ctrl.study({ label: labelFn, marks: P.list.map(it => { const k = msLow(it.n), d = P.done.get(k); return { n: it.n, kind: P.cur && msLow(P.cur.n) === k ? "pulse" : d ? (d === "right" ? "right" : "true") : "ring" }; }) });
   }
-  function hoodProg() { const left = P.list.length - P.done.size; setProg(`<span class="ms-n">${P.done.size} of ${P.list.length} named${left ? "" : ""}</span>`); }
+  function hoodProg() { setProg(`<span class="ms-n">${P.done.size} of ${P.list.length} named</span>`); }
   function hoodTap(x) {
     const k = msLow(x.n);
     if (!P.region.has(k)) { buzz(4); say(`That one's outside the ring. ${P.list.length - P.done.size} left inside.`); return; }
-    if (P.done.has(k)) { buzz(4); say(`<b>${esc(x.n)}</b>, already named.`); return; }
-    P.cur = mapItems.find(it => msLow(it.n) === k) || x; P.tq = performance.now(); buzz(6); hoodPaint();
-    // the names still to place, topped up with same-family neighbors so the last one is never a give-away
+    if (P.done.has(k)) { buzz(4); msNote(x.h); say(`<b>${esc(x.n)}</b>, already named.`); return; }
+    P.cur = itemOf(k) || x; P.tq = performance.now(); buzz(6); msNote(P.cur.h); hoodPaint();
+    // the names still to place: the ring's own names, so it's a matching game; one decoy keeps the last fair
+    const typed = P.help >= MS_WHOLE;
     let opts = null;
-    if (P.breath <= 1) {
-      const left = P.list.filter(it => !P.done.has(msLow(it.n))), want = P.breath === 0 ? 4 : 6;
-      const extra = left.length < want ? msDistractors(P.cur, msCore().slice(0, 614), want - left.length).filter(d => !left.some(l => msLow(l.n) === msLow(d.n))) : [];
-      opts = msShuffle(left.concat(extra)).slice(0, Math.max(want, left.length));
+    if (!typed) {
+      const left = P.list.filter(it => !P.done.has(msLow(it.n)));
+      const extra = left.length < 3 ? msDistractors(P.cur, optPool(3), 3 - left.length).filter(d => !left.some(l => msLow(l.n) === msLow(d.n))) : [];
+      opts = msShuffle(left.concat(extra));
     }
     const box = panel.querySelector(".ms-hood-opts");
     say(opts ? "Which name is it?" : "Type or say its name.");
@@ -679,21 +746,24 @@ function msOpen(o = {}) {
   function hoodAnswer(o, close) {
     const t = P.cur; if (!t) return;
     const k = msLow(t.n), res = o && msLow(o.n) === k ? "right" : close ? "close" : "wrong";
-    record(t, res, P.breath <= 1 ? "pick" : "say", o && res !== "right" ? o : null);
+    record(t, res, P.help < MS_WHOLE ? "pick" : "say", o && res !== "right" ? o : null);
     P.done.set(k, res); reveal.add(k); if (res === "right") P.right++;
     P.cur = null; hoodPaint(); hoodProg();
-    buzz(res === "right" ? 12 : [10, 40, 10]);
+    msSfx(res === "right" ? "right" : "wrong"); buzz(res === "right" ? 12 : [10, 40, 10]);
     const box = panel.querySelector(".ms-hood-opts"); box.innerHTML = ""; box.className = "ms-opts ms-hood-opts";
-    say(res === "right" ? `<b>${esc(t.n)}.</b> Right.` : `<b>That's ${esc(t.n.toLowerCase())}.</b> ${o ? `${esc(o.n)} is ${esc(msDir(o, t))}.` : ""}`);
+    say(res === "right" ? `<b>${esc(t.n)}.</b> Right. ${P.list.length - P.done.size ? "Tap the next ringed one." : ""}` : `<b>That's ${esc(t.n.toLowerCase())}.</b> ${o ? `${esc(o.n)} is ${esc(msDir(o, t))}.` : ""}`);
     if (P.done.size >= P.list.length) later(() => hoodEnd(false), 900);
   }
   function hoodEnd(early) {
     const n = P.list.length, r = P.right, stars = early ? Math.min(1, msStars(r, n)) : msStars(r, n);
     const key = `hood|${spec.level}|${spec.set}`, old = M.best[key]; if (!old || r / n > old.r / old.n) M.best[key] = { r, n, stars, at: today() };
-    M.seenHood = 1; save();
+    M.seenHood = 1;
+    // For you: a clean corner (80%+) widens the next one, half or worse (or giving up) narrows it
+    if (spec.diff === "you") M.help[P.lk] = early || r / n < .5 ? Math.max(0, P.help - 1) : r / n >= .8 ? Math.min(MS_WHOLE, P.help + 1) : P.help;
+    save();
     P.list.forEach(it => reveal.add(msLow(it.n)));
     // everything nearby gets its name too: the neighborhood in context
-    const ring2 = msHood(graph(), P.center.n, P.list.length + 12); ring2.forEach(k => reveal.add(k));
+    msHood(graph(), P.center.n, P.list.length + 12).forEach(k => reveal.add(k));
     ctrl.study({ hit: null, label: labelFn, marks: P.list.map(it => ({ n: it.n, kind: P.done.get(msLow(it.n)) === "right" ? "right" : "true" })) });
     ctrl.studyZoom(.95);
     P.kind = "done";
@@ -704,88 +774,43 @@ function msOpen(o = {}) {
       <h3 class="title-2">${r === n ? "You know this corner." : early ? "Here they all are." : `${r} of ${n} named`}</h3>
       <p class="ms-line">Every name nearby is showing now. Drag around: each one sits between the colors it's made of.</p>
       ${miss.length ? `<div class="ms-sec"><b>Look again</b><span>tap one for its page</span></div><div class="ms-chips">${miss.map(msChip).join("")}</div>` : ""}
-      <button class="btn" data-again>Another neighborhood ${ICON.arrow}</button>
+      <button class="btn" data-again>Another corner ${ICON.arrow}</button>
       <div class="ms-acts"><button class="btn ghost" data-setup>Change</button></div></div>`;
     wireEnd();
     panel.querySelector("[data-again]").onclick = () => { buzz(8); P = null; hood(); };
+    msSfx(stars >= 2 ? "complete" : "settle", P.list.map(it => it.h));
     buzz(stars >= 3 ? [12, 60, 12] : 10);
   }
 
-  // ---- path walk
-  function walk() {
-    if (!P || !P.mapShown) mapUpdate(mapItems);
-    const g = graph(), b0 = bandNow()[0], tset = new Set(targets.map(it => msLow(it.n)));
-    const byName = new Map(mapItems.map(it => [msLow(it.n), it]));
-    let pick = null, start = null;
-    for (const s of msShuffle(targets.filter(it => g.has(msLow(it.n)))).slice(0, 12)) { pick = msPathPick(g, s.n, MS_PATH[b0], tset); if (pick) { start = s; break; } }
-    if (!pick) { toast("This set is too small for a walk"); return setup(); }
-    const goal = byName.get(pick.goal);
-    newSession("path", [start], { cur: start, goal, best: pick.len, steps: 0, trail: [start], breath: b0, mapShown: true });
-    P.dist = msBfs(g, goal.n);
-    reveal.add(msLow(start.n)); reveal.add(msLow(goal.n));
-    ctrl.studyFlyTo(start, 1.25);
-    setAsk(`<small>Walk to</small><b><i class="ms-dot" style="--c:${goal.h}"></i>${esc(goal.n)}</b>`);
-    panel.innerHTML = `<div class="ms-play"><p class="ms-say in"></p><div class="ms-acts"><button class="btn ghost" data-way>Show me the way</button></div></div>`;
-    panel.querySelector("[data-way]").onclick = () => pathEnd(true);
-    pathPaint(); pathLine("");
+  // ---- wander: no score, every name on; a tap plays the color's note and compares it with the last one
+  function wander() {
+    if (P && P.board) mapUpdate(mapItems);
+    newSession("wander", [], { last: null, seen: new Set(), mapShown: true });
+    mapItems.forEach(it => reveal.add(msLow(it.n)));
+    ctrl.study({ label: labelFn, marks: [] });
+    ctrl.studyZoom(.9);
+    setAsk(`<small>Wander</small><b>${esc(msLevelWord(spec.level))}</b>`);
+    setProg("");
+    panel.innerHTML = `<div class="ms-play"><p class="ms-say in">Tap any bubble to hear it. Tap two in a row and you'll read how they differ.</p>
+      <div class="ms-acts"><button class="btn ghost" data-setup>Done</button></div></div>`;
+    panel.querySelector("[data-setup]").onclick = () => { buzz(4); setup(); };
   }
-  function pathNbrs() { return graph().get(msLow(P.cur.n)) || new Set(); }
-  function pathPaint() {
-    const nb = pathNbrs(), easy = P.breath <= 1, cur = msLow(P.cur.n);
-    if (easy) nb.forEach(k => reveal.add(k));
-    const marks = [...nb].filter(k => k !== msLow(P.goal.n)).map(k => ({ n: (mapItems.find(it => msLow(it.n) === k) || { n: k }).n, kind: "ring" }));
-    P.trail.forEach(it => { if (msLow(it.n) !== cur) marks.push({ n: it.n, kind: "start" }); });
-    marks.push({ n: P.goal.n, kind: "goal" }, { n: P.cur.n, kind: "pulse" });
-    ctrl.study({ label: labelFn, marks });
-    setProg(`<span class="ms-n">${P.steps} step${P.steps === 1 ? "" : "s"} · shortest ${P.best}</span>`);
-  }
-  function pathLine(stepWords) {
-    const togo = P.dist.get(msLow(P.cur.n));
-    say(`${stepWords}${stepWords ? " " : ""}${esc(P.goal.n)} is ${esc(msDir(P.goal, P.cur))} than ${esc(P.cur.n.toLowerCase())}${togo != null ? `: ${togo} step${togo === 1 ? "" : "s"} away` : ""}. Tap a ringed neighbor.`);
-  }
-  function pathTap(x) {
-    const k = msLow(x.n), nb = pathNbrs();
-    if (k === msLow(P.cur.n)) { buzz(4); say(`You're on <b>${esc(P.cur.n)}</b>. Step to a ringed neighbor.`); return; }
-    if (!nb.has(k)) { buzz(4); say(`One step at a time: tap a ringed neighbor of ${esc(P.cur.n.toLowerCase())}.`); return; }
-    const it = mapItems.find(m => msLow(m.n) === k) || x, before = P.dist.get(msLow(P.cur.n)), after = P.dist.get(k);
-    const words = msDir(it, P.cur);
-    P.steps++; P.trail.push(it); const prev = P.cur; P.cur = it; reveal.add(k);
+  function wanderTap(x) {
+    const it = itemOf(msLow(x.n)) || x, last = P.last;
+    msNote(it.h); buzz(6);
+    if (!P.seen.has(msLow(it.n))) { P.seen.add(msLow(it.n)); msLog("seen", it); }
+    ctrl.study({ marks: (last ? [{ n: last.n, kind: "start" }] : []).concat([{ n: it.n, kind: "pulse" }]) });
     ctrl.studyFlyTo(it);
-    if (k === msLow(P.goal.n)) { buzz([12, 60, 12]); return pathEnd(false); }
-    buzz(after < before ? 8 : [6, 30, 6]);
-    pathPaint();
-    pathLine(`<b>${esc(words[0].toUpperCase() + words.slice(1))}:</b> ${esc(it.n)}${after < before ? ", closer." : after > before ? ", a step away from it." : ", no closer."}`);
-    msLog("seen", it);
-  }
-  function pathEnd(shown) {
-    const extra = P.steps - P.best, stars = shown ? 0 : extra <= 0 ? 3 : extra <= 2 ? 2 : 1;
-    // the shortest way from where you stood, drawn as rings
-    let way = [];
-    if (shown) {
-      const g = graph(); let cur = msLow(P.cur.n);
-      while (cur !== msLow(P.goal.n) && way.length < 20) { const d = P.dist.get(cur); const nx = [...(g.get(cur) || [])].find(n => P.dist.get(n) === d - 1); if (!nx) break; way.push(nx); cur = nx; }
-      way.forEach(k => reveal.add(k));
-    }
-    const key = `path|${spec.level}|${spec.set}`, old = M.best[key];
-    if (!shown && (!old || stars > old.stars)) M.best[key] = { r: stars, n: 3, stars, at: today() };
-    save();
-    const marks = P.trail.map(it => ({ n: it.n, kind: "start" })).concat(way.map(k => ({ n: k, kind: "ring" })), [{ n: P.goal.n, kind: shown ? "goal" : "right" }]);
-    ctrl.study({ hit: null, label: labelFn, marks });
-    P.kind = "done";
-    setAsk(`<small>Path</small><b>${shown ? "The way there" : P.steps === P.best ? "The shortest way" : `${P.steps} steps`}</b>`); setProg("");
-    const trail = P.trail.concat(shown ? way.map(k => mapItems.find(it => msLow(it.n) === k)).filter(Boolean) : []);
-    panel.innerHTML = `<div class="ms-end">
-      <div class="ms-end-top">${msStarRow(stars)}</div>
-      <h3 class="title-2">${shown ? `${way.length} more step${way.length === 1 ? "" : "s"} to ${esc(P.goal.n.toLowerCase())}` : P.steps === P.best ? `${esc(P.goal.n)} in ${P.steps}: no shorter way exists.` : `${esc(P.goal.n)} in ${P.steps}. The shortest takes ${P.best}.`}</h3>
-      <p class="ms-line">Read the walk: each step changed one or two things, lighter or darker, greyer or more vivid, or a little round the wheel.</p>
-      <div class="ms-trail">${trail.map(msChip).join("")}</div>
-      <button class="btn" data-again>Another walk ${ICON.arrow}</button>
-      <div class="ms-acts"><button class="btn ghost" data-setup>Change</button></div></div>`;
-    wireEnd();
-    panel.querySelector("[data-again]").onclick = () => { buzz(8); P = null; walk(); };
+    P.last = it;
+    const cmp = last && msLow(last.n) !== msLow(it.n) ? ` ${esc(msDir(it, last)).replace(/^./, c => c.toUpperCase())} than ${esc(last.n.toLowerCase())}.` : "";
+    panel.innerHTML = `<div class="ms-play"><p class="ms-say in"><b>${esc(it.n)}</b>${cmp ? `<br>${cmp.trim()}` : ""}</p>
+      <div class="ms-acts"><button class="btn" data-open="${esc(it.n)}">Its page ${ICON.arrow}</button><button class="btn ghost" data-setup>Done</button></div></div>`;
+    panel.querySelector("[data-open]").onclick = () => msOpenColor(it);
+    panel.querySelector("[data-setup]").onclick = () => { buzz(4); setup(); };
+    setProg(`<span class="ms-n">${P.seen.size} looked at</span>`);
   }
 
-  // ---- light up 5
+  // ---- today's five
   function lightUp() {
     const day = msToday5();
     const items = day.names.map(n => msItemOf(n)).filter(Boolean);
@@ -801,8 +826,8 @@ function msOpen(o = {}) {
   }
   function lightMeet() {
     if (P.i >= P.list.length) { P.i = 0; P.stage = "find"; return lightFind(); }
-    const t = P.list[P.i]; msLog("seen", t);
-    const g = graph(), nb = [...(g.get(msLow(t.n)) || [])].map(k => mapItems.find(it => msLow(it.n) === k)).filter(Boolean);
+    const t = P.list[P.i]; msLog("seen", t); msNote(t.h);
+    const g = graph(), nb = [...(g.get(msLow(t.n)) || [])].map(itemOf).filter(Boolean);
     const anchors = nb.filter(x => P.known.has(msLow(x.n))).concat(nb.filter(x => !P.known.has(msLow(x.n)))).slice(0, 2);
     // your map so far keeps its names; today's new one shows its own
     // (the two neighbors it's described against show their names and a quiet ring, so the words point somewhere)
@@ -818,18 +843,19 @@ function msOpen(o = {}) {
     panel.querySelector("[data-open]").onclick = () => msOpenColor(t);
   }
   function lightTap(x) {
-    if (P.stage === "meet") { if (msLow(x.n) === msLow(P.list[P.i].n)) { buzz(6); P.i++; lightMeet(); } else { buzz(4); say(`That's ${P.known.has(msLow(x.n)) ? esc(x.n.toLowerCase()) : "one you haven't met yet"}. Tap ${esc(P.list[P.i].n.toLowerCase())} or Next.`); } return; }
+    if (P.stage === "meet") { if (msLow(x.n) === msLow(P.list[P.i].n)) { buzz(6); P.i++; lightMeet(); } else { buzz(4); msNote(x.h); say(`That's ${P.known.has(msLow(x.n)) ? esc(x.n.toLowerCase()) : "one you haven't met yet"}. Tap ${esc(P.list[P.i].n.toLowerCase())} or Next.`); } return; }
     if (P.answered) { if (msLow(x.n) === msLow(P.t.n)) lightNext(); else buzz(4); return; }
-    const t = P.t, res = msGrade(x, t, graph().get(msLow(t.n)), 3);
+    msNote(x.h);
+    const t = P.t, res = msGrade(x, t, graph().get(msLow(t.n)), true);
     P.answered = true; P.first.set(msLow(t.n), { it: t, res });
     if (res === "right") P.right++;
     reveal.add(msLow(t.n)); if (res !== "right") reveal.add(msLow(x.n));
     const marks = [{ n: t.n, kind: res === "right" ? "right" : "true" }]; if (res !== "right") marks.push({ n: x.n, kind: "wrong" });
     ctrl.study({ marks });
     msLog("answer", t, { ok: res === "right", by: "pick" }); if (res !== "right") msLog("confuse", t, { b: { n: x.n, h: x.h } });
-    if (res === "right") { buzz(12); say(`<b>${esc(t.n)}.</b> On your map.`); later(lightNext, 950); return; }
-    buzz([10, 40, 10]); ctrl.studyFlyTo(t);
-    say(`<b>${res === "close" ? "Next door." : `${esc(t.n)} is here.`}</b> You picked ${esc(x.n.toLowerCase())}: ${esc(msDir(x, t))}.`);
+    if (res === "right") { msSfx("right"); buzz(12); say(`<b>${esc(t.n)}.</b> On your map.`); later(lightNext, 950); return; }
+    msSfx(res === "close" ? "near" : "wrong"); buzz([10, 40, 10]); ctrl.studyFlyTo(t);
+    say(`<b>${res === "close" ? "Next door." : `${esc(t.n)} is here.`}</b> You picked ${esc(x.n.toLowerCase())}: ${esc(t.n.toLowerCase())} is ${esc(msDir(t, x))}.`);
     const acts = panel.querySelector(".ms-acts"); acts.innerHTML = `<button class="btn" data-next>Next ${ICON.arrow}</button>`; acts.querySelector("[data-next]").onclick = lightNext;
   }
   function lightFind() {
@@ -854,7 +880,7 @@ function msOpen(o = {}) {
     ctrl.study({ hit: null, label: labelFn, marks: P.list.map(it => ({ n: it.n, kind: (P.first.get(msLow(it.n)) || {}).res === "right" ? "right" : "true" })) });
     ctrl.studyZoom(.7);
     P.kind = "done";
-    setAsk(`<small>Light up 5</small><b>${n} lit today</b>`); setProg("");
+    setAsk(`<small>Today's five</small><b>${n} lit today</b>`); setProg("");
     panel.innerHTML = `<div class="ms-end">
       <div class="ms-end-top">${msStarRow(msStars(r, n))}</div>
       <h3 class="title-2">Your map holds ${total.toLocaleString()} color${total === 1 ? "" : "s"} now.</h3>
@@ -871,6 +897,7 @@ function msOpen(o = {}) {
       else $("[data-close]").click();
     };
     wireEnd();
+    msSfx("complete", lit.map(it => it.h));
     buzz([12, 60, 12]);
   }
 
@@ -899,7 +926,7 @@ function msTrainShelf() {
   const art = ["#7FA88A", "#B9C9A7", "#4E7A6A", "#A8C3BC", "#D5D9B0", "#5C8C78", "#93B39A"].map(h => `<i style="--c:${h}"></i>`).join("");
   return `<div class="sec-head"><b>The map</b><span>study on the honeycomb</span></div>
     <div class="gs-grid"><button class="gs-tile ms-tile" data-mapstudy><span class="sa ms-art">${art}</span><span class="gs-name">Study the map</span>
-      <span class="gs-meta"><span>${f ? `${f.toLocaleString()} found at ${esc(msLevelLabel(lvl))}` : "New"}</span></span><span class="ladder blank"></span>
-      <span class="gs-best">${day ? "Today's five are lit" : "Find, name and walk the colors"}</span></button></div>`;
+      <span class="gs-meta"><span>${f ? (lvl === "all" ? `${f.toLocaleString()} names found` : `${f.toLocaleString()} of ${lvl} found`) : "New"}</span></span><span class="ladder blank"></span>
+      <span class="gs-best">${day ? "Today's five are lit" : "Find, name and wander the colors"}</span></button></div>`;
 }
 function msWireTrain(el) { const b = el.querySelector("[data-mapstudy]"); if (b) b.onclick = () => msOpen({ from: "gym" }); }
