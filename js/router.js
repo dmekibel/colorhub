@@ -112,7 +112,7 @@ const ROUTED = [["colorPage", (n, tapped) => n && n.id ? routed(n.title, nodeRou
   ["awIndex", () => routed("Art history by color", "arthistory")],
   ["awVs", (a, b) => routed("Painter against painter", "painters" + (a ? "/" + a + (b ? "/" + b : "") : ""))],
   ["gmListPage", kind => typeof gmListTitle === "function" ? routed(gmListTitle(kind), "gem/" + kind) : null],   // js/gems.js (gem/essay detail pages route via wikiPage above)
-  ["labHoney", () => routed("Honeycomb lab", "lab/honey")],   // js/home.js: rate every preset at every set size
+  ["labHoney", () => routed("Honeycomb lab", "lab/honey")], ["sndLab", () => routed("Sounds", "lab/sounds")],   // js/sound.js   // js/home.js: rate every preset at every set size
   ["msOpen", () => routed("Study the map", "mapstudy")],   // js/mapstudy.js
   ["gamutWheel", () => routed("Gamut wheel", "studio/wheel")],   // js/studio.js
   ["openSavedPalette", id => routed("Your palette", "studio/palette/" + id)],   // js/studio.js
@@ -235,7 +235,7 @@ function openRoute(hash, initial = false) {
   const simple = { daily: () => daily(), challenge: () => challenge(),
     taste: () => tasteIntro(id === "palette" ? "palette" : "color"),
     favorites: () => typeof favShelf !== "function" ? go(S.tab || "learn") : id === "taste" ? favTaste() : id === "rank" ? frStart(more || "bws", "all") : favShelf(),   // js/favs.js
-    lab: () => id === "honey" && typeof labHoney === "function" ? labHoney() : (LAB[id] && ["harmony", "contrast"].includes(id) ? LAB[id] : LAB.harmony)(),
+    lab: () => id === "sounds" && typeof sndLab === "function" ? sndLab() : id === "honey" && typeof labHoney === "function" ? labHoney() : (LAB[id] && ["harmony", "contrast"].includes(id) ? LAB[id] : LAB.harmony)(),
     fashion: () => typeof fashionPage === "function" && fashionPage(id),
     mapstudy: () => typeof msOpen === "function" ? msOpen() : go(S.tab || "learn"),   // js/mapstudy.js
     // the honeycomb home's instant mini-lesson (js/learnit.js): #/learnit/<color>
