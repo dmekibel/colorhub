@@ -376,6 +376,17 @@ function hmHome() {
   `, "fixed cx hm");
   const $ = s => el.querySelector(s), viewEl = $(".cx-view"), title = $(".hm-title");
   loadLongNames();
+  // the placement result's one-line hint ("Tap any color to open it", js/learn.js lrMapHint/S.mapHint): shown
+  // once right after placement, but if the app closed before that first touch, S.mapHint is still pending, so
+  // the next time Home opens shows it again. hmDismissHint is every other real interaction's way to clear it
+  // (a bubble opened, a drag, the corner menu) -- belt and suspenders beside lrMapHint's own pointerdown listener.
+  if (typeof lrMapHint === "function") lrMapHint();
+  function hmDismissHint() {
+    if (!S.mapHint) return;
+    delete S.mapHint; save();
+    const tip = $(".lr-maphint"); if (!tip) return;
+    tip.classList.add("out"); later(() => tip.remove(), typeof reduceMotion !== "undefined" && reduceMotion ? 0 : 320);
+  }
 
   // ---------- the honeycomb itself ----------
   let items = [], ctrl = null, gen = 0;
@@ -387,7 +398,7 @@ function hmHome() {
   // (js/mapxfer.js) grows the bubble's exact outline into the page's cover. Back shrinks it home (hmHome below).
   const pick = (o, fx) => {
     if (typeof MX !== "undefined" && MX && MX.dir === "in") return;   // a bubble is already becoming its page: one tap, one page
-    if (typeof hmDismissHint === "function") hmDismissHint();
+    hmDismissHint();
     const open = () => (o.c ? hmOpenColor(o.c) : hmOpenName(o));
     // the bubble becomes its page (js/mapxfer.js): it grows from its exact shape into the cover, sync or async page alike
     const geo = fx && fx.geo && typeof mxGrow === "function" ? fx.geo() : null;
@@ -701,7 +712,7 @@ function hmHome() {
     if (!ctrl || !items.length) return;
     const unmet = items.filter(it => !(it.c && it.c.id && S.cards[it.c.id]));
     const pool = unmet.length ? unmet : items;
-    buzz(6); if (typeof hmDismissHint === "function") hmDismissHint();
+    buzz(6); hmDismissHint();
     ctrl.update({ items, focus: pool[Math.floor(Math.random() * pool.length)], soft: true });
   }
 
@@ -718,7 +729,7 @@ function hmHome() {
     cv.addEventListener("pointerdown", e => { p0 = [e.clientX, e.clientY]; clearTimeout(chromeT); });
     cv.addEventListener("pointermove", e => { if (p0 && Math.hypot(e.clientX - p0[0], e.clientY - p0[1]) > 10) { el.classList.add("chrome-hide"); clearTimeout(chromeT); } });
     const lift = () => { p0 = null; clearTimeout(chromeT); chromeT = setTimeout(() => { el.classList.remove("chrome-hide"); if (!document.querySelector(".sheet") && !STEM_OPEN) cornersBack(); }, 220); };
-    cv.addEventListener("pointerup", () => { lift(); if (typeof hmDismissHint === "function") hmDismissHint(); });
+    cv.addEventListener("pointerup", () => { lift(); hmDismissHint(); });
     cv.addEventListener("pointercancel", lift);
     // David: "sometimes the bottom corner buttons disappear". A pan whose finger lifts off the canvas (over a corner, a
     // sheet, outside the window) never sent the canvas its pointerup, so the corners stayed faded and untappable. The
@@ -746,7 +757,7 @@ function hmHome() {
     if (STEM_OPEN) { buzz(4); return closeStem(); }
     if (document.querySelector(".sheet,.scrim")) return;
     document.querySelectorAll(".rooms-stem,.rm-scrim").forEach(n => n.remove());
-    if (typeof hmDismissHint === "function") hmDismissHint();
+    hmDismissHint();
     buzz(4);
     STEM_OPEN = true; document.body.classList.add("stem-open");
     const due = typeof dueList === "function" ? dueList() : [], v = hmView(), lit = typeof HONEY_HL !== "undefined" && HONEY_HL;

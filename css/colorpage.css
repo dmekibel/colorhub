@@ -263,6 +263,8 @@
 .rc-you{margin-top:26px;padding:16px 18px;background:var(--surface-2);border-radius:var(--r-2)}
 .rc-you h3{font:400 22px/1.15 var(--serif);margin-bottom:8px}
 .rc-you p{font:400 17px/1.35 var(--serif)}
+.rc-you .rc-met{margin-top:4px}
+.rc-metlink{display:inline;padding:0;border:0;background:none;font:inherit;color:inherit;font-weight:600;text-decoration:underline;text-decoration-color:var(--faint)}
 .rc-you .rc-duel{margin-top:12px;padding:10px 18px;border-radius:999px;border:1px solid var(--cp-rule);font:italic 400 17px/1 var(--serif)}
 .rc-duel-panel{display:block;margin-top:12px}
 
