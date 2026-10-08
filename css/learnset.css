@@ -103,7 +103,7 @@
 .pr-board2 .pr-tile{min-height:52px}
 .pr-board2 .pr-tile.gone{opacity:.0}
 /* results */
-.ls-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin-top:16px}
+.ls-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px}
 .ls-stats div{padding:12px;border-radius:var(--r-2,14px);background:rgba(0,0,0,.18);display:flex;flex-direction:column;gap:6px}
 .ls-stats b .pr-code{font-size:22px;color:var(--ink)}
 .ls-stats span{font:italic 400 14px/1.2 var(--serif);color:var(--soft)}
@@ -115,3 +115,14 @@
 .pr-shot .ls-pop.go,.pr-shot .ls-grad.go .ls-gchip{animation:none;opacity:1}
 .pr-shot .ls-prev i,.pr-shot .ls-body{animation:none}
 .ls-combo.on{opacity:1}
+/* craft pass 2026-10-08 */
+/* Matching: rows sized to the content (56-76 px), the board centered, never stretched to fill the stage */
+.pr-board.pr-board2{flex:0 0 auto;grid-template-rows:repeat(var(--rows,4),minmax(56px,76px));margin:auto 0}
+/* a mastered color's segment pops */
+.ls-prog i.pop{animation:lsSeg .6s var(--spring,ease)}
+@keyframes lsSeg{30%{transform:scaleY(1.9)}}
+/* the final round: the whole set fanned out above the title */
+.ls-fan{display:flex;justify-content:center;margin-bottom:10px}
+.ls-fan i{width:44px;height:44px;border-radius:50%;background:var(--c);margin-left:-10px;box-shadow:0 0 0 3px var(--booth,#5c5c5c);animation:lsIn .4s var(--spring,ease) both;animation-delay:calc(var(--k) * 60ms)}
+.ls-fan i:first-child{margin-left:0}
+.pr-shot .ls-fan i{animation:none}

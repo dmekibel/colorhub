@@ -102,8 +102,8 @@ function makeRead(user, target) {
 // "Teal is darker and greener than turquoise." (measured, for neighbors without a written line)
 function compareLine(c, nb) {
   const p = colorDiff(c.h, nb.h).slice(0, 2);
-  if (!p.length) return `${c.n} and ${nb.n.toLowerCase()} are almost the same color.`;
-  return `${c.n} is ${MORE[p[0].w]}${p[1] ? " and " + MORE[p[1].w] : ""} than ${nb.n.toLowerCase()}.`;
+  if (!p.length) return `${c.n} and ${nb.n} are almost the same color.`;
+  return `${c.n} is ${MORE[p[0].w]}${p[1] ? " and " + MORE[p[1].w] : ""} than ${nb.n}.`;
 }
 
 // ======================================================================

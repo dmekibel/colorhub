@@ -237,7 +237,11 @@ function prNear(it, k = 3, deck = null) {
 }
 // How two colors differ, in words: the written line for an app color's own neighbor, else measured (produce.js)
 function prDiff(it, nb) {
-  if (it.c && it.c.vs && it.c.d && it.c.vs.toLowerCase() === nb.n.toLowerCase()) return it.c.d;
+  if (it.c && it.c.vs && it.c.d && it.c.vs.toLowerCase() === nb.n.toLowerCase()) {
+    // the written line often has no subject ("Lighter than teal."): name it, so it reads on its own
+    const d = it.c.d, nm = prName(it);
+    return /^([A-Z][a-z]+er|Much|More|Less|Slightly) [^.]*\bthan\b/.test(d) && !d.startsWith(nm) ? `${nm} is ${d[0].toLowerCase()}${d.slice(1)}` : d;
+  }
   return compareLine({ n: prName(it), h: it.h }, { n: prName(nb), h: nb.h });
 }
 

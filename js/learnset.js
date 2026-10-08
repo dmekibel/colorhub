@@ -17,6 +17,8 @@ const lsSetKey = items => items.map(it => it.key).sort().join("|");
 function lsExitTo(back) {
   return () => { if (typeof back === "function") back(); else if (back && /^#\/./.test(back)) { if (!openRoute(back)) go(S.tab || "learn"); } else go(S.tab || "learn"); };
 }
+// sound (js/sound.js): an explicit sfx in the same tick wins over the sound buzz() implies, so a moment keeps its haptic
+const lsSfx = (fn, ...a) => { try { if (typeof window[fn] === "function") window[fn](...a); } catch (e) {} };
 const lsOpenPage = it => { if (typeof openCoreName === "function") openCoreName(it.h, it.n); };
 // a color and its look-alikes, every pair at least `gap` apart (ΔE2000), nearest first
 function lsAlike(seed, n, gap) {
@@ -94,6 +96,19 @@ function lsOpen(o = {}) {
   paint();
   return { sh, close };
 }
+// a hex's label: one line when it fits, else two balanced lines, sized so the longest line fits the hex (about 0.9 wide)
+function lsHexLabel(name, x, y, fill) {
+  const w = name.split(" ");
+  let lines = [name];
+  if (name.length > 9 && w.length > 1) {
+    let best = null;
+    for (let k = 1; k < w.length; k++) { const a = w.slice(0, k).join(" "), b = w.slice(k).join(" "), m = Math.max(a.length, b.length); if (!best || m < best.m) best = { m, l: [a, b] }; }
+    lines = best.l;
+  }
+  const long = Math.max(...lines.map(l => l.length)), fs = Math.min(.22, .9 / (.5 * Math.max(4, long))), lh = fs * 1.05;
+  const y0 = y + .04 - (lines.length - 1) * lh / 2;
+  return `<text x="${x}" fill="${fill}" font-size="${fs.toFixed(3)}">${lines.map((l, i) => `<tspan x="${x}" y="${(y0 + i * lh).toFixed(3)}">${esc(l)}</tspan>`).join("")}</text>`;
+}
 const LS_ICON = {
   eye: sv('<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/>', 22, 1.6),
   map: sv('<path d="M12 3l7.8 4.5v9L12 21l-7.8-4.5v-9z"/>', 18, 1.6),
@@ -137,7 +152,7 @@ function lsLook(items, o = {}) {
       const xs = pts.map(p => p.x), ys = pts.map(p => p.y), x0 = Math.min(...xs) - .6, y0 = Math.min(...ys) - .6, w = Math.max(...xs) - x0 + .6, h = Math.max(...ys) - y0 + .6;
       const hex = (cx, cy) => { const r = .56, p = []; for (let k = 0; k < 6; k++) { const a = Math.PI / 6 + k * Math.PI / 3; p.push((cx + r * Math.cos(a)).toFixed(3) + "," + (cy + r * Math.sin(a)).toFixed(3)); } return p.join(" "); };
       return `<p class="pr-notep">Hue runs across, light to dark runs down: the same layout as Home's honeycomb.</p>
-        <svg class="ls-map" viewBox="${x0} ${y0} ${w} ${h}" role="img" aria-label="These colors on the color map">${pts.map(p => { const it = p.it.o; return `<g data-i="${items.indexOf(it)}"><polygon points="${hex(p.x, p.y)}" fill="${it.h}"/><text x="${p.x}" y="${p.y + .06}" fill="${ink(it.h) === "dark" ? "#141311" : "#fff"}" font-size="${Math.min(.2, 1.5 / Math.max(6, prName(it).length))}">${esc(prName(it))}</text></g>`; }).join("")}</svg>
+        <svg class="ls-map" viewBox="${x0} ${y0} ${w} ${h}" role="img" aria-label="These colors on the color map">${pts.map(p => { const it = p.it.o; return `<g data-i="${items.indexOf(it)}"><polygon points="${hex(p.x, p.y)}" fill="${it.h}"/>${lsHexLabel(prName(it), p.x, p.y, ink(it.h) === "dark" ? "#141311" : "#fff")}</g>`; }).join("")}</svg>
         ${typeof csOnMap === "function" ? `<button class="pr-text ls-bigmap" data-bigmap>${LS_ICON.map} See them on the big map</button>` : ""}`;
     },
     art: () => {
@@ -213,10 +228,12 @@ function lsStudy(items, o = {}) {
     combo = ok ? combo + 1 : 0; bestCombo = Math.max(bestCombo, combo);
     comboEl.querySelector("b").textContent = combo; comboEl.classList.toggle("on", combo >= 2); comboEl.classList.toggle("hot", combo >= 3); comboEl.classList.toggle("fire", combo >= 10);
     comboEl.classList.remove("tick"); void comboEl.offsetWidth; if (ok) comboEl.classList.add("tick");
-    if (ok && LS_COMBO.includes(combo)) { pop(`${combo} in a row`, "streak"); buzz([8, 30, 8, 30, 16]); }
+    if (ok && LS_COMBO.includes(combo)) { pop(`${combo} in a row`, "streak"); buzz([8, 30, 8, 30, 16]); lsSfx("sfx", combo >= 10 ? "best" : "combo", items.map(it => it.h)); }
   };
   const graduate = it => {
-    mastered++; buzz([10, 30, 20]);
+    mastered++; buzz([10, 30, 20]); coachDone();
+    lsSfx("sfxColor", it.h, { long: true }); setTimeout(() => lsSfx("sfx", "best", [it.h]), 200);
+    const seg = el.querySelector(`.ls-prog i[data-k="${CSS.escape(it.key)}"]`); if (seg) { seg.classList.remove("pop"); void seg.offsetWidth; seg.classList.add("pop"); }
     const g = el.querySelector("[data-grad]");
     g.innerHTML = `<span class="ls-gchip"><i style="--c:${it.h}"></i><b>${esc(prName(it))}</b><span>mastered</span></span>`;
     g.classList.remove("go"); void g.offsetWidth; g.classList.add("go");
@@ -241,7 +258,7 @@ function lsStudy(items, o = {}) {
       if (sinceMatch >= LS_MATCH_EVERY && inPlay.length >= 3) {
         sinceMatch = 0;
         const set = prShuffle(inPlay).slice(0, 5);
-        pop("Matching round", "round"); buzz([6, 40, 6]);
+        pop("Matching round", "round"); buzz(8); lsSfx("sfx", "rooms", 4);
         const res = await PR_STEPS.match.render(stage, set.map(q => q.it), ctx({ note: "Pair each name with its color" }));
         if (sess.ended || !stage.isConnected) return;
         (res.per || []).forEach(p => { const q = lvOf.get(p.item.key); prRecord(sess, p.item, { ok: p.ok, answer: p.answer, ms: res.ms / set.length }, "match"); climb(q, p.ok); if (!p.ok) { const i = queue.indexOf(q); if (i > 1) { queue.splice(i, 1); queue.splice(1, 0, q); } } });
@@ -264,10 +281,10 @@ function lsStudy(items, o = {}) {
     // the boss: a lightning Matching round of everything
     let bossMs = null;
     if (n >= 3) {
-      boss = true; status();
+      boss = true; status(); coachDone();
       const set = prShuffle(items).slice(0, 6);
-      stage.innerHTML = `<div class="ls-boss"><span class="pr-note">Every color mastered</span><b class="pr-t1">Final round</b><p class="pr-notep">Lightning match: pair all ${set.length} as fast as you can.</p>${prPrimary("Go", "", "data-boss")}</div>`;
-      buzz([10, 40, 10, 40, 20]);
+      stage.innerHTML = `<div class="ls-boss"><div class="ls-fan">${set.map((it, k) => `<i style="--c:${it.h};--k:${k}"></i>`).join("")}</div><span class="pr-note">Every color mastered</span><b class="pr-t1">Final round</b><p class="pr-notep">Lightning match: pair all ${set.length} as fast as you can.</p>${prPrimary("Go", "", "data-boss")}</div>`;
+      buzz([10, 40, 10, 40, 20]); lsSfx("sfxChord", set.map(it => it.h));
       await new Promise(r => { const b = stage.querySelector("[data-boss]"); b.onclick = r; setKey(e => { if (e.key === "Enter") r(); }); });
       if (sess.ended) return;
       const clock = el.querySelector("[data-status]"); let pen = 0; const t0 = performance.now();
@@ -277,6 +294,7 @@ function lsStudy(items, o = {}) {
       clearInterval(tick);
       if (sess.ended) return;
       bossMs = performance.now() - t0 + pen * 1000;
+      lsSfx("sfx", "levelup", set.map(it => it.h));
     }
     lsResults(sess, { items, o, bestCombo, mastered, lvOf, bossMs });
   })();
@@ -312,7 +330,8 @@ function lsResults(sess, r) {
     <div class="pr-grow"></div>
     <div class="pr-acts">${prPrimary(all ? "Study again" : "Keep going", "", "data-a=again")}
       <span class="pr-textrow"><button class="pr-text" data-a="look">Look again</button><button class="pr-text" data-a="share">Share</button></span></div>`, "pr-res pr-booth ls-res");
-  buzz(all ? [10, 30, 10, 30, 24] : 8);
+  buzz(all ? [10, 30, 10, 30, 24] : 8); lsSfx("sfxChord", items.map(it => it.h));
+  if (newBest && best != null) setTimeout(() => { if (el.isConnected) lsSfx("sfx", "best", items.map(it => it.h)); }, 1100);
   const exit = o.back || lsExitTo("");
   el.querySelector("[data-close]").onclick = () => exit();
   el.querySelectorAll("[data-h]").forEach(b => b.onclick = () => lsOpenPage({ h: b.dataset.h, n: b.dataset.n }));
