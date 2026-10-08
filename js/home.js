@@ -662,10 +662,11 @@ function hmHome() {
     scrim.addEventListener("click", e => { e.preventDefault(); e.stopPropagation(); });
     scrim.addEventListener("touchmove", e => e.preventDefault(), { passive: false });
     const stem = document.createElement("div");
-    stem.className = "rooms-stem hm-do-stem"; stem.setAttribute("role", "menu"); stem.setAttribute("aria-label", "Home menu");
+    stem.className = "rooms-stem hm-do-stem mn-panel mn-panel-r"; stem.setAttribute("role", "menu"); stem.setAttribute("aria-label", "Home menu");
     stem.style.setProperty("--n", n);
-    stem.innerHTML = rows.map((r, k) => {
-      const i = n - 1 - k;   // a straight stack up the right edge, pictures centered over the corner
+    // the menu panel (design/VISUAL-DIRECTION.md component 2): a tile grid at the thumb, Search as a field along the bottom
+    stem.innerHTML = `<div class="mn-ph"><h3>The map</h3><p>What you see, and what to do with it</p></div>` + rows.map((r, k) => {
+      const i = k;
       return `<button class="rm-bubble" role="menuitem" data-do="${r.id}" ${r.attr || ""} style="--i:${i}">
         ${r.art}<span class="rm-label"><b>${esc(r.t)}</b><em>${esc(r.n)}</em></span></button>`;
     }).join("");

@@ -536,12 +536,12 @@ function toggleStem(cornerEl) {
   scrim.addEventListener("click", e => { e.preventDefault(); e.stopPropagation(); });
   scrim.addEventListener("touchmove", e => e.preventDefault(), { passive: false });
   const stem = document.createElement("div");
-  stem.className = "rooms-stem";
+  stem.className = "rooms-stem mn-panel mn-panel-l";
   stem.setAttribute("role", "menu"); stem.setAttribute("aria-label", "Rooms");
   const n = items.length;
   stem.style.setProperty("--n", n);   // short screens tighten the step so the top capsule stays low (css/menus2.css)
-  // a straight stack up the left edge (David, 2026-10-08: "straight up along the side"), every picture centered over the corner
-  stem.innerHTML = items.map(([id, label], i) => {
+  // the menu panel (design/VISUAL-DIRECTION.md component 2): a floating tile grid above the corner, not a pill cascade
+  stem.innerHTML = `<div class="mn-ph"><h3>Rooms</h3><p>Where to next</p></div>` + items.map(([id, label], i) => {
     const cur = id === here;
     return `<button class="rm-bubble${cur ? " cur" : ""}" role="menuitem" data-room="${id}" style="--i:${i}">
       ${roomsBubbleArt(id)}<span class="rm-label"><b>${esc(label)}</b><em>${esc(cur ? "You're here" : roomsNote(id))}</em></span>

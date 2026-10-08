@@ -271,7 +271,7 @@
    sliders are quiet tracks with a white thumb and the filled part in ink. ---------- */
 .hm-arr{gap:8px;padding:4px 16px 6px}
 .hm-arr-b{width:80px;gap:8px;min-height:var(--tap)}
-.hm-arr-pic{width:72px;height:72px;border-radius:var(--r-tile);background:var(--surface-2);box-shadow:none;display:grid;place-items:center;
+.hm-arr-pic{width:72px;height:72px;border-radius:var(--r-card);background:var(--s2);box-shadow:none;display:grid;place-items:center;
   transition:box-shadow var(--dur-1),background var(--dur-1)}
 .hm-arr-pic svg{width:56px;height:56px;display:block}
 .hm-arr-b b{font:400 var(--type-cap)/1.15 var(--sans);min-height:0;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;-webkit-line-clamp:unset}
@@ -285,7 +285,7 @@
 .hm-ch-scroll .cx-sec span{font:400 var(--type-cap)/1 var(--sans);letter-spacing:0;color:var(--faint)}
 /* the Look: three equal tiles, icon over label */
 .hm-sheet-panel .hm-look-row{gap:8px;padding-top:10px}
-.hm-sheet-panel .hm-look-chip{min-height:84px;gap:8px;border-radius:var(--r-tile);background:var(--surface-2);transition:background var(--dur-1),box-shadow var(--dur-1)}
+.hm-sheet-panel .hm-look-chip{min-height:84px;gap:8px;border-radius:var(--r-card);background:var(--s2);transition:background var(--dur-1),box-shadow var(--dur-1)}
 .hm-sheet-panel .hm-look-chip .hm-look-ic{width:40px;height:40px;box-shadow:none;background:none;clip-path:none;border-radius:0}
 .hm-look-ic svg{width:40px;height:40px;display:block}
 .hm-sheet-panel .hm-look-chip b{font:400 15px/1.1 var(--sans);color:var(--soft)}
@@ -299,17 +299,22 @@
 .hm-feel-r{gap:12px;min-height:var(--tap)}
 .hm-feel-r i,.hm-feel-r i:last-child{width:auto;font:400 var(--type-cap)/1 var(--sans);color:var(--faint);text-align:left}
 .hm-feel-r input{-webkit-appearance:none;appearance:none;height:var(--tap);background:none;margin:0}
-.hm-feel-r input::-webkit-slider-runnable-track{height:4px;border-radius:2px;
-  background:linear-gradient(90deg,var(--ink) calc(var(--p,.5) * 100%),var(--surface-3) 0)}
+.hm-feel-r input::-webkit-slider-runnable-track{height:6px;border-radius:3px;
+  background:linear-gradient(90deg,var(--ink) calc(var(--p,.5) * 100%),var(--s3) 0)}
 .hm-feel-r input::-moz-range-track{height:4px;border-radius:2px;background:var(--surface-3)}
 .hm-feel-r input::-moz-range-progress{height:4px;border-radius:2px;background:var(--ink)}
-.hm-feel-r input::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;margin-top:-12px;border-radius:50%;background:#fff;
+.hm-feel-r input::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;margin-top:-11px;border-radius:50%;background:var(--ink);
   box-shadow:0 2px 8px rgba(0,0,0,.4),0 0 0 .5px rgba(0,0,0,.2)}
-.hm-feel-r input::-moz-range-thumb{width:28px;height:28px;border:0;border-radius:50%;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.4)}
-.hm-feel-reset{min-height:var(--tap);border-radius:var(--r-ctl);margin-top:8px}
+.hm-feel-r input::-moz-range-thumb{width:28px;height:28px;border:0;border-radius:50%;background:var(--ink);box-shadow:0 2px 8px rgba(0,0,0,.4)}
+.hm-feel-reset{min-height:var(--tap);border-radius:var(--r-pill);margin-top:8px;background:var(--s2)}
 .hm-feel-r i{flex:none;width:52px!important}.hm-feel-r i:last-child{width:60px!important;text-align:right!important}
 /* segmented pairs in the Home sheets: filled, no outline; the chosen one ringed */
 .hm-seg{gap:8px}
 .hm-seg button{border:0;background:var(--ctl-fill);font:400 15px/1 var(--sans);color:var(--soft)}
 .hm-seg button.on{font-weight:500}
 .hm-lab-stars button svg,.hm-lab-heart svg{width:18px;height:18px}
+
+/* Night Gallery: the selected arrangement and look also take the dot */
+.hm-arr-pic{position:relative}
+.hm-arr-b.on .hm-arr-pic::after,.hm-sheet-panel .hm-look-chip.on::after{content:"";position:absolute;top:8px;right:8px;width:7px;height:7px;border-radius:50%;background:var(--sel-dot)}
+.hm-sheet-panel .hm-look-chip{position:relative}
