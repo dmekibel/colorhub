@@ -130,6 +130,15 @@ function honeyWheel(items) {
 // golden-angle phyllotaxis disc: every item placed once, ordered by hue (so hue sweeps smoothly as the spiral
 // grows) then lightness (so lightness reads along the radius too). Never wraps — one cluster at any size.
 const HONEY_GA = Math.PI * (3 - Math.sqrt(5));
+// L18 (David, 2026-10-08: zooming in "increases the distance between things too much"): past the normal zoom the
+// plane spreads at 60% of the pinch, so a zoom-in enlarges the middle without flinging its neighbors apart.
+// Zoomed out (z <= 1) is untouched, so every floor and preset stays exactly where it was.
+const l18Spread = z => z <= 1 ? z : 1 + (z - 1) * .6;
+// and the lens widens its calm middle as you zoom in: the fisheye packs each ring tighter outward than around, and
+// that difference is what opened wide seams between neighbors when zoomed in. At z <= 1 nothing changes (the round
+// Apple Watch fisheye stays exactly as approved); at the double-tap zoom the ring spacing is within ~10% of even.
+const l18Flat = z => z <= 1 ? 1 : 1 + (z - 1) * .55;
+const L18_GROW = .52;
 function honeySunflower(items) {
   const N = items.length, c = .56;   // tuned so neighbor spacing (by index) is close to the lattice's unit spacing
   const ordered = items.slice().sort((a, b) => honeyHueKey(a) - honeyHueKey(b) || b.L - a.L);
@@ -566,8 +575,8 @@ function honeycomb(host, opts = {}) {
   const unwarp = (v, a) => v <= a ? v : v >= .9999 ? 40 : a - (1 - a) * Math.log(1 - (v - a) / (1 - a));
   const lens = t => {
     const e = 1 - Math.pow(1 - bloom, 3), br = phase === "drift" ? 1 + .028 * Math.sin(t / 1000 * Math.PI * 2 / 3.8) : 1;
-    const s = (.72 + .28 * e) * Z;
-    return { s, a: e, m0: zc("m0") * br, m1: zc("m1"), sig: zc("sig"), K: base * s * M * br, inner: inner() };
+    const s = (.72 + .28 * e) * l18Spread(Z);
+    return { s, a: e, m0: zc("m0") * br, m1: zc("m1"), sig: zc("sig") * l18Flat(Z), K: base * s * M * br, inner: inner() };
   };
   const F = (z, l) => base * l.s * (l.m1 * z + (l.m0 - l.m1) * l.sig * .8862 * honeyErf(z / l.sig));
   const magR = (z, l) => l.m1 + (l.m0 - l.m1) * Math.exp(-((z / l.sig) ** 2));            // radial derivative (F')
@@ -704,6 +713,7 @@ function honeycomb(host, opts = {}) {
   // the field moves as one coherent sheet, never bubbles shaking independently.
   function applyMotion(l, t) {
     ripples = ripples.filter(r => t - r.t0 < 650);
+    if (pinch) return;   // L18: two fingers own the sheet; no lag or water wobble under them (David: pinch "wiggles")
     if (RM || SHOOT || cfg.alive <= 0 || !drawn.length || drawn.length > HONEY_MOTION_BUDGET) return;
     const lagX = P[0] - Plag[0], lagY = P[1] - Plag[1], kk = centerK(l);
     const lvx = lagX * kk, lvy = lagY * kk;
@@ -732,7 +742,7 @@ function honeycomb(host, opts = {}) {
   function finishFrame(l, t) {
     const shapeAmt = zc("shape");
     applyMotion(l, t);
-    honeyCells(drawn, gapPx(), shapeAmt, .52, !!morph);
+    honeyCells(drawn, gapPx(), shapeAmt, L18_GROW, !!morph);
     // No snapping (David): a bubble's size eases to its new value over ~120 ms instead of jumping when its cell
     // changes. New bubbles (just entered the screen) start at their size; growth eases too.
     const dt = sizeT ? Math.min(100, t - sizeT) : 0; sizeT = t;
@@ -744,7 +754,7 @@ function honeycomb(host, opts = {}) {
     for (const b of drawn) {
       if (!b.k) continue;
       const prev = sizeMem.get(b.k);
-      if (prev != null && dt > 0 && prev < b.rin) {
+      if (prev != null && dt > 0 && prev < b.rin && !pinch && b.rin - prev > Math.max(1.2, prev * .1)) {   // L18: jumps ease; motion's own small steps don't
         const r = prev + (b.rin - prev) * ease, f = b.rin > 0 ? r / b.rin : 1;
         if (b.rin - r > .3) easing = true;
         if (b.poly && Math.abs(f - 1) > .001) b.poly = b.poly.map(q => [q[0] * f, q[1] * f]);
@@ -868,7 +878,7 @@ function honeycomb(host, opts = {}) {
       more = true;
     }
     // the net's lag (Plag chases P) and water's breathing run all the time ALIVE is on, not just while idle
-    if (ALIVE) {
+    if (ALIVE && !pinch) {
       const tau = .1, a = 1 - Math.exp(-dt / tau);
       Plag = [Plag[0] + (P[0] - Plag[0]) * a, Plag[1] + (P[1] - Plag[1]) * a];
       more = true;
@@ -1114,8 +1124,12 @@ function honeycomb(host, opts = {}) {
     if (!ptrs.has(e.pointerId)) return;
     const [x, y] = local(e); ptrs.set(e.pointerId, [x, y]); touchXY = [x, y];
     if (pinch && ptrs.size >= 2) {
-      const [a, b] = [...ptrs.values()], mid = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2], d = Math.hypot(a[0] - b[0], a[1] - b[1]);
-      if (Math.abs(d - pinch.d0) > 8) pinch.moved = true;
+      const [a, b] = [...ptrs.values()], mid0 = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2], d0 = Math.hypot(a[0] - b[0], a[1] - b[1]);
+      // L18: a light low-pass on the fingers (half a frame of lag), so pixel jitter never shakes the whole map
+      pinch.sd = pinch.sd == null ? d0 : pinch.sd + (d0 - pinch.sd) * .55;
+      pinch.sm = pinch.sm ? [pinch.sm[0] + (mid0[0] - pinch.sm[0]) * .55, pinch.sm[1] + (mid0[1] - pinch.sm[1]) * .55] : mid0;
+      const d = pinch.sd, mid = pinch.sm;
+      if (Math.abs(d0 - pinch.d0) > 8) pinch.moved = true;
       Z = rubber(pinch.Z0 * d / pinch.d0);
       if (!lay.globe) { const o = offAt(mid[0], mid[1], lens(0)); P = [pinch.W0[0] - o[0], pinch.W0[1] - o[1]]; }
       draw(); return;
@@ -1268,11 +1282,16 @@ function honeycomb(host, opts = {}) {
 
   // ---- size, visibility, teardown ----
   function resize() {
-    const r = cv.getBoundingClientRect(); dpr = Math.min(3, devicePixelRatio || 1);
+    // L18 (David: panning "goes completely white and breaks"): 2x is as sharp as a phone can show for bubbles, and
+    // a 3x full-screen canvas is 12 MB a copy; iOS blanks every canvas once their total passes its limit
+    const r = cv.getBoundingClientRect(); dpr = Math.min(2, devicePixelRatio || 1);
     W = r.width; Hh = r.height; cv.width = Math.round(W * dpr); cv.height = Math.round(Hh * dpr);
     base = clamp(W / 13, 26, 34); ghost = null; ZMIN = zFloor(); Z = clamp(Z, ZMIN, ZMAX); draw();
   }
   const ro = new ResizeObserver(resize); ro.observe(cv);
+  // L18: a canvas whose context the browser dropped (memory pressure) comes back drawn, not blank
+  cv.addEventListener("contextlost", e => e.preventDefault());
+  cv.addEventListener("contextrestored", () => { sizeMem = new Map(); draw(); });
   const io = "IntersectionObserver" in window ? new IntersectionObserver(es => { visible = es[0].isIntersecting && !document.hidden; if (visible) kick(); }) : null;
   if (io) io.observe(host);
   const vis = () => { visible = !document.hidden; if (visible) kick(); };
@@ -1282,6 +1301,8 @@ function honeycomb(host, opts = {}) {
     if (dead) return;
     remember(); dead = true; clearTimeout(tapTimer); clearTimeout(wheelT);
     cancelAnimationFrame(raf); raf = 0; ro.disconnect(); if (io) io.disconnect();
+    // L18: give the canvas memory back now (iOS only frees it on a later GC, and every Home rebuild made a new one)
+    setTimeout(() => { try { cv.width = cv.height = 0; if (ghost) ghost.width = ghost.height = 0; ghost = null; } catch (e) {} }, 600);
     document.removeEventListener("visibilitychange", vis);
   }
   cleanup.push(destroy);
@@ -1396,6 +1417,13 @@ function honeycomb(host, opts = {}) {
     zoomValue: () => Z,
     famNames(on) { famOn = !!on; draw(); },
     _morphCheck: items => l18MorphCheck(items),
+    // QA (tools/smoke map group): the median seam between each readable bubble and its nearest neighbor, in px
+    _gapStat() {
+      const big = drawn.filter(b => b.d >= 12), gs = [];
+      for (const b of big) { let g = Infinity; for (const o of drawn) { if (o === b) continue; const v = Math.hypot(o.x - b.x, o.y - b.y) - b.d / 2 - o.d / 2; if (v < g) g = v; } if (isFinite(g)) gs.push(g); }
+      gs.sort((x, y) => x - y);
+      return { n: drawn.length, w: cv.width, h: cv.height, gap: gs.length ? +gs[Math.floor(gs.length / 2)].toFixed(2) : null, p90: gs.length ? +gs[Math.floor(gs.length * .9)].toFixed(2) : null };
+    },
     // L18 B2: a small JPEG of the map as it looks right now (the rooms' floor strip shows it under a solid scrim)
     snapshot(w = 390) {
       if (!W || !cv.width) return null;

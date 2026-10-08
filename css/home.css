@@ -157,3 +157,6 @@
 /* L18: a lit constellation pill sits above the favorites heart on Home */
 .hm .cs-hl-pill{bottom:calc(var(--bottom) + 140px)}
 .hm-look-spiral{background:radial-gradient(circle at 50% 50%,#E7C35C 0 18%,#2A2822 19% 22%,#4C9F70 23% 44%,#2A2822 45% 48%,#4C7FD1 49% 72%,#2A2822 73% 76%,#8C5AC2 77%)}
+/* L18: every Home corner fades together while you drag, and returns together (David: only the Study corner stayed) */
+.hm.chrome-hide .corner{opacity:0;pointer-events:none}
+.hm .corner{transition:opacity .45s var(--ease),transform .3s var(--spring)}

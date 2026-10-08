@@ -445,9 +445,14 @@ function hmHome() {
   function hmShowChrome() { el.classList.remove("chrome-hide"); clearTimeout(chromeT); }
   function hmWireChrome() {
     const cv = viewEl.querySelector("canvas"); if (!cv || cv.dataset.hmWired) return; cv.dataset.hmWired = "1";
-    cv.addEventListener("pointerdown", () => { el.classList.add("chrome-hide"); clearTimeout(chromeT); });
-    cv.addEventListener("pointerup", () => { hmShowChrome(); if (typeof hmDismissHint === "function") hmDismissHint(); });
-    cv.addEventListener("pointercancel", () => hmShowChrome());
+    // L18 (David: "everything disappears except the flashcards"): every corner fades together (css/home.css), only
+    // once a drag really moves (a tap never blinks them), and they return a beat after the finger lifts
+    let p0 = null;
+    cv.addEventListener("pointerdown", e => { p0 = [e.clientX, e.clientY]; clearTimeout(chromeT); });
+    cv.addEventListener("pointermove", e => { if (p0 && Math.hypot(e.clientX - p0[0], e.clientY - p0[1]) > 10) { el.classList.add("chrome-hide"); clearTimeout(chromeT); } });
+    const lift = () => { p0 = null; clearTimeout(chromeT); chromeT = setTimeout(() => el.classList.remove("chrome-hide"), 220); };
+    cv.addEventListener("pointerup", () => { lift(); if (typeof hmDismissHint === "function") hmDismissHint(); });
+    cv.addEventListener("pointercancel", lift);
   }
   hmShowChrome();
   { const ms = $("#hmMapStudy"); if (ms) ms.onclick = () => { buzz(6); msOpen({ from: "home" }); }; }   // js/mapstudy.js
@@ -726,6 +731,7 @@ function hmTap(el) {
 function hmShot(arg) {
   // L18: home:far (stage 9, all the way out) · home:fam (the same, with family names on)
   if (arg === "far" || arg === "fam") S.hm = Object.assign(S.hm || {}, { src: "stage:1000", filter: "all", zoom: .01, famNames: arg === "fam" });
+  if (arg === "zin") S.hm = Object.assign(S.hm || {}, { zoom: 2.1 });   // L18: the double-tap zoom-in level
   if (/^spiral/.test(arg)) S.hm = Object.assign(S.hm || {}, { src: "stage:1000", filter: "all", style: "spiral", zoom: arg === "spiral:out" ? .01 : 1 });   // L18 H5
   hmHome();
   if (arg === "bar") setTimeout(() => { const s = document.querySelector(".screen.hm"); if (s) s.classList.remove("chrome-hide"); }, 3200);
