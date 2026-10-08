@@ -167,3 +167,9 @@
 .tw-live span{display:flex;flex-direction:column;min-width:0;font:italic 400 12px/1.3 var(--serif);color:var(--soft)}
 .tw-live b{font:400 16px/1.15 var(--serif);color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .nmr-harm .sec-head{flex-basis:100%}
+
+/* ---------- the photo/upload palette (David, 2026-10-09): every palette type, Save, Edit ---------- */
+.pv-save-row{margin-top:10px}
+.pv-edit[aria-pressed="true"],[data-pvedit].on{background:var(--paper);color:var(--paper-ink)}
+.gl-strip .pal .pv-rm{position:absolute;top:4px;right:4px;width:18px;height:18px;border-radius:50%;display:grid;place-items:center;background:rgba(14,13,11,.55);color:#fff;font:400 13px/1 var(--sans);font-style:normal}
+.pal-name .pv-rm{display:none}
