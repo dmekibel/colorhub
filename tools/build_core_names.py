@@ -350,6 +350,31 @@ def apply_quality_fixes(out, ov):
             else:
                 e.pop("also")
 
+    # duplicate identities (genius panel 2026-10-08, "one identity per color"): spelling/-ish variants of one color
+    # become one entry. `_merge: [[keep, drop], ...]`; the dropped name and its synonyms move to the kept entry's `also`.
+    merged_log = []
+    for keep, dropn in ov.get("_merge", []):
+        ek = next((x for x in out if x["n"].lower() == keep.lower()), None)
+        ed = next((x for x in out if x["n"].lower() == dropn.lower()), None)
+        if ek is None or ed is None or ek is ed:
+            print("MERGE NOT APPLIED:", keep, "<-", dropn)
+            continue
+        de = float(LIB.de2000(LIB.labs([ek["h"]]), LIB.labs([ed["h"]]))[0][0])
+        ek["also"] = ([ed["n"]] + [a for a in (ed.get("also") or [])] + (ek.get("also") or []))
+        seen, res = {LIB.key(ek["n"])}, []
+        for a in ek["also"]:
+            if LIB.key(a) not in seen:
+                seen.add(LIB.key(a)); res.append(a)
+        ek["also"] = res[:ALSO_CAP + 4]
+        ek["src"] = sorted(set(ek["src"]) | set(ed["src"]), key=lambda x: SRC_RANK.get(x, 6))
+        if ed.get("notes") and not ek.get("notes"):
+            ek["notes"] = ed["notes"]
+        out.remove(ed)
+        merged_log.append((ek["n"], ed["n"], round(de, 1)))
+    for i, e in enumerate(out):
+        e["rank"] = i      # contiguous again (the app's first 101 are untouched: no merge touches them)
+    apply_quality_fixes.merged = merged_log
+
     # compound / modifier flags: `base` is the slug of the root color the name varies (Light Seafoam -> seafoam)
     prim_keys = {LIB.key(e["n"]): e for e in out}
     alias_keys = {}
@@ -392,10 +417,122 @@ def apply_quality_fixes(out, ov):
             print(f"  {bn:24s} {bh}  ->  {an:24s} {ah}  {why}")
 
 
+def _archive_presence(out):
+    """Share of the painting archive (area-weighted palette pixels) whose nearest core name is each entry. Reads the
+    gitignored research/_raw/corpus-pool.jsonl (main checkout fallback, like tools/analyze.py). Returns None when absent."""
+    import base64
+    cand = [ROOT / "research" / "_raw" / "corpus-pool.jsonl", ROOT.parent.parent.parent / "research" / "_raw" / "corpus-pool.jsonl"]
+    path = next((c for c in cand if c.exists()), None)
+    if path is None:
+        return None
+    rgb, w = [], []
+    for line in path.read_text().splitlines():
+        buf = base64.b64decode(json.loads(line)["pl"])
+        for i in range(0, len(buf) - 3, 4):
+            if buf[i + 3]:
+                rgb.append((buf[i], buf[i + 1], buf[i + 2])); w.append(buf[i + 3] / 250.0)
+    lab = LIB.rgb_to_lab(np.array(rgb, dtype=np.float64))
+    centers = LIB.labs([e["h"] for e in out])
+    from scipy.spatial import cKDTree
+    _, idx = cKDTree(centers).query(lab)
+    share = np.bincount(idx, weights=np.array(w), minlength=len(out))
+    return share / share.sum()
+
+
+def _ngram_freq(e):
+    """Mean Google Books frequency, 1920-2019, of the name (or the first of its synonyms with a cached curve)."""
+    from urllib.parse import quote
+    d = ROOT / "research" / "_raw" / "ngrams"
+    if not d.exists():
+        d = ROOT.parent.parent.parent / "research" / "_raw" / "ngrams"
+    for term in [e["n"]] + list(e.get("also") or [])[:4]:
+        f = d / f"ci__{quote(term.lower())}.json"
+        if f.exists():
+            try:
+                j = json.loads(f.read_text())
+                if j.get("found") and j.get("ts"):
+                    ts = j["ts"][-100:]
+                    return sum(ts) / len(ts)
+            except Exception:
+                pass
+    return None
+
+
+def add_use_rank(out):
+    """useRank: a usefulness order for LEARNING, so the path doesn't fall back to alphabetical once the obvious words run
+    out (stage 5 reached "Xanadu"). The app's first 101 keep their curriculum order (useRank = rank). Every other name is
+    scored from four independent signals, each turned into a 0-1 percentile among those names:
+      sources   how many of our name lists carry it (more lists = more people use the word);
+      xkcd      carried by the xkcd color survey (140k people typing names, the best 'what do people actually say' signal);
+      ngram     mean Google Books frequency 1920-2019 (names with no cached curve get the median);
+      archive   share of all painting palette pixels whose nearest core name this is (does the world's art contain it?).
+    score = mean of the four percentiles; useRank sorts by score descending, ties by the old rank (deterministic)."""
+    def pct(vals):
+        order = sorted(range(len(vals)), key=lambda i: vals[i])
+        r = [0.0] * len(vals)
+        i = 0
+        while i < len(order):                      # average rank for ties
+            j = i
+            while j + 1 < len(order) and vals[order[j + 1]] == vals[order[i]]:
+                j += 1
+            for k in range(i, j + 1):
+                r[order[k]] = (i + j) / 2 / max(len(vals) - 1, 1)
+            i = j + 1
+        return r
+    free = [e for e in out if e["rank"] >= 101]
+    arch = _archive_presence(out)
+    ng = [_ngram_freq(e) for e in free]
+    med = sorted(x for x in ng if x is not None)
+    med = med[len(med) // 2] if med else 0.0
+    sig = {
+        "sources": pct([len(e["src"]) for e in free]),
+        "xkcd": [1.0 if "xkcd" in e["src"] else 0.0 for e in free],
+        "ngram": pct([(x if x is not None else med) for x in ng]),
+        "archive": pct([float(arch[e["rank"]]) for e in free]) if arch is not None else [0.0] * len(free),
+    }
+    used = [k for k in sig if not (k == "archive" and arch is None)]
+    for i, e in enumerate(free):
+        e["_score"] = sum(sig[k][i] for k in used) / len(used)
+    ranked = sorted(free, key=lambda e: (-e["_score"], e["rank"]))
+    for e in out:
+        if e["rank"] < 101:
+            e["useRank"] = e["rank"]
+    for i, e in enumerate(ranked):
+        e["useRank"] = 101 + i
+    for e in free:
+        e.pop("_score", None)
+    print(f"\nuseRank: signals {used}; first free names by useRank: " + ", ".join(e["n"] for e in ranked[:12]))
+    print("         ... and the last: " + ", ".join(e["n"] for e in ranked[-6:]))
+
+
+def write_aliases(out, merged):
+    """data/aliases.json: every synonym, spelling variant and merged duplicate -> its canonical name and slug (for
+    tools/graph_build.py and tools/analyze.py to count one color once, and for check_names.js)."""
+    names, slugs = {}, {}
+    for e in out:
+        cs = slug(e["n"])
+        for a in e.get("also", []):
+            if LIB.key(a) != LIB.key(e["n"]):
+                names.setdefault(a, e["n"]); slugs.setdefault(slug(a), cs)
+        for variant in {e["n"].replace("Grey", "Gray").replace("grey", "gray"), e["n"].replace("-", " "), e["n"].replace(" ", "-")}:
+            if variant != e["n"]:
+                names.setdefault(variant, e["n"]); slugs.setdefault(slug(variant), cs)
+    # a synonym that is itself another entry's primary must not shadow it
+    prim = {slug(e["n"]) for e in out}
+    slugs = {k: v for k, v in slugs.items() if k not in prim}
+    names = {k: v for k, v in names.items() if slug(k) not in prim}
+    doc = {"_doc": "Canonical-name table (L15, 2026-10-08). `slugs` maps any synonym/spelling-variant slug to the canonical color slug; `names` is the same by display name; `merged` lists the duplicate colors folded into one entry (kept, dropped, dE between their hexes). Count by canonical slug.",
+           "merged": [list(m) for m in merged], "slugs": dict(sorted(slugs.items())), "names": dict(sorted(names.items()))}
+    (ROOT / "data" / "aliases.json").write_text(json.dumps(doc, ensure_ascii=False, indent=0, separators=(",", ":")) + "\n", encoding="utf-8")
+    print(f"aliases.json: {len(slugs)} slug aliases, {len(merged)} merged duplicates")
+
+
 def main():
     report = "--report" in sys.argv[1:]
     app_rows = LIB.load_app()  # [{n, h, src}], curriculum order: basics, then every unit's colors in order
-    lib = [e for e in LIB.load_library() if not e.get("crude")]
+    # Maerz & Paul-only names stay out of the core: adding 129 new candidates would reshuffle the farthest-point trim and every
+    # id (they are in data/library.json for the honeycomb and the graph; promoting some to core is a deliberate later pass).
+    lib = [e for e in LIB.load_library() if not e.get("crude") and e["src"] != ["maerz-paul"]]
     silly = LIB.silly_names(lib)
 
     app_keys = {LIB.key(e["n"]) for e in app_rows}
@@ -538,6 +675,9 @@ def main():
 
     # data-quality pass (L15, 2026-10-08): hex fixes, typos, bad synonyms, compound flags
     apply_quality_fixes(out, ov)
+
+    add_use_rank(out)
+    write_aliases(out, getattr(apply_quality_fixes, "merged", []))
 
     # sanity check: no two primaries are now identical
     seen_names = {}

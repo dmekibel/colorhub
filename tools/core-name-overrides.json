@@ -146,14 +146,14 @@
   "#5F686F": {"n": "Blue slate", "why": "'Violet-Slate' is a blue-grey"},
   "#47545D": {"n": "Dark blue slate", "why": "'Dark Violet-Slate' is a dark blue-grey"},
   "#FFF39A": {"n": "Pale butter", "why": "'Dark Cream' is a light yellow"},
-  "#313C48": {"h": "#647D8E", "why": "RAL dark swatch -> xkcd 'grey blue'"},
+  "#313C48": {"h": "#77A1B5", "why": "RAL dark swatch -> xkcd 'grey blue' (the survey's lighter value; #647D8E is a twin of Delft Blue)"},
   "#0E4243": {"h": "#137E6D", "why": "RAL 6004 near-black -> xkcd 'blue green'"},
   "#607059": {"h": "#5CA904", "why": "dull grey-green -> xkcd 'leaf green'"},
   "#702670": {"h": "#03012D", "why": "a purple 'Midnight' -> xkcd 'midnight' (near-black navy)"},
   "#3F3A3A": {"h": "#7F7053", "why": "near-black RAL 8019 -> xkcd 'grey brown'"},
   "#F09200": {"h": "#FFDF22", "why": "RAL 1037 orange 'Sun Yellow' -> xkcd 'sun yellow'"},
   "#EB9C52": {"h": "#FDFD96", "why": "an orange 'Pastel Yellow' -> Wikipedia pastel yellow"},
-  "#93B778": {"h": "#028F1E", "why": "a pale sage 'Emerald Green' -> xkcd 'emerald green'"},
+  "#93B778": {"h": "#28713E", "why": "a pale sage 'Emerald Green' -> RAL 6001 emerald green (the xkcd value is a twin of Forest green)"},
   "#ADBA98": {"h": "#76CD26", "why": "a grey-green 'Apple Green' -> xkcd 'apple green'"},
   "#7D8C55": {"h": "#3F9B0B", "why": "a dull olive 'Grass Green' -> xkcd 'grass green'"},
   "#9C322E": {"h": "#EC2D01", "why": "a dull maroon 'Tomato Red' -> xkcd 'tomato red'"},
@@ -166,5 +166,6 @@
  },
  "_typos": {"Lavendar": "Lavender", "Liliac": "Lilac", "Terracota": "Terracotta", "Forrest": "Forest", "Perrywinkle": "Periwinkle", "Toupe": "Taupe", "Wedgewood": "Wedgwood"},
  "_drop_also": ["Vantg Blue", "Pitch Or Brownish Black", "Rich Black", "Warm Black"],
- "_doc2": "L15 data-quality sections (2026-10-08), applied by apply_quality_fixes() in build_core_names.py: _fixes (keyed by the hex BEFORE the fix: a wrong hex, or a name that contradicts its hex), _typos (word-wise spelling fixes on primaries and synonyms), _drop_also (garbage synonyms)."
+ "_doc2": "L15 data-quality sections (2026-10-08), applied by apply_quality_fixes() in build_core_names.py: _fixes (keyed by the hex BEFORE the fix: a wrong hex, or a name that contradicts its hex), _typos (word-wise spelling fixes on primaries and synonyms), _drop_also (garbage synonyms).",
+ "_merge": [["Bistre", "Bister"], ["Olive-Brown", "Olive brown"], ["Brown Grey", "Brownish Grey"], ["Brown Red", "Brownish Red"], ["Green Grey", "Greenish Grey"], ["Grey Blue", "Greyish Blue"], ["Grey Brown", "Greyish Brown"], ["Grey Green", "Greyish Green"], ["Pink Purple", "Pinky Purple"], ["Purple Red", "Purplish Red"], ["Yellowish Green", "Yellow green"], ["Dark olive grey", "Dark Olive-Grey"], ["Grass Green", "Grassy Green"], ["Gold", "Sun Yellow"], ["Bluish Purple", "Burple"], ["Midnight", "Dark Navy"]]
 }
