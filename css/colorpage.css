@@ -317,7 +317,7 @@
 .rc-pal-note{display:flex;align-items:center;gap:10px}
 
 /* ---------- the color header (IMPROVE-2026-10-08 color-page #4): pinned when the cover scrolls away ---------- */
-.rp-bar{position:fixed;top:0;left:50%;z-index:30;width:min(100%,540px);transform:translate(-50%,-110%);transition:transform .32s var(--ease);background:var(--c);padding:calc(var(--top) + 6px) var(--g) 8px;display:grid;grid-template-columns:40px minmax(0,1fr);align-items:center;column-gap:10px;row-gap:6px;pointer-events:none}
+.rp-bar{position:fixed;top:0;left:50%;z-index:30;width:min(100%,540px);transform:translate(-50%,-110%);transition:transform .32s var(--ease);background:var(--c);padding:calc(var(--top) + 6px) var(--g) 8px;display:grid;grid-template-columns:40px minmax(0,1fr) auto;align-items:center;column-gap:10px;row-gap:6px;pointer-events:none}
 .rp-bar-back{width:40px;height:40px;display:grid;place-items:center;border-radius:50%;background:var(--surface-2);color:var(--ink);border:1px solid rgba(236,232,223,.14)}.rp-bar-back svg{width:22px;height:22px}
 .rp-bar.on{transform:translate(-50%,0);pointer-events:auto}
 .rp-bar-hair{box-shadow:0 1px 0 rgba(255,255,255,.1)}

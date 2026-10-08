@@ -9,8 +9,8 @@
 //  - On a page that is on the trail, ‹ (the button, Escape, the browser and the iOS back gesture, which all press
 //    it) is xBack(): one step, scroll restored (core.js SCROLL_BY_HASH). Each page's own back closure is bypassed.
 //  - Long-press ‹ opens the trail sheet: where you've been, newest first, with a picture of each; tap one to jump.
-//  - Every inner page gets a second control, top-right: the map glyph, straight to the honeycomb with its pan
-//    and zoom kept (honey.js HONEY_PAN). A pull down from the top of a page goes one step back.
+//  - Every inner page gets a second control, top-right: Close (a labeled pill), straight to the map exactly where you
+//    left it (honey.js HONEY_PAN), forgetting the whole chain. A pull down from the top of a page goes one step back.
 //  - The trail lives in sessionStorage, so a reload keeps it.
 // core.js show() calls tlNote() for every screen; router.js routeWrap() calls tlCallNote() for every addressed one.
 
@@ -70,6 +70,7 @@ function tlRestore() {
 // Called by show() (core.js) once the screen is in the page.
 function tlNote(el, tab, backNav) {
   const call = TL_CALL; TL_CALL = null;
+  if (!el.classList.contains("hm") && !el.classList.contains("waiting")) TL_FORGOT = false;   // a new page: Back works as usual again
   // screenshot mode (#shot=…, boot.js) draws a screen as if it had been opened from its room
   if (typeof SHOT !== "undefined" && SHOT) { if (tab || el.classList.contains("hm")) X_ROOT = tab || "home"; else if (!X_ROOT) X_ROOT = S.tab || "learn"; tlDecorate(el); return; }
   // a loading placeholder (loader.js waitScreen): the real screen it stands in for is the one that joins the trail
@@ -110,13 +111,23 @@ function tlNote(el, tab, backNav) {
   if (backNav) tlHoldScroll();
 }
 
-// ---------- the second control: the map glyph, top-right, beside whatever the header already holds ----------
+// ---------- the second control: Close (exit everything), top-right, beside whatever the header already holds ----------
+const TL_EXIT_HTML = (cls = "") => `<button class="tl-exit${cls ? " " + cls : ""}" data-tl-exit aria-label="Close: back to the map, where you left it">${ICON.x}<span>Close</span></button>`;
+// the map reached by Close: the chain behind it is forgotten, so Back (the browser's, the iOS swipe) stays on the map
+// instead of walking into it again (core.js popstate asks tlForgot)
+let TL_FORGOT = false;
+const tlForgot = () => TL_FORGOT && !!app.querySelector(".screen.hm");
 function tlDecorate(el) {
   const back = tlBackBtn(el);
   if (!back || el.querySelector("[data-tl-exit]") || document.documentElement.classList.contains("booth") || el.classList.contains("hm")) return;
-  const html = `<button class="${esc(back.className)} tl-exit" data-tl-exit aria-label="Back to the map">${HOME_GLYPH}</button>`;
+  // David (2026-10-09): "there should be an easy way to exit everything, and it should forget the whole chain". The
+  // hexagon alone read as a private icon, so the exit is a labeled, solid pill: ✕ Close, top right on every inner page
+  // (and in a color page's pinned header). It goes straight to the map where you left it and forgets the trail.
+  const html = TL_EXIT_HTML();
   const nav = back.closest(".nav-top");
-  if (back.classList.contains("cp-close")) back.insertAdjacentHTML("afterend", html);   // a full-bleed hero: mirrored on the right
+  const bar = el.querySelector(".rp-bar");
+  if (bar && !bar.querySelector("[data-tl-exit]")) bar.querySelector(".rp-bar-name").insertAdjacentHTML("afterend", TL_EXIT_HTML("tl-exit-bar"));
+  if (back.classList.contains("cp-close")) back.insertAdjacentHTML("afterend", TL_EXIT_HTML("tl-exit-float"));   // a full-bleed hero: mirrored on the right
   else if (nav && nav.querySelector(".nav-r")) nav.querySelector(".nav-r").insertAdjacentHTML("beforeend", html);
   else {
     const hd = back.parentElement, last = hd.lastElementChild;
@@ -162,7 +173,7 @@ function tlJump(i) {
 function tlToOrigin() { XSTACK = []; BACK_RENDER = true; xStep(undefined); }
 function tlExit(btn) {
   buzz(6);
-  XSTACK = []; X_ROOT = null;
+  XSTACK = []; X_ROOT = null; TL_UNDER = null; TL_MAPKEEP = null; TL_FORGOT = true; tlSave();   // the whole chain is forgotten
   const scr = app.querySelector(".screen"), home = () => typeof hmHome === "function" ? hmHome() : go(S.tab || "learn");
   // a color's page goes back into its own bubble on the map instead (js/mapxfer.js, from hmHome)
   if (scr && btn && btn.isConnected && !(scr.querySelector(".cp-hero") && typeof mxLeave === "function")) shrinkTo(scr, btn, home); else home();

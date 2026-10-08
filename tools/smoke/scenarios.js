@@ -2342,3 +2342,39 @@ scenario("pages", "double-tap the cover to favorite", async t => {
   up(); up();
   t.expect(has() === was, "a double tap on the hex button toggled the favorite");
 });
+
+// David (2026-10-09): "color > painting > color in the painting, then I have to go back all the way to reach the map".
+// Close (top right, labeled) exits everything: the map exactly as it was, the trail forgotten, Back stays on the map.
+scenario("trail", "Close from color > painting > color: the map as it was, the trail forgotten, corners back", async t => {
+  await TRL.open(t, "#/home");
+  await t.waitFor(".hm canvas", 12000, "the map");
+  await t.sleep(500);
+  await MXT.pan(t, -70, -55);
+  const pan0 = t.ev("HM_CTRL._settle()");
+  t.ev("hmOpenColor(BYNAME.get('cobalt'))");
+  await TRL.atHash(t, /^#\/color\/cobalt/, "the cobalt page");
+  t.expect(t.$("#app .screen .cp-hero [data-tl-exit]") && /Close/.test(t.text("#app .screen .cp-hero [data-tl-exit]")), "the color page has no labeled Close");
+  t.expect(t.$(".rp-bar [data-tl-exit]"), `the pinned color header has no Close (bar: ${!!t.$(".rp-bar")}, exits: ${t.$$("[data-tl-exit]").length}, tl: ${t.$("#app .screen").dataset.tl})`);
+  const sec = await t.waitFor("[data-glin]", 12000, "the In paintings section");
+  const fold = sec.closest("details:not([open])"); if (fold) await t.click(fold.querySelector("summary"), { wait: 300 });
+  const pin = await t.waitFor(() => { sec.scrollIntoView(); t.w.dispatchEvent(new t.w.Event("scroll")); return t.$$("[data-pt-rail] .gl-pin, [data-pt-rail] .pin, [data-glin] [data-gi]")[0]; }, 25000, "a painting in cobalt's rail");
+  pin.scrollIntoView({ block: "center" }); await t.sleep(200);
+  await t.click(pin, { wait: 600 });
+  await TRL.atHash(t, /^#\/gallery\/\d+/, "the painting page");
+  t.expect(t.$("#app .screen [data-tl-exit]"), "the painting page has no Close");
+  await t.waitFor(() => t.$$("[data-glswatches] [data-swatch]").length, 15000, "the painting's palette");
+  await t.click(t.$$("[data-glswatches] [data-swatch]")[0], { wait: 600 });
+  await TRL.atHash(t, /^#\/(color|name)\//, "a color from the painting");
+  t.expect(TRL.depth(t) >= 3, `the trail holds ${TRL.depth(t)} pages, expected 3`);
+  t.w.scrollTo(0, 0); await t.sleep(200);
+  await t.click("#app .screen .cp-hero [data-tl-exit]", { wait: 300 });
+  await t.waitFor(() => t.$$(".screen.hm canvas").length === 1 && !t.$(".mx") && !t.$(".mx-floor"), 10000, "the map after Close");
+  await t.sleep(300);
+  t.expect(TRL.depth(t) === 0, `Close left ${TRL.depth(t)} pages on the trail`);
+  const pan1 = t.ev("HM_CTRL._settle()");
+  t.expect(Math.hypot(pan1[0] - pan0[0], pan1[1] - pan0[1]) < .01 && Math.abs(pan1[2] - pan0[2]) < .01, `the map moved: ${pan0.map(v => v.toFixed(3))} -> ${pan1.map(v => v.toFixed(3))}`);
+  MXT.corners(t, "after Close");
+  // the chain is forgotten: the browser's Back (the iOS swipe) stays on the map
+  t.w.history.back(); await t.sleep(800);
+  t.expect(t.$(".screen.hm canvas") && !t.$(".cp-page") && !t.$(".room-sheet"), `Back after Close left the map (${TRL.hash(t)})`);
+});

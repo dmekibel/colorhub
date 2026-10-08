@@ -647,6 +647,8 @@ function roomToFloor(targetEl) {
 let HIST_POP = false;
 addEventListener("popstate", e => {
   if (!e.state && /^#\/./.test(location.hash)) return;   // a typed or linked address, not Back: router.js opens it
+  // the map reached by Close (js/trail.js tlExit): the chain behind it is forgotten, so Back stays on the map
+  if (typeof tlForgot === "function" && tlForgot()) { try { history.pushState({ ch: 1 }, "", ROUTE_NOW || undefined); } catch (e) {} return; }
   if (STEM_OPEN) { closeStem(); try { history.pushState({ ch: 1 }, "", ROUTE_NOW || undefined); } catch (e) {} return; }
   const over = document.querySelector(".peek [data-back], .sheet");
   if (over) { if (over.matches(".sheet")) document.querySelector(".scrim")?.dispatchEvent(new PointerEvent("pointerdown")); else over.click(); try { history.pushState({ ch: 1 }, "", ROUTE_NOW || undefined); } catch (e) {} return; }
