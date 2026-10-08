@@ -583,6 +583,27 @@ scenario("train", "Gradients: map and Choose mode and the daily board", async t 
   t.expect(/today/i.test(t.text("#hgq")), "the daily board has no title");
 });
 
+// Brand colors (js/games/brands-game.js): the Train tile opens a round (mode A: pick the brand from a swatch;
+// mode B: pick the color for a named brand), real taps through a whole session to the results screen.
+scenario("train", "Brand colors: tap through a full round to results", async t => {
+  await t.open("#shot=gx:home", { settle: 600 });
+  const tile = await t.waitFor("[data-r2-extra=brands]", 6000, "the Brand colors tile");
+  await t.click(tile, { wait: 700 });
+  await t.waitFor(".bg-page .bg-opt", 6000, "the first round");
+  let rounds = 0;
+  for (let i = 0; i < 60 && !t.$(".bg-page .p-title"); i++) {
+    const opt = t.$(".bg-opt:not(:disabled)");
+    const next = t.$("[data-bg-next]");
+    if (next) { await t.click(next, { force: true, wait: 350 }); }
+    else if (opt) { await t.click(opt, { force: true, wait: 400 }); rounds++; }
+    else await t.sleep(250);
+  }
+  await t.waitFor(".bg-page .p-title", 8000, "the results screen");
+  t.expect(/\d+\/\d+/.test(t.text(".bg-page .p-title")), "the results heading doesn't show a score");
+  const quit = t.$("[data-done]"); if (quit) await t.click(quit, { wait: 400 });
+  t.notes.push(`${rounds} rounds played`);
+});
+
 // ================================================================== EXPLORE
 for (const [part, expect] of [["all", ".x-feed .pin, .x-feed [data-pin]"], ["art", ".xb-pick"], ["ideas", ".x-feed .pin, .x-feed [data-pin]"], ["world", "#world *"], ["saved", ".x-feed"]]) {
   scenario("explore", `${part} cover opens and goes back`, async t => {
