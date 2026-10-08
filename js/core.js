@@ -25,6 +25,16 @@ let INSTALL_EVT = null;
 addEventListener("beforeinstallprompt", e => { e.preventDefault(); INSTALL_EVT = e; });
 const standalone = () => matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
 const isIOS = () => /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+// A Home Screen app on iPhone with the translucent status bar gets a layout viewport that's short by the status
+// bar's height, so everything pinned to bottom:0 stopped above a black band and the Rooms corner sat too high
+// (David's iPhone 16 Pro Max screenshot, 2026-10-08). --vb is that missing strip (0 everywhere else); the shell
+// in css/menus2.css reaches through it.
+function vbFix() {
+  let gap = 0;
+  try { if (standalone() && isIOS()) { const full = innerHeight > innerWidth ? Math.max(screen.width, screen.height) : Math.min(screen.width, screen.height); gap = full - innerHeight; if (gap < 1 || gap > 80) gap = 0; } } catch (e) {}
+  document.documentElement.style.setProperty("--vb", gap + "px");
+}
+vbFix(); addEventListener("resize", vbFix); addEventListener("orientationchange", () => setTimeout(vbFix, 300));
 
 // ---------- color math (CIELAB, D65) ----------
 const rgb = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
@@ -318,7 +328,7 @@ function show(html, cls = "", tab = null) {
   const backNav = BACK_RENDER; BACK_RENDER = false;
   timers.forEach(clearTimeout); timers = []; onKey = null;
   cleanup.forEach(f => { try { f(); } catch (e) {} }); cleanup = [];
-  document.querySelectorAll(".scrim,.sheet,.toast,.fade-ghost,.rooms-stem").forEach(n => n.remove());
+  document.querySelectorAll(".scrim,.sheet,.toast,.fade-ghost,.rooms-stem,.rm-scrim").forEach(n => n.remove());
   document.body.classList.remove("stem-open"); STEM_OPEN = false;
   // a new screen always scrolls: release any scroll lock a sheet or panel left behind (leaving a screen with a sheet
   // open used to keep the body pinned, so the next page couldn't scroll)
@@ -367,7 +377,7 @@ const navTop = (title = "", o = {}) => `<header class="nav-top"><button class="i
 // over it. No tab bar anywhere. The left corner — present on the honeycomb and inside every room, always the
 // same 56px spot — raises "the stem": Learn / Train / Explore / Studio (plus Home, at the foot, inside a room).
 // ================================================================
-const ROOMS_LIST = [["learn", "Learn"], ["gym", "Train"], ["explore", "Explore"], ["studio", "Studio"]];
+const ROOMS_LIST = [["learn", "Learn"], ["gym", "Train"], ["explore", "Explore"], ["studio", "Studio"], ["you", "You"]];   // You: js/you.js
 const ROOMS_GLYPH = sv('<circle cx="5.5" cy="18.5" r="2.4"/><circle cx="7.5" cy="11.2" r="2.4"/><circle cx="12.6" cy="6" r="2.4"/><circle cx="19.5" cy="4.6" r="2.4"/>', 24, 1.6);
 const HOME_GLYPH = sv('<path d="M12 3l7 4v10l-7 4-7-4V7z"/>', 24, 1.6);
 // a cheap, decorative stand-in for "a strip of the dimmed honeycomb" above a room (the real canvas doesn't
@@ -390,8 +400,13 @@ function roomsBubbleArt(id) {
     const cols = (due.length ? due : ALL.slice(0, 8)).map(c => c.h);
     return `<span class="rm-art rm-art-strip">${cols.map(h => `<i style="background:${h}"></i>`).join("")}</span>`;
   }
-  if (id === "gym") return `<span class="rm-art" style="background:conic-gradient(from 0deg,#ff3b30,#ffcc00,#4cd964,#34c8e0,#3b5bff,#c644fc,#ff3b30)"></span>`;
+  // Train: an odd-one-out board in miniature, one tile a shade off (DESIGN-SYSTEM §2: "today's station tile")
+  if (id === "gym") { const hu = (new Date().getDate() * 37) % 360, h = lchHex(56, 28, hu), o = lchHex(63, 28, hu);
+    return `<span class="rm-art rm-art-grid">${Array.from({ length: 9 }, (_, i) => `<i style="background:${i === 5 ? o : h}"></i>`).join("")}</span>`; }
   if (id === "explore") return `<span class="rm-art" style="background:linear-gradient(135deg,#2C4F6F,#8E9C8A 60%,#F0DFBC)"></span>`;
+  if (id === "you" && typeof ymBubbleArt === "function") return ymBubbleArt();   // js/you.js
+  // Home: the honeycomb in miniature, seven bubbles
+  if (id === "home") return `<span class="rm-art rm-art-home">${["#3E7F8C", "#C8553D", "#E0A458", "#7A6CA8", "#5E8C4A", "#B8577A", "#2F4E73"].map((h, i) => `<i style="background:${h};--k:${i}"></i>`).join("")}</span>`;
   return `<span class="rm-art" style="background:radial-gradient(circle,#8a8a8a 0,rgba(138,138,138,0) 68%),conic-gradient(#ff3b30,#ffcc00,#4cd964,#34c8e0,#3b5bff,#c644fc,#ff3b30)"></span>`;
 }
 function roomsNote(id) {
@@ -400,43 +415,67 @@ function roomsNote(id) {
     if (id === "gym" && typeof todayTrain === "function") return todayTrain().what;
     if (id === "explore") return "Browse by color";
     if (id === "studio") return "Wheel, camera, palettes";
+    if (id === "home") return "Back to the honeycomb";
+    if (id === "you" && typeof ymNote === "function") return ymNote();   // js/you.js
   } catch (e) {}
   return "";
 }
-function closeStem() {
-  const s = document.querySelector(".rooms-stem");
+// The stem (David, 2026-10-08: "everything could fade, but it shouldn't disappear"). The page stays exactly where
+// it was under a solid dimming scrim; the rooms rise as opaque capsules in a low arc from the corner, under the
+// thumb. A tap anywhere outside (or the ✕, Escape, Back) sinks them back into the corner and nothing else moves.
+let STEM_KEY = null;
+function closeStem(instant) {
+  const s = document.querySelector(".rooms-stem"), sc = document.querySelector(".rm-scrim");
   STEM_OPEN = false;
   document.body.classList.remove("stem-open");
-  document.querySelectorAll("[data-rooms-corner]").forEach(b => { b.classList.remove("on"); b.innerHTML = ROOMS_GLYPH; });
-  if (!s) return;
-  if (reduceMotion) { s.remove(); return; }
-  s.classList.remove("on");
-  setTimeout(() => s.remove(), 260);
+  if (STEM_KEY) { removeEventListener("keydown", STEM_KEY, true); STEM_KEY = null; }
+  document.querySelectorAll("[data-rooms-corner]").forEach(b => { b.classList.remove("on"); b.innerHTML = ROOMS_GLYPH; b.setAttribute("aria-expanded", "false"); });
+  const gone = () => { if (s) s.remove(); if (sc) sc.remove(); };
+  if (instant === true || (!s && !sc)) return gone();
+  if (s) s.classList.remove("on");
+  if (sc) sc.classList.remove("on");
+  setTimeout(gone, reduceMotion ? 160 : 320);
 }
 function toggleStem(cornerEl) {
-  if (STEM_OPEN) return closeStem();
+  if (STEM_OPEN) { buzz(4); return closeStem(); }
   if (document.querySelector(".sheet,.scrim")) return;   // a sheet is already up; don't stack chrome on chrome
+  document.querySelectorAll(".rooms-stem,.rm-scrim").forEach(n => n.remove());   // one still sinking from a fast double tap
   buzz(4);
   STEM_OPEN = true;
   document.body.classList.add("stem-open");
-  const inRoom = !!document.querySelector(".room-sheet");
-  const items = (inRoom ? [["home", "Home"]] : []).concat(ROOMS_LIST);
+  const roomEl = document.querySelector(".room-sheet"), here = roomEl && roomEl.dataset.room;
+  const items = (roomEl ? [["home", "Home"]] : []).concat(ROOMS_LIST);
+  const scrim = document.createElement("div");
+  scrim.className = "rm-scrim";
+  // a tap outside only closes: it never reaches the page underneath, and the page never scrolls or re-renders
+  scrim.addEventListener("pointerdown", e => { e.preventDefault(); e.stopPropagation(); buzz(4); closeStem(); });
+  scrim.addEventListener("click", e => { e.preventDefault(); e.stopPropagation(); });
+  scrim.addEventListener("touchmove", e => e.preventDefault(), { passive: false });
   const stem = document.createElement("div");
   stem.className = "rooms-stem";
-  stem.style.setProperty("--n", items.length);   // short screens space the bubbles to fit (css/polish.css)
-  stem.innerHTML = items.map(([id, label], i) => `
-    <button class="rm-bubble" data-room="${id}" style="--i:${i}">
-      ${id === "home" ? `<span class="rm-art rm-art-home">${HOME_GLYPH}</span>` : roomsBubbleArt(id)}
-      <span class="rm-label"><b>${esc(label)}</b><em>${esc(id === "home" ? "Back to the honeycomb" : roomsNote(id))}</em></span>
-    </button>`).join("");
-  document.body.appendChild(stem);
-  document.querySelectorAll("[data-rooms-corner]").forEach(b => { b.classList.add("on"); b.innerHTML = ICON.x; });
-  requestAnimationFrame(() => requestAnimationFrame(() => stem.classList.add("on")));
+  stem.setAttribute("role", "menu"); stem.setAttribute("aria-label", "Rooms");
+  const n = items.length;
+  stem.style.setProperty("--n", n);   // short screens tighten the step so the top capsule stays low (css/menus2.css)
+  // a gentle arc: each capsule a little further right as it rises (x grows with the square of its height)
+  stem.innerHTML = items.map(([id, label], i) => {
+    const t = (i + 1) / n, cur = id === here;
+    return `<button class="rm-bubble${cur ? " cur" : ""}" role="menuitem" data-room="${id}" style="--i:${i};--x:${(26 * t * t).toFixed(1)}px">
+      ${roomsBubbleArt(id)}<span class="rm-label"><b>${esc(label)}</b><em>${esc(cur ? "You're here" : roomsNote(id))}</em></span>
+    </button>`;
+  }).join("");
+  document.body.append(scrim, stem);
+  document.querySelectorAll("[data-rooms-corner]").forEach(b => { b.classList.add("on"); b.innerHTML = ICON.x; b.setAttribute("aria-expanded", "true"); });
+  requestAnimationFrame(() => requestAnimationFrame(() => { scrim.classList.add("on"); stem.classList.add("on"); }));
+  STEM_KEY = e => { if (e.key === "Escape") { e.stopPropagation(); closeStem(); } };
+  addEventListener("keydown", STEM_KEY, true);
   stem.querySelectorAll("[data-room]").forEach(b => b.onclick = () => {
-    const id = b.dataset.room;
+    const id = b.dataset.room, art = b.querySelector(".rm-art");
+    buzz(8);
+    if (id === here) return closeStem();   // the room you're in: just put the stem away
+    b.classList.add("go");
     closeStem();
-    if (id === "home") return roomToFloor(b.querySelector(".rm-art"));
-    growFrom(b.querySelector(".rm-art"), () => go(id));
+    if (id === "home") return roomToFloor(art);
+    growFrom(art, () => go(id));
   });
 }
 document.addEventListener("click", e => { const b = e.target.closest && e.target.closest("[data-rooms-corner]"); if (b) toggleStem(b); });
@@ -507,6 +546,7 @@ function go(tab) {
   if (tab === "gym") return gymHome();
   if (tab === "explore") return exploreHome();
   if (tab === "studio") return studio();
+  if (tab === "you" && typeof youPage === "function") return youPage();   // js/you.js
   // Learn is the first Room (DESIGN-SYSTEM.md §2): Today folds into it (js/learn.js home()). The honeycomb
   // floor itself is a separate place now — reached via hmHome(), the Rooms corner's Home bubble, or "#/home" —
   // not a tab, so go() never lands there.
@@ -514,7 +554,20 @@ function go(tab) {
 }
 const dailyDone = () => !!(S.daily && S.daily[today()]);
 addEventListener("keydown", e => { if (onKey && !e.metaKey && !e.ctrlKey) onKey(e); });
-function toast(msg) { document.querySelectorAll(".toast").forEach(n => n.remove()); const t = document.createElement("div"); t.className = "toast"; t.textContent = msg; document.body.appendChild(t); setTimeout(() => t.remove(), 2300); }
+// One toast for the whole app (css/menus2.css): a solid capsule that drops in under the status bar, clear of the
+// corners and every primary, says one thing and leaves. o.undo (or o.action + o.onAction) adds one text action;
+// o.dot shows the color it's about; o.ms sets how long it stays. toast(msg) alone works as it always did.
+function toast(msg, o = {}) {
+  document.querySelectorAll(".toast").forEach(n => n.remove());
+  const t = document.createElement("div"), act = o.undo ? "Undo" : o.action, run = o.undo || o.onAction;
+  t.className = "toast"; t.setAttribute("role", "status"); t.setAttribute("aria-live", "polite");
+  t.innerHTML = `${o.dot ? `<i class="toast-dot" style="--c:${esc(o.dot)}"></i>` : ""}<span>${esc(msg)}</span>${act && run ? `<button type="button">${esc(act)}</button>` : ""}`;
+  document.body.appendChild(t);
+  const leave = () => { if (!t.isConnected) return; t.classList.add("out"); setTimeout(() => t.remove(), 220); };
+  const timer = setTimeout(leave, o.ms || (act ? 4200 : 2300));
+  if (act && run) t.querySelector("button").onclick = e => { e.stopPropagation(); clearTimeout(timer); t.remove(); buzz(8); run(); };
+  return t;
+}
 const fanVars = (n, k) => `--k:${k};--mid:${(n - 1) / 2}`;
 
 // ---------- menu ----------
@@ -538,7 +591,7 @@ function sheet(html) {
   sh.innerHTML = `<div class="grab"></div>${html}`;
   let gone = false;
   const close = () => {
-    if (gone) return; gone = true; unlockScroll();
+    if (gone) return; gone = true; unlockScroll(); if (sh._esc) removeEventListener("keydown", sh._esc, true);
     if (reduceMotion) { scrim.remove(); sh.remove(); return; }
     scrim.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 200, fill: "forwards" }).onfinish = () => scrim.remove();
     sh.animate([{ transform: getComputedStyle(sh).transform === "none" ? "none" : getComputedStyle(sh).transform }, { transform: "translateY(105%)" }], { duration: 240, easing: "cubic-bezier(.3,0,.8,.2)", fill: "forwards" }).onfinish = () => sh.remove();
@@ -575,6 +628,13 @@ function sheet(html) {
   sh.addEventListener("pointermove", e => { if (e.pointerType === "mouse") move(e.clientX, e.clientY, null); });
   sh.addEventListener("pointerup", e => { if (e.pointerType === "mouse") end(); });
   lockScroll();
+  // the menu family (css/menus2.css): a modal for assistive tech, Escape closes, focus comes back where it was
+  const back = document.activeElement, esc0 = e => { if (e.key === "Escape" && sh.isConnected && !gone) { e.stopPropagation(); close(); } };
+  sh.setAttribute("aria-modal", "true"); sh.tabIndex = -1;
+  sh._esc = esc0; addEventListener("keydown", esc0, true);
+  const close0 = close;
+  const closeAll = () => { close0(); try { if (back && back.isConnected) back.focus({ preventScroll: true }); } catch (e) {} };
   document.body.append(scrim, sh);
-  return { sh, close };
+  try { sh.focus({ preventScroll: true }); } catch (e) {}
+  return { sh, close: closeAll };
 }
