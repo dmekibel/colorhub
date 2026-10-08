@@ -411,6 +411,49 @@ function honeyPicked(ctx, b, shapeAmt, a) {
   ctx.bezierCurveTo(bx + s * 1, by - s, bx + s * 1.4, by + s * .1, bx, by + s * .95); ctx.fill();
   ctx.restore();
 }
+// ---- L18 H1: family names at far zoom (an optional Look toggle, off by default; David 0c) ----
+// When the map is zoomed out (names are off), a paper pill names each family's region: Blues, Greens, Earths...
+// Pills sit on the ground over the region's middle, fade in as the bubble names fade out, and never overlap.
+function honeyFamOf(it) {
+  if (it.fam) return it.fam;
+  const L = it.L, C = it.C, H = it.H;
+  return (it.fam = C < 12 ? "Greys" : H >= 345 || H < 40 ? (L > 70 ? "Pinks" : "Reds") : H < 70 ? (L < 48 ? "Browns" : "Oranges")
+    : H < 100 ? (L < 55 ? "Browns" : "Yellows") : H < 195 ? "Greens" : H < 290 ? "Blues" : L > 72 ? "Pinks" : "Purples");
+}
+function honeyFamPills(ctx, drawn, W, H, alpha) {
+  if (alpha <= .01 || drawn.length < 24) return;
+  const x0 = W * .1, x1 = W * .9, y0 = H * .1, y1 = H * .9, bins = new Map(), cellN = new Map();
+  for (const b of drawn) {
+    if (b.x < x0 || b.x > x1 || b.y < y0 || b.y > y1) continue;
+    const f = honeyFamOf(b.it), k = f + "|" + Math.floor((b.x - x0) / (x1 - x0) * 3) + "|" + Math.floor((b.y - y0) / (y1 - y0) * 4);
+    let g = bins.get(k); if (!g) bins.set(k, g = { f, c: k.slice(f.length), n: 0, x: 0, y: 0 });
+    g.n++; g.x += b.x; g.y += b.y; cellN.set(g.c, (cellN.get(g.c) || 0) + 1);
+  }
+  // each family's bins, nearest the middle first; a family whose best spot is taken tries its next region
+  const fams = new Map();
+  for (const g of bins.values()) {
+    if (g.n < 12 || g.n < cellN.get(g.c) * .4) continue;   // the family has to own the region, not just pass through it
+    g.x /= g.n; g.y /= g.n; g.dc = Math.hypot(g.x - W / 2, g.y - H / 2);
+    let a = fams.get(g.f); if (!a) fams.set(g.f, a = []); a.push(g);
+  }
+  const list = [...fams.values()].map(a => a.sort((p, q) => p.dc - q.dc)).sort((a, b) => b.reduce((t, g) => t + g.n, 0) - a.reduce((t, g) => t + g.n, 0)), placed = [];
+  ctx.save(); ctx.font = `18px "Instrument Serif",Georgia,serif`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+  for (const cands of list) {
+    const f = cands[0].f, w = ctx.measureText(f).width + 20, h = 28;
+    let g = null, r = null;
+    for (const c of cands) {
+      const x = clamp(c.x, w / 2 + 12, W - w / 2 - 12), y = clamp(c.y, h / 2 + 12, H - h / 2 - 12), rr = { l: x - w / 2, t: y - h / 2, r: x + w / 2, b: y + h / 2 };
+      if (placed.some(q => rr.l < q.r + 6 && rr.r > q.l - 6 && rr.t < q.b + 6 && rr.b > q.t - 6)) continue;   // taken: try the next region
+      g = { f, x, y }; r = rr; break;
+    }
+    if (!g) continue;
+    placed.push(r);
+    ctx.globalAlpha = alpha; ctx.fillStyle = "#EFEBE3"; ctx.beginPath();
+    if (ctx.roundRect) ctx.roundRect(r.l, r.t, w, h, 999); else ctx.rect(r.l, r.t, w, h);
+    ctx.fill(); ctx.fillStyle = "#141311"; ctx.fillText(g.f, g.x, g.y + 1);
+  }
+  ctx.restore();
+}
 function honeyPath(ctx, cx, cy, r, shapeAmt) {
   ctx.beginPath();
   if (shapeAmt <= .02 || r < 3) { ctx.arc(cx, cy, r, 0, 6.2832); return; }
@@ -460,6 +503,7 @@ function honeycomb(host, opts = {}) {
   let Plag = [0, 0], lastInput = performance.now(), driftT0 = 0, driftTeff = 0, driftAnchor = [0, 0], touchXY = null, ripples = [];
   let insetBottom = 0, insetCur = 0;
   // per-bubble size memory, so a bubble never snaps to a new size (cells change as neighbors come and go): sizes ease
+  let famOn = !!opts.famNames;   // L18 H1: family-name pills when zoomed out (Look toggle, off by default)
   let sizeMem = new Map(), sizeT = 0, sizeRaf = 0, glided = null;   // glided: the item a tap last brought to the middle
   const vy = () => Math.max(60, Hh - insetCur);   // the visible height above whatever panel is inset
   const vcy = () => vy() / 2;
@@ -688,6 +732,7 @@ function honeycomb(host, opts = {}) {
     }
     ctx.globalAlpha = 1;
     if (sel) for (const b of drawn) if (b.d >= 10 && sel.isOn(b.it.o)) honeyPicked(ctx, b, shapeAmt, l.a);
+    if (famOn && !hlSet && !lay.globe) { const fa = l18FarAmount(cItemCur); if (fa > 0) honeyFamPills(ctx, drawn, W, vy(), fa * l.a); }
     if (ghost) {
       const a = 1 - (t - ghostT0) / 240;
       if (a > 0) { ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = a; ctx.drawImage(ghost, 0, 0); ctx.globalAlpha = 1; } else ghost.on = false;
@@ -845,6 +890,11 @@ function honeycomb(host, opts = {}) {
   // the zoomed-out tap rule (David, MASTER-PLAN 0c): when the map is zoomed out and bubbles are tiny, a tap zooms
   // in to that bubble and centers it; the next tap (it's now the center) opens its page.
   const L18_TINY_D = 46;
+  // 0 at normal zoom, 1 once the center bubble is too small for its name (a 12 px fade between, so nothing snaps)
+  function l18FarAmount(it) {
+    let cd = 0; for (const q of drawn) if (q.it === it && q.d > cd) cd = q.d;
+    return cd ? clamp((Math.max(L18_TINY_D, zc("labelMin") * 1.8) + 6 - cd) / 12, 0, 1) : 0;
+  }
   function l18ZoomedOut() {
     // the center's own copy (a wrapping map repeats it; a far copy is always tiny): the biggest one on screen
     let cd = 0; for (const q of drawn) if (q.it === center && q.d > cd) cd = q.d;
@@ -1191,6 +1241,7 @@ function honeycomb(host, opts = {}) {
       return it.o;
     },
     zoomValue: () => Z,
+    famNames(on) { famOn = !!on; draw(); },
     isZoomedOut: () => l18ZoomedOut(),
     // where a color sits on screen right now (js/polish.js flyToMap): the biggest drawn bubble with that hex, in viewport px
     locate(h) { const H = String(h).toUpperCase(), b = drawn.filter(x => String(x.it.h).toUpperCase() === H).sort((x, y) => y.d - x.d)[0]; if (!b) return null; const r = cv.parentNode.getBoundingClientRect(); return { x: r.left + b.x, y: r.top + b.y, d: b.d }; },

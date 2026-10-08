@@ -138,3 +138,5 @@
 .hm-chooser-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
 .hm-chooser-top .title-2{margin:0}
 .hm-chooser-acts{display:flex;gap:8px}
+.hm-l18-fam{margin:8px 0 6px}
+.hm-l18-fam button{height:32px;font-size:14px}

@@ -586,3 +586,13 @@ scenario("map", "zoomed out: a tap zooms onto a tiny bubble, the next tap opens 
   await t.tapAt(cv, r.left + r.width / 2, r.top + r.height / 2, { wait: 500 });
   await t.waitFor(".cp-page", 8000, "a page on the second tap");
 });
+scenario("map", "Look: family names when zoomed out is off by default and toggles on", async t => {
+  await H.homeReady(t);
+  t.expect(!t.ev("S.hm.famNames"), "family names are on by default");
+  await t.click("#hmView", { pointer: true });
+  await t.waitFor(".hm-chooser", 10000, "the View sheet");
+  t.expect(!/\b101\b/.test(t.text(".hm-chooser")), "the View sheet says 101");
+  await t.click('[data-tab="look"]', { wait: 300 });
+  await t.click('[data-fam="1"]', { wait: 300 });
+  t.expect(t.ev("S.hm.famNames") === true && t.$('[data-fam="1"]').classList.contains("on"), "the Family names choice did not turn on");
+});

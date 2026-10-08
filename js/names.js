@@ -33,10 +33,10 @@ function openCoreName(hex, name) {
   return namePage(entry);
 }
 
-// ---------- which stage a name belongs to (js/home.js HM_STAGES: 25/50/101/150/250/400/600/800/1,000) ----------
+// ---------- which stage a name belongs to (js/home.js HM_STAGES: 25/50/100/150/250/400/600/800/1,000) ----------
 function npStage(rank) {
   if (rank == null || typeof HM_STAGES === "undefined") return null;
-  for (let i = 0; i < HM_STAGES.length; i++) { if (rank < (HM_STAGES[i] === 100 ? 101 : HM_STAGES[i])) return i + 1; }
+  for (let i = 0; i < HM_STAGES.length; i++) { if (rank < HM_STAGES[i]) return i + 1; }
   return HM_STAGES.length;
 }
 
@@ -100,7 +100,7 @@ function namePage(entry, push = true, tapped) {
   const heroHex = tapped || hex;
   if (push) XSTACK.push("n:" + encodeURIComponent(name));   // the in-session back-trail; `tapped` only ever lives in the address bar (router.js)
   const fam = familyOf(hex);
-  const stage = npStage(entry.rank);
+  const stage = npStage(entry.useRank != null ? entry.useRank : entry.rank);   // the stage order is useRank (js/home.js hmStageItems)
   const taught = BYNAME.get(name.toLowerCase());   // true only if routing ever lands here for one of the 101 (see router.js)
   const mine = taught && taught.id && isMine(S.cards[taught.id]);
   const also = entry.also || [];

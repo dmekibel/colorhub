@@ -19,10 +19,12 @@ const HM_SLIDERS = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
 // The nine stages of the path (ROADMAP §14): stage N shows the first N names of the core list (data/core-names.json,
 // ordered by `rank` until the stage ordering exists), so you can preview what any stage holds.
 const HM_STAGES = [25, 50, 100, 150, 250, 400, 600, 800, 1000];
+// The order is useRank (data/core-names.json: usefulness for learning; the path's own first words keep their
+// place), so every stage is exactly its round number, stage 3 included (X19: no list has special status).
+const hmUseRank = e => e.useRank != null ? e.useRank : e.rank != null ? e.rank : 1e9;
 function hmStageItems(n) {
-  return (CORE_NAMES || []).slice().sort((a, b) => a.rank - b.rank).slice(0, n === 100 ? 101 : n)   // stage 3 = the 101 the path teaches today
-    .map(e => ({ n: e.n, h: e.h, c: BYNAME.get(e.n.toLowerCase()) || null }))
-    ;
+  return (CORE_NAMES || []).slice().sort((a, b) => hmUseRank(a) - hmUseRank(b)).slice(0, n)
+    .map(e => ({ n: e.n, h: e.h, c: BYNAME.get(e.n.toLowerCase()) || null, rank: hmUseRank(e) }));
 }
 // Two stops after Stage 9 (NOTES-TRACKER.md item 0): "Every name" (core + library, every primary and library
 // name with no repeats) and "Every shade" (+ the computed shades, js/naming.js loadShades()). Browse views, not
@@ -133,15 +135,15 @@ function hmOpenTweak(ctrl, opts = {}) {
 // ---------- the honeycomb lab (#/lab/honey): one preset and one size at a time, so David can rate each on his
 // phone. Ratings (a heart + 1-5) save in S.hmLab, keyed "style|size". "Copy my ratings" puts a compact JSON
 // summary on the clipboard to paste back to us. The Tweak panel (above) opens here too, over the same honeycomb. ----------
-const HM_LAB_SIZES = [25, 50, 101, 150, 250, 400, 600, 1000, 2700];
+const HM_LAB_SIZES = [25, 50, 100, 150, 250, 400, 600, 1000, 2700];
 async function labItems(n) {
-  if (n <= 1000) { if (!CORE_NAMES) await loadCoreNames(); return hmStageItems(n === 101 ? 100 : n); }
+  if (n <= 1000) { if (!CORE_NAMES) await loadCoreNames(); return hmStageItems(n); }
   if (!LONG_NAMES) await loadLongNames();
   return csItems().slice().sort((a, b) => a.rank - b.rank).slice(0, n).map(e => ({ n: e.n, h: e.h, c: e.c || null, lib: e.lib || null }));
 }
 function labHoney() {
   S.hmLab = S.hmLab || {}; S.hm = S.hm || {};
-  let pi = (window.HM_LAB_LAST_P || 0) % HONEY_STYLE_LIST.length, si = HM_LAB_SIZES.indexOf(window.HM_LAB_LAST_N || 101); if (si < 0) si = 2;
+  let pi = (window.HM_LAB_LAST_P || 0) % HONEY_STYLE_LIST.length, si = HM_LAB_SIZES.indexOf(window.HM_LAB_LAST_N || 100); if (si < 0) si = 2;
   const el = show(`<div class="hm-lab"><div class="hm-lab-view"></div>
     <button class="icon-btn glass hm-lab-back" data-back aria-label="Back">${ICON.back}</button>
     <div class="hm-lab-bar">
@@ -243,7 +245,7 @@ function hmHome() {
   };
   function paintTitle(loading) {
     title.querySelector("span").textContent = hmViewLabel();
-    title.querySelector("small").textContent = loading ? "Loading…" : `${items.length.toLocaleString()} color${items.length === 1 ? "" : "s"} · swipe or tap`;
+    title.querySelector("small").textContent = loading ? "Loading…" : `${items.length.toLocaleString()} color${items.length === 1 ? "" : "s"}`;
   }
   async function render(soft) {
     const g = ++gen, v = hmView(), stage = /^stage:/.test(v.src) ? +v.src.slice(6) : 0, every = HM_EVERY.includes(v.src), set = !stage && !every ? hmSet(v.src) : null;
@@ -263,7 +265,7 @@ function hmHome() {
     items = items.filter(HM_KEEP[v.filter]);
     paintTitle();
     if (ctrl) ctrl.update({ items, soft });
-    else ctrl = honeycomb(viewEl, { items, style: v.style, tweak: hmTweakFor(v.style), zoom: S.hm.zoom || 1, pick, onPeek, centerFirst: true,
+    else ctrl = honeycomb(viewEl, { items, style: v.style, tweak: hmTweakFor(v.style), zoom: S.hm.zoom || 1, pick, onPeek, centerFirst: true, famNames: !!S.hm.famNames,
       onZoom: z => { S.hm.zoom = Math.round(z * 100) / 100; save(); } });
     window.HM_CTRL = ctrl;   // the map, for js/polish.js flyToMap()
     hmWireChrome();
@@ -305,7 +307,7 @@ function hmHome() {
       <div class="hm-tab-panel" data-panel="show">
         <div class="cx-sh-head"><h3>What to show</h3></div>
         <div class="cx-sec"><b>Stage</b><span>the colors each stage of the path teaches</span></div>
-        <div class="cx-chips hm-stages">${HM_STAGES.map((n, i) => `<button class="cx-chip${v.src === "stage:" + n ? " on" : ""}" data-src="stage:${n}"><b>${i + 1}</b><em>${(n === 100 ? 101 : n).toLocaleString()}</em></button>`).join("")}
+        <div class="cx-chips hm-stages">${HM_STAGES.map((n, i) => `<button class="cx-chip${v.src === "stage:" + n ? " on" : ""}" data-src="stage:${n}"><b>${i + 1}</b><em>${n.toLocaleString()}</em></button>`).join("")}
           <button class="cx-chip${v.src === "every-name" ? " on" : ""}" data-src="every-name"><b>Name</b><em>${everyNameCount.toLocaleString()}</em></button>
           ${shadeCount ? `<button class="cx-chip${v.src === "every-shade" ? " on" : ""}" data-src="every-shade"><b>Shade</b><em>${(everyNameCount + shadeCount).toLocaleString()}</em></button>` : ""}</div>
         <div class="cx-sec"><b>Show</b><span>from your own reviews</span></div>
@@ -315,6 +317,8 @@ function hmHome() {
       </div>
       <div class="hm-tab-panel hm-look-panel" data-panel="look" hidden>
         <div class="hm-look-row">${HM_HOME_STYLES.map(id => `<button class="hm-look-chip${v.style === id ? " on" : ""}" data-style="${id}"><i class="hm-look-ic hm-look-${id}"></i><b>${esc((HONEY_STYLES[id] || {}).title || id)}</b></button>`).join("")}</div>
+        <div class="cx-sec hm-l18-sec"><b>Zoomed out</b><span>name each family's region</span></div>
+        <div class="hm-seg hm-l18-fam" data-l18-fam aria-label="Zoomed out">${[["", "Just colors"], ["1", "Family names"]].map(([k, l]) => `<button class="${!!S.hm.famNames === !!k ? "on" : ""}" data-fam="${k}">${l}</button>`).join("")}</div>
         <div class="hm-look-sliders">${HM_FINE_SPECS.map(s => `<label class="hm-tweak-row" data-key="${s.key}"><span>${s.label}</span><input type="range" min="${s.min}" max="${s.max}" step="${s.step}" value="${twVal(s.key)}"><b>${(+twVal(s.key)).toFixed(2)}</b></label>`).join("")}</div>
         <button class="link" data-lab-open>Rate every preset (honeycomb lab) →</button>
       </div>
@@ -338,7 +342,7 @@ function hmHome() {
       if (S.hm.filter !== "all") { applyView("filter", "all"); sh.querySelectorAll('.hm-seg[data-key="filter"] button').forEach(x => x.classList.toggle("on", x.dataset.val === "all")); }
       render(true).then(paintCount);
     });
-    sh.querySelectorAll(".hm-seg").forEach(g => g.querySelectorAll("button").forEach(b => b.onclick = () => {
+    sh.querySelectorAll(".hm-seg[data-key]").forEach(g => g.querySelectorAll("button").forEach(b => b.onclick = () => {
       applyView(g.dataset.key, b.dataset.val); g.querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b)); render(true).then(paintCount);
     }));
     paintCount();
@@ -364,6 +368,11 @@ function hmHome() {
         const val = +input.value; out.textContent = val.toFixed(2);
         if (ctrl) { hmSetTweak(ctrl.getStyle(), { [k]: val }); ctrl.tweak({ [k]: val }); }
       });
+    });
+    // zoomed out: just the colors (default), or family names over each region (L18 H1)
+    sh.querySelectorAll("[data-fam]").forEach(b => b.onclick = () => {
+      applyView("famNames", !!b.dataset.fam); sh.querySelectorAll("[data-fam]").forEach(x => x.classList.toggle("on", x === b));
+      if (ctrl && ctrl.famNames) ctrl.famNames(S.hm.famNames);
     });
     sh.querySelector("[data-lab-open]").onclick = () => { close(); labHoney(); };
     sh.querySelector("[data-search]").onclick = () => { close(); openSearch(); };
@@ -540,6 +549,8 @@ function hmTap(el) {
 // ---------- screenshot hooks: #shot=home (bar fades, the default) · home:bar (forced back on) ----------
 //   home:rooms (the stem) · home:views · home:look · home:search
 function hmShot(arg) {
+  // L18: home:far (stage 9, all the way out) · home:fam (the same, with family names on)
+  if (arg === "far" || arg === "fam") S.hm = Object.assign(S.hm || {}, { src: "stage:1000", filter: "all", zoom: .01, famNames: arg === "fam" });
   hmHome();
   if (arg === "bar") setTimeout(() => { const s = document.querySelector(".screen.hm"); if (s) s.classList.remove("chrome-hide"); }, 3200);
   if (arg === "rooms") setTimeout(() => hmTap(document.querySelector("[data-rooms-corner]")), 150);
