@@ -589,17 +589,16 @@ function colorPage(n, tapped) {
   // below that would otherwise go quiet on a thin name — a no-op for one of the 101 themselves (their own
   // family head is always themselves, de 0).
   const famC = typeof rcFamC === "function" ? rcFamC(tapped || c.h) : null;
+  const cover = rpCoverFoot(c.n, c.h, tapped, c);
   const el = show(`
     <div class="c-hero cp-hero cp-hero-full" style="--c:${heroHex}" data-ink="${ink(heroHex)}">
       <button class="cp-close" data-back aria-label="Back">${ICON.back}</button>
       <div class="cp-hero-foot">
-        <span class="cp-chip">${esc(status)}</span>
+        ${cover.html}
         ${typeof fvPageChip === "function" ? fvPageChip(c.h) : ""}
-        <h1>${esc(c.n)}</h1>
-        <button class="mono cp-hex" data-copy="${heroHex}">${heroHex}</button>
       </div>
-      <span class="cp-scroll-hint" aria-hidden="true">${ICON.up}</span>
     </div>
+    ${typeof rpGlanceHTML === "function" ? rpGlanceHTML(c.n, c.h) : ""}
     <div class="cp-primary-row">
       ${typeof hmLearnIt === "function" ? `<button class="cp-primary" data-learnit>${mine ? "Review it" : "Learn it"}${mine ? "" : `<em>2 min</em>`}${ICON.arrow}</button>` : ""}
       <button class="icon-btn cp-icon${saved ? " saved" : ""}" data-save aria-label="Save">${saved ? "♥" : "♡"}</button>
@@ -613,21 +612,9 @@ function colorPage(n, tapped) {
       <p class="cp-diff">${esc(stripDiff)}</p>
       ${tapped ? "" : `<div data-csacts></div>`}
     </section>` : ""}
-    ${typeof rcYouHTML === "function" ? rcYouHTML(c.n, c.h) : ""}
-    <div class="ar-slot" data-ar-slot hidden></div>
-    ${typeof rcReachSection === "function" ? rcReachSection(c.n, heroHex) : ""}
     ${c.o && !(w && w.facets.some(f => f.k === "language")) ? `<p class="lead">${esc(c.o)}</p>` : ""}
     ${figHTML(c.n)}
-    <section class="gl-in" data-glin></section>
-    ${typeof rcSectionsBeforeWorld === "function" ? rcSectionsBeforeWorld(c.n, c.h, famC) : ""}
-    ${typeof btRow === "function" ? btRow(c, famC) : ""}
-    ${typeof gmRow === "function" ? gmRow(c, famC) : ""}
-    <section class="fx-in" data-world-in></section>
-    ${typeof archiveRows === "function" ? archiveRows(c, "films", famC) : ""}
-    <div class="c-poems"></div>
-    ${typeof archiveRows === "function" ? archiveRows(c, "books", famC) : ""}
-    ${typeof rcSectionsAfterWords === "function" ? rcSectionsAfterWords(c.h) : ""}
-    ${typeof rcCompassSection === "function" ? rcCompassSection(c.n, heroHex) : ""}
+    ${rpPageBody(c, c.n, c.h, heroHex, famC, `<section class="gl-in" data-glin></section>`)}
     ${(() => {
       const secs = (w ? w.facets : []).map((f, i) => [f.k + i, FACET_LABEL[f.k] || f.k, `<p>${linkText(f.text)}</p>` + figHTML(c.n, i + 1)]);
       if (w && w.related && w.related.length) secs.push(["kin", "Kin", w.related.map(r => { const x = graph().resolve(r.to); return x ? `<button class="kin" data-node="${esc(x.id)}"><i style="--c:${x.h}"></i><b>${esc(x.title)}</b><span>${esc(r.why)}</span></button>` : ""; }).join("")]);
@@ -670,6 +657,7 @@ function colorPage(n, tapped) {
   // a tap anywhere on a near-name row grows its chip into the next page (js/core.js's morphFrom/runMorph)
   el.querySelectorAll("[data-cp-near]").forEach(b => b.onclick = () => { morphFrom(b.querySelector("i")); openCoreName(b.dataset.h, b.dataset.cpNear); });
   const gi = el.querySelector("[data-glin]"); if (gi) galleryColorRow(gi, c);
+  rpCoverFill(el, c.n, c.h, heroHex, c); rpDrawersWire(el, c.n, heroHex); rpHoldWalk(el, c.n, heroHex);
   // the Learner Model (js/learner.js) and the ColorSet verbs on the look-alike strip (js/colorset.js)
   if (typeof learnerLog === "function" && !tapped) learnerLog({ type: "seen", color: c, src: "page" });
   const csHost = el.querySelector("[data-csacts]");

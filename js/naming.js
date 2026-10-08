@@ -153,31 +153,34 @@ function compassOf(hex, selfName) {
   const L0 = lab(hex), [l0, c0, h0] = lch(hex), self = String(selfName || "").toLowerCase();
   const cands = [];
   for (const e of list) {
-    if (e.n.toLowerCase() === self) continue;
+    if (e.n.toLowerCase() === self || (e.src && e.src.length === 1 && e.src[0] === "jp")) continue;   // Japanese-primary names are "also called" doors, not titles
     const el = e.lab || (e.lab = lab(e.h)), de = de2000(L0, el);
-    if (de < 2.5) continue;
+    if (de < 2) continue;   // under 2 they are twins, not directions
     const c = Math.hypot(el[1], el[2]); let h = Math.atan2(el[2], el[1]) * 180 / Math.PI; if (h < 0) h += 360;
     let dh = h - h0; if (dh > 180) dh -= 360; if (dh < -180) dh += 360;
     cands.push({ n: e.n, h: e.h, de, dL: el[0] - l0, dC: c - c0, arc: 2 * Math.sqrt(Math.max(c * c0, 0)) * Math.sin(dh * Math.PI / 360) });
   }
-  const pick = (primary, off, min) => {
-    let best = null;
-    for (const x of cands) {
-      const p = primary(x); if (p < min || off(x) > p) continue;
-      if (!best || x.de < best.de) best = x;
-    }
-    return best && best.de <= COMPASS_CAP ? best : null;
-  };
+  // each direction ranks its qualifying names by ΔE; then one name fills one hex only, lowest ΔE first across all
+  // six, so a name that qualifies twice (lighter AND yellower) takes its closest cell and the other takes its next
+  const rank = (primary, off, min) => cands.filter(x => primary(x) >= min && off(x) <= primary(x) && x.de <= COMPASS_CAP).sort((p, q) => p.de - q.de).slice(0, 6);
   const offLC = x => Math.max(Math.abs(x.dC), Math.abs(x.arc)), offCL = x => Math.max(Math.abs(x.dL), Math.abs(x.arc)), offH = x => Math.max(Math.abs(x.dL), Math.abs(x.dC));
   const hasHue = c0 > 8;
   const cells = [
-    { key: "lighter", label: "Lighter", hit: pick(x => x.dL, offLC, 3) },
-    { key: "darker", label: "Darker", hit: pick(x => -x.dL, offLC, 3) },
-    { key: "vivid", label: "More vivid", hit: pick(x => x.dC, offCL, 3) },
-    { key: "greyer", label: "Greyer", hit: pick(x => -x.dC, offCL, 3) },
-    { key: "huep", label: hasHue ? compassHueWord(h0 + 25) : "Hue", hit: hasHue ? pick(x => x.arc, offH, 3) : null },
-    { key: "huem", label: hasHue ? compassHueWord(h0 - 25) : "Hue", hit: hasHue ? pick(x => -x.arc, offH, 3) : null },
+    { key: "lighter", pos: "n", label: "Lighter", list: rank(x => x.dL, offLC, 3) },
+    { key: "darker", pos: "s", label: "Darker", list: rank(x => -x.dL, offLC, 3) },
+    { key: "vivid", pos: "ne", label: "More vivid", list: rank(x => x.dC, offCL, 3) },
+    { key: "greyer", pos: "sw", label: "Duller", list: rank(x => -x.dC, offCL, 3) },
+    { key: "huem", pos: "nw", label: hasHue ? compassHueWord(h0 - 25) : "No hue to turn", nohue: !hasHue, list: hasHue ? rank(x => -x.arc, offH, 3) : [] },
+    { key: "huep", pos: "se", label: hasHue ? compassHueWord(h0 + 25) : "No hue to turn", nohue: !hasHue, list: hasHue ? rank(x => x.arc, offH, 3) : [] },
   ];
+  const taken = new Set();
+  cells.forEach(c => { c.hit = null; });
+  for (let round = 0; round < 6; round++) {
+    let best = null;
+    cells.forEach(c => { if (c.hit) return; const x = c.list.find(y => !taken.has(y.n)); if (x && (!best || x.de < best.x.de)) best = { c, x }; });
+    if (!best) break;
+    best.c.hit = best.x; taken.add(best.x.n);
+  }
   const nearest = cands.reduce((a, b) => !a || b.de < a.de ? b : a, null);
   return { cells, crowd: { near: cands.filter(x => x.de <= COMPASS_CROWD_DE).length, nearest, total: list.length } };
 }

@@ -120,39 +120,26 @@ function namePage(entry, push = true, tapped) {
   const Lab = lab(heroHex);
   const codeRows = (typeof codes === "function" ? codes(heroHex).slice(0, 3) : [["HEX", heroHex]]).concat([["LAB", `${Lab[0].toFixed(1)} ${Lab[1].toFixed(1)} ${Lab[2].toFixed(1)}`]]);
   const status = tapped ? `Your color · ${pctMatch(de2000(tapped, hex))} to ${name}` : stage ? `Stage ${stage} of 9` : shade ? "A described shade" : "Library color";
+  const cover = rpCoverFoot(name, hex, tapped, entry);
   const el = show(`
     <div class="c-hero cp-hero cp-hero-full" style="--c:${heroHex}" data-ink="${ink(heroHex)}">
       <button class="cp-close" data-back aria-label="Back">${ICON.back}</button>
       <div class="cp-hero-foot">
-        <span class="cp-chip">${esc(status)}</span>
+        ${cover.html}
         ${typeof fvPageChip === "function" ? fvPageChip(hex) : ""}
-        <h1>${esc(name)}</h1>
-        <button class="mono cp-hex" data-copy="${heroHex}">${heroHex}</button>
       </div>
-      <span class="cp-scroll-hint" aria-hidden="true">${ICON.up}</span>
     </div>
+    ${typeof rpGlanceHTML === "function" ? rpGlanceHTML(name, hex) : ""}
     ${typeof fvHeartRow === "function" ? fvHeartRow(hex, name, taught && typeof hmLearnIt === "function" ? `<button class="cp-primary" data-learnit>${mine ? "Review it" : "Learn it"}${mine ? "" : `<em>2 min</em>`}${ICON.arrow}</button>` : "")
       : taught && typeof hmLearnIt === "function" ? `<div class="cp-primary-row"><button class="cp-primary" data-learnit>${mine ? "Review it" : "Learn it"}${mine ? "" : `<em>2 min</em>`}${ICON.arrow}</button></div>` : ""}
     ${tapped ? `<section class="cp-strip-sec">
       <div class="cp-strip"><div style="--c:${tapped}" data-ink="${ink(tapped)}"><b>Your color</b></div><div style="--c:${hex}" data-ink="${ink(hex)}"><b>${esc(name)}</b></div></div>
       <p class="cp-diff">${esc(lookDiff({ h: tapped, n: "Your color" }, { h: hex, n: name }))}</p>
     </section>` : ""}
-    ${typeof rcYouHTML === "function" ? rcYouHTML(name, hex) : ""}
-    <div class="ar-slot" data-ar-slot hidden></div>
-    ${typeof rcReachSection === "function" ? rcReachSection(name, heroHex) : ""}
     ${shade ? `<p class="fine np-shade">A described shade: ${esc(shade.base)} made ${esc(shade.mod)}${shadeBase ? `. <button class="link" data-shade-base>See ${esc(shade.base)}</button>` : "."}</p>` : ""}
     ${also.length ? `<p class="fine np-also">Also called ${also.map(esc).join(", ")}.</p>` : ""}
     ${notes.length ? `<p class="fine np-jp">${jpNoteLine(notes)}</p>` : ""}
-    <section class="gl-in" data-npgal></section>
-    ${typeof rcSectionsBeforeWorld === "function" ? rcSectionsBeforeWorld(name, hex, famC) : ""}
-    ${typeof btRow === "function" ? btRow(entry, famC) : ""}
-    ${typeof gmRow === "function" ? gmRow(entry, famC) : ""}
-    <section class="fx-in" data-world-in></section>
-    ${typeof archiveRows === "function" ? archiveRows(entry, "films", famC) : ""}
-    <div class="c-poems"></div>
-    ${typeof archiveRows === "function" ? archiveRows(entry, "books", famC) : ""}
-    ${typeof rcSectionsAfterWords === "function" ? rcSectionsAfterWords(heroHex) : ""}
-    ${typeof rcCompassSection === "function" ? rcCompassSection(name, heroHex) : ""}
+    ${rpPageBody(entry, name, hex, heroHex, famC, `<section class="gl-in" data-npgal></section>`)}
     ${nearCore.length ? `<div class="sec-head"><b>Nearest names</b><span>of about 1,000</span></div>
       <div class="lk-list">${nearCore.map(x => `<button class="lk-row" data-np-near="${esc(x.n)}" data-h="${x.h}"><i style="--c:${x.h}" data-morph-src></i><b>${esc(x.n)}</b><span>${pctMatch(x.de)} · ${esc(lookDiff({ n: name, h: hex }, x))}${typeof rcHasArticle === "function" && rcHasArticle(x.n) ? " · has its own story" : ""}</span></button>`).join("")}</div>` : ""}
     ${entry.src && entry.src.length && typeof rcPassportHTML === "function" && rcPassportHTML(entry.src) ? `<div class="sec-head"><b>Passport</b><span>naming systems that list it</span></div>${rcPassportHTML(entry.src)}` : ""}
@@ -172,6 +159,7 @@ function namePage(entry, push = true, tapped) {
   // [data-morph-src] delegated listener, which only catches a tap exactly on the marked element).
   el.querySelectorAll("[data-np-near]").forEach(b => b.onclick = () => { morphFrom(b.querySelector("i")); openCoreName(b.dataset.h, b.dataset.npNear); });
   npPaintingsSection(el.querySelector("[data-npgal]"), hex);
+  rpCoverFill(el, name, hex, heroHex, entry); rpDrawersWire(el, name, heroHex); rpHoldWalk(el, name, heroHex);
   colorPoems(el.querySelector(".c-poems"), entry, famC);
   if (typeof worldColorRow === "function") worldColorRow(el, { kind: "color", h: hex, title: name }, famC);
   if (typeof rcWireOpen === "function") rcWireOpen(el, heroHex);

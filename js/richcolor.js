@@ -501,30 +501,6 @@ function rcReachSection(name, hex) {
 }
 
 // ======================================================================
-// The Compass -- nearest named color in six directions (js/naming.js compassOf), with how crowded this corner
-// of color is. One tap on a cell walks there.
-// ======================================================================
-function rcCompassSection(name, hex) {
-  const id = "rc-compass-" + Math.random().toString(36).slice(2, 8);
-  const draw = () => {
-    const box = document.getElementById(id); if (!box) return;
-    const { cells, crowd } = compassOf(hex, name);
-    const cell = c => c.hit
-      ? `<button class="kin rc-cell" data-rc-open data-h="${c.hit.h}" data-n="${esc(c.hit.n)}"><i style="--c:${c.hit.h}"></i><small>${esc(c.label)}</small><b>${esc(c.hit.n)}</b><span>${pctDiff(c.hit.de)}</span></button>`
-      : `<div class="rc-cell rc-cell-empty"><small>${esc(c.label)}</small><span>No named color this way within ${pctFmt(25)}.</span></div>`;
-    const near = crowd.near, nm = crowd.nearest;
-    const line = near >= 8 ? `Crowded corner: ${near} named colors within ${pctFmt(5)} of it.`
-      : near >= 3 ? `A well-named corner: ${near} named colors within ${pctFmt(5)} of it.`
-      : near >= 1 ? `A sparse corner: ${near === 1 ? "one other name" : near + " other names"} within ${pctFmt(5)}.`
-      : `A lonely color: the nearest name${nm ? ` (${esc(nm.n)})` : ""} is ${nm ? pctDiff(nm.de) : "far"}.`;
-    box.innerHTML = `<section class="rc-sec rc-compass"><h3>The Compass</h3><div class="rc-compass-grid">${cells.map(cell).join("")}</div>
-      <p class="rc-crowd">${line}</p><p class="fine">Directions are lightness, chroma and hue in CIELAB, searched among about ${crowd.total.toLocaleString()} names in our archive of names.</p></section>`;
-  };
-  setTimeout(() => { draw(); if (!compassHasLibrary()) loadLongNames().then(draw).catch(() => {}); }, 0);
-  return `<div id="${id}"></div>`;
-}
-
-// ======================================================================
 // Passport stamps and the tier line -- each naming system that lists the color, dated by the system (never a
 // first-use claim; X11 is "1980s"), and one honest line on where the name comes from, from `src` alone.
 // ======================================================================
@@ -544,28 +520,4 @@ function rcPassportHTML(src) {
   const stamps = RC_STAMPS.filter(([k]) => (src || []).includes(k));
   if (!stamps.length) return "";
   return `<div class="rc-passport">${stamps.map(([, label, date]) => `<span class="rc-stamp"><b>${esc(label)}</b>${date ? `<em>${esc(date)}</em>` : ""}</span>`).join("")}</div><p class="fine rc-tier">${esc(rcTierLine(src))}.</p>`;
-}
-
-function rcSectionsBeforeWorld(name, hex, famC) {
-  return `${rcRoleSection(name, hex)}${rcPaintersSection(name, hex)}${rcWhenWhereSection(name, hex)}${rcPairedSection(name, hex)}${rcHarmonyHTML(hex)}`;
-}
-function rcSectionsAfterWords(hex) {
-  return `${rcMeasuredHTML(hex)}${rcMixHTML(hex)}`;
-}
-
-// ======================================================================
-// The article slot. A separate article system is coming (written prose stored as data/articles/<slug>.json,
-// slug = routeSlug(color name)). Both page types call articleSlot(slug) near the top, right under the hero;
-// it renders nothing when no article file exists (a 404 is the normal case today), so pages stay clean.
-// Expected shape (provisional, the article system may replace this renderer): { lead?: string, sections?: [{ title?, text }] }.
-// ======================================================================
-function articleSlot(slug) {
-  const id = "rc-article-" + Math.random().toString(36).slice(2, 8);
-  fetch("data/articles/" + encodeURIComponent(slug) + ".json" + (typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : ""))
-    .then(r => r.ok ? r.json() : null).catch(() => null).then(a => {
-      const box = document.getElementById(id); if (!box || !a) return;
-      const secs = (a.sections || []).map(x => `<section class="rc-article-sec">${x.title ? `<h3>${esc(x.title)}</h3>` : ""}<p>${esc(x.text || "")}</p></section>`).join("");
-      box.innerHTML = `${a.lead ? `<p class="lead">${esc(a.lead)}</p>` : ""}${secs}`;
-    });
-  return `<div class="rc-article" id="${id}"></div>`;
 }
