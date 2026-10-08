@@ -974,6 +974,9 @@ def dedupe(rows):
 # One artist keeps at most ARTIST_CAP paintings, spread evenly over the artist's dated works (sorted by year, then id),
 # so a museum that owns hundreds of one painter's sketches cannot outweigh a country or a decade.
 ARTIST_CAP = 50
+# painters whose range is the point of the archive get a larger cap (still spread evenly over their dated works): Sargent's
+# bright watercolors and plein-air oils (tools/sargent_extra.py) would otherwise be thinned back to the dark portraits
+ARTIST_CAP_EXTRA = {"John Singer Sargent": 300}
 CAPPED = {}
 
 
@@ -985,9 +988,10 @@ def cap_artists(rows):
     drop = set()
     CAPPED.clear()
     for a, rs in by.items():
-        if len(rs) > ARTIST_CAP:
+        cap = ARTIST_CAP_EXTRA.get(a, ARTIST_CAP)
+        if len(rs) > cap:
             rs = sorted(rs, key=lambda r: (r["y"] if r["y"] is not None else 99999, r["id"]))
-            keep = {rs[i]["id"] for i in np.linspace(0, len(rs) - 1, ARTIST_CAP).round().astype(int)}
+            keep = {rs[i]["id"] for i in np.linspace(0, len(rs) - 1, cap).round().astype(int)}
             drop.update(r["id"] for r in rs if r["id"] not in keep)
             CAPPED[a] = len(rs)
     if CAPPED:

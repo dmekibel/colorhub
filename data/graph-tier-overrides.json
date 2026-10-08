@@ -1,0 +1,17 @@
+{
+  "magenta": {"tier": "place-institution", "why": "named for the Battle of Magenta (1859), the year the dye was named"},
+  "navy": {"tier": "place-institution", "why": "the dark blue of the Royal Navy's officers' uniforms from 1748"},
+  "pullman-brown": {"tier": "commercial", "why": "the Pullman Company's railcar brown"},
+  "tiffany-blue": {"tier": "commercial", "why": "Tiffany and Co. brand color (a trademark; hex is approximate)"},
+  "barbie-pink": {"tier": "commercial", "why": "Mattel's Barbie brand pink"},
+  "xiaomi-orange": {"tier": "commercial", "why": "Xiaomi brand orange"},
+  "windows-blue": {"tier": "commercial", "why": "Microsoft Windows default desktop blue"},
+  "android-green": {"tier": "commercial", "why": "the Android logo green"},
+  "xbox-green": {"tier": "commercial", "why": "the Xbox brand green"},
+  "falu-red": {"tier": "place-institution", "why": "named for the Falun copper mine in Sweden, source of the pigment"},
+  "oxblood": {"tier": "nature", "why": "named for ox blood"},
+  "denim": {"tier": "nature", "why": "named for the twilled cotton cloth (serge de Nimes)"},
+  "petrol": {"tier": "nature", "why": "named for the fuel's iridescent blue-green sheen"},
+  "cosmic-latte": {"tier": "place-institution", "why": "named in 2002 by Johns Hopkins astronomers for the average color of the universe's light"},
+  "pomp-and-power": {"tier": "undocumented", "why": "a Wikipedia-listed name; origin not documented in our data"}
+}

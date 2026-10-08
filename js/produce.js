@@ -248,6 +248,7 @@ function sayCard(card, c, foot, o) {
     if (rec) try { rec.abort(); } catch (e) {}
     inp.blur(); unfit();
     const ok = j.r === "right", nb0 = neighbor(c);
+    if (typeof learnerLog === "function" && j.r !== "empty") { learnerLog({ type: "answer", color: c, ok, by: "say", src: "deck" }); const as = j.nb || j.said; if (!ok && as && as.n) learnerLog({ type: "confuse", color: c, b: as, src: "say" }); }   // js/learner.js
     let verdict, cls, vs = nb0, line = c.d;
     if (ok) { verdict = `${ICON.checkS} Right${j.typo ? " · check the spelling" : ""}`; cls = "ok"; }
     else if (j.r === "close") {
@@ -328,6 +329,7 @@ function makeCard(card, c, foot, o) {
   function finish() {
     if (done) return; done = true;
     const user = PROD_PICKER.get(), d = de2000(user, c.h), res = d <= MAKE_OK ? "right" : d <= MAKE_CLOSE ? "close" : "wrong", ok = res === "right";
+    if (typeof learnerLog === "function") learnerLog({ type: "answer", color: c, ok, by: "make", src: "deck" });   // js/learner.js
     const verdict = ok ? `${ICON.checkS} Right` : res === "close" ? "Close" : `${ICON.xS} Not quite`;
     card.innerHTML = `<div class="mk-split"><div style="--c:${user}"><span class="p-tag">Yours</span></div><div style="--c:${c.h}"><span class="p-tag">${esc(c.n)}</span></div></div>
       ${prodLabel(c, verdict, ok ? "ok" : res === "close" ? "close" : "miss", null, makeRead(user, c.h), `${pctDiff(d)}`)}`;
