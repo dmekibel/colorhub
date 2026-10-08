@@ -90,6 +90,8 @@ const ROUTED = [["colorPage", (n, tapped) => n && n.id ? routed(n.title, nodeRou
   ["closeup", nodeRouted("/more")],
   ["daily", () => routed("Color of the day", "daily")],
   ["challenge", () => routed("Daily challenge", "challenge")], ["challengeDone", () => routed("Daily challenge", "challenge")],
+  ["favShelf", () => routed("Your colors", "favorites")], ["favTaste", () => routed("Your taste", "favorites/taste")],   // js/favs.js, js/favprofile.js
+  ["frStart", (m, c) => routed("Rank your colors", "favorites/rank/" + (m || "bws"))],   // js/favrank.js
   ["tasteIntro", k => k === "palette" ? routed("Find your palette", "taste/palette") : routed("Find your color", "taste/color")],
   ["glPage", (i, d, fromHex) => routed(d && d.t || "Painting", "gallery/" + i + (fromHex ? "?c=" + String(fromHex).replace("#", "") : ""))],
   ["poemPage", id => id != null ? routed("Poem", "poem/" + id) : null],   // js/poems.js   // a museum painting (js/gallery.js); i = its place in the gallery index
@@ -115,6 +117,7 @@ const ROUTED = [["colorPage", (n, tapped) => n && n.id ? routed(n.title, nodeRou
 ROUTED.forEach(([name, f]) => routeWrap(window, name, f));
 routeWrap(LAB, "harmony", () => routed("Harmony", "lab/harmony"));
 routeWrap(LAB, "contrast", () => routed("Albers", "lab/contrast"));
+routeWrap(LAB, "namer", () => routed("Name any color", "studio/namer"));   // js/namer.js
 
 // ---------- opening an address ----------
 const routeColor = slug => [...BASICS, ...ALL].find(c => routeSlug(c.n) === slug) || null;
@@ -141,6 +144,7 @@ function openRoute(hash, initial = false) {
     try { history.replaceState({ ch: 1, tab: S.tab || "learn" }, "", "#/" + tabRoute(S.tab || "learn").path); } catch (e) {}
     ROUTE_REPLACE = false;   // the screen itself goes on top
   };
+  if (kind === "studio" && id === "namer" && typeof LAB.namer === "function") { base(); XSTACK = []; LAB.namer(tappedHex); return true; }
   if (kind === "studio" && id === "wheel" && typeof gamutWheel === "function") { base(); XSTACK = []; gamutWheel(); return true; }
   if (kind === "studio" && id === "palette" && more && typeof openSavedPalette === "function") { base(); XSTACK = []; openSavedPalette(more); return true; }
   // the floor (the honeycomb, js/home.js): not a tab, so it's its own address
@@ -205,6 +209,7 @@ function openRoute(hash, initial = false) {
   if (["painter", "movement", "decade", "country", "arthistory", "painters"].includes(kind) && typeof awOpenRoute === "function") { base(); XSTACK = []; awOpenRoute(kind, id, more); return true; }   // js/artwiki.js
   const simple = { daily: () => daily(), challenge: () => chToday() ? challengeDone() : challenge(),
     taste: () => tasteIntro(id === "palette" ? "palette" : "color"),
+    favorites: () => typeof favShelf !== "function" ? go(S.tab || "learn") : id === "taste" ? favTaste() : id === "rank" ? frStart(more || "bws", "all") : favShelf(),   // js/favs.js
     lab: () => id === "honey" && typeof labHoney === "function" ? labHoney() : (LAB[id] && ["harmony", "contrast"].includes(id) ? LAB[id] : LAB.harmony)(),
     fashion: () => typeof fashionPage === "function" && fashionPage(id),
     // the honeycomb home's instant mini-lesson (js/learnit.js): #/learnit/<color>

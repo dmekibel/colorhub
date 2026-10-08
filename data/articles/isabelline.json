@@ -48,8 +48,10 @@
   "parent": null,
   "children": [],
   "disambiguation": [
-   "Isabelline (web) is near-white.",
-   "Isabella Color (Ridgway 1912) and Isabella (Maerz & Paul 1930) are greyish tans."
+   {
+    "slug": "isabella-color",
+    "gloss": "Ridgway 1912 Isabella Color, and Maerz and Paul's 1930 Isabella, are greyish tans; the web isabelline is near-white"
+   }
   ],
   "other_languages": []
  },

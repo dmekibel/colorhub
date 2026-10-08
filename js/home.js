@@ -216,6 +216,7 @@ function hmHome() {
     </div>
     <button class="corner l" data-rooms-corner aria-label="Rooms">${ROOMS_GLYPH}</button>
     <button class="corner r" id="hmView" aria-label="View">${HM_SLIDERS}</button>
+    ${typeof FV_HEART === "string" ? `<button class="corner r fv-corner" id="hmFav" aria-label="Pick favorites">${FV_HEART}</button>` : ""}
   `, "fixed cx hm");
   const $ = s => el.querySelector(s), viewEl = $(".cx-view"), title = $(".hm-title");
   loadLongNames();
@@ -266,6 +267,7 @@ function hmHome() {
       onZoom: z => { S.hm.zoom = Math.round(z * 100) / 100; save(); } });
     window.HM_CTRL = ctrl;   // the map, for js/polish.js flyToMap()
     hmWireChrome();
+    if (typeof fvHomeReady === "function") fvHomeReady(el, ctrl);   // js/favs.js: open straight into pick mode when asked
   }
   function applyView(k, val) { S.hm[k] = val; save(); buzz(4); }
 
@@ -296,6 +298,7 @@ function hmHome() {
     const { sh, close } = sheet(`<div class="cx-sh hm-chooser">
       <div class="hm-chooser-top"><h3 class="title-2">View</h3><span class="hm-chooser-acts">
         <button class="iconq" data-search aria-label="Search">${ICON.search}</button>
+        ${typeof NMR_ICON !== "undefined" ? `<button class="iconq" data-namer aria-label="Name any color">${NMR_ICON}</button>` : ""}
         <button class="iconq" data-surprise aria-label="Surprise me">${ICON.dice}</button>
       </span></div>
       <div class="hm-tabs" data-tabs><button class="on" data-tab="show">Show</button><button data-tab="look">Look</button></div>
@@ -365,6 +368,7 @@ function hmHome() {
     });
     sh.querySelector("[data-lab-open]").onclick = () => { close(); labHoney(); };
     sh.querySelector("[data-search]").onclick = () => { close(); openSearch(); };
+    const nmBtn = sh.querySelector("[data-namer]"); if (nmBtn) nmBtn.onclick = () => { close(); XSTACK = []; X_ROOT = "home"; LAB.namer(); };   // Name any color (js/namer.js)
     sh.querySelector("[data-surprise]").onclick = () => { close(); hmDice(); };
     applyInset();
   }
@@ -414,6 +418,7 @@ function hmHome() {
     viewBtn.addEventListener("pointerdown", () => { longFired = false; clearTimeout(holdT); holdT = setTimeout(() => { longFired = true; buzz(6); chooser("look"); }, 480); });
     ["pointerup", "pointercancel", "pointerleave"].forEach(ev => viewBtn.addEventListener(ev, () => clearTimeout(holdT)));
     viewBtn.onclick = () => { if (longFired) { longFired = false; return; } chooser("show"); };
+    const favBtn = $("#hmFav"); if (favBtn) favBtn.onclick = () => { if (typeof hmDismissHint === "function") hmDismissHint(); buzz(6); fvPickStart(el, ctrl); };   // js/favs.js: Pick favorites
   }
   // swipe up from the bottom edge of Home opens Learn straight away (DESIGN-SYSTEM §2 "the shortcut"): the
   // honeycomb keeps a short drag (bubbles near the bottom stay tappable), but a real upward swipe wins.
