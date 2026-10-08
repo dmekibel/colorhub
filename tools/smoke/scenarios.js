@@ -503,7 +503,7 @@ scenario("pages", "Learn it runs meet > recall from a color page", async t => {
   await H.openPage(t, "#/color/teal", "Teal");
   await t.click("[data-learnit]", { wait: 600 });
   // the Learn button opens the instant-deck sheet (js/practice.js); Learn it is one of its methods
-  if (t.$(".pr-quick")) { await t.click('[data-method="lesson"]', { wait: 200 }); await t.click(".pr-quick [data-go]", { wait: 600 }); }
+  if (t.$(".pr-quick")) await t.click('[data-method="lesson"]', { wait: 600 });
   await t.waitFor("#ltPager", 6000, "the Learn it meet pager");
   t.expect(t.$$("#ltPager .lt-page").length >= 3, "the meet pager has too few pages");
   // (smooth scrolling does not run under the virtual clock, so jump page by page like a finger would, then press Enter on the last one)
@@ -526,9 +526,8 @@ scenario("pages", "Learn opens the instant deck; Start plays flashcards to the r
   await H.openPage(t, "#/color/teal", "Teal");
   await t.click("[data-learnit]", { wait: 600 });
   await t.waitFor(".pr-quick", 4000, "the instant-deck sheet");
-  await t.click('.pr-quick [data-size="5"]', { wait: 150 });
-  await t.click('.pr-quick [data-method="cards"]', { wait: 150 });
-  await t.click(".pr-quick [data-go]", { wait: 600 });
+  t.ev("(() => { const r = document.querySelector('.pr-quick [data-size]'); r.value = 5; r.dispatchEvent(new Event('input', { bubbles: true })); })()");
+  await t.click('.pr-quick [data-method="cards"]', { wait: 600 });
   await t.waitFor(".pr-play .pr-card", 4000, "the flashcard");
   for (let i = 0; i < 20 && !t.$(".pr-res"); i++) {
     const st = t.$(".pr-stage"); if (st && st._prReveal && !t.$(".pr-card.revealed")) { st._prReveal(); await t.sleep(150); }
@@ -546,6 +545,69 @@ scenario("home", "Study corner opens the instant deck seeded with the middle col
   await t.waitFor(".pr-quick", 4000, "the instant-deck sheet from Home");
   t.expect(/Learn/.test(t.$("[data-qtitle]").textContent), "the sheet title");
   t.expect(t.$$(".pr-quick .pr-plate i").length >= 5, "the deck plate");
+});
+
+// ================================================================== LEARN A SET (js/learnset.js)
+const LS_SOLVE = `(() => {
+  const st = document.querySelector('.ls-study .pr-stage'); if (!st) return 'gone';
+  const nx = st.querySelector('[data-next]'); if (nx) { nx.click(); return 'next'; }
+  const boss = st.querySelector('[data-boss]'); if (boss) { boss.click(); return 'boss'; }
+  const it = st._lsIt, nm = it ? prName(it) : '';
+  if (st.querySelector('.pr-s-match') && st._prMatch) {
+    const { tiles } = st._prMatch, btns = [...st.querySelectorAll('.pr-tile')];
+    const k = tiles.findIndex((t, i) => !t.sw && !btns[i].classList.contains('gone')); if (k < 0) return 'wait';
+    const j = tiles.findIndex(t => t.sw && t.i === tiles[k].i); btns[k].click(); btns[j].click(); return 'match';
+  }
+  if (st.querySelector('.pr-s-odd')) { st._prChoose(st._prOpts.findIndex(o => !o.same)); return 'odd'; }
+  if (st.querySelector('.pr-s-quiz')) { st._prChoose([...st.querySelectorAll('.pr-opt')].findIndex(b => b.textContent.trim() === nm)); return 'qn'; }
+  if (st.querySelector('.pr-s-qc')) { st._prChoose([...st.querySelectorAll('.pr-cell .pr-tag')].findIndex(b => b.textContent.trim() === nm)); return 'qc'; }
+  if (st.querySelector('.pr-s-type input') && !st.querySelector('.pr-typef.done')) { st._prType(nm); return 'type'; }
+  if (st.querySelector('.pr-s-card')) { if (!st.querySelector('.pr-card.revealed')) { st._prReveal(); return 'reveal'; } const y = st.querySelector('[data-yes]'); if (y) { y.click(); return 'yes'; } }
+  return 'wait';
+})()`;
+scenario("learnset", "Learn sheet: live preview, size and closeness sliders, Look and Study both there", async t => {
+  await H.openPage(t, "#/color/teal", "Teal");
+  await t.click("[data-learnit]", { wait: 600 });
+  await t.waitFor(".ls-sheet", 4000, "the Learn sheet");
+  t.expect(t.$(".ls-sheet [data-look]") && t.$(".ls-sheet [data-go]"), "Look and Study are both on the sheet");
+  const set = v => t.ev(`(() => { const r = document.querySelector('.ls-sheet [data-size]'); r.value = ${v}; r.dispatchEvent(new Event('input', { bubbles: true })); return document.querySelectorAll('.ls-prev i').length; })()`);
+  t.expect(await set(4) === 4, "the preview follows the size slider (4)");
+  t.expect(await set(14) === 14, "the preview follows the size slider (14)");
+  const before = t.ev("[...document.querySelectorAll('.ls-prev i')].map(i => i.style.cssText).join()");
+  t.ev("(() => { const r = document.querySelector('.ls-sheet [data-closeness]'); r.value = 4; r.dispatchEvent(new Event('input', { bubbles: true })); })()");
+  t.expect(t.ev("[...document.querySelectorAll('.ls-prev i')].map(i => i.style.cssText).join()") !== before, "the closeness slider changes the set");
+  t.expect(/Wide/.test(t.text(".ls-sheet [data-closev]")), "the closeness label reads Wide");
+});
+scenario("learnset", "Look: every view draws, a tile opens its page", async t => {
+  await H.openPage(t, "#/color/teal", "Teal");
+  await t.click("[data-learnit]", { wait: 600 });
+  await t.waitFor(".ls-sheet", 4000, "the Learn sheet");
+  await t.click(".ls-sheet [data-look]", { wait: 600 });
+  await t.waitFor(".ls-lookscr", 4000, "the Look screen");
+  for (const v of ["grid", "strip", "pairs", "map", "art", "carousel"]) {
+    await t.click(`.ls-views [data-view="${v}"]`, { wait: 250 });
+    t.expect(t.$(`.ls-body[data-view="${v}"]`) && t.$(".ls-body").innerText.length + t.$$(".ls-body [style*='--c'], .ls-body polygon").length > 3, `the ${v} view is empty`);
+  }
+  await t.click('.ls-views [data-view="grid"]', { wait: 250 });
+  await t.click(".ls-tile", { wait: 500 });
+  await t.waitFor(".cp-page", 6000, "a color page from a Look tile");
+});
+scenario("learnset", "Study: a mixed session runs to the results", async t => {
+  await H.openPage(t, "#/color/teal", "Teal");
+  await t.click("[data-learnit]", { wait: 600 });
+  await t.waitFor(".ls-sheet", 4000, "the Learn sheet");
+  t.ev("(() => { const r = document.querySelector('.ls-sheet [data-size]'); r.value = 4; r.dispatchEvent(new Event('input', { bubbles: true })); })()");
+  await t.click(".ls-sheet [data-go]", { wait: 600 });
+  await t.waitFor(".ls-study .pr-stage .pr-step", 6000, "the first question");
+  const kinds = new Set();
+  for (let i = 0; i < 160 && !t.$(".ls-res"); i++) { const k = t.ev(LS_SOLVE); kinds.add(k); await t.sleep(k === "wait" ? 300 : 250); }
+  await t.waitFor(".ls-res", 6000, "the Study results");
+  t.notes.push("kinds: " + [...kinds].join(","));
+  t.expect(kinds.has("qn") && (kinds.has("qc") || kinds.has("odd")), "the session mixed question kinds");
+  t.expect(kinds.has("boss"), "the final round came up");
+  t.expect(/mastered/.test(t.text(".pr-res-t")), "the results title");
+  await t.click(".ls-res [data-a=look]", { wait: 500 });
+  await t.waitFor(".ls-lookscr", 4000, "Look again from the results");
 });
 
 // ================================================================== STUDIO
@@ -809,8 +871,7 @@ scenario("learn", "Learn it opens on a name past the first units", async t => {
   await t.waitFor(".cp-page [data-learnit]", 10000, "Learn it on the Chestnut name page");
   await t.click("[data-learnit]", { wait: 600 });
   await t.waitFor(".pr-quick [data-method='lesson']", 6000, "Practice's sheet offering Learn it for a name past the first units");
-  await t.click("[data-method='lesson']", { wait: 300 });
-  await t.click(".pr-quick [data-go]", { wait: 700 });
+  await t.click("[data-method='lesson']", { wait: 700 });
   await t.waitFor("#ltPager", 6000, "the Learn it meet pager");
   t.expect(t.$$("#ltPager .lt-page").length >= 3, "the group has look-alikes from the ~1,000 names");
   await t.click("[data-lt-x]", { wait: 600 });

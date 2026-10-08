@@ -63,7 +63,7 @@ const PR_METHODS = {
   cards: { t: "Flashcards", d: "Flip, then swipe right if you knew it." },
   quiz: { t: "Quiz", d: "Four close neighbors. Pick the one." },
   type: { t: "Type it", d: "Spell the name. Small typos are fine." },
-  match: { t: "Match", d: "Pair six colors with their names, fast." },
+  match: { t: "Match", d: "Names on the left, colors on the right. Pair them, fast." },
   learn: { t: "Learn", d: "Pick it, then type it, until it sticks." },
   test: { t: "Test", d: "Twenty mixed questions, answers at the end." },
   say: { t: "Say it", d: "Hands-free. Say each name out loud." },
@@ -788,13 +788,15 @@ PR_STEPS.say = { by: "say", render(box, it, ctx = {}) {
 PR_STEPS.match = { by: "pick", render(box, items, ctx = {}) {
   items = [].concat(items).slice(0, 6);
   return new Promise(resolve => {
-    const t0 = performance.now(), tiles = prShuffle([...items.map((it, i) => ({ i, sw: true })), ...items.map((it, i) => ({ i, sw: false }))]);
-    const cols = tiles.length > 8 ? 3 : 2;
-    box.innerHTML = `<div class="pr-step pr-s-match"><div class="pr-board" style="--cols:${cols};--rows:${Math.ceil(tiles.length / cols)}">${tiles.map((t, k) => {
+    // names in the left column, colors in the right (David: pairing is not a memory game); each column shuffled
+    const t0 = performance.now(), nmO = prShuffle(items.map((it, i) => i)), swO = prShuffle(items.map((it, i) => i)), tiles = [];
+    nmO.forEach((i, r) => { tiles.push({ i, sw: false }); tiles.push({ i: swO[r], sw: true }); });
+    box.innerHTML = `<div class="pr-step pr-s-match">${ctx.note ? `<p class="pr-stepnote">${esc(ctx.note)}</p>` : ""}<div class="pr-board pr-board2" style="--cols:2;--rows:${items.length}">${tiles.map((t, k) => {
       const it = items[t.i];
       return t.sw ? `<button class="pr-tile sw" data-k="${k}" style="--c:${it.h}" aria-label="A color"></button>`
         : `<button class="pr-tile nm" data-k="${k}"><span>${esc(prName(it))}</span></button>`;
-    }).join("")}</div><p class="pr-matchnote" aria-live="polite"></p></div>`;
+    }).join("")}</div><p class="pr-matchnote" aria-live="polite"><span class="pr-hint">Tap a name, then its color</span></p></div>`;
+    box._prMatch = { tiles, items };   // test hook
     const missed = new Map(), note = box.querySelector(".pr-matchnote");
     let sel = null, left = items.length;
     box.querySelectorAll(".pr-tile").forEach(b => b.onclick = () => {
@@ -991,7 +993,7 @@ PR_STEPS["odd-one-out"] = { by: "pick", render(box, it, ctx = {}) {
 // ======================================================================
 // The first time you play a method: one line above the stage, gone after your first answer (taught by doing)
 const PR_COACH = { cards: "Name it in your head, tap to check, then swipe.", quiz: "Tap the name that fits.", type: "Type its name. Small typos are fine.",
-  match: "Tap a color, then its name.", learn: "Each color climbs from picking to typing.", test: "No answers until the end.", say: "Say its name out loud.",
+  match: "Tap a name, then its color.", learn: "Each color climbs from picking to typing.", test: "No answers until the end.", say: "Say its name out loud.",
   blitz: "Swipe right for yes, left for no.", pairs: "Flip two tiles to find a color and its name.", rain: "Tap its name before it lands.",
   odd: "Tap the one that isn't the named color." };
 function prCoach(sess, el, text) {
@@ -1539,6 +1541,8 @@ function prInstantDeck(o = {}) {
 }
 // The quick sheet. Smart defaults are already chosen, so one tap on Start begins; chips change them; it remembers.
 function prQuick(o = {}) {
+  // every "Learn" with a color or a set opens the Learn sheet (js/learnset.js): Look and Study, always both
+  if (typeof lsOpen === "function" && !o.legacy && ((o.items && o.items.length) || o.seed)) return lsOpen(o);
   if (typeof CORE_NAMES !== "undefined" && !CORE_NAMES && typeof loadCoreNames === "function") return void loadCoreNames().then(() => prQuick(o));
   const p = prState(), last = p.quick || {};
   const backTo = o.back || (typeof ROUTE_NOW !== "undefined" ? ROUTE_NOW : "");
