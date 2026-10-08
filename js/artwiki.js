@@ -229,9 +229,22 @@ function awPainter(slug, push = true) {
   el.querySelectorAll("[data-glimg]").forEach(im => { const i = +im.dataset.glimg; if (i >= 0) glDetail(i).then(d => { if (im.isConnected) im.src = d.img; }).catch(() => {}); });
   el.querySelectorAll("[data-gltypical]").forEach(w => { const i = +w.dataset.gltypical; if (i >= 0) glDetail(i).then(d => { if (!w.isConnected) return; const im = w.querySelector("img"); im.src = d.img; w.querySelector("b").textContent = d.t; }).catch(() => {}); });
   bioSlot(slug).then(h => { const s = el.querySelector("[data-awbio]"); if (s && h) s.innerHTML = h; });
+  // "You and this painter" (js/learner.js knowState): how many of this painter's cluster and signature colors you've met or own
   const you = el.querySelector("[data-aw-you]");
-  if (typeof lmYouAndPainter === "function") { try { const h = lmYouAndPainter(slug); if (h) you.innerHTML = h; } catch (e) {} }
+  try {
+    if (typeof lmYouAndPainter === "function") { const h = lmYouAndPainter(slug); if (h) you.innerHTML = h; }
+    else if (typeof knowState === "function") {
+      const names = [...new Set([...(A.clusters || []).flatMap(c => c.colors), ...(P.sig || []).map(r => awCol(r[0])[0])].map(awCanon))];
+      const hexes = names.map(k => { const e = (CORE_NAMES || []).find(x => awCanon(x.n) === k); return e && e.h; }).filter(Boolean);
+      const st = hexes.map(h => knowState(h)), yours = st.filter(x => x === "yours").length, met = st.filter(x => x !== "none").length;
+      if (hexes.length >= 4) you.innerHTML = `<p class="aw-find">${yours ? `${yours} of the ${hexes.length} colors in these palettes are Yours` : met ? `You've met ${met} of the ${hexes.length} colors in these palettes` : `None of the ${hexes.length} colors in these palettes are Yours yet`}${met > yours ? `, ${met - yours} more met.` : "."}</p>`;
+    }
+  } catch (e) {}
   const acts = el.querySelector("[data-aw-acts]");
+  if (typeof colorSet === "function" && typeof csActions === "function") {
+    const hx = [...new Set([...(A.clusters || []).flatMap(c => c.colors.slice(0, 3)), ...(P.sig || []).map(r => awCol(r[0])[0])])].map(awHex).filter(h => h !== "#808080");
+    acts.appendChild(csActions(colorSet({ kind: "painter", id: slug, title: A.name, colors: hx.map(h => ({ h })), src: "painter/" + slug }), { back: () => awPainter(slug, false) }));
+  }
   if (typeof whosePalette === "function") acts.insertAdjacentHTML("beforeend", `<button class="btn ghost" data-awwhose="${esc(slug)}">Whose palette? Guess ${esc(A.name.split(" ").pop())} from five colors ${ICON.arrow}</button>`);
   acts.onclick = e => { const w = e.target.closest("[data-awwhose]"); if (w) whosePalette(w.dataset.awwhose); };
 }
@@ -337,7 +350,7 @@ function awAnalysis(host, el, i, d, r, ctx) {
   const Lh = awUnb64(st.Lh), hh = awUnb64(st.hh);
   const pf = r.pct || {}, fin = awGateFinds(r.find, 3);
   const warm = st.wf / 1000, ch = st.ch.map(v => v / 1000);
-  const pc = (v, base, lo, hi, nTxt) => v == null ? "" : `${v >= 50 ? hi : lo} than ${v >= 50 ? Math.round(v) : Math.round(100 - v)}% of ${nTxt}`;
+  const pc = (v, base, lo, hi, nTxt) => v == null || (v > 35 && v < 65) ? "" : `${v >= 50 ? hi : lo} than ${v >= 50 ? Math.round(v) : Math.round(100 - v)}% of ${nTxt}`;
   const lightTxt = [pc(pf.a, 0, "Darker", "Lighter", "the 23,531 paintings here"), pf.p != null && pf.pn ? pc(pf.p, 0, "darker", "lighter", `this painter's other ${pf.pn - 1}`) : ""].filter(Boolean).join(" · ");
   const roles = ["foc", "hid", "glu"];
   const poolOK = pool.length >= 6;
