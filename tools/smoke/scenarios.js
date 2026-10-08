@@ -691,6 +691,57 @@ scenario("learnset", "Study: a mixed session runs to the results", async t => {
   await t.click(".ls-res [data-a=look]", { wait: 500 });
   await t.waitFor(".ls-lookscr", 4000, "Look again from the results");
 });
+// Answer wrong (every other question, so the session can end) and press Next the way an iPhone does: a touch
+// pointerdown/pointerup with no click after it (iOS can drop the synthesized click), or the miss compare's Got it.
+// David, 2026-10-08: "I'm clicking Next and it's stuck."
+const LS_WRONG = `(() => {
+  const st = document.querySelector('.ls-study .pr-stage'); if (!st) return 'gone';
+  const touch = (b, k) => { const r = b.getBoundingClientRect(), o = { bubbles: true, pointerId: 7 + k, pointerType: 'touch', isPrimary: true, clientX: r.left + r.width / 2, clientY: r.top + r.height / 2 };
+    b.dispatchEvent(new PointerEvent('pointerdown', o)); b.dispatchEvent(new PointerEvent('pointerup', o)); };
+  window.__lsN = (window.__lsN || 0) + 1;
+  const mc = document.querySelector('.mc:not(.out) .mc-go'); if (mc) { if (window.__lsN % 2) touch(mc, 1); else mc.click(); return 'mc'; }
+  const meet = document.querySelector('.ls-study [data-meetnext]'); if (meet) { meet.click(); return 'meet'; }
+  const nx = st.querySelector('[data-next]'); if (nx) { if (window.__lsN % 2) touch(nx, 2); else nx.click(); return 'next'; }
+  const boss = st.querySelector('[data-boss]'); if (boss) { boss.click(); return 'boss'; }
+  const it = st._lsIt, nm = it ? prName(it) : '', wrong = (window.__lsW = !window.__lsW);
+  const pick = labels => { const k = labels.findIndex(t => (t === nm) !== wrong); return k < 0 ? 0 : k; };
+  if (st.querySelector('.pr-s-match') && st._prMatch) {
+    const { tiles } = st._prMatch, btns = [...st.querySelectorAll('.pr-tile')];
+    const k = tiles.findIndex((t, i) => !t.sw && !btns[i].classList.contains('gone')); if (k < 0) return 'wait';
+    const j = tiles.findIndex(t => t.sw && t.i === tiles[k].i); btns[k].click(); btns[j].click(); return 'match';
+  }
+  if (st.querySelector('.pr-s-odd')) { const k = st._prOpts.findIndex(o => !o.same); st._prChoose(wrong ? (k + 1) % st._prOpts.length : k); return wrong ? 'oddx' : 'odd'; }
+  if (st.querySelector('.pr-s-quiz')) { const b = [...st.querySelectorAll('.pr-opt')]; b[pick(b.map(x => x.textContent.trim()))].click(); return wrong ? 'qnx' : 'qn'; }
+  if (st.querySelector('.pr-s-qc')) { const b = [...st.querySelectorAll('.pr-cell')]; b[pick(b.map(x => x.querySelector('.pr-tag').textContent.trim()))].click(); return wrong ? 'qcx' : 'qc'; }
+  if (st.querySelector('.pr-s-type input') && !st.querySelector('.pr-typef.done')) { st._prType(wrong ? 'qqqq' : nm); return wrong ? 'typex' : 'type'; }
+  if (st.querySelector('.pr-s-card')) { if (!st.querySelector('.pr-card.revealed')) { st._prReveal(); return 'reveal'; } const y = st.querySelector(wrong ? '[data-no]' : '[data-yes]'); if (y) { y.click(); return 'card'; } }
+  return 'wait';
+})()`;
+scenario("learnset", "Study: wrong answers and touch-only Next play a 3-color session to the end", async t => {
+  await H.openPage(t, "#/color/teal", "Teal");
+  t.ev("window.__lsN = 0; window.__lsW = false");
+  if (t.ev("typeof lsQuick === 'function'")) { t.ev("lsQuick({ seed: prByKey('teal') })"); }
+  else {
+    await t.click("[data-learnit]", { wait: 600 });
+    await t.waitFor(".ls-sheet", 4000, "the Learn sheet");
+    t.ev("(() => { const r = document.querySelector('.ls-sheet [data-size]'); r.value = 3; r.dispatchEvent(new Event('input', { bubbles: true })); })()");
+    await t.click(".ls-sheet [data-go]", { wait: 600 });
+  }
+  await t.waitFor(".ls-study", 6000, "the Study screen");
+  const seen = [];
+  let lastSig = "", same = 0;
+  for (let i = 0; i < 260 && !t.$(".ls-res"); i++) {
+    const k = t.ev(LS_WRONG); seen.push(k);
+    await t.sleep(k === "wait" ? 300 : k === "next" || k === "mc" ? 450 : 300);
+    const sig = t.ev("(() => { const s = document.querySelector('.ls-study .pr-stage'); return s ? s.innerHTML.length + '|' + !!s.querySelector('[data-next]') : 'x'; })()");
+    if (k === "next" && sig === lastSig && /true$/.test(sig)) { same++; t.expect(same < 2, `Next did nothing (stuck after: ${seen.slice(-8).join(" ")})`); } else same = 0;
+    lastSig = sig;
+  }
+  await t.waitFor(".ls-res", 8000, "the results after a session with misses");
+  t.notes.push("steps: " + seen.length + " · " + [...new Set(seen)].join(","));
+  t.expect(seen.some(k => /x$/.test(k)), "the session had wrong answers");
+  t.expect(seen.includes("next") || seen.includes("mc"), "a Next or Got it was pressed after a miss");
+});
 scenario("learnset", "Study: stop part-way, Keep going picks each color up at its level", async t => {
   await H.openPage(t, "#/color/teal", "Teal");
   await t.click("[data-learnit]", { wait: 600 });

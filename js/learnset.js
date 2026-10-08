@@ -345,11 +345,14 @@ function lsStudy(items, o = {}, resume = null) {
       if (!q) break;
       const kind = lsKindFor(q, typing, lastKind);
       stage._lsIt = q.it;   // test hook
-      const res = await PR_STEPS[kind].render(stage, q.it, ctx({ dir: kind === "quiz-color" ? "r" : "f" }));
+      // a step that throws, or bookkeeping that throws, must never leave the screen frozen on Next: log it, move on
+      let res;
+      try { res = await PR_STEPS[kind].render(stage, q.it, ctx({ dir: kind === "quiz-color" ? "r" : "f" })); }
+      catch (err) { console.error("Study step failed", kind, err); res = await PR_STEPS["quiz-name"].render(stage, q.it, ctx({})); }
       if (sess.ended || !stage.isConnected) return;
-      prRecord(sess, q.it, res, kind);
+      try { prRecord(sess, q.it, res, kind); } catch (err) { console.error("Study record failed", err); }
       asked++; sinceMatch++; lastKind = kind; coachDone();
-      climb(q, !!res.ok); keep(); bump(!!res.ok);
+      climb(q, !!res.ok); try { keep(); } catch (err) { console.error("Study keep failed", err); } bump(!!res.ok);
       if (q.lv < 3) queue.splice(res.ok ? Math.min(queue.length, 2 + q.lv) : Math.min(1, queue.length), 0, q);
       status();
     }
