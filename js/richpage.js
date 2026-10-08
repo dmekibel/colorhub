@@ -219,7 +219,7 @@ function rpRing(n) {
   return out;
 }
 function rpWalkGrid(name, hex) {
-  const list = ((typeof LONG_NAMES !== "undefined" && LONG_NAMES) || CORE_NAMES || coreFallback()).filter(e => !(e.src && e.src.length === 1 && e.src[0] === "jp") && e.n.toLowerCase() !== name.toLowerCase());
+  const list = (walkNameList() || coreFallback()).filter(e => !(e.src && e.src.length === 1 && e.src[0] === "jp") && e.n.toLowerCase() !== name.toLowerCase());
   list.forEach(e => { if (!e.lab) e.lab = lab(e.h); });
   const used = new Set(), cells = new Map(), L0 = lab(hex), key = (q, r) => q + "," + r;
   cells.set(key(0, 0), { q: 0, r: 0, lab: L0, self: true });
