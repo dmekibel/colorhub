@@ -272,7 +272,7 @@ function ymSets() {
 }
 // back to the You page after a lesson, whichever way it ends
 const ymBack = () => { if (typeof openRoute === "function" && openRoute("#/you")) return; youPage(); };
-function ymLearnSet(x) { if (typeof prQuick === "function") prQuick({ items: x.hs, label: x.t, src: x.src, back: ymBack }); }
+function ymLearnSet(x) { if (typeof prQuick === "function") prQuick({ items: x.pin && x.pin.length ? x.pin : x.hs, pin: !!(x.pin && x.pin.length), route: x.r, label: x.t, src: x.src, back: ymBack }); }
 // Untangle: the pair plus its nearest third color, as a 3-color lesson (the Learn sheet opens on that pair)
 function ymUntangle(p) {
   if (typeof prQuick !== "function") return;

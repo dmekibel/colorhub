@@ -16,7 +16,7 @@ run(`const D = window.DATA;
   const esc = s => String(s);
   const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; };
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
-  const sv = () => "";
+  const sv = () => ""; const icon = () => "";
   const buzz = () => {};
   let SAVES = 0; const save = () => { SAVES++; };
   let S = { v: 1, cards: {}, done: {}, ownV: 2 };
@@ -272,6 +272,30 @@ run(`S.cards = {}; S.practice = undefined; var KNOWN = new Set(); var knowState 
   ok(run(`LS_RES.get(LS_ITEMS[4].key).lv === 3 && LS_RES.get(LS_ITEMS[5].key).lv === 0`), "colors without a saved level start where a fresh session would (yours straight to recall)");
   ok(run(`LS_RES.get(LS_ITEMS[0].key).met && LS_RES.get(LS_ITEMS[1].key).met`), "Keep going doesn't meet a resumed color again");
   ok(run(`lsLevels(LS_ITEMS).get(LS_ITEMS[0].key).lv === 0`), "a fresh session starts unknown colors at 0");
+
+  // ---------- Pinned sets: a pair/set/palette's colors stay in, with look-alikes beside each ----------
+  run(`var PN_PINS = [prByKey("teal"), prByKey("coral")], PN_AUTO = lsNeighbors(PN_PINS);`);
+  ok(run(`PN_AUTO.length === 2 && PN_AUTO.every(g => g.nbs.length === 4)`), "each pinned color gets up to 4 look-alikes");
+  ok(run(`PN_AUTO.every(g => g.nbs.every(x => !PN_PINS.some(p => p.key === x.key || p.h === x.h)))`), "a look-alike is never a pinned color");
+  ok(run(`(() => { const all = PN_AUTO.flatMap(g => g.nbs.map(x => x.key)); return new Set(all).size === all.length; })()`), "no look-alike is shared between two groups");
+  ok(run(`PN_AUTO.every((g, i) => g.nbs.every(x => de2000(PN_PINS[i].h, x.h) <= LS_NB_REACH))`), "look-alikes are near their pinned color");
+  ok(run(`lsNbDefault(2) === 2 && lsNbDefault(3) === 1 && lsNbDefault(5) === 1 && lsNbDefault(6) === 0 && lsNbDefault(12) === 0`), "default neighbors: 2 for a pair, 1 for 3-5, 0 for larger");
+  run(`var PN_G2 = lsGroups(PN_AUTO, 2, new Set(), []), PN_G0 = lsGroups(PN_AUTO, 0, new Set(), []);`);
+  ok(run(`PN_G0.items.length === 2 && PN_G0.items[0] === PN_PINS[0] && PN_G0.items[1] === PN_PINS[1]`), "0 neighbors: only the pinned colors");
+  ok(run(`PN_G2.items.length === 6 && PN_G2.keys.every(k => k.length === 3) && PN_G2.items.slice(0, 1)[0] === PN_PINS[0]`), "2 neighbors: pins plus 2 each, grouped");
+  const rmKey = run(`PN_G2.groups[0].nbs[0].key`);
+  ok(run(`lsGroups(PN_AUTO, 2, new Set([${JSON.stringify(rmKey)}]), []).items.length`) === 5, "tapping a look-alike removes it");
+  ok(run(`(() => { const x = prByKey("olive"), g = lsGroups(PN_AUTO, 0, new Set(), [x]); return g.items.length === 3 && g.items.includes(x); })()`), "+ adds any color, beside its nearest pinned one");
+  ok(run(`lsGroups(PN_AUTO, 2, new Set(), [PN_PINS[0]]).items.length`) === 6, "adding a pinned color again changes nothing");
+  // the pacer meets a pinned color with its own look-alikes, then asks them beside each other
+  run(`var PN_P = spNew(PN_G2.items, { know: new Map(PN_G2.items.map(x => [x.key, "none"])), de: de2000, groups: PN_G2.keys });`);
+  const wave = () => run(`(() => { let a, got = []; while ((a = spNext(PN_P)) && a.t === "meet") got.push(a.q.it.key); PN_LAST = a; return got; })()`);
+  run(`var PN_LAST = null;`);
+  const w1 = wave(), g0 = run(`PN_G2.keys[0]`);
+  ok(w1.length >= 2 && w1.every((k, i) => k === g0[i]), "the first wave is the first pinned color and its look-alikes, pin first");
+  ok(run(`PN_LAST && PN_LAST.t`) === "pair", "a group wave ends with its closest pair side by side");
+  const rest = run(`(() => { let a, got = []; for (let i = 0; i < 40 && (a = spNext(PN_P)); i++) { if (a.t === "meet") got.push(a.q.it.key); else if (a.t === "ask") spAnswer(PN_P, a.q, true); } return got; })()`);
+  ok(rest.length >= 1 && rest.every(k => !g0.slice(0, w1.length).includes(k)), "later waves hold the other colors, each wave from one group");
 
   // ---------- The Study pacer (js/studypace.js, design/STUDY-FLOW.md), driven by simulated learners ----------
   run(`
