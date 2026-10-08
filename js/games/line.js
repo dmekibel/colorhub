@@ -85,7 +85,9 @@ OO_MIXPLAY.across = function (ui, it) {
     OO_LAST = { v: "one", ans: [rd.at], colors: rd.colors };
     const cols = k === 6 ? 3 : 2, rows = k / cols, aspect = cols / rows;
     const cells = rd.colors.map((_, i) => ({ x: (i % cols) / cols, y: Math.floor(i / cols) / rows, w: 1 / cols, h: 1 / rows, shape: "sq" }));
-    ui.q.innerHTML = `${OO_NUM[k - 1]} of these are <em>${esc(rd.cat)}</em>${ooLineAnchor(rd)}. Which one isn't?`;
+    // the word's last part, its swatch and the full stop never break apart ("Mauve ▪." on one line)
+    const cw = rd.cat.split(" "), last = cw.pop(), head = cw.length ? `<em>${esc(cw.join(" "))} </em>` : "";
+    ui.q.innerHTML = `${OO_NUM[k - 1]} of these are ${head}<span style="white-space:nowrap"><em>${esc(last)}</em>${ooLineAnchor(rd)}.</span> Which one isn't?`;
     ui.stage.innerHTML = `<div class="oo-lwrap">${ooBoardHTML({ b: "grid", cells, aspect, colors: rd.colors, cols })}<div class="oo-lrev"></div></div>`;
     const board = ui.stage.querySelector(".oo-board");
     board.style.width = "min(100%, 32dvh)";   // a little smaller than Odd one out's, so the strip and the settle line fit at 375 x 812
