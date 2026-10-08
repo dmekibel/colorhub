@@ -308,13 +308,305 @@ function extractPalette(canvas, k) {
     .filter(p => p.share > 0).sort((a, b) => b.share - a.share);
 }
 
+// The over-cluster step of extractPalette (its "many groups" stage, step 1-2), without picking k: a pool of up
+// to 24 colors with shares, the same shape js/gallery.js's glPoolDecode hands the shared palette-type engine
+// (js/palettes.js, js/gallery.js's GL_MODES/glModeSet/glPoolPick/glStandOut) — so a photo gets every palette
+// type the painting page has, from the same functions, not a second copy of them.
+function extractPool(canvas, maxPool = 24) {
+  const sc = Math.min(1, 160 / Math.max(canvas.width, canvas.height)), w = Math.max(1, Math.round(canvas.width * sc)), h = Math.max(1, Math.round(canvas.height * sc));
+  const c = document.createElement("canvas"); c.width = w; c.height = h; const x = c.getContext("2d"); x.drawImage(canvas, 0, 0, w, h);
+  const d = x.getImageData(0, 0, w, h).data, px = [];
+  for (let i = 0; i < d.length; i += 4) if (d[i + 3] > 128) px.push(oklabRgb(lin8(d[i]), lin8(d[i + 1]), lin8(d[i + 2])).concat([(i / 4) % w / w, Math.floor(i / 4 / w) / h]));
+  if (!px.length) return [];
+  const dist = (p, q) => (p[0] - q[0]) ** 2 + (p[1] - q[1]) ** 2 + (p[2] - q[2]) ** 2;
+  const chroma = p => Math.hypot(p[1], p[2]);
+  const toHex = cc => "#" + oklabToLin(...cc).map(v => enc8(v).toString(16).padStart(2, "0")).join("").toUpperCase();
+  let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const K = Math.min(px.length, maxPool);
+  const cents = [px[Math.floor(rnd() * px.length)].slice(0, 3)], dmin = px.map(p => dist(p, cents[0]));
+  while (cents.length < K) {
+    const tot = dmin.reduce((a, b) => a + b, 0); if (!tot) break;
+    let t = rnd() * tot, i = 0; while (t > dmin[i] && i < dmin.length - 1) t -= dmin[i++];
+    cents.push(px[i].slice(0, 3)); px.forEach((p, j) => { const dd = dist(p, cents[cents.length - 1]); if (dd < dmin[j]) dmin[j] = dd; });
+  }
+  const assign = cs => px.map(p => { let b = 0, bd = 1e9; cs.forEach((cc, j) => { const dd = dist(p, cc); if (dd < bd) { bd = dd; b = j; } }); return b; });
+  let lbl = assign(cents);
+  for (let it = 0; it < 14; it++) {
+    const sum = cents.map(() => [0, 0, 0, 0]);
+    px.forEach((p, i) => { const s = sum[lbl[i]]; s[0] += p[0]; s[1] += p[1]; s[2] += p[2]; s[3]++; });
+    sum.forEach((s, j) => { if (s[3]) cents[j] = [s[0] / s[3], s[1] / s[3], s[2] / s[3]]; });
+    lbl = assign(cents);
+  }
+  const groups = cents.map((cc, j) => {
+    const mine = px.filter((p, i) => lbl[i] === j); if (!mine.length) return null;
+    mine.sort((p, q) => dist(p, cc) - dist(q, cc));
+    const core = mine.slice(0, Math.max(1, Math.ceil(mine.length * .6))).sort((p, q) => chroma(q) - chroma(p)).slice(0, Math.max(1, Math.ceil(mine.length * .3)));
+    const col = [0, 1, 2].map(t => core.reduce((a, p) => a + p[t], 0) / core.length);
+    return { h: toHex(col), share: mine.length / px.length };
+  }).filter(g => g && g.share > .002);
+  return groups.sort((a, b) => b.share - a.share).slice(0, maxPool);
+}
+
 function studioFromImage(canvas, from) {
-  const pals = {}; [3, 6, 10].forEach(k => { pals[k] = extractPalette(canvas, k); });
-  paletteView({ img: canvas.toDataURL("image/jpeg", .85), pals, from });
+  paletteView({ img: canvas.toDataURL("image/jpeg", .85), pool: extractPool(canvas), from });
+}
+
+// js/palettes.js (the pixel kernels behind "On the photo": markers/highlight) isn't in index.html yet — loaded
+// once, lazily, the same pattern js/gallery.js's glQuizLoad() uses for js/thingquiz.js.
+let PAL_LOADING = null;
+function palLoad() {
+  if (typeof palPix === "function") return Promise.resolve();
+  const v = typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : "";
+  return PAL_LOADING || (PAL_LOADING = new Promise((res, rej) => {
+    const s = document.createElement("script"); s.src = "js/palettes.js" + v;
+    s.onload = res; s.onerror = () => { PAL_LOADING = null; rej(new Error("palettes")); };
+    document.head.appendChild(s);
+  }));
+}
+
+// ---------- the photo/upload palette: every palette type the painting page has (David, 2026-10-09) ----------
+// Reuses js/gallery.js's GL_MODES/glModeSet/glPoolPick/glStandOut/glName/glPctTxt/GL_WHERE directly (gallery.js
+// loads earlier in index.html, and all js files share one global scope: CLAUDE.md "Tech") rather than forking a
+// second copy of the palette-type engine. "Stands out" has no archive/painter context for a photo, so prior is
+// left null -> glStandOut falls back to glHueAll() (the whole painting corpus) only if GAL happens to be loaded;
+// to keep a photo's "stands out" honestly photo-relative we always pass a flat prior instead (every hue bin
+// equally common), so the only signal left is this photo's own chroma, rarity of share and distance from its
+// own average -- "distinct vs this photo's average", per the fallback rule.
+const PV_FLAT_PRIOR = new Array(13).fill(0);
+// GL_MODES' captions (js/gallery.js) talk about "this painting"/"this painter"; a photo gets its own wording
+// for the two modes whose text actually differs for a photo. Every other mode's caption already reads fine
+// unchanged ("Only the lights: highlights and pale grounds" etc.).
+const PV_CAP = {
+  out: ["Vivid and distinct from this photo's own average", "The colors that make this photo itself: vivid and far from its own average."],
+  area: ["Sized by how much each covers", "Every color sized by how much of the photo it covers."],
+};
+function palPhotoView(p) {
+  const pool = p.pool;
+  let curK = 6, mode = "out", where = typeof S !== "undefined" && S && GL_WHERE.some(w => w[0] === S.palWhere) ? S.palWhere : "off", capOpen = false;
+  let editedPal = null;   // once the visitor edits (remove/replace/nudge/reorder), this overrides the computed set
+  let undoPal = null, undoLabel = "";
+  const picks = [];   // "Pick from it" taps
+  const lit = { img: null, pix: null, ok: true };   // a photo's own pixels are always readable
+  const modeSet = (m, k) => {
+    if (m === "out") return { pal: glStandOut(pool, k, PV_FLAT_PRIOR), max: Math.min(pool.length, 24) };
+    if (m === "area") return { pal: glPoolPick(pool, k), max: Math.min(pool.length, 24) };
+    if (m === "pick") return { pal: picks.map(h => ({ h, share: 1 / picks.length, pick: true })), max: 12, fixed: true,
+      cap: picks.length ? "Colors you took from the photo. Tap it for more, a swatch to open its page." : "Tap the photo to take a color, up to 12." };
+    return glModeSet(m, pool, k, null);
+  };
+  const curSet = () => editedPal ? { pal: editedPal, max: 24, fixed: true, cap: "Edited by hand." } : (modeSet(mode, curK) || modeSet("out", curK));
+  const curPal = () => curSet().pal;
+  const have = GL_MODES.filter(m => m[0] === "out" || m[0] === "area" || m[0] === "pick" || glModeSet(m[0], pool, 6, null));
+  const dom = pool.reduce((a, b) => b.share > a.share ? b : a).h;
+  const titleKind = p.photoId != null ? "photo" : null;
+  let curTitle = p.title || "";
+  const titlePlaceholder = fmtDay(p.at) || "Your photo";
+  const el = show(`
+    <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span style="width:44px"></span></header>
+    ${titleKind ? `<button class="pv-title${curTitle ? "" : " ph"}" data-rename aria-label="Rename">${esc(curTitle || titlePlaceholder)}</button>` : `<p class="eyebrow">${esc(p.from || "Photo")}</p>`}
+    <div class="gl-pal-wrap">
+    <div class="pv-img" id="himg"><img src="${p.img}" alt="Your photo"><canvas class="gl-lit-cv" data-pvlitcv aria-hidden="true"></canvas><div class="gl-mks" data-pvmks></div></div>
+    <p class="pv-tapnote" data-pvtapnote>Tap the photo to guess a spot's name, then see it alone.</p>
+    <div class="gl-pal-ui">
+    <div class="palette gl-strip" data-pvswatches></div>
+    <div class="gl-modes-f" data-pvfade><div class="gl-modes" data-pvorder role="group" aria-label="Palette type">${have.map(m => `<button data-pvo="${m[0]}" aria-pressed="false">${m[1]}</button>`).join("")}</div></div>
+    <div class="pr-slide gl-slide" data-pvslide hidden><input type="range" min="3" max="24" step="1" value="6" data-pvk aria-label="How many colors"><span class="gl-kn-t" data-pvkn>6 colors</span></div>
+    <div class="gl-where" data-pvwhere><span>On the photo</span><div class="gl-where-seg" role="group" aria-label="Show where each color is on the photo">${GL_WHERE.map(([k, t]) => `<button data-pvw="${k}" aria-pressed="false">${t}</button>`).join("")}</div></div>
+    <p class="gl-cap" data-pvcap></p>
+    <div class="row2 pv-save-row"><button class="btn solid" data-pvsave>Save palette</button><button class="btn ghost" data-pvedit aria-pressed="false">Edit</button></div>
+    <div class="pal-names" data-pvrows></div>
+    </div></div>
+    <div data-csacts></div>
+    <div class="row2" style="margin-top:10px"><button class="btn ghost" data-share>${ICON.share} Share</button><button class="btn ghost" data-export>Export: CSS, Procreate, Adobe…</button></div>
+    <div id="twins"></div>
+    ${p.photoId != null ? `<button class="btn ghost" data-delphoto style="margin-top:10px">Delete this photo</button>` : ""}
+    <p class="fine">Palette types computed from a small copy of the photo. Edit to remove, replace, reorder or nudge any color, with Undo.</p>
+  `, "article studio gl-page");
+  el.querySelector("[data-back]").onclick = xBack;
+  onKey = e => { if (e.key === "Escape") xBack(); };
+  const renameRow = () => el.querySelector("[data-rename]");
+  const wireRename = () => {
+    const row = renameRow(); if (!row) return;
+    row.onclick = () => {
+      const input = document.createElement("input");
+      input.className = "pv-title-input"; input.value = curTitle; input.placeholder = titlePlaceholder; input.maxLength = 60;
+      input.setAttribute("aria-label", "Rename");
+      row.replaceWith(input); input.focus(); input.select();
+      let done = false;
+      const commit = () => {
+        if (done) return; done = true;
+        curTitle = input.value.trim();
+        phRename(p.photoId, curTitle);
+        const b = document.createElement("button");
+        b.className = "pv-title" + (curTitle ? "" : " ph"); b.setAttribute("data-rename", ""); b.setAttribute("aria-label", "Rename");
+        b.textContent = curTitle || titlePlaceholder;
+        input.replaceWith(b); wireRename();
+      };
+      input.addEventListener("keydown", ev => { if (ev.key === "Enter") { ev.preventDefault(); input.blur(); } });
+      input.addEventListener("blur", commit, { once: true });
+    };
+  };
+  wireRename();
+  let editing = false;
+  const pushUndo = (label) => { undoPal = (editedPal || curSet().pal).map(c => ({ ...c })); undoLabel = label; };
+  const doUndo = () => { if (!undoPal) return; editedPal = undoPal; undoPal = null; drawPalette(); buzz(6); };
+  const drawPalette = () => {
+    const set = curSet(), pal = set.pal;
+    el.querySelector("[data-pvorder]").querySelectorAll("button").forEach(b => { const on = b.dataset.pvo === mode; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); });
+    const slide = el.querySelector("[data-pvslide]"), inp = slide.querySelector("input"), kk = Math.min(curK, set.max);
+    slide.hidden = !!set.fixed || set.max <= 3 || editing;
+    inp.max = set.max; inp.min = 3; inp.value = kk;
+    el.querySelector("[data-pvkn]").textContent = kk + " colors";
+    const def = GL_MODES.find(m => m[0] === mode) || GL_MODES[0], pvc = PV_CAP[mode];
+    const full = set.cap || (pvc ? pvc[1] : def[2]), short = mode === "pick" ? full : (pvc ? pvc[0] : def[3]) || full;
+    const cap = el.querySelector("[data-pvcap]");
+    cap.classList.toggle("open", capOpen || short === full);
+    cap.innerHTML = `<button class="gl-cap-t" data-pvcapt aria-expanded="${capOpen}"${short === full ? " disabled" : ""}>${esc(capOpen ? full : short)}</button>` + (mode === "pick" && picks.length ? `<button class="aw-link" data-pvclear>Start over</button>` : "");
+    const wh = el.querySelector("[data-pvwhere]");
+    wh.hidden = mode === "pick" || editing;
+    wh.querySelectorAll("[data-pvw]").forEach(b => { const on = b.dataset.pvw === where; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); });
+    const sel = el.querySelector("[data-pvorder] .on"); const host = el.querySelector("[data-pvorder]");
+    if (sel && host.scrollWidth > host.clientWidth) { const l = sel.offsetLeft - (host.clientWidth - sel.offsetWidth) / 2; host.scrollTo ? host.scrollTo({ left: l }) : (host.scrollLeft = l); }
+    glFadeEdges(el.querySelector("[data-pvfade]"), host);
+    el.querySelector("[data-pvorder]").hidden = editing;
+    // Edit mode drops data-swatch from every chip/row (js/swatch.js's own document-level capturing click
+    // listener always wins a race against anything attached lower in the tree, including a bubbled-up remove
+    // icon nested inside a [data-swatch] button) — while editing, a tap opens the edit sheet instead of the
+    // color page, wired below through [data-pvj] alone.
+    const swAttr = c => editing ? "" : ` data-swatch="${c.h}"`;
+    el.querySelector("[data-pvswatches]").innerHTML = pal.map((c, j) => `<button class="pal"${swAttr(c)} data-pvj="${j}" style="--c:${c.h};flex:${(Math.max(c.share, .08) * 100).toFixed(1)}" data-ink="${ink(c.h)}"><span>${c.pick ? "" : c.share < .005 ? "<1%" : Math.round(c.share * 100) + "%"}</span>${editing ? `<i class="pv-rm" data-pvrm="${j}" aria-label="Remove">×</i>` : ""}</button>`).join("");
+    el.querySelector("[data-pvrows]").innerHTML = pal.map((c, j) => {
+      const nm = glName(c.h), fam = typeof familyOf === "function" && familyOf(c.h);
+      const sub = [nm.sub ? nm.sub.charAt(0).toUpperCase() + nm.sub.slice(1) : fam ? fam.head.n + " family" : "", c.pick ? "Picked" : glPctTxt(c.share)].filter(Boolean).join(" · ");
+      return `<button class="pal-name"${swAttr(c)} data-pvj="${j}"><i style="--c:${c.h}" data-ink="${ink(c.h)}"></i><b>${esc(nm.t)}</b><span>${esc(sub)}</span><em class="mono">${c.h}</em></button>`;
+    }).join("");
+    litDraw(pal); markDraw(pal);
+    const acts = el.querySelector("[data-csacts]"); if (acts) acts.hidden = !pal.length;
+    el.querySelector("[data-pvsave]").disabled = !pal.length;
+  };
+  // "On the photo": a photo's pixels are always readable (it's the visitor's own canvas, no museum CORS limit)
+  const litBuild = () => { if (!lit.img) return null; if (!lit.pix) lit.pix = palPix(lit.img); return lit.pix; };
+  const litDraw = pal => {
+    const cv = el.querySelector("[data-pvlitcv]"); if (!cv) return;
+    if (where !== "lit" || !pal.length || typeof palHighlightPaint !== "function") { cv.classList.remove("on"); return; }
+    const pix = litBuild(); if (!pix || !palHighlightPaint(cv, pix, pal)) { cv.classList.remove("on"); return; }
+    cv.classList.add("on");
+  };
+  const markDraw = pal => {
+    const host = el.querySelector("[data-pvmks]"), span = el.querySelector("#himg"), img = span.querySelector("img");
+    if (!host) return;
+    if (where !== "mark" || !pal.length || typeof palMarkerFind !== "function" || !img.naturalWidth) { host.innerHTML = ""; return; }
+    const pix = litBuild(); if (!pix) { host.innerHTML = ""; return; }
+    const num = mode !== "pick";
+    const found = palMarkerFind(pix, pal);
+    const fresh = host.dataset.k !== mode + curK + pal.map(c => c.h).join();
+    host.dataset.k = mode + curK + pal.map(c => c.h).join();
+    host.innerHTML = found.map((o, q) => { const h = pal[o.k].h; return `<button class="gl-mk${o.n ? " sm" : ""}${fresh ? " in" : ""}" data-swatch="${h}" data-ink="${ink(h)}" style="left:${(o.fx * 100).toFixed(2)}%;top:${(o.fy * 100).toFixed(2)}%;--c:${h};--d:${q * 20}ms" aria-label="${esc(glName(h).t)}, color ${o.k + 1}">${o.n || !num ? "" : o.k + 1}</button>`; }).join("");
+  };
+  const setWhere = w => { if (w === where) return; where = w; if (typeof S !== "undefined" && S) { S.palWhere = w; save(); } drawPalette(); };
+  const setMode = m => { if (m === mode) return; mode = m; editedPal = null; capOpen = false; buzz(5); drawPalette(); };
+  palLoad().then(() => { if (el.isConnected) drawPalette(); }).catch(() => {});
+  drawPalette();
+  if (typeof twSection === "function") twSection(el.querySelector("#twins"), pool, { what: "your photo", key: "img", img: () => el.querySelector(".pv-img img"), rich: () => typeof twRichPool === "function" ? twRichPool(el.querySelector(".pv-img img")) : null });
+  if (typeof colorSet === "function") {
+    const pid = p.photoId != null ? p.photoId : "new";
+    const pvSet = () => colorSet({ kind: "photo", id: pid, title: curTitle || fmtDay(p.at) || "Your photo", colors: curPal().map(c => ({ h: c.h, share: c.share })), src: p.photoId != null ? "photo/" + pid : "" });
+    if (p.photoId != null) learnerLog({ type: "seen", set: pvSet(), src: "photo" });
+    el.querySelector("[data-csacts]").appendChild(csActions(pvSet, { only: ["map", "learn", "play", "compare"], back: () => (p.photoId != null ? photoPage(p.photoId, false) : go("studio")) }));
+  }
+  el.querySelector("[data-pvk]").oninput = e => { curK = +e.target.value; drawPalette(); };
+  el.querySelector("[data-pvk]").onchange = () => buzz(5);
+  el.querySelector("[data-pvorder]").onclick = e => { const b = e.target.closest("[data-pvo]"); if (b) setMode(b.dataset.pvo); };
+  el.querySelector("[data-pvorder]").onscroll = () => glFadeEdges(el.querySelector("[data-pvfade]"), el.querySelector("[data-pvorder]"));
+  el.querySelector("[data-pvwhere]").onclick = e => { const b = e.target.closest("[data-pvw]"); if (b) { buzz(5); setWhere(b.dataset.pvw); } };
+  el.querySelector("[data-pvcap]").onclick = e => {
+    if (e.target.closest("[data-pvclear]")) { picks.length = 0; buzz(5); drawPalette(); return; }
+    if (e.target.closest("[data-pvcapt]")) { capOpen = !capOpen; buzz(4); drawPalette(); }
+  };
+  // Edit: remove (×), replace (try-on picker or pick-from-photo), reorder, nudge lighter/darker/more-less vivid — all with Undo
+  let frompic = null;   // index awaiting a tap on the photo, while a pick-from-photo replacement is armed
+  const openEditSheet = j => {
+    const pal = (editedPal || curSet().pal).slice(), c = pal[j]; if (!c) return;
+    const nm = glName(c.h);
+    const { sh, close } = sheet(`
+      <div class="pk-hero" style="--c:${c.h}" data-ink="${ink(c.h)}"><h2>${esc(nm.t)}</h2><small class="mono">${c.h}</small></div>
+      <div class="row2"><button class="btn ghost" data-nudge="L+">Lighter</button><button class="btn ghost" data-nudge="L-">Darker</button></div>
+      <div class="row2" style="margin-top:8px"><button class="btn ghost" data-nudge="C+">More vivid</button><button class="btn ghost" data-nudge="C-">Less vivid</button></div>
+      <button class="btn ghost" style="margin-top:14px" data-replace>Replace this color…</button>
+      <button class="btn ghost" style="margin-top:8px" data-frompic>Pick from the photo</button>
+      <div class="row2" style="margin-top:14px"><button class="btn ghost" data-move="-1" ${j === 0 ? "disabled" : ""}>Move earlier</button><button class="btn ghost" data-move="1" ${j === pal.length - 1 ? "disabled" : ""}>Move later</button></div>
+      <button class="btn ghost" style="margin-top:14px;color:#D9664F" data-remove>Remove this color</button>`);
+    const commit = (next, label) => { pushUndo(label); editedPal = next; close(); drawPalette(); buzz(8); toast(label, { undo: doUndo }); };
+    sh.onclick = e => {
+      const nb = e.target.closest("[data-nudge]");
+      if (nb) { const d = nb.dataset.nudge, dL = d === "L+" ? .06 : d === "L-" ? -.06 : 0, dCmul = d === "C+" ? 1.3 : d === "C-" ? .75 : 1;
+        const [L, a, b] = hexOk(c.h), C = Math.hypot(a, b) * dCmul, hue = Math.atan2(b, a);
+        const h2 = okHex(clamp(L + dL, .06, .97), Math.max(0, C), hue), next = pal.slice(); next[j] = { ...c, h: h2 };
+        return commit(next, `Adjusted ${nm.t}`);
+      }
+      if (e.target.closest("[data-remove]")) { const next = pal.filter((_, i) => i !== j); return commit(next, `Removed ${nm.t}`); }
+      const mv = e.target.closest("[data-move]");
+      if (mv) { const d = +mv.dataset.move, j2 = j + d; if (j2 < 0 || j2 >= pal.length) return; const next = pal.slice(); [next[j], next[j2]] = [next[j2], next[j]]; return commit(next, `Reordered`); }
+      if (e.target.closest("[data-replace]") && typeof sxPick === "function") {
+        close();
+        sxPick(c.h, { title: "Replace with", onPick: h2 => { const next = pal.slice(); next[j] = { ...c, h: h2 }; pushUndo(`Replaced ${nm.t}`); editedPal = next; drawPalette(); buzz(8); toast(`Replaced ${nm.t}`, { undo: doUndo }); } });
+        return;
+      }
+      if (e.target.closest("[data-frompic]")) { frompic = j; close(); toast("Tap the photo to pick the new color"); }
+    };
+  };
+  el.querySelector("[data-pvedit]").onclick = e => {
+    editing = !editing; e.currentTarget.classList.toggle("on", editing); e.currentTarget.setAttribute("aria-pressed", editing);
+    e.currentTarget.textContent = editing ? "Done" : "Edit";
+    if (editing && !editedPal) editedPal = curSet().pal.map(c => ({ ...c }));
+    buzz(5); drawPalette();
+  };
+  el.querySelector(".gl-pal-ui").addEventListener("click", e => {
+    const rm = e.target.closest("[data-pvrm]");
+    if (rm) { e.stopPropagation(); const j = +rm.dataset.pvrm, pal = (editedPal || curSet().pal).slice(), c = pal[j]; if (!c) return;
+      pushUndo(`Removed ${glName(c.h).t}`); editedPal = pal.filter((_, i) => i !== j); drawPalette(); buzz(8); toast(`Removed ${glName(c.h).t}`, { undo: doUndo }); return; }
+    if (!editing) return;
+    const row = e.target.closest("[data-pvj]"); if (row) { e.stopPropagation(); e.preventDefault(); openEditSheet(+row.dataset.pvj); }
+  }, true);
+  el.querySelector("[data-pvsave]").onclick = () => { const pal = curSet().pal; if (!pal.length) return; keepPalette(pal.map(c => c.h), curTitle || p.from || "Palette"); };
+  el.querySelector("[data-share]").onclick = () => sharePalette(curSet().pal, curTitle || p.from, h => ({ nm: glName(h), fam: typeof familyOf === "function" && familyOf(h) }));
+  el.querySelector("[data-export]").onclick = () => exOpenSheet({ cols: curSet().pal, title: curTitle || p.from || "Palette" });
+  exLongCopy(el.querySelector("[data-pvrows]"));
+  const delPhoto = el.querySelector("[data-delphoto]");
+  if (delPhoto) delPhoto.onclick = () => phDeleteConfirm(p.photoId, () => go("studio"));
+  // tap the photo: pick-from-photo replacement (edit) > "Pick from it" sampling (pick mode) > the Isolator (guess, then see it alone)
+  const span = el.querySelector("#himg"), img = span.querySelector("img");
+  const armSample = () => { lit.img = img; lit.pix = null; drawPalette(); };
+  if (img.complete && img.naturalWidth) armSample(); else img.addEventListener("load", armSample, { once: true });
+  const sampleAt = (clientX, clientY) => {
+    const r = img.getBoundingClientRect(); if (!img.naturalWidth) return null;
+    const c = document.createElement("canvas"); c.width = img.naturalWidth; c.height = img.naturalHeight;
+    const cx = c.getContext("2d", { willReadFrequently: true }); cx.drawImage(img, 0, 0);
+    const px = Math.round((clientX - r.left) / r.width * c.width), py = Math.round((clientY - r.top) / r.height * c.height), half = 3;
+    const bx = clamp(px - half, 0, c.width - 1), by = clamp(py - half, 0, c.height - 1), bw = Math.min(half * 2 + 1, c.width - bx), bh = Math.min(half * 2 + 1, c.height - by);
+    const data = cx.getImageData(bx, by, bw, bh).data; let rr = 0, gg = 0, bb = 0, n = 0;
+    for (let k = 0; k < data.length; k += 4) { rr += data[k]; gg += data[k + 1]; bb += data[k + 2]; n++; }
+    return "#" + [rr, gg, bb].map(v => clamp(Math.round(v / n), 0, 255).toString(16).padStart(2, "0")).join("").toUpperCase();
+  };
+  span.addEventListener("click", e => {
+    if (e.target.closest(".gl-mk")) return;
+    const r = span.getBoundingClientRect(); if (e.clientX < r.left || e.clientY < r.top || e.clientX > r.right || e.clientY > r.bottom) return;
+    const hex = sampleAt(e.clientX, e.clientY); if (!hex) return;
+    if (frompic != null) {
+      const j = frompic; frompic = null; const pal = (editedPal || curSet().pal).slice(), c = pal[j]; if (!c) return;
+      pushUndo(`Replaced ${glName(c.h).t}`); pal[j] = { ...c, h: hex }; editedPal = pal; buzz(8); drawPalette(); toast("Replaced", { undo: doUndo }); return;
+    }
+    if (mode === "pick") { if (!picks.includes(hex) && picks.length < 12) picks.push(hex); buzz(6); drawPalette(); return; }
+    if (typeof isoOpen === "function") { buzz(6); isoOpen({ src: img, fx: (e.clientX - r.left) / r.width, fy: (e.clientY - r.top) / r.height, from: "photo", ref: p.photoId != null ? "photo:" + p.photoId : "photo" }); }
+  });
 }
 
 // ---------- palette view: count, percentages and three looks; keep, copy or share ----------
+// A photo/upload now carries p.pool (js/photos.js, js/boot.js's studiopv shot): palPhotoView() above gives it
+// every palette type, the How-many slider, markers/highlight and Edit. Anything without a pool (the gamut
+// wheel's result, js/looks.js, a saved palette with no photo) keeps this simpler view.
 function paletteView(p) {
+  if (p.pool && p.pool.length) return palPhotoView(p);
   const hasImg = !!p.img, counts = hasImg ? [3, 6, 10] : null;
   let n = hasImg ? 6 : null, pct = hasImg, look = hasImg ? "weighted" : "stripes";
   const colsNow = () => hasImg ? p.pals[n] : p.cols;

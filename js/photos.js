@@ -57,14 +57,16 @@ function phDownscale(canvas, maxSide = PH_MAX_SIDE) {
   return c;
 }
 // Studio's two real capture points (a file picked in studio.js, "palette from this frame" in camera.js) call
-// this instead of studioFromImage() directly: it saves the photo (downscaled, palettes already computed) and
-// opens its own page. If saving fails, it falls back to the old in-memory paletteView (not addressed, not kept).
+// this instead of studioFromImage() directly: it saves the photo (downscaled, its palette pool already
+// extracted — js/studio.js extractPool(), the same pool shape js/gallery.js's glPoolDecode hands the shared
+// palette-type engine) and opens its own page. If saving fails, it falls back to the old in-memory paletteView
+// (not addressed, not kept).
 function phCaptureAndOpen(canvas, from) {
-  const small = phDownscale(canvas), pals = {}; [3, 6, 10].forEach(k => pals[k] = extractPalette(small, k));
+  const small = phDownscale(canvas), pool = extractPool(small);
   const id = phMakeId();
-  phBlobFromCanvas(small).then(blob => phSave({ id, blob, pals, at: today(), title: "", from: from || "" }))
+  phBlobFromCanvas(small).then(blob => phSave({ id, blob, pool, at: today(), title: "", from: from || "" }))
     .then(rec => { XSTACK.push("ph:" + id); phOpenRecord(id, rec); })
-    .catch(() => { paletteView({ img: small.toDataURL("image/jpeg", .85), pals, from }); phWarn(); });
+    .catch(() => { paletteView({ img: small.toDataURL("image/jpeg", .85), pool, from }); phWarn(); });
 }
 
 // ---------- the photo page: an address, Back one step at a time, delete with a confirm ----------
@@ -83,7 +85,10 @@ function photoPage(id, push = true) {
 // the actual renderer (what router.js gives an address): kept separate from photoPage so going back to an
 // already-fetched record (xStep's "ph:" case) doesn't need to touch IndexedDB again.
 function phOpenRecord(id, rec) {
-  paletteView({ img: phURL(rec), pals: rec.pals, from: rec.from || "Your photo", title: rec.title || "", at: rec.at, photoId: id });
+  // a photo saved before 2026-10-09 has pals{3,6,10} instead of a pool: its 10-color palette stands in as a
+  // pool (fewer colors than a fresh extractPool(), but every palette type still works from it)
+  const pool = rec.pool || (rec.pals && (rec.pals[10] || rec.pals[6] || rec.pals[3]) || []).map(c => ({ h: c.h, share: c.share }));
+  paletteView({ img: phURL(rec), pool, from: rec.from || "Your photo", title: rec.title || "", at: rec.at, photoId: id });
 }
 // renaming (ROADMAP.md §17 job #2): the title is tappable on the photo's own page (js/studio.js's paletteView)
 // and saves straight to IndexedDB, same record, so it shows on the shelf next time too.
@@ -108,7 +113,8 @@ function phWireShelf(host) {
   phList().then(rows => {
     if (!host.isConnected) return;
     if (!rows.length) { host.innerHTML = `<p class="x-sub">A photo you upload or shoot with the camera lands here, with its palette ready next time.</p>`; return; }
-    host.innerHTML = rows.map(r => `<button class="st-ph" data-ph="${r.id}" style="--c:${(r.pals[6] || r.pals[3] || [{ h: "#3A3732" }])[0].h}">
+    const dom = r => (r.pool || r.pals && (r.pals[6] || r.pals[3]) || [{ h: "#3A3732" }]).reduce((a, b) => (b.share || 0) > (a.share || 0) ? b : a).h;
+    host.innerHTML = rows.map(r => `<button class="st-ph" data-ph="${r.id}" style="--c:${dom(r)}">
       <img src="${phURL(r)}" alt="" loading="lazy"><small>${esc(r.title || fmtDay(r.at) || "")}</small></button>`).join("");
     host.querySelectorAll("[data-ph]").forEach(b => {
       let t = 0;

@@ -1146,22 +1146,53 @@ scenario("studio", "camera screen fails gracefully with no camera", async t => {
   await t.waitFor('.room-sheet[data-room="studio"], .screen.studio', 6000, "Studio after Back");
 });
 
-scenario("studio", "photo palette: controls work and a chip opens its page", async t => {
+scenario("studio", "photo palette: mode chips, slider and a chip opens its page", async t => {
   await t.open("#shot=studiopv", { settle: 900 });
-  await t.waitFor("i[data-swatch]", 8000, "the photo palette chips");
-  const n0 = t.$$("i[data-swatch]").length;
-  const btns = t.$$("button[data-n]");
-  const other = btns.find(b => !b.classList.contains("on"));
-  if (other) { await t.click(other, { wait: 400 }); }
-  for (const b of t.$$("button[data-look]").filter(b => !b.classList.contains("on"))) await t.click(b, { wait: 300 });
-  const pct = t.$("button[data-pct]"); if (pct) await t.click(pct, { wait: 300 });
-  t.expect(t.$$("i[data-swatch]").length >= 3, `only ${t.$$("i[data-swatch]").length} chips after changing the controls (was ${n0})`);
-  const chip = t.$$("i[data-swatch]").find(e => e.getBoundingClientRect().width > 0);
+  await t.waitFor("[data-pvorder] button", 8000, "the photo's palette-type chips");
+  const n0 = t.$$(".gl-strip [data-swatch]").length;
+  t.expect(t.$$("[data-pvorder] button").length >= 8, `only ${t.$$("[data-pvorder] button").length} palette types on a photo (the painting page has up to 14)`);
+  const other = t.$$("[data-pvorder] button").find(b => !b.classList.contains("on"));
+  if (other) await t.click(other, { force: true, wait: 400 });
+  const slide = t.$("[data-pvk]");
+  if (slide && !t.$("[data-pvslide]").hidden) { slide.value = slide.max; slide.dispatchEvent(new t.w.Event("input", { bubbles: true })); await t.sleep(300); }
+  t.expect(t.$$(".gl-strip [data-swatch]").length >= 3, `only ${t.$$(".gl-strip [data-swatch]").length} chips after changing the controls (was ${n0})`);
+  const chip = t.$$(".gl-strip [data-swatch]").find(e => e.getBoundingClientRect().width > 0);
   await t.click(chip, { force: true, wait: 400 });
   await t.waitFor(".cp-page", 8000, "a color page after tapping a photo-palette chip");
   await H.back(t);
   t.expect(!t.$(".cp-page"), "Back left the color page open");
   t.expect(t.$("#app").innerText.length > 60, "Back from the color page landed on an empty screen");
+});
+
+// A photo gets the painting page's whole palette engine (David, 2026-10-09): mode chips, the How-many slider,
+// On the photo (Markers/Highlight, always readable since it's the visitor's own canvas), the full named list,
+// Save, and Edit (remove/replace/reorder/nudge, with Undo).
+scenario("studio", "photo palette: On the photo markers/highlight, the named list, Save, and Edit with Undo", async t => {
+  await t.open("#shot=studiopv", { settle: 900 });
+  await t.waitFor("[data-pvrows] .pal-name", 8000, "the photo's named palette rows");
+  t.expect(t.$$("[data-pvrows] .pal-name b").every(b => b.textContent.trim().length), "a named row has no name");
+  await t.click("[data-pvw='mark']", { force: true, wait: 400 });
+  await t.waitFor(() => t.$$("[data-pvmks] .gl-mk").length > 0, 6000, "numbered markers on the photo after choosing Markers");
+  await t.click("[data-pvw='lit']", { force: true, wait: 400 });
+  await t.waitFor(() => t.$(".gl-lit-cv").classList.contains("on"), 6000, "the highlight canvas to turn on");
+  await t.click("[data-pvw='off']", { force: true, wait: 300 });
+  const n0 = t.$$(".gl-strip .pal").length;
+  await t.click("[data-pvedit]", { force: true, wait: 300 });
+  t.expect(t.$$(".gl-strip .pv-rm").length === n0, "Edit did not show a remove (x) on every chip");
+  // Edit mode drops data-swatch from the chip/row (js/swatch.js's document-level capturing click listener would
+  // otherwise beat js/studio.js's own handler to the tap and open a color page instead of removing the color)
+  t.expect(!t.$(".gl-strip .pal[data-swatch]"), "a chip still carries data-swatch while editing");
+  await t.click(t.$(".gl-strip .pv-rm"), { force: true, wait: 400 });
+  t.expect(t.$$(".gl-strip .pal").length === n0 - 1, "removing a chip did not drop the count by one");
+  const undo = t.$(".toast button");
+  t.expect(undo, "no Undo action after removing a color");
+  await t.click(undo, { force: true, wait: 400 });
+  t.expect(t.$$(".gl-strip .pal").length === n0, "Undo did not restore the removed color");
+  await t.click("[data-pvedit]", { force: true, wait: 300 });
+  const saved0 = (t.ev("S.palettes ? S.palettes.length : 0")) || 0;
+  await t.click("[data-pvsave]", { force: true, wait: 400 });
+  const saved1 = (t.ev("S.palettes ? S.palettes.length : 0")) || 0;
+  t.expect(saved1 === saved0 + 1, `Save palette did not add to S.palettes (${saved0} -> ${saved1})`);
 });
 
 // ---- L13 Studio: Name any color, the Isolator, the Export sheet, Closest in the archive ----
