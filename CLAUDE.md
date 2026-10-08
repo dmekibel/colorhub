@@ -14,6 +14,22 @@ What that means in practice (the default, not something David should have to ask
 - **Grounded and honest.** Classical, sourced depth for those who want it (the Read side). Playful interaction for those who don't (the Explore side). No hype, no myths, no fake progress.
 - **Think like the most obsessive color nerd and the best museum curator at once,** then design it like Apple. When planning any feature, first ask: "what is every piece of color information we could derive or connect here?" List it all, then choose what to show.
 
+## The craft bar (David, 2026-10-08: "avoid anything that feels cheap and vibe-coded")
+Nothing ships that feels basic, thin or unthought. Every game, screen and feature is thought through to its logical conclusion, and still feels clean and calm. It doesn't pile on features.
+- **Every state is designed:** first time (taught by doing, no walls of text), normal, empty, loading, error, right, wrong, streak, level up, mastery, the end of a session, and coming back tomorrow.
+- **Every action gets feedback:** the visual, a haptic and the words, with anticipation → impact → settle. Never silent; never wiggly.
+- **Games have depth:**
+  - a real skill to master;
+  - a difficulty curve that breathes;
+  - variety that unlocks over time;
+  - meaningful choices and fair, solvable rounds;
+  - a reason to replay (bests, stars, a daily board);
+  - mastery you can see (the eye profile, honest numbers);
+  - and a connection to the rest of the app (the Learner Model, color pages, the map).
+- **Details:** real copy (no placeholders, no emoji squares, no shouting mono labels); numbers formatted; spacing and type from DESIGN-SYSTEM; works at 320 px and with very light or very dark colors.
+- **Benchmark:** would this hold up next to Duolingo, I Love Hue, Wordle, Monument Valley and Apple Fitness? If a screen feels like a prototype, it isn't done.
+- **Process:** lanes with UI get a fresh-context craft critique (design/CRAFT-RUBRIC.md) before merge, and they fix what it finds.
+
 ## The four goals
 1. **Learn color words.** More color names lets you notice more colors. This is the goal of the learning/flashcard part only.
 2. **Train artists to see.** An eye-training gym modeled on ear-training apps for musicians, plus a paint-mixing simulator.
