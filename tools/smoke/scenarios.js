@@ -279,7 +279,7 @@ scenario("train", "Odd one out: tap tiles through a whole round", async t => {
 });
 
 // ================================================================== EXPLORE
-for (const [part, expect] of [["all", ".x-feed .pin, .x-feed [data-pin]"], ["art", ".art-bubbles"], ["ideas", ".x-feed .pin, .x-feed [data-pin]"], ["world", "#world *"]]) {
+for (const [part, expect] of [["all", ".x-feed .pin, .x-feed [data-pin]"], ["art", ".xb-pick"], ["ideas", ".x-feed .pin, .x-feed [data-pin]"], ["world", "#world *"]]) {
   scenario("explore", `${part} cover opens and goes back`, async t => {
     await t.open("#shot=explore:all", { settle: 600 });
     const cover = await t.waitFor(`.xp-cover[data-part="${part}"]`, 8000, `the ${part} cover`);
@@ -303,16 +303,42 @@ for (const [part, expect] of [["all", ".x-feed .pin, .x-feed [data-pin]"], ["art
   });
 }
 
-scenario("explore", "Art with a color shows pins", async t => {
+scenario("explore", "Art with a color shows tiles", async t => {
   await t.open("#shot=explore:art:Denim", { settle: 600 });
   await t.waitFor(".art-band", 8000, "the Art screen");
-  t.expect(/denim/i.test(t.text(".art-band .p-dek")), `Art's line says "${t.text(".art-band .p-dek")}"`);
-  const pins = await t.waitFor(() => { const p = t.$$(".art-feed .pin"); return p.length >= 6 && p; }, 25000, "painting pins in the Art feed");
-  t.notes.push(`${pins.length} pins`);
-  const gi = t.$(".art-feed [data-gi]");
-  t.expect(gi, "no painting pin to open");
-  await t.click(gi, { force: true, wait: 600 });
-  await t.waitFor(() => t.$(".gl-page, .cp-page, .article") && !t.$(".art-feed"), 12000, "a painting page after tapping a pin");
+  await t.waitFor(() => /denim/i.test(t.text(".art-band .p-dek")), 15000, "Art's line to name denim");
+  const tiles = await t.waitFor(() => { const p = t.$$(".xb-body .xb-t"); return p.length >= 6 && p; }, 25000, "painting tiles in the Art grid");
+  t.notes.push(`${tiles.length} tiles`);
+  await t.click(tiles[0], { force: true, wait: 600 });
+  await t.waitFor(() => t.$(".gl-page") && !t.$(".xb-screen"), 12000, "a painting page after tapping a tile");
+  await t.click(".gl-page [data-back]", { wait: 600 });
+  await t.waitFor(() => t.$(".xb-screen") && /denim/i.test(t.text(".xb-crumbs")), 12000, "Art again, still on denim, after Back");
+});
+
+// Explore 2.0 (js/browse-ui.js): a facet sheet narrows the count, the crumb's x and Back unwind, every view draws
+scenario("explore", "Art facets, views and Back", async t => {
+  await t.open("#shot=explore:art", { settle: 600 });
+  await t.waitFor(".xb-screen [data-xbn]", 25000, "the Art count");
+  const count = () => H.num(t.text("[data-xbn]"));
+  const all = count();
+  t.expect(all > 20000, `Art starts with ${all} paintings`);
+  await t.click('.xb-facets [data-xbfacet="mood"]', { wait: 500 });
+  await t.waitFor(".xb-sheet", 4000, "the Mood sheet");
+  await t.click('.xb-sheet [data-xbopt="key"][data-v="2"]', { wait: 400 });
+  const light = count();
+  t.expect(light > 0 && light < all, `Light key: ${light} of ${all}`);
+  await t.click(".xb-sheet [data-xbshgo]", { wait: 500 });
+  t.expect(/light key/i.test(t.text(".xb-crumbs")), `the breadcrumb says "${t.text(".xb-crumbs")}"`);
+  for (const v of ["river", "painters", "wall", "grid"]) {
+    await t.click(`[data-xbview="${v}"]`, { wait: 600 });
+    await t.waitFor({ river: ".xb-river, .xb-empty", painters: ".xb-pr", wall: ".xb-wall canvas", grid: ".xb-t" }[v], 8000, `the ${v} view`);
+  }
+  await t.click('[data-xbx="key"]', { wait: 500 });
+  t.expect(count() === all, `removing the crumb brings back all ${all} (now ${count()})`);
+  await t.click(".art-top [data-back]", { wait: 500 });
+  t.expect(count() === light, `Back unwinds to the light-key filter (${count()})`);
+  await t.click(".art-top [data-back]", { wait: 500 });
+  t.expect(count() === all, `Back again unwinds to everything (${count()})`);
 });
 
 // ================================================================== COLOR PAGES
