@@ -852,20 +852,35 @@ def build_rows():
     return rows, app
 
 
+# Same painter, plainly different spelling in different sources' attribution fields, which merge_artists()'s own rules
+# cannot see. Hand-picked, never automatic: found by scanning the built corpus for one artist name inside another
+# (both with real painting counts) and confirming each pair by hand. Substring matching alone has false positives:
+# Anton Raphael Mengs is not Raphael. Keys are compared with artist_key(); the value is the name the corpus keeps.
+ARTIST_ALIAS = {
+    "Rembrandt": "Rembrandt van Rijn",                       # Commons (Wikidata's short label)
+    "Sir Anthony van Dyck": "Anthony van Dyck",              # NGA
+    "Auguste Renoir": "Pierre-Auguste Renoir",               # NGA, the Met
+    "David Teniers": "David Teniers the Younger",            # CMA, Rijksmuseum, SMK
+    "Lucas Cranach": "Lucas Cranach the Elder",              # CMA, Rijksmuseum, SMK
+}
+_ALIAS_KEY = {artist_key(k): v for k, v in ARTIST_ALIAS.items()}
+
+
 def merge_artists(rows):
     """One display name per artist across museums ("Paul Cezanne" / "Paul Cézanne"; the Met's "Rembrandt (Rembrandt
     van Rijn)" joins "Rembrandt van Rijn" when another museum writes it that way): the most used spelling, preferring
-    a name without brackets, ties to the one with diacritics."""
+    a name without brackets, ties to the one with diacritics. ARTIST_ALIAS names are renamed first."""
     spell = defaultdict(Counter)
     for r in rows:
         if r["a"]:
+            r["a"] = _ALIAS_KEY.get(artist_key(r["a"]), r["a"])
             spell[artist_key(r["a"])][r["a"]] += 1
     alias = {}
     for k, c in spell.items():
         m = re.match(r"^(.*?)\s*\((.+)\)\s*$", c.most_common(1)[0][0])
         if m:
-            for part in (m.group(2), m.group(1)):
-                pk = artist_key(part)
+            for part in (m.group(2), m.group(1)):  # the Rijksmuseum's "Lucas Cranach (I)" reaches the Elder this way
+                pk = artist_key(_ALIAS_KEY.get(artist_key(part), part))
                 if pk != k and pk in spell:
                     alias[k] = pk
                     break
