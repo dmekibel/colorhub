@@ -141,11 +141,16 @@ function tlBackUnder() {
   xStep(XSTACK[XSTACK.length - 1]);
   return true;
 }
-// the trail kept behind the map (csOnMap): its newest page, for the lit-set pill's back arrow
+// the page that lit the map's set (csOnMap), for the lit-set bar's ‹ and its picture. The trail behind it rides on the
+// lit set (honey.js HONEY_HL.from), so after Learn these or Find them come back to a map whose own trail restarted,
+// ‹ still lands on that page with its scroll kept. A set lit on the map itself (search) has no page to go back to.
 function tlMapBack() {
-  const tok = XSTACK[XSTACK.length - 1]; if (!tok) return null;
-  const m = TL_META.get(tok);
-  return { title: (m && m.title) || "", go: () => tlJump(XSTACK.length - 1) };
+  const lit = typeof HONEY_HL !== "undefined" && HONEY_HL;
+  const from = lit ? lit.from : (XSTACK.length ? { stack: XSTACK, root: X_ROOT } : null);
+  const tok = from && from.stack[from.stack.length - 1]; if (!tok) return null;
+  const m = TL_META.get(tok) || {};
+  return { title: m.title || "", img: m.img || "", c: m.c || "", sw: m.sw || [],
+    go: () => { XSTACK = from.stack.slice(); X_ROOT = from.root; tlJump(XSTACK.length - 1); } };
 }
 function tlJump(i) {
   if (i < 0 || i >= XSTACK.length) return;

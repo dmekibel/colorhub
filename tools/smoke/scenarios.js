@@ -1405,3 +1405,42 @@ scenario("mapstudy", "Name it, Neighborhood and Wander all play; Choose shows bo
   t.expect(t.$("[data-test]"), "no test-out under Choose");
   await t.click('[data-dm="you"]', { wait: 300 });
 });
+
+// ================================================================== LANE F: the lit set is the map's subject (js/honey.js honeyLitBar)
+scenario("map-subject", "a painting on the map: the bar's Learn these, Find them, ‹ back with the scroll kept, ✕", async t => {
+  await TRL.open(t, "#/painting/milkmaid");
+  const b = await t.waitFor("[data-cs=map]", 15000, "the On the map button on The Milkmaid");
+  t.w.scrollTo(0, 400); await t.sleep(200);
+  const y0 = Math.round(t.w.scrollY);
+  await t.click(b, { force: true, wait: 900 });
+  await t.waitFor(() => /The Milkmaid/.test(t.text(".cs-hl-bar")) && /as photographed/.test(t.text(".cs-hl-bar")), 15000, "the Milkmaid bar on the map");
+  t.expect(t.$(".cs-hl-bar .cs-hl-back"), "the bar has no ‹ back to the painting");
+  // Learn these: the Learn sheet on exactly the lit set, with its source
+  await t.click("[data-hl-learn]", { wait: 700 });
+  await t.waitFor(".ls-sheet", 6000, "the Learn sheet from the bar");
+  t.expect(/Milkmaid/.test(t.text("[data-qtitle]")), `the sheet is about ${t.text("[data-qtitle]")}`);
+  await H.keys(t, "Escape"); await t.sleep(500);
+  // Find them: Study the map's Find it on that set, straight into round 1
+  await t.click("[data-hl-find]", { wait: 900 });
+  await t.waitFor(() => t.ev("MS_DEBUG.P && MS_DEBUG.P.kind"), 8000, "a Find it round from the bar");
+  t.expect(t.ev("S.mapstudy.spec.set") === "custom" && t.ev("MS_DEBUG.P.kind") === "find", "Find them didn't study the lit set");
+  await t.click(".ms-x", { wait: 900 });
+  // back on the map, still lit, and ‹ still lands on the painting with its scroll
+  const back = await t.waitFor(".cs-hl-bar .cs-hl-back", 12000, "the bar and its ‹ after Find them");
+  await t.click(back, { wait: 900 });
+  await t.waitFor(() => /^#\/painting\/milkmaid/.test(TRL.hash(t)) && !t.$(".screen.waiting"), 12000, `back on the painting (on ${TRL.hash(t)})`);
+  await t.waitFor(() => Math.abs(t.w.scrollY - y0) < 40, 4000, `the scroll came back (${Math.round(t.w.scrollY)}, was ${y0})`);
+  // ✕ clears the set: your own view comes back
+  t.ev("csOnMap(hmPaintingSet(graph().nodes.get('painting-milkmaid')))");
+  await t.waitFor(".cs-hl-bar .cs-hl-x", 12000, "the bar again");
+  await t.click(".cs-hl-bar .cs-hl-x", { wait: 900 });
+  t.expect(!t.$(".cs-hl-bar") && !t.ev("HONEY_HL"), "✕ left the set lit");
+});
+scenario("map-subject", "the Study corner on a fresh map never studies Grey", async t => {
+  await TRL.open(t, "#/home");
+  await t.waitFor(() => /\d/.test(t.text(".hm-title small")) && !/Loading/.test(t.text(".hm-title small")), 12000, "the map to fill");
+  await t.click("[data-pr-study]", { wait: 700 });
+  await t.waitFor(".ls-sheet", 6000, "the Learn sheet from the Study corner");
+  const names = t.text("[data-names]");
+  t.expect(names && !/\bgr[ae]y\b/i.test(names.split(",")[0]) && !/^Learn Grey/.test(t.text("[data-qtitle]")), `the corner studied grey: ${t.text("[data-qtitle]")} | ${names}`);
+});

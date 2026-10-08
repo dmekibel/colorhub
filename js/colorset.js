@@ -5,7 +5,8 @@
 // (Not to be confused with js/colorsets.js, the color explorer's filter presets.)
 //
 //   colorSet({ kind, id, title, colors: [{ h, n?, share? }], src }) -> { kind, id, key, title, colors, src }
-//   csOnMap(set)        Home, with the set lit up as a constellation (honeyHighlight in js/honey.js)
+//   csOnMap(set)        Home, with the set lit up as the map's subject (honeyHighlight in js/honey.js): a bar with
+//                       ‹ back to this page, Learn these, Find them (Study the map) and ✕
 //   csLearn(set)        an instant deck of the set (prInstantDeck, the Practice lane) or Learn it on its top color
 //   csPlay(set, o)      a game board from the set (playSet, the Train lane) or Odd one out seeded with its colors
 //   csCompare(a, b)     a side-by-side sheet: both palettes, close matches, lighter / stronger / warmer
@@ -36,9 +37,11 @@ const csName = c => c.n || (typeof nameOf === "function" ? nameOf(c.h).text : ""
 // ---------- the verbs ----------
 function csOnMap(set) {
   set = csGet(set); if (!set || !set.colors.length) return;
-  if (typeof honeyHighlight === "function") honeyHighlight(set.colors.map(c => c.h), { title: set.title });
-  // the page that lit it stays on the trail behind the map (js/trail.js tlNote), so the lit set can return to its source
-  if (typeof XSTACK !== "undefined" && XSTACK.length && !document.querySelector(".screen.hm")) TL_MAPKEEP = { stack: XSTACK.slice(), root: X_ROOT, t: performance.now() };
+  // the page that lit it stays on the trail behind the map (js/trail.js tlNote), so the lit set can return to its
+  // source; the set carries that trail too (honey.js HONEY_HL.from), so ‹ survives a lesson or a round of Find them
+  const from = typeof XSTACK !== "undefined" && XSTACK.length && !document.querySelector(".screen.hm") ? { stack: XSTACK.slice(), root: X_ROOT } : null;
+  if (typeof honeyHighlight === "function") honeyHighlight(set.colors.map(c => c.h), { title: set.title, set, from });
+  if (from) TL_MAPKEEP = { ...from, t: performance.now() };
   if (typeof hmHome === "function") hmHome(); else go("learn");
 }
 // the set's colors, biggest share first, each as its nearest taught color; the first that isn't yours yet

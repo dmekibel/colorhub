@@ -150,6 +150,27 @@
 .room-floor-snap i{position:absolute;inset:0;top:0;width:auto;height:auto;transform:none;opacity:1;background:rgba(14,13,11,.58)}
 /* L18: a lit constellation pill sits above the favorites heart on Home */
 .hm .cs-hl-pill{bottom:calc(var(--bottom) + 140px)}
+/* lane F: the lit set is the map's subject. A solid bar (js/honey.js honeyLitBar): ‹ · its source · ✕, then Learn these and Find them */
+.cs-hl-pill.cs-hl-bar{display:block;left:16px;right:16px;transform:none;max-width:420px;margin:0 auto;min-height:0;padding:8px 8px 10px;border-radius:24px;font:inherit;
+  animation:csHlIn .32s var(--ease,ease-out) both}
+@keyframes csHlIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.cs-hl-head{display:flex;align-items:center;gap:8px;min-height:48px}
+.cs-hl-bar .cs-hl-back{flex:none;width:40px;height:44px;margin:0 -6px 0 -2px;padding:0;min-width:0;display:grid;place-items:center;font:400 32px/1 var(--serif);color:inherit;border-radius:50%}
+.cs-hl-th{flex:none;width:44px;height:44px;border-radius:10px;overflow:hidden;background:rgba(0,0,0,.08)}
+.cs-hl-head .cs-hl-th:first-child{margin-left:4px}
+.cs-hl-th img{display:block;width:100%;height:100%;object-fit:cover}
+.cs-hl-sw{display:grid;grid-template-columns:1fr 1fr}
+.cs-hl-sw i:only-child{grid-column:1/-1}
+.cs-hl-t{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.cs-hl-t b{font:400 20px/1.1 var(--serif);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cs-hl-t small{font:400 12.5px/1.2 var(--sans);opacity:.64;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cs-hl-sep{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}   /* read aloud and copied as one line: "The Milkmaid · 7 named colors" */
+.cs-hl-x{flex:none;width:44px;height:44px;display:grid;place-items:center;color:inherit;border-radius:50%}
+.cs-hl-x svg{width:18px;height:18px}
+.cs-hl-acts{display:flex;gap:8px;margin-top:8px}
+.cs-hl-act{flex:1;min-height:46px;display:flex;align-items:center;justify-content:center;padding:0 12px;border-radius:var(--r-pill,999px);font:500 16px/1 var(--sans);color:inherit;box-shadow:inset 0 0 0 1px rgba(20,19,17,.22);transition:transform .12s ease-out}
+.cs-hl-act.on{background:var(--paper-ink);color:var(--paper);box-shadow:none}
+.cs-hl-act:active,.cs-hl-x:active,.cs-hl-bar .cs-hl-back:active{transform:scale(.96)}
 .hm-look-spiral{background:radial-gradient(circle at 50% 50%,#E7C35C 0 18%,#2A2822 19% 22%,#4C9F70 23% 44%,#2A2822 45% 48%,#4C7FD1 49% 72%,#2A2822 73% 76%,#8C5AC2 77%)}
 /* L18: every Home corner fades together while you drag, and returns together (David: only the Study corner stayed) */
 .hm.chrome-hide .corner{opacity:0;pointer-events:none}

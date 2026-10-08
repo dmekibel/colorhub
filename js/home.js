@@ -272,10 +272,11 @@ function hmHome() {
     }
     // L18 H4: a fresh constellation (a painting, a painter, a decade...) lights up among every name, so each of its
     // colors finds its own bubble instead of all collapsing onto the few a small stage holds. Not saved; clearing the
-    // constellation (its pill) brings your own view back.
-    if (typeof HONEY_HL !== "undefined" && HONEY_HL && HONEY_HL.fresh && !every) {
+    // constellation (its bar's ✕) brings your own view back. It stays among every name while it's lit, so coming
+    // back from Learn these, Find them or a color page finds the same constellation, not one collapsed onto a stage.
+    if (typeof HONEY_HL !== "undefined" && HONEY_HL && (HONEY_HL.fresh || HONEY_HL.every) && !every) {
       if (!LONG_NAMES || !CORE_NAMES) { await Promise.all([loadCoreNames(), loadLongNames()]); if (!el.isConnected || g !== gen) return; }
-      items = hmEveryNameItems(); hlAll = true;
+      items = hmEveryNameItems(); hlAll = true; HONEY_HL.every = true;
     } else if (!(typeof HONEY_HL !== "undefined" && HONEY_HL)) hlAll = false;
     if (!hlAll) items = items.filter(HM_KEEP[v.filter]);
     paintTitle();
@@ -344,6 +345,7 @@ function hmHome() {
     // every change applies at once and the panel stays open, so you can see what each control does
     sh.querySelectorAll("[data-src]").forEach(b => b.onclick = () => {
       applyView("src", b.dataset.src); sh.querySelectorAll("[data-src]").forEach(x => x.classList.toggle("on", x === b));
+      if (typeof HONEY_HL !== "undefined" && HONEY_HL) honeyHighlight(null);   // the view you chose becomes the map's subject
       // a new set always starts at All: a leftover Learned/New filter made every set look stuck at a small count
       if (S.hm.filter !== "all") { applyView("filter", "all"); sh.querySelectorAll('.hm-seg[data-key="filter"] button').forEach(x => x.classList.toggle("on", x.dataset.val === "all")); }
       render(true).then(paintCount);
@@ -447,7 +449,7 @@ function hmHome() {
     viewBtn.onclick = () => { if (longFired) { longFired = false; return; } chooser("show"); };
     const favBtn = $("#hmFav"); if (favBtn) favBtn.onclick = () => { if (typeof hmDismissHint === "function") hmDismissHint(); buzz(6); fvPickStart(el, ctrl); };   // js/favs.js: Pick favorites
   }
-  { const study = $("[data-pr-study]"); if (study) study.onclick = () => { const mid = ctrl && ctrl.current(); prQuick({ seed: mid ? { n: mid.n, h: mid.h } : null, items: items.slice(0, 400).map(x => x.h), label: hmViewLabel(), src: "map", source: mid ? "alike" : "these" }); }; }   // js/practice.js
+  { const study = $("[data-pr-study]"); if (study) study.onclick = () => { buzz(6); hmStudyCorner(ctrl, items); }; }   // js/practice.js
   // (the swipe-up-from-the-bottom shortcut to Learn is gone: David, 2026-10-08, a scroll near the bottom kept landing
   // in Learn. The rooms button is the way in.)
   // L18 B3: the mirror gesture, a pull down from the top of Home opens search (View's magnifier stays the second way in)
@@ -615,6 +617,37 @@ async function l18Resolve(q) {
   const short = p.n.split(" ").slice(-1)[0], n = A.n || p.k;
   const title = `${short} · ${n.toLocaleString()} painting${n === 1 ? "" : "s"} · as photographed${n < 15 ? " · few paintings" : ""}`;
   return { set: colorSet({ kind: "painter", id: p.slug, title, colors: hs.map(h => ({ h })) }), hint: `${l18Sw(hs)}<span>Light up <b>${esc(p.n)}</b>'s colors</span>` };
+}
+
+// ---------- the Study corner: "Learn these" means what you're looking at (PLAN.md lane F; home-map-nav.md A6) ----------
+// The lit set when one is lit; else the middle bubble and its look-alikes, when it's a name you can still learn; else
+// next door to what you know (learner.js edgeOfMap); else the names you can't name yet nearest the middle. Never seeded
+// from a basic: Grey sits in the middle of a fresh map, and ten greys was a newcomer's first lesson.
+function hmStudyCorner(ctrl, items) {
+  if (typeof HONEY_HL !== "undefined" && HONEY_HL && typeof honeyLearnLit === "function") return honeyLearnLit();
+  const mid = ctrl && ctrl.current();
+  const basic = x => { const a = x && x.n && BYNAME.get(String(x.n).toLowerCase()); return !!(a && a.basic); };
+  const unknown = x => typeof knowState !== "function" || knowState({ n: x.n, h: x.h }) !== "yours";
+  if (mid && mid.n && !basic(mid) && unknown(mid)) return prQuick({ seed: { n: mid.n, h: mid.h }, src: "map", source: "alike" });
+  const edge = typeof edgeOfMap === "function" ? edgeOfMap(10) : [];
+  if (edge.length >= 3) return prQuick({ items: edge.map(x => ({ n: x.n, h: x.h })), label: "Next door to what you know", src: "map", source: "these" });
+  // nearest on the map itself (the bubbles you see around the middle); by color distance when the layout can't say.
+  // Around a basic in the middle (Grey, Black, White...), only colors with some hue, so it isn't more of the same.
+  const hueOnly = mid && basic(mid), sp = ctrl && ctrl.studyPoints && ctrl.studyPoints();
+  let dist = null;
+  if (sp && mid) {
+    const c = sp.pts.find(p => p.n === mid.n);
+    if (c) { dist = new Map(); sp.pts.forEach(p => { const d = Math.hypot(p.x - c.x, p.y - c.y); if (!dist.has(p.n) || d < dist.get(p.n)) dist.set(p.n, d); }); }
+  }
+  const m = mid && mid.h ? lab(mid.h) : null;
+  const near = [];
+  for (const { x } of items.filter(x => x && x.n && x.h && (!hueOnly || lch(x.h)[1] >= 12))
+    .map(x => ({ x, d: dist ? (dist.has(x.n) ? dist.get(x.n) : Infinity) : m ? de2000(m, lab(x.h)) : 0 })).sort((a, b) => a.d - b.d)) {
+    if (!basic(x) && unknown(x)) near.push(x);
+    if (near.length >= 10) break;
+  }
+  if (near.length >= 3) return prQuick({ items: near.map(x => ({ n: x.n, h: x.h })), label: mid && !hueOnly ? `Near ${mid.n.toLowerCase()}` : "Near the middle", src: "map", source: "these" });
+  toast("You can name every color here. Grow the map in View.");
 }
 
 // ---------- L18 H4: any painting on the map. Its measured colors, merged by name (shares added), biggest first, lit as

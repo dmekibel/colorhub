@@ -531,14 +531,81 @@ function honeyStudyMarks(ctx, drawn, marks, t) {
   ctx.restore();
 }
 // ---- a highlighted constellation (js/colorset.js csOnMap): any set of hexes lights up on the honeycomb home ----
-// honeyHighlight(hexes, { title }) dims every bubble but the nearest one to each hex; honeyHighlight(null) clears it.
-// Only the home honeycomb (inside .hm) listens; a pill at the bottom names the set and clears it on tap.
+// honeyHighlight(hexes, { title, set, from }) dims every bubble but the nearest one to each hex; honeyHighlight(null)
+// clears it. Only the home honeycomb (inside .hm) listens. The lit set becomes the map's subject (PLAN.md Wave 1b,
+// lane F): a solid bar at the bottom names it and its source, with ‹ back to the source, Learn these, Find them, ✕.
+//   set:  the ColorSet it came from (names, shares, kind), so Learn these and Find them work on exactly these colors
+//   from: the trail behind the page that lit it ({ stack, root }), so ‹ still finds that page after a lesson or a
+//         round of Study the map comes back to a map whose own trail restarted (js/trail.js tlMapBack)
 let HONEY_HL = null, HONEY_HL_REV = 0;
 const HONEY_LIVE = new Set();
 function honeyHighlight(hexes, o = {}) {
   const hs = (hexes || []).map(h => String(h).toUpperCase()).filter(h => /^#[0-9A-F]{6}$/.test(h));
-  HONEY_HL = hs.length ? { hexes: hs, title: o.title || "", rev: ++HONEY_HL_REV, fresh: true } : null;
+  HONEY_HL = hs.length ? { hexes: hs, title: o.title || "", set: o.set || null, from: o.from || null, rev: ++HONEY_HL_REV, fresh: true } : null;
   HONEY_LIVE.forEach(f => { if (f() === false) HONEY_LIVE.delete(f); });
+}
+// the lit set's colors as { h, n?, share? }, biggest share first (the set's own order when it has no shares)
+function honeyLitColors() {
+  if (!HONEY_HL) return [];
+  const cs = HONEY_HL.set && HONEY_HL.set.colors && HONEY_HL.set.colors.length ? HONEY_HL.set.colors : HONEY_HL.hexes.map(h => ({ h }));
+  return cs.some(c => c.share != null) ? cs.slice().sort((a, b) => (b.share || 0) - (a.share || 0)) : cs.slice();
+}
+// "The Starry Night · 6 named colors · as photographed" -> a title and a subline. A bare title gets its count, and a
+// painting, painter or decade says "as photographed" once (the colors are photographs of varnished paint).
+const HONEY_PHOTO_KINDS = ["painting", "painter", "decade", "movement", "century", "country", "museum"];
+function honeyLitLabel() {
+  if (!HONEY_HL) return { title: "", sub: "" };
+  const parts = String(HONEY_HL.title || "").split(" · ").map(x => x.trim()).filter(Boolean), n = honeyLitColors().length;
+  const kind = HONEY_HL.set && HONEY_HL.set.kind;
+  let sub = parts.slice(1).join(" · ");
+  if (!sub) sub = `${n} color${n === 1 ? "" : "s"}${HONEY_PHOTO_KINDS.includes(kind) ? " · as photographed" : ""}`;
+  return { title: parts[0] || "Your set", sub };
+}
+// Learn these: the Learn sheet (js/learnset.js) on exactly the lit colors, with their source; it comes back to the map
+function honeyLearnLit() {
+  if (!HONEY_HL) return;
+  const cs = honeyLitColors(), { title } = honeyLitLabel(), src = (HONEY_HL.set && HONEY_HL.set.kind) || "map";
+  HONEY_HL.fresh = true;   // the map it comes back to frames the set again (a lesson's own honeycomb moves the shared pan)
+  if (typeof lsOpen === "function") return lsOpen({ items: cs.map(c => c.h), label: title, src, back: "#/home" });
+  if (typeof prQuick === "function") return prQuick({ items: cs.map(c => c.h), label: title, src, source: "these" });
+}
+// Find them: Study the map's Find it (js/mapstudy.js) on exactly the lit colors, straight into the first round
+const HONEY_FIND_MIN = 3;
+function honeyFindLit() {
+  if (!HONEY_HL || typeof msOpen !== "function") return;
+  const cs = honeyLitColors(), { title } = honeyLitLabel();
+  HONEY_HL.fresh = true;   // Study the map's honeycomb moves the shared pan; coming back frames the set again
+  msOpen({ set: { title, colors: cs }, mode: "find", from: "home", autostart: true });
+}
+// the bar itself (Home's honeycomb asks for one per lit set). Two rows: ‹, the source's picture, its title and
+// subline, ✕; then the two verbs. ‹ only shows while the page that lit the set can still be reached.
+function honeyLitBar() {
+  const bar = document.createElement("div");
+  bar.className = "cs-hl-pill cs-hl-bar"; bar.setAttribute("role", "region");
+  const bk = typeof tlMapBack === "function" ? tlMapBack() : null, { title, sub } = honeyLitLabel(), cs = honeyLitColors();
+  bar.setAttribute("aria-label", `On the map: ${title}`);
+  const sw = (bk && bk.sw && bk.sw.length ? bk.sw : cs.map(c => c.h)).slice(0, 4);
+  const thumb = bk && bk.img ? `<span class="cs-hl-th"><img src="${esc(bk.img)}" alt="" loading="lazy"></span>`
+    : bk && bk.c ? `<span class="cs-hl-th" style="background:${esc(bk.c)}"></span>`
+    : `<span class="cs-hl-th cs-hl-sw">${sw.map(h => `<i style="background:${esc(h)}"></i>`).join("")}</span>`;
+  const canFind = typeof msOpen === "function" && cs.length >= HONEY_FIND_MIN;
+  bar.innerHTML = `<div class="cs-hl-head">
+      ${bk ? `<button class="cs-hl-back" aria-label="Back to ${esc(bk.title || title)}">‹</button>` : ""}
+      ${thumb}<span class="cs-hl-t"><b>${esc(title)}</b><i class="cs-hl-sep"> · </i><small>${esc(sub)}</small></span>
+      <button class="cs-hl-x" aria-label="Show every color again">${ICON.x}</button>
+    </div>
+    <div class="cs-hl-acts">
+      <button class="cs-hl-act on" data-hl-learn>Learn these</button>
+      ${canFind ? `<button class="cs-hl-act" data-hl-find>Find them</button>` : ""}
+    </div>`;
+  const on = (sel, f) => { const b = bar.querySelector(sel); if (b) b.onclick = e => { e.stopPropagation(); f(); }; };
+  on(".cs-hl-back", () => { buzz(6); honeyHighlight(null); bk.go(); });
+  on(".cs-hl-x", () => { buzz(4); honeyHighlight(null); });
+  on("[data-hl-learn]", () => { buzz(6); honeyLearnLit(); });
+  on("[data-hl-find]", () => { buzz(6); honeyFindLit(); });
+  // the bar is solid: a drag that starts on it never pans the map underneath
+  bar.addEventListener("pointerdown", e => e.stopPropagation());
+  return bar;
 }
 function honeycomb(host, opts = {}) {
   host.classList.add("hc");
@@ -1373,13 +1440,9 @@ function honeycomb(host, opts = {}) {
   }
   let hlPill = null;
   function hlShowPill() {
-    if (hlPill || !host.parentElement) return;
-    hlPill = document.createElement("button"); hlPill.className = "cs-hl-pill"; hlPill.setAttribute("aria-label", "Show every color again");
-    const bk = typeof tlMapBack === "function" ? tlMapBack() : null;   // the page that lit this set is still on the trail: the arrow goes back to it
-    hlPill.innerHTML = `${bk ? `<i class="cs-hl-back" role="button" aria-label="Back to ${esc(bk.title || "the page")}">\u2039</i>` : ""}<span>${esc(HONEY_HL.title || "Your set")}</span>${ICON.x}`;
-    const bb = hlPill.querySelector(".cs-hl-back");
-    if (bb) bb.onclick = e => { e.stopPropagation(); buzz(6); honeyHighlight(null); bk.go(); };
-    hlPill.onclick = e => { e.stopPropagation(); buzz(4); honeyHighlight(null); };
+    if (!host.parentElement || (hlPill && +hlPill.dataset.rev === HONEY_HL.rev)) return;
+    if (hlPill) hlPill.remove();   // a new set lit while the map is open (search lights a painter): its own bar
+    hlPill = honeyLitBar(); hlPill.dataset.rev = HONEY_HL.rev;
     host.parentElement.appendChild(hlPill);
   }
   if (hlOn) HONEY_LIVE.add(() => { if (dead) return false; hlMemo = null; draw(); return true; });
