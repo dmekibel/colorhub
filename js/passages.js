@@ -195,6 +195,7 @@ function archiveRows(c) {
   archWhen(() => requestAnimationFrame(() => {
     const box = document.getElementById(id); if (!box) return;
     box.innerHTML = inBooksRow(c) + (typeof inFilmsRow === "function" ? inFilmsRow(c) : "");
+    if (typeof lkRowInto === "function") lkRowInto(box, c);   // js/looks.js: "In looks"
   }));
   return `<div class="arch-rows" id="${id}"></div>`;
 }

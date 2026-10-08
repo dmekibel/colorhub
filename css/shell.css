@@ -1,14 +1,14 @@
 /* App shell: the quiet placeholder while the wiki loads (js/loader.js), the backup card and the
    "progress isn't saving" bar (js/core.js). Same museum rules: no boxes, hairlines, soft greys. */
 .waiting .wait-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:34px;align-items:start}
-.waiting .wait-grid i,.waiting .wait-hero,.waiting .wait-lines i{display:block;background:var(--lift);border-radius:2px;animation:waitPulse 1.6s ease-in-out infinite;animation-delay:calc(var(--k,0) * 90ms)}
+.waiting .wait-grid i,.waiting .wait-hero,.waiting .wait-lines i{display:block;background:var(--lift);border-radius:var(--r-1);animation:waitPulse 1.6s ease-in-out infinite;animation-delay:calc(var(--k,0) * 90ms)}
 .waiting .wait-grid i:nth-child(even){margin-top:24px}
 .waiting .wait-hero{height:38dvh;margin:6px calc(-1 * var(--g)) 26px;border-radius:0}
 .waiting .wait-lines{display:flex;flex-direction:column;gap:12px}
 .waiting .wait-lines i{height:14px}
 .waiting .wait-lines i:first-child{height:44px;width:70%;margin-bottom:10px}
 .waiting .wait-lines i:last-child{width:55%}
-.wait-note{margin-top:22px;color:var(--faint);font:500 10.5px/1.5 var(--mono);letter-spacing:.1em;text-transform:uppercase;opacity:0;animation:waitNote .3s ease .6s forwards}
+.wait-note{margin-top:22px;color:var(--faint);font:italic 400 14px/1.5 var(--serif);letter-spacing:0;text-transform:none;opacity:0;animation:waitNote .3s ease .6s forwards}
 @keyframes waitPulse{0%,100%{opacity:.55}50%{opacity:1}}
 @keyframes waitNote{to{opacity:1}}
 @media (prefers-reduced-motion:reduce){.waiting .wait-grid i,.waiting .wait-hero,.waiting .wait-lines i{animation:none}.wait-note{animation:none;opacity:1}}
