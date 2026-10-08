@@ -4,7 +4,7 @@
    and the safe areas belong to the shell (app.css / polish.css); this file only lays out the content and makes
    sure the last line clears the Rooms button. */
 
-.r2{--r2-gap:12px;width:100%;min-width:0;padding-bottom:calc(var(--bottom) + 56px + 16px + 48px) !important}
+.r2{--r2-gap:12px;width:100%;min-width:0;padding-bottom:var(--dock) !important}
 .r2 .room-head,.r2>.room-head{margin-bottom:var(--s4)}
 
 /* ---------------------------------------------------------------- shared: block heads, rails, text links */
@@ -30,68 +30,81 @@
 .r2-ic.sm{width:44px;height:44px;flex:none;border-radius:var(--r-1)}
 .r2-ic.sm svg{width:30px;height:30px;stroke-width:1.7}
 
-/* ---------------------------------------------------------------- Train: the games grid (first thing in the room) */
+/* ---------------------------------------------------------------- Train: today (todayPick's three parts, on top) */
+.r2-tdy{margin-top:var(--s2)}
+.r2-td-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--r2-gap)}
+.r2-td{display:flex;flex-direction:column;align-items:stretch;min-width:0;padding:0;background:none;border:0;color:var(--ink);text-align:left;cursor:pointer;
+  transition:transform var(--dur-0) ease-out;animation:r2Rise var(--grow) var(--ease-grow) both;animation-delay:calc(var(--k,0) * 22ms)}
+.r2-td:active{transform:scale(.97)}
+.r2-td-v{position:relative;display:grid;place-items:center;aspect-ratio:1;width:100%;border-radius:var(--r-2);overflow:hidden;background:var(--surface-2)}
+.r2-td b{margin-top:8px;font:400 18px/1.08 var(--serif);letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.r2-td em{margin-top:3px;font:italic 400 14px/1.2 var(--serif);color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.r2-td-pic{position:absolute;inset:0;background:var(--surface-3)}
+.r2-td-pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.r2-td-sw{position:absolute;inset:0;background:var(--c)}
+.r2-today-band{position:absolute;inset:0;display:flex}.r2-today-band i{flex:1;background:var(--c)}
+.r2-loading{animation:r2Pulse 1.6s ease-in-out infinite}
+@keyframes r2Pulse{50%{opacity:.55}}
+/* the color you haven't named yet: six empty guess rows (name it in six), never the color itself */
+.r2-td-q{display:flex;flex-direction:column;gap:5px;width:58%}
+.r2-td-q i{height:9px;border-radius:3px;border:1.5px solid color-mix(in srgb,var(--ink) 34%,transparent)}
+.r2-td-board{display:grid;place-items:center;width:78%;height:78%}
+.r2-td-board .hg-mini{max-width:100%;max-height:100%}
+/* done: a paper tick in the corner */
+.r2-tick{position:absolute;top:8px;right:8px;display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--paper);color:var(--paper-ink);
+  box-shadow:0 1px 4px rgba(0,0,0,.3)}
+.r2-tick svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------------------------------------------------------------- Train: the six games */
+.r2-gm{margin-top:var(--s6)}
 .r2-games{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s4) var(--r2-gap)}
-.r2-g{display:flex;flex-direction:column;align-items:stretch;min-width:0;padding:0;background:none;border:0;color:var(--ink);text-align:left;cursor:pointer;
-  transition:transform var(--dur-0) ease-out;animation:r2Rise var(--grow) var(--ease-grow) both;animation-delay:calc(min(var(--k,0),12) * 22ms)}
+.r2-g{position:relative;display:flex;flex-direction:column;align-items:stretch;min-width:0;padding:0;background:none;border:0;color:var(--ink);text-align:left;cursor:pointer;
+  transition:transform var(--dur-0) ease-out;animation:r2Rise var(--grow) var(--ease-grow) both;animation-delay:calc((3 + min(var(--k,0),12)) * 22ms)}
 .r2-g:active{transform:scale(.97)}
 .r2-g .r2-ic{aspect-ratio:16/11;width:100%}
 .r2-g b{margin-top:8px;font:400 18px/1.08 var(--serif);letter-spacing:-.01em;text-wrap:balance;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .r2-g em{margin-top:3px;font:italic 400 14px/1.2 var(--serif);color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.r2-new{position:absolute;top:7px;left:7px;padding:3px 8px;border-radius:999px;background:var(--paper);color:var(--paper-ink);font:italic 400 13px/1 var(--serif)}
 /* played today: a small paper dot in the icon's corner */
 .r2-g.done .r2-ic::after,.r2-li.done .r2-ic::after{content:"";position:absolute;top:8px;right:8px;width:7px;height:7px;border-radius:50%;background:var(--paper)}
 .r2-li.done .r2-ic::after{top:4px;right:4px;width:6px;height:6px}
 @keyframes r2Rise{from{opacity:0;transform:translateY(8px)}}
 
-/* ---------------------------------------------------------------- Train: today (one paper card) + the check-in banner */
-.r2-todayblk{margin-top:var(--s6);display:flex;flex-direction:column;gap:var(--s3)}
-.r2-today{display:flex;align-items:center;gap:14px;width:100%;min-height:84px;padding:10px 18px 10px 10px;border:0;border-radius:var(--r-2);
-  background:var(--paper);color:var(--paper-ink);text-align:left;cursor:pointer;transition:transform var(--dur-0) ease-out}
-.r2-today:active{transform:scale(.98)}
-.r2-today-pic{position:relative;flex:none;width:64px;height:64px;border-radius:var(--r-1);overflow:hidden;background:var(--paper-line)}
-.r2-today-pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.r2-today-band{position:absolute;left:0;right:0;bottom:0;height:9px;display:flex}
-.r2-today-band.full{top:0;height:auto}
-.r2-today-band i{flex:1;background:var(--c)}
-.r2-loading{animation:r2Pulse 1.6s ease-in-out infinite}
-@keyframes r2Pulse{50%{opacity:.55}}
-.r2-today-t{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
-.r2-today-t b{font:400 26px/1 var(--serif);letter-spacing:-.015em}
-.r2-today-t b em{font-style:italic}
-.r2-today-t small{font:italic 400 15px/1.25 var(--serif);color:var(--paper-soft)}
-.r2-today-go{flex:none;display:flex;align-items:center;gap:6px;font:400 21px/1 var(--serif)}
-.r2-today-go svg,.r2-today>svg{width:18px;height:18px}
-.r2-today.played{background:var(--surface-2);color:var(--ink)}
-.r2-today.played .r2-today-t small{color:var(--soft)}
-.r2-today.played>svg{color:var(--faint)}
+/* ---------------------------------------------------------------- Train: the two rows (Drills, Your eye) */
+.r2-rows{display:flex;flex-direction:column;margin-top:var(--s6);border-top:1px solid var(--line)}
+.r2-row{display:flex;align-items:center;gap:14px;min-height:72px;padding:12px 0;background:none;border:0;border-bottom:1px solid var(--line);color:var(--ink);text-align:left;cursor:pointer;
+  transition:opacity var(--dur-0) ease-out}
+.r2-row:active{opacity:.6}
+.r2-row>span:not(.r2-ic){flex:1;display:flex;flex-direction:column;min-width:0}
+.r2-row b{font:400 21px/1.1 var(--serif);letter-spacing:-.01em}
+.r2-row em{margin-top:3px;font:italic 400 15px/1.25 var(--serif);color:var(--soft);text-wrap:pretty}
+.r2-row>svg{flex:none;width:16px;height:16px;color:var(--faint)}
 
-/* ---------------------------------------------------------------- Train: list rows (drills, checks, the banner) */
-.r2-more{margin-top:var(--s6)}
-.r2-more .r2-sh+.r2-list{margin-bottom:var(--s6)}
-.r2-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s2) var(--r2-gap)}
+/* ---------------------------------------------------------------- Train › Drills and Your eye (the two sub-pages) */
+.r2-sub .r2-top{margin-bottom:var(--s2)}
+.r2-lede{margin:var(--s2) 0 0;font:italic 400 18px/1.32 var(--serif);color:var(--soft);text-wrap:pretty;max-width:36ch}
+.r2-shelf{margin-top:var(--s6)}
+.r2-list{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--s3)}
 .r2-li{display:flex;align-items:center;gap:10px;min-width:0;min-height:52px;padding:0;background:none;border:0;color:var(--ink);text-align:left;cursor:pointer;transition:opacity var(--dur-0) ease-out}
 .r2-li:active{opacity:.6}
 .r2-li>span:not(.r2-ic){display:flex;flex-direction:column;min-width:0}
-.r2-li b{font:400 17px/1.08 var(--serif);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.r2-li em{margin-top:2px;font:italic 400 13.5px/1.2 var(--serif);color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.r2-ci-banner{padding:10px 14px 10px 10px;border-radius:var(--r-2);background:var(--surface-2)}
-.r2-ci-banner .r2-ic{background:var(--surface-3)}
-.r2-ci-banner>span:not(.r2-ic){flex:1}
-.r2-ci-banner em{white-space:normal}
-.r2-ci-banner>svg{width:16px;height:16px;color:var(--faint);flex:none}
-
-/* ---------------------------------------------------------------- Train: your eye */
-.r2-eye{display:block;width:100%;margin-top:var(--s6);padding:0;background:none;border:0;color:var(--ink);text-align:left;cursor:pointer;transition:opacity var(--dur-0)}
-.r2-eye:active{opacity:.7}
-.r2-eye-h{display:flex;align-items:baseline;justify-content:space-between}
-.r2-eye-h .title-3{margin:0}.r2-eye-h svg{width:16px;height:16px;color:var(--faint);align-self:center}
+.r2-li b{font:400 19px/1.1 var(--serif);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.r2-li em{margin-top:2px;font:italic 400 15px/1.25 var(--serif);color:var(--soft);text-wrap:pretty}
 .r2-fams{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:4px;margin-top:var(--s3)}
-.r2-fam{display:flex;flex-direction:column;align-items:center;gap:6px}
+.r2-fam{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0}
 .r2-fam i{width:100%;max-width:30px;aspect-ratio:1;border-radius:50%;background:var(--c)}
 .r2-fam b{font:400 11px/1 var(--mono);color:var(--soft);letter-spacing:0}
+.r2-fam small{display:none}
 .r2-fam.thin i{opacity:.6}.r2-fam.na i{opacity:.18}.r2-fam.na b{color:var(--faint)}
-.r2-eye-l{display:block;margin-top:var(--s3);font:italic 400 17px/1.3 var(--serif);color:var(--soft);text-wrap:pretty}
+/* Your eye: the nine families as big plates in a 3x3, each with its number and its name */
+.r2-fams.big{grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--r2-gap);margin-top:var(--s5,24px)}
+.r2-fams.big .r2-fam{position:relative;align-items:flex-start;justify-content:flex-end;gap:2px;aspect-ratio:4/3;padding:10px 12px;border-radius:var(--r-2);background:var(--surface-2);overflow:hidden}
+.r2-fams.big .r2-fam i{position:absolute;inset:0;max-width:none;border-radius:0;aspect-ratio:auto}
+.r2-fams.big .r2-fam b,.r2-fams.big .r2-fam small{position:relative;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.35)}
+.r2-fams.big .r2-fam b{font:500 20px/1 var(--mono);letter-spacing:-.02em}
+.r2-fams.big .r2-fam small{display:block;font:400 15px/1.1 var(--serif)}
+.r2-fams.big .r2-fam.na i{opacity:.28}.r2-fams.big .r2-fam.thin i{opacity:.7}
 
 /* ---------------------------------------------------------------- Studio: capture (the hero) */
 .r2-hero{display:flex;flex-direction:column}
@@ -193,9 +206,9 @@
   .r2-g b{font-size:16px}.r2-g em{font-size:13px}
   .r2-ic svg{width:42px;height:42px}
   .r2-list{grid-template-columns:1fr}
-  .r2-today-t b{font-size:23px}.r2-today-go{font-size:19px}
+  .r2-td b{font-size:16px}.r2-td em{font-size:13px}.r2-row b{font-size:19px}
   .r2-fam b{font-size:9.5px}
   .r2-wheelpic{gap:14px;padding:0 14px}.r2-mini{width:92px;height:92px}
 }
 @media (min-width:430px){ .r2-g .r2-ic{aspect-ratio:3/2} .r2-g .r2-ic svg{width:58px;height:58px} }
-@media (prefers-reduced-motion:reduce){ .r2-g{animation:none} .r2-loading,.r2-ph-wait{animation:none} }
+@media (prefers-reduced-motion:reduce){ .r2-g,.r2-td{animation:none} .r2-loading,.r2-ph-wait{animation:none} }

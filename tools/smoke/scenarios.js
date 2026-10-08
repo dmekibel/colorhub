@@ -378,7 +378,11 @@ scenario("daily", "Today's painting: a tap answers round 1, Next opens round 2's
 // ================================================================== TRAIN
 scenario("train", "check-in card opens the drill", async t => {
   await t.open("#shot=gx:due", { settle: 600 });
-  const ck = await t.waitFor("[data-checkin]", 6000, "the weekly check-in card");
+  // the check-in lives on Train > Your eye (js/rooms2.js); the row says it's ready
+  const eyeRow = await t.waitFor("[data-r2-eye]", 6000, "the Your eye row");
+  t.expect(/check-in/i.test(eyeRow.textContent), "the Your eye row doesn't say a check-in is ready");
+  await t.click(eyeRow, { wait: 500 });
+  const ck = await t.waitFor("[data-checkin]", 6000, "the weekly check-in row");
   await t.click(ck, { wait: 500 });
   await t.waitFor(".drill.gy-checkin", 6000, "the check-in drill");
   await t.waitFor(".drill .tile, .drill .half, .drill .sq-dot, .drill [data-check], .drill [data-lock], .drill input[type=range]", 5000, "something to answer in the drill");
@@ -392,21 +396,45 @@ scenario("train", "check-in card opens the drill", async t => {
 });
 
 scenario("train", "every entry on the Train menu opens something (nothing locked)", async t => {
-  // design round 2 (js/rooms2.js): the games grid, the drills and the checks; each tap must leave the room
-  // (a game, a drill, a page) or answer with a sheet or a toast, with no error
+  // js/rooms2.js: Today (3), the six games, then Drills and Your eye; each tap must leave the room (a game, a
+  // drill, a page) or answer with a sheet or a toast, with no error. Then every drill on the Drills page.
   await t.open("#shot=gx:home", { settle: 600 });
   await t.waitFor(".r2-games .r2-g", 6000, "the Train games grid");
-  const n = t.$$(".r2-games .r2-g, .r2-list .r2-li").length;
-  t.expect(n >= 25, `only ${n} entries on the Train menu`);
+  const SEL = ".r2-td-row .r2-td, .r2-games .r2-g, .r2-rows .r2-row";
+  const n = t.$$(SEL).length, g = t.$$(".r2-games .r2-g").length;
+  t.expect(g >= 6 && g <= 7, `${g} game tiles on Train (want the six)`);
+  t.expect(t.$$(".r2-td-row .r2-td").length === 3, "the Today row doesn't have three parts");
+  t.expect(t.$$(".r2-new").length <= 2, `${t.$$(".r2-new").length} "New" tags (at most two)`);
   t.expect(!t.$(".r2-train .locked, .r2-train [data-locked]"), "a locked entry on the Train menu");
+  // nothing sits under the rooms button: scrolled to the end, the last row ends at least a corner (48 px) plus its
+  // gap above the room's bottom edge (measured against the room itself, which may still be mid-entrance here)
+  t.ev("document.querySelectorAll('.r2-train').forEach(e => e.scrollTop = 1e6); window.scrollTo(0, 1e6)"); await t.sleep(300);
+  const last = t.$$(".r2-rows .r2-row").pop(), room = t.$(".r2-train");
+  if (last && room) { const a2 = last.getBoundingClientRect(), r2 = room.getBoundingClientRect(), k = r2.width / room.offsetWidth || 1, gap = (r2.bottom - a2.bottom) / k; t.expect(gap >= 56, `the last Train row ends ${Math.round(gap)} px from the bottom, under the rooms button`); }
   for (let i = 0; i < n; i++) {
-    const b = t.$$(".r2-games .r2-g, .r2-list .r2-li")[i], label = (b.querySelector("b") || b).textContent.trim();
+    const b = t.$$(SEL)[i], label = (b.querySelector("b") || b).textContent.trim();
     await t.click(b, { wait: 500 });
     await t.waitFor(() => !t.$('.room-sheet[data-room="gym"]') || t.$(".sheet") || t.$(".toast"), 6000, `"${label}" to open something`);
     t.ev("document.querySelectorAll('.scrim,.sheet,.toast').forEach(n => n.remove()); go('gym')");
     await t.waitFor(".r2-games .r2-g", 6000, `the Train menu again after "${label}"`);
   }
-  t.notes.push(`${n} entries opened`);
+  await t.click("[data-r2-drills]", { wait: 500 });
+  await t.waitFor(".r2-sub .r2-list .r2-li", 6000, "the Drills page");
+  const d = t.$$(".r2-sub .r2-li").length;
+  t.expect(d >= 12, `only ${d} drills on the Drills page`);
+  for (let i = 0; i < d; i++) {
+    const b = t.$$(".r2-sub .r2-li")[i], label = (b.querySelector("b") || b).textContent.trim();
+    await t.click(b, { wait: 500 });
+    await t.waitFor(() => !t.$(".r2-sub") || t.$(".sheet") || t.$(".toast"), 6000, `drill "${label}" to open something`);
+    t.ev("document.querySelectorAll('.scrim,.sheet,.toast').forEach(n => n.remove()); r2DrillsPage()");
+    await t.waitFor(".r2-sub .r2-li", 6000, `the Drills page again after "${label}"`);
+  }
+  await t.click("[data-close]", { wait: 500 });
+  await t.waitFor(".r2-games .r2-g", 6000, "Train after Back from Drills");
+  await t.click("[data-r2-eye]", { wait: 500 });
+  await t.waitFor(".r2-fams.big .r2-fam", 6000, "the Your eye page");
+  t.expect(t.$$(".r2-fams.big .r2-fam").length === 9, "Your eye doesn't show nine families");
+  t.notes.push(`${n} Train entries and ${d} drills opened`);
 });
 
 scenario("train", "Odd one out: tap tiles through a whole round", async t => {

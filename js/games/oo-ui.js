@@ -400,7 +400,7 @@ function ooRun(cfg) {
     const fb = kind === "board" ? ooLine(r, res) : { html: res.line || "", cmp: res.cmp || null };
     const last = (cfg.endOnMiss && !res.ok) || (cfg.lives && st.lives <= 0) || (!cfg.lives && !cfg.endOnMiss && st.i >= cfg.total) || st.i >= (cfg.max || 99) || (cfg.endWhen && cfg.endWhen(st));
     // a miss on a color: the one you tapped and the right one fill the screen (js/misscompare.js), not two small squares
-    const big = !res.ok && typeof mcShow === "function" && (res.mc || (kind === "board" && fb.cmp && res.picked && res.right && res.picked !== res.right ? { you: { h: res.picked }, was: { h: res.right }, wasLabel: "The odd one" } : null));
+    const big = !res.ok && typeof mcShow === "function" && (res.mc || (kind === "board" && fb.cmp && res.picked && res.right && res.picked !== res.right ? { you: { h: res.picked }, was: { h: res.right } } : null));
     if (big) fb.cmp = null;
     const cmp = fb.cmp ? `<div class="oo-cmp">${fb.cmp.map(([h, w]) => `<span><i style="--c:${h}"></i><em>${esc(w)}</em></span>`).join("")}</div>` : "";
     if (res.ok && !last && !it.hold) {
