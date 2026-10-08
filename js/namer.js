@@ -43,15 +43,26 @@ LAB.namer = (hex, push = true) => {
   hex = (hex && /^#[0-9a-f]{6}$/i.test(hex) ? hex : NMR_LAST.hex || "#5F8C8A").toUpperCase();
   if (push && XSTACK[XSTACK.length - 1] !== "namer") XSTACK.push("namer");
   let cur = hex, tab = NMR_LAST.tab, scheme = NMR_LAST.scheme, raf = 0, urlT = 0, stream = null;
+  // One screen, no scrolling for the thing the page is for (David, 2026-10-08: "doesn't fit on the screen"): a
+  // 100dvh stage holds the name (on its own color), the four next names as a swipeable row, the actions, the
+  // tabs and the picker, which takes whatever height is left. Every band above the picker has a fixed height,
+  // so the picker never resizes under the finger. Harmony names, the tray and the fine print sit below the fold.
   const el = show(`
-    <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span class="eyebrow">Studio · Name any color</span><span style="width:44px"></span></header>
-    <button class="nmr-hero" id="hero" aria-label="Open this color's page"><span class="nmr-name" id="name"></span><span class="nmr-sub" id="sub"></span></button>
-    <div class="nmr-near" id="near"></div>
-    <div class="nmr-acts" id="acts"></div>
-    <div class="nmr-tabs" role="tablist" id="tabs">${NMR_TABS.map(([k, t]) => `<button role="tab" data-tab="${k}" aria-selected="${k === tab}" class="${k === tab ? "on" : ""}">${t}</button>`).join("")}</div>
-    <div class="nmr-pane" id="pane"></div>
-    <div class="nmr-tray" id="tray"></div>
-    <p class="fine">Names are the nearest of about 1,000, measured with CIEDE2000, and the match is how close your color is to the name's. The perceptual picker is OKLCH (Björn Ottosson, 2020). Screens, cameras and light shift colors, so a camera reading is a good guess, not a measurement.</p>
+    <div class="nmr-stage">
+      <div class="nmr-top" id="top">
+        <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span class="eyebrow">Studio · Name any color</span><span style="width:44px"></span></header>
+        <button class="nmr-hero" id="hero" aria-label="Open this color's page"><span class="nmr-name" id="name"></span><span class="nmr-sub" id="sub"></span></button>
+      </div>
+      <div class="nmr-near" id="near"></div>
+      <div class="nmr-acts" id="acts"></div>
+      <div class="nmr-tabs" role="tablist" id="tabs">${NMR_TABS.map(([k, t]) => `<button role="tab" data-tab="${k}" aria-selected="${k === tab}" class="${k === tab ? "on" : ""}">${t}</button>`).join("")}</div>
+      <div class="nmr-pane" id="pane"></div>
+    </div>
+    <div class="nmr-below">
+      <div class="nmr-harm" id="harm"></div>
+      <div class="nmr-tray" id="tray"></div>
+      <p class="fine">Names are the nearest of about 1,000, measured with CIEDE2000, and the match is how close your color is to the name's. The perceptual picker is OKLCH (Björn Ottosson, 2020). Screens, cameras and light shift colors, so a camera reading is a good guess, not a measurement.</p>
+    </div>
   `, "article lab namer");
   const $ = s => el.querySelector(s);
   // one step Back, like every Studio screen: pop this screen's place in the shared trail (the phone's Back gesture presses this button)
@@ -68,12 +79,12 @@ LAB.namer = (hex, push = true) => {
   };
   function render() {
     const nm = nameOf(cur, { n: 6 }), taught = BYNAME.get(nm.n.toLowerCase());
-    const hero = $("#hero"); hero.style.setProperty("--c", cur); hero.dataset.ink = ink(cur); hero.dataset.swatch = cur;
-    $("#name").textContent = nm.text;
+    const hero = $("#hero"), top = $("#top"); top.style.setProperty("--c", cur); top.dataset.ink = ink(cur); hero.dataset.swatch = cur;
+    nmrFit($("#name"), nm.text);
     $("#sub").innerHTML = nm.between ? `Between two names <span class="mono">${cur}</span>` : `${pctMatch(nm.de)} <span class="mono">${cur}</span>`;
     const list = nm.between ? nm.near.slice(0, 4) : nm.near.slice(1, 5);
     $("#near").innerHTML = list.map(x => { const d = lookDiff({ h: x.h }, { h: cur });
-      return `<button class="nmr-row" data-swatch="${x.h}"><i style="--c:${x.h}"></i><span><b>${esc(x.n)}</b><em>${d === "almost the same" ? "Yours is almost identical" : "Yours is " + esc(d)}</em></span><span class="mono">${pctMatch(x.de).replace(" match", "")}</span></button>`; }).join("");
+      return `<button class="nmr-row" data-swatch="${x.h}"><i style="--c:${x.h}"></i><span><b>${esc(x.n)}</b><em>${d === "almost the same" ? "Almost identical" : "Yours is " + esc(d)}</em></span><span class="mono">${pctMatch(x.de).replace(" match", "")}</span></button>`; }).join("");
     const saved = nmrTray().includes(cur);
     $("#acts").innerHTML = `<button data-save>${saved ? "Saved" : "Save"}</button>`
       + (typeof galleryOpenColor === "function" ? `<button data-pt>Paintings</button>` : "")
@@ -102,9 +113,9 @@ LAB.namer = (hex, push = true) => {
   // ---------- the five pickers ----------
   const panes = {
     ring() {
-      $("#pane").innerHTML = `<div class="nmr-schemes" id="sch">${NMR_SCHEMES.map(([k, t]) => `<button data-sch="${k}" class="${k === scheme ? "on" : ""}">${t}</button>`).join("")}</div><div id="ringHost"></div><div class="nmr-harm" id="harm"></div>`;
+      $("#pane").innerHTML = `<div class="nmr-schemes" id="sch">${NMR_SCHEMES.map(([k, t]) => `<button data-sch="${k}" class="${k === scheme ? "on" : ""}">${t}</button>`).join("")}</div><div id="ringHost"></div>`;
       const picker = colorPicker($("#ringHost"), { hex: cur, onChange: h => { if (h !== cur) setColor(h, "ring"); }, marks: h => scheme === "off" ? [] : schemeColors(h, scheme) });
-      const harm = () => { $("#harm").innerHTML = scheme === "off" ? "" : schemeColors(cur, scheme).slice(1).map(h => `<button class="nmr-hchip" data-swatch="${h}"><i style="--c:${h}"></i><b>${esc(nameOf(h).text)}</b></button>`).join(""); };
+      const harm = () => { $("#harm").innerHTML = scheme === "off" ? "" : `<div class="sec-head"><b>In harmony</b></div>` + schemeColors(cur, scheme).slice(1).map(h => `<button class="nmr-hchip" data-swatch="${h}"><i style="--c:${h}"></i><b>${esc(nameOf(h).text)}</b></button>`).join(""); };
       $("#sch").onclick = e => { const b = e.target.closest("[data-sch]"); if (!b) return; scheme = NMR_LAST.scheme = b.dataset.sch; $("#sch").querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b)); picker.set(cur); harm(); buzz(4); };
       harm();
       return { render: harm, set: h => picker.set(h) };
@@ -144,7 +155,7 @@ LAB.namer = (hex, push = true) => {
     field() {
       $("#pane").innerHTML = `<div class="nmr-field"><canvas id="fd"></canvas><i class="nmr-knob" id="fk"></i></div>
         <label class="nmr-slide"><span>Vividness</span><input type="range" id="fc" min="0" max="${NMR_CMAX * 1000 | 0}" step="1" aria-label="Vividness"></label>
-        <p class="nmr-read" id="fr">Drag across. The pick settles onto a name when you pass close to one; the dots are the names that live at this vividness.</p>`;
+        <p class="nmr-read" id="fr">Drag across: the pick settles onto a name as you pass. Dots are names at this vividness.</p>`;
       const cv = $("#fd"), W = 180, H = 120; cv.width = W; cv.height = H;
       const names = (CORE_NAMES || coreFallback()).map(e => ({ n: e.n, h: e.h, lab: e.lab || lab(e.h), ok: nmrOk(e.h) }));
       let [L0, C0, h0] = nmrOk(cur), sliceC = clamp(C0, .02, .26), fx = h0 / 360, fy = 1 - L0, lastName = "";
@@ -223,7 +234,7 @@ LAB.namer = (hex, push = true) => {
     },
   };
   function openTab(k, quiet) {
-    stopCam();
+    stopCam(); $("#harm").innerHTML = "";
     tab = NMR_LAST.tab = k;
     el.querySelectorAll("#tabs button").forEach(b => { const on = b.dataset.tab === k; b.classList.toggle("on", on); b.setAttribute("aria-selected", on); });
     paneApi = panes[k]();
@@ -232,6 +243,13 @@ LAB.namer = (hex, push = true) => {
   $("#tabs").onclick = e => { const b = e.target.closest("[data-tab]"); if (b && b.dataset.tab !== tab) openTab(b.dataset.tab); };
   openTab(tab, true); drawTray(); render();
 };
+
+// the name on one line: shrink the type for a long name instead of wrapping, so the band never changes height
+function nmrFit(node, text) {
+  node.textContent = text; node.style.fontSize = "";
+  const w = node.clientWidth, sw = node.scrollWidth;
+  if (w && sw > w) node.style.fontSize = Math.max(20, parseFloat(getComputedStyle(node).fontSize) * w / sw - .5) + "px";
+}
 
 // "On the map": open the honeycomb with this name typed into its search, so the name's neighbors light up
 function nmrOnMap(name) {
