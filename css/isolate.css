@@ -1,0 +1,40 @@
+/* The Isolator (js/isolate.js): a full-screen overlay. Tap a spot, guess its name, then the rest of the picture
+   falls away to the viewing booth's neutral grey and the patch stands alone. Hold the picture to see it back. */
+.iso{position:fixed;inset:0;z-index:30;display:flex;flex-direction:column;background:var(--ground);color:var(--ink);
+  transition:background .45s var(--ease-grow);touch-action:none;animation:isoIn .3s var(--ease) both}
+@keyframes isoIn{from{opacity:0}}
+.iso.isolated{background:var(--booth);color:var(--b-ink)}
+.iso-top{flex:none;display:flex;align-items:center;justify-content:space-between;padding:calc(var(--top) + 8px) 12px 4px}
+.iso-top .icon-btn{color:inherit}
+.iso-hint{font:italic 400 16px/1.2 var(--serif);color:var(--soft);text-align:center;padding:0 8px}
+.iso.isolated .iso-hint{color:var(--b-soft)}
+.iso-stage{flex:1;min-height:0;display:grid;place-items:center;padding:6px var(--g)}
+.iso-frame{position:relative;touch-action:none;cursor:crosshair;-webkit-user-select:none;user-select:none}
+.iso-img{position:absolute;inset:0;width:100%;height:100%;display:block}
+.iso-veil{position:absolute;inset:-1px;background:var(--booth);opacity:0;transition:opacity .45s var(--ease-grow);pointer-events:none}
+.iso.peek .iso-veil{transition-duration:.16s}
+.iso-ring{position:absolute;border-radius:50%;transform:translate(-50%,-50%);border:2px solid #fff;box-shadow:0 0 0 1.5px rgba(0,0,0,.55),inset 0 0 0 1.5px rgba(0,0,0,.4);pointer-events:none;transition:opacity .3s,left .25s var(--ease),top .25s var(--ease),width .25s var(--ease),height .25s var(--ease)}
+.iso-card{flex:none;width:100%;max-width:540px;margin:0 auto;padding:18px var(--g) calc(var(--bottom) + 20px);background:var(--surface-1);border-radius:var(--r-3) var(--r-3) 0 0;
+  transition:background .45s var(--ease-grow);animation:isoCard .35s var(--ease) both}
+@keyframes isoCard{from{opacity:0;transform:translateY(10px)}}
+.iso.isolated .iso-card{background:transparent;display:grid;grid-template-columns:84px 1fr;gap:4px 16px;align-items:center}
+.iso-q{font:400 28px/1.05 var(--serif);letter-spacing:-.02em;margin:0 0 14px}
+.iso-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.iso-opts button{min-height:56px;padding:8px 14px;border-radius:var(--r-2);background:var(--surface-2);font:400 20px/1.1 var(--serif);text-align:left;color:var(--ink);transition:transform .3s var(--spring),opacity .2s}
+.iso-opts button:active{transform:scale(.96);opacity:.85}
+.iso-skip{display:block;min-height:44px;margin-top:6px;font:italic 400 16px/1 var(--serif);color:var(--soft);text-decoration:underline;text-decoration-color:rgba(236,232,223,.3);text-underline-offset:4px}
+.iso-patch{width:84px;height:84px;border-radius:var(--r-1);background:var(--c);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);cursor:pointer}
+.iso-res{min-width:0}
+.iso-alone{margin:0;font:italic 400 17px/1.2 var(--serif);color:var(--b-soft)}
+.iso-name{display:block;text-align:left;font:400 clamp(30px,9vw,38px)/1 var(--serif);letter-spacing:-.025em;color:var(--b-ink);margin-top:2px;text-decoration:underline;text-decoration-color:rgba(255,255,255,.4);text-underline-offset:5px}
+.iso-line{margin:8px 0 0;font:400 14px/1.45 var(--sans);color:var(--b-soft);text-wrap:pretty}
+.iso-arch{grid-column:1/-1;margin-top:10px}
+.iso-arch:empty{display:none}
+.iso-arch button{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:8px 0;border-top:1px solid var(--b-rule)}
+.iso-arch img{width:56px;height:56px;object-fit:cover;border-radius:var(--r-1);flex:none;background:var(--b-track)}
+.iso-arch span{display:flex;flex-direction:column;min-width:0;font:400 13px/1.35 var(--sans);color:var(--b-soft)}
+.iso-arch b{font:400 19px/1.15 var(--serif);color:var(--b-ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.iso-arch em{font-style:normal}
+.iso-acts{grid-column:1/-1;display:flex;justify-content:space-between;margin-top:6px}
+.iso-acts button{min-height:44px;font:italic 400 18px/1 var(--serif);color:var(--b-ink);text-decoration:underline;text-decoration-color:rgba(255,255,255,.35);text-underline-offset:4px}
+@media (prefers-reduced-motion:reduce){.iso,.iso-veil,.iso-card,.iso-ring{transition:none!important;animation:none!important}}
