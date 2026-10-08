@@ -106,6 +106,7 @@ function rpCoverFill(el, name, hex, heroHex, entry) {
     if (ap && aka.length && ap.hidden) { ap.textContent = `Also called ${aka.join(", ")}.`; ap.hidden = false; const h = el.querySelector('[data-rp-head="names"]'); if (h && !/also /.test(h.textContent)) h.textContent += ` · also ${aka[0]}`; }
     if (def && q("[data-rp-def]")) { q("[data-rp-def]").textContent = def.t; q("[data-rp-defsrc]").textContent = def.src; }
     el.querySelectorAll(".rp-cov-hold").forEach(x => x.classList.add("in"));
+    el.dataset.coverReady = "1";   // the cover's words are in: the title won't move again (js/mapxfer.js waits for this)
   });
 }
 

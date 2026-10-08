@@ -438,6 +438,7 @@ function show(html, cls = "", tab = null) {
   else window.scrollTo(0, 0);
   document.body.classList.remove("scrolled");
   const el = app.querySelector(".screen");
+  if (typeof mxOnShow === "function") mxOnShow(el);   // a bubble growing into this page, or a page shrinking back into the map (js/mapxfer.js)
   const mb = tab && el.querySelector("[data-menu]"); if (mb) mb.onclick = () => menu();
   if (typeof tlNote === "function") tlNote(el, tab, backNav);   // the one trail, the map glyph, the pull-down (js/trail.js)
   el.querySelectorAll("img").forEach(i => { if (i.complete && i.naturalWidth) i.classList.add("ld"); });

@@ -164,7 +164,8 @@ function tlExit(btn) {
   buzz(6);
   XSTACK = []; X_ROOT = null;
   const scr = app.querySelector(".screen"), home = () => typeof hmHome === "function" ? hmHome() : go(S.tab || "learn");
-  if (scr && btn && btn.isConnected) shrinkTo(scr, btn, home); else home();
+  // a color's page goes back into its own bubble on the map instead (js/mapxfer.js, from hmHome)
+  if (scr && btn && btn.isConnected && !(scr.querySelector(".cp-hero") && typeof mxLeave === "function")) shrinkTo(scr, btn, home); else home();
 }
 // the exact color that opened a color or name page as its nearest name ("Your color · 97% match"), so Back draws it
 // the same way: it rode in the page's address as ?c=<hex> (router.js tappedQS)

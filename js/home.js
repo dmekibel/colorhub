@@ -354,6 +354,10 @@ function hmHome() {
   if (!S.placed) return welcome();
   S.hm = S.hm || {};
   hmView();
+  // leaving a color's page: its color takes over now, the map is built a frame later underneath it, and the color
+  // shrinks back into its bubble once the map is drawn (js/mapxfer.js)
+  const back = typeof mxLeave === "function" ? mxLeave(hmHome) : null;
+  if (back && !back.building) return;
   // The floor of the app (DESIGN-SYSTEM.md §2), not a tab: its own address, and S.tab is left alone so it keeps
   // pointing at whichever Room was last open (the Rooms corner's quick-resume, and every "go(S.tab)" fallback).
   ROUTE_NEXT = routed(NAV_MAP, "home"); ROUTE_REPLACE = true;
@@ -379,16 +383,16 @@ function hmHome() {
   // a tap opens the real page straight away (ROADMAP §13: every name has one now) — one of the 101, or its
   // own name page (js/names.js); a long press still shows the quick peek sheet above. The page itself grows
   // from the tapped bubble (David, 2026-10-07: "any color in home, you should be able to click it to make it
-  // full screen"), via growFrom (js/core.js) when it's available; hmOpenColor/hmOpenName return their show()'d
-  // root for exactly this. growFrom calls its renderFn synchronously, so an async open (a name not yet in
-  // CORE_NAMES) just falls back to the old flying-chip morph — still a clean grow, never a hard cut.
+  // full screen"; 2026-10-08: "it should fully expand until it transitions into the color page"): mxGrow
+  // (js/mapxfer.js) grows the bubble's exact outline into the page's cover. Back shrinks it home (hmHome below).
   const pick = (o, fx) => {
     if (typeof hmDismissHint === "function") hmDismissHint();
-    const src = fx && fx.srcEl && fx.srcEl();
     const open = () => (o.c ? hmOpenColor(o.c) : hmOpenName(o));
-    // one of the 101 resolves synchronously, so growFrom's renderFn returns its root and the grow plays; a
-    // library name waits on loadCoreNames() first (hmOpenName), so renderFn returns nothing yet and growFrom
-    // quietly skips the animation — the page still opens, just with show()'s plain cross-fade instead.
+    // the bubble becomes its page (js/mapxfer.js): it grows from its exact shape into the cover, sync or async page alike
+    const geo = fx && fx.geo && typeof mxGrow === "function" ? fx.geo() : null;
+    if (geo) return mxGrow(geo, open);
+    const src = fx && fx.srcEl && fx.srcEl();
+    // (no geometry: the older grow from a stand-in element; a library name opens async, so it gets the flying chip)
     // finally: the stand-in bubble goes even if opening the page throws (it used to stay, stuck over the map)
     try {
       if (src && o.c && typeof growFrom === "function") growFrom(src, open);
@@ -811,7 +815,8 @@ function hmHome() {
 
   window.HM_SEARCH = q => { openSearch(); searchInput.value = q; searchInput.dispatchEvent(new Event("input")); };   // #shot=home:find:<q>
   window.HM_CHOOSER = chooser;   // #shot=home:look hook (tools/shots.sh): drive the Show/Look sheet without a tap
-  render(false);
+  const drawn = render(false);
+  if (back) Promise.resolve(drawn).then(() => mxLand(back), () => mxLand(back));
 }
 
 // Opens an app color's full page directly (ROADMAP.md §12: no half-height card, no second tap). Back (the

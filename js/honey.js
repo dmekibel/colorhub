@@ -40,7 +40,13 @@
 //   onPeek(item)  optional: a long still press (480ms) calls this instead of pick (js/home.js: peek.js's quick look).
 
 const HONEY_SQ3 = Math.sqrt(3) / 2, HONEY_FINITE = 48;
-let HONEY_PAN = null;                 // where you were: { key, x, y, z, name }
+let HONEY_PAN = null;                 // where you were on the Home map: { key, x, y, z, name }
+let HONEY_PAN_ALT = null;             // the same, for every other honeycomb (browse views, favorites)
+// The map's exact view at the moment a bubble opened a page (David, 2026-10-08: "it should return to the exact spot
+// where you were"): the pan (a glide's destination if one was in flight), the zoom, and the tapped color with its
+// screen point. Only the Home map writes it. On the way back setItems() restores it as is (no snap, no glide); when
+// the set of colors changed meanwhile, the tapped color goes back under the same screen point instead.
+let HONEY_RET = null;                 // { key, x, y, z, n, h, sx, sy } (sx, sy: canvas px, null when it was mid-glide)
 const HONEY_NORM = new WeakMap();     // original item -> normalized item (Lab, LCh, ink)
 const HONEY_LAYOUTS = new Map();      // layout cache by contents
 
@@ -927,12 +933,21 @@ function honeyLitBar() {
   bar.addEventListener("pointerdown", e => e.stopPropagation());
   return bar;
 }
+// where the tapped color sits in a rebuilt layout (setItems, HONEY_RET): the same name, else the nearest color
+function honeyRetPoint(lay, ret) {
+  if (!lay || !lay.pts.length) return null;
+  let p = lay.pts.find(q => q.it.n === ret.n);
+  if (!p && ret.h) { const L = lab(ret.h); let bd = Infinity; for (const q of lay.pts) { const dd = (q.it.lab[0] - L[0]) ** 2 + (q.it.lab[1] - L[1]) ** 2 + (q.it.lab[2] - L[2]) ** 2; if (dd < bd) { bd = dd; p = q; } } }
+  return p || null;
+}
 function honeycomb(host, opts = {}) {
   host.classList.add("hc");
   host.innerHTML = `<div class="hc-box"><div class="hc-vig"></div><canvas class="hc-cv" aria-label="Colors as bubbles: drag to browse, pinch to zoom, tap one to open it"></canvas></div>
     <button class="hc-cap"><i></i><span><b></b><small></small></span><em></em></button>`;
   const vig = host.querySelector(".hc-vig"), cv = host.querySelector("canvas"), ctx = cv.getContext("2d"), cap = host.querySelector(".hc-cap");
   const RM = reduceMotion, SHOOT = typeof SHOT !== "undefined" && !!SHOT, ZMAX = 2.5, ABS_ZMIN = .04, M = 2.2;
+  const isHome = !!(host.closest && host.closest(".hm"));   // the Home map: the one whose view a page returns to
+  let frozen = false;   // a bubble just opened a page: the view saved at that moment must not be overwritten on the way out
   let vigK = -1, vigOpSet = -1;
   let styleId = typeof opts.style === "string" ? opts.style : "current", liveTweak = opts.tweak ? { ...opts.tweak } : null;
   // back-compat: callers that still pass layout/lens/lensMode directly (colorsets.js, and any legacy caller).
@@ -1292,7 +1307,8 @@ function honeycomb(host, opts = {}) {
     draw(t);
     if (more) kick();
   }
-  const remember = () => { if (lay) HONEY_PAN = { key: lay.key, x: P[0], y: P[1], z: Z, name: center && center.n }; };
+  // (each kind of map keeps its own: a browse view or a favorites map never overwrites where you were on Home)
+  const remember = () => { if (!lay || frozen) return; const v = { key: lay.key, x: P[0], y: P[1], z: Z, name: center && center.n }; if (isHome) HONEY_PAN = v; else HONEY_PAN_ALT = v; };
   function settle() {
     if (center && settled && center !== settled) buzz(4);
     settled = center; remember();
@@ -1523,6 +1539,7 @@ function honeycomb(host, opts = {}) {
   const GLOBE_ROT_K = 150;
   cv.addEventListener("pointerdown", e => {
     if (!lay) return;
+    frozen = false;   // still here (an open that never left): the view is yours to move again
     lastInput = performance.now();
     const [x, y] = local(e); ptrs.set(e.pointerId, [x, y]); touchXY = [x, y];
     try { cv.setPointerCapture(e.pointerId); } catch (er) {}
@@ -1653,8 +1670,27 @@ function honeycomb(host, opts = {}) {
   }, { passive: false });
   cap.onclick = () => { if (center) open(center, drawn.find(b => b.it === center)); };
 
+  // A drawn bubble's exact on-screen shape, for the bubble-becomes-its-page move (js/mapxfer.js): its center in
+  // viewport px, its outline as 72 rays (circle, true hexagon or the blend between, exactly as honeyCellPath draws it)
+  // and its label as drawn (lines, size, ink), or null when it is too small to carry one.
+  function geoOf(b) {
+    if (!b || !(b.d > 0)) return null;
+    const r = cv.getBoundingClientRect(), shp = zc("shape"), rays = [];
+    for (let i = 0; i < 72; i++) { const t = i / 72 * 6.283185307; rays.push(b.poly && shp > .02 && b.rin >= 3 ? b.rin * (1 - shp) + honeyRay(b.poly, t) * shp : b.rin); }
+    const it = b.it, la = (b.d - zc("labelMin")) / 5;
+    let label = null;
+    if (la > .5 && !(ST.label && !ST.label(it.o))) { const w = honeyWrap(ctx, it.n), fs = Math.min(w.fs * b.d, 30); label = { lines: w.lines, fs, lh: fs * 1.02, ink: it.ink }; }
+    return { x: r.left + b.x, y: r.top + b.y, d: b.d, rays, label, h: it.h, n: it.n };
+  }
   function open(it, b) {
-    remember();
+    // the exact view at this moment (a glide in flight counts as where it was going), kept as is until the map is
+    // built again: nothing on the way out (a settling spring, destroy) may overwrite it
+    const gliding = phase === "spring" && spring, at = gliding ? spring.X.slice() : P.slice(), z = zAnim ? zAnim.to : Z;
+    if (lay && isHome) {
+      HONEY_PAN = { key: lay.key, x: at[0], y: at[1], z, name: it.n };
+      HONEY_RET = { key: lay.key, x: at[0], y: at[1], z, n: it.n, h: it.h, sx: b && !gliding ? b.x : null, sy: b && !gliding ? b.y : null };
+      frozen = true;
+    } else remember();
     // a small positioned element standing in for the tapped bubble — the honeycomb itself is a canvas, so
     // there's no real DOM element at the bubble's spot for growFrom()/morphFrom() to read a rect from.
     const mkSrc = () => {
@@ -1667,7 +1703,7 @@ function honeycomb(host, opts = {}) {
       return m;
     };
     const morph = () => { const m = mkSrc(); if (m) { morphFrom(m); m.remove(); } };
-    if (opts.pick) opts.pick(it.o, { morph, srcEl: mkSrc });
+    if (opts.pick) opts.pick(it.o, { morph, srcEl: mkSrc, geo: () => geoOf(b) });
   }
 
   // ---- contents ----
@@ -1685,18 +1721,30 @@ function honeycomb(host, opts = {}) {
     lay = honeyLayout(raw, cfg.layout);
     if (snap0 && !lay.globe) morph = l18MorphStart(snap0);
     ZMIN = zFloor(); Z = clamp(Z, ZMIN, ZMAX);
+    const PAN = isHome ? HONEY_PAN : HONEY_PAN_ALT;
+    // a return from a page a bubble opened (HONEY_RET, saved in open()): used once, by the Home map only
+    const ret = how === "restore" && isHome && HONEY_RET ? HONEY_RET : null;
+    if (ret) HONEY_RET = null;
+    let restored = false;
     if (lay.globe) {
       // P means [yaw, pitch] here, not a plane offset — see the pointer handlers above
-      if (how === "restore" && HONEY_PAN && HONEY_PAN.key === lay.key) { P = [HONEY_PAN.x, HONEY_PAN.y]; if (HONEY_PAN.z) Z = clamp(HONEY_PAN.z, ZMIN, ZMAX);   /* L18: the last zoom you left, always */ }
+      if (how === "restore" && PAN && PAN.key === lay.key) { P = [PAN.x, PAN.y]; if (PAN.z) Z = clamp(PAN.z, ZMIN, ZMAX); restored = true;   /* L18: the last zoom you left, always */ }
       else {
         const f = focus && (focus.h ? focus : BYNAME.get(String(focus.n || "").toLowerCase())), p = f && lay.pts.find(q => q.it.n === f.n);
         P = p ? [-p.lon, clamp(Math.asin(clamp(p.y, -1, 1)), -1.5, 1.5)] : [0, 0];
       }
-    } else if (how === "restore" && HONEY_PAN && HONEY_PAN.key === lay.key) {
-      P = [HONEY_PAN.x, HONEY_PAN.y]; if (HONEY_PAN.z) Z = clamp(HONEY_PAN.z, ZMIN, ZMAX);   /* L18: the last zoom you left, always */
-      // a tap can open a bubble mid-glide or mid rubber-band (taps open at once), which saved a half-way pan: come
-      // back centered on the nearest bubble, never off to one side (a no-op for a pan saved at rest)
-      const n = nearestTo(P); if (n) P = [n.x, n.y];
+    } else if (how === "restore" && PAN && PAN.key === lay.key) {
+      // exactly the view you left (David, 2026-10-08): no re-centering and no snap to the nearest bubble. A tap made
+      // mid-glide saved the glide's destination (open()), so this is never a half-way pan.
+      P = [PAN.x, PAN.y]; if (PAN.z) Z = clamp(PAN.z, ZMIN, ZMAX);   /* L18: the last zoom you left, always */
+      restored = true;
+    } else if (ret && (ret.p = honeyRetPoint(lay, ret))) {
+      // the set changed while you were away (a filter, a word you learned): the color you tapped goes back under the
+      // same screen point, at the same zoom
+      if (ret.z) Z = clamp(ret.z, ZMIN, ZMAX);
+      const o = ret.sx != null && W ? offAt(ret.sx, ret.sy, lens(0)) : [0, 0];
+      P = [ret.p.x - o[0], ret.p.y - o[1]];
+      restored = true;
     }
     else {
       const f = focus && (focus.h ? focus : BYNAME.get(String(focus.n || "").toLowerCase()));
@@ -1709,8 +1757,13 @@ function honeycomb(host, opts = {}) {
     }
     Plag = P.slice(); lastInput = performance.now();
     center = null; draw(); settled = center;
-    phase = touched ? "idle" : "drift"; spring = null;
-    if (how !== "soft" && !RM && !SHOOT) { bloom = 0; bloomT0 = performance.now(); }
+    // a restored view stays put (idle drift resumes after the usual pause); a fresh one may float at once, from here
+    // (it used to drift from a stale anchor at the origin, which pulled a restored map away from where you left it)
+    phase = touched || restored ? "idle" : "drift"; spring = null;
+    if (phase === "drift") { driftT0 = performance.now(); driftTeff = 0; driftAnchor = P.slice(); }
+    // coming back to the view you left: no bloom (the page is shrinking back into its bubble, which is already there)
+    if (ret && restored) bloom = 1;
+    else if (how !== "soft" && !RM && !SHOOT) { bloom = 0; bloomT0 = performance.now(); }
     kick();
   }
 
@@ -1718,7 +1771,9 @@ function honeycomb(host, opts = {}) {
   function resize() {
     // L18 (David: panning "goes completely white and breaks"): 2x is as sharp as a phone can show for bubbles, and
     // a 3x full-screen canvas is 12 MB a copy; iOS blanks every canvas once their total passes its limit
-    const r = cv.getBoundingClientRect(); dpr = Math.min(2, devicePixelRatio || 1);
+    // the layout size, not the painted one: a map caught mid-zoom by a page transition (js/mapxfer.js scales the screen)
+    // must not measure itself 12% bigger
+    const r = cv.clientWidth ? { width: cv.clientWidth, height: cv.clientHeight } : cv.getBoundingClientRect(); dpr = Math.min(2, devicePixelRatio || 1);
     W = r.width; Hh = r.height; cv.width = Math.round(W * dpr); cv.height = Math.round(Hh * dpr);
     base = clamp(W / 13, 26, 34); ghost = null; ZMIN = zFloor(); Z = clamp(Z, ZMIN, ZMAX); draw();
   }
@@ -1798,7 +1853,7 @@ function honeycomb(host, opts = {}) {
   let hlFocus = null;
   if (hlOn && HONEY_HL && HONEY_HL.fresh) { HONEY_HL.fresh = false; hlFocus = { h: HONEY_HL.hexes[0] }; }
   if (hlFocus) { setItems(opts.items, opts.focus || hlFocus, ""); l18FrameLit(); }
-  else setItems(opts.items, opts.focus || (HONEY_PAN && { n: HONEY_PAN.name }), "restore");
+  else { const PAN = isHome ? HONEY_PAN : HONEY_PAN_ALT; setItems(opts.items, opts.focus || (PAN && { n: PAN.name }), "restore"); }
   // ---- the Tweak panel's API: live overrides on top of the active preset, saved by the caller (S.hm.tweak) ----
   function applyTweak(partial) {
     liveTweak = { ...(liveTweak || {}), ...partial };
@@ -1899,6 +1954,15 @@ function honeycomb(host, opts = {}) {
       return { pts: lay.pts.map(p => ({ o: p.it.o, n: p.it.n, x: p.x, y: p.y })), finite: !!lay.finite, A: lay.A || null, B: lay.B || null };
     },
     // where a color sits on screen right now (js/polish.js flyToMap): the biggest drawn bubble with that hex, in viewport px
+    // a color's bubble as drawn right now, fully on screen and big enough to aim at (js/mapxfer.js shrinks a page back
+    // into it): the copy nearest `near` (viewport px) if given, else the biggest; null when there is none
+    geoOf(h, near) {
+      const H = String(h).toUpperCase(), r = cv.getBoundingClientRect();
+      const ok = drawn.filter(x => String(x.it.h).toUpperCase() === H && x.d >= 6 && x.x - x.d / 2 >= 0 && x.y - x.d / 2 >= 0 && x.x + x.d / 2 <= W && x.y + x.d / 2 <= Hh);
+      if (!ok.length) return null;
+      const b = near ? ok.sort((p, q) => Math.hypot(r.left + p.x - near.x, r.top + p.y - near.y) - Math.hypot(r.left + q.x - near.x, r.top + q.y - near.y))[0] : ok.sort((p, q) => q.d - p.d)[0];
+      return geoOf(b);
+    },
     locate(h) { const H = String(h).toUpperCase(), b = drawn.filter(x => String(x.it.h).toUpperCase() === H).sort((x, y) => y.d - x.d)[0]; if (!b) return null; const r = cv.parentNode.getBoundingClientRect(); return { x: r.left + b.x, y: r.top + b.y, d: b.d }; },
     destroy,
   };
