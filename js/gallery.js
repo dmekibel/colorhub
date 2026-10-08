@@ -25,6 +25,7 @@ let GLV = null;                        // where to put the grid when Explore com
 let GL_CTRL = null;                    // the live grid
 const glKey = q => JSON.stringify(q);
 const GL_ICON_ADJ = sv('<path d="M4 7h9M18 7h2M4 17h3M12 17h8"/><circle cx="15.5" cy="7" r="2.2"/><circle cx="9.5" cy="17" r="2.2"/>', 16, 1.8);
+const GL_ICON_MAP = sv('<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/>', 20, 1.7);
 const GL_ICON_OUT = sv('<path d="M14 5h5v5M19 5l-8 8M17 14v5H5V7h5"/>', 14, 1.8);
 
 // ---------- loading ----------
@@ -614,7 +615,7 @@ function glPage(i, d, fromHex, tol) {
   const el = show(`
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button>${d.rec ? `<a class="glass-pill" href="${esc(d.rec)}" target="_blank" rel="noopener">${GL_ICON_OUT}<span>${esc(src.short)}</span></a>` : ""}</header>
     <div class="gl-hero gl-full-w"><span style="--c:${dom};width:min(100%, calc(82dvh / ${ar.toFixed(3)}));aspect-ratio:${(1 / ar).toFixed(4)}"><img src="${esc(glBig(d.img))}" alt="${esc(d.t)}${d.a ? " by " + esc(d.a) : ""}"${glCropStyle(i, d, ar)}${d.hi ? ` data-hi="${esc(d.hi)}"` : ""}${glCORS(glBig(d.img))}></span></div>
-    <div class="gl-under"><div class="gl-quiz" data-glquiz></div>${glSmall(d) && !d.hi && d.rec ? `<a class="gl-full" href="${esc(d.rec)}" target="_blank" rel="noopener">Full size at the museum ↗</a>` : ""}</div>
+    <div class="gl-under"><div class="gl-quiz" data-glquiz></div>${glSmall(d) && !d.hi && d.rec ? `<a class="gl-full" href="${esc(d.rec)}" target="_blank" rel="noopener">Full size at the museum ↗</a>` : ""}${typeof fvArtHeart === "function" ? fvArtHeart(d.id) : ""}</div>
     <p class="eyebrow p-type">Painting${yr ? " · " + yr : ""}</p>
     <h1 class="p-title">${esc(d.t)}</h1>
     <p class="p-dek">${esc([d.a || "Artist unknown", d.co, d.mv].filter(Boolean).join(" · "))}</p>
@@ -632,6 +633,7 @@ function glPage(i, d, fromHex, tol) {
     <div data-awan></div>
     ${typeof twSection === "function" ? `<div data-glsim></div>` : `<div class="sec-head gl-sim-h"><b>Similar palettes</b><span>by color, not subject</span></div>
     <div class="gl-rail" data-glsim></div>`}
+    <button class="gl-pmap" data-pmap="arr=similar&seed=${i}">${GL_ICON_MAP}<span>Similar paintings, on the map</span>${ICON.chev}</button>
     <section class="srcs"><h3>Image and data</h3><ul><li>${d.rec ? `<a href="${esc(d.rec)}" target="_blank" rel="noopener">${esc(src.name)}</a>` : esc(src.name)}${src.credit ? ` · ${esc(src.credit)}` : ""}</li><li>Palette and color names computed by ColorHub from the museum's image</li></ul></section>
   `, "article gl-page");
   const route = "#/gallery/" + i;
@@ -723,6 +725,7 @@ function glPage(i, d, fromHex, tol) {
   function armSample(img) { sampleImg = img; canSample = testSample(img); heroSpan.classList.toggle("gl-tap", canSample); if (arrival) arrival.image(img, canSample); }
   // the arriving color: pinned above the palette, with how much of this canvas it covers and where (js/paintingsof.js, L26)
   if (fromHex && typeof ptArrival === "function") arrival = ptArrival(el, { i, hex: fromHex, tol, pool, heroSpan, getImg: () => sampleImg, why: "This museum's image server doesn't let ColorHub read its pixels, so the map isn't available for this painting." });
+  if (typeof fvArtWire === "function") fvArtWire(el, i, d, heroSpan);   // the heart under the picture; a long press on it keeps it too (js/favs.js)
   if (sampleImg.complete && sampleImg.naturalWidth) armSample(sampleImg); else sampleImg.addEventListener("load", () => armSample(sampleImg), { once: true });
   heroSpan.addEventListener("click", e => {
     if (arrival && arrival.tap(e)) return;

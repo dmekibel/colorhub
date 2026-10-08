@@ -242,6 +242,7 @@ function paintingsOfPage(hexes, o = {}) {
     <p class="pt-take" data-take hidden></p>
     <div data-sliders></div>
     <div class="pt-acts" data-acts></div>
+    <button class="gl-pmap pt-pmap" data-pmap="arr=color&c=${hexes.map(h => h.slice(1).toLowerCase()).join(",")}&t=${st.tol}&m=${st.minCover || 0}">${GL_ICON_MAP}<span>See them as a map</span>${ICON.chev}</button>
     <details class="pt-stats" data-stats hidden><summary>What the numbers say</summary><div data-statsbody></div></details>
     <div class="pt-sortrow" data-sortrow><div class="pt-seg">${PT_SORTS.map(([k, t]) => `<button data-sort="${k}">${t}</button>`).join("")}</div></div>
     <div class="pt-results" data-results><p class="fine">Finding paintings…</p></div>

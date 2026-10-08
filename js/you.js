@@ -194,6 +194,7 @@ function youPage() {
       <h2 class="ym-h">What you love</h2>
       ${fvN ? `<button class="ym-strip" data-ym="favs">${fvTop.map(h => `<i style="--c:${h}"></i>`).join("")}</button>` : ""}
       ${mnRow({ k: "favs", label: "Your colors", value: fvN ? `${n0(fvN)} hearted` : "", sub: fvN ? "" : "Heart the colors you love, then rank them" })}
+      ${typeof fvArtStrip === "function" ? fvArtStrip() : ""}${typeof fvCatDoors === "function" ? fvCatDoors() : ""}
       ${head ? mnRow({ k: "ftaste", label: esc(head), sub: "Your taste, from your hearts" }) : ""}
       ${tz.color ? mnRow({ k: "tzc", label: "Your color", sub: "From the 20-tap taste test", value: tz.color.at ? esc(fmtDay(tz.color.at)) : "" }) : mnRow({ k: "tzcnew", label: "Find your color", value: "20 taps" })}
       ${tz.palette ? mnRow({ k: "tzp", label: "Your palette", sub: "From the palette taste test", value: tz.palette.at ? esc(fmtDay(tz.palette.at)) : "" }) : mnRow({ k: "tzpnew", label: "Find your palette", value: "15 taps" })}
@@ -237,7 +238,8 @@ function youPage() {
     if (k === "map") { S.hm = S.hm || {}; S.hm.filter = "learned"; save(); buzz(8); return roomToFloor(b); }
     if (k === "learn") return go("learn");
     if (k === "share") { buzz(8); return cardShare(ymShareSpec(mine), `${owned} colors I can name now, learned on ColorHub.`, routeURL("today"), "colorhub-my-colors.png"); }
-    if (k === "favs") return favShelf();
+    if (k === "favs") { S.fvCat = "colors"; return favShelf(); }
+    if (k === "favart") { S.fvCat = "paintings"; save(); return favShelf(); }
     if (k === "ftaste") return favTaste();
     if (k === "tzc") return tzReopen("color");
     if (k === "tzp") return tzReopen("palette");

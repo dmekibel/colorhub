@@ -1,0 +1,73 @@
+/* The painting map (js/paintmap.js): thousands of paintings on one canvas through the color map's lens.
+   Full screen and edge to edge; the only chrome is the back button, the title (what's showing; tap to filter), one
+   line saying what position means, the caption of the painting in the middle, and the right corner (arrange). */
+.pmx .pmx-stage{position:absolute;inset:0;overflow:hidden;background:var(--ground)}
+.pmx-cv{display:block;width:100%;height:100%;touch-action:none;cursor:grab;-webkit-tap-highlight-color:transparent}
+.pmx-cv:active{cursor:grabbing}
+.pmx-wait{position:absolute;left:0;right:0;top:46%;margin:0;padding:0 32px;text-align:center;font:italic 400 19px/1.35 var(--serif);color:var(--soft)}
+.pmx-wait[hidden]{display:none}
+.pmx-wait .wl{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+
+/* top: back, the title, a spacer that keeps the title centered */
+.pmx-top{position:absolute;top:0;left:0;right:0;z-index:3;display:flex;align-items:flex-start;gap:10px;padding:calc(var(--top) + 10px) 12px 30px;
+  background:linear-gradient(to bottom,rgba(14,13,11,.86),rgba(14,13,11,.5) 60%,rgba(14,13,11,0));pointer-events:none}
+.pmx-top>*{pointer-events:auto}
+.pmx-sp{flex:none;width:44px}
+.pmx-title{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 10px 7px;border-radius:var(--r-2);text-align:center;color:var(--ink);transition:transform .25s var(--spring)}
+.pmx-title:active{transform:scale(.97)}
+.pmx-title b{display:flex;align-items:center;gap:4px;font:400 22px/1.05 var(--serif);letter-spacing:-.01em}
+.pmx-title b svg{color:var(--soft);flex:none}
+.pmx-title small{max-width:100%;font:400 15px/1.25 var(--sans);color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pmx-why{position:absolute;z-index:3;left:16px;right:16px;top:calc(var(--top) + 76px);margin:0;text-align:center;font:italic 400 16px/1.3 var(--serif);color:rgba(236,232,223,.72);pointer-events:none;
+  text-shadow:0 1px 10px rgba(0,0,0,.8)}
+
+/* bottom: the painting in the middle, named; the heart beside it; the corner at the right */
+.pmx-cap{position:absolute;z-index:3;left:12px;right:calc(16px + var(--corner,56px) + 10px);bottom:var(--corner-b,calc(var(--bottom) + 12px));min-height:var(--corner,56px);
+  display:flex;align-items:center;gap:4px;padding:4px 4px 4px 0;border-radius:var(--r-2);background:var(--surface-2);border:1px solid rgba(236,232,223,.12);box-shadow:0 8px 24px rgba(0,0,0,.45)}
+.pmx-cap[hidden]{display:none}
+.pmx-cap::before{content:"";flex:none;align-self:stretch;width:6px;margin-right:8px;border-radius:var(--r-2) 0 0 var(--r-2);background:var(--c,#3A3630)}
+.pmx-cap-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;padding:6px 0;text-align:left;color:var(--ink)}
+.pmx-cap-main b{font:400 18px/1.15 var(--serif);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pmx-cap-main small{font-size:14px;line-height:1.2;color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pmx-heart{flex:none;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;color:var(--soft);transition:color .2s,transform .2s var(--spring)}
+.pmx-heart[hidden]{display:none}
+.pmx-heart.on{color:#E8787A}
+.pmx-heart:active{transform:scale(.88)}
+.pmx-heart.pop svg{animation:fvaPop .42s var(--spring)}
+.pmx-do svg{width:22px;height:22px}
+.pmx-bloom{position:fixed;z-index:6}
+
+/* the arc (Home's right-corner menu): the current arrangement is ringed */
+.pmx-stem .hm-do-ic{color:var(--ink)}
+
+/* Filter */
+.pmx-scrim{background:rgba(0,0,0,.3)}
+.pmx-sheet{padding-top:10px;padding-bottom:0}
+.pmx-sheet .grab{margin-bottom:10px}
+.pmx-sh-top{display:flex;align-items:baseline;gap:10px;margin-bottom:6px}
+.pmx-sh-top b{font:400 30px/1 var(--serif);letter-spacing:-.02em}
+.pmx-sh-top span{flex:1;font:400 16px/1 var(--sans);color:var(--soft);font-variant-numeric:tabular-nums}
+.pmx-reset{min-height:44px;padding:0 4px;font:italic 400 17px/1 var(--serif);color:var(--soft)}
+.pmx-row{padding:12px 0 6px;border-top:1px solid var(--rule)}
+.pmx-lab{display:block;margin-bottom:9px;font:400 17px/1 var(--serif);color:var(--ink)}
+.pmx-chips{display:flex;flex-wrap:wrap;gap:7px}
+.pmx-chips.pmx-sub{margin-top:8px;padding-left:10px;border-left:2px solid var(--rule)}
+.pmx-chips button{display:flex;align-items:baseline;gap:6px;min-height:40px;padding:0 14px;border-radius:var(--r-pill);background:var(--surface-2);color:var(--ink);font:400 16px/40px var(--serif);
+  transition:background .2s,color .2s,transform .2s var(--spring)}
+.pmx-chips button em{font:500 12px/1 var(--mono);font-style:normal;color:var(--faint);font-variant-numeric:tabular-nums}
+.pmx-chips button.on{background:var(--paper);color:var(--paper-ink)}
+.pmx-chips button.on em{color:var(--paper-soft)}
+.pmx-chips button:disabled{opacity:.38}
+.pmx-chips button:active{transform:scale(.95)}
+.pmx-chips .pmx-more{background:none;color:var(--soft);font-style:italic;text-decoration:underline;text-underline-offset:3px}
+.pmx-sw{display:flex;gap:6px;overflow-x:auto;margin:0 calc(-1 * var(--g));padding:2px var(--g) 6px;scrollbar-width:none}
+.pmx-sw::-webkit-scrollbar{display:none}
+.pmx-sw button{flex:none;width:40px;height:40px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1);transition:transform .2s var(--spring)}
+.pmx-sw button.on{box-shadow:0 0 0 2px var(--surface-1),0 0 0 4px var(--paper)}
+.pmx-sw button:active{transform:scale(.9)}
+.pmx-cap2{display:flex;align-items:center;gap:8px;margin:6px 0 0!important;font:400 16px/1.3 var(--serif)!important;color:var(--ink)!important}
+.pmx-cap2 i{width:18px;height:18px;border-radius:50%;background:var(--c);flex:none}
+.pmx-cap2 span{color:var(--soft)}
+.pmx-find{margin:0 0 10px}
+.pmx-go{position:sticky;bottom:0;width:100%;margin:14px 0 0;box-shadow:0 -14px 18px var(--surface-1)}
+.pmx-sheet .pmx-go{margin-bottom:calc(var(--bottom) + 14px)}
