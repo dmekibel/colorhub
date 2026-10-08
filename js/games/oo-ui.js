@@ -607,7 +607,7 @@ function ooMap() {
     return world + row + (i === OO_MIX_AT - 1 ? ooMixBlock() : "");
   }).join("");
   const el = show(`
-    <header class="deck-top"><button class="icon-btn" data-close aria-label="Back to Train">${ICON.back}</button><span style="flex:1"></span><span class="mono oo-tot">${ooStarCount()} ★</span></header>
+    <header class="deck-top"><button class="icon-btn" data-close aria-label="Back to Train">${ICON.back}</button><span style="flex:1"></span><span class="mono oo-tot">${ooStarCount()} ${icon("starOn", 14)}</span></header>
     <h1 class="title-1 oo-title">Odd one out</h1>
     <p class="note">${back ? "Welcome back. Your first round today is a warm-up." : st.sets ? `Level ${cur + 1} of ${OO_LEVEL_N} is next for you.` : "Find the tile that's different. Each level makes the gap smaller."}</p>
     <button class="oo-eyeline" data-eye><span>${esc(ooEyeLine())}</span><b>Your eye ${ICON.chev}</b></button>
@@ -740,7 +740,7 @@ function ooShelf() {
     <button class="oo-shelf" data-oo-map>
       ${ooMini(lv)}
       <span class="oo-nt"><b>${st.sets ? `Level ${lv + 1} · ${esc(pctFmt(ooLevelGap(lv)))} different` : "Find the different tile"}</b><em>${st.sets ? esc(`${ooGapWord(lv)}. For you, or choose your own level.`) : "Twenty levels, from an obvious difference to the edge of what you can see. Pick your own difficulty any time."}</em></span>
-      <span class="mono oo-tot">${st.sets ? `${ooStarCount()} ★` : ""}</span>
+      <span class="mono oo-tot">${st.sets ? `${ooStarCount()} ${icon("starOn", 14)}` : ""}</span>
     </button>
     <button class="play-row" data-oo-line><span><b>Across the line</b><span>Three of these are Teal. Which one isn't?</span></span><em class="lt-best">${ln.best ? `<b>${ln.best}</b>best` : "new"}</em></button>
     <button class="play-row" data-oo-pairs><span><b>Painters' pairs</b><span>Which colors did painters put together?</span></span><em class="lt-best">${st.pairs && st.pairs.best ? `<b>${st.pairs.best}</b>best` : "new"}</em></button>

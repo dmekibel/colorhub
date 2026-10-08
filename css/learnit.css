@@ -26,7 +26,7 @@
 .screen.learnit .lt-display{font:400 clamp(42px,13vw,76px)/.9 var(--serif);letter-spacing:-.03em;text-wrap:balance}
 .screen.learnit .lt-t1{font:400 clamp(30px,8.6vw,42px)/1.05 var(--serif);letter-spacing:-.02em;text-wrap:pretty}
 .screen.learnit .lt-t1 em{font-style:italic}
-.screen.learnit .lt-code{font:400 12px/1 var(--mono);letter-spacing:.02em;font-variant-numeric:tabular-nums}
+.screen.learnit .lt-code{font:400 13px/1 var(--mono);letter-spacing:.02em;font-variant-numeric:tabular-nums}
 .screen.learnit .lt-diff{font:400 26px/1.15 var(--serif);letter-spacing:-.01em;margin-top:16px;text-wrap:pretty;flex:none}
 .screen.learnit .note{font:italic 400 16px/1.3 var(--serif);color:var(--soft);margin-top:10px}
 

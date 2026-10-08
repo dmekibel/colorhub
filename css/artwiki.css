@@ -4,9 +4,9 @@
 
 .aw-page .aw-sub{color:var(--soft);font-size:13.5px;line-height:1.5;margin:12px 0 14px;max-width:48ch;text-wrap:pretty}
 .aw-page .aw-quiet{margin-top:20px}
-.aw-page .aw-cap{color:var(--faint);font:400 12.5px/1.45 var(--sans);margin:8px 0 0}
+.aw-page .aw-cap{color:var(--faint);font:400 13px/1.45 var(--sans);margin:8px 0 0}
 .aw-page .aw-note{border-left:2px solid var(--rule-strong);padding:2px 0 2px 14px;margin:18px 0 6px;color:var(--soft);font-size:13.5px;line-height:1.5;max-width:50ch;text-wrap:pretty}
-.aw-page .aw-lbl{font:500 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin:22px 0 10px}
+.aw-page .aw-lbl{font:500 13px/1 var(--mono);letter-spacing:0;text-transform:none;color:var(--faint);margin:22px 0 10px}
 .aw-page .aw-find{font:400 18px/1.35 var(--serif);color:var(--ink);margin:18px 0 0;max-width:46ch;text-wrap:pretty}
 .aw-link{font:inherit;color:inherit;text-decoration:underline;text-decoration-color:rgba(236,232,223,.35);text-underline-offset:3px;padding:0;display:inline;text-align:left}
 .aw-link:active{opacity:.7}
@@ -25,7 +25,7 @@
 .aw-bc button{flex:1 1 0;min-width:1px;display:flex;flex-direction:column;padding:0}
 .aw-bc button i{flex:1;background:var(--c)}
 .aw-bc button:active{opacity:.6}
-.aw-bcax{display:flex;justify-content:space-between;gap:10px;align-items:baseline;padding:8px var(--g) 0;font:500 11px/1.3 var(--mono);color:var(--soft);letter-spacing:.06em}
+.aw-bcax{display:flex;justify-content:space-between;gap:10px;align-items:baseline;padding:8px var(--g) 0;font:500 13px/1.3 var(--mono);color:var(--soft);letter-spacing:.06em}
 .aw-bcax em{font:italic 400 13px/1.3 var(--serif);color:var(--faint);text-align:center;letter-spacing:0}
 
 .aw-finds{list-style:none;margin:22px 0 0;padding:0}
@@ -41,7 +41,7 @@
 .aw-chip{display:inline-flex;align-items:center;gap:9px;min-height:36px;text-align:left}
 .aw-chip i{width:22px;height:22px;background:var(--c);border-radius:2px;flex:none;box-shadow:inset 0 0 0 1px rgba(236,232,223,.14)}
 .aw-chip b{font:400 19px/1 var(--serif)}
-.aw-chip span{font:500 11px/1 var(--mono);color:var(--soft);letter-spacing:.06em}
+.aw-chip span{font:500 13px/1 var(--mono);color:var(--soft);letter-spacing:.06em}
 
 /* palette-family cards */
 .aw-cl{display:grid;grid-template-columns:92px minmax(0,1fr);gap:16px;padding:16px 0;border-top:1px solid var(--rule)}
@@ -50,8 +50,8 @@
 .aw-thumb img{width:100%;height:100%;object-fit:cover;display:block}
 .aw-thumb img:not([src]){visibility:hidden}
 .aw-cl-t{font:400 22px/1.1 var(--serif);letter-spacing:-.01em;margin:0 0 5px;text-wrap:balance}
-.aw-cl-s{font:500 11px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--soft);margin:0 0 10px}
-.aw-cl-n{font-size:12.5px;color:var(--faint);line-height:1.4;margin:8px 0 0}
+.aw-cl-s{font:500 13px/1.3 var(--mono);letter-spacing:0;text-transform:none;color:var(--soft);margin:0 0 10px}
+.aw-cl-n{font-size:13px;color:var(--faint);line-height:1.4;margin:8px 0 0}
 
 /* signature rows */
 .aw-sigs{display:flex;flex-direction:column}
@@ -60,14 +60,14 @@
 .aw-sig i{grid-row:span 2;width:40px;height:40px;background:var(--c);border-radius:2px;box-shadow:inset 0 0 0 1px rgba(236,232,223,.12)}
 .aw-sig b{font:400 22px/1 var(--serif)}
 .aw-sig span{font:500 14px/1 var(--mono);color:var(--ink)}
-.aw-sig em{grid-column:2/4;font:400 12.5px/1.35 var(--sans);color:var(--soft);font-style:normal;margin-top:3px}
+.aw-sig em{grid-column:2/4;font:400 13px/1.35 var(--sans);color:var(--soft);font-style:normal;margin-top:3px}
 .aw-role{display:grid;grid-template-columns:22px minmax(0,1fr);gap:12px;align-items:start;padding:9px 0;border-top:1px solid var(--rule);text-align:left;font-size:14.5px;line-height:1.4;width:100%}
 .aw-role i{width:22px;height:22px;background:var(--c);border-radius:2px;margin-top:1px}
 .aw-role em{color:var(--faint);font-style:normal}
 .aw-chord{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;align-items:center;padding:11px 0;border-top:1px solid var(--rule)}
 .aw-chord-sw{display:flex;gap:3px}.aw-chord-sw .aw-sw{width:26px;height:26px}
 .aw-chord-t{font:400 18px/1.2 var(--serif)}
-.aw-chord em{grid-column:1/3;font:500 11px/1.3 var(--mono);letter-spacing:.06em;color:var(--soft);font-style:normal;text-transform:uppercase}
+.aw-chord em{grid-column:1/3;font:500 13px/1.3 var(--mono);letter-spacing:0;color:var(--soft);font-style:normal;text-transform:none}
 
 /* the deeper layers: one tap away */
 .aw-more{border-top:1px solid var(--rule);margin-top:16px}
@@ -76,7 +76,7 @@
 .aw-more>summary::-webkit-details-marker{display:none}
 .aw-more>summary::after{content:"+";font:400 22px/1 var(--sans);color:var(--soft);flex:none}
 .aw-more[open]>summary::after{content:"–"}
-.aw-more>summary small{font:500 10.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-left:auto;margin-right:8px}
+.aw-more>summary small{font:500 13px/1 var(--mono);letter-spacing:0;text-transform:none;color:var(--faint);margin-left:auto;margin-right:8px}
 .aw-more[open]{padding-bottom:12px}
 
 /* over time */
@@ -85,11 +85,11 @@
 .aw-dcol{flex:1 0 34px;display:flex;flex-direction:column;align-items:stretch;gap:4px;max-width:70px}
 .aw-dstack{display:flex;flex-direction:column;height:96px;gap:1px;border-radius:2px;overflow:hidden}
 .aw-dstack i{flex:1 1 0;background:var(--c);min-height:2px}
-.aw-dcol em{font:500 11px/1 var(--mono);color:var(--soft);font-style:normal;text-align:center;letter-spacing:.04em}
-.aw-dcol u{font:500 10.5px/1 var(--mono);color:var(--faint);text-decoration:none;text-align:center}
+.aw-dcol em{font:500 13px/1 var(--mono);color:var(--soft);font-style:normal;text-align:center;letter-spacing:.04em}
+.aw-dcol u{font:500 13px/1 var(--mono);color:var(--faint);text-decoration:none;text-align:center}
 .aw-dcol.thin .aw-dstack{opacity:.5}
 .aw-spark-w{margin-top:20px;color:var(--soft)}
-.aw-spark-w span{font:500 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--faint);display:block;margin-bottom:6px}
+.aw-spark-w span{font:500 13px/1 var(--mono);letter-spacing:0;text-transform:none;color:var(--faint);display:block;margin-bottom:6px}
 .aw-spark{width:100%;height:60px;display:block;color:var(--ink);overflow:visible}
 .aw-spark-w em{display:block;font:italic 400 13px/1.3 var(--serif);color:var(--faint);margin-top:4px}
 
@@ -98,7 +98,7 @@
 .aw-pbar{padding:12px 0;border-top:1px solid var(--rule)}
 .aw-pb-h{display:flex;justify-content:space-between;gap:12px;align-items:baseline;margin-bottom:12px}
 .aw-pb-h b{font:400 20px/1 var(--serif);flex:none}
-.aw-pb-h span{font:400 12.5px/1.3 var(--sans);color:var(--soft);text-align:right}
+.aw-pb-h span{font:400 13px/1.3 var(--sans);color:var(--soft);text-align:right}
 .aw-track{position:relative;height:2px;background:var(--rule-strong);margin:6px 6px 8px;opacity:1}
 .aw-track::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--rule),var(--rule-strong))}
 .aw-track i{position:absolute;top:-6px;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:var(--ink);box-shadow:0 0 0 3px var(--ground)}
@@ -109,12 +109,12 @@
 .aw-typ span{display:block;aspect-ratio:4/5;background:var(--surface-2);border-radius:2px;overflow:hidden}
 .aw-typ img{width:100%;height:100%;object-fit:cover;display:block}
 .aw-typ img:not([src]){visibility:hidden}
-.aw-typ em{font:500 10.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--faint);font-style:normal}
+.aw-typ em{font:500 13px/1 var(--mono);letter-spacing:0;text-transform:none;color:var(--faint);font-style:normal}
 .aw-typ b{font:400 17px/1.2 var(--serif);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .aw-near,.aw-ties{display:flex;flex-direction:column}
 .aw-tie{display:flex;justify-content:space-between;align-items:baseline;gap:14px;min-height:46px;padding:11px 0;border-top:1px solid var(--rule);text-align:left;width:100%}
 .aw-tie b{font:400 19px/1.2 var(--serif)}
-.aw-tie span{font:500 11px/1.3 var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--soft);text-align:right}
+.aw-tie span{font:500 13px/1.3 var(--mono);letter-spacing:0;text-transform:none;color:var(--soft);text-align:right}
 .aw-tie.off{opacity:.65}
 .aw-pn{display:flex;justify-content:space-between;margin-top:24px;font:italic 400 18px/1 var(--serif)}
 .aw-acts{margin-top:26px}
@@ -124,12 +124,12 @@
 /* the Analysis section on a painting page */
 .aw-tiles{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:6px}
 .aw-tiles>div{background:var(--ground);padding:14px 14px 13px;display:flex;flex-direction:column;gap:4px;min-width:0}
-.aw-tiles span{font:500 10px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.aw-tiles span{font:500 13px/1 var(--mono);letter-spacing:0;text-transform:none;color:var(--faint)}
 .aw-tiles b{font:400 21px/1.1 var(--serif);text-wrap:balance}
-.aw-tiles em{font:400 12px/1.35 var(--sans);color:var(--soft);font-style:normal}
+.aw-tiles em{font:400 13px/1.35 var(--sans);color:var(--soft);font-style:normal}
 .aw-vrow{display:grid;grid-template-columns:92px minmax(0,1fr);gap:14px;align-items:center;padding:8px 0}
 .aw-vrow>span:first-child{font:400 17px/1.1 var(--serif)}
-.aw-vrow em{display:block;font:500 11px/1 var(--mono);color:var(--soft);font-style:normal;margin-top:4px;letter-spacing:.06em}
+.aw-vrow em{display:block;font:500 13px/1 var(--mono);color:var(--soft);font-style:normal;margin-top:4px;letter-spacing:.06em}
 .aw-vsw{display:flex;gap:3px;flex-wrap:wrap}
 .aw-none{font:italic 400 14px/1 var(--serif);color:var(--faint)}
 .aw-seg{display:flex;height:16px;gap:2px;border-radius:2px;overflow:hidden;margin:8px 0 6px}
@@ -137,22 +137,22 @@
 .aw-seg i{background:var(--c)}
 .aw-one{display:grid;grid-template-columns:62px minmax(0,1fr);gap:14px;align-items:center;padding:9px 0;border-top:1px solid var(--rule)}
 .aw-one-sw{width:62px;height:62px;background:var(--c);border-radius:2px;display:flex;align-items:flex-end;padding:5px;box-shadow:inset 0 0 0 1px rgba(236,232,223,.12)}
-.aw-one-sw span{font:500 10.5px/1 var(--mono)}
+.aw-one-sw span{font:500 13px/1 var(--mono)}
 .aw-one-sw[data-ink="dark"]{color:rgba(20,19,17,.8)}.aw-one-sw[data-ink="light"]{color:rgba(255,255,255,.9)}
-.aw-one b{display:block;font:500 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:5px}
+.aw-one b{display:block;font:500 13px/1 var(--mono);letter-spacing:0;text-transform:none;color:var(--faint);margin-bottom:5px}
 .aw-one span{font:400 19px/1.15 var(--serif);display:block}
-.aw-one em{display:block;font:400 12px/1.4 var(--sans);color:var(--soft);font-style:normal;margin-top:3px}
+.aw-one em{display:block;font:400 13px/1.4 var(--sans);color:var(--soft);font-style:normal;margin-top:3px}
 .aw-meas{display:grid;grid-template-columns:132px minmax(0,1fr);gap:18px;align-items:center;margin:6px 0 10px}
 .aw-ring{width:132px;height:132px;display:block}
 .aw-meas em{display:block;font:italic 400 13px/1.3 var(--serif);color:var(--faint);margin-top:6px}
-.aw-meas-t p{margin:10px 0 4px;font:500 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.aw-meas-t p{margin:10px 0 4px;font:500 13px/1 var(--mono);letter-spacing:0;text-transform:none;color:var(--faint)}
 .aw-meas-t p b{font-weight:500}
 .aw-lhist{display:flex;align-items:flex-end;gap:2px;height:44px}
 .aw-lhist i{flex:1;background:linear-gradient(0deg,#4a4640,#d9d4c8);min-height:2px;border-radius:1px 1px 0 0}
 .aw-kv{display:grid;grid-template-columns:132px auto minmax(0,1fr);gap:12px;align-items:baseline;margin:0;padding:9px 0;border-top:1px solid var(--rule)}
-.aw-kv span{font:500 10.5px/1.2 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.aw-kv span{font:500 13px/1.2 var(--mono);letter-spacing:0;text-transform:none;color:var(--faint)}
 .aw-kv b{font:400 18px/1 var(--serif)}
-.aw-kv em{font:400 12px/1.35 var(--sans);color:var(--soft);font-style:normal}
+.aw-kv em{font:400 13px/1.35 var(--sans);color:var(--soft);font-style:normal}
 .aw-linkrow .btn{padding-left:0}
 
 /* hue bars (group pages) */
@@ -170,23 +170,23 @@
 .aw-tp{display:flex;height:46px;border-radius:2px;overflow:hidden;gap:1px}
 .aw-tp i{flex:1;background:var(--c)}
 .aw-tile b{font:400 19px/1.15 var(--serif);text-wrap:balance}
-.aw-tile em{font:500 10.5px/1 var(--mono);letter-spacing:.08em;color:var(--soft);text-transform:uppercase;font-style:normal}
+.aw-tile em{font:500 13px/1 var(--mono);letter-spacing:0;color:var(--soft);text-transform:none;font-style:normal}
 .aw-input{width:100%;height:46px;margin:14px 0 4px;background:var(--surface-2);border:1px solid var(--rule);border-radius:var(--r-2);padding:0 16px;color:var(--ink);font:400 16px/1 var(--sans);outline:none}
 .aw-input:focus{border-color:var(--rule-strong)}
 .aw-res{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;align-items:baseline;width:100%;text-align:left;padding:11px 0;border-top:1px solid var(--rule);min-height:50px}
 .aw-res b{font:400 19px/1.2 var(--serif)}
-.aw-res span{grid-column:1;font:500 11px/1.3 var(--mono);color:var(--soft);letter-spacing:.04em}
-.aw-res em{grid-row:1/3;grid-column:2;font:500 11px/1 var(--mono);color:var(--faint);font-style:normal}
+.aw-res span{grid-column:1;font:500 13px/1.3 var(--mono);color:var(--soft);letter-spacing:.04em}
+.aw-res em{grid-row:1/3;grid-column:2;font:500 13px/1 var(--mono);color:var(--faint);font-style:normal}
 
 /* painter against painter */
 .aw-vs{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
 .aw-vs-c{display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-width:0}
 .aw-vs-c b{font:400 21px/1.1 var(--serif);text-wrap:balance}
-.aw-vs-c span{font:500 11px/1.3 var(--mono);color:var(--soft);letter-spacing:.05em}
+.aw-vs-c span{font:500 13px/1.3 var(--mono);color:var(--soft);letter-spacing:.05em}
 .aw-vs-c.empty{grid-column:1/-1}
 .aw-vs-c.empty [data-awfind]{width:100%}
 .aw-vs2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:14px;align-items:start}
-.aw-vcl{margin-bottom:12px}.aw-vcl em{display:block;font:500 11px/1 var(--mono);color:var(--soft);font-style:normal;margin-top:4px}
+.aw-vcl{margin-bottom:12px}.aw-vcl em{display:block;font:500 13px/1 var(--mono);color:var(--soft);font-style:normal;margin-top:4px}
 .aw-legend{display:flex;gap:6px;align-items:center;flex-wrap:wrap;font-size:13px;color:var(--soft);margin:14px 0 0}
 .aw-legend i{width:10px;height:10px;border-radius:50%;display:inline-block;margin-left:8px}
 .aw-legend i.a{background:var(--ink)}.aw-legend i.b{background:#e0a13a}
@@ -198,7 +198,7 @@
 .aw-rooms::-webkit-scrollbar{display:none}
 .aw-room{flex:none;display:flex;flex-direction:column;gap:5px;width:132px;text-decoration:none;color:var(--ink)}
 .aw-room b{font:400 15px/1.15 var(--serif);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.aw-room em{font:500 10.5px/1 var(--mono);letter-spacing:.06em;color:var(--soft);font-style:normal}
+.aw-room em{font:500 13px/1 var(--mono);letter-spacing:.06em;color:var(--soft);font-style:normal}
 .aw-tiles+.aw-find{margin-bottom:6px}
 
 /* Craft pass (2026-10-08 critique): word labels speak in the serif note voice, never uppercase mono
@@ -210,7 +210,7 @@
 .aw-tiles span,.aw-one b{font-size:15px}
 /* decades are written in full ("1870s", not "70s"): a country's columns span centuries, so "70s" was ambiguous */
 .aw-dcol{flex-basis:42px}
-.aw-dcol em{font-size:10.5px;letter-spacing:0}
+.aw-dcol em{font-size:13px;letter-spacing:0}
 /* the movement caveat: one calm line, the tagging counts one tap away */
 .aw-page details.aw-note>summary{list-style:none;cursor:pointer;font:italic 400 16px/1.35 var(--serif);color:var(--soft)}
 .aw-page details.aw-note>summary::-webkit-details-marker{display:none}
@@ -237,7 +237,7 @@
 .aw-hl-chip{display:inline-flex;align-items:center;gap:9px;min-height:42px;padding:0 14px 0 6px;border-radius:var(--r-pill);background:var(--surface-2);border:1px solid var(--rule);color:var(--ink);text-align:left;max-width:100%}
 .aw-hl-chip i{width:30px;height:30px;border-radius:50%;background:var(--c);flex:none;box-shadow:inset 0 0 0 1px rgba(236,232,223,.14)}
 .aw-hl-chip b{font:400 17px/1.1 var(--serif);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
-.aw-hl-chip em{font:400 12px/1 var(--mono);color:var(--soft);font-style:normal;flex:none}
+.aw-hl-chip em{font:400 13px/1 var(--mono);color:var(--soft);font-style:normal;flex:none}
 .aw-hl-chip:active{transform:scale(.97)}
 /* "In most of the work" sits inside the Colors drawer, whose summary already names it */
 [data-awptc] .sec-head{display:none}

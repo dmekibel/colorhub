@@ -14,7 +14,7 @@
 .cx-card-txt{position:absolute;left:0;right:0;bottom:0;display:block;padding:96px 18px 16px;background:linear-gradient(to top,rgba(14,13,11,.97) 48%,rgba(14,13,11,.72) 74%,rgba(14,13,11,0));pointer-events:none}
 .cx-card-txt .eyebrow{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .cx-card-txt b{display:block;margin:6px 0 10px;font:400 46px/.92 var(--serif);letter-spacing:-.03em;color:var(--ink)}
-.cx-open{display:inline-flex;align-items:center;gap:8px;font:500 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
+.cx-open{display:inline-flex;align-items:center;gap:8px;font:500 13px/1 var(--mono);letter-spacing:0;text-transform:none;color:var(--ink)}
 .cx-open svg{width:16px;height:16px}
 
 /* ---- the explorer screen ---- */
@@ -34,7 +34,7 @@
 .cx-title.busy{opacity:.6}
 .cx-title b{display:block;font:400 20px/1.08 var(--serif);letter-spacing:-.01em;text-wrap:balance}
 .cx-title b svg{display:inline-block;vertical-align:-1px;margin-left:5px;color:var(--soft)}
-.cx-title small{font:500 9px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--soft);white-space:nowrap}
+.cx-title small{font:500 13px/1 var(--mono);letter-spacing:0;text-transform:none;color:var(--soft);white-space:nowrap}
 .cx.tuned .cx-title small{color:var(--ink)}
 /* the bottom bar: the honeycomb's own caption becomes its left side; two small buttons sit on its right */
 .cx .hc-box{position:absolute;inset:0}
@@ -51,7 +51,7 @@
 .cx-bar{position:absolute;z-index:3;left:max(12px,calc(50% - 258px));right:max(12px,calc(50% - 258px));bottom:calc(var(--bottom) + 12px);height:0;pointer-events:none}
 .cx-btns{position:absolute;right:8px;bottom:9px;display:flex;gap:2px;pointer-events:auto}
 .cx-btns button{width:60px;height:48px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;border-radius:12px;color:var(--ink);
-  font:500 8.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;transition:background .2s,transform .3s var(--spring)}
+  font:500 13px/1 var(--mono);letter-spacing:0;text-transform:none;transition:background .2s,transform .3s var(--spring)}
 .cx-btns button:active{background:rgba(236,232,223,.08);transform:scale(.94)}
 .cx-btns button+button{box-shadow:-1px 0 0 var(--rule)}
 .cx-btns svg{width:20px;height:20px}
@@ -61,7 +61,7 @@
 .cx-empty{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:0 44px;text-align:center}
 .cx-empty[hidden]{display:none}
 .cx-empty p{margin:0;font:400 24px/1.2 var(--serif);color:var(--soft);text-wrap:balance}
-.cx-pill{height:36px;padding:0 16px;border:1px solid var(--rule-2);border-radius:18px;font:500 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.cx-pill{height:36px;padding:0 16px;border:1px solid var(--rule-2);border-radius:18px;font:500 13px/1 var(--mono);letter-spacing:0;text-transform:none;color:var(--ink)}
 
 /* ---- the sheets ---- */
 .scrim.cx-clear{background:rgba(0,0,0,.14)}
@@ -70,11 +70,11 @@
 .cx-sh-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:4px}
 .cx-sh-head h3{margin:0!important;font-size:30px!important}
 .cx-sh-head>span{display:flex;align-items:center;gap:6px}
-.cx-link{height:36px;padding:0 6px;font:500 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--soft);text-decoration:underline;text-underline-offset:4px}
+.cx-link{height:36px;padding:0 6px;font:500 13px/1 var(--mono);letter-spacing:0;text-transform:none;color:var(--soft);text-decoration:underline;text-underline-offset:4px}
 .cx-link:disabled{opacity:.35;text-decoration:none}
 .cx-sec{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:20px 0 4px;padding-bottom:8px;border-bottom:1px solid var(--rule)}
-.cx-sec b{font:500 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
-.cx-sec span{font:500 9.5px/1 var(--mono);letter-spacing:.08em;color:var(--faint)}
+.cx-sec b{font:500 13px/1 var(--mono);letter-spacing:0;text-transform:none;color:var(--ink)}
+.cx-sec span{font:500 13px/1 var(--mono);letter-spacing:.08em;color:var(--faint)}
 .cx-dots{display:flex;flex:none}
 .cx-dots i{width:14px;height:14px;border-radius:50%;background:var(--c);box-shadow:0 0 0 1.5px #17160F,inset 0 0 0 1px rgba(236,232,223,.16)}
 .cx-dots i+i{margin-left:-4px}
@@ -82,12 +82,12 @@
 .cx-opt .cx-dots{width:58px}
 .cx-opt-t{flex:1;min-width:0}
 .cx-opt-t b{display:block;font:400 21px/1.05 var(--serif);letter-spacing:-.01em}
-.cx-opt-t small{display:block;margin-top:4px;font-size:12.5px;line-height:1.3;color:var(--soft)}
-.cx-opt em{flex:none;font:500 10.5px/1 var(--mono);font-style:normal;letter-spacing:.06em;color:var(--faint)}
+.cx-opt-t small{display:block;margin-top:4px;font-size:13px;line-height:1.3;color:var(--soft)}
+.cx-opt em{flex:none;font:500 13px/1 var(--mono);font-style:normal;letter-spacing:.06em;color:var(--faint)}
 .cx-opt.on .cx-opt-t b::after,.cx-spread.on .cx-opt-t b::after{content:"";display:inline-block;width:6px;height:6px;margin:0 0 3px 8px;border-radius:50%;background:var(--ink)}
 .cx-spread{gap:10px}
 .cx-ns{display:flex;flex:none;border:1px solid var(--rule);border-radius:18px;overflow:hidden}
-.cx-ns button{min-width:46px;height:34px;padding:0 10px;font:500 11px/1 var(--mono);letter-spacing:.04em;color:var(--soft)}
+.cx-ns button{min-width:46px;height:34px;padding:0 10px;font:500 13px/1 var(--mono);letter-spacing:.04em;color:var(--soft)}
 .cx-ns button+button{border-left:1px solid var(--rule)}
 .cx-ns button.on{color:#17160F;background:var(--ink)}
 .cx-fams{display:grid;grid-template-columns:repeat(5,1fr);gap:12px 4px;padding-top:12px}
@@ -96,11 +96,11 @@
 .cx-fam i{width:40px;height:40px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(236,232,223,.16);transition:box-shadow .2s}
 .cx-fam.on i{box-shadow:0 0 0 2px #17160F,0 0 0 3.5px var(--ink)}
 .cx-fam b{font:400 15px/1 var(--serif)}
-.cx-fam small{font:500 9px/1 var(--mono);letter-spacing:.04em;color:var(--faint)}
+.cx-fam small{font:500 13px/1 var(--mono);letter-spacing:.04em;color:var(--faint)}
 .cx-chips{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding-top:12px}
 .cx-chip{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:7px 6px;min-width:0;padding:10px 10px 9px;border:1px solid var(--rule);border-radius:10px;text-align:left;transition:border-color .2s,background .2s,transform .3s var(--spring)}
 .cx-chip:active{transform:scale(.96)}
-.cx-chip small{grid-row:1;grid-column:2;justify-self:end;font:500 9px/1 var(--mono);letter-spacing:.04em;color:var(--faint)}
+.cx-chip small{grid-row:1;grid-column:2;justify-self:end;font:500 13px/1 var(--mono);letter-spacing:.04em;color:var(--faint)}
 .cx-chip b{grid-column:1 / 3;font:400 17px/1 var(--serif);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .cx-chip .cx-dots i{width:12px;height:12px}
 .cx-chip.on{border-color:var(--rule-2);background:rgba(236,232,223,.07)}
@@ -109,12 +109,12 @@
 .cx-tune-sheet{max-height:min(420px,56dvh)}
 .cx-hue{display:flex;align-items:center;gap:16px;margin:10px 0 6px}
 .cx-hue p{margin:0!important;font-size:13px!important;line-height:1.4!important}
-.cx-hue p b{display:block;margin-bottom:4px;font:500 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.cx-hue p b{display:block;margin-bottom:4px;font:500 13px/1 var(--mono);letter-spacing:0;text-transform:none;color:var(--ink)}
 .cx-f{margin-top:8px}
-.cx-f>span{display:flex;align-items:baseline;gap:8px;font-size:12.5px;color:var(--soft)}
-.cx-f>span b{font:500 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.cx-f>span{display:flex;align-items:baseline;gap:8px;font-size:13px;color:var(--soft)}
+.cx-f>span b{font:500 13px/1 var(--mono);letter-spacing:0;text-transform:none;color:var(--ink)}
 .cx-f>span i{flex:1;font-style:normal;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.cx-f>span em{font:500 10px/1 var(--mono);font-style:normal;letter-spacing:.04em;color:var(--ink)}
+.cx-f>span em{font:500 13px/1 var(--mono);font-style:normal;letter-spacing:.04em;color:var(--ink)}
 
 /* a bare, chrome-free honeycomb for design review screenshots (#shot=honey:<style>:<n>:<default|out>) */
 .hc-shot{position:absolute;inset:0}

@@ -26,7 +26,7 @@
 @media (prefers-reduced-motion:reduce){.dl-art.dl-ph{animation:none}}
 
 /* ---------- Name today's color ---------- */
-.dn .deck-top .left{font:400 12px/1 var(--mono);letter-spacing:.02em;color:var(--soft)}
+.dn .deck-top .left{font:400 13px/1 var(--mono);letter-spacing:.02em;color:var(--soft)}
 .dn-dots{flex:1;display:flex;gap:8px;justify-content:center}
 .dn-dots i{width:10px;height:10px;border-radius:50%;background:var(--b-track);transition:background .3s,transform .3s var(--spring)}
 .dn-dots i.on{background:var(--c);transform:scale(1.15)}
@@ -84,7 +84,7 @@
 .dn .fine,.dp-end .fine{color:var(--b-soft)}
 
 /* ---------- Today's painting ---------- */
-.dp .deck-top .left{font:400 12px/1 var(--mono);letter-spacing:.02em;color:var(--soft)}
+.dp .deck-top .left{font:400 13px/1 var(--mono);letter-spacing:.02em;color:var(--soft)}
 .dp-head{display:flex;align-items:center;gap:14px;min-height:66px;padding-top:8px}
 .dp-chip{flex:none;width:46px;height:46px;border-radius:var(--r-1);background:var(--c);animation:fade .3s ease}
 .dp-q{font:400 clamp(25px,7.4vw,30px)/1.04 var(--serif);letter-spacing:-.02em;margin:0;text-wrap:balance}

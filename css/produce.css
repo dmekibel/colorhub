@@ -55,7 +55,7 @@
 .intro-in h2{font:400 clamp(54px,15vw,72px)/.9 var(--serif);letter-spacing:-.03em;margin:8px 0 14px}
 .intro-in ol{list-style:none;margin:0;padding:0;counter-reset:i}
 .intro-in li{counter-increment:i;display:grid;grid-template-columns:30px 1fr;padding:10px 0;border-top:1px solid var(--paper-line);font-size:15px;line-height:1.4;color:#3A3832;text-wrap:pretty}
-.intro-in li::before{content:counter(i,decimal-leading-zero);font:500 10.5px/2 var(--mono);color:var(--paper-soft)}
+.intro-in li::before{content:counter(i,decimal-leading-zero);font:500 13px/2 var(--mono);color:var(--paper-soft)}
 .intro-art{flex:1;min-height:0;display:flex;margin-bottom:18px}
 .ia-say,.ia-make{flex:1;display:flex;position:relative;overflow:hidden;border-radius:var(--r-1)}
 .ia-say i{position:absolute;inset:0;background:var(--c)}

@@ -472,7 +472,7 @@ function hgResults(o) {
   const corners = board.corners.map(h => { const nm = typeof nameOf === "function" ? nameOf(h).text : h; return `<button class="hg-corner" data-hex="${h}" aria-label="${esc(nm)}"><i style="--c:${h}"></i><span>${esc(nm)}</span></button>`; }).join("");
   const time = Math.round(res.ms / 1000), timeTxt = `${Math.floor(time / 60)}:${String(time % 60).padStart(2, "0")}`;
   const el = show(`
-    <header class="deck-top"><button class="icon-btn" data-close aria-label="Back to the map">${ICON.back}</button><span style="flex:1"></span><span class="mono oo-tot">${hgStarTotal()} ★</span></header>
+    <header class="deck-top"><button class="icon-btn" data-close aria-label="Back to the map">${ICON.back}</button><span style="flex:1"></span><span class="mono oo-tot">${hgStarTotal()} ${icon("starOn", 14)}</span></header>
     <p class="note">${esc(o.title)}${o.diff ? ` · ${esc(HG_DIFF[o.diff].name)}` : ""}</p>
     <h1>${head}</h1>
     <button class="hg-art" data-src>${hgStillHTML(board, "big")}<span class="hg-srcline"><b>${esc(src.title)}</b><em>${esc(src.line)}</em></span>${ICON.chev}</button>
@@ -552,7 +552,7 @@ function hgMap(focusW) {
   }).join("");
   const dline = dd ? `Solved in ${dd.moves} moves (par ${dd.par}). A new board tomorrow.` : `${HG_SHAPE_NAME[dspec.shape]}, the same board for everyone today.`;
   const el = show(`
-    <header class="deck-top"><button class="icon-btn" data-close aria-label="Back to Train">${ICON.back}</button><span style="flex:1"></span><span class="mono oo-tot">${hgStarTotal()} ★</span></header>
+    <header class="deck-top"><button class="icon-btn" data-close aria-label="Back to Train">${ICON.back}</button><span style="flex:1"></span><span class="mono oo-tot">${hgStarTotal()} ${icon("starOn", 14)}</span></header>
     <h1 class="title-1 oo-title">Gradients</h1>
     <p class="note">${back ? "Welcome back. Today's board is new." : st.plays ? "Every board's corners come from something real. Finish one to see what." : "Swap tiles until the colors flow. Each board's four corners come from a painting, a flower, a gem or a decade."}</p>
     ${hgModeHTML()}
@@ -714,7 +714,7 @@ function hgShelf() {
     <button class="oo-shelf hg-shelf" data-hg-map>
       <span class="hg-lvart">${hgMiniHTML(R.s, hgMiniCorners(nx.w, nx.i))}</span>
       <span class="oo-nt"><b>${st.plays ? `${esc(HG_WORLDS[nx.w].name)} · level ${nx.i + 1}` : "Swap tiles until the colors flow"}</b><em>${st.plays ? esc(HG_SHAPE_NAME[R.s]) + (R.t && HG_TWIST[R.t] ? ", " + esc(HG_TWIST[R.t].name.toLowerCase()) : "") : "Boards from paintings, flowers, gems and decades, from a 4 × 4 to a 12 × 12."}</em></span>
-      <span class="mono oo-tot">${st.plays ? `${hgStarTotal()} ★` : ""}</span>
+      <span class="mono oo-tot">${st.plays ? `${hgStarTotal()} ${icon("starOn", 14)}` : ""}</span>
     </button>
     <button class="play-row" data-hg-daily><span><b>Today's gradient</b><span>${esc(HG_SHAPE_NAME[dspec.shape])} #${dspec.num}, the same board for everyone</span></span><em class="lt-best">${dd ? `<b>${dd.moves}</b>moves` : "new"}</em></button>`;
 }
@@ -727,7 +727,7 @@ function hgWire(el) {
 // Train room tiles (js/rooms2.js reads window.TRAIN_TILES when it draws; meta is read live through getters)
 window.TRAIN_TILES = window.TRAIN_TILES || [];
 window.TRAIN_TILES.push(
-  { id: "hue", icon: "gradient", name: "Gradients", get meta() { const st = hgS(), nx = hgNext(); return st.plays ? `${HG_WORLDS[nx.w].name} ${nx.i + 1}${hgStarTotal() ? ` · ${hgStarTotal()} ★` : ""}` : "Put the colors back"; }, open: () => hgEnter() },
+  { id: "hue", icon: "gradient", name: "Gradients", get meta() { const st = hgS(), nx = hgNext(); return st.plays ? `${HG_WORLDS[nx.w].name} ${nx.i + 1}${hgStarTotal() ? ` · ${hgStarTotal()} stars` : ""}` : "Put the colors back"; }, open: () => hgEnter() },
   { id: "hue-daily", icon: "gradient", name: "Today's gradient", get meta() { const d = hgS().daily[today()]; return d ? `${d.moves} moves` : "Same board for all"; }, open: () => hgDaily() });
 function hgOpenRoute(id) {
   if (id === "daily") return hgDaily();

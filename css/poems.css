@@ -33,7 +33,7 @@
 .pm-dots .fine{margin-top:4px}
 .pm-dot{display:flex;align-items:center;gap:7px;padding:5px 9px 5px 5px;border:1px solid var(--rule);border-radius:var(--r-1);font:400 16px/1 var(--serif);transition:border-color .2s,background .2s}
 .pm-dot i{width:18px;height:18px;background:var(--c);border-radius:var(--r-1);box-shadow:inset 0 0 0 1px rgba(236,232,223,.16)}
-.pm-dot em{font:500 9.5px/1 var(--mono);font-style:normal;color:var(--faint);letter-spacing:.06em}
+.pm-dot em{font:500 13px/1 var(--mono);font-style:normal;color:var(--faint);letter-spacing:.06em}
 .pm-dot.on{border-color:var(--ink);background:var(--lift-2)}
 .pm-search{margin-top:22px}
 .pm-row{display:block;width:100%;text-align:left;padding:13px 0 12px;border-bottom:1px solid var(--rule)}
@@ -74,7 +74,7 @@
 /* the swatch at the top of a color-word sheet */
 .pm-sw{height:120px;background:var(--c);border-radius:var(--r-1);display:flex;align-items:flex-end;padding:10px 12px;margin-bottom:12px}
 .pm-sw[data-ink="dark"]{color:#141311}.pm-sw[data-ink="light"]{color:#fff}
-.pm-sw span{font-size:12px;opacity:.8}
+.pm-sw span{font-size:13px;opacity:.8}
 
 /* ---------- "In poems" on a color page ---------- */
 .pm-in{margin:40px 0 0}

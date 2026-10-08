@@ -13,9 +13,9 @@
 
 /* the bar above the grid: Adjust, what the search is, clear */
 .gl-bar{display:flex;align-items:center;gap:14px;min-height:46px;border-top:1px solid var(--rule-2);border-bottom:1px solid var(--rule);margin:4px 0 18px}
-.gl-adj{display:inline-flex;align-items:center;gap:8px;height:46px;font:500 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink);flex:none}
+.gl-adj{display:inline-flex;align-items:center;gap:8px;height:46px;font:500 13px/1 var(--mono);letter-spacing:0;text-transform:none;color:var(--ink);flex:none}
 .gl-adj svg{width:16px;height:16px}
-.gl-sum{flex:1;min-width:0;display:flex;align-items:center;gap:7px;font:500 10px/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gl-sum{flex:1;min-width:0;display:flex;align-items:center;gap:7px;font:500 13px/1.2 var(--mono);letter-spacing:0;text-transform:none;color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .gl-sum i{width:10px;height:10px;background:var(--c);flex:none}
 .gl-x{width:40px;height:40px;display:grid;place-items:center;color:var(--soft);margin-right:-10px;flex:none}
 .gl-x svg{width:16px;height:16px}
@@ -31,11 +31,11 @@
 .gl-im img.ld{opacity:1}
 .gl-pin .mini-pal{margin:6px 0 8px;flex:none}
 .gl-pin b{display:block;height:21px;font:400 19px/21px var(--serif);letter-spacing:-.005em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.gl-pin small{display:flex;height:14px;margin-top:5px;font:500 9.5px/14px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--soft);white-space:nowrap;overflow:hidden}
+.gl-pin small{display:flex;height:14px;margin-top:5px;font:500 13px/14px var(--mono);letter-spacing:0;text-transform:none;color:var(--soft);white-space:nowrap;overflow:hidden}
 .gl-pin small span{min-width:0;overflow:hidden;text-overflow:ellipsis}
 .gl-pin small em{flex:none;font-style:normal;white-space:pre}
 .gl-pin:active .gl-im{opacity:.8}
-.gl-badge{position:absolute;left:6px;bottom:6px;z-index:1;max-width:calc(100% - 12px);padding:5px 7px 4px;border-radius:2px;background:rgba(14,13,11,.7);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:var(--ink);font:500 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gl-badge{position:absolute;left:6px;bottom:6px;z-index:1;max-width:calc(100% - 12px);padding:5px 7px 4px;border-radius:2px;background:rgba(14,13,11,.7);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:var(--ink);font:500 13px/1 var(--mono);letter-spacing:0;text-transform:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
 /* Adjust floats once the bar has scrolled away */
 .gl-float{position:fixed;left:50%;bottom:calc(var(--tabh) + 14px);transform:translateX(-50%);z-index:14;max-width:min(78vw,420px);box-shadow:0 10px 30px -10px rgba(0,0,0,.8);animation:fade .25s both}
@@ -48,17 +48,17 @@
 .gl-picker .cp-wheel{touch-action:none}
 .gl-sh-top{display:flex;align-items:baseline;gap:12px;padding-bottom:8px}
 .gl-sh-top b{font:400 30px/1 var(--serif);letter-spacing:-.02em}
-.gl-sh-top span{flex:1;font:500 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--soft)}
-.gl-reset{font:500 10px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--soft);padding:10px 0 10px 10px}
+.gl-sh-top span{flex:1;font:500 13px/1 var(--mono);letter-spacing:0;text-transform:none;color:var(--soft)}
+.gl-reset{font:500 13px/1 var(--mono);letter-spacing:0;text-transform:none;color:var(--soft);padding:10px 0 10px 10px}
 .gl-row{display:grid;grid-template-columns:58px minmax(0,1fr);align-items:center;min-height:48px;border-top:1px solid var(--rule)}
-.gl-lab{font:500 9.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.gl-lab{font:500 13px/1 var(--mono);letter-spacing:0;text-transform:none;color:var(--faint)}
 .gl-sw,.gl-chips{display:flex;gap:7px;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;scrollbar-width:none;padding:9px var(--g) 9px 3px;margin-right:calc(-1 * var(--g))}
 .gl-sw::-webkit-scrollbar,.gl-chips::-webkit-scrollbar{display:none}
 .gl-sw button{flex:none;width:30px;height:30px;background:var(--c);border-radius:2px;position:relative}
 .gl-sw button.on{outline:2px solid var(--ink);outline-offset:2px}
 .gl-sw .today::after{content:"";position:absolute;left:50%;bottom:-7px;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:var(--ink)}
 .gl-sw .gl-any{border-radius:50%;background:conic-gradient(#E34234,#FFBF00,#50C878,#00A6C8,#4B5BD8,#B04BC8,#E34234)}
-.gl-cap{display:flex;align-items:center;gap:8px;min-height:30px;margin:-4px 0 6px 58px;font-size:12px;line-height:1.3;color:var(--soft)}
+.gl-cap{display:flex;align-items:center;gap:8px;min-height:30px;margin:-4px 0 6px 58px;font-size:13px;line-height:1.3;color:var(--soft)}
 .gl-cap i{width:12px;height:12px;background:var(--c);flex:none}
 .gl-cap b{font:400 18px/1 var(--serif);color:var(--ink);white-space:nowrap}
 .gl-cap span{min-width:0}
@@ -66,9 +66,9 @@
 .gl-picker .cp-wheel{width:min(100%,190px)}
 /* the wheel and the hex field are enough here; the HSB/RGB/LCh sliders live in Studio */
 .gl-picker .cp-modes,.gl-picker .cp-sliders{display:none}
-.gl-chips button{flex:none;height:30px;padding:0 11px;border:1px solid var(--rule);border-radius:2px;font:500 9.5px/1 var(--mono);letter-spacing:.11em;text-transform:uppercase;color:var(--soft);white-space:nowrap;transition:background .2s,color .2s}
+.gl-chips button{flex:none;height:30px;padding:0 11px;border:1px solid var(--rule);border-radius:2px;font:500 13px/1 var(--mono);letter-spacing:0;text-transform:none;color:var(--soft);white-space:nowrap;transition:background .2s,color .2s}
 .gl-chips button.on{background:var(--paper);border-color:var(--paper);color:var(--paper-ink)}
-.gl-range{display:flex;align-items:center;gap:0;font:500 9px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.gl-range{display:flex;align-items:center;gap:0;font:500 13px/1 var(--mono);letter-spacing:0;text-transform:none;color:var(--faint)}
 .gl-range>span{width:34px;flex:none}
 .gl-range>span:last-child{text-align:right}
 .gl-tr{position:relative;flex:1;height:8px;margin:14px 12px;border-radius:4px;touch-action:none;cursor:pointer}
@@ -92,13 +92,13 @@
 /* "In paintings" on a color page */
 .gl-in{margin-top:40px}
 .gl-in:empty{display:none}
-.gl-in h3{font:500 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--soft);padding-bottom:10px;border-bottom:1px solid var(--rule);margin-bottom:14px}
+.gl-in h3{font:500 13px/1 var(--mono);letter-spacing:0;text-transform:none;color:var(--soft);padding-bottom:10px;border-bottom:1px solid var(--rule);margin-bottom:14px}
 .gl-in-sub{color:var(--soft);font-size:13.5px;line-height:1.45;margin:0 0 14px;max-width:46ch}
 .gl-in .gl-all{margin-top:4px;padding:0}
 
 /* painting page: our 200px copies stay crisp at a smaller size; a link offers the full image at the museum */
 .gl-hero.small span{margin:0 auto}
-.gl-full{display:block;text-align:center;margin-top:10px;font:500 11px/1.4 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--soft);text-decoration:underline;text-underline-offset:3px}
+.gl-full{display:block;text-align:center;margin-top:10px;font:500 13px/1.4 var(--mono);letter-spacing:0;text-transform:none;color:var(--soft);text-decoration:underline;text-underline-offset:3px}
 .gl-hero img.hi{animation:fade .4s both}
 
 /* the dynamic palette's 3/6/12/20 control (ROADMAP §13) */

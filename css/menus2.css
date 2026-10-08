@@ -207,7 +207,7 @@ html.booth .toast{background:var(--booth-2);box-shadow:none;border-color:var(--b
 .ym-week i{width:34px;height:34px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--rule)}
 .ym-week span.on i{background:var(--c,var(--soft));box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
 .ym-week span.now i{outline:1.5px solid var(--ink);outline-offset:3px}
-.ym-week small{font:400 12px/1 var(--mono);color:var(--faint)}
+.ym-week small{font:400 13px/1 var(--mono);color:var(--faint)}
 .ym-week span.now small{color:var(--ink)}
 /* mix-ups: two chips, each opens its page */
 .ym-pair{display:flex;align-items:center;gap:14px;min-height:64px;border-bottom:1px solid var(--rule)}
@@ -226,7 +226,7 @@ html.booth .toast{background:var(--booth-2);box-shadow:none;border-color:var(--b
 .ym-bars>div{display:grid;grid-template-columns:76px 1fr 46px;align-items:center;gap:10px}
 .ym-bars span{font:italic 400 15px/1 var(--serif);color:var(--soft)}
 .ym-bars i{height:6px;border-radius:3px;width:var(--w);background:var(--c)}
-.ym-bars b{font:400 12px/1 var(--mono);color:var(--soft);text-align:right}
+.ym-bars b{font:400 13px/1 var(--mono);color:var(--soft);text-align:right}
 .ym-photos{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 calc(-1 * var(--g));padding:0 var(--g)}
 .ym-ph{flex:none;width:92px;height:92px;padding:0;border:0;border-radius:var(--r-1);overflow:hidden;background:var(--surface-2)}
 .ym-ph img{width:100%;height:100%;object-fit:cover}
@@ -266,6 +266,12 @@ html.booth .toast{background:var(--booth-2);box-shadow:none;border-color:var(--b
   --tap:44px; --tap-l:56px; --type-body:16px; --type-ui:15px; --type-cap:13px;
   --mono:var(--sans);   /* Geist Mono retired: every mono label falls back to Geist */
   --corner:56px;
+  /* the older names follow the Night Gallery tokens, so every screen that still says --surface-2 or --r-1 converges:
+     surfaces e1/e2/raised, radii 6 (tiles) / 18 (cards) / 28 (sheets), and --rule-2 becomes the .22 edge, never a
+     near-white outline */
+  --surface-1:var(--s1); --surface-2:var(--s2); --surface-3:var(--s3);
+  --r-1:var(--r-tile); --r-2:var(--r-card); --r-3:var(--r-sheet);
+  --rule-2:var(--line-2);
 }
 .mono{font-variant-numeric:tabular-nums}
 /* segmented controls: a pill track, the chosen segment a raised, ringed pill */
