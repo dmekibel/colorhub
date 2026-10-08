@@ -244,8 +244,10 @@ function hmHome() {
     else { if (fx && fx.morph) fx.morph(); open(); }
     if (src) src.remove();
   };
+  let hlAll = false;
+  if (typeof HONEY_LIVE !== "undefined") HONEY_LIVE.add(() => { if (!el.isConnected) return false; if (hlAll && !HONEY_HL) { hlAll = false; render(true); } return true; });
   function paintTitle(loading) {
-    title.querySelector("span").textContent = hmViewLabel();
+    title.querySelector("span").textContent = hlAll ? "Every name" : hmViewLabel();
     title.querySelector("small").textContent = loading ? "Loading…" : `${items.length.toLocaleString()} color${items.length === 1 ? "" : "s"}`;
   }
   async function render(soft) {
@@ -263,7 +265,14 @@ function hmHome() {
       if (csNeedsLib(set.state) && !LONG_NAMES) { paintTitle(true); await loadLongNames(); if (!el.isConnected || g !== gen) return; }
       items = set.get();
     }
-    items = items.filter(HM_KEEP[v.filter]);
+    // L18 H4: a fresh constellation (a painting, a painter, a decade...) lights up among every name, so each of its
+    // colors finds its own bubble instead of all collapsing onto the few a small stage holds. Not saved; clearing the
+    // constellation (its pill) brings your own view back.
+    if (typeof HONEY_HL !== "undefined" && HONEY_HL && HONEY_HL.fresh && !every) {
+      if (!LONG_NAMES || !CORE_NAMES) { await Promise.all([loadCoreNames(), loadLongNames()]); if (!el.isConnected || g !== gen) return; }
+      items = hmEveryNameItems(); hlAll = true;
+    } else if (!(typeof HONEY_HL !== "undefined" && HONEY_HL)) hlAll = false;
+    if (!hlAll) items = items.filter(HM_KEEP[v.filter]);
     paintTitle();
     if (ctrl) ctrl.update({ items, soft });
     else ctrl = honeycomb(viewEl, { items, style: v.style, tweak: hmTweakFor(v.style), zoom: S.hm.zoom || 1, pick, onPeek, centerFirst: true, famNames: !!S.hm.famNames,
@@ -648,6 +657,26 @@ async function l18Resolve(q) {
   return { set: colorSet({ kind: "painter", id: p.slug, title, colors: hs.map(h => ({ h })) }), hint: `${l18Sw(hs)}<span>Light up <b>${esc(p.n)}</b>'s colors</span>` };
 }
 
+// ---------- L18 H4: any painting on the map. Its measured colors, merged by name (shares added), biggest first, lit as
+// a constellation on Home (csOnMap). Addresses: #/map/gallery/<i> (a museum painting), #/map/painting/<slug>. ----------
+function hmPaintingSet(n) {
+  const by = new Map();
+  (n.palette || []).forEach(p => { const nm = p.name || (typeof nameOf === "function" ? nameOf(p.h).text : p.h), o = by.get(nm); if (o) o.share += p.share || 0; else by.set(nm, { h: p.h, n: nm, share: p.share || 0 }); });
+  const colors = [...by.values()].sort((a, b) => b.share - a.share);
+  return colorSet({ kind: "painting", id: n.id || n.title, title: `${n.title} · ${colors.length} named color${colors.length === 1 ? "" : "s"} · as photographed`, colors, src: n.src || "painting/" + routeSlug(String(n.id || "").replace(/^painting-/, "")) });
+}
+function hmMapRoute(kind, id) {
+  if (kind === "gallery" && /^\d+$/.test(id) && typeof loadGallery === "function") {
+    const i = +id;
+    return loadGallery().then(() => glDetail(i)).then(d => {
+      const pal = glPal(i).map(p => ({ ...p, name: nameOf(p.h).text }));
+      csOnMap(hmPaintingSet({ id: "g" + i, title: d.t || "Painting", palette: pal, src: "gallery/" + i }));
+    }).catch(() => { hmHome(); toast("That painting didn't load"); });
+  }
+  if (kind === "painting") return loadWiki().then(() => { const n = graph().nodes.get("painting-" + id); if (n && (n.palette || []).length) csOnMap(hmPaintingSet(n)); else hmHome(); });
+  hmHome();
+}
+
 // ---------- L18 B2: the real floor. Just before a room rises over Home, keep a snapshot of the map exactly as you
 // left it; the strip above every room (js/core.js roomChrome) shows it, dimmed by a solid scrim, never blurred. ----------
 let ROOM_FLOOR_IMG = null;
@@ -693,6 +722,7 @@ function hmShot(arg) {
   hmHome();
   if (arg === "bar") setTimeout(() => { const s = document.querySelector(".screen.hm"); if (s) s.classList.remove("chrome-hide"); }, 3200);
   if (arg === "floor") setTimeout(() => { hmSnapFloor(); go("gym"); }, 600);   // L18 B2: a room over the real floor
+  if (/^route:/.test(arg)) setTimeout(() => openRoute("#" + arg.slice(6)), 300);   // e.g. home:route:/map/painting/starry-night
   if (/^find:/.test(arg)) setTimeout(() => window.HM_SEARCH && window.HM_SEARCH(arg.slice(5)), 300);
   if (arg === "rooms") setTimeout(() => hmTap(document.querySelector("[data-rooms-corner]")), 150);
   if (arg === "views") setTimeout(() => hmTap(document.getElementById("hmView")), 150);

@@ -154,3 +154,5 @@
 .rm-art-station .sa{width:100%;height:100%;aspect-ratio:auto;border-radius:0}
 .room-floor-snap{background-size:cover;background-position:center 42%}
 .room-floor-snap i{position:absolute;inset:0;top:0;width:auto;height:auto;transform:none;opacity:1;background:rgba(14,13,11,.58)}
+/* L18: a lit constellation pill sits above the favorites heart on Home */
+.hm .cs-hl-pill{bottom:calc(var(--bottom) + 140px)}

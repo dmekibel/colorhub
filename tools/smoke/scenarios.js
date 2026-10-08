@@ -628,6 +628,15 @@ scenario("map", "search 2.0: a hex and a modifier fly; a decade, a painter and a
   h = await ask("between teal and navy");
   await t.waitFor(() => /Between Teal and Navy/i.test(t.text(".cs-hl-pill")), 15000, "the road constellation");
 });
+scenario("map", "On the map: a painting page lights its colors on Home; #/map/gallery/<i> does the same", async t => {
+  await H.homeReady(t); t.ev("openRoute('#/painting/starry-night')");   // shot mode: placed, so Home is the floor
+  const b = await t.waitFor("[data-cs=map]", 12000, "the On the map button on a painting page");
+  await t.click(b, { force: true, wait: 900 });
+  await t.waitFor(() => /as photographed/.test(t.text(".cs-hl-pill")), 15000, "the painting's constellation on Home");
+  t.notes.push(t.text(".cs-hl-pill"));
+  await H.homeReady(t); t.ev("openRoute('#/map/gallery/3')");
+  await t.waitFor(() => /named colou?rs? · as photographed/.test(t.text(".cs-hl-pill")), 20000, "a museum painting's constellation from its address");
+});
 scenario("map", "Look: family names when zoomed out is off by default and toggles on", async t => {
   await H.homeReady(t);
   t.expect(!t.ev("S.hm.famNames"), "family names are on by default");

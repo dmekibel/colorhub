@@ -959,6 +959,21 @@ function honeycomb(host, opts = {}) {
     morph = null; draw();
     return { ok: out.every(r => !r.bad), out };
   }
+  // L18 H4: a freshly lit constellation is framed: centered on its middle and zoomed out just enough to hold it all
+  function l18FrameLit() {
+    if (!lay || lay.globe || !W) return;
+    const set = hlItems(); if (!set || set.size < 2) return;
+    const pts = [...set].map(l18WorldOf).filter(Boolean); if (pts.length < 2) return;
+    // the middle is the lit bubble closest to all the others (never an empty patch between them); the zoom holds
+    // the nearer two thirds big enough to read, and the outliers still show, smaller, toward the edge
+    const sum = p => pts.reduce((t, q) => t + Math.hypot(p[0] - q[0], p[1] - q[1]), 0), mid = pts.reduce((m, p) => sum(p) < sum(m) ? p : m, pts[0]);
+    const [cx, cy] = mid, ds = pts.map(p => Math.hypot(p[0] - cx, p[1] - cy)).sort((a, b) => a - b);
+    const dmax = ds[Math.min(ds.length - 1, Math.ceil(ds.length * .67))] + .8, R = Math.min(W, vy()) / 2 - 34;
+    const fits = z => cfg.lensMode === "round" ? F(dmax, { s: z, m0: cfg.m0, m1: cfg.m1, sig: cfg.sig }) <= R : dmax * base * z * M <= R;
+    let lo = ZMIN, hi = Math.max(ZMIN, Z);
+    if (!fits(lo)) hi = lo; else for (let i = 0; i < 20; i++) { const m = (lo + hi) / 2; if (fits(m)) lo = m; else hi = m; }
+    P = [cx, cy]; Plag = P.slice(); Z = clamp(Math.min(Z, lo), ZMIN, ZMAX); center = null; draw(); settled = center;
+  }
   // where an item sits in the plane, the copy nearest the current pan (a wrapping map repeats every item)
   function l18WorldOf(it) {
     let best = null, bd = Infinity;
@@ -1248,7 +1263,7 @@ function honeycomb(host, opts = {}) {
   if (hlOn) HONEY_LIVE.add(() => { if (dead) return false; hlMemo = null; draw(); return true; });
   let hlFocus = null;
   if (hlOn && HONEY_HL && HONEY_HL.fresh) { HONEY_HL.fresh = false; hlFocus = { h: HONEY_HL.hexes[0] }; }
-  if (hlFocus) setItems(opts.items, opts.focus || hlFocus, "");
+  if (hlFocus) { setItems(opts.items, opts.focus || hlFocus, ""); l18FrameLit(); }
   else setItems(opts.items, opts.focus || (HONEY_PAN && { n: HONEY_PAN.name }), "restore");
   // ---- the Tweak panel's API: live overrides on top of the active preset, saved by the caller (S.hm.tweak) ----
   function applyTweak(partial) {
