@@ -33,7 +33,6 @@ function rcWireOpen(host, hex) {
   host.addEventListener("click", e => {
     const g = e.target.closest("[data-rc-gi]");
     if (g) return galleryPage(+g.dataset.rcGi, true, host._rcHex || null);
-    const dl = e.target.closest("[data-rc-duel]"); if (dl && typeof lmDuel === "function") return lmDuel(dl.dataset.rcDuel);
     const b = e.target.closest("[data-rc-open]"); if (!b) return;
     morphFrom(b.querySelector("i") || b); openCoreName(b.dataset.h, b.dataset.n);
   });
@@ -70,24 +69,28 @@ const rcNearNote = (name, near) => `<p class="fine">Nothing of ${esc(name.toLowe
 const RC_MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 function rcDayLabel(k) { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(k || ""); return m ? `${+m[3]} ${RC_MONTHS[+m[2] - 1]}` : ""; }
 function rcYouHTML(name, hex) {
-  const lines = [];
+  const lines = [], self = { n: name, h: hex };
   const taught = BYNAME.get(String(name).toLowerCase()), st = taught && taught.id && S.cards[taught.id];
   if (st && isMine(st) && st.ownAt) lines.push(`Yours since ${esc(rcDayLabel(st.ownAt))}.`);
-  else if (st && S.cards[taught.id]) lines.push("You're learning this one.");
   let duel = "";
   if (typeof lmPairs === "function") {
     try {
-      (lmPairs(routeSlug(name)) || []).slice(0, 1).forEach(p => {
-        lines.push(`You've mixed it up with ${esc(p.name || p.slug)} ${p.n} time${p.n === 1 ? "" : "s"}.`);
-        if (typeof lmDuel === "function") duel = `<button class="btn ghost rc-duel" data-rc-duel="${esc(p.slug || "")}">Duel it ${ICON.arrow}</button>`;
-      });
+      const p = (lmPairs(self, 1) || [])[0];
+      if (p && p.b && p.hb) {
+        lines.push(`You've mixed it up with ${esc(String(p.b).toLowerCase())}${p.n > 1 ? `, ${p.n} times` : ""}.`);
+        if (typeof arDuel === "function") duel = `<button class="rc-duel" data-rc-duel data-b="${esc(p.b)}" data-hb="${p.hb}">Duel the two · 20 s</button><span class="rc-duel-panel" data-rc-duel-panel hidden></span>`;
+      }
     } catch (e) {}
   }
   if (typeof lmSeen === "function") {
-    try { const n = lmSeen(routeSlug(name)); if (n) lines.push(`Found ${n === 1 ? "once" : n + " times"} with the camera.`); } catch (e) {}
+    try { const sets = lmSeen(self, 3) || []; if (sets.length) lines.push(`You've met it in ${sets.length === 1 ? "one set" : sets.length + " sets"} you opened${sets[0].title ? `, like ${esc(sets[0].title)}` : ""}.`); } catch (e) {}
   }
   if (!lines.length) return "";
-  return `<p class="rc-you">${lines.join(" ")}${duel}</p>`;
+  return `<section class="rc-you"><h3>You and this color</h3><p>${lines.join(" ")}</p>${duel}</section>`;
+}
+function rcWireYou(el, name, hex) {
+  const b = el.querySelector("[data-rc-duel]"); if (!b) return;
+  b.onclick = () => { const pan = el.querySelector("[data-rc-duel-panel]"); pan.hidden = false; b.hidden = true; arDuel(pan, { n: name, h: hex }, { n: b.dataset.b, h: b.dataset.hb }, 5); };
 }
 
 // ======================================================================

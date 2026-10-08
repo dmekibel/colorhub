@@ -132,6 +132,7 @@ function rpDrawersHTML(entry, name, hex, famC, paintHost) {
     ${rpDrawer("paint", "In paintings", paint)}${rpDrawer("company", "Its company", rcPairedSection(name, hex))}${rpDrawer("words", "In words", words)}${rpDrawer("world", "In the world", world)}${rpDrawer("measured", "Measured", measured, esc(mhead))}</section>`;
 }
 function rpDrawersWire(el, name, hex) {
+  if (typeof rcWireYou === "function") rcWireYou(el, name, hex);
   const drawers = [...el.querySelectorAll(".rp-drawer")];
   const open = (id, scroll) => { drawers.forEach(d => { const on = d.dataset.rpDrawer === id; if (on) d.open = true; else if (d.open) d.open = false; if (on && scroll) setTimeout(() => d.scrollIntoView({ block: "start", behavior: reduceMotion ? "auto" : "smooth" }), 30); }); };
   drawers.forEach(d => d.querySelector("summary").addEventListener("click", () => { if (!d.open) drawers.forEach(o => { if (o !== d) o.open = false; }); }));
