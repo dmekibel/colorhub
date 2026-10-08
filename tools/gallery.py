@@ -450,6 +450,9 @@ def main():
           f"{n_sh} detail shards of {shard}; {tot / 1e6:.2f} MB in all. "
           f"{no_size} without a known image size, {no_rec} without a record URL, "
           f"{no_pool} without a dynamic palette (no cached image) -- pool data adds ~{pool_bytes / 1e6:.2f} MB.")
+    # Every file keyed by a gallery index goes stale when the corpus changes (node tools/check_ids.js fails on it).
+    print("Now rebuild what is keyed to this order, in this order: tools/analyze.py, tools/metrics_build.py, "
+          "tools/facets.py, tools/artwiki_build.py; then run node tools/check_ids.js.")
 
 
 if __name__ == "__main__":

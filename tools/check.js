@@ -83,4 +83,10 @@ for (const f of fs.readdirSync(path.join(__dirname, "../js")).filter(f => f.ends
 }
 nameErrors.forEach(f => console.log(`FAIL  js/${f}: names a color outside js/naming.js's nameOf() (LONG_NAMES, nameColor(, or library.json)`));
 console.log(`naming gate: ${nameErrors.length} files name colors outside the one naming system`);
-process.exit(errors.length || nameErrors.length ? 1 : 0);
+
+// Index-alignment gate (tools/check_ids.js): every file keyed by a gallery index must agree with the corpus.
+const idsGate = require("./check_ids.js").checkIds();
+idsGate.warnings.forEach(w => console.log("warn  " + w));
+idsGate.errors.forEach(e => console.log("FAIL  " + e));
+console.log(`ids gate: ${idsGate.N} paintings, ${idsGate.errors.length} files out of step with the corpus`);
+process.exit(errors.length || nameErrors.length || idsGate.errors.length ? 1 : 0);
