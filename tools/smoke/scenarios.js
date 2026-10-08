@@ -789,6 +789,28 @@ scenario("pages", "a world twin (In gems) opens its page in one tap, Back return
   await t.waitFor(() => t.$(".cp-page .cp-hero-foot h1") && H.title(t) === "Fiery Rose", 8000, "Back to return to Fiery Rose");
 });
 
+// design/audit-graph/CHECKPOINT.md #6/#7: role paintings (ar.rp_) and Werner's 1821 examples (node.werner),
+// both already computed, never shown before this -- js/richcolor.js rcRolePaintingsHTML / rcWernerLine.
+scenario("pages", "role paintings and Werner's 1821 example show on the color page", async t => {
+  await H.openPage(t, "#/name/auburn", "Auburn");
+  const paint = await t.waitFor(() => t.$('[data-rp-drawer="paint"]'), 8000, "the 'In paintings' drawer");
+  if (!paint.open) await t.click(paint.querySelector("summary"), { wait: 200 });
+  await t.waitFor(() => t.$$(".rc-ri", paint).length >= 2, 15000, "a role-paintings row (shadow/mid/light/accent/hidden)");
+  const tiles = t.$$(".rc-ri", paint);
+  t.expect(tiles.every(x => /Shadow|Mid|Light|Accent|Hidden/.test(x.textContent)), "a role tile is missing its label");
+  const tile = await t.waitFor(() => tiles.find(x => x.dataset.rcGi), 15000, "a role painting resolved to a gallery index");
+  await t.click(tile, { wait: 700 });
+  await t.waitFor(() => t.$(".gl-page"), 10000, "the role painting's own page");
+  await t.click("[data-back]", { wait: 600 });
+  await t.waitFor(() => t.$(".cp-page .cp-hero-foot h1") && H.title(t) === "Auburn", 8000, "Back to return to Auburn");
+
+  await H.openPage(t, "#/name/indigo-blue", "Indigo Blue");
+  const world = await t.waitFor(() => t.$('[data-rp-drawer="world"]'), 8000, "the 'In the world' drawer");
+  if (!world.open) await t.click(world.querySelector("summary"), { wait: 200 });
+  const line = await t.waitFor(() => t.$(".rc-werner", world), 15000, "Werner's 1821 example line");
+  t.expect(/Werner, 1821:.*Blue Copper Ore.*\(mineral\)/.test(t.text(line)), `the Werner line reads "${t.text(line)}"`);
+});
+
 scenario("pages", "hold the cover: the flower rises, dragging lights a hex, letting go opens that color; Back returns", async t => {
   await H.openPage(t, "#/name/fiery-rose", "Fiery Rose");
   const hero = t.$(".cp-hero"), r = hero.getBoundingClientRect();

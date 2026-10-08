@@ -169,9 +169,9 @@ function rpDrawer(id, title, body, head) {
 }
 function rpDrawersHTML(entry, name, hex, famC, paintHost, o = {}) {
   const call = (f, ...a) => typeof f === "function" ? f(...a) : "";
-  const paint = `${paintHost}${call(rcReachSection, name, hex)}${call(rcRoleSection, name, hex)}${call(rcPaintersSection, name, hex)}${call(rcWhenWhereSection, name, hex)}`;
+  const paint = `${paintHost}${call(rcRolePaintingsHTML, name, hex)}${call(rcReachSection, name, hex)}${call(rcRoleSection, name, hex)}${call(rcPaintersSection, name, hex)}${call(rcWhenWhereSection, name, hex)}`;
   const words = `<div class="c-poems"></div>${call(archiveRows, entry, "books", famC)}`;
-  const world = `${call(btRow, entry, famC)}${call(gmRow, entry, famC)}<section class="fx-in" data-world-in></section>${call(archiveRows, entry, "films", famC)}`;
+  const world = `${call(rcWernerLine, name, hex)}${call(btRow, entry, famC)}${call(gmRow, entry, famC)}<section class="fx-in" data-world-in></section>${call(archiveRows, entry, "films", famC)}`;
   const measured = `${rcMeasuredHTML(hex)}${rcMixHTML(hex)}${rcHarmonyHTML(hex, name)}`;
   const [L, C] = lch(hex);
   rcPercentileCaches();
