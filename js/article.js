@@ -93,11 +93,12 @@ let AR_GN = null;   // data/graph/names.json rows [slug, name, hex, ...]: every 
 // Alias-aware resolving (the data-quality merge renamed and merged many colors). AR_AL maps an alias slug to { to: canonical slug, via: original word }:
 // data/graph/aliases.json { alias: {slug: canonical} } and data/aliases.json { slugs: {slug: canonical}, names: {Display name: Canonical name} }.
 // AR_LM is data/articles/link-map.json { links: { slug: { to: slug | null, label, reason } } }: explicit overrides, consulted first; to:null = plain text.
-let AR_AL = new Map(), AR_LM = new Map();
+let AR_AL = new Map(), AR_LM = new Map(), AR_BK = new Map();   // AR_BK: article-only slugs (data/articles/index.json, written by tools/article_gate.py --write-index): a pigment or idea with a book but no color of its own
 function arLoadNames() {
   if (AR_GN) return Promise.resolve(AR_GN);
   return Promise.all([arFetchJSON(arCfg().names || "data/graph/names.json"), arFetchJSON(arCfg().gaiases || "data/graph/aliases.json"),
-    arFetchJSON(arCfg().aliases || "data/aliases.json"), arFetchJSON((arCfg().articles || "data/articles/") + "link-map.json")]).then(([rows, ga, da, lm]) => {
+    arFetchJSON(arCfg().aliases || "data/aliases.json"), arFetchJSON((arCfg().articles || "data/articles/") + "link-map.json"), arFetchJSON((arCfg().articles || "data/articles/") + "index.json")]).then(([rows, ga, da, lm, ix]) => {
+    AR_BK = new Map(Object.entries((ix && ix.articles) || {}));
     const al = new Map();
     if (da && da.names) Object.keys(da.names).forEach(k => { const s = routeSlug(k); if (!al.has(s)) al.set(s, k); });   // slug -> the word as first written
     if (da && da.slugs) Object.keys(da.slugs).forEach(s => al.set(s, { to: da.slugs[s], via: typeof al.get(s) === "string" ? al.get(s) : "" }));
@@ -133,18 +134,22 @@ function arColor(ref) {
   }
   const d = arDirect(slug);
   if (d) return d;
+  const bk = AR_BK.get(slug);   // an article with no color name of its own: a link to the book, not a swatch
+  if (bk) return { slug, n: bk.name, h: bk.hex, book: true };
   const a = AR_AL.get(slug);   // an alias: the canonical color, the word as first written kept as the label
   const t = a && arDirect(a.to);
   return t ? { ...t, via: a.via || arPretty(slug) } : null;
 }
 function arOpenColor(slug, srcEl) {
   const c = arColor(slug); if (!c) return;
+  if (c.book) return arReadPage(c.slug);
   if (srcEl && typeof morphFrom === "function") { try { morphFrom(srcEl); } catch (e) {} }
   openCoreName(c.h, c.n);
 }
 
 // ---------- inline text ----------
 // hl: a paragraph's highlight budget ({ n }); while it lasts, the link's words take their own color, legibly (arAccent)
+const AR_BOOK_GLYPH = `<svg class="ar-bk" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5zM4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/></svg>`;   // a link to a book, not a color
 function arLinkHTML(slug, label, hl, word) {
   const c = arColor(slug);
   if (!c) { const lm = AR_LM.get(slug); return `<span class="ar-link ar-x">${esc(label || (lm && lm.label) || arPretty(slug))}</span>`; }
@@ -152,7 +157,7 @@ function arLinkHTML(slug, label, hl, word) {
   if (a && a.mode !== "none") hl.n++;
   const cls = a && a.mode !== "none" ? ` ${AR_HL_CLS[a.mode]}" style="--hl:${a.c || "transparent"}` : "";
   // word: a color word found in plain text ("then purple"): its color is the mark, so no swatch dot and no underline unless it is pale
-  return `<button type="button" class="ar-link${word ? " ar-cw" : ""}${cls}" data-ar-open="${esc(c.slug)}">${word ? "" : `<i style="--c:${c.h}"></i>`}${esc(label || c.via || c.n)}</button>`;
+  return `<button type="button" class="ar-link${word ? " ar-cw" : ""}${cls}" data-ar-open="${esc(c.slug)}">${word ? "" : c.book ? AR_BOOK_GLYPH : `<i style="--c:${c.h}"></i>`}${esc(label || c.via || c.n)}</button>`;
 }
 
 // ---------- reading aids (David, 2026-10-08: "a lot of text and hard to read ... some words pink, not light pink") ----------

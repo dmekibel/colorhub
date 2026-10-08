@@ -24,12 +24,12 @@ if (fs.existsSync(gnPath)) JSON.parse(fs.readFileSync(gnPath, "utf8")).forEach(r
 const readJSON = f => { try { return JSON.parse(fs.readFileSync(path.join(root, f), "utf8")); } catch (e) { return null; } };
 const linkMap = (readJSON("data/articles/link-map.json") || {}).links || {};
 const aliasOf = Object.assign({}, (readJSON("data/aliases.json") || {}).slugs, (readJSON("data/graph/aliases.json") || {}).alias);
-const articleSlugs = new Set(fs.readdirSync(path.join(root, "data/articles")).filter(f => f.endsWith(".json") && f !== "link-map.json").map(f => f.slice(0, -5)));
+const articleSlugs = new Set(fs.readdirSync(path.join(root, "data/articles")).filter(f => f.endsWith(".json") && f !== "link-map.json" && f !== "index.json").map(f => f.slice(0, -5)));
 const resolves = (s, body) => { s = norm(s); if (s in linkMap) return linkMap[s].to ? known.has(linkMap[s].to) || articleSlugs.has(linkMap[s].to) : !!body; return known.has(s) || articleSlugs.has(s) || (s in aliasOf && (known.has(aliasOf[s]) || articleSlugs.has(aliasOf[s]))); };
 
 // ---- sandbox ----
 let fetchTable = { "data/graph/names.json": readJSON("data/graph/names.json"), "data/graph/aliases.json": readJSON("data/graph/aliases.json"),
-  "data/aliases.json": readJSON("data/aliases.json"), "data/articles/link-map.json": readJSON("data/articles/link-map.json") };
+  "data/aliases.json": readJSON("data/aliases.json"), "data/articles/link-map.json": readJSON("data/articles/link-map.json"), "data/articles/index.json": readJSON("data/articles/index.json") };
 const cm = require("./colormath.js");
 // the files the reference cards read from disk (the app fetches them over HTTP)
 const diskFetch = k => /^data\/(graph\/(nodes|edges)-[a-z_]\.json|gallery\/ids\.txt|analysis\/artists\/[a-z0-9-]+\.json)$/.test(k) && fs.existsSync(path.join(root, k)) ? fs.readFileSync(path.join(root, k), "utf8") : null;
@@ -66,6 +66,8 @@ const namesLoaded = (async () => {
   ok(ar.arLinkHTML("seashell", "shell").includes(">shell<"), "an explicit [[slug|label]] still wins over the alias word");
   ok(ar.arLinkHTML("konjo-iro").includes('data-ar-open="yale-blue"') && ar.arLinkHTML("konjo-iro").includes(">Konjō-iro<"), "a link-map entry opens its target with its label");
   ok(ar.arColor("yinmn-blue") === null && ar.arLinkHTML("yinmn-blue").includes("ar-x") && ar.arLinkHTML("yinmn-blue").includes("YInMn blue"), "a link-map to:null entry is plain text with its label");
+  const bk = ar.arColor("madder");
+  ok(bk && bk.book && ar.arLinkHTML("madder").includes('data-ar-open="madder"') && ar.arLinkHTML("madder").includes("ar-bk") && !ar.arLinkHTML("madder").includes("<i "), "an article-only slug (madder) links to its book with a book glyph, not a swatch");
   ok(ar.arColor("cobalt") && ar.arColor("cobalt").via === undefined, "a canonical name resolves unchanged");
 })();
 
