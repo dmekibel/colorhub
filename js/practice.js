@@ -87,6 +87,7 @@ function prState() {
   if (!p.best || typeof p.best !== "object") p.best = {};
   if (p.speak == null) p.speak = true;
   if (!p.mix || typeof p.mix !== "object" || Array.isArray(p.mix)) p.mix = {};
+  if (!p.seen || typeof p.seen !== "object" || Array.isArray(p.seen)) p.seen = {};
   return p;
 }
 const PR_DEFAULT = () => ({ src: "first", n: 50, fam: "all", list: "", order: "shuffle", dir: "f", round: 0, method: "cards" });
@@ -364,8 +365,11 @@ function prRecord(sess, it, res, kind) {
   if (sess.first.has(it.key)) return false;
   sess.first.set(it.key, { it, ok: !!res.ok, answer: res.answer || null, kind, assist: !!res.assist });
   const by = PR_STEPS[kind] ? PR_STEPS[kind].by : null;
-  prApply(it, !!res.ok, by, !!res.assist);
+  const eff = prApply(it, !!res.ok, by, !!res.assist);
+  sess.applied = sess.applied || { review: 0, tomorrow: 0 };
+  if (eff === "review") sess.applied.review++; if (eff === "tomorrow" || (eff === "review" && !res.ok)) sess.applied.tomorrow++;
   prTrick(it, !!res.ok);
+  if (sess.el) prCoach(sess, sess.el);
   if (!res.ok && res.answer && res.answer.n) prMixNote(it, res.answer.n);
   return true;
 }
@@ -406,7 +410,7 @@ function prFit(name, big = 72) {
   const n = String(name).length, s = n <= 7 ? big : n <= 10 ? big * .84 : n <= 14 ? big * .7 : n <= 18 ? big * .6 : big * .54;
   return `font-size:${Math.round(s)}px`;
 }
-const prPlate = (items, cls = "") => `<div class="pr-plate ${cls}" aria-hidden="true">${items.slice(0, 160).map(it => `<i style="--c:${it.h}"></i>`).join("")}</div>`;
+const prPlate = (items, cls = "") => `<div class="pr-plate ${cls}" aria-hidden="true">${items.slice(0, 160).map((it, k) => `<i style="--c:${it.h};--k:${k}"></i>`).join("")}</div>`;
 const prTime = ms => { const s = ms / 1000; if (s < 60) return `${s.toFixed(1)} s`; const m = Math.floor(s / 60); return `${m}:${String(Math.floor(s % 60)).padStart(2, "0")}`; };
 const prPrimary = (label, note = "", attr = "") => `<button class="pr-primary" ${attr}><span>${label}</span>${note ? `<em>${note}</em>` : ""}${PR_ICON.arrow}</button>`;
 const prShotMode = () => typeof SHOT !== "undefined" && !!SHOT || (typeof PR_SHOT_ON !== "undefined" && PR_SHOT_ON);
@@ -781,8 +785,8 @@ PR_STEPS.match = { by: "pick", render(box, items, ctx = {}) {
       const it = items[t.i];
       return t.sw ? `<button class="pr-tile sw" data-k="${k}" style="--c:${it.h}" aria-label="A color"></button>`
         : `<button class="pr-tile nm" data-k="${k}"><span>${esc(prName(it))}</span></button>`;
-    }).join("")}</div></div>`;
-    const missed = new Map();
+    }).join("")}</div><p class="pr-matchnote" aria-live="polite"></p></div>`;
+    const missed = new Map(), note = box.querySelector(".pr-matchnote");
     let sel = null, left = items.length;
     box.querySelectorAll(".pr-tile").forEach(b => b.onclick = () => {
       const k = +b.dataset.k, t = tiles[k];
@@ -800,6 +804,8 @@ PR_STEPS.match = { by: "pick", render(box, items, ctx = {}) {
         if (!missed.has(swT.i)) missed.set(swT.i, { kind: "pick", n: prName(picked), h: picked.h });
         [a.b, b].forEach(x => { x.classList.remove("bad"); void x.offsetWidth; x.classList.add("bad"); });
         buzz([10, 40, 10]);
+        // a wrong pair teaches: which way the two differ
+        note.innerHTML = `<span class="pr-pair"><i style="--c:${it.h}"></i><i style="--c:${picked.h}"></i></span><span>Not ${esc(prName(picked))}. ${esc(prDiff(it, picked))}</span>`;
         if (ctx.onMiss) ctx.onMiss({ item: it, picked });
       }
     });
@@ -887,9 +893,9 @@ PR_STEPS["blitz-yes-no"] = { by: null, render(box, it, ctx = {}) {
 // ---------- rain: a color drifts down; tap its name (of three neighbors) before it lands ----------
 PR_STEPS.rain = { by: "pick", render(box, it, ctx = {}) {
   return new Promise(resolve => {
-    const t0 = performance.now(), opts = prShuffle([it, ...prNear(it, 2, ctx.deck)]), fall = ctx.fall || 6500;
+    const t0 = performance.now(), opts = prShuffle([it, ...(ctx.ease ? prNear(it, 3, ctx.deck).slice(1) : prNear(it, 2, ctx.deck))]), fall = ctx.fall || 6500;
     box.innerHTML = `<div class="pr-step pr-s-rain">
-      <div class="pr-sky"><i class="pr-drop" style="--c:${it.h}"></i><span class="pr-ground"></span></div>
+      <div class="pr-sky"><i class="pr-drop" style="--c:${it.h}"></i><span class="pr-ground"></span><p class="pr-rainnote" aria-live="polite"></p></div>
       <div class="pr-opts pr-opts3">${opts.map((o, i) => `<button class="pr-opt" data-i="${i}"><span>${esc(prName(o))}</span></button>`).join("")}</div></div>`;
     const sky = box.querySelector(".pr-sky"), drop = box.querySelector(".pr-drop");
     let done = false, anim = null;
@@ -898,6 +904,7 @@ PR_STEPS.rain = { by: "pick", render(box, it, ctx = {}) {
       if (anim) anim.pause();
       box.querySelectorAll(".pr-opt").forEach((b, k) => { b.classList.toggle("ok", opts[k] === it); b.disabled = true; });
       drop.classList.add(cls);
+      if (!ok) box.querySelector(".pr-rainnote").innerHTML = `It was <em>${esc(prName(it))}</em>`;
       buzz(ok ? 12 : [10, 40, 10]);
       prAuto(() => resolve({ ok, answer, ms: performance.now() - t0 }), ok ? 380 : 1000);
     };
@@ -973,12 +980,25 @@ PR_STEPS["odd-one-out"] = { by: "pick", render(box, it, ctx = {}) {
 // ======================================================================
 // The play shell: the lesson archetype on booth grey. ✕ on the left, then one progress bar, then one small readout.
 // ======================================================================
+// The first time you play a method: one line above the stage, gone after your first answer (taught by doing)
+const PR_COACH = { cards: "Name it in your head, tap to check, then swipe.", quiz: "Tap the name that fits.", type: "Type its name. Small typos are fine.",
+  match: "Tap a color, then its name.", learn: "Each color climbs from picking to typing.", test: "No answers until the end.", say: "Say its name out loud.",
+  blitz: "Swipe right for yes, left for no.", pairs: "Flip two tiles to find a color and its name.", rain: "Tap its name before it lands.",
+  odd: "Tap the one that isn't the named color." };
+function prCoach(sess, el, text) {
+  const c = el && el.querySelector(".pr-coach"); if (!c) return;
+  if (text) { c.textContent = text; c.hidden = false; return; }
+  c.hidden = true;
+  if (!sess.coached) { sess.coached = true; const p = prState(); if (!p.seen[sess.method]) { p.seen[sess.method] = today(); save(); } }
+}
 function prShell(sess, o = {}) {
   const n = sess.items.length, segs = n <= 30;
   const prog = o.timer ? `<div class="pr-timer"><i></i></div>` : segs ? `<div class="pr-segs">${sess.items.map(it => `<i data-k="${esc(it.key)}" style="--c:${it.h}"></i>`).join("")}</div>`
     : `<div class="pr-bar"><i></i></div>`;
   const el = show(`<header class="pr-top"><button class="pr-x" data-close aria-label="Close">${prX()}</button>${prog}<span class="pr-right">${o.right || ""}</span></header>
+    <p class="pr-coach"${prState().seen[sess.method] ? " hidden" : ""}>${PR_COACH[sess.method] || ""}</p>
     <div class="pr-stage"></div>`, "fixed pr-play pr-booth pr-m-" + sess.method);
+  sess.el = el;
   const stage = el.querySelector(".pr-stage"), right = el.querySelector(".pr-right");
   let known = 0;
   el.querySelector("[data-close]").onclick = () => { sess.ended = true; if (sess.first.size || sess.score) prResults(sess, { stopped: true }); else prExit(sess); };
@@ -1053,13 +1073,21 @@ PR_RUN.say = sess => {
   return run;
 };
 // Match: boards of six against the clock; a wrong pair adds a second.
+// Boards after the first group neighbors by hue, so the matching gets harder: telling look-alikes apart
+function prBoards(items) {
+  if (items.length <= PR_SET * 1.5) return items;
+  const key = it => { const [L, C, H] = lch(it.h); return C < 12 ? 400 + (100 - L) : H; };
+  return [...items.slice(0, PR_SET), ...items.slice(PR_SET).sort((a, b) => key(a) - key(b))];
+}
 PR_RUN.match = async sess => {
   let pen = 0;
+  sess.items = prBoards(sess.items);
   const sh = prShell(sess, { right: `<span class="pr-code" data-clock>0.0 s</span>` }), clock = sh.right.querySelector("[data-clock]");
   const tick = () => { if (!clock.isConnected) return; clock.textContent = prTime(performance.now() - sess.t0 + pen * 1000); later(tick, 100); };
   tick();
   for (let i = 0; i < sess.items.length && !sess.ended; i += PR_SET) {
     const set = sess.items.slice(i, i + PR_SET);
+    if (i === PR_SET) prCoach(sess, sh.el, "Now look-alikes, side by side.");
     const res = await PR_STEPS.match.render(sh.stage, set, prCtx(sess, sh, { onMiss: () => { pen++; clock.classList.remove("pen"); void clock.offsetWidth; clock.classList.add("pen"); } }));
     if (sess.ended || !sh.stage.isConnected) return;
     res.per.forEach(p => { prRecord(sess, p.item, { ok: p.ok, answer: p.answer, ms: res.ms / set.length }, "match"); sh.seg(p.item, p.ok ? "on" : "met"); });
@@ -1070,6 +1098,7 @@ PR_RUN.match = async sess => {
 // Pairs: boards of six pairs; the score is the time.
 PR_RUN.pairs = async sess => {
   let flips = 0;
+  sess.items = prBoards(sess.items);
   const sh = prShell(sess, { right: `<span class="pr-code" data-clock>0.0 s</span>` }), clock = sh.right.querySelector("[data-clock]");
   const tick = () => { if (!clock.isConnected) return; clock.textContent = prTime(performance.now() - sess.t0); later(tick, 100); };
   tick();
@@ -1145,14 +1174,20 @@ PR_RUN.blitz = async sess => {
   while (!over && !sess.ended) {
     let it; do { it = sess.items[Math.random() * sess.items.length | 0]; } while (sess.items.length > 1 && it === last);
     last = it;
-    const res = await PR_STEPS["blitz-yes-no"].render(sh.stage, it, prCtx(sess, sh));
+    // a breathing curve: early false claims are a farther neighbor, a long run brings the nearest; a miss resets it
+    const near = prNear(it, 3, sess.deckAll || sess.items), o = near[Math.min(near.length - 1, combo < 4 ? 2 : combo < 9 ? 1 : 0)];
+    const claim = Math.random() < .5 || !o ? { n: prName(it), h: it.h, truth: true } : { n: prName(o), h: o.h, truth: false };
+    const res = await PR_STEPS["blitz-yes-no"].render(sh.stage, it, prCtx(sess, sh, { claim }));
     if (over || !sh.stage.isConnected) return;
     prRecord(sess, it, res, "blitz-yes-no");
     sess.score.n++;
+    const m0 = Math.min(4, 1 + Math.floor(combo / 5));
     if (res.ok) { combo++; sess.score.right++; const m = Math.min(4, 1 + Math.floor(combo / 5)); sess.score.pts += m; sess.score.best = Math.max(sess.score.best, combo); }
     else combo = 0;
     const m = Math.min(4, 1 + Math.floor(combo / 5));
     score.textContent = sess.score.pts; mult.textContent = m > 1 ? `×${m}` : "";
+    if (m > m0) { mult.classList.remove("up"); void mult.offsetWidth; mult.classList.add("up"); buzz([10, 30, 20]); prCoach(sess, sh.el, m === 2 ? "Five in a row: every right answer counts double." : `×${m}. The look-alikes get closer.`); }
+    else if (m < m0) prCoach(sess, sh.el, "Run over. Easier ones again.");
   }
 };
 // Color rain: three lives; it falls a little faster after every catch.
@@ -1162,11 +1197,12 @@ PR_RUN.rain = async sess => {
   let lives = PR_RAIN_LIVES, fall = 7000, caught = 0;
   for (let i = 0; i < sess.items.length && lives > 0 && !sess.ended; i++) {
     const it = sess.items[i];
-    const res = await PR_STEPS.rain.render(sh.stage, it, prCtx(sess, sh, { fall }));
+    const res = await PR_STEPS.rain.render(sh.stage, it, prCtx(sess, sh, { fall, ease: caught < 4 }));
     if (sess.ended || !sh.stage.isConnected) return;
     prRecord(sess, it, res, "rain");
     sh.seg(it, res.ok ? "on" : "met");
-    if (res.ok) { caught++; fall = Math.max(2600, fall * .95); } else { lives--; sh.right.innerHTML = life(lives); }
+    if (res.ok) { caught++; fall = Math.max(2600, fall * .95); if (caught === 4) prCoach(sess, sh.el, "Now the closest look-alikes."); }
+    else { lives--; fall = Math.min(7000, fall * 1.12); sh.right.innerHTML = life(lives); }
   }
   sess.score = { caught, lives };
   if (!sess.ended) prResults(sess);
@@ -1268,21 +1304,33 @@ function prResults(sess, o = {}) {
   }
   if (best && best.better && !best.first) line += " · A new best";
   else if (best && !best.better && best.old != null) line += ` · Best ${mono(best.lower ? prTime(best.old) : best.old)}`;
+  // Test: how each kind of question went
+  if (m === "test") {
+    const kinds = [["quiz-name", "naming"], ["quiz-color", "finding"], ["type", "typing"], ["blitz-yes-no", "true or false"]];
+    const parts = kinds.map(([k, t]) => { const f = firsts.filter(x => x.kind === k); return f.length ? `${t} ${mono(f.filter(x => x.ok).length + "/" + f.length)}` : ""; }).filter(Boolean);
+    if (parts.length) line += " · " + parts.join(", ");
+  }
   line = line.replace(/ · /g, "&ensp;·&ensp;");
-  const rows = misses.map(f => {
+  // what it did to your reviews, honestly (only learned colors are ever touched)
+  const ap = sess.applied || {};
+  const sched = [ap.review ? `Counted as today's review for ${ap.review} ${ap.review === 1 ? "color" : "colors"}` : "", ap.tomorrow ? `${ap.tomorrow} come${ap.tomorrow === 1 ? "s" : ""} back tomorrow` : ""].filter(Boolean).join(". ");
+  const win = (total > 0 && !misses.length && !o.stopped) || (best && best.better && !best.first);
+  const rows = misses.map((f, i) => {
     const a = f.answer || {}, yours = a.h && (a.kind !== "claim" || a.yes) ? `<i style="--c:${a.h}"></i>` : `<i class="none"></i>`;
-    return `<div class="pr-row pr-miss"><span class="pr-pair2"><i style="--c:${f.it.h}"></i>${yours}</span><span class="pr-rowt"><b>${esc(prName(f.it))}</b><small>${prAnswerLine(f)}</small></span></div>`;
+    return `<button class="pr-row pr-miss" data-open="${i}"><span class="pr-pair2"><i style="--c:${f.it.h}"></i>${yours}</span><span class="pr-rowt"><b>${esc(prName(f.it))}</b><small>${prAnswerLine(f)}</small></span>${PR_ICON.chev}</button>`;
   }).join("");
+  const shareText = `ColorHub · ${M.t} · ${sess.items.length} colors · ${String(title).replace(/<[^>]+>/g, "")}`;
   const el = show(`<header class="pr-top"><button class="pr-x" data-close aria-label="Close">${prX()}</button><span class="pr-grow"></span><span class="pr-note">${esc(M.t)}</span></header>
-    ${prPlate(sess.items, "pr-plate-res")}
+    ${prPlate(sess.items, "pr-plate-res" + (win ? " win" : ""))}
     <h1 class="pr-t1 pr-res-t">${title}</h1>
     <p class="pr-notep">${line}</p>
+    ${sched ? `<p class="pr-notep pr-sched">${sched}.</p>` : ""}
     ${misses.length ? `<p class="pr-note pr-sec-n">${misses.length === 1 ? "The one to look at again" : `The ${misses.length} to look at again`}</p><div class="pr-rows">${rows}</div>` : ""}
     <div class="pr-grow"></div>
     <div class="pr-acts">
       ${misses.length ? prPrimary("Practice my misses", String(misses.length), "data-a=misses") : more ? prPrimary(`Next ${Math.min(sess.spec.round, deck.length - nextOff)}`, "", "data-a=next") : prPrimary("Again", "", "data-a=again")}
       ${misses.length && more ? `<button class="pr-text" data-a="next">Go on to the next ${Math.min(sess.spec.round, deck.length - nextOff)}</button>` : ""}
-      <button class="pr-text" data-a="other">Same deck, another way</button>
+      <span class="pr-textrow"><button class="pr-text" data-a="other">Same deck, another way</button><button class="pr-text" data-a="share">Share</button></span>
     </div>`, "pr-res pr-booth");
   buzz(misses.length ? 8 : [10, 30, 20]);
   const act = a => {
@@ -1290,8 +1338,14 @@ function prResults(sess, o = {}) {
     if (a === "misses") return prPlay(m, { items: prShuffle(misses.map(f => f.it)), deck, label: "Your misses", ...keep });
     if (a === "next") return prPlay(m, { deck, offset: nextOff, ...keep });
     if (a === "again") return prPlay(m, sess.misses ? { items: prShuffle(sess.items), deck, ...keep } : { deck: sess.spec.order === "shuffle" ? null : deck, offset: sess.offset || 0, ...keep });
+    if (a === "share") {
+      try { if (navigator.share) return void navigator.share({ text: shareText }).catch(() => {}); navigator.clipboard.writeText(shareText); toast("Copied"); } catch (e) {}
+      return;
+    }
     return sess.other ? sess.other() : prHome();
   };
+  // a miss opens its color's page (any of the ~1,000 names)
+  el.querySelectorAll("[data-open]").forEach(b => b.onclick = () => { const f = misses[+b.dataset.open]; if (f && typeof openCoreName === "function") openCoreName(f.it.h, f.it.n); });
   el.querySelectorAll("[data-a]").forEach(b => b.onclick = () => act(b.dataset.a));
   el.querySelector("[data-close]").onclick = () => prExit(sess);
   onKey = e => { if (e.key === "Enter") act(misses.length ? "misses" : more ? "next" : "again"); if (e.key === "Escape") prExit(sess); };
@@ -1478,9 +1532,9 @@ function prQuick(o = {}) {
   const { sh, close } = sheet(`<div class="pr-quick">
     <div class="pr-qhead"><h2 class="pr-t2" data-qtitle></h2><span class="pr-note" data-qcount></span></div>
     <div data-qplate></div>
-    <p class="pr-note pr-qsec">From</p><div class="pr-rail" data-qrow="source"></div>
-    <p class="pr-note pr-qsec">How many</p><div class="pr-seg" data-qrow="size">${PR_SIZES.map(([n, t]) => `<button class="pr-chip" data-size="${n}">${t}</button>`).join("")}</div>
-    <p class="pr-note pr-qsec">How</p><div class="pr-rail" data-qrow="method">${methods.map(([m, t]) => `<button class="pr-chip" data-method="${m}">${t}</button>`).join("")}</div>
+    <div class="pr-note pr-qsec">From</div><div class="pr-rail" data-qrow="source"></div>
+    <div class="pr-note pr-qsec">How many</div><div class="pr-seg" data-qrow="size">${PR_SIZES.map(([n, t]) => `<button class="pr-chip" data-size="${n}">${t}</button>`).join("")}</div>
+    <div class="pr-note pr-qsec">How</div><div class="pr-rail" data-qrow="method">${methods.map(([m, t]) => `<button class="pr-chip" data-method="${m}">${t}</button>`).join("")}</div>
     <div class="pr-qgo" data-qgo></div></div>`);
   sh.classList.add("pr-qsheet");
   let deck = null;
@@ -1491,7 +1545,7 @@ function prQuick(o = {}) {
     sh.querySelector('[data-qrow="source"]').innerHTML = srcs.map(k => `<button class="pr-chip${k === st.source ? " on" : ""}" data-source="${k}">${k === "these" && o.label ? esc(o.label) : PR_SOURCES[k]}${["mixups", "due", "tricky", "star"].includes(k) ? ` <span class="pr-code">${deck.counts[k]}</span>` : ""}</button>`).join("");
     sh.querySelectorAll("[data-size]").forEach(b => b.classList.toggle("on", +b.dataset.size === +st.size));
     sh.querySelectorAll("[data-method]").forEach(b => b.classList.toggle("on", b.dataset.method === st.method));
-    const title = seed && st.source !== "these" ? `Learn <em>${esc(prName(seed))}</em>` : `Learn <em>${esc(st.source === "these" ? (o.label || "these colors") : PR_SOURCES[st.source].toLowerCase())}</em>`;
+    const title = seed && st.source !== "these" ? `Learn <em>${esc(prName(seed))}</em>` : `Learn <em>${esc(st.source === "these" ? "these colors" : PR_SOURCES[st.source].toLowerCase())}</em>`;
     sh.querySelector("[data-qtitle]").innerHTML = title;
     sh.querySelector("[data-qcount]").innerHTML = st.method === "lesson" ? "about 2 minutes" : `<span class="pr-code">${deck.items.length}</span> ${deck.items.length === 1 ? "color" : "colors"}`;
     sh.querySelector("[data-qplate]").innerHTML = prPlate(st.method === "lesson" ? [seed] : deck.items, "pr-plate-quick");

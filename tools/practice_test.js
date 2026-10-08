@@ -219,6 +219,15 @@ ok(D({ seed: "teal", source: "tricky", size: 0 }).keys.includes("teal"), "Tricky
 ok(D({}).source === "first", "no seed and no set: the first 50");
 ok(run(`typeof prQuick === "function" && typeof prLearnSet === "function"`), "the quick sheet and prLearnSet exist");
 
+// ---------- craft details ----------
+run(`S.cards = {}; S.practice = undefined;`);
+card("Teal", { b: 1, due: T, since: add(-4), own: false }); card("Coral", { b: 2, due: add(9), since: add(-20), own: false });
+const ap = run(`(() => { const s = prSession("quiz", {}, []); prRecord(s, prOfApp(${C("Teal")}), { ok: true }, "quiz-name"); prRecord(s, prOfApp(${C("Coral")}), { ok: false }, "quiz-name"); prRecord(s, prByKey("cerulean"), { ok: false }, "quiz-name"); return s.applied; })()`);
+ok(ap.review === 1 && ap.tomorrow === 1, "the results know honestly how many reviews were counted and how many come back tomorrow");
+const boards = run(`prBoards(prFirst(30)).map(x => x.key)`);
+ok(boards.length === 30 && new Set(boards).size === 30 && boards.slice(0, 6).join() === run(`prFirst(6).map(x => x.key).join()`), "Match boards: the first board stays mixed, the rest is the same set regrouped");
+ok(run(`(() => { const b = prBoards(prFirst(30)).slice(6), key = it => { const [L, C, H] = lch(it.h); return C < 12 ? 400 + (100 - L) : H; }; return b.every((x, i) => !i || key(b[i - 1]) <= key(x)); })()`), "later Match boards hold hue neighbors (look-alikes side by side)");
+
 // ---------- the step contract is complete ----------
 const kinds = ["card", "quiz-name", "quiz-color", "type", "say", "match", "pairs", "blitz-yes-no", "rain", "odd-one-out"];
 ok(kinds.every(k => run(`typeof PR_STEPS[${JSON.stringify(k)}].render === "function" && "by" in PR_STEPS[${JSON.stringify(k)}]`)), "every step kind has render() and by");
