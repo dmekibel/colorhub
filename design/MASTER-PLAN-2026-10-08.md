@@ -177,7 +177,19 @@ The full-screen color, then a one-line definition with its source, then the **Re
 
 ---
 
+## Launch queue (start as slots free; 20 subagents can run at once)
+0. R1 competitor teardown (design/lanes/R1-competitors.md): first free slot.
+0c. L18 Honeycomb 10× build (design/IDEAS-10X/home-map.md specs H1 family names when zoomed out, **an optional toggle in Look, off by default** (David: he likes seeing all the tiny colors too); **zoomed-out tap rule (David): when bubbles are tiny, a tap zooms in to that bubble and centers it, and the next tap opens its page; the normal-zoom rules (glide to center, center ring opens) stay**; H3 stage glide, H4 on the map for any painting, H5 learning spiral, B1 Placement 2.0, B2 live stem + real floor, B3 pull-down search 2.0). Start after L23 and L24 merge, since they share honey.js.
+0b. L16 Explore 2.0 browsing (design/lanes/L16-explore-browse.md): the color dial, facet chips with counts, views (grid with a jump bar, Decade River, by painter, wall), smart collections. Second free slot; pairs with L26.
+1. L22 Maerz & Paul round 2: the dictionary index (~4,000 names, plate/cell, origin and date), per-plate color correction, a clean merge.
+2. L9 learning beyond the 101 + the Journey, after Practice (L4) merges.
+3. Ideas synthesis, after the 7 IDEAS-10X panels report.
+4. L7 article engine at scale, after David approves the pilot voice.
+6. L26 color in paintings (design/lanes/L26-color-in-paintings.md): tolerance and coverage sliders, a finer per-painting color index, the arriving color pinned, a where-it-lives mask.
+5. L23 taste and favorites (design/lanes/L23-taste.md): honeycomb multi-select, a favorites shelf, rankings that aren't tournaments, a taste profile.
+
 ## Progress log
+- 13:xx: David chose "go with your recs" on the 5 Journey decisions (recorded at the top of design/JOURNEY.md). L9 is unblocked once Practice merges.
 - 12:4x: L1 ledger landed (design/REQUESTS-LEDGER.md: 111 done, 43 partial, 45 not started). ECC patterns adopted as files (no plugin). L19 design-history corpus started. L6 also computes per-color superlatives (rarest, peak decade, loyal painters).
 - 12:0x: Wave 0 launched: L1 ledger, L2 concordance, L3 smoke harness, L4 Practice resume, L5 rich pages resume.
 - 12:1x: Wave 1 started early (no dependencies): L6 graph, L15 data quality, L10 Train games, L11 art wiki, L12 design lead. The genius panel is reviewing this plan (design/GENIUS-PANEL-1.md). An ECC study agent is writing design/ECC-ADAPT.md (patterns only; no plugin installed mid-sprint).
