@@ -25,6 +25,19 @@ Built 2026-10-07 by `tools/corpus.py`, with one adapter per newer museum in `too
 > paintings was judged not worth doing twice in one document; `research/COMMONS.md` has what changed on the Commons
 > side specifically.
 
+> **Update, 2026-10-07 (artist merge).** Four painters were counted twice because museums spell them differently:
+> NGA's "Sir Anthony van Dyck", NGA and the Met's "Auguste Renoir", and CMA, Rijksmuseum and SMK's "David Teniers"
+> and "Lucas Cranach". They now join "Anthony van Dyck", "Pierre-Auguste Renoir", "David Teniers the Younger" and
+> "Lucas Cranach the Elder" through a short hand-picked table, `ARTIST_ALIAS` in `tools/corpus.py`. It is not an
+> automatic rule: substring matching would also merge Anton Raphael Mengs into Raphael. Measured on the same cache
+> before and after: **4 fewer artists** (839 → 835) and **80 fewer paintings**, all from the 50-per-artist cap,
+> which now also catches Pierre-Auguste Renoir (96), Anthony van Dyck (67), David Teniers the Younger (66) and Lucas
+> Cranach the Elder (51). #13 (Russia, black 35.5%) and #14 (darkest Willem Kalf, lightest Bian Shoumin) are
+> unchanged except for that artist count. The Renoir cap trims #5 (French blues and greens in the 1880s 17.3% →
+> 16.9%) and #6, which uses only the Art Institute's movement labels (Impressionist blue 8.4% → 7.4%, n 140 → 132,
+> since some of Chicago's Renoirs fall outside the evenly spread 50). Both still hold. (The 830 above is the
+> committed build. A rebuild of the same code on today's refreshed Commons metadata already gives 839.)
+
 ---
 
 ## 1. Data

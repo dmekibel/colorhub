@@ -51,7 +51,7 @@ const ooTheta0 = (m, j) => { const r = m.j[j]; return r && isFinite(r.r) ? Math.
 // hue and soft in lightness). Both offsets are small and bounded, and start at zero.
 const ooOff = (m, k) => m.f[k] && isFinite(m.f[k].o) ? m.f[k].o : 0;
 const ooTheta = (m, j, fam) => Math.max(OO_MIN, Math.min(OO_MAX, ooTheta0(m, j) * Math.exp(fam ? ooOff(m, fam) + ooOff(m, fam + ":" + j) : 0)));
-// The reader other screens use (eyeThreshold in js/games/oo-ui.js): { th (ΔE00), n (answers behind it), sure }
+// The reader other screens use (ooEyeInfo / trEyeThreshold in js/games/oo-ui.js): { th (ΔE00), n (answers behind it), sure }
 function ooEye(m, fam, axis) {
   m = ooModel(m);
   const axes = axis ? [axis] : OO_AXES, js = axes.filter(a => m.j[a] && m.j[a].n);

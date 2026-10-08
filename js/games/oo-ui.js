@@ -26,37 +26,37 @@ const ooMixOpen = () => ooS().lv > OO_MIX_AT - 1 || !!(ooStars(OO_MIX_AT - 1)[0]
 const ooShotMode = () => typeof SHOT !== "undefined" && !!SHOT;
 
 // ---------- the reader other screens use: can this person see a difference? ----------
-// eyeThreshold(family, axis): family like "Blues" (or "blue"), axis "light" | "chroma" | "hue" (or "lightness",
-// "vividness"), either may be null. Returns { th (ΔE00), pct ("2.2%"), n (answers behind it), sure } or null.
-// Color pages can say "ΔE 3.1: your blue threshold is 2.2%, so you can see this".
+// ooEyeInfo(family, axis): family like "Blues" (or "blue"), axis "light" | "chroma" | "hue" (or "lightness",
+// "vividness", "context", "memory"), either may be null (null axis = any difference, the three axes together).
+// Returns { th (ΔE00), pct ("2.2%"), n (answers behind it), sure } or null before it's been measured.
+// trEyeThreshold(family, axis) is the number alone, the hook js/learner.js's eyeThreshold() reads first; there
+// "hue" / "de" mean any difference (the odd-one-out sense), so they map to the combined estimate here.
 const OO_AXIS_ALIAS = { lightness: "light", value: "light", l: "light", vividness: "chroma", saturation: "chroma", c: "chroma", h: "hue" };
-function eyeThreshold(family, axis) {
-  let fam = family ? String(family) : null;
-  if (fam) { fam = fam.charAt(0).toUpperCase() + fam.slice(1).toLowerCase(); if (!fam.endsWith("s")) fam += "s"; if (!OO_FAMS[fam]) fam = null; }
-  const ax = axis ? (OO_AXIS_ALIAS[String(axis).toLowerCase()] || String(axis).toLowerCase()) : null;
+const ooFamName = family => { if (!family) return null; if (/^#?[0-9a-f]{6}$/i.test(family)) return ooFam("#" + String(family).replace("#", "")); let f = String(family).replace(/^gray/i, "grey"); f = f.charAt(0).toUpperCase() + f.slice(1).toLowerCase(); if (!f.endsWith("s")) f += "s"; return OO_FAMS[f] ? f : null; };
+function ooEyeInfo(family, axis) {
+  const fam = ooFamName(family), ax = axis ? (OO_AXIS_ALIAS[String(axis).toLowerCase()] || String(axis).toLowerCase()) : null;
   if (ax && !OO_AXES.includes(ax) && !OO_JUDG[ax]) return null;
   const m = ooS().model;
   if (ax && !OO_AXES.includes(ax)) { const r = m.j[ax]; return r && r.n ? { th: Math.exp(r.r), pct: pctFmt(Math.exp(r.r)), n: r.n, sure: r.n >= 12 } : null; }
   const e = ooEye(m, fam, ax);
-  if (e.th == null) {
-    // nothing from the games yet: the older Odd one out station's per-family scores (js/gym.js), when there are some
-    const old = S.gym && S.gym.skills && S.gym.skills.hue && S.gym.skills.hue.fam && fam ? S.gym.skills.hue.fam[fam] : null;
-    return old && !ax ? { th: old, pct: pctFmt(old), n: 0, sure: false, from: "station" } : null;
-  }
-  return { th: e.th, pct: pctFmt(e.th), n: e.n, sure: e.sure };
+  return e.th == null ? null : { th: e.th, pct: pctFmt(e.th), n: e.n, sure: e.sure };
+}
+function trEyeThreshold(family, axis) {
+  const a = String(axis || "").toLowerCase(), e = ooEyeInfo(family, a === "hue" || a === "de" || !a ? null : a);
+  return e ? e.th : null;
 }
 
 // ---------- every miss is a confusion event (Genius panel #4) ----------
 // learnerLog (js/learner.js, another lane) when it exists; otherwise S.gymMiss, a capped list the learner lane reads.
 function ooLogMiss(right, picked, meta = {}) {
   if (!right || !picked || right === picked) return;
+  try { if (typeof learnerLog === "function" && learnerLog({ type: "confuse", a: right, b: picked, src: "train" })) return; } catch (e) {}
+  // no learner (yet): a capped list the learner lane reads, with the direction of the miss (dL, dC, dH)
   const [L1, C1, H1] = lch(right), [L2, C2, H2] = lch(picked);
   let dH = H2 - H1; if (dH > 180) dH -= 360; if (dH < -180) dH += 360;
-  const ev = { type: "confuse", a: right, b: picked, src: "train", game: meta.game || "odd", judg: meta.judg || null, d: meta.d != null ? +(+meta.d).toFixed(2) : null,
-    dL: +(L2 - L1).toFixed(1), dC: +(C2 - C1).toFixed(1), dH: +dH.toFixed(1), t: Date.now() };
-  try { if (typeof learnerLog === "function") return learnerLog(ev); } catch (e) {}
   if (!Array.isArray(S.gymMiss)) S.gymMiss = [];
-  S.gymMiss.push(ev);
+  S.gymMiss.push({ type: "confuse", a: right, b: picked, src: "train", game: meta.game || "odd", judg: meta.judg || null, d: meta.d != null ? +(+meta.d).toFixed(2) : null,
+    dL: +(L2 - L1).toFixed(1), dC: +(C2 - C1).toFixed(1), dH: +dH.toFixed(1), t: Date.now() });
   if (S.gymMiss.length > 400) S.gymMiss.splice(0, S.gymMiss.length - 400);
 }
 
@@ -566,6 +566,9 @@ function ooPlaySet(set, task = "one", opts = {}) {
       again: () => ooPlaySet(set, task, opts), score: `${s.hits} of ${s.total} right`, back: "Done", onBack: opts.onQuit || (() => go("gym")) }) });
 }
 
+// js/colorset.js csPlay(set) calls this: a ColorSet ({ title, colors: [{ h }] }) and a task ("odd" = odd one out)
+function playSet(set, task = "odd") { return ooPlaySet(set, task === "odd" ? "one" : task, { onQuit: () => go("gym") }); }
+
 // ======================================================================
 // The Train shelf (gym.js hook), the old stations it replaces, and routes (router.js hook)
 // ======================================================================
@@ -589,7 +592,7 @@ function ooWire(el) {
 }
 // The old stations this replaces (design/IDEAS-10X/train-games.md §5): Odd one out, Color memory and Sort the
 // strip open their new homes. Their history stays in S.gym (the old Odd one out's family scores seed
-// eyeThreshold until the new model has answers), and check-ins still use the old drills underneath.
+// js/learner.js's eyeThreshold until the new model has answers), and check-ins still use the old drills underneath.
 function ooRetired(k) {
   if (k === "hue") return ooEnter();
   if (k === "memory") return ooPlayMix("wasthere", { title: "Color memory", onQuit: () => go("gym") });
