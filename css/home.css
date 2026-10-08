@@ -249,7 +249,7 @@
 .hm-do svg{width:20px;height:20px}
 .hm-do-n{position:absolute;top:-5px;right:-5px;min-width:22px;height:22px;padding:0 6px;border-radius:11px;background:var(--paper);color:var(--paper-ink);
   font:500 12.5px/22px var(--sans);font-style:normal;text-align:center;font-variant-numeric:tabular-nums;box-shadow:0 0 0 2px var(--ground)}
-/* the stem's mirror: capsules rise from the right corner, picture on the right, words right-aligned */
+/* the stem mirror: a straight stack up the right edge, picture on the right, words right-aligned */
 .rooms-stem.hm-do-stem .rm-bubble{left:auto;right:calc(11px + var(--x,0px));flex-direction:row-reverse;padding:3px 3px 3px 22px;text-align:right;
   transform-origin:calc(100% - 30px) 100%;transform:translate(var(--x,0px),calc(var(--step) * (var(--i) + 1) * .55)) scale(.55)}
 .rooms-stem.hm-do-stem.on .rm-bubble{transform:none}

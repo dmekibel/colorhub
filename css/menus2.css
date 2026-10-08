@@ -44,7 +44,7 @@ body.stem-open .screen,body.stem-open .hc,body.stem-open .hm-stage{filter:none}
 @keyframes mnSpin{from{transform:rotate(-90deg) scale(.5);opacity:0}}
 @keyframes mnSpinBack{from{transform:rotate(90deg) scale(.5);opacity:0}}
 
-/* the capsules: low, under the thumb, a gentle arc rising from the corner (--x from toggleStem) */
+/* the capsules: low, under the thumb, a straight stack up the side, each picture centered over the corner */
 .rooms-stem{position:fixed;inset:0;z-index:17;pointer-events:none;
   --step:min(66px,calc((100dvh - var(--top) - var(--bottom) - 150px) / var(--n,5)));
   --base:calc(var(--corner-b) + var(--corner) + 12px)}

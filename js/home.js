@@ -616,8 +616,8 @@ function hmHome() {
     stem.className = "rooms-stem hm-do-stem"; stem.setAttribute("role", "menu"); stem.setAttribute("aria-label", "Home menu");
     stem.style.setProperty("--n", n);
     stem.innerHTML = rows.map((r, k) => {
-      const i = n - 1 - k, t = (i + 1) / n;
-      return `<button class="rm-bubble" role="menuitem" data-do="${r.id}" ${r.attr || ""} style="--i:${i};--x:${(26 * t * t).toFixed(1)}px">
+      const i = n - 1 - k;   // a straight stack up the right edge, pictures centered over the corner
+      return `<button class="rm-bubble" role="menuitem" data-do="${r.id}" ${r.attr || ""} style="--i:${i}">
         ${r.art}<span class="rm-label"><b>${esc(r.t)}</b><em>${esc(r.n)}</em></span></button>`;
     }).join("");
     document.body.append(scrim, stem);

@@ -498,10 +498,10 @@ function toggleStem(cornerEl) {
   stem.setAttribute("role", "menu"); stem.setAttribute("aria-label", "Rooms");
   const n = items.length;
   stem.style.setProperty("--n", n);   // short screens tighten the step so the top capsule stays low (css/menus2.css)
-  // a gentle arc: each capsule a little further right as it rises (x grows with the square of its height)
+  // a straight stack up the left edge (David, 2026-10-08: "straight up along the side"), every picture centered over the corner
   stem.innerHTML = items.map(([id, label], i) => {
-    const t = (i + 1) / n, cur = id === here;
-    return `<button class="rm-bubble${cur ? " cur" : ""}" role="menuitem" data-room="${id}" style="--i:${i};--x:${(26 * t * t).toFixed(1)}px">
+    const cur = id === here;
+    return `<button class="rm-bubble${cur ? " cur" : ""}" role="menuitem" data-room="${id}" style="--i:${i}">
       ${roomsBubbleArt(id)}<span class="rm-label"><b>${esc(label)}</b><em>${esc(cur ? "You're here" : roomsNote(id))}</em></span>
     </button>`;
   }).join("");
