@@ -35,4 +35,5 @@
   max-width:calc(100% - 32px);min-height:44px;padding:0 14px 0 18px;border-radius:var(--r-pill);background:var(--paper);color:var(--paper-ink);
   font:400 18px/1 var(--serif);box-shadow:0 10px 30px -12px rgba(0,0,0,.8)}
 .cs-hl-pill span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cs-hl-back{flex:none;font:400 28px/1 var(--serif);font-style:normal;margin:-4px 2px -4px -8px;padding:6px 8px;min-width:44px;text-align:center}
 .cs-hl-pill svg{flex:none;width:18px;height:18px}

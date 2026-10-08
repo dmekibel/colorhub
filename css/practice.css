@@ -354,7 +354,6 @@ html:has(#app > .screen.pr-booth) body::after{display:none}
 .pr-plate-quick{height:64px;margin-top:14px}
 .pr-qsec{display:block;margin:18px 0 8px}
 .pr-qgo{margin-top:22px}
-.corner.r.pr-study-corner{right:84px}
 .pr-learn-these{display:inline-flex;align-items:center;gap:6px;min-height:44px;margin-top:6px;font:italic 400 17px/1 var(--serif);color:var(--soft);text-decoration:underline;text-decoration-color:rgba(236,232,223,.35);text-underline-offset:4px}
 .pr-learn-these svg{width:14px;height:14px;color:var(--faint)}
 

@@ -37,6 +37,8 @@ const csName = c => c.n || (typeof nameOf === "function" ? nameOf(c.h).text : ""
 function csOnMap(set) {
   set = csGet(set); if (!set || !set.colors.length) return;
   if (typeof honeyHighlight === "function") honeyHighlight(set.colors.map(c => c.h), { title: set.title });
+  // the page that lit it stays on the trail behind the map (js/trail.js tlNote), so the lit set can return to its source
+  if (typeof XSTACK !== "undefined" && XSTACK.length && !document.querySelector(".screen.hm")) TL_MAPKEEP = { stack: XSTACK.slice(), root: X_ROOT, t: performance.now() };
   if (typeof hmHome === "function") hmHome(); else go("learn");
 }
 // the set's colors, biggest share first, each as its nearest taught color; the first that isn't yours yet
