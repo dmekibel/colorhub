@@ -510,7 +510,7 @@ function honeySmooth(lay, budgetMs = 120) {
       }
       if (best >= 0) { const tmp = col[k]; col[k] = col[best]; col[best] = tmp; fixed++; }
     }
-    if (!fixed || performance.now() - t1 > budgetMs / 3) break;
+    if (!fixed || (rep >= 1 && performance.now() - t1 > budgetMs / 3)) break;   // two rounds always, even on a slow phone
   }
   const after = mean();
   P.forEach((q, k) => { q.it = its[col[k]]; });
