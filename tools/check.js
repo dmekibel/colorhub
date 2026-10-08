@@ -100,4 +100,7 @@ const liteErrors = [];
 }
 liteErrors.forEach(e => console.log("FAIL  " + e));
 console.log(`articles-lite gate: ${liteErrors.length} problems`);
-process.exit(errors.length || nameErrors.length || idsGate.errors.length || liteErrors.length ? 1 : 0);
+const fetchedMiss = require("./check_fetched.js").checkFetched();
+fetchedMiss.forEach(x => console.log("FAIL  missing fetched file: " + x));
+console.log(`fetched-file gate: ${fetchedMiss.length} missing`);
+process.exit(errors.length || nameErrors.length || idsGate.errors.length || liteErrors.length || fetchedMiss.length ? 1 : 0);

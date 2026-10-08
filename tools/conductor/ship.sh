@@ -7,6 +7,7 @@ fail=0
 for f in js/*.js; do node --check "$f" >/dev/null 2>&1 || { echo "SYNTAX $f"; fail=1; }; done
 node tools/check.js 2>&1 | grep -q "0 files name colors" || { node tools/check.js | tail -3; fail=1; }
 node tools/check_names.js | grep -q "0 duplicate" || { echo NAMES; fail=1; }
+node tools/check_fetched.js >/dev/null || { node tools/check_fetched.js | tail -5; fail=1; }
 # gate only committed articles (the writing workflow drops in-progress files into data/articles/)
 # (a tracked file the workflow is re-editing in the working tree isn't what ships; its committed version passed when committed)
 TRACKED=$(git ls-files 'data/articles/*.json' | grep -v -e link-map -e '/index.json' | while read f; do git diff --quiet -- "$f" && echo "$f"; done)
