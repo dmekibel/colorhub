@@ -227,7 +227,7 @@ function explorePager() {
     <div class="xp-wrap">
       <div class="xp-pager" id="xpPager">${covers.join("")}</div>
       <div class="xp-dots">${covers.map((_, i) => `<i class="${i === 0 ? "on" : ""}"></i>`).join("")}</div>
-      <button class="xp-search" data-search aria-label="Search Explore">${ICON.search}</button>
+      <button class="xp-search" data-search aria-label="Search the ${NAV_MUSEUM}">${ICON.search}</button>
     </div>
   `, "explore", "explore");
   const pager = el.querySelector("#xpPager"), dots = [...el.querySelectorAll(".xp-dots i")], sections = [...pager.querySelectorAll(".xp-cover")];
@@ -494,6 +494,7 @@ function xStep(prev) {
     const nm = decodeURIComponent(prev.slice(2));
     return loadCoreNames().then(() => { const e = (CORE_NAMES || []).find(x => x.n === nm); e ? namePage(e, false) : go(xFallbackTab()); });
   }
+  if (prev.startsWith("r:") && typeof tlReplay === "function") return tlReplay(prev);   // any other addressed screen (js/trail.js)
   const node = graph().nodes.get(prev.replace(/^[zp]:/, ""));
   return prev.startsWith("z:") ? closeup(node, { back: true }) : openNode(node, false);
 }

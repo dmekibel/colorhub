@@ -49,7 +49,8 @@ function storyPlayer(s) {
     <div class="st-stage" id="st"></div>
   `, "fixed story");
   const stage = el.querySelector("#st"), segs = el.querySelectorAll(".segs i");
-  const close = () => { XSTACK.length ? xBack() : go("explore"); };
+  // ✕ returns to the page under the story (the story itself isn't on the trail, so nothing is popped)
+  const close = () => { if (!XSTACK.length) return go(xFallbackTab()); BACK_RENDER = true; xStep(XSTACK[XSTACK.length - 1]); };
   el.querySelector("[data-close]").onclick = close;
   const g = graph();
   function draw() {
@@ -82,7 +83,7 @@ function storyPlayer(s) {
   }
   stage.addEventListener("click", e => {
     const node = e.target.closest("[data-node],[data-to]");
-    if (node) { XSTACK = []; return openNode(g.nodes.get(node.dataset.node || node.dataset.to)); }
+    if (node) return openNode(g.nodes.get(node.dataset.node || node.dataset.to));   // keeps the trail behind the story
     const ns = e.target.closest("[data-next-story]"); if (ns) return storyPlayer(g.nodes.get(ns.dataset.nextStory));
     if (e.target.closest("[data-close2]")) return close();
     if (e.target.closest("button")) return;

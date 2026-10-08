@@ -161,9 +161,7 @@ function lkRewire(to) {
 }
 function lkNode(nodeId, lookId, pi) {
   const n = graph().nodes.get(nodeId); if (!n) return;
-  XSTACK = [];
-  openNode(n);
-  lkRewire(() => lkOpen(lookId, { keep: true, pi }));
+  openNode(n);   // onto the one trail: its ‹ comes back to this look (js/trail.js)
 }
 // closest public-domain paintings (data/paintings.js), each scored by the look's best palette
 function lkPaintings(look) {

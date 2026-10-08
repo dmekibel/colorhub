@@ -205,7 +205,7 @@ function hmHome() {
   hmView();
   // The floor of the app (DESIGN-SYSTEM.md §2), not a tab: its own address, and S.tab is left alone so it keeps
   // pointing at whichever Room was last open (the Rooms corner's quick-resume, and every "go(S.tab)" fallback).
-  ROUTE_NEXT = routed("ColorHub", "home"); ROUTE_REPLACE = true;
+  ROUTE_NEXT = routed(NAV_MAP, "home"); ROUTE_REPLACE = true;
 
   const el = show(`
     <div class="cx-stage hm-stage"><div class="cx-view"></div></div>
@@ -478,9 +478,7 @@ function hmHome() {
 // honey.js's own HONEY_PAN restores the pan and zoom the next time hmHome() builds the same set of items.
 function hmOpenColor(c) {
   XSTACK = []; X_ROOT = "home";
-  const el = openNode(colorNode(c));
-  hmPullClose(app.firstElementChild, hmBackOneStep);
-  return el;   // growFrom's renderFn (js/home.js pick, js/core.js) grows the page from the tapped bubble
+  return openNode(colorNode(c));   // (the pull-down, the map glyph and the trail come from js/trail.js, on every page)   // growFrom's renderFn (js/home.js pick, js/core.js) grows the page from the tapped bubble
 }
 // Same, for a bubble that isn't one of the 101: its own name page (js/names.js), not the small color sheet
 // (ROADMAP.md §13: every one of the ~1,000 names has a real page now).
@@ -488,13 +486,9 @@ function hmOpenName(o) {
   XSTACK = []; X_ROOT = "home";
   loadCoreNames().then(() => {
     namePage(npEntryFor(o));
-    hmPullClose(app.firstElementChild, hmBackOneStep);
   });
   // (async: no root to return synchronously, so this path never grows from the bubble — see pick() above)
 }
-// whatever the current screen's own Back button does (one step, same as a tap); the pull-down gesture uses
-// this too, so it never skips straight to the honeycomb when there's a nearer screen to land on
-function hmBackOneStep() { const btn = app.querySelector("[data-back]"); if (btn) btn.click(); else hmHome(); }
 
 // Pull down from the top of a page to close it, like a sheet: the page follows the finger, and past ~110px (or a quick
 // flick) it slides away and close() runs. Anywhere below the top, a downward drag is just normal scrolling.
@@ -508,7 +502,8 @@ function hmPullClose(screen, close) {
   screen.addEventListener("touchstart", e => {
     // arm only when the page is resting at the top: not mid-fling (a scroll in the last 180 ms means the finger is
     // catching a page that's still moving), and not in the first moments after the page opened
-    if (e.touches.length !== 1 || scrollY > 0 || document.querySelector(".sheet") || performance.now() - lastScroll < 180 || performance.now() - born < 350) { y0 = null; return; }
+    // (not on a canvas, a slider or a field: those drags belong to them)
+    if (e.touches.length !== 1 || scrollY > 0 || e.target.closest("canvas,input,textarea,select,[data-nopull]") || document.querySelector(".sheet") || performance.now() - lastScroll < 180 || performance.now() - born < 350) { y0 = null; return; }
     y0 = e.touches[0].clientY; x0 = e.touches[0].clientX; dy = 0; on = false; t0 = performance.now();
   }, { passive: true });
   screen.addEventListener("touchmove", e => {

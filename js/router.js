@@ -21,7 +21,7 @@
 
 const routeSlug = s => String(s).normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 const APP_BASE = () => location.origin + location.pathname.replace(/[^/]*$/, "");
-const TAB_ROUTE = { learn: ["today", "Learn"], gym: ["train", "Train"], explore: ["explore", "Explore"], studio: ["studio", "Studio"] };
+const TAB_ROUTE = { learn: ["today", "Learn"], gym: ["train", "Train"], explore: ["museum", NAV_MUSEUM], studio: ["studio", "Studio"] };
 const LENS_ROUTE = { art: "art", ideas: "ideas", world: "world", saved: "saved" };   // "For you" (the pager) is plain #/explore
 const LENS_TITLE = { art: "Art", ideas: "Ideas", world: "World", saved: "Saved" };
 // legacy lens tokens, from before Paintings/Poems merged into Art and Colors was dropped (links, bookmarks, S.lens left over from an old save)
@@ -75,7 +75,7 @@ function routeWrap(host, key, toRoute) {
   if (typeof orig !== "function" || orig.__routed) return;   // not defined yet (a later script), or already wrapped
   host[key] = function (...a) {
     let r = null; try { r = toRoute(...a); } catch (e) {}
-    if (r) ROUTE_NEXT = r;
+    if (r) { ROUTE_NEXT = r; if (typeof tlCallNote === "function") tlCallNote(host[key], this, a); }   // js/trail.js: how to draw it again
     try { return orig.apply(this, a); } finally { if (r) ROUTE_NEXT = null; }
   };
   host[key].__routed = true;
@@ -149,10 +149,12 @@ function openRoute(hash, initial = false) {
   }
   // "learn" is kept as a working alias for "today" (DESIGN-SYSTEM.md §2: Learn is the room's real name now;
   // #/today still opens it, since that address is already shared and bookmarked).
-  const tabs = { today: "learn", learn: "learn", train: "gym", studio: "studio", explore: "explore" };
+  // "museum" is the room's address now (core.js NAV_MUSEUM); the older #/explore… addresses still open it
+  const tabs = { today: "learn", learn: "learn", train: "gym", studio: "studio", explore: "explore", museum: "explore" };
   // hoisted above the tabs[kind] check below, since studio/wheel and studio/palette/<id> are Studio sub-screens,
   // not the tab home itself, and need it too (js/studio.js)
   const base = () => {
+    X_ROOT = "home";   // a page opened from an address: Back unwinds to the map (js/trail.js), not to a room
     if (!initial) return;
     try { history.replaceState({ ch: 1, tab: S.tab || "learn" }, "", "#/" + tabRoute(S.tab || "learn").path); } catch (e) {}
     ROUTE_REPLACE = false;   // the screen itself goes on top
@@ -163,7 +165,7 @@ function openRoute(hash, initial = false) {
   // the floor (the honeycomb, js/home.js): not a tab, so it's its own address
   if (kind === "home" && typeof hmHome === "function") { base(); XSTACK = []; hmHome(); return true; }
   if (tabs[kind]) {
-    if (kind === "explore") S.lens = LENS_LEGACY[id] || Object.keys(LENS_ROUTE).find(k => LENS_ROUTE[k] === id) || "all";
+    if (kind === "explore" || kind === "museum") S.lens = LENS_LEGACY[id] || Object.keys(LENS_ROUTE).find(k => LENS_ROUTE[k] === id) || "all";
     go(tabs[kind]);
     return true;
   }

@@ -384,7 +384,7 @@ function expDone(u, day) {
     <h1>${esc(u.title)}, <em>tested.</em></h1>
     ${expTable(s)}
     <p class="lede">Practiced colors went through the deck and reviews; held-back ones were never taught. A blind guess gets 1 in 4.${day === EXP_DAYS[EXP_DAYS.length - 1] ? " The held-back colors now join your reviews." : ` The day-${EXP_DAYS[EXP_DAYS.length - 1]} test comes later.`}</p>
-    <div class="stack"><button class="btn" data-home>Home ${ICON.arrow}</button></div>
+    <div class="stack"><button class="btn" data-home>Back to Learn ${ICON.arrow}</button></div>
   `, "result");
   el.querySelector("[data-home]").onclick = home;
   onKey = e => { if (e.key === "Enter") home(); };
