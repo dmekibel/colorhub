@@ -64,3 +64,31 @@ input[type=range]:not(.mt-sl *):not(.mt-wh *):not(.pt-range)::-moz-range-thumb{w
 .act:active{background:var(--s3)}
 /* the sheet's secondary (Look) is a solid pill beside the one paper primary (Study) */
 .ls-look{border:0;background:var(--s2)}
+
+/* ============================================================ Train: room, Drills, Your eye, games, Study the map */
+/* "For you / Choose" (Odd one out, Gradients, Study the map): a 44 pt pill track on e1, the chosen side a raised, ringed pill */
+.oo-pk-seg,.hg-seg,.hm-seg.ms-diff{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:4px;padding:4px;background:var(--s1);border-radius:var(--r-pill);box-shadow:inset 0 0 0 1px var(--line)}
+.oo-pk-seg button,.hg-seg button,.hm-seg.ms-diff button{min-height:var(--tap);height:auto;border:0;background:none;border-radius:var(--r-pill);font:500 var(--type-ui)/1 var(--sans);color:var(--soft)}
+.oo-pk-seg button.on,.hg-seg button.on,.hm-seg.ms-diff button.on{background:var(--sel-fill);color:var(--sel-ink);box-shadow:var(--sel-ring)}
+/* Choose's difficulty chips: solid, the chosen one raised and ringed */
+.oo-pk-ch button{height:var(--tap);border:0;background:var(--s2);font:500 var(--type-ui)/1 var(--sans)}
+/* star totals use the shared star icon */
+.oo-tot{display:inline-flex;align-items:center;gap:4px;font:500 15px/1 var(--sans);letter-spacing:0;font-variant-numeric:tabular-nums}
+.oo-tot svg{width:14px;height:14px}
+/* Your eye: the value column fits "1.9%" over "level 13" without wrapping */
+.ey-row{grid-template-columns:minmax(0,1.1fr) 1.6fr minmax(64px,auto)}
+.ey-row b,.ey-row b small{white-space:nowrap;overflow-wrap:normal}
+.ey-row i{height:6px;border-radius:3px;background:linear-gradient(var(--ink),var(--ink)) 0 0/var(--w) 100% no-repeat,var(--s3)}
+/* Study the map setup: modes, sets and levels are solid 44 pt controls; a chosen chip is ringed (no dot on a pill) */
+.ms-mode{height:var(--tap);font:500 var(--type-ui)/1 var(--sans);color:var(--soft)}
+.ms-set{height:var(--tap)}
+.ms-set.on::after{content:none}
+.ms-set.on b{color:var(--sel-ink)}
+.ms-lv{border-radius:var(--r-card);min-height:var(--tap-l)}
+.ms-chip{height:var(--tap);padding-right:16px}
+.ms-chip i{width:32px;height:32px}
+.ms-stars i.on{background:var(--sel-dot);border-color:var(--sel-dot)}
+.ms-ptg.on{border-color:transparent;box-shadow:var(--sel-ring)}
+/* drill picks on the booth grey: a ring with a ground gap, never a bare white outline */
+.tile.picked,.half.picked{outline:0;box-shadow:0 0 0 2px var(--booth,#5C5C5C),0 0 0 4px rgba(236,232,223,.9)}
+.oo-t.sel,.oo-oc.sel{outline:0;box-shadow:0 0 0 2px var(--ground),0 0 0 4px var(--ink)}
