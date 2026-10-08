@@ -50,7 +50,7 @@ One file per article. Written by the article engine (lane L7), read by the artic
   "siblings": ["berlin-blue", "paris-blue"],
   "parent": null,
   "children": ["midnight-blue"],
-  "disambiguation": ["One line each"],
+  "disambiguation": [{"slug": "dusk-blue", "gloss": "nearly the same screen color, unrelated name"}],
   "other_languages": [{"lang": "ja", "name": "bero, Konjō-iro (紺青色)"}]
 }
 ```
@@ -58,7 +58,11 @@ One file per article. Written by the article engine (lane L7), read by the artic
 - `origin.named_after`: plain words; say "origin undocumented" when true.
 - `aka`: alternative names, display text (not slugs).
 - `siblings` / `parent` / `children`: **slugs** that resolve to a slug in `data/graph/names.json` or to an article (gate-checked). Siblings = same material or same name in other systems; children = modifiers and named variants.
-- `disambiguation`: lines for same-name-different-color cases (Indigo vs Indigo Dye; Isabelline vs Isabella Color).
+- `disambiguation`: same-name-different-color cases (Indigo vs Indigo Dye; Isabelline vs Isabella Color), **structured**: `{slug, gloss}` (a bare slug is allowed), where `slug` resolves like any link and `gloss` is a short phrase the reader shows under "Not to be confused with". Never a prose line (the gate fails it); prose belongs in a section body.
+
+## Link resolution (gate, reader and test all use the same order)
+
+A `[[slug]]` or aside slug resolves, in this order, to: (1) an entry in `data/articles/link-map.json` (explicit override: `{to: canonical slug | null, label, reason}`; `to: null` shows plain text, for pigment or historical names that are not colors in our data; never invent a color); (2) a canonical slug in `data/graph/names.json`; (3) an article slug; (4) an alias in `data/graph/aliases.json` or `data/aliases.json`, which opens the canonical color. An alias link keeps the original word as its label (`[[seashell]]` reads "Seashell", opens Linen). Aside slugs cannot be `to: null`.
 
 ## notes[]
 

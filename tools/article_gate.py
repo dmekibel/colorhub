@@ -16,7 +16,8 @@ FAIL (blocks the article):
   - a myth-list phrase (CLAUDE.md "Color myths") with no correcting frame in the same or the next sentence
   - the words "the 101"
   - "words" differs from the computed count (fix with --write-words)
-  - a [[slug]] link (or aside sibling/child/parent) that resolves to no slug in data/graph/names.json or article; an [[art:id|label]] that is not in data/gallery
+  - a [[slug]] link (or aside sibling/child/parent/disambiguation) that resolves to no canonical slug in data/graph/names.json,
+    no alias (data/graph/aliases.json, data/aliases.json), no link-map.json entry and no article; an [[art:id|label]] that is not in data/gallery
   - questions: 2-3, kind pick|true-false, answer among the choices
   - fewer than 4 connections (aside siblings + children + aka + [[links]]) or fewer than 3 field keys
 WARN (printed, does not block): a 10-word run shared with a private book text; an unused note; a sentence over 45 words.
@@ -154,6 +155,48 @@ def load_names():
     return names
 
 
+def load_aliases():
+    """alias slug -> canonical slug, from data/graph/aliases.json ({alias: {slug: canonical}}) and data/aliases.json
+    ({slugs: {slug: canonical}}). The first file wins on a clash."""
+    out = {}
+    for rel, key in (("data/graph/aliases.json", "alias"), ("data/aliases.json", "slugs")):
+        p = ROOT / rel
+        if p.exists():
+            for k, v in json.loads(p.read_text()).get(key, {}).items():
+                out.setdefault(k, v)
+    return out
+
+
+def load_link_map():
+    """data/articles/link-map.json: explicit, reasoned overrides. {links: {slug: {to: canonical slug | null, reason, label?}}}.
+    `to: null` means the link is shown as plain text (a pigment or historical name that is not a color in our data)."""
+    p = ART / "link-map.json"
+    return json.loads(p.read_text()).get("links", {}) if p.exists() else {}
+
+
+class Resolver:
+    """A slug resolves if it is in link-map.json, a canonical name in graph/names.json, an article slug, or an alias
+    (graph/aliases.json, data/aliases.json) of a canonical name. Same order as js/article.js arColor."""
+
+    def __init__(self, names, slugs):
+        self.names, self.slugs = names, slugs
+        self.aliases, self.lmap = load_aliases(), load_link_map()
+
+    def canon(self, s):
+        """canonical slug / article slug for s, or None. 'plain' means link-map says show plain text."""
+        if s in self.lmap:
+            to = self.lmap[s].get("to")
+            return to if to and (to in self.names or to in self.slugs) else "plain" if to is None else None
+        if s in self.names or s in self.slugs:
+            return s
+        t = self.aliases.get(s)
+        return t if t and (t in self.names or t in self.slugs) else None
+
+    def ok(self, s, body=True):
+        c = self.canon(s)
+        return c is not None and (body or c != "plain")
+
+
 def load_gallery_ids():
     ids = set()
     d = ROOT / "data" / "gallery" / "d"
@@ -191,7 +234,8 @@ def book_grams(n=10):
     return _BOOK_GRAMS
 
 
-def check(path, names, gallery, slugs, write_words=False):
+def check(path, names, gallery, slugs, write_words=False, res=None):
+    res = res or Resolver(names, slugs)
     fails, warns = [], []
     try:
         a = json.loads(path.read_text())
@@ -267,7 +311,7 @@ def check(path, names, gallery, slugs, write_words=False):
                     fails.append(f"{where}: painting link {tgt} not in data/gallery")
             else:
                 links.add(tgt)
-                if tgt not in names and tgt not in slugs:
+                if not res.ok(tgt):
                     fails.append(f"{where}: link [[{tgt}]] resolves to no color name or article")
         for q in QUOTE.finditer(t):
             if len(q.group(1).split()) > 15:
@@ -313,8 +357,17 @@ def check(path, names, gallery, slugs, write_words=False):
     if len(conns) < 4:
         fails.append(f"only {len(conns)} connections (want >= 4)")
     for s in (asd.get("siblings") or []) + (asd.get("children") or []) + ([asd["parent"]] if asd.get("parent") else []):
-        if s not in names and s not in slugs:
-            fails.append(f"aside: {s} resolves to no color name or article")
+        if not res.ok(s, body=False):
+            fails.append(f"aside: {s} resolves to no color name, alias or article")
+    # disambiguation is structured: [{"slug": ..., "gloss": "..."}] (a bare slug string is allowed); never a prose line
+    for d in asd.get("disambiguation") or []:
+        s = d.get("slug") if isinstance(d, dict) else d
+        if not isinstance(s, str) or route_slug(s) != s:
+            fails.append(f"aside.disambiguation: {str(d)[:60]!r} is prose, not a slug or {{slug, gloss}}")
+        elif not res.ok(s, body=False):
+            fails.append(f"aside.disambiguation: {s} resolves to no color name, alias or article")
+        elif isinstance(d, dict) and not (d.get("gloss") or "").strip():
+            fails.append(f"aside.disambiguation: {s} has no gloss")
     if len(a["field"]) < 3:
         fails.append("fewer than 3 field-note keys")
 
@@ -374,13 +427,21 @@ def main():
             print(json.dumps({s: surprises(s)}, ensure_ascii=False, indent=1))
         return
     write = "--write-words" in sys.argv
-    files = [ART / f"{s}.json" for s in args] if args else sorted(ART.glob("*.json"))
+    files = [ART / f"{s}.json" for s in args] if args else sorted(p for p in ART.glob("*.json") if p.stem != "link-map")
     names = load_names()
     gallery = load_gallery_ids()
-    slugs = {p.stem for p in ART.glob("*.json")}
+    slugs = {p.stem for p in ART.glob("*.json") if p.stem != "link-map"}
+    res = Resolver(names, slugs)
+    for k, v in res.lmap.items():
+        if not v.get("reason"):
+            print(f"link-map: {k} has no reason")
+            sys.exit(1)
+        if v.get("to") and v["to"] not in names and v["to"] not in slugs:
+            print(f"link-map: {k} -> {v['to']} is not a canonical color")
+            sys.exit(1)
     bad = 0
     for p in files:
-        fails, warns, n = check(p, names, gallery, slugs, write)
+        fails, warns, n = check(p, names, gallery, slugs, write, res)
         tag = "FAIL" if fails else "PASS"
         bad += bool(fails)
         print(f"{tag}  {p.stem:<18} {n if n is not None else '?':>5} words")

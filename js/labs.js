@@ -98,7 +98,6 @@ function storyPlayer(s) {
 // ======================================================================
 const LAB = {};
 const pickerRow = (sel) => `<div class="pick-row">${EVERY().slice().sort((a, b) => { const A = lch(a.h), B = lch(b.h); return (A[1] < 12) - (B[1] < 12) || ((A[2] + 330) % 360) - ((B[2] + 330) % 360); }).map(c => `<button data-pick="${c.h}" title="${esc(c.n)}" style="--c:${c.h}" class="${c.h === sel ? "on" : ""}"></button>`).join("")}</div>`;
-const appName = hex => { const [x] = nearestColors(hex, 1); return x ? x : null; };
 
 // Harmony: drag the base around the picker's ring and the harmony colors swing with it, live. The base and
 // scheme are remembered (LAB_HARMONY_STATE) so a [[link]] out to a wiki page, then Back, lands on this same spot.
@@ -113,7 +112,7 @@ LAB.harmony = (base = lch(dailyColor().h)[1] > 30 ? dailyColor().h : "#C8553D", 
     <p class="eyebrow" style="margin:26px 0 10px">Base color · drag the ring</p>
     <div id="pick"></div>
     <p class="p-body">${linkText("Why these work: [[complementary-colors|complements]] sit opposite on the [[color-wheel]] and make each other look stronger, the effect [[chevreul|Chevreul]] described for tapestry dyes. Analogous colors sit side by side and feel calm. Triads were a [[bauhaus|Bauhaus]] favorite.")}</p>
-    <p class="fine">Harmonies rotate CIELAB hue (LCh h) at the same lightness and strength. The Studio gamut wheel uses OKLab hue instead, so the same angle can land on a slightly different color there. Names are the nearest of the app's ${EVERY().length}. Tap a color to copy it.</p>
+    <p class="fine">Harmonies rotate CIELAB hue (LCh h) at the same lightness and strength. The Studio gamut wheel uses OKLab hue instead, so the same angle can land on a slightly different color there. Names are the nearest of about 1,000. Tap a color to open its page; press and hold to copy the hex.</p>
   `, "article lab");
   // one-step Back (ROADMAP.md §17 job #1): pops this lab's own place in the shared trail, so it lands wherever
   // it was opened from (Studio, usually) rather than always jumping straight to the Studio tab.
@@ -124,12 +123,13 @@ LAB.harmony = (base = lch(dailyColor().h)[1] > 30 ? dailyColor().h : "#C8553D", 
     const cols = schemeColors(hex, scheme), [p0, p1, p2 = p1, p3 = p0] = cols, light = cols.slice().sort((a, b) => lab(b)[0] - lab(a)[0]);
     el.querySelector("#poster").innerHTML = `<svg viewBox="0 0 320 300"><rect width="320" height="300" fill="${light[0]}"/><rect x="0" y="196" width="320" height="104" fill="${p1}"/>
       <circle cx="204" cy="122" r="80" fill="${p0}"/><rect x="30" y="44" width="58" height="176" fill="${p2}"/><rect x="238" y="222" width="50" height="50" fill="${p3}"/><rect x="30" y="238" width="140" height="10" fill="${light[light.length - 1]}"/></svg>`;
-    el.querySelector("#hlist").innerHTML = cols.map((h, i) => { const [c, d] = appName(h); return `<button class="h-item" data-copy="${h}"><i style="--c:${h}"></i><span><b>${i ? "" : "Base · "}≈ ${esc(c.n)}</b><em class="mono">${h} · ${closeness(d)}</em></span></button>`; }).join("");
+    el.querySelector("#hlist").innerHTML = cols.map((h, i) => { const nm = nameOf(h); return `<button class="h-item" data-copy="${h}" data-swatch="${h}"><i style="--c:${h}"></i><span><b>${i ? "" : "Base · "}${esc(nm.text)}</b><em class="mono">${h} · ${closeness(nm.de)}</em></span></button>`; }).join("");
   };
   const picker = colorPicker(el.querySelector("#pick"), { hex: base, onChange: draw, marks: hex => schemeColors(hex, scheme) });
   draw(base);
+  if (!CORE_NAMES) loadCoreNames().then(() => { if (el.isConnected) draw(base); });
   el.querySelectorAll("[data-scheme]").forEach(b => b.onclick = () => { scheme = b.dataset.scheme; el.querySelectorAll("[data-scheme]").forEach(x => x.classList.toggle("on", x === b)); draw(base); picker.set(base); });
-  el.querySelector("#hlist").addEventListener("click", e => { const b = e.target.closest("[data-copy]"); if (b) { try { navigator.clipboard.writeText(b.dataset.copy); toast("Copied " + b.dataset.copy); } catch (x) {} } });
+  if (typeof exLongCopy === "function") exLongCopy(el.querySelector("#hlist"));   // one tap opens the page; a long press copies the hex
 };
 
 // One color, two looks (Albers): the same inner color on two grounds, then lift the grounds. set/slot are
@@ -152,57 +152,17 @@ LAB.contrast = (set = CONTRAST_PRESETS[0].slice(), slot = 0, push = true) => {
   const ctr = el.querySelector("#ctr"), txt = el.querySelector("#ctxt");
   const draw = () => {
     LAB_CONTRAST_STATE = { set: set.slice(), slot };
-    const [inner, g1, g2] = set, names = set.map(h => appName(h)[0].n);
+    const [inner, g1, g2] = set;
     const gs = ctr.querySelectorAll(".g");
     gs[0].style.setProperty("--c", g1); gs[1].style.setProperty("--c", g2);
     ctr.querySelectorAll(".g i").forEach(i => i.style.setProperty("--c", inner));
-    txt.innerHTML = linkText(`Both small squares are the same ≈ [[${names[0]}]]. Each ground pushes the square toward its own [[complementary-colors|opposite]]: on ≈ [[${names[1]}]] it drifts one way, on ≈ [[${names[2]}]] the other. [[josef-albers|Josef Albers]] built a whole course on this ([[interaction-of-color]]).`);
+    const nl = h => `<span class="wl wl-c" style="--c:${h}" data-swatch="${h}">${esc(nameOf(h).text.toLowerCase())}</span>`;
+    txt.innerHTML = `Both small squares are the same ${nl(inner)}. Each ground pushes the square toward its own ${linkText("[[complementary-colors|opposite]]")}: on ${nl(g1)} it drifts one way, on ${nl(g2)} the other. ${linkText("[[josef-albers|Josef Albers]] built a whole course on this ([[interaction-of-color]]).")}`;
   };
   wireLinks(txt);
   const picker = colorPicker(el.querySelector("#pick"), { hex: set[slot], onChange: h => { set[slot] = h; draw(); } });
   draw();
+  if (!CORE_NAMES) loadCoreNames().then(() => { if (el.isConnected) draw(); });
   el.querySelectorAll("[data-slot]").forEach(b => b.onclick = () => { slot = +b.dataset.slot; el.querySelectorAll("[data-slot]").forEach(x => x.classList.toggle("on", x === b)); picker.set(set[slot]); });
   el.querySelectorAll("[data-preset]").forEach(b => b.onclick = () => { set = CONTRAST_PRESETS[+b.dataset.preset].slice(); picker.set(set[slot]); draw(); });
-};
-
-// Name any color: pick it, or point the camera and sample the middle of the frame.
-LAB.namer = (hex = "#5F8C8A") => {
-  const el = show(`
-    <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span class="eyebrow">Lab · Name it</span><span style="width:44px"></span></header>
-    <div class="cam" id="cam" hidden><video id="vid" playsinline muted></video><i class="reticle"></i><button class="btn" data-snap>Use this color ${ICON.arrow}</button></div>
-    <div id="pick"></div>
-    <button class="btn ghost" data-camera>${ICON.search} Use the camera instead</button>
-    <div id="nout"></div>
-    <p class="fine">Cameras and light shift colors, so a camera reading is a hint, not a measurement. Readings are sRGB: colors more vivid than that (the iPhone camera and screen reach P3) are clipped.</p>
-  `, "article lab");
-  el.querySelector("[data-back]").onclick = () => go("studio");
-  const out = el.querySelector("#nout");
-  const render = h => {
-    const nm = nameOf(h);
-    out.innerHTML = `<section class="facet"><h3>Nearest names · tap any</h3>${nm.near.map(x => `<button class="kin" data-swatch="${esc(x.h)}"><i style="--c:${x.h}"></i><b>${esc(x.n)}</b><span>${closeness(x.de)} · ${pctDiff(x.de)}</span></button>`).join("")}</section>`;
-  };
-  wireLinks(out);
-  const picker = colorPicker(el.querySelector("#pick"), { hex, onChange: render });
-  loadCoreNames().then(() => render(picker.get()));
-  render(hex);
-  let stream = null;
-  const stop = () => { if (stream) stream.getTracks().forEach(t => t.stop()); stream = null; };
-  cleanup.push(stop);
-  el.querySelector("[data-camera]").onclick = async () => {
-    try {
-      stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" }, audio: false });
-      const v = el.querySelector("#vid"); v.srcObject = stream; await v.play();
-      el.querySelector("#cam").hidden = false;
-    } catch (e) { toast("The camera isn't available here"); }
-  };
-  el.querySelector("[data-snap]").onclick = () => {
-    const v = el.querySelector("#vid"), c = document.createElement("canvas"), sz = 24;
-    c.width = sz; c.height = sz;
-    const ctx = c.getContext("2d"), side = Math.min(v.videoWidth, v.videoHeight) * .12;
-    ctx.drawImage(v, (v.videoWidth - side) / 2, (v.videoHeight - side) / 2, side, side, 0, 0, sz, sz);
-    const d = ctx.getImageData(0, 0, sz, sz).data; let r = 0, g = 0, b = 0;
-    for (let p = 0; p < d.length; p += 4) { r += d[p]; g += d[p + 1]; b += d[p + 2]; }
-    const n = d.length / 4, h = "#" + [r, g, b].map(x => Math.round(x / n).toString(16).padStart(2, "0")).join("").toUpperCase();
-    stop(); el.querySelector("#cam").hidden = true; picker.set(h); render(h);
-  };
 };

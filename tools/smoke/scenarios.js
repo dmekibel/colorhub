@@ -260,17 +260,20 @@ scenario("train", "check-in card opens the drill", async t => {
 });
 
 scenario("train", "Odd one out: tap tiles through a whole round", async t => {
+  // js/games: the Train shelf opens the Odd one out map (a played save), then level 1
   await t.open("#shot=gx:home", { settle: 600 });
-  const st = await t.waitFor('[data-st="hue"]', 6000, "the Odd one out tile");
-  await t.click(st, { wait: 500 });
-  await t.waitFor(".drill .tile", 6000, "the 3x3 grid of tiles");
-  t.expect(t.$$(".drill .tile").length === 9, `${t.$$(".drill .tile").length} tiles instead of 9`);
-  const first = t.$(".drill #dstage").innerHTML;
-  await t.click(".drill .tile", { wait: 1200 });
-  t.expect(t.$(".drill #dstage").innerHTML !== first || t.$(".result"), "tapping a tile changed nothing");
+  const st = await t.waitFor("[data-oo-map]", 6000, "the Odd one out shelf");
+  await t.click(st, { wait: 600 });
+  const play = await t.waitFor("[data-play], .oo-board", 6000, "the map or level 1");
+  if (play.matches("[data-play]")) await t.click(play, { wait: 600 });
+  await t.waitFor(".oo-board .oo-t", 6000, "the board");
+  t.expect(t.$$(".oo-board .oo-t").length >= 9, `${t.$$(".oo-board .oo-t").length} tiles`);
+  const first = t.$("#oostage").innerHTML;
+  await t.click(".oo-board .oo-t", { wait: 1200 });
+  t.expect(t.$("#oostage").innerHTML !== first || t.$(".result") || t.$("#oofoot").innerText.length > 5, "tapping a tile changed nothing");
   let taps = 1;
   for (let i = 0; i < 60 && !t.$(".result"); i++) {
-    const b = t.$("[data-cf]") || t.$("[data-next]") || t.$(".drill .tile:not(.ring):not(.miss):not(.picked)");
+    const b = t.$("[data-next]") || t.$("[data-w]") || t.$("[data-k]:not(:disabled)") || t.$(".oo-board .oo-t:not(.ring):not(.miss):not(.sel):not(:disabled)");
     if (b) { await t.click(b, { force: true, wait: 400 }); taps++; } else await t.sleep(300);
   }
   await t.waitFor(".result", 6000, "the station result screen");
@@ -380,6 +383,8 @@ scenario("pages", "a tapped in-between hex opens its nearest name with 'Your col
 scenario("pages", "Learn it runs meet > recall from a color page", async t => {
   await H.openPage(t, "#/color/teal", "Teal");
   await t.click("[data-learnit]", { wait: 600 });
+  // the Learn button opens the instant-deck sheet (js/practice.js); Learn it is one of its methods
+  if (t.$(".pr-quick")) { await t.click('[data-method="lesson"]', { wait: 200 }); await t.click(".pr-quick [data-go]", { wait: 600 }); }
   await t.waitFor("#ltPager", 6000, "the Learn it meet pager");
   t.expect(t.$$("#ltPager .lt-page").length >= 3, "the meet pager has too few pages");
   // (smooth scrolling does not run under the virtual clock, so jump page by page like a finger would, then press Enter on the last one)
@@ -396,6 +401,32 @@ scenario("pages", "Learn it runs meet > recall from a color page", async t => {
   // closing returns to the color's own page
   await t.click("[data-close]", { wait: 600 });
   await t.waitFor(".cp-page", 6000, "the color page after closing Learn it");
+});
+
+scenario("pages", "Learn opens the instant deck; Start plays flashcards to the results", async t => {
+  await H.openPage(t, "#/color/teal", "Teal");
+  await t.click("[data-learnit]", { wait: 600 });
+  await t.waitFor(".pr-quick", 4000, "the instant-deck sheet");
+  await t.click('.pr-quick [data-size="5"]', { wait: 150 });
+  await t.click('.pr-quick [data-method="cards"]', { wait: 150 });
+  await t.click(".pr-quick [data-go]", { wait: 600 });
+  await t.waitFor(".pr-play .pr-card", 4000, "the flashcard");
+  for (let i = 0; i < 20 && !t.$(".pr-res"); i++) {
+    const st = t.$(".pr-stage"); if (st && st._prReveal && !t.$(".pr-card.revealed")) { st._prReveal(); await t.sleep(150); }
+    const yes = t.$("[data-yes]"); if (yes) await t.click(yes, { wait: 450 }); else await t.sleep(200);
+  }
+  await t.waitFor(".pr-res", 4000, "the results screen");
+  t.expect(/known/.test(t.$(".pr-res-t").textContent), "the results title");
+  await t.click(".pr-res [data-close]", { wait: 600 });
+  await t.waitFor(".cp-page", 6000, "back on the color page after closing");
+});
+
+scenario("home", "Study corner opens the instant deck seeded with the middle color", async t => {
+  await H.homeReady(t);
+  await t.click("[data-pr-study]", { wait: 600 });
+  await t.waitFor(".pr-quick", 4000, "the instant-deck sheet from Home");
+  t.expect(/Learn/.test(t.$("[data-qtitle]").textContent), "the sheet title");
+  t.expect(t.$$(".pr-quick .pr-plate i").length >= 5, "the deck plate");
 });
 
 // ================================================================== STUDIO
@@ -449,6 +480,70 @@ scenario("studio", "photo palette: controls work and a chip opens its page", asy
   await H.back(t);
   t.expect(!t.$(".cp-page"), "Back left the color page open");
   t.expect(t.$("#app").innerText.length > 60, "Back from the color page landed on an empty screen");
+});
+
+// ---- L13 Studio: Name any color, the Isolator, the Export sheet, Closest in the archive ----
+scenario("studio", "Name any color: tabs, drag, save, a name opens its page", async t => {
+  await t.open("#/studio/namer?c=5F8C8A", { settle: 600 });
+  await t.waitFor(".nmr-hero", 8000, "the namer");
+  const n0 = t.text("#name");
+  t.expect(n0.length > 2 && t.$$(".nmr-row").length === 4, "the namer shows a name and four next names");
+  for (const k of ["plane", "field", "type", "eye", "ring"]) { await t.click(`[data-tab='${k}']`, { force: true, wait: 350 }); t.expect(t.$("#pane").children.length, `the ${k} tab is empty`); }
+  await t.click("[data-tab='type']", { force: true, wait: 300 });
+  const hx = t.$("#hx"); hx.value = "#C8553D"; hx.dispatchEvent(new t.w.Event("input", { bubbles: true }));
+  await t.waitFor(() => t.text("#name") !== n0, 6000, "the name to follow a typed hex");
+  await t.click("#acts [data-save]", { force: true, wait: 300 });
+  t.expect(t.$$(".nmr-chips button").length === 1, "Save did not add the color to the tray");
+  await t.click(".nmr-row", { force: true, wait: 500 });
+  await t.waitFor(".cp-page", 8000, "a color page after tapping a near name");
+  await H.back(t);
+  await t.waitFor(".nmr-hero", 6000, "the namer again after Back");
+  await t.click("[data-back]", { force: true, wait: 700 });
+  await t.waitFor(() => !t.$(".nmr-hero") && t.$("#app").innerText.length > 60, 6000, "a room after Back from the namer (opened by address, so it falls back to the current room)");
+});
+
+scenario("home", "View sheet: the picker icon opens Name any color", async t => {
+  await t.open("#shot=home:views", { settle: 1500 });
+  await t.waitFor("[data-namer]", 8000, "the picker icon in the View sheet");
+  await t.click("[data-namer]", { force: true, wait: 800 });
+  await t.waitFor(".nmr-hero", 6000, "Name any color from Home");
+});
+
+scenario("studio", "Isolator: guess, reveal alone, hold to see it back, try another", async t => {
+  await t.open("#shot=studiopv", { settle: 900 });
+  const img = await t.waitFor(() => { const i = t.$(".pv-img img"); return i && i.complete && i.naturalWidth ? i : null; }, 8000, "the photo");
+  const r = img.getBoundingClientRect();
+  img.dispatchEvent(new t.w.MouseEvent("click", { bubbles: true, clientX: r.left + r.width * .5, clientY: r.top + r.height * .5, view: t.w }));
+  await t.waitFor(".iso .iso-opts button", 6000, "the four options");
+  t.expect(t.$$(".iso-opts button").length >= 3, "fewer than three options");
+  await t.click(".iso-opts button", { force: true, wait: 700 });
+  await t.waitFor(".iso.isolated .iso-name", 4000, "the reveal");
+  const f = t.$("#isoFrame"), fr = f.getBoundingClientRect(), w = t.w, o = { bubbles: true, cancelable: true, clientX: fr.left + 30, clientY: fr.top + 30, pointerId: 1, pointerType: "touch", isPrimary: true, view: w };
+  f.dispatchEvent(new w.PointerEvent("pointerdown", o)); await t.sleep(450);
+  t.expect(t.$(".iso.peek"), "holding the picture did not bring the surroundings back");
+  f.dispatchEvent(new w.PointerEvent("pointerup", o)); await t.sleep(300);
+  t.expect(!t.$(".iso.peek"), "letting go did not isolate again");
+  await t.click("[data-again]", { force: true, wait: 400 });
+  t.expect(t.$(".iso-opts"), "Try another spot did not ask again");
+  await t.click("[data-iso-close]", { force: true, wait: 300 });
+  t.expect(!t.$(".iso"), "the Isolator did not close");
+});
+
+scenario("studio", "Export sheet opens and Closest in the archive switches metric", async t => {
+  await t.open("#shot=studiopv", { settle: 900 });
+  await t.waitFor("[data-export]", 8000, "the Export button");
+  await t.click("[data-export]", { force: true, wait: 500 });
+  await t.waitFor(".ex-sheet [data-ex-copy='css']", 4000, "the Export sheet");
+  t.expect(t.$$(".ex-sheet [data-ex-row]").length === 6, "the sheet should list six formats");
+  await t.click(".ex-sheet [data-ex-tints]", { force: true, wait: 200 });
+  t.$("#twins").scrollIntoView();
+  await t.waitFor(".tw-card", 20000, "the closest paintings");
+  t.expect(t.$$(".tw-chips button").length >= 6, "the metric chips are missing");
+  for (const m of ["dominant", "mood", "light"]) {
+    await t.click(`.tw-chips [data-m='${m}']`, { force: true, wait: 300 });
+    await t.waitFor(() => t.$(".tw-out .tw-card .tw-why"), 25000, `results for ${m}`);
+    t.expect(t.text(".tw-why").length > 12, `${m}: a result has no reason`);
+  }
 });
 
 // ================================================================== YOUR COLORS (L23: favorites, ranking, taste)

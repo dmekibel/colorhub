@@ -482,6 +482,7 @@ function home() {
     <p class="note" style="margin-top:6px">${h.note}</p>
     ${h.cta ? `<button class="btn" data-${h.act} style="margin-top:20px">${h.cta} ${ICON.arrow}</button>` : ""}
     <div class="trio" style="margin-top:32px">${tiles.map(t => `<button class="tday${t.done ? " done" : ""}" ${t.a}>${t.art}<b>${t.name}</b><span class="tday-st">${t.st}</span></button>`).join("")}</div>
+    ${typeof prEntry === "function" ? prEntry() : ""}
     <h3 class="title-3" style="margin-top:32px">The path</h3>
     <div class="path-list">${pathRows}</div>
     <button class="collection" data-palette aria-label="Your collection">

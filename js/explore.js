@@ -479,6 +479,7 @@ function xStep(prev) {
   if (prev.startsWith("aw:") && typeof awStep === "function") return awStep(prev);   // the art wiki (js/artwiki.js)
   if (prev === "wheel") return gamutWheel(GW_LAST && GW_LAST.preset, GW_LAST && GW_LAST.pts, false);
   if (prev === "wheelview") return gwReopenView();
+  if (prev === "namer") return LAB.namer(NMR_LAST.hex, false);   // Name any color (js/namer.js), with the color you left it on
   if (prev === "harmony") return LAB.harmony(LAB_HARMONY_STATE && LAB_HARMONY_STATE.base, LAB_HARMONY_STATE && LAB_HARMONY_STATE.scheme, false);
   if (prev === "contrast") return LAB.contrast(LAB_CONTRAST_STATE && LAB_CONTRAST_STATE.set, LAB_CONTRAST_STATE && LAB_CONTRAST_STATE.slot, false);
   if (prev.startsWith("pal:")) return openSavedPalette(prev.slice(4), false);   // a saved palette (js/studio.js)
@@ -600,7 +601,7 @@ function colorPage(n, tapped) {
     </div>
     ${typeof rpGlanceHTML === "function" ? rpGlanceHTML(c.n, c.h) : ""}
     <div class="cp-primary-row">
-      ${typeof hmLearnIt === "function" ? `<button class="cp-primary" data-learnit>${mine ? "Review it" : "Learn it"}${mine ? "" : `<em>2 min</em>`}${ICON.arrow}</button>` : ""}
+      ${typeof prQuick === "function" || typeof hmLearnIt === "function" ? `<button class="cp-primary" data-learnit>${mine ? "Review it" : "Learn it"}${mine ? "" : `<em>2 min</em>`}${ICON.arrow}</button>` : ""}
       <button class="icon-btn cp-icon${saved ? " saved" : ""}" data-save aria-label="Save">${saved ? "♥" : "♡"}</button>
       <button class="icon-btn cp-icon" data-share aria-label="Share">${ICON.share}</button>
     </div>
@@ -642,7 +643,7 @@ function colorPage(n, tapped) {
   wireLinks(el); wireSections(el);
   if (typeof articleRender === "function") articleRender(routeSlug(c.n), el.querySelector("[data-ar-slot]"), { n: c.n, h: c.h });   // js/article.js (lane L8): draws nothing when data/articles/<slug>.json is missing
   onKey = e => { if (e.key === "Escape") xBack(); };
-  const li = el.querySelector("[data-learnit]"); if (li) li.onclick = () => hmLearnIt(c);
+  const li = el.querySelector("[data-learnit]"); if (li) li.onclick = () => typeof prQuick === "function" ? prQuick({ seed: c }) : hmLearnIt(c);   // js/practice.js: the instant-deck sheet
   el.querySelector("[data-save]").onclick = e => {
     const b = e.currentTarget, want = !b.classList.contains("saved");
     if (isSaved(n.id) !== want) toggleSave(n.id);
@@ -705,7 +706,7 @@ function paintingPage(n) {
     <p class="p-dek">${esc(n.artist || "")}${n.place ? ` · ${esc(n.place)}` : ""}</p>
     ${pal.length ? `<div class="palette">${pal.map((p, i) => `<button class="pal" data-pi="${i}" data-swatch="${p.h}" style="--c:${p.h};flex:${Math.max(p.share, .08)}" data-ink="${ink(p.h)}"><span>${Math.round(p.share * 100)}%</span></button>`).join("")}</div>
       <div class="pal-names">${pal.map((p, i) => { const fam = typeof familyOf === "function" && familyOf(p.h); return `<button class="pal-name" data-pi="${i}" data-swatch="${p.h}"><i style="--c:${p.h}"></i><b>${esc(p.name)}</b>${fam ? `<span>${esc(fam.head.n)} family</span>` : ""}<em class="mono">${p.h}</em></button>`; }).join("")}</div>
-      <p class="fine">Tap a swatch to open its page.</p>` : `<p class="fine">This painting's palette is being extracted.</p>`}
+      <p class="fine">Tap a swatch to open its page.</p>${typeof prLearnBtn === "function" ? prLearnBtn(".palette", n.title) : ""}` : `<p class="fine">This painting's palette is being extracted.</p>`}
     ${n.note ? `<p class="p-body">${linkText(n.note)}</p>` : ""}
     ${connSection(n)}
     ${n.commons ? `<section class="srcs"><h3>Image</h3><ul><li><a href="${esc(n.commons)}" target="_blank" rel="noopener">Wikimedia Commons</a> · ${esc(n.license || "Public domain")}</li></ul></section>` : ""}
