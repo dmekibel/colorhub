@@ -118,6 +118,9 @@ const ROUTED = [["colorPage", (n, tapped) => n && n.id ? routed(n.title, nodeRou
   ["awIndex", () => routed("Art history by color", "arthistory")],
   ["awVs", (a, b) => routed("Painter against painter", "painters" + (a ? "/" + a + (b ? "/" + b : "") : ""))],
   ["gmListPage", kind => typeof gmListTitle === "function" ? routed(gmListTitle(kind), "gem/" + kind) : null],   // js/gems.js (gem/essay detail pages route via wikiPage above)
+  ["bdPage", id => typeof bdTitle === "function" ? routed(bdTitle(id), "brand/" + id) : null],   // js/brands.js
+  ["bdBrowser", () => routed("Brand colors", "design/brands")],   // js/brands.js
+  ["bgEnter", () => routed("Brand colors", "brands")],   // js/games/brands-game.js
   ["labHoney", () => routed("Honeycomb lab", "lab/honey")], ["sndLab", () => routed("Sounds", "lab/sounds")],   // js/sound.js   // js/home.js: rate every preset at every set size
   ["msOpen", () => routed("Study the map", "mapstudy")],   // js/mapstudy.js
   ["gamutWheel", () => routed("Gamut wheel", "studio/wheel")],   // js/studio.js
@@ -250,6 +253,9 @@ function openRoute(hash, initial = false) {
   if (kind === "look" && id && typeof lkOpenRoute === "function") { base(); XSTACK = []; lkOpenRoute(id); return true; }   // js/looks.js
   if (kind === "botany" && id && typeof btOpenRoute === "function") { base(); btOpenRoute(id); return true; }   // js/botany.js
   if (kind === "gem" && id && typeof gmOpenRoute === "function") { base(); gmOpenRoute(id); return true; }   // js/gems.js
+  if (kind === "brand" && id && typeof bdOpenRoute === "function") { base(); bdOpenRoute(id); return true; }   // js/brands.js
+  if (kind === "design" && id === "brands" && typeof bdBrowser === "function") { base(); XSTACK = []; bdBrowser(); return true; }
+  if (kind === "brands" && typeof bgOpenRoute === "function") { base(); bgOpenRoute(); return true; }   // js/games/brands-game.js
   if (kind === "name" && id) {
     // an app color's slug opens its own deep page instead (ROADMAP.md §13): same address family, same rule
     // as routeColor above for "color/<slug>".

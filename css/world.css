@@ -60,3 +60,23 @@
 .wd-card .mini-pal{grid-row:1/3;align-self:start;margin-top:3px}
 .wd-card .mini-pal i{flex:1}
 .wd-card b,.wd-card small{grid-column:2}
+
+/* Brand colors (js/brands.js): the page hero, the color-history timeline, and the brand browser grid. */
+.bd-hero{display:flex;gap:10px;margin:18px 0 10px}
+.bd-hero i{flex:1;height:84px;border-radius:var(--r-1);background:var(--c)}
+.bd-tl{margin-top:14px;display:flex;flex-direction:column;gap:14px}
+.bd-tl-step{display:grid;grid-template-columns:52px 1fr;column-gap:14px;row-gap:2px;align-items:baseline;padding-bottom:14px;border-bottom:1px solid var(--rule)}
+.bd-tl-step:last-child{border-bottom:0;padding-bottom:0}
+.bd-tl-step i{grid-row:1/3;align-self:start;width:52px;height:52px;border-radius:var(--r-1);background:var(--c)}
+.bd-tl-step b{font:400 20px/1.1 var(--serif)}
+.bd-tl-d{font-size:13px;color:var(--soft);justify-self:end}
+.bd-tl-step p{grid-column:2;margin:2px 0 0;font:italic 400 15px/1.4 var(--serif);letter-spacing:0;text-transform:none;color:var(--faint)}
+.bd-tl-step small{grid-column:2;font-size:13px;color:var(--soft)}
+.bd-last{margin-top:28px}
+.bd-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.bd-card{display:flex;flex-direction:column;gap:8px;padding:14px;border:1px solid var(--rule);border-radius:var(--r-1);text-align:left}
+.bd-card i{display:block;width:100%;height:48px;border-radius:var(--r-1);background:var(--c)}
+.bd-card b{font:400 18px/1.1 var(--serif)}
+.bd-card small{font-size:13px;color:var(--soft)}
+.bd-tile-sw{display:flex;gap:4px;width:100%;height:100%}
+.bd-tile-sw i{flex:1;background:var(--c);border-radius:var(--r-2,6px)}
