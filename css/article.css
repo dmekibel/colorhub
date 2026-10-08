@@ -308,3 +308,22 @@ button.ar-pl:active i{transform:scale(.97)}
 .ar-fig.ar-wide+.ar-fig{margin-top:0}
 @media (max-width:359px){.ar-wide .ar-fig-im{width:100%;height:auto}.ar-wide .ar-fig-cr{margin-left:0}.ar-pq p{font-size:24px}.ar-pl i{height:68px}}
 @media (prefers-reduced-motion:reduce){button.ar-pl i{transition:none}}
+
+/* ---------- the lead picture (David, 2026-10-08): every story opens with one; a fixed 16:10 box, cropped, lazy ---------- */
+.ar-lead{margin:18px 0 6px}
+.ar-lead-b{display:block;width:100%;text-align:left;color:inherit}
+.ar-lead-im{position:relative;display:block;width:100%;aspect-ratio:16/10;overflow:hidden;border-radius:var(--r-2);background:var(--c,var(--surface-2));box-shadow:0 0 0 1px rgba(255,255,255,.08)}
+.ar-lead-im img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .35s ease}
+.ar-lead-im img.ld{opacity:1}
+.ar-lead-tx{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 8px;margin-top:10px}
+.ar-lead-k{font:italic 400 15px/1.2 var(--serif);color:var(--soft)}
+.ar-lead-n{font:400 18px/1.2 var(--serif);color:var(--ink)}
+b.ar-lead-n{font-weight:400}
+.ar-lead-m{display:flex;align-items:center;gap:8px;flex-basis:100%;font:400 14px/1.35 var(--sans);color:var(--soft)}
+.ar-lead-cr{margin-top:4px;font:400 13px/1.4 var(--sans);color:var(--soft)}
+.ar-lead-cr a{color:inherit;text-decoration:underline;text-decoration-color:rgba(236,232,223,.3);text-underline-offset:2px}
+.ar-door .ar-lead{margin:-20px -18px 16px}
+.ar-door .ar-lead-im{border-radius:var(--r-2) var(--r-2) 0 0;box-shadow:none}
+.ar-door .ar-lead-tx,.ar-door .ar-lead-cr{padding:0 18px}
+.ar-read .ar-lead{margin:16px 0 0}
+@media (prefers-reduced-motion:reduce){.ar-lead-im img{transition:none}}

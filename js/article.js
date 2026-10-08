@@ -771,6 +771,7 @@ function arReadDraw(slug, chap, push) {
   const root = el.querySelector(".ar");
   arWire(root, art, self);
   if (typeof wireLinks === "function") wireLinks(el);
+  if (typeof arfLead === "function") { try { root.__lead = arfLead(f => root.isConnected ? root.before(f) : false, art, self); } catch (e) {} }   // the lead picture, under the band (js/article-refs.js)
   if (typeof arfEnhance === "function") { try { arfEnhance(root, art, self); } catch (e) {} }
   // where you stopped: the chapter in view and how far through the whole story, saved as you read
   const secs = arHeaded(root), store = arReadStore();
@@ -809,9 +810,13 @@ function articleRender(slug, host, ctx) {
       AR_READING.set(art.slug, { art, self });
       host.innerHTML = arDoorHTML(art, self, ctx && ctx.fig);
       arDoorWire(host, art, self);
+      const door = host.querySelector(".ar-door");
+      if (door && !(ctx && ctx.fig) && typeof arfLead === "function") { try { arfLead(f => door.isConnected ? door.prepend(f) : false, art, self); } catch (e) {} }   // every story opens with a picture
       return true;
     }
     host.innerHTML = (ctx && ctx.fig || "") + arBuildHTML(art, self);
+    const inl = host.querySelector(".ar");
+    if (!(ctx && ctx.fig) && inl && typeof arfLead === "function") { try { inl.__lead = arfLead(f => inl.isConnected ? inl.before(f) : false, art, self); } catch (e) {} }   // every story opens with a picture
     arWire(host.querySelector(".ar"), art, self);
     if (typeof arfEnhance === "function") { try { arfEnhance(host.querySelector(".ar"), art, self); } catch (e) { try { console.warn("article figures failed:", e); } catch (_) {} } }   // js/article-refs.js: the figure cards
     return true;

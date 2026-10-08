@@ -132,7 +132,7 @@ function arfPainting(id) {
         // the title, picture and credit come from the detail shard: loaded only for a painting that is close enough to be shown
         fill: () => glDetail(i).then(d => {
           base.name = d.t; base.sub = [d.a || d.co, glYear(i)].filter(Boolean).join(" · ");
-          base.img = d.img ? { src: d.img, cors: /^img\//.test(d.img) || (typeof glCORS === "function" && glCORS(d.img) !== "") } : null;
+          base.img = d.img ? { src: d.img, cors: /^img\//.test(d.img) || (typeof glCORS === "function" && glCORS(d.img) !== ""), crop: d.crop || null } : null;
           base.credit = { credit: src.name + (src.credit ? " · " + src.credit : ""), url: d.rec || "", licenseUrl: "" };
         }) };
       return base;
@@ -313,10 +313,16 @@ function arfFixChips(root, resolved) {
     if (ch.hasAttribute("data-ar-guess")) { const s = ch.querySelector("span"); if (s) s.textContent = t.name; ch.removeAttribute("data-ar-guess"); }
   });
 }
+const arfInTime = art => {
+  const since = art.tier === "pigment" ? +((String((art.aside && art.aside.origin && art.aside.origin.first_recorded) || "").match(/\b(1[5-9]\d\d)\b/) || [])[1] || 0) : 0;
+  return t => !(since && t && t.kind === "painting" && t.year != null && t.year < since - 10);
+};
 async function arfEnhance(root, art, self) {
   if (!root || !self || !/^#[0-9a-f]{6}$/i.test(self.h || "")) return;
   const alive = () => root.isConnected;
   const shown = new Set(), secsWith = new Set(), shownIdx = new Set();   // shownIdx: gallery indexes already on the page
+  const lead = root.__lead ? await root.__lead.catch(() => null) : null;   // the lead picture (arfLead) is already on the page: never show it twice
+  if (lead && lead.key) { shown.add(lead.key); if (lead.i != null) shownIdx.add(lead.i); }
   const secOf = el => { const s = el.closest("[data-ar-sec]"); return s ? s.dataset.arSec : null; };
   // 1. explicit references
   const ps = [...root.querySelectorAll("p[data-ar-refs]")];
@@ -335,8 +341,7 @@ async function arfEnhance(root, art, self) {
   const cand = await arfAutoKeys(art, self);
   if (!alive()) return;
   // a pigment's story shows no painting made before the pigment was (a 1474 panel in a Prussian-blue-like color would read as a claim)
-  const since = art.tier === "pigment" ? +((String((art.aside && art.aside.origin && art.aside.origin.first_recorded) || "").match(/\b(1[5-9]\d\d)\b/) || [])[1] || 0) : 0;
-  const inTime = t => !(since && t && t.kind === "painting" && t.year != null && t.year < since - 10);
+  const inTime = arfInTime(art);
   const things = (await Promise.all(cand.filter(k => !shown.has(k)).map(k => arfFor(k, self.h, "light")))).filter(t => t && inTime(t));
   if (!alive()) return;
   const plan = arfPlan(art.sections.filter(s => s.title).map(s => ({ id: s.id, title: s.title })), things, secsWith, shown);
@@ -405,6 +410,79 @@ function arfGaps(scope) {
     });
   });
   return out;
+}
+
+
+// ---------- the lead picture (David, 2026-10-08: articles almost always open with a picture) ----------
+// In order: the color's own image (data/images.js), else the painting that holds the color most, else the closest gem or flower.
+// Same honesty rule as the figures above (ΔE <= 15, paintings >= 2% of the canvas, nothing from before a pigment existed);
+// when nothing qualifies there is no lead, never a far match.
+const ARF_LEAD_AB = .625;   // the box's height / width (16:10): fixed, so nothing moves when the picture lands
+function arfLeadOwn(art, self) {
+  const W = arfWin("WIKI_IMAGES") || {};
+  const keys = [self.n, art.name, ...(art.names || []), self.slug, art.slug].filter(Boolean);
+  for (const k of keys) {
+    const f = arfImgOK((W[k] || [])[0]); if (!f) continue;
+    return { kind: "own", lead: "own", key: "", name: self.n, img: { src: f.src }, credit: arfImgCredit(f), caption: f.caption || "", best: { h: self.h, i: 0, de: 0 } };
+  }
+  return null;
+}
+// painting keys worth scoring: the twins' paintings (data/graph) plus the nearest in the whole gallery
+async function arfLeadPaintings(art, self, row) {
+  const keys = ((row && row.ap) || []).slice(0, 6).map(a => "painting:" + a[0]);
+  try {
+    if (typeof loadGallery === "function") await loadGallery();
+    if (typeof npGalleryHits === "function") npGalleryHits(self.h, 6).slice(0, 8).forEach(h => keys.push("painting:" + h[0]));
+  } catch (e) {}
+  return [...new Set(keys)];
+}
+async function arfLeadPick(art, self) {
+  if (!art || !self || !/^#[0-9a-f]{6}$/i.test(self.h || "")) return null;
+  if (typeof loadWiki === "function") { try { await loadWiki(); } catch (e) {} }
+  const own = arfLeadOwn(art, self); if (own) return own;
+  const inTime = arfInTime(art);
+  let row = null;
+  for (const sl of [...new Set([art.slug, self.slug, ...(art.names || []).map(n => routeSlug(n))].filter(Boolean))]) { row = await arfGraphRow(sl); if (row) break; }
+  // 1. the painting that holds this color most (and has a picture)
+  const pk = await arfLeadPaintings(art, self, row);
+  const ps = (await Promise.all(pk.map(k => arfFor(k, self.h, "light")))).filter(t => t && t.ok && inTime(t)).sort((a, b) => (b.cover || 0) - (a.cover || 0));
+  for (const c of ps.slice(0, 5)) {
+    const t = await arfFor(c.key, self.h);
+    if (t && t.ok && t.img && t.img.src) { t.lead = "painting"; return t; }
+  }
+  // 2. the closest gem or flower that has a picture
+  const keys = [];
+  const G = await arfPoll(() => arfWin("GEMS"), 3000);
+  if (G) (G.gems || []).forEach(g => keys.push("gem:" + g.id));
+  const B = await arfPoll(() => arfWin("BOTANY"), 3000);
+  if (B) { (B.plants || []).forEach(p => keys.push("flower:" + p.id)); (B.dyes || []).forEach(d => keys.push("flower:" + d.id)); }
+  const cs = (await Promise.all(keys.map(k => arfFor(k, self.h, "light")))).filter(t => t && t.ok && t.img && t.img.src).sort((a, b) => a.de - b.de);
+  if (cs[0]) { cs[0].lead = cs[0].kind; return cs[0]; }
+  return null;
+}
+function arfLeadHTML(t, self) {
+  const own = t.kind === "own", src = t.img.src;
+  const big = t.kind === "painting" && typeof glBig === "function" ? glBig(src) : src;
+  const crop = t.kind === "painting" && t.img.crop && typeof glCropStyle === "function" && t.i != null && typeof GAL !== "undefined" && GAL ? glCropStyle(t.i, { crop: t.img.crop }, ARF_LEAD_AB) : "";
+  const noref = /^https?:/.test(big) ? ` referrerpolicy="no-referrer"` : "";
+  const im = `<span class="ar-lead-im" style="--c:${t.best.h}"><img src="${esc(big)}" alt="${own ? esc(t.caption || self.n) : ""}" loading="lazy" decoding="async"${noref}${crop} onload="this.classList.add('ld')"></span>`;
+  const cap = own ? `<span class="ar-lead-n">${esc(t.caption || self.n)}</span>`
+    : `<span class="ar-lead-k">${esc(ARF_WORD[t.kind] || "")}</span><b class="ar-lead-n">${esc(t.name)}</b><span class="ar-lead-m"><span class="ar-fig-d" aria-hidden="true"><i style="--c:${self.h}"></i><i style="--c:${t.best.h}"></i></span>${esc(t.pctText)} to ${esc(self.n)}</span>`;
+  const credit = arfCreditHTML(t.credit).replace("ar-fig-cr", "ar-lead-cr");
+  const aria = ` aria-label="${esc(`${t.name}. ${t.pctText} to ${self.n}. Open`)}"`;
+  return `<figure class="ar-lead" data-kind="${t.kind}" data-ar-lead="${esc(t.key || "own")}">${own ? im + `<div class="ar-lead-tx">${cap}</div>`
+    : `<button type="button" class="ar-lead-b" data-ar-ref="${esc(t.key)}"${aria}>${im}<span class="ar-lead-tx">${cap}</span></button>`}${credit}</figure>`;
+}
+// Finds and places the lead picture. place(fig) puts the element in the page (return false to cancel). Resolves to the picked thing, or null.
+function arfLead(place, art, self) {
+  return arfLeadPick(art, self).catch(() => null).then(t => {
+    if (!t) return null;
+    const tpl = document.createElement("template"); tpl.innerHTML = arfLeadHTML(t, self).trim();
+    const fig = tpl.content.firstElementChild;
+    fig.addEventListener("click", e => { const b = e.target.closest("[data-ar-ref]"); if (b) { e.stopPropagation(); arfOpen(b.dataset.arRef, self); } });
+    const r = arfInsert(null, () => { const ok = place(fig); return ok === false ? null : fig; });
+    return r ? t : null;
+  });
 }
 
 // ---------- opening ----------
