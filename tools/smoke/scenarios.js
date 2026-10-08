@@ -338,6 +338,58 @@ scenario("train", "Odd one out: tap tiles through a whole round", async t => {
   t.notes.push(`${taps} taps to the result`);
 });
 
+// Gradients (js/games/hue-*.js): the shelf opens the teaching board; swap the two tiles with real taps, then play
+// level 1 to the results by tapping each tile home (tile, then its slot), the way a thumb would.
+const hgSolveByTaps = async t => {
+  for (let k = 0; k < 80; k++) {
+    const pair = t.ev(`(() => { const L = HG_LIVE; if (!L || L.st.done) return null; const b = L.board, at = L.at;
+      for (let s = 0; s < at.length; s++) { if (hgHome(b, at, s) || (b.geo.twins && b.geo.cells[s].i >= b.geo.n / 2)) continue;
+        const f = at.findIndex((x, j) => j !== s && b.hex[x] === b.hex[s] && !hgHome(b, at, j)); if (f >= 0) return [f, s]; } return null; })()`);
+    if (!pair) break;
+    await t.click(`.hg-board .hg-s[data-s="${pair[0]}"]`, { force: true, wait: 60 });
+    await t.click(`.hg-board .hg-s[data-s="${pair[1]}"]`, { force: true, wait: 320 });
+  }
+};
+scenario("train", "Gradients: teaching board then level 1 by taps", async t => {
+  await t.open("#shot=gx:home", { settle: 600 });
+  const shelf = await t.waitFor("[data-hg-map], [data-r2-extra=hue]", 6000, "the Gradients tile");
+  await t.click(shelf, { wait: 600 });
+  await t.waitFor(".hg-board .hg-s", 6000, "the teaching board");
+  t.expect(/swapped/i.test(t.text("#hgq")), `the first board teaches by doing ("${t.text("#hgq")}")`);
+  await hgSolveByTaps(t);
+  await t.waitFor(".hg-foot [data-go]", 6000, "Play level 1 after the teaching board");
+  await t.sleep(400);
+  await t.sleep(600);
+  await t.click(".hg-foot [data-go]", { force: true, wait: 700 });
+  await t.waitFor(() => !/game|swapped/i.test(t.text("#app #hgq")) && t.$("#app .hg-board .hg-s:not(.fix)"), 6000, "level 1");
+  const moves0 = t.text(".hg-moves");
+  await hgSolveByTaps(t);
+  t.expect(t.text(".hg-moves") !== moves0, "tapping tiles did not count a move");
+  const go = await t.waitFor("#app .hg-foot [data-go]", 8000, "the reveal after solving");
+  t.expect(t.text("#hgq").length > 2, "the source's name did not come up");
+  await t.click(go, { wait: 700 });
+  await t.waitFor(".hg-res", 6000, "the results screen");
+  t.expect(t.$$(".hg-corner").length === 4, `${t.$$(".hg-corner").length} corner chips instead of 4`);
+  t.expect(t.$(".hg-heat"), "no heat map on the results");
+  t.notes.push(`${t.text(".hg-res .res b")}`);
+});
+scenario("train", "Gradients: map and Choose mode and the daily board", async t => {
+  await t.open("#shot=gx:hue:map", { settle: 600 });
+  await t.waitFor(".hg-lv", 6000, "the level grid");
+  const locked0 = t.$$(".hg-lv.locked").length;
+  t.expect(locked0 > 0, "nothing is locked on a played save");
+  await t.click("[data-mode=choose]", { wait: 500 });
+  await t.waitFor("[data-diff]", 4000, "the difficulty picker");
+  await t.click("[data-diff=hard]", { wait: 500 });
+  const lockedOpen = t.$$(".hg-world:not([data-w='4']) .hg-lv.locked").length;
+  t.expect(lockedOpen === 0, `${lockedOpen} levels still locked in Choose mode`);
+  t.expect(/Hard|2\.\d%/.test(t.text(".hg-modeline")) || t.$("[data-diff=hard].on"), "Hard is not selected");
+  await t.click("[data-mode=you]", { wait: 500 });
+  await t.click("[data-daily]", { wait: 700 });
+  await t.waitFor(".hg-board .hg-s", 6000, "today's board");
+  t.expect(/today/i.test(t.text("#hgq")), "the daily board has no title");
+});
+
 // ================================================================== EXPLORE
 for (const [part, expect] of [["all", ".x-feed .pin, .x-feed [data-pin]"], ["art", ".xb-pick"], ["ideas", ".x-feed .pin, .x-feed [data-pin]"], ["world", "#world *"]]) {
   scenario("explore", `${part} cover opens and goes back`, async t => {

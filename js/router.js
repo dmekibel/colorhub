@@ -119,6 +119,7 @@ const ROUTED = [["colorPage", (n, tapped) => n && n.id ? routed(n.title, nodeRou
   ["openSavedPalette", id => routed("Your palette", "studio/palette/" + id)],   // js/studio.js
   ["prHome", () => routed("Practice", "practice")], ["prPlay", m => PR_METHODS[m] ? routed(PR_METHODS[m].t, "practice/" + m) : null],   // js/practice.js
   ["ooMap", () => routed("Odd one out", "odd")], ["ooEyePage", () => routed("Your eye", "odd/eye")],   // js/games/oo-ui.js
+  ["hgMap", () => routed("Gradients", "hue")], ["hgDaily", () => routed("Today's gradient", "hue/daily")],   // js/games/hue-ui.js
   ["ooWhose", () => routed("Whose palette?", "odd/whose")], ["ooAcross", () => routed("Across the line", "line")], ["ooPairs", () => routed("Painters' pairs", "odd/pairs")],
   ["arHubPage", id => id ? routed(arPretty(id), "hub/" + id) : null], ["arWhichPage", name => name ? routed(arPretty(name), "which/" + name) : null]];   // js/article.js: #/hub/<id>, #/which/<name>
 // Scripts loaded after router.js (artwiki.js, article.js, looks.js, fashion.js...) aren't defined yet when this runs, so boot.js
@@ -210,6 +211,7 @@ function openRoute(hash, initial = false) {
   }
   if (kind === "line" && typeof ooAcross === "function") { base(); XSTACK = []; ooAcross(); return true; }   // js/games/line.js
   if (kind === "odd" && typeof ooOpenRoute === "function") { base(); XSTACK = []; ooOpenRoute(id); return true; }   // js/games/oo-ui.js: #/odd, #/odd/eye, #/odd/whose, #/odd/pairs
+  if (kind === "hue" && typeof hgOpenRoute === "function") { base(); XSTACK = []; hgOpenRoute(id); return true; }   // js/games/hue-ui.js: #/hue, #/hue/daily
   if (kind === "photo" && id && typeof photoPage === "function") { base(); XSTACK = []; photoPage(id); return true; }
   if (kind === "hub" && id && typeof arHubPage === "function") { base(); XSTACK = []; arHubPage(id); return true; }   // js/article.js
   if (kind === "which" && id && typeof arWhichPage === "function") { base(); XSTACK = []; arWhichPage(id); return true; }
