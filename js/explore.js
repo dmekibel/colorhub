@@ -577,6 +577,10 @@ function colorPage(n, tapped) {
   const seenN = new Set([c.n]);
   const stripOthers = tapped ? [c] : [nb, ...likes].filter(x => x && !seenN.has(x.n) && (seenN.add(x.n), true)).slice(0, 2);
   const stripDiff = tapped ? lookDiff({ h: tapped, n: "Your color" }, c) : c.d;
+  // every color page is rich (ROADMAP, David 2026-10-08): famC is a fallback family head for the shelves
+  // below that would otherwise go quiet on a thin name — a no-op for one of the 101 themselves (their own
+  // family head is always themselves, de 0).
+  const famC = typeof rcFamC === "function" ? rcFamC(tapped || c.h) : null;
   const el = show(`
     <div class="c-hero cp-hero cp-hero-full" style="--c:${heroHex}" data-ink="${ink(heroHex)}">
       <button class="cp-close" data-back aria-label="Back">${ICON.back}</button>
@@ -602,20 +606,29 @@ function colorPage(n, tapped) {
     ${c.o && !(w && w.facets.some(f => f.k === "language")) ? `<p class="lead">${esc(c.o)}</p>` : ""}
     ${figHTML(c.n)}
     <section class="gl-in" data-glin></section>
-    <div class="c-poems"></div>
-    ${typeof archiveRows === "function" ? archiveRows(c) : ""}
-    ${typeof btRow === "function" ? btRow(c) : ""}
-    ${typeof gmRow === "function" ? gmRow(c) : ""}
+    ${typeof rcSectionsBeforeWorld === "function" ? rcSectionsBeforeWorld(c.n, c.h, famC) : ""}
+    ${typeof btRow === "function" ? btRow(c, famC) : ""}
+    ${typeof gmRow === "function" ? gmRow(c, famC) : ""}
     <section class="fx-in" data-world-in></section>
+    ${typeof archiveRows === "function" ? archiveRows(c, "films", famC) : ""}
+    <div class="c-poems"></div>
+    ${typeof archiveRows === "function" ? archiveRows(c, "books", famC) : ""}
+    ${typeof rcSectionsAfterWords === "function" ? rcSectionsAfterWords(c.h) : ""}
     ${(() => {
       const secs = (w ? w.facets : []).map((f, i) => [f.k + i, FACET_LABEL[f.k] || f.k, `<p>${linkText(f.text)}</p>` + (i === 0 ? figHTML(c.n, 1) : "")]);
       if (w && w.related && w.related.length) secs.push(["kin", "Kin", w.related.map(r => { const x = graph().resolve(r.to); return x ? `<button class="kin" data-node="${esc(x.id)}"><i style="--c:${x.h}"></i><b>${esc(x.title)}</b><span>${esc(r.why)}</span></button>` : ""; }).join("")]);
       // the sheet used to be the only place these lived (David, 2026-10-07: "everything the sheet had moves
-      // onto the page") — the nearest of the ~1,000 core names, same list js/names.js's own pages show.
+      // onto the page") — the nearest of the ~1,000 core names, same list js/names.js's own pages show. A
+      // nearby name that already has a full written article reads naturally here (never "closest of the
+      // 101", David 2026-10-08) rather than as a separate list.
       if (typeof nearestCore === "function") {
         const list = CORE_NAMES || (typeof coreFallback === "function" ? coreFallback() : []);
         const near = nearestCore(tapped || c.h, list, 7).filter(x => x.n.toLowerCase() !== c.n.toLowerCase()).slice(0, 6);
-        if (near.length) secs.push(["nearnames", "Nearest names", `<div class="lk-list">${near.map(x => `<button class="lk-row" data-cp-near="${esc(x.n)}" data-h="${x.h}"><i style="--c:${x.h}"></i><b>${esc(x.n)}</b><span>${closeness(x.de)} · ${pctDiff(x.de)}</span></button>`).join("")}</div>`]);
+        if (near.length) secs.push(["nearnames", "Nearest names", `<div class="lk-list">${near.map(x => `<button class="lk-row" data-cp-near="${esc(x.n)}" data-h="${x.h}"><i style="--c:${x.h}"></i><b>${esc(x.n)}</b><span>${closeness(x.de)} · ${pctDiff(x.de)}${rcHasArticle(x.n) ? " · has its own story" : ""}</span></button>`).join("")}</div>`]);
+      }
+      const coreSelf = (CORE_NAMES || (typeof coreFallback === "function" ? coreFallback() : [])).find(e => e.n.toLowerCase() === c.n.toLowerCase());
+      if (coreSelf && ((coreSelf.also || []).length || (coreSelf.src || []).length)) {
+        secs.push(["names", "Also called", `${(coreSelf.also || []).length ? `<p>${(coreSelf.also || []).map(esc).join(", ")}.</p>` : ""}${(coreSelf.src || []).length ? `<p class="fine">Listed by: ${esc(rcSrcLabels(coreSelf.src))}.</p>` : ""}`]);
       }
       secs.push(["codes", "Codes", `<div class="cp-codes">${codeRows(c.h).map(([k, v]) => `<button class="cp-code-row" data-copy="${esc(v)}"><span>${esc(k)}</span><b class="mono">${esc(v)}</b></button>`).join("")}</div>${codeRows(c.h).some(r => r[0].startsWith("CMYK")) ? `<p class="fine cp-codes-fine">CMYK here is a rough formula, not a print profile: real values depend on the paper and press, so check them in a print workflow with a proof.</p>` : ""}`]);
       return (w ? "" : `<p class="fine">The full page for ${esc(c.n)} is being written. Its connections below are already live.</p>`) + tocHTML(secs.map(x => [x[0], x[1]])) + secs.map(x => secHTML(x[0], x[1], x[2], false)).join("");
@@ -636,8 +649,9 @@ function colorPage(n, tapped) {
   // a tap anywhere on a near-name row grows its chip into the next page (js/core.js's morphFrom/runMorph)
   el.querySelectorAll("[data-cp-near]").forEach(b => b.onclick = () => { morphFrom(b.querySelector("i")); openCoreName(b.dataset.h, b.dataset.cpNear); });
   const gi = el.querySelector("[data-glin]"); if (gi) galleryColorRow(gi, c);
-  colorPoems(el.querySelector(".c-poems"), c);
-  if (typeof worldColorRow === "function") worldColorRow(el, n);
+  colorPoems(el.querySelector(".c-poems"), c, famC);
+  if (typeof worldColorRow === "function") worldColorRow(el, n, famC);
+  if (typeof rcWireOpen === "function") rcWireOpen(el);
   el.querySelectorAll("[data-copy]").forEach(b => b.onclick = () => { try { navigator.clipboard.writeText(b.dataset.copy); toast("Copied " + b.dataset.copy); } catch (e) {} });
   return el;   // so growFrom (js/core.js, js/home.js hmOpenColor) can grow this page from the tapped honeycomb bubble
 }

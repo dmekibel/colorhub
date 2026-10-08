@@ -100,6 +100,9 @@ function namePage(entry, push = true, tapped) {
   const heroHex = tapped || hex;
   if (push) XSTACK.push("n:" + encodeURIComponent(name));   // the in-session back-trail; `tapped` only ever lives in the address bar (router.js)
   const fam = familyOf(hex);
+  // every color page is rich (ROADMAP, David 2026-10-08): famC is a fallback family head for the shelves
+  // below that would otherwise go quiet on a thin name — reuses `fam` above rather than calling familyOf twice.
+  const famC = fam ? { n: fam.head.n, h: fam.head.h } : null;
   const stage = npStage(entry.rank);
   const taught = BYNAME.get(name.toLowerCase());   // true only if routing ever lands here for one of the 101 (see router.js)
   const mine = taught && taught.id && isMine(S.cards[taught.id]);
@@ -110,7 +113,6 @@ function namePage(entry, push = true, tapped) {
   const shade = entry.shade || null;
   const shadeBase = shade && (CORE_NAMES || coreFallback()).find(e => e.n.toLowerCase() === shade.base.toLowerCase());
   const nearCore = nearestCore(tapped || hex, CORE_NAMES || coreFallback(), 7).filter(x => x.n.toLowerCase() !== name.toLowerCase()).slice(0, 6);
-  const likes = typeof lookalikes === "function" ? lookalikes({ n: name, h: hex }, 6) : [];
   // a small codes block at the end (David, 2026-10-07): HEX/RGB/HSL from js/explore.js's codes() (shared, not
   // reimplemented here), plus Lab, which that one doesn't carry (it's CMYK there, for print; a library name
   // has no print context, so Lab — the space every ΔE/closeness number on this page is already computed in —
@@ -137,13 +139,17 @@ function namePage(entry, push = true, tapped) {
     ${also.length ? `<p class="fine np-also">Also called ${also.map(esc).join(", ")}.</p>` : ""}
     ${notes.length ? `<p class="fine np-jp">${jpNoteLine(notes)}</p>` : ""}
     <section class="gl-in" data-npgal></section>
-    <div class="c-poems"></div>
-    ${typeof archiveRows === "function" ? archiveRows(entry) : ""}
-    ${typeof btRow === "function" ? btRow(entry) : ""}
-    ${typeof gmRow === "function" ? gmRow(entry) : ""}
+    ${typeof rcSectionsBeforeWorld === "function" ? rcSectionsBeforeWorld(name, hex, famC) : ""}
+    ${typeof btRow === "function" ? btRow(entry, famC) : ""}
+    ${typeof gmRow === "function" ? gmRow(entry, famC) : ""}
     <section class="fx-in" data-world-in></section>
+    ${typeof archiveRows === "function" ? archiveRows(entry, "films", famC) : ""}
+    <div class="c-poems"></div>
+    ${typeof archiveRows === "function" ? archiveRows(entry, "books", famC) : ""}
+    ${typeof rcSectionsAfterWords === "function" ? rcSectionsAfterWords(heroHex) : ""}
     ${nearCore.length ? `<div class="sec-head"><b>Nearest names</b><span>of about 1,000</span></div>
-      <div class="lk-list">${nearCore.map(x => `<button class="lk-row" data-np-near="${esc(x.n)}" data-h="${x.h}"><i style="--c:${x.h}" data-morph-src></i><b>${esc(x.n)}</b><span>${pctMatch(x.de)} · ${esc(lookDiff({ n: name, h: hex }, x))}</span></button>`).join("")}</div>` : ""}
+      <div class="lk-list">${nearCore.map(x => `<button class="lk-row" data-np-near="${esc(x.n)}" data-h="${x.h}"><i style="--c:${x.h}" data-morph-src></i><b>${esc(x.n)}</b><span>${pctMatch(x.de)} · ${esc(lookDiff({ n: name, h: hex }, x))}${typeof rcHasArticle === "function" && rcHasArticle(x.n) ? " · has its own story" : ""}</span></button>`).join("")}</div>` : ""}
+    ${entry.src && entry.src.length ? `<div class="sec-head"><b>Also called</b></div><p class="fine">Listed by: ${esc(typeof rcSrcLabels === "function" ? rcSrcLabels(entry.src) : entry.src.join(", "))}.</p>` : ""}
     <div class="sec-head"><b>Codes</b></div>
     <div class="cp-codes">${codeRows.map(([k, v]) => `<button class="cp-code-row" data-copy="${esc(v)}"><span>${esc(k)}</span><b class="mono">${esc(v)}</b></button>`).join("")}</div>
     <p class="fine">Nearest of about 1,000 primary names (CIEDE2000). Hex values are screen approximations.</p>
@@ -159,8 +165,9 @@ function namePage(entry, push = true, tapped) {
   // [data-morph-src] delegated listener, which only catches a tap exactly on the marked element).
   el.querySelectorAll("[data-np-near]").forEach(b => b.onclick = () => { morphFrom(b.querySelector("i")); openCoreName(b.dataset.h, b.dataset.npNear); });
   npPaintingsSection(el.querySelector("[data-npgal]"), hex);
-  colorPoems(el.querySelector(".c-poems"), entry);
-  if (typeof worldColorRow === "function") worldColorRow(el, { kind: "color", h: hex, title: name });
+  colorPoems(el.querySelector(".c-poems"), entry, famC);
+  if (typeof worldColorRow === "function") worldColorRow(el, { kind: "color", h: hex, title: name }, famC);
+  if (typeof rcWireOpen === "function") rcWireOpen(el);
   el.querySelectorAll("[data-copy]").forEach(b => b.onclick = () => { try { navigator.clipboard.writeText(b.dataset.copy); toast("Copied " + b.dataset.copy); } catch (e) {} });
   return el;   // so growFrom (js/core.js, js/home.js hmOpenName) can grow this page from the tapped honeycomb bubble
 }
@@ -169,14 +176,20 @@ function namePage(entry, push = true, tapped) {
 // Mirrors router.js's own redirect: an app color's slug opens its deep colorPage instead (same as a real
 // #/name/<slug> visit), so this hook is an honest preview of production routing, not just namePage() in
 // isolation.
+// A library-only name (one of the ~2,716 in the big name library, but not in the ~1,000 core names) has no
+// #/name/<slug> route in production — it only opens through the honeycomb tap (js/home.js hmOpenName ->
+// npEntryFor), which builds its page entry live from the tapped item. This hook does the same thing, so
+// design review (and the "every color page is rich" verification pass, 2026-10-08) can reach one directly.
 function namesShot(arg) {
   const [slug, down] = String(arg || "greyish-white").split("@");
   const after = () => { if (down) document.body.style.marginTop = "-" + down + "px"; };
   const c = routeColor(slug);
   if (c) { XSTACK = []; openNode(colorNode(c)); return after(); }
-  loadCoreNames().then(() => {
-    const entry = (CORE_NAMES || []).find(e => routeSlug(e.n) === slug) || (CORE_NAMES || []).find(e => e.n.toLowerCase() === slug.toLowerCase());
-    if (!entry) return toast("No core name called that");
+  Promise.all([loadCoreNames(), loadLongNames()]).then(() => {
+    const core = (CORE_NAMES || []).find(e => routeSlug(e.n) === slug) || (CORE_NAMES || []).find(e => e.n.toLowerCase() === slug.toLowerCase());
+    const lib = !core && findLongName(slug);
+    const entry = core || (lib && npEntryFor({ n: lib.n, h: lib.h, lib }));
+    if (!entry) return toast("No core or library name called that");
     XSTACK = [];
     namePage(entry);
     after();

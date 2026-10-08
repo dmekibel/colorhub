@@ -218,15 +218,26 @@ function fashionCoty(opts = {}) {
 
 // ---------------------------------------------------------------- "In fashion" row on a color page
 // Lazy: js/explore.js calls this if it exists, right after drawing colorPage's own sections.
-function worldColorRow(el, n) {
-  if (!n || n.kind !== "color" || !window.FASHION) return;
-  const host = el.querySelector("[data-world-in]"); if (!host) return;
+// ΔE caps widened from 9/11 to 13/15 and a family fallback added (David, 2026-10-08: "a random color shouldn't
+// land on an almost empty page") -- fashion's own lists (decades, houses) are only ~35 entries total, so a
+// tight cap left most of the library's names with nothing here at all.
+function worldFashionHits(hex, title) {
   const hits = [];
   const seenDecades = new Set(), seenHouses = new Set();
-  FASHION.decades.forEach(d => { d.swatches.forEach(([h, label]) => { if (!seenDecades.has(d.id) && de2000(n.h, h) < 9) { seenDecades.add(d.id); hits.push({ slug: "decade-" + d.id, title: d.label, sub: label, h }); } }); });
-  FASHION.houses.forEach(h => { if (!seenHouses.has(h.id) && de2000(n.h, h.hex) < 11) { seenHouses.add(h.id); hits.push({ slug: "house-" + h.id, title: h.house, sub: h.label, h: h.hex }); } });
+  FASHION.decades.forEach(d => { d.swatches.forEach(([h, label]) => { if (!seenDecades.has(d.id) && de2000(hex, h) < 13) { seenDecades.add(d.id); hits.push({ slug: "decade-" + d.id, title: d.label, sub: label, h }); } }); });
+  FASHION.houses.forEach(h => { if (!seenHouses.has(h.id) && de2000(hex, h.hex) < 15) { seenHouses.add(h.id); hits.push({ slug: "house-" + h.id, title: h.house, sub: h.label, h: h.hex }); } });
+  return hits;
+}
+function worldColorRow(el, n, famC) {
+  if (!n || n.kind !== "color" || !window.FASHION) return;
+  const host = el.querySelector("[data-world-in]"); if (!host) return;
+  let hits = worldFashionHits(n.h, n.title), note = "";
+  if (hits.length < 2 && famC && famC.n.toLowerCase() !== n.title.toLowerCase()) {
+    const famHits = worldFashionHits(famC.h, famC.n);
+    if (famHits.length >= 2) { hits = famHits; note = `<p class="fine">Nothing of ${esc(n.title.toLowerCase())}'s own; its nearest well-covered match, ${esc(famC.n)}, does.</p>`; }
+  }
   if (hits.length < 2) return;
-  host.innerHTML = `<h3>In fashion</h3><p class="fx-in-sub">Decades and houses whose signature color is close to ${esc(n.title)}.</p>
+  host.innerHTML = `<h3>In fashion</h3><p class="fx-in-sub">Decades and houses whose signature color is close to ${esc(note ? famC.n : n.title)}.</p>${note}
     <div class="wd-in-strip">${hits.slice(0, 8).map(x => `<button class="wd-in" data-wd-open="${esc(x.slug)}"><i style="--c:${x.h}"></i><b>${esc(x.title)}</b><small>${esc(x.sub)}</small></button>`).join("")}</div>`;
   host.querySelectorAll("[data-wd-open]").forEach(b => b.onclick = () => fashionPage(b.dataset.wdOpen, { back: () => openNode(n, false) }));
 }
