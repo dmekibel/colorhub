@@ -260,7 +260,9 @@ span.ar-ref.ar-x{text-decoration:none;color:var(--ar-body)}
 /* a tuned float drop cap, not initial-letter: Safari's -webkit-initial-letter renders low with Instrument Serif
    (its cap-height/line metrics don't match what initial-letter assumes), so both engines get the same plain
    float sizing instead — top of the glyph lands on line 1's cap height, its foot on line 2's baseline. */
-.ar-sec>p.ar-dc::first-letter{font-family:var(--serif);color:var(--ar-acc-x);font-weight:400;float:left;font-size:3.7em;line-height:.78;margin:.04em .12em 0 0}
+/* raised initial (2026-10-09): a sunk drop cap rendered low on iPhone Safari twice, so the first letter sits on the
+   first line's baseline, larger and in the page's color; it can never misalign */
+.ar-sec>p.ar-dc::first-letter{font-family:var(--serif);color:var(--ar-acc-x);font-weight:400;font-size:2.15em;line-height:0;letter-spacing:-.01em}
 /* color words */
 .ar-link.hl-t,.ar-hl.hl-t{color:var(--hl);font-weight:500}
 .ar-link.hl-t{text-decoration-color:color-mix(in srgb,var(--hl) 45%,transparent)}
