@@ -26,6 +26,8 @@ const H = {
     const fold = target.closest("details:not([open])");
     if (fold) { await t.click(fold.querySelector("summary"), { wait: 200 }); t.expect(fold.open, "the folded section did not open"); }
     await t.click(target, { wait: 400 });
+    // the Walk's first tap walks to that color (it becomes the center); a second tap on the centered one opens its page
+    if (used === ".rp-hc-c[data-rc-open]") await t.click(target, { wait: 400 });
     await t.waitFor(() => t.$(".cp-page .cp-hero-foot h1") && (H.title(t) + "|" + H.chip(t)) !== before, 8000, `${used} to open another page`);
     return used;
   },

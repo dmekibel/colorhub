@@ -238,11 +238,10 @@ function rpFlowerHTML(cells, name, hex) {
 // ---------- Walk from here: a honeycomb you can drag outward (David, 2026-10-08) ----------
 // Axial hex grid centred on this color. Rings are filled lazily as you pan: each new cell takes the unplaced name
 // closest (CIELAB) to the cells already around it, so neighbors on screen are neighbors in color.
-const RP_HS = 50, RP_DIR = [[1, 0], [1, -1], [0, -1], [-1, 0], [-1, 1], [0, 1]];
-function rpHexXY(q, r) { return [1.5 * RP_HS * q, Math.sqrt(3) * RP_HS * (r + q / 2)]; }
-// the center is drawn about 2x a neighbor, so every other cell is pushed straight out from it by RP_OFF
-const RP_OFF = 56;
-function rpPos(q, r) { const [x, y] = rpHexXY(q, r), d = Math.hypot(x, y); return d ? [x + x / d * RP_OFF, y + y / d * RP_OFF] : [0, 0]; }
+const RP_HS = 56, RP_GAP = 1.025, RP_DIR = [[1, 0], [1, -1], [0, -1], [-1, 0], [-1, 1], [0, 1]];
+function rpHexXY(q, r) { return [1.5 * RP_HS * q * RP_GAP, Math.sqrt(3) * RP_HS * (r + q / 2) * RP_GAP]; }
+function rpPos(q, r) { return rpHexXY(q, r); }
+function rpRingOf(c) { return Math.max(Math.abs(c.q), Math.abs(c.r), Math.abs(c.q + c.r)); }
 function rpRing(n) {
   if (n === 0) return [[0, 0]];
   const out = []; let q = -n, r = n;
@@ -277,27 +276,42 @@ function rpWalkSection(name, hex) {
     const box = document.getElementById(id); if (!box) return;
     const g = rpWalkGrid(name, hex);
     box.innerHTML = `<section class="rp-walk"><h2>Walk from here</h2><p class="rp-walk-sub">The closest colors to ${esc(name)}.</p>
-      <div class="rp-hc" tabindex="0" aria-label="Neighborhood of ${esc(name)}"><div class="rp-hc-in"></div><p class="rp-hc-hint">Drag to walk further</p><button class="rp-hc-back" type="button" hidden>Back to ${esc(name)}</button></div>
+      <div class="rp-hc-wrap"><div class="rp-hc" tabindex="0" aria-label="Neighborhood of ${esc(name)}"><div class="rp-hc-in"></div></div><p class="rp-hc-hint">Tap a color to walk to it</p><button class="rp-hc-back" type="button" hidden>Back to ${esc(name)}</button></div>
       <button class="rp-hc-map" type="button">Open on the map</button></section>`;
     const vp = box.querySelector(".rp-hc"), inn = box.querySelector(".rp-hc-in"), W = () => vp.clientWidth || 340, H = () => vp.clientHeight || 360;
     let ox = 0, oy = 0, sc = 1, drawn = new Set();
     const back = box.querySelector(".rp-hc-back");
-    // the outer rings stay hidden until you pan or zoom out; the recenter chip appears once the center drifts away
+    // one ring at rest; every ~70px of walking (or each step of zooming out) reveals exactly one more, never all at once
+    // Walking: tap a neighbor and it becomes the center (its own closest colors appear around it); tap the centered one to open it.
+    // Each step reveals one more ring, never everything. The widget only pans sideways, so vertical swipes always scroll the page.
+    let travel = 0, lvl = 1, focus = { q: 0, r: 0 }; const foci = [focus];
+    const hd = (a, b) => { const dq = a.q - b.q, dr = a.r - b.r; return Math.max(Math.abs(dq), Math.abs(dr), Math.abs(dq + dr)); };
+    const lay = () => {
+      paint();
+      inn.querySelectorAll(".rp-hc-c").forEach(e => { const c = { q: +e.dataset.q, r: +e.dataset.r }; if (!e.classList.contains("rp-hc-on") && foci.some(f => hd(f, c) <= lvl)) { e.classList.add("rp-hc-on"); e.tabIndex = 0; } e.classList.toggle("rp-hc-focus", c.q === focus.q && c.r === focus.r); });
+      box.querySelector(".rp-hc-hint").style.opacity = lvl > 1 || foci.length > 1 ? 0 : 1;
+    };
+    const reveal = () => {
+      const want = Math.min(6, Math.max(1 + Math.floor(travel / 90), 1 + Math.floor((1 - sc) / .12)));
+      if (want > lvl) { lvl = want; lay(); }
+    };
     const apply = () => {
       inn.style.transform = `translate(${W() / 2 + ox}px,${H() / 2 + oy}px) scale(${sc})`;
-      if (Math.hypot(ox, oy) > 14 || sc < .92) vp.classList.add("far-on");
-      back.hidden = !(Math.hypot(ox, oy) * sc > Math.min(W(), H()) * .6);
+      back.hidden = !(Math.hypot(ox, oy) > Math.min(W(), H()) * .6);
     };
-    back.onclick = () => { vp.classList.add("glide"); ox = 0; oy = 0; sc = 1; apply(); setTimeout(() => vp.classList.remove("glide"), 400); };
+    const goTo = (c) => {
+      focus = c; if (!foci.some(f => f.q === c.q && f.r === c.r)) foci.push(c);
+      const [x, y] = rpPos(c.q, c.r); vp.classList.add("glide"); ox = -x * sc; oy = -y * sc; lay(); apply(); setTimeout(() => vp.classList.remove("glide"), 450);
+    };
+    back.onclick = () => { sc = 1; goTo({ q: 0, r: 0 }); };
     const paint = () => {
-      const need = Math.min(14, Math.ceil(Math.max(Math.hypot(Math.abs(ox) + W() / 2 / sc, 0), Math.hypot(Math.abs(oy) + H() / 2 / sc, 0)) / (RP_HS * 1.5)) + 1);
-      g.grow(Math.max(3, need));
+      g.grow(Math.max(...foci.map(f => rpRingOf(f))) + lvl + 1);
       let html = "";
       g.cells.forEach(c => { const k = c.q + "," + c.r; if (drawn.has(k)) return; drawn.add(k); const [x, y] = rpPos(c.q, c.r);
         const st = `left:${(x - RP_HS).toFixed(1)}px;top:${(y - RP_HS * .866).toFixed(1)}px`;
-        const far = Math.max(Math.abs(c.q), Math.abs(c.r), Math.abs(c.q + c.r)) > 1 ? " rp-hc-far" : "";
-        html += c.self ? `<div class="rp-hc-ring" style="left:${-RP_HS * 2 - 7}px;top:${-RP_HS * 1.732 - 6}px"></div><div class="rp-hc-c rp-hc-self" style="left:${-RP_HS * 2}px;top:${-RP_HS * 1.732}px;--c:${hex}" data-ink="${ink(hex)}"><b>${esc(name)}</b><em>${hex}</em></div>`
-          : `<button class="rp-hc-c${far}" style="${st};--c:${c.h}" data-ink="${ink(c.h)}"${far ? " tabindex=-1" : ""} data-rc-open data-h="${c.h}" data-n="${esc(c.n)}"><b>${esc(c.n)}</b><em>${Math.round(Math.max(0, 100 - c.de))}%</em></button>`; });
+        const rg = rpRingOf(c), on = rg <= lvl ? " rp-hc-on" : "";
+        html += c.self ? `<div class="rp-hc-c rp-hc-self rp-hc-on rp-hc-focus" data-q="0" data-r="0" style="${st};--c:${hex}" data-ink="${ink(hex)}"><b>${esc(name)}</b><em>${hex}</em></div>`
+          : `<button class="rp-hc-c${on}" data-q="${c.q}" data-r="${c.r}" style="${st};--c:${c.h}" data-ink="${ink(c.h)}"${on ? "" : " tabindex=-1"} data-rc-open data-h="${c.h}" data-n="${esc(c.n)}"><b>${esc(c.n)}</b><em>${Math.round(Math.max(0, 100 - c.de))}%</em></button>`; });
       inn.insertAdjacentHTML("beforeend", html);
     };
     paint(); apply();
@@ -306,14 +320,21 @@ function rpWalkSection(name, hex) {
     vp.addEventListener("pointermove", e => {
       if (!ptrs.has(e.pointerId)) return;
       const prev = ptrs.get(e.pointerId); ptrs.set(e.pointerId, [e.clientX, e.clientY]);
-      if (ptrs.size === 2) { const [a, b2] = [...ptrs.values()], d = Math.hypot(a[0] - b2[0], a[1] - b2[1]); if (pd) sc = Math.max(.4, Math.min(1.5, sc * d / pd)); pd = d; moved = 99; apply(); return; }
+      if (ptrs.size === 2) { const [a, b2] = [...ptrs.values()], d = Math.hypot(a[0] - b2[0], a[1] - b2[1]); if (pd) sc = Math.max(.4, Math.min(1.5, sc * d / pd)); pd = d; moved = 99; apply(); reveal(); return; }
       const dx = e.clientX - prev[0], dy = e.clientY - prev[1]; moved += Math.abs(dx) + Math.abs(dy);
-      if (moved > 8) { ox += dx / sc; oy += dy / sc; vp.classList.add("drag"); apply(); paint(); }
+      if (moved > 8) { ox += dx; oy += dy; vp.classList.add("drag"); travel += Math.hypot(dx, dy); apply(); reveal(); }
     });
     const up = e => { ptrs.delete(e.pointerId); pd = 0; if (!ptrs.size) setTimeout(() => vp.classList.remove("drag"), 0); };
     vp.addEventListener("pointerup", up); vp.addEventListener("pointercancel", up);
-    vp.addEventListener("click", e => { if (moved > 8) { e.stopPropagation(); e.preventDefault(); } }, true);
-    vp.addEventListener("wheel", e => { if (!e.ctrlKey) return; e.preventDefault(); sc = Math.max(.4, Math.min(1.5, sc * (e.deltaY < 0 ? 1.08 : .92))); apply(); }, { passive: false });
+    vp.addEventListener("click", e => {
+      const cell = e.target.closest(".rp-hc-c"), still = moved <= 8;
+      if (!still || !cell) { if (!still) { e.stopPropagation(); e.preventDefault(); } return; }
+      const c = { q: +cell.dataset.q, r: +cell.dataset.r };
+      if (cell.classList.contains("rp-hc-self")) { e.stopPropagation(); e.preventDefault(); if (!(c.q === focus.q && c.r === focus.r)) goTo(c); return; }
+      if (c.q === focus.q && c.r === focus.r) return;   // the centered color: the click opens its page
+      e.stopPropagation(); e.preventDefault(); goTo(c);
+    }, true);
+    vp.addEventListener("wheel", e => { if (!e.ctrlKey) return; e.preventDefault(); sc = Math.max(.4, Math.min(1.5, sc * (e.deltaY < 0 ? 1.08 : .92))); apply(); reveal(); }, { passive: false });
     box.querySelector(".rp-hc-map").onclick = () => {
       const near = [...g.cells.values()].filter(c => !c.self).sort((p, q) => p.de - q.de).slice(0, 23);
       if (typeof colorSet === "function" && typeof csOnMap === "function") csOnMap(colorSet({ kind: "walk", id: routeSlug(name), title: `Around ${name}`, colors: [{ h: hex, n: name }, ...near.map(c => ({ h: c.h, n: c.n }))], src: "color/" + routeSlug(name) }));
