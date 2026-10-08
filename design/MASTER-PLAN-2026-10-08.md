@@ -133,7 +133,7 @@ The full-screen color, then a one-line definition with its source, then the **Re
 | L13 | Studio: palette engine (music framing), mosaic picker, image analysis, cross-matching | js/palette-engine.js, js/mosaic.js | Sonnet | 2 |
 | L14 | Mix lab (own mixing model, no Mixbox) | js/mixlab.js | Sonnet | 2 |
 | L15 | Data quality: core names (Seafoam, typos, compounds), Maerz & Paul filter + merge, "brighter" wording, more museums (Sargent watercolors) | tools/*, data/*.json | Sonnet | 1 |
-| L16 | Explore 2.0: For you from the Learner Model, mood search, hubs in Explore, Cabinet | js/explore.js sections | Sonnet | 2 |
+| L16 | Explore 2.0: For you from the Learner Model, mood search, hubs in Explore, Cabinet, **aesthetics as palettes** (cottagecore, dark academia, vaporwave…, from David's Aesthetics Wiki ask: names and ideas only, palettes built from our own color data) | js/explore.js sections | Sonnet | 2 |
 | L17 | Crawlable pages for all names and articles (SEO) | tools/pages.py output | Sonnet | 3 |
 | L18 | Honeycomb polish (Globe Fibonacci, lens, styles) | js/honey.js | Sonnet | 2 |
 
@@ -178,5 +178,6 @@ The full-screen color, then a one-line definition with its source, then the **Re
 ---
 
 ## Progress log
+- 12:4x: L1 ledger landed (design/REQUESTS-LEDGER.md: 111 done, 43 partial, 45 not started). ECC patterns adopted as files (no plugin). L19 design-history corpus started. L6 also computes per-color superlatives (rarest, peak decade, loyal painters).
 - 12:0x: Wave 0 launched: L1 ledger, L2 concordance, L3 smoke harness, L4 Practice resume, L5 rich pages resume.
 - 12:1x: Wave 1 started early (no dependencies): L6 graph, L15 data quality, L10 Train games, L11 art wiki, L12 design lead. The genius panel is reviewing this plan (design/GENIUS-PANEL-1.md). An ECC study agent is writing design/ECC-ADAPT.md (patterns only; no plugin installed mid-sprint).
