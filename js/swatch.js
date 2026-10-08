@@ -91,7 +91,7 @@ function nameSheet(hex) {
     close();
     if (hasName) openCoreName(nm.h, nm.n); else if (typeof galleryOpenColor === "function") galleryOpenColor(hex, nm.text || nm.n);
   };
-  const learnBtn = sh.querySelector("[data-sw-learn]"); if (learnBtn) learnBtn.onclick = () => { morphFrom(sh.querySelector(".pk-hero")); close(); hmLearnIt(taught); };
+  const learnBtn = sh.querySelector("[data-sw-learn]"); if (learnBtn) learnBtn.onclick = () => { close(); if (typeof prQuick === "function") prQuick({ seed: { n: taught.n, h: taught.h } }); else hmLearnIt(taught); };   // the one Learn door: js/learnset.js lsOpen
   const ptgBtn = sh.querySelector("[data-sw-ptgs]"); if (ptgBtn) ptgBtn.onclick = () => { close(); galleryOpenColor(hex, nm.text || nm.n); };
   sh.querySelector("[data-sw-copy]").onclick = () => { try { navigator.clipboard.writeText(hex); toast("Copied " + hex); } catch (e) {} };
   buzz(6);

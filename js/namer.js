@@ -92,7 +92,7 @@ LAB.namer = (hex, push = true) => {
       + (typeof hmHome === "function" ? `<button data-map>On the map</button>` : "");
     $("#acts [data-save]").onclick = () => { const t = nmrTray(); if (t.includes(cur)) { S.namerTray = t.filter(x => x !== cur); } else { t.unshift(cur); S.namerTray = t.slice(0, 12); buzz(8); } save(); render(); drawTray(); };
     const pt = $("#acts [data-pt]"); if (pt) pt.onclick = () => galleryOpenColor(cur, nm.text);
-    const lr = $("#acts [data-learn]"); if (lr) lr.onclick = () => hmLearnIt(taught);
+    const lr = $("#acts [data-learn]"); if (lr) lr.onclick = () => typeof prQuick === "function" ? prQuick({ seed: { n: taught.n, h: taught.h } }) : hmLearnIt(taught);   // the one Learn door (js/learnset.js)
     const mp = $("#acts [data-map]"); if (mp) mp.onclick = () => nmrOnMap(nm.n);
     if (paneApi && paneApi.render) paneApi.render();
     // the address follows the color, so a copied link reopens this exact pick (Back is untouched)

@@ -1503,7 +1503,7 @@ const prLevelRank = it => it.useRank != null ? it.useRank : it.rank;
 const prSeedRank = it => it.rank < 9999 ? prLevelRank(it) : (prItemOf(it.h) ? prLevelRank(prItemOf(it.h)) : 9999);
 function prInstantDeck(o = {}) {
   // csLearn (js/colorset.js) hands over a ColorSet: open the quick sheet with its colors as "These colors"
-  if (o.set && !o.build) { const set = typeof o.set === "function" ? o.set() : o.set; return prQuick({ items: ((set && set.colors) || []).map(c => c.h), label: (set && set.title) || "", seed: o.seed, back: o.back }); }
+  if (o.set && !o.build) { const set = typeof o.set === "function" ? o.set() : o.set; return prQuick({ items: ((set && set.colors) || []).map(c => c.h), label: (set && set.title) || "", src: set && set.kind, seed: o.seed, back: o.back }); }
   if (o.source === "set") o = { ...o, source: "these" };
   const seed = prSeed(o.seed), size = o.size == null ? 10 : +o.size, core = prCore(), p = prState();
   const these = prUnique((o.items || []).map(x => typeof x === "string" ? prItemOf(x) : prSeed(x)).filter(Boolean));

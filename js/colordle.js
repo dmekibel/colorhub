@@ -254,7 +254,7 @@ function daily() {
     if (typeof wireLinks === "function") wireLinks($("#dnEnd"));
     $("[data-page]").onclick = () => openCoreName(t.h, t.n);
     $("[data-share]").onclick = () => dnShare(rec, no, t);
-    const pr = el.querySelector("[data-practice]"); if (pr) pr.onclick = () => prQuick({ items: misses.map(m => m.h), label: "Today's misses" });
+    const pr = el.querySelector("[data-practice]"); if (pr) pr.onclick = () => prQuick({ items: misses.map(m => m.h), label: "Today's misses", src: "colordle" });
     const hm = el.querySelector("[data-home]"); if (hm) hm.onclick = leave;
     const pa = el.querySelector("[data-paint]"); if (pa) pa.onclick = () => challenge();
     if (fresh) dnLog({ type: "answer", c: t.n, ok: rec.ok && !rec.hint, by: rec.hint ? "pick" : "type", src: "daily" });

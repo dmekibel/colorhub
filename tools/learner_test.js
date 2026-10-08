@@ -55,6 +55,12 @@ const DAY = 864e5, NOW = Date.now();
   ctx.__d = { v: 9, learn: { odd: true }, y: 2 };
   const f = run(ctx, "migrateState(__d)");
   ok(f.v === 9 && f.learn.odd === true && f.y === 2, "migrate: a newer save is kept as it is");
+  // Study (js/learnset.js) adds only optional keys: a card's "from" and S.practice.ls.sets. No step, nothing dropped.
+  ctx.__d = { v: 3, cards: { "u1:Teal": { b: 0, due: "2026-10-09", since: "2026-10-08", n: "Teal", h: "#008080", from: "s1abc" } },
+    practice: { ls: { size: 8, best: {}, sets: { s1abc: { t: "The Milkmaid", src: "painting", r: "#/painting/milkmaid", hs: ["#008080"], at: "2026-10-08", last: "2026-10-08", climbed: ["teal"] } } } } };
+  const st = run(ctx, "migrateState(__d)");
+  ok(st.v === 3 && st.cards["u1:Teal"].from === "s1abc" && st.cards["u1:Teal"].b === 0, "migrate: a Study card keeps the set it came from");
+  ok(st.practice.ls.sets.s1abc.src === "painting" && st.practice.ls.size === 8, "migrate: kept Study sets survive with their source");
 }
 
 // ---------- 2. backfill from a sample old save ----------
