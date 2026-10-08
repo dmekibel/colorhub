@@ -380,6 +380,8 @@ scenario("pages", "a tapped in-between hex opens its nearest name with 'Your col
 scenario("pages", "Learn it runs meet > recall from a color page", async t => {
   await H.openPage(t, "#/color/teal", "Teal");
   await t.click("[data-learnit]", { wait: 600 });
+  // the Learn button opens the instant-deck sheet (js/practice.js); Learn it is one of its methods
+  if (t.$(".pr-quick")) { await t.click('[data-method="lesson"]', { wait: 200 }); await t.click(".pr-quick [data-go]", { wait: 600 }); }
   await t.waitFor("#ltPager", 6000, "the Learn it meet pager");
   t.expect(t.$$("#ltPager .lt-page").length >= 3, "the meet pager has too few pages");
   // (smooth scrolling does not run under the virtual clock, so jump page by page like a finger would, then press Enter on the last one)
@@ -396,6 +398,32 @@ scenario("pages", "Learn it runs meet > recall from a color page", async t => {
   // closing returns to the color's own page
   await t.click("[data-close]", { wait: 600 });
   await t.waitFor(".cp-page", 6000, "the color page after closing Learn it");
+});
+
+scenario("pages", "Learn opens the instant deck; Start plays flashcards to the results", async t => {
+  await H.openPage(t, "#/color/teal", "Teal");
+  await t.click("[data-learnit]", { wait: 600 });
+  await t.waitFor(".pr-quick", 4000, "the instant-deck sheet");
+  await t.click('.pr-quick [data-size="5"]', { wait: 150 });
+  await t.click('.pr-quick [data-method="cards"]', { wait: 150 });
+  await t.click(".pr-quick [data-go]", { wait: 600 });
+  await t.waitFor(".pr-play .pr-card", 4000, "the flashcard");
+  for (let i = 0; i < 20 && !t.$(".pr-res"); i++) {
+    const st = t.$(".pr-stage"); if (st && st._prReveal && !t.$(".pr-card.revealed")) { st._prReveal(); await t.sleep(150); }
+    const yes = t.$("[data-yes]"); if (yes) await t.click(yes, { wait: 450 }); else await t.sleep(200);
+  }
+  await t.waitFor(".pr-res", 4000, "the results screen");
+  t.expect(/known/.test(t.$(".pr-res-t").textContent), "the results title");
+  await t.click(".pr-res [data-close]", { wait: 600 });
+  await t.waitFor(".cp-page", 6000, "back on the color page after closing");
+});
+
+scenario("home", "Study corner opens the instant deck seeded with the middle color", async t => {
+  await H.homeReady(t);
+  await t.click("[data-pr-study]", { wait: 600 });
+  await t.waitFor(".pr-quick", 4000, "the instant-deck sheet from Home");
+  t.expect(/Learn/.test(t.$("[data-qtitle]").textContent), "the sheet title");
+  t.expect(t.$$(".pr-quick .pr-plate i").length >= 5, "the deck plate");
 });
 
 // ================================================================== STUDIO
@@ -655,6 +683,9 @@ scenario("learn", "Learn it opens on a name past the first units", async t => {
   await t.open("#/name/chestnut", { settle: 600 });
   await t.waitFor(".cp-page [data-learnit]", 10000, "Learn it on the Chestnut name page");
   await t.click("[data-learnit]", { wait: 600 });
+  await t.waitFor(".pr-quick [data-method='lesson']", 6000, "Practice's sheet offering Learn it for a name past the first units");
+  await t.click("[data-method='lesson']", { wait: 300 });
+  await t.click(".pr-quick [data-go]", { wait: 700 });
   await t.waitFor("#ltPager", 6000, "the Learn it meet pager");
   t.expect(t.$$("#ltPager .lt-page").length >= 3, "the group has look-alikes from the ~1,000 names");
   await t.click("[data-lt-x]", { wait: 600 });
