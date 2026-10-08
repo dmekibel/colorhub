@@ -25,10 +25,15 @@ function rcFamC(hex) {
 // in the app gets (js/core.js morphFrom + MORPH_TRIGGER already matches .kin). Delegated (not querySelectorAll
 // + forEach), because several of these sections (Painters, When and where, Often paired with) fill in async,
 // after this is wired.
-function rcWireOpen(host) {
-  if (!host || host._rcWired) return;
+function rcWireOpen(host, hex) {
+  if (!host) return;
+  host._rcHex = hex || host._rcHex;
+  if (host._rcWired) return;
   host._rcWired = true;
   host.addEventListener("click", e => {
+    const g = e.target.closest("[data-rc-gi]");
+    if (g) return galleryPage(+g.dataset.rcGi, true, host._rcHex || null);
+    const dl = e.target.closest("[data-rc-duel]"); if (dl && typeof lmDuel === "function") return lmDuel(dl.dataset.rcDuel);
     const b = e.target.closest("[data-rc-open]"); if (!b) return;
     morphFrom(b.querySelector("i") || b); openCoreName(b.dataset.h, b.dataset.n);
   });
@@ -39,6 +44,102 @@ const rcHasArticle = name => !!BYNAME.get(String(name).toLowerCase());
 // data/core-names.json's `src` codes (tools/build_core_names.py), in plain words, for the "Also called" block.
 const RC_SRC_LABEL = { app: "ColorHub", css: "a CSS color keyword", wiki: "Wikipedia", xkcd: "the xkcd color survey", "iscc-nbs": "ISCC-NBS, 1955", ridgway: "Ridgway, 1912" };
 const rcSrcLabels = list => (list || []).map(s => RC_SRC_LABEL[s] || s).filter((v, i, a) => a.indexOf(v) === i).join(", ");
+
+// The nearest core name (by CIEDE2000) that actually has data in `has` (a function of a name), within `cap`. Most
+// of the ~1,000 names are never any painter's signature, never top a decade, and never share a canvas often
+// enough to be paired; rather than a quiet page, those sections show the nearest name that does, and say so
+// plainly with how close it is. The whole core list is searched, never a special short list.
+function rcNearestWith(hex, name, has, cap = 20) {
+  const list = CORE_NAMES || coreFallback(), L = lab(hex);
+  let best = null;
+  for (const e of list) {
+    if (e.n === name || !has(e.n)) continue;
+    const d = de2000(L, e.lab || (e.lab = lab(e.h)));
+    if (!best || d < best.d) best = { n: e.n, h: e.h, d };
+  }
+  return best && best.d <= cap ? best : null;
+}
+const rcNearNote = (name, near) => `<p class="fine">Nothing of ${esc(name.toLowerCase())}'s own; here is its nearest color with data, <b>${esc(near.n)}</b> (${pctMatch(near.d)}).</p>`;
+
+// ======================================================================
+// "You and this color" -- one quiet line under the hero, only when there is something true to say.
+// Today that is when it became Yours (S.cards[..].ownAt, js/pickit.js). When the learner model lands
+// (js/learner.js: lmStatus / lmPairs / lmSeen -- all optional here) it also shows the mix-up note with a
+// duel button and any camera finds. Hidden entirely when there is nothing to show.
+// ======================================================================
+const RC_MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+function rcDayLabel(k) { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(k || ""); return m ? `${+m[3]} ${RC_MONTHS[+m[2] - 1]}` : ""; }
+function rcYouHTML(name, hex) {
+  const lines = [];
+  const taught = BYNAME.get(String(name).toLowerCase()), st = taught && taught.id && S.cards[taught.id];
+  if (st && isMine(st) && st.ownAt) lines.push(`Yours since ${esc(rcDayLabel(st.ownAt))}.`);
+  else if (st && S.cards[taught.id]) lines.push("You're learning this one.");
+  let duel = "";
+  if (typeof lmPairs === "function") {
+    try {
+      (lmPairs(routeSlug(name)) || []).slice(0, 1).forEach(p => {
+        lines.push(`You've mixed it up with ${esc(p.name || p.slug)} ${p.n} time${p.n === 1 ? "" : "s"}.`);
+        if (typeof lmDuel === "function") duel = `<button class="btn ghost rc-duel" data-rc-duel="${esc(p.slug || "")}">Duel it ${ICON.arrow}</button>`;
+      });
+    } catch (e) {}
+  }
+  if (typeof lmSeen === "function") {
+    try { const n = lmSeen(routeSlug(name)); if (n) lines.push(`Found ${n === 1 ? "once" : n + " times"} with the camera.`); } catch (e) {}
+  }
+  if (!lines.length) return "";
+  return `<p class="rc-you">${lines.join(" ")}${duel}</p>`;
+}
+
+// ======================================================================
+// "Its role in paintings" -- in the paintings that hold this color, is it the shadow, a mid-tone, the light,
+// or a small accent? Read from the gallery index (js/gallery.js, six measured colors a painting): the color's
+// lightness against the painting's own mean lightness, so it survives varnish and camera (it is relative).
+// Each segment opens the painting where that role is strongest, with the color highlighted on arrival.
+// As photographed; n is the number of paintings holding a close match (CIEDE2000 12, widened to 18 if few).
+// ======================================================================
+const RC_ROLES = [["shadow", "Shadow", "darker than the painting around it"], ["mid", "Mid-tone", "about as light as the painting around it"], ["light", "Light", "lighter than the painting around it"], ["accent", "Accent", "a small, strong touch"]];
+function rcRoleStats(hex) {
+  const G = GAL, N = G.n, [tL, ta, tb] = lab(hex);
+  for (const R of [12, 18]) {
+    const roles = { shadow: [], mid: [], light: [], accent: [] };
+    let n = 0;
+    for (let i = 0; i < N; i++) {
+      let best = -1, bd = R;
+      for (let j = 0; j < 6; j++) {
+        const k = i * 6 + j, o = k * 3, dL = G.lab[o] - tL;
+        if (dL > 30 || dL < -30) continue;
+        const d = glDE(tL, ta, tb, G.lab[o], G.lab[o + 1], G.lab[o + 2]);
+        if (d < bd) { bd = d; best = k; }
+      }
+      if (best < 0) continue;
+      const share = G.sh[best], o = best * 3, dm = G.lab[o] - G.mean[i * 3];
+      let role = dm < -8 ? "shadow" : dm > 8 ? "light" : "mid";
+      if (share < .1 && G.ch[best] > 18 && glDE(G.lab[o], G.lab[o + 1], G.lab[o + 2], G.mean[i * 3], G.mean[i * 3 + 1], G.mean[i * 3 + 2]) > 22) role = "accent";
+      roles[role].push([i, role === "accent" ? G.ch[best] * (1 - share) : share * (1 - bd / R)]);
+      n++;
+    }
+    if (n >= 5 || R === 18) return { roles, n, R };
+  }
+}
+function rcRoleSection(name, hex) {
+  const id = "rc-role-" + Math.random().toString(36).slice(2, 8);
+  const draw = () => {
+    const box = document.getElementById(id); if (!box) return;
+    const r = rcRoleStats(hex);
+    if (!r || r.n < 3) { box.innerHTML = ""; return; }
+    const tot = RC_ROLES.reduce((a, [k]) => a + r.roles[k].length, 0) || 1;
+    const segs = RC_ROLES.filter(([k]) => r.roles[k].length).map(([k, label, what]) => {
+      const list = r.roles[k], top = list.reduce((a, b) => b[1] > a[1] ? b : a);
+      return `<button class="rc-role" data-role="${k}" data-rc-gi="${top[0]}" style="flex:${Math.max(list.length, tot * .06)}"><b>${label}</b><span>${list.length} of ${r.n}</span><small>${esc(what)}</small></button>`;
+    }).join("");
+    box.innerHTML = `<section class="rc-sec rc-roles"><h3>Its role in paintings</h3>
+      <div class="rc-role-bar" style="--c:${hex}">${segs}</div>
+      <p class="fine">Across ${r.n.toLocaleString()} paintings with a close match, as photographed: its lightness against the painting's own average. Tap a role to see where it is strongest.</p></section>`;
+    glFill(box);
+  };
+  rcLazyGallery(id, draw);   // the gallery index is large: only loaded when this section nears the screen
+  return `<div id="${id}"></div>`;
+}
 
 // ======================================================================
 // 5. Harmonies -- pure color math, so every page gets this, even with zero written content.
@@ -206,9 +307,8 @@ function rcMixHTML(hex) {
 // 2. Painters who use it -- data/analysis/color-artists.json, built offline by tools/build_richdata.py from
 // each artist's own `signature` array (data/analysis/artists/*.json), inverted from "per artist" to "per
 // color." Only ~15% of names turn out to be any painter's real signature color (most named colors are too
-// rare to be anyone's "overused vs peers" color) -- that's the data being honest, not a bug, so this section
-// simply doesn't try a family fallback: a fallback here would misattribute a painter's real signature to a
-// color they never actually favored.
+// rare to be anyone's "overused vs peers" color). So a name with none of its own shows the nearest name that
+// does, labeled as such with its closeness (rcNearestWith), never presented as this color's own painters.
 // ======================================================================
 let RC_ARTISTS = null, RC_ARTISTS_LOADING = null;
 function rcLoadArtists() {
@@ -221,12 +321,17 @@ function rcPaintersHTML(name) {
   if (!rows || !rows.length) return "";
   return `<section class="rc-sec rc-painters"><h3>Painters who use it</h3>
     ${rows.slice(0, 5).map(r => `<div class="kin rc-plain"><i style="--c:#8a8a82"></i><b>${esc(r.a)}</b><span>${r.l.toFixed(1)}× more than his or her peers, from ${r.n} painting${r.n === 1 ? "" : "s"} here</span></div>`).join("")}
-    <p class="fine">Lift vs. the same decade and country (or country, or the whole archive, when that group is too small). From the gallery's 23,531 paintings; artist pages aren't built yet, so names aren't links yet.</p>
+    <p class="fine">Lift vs. the same decade and country (or country, or the whole archive, when that group is too small), as photographed, from the gallery's 23,531 paintings (n per painter above). Artist pages aren't built yet, so names aren't links yet.</p>
   </section>`;
 }
-function rcPaintersSection(name) {
+function rcPaintersSection(name, hex) {
   const id = "rc-painters-" + Math.random().toString(36).slice(2, 8);
-  rcLoadArtists().then(() => { const box = document.getElementById(id); if (box) box.innerHTML = rcPaintersHTML(name); });
+  rcLoadArtists().then(() => {
+    const box = document.getElementById(id); if (!box) return;
+    let html = rcPaintersHTML(name);
+    if (!html) { const near = rcNearestWith(hex, name, n => (RC_ARTISTS[n] || []).length); if (near) html = rcPaintersHTML(near.n).replace("<h3>Painters who use it</h3>", "<h3>Painters who use it</h3>" + rcNearNote(name, near)); }
+    box.innerHTML = html;
+  });
   return `<div id="${id}"></div>`;
 }
 
@@ -273,14 +378,14 @@ function rcWhenWhereHTML(name) {
     <p class="fine">From the gallery's 23,531 paintings, as photographed; country is often the painter's nationality, and movement data covers only part of the corpus.</p>
   </section>`;
 }
-function rcWhenWhereSection(name, famC) {
+function rcWhenWhereSection(name, hex) {
   const id = "rc-ww-" + Math.random().toString(36).slice(2, 8);
   rcLoadGroups().then(() => {
     const box = document.getElementById(id); if (!box) return;
     let html = rcWhenWhereHTML(name);
-    if (!html && famC && famC.n !== name) {
-      const h2 = rcWhenWhereHTML(famC.n);
-      if (h2) html = h2.replace("<h3>When and where</h3>", `<h3>When and where</h3><p class="fine">Nothing of ${esc(name.toLowerCase())}'s own; its nearest well-covered match, ${esc(famC.n)}:</p>`);
+    if (!html && RC_GROUPS) {
+      const near = rcNearestWith(hex, name, n => !!rcWhenWhereHTML(n));
+      if (near) html = rcWhenWhereHTML(near.n).replace("<h3>When and where</h3>", "<h3>When and where</h3>" + rcNearNote(name, near));
     }
     box.innerHTML = html;
   });
@@ -307,17 +412,14 @@ function rcPairedHTML(name) {
     return `<button class="kin rc-harm" data-rc-open data-h="${e.h}" data-n="${esc(e.n)}"><i style="--c:${e.h}"></i><b>${esc(e.n)}</b><span>${r.l.toFixed(1)}× more than chance, ${r.n} paintings</span></button>`;
   }).filter(Boolean).join("");
   if (!chips) return "";
-  return `<section class="rc-sec rc-paired"><h3>Often paired with</h3>${chips}<p class="fine">How much more often two colors share a painting's palette than chance would predict, from the gallery's 23,531 paintings.</p></section>`;
+  return `<section class="rc-sec rc-paired"><h3>Often paired with</h3>${chips}<p class="fine">How much more often two colors share a painting's palette than chance would predict, as photographed, from the gallery's 23,531 paintings (n per pair above).</p></section>`;
 }
-function rcPairedSection(name, famC) {
+function rcPairedSection(name, hex) {
   const id = "rc-pair-" + Math.random().toString(36).slice(2, 8);
   rcLoadPairs().then(() => {
     const box = document.getElementById(id); if (!box) return;
     let html = rcPairedHTML(name);
-    if (!html && famC && famC.n !== name) {
-      const h2 = rcPairedHTML(famC.n);
-      if (h2) html = h2.replace("<h3>Often paired with</h3>", `<h3>Often paired with</h3><p class="fine">Nothing of ${esc(name.toLowerCase())}'s own; its nearest well-covered match, ${esc(famC.n)}:</p>`);
-    }
+    if (!html) { const near = rcNearestWith(hex, name, n => (RC_PAIRS[n] || []).length); if (near) html = rcPairedHTML(near.n).replace("<h3>Often paired with</h3>", "<h3>Often paired with</h3>" + rcNearNote(name, near)); }
     box.innerHTML = html;
   });
   return `<div id="${id}"></div>`;
@@ -329,9 +431,144 @@ function rcPairedSection(name, famC) {
 // measured, Mix it) go after. 1 (In paintings, js/gallery.js), 6/7 (js/botany.js/js/gems.js/js/world.js/
 // js/films.js/js/poems.js/js/passages.js) and 10-11 (Nearest names/Codes) stay exactly where they already are.
 // ======================================================================
+// ======================================================================
+// The history band -- the closest color any painting in the archive actually reaches (data/analysis/reach.json,
+// tools/archive_reach.py, from all 564,744 pool colors of the 23,531 paintings; a name outside the ~1,000
+// core names is measured live against each painting's six main colors instead). When nothing comes close the
+// headline says so: that is the honest fix for an empty page, and the caveat is built in (aged, varnished
+// paintings, photographed, 24 colors each).
+// ======================================================================
+let RC_REACH = null, RC_REACH_LOADING = null;
+function rcLoadReach() {
+  if (RC_REACH) return Promise.resolve(RC_REACH);
+  return RC_REACH_LOADING || (RC_REACH_LOADING = fetch("data/analysis/reach.json" + (typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : ""))
+    .then(r => r.ok ? r.json() : {}).catch(() => ({})).then(d => (RC_REACH = d)));
+}
+// live fallback for a name not in reach.json: closest of each painting's six main colors, and how many are within ΔE 6
+function rcReachLive(hex) {
+  const G = GAL, [tL, ta, tb] = lab(hex); let bd = 1e9, bi = -1, bk = -1, n = 0, y = null;
+  for (let i = 0; i < G.n; i++) {
+    let hit = false;
+    for (let j = 0; j < 6; j++) {
+      const k = i * 6 + j, o = k * 3, dL = G.lab[o] - tL;
+      if (dL > 25 || dL < -25) continue;
+      const d = glDE(tL, ta, tb, G.lab[o], G.lab[o + 1], G.lab[o + 2]);
+      if (d < bd) { bd = d; bi = i; bk = k; }
+      if (d <= 6) hit = true;
+    }
+    if (hit) { n++; if (G.year[i] !== GL_UNDATED) { const yy = G.year[i]; y = y == null || yy < y ? yy : y; } }
+  }
+  return bi < 0 ? null : [Math.round(bd * 10) / 10, bi, glHex(bi, bk % 6), n, y];
+}
+// run draw() once the gallery index is in (loaded only when the section nears the screen)
+function rcLazyGallery(id, draw) {
+  const go = () => { if (typeof GAL !== "undefined" && GAL) draw(); else loadGallery().then(draw).catch(() => {}); };
+  setTimeout(() => {
+    const box = document.getElementById(id); if (!box) return;
+    if ((typeof GAL !== "undefined" && GAL) || !("IntersectionObserver" in window)) return go();
+    const io = new IntersectionObserver(es => { if (es[0].isIntersecting) { io.disconnect(); go(); } }, { rootMargin: "600px 0px" });
+    io.observe(box); cleanup.push(() => io.disconnect());
+  }, 0);
+}
+const rcYearLabel = y => y == null ? "" : y < 0 ? `${-y} BCE` : String(y);
+function rcReachSection(name, hex) {
+  const id = "rc-reach-" + Math.random().toString(36).slice(2, 8);
+  const paint = (r, box) => {
+    const [d, pi, ph, n, y] = r;
+    const none = d > 8 && n === 0;
+    const pin = () => (typeof GAL !== "undefined" && GAL) ? glPinHTML(pi, { badge: pctMatch(d) }) : "";
+    const caveat = `<p class="fine">As photographed: aged, varnished paintings, each cut to a few dozen colors, so a very small vivid touch can be lost. This says what our archive shows, not what paint can do.</p>`;
+    if (none) {
+      box.innerHTML = `<section class="rc-sec rc-reach rc-reach-none"><p class="rc-reach-head">No painting in our 23,531 reaches this color. It's a modern color.</p>
+        <div class="rc-reach-pair"><div style="--c:${hex}" data-ink="${ink(hex)}"><b>This color</b></div><div style="--c:${ph}" data-ink="${ink(ph)}"><b>The closest any painting gets</b><small>${pctDiff(d)}</small></div></div>${caveat}</section>`;
+    } else {
+      const few = n <= 3;
+      box.innerHTML = `<section class="rc-sec rc-reach"><h3>In the archive</h3>
+        <div class="rc-reach-blocks"><div class="rc-reach-pin">${pin()}</div>
+          <div class="rc-reach-stat"><b>${few ? (n ? `Only ${n} painting${n === 1 ? "" : "s"}` : "Barely any") : n.toLocaleString() + " paintings"}</b><span>${few ? "come close" : "come close to it"} (within ${pctFmt(6)}).</span>${y != null ? `<span>Earliest in our archive: <b>${esc(rcYearLabel(y))}</b>.</span>` : ""}<span>The closest, ${pctDiff(d)}, is the one at left.</span></div></div>${caveat}</section>`;
+    }
+    glFill(box);
+  };
+  Promise.all([rcLoadReach()]).then(() => {
+    let r = RC_REACH && RC_REACH[name];
+    if (r) {
+      // the none-headline needs no gallery; the pin does
+      const box = document.getElementById(id); if (!box) return;
+      if (r[0] > 8 && r[3] === 0) return paint(r, box);
+      box.innerHTML = "";
+      return rcLazyGallery(id, () => { const b = document.getElementById(id); if (b) paint(r, b); });
+    }
+    rcLazyGallery(id, () => { const b = document.getElementById(id); r = b && rcReachLive(hex); if (b && r) paint(r, b); });
+  });
+  return `<div id="${id}"></div>`;
+}
+
+// ======================================================================
+// The Compass -- nearest named color in six directions (js/naming.js compassOf), with how crowded this corner
+// of color is. One tap on a cell walks there.
+// ======================================================================
+function rcCompassSection(name, hex) {
+  const id = "rc-compass-" + Math.random().toString(36).slice(2, 8);
+  const draw = () => {
+    const box = document.getElementById(id); if (!box) return;
+    const { cells, crowd } = compassOf(hex, name);
+    const cell = c => c.hit
+      ? `<button class="kin rc-cell" data-rc-open data-h="${c.hit.h}" data-n="${esc(c.hit.n)}"><i style="--c:${c.hit.h}"></i><small>${esc(c.label)}</small><b>${esc(c.hit.n)}</b><span>${pctDiff(c.hit.de)}</span></button>`
+      : `<div class="rc-cell rc-cell-empty"><small>${esc(c.label)}</small><span>No named color this way within ${pctFmt(25)}.</span></div>`;
+    const near = crowd.near, nm = crowd.nearest;
+    const line = near >= 8 ? `Crowded corner: ${near} named colors within ${pctFmt(5)} of it.`
+      : near >= 3 ? `A well-named corner: ${near} named colors within ${pctFmt(5)} of it.`
+      : near >= 1 ? `A sparse corner: ${near === 1 ? "one other name" : near + " other names"} within ${pctFmt(5)}.`
+      : `A lonely color: the nearest name${nm ? ` (${esc(nm.n)})` : ""} is ${nm ? pctDiff(nm.de) : "far"}.`;
+    box.innerHTML = `<section class="rc-sec rc-compass"><h3>The Compass</h3><div class="rc-compass-grid">${cells.map(cell).join("")}</div>
+      <p class="rc-crowd">${line}</p><p class="fine">Directions are lightness, chroma and hue in CIELAB, searched among about ${crowd.total.toLocaleString()} names in our archive of names.</p></section>`;
+  };
+  setTimeout(() => { draw(); if (!compassHasLibrary()) loadLongNames().then(draw).catch(() => {}); }, 0);
+  return `<div id="${id}"></div>`;
+}
+
+// ======================================================================
+// Passport stamps and the tier line -- each naming system that lists the color, dated by the system (never a
+// first-use claim; X11 is "1980s"), and one honest line on where the name comes from, from `src` alone.
+// ======================================================================
+const RC_STAMPS = [["werner", "Werner", "1821"], ["ridgway", "Ridgway", "1912"], ["ral", "RAL", "1927 on"], ["iscc-nbs", "ISCC-NBS", "1955"], ["css", "X11 / CSS", "1980s"], ["xkcd", "xkcd survey", "2010"], ["jp", "Japanese traditional", ""], ["pigment", "Pigment lists", ""], ["wiki", "Wikipedia lists", ""]];
+function rcTierLine(src) {
+  const has = k => (src || []).includes(k);
+  if (has("pigment")) return "A pigment name";
+  if (has("werner") || has("ridgway")) return "A naturalist's name";
+  if (has("css")) return "A web color name";
+  if (has("ral")) return "An industrial color name";
+  if (has("iscc-nbs")) return "A name from a descriptive color system";
+  if (has("xkcd")) return "A crowd word";
+  if (has("jp")) return "A traditional Japanese color name";
+  return "Origin undocumented";
+}
+function rcPassportHTML(src) {
+  const stamps = RC_STAMPS.filter(([k]) => (src || []).includes(k));
+  if (!stamps.length) return "";
+  return `<div class="rc-passport">${stamps.map(([, label, date]) => `<span class="rc-stamp"><b>${esc(label)}</b>${date ? `<em>${esc(date)}</em>` : ""}</span>`).join("")}</div><p class="fine rc-tier">${esc(rcTierLine(src))}.</p>`;
+}
+
 function rcSectionsBeforeWorld(name, hex, famC) {
-  return `${rcPaintersSection(name)}${rcWhenWhereSection(name, famC)}${rcPairedSection(name, famC)}${rcHarmonyHTML(hex)}`;
+  return `${rcRoleSection(name, hex)}${rcPaintersSection(name, hex)}${rcWhenWhereSection(name, hex)}${rcPairedSection(name, hex)}${rcHarmonyHTML(hex)}`;
 }
 function rcSectionsAfterWords(hex) {
   return `${rcMeasuredHTML(hex)}${rcMixHTML(hex)}`;
+}
+
+// ======================================================================
+// The article slot. A separate article system is coming (written prose stored as data/articles/<slug>.json,
+// slug = routeSlug(color name)). Both page types call articleSlot(slug) near the top, right under the hero;
+// it renders nothing when no article file exists (a 404 is the normal case today), so pages stay clean.
+// Expected shape (provisional, the article system may replace this renderer): { lead?: string, sections?: [{ title?, text }] }.
+// ======================================================================
+function articleSlot(slug) {
+  const id = "rc-article-" + Math.random().toString(36).slice(2, 8);
+  fetch("data/articles/" + encodeURIComponent(slug) + ".json" + (typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : ""))
+    .then(r => r.ok ? r.json() : null).catch(() => null).then(a => {
+      const box = document.getElementById(id); if (!box || !a) return;
+      const secs = (a.sections || []).map(x => `<section class="rc-article-sec">${x.title ? `<h3>${esc(x.title)}</h3>` : ""}<p>${esc(x.text || "")}</p></section>`).join("");
+      box.innerHTML = `${a.lead ? `<p class="lead">${esc(a.lead)}</p>` : ""}${secs}`;
+    });
+  return `<div class="rc-article" id="${id}"></div>`;
 }

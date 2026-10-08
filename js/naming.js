@@ -137,3 +137,47 @@ function jpNoteLine(notes) {
   const one = j => `${esc(j.kanji || "")}${j.kanji && j.jp ? " · " : ""}${esc(j.jp || "")}${j.meaning ? `, '${esc(j.meaning.toLowerCase())}'` : ""}`;
   return `In Japanese: ${notes.map(one).join("; ")}`;
 }
+
+// ---------- The Compass (color-archive panel, 2026-10-08): walk color space by name ----------
+// For one color: the nearest *named* color in each of six directions -- lighter, darker, more vivid, greyer,
+// and one step each way along the hue -- searched in all ~2,700 names once the big name library has loaded
+// (the ~1,000 core names until then). Directions are CIELAB axes (lightness, chroma, hue), never "brighter".
+// Also how crowded this corner of color is: the names within a small ΔE. A direction with nothing in reach
+// (cap 25 ΔE) comes back null: a gap in our names, not in English.
+const COMPASS_CAP = 25, COMPASS_CROWD_DE = 5;
+const compassHueWord = h => { h = (h + 360) % 360; return h < 55 || h >= 345 ? "redder" : h < 130 ? "yellower" : h < 190 ? "greener" : h < 280 ? "bluer" : "purpler"; };
+const compassHasLibrary = () => typeof LONG_NAMES !== "undefined" && !!LONG_NAMES;
+function compassOf(hex, selfName) {
+  hex = String(hex).toUpperCase();
+  const list = (typeof LONG_NAMES !== "undefined" && LONG_NAMES) || CORE_NAMES || coreFallback();
+  const L0 = lab(hex), [l0, c0, h0] = lch(hex), self = String(selfName || "").toLowerCase();
+  const cands = [];
+  for (const e of list) {
+    if (e.n.toLowerCase() === self) continue;
+    const el = e.lab || (e.lab = lab(e.h)), de = de2000(L0, el);
+    if (de < 2.5) continue;
+    const c = Math.hypot(el[1], el[2]); let h = Math.atan2(el[2], el[1]) * 180 / Math.PI; if (h < 0) h += 360;
+    let dh = h - h0; if (dh > 180) dh -= 360; if (dh < -180) dh += 360;
+    cands.push({ n: e.n, h: e.h, de, dL: el[0] - l0, dC: c - c0, arc: 2 * Math.sqrt(Math.max(c * c0, 0)) * Math.sin(dh * Math.PI / 360) });
+  }
+  const pick = (primary, off, min) => {
+    let best = null;
+    for (const x of cands) {
+      const p = primary(x); if (p < min || off(x) > p * .7) continue;
+      if (!best || x.de < best.de) best = x;
+    }
+    return best && best.de <= COMPASS_CAP ? best : null;
+  };
+  const offLC = x => Math.max(Math.abs(x.dC), Math.abs(x.arc)), offCL = x => Math.max(Math.abs(x.dL), Math.abs(x.arc)), offH = x => Math.max(Math.abs(x.dL), Math.abs(x.dC));
+  const hasHue = c0 > 8;
+  const cells = [
+    { key: "lighter", label: "Lighter", hit: pick(x => x.dL, offLC, 3) },
+    { key: "darker", label: "Darker", hit: pick(x => -x.dL, offLC, 3) },
+    { key: "vivid", label: "More vivid", hit: pick(x => x.dC, offCL, 3) },
+    { key: "greyer", label: "Greyer", hit: pick(x => -x.dC, offCL, 3) },
+    { key: "huep", label: hasHue ? compassHueWord(h0 + 25) : "Hue", hit: hasHue ? pick(x => x.arc, offH, 3) : null },
+    { key: "huem", label: hasHue ? compassHueWord(h0 - 25) : "Hue", hit: hasHue ? pick(x => -x.arc, offH, 3) : null },
+  ];
+  const nearest = cands.reduce((a, b) => !a || b.de < a.de ? b : a, null);
+  return { cells, crowd: { near: cands.filter(x => x.de <= COMPASS_CROWD_DE).length, nearest, total: list.length } };
+}

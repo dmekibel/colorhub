@@ -253,18 +253,21 @@ function poemGlossSheet(key, text) {
 // ======================================================================
 // "In poems" on a color page
 // ======================================================================
-// famC: the color's family head ({n, h}) -- if this exact word names no poem lines, fall back to the family's
-// own word and say so (David, 2026-10-08: no almost-empty pages; most of the library's ~2,700/~1,000 names
-// are never the exact word a poem uses, but their family word usually is).
-async function colorPoems(el, c, famC) {
+// If this exact word names no poem lines, fall back to the nearest color word the poem index knows and say so
+// (David, 2026-10-08: no almost-empty pages; most of the library's ~2,700/~1,000 names
+// are never the exact word a poem uses, but a nearby word usually is).
+async function colorPoems(el, c) {
   if (!el) return;
   const ix = await loadPoemIndex(); if (!ix || !el.isConnected) return;
   let name = c.n, h = c.h, note = "";
   let ci = ix.colorByName.get(name.toLowerCase());
   let best = ci != null && ix.best[ci];
-  if ((!best || !best.length) && famC && famC.n.toLowerCase() !== c.n.toLowerCase()) {
-    const ci2 = ix.colorByName.get(famC.n.toLowerCase()), best2 = ci2 != null && ix.best[ci2];
-    if (best2 && best2.length) { ci = ci2; best = best2; name = famC.n; h = famC.h; note = `<p class="fine">No poems name ${esc(c.n.toLowerCase())} itself; here are its family's, ${esc(famC.n.toLowerCase())}.</p>`; }
+  if (!best || !best.length) {
+    // no poem line names this word: fall back to the nearest color word the poem index does know (it has ~60,
+    // "green", "rose", "gold"...) and say so plainly, with how close it is
+    const L0 = lab(c.h); let near = null;
+    ix.colors.forEach((x, i) => { if (!(ix.best[i] && ix.best[i].length)) return; const d = de2000(L0, x[1]); if (!near || d < near.d) near = { i, n: x[0], h: x[1], d }; });
+    if (near && near.d <= 32) { ci = near.i; best = ix.best[ci]; name = near.n; h = near.h; note = `<p class="fine">No poem line names ${esc(c.n.toLowerCase())} itself; here are poems with <b>${esc(near.n.toLowerCase())}</b>, the nearest color word poets use (${pctMatch(near.d)}).</p>`; }
   }
   if (!best || !best.length) { el.remove(); return; }
   // lines that carry their text in the index come first; fetch the rest only if there are too few

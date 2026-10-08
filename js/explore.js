@@ -603,6 +603,9 @@ function colorPage(n, tapped) {
       </div>
       <p class="cp-diff">${esc(stripDiff)}</p>
     </section>` : ""}
+    ${typeof rcYouHTML === "function" ? rcYouHTML(c.n, c.h) : ""}
+    ${typeof articleSlot === "function" ? articleSlot(routeSlug(c.n)) : ""}
+    ${typeof rcReachSection === "function" ? rcReachSection(c.n, heroHex) : ""}
     ${c.o && !(w && w.facets.some(f => f.k === "language")) ? `<p class="lead">${esc(c.o)}</p>` : ""}
     ${figHTML(c.n)}
     <section class="gl-in" data-glin></section>
@@ -614,6 +617,7 @@ function colorPage(n, tapped) {
     <div class="c-poems"></div>
     ${typeof archiveRows === "function" ? archiveRows(c, "books", famC) : ""}
     ${typeof rcSectionsAfterWords === "function" ? rcSectionsAfterWords(c.h) : ""}
+    ${typeof rcCompassSection === "function" ? rcCompassSection(c.n, heroHex) : ""}
     ${(() => {
       const secs = (w ? w.facets : []).map((f, i) => [f.k + i, FACET_LABEL[f.k] || f.k, `<p>${linkText(f.text)}</p>` + (i === 0 ? figHTML(c.n, 1) : "")]);
       if (w && w.related && w.related.length) secs.push(["kin", "Kin", w.related.map(r => { const x = graph().resolve(r.to); return x ? `<button class="kin" data-node="${esc(x.id)}"><i style="--c:${x.h}"></i><b>${esc(x.title)}</b><span>${esc(r.why)}</span></button>` : ""; }).join("")]);
@@ -628,7 +632,7 @@ function colorPage(n, tapped) {
       }
       const coreSelf = (CORE_NAMES || (typeof coreFallback === "function" ? coreFallback() : [])).find(e => e.n.toLowerCase() === c.n.toLowerCase());
       if (coreSelf && ((coreSelf.also || []).length || (coreSelf.src || []).length)) {
-        secs.push(["names", "Also called", `${(coreSelf.also || []).length ? `<p>${(coreSelf.also || []).map(esc).join(", ")}.</p>` : ""}${(coreSelf.src || []).length ? `<p class="fine">Listed by: ${esc(rcSrcLabels(coreSelf.src))}.</p>` : ""}`]);
+        secs.push(["names", "Also called", `${(coreSelf.also || []).length ? `<p>${(coreSelf.also || []).map(esc).join(", ")}.</p>` : ""}${rcPassportHTML(coreSelf.src || [])}`]);
       }
       secs.push(["codes", "Codes", `<div class="cp-codes">${codeRows(c.h).map(([k, v]) => `<button class="cp-code-row" data-copy="${esc(v)}"><span>${esc(k)}</span><b class="mono">${esc(v)}</b></button>`).join("")}</div>${codeRows(c.h).some(r => r[0].startsWith("CMYK")) ? `<p class="fine cp-codes-fine">CMYK here is a rough formula, not a print profile: real values depend on the paper and press, so check them in a print workflow with a proof.</p>` : ""}`]);
       return (w ? "" : `<p class="fine">The full page for ${esc(c.n)} is being written. Its connections below are already live.</p>`) + tocHTML(secs.map(x => [x[0], x[1]])) + secs.map(x => secHTML(x[0], x[1], x[2], false)).join("");
@@ -651,7 +655,7 @@ function colorPage(n, tapped) {
   const gi = el.querySelector("[data-glin]"); if (gi) galleryColorRow(gi, c);
   colorPoems(el.querySelector(".c-poems"), c, famC);
   if (typeof worldColorRow === "function") worldColorRow(el, n, famC);
-  if (typeof rcWireOpen === "function") rcWireOpen(el);
+  if (typeof rcWireOpen === "function") rcWireOpen(el, tapped || c.h);
   el.querySelectorAll("[data-copy]").forEach(b => b.onclick = () => { try { navigator.clipboard.writeText(b.dataset.copy); toast("Copied " + b.dataset.copy); } catch (e) {} });
   return el;   // so growFrom (js/core.js, js/home.js hmOpenColor) can grow this page from the tapped honeycomb bubble
 }

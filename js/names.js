@@ -135,6 +135,9 @@ function namePage(entry, push = true, tapped) {
       <div class="cp-strip"><div style="--c:${tapped}" data-ink="${ink(tapped)}"><b>Your color</b></div><div style="--c:${hex}" data-ink="${ink(hex)}"><b>${esc(name)}</b></div></div>
       <p class="cp-diff">${esc(lookDiff({ h: tapped, n: "Your color" }, { h: hex, n: name }))}</p>
     </section>` : ""}
+    ${typeof rcYouHTML === "function" ? rcYouHTML(name, hex) : ""}
+    ${typeof articleSlot === "function" ? articleSlot(routeSlug(name)) : ""}
+    ${typeof rcReachSection === "function" ? rcReachSection(name, heroHex) : ""}
     ${shade ? `<p class="fine np-shade">A described shade: ${esc(shade.base)} made ${esc(shade.mod)}${shadeBase ? `. <button class="link" data-shade-base>See ${esc(shade.base)}</button>` : "."}</p>` : ""}
     ${also.length ? `<p class="fine np-also">Also called ${also.map(esc).join(", ")}.</p>` : ""}
     ${notes.length ? `<p class="fine np-jp">${jpNoteLine(notes)}</p>` : ""}
@@ -147,9 +150,10 @@ function namePage(entry, push = true, tapped) {
     <div class="c-poems"></div>
     ${typeof archiveRows === "function" ? archiveRows(entry, "books", famC) : ""}
     ${typeof rcSectionsAfterWords === "function" ? rcSectionsAfterWords(heroHex) : ""}
+    ${typeof rcCompassSection === "function" ? rcCompassSection(name, heroHex) : ""}
     ${nearCore.length ? `<div class="sec-head"><b>Nearest names</b><span>of about 1,000</span></div>
       <div class="lk-list">${nearCore.map(x => `<button class="lk-row" data-np-near="${esc(x.n)}" data-h="${x.h}"><i style="--c:${x.h}" data-morph-src></i><b>${esc(x.n)}</b><span>${pctMatch(x.de)} · ${esc(lookDiff({ n: name, h: hex }, x))}${typeof rcHasArticle === "function" && rcHasArticle(x.n) ? " · has its own story" : ""}</span></button>`).join("")}</div>` : ""}
-    ${entry.src && entry.src.length ? `<div class="sec-head"><b>Also called</b></div><p class="fine">Listed by: ${esc(typeof rcSrcLabels === "function" ? rcSrcLabels(entry.src) : entry.src.join(", "))}.</p>` : ""}
+    ${entry.src && entry.src.length && typeof rcPassportHTML === "function" && rcPassportHTML(entry.src) ? `<div class="sec-head"><b>Passport</b><span>naming systems that list it</span></div>${rcPassportHTML(entry.src)}` : ""}
     <div class="sec-head"><b>Codes</b></div>
     <div class="cp-codes">${codeRows.map(([k, v]) => `<button class="cp-code-row" data-copy="${esc(v)}"><span>${esc(k)}</span><b class="mono">${esc(v)}</b></button>`).join("")}</div>
     <p class="fine">Nearest of about 1,000 primary names (CIEDE2000). Hex values are screen approximations.</p>
@@ -167,7 +171,7 @@ function namePage(entry, push = true, tapped) {
   npPaintingsSection(el.querySelector("[data-npgal]"), hex);
   colorPoems(el.querySelector(".c-poems"), entry, famC);
   if (typeof worldColorRow === "function") worldColorRow(el, { kind: "color", h: hex, title: name }, famC);
-  if (typeof rcWireOpen === "function") rcWireOpen(el);
+  if (typeof rcWireOpen === "function") rcWireOpen(el, heroHex);
   el.querySelectorAll("[data-copy]").forEach(b => b.onclick = () => { try { navigator.clipboard.writeText(b.dataset.copy); toast("Copied " + b.dataset.copy); } catch (e) {} });
   return el;   // so growFrom (js/core.js, js/home.js hmOpenName) can grow this page from the tapped honeycomb bubble
 }
