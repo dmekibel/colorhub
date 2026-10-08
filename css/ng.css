@@ -186,3 +186,6 @@ input[type=range]:not(.mt-sl *):not(.mt-wh *):not(.pt-range)::-moz-range-thumb{w
 /* the bet on a booth-grey results screen: the pills sit in the booth, not as black holes */
 .ls-res .lx-bet-b,.pr-res .lx-bet-b{background:rgba(14,13,11,.22);color:#fff}
 .ms-fog input:checked::after{background:var(--ground)}
+/* (Study, Practice) once an answer is checked, the verdict ring wins over the pick's raised state */
+.pr-opt.chosen.ok,.pr-opt.ok{outline-color:var(--good);background:var(--booth-2,#555555);box-shadow:none}
+.pr-opt.chosen.bad,.pr-opt.bad{outline-color:var(--bad);background:var(--booth-2,#555555);box-shadow:none}
