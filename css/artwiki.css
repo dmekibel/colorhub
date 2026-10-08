@@ -127,23 +127,6 @@
 .aw-tiles span{font:500 10px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
 .aw-tiles b{font:400 21px/1.1 var(--serif);text-wrap:balance}
 .aw-tiles em{font:400 12px/1.35 var(--sans);color:var(--soft);font-style:normal}
-.aw-look{margin-top:26px;padding:20px 18px 18px;background:var(--surface-1);border-radius:var(--r-2)}
-.aw-look-h span{font:500 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
-.aw-look-q{font:400 26px/1.1 var(--serif);letter-spacing:-.01em;margin:12px 0 4px;text-wrap:balance}
-.aw-look-s{color:var(--soft);font-size:13.5px;margin:0 0 16px}
-.aw-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.aw-opt{height:84px;background:var(--c);border-radius:var(--r-1);position:relative;display:flex;align-items:flex-end;padding:8px;text-align:left;box-shadow:inset 0 0 0 1px rgba(236,232,223,.14)}
-.aw-opt:active{transform:scale(.98)}
-.aw-opt span{font:500 11px/1.2 var(--mono);letter-spacing:.04em}
-.aw-opt[data-ink="dark"]{color:rgba(20,19,17,.85)}.aw-opt[data-ink="light"]{color:rgba(255,255,255,.92)}
-.aw-opt.right{outline:2px solid var(--ink);outline-offset:3px}
-.aw-opt.miss{opacity:.55}
-.aw-reveal:empty{display:none}
-.aw-reveal{margin-top:16px}
-.aw-reveal p{margin:0 0 6px;font-size:15px;line-height:1.45}
-.aw-reveal b{font:400 22px/1.1 var(--serif)}
-.aw-lookdone{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
-.aw-lookdone b{font:400 24px/1.1 var(--serif)}.aw-lookdone span{color:var(--soft);font-size:14px}
 .aw-vrow{display:grid;grid-template-columns:92px minmax(0,1fr);gap:14px;align-items:center;padding:8px 0}
 .aw-vrow>span:first-child{font:400 17px/1.1 var(--serif)}
 .aw-vrow em{display:block;font:500 11px/1 var(--mono);color:var(--soft);font-style:normal;margin-top:4px;letter-spacing:.06em}
@@ -208,7 +191,7 @@
 .aw-legend i{width:10px;height:10px;border-radius:50%;display:inline-block;margin-left:8px}
 .aw-legend i.a{background:var(--ink)}.aw-legend i.b{background:#e0a13a}
 @media (max-width:374px){.aw-meas{grid-template-columns:1fr}.aw-kv{grid-template-columns:1fr}}
-@media (prefers-reduced-motion:reduce){.aw-opt:active,.aw-bub:active{transform:none}}
+@media (prefers-reduced-motion:reduce){.aw-bub:active{transform:none}}
 
 /* the life strip's rooms: palette families, named after their typical painting */
 .aw-rooms{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding:12px var(--g) 0}
@@ -221,9 +204,9 @@
 /* Craft pass (2026-10-08 critique): word labels speak in the serif note voice, never uppercase mono
    (DESIGN-SYSTEM §4: "mono only counts"). Pure numbers keep the mono. */
 .aw-page .aw-lbl,.aw-spark-w span,.aw-meas-t p{font:italic 400 16px/1.3 var(--serif);letter-spacing:0;text-transform:none;color:var(--soft)}
-.aw-cl-s,.aw-chord em,.aw-tie span,.aw-tile em,.aw-room em,.aw-typ em,.aw-tiles span,.aw-look-h span,.aw-one b,.aw-kv span,.aw-hueleg span,.aw-more>summary small{font:italic 400 14px/1.3 var(--serif);letter-spacing:0;text-transform:none}
+.aw-cl-s,.aw-chord em,.aw-tie span,.aw-tile em,.aw-room em,.aw-typ em,.aw-tiles span,.aw-one b,.aw-kv span,.aw-hueleg span,.aw-more>summary small{font:italic 400 14px/1.3 var(--serif);letter-spacing:0;text-transform:none}
 .aw-cl-s,.aw-chord em,.aw-tie span,.aw-tile em,.aw-room em,.aw-hueleg span,.aw-more>summary small{color:var(--soft)}
-.aw-typ em,.aw-tiles span,.aw-look-h span,.aw-one b,.aw-kv span{color:var(--faint)}
+.aw-typ em,.aw-tiles span,.aw-one b,.aw-kv span{color:var(--faint)}
 .aw-tiles span,.aw-one b{font-size:15px}
 /* decades are written in full ("1870s", not "70s"): a country's columns span centuries, so "70s" was ambiguous */
 .aw-dcol{flex-basis:42px}
