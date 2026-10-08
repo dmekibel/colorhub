@@ -124,7 +124,8 @@ function arfPainting(id) {
     return find.then(i => {
       if (!(i >= 0 && i < G.n)) return null;
       const pal = glPal(i), src = G.src[G.mus[i]] || { name: "Museum" };
-      const base = { kind: "painting", id, i, name: "A painting", sub: "", pal: pal.map(p => p.h), shares: pal.map(p => p.share), img: null, credit: null,
+      const yr = typeof glYear === "function" ? String(glYear(i) || "") : "", year = yr ? (/BCE/.test(yr) ? -parseInt(yr, 10) : parseInt(yr, 10)) : null;
+      const base = { kind: "painting", id, i, year, name: "A painting", sub: "", pal: pal.map(p => p.h), shares: pal.map(p => p.share), img: null, credit: null,
         // the same weighting as the gallery's own badges: each palette color within 12 counts, fading to nothing at 12
         cover: hex => pal.reduce((t, p) => { const d = arfDE(hex, p.h); return d < 12 ? t + p.share * (1 - (d / 12) ** 2) : t; }, 0),
         open: self => galleryPage(i, true, self.h),
@@ -236,13 +237,15 @@ function arfPicHTML(t) {
   const order = t.pal.map((h, i) => i).sort((a, b) => (sh[b] || 1) - (sh[a] || 1)).slice(0, 8).sort((a, b) => a - b);
   return `<span class="ar-fig-im ar-fig-strip" aria-hidden="true">${order.map(i => `<i style="--c:${t.pal[i]};flex:${Math.max(.06, (sh[i] || 1) / tot).toFixed(3)}"${i === t.best.i ? ` class="on"` : ""}></i>`).join("")}</span>`;
 }
-function arfFigHTML(t, self) {
+// o.wide: a picture that breaks up the text: the full measure, a fixed 4:3 box cropped to where the color sits, the words under it
+function arfFigHTML(t, self, o) {
+  const wide = !!(o && o.wide && t.img && t.img.src);
   const word = ARF_WORD[t.kind] || "", nm = t.best && t.palNames && t.palNames[t.best.i];
   const sub = [word, t.sub].filter(Boolean).join(" · ");
   const near = t.kind === "painting" || !nm || String(nm).toLowerCase() === String(self.n).toLowerCase() ? "" : ` · ${esc(nm)}`;
   const cov = t.kind === "painting" && t.cover != null ? `<span class="ar-fig-c">${Math.max(1, Math.round(t.cover * 100))}% of the canvas</span>` : "";
   const aria = `${t.name}${t.sub ? ", " + t.sub : ""}. ${t.pctText} to ${self.n}. Open`;
-  return `<figure class="ar-fig" data-kind="${t.kind}" data-ar-fig="${esc(t.key)}">
+  return `<figure class="ar-fig${wide ? " ar-wide" : ""}" data-kind="${t.kind}" data-ar-fig="${esc(t.key)}"${o && o.gap ? " data-ar-gap" : ""}>
     <button type="button" class="ar-fig-b" data-ar-ref="${esc(t.key)}" aria-label="${esc(aria)}">${arfPicHTML(t)}
       <span class="ar-fig-tx"><small class="ar-fig-k">${esc(sub)}</small><b class="ar-fig-n">${esc(t.name)}</b>
         <span class="ar-fig-m"><span class="ar-fig-d" aria-hidden="true"><i style="--c:${self.h}"></i><i style="--c:${t.best.h}"></i></span><span>${esc(t.pctText)} to ${esc(self.n)}${near}</span></span>${cov}</span></button>
@@ -255,15 +258,25 @@ function arfHighlight(fig, hex) {
   if (!img || !cv || !img.getAttribute("crossorigin") && /^https?:/.test(img.getAttribute("src") || "")) return;
   const draw = () => {
     try {
-      const W = 56, H = 56, tmp = document.createElement("canvas"); tmp.width = W; tmp.height = H;
+      const box = img.parentNode.getBoundingClientRect(), W = 64, H = Math.max(16, Math.round(64 * (box.height || 1) / (box.width || 1)));
+      const tmp = document.createElement("canvas"); tmp.width = W; tmp.height = H;
       const x = tmp.getContext("2d", { willReadFrequently: true }), iw = img.naturalWidth, ih = img.naturalHeight; if (!iw || !ih) return;
+      const tl = lab(hex), near = (d, i) => de2000(tl, lab("#" + ((1 << 24) | d[i] << 16 | d[i + 1] << 8 | d[i + 2]).toString(16).slice(1)));
+      // a wide box crops the picture: center the crop on where the color sits (its centroid in the whole picture)
+      let fx = .5, fy = .5;
+      if (fig.classList.contains("ar-wide")) {
+        const S = 40, a = document.createElement("canvas"); a.width = S; a.height = S;
+        const ax = a.getContext("2d", { willReadFrequently: true }); ax.drawImage(img, 0, 0, S, S);
+        const d = ax.getImageData(0, 0, S, S).data; let sx = 0, sy = 0, n = 0;
+        for (let i = 0; i < S * S; i++) if (near(d, i * 4) < 9) { sx += i % S + .5; sy += Math.floor(i / S) + .5; n++; }
+        if (n >= S * S * .01) { fx = sx / n / S; fy = sy / n / S; img.style.objectPosition = `${(fx * 100).toFixed(1)}% ${(fy * 100).toFixed(1)}%`; }
+      }
       const s = Math.max(W / iw, H / ih), dw = iw * s, dh = ih * s;
-      x.drawImage(img, (W - dw) / 2, (H - dh) / 2, dw, dh);
-      const px = x.getImageData(0, 0, W, H).data, out = cv.getContext("2d"), o = out.createImageData(W, H), tl = lab(hex);
+      x.drawImage(img, (W - dw) * fx, (H - dh) * fy, dw, dh);
+      const px = x.getImageData(0, 0, W, H).data, out = cv.getContext("2d"), o = out.createImageData(W, H);
       let hit = 0;
       for (let i = 0; i < W * H; i++) {
-        const h = "#" + ((1 << 24) | px[i * 4] << 16 | px[i * 4 + 1] << 8 | px[i * 4 + 2]).toString(16).slice(1);
-        const d = de2000(tl, lab(h)), a = d < 7 ? 0 : d > 18 ? 168 : Math.round((d - 7) / 11 * 168);
+        const d = near(px, i * 4), a = d < 7 ? 0 : d > 18 ? 168 : Math.round((d - 7) / 11 * 168);
         if (d < 7) hit++;
         o.data[i * 4] = 16; o.data[i * 4 + 1] = 15; o.data[i * 4 + 2] = 14; o.data[i * 4 + 3] = a;
       }
@@ -281,8 +294,8 @@ function arfInsert(root, put) {
   if (above && y0 > 0) sc.scrollTop = y0 + (sc.scrollHeight - h0);
   return el;
 }
-function arfPutFig(root, t, self, where) {
-  const tpl = document.createElement("template"); tpl.innerHTML = arfFigHTML(t, self).trim();
+function arfPutFig(root, t, self, where, o) {
+  const tpl = document.createElement("template"); tpl.innerHTML = arfFigHTML(t, self, o).trim();
   const fig = tpl.content.firstElementChild;
   arfInsert(root, () => { where(fig); return fig; });
   if (t.kind === "painting" || t.kind === "painter") arfHighlight(fig, self.h);
@@ -303,7 +316,7 @@ function arfFixChips(root, resolved) {
 async function arfEnhance(root, art, self) {
   if (!root || !self || !/^#[0-9a-f]{6}$/i.test(self.h || "")) return;
   const alive = () => root.isConnected;
-  const shown = new Set(), secsWith = new Set();
+  const shown = new Set(), secsWith = new Set(), shownIdx = new Set();   // shownIdx: gallery indexes already on the page
   const secOf = el => { const s = el.closest("[data-ar-sec]"); return s ? s.dataset.arSec : null; };
   // 1. explicit references
   const ps = [...root.querySelectorAll("p[data-ar-refs]")];
@@ -315,13 +328,16 @@ async function arfEnhance(root, art, self) {
   ps.forEach(p => {
     const list = p.dataset.arRefs.split(/\s+/).map(k => got.get(k)).filter(t => t && t.ok && !shown.has(t.key)).slice(0, ARF_MAX_PER_P);
     let at = p;
-    list.forEach(t => { shown.add(t.key); const prev = at; at = arfPutFig(root, t, self, f => prev.after(f)); });
+    list.forEach(t => { shown.add(t.key); if (t.i != null) shownIdx.add(t.i); const prev = at; at = arfPutFig(root, t, self, f => prev.after(f), { wide: true }); });
     if (list.length) { const s = secOf(p); if (s) secsWith.add(s); }
   });
-  // 2. the nearest twins, placed after the section they belong to
+  // 2. the nearest twins, placed in the section they belong to
   const cand = await arfAutoKeys(art, self);
   if (!alive()) return;
-  const things = (await Promise.all(cand.filter(k => !shown.has(k)).map(k => arfFor(k, self.h, "light")))).filter(Boolean);
+  // a pigment's story shows no painting made before the pigment was (a 1474 panel in a Prussian-blue-like color would read as a claim)
+  const since = art.tier === "pigment" ? +((String((art.aside && art.aside.origin && art.aside.origin.first_recorded) || "").match(/\b(1[5-9]\d\d)\b/) || [])[1] || 0) : 0;
+  const inTime = t => !(since && t && t.kind === "painting" && t.year != null && t.year < since - 10);
+  const things = (await Promise.all(cand.filter(k => !shown.has(k)).map(k => arfFor(k, self.h, "light")))).filter(t => t && inTime(t));
   if (!alive()) return;
   const plan = arfPlan(art.sections.filter(s => s.title).map(s => ({ id: s.id, title: s.title })), things, secsWith, shown);
   const chosen = [...Object.values(plan.place).flat(), ...plan.end];
@@ -330,9 +346,39 @@ async function arfEnhance(root, art, self) {
   if (!alive()) return;
   Object.entries(plan.place).forEach(([sid, list]) => {
     const sec = root.querySelector(`[data-ar-sec="${CSS.escape(sid)}"]`); if (!sec) return;
-    list.forEach(t0 => { const t = filled.get(t0.key); if (!t || !t.ok) return; arfPutFig(root, t, self, f => { const acts = sec.querySelector(".ar-acts"); acts ? acts.before(f) : sec.append(f); }); });
+    list.forEach(t0 => {
+      const t = filled.get(t0.key); if (!t || !t.ok) return;
+      shown.add(t.key); if (t.i != null) shownIdx.add(t.i);
+      const gap = arfGaps(sec)[0];   // inside the chapter's first long run of text, else at its end
+      arfPutFig(root, t, self, f => { if (gap) return gap.after(f); const acts = sec.querySelector(".ar-acts"); acts ? acts.before(f) : sec.append(f); }, { wide: true });
+    });
   });
-  const endList = plan.end.map(t => filled.get(t.key)).filter(t => t && t.ok);
+  // 3. pictures for the long runs of text that are left (David, 2026-10-08: "any picture breaks it up"): the twins that would
+  //    have waited for the closing strip, then the paintings that hold this color most, interleaved, each still inside the threshold
+  let endList = plan.end.map(t => filled.get(t.key)).filter(t => t && t.ok);
+  const gaps = arfGaps(root).slice(0, ARF_GAP_MAX);
+  if (gaps.length) {
+    let paint = [];
+    if (typeof loadGallery === "function" && typeof npGalleryHits === "function") {
+      try { await loadGallery(); paint = npGalleryHits(self.h, 6).filter(h => !shownIdx.has(h[0]) && inTime({ kind: "painting", year: parseInt(glYear(h[0]), 10) || null })).slice(0, gaps.length + 3).map(h => "painting:" + h[0]); } catch (e) { paint = []; }
+    }
+    if (!alive()) return;
+    const extra = things.filter(t => t.ok && !shown.has(t.key) && !chosen.some(c => c.key === t.key) && t.kind !== "painting").sort((a, b) => a.de - b.de).slice(0, 4).map(t => t.key);
+    const others = [...endList.map(t => t.key), ...extra];
+    const order = []; for (let k = 0; k < Math.max(paint.length, others.length); k++) { if (paint[k]) order.push(paint[k]); if (others[k]) order.push(others[k]); }
+    const pool = (await Promise.all(order.slice(0, gaps.length + 4).map(k => arfFor(k, self.h)))).filter(t => t && t.ok && inTime(t) && !(t.kind === "painting" && (!t.img || shownIdx.has(t.i))));
+    if (!alive()) return;
+    const seenNames = new Set();
+    gaps.forEach(g => {
+      let t = pool.shift();
+      while (t && t.kind === "painting" && seenNames.has(t.name)) t = pool.shift();   // one picture per painting, even when the archive holds two photographs of it
+      if (!t || !g.isConnected) return;
+      if (t.kind === "painting") { seenNames.add(t.name); shownIdx.add(t.i); }
+      shown.add(t.key);
+      arfPutFig(root, t, self, f => g.after(f), { wide: true, gap: true });
+    });
+    endList = endList.filter(t => !shown.has(t.key));
+  }
   if (endList.length) {
     const host = document.createElement("section"); host.className = "ar-seen"; host.setAttribute("aria-label", "Seen in");
     host.innerHTML = `<h3 class="ar-seen-h">Seen in</h3>`;
@@ -340,6 +386,25 @@ async function arfEnhance(root, art, self) {
     arfInsert(root, () => { before ? before.before(host) : root.append(host); return host; });
     endList.forEach(t => arfPutFig(root, t, self, f => host.append(f)));
   }
+}
+// The long runs of plain text in a chapter: the paragraphs after which a picture should go. A run ends at anything that isn't a
+// paragraph (a figure, a plate, a quotation, a callout). A picture goes after the 2nd paragraph of a run when 2 more follow,
+// else after the 3rd when one more follows: about one picture every 2-3 paragraphs, never right before a heading.
+const ARF_GAP_MAX = 10;
+function arfGaps(scope) {
+  const out = [], secs = scope.matches && scope.matches(".ar-sec") ? [scope] : [...scope.querySelectorAll(".ar-sec")];
+  secs.forEach(sec => {
+    const kids = [...sec.children], isP = el => !!el && el.tagName === "P" && !el.classList.contains("ar-chk");
+    let run = 0;
+    kids.forEach((el, i) => {
+      if (isP(el)) {
+        run++;
+        let k = 0; for (let j = i + 1; isP(kids[j]); j++) k++;
+        if ((run >= 2 && k >= 2) || (run >= 3 && k >= 1)) { out.push(el); run = 0; }
+      } else if (el.tagName !== "H2" && !el.classList.contains("ar-chk")) run = 0;
+    });
+  });
+  return out;
 }
 
 // ---------- opening ----------
