@@ -1,0 +1,52 @@
+{
+  "slug": "mauve",
+  "name": "Mauve",
+  "hex": "#A8778F",
+  "tier": "nature",
+  "status": "fixture",
+  "lede": "A soft, greyed purple named for the mallow flower, and the color of one of the most talked-about chemical accidents of the nineteenth century.[1]",
+  "sections": [
+    {
+      "id": "the-flower",
+      "title": "A word for mallow",
+      "body": "*Mauve* is the French word for the mallow plant, which came from the Latin *malva*. The flower has pale lilac-pink petals with darker veins, and the word was used for that color long before a chemist put it in a bottle.[1] In English the color word is recorded from the middle of the nineteenth century, close to the moment the dye made it fashionable.[2]"
+    },
+    {
+      "id": "the-dye",
+      "title": "Perkin's purple",
+      "body": "In 1856 William Henry Perkin, then a teenager studying chemistry in London, made a purple dye from coal-tar chemicals. He called it mauveine and set up a factory to sell it. It is the first aniline dye, which is the only claim about it that books agree on.[3]\n\n!myth The story says Perkin found his dye in the rainbow film on a puddle. The record shows it came from a failed attempt to make quinine, a medicine, from coal-tar chemicals in a home laboratory.[3]\n\nBooks disagree: whether mauveine was the first *commercial* synthetic dye depends on how earlier products such as picric acid, a yellow used on silk, are counted.[4]"
+    },
+    {
+      "id": "the-decade",
+      "title": "A decade named after it",
+      "body": "Writers later spoke of the \"Mauve Decade\" for the 1890s in Britain and America, and the phrase appears in many books, but they do not agree on its dates or on whether it was meant kindly.[4]\n\nPerkin's color is not quite the swatch above. Mauveine fades, and the museum samples of early mauve-dyed silk are paler and browner than the dye was when new. Treat any reconstruction as an approximation."
+    },
+    {
+      "id": "lookalikes",
+      "title": "Mauve against the lilacs",
+      "body": "The quick test for mauve is to put it beside [[lilac]]: mauve is greyer and slightly redder, while lilac is clearer and lighter. Beside [[lavender]], mauve is duller and warmer. Both differences are small enough that many people use the three words as if they were interchangeable."
+    }
+  ],
+  "aside": {
+    "origin": { "named_after": "the mallow flower, French *mauve*", "first_recorded": "Mid-1800s in English[2]", "source": "Fixture source for tests, not a real citation" },
+    "aka": ["Mauveine purple"],
+    "parent": ["violet"],
+    "siblings": ["lilac", "lavender"],
+    "children": [],
+    "disambiguation": []
+  },
+  "field": {},
+  "notes": [
+    { "n": 1, "kind": "book", "cite": "Fixture E: a dictionary of color words, entry for mauve." },
+    { "n": 2, "kind": "web", "cite": "Fixture F: an etymology page with first-use dates.", "url": "https://example.org/fixture-f" },
+    { "n": 3, "kind": "book", "cite": "Fixture G: a biography of Perkin and the early dye industry." },
+    { "n": 4, "kind": "book", "cite": "Fixture H: a cultural history of purple." }
+  ],
+  "questions": [
+    { "q": "What does the word mauve originally mean?", "choices": ["Mallow", "Violet", "Twilight"], "answer": 0, "kind": "recall" },
+    { "q": "Mauve is greyer than which color?", "choices": ["Lilac", "Taupe", "Charcoal"], "answer": 0, "kind": "compare", "why": "Lilac is the clearer, lighter one." }
+  ],
+  "openers": [],
+  "words": 0,
+  "checked": {}
+}
