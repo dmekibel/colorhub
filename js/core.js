@@ -505,9 +505,12 @@ function roomsNote(id) {
 // it was under a solid dimming scrim; the rooms rise as opaque capsules in a low arc from the corner, under the
 // thumb. A tap anywhere outside (or the ✕, Escape, Back) sinks them back into the corner and nothing else moves.
 let STEM_KEY = null;
+// The one source of truth for the corners coming back: a pan fade (.chrome-hide on Home) never outlives a closed
+// sheet or menu. Called by closeStem and every sheet() close (David: "the bottom corner buttons disappear").
+function cornersBack() { document.querySelectorAll(".chrome-hide").forEach(n => n.classList.remove("chrome-hide")); }
 function closeStem(instant) {
   const s = document.querySelector(".rooms-stem"), sc = document.querySelector(".rm-scrim");
-  STEM_OPEN = false;
+  STEM_OPEN = false; cornersBack();
   document.body.classList.remove("stem-open");
   if (STEM_KEY) { removeEventListener("keydown", STEM_KEY, true); STEM_KEY = null; }
   document.querySelectorAll("[data-rooms-corner]").forEach(b => { b.classList.remove("on"); b.innerHTML = ROOMS_GLYPH; b.setAttribute("aria-expanded", "false"); });
@@ -530,18 +533,18 @@ function toggleStem(cornerEl) {
   if (!roomEl && typeof hmSnapFloor === "function") hmSnapFloor();   // L18 B2: the floor as you leave it
   const items = (roomEl ? [["home", NAV_MAP]] : []).concat(ROOMS_LIST);
   const scrim = document.createElement("div");
-  scrim.className = "rm-scrim";
+  scrim.className = "rm-scrim rm-scrim-l";
   // a tap outside only closes: it never reaches the page underneath, and the page never scrolls or re-renders
   scrim.addEventListener("pointerdown", e => { e.preventDefault(); e.stopPropagation(); buzz(4); closeStem(); });
   scrim.addEventListener("click", e => { e.preventDefault(); e.stopPropagation(); });
   scrim.addEventListener("touchmove", e => e.preventDefault(), { passive: false });
   const stem = document.createElement("div");
-  stem.className = "rooms-stem mn-panel mn-panel-l";
+  stem.className = "rooms-stem";
   stem.setAttribute("role", "menu"); stem.setAttribute("aria-label", "Rooms");
   const n = items.length;
   stem.style.setProperty("--n", n);   // short screens tighten the step so the top capsule stays low (css/menus2.css)
-  // the menu panel (design/VISUAL-DIRECTION.md component 2): a floating tile grid above the corner, not a pill cascade
-  stem.innerHTML = `<div class="mn-ph"><h3>Rooms</h3><p>Where to next</p></div>` + items.map(([id, label], i) => {
+  // a straight stack up the left edge (David, 2026-10-08: "straight up along the side", and again over the tile panel)
+  stem.innerHTML = items.map(([id, label], i) => {
     const cur = id === here;
     return `<button class="rm-bubble${cur ? " cur" : ""}" role="menuitem" data-room="${id}" style="--i:${i}">
       ${roomsBubbleArt(id)}<span class="rm-label"><b>${esc(label)}</b><em>${esc(cur ? "You're here" : roomsNote(id))}</em></span>
@@ -674,7 +677,7 @@ function sheet(html) {
   sh.innerHTML = `<div class="grab"></div>${html}`;
   let gone = false;
   const close = () => {
-    if (gone) return; gone = true; unlockScroll(); if (sh._esc) removeEventListener("keydown", sh._esc, true);
+    if (gone) return; gone = true; unlockScroll(); cornersBack(); if (sh._esc) removeEventListener("keydown", sh._esc, true);
     if (reduceMotion) { scrim.remove(); sh.remove(); return; }
     scrim.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 200, fill: "forwards" }).onfinish = () => scrim.remove();
     sh.animate([{ transform: getComputedStyle(sh).transform === "none" ? "none" : getComputedStyle(sh).transform }, { transform: "translateY(105%)" }], { duration: 240, easing: "cubic-bezier(.3,0,.8,.2)", fill: "forwards" }).onfinish = () => sh.remove();

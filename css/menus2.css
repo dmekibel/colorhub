@@ -41,8 +41,16 @@ body.stem-open .screen,body.stem-open .hc,body.stem-open .hm-stage{filter:none}
 .corner.on{z-index:18}
 .corner.on svg{animation:mnSpin var(--dur-2) var(--ease-grow) both}
 .corner[aria-expanded="false"] svg{animation:mnSpinBack var(--dur-2) var(--ease-grow) both}
-@keyframes mnSpin{from{transform:rotate(-90deg) scale(.5);opacity:0}}
-@keyframes mnSpinBack{from{transform:rotate(90deg) scale(.5);opacity:0}}
+/* the open corner's ✕ is never dimmed: the corner lives inside #app's stacking context, under the body-level scrim, so
+   the scrim leaves a clear disc over the corner it rose from (a tap there still lands on the scrim and closes, like the ✕) */
+.rm-scrim-l,.rm-scrim-r{--hx:calc(16px + var(--corner) / 2);--hy:calc(100% - var(--corner-b) - var(--vb) - var(--corner) / 2)}
+.rm-scrim-l{-webkit-mask:radial-gradient(circle at var(--hx) var(--hy),transparent calc(var(--corner) / 2 + 1px),#000 calc(var(--corner) / 2 + 2px));
+  mask:radial-gradient(circle at var(--hx) var(--hy),transparent calc(var(--corner) / 2 + 1px),#000 calc(var(--corner) / 2 + 2px))}
+.rm-scrim-r{-webkit-mask:radial-gradient(circle at calc(100% - var(--hx)) var(--hy),transparent calc(var(--corner) / 2 + 1px),#000 calc(var(--corner) / 2 + 2px));
+  mask:radial-gradient(circle at calc(100% - var(--hx)) var(--hy),transparent calc(var(--corner) / 2 + 1px),#000 calc(var(--corner) / 2 + 2px))}
+/* the icon never starts from an invisible frame (a blank corner if the animation stalls or a screenshot lands on frame 1) */
+@keyframes mnSpin{from{transform:rotate(-90deg) scale(.6)}}
+@keyframes mnSpinBack{from{transform:rotate(90deg) scale(.6)}}
 
 /* the capsules: low, under the thumb, a straight stack up the side, each picture centered over the corner */
 .rooms-stem{position:fixed;inset:0;z-index:17;pointer-events:none;
@@ -306,49 +314,25 @@ input[type=checkbox][switch]:checked::before{transform:translateX(20px);backgrou
 button:focus-visible,input:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 
 
-/* ============================================================ the menu panel (design/VISUAL-DIRECTION.md component 2)
-   Both corners open one floating e1 panel, inset 12 from the edges, just above its corner: a serif title, one note
-   and a 3-column grid of 108 pt tiles (picture top-left, name and note bottom-left). It replaces the pill stacks.
-   Same machinery as before (js/core.js toggleStem/closeStem, js/home.js doMenu): scrim tap, Escape and Back close it. */
-.rooms-stem.mn-panel{inset:auto 12px calc(var(--corner-b) + var(--corner) + 12px) 12px;pointer-events:auto;
-  display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:18px 14px 14px;max-height:calc(100dvh - var(--top) - var(--corner-b) - var(--corner) - 36px);overflow-y:auto;overscroll-behavior:contain;
-  background:var(--s1);border:1px solid var(--line);border-radius:var(--r-sheet);box-shadow:0 -16px 48px rgba(0,0,0,.5);
-  opacity:0;transform:translateY(14px) scale(.97);transform-origin:20% 100%;transition:opacity 160ms ease-in,transform 200ms cubic-bezier(.4,0,1,1)}
-.rooms-stem.mn-panel-r{transform-origin:80% 100%}
-.rooms-stem.mn-panel.on{opacity:1;transform:none;transition:opacity 200ms ease-out,transform 380ms var(--ease-grow)}
-.mn-ph{grid-column:1/-1;padding:0 6px 6px}
-.mn-ph h3{margin:0;font:400 30px/1 var(--serif);letter-spacing:-.02em;color:var(--ink)}
-.mn-ph p{margin:4px 0 0;font:italic 400 16px/1.3 var(--serif);color:var(--soft)}
-.rooms-stem.mn-panel .rm-bubble,.rooms-stem.mn-panel.hm-do-stem .rm-bubble{position:relative;left:auto;right:auto;bottom:auto;height:auto;min-height:108px;
-  flex-direction:column;align-items:flex-start;justify-content:space-between;gap:10px;padding:12px;text-align:left;
-  border-radius:var(--r-card);background:var(--s2);border:0;box-shadow:none;
-  opacity:0;transform:translateY(8px);transition:opacity 160ms ease-in,transform 160ms ease-in,background var(--dur-0);transition-delay:0ms}
-.rooms-stem.mn-panel.on .rm-bubble{opacity:1;transform:none;transition:opacity 220ms ease-out,transform 320ms var(--ease-grow),background var(--dur-0);transition-delay:calc(60ms + var(--i) * 20ms)}
-.rooms-stem.mn-panel .rm-bubble:active{background:var(--s3);transform:scale(.96);transition-delay:0ms}
-.rooms-stem.mn-panel .rm-art{width:40px;height:40px;flex:none}
-.rooms-stem.mn-panel .rm-art-home{zoom:.8}
-.rooms-stem.mn-panel .hm-do-ic{background:none;border-radius:0;width:28px;height:28px;place-items:start}
-.rooms-stem.mn-panel .hm-do-ic svg{width:26px;height:26px}
-.rooms-stem.mn-panel .hm-do-dots{display:flex!important;gap:0;padding:0;width:auto}
-.rooms-stem.mn-panel .hm-do-dots i{width:18px;height:18px;margin-right:-5px;border:2px solid var(--s2);flex:none}
-.rooms-stem.mn-panel .rm-label,.rooms-stem.mn-panel.hm-do-stem .rm-label{align-items:flex-start;gap:4px;width:100%}
-.rooms-stem.mn-panel .rm-label b{font:400 21px/1.05 var(--serif);white-space:normal}
-.rooms-stem.mn-panel .rm-label em{font:400 13px/1.3 var(--sans);font-style:normal;color:var(--soft);max-width:100%;white-space:normal;
-  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-/* where you are: raised, ringed, with the dot */
-.rooms-stem.mn-panel .rm-bubble.cur{background:var(--s3);box-shadow:var(--sel-ring)}
-.rooms-stem.mn-panel .rm-bubble.cur .rm-art{box-shadow:none}
-.rooms-stem.mn-panel .rm-bubble.cur::after{content:"";position:absolute;top:14px;right:14px;width:8px;height:8px;border-radius:50%;background:var(--sel-dot)}
-/* Home: Colors is the wide tile, Search is a field along the bottom */
-.rooms-stem.mn-panel [data-do="colors"]{grid-column:span 2}
-.rooms-stem.mn-panel .rm-bubble[data-do="search"]{grid-column:1/-1;order:9;min-height:52px;flex-direction:row;align-items:center;justify-content:flex-start;gap:12px;padding:0 18px;border-radius:var(--r-pill)}
-.rooms-stem.mn-panel [data-do="search"] .hm-do-ic{width:22px;height:22px;place-items:center}
-.rooms-stem.mn-panel [data-do="search"] .hm-do-ic svg{width:20px;height:20px;color:var(--soft)}
-.rooms-stem.mn-panel [data-do="search"] .rm-label b{display:none}
-.rooms-stem.mn-panel [data-do="search"] .rm-label em{font:400 16px/1.2 var(--sans);-webkit-line-clamp:1}
-.rooms-stem.mn-panel [data-do="recall"] .rm-art{width:100%;height:28px;border-radius:var(--r-tile)}
-@media (max-width:360px){.rooms-stem.mn-panel{grid-template-columns:repeat(2,1fr)}.rooms-stem.mn-panel [data-do="colors"]{grid-column:1/-1}}
-@media (prefers-reduced-motion:reduce){.rooms-stem.mn-panel,.rooms-stem.mn-panel .rm-bubble,.rooms-stem.mn-panel.on .rm-bubble{transform:none;transition:opacity 160ms linear;transition-delay:0ms}}
+/* ============================================================ the corner stacks, Night Gallery
+   David (2026-10-08) chose the straight vertical stacks along the side over the tile panel. Same machinery (js/core.js
+   toggleStem/closeStem, js/home.js doMenu; scrim tap, Escape and Back close it). Each capsule is a solid --s2 pill,
+   56 pt tall, with --line-2 edge; its picture sits centered over the corner and its words on the inner side. The room
+   you're in is raised (--s3), ringed and dotted, never a paper ring. */
+.rooms-stem .rm-bubble{left:12px;height:var(--tap-l);gap:12px;padding:3px 22px 3px 3px;
+  background:var(--s2);border:1px solid var(--line-2);box-shadow:0 8px 24px rgba(0,0,0,.5);transform-origin:28px 100%}
+.rooms-stem.hm-do-stem .rm-bubble{left:auto;right:12px;padding:3px 3px 3px 22px;transform-origin:calc(100% - 28px) 100%}
+.rooms-stem .rm-bubble:active{background:var(--s3)}
+.rooms-stem .rm-art{width:48px;height:48px;border-radius:50%;overflow:hidden;flex:none}
+.rooms-stem .hm-do-ic{background:var(--s3)}
+.rooms-stem .rm-label{gap:3px}
+.rooms-stem .rm-label b{font:400 21px/1.05 var(--serif)}
+.rooms-stem .rm-label em{font:400 14px/1.2 var(--sans);font-style:normal;color:var(--soft)}
+.rooms-stem .rm-bubble.cur{background:var(--s3);border-color:transparent;box-shadow:var(--sel-ring),0 8px 24px rgba(0,0,0,.5)}
+.rooms-stem .rm-bubble.cur .rm-art{box-shadow:none}
+.rooms-stem .rm-bubble.cur .rm-label b::after{content:"";display:inline-block;width:8px;height:8px;margin:0 0 0 9px;border-radius:50%;background:var(--sel-dot);vertical-align:middle}
+.rooms-stem .rm-bubble.cur .rm-label em{color:var(--soft)}
+@media (max-height:600px){.rooms-stem .rm-bubble{height:50px}.rooms-stem .rm-art{width:42px;height:42px}}
 /* sheets take the Night Gallery radius */
 .sheet{border-radius:var(--r-sheet) var(--r-sheet) 0 0}
 
