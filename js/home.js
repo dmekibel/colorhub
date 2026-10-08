@@ -217,6 +217,7 @@ function hmHome() {
     </div>
     <button class="corner l" data-rooms-corner aria-label="Rooms">${ROOMS_GLYPH}</button>
     <button class="corner r" id="hmView" aria-label="View">${HM_SLIDERS}</button>
+    ${typeof msHomeButton === "function" ? msHomeButton() : ""}
     ${typeof prQuick === "function" ? `<button class="corner r pr-study-corner" data-pr-study aria-label="Study">${PR_ICON.cards}</button>` : ""}
     ${typeof FV_HEART === "string" ? `<button class="corner r fv-corner" id="hmFav" aria-label="Pick favorites">${FV_HEART}</button>` : ""}
   `, "fixed cx hm");
@@ -412,6 +413,7 @@ function hmHome() {
     cv.addEventListener("pointercancel", () => hmShowChrome());
   }
   hmShowChrome();
+  { const ms = $("#hmMapStudy"); if (ms) ms.onclick = () => { buzz(6); msOpen({ from: "home" }); }; }   // js/mapstudy.js
 
   // the Rooms corner (left, shared chrome: js/core.js toggleStem) raises the stem; the View corner (right)
   // opens the chooser — a tap for "Show", a long-press (480ms) jumps straight to "Look"

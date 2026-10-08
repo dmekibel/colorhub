@@ -311,6 +311,7 @@ function gymHome() {
     ${SHELVES.map(([name, ks]) => `<div class="sec-head"><b>${name}</b><span>${name === "Applied" ? "built on the basics" : name === "In context" ? "color next to color" : "one judgment at a time"}</span></div>
       <div class="gs-grid">${ks.filter(k => typeof ooRetired !== "function" || !["hue", "memory", "order"].includes(k)).map(stationTile).join("")}</div>`).join("")}
     ${typeof matchShelves === "function" ? matchShelves() : ""}
+    ${typeof msTrainShelf === "function" ? msTrainShelf() : ""}
     <div class="sec-head"><b>Game</b><span>for fun</span></div>
     <button class="play-row" data-lightning><span><b>Lightning round</b><span>Forty-five seconds. Name as many colors as you can.</span></span><em class="lt-best">${S.best.lightning ? `<b>${S.best.lightning}</b>best` : "new"}</em></button>
     <p class="fine">Scores are shown as a percent of the full black-to-white range: 100% is the difference between black and white, and about 1% is the smallest difference most people can see side by side. Every swatch is at least a quarter of the screen wide, because small patches look less colorful. Practice sharpens these judgments; it isn't a brain-training claim.</p>
@@ -321,6 +322,7 @@ function gymHome() {
   el.querySelector("[data-lightning]").onclick = lightning;
   el.querySelector("[data-eye]").onclick = eyeReport;
   if (typeof wireMatch === "function") wireMatch(el);
+  if (typeof msWireTrain === "function") msWireTrain(el);
   if (typeof ooWire === "function") ooWire(el);   // js/games/oo-ui.js: Odd one out, today's board, Whose palette?
 }
 const k0Trials = k => k === "order" ? `${SKILLS[k].trials} strips` : k === "squint" ? `${SKILLS[k].trials} paintings` : `${SKILLS[k].trials} rounds`;
