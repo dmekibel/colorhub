@@ -655,7 +655,7 @@ function colorPage(n, tapped) {
       if (typeof nearestCore === "function") {
         const list = CORE_NAMES || (typeof coreFallback === "function" ? coreFallback() : []);
         const near = nearestCore(tapped || c.h, list, 7).filter(x => x.n.toLowerCase() !== c.n.toLowerCase()).slice(0, 6);
-        if (near.length) secs.push(["nearnames", "Nearest names", `<div class="lk-list">${near.map(x => `<button class="lk-row" data-cp-near="${esc(x.n)}" data-h="${x.h}"><i style="--c:${x.h}"></i><b>${esc(x.n)}</b><span>${closeness(x.de)} · ${pctDiff(x.de)}${rcHasArticle(x.n) ? " · has its own story" : ""}</span></button>`).join("")}</div>`]);
+        if (near.length) secs.push(["nearnames", "Nearest names", `<div class="lk-list">${near.map(x => `<button class="lk-row" data-cp-near="${esc(x.n)}" data-h="${x.h}"><i class="lk-split" style="--c:${x.h};--c2:${heroHex}"></i><b>${esc(x.n)}</b><span>${closeness(x.de)} · ${pctDiff(x.de)}${rcHasArticle(x.n) ? " · has its own story" : ""}</span></button>`).join("")}</div>`]);
       }
       const coreSelf = (CORE_NAMES || (typeof coreFallback === "function" ? coreFallback() : [])).find(e => e.n.toLowerCase() === c.n.toLowerCase());
       if (coreSelf && ((coreSelf.also || []).length || (coreSelf.src || []).length)) {

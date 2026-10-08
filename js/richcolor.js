@@ -33,6 +33,8 @@ function rcWireOpen(host, hex) {
   host.addEventListener("click", e => {
     const g = e.target.closest("[data-rc-gi]");
     if (g) return galleryPage(+g.dataset.rcGi, true, host._rcHex || null);
+    const pr = e.target.closest("[data-rc-pair]");
+    if (pr) { const [a, b2] = pr.dataset.rcPair.split("+"), [na, nb2] = pr.dataset.rcNames.split("|"); return paintingsOfPage(["#" + a, "#" + b2], { tol: CI_STD.tol, minCover: CI_STD.minCover, maxCover: null, mode: "all", sort: "cover", names: [na, nb2] }); }
     const b = e.target.closest("[data-rc-open]"); if (!b) return;
     morphFrom(b.querySelector("i") || b); openCoreName(b.dataset.h, b.dataset.n);
   });
@@ -147,22 +149,64 @@ function rcRoleSection(name, hex) {
 // ======================================================================
 // 5. Harmonies -- pure color math, so every page gets this, even with zero written content.
 // ======================================================================
-function rcHarmonyHTML(hex) {
-  const complement = rotateHue(hex, 180), an1 = rotateHue(hex, -30), an2 = rotateHue(hex, 30);
-  const tri1 = rotateHue(hex, 120), tri2 = rotateHue(hex, 240), sp1 = rotateHue(hex, 150), sp2 = rotateHue(hex, 210);
-  const row = (title, sub, hexes) => {
-    const chips = hexes.map(h => { const nm = rcName(h); return `<button class="kin rc-harm" data-rc-open data-h="${nm.h}" data-n="${esc(nm.n)}"><i style="--c:${h}"></i><b>${esc(nm.n)}</b></button>`; }).join("");
-    return `<div class="rc-harm-row"><p class="rc-harm-sub"><b>${esc(title)}</b> · ${esc(sub)}</p><div class="rc-harm-chips">${chips}</div></div>`;
+// A tiny ring: this color at the top, each partner a dot at its hue angle around the wheel.
+function rcRingSVG(hex, angles, hexes) {
+  const pt = (a, r) => [12 + r * Math.sin(a * Math.PI / 180), 12 - r * Math.cos(a * Math.PI / 180)].map(v => v.toFixed(1));
+  const dot = (a, h, big) => { const [x, y] = pt(a, 8.5); return `<circle cx="${x}" cy="${y}" r="${big ? 3.4 : 3}" fill="${h}" stroke="var(--ink)" stroke-width=".8"/>`; };
+  return `<svg class="rc-ring" viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="var(--rule)" stroke-width="1.2"/>${angles.map((a, i) => dot(a, hexes[i])).join("")}${dot(0, hex, true)}</svg>`;
+}
+// ---------- Palettes: one visible, the others one tap away (David, 2026-10-08) ----------
+// Each palette is this color plus partners at realistic proportions (w = flex weight), names under every swatch,
+// every swatch one tap to its page; "Learn these" and "Save palette" come from the ColorSet verbs (js/colorset.js).
+function rcLchSteps(hex, f) {
+  const [L, C, H] = lch(hex);
+  return f(L, C, H).map(([l, c, h]) => { l = Math.max(4, Math.min(97, l)); c = Math.max(0, c); h = (h + 360) % 360; while (c > 1 && !inGamut(l, c * Math.cos(h * Math.PI / 180), c * Math.sin(h * Math.PI / 180))) c -= 1.5; return lchHex(l, c, h); });
+}
+function rcPaletteDefs(hex) {
+  const R = d => rotateHue(hex, d), P = (id, label, note, hs, w, deg) => ({ id, label, note, hs, w, deg });
+  return [
+    P("comp", "Complementary", "Two opposites: one carries the page, the other answers it.", [hex, R(180)], [3, 2], [180]),
+    P("ana", "Analogous", "Neighbors on the wheel: calm, close, easy to live with.", [R(-30), hex, R(30)], [2, 3, 2], [-30, 30]),
+    P("tri", "Triad", "Three evenly spaced hues: lively, so let one lead.", [hex, R(120), R(240)], [3, 2, 2], [120, 240]),
+    P("split", "Split", "Its opposite's two neighbors: contrast with less tension.", [hex, R(150), R(210)], [4, 2, 2], [150, 210]),
+    P("tet", "Tetrad", "Two opposite pairs: rich, and easy to overdo.", [hex, R(90), R(180), R(270)], [4, 2, 2, 1], [90, 180, 270]),
+    P("mono", "Tints and shades", "One hue, five steps of lightness.", rcLchSteps(hex, (L, C, H) => [[L - 24, C, H], [L - 12, C, H], [L + 12, C * .8, H], [L + 24, C * .55, H]]).slice(0, 2).concat([hex], rcLchSteps(hex, (L, C, H) => [[L + 12, C * .8, H], [L + 24, C * .55, H]])), [1, 1, 1, 1, 1]),
+    P("soft", "Soft", "Muted and a little lighter, the same hues turned down.", [hex].concat(rcLchSteps(hex, (L, C, H) => [[L + 10, C * .45, H - 30], [L + 14, C * .4, H + 30], [L + 20, C * .35, H + 180]])), [3, 2, 2, 1]),
+    P("vivid", "Vivid", "The same hues turned up as far as the screen allows.", [hex].concat(rcLchSteps(hex, (L, C, H) => [[L, C * 1.6 + 20, H - 30], [L, C * 1.6 + 20, H + 150], [L, C * 1.6 + 20, H + 210]])), [3, 2, 2, 1])
+  ];
+}
+function rcPalettesBlock(hex, name) {
+  const id = "rc-pals-" + Math.random().toString(36).slice(2, 8), slug = typeof routeSlug === "function" ? routeSlug(name) : name;
+  let cur = "comp";
+  const defs = () => {
+    const d = rcPaletteDefs(hex), rows = (RC_PAIRS || {})[name], list = CORE_NAMES || coreFallback();
+    if (rows && rows.length) {
+      const top = rows.slice(0, 4).map(r => ({ r, e: list.find(x => x.n === r.b) })).filter(x => x.e);
+      if (top.length) d.push({ id: "paint", label: "As painters used it", note: "The colors that most often share a painting with it, from 23,781 paintings, as photographed.", hs: [hex, ...top.map(x => x.e.h)], w: [3, ...top.map(() => 2)], ns: [name, ...top.map(x => x.e.n)], sub: ["this color", ...top.map(x => "in " + x.r.n.toLocaleString() + " paintings")] });
+    }
+    return d;
   };
-  const strip = [an1, hex, an2, sp1, sp2];
-  return `<section class="rc-sec rc-harmony"><h3>Harmonies</h3>
-    ${row("Complement", "opposite on the CIELAB wheel", [complement])}
-    ${row("Analogous", "either side of it", [an1, an2])}
-    ${row("Triad", "a third of the way around, each way", [tri1, tri2])}
-    ${row("Split-complement", "either side of its opposite", [sp1, sp2])}
-    <p class="rc-harm-sub"><b>A palette</b> · five colors built around it</p>
-    <div class="palette rc-harm-pal">${strip.map(h => `<button class="pal" data-rc-open data-h="${h}" style="--c:${h};flex:1" data-ink="${ink(h)}"></button>`).join("")}</div>
-    <p class="fine">Rotates CIELAB hue (LCh h) at the same lightness and strength; names are the nearest of about 1,000.</p>
+  const colors = p => p.hs.map((h, i) => { const nm = p.ns ? { n: p.ns[i], h } : rcName(h); return { h, n: h === hex ? name : nm.n, nmh: nm.h }; });
+  const setOf = () => { const ds = defs(), p = ds.find(x => x.id === cur) || ds[0]; return colorSet({ kind: "palette", id: slug + "-" + p.id, title: name + ": " + p.label.toLowerCase(), colors: colors(p).map(c => ({ h: c.h, n: c.n })), src: "color/" + slug }); };
+  const draw = () => {
+    const box = document.getElementById(id); if (!box) return;
+    const ds = defs(), p = ds.find(x => x.id === cur) || ds[0], cs = colors(p);
+    box.innerHTML = `<div class="rc-pal-tabs" role="tablist">${ds.map(d => `<button role="tab" class="${d.id === p.id ? "on" : ""}" aria-selected="${d.id === p.id}" data-rc-pal="${d.id}">${esc(d.label)}</button>`).join("")}</div>
+      <div class="rc-pal-row">${cs.map((c, i) => { const me = c.h === hex; const inner = `<i style="--c:${c.h}"></i><b>${esc(c.n)}</b><em>${esc(me ? "this color" : (p.sub && p.sub[i]) || "")}</em>`;
+        return me ? `<span class="rc-pal-sw rc-pal-me" style="flex:${p.w[i] || 1}">${inner}</span>` : `<button class="rc-pal-sw" data-rc-open data-h="${c.nmh}" data-n="${esc(c.n)}" style="flex:${p.w[i] || 1}">${inner}</button>`; }).join("")}</div>
+      <p class="fine rc-pal-note">${p.deg ? rcRingSVG(hex, p.deg, p.hs.filter(h => h !== hex)) : ""}<span>${esc(p.note)}</span></p><div class="rc-pal-acts"></div>`;
+    box.querySelector(".rc-pal-acts").appendChild(csActions(setOf, { only: ["learn", "keep"], back: () => {} }));
+    box.querySelectorAll("[data-rc-pal]").forEach(b => b.onclick = () => { cur = b.dataset.rcPal; draw(); });
+  };
+  rcLoadPairs().then(() => draw());
+  setTimeout(draw, 0);
+  return `<div class="rc-pals" id="${id}"></div>`;
+}
+
+function rcHarmonyHTML(hex, name) {
+  return `<section class="rc-sec rc-harmony"><h3>Palettes and harmonies</h3>
+    ${rcPalettesBlock(hex, name || rcName(hex).n)}
+    <p class="fine">Hues are rotated in CIELAB (LCh h) at the same lightness and strength; names are the nearest of about 1,000.</p>
   </section>`;
 }
 
@@ -407,23 +451,28 @@ function rcLoadPairs() {
   return RC_PAIRS_LOADING || (RC_PAIRS_LOADING = fetch("data/analysis/color-pairs.json" + (typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : ""))
     .then(r => r.ok ? r.json() : {}).catch(() => ({})).then(d => (RC_PAIRS = d)));
 }
-function rcPairedHTML(name) {
+function rcPairedHTML(name, baseHex, baseName) {
   const rows = (RC_PAIRS || {})[name];
   if (!rows || !rows.length) return "";
   const list = CORE_NAMES || coreFallback();
-  const chips = rows.slice(0, 6).map(r => {
+  const mine = list.find(x => x.n === name), mh = baseHex || (mine && mine.h), mn = baseName || name;
+  const cards = rows.slice(0, 6).map((r, i) => {
     const e = list.find(x => x.n === r.b); if (!e) return "";
-    return `<button class="kin rc-harm" data-rc-open data-h="${e.h}" data-n="${esc(e.n)}"><i style="--c:${e.h}"></i><b>${esc(e.n)}</b><span>${r.l.toFixed(1)}× more than chance, ${r.n} paintings</span></button>`;
-  }).filter(Boolean).join("");
-  if (!chips) return "";
-  return `<section class="rc-sec rc-paired"><h3>Often paired with</h3>${chips}<p class="fine">How much more often two colors share a painting's palette than chance would predict, as photographed, from the gallery's 23,781 paintings (n per pair above).</p></section>`;
+    return `<div class="rc-pc${i >= 3 ? " rc-pc-more" : ""}"><div class="rc-combo rc-combo-2">
+      <span class="rc-cb rc-cb-me"><i style="--c:${mh}"></i><b>${esc(mn)}</b></span>
+      <button class="rc-cb" data-rc-open data-h="${e.h}" data-n="${esc(e.n)}"><i style="--c:${e.h}"></i><b>${esc(e.n)}</b></button></div>
+      <p class="rc-pc-meta">${r.l.toFixed(1)}× more than chance · in ${r.n.toLocaleString()} paintings <button class="rc-pc-go" data-rc-pair="${mh.replace("#", "")}+${e.h.replace("#", "")}" data-rc-names="${esc(mn)}|${esc(e.n)}">See them</button></p></div>`;
+  }).filter(Boolean);
+  if (!cards.length) return "";
+  const more = cards.length > 3 ? `<details class="rc-more"><summary>${cards.length - 3} more pairings</summary>${cards.slice(3).join("")}</details>` : "";
+  return `<section class="rc-sec rc-paired"><h3>Often paired with</h3>${cards.slice(0, 3).join("")}${more}<p class="fine">How much more often two colors share a painting's palette than chance would predict, as photographed, from the gallery's 23,781 paintings.</p></section>`;
 }
 function rcPairedSection(name, hex) {
   const id = "rc-pair-" + Math.random().toString(36).slice(2, 8);
   rcLoadPairs().then(() => {
     const box = document.getElementById(id); if (!box) return;
-    let html = rcPairedHTML(name);
-    if (!html) { const near = rcNearestWith(hex, name, n => (RC_PAIRS[n] || []).length); if (near) html = rcPairedHTML(near.n).replace("<h3>Often paired with</h3>", "<h3>Often paired with</h3>" + rcNearNote(name, near)); }
+    let html = rcPairedHTML(name, hex, name);
+    if (!html) { const near = rcNearestWith(hex, name, n => (RC_PAIRS[n] || []).length); if (near) html = rcPairedHTML(near.n, hex, name).replace("<h3>Often paired with</h3>", "<h3>Often paired with</h3>" + rcNearNote(name, near)); }
     box.innerHTML = html;
   });
   return `<div id="${id}"></div>`;
