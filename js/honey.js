@@ -395,6 +395,22 @@ function honeyCellPath(ctx, b, shapeAmt, grow = 1) {
   }
   ctx.closePath();
 }
+// Select mode (L23, js/favs.js): a picked bubble glows white and carries a small paper heart. Drawn after every
+// bubble, so a ring is never covered by its neighbor.
+function honeyPicked(ctx, b, shapeAmt, a) {
+  const d = b.d, r = d / 2;
+  ctx.save(); ctx.globalAlpha = a; ctx.lineJoin = "round";
+  honeyCellPath(ctx, b, shapeAmt, 1);
+  ctx.shadowColor = "rgba(255,255,255,.6)"; ctx.shadowBlur = Math.max(6, d * .2);
+  ctx.lineWidth = Math.max(2.5, d * .05); ctx.strokeStyle = "#FFFFFF"; ctx.stroke();
+  ctx.shadowBlur = 0;
+  const br = Math.max(6.5, Math.min(15, d * .15)), bx = b.x + r * .6, by = b.y - r * .6, s = br * .52;
+  ctx.fillStyle = "#EFEBE3"; ctx.beginPath(); ctx.arc(bx, by, br, 0, 6.2832); ctx.fill();
+  ctx.fillStyle = "#141311"; ctx.beginPath(); ctx.moveTo(bx, by + s * .95);
+  ctx.bezierCurveTo(bx - s * 1.4, by + s * .1, bx - s * 1, by - s, bx, by - s * .38);
+  ctx.bezierCurveTo(bx + s * 1, by - s, bx + s * 1.4, by + s * .1, bx, by + s * .95); ctx.fill();
+  ctx.restore();
+}
 function honeyPath(ctx, cx, cy, r, shapeAmt) {
   ctx.beginPath();
   if (shapeAmt <= .02 || r < 3) { ctx.arc(cx, cy, r, 0, 6.2832); return; }
@@ -407,6 +423,49 @@ function honeyPath(ctx, cx, cy, r, shapeAmt) {
   ctx.closePath();
 }
 
+// ---- map study marks (js/mapstudy.js): calm rings over named bubbles, drawn after the bubbles themselves.
+// pulse: a slow breathing ring (the one to name) · right: a soft green glow that blooms out and fades (~0.9s) ·
+// wrong: a thin warm ring · true: a bright ring that stays (where the answer was) · ring: a quiet hairline (part of
+// this round) · start / goal: a ring with a small dot. Never a fill, never a dim: the bubble's own color stays true.
+const HONEY_MARK_ANIM = { pulse: Infinity, right: 900, true: 420 };
+function honeyStudyAnimating(marks, t) { for (const m of marks.values()) if (HONEY_MARK_ANIM[m.kind] && t - m.t0 < HONEY_MARK_ANIM[m.kind]) return true; return false; }
+function honeyStudyMarks(ctx, drawn, marks, t) {
+  ctx.save();
+  for (const b of drawn) {
+    const m = marks.get(b.it.n); if (!m || b.rin < 2) continue;
+    const age = t - m.t0, r = b.rin;
+    ctx.beginPath();
+    if (m.kind === "pulse") {
+      const k = .5 + .5 * Math.sin(age / 1000 * Math.PI * 2 / 1.8);
+      ctx.arc(b.x, b.y, r + 3 + 3 * k, 0, 6.2832); ctx.lineWidth = 3; ctx.strokeStyle = `rgba(239,235,227,${.55 + .4 * k})`; ctx.stroke();
+    } else if (m.kind === "right") {
+      const u = Math.min(1, age / 900), e = 1 - Math.pow(1 - u, 3);
+      ctx.arc(b.x, b.y, r + 2 + 10 * e, 0, 6.2832); ctx.lineWidth = 3 * (1 - u) + .5; ctx.strokeStyle = `rgba(154,212,174,${.95 * (1 - u)})`; ctx.stroke();
+      ctx.beginPath(); ctx.arc(b.x, b.y, r + 2.5, 0, 6.2832); ctx.lineWidth = 2; ctx.strokeStyle = "rgba(154,212,174,.9)"; ctx.stroke();
+    } else if (m.kind === "wrong") {
+      ctx.arc(b.x, b.y, r + 2.5, 0, 6.2832); ctx.lineWidth = 1.6; ctx.setLineDash([4, 4]); ctx.strokeStyle = "rgba(240,154,134,.9)"; ctx.stroke(); ctx.setLineDash([]);
+    } else if (m.kind === "true") {
+      const u = Math.min(1, age / 420);
+      ctx.arc(b.x, b.y, r + 3 + 8 * (1 - u), 0, 6.2832); ctx.lineWidth = 2.6; ctx.strokeStyle = `rgba(239,235,227,${.4 + .55 * u})`; ctx.stroke();
+    } else if (m.kind === "ring") {
+      ctx.arc(b.x, b.y, r + 2, 0, 6.2832); ctx.lineWidth = 1.2; ctx.strokeStyle = "rgba(239,235,227,.5)"; ctx.stroke();
+    } else if (m.kind === "start" || m.kind === "goal") {
+      ctx.arc(b.x, b.y, r + 3, 0, 6.2832); ctx.lineWidth = 2.2; ctx.strokeStyle = m.kind === "goal" ? "rgba(239,235,227,.95)" : "rgba(239,235,227,.55)"; ctx.stroke();
+      ctx.beginPath(); ctx.arc(b.x, b.y - r - 3, 3.2, 0, 6.2832); ctx.fillStyle = m.kind === "goal" ? "#EFEBE3" : "rgba(239,235,227,.6)"; ctx.fill();
+    }
+  }
+  ctx.restore();
+}
+// ---- a highlighted constellation (js/colorset.js csOnMap): any set of hexes lights up on the honeycomb home ----
+// honeyHighlight(hexes, { title }) dims every bubble but the nearest one to each hex; honeyHighlight(null) clears it.
+// Only the home honeycomb (inside .hm) listens; a pill at the bottom names the set and clears it on tap.
+let HONEY_HL = null, HONEY_HL_REV = 0;
+const HONEY_LIVE = new Set();
+function honeyHighlight(hexes, o = {}) {
+  const hs = (hexes || []).map(h => String(h).toUpperCase()).filter(h => /^#[0-9A-F]{6}$/.test(h));
+  HONEY_HL = hs.length ? { hexes: hs, title: o.title || "", rev: ++HONEY_HL_REV, fresh: true } : null;
+  HONEY_LIVE.forEach(f => { if (f() === false) HONEY_LIVE.delete(f); });
+}
 function honeycomb(host, opts = {}) {
   host.classList.add("hc");
   host.innerHTML = `<div class="hc-box"><div class="hc-vig"></div><canvas class="hc-cv" aria-label="Colors as bubbles: drag to browse, pinch to zoom, tap one to open it"></canvas></div>
@@ -433,6 +492,10 @@ function honeycomb(host, opts = {}) {
   // water's tap ripples, and the panel inset (ctrl.setInset, so a bottom sheet never covers the magnified middle)
   let Plag = [0, 0], lastInput = performance.now(), driftT0 = 0, driftTeff = 0, driftAnchor = [0, 0], touchXY = null, ripples = [];
   let insetBottom = 0, insetCur = 0;
+  // ---- map study hooks (js/mapstudy.js), all inert until ctrl.study() sets them. hit(o, at): a tap answers instead
+  // of gliding/opening (and idle drift stays off); label(o) -> false hides that bubble's name; fog(o) -> false veils
+  // it (the opt-in "your map" view only, never a default); marks: name -> { kind, t0 } rings drawn over the bubbles.
+  const ST = { hit: null, label: null, fog: null, marks: new Map() };
   // per-bubble size memory, so a bubble never snaps to a new size (cells change as neighbors come and go): sizes ease
   let sizeMem = new Map(), sizeT = 0, sizeRaf = 0, glided = null;   // glided: the item a tap last brought to the middle
   const vy = () => Math.max(60, Hh - insetCur);   // the visible height above whatever panel is inset
@@ -638,9 +701,13 @@ function honeycomb(host, opts = {}) {
     if (easing && !sizeRaf) sizeRaf = requestAnimationFrame(() => { sizeRaf = 0; if (!raf) draw(); });
     let pb = null;
     if (pressed) { const i = drawn.findIndex(b => b.it === pressed.it && Math.abs(b.x - pressed.x) < 3 && Math.abs(b.y - pressed.y) < 3); if (i >= 0) { pb = drawn.splice(i, 1)[0]; drawn.push(pb); } }
+    const hlSet = hlItems();
     for (const b of drawn) {
       const it = b.it, d = b.d * (b === pb ? 1 + .12 * pressK : 1), r = d / 2;
       honeyCellPath(ctx, b, shapeAmt, b === pb ? 1 + .12 * pressK : 1); ctx.fillStyle = it.h; ctx.fill();
+      if (ST.fog && !ST.fog(it.o)) { ctx.fillStyle = "rgba(14,13,11,.8)"; ctx.fill(); continue; }
+      if (ST.label && !ST.label(it.o)) { if (d >= 8 && it.L < 26) { ctx.lineWidth = Math.max(1, d * .025); ctx.strokeStyle = "rgba(236,232,223,.24)"; ctx.stroke(); } continue; }
+      if (hlSet) { if (!hlSet.has(it)) { ctx.fillStyle = "rgba(14,13,11,.8)"; ctx.fill(); continue; } ctx.lineWidth = Math.max(1.5, d * .03); ctx.strokeStyle = "rgba(239,235,227,.95)"; ctx.stroke(); }
       if (d < 8) continue;
       if (it.L < 26) { ctx.lineWidth = Math.max(1, d * .025); ctx.strokeStyle = `rgba(236,232,223,${it.L < 14 ? .34 : .24})`; ctx.stroke(); }
       const la = Math.min(1, Math.max(0, (d - zc("labelMin")) / 5));
@@ -659,6 +726,8 @@ function honeycomb(host, opts = {}) {
       }
     }
     ctx.globalAlpha = 1;
+    if (ST.marks.size) honeyStudyMarks(ctx, drawn, ST.marks, t);
+    if (sel) for (const b of drawn) if (b.d >= 10 && sel.isOn(b.it.o)) honeyPicked(ctx, b, shapeAmt, l.a);
     if (ghost) {
       const a = 1 - (t - ghostT0) / 240;
       if (a > 0) { ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = a; ctx.drawImage(ghost, 0, 0); ctx.globalAlpha = 1; } else ghost.on = false;
@@ -690,6 +759,7 @@ function honeycomb(host, opts = {}) {
   function caption() {
     const it = center; if (!it) return;
     cap.querySelector("i").style.setProperty("--c", it.h);
+    if (typeof relState === "function") cap.querySelector("i").dataset.rel = relState(it.c || it.h);   // the relation mark (js/polish.js)
     cap.querySelector("b").textContent = it.n;
     cap.querySelector("small").textContent = honeyWhere(it);
     cap.querySelector("em").textContent = it.h;
@@ -708,11 +778,11 @@ function honeycomb(host, opts = {}) {
     // formula's derivative, which can spike mid-ease), so it's hard-bounded at ~4.2px/s at alive 1, ~8.4px/s at
     // alive 2, measured in tools/_qa/drift_check.js. A globe instead just spins slowly (no wandering off a tilt).
     // Any touch changes `phase` away from "idle"/"drift" immediately, which stops this.
-    if (phase === "idle" && ALIVE && !down && !pinch && (t - lastInput) > 4000) { phase = "drift"; driftT0 = t; driftTeff = 0; driftAnchor = P.slice(); }
+    if (phase === "idle" && ALIVE && !ST.hit && !down && !pinch && (t - lastInput) > 4000) { phase = "drift"; driftT0 = t; driftTeff = 0; driftAnchor = P.slice(); }
     if (zAnim) {
       const nz = Math.abs(zAnim.to - Z) < .003 ? zAnim.to : Z + (zAnim.to - Z) * Math.min(1, dt * (RM ? 60 : 11));
       zoomAround(nz, zAnim.sx, zAnim.sy);
-      if (nz === zAnim.to) { zAnim = null; if (opts.onZoom) opts.onZoom(Z); if (!down && !pinch && !lay.globe) snap(); } else more = true;
+      if (nz === zAnim.to) { zAnim = null; if (opts.onZoom) opts.onZoom(Z); if (!down && !pinch && !lay.globe && phase !== "spring") snap(); } else more = true;
     }
     if (phase === "spring") {
       const s = spring, tau = (t - s.t0) / 1000, e = Math.exp(-s.w * tau);
@@ -751,6 +821,7 @@ function honeycomb(host, opts = {}) {
     }
     const pt = pressed ? 1 : 0;
     if (Math.abs(pressK - pt) > .01) { pressK += (pt - pressK) * Math.min(1, dt * 18); more = true; } else pressK = pt;
+    if (ST.marks.size && honeyStudyAnimating(ST.marks, t)) more = true;
     if (bloom < 1) { bloom = Math.min(1, (t - bloomT0) / 700); more = true; }
     if (ghost) more = true;
     draw(t);
@@ -798,6 +869,9 @@ function honeycomb(host, opts = {}) {
 
   // ---- input: drag with momentum, pinch or ctrl-wheel to zoom, double-tap to zoom in (again to reset) ----
   let down = null, pinch = null, lastTap = null, tapTimer = 0;
+  // select mode (honeySelectMode below): a tap toggles a bubble; hold still ~260ms, then drag, to sweep a run of them.
+  let sel = null, paint = null, holdT = 0;
+  const selSet = (it, on) => { if (!sel || sel.isOn(it.o) === on) return; sel.onToggle(it.o, on); buzz(4); draw(); };
   const ptrs = new Map();
   const hit = (x, y) => { let best = null, bd = Infinity; for (const b of drawn) { const d = Math.hypot(b.x - x, b.y - y); if (d < b.d / 2 + 4 && d / b.d < bd) { bd = d / b.d; best = b; } } return best; };
   const local = e => { const r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
@@ -812,12 +886,17 @@ function honeycomb(host, opts = {}) {
     if (ptrs.size === 2) {
       const [a, b] = [...ptrs.values()], mid = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2], o = lay.globe ? [0, 0] : offAt(mid[0], mid[1], lens(0));
       pinch = { d0: Math.max(10, Math.hypot(a[0] - b[0], a[1] - b[1])), Z0: Z, W0: [P[0] + o[0], P[1] + o[1]], t0: performance.now(), moved: false };
-      pressed = null; down = null; clearTimeout(tapTimer); kick(); return;
+      pressed = null; down = null; paint = null; clearTimeout(holdT); clearTimeout(tapTimer); kick(); return;
     }
     if (ptrs.size > 2 || pinch) return;
     const b = hit(x, y);
     pressed = b ? { it: b.it, x: b.x, y: b.y, b } : null;
     down = { x, y, P0: P.slice(), moved: false, hist: [[performance.now(), P[0], P[1]]] };
+    clearTimeout(holdT);
+    if (sel && pressed) holdT = setTimeout(() => {
+      if (!sel || !down || down.moved || !pressed) return;
+      paint = { on: !sel.isOn(pressed.it.o) }; down.painted = true; buzz(8); selSet(pressed.it, paint.on);
+    }, 260);
     kick();
   });
   cv.addEventListener("pointermove", e => {
@@ -831,8 +910,9 @@ function honeycomb(host, opts = {}) {
       draw(); return;
     }
     if (!down) return;
+    if (paint) { const pb = hit(x, y); if (pb) selSet(pb.it, paint.on); return; }
     const dx = x - down.x, dy = y - down.y;
-    if (!down.moved && Math.hypot(dx, dy) > 10) { down.moved = true; pressed = null; glided = null; kick(); }
+    if (!down.moved && Math.hypot(dx, dy) > 10) { down.moved = true; pressed = null; glided = null; clearTimeout(holdT); kick(); }
     if (!down.moved) return;
     const now = performance.now();
     if (lay.globe) { P = [down.P0[0] + dx / GLOBE_ROT_K, clamp(down.P0[1] - dy / GLOBE_ROT_K, -1.5, 1.5)]; }
@@ -860,9 +940,16 @@ function honeycomb(host, opts = {}) {
       return lay.globe ? void 0 : snap();
     }
     if (!down) return;
-    const d = down; down = null; phase = "idle";
+    const d = down; down = null; phase = "idle"; clearTimeout(holdT);
+    if (d.painted || paint) { paint = null; pressed = null; kick(); return; }
     if (!d.moved) {
       const now = performance.now(), p = pressed, held = now - d.hist[0][0];
+      if (ST.hit) {   // map study: a tap is an answer, at once (no double-tap wait, no glide, no peek)
+        pressed = null; kick();
+        if (p && e.type === "pointerup") { if (!RM && !SHOOT) ripples.push({ x: p.x, y: p.y, t0: now, sigma: Math.max(22, p.b.d * .85) }); ST.hit(p.it.o, { x: p.x, y: p.y, d: p.b.d }); }
+        return;
+      }
+      if (sel && p && e.type === "pointerup") { pressed = null; selSet(p.it, !sel.isOn(p.it.o)); kick(); return; }
       if (p && opts.onPeek && held >= 480) { pressed = null; kick(); return opts.onPeek(p.it.o); }
       if (lastTap && now - lastTap.t < 300 && Math.hypot(d.x - lastTap.x, d.y - lastTap.y) < 36) {
         clearTimeout(tapTimer); lastTap = null; pressed = null; kick();
@@ -1014,7 +1101,31 @@ function honeycomb(host, opts = {}) {
   });
   resize();
   if (opts.style) { const p = HONEY_STYLES[styleId]; if (p && p.initialZoom && !opts.zoom) Z = p.initialZoom((opts.items && opts.items.length) || 101); }
-  setItems(opts.items, opts.focus || (HONEY_PAN && { n: HONEY_PAN.name }), "restore");
+  // the highlighted constellation (honeyHighlight above): the nearest bubble to each hex, worked out once per set of items
+  const hlOn = !!(host.closest && host.closest(".hm"));
+  let hlMemo = null;
+  function hlItems() {
+    if (!hlOn || !HONEY_HL || !lay) { if (hlPill) { hlPill.remove(); hlPill = null; } return null; }
+    if (hlMemo && hlMemo.lay === lay && hlMemo.rev === HONEY_HL.rev) return hlMemo.set;
+    const its = [...new Set(lay.pts.map(q => q.it).filter(Boolean))], set = new Set();
+    HONEY_HL.hexes.forEach(h => { const L = lab(h); let best = null, bd = Infinity; for (const it of its) { const dd = (it.lab[0] - L[0]) ** 2 + (it.lab[1] - L[1]) ** 2 + (it.lab[2] - L[2]) ** 2; if (dd < bd) { bd = dd; best = it; } } if (best) set.add(best); });
+    hlMemo = { lay, rev: HONEY_HL.rev, set };
+    hlShowPill();
+    return set;
+  }
+  let hlPill = null;
+  function hlShowPill() {
+    if (hlPill || !host.parentElement) return;
+    hlPill = document.createElement("button"); hlPill.className = "cs-hl-pill"; hlPill.setAttribute("aria-label", "Show every color again");
+    hlPill.innerHTML = `<span>${esc(HONEY_HL.title || "Your set")}</span>${ICON.x}`;
+    hlPill.onclick = e => { e.stopPropagation(); buzz(4); honeyHighlight(null); };
+    host.parentElement.appendChild(hlPill);
+  }
+  if (hlOn) HONEY_LIVE.add(() => { if (dead) return false; hlMemo = null; draw(); return true; });
+  let hlFocus = null;
+  if (hlOn && HONEY_HL && HONEY_HL.fresh) { HONEY_HL.fresh = false; hlFocus = { h: HONEY_HL.hexes[0] }; }
+  if (hlFocus) setItems(opts.items, opts.focus || hlFocus, "");
+  else setItems(opts.items, opts.focus || (HONEY_PAN && { n: HONEY_PAN.name }), "restore");
   // ---- the Tweak panel's API: live overrides on top of the active preset, saved by the caller (S.hm.tweak) ----
   function applyTweak(partial) {
     liveTweak = { ...(liveTweak || {}), ...partial };
@@ -1043,10 +1154,44 @@ function honeycomb(host, opts = {}) {
       if (p && p.initialZoom) Z = p.initialZoom(lay ? lay.raw.length : 101);
       setItems(lay && lay.raw, center && center.o, "soft");
     },
+    // Select mode (L23, js/favs.js "Pick favorites"): o = { isOn(item) -> bool, onToggle(item, on) } with item = the
+    // original { n, h, c?, lib? }. Off (null/false) clears it. Panning and pinch-zoom keep working; a tap toggles a
+    // bubble instead of opening it; hold still, then drag, to sweep a run (it turns ON, or OFF if the first bubble was on).
+    selectMode(on, o) { sel = on && o ? o : null; paint = null; clearTimeout(holdT); draw(); },
+    honeySelectMode(on, onToggle, isOn) { return this.selectMode(on, { onToggle, isOn }); },
+    redraw: () => draw(),
     getStyle: () => styleId,
     getCfg: () => ({ style: styleId, tweak: liveTweak, resolved: cfg }),
     getTweak: () => liveTweak,
     current: () => center && center.o,
+    // ---- map study (js/mapstudy.js) ----
+    study(o = {}) {
+      ["hit", "label", "fog"].forEach(k => { if (k in o) ST[k] = typeof o[k] === "function" ? o[k] : null; });
+      if ("marks" in o) { const t0 = performance.now(); ST.marks = new Map((o.marks || []).map(m => [m.n, { kind: m.kind, t0: m.t0 || t0 }])); }
+      draw(); kick();
+    },
+    // glide (the same spring a tap uses) so the nearest copy of o sits in the middle; z optionally eases the zoom too.
+    // o may also be a lattice point { x, y } (from studyPoints), e.g. the middle of a small cluster.
+    studyFlyTo(o, z) {
+      if (!lay || lay.globe || !o) return false;
+      let best = o.n == null && isFinite(o.x) && isFinite(o.y) ? [o.x, o.y] : null, bd = Infinity;
+      const R = lay.finite ? 1e9 : Math.max(2, lay.per * 1.5);
+      if (!best) for (const p of lay.pts) if (p.it.n === o.n) copies(p, P, R, (ex, ey) => { const dd = ex * ex + ey * ey; if (dd < bd) { bd = dd; best = [P[0] + ex, P[1] + ey]; } });
+      if (!best) return false;
+      if (z) zAnim = { to: clamp(z, ZMIN, ZMAX), sx: W / 2, sy: vcy() };
+      const A = [P[0] - best[0], P[1] - best[1]], w = RM ? 40 : 9;
+      spring = { t0: performance.now(), X: best, A, B: [w * A[0], w * A[1]], w }; phase = "spring"; glided = null; kick();
+      return true;
+    },
+    // ease the zoom about the middle without cancelling a glide in flight (ctrl.zoom would drop the spring)
+    studyZoom(z) { if (!lay || lay.globe) return; zAnim = { to: clamp(z, ZMIN, ZMAX), sx: W / 2, sy: vcy() }; kick(); },
+    // the lattice itself, for neighbors and paths: every point (an item can sit at two), and how the plane repeats
+    studyPoints() {
+      if (!lay || lay.globe) return null;
+      return { pts: lay.pts.map(p => ({ o: p.it.o, n: p.it.n, x: p.x, y: p.y })), finite: !!lay.finite, A: lay.A || null, B: lay.B || null };
+    },
+    // where a color sits on screen right now (js/polish.js flyToMap): the biggest drawn bubble with that hex, in viewport px
+    locate(h) { const H = String(h).toUpperCase(), b = drawn.filter(x => String(x.it.h).toUpperCase() === H).sort((x, y) => y.d - x.d)[0]; if (!b) return null; const r = cv.parentNode.getBoundingClientRect(); return { x: r.left + b.x, y: r.top + b.y, d: b.d }; },
     destroy,
   };
 }

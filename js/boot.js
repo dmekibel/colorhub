@@ -5,6 +5,7 @@
 // Screenshot mode for design review: index.html#shot=<screen> renders one screen with sample progress
 // (in memory only; nothing is saved). Used by tools/shots.sh. It waits for the whole wiki first.
 const SHOT = location.hash.startsWith("#shot=") ? decodeURIComponent(location.hash.slice(6)) : null;
+routeWrapAll();   // js/router.js: wrap the screens of scripts that loaded after it (art wiki, hubs, looks, fashion)
 if (SHOT) loadWiki().then(() => shot(SHOT));
 else {
   ROUTE_REPLACE = true;   // the first screen takes over the page's own history entry
@@ -68,6 +69,7 @@ function shot(name) {
       }); }
     // the Learn it mini-lesson (js/learnit.js): learnit:<meet|recall|tell|done>
     case "learnit": return hmLearnitShot(arg || "meet");
+    case "lx": return lxShot(arg || "room");   // js/learnmore.js: lx:<room|unit|meet|deck|learnit|learnitpage|edge>
     case "gym": return go("gym");
     case "studio": return go("studio");
     // a Studio photo palette, for design review (ROADMAP §17 job #1 screenshots): a synthetic canvas run
@@ -123,6 +125,8 @@ function shot(name) {
         S.lens = "world"; go("explore");
       }); }
     case "taste": return tasteShot(arg);
+    case "favs": return favShot(arg);   // js/favs.js: favs:<shelf|empty|pick|taste|rank:<method>>
+    case "look": case "looks": case "lookyours": case "lookmatch": return lkShot(screen, arg, name.split(":")[2]);   // js/looks.js
     case "poem": return poemPage(name.slice(5), {});   // poem:<poem id>
     case "poemcolor": { const n = g().nodes.get("c:" + (arg || "Crimson")); XSTACK = ["p:" + n.id]; colorPage(n); const x = document.querySelector(".c-poems"), h = document.querySelector(".c-hero"); if (x && h) h.after(x); return; }   // "In poems" moved up so one screen shows it
     case "potd": return show(`<div class="sec-head"><b>Today</b></div><div class="today">${poemOfTheDayCard()}</div>`, "", "learn");
@@ -143,7 +147,7 @@ function shot(name) {
       return colorExplorer({ focus: dailyColor(), pick: c => closeup(colorNode(c)), shot: ["wheel", "tuned"].includes(act) ? "" : act });
     }
     case "gallery": return galleryShot(name.slice(8));   // gallery, gallery:scroll=600, gallery:color=Cobalt, gallery:adjust=Cobalt, gallery:page=12, gallery:cpage=Cobalt
-    case "world": case "fashiondecade": case "fashioncoty": case "fashionhouse": case "fashionhistory":
+    case "world": case "fashiondecade": case "fashioncoty": case "fashionhouse": case "fashionhistory": case "garments": case "garment": case "fxcolor":
       return typeof worldShot === "function" && worldShot(screen, arg);   // js/world.js
     // the color link sheet (ROADMAP §13, js/swatch.js) opened over a real screen: swsheet:gallery|studio|fashion
     case "swsheet": {

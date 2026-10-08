@@ -48,7 +48,7 @@ function pickMigrate(s) {
 const OWN_LINE = "Yours = you picked or named it right a day or more later.";
 function ownCounts() {
   const n = { mine: 0, self: 0, placed: 0, learning: 0 };
-  ALL.forEach(c => { const k = ownState(S.cards[c.id]); if (k) n[k]++; });
+  (typeof cardsAll === "function" ? cardsAll() : ALL).forEach(c => { const k = ownState(S.cards[c.id]); if (k) n[k]++; });
   return n;
 }
 // One line for the collection: "6 to confirm · 42 placed · 8 learning"
@@ -65,17 +65,26 @@ function ownFoot() {
 // ======================================================================
 let PICK_POOL_ = null;
 const PICK_NEAR = new Map();
-const pickPool = () => PICK_POOL_ || (PICK_POOL_ = [...BASICS, ...ALL]);
+// the options come from all ~1,000 core names once they've loaded (js/learnmore.js lxLookPool), else the first units
+function pickPool() {
+  const p = typeof lxLookPool === "function" ? lxLookPool() : null;
+  if (p && p !== PICK_POOL_ && p.length > BASICS.length + ALL.length) { PICK_POOL_ = p; PICK_NEAR.clear(); }
+  return PICK_POOL_ || (PICK_POOL_ = [...BASICS, ...ALL]);
+}
 function pickNear(c, pool) {
-  const key = c.n + "|" + c.h;
+  const key = c.n + "|" + c.h, P = pool || pickPool();   // pickPool() first: a newly loaded name list clears the cache
   if (!pool && PICK_NEAR.has(key)) return PICK_NEAR.get(key);
-  const near = (pool || pickPool()).filter(x => x.n.toLowerCase() !== c.n.toLowerCase() && x.h.toUpperCase() !== c.h.toUpperCase())
+  const near = P.filter(x => x.n.toLowerCase() !== c.n.toLowerCase() && x.h.toUpperCase() !== c.h.toUpperCase())
     .map(x => ({ x, d: de2000(c.h, x.h) })).sort((a, b) => a.d - b.d);
   const out = [];
-  for (const o of near) {
-    if (o.d < PICK_GAP) continue;
-    if (out.every(p => de2000(p.h, o.x.h) >= PICK_GAP)) out.push(o.x);
-    if (out.length === 3) break;
+  // same family first (three blues, never a blue and a yellow: js/learnmore.js lxSameFam), then any near name
+  const fam = typeof lxSameFam === "function" ? x => lxSameFam(c, x) : () => true;
+  for (const strict of [true, false]) {
+    for (const o of near) {
+      if (out.length === 3) break;
+      if (o.d < PICK_GAP || out.includes(o.x) || (strict && !fam(o.x))) continue;
+      if (out.every(p => de2000(p.h, o.x.h) >= PICK_GAP)) out.push(o.x);
+    }
   }
   if (!pool) PICK_NEAR.set(key, out);
   return out;
@@ -160,6 +169,7 @@ function pickBoard(card, c, o = {}) {
       if (!x.ok) card.querySelector(".pi-line").textContent = pickWhy(c, x.c);
       buzz(x.ok ? 12 : [10, 40, 10]);
     } else buzz(6);
+    if (typeof learnerLog === "function") { learnerLog({ type: "answer", color: c, ok: x.ok, by: "pick", src: "pick" }); if (!x.ok) learnerLog({ type: "confuse", color: c, b: x.c, src: "pick" }); }   // js/learner.js
     o.onPick && o.onPick(x.ok, x);
   };
   card.querySelectorAll(".pi-sw").forEach(b => b.onclick = e => { e.stopPropagation(); choose(+b.dataset.i); });
@@ -269,7 +279,7 @@ const expRec = id => S.exp && S.exp.units && S.exp.units[id];
 // The unit as it is taught: without its held-back colors while the experiment runs. Called by meet().
 function expUnit(u) {
   let e = expRec(u.id);
-  if (!e && expOn() && !S.done[u.id] && u.colors.length >= EXP_HOLD * 2) {
+  if (!e && expOn() && !u.gen && !S.done[u.id] && u.colors.length >= EXP_HOLD * 2) {
     e = S.exp.units[u.id] = { held: shuffle(u.colors).slice(0, EXP_HOLD).map(c => c.id), tests: {} };
     save();
   }

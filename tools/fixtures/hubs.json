@@ -1,0 +1,24 @@
+{
+  "hubs": [
+    {
+      "id": "pigments-that-changed-painting",
+      "title": "Pigments that changed painting",
+      "dek": "Every so often a new material arrives and painters' skies, skins or shadows change. These are the colors behind those moments.",
+      "intro": "A pigment is a physical thing: ground rock, burnt bone, a coal-tar dye. When a new one becomes cheap enough, you can often see the date in the paintings.\n\nThese collections are lists drawn from our color graph, and each color opens its own page.",
+      "members": ["cobalt", "cerulean", "azure", "navy", "mauve", "lilac", "lavender", "indigo", "teal", "turquoise", { "slug": "prussian-blue", "note": "The first modern synthetic pigment" }]
+    },
+    {
+      "id": "purples-and-lilacs",
+      "title": "Purples, mauves and lilacs",
+      "dek": "Soft purples that people treat as synonyms.",
+      "members": ["mauve", "lilac", "lavender", "violet", "indigo"]
+    }
+  ],
+  "which": {
+    "blue": {
+      "title": "Blue",
+      "dek": "Several different blues are called this, depending on who is asking.",
+      "senses": [{ "slug": "cobalt", "gloss": "the pigment color" }, { "slug": "navy", "gloss": "the uniform color" }, { "slug": "azure", "gloss": "the bright sky color" }, { "slug": "royal-blue", "gloss": "the saturated, slightly violet blue" }]
+    }
+  }
+}

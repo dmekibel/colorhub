@@ -89,7 +89,7 @@ UNITS.forEach(u => u.colors.forEach(c => { c.unit = u; }));
 const ALL = UNITS.flatMap(u => u.colors);
 const BASICS = D.basics.map(([n, h]) => ({ n, h, id: "basic:" + n, basic: true }));
 const BYNAME = new Map([...BASICS, ...ALL].map(c => [c.n.toLowerCase(), c]));
-const neighbor = c => (c.vs && BYNAME.get(c.vs.toLowerCase())) || null;
+const neighbor = c => c.vsC || (c.vs && BYNAME.get(c.vs.toLowerCase())) || null;   // vsC: a color past the first units (js/learnmore.js)
 const FIRST_T3 = UNITS.findIndex(u => u.tier === 3);
 
 // ---------- days (a new day starts at 4am, so a late session still counts as tonight) ----------
@@ -107,7 +107,7 @@ const fresh = () => ({ v: 1, placed: null, start: 0, cards: {}, done: {}, tab: "
 // Progress is never thrown away. An older save is migrated step by step (bump STATE_V and add a step when the
 // shape changes); a save from a newer version is kept as it is; unknown keys always survive. A save that
 // can't be read is copied aside (KEY + "-unreadable") before anything is written over it.
-const STATE_V = 1;
+const STATE_V = 3;   // 2: S.learn, the Learner Model's event log (js/learner.js) · 3: cards for any color (js/learnmore.js)
 function migrateState(d) {
   if (!d || typeof d !== "object" || Array.isArray(d)) return null;
   const s = Object.assign(fresh(), d);
@@ -116,8 +116,21 @@ function migrateState(d) {
   s.gym.skills = s.gym.skills || {}; s.gym.workouts = s.gym.workouts || {};
   // a saved palette from before it had a stable id (for its own address and the one-step Back chain): give it one
   if (Array.isArray(s.palettes)) s.palettes.forEach(p => { if (p && !p.id) p.id = "pl" + Date.now().toString(36) + Math.random().toString(36).slice(2, 7); });
+  // L23 favorites: S.favs { "#HEX": {n, at} } and S.pref { v, ctx, cmp } (js/favs.js); repaired here, never wiped
+  if (!s.favs || typeof s.favs !== "object" || Array.isArray(s.favs)) s.favs = {};
+  if (!s.pref || typeof s.pref !== "object" || Array.isArray(s.pref)) s.pref = { v: 1, ctx: {}, cmp: {} };
   if (!(s.v >= 1)) s.v = 1;   // unversioned saves had the v1 shape
-  // future steps go here: if (s.v < 2) { …; s.v = 2; }
+  // v2 (js/learner.js): an empty Learner Model log; learner.js folds older progress into it once (S.learn.bf).
+  // A learn field that isn't an object is kept aside, never dropped.
+  if (s.v < 2) { if (s.learn != null && (typeof s.learn !== "object" || Array.isArray(s.learn))) { s.learnUnreadable = s.learn; delete s.learn; } if (!s.learn) s.learn = { v: 1, ev: [], agg: { c: {}, p: {} }, sets: {}, bf: 0 }; s.v = 2; }
+  // v3 (js/learnmore.js): a card can be any learnable color ("core:<slug>", "lib:<slug>") beside the unit ids, and
+  // carries its own name and hex so it resolves before the name lists load. Old unit cards are kept and backfilled.
+  if (s.v < 3) {
+    const byId = new Map(ALL.map(c => [c.id, c]));
+    Object.entries(s.cards).forEach(([id, st]) => { const c = byId.get(id); if (c && st && typeof st === "object" && !st.n) { st.n = c.n; st.h = c.h; } });
+    s.v = 3;
+  }
+  // future steps go here: if (s.v < 4) { …; s.v = 4; }
   return s;
 }
 let S;
@@ -157,7 +170,7 @@ function wireKeep(el) {
 const INTERVALS = [1, 3, 7, 16, 35, 90];
 function learnUnit(u) {
   const t = today();
-  u.colors.forEach(c => { if (!S.cards[c.id]) S.cards[c.id] = { b: 0, due: addDays(t, 1), since: t, own: false }; });
+  u.colors.forEach(c => { if (!S.cards[c.id]) S.cards[c.id] = { b: 0, due: addDays(t, 1), since: t, own: false, n: c.n, h: c.h }; });
   S.done[u.id] = t;
   save();
 }
@@ -172,12 +185,15 @@ function schedule(c, ok, by = "swipe") {
   st.last = t;
   save();
 }
-const dueList = () => { const t = today(); return ALL.filter(c => S.cards[c.id] && S.cards[c.id].due <= t).sort((a, b) => S.cards[a.id].due.localeCompare(S.cards[b.id].due)); };
+// every card counts, the first units' and any other color's (cardColors, js/learnmore.js)
+const cardsAll = () => typeof cardColors === "function" ? cardColors() : ALL.filter(c => S.cards[c.id]);
+const dueList = () => { const t = today(); return cardsAll().filter(c => S.cards[c.id] && S.cards[c.id].due <= t).sort((a, b) => S.cards[a.id].due.localeCompare(S.cards[b.id].due)); };
 // "Yours" = picked or named right (an objective check), a day or more after learning. That is the only progress number.
 // Self-graded swipes don't count (isMine in pickit.js).
-const ownedCount = () => ALL.filter(c => isMine(S.cards[c.id])).length;
-const nextUnit = () => UNITS.find(u => u.i >= S.start && !S.done[u.id]) || null;
-const unitLabel = u => `Unit ${u.i + 1} · ${D.tiers[u.tier].short}`;
+const ownedCount = () => cardsAll().filter(c => isMine(S.cards[c.id])).length;
+// past the units in data/colors.js the path goes on through generated units (js/learnmore.js lxNextUnit)
+const nextUnit = () => typeof lxNextUnit === "function" ? lxNextUnit() : UNITS.find(u => u.i >= S.start && !S.done[u.id]) || null;
+const unitLabel = u => u.label || `Unit ${u.i + 1} · ${D.tiers[u.tier].short}`;
 
 // ---------- icons ----------
 const sv = (d, s = 22, w = 2) => `<svg viewBox="0 0 24 24" width="${s}" height="${s}" fill="none" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
@@ -219,7 +235,8 @@ let cleanup = [];   // functions to run when the screen changes (stop animation 
 // Everything is skipped under Reduce Motion.
 let PENDING_MORPH = null, LAST_TAB = null;
 // Tapping any of these opens a color; the swatch inside is the chip that grows. [data-morph-src] marks one by hand.
-const MORPH_TRIGGER = "[data-morph-src], .pin-color, .pin-pair, .kin, .pchip, .tday[data-daily]";
+// [data-swatch] too (lane L12): every tappable swatch in the app grows into the color page it opens (js/swatch.js).
+const MORPH_TRIGGER = "[data-morph-src], [data-swatch], .pin-color, .pin-pair, .kin, .pchip, .tday[data-daily]";
 const MORPH_CHIP = "[data-morph-src], .pc, .pair2>span, .kin>i, .pchip>i";
 // The swatch a color page opens on: a hand-marked [data-morph], or a known hero.
 const MORPH_TARGET = "[data-morph], .z-color, .c-hero, .d-swatch";
@@ -353,7 +370,13 @@ const HOME_GLYPH = sv('<path d="M12 3l7 4v10l-7 4-7-4V7z"/>', 24, 1.6);
 // survive a screen swap, since #app is fully re-rendered each time — see show() above)
 // spread across the strip (each bar needs its own left; without it all 16 stacked into one bright slash at the left edge)
 const ROOM_PEEK_BARS = Array.from({ length: 16 }, (_, i) => `<i style="left:${(i * 6.4 - 2).toFixed(1)}%;background:${lchHex(50 + (i % 3) * 9, 46, (i * 23) % 360)}"></i>`).join("");
+// The Room header (DESIGN-SYSTEM §11): the room's name in title-1 on the left, one note on the right. Rooms that
+// still render the old brand row (tabHead() + <h1 class="tab-title">) are converted here, so Train and Studio get
+// the new header without their own JS changing. The notes say what each room does to your map (GENIUS-PANEL-1).
+const ROOM_NOTES = { gym: "Sharpen your eye", studio: "Make your own", explore: "The world in color" };
+const LEGACY_HEAD = /<header class="bar"><button class="brand" data-hm-brand[\s\S]*?<\/header>\s*<h1 class="tab-title">([\s\S]*?)<\/h1>/;
 function roomChrome(inner, tab) {
+  inner = inner.replace(LEGACY_HEAD, (_, t) => `<header class="room-head rh-auto"><h1 class="title-1">${t}</h1>${ROOM_NOTES[tab] ? `<span class="note">${ROOM_NOTES[tab]}</span>` : ""}</header>`);
   return `<div class="room-floor-peek" data-floor-peek>${ROOM_PEEK_BARS}</div><div class="room-sheet" data-room="${tab}">${inner}</div><button class="corner l" data-rooms-corner aria-label="Rooms">${ROOMS_GLYPH}</button>`;
 }
 let STEM_OPEN = false;
@@ -396,6 +419,7 @@ function toggleStem(cornerEl) {
   const items = (inRoom ? [["home", "Home"]] : []).concat(ROOMS_LIST);
   const stem = document.createElement("div");
   stem.className = "rooms-stem";
+  stem.style.setProperty("--n", items.length);   // short screens space the bubbles to fit (css/polish.css)
   stem.innerHTML = items.map(([id, label], i) => `
     <button class="rm-bubble" data-room="${id}" style="--i:${i}">
       ${id === "home" ? `<span class="rm-art rm-art-home">${HOME_GLYPH}</span>` : roomsBubbleArt(id)}

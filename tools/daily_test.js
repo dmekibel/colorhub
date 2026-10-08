@@ -43,15 +43,17 @@ const day = n => run(`addDays("2026-10-07", ${n})`);
 // ================================================================ Name today's color
 // determinism and coverage: the same date gives the same word; a long run never repeats before the list is used up
 {
-  const seen = new Map();
-  for (let i = 0; i < 1000; i++) {
+  const seen = new Map(), N = run("dnOrder(CORE_NAMES).length");
+  ok(N >= 600, `the word pool is the real words among the core names (${N})`);
+  for (let i = 0; i < N; i++) {
     const k = day(i);
-    const a = run(`dnTarget("${k}").n`), b = run(`dnTarget("${k}").n`);
+    const a = run(`dnTarget("${k}").n`), b = run(`dnTarget("${k}").n`), e = CORE.find(x => x.n === a);
     ok(a === b, `dnTarget ${k} is deterministic`);
     ok(!seen.has(a), `day ${i + 1} (${a}) repeats day ${seen.get(a)}`);
+    ok(e && !e.compound && !/\bugly\b/i.test(a), `day ${i + 1} (${a}) is a real word, not a compound`);
     seen.set(a, i + 1);
   }
-  ok(seen.size === CORE.length, `1,000 days cover all ${CORE.length} core names (got ${seen.size})`);
+  ok(seen.size === N, `${N} days cover the whole pool (got ${seen.size})`);
   // every target can be named (the win is the same core name) and has a page (a slug for #/name/<slug> or a color page)
   const slugs = new Set();
   for (const e of CORE) {
@@ -99,12 +101,13 @@ const day = n => run(`addDays("2026-10-07", ${n})`);
       const zone = h => { h = ((h % 360) + 360) % 360; return Z.find(z => h < z[0])[1]; };
       const hg = Math.atan2(bg, ag) * 180 / Math.PI, ht = Math.atan2(bt, at) * 180 / Math.PI;
       let dh = ht - hg; if (dh > 180) dh -= 360; if (dh < -180) dh += 360;
-      if (Math.abs(dh) > 60) ok(a.H.word === zone(ht), `${g}->${t}: "${a.H.word}" is where today's hue sits (${zone(ht)})`);
+      if (Math.abs(dh) > 60 && zone(ht) !== zone(hg)) ok(a.H.word === zone(ht), `${g}->${t}: "${a.H.word}" is where today's hue sits (${zone(ht)})`);
       else {
-        // walking from the guess toward today's hue, the word's zone is reached within the first 30 degrees
-        const sg = Math.sign(dh) || 1, seen = new Set();
-        for (let d = 0; d <= Math.min(30, Math.abs(dh) + 5); d++) seen.add(zone(hg + sg * d));
-        ok(seen.has(a.H.word), `${g}->${t}: "${a.H.word}" lies the way the hue turns`);
+        // walking from the guess the way the hue turns, the word is the first other zone you reach (never the
+        // zone you're leaving: a blue turning toward green is "greener", not "bluer")
+        const sg = Math.sign(dh) || 1; let first = null;
+        for (let d = 1; d < 360 && !first; d++) if (zone(hg + sg * d) !== zone(hg)) first = zone(hg + sg * d);
+        ok(a.H.word === first, `${g}->${t}: "${a.H.word}" is the way the hue turns (${first})`);
       }
     }
     const words = ["L", "H", "C"].map(x => run(`dnCell(dnAxes(__g, __t).${x}, "${x}")`)).join(" ") + " " + run(`dnSentence(dnAxes(__g, __t), "Cerulean")`);

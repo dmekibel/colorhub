@@ -275,7 +275,7 @@ function dpPlay(e, k) {
         b.classList.add(ok ? "right" : "wrong");
         if (!ok) foot.querySelector(`[data-o="${focal.opts.findIndex(x => x.n === focal.ans)}"]`).classList.add("right");
         st.focal = { n: focal.ans, h: (CORE_NAMES || []).find(x => x.n === focal.ans)?.h || focal.hex };
-        if (!ok) { try { if (typeof learnerLog === "function") learnerLog({ k: "confuse", c: focal.ans, with: o.n, surf: "painting" }); } catch (err) {} }
+        try { if (typeof learnerLog === "function") { learnerLog({ type: "answer", c: focal.ans, ok, by: "pick", src: "painting" }); if (!ok) learnerLog({ type: "confuse", c: focal.ans, b: o.n, src: "painting" }); } } catch (err) {}
         const exact = nm.mod ? ` (the nearest name is ${esc(nm.n.toLowerCase())})` : "";
         later(() => { foot.dataset.done = ""; answer(ok, o.n, ok ? `Yes: ${nameLink(focal.hex)}${exact}.` : `It's ${nameLink(focal.hex)}${exact}. ${esc(o.n)} would be ${esc(lookDiff({ h: focal.hex }, o))}.`); }, 450);
       });
@@ -355,7 +355,7 @@ function dpFinish(e, k) {
   const st = S.dpNow || { hits: [] };
   chState()[k] = { hits: st.hits.slice(0, 5).map(Boolean), p: e.id, focal: st.focal || null, v: 2 };
   delete S.dpNow; save();
-  try { if (typeof learnerLog === "function") learnerLog({ k: "seen", c: e.id, surf: "painting-of-the-day" }); } catch (err) {}
+  try { if (typeof learnerLog === "function") learnerLog({ type: "seen", src: "painting-day", set: { kind: "painting", id: e.id, title: e.t, colors: e.pool.slice(0, 6).map(p => ({ h: p[0], share: p[1] })) } }); } catch (err) {}
   challengeDone(true, e);
 }
 // the finish (also what a played day reopens to): the painting whole, your grid in its own colors, one finding

@@ -1,5 +1,5 @@
 "use strict";
-// Name today's color (#/daily): one color a day, the same for everyone, drawn from all ~1,000 core names
+// Name today's color (#/daily): one color a day, the same for everyone, drawn from the real words among the ~1,000 core names
 // (data/core-names.json) in a seeded order, so no word repeats for years. You type names, never pick from a list:
 // recall before reveal. Every guess paints its own swatch and says which way today's color lies from it, on the
 // three axes painters use (Godlove's split): lighter or darker, which way the hue turns (bluer, greener, redder,
@@ -17,10 +17,13 @@ const DN_GREY_C = 8;                     // both colors this grey: hue has no me
 // FNV-1a, for the day's seed (explore.js has its own `hash`; this file keeps its own so it can be tested alone)
 const dlHash = s => { let h = 2166136261; for (const ch of String(s)) { h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; };
 let DN_ORDER = null;
+const DN_SKIP = /\b(ugly|windows|puke|vomit|barf|poop|light light|dark dark)\b/i;
 // every core name, in one fixed seeded order (rank first, so the order never depends on how the JSON is sorted)
 function dnOrder(list) {
   if (DN_ORDER && DN_ORDER.src === list) return DN_ORDER.o;
-  const o = list.slice().sort((a, b) => (a.rank == null ? 1e9 : a.rank) - (b.rank == null ? 1e9 : b.rank) || a.n.localeCompare(b.n));
+  // real words only: a compound (a variation like "pale olive grey", taught under its base word) or a joke
+  // survey name ("ugly blue") never becomes the word of the day
+  const o = list.filter(e => !e.compound && !DN_SKIP.test(e.n)).sort((a, b) => (a.rank == null ? 1e9 : a.rank) - (b.rank == null ? 1e9 : b.rank) || a.n.localeCompare(b.n));
   const rnd = seededRnd(dlHash("name-today-v1"));
   for (let i = o.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [o[i], o[j]] = [o[j], o[i]]; }
   DN_ORDER = { src: list, o };
@@ -33,6 +36,7 @@ function dnTarget(k = today(), list = CORE_NAMES) {
   return o[((n % o.length) + o.length) % o.length];
 }
 const dnZone = h => { h = (h + 360) % 360; return h < 55 || h >= 345 ? "redder" : h < 130 ? "yellower" : h < 190 ? "greener" : h < 280 ? "bluer" : "purpler"; };
+const dnNextZone = (h, s) => { const z0 = dnZone(h); for (let d = 1; d < 360; d++) { const z = dnZone(h + s * d); if (z !== z0) return z; } return z0; };
 // Which way today's color (t) lies from a guess (g), per axis. Each axis: { st: same|near|far, word, v }.
 function dnAxes(g, t) {
   const [Lg, ag, bg] = lab(g), [Lt, at, bt] = lab(t), Cg = Math.hypot(ag, bg), Ct = Math.hypot(at, bt);
@@ -47,9 +51,10 @@ function dnAxes(g, t) {
   if (Cg < DN_GREY_C && Ct < DN_GREY_C) H = { st: "grey", v: 0, word: "" };
   else {
     // the way the hue turns, in the app's one hue vocabulary (js/lookalikes.js lookDiff: redder, yellower, greener,
-    // bluer, purpler; never "warmer"): the hue zone the guess moves into as it turns toward today's. For a big
-    // turn (over 60°) there's no single "way", so it names the zone today's hue sits in.
-    const word = Math.abs(dh) > 60 ? dnZone(ht) : dnZone(hg + Math.sign(dh || 1) * Math.min(25, Math.abs(dh) + 5));
+    // bluer, purpler; never "warmer"): the next hue zone the guess heads toward as it turns toward today's (from
+    // a blue turning toward green, "greener", even before it gets there). For a big turn (over 60°) into another
+    // zone there's no single "way", so it names the zone today's hue sits in.
+    const word = Math.abs(dh) > 60 && dnZone(ht) !== dnZone(hg) ? dnZone(ht) : dnNextZone(hg, Math.sign(dh) || 1);
     H = { st: st(dH), v: dH, word };
   }
   const de = de2000(g, t);
@@ -81,7 +86,7 @@ function dnShareText(rec, no) {
 // blue and a yellow), skipping words already guessed, each at least 4 apart from the others so every choice is
 // a real choice.
 function dnChoices(t, list, guessed = [], rnd = Math.random) {
-  const near = nearestCore(t.h, list, 40).filter(x => x.n !== t.n && !guessed.includes(x.n));
+  const near = nearestCore(t.h, list, 40).filter(x => x.n !== t.n && !guessed.includes(x.n) && !DN_SKIP.test(x.n));
   const out = [];
   for (const x of near) { if (out.every(o => de2000(o.h, x.h) >= 4) && de2000(t.h, x.h) >= 4) out.push(x.entry); if (out.length === 3) break; }
   const all = [t, ...out];
@@ -183,7 +188,7 @@ function daily() {
     if (won) { rec.ok = true; rec.done = true; }
     else {
       const d = de2000(e.h, t.h);
-      if (d < 10) dnLog({ k: "confuse", c: t.n, with: e.n, surf: "daily", dir: dnSentence(dnAxes(e.h, t.h), e.n) });
+      if (d < 10) dnLog({ type: "confuse", c: t.n, b: e.n, src: "daily" });
       if (rec.g.length >= DN_MAX) rec.done = true;
     }
     save1();
@@ -218,7 +223,7 @@ function daily() {
       b.classList.add(ok ? "right" : "wrong");
       if (!ok) el.querySelector(`[data-o="${opts.indexOf(t)}"]`).classList.add("right");
       rec.g.push(o.n); rec.ok = ok; rec.done = true; save1();
-      if (!ok) dnLog({ k: "confuse", c: t.n, with: o.n, surf: "daily" });
+      if (!ok) dnLog({ type: "confuse", c: t.n, b: o.n, src: "daily" });
       buzz(ok ? 12 : [10, 40, 10]);
       later(() => { drawRows(); finish(true); }, 750);
     });
@@ -243,16 +248,16 @@ function daily() {
       ${story ? `<p class="dn-story">${story}</p>` : ""}
       <button class="btn ghost" data-page>Read about ${esc(t.n.toLowerCase())}</button>
       <div class="dn-acts"><button class="btn" data-share>Share your rows ${ICON.share}</button>
-      ${misses.length && typeof prInstantDeck === "function" ? `<button class="btn ghost" data-practice>Practice today's misses</button>` : ""}
+      ${misses.length && typeof prQuick === "function" ? `<button class="btn ghost" data-practice>Practice today's misses</button>` : ""}
       ${chToday() ? `<button class="btn ghost" data-home>Back to ${S.tab === "gym" ? "Train" : "Learn"}</button>` : `<button class="btn ghost" data-paint>Now today's painting</button>`}</div>
       <p class="fine">${dlStreakLine()}Screen colors are approximate. A new color tomorrow.</p>`;
     if (typeof wireLinks === "function") wireLinks($("#dnEnd"));
     $("[data-page]").onclick = () => openCoreName(t.h, t.n);
     $("[data-share]").onclick = () => dnShare(rec, no, t);
-    const pr = el.querySelector("[data-practice]"); if (pr) pr.onclick = () => prInstantDeck({ title: "Today's misses", names: misses.map(m => m.n) });
+    const pr = el.querySelector("[data-practice]"); if (pr) pr.onclick = () => prQuick({ items: misses.map(m => m.h), label: "Today's misses" });
     const hm = el.querySelector("[data-home]"); if (hm) hm.onclick = leave;
     const pa = el.querySelector("[data-paint]"); if (pa) pa.onclick = () => challenge();
-    if (!rec.ok) dnLog({ k: "miss", c: t.n, surf: "daily" }); else dnLog({ k: rec.hint ? "recog_ok" : "recall_ok", c: t.n, surf: "daily" });
+    if (fresh) dnLog({ type: "answer", c: t.n, ok: rec.ok && !rec.hint, by: rec.hint ? "pick" : "type", src: "daily" });
     if (fresh) buzz(rec.ok ? [10, 30, 20] : 10);
     dots();
   }
