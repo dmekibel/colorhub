@@ -54,7 +54,8 @@ function studio() {
   const el = show(`
     ${tabHead()}
     <h1 class="tab-title">Studio</h1>
-    <div class="st-tiles">
+    <div class="st-tiles st-capture">
+      <button class="st-tile" data-namer><span class="st-art st-namer" aria-hidden="true"><span class="ring" style="background:${ringStops()}"></span><i></i></span><b>Name any color</b><small>Pick it any way. See its nearest names as you drag.</small></button>
       <button class="st-tile" data-wheel><span class="st-art st-wheel" id="mini"></span><b>Gamut wheel</b><small>Lay a shape on the wheel. What's inside is your palette.</small></button>
       <button class="st-tile" data-eye><span class="st-art st-eye"><i></i></span><b>Camera</b><small>Name what you see, or turn it into colors.</small></button>
       <label class="st-tile"><span class="st-art st-photo">${ICON_PHOTO}</span><b>From a photo</b><small>Pull the main colors out of any picture.</small><input type="file" accept="image/*" hidden id="file"></label>
@@ -72,6 +73,7 @@ function studio() {
   `, "studio", "studio");
   el.querySelectorAll("[data-lab]").forEach(b => b.onclick = () => LAB[b.dataset.lab]());
   el.querySelectorAll("[data-taste]").forEach(b => b.onclick = () => tasteIntro(b.dataset.taste));
+  el.querySelector("[data-namer]").onclick = () => LAB.namer();
   el.querySelector("[data-wheel]").onclick = () => gamutWheel();
   el.querySelector("[data-eye]").onclick = () => eye();
   el.querySelector("#file").onchange = e => { const f = e.target.files[0]; if (f) loadImage(f, c => phCaptureAndOpen(c, "From a photo")); };
@@ -179,7 +181,7 @@ function gamutWheel(preset = "Warm", initPts = null, push = true) {
     if (cur && cur.join() === pal.cols.join()) return;
     cur = pal.cols;
     el.querySelector("#pal").innerHTML = pal.cols.map(h => `<i style="--c:${h}" data-swatch="${h}"></i>`).join("");
-    el.querySelector("#hlist").innerHTML = pal.cols.map((h, i) => { const nm = nameOf(h); return `<button class="h-item" data-copy="${h}"><i style="--c:${h}" data-swatch="${h}"></i><span><b>${esc(nm.text)}</b><em class="mono">${h}${i === 0 ? " · light" : i === pal.cols.length - 1 ? " · dark" : ""}</em></span></button>`; }).join("");
+    el.querySelector("#hlist").innerHTML = pal.cols.map((h, i) => { const nm = nameOf(h); return `<button class="h-item" data-copy="${h}" data-swatch="${h}"><i style="--c:${h}"></i><span><b>${esc(nm.text)}</b><em class="mono">${h}${i === 0 ? " · light" : i === pal.cols.length - 1 ? " · dark" : ""}</em></span></button>`; }).join("");
   };
   // dragging: a corner reshapes, the inside moves the whole shape; everything stays on the wheel
   let drag = null;
@@ -203,7 +205,7 @@ function gamutWheel(preset = "Warm", initPts = null, push = true) {
   mcv.addEventListener("pointerup", end); mcv.addEventListener("pointercancel", end);
   el.querySelectorAll("[data-m]").forEach(b => b.onclick = () => { presetName = b.dataset.m; pts = MASKS[b.dataset.m].map(polar); el.querySelectorAll("[data-m]").forEach(x => x.classList.toggle("on", x === b)); draw(); buzz(5); });
   el.querySelector("[data-names]").onclick = e => { names = S.wheelNames = !names; save(); e.currentTarget.classList.toggle("on", names); drawNames(); };
-  el.querySelector("#hlist").addEventListener("click", e => { const b = e.target.closest("[data-copy]"); if (b) { try { navigator.clipboard.writeText(b.dataset.copy); toast("Copied " + b.dataset.copy); } catch (x) {} } });
+  exLongCopy(el.querySelector("#hlist"));   // one tap opens the color's page; press and hold copies the hex
   el.querySelector("[data-keep]").onclick = () => { keepPalette(cur, "Gamut wheel"); };
   // the result view is one step further down the same trail: Back from it returns to this exact shape (gwReopen below)
   el.querySelector("[data-open]").onclick = () => { if (XSTACK[XSTACK.length - 1] !== "wheelview") XSTACK.push("wheelview"); paletteView({ cols: cur.map(h => ({ h })), from: "Gamut wheel" }); };
@@ -320,7 +322,7 @@ function paletteView(p) {
   const el = show(`
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span class="eyebrow">Studio · ${esc(p.from || "Palette")}${p.at ? " · " + esc(p.at) : ""}</span><span style="width:44px"></span></header>
     ${titleKind ? `<button class="pv-title${curTitle ? "" : " ph"}" data-rename aria-label="Rename">${esc(curTitle || titlePlaceholder)}</button>` : ""}
-    ${hasImg ? `<div class="pv-img"><img src="${p.img}" alt=""><div id="dots"></div></div>` : ""}
+    ${hasImg ? `<div class="pv-img"><img src="${p.img}" alt="Your photo. Tap a spot to guess its name."><div id="dots"></div></div><p class="pv-tapnote">Tap a spot in the photo to guess its name, then see it alone.</p>` : ""}
     <div class="pv-ctrl">
       ${hasImg ? `<div class="seg" id="cnt">${counts.map(k => `<button class="${k === n ? "on" : ""}" data-n="${k}">${k}</button>`).join("")}</div>` : ""}
       <div class="seg" id="look">${[["stripes", "Stripes"], ["weighted", "By area"], ["chips", "Chips"]].filter(x => hasImg || x[0] !== "weighted").map(([k, t]) => `<button class="${k === look ? "on" : ""}" data-look="${k}">${t}</button>`).join("")}</div>
@@ -329,7 +331,8 @@ function paletteView(p) {
     <div class="pv-pal" id="pv"></div>
     <div class="h-list" id="hlist"></div>
     <div class="row2" style="margin-top:18px"><button class="btn" data-keep>${p.savedId != null ? "Kept" : "Keep it"}</button><button class="btn ghost" data-share>${ICON.share} Share</button></div>
-    <div class="row2" style="margin-top:10px"><button class="btn ghost" data-css>Copy as CSS</button><button class="btn ghost" data-hex>Copy hex list</button></div>
+    <div class="row2" style="margin-top:10px"><button class="btn ghost" data-export>Export: CSS, Procreate, Adobe…</button></div>
+    <div id="twins"></div>
     ${p.savedId != null ? `<button class="btn ghost" data-del style="margin-top:10px">Remove from your palettes</button>` : ""}
     ${p.photoId != null ? `<button class="btn ghost" data-delphoto style="margin-top:10px">Delete this photo</button>` : ""}
     ${hasImg ? `<p class="fine">Colors are grouped by similarity (k-means in OKLab) on a small copy of the image; "by area" shows how much of the picture each one covers. A small, striking color that the groups miss is added as an accent.</p>` : ""}
@@ -368,18 +371,26 @@ function paletteView(p) {
     const cols = colsNow();
     el.querySelector("#pv").className = "pv-pal pv-" + look;
     el.querySelector("#pv").innerHTML = cols.map(c => `<i style="--c:${c.h};--w:${look === "weighted" ? Math.max(c.share, .02) : 1}" data-ink="${ink(c.h)}" data-swatch="${c.h}">${pct && c.share != null && look !== "chips" ? `<span>${c.share < .01 ? "<1" : Math.round(c.share * 100)}%</span>` : ""}</i>`).join("");
-    el.querySelector("#hlist").innerHTML = cols.map(c => { const { nm, fam } = named(c.h); return `<button class="h-item" data-copy="${c.h}"><i style="--c:${c.h}" data-swatch="${c.h}"></i><span><b>${esc(nm.text)}</b><em class="mono">${c.h}${c.accent ? " · accent" : ""}${fam ? ` · ${esc(fam.head.n)} family` : ""}${pct && c.share != null ? ` · ${c.share < .01 ? "<1" : Math.round(c.share * 100)}%` : ""}</em></span></button>`; }).join("");
+    el.querySelector("#hlist").innerHTML = cols.map(c => { const { nm, fam } = named(c.h); return `<button class="h-item" data-copy="${c.h}" data-swatch="${c.h}"><i style="--c:${c.h}"></i><span><b>${esc(nm.text)}</b><em class="mono">${c.h}${c.accent ? " · accent" : ""}${fam ? ` · ${esc(fam.head.n)} family` : ""}${pct && c.share != null ? ` · ${c.share < .01 ? "<1" : Math.round(c.share * 100)}%` : ""}</em></span></button>`; }).join("");
     if (hasImg) el.querySelector("#dots").innerHTML = cols.map(c => `<i style="--c:${c.h};left:${c.at[0] * 100}%;top:${c.at[1] * 100}%" data-swatch="${c.h}"></i>`).join("");
+    if ((hasImg || cols.length >= 3) && typeof twSection === "function") twSection(el.querySelector("#twins"), cols, { what: hasImg ? "your photo" : "your palette", key: hasImg ? "img" : null, img: () => el.querySelector(".pv-img img"), rich: hasImg ? () => twRichPool(el.querySelector(".pv-img img")) : null });   // Closest in the archive (js/twins.js)
   };
   loadCoreNames().then(render); render();
   const seg = (sel, attr, set) => el.querySelectorAll(`${sel} [${attr}]`).forEach(b => b.onclick = () => { set(b.getAttribute(attr)); el.querySelectorAll(`${sel} [${attr}]`).forEach(x => x.classList.toggle("on", x === b)); render(); buzz(4); });
   if (hasImg) { seg("#cnt", "data-n", v => { n = +v; }); el.querySelector("[data-pct]").onclick = e => { pct = !pct; e.currentTarget.classList.toggle("on", pct); render(); }; }
   seg("#look", "data-look", v => { look = v; });
-  el.querySelector("#hlist").addEventListener("click", e => { const b = e.target.closest("[data-copy]"); if (b) { try { navigator.clipboard.writeText(b.dataset.copy); toast("Copied " + b.dataset.copy); } catch (x) {} } });
+  exLongCopy(el.querySelector("#hlist"));   // one tap opens the color's page; press and hold copies the hex
   const hexes = () => colsNow().map(c => c.h);
-  const copy = t => { try { navigator.clipboard.writeText(t); toast("Copied"); } catch (e) {} };
-  el.querySelector("[data-css]").onclick = () => copy(":root {\n" + colsNow().map((c, i) => `  --color-${i + 1}: ${c.h}; /* ${named(c.h).nm.text} */`).join("\n") + "\n}");
-  el.querySelector("[data-hex]").onclick = () => copy(hexes().join(" "));
+  el.querySelector("[data-export]").onclick = () => exOpenSheet({ cols: colsNow(), title: curTitle || p.from || "Palette" });
+  // the Isolator: tap a spot on the photo, guess its name, then see it alone on grey (js/isolate.js)
+  const pvImg = el.querySelector(".pv-img img");
+  if (pvImg) pvImg.addEventListener("click", e => {
+    if (typeof isoOpen !== "function" || !pvImg.naturalWidth) return;
+    const r = pvImg.getBoundingClientRect(), k = Math.min(r.width / pvImg.naturalWidth, r.height / pvImg.naturalHeight), dw = pvImg.naturalWidth * k, dh = pvImg.naturalHeight * k;
+    const fx = (e.clientX - r.left - (r.width - dw) / 2) / dw, fy = (e.clientY - r.top - (r.height - dh) / 2) / dh;
+    if (fx < 0 || fx > 1 || fy < 0 || fy > 1) return;
+    isoOpen({ src: pvImg, fx, fy, from: "photo", ref: p.photoId != null ? "photo:" + p.photoId : "photo" });
+  });
   el.querySelector("[data-keep]").onclick = e => { if (p.savedId != null) return; keepPalette(hexes(), p.from || "Palette"); e.currentTarget.textContent = "Kept"; };
   el.querySelector("[data-share]").onclick = () => sharePalette(colsNow(), curTitle || p.from, named);
   const del = el.querySelector("[data-del]");

@@ -537,8 +537,8 @@ function glPage(i, d, fromHex) {
     <div class="palette" data-glswatches></div>
     <div class="pal-names" data-glrows></div>
     <p class="fine">Computed by ColorHub, not by the museum: colors found in its small photo, each sized by its share of the picture and given the nearest of 1,000 named colors. Screen approximations; old varnish and the photograph shift color.</p>
-    <div class="sec-head gl-sim-h"><b>Similar palettes</b><span>by color, not subject</span></div>
-    <div class="gl-rail" data-glsim></div>
+    ${typeof twSection === "function" ? `<div data-glsim></div>` : `<div class="sec-head gl-sim-h"><b>Similar palettes</b><span>by color, not subject</span></div>
+    <div class="gl-rail" data-glsim></div>`}
     <section class="srcs"><h3>Image and data</h3><ul><li>${d.rec ? `<a href="${esc(d.rec)}" target="_blank" rel="noopener">${esc(src.name)}</a>` : esc(src.name)}${src.credit ? ` · ${esc(src.credit)}` : ""}</li><li>Palette and color names computed by ColorHub from the museum's image</li></ul></section>
   `, "article gl-page");
   // the palette strip + named rows + arrival line, redrawn whenever the slider's size changes
@@ -587,6 +587,12 @@ function glPage(i, d, fromHex) {
     if (!canSample || e.target.closest("a")) return;
     const r = sampleImg.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
     if (x < 0 || y < 0 || x > r.width || y > r.height || !sampleImg.naturalWidth) return;
+    if (typeof isoOpen === "function") {   // guess its name, then see it alone on grey (js/isolate.js); the reveal is one tap from its page
+      const k = Math.min(r.width / sampleImg.naturalWidth, r.height / sampleImg.naturalHeight), dw = sampleImg.naturalWidth * k, dh = sampleImg.naturalHeight * k;
+      const fx = (x - (r.width - dw) / 2) / dw, fy = (y - (r.height - dh) / 2) / dh;
+      if (fx >= 0 && fx <= 1 && fy >= 0 && fy <= 1) { buzz(6); isoOpen({ src: sampleImg, fx, fy, from: "painting", ref: "painting:" + i }); }
+      return;
+    }
     try {
       const c = document.createElement("canvas"); c.width = sampleImg.naturalWidth; c.height = sampleImg.naturalHeight;
       const cx = c.getContext("2d"); cx.drawImage(sampleImg, 0, 0);
@@ -610,7 +616,12 @@ function glPage(i, d, fromHex) {
     if (a) { e.preventDefault(); return openNode(graph().nodes.get(a.dataset.to)); }
     const p = e.target.closest("[data-gi]"); if (p) return galleryPage(+p.dataset.gi);
   });
-  later(() => { const rail = el.querySelector("[data-glsim]"); if (!rail || !rail.isConnected) return; rail.innerHTML = glSimilar(i, 5).map(j => glPinHTML(j)).join(""); glFill(rail); }, 40);
+  later(() => {
+    const rail = el.querySelector("[data-glsim]"); if (!rail || !rail.isConnected) return;
+    // "More like this, by…": the metric switch from js/twins.js (overall palette, dominant colors, accents, mood, light, one color, layout)
+    if (typeof twSection === "function") return twSection(rail, pool.length >= 3 ? pool : pal6, { self: i, what: "this painting", title: "More like this, by…", img: () => canSample ? sampleImg : null });
+    rail.innerHTML = glSimilar(i, 5).map(j => glPinHTML(j)).join(""); glFill(rail);
+  }, 40);
 }
 // crossorigin="anonymous" lets a canvas read the image later (tap-to-name), but it only helps — and only loads
 // at all — on a host that actually answers every hop with Access-Control-Allow-Origin (checked by hand, 2026-10,
