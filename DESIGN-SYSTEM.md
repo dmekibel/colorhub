@@ -36,7 +36,7 @@ This is the most important section. It replaces the current mix: the Today tab t
 | **Explore** (the map) | The full-screen honeycomb, always underneath everything | `#/home` | "Explore · Every color" on the stem; no label on the floor itself. (Was "Home" until 2026-10-08.) |
 | **Learn** | Today (what's due, Today's three), then the path, then your collection | `#/learn` (`#/today` opens Learn at Today) | "Learn". Its first block is about today, with no "Today" heading needed. |
 | **Train** | The eye gym: stations, levels, check-ins | `#/train` | "Train" |
-| **Museum** | Four full-bleed covers: For you, Art, Ideas, World | `#/museum[/art|ideas|world]` (old `#/explore…` still works) | "Museum" (was "Explore" until 2026-10-08) |
+| **Museum** | Five full-screen covers: For you, Art, Ideas, World, Saved | `#/museum[/art|ideas|world]` (old `#/explore…` still works) | "Museum" (was "Explore" until 2026-10-08) |
 | **Studio** | Making: the gamut wheel, the camera, photo palettes, taste | `#/studio` | "Studio" |
 
 ### The pieces
@@ -399,17 +399,17 @@ The Station archetype.
 
 ### Explore (a pager of covers)
 Explore is unmistakably ColorHub because every screen is led by one great image and its measured colors.
-- **The top level** is a vertical pager like the meet pager. There are four full-bleed covers, one per part: **For you · Art · Ideas · World**. You swipe up through them.
-- **Each cover:**
-  - One image across the top, `100vh × .62 − 140 px` tall: today's pick for that part (Hokusai's wave for Art, a story's image for Ideas).
-  - Along the seam, a 12 px band of the image's six measured colors, sized by share.
-  - Below, a ground tinted from the image's darkest dominant color (the wave gives deep indigo `#152230`), mixed toward `--ground` so text stays above 7:1.
-  - On the ground: the part's name in `display` ("Art"), one `lead` sentence ("Fourteen thousand paintings and eleven thousand poems, found by their colors."), and one `note` about today's image.
+- **The top level** is a vertical pager like the meet pager. There are five full-screen covers, one per part: **For you · Art · Ideas · World · Saved**. You swipe up through them. (Redesigned 2026-10-08 after David's 16 Pro Max screenshot: no card, no margins, no peek.)
+- **Each cover** fills the whole screen, edge to edge:
+  - The image runs under the status bar (a soft shade behind it) and takes whatever the text below doesn't: about 60% on a 16 Pro Max, 55% on a 375 × 812. Today's pick for that part: a painting (Art), a story's colors with its title set large (Ideas), a color with its name (For you, World), what you've kept as a mosaic (Saved).
+  - Under it, the palette band (30–44 px): the image's real colors sized by share, each a button to its color page. Short palettes aren't padded with repeats.
+  - Below, a ground tinted from the image's darkest dominant color (L* ≤ 18, chroma ≤ 20), so text stays above 7:1.
+  - On the ground: the part's name in `display` (56–76 px), one `lead` line, one `note` about today (with a chip of today's color when there is one), then the paper primary ("Enter Art", "Read Ideas"…) just above the Rooms corner.
+  - States: loading paints the image area in the painting's dominant color and fades the photo in; a failed image shows its colors as stripes with the title; empty Saved shows twelve empty frames and a heart, and its primary is "Find something to keep".
 - **Navigation:**
-  - Four small page dots sit on the right edge.
-  - The next cover peeks 30 px at the bottom.
-  - One solid search button sits top-right.
-  - There's no tab row, no cards and no labels.
+  - Five page dots on the right edge, level with the part's name; the current one is a short bar.
+  - One solid search button top-right, inside the safe area.
+  - There's no tab row and no next-cover peek.
 - **Inside a part (Art):**
   - The header takes the tint of the chosen color.
   - A row of 46 px color bubbles picks the color (the honeycomb's material again).

@@ -145,7 +145,7 @@ function LAB_TILES(keys = ["harmony", "contrast", "eye", "studio"]) {
   return keys.map(k => tiles[k]).join("");
 }
 // ======================================================================
-// Explore's top level: a vertical pager of four full-bleed covers (DESIGN-SYSTEM.md §12).
+// Explore's top level: a vertical pager of five full-screen covers (DESIGN-SYSTEM.md §12).
 // S.lens remembers which part is open ("all" = the pager itself, i.e. For you's own address is plain
 // #/explore); exploreHome() is the one entry point router.js and go() call, same as before.
 // ======================================================================
@@ -173,16 +173,34 @@ function tintFromHex(hex) {
 const darkestHex = list => list.reduce((a, b) => lch(b)[0] < lch(a)[0] ? b : a);
 const tintFromHexList = list => list && list.length ? tintFromHex(darkestHex(list)) : null;
 const tintFromPalette = pal => pal && pal.length ? tintFromHex(darkestHex(pal.map(p => p.h))) : null;
-// pad or trim any list of colors to exactly six, for the seam band every cover shows
+// pad or trim any list of colors to exactly six, for the palette band every cover shows
 const cycleTo6 = list => list && list.length ? Array.from({ length: 6 }, (_, i) => list[i % list.length]) : [];
-const sixSwatchHTML = (hexes, shares) => cycleTo6(hexes).map((h, i) => `<i style="background:${h};flex:${shares && shares[i] != null ? shares[i] : 1}"></i>`).join("");
+// the palette band (DESIGN-SYSTEM §12, redesigned 2026-10-08): the cover's real colors, sized by share, each one a
+// button that opens its color page (js/swatch.js's [data-swatch] tap: the nearest name, with the exact color shown).
+// A short palette isn't padded with repeats: fewer, wider chips.
+// flex-grow by share, scaled so the shares fill the row (grow values summing under 1 leave a gap at the end)
+const shareFlex = (shares, i) => shares && shares[i] != null ? (100 * Math.max(shares[i], .04)).toFixed(1) : 100;
+const sixSwatchHTML = (hexes, shares) => {
+  const seen = new Set();
+  return (hexes || []).slice(0, 6).map((h, i) => {
+    if (seen.has(h)) return "";
+    seen.add(h);
+    const nm = typeof nameOf === "function" ? nameOf(h).n : "";
+    return `<button class="xp-chip" data-swatch="${esc(h)}" style="background:${h};flex:${shareFlex(shares, i)} 1 0" aria-label="${esc(nm || h)}"></button>`;
+  }).join("");
+};
 // For you and World have no photo, so their "one great image" is the color itself, full bleed, with its own
 // name set large in the corner (the same "color is the interface" move as a color page's hero) — plain flat
 // color reads as empty space otherwise, especially when today's pick is very light or very dark.
 const flatHeroHTML = (hex, label) => `<div class="xp-flat" style="background:${hex}"></div><div class="xp-flat-label" data-ink="${ink(hex)}">${esc(label)}</div>`;
+// a painting: drawn over its own dominant color (the loading state), faded in when it lands (wireCoverImages)
+const photoHeroHTML = (src, alt) => `<img class="xp-photo" src="${esc(src)}" alt="${esc(alt)}" decoding="async">`;
+// the image didn't load: the painting's colors as stripes, sized by share, with its title, so the cover still reads
+const brokenHeroHTML = (hexes, shares, title) => `<div class="xp-stripes">${hexes.map((h, i) => `<i style="background:${h};flex:${shareFlex(shares, i)} 1 0"></i>`).join("")}</div>
+  <div class="xp-flat-label xp-broken" data-ink="light">${esc(title)}<small>The image didn't load. These are its colors.</small></div>`;
 
 // what each cover shows today: a color (For you), a hand-built painting (Art), a story (Ideas), a Pantone
-// Color of the Year (World) — the only four things in the data that come with a ready "today" pick.
+// Color of the Year (World), and what you've kept (Saved).
 function coverData() {
   const day = today(), g = graph();
   const c = dailyColor(day);
@@ -192,69 +210,125 @@ function coverData() {
   const art = tn && tn.kind === "painting" && !tn.stub && tn.img && (tn.palette || []).length ? tn : tp ? null : paintings.length ? seeded(paintings, "artcover" + day)[0] : null;
   const story = g.stories.length ? seeded(g.stories, "ideacover" + day)[0] : null;
   const coty = window.FASHION && FASHION.coty && FASHION.coty[FASHION.coty.length - 1];
-  return { c, art, story, coty, tp };
+  const saved = (S.saved || []).map(id => g.nodes.get(id)).filter(Boolean);
+  return { c, art, story, coty, tp, saved };
 }
+// a color you can see: black, white and the greys only name a painting when it holds nothing chromatic
+const isChromaticName = (name, hex) => lch(hex)[1] >= 10 && !/\b(black|white|gr[ae]y|silver|charcoal|dark|gunmetal|slate)\b/i.test(name || "");
 function artCoverNote(art) {
   const tp = typeof todayPick === "function" ? todayPick() : null;
   if (tp && tp.painting && tp.painting.node === art.id) return `Today, ${tp.color.n.toLowerCase()} in ${art.title}`;
-  const pal = art.palette, dom = pal.reduce((a, b) => b.share > a.share ? b : a), dark = pal.reduce((a, b) => lch(b.h)[0] < lch(a.h)[0] ? b : a);
-  const names = [dom.name, dark.name].filter((n, i, arr) => n && arr.indexOf(n) === i);
-  return `Today, ${art.title}${names.length ? `, in ${names.map(n => n.toLowerCase()).join(" and ")}` : ""}`;
+  const byShare = art.palette.filter(p => p.name).sort((a, b) => (b.share || 0) - (a.share || 0));
+  const vivid = byShare.filter(p => isChromaticName(p.name, p.h));
+  const names = (vivid.length ? vivid : byShare).map(p => p.name.toLowerCase()).filter((n, i, arr) => arr.indexOf(n) === i).slice(0, vivid.length ? 2 : 1);
+  return `Today, ${art.title}${names.length ? `, in ${names.join(" and ")}` : ""}`;
 }
-function coverHTML(part, name, lead, note, tint, heroHTML, seamHTML) {
-  return `<section class="xp-cover" data-part="${esc(part)}" style="${tint ? `--tint:${tint}` : ""}">
-    <div class="xp-img">${heroHTML}</div>
-    ${seamHTML ? `<div class="xp-seam">${seamHTML}</div>` : ""}
+// the dominant color of a palette: the loading state's wash, so the cover is already its painting's color
+const domHex = (hexes, shares) => hexes.length ? hexes[shares ? Math.max(0, shares.indexOf(Math.max(...shares))) : 0] : null;
+// one cover. o: { part, name, lead, note, dot (today's color, a small chip before the note), tint, wash, hero, seam, go }
+function coverHTML(o) {
+  return `<section class="xp-cover" data-part="${esc(o.part)}" style="${o.tint ? `--tint:${o.tint};` : ""}${o.wash ? `--wash:${o.wash}` : ""}">
+    <div class="xp-img">${o.hero || ""}</div>
+    ${o.seam ? `<div class="xp-seam">${o.seam}</div>` : ""}
     <div class="xp-body">
-      <h2 class="xp-name">${esc(name)}</h2>
-      <p class="xp-lead">${esc(lead)}</p>
-      ${note ? `<p class="xp-note">${esc(note)}</p>` : ""}
+      <h2 class="xp-name">${esc(o.name)}</h2>
+      <p class="xp-lead">${esc(o.lead)}</p>
+      ${o.note ? `<p class="xp-note">${o.dot ? `<i style="background:${o.dot}"></i>` : ""}${esc(o.note)}</p>` : ""}
     </div>
+    <div class="xp-act"><button class="btn xp-go" data-go="${esc(o.goTo || o.part)}">${esc(o.go)}${ICON.arrow}</button></div>
   </section>`;
+}
+const artLead = () => `${typeof GAL !== "undefined" && GAL ? GAL.n.toLocaleString("en-US") : "Over 23,000"} paintings and 11,440 poems, by color.`;
+// the Art cover from today's painting, whichever way it arrived: a graph node, or dpLoad's daily-set entry
+function artCoverHTML(p, note, dot) {
+  if (!p) return coverHTML({ part: "art", name: "Art", lead: artLead(), note, dot, wash: dot ? tintFromHex(dot) : null, hero: `<div class="xp-wait"></div>`, go: "Enter Art" });
+  return coverHTML({ part: "art", name: "Art", lead: artLead(), note, dot, tint: tintFromHexList(p.hexes), wash: domHex(p.hexes, p.shares),
+    hero: photoHeroHTML(p.img, p.title), seam: sixSwatchHTML(p.hexes, p.shares), go: "Enter Art" });
+}
+// Saved: a mosaic of what you've kept (each thing by its first color), or a calm empty state that says how to keep
+function savedCoverHTML(saved) {
+  const hexOf = n => n.kind === "color" ? n.h : n.palette && n.palette.length ? n.palette[0].h : n.cover && n.cover.length ? n.cover[0] : n.swatches && n.swatches.length ? (n.swatches[0].h || n.swatches[0]) : null;
+  const hexes = saved.map(hexOf).filter(h => typeof h === "string" && /^#/.test(h));
+  const lead = "Everything you keep, in one place.";
+  // empty: twelve empty frames waiting to be filled, a heart in the middle, and a way to go find something
+  if (!hexes.length) return coverHTML({ part: "saved", name: "Saved", lead,
+    note: saved.length ? `${saved.length} kept` : "Nothing kept yet. Tap the heart on any color or painting.",
+    hero: `<div class="xp-mosaic xp-mosaic-empty" style="--cols:3">${"<i></i>".repeat(12)}</div><div class="xp-empty">${ICON_HEART}</div>`,
+    go: saved.length ? "Open Saved" : "Find something to keep", goTo: saved.length ? "saved" : "all" });
+  const kinds = [["color", "color", "colors"], ["painting", "painting", "paintings"]].map(([k, one, many]) => { const n = saved.filter(x => x.kind === k).length; return n ? `${n} ${n === 1 ? one : many}` : ""; }).filter(Boolean);
+  const other = saved.filter(x => x.kind !== "color" && x.kind !== "painting").length;
+  if (other) kinds.push(`${other} more`);
+  const tiles = hexes.slice(0, 12), cols = tiles.length <= 4 ? tiles.length : tiles.length <= 9 ? 3 : 4;
+  return coverHTML({ part: "saved", name: "Saved", lead, note: kinds.join(", "), tint: tintFromHexList(tiles), wash: tiles[0],
+    hero: `<div class="xp-mosaic" style="--cols:${cols}">${tiles.map(h => `<i style="background:${h}"></i>`).join("")}</div>`, go: "Open Saved" });
+}
+// fade each painting in over its own color when it lands; on an error, draw its colors in its place
+function wireCoverImages(root, fallback) {
+  root.querySelectorAll("img.xp-photo").forEach(img => {
+    const cv = img.closest(".xp-cover");
+    const done = () => img.classList.add("in");
+    const fail = () => { const f = fallback(cv && cv.dataset.part); if (f && img.parentNode) img.parentNode.innerHTML = f; };
+    if (img.complete) { img.naturalWidth ? done() : fail(); return; }
+    img.addEventListener("load", done, { once: true });
+    img.addEventListener("error", fail, { once: true });
+  });
 }
 function explorePager() {
   XSTACK = [];
-  const { c, art, story, coty, tp } = coverData();
-  const forYouSeam = sixSwatchHTML([c.h, ...nearestColors(c.h, 5, c.n).map(x => x[0].h)]);
+  const { c, art, story, coty, tp, saved } = coverData();
+  const artP = art ? { title: art.title, img: art.img, hexes: art.palette.map(p => p.h), shares: art.palette.map(p => p.share) } : null;
   const covers = [
-    coverHTML("all", "For you", "A new pick of colors, paintings and stories every day.", `Today, ${c.n}`,
-      tintFromHex(c.h), flatHeroHTML(c.h, c.n), forYouSeam),
-    art ? coverHTML("art", "Art", `${typeof GAL !== "undefined" && GAL ? GAL.n.toLocaleString("en-US") : "Over 23,000"} paintings and 11,440 poems, found by their colors.`, artCoverNote(art),
-      tintFromPalette(art.palette), `<img src="${esc(art.img)}" alt="${esc(art.title)}">`, sixSwatchHTML(art.palette.map(p => p.h), art.palette.map(p => p.share)))
-      : coverHTML("art", "Art", `${typeof GAL !== "undefined" && GAL ? GAL.n.toLocaleString("en-US") : "Over 23,000"} paintings and 11,440 poems, found by their colors.`, tp ? `Today, ${tp.color.n.toLowerCase()}` : "", null, `<div class="xp-flat" style="background:var(--lift-2)"></div>`, ""),
-    story ? coverHTML("ideas", "Ideas", "Short stories, systems and history, read through color.", story.title,
-      tintFromHexList(story.cover), `<div class="xp-flat" style="background:linear-gradient(135deg,${story.cover.join(",")})"></div>`, sixSwatchHTML(story.cover))
-      : coverHTML("ideas", "Ideas", "Short stories, systems and history, read through color.", "", null, `<div class="xp-flat" style="background:var(--lift-2)"></div>`, ""),
-    coty ? coverHTML("world", "World", "Fashion, gems and growing things, in color.", `${coty.name} · ${coty.year}`,
-      tintFromHex(coty.hex), flatHeroHTML(coty.hex, coty.name), sixSwatchHTML(FASHION.coty.slice(-6).map(y => y.hex)))
-      : coverHTML("world", "World", "Fashion, gems and growing things, in color.", "", null, `<div class="xp-flat" style="background:var(--lift-2)"></div>`, ""),
+    coverHTML({ part: "all", name: "For you", lead: "New colors, paintings and stories every day.", note: "Today's color and its five nearest names",
+      tint: tintFromHex(c.h), wash: c.h, hero: flatHeroHTML(c.h, c.n), seam: sixSwatchHTML([c.h, ...nearestColors(c.h, 5, c.n).map(x => x[0].h)]), go: "See today's picks" }),
+    artP ? artCoverHTML(artP, artCoverNote(art), tp && tp.painting && tp.painting.node === art.id ? tp.color.h : null)
+      : artCoverHTML(null, tp ? `Today, ${tp.color.n.toLowerCase()}` : "", tp ? tp.color.h : null),
+    story ? coverHTML({ part: "ideas", name: "Ideas", lead: "Stories, systems and history, read through color.", note: "Today's story, in its colors",
+      tint: tintFromHexList(story.cover), wash: story.cover[0], hero: `<div class="xp-flat" style="background:linear-gradient(160deg,${story.cover.join(",")})"></div><div class="xp-flat-label" data-ink="${ink(story.cover[story.cover.length - 1])}">${esc(story.title)}</div>`, seam: sixSwatchHTML(story.cover), go: "Read Ideas" })
+      : coverHTML({ part: "ideas", name: "Ideas", lead: "Stories, systems and history, read through color.", hero: `<div class="xp-wait"></div>`, go: "Read Ideas" }),
+    coty ? coverHTML({ part: "world", name: "World", lead: "Fashion, gems and growing things, in color.", note: `${coty.name}, Color of the Year ${coty.year}`, dot: coty.hex,
+      tint: tintFromHex(coty.hex), wash: coty.hex, hero: flatHeroHTML(coty.hex, coty.name), seam: sixSwatchHTML(FASHION.coty.slice(-6).map(y => y.hex)), go: "Enter World" })
+      : coverHTML({ part: "world", name: "World", lead: "Fashion, gems and growing things, in color.", hero: `<div class="xp-wait"></div>`, go: "Enter World" }),
+    savedCoverHTML(saved),
   ];
   const el = show(`
     <div class="xp-wrap">
       <div class="xp-pager" id="xpPager">${covers.join("")}</div>
-      <div class="xp-dots">${covers.map((_, i) => `<i class="${i === 0 ? "on" : ""}"></i>`).join("")}</div>
+      <div class="xp-dots" aria-hidden="true">${covers.map((_, i) => `<i class="${i === 0 ? "on" : ""}"></i>`).join("")}</div>
       <button class="xp-search" data-search aria-label="Search the ${NAV_MUSEUM}">${ICON.search}</button>
     </div>
-  `, "explore", "explore");
-  const pager = el.querySelector("#xpPager"), dots = [...el.querySelectorAll(".xp-dots i")], sections = [...pager.querySelectorAll(".xp-cover")];
-  if ("IntersectionObserver" in window) {
-    const io = new IntersectionObserver(es => es.forEach(e => { if (e.intersectionRatio > .5) { const i = sections.indexOf(e.target); dots.forEach((d, j) => d.classList.toggle("on", j === i)); } }),
-      { root: pager, threshold: [.5] });
-    sections.forEach(s => io.observe(s));
-    cleanup.push(() => io.disconnect());
-  }
-  // (the "For you" cover opens its feed directly: openPart("all") is the pager itself, so it used to just redraw the pager)
-  pager.addEventListener("click", e => { const s = e.target.closest("[data-part]"); if (s) s.dataset.part === "all" ? exploreForYou() : openPart(s.dataset.part); });
+  `, "explore xp-home", "explore");
+  const wrap = el.querySelector(".xp-wrap"), pager = el.querySelector("#xpPager"), dotsEl = el.querySelector(".xp-dots"), dots = [...dotsEl.children], sections = [...pager.querySelectorAll(".xp-cover")];
+  wireCoverImages(pager, part => part === "art" && artP ? brokenHeroHTML(artP.hexes, artP.shares, artP.title) : null);
+  // the current page: whichever cover fills most of the pager (every cover is exactly one pager tall)
+  let cur = -1;
+  const onScroll = () => { const i = Math.max(0, Math.min(sections.length - 1, Math.round(pager.scrollTop / (pager.clientHeight || 1)))); if (i === cur) return; cur = i; dots.forEach((d, j) => d.classList.toggle("on", j === i)); };
+  pager.addEventListener("scroll", onScroll, { passive: true }); onScroll();
+  // the page dots sit on the right edge, level with the part's name (every cover has the same layout below its band)
+  const placeDots = () => {
+    const nm = el.isConnected && sections[0] && sections[0].querySelector(".xp-name"); if (!nm) return;
+    const r = nm.getBoundingClientRect(), w = wrap.getBoundingClientRect();
+    dotsEl.style.top = `${Math.round(r.top - w.top + r.height / 2 - dotsEl.offsetHeight / 2)}px`; dotsEl.classList.add("in");
+  };
+  requestAnimationFrame(placeDots); addEventListener("resize", placeDots); cleanup.push(() => removeEventListener("resize", placeDots));
+  // a cover opens its part (the "For you" cover opens its feed directly: openPart("all") is the pager itself);
+  // a palette chip opens its color page instead (js/swatch.js, capture phase), so a chip tap never reaches here
+  pager.addEventListener("click", e => {
+    const b = e.target.closest("[data-go]"), s = e.target.closest("[data-part]"), part = b ? b.dataset.go : s && s.dataset.part; if (!part) return;
+    buzz(6); part === "all" ? exploreForYou() : openPart(part);
+  });
   el.querySelector("[data-search]").onclick = () => exploreSearchSheet();
-  // today's painting isn't a graph node (most of the daily set isn't): draw it onto the Art cover when it loads
+  // today's painting isn't a graph node (most of the daily set isn't): draw it onto the Art cover when it lands
   if (!art && tp && typeof dpLoad === "function") dpLoad().then(e => {
     const cv = e && el.isConnected && el.querySelector('.xp-cover[data-part="art"]'); if (!cv) return;
-    cv.querySelector(".xp-img").innerHTML = `<img src="${esc(e.img)}" alt="${esc(e.t)}">`;
-    const nt = cv.querySelector(".xp-note"); if (nt) nt.textContent = `Today, ${tp.color.n.toLowerCase()} in ${e.t}`;
-    const pool = e.pool.slice(0, 6); cv.style.setProperty("--tint", tintFromPalette(pool.map(p => ({ h: p[0] })))  || "");
-    const seam = cv.querySelector(".xp-seam") || cv.insertBefore(Object.assign(document.createElement("div"), { className: "xp-seam" }), cv.querySelector(".xp-body"));
-    seam.innerHTML = sixSwatchHTML(pool.map(p => p[0]), pool.map(p => p[1]));
-  }).catch(() => {});
+    const pool = e.pool.slice(0, 6), p = { title: e.t, img: e.img, hexes: pool.map(x => x[0]), shares: pool.map(x => x[1]) };
+    const tmp = document.createElement("div"); tmp.innerHTML = artCoverHTML(p, `Today, ${tp.color.n.toLowerCase()} in ${e.t}`, tp.color.h);
+    const nw = tmp.firstElementChild; cv.setAttribute("style", nw.getAttribute("style") || ""); cv.innerHTML = nw.innerHTML;
+    wireCoverImages(cv, () => brokenHeroHTML(p.hexes, p.shares, p.title));
+  }).catch(() => {
+    // the daily set didn't load (offline): say so quietly on the cover; it still opens Art
+    const im = el.isConnected && el.querySelector('.xp-cover[data-part="art"] .xp-img');
+    if (im && im.querySelector(".xp-wait")) im.innerHTML = `<div class="xp-flat-label xp-broken" data-ink="light">Today's painting<small>It couldn't load just now. Art is still open.</small></div>`;
+  });
 }
 
 // ---------- the generic feed: For you, Ideas and Saved share this (plain {title, sub, pins} sections) ----------

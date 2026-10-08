@@ -388,11 +388,11 @@ scenario("train", "Gradients: map and Choose mode and the daily board", async t 
 });
 
 // ================================================================== EXPLORE
-for (const [part, expect] of [["all", ".x-feed .pin, .x-feed [data-pin]"], ["art", ".xb-pick"], ["ideas", ".x-feed .pin, .x-feed [data-pin]"], ["world", "#world *"]]) {
+for (const [part, expect] of [["all", ".x-feed .pin, .x-feed [data-pin]"], ["art", ".xb-pick"], ["ideas", ".x-feed .pin, .x-feed [data-pin]"], ["world", "#world *"], ["saved", ".x-feed"]]) {
   scenario("explore", `${part} cover opens and goes back`, async t => {
     await t.open("#shot=explore:all", { settle: 600 });
     const cover = await t.waitFor(`.xp-cover[data-part="${part}"]`, 8000, `the ${part} cover`);
-    t.expect(t.$$(".xp-cover").length === 4, `${t.$$(".xp-cover").length} covers instead of 4`);
+    t.expect(t.$$(".xp-cover").length === 5, `${t.$$(".xp-cover").length} covers instead of 5`);
     let pinOpened = false;
     await t.click(cover, { force: true, wait: 500 });
     await t.waitFor(".p-title", 8000, `the ${part} screen`);
@@ -411,6 +411,18 @@ for (const [part, expect] of [["all", ".x-feed .pin, .x-feed [data-pin]"], ["art
     await t.waitFor(".xp-cover", 6000, "the pager of covers after Back");
   });
 }
+
+scenario("explore", "a cover's palette chip opens its color page; the primary opens the part", async t => {
+  await t.open("#shot=explore:all", { settle: 600 });
+  const chip = await t.waitFor('.xp-cover[data-part="all"] .xp-chip', 8000, "a palette chip on the For you cover");
+  await t.click(chip, { force: true, wait: 500 });
+  await t.waitFor(".cp-page, .nm-page, .p-title", 8000, "a color page after tapping a palette chip");
+  t.expect(!t.$(".x-feed"), "the chip opened the For you feed instead of its color page");
+  await t.open("#shot=explore:all", { settle: 600 });
+  const go = await t.waitFor('.xp-cover[data-part="saved"] [data-go]', 8000, "the Saved cover's primary");
+  await t.click(go, { force: true, wait: 500 });
+  await t.waitFor(".p-title", 8000, "a part after the Saved cover's primary");
+});
 
 scenario("explore", "Art with a color shows tiles", async t => {
   await t.open("#shot=explore:art:Denim", { settle: 600 });

@@ -1,7 +1,7 @@
 // Builds the table inside js/today.js: for each of the 292 days of Today's painting, the one core name that painting
 // really holds (as photographed): its nearest-name share >= 2% at dE <= 7, weighted x3 for names with an article and
 // by how much more of it this painting has than the average painting (distinctive). Names don't repeat until all
-// have been used. Deterministic. Run: node tools/today_table.js        (rewrites the block between the markers)
+// have been used. Black, white, greys and near-neutrals only when no chromatic name qualifies. Deterministic. Run: node tools/today_table.js        (rewrites the block between the markers)
 const fs = require("fs"), path = require("path");
 const { lab, lch, de2000 } = require("./colormath.js");
 const R = p => path.join(__dirname, "..", p);
@@ -23,13 +23,21 @@ const covAt = maxDe => rows.slice(0, meta.n).map(e => {
 const cov = covAt(7), loose = covAt(11);   // a few muted paintings hold no name at dE 7: widen for those only
 const mean = new Map(); for (const m of cov) for (const [n, s] of m) mean.set(n, (mean.get(n) || 0) + s / cov.length);
 const hash = s => { let h = 2166136261; for (const ch of s) { h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; };
+// near-neutral: chroma under 10 (cement, ash, taupe), or a black / white / grey word whatever its slight tint
+const isNeutral = (n, h) => lch(h)[1] < 10 || /\b(black|white|gr[ae]y|silver|charcoal|dark|gunmetal|slate)\b/i.test(n);
 const used = new Set(), out = [];
 cov.forEach((m0, i) => {
   let m = m0; if (![...m].some(([, s]) => s >= 0.02)) m = loose[i];
-  const cand = [...m].filter(([n, s]) => s >= 0.02).map(([n, s]) => {
+  const candOf = m => [...m].filter(([n, s]) => s >= 0.02).map(([n, s]) => {
     const c = core.find(x => x.n === n), C = lch(c.h)[1];
-    return { n, h: c.h, s, w: Math.sqrt(s) * Math.min(4, s / (mean.get(n) || s)) * (art.has(slug(n)) ? 3 : 1) * (C < 6 ? 0.3 : 1 + C / 25) };
+    return { n, h: c.h, s, neutral: isNeutral(n, c.h), w: Math.sqrt(s) * Math.min(4, s / (mean.get(n) || s)) * (art.has(slug(n)) ? 3 : 1) * (C < 6 ? 0.3 : 1 + C / 25) };
   }).sort((a, b) => b.w - a.w);
+  let cand = candOf(m);
+  // a muted painting with only neutral names at dE 7 may still hold a chromatic one at the looser dE 11
+  if (!cand.some(c => !c.neutral) && m !== loose[i] && candOf(loose[i]).some(c => !c.neutral)) cand = candOf(loose[i]);
+  // "Today, X in Y" should name a color you can see: black, white, the greys and near-neutrals only when the
+  // painting holds no chromatic name at all (David, 2026-10-08: "in black" was a weak pick)
+  if (cand.some(c => !c.neutral)) cand = cand.filter(c => !c.neutral);
   let pool = cand.filter(c => !used.has(c.n)); if (!pool.length) pool = cand;
   pool = pool.slice(0, 4); const tot = pool.reduce((a, c) => a + c.w, 0);
   let r = (hash("today-v1-" + i) / 4294967296) * tot, pick = pool[0];

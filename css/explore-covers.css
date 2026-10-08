@@ -3,30 +3,72 @@
    untouched (js/explore.js, js/gallery.js, js/poems.js). Same "museum editorial" tokens as app.css:
    var(--serif)/var(--mono), the warm-black ground, hairline rules instead of boxes. */
 
-/* ---------- the pager: a vertical scroll-snap of covers, one great image each ---------- */
-.xp-wrap{position:relative;margin:0 calc(-1 * var(--g))}
-.xp-pager{height:calc(100dvh - var(--top) - 12px - var(--tabh) - 20px);overflow-y:auto;overflow-x:hidden;scroll-snap-type:y mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;touch-action:pan-y}
+/* ---------- the pager: a vertical scroll-snap of full-screen covers, one great image each ----------
+   Redesigned 2026-10-08 (David: "this menu is ugly and odd" on a 16 Pro Max). Each cover is the whole screen,
+   edge to edge: the image runs under the status bar and takes whatever the text doesn't (about 60% on a 16 Pro
+   Max, 55% on a 375 x 812); then the palette band (its real colors, each a button to its color page), the name,
+   one line, today's note, and the paper primary, which sits just above the Rooms corner. No next-cover peek:
+   the page dots on the right say there's more. Search is the one solid button top-right, inside the safe area. */
+.room-sheet>.screen.explore.xp-home,.screen.explore.xp-home{padding:0;width:100%;max-width:none;overflow:hidden}
+.xp-wrap{position:relative;height:100%;min-height:0;flex:1}
+.xp-pager{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;scroll-snap-type:y mandatory;overscroll-behavior-y:contain;
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;touch-action:pan-y}
 .xp-pager::-webkit-scrollbar{display:none}
-.xp-cover{position:relative;height:calc(100% - 30px);scroll-snap-align:start;scroll-snap-stop:always;display:flex;flex-direction:column;overflow:hidden;background:var(--tint,var(--lift));text-align:left}
-.xp-img{position:relative;flex:none;height:calc(62% - 92px);min-height:150px;background:var(--lift)}
-.xp-img img,.xp-flat{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.xp-flat-label{position:absolute;left:18px;right:18px;bottom:16px;font:400 38px/1 var(--serif);letter-spacing:-.02em;text-wrap:balance}
+.xp-cover{position:relative;height:100%;scroll-snap-align:start;scroll-snap-stop:always;display:flex;flex-direction:column;overflow:hidden;
+  background:var(--tint,var(--surface-1));text-align:left;cursor:pointer;-webkit-tap-highlight-color:transparent}
+/* the image: the rest of the screen, never under 44% of it; its own dominant color while it loads */
+.xp-img{position:relative;flex:1 1 auto;min-height:44%;background:var(--wash,var(--surface-2));overflow:hidden}
+.xp-img::after{content:"";position:absolute;left:0;right:0;top:0;height:calc(var(--top) + 64px);pointer-events:none;
+  background:linear-gradient(rgba(10,9,8,.42),rgba(10,9,8,0))}
+.xp-img img,.xp-flat,.xp-stripes{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%;display:block}
+.xp-photo{opacity:0;transition:opacity 480ms ease-out}
+.xp-photo.in{opacity:1}
+.xp-stripes{display:flex}
+.xp-stripes i{display:block;min-width:2px}
+.xp-stripes::after{content:"";position:absolute;left:0;right:0;bottom:0;height:150px;background:linear-gradient(rgba(10,9,8,0),rgba(10,9,8,.72))}
+.xp-wait{position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(236,232,223,.06) 50%,transparent 70%) 0 0/250% 100%;
+  animation:xpShimmer 1.6s linear infinite}
+@keyframes xpShimmer{from{background-position:100% 0}to{background-position:-150% 0}}
+.xp-flat-label{position:absolute;left:var(--g);right:calc(var(--g) + 20px);bottom:18px;font:400 40px/1 var(--serif);letter-spacing:-.02em;text-wrap:balance}
 .xp-flat-label[data-ink="dark"]{color:#141311}
 .xp-flat-label[data-ink="light"]{color:#fff}
-.xp-seam{display:flex;height:12px;flex:none}
-.xp-seam i{display:block;min-width:2px}
-.xp-body{flex:1;min-height:0;padding:18px var(--g) 0;display:flex;flex-direction:column}
-.xp-name{font:400 64px/.88 var(--serif);letter-spacing:-.03em;color:#fff;margin:0}
-.xp-lead{font:400 19px/1.3 var(--serif);color:rgba(255,255,255,.88);margin:10px 0 0;max-width:34ch;text-wrap:pretty}
-.xp-note{font:400 italic 15px/1.3 var(--serif);color:rgba(255,255,255,.62);margin:10px 0 0}
+.xp-broken{font-size:30px;text-shadow:0 1px 12px rgba(0,0,0,.35)}
+.xp-broken small{display:block;margin-top:8px;font:italic 400 16px/1.3 var(--serif);letter-spacing:0;color:rgba(255,255,255,.82)}
+/* Saved: a mosaic of what you've kept, or a quiet heart when there's nothing yet */
+.xp-mosaic{position:absolute;inset:0;display:grid;grid-template-columns:repeat(var(--cols,3),1fr);grid-auto-rows:1fr;gap:2px;background:var(--tint,var(--ground))}
+.xp-mosaic i{display:block}
+.xp-mosaic-empty{background:var(--ground)}
+.xp-mosaic-empty i{background:var(--surface-1);box-shadow:inset 0 0 0 1px rgba(236,232,223,.05)}
+.xp-empty{position:absolute;left:50%;top:50%;width:96px;height:96px;margin:-48px 0 0 -48px;border-radius:50%;display:grid;place-items:center;
+  background:var(--surface-2);border:1px solid rgba(236,232,223,.1);color:var(--soft)}
+.xp-empty svg{width:40px;height:40px}
 
-/* dots on the right edge, a floating search button top-right — no tab row, no cards, no other labels */
-.xp-dots{position:absolute;right:10px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:9px;z-index:7;pointer-events:none}
-.xp-dots i{width:6px;height:6px;border-radius:50%;background:rgba(236,232,223,.32);transition:background .25s,transform .25s}
-.xp-dots i.on{background:#fff;transform:scale(1.35)}
-.xp-search{position:absolute;right:var(--g);top:calc(var(--top) + 14px);z-index:8;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:rgba(14,13,11,.62);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);color:#fff}
+/* the palette band: six real colors, sized by share, hairline gaps of the cover's own tint; each opens its page */
+.xp-seam{display:flex;gap:2px;height:clamp(30px,4.4vh,44px);flex:none;padding-top:2px}
+.xp-chip{display:block;min-width:14px;height:100%;padding:0;border:0;border-radius:0;box-shadow:inset 0 0 0 1px rgba(236,232,223,.08);transition:transform var(--dur-0) ease-out,filter var(--dur-0)}
+.xp-chip:active{transform:scaleY(1.18);filter:brightness(1.12)}
+
+.xp-body{flex:none;padding:clamp(16px,2.4vh,24px) calc(var(--g) + 28px) 0 var(--g);display:flex;flex-direction:column}
+.xp-name{font:400 clamp(56px,16vw,76px)/.88 var(--serif);letter-spacing:-.03em;color:#fff;margin:0}
+.xp-lead{font:400 clamp(18px,4.6vw,20px)/1.28 var(--serif);color:rgba(255,255,255,.9);margin:10px 0 0;text-wrap:balance}
+.xp-note{font:400 italic 16px/1.3 var(--serif);color:rgba(255,255,255,.66);margin:7px 0 0;
+  overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.xp-note i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px;vertical-align:1px;box-shadow:0 0 0 1px rgba(236,232,223,.22)}
+/* the primary, in thumb reach just above the Rooms corner (the corner, its gap and a 14 px breath) */
+.xp-act{flex:none;padding:clamp(14px,2.2vh,22px) var(--g) calc(var(--bottom) + var(--corner-gap,8px) + var(--corner,48px) + 14px)}
+.xp-go{min-height:54px;font-size:24px}
+
+/* page dots: right edge, level with the part's name (placed by explorePager); the current one a short bar */
+.xp-dots{position:absolute;right:calc(var(--g) - 6px);top:60%;display:flex;flex-direction:column;align-items:center;gap:7px;z-index:7;pointer-events:none;opacity:0;transition:opacity var(--dur-2)}
+.xp-dots.in{opacity:1}
+.xp-dots i{width:5px;height:5px;border-radius:3px;background:rgba(236,232,223,.34);transition:height var(--dur-2) var(--ease-grow),background var(--dur-2)}
+.xp-dots i.on{height:18px;background:#fff}
+/* search: one solid button top-right, inside the safe area, over the status-bar shade (never mid-image) */
+.xp-search{position:absolute;right:var(--g);top:calc(var(--top) + 4px);z-index:8;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:#fff}
 .xp-search svg{width:20px;height:20px}
 .xp-search:active{transform:scale(.94)}
+@media (prefers-reduced-motion:reduce){.xp-photo,.xp-dots i{transition:none}.xp-wait{animation:none}}
+@media (max-height:700px){.xp-name{font-size:52px}.xp-lead{font-size:17px}.xp-go{min-height:50px;font-size:22px}}
 
 /* ---------- Art: the merged Paintings + Poems feed ---------- */
 .art-band{margin:0 calc(-1 * var(--g));padding:0 var(--g) 20px;background:linear-gradient(180deg,var(--tint,var(--ground)) 0%,var(--ground) 280px)}
