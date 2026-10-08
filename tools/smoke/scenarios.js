@@ -648,6 +648,19 @@ scenario("pages", "colorPage x3: renders, swatch opens another, Back works", asy
   }
 });
 
+scenario("pages", "nearest stories: a name without an article offers the nearest ones, a tap opens another page", async t => {
+  await H.openPage(t, "#/name/cinnamon-buff");
+  const first = H.title(t);
+  await t.waitFor(".rp-ns-row", 10000, "a nearest-story row on a color with no article of its own");
+  const rows = t.$$(".rp-ns-row", t.$("#app"));
+  t.expect(rows.length >= 1 && rows.length <= 3, `${rows.length} nearest-story rows`);
+  t.expect(/match/.test(rows[0].textContent) && /min read/.test(rows[0].textContent), "a row shows the match and the minutes to read");
+  t.expect(!/\bthe 101\b/i.test(t.$("#app").innerText), "the page says 'the 101'");
+  await t.click(rows[0], { wait: 400 });
+  await t.waitFor(() => t.$(".cp-page .cp-hero-foot h1") && H.title(t) !== first, 8000, "a nearest-story tap to open another page");
+  t.notes.push(`${first} > ${H.title(t)}`);
+});
+
 scenario("pages", "namePage x3: renders, a near name opens another, Back works", async t => {
   await t.open("#shot=home");
   const core = await fetch("/data/core-names.json").then(r => r.json());

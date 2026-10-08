@@ -1192,10 +1192,15 @@ def main():
 
     # ---- write output ----
     print("writing output...", flush=True)
+    # Delete only this script's own outputs; foreign files here (articles-lite.json, artist-taste.json, ...) must survive.
     if out_dir.exists():
         import shutil
-        shutil.rmtree(out_dir)
-    (out_dir / "artists").mkdir(parents=True)
+        for f in list(out_dir.glob("paintings-*.json")) + [out_dir / "index.json", out_dir / "groups.json"]:
+            if f.exists():
+                f.unlink()
+        if (out_dir / "artists").exists():
+            shutil.rmtree(out_dir / "artists")
+    (out_dir / "artists").mkdir(parents=True, exist_ok=True)
 
     def ship_pct(pct):
         o = {"a": pct["arc"].get("Lmean")}
