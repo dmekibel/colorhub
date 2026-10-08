@@ -596,6 +596,38 @@ scenario("map", "stage glide: no overlap at a quarter, half and three quarters o
   }
   t.notes.push(res.join(", "));
 });
+scenario("map", "search 2.0: a hex and a modifier fly; a decade, a painter and a road light up", async t => {
+  const ask = async q => {
+    if (t.$("#hmSearch").hidden) t.ev("document.querySelector('#hmView') && 0"), t.$("#hmSearch").hidden = false;
+    const inp = t.$("#hmq"); inp.focus(); inp.value = q; inp.dispatchEvent(new t.w.Event("input", { bubbles: true }));
+    await t.waitFor(() => !t.$("#hmqHint").hidden, 15000, `a hint for "${q}"`);
+    const hint = t.text("#hmqHint");
+    inp.dispatchEvent(new t.w.KeyboardEvent("keydown", { key: "Enter", bubbles: true }));
+    await t.sleep(500);
+    return hint;
+  };
+  await H.homeReady(t);
+  // the pull-down opens the field
+  const cv = t.$(".screen.hm canvas"), r = cv.getBoundingClientRect(), o = y => ({ bubbles: true, cancelable: true, clientX: r.left + r.width / 2, clientY: r.top + y, pointerId: 7, pointerType: "touch", isPrimary: true, view: t.w });
+  cv.dispatchEvent(new t.w.PointerEvent("pointerdown", o(40)));
+  for (const y of [60, 80, 100, 130]) { cv.dispatchEvent(new t.w.PointerEvent("pointermove", o(y))); await t.sleep(20); }
+  cv.dispatchEvent(new t.w.PointerEvent("pointerup", o(130)));
+  await t.sleep(200);
+  t.expect(!t.$("#hmSearch").hidden, "a pull down from the top did not open search");
+  let h = await ask("#2A6F77");
+  t.expect(/Fly to/.test(h) && /≈/.test(t.text(".toast")), `hex: hint "${h}", toast "${t.text(".toast")}"`);
+  h = await ask("deep celadon");
+  t.expect(/≈/.test(t.text(".toast")), `deep celadon: no "≈" toast (hint "${h}")`);
+  h = await ask("1660s");
+  await t.waitFor(".cs-hl-pill", 15000, "the 1660s constellation");
+  t.expect(/1660s · [\d,]+ paintings · as photographed/.test(t.text(".cs-hl-pill")), `decade pill says "${t.text(".cs-hl-pill")}"`);
+  await H.homeReady(t);
+  h = await ask("sargent");
+  await t.waitFor(() => /Sargent/.test(t.text(".cs-hl-pill")), 15000, "Sargent's constellation");
+  await H.homeReady(t);
+  h = await ask("between teal and navy");
+  await t.waitFor(() => /Between Teal and Navy/i.test(t.text(".cs-hl-pill")), 15000, "the road constellation");
+});
 scenario("map", "Look: family names when zoomed out is off by default and toggles on", async t => {
   await H.homeReady(t);
   t.expect(!t.ev("S.hm.famNames"), "family names are on by default");

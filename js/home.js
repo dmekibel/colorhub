@@ -214,7 +214,8 @@ function hmHome() {
       <button class="cx-title glass-box hm-title" aria-haspopup="dialog" aria-label="Which colors you see"><b><span></span>${CX_ICON.down}</b><small></small></button>
     </header>
     <div class="hm-search" id="hmSearch" hidden>
-      <label class="search"><span>${ICON.search}</span><input id="hmq" type="search" placeholder="sea, rust, Monet…" autocomplete="off" enterkeyhint="search"></label>
+      <label class="search"><span>${ICON.search}</span><input id="hmq" type="search" placeholder="a color, a hex, a painter, a decade…" autocomplete="off" enterkeyhint="go"></label>
+      <button class="hm-l18-hint" id="hmqHint" hidden></button>
     </div>
     <button class="corner l" data-rooms-corner aria-label="Rooms">${ROOMS_GLYPH}</button>
     <button class="corner r" id="hmView" aria-label="View">${HM_SLIDERS}</button>
@@ -380,17 +381,35 @@ function hmHome() {
     applyInset();
   }
   // ---------- search: a tap (from the View panel's header) reveals the field; typing filters the honeycomb ----------
-  const searchBox = $("#hmSearch"), searchInput = $("#hmq");
+  const searchBox = $("#hmSearch"), searchInput = $("#hmq"), searchHint = $("#hmqHint");
   function openSearch() { searchBox.hidden = false; hmShowChrome(true); searchInput.focus(); }
-  searchInput.addEventListener("blur", () => { if (!searchInput.value.trim()) { searchBox.hidden = true; render(true); } });
+  searchInput.addEventListener("blur", () => { if (!searchInput.value.trim()) { searchBox.hidden = true; l18Pending = null; searchHint.hidden = true; if (l18Filtered) { l18Filtered = false; render(true); } } });
+  // ---- L18 B3: search 2.0. Typing still filters; Return travels: a color (a name, a hex, "dusty pink", "between
+  // teal and navy") flies the map there, a decade or a painter lights up as a constellation (csOnMap). ----
+  let l18Pending = null, l18Filtered = false, l18Seq = 0;
+  const l18ShowHint = r => { l18Pending = r; searchHint.hidden = !r; if (r) searchHint.innerHTML = r.hint; };
+  searchInput.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); l18Go(); } });
+  function l18Go() {
+    const r = l18Pending; if (!r || !ctrl) return;
+    buzz(6); searchInput.blur(); searchBox.hidden = true; searchInput.value = ""; searchHint.hidden = true; l18Pending = null;
+    if (r.set) return csOnMap(r.set);
+    const fly = () => { const o = ctrl.flyToColor(r.h); if (o) toast(r.say(o)); };
+    if (l18Filtered) { l18Filtered = false; ctrl.update({ items, focus: { h: r.h }, soft: true }); const o = ctrl.current(); if (o) toast(r.say(o)); }
+    else fly();
+  }
+  searchHint.addEventListener("click", l18Go);
   searchInput.addEventListener("input", () => {
-    const q = searchInput.value.trim();
-    if (!q) return render(true);
+    const q = searchInput.value.trim(), seq = ++l18Seq;
+    l18ShowHint(null);
+    if (!q) { l18Filtered = false; return render(true); }
+    l18Resolve(q).then(r => { if (seq === l18Seq && el.isConnected && r) l18ShowHint(r); });
     // every core name, every library name (an alternate/library hit opens its color's page, "also called" shown
     // there — js/names.js namePage) and every shade (dormant while data/shades.json is empty)
     Promise.all([loadLongNames(), loadCoreNames(), loadShades()]).then(() => {
       if (!el.isConnected) return;
       const hits = searchColors((SHADES || []).length ? hmEveryShadeItems() : hmEveryNameItems(), q);
+      if (seq !== l18Seq || /^#?[0-9a-f]{3,6}$|^rgb|^between /i.test(q)) return;   // a hex or a road filters nothing; Return flies
+      l18Filtered = !!hits.length;
       if (ctrl) ctrl.update({ items: hits.length ? hits : items, soft: true });
     });
   });
@@ -456,6 +475,24 @@ function hmHome() {
     hmEdgeOpenLearn();
   };
   viewEl.addEventListener("pointerup", edgeEnd, true); viewEl.addEventListener("pointercancel", edgeEnd, true);
+  // L18 B3: the mirror gesture, a pull down from the top of Home opens search (View's magnifier stays the second way in)
+  let l18Pull = null;
+  viewEl.addEventListener("pointerdown", e => { l18Pull = e.isPrimary && e.clientY < viewEl.getBoundingClientRect().top + 100 ? { x0: e.clientX, y0: e.clientY, on: false } : null; }, true);
+  viewEl.addEventListener("pointermove", e => {
+    if (!l18Pull) return;
+    const dx = e.clientX - l18Pull.x0, dy = e.clientY - l18Pull.y0;
+    if (!l18Pull.on) {
+      if (dy > 34 && dy > Math.abs(dx) * 1.5) {
+        l18Pull.on = true;
+        const cv = viewEl.querySelector("canvas"), ours = l18Pull; l18Pull = null;
+        if (cv) cv.dispatchEvent(new PointerEvent("pointercancel", { pointerId: e.pointerId, bubbles: true, clientX: e.clientX, clientY: e.clientY }));
+        l18Pull = ours;
+      } else { if (Math.hypot(dx, dy) > 34 || dy < -10) l18Pull = null; return; }
+    }
+    e.stopPropagation();
+  }, true);
+  const l18PullEnd = e => { if (!l18Pull) return; const was = l18Pull.on; l18Pull = null; if (!was) return; e.stopPropagation(); buzz(6); openSearch(); };
+  viewEl.addEventListener("pointerup", l18PullEnd, true); viewEl.addEventListener("pointercancel", l18PullEnd, true);
   // the signature motion needs a source shape; a swipe has none, so grow from a thin strip at the very bottom
   // edge — content rising up from where the finger was, same spirit as a bubble growing from where it was tapped
   function hmEdgeOpenLearn() {
@@ -466,6 +503,7 @@ function hmHome() {
     src.remove();
   }
 
+  window.HM_SEARCH = q => { openSearch(); searchInput.value = q; searchInput.dispatchEvent(new Event("input")); };   // #shot=home:find:<q>
   window.HM_CHOOSER = chooser;   // #shot=home:look hook (tools/shots.sh): drive the Show/Look sheet without a tap
   render(false);
 }
@@ -539,6 +577,76 @@ function hmPullClose(screen, close) {
 }
 
 // A tap, as a real pointer sequence: the grab handle and the title read pointerdown/up, not click.
+// ---------- L18 B3: search 2.0's resolver. l18Resolve(q) -> Promise of null, a color to fly to { h, hint, say(o) },
+// or a set to light up { set, hint }. Modifiers are fixed Lab shifts, so the result is approximate and says so
+// ("dusty pink ≈ Ash rose"). Painter and decade sets are measured from photographs of paintings: "as photographed".
+const L18_MOD = { pale: { dL: 15, k: .5 }, light: { dL: 10, k: .85 }, dark: { dL: -14, k: 1 }, deep: { dL: -12, k: 1.15 }, dusty: { k: .6 },
+  muted: { k: .55 }, greyish: { k: .4 }, grayish: { k: .4 }, bright: { dL: 3, k: 1.3 }, vivid: { dL: 2, k: 1.35 }, warm: { to: 60 }, cool: { to: 250 } };
+const l18Get = p => fetch(p + (typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : "")).then(r => r.ok ? r.json() : null).catch(() => null);
+let L18_NAMES = null, L18_PAINTERS = null, L18_GROUPS = null;
+function l18NameMap() {
+  const key = (CORE_NAMES || []).length + "|" + (LONG_NAMES ? 1 : 0);
+  if (L18_NAMES && L18_NAMES.key === key) return L18_NAMES.m;
+  const m = new Map();
+  hmEveryNameItems().forEach(e => { const k = e.n.toLowerCase(); if (!m.has(k)) m.set(k, { n: e.n, h: e.h }); });
+  (CORE_NAMES || []).forEach(e => (e.also || []).forEach(a => { const k = String(a).toLowerCase(); if (!m.has(k)) m.set(k, { n: e.n, h: e.h }); }));
+  L18_NAMES = { key, m };
+  return m;
+}
+const l18Color = q => l18NameMap().get(String(q).toLowerCase().trim()) || null;
+function l18Hex(q) {
+  let m = /^#?([0-9a-f]{6})$/i.exec(q); if (m) return "#" + m[1].toUpperCase();
+  m = /^#([0-9a-f])([0-9a-f])([0-9a-f])$/i.exec(q); if (m) return ("#" + m[1] + m[1] + m[2] + m[2] + m[3] + m[3]).toUpperCase();
+  m = /^rgb\(?\s*(\d{1,3})[\s,]+(\d{1,3})[\s,]+(\d{1,3})\s*\)?$/i.exec(q);
+  if (m && [m[1], m[2], m[3]].every(v => +v <= 255)) return "#" + [m[1], m[2], m[3]].map(v => (+v).toString(16).padStart(2, "0")).join("").toUpperCase();
+  return null;
+}
+const l18Sw = hs => `<span class="hm-l18-sw">${hs.slice(0, 6).map(h => `<i style="background:${h}"></i>`).join("")}</span>`;
+const l18Hexes = names => [...new Set(names.map(n => (l18Color(n) || {}).h).filter(Boolean))];
+async function l18Resolve(q) {
+  await Promise.all([loadCoreNames(), loadLongNames()]);
+  const ql = q.toLowerCase().replace(/\s+/g, " ").trim();
+  const hx = l18Hex(ql);
+  if (hx) return { h: hx, hint: `${l18Sw([hx])}<span>Fly to <b>${hx}</b></span>`, say: o => `${hx} ≈ ${o.n}` };
+  let m = /^between (.+?) and (.+)$/.exec(ql);
+  if (m) {
+    const a = l18Color(m[1]), b = l18Color(m[2]); if (!a || !b) return null;
+    const A = lab(a.h), B = lab(b.h), road = Array.from({ length: 7 }, (_, i) => labHex(...A.map((v, k) => v + (B[k] - v) * i / 6)));
+    const mid = road[3], colors = [mid].concat(road.filter(h => h !== mid)).map(h => ({ h }));
+    return { set: colorSet({ kind: "road", id: a.n + "|" + b.n, title: `Between ${a.n} and ${b.n}`, colors }), hint: `${l18Sw(road)}<span>The road from <b>${esc(a.n)}</b> to <b>${esc(b.n)}</b></span>` };
+  }
+  m = /^(1[3-9]\d0)s?$/.exec(ql);
+  if (m) {
+    L18_GROUPS = L18_GROUPS || await l18Get("data/analysis/groups.json");
+    const g = L18_GROUPS && L18_GROUPS.byDecade && L18_GROUPS.byDecade[m[1]]; if (!g) return null;
+    const hs = l18Hexes((g.distinctive || []).concat(g.top || []).map(x => x.name)); if (!hs.length) return null;
+    const title = `${m[1]}s · ${g.n.toLocaleString()} painting${g.n === 1 ? "" : "s"} · as photographed`;
+    return { set: colorSet({ kind: "decade", id: m[1], title, colors: hs.map(h => ({ h })) }), hint: `${l18Sw(hs)}<span>Light up the <b>${m[1]}s</b></span>` };
+  }
+  const exact = l18Color(ql);
+  if (exact) return { h: exact.h, hint: `${l18Sw([exact.h])}<span>Fly to <b>${esc(exact.n)}</b></span>`, say: o => o.n.toLowerCase() === exact.n.toLowerCase() ? exact.n : `${exact.n} · nearest here: ${o.n}` };
+  const words = ql.split(" "), mod = L18_MOD[words[0]], base = mod && words.length > 1 && l18Color(words.slice(1).join(" "));
+  if (base) {
+    let [L, C, H] = lch(base.h);
+    if (mod.dL) L = clamp(L + mod.dL, 2, 98);
+    if (mod.k) C *= mod.k;
+    if (mod.to != null) { const d = ((mod.to - H + 540) % 360) - 180; H += Math.sign(d) * Math.min(15, Math.abs(d)); }
+    const h = lchHex(L, C, H);
+    return { h, hint: `${l18Sw([h])}<span>Fly to <b>${esc(ql)}</b></span>`, say: o => `${ql} ≈ ${o.n}` };
+  }
+  if (ql.length < 3) return null;
+  L18_PAINTERS = L18_PAINTERS || await l18Get("data/artists/meta.json").then(d => d && d.a ? Object.entries(d.a).map(([slug, a]) => ({ slug, n: a.n, k: a.k || 0, w: a.n.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").split(/[\s.-]+/) })) : []);
+  const qw = ql.normalize("NFD").replace(/[̀-ͯ]/g, "").split(" ");
+  const p = L18_PAINTERS.filter(a => qw.every(x => a.w.some(w => w.startsWith(x)))).sort((a, b) => b.k - a.k)[0];
+  if (!p) return null;
+  const A = await l18Get(`data/analysis/artists/${p.slug}.json`); if (!A) return null;
+  const names = (A.signature || []).map(x => x.name).concat(...(A.clusters || []).map(c => c.colors || []));
+  const hs = l18Hexes(names); if (!hs.length) return null;
+  const short = p.n.split(" ").slice(-1)[0], n = A.n || p.k;
+  const title = `${short} · ${n.toLocaleString()} painting${n === 1 ? "" : "s"} · as photographed${n < 15 ? " · few paintings" : ""}`;
+  return { set: colorSet({ kind: "painter", id: p.slug, title, colors: hs.map(h => ({ h })) }), hint: `${l18Sw(hs)}<span>Light up <b>${esc(p.n)}</b>'s colors</span>` };
+}
+
 function hmTap(el) {
   if (!el) return;
   const r = el.getBoundingClientRect(), x = r.left + r.width / 2, y = r.top + r.height / 2, o = { bubbles: true, clientX: x, clientY: y, pointerId: 1 };
@@ -553,6 +661,7 @@ function hmShot(arg) {
   if (arg === "far" || arg === "fam") S.hm = Object.assign(S.hm || {}, { src: "stage:1000", filter: "all", zoom: .01, famNames: arg === "fam" });
   hmHome();
   if (arg === "bar") setTimeout(() => { const s = document.querySelector(".screen.hm"); if (s) s.classList.remove("chrome-hide"); }, 3200);
+  if (/^find:/.test(arg)) setTimeout(() => window.HM_SEARCH && window.HM_SEARCH(arg.slice(5)), 300);
   if (arg === "rooms") setTimeout(() => hmTap(document.querySelector("[data-rooms-corner]")), 150);
   if (arg === "views") setTimeout(() => hmTap(document.getElementById("hmView")), 150);
   if (arg === "look") setTimeout(() => window.HM_CHOOSER && window.HM_CHOOSER("look"), 150);   // the long-press shortcut, without the long-press

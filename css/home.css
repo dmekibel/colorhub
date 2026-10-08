@@ -140,3 +140,11 @@
 .hm-chooser-acts{display:flex;gap:8px}
 .hm-l18-fam{margin:8px 0 6px}
 .hm-l18-fam button{height:32px;font-size:14px}
+/* L18 B3: the search hint, one paper row under the field; Return or a tap travels */
+.hm-l18-hint{display:flex;align-items:center;gap:10px;width:100%;margin-top:8px;min-height:44px;padding:8px 16px;border-radius:var(--r-pill);background:var(--paper);color:var(--paper-ink);font:400 16px/1.2 var(--serif);text-align:left}
+.hm-l18-hint[hidden]{display:none}
+.hm-l18-hint b{font-weight:400;font-style:italic}
+.hm-l18-hint span:last-child{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hm-l18-sw{flex:none;display:flex}
+.hm-l18-sw i{width:22px;height:22px;border-radius:50%;margin-left:-6px;box-shadow:0 0 0 2px var(--paper)}
+.hm-l18-sw i:first-child{margin-left:0}
