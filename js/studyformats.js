@@ -67,8 +67,10 @@ PR_STEPS.edge = { by: null, render(box, it, ctx = {}) {
       fb.innerHTML = `<p>${k === 0 ? `Right on the border: ${esc(low(na))} gives way to ${esc(low(nb))} just after it.`
         : ok ? `Close: the border is one step ${k > 0 ? "sooner" : "further"}.`
         : k > 0 ? `${esc(na)} ends ${steps(k)} sooner. Past it the color is nearer ${esc(low(nb))}.` : `${esc(na)} reaches ${steps(k)} further than that.`}</p>`;
-      if (ok) return prAuto(() => resolve(res), 1300);
-      prNextBtn(foot, () => resolve(res));
+      // the same hold as every other step: read the line, then Next (or a tap anywhere)
+      if (typeof prHold === "function") prHold(box, foot, () => resolve(res));
+      else if (ok) return prAuto(() => resolve(res), 1300);
+      else prNextBtn(foot, () => resolve(res));
       prKeyer(ctx)(e => { if (e.key === "Enter" || e.key === " " || e.key === "ArrowRight") { e.preventDefault(); resolve(res); } });
     };
     box.querySelectorAll(".sf-edge-b").forEach(x => x.onclick = () => choose(+x.dataset.i));

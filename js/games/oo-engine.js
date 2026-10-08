@@ -36,7 +36,8 @@ const OO_BREATH = ["easy", "medium", "hard", "easy", "harder", "boss"];
 // twins and "which way" need a clearer difference; small tiles look less colorful.
 const OO_VF = { one: 1, pair: 1, group: .72, count: 1.1, twins: 1.35, which: 1.3 };
 const OO_BF = { grid: 1, ring: 1, honey: 1, strip: 1, sizes: 1, mosaic: 1.1, busy: 1, gradient: 1.2, painting: 1.8 };
-const ooSizeF = cols => cols <= 4 ? 1 : cols === 5 ? 1.1 : cols === 6 ? 1.2 : 1.28;
+// small tiles look less colorful and are harder to compare: a gap is drawn a little larger on big grids (Classic goes to 16 × 16)
+const ooSizeF = cols => cols <= 4 ? 1 : cols === 5 ? 1.1 : cols === 6 ? 1.2 : cols <= 8 ? 1.28 : cols <= 11 ? 1.36 : 1.45;
 
 function ooModel(m) {
   m = m && typeof m === "object" ? m : {};
@@ -137,6 +138,31 @@ function ooBase(rnd, o = {}) {
   return lchHex(58, 30, 220);
 }
 
+// ---------- the gap: how different two drawn tiles look (David, 2026-10-09: "you can choose super hard and it still
+// gives you really easy questions") ----------
+// CIEDE2000 divides a chroma difference by Sc = 1 + 0.045 C (and a hue difference by Sh = 1 + 0.015 C T): fitted on
+// small paint samples, it shrinks differences between vivid colors. On two big glowing tiles side by side the eye
+// sees them far better: at "1.1" a vividness move on a saturated teal or yellow was ΔE76 3.5 and obvious, while a
+// lightness move at the same 1.1 was ΔE76 1.4 and hard. The game's gap keeps CIEDE2000 but softens the two
+// weightings (chroma ×0.15, hue ×0.5 of their slope), so lightness, vividness and hue moves at one level look about
+// equally hard (tools/games_test.js checks the three axes stay within 25% of each other in ΔE76). Every gap the game
+// draws, scores and shows goes through this; color names elsewhere still use de2000.
+const OO_KC = .15, OO_KH = .5;
+function ooGapDE(h1, h2) {
+  const [L1, a1, b1] = Array.isArray(h1) ? h1 : lab(h1), [L2, a2, b2] = Array.isArray(h2) ? h2 : lab(h2), rad = Math.PI / 180;
+  const Cb = (Math.hypot(a1, b1) + Math.hypot(a2, b2)) / 2, G = .5 * (1 - Math.sqrt(Cb ** 7 / (Cb ** 7 + 25 ** 7)));
+  const a1p = a1 * (1 + G), a2p = a2 * (1 + G), C1p = Math.hypot(a1p, b1), C2p = Math.hypot(a2p, b2);
+  const hp = (b, a) => { if (!b && !a) return 0; const t = Math.atan2(b, a) / rad; return t < 0 ? t + 360 : t; };
+  const h1p = hp(b1, a1p), h2p = hp(b2, a2p), dL = L2 - L1, dC = C2p - C1p;
+  let dh = 0; if (C1p * C2p) { dh = h2p - h1p; if (dh > 180) dh -= 360; else if (dh < -180) dh += 360; }
+  const dH = 2 * Math.sqrt(C1p * C2p) * Math.sin(dh * rad / 2), Lb = (L1 + L2) / 2, Cbp = (C1p + C2p) / 2;
+  let hb = h1p + h2p; if (C1p * C2p) { if (Math.abs(h1p - h2p) > 180) hb += h1p + h2p < 360 ? 360 : -360; hb /= 2; }
+  const T = 1 - .17 * Math.cos((hb - 30) * rad) + .24 * Math.cos(2 * hb * rad) + .32 * Math.cos((3 * hb + 6) * rad) - .2 * Math.cos((4 * hb - 63) * rad);
+  const Rc = 2 * Math.sqrt(Cbp ** 7 / (Cbp ** 7 + 25 ** 7)), dTh = 30 * Math.exp(-(((hb - 275) / 25) ** 2));
+  const Sl = 1 + .015 * (Lb - 50) ** 2 / Math.sqrt(20 + (Lb - 50) ** 2), Sc = 1 + .045 * OO_KC * Cbp, Sh = 1 + .015 * OO_KH * Cbp * T, Rt = -Math.sin(2 * dTh * rad) * Rc;
+  return Math.sqrt((dL / Sl) ** 2 + (dC / Sc) ** 2 + (dH / Sh) ** 2 + Rt * (dC / Sc) * (dH / Sh));
+}
+
 // ---------- moving a color by exactly d (as drawn, in hex) ----------
 // axis "light" | "chroma" | "hue" in LCh, sign ±1. Returns { hex, act } with act = ΔE00 between the two hex codes,
 // or null if the move leaves the screen gamut. The amount is found by bisection on the drawn colors.
@@ -146,7 +172,7 @@ function ooMove(baseHex, axis, sign, d) {
     const L2 = axis === "light" ? L + sign * k : L, C2 = axis === "chroma" ? C + sign * k : C, H2 = axis === "hue" ? H + sign * k : H;
     if (L2 < 2 || L2 > 98 || C2 < 0 || !ooOk(L2, C2, H2)) return null;
     const hex = lchHex(L2, C2, (H2 + 360) % 360);
-    return { hex, act: de2000(baseHex, hex) };
+    return { hex, act: ooGapDE(baseHex, hex) };
   };
   let lo = 0, hi = null, best = null;
   // grow until the drawn difference reaches d (or the gamut ends)
@@ -167,9 +193,10 @@ function ooMove(baseHex, axis, sign, d) {
   return best;
 }
 // a move in any Lab direction (twins, "was it there", n-back lures)
-function ooMoveDir(baseHex, v, d) {
+// de: the metric (de2000 for Across the line's name boundaries; ooGapDE for the odd-one-out boards)
+function ooMoveDir(baseHex, v, d, de = de2000) {
   const B = lab(baseHex), n = Math.hypot(...v) || 1, u = v.map(x => x / n);
-  const at = k => { const P = B.map((x, i) => x + u[i] * k); if (P[0] < 2 || P[0] > 98 || !inGamut(...P)) return null; const hex = labHex(...P); return { hex, act: de2000(baseHex, hex) }; };
+  const at = k => { const P = B.map((x, i) => x + u[i] * k); if (P[0] < 2 || P[0] > 98 || !inGamut(...P)) return null; const hex = labHex(...P); return { hex, act: de(baseHex, hex) }; };
   let lo = 0, hi = null, best = null;
   for (let k = Math.max(.3, d * .5); k <= 90; k *= 1.35) { const r = at(k); if (!r) break; if (!best || Math.abs(r.act - d) < Math.abs(best.act - d)) best = r; if (r.act >= d) { hi = k; break; } lo = k; }
   if (hi == null) return best && Math.abs(best.act - d) <= d * .15 ? best : null;
@@ -283,8 +310,8 @@ function ooRound(spec) {
       for (let i = 0; i < N - 2; i++) {
         let got = null;
         for (let t = 0; t < 60 && !got; t++) {
-          const r = ooMoveDir(base, ooRandDir(rnd), d * ooBtw(1, 1.45, rnd));
-          if (r && all.every(h => de2000(h, r.hex) >= d * .92)) got = r.hex;
+          const r = ooMoveDir(base, ooRandDir(rnd), d * ooBtw(1, 1.45, rnd), ooGapDE);
+          if (r && all.every(h => ooGapDE(h, r.hex) >= d * .92)) got = r.hex;
         }
         if (!got) { ok = false; break; }
         others.push(got); all.push(got);
@@ -292,7 +319,7 @@ function ooRound(spec) {
       if (!ok) continue;
       let k = 0;
       for (let i = 0; i < N; i++) colors[i] = tw.includes(i) ? base : others[k++];
-      const act = Math.min(...others.map(h => de2000(base, h)), ...others.flatMap((h, i) => others.slice(i + 1).map(x => de2000(h, x))));
+      const act = Math.min(...others.map(h => ooGapDE(base, h)), ...others.flatMap((h, i) => others.slice(i + 1).map(x => ooGapDE(h, x))));
       // twins differ in every direction at once, so they measure no single judgment: judg "any" (the model
       // draws their difficulty from the mean of the three axes and doesn't file the answer under one)
       Object.assign(out, { colors, ans: tw, act, odd: base, dir: null, g: 2 / (N * (N - 1)), axis: "any" });
@@ -338,9 +365,11 @@ function ooRound(spec) {
       const g = geo.cols, names = Object.keys(OO_SHAPES), sh = OO_SHAPES[ooPick(names, rnd)];
       const w = Math.max(...sh.map(p => p[0])) + 1, h = Math.max(...sh.map(p => p[1])) + 1, ox = Math.floor(rnd() * (g - w + 1)), oy = Math.floor(rnd() * (g - h + 1));
       ans = sh.map(([x, y]) => (oy + y) * g + ox + x);
-    } else ans = [Math.floor(rnd() * N)];
+    } else if (v === "one" && spec.k > 1) ans = ooShuf([...Array(N).keys()], rnd).slice(0, Math.min(spec.k, N - 1));   // Classic: several odd tiles, find them all
+    else ans = [Math.floor(rnd() * N)];
     ans.forEach(i => { colors[i] = m.hex; });
-    Object.assign(out, { colors, ans, act: m.act, odd: m.hex, dir: ooDirWord(base, m.hex), g: v === "pair" ? 2 / (N * (N - 1)) : v === "group" ? ans.length / N : v === "which" ? 1 / (6 * N) : 1 / N });
+    let gk = 1; for (let j = 0; j < ans.length; j++) gk *= (j + 1) / (N - j);   // the chance of tapping all k by luck
+    Object.assign(out, { colors, ans, k: ans.length, act: m.act, odd: m.hex, dir: ooDirWord(base, m.hex), g: v === "pair" ? 2 / (N * (N - 1)) : v === "group" ? ans.length / N : v === "which" ? 1 / (6 * N) : gk });
     return ooFinish(out, spec);
   }
   // could not draw it (an extreme d): fall back to an easy plain round, flagged
@@ -523,8 +552,8 @@ function ooWasRound(d, rnd, from) {
   for (let t = 0; set.length < 4; t++) { const c = ooBase(rnd, { set: t < 60 ? from : null }); if (set.every(h => de2000(h, c) > (t < 120 ? 18 : 8))) set.push(c); }
   const near = Math.floor(rnd() * 4);
   for (let t = 0; t < 20; t++) {
-    const m = ooMoveDir(set[near], ooRandDir(rnd), d);
-    if (m && set.every(h => de2000(h, m.hex) >= d * .85)) { const opts = ooShuf([...set, m.hex], rnd); return { set, opts, fresh: opts.indexOf(m.hex), act: m.act, near, d }; }
+    const m = ooMoveDir(set[near], ooRandDir(rnd), d, ooGapDE);
+    if (m && set.every(h => ooGapDE(h, m.hex) >= d * .85)) { const opts = ooShuf([...set, m.hex], rnd); return { set, opts, fresh: opts.indexOf(m.hex), act: m.act, near, d }; }
   }
   return null;
 }
@@ -680,7 +709,12 @@ const ooLim = (v, a, b) => Math.max(a, Math.min(b, v));
 function ooPrefNorm(p) {
   p = p && typeof p === "object" && !Array.isArray(p) ? p : {};
   // d: a preset id, or "level" (you tapped a level on the map: lv is the one to play)
-  return { m: p.m === "pick" ? "pick" : "you", d: OO_DIFF_IDS.includes(p.d) || p.d === "level" ? p.d : "medium", lv: Number.isInteger(p.lv) ? ooLim(p.lv, 0, OO_LEVEL_N - 1) : null };
+  // Odd one out also keeps its board (mode: Classic or Shuffle; grid: 2-16 a side; odd: 1-4 odd tiles)
+  const q = { m: p.m === "pick" ? "pick" : "you", d: OO_DIFF_IDS.includes(p.d) || p.d === "level" ? p.d : "medium", lv: Number.isInteger(p.lv) ? ooLim(p.lv, 0, OO_LEVEL_N - 1) : null };
+  q.mode = p.mode === "shuffle" ? "shuffle" : "classic";
+  q.grid = Number.isInteger(p.grid) ? ooLim(p.grid, OO_GRID_MIN, OO_GRID_MAX) : 3;
+  q.odd = Number.isInteger(p.odd) ? ooLim(p.odd, 1, OO_ODD_MAX) : 1;
+  return q;
 }
 // Odd one out: the ladder level a Choose pick plays, or null for For you. th is your threshold (ΔE00) for Edge of my eye.
 function ooPickLevel(p, th) {
@@ -693,6 +727,64 @@ function ooPickLevel(p, th) {
 const ooPickTier = p => { p = ooPrefNorm(p); return p.m === "pick" ? OO_DIFF_TIER[p.d] : null; };
 // test-out rounds are Hard, or your chosen difficulty when that is harder still
 const ooTestTier = p => { const t = ooPickTier(p); return t && OO_TIER[t] <= OO_TIER.hard ? t : "hard"; };
+
+// ---------- a session: one staircase that climbs to the edge of your eye (David, 2026-10-09) ----------
+// "A lesson should progressively get harder and harder and match exactly where your vision is: nothing too hard,
+// nothing too easy, and keep going longer." A session is 30 rounds (Keep going adds 10) on one continuous level x
+// (0..19; the gap is log-interpolated between the ladder's levels). Until the first miss it climbs a whole level per
+// right answer (the run-up); after that a right answer climbs half a level and a miss drops one and a half. That
+// weighted staircase (Kaernbach 1991) settles where you are right 1.5 / (0.5 + 1.5) = 75% of the time: hard enough
+// to feel, easy enough to keep going. Your edge today is the mean level at the turning points (after the first two).
+// Choose starts x at your pick (round 1 is drawn at exactly that level's gap); For you starts a little below your
+// measured edge, so the first rounds are wins and the climb is visible.
+const OO_GRID_MIN = 2, OO_GRID_MAX = 16, OO_ODD_MAX = 4;
+const OO_SESSION_N = 30, OO_SESSION_MORE = 10, OO_UP = .5, OO_DOWN = 1.5, OO_RUSH = 1;
+// between two levels the gap is log-interpolated; on a whole level it is exactly that level's gap (the number the ladder shows)
+const ooGapAt = x => { x = ooLim(+x || 0, 0, OO_LEVEL_N - 1); const i = Math.min(OO_LEVEL_N - 2, Math.floor(x)), f = x - i; return f < 1e-9 ? OO_GAPS[i] : Math.exp(Math.log(OO_GAPS[i]) * (1 - f) + Math.log(OO_GAPS[i + 1]) * f); };
+// the continuous level of a gap (the inverse of ooGapAt)
+function ooXOfGap(g) {
+  if (!(g < OO_GAPS[0])) return 0;
+  for (let i = 0; i < OO_LEVEL_N - 1; i++) if (g >= OO_GAPS[i + 1]) return i + Math.log(g / OO_GAPS[i]) / Math.log(OO_GAPS[i + 1] / OO_GAPS[i]);
+  return OO_LEVEL_N - 1;
+}
+const ooSess = (lv, n = OO_SESSION_N) => { const x = ooLim(+lv || 0, 0, OO_LEVEL_N - 1); return { x, x0: x, n, i: 0, hits: 0, hist: [], rev: [], dir: 0, rush: true, top: -1, hi: x, ups: 0 }; };
+// one answer: moves the level; returns true when this answer reached a new whole level (a level-up moment)
+function ooSessStep(s, ok) {
+  const x = s.x, hi0 = Math.floor(s.hi);
+  s.hist.push({ x, ok: ok ? 1 : 0 }); s.i++;
+  if (ok) { s.hits++; s.top = Math.max(s.top, Math.floor(x + 1e-9)); }
+  const move = ok ? (s.rush ? OO_RUSH : OO_UP) : -OO_DOWN;
+  if (!ok) s.rush = false;
+  const dir = Math.sign(move);
+  if (s.dir && dir !== s.dir) s.rev.push(x);
+  s.dir = dir;
+  s.x = ooLim(x + move, 0, OO_LEVEL_N - 1);
+  s.hi = Math.max(s.hi, s.x);
+  const up = !!ok && Math.floor(s.hi + 1e-9) > hi0;
+  if (up) s.ups++;
+  return up;
+}
+// your edge today, as a continuous level: the turning points once there are three (the first two dropped when
+// there are enough), else the mean level of the last ten rounds
+function ooSessEdge(s) {
+  const r = s.rev.length >= 6 ? s.rev.slice(2) : s.rev;
+  if (r.length >= 3) return r.reduce((a, x) => a + x, 0) / r.length;
+  const h = s.hist.slice(-10);
+  return h.length ? h.reduce((a, x) => a + x.x, 0) / h.length : s.x;
+}
+// where a session starts. pick: a chosen level (Choose); else a little below your last edge, or below the level of
+// your measured threshold th (the model's 50%-above-guessing point; the 75% point sits about two levels easier)
+function ooSessStart(o = {}) {
+  if (o.pick != null) return ooLim(o.pick | 0, 0, OO_LEVEL_N - 1);
+  if (o.edge != null && isFinite(o.edge)) return Math.max(0, Math.floor(o.edge - 3));
+  if (o.th) return Math.max(0, Math.floor(ooXOfGap(o.th) - 4));
+  return 0;
+}
+// Classic: one square grid the whole session (n a side, k odd tiles); Shuffle rotates the layouts
+const ooClassic = (n = 3, k = 1) => { n = ooLim(n | 0, OO_GRID_MIN, OO_GRID_MAX); return { id: "classic", name: `${n} × ${n} squares`, v: "one", b: "grid", n, k: ooLim(k | 0, 1, Math.min(OO_ODD_MAX, n * n - 1)), at: 0 }; };
+// the target gap for the next round of a session on a layout: the session's level, through the layout's modifier.
+// No easing for new layouts or anything else: the staircase alone sets the difficulty, so a chosen level is honest.
+const ooSessD = (s, lay) => ooLim(ooGapAt(s.x) * ooLayoutF(lay), OO_MIN, OO_MAX);
 
 // ---------- the level map: every level is open; clearing is playing it or testing out ----------
 const ooDoneAt = (stars, cleared, i) => !!((stars && Array.isArray(stars[i]) && stars[i][0]) || (cleared && cleared[i]));
@@ -738,6 +830,7 @@ if (typeof module !== "undefined") module.exports = {
   OO_WORLDS, OO_LEVELS, OO_LEVEL_N, OO_GAPS, ooLevelGap, ooLevelOfGap, ooGapWord, OO_PRESET_LV, ooLevelForTh, OO_LEVEL_ROUNDS, OO_LEVEL_PASS,
   OO_LAYOUTS, ooLayout, ooLayoutsFor, ooLayoutNext, ooLayoutF, OO_KINDS, OO_ROUNDS, OO_MIX_AT, OO_MIX, OO_PASS, OO_FAST_MS, ooTierAt, ooKindKey, OO_DAILY_D, ooDaily, ooDayNum, ooShareText,
   OO_DIFFS, OO_DIFF_IDS, OO_DIFF_TIER, ooDiffName, ooPrefNorm, ooPickLevel, ooPickTier, ooTestTier, ooDoneAt, ooFrontier, ooTestOutMark, OO_TEST_ROUNDS,
+  OO_GRID_MIN, OO_GRID_MAX, OO_ODD_MAX, OO_SESSION_N, OO_SESSION_MORE, OO_UP, OO_DOWN, ooGapAt, ooXOfGap, ooSess, ooSessStep, ooSessEdge, ooSessStart, ooClassic, ooSessD, ooGapDE, OO_KC, OO_KH,
   OO_EDGE, ooEdgeTh, ooEdgeD, ooEdgeUpdate, ooPairRatioOf, ooWhoseAlts,
   ooPairsRound, ooPairClear, OO_PAIR_RATIO, ooLineRound, ooNameMargin, OO_LINE_MARGIN, OO_LINE_P0, OO_LINE_MIN, ooGradStrip, ooOrderRound, ooChangedRound, ooWasRound, ooNbackSeq, ooCountPick,
 };
