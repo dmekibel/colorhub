@@ -354,6 +354,24 @@ scenario("pages", "namePage x3: renders, a near name opens another, Back works",
   }
 });
 
+// js/article-refs.js: the figure cards in an article (Mauve has an article, a twin gem, a film and paintings that hold the color)
+scenario("pages", "article figure cards: Mauve draws them, a card opens its page, Back returns to the article", async t => {
+  await H.openPage(t, "#/color/mauve", "Mauve");
+  await t.waitFor(() => t.$$(".ar-fig").length >= 2, 25000, "the article's figure cards");
+  const figs = t.$$(".ar-fig");
+  t.expect(figs.length <= 5, `${figs.length} auto-figures, the limit is 5`);
+  t.expect(figs.every(f => /\d+% match to Mauve/.test(t.text(f.querySelector(".ar-fig-m")))), "a card is missing its '% match to Mauve' line");
+  t.expect(figs.every(f => [112, 88].includes(f.querySelector(".ar-fig-im").getBoundingClientRect().width)), "a card's picture box lost its fixed size");
+  const secs = figs.map(f => (f.closest("[data-ar-sec]") || {}).id || "seen").filter(x => x !== "seen");
+  t.expect(new Set(secs).size === secs.length, "two figures landed in one section");
+  const card = t.$('.ar-fig[data-kind="gem"] .ar-fig-b') || t.$(".ar-fig .ar-fig-b");
+  const title = t.text(card.querySelector(".ar-fig-n"));
+  await t.click(card, { wait: 700 });
+  await t.waitFor(() => !t.$(".ar") && t.$(".p-title, .cp-hero-foot h1, .gl-page, .film-page"), 10000, `the page for "${title}"`);
+  await t.click("[data-back]", { wait: 600 });
+  await t.waitFor(() => t.$(".ar") && t.$$(".ar-fig").length >= 2, 20000, "the article and its figures after Back");
+});
+
 scenario("pages", "a tapped in-between hex opens its nearest name with 'Your color'", async t => {
   await H.openPage(t, "#/color/teal", "Teal");
   let sawYours = 0;

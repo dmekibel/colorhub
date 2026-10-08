@@ -27,6 +27,7 @@ Output: data/gallery/ (deleted and rewritten each run)
                u16 year + 20000 (0 = undated) · u8 museum (sources index) · u8 aspect (ln(h/w) mapped -1.6..1.6
                onto 0..255) · u8 mean L* x 2.5 · u8 mean C* x 3 · 6 x (R, G, B, share x 250).
                About 30 bytes a painting: 40,000 paintings is 1.2 MB.
+  ids.txt      painting ids, one per line, in index order (line i = gallery index i). For the article reader's [[painting:<id>]].
   names.json   the library names used: [[name, hex, "src src", kanji?, meaning?]]. Loaded with the first painting page.
   d/NNN.json   detail shards of `shard` paintings (index order): [id, title, artist, country, movement, image URL,
                record URL, [library name index x 6], [app word index x 6], hi image URL, pool]. Loaded for the
@@ -439,6 +440,9 @@ def main():
         text = json.dumps(details[s:s + shard], ensure_ascii=False, separators=(",", ":")).replace('],["', '],\n["')
         (OUT / "d" / f"{s // shard:03d}.json").write_text(text, encoding="utf-8")
         n_sh += 1
+    # ids.txt: painting ids, one per line, in gallery order (line i = gallery index i). The article reader (js/article-refs.js)
+    # turns [[painting:<id>]] and the graph's "appears in" ids into gallery numbers with it.
+    (OUT / "ids.txt").write_text("\n".join(d[0] for d in details), encoding="utf-8")
     tot = sum(f.stat().st_size for f in OUT.rglob("*") if f.is_file())
     print(f"data/gallery/: {len(corpus)} paintings from {', '.join(f.name for f in files)}; "
           f"index.bin {len(index) / 1e3:.0f} KB, index.json {(OUT / 'index.json').stat().st_size / 1e3:.1f} KB, "

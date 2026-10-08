@@ -16,6 +16,9 @@
 //     "Books disagree: ..."  or  "!books ..."          -> the "Books disagree" callout
 //     "Myth: The story says ... The record shows ..."  or  "!myth ..."  or a paragraph that simply starts
 //     "The story says ... The record shows ..."         -> the "Myth" callout (story vs record)
+// Reference cards (js/article-refs.js draws them): [[gem:<id>]] [[flower:<id>]] [[painting:<id or gallery n>]] [[look:<id>]]
+// [[garment:<id>]] [[film:<id>]] [[painter:<slug>]] (and the older [[art:<painting id>|label]]) are small inline chips; a
+// paragraph that holds one also gets a figure card (image, name, "94% match to Fiery Rose") when the thing is close enough.
 // A section can carry `actions` (["duel","painting","mix","map"]); without it, the actions are inferred from the
 // section's id/title and offered only when the thing they open exists:
 //     duel     always (an inline round, built here; logs to the Learner Model when it exists)
@@ -65,7 +68,7 @@ function arNorm(a, slug) {
   if (!a.lede && !sections.length) return null;
   const notes = new Map();
   (Array.isArray(a.notes) ? a.notes : []).forEach((n, i) => { if (n) notes.set(+n.n || i + 1, { ...n, n: +n.n || i + 1 }); });
-  return { slug: a.slug || slug, name: a.name || arPretty(slug), hex: a.hex || null, tier: a.tier || "", lede: String(a.lede || ""), sections,
+  return { slug: a.slug || slug, name: a.name || arPretty(slug), names: arList(a.names), hex: a.hex || null, tier: a.tier || "", lede: String(a.lede || ""), sections,
     aside: a.aside && typeof a.aside === "object" ? a.aside : {}, notes, questions: (Array.isArray(a.questions) ? a.questions : []).filter(q => q && q.q && Array.isArray(q.choices) && q.choices.length > 1),
     words: +a.words || 0, status: a.status || "" };
 }
@@ -152,9 +155,36 @@ function arRefsHTML(body, art) {
   if (!art || !ids.every(k => art.notes.has(k))) return null;
   return `<sup class="ar-fnw">${ids.map(k => `<button type="button" class="ar-fn" data-fn="${k}" aria-label="Note ${k}">${k}</button>`).join("")}</sup>`;
 }
+// ---------- reference chips: [[gem:spinel]], [[painting:nga-72328|Roses]] ... (the figure cards are js/article-refs.js) ----------
+const AR_REF_KINDS = { gem: "Gem", flower: "Flower", painting: "Painting", look: "Look", garment: "Garment", film: "Film", painter: "Painter" };
+const AR_REF_SRC = "\\[\\[(gem|flower|painting|art|look|garment|film|painter):([A-Za-z0-9._-]+)(?:\\|([^\\]]+))?\\]\\]";
+const AR_REF_ICON = {   // 12px line icons, one per kind (stroke only, so they take the text color)
+  gem: '<path d="M3 9l3-5h12l3 5-9 11z"/><path d="M3 9h18M9 4l3 5 3-5M12 9v11"/>',
+  flower: '<circle cx="12" cy="12" r="2.2"/><path d="M12 9.8C9.5 6 10 3.5 12 3.5s2.5 2.5 0 6.3zM14.2 12c3.8-2.5 6.3-2 6.3 0s-2.5 2.5-6.3 0zM12 14.2c2.5 3.8 2 6.3 0 6.3s-2.5-2.5 0-6.3zM9.8 12c-3.8 2.5-6.3 2-6.3 0s2.5-2.5 6.3 0z"/>',
+  painting: '<rect x="3.5" y="4.5" width="17" height="15" rx="1"/><path d="M3.5 16l5-5 4 4 3-3 5 5"/>',
+  look: '<path d="M4 6h16M4 12h16M4 18h16"/><path d="M9 4v4M15 10v4M8 16v4"/>',
+  garment: '<path d="M9 4l-6 3 2 4 2-1v10h10V10l2 1 2-4-6-3c-.5 1.5-1.5 2.5-3 2.5S9.5 5.5 9 4z"/>',
+  film: '<rect x="3.5" y="5" width="17" height="14" rx="1.5"/><path d="M7.5 5v14M16.5 5v14M3.5 9.5h4M3.5 14.5h4M16.5 9.5h4M16.5 14.5h4"/>',
+  painter: '<path d="M4 20c0-3 3-3 3-6 0-1.5-1-2.5-1-4 0-3.5 3-6 7-6s7 2.5 7 5.5c0 3-2.5 4-5 4-1.5 0-2 .8-2 1.8 0 2-2 3.7-5 3.7-2 0-3 1-4 1.8"/><circle cx="9" cy="9" r=".8"/><circle cx="13" cy="7.5" r=".8"/><circle cx="16.5" cy="10" r=".8"/>'
+};
+const arRefKind = k => { k = String(k || "").toLowerCase(); return k === "art" ? "painting" : k; };
+const arRefIcon = k => `<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${AR_REF_ICON[k] || ""}</svg>`;
+// a chip's text before its data lands: the writer's label, else a plain guess (the real name replaces a guess once the data is in)
+const arRefGuess = (k, id) => k === "painting" ? "A painting" : k === "painter" ? arPretty(id) : arPretty(id);
+function arRefChipHTML(kind, id, label) {
+  const k = arRefKind(kind), key = k + ":" + id;
+  return `<button type="button" class="ar-ref" data-kind="${k}" data-ar-ref="${esc(key)}"${label ? "" : " data-ar-guess"}>${arRefIcon(k)}<span>${esc(label || arRefGuess(k, id))}</span></button>`;
+}
+// every reference a text mentions, as [{ kind, id, label? }] in order, de-duplicated by kind:id
+function arRefList(text) {
+  const out = [], seen = new Set();
+  String(text == null ? "" : text).replace(new RegExp(AR_REF_SRC, "gi"), (m, kind, id, label) => { const k = arRefKind(kind), key = k + ":" + id; if (!seen.has(key)) { seen.add(key); out.push({ kind: k, id, key, label: label || "" }); } return m; });
+  return out;
+}
 function arInline(text, art) {
   const stash = [];
   let s = String(text == null ? "" : text);
+  s = s.replace(new RegExp(AR_REF_SRC, "gi"), (m, kind, id, label) => { stash.push(arRefChipHTML(kind, id, label)); return "\u0001" + (stash.length - 1) + "\u0002"; });
   s = s.replace(/\[\[([a-z0-9-]+)(?:\|([^\]]+))?\]\]/gi, (m, slug, label) => { stash.push(arLinkHTML(slug.toLowerCase(), label)); return "\u0001" + (stash.length - 1) + "\u0002"; });
   s = esc(s);
   s = s.replace(/\[(\d+(?:\s*(?:,|–|-)\s*\d+)*)\]/g, (m, body) => { const h = arRefsHTML(body, art); if (!h) return m; stash.push(h); return "\u0001" + (stash.length - 1) + "\u0002"; });
@@ -165,12 +195,13 @@ function arInline(text, art) {
 function arRefs(art) {
   const texts = [art.lede, art.aside.origin && Object.values(art.aside.origin).join(" ")].filter(Boolean);
   art.sections.forEach(s => s.blocks.forEach(b => texts.push(b.text || [b.say, b.rec].join(" "))));
-  const links = new Set(), fns = new Set();
+  const links = new Set(), fns = new Set(), refs = new Map();
   texts.forEach(t => {
+    arRefList(t).forEach(r => { if (!refs.has(r.key)) refs.set(r.key, r); });
     String(t).replace(/\[\[([a-z0-9-]+)(?:\|[^\]]+)?\]\]/gi, (m, s) => links.add(s.toLowerCase()));
     String(t).replace(/\[\[[^\]]*\]\]/g, "").replace(/\[(\d+(?:\s*(?:,|–|-)\s*\d+)*)\]/g, (m, b) => { b.split(/\s*,\s*/).forEach(p => { const r = p.match(/^(\d+)\s*[–-]\s*(\d+)$/); if (r) for (let k = +r[1]; k <= +r[2]; k++) fns.add(k); else fns.add(+p); }); return m; });
   });
-  return { links: [...links], fns: [...fns].sort((a, b) => a - b) };
+  return { links: [...links], fns: [...fns].sort((a, b) => a - b), refs: [...refs.values()] };
 }
 function arWords(art) {
   const t = [art.lede]; art.sections.forEach(s => s.blocks.forEach(b => t.push(b.text || [b.say, b.rec].join(" "))));
@@ -225,7 +256,8 @@ const arCap = t => String(t || "").replace(/^\s*[a-z]/, m => m.toUpperCase());
 function arBlockHTML(b, art) {
   if (b.t === "books") return `<aside class="ar-call ar-books"><p class="ar-tag">Books disagree</p><p>${arInline(b.text, art)}</p></aside>`;
   if (b.t === "myth") return `<aside class="ar-call ar-myth"><p class="ar-tag">Myth</p><p class="ar-say"><em>The story says</em> ${arInline(arCap(b.say), art)}</p>${b.rec ? `<p class="ar-rec"><em>The record shows</em> ${arInline(arCap(b.rec), art)}</p>` : ""}</aside>`;
-  return `<p>${arInline(b.text, art)}</p>`;
+  const refs = arRefList(b.text);
+  return `<p${refs.length ? ` data-ar-refs="${esc(refs.map(r => r.key).join(" "))}"` : ""}>${arInline(b.text, art)}</p>`;
 }
 const AR_INFER = [["duel", /look.?alike|confus|mistak|mix(?:ed)? up|apart|differ|neighbou?r|versus|\bvs\b/i], ["painting", /paint|artist|canvas|masters?\b|museum|studio/i],
   ["mix", /\bmix|recipe|blend|how (?:it|they) (?:is|are|was|were) made/i], ["map", /\bmap\b|trade route|geograph|where (?:it|they) (?:come|came|grew|grow)/i]];
@@ -386,6 +418,7 @@ function arWire(root, art, self) {
   root.addEventListener("click", e => {
     const t = e.target;
     const fn = t.closest("[data-fn]"); if (fn) return arNoteSheet(art, +fn.dataset.fn);
+    const rf = t.closest("[data-ar-ref]"); if (rf) return typeof arfOpen === "function" ? arfOpen(rf.dataset.arRef, self) : undefined;
     const op = t.closest("[data-ar-open]"); if (op) return arOpenColor(op.dataset.arOpen, op.querySelector("i"));
     const wh = t.closest("[data-ar-which]"); if (wh) { e.preventDefault(); return arWhichPage(wh.dataset.arWhich); }
     const act = t.closest("[data-ar-act]"); if (act) return arAct(root, art, self, act);
@@ -447,6 +480,7 @@ function articleRender(slug, host, ctx) {
     if (!self) return none();
     host.hidden = false; host.innerHTML = arBuildHTML(art, self);
     arWire(host.querySelector(".ar"), art, self);
+    if (typeof arfEnhance === "function") { try { arfEnhance(host.querySelector(".ar"), art, self); } catch (e) { try { console.warn("article figures failed:", e); } catch (_) {} } }   // js/article-refs.js: the figure cards
     return true;
   }).catch(e => { try { console.warn("article render failed:", slug, e); } catch (_) {} return none(); });
 }
