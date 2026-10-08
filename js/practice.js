@@ -559,12 +559,13 @@ function prNextBtn(foot, go, label = "Next") {
 }
 PR_STEPS["quiz-name"] = { by: "pick", render(box, it, ctx = {}) {
   return new Promise(resolve => {
-    const t0 = performance.now(), opts = prShuffle([it, ...prNear(it, 3, ctx.deck)]);
+    // ctx.wrong: the wrong options chosen by the caller (Study's early rungs: fewer and farther apart, js/studypace.js)
+    const t0 = performance.now(), opts = prShuffle([it, ...(ctx.wrong && ctx.wrong.length ? ctx.wrong : prNear(it, 3, ctx.deck))]);
     box.innerHTML = `<div class="pr-step pr-s-quiz">
       ${ctx.note ? `<p class="pr-stepnote">${esc(ctx.note)}</p>` : ""}
       <div class="pr-sw" style="--c:${it.h}"></div>
       <div class="pr-fb" aria-live="polite"></div>
-      <div class="pr-opts">${opts.map((o, i) => `<button class="pr-opt" data-i="${i}"><span>${esc(prName(o))}</span></button>`).join("")}</div>
+      <div class="pr-opts${opts.length === 3 ? " pr-opts-3" : ""}">${opts.map((o, i) => `<button class="pr-opt" data-i="${i}"><span>${esc(prName(o))}</span></button>`).join("")}</div>
       <div class="pr-foot"><p class="pr-hint">Tap its name</p></div></div>`;
     const fb = box.querySelector(".pr-fb"), foot = box.querySelector(".pr-foot");
     let done = false;
@@ -592,7 +593,7 @@ PR_STEPS["quiz-name"] = { by: "pick", render(box, it, ctx = {}) {
 // ---------- quiz-color: a name, four same-family swatches ----------
 PR_STEPS["quiz-color"] = { by: "pick", render(box, it, ctx = {}) {
   return new Promise(resolve => {
-    const t0 = performance.now(), opts = prShuffle([it, ...prNear(it, 3, ctx.deck)]), nm = prName(it);
+    const t0 = performance.now(), opts = prShuffle([it, ...(ctx.wrong && ctx.wrong.length === 3 ? ctx.wrong : prNear(it, 3, ctx.deck))]), nm = prName(it);
     box.innerHTML = `<div class="pr-step pr-s-qc">
       ${ctx.note ? `<p class="pr-stepnote">${esc(ctx.note)}</p>` : ""}
       <div class="pr-q"><span class="pr-note">Which one is</span><b class="pr-t1" style="${prFit(nm, 44)}">${esc(nm)}?</b></div>

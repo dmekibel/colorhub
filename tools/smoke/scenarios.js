@@ -629,8 +629,8 @@ scenario("home", "Study corner opens the instant deck seeded with the middle col
 // ================================================================== LEARN A SET (js/learnset.js)
 const LS_SOLVE = `(() => {
   const st = document.querySelector('.ls-study .pr-stage'); if (!st) return 'gone';
-  const nx = st.querySelector('[data-next]'); if (nx) { nx.click(); return 'next'; }
   const boss = st.querySelector('[data-boss]'); if (boss) { boss.click(); return 'boss'; }
+  const nx = st.querySelector('[data-next]'); if (nx) { nx.click(); return 'next'; }
   const it = st._lsIt, nm = it ? prName(it) : '';
   if (st.querySelector('.pr-s-match') && st._prMatch) {
     const { tiles } = st._prMatch, btns = [...st.querySelectorAll('.pr-tile')];
@@ -701,8 +701,8 @@ const LS_WRONG = `(() => {
   window.__lsN = (window.__lsN || 0) + 1;
   const mc = document.querySelector('.mc:not(.out) .mc-go'); if (mc) { if (window.__lsN % 2) touch(mc, 1); else mc.click(); return 'mc'; }
   const meet = document.querySelector('.ls-study [data-meetnext]'); if (meet) { meet.click(); return 'meet'; }
-  const nx = st.querySelector('[data-next]'); if (nx) { if (window.__lsN % 2) touch(nx, 2); else nx.click(); return 'next'; }
   const boss = st.querySelector('[data-boss]'); if (boss) { boss.click(); return 'boss'; }
+  const nx = st.querySelector('[data-next]'); if (nx) { if (window.__lsN % 2) touch(nx, 2); else nx.click(); return 'next'; }
   const it = st._lsIt, nm = it ? prName(it) : '', wrong = (window.__lsW = !window.__lsW);
   const pick = labels => { const k = labels.findIndex(t => (t === nm) !== wrong); return k < 0 ? 0 : k; };
   if (st.querySelector('.pr-s-match') && st._prMatch) {
@@ -741,6 +741,35 @@ scenario("learnset", "Study: wrong answers and touch-only Next play a 3-color se
   t.notes.push("steps: " + seen.length + " · " + [...new Set(seen)].join(","));
   t.expect(seen.some(k => /x$/.test(k)), "the session had wrong answers");
   t.expect(seen.includes("next") || seen.includes("mc"), "a Next or Got it was pressed after a miss");
+});
+scenario("learnset", "Study: new colors are met (a Meet card each, then the closest two) before any question; Test me skips Meet", async t => {
+  await H.openPage(t, "#/color/teal", "Teal");
+  await t.click("[data-learnit]", { wait: 600 });
+  await t.waitFor(".ls-sheet", 4000, "the Learn sheet");
+  t.expect(t.$$(".ls-sheet [data-pace]").length === 4 && t.$(".ls-sheet [data-pace].on"), "the pace chips, one on");
+  t.expect(/new ones? first|Nothing new/.test(t.text(".ls-sheet [data-pacesay]")), "the pace line says what Study will do");
+  t.ev("(() => { const r = document.querySelector('.ls-sheet [data-size]'); r.value = 4; r.dispatchEvent(new Event('input', { bubbles: true })); })()");
+  await t.click(".ls-sheet [data-go]", { wait: 600 });
+  await t.waitFor(".ls-study .ls-meet", 6000, "a Meet card first");
+  t.expect(/Meet/.test(t.text(".ls-study [data-status]")), "the status says Meet");
+  t.expect(t.$(".ls-meet .ls-meet-n") && t.text(".ls-meet .ls-meet-n").length > 1, "the Meet card names the color");
+  t.expect(!t.$(".ls-study .pr-s-quiz, .ls-study .pr-s-qc"), "no question before the colors are met");
+  const seen = [];
+  for (let i = 0; i < 12 && !t.$(".ls-study .pr-s-quiz, .ls-study .pr-s-qc"); i++) {
+    seen.push(t.$(".ls-mpair") ? "pair" : t.$(".ls-meet") ? "meet" : "?");
+    await t.waitFor(".ls-study [data-meetnext][data-next]", 3000, "the Meet card's Next");
+    await t.click(".ls-study [data-meetnext][data-next]", { wait: 420 });
+  }
+  t.notes.push(seen.join(" "));
+  t.expect(seen.filter(x => x === "meet").length >= 2 && seen.filter(x => x === "meet").length <= 3, `a wave of 2-3 colors is met (${seen.join(" ")})`);
+  t.expect(seen.includes("pair"), "the closest two are shown side by side");
+  t.expect(t.$(".ls-study .pr-s-quiz, .ls-study .pr-s-qc"), "then the first question");
+  // Test me: straight to a question
+  t.ev("lsState().pace = 'test'");
+  t.ev("lsStudy(lsAlike(prByKey('teal'), 4, 5), { label: 'x' })");
+  await t.waitFor(".ls-study .pr-step", 4000, "a Test me session");
+  t.expect(!t.$(".ls-study .ls-meet"), "Test me skips Meet");
+  t.ev("lsState().pace = 'you'");
 });
 scenario("learnset", "Study: stop part-way, Keep going picks each color up at its level", async t => {
   await H.openPage(t, "#/color/teal", "Teal");

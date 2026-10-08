@@ -27,6 +27,7 @@ One screen, a segmented switch with six views; one tap switches, the choice is r
 Every color tile opens its page in one tap. The footer: "Test me" starts Study.
 
 ## Study (the mixed session, like Quizlet Learn, tuned for fun)
+**Superseded in part by design/STUDY-FLOW.md (2026-10-08):** a session now meets new colors first in waves of 2-3 (Meet cards, then the closest two side by side), climbs 5 rungs (far options, near options, find, recall, climbed), and paces itself to about 80-85% right. The rest below still holds.
 - Each color climbs a ladder: **new → familiar → mastered** (levels 0-3).
   - level 0: see the color, pick the name (4 same-family options)
   - level 1: see the name, pick the color, or odd one out (rotates)

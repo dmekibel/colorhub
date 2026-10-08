@@ -236,6 +236,7 @@ ok(kinds.every(k => run(`typeof PR_STEPS[${JSON.stringify(k)}].render === "funct
 ok(run(`Object.keys(PR_METHODS).every(m => typeof PR_RUN[m] === "function")`), "every method has a runner");
 
 // ---------- Learn a set (js/learnset.js): Study keeps cards and the set, Keep going resumes, the sheet picks well ----------
+run(read("js/studypace.js"));
 run(read("js/learnset.js"));
 run(`S.cards = {}; S.practice = undefined; var KNOWN = new Set(); var knowState = c => KNOWN.has(String(c.n).toLowerCase()) ? "yours" : "none";`);
 {
@@ -246,7 +247,7 @@ run(`S.cards = {}; S.practice = undefined; var KNOWN = new Set(); var knowState 
   run(`KNOWN.add(LS_ITEMS[4].key);
     var LS_SESS = prSession("learn", { dir: "f" }, LS_ITEMS, {}); var LS_LV = lsLevels(LS_ITEMS);
     LS_ITEMS.slice(0, 5).forEach((it, i) => prRecord(LS_SESS, it, { ok: i !== 1 }, "quiz-name"));
-    LS_LV.get(LS_ITEMS[0].key).lv = 3; LS_LV.get(LS_ITEMS[2].key).lv = 2;
+    LS_LV.get(LS_ITEMS[0].key).lv = 4; LS_LV.get(LS_ITEMS[0].key).up = true; LS_LV.get(LS_ITEMS[2].key).lv = 2;
     S.cards[LS_ITEMS[3].c.id] = { b: 3, due: addDays(today(), 9), since: addDays(today(), -30), own: true };
     var LS_MADE = lsKeep(LS_SESS, LS_ITEMS, { label: "Teal and its look-alikes", src: "alike", route: "#/color/teal" }, LS_LV);`);
   const id = run(`lsSetId(LS_ITEMS)`), c0 = run(`S.cards[LS_ITEMS[0].c.id]`), c1 = run(`S.cards[LS_ITEMS[1].c.id]`);
@@ -268,8 +269,89 @@ run(`S.cards = {}; S.practice = undefined; var KNOWN = new Set(); var knowState 
   // Keep going: each color resumes at its rung, climbed ones stay climbed
   run(`var LS_RES = lsLevels(LS_ITEMS, new Map([[LS_ITEMS[0].key, 3], [LS_ITEMS[2].key, 2], [LS_ITEMS[1].key, 1]]));`);
   ok(run(`LS_RES.get(LS_ITEMS[0].key).lv === 3 && LS_RES.get(LS_ITEMS[2].key).lv === 2 && LS_RES.get(LS_ITEMS[1].key).lv === 1`), "Keep going resumes each color's level, not 0");
-  ok(run(`LS_RES.get(LS_ITEMS[4].key).lv === 1 && LS_RES.get(LS_ITEMS[5].key).lv === 0`), "colors without a saved level start where a fresh session would (yours a rung up)");
+  ok(run(`LS_RES.get(LS_ITEMS[4].key).lv === 3 && LS_RES.get(LS_ITEMS[5].key).lv === 0`), "colors without a saved level start where a fresh session would (yours straight to recall)");
+  ok(run(`LS_RES.get(LS_ITEMS[0].key).met && LS_RES.get(LS_ITEMS[1].key).met`), "Keep going doesn't meet a resumed color again");
   ok(run(`lsLevels(LS_ITEMS).get(LS_ITEMS[0].key).lv === 0`), "a fresh session starts unknown colors at 0");
+
+  // ---------- The Study pacer (js/studypace.js, design/STUDY-FLOW.md), driven by simulated learners ----------
+  run(`
+    var spRnd = (s => () => (s = (s * 16807) % 2147483647) / 2147483647)(7);
+    // a learner: right more often on easy rungs, far options and colors seen more; skill shifts the whole curve
+    var spSim = (items, know, o, skill, max = 600) => {
+      const P = spNew(items, { know: new Map(Object.entries(know)), de: de2000, typing: true, ...o });
+      const log = [], asked = new Set(); let a, steps = 0, right = 0, n = 0, lastKind = "", twice = 0, firstKind = {}, firstFar = {}, eases = [];
+      while ((a = spNext(P)) && steps++ < max) {
+        log.push(a.t === "ask" ? a.kind : a.t);
+        if (a.t !== "ask") lastKind = "";
+        if (a.t === "relook") a.q.__look = 1;   // a re-Look helps the next try (that is what it is for)
+        if (a.t === "meet") { if (asked.has(a.q.it.key)) log.push("MET-AFTER-ASK"); a.q.__met = 1; }
+        if (a.t === "ask") {
+          if (!a.q.__met) a.q.__unmet = 1;
+          if (a.kind === lastKind) twice++; lastKind = a.kind;
+          if (!(a.q.it.key in firstKind)) { firstKind[a.q.it.key] = a.kind; firstFar[a.q.it.key] = a.far; }
+          asked.add(a.q.it.key);
+          const look = a.q.__look ? .15 : 0; a.q.__look = 0;
+          const p = skill === 0 ? 0 : Math.max(.03, Math.min(.98, skill + look + (a.far ? .2 : 0) - .07 * a.q.lv + .05 * a.q.n));
+          const ok = spRnd() < p; n++; if (ok) right++;
+          spAnswer(P, a.q, ok); eases.push(P.ease);
+        }
+        if (a.t === "match") a.qs.forEach(q => spAnswer(P, q, spRnd() < .8));
+      }
+      return { P, log, steps, acc: n ? right / n : 0, n, twice, firstKind, firstFar, eases, ended: !a };
+    };
+    var SP_SET = lsAlike(prByKey("teal"), 8, 5);
+  `);
+  const keys = run(`SP_SET.map(x => x.key)`);
+  const none = Object.fromEntries(keys.map(k => [k, "none"]));
+  let r = run(`(() => { const r = spSim(SP_SET, ${JSON.stringify(none)}, {}, .62); return { log: r.log, acc: r.acc, ended: r.ended, twice: r.twice, firstFar: r.firstFar, n: r.n }; })()`);
+  ok(r.log[0] === "meet", `a session of new colors starts by meeting them, not asking (${r.log.slice(0, 6).join(" ")})`);
+  const firstAsk = r.log.findIndex(x => !["meet", "pair", "relook"].includes(x));
+  ok(r.log.slice(0, firstAsk).filter(x => x === "meet").length <= 3, "the first wave meets at most 3 new colors before practice");
+  ok(r.log.slice(0, firstAsk).includes("pair"), "a wave of 2-3 ends with the closest two side by side");
+  ok(!r.log.includes("MET-AFTER-ASK") && run(`SP_SET.every(it => true)`), "no color is met after it was already asked");
+  ok(Object.values(r.firstFar).every(Boolean), "every new color's first question has far options (errorless start)");
+  ok(r.ended && r.n < 8 * 10, `the session ends (${r.n} questions for 8 colors)`);
+  ok(r.twice === 0, "never the same kind of question twice in a row");
+  ok(r.acc >= .7 && r.acc <= .93, `a middling learner lands near the target (${Math.round(r.acc * 100)}% right)`);
+  const waves = r.log.reduce((acc, x, i) => { if (x === "meet" && r.log[i - 1] !== "meet") acc++; return acc; }, 0);
+  ok(waves >= 3, `8 new colors are met in waves, not all at once (${waves} waves)`);
+  // a whole sim across learners: accuracy is held near 80-85% by the pacer, not by luck
+  const accs = run(`[.5, .58, .66, .74].map(s => { let t = 0; for (let i = 0; i < 6; i++) t += spSim(SP_SET, ${JSON.stringify(none)}, {}, s).acc; return t / 6; })`);
+  ok(accs.every(a => a > .64 && a < .95) && accs.slice(1, 3).every(a => a > .72 && a < .9), `learners from weak to good land between 65% and 95%, the middle ones near 80% (${accs.map(a => Math.round(a * 100)).join(", ")})`);
+  // always wrong: hard colors are set aside for tomorrow, so the session still ends
+  r = run(`(() => { const r = spSim(SP_SET.slice(0, 3), ${JSON.stringify(none)}, {}, 0); return { ended: r.ended, n: r.n, out: [...r.P.qs.values()].filter(q => q.out).length, relook: r.log.filter(x => x === "relook").length, ease: r.eases[r.eases.length - 1] }; })()`);
+  ok(r.ended && r.out === 3, `an all-wrong session ends: each color set aside after 3 misses (${r.n} questions)`);
+  ok(r.relook >= 1 && r.ease === -1, "struggling eases the session: re-Looks before a missed color comes back");
+  // a strong learner: hardened, no re-Looks, done faster
+  const strong = run(`(() => { const r = spSim(SP_SET, ${JSON.stringify(none)}, {}, .97); return { n: r.n, relook: r.log.filter(x => x === "relook").length, hard: r.eases.filter(e => e > 0).length }; })()`);
+  const mid = run(`(() => { let t = 0; for (let i = 0; i < 5; i++) t += spSim(SP_SET, ${JSON.stringify(none)}, {}, .62).n; return t / 5; })()`);
+  ok(strong.relook === 0 && strong.hard > 0, "a strong learner is hardened and never re-Looks");
+  ok(strong.n < mid, `and finishes in fewer questions (${strong.n} vs ${Math.round(mid)})`);
+  // known colors skip Meet; yours go straight to recall
+  const mixed = Object.fromEntries(keys.map((k, i) => [k, i < 2 ? "yours" : i < 4 ? "learning" : "none"]));
+  r = run(`(() => { const r = spSim(SP_SET, ${JSON.stringify(mixed)}, {}, .8); return { firstKind: r.firstKind, met: r.log.filter(x => x === "meet").length, unmet: [...r.P.qs.values()].filter(q => q.__unmet).map(q => q.k) }; })()`);
+  ok(r.met === 4, `only the 4 new colors are met (${r.met})`);
+  ok(r.unmet.every(k => k === "yours" || k === "learning"), "only known colors are asked without a Meet");
+  ok(["type", "card", "quiz-color"].includes(r.firstKind[keys[0]]) && ["type", "card", "quiz-color"].includes(r.firstKind[keys[1]]), `a color that's yours starts at recall (${r.firstKind[keys[0]]}, ${r.firstKind[keys[1]]})`);
+  ok(run(`spNew(SP_SET, { know: new Map(${JSON.stringify(Object.entries(mixed))}) }).qs.get(SP_SET[0].key).lv`) === 3, "yours starts on rung 3 (recall)");
+  // Test me: no Meet, everything from rung 2
+  r = run(`(() => { const r = spSim(SP_SET, ${JSON.stringify(none)}, { pace: "test" }, .8); return { met: r.log.filter(x => x === "meet").length, first: r.log[0] }; })()`);
+  ok(r.met === 0 && r.first !== "meet", "Test me skips Meet");
+  ok(run(`[...spNew(SP_SET, { pace: "test", de: de2000 }).qs.values()].every(q => q.lv >= 2)`), "Test me starts every color at finding (rung 2)");
+  // From Look ("Test me" on the Look screen): no second Meet
+  ok(run(`spNext(spNew(SP_SET, { looked: true, de: de2000 })).t`) === "ask", "coming from Look goes straight to questions");
+  // Gentle: waves of 2
+  r = run(`spSim(SP_SET, ${JSON.stringify(none)}, { pace: "gentle" }, .8).log`);
+  ok(r.slice(0, r.findIndex(x => !["meet", "pair"].includes(x))).filter(x => x === "meet").length === 2, "Gentle meets two at a time");
+  // a pair you mixed up before is shown side by side before either is asked
+  r = run(`(() => { const m = [[SP_SET[0].key, SP_SET[1].key]], P = spNew(SP_SET, { know: new Map(SP_SET.map(x => [x.key, "learning"])), mix: m, de: de2000 }); return spNext(P); })()`);
+  ok(r && r.t === "pair" && r.why === "mixup", "known colors you've mixed up get a side-by-side look first");
+  // quick (Learn it): climbs to rung 3, never types
+  r = run(`(() => { const r = spSim(SP_SET.slice(0, 4), ${JSON.stringify(none)}, { quick: true }, .85); return { top: r.P.top, kinds: [...new Set(r.log)], n: r.n }; })()`);
+  ok(r.top === 3 && !r.kinds.includes("type"), `a quick session climbs to recall without typing (${r.n} questions)`);
+  // far options: the same family, well apart
+  const far = run(`(() => { const it = prByKey("teal"), w = spFar(it, 3, prCore(), de2000, prFam9); return { fam: w.every(x => prFam9(x.h) === prFam9(it.h)), d: w.map(x => de2000(it.h, x.h)), sep: w.every((a, i) => w.every((b, j) => i === j || de2000(a.h, b.h) >= 10)), n: w.length }; })()`);
+  ok(far.n === 3 && far.fam && far.sep && far.d.every(d => d >= 14), `far options are same-family, ≥ 14 from the answer and ≥ 10 apart (${far.d.map(d => d.toFixed(0)).join(", ")})`);
 
   // The sheet's pick: unknown first, yours left out, every pair fair
   run(`KNOWN = new Set(); var LS_SRC = prFirst(80); LS_SRC.slice(0, 20).forEach(it => KNOWN.add(it.key));`);
