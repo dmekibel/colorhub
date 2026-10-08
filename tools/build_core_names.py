@@ -242,10 +242,297 @@ def clean_jp_meaning(meaning):
     return m[0].upper() + m[1:].lower()
 
 
+MODS = {"light", "pale", "dark", "deep", "dusky", "bright", "dusty", "dull", "vivid", "neon", "electric",
+        "medium", "soft", "muted", "pastel", "greyish", "grayish", "reddish", "yellowish", "greenish", "bluish",
+        "purplish", "orangish", "pinkish", "brownish", "very", "rich", "warm", "cool", "faded"}
+HUE_SUFFIX = {"green", "blue", "red", "pink", "purple", "yellow", "orange", "brown", "grey", "gray", "violet"}
+
+
+def slug(s):
+    return re.sub(r"[^a-z0-9]+", "-", re.sub(r"[\u0300-\u036f]", "", __import__("unicodedata").normalize("NFKD", str(s)).lower())).strip("-")
+
+
+def apply_quality_fixes(out, ov):
+    """tools/core-name-overrides.json sections (all optional):
+       _fixes:   {old_hex: {h?: new_hex, n?: new_name, move_old_to?: name, why: str}} -- a wrong hex or a name that
+                 contradicts its hex. A hex fix re-homes any synonym whose own library hex is >5 dE from the new
+                 hex onto the nearest other entry (the synonyms described the old color, not the new one).
+                 `drop_also: [names]` removes synonyms from just this entry.
+       _typos:   {wrong: right} applied word-wise to every primary and synonym; a synonym that then equals another
+                 entry's primary is dropped.
+       _drop_also: [names] garbage synonyms removed outright.
+    Then flags compound/modifier names: `compound: true` + `base: <slug of the root color>`."""
+    fixes = ov.get("_fixes", {})
+    typos = {k.lower(): v for k, v in ov.get("_typos", {}).items()}
+    drop = {LIB.key(x) for x in ov.get("_drop_also", [])}
+    by_hex = {e["h"].upper(): e for e in out}
+    lib = {}
+    for le in LIB.load_library():
+        lib.setdefault(LIB.key(le["n"]), le)
+    labs = {e["h"]: LIB.labs([e["h"]])[0] for e in out}
+    log = []
+
+    def nearest_other(hexv, exclude):
+        lab = LIB.labs([hexv])[0]
+        best, bd = None, 1e9
+        for e in out:
+            if e is exclude:
+                continue
+            d = float(LIB.de2000(lab[None], labs[e["h"]][None])[0][0])
+            if d < bd:
+                best, bd = e, d
+        return best
+
+    for old_hex, f in fixes.items():
+        e = by_hex.get(old_hex.upper())
+        if not e:
+            print("FIX NOT APPLIED (hex not found):", old_hex)
+            continue
+        before = (e["n"], e["h"])
+        old_name = e["n"]
+        if f.get("h"):
+            e["h"] = f["h"].upper()
+            labs[e["h"]] = LIB.labs([e["h"]])[0]
+            keep, move = [], []
+            for a in e.get("also", []):
+                le = lib.get(LIB.key(a))
+                if le and float(LIB.de2000(labs[e["h"]][None], LIB.labs([le["h"]]))[0][0]) > 5:
+                    move.append((a, le["h"]))
+                else:
+                    keep.append(a)
+            for a, ah in move:
+                tgt = nearest_other(ah, e)
+                tgt["also"] = (tgt.get("also") or []) + [a]
+            e["also"] = keep
+            if not e["also"]:
+                e.pop("also")
+        if f.get("drop_also"):
+            e["also"] = [a for a in (e.get("also") or []) if LIB.key(a) not in {LIB.key(x) for x in f["drop_also"]}]
+            if not e["also"]:
+                e.pop("also")
+        if f.get("n") and f["n"] != e["n"]:
+            e["n"] = f["n"]
+            tgt = next((x for x in out if x["n"].lower() == f.get("move_old_to", "").lower()), None) if f.get("move_old_to") else None
+            if tgt is not None:
+                tgt["also"] = (tgt.get("also") or []) + [old_name]
+            elif not f.get("drop_old"):
+                e["also"] = [old_name] + [a for a in (e.get("also") or []) if a.lower() != e["n"].lower()]
+        log.append((before[0], before[1], e["n"], e["h"], f.get("why", "")))
+
+    def fix_typos(name):
+        def sub(m):
+            w = m.group(0)
+            r = typos.get(w.lower())
+            if not r:
+                return w
+            return r[0].upper() + r[1:] if w[0].isupper() else r
+        return re.sub(r"[A-Za-z]+", sub, name)
+
+    prim_keys = {}
+    for e in out:
+        e["n"] = fix_typos(e["n"])
+        prim_keys[LIB.key(e["n"])] = e
+    for e in out:
+        if e.get("also"):
+            seen, res = set(), []
+            for a in e["also"]:
+                if LIB.key(a) in drop:
+                    continue
+                a2 = fix_typos(a)
+                k = LIB.key(a2)
+                other = prim_keys.get(k)
+                if (other is not None and other is not e) or k == LIB.key(e["n"]) or k in seen:
+                    continue
+                seen.add(k)
+                res.append(a2)
+            if res:
+                e["also"] = res[:ALSO_CAP]
+            else:
+                e.pop("also")
+
+    # duplicate identities (genius panel 2026-10-08, "one identity per color"): spelling/-ish variants of one color
+    # become one entry. `_merge: [[keep, drop], ...]`; the dropped name and its synonyms move to the kept entry's `also`.
+    merged_log = []
+    for keep, dropn in ov.get("_merge", []):
+        ek = next((x for x in out if x["n"].lower() == keep.lower()), None)
+        ed = next((x for x in out if x["n"].lower() == dropn.lower()), None)
+        if ek is None or ed is None or ek is ed:
+            print("MERGE NOT APPLIED:", keep, "<-", dropn)
+            continue
+        de = float(LIB.de2000(LIB.labs([ek["h"]]), LIB.labs([ed["h"]]))[0][0])
+        ek["also"] = ([ed["n"]] + [a for a in (ed.get("also") or [])] + (ek.get("also") or []))
+        seen, res = {LIB.key(ek["n"])}, []
+        for a in ek["also"]:
+            if LIB.key(a) not in seen:
+                seen.add(LIB.key(a)); res.append(a)
+        ek["also"] = res[:ALSO_CAP + 4]
+        ek["src"] = sorted(set(ek["src"]) | set(ed["src"]), key=lambda x: SRC_RANK.get(x, 6))
+        if ed.get("notes") and not ek.get("notes"):
+            ek["notes"] = ed["notes"]
+        out.remove(ed)
+        merged_log.append((ek["n"], ed["n"], round(de, 1)))
+    for i, e in enumerate(out):
+        e["rank"] = i      # contiguous again (the app's first 101 are untouched: no merge touches them)
+    apply_quality_fixes.merged = merged_log
+
+    # compound / modifier flags: `base` is the slug of the root color the name varies (Light Seafoam -> seafoam)
+    prim_keys = {LIB.key(e["n"]): e for e in out}
+    alias_keys = {}
+    for e in out:
+        for a in e.get("also", []):
+            alias_keys.setdefault(LIB.key(a), e)
+
+    def base_of(name):
+        toks = re.split(r"[\s-]+", name.strip())
+        if len(toks) >= 2 and toks[0].lower() in MODS:
+            rest = LIB.key(" ".join(toks[1:]))
+            b = prim_keys.get(rest) or alias_keys.get(rest)   # "Dark Fuchsia" -> Magenta (Fuchsia is its synonym)
+            if b is not None and b["n"] != name:
+                return b
+        if len(toks) >= 2 and toks[-1].lower() in HUE_SUFFIX and toks[-2].lower() not in HUE_SUFFIX:
+            b = prim_keys.get(LIB.key(" ".join(toks[:-1])))
+            if b is not None and b["n"] != name:
+                return b
+        return None
+
+    n_comp = 0
+    for e in out:
+        e.pop("compound", None)
+        e.pop("base", None)
+        b = base_of(e["n"])
+        hops = 0
+        while b is not None and hops < 4:
+            nb = base_of(b["n"])
+            if nb is None:
+                break
+            b, hops = nb, hops + 1
+        if b is not None:
+            e["compound"] = True
+            e["base"] = slug(b["n"])
+            n_comp += 1
+    print(f"\nQuality pass: {len(log)} fixes applied, {n_comp} compound names flagged")
+    if log:
+        print("\nFixes (before -> after):")
+        for bn, bh, an, ah, why in log:
+            print(f"  {bn:24s} {bh}  ->  {an:24s} {ah}  {why}")
+
+
+def _archive_presence(out):
+    """Share of the painting archive (area-weighted palette pixels) whose nearest core name is each entry. Reads the
+    gitignored research/_raw/corpus-pool.jsonl (main checkout fallback, like tools/analyze.py). Returns None when absent."""
+    import base64
+    cand = [ROOT / "research" / "_raw" / "corpus-pool.jsonl", ROOT.parent.parent.parent / "research" / "_raw" / "corpus-pool.jsonl"]
+    path = next((c for c in cand if c.exists()), None)
+    if path is None:
+        return None
+    rgb, w = [], []
+    for line in path.read_text().splitlines():
+        buf = base64.b64decode(json.loads(line)["pl"])
+        for i in range(0, len(buf) - 3, 4):
+            if buf[i + 3]:
+                rgb.append((buf[i], buf[i + 1], buf[i + 2])); w.append(buf[i + 3] / 250.0)
+    lab = LIB.rgb_to_lab(np.array(rgb, dtype=np.float64))
+    centers = LIB.labs([e["h"] for e in out])
+    from scipy.spatial import cKDTree
+    _, idx = cKDTree(centers).query(lab)
+    share = np.bincount(idx, weights=np.array(w), minlength=len(out))
+    return share / share.sum()
+
+
+def _ngram_freq(e):
+    """Mean Google Books frequency, 1920-2019, of the name (or the first of its synonyms with a cached curve)."""
+    from urllib.parse import quote
+    d = ROOT / "research" / "_raw" / "ngrams"
+    if not d.exists():
+        d = ROOT.parent.parent.parent / "research" / "_raw" / "ngrams"
+    for term in [e["n"]] + list(e.get("also") or [])[:4]:
+        f = d / f"ci__{quote(term.lower())}.json"
+        if f.exists():
+            try:
+                j = json.loads(f.read_text())
+                if j.get("found") and j.get("ts"):
+                    ts = j["ts"][-100:]
+                    return sum(ts) / len(ts)
+            except Exception:
+                pass
+    return None
+
+
+def add_use_rank(out):
+    """useRank: a usefulness order for LEARNING, so the path doesn't fall back to alphabetical once the obvious words run
+    out (stage 5 reached "Xanadu"). The app's first 101 keep their curriculum order (useRank = rank). Every other name is
+    scored from four independent signals, each turned into a 0-1 percentile among those names:
+      sources   how many of our name lists carry it (more lists = more people use the word);
+      xkcd      carried by the xkcd color survey (140k people typing names, the best 'what do people actually say' signal);
+      ngram     mean Google Books frequency 1920-2019 (names with no cached curve get the median);
+      archive   share of all painting palette pixels whose nearest core name this is (does the world's art contain it?).
+    score = mean of the four percentiles; useRank sorts by score descending, ties by the old rank (deterministic)."""
+    def pct(vals):
+        order = sorted(range(len(vals)), key=lambda i: vals[i])
+        r = [0.0] * len(vals)
+        i = 0
+        while i < len(order):                      # average rank for ties
+            j = i
+            while j + 1 < len(order) and vals[order[j + 1]] == vals[order[i]]:
+                j += 1
+            for k in range(i, j + 1):
+                r[order[k]] = (i + j) / 2 / max(len(vals) - 1, 1)
+            i = j + 1
+        return r
+    free = [e for e in out if e["rank"] >= 101]
+    arch = _archive_presence(out)
+    ng = [_ngram_freq(e) for e in free]
+    med = sorted(x for x in ng if x is not None)
+    med = med[len(med) // 2] if med else 0.0
+    sig = {
+        "sources": pct([len(e["src"]) for e in free]),
+        "xkcd": [1.0 if "xkcd" in e["src"] else 0.0 for e in free],
+        "ngram": pct([(x if x is not None else med) for x in ng]),
+        "archive": pct([float(arch[e["rank"]]) for e in free]) if arch is not None else [0.0] * len(free),
+    }
+    used = [k for k in sig if not (k == "archive" and arch is None)]
+    for i, e in enumerate(free):
+        e["_score"] = sum(sig[k][i] for k in used) / len(used)
+    ranked = sorted(free, key=lambda e: (-e["_score"], e["rank"]))
+    for e in out:
+        if e["rank"] < 101:
+            e["useRank"] = e["rank"]
+    for i, e in enumerate(ranked):
+        e["useRank"] = 101 + i
+    for e in free:
+        e.pop("_score", None)
+    print(f"\nuseRank: signals {used}; first free names by useRank: " + ", ".join(e["n"] for e in ranked[:12]))
+    print("         ... and the last: " + ", ".join(e["n"] for e in ranked[-6:]))
+
+
+def write_aliases(out, merged):
+    """data/aliases.json: every synonym, spelling variant and merged duplicate -> its canonical name and slug (for
+    tools/graph_build.py and tools/analyze.py to count one color once, and for check_names.js)."""
+    names, slugs = {}, {}
+    for e in out:
+        cs = slug(e["n"])
+        for a in e.get("also", []):
+            if LIB.key(a) != LIB.key(e["n"]):
+                names.setdefault(a, e["n"]); slugs.setdefault(slug(a), cs)
+        for variant in {e["n"].replace("Grey", "Gray").replace("grey", "gray"), e["n"].replace("-", " "), e["n"].replace(" ", "-")}:
+            if variant != e["n"]:
+                names.setdefault(variant, e["n"]); slugs.setdefault(slug(variant), cs)
+    # a synonym that is itself another entry's primary must not shadow it
+    prim = {slug(e["n"]) for e in out}
+    slugs = {k: v for k, v in slugs.items() if k not in prim}
+    names = {k: v for k, v in names.items() if slug(k) not in prim}
+    doc = {"_doc": "Canonical-name table (L15, 2026-10-08). `slugs` maps any synonym/spelling-variant slug to the canonical color slug; `names` is the same by display name; `merged` lists the duplicate colors folded into one entry (kept, dropped, dE between their hexes). Count by canonical slug.",
+           "merged": [list(m) for m in merged], "slugs": dict(sorted(slugs.items())), "names": dict(sorted(names.items()))}
+    (ROOT / "data" / "aliases.json").write_text(json.dumps(doc, ensure_ascii=False, indent=0, separators=(",", ":")) + "\n", encoding="utf-8")
+    print(f"aliases.json: {len(slugs)} slug aliases, {len(merged)} merged duplicates")
+
+
 def main():
     report = "--report" in sys.argv[1:]
     app_rows = LIB.load_app()  # [{n, h, src}], curriculum order: basics, then every unit's colors in order
-    lib = [e for e in LIB.load_library() if not e.get("crude")]
+    # Maerz & Paul-only names stay out of the core: adding 129 new candidates would reshuffle the farthest-point trim and every
+    # id (they are in data/library.json for the honeycomb and the graph; promoting some to core is a deliberate later pass).
+    lib = [e for e in LIB.load_library() if not e.get("crude") and e["src"] != ["maerz-paul"]]
     silly = LIB.silly_names(lib)
 
     app_keys = {LIB.key(e["n"]) for e in app_rows}
@@ -266,6 +553,16 @@ def main():
         centers = labv[None] if centers is None else np.vstack([centers, labv[None]])
         used_lower.add(name.lower())
 
+    def absorb(cl, e, dist):
+        """The library's own canonical-card data (tools/library_final.py): near-duplicate names folded into this card
+        become synonyms here too, and Japanese names moved into `also` (lang "ja") become cultural notes."""
+        for a2 in e.get("altn") or []:
+            if a2["n"] != cl["n"]:
+                cl["also"].append((a2["n"], e["src"], round(dist + 0.05, 2)))
+        for a2 in e.get("also") or []:
+            if isinstance(a2, dict) and a2.get("lang") == "ja" and len(cl["notes"]) < NOTES_CAP:
+                cl["notes"].append({"jp": a2["n"], "kanji": a2.get("kanji"), "meaning": a2.get("meaning")})
+
     def plain_primary_for(e, lab_e):
         """An obscure entry that didn't merge into anything close: try the bare name (paren qualifier
         stripped) first, then fall back to a synthesized base+modifier name."""
@@ -280,6 +577,8 @@ def main():
         n, h = row["n"], row["h"]
         e = lib_by_key.get(LIB.key(n))
         add_cluster(n, h, LIB.labs([h])[0], e["src"] if e else ["app"], locked=True)
+        if e:
+            absorb(clusters[-1], e, 0.0)
 
     # 2. every other English-sourced name, best-named first, merged into the nearest cluster within MERGE_DE
     #    (or JUNK_SKIP_DE for a name junk_penalty() already flagged — unchanged from the pre-existing build);
@@ -297,13 +596,16 @@ def main():
         if d[j] < threshold:
             if e["n"] != clusters[j]["n"]:
                 clusters[j]["also"].append((e["n"], e["src"], round(float(d[j]), 1)))
+            absorb(clusters[j], e, float(d[j]))
         elif is_obscure(e["n"], e["src"], silly):
             label, kind, synth = plain_primary_for(e, lab_e)
             add_cluster(label, e["h"], lab_e, e["src"], synth=synth)
             clusters[-1]["also"].append((e["n"], e["src"], 0.0))
+            absorb(clusters[-1], e, 0.0)
             renames.append((e["n"], label, kind))
         else:
             add_cluster(e["n"], e["h"], lab_e, e["src"])
+            absorb(clusters[-1], e, 0.0)
 
     # 3. Japanese names: a cultural note on the nearest color if one is close; otherwise its English
     #    translation becomes its own primary (never the romaji) — learnable like any other color, with the
@@ -319,7 +621,7 @@ def main():
             if len(clusters[j]["notes"]) < NOTES_CAP:
                 clusters[j]["notes"].append(note)
         else:
-            label = clean_jp_meaning(jp["meaning"]) or jp["romaji"]
+            label = e["n"] if e.get("jpEn") else (clean_jp_meaning(jp["meaning"]) or jp["romaji"])   # library_final.py already gave it an English title
             label = make_unique(label, used_lower)
             if label != jp["romaji"]:
                 renames.append((jp["romaji"], label, "Japanese translated"))
@@ -370,7 +672,7 @@ def main():
 
     out = []
     for i, c in enumerate(final):
-        also = sorted(set(a[0] for a in c["also"]) - {c["n"]}, key=lambda n: next((a[2] for a in c["also"] if a[0] == n), 99))[:ALSO_CAP]
+        also = sorted(set(a[0] for a in c["also"]) - {c["n"]}, key=lambda n: (next((a[2] for a in c["also"] if a[0] == n), 99), n))[:ALSO_CAP]
         entry = {"n": c["n"], "h": c["h"], "src": c["src"], "rank": i}
         if also:
             entry["also"] = also
@@ -385,6 +687,12 @@ def main():
         if nn and nn != e["n"]:
             e["also"] = [e["n"]] + [a for a in (e.get("also") or []) if a.lower() != nn.lower()][:9]
             e["n"] = nn
+
+    # data-quality pass (L15, 2026-10-08): hex fixes, typos, bad synonyms, compound flags
+    apply_quality_fixes(out, ov)
+
+    add_use_rank(out)
+    write_aliases(out, getattr(apply_quality_fixes, "merged", []))
 
     # sanity check: no two primaries are now identical
     seen_names = {}

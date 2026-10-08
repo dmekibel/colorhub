@@ -19,3 +19,11 @@ Research with the web; facts only, no copying. Write design/COMPETITORS.md.
 6. **Positioning and naming:** a one-line positioning statement. Check the name candidates ("ColorHub" is taken twice; the panel suggested "Ochre") against the App Store, and give the 3 best options.
 
 Report in at most 20 lines: the top 5 competitors to watch, the 10 best ideas to steal, and our 3 weakest spots.
+
+## Added (David, same day)
+7. **Color encyclopedias, a deep dive** (encycolorpedia, colorhexa, ColourLex, Pigments.wiki and pigment databases, color-name.com, Wikipedia's color lists, Ridgway and Werner online, the Munsell Book of Color, RAL/NCS public info). For each: what color data it holds (names, systems, conversions, paint matches, pigments, history), its license or terms, and what we can legally take (facts, values, names) versus what we must not (copied text, proprietary databases). List concrete data sets worth importing or cross-referencing, with their terms.
+8. **Legal: Pantone and other proprietary systems** (not legal advice; flag where counsel is needed before a commercial launch).
+   - Is a color value copyrightable? (No; facts aren't.) What about a named color *system* or *database* (database rights in the EU)? Pantone's names and numbers as trademarks; Pantone's past enforcement and the 2022 Adobe change; how encyclopedias publish "Pantone 18-1750 Viva Magenta ≈ #BB2649" today.
+   - What's safe for an *archive*: nominative, factual reference ("Pantone's Color of the Year 2023 was Viva Magenta"), approximate screen values labeled as approximations, no bulk reproduction of their library, no logos, no claim of affiliation.
+   - Same questions for RAL, NCS, Munsell (the Munsell notation is public; the Book of Color is a product), Farrow & Ball and other paint brand names, and Crayola names (we already store some).
+   - A clear policy recommendation for ColorHub, written as rules.

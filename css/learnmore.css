@@ -1,0 +1,8 @@
+/* The path past the first units (js/learnmore.js lxPathHtml). Builds on app.css's .path-* rows. */
+.lx-stage-h{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:10px;padding-top:14px;border-top:1px solid rgba(236,232,223,.1);font:400 15px/1.3 var(--sans);color:var(--ink)}
+.lx-stage-h .note{font-size:14px;white-space:nowrap}
+.lx-more{margin-top:-4px}
+.lx-stage-done .path-band{height:18px;opacity:.9}
+.lx-stage-next .path-band{opacity:.45}
+.lx-band-wait{background:var(--surface-2)}
+.lx-stage-next .path-cap .note{white-space:nowrap}

@@ -244,6 +244,7 @@ function deck(mode, opts = {}) {
     if (firstTry) first.set(id, ok);
     // a swipe is practice (self-graded); Pick it / Say it / Make it are checks that can make the name yours
     if (mode === "review" && firstTry) schedule(it.c, ok, it.kind || "swipe");
+    if (firstTry && !it.kind && typeof learnerLog === "function") learnerLog({ type: "answer", color: it.c, ok, by: "swipe", src: mode });   // js/learner.js
     if (ok) { const seg = el.querySelector(`.segs i[data-id="${CSS.escape(id)}"]`); if (seg) seg.classList.add("on"); }
     else queue.splice(Math.min(2, queue.length), 0, it.kind ? plain(it) : it); // comes back after two other cards, as a swipe card
     mount();
@@ -499,6 +500,8 @@ function home() {
     <button class="qrow" data-menu style="margin-top:8px">Settings & more<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
   `, "home room-learn", "learn");
   wireInstall(el);
+  // the path past the first units draws once the ~1,000-name list is in (usually already prefetched)
+  if (typeof lxPlan === "function" && !lxPlan().ready) loadCoreNames().then(() => { const pl = el.querySelector(".path-list"); if (pl && pl.isConnected) pl.innerHTML = lxPathHtml(nextUnit()); });
   const go1 = () => due.length ? deck("review") : nu ? meet(nu) : null;
   el.querySelectorAll("[data-review],[data-learn],[data-go]").forEach(b => b.onclick = go1);
   el.querySelector("[data-palette]").onclick = () => { S.lens = "spectrum"; save(); go("explore"); };

@@ -169,6 +169,7 @@ function pickBoard(card, c, o = {}) {
       if (!x.ok) card.querySelector(".pi-line").textContent = pickWhy(c, x.c);
       buzz(x.ok ? 12 : [10, 40, 10]);
     } else buzz(6);
+    if (typeof learnerLog === "function") { learnerLog({ type: "answer", color: c, ok: x.ok, by: "pick", src: "pick" }); if (!x.ok) learnerLog({ type: "confuse", color: c, b: x.c, src: "pick" }); }   // js/learner.js
     o.onPick && o.onPick(x.ok, x);
   };
   card.querySelectorAll(".pi-sw").forEach(b => b.onclick = e => { e.stopPropagation(); choose(+b.dataset.i); });

@@ -4,11 +4,12 @@
 //  1. Card ids for every learnable color. The first units keep their ids ("t2-blues:Teal"); any other core name
 //     is "core:<slug>" and any library color is "lib:<slug>". cardIdFor(color) gives the id, colorForCard(id)
 //     gives the color back ({ id, n, h, fam, unit, vs, d, … }), and every card stores its own n and h, so a
-//     card resolves even before the name lists have loaded (core.js migrateState v2 backfills old cards).
+//     card resolves even before the name lists have loaded (core.js migrateState v3 backfills old cards).
 //  2. The path past the first units: learnUnitsAll() = the units in data/colors.js, then generated units from
-//     the learning order, in stages: 150 · 250 · 400 · Fluent (every real color word, about 614) · Expert (their
-//     variations, about 1,000) · about 1,600 · about 2,200 · Master (every distinct library color, about 2,700).
-//     Families mix inside a unit; compounds ("Light teal") are taught as variations of their base word, after it;
+//     the learning order (useRank), in stages: 150 · 250 · 400 · Fluent (every real color word: 655 today) ·
+//     Expert (plus their variations: all 984 core names) · Every learnable color (plus the library's learnable
+//     cards, teach:false skipped: 1,225 today). The last checkpoint is the honest ceiling, sized from the data; an
+//     extra cut at about 1,500 appears only if the data ever grows past it. Families mix inside a unit; compounds ("Light teal") are taught as variations of their base word, after it;
 //     near-duplicates are never a second card.
 //  3. Look-alikes from all ~1,000 names in the same family, never closer than LX_LOOK_MIN (so every pair is
 //     solvable): lookalikes() (js/lookalikes.js), Learn it (js/learnit.js), Pick it (js/pickit.js) and Say it
@@ -23,9 +24,10 @@ const LX_SPREAD = 10;         // CIEDE2000: two new names in one unit at least t
 const LX_DUP = 2.5;           // CIEDE2000: a library color this close to one already on the path is the same card
 const LX_LOOK_MIN = 5;        // look-alikes are at least 5% different (side by side, clearly two colors)
 const LX_LOOK_MAX = 30;       // …and at most 30% (past that they aren't look-alikes)
+const LX_ALL_NAME = "Every learnable color";   // the last checkpoint: the honest ceiling, sized from the data
 // word-count checkpoints after the first units. 0 = "every real word" and "every variation": the real count.
-const LX_STAGE_PLAN = [[150, ""], [250, ""], [400, ""], [0, "Fluent"], [0, "Expert"], [1600, ""], [2200, ""], [0, "Master"]];
-const LX_STAGE_GUESS = { Fluent: 614, Expert: 1000, Master: 2700 };   // shown until the lists have loaded
+const LX_STAGE_PLAN = [[150, ""], [250, ""], [400, ""], [0, "Fluent"], [0, "Expert"], [1500, ""], [0, LX_ALL_NAME]];
+const LX_STAGE_GUESS = { Fluent: 655, Expert: 984, [LX_ALL_NAME]: 1225 };   // shown (as "about") until the lists have loaded
 
 // ---------- small helpers ----------
 const lxSlug = n => String(n).normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
@@ -64,7 +66,8 @@ function lxSameFam(a, b) {
 // first time something reads it (lxNb), against a name you meet before it on the path.
 function lxMake(kind, e) {
   const c = { id: kind + ":" + lxSlug(e.n), n: e.n, h: String(e.h).toUpperCase(), kind, rank: e.rank, useRank: e.useRank, teach: e.teach,
-    src: e.src || [], also: e.also, notes: e.notes, lab: e.lab || lab(e.h), ord: Infinity, unit: null };
+    src: e.src || [], also: e.also, notes: e.notes, lab: e.lab || lab(e.h), ord: Infinity, unit: null,
+    compound: e.compound, baseSlug: e.base, field: e.field };   // compound/base (core) and field (library) come from the data (lane L15)
   c.fam = lxFam(c.h);
   c.unit = { title: c.fam, fam: true };
   ["vs", "d", "vsC"].forEach(k => Object.defineProperty(c, k, { get: () => lxNb(c)[k], enumerable: false, configurable: true }));
@@ -85,14 +88,15 @@ function lxCore() {
   return LX_CORE;
 }
 // The library (js/graph.js loadLongNames): only colors that aren't already a core name, aren't crude, carry an English
-// title (a Japanese-only name is secondary, never a title: CLAUDE.md naming policy) and no source qualifier like "(Crayola)".
+// title (the data gives Japanese-sourced colors an English title; the Japanese name stays a note) and no source
+// qualifier like "(Crayola)".
 let LX_LIB_SRC = null, LX_LIB = null, LX_LIB_LOADING = null;
 function lxLibLoad() {
   if (LX_LIB_SRC) return Promise.resolve(lxLib());
   if (typeof loadLongNames !== "function") return Promise.resolve(null);
   return LX_LIB_LOADING || (LX_LIB_LOADING = Promise.all([loadCoreNames(), loadLongNames()]).then(([, list]) => { LX_LIB_SRC = list || []; LX_PLAN = null; return lxLib(); }));
 }
-const lxLibOk = e => e && !e.crude && /^#[0-9a-f]{6}$/i.test(e.h) && !/[()0-9]/.test(e.n) && !((e.src || []).length === 1 && e.src[0] === "jp");
+const lxLibOk = e => e && !e.crude && /^#[0-9a-f]{6}$/i.test(e.h) && !/[()0-9]/.test(e.n);
 function lxLib() {
   if (!LX_LIB_SRC) return null;
   if (LX_LIB && LX_LIB.src === LX_LIB_SRC) return LX_LIB;
@@ -157,6 +161,41 @@ function lxLearnable(entry) {
   if (!entry || !entry.n || entry.shade) return null;   // a computed shade is a description, never a word to learn
   const t = BYNAME.get(entry.n.toLowerCase()); if (t) return t.basic ? null : t;
   return colorForCard(cardIdFor(entry)) || (entry.h ? lxMake(cardIdFor(entry).split(":")[0], entry) : null);
+}
+// A name can be renamed or merged in the data (data/aliases.json maps old slugs to the canonical one). A card whose
+// slug no longer resolves moves to its canonical id, once the lists are in; if that id already has a card, the one
+// with more progress stays and the other is kept aside in S.cardsMerged (never thrown away).
+let LX_REKEYED = false;
+function lxRekey() {
+  if (LX_REKEYED || typeof S === "undefined" || !S || !S.cards || !lxCore()) return;
+  // a slug that now names a different card (a name that joined the first units, or core <-> library): move it now
+  Object.keys(S.cards).forEach(id => {
+    const m = /^(core|lib):(.+)$/.exec(id); if (!m) return;
+    const hit = lxCore().bySlug.get(m[2]) || (lxLib() && lxLib().bySlug.get(m[2]));
+    if (!hit || !hit.id || hit.id === id || hit.basic) return;
+    const st = S.cards[id], have = S.cards[hit.id];
+    if (have) { S.cardsMerged = S.cardsMerged || {}; if ((st.b || 0) > (have.b || 0)) { S.cardsMerged[hit.id] = have; S.cards[hit.id] = st; } else S.cardsMerged[id] = st; }
+    else S.cards[hit.id] = st;
+    delete S.cards[id]; save();
+  });
+  const lost = Object.keys(S.cards).filter(id => { const m = /^(core|lib):(.+)$/.exec(id); return m && !(m[1] === "core" ? lxCore() : lxLib() || { bySlug: new Map() }).bySlug.has(m[2]) && (m[1] === "core" || lxLib()); });
+  if (!lost.length) return;
+  LX_REKEYED = true;
+  fetch("data/aliases.json" + (typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : "")).then(r => r.ok ? r.json() : null).then(a => {
+    const map = a && a.slugs; if (!map) return;
+    let moved = 0;
+    lost.forEach(id => {
+      const slug = id.split(":")[1], to = map[slug]; if (!to) return;
+      const nid = lxCore().bySlug.has(to) ? (lxCore().bySlug.get(to).id) : "lib:" + to;
+      if (!nid || nid === id) return;
+      const st = S.cards[id], have = S.cards[nid];
+      if (have) { S.cardsMerged = S.cardsMerged || {}; S.cardsMerged[(have.b || 0) >= (st.b || 0) ? id : nid] = (have.b || 0) >= (st.b || 0) ? st : have; if ((st.b || 0) > (have.b || 0)) S.cards[nid] = st; }
+      else S.cards[nid] = st;
+      const c = colorForCard(nid); if (c) { S.cards[nid].n = c.n; S.cards[nid].h = c.h; }
+      delete S.cards[id]; moved++;
+    });
+    if (moved) save();
+  }).catch(() => { LX_REKEYED = false; });
 }
 // Every card's color (never a basic): dueList(), ownedCount() and ownCounts() run over this, not just the first units.
 function cardColors() {
@@ -233,6 +272,8 @@ function lxChunk(list) {
   let k = Math.max(1, Math.round(list.length / LX_UNIT_N));
   while (pending.length) {
     const size = Math.ceil(pending.length / k--), win = pending.slice(0, size * 3), pick = [], fam = {};
+    // a name passed over twice goes first, so the order bends but never breaks (at most two units late)
+    win.filter(c => (c._skip || 0) >= 2).slice(0, size).forEach(c => { pick.push(c); fam[c.fam] = (fam[c.fam] || 0) + 1; });
     for (const pass of [0, 1, 2]) {   // 0: mixed and apart · 1: apart · 2: anything (a crowded corner of the list)
       for (const c of win) {
         if (pick.length >= size) break;
@@ -242,7 +283,8 @@ function lxChunk(list) {
         pick.push(c); fam[c.fam] = (fam[c.fam] || 0) + 1;
       }
     }
-    pick.forEach(c => pending.splice(pending.indexOf(c), 1));
+    win.slice(0, size).forEach(c => { if (!pick.includes(c)) c._skip = (c._skip || 0) + 1; });   // its turn came and it waited
+    pick.forEach(c => { pending.splice(pending.indexOf(c), 1); delete c._skip; });
     out.push(pick);
   }
   return out;
@@ -268,12 +310,15 @@ function lxDedupe(cands, placed) {
 }
 // Fields for the library stages (JOURNEY decision 1: "past 614, chapters are grouped by field"). Read from each
 // library color's sources; a unit never mixes fields.
+// The data names each library color's field (lane L15); a color without one is read from its sources.
 const LX_FIELDS = [
-  ["everyday", "Everyday and screen names", s => !s.includes("ridgway") && !s.includes("werner") && s.some(x => x === "xkcd" || x === "css" || x === "wiki")],
-  ["paint", "Paint and pigments", s => s.includes("ral") || s.includes("pigment")],
-  ["nature", "The naturalists' charts", s => s.includes("ridgway") || s.includes("werner")],
-  ["standard", "The color standard's names", () => true]];
-const lxField = c => LX_FIELDS.find(f => f[2](c.src || [])) || LX_FIELDS[LX_FIELDS.length - 1];
+  ["everyday", "Everyday names", s => !s.includes("ridgway") && !s.includes("werner") && s.some(x => x === "xkcd" || x === "css" || x === "wiki")],
+  ["painter's pigments", "Painter's pigments", s => s.includes("pigment")],
+  ["fashion and textiles", "Fashion and textiles", () => false],
+  ["interiors and paint", "Interiors and paint", s => s.includes("ral")],
+  ["design and print", "Design and print", s => s.includes("iscc-nbs")],
+  ["nature", "Nature", s => s.includes("ridgway") || s.includes("werner")]];
+const lxField = c => (c.field && LX_FIELDS.find(f => f[0] === c.field)) || LX_FIELDS.find(f => f[2](c.src || [])) || LX_FIELDS[LX_FIELDS.length - 1];
 
 let LX_PLAN = null;
 // The whole plan: { stages: [{ k, n, name, label, units, gen }], units: [all units in order], total }. The first two
@@ -293,7 +338,7 @@ function lxPlan() {
   const first = count;
   const units = UNITS.slice();
   if (!core) {
-    LX_STAGE_PLAN.forEach(([n, name]) => stages.push({ k: stages.length, n: n || LX_STAGE_GUESS[name], name, units: [], gen: true, approx: !n || n > 1000 }));
+    LX_STAGE_PLAN.filter(([n]) => !n || n < LX_STAGE_GUESS[LX_ALL_NAME]).forEach(([n, name]) => stages.push({ k: stages.length, n: n || LX_STAGE_GUESS[name], name, units: [], gen: true, approx: !n || n > 1000 }));
     return { core, lib, stages, units, total: 0, ready: false };
   }
   // the core names past the first units: real words, then the variations (each after its base)
@@ -302,7 +347,10 @@ function lxPlan() {
   const has = n => byName.get(n) || null;
   const rest = core.list.filter(c => !known.has(c.n.toLowerCase()) && c.teach !== false).sort(lxOrderCmp);
   const words = [], vars = [];
-  rest.forEach(c => { const b = lxBaseOf(c.n, has); if (b && b !== c) { c.base = b; vars.push(c); } else { delete c.base; words.push(c); } });
+  // compounds: the data's own compound/base flags when it has them (lane L15), else read from the name
+  const flagged = core.list.some(c => c.compound);
+  const baseOf = c => flagged ? (c.compound && c.baseSlug ? core.bySlug.get(c.baseSlug) || lxBaseOf(c.n, has) : null) : lxBaseOf(c.n, has);
+  rest.forEach(c => { const b = baseOf(c); if (b && b !== c) { c.base = b; vars.push(c); } else { delete c.base; words.push(c); } });
   // a variation of a variation waits for its own base
   const depth = c => { let d = 0, x = c; while (x.base && x.base.base && d < 4) { d++; x = x.base; } return d; };
   vars.sort((a, b) => depth(a) - depth(b));
@@ -327,20 +375,21 @@ function lxPlan() {
   LX_STAGE_PLAN.slice(0, 3).forEach(([n]) => { const take = Math.max(0, Math.min(words.length - wi, n - count)); place(words.slice(wi, wi + take), n, ""); wi += take; });
   place(words.slice(wi), 0, "Fluent");
   place(vars, 0, "Expert");
-  // the library: field by field, then cut at about 1,600 and 2,200; the rest is Master
+  // the library's learnable cards (teach:false ones are near-duplicates, obscure or crude: never a card), field by
+  // field, cut at about 1,500; the rest is the last checkpoint, every learnable color
   if (lib) {
-    const cands = lib.list.slice().sort((a, b) => LX_FIELDS.indexOf(lxField(a)) - LX_FIELDS.indexOf(lxField(b)) || lxOrderCmp(a, b));
+    const cands = lib.list.filter(c => c.teach !== false).sort((a, b) => LX_FIELDS.indexOf(lxField(a)) - LX_FIELDS.indexOf(lxField(b)) || lxOrderCmp(a, b));
     const keep = lxDedupe(cands, [...BASICS, ...ALL, ...rest]);
-    const cuts = [1600, 2200].map(n => Math.max(0, n - count));
-    const segs = [keep.slice(0, cuts[0]), keep.slice(cuts[0], cuts[1]), keep.slice(cuts[1])];
+    const cut = Math.max(0, Math.min(keep.length, 1500 - count));
+    const segs = cut >= LX_UNIT_N && keep.length - cut >= LX_UNIT_N ? [keep.slice(0, cut), keep.slice(cut)] : [keep];
     segs.forEach((seg, i) => {
-      const name = i === 2 ? "Master" : "";
+      const name = i === segs.length - 1 ? LX_ALL_NAME : "";
       // inside a stage, a unit never mixes fields: chunk each field's run on its own
       const runs = [];
       seg.forEach(c => { const f = lxField(c)[0]; if (!runs.length || runs[runs.length - 1].f !== f) runs.push({ f, cs: [] }); runs[runs.length - 1].cs.push(c); });
       if (!seg.length) return;
       const from = count;
-      const st = { k: stages.length, n: count + seg.length, from, name, units: [], gen: true, approx: i < 2, lib: true };
+      const st = { k: stages.length, n: count + seg.length, from, name, units: [], gen: true, approx: i < segs.length - 1, lib: true };
       runs.forEach(r => {
         lxChunk(r.cs).forEach(cs => {
           cs.forEach(c => { c.ord = ord++; c._nb = null; });
@@ -355,7 +404,7 @@ function lxPlan() {
     });
   } else {
     // not loaded yet: the library stages stay as named placeholders
-    [[1600, ""], [2200, ""], [LX_STAGE_GUESS.Master, "Master"]].forEach(([n, name]) => stages.push({ k: stages.length, n, name, units: [], gen: true, approx: true, lib: true }));
+    [[LX_STAGE_GUESS[LX_ALL_NAME], LX_ALL_NAME]].forEach(([n, name]) => stages.push({ k: stages.length, n, name, units: [], gen: true, approx: true, lib: true }));
   }
   LX_PLAN = { core, lib, stages, units, total: count, first, ready: true, words: words.length, vars: vars.length };
   return LX_PLAN;
@@ -396,7 +445,7 @@ function lxPending() {
 }
 
 // ---------- stage progress (the Learn room's collection) ----------
-// The next named checkpoint above what's yours: "27 of 614 · Fluent", then Expert, then Master.
+// The next named checkpoint above what's yours: "27 of 650 · Fluent", then Expert, then every learnable color.
 function lxCheckpoint(owned) {
   const plan = lxPlan();
   const named = plan.stages.filter(s => s.name);
@@ -410,6 +459,7 @@ function lxCheckpoint(owned) {
 // unit large, and the two after it; later stages are named and waiting (locked, never hidden).
 function lxPathHtml(nu) {
   const plan = lxPlan();
+  lxRekey();
   const band = (cols, cls) => `<div class="path-band ${cls}">${cols.map(h => `<i style="background:${h}"></i>`).join("")}</div>`;
   const sample = (cs, n) => { if (cs.length <= n) return cs; const out = []; for (let i = 0; i < n; i++) out.push(cs[Math.floor(i * cs.length / n)]); return out; };
   const stageDone = st => st.units.length && st.units.every(lxUnitDone);
