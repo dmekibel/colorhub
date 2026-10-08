@@ -375,6 +375,7 @@ function paletteView(p) {
     if (hasImg) el.querySelector("#dots").innerHTML = cols.map(c => `<i style="--c:${c.h};left:${c.at[0] * 100}%;top:${c.at[1] * 100}%" data-swatch="${c.h}"></i>`).join("");
   };
   loadCoreNames().then(render); render();
+  if (typeof lkHook === "function") lkHook(el, colsNow, p);   // js/looks.js: "What look is this?"
   // the ColorSet verbs (js/colorset.js); Keep and Share already live on this page
   if (typeof colorSet === "function") {
     const kind = p.photoId != null ? "photo" : p.savedId != null ? "palette" : "studio", pid = p.photoId != null ? p.photoId : p.savedId != null ? p.savedId : "new";

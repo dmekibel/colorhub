@@ -265,6 +265,7 @@ function hmHome() {
     if (ctrl) ctrl.update({ items, soft });
     else ctrl = honeycomb(viewEl, { items, style: v.style, tweak: hmTweakFor(v.style), zoom: S.hm.zoom || 1, pick, onPeek, centerFirst: true,
       onZoom: z => { S.hm.zoom = Math.round(z * 100) / 100; save(); } });
+    window.HM_CTRL = ctrl;   // the map, for js/polish.js flyToMap()
     hmWireChrome();
     if (typeof fvHomeReady === "function") fvHomeReady(el, ctrl);   // js/favs.js: open straight into pick mode when asked
   }

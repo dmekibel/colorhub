@@ -123,6 +123,7 @@ function shot(name) {
       }); }
     case "taste": return tasteShot(arg);
     case "favs": return favShot(arg);   // js/favs.js: favs:<shelf|empty|pick|taste|rank:<method>>
+    case "look": case "looks": case "lookyours": case "lookmatch": return lkShot(screen, arg, name.split(":")[2]);   // js/looks.js
     case "poem": return poemPage(name.slice(5), {});   // poem:<poem id>
     case "poemcolor": { const n = g().nodes.get("c:" + (arg || "Crimson")); XSTACK = ["p:" + n.id]; colorPage(n); const x = document.querySelector(".c-poems"), h = document.querySelector(".c-hero"); if (x && h) h.after(x); return; }   // "In poems" moved up so one screen shows it
     case "potd": return show(`<div class="sec-head"><b>Today</b></div><div class="today">${poemOfTheDayCard()}</div>`, "", "learn");
@@ -143,7 +144,7 @@ function shot(name) {
       return colorExplorer({ focus: dailyColor(), pick: c => closeup(colorNode(c)), shot: ["wheel", "tuned"].includes(act) ? "" : act });
     }
     case "gallery": return galleryShot(name.slice(8));   // gallery, gallery:scroll=600, gallery:color=Cobalt, gallery:adjust=Cobalt, gallery:page=12, gallery:cpage=Cobalt
-    case "world": case "fashiondecade": case "fashioncoty": case "fashionhouse": case "fashionhistory":
+    case "world": case "fashiondecade": case "fashioncoty": case "fashionhouse": case "fashionhistory": case "garments": case "garment": case "fxcolor":
       return typeof worldShot === "function" && worldShot(screen, arg);   // js/world.js
     // the color link sheet (ROADMAP §13, js/swatch.js) opened over a real screen: swsheet:gallery|studio|fashion
     case "swsheet": {

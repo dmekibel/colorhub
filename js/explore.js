@@ -82,7 +82,8 @@ function lensSections(lens) {
       return [{ honey: true }, ...lensSections("origins").map(sec => ({ ...sec, title: sec.title === "Still being traced" ? sec.title : "Named after · " + sec.title }))];
     case "ideas": {
       const sys = pages.filter(p => (p.swatches || []).length >= 3), ideas = pages.filter(p => !sys.includes(p) && ["concept", "person", "work", "tradition", "culture"].includes(p.type));
-      return [{ title: "Stories", sub: "Short reads, a few swipes each.", pins: stories.map(n => pin(n)) },
+      return [...(typeof lkSections === "function" ? lkSections() : []),   // js/looks.js: visual styles, each a family of palettes
+        { title: "Stories", sub: "Short reads, a few swipes each.", pins: stories.map(n => pin(n)) },
         { title: "Color systems", sub: "Traditions that gave each color a meaning.", pins: sys.map(n => pin(n, { system: true })) },
         { title: "Ideas and people", pins: seeded(ideas, today()).map(n => pin(n)) },
         ...[window.passagesSection, window.filmsSection].filter(f => typeof f === "function").flatMap(f => f()),   // js/passages.js, js/films.js
@@ -618,7 +619,7 @@ function colorPage(n, tapped) {
     ${typeof gmRow === "function" ? gmRow(c) : ""}
     <section class="fx-in" data-world-in></section>
     ${(() => {
-      const secs = (w ? w.facets : []).map((f, i) => [f.k + i, FACET_LABEL[f.k] || f.k, `<p>${linkText(f.text)}</p>` + (i === 0 ? figHTML(c.n, 1) : "")]);
+      const secs = (w ? w.facets : []).map((f, i) => [f.k + i, FACET_LABEL[f.k] || f.k, `<p>${linkText(f.text)}</p>` + figHTML(c.n, i + 1)]);
       if (w && w.related && w.related.length) secs.push(["kin", "Kin", w.related.map(r => { const x = graph().resolve(r.to); return x ? `<button class="kin" data-node="${esc(x.id)}"><i style="--c:${x.h}"></i><b>${esc(x.title)}</b><span>${esc(r.why)}</span></button>` : ""; }).join("")]);
       // the sheet used to be the only place these lived (David, 2026-10-07: "everything the sheet had moves
       // onto the page") — the nearest of the ~1,000 core names, same list js/names.js's own pages show.
@@ -630,6 +631,7 @@ function colorPage(n, tapped) {
       secs.push(["codes", "Codes", `<div class="cp-codes">${codeRows(c.h).map(([k, v]) => `<button class="cp-code-row" data-copy="${esc(v)}"><span>${esc(k)}</span><b class="mono">${esc(v)}</b></button>`).join("")}</div>${codeRows(c.h).some(r => r[0].startsWith("CMYK")) ? `<p class="fine cp-codes-fine">CMYK here is a rough formula, not a print profile: real values depend on the paper and press, so check them in a print workflow with a proof.</p>` : ""}`]);
       return (w ? "" : `<p class="fine">The full page for ${esc(c.n)} is being written. Its connections below are already live.</p>`) + tocHTML(secs.map(x => [x[0], x[1]])) + secs.map(x => secHTML(x[0], x[1], x[2], false)).join("");
     })()}
+    ${typeof wgColorTail === "function" ? wgColorTail(c, w) : ""}
     ${connSection(n)}
     ${w && w.sources ? secHTML("src", "Sources", sourcesHTML(w.sources), false) : ""}
   `, "article cp-page");
@@ -676,11 +678,12 @@ function wikiPage(n) {
       if (n.stub) return `<p class="fine">This page is being written. Its connections are already live.</p>`;
       const body = n.body || [];
       // pages written with sections use them; older pages get a lead paragraph and a folding "full story"
-      const secs = n.sections && n.sections.length ? n.sections.map((x, i) => ["p" + i, x.title, (Array.isArray(x.text) ? x.text : [x.text]).map(t => `<p>${linkText(t)}</p>`).join("") + (x.img != null ? figHTML(n.id, x.img) : "")])
-        : body.length > 1 ? [["story", "The full story", body.slice(1).map(t => `<p>${linkText(t)}</p>`).join("") + figHTML(n.id, 1)]] : [];
+      const secs = n.sections && n.sections.length ? n.sections.map((x, i) => ["p" + i, x.title, (Array.isArray(x.text) ? x.text : [x.text]).map(t => `<p>${linkText(t)}</p>`).join("") + figHTML(n.id, x.img != null ? x.img : i + 1)])
+        : body.length > 1 ? [["story", "The full story", body.slice(1).map((t, i) => `<p>${linkText(t)}</p>` + figHTML(n.id, i + 1)).join("")]] : [];
       if (n.colors && n.colors.length) secs.push(["colors", "Colors", `<div class="chips-wrap">${n.colors.map(cn => { const x = graph().resolve(cn); return x ? `<button class="pchip" data-node="${esc(x.id)}"><i style="--c:${x.h}"></i>${esc(x.title)}</button>` : ""; }).join("")}</div>`]);
       return (body[0] && !(n.sections && n.sections.length) ? `<p class="lead">${linkText(body[0])}</p>` : "") + tocHTML(secs.map(x => [x[0], x[1]])) + secs.map((x, i) => secHTML(x[0], x[1], x[2], i === 0)).join("");
     })()}
+    ${typeof wgWikiTail === "function" ? wgWikiTail(n) : ""}
     ${connSection(n)}
     ${n.sources ? secHTML("src", "Sources", sourcesHTML(n.sources), false) : ""}
   `, "article");

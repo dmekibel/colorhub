@@ -225,7 +225,8 @@ let cleanup = [];   // functions to run when the screen changes (stop animation 
 // Everything is skipped under Reduce Motion.
 let PENDING_MORPH = null, LAST_TAB = null;
 // Tapping any of these opens a color; the swatch inside is the chip that grows. [data-morph-src] marks one by hand.
-const MORPH_TRIGGER = "[data-morph-src], .pin-color, .pin-pair, .kin, .pchip, .tday[data-daily]";
+// [data-swatch] too (lane L12): every tappable swatch in the app grows into the color page it opens (js/swatch.js).
+const MORPH_TRIGGER = "[data-morph-src], [data-swatch], .pin-color, .pin-pair, .kin, .pchip, .tday[data-daily]";
 const MORPH_CHIP = "[data-morph-src], .pc, .pair2>span, .kin>i, .pchip>i";
 // The swatch a color page opens on: a hand-marked [data-morph], or a known hero.
 const MORPH_TARGET = "[data-morph], .z-color, .c-hero, .d-swatch";
@@ -359,7 +360,13 @@ const HOME_GLYPH = sv('<path d="M12 3l7 4v10l-7 4-7-4V7z"/>', 24, 1.6);
 // survive a screen swap, since #app is fully re-rendered each time — see show() above)
 // spread across the strip (each bar needs its own left; without it all 16 stacked into one bright slash at the left edge)
 const ROOM_PEEK_BARS = Array.from({ length: 16 }, (_, i) => `<i style="left:${(i * 6.4 - 2).toFixed(1)}%;background:${lchHex(50 + (i % 3) * 9, 46, (i * 23) % 360)}"></i>`).join("");
+// The Room header (DESIGN-SYSTEM §11): the room's name in title-1 on the left, one note on the right. Rooms that
+// still render the old brand row (tabHead() + <h1 class="tab-title">) are converted here, so Train and Studio get
+// the new header without their own JS changing. The notes say what each room does to your map (GENIUS-PANEL-1).
+const ROOM_NOTES = { gym: "Sharpen your eye", studio: "Make your own", explore: "The world in color" };
+const LEGACY_HEAD = /<header class="bar"><button class="brand" data-hm-brand[\s\S]*?<\/header>\s*<h1 class="tab-title">([\s\S]*?)<\/h1>/;
 function roomChrome(inner, tab) {
+  inner = inner.replace(LEGACY_HEAD, (_, t) => `<header class="room-head rh-auto"><h1 class="title-1">${t}</h1>${ROOM_NOTES[tab] ? `<span class="note">${ROOM_NOTES[tab]}</span>` : ""}</header>`);
   return `<div class="room-floor-peek" data-floor-peek>${ROOM_PEEK_BARS}</div><div class="room-sheet" data-room="${tab}">${inner}</div><button class="corner l" data-rooms-corner aria-label="Rooms">${ROOMS_GLYPH}</button>`;
 }
 let STEM_OPEN = false;
@@ -402,6 +409,7 @@ function toggleStem(cornerEl) {
   const items = (inRoom ? [["home", "Home"]] : []).concat(ROOMS_LIST);
   const stem = document.createElement("div");
   stem.className = "rooms-stem";
+  stem.style.setProperty("--n", items.length);   // short screens space the bubbles to fit (css/polish.css)
   stem.innerHTML = items.map(([id, label], i) => `
     <button class="rm-bubble" data-room="${id}" style="--i:${i}">
       ${id === "home" ? `<span class="rm-art rm-art-home">${HOME_GLYPH}</span>` : roomsBubbleArt(id)}
