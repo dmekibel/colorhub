@@ -1978,7 +1978,7 @@ scenario("paintmap", "the map lays out, a tap glides a painting to the middle, t
   await t.click("[data-back]", { wait: 900 });
   await t.waitFor(() => t.w.PM_CTRL && t.$(".pmx-cv") && t.w.PM_CTRL.center === c1, 12000, "Back to the map, with the same painting in the middle");
 });
-scenario("paintmap", "the corner arranges (time, painter, around this one); Filter counts, narrows the map and rides in the address", async t => {
+scenario("paintmap", "arrange by time and painter and around the middle one then filter by century (counts and address follow)", async t => {
   await t.open("#/paintings/map?arr=color&co=France", { settle: 800 });
   await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 100, 20000, "the map of France");
   const n = t.w.PM_CTRL.count;
@@ -2012,7 +2012,7 @@ scenario("favs", "a painting's heart keeps it; the shelf sorts favorites into ki
   await t.waitFor("[data-fva]", 14000, "the heart under the painting");
   await t.click("[data-fva]", { wait: 400 });
   t.expect(t.$("[data-fva]").getAttribute("aria-pressed") === "true", "the heart didn't fill");
-  t.expect(Object.keys(t.w.S.favArt || {}).length === 1, "the painting isn't in favorites");
+  t.expect(t.ev("Object.keys(S.favArt || {}).length") === 1, "the painting isn't in favorites");
   t.ev(`S.favs = { "#008080": { n: "Teal", at: today() }, "#4682B4": { n: "Steel blue", at: today() } }; S.fvCat = "all"; save(); favShelf()`);
   await t.waitFor(".fv-cats [data-fvcat]", 6000, "the kinds on the shelf");
   const kinds = t.$$(".fv-cats [data-fvcat]").map(b => b.dataset.fvcat).join(",");
@@ -2020,7 +2020,7 @@ scenario("favs", "a painting's heart keeps it; the shelf sorts favorites into ki
   t.expect(t.$$(".fv-group").length === 2, "All doesn't show one section per kind");
   await t.click('.fv-cats [data-fvcat="paintings"]', { wait: 400 });
   await t.waitFor(".fva-grid .fva-pin", 4000, "the paintings grid");
-  t.expect(t.w.S.fvCat === "paintings", "the chosen kind isn't remembered");
+  t.expect(t.ev("S.fvCat") === "paintings", "the chosen kind isn't remembered");
   await t.click(".fva-grid .fva-pin", { wait: 900 });
   await t.waitFor(() => /#\/gallery\/8136/.test(t.w.location.hash), 10000, "a kept painting to open");
 });

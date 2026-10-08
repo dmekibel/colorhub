@@ -426,8 +426,12 @@ function pmMount(el, s, F) {
   }
   // ---- drawing
   function kick() { if (!raf && !dead) raf = requestAnimationFrame(frame); }
-  let touched = false;
-  function frame(t) {
+  let touched = false, clock = 0, lastNow = 0, frameDt = 16;
+  // the map's own clock: every frame moves it at least 8 ms (and at most 40), so a glide, a flick or a fade always
+  // ends after a bounded number of frames, even where the wall clock stalls (a background tab, a headless test run)
+  function frame() {
+    const now = performance.now(); frameDt = lastNow ? clamp(now - lastNow, 8, 40) : 16; lastNow = now; clock += frameDt;
+    const t = clock;
     raf = 0; if (dead || !lay || !W) return;
     let moving = false;
     if (glide) {
@@ -436,12 +440,11 @@ function pmMount(el, s, F) {
       if (glide.z) Z = glide.z[0] + (glide.z[1] - glide.z[0]) * e;
       if (u >= 1) glide = null; moving = true;
     } else if (!drag && (Math.abs(V[0]) > 1e-4 || Math.abs(V[1]) > 1e-4)) {
-      const dt = Math.min(40, t - (frame.t || t)); P[0] -= V[0] * dt; P[1] -= V[1] * dt;
+      const dt = frameDt; P[0] -= V[0] * dt; P[1] -= V[1] * dt;
       const k = Math.exp(-dt / 300); V[0] *= k; V[1] *= k; moving = true;
       if (Math.hypot(V[0], V[1]) < .0006) { V = [0, 0]; settle(); }
       clampPan();
     }
-    frame.t = t;
     draw(t);
     if (moving || fading) kick();
   }
@@ -495,7 +498,8 @@ function pmMount(el, s, F) {
       else { ctx.fillStyle = pmHex(i); ctx.fillRect(X, Y, w, h); }
       if (b.d >= 20) wantImg.push([i, b.d > 92 || m > .3]);
       if (e && e.st === 1 && b.d >= 7) {
-        const age = t - (e.t0 || 0), a = RM ? 1 : Math.min(1, age / 260); if (a < 1) fading = true;
+        if (e.fadeT == null) e.fadeT = t;
+        const age = t - e.fadeT, a = RM ? 1 : Math.min(1, age / 260); if (a < 1) fading = true;
         ctx.globalAlpha = a;
         const big = (b.d > 92 || m > .02) && imgs.big(i);
         if (big) {   // from the full picture: crop (frame away), then cover the tile's own shape
@@ -539,7 +543,7 @@ function pmMount(el, s, F) {
     const k = nearestK(P[0], P[1]); if (k < 0) return;
     glideTo([lay.x[k], lay.y[k]], 260);
   }
-  function glideTo(b, dur = 340, z) { glide = { a: P.slice(), b, t0: performance.now(), dur, z: z ? [Z, z] : null }; V = [0, 0]; kick(); }
+  function glideTo(b, dur = 340, z) { glide = { a: P.slice(), b, t0: clock, dur, z: z ? [Z, z] : null }; V = [0, 0]; kick(); }
   cv.addEventListener("pointerdown", e => {
     touched = true;
     try { cv.setPointerCapture(e.pointerId); } catch (err) {}
@@ -630,7 +634,7 @@ function pmMount(el, s, F) {
     else if (!keepPan) { P = lay.start.slice(); Z = 1; const k = nearestK(P[0], P[1]); if (k >= 0) P = [lay.x[k], lay.y[k]]; }
     if (keepPan) { const k = nearestK(P[0], P[1]); if (k >= 0) P = [lay.x[k], lay.y[k]]; }
     Z = clamp(Z, zMin(), ZMAX);
-    centerK = -1; chrome(); kick();
+    centerK = -1; drawn = []; setCenter(lay.n ? nearestK(P[0], P[1]) : -1); chrome(); kick();
     if (window.PM_DEBUG) console.log("paintmap layout", s.arr, lay.n, Math.round(performance.now() - t0) + "ms");
   }
   function rebuild() {
