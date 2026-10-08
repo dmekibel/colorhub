@@ -15,7 +15,9 @@ for l in strip(theirs)-strip(ours):
     tag=l.replace('.css"',f'.css{v}"').replace('.js"',f'.js{v}"')
     if '<link' in l: ours=ours.replace('</head>',tag+'\n</head>',1)
     else:
-        i=ours.rfind('<script src="js/'); j=ours.find('\n',i); ours=ours[:j+1]+tag+'\n'+ours[j+1:]
+        # new scripts go before router.js/boot.js (boot runs the first route; everything must be loaded by then)
+        i=ours.find('<script src="js/router.js'); i = i if i>=0 else ours.find('<script src="js/boot.js')
+        ours=ours[:i]+tag+'\n'+ours[i:]
     print("added",tag)
 open("index.html","w").write(ours)
 EOF
