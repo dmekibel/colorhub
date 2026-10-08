@@ -236,3 +236,10 @@ html.booth .toast{background:var(--booth-2);box-shadow:none;border-color:var(--b
 /* the map screens (Home, Study the map) are the whole screen on an iPhone Home Screen app: its layout viewport (and
    100dvh) stop a status bar short of the bottom, and a .fixed screen clips at its own height (js/core.js vbFix) */
 .screen.fixed.cx{position:fixed;top:0;left:0;right:0;height:var(--app-full,100dvh)}
+
+/* ============================================================ bottom band, belt and braces (2026-10-08, David's Arrange
+   sheet screenshot: a 61 px band of ground under every sheet on his iPhone Home Screen app). vbFix now measures
+   where bottom:0 really lands; if a phone still reports it wrong, each bottom sheet paints its own surface on
+   below its edge (a solid offset shadow is never clipped by the sheet's overflow), so no band can show. */
+.sheet{box-shadow:0 -16px 48px rgba(0,0,0,.45),0 160px 0 0 var(--surface-1)}
+.room-sheet{box-shadow:0 160px 0 0 var(--ground)}

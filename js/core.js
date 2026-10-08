@@ -32,16 +32,33 @@ const isIOS = () => /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.pla
 // in css/menus2.css reaches through it.
 function vbFix() {
   let gap = 0, full = 0;
-  try { if (standalone() && isIOS()) { full = innerHeight > innerWidth ? Math.max(screen.width, screen.height) : Math.min(screen.width, screen.height); gap = full - innerHeight; if (gap < 1 || gap > 80) gap = 0; } } catch (e) {}
+  try {
+    if (standalone() && isIOS()) {
+      full = innerHeight > innerWidth ? Math.max(screen.width, screen.height) : Math.min(screen.width, screen.height);
+      // measure where bottom:0 really lands, not just innerHeight: on iOS 26 a Home Screen app can report innerHeight
+      // as the whole screen while fixed layers still stop a status bar short (David's Arrange-sheet screenshot,
+      // 2026-10-08: --vb came out 0 and the sheet ended 61 px above the edge). The larger of the two is the strip.
+      const pr = document.createElement("div");
+      pr.style.cssText = "position:fixed;left:0;bottom:0;width:1px;height:1px;visibility:hidden;pointer-events:none";
+      document.documentElement.appendChild(pr);
+      const pb = pr.getBoundingClientRect().bottom; pr.remove();
+      gap = Math.round(Math.max(full - innerHeight, full - pb));
+      if (gap < 1 || gap > 120) gap = 0;
+    }
+  } catch (e) {}
   // (re-enabled 2026-10-08. It once "pushed Home into a black bar": .fixed screens are 100dvh with overflow:hidden, so
   // the stage reached into the strip but was clipped there. The map screens now size to the whole screen themselves
   // (--app-full, css/menus2.css), whichever of innerHeight or 100dvh is the short one. David's 16 Pro Max screenshot:
   // the strip is the status bar, 62 px.)
-  document.documentElement.style.setProperty("--vb", gap + "px");
-  if (full) document.documentElement.style.setProperty("--app-full", full + "px"); else document.documentElement.style.removeProperty("--app-full");
+  const de = document.documentElement;
+  de.style.setProperty("--vb", gap + "px");
+  if (full) de.style.setProperty("--app-full", full + "px"); else de.style.removeProperty("--app-full");
+  de.classList.toggle("ios-app", !!full);
 }
 
-vbFix(); addEventListener("resize", vbFix); addEventListener("orientationchange", () => setTimeout(vbFix, 300));
+vbFix(); addEventListener("resize", vbFix); addEventListener("load", vbFix); setTimeout(vbFix, 600);
+try { visualViewport && visualViewport.addEventListener("resize", vbFix); } catch (e) {}
+ addEventListener("orientationchange", () => setTimeout(vbFix, 300));
 
 // ---------- color math (CIELAB, D65) ----------
 const rgb = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
