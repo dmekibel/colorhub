@@ -187,6 +187,38 @@ run(`S.practice = "junk"`);
 const p = run(`prState()`);
 ok(p && typeof p.tricky === "object" && Array.isArray(p.star) && typeof p.best === "object", "prState repairs a malformed S.practice");
 
+// ---------- instant decks (prInstantDeck) ----------
+run(`S.practice = undefined; S.cards = {};`);
+const D = (o) => { ctx.__o = o; return run(`(() => { const d = prInstantDeck({ ...__o, shuffle: false }); return { keys: d.items.map(x => x.key), hexes: d.items.map(x => x.h), source: d.source, label: d.label, seed: d.seed && d.seed.key, counts: d.counts }; })()`); };
+let d = D({ seed: "#008080", source: "alike", size: 10 });
+ok(d.seed === "teal" && d.keys[0] === "teal" && d.keys.length === 10, `an exact hex seeds its own name (Teal), look-alikes deck of 10 (${d.keys.slice(0, 4).join(", ")}…)`);
+const dists = run(`prInstantDeck({ seed: "teal", source: "alike", size: 10, shuffle: false }).items.slice(1).map(x => de2000("#008080", x.h))`);
+const farOut = run(`(() => { const s = new Set(prInstantDeck({ seed: "teal", source: "alike", size: 10, shuffle: false }).items.map(x => x.key)); return Math.min(...prCore().filter(x => !s.has(x.key)).map(x => de2000("#008080", x.h))); })()`);
+ok(dists.every((v, i) => i === 0 || v >= dists[i - 1]) && Math.max(...dists) <= farOut, "look-alikes are the nearest names of all ~1,000, nearest first");
+d = D({ seed: "#0A7E83", source: "alike", size: 5 });
+ok(d.keys.length === 5 && d.seed === run(`nameOf("#0A7E83").n.toLowerCase()`), `any hex seeds its nearest name (${d.seed})`);
+d = D({ seed: { n: "Gendarme Blue", h: "#455D85" }, source: "family", size: 0 });
+ok(d.seed === "gendarme blue" && d.keys[0] === "gendarme blue" && d.keys.length > 20, "a library name past the core list is a seed in its own right");
+ok(run(`prInstantDeck({ seed: { n: "Gendarme Blue", h: "#455D85" }, source: "family", size: 0 }).items.every(x => prFam9(x.h) === prFam9("#455D85"))`), "family: every color shares the seed's family");
+d = D({ seed: "teal", source: "level", size: 0 });
+const tealBand = run(`prBand(prByKey("teal").rank)`);
+ok(d.keys.length > 5 && run(`prInstantDeck({ seed: "teal", source: "level", size: 0 }).items.every(x => prBand(x.rank) === ${tealBand})`), `equal difficulty: all ${d.keys.length} names sit in Teal's stage (${tealBand})`);
+ok(run(`prBand(0)`) === 1 && run(`prBand(24)`) === 1 && run(`prBand(25)`) === 2 && run(`prBand(999)`) === 9 && run(`prBand(9999)`) === 10, "stage bands follow the honeycomb's nine stages");
+const libBand = run(`prBand(prSeedRank(prSeed({ n: "Gendarme Blue", h: "#455D85" })))`);
+ok(run(`prInstantDeck({ seed: { n: "Gendarme Blue", h: "#455D85" }, source: "level", size: 0, shuffle: false }).items.slice(1).every(x => prBand(x.rank) === ${libBand})`), "a library name's level is its nearest core name's stage");
+d = D({ items: ["#262B2D", "#455D85", "#677E90", "#314381", "#909C8A", "#A9A55B"], label: "The Starry Night", size: 0 });
+ok(d.source === "these" && d.keys.length >= 4 && d.keys.length <= 6, `a painting's palette becomes its named colors (${d.keys.join(", ")})`);
+ok(D({ items: ["#262B2D", "#262B2D"], size: 0 }).keys.length === 1, "duplicate colors in a set collapse to one card");
+ok(D({ seed: "teal", source: "first", size: 20 }).keys.join() === stage50.slice(0, 20).map(n => n.toLowerCase()).join(), "first N, in stage order");
+ok(D({ seed: "teal", source: "alike", size: 5 }).keys.length === 5 && D({ seed: "teal", source: "alike", size: 20 }).keys.length === 20, "size 5 and 20");
+ok(D({ seed: "teal", source: "mixups" }).source === "alike", "no mix-ups yet: falls back to look-alikes");
+run(`(() => { const s = prSession("quiz", {}, []); prRecord(s, prByKey("teal"), { ok: false, answer: { kind: "pick", n: "Dark Aqua", h: "#05696B" } }, "quiz-name"); })()`);
+d = D({ seed: "teal", source: "mixups", size: 0 });
+ok(d.source === "mixups" && d.keys[0] === "teal" && d.keys.includes("dark aqua"), "a quiz miss records a mix-up pair, and the Mix-ups deck holds it");
+ok(D({ seed: "teal", source: "tricky", size: 0 }).keys.includes("teal"), "Tricky as an instant source");
+ok(D({}).source === "first", "no seed and no set: the first 50");
+ok(run(`typeof prQuick === "function" && typeof prLearnSet === "function"`), "the quick sheet and prLearnSet exist");
+
 // ---------- the step contract is complete ----------
 const kinds = ["card", "quiz-name", "quiz-color", "type", "say", "match", "pairs", "blitz-yes-no", "rain", "odd-one-out"];
 ok(kinds.every(k => run(`typeof PR_STEPS[${JSON.stringify(k)}].render === "function" && "by" in PR_STEPS[${JSON.stringify(k)}]`)), "every step kind has render() and by");

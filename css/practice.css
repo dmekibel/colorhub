@@ -344,3 +344,16 @@ html:has(#app > .screen.pr-booth) body::after{display:none}
 @media (prefers-reduced-motion:reduce){.pr-saycard.listen{animation:none;box-shadow:0 0 0 3px var(--ground),0 0 0 6px var(--c)}.pr-card,.pr-label,.pr-tile{transition:none}}
 .pr-shot .pr-saycard.listen{animation:none;box-shadow:0 0 0 3px var(--ground),0 0 0 7px var(--c)}
 .pr-shot .pr-label,.pr-shot .pr-card,.pr-shot .pr-fill,.pr-shot .pr-front,.pr-shot .pr-tile,.pr-shot .pr-tile *{transition:none!important}
+
+/* ---------- instant decks: the quick sheet, the Study corner on Home, "Learn these colors" ---------- */
+.pr-qsheet{--pr-g:var(--g,20px)}
+.pr-quick{padding-top:4px}
+.pr-qhead{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.pr-qhead .pr-t2{margin:0;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pr-qhead .pr-note{flex:none}
+.pr-plate-quick{height:64px;margin-top:14px}
+.pr-qsec{display:block;margin:18px 0 8px}
+.pr-qgo{margin-top:22px}
+.corner.r.pr-study-corner{right:84px}
+.pr-learn-these{display:inline-flex;align-items:center;gap:6px;min-height:44px;margin-top:6px;font:italic 400 17px/1 var(--serif);color:var(--soft);text-decoration:underline;text-decoration-color:rgba(236,232,223,.35);text-underline-offset:4px}
+.pr-learn-these svg{width:14px;height:14px;color:var(--faint)}

@@ -128,7 +128,7 @@ function namePage(entry, push = true, tapped) {
       </div>
       <span class="cp-scroll-hint" aria-hidden="true">${ICON.up}</span>
     </div>
-    ${taught && typeof hmLearnIt === "function" ? `<div class="cp-primary-row"><button class="cp-primary" data-learnit>${mine ? "Review it" : "Learn it"}${mine ? "" : `<em>2 min</em>`}${ICON.arrow}</button></div>` : ""}
+    ${typeof prQuick === "function" || (taught && typeof hmLearnIt === "function") ? `<div class="cp-primary-row"><button class="cp-primary" data-learnit>${mine ? "Review it" : "Learn it"}${mine ? "" : `<em>2 min</em>`}${ICON.arrow}</button></div>` : ""}
     ${tapped ? `<section class="cp-strip-sec">
       <div class="cp-strip"><div style="--c:${tapped}" data-ink="${ink(tapped)}"><b>Your color</b></div><div style="--c:${hex}" data-ink="${ink(hex)}"><b>${esc(name)}</b></div></div>
       <p class="cp-diff">${esc(lookDiff({ h: tapped, n: "Your color" }, { h: hex, n: name }))}</p>
@@ -151,7 +151,7 @@ function namePage(entry, push = true, tapped) {
   el.querySelector("[data-back]").onclick = xBack;
   onKey = e => { if (e.key === "Escape") xBack(); };
   wireLinks(el);
-  const li = el.querySelector("[data-learnit]"); if (li) li.onclick = () => hmLearnIt(taught);
+  const li = el.querySelector("[data-learnit]"); if (li) li.onclick = () => typeof prQuick === "function" ? prQuick({ seed: { n: name, h: hex } }) : hmLearnIt(taught);   // js/practice.js
   
   const shBtn = el.querySelector("[data-shade-base]"); if (shBtn) shBtn.onclick = () => openCoreName(shadeBase.h, shadeBase.n);
   // a tap anywhere on the row grows its little swatch into the next page's hero (the whole row is the hit

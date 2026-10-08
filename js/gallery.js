@@ -536,6 +536,7 @@ function glPage(i, d, fromHex) {
     <p class="fine gl-arrive" data-glarrive hidden></p>
     <div class="palette" data-glswatches></div>
     <div class="pal-names" data-glrows></div>
+    ${typeof prLearnBtn === "function" ? prLearnBtn("[data-glswatches]", d.t) : ""}
     <p class="fine">Computed by ColorHub, not by the museum: colors found in its small photo, each sized by its share of the picture and given the nearest of 1,000 named colors. Screen approximations; old varnish and the photograph shift color.</p>
     <div class="sec-head gl-sim-h"><b>Similar palettes</b><span>by color, not subject</span></div>
     <div class="gl-rail" data-glsim></div>

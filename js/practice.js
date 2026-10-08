@@ -86,6 +86,7 @@ function prState() {
   if (!Array.isArray(p.star)) p.star = [];
   if (!p.best || typeof p.best !== "object") p.best = {};
   if (p.speak == null) p.speak = true;
+  if (!p.mix || typeof p.mix !== "object" || Array.isArray(p.mix)) p.mix = {};
   return p;
 }
 const PR_DEFAULT = () => ({ src: "first", n: 50, fam: "all", list: "", order: "shuffle", dir: "f", round: 0, method: "cards" });
@@ -365,7 +366,16 @@ function prRecord(sess, it, res, kind) {
   const by = PR_STEPS[kind] ? PR_STEPS[kind].by : null;
   prApply(it, !!res.ok, by, !!res.assist);
   prTrick(it, !!res.ok);
+  if (!res.ok && res.answer && res.answer.n) prMixNote(it, res.answer.n);
   return true;
+}
+// Mix-ups: which name you gave instead (a real confusion pair), kept for the "Mix-ups" deck. S.practice.mix[key] = [names]
+function prMixNote(it, other) {
+  const ok = String(other || "").toLowerCase();
+  if (!ok || ok === it.key) return;
+  const mix = prState().mix, list = mix[it.key] || (mix[it.key] = []);
+  if (!list.includes(ok)) { list.unshift(ok); list.length = Math.min(list.length, 6); }
+  save();
 }
 function prStar(it, on) {
   const p = prState(), i = p.star.indexOf(it.key);
@@ -387,6 +397,7 @@ const PR_ICON = {
   back: sv('<path d="M15 6l-6 6 6 6"/>', 22, 1.8),
   chev: sv('<path d="M9 6l6 6-6 6"/>', 16, 1.8),
   arrow: sv('<path d="M5 12h14M13 6l6 6-6 6"/>', 20, 1.6),
+  cards: sv('<rect x="7.5" y="4" width="11" height="15" rx="2"/><path d="M5 7.5v11a2 2 0 0 0 2 2h8"/>', 24, 1.6),
 };
 const prX = () => sv('<path d="M6 6l12 12M18 6L6 18"/>', 22, 1.8);
 const prCheck = () => sv('<path d="M5 12.5l4.5 4.5L19 7.5"/>', 24, 2);
@@ -970,7 +981,7 @@ function prShell(sess, o = {}) {
     <div class="pr-stage"></div>`, "fixed pr-play pr-booth pr-m-" + sess.method);
   const stage = el.querySelector(".pr-stage"), right = el.querySelector(".pr-right");
   let known = 0;
-  el.querySelector("[data-close]").onclick = () => { sess.ended = true; if (sess.first.size || sess.score) prResults(sess, { stopped: true }); else prHome(); };
+  el.querySelector("[data-close]").onclick = () => { sess.ended = true; if (sess.first.size || sess.score) prResults(sess, { stopped: true }); else prExit(sess); };
   let stepKey = null;
   onKey = e => { if (e.key === "Escape") return el.querySelector("[data-close]").click(); if (stepKey) stepKey(e); };
   return {
@@ -1164,7 +1175,9 @@ PR_RUN.rain = async sess => {
 // ======================================================================
 // Starting a method
 // ======================================================================
-// opts: { items (play exactly these, e.g. your misses), label, offset }
+// opts: { items (play exactly these, e.g. your misses or an instant deck), label, offset,
+//         exit (where ✕ goes; default the builder), other ("Same deck, another way"; default the builder) }
+const prExit = sess => (sess && sess.exit ? sess.exit() : prHome());
 function prPlay(method, opts = {}) {
   if (!PR_METHODS[method]) method = "cards";
   if (typeof CORE_NAMES !== "undefined" && !CORE_NAMES && typeof loadCoreNames === "function") return void loadCoreNames().then(() => prPlay(method, opts));
@@ -1173,7 +1186,7 @@ function prPlay(method, opts = {}) {
   const deck = opts.deck || prDeck(spec), offset = opts.offset || 0;
   const items = opts.items || prRound(deck, spec, offset);
   if (!items.length) { toast("No colors in this deck yet"); return prHome(); }
-  const sess = prSession(method, spec, items, { deckAll: deck, offset, label: opts.label || "", misses: !!opts.items });
+  const sess = prSession(method, spec, items, { deckAll: deck, offset, label: opts.label || "", misses: !!opts.items, exit: opts.exit || null, other: opts.other || null });
   if (method === "say" && !opts.started) return prSayIntro(sess);
   if (method === "blitz" || method === "pairs" || method === "match") buzz(8);
   return PR_RUN[method](sess);
@@ -1195,12 +1208,12 @@ function prSayIntro(sess) {
     </div>
     <div class="pr-grow"></div>
     ${prPrimary(can ? "Start listening" : "Start", `${sess.items.length} colors`, "data-go")}`, "pr-say-intro pr-booth fixed");
-  el.querySelector("[data-close]").onclick = () => prHome();
+  el.querySelector("[data-close]").onclick = () => prExit(sess);
   const sw = el.querySelector("[data-speak]");
   if (sw) sw.onchange = () => { p.speak = sw.checked; save(); buzz(4); };
   const go1 = () => { if (!can) return PR_RUN.type(sess); sess.ear = prEar(); PR_RUN.say(sess); };
   el.querySelector("[data-go]").onclick = go1;
-  onKey = e => { if (e.key === "Enter") go1(); if (e.key === "Escape") prHome(); };
+  onKey = e => { if (e.key === "Enter") go1(); if (e.key === "Escape") prExit(sess); };
 }
 
 // ======================================================================
@@ -1273,14 +1286,15 @@ function prResults(sess, o = {}) {
     </div>`, "pr-res pr-booth");
   buzz(misses.length ? 8 : [10, 30, 20]);
   const act = a => {
-    if (a === "misses") return prPlay(m, { items: prShuffle(misses.map(f => f.it)), deck, label: "Your misses" });
-    if (a === "next") return prPlay(m, { deck, offset: nextOff });
-    if (a === "again") return prPlay(m, sess.misses ? { items: prShuffle(sess.items), deck } : { deck: sess.spec.order === "shuffle" ? null : deck, offset: sess.offset || 0 });
-    return prHome();
+    const keep = { exit: sess.exit, other: sess.other };
+    if (a === "misses") return prPlay(m, { items: prShuffle(misses.map(f => f.it)), deck, label: "Your misses", ...keep });
+    if (a === "next") return prPlay(m, { deck, offset: nextOff, ...keep });
+    if (a === "again") return prPlay(m, sess.misses ? { items: prShuffle(sess.items), deck, ...keep } : { deck: sess.spec.order === "shuffle" ? null : deck, offset: sess.offset || 0, ...keep });
+    return sess.other ? sess.other() : prHome();
   };
   el.querySelectorAll("[data-a]").forEach(b => b.onclick = () => act(b.dataset.a));
-  el.querySelector("[data-close]").onclick = () => prHome();
-  onKey = e => { if (e.key === "Enter") act(misses.length ? "misses" : more ? "next" : "again"); if (e.key === "Escape") prHome(); };
+  el.querySelector("[data-close]").onclick = () => prExit(sess);
+  onKey = e => { if (e.key === "Enter") act(misses.length ? "misses" : more ? "next" : "again"); if (e.key === "Escape") prExit(sess); };
 }
 
 // ======================================================================
@@ -1384,6 +1398,138 @@ function prHome(o = {}) {
 }
 
 // ======================================================================
+// Instant decks: start learning any color (or any set of colors) in one tap, outside the path.
+//   prInstantDeck({ seed, source, size, items }) -> { items, label, sources }   (pure: builds the deck, plays nothing)
+//   prQuick({ seed, items, label, source, size, method })                         (the quick sheet; one tap on Start)
+//   prLearnSet(hexes, label)                                                      (a painting, photo, palette or poem's colors)
+// seed: a hex, a name (any of the core names or a library name given as { n, h }), or an item. items: hexes or items.
+// The path never changes: these are free-play decks under the same honest scheduling policy as every Practice deck.
+// ======================================================================
+const PR_SOURCES = {
+  alike: "Look-alikes", family: "Its family", level: "Same level", these: "These colors", mixups: "Mix-ups",
+  first: "First 50", due: "Due now", tricky: "Tricky", star: "Starred",
+};
+const PR_SIZES = [[5, "5"], [10, "10"], [20, "20"], [0, "All"]];
+const PR_BANDS = [0, 25, 50, 100, 150, 250, 400, 600, 800, 1000];   // the honeycomb's nine stages (js/home.js HM_STAGES)
+// the stage a rank sits in: 1..9 (a name past the core list is stage 10)
+const prBand = rank => { for (let i = 1; i < PR_BANDS.length; i++) if (rank < PR_BANDS[i]) return i; return PR_BANDS.length; };
+// The seed as an item. A core name is itself; a library name keeps its own name and swatch; any other hex is
+// practiced as its nearest name (nameOf), since a name is what's being learned.
+function prSeed(seed) {
+  if (!seed) return null;
+  if (typeof seed === "object") {
+    if (seed.key) return seed;
+    const core = seed.n && prByKey(seed.n);
+    if (core) return core;
+    if (seed.n && seed.h) return prItem({ n: seed.n, h: seed.h });
+    if (seed.h) return prItemOf(seed.h);
+    return null;
+  }
+  return prItemOf(seed) || null;
+}
+// For a library name the difficulty band is its nearest core name's
+const prSeedRank = it => it.rank < 9999 ? it.rank : ((prItemOf(it.h) || {}).rank ?? 9999);
+function prInstantDeck(o = {}) {
+  const seed = prSeed(o.seed), size = o.size == null ? 10 : +o.size, core = prCore(), p = prState();
+  const these = prUnique((o.items || []).map(x => typeof x === "string" ? prItemOf(x) : prSeed(x)).filter(Boolean));
+  const cap = (list, n) => n > 0 ? list.slice(0, n) : list;
+  const byDist = list => list.map(x => ({ x, d: de2000(seed.h, x.h) })).sort((a, b) => a.d - b.d).map(o => o.x);
+  const build = {
+    // this color and the names nearest it, from all the core names (the ones easiest to mix it up with)
+    alike: () => seed ? [seed, ...byDist(core.filter(x => x.key !== seed.key && x.h !== seed.h))] : [],
+    // its family (the nine hue families), nearest first
+    family: () => seed ? [seed, ...byDist(core.filter(x => x.key !== seed.key && prFam9(x.h) === prFam9(seed.h)))] : [],
+    // names of the same difficulty: the same stage of the path's order
+    level: () => { if (!seed) return []; const b = prBand(prSeedRank(seed)); return [seed, ...prShuffle(core.filter(x => x.key !== seed.key && prBand(x.rank) === b))]; },
+    these: () => these,
+    // names you've confused: this color and what you said instead, then your other mix-ups
+    mixups: () => {
+      const out = [], add = k => { const it = prByKey(k); if (it) out.push(it); };
+      if (seed && p.mix[seed.key]) { out.push(seed); p.mix[seed.key].forEach(add); }
+      Object.entries(p.mix).forEach(([k, list]) => { add(k); list.forEach(add); });
+      return out;
+    },
+    first: () => prFirst(50),
+    due: () => prList("due"), tricky: () => prList("tricky"), star: () => prList("star"),
+  };
+  const counts = {};
+  Object.keys(build).forEach(k => { counts[k] = k === "these" ? these.length : k === "first" ? 50 : k === "mixups" ? Object.keys(p.mix).length : k === "due" ? dueList().length
+    : k === "tricky" ? Object.keys(p.tricky).length : k === "star" ? p.star.length : seed ? 1 : 0; });
+  let source = o.source && build[o.source] && counts[o.source] ? o.source : these.length ? "these" : seed ? "alike" : "first";
+  let items = prUnique(build[source]());
+  // keep the seed in, then shuffle so it isn't always the first card
+  items = cap(items, size);
+  if (o.shuffle !== false) items = prShuffle(items);
+  const nm = seed ? prName(seed) : "";
+  const label = source === "these" ? (o.label || "These colors") : source === "alike" ? `${nm} and its look-alikes` : source === "family" ? `${nm}'s family`
+    : source === "level" ? `Names as hard as ${nm.toLowerCase()}` : PR_SOURCES[source];
+  return { items, label, source, seed, counts };
+}
+// The quick sheet. Smart defaults are already chosen, so one tap on Start begins; chips change them; it remembers.
+function prQuick(o = {}) {
+  if (typeof CORE_NAMES !== "undefined" && !CORE_NAMES && typeof loadCoreNames === "function") return void loadCoreNames().then(() => prQuick(o));
+  const p = prState(), last = p.quick || {};
+  const backTo = o.back || (typeof ROUTE_NOW !== "undefined" ? ROUTE_NOW : "");
+  const seed = prSeed(o.seed), app = seed && seed.c && seed.c.unit ? seed.c : null;
+  const st = { source: o.source || (o.items && o.items.length ? "these" : seed ? (last.seedSource || "alike") : (last.source || "first")),
+    size: o.size != null ? o.size : last.size != null ? last.size : 10, method: o.method || last.method || "cards" };
+  if (st.method === "lesson" && !app) st.method = "cards";
+  const methods = [...(app && typeof hmLearnIt === "function" ? [["lesson", "Learn it"]] : []), ...Object.keys(PR_METHODS).map(m => [m, PR_METHODS[m].t])];
+  const { sh, close } = sheet(`<div class="pr-quick">
+    <div class="pr-qhead"><h2 class="pr-t2" data-qtitle></h2><span class="pr-note" data-qcount></span></div>
+    <div data-qplate></div>
+    <p class="pr-note pr-qsec">From</p><div class="pr-rail" data-qrow="source"></div>
+    <p class="pr-note pr-qsec">How many</p><div class="pr-seg" data-qrow="size">${PR_SIZES.map(([n, t]) => `<button class="pr-chip" data-size="${n}">${t}</button>`).join("")}</div>
+    <p class="pr-note pr-qsec">How</p><div class="pr-rail" data-qrow="method">${methods.map(([m, t]) => `<button class="pr-chip" data-method="${m}">${t}</button>`).join("")}</div>
+    <div class="pr-qgo" data-qgo></div></div>`);
+  sh.classList.add("pr-qsheet");
+  let deck = null;
+  const paint = () => {
+    deck = prInstantDeck({ seed, items: o.items, label: o.label, source: st.source, size: st.size });
+    st.source = deck.source;
+    const srcs = Object.keys(PR_SOURCES).filter(k => deck.counts[k] && (k !== "these" || (o.items && o.items.length)));
+    sh.querySelector('[data-qrow="source"]').innerHTML = srcs.map(k => `<button class="pr-chip${k === st.source ? " on" : ""}" data-source="${k}">${k === "these" && o.label ? esc(o.label) : PR_SOURCES[k]}${["mixups", "due", "tricky", "star"].includes(k) ? ` <span class="pr-code">${deck.counts[k]}</span>` : ""}</button>`).join("");
+    sh.querySelectorAll("[data-size]").forEach(b => b.classList.toggle("on", +b.dataset.size === +st.size));
+    sh.querySelectorAll("[data-method]").forEach(b => b.classList.toggle("on", b.dataset.method === st.method));
+    const title = seed && st.source !== "these" ? `Learn <em>${esc(prName(seed))}</em>` : `Learn <em>${esc(st.source === "these" ? (o.label || "these colors") : PR_SOURCES[st.source].toLowerCase())}</em>`;
+    sh.querySelector("[data-qtitle]").innerHTML = title;
+    sh.querySelector("[data-qcount]").innerHTML = st.method === "lesson" ? "about 2 minutes" : `<span class="pr-code">${deck.items.length}</span> ${deck.items.length === 1 ? "color" : "colors"}`;
+    sh.querySelector("[data-qplate]").innerHTML = prPlate(st.method === "lesson" ? [seed] : deck.items, "pr-plate-quick");
+    const mt = st.method === "lesson" ? "Learn it" : PR_METHODS[st.method].t;
+    sh.querySelector("[data-qgo]").innerHTML = prPrimary("Start", esc(mt), `data-go${deck.items.length ? "" : " disabled"}`);
+    sh.querySelector("[data-go]").onclick = start;
+  };
+  const remember = () => { p.quick = { ...p.quick, size: st.size, method: st.method, ...(seed && !o.items ? { seedSource: st.source } : { source: st.source }) }; save(); };
+  function start() {
+    if (!deck || !deck.items.length) return;
+    remember(); close(); buzz(8);
+    if (st.method === "lesson") return hmLearnIt(app);
+    const exit = () => { if (backTo && /^#\/./.test(backTo)) { if (!openRoute(backTo)) go(S.tab || "learn"); } else prHome(); };
+    prPlay(st.method, { items: deck.items, label: deck.label, exit, other: () => { exit(); setTimeout(() => prQuick({ ...o, back: backTo }), 60); } });
+  }
+  sh.addEventListener("click", e => {
+    const b = e.target.closest(".pr-chip"); if (!b) return;
+    if (b.dataset.source) st.source = b.dataset.source;
+    if (b.dataset.size != null) st.size = +b.dataset.size;
+    if (b.dataset.method) st.method = b.dataset.method;
+    buzz(4); paint(); remember();
+  });
+  paint();
+  requestAnimationFrame(() => sh.querySelectorAll(".pr-rail").forEach(r => { const on = r.querySelector(".on"); if (on && on.offsetLeft + on.offsetWidth > r.clientWidth - 8) r.scrollLeft = Math.max(0, on.offsetLeft - 24); }));
+  return { sh, close, start };
+}
+const prLearnSet = (hexes, label) => prQuick({ items: hexes, label });
+// "Learn these colors" under a painting's or a palette's colors: reads the swatches inside `scope` at tap time,
+// so a palette whose size changed (3/6/12/20) gives the colors you're looking at.
+const prLearnBtn = (scope, label = "") => `<button class="pr-learn-these" data-pr-scope="${esc(scope)}" data-pr-label="${esc(label)}">Learn these colors ${PR_ICON.chev}</button>`;
+if (typeof document !== "undefined") document.addEventListener("click", e => {
+  const b = e.target.closest && e.target.closest("[data-pr-scope]"); if (!b) return;
+  const scr = b.closest(".screen") || document, box = scr.querySelector(b.dataset.prScope);
+  const hexes = box ? [...new Set([...box.querySelectorAll("[data-swatch]")].map(x => x.dataset.swatch))] : [];
+  if (hexes.length) prLearnSet(hexes, b.dataset.prLabel ? `${b.dataset.prLabel}'s colors` : "These colors");
+});
+
+// ======================================================================
 // The entry point on the Learn home (js/learn.js home()): one quiet row. Wired here, so moving it is one line.
 // ======================================================================
 function prEntry() {
@@ -1420,6 +1566,15 @@ function prShot(arg) {
     sess.t0 = performance.now() - 134000;
     prResults(sess);
   };
+  if (what === "quick") {   // the instant-deck sheet, opened from a color page, a name page, Home or a painting
+    const tap = (sel, ms = 900) => { let n = 0; const t = () => { const b = document.querySelector(sel); if (b) return setTimeout(() => { b.scrollIntoView({ block: "center" }); b.click(); }, 500); if (++n < 60) setTimeout(t, 200); }; setTimeout(t, ms); };
+    if (st === "home" || st === "homebtn") { hmHome(); if (st === "home") tap("[data-pr-study]", 1500); return; }
+    if (st === "name") { openRoute("#/name/harbor-blue"); return tap("[data-learnit]", 1500); }
+    if (st === "painting") { openRoute("#/painting/starry-night"); return tap("[data-pr-scope]"); }
+    openRoute("#/color/teal");
+    if (st !== "page") tap("[data-learnit]", 1500);
+    return;
+  }
   if (what === "entry") { home(); setTimeout(() => { const e = document.querySelector(".pr-entry"); if (e) e.scrollIntoView({ block: "center" }); }, 400); return; }
   if (what === "home") { const el = prHome({ more: st === "more" }); if (st === "more" || st === "scroll") setTimeout(() => { const t = document.querySelector(st === "scroll" ? "[data-row=round]" : "[data-tiles]"); if (t) t.scrollIntoView({ block: "start" }); }, 400); return el; }
   if (st === "results") { const spec = prSpec(), deck = prDeck(spec); return fakeRes(prSession(what, spec, deck.slice(0, 12), { deckAll: deck })); }

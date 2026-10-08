@@ -328,6 +328,7 @@ function paletteView(p) {
     </div>
     <div class="pv-pal" id="pv"></div>
     <div class="h-list" id="hlist"></div>
+    ${typeof prLearnBtn === "function" ? prLearnBtn("#hlist", curTitle || "") : ""}
     <div class="row2" style="margin-top:18px"><button class="btn" data-keep>${p.savedId != null ? "Kept" : "Keep it"}</button><button class="btn ghost" data-share>${ICON.share} Share</button></div>
     <div class="row2" style="margin-top:10px"><button class="btn ghost" data-css>Copy as CSS</button><button class="btn ghost" data-hex>Copy hex list</button></div>
     ${p.savedId != null ? `<button class="btn ghost" data-del style="margin-top:10px">Remove from your palettes</button>` : ""}
