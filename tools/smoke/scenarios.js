@@ -1683,6 +1683,27 @@ scenario("sets", "long-press a swatch adds it to the tray and the tray opens the
   await t.click(".sx-tray-main", { wait: 800 });
   await t.waitFor(".sp-page .sp-pair", 12000, "the tray to open the pair");
 });
+scenario("sets", "a pair's painting rail carries the whole pair, not one color: the arrival row shows both", async t => {
+  SP.placed();
+  // two real, clearly different colors from the same painting: that painting is guaranteed to hold the pair
+  await t.open("#/gallery/15146", { settle: 600, keepState: true });
+  const pair = t.ev(`(() => { const pal = glPal(15146); let best = null;
+    for (let i = 0; i < pal.length; i++) for (let j = i + 1; j < pal.length; j++) { const d = de2000(pal[i].h, pal[j].h); if (!best || d > best.d) best = { a: pal[i].h, b: pal[j].h, d }; }
+    return best; })()`);
+  t.expect(pair && pair.d > 15, "painting 15146's palette colors are too similar to form a clear pair");
+  const a = pair.a.slice(1).toLowerCase(), b = pair.b.slice(1).toLowerCase();
+  await t.open(`#/pair/${a}+${b}`, { settle: 800, keepState: true });
+  await t.waitFor(".sp-page .sp-pair .sp-plate", 12000, "the pair page");
+  await SP.lead(t);
+  const pin = await t.waitFor("[data-ptg] .gl-pin", 25000, "a painting holding this pair (painting 15146 itself, at least)");
+  await t.click(pin, { force: true, wait: 900 });
+  await t.waitFor(".pt-arrive [data-opensp]", 14000, "the painting's arrival row");
+  t.expect(/You came from/.test(t.text(".pt-arrive")), `the arrival row doesn't say "You came from": ${t.text(".pt-arrive")}`);
+  t.expect(t.$$(".pt-ar-sw-s").length === 2, `the arrival row shows ${t.$$(".pt-ar-sw-s").length} swatches, expected 2 (the whole pair)`);
+  // tapping the row (not a swatch, not the map button) reopens the pair page
+  await t.click(".pt-arrive [data-opensp]", { force: true, wait: 800 });
+  await t.waitFor(".sp-page .sp-pair .sp-plate", 12000, "the row reopened the pair page");
+});
 
 // ================================================================== DIRECT LOADS (a typed or shared address on a fresh load)
 scenario("pages", "a fresh load of #/painter/<slug> opens that painter, not Home", async t => {

@@ -408,8 +408,11 @@ function spPage(hexes, o = {}) {
 
   // ---- taps ----
   el.addEventListener("click", e => {
+    // a painting from one of these rails arrived from the whole set, not just one color of it (David, 2026-10-08):
+    // ptArrival (js/paintingsof.js) measures each of `hexes` on that painting itself, so the weakest-cover guess
+    // this used to make here isn't needed any more.
     const g = e.target.closest("[data-gi]");
-    if (g) { const r = ($("[data-ptg]")._rows || []).find(x => x.i === +g.dataset.gi), weakest = r && r.covers ? q[r.covers.indexOf(Math.min(...r.covers))] : q[0]; return galleryPage(+g.dataset.gi, true, weakest, CI_STD.tol); }
+    if (g) return galleryPage(+g.dataset.gi, true, hexes, CI_STD.tol);
     if (e.target.closest("[data-all]")) { const o2 = ($("[data-ptg]")._res || {}).o || CI_STD; return paintingsOfPage(q, { tol: o2.tol, minCover: o2.minCover, mode: "all", sort: "cover", source: "paintings", maxCover: null, names: q.map(spNm) }); }
     const pr = e.target.closest("[data-pair]"); if (pr) { buzz(6); return spPage(pr.dataset.pair.split("+")); }
     const pa = e.target.closest("[data-painter]"); if (pa && typeof awPainter === "function") { buzz(5); return awPainter(routeSlug(pa.dataset.painter)); }

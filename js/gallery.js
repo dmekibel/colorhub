@@ -689,7 +689,8 @@ function glModeSet(m, pool, k, row) {
 // ---------- the lite painting page ----------
 // fromHex: the color the visitor arrived from (a search, a color page's "In paintings", a name page, or the
 // color sheet's "More paintings with this color") — ROADMAP §13 "arrive from a color and see it". Carried in
-// the address (?c=<hex>, js/router.js) so it survives reload and Back.
+// the address (?c=<hex>, js/router.js) so it survives reload and Back. Arriving from a pair/set page
+// (js/setpage.js) it is an array, the whole set: ptArrival (js/paintingsof.js) measures and shows every one.
 // "On the painting" (David, 2026-10-08): one control for where each palette color sits. Markers put a numbered dot
 // at each color's main places; Highlight dims everything else. Remembered across paintings in S.glWhere.
 const GL_WHERE = [["off", "Off"], ["mark", "Markers"], ["lit", "Highlight"]];
@@ -720,6 +721,9 @@ function galleryPage(i, push = true, fromHex = null, tol = null) {
   }).catch(() => toast("This painting didn't load"));
 }
 function glPage(i, d, fromHex, tol) {
+  // fromHex is one hex, or (arriving from a pair/set page) the whole set: keep the array for ptArrival
+  // (js/paintingsof.js), but a single hex for anything here that only ever highlighted one swatch.
+  const fromPrimary = Array.isArray(fromHex) ? fromHex[0] : fromHex;
   const G = GAL, src = G.src[G.mus[i]] || { name: "Museum", short: "Museum", credit: "" }, pal6 = glPal(i), yr = glYear(i), ar = G.ar[i];
   const pool = glPoolDecode(d.pl);
   let curK = 6;   // the "How many colors" slider; every palette type draws that many (up to what it has)
@@ -786,7 +790,7 @@ function glPage(i, d, fromHex, tol) {
   const drawPalette = () => {
     const set = curSet(), pal = set.pal;
     drawModes(set);
-    const near = fromHex ? glNearestSwatch(pal, fromHex) : null;
+    const near = fromPrimary ? glNearestSwatch(pal, fromPrimary) : null;
     const num = where === "mark" && lit.ok && mode !== "pick";   // the markers' numbers, repeated on the strip and the rows
     el.querySelector("[data-glswatches]").innerHTML = pal.map((p, j) => `<button class="pal${near && near.i === j ? " on" : ""}${p.out ? " gl-out" : ""}" data-swatch="${p.h}" data-glj="${j}" style="--c:${p.h};flex:${(Math.max(p.share, .08) * 100).toFixed(1)}" data-ink="${ink(p.h)}">${num ? `<em class="gl-n">${j + 1}</em>` : ""}<span>${p.pick ? "" : p.share < .005 ? "<1%" : Math.round(p.share * 100) + "%"}</span></button>`).join("");
     el.querySelector("[data-glrows]").innerHTML = pal.map((p, j) => {

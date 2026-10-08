@@ -610,7 +610,9 @@ function pmMount(el, s, F) {
   function openK(k) {
     const i = lay.items[k];
     PM_PAN.set(lay.key, { x: lay.x[k], y: lay.y[k], s: Z });
-    buzz(8); galleryPage(i, true, s.f.hexes[0] || null, s.f.hexes.length ? s.f.tol : null);
+    // the map's color filter can hold a whole set (?c=hex1,hex2…, from a pair/set page's "as a map" link); carry
+    // all of it onto the painting, not just the first one (David, 2026-10-08).
+    buzz(8); galleryPage(i, true, s.f.hexes.length > 1 ? s.f.hexes : (s.f.hexes[0] || null), s.f.hexes.length ? s.f.tol : null);
   }
   el.querySelector("[data-pmopen]").onclick = () => { if (centerK >= 0) openK(centerK); };
   heart.onclick = () => toggleHeart(false);
