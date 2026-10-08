@@ -182,6 +182,7 @@ The full-screen color, then a one-line definition with its source, then the **Re
 2. L9 learning beyond the 101 + the Journey, after Practice (L4) merges.
 3. Ideas synthesis, after the 7 IDEAS-10X panels report.
 4. L7 article engine at scale, after David approves the pilot voice.
+6. L26 color in paintings (design/lanes/L26-color-in-paintings.md): tolerance and coverage sliders, a finer per-painting color index, the arriving color pinned, a where-it-lives mask.
 5. L23 taste and favorites (design/lanes/L23-taste.md): honeycomb multi-select, a favorites shelf, rankings that aren't tournaments, a taste profile.
 
 ## Progress log
