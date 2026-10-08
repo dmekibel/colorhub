@@ -513,7 +513,23 @@ PR_STEPS.card = { by: null, render(box, it, ctx = {}) {
 function prFeedback(fb, it, pick) {
   if (!fb) return;
   if (!pick) { fb.innerHTML = ""; return; }
-  fb.innerHTML = `<span class="pr-pair"><i style="--c:${it.h}"></i><i style="--c:${pick.h}"></i></span><p>That's ${esc(prName(pick))}. ${esc(prDiff(it, pick))}</p>`;
+  fb.innerHTML = `${typeof mcShow === "function" ? "" : `<span class="pr-pair"><i style="--c:${it.h}"></i><i style="--c:${pick.h}"></i></span>`}<p>That's ${esc(prName(pick))}. ${esc(prDiff(it, pick))}</p>`;
+}
+// The big color card itself splits on a miss: what you picked | what it was, names on each half (the large area is the comparison)
+function prSplit(box, it, pick) {
+  const sw = box.querySelector(".pr-sw");
+  if (!sw || !pick || !pick.h || pick.h === it.h) return false;
+  const half = (x, lab) => `<div class="pr-half" style="--c:${x.h}" data-ink="${ink(x.h)}"><small>${lab}</small><button data-swatch="${x.h}">${esc(prName(x))}</button></div>`;
+  sw.classList.add("pr-split");
+  sw.innerHTML = half(pick, "You picked") + half(it, "It was");
+  if (typeof reduceMotion === "undefined" || !reduceMotion) { sw.classList.add("pr-splitting"); requestAnimationFrame(() => requestAnimationFrame(() => sw.classList.remove("pr-splitting"))); }
+  return true;
+}
+// A miss on a color: the one you picked and the one it was fill the screen (js/misscompare.js). go moves on.
+function prMiss(it, pick, from, go, delay = 380) {
+  if (typeof mcShow !== "function" || !pick || !pick.h || !it || pick.h === it.h) return false;
+  later(() => { if (from && !from.isConnected) return; mcShow({ you: { n: prName(pick), h: pick.h }, was: { n: prName(it), h: it.h }, line: prDiff(it, pick), from, go }); }, delay);
+  return true;
 }
 function prNextBtn(foot, go, label = "Next") {
   foot.innerHTML = prPrimary(label, "", "data-next");
@@ -544,6 +560,7 @@ PR_STEPS["quiz-name"] = { by: "pick", render(box, it, ctx = {}) {
       if (ok) { foot.innerHTML = `<p class="pr-hint pr-good">Right</p>`; return prAuto(() => resolve(res), 650); }
       prFeedback(fb, it, o);
       prNextBtn(foot, () => resolve(res));
+      if (!prSplit(box, it, o)) prMiss(it, o, btn, () => resolve(res));
       prKeyer(ctx)(e => { if (e.key === "Enter" || e.key === " " || e.key === "ArrowRight") { e.preventDefault(); resolve(res); } });
     };
     box.querySelectorAll(".pr-opt").forEach(b => b.onclick = () => choose(+b.dataset.i));
@@ -577,6 +594,7 @@ PR_STEPS["quiz-color"] = { by: "pick", render(box, it, ctx = {}) {
       if (ok) { foot.innerHTML = `<p class="pr-hint pr-good">Right</p>`; return prAuto(() => resolve(res), 800); }
       prFeedback(fb, it, o);
       prNextBtn(foot, () => resolve(res));
+      prMiss(it, o, btn, () => resolve(res));
       prKeyer(ctx)(e => { if (e.key === "Enter" || e.key === " " || e.key === "ArrowRight") { e.preventDefault(); resolve(res); } });
     };
     box.querySelectorAll(".pr-cell").forEach(b => b.onclick = () => choose(+b.dataset.i));
@@ -618,11 +636,13 @@ PR_STEPS.type = { by: "say", render(box, it, ctx = {}) {
       if (ctx.feedback === false) { buzz(8); return later(() => resolve(res), prPause(ctx)); }
       const v = prVerdict(it, j, typed);
       form.classList.add("done"); box.querySelector(".pr-sub").classList.add("done");
-      fb.innerHTML = `${v.nb ? `<span class="pr-pair"><i style="--c:${it.h}"></i><i style="--c:${v.nb.h}"></i></span>` : ""}<p><span class="pr-v ${v.cls}">${v.html}</span>${v.nb ? ` ${esc(prDiff(it, v.nb))}` : ""}</p>`;
+      const bigMiss = !ok && v.nb && typeof mcShow === "function";
+      fb.innerHTML = `${v.nb && !bigMiss ? `<span class="pr-pair"><i style="--c:${it.h}"></i><i style="--c:${v.nb.h}"></i></span>` : ""}<p><span class="pr-v ${v.cls}">${v.html}</span>${v.nb ? ` ${esc(prDiff(it, v.nb))}` : ""}</p>`;
       buzz(ok ? 12 : [10, 40, 10]);
       if (ok && !j.typo && !j.via) return prAuto(() => resolve(res), 750);
       prNextBtn(foot, () => resolve(res));
       prKeyer(ctx)(e => { if (e.key === "Enter" || e.key === " " || e.key === "ArrowRight") { e.preventDefault(); resolve(res); } });
+      if (bigMiss) prMiss(it, v.nb, form, () => resolve(res), 450);
     };
     form.onsubmit = e => {
       e.preventDefault();
@@ -725,12 +745,14 @@ PR_STEPS.say = { by: "say", render(box, it, ctx = {}) {
       lnote.innerHTML = verdictHtml; lnote.className = "pr-note pr-v " + cls;
       // the difference from the color heard (or its nearest neighbor), so the label teaches something
       const nb = (opts.nb && opts.nb.h !== it.h ? opts.nb : null) || prNear(it, 1, ctx.deck)[0];
-      if (nb) label.insertAdjacentHTML("beforeend", `<div class="pr-vs"><span class="pr-pair"><i style="--c:${it.h}"></i><i style="--c:${nb.h}"></i></span><p>${esc(prDiff(it, nb))}</p></div>`);
+      const heard = !ok && opts.nb && opts.nb.h !== it.h && typeof mcShow === "function";   // you said another color: it fills the screen
+      if (nb) label.insertAdjacentHTML("beforeend", `<div class="pr-vs">${heard ? "" : `<span class="pr-pair"><i style="--c:${it.h}"></i><i style="--c:${nb.h}"></i></span>`}<p>${esc(prDiff(it, nb))}</p></div>`);
       card.classList.add("revealed", ok ? "is-ok" : "is-bad");
       foot.innerHTML = ""; cmds.textContent = "";
       status(ok ? "Right" : "", ok ? "pr-good" : "");
       buzz(ok ? 12 : [10, 40, 10]);
       const speakIt = !ok && ctx.speak !== false ? prSpeak(nm) : Promise.resolve();
+      if (heard) { prMiss(it, nb, card, () => resolve(res), 300); return; }   // tap anywhere on the compare goes on
       speakIt.then(() => prAuto(() => resolve(res), opts.fast ? 500 : PR_NEXT_MS));
     }
     const miss = (answer, why, nb) => result(false, answer, why, "bad", { nb });
@@ -982,9 +1004,14 @@ PR_STEPS["odd-one-out"] = { by: "pick", render(box, it, ctx = {}) {
       box.querySelectorAll(".pr-cell").forEach((b, k) => { b.classList.toggle("ok", !opts[k].same); b.disabled = true; });
       if (!ok) btn.classList.add("bad");
       buzz(ok ? 12 : [10, 40, 10]);
-      fb.innerHTML = `<span class="pr-pair"><i style="--c:${it.h}"></i><i style="--c:${odd.h}"></i></span><p>${esc(prDiff(odd, it))}</p>`;
+      const bigMiss = !ok && typeof mcShow === "function";
+      fb.innerHTML = `${bigMiss ? "" : `<span class="pr-pair"><i style="--c:${it.h}"></i><i style="--c:${odd.h}"></i></span>`}<p>${esc(prDiff(odd, it))}</p>`;
       if (ok) return prAuto(() => resolve(res), 1100);
       prNextBtn(foot, () => resolve(res));
+      if (bigMiss) {   // you took one of the three; the odd one was the answer
+        const pk = { n: nameOf(o.h).n, h: o.h };
+        later(() => { if (btn.isConnected) mcShow({ you: pk, was: { n: prName(odd), h: odd.h }, line: prDiff(odd, pk), from: btn, go: () => resolve(res), wasLabel: "The odd one" }); }, 380);
+      }
     };
     box.querySelectorAll(".pr-cell").forEach(b => b.onclick = () => choose(+b.dataset.i));
     prKeyer(ctx)(e => { if (/^[1-4]$/.test(e.key)) choose(+e.key - 1); });

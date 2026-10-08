@@ -643,6 +643,8 @@ function msOpen(o = {}) {
     resEl.innerHTML = `<p class="ms-say in">${body}</p>${lw}${res === "right" ? "" : `<div class="ms-acts"><button class="btn" data-next>Next ${ICON.arrow}</button></div>`}`;
     const play = panel.querySelector(".ms-play"); play.querySelectorAll(".ms-acts,form,.ms-say").forEach(n => n.remove()); play.appendChild(resEl);
     if (res === "right") later(next, lift ? 1500 : 1000); else resEl.querySelector("[data-next]").onclick = next;
+    // a wrong name: the one you chose and the one it was fill the screen, once the map has shown where they sit
+    if (said && res !== "right" && typeof mcShow === "function") { const i0 = P.i; later(() => { if (P && P.i === i0 && P.kind !== "done") mcShow({ you: { n: said.n, h: said.h }, was: { n: t.n, h: t.h }, label: "Next", go: next }); }, 1100); }
   }
   function next() { if (!P || P.kind === "done") return; P.i++; round(); }
 

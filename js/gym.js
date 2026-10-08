@@ -819,7 +819,8 @@ const DRILLS = {
           b.classList.remove("picked");
           const up = ctx.intro ? false : memStep(ok);
           ctx.stage.querySelector(`[data-i="${right}"]`).classList.add("ring");
-          if (!ok) { b.classList.add("miss"); ctx.foot.innerHTML = `<p class="note">The ringed one was it, <b>${pctFmt(de2000(hex, opts[+b.dataset.i]))}</b> different from your pick</p>`; }
+          if (!ok) { b.classList.add("miss"); ctx.foot.innerHTML = `<p class="note">The ringed one was it, <b>${pctFmt(de2000(hex, opts[+b.dataset.i]))}</b> different from your pick</p>`;
+            if (typeof mcShow === "function" && !ctx.intro && !ctx.check) later(() => b.isConnected && mcShow({ you: { h: opts[+b.dataset.i] }, was: { h: hex }, from: b, label: "Next", go: () => { const nx = ctx.foot.querySelector("[data-next]"); if (nx) nx.click(); } }), 500); }
           else if (up) { ctx.foot.innerHTML = `<p class="note mem-up">Level ${MEM.lv} · ${esc(memParams(MEM.lv).news || "")}</p>`; buzz([8, 30, 8, 30, 14]); }
         }, { ...bandsOf(hex), s: ok ? undefined : { dC: +(Cp - Ct).toFixed(1), dL: +(Lp - Lt).toFixed(1) }, rp: { h: hex, pk: opts[+b.dataset.i] } });
       });
@@ -1153,7 +1154,11 @@ function lightning() {
       else {
         combo = 0; buzz([10, 40, 10]); b.classList.add("wrong");
         box.querySelector(`[data-i="${opts.indexOf(c)}"]`).classList.add("right");
-        box.dataset.lock = 1; later(() => { delete box.dataset.lock; ask(); }, 900);
+        box.dataset.lock = 1;
+        const po = opts[+b.dataset.i];
+        // the clock keeps running, so the big compare moves on by itself after a beat (tap to skip)
+        if (typeof mcShow === "function") later(() => mcShow({ you: { n: po.n, h: po.h }, was: { n: c.n, h: c.h }, from: b, auto: 1300, label: "Next", go: () => { delete box.dataset.lock; ask(); } }), 120);
+        else later(() => { delete box.dataset.lock; ask(); }, 900);
       }
     });
   }

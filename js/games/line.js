@@ -123,7 +123,8 @@ OO_MIXPLAY.across = function (ui, it) {
       const line = ok ? `Right: this one crossed into ${lk(rd.odd, ooLow(rd.nb))}. It sits only <b class="mono">${pctFmt(rd.act)}</b> from the nearest ${esc(ooLow(rd.cat))}, ${rd.trapOk ? "closer than some of the others are to each other." : "but over the line."}`
         : `In ColorHub's map, this side is ${lk(rd.odd, ooLow(rd.nb))}. Yours is still ${lk(rd.colors[i], ooLow(rd.cat))}, <b class="mono">${pctFmt(de2000(rd.colors[i], rd.odd))}</b> away. Dictionaries draw the line a little differently.`;
       // no hex pair goes to the eye's miss list: a word edge is a naming answer, logged above with names
-      resolve({ ok: ok ? 1 : 0, ms, act: rd.act, picked: ok ? null : rd.colors[i], noModel: true, hold: true, line: line + ooLineAddRow(rd), cmp: null });
+      resolve({ ok: ok ? 1 : 0, ms, act: rd.act, picked: ok ? null : rd.colors[i], noModel: true, hold: true, line: line + ooLineAddRow(rd), cmp: null,
+        mc: ok ? null : { you: { n: rd.cat, h: rd.colors[i] }, was: { n: rd.nb, h: rd.odd }, wasLabel: "Across the line" } });
     });
   });
 };

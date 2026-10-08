@@ -261,6 +261,9 @@ function daily() {
     const pa = el.querySelector("[data-paint]"); if (pa) pa.onclick = () => challenge();
     if (fresh) dnLog({ type: "answer", c: t.n, ok: rec.ok && !rec.hint, by: rec.hint ? "pick" : "type", src: "daily" });
     if (fresh) buzz(rec.ok ? [10, 30, 20] : 10);
+    // out of guesses: your last guess and today's color fill the screen, to remember the difference (js/misscompare.js)
+    const lastG = !rec.ok && rec.g.length ? ent(rec.g[rec.g.length - 1]) : null;
+    if (fresh && lastG && lastG.h !== t.h && typeof mcShow === "function") later(() => mcShow({ you: { n: lastG.n, h: lastG.h }, was: { n: t.n, h: t.h }, youLabel: "Your last guess", wasLabel: "Today's color", from: el.querySelector(".dn-hero") }), 600);
     dots();
   }
   drawRows();
