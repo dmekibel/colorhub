@@ -447,7 +447,7 @@ function lxPending() {
   return null;
 }
 
-// ---------- stage progress (the Learn room's collection) ----------
+// ---------- stage progress (the You page's checkpoint) ----------
 // The next named checkpoint above what's yours: "27 of 650 · Fluent", then Expert, then every learnable color.
 function lxCheckpoint(owned) {
   const plan = lxPlan();
@@ -457,39 +457,59 @@ function lxCheckpoint(owned) {
   return { n: st.n, name: st.name, approx: !plan.ready || (!plan.lib && st.lib), stage };
 }
 
-// ---------- the path, drawn (js/learn.js home()) ----------
-// Finished stages fold into one band each; the current stage shows its finished units as one band, the next
-// unit large, and the two after it; later stages are named and waiting (locked, never hidden).
-function lxPathHtml(nu) {
+// ---------- Your words: one bar to the next stop (js/learn.js home()) ----------
+// PLAN.md lane C: the stage rows and the 655-square collection grid fold into one bar. The next stop is the stage
+// the path is in, named by size ("150 words", "Fluent · 655 words"). The bar holds every path name up to that stop,
+// told in its own colors in hue order: yours solid, still learning faint, not met yet as the empty track. The map
+// is the real collection, so the bar's one action opens it on the Learned (or Learning) view.
+function lxWordsStop(nu) {
   const plan = lxPlan();
-  lxRekey();
-  const band = (cols, cls) => `<div class="path-band ${cls}">${cols.map(h => `<i style="background:${h}"></i>`).join("")}</div>`;
-  const sample = (cs, n) => { if (cs.length <= n) return cs; const out = []; for (let i = 0; i < n; i++) out.push(cs[Math.floor(i * cs.length / n)]); return out; };
-  const stageDone = st => st.units.length && st.units.every(lxUnitDone);
-  const curK = nu ? (nu.gen ? nu.stage : plan.stages.findIndex(st => st.units.some(u => u.id === nu.id))) : -1;
-  const rows = [];
-  plan.stages.forEach(st => {
-    const head = st.label || lxStageWord(st);
-    if (st.k < curK || (curK < 0 && stageDone(st))) {
-      const cs = st.units.flatMap(u => u.colors);
-      rows.push(`<div class="path-row path-done lx-stage-done">${band(sample(cs, 28).map(c => c.h), "path-band-done")}<div class="path-cap"><span class="title-3">${esc(head)}</span><span class="note">${lxNum(cs.length)} names met</span></div></div>`);
-      return;
-    }
-    if (st.k === curK) {
-      rows.push(`<p class="lx-stage-h"><span>${esc(st.k < 2 ? head : "To " + lxStageWord(st).replace(/^(\w+) · /, "") + (st.name ? " · " + st.name : ""))}</span><span class="note">${st.units.filter(lxUnitDone).length} of ${st.units.length} units</span></p>`);
-      const done = st.units.filter(u => u.id !== nu.id && lxUnitDone(u)), after = st.units.filter(u => u.id !== nu.id && !lxUnitDone(u));
-      if (done.length) rows.push(`<div class="path-row path-done">${band(sample(done.flatMap(u => u.colors), 28).map(c => c.h), "path-band-done")}<div class="path-cap"><span class="title-3">${done.length === 1 ? esc(done[0].title) : `${done.length} units`}</span><span class="note">Met</span></div></div>`);
-      const cur = st.units.find(u => u.id === nu.id) || nu;
-      rows.push(`<div class="path-row path-current">${band(cur.colors.map(c => c.h), "path-band-current")}<div class="path-cap"><span class="title-2">${esc(nu.title)}</span><span class="note">Next, about ${Math.max(2, Math.round(nu.colors.length * 15 / 60))} min</span></div></div>`);
-      after.slice(0, 2).forEach(u => rows.push(`<div class="path-row path-future">${band(u.colors.map(c => c.h), "path-band-future")}<div class="path-cap"><span class="title-3 path-future-name">${esc(u.title)}</span></div></div>`));
-      if (after.length > 2) rows.push(`<p class="note lx-more">and ${after.length - 2} more unit${after.length - 2 === 1 ? "" : "s"} to ${lxStageWord(st).replace(/^\w+ · /, "")}</p>`);
-      return;
-    }
-    // a stage still ahead: its name and a thin band of what it holds (or a quiet one, before the lists load)
-    const cs = st.units.flatMap(u => u.colors);
-    rows.push(`<div class="path-row path-future lx-stage-next">${cs.length ? band(sample(cs, 28).map(c => c.h), "path-band-future") : `<div class="path-band path-band-future lx-band-wait"></div>`}<div class="path-cap"><span class="title-3 path-future-name">${esc(head)}</span><span class="note">${st.units.length ? `${st.units.length} units` : ""}</span></div></div>`);
-  });
-  return rows.join("");
+  let k = nu ? (nu.gen ? nu.stage : plan.stages.findIndex(st => st.units.some(u => u.id === nu.id))) : -1;
+  if (k < 0 || !plan.stages[k]) k = plan.stages.length - 1;
+  return plan.stages[k];
+}
+function lxWords(nu) {
+  const plan = lxPlan(), st = lxWordsStop(nu);
+  lxRekey();   // renamed or merged names move to their canonical card first (once the lists are in)
+  const upTo = plan.stages.filter(s => s.k <= st.k).flatMap(s => s.units).flatMap(u => u.colors);
+  const yours = [], learning = [];
+  let left = 0;
+  upTo.forEach(c => { const cd = S.cards[c.id]; if (!cd) left++; else (isMine(cd) ? yours : learning).push(c); });
+  // a stage whose names haven't loaded yet has no units: count what's left to it from its size
+  if (!st.units.length) left = Math.max(0, st.n - BASICS.length - yours.length - learning.length);
+  return { st, yours, learning, left, owned: ownedCount(), last: st.k === plan.stages.length - 1 };
+}
+// The map's view for "See them on the map": the first map stage that holds the whole stop, on Learned when any are
+// yours, else on Learning.
+function lxWordsView(w) {
+  const n = (typeof HM_STAGES !== "undefined" ? HM_STAGES : []).find(x => x >= w.st.n);
+  return { src: n ? "stage:" + n : "every-name", filter: w.yours.length ? "learned" : "learning" };
+}
+function lxWordsHtml(nu) {
+  const w = lxWords(nu), met = w.yours.length + w.learning.length, all = met + w.left;
+  const hueKey = c => { const [L, C, H] = lch(c.h); return C < 12 ? 1000 + (100 - L) : (H + 330) % 360 + (100 - L) / 400; };
+  const faint = h => /^#[0-9a-f]{6}$/i.test(h) ? h + "5c" : h;
+  const segs = [...w.yours.sort((a, b) => hueKey(a) - hueKey(b)).map(c => c.h), ...w.learning.sort((a, b) => hueKey(a) - hueKey(b)).map(c => faint(c.h))];
+  const grad = segs.length ? `linear-gradient(90deg,${segs.map((h, i) => `${h} ${(i * 100 / segs.length).toFixed(3)}% ${((i + 1) * 100 / segs.length).toFixed(3)}%`).join(",")})` : "none";
+  const pct = all ? Math.max(met ? 1.5 : 0, met * 100 / all) : 100;
+  const v = lxWordsView(w), done = !nu && !w.left;
+  const stop = done ? "Every stop reached" : `Next stop · <b>${esc(lxStageWord(w.st))}</b>`;
+  const foot = done ? `${lxNum(met)} names met. Reviews keep them yours.`
+    : met ? `${lxNum(w.left)} ${w.left === 1 ? "name" : "names"} to go`
+    : "Every name you learn lands here, and on the map.";
+  return `<section class="lx-words" aria-label="Your words">
+    <div class="lx-words-head"><h3 class="title-3">Your words</h3><span class="note">${stop}</span></div>
+    <p class="lx-words-n"><b data-count="${w.owned}">${w.owned}</b><span>yours${w.learning.length ? ` · ${lxNum(w.learning.length)} learning` : ""}</span></p>
+    <div class="lx-bar" role="img" aria-label="${met} of ${all} names met on the way to ${esc(lxStageWord(w.st))}"><i class="lx-bar-fill" style="width:${pct.toFixed(2)}%;background-image:${grad}"></i></div>
+    <div class="lx-words-foot"><span class="note">${foot}</span>${met ? `<button class="lx-words-map" data-words-map data-src="${v.src}" data-filter="${v.filter}">See them on the map ${ICON.arrow}</button>` : ""}</div>
+  </section>`;
+}
+function lxWordsWire(el) {
+  const b = el.querySelector("[data-words-map]"); if (!b) return;
+  b.onclick = () => {
+    S.hm = S.hm || {}; S.hm.src = b.dataset.src; S.hm.filter = b.dataset.filter; save();
+    buzz(6); hmHome();
+  };
 }
 
 // ======================================================================

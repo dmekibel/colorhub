@@ -29,6 +29,21 @@ function chdTheory(sl, kind) {
     <p class="fine">The wheel here is CIELAB hue, a perceptual one: painters' own wheels place complements differently, and a canvas holding two colors isn't the same as someone pairing them on purpose. Neutrals are colors with very little chroma.</p>`;
 }
 
+// a chord is two different colors: drop pairs where any two members are near-twins (k-means splitting one gradient, e.g. Maroon + Oxblood)
+const CHD_MIN_DE = 15;
+function chdSpread(x) {   // the smallest gap between any two members, on the 0-100 black-to-white scale
+  const hx = x.length >= 8 ? [x[1], x[3], x[5]] : [x[1], x[3]];   // triads carry 3 names then counts, pairs 2
+  let m = 100;
+  for (let i = 0; i < hx.length; i++) for (let j = i + 1; j < hx.length; j++) m = Math.min(m, de2000(hx[i], hx[j]));
+  return m;
+}
+// keep the chords whose members are really different; a thin slice keeps its 10 most different instead, still in the original order
+function chdApart(L) {
+  const ok = L.filter(x => chdSpread(x) >= CHD_MIN_DE);
+  if (ok.length >= 10 || L.length <= 10) return ok.length ? ok : L;
+  const keep = new Set(L.slice().sort((a, b) => chdSpread(b) - chdSpread(a)).slice(0, 10));
+  return L.filter(x => keep.has(x));
+}
 function chordsPage(o = {}) {
   if (o.era) CHD.era = o.era;
   if (o.kind) CHD.kind = o.kind;
@@ -58,7 +73,7 @@ function chordsPage(o = {}) {
       triads: `Three-color combinations that beat chance, each pair inside them also above chance.`,
       avoid: `Pairs that turn up together far less than their popularity predicts.` }[CHD.kind];
     el.querySelector("[data-sub]").textContent = sub;
-    const L = sl[CHD.kind === "avoid" ? "avoid" : CHD.kind];
+    const L = chdApart(sl[CHD.kind === "avoid" ? "avoid" : CHD.kind]);
     const row = (cols, big, small, spec) => `<button class="chd-row" data-hexes="${cols.map(c => c[1]).join("+")}" data-names="${esc(cols.map(c => c[0]).join("|"))}"><span class="chd-sw">${cols.map(c => `<i style="--c:${c[1]}"></i>`).join("")}</span><span class="chd-t"><b>${esc(big)}</b><small>${small}</small></span>${ICON.arrow}</button>`;
     el.querySelector("[data-list]").innerHTML = !L.length ? `<p class="fine">Nothing in ${esc(sl.label)} is measurable enough to show.</p>`
       : L.map(x => {

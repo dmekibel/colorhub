@@ -153,6 +153,7 @@ function youPage() {
   const eyeLine = typeof ooEyeLine === "function" ? ooEyeLine() : "", eyeBars = ymEyeBars();
   const trained = typeof TRAIN_KEYS !== "undefined" && typeof stationLevel === "function" && TRAIN_KEYS.some(k => { try { return stationLevel(k).tried; } catch (e) { return false; } });
   const n0 = n => Number(n).toLocaleString("en-US");
+  const sets = ymSets();
 
   const el = show(`
     <header class="room-head"><h1 class="title-1">You</h1>${since ? `<span class="note">${esc(since)}</span>` : ""}</header>
@@ -163,7 +164,7 @@ function youPage() {
         <span class="ym-of"><span class="note">${owned === 1 ? "color" : "colors"} yours</span>${ck ? `<small>${owned >= ck.n ? "every name on the path" : `${ck.approx ? "about " : ""}${n0(ck.n - owned)} to ${esc(ck.name || "the next stage")}`}</small>` : ""}</span></div>
       ${owned || lrn.length ? `<div class="ym-figs">
         <div><b class="mono">${n0(lrn.length)}</b><span>learning</span></div>
-        <div><b class="mono">${n0(due)}</b><span>to recall today</span></div>
+        ${due && typeof deck === "function" ? `<button type="button" data-ym="recall" aria-label="Recall ${n0(due)} ${due === 1 ? "color" : "colors"} now"><b class="mono">${n0(due)}</b><span>to recall today</span></button>` : `<div><b class="mono">${n0(due)}</b><span>to recall today</span></div>`}
         <div><b class="mono">${n0(fvN)}</b><span>hearted</span></div></div>
         ${mine.length ? `<div class="ym-links"><button class="mn-link" data-ym="map">See them on your map</button>${typeof cardShare === "function" && mine.length >= 3 ? `<button class="mn-link" data-ym="share">Share your colors</button>` : ""}</div>` : ""}`
       : `<div class="mn-empty"><b>Nothing yours yet</b><small>A color becomes yours when you can still name it a day later.</small></div><button class="mn-link" data-ym="learn">Start in Learn</button>`}
@@ -175,10 +176,18 @@ function youPage() {
       <p class="note">Color on ${dayN} of the last 7 days${streak > 1 ? ` · daily challenge ${streak} days running` : streak === 1 ? " · daily challenge played today" : ""}</p>
     </section>` : ""}
 
+    ${sets.length ? `<section class="ym-sec">
+      <h2 class="ym-h">You can name</h2>
+      <div class="ym-name">${sets.map(x => `<button type="button" class="ym-set" data-set="${esc(x.id)}" aria-label="${esc(x.t)}, ${covLabel0(x.cov)}">
+        <span class="ym-set-top">${coverageRing(x.cov, { size: 40, stroke: 5 })}<span class="ym-set-c">${x.hs.slice(0, 8).map(h => `<i style="--c:${h}"></i>`).join("")}</span></span>
+        <b>${esc(x.t)}</b><small>${x.cov.yours} of ${x.cov.total}</small></button>`).join("")}</div>
+    </section>` : ""}
+
     ${mix.length ? `<section class="ym-sec">
       <h2 class="ym-h">You mix these up</h2>
       ${mix.map(p => `<div class="ym-pair"><a class="ym-chip" href="${ymSlugHash(p.a)}" style="--c:${p.ha}" aria-label="${esc(p.a)}"></a><a class="ym-chip" href="${ymSlugHash(p.b)}" style="--c:${p.hb}" aria-label="${esc(p.b)}"></a>
-        <span class="mn-txt"><b>${esc(p.a)} and ${esc(String(p.b).toLowerCase())}</b><small>${p.n === 1 ? "Once" : `${n0(p.n)} times`}${typeof lookDiff === "function" ? ` · ${esc(ymDiff(p))}` : ""}</small></span></div>`).join("")}
+        <span class="mn-txt"><b>${esc(p.a)} and ${esc(String(p.b).toLowerCase())}</b><small>${p.n === 1 ? "Once" : `${n0(p.n)} times`}${typeof lookDiff === "function" ? ` · ${esc(ymDiff(p))}` : ""}</small></span>
+        ${typeof prQuick === "function" ? `<button type="button" class="ym-untangle" data-untangle="${mix.indexOf(p)}" aria-label="Untangle ${esc(p.a)} and ${esc(String(p.b).toLowerCase())}">Untangle</button>` : ""}</div>`).join("")}
     </section>` : ""}
 
     <section class="ym-sec">
@@ -219,8 +228,11 @@ function youPage() {
   `, "you-page", "you");
 
   el.addEventListener("click", e => {
-    const b = e.target.closest("[data-ym],[data-mn],[data-pal]"); if (!b) return;
+    const b = e.target.closest("[data-ym],[data-mn],[data-pal],[data-untangle],[data-set]"); if (!b) return;
     const k = b.dataset.ym || b.dataset.mn;
+    if (b.dataset.untangle != null) { const p = mix[+b.dataset.untangle]; if (p) { buzz(8); ymUntangle(p); } return; }
+    if (b.dataset.set) { const x = sets.find(z => z.id === b.dataset.set); if (x) { buzz(8); ymLearnSet(x); } return; }
+    if (k === "recall") { buzz(8); return typeof deck === "function" ? deck("review") : go("learn"); }
     if (b.dataset.pal) return openSavedPalette(b.dataset.pal);
     if (k === "map") { S.hm = S.hm || {}; S.hm.filter = "learned"; save(); buzz(8); return roomToFloor(b); }
     if (k === "learn") return go("learn");
@@ -244,6 +256,34 @@ function youPage() {
     sec.querySelectorAll("[data-ph]").forEach(x => x.onclick = () => photoPage(x.dataset.ph));
   }).catch(() => {});
   return el;
+}
+// saved Sets (Study keeps them in S.practice.ls.sets, js/learnset.js), newest first, each with how much of it you can name
+const covLabel0 = c => typeof covLabel === "function" ? covLabel(c) : "";
+function ymSets() {
+  if (typeof setCoverage !== "function" || typeof coverageRing !== "function") return [];
+  try {
+    const ls = typeof lsState === "function" ? lsState() : null, all = (ls && ls.sets) || {};
+    return Object.keys(all).map(id => ({ id, ...all[id] })).filter(x => x.t && Array.isArray(x.hs) && x.hs.length >= 2)
+      .sort((a, b) => String(b.last).localeCompare(String(a.last))).slice(0, 8).map(x => ({ ...x, cov: setCoverage(x.hs) }));
+  } catch (e) { return []; }
+}
+// back to the You page after a lesson, whichever way it ends
+const ymBack = () => { if (typeof openRoute === "function" && openRoute("#/you")) return; youPage(); };
+function ymLearnSet(x) { if (typeof prQuick === "function") prQuick({ items: x.hs, label: x.t, src: x.src, back: ymBack }); }
+// Untangle: the pair plus its nearest third color, as a 3-color lesson (the Learn sheet opens on that pair)
+function ymUntangle(p) {
+  if (typeof prQuick !== "function") return;
+  const go = () => {
+    const a = typeof prSeed === "function" ? prSeed({ n: p.a, h: p.ha }) : null, b = typeof prSeed === "function" ? prSeed({ n: p.b, h: p.hb }) : null;
+    const items = [a, b].filter(Boolean);
+    if (items.length === 2 && typeof prCore === "function" && typeof de2000 === "function") {
+      const near = prCore().filter(c => c.key !== a.key && c.key !== b.key && c.h !== a.h && c.h !== b.h)
+        .map(c => ({ c, d: Math.min(de2000(a.h, c.h), de2000(b.h, c.h)) })).sort((m, n) => m.d - n.d)[0];
+      if (near) items.push(near.c);
+    }
+    prQuick({ items: items.length ? items : [p.ha, p.hb], seed: a || undefined, source: "these", label: `${p.a} and ${String(p.b).toLowerCase()}`, src: "mixup", back: ymBack });
+  };
+  if (typeof CORE_NAMES !== "undefined" && !CORE_NAMES && typeof loadCoreNames === "function") loadCoreNames().then(go); else go();
 }
 // the You card (js/sharecard.js palette layout): six of your colors spread across the hue order, each named
 function ymShareSpec(mine) {
