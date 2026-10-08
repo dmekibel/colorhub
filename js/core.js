@@ -107,7 +107,7 @@ const fresh = () => ({ v: 1, placed: null, start: 0, cards: {}, done: {}, tab: "
 // Progress is never thrown away. An older save is migrated step by step (bump STATE_V and add a step when the
 // shape changes); a save from a newer version is kept as it is; unknown keys always survive. A save that
 // can't be read is copied aside (KEY + "-unreadable") before anything is written over it.
-const STATE_V = 1;
+const STATE_V = 2;   // 2: S.learn, the Learner Model's event log (js/learner.js)
 function migrateState(d) {
   if (!d || typeof d !== "object" || Array.isArray(d)) return null;
   const s = Object.assign(fresh(), d);
@@ -117,7 +117,10 @@ function migrateState(d) {
   // a saved palette from before it had a stable id (for its own address and the one-step Back chain): give it one
   if (Array.isArray(s.palettes)) s.palettes.forEach(p => { if (p && !p.id) p.id = "pl" + Date.now().toString(36) + Math.random().toString(36).slice(2, 7); });
   if (!(s.v >= 1)) s.v = 1;   // unversioned saves had the v1 shape
-  // future steps go here: if (s.v < 2) { …; s.v = 2; }
+  // v2 (js/learner.js): an empty Learner Model log; learner.js folds older progress into it once (S.learn.bf).
+  // A learn field that isn't an object is kept aside, never dropped.
+  if (s.v < 2) { if (s.learn != null && (typeof s.learn !== "object" || Array.isArray(s.learn))) { s.learnUnreadable = s.learn; delete s.learn; } if (!s.learn) s.learn = { v: 1, ev: [], agg: { c: {}, p: {} }, sets: {}, bf: 0 }; s.v = 2; }
+  // future steps go here: if (s.v < 3) { …; s.v = 3; }
   return s;
 }
 let S;

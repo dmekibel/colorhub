@@ -83,14 +83,14 @@
 
 /* ================================================================ 3. shared components */
 /* The relation mark: one tiny mark for your relation to a color, the same on every chip in the app.
-   unmet: nothing · met: an outline ring · yours: a solid disc · mix (you confuse it): a half disc.
+   unmet: nothing · met: an outline ring · yours: a solid disc · confused (you mixed it up): a half disc.
    It sits in the chip's top-right corner, paper with a dark hairline so it reads on any color. */
-.rel,[data-rel="met"]::after,[data-rel="yours"]::after,[data-rel="mix"]::after{
+.rel,[data-rel="met"]::after,[data-rel="yours"]::after,[data-rel="confused"]::after{
   content:"";position:absolute;top:4px;right:4px;width:8px;height:8px;border-radius:50%;box-sizing:border-box;pointer-events:none;z-index:1;
   box-shadow:0 0 0 1px rgba(20,19,17,.55)}
 .rel[data-s="met"],[data-rel="met"]::after{border:1.5px solid var(--paper);background:none}
 .rel[data-s="yours"],[data-rel="yours"]::after{background:var(--paper)}
-.rel[data-s="mix"],[data-rel="mix"]::after{background:linear-gradient(90deg,var(--paper) 50%,transparent 50%);border:1.5px solid var(--paper)}
+.rel[data-s="confused"],[data-rel="confused"]::after{background:linear-gradient(90deg,var(--paper) 50%,transparent 50%);border:1.5px solid var(--paper)}
 /* small chips (under 28px) get a smaller mark, tucked onto the corner */
 .lk-row>i[data-rel]::after,.cp-near>i[data-rel]::after,.hc-cap>i[data-rel]::after,.pair i[data-rel]::after{top:-2px;right:-2px;width:7px;height:7px}
 /* two chips you confuse, side by side: a hairline thread joins them */
@@ -100,6 +100,11 @@
 .rel-key{display:flex;gap:16px;align-items:center;font:italic 400 15px/1.3 var(--serif);color:var(--soft)}
 .rel-key span{display:inline-flex;align-items:center;gap:6px}
 .rel-key .rel{position:static;display:inline-block}
+/* learner.js relMarkHTML() puts the mark inline after a name (.rel-mark): the same mark, in the flow, in currentColor */
+.rel-mark{display:inline-block;flex:none;width:8px;height:8px;margin-left:6px;border-radius:50%;box-sizing:border-box;vertical-align:middle;pointer-events:none;opacity:1;box-shadow:none;border:1.5px solid currentColor}
+.rel-mark[data-s="met"]{background:none}
+.rel-mark[data-s="yours"]{background:currentColor}
+.rel-mark[data-s="confused"]{background:linear-gradient(90deg,currentColor 50%,transparent 50%)}
 
 /* The squint key: one value-only toggle on every image and palette, bottom-right on its image.
    Solid level-2 (never glass); paper when on. With it on, the page is in value only. */

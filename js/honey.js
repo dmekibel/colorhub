@@ -407,6 +407,16 @@ function honeyPath(ctx, cx, cy, r, shapeAmt) {
   ctx.closePath();
 }
 
+// ---- a highlighted constellation (js/colorset.js csOnMap): any set of hexes lights up on the honeycomb home ----
+// honeyHighlight(hexes, { title }) dims every bubble but the nearest one to each hex; honeyHighlight(null) clears it.
+// Only the home honeycomb (inside .hm) listens; a pill at the bottom names the set and clears it on tap.
+let HONEY_HL = null, HONEY_HL_REV = 0;
+const HONEY_LIVE = new Set();
+function honeyHighlight(hexes, o = {}) {
+  const hs = (hexes || []).map(h => String(h).toUpperCase()).filter(h => /^#[0-9A-F]{6}$/.test(h));
+  HONEY_HL = hs.length ? { hexes: hs, title: o.title || "", rev: ++HONEY_HL_REV, fresh: true } : null;
+  HONEY_LIVE.forEach(f => { if (f() === false) HONEY_LIVE.delete(f); });
+}
 function honeycomb(host, opts = {}) {
   host.classList.add("hc");
   host.innerHTML = `<div class="hc-box"><div class="hc-vig"></div><canvas class="hc-cv" aria-label="Colors as bubbles: drag to browse, pinch to zoom, tap one to open it"></canvas></div>
@@ -638,9 +648,11 @@ function honeycomb(host, opts = {}) {
     if (easing && !sizeRaf) sizeRaf = requestAnimationFrame(() => { sizeRaf = 0; if (!raf) draw(); });
     let pb = null;
     if (pressed) { const i = drawn.findIndex(b => b.it === pressed.it && Math.abs(b.x - pressed.x) < 3 && Math.abs(b.y - pressed.y) < 3); if (i >= 0) { pb = drawn.splice(i, 1)[0]; drawn.push(pb); } }
+    const hlSet = hlItems();
     for (const b of drawn) {
       const it = b.it, d = b.d * (b === pb ? 1 + .12 * pressK : 1), r = d / 2;
       honeyCellPath(ctx, b, shapeAmt, b === pb ? 1 + .12 * pressK : 1); ctx.fillStyle = it.h; ctx.fill();
+      if (hlSet) { if (!hlSet.has(it)) { ctx.fillStyle = "rgba(14,13,11,.8)"; ctx.fill(); continue; } ctx.lineWidth = Math.max(1.5, d * .03); ctx.strokeStyle = "rgba(239,235,227,.95)"; ctx.stroke(); }
       if (d < 8) continue;
       if (it.L < 26) { ctx.lineWidth = Math.max(1, d * .025); ctx.strokeStyle = `rgba(236,232,223,${it.L < 14 ? .34 : .24})`; ctx.stroke(); }
       const la = Math.min(1, Math.max(0, (d - zc("labelMin")) / 5));
@@ -1015,7 +1027,31 @@ function honeycomb(host, opts = {}) {
   });
   resize();
   if (opts.style) { const p = HONEY_STYLES[styleId]; if (p && p.initialZoom && !opts.zoom) Z = p.initialZoom((opts.items && opts.items.length) || 101); }
-  setItems(opts.items, opts.focus || (HONEY_PAN && { n: HONEY_PAN.name }), "restore");
+  // the highlighted constellation (honeyHighlight above): the nearest bubble to each hex, worked out once per set of items
+  const hlOn = !!(host.closest && host.closest(".hm"));
+  let hlMemo = null;
+  function hlItems() {
+    if (!hlOn || !HONEY_HL || !lay) { if (hlPill) { hlPill.remove(); hlPill = null; } return null; }
+    if (hlMemo && hlMemo.lay === lay && hlMemo.rev === HONEY_HL.rev) return hlMemo.set;
+    const its = [...new Set(lay.pts.map(q => q.it).filter(Boolean))], set = new Set();
+    HONEY_HL.hexes.forEach(h => { const L = lab(h); let best = null, bd = Infinity; for (const it of its) { const dd = (it.lab[0] - L[0]) ** 2 + (it.lab[1] - L[1]) ** 2 + (it.lab[2] - L[2]) ** 2; if (dd < bd) { bd = dd; best = it; } } if (best) set.add(best); });
+    hlMemo = { lay, rev: HONEY_HL.rev, set };
+    hlShowPill();
+    return set;
+  }
+  let hlPill = null;
+  function hlShowPill() {
+    if (hlPill || !host.parentElement) return;
+    hlPill = document.createElement("button"); hlPill.className = "cs-hl-pill"; hlPill.setAttribute("aria-label", "Show every color again");
+    hlPill.innerHTML = `<span>${esc(HONEY_HL.title || "Your set")}</span>${ICON.x}`;
+    hlPill.onclick = e => { e.stopPropagation(); buzz(4); honeyHighlight(null); };
+    host.parentElement.appendChild(hlPill);
+  }
+  if (hlOn) HONEY_LIVE.add(() => { if (dead) return false; hlMemo = null; draw(); return true; });
+  let hlFocus = null;
+  if (hlOn && HONEY_HL && HONEY_HL.fresh) { HONEY_HL.fresh = false; hlFocus = { h: HONEY_HL.hexes[0] }; }
+  if (hlFocus) setItems(opts.items, opts.focus || hlFocus, "");
+  else setItems(opts.items, opts.focus || (HONEY_PAN && { n: HONEY_PAN.name }), "restore");
   // ---- the Tweak panel's API: live overrides on top of the active preset, saved by the caller (S.hm.tweak) ----
   function applyTweak(partial) {
     liveTweak = { ...(liveTweak || {}), ...partial };

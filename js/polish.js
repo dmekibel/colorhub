@@ -10,9 +10,9 @@
 // by markup alone: [data-swatch] / [data-rel-hex] chips get the mark, [data-squint] containers get the key.
 
 // ---------------------------------------------------------------- 1. the relation mark
-// States (the Learner Model's lmStatus() wins when it exists; until then, S.cards via pickit.js's ownState()):
+// States:
 //   "" unmet (no mark) · "met" an outline ring · "yours" a solid corner disc (confirmed by a check, never a
-//   self-graded swipe alone) · "mix" a half disc (you confuse it with a neighbor). Pairs you confuse get a
+//   self-graded swipe alone) · "confused" a half disc (you mixed it up with a neighbor). Pairs you confuse get a
 //   hairline thread drawn between their chips by .rel-thread (CSS), wherever a screen shows the two together.
 let REL_BYHEX = null;
 function relColorOf(hex) {
@@ -20,17 +20,16 @@ function relColorOf(hex) {
   if (!REL_BYHEX) { REL_BYHEX = new Map(); (typeof ALL !== "undefined" ? ALL : []).forEach(c => REL_BYHEX.set(c.h.toUpperCase(), c)); }
   return REL_BYHEX.get(String(hex).trim().toUpperCase()) || null;
 }
+// js/learner.js owns the state (relMark(color) -> "" | "met" | "yours" | "confused"); this only draws it.
+// Without the Learner Model, S.cards decides: Yours only once confirmed by a check.
 function relState(cOrHex) {
-  const c = typeof cOrHex === "string" ? relColorOf(cOrHex) : cOrHex;
+  const c = typeof cOrHex === "string" ? (relColorOf(cOrHex) || { h: cOrHex }) : cOrHex;
   if (!c) return "";
-  try { if (typeof lmStatus === "function") { const s = lmStatus(c); if (s) return ["met", "yours", "mix"].includes(s) ? s : ""; } } catch (e) {}
-  const st = S && S.cards && S.cards[c.id];
+  if (typeof relMark === "function") { try { return relMark(c) || ""; } catch (e) {} }
+  const app = c.id ? c : relColorOf(c.h), st = app && S && S.cards && S.cards[app.id];
   if (!st) return "";
-  const o = typeof ownState === "function" ? ownState(st) : st.own ? "mine" : "learning";
-  return o === "mine" ? "yours" : "met";
+  return typeof isMine === "function" && isMine(st) ? "yours" : "met";
 }
-// the inline form, for a screen that builds its own chip: `<i class="chip">${relMark(c)}</i>`
-const relMark = cOrHex => { const s = relState(cOrHex); return s ? `<i class="rel" data-s="${s}" aria-label="${s === "yours" ? "Yours" : s === "mix" ? "You mix this up" : "Met"}"></i>` : ""; };
 const REL_SEL = "[data-swatch], [data-rel-hex], .lk-row > i, .cp-near > i, .hc-cap > i";
 function relHexOf(el) {
   return el.dataset.relHex || el.dataset.swatch || (el.parentElement && el.parentElement.dataset.h) || el.style.getPropertyValue("--c") || "";
