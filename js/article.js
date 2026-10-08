@@ -19,12 +19,13 @@
 // Reference cards (js/article-refs.js draws them): [[gem:<id>]] [[flower:<id>]] [[painting:<id or gallery n>]] [[look:<id>]]
 // [[garment:<id>]] [[film:<id>]] [[painter:<slug>]] (and the older [[art:<painting id>|label]]) are small inline chips; a
 // paragraph that holds one also gets a figure card (image, name, "94% match to Fiery Rose") when the thing is close enough.
-// A section can carry `actions` (["duel","painting","mix","map"]); without it, the actions are inferred from the
+// A section can carry `actions` (["duel","painting","map"]); without it, the actions are inferred from the
 // section's id/title and offered only when the thing they open exists:
 //     duel     always (an inline round, built here; logs to the Learner Model when it exists)
 //     painting galleryPage + npGalleryHits (js/gallery.js, js/names.js): opens the painting that holds this color most
-//     mix      a global mixLab(hex, name) (lane L14): link only
 //     map      csOnMap(colorSet(...)) (js/colorset.js): "On the map", lit with the color and its family
+// "Mix it" lives on every color page instead (js/richcolor.js rcMixHTML, drawn by js/richpage.js), so it is not
+// one of this section's actions.
 // The Learner Model (js/learner.js) is feature-detected: knowState(color) lights the family tree (yours, met, unmet),
 // confusions(color) feeds the mix-up card, learnerLog(evt) records duel and question answers. Without it the tree
 // falls back to the 101's own cards (S.cards, isMine) and the mix-up card simply doesn't appear.
@@ -434,11 +435,11 @@ function arBlockHTML(b, art, o) {
   return `<p${o && o.cls ? ` class="${o.cls}"` : ""}${refs.length ? ` data-ar-refs="${esc(refs.map(r => r.key).join(" "))}"` : ""}>${arInline(b.text, art, o && o.hl)}</p>`;
 }
 const AR_INFER = [["duel", /look.?alike|confus|mistak|mix(?:ed)? up|apart|differ|neighbou?r|versus|\bvs\b/i], ["painting", /paint|artist|canvas|masters?\b|museum|studio/i],
-  ["mix", /\bmix|recipe|blend|how (?:it|they) (?:is|are|was|were) made/i], ["map", /\bmap\b|trade route|geograph|where (?:it|they) (?:come|came|grew|grow)/i]];
-const AR_ACT_LABEL = { duel: "Duel the look-alike", painting: "See it in this painting", mix: "Mix it", map: "On the map" };
+  ["map", /\bmap\b|trade route|geograph|where (?:it|they) (?:come|came|grew|grow)/i]];
+const AR_ACT_LABEL = { duel: "Duel the look-alike", painting: "See it in this painting", map: "On the map" };
 function arActionAvailable(k) {
   return k === "duel" ? true : k === "painting" ? typeof galleryPage === "function" && typeof npGalleryHits === "function" && typeof loadGallery === "function"
-    : k === "mix" ? typeof mixLab === "function" : k === "map" ? typeof csOnMap === "function" && typeof colorSet === "function" : false;
+    : k === "map" ? typeof csOnMap === "function" && typeof colorSet === "function" : false;
 }
 function arActionsFor(sec) {
   let kinds = Array.isArray(sec.actions) ? sec.actions.map(a => typeof a === "string" ? a : a && a.kind).filter(Boolean)
@@ -650,7 +651,6 @@ function arAct(root, art, self, btn) {
       if (hit) galleryPage(hit[0], true, self.h); else toast("The paintings didn't load");
     }).catch(() => toast("The gallery didn't load"));
   }
-  if (kind === "mix") return mixLab(self.h, self.n);
   if (kind === "map") {
     const kin = [self, ...arList(art.aside.siblings).map(arColor), ...arList(art.aside.children).map(arColor)].filter(Boolean);
     return csOnMap(colorSet({ kind: "color", id: self.slug, title: self.n, colors: kin.map(c => ({ h: c.h, n: c.n })) }));

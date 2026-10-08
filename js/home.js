@@ -354,6 +354,10 @@ function hmHome() {
   if (!S.placed) return welcome();
   S.hm = S.hm || {};
   hmView();
+  // leaving a color's page: its color takes over now, the map is built a frame later underneath it, and the color
+  // shrinks back into its bubble once the map is drawn (js/mapxfer.js)
+  const back = typeof mxLeave === "function" ? mxLeave(hmHome) : null;
+  if (back && !back.building) return;
   // The floor of the app (DESIGN-SYSTEM.md §2), not a tab: its own address, and S.tab is left alone so it keeps
   // pointing at whichever Room was last open (the Rooms corner's quick-resume, and every "go(S.tab)" fallback).
   ROUTE_NEXT = routed(NAV_MAP, "home"); ROUTE_REPLACE = true;
@@ -372,6 +376,17 @@ function hmHome() {
   `, "fixed cx hm");
   const $ = s => el.querySelector(s), viewEl = $(".cx-view"), title = $(".hm-title");
   loadLongNames();
+  // the placement result's one-line hint ("Tap any color to open it", js/learn.js lrMapHint/S.mapHint): shown
+  // once right after placement, but if the app closed before that first touch, S.mapHint is still pending, so
+  // the next time Home opens shows it again. hmDismissHint is every other real interaction's way to clear it
+  // (a bubble opened, a drag, the corner menu) -- belt and suspenders beside lrMapHint's own pointerdown listener.
+  if (typeof lrMapHint === "function") lrMapHint();
+  function hmDismissHint() {
+    if (!S.mapHint) return;
+    delete S.mapHint; save();
+    const tip = $(".lr-maphint"); if (!tip) return;
+    tip.classList.add("out"); later(() => tip.remove(), typeof reduceMotion !== "undefined" && reduceMotion ? 0 : 320);
+  }
 
   // ---------- the honeycomb itself ----------
   let items = [], ctrl = null, gen = 0;
@@ -379,16 +394,17 @@ function hmHome() {
   // a tap opens the real page straight away (ROADMAP §13: every name has one now) — one of the 101, or its
   // own name page (js/names.js); a long press still shows the quick peek sheet above. The page itself grows
   // from the tapped bubble (David, 2026-10-07: "any color in home, you should be able to click it to make it
-  // full screen"), via growFrom (js/core.js) when it's available; hmOpenColor/hmOpenName return their show()'d
-  // root for exactly this. growFrom calls its renderFn synchronously, so an async open (a name not yet in
-  // CORE_NAMES) just falls back to the old flying-chip morph — still a clean grow, never a hard cut.
+  // full screen"; 2026-10-08: "it should fully expand until it transitions into the color page"): mxGrow
+  // (js/mapxfer.js) grows the bubble's exact outline into the page's cover. Back shrinks it home (hmHome below).
   const pick = (o, fx) => {
-    if (typeof hmDismissHint === "function") hmDismissHint();
-    const src = fx && fx.srcEl && fx.srcEl();
+    if (typeof MX !== "undefined" && MX && MX.dir === "in") return;   // a bubble is already becoming its page: one tap, one page
+    hmDismissHint();
     const open = () => (o.c ? hmOpenColor(o.c) : hmOpenName(o));
-    // one of the 101 resolves synchronously, so growFrom's renderFn returns its root and the grow plays; a
-    // library name waits on loadCoreNames() first (hmOpenName), so renderFn returns nothing yet and growFrom
-    // quietly skips the animation — the page still opens, just with show()'s plain cross-fade instead.
+    // the bubble becomes its page (js/mapxfer.js): it grows from its exact shape into the cover, sync or async page alike
+    const geo = fx && fx.geo && typeof mxGrow === "function" ? fx.geo() : null;
+    if (geo) return mxGrow(geo, open);
+    const src = fx && fx.srcEl && fx.srcEl();
+    // (no geometry: the older grow from a stand-in element; a library name opens async, so it gets the flying chip)
     // finally: the stand-in bubble goes even if opening the page throws (it used to stay, stuck over the map)
     try {
       if (src && o.c && typeof growFrom === "function") growFrom(src, open);
@@ -696,7 +712,7 @@ function hmHome() {
     if (!ctrl || !items.length) return;
     const unmet = items.filter(it => !(it.c && it.c.id && S.cards[it.c.id]));
     const pool = unmet.length ? unmet : items;
-    buzz(6); if (typeof hmDismissHint === "function") hmDismissHint();
+    buzz(6); hmDismissHint();
     ctrl.update({ items, focus: pool[Math.floor(Math.random() * pool.length)], soft: true });
   }
 
@@ -712,8 +728,8 @@ function hmHome() {
     let p0 = null;
     cv.addEventListener("pointerdown", e => { p0 = [e.clientX, e.clientY]; clearTimeout(chromeT); });
     cv.addEventListener("pointermove", e => { if (p0 && Math.hypot(e.clientX - p0[0], e.clientY - p0[1]) > 10) { el.classList.add("chrome-hide"); clearTimeout(chromeT); } });
-    const lift = () => { p0 = null; clearTimeout(chromeT); chromeT = setTimeout(() => el.classList.remove("chrome-hide"), 220); };
-    cv.addEventListener("pointerup", () => { lift(); if (typeof hmDismissHint === "function") hmDismissHint(); });
+    const lift = () => { p0 = null; clearTimeout(chromeT); chromeT = setTimeout(() => { el.classList.remove("chrome-hide"); if (!document.querySelector(".sheet") && !STEM_OPEN) cornersBack(); }, 220); };
+    cv.addEventListener("pointerup", () => { lift(); hmDismissHint(); });
     cv.addEventListener("pointercancel", lift);
     // David: "sometimes the bottom corner buttons disappear". A pan whose finger lifts off the canvas (over a corner, a
     // sheet, outside the window) never sent the canvas its pointerup, so the corners stayed faded and untappable. The
@@ -724,7 +740,7 @@ function hmHome() {
     document.addEventListener("visibilitychange", winLift);
     cleanup.push(() => { ["pointerup", "pointercancel", "blur"].forEach(k => removeEventListener(k, winLift, true)); document.removeEventListener("visibilitychange", winLift); });
   }
-  hmShowChrome();
+  hmShowChrome(); cornersBack();   // every way into Home starts with both corners drawn and tappable
   // ---------- the right corner: ONE button (PLAN.md decision #2; David: "Study the map is a mini game that belongs with
   // learning, inside a menu, not its own button"). It shows how many names are due, and opens a labeled arc of verbs,
   // the rooms stem's mirror: Recall · Learn these · Study the map · Favorites · Search · Colors · Arrange. The arc is
@@ -741,7 +757,7 @@ function hmHome() {
     if (STEM_OPEN) { buzz(4); return closeStem(); }
     if (document.querySelector(".sheet,.scrim")) return;
     document.querySelectorAll(".rooms-stem,.rm-scrim").forEach(n => n.remove());
-    if (typeof hmDismissHint === "function") hmDismissHint();
+    hmDismissHint();
     buzz(4);
     STEM_OPEN = true; document.body.classList.add("stem-open");
     const due = typeof dueList === "function" ? dueList() : [], v = hmView(), lit = typeof HONEY_HL !== "undefined" && HONEY_HL;
@@ -811,7 +827,8 @@ function hmHome() {
 
   window.HM_SEARCH = q => { openSearch(); searchInput.value = q; searchInput.dispatchEvent(new Event("input")); };   // #shot=home:find:<q>
   window.HM_CHOOSER = chooser;   // #shot=home:look hook (tools/shots.sh): drive the Show/Look sheet without a tap
-  render(false);
+  const drawn = render(false);
+  if (back) Promise.resolve(drawn).then(() => mxLand(back), () => mxLand(back));
 }
 
 // Opens an app color's full page directly (ROADMAP.md §12: no half-height card, no second tap). Back (the

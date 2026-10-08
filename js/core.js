@@ -454,6 +454,7 @@ function show(html, cls = "", tab = null) {
   else window.scrollTo(0, 0);
   document.body.classList.remove("scrolled");
   const el = app.querySelector(".screen");
+  if (typeof mxOnShow === "function") mxOnShow(el);   // a bubble growing into this page, or a page shrinking back into the map (js/mapxfer.js)
   const mb = tab && el.querySelector("[data-menu]"); if (mb) mb.onclick = () => menu();
   if (typeof tlNote === "function") tlNote(el, tab, backNav);   // the one trail, the map glyph, the pull-down (js/trail.js)
   el.querySelectorAll("img").forEach(i => { if (i.complete && i.naturalWidth) i.classList.add("ld"); });
@@ -530,7 +531,14 @@ function roomsNote(id) {
 let STEM_KEY = null;
 // The one source of truth for the corners coming back: a pan fade (.chrome-hide on Home) never outlives a closed
 // sheet or menu. Called by closeStem and every sheet() close (David: "the bottom corner buttons disappear").
-function cornersBack() { document.querySelectorAll(".chrome-hide").forEach(n => n.classList.remove("chrome-hide")); }
+// It is the single state function for the corners: called on every way into Home (hmHome), at the end of a bubble <->
+// page transition both ways (js/mapxfer.js mxKill), on a sheet or stem close, and when a pan lifts.
+function cornersBack() {
+  document.querySelectorAll(".chrome-hide").forEach(n => n.classList.remove("chrome-hide"));
+  if (!STEM_OPEN) document.body.classList.remove("stem-open");
+  // nothing may leave a corner drawn but faded or untappable (a transition's inline style)
+  document.querySelectorAll("[data-rooms-corner],[data-do-corner]").forEach(b => ["opacity", "visibility", "pointerEvents"].forEach(k => { b.style[k] = ""; }));
+}
 function closeStem(instant) {
   const s = document.querySelector(".rooms-stem"), sc = document.querySelector(".rm-scrim");
   STEM_OPEN = false; cornersBack();
@@ -639,6 +647,8 @@ function roomToFloor(targetEl) {
 let HIST_POP = false;
 addEventListener("popstate", e => {
   if (!e.state && /^#\/./.test(location.hash)) return;   // a typed or linked address, not Back: router.js opens it
+  // the map reached by Close (js/trail.js tlExit): the chain behind it is forgotten, so Back stays on the map
+  if (typeof tlForgot === "function" && tlForgot()) { try { history.pushState({ ch: 1 }, "", ROUTE_NOW || undefined); } catch (e) {} return; }
   if (STEM_OPEN) { closeStem(); try { history.pushState({ ch: 1 }, "", ROUTE_NOW || undefined); } catch (e) {} return; }
   const over = document.querySelector(".peek [data-back], .sheet");
   if (over) { if (over.matches(".sheet")) document.querySelector(".scrim")?.dispatchEvent(new PointerEvent("pointerdown")); else over.click(); try { history.pushState({ ch: 1 }, "", ROUTE_NOW || undefined); } catch (e) {} return; }

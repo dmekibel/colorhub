@@ -91,6 +91,28 @@ function rpCoverFoot(name, hex, tapped, entry) {
         <p class="rp-def" data-rp-def></p><p class="rp-defsrc" data-rp-defsrc></p>`}
         <span class="rp-hexrow"><button class="mono cp-hex" data-copy="${tapped || hex}">${tapped || hex}</button>${tapped && typeof fvSet === "function" ? `<button class="rp-saveyours" data-rp-saveyours>${typeof fvHas === "function" && fvHas(tapped) ? "Saved to your colors" : "Save your color"}</button>` : ""}</span>${typeof sxPairBtnHTML === "function" ? sxPairBtnHTML(tapped || hex, name) : ""}` };
 }
+// Double-tap the cover's color to keep it in your colors, or let it go (David, 2026-10-08), like a photo you love: a heart
+// blooms where you tapped, with a haptic and the color's own note. Only the bare color counts: a tap on the hex, a
+// button or a link stays theirs, and a single tap does exactly what it did before (nothing waits for a second one).
+function rpCoverLike(el, name, hex) {
+  const hero = el.querySelector(".cp-hero"); if (!hero || typeof fvSet !== "function") return;
+  let last = null;
+  hero.addEventListener("pointerup", e => {
+    if (!e.isPrimary || e.button > 0 || e.target.closest("button, a, input, [data-copy], [data-back], [data-tl-exit]")) { last = null; return; }
+    const now = performance.now();
+    if (!last || now - last.t > 320 || Math.hypot(e.clientX - last.x, e.clientY - last.y) > 32) { last = { t: now, x: e.clientX, y: e.clientY }; return; }
+    last = null;
+    const on = !fvHas(hex), btn = el.querySelector("[data-fvh]");
+    if (btn) btn.click(); else fvPageSet(el, hex, name, on);   // the page's own heart repaints with it
+    if (!btn) buzz(on ? 8 : 4);
+    if (on && typeof sfxColor === "function") sfxColor(hex);
+    const r = hero.getBoundingClientRect(), b = document.createElement("i");
+    b.className = "fva-bloom rp-like" + (on ? "" : " off"); b.innerHTML = on ? FVA_HEART_ON : FV_HEART;
+    b.style.left = e.clientX - r.left + "px"; b.style.top = e.clientY - r.top + "px"; b.style.color = ink(hex) === "dark" ? "#1A1814" : "#F2EEE6";
+    hero.appendChild(b); setTimeout(() => b.remove(), 900);
+    toast(on ? "In your colors" : "Taken out of your colors", { dot: hex, ms: 1600 });
+  });
+}
 function rpCoverFill(el, name, hex, heroHex, entry) {
   const h1 = el.querySelector(".rp-name"); if (h1) { rpFitName(h1); if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => h1.isConnected && rpFitName(h1)); }
   // the story itself (js/article.js arLoad, cached: the story slot reads the same file), not the small lite index
@@ -106,6 +128,7 @@ function rpCoverFill(el, name, hex, heroHex, entry) {
     if (ap && aka.length && ap.hidden) { ap.textContent = `Also called ${aka.join(", ")}.`; ap.hidden = false; const h = el.querySelector('[data-rp-head="names"]'); if (h && !/also /.test(h.textContent)) h.textContent += ` · also ${aka[0]}`; }
     if (def && q("[data-rp-def]")) { q("[data-rp-def]").textContent = def.t; q("[data-rp-defsrc]").textContent = def.src; }
     el.querySelectorAll(".rp-cov-hold").forEach(x => x.classList.add("in"));
+    el.dataset.coverReady = "1";   // the cover's words are in: the title won't move again (js/mapxfer.js waits for this)
   });
 }
 
@@ -146,9 +169,9 @@ function rpDrawer(id, title, body, head) {
 }
 function rpDrawersHTML(entry, name, hex, famC, paintHost, o = {}) {
   const call = (f, ...a) => typeof f === "function" ? f(...a) : "";
-  const paint = `${paintHost}${call(rcReachSection, name, hex)}${call(rcRoleSection, name, hex)}${call(rcPaintersSection, name, hex)}${call(rcWhenWhereSection, name, hex)}`;
+  const paint = `${paintHost}${call(rcRolePaintingsHTML, name, hex)}${call(rcReachSection, name, hex)}${call(rcRoleSection, name, hex)}${call(rcPaintersSection, name, hex)}${call(rcWhenWhereSection, name, hex)}`;
   const words = `<div class="c-poems"></div>${call(archiveRows, entry, "books", famC)}`;
-  const world = `${call(btRow, entry, famC)}${call(gmRow, entry, famC)}<section class="fx-in" data-world-in></section>${call(archiveRows, entry, "films", famC)}`;
+  const world = `${call(rcWernerLine, name, hex)}${call(btRow, entry, famC)}${call(gmRow, entry, famC)}<section class="fx-in" data-world-in></section>${call(archiveRows, entry, "films", famC)}`;
   const measured = `${rcMeasuredHTML(hex)}${rcMixHTML(hex)}${rcHarmonyHTML(hex, name)}`;
   const [L, C] = lch(hex);
   rcPercentileCaches();
@@ -492,6 +515,7 @@ function colorDossier(entry, o = {}) {
   wireLinks(el);
   rpStoryFill(el, name, hex, o);
   rpCoverFill(el, name, hex, heroHex, entry);
+  rpCoverLike(el, name, hex);
   rpDrawersWire(el, name, heroHex);
   rpHoldWalk(el, name, heroHex);
   rpBarWire(el);

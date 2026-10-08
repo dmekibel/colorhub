@@ -13,11 +13,16 @@ node tools/check_fetched.js >/dev/null || { node tools/check_fetched.js | tail -
 TRACKED=$(git ls-files 'data/articles/*.json' | grep -v -e link-map -e '/index.json' | while read f; do git diff --quiet -- "$f" && echo "$f"; done)
 [ -f tools/article_gate.py ] && [ -n "$TRACKED" ] && { python3 tools/article_gate.py $TRACKED >/tmp/ag.log 2>&1 || { tail -3 /tmp/ag.log; fail=1; }; }
 # Full smoke once; under heavy machine load a whole Chrome group can die, so re-run only the failed groups, alone.
+# Smoke runs on a clean snapshot of HEAD (+ the bumped index.html), never the working tree: the article workflows keep
+# dropping half-written drafts into data/articles/, and a draft once hung a whole smoke group.
+SNAP=/tmp/colorhub-ship-snap
+[ -d "$SNAP/.git" ] || [ -f "$SNAP/.git" ] || git worktree add -f --detach "$SNAP" HEAD >/dev/null 2>&1
+git -C "$SNAP" checkout -q --detach -f "$(git rev-parse HEAD)" && git -C "$SNAP" clean -qfd && cp index.html "$SNAP/index.html"
 ok=0
-if bash tools/smoke.sh > /tmp/smoke.log 2>&1; then ok=1; else
+if bash "$SNAP/tools/smoke.sh" > /tmp/smoke.log 2>&1; then ok=1; else
   ok=1
-  for g in $(grep -A40 FAILURES /tmp/smoke.log | grep -oE '^  [a-z]+ /' | awk '{print $1}' | sort -u); do
-    bash tools/smoke.sh --group "$g" > /tmp/smoke-$g.log 2>&1 || { ok=0; grep -A6 FAILURES /tmp/smoke-$g.log; }
+  for g in $(grep -A40 FAILURES /tmp/smoke.log | grep -oE '^  [a-z-]+ /' | awk '{print $1}' | sort -u); do
+    bash "$SNAP/tools/smoke.sh" --group "$g" > /tmp/smoke-$g.log 2>&1 || { ok=0; grep -A6 FAILURES /tmp/smoke-$g.log; }
   done
 fi
 [ $ok = 1 ] || fail=1

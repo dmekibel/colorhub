@@ -3,17 +3,21 @@
 /* the floating ‹ over a full-bleed color hero is solid now, like every other control (DESIGN-SYSTEM §1.2) */
 .cp-close{background:var(--surface-2);color:var(--ink);border:1px solid rgba(236,232,223,.14);border-radius:50%;width:40px;height:40px}
 .cp-close svg{width:22px;height:22px}
-.cp-close.tl-exit{left:auto;right:20px}
-.ar-hubband .cp-close.tl-exit{right:calc(var(--g) + 0px)}
+/* Close: exit everything, back to the map (js/trail.js tlExit). A solid, labeled pill, the same on every inner page. */
+.tl-exit{flex:none;display:inline-flex;align-items:center;gap:6px;height:40px;padding:0 15px 0 11px;border-radius:999px;background:var(--surface-2);color:var(--ink);border:1px solid rgba(236,232,223,.14);font:500 15px/1 var(--sans);letter-spacing:0;white-space:nowrap;transition:transform .2s var(--spring)}
+.tl-exit:active{transform:scale(.94)}
+.tl-exit svg{width:18px;height:18px}
+.tl-exit-float{position:absolute;top:calc(var(--top) + 14px);right:20px;z-index:2}
+.ar-hubband .tl-exit-float{right:var(--g)}
+.rp-bar .tl-exit-bar{align-self:center;height:36px}
 
 /* a header row: ‹ on the left; whatever the page puts on the right, then the map glyph at the very end */
 .tl-x{justify-content:flex-start;gap:8px}
 .tl-x>:nth-child(2):not(.eyebrow){margin-left:auto}
-.tl-x>.tl-exit{margin-left:0;margin-right:-6px;flex:none;color:var(--ink)}
+.tl-x>.tl-exit{margin-left:0;margin-right:0}
 .tl-x>.tl-exit:nth-child(2){margin-left:auto}
 .tl-x>.eyebrow+.tl-exit{margin-left:0}
-.nav-r .tl-exit{margin-right:-12px;color:var(--ink)}
-.tl-exit svg{width:20px;height:20px}
+.nav-r .tl-exit{margin-right:0}
 /* a full-screen tool's header (the color explorer) keeps the glyph opposite ‹ */
 .cx-top.tl-x>.tl-exit{margin-left:auto}
 .pr-top.tl-x>.tl-exit{margin-left:auto;margin-right:0}

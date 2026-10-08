@@ -21,8 +21,8 @@
 //
 // Hooks other lanes can fill (all optional; nothing renders if they're absent):
 //   bioSlot(slug)            -> Promise<html>, reads data/artists/bios/<slug>.json (the article engine writes these)
-//   paintingLesson(gi)       -> "Learn this painting" (js/practice.js PR_STEPS); the button appears when it exists
-//   lmYouAndPainter(slug)    -> html for the "You and this painter" line (js/learner.js)
+//   prQuick(o)               -> "Learn this painting" (js/practice.js, the quick-deck sheet); the button appears when it exists
+//   knowState(c)             -> the "You and this painter" line (js/learner.js)
 //   whosePalette(slug)       -> the Train quiz, opened on this painter (L10)
 
 const AW_DIR = "data/artists/", AW_AN = "data/analysis/";
@@ -322,8 +322,7 @@ function awPainter(slug, push = true) {
   // "You and this painter" (js/learner.js knowState): how many of this painter's cluster and signature colors you've met or own
   const you = el.querySelector("[data-aw-you]");
   try {
-    if (typeof lmYouAndPainter === "function") { const h = lmYouAndPainter(slug); if (h) you.innerHTML = h; }
-    else if (typeof knowState === "function") {
+    if (typeof knowState === "function") {
       const names = [...new Set([...(A.clusters || []).flatMap(c => c.colors), ...(P.sig || []).map(r => awCol(r[0])[0])].map(awCanon))];
       const hexes = names.map(k => { const e = (CORE_NAMES || []).find(x => awCanon(x.n) === k); return e && e.h; }).filter(Boolean);
       const st = hexes.map(h => knowState(h)), yours = st.filter(x => x === "yours").length, met = st.filter(x => x !== "none").length;
@@ -506,7 +505,7 @@ function awAnalysis(host, el, i, d, r, ctx) {
       <div><span>Vivid</span><b>${awPct(ch[2])}%</b><em>${awPct(ch[0])}% muted · ${awPct(ch[1])}% moderate</em></div>
       <div><span>Warm / cool</span><b>${awPct(warm)}% warm</b><em>by chroma-weighted hue</em></div>
     </div>
-    ${(typeof paintingLesson === "function") ? `<button class="btn" data-awlesson>Learn this painting${ICON.arrow}</button>` : ""}
+    ${(typeof prQuick === "function") ? `<button class="btn" data-awlesson>Learn this painting${ICON.arrow}</button>` : ""}
     <div data-awreadings></div>
     <details class="aw-more"><summary>The measurements</summary>
       <div class="aw-meas">
@@ -555,7 +554,7 @@ function awAnalysis(host, el, i, d, r, ctx) {
   };
   draw(curPal());
   el._awPal = draw;
-  const les = host.querySelector("[data-awlesson]"); if (les) les.onclick = () => paintingLesson(i);
+  const les = host.querySelector("[data-awlesson]"); if (les) les.onclick = () => prQuick({ items: curPal().map(p => p.h), label: d.t, src: "painting", route: "#/gallery/" + i });
   // pigment hint (hedged)
   if (r.pig && CORE_NAMES && CORE_NAMES[r.pig.ci]) {
     host.querySelector("[data-awpig]").innerHTML = `<p class="aw-find">${esc(CORE_NAMES[r.pig.ci].n)} is the name of a pigment first made around ${r.pig.since}, close to when this was painted. A hint, from screen color only, not a claim about the paint used.</p>`;
