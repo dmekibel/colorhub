@@ -106,11 +106,27 @@ const ink = h => lab(h)[0] > 64 ? "dark" : "light";
 const pctFmt = n => `${(n = Math.max(0, n)) >= 10 ? n.toFixed(0) : n.toFixed(1)}%`;
 // a gap between two colors, or an unsigned ΔL*: "3.0% different" / "1.5% different"
 const pctDiff = n => `${pctFmt(n)} different`;
-// a closeness/match line: "97% match"; one decimal once it's above 99 ("99.2% match")
-function pctMatch(n) {
+// a closeness/match line: "97% match"; one decimal once it's above 99 ("99.2% match"), or whenever `decimal` is
+// forced true (David, 2026-10-08: "97% match with Coral and with Mandarin" — two matches shown together must
+// never read as a tie that isn't real). Pass `decimal: true` when this match is one of two or more shown
+// together; pctMatchDecimal(ns) below decides that for a whole list in one place.
+function pctMatch(n, decimal) {
   const m = Math.max(0, 100 - n);
   if (m >= 100) return "100% match";
-  return `${m > 99 ? m.toFixed(1) : Math.round(m)}% match`;
+  return `${decimal || m > 99 ? m.toFixed(1) : Math.round(m)}% match`;
+}
+// true when any two of these ΔE/ΔL* values (shown together, e.g. several "near" rows) would round to the same
+// whole-number percent — so the caller should pass `decimal: true` to pctMatch() for every one of them.
+function pctMatchDecimal(ns) {
+  const seen = new Set();
+  for (const n of ns) {
+    const m = Math.max(0, 100 - n);
+    if (m >= 100) continue;
+    const r = Math.round(m);
+    if (seen.has(r)) return true;
+    seen.add(r);
+  }
+  return false;
 }
 // ΔE, ΔL* and "ΔE step" (js/gym-engine.js SKILLS, js/match.js MATCH) all sit on that 0-100 scale, so each is
 // shown as a percent; "mired" (Kelvin eye, js/match.js) isn't on it and keeps its own unit word.

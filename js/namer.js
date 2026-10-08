@@ -81,8 +81,9 @@ LAB.namer = (hex, push = true) => {
     nmrFit($("#name"), nm.text);
     $("#sub").innerHTML = nm.between ? `Between two names <span class="mono">${cur}</span>` : `${pctMatch(nm.de)} <span class="mono">${cur}</span>`;
     const list = nm.between ? nm.near.slice(0, 4) : nm.near.slice(1, 5);
+    const decDigits = pctMatchDecimal(list.map(x => x.de));   // several matches shown in one list: never a false tie
     $("#near").innerHTML = list.map(x => { const d = lookDiff({ h: x.h }, { h: cur });
-      return `<button class="nmr-row" data-swatch="${x.h}"><i style="--c:${x.h}"></i><span><b>${esc(x.n)}</b><em>${d === "almost the same" ? "Almost identical" : "Yours is " + esc(d)}</em></span><span class="mono">${pctMatch(x.de).replace(" match", "")}</span></button>`; }).join("");
+      return `<button class="nmr-row" data-swatch="${x.h}"><i style="--c:${x.h}"></i><span><b>${esc(x.n)}</b><em>${d === "almost the same" ? "Almost identical" : "Yours is " + esc(d)}</em></span><span class="mono">${pctMatch(x.de, decDigits).replace(" match", "")}</span></button>`; }).join("");
     const saved = nmrTray().includes(cur);
     $("#acts").innerHTML = `<button data-save>${saved ? "Saved" : "Save"}</button>`
       + (typeof galleryOpenColor === "function" ? `<button data-pt>Paintings</button>` : "")

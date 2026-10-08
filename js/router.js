@@ -90,6 +90,9 @@ WIKI_SCREENS.forEach(([name, o]) => needsWiki(name, o));
 // a tapped-but-not-quite-this-color hex (js/swatch.js openTappedColor, David 2026-10-07) rides along as
 // ?c=<hex> on the color/name address, so Back and a shared link reproduce the same "Your color" view.
 const tappedQS = tapped => tapped ? "?c=" + String(tapped).replace("#", "").toLowerCase() : "";
+// fromHex on a painting (js/gallery.js glPage) can be one color or, arriving from a pair/set page, the whole
+// set: "?c=hex1-hex2-hex3". A single hex has no dash, so this stays compatible with every older link.
+const ptCParam = h => Array.isArray(h) ? h.map(x => String(x).replace("#", "").toLowerCase()).join("-") : String(h).replace("#", "").toLowerCase();
 const ROUTED = [["colorPage", (n, tapped) => n && n.id ? routed(n.title, nodeRoute(n) + tappedQS(tapped)) : null], ["wikiPage", nodeRouted()], ["paintingPage", nodeRouted()], ["storyPlayer", nodeRouted()],
   ["closeup", nodeRouted("/more")],
   ["daily", () => routed("Today's color", "daily")],   // js/colordle.js: Name today's color
@@ -97,7 +100,7 @@ const ROUTED = [["colorPage", (n, tapped) => n && n.id ? routed(n.title, nodeRou
   ["favShelf", () => routed("Your colors", "favorites")], ["favTaste", () => routed("Your taste", "favorites/taste")],   // js/favs.js, js/favprofile.js
   ["frStart", (m, c) => routed("Rank your colors", "favorites/rank/" + (m || "bws"))],   // js/favrank.js
   ["tasteIntro", k => k === "palette" ? routed("Find your palette", "taste/palette") : routed("Find your color", "taste/color")],
-  ["glPage", (i, d, fromHex, tol) => routed(d && d.t || "Painting", "gallery/" + i + (fromHex ? "?c=" + String(fromHex).replace("#", "").toLowerCase() + (tol != null ? "&t=" + tol : "") : ""))],
+  ["glPage", (i, d, fromHex, tol) => routed(d && d.t || "Painting", "gallery/" + i + (fromHex ? "?c=" + ptCParam(fromHex) + (tol != null ? "&t=" + tol : "") : ""))],
   ["paintingsOfPage", (hexes, o) => { const h = typeof ptHexList === "function" ? ptHexList(hexes) : []; return h.length ? routed("Color in paintings", ptPath(h, { ...PT_PREF, mode: "all", sort: "cover", source: "paintings", ...(o || {}) })) : null; }],   // js/paintingsof.js (L26)
   ["chordsPage", () => routed("Masters' chords", "chords")],
   ["spPage", hexes => { const h = typeof spCanon === "function" ? spCanon(hexes) : []; return h.length >= 2 ? routed(spTitle(h), spPath(h)) : null; }],   // js/setpage.js: a pair or a set   // js/chords.js (L26)
@@ -186,10 +189,13 @@ function openRoute(hash, initial = false) {
   // nearest name but isn't quite it — same "?c=" convention the gallery route already used for a painting
   // palette tap. Lives inside the hash fragment itself (there's no true query string here), so it's just the
   // tail of `id` once split off, same as "gallery/12?c=aabbcc" below.
-  let tappedHex = null, tappedTol = null;
+  // a painting's ?c= can also carry a dash-joined set (a pair/set page's "Together in paintings" rails):
+  // the whole set rides along, not just one color (David, 2026-10-08).
+  let tappedHex = null, tappedHexes = null, tappedTol = null;
   if (id && id.includes("?c=")) {
     const [clean, qs] = id.split("?c="), [hx, ...rest] = qs.split("&");
-    id = clean; tappedHex = "#" + hx.toUpperCase();
+    id = clean; tappedHexes = hx.split("-").map(h => "#" + h.toUpperCase()).filter(h => /^#[0-9A-F]{6}$/.test(h));
+    tappedHex = tappedHexes[0] || null;
     const t = rest.map(x => x.match(/^t=(\d+(?:\.\d+)?)$/)).find(Boolean); tappedTol = t ? +t[1] : null;   // &t=<tol> rides with a painting's ?c=
   }
   // "learn" is kept as a working alias for "today" (DESIGN-SYSTEM.md §2: Learn is the room's real name now;
@@ -267,10 +273,11 @@ function openRoute(hash, initial = false) {
   if (kind === "which" && id && typeof arWhichPage === "function") { base(); XSTACK = []; arWhichPage(id); return true; }
   if (kind === "read" && id && typeof arReadPage === "function") { base(); XSTACK = []; arReadPage(id, more || null); return true; }   // js/article.js: a story, opened as a book
   if (kind === "gallery" && /^\d+$/.test(id || "") && typeof galleryPage === "function") {
-    // #/gallery/<n>?c=<hex>&t=<tol>: the color that brought you, and how close it had to be (stripped into tappedHex/tappedTol above)
-    const fromHex = tappedHex || null;
+    // #/gallery/<n>?c=<hex[-hex...]>&t=<tol>: the color (or whole set) that brought you, and how close it had
+    // to be (stripped into tappedHex/tappedHexes/tappedTol above)
+    const fromHex = tappedHexes && tappedHexes.length > 1 ? tappedHexes : (tappedHex || null);
     base();
-    if (!GAL) { ROUTE_NEXT = routed("Painting", "gallery/" + id + (fromHex ? "?c=" + fromHex.slice(1).toLowerCase() : "")); waitScreen(); ROUTE_REPLACE = true; }   // the painting replaces the placeholder
+    if (!GAL) { ROUTE_NEXT = routed("Painting", "gallery/" + id + (fromHex ? "?c=" + ptCParam(fromHex) : "")); waitScreen(); ROUTE_REPLACE = true; }   // the painting replaces the placeholder
     XSTACK = [];
     galleryPage(+id, true, fromHex, tappedTol);
     return true;
