@@ -1,0 +1,519 @@
+{
+ "slug": "brown",
+ "name": "Brown",
+ "hex": "#7A5230",
+ "names": [
+  "Brown"
+ ],
+ "tier": "nature",
+ "depth": "epic",
+ "lede": "Brown is a darkened yellow or orange with a word of its own: the color of earth, wood and the poor man's coat, the oldest paint in the world and, for most of art history, the color of shadow.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dark yellow with its own word",
+   "body": "Brown is what yellow and orange become when they are darker than their surroundings. Dim a blue and it is still called blue, dim a red and it is still red, but a dim yellow needs a separate basic word, and that word is brown [1]. The eye makes the same cut: the difference between yellow and brown, like the difference between pink and maroon, is lightness alone [2]. There is no brown in the rainbow and no single wavelength of brown light, a point Jarman borrows from Wittgenstein [3].\n\nLatin had no specific word for brown, and the Hebrew word translated as brown in Genesis means sun-scorched, a variant of black; the color's earliest sense was simply dark [5]. English *brown* is Germanic, and Pastoureau ties the German *braun* to the coat of the bear [6]. To burnish something once meant, literally, to make it brown [5]. Chaucer's Monk rode a palfrey as brown as a berry, and a gloomy reverie became a brown study, from French *brun* in the sense of melancholy [35].\n\nThe neighboring languages cut the color differently. French *brun* does not match English brown: brown shoes in French are *marron*, and *brun* hair is simply dark [7]. *Marron*, from the chestnut, only appeared in the eighteenth century, for a warmer, slightly red brown [6]. Pastoureau counts brown among the half-colors, and he calls it the least liked of his eleven colors and half-colors [6]."
+  },
+  {
+   "id": "swatch",
+   "title": "Which brown",
+   "body": "The swatch here is a middle, slightly red brown that the ISCC-NBS dictionary of 1955 files as moderate brown, block 58 [32]. Its closest named neighbors are [[beige-brown]], [[brussels-brown]], [[prout-s-brown]], [[milk-chocolate]] and [[coffee]], all within about four units [32]. Web designers who type the keyword `brown` get something else: the X11 Brown, `#A52A2A`, a brick red about nineteen units away [5][32].\n\nBrown is the most context-bound of colors. Eckstut notes that yellow loses lightness very fast as black is added and turns brown almost at once [4]. Put a yellow card in shadow next to a sheet of white paper and it will look brown; lift it into the light and the yellow comes back."
+  },
+  {
+   "id": "language",
+   "title": "A late basic word",
+   "body": "In their 1969 survey of 98 languages, Brent Berlin and Paul Kay proposed that basic color words arrive in a fixed order: black and white, then red, then green and yellow, then blue, with brown next [8]. Purple, pink, orange and grey came last [8]. The study is contested: Gage notes that critics have objected that stage-one languages often separate dark from light or cool from warm rather than black from white [8].\n\nBrown also survived every attempt to strip English down to essentials [9]. When Charles Kay Ogden designed Basic English in the late 1920s, an 850-word core vocabulary, he kept eight color words, brown and grey among them, and left out pink, orange and purple [9]."
+  },
+  {
+   "id": "earths",
+   "title": "The earth pigments",
+   "body": "Most brown paint has always come out of the ground [11]. Iron oxides, the ochres, are among the most common compounds on the earth's surface and among the first pigments people used; the browns and maroons of animals in prehistoric caves are ochre [10][11]. Roman painters cooked their earths: vessels found in Pompeian villas show yellow ochres being heated to turn them red and even brown [12].\n\nUmber is an iron-oxide earth darkened by manganese, which gives it a cooler, faintly greenish cast; European painters took it up around 1500 [13][14]. Its name is often tied to Umbria, but Ball, Finlay and St Clair all lean toward Latin *umbra*, shadow, and Ball adds that most European umber was imported from Turkey [13][11][15]. Raw [[sienna]], from the ochres of Siena, is yellowish; roasted, it becomes the warm red-brown [[burnt-sienna]] [13]. Many classic browns are earths cooked to red heat, as their names admit: [[burnt-umber]], burnt ochre, burnt sienna [3].\n\nFrom the early seventeenth century there were synthetic iron oxides too. Théodore de Mayerne recorded a recipe for them, and they boomed in the eighteenth century, when sulfuric acid made for bleaching textiles left iron oxide as a by-product; painters know them as the Mars colors [13]. A blood-brown earth named [[sinopia]], after the Black Sea port of Sinope, was used for the underdrawings of frescoes [10][11]. When a fire in July 1944 wrecked the frescoes in a building beside the Leaning Tower of Pisa, the plaster that came away revealed the sinopia drawings underneath, which can still be seen [10]."
+  },
+  {
+   "id": "strange",
+   "title": "Soot, ink, tar and mummies",
+   "body": "Not every brown is an earth. [[bistre|Bistre]], a warm brown for drawing, was made from the tarry soot of burnt beech wood; before the word came in during the seventeenth century it was called *caligo*, Latin for darkness [10][14]. [[sepia|Sepia]] is the ink of the cuttlefish, almost pure melanin [15][11]. The books disagree on when it became a common artists' brown: Finlay says after the eighteenth century, while St Clair finds it as an ink in Cicero and in Leonardo's sketches [11][15].\n\nCassel earth, sold in England from about 1790 as [[van-dyke-brown|Vandyke brown]], is not a mineral at all but decayed organic matter, peat or lignite, dug near Cologne and Kassel [13]. It is a transparent glaze found in Rubens and Rembrandt [13]. Asphaltum, a bitumen sold as a lustrous brown from the sixteenth century, was worse: it never fully dries, so the paint above it runs and wrinkles [13][11]. Reynolds used it in the 1780s, Géricault used it in *The Raft of the Medusa* in 1819, and Albert Pinkham Ryder used it in the 1880s, and the work of all three has suffered for it [13][11].\n\nThe strangest was mummy brown, ground from Egyptian mummies [16][11]. The name goes back to the Persian *mumiya*, bitumen, which was thought to be medicine [14][16]. An English traveller in 1586 climbed down into a mass grave in Egypt and brought home body parts, a Paris color shop called À la Momie was open by 1712, and the colorman George Field took a delivery of mummy in 1809 [11]. Bone black, a different pigment, was not made from human corpses, though it was said to be; it came from the bones of cattle and lambs, and mummy brown was the one with human remains in it [11].\n\nThe best-known mummy-brown story has a painter burying his tubes in the garden on learning what was in them. The books disagree on who: St Clair names Edward Burne-Jones in 1881, while Finlay tells it of an unnamed artist and reports that the original source was lost [16][11]. The London colorman Roberson ran out of mummies in the 1960s [16]. Gurney writes that the pigment was dropped for fear of disease rather than for lack of supply [17]."
+  },
+  {
+   "id": "art",
+   "title": "Brown in painting",
+   "body": "Medieval painters distrusted brown because it had to be mixed, and they preferred the glory of pure, costly materials such as gold and ultramarine [10]. The painters who valued brown most came after the first flush of the Renaissance: Correggio, Caravaggio and Rembrandt set their lit figures in great spaces of shadow, which needed a whole range of browns, warm and cool, opaque and transparent [10]. After his bankruptcy in 1656 Rembrandt leaned on cheap ochres, umber above all, for the dark grounds of his late self-portraits [15]. Earlier, around the 1480s, Geertgen tot Sint Jans had painted a whole *Nativity at Night* in browns and near-black [18].\n\nBy the early nineteenth century brown had become the safe academic tone. Sir George Beaumont, Constable's patron, compared a good painting to a good fiddle: both should be brown; Constable answered by laying a violin on the grass to show that nature is not [13]. The Impressionists mocked the academic \"brown gravy\", and Pissarro boasted of banishing earth colors from his palette, though St Clair notes they still crop up in his work [13][10]. Van Gogh went the other way for *The Potato Eaters*, choosing brown materials so that his peasants would look painted with the earth they worked [19].\n\nMany browns in old paintings were never meant to be there. Green copper resinate has darkened to brown in the foliage and hills of fifteenth- and sixteenth-century Italian landscapes [20]. The smalt sky of Velázquez's *Immaculate Conception*, painted about 1618, has turned brown as its cobalt leached away [20]. Red lead has gone chocolate brown in Chinese and Afghan wall paintings and in Indian miniatures, and Van Gogh's chrome yellows have browned in his sunflowers [20][21]. When a landscape's trees look like autumn in a picture of summer, suspect the chemistry before the painter."
+  },
+  {
+   "id": "cloth",
+   "title": "The color of the poor, then of the sober",
+   "body": "Bright, fast dyes were expensive, so for centuries brown cloth was what poor people wore [10]. Many plant dyes gave brown whether the dyer wanted it or not: purple loosestrife, for one, dyes brown [22]. Fourteenth-century sumptuary laws kept the cheap cloth called [[russet]] for the lowest trades, and an English statute of 1363 limited carters and ploughmen to blanket and russet [10][23]. Russet then meant a coarse wool whose color ran from dun through brown to grey [23]. Some religious orders made a virtue of it: where the Benedictines wore black, newer orders chose white or brown [25].\n\nThe Reformation made brown respectable [24]. Protestant dress codes favored blacks, greys and browns, and from the fifteenth to the nineteenth century dark colors dominated men's everyday clothes across Europe [24]. In Paris estate inventories of about 1700, 27 per cent of nobles' clothing was brown, behind black at 33 per cent; among servants the figures were 29 per cent black and 23 per cent brown [24]. [[buff|Buff]] leather coats for cavalry in the sixteenth and seventeenth centuries led to buff breeches, a staple of the well-dressed European gentleman by the mid-1700s [10][26].\n\nThen brown went to war. [[khaki|Khaki]] comes from a Hindustani word for dust, and the first uniform designed to blend into the ground was the mud-dyed cotton of Harry Lumsden's Corps of Guides at Peshawar in 1846 [26][36]. The British army took it up widely after 1857, and most armies followed as visibility became deadly [26]. In 1925 the German SA adopted brown shirts, which Pastoureau links to the color's modern associations with violence [6]. The SS, in black, eliminated the SA's leadership in 1934 [27]."
+  },
+  {
+   "id": "names",
+   "title": "Naming and measuring browns",
+   "body": "Brown has collected odd names. Drab, now a word for dullness, comes from French *drap*, the color of unbleached sheets, and was once a technical hue between olive and puce [37][11]. [[puce|Puce]] is French for flea; the story goes that in 1775 Louis XVI called a gown of Marie Antoinette's flea-colored and the court copied it [31]. In late 1751 Paris briefly wore a brownish yellow called *caca-dauphin* to celebrate the birth of Louis XV's grandson [29]. In *A Christmas Carol* of 1843, Dickens gave the fog of London a color of its own, the \"palpable brown\" air through which candles showed as ruddy smears [38]. In heraldry, brown arrived late: German arms used it from the early thirteenth century, French and English arms more than a century after [28].\n\nBrown also gave the world its first colorimeter. Joseph Lovibond, a brewer, wanted a fixed scale for the color of his beer; the idea of graded brown glass came to him in Salisbury Cathedral, and in 1885 he produced the first colorimeter [11]. Some browns need no dye at all. Guatemalan *ixcaco* is a naturally brown cotton, and Sally Fox bred brown cottons whose color deepens rather than fades in the wash [30]. A Harris Tweed brown, seen close up, is a blend of chestnut, black and wren-colored fibres [30]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Brown is everywhere in our archive. In 4,484 of 23,781 museum paintings, about one in five, a color within six units of this swatch covers at least five per cent of the canvas [33]. Inside those paintings it is most often a middle tone, neither the shadow nor the light [33]. The caveat matters more for brown than for any other color: these are photographs of paintings under aged, yellowed varnish, and varnish pushes everything toward brown, so a match is not a pigment test [33].\n\nEven so, the history shows. The share is highest in our paintings from the 1300s, 95 of 251, and falls to 151 of 1,674 in the 1900s, half the archive average [33]. Among Impressionist paintings it appears in only 7 of 140, about a quarter of the expected rate, which fits their war on brown gravy [33]. The single most brown-loving painter here is Maarten van Heemskerck, in 9 of his 12 works [33]. The top match of all is a Chinese silk painting of 1279, *Flight of Geese*, where the toned silk ground reads brown across 97 per cent of the image [33].\n\nIn Google Books, counting only adjective uses so that the surname Brown stays out, the word peaks in the 1920s after its fastest rise in the 1860s [34]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Germanic *brūn*, dark; Pastoureau links German *braun* to the bear's coat",
+   "first_recorded": "Old English; a basic color word throughout the history of English",
+   "source": "Paterson, A Dictionary of Colour, \"brown\"; Pastoureau, Le petit livre des couleurs, ch. 7"
+  },
+  "aka": [
+   "brun (French, for hair)",
+   "marron (French, for things)",
+   "braun (German)"
+  ],
+  "siblings": [
+   "umber",
+   "sienna",
+   "sepia",
+   "bistre",
+   "russet",
+   "khaki"
+  ],
+  "parent": null,
+  "children": [
+   "light-brown",
+   "dark-brown",
+   "reddish-brown",
+   "yellowish-brown",
+   "golden-brown",
+   "chocolate-brown",
+   "saddle-brown",
+   "seal-brown"
+  ],
+  "disambiguation": [
+   {
+    "slug": "maroon",
+    "gloss": "once meant chestnut brown (French marron); now a dark brownish red"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "brun, marron"
+   },
+   {
+    "lang": "de",
+    "name": "braun"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#7A5230",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 4484,
+  "top_paintings": [
+   "aic-79716",
+   "cma-173760",
+   "cma-152557",
+   "aic-24438"
+  ],
+  "by_century": {
+   "1300": [
+    95,
+    251,
+    2.01
+   ],
+   "1600": [
+    1353,
+    6394,
+    1.12
+   ],
+   "1900": [
+    151,
+    1674,
+    0.48
+   ]
+  },
+  "movements": {
+   "Impressionism": [
+    7,
+    140,
+    0.27
+   ],
+   "Renaissance": [
+    7,
+    25,
+    1.48
+   ]
+  },
+  "painters": [
+   [
+    "Maarten van Heemskerck",
+    9,
+    12
+   ]
+  ],
+  "role": {
+   "highlight": 0.25,
+   "mid": 0.62,
+   "shadow": 0.14
+  },
+  "ngram": {
+   "term": "brown",
+   "adjective_only": true,
+   "peak": 1920,
+   "fastest_rise": 1860
+  },
+  "measured": {
+   "lch": [
+    38.5,
+    29.4,
+    64.2
+   ],
+   "iscc_nbs": "block 58, moderate brown",
+   "contrast_white": 6.82,
+   "css_brown": [
+    "#A52A2A",
+    18.9
+   ],
+   "nearest": [
+    [
+     "Beige Brown",
+     3.1
+    ],
+    [
+     "Brussels Brown",
+     3.4
+    ],
+    [
+     "Prout's Brown",
+     3.7
+    ],
+    [
+     "Milk Chocolate",
+     4.0
+    ],
+    [
+     "Coffee",
+     4.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 2",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Livingstone, Vision and Art, ch. 13 and ch. 15",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 44",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Eckstut, What Is Color?, ch. 44",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"brown\", \"Brown\" (X11) and \"burnish\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, Le petit livre des couleurs, ch. 7 (\"Les demi-couleurs\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Batchelor, Chromophobia, ch. 4; Ball, Bright Earth, ch. 2",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 83; Westland, Universal Principles of Color, ch. 13",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Basic English\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Brown\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 2 (\"Black and Brown\") and notes",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 8",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 6",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, pp. 37, 105, 135",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Umber\" and \"Sepia\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Mummy\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "book",
+   "cite": "Gurney, Colour and Light, p. 221",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 18,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 48",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 19,
+   "kind": "book",
+   "cite": "Finlay, Colour, notes to ch. 1 (\"Ochre\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 20,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 19",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 21,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 33",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 22,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 6",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 23,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Russet\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 24,
+   "kind": "book",
+   "cite": "Pastoureau, Black, pp. 132, 135",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 25,
+   "kind": "book",
+   "cite": "Pastoureau, Black, pp. 64-65",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 26,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Buff\" and \"Khaki\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 27,
+   "kind": "book",
+   "cite": "Pastoureau, Black, p. 190",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 28,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 87",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 29,
+   "kind": "book",
+   "cite": "Pastoureau, Black, p. 160",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 30,
+   "kind": "book",
+   "cite": "Finlay, Fabric, pp. 84, 148, 192",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 31,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Puce\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 32,
+   "kind": "data",
+   "cite": "ColorHub color library and Color Graph (data/graph; ISCC-NBS 1955; X11/CSS), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 33,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 34,
+   "kind": "data",
+   "cite": "Google Books Ngram, adjective use only (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  },
+  {
+   "n": 35,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, colour phrases: \"brown as a berry\", \"brown study\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 36,
+   "kind": "book",
+   "cite": "Pastoureau, Green, ch. 44",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 37,
+   "kind": "book",
+   "cite": "Finlay, Fabric, p. 292",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 38,
+   "kind": "data",
+   "cite": "ColorHub passages: Dickens, A Christmas Carol (1843), Stave I (data/passages.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is the only difference between yellow and brown, as the eye sees them?",
+   "choices": [
+    "Lightness: brown is yellow that is darker than its surroundings",
+    "Brown has its own wavelength in the spectrum",
+    "Brown always contains red",
+    "Brown is a mix of all three primaries and nothing else"
+   ],
+   "answer": "Lightness: brown is yellow that is darker than its surroundings",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: bone black was made from human corpses.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Why do the trees in some 15th- and 16th-century Italian landscapes look brown?",
+   "choices": [
+    "Their green copper resinate paint has darkened",
+    "The painters used umber for foliage",
+    "Italian summers were drier then",
+    "The paintings were left unfinished"
+   ],
+   "answer": "Their green copper resinate paint has darkened",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "A dim blue is still blue, but a dim yellow needs a new word: brown.",
+  "For centuries some painters really did grind up Egyptian mummies to make a brown.",
+  "Hold a yellow card in shadow next to white paper and watch it turn brown."
+ ],
+ "words": 2088,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Pastoureau 'French opinion polls' for brown not in the cited passage: reworded to his 'least liked of eleven colors and half-colors'.",
+   "Berlin-Kay critique attributed to Gage only (Finlay not found in text).",
+   "Removed unsupported 'coal-smoke' from the Dickens line."
+  ]
+ }
+}

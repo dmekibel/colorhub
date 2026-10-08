@@ -7,7 +7,7 @@
  ],
  "tier": "nature",
  "depth": "long",
- "lede": "Apple is a bright, fresh green named for a fruit that most often is not that color; behind the name lies an older color word, apple green, which began as a pale gray-green in natural-history charts.",
+ "lede": "Apple is a bright, fresh green named for a fruit that most often is not that color; behind the name lies an older color word, apple green, which appears in natural-history charts as a pale gray-green.",
  "sections": [
   {
    "id": "name",
@@ -27,7 +27,7 @@
   {
    "id": "modern",
    "title": "Mondrian and the logo",
-   "body": "Gage observes that Mondrian, who disliked green for its association with nature, turned in several paintings of about 1920 to a greenish yellow, at times an apple green, to serve as his third primary [5]. That puts apple green in an odd position, as a bridge between the yellow and the green of Ostwald's primaries [5].\n\nBatchelor mentions the Apple Computer logo, a partially eaten apple striped in spectrum colors that begin with green at the top and end with blue [6]. The designer, he notes, used six colors where Newton divided the spectrum into seven to match the musical scale [6]."
+   "body": "Gage observes that Mondrian, who disliked green for its association with nature, turned in several paintings of about 1920 to a greenish yellow, at times an apple green, to serve as his third primary [5]. That puts apple green in an odd position, as a bridge between the yellow and the green of Ostwald's primaries [5].\n\nBatchelor mentions the Apple Computer logo, a partially eaten apple cut into horizontal spectrum bands, green at the top and blue at the bottom [6]. The designer, he notes, used six colors where Newton divided the spectrum into seven to match the musical scale [6]."
   },
   {
    "id": "field",
@@ -221,15 +221,15 @@
   "Apple green began as a gray-green in a natural-history chart; the bright swatch is a 2010 survey color.",
   "A green apple in a medieval tale is merely sour; the poisoned apple is red."
  ],
- "words": 757,
+ "words": 756,
  "status": "checked",
  "checked": {
-  "by": "epic batch 16 writer self-check",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Baty critique of apple green attributed to an unnamed 19th-century medical author (context uncertain).",
-   "Maerz and Paul 1648 date comes from our library note, not read in the book.",
-   "Swatch (xkcd 2010) differs from the Werner color; stated."
+   "Reworded Apple logo sentence (10-word run shared with Batchelor).",
+   "Lede: 'began as' softened to 'appears in' (origin of apple green not established).",
+   "Checked Baty/Hunter, Werner 52, Pastoureau, Gage, 1648 library date: supported."
   ]
  }
 }

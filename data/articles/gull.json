@@ -1,0 +1,173 @@
+{
+ "slug": "gull",
+ "name": "Gull",
+ "hex": "#5D5A37",
+ "names": [
+  "Gull"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Gull is an old English word for a shade of grey, now shown as a grayish olive; the books say little about it, but one nineteenth-century color chart took several of its whites and greys from gull feathers.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "An old name for grey",
+   "body": "Paterson's dictionary glosses *gull* as an ancient word for a grey tone [1]. The Maerz and Paul *Dictionary of Color* of 1930 lists it on plate 38 and dates its first use to about 1350 [2]. Which gull the name first pointed to is undocumented in the books we hold, and so is who coined it [1]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch is not a gull's grey",
+   "body": "The swatch here is the Maerz and Paul color as the library carries it [2]. It sits closest to the ISCC-NBS block called grayish olive [2]. That is far darker and greener than the plumage of a gull, whose back the Werner chart reads as a pale grey [3]. The old word and the modern swatch have drifted apart.\n\nIts nearest named neighbors are [[beetle]], [[bronze-lustre]] and [[greenish-hunter-green]] [2]. Of the greys, [[grey]] is the parent word, and the browner [[olive-brown]] is nearer in hue."
+  },
+  {
+   "id": "werner",
+   "title": "Gulls on Werner's chart",
+   "body": "Gulls do appear in the color record, just not under this name. Werner's *Nomenclature of Colours*, in the Syme edition that Baty reproduces, picked its example for each color from birds, flowers and minerals [3]. The back of the black-headed gull stands for Pearl Grey, its breast for Snow White, and its head for Broccoli Brown [3][4][5]. The kittiwake supplies Greyish White and, at the junction of neck and back, Purplish White [3][6].\n\nThe chart treats the gull as a bird of whites and pale greys. Nothing in it points to the olive the word now shows on screen."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "As a painted color, this dark olive is common: it appears in 2,246 of 23,781 paintings in our archive, 9.44 per cent, as photographed [7]. The more cautious within-painting lens finds it in 1,345 [7]. Its peak is the 1700s, at 8.0 per cent of the 3,449 paintings from that century, 1.4 times the baseline of the same museums [7]. Most often it plays a hidden color, by lightness rank within the painting, in 31 per cent of those 1,345 [7].\n\nThe most devoted painter is [[painter:peter-snayers|Peter Snayers]], in 8 of his 16 works here, 6.9 times the baseline [7]. It travels with [[kronberg-s-green]] and [[courge-green]] more than chance would suggest [7]. These are photographs of aged, varnished paintings, so a color match is not a pigment test, and the name's earliest record in our sources (1930) is far later than the first match in the archive [7]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented in our books (presumably the seabird)",
+   "first_recorded": "c. 1350 (Maerz and Paul, 1930)",
+   "source": "Paterson, A Dictionary of Colour; Maerz and Paul"
+  },
+  "aka": [],
+  "siblings": [],
+  "parent": "grey",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2246,
+  "n_within_painting": 1345,
+  "pct_present": 9.44,
+  "century_peak": {
+   "century": "1700s",
+   "pct": 8.0,
+   "n": 276,
+   "lift": 1.4
+  },
+  "painters": [
+   [
+    "peter-snayers",
+    8,
+    16,
+    6.9
+   ]
+  ],
+  "role": "hidden, 31%",
+  "measured": {
+   "lch": [
+    37.7,
+    21.2,
+    102.9
+   ],
+   "iscc": "grayish olive",
+   "de": 3.6
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 203",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (Maerz and Paul 1930 plate 38 A 1; ISCC-NBS grayish olive, dE 3.6)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 41-55 (Werner's whites and greys)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 43, 54 (Snow White, Pearl Grey)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 254, 263 (Broccoli Brown)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 41, 45, 49 (Purplish White, Greyish White)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (data/graph/fieldnotes/g.json), 23,781 paintings, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Paterson's dictionary say gull names?",
+   "choices": [
+    "A very old name for a shade of grey",
+    "A pale yellow",
+    "A deep sea blue",
+    "A dull red"
+   ],
+   "answer": "A very old name for a shade of grey",
+   "kind": "pick"
+  },
+  {
+   "q": "On Werner's chart in the Syme edition, which bird's back stands for Pearl Grey?",
+   "choices": [
+    "The black-headed gull",
+    "The wood pigeon",
+    "The kestrel",
+    "The egret"
+   ],
+   "answer": "The black-headed gull",
+   "kind": "pick"
+  },
+  {
+   "q": "The ColorHub swatch for Gull is a pale, silvery grey.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Gull is an old word for grey, yet its modern swatch is a dark grayish olive.",
+  "Werner's color chart took its Pearl Grey from the backs of black-headed gulls."
+ ],
+ "words": 426,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "swatch described as dark grayish olive; ISCC-NBS block is grayish olive"
+  ]
+ }
+}

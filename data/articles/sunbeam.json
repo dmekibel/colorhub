@@ -1,0 +1,202 @@
+{
+ "slug": "sunbeam",
+ "name": "Sunbeam",
+ "hex": "#E0C270",
+ "names": [
+  "Sunbeam"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Sunbeam is a soft, dusty gold recorded as a color name in 1917, and the thing it names, a shaft of sunlight in hazy air, is one of the hardest effects in painting.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A color name with one source",
+   "body": "Only one dictionary in our library lists *sunbeam* as a color, Maerz and Paul's of 1930, which dates it to 1917 and puts it on plate 11, square K 5; ISCC-NBS 1955 cites it and calls the swatch a dark yellow [2]. Who coined it, and for which fabric or paint, is undocumented in the books we hold.\n\nPaterson's dictionary lists *sunbeam* only as the ray of light itself. The nearby entries *sunburn*, a color term he dates as early as 1590, and *sunflower*, a dark yellow, are marked as colors [1]."
+  },
+  {
+   "id": "beam",
+   "title": "What a sunbeam needs",
+   "body": "Gurney, a painter who wrote a book on light, says a visible sunbeam needs three conditions: a high screen of cloud, foliage or architecture pierced by a few openings; air filled with dust, vapor or smoke; and a view toward the sun [3]. The rays are in fact parallel and only seem to converge on the sun in perspective [3]. Looking away from the sun they nearly vanish, because droplets scatter most light forward at small angles [3]. The beam also changes the shadows of the forms beyond it even more than their lit sides [3].\n\nOn canvas, he paints a beam by brushing a light, semiopaque tone over a dry background, or by premixing one string of colors for the lit air and another for the dark forest [3]. Opaque white alone makes the color chalky, so the chroma may have to be restored with a glaze [3]. He advises using sunbeams sparingly, since they draw the eye [3]."
+  },
+  {
+   "id": "newton",
+   "title": "Newton's sunbeam",
+   "body": "The most famous sunbeam in color science is Newton's [4]. In 1672 he darkened a room, made a small hole in the window shutter and put a prism in the beam that came through, which divided the white light into colors [4]. Livingstone adds that he found a beam's color to be a permanent property of that light [4]."
+  },
+  {
+   "id": "swatch",
+   "title": "A flat tint, no glow",
+   "body": "The swatch, #E0C270, is a soft, slightly dusty gold with no glow in it [2]. Its nearest named neighbors are [[venetian-yellow]] (more vivid), [[reed-yellow]] (duller), [[popcorn]], [[ochre-yellow]] and [[brazen-yellow]], all within about 4 units [2]. The closest cut stone in our data is imperial or sherry [[gem:topaz|topaz]], about 8 units away [6]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 551 works, 2.3 per cent of the archive [5]. The six largest covers take up 65 to 81 per cent of the canvas, and they are grounds, not light: a Japanese fan album by Kanô Tsunenobu (1636), Kishi Ganku's [[painting:aic-92960|Bamboo]] (1801) and Indian paintings of about 1890 [5]. India has it in 73 of 721 works, 4.4 times the archive rate, and Kalighat paintings in 51 of 96 [5].\n\nInside a painting it is almost always among the lightest colors, in 97 per cent of cases, and it shares canvases with Khaki and Mustard far more than chance [5]. Among painters, [[painter:pierre-bonnard|Bonnard]] has it in 5 of 45 works and [[painter:joseph-mallord-william-turner|Turner]] in 3 of 14, small samples [5]. As always these are photographs of aged, varnished paintings; a color match is not a pigment test [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the sunbeam, a ray of sunlight (who coined the color name is undocumented)",
+   "first_recorded": "1917, per Maerz and Paul 1930 as cited in the library",
+   "source": "Maerz & Paul 1930, plate 11 K 5, cited by NBS Circular 553"
+  },
+  "aka": [],
+  "siblings": [
+   "reed-yellow",
+   "venetian-yellow",
+   "ochre-yellow"
+  ],
+  "parent": "yellow",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "sunglow",
+    "gloss": "a brighter, more orange yellow with a similar sunny name"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#E0C270",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 551,
+  "top_paintings": [
+   "met-829398",
+   "aic-92960",
+   "cma-162430"
+  ],
+  "painters": [
+   "Pierre Bonnard (5 of 45)",
+   "J. M. W. Turner (3 of 14)"
+  ],
+  "countries": [
+   "India 73 of 721, 4.4x"
+  ],
+  "measured": {
+   "lch": [
+    79.4,
+    44.9,
+    89.6
+   ],
+   "nearest": [
+    [
+     "Venetian Yellow",
+     2.5
+    ],
+    [
+     "Reed Yellow",
+     2.5
+    ],
+    [
+     "Popcorn",
+     3.0
+    ],
+    [
+     "Ochre Yellow",
+     3.7
+    ],
+    [
+     "Brazen Yellow",
+     4.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"sunbeam\", \"sunburn\", \"sunflower\", p. 383",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; Maerz & Paul 1930, ISCC-NBS 1955 as cited there) and Color Graph look-alikes, CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Gurney, Colour and Light, \"Sunbeams\", pp. 192-193",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Livingstone, Vision and Art, p. 10",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub Color Graph twins (data/graph), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does a painter need in the air to make a visible sunbeam, according to Gurney?",
+   "choices": [
+    "Dust, vapor or smoke, and a view toward the sun",
+    "Perfectly clean air and the sun behind you",
+    "A full moon",
+    "Rain on a clear day"
+   ],
+   "answer": "Dust, vapor or smoke, and a view toward the sun",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the rays of a sunbeam really converge on the sun.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "What did Newton put in a beam of sunlight in 1672?",
+   "choices": [
+    "A prism",
+    "A mirror",
+    "A lens of colored glass",
+    "A bowl of water"
+   ],
+   "answer": "A prism",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "A sunbeam is only visible because the air is full of dust or smoke: in clean air the light would pass unseen.",
+  "The rays in a sunbeam are parallel; they seem to meet at the sun only because of perspective.",
+  "Look for a sunbeam when you face the sun through a gap in clouds or leaves, never when you look away."
+ ],
+ "words": 542,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported claim that a real beam is lighter/more saturated and that painters layer it",
+   "Softened 'standard manual' overstatement for Gurney"
+  ]
+ }
+}

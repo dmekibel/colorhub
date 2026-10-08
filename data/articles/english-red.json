@@ -1,0 +1,225 @@
+{
+ "slug": "english-red",
+ "name": "English Red",
+ "hex": "#AB4B52",
+ "names": [
+  "English Red"
+ ],
+ "tier": "pigment",
+ "depth": "long",
+ "lede": "English red is the old trade name for a red iron-oxide pigment, made by heating yellow ochre or iron sulfate, and it never meant one exact recipe or one place of making.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A family of iron-oxide reds",
+   "body": "*English red* was a pigment name long before it was a color name. Paterson's dictionary defines it as red iron oxide, and gives [[indian-red]], [[pompeian-red]], [[venetian-red]] and Persian red as other names for it [5]. The Pigment Compendium is more cautious, citing Harley's study of British documents from the seventeenth to the nineteenth century, it says English red, light red and brown red were used for ochreous pigments whose exact composition is uncertain [2][3]. The name covers a family of reds, not one fixed recipe."
+  },
+  {
+   "id": "material",
+   "title": "Heat turns yellow into red",
+   "body": "Heating turns yellow ochre red, and most of this family was made that way. Finlay describes the process in northern Australia, where Tiwi painters cook yellow ochre to make their ordinary reds [1]. He notes that in Europe calcining was so common that some paints carry two names, as sienna and burnt sienna do [1]. Books give the same earth a second life as [[sienna]] and its burnt form.\n\nFor English red, the Pigment Compendium quotes de Massoul: yellow ochre from Berry in France was shipped to Holland, calcined there and sold as English red [2]. Finlay tells the same trade and puts it in the eighteenth century, with Dutch paint-makers doing the heating [1]. On that account the name described the market, not the place of making."
+  },
+  {
+   "id": "factory",
+   "title": "A second recipe",
+   "body": "A different account makes English red a factory product [2]. Watin wrote in 1785 that English brown red was made at Deptford, seven miles from London [2]. The Compendium reads him closely and concludes that this was no ochre but a synthetic iron oxide, made by roasting iron sulfate, a by-product of manufacturing sulfuric acid [2]. Tingry in 1804 likewise describes it as the result of decomposing iron sulfates, and Watin adds that it went mainly into distemper and oil paint [2][3].\n\nThe sources split on this. Merrifield in 1846 took the Italian *rosso d'Inghilterra*, *bruno d'Inghilterra* and the French *rouge violet* as one product, and cites Pozzo (1642-1709) calling a related Italian term \"of the nature of vitriol\", which points to manufacture [2]. Merrifield also equated the same terms with the natural reds *pavonazzo* and *sinoper*, so the evidence runs both ways [2]. Books disagree, then, on whether English red was a burnt earth or a factory product; both may be true for different makers and decades [2][3].\n\nChurch, writing in 1901, describes the same drift for Venetian red: first a native hematite, later the name of an artificial oxide made by calcining green vitriol [3]."
+  },
+  {
+   "id": "trade",
+   "title": "In the colorman's lists",
+   "body": "By the nineteenth century the name sat inside long lists of red earths. Field in 1835 listed Indian red, light red, Venetian red, scarlet ochre and Spanish red under red ochre, and Salter in 1869 added English red, Persian red, Prussian red, brown red and English vermilion, among others [3]. Salter also gave English red, Prussian red and scarlet ochre as equivalent names, and said Spanish red differed little from them [3]. Heaton still listed English red as a current term in 1928, despite what the Compendium calls evident confusion [2].\n\nNatural-history colorists wanted names that stayed put. Schäffer's 1769 color system lists English red, which he also calls brown red, as the eighth and last of his red pigments, after minium, cochineal, cinnabar, carmine, kugellack, Brazil red and Florentine lake [4]. His brick red, number 76, is minium, lead white, orpiment and English red mixed together [4]. For a warm brick color of your own, [[brick-red]] is the neighbor to look at."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch is not the pigment",
+   "body": "The swatch is the library's English Red, #AB4B52, a muted, slightly rosy red [6]. It comes from Ridgway's 1912 plate and the ISCC-NBS system of 1955, where it sits 1.4 units from the \"moderate red\" block; the library's notes also give Maerz and Paul a first record near 1750 [6]. Ridgway's plate scan gives a more orange #BD512B, and the plate is aged, so both are approximate [6]. Its nearest named look-alikes are [[acajou-red]] and [[pompeian-red]], within 4.5 units [6].\n\nBecause the makers varied, no single hex can be the pigment [2][3]. Calcined ochre, roasted sulfate and fired earth would give different reds under one name."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 67 works [7]. The largest covers are not European oils: an Indian folio of about 1720 is 42 per cent this color, then Matisse's [[painting:smk-KMSr86|Odalisque with a Screen]] (1923) at 32 per cent [7]. Andrea del Castagno's [[painting:nga-19|Portrait of a Man]] (about 1450) is a quarter this color, and Bonnard's [[painting:commons-Q17492885|The Red Blouse]] (1925) a fifth [7].\n\nIndia stands out: 25 of 721 Indian paintings carry it, 12 times the archive rate, and Kalighat paintings carry it in 12 of 96 works [7]. [[painter:henri-matisse|Matisse]] has it in 3 of his 50 paintings here [7]. By decade it peaks in the 1890s, in 13 of 1,173 paintings, 3.9 times the expected rate [7]. Inside a painting it is mostly a mid-tone, 60 per cent of the time, and its most frequent companion is Brick, shared in 43 paintings [7].\n\nIn printed English the phrase *English red* peaks near 1897 in the smoothed Google Books series, but the phrase also names other things, so treat that as a rough guide [8]. As always these are photographs of aged, varnished paintings; a color match is not a pigment test [7]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the English market for the pigment; on one account the ochre was French and calcined in Holland",
+   "first_recorded": "Schäffer's 1769 pigment lists; Maerz and Paul give about 1750 per the library notes",
+   "source": "Pigment Compendium, \"English red\"; Baty, Nature's Palette, p. 18"
+  },
+  "aka": [
+   "brown red",
+   "English brown red",
+   "rosso d'Inghilterra"
+  ],
+  "siblings": [
+   "indian-red",
+   "venetian-red",
+   "light-red",
+   "brown-red",
+   "pompeian-red"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "pompeian-red",
+    "gloss": "almost the same screen color, named for a city rather than a trade"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "it",
+    "name": "rosso d'Inghilterra, bruno d'Inghilterra"
+   },
+   {
+    "lang": "fr",
+    "name": "rouge violet (equated by Merrifield)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#AB4B52",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 67,
+  "top_paintings": [
+   "smk-KMSr86",
+   "nga-19",
+   "commons-Q17492885"
+  ],
+  "painters": [
+   "Henri Matisse (3 of 50)"
+  ],
+  "countries": [
+   "India 25 of 721, 12.3x"
+  ],
+  "ngram": {
+   "peak": 1897
+  },
+  "measured": {
+   "lch": [
+    44.7,
+    42.9,
+    21.1
+   ],
+   "nearest": [
+    [
+     "Acajou Red",
+     3.0
+    ],
+    [
+     "Pompeian Red",
+     4.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 10",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"English red\", p. 163",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, entries \"Light red\", \"Red ochre\", \"Spanish red\", \"Venetian red\", pp. 214, 251, 334, 339, 396",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 18 (on Schäffer, 1769)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"English red\", p. 159",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930 as cited there) and Color Graph look-alikes, CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "According to Finlay and the Pigment Compendium, how was much English red made?",
+   "choices": [
+    "By heating yellow ochre",
+    "By grinding red clay dug in England",
+    "By boiling madder roots",
+    "By mixing vermilion with umber"
+   ],
+   "answer": "By heating yellow ochre",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: English red was always a natural earth dug in England.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Why can no single hex stand for English red?",
+   "choices": [
+    "Its makers used different materials and firings",
+    "Only one firm ever sold it",
+    "It faded to nothing",
+    "It was banned in Britain"
+   ],
+   "answer": "Its makers used different materials and firings",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Heat a yellow ochre and it turns red: Dutch makers bought French ochre, fired it, and sold it as English red.",
+  "English red may be neither English nor an earth: one eighteenth-century account has it made from the leftovers of sulfuric acid.",
+  "In our archive this red is 12 times more common in Indian paintings than in the archive as a whole, as photographed."
+ ],
+ "words": 900,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported 'Wikipedia' attribution in swatch sentence; reworded"
+  ]
+ }
+}

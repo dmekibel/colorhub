@@ -1,0 +1,473 @@
+{
+ "slug": "yellow",
+ "name": "Yellow",
+ "hex": "#F2C81F",
+ "names": [
+  "Yellow"
+ ],
+ "tier": "pigment",
+ "depth": "epic",
+ "lede": "Yellow is the color of ochre, saffron, lemons and egg yolk, the brightest hue the eye sees and, in poll after poll, the least loved: a color that spent centuries in the shadow of gold and the company of traitors.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A word without a Latin ancestor",
+   "body": "English *yellow* comes from Old English *ġeolu*, from a Proto-Germanic *gelwaz* and an older root that covered both green and yellow [1]. Its cousins include Dutch *geel* and German *gelb*, and further back Latin *helvus*, dull yellow, and Greek *khlōros*, pale green [1]. Ball points out that Latin *flavus*, yellow, is related to the words *blue*, *bleu* and *blau* [31].\n\nLatin itself never had one basic word for yellow, as it had *ruber* for red [5]. It had a family of farm-born yellows instead: *croceus* from saffron, *luteus* from the dye plant weld, *melleus* from honey, *vitellus* from egg yolk and *flavus* for ripening wheat and blond hair [3]. The gap was filled from outside. Latin borrowed the Germanic word as *galbinus*, at first a sneer for effeminate men's clothes, and it became French *jaune* and Italian *giallo* [5].\n\nThe swatch here is a warm, slightly golden yellow, close to the dictionaries' vivid yellow [29]. Its nearest named neighbors are [[sunglow]], [[gold]] and [[orpiment]], all within about four and a half units [29]. The screen's pure yellow, #FFFF00, is a colder, greener color that our library files as [[bright-yellow]] [29]."
+  },
+  {
+   "id": "material",
+   "title": "Earth, arsenic, flowers and resin",
+   "body": "The oldest yellow is earth. Traces of yellow [[ochre]] go back some 45,000 to 40,000 years, later and rarer than red ochre, and cave painters already knew that heating yellow ochre turns it red [3][32]. Archaeologists found mines at Bomvu Ridge in Swaziland used at least 40,000 years ago for red and yellow pigment [32]. Ochre is non-toxic and does not fade, which is why it lasted [3].\n\nThe bright yellows were harder to come by. [[orpiment]] is a natural arsenic sulphide whose Latin name, *auripigmentum*, means gold paint; Pliny says Caligula tried to extract gold from it, in vain [13][19]. Egyptian painters used it to give their gods yellow skin [4]. Cennino Cennini warned painters not to let it touch their mouths [13].\n\nFor dyers, saffron was the luxury yellow and weld the workhorse. Saffron is only the three stigmas of a purple crocus, and about 170,000 flowers make one kilo [17]. Weld, a tall plant whose every part holds the yellow colorant luteolin, was the main yellow dye of western Europe from the late Neolithic to the mid-nineteenth century [9]. The so-called saffron robes of Buddhist monks were usually dyed with cheaper turmeric or jackfruit heartwood [17].\n\nPainters had their own set. Lead-tin yellow was the key yellow of European painting from about 1300 to about 1750, then vanished so completely that no one knew it had existed until a Munich researcher re-created it around 1940 [19]. Naples yellow, a lead antimonate, was already made in ancient Egypt, and its name first appears around 1693 to 1700 [20]. Gamboge, a resin from Garcinia trees named after Cambodia, came to Europe with the East India Company from about 1615 [14]. In 1908 the physicist Jean Perrin used gamboge particles to demonstrate Brownian motion, evidence for atoms [14]."
+  },
+  {
+   "id": "history",
+   "title": "In the shadow of gold",
+   "body": "Much of yellow's history in the West is really the history of gold [2]. In ancient Egypt gold was held to be the flesh of the sun and the gods [4]. Since the seventeenth century most dictionaries have defined yellow as the color of gold [4]. Pastoureau adds that the sun's true color is white, and that it looks yellow only because the air scatters its shorter wavelengths [4].\n\nIn Rome yellow belonged to women [5]. At Republican weddings the bride wore yellow, the color of joy and fertility, while men's togas had to be white [5]. In 62 BC Publius Clodius slipped into the women-only rites of the Bona Dea disguised as a woman, and Cicero made much of his saffron-yellow gown [5]. A man in yellow, in Roman eyes, was a man out of place [5].\n\nIn the early Middle Ages yellow almost disappears from the record, its place taken by gold [2]. The Roman liturgical colors set down around 1195 by the future Innocent III have no yellow at all [6]. Heraldry gave it a second life from the twelfth century, as one of six basic colors, named *or*; yellow and white formed a group whose members could never touch each other on a shield [6]. Late medieval heralds ranked it first when they meant gold and only fourth when they meant ordinary yellow [6]."
+  },
+  {
+   "id": "stigma",
+   "title": "The color of treachery",
+   "body": "From the twelfth century yellow drifted toward lying and betrayal. When the seven deadly sins received colors in the thirteenth century, envy was yellow [7]. Judas began to appear in a yellow robe in twelfth-century miniatures, though not every yellow robe in those books meant a traitor [6]. In Giotto's *Betrayal of Christ* of about 1305, Judas's yellow cloak almost hides Christ [36]. Pastoureau offers, as a hypothesis only, a pun behind the link: Latin *fel*, bile, and Old French *felon*, a rebellious vassal [7].\n\nThe stigma had real targets. From the late thirteenth century the houses of traitors, heretics and forgers were painted yellow, among them the Paris mansion of the Constable of Bourbon in 1523 [7]. Jan Hus went to the stake at Constance on 6 July 1415 in a long yellow robe, although pictures of the scene vary its color [7].\n\nBooks disagree on how the yellow badge began. Finlay writes that in 1215 Innocent III, for the Fourth Lateran Council, decreed that Jews wear yellow badges [18]. Pastoureau reads the council's canon as requiring only a distinguishing mark, with form and color left to local rulers, and calls Saint Louis's 1269 yellow wheel one practice among many [7]. Marks were often yellow but could be red, white, green or black [7]. The Nazi decrees revived the color deliberately: the yellow star was imposed in the Reich from 1 September 1941 and in occupied France from June 1942 [11]."
+  },
+  {
+   "id": "china",
+   "title": "Imperial yellow",
+   "body": "East Asia read yellow the other way round [12]. In Chinese five-element thought yellow stood for earth and the center, and a law of 618 forbade commoners and officials to wear reddish yellow [21]. Under the Qing only the imperial family could wear yellow silk, and the palaces had yellow-glazed roof tiles [9][21]. Imperial yellow silk was dyed with the root of Chinese foxglove, *Rehmannia glutinosa* [21]. Ball notes the contrast: in China yellow was the emperor's color, while in the West it was safer to call it gold [12]."
+  },
+  {
+   "id": "modern",
+   "title": "Chrome and cadmium",
+   "body": "The nineteenth century gave painters strong, cheap yellows for the first time. Louis-Nicolas Vauquelin found chromium in 1797 in a red Siberian mineral, and chrome yellow, a lead chromate, was in use by 1809 [15]. Friedrich Stromeyer discovered cadmium in 1817, and its sulphide gave a reliable yellow that was in French oil paint by about 1829 [15]. Cadmium cost four to five times as much as chrome yellow [10]. Monet used cadmium yellow from 1873, and Turner took up chrome yellow within a few years of its arrival [15].\n\nThe cheap yellow did not last. Van Gogh's chrome yellows have turned brown, beige or greenish, and Ball says his sunflower paintings look drab partly for that reason [10][16]. The lawn of Seurat's *[[art:aic-27992|A Sunday on La Grande Jatte]]* is spotted brown where its chrome yellow deteriorated [16]. Older yellow lakes failed in a different way: glazed over blue to make green, they faded and left painted leaves blue, as in Jan van Huysum's flowers of 1736 [16]."
+  },
+  {
+   "id": "art",
+   "title": "Yellow in painting",
+   "body": "Pure yellow was rare in European painting from about the 1560s until Impressionism; Pastoureau finds it drifting toward ochre, straw, beige or gold [8]. He names Vermeer, Hoogstraten and de Hooch as the great Dutch painters of yellow [8]. Proust's famous little patch of yellow wall in Vermeer's *[[art:commons-Q523974|View of Delft]]* is in fact a small roof, and today it looks more pink than yellow [8].\n\nLater painters used yellow as a statement. Gauguin told Paul Sérusier to paint a tree he saw as yellow with his best yellow, and the small panel that resulted, *The Talisman*, launched the Nabis [33]. Van Gogh wrote from the south of France of a sun he could only describe in sulphur, lemon and gold, while Kandinsky said bright yellow wounds the eye like a trumpet [10]. Delacroix is said to have learned how to paint a yellow drapery by watching a canary-yellow Paris cab throw a violet shadow in the sun [33]."
+  },
+  {
+   "id": "science",
+   "title": "Seeing yellow",
+   "body": "Yellow is made in the eye as much as in the world. Red light near 620 nanometres mixed with green light near 520 looks yellow, although no yellow wavelength is present [12]. The long-wave cone is often called the red cone, but it actually peaks in yellow-green [22]. Vision is most discriminating near 580 to 585 nanometres, where tiny shifts are visible, while deep blues and deep reds blur together; Eckstut suggests this is why such a narrow band earned its own name [22].\n\nYellow also reaches its strongest color only when it is light. The most chromatic yellows are pale in value, while the most chromatic blues are dark [23]. Darken a yellow and it does not stay yellow: a low-brightness yellow or orange is what we call [[brown]] [12]. Black text on a yellow ground is among the most legible pairings, which is why warning signs use it [26][11]."
+  },
+  {
+   "id": "culture",
+   "title": "Jerseys, balls and cards",
+   "body": "Modern yellow is the color of being seen. The Tour de France introduced the yellow jersey on 19 July 1919, echoing the yellow newsprint of the sponsoring paper *L'Auto* [11]. Tennis balls turned fluorescent yellow in the 1970s because white balls blurred against white lines on early color television [11]. The yellow card for a warning and the red card for expulsion were first used at the 1970 football World Cup [11].\n\nOld meanings survive alongside. American *yellow journalism* takes its name from the Yellow Kid cartoon of 1895 [25]. In 1890s Britain yellow-covered French novels stood for scandal, and when Oscar Wilde was arrested in 1895, a newspaper headline put a Yellow Book under his arm [30]. Color-preference polls in Europe since the 1880s have put yellow last, chosen by fewer than one person in twenty [11]. Pastoureau suggests that Europe's yellow post boxes descend from the dynastic color of the Thurn and Taxis family, who ran the post from the fifteenth century, but he offers it as a doubt about the usual visibility explanation rather than a proven origin [11]."
+  },
+  {
+   "id": "myths",
+   "title": "Myths and loose ends",
+   "body": "Indian yellow carries the best-known story. In 1883 T. N. Mukharji reported that it was made at Mirzapur from the urine of cows fed only mango leaves [14]. Ball adds that the practice was denounced and made illegal by 1890 [14]. Finlay searched libraries in London and Calcutta and found no record of any such ban, and St Clair calls the cow story plausible but unverified; the books disagree, and the ban, at least, is unproven [17].\n\nThe school rule that red, yellow and blue are the true primaries is a teaching convention, not a law of nature. The best subtractive primaries for paint and print are cyan, magenta and yellow, and no three primaries can mix every color [27]. Yellow is the one color that survives the correction. A related claim, that yellow and blue dots in pointillist painting fuse in the eye into a brighter green, is disputed: Livingstone found such dots merge to grey [24]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This vivid yellow is one of the rarest colors in our archive. Of 23,781 paintings, only 19 carry a screen color within six units of it over at least five per cent of the canvas [28]. Where it appears it is nearly always the lightest note, the highlight, in 95 per cent of cases [28]. No painting before 1500 passes the threshold, and the 1900s carry it at three times the archive rate, 4 of 1,674 works [28].\n\nThe largest areas are in George Dawe's portrait of Kirill Kazachkovsky of 1823, about half the canvas, Berthe Morisot's *[[art:commons-Q17491182|In the Wheat]]* of 1875, and Paul Sérusier's *[[art:nga-116570|Farmhouse at Le Pouldu]]* of 1890 [28]. Indian paintings carry it at ten times the archive rate, 6 of 721 [28]. The earliest dated match is an anonymous *[[art:nga-46029|Madonna and Child with the Infant Saint John]]* of 1510 [28].\n\nThe rarity fits the history: pure yellow was scarce in European painting for three centuries, and many bright yellows have since browned or faded [8][16]. These are photographs of aged, varnished paintings, and a color match is not a pigment test, so a match says nothing about whether the yellow is ochre, lead-tin yellow or chrome [28]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Old English ġeolu, from a root covering yellow and green",
+   "first_recorded": "Old English ġeolu, ġeolwe",
+   "source": "Wiktionary (yellow)"
+  },
+  "aka": [
+   "Or (heraldry, with gold)",
+   "Ochre, orpiment, lead-tin yellow, Naples yellow, gamboge, chrome yellow, cadmium yellow (pigments)",
+   "Saffron, weld (dyes)"
+  ],
+  "siblings": [
+   "gold",
+   "orpiment",
+   "sunglow",
+   "saffron-yellow"
+  ],
+  "parent": null,
+  "children": [
+   "lemon-yellow",
+   "golden-yellow",
+   "canary",
+   "mustard-yellow",
+   "sulphur-yellow"
+  ],
+  "disambiguation": [
+   {
+    "slug": "bright-yellow",
+    "gloss": "the pure screen yellow #FFFF00, colder and greener than this swatch"
+   },
+   {
+    "slug": "indian-yellow",
+    "gloss": "a pigment name for a deep golden yellow, not this vivid yellow"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "la",
+    "name": "flavus, luteus, croceus, galbinus"
+   },
+   {
+    "lang": "fr",
+    "name": "jaune"
+   },
+   {
+    "lang": "de",
+    "name": "gelb"
+   },
+   {
+    "lang": "zh",
+    "name": "huang (黄)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#F2C81F",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 19,
+  "top_paintings": [
+   "commons-Q61743109",
+   "commons-Q21741400",
+   "nga-42466",
+   "commons-Q17491182",
+   "rijks-20026517",
+   "nga-116570"
+  ],
+  "top_country": {
+   "name": "India",
+   "hits": 6,
+   "n": 721,
+   "lift": 10.42
+  },
+  "century": {
+   "key": 1900,
+   "hits": 4,
+   "n": 1674,
+   "lift": 2.99
+  },
+  "first_dated": {
+   "id": "nga-46029",
+   "painter": null,
+   "year": 1510
+  },
+  "role": {
+   "highlight": 0.95,
+   "mid": 0.05
+  },
+  "measured": {
+   "lch": [
+    82.0,
+    79.0,
+    89.6
+   ],
+   "iscc": "vivid yellow",
+   "nearest": [
+    [
+     "Sunglow",
+     2.9
+    ],
+    [
+     "Gold",
+     3.9
+    ],
+    [
+     "Orpiment",
+     4.4
+    ]
+   ],
+   "css_yellow_is": "Bright Yellow (#FFFF00)"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "Wiktionary, \"yellow\" (etymology)",
+   "loc_kind": null,
+   "url": "https://en.wiktionary.org/wiki/yellow"
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, ch. 7 (introduction)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, chs. 8-9",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, chs. 10-12",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, chs. 13-16",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, chs. 19-21",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, chs. 24-26",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, ch. 28",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, chs. 31-32",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, ch. 33",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, chs. 35-36",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 2",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 4",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 6",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 7",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 19",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 6 (\"Yellow\"); St Clair, The Secret Lives of Colour, \"Indian yellow\"",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 18,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 5 (\"Orange\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 19,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Lead-tin yellow\" and \"Orpiment\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 20,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Naples yellow\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 21,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Imperial yellow\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 22,
+   "kind": "book",
+   "cite": "Eckstut, What Is Color?, ch. 20",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 23,
+   "kind": "book",
+   "cite": "Westland et al., Universal Principles of Color, ch. 23",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 24,
+   "kind": "book",
+   "cite": "Livingstone, Vision and Art, ch. 17",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 25,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, part 3, ch. 13",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 26,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, part 4, ch. 19",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 27,
+   "kind": "book",
+   "cite": "Westland et al., Universal Principles of Color, ch. 82",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 28,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 29,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/names.json, data/library.json, ISCC-NBS block), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 30,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Yellow\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 31,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 9",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 32,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 1 (\"Ochre\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 33,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 8",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 36,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 5",
+   "loc_kind": "epub-chapter",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why do many of Van Gogh's yellows look duller today than when he painted them?",
+   "choices": [
+    "Cheap chrome yellow has turned brown, beige or greenish with age",
+    "He mixed every yellow with black",
+    "Museums dim their lights",
+    "He painted only with ochre"
+   ],
+   "answer": "Cheap chrome yellow has turned brown, beige or greenish with age",
+   "kind": "pick"
+  },
+  {
+   "q": "Red light and green light are mixed on a screen. What color do you see?",
+   "choices": [
+    "Yellow",
+    "Brown",
+    "Grey",
+    "Purple"
+   ],
+   "answer": "Yellow",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: there is a documented colonial law banning Indian yellow for cruelty to cows.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Mix red light with green light and you see yellow, though no yellow wavelength is there at all.",
+  "Saffron is three stigmas of a crocus: about 170,000 flowers make one kilo.",
+  "Look at a yellow you darken: it does not stay yellow but turns brown, which is why the most vivid yellows are always light."
+ ],
+ "words": 2026,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Heraldry: removed 'metals' framing not in Pastoureau; now six colors, yellow and white as one group (rule verified).",
+   "Wilde: reworded to what St Clair reports (a Westminster Gazette headline), not a claimed fact about the book.",
+   "Cards: Pastoureau says both yellow and red cards were introduced in 1970; reworded.",
+   "Verified: Hus 6 July 1415, heraldic ranking first/fourth, Giotto Judas cloak, Kandinsky trumpet, Bomvu Ridge, Chinese Indian-yellow hedge, tennis balls and TV, Clodius, weld seeds; all supported."
+  ]
+ }
+}

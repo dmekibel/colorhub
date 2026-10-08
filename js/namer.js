@@ -2,7 +2,7 @@
 // Name any color (#/studio/namer). Pick a color any way you like and the app names it while you drag: the
 // nearest of about 1,000 names, big, with its % match; the next four, each with how yours differs from it; or
 // "between X and Y" when it sits between two. Five ways to pick, switchable as tabs:
-//   Ring        js/picker.js: hue ring, saturation-brightness square, HSB / RGB / LCh sliders, harmony marks on the ring
+//   Ring        the Gamut wheel's OKLab disc (js/studio.js) plus a Lightness slider; harmonies live on the Gamut wheel
 //   Perceptual  OKLCH: a lightness x chroma plane and a hue slider, so equal steps look equal
 //   Names       a hue x lightness field with the names' own positions marked; the pick snaps softly to a name as you pass
 //   Type        hex or RGB typed in, plus the same color written five ways
@@ -11,10 +11,9 @@
 // Everything here is prefixed nmr; the naming is nameOf() only, so no word is special.
 
 const NMR_TABS = [["ring", "Ring"], ["plane", "Perceptual"], ["field", "Names"], ["type", "Type"], ["eye", "Eyedrop"]];
-const NMR_SCHEMES = [["off", "Off"], ["complementary", "Complement"], ["analogous", "Analogous"], ["triadic", "Triad"], ["square", "Square"]];
 const NMR_ICON = icon("pipette", 22);   // a pipette (js/core.js ICON_PATHS)
 const NMR_CMAX = .34;   // the strongest chroma any sRGB color reaches in OKLCH is a little over .32
-let NMR_LAST = { hex: null, tab: "ring", scheme: "off" };
+let NMR_LAST = { hex: null, tab: "ring" };
 
 const nmrHsl = hex => {
   const [r, g, b] = rgb(hex).map(v => v / 255), mx = Math.max(r, g, b), mn = Math.min(r, g, b), l = (mx + mn) / 2, d = mx - mn;
@@ -42,11 +41,11 @@ const nmrPaste = t => {   // "#abc", "#aabbcc", "rgb(12, 99, 180)", "12 99 180"
 LAB.namer = (hex, push = true) => {
   hex = (hex && /^#[0-9a-f]{6}$/i.test(hex) ? hex : NMR_LAST.hex || "#5F8C8A").toUpperCase();
   if (push && XSTACK[XSTACK.length - 1] !== "namer") XSTACK.push("namer");
-  let cur = hex, tab = NMR_LAST.tab, scheme = NMR_LAST.scheme, raf = 0, urlT = 0, stream = null;
+  let cur = hex, tab = NMR_LAST.tab, raf = 0, urlT = 0, stream = null;
   // One screen, no scrolling for the thing the page is for (David, 2026-10-08: "doesn't fit on the screen"): a
   // 100dvh stage holds the name (on its own color), the four next names as a swipeable row, the actions, the
   // tabs and the picker, which takes whatever height is left. Every band above the picker has a fixed height,
-  // so the picker never resizes under the finger. Harmony names, the tray and the fine print sit below the fold.
+  // so the picker never resizes under the finger. The tray and the fine print sit below the fold.
   const el = show(`
     <div class="nmr-stage">
       <div class="nmr-top" id="top">
@@ -59,7 +58,6 @@ LAB.namer = (hex, push = true) => {
       <div class="nmr-pane" id="pane"></div>
     </div>
     <div class="nmr-below">
-      <div class="nmr-harm" id="harm"></div>
       <div class="nmr-tray" id="tray"></div>
       <p class="fine">Names are the nearest of about 1,000, measured with CIEDE2000, and the match is how close your color is to the name's. The perceptual picker is OKLCH (Björn Ottosson, 2020). Screens, cameras and light shift colors, so a camera reading is a good guess, not a measurement.</p>
     </div>
@@ -113,12 +111,29 @@ LAB.namer = (hex, push = true) => {
   // ---------- the five pickers ----------
   const panes = {
     ring() {
-      $("#pane").innerHTML = `<div class="nmr-schemes" id="sch">${NMR_SCHEMES.map(([k, t]) => `<button data-sch="${k}" class="${k === scheme ? "on" : ""}">${t}</button>`).join("")}</div><div id="ringHost"></div>`;
-      const picker = colorPicker($("#ringHost"), { hex: cur, onChange: h => { if (h !== cur) setColor(h, "ring"); }, marks: h => scheme === "off" ? [] : schemeColors(h, scheme) });
-      const harm = () => { $("#harm").innerHTML = scheme === "off" ? "" : `<div class="sec-head"><b>In harmony</b></div>` + schemeColors(cur, scheme).slice(1).map(h => `<button class="nmr-hchip" data-swatch="${h}"><i style="--c:${h}"></i><b>${esc(nameOf(h).text)}</b></button>`).join(""); };
-      $("#sch").onclick = e => { const b = e.target.closest("[data-sch]"); if (!b) return; scheme = NMR_LAST.scheme = b.dataset.sch; $("#sch").querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b)); picker.set(cur); harm(); buzz(4); };
-      harm();
-      return { render: harm, set: h => picker.set(h) };
+      // the Gamut wheel's own OKLab disc (js/studio.js: wheelCanvas / diskColor), so there is one wheel in the app.
+      // The disc sets hue and strength; the Lightness slider moves the pick up and down the disc's colors.
+      $("#pane").innerHTML = `<div class="nmr-disc" id="disc"><div class="nmr-disc-in" id="discIn"><i class="nmr-knob" id="dk"></i></div></div>
+        <label class="nmr-slide"><span>Lightness</span><input type="range" id="dl" min="4" max="97" step="1" aria-label="Lightness"></label>`;
+      const host = $("#disc"), inner = $("#discIn"), knob = $("#dk"), sl = $("#dl");
+      let [L0, C0, h0] = nmrOk(cur), size = 0, kx = 0, ky = 0;
+      const cuspC = hDeg => { const cs = cusps(), f = (((hDeg % 360) + 360) % 360) / 2, i = Math.floor(f), t = f - i; return cs[i % 180][1] + (cs[(i + 1) % 180][1] - cs[i % 180][1]) * t; };
+      const sync = (L, C, hh) => { const r = clamp(C / Math.max(.02, cuspC(hh)), 0, 1); kx = r * Math.cos(hh * Math.PI / 180); ky = r * Math.sin(hh * Math.PI / 180); sl.value = Math.round(L * 100); place(); };
+      const place = () => { knob.style.left = (kx + 1) / 2 * 100 + "%"; knob.style.top = (1 - ky) / 2 * 100 + "%"; knob.style.background = cur; };
+      const build = () => {
+        const w = Math.floor(Math.min(host.clientWidth, host.clientHeight, 400)); if (w < 60 || w === size) return;
+        size = w; inner.style.width = inner.style.height = w + "px";
+        inner.querySelector("canvas")?.remove(); const cv = wheelCanvas(w); cv.className = "nmr-disc-cv"; inner.prepend(cv);
+      };
+      const apply = () => {   // the pick = the disc's hue and strength at the knob, at the slider's lightness
+        const [, Cb, hb] = nmrOk(diskColor(kx, ky));
+        const hex = nmrHexAt(+sl.value / 100, Cb, hb); cur = hex.toUpperCase(); place(); setColor(hex, "ring");
+      };
+      const mv = e => { const r = inner.getBoundingClientRect(); let x = ((e.clientX - r.left) / r.width) * 2 - 1, y = 1 - ((e.clientY - r.top) / r.height) * 2; const m = Math.hypot(x, y); if (m > 1) { x /= m; y /= m; } kx = x; ky = y; apply(); };
+      inner.addEventListener("pointerdown", e => { inner.setPointerCapture(e.pointerId); mv(e); inner.onpointermove = mv; inner.onpointerup = inner.onpointercancel = () => { inner.onpointermove = null; buzz(4); }; });
+      sl.oninput = apply;
+      requestAnimationFrame(() => { if (!host.isConnected) return; build(); sync(L0, C0, h0); });
+      return { render() {}, set: h => { [L0, C0, h0] = nmrOk(h); sync(L0, C0, h0); } };
     },
     plane() {
       $("#pane").innerHTML = `<div class="nmr-plane"><canvas id="pl" aria-label="Lightness and chroma"></canvas><i class="nmr-knob" id="plk"></i></div>
@@ -234,7 +249,7 @@ LAB.namer = (hex, push = true) => {
     },
   };
   function openTab(k, quiet) {
-    stopCam(); $("#harm").innerHTML = "";
+    stopCam();
     tab = NMR_LAST.tab = k;
     el.querySelectorAll("#tabs button").forEach(b => { const on = b.dataset.tab === k; b.classList.toggle("on", on); b.setAttribute("aria-selected", on); });
     paneApi = panes[k]();

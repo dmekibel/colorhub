@@ -22,7 +22,7 @@
   {
    "id": "process",
    "title": "How much dye, and how much work",
-   "body": "Each snail gave a drop. Garfield says the animals were crushed in autumn and winter, salted for three days and then boiled for ten, and that the dyeing varied from port to port, with water or even honey added to change the shade [6]. A dyer could also combine the fluids of two species: Ball reports that the shade the Romans prized came from mixing them, because the *Murex* extract alone was bright and the Romans wanted a color tinged with black [1].\n\nBooks disagree on how many snails a given amount of dye cost, and they use different units. Ball gives about 250,000 shellfish for an ounce of dye [1]. Paterson says it took 60,000 to make half a pint [4]. Gurney, citing the chemist Friedlander's work, gives 12,000 snails for 1.4 grams of pure dye [9]. The three figures cannot be reconciled without knowing what each author meant by dye, so the safe statement is the common one: tens of thousands of animals for a small quantity.\n\nThe smell was part of the cost. Ball says the Phoenician dyers were shunned by polite society, that Athens pushed its dye shops to the edge of the city, and that one story blames their use of ammonia from stale urine [1]. Finlay, standing in a modern dye room, says he understood why Tyre had put up with the odor [2]. The shell mounds of the ancient workshops still litter the eastern Mediterranean shore, by Ball's account [1]."
+   "body": "Each snail gave a drop. Garfield says the animals were crushed in autumn and winter, salted for three days and then boiled for ten, and that the dyeing varied from port to port, with water or even honey added to change the shade [6]. A dyer could also combine the fluids of two species: Ball reports that the shade the Romans prized came from mixing them, because the *Murex* extract alone was bright and the Romans wanted a color tinged with black [1].\n\nBooks disagree on how many snails a given amount of dye cost, and they use different units. Ball gives about 250,000 shellfish for an ounce of dye [1]. Paterson says it took 60,000 to make half a pint [4]. Gurney, citing the chemist Friedlander's work, gives 12,000 snails for 1.4 grams of pure dye [9]. The three figures cannot be reconciled without knowing what each author meant by dye, so the safe statement is the common one: tens of thousands of animals for a small quantity.\n\nThe smell was part of the cost. Ball says the Phoenician dyers were shunned by polite society, that Athens pushed its dye shops to the edge of the city, and that by one story they used ammonia from stale urine [1]. Finlay, standing in a modern dye room, says he understood why Tyre had put up with the odor [2]. The shell mounds of the ancient workshops still litter the eastern Mediterranean shore, according to Coles and St Clair [10][8]."
   },
   {
    "id": "price",
@@ -269,16 +269,14 @@
   "The same snails could give a vivid purple or a sky blue, depending on how the dye was handled.",
   "Perkin's famous mauve was first sold under the name Tyrian purple."
  ],
- "words": 2175,
+ "words": 2177,
  "status": "checked",
  "checked": {
-  "by": "L7 batch 23 self-check (sentence-to-card trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Snail-per-ounce figures disagree (Ball 250,000/oz; Paterson 60,000/half pint; Gurney 12,000/1.4 g): stated as a disagreement.",
-   "End date of the trade disputed (1165, 1453, 'fifteenth century'): stated as a disagreement.",
-   "Hercules/Melkarth origin told as legend only; murexide guano corrected.",
-   "Swatch is Wikipedia's modern screen value, flagged as not ancient."
+   "Shell-mound sentence re-attributed from Ball to Coles/St Clair (not in Ball's text).",
+   "Urine/ammonia sentence reworded to match Ball's 'by one story' wording."
   ]
  }
 }

@@ -42,13 +42,13 @@
   {
    "id": "field",
    "title": "Field notes",
-   "body": "These are our own measurements, from photographs of aged, varnished paintings; a color match is not a pigment test [16]. Within a CIEDE2000 distance of 6, and covering at least 5 percent of the canvas, this green appears in 46 of 23,781 paintings, about 1 in 500 [16].\n\nThe distribution is lopsided: 27 of the 46 are from the 1800s and 16 from the 1900s, and none is earlier than 1600 [16]. In the 1900s it turns up in 1.0 percent of the archive's 1,674 paintings, nearly five times the expected rate [16]. The earliest is Jan Brueghel the Elder's *Wooded Landscape with Travelers* of 1610, which our data dates 310 years before the color's first record in our sources [16][15]. The thin early archive and aged varnish make that a floor, not a first, and Pastoureau's warning about browned greens may explain part of the gap [11][16].\n\nFour painters stand out. [[painter:paul-gauguin|Gauguin]] has it in 5 of his 50 works here, Van Gogh in 4 of 49, Vallotton in 3 of 40 and [[painter:auguste-renoir|Renoir]] in 3 of 46 [16]. Four of the 45 Post-Impressionist works in the archive carry it [16]. The largest area is in [[painting:commons-Q76627696|Gauguin's Still Life of 1899]], where it covers about 45 percent of the canvas [16]. In printed English the word *meadow* peaks in the 1800s, counting every sense, so that curve follows the landscape and not the color [17]."
+   "body": "These are our own measurements, from photographs of aged, varnished paintings; a color match is not a pigment test [16]. Within a CIEDE2000 distance of 6, and covering at least 5 percent of the canvas, this green appears in 46 of 23,781 paintings, about 1 in 500 [16].\n\nThe distribution is lopsided: 27 of the 46 are from the 1800s and 16 from the 1900s, and none is earlier than 1600 [16]. In the 1900s it turns up in 1.0 percent of the archive's 1,674 paintings, nearly five times the expected rate [16]. The earliest is Jan Brueghel the Elder's *Wooded Landscape with Travelers* of 1610, which our data dates 320 years before the color's first record in our sources [16][15]. The thin early archive and aged varnish make that a floor, not a first, and Pastoureau's warning about browned greens may explain part of the gap [11][16].\n\nFour painters stand out. [[painter:paul-gauguin|Gauguin]] has it in 5 of his 50 works here, Van Gogh in 4 of 49, Vallotton in 3 of 40 and [[painter:auguste-renoir|Renoir]] in 3 of 46 [16]. Four of the 45 Post-Impressionist works in the archive carry it [16]. The largest area is in [[painting:commons-Q76627696|Gauguin's Still Life of 1899]], where it covers about 45 percent of the canvas [16]. In printed English the word *meadow* peaks in the 1800s, counting every sense, so that curve follows the landscape and not the color [17]."
   }
  ],
  "aside": {
   "origin": {
    "named_after": "the meadow, the English landscape word",
-   "first_recorded": "as a color word in Werner-descended mineral lists of the 1790s; as a swatch in Maerz and Paul, 1930",
+   "first_recorded": "as a color word, possibly in Werner-descended mineral lists of the 1790s (Baty calls the identification debatable); as a swatch in Maerz and Paul, 1930",
    "source": "Baty, Nature's Palette, pp. 20-21; Maerz and Paul via the ColorHub library"
   },
   "aka": [
@@ -308,12 +308,11 @@
  "words": 1038,
  "status": "checked",
  "checked": {
-  "by": "batch-58 writer self-check (sentence-to-card trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Meadow green in Werner-descended lists: Baty prints it without saying whose list; stated only as 'several lists'.",
-   "Archive matches are look-alike colors, not pigment identifications.",
-   "Old-landscape browning (Pastoureau) cited as a possible partial cause of the early gap, not proven."
+   "Fixed date gap 1610 to 1930 (320 years, not 310)",
+   "Hedged 1790s first-record in aside"
   ]
  }
 }

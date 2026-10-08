@@ -8,7 +8,7 @@
  ],
  "tier": "pigment",
  "depth": "epic",
- "lede": "Crimson is a deep red with a lean toward purple, named after the kermes insect whose dye made it the costliest cloth color of medieval Europe, and later the color of cochineal, of cardinals and of the painter's transparent red glaze.",
+ "lede": "Crimson is a deep red with a lean toward purple, named after the kermes insect whose dye made it one of the costliest cloth colors of medieval Europe, and later the color of cochineal, of cardinals and of the painter's transparent red glaze.",
  "sections": [
   {
    "id": "name",
@@ -18,7 +18,7 @@
   {
    "id": "material",
    "title": "Kermes, lac and cochineal",
-   "body": "The kermes insect lives on the kermes oak of southern and eastern Europe [26]. Dyers scraped the wingless females from the branches, crushed them and boiled them to free the red [26]. St Clair puts the yield at up to 80 insects for a single gram of dye, which made the color bright, fast and very dear [24]. Coles passes on a claim that Roman Spain paid half its taxes to Rome in kermes, a striking figure that no other book here repeats [26].\n\nPainters needed the dye in solid form, so it was fixed onto a colorless powder to make a lake pigment. The word lake once meant red alone, and Paterson ties it to lac, an Indian insect resin whose color he gives as crimson [9][32]. Lac lakes were common in fifteenth-century Florence, and painters seem to have preferred these purplish crimson lakes to paler violet extracts [2]. Brazilwood gave cheaper crimsons too, but they faded to a dull pinkish brown, which earned the dye a reputation for deceit [7].\n\nThe great change came from Mexico [27]. Cochineal, a scale insect that feeds on prickly pear cactus, carries carminic acid, and Greenfield reckons it about ten times as strong as kermes [9][24]. Every book agrees that a pound of dye took tens of thousands of dried insects [28][24][19]. Their counts differ widely: Garfield gives 17,000 for an ounce, St Clair about 70,000 for a pound, and Pastoureau about 150,000 for a kilogram [28][24][19].\n\nAccording to the Pigment Compendium, crimson at first named the color of every scale-insect dye [16]. Cochineal was so much stronger that the others were eventually dropped, and by the nineteenth century crimson lake simply meant a cochineal lake [16]. An 1869 handbook describes it as carmine stretched with more white base, weaker in color and less stable [16]."
+   "body": "The kermes insect lives on the kermes oak of southern and eastern Europe [26]. Dyers scraped the wingless females from the branches, crushed them and boiled them to free the red [26]. St Clair puts the yield at up to 80 insects for a single gram of dye, which made the color bright, fast and very dear [24]. Coles passes on a claim that Roman Spain paid half its taxes to Rome in kermes, a striking figure that no other book here repeats [26].\n\nPainters needed the dye in solid form, so it was fixed onto a colorless powder to make a lake pigment. The word lake once meant red alone, and Paterson ties it to lac, an Indian insect resin whose color he gives as crimson [9][32]. Lac lakes were common in fifteenth-century Florence, and painters seem to have preferred these purplish crimson lakes to paler violet extracts [2]. Brazilwood gave cheaper crimsons too, but they faded to a dull pinkish brown, which earned the dye a reputation for deceit [7].\n\nThe great change came from Mexico [27]. Cochineal, a scale insect that feeds on prickly pear cactus, carries carminic acid, and Greenfield reckons it about ten times as strong as kermes [9][24]. The books agree that a pound of dye took tens of thousands of dried insects [28][24][19]. Their counts differ widely: Garfield gives 17,000 for an ounce, St Clair about 70,000 for a pound, and Pastoureau about 150,000 for a kilogram [28][24][19].\n\nAccording to the Pigment Compendium, crimson at first named the color of every scale-insect dye [16]. Cochineal was so much stronger that the others were eventually dropped, and by the nineteenth century crimson lake simply meant a cochineal lake [16]. An 1869 handbook describes it as carmine stretched with more white base, weaker in color and less stable [16]."
   },
   {
    "id": "history",
@@ -446,20 +446,14 @@
   "To be dyed in grain once meant dyed crimson; it is why we still call habits ingrained.",
   "Look at someone's ears with the sun behind them: the glow is crimson, light passing through red."
  ],
- "words": 1960,
+ "words": 1962,
  "status": "checked",
  "checked": {
-  "by": "L7 self-check (sentence-to-card trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Etymology: Arabic kirmiz (Greenfield) vs Sanskrit kirmidja (Ball, Compendium): presented as one chain per CONFLICTS.md.",
-   "Cochineal insect counts differ across books (Garfield, St Clair, Pastoureau, Coles): stated as 'tens of thousands' with the disagreement named.",
-   "Cochineal arrival 1525-30 (Pastoureau) vs early 1540s (Greenfield, Compendium): books disagree, stated.",
-   "Drebbel accident story flagged as doubted (Greenfield).",
-   "Roman Spain paying half its taxes in kermes: Coles only, hedged.",
-   "Magenta credited to Verguin (fuchsine) per CLAUDE.md wording.",
-   "Crimson entering English c. 1400 is the Color Graph's approximate 'since' record, not a book.",
-   "Archive presence tiny because the X11 value is more saturated than photographed paint: interpretation, stated as such."
+   "Lede: costliest softened to one of the costliest (sources say noblest/high price, not strictly costliest)",
+   "Insect counts: Every book agrees softened"
   ]
  }
 }

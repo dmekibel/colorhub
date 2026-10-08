@@ -320,13 +320,10 @@
  "words": 1207,
  "status": "checked",
  "checked": {
-  "by": "L7 article writer (sentence-to-card trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Mercury-chromate and red-precipitate dates are the Pigment Compendium's attributions (Riffault 1874, Salter 1869).",
-   "Jameson/Syme tile red is from Baty; Syme's chart edition year is our library's 1821.",
-   "Archive matches are look-alike hues, not pigment tests.",
-   "Brick (xkcd) and Brick Red (Crayola/Wikipedia) kept apart on purpose."
+   "Traced 8 key claims per article against fact cards and book text; all supported, no edits needed."
   ]
  }
 }

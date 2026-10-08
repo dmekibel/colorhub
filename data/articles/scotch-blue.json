@@ -1,0 +1,187 @@
+{
+ "slug": "scotch-blue",
+ "name": "Scotch Blue",
+ "hex": "#281F3F",
+ "names": [
+  "Scotch Blue"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Scotch Blue is a very dark purplish blue that entered the early nineteenth-century mineralogist's colour chart as number 24 of the blues, defined by a mixing recipe and three examples from nature.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dark purplish blue",
+   "body": "Paterson's dictionary glosses Scotch blue as a dark purplish blue, and lists *bonny blue* as another name for it [3]. Who coined the name, and why it says Scotch, is undocumented in the books we read [1][3].\n\nThe name sits among the blues of the chart that follows, next to [[prussian-blue]], [[indigo-blue]] and [[china-blue]] [2]."
+  },
+  {
+   "id": "history",
+   "title": "Number 24 on Syme's chart",
+   "body": "Scotch Blue is number 24 in the blues of the Werner colour chart as Syme published it, a nomenclature built for describing minerals in the field [2][5]. Baty says Syme added this blue, and one red, in the second edition of 1821 [1]. Maerz and Paul instead record the name in 1814, so the books disagree on when it first appeared [1][5].\n\nBaty adds a detail that explains why the chart can confuse. The 1821 recipe for Scotch blue repeated the recipe the earlier edition had given for indigo blue, while indigo blue itself got an amended recipe [1]. In other words the new name took over an old formula, and the old name was rewritten [1]."
+  },
+  {
+   "id": "recipe",
+   "title": "The recipe and its three examples",
+   "body": "Syme's entry defines Scotch blue as [[berlin-blue]] darkened with a good deal of velvet black, a trace of grey and a faint touch of carmine red [2].\n\nEvery colour on the chart also came with three examples from nature: one animal, one vegetable and one mineral [2]. For Scotch blue they are the throat of the blue tit, the stamens of a single purple anemone and blue copper ore, which is now called [[gem:azurite|azurite]] [2][5]. Later illustrators matched the colour to the same things: Gould's *Birds of Europe* for the bird, Loudon's flower garden for the anemone and Simonin's *Underground Life* for the mineral [2]. A plate of shells in the same book lists Scotch blue beside *Mytilus*, the mussel genus [2]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "Our swatch is a screen colour taken from an aged chart, so it is approximate [5]. It is very dark, with a lightness of 14 on the LCH scale and a violet-blue hue [5]. The nearest everyday name is [[navy]], about nine units away in ΔE [5].\n\nThe 1955 ISCC-NBS system files the same dark violet-blue block under many names, among them Grape Blue, Elderberry and Nightshade [5]. Scotch Blue is one of the oldest names in that crowd [5]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "As a painted colour it is rare. In our archive of 23,781 paintings, a colour within six units of this swatch covers at least five per cent of the canvas in 39 works, or 0.16 per cent [6]. The largest patch is in Paggi's portrait of [[painting:commons-Q120379763|Piero di Lorenzo de' Medici]], dated 1586, where it covers about half the canvas [6]. Close behind are Bassano's *Adoration of the Magi* of 1568 and Orrente's *Laban Searching for the Idols* of 1620 [6]. The earliest match is Lorenzetti's *Madonna and Child Enthroned with Eight Angels*, dated 1340 [6].\n\nAlmost all of it sits in the shadows of the picture, in 95 per cent of the cases we measured, which suits a colour this dark [6]. These are photographs of aged, varnished paintings, so a match is a screen colour, not a pigment test [6]. In Google Books the phrase *scotch blue* peaks in 1877, though it also covers other uses, so the curve is not a clean colour record [7]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented in the books read",
+   "first_recorded": "1814 (Maerz & Paul) or the 1821 second edition of Syme (Baty)",
+   "source": "Baty, Nature's Palette, p. 28; library data"
+  },
+  "aka": [
+   "bonny blue"
+  ],
+  "siblings": [
+   "prussian-blue",
+   "indigo-blue",
+   "china-blue",
+   "berlin-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#281F3F",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 39,
+  "top_paintings": [
+   "commons-Q120379763",
+   "commons-Q21716222",
+   "commons-Q59696354"
+  ],
+  "role": {
+   "shadow": 0.95,
+   "mid": 0.05
+  },
+  "company": [
+   "Navy",
+   "Umber",
+   "Black"
+  ],
+  "ngram": {
+   "peak": 1877
+  },
+  "measured": {
+   "lch": [
+    14,
+    23,
+    305
+   ],
+   "nearest": [
+    [
+     "Navy",
+     8.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, introduction, p. 28",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, no. 24 \"Scotch blue\", pp. 90-95 and shell plate, p. 133",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Scotch blue\" and \"bonny blue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub library: Werner no. 24; ISCC-NBS 1955 blocks 201 and 212; Maerz & Paul 1930 (first recorded 1814, plate 47 E 12), aged swatch, approximate",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "How did Syme's chart define Scotch blue?",
+   "choices": [
+    "As Berlin blue darkened with velvet black, a little grey and a touch of carmine",
+    "As ultramarine mixed with white",
+    "As a dye from Scottish woad",
+    "As a single mineral, azurite"
+   ],
+   "answer": "As Berlin blue darkened with velvet black, a little grey and a touch of carmine",
+   "kind": "pick"
+  },
+  {
+   "q": "Which three natural examples go with Scotch blue?",
+   "choices": [
+    "Blue tit throat, purple anemone stamens, blue copper ore",
+    "Cornflower, lapis lazuli, peacock feather",
+    "Indigo leaf, mussel shell, sapphire",
+    "Violet petal, kingfisher, smalt"
+   ],
+   "answer": "Blue tit throat, purple anemone stamens, blue copper ore",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the books agree on exactly when Scotch blue first appeared.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Scotch blue is a recipe before it is a swatch: Berlin blue, velvet black, a little grey, a touch of carmine.",
+  "The mineral example for Scotch blue is azurite, the copper ore that is itself a blue."
+ ],
+ "words": 555,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported claim that it is the darkest of its neighbors and 'needed a recipe' (speculation)."
+  ]
+ }
+}

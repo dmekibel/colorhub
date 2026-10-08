@@ -246,6 +246,7 @@ function arFactsHTML(art) {
 }
 const arCap = t => String(t || "").replace(/^\s*[a-z]/, m => m.toUpperCase());
 function arBlockHTML(b, art) {
+  if (b.t === "html") return b.html;   // a story built from the wiki's own facets (arFacetArt below): already linked HTML
   if (b.t === "books") return `<aside class="ar-call ar-books"><p class="ar-tag">Books disagree</p><p>${arInline(b.text, art)}</p></aside>`;
   if (b.t === "myth") return `<aside class="ar-call ar-myth"><p class="ar-tag">Myth</p><p class="ar-say"><em>The story says</em> ${arInline(arCap(b.say), art)}</p>${b.rec ? `<p class="ar-rec"><em>The record shows</em> ${arInline(arCap(b.rec), art)}</p>` : ""}</aside>`;
   const refs = arRefList(b.text);
@@ -460,17 +461,146 @@ function arAnswer(root, art, self, btn) {
   }
 }
 
+
+// ---------- the story door and the book (design/IMPROVE-2026-10-08/color-page.md #1, COLOR-PAGE-DESIGN §2.5, §3) ----------
+// A long story is a book you open on purpose, not 11,000 px inline on the color page: the page draws a door (dek, the
+// first chapters, minutes, a resume line) and the book reads on its own screen at #/read/<slug>[/<chapter>], which
+// remembers where you stopped. A short story (under AR_DOOR_MIN words) still reads inline as the page's lead.
+const AR_DOOR_MIN = 600;
+// One of the app's own colors without a written article still has its own story: its wiki facets (history,
+// language, symbolism...) become the chapters, and its kin become the last one. Never a twin's story when it has one.
+function arFacetArt(c) {
+  const n = c && typeof colorNode === "function" ? colorNode(c) : null, w = n && n.wiki;
+  if (!w || !w.facets || !w.facets.length) return null;
+  const html = t => [{ t: "html", html: `<p>${linkText(t)}</p>` }];
+  const sections = w.facets.map((f, i) => ({ id: routeSlug(f.k) + (i ? "-" + i : ""), title: (typeof FACET_LABEL !== "undefined" && FACET_LABEL[f.k]) || arPretty(f.k), blocks: html(f.text), words: String(f.text || "").split(/\s+/).length }));
+  if (w.related && w.related.length) {
+    const rows = w.related.map(r => { const x = graph().resolve(r.to); return x ? `<button class="kin" data-node="${esc(x.id)}"><i style="--c:${x.h}"></i><b>${esc(x.title)}</b><span>${esc(r.why)}</span></button>` : ""; }).join("");
+    if (rows) sections.push({ id: "family", title: "Family", blocks: [{ t: "html", html: `<div class="ar-kin">${rows}</div>` }], words: 40 });
+  }
+  const slug = routeSlug(c.n), words = sections.reduce((s, x) => s + x.words, 0);
+  return { slug, name: c.n, names: [c.n], hex: c.h, tier: "", lede: "", sections, aside: {}, notes: new Map(), questions: [], words, status: "", facet: true, dek: typeof plainText === "function" ? plainText(w.facets[0].text).split(/(?<=[.!?])\s/)[0] : "", sources: w.sources || [] };
+}
+const arChapters = art => art.sections.filter(s => s.title).map((s, i) => ({ id: s.id, title: s.title, i,
+  min: ((m) => m < .75 ? "<1" : String(Math.max(1, Math.round(m))))(((s.words || s.blocks.reduce((t, b) => t + String(b.text || b.say || "").split(/\s+/).length + String(b.rec || "").split(/\s+/).length, 0)) / AR_WPM)) }));
+// where you stopped, per story (inside S, so migrateState keeps it): { s: chapter id, i, n, p: 0..1, done }
+const arReadStore = () => (S.arRead && typeof S.arRead === "object" ? S.arRead : (S.arRead = {}));
+const arReadState = slug => arReadStore()[slug] || null;
+function arDoorHTML(art, self, fig) {
+  const ch = arChapters(art), st = arReadState(art.slug), mins = arMinutes(art);
+  const started = st && st.p > .03 && !st.done, cur = started ? ch.find(c => c.id === st.s) || ch[0] : null;
+  const left = started ? Math.max(1, Math.round(mins * (1 - st.p))) : 0;
+  const dek = art.dek || (art.lede ? art.lede.split(/(?<=[.!?])\s/).slice(0, 1).join(" ") : "");
+  const src = art.notes && art.notes.size ? art.notes.size : (art.sources || []).length;
+  const meta = [`${mins} min`, `${ch.length} chapter${ch.length === 1 ? "" : "s"}`, src ? `${src} source${src === 1 ? "" : "s"}` : ""].filter(Boolean).join(" · ");
+  const rows = started
+    ? `<div class="ar-door-prog" style="--p:${Math.round(st.p * 100)}%"><i></i></div><button type="button" class="ar-door-row ar-door-cont" data-ar-chap="${esc(cur.id)}"><span class="mono">${cur.i + 1}</span><b>Continue · ${esc(cur.title)}</b><em>${left} min left</em></button>`
+    : ch.slice(0, 3).map(c => `<button type="button" class="ar-door-row" data-ar-chap="${esc(c.id)}"><span class="mono">${c.i + 1}</span><b>${esc(c.title)}</b><em>${c.min} min</em></button>`).join("")
+      + (ch.length > 3 ? `<button type="button" class="ar-door-row ar-door-more" data-ar-chap="${esc(ch[3].id)}"><span class="mono">+</span><b>${ch.length - 3} more: ${esc(ch.slice(3).map(c => c.title).join(", "))}</b></button>` : "");
+  return `<section class="ar-door" data-ar-door="${esc(art.slug)}">${fig || ""}
+    <p class="ar-door-k">The story${st && st.done ? " · read" : ""}</p>
+    <h2 class="ar-door-t">${esc(art.name || self.n)}</h2>
+    ${dek ? `<p class="ar-door-dek">${arInline(dek, art)}</p>` : ""}
+    <p class="ar-door-meta">${esc(meta)}</p>
+    <div class="ar-door-rows">${rows}</div>
+    <button type="button" class="ar-door-go" data-ar-begin>${started ? `Continue reading · ${left} min` : st && st.done ? "Read it again" : `Begin reading · ${mins} min`}<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+  </section>`;
+}
+function arDoorWire(host, art, self) {
+  host.addEventListener("click", e => {
+    const ch = e.target.closest("[data-ar-chap]"), go = e.target.closest("[data-ar-begin]");
+    if (!ch && !go) return;
+    const st = arReadState(art.slug);
+    arReadPage(art.slug, ch ? ch.dataset.arChap : st && !st.done && st.p > .03 ? st.s : null, true, { art, self });
+  });
+}
+
+// The book: its own screen, the article in full, a contents bar that follows you, a "Back to <color>" at the end.
+const AR_READING = new Map();   // slug -> { art, self } once loaded (a facet story needs the wiki, which may be in by now)
+function arReadLoad(slug) {
+  if (AR_READING.has(slug)) return Promise.resolve(AR_READING.get(slug));
+  const names = Promise.all([typeof loadCoreNames === "function" ? loadCoreNames() : null, arLoadNames()]);
+  return Promise.all([arLoad(slug), names]).then(([art]) => {
+    let a = art;
+    const c = typeof routeColor === "function" ? routeColor(slug) : null;
+    if (!a && c) return loadWiki().then(() => arFacetArt(c));
+    return a;
+  }).then(a => {
+    if (!a) return null;
+    const self = arColor(slug) || (a.hex ? { slug, n: a.name, h: a.hex } : null);
+    if (!self) return null;
+    const r = { art: a, self };
+    AR_READING.set(slug, r);
+    return r;
+  });
+}
+function arReadPage(slug, chap, push = true, pre) {
+  if (pre && pre.art) AR_READING.set(slug, pre);
+  if (AR_READING.has(slug)) return arReadDraw(slug, chap, push);
+  waitScreen(); const tok = SHOW_N;
+  arReadLoad(slug).then(r => {
+    if (SHOW_N !== tok) return;
+    ROUTE_REPLACE = true; ROUTE_NEXT = routed(r ? r.art.name : arPretty(slug), "read/" + slug + (chap ? "/" + chap : ""));
+    if (!r) return arMissing("This story");
+    arReadDraw(slug, chap, push);
+  });
+}
+function arReadDraw(slug, chap, push) {
+  const { art, self } = AR_READING.get(slug);
+  if (push) XSTACK.push("ar:read/" + slug);
+  const el = show(`<header class="ar-rd-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span class="ar-rd-t"><i style="--c:${self.h}"></i>${esc(art.name || self.n)}</span><span class="ar-rd-sp"></span></header>
+    <div class="ar-rd-band" style="--c:${self.h}" data-ink="${ink(self.h)}"><h1>${esc(art.name || self.n)}</h1></div>
+    ${arBuildHTML(art, self)}
+    ${art.facet && art.sources && art.sources.length ? `<section class="ar-notes"><h2>Sources</h2><ol>${art.sources.map((s, i) => `<li><span class="ar-nn">${i + 1}</span><span class="ar-nc">${/^https?:\/\//.test(s) ? `<a href="${esc(s)}" target="_blank" rel="noopener">${esc(s.replace(/^https?:\/\/(www\.)?/, "").slice(0, 60))}</a>` : esc(s)}</span></li>`).join("")}</ol></section>` : ""}
+    <div class="ar-rd-end"><button type="button" class="cp-primary" data-ar-home>Back to ${esc(self.n)}${ICON.arrow}</button></div>`, "article ar-page ar-read");
+  el.querySelector("[data-back]").onclick = xBack;
+  // opened from its color's page: back to it; opened from a shared link: its color's page is the way on
+  el.querySelector("[data-ar-home]").onclick = () => XSTACK.length > 1 ? xBack() : (XSTACK = [], openCoreName(self.h, self.n));
+  onKey = e => { if (e.key === "Escape") xBack(); };
+  const root = el.querySelector(".ar");
+  arWire(root, art, self);
+  if (typeof wireLinks === "function") wireLinks(el);
+  if (typeof arfEnhance === "function") { try { arfEnhance(root, art, self); } catch (e) {} }
+  // where you stopped: the chapter in view and how far through the whole story, saved as you read
+  const secs = arHeaded(root), store = arReadStore();
+  let saveT = 0;
+  const tick = () => {
+    const r = root.getBoundingClientRect(), p = Math.min(1, Math.max(0, -r.top / Math.max(1, r.height - innerHeight * .8)));
+    let idx = 0; secs.forEach((s, i) => { if (s.getBoundingClientRect().top <= 120) idx = i; });
+    if (p < .02) return;   // the top of the book is not a place to resume from
+    const prev = store[slug] || {};
+    store[slug] = { s: secs[idx] ? secs[idx].id.replace(/^ar-s-/, "") : "", i: idx, n: secs.length, p, done: prev.done || p > .94, at: today() };
+    clearTimeout(saveT); saveT = setTimeout(save, 600);
+  };
+  const onScroll = () => tick();   // direct, not rAF: a background tab still records where you stopped
+  document.addEventListener("scroll", onScroll, { passive: true, capture: true });
+  cleanup.push(() => { document.removeEventListener("scroll", onScroll, true); clearTimeout(saveT); if (root.isConnected) tick(); clearTimeout(saveT); save(); });
+  if (chap) { const t = el.querySelector("#ar-s-" + CSS.escape(chap)); if (t) setTimeout(() => arScrollTo(t), 60); }
+  return el;
+}
+
 // ---------- entry point ----------
-// Draws the article for `slug` into `host`. Resolves true if there is one; otherwise draws nothing and resolves false.
+// Draws the story for `slug` into `host`: the door for a long one (AR_DOOR_MIN words or more), the text itself for a
+// short one. ctx.facet is a story built from the wiki (arFacetArt), used when there's no written article; ctx.fig a
+// cover figure. Resolves true if there is a story; otherwise draws nothing and resolves false.
 function articleRender(slug, host, ctx) {
   const none = () => { if (host) { host.innerHTML = ""; host.hidden = true; } return false; };
   if (!host || !slug) return Promise.resolve(false);
   const names = Promise.all([typeof loadCoreNames === "function" ? loadCoreNames() : null, arLoadNames()]);
-  return Promise.all([arLoad(slug), names]).then(([art]) => {
+  return Promise.all([arLoad(slug), names]).then(([found]) => {
+    const art = found || (ctx && ctx.facet) || null;
     if (!art || (host.isConnected === false)) return none();
     const self = arColor(slug) || (ctx && ctx.h ? { slug, n: ctx.n || art.name, h: ctx.h } : art.hex ? { slug, n: art.name, h: art.hex } : null);
     if (!self) return none();
-    host.hidden = false; host.innerHTML = arBuildHTML(art, self);
+    host.hidden = false;
+    // a wiki-facet story is chapters by nature (history, language, symbolism...): a book from three of them
+    if (!(ctx && ctx.door === false) && (art.facet ? art.sections.length >= 3 : (art.words || arWords(art)) >= AR_DOOR_MIN)) {
+      AR_READING.set(art.slug, { art, self });
+      host.innerHTML = arDoorHTML(art, self, ctx && ctx.fig);
+      arDoorWire(host, art, self);
+      return true;
+    }
+    host.innerHTML = (ctx && ctx.fig || "") + arBuildHTML(art, self);
     arWire(host.querySelector(".ar"), art, self);
     if (typeof arfEnhance === "function") { try { arfEnhance(host.querySelector(".ar"), art, self); } catch (e) { try { console.warn("article figures failed:", e); } catch (_) {} } }   // js/article-refs.js: the figure cards
     return true;
@@ -569,5 +699,6 @@ function arStep(spec) {
   const [kind, ...rest] = spec.split("/"), id = rest.join("/");
   if (kind === "hub") return arHubPage(id, false);
   if (kind === "which") return arWhichPage(id, false);
+  if (kind === "read") return arReadPage(rest[0], rest[1] || null, false);   // the book (arReadPage)
   return xToOrigin();
 }

@@ -17,7 +17,7 @@
   {
    "id": "material",
    "title": "What the earth is",
-   "body": "Sienna is generally described as a variety of yellow ochre, but it differs in having a small share of manganese oxide, under ten per cent, beside the iron oxide hydroxide goethite that does most of the coloring [1]. It may also hold a few per cent of peaty or organic matter, which puts it between the ochres and the umbers in composition [1]. The Pigment Compendium adds that, although the pigment is well known and widely used, little detailed information about it has been published [1].\n\nThe original source was Siena in Tuscany [1]. The most informative nineteenth-century writer, Terry in 1893, places the deposits on the western slopes of Monte Amiata, in lake-bed layers among volcanic rock and under a cover of vegetable soil [1]. The Tuscan earth was graded by quality, and the price rose as the tint deepened; Terry lists four grades, boletta, fascia, cerchione and terra guilla [1]. The best-colored, chestnut-brown grade was called bole [1].\n\nSienna was never a purely Italian product [1]. Deposits are known in the United States, where they were called paint-beds, and good siennas are found at Lehigh Gap, Pennsylvania [1]. Church lists the Harz Mountains of Germany as another source [1]. Books disagree about whether the name still tells the truth: Finlay observes that today's sienna probably no longer comes from Siena at all, just as lamp black no longer comes from lamps [7].\n\nLike the ochres, siennas make very stable pigments that do not fade [1]. The raw earth is washed, finely ground and levigated, which is a slurrying that separates coarse grit, before use [1]."
+   "body": "Sienna is generally described as a variety of yellow ochre, but it differs in having a small share of manganese oxide, under ten per cent, beside the iron oxide hydroxide goethite that does most of the coloring [1]. It may also hold a few per cent of peaty or organic matter, which puts it between the ochres and the umbers in composition [1]. The Pigment Compendium adds that, although the pigment is well known and widely used, little detailed information about it has been published [1].\n\nThe original source was Siena in Tuscany [1]. The most informative nineteenth-century writer, Terry in 1893, places the deposits on the western slopes of Monte Amiata, in lake-bed layers among volcanic rock and under a cover of vegetable soil [1]. The Tuscan earth was graded by quality, and the price rose as the tint deepened; Terry lists four grades, boletta, fascia, cerchione and terra guilla [1]. Earth of a chestnut color was called bole, which the Compendium describes as the typical sienna [1].\n\nSienna was never a purely Italian product [1]. Deposits are known in the United States, where they were called paint-beds, and good siennas are found at Lehigh Gap, Pennsylvania [1]. Church lists the Harz Mountains of Germany as another source [1]. Books disagree about whether the name still tells the truth: Finlay observes that today's sienna probably no longer comes from Siena at all, just as lamp black no longer comes from lamps [7].\n\nLike the ochres, siennas make very stable pigments that do not fade [1]. The raw earth is washed, finely ground and levigated, which is a slurrying that separates coarse grit, before use [1]."
   },
   {
    "id": "burnt",
@@ -32,7 +32,7 @@
   {
    "id": "practice",
    "title": "In the studio and in the street",
-   "body": "Painters use burnt sienna as a warm transparent base. Gurney recommends toning a panel with a transparent undertone of Venetian red or burnt sienna, because an insistent warm underpainting forces the painter to cover the background with opaque mixtures and makes skies and foliage easier to judge [5]. The practice is called an *imprimatura* [5]. A painter who starts from a warm ground, he adds, has to decide on every mixture rather than leaving bare canvas to do the work [5].\n\nThe earths also reach the street. Batchelor notes that Le Corbusier's Pavillon de l'Esprit Nouveau of 1925 was painted in ten colors, among them burnt sienna and a darker burnt sienna, which is one fact that undercuts the idea of the architect as a builder of white boxes [10]. Gurney also points out that the brownish reds and oranges of iron oxides have been dug from open pits since prehistory, and that Siena gave its name to those ore-based pigments, used burnt or raw [5].\n\nWhere to look: in an old landscape, find the warm transparent brown under the greens of the trees or in a figure's shadows, and ask whether a sienna-type earth could be doing the work."
+   "body": "Painters use burnt sienna as a warm transparent base. Gurney recommends toning a panel with a transparent undertone of Venetian red or burnt sienna, because an insistent warm underpainting forces the painter to cover the background with opaque mixtures and makes skies and foliage easier to judge [5]. The practice is called an *imprimatura* [5]. A painter who starts from a warm ground, he adds, has to decide on every mixture rather than leaving bare canvas to do the work [5].\n\nThe earths also reach the street. Batchelor notes that Le Corbusier's Pavillon de l'Esprit Nouveau of 1925 was painted in ten colors, among them burnt sienna and a darker burnt sienna, which is one fact that undercuts the idea of the architect as a builder of white boxes [10]. Gurney adds that pigment makers have dug iron-oxide browns, reds and oranges from open pits since prehistory, and that Siena lent its name to ore pigments used raw or burnt [5].\n\nWhere to look: in an old landscape, find the warm transparent brown under the greens of the trees or in a figure's shadows, and ask whether a sienna-type earth could be doing the work."
   },
   {
    "id": "japan",
@@ -251,15 +251,15 @@
   "In the 1440s, 13 of 58 paintings in our archive hold this brown, 7 times the usual rate.",
   "Look for burnt sienna as the warm brown under skin and trees in landscape paintings."
  ],
- "words": 1518,
+ "words": 1522,
  "status": "checked",
  "checked": {
-  "by": "article engine batch 10",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Pigment Compendium page numbers are PDF pages; 'brunum' entry name inferred.",
-   "Finlay's claim that sienna no longer comes from Siena is single-source and hedged.",
-   "Siena the city generates many false hits in the concordance; only pigment passages used."
+   "Corrected bole: chestnut-colored earth and 'typical sienna', not 'best grade'",
+   "Reworded Gurney sentence that echoed the book",
+   "Verified Terry grades, Lehigh Gap, Payne/gallstone, Le Corbusier ten colors, Matisse 1897, Cleaveland Sienna Yellow, Altamira/Ajanta finds, Jarman against books"
   ]
  }
 }

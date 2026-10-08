@@ -1,0 +1,268 @@
+{
+ "slug": "ecru",
+ "name": "Ecru",
+ "hex": "#F0E6D2",
+ "names": [
+  "Ecru"
+ ],
+ "tier": "traditional",
+ "depth": "long",
+ "lede": "Ecru is the pale warm off-white of cloth that has not been bleached or dyed, a French word that for centuries stood for what most white things really looked like.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Cloth that has never been wet",
+   "body": "*Ecru* is French, and Finlay traces it to *escru*, a seventeenth-century dictionary's word for cloth that has never been wetted [1]. Flax fibre in this state is the natural color of linen [1]. St Clair offers a second, related derivation, from the Latin *crudus*, raw [2]. Both agree on the sense: the color of material before anyone has washed, bleached or dyed it [1][2].\n\nThe word has relatives. Paterson treats ecru, beige and *grège* as the same French idea, each naming wool or cloth in its unbleached state and originally a grey [3]. Beige is first recorded as a color word in 1879, and *greige*, a blend of grey and beige, names a color close to ecru [3]. Finlay lists *drab* and *greige* among other words for this natural color of linen [1]. Ecru is one of several colors named for a cloth rather than a dye, in company with Kendal green and *perse* [4]."
+  },
+  {
+   "id": "near-whites",
+   "title": "The white that was never quite white",
+   "body": "For most of European history, ecru was what white looked like [5]. Pastoureau notes that until the eighteenth century the whites made in Europe were near-whites: drab, ecru, beige, greyish or yellowed [5]. Bleaching with morning dew and sun was slow, needed a great deal of space and was close to impossible in winter [5]. The result did not last, and turned back to greyish brown, yellowish or ecru [5].\n\nLinen left as it came from the loom ran from off-white to brown or light grey, taking in the whole range of beige and ecru tones [6]. To whiten it, Romans used milk, or dew, or oxalic acid from sorrel [6]. Even the monks of Cluny and Cîteaux, who argued over black and white habits, wore ecru, grey, bluish and brown cloth rather than the colors of their symbols [7].\n\nPaper began the same way. The first paper used in Europe verged on yellow, beige or ecru and darkened with age, and only with printing did it lighten, through off-white to white [8][9]. The change that ended the old order was chemical. Carl Wilhelm Scheele isolated chlorine in 1774 [10]. Later, ordinary people could for the first time wear white shirts and sleep in white sheets instead of beige, ecru or greyish ones [10]."
+  },
+  {
+   "id": "names",
+   "title": "A color word with a quiet career",
+   "body": "Ecru kept its place among the names for neutrals. At the centenary of mauve in New York, the National Bureau of Standards color scientist Deane B. Judd presented an analysis of about 7,500 color names, and Garfield reports that 50 of them came from undyed textiles, ecru among them [11]. Pastoureau lists ecru with the dull, so-called natural tones that fashion treats as neutral, tones that do not dare claim a name or a shade [12].\n\nThe word is still policed at the edge of white. In 2013 Wimbledon, which still requires all-white tennis clothing, forbade off-white, cream and ecru [13]. Wordplay finds it too: the English word *piecrust* has ecru hidden inside it, and Paterson notes a Times crossword clue in 2000 that used the color for piecrust [14].\n\nOur data shows how many names crowd around this color. The library lists [[eggshell]], Parchment and Magnolia as near-duplicates within about two units, and also [[beige]], [[cream]], [[ivory]] and [[linen]] nearby [15]."
+  },
+  {
+   "id": "swatch",
+   "title": "Which ecru?",
+   "body": "The swatch here is #F0E6D2, a light warm cream [15]. It is not the only ecru. Maerz and Paul recorded the word twice, in 1919 and 1925, in their dictionary of 1930, and the ISCC-NBS system of 1955 files the color under several blocks [15]. Wikipedia's page for the color uses a much darker tan, #C2B280, while xkcd's survey results sit near pale yellow [15].\n\nThat spread is the history in miniature. Ecru names a material state, not a fixed color, and natural linen runs from off-white to brown or light grey [6]. Werner's own nearest entry, Reddish White, number 2 in his list, was matched to a linnet's egg, the back of a Christmas rose and porcelain earth [15]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is a common painted color. In our archive of 23,781 paintings, 765 contain a color within six units of the swatch over at least five per cent of the canvas, about 3 per cent of the collection [16]. In nearly every case it is the lightest tone in the picture, which fits a color that is mostly a ground: paper, silk or a pale wall [16]. Four album leaves by the Chinese painter Bian Shoumin, from about 1700, are 95 to 96 per cent ecru [16].\n\nChina stands out: 143 of 635 Chinese paintings, 22 per cent, carry it, about seven times the rate across the whole archive [16]. Pahari paintings of northern India are over three times as likely, 12 of 118 [16]. The 1100s are the most ecru century, with 9 of 50 works [16]. Among painters, [[painter:willem-van-de-velde-i|Willem van de Velde the Elder]] has it in 5 of 14 works, and [[painter:john-singer-sargent|Sargent]] in 30 of 287 [16]. As always these are photographs of aged, varnished or yellowed grounds, so a match tells you about the surface of the picture as much as its paint [16]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "French écru, cloth never wetted (Finlay); Latin crudus, raw (St Clair)",
+   "first_recorded": "Maerz & Paul give 1919 and 1925",
+   "source": "Finlay, Fabric; Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "Unbleached",
+   "Natural"
+  ],
+  "siblings": [
+   "beige",
+   "linen",
+   "cream"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "beige",
+    "gloss": "the same French idea of unbleached cloth, and originally a grey"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "écru (unbleached)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#F0E6D2",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 765,
+  "top_paintings": [
+   "cma-161025",
+   "cma-152830"
+  ],
+  "role": {
+   "highlight": 1.0
+  },
+  "measured": {
+   "lch": [
+    92,
+    11,
+    90
+   ],
+   "nearest": [
+    [
+     "Eggshell",
+     2.0
+    ],
+    [
+     "Parchment",
+     1.8
+    ],
+    [
+     "Magnolia",
+     1.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Finlay, Fabric, ch. 8 (\"Linen\"), \"Grey, ecru and drab\" and notes",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary, \"ecru\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"beige\", \"ecru\", \"greige\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"perse\" and \"piecrust\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, White, pp. 11, 40 and 142",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, White, p. 43",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pastoureau, White, p. 74",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pastoureau, Black, p. 60",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Pastoureau, White, p. 159",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Pastoureau, White, pp. 165 and 184",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Garfield, Mauve, chapter on the 1956 centenary",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Pastoureau, White, p. 216",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Pastoureau, White, p. 206",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"piecrust\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "data",
+   "cite": "ColorHub library: ecru sources (Maerz & Paul, ISCC-NBS, Wikipedia, xkcd, Werner) and near-duplicates by CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, color within dE 6 covering at least 5% of the canvas; as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the French word behind ecru describe, according to Finlay?",
+   "choices": [
+    "Cloth that has never been wetted",
+    "A dye made from eggshells",
+    "A pale shade of silk",
+    "Paper before printing"
+   ],
+   "answer": "Cloth that has never been wetted",
+   "kind": "pick"
+  },
+  {
+   "q": "Why were most medieval and early modern European \"whites\" really ecru, beige or greyish?",
+   "choices": [
+    "Bleaching was slow and unstable, and true white was hard to make",
+    "White dyes were banned by the church",
+    "Linen cannot be bleached at all",
+    "Painters only had brown pigments"
+   ],
+   "answer": "Bleaching was slow and unstable, and true white was hard to make",
+   "kind": "pick"
+  },
+  {
+   "q": "Wimbledon's 2013 dress rules banned ecru.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Until about the eighteenth century, most European whites were really ecru.",
+  "Wimbledon banned ecru in 2013, along with off-white and cream.",
+  "In our archive, 22 per cent of Chinese paintings carry ecru, about seven times the overall rate."
+ ],
+ "words": 835,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Judd count of undyed-textile names corrected from 46 to 50 (46 is mythology).",
+   "Removed unverified drab-from-drap etymology and brownish-sheets gloss.",
+   "Removed inferred \"mostly silk and paper grounds\"."
+  ]
+ }
+}

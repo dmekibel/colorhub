@@ -1,0 +1,172 @@
+{
+ "slug": "brown-green",
+ "name": "Brown Green",
+ "hex": "#35382E",
+ "names": [
+  "Brown Green"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Brown Green is a very dark olive-grey, the name of a RAL factory paint colour, and in the books the same two words describe natural minerals, cotton and Chinese porcelain.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name from a paint chart",
+   "body": "The swatch is #35382E, a dark neutral with a faint olive cast and lightness 23 [1]. Our library traces the name to RAL, the German colour standard first issued in 1927, where it is RAL 6008 [1]. The nearest named colour is [[gunmetal]], at a ΔE of 9.5 [1].\n\nA second source gives a different colour under the same name: the xkcd survey of 2010 has brown green as #706C11, a far yellower olive [1]. The two lists do not agree, and the name is plain enough that both are reasonable. Close neighbours are [[olive]] and [[moss]] [1]."
+  },
+  {
+   "id": "books",
+   "title": "Where brown-green turns up",
+   "body": "The books use the words as a plain description of nature rather than as a colour with a history. The Pigment Compendium says the mineral augite ranges from brown-green through light and dark brown to black, that biotite mica is usually black but can be brown-green, and that pyrophyllite has brown-green varieties [2]. These are natural rocks whose colour varies with impurities [2].\n\nIn cotton, conventional breeding long gave only browns, greens, yellows and rusts, and the blues stayed elusive; in 1996 Calgene was granted the first US patent for transgenic colour alteration, aimed at black, red and blue cotton, in Balfour-Paul's account [3]. Finlay describes Chinese brown-green porcelain, the celadon, and a young museum worker who told her its appeal was its simplicity and its closeness to nature [4]. See [[celadon]] for the glaze itself.\n\nThe pair also matters for the eye. In deuteranopia, a form of red-green colour blindness, green can be seen as brown, and brown, green, yellow, orange and red are hard to tell apart [5]. Brown and green are also two of the eleven basic colour terms in Berlin and Kay's study of 98 languages [6]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is a common painted colour. In our archive of 23,781 paintings, 2,112 contain it, or 8.88 per cent, more common than 94 per cent of the named colours [7]. It peaks in the 1700s, in 7.9 per cent of 3,449 paintings, only 1.2 times the rate of the same museums as a whole [7]. Inside a painting it is most often a mid-tone, in 44 per cent of the 1,596 paintings that hold it by lightness rank [7].\n\nThe painters who lean on it hardest are [[painter:erik-pauelsen|Pauelsen]] (7 of 15 works), [[painter:pieter-van-der-werff|Pieter van der Werff]] (12 of 35) and [[painter:gustave-courbet|Courbet]] (10 of 50) [7]. It shares canvases with [[ebony]] and [[bronze-lustre]] more than chance [7]. These are photographs of varnished paintings, so a match is a screen colour, not a pigment test [7].\n\nThe oldest match, a 1099 Japanese sutra wrapper, is 828 years older than the name, so it is a look-alike hue in an aged photograph, not a sign of any dye [7]. Look for it in the shadowed trees and dark earth of Dutch and Danish landscapes, where [[painting:nga-50602|a view of the Amazon shore]] by Catlin shows it as a shadow colour [7]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a RAL factory paint colour (RAL 6008)",
+   "first_recorded": "RAL, 1927",
+   "source": "ColorHub library"
+  },
+  "aka": [
+   "RAL 6008"
+  ],
+  "siblings": [
+   "gunmetal",
+   "black-green",
+   "olive"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "olive",
+    "gloss": "xkcd's brown green (#706C11) is a yellow olive, not this dark neutral"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2112,
+  "pct": 8.88,
+  "peak_century": 1700,
+  "painters": [
+   [
+    "erik-pauelsen",
+    7,
+    15
+   ],
+   [
+    "pieter-van-der-werff",
+    12,
+    35
+   ],
+   [
+    "gustave-courbet",
+    10,
+    50
+   ]
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library, \"Brown Green\" (RAL 6008, 1927; xkcd 2010; screen values approximate)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, pp. 41, 59 and 327 (\"augite\", \"biotite\", \"pyrophyllite\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 243",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 16",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 145 (\"deuteranopia\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 43 (\"basic colours\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub graph fieldnotes, \"brown-green\" (23,781 paintings, as photographed)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does the name Brown Green come from?",
+   "choices": [
+    "The RAL paint standard, number 6008",
+    "A Renaissance pigment",
+    "A Japanese dye tradition",
+    "The Crayola box"
+   ],
+   "answer": "The RAL paint standard, number 6008",
+   "kind": "pick"
+  },
+  {
+   "q": "What can happen to green for a person with deuteranopia?",
+   "choices": [
+    "It can be seen as brown",
+    "It turns bright blue",
+    "It disappears into white",
+    "Nothing changes"
+   ],
+   "answer": "It can be seen as brown",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the xkcd and RAL lists agree on what brown green looks like.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Brown Green is the shadow colour of a lot of old landscapes: it fills 8.88 per cent of our archive.",
+  "In the books brown-green is the colour of augite, biotite and celadon porcelain."
+ ],
+ "words": 506,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Cotton sentence no longer implies the 1996 patent solved blue"
+  ]
+ }
+}

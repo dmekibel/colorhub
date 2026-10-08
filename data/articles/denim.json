@@ -37,7 +37,7 @@
   {
    "id": "myths",
    "title": "Rebel clothing?",
-   "body": "A popular claim holds that jeans were always the clothing of rebellious youth. Pastoureau calls that idea inaccurate, if not wholly false: for most of their history jeans were sensible, utilitarian, even conformist, worn by ordinary and often not young people, and only in the late 1960s in Europe did they become a symbol [1]. Vogue accepted its first jeans advertisement in 1935, when rich tourists from the eastern United States wore them on holidays in the West [1].\n\nBalfour-Paul stresses the postwar rebellion, yet her own dates agree: American soldiers gave Europeans their first sight of blue jeans during the Second World War, and film stars and pop musicians adopted them afterward [2]. Pastoureau places the emblem of youthful dissent between 1950 and 1975 and adds that in communist and developing countries jeans did become a garment of openness to the West [1]."
+   "body": "A popular claim holds that jeans were always the clothing of rebellious youth. Pastoureau calls that idea inaccurate, if not wholly false: for most of their history jeans were sensible, utilitarian, even conformist, worn by ordinary and often not young people, and only in the late 1960s in Europe did they become a symbol [1]. Vogue accepted its first jeans advertisement in 1935, when rich tourists from the eastern United States wore them on holidays in the West [1].\n\nBalfour-Paul stresses the postwar rebellion: glamorized by American soldiers, jeans became an icon of European youth after the Second World War, particularly once film stars and pop musicians adopted them [2]. Pastoureau places the emblem of youthful dissent between 1950 and 1975 and adds that in communist and developing countries jeans did become a garment of openness to the West [1]."
   },
   {
    "id": "after",
@@ -253,18 +253,15 @@
   "In denim only the warp threads are dyed, so worn jeans go pale where the blue rubs off but the blue left behind keeps its hue.",
   "Dye vats dated to about 1700, still stained blue, were dug up beside the canal at Nîmes."
  ],
- "words": 1434,
+ "words": 1430,
  "status": "checked",
  "checked": {
-  "by": "L7 article engine (sentence-to-card trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Word origin: Pastoureau calls serge de Nîmes only possible; Finlay and Balfour-Paul state it more firmly. Stated as disputed.",
-   "Strauss/Davis dates differ (Pastoureau 1853, 1860-65, 1870, 1872; Balfour-Paul 1847, 1853, 1873). Presented as disagreement; 1873 per CONFLICTS.md.",
-   "Finlay says Nîmes cloth, Balfour-Paul an American mill. Both reported.",
-   "Finlay's aniline since about 1900 is a single note; hedged.",
-   "Rebel-jeans myth corrected per Pastoureau.",
-   "Archive matches are look-alike colors on aged photographs."
+   "Rewrote the Balfour-Paul rebellion sentence: she says GIs glamorized jeans and stars/musicians made them an icon; the article had claimed Europeans first saw jeans via soldiers and that her dates agree with Pastoureau, neither of which the text says.",
+   "Word origin, Strauss/Davis dates, Vogue 1935, red tab 1936, pH 11.5, billion pairs, $54bn 2011 and rebel-jeans myth correction traced to Pastoureau, Balfour-Paul, Finlay, St Clair: supported and already framed as disagreement.",
+   "Patent-year 1873 is from the library, not a book."
   ]
  }
 }

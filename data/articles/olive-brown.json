@@ -1,0 +1,209 @@
+{
+ "slug": "olive-brown",
+ "name": "Olive-Brown",
+ "hex": "#715F4A",
+ "names": [
+  "Olive-Brown",
+  "Olive Brown"
+ ],
+ "tier": "standard",
+ "depth": "medium",
+ "lede": "Olive-Brown is a muted greenish brown, the color of a kestrel's head and a blackcurrant stem in an Edinburgh flower-painter's 1821 chart, and of a quarter of the paintings in our archive.",
+ "sections": [
+  {
+   "id": "syme",
+   "title": "Syme's olive brown",
+   "body": "The best-documented olive brown is a nineteenth-century naturalists' color. In 1774 the German geologist Abraham Gottlob Werner devised a nomenclature of 54 colors to identify minerals [1]. In 1814 the Scottish artist Patrick Syme (1774-1845) expanded it to 108 terms, and in 1821 to 110, adding examples from animals and plants and a painted swatch for each [1][2].\n\nColor number 109 has two names [3]. Syme's plate calls it Clove Brown, but his text and later pages call it Olive Brown, and he treated them as interchangeable [3]. Baty uses Olive Brown because Syme did [3]. Syme's examples are the head and neck of the male kestrel and the stems of the blackcurrant bush [3]. The mixture given for it is mostly ash grey, with small amounts of blue, red and chestnut brown [3].\n\nThe color has near relatives in the same chart. Syme makes [[hair-brown]] olive brown mixed with ash grey, and [[broccoli-brown]] the same blend with a touch of red added [3]. The set also includes [[liver-brown]] [3]. Werner's list reached medicine in a small way: the anatomist John Gordon cited it in 1817 and William Prout in 1819, though it never became well established there [3]."
+  },
+  {
+   "id": "words",
+   "title": "Olive brown in words",
+   "body": "Paterson's dictionary uses the name for bracken, the olive-brown or orange-brown of the plant, and for mastic as a pale olive brown [4]. The *Pigment Compendium* quotes Salter (1869) describing Leitch's Brown as a most beautiful olive brown, soft and rich, with no information about its composition [5]. That is a description of a color, not a recipe.\n\nFinlay uses the name for disappointment. He describes a smudgy catalogue picture of the Chinese *mi se* porcelain that looked dirty and olive brown, a reminder that a photograph of a [[celadon]]-type glaze is not the glaze [6]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch and its standards",
+   "body": "The swatch on this page is not Syme's [7]. It comes from Ridgway's *Color Standards and Color Nomenclature* of 1912 (plate XL, hue 17‴, tone k), read from a scan of an aged plate, so it is approximate [7]. The name is also in the ISCC-NBS system of 1955 (block 95), and Maerz and Paul's 1930 *Dictionary of Color* gives 1796 as its first record, at plate 15, H 7 [7].\n\nThe standards agree on the name and not on the color. RAL 8008 is a warmer, more orange brown (#6F4F28 on screen, approximate), and the XKCD survey's olive brown (#645403) is much greener and more saturated [7]. Measured, our swatch is dark and quiet: lightness 42, chroma 15, hue angle 75 [7]. The nearest named color is [[umber]], 7.2 units away; neighbors are [[raw-umber]], [[olive-green]] and [[khaki]] [7]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In painting, olive brown is the background. In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 5,661 works, or 23.8 per cent [8]. The rate is nearly flat across the centuries, 22.9 per cent in the 1500s, 23.4 per cent in the 1600s, 23.6 per cent in the 1700s and 23.3 per cent in the 1800s [8].\n\nIt is far higher before 1400 [8]. Of the 50 works from the 1100s, 33 (66 per cent) match, and the peak decade is the 1270s, with 33 of 48 works (69 per cent) [8]. By country, China (230 of 635 works), Japan (244 of 698), Korea (30 of 63) and Nepal (13 of 25) have rates of 35 to 52 per cent, higher than Denmark's 33 per cent [8].\n\nThe largest matches are almost entirely this color: Shen Kai's [[painting:aic-212492|Geese on a Riverbank]] (1750) is 98 per cent olive brown, Kano Chikanobu's [[painting:cma-149142|Chinese Landscape]] (about 1680) 94 per cent and Chen Juzhong's [[painting:cma-111789|The Autumn Hunt]] (about 1200) 92 per cent [8]. These are aged silk and paper, which yellow and darken, so what looks like a painter's choice is partly the age of the ground. The company it keeps is [[sepia]], umber, taupe, camel and tan, all warm browns that turn up with it more often than in the archive overall [8].\n\nAs always these are photographs of aged, varnished paintings, so a match is a screen color and not a pigment test [8]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive: the brown of the olive, or a brown with green in it",
+   "first_recorded": "Maerz and Paul give 1796; Syme's chart, 1814/1821",
+   "source": "Baty, Nature's Palette; ColorHub library"
+  },
+  "aka": [
+   "Clove Brown (Syme's plate name)",
+   "RAL 8008 (nearest approximate)"
+  ],
+  "siblings": [
+   "umber",
+   "raw-umber",
+   "olive-green",
+   "khaki"
+  ],
+  "parent": "brown",
+  "children": [
+   "hair-brown",
+   "broccoli-brown"
+  ],
+  "disambiguation": [
+   {
+    "slug": "olive-green",
+    "gloss": "a greener, more saturated olive"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#715F4A",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 5661,
+  "top_paintings": [
+   "aic-212492",
+   "cma-149142",
+   "cma-111789",
+   "cma-173634",
+   "cma-173671"
+  ],
+  "countries": [
+   {
+    "key": "China",
+    "n": 635,
+    "hits": 230
+   },
+   {
+    "key": "Japan",
+    "n": 698,
+    "hits": 244
+   }
+  ],
+  "measured": {
+   "lch": [
+    42,
+    15,
+    75
+   ],
+   "nearest": [
+    [
+     "Umber",
+     7.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, introduction (Werner and Syme)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, introduction to Syme's chart",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, Reds and Browns, colors 107-110, pp. 276-279, and note on naming; section on medical use (Karliczek)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"bracken\", \"mastic\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Leitch's Brown\" (citing Salter 1869)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Finlay, Colour, chapter on the search for mi se porcelain",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub library, entry \"Olive-Brown\" (Ridgway 1912, RAL 8008, XKCD, ISCC-NBS 1955 block 95, Maerz and Paul 1930)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py, ΔE 6, 5% cover)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did Syme call color number 109 on his plate, compared with his text?",
+   "choices": [
+    "Clove Brown on the plate, Olive Brown in the text",
+    "Olive Brown on the plate, Clove Brown in the text",
+    "Hair Brown in both",
+    "Wood Brown on the plate, Liver Brown in the text"
+   ],
+   "answer": "Clove Brown on the plate, Olive Brown in the text",
+   "kind": "pick"
+  },
+  {
+   "q": "Roughly what share of paintings in our archive contain a lot of this olive brown?",
+   "choices": [
+    "About a quarter",
+    "About one in a hundred",
+    "Nearly all of them",
+    "None"
+   ],
+   "answer": "About a quarter",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the swatch on this page is Syme's color from 1821.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Syme's color 109 is Clove Brown on the plate and Olive Brown in the text, and he used both names.",
+  "A quarter of the paintings in our archive hold this quiet brown, and part of it is the age of the painting."
+ ],
+ "words": 709,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Medical-use sentence overstated (Baty says it was not well established); rewritten to Gordon 1817 and Prout 1819, no olive brown claim.",
+   "Softened age-of-ground claims to 'part of it'."
+  ]
+ }
+}

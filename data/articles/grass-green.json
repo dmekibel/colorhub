@@ -37,7 +37,7 @@
   {
    "id": "field",
    "title": "Field notes",
-   "body": "Our archive holds 23,781 painting photographs [16]. A color within ten CIEDE2000 units of the bright swatch, covering at least five per cent of the canvas, turns up in just 7 of them [16]. All are dated 1886 or later [16]. The earliest is Gauguin's *[[painting:commons-Q79790701|Mother and Child under a Tree at Pont-Aven]]*, and the list includes van Gogh's *[[painting:nga-163323|Green Wheat Fields, Auvers]]* and Matisse's *[[painting:commons-Q21723020|Nymph and Satyr]]*, where the green fills 32 per cent of the canvas [16].\n\nThe old, quieter grass green is common by contrast. Within six units and at least five per cent of the canvas, the muted Werner and Ridgway swatch appears in 262 paintings, 135 of them from the 1800s [17]. [[painter:georges-seurat|Seurat]] carries it in 10 of his 41 works here, and [[painter:camille-pissarro|Pissarro]] in 9 of 50 [17]. Painters, it seems, meant the dull one.\n\nThe phrase itself peaks in printed English around 1820 and has since fallen to about a quarter of that peak [18]. As always, these are photographs of aged, varnished paintings, and screen colors are approximate [16][17]."
+   "body": "Our archive holds 23,781 painting photographs [16]. A color within ten CIEDE2000 units of the bright swatch, covering at least five per cent of the canvas, turns up in just 7 of them [16]. All are dated 1886 or later [16]. The earliest is Gauguin's *[[painting:commons-Q79790701|Mother and Child under a Tree at Pont-Aven]]*, and the list includes van Gogh's *[[painting:nga-163323|Green Wheat Fields, Auvers]]* and Matisse's *[[painting:commons-Q21723020|Nymph and Satyr]]*, where the green fills 32 per cent of the canvas [16].\n\nThe old, quieter grass green is common by contrast. Within six units and at least five per cent of the canvas, the muted Werner and Ridgway swatch appears in 262 paintings, 135 of them from the 1800s [17]. [[painter:georges-seurat|Seurat]] carries it in 10 of his 41 works here, and [[painter:camille-pissarro|Pissarro]] in 9 of 50 [17]. Painters here are far likelier to have used the dull one.\n\nThe phrase itself peaks in printed English around 1820 and has since fallen to about a quarter of that peak [18]. As always, these are photographs of aged, varnished paintings, and screen colors are approximate [16][17]."
   }
  ],
  "aside": {
@@ -274,16 +274,13 @@
   "The bright grass green on screen fills five per cent of a canvas in only 7 of our 23,781 paintings, none earlier than 1886.",
   "When a painter says grass green, think duller and more olive than the screen swatch."
  ],
- "words": 931,
+ "words": 935,
  "status": "checked",
  "checked": {
-  "by": "article writer, sentence-to-card trace",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Thin sources: the 67 concordance hits are mostly Baty's reproductions of old color lists; no book gives an origin story for the name.",
-   "Baty p. 20 does not name which Werner follower used sparrow-grass green; hedged.",
-   "Birren healing claims are corrected, not asserted.",
-   "Swatch (xkcd) vs Werner/Ridgway difference stated."
+   "Softened 'painters meant the dull one' (data shows frequency, not intent)."
   ]
  }
 }

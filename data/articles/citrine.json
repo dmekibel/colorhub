@@ -1,0 +1,268 @@
+{
+ "slug": "citrine",
+ "name": "Citrine",
+ "hex": "#E4D00A",
+ "names": [
+  "Citrine"
+ ],
+ "tier": "pigment",
+ "depth": "long",
+ "lede": "Citrine is a lemon-to-greenish yellow named for the citron, the color of the yellow quartz, and an old artists' word for a muddy tertiary between orange and green.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Name and meaning",
+   "body": "*Citrine* began as a lemon-yellow word, and Paterson reports that the word kept that sense in France, while in English, by Maerz and Paul's reckoning, it came to share the meaning of *citron*, a browny yellow made by mixing green and orange [1]. Maerz and Paul's dictionary of 1930 dates the English color word to 1386 [2].\n\nDated to 1386, it is one of the older yellow words in English, and one that has moved [2]. Today's dictionaries, as St Clair's glossary shows, give it as the tertiary color between orange and green [3]. The swatch on this page is a different thing again: a vivid greenish yellow, nearer the lemon of the original meaning than the olive-brown of the later one [4]."
+  },
+  {
+   "id": "tertiary",
+   "title": "The tertiary citrine",
+   "body": "The English tertiary sense comes through George Field, the London color maker and author of *Chromatography* (1835), named citrine, russet and olive as his three tertiary colors [5]. He made pigments for all three himself, so that every hue on his published scale existed as a real paint [5].\n\nField described a citrine color as an orange broken with green, which is why he could call his citrine lake a fine, transparent color that was rarely a true brown [6]. The lake was based on quercitron, a yellow dye from the bark of the quercitron oak, and later authors such as Salter (1869) treated it as the same pigment as brown pink [6]. Salter also described a \"citrine brown\" made from chromium compounds, which the Pigment Compendium notes had not become a commercial paint [7].\n\nIn Google Books the adjective use of the word, which is the color sense, peaks in the 1860s [8]. That is a generation after Field's *Chromatography* of 1835 [5][6].\n\nBooks therefore disagree about what color citrine is. Paterson's lemon, Field's broken orange-green, and the modern tertiary are three different places on the wheel [1][3][6]."
+  },
+  {
+   "id": "gem",
+   "title": "The stone",
+   "body": "Citrine is also the yellow quartz. Quartz is silicon dioxide, usually colorless or white, and its colored varieties owe their hue to impurities: citrine to iron compounds, amethyst to iron in another state, rose quartz to titanium or fine rutile needles [9]. [[gem:amethyst|Amethyst]] is the same mineral with its iron changed by natural radiation, a different state of the same element [9][10].\n\nIn Sri Lanka, Finlay was shown \"pineapple\" citrines laid out beside lemon-colored topazes [11]. Paterson's list of birthstones gives citrine as an alternative to [[gem:topaz|topaz]] for November [12].\n\nThe ancient stones are less certain. Finlay's survey of the Hebrew Bible's breastplate stones records that Tharshish has been translated as green jasper or as citrine [13]. That is a translation question, not a record of the gem as we know it."
+  },
+  {
+   "id": "alchemy",
+   "title": "In the alchemists' sequence",
+   "body": "Medieval alchemy gave citrine a place in its sequence of color stages. Jarman's survey of alchemical color describes a stage of yellowing, *xanthosis* in the Greek texts, and quotes the formula in which the adept speaks of the citrine of the red [14]. Gage cites a fifteenth-century poem by Sir George Ripley in which citrine appears among the colors that must pass before the perfect white and the final red [15].\n\nThe word here is a stage in a process, not a hue to match. Gage uses the poem to show an area of experience where naming colors precisely was always essential, because the operator had to know when to proceed [15]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch is not the history",
+   "body": "The color shown here, `#E4D00A`, is ISCC-NBS block 106, a vivid greenish yellow, and it sits within CIEDE2000 3.4 of the block's center [4]. Ridgway's *Color Standards* (1912), plate IV hue 21, gives a much darker olive-brown for citrine, though our copy is a scan of an aged plate and approximate [4].\n\nSo the two historical senses pull in opposite directions. The Ridgway plate and Field's broken orange-green fit the brown-citrine tradition, while this page's swatch fits the lemon sense and the gemstone [1][4][6]. The nearest named neighbor of the swatch in our data is [[lemon-yellow]], at 14 ΔE units [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, as photographed, only 6 paintings carry this swatch at 5 percent of the canvas or more, about 0.03 percent [16]. It is rarer than 72 percent of the named colors [16]. Where it appears it plays an accent, never a mass of color [16].\n\nIt peaks in the 1900s, found in 0.4 percent of the 1,674 paintings we hold from that century, which is 5.9 times the rate the same museums would predict [16]. The earliest dated painting is from about 1700 [16]. These are photographs of aged, varnished paintings, so a match is a look-alike hue, not a pigment test, and six paintings is a small number [16].\n\nTo look for it, hold a piece of lemon quartz beside a true lemon and a gold ring, and notice how the greenish pull makes citrine the coolest of the three."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the citron (Latin citrus); also the yellow quartz gem",
+   "first_recorded": "1386 as an English color word (Maerz & Paul 1930)",
+   "source": "Paterson, A Dictionary of Colour; Maerz & Paul 1930"
+  },
+  "aka": [
+   "citrine yellow",
+   "citrine quartz",
+   "citrine lake (the pigment)"
+  ],
+  "siblings": [
+   "lemon-yellow",
+   "sulphur-yellow",
+   "greenish-yellow",
+   "amethyst"
+  ],
+  "parent": "yellow",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "greenish-yellow",
+    "gloss": "close in hue to the ISCC-NBS reading, but a duller, darker color"
+   },
+   {
+    "slug": "olive-green",
+    "gloss": "the brown-citrine tertiary of Field and Ridgway sits near this"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "citrin (still means lemon-colored)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#E4D00A",
+   "de2000": 4,
+   "min_cover": 0.05
+  },
+  "n_present": 6,
+  "top_paintings": [
+   "cma-167578"
+  ],
+  "role": "accent",
+  "ngram": {
+   "adj_peak": 1860,
+   "word_peak": 1940
+  },
+  "measured": {
+   "iscc": "vivid greenish yellow, block 106",
+   "nearest": [
+    [
+     "Lemon Yellow",
+     13.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"citrine\" and \"citron\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 106, citing Maerz & Paul (1930); see also the ColorHub library record, Maerz & Paul first recorded 1386",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary, \"Citrine\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color library and graph nodes (data/library.json; ISCC-NBS 1955 block 106; Ridgway 1912, plate IV), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 220 (on George Field)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pigment Compendium (Dictionary of Historical Pigments), pp. 76, 119, \"citrine lake\", \"brown pink\"",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 119, \"citrine brown\"",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "Google Books Ngram, adjective use of \"citrine\", via ColorHub graph (data/graph/fieldnotes/c.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 328, \"quartz\"",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "ColorHub gem notes (data/gems.js), \"Amethyst\" and \"Citrine\"",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Finlay, Jewels, p. 16 (Sri Lanka)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 50, birthstones",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Finlay, Jewels, p. 20 (Hebrew Bible breastplate stones)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 43",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 143",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, as photographed (data/graph/fieldnotes/c.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In English, which pair of colors did the nineteenth-century color maker George Field say went into a citrine?",
+   "choices": [
+    "Orange and green",
+    "Red and blue",
+    "Blue and yellow",
+    "Yellow and purple"
+   ],
+   "answer": "Orange and green",
+   "kind": "pick"
+  },
+  {
+   "q": "What gives the quartz called citrine its yellow?",
+   "choices": [
+    "Iron compounds",
+    "Gold dust",
+    "Sulphur",
+    "Copper"
+   ],
+   "answer": "Iron compounds",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the swatch on this page matches Ridgway's olive-brown citrine.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Citrine meant lemon yellow in French and a muddy orange-green to Victorian color makers [1][5][6].",
+  "Amethyst and citrine are the same mineral, quartz, colored by iron in different states [9]."
+ ],
+ "words": 807,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Sources thin: few book passages; Field via the Pigment Compendium",
+   "Books disagree on the hue: lemon vs broken orange-green vs olive-brown",
+   "Finlay page numbers are from the concordance, locators approximate",
+   "Re-verified key claims against fact cards and book text; no changes needed"
+  ]
+ }
+}

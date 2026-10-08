@@ -1,0 +1,177 @@
+{
+ "slug": "liver-brown",
+ "name": "Liver Brown",
+ "hex": "#513E32",
+ "names": [
+  "Liver Brown"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Liver Brown is a dark, slightly reddish brown that comes straight out of the mineralogists' colour list, where it was defined as a recipe: chestnut brown darkened with a little black and olive green.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name from a mineral list",
+   "body": "Liver Brown is number 106 in Werner's colour list, in the group of reds and browns, as Patrick Syme printed it in 1821 [1][4]. Werner defined it by a mixing recipe rather than a measurement: chestnut brown with a little black and olive green added [1]. The books I read give no account of why the organ was chosen, and the definition is all they offer [1][2].\n\nSyme marked Werner's original colours with a W, but Baty finds slips, and liver brown is one that Werner had and Syme left unmarked [2]."
+  },
+  {
+   "id": "examples",
+   "title": "What Werner pointed at",
+   "body": "Werner paired each colour with samples from the animal, vegetable and mineral kingdoms. For Liver Brown the animal samples are the middle parts of a hen pheasant's feathers and the wing coverts of a grosbeak, and the mineral sample is semi-opal [1].\n\nBaty's plates make the same point with pictures: the cashew seedpod in Weinmann's 1737 botanical plates, an opal in Brauns's 1912 *The Mineral Kingdom*, and the wing feathers of the grosbeak in Gould's *Birds of Europe*, 1832 to 1837 [1]."
+  },
+  {
+   "id": "neighbours",
+   "title": "Its neighbours on the list",
+   "body": "Liver Brown sits in a run of browns that Werner's followers copied with small changes [3]. Several late eighteenth-century lists in Baty, from Picardet in 1790 and from Widenmann and Kirwan in 1794, put [[reddish-brown]], clove brown, yellowish brown and tombac brown before it and [[blackish-brown]] after it [3].\n\nThe near neighbour is [[hair-brown]], defined as olive brown mixed with ash grey, so a greyer, greener brown than liver brown's reddish one [1]. One of the lists also places [[nut-brown]] just ahead of it [3]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "On screen the color is #513E32, which ISCC-NBS 1955 files as dark grayish yellow brown in block 46, 3.9 units away by ΔE [4]. Ridgway's 1912 *Color Standards*, plate XIV, kept the name from his 1886 book, but its swatch is redder and lighter, near #65473E [4]. Werner's recipe belongs to a hand-painted list, and any modern swatch is an interpretation of it.\n\nOur library files a Japanese traditional name, Mirucha, glossed as simmered seaweed, under the same swatch, which is a coincidence of color and not of history [6]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, 6,676 carry a color within six ΔE units of this brown covering at least five per cent of the canvas, 28 per cent of the archive [5]. That is a common color: where it appears, 57 per cent of the matching colors sit in the shadows of the painting's lightness order, 41 per cent in the middles and 3 per cent in the lights [5].\n\nBy period it is steady from the 1200s, when 18 of 40 paintings in the peak decade carry it, down to the 1900s [5]. It is rare among Impressionists, with 19 of 140 paintings, and rarer still among Post-Impressionists, with 3 of 45 [5]. The painting with the most of it is Nagasawa Rosetsu's 1788 [[painting:cma-160688|Snails]], where it covers 98 per cent of the canvas [5]. These are photographs of aged, varnished paintings, so a match shows a screen color near this one and never proves a pigment [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the color of liver; no book consulted explains the choice",
+   "first_recorded": "Werner's colour list, no. 106 in Syme's 1821 edition",
+   "source": "Baty, Nature's Palette; ColorHub library"
+  },
+  "aka": [
+   "Mirucha (Japanese traditional name filed under the same swatch)"
+  ],
+  "siblings": [
+   "hair-brown",
+   "blackish-brown"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Mirucha (海松茶), simmered seaweed"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#513E32",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 6676,
+  "top_paintings": [
+   "cma-160688"
+  ],
+  "role": {
+   "shadow": 0.57,
+   "mid": 0.41,
+   "highlight": 0.03
+  },
+  "measured": {
+   "lch": [
+    27.9,
+    12.3,
+    59.0
+   ],
+   "iscc": "dark grayish yellow brown",
+   "munsell": "6.8YR 2.8/2.0"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, Werner's colour no. 106, \"Liver Brown\" and plates",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, introduction, on Syme's W marks",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, introduction, the colour lists of Picardet (1790), Widenmann and Kirwan (1794)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub library: Werner 1821 no. 106, Ridgway 1912 plate XIV, ISCC-NBS 1955 block 46",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub library, Japanese traditional names (Mirucha)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How did Werner define Liver Brown?",
+   "choices": [
+    "Chestnut brown with a little black and olive green",
+    "Pure umber mixed with red ochre",
+    "Black with a drop of crimson",
+    "Olive brown mixed with ash grey"
+   ],
+   "answer": "Chestnut brown with a little black and olive green",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Syme added Liver Brown to Werner's list in 1821.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "In our painting archive, where does this brown mostly sit in a painting's lightness order?",
+   "choices": [
+    "In the shadows",
+    "In the highlights",
+    "Exactly in the middle",
+    "Nowhere, it is absent"
+   ],
+   "answer": "In the shadows",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Werner defined Liver Brown as a recipe: chestnut brown with a little black and olive green.",
+  "Werner's animal samples for Liver Brown include the middle feathers of a hen pheasant and the wing coverts of a grosbeak."
+ ],
+ "words": 531,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported 'crowded list' aside and 'everyday sample' pheasant embellishment; reworded opener to what Baty states."
+  ]
+ }
+}

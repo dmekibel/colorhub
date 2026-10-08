@@ -1,0 +1,207 @@
+{
+ "slug": "salmon",
+ "name": "Salmon",
+ "hex": "#FA8072",
+ "names": [
+  "Salmon"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Salmon is the orange-pink of the fish's flesh, and on screens it is a bright, warm pink that sits between coral and peach.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name and its family",
+   "body": "Paterson defines salmon as the orange-pink of the fish's flesh, and notes that Salmon, capitalised, is one of the 140 colours of the X11 set, with the code #FA8072 [1]. He also lists salmon pink as a deep pink and salmon red as an orangey-red [1]. St Clair's glossary calls it a warm pinky orange [2].\n\nThe family on our side is wider than those entries: [[salmon-pink]], [[dark-salmon]], [[light-salmon]] and [[pale-salmon]] all lean on the same word, and [[coral]], [[peach]] and [[flesh-color]] sit close to it. The books do not say when the word first became a color name."
+  },
+  {
+   "id": "in-use",
+   "title": "Where the color turns up",
+   "body": "St Clair notes that the women painted by the rococo artists Boucher and Fragonard are dressed in salmon-coloured silks [3]. Finlay met young weavers in a village who found salmon-pink in rock lichens that they call *muzgo de roca*, one colour in a wild-collected set that ran to deep browns from walnuts and blacks from mimosa [4]. In gems, the pink beryl found in Madagascar in 1911 was named [[gem:morganite|morganite]] in gratitude to the financier J. P. Morgan, and Finlay says it usually comes out of the ground a pale salmon and looks far more vivid after heating [5]."
+  },
+  {
+   "id": "dead-salmon",
+   "title": "Dead Salmon, and other Salmons",
+   "body": "The British paint firm Farrow & Ball sells a colour called Dead Salmon that is so off-white it is almost brown, and it is a best seller [6]. The name has nothing to do with the fish dying: it comes from an invoice for decorating a house in 1850, where it meant a dead flat finish [6]. Finlay reports that the National Trust objected to the name [6]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The screen color is #FA8072, a lightness of 67 and chroma of 54, and ISCC-NBS 1955 calls the nearest block vivid yellowish pink, 4.8 units away [7]. Other sources do not agree on what salmon is: Ridgway's 1912 swatch is the duller #E49489, and the xkcd survey of 2010 chose the redder #FF6163 [7].\n\nBirren, writing in 1950, recommended tints of orange such as peach and salmon for hospitals, homes, factories and schools, which is an old opinion and not modern evidence [8]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Bright salmon is almost absent from oil painting. Only one of 23,781 paintings in our archive carries a color within six ΔE units of it over at least five per cent of the canvas, the 1860 [[painting:commons-Q133269393|Self-portrait]] by Emma Gaggiotti Richards, at 16 per cent [9]. A wider lens finds it in nine paintings, 0.04 per cent, rarer than 77 per cent of the named colors [9].\n\nIn printed English the word itself peaks in the 1880s, though the count includes the fish [10]. These are photographs of aged, varnished paintings, so a match is a screen color and not a pigment test [9]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the flesh of the salmon",
+   "first_recorded": "origin of the color name undocumented in the books read",
+   "source": "Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "Salmon pink (deeper)",
+   "Salmon red (orangier)"
+  ],
+  "siblings": [
+   "salmon-pink",
+   "dark-salmon",
+   "light-salmon"
+  ],
+  "parent": null,
+  "children": [
+   "pale-salmon"
+  ],
+  "disambiguation": [
+   {
+    "slug": "dark-salmon",
+    "gloss": "the CSS Dark Salmon, #E9967A, a duller orange-tan"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#FA8072",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1,
+  "top_paintings": [
+   "commons-Q133269393"
+  ],
+  "ngram": {
+   "peak": 1884
+  },
+  "measured": {
+   "lch": [
+    67.3,
+    53.8,
+    32.7
+   ],
+   "iscc": "vivid yellowish pink",
+   "munsell": "6.6R 6.6/11.0"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"salmon\", \"Salmon\", \"salmon pink\", \"salmon red\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, glossary, \"Salmon\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, ch. \"Pink\"",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 18",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Finlay, Jewels, ch. 15",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 12",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub library: CSS/X11, ISCC-NBS 1955 block 26, Ridgway 1912, xkcd 2010",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 29",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does \"dead\" mean in the paint name Dead Salmon?",
+   "choices": [
+    "A dead flat, matte finish",
+    "A fish that has died",
+    "A faded, washed-out pink",
+    "A dark, muted red"
+   ],
+   "answer": "A dead flat, matte finish",
+   "kind": "pick"
+  },
+  {
+   "q": "Which pink beryl, named after a financier, usually comes out of the ground a pale salmon?",
+   "choices": [
+    "Morganite",
+    "Spinel",
+    "Rose quartz",
+    "Kunzite"
+   ],
+   "answer": "Morganite",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: bright screen salmon is common in the oil paintings of our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dead Salmon, the off-white paint, has nothing to do with a dead fish: it means a dead flat finish.",
+  "Morganite, the pink beryl, often leaves the ground a pale salmon and turns vivid when heated."
+ ],
+ "words": 467,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed low-confidence garbled Gage/van Gogh sentence and the off-topic William Salmon paragraph (woad-for-bleeding unsupported); National Trust 'thought nobody would buy it' softened to 'objected'; notes renumbered."
+  ]
+ }
+}

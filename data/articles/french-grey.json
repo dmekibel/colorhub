@@ -32,7 +32,7 @@
   {
    "id": "field",
    "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 2,120 works, about 9 per cent [10]. It is a pale color, and in 94 per cent of those paintings it is among the lightest colors on the canvas [10]. Five of the six paintings where it covers the most are Japanese or Indian, among them [[painting:cma-133000|Sesshu's splashed-ink landscape]] at 89 per cent, where a pale ground can carry the whole match [10]. The sixth is a frieze by Klimt, [[painting:commons-Q58427233|Yearning for happiness is assuaged in poetry]], at 87 per cent [10].\n\nThe rate rises over time, from 6.1 per cent of paintings in the 1600s to 14.3 per cent in the 1900s, and the 1930s peak at 13 of 69 paintings [10]. Impressionism carries it in 28 of 140 works, and [[painter:frederic-remington|Remington]] in 9 of 16 [10]. As always these are photographs of aged, varnished paintings, so a match is a screen color, not a pigment test [10].\n\nThe word itself is easy to date. In Google Books, *French grey* rose fastest in the 1810s, the decade of Syme's first edition, and peaked in the 1920s, though the count covers every sense of the phrase [11]. Our archive finds this grey in a painting of 1164, 657 years before the name's earliest record in our sources, a reminder that a color can exist long before its name [10][9]."
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 2,120 works, about 9 per cent [10]. It is a pale color, and in 94 per cent of those paintings it is among the lightest colors on the canvas [10]. Five of the six paintings where it covers the most are Japanese or Indian, among them [[painting:cma-133000|Sesshu's splashed-ink landscape]] at 89 per cent, where a pale ground can carry the whole match [10]. The sixth is a frieze by Klimt, [[painting:commons-Q58427233|Yearning for happiness is assuaged in poetry]], at 87 per cent [10].\n\nThe rate rises over time, from 6.1 per cent of paintings in the 1600s to 14.3 per cent in the 1900s, and the 1930s peak at 13 of 69 paintings [10]. Impressionism carries it in 28 of 140 works, and [[painter:frederic-remington|Remington]] in 9 of 16 [10]. As always these are photographs of aged, varnished paintings, so a match is a screen color, not a pigment test [10].\n\nThe word itself is easy to date. In Google Books, *French grey* rose fastest in the 1810s, the decade of Syme's first edition, and peaked in the 1920s, though the count covers every sense of the phrase [11]. Our archive finds this grey in a painting of 1164, 650 years before the name's earliest record in our sources, a reminder that a color can exist long before its name [10][9]."
   }
  ],
  "aside": {
@@ -243,13 +243,14 @@
  "words": 971,
  "status": "checked",
  "checked": {
-  "by": "Claude Sonnet 5.5 (batch 54)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
    "Baty p.51 calls French grey Syme's own; p.173 says already common English (disagreement reported)",
    "Origin of 'French' undocumented",
    "Darwin episode: Baty and Finlay assumed to be the same passage (hedged)",
-   "Our rec table dates the name to 1821; Maerz and Paul and Syme's first edition give 1814"
+   "Our rec table dates the name to 1821; Maerz and Paul and Syme's first edition give 1814",
+   "Fixed gap between 1164 painting and name record (650 years from 1814, not 657 from 1821)"
   ]
  }
 }

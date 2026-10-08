@@ -1,0 +1,140 @@
+<!doctype html>
+<!-- Visual direction A: Night Gallery. Three 440x956 frames: Home + corner menu, color page top, a game. -->
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="shared.js"></script>
+<style>
+:root{
+  --ground:#0E0D0B; --s1:#171512; --s2:#201E1A; --s3:#2B2823; --line:rgba(236,232,223,.10); --line-2:rgba(236,232,223,.22);
+  --ink:#ECE8DF; --soft:#A39E92; --faint:#7C776C; --paper:#EFEBE3; --paper-ink:#141311; --good:#9AD4AE; --bad:#F09A86;
+  --serif:'Instrument Serif',Georgia,serif; --sans:Geist,system-ui,sans-serif;
+  --r-tile:6px; --r-card:18px; --r-sheet:28px; --r-pill:999px;
+}
+*{box-sizing:border-box;margin:0}
+body{background:#050505;display:flex;gap:20px;padding:0;width:1360px;font-family:var(--sans);color:var(--ink);-webkit-font-smoothing:antialiased}
+.f{width:440px;height:956px;position:relative;overflow:hidden;background:var(--ground)}
+.island{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:126px;height:37px;border-radius:20px;background:#000;z-index:50}
+.sb{position:absolute;top:18px;left:38px;right:34px;display:flex;justify-content:space-between;font:600 17px var(--sans);z-index:49}
+.num{font-family:var(--sans);font-variant-numeric:tabular-nums}
+/* corner buttons: level 2, opaque, 56 */
+.corner{position:absolute;bottom:34px;width:56px;height:56px;border-radius:50%;background:var(--s2);border:1px solid var(--line-2);box-shadow:0 8px 24px rgba(0,0,0,.5);display:grid;place-items:center;z-index:20}
+.corner svg{width:24px;height:24px;stroke:var(--ink);fill:none;stroke-width:1.6;stroke-linecap:round}
+/* the place pill (trunk test) */
+.place{position:absolute;top:62px;left:20px;height:36px;padding:0 14px 0 6px;border-radius:var(--r-pill);background:var(--s2);border:1px solid var(--line-2);display:flex;align-items:center;gap:8px;font:15px var(--sans);z-index:20}
+.place i{width:24px;height:24px;border-radius:50%;background:conic-gradient(#E34234,#FFBF00,#98E2B5,#2E7FD6,#B784A7,#E34234)}
+.place b{font:400 19px var(--serif)}
+.place span{color:var(--soft)}
+/* menu sheet: a tile grid at the thumb, no stacked pills */
+.dim{position:absolute;inset:0;background:rgba(0,0,0,.42)}
+.menu{position:absolute;left:12px;right:12px;bottom:104px;background:var(--s1);border:1px solid var(--line);border-radius:var(--r-sheet);padding:18px 14px 14px;box-shadow:0 -16px 48px rgba(0,0,0,.5);z-index:30}
+.menu h3{font:400 30px/1 var(--serif);padding:0 6px 4px}
+.menu .note{font:italic 16px var(--serif);color:var(--soft);padding:0 6px 14px}
+.grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.tile{height:108px;border-radius:var(--r-card);background:var(--s2);padding:12px;display:flex;flex-direction:column;justify-content:space-between;position:relative}
+.tile svg{width:26px;height:26px;stroke:var(--ink);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.tile b{font:400 21px/1 var(--serif);display:block}
+.tile small{font:13px var(--sans);color:var(--soft);display:block;margin-top:4px}
+.tile .dots{display:flex}.tile .dots i{width:16px;height:16px;border-radius:50%;margin-right:-4px;border:2px solid var(--s2)}
+.tile.on{background:var(--s3);box-shadow:inset 0 0 0 1.5px var(--line-2)}
+.tile.on::after{content:"";position:absolute;top:14px;right:14px;width:8px;height:8px;border-radius:50%;background:#FFBF00}
+.wide{grid-column:span 2}
+/* color page */
+.hero{height:520px;background:#FFBF00;position:relative;padding:0 20px 22px;display:flex;flex-direction:column;justify-content:flex-end;color:#1A1405}
+.float{position:absolute;top:62px;width:44px;height:44px;border-radius:50%;background:rgba(14,13,11,.88);display:grid;place-items:center}
+.float svg{width:20px;height:20px;stroke:#ECE8DF;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.hero .kick{font:italic 18px var(--serif);opacity:.75}
+.hero h1{font:400 112px/.84 var(--serif);letter-spacing:-.045em;margin:6px 0 10px}
+.hero .meta{display:flex;gap:14px;font:500 14px var(--sans);opacity:.8}
+.seg{margin:18px 20px 0;height:44px;border-radius:var(--r-pill);background:var(--s1);border:1px solid var(--line);display:flex;padding:3px}
+.seg div{flex:1;border-radius:var(--r-pill);display:grid;place-items:center;font:15px var(--sans);color:var(--soft)}
+.seg .on{background:var(--s3);color:var(--ink);box-shadow:inset 0 0 0 1px var(--line-2)}
+.sec{padding:22px 20px 0}
+.sec .note{font:italic 16px var(--serif);color:var(--soft);margin-bottom:10px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{height:44px;border-radius:var(--r-pill);padding:0 16px 0 6px;display:flex;align-items:center;gap:10px;background:var(--s1);border:1px solid var(--line);font:400 19px var(--serif)}
+.chip i{width:32px;height:32px;border-radius:50%}
+.chip.on{background:var(--s3);border-color:transparent;box-shadow:inset 0 0 0 1.5px var(--c)}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.stat{background:var(--s1);border:1px solid var(--line);border-radius:var(--r-card);padding:14px}
+.stat b{font:400 40px/1 var(--serif);display:block}
+.stat small{font:14px/1.35 var(--sans);color:var(--soft);display:block;margin-top:6px}
+.bar{display:flex;height:10px;border-radius:3px;overflow:hidden;margin-top:12px}
+/* game */
+.top{position:absolute;top:60px;left:20px;right:20px;display:flex;align-items:center;gap:14px}
+.x{width:44px;height:44px;border-radius:50%;background:var(--s2);display:grid;place-items:center}
+.x svg{width:18px;height:18px;stroke:var(--ink);stroke-width:2;stroke-linecap:round}
+.track{flex:1;height:6px;border-radius:3px;background:var(--s3)}
+.track i{display:block;height:100%;width:62%;border-radius:3px;background:var(--ink)}
+.lvl{font:500 15px var(--sans);color:var(--soft)}
+.q{position:absolute;top:128px;left:20px;right:20px}
+.q .note{font:italic 17px var(--serif);color:var(--soft)}
+.q h2{font:400 44px/.98 var(--serif);letter-spacing:-.02em;margin-top:6px}
+.board{position:absolute;top:262px;left:20px;right:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.board div{aspect-ratio:1;border-radius:var(--r-tile);position:relative}
+.board .pick{box-shadow:0 0 0 3px var(--ground),0 0 0 5px var(--good)}
+.fb{position:absolute;left:20px;right:20px;top:690px;display:flex;align-items:center;gap:14px}
+.fb .pair{display:flex;border-radius:var(--r-tile);overflow:hidden;width:96px;height:56px}.fb .pair i{flex:1}
+.fb b{font:400 26px/1 var(--serif);color:var(--good)}
+.fb small{display:block;font:15px var(--sans);color:var(--soft);margin-top:4px}
+.btn{position:absolute;left:20px;right:20px;bottom:40px;height:58px;border-radius:var(--r-pill);background:var(--paper);color:var(--paper-ink);display:flex;align-items:center;justify-content:space-between;padding:0 24px;font:400 24px var(--serif)}
+.btn svg{width:22px;height:22px;stroke:var(--paper-ink);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+</style>
+
+<!-- 1. Home + menu -->
+<div class="f" id="home">
+  <div class="island"></div><div class="sb"><span>9:41</span><span>●●● ▮</span></div>
+  <div id="map" style="position:absolute;inset:0"></div>
+  <div class="place"><i></i><b>Hue map</b><span class="num">100 colors</span></div>
+  <div class="dim"></div>
+  <div class="menu">
+    <h3>The map</h3><div class="note">What you see, and what to do with it</div>
+    <div class="grid">
+      <div class="tile on wide"><div class="dots"><i style="background:#E34234"></i><i style="background:#FFBF00"></i><i style="background:#30C5C0"></i><i style="background:#2A3FB0"></i><i style="background:#B784A7"></i></div><div><b>Colors</b><small class="num">Stage 3 · 100 names</small></div></div>
+      <div class="tile"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h10M4 17h6"/><circle cx="18" cy="15" r="3"/></svg><div><b>Arrange</b><small>Hue map</small></div></div>
+      <div class="tile"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="11" height="15" rx="2"/><path d="M8 4V3h11v15h-1"/></svg><div><b>Learn</b><small>12 near you</small></div></div>
+      <div class="tile"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg><div><b>Study</b><small>Find by place</small></div></div>
+      <div class="tile"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><div><b>Loved</b><small class="num">14 colors</small></div></div>
+    </div>
+    <div style="margin-top:8px;height:52px;border-radius:var(--r-pill);background:var(--s2);display:flex;align-items:center;gap:12px;padding:0 18px;color:var(--soft);font:16px var(--sans)">
+      <svg viewBox="0 0 24 24" style="width:20px;height:20px;stroke:var(--soft);fill:none;stroke-width:1.8;stroke-linecap:round"><circle cx="11" cy="11" r="6"/><path d="M16 16l4 4"/></svg>A color, a hex, a painter, a decade</div>
+  </div>
+  <div class="corner" style="left:20px"><svg viewBox="0 0 24 24"><circle cx="6" cy="18" r="1.6"/><circle cx="9" cy="10" r="1.6"/><circle cx="15" cy="6" r="1.6"/><circle cx="19" cy="13" r="1.6"/></svg></div>
+  <div class="corner" style="right:20px;background:var(--s3)"><svg viewBox="0 0 24 24"><path d="M7 7l10 10M17 7L7 17"/></svg></div>
+</div>
+
+<!-- 2. Color page top -->
+<div class="f" id="color">
+  <div class="island"></div><div class="sb" style="color:#1A1405"><span>9:41</span><span>●●● ▮</span></div>
+  <div class="hero">
+    <div class="float" style="left:20px"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></div>
+    <div class="float" style="right:20px"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></div>
+    <div class="kick">A gem, then a pigment name</div>
+    <h1>Amber</h1>
+    <div class="meta num"><span>#FFBF00</span><span>Warm yellow-orange</span><span>Known · 3 days</span></div>
+  </div>
+  <div class="seg"><div class="on">Overview</div><div>Paintings</div><div>Kin</div><div>Read</div></div>
+  <div class="sec"><div class="note">Easy to mix up with</div>
+    <div class="chips"><div class="chip on" style="--c:#F4C430"><i style="background:#F4C430"></i>Saffron</div><div class="chip"><i style="background:#E1AD01"></i>Mustard</div><div class="chip"><i style="background:#F28500"></i>Tangerine</div></div></div>
+  <div class="sec"><div class="stats">
+    <div class="stat"><b class="num">1,600</b><small>paintings use it, most of them Dutch, 1620 to 1680</small><div class="bar"><i style="flex:5;background:#6B4A3A"></i><i style="flex:3;background:#FFBF00"></i><i style="flex:2;background:#36393D"></i></div></div>
+    <div class="stat"><b class="num">84%</b><small>of them set it against a deep brown</small><div class="bar"><i style="flex:8;background:#4A2C20"></i><i style="flex:2;background:#FFBF00"></i></div></div>
+  </div></div>
+</div>
+
+<!-- 3. Game -->
+<div class="f" id="game">
+  <div class="island"></div><div class="sb"><span>9:41</span><span>●●● ▮</span></div>
+  <div class="top"><div class="x"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></div><div class="track"><i></i></div><div class="lvl num">Level 9</div></div>
+  <div class="q"><div class="note">Odd one out · violets</div><h2>Which one is<br><i>different?</i></h2></div>
+  <div class="board" id="board"></div>
+  <div class="fb"><div class="pair" id="pair"></div><div><b>Right.</b><small class="num">3.5% lighter. Your best is 3.2%.</small></div></div>
+  <div class="btn">Next<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+</div>
+
+<script>
+document.getElementById("map").innerHTML = vdMap({ step:66, cy:.30 });
+const b = vdBoard(3, 268, 50, 36, 4, 4);
+document.getElementById("board").innerHTML = b.map((c,i)=>`<div class="${i===4?"pick":""}" style="background:${c}"></div>`).join("");
+document.getElementById("pair").innerHTML = `<i style="background:${b[0]}"></i><i style="background:${b[4]}"></i>`;
+</script>

@@ -17,7 +17,7 @@
   {
    "id": "werner",
    "title": "Number 74",
-   "body": "Werner's first list of 1774 contained 54 colors, and ochre yellow was one of its nine yellows, beside sulphur, lemon, straw, wine and Isabella yellow [1]. It appears in each of the early lists Baty charts through the 1790s [1].\n\nIn Syme's chart it is number 74, marked with a W as one of Werner's own [2]. His recipe is sienna yellow with a little light chesnut brown, while sienna yellow itself, number 73, is primrose yellow with a little ochre yellow [2]. The two recipes lean on each other, and on screen the two swatches sit only 1.7 units apart [15].\n\nOchre yellow was also a building block. Syme made straw yellow from sulphur yellow, much greyish white and a little ochre yellow, and cream yellow from ochre yellow with some white and the merest trace of Dutch orange [2]. Cream yellow was his new name for Werner's Isabella yellow [2]. His examples for number 74 were the vent coverts of the redstart, which are the feathers around the cloaca, and porcelain jasper [2]."
+   "body": "Werner's first list of 1774 contained 54 colors, and ochre yellow was one of its nine yellows, beside sulphur, lemon, straw, wine and Isabella yellow [1]. Baty's chart shows it again in later lists, among them Lenz, Widenmann, Kirwan and Picardet [1].\n\nIn Syme's chart it is number 74, marked with a W as one of Werner's own [2]. His recipe is sienna yellow with a little light chesnut brown, while sienna yellow itself, number 73, is primrose yellow with a little ochre yellow [2]. The two recipes lean on each other, and on screen the two swatches sit only 1.7 units apart [15].\n\nOchre yellow was also a building block. Syme made straw yellow from sulphur yellow, much greyish white and a little ochre yellow, and cream yellow from ochre yellow with some white and the merest trace of Dutch orange [2]. Cream yellow was his new name for Werner's Isabella yellow [2]. His examples for number 74 were the vent coverts of the redstart, which are the feathers around the cloaca, and porcelain jasper [2]."
   },
   {
    "id": "material",
@@ -27,7 +27,7 @@
   {
    "id": "antiquity",
    "title": "From cave walls to Roman villas",
-   "body": "Yellow ochre is among the earliest pigments. It has been identified in European Palaeolithic cave art, though it was used far less than red ochre or burnt ochre, and in the rock art of more recent Aboriginal cultures [6]. Egyptian painters used it widely, sometimes adulterated with orpiment, and mixed it with blue frit to make green [6][12]. It also appears in wall paintings and reliefs from Persepolis and in Roman wall paintings [6].\n\nThe most celebrated yellow ochre of antiquity came from the silver mines at Laurion, west of Athens, and was known as Attic ochre [6]. By Vitruvius' account in the first century BC its supply was exhausted, yet Pliny, writing in AD 77, still quotes two denarii a pound for it, which the Compendium calls confusing [6]. Vitruvius calls yellow ochre *ochra* and *sil*, Pliny calls it *sil*, and between them they name sources in Italy, Scyros, Gaul, Rome, Lydia and Achaia [6].\n\nPliny is also the source of a story that the great Greek painters, Apelles among them, used only four colors: Melian white, Attic ochre yellow, Pontic red and black [10]. That is a myth. Pliny was moralising against luxury, and Greek painters did use blues such as Egyptian blue [10]. Ochre belongs to the plain, sober end of the ancient palette, but it was never the whole of it."
+   "body": "Yellow ochre is among the earliest pigments. It has been identified in European Palaeolithic cave art, though it was used far less than red ochre or burnt ochre, and in the rock art of more recent Aboriginal cultures [6]. Egyptian painters used it, sometimes adulterated with orpiment, and occasionally mixed it with blue frit to make green [6][12]. It also appears in wall paintings and reliefs from Persepolis and in Roman wall paintings [6].\n\nThe most celebrated yellow ochre of antiquity came from the silver mines at Laurion, west of Athens, and was known as Attic ochre [6]. By Vitruvius' account in the first century BC its supply was exhausted, yet Pliny, writing in AD 77, still quotes two denarii a pound for it, which the Compendium calls confusing [6]. Vitruvius calls yellow ochre *ochra* and *sil*, Pliny calls it *sil*, and between them they name sources in Italy, Scyros, Gaul, Rome, Lydia and Achaia [6].\n\nPliny is also the source of a story that the great Greek painters, Apelles among them, used only four colors: Melian white, Attic ochre yellow, Pontic red and black [10]. That is a myth. Pliny was moralising against luxury, and Greek painters did use blues such as Egyptian blue [10]. Ochre belongs to the plain, sober end of the ancient palette, but it was never the whole of it."
   },
   {
    "id": "art",
@@ -314,16 +314,14 @@
   "The swatch is a pale gold, but the dictionary calls ochre yellow a yellowish brown: the family runs from straw to leather.",
   "Pliny priced Attic ochre at two denarii a pound after Vitruvius said the mines were exhausted."
  ],
- "words": 1590,
+ "words": 1592,
  "status": "checked",
  "checked": {
-  "by": "batch 33 writer (sentence-to-card trace, myth list)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Roman ochre: Heaton (warm, reddish) vs Salter (deeper, cool), both via Pigment Compendium; presented as disagreement.",
-   "Pliny four-colour claim corrected as a myth; Werner 1774 list identified in Baty's chart by its 54-colour count.",
-   "Sargent/Both/Sully counts are small-n; East Asian matches may be the support, hedged.",
-   "Maerz and Paul 1814 date in the library note appears to belong to Sienna Yellow, so not used."
+   "Softened 'each of the early lists' to the lists on the card",
+   "Egyptian use: removed 'widely', blue-frit green is 'occasional' per Ball"
   ]
  }
 }

@@ -22,7 +22,7 @@
   {
    "id": "field",
    "title": "Field notes",
-   "body": "No painting in our 23,781-painting archive has this color over 1 per cent of its canvas, as photographed [2]. That describes this archive, not painting as a whole. A saturated electric violet is mostly a screen color and a synthetic-dye color, and our nearest fashion match is the aniline craze of the 1850s and 1860s [2]."
+   "body": "No painting in our 23,781-painting archive has this color over 1 per cent of its canvas, as photographed [2]. That describes this archive, not painting as a whole. By color distance alone, our nearest fashion match is the aniline craze of the 1850s and 1860s [2]. That is a match in color, not a claim about cause."
   }
  ],
  "aside": {
@@ -122,12 +122,12 @@
  ],
  "status": "checked",
  "checked": {
-  "by": "L7 batch writer self-check",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Name is descriptive; no coinage claimed.",
-   "Aniline-craze match is a color proximity, not a causal link."
+   "Removed unsourced 'mostly a screen color and synthetic-dye color'",
+   "Marked aniline match as color proximity only"
   ]
  },
- "words": 258
+ "words": 259
 }

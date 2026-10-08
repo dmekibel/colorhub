@@ -301,14 +301,10 @@
  "words": 1724,
  "status": "checked",
  "checked": {
-  "by": "batch30 writer + gate",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Reason for the color name Arsenate undocumented; stated as such.",
-   "Paragraph on poison/Napoleon relies on notes reused from the checked emerald-green article (St Clair, Finlay); 2008 hair study per St Clair.",
-   "Thenard date disagreement: St Clair 1802 vs Compendium 1803-4.",
-   "Pastoureau 'copper arsenate' vs Compendium 'arsenite' flagged.",
-   "Olivenite 'reddish black' pairing in Baty is a page-layout adjacency; wording may need a re-check against the plate."
+   "Verified Scheele/Sattler, Paterson Veronese, Coles 1815/1960s, Hofmann 1862, Napoleon hair 2008, cobalt violet 1859, Baty olivenite against sources; no changes needed"
   ]
  }
 }

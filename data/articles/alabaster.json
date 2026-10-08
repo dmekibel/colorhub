@@ -1,0 +1,244 @@
+{
+ "slug": "alabaster",
+ "name": "Alabaster",
+ "hex": "#FFE3CE",
+ "names": [
+  "Alabaster"
+ ],
+ "tier": "pigment",
+ "depth": "medium",
+ "lede": "Alabaster is the soft, fine-grained white stone used for vases, statues and painters' grounds, and the name of the warm cream that dictionaries have used for its look since the sixteenth century.",
+ "sections": [
+  {
+   "id": "material",
+   "title": "The stone",
+   "body": "Alabaster is a variety of gypsum, hydrated calcium sulfate, and the books describe it as the massive, fine-grained and often banded form [1]. Gypsum takes its name from a Greek word meaning burned, and the clear, translucent form is called selenite [1]. Where the word *alabaster* itself comes from is not covered in our sources.\n\nTrade names confuse the stone. \"Oriental alabaster\" is banded calcite, not alabaster proper, and \"Algerian onyx\" is neither alabaster nor onyx [2][3]. Travertine and tufa look much alike but are calcium carbonate [4]."
+  },
+  {
+   "id": "name",
+   "title": "The word as a color",
+   "body": "As a color word, Paterson defines alabaster as akin to the stone in its whiteness and the smoothness of its texture [5]. He cites Shakespeare's *Richard III*, where it describes the arms of two murdered children [5].\n\nThe swatch here is Maerz and Paul's plate 1 A 2 of 1930, which records the name as first used in 1573 [6]. It is a warm cream with a trace of peach, lightness 92 and chroma 15, and its nearest named neighbor is [[ecru]] at a distance of 7.7 [6]. That is warmer than a freshly cut white stone. The swatch is the dictionary's idea of the color, not a measurement of the mineral [5][6]."
+  },
+  {
+   "id": "painters",
+   "title": "In the painter's studio",
+   "body": "Alabaster's main job in painting was hidden. A gesso ground was made of chalk, gypsum or alabaster bound with glue, and Ball and Finlay both list alabaster among the options [7][8]. To make plaster of Paris, either mineral is heated to drive off bound water, and set in glue size the crystals weld together slowly into a hard, smooth surface [7]. Painters used thin gesso, *gesso sottile*, over delicate carving and thick gesso, *gesso grosso*, on flat areas [7].\n\nThe records go back several centuries. Pacheco's treatise of 1638 uses a Spanish term for recrystallized calcium sulfate derived from alabaster [2][9]. De Mayerne in 1620 recommended unburnt alabaster as a base for verditer [10]. An English manuscript by Fishwick, written between 1795 and 1816, adds alabaster to paints of quite different colors [2]. The Colour Index of 1971 lists it as a source of Pigment White 25 [2][1]. Finlay says Vermeer made some of his whites with a recipe including alabaster and quartz, a claim we found in that one book only [11]."
+  },
+  {
+   "id": "vessels",
+   "title": "Jars and lamps",
+   "body": "Alabaster has long meant a vessel. St Clair notes that ancient Egyptians kept their black eye paint in small jars of alabaster or breccia [12]. In the 1500s Aretino, as Gage reports, pictured the Virgin after the Annunciation filled with light like a lamp in an alabaster vase [13]. The image works because the stone is translucent: it glows when lit from inside [13].\n\nCompare [[ivory]], [[pearl]] and [[white]] for other pale surfaces that carry warmth."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "At least five per cent of the canvas within a color distance of six, the swatch appears in 109 of the 23,781 paintings in our archive, as photographed [14]. It is far more common in some places than others: 34 of the 635 paintings from China, against a much lower rate elsewhere [14]. One painter stands out, [[painter:xugu|Xugu]], with 7 of his 16 paintings in the archive matching, a lift of about 95 times the overall rate [14].\n\nThe decade with most matches is the 1780s, 8 of 430 paintings [14]. The colors that keep it company are [[peach]] and [[ecru]] [14]. These are photographs of aged, varnished paintings, so a match is a look-alike hue and not a pigment test [14]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the stone (word origin undocumented in our sources)",
+   "first_recorded": "1573, per Maerz and Paul (1930)",
+   "source": "Paterson, A Dictionary of Colour; Pigment Compendium; ColorHub library"
+  },
+  "aka": [
+   "gypsum (the mineral)"
+  ],
+  "siblings": [
+   "ivory",
+   "ecru",
+   "unbleached-silk"
+  ],
+  "parent": "white",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#FFE3CE",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 109,
+  "countries": [
+   {
+    "key": "China",
+    "n": 635,
+    "hits": 34
+   }
+  ],
+  "painters": [
+   {
+    "key": "Xugu",
+    "n": 16,
+    "hits": 7
+   }
+  ],
+  "measured": {
+   "lch": [
+    92,
+    15,
+    65
+   ],
+   "nearest": [
+    [
+     "Ecru",
+     7.7
+    ]
+   ]
+  },
+  "company": [
+   "Peach",
+   "Ecru"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pigment Compendium, entry gypsum, p. 191",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, entry alabaster, p. 16",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, entry calcite, p. 87",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, entry travertine, p. 380",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"alabaster\", p. 22",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub color library (Maerz and Paul 1930, plate 1 A 2), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 12",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 9",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Pigment Compendium, entry de espejuelo, p. 152",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Pigment Compendium, entry selenite, p. 349",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 12",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, p. 117",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 153",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "data",
+   "cite": "ColorHub archive field notes, 23,781 paintings, as photographed; tools/article_field.py",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What kind of mineral is true alabaster?",
+   "choices": [
+    "Gypsum",
+    "Calcite",
+    "Quartz",
+    "Marble"
+   ],
+   "answer": "Gypsum",
+   "kind": "pick"
+  },
+  {
+   "q": "What was alabaster used for in a painter's workshop?",
+   "choices": [
+    "As part of the gesso ground",
+    "As a blue pigment",
+    "As a varnish",
+    "As a brush hair"
+   ],
+   "answer": "As part of the gesso ground",
+   "kind": "pick"
+  },
+  {
+   "q": "\"Oriental alabaster\" is the same stone as alabaster.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Alabaster is gypsum, the same mineral as plaster of Paris, and painters hid it under their gesso grounds.",
+  "Hold a thin slab of alabaster to a lamp: the glow is why writers picked it for a lamp-like image."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Dropped speculative link between swatch color and translucency.",
+   "Flagged Vermeer alabaster recipe as single-source (Finlay)."
+  ]
+ },
+ "words": 580
+}

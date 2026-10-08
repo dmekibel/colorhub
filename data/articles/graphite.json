@@ -22,7 +22,7 @@
   {
    "id": "history",
    "title": "Borrowdale and the pencil",
-   "body": "Graphite was used for decoration long before pencils. The Compendium cites a study of pottery from Xishan in China, dated to roughly 4300-2800 BC, that found it in the decoration [3]. Books disagree about its drawing use in Europe [2][7]. Coles says that until the mid-sixteenth century graphite was seldom used for drawing or writing because it was so scarce [2]. Yet a caption in Pastoureau's *Green* describes a drawing by Albrecht Dürer of 1508 as chalk and graphite on green paper [7]. A museum caption may use the word loosely, and the two sources cannot both be right about practice.\n\nThe decisive deposit was at Seathwaite in Borrowdale [4]. Finlay writes that from the middle of the sixteenth century \"lead\" drawing materials were made of this mineral, and that its first big money was in ammunition: a thin coat of graphite on the inside of a mould made cannonballs come out cleanly [4]. A legend says the deposit was uncovered in 1565 when a traveler noticed what looked like silver in the roots of a storm-felled tree [4]. Finlay reports that Elizabeth I took an interest and a Company of Mines Royal was set up at Keswick, using German miners accustomed to Bavarian graphite workings [4].\n\nFinlay is skeptical of another Borrowdale tale, that graphite was first used to mark sheep [4]. Local Herdwick sheep are naturally grey, and daubing them with a heavy mineral would have been harder than using a dye [4]. He calls it likely a joke told to credulous visitors. The mine has been worked out for a century or more, leaving a hole in the ground and a pencil museum in Keswick [4]."
+   "body": "Graphite was used for decoration long before pencils. The Compendium cites a study of pottery from Xishan in China, dated to roughly 4300-2800 BC, that found it in the decoration [3]. Books disagree about its drawing use in Europe [2][7]. Coles says that until the mid-sixteenth century graphite was seldom used for drawing or writing because it was so scarce [2]. Yet a caption in Pastoureau's *Green* describes a drawing by Albrecht Dürer of 1508 as chalk and graphite on green paper [7]. The two accounts sit uneasily together.\n\nThe decisive deposit was at Seathwaite in Borrowdale [4]. Finlay writes that from the middle of the sixteenth century \"lead\" drawing materials were made of this mineral, and that its first big money was in ammunition: a thin coat of graphite on the inside of a mould made cannonballs come out cleanly [4]. A legend says the deposit was uncovered in 1565 when a traveler noticed what looked like silver in the roots of a storm-felled tree [4]. Finlay reports that Elizabeth I took an interest and a Company of Mines Royal was set up at Keswick, using German miners accustomed to Bavarian graphite workings [4].\n\nFinlay is skeptical of another Borrowdale tale, that graphite was first used to mark sheep [4]. Local Herdwick sheep are naturally grey, and daubing them with a heavy mineral would have been harder than using a dye [4]. He doubts the tale [4]. The mine has been worked out for a century or more, leaving a hole in the ground and a pencil museum in Keswick [4]."
   },
   {
    "id": "seeing",
@@ -193,14 +193,13 @@
   "Tilt a heavy pencil line toward a window and it turns silver."
  ],
  "checked": {
-  "by": "batch-21 writer",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Books disagree on early graphite drawing: Coles (scarce before mid-1500s) vs Pastoureau caption (Durer 1508).",
-   "1565 tree-root story and sheep-marking story reported as legend, per Finlay.",
-   "Thin pure-color coverage; honest medium article."
+   "Removed speculation about museum caption",
+   "Finlay doubts sheep story; dropped 'joke told to credulous visitors' claim"
   ]
  },
  "status": "checked",
- "words": 967
+ "words": 949
 }

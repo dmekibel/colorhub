@@ -1,0 +1,217 @@
+{
+ "slug": "auricula-purple",
+ "name": "Auricula Purple",
+ "hex": "#533552",
+ "names": [
+  "Auricula Purple"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Auricula purple is a dark, reddish plum purple named for the garden auricula, and it entered the language of color when the painter Patrick Syme added it to Werner's chart of nature's colors.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A garden flower",
+   "body": "The auricula is *Primula auricula*, a garden primula also known as the bear's ear [2]. The color name points to one particular flower, the largest purple auricula, which was the plant example for this color in Syme's chart [1][2]. In the language of flowers the auricula stood for painting, and the scarlet auricula for avarice [3]."
+  },
+  {
+   "id": "syme",
+   "title": "Syme's chart",
+   "body": "The chain of key color charts ran from Werner to Syme between 1774 and 1821 [6]. Syme published *Werner's Nomenclature of Colours* in 1814 and, as a painter with a knowledge of flowers, added names of his own, among them Sienna yellow, pansy purple and auricula purple [4]. He made purple and orange principal colors [4]. His chart held 108 colors, and 110 in the second edition of 1821 [4]. Of the purples in the 1821 edition, seven came from Syme's own 1814 edition, among them number 41, auricula purple [1].\n\nSyme pinned his colors to natural examples. For number 41 they were the egg of the largest blue-bottle or flesh fly, the largest purple auricula, and fluor spar, the mineral fluorite [1]. Fluor spar anchored all four of the dark purples: [[campanula-purple]], [[imperial-purple]], auricula and [[plum-purple]] [1].\n\nSyme also gave a recipe for painters. It builds auricula purple on plum purple, adding indigo blue and a good deal of carmine [2]. Plum purple in turn is Berlin blue with a lot of carmine, a trace of brown and the barest touch of black [2]."
+  },
+  {
+   "id": "ridgway",
+   "title": "From Syme to Ridgway",
+   "body": "The name survived because naturalists kept using Syme's chart [5]. Ridgway's first book of color names for ornithologists, in 1886, had 186 samples and took at least 19 terms from Syme, auricula purple among them [5]. His atlas of 1912, with 1,115 colors on 53 plates, lists Auricula Purple on plate XXVI beside a darker Dusky Auricula Purple [5][8].\n\nSources differ on the first date. Baty and the Maerz and Paul dictionary of 1930 both place the name in 1814, the year of Syme's first edition, though the 1821 edition is where Baty counts it among the purples [1][7]. The ISCC-NBS system of 1955 lists blocks 224 and 238 for the area, and a near-duplicate in our library, Prune Purple, sits 1.3 units away [7]."
+  },
+  {
+   "id": "swatch",
+   "title": "How dark it is",
+   "body": "The swatch here, #533552, is the aged Werner-Syme swatch, a very dark purple with a lightness of 27 on a scale of 100 [7]. Ridgway's plate, read from an aged scan, is lighter and redder, #7A4660, about 10 units away [7]. The nearest familiar name is [[byzantium]], 9 units away, and [[english-violet]] is its closest neighbor in the library [7].\n\nWhere to look: the deepest petals of a purple auricula, and the dark purple of fluorite. Syme chose both as this color's standard [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 museum paintings, only 17 hold colors within six units of this swatch over at least five per cent of the canvas, 0.07 per cent [9]. These are photographs of aged, varnished paintings, so a match is a hue, not a pigment test [9]. By lightness rank within each painting, 59 per cent of the matched area is shadow [9].\n\nThe widest cover is the right panel of Lucas van Leyden's *Healing of the Blind Man of Jericho*, the [[painting:commons-Q117196346|Portrait of Dirckgen van Lindenburgh]] of 1531, at 30 per cent of the canvas [9]. Gentile da Fabriano's [[painting:commons-Q111821584|Adoration of the Three Kings]] of 1423 follows at 24 per cent [9]. The first match is Starnina's *The Death of the Virgin* of about 1405, at 8 per cent, roughly four centuries before the name appears in our sources [9][7]. That gap is a warning: the match is a look-alike hue, not proof of a plum-purple pigment [9]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the auricula (Primula auricula), the garden flower called bear's ear",
+   "first_recorded": "Syme, Werner's Nomenclature of Colours, 1814 (our library dates the name from the 1821 edition)",
+   "source": "Baty, Nature's Palette"
+  },
+  "aka": [
+   "Syme no. 41",
+   "Largest purple auricula"
+  ],
+  "siblings": [
+   "pansy-purple",
+   "campanula-purple",
+   "imperial-purple",
+   "plum-purple"
+  ],
+  "parent": null,
+  "children": [
+   "dusky-auricula-purple"
+  ],
+  "disambiguation": [
+   {
+    "slug": "plum-purple",
+    "gloss": "the next Syme purple, built from Berlin blue and carmine"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#533552",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 17,
+  "top_paintings": [
+   "commons-Q117196346",
+   "commons-Q111821584",
+   "nga-130842",
+   "aic-16177"
+  ],
+  "role": {
+   "shadow": 0.59,
+   "mid": 0.35,
+   "highlight": 0.06
+  },
+  "first": {
+   "id": "aic-16177",
+   "year": 1405,
+   "cover": 0.076
+  },
+  "measured": {
+   "lch": [
+    27,
+    22,
+    327
+   ],
+   "nearest": [
+    [
+     "Byzantium",
+     9.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 104 (Syme's purples, numbers 35-45)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 111-112 (plate 41, auricula purple, with Syme's recipes)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Greenaway, Language of Flowers (1884), \"Auricula\" (public domain)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 81",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 30",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 32 (chart of key nomenclatures, Werner to Syme, 1774-1821)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Auricula Purple, Dusky Auricula Purple, Prune Purple; Werner aged swatch, Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930; CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "Ridgway 1912, plate list (color-kb index of Color Standards and Color Nomenclature)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which flower was the plant example for Syme's auricula purple?",
+   "choices": [
+    "The largest purple auricula",
+    "The pansy",
+    "The saffron crocus",
+    "The plum"
+   ],
+   "answer": "The largest purple auricula",
+   "kind": "pick"
+  },
+  {
+   "q": "Which mineral anchored all four of Syme's dark purples?",
+   "choices": [
+    "Fluor spar",
+    "Amethyst",
+    "Lepidolite",
+    "Porcelain jasper"
+   ],
+   "answer": "Fluor spar",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Ridgway took the name auricula purple from Syme's chart.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Syme pinned auricula purple to three natural examples: a flower, a fly's egg and a mineral, fluor spar.",
+  "Four of Syme's dark purples shared one mineral anchor, fluor spar.",
+  "Our archive finds this dark plum in only 17 of 23,781 paintings."
+ ],
+ "words": 623,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported Jameson link, Werner renamings, and 'an animal, plant and mineral for each' generalization",
+   "Fixed first-date sentence: library/Baty/M&P agree on 1814"
+  ]
+ }
+}

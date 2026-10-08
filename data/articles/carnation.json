@@ -1,0 +1,253 @@
+{
+ "slug": "carnation",
+ "name": "Carnation",
+ "hex": "#FD798F",
+ "names": [
+  "Carnation"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Carnation is an old word for the color of flesh that settled on a warm pink, and it is also the name of the garden flower.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A word for flesh",
+   "body": "*Carnation* starts as a word for skin. Its root is the Latin *carneus*, flesh-colored, and French heraldry used the same idea for a tincture the color of flesh [1][2]. Paterson's dictionary gives the plain English meaning as rose-pink or flesh-coloured [1]. Its relatives show the family: *incarnadine* once meant carnation or flesh color and has since drifted toward the color of blood, while *incarnate* is a light pink [3].\n\nThe flower is the later story. Paterson says the word was not used for the flower's color until the twentieth century, and adds that with so many varieties of the flower the term has little precision [1]. The color is therefore older than the flower's use of it, and a carnation in a vase may be white, red or striped."
+  },
+  {
+   "id": "history",
+   "title": "How pink got a name",
+   "body": "Before about 1400, Europeans had little use for pink as a color of its own, and Pastoureau says the old words that came closest meant pale, beige or yellowish rather than pink [4]. The change began around 1380 to 1400, when Italian dyers found mordants that made [[flower:brazilwood|brazilwood]], a dye Venetian merchants imported from Asia and long scorned as impermanent, stable enough to give true [[pink]] [4]. The fashion reached the French court through Jean de Berry, and painters and illuminators began turning the dye into a lake pigment [4].\n\nThe new color needed a name, and it came from the Venetian and Tuscan *incarnato*, which until then had described only the complexion of the face [4]. French *incarnat* appears as a color term around 1400 to 1420, Castilian *encarnado* in the same years, and English *carnation* a few decades later; German speakers did not take it up [4]. Pastoureau's *Le petit livre des couleurs* repeats the point: pink was slow to get a clear existence, and people said *incarnat*, meaning flesh color, before they said *rose* [5].\n\nWhere to put the new color was the next puzzle. By Pastoureau's account the inherited scale of colors had no slot for a pale red, so from the fifteenth to the seventeenth centuries dictionaries, color charts and trade manuals filed carnation as a delicate shade of yellow [4]. The color adjective *rose* did not appear in French dictionaries before the middle of the eighteenth century [4]."
+  },
+  {
+   "id": "art",
+   "title": "In the painter's workshop",
+   "body": "For painters, *carnation* was a job rather than a pigment. The Pigment Compendium treats it as a term for the mixtures used for flesh tints, and quotes Harris's dictionary of 1704 to 1710, in which a painter whose bare skin is natural, bold and strong is said to have a very good carnation [6]. The Italian *carnagione* means much the same, and the Spanish *encarnación*, by Veliz's definition, is the painted flesh tone of a sculpted figure [6].\n\nBall records that the English color maker Field claimed his orange [[vermilion]] could render warm flesh tints more purely and delicately than any other pigment, in the manner of Titian and Rubens [7]. The pigment sold well from the 1830s through the color merchant Charles Roberson and later Winsor and Newton, but Field never said how it was made [7]. Treat the claim as a maker's boast, not a measurement."
+  },
+  {
+   "id": "dye",
+   "title": "A dye that was never found",
+   "body": "Carnation also appears in the long hunt for a cheaper substitute for cochineal. In the 1590s Sir Walter Raleigh claimed to have found berries in Guiana that dyed a perfect crimson and carnation [8]. Greenfield lists this among the glowing reports that rarely panned out [8]."
+  },
+  {
+   "id": "flower",
+   "title": "The flower and its growers",
+   "body": "Werner's mineralogical nomenclature, brought to naturalists by Syme, names Carnation Pink as a plant example of its Carmine Red, number 91, beside raspberry and cockscomb, with Oriental ruby as the mineral [9]. The plant is *Dianthus caryophyllus* [9]. For the color word, see [[pink]]. The nearest Werner red in our data is [[carmine]], the cochineal pigment [9].\n\nIn 1842 a Monsieur Ragonot-Godefroy, perhaps a pseudonym of the botanist Pierre Boitard, published a treatise on growing carnations that included a circle of 48 hues [10]. Baty traces a line from color sets made for French carnation and chrysanthemum growers to the British horticultural charts that followed [10]. Growers needed names for petal colors long before painters needed names for dyes."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch here is a bright coral-leaning pink, #FD798F [11]. Its nearest everyday word is pink, 8.6 CIEDE2000 units away, and its nearest named neighbor is [[blush-pink]] [11]. Our library finds it in the 1955 ISCC-NBS list, in Maerz and Paul's 1930 dictionary, which dates the name to 1535, and in the 2010 xkcd survey [11]. That date is later than Pastoureau's \"a few decades\" after 1400 to 1420, and the gap is probably between first use and first record [4][11].\n\nSt Clair describes today's word as a creamy mid-pink, and Paterson as rose-pink or flesh-colored [1][2]. Neither is quite this vivid screen color, and the old carnation of the painters was a skin tone, closer to [[flesh-pink]] than to a flower. Not to be confused with [[carnation-pink]], a paler, cooler swatch (#FFA6C9) listed from Wikipedia and xkcd [11]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, none has this color covering at least 1 per cent of the canvas, within a CIEDE2000 distance of 4, as photographed [12]. That says something about a vivid modern pink and little about flesh tints: painted skin is usually duller, and the archive photographs aged, varnished paintings, so a color match is not a pigment test [12].\n\nIn printed English, the word *carnation* (all senses, mostly the flower) began rising in the 1890s and peaked around 1900, according to Google Books [13]. Because it is also a flower, a clothing color and a Spanish and French word, the curve says more about gardens than about the pink [13]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Latin carneus, flesh-colored, by way of Italian incarnato and French incarnat",
+   "first_recorded": "English a few decades after 1400 to 1420 (Pastoureau); Maerz and Paul list 1535",
+   "source": "Pastoureau, Red; Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "incarnat",
+   "incarnato",
+   "carnadine"
+  ],
+  "siblings": [
+   "carnation-pink",
+   "blush-pink",
+   "flesh-pink"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "carnation-pink",
+    "gloss": "a paler, cooler pink from the Crayola and Wikipedia lists"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "incarnat (flesh color)"
+   },
+   {
+    "lang": "it",
+    "name": "incarnato, carnagione"
+   },
+   {
+    "lang": "es",
+    "name": "encarnado, encarnación"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#FD798F",
+   "de2000": 4,
+   "min_cover": 0.01
+  },
+  "n_present": 0,
+  "ngram": {
+   "term": "carnation",
+   "rise": 1890,
+   "peak": 1900
+  },
+  "measured": {
+   "nearest": [
+    [
+     "Pink",
+     8.6
+    ],
+    [
+     "Blush Pink",
+     null
+    ]
+   ],
+   "library_first_record": 1535
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"carnation\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary (\"Carnation\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"incarnadine\" and \"incarnate\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Red: The History of a Color, \"On the Margins of Red: Pink\"",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Le petit livre des couleurs, \"Le rose\"",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"carnation\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 15",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 18",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, Werner's table, no. 91 (Carmine Red)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, chapter on the history of colour reference systems",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json): Carnation, Carnation Pink",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (data/graph/fieldnotes/c.json), carnation",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "data",
+   "cite": "Google Books Ngram, \"carnation\", via ColorHub field notes",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which Latin word is the root of carnation as a color?",
+   "choices": [
+    "carneus, flesh-colored",
+    "carmen, a song",
+    "corona, a crown",
+    "carbo, charcoal"
+   ],
+   "answer": "carneus, flesh-colored",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: in dictionaries and color charts of the fifteenth to seventeenth centuries, carnation was filed as a shade of red.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "What did painters of the early 1700s mean by a good carnation?",
+   "choices": [
+    "Well-painted bare flesh",
+    "A pure red pigment",
+    "A flower study",
+    "A dark ground color"
+   ],
+   "answer": "Well-painted bare flesh",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Carnation was a skin color first and a flower color second; the flower's use of the word is a twentieth-century sense.",
+  "For two centuries, dictionaries filed pink as a kind of yellow: carnation was a pale yellow in their scheme."
+ ],
+ "words": 937,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported claim that garden pink gave the color word pink its name (not in cards or cited book text)."
+  ]
+ }
+}

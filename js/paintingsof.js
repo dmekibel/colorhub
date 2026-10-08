@@ -182,7 +182,7 @@ function paintingsOfSection(hex, host, o = {}) {
       return;
     }
     const pair = e.target.closest("[data-pt-pair]");
-    if (pair) return paintingsOfPage([hex, pair.dataset.ptPair], { tol: CI_STD.tol, minCover: CI_STD.minCover, maxCover: null, mode: "all", names: [name, pair.dataset.ptPname] });
+    if (pair) return typeof spPage === "function" ? spPage([hex, pair.dataset.ptPair]) : paintingsOfPage([hex, pair.dataset.ptPair], { tol: CI_STD.tol, minCover: CI_STD.minCover, maxCover: null, mode: "all", names: [name, pair.dataset.ptPname] });
     if (e.target.closest("[data-pt-chords]") && typeof chordsPage === "function") return chordsPage();
     if (e.target.closest("[data-pt-retry]")) return refresh();
   };
@@ -214,9 +214,8 @@ function ptParse(spec) {
   st.source = ["paintings", "design", "both"].includes(q.get("src")) ? q.get("src") : "paintings";
   return { hexes: ptHexList(h), st };
 }
-// the address: a plain pair at the standard definition is #/pair/<a>+<b> (the chords page's numbers); anything else is #/paintings-of/...
-const ptIsPair = (hexes, st) => hexes.length === 2 && st.tol === CI_STD.tol && st.minCover === CI_STD.minCover && !st.maxCover && st.mode === "all" && st.sort === "cover" && st.source === "paintings";
-const ptPath = (hexes, st) => ptIsPair(hexes, st) ? "pair/" + hexes.map(h => h.replace("#", "").toLowerCase()).join("+") : "paintings-of/" + ptSpec(hexes, st);
+// (#/pair/ itself is now the pair page, js/setpage.js; this screen keeps the paintings-of/ address even for a plain pair)
+const ptPath = (hexes, st) => "paintings-of/" + ptSpec(hexes, st);
 function ptSyncURL(hexes, st) {
   const path = ptPath(hexes, st), url = "#/" + path;
   try { if (location.hash !== url) { history.replaceState(history.state, "", url); ROUTE_NOW = url; } } catch (e) {}

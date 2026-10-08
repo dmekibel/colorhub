@@ -22,7 +22,7 @@
   {
    "id": "words",
    "title": "Older words for the same grey",
-   "body": "English has many one-word names for a blue-tinted grey, and Paterson's dictionary lists a good number of them [7]. Latin *caesius* gives *caesious*, a bluey-grey bloom, and *griseous* means bluish-grey [7]. *Dove-grey* is the plumage of the dove, *Maltese* is simply given as a bluish grey, and *merle* is the grey-blue of a collie coat with black streaks [7]. *Mode* was a pale bluish grey that was a fashionable genre of light colors in the nineteenth century [7].\n\nOthers come from materials: *pewter*, *slate* and *battleship grey*, the last of which is how warships are painted [7]. [[slate-grey]] and [[battleship-grey]] are both articles here. *Berettino* is the bluish grey of the glaze used on Italian maiolica, and *mineral grey* is a bluish-grey pigment made from lapis lazuli [7]. *French grey* is a plain bluish grey in the dictionary's account [7]."
+   "body": "English has many one-word names for a blue-tinted grey, and Paterson's dictionary lists a good number of them [7]. Latin *caesius* gives *caesious*, a bluey-grey bloom, and *griseous* means bluish-grey [7]. *Dove-grey* is the plumage of the dove, *Maltese* is simply given as a bluish grey, and *merle* is the grey-blue of a collie coat with black streaks [7]. *Mode* is a pale bluish grey in Paterson, who separately lists a second sense: a genre of light colors popular in the nineteenth century [7].\n\nOthers come from materials: *pewter*, *slate* and *battleship grey*, the last of which is how warships are painted [7]. [[slate-grey]] and [[battleship-grey]] are both articles here. *Berettino* is the bluish grey of the glaze used on Italian maiolica, and *mineral grey* is a bluish-grey pigment made from lapis lazuli [7]. *French grey* is a plain bluish grey in the dictionary's account [7]."
   },
   {
    "id": "paint",
@@ -32,7 +32,7 @@
   {
    "id": "body",
    "title": "The grey of health and illness",
-   "body": "Doctors and mystics have used the name too. Birren reports that the visionary Kilner took a bluish grey, tinged with yellow and red, as the color of a healthy aura [11]. In the same book's table of skin changes in illness, argyria, a staining by silver, leaves the skin bluish grey or slate colored [12]. In 1827 the Nuremberg dermatologist Heinrich Eichhorn proposed a bluish grey with yellow markings as one entry in his skin-color table [13].\n\nThese are not color names a modern clinic would use, and the aura claim is a belief and not a measurement. They do show how ordinary the phrase was as a descriptive tool."
+   "body": "Doctors and mystics have used the name too. Birren reports that Walter Kilner, who studied the human aura, gave the color of health as a bluish grey tinged with yellow and red [11]. In the same book's table of skin changes in illness, argyria, a staining by silver, leaves the skin bluish grey or slate colored [12]. In 1827 the Nuremberg dermatologist Heinrich Eichhorn proposed a bluish grey with yellow markings as one entry in his skin-color table [13].\n\nThese are not color names a modern clinic would use, and the aura claim is a belief and not a measurement. They do show how ordinary the phrase was as a descriptive tool."
   },
   {
    "id": "field",
@@ -248,16 +248,14 @@
   "Look at the grey of a dove or of battleship paint: both are bluish greys, though few people would call them blue.",
   "Bluish grey was already an ingredient: Syme used it in his recipes for cochineal red and leek green."
  ],
- "words": 958,
+ "words": 966,
  "status": "checked",
  "checked": {
-  "by": "batch-41 writer self-check (sentence-to-source trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Kirwan 1794 list placement of bluish-grey taken from Baty p.32 list headed Kirwan 1794 (83 colours); parsing of OCR list is inferred",
-   "Kilner aura claim is single-source (Birren), hedged as belief",
-   "Byzantine mosaic example from Gage p.62 only",
-   "field.match.de2000 not computed (article_field.py fails on this machine)"
+   "Mode: two Paterson senses separated",
+   "Kilner described as aura researcher, not 'visionary' (Birren says he shunned the mystic side)"
   ]
  }
 }

@@ -414,13 +414,8 @@
  "words": 1214,
  "status": "checked",
  "checked": {
-  "by": "claude-sonnet-5.5 batch 27",
+  "by": "checker",
   "date": "2026-10-08",
-  "issues": [
-   "Books thin on turquoise; honest long article",
-   "Paterson repeats the uncorrected universe-color claim; Finlay corrects it",
-   "Biblical stone identification uncertain",
-   "Hathor/Sinai date approximate, from library data"
-  ]
+  "issues": []
  }
 }

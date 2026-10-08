@@ -1,0 +1,227 @@
+{
+ "slug": "cherry-red",
+ "name": "Cherry Red",
+ "hex": "#F7022A",
+ "names": [
+  "Cherry Red"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Cherry red is the red of the fruit, a vivid, slightly bluish red that the word has named for centuries, though its oldest scientific meaning was darker and duller than the swatch.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The fruit's red",
+   "body": "Paterson defines *cherry* as a bright red, the color of cherries, and *cherry-red* as of the color of the red cherry [1]. For the French form he sends the reader on to [[cerise]] [1]. His colour index files cherry-red among the reds [2]. Maerz and Paul's 1930 dictionary records the name in 1594, on plate 2 [3]. For the shorter *cherry* the same library records two entries, with dates of 1447 and 1915 [3].\n\nThe swatch is a vivid, strongly saturated red, ISCC-NBS block 34 in the 1955 system [3]. Its nearest named color in our library is [[vermilion]], about four and a half units away. Other vivid reds in the same library include [[fire-engine-red]], [[lipstick-red]] and [[rosso-corsa]] [3]. Next to [[crimson]] it stays closer to a plain [[red]] [3]."
+  },
+  {
+   "id": "werner",
+   "title": "Werner's darker cherry",
+   "body": "The oldest technical use is not the swatch's color. Abraham Werner's colour names for minerals reached English through Jameson in 1804 and 1805, and Mawe was using Werner's terms by 1813, writing of blood red, cherry red, crimson red and fire red under garnet and opal [4]. Syme's 1821 edition lists cherry-red among the reds, between peach-blossom-red and brownish-red [5].\n\nIn that book the entry is glossed *brownish purple red*, the cherry red of Werner, and described as lake red mixed with brownish black and a little grey [6]. That is a darker, duller, more purple color than the modern swatch [6][3]. A gemmologist's use points the same way: Finlay lists pyrope, the red garnet, as cherry red [7]. The word on a mineral label and the word on a paint chart, then, were never quite the same color."
+  },
+  {
+   "id": "scarlet",
+   "title": "Cherry red and scarlet dyes",
+   "body": "Cherry red also appears in the history of the dye trade. Greenfield describes the tin-and-cochineal scarlets that became fashionable in the 1600s under names such as Bow-dye, Dutch scarlet and Kuffler's color, tied to Cornelis Drebbel [8]. Greenfield says the recipes gave a range of luminous scarlets, with a deep cherry red at the dark end and a neon-bright red at the other [8].\n\nBall mentions the same word in a different shop: the colored potions and cordials of the nineteenth-century chemist's window, which came in cherry red and golden yellow [9]. For the scarlet itself, see [[scarlet]]; for the cochineal reds that sit nearby, see [[carmine]]."
+  },
+  {
+   "id": "eye",
+   "title": "Telling it from its neighbors",
+   "body": "To tell cherry red from its neighbors, look at the lean. On screen [[scarlet]] tips toward orange and [[crimson]] toward blue, and cherry red sits between them [3]. The library gives it a near-duplicate, Red (Pigment), about two units away [3]. The shorter *cherry* is nearest to crimson at about three units, with Cardinal about two units from it [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Cherry red as a saturated swatch is nearly absent from painting. In our archive of 23,781 museum paintings, a color within six units of this swatch covers at least five per cent of the canvas in only 3 works [10]. They are [[painter:pierre-bonnard|Bonnard]]'s *Corner of a Table* of 1935 (16 per cent of the canvas), a Chinese ancestor portrait set of 1644, *Twenty-one Ancestors with Spirit Tablet* (15 per cent), and [[painter:bronzino|Bronzino]]'s *Pietà with Saint Mary Magdalene* of 1529 (8 per cent) [10]. Aged paintings and varnish shift red toward brown, so a screen-bright red of this kind may be underrepresented; that is our caveat, not a measurement [10].\n\nThe words are easier to follow than the paint. In Google Books, *cherry red* is at about 17 per cent of its peak in 1800, passes 90 per cent by 1900, and peaks near 1918 before falling to about 40 per cent by 2000 [11]. As always, the paintings are photographs of aged, varnished works, so read them as screen colors [10]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the cherry fruit",
+   "first_recorded": "Maerz & Paul 1930 give 1594 for Cherry Red",
+   "source": "Paterson, A Dictionary of Colour; ColorHub library"
+  },
+  "aka": [
+   "cerise (French form)",
+   "Werner's brownish purple red (older sense)"
+  ],
+  "siblings": [
+   "cerise",
+   "crimson",
+   "scarlet",
+   "vermilion"
+  ],
+  "parent": "red",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "cerise",
+    "gloss": "Cerise is the French word for cherry and a pinker, bluer red on screens"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "cerise (cherry)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#F7022A",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 3,
+  "top_paintings": [
+   "commons-Q17491092",
+   "met-42889",
+   "commons-Q83295755"
+  ],
+  "ngram": {
+   "peak": 1918,
+   "rel_1800": 0.171,
+   "rel_1900": 0.93,
+   "rel_2000": 0.413
+  },
+  "measured": {
+   "lch": [
+    52,
+    93,
+    33
+   ],
+   "nearest": [
+    [
+     "Vermilion",
+     4.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"cherry\" and \"cherry-red\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, colour index (reds)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library: Cherry Red, Cherry (ISCC-NBS 1955, Maerz & Paul 1930, xkcd), nearest names and near-duplicates",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, introduction, p. 24",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 34-35 (Syme, 1821, list of 110 colours)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 250 (plate 97, Brownish Purple Red)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Finlay, Jewels: A Secret History, ch. 20 (garnet)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 15",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 9",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did Werner's 'cherry red' look like in the 1821 description?",
+   "choices": [
+    "A brownish purple red, darker and duller than the modern swatch",
+    "A bright orange-red",
+    "A pale pink",
+    "A yellowish red"
+   ],
+   "answer": "A brownish purple red, darker and duller than the modern swatch",
+   "kind": "pick"
+  },
+  {
+   "q": "According to Greenfield, how far did the tin-and-cochineal scarlets of the 1600s range?",
+   "choices": [
+    "From a deep cherry red to a neon-bright red",
+    "Only pale pinks",
+    "Only dark browns",
+    "From blue to green"
+   ],
+   "answer": "From a deep cherry red to a neon-bright red",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: in our painting archive, a screen-bright cherry red covers a large part of many canvases.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A mineralogist's cherry red in 1821 was brownish purple, much darker than the screen swatch.",
+  "In 23,781 paintings, only three have a canvas that is five per cent cherry red."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Verified 8 key claims against fact card and book text; no changes needed."
+  ]
+ },
+ "words": 620
+}

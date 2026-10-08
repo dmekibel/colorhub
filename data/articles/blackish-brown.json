@@ -1,0 +1,188 @@
+{
+ "slug": "blackish-brown",
+ "name": "Blackish Brown",
+ "hex": "#453B32",
+ "names": [
+  "Blackish Brown"
+ ],
+ "tier": "standard",
+ "depth": "medium",
+ "lede": "Blackish Brown is the last of the browns in Patrick Syme's Edinburgh color guide, a name inherited from German mineralogy and used by naturalists for feathers, nuts and pitch.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A mineralogist's name",
+   "body": "Blackish brown is a plain descriptive name, a dark brown with black in it, and its first firm home is the color system of Abraham Gottlob Werner, who taught mineralogy at Freiberg [2]. His pupil Robert Jameson carried a list of 80 Wernerian color names to Edinburgh, published it in 1804 and extended it by four names in 1805 [2].\n\nIn that tradition each color was defined by a recipe rather than a swatch. Werner's recipe for this one was chestnut brown with black added [1]."
+  },
+  {
+   "id": "syme",
+   "title": "Number 110 in Syme's guide",
+   "body": "Patrick Syme, a flower painter in Edinburgh who lived from 1774 to 1845, turned Werner's list into a small book in 1814, *Werner's Nomenclature of Colours* [2]. It was compact, almost pocket-sized, and laid out for fieldwork, with painted paper swatches, a recipe for each color and real examples beside it [2]. Blackish brown is number 110 there, the last of the browns [1]. Of the eleven browns in the 1821 edition, four came straight from Werner (numbers 104, 106, 109 and 110), and the rest were borrowed from other systems or added by Syme himself [1].\n\nThe examples are the best part. For number 110 Syme named the wing feathers of the storm petrel and of the black grouse, which he called the black cock, the forehead of the polecat, hazel nuts, the stems of the black currant bush and mineral pitch, among others [1][3]. Baty's modern plates show it on the feathers of a storm petrel from Gould's *Birds of Great Britain*, and on the skin of a blackberry in Bentley and Trimen's *Medicinal Plants* of 1880 [1]."
+  },
+  {
+   "id": "naturalists",
+   "title": "In the naturalists' hands",
+   "body": "Syme meant the book for zoology, botany, chemistry and anatomy as well as mineralogy, and naturalists took it at his word [2]. About two thirds of his animal examples are birds, with insects making up most of the rest [4]. William Hewitson's *British Oology* of 1833 matched the cuckoo's egg to no. 110 [4]. Baty also notes a description of a female Lapland finch that stacks blackish brown, yellowish brown and clove brown on one bird [4].\n\nBaty considers it highly likely that Charles Darwin met the book while studying in Edinburgh and used it on the *Beagle* voyage [2][4]. The name outlived the system, and today it turns up in ordinary dictionaries: Paterson defines brown coal, or lignite, as a blackish-brown coal [5]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch is not the recipe",
+   "body": "The swatch on this page, #453B32, was taken from an aged print of the Werner number 110 chip and is a screen approximation [6]. Its nearest ISCC-NBS name is dark grayish yellow brown, within a color distance (ΔE) of 2.8 [6]. Syme's own definition was a recipe, chestnut brown plus black, and printed paper has darkened and yellowed since 1814, so two readers will not agree on one exact color [1][6].\n\nA good place to see it is a dark nut shell, wet pitch or the back of a black-grouse feather. It sits close to [[umber]] and [[bistre]], and darker and plainer than [[sepia]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, as photographed, a color within ΔE 6 of this swatch fills at least 5% of the canvas in 7,933 paintings, about one in three [7]. Inside a painting it is mostly a shadow color: by lightness rank it is the shadow in 70% of the cases and a mid-tone in 29% [7]. It is commonest in the 1600s, at 2,473 of 6,394 paintings (39%), and rarer in Impressionism, at 28 of 140 (20%) [7].\n\nSome painters live in it: it appears in 12 of 13 works by Andrea Vaccaro and 19 of 24 by Dahl [7]. Danish paintings carry it most, in 766 of 1,676 (46%) [7]. It keeps company with [[umber]], [[sepia]] and [[olive-brown]] [7]. The best matches are dark landscapes such as [[painting:smk-KMS3209|Skov ved solnedgang]] and the portrait [[painting:rijks-20028582|Laurens Reael]] [7]. These are photographs of aged, varnished paintings, so a match shows what the museum photograph looks like, not which pigment was used [7]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a descriptive name (blackish + brown) defined in Werner's mineralogical color system as chestnut brown with black",
+   "first_recorded": "Werner's list, as passed on by Jameson (1804-05) and Syme (1814; 2nd ed. 1821, no. 110)",
+   "source": "Baty, Nature's Palette"
+  },
+  "aka": [
+   "Werner no. 110",
+   "Syme's blackish brown"
+  ],
+  "siblings": [
+   "umber-brown",
+   "olive-brown"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#453B32",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 7933,
+  "rate": 0.3336,
+  "role": {
+   "shadow": 0.7,
+   "mid": 0.29,
+   "highlight": 0.01
+  },
+  "top_country": {
+   "name": "Denmark",
+   "hits": 766,
+   "n": 1676
+  },
+  "top_painters": [
+   "Andrea Vaccaro 12 of 13",
+   "Dahl 19 of 24"
+  ],
+  "measured": {
+   "nearest": [
+    [
+     "dark grayish yellow brown",
+     2.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, Syme's table of browns and entry 110 (Blackish Brown), pp. 253-254, 265-266",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, Introduction (Werner, Jameson, Syme, Darwin), pp. 22-29",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, Syme's table of examples for nos. 100-110, p. 254",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, ch. 2 (Colours in zoology), pp. 127-129, 135",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"brown coal\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub library: Werner no. 110 (Browns) aged swatch; ISCC-NBS 1955 nearest name, ΔE 2.8",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed: match within ΔE 6, at least 5% of the canvas",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did Werner's recipe combine to make blackish brown?",
+   "choices": [
+    "Chestnut brown and black",
+    "Umber and white",
+    "Hair brown and grey",
+    "Olive brown and violet"
+   ],
+   "answer": "Chestnut brown and black",
+   "kind": "pick"
+  },
+  {
+   "q": "Why did Syme list storm-petrel feathers and mineral pitch beside the color?",
+   "choices": [
+    "So a reader could check the name against real things in nature",
+    "Because the color was invented from those materials",
+    "To show which pigment to buy",
+    "As a joke"
+   ],
+   "answer": "So a reader could check the name against real things in nature",
+   "kind": "pick"
+  },
+  {
+   "q": "Syme's guide was written only for mineralogists.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Number 110 of Syme's 1814 guide was blackish brown, and its examples included a storm petrel's wing, a polecat's forehead and mineral pitch.",
+  "Look for it in a wet hazel nut shell or a black-grouse feather: a brown so dark it nearly reads as black."
+ ],
+ "words": 666,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed uncited 1790s-lists sentence",
+   "Removed unsupported 'chestnut brown is no. 103' claim",
+   "Dropped unverified Kurr pitch plate"
+  ]
+ }
+}

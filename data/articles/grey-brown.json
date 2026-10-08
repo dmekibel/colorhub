@@ -1,0 +1,219 @@
+{
+ "slug": "grey-brown",
+ "name": "Grey Brown",
+ "hex": "#7F7053",
+ "names": [
+  "Grey Brown",
+  "Gray Brown",
+  "Greyish Brown"
+ ],
+ "tier": "descriptive",
+ "depth": "medium",
+ "lede": "Grey brown is a name for a dull, warm neutral, and it has meant two quite different swatches: a mid olive-tinged brown on screens today and a near-black in older charts.",
+ "sections": [
+  {
+   "id": "swatch",
+   "title": "Two swatches, one name",
+   "body": "The swatch on this page is the xkcd survey color #7F7053, a mid brown with a faint olive cast, from 2010 [1]. Older sources use the same name for something far darker. RAL 8019, a European paint standard first issued in 1927, is #3F3A3A on screen, and Werner's 1821 color nomenclature lists Grey Brown among its blacks [1]. ISCC-NBS 1955 files it under block 45, and our library notes Werner's examples as the guillemot's wing coverts and the mineral mica [1].\n\nThe screen swatch of the survey is closest to ISCC-NBS grayish yellowish brown, about five units away [1]. The old charts and the modern survey are therefore not describing one color. A reader who sees a dark brownish black in a nineteenth-century source should not expect this swatch [1]."
+  },
+  {
+   "id": "between",
+   "title": "A color between two colors",
+   "body": "The name is a compound of two color words, and the books treat grey brown as a family rather than a single shade. Ball observes that brown is a kind of grey biased toward yellow or orange, a dull color that sits on the border between a true color and an achromatic one [2]. Grey brown is simply the nearer side of that border.\n\nDictionaries show the shade in animals and wood: Paterson defines *badger brown* as the grey-brown of the badger and *hickory* as a dark grey-brown [3]. St Clair gives *dun* as a grey-brown often used of livestock [4]. Geology lists it too: the Pigment Compendium describes pumice as sometimes grey brown, and smoky quartz as grey-brown, with aluminium in the crystal structure possibly responsible [5]. Fra Bartolomeo's dark grey-brown passages contain bismuth, according to Buzzegoli and colleagues as cited there [5]."
+  },
+  {
+   "id": "clothing",
+   "title": "The color of the many",
+   "body": "For centuries grey and brown were what ordinary people wore. Pastoureau says commoners were long fated to grey, brown and a few halftones until the eighteenth century [6]. Monks' habits came in four colors in the Middle Ages: black, white, grey and brown, which Pastoureau says first carried the meanings austerity, purity, modesty and temperance [7]. Before the twelfth century the Virgin Mary was usually shown in dark clothes, among them black, grey and brown, to show mourning [8]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Grey brown is among the most common colors we measure. It appears in 4,992 of the 23,781 paintings in our archive, about 21 per cent, and it is more common than 99 per cent of the named colors [9].\n\nThe color is at its highest in the oldest and most eastern collections. It appears in 16 of our 50 paintings from the 1100s, and in 281 of 698 Japanese works [9]. That is a warning as much as a result: age and varnish push many colors toward this brownish grey, so a match is a look-alike hue in a photograph, not a pigment test [9]. It keeps company with [[flint-grey]] and [[putty]] more often than chance [9]. See also the cooler [[taupe]]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: grey plus brown",
+   "first_recorded": "Werner 1821 (as a name in our library); xkcd 2010 for this swatch",
+   "source": "ColorHub library; ISCC-NBS 1955; RAL 1927"
+  },
+  "aka": [
+   "Gray Brown",
+   "Greyish Brown"
+  ],
+  "siblings": [
+   "taupe",
+   "olive-brown",
+   "mouse-grey"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "taupe",
+    "gloss": "a pinker grey-brown with its own name and history"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Aisumicha (indigo ink brown), our library's Japanese match for the darker swatch"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#7F7053",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 4992,
+  "pct": 20.99,
+  "rank_pct": 99,
+  "century_1100": {
+   "hits": 16,
+   "n": 50
+  },
+  "countries": [
+   {
+    "key": "Japan",
+    "n": 698,
+    "hits": 281
+   }
+  ],
+  "company": [
+   "Flint Grey",
+   "Putty"
+  ],
+  "swatches": {
+   "xkcd": "#7F7053",
+   "RAL 8019": "#3F3A3A"
+  },
+  "measured": {
+   "lch": [
+    47.9,
+    18.3,
+    86.2
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; xkcd 2010, RAL 1927, Werner 1821, ISCC-NBS 1955), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 1",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, pp. 34, 209",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"pumice\", \"smoky quartz\" and bismuth-white entries (pp. 60, 324, 328)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, White, p. 144",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pastoureau, Black, pp. 34, 87",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pastoureau, Blue, ch. 8; Pastoureau, Red, ch. 22 (\"Blue versus Red\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub archive, field notes for #7F7053 (23,781 paintings; as photographed)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why can an old chart's Grey Brown look nothing like this page's swatch?",
+   "choices": [
+    "Older sources use the name for a much darker color",
+    "Brown fades to grey over time",
+    "The old charts had no brown",
+    "Screens cannot show brown"
+   ],
+   "answer": "Older sources use the name for a much darker color",
+   "kind": "pick"
+  },
+  {
+   "q": "According to Ball, brown is best described as what?",
+   "choices": [
+    "A grey biased toward yellow or orange",
+    "A dark red",
+    "A kind of purple",
+    "A mixture of green and blue only"
+   ],
+   "answer": "A grey biased toward yellow or orange",
+   "kind": "pick"
+  },
+  {
+   "q": "Which medieval religious clothing colors included grey and brown?",
+   "choices": [
+    "Monks' habits",
+    "Royal robes",
+    "Cardinals' hats",
+    "Knights' banners"
+   ],
+   "answer": "Monks' habits",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Werner filed Grey Brown among his blacks, nothing like today's swatch.",
+  "Look at an old ink painting on silk: the mid grey-brown field is time, not paint.",
+  "Grey brown turns up in about one painting in five of our archive."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "'Most common color' softened to 'among the most common' (99th percentile, not 100)",
+   "Removed unsupported light-tone percentage, Kano Tan'yu, ink-on-silk and Valdes Leal stats (not in field data)",
+   "Monks' colors: symbolism attributed to Pastoureau, not stated as the reason chosen",
+   "Removed unsupported nineteenth-century horizon sentence"
+  ]
+ },
+ "words": 492
+}

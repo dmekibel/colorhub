@@ -61,7 +61,7 @@ function studio() {
       <button class="st-tile" data-eye><span class="st-art st-eye"><i></i></span><b>Camera</b><small>Name what you see, or turn it into colors.</small></button>
       <label class="st-tile"><span class="st-art st-photo">${ICON_PHOTO}</span><b>From a photo</b><small>Pull the main colors out of any picture.</small><input type="file" accept="image/*" hidden id="file"></label>
     </div>
-    <div class="labs st-labs">${LAB_TILES(["harmony", "contrast"])}</div>
+    <div class="labs st-labs">${LAB_TILES(["contrast"])}</div>
     <div class="sec-head"><b>Your taste</b><span>quick taste tests</span></div>
     <div class="st-tiles st-taste">
       <button class="st-tile" data-taste="color"><span class="st-art st-duel"><i style="--c:#C8553D"></i><i style="--c:#3F7C8C"></i></span><b>Find your color</b><small>${S.fav ? `Yours: ${esc(S.fav.n)}-ish` : "About 20 taps. A map of the colors you love."}</small></button>
@@ -122,6 +122,8 @@ const MASKS = {
   Triad: [[30, .86], [150, .86], [270, .86]],
   Muted: [[40, .48], [165, .42], [285, .44]],
   Complement: [[55, .92], [148, .2], [235, .92], [322, .2]],
+  Analogous: [[20, .9], [62, .92], [104, .9], [62, .26]],
+  Square: [[20, .86], [110, .86], [200, .86], [290, .86]],
 };
 const polar = ([d, r]) => [r * Math.cos(d * Math.PI / 180), r * Math.sin(d * Math.PI / 180)];
 const BASIC_HUES = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple", "Pink"];
@@ -144,13 +146,13 @@ function gamutWheel(preset = "Warm", initPts = null, push = true) {
   const el = show(`
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span class="eyebrow">Studio · Gamut wheel</span><span style="width:44px"></span></header>
     <div class="gw" id="gw"><canvas class="gw-mask" id="mask"></canvas><div class="gw-names" id="names"></div></div>
-    <p class="gw-hint">Drag the shape to move it. Drag a corner to reshape it.</p>
+    <p class="gw-hint">Drag the shape to move it. Drag a corner to reshape it. Tap a color to open it; press and hold to copy its hex.</p>
     <div class="schemes">${Object.keys(MASKS).map(k => `<button class="${k === preset ? "on" : ""}" data-m="${k}">${k}</button>`).join("")}<button class="${names ? "on" : ""}" data-names>Names</button></div>
     <div class="gw-pal" id="pal"></div>
     <div class="h-list" id="hlist"></div>
     <div class="row2" style="margin-top:18px"><button class="btn" data-keep>Keep it</button><button class="btn ghost" data-open>Views & export</button></div>
     <p class="p-body">${linkText("Painters call this a gamut mask. Mix only from colors inside the shape and a picture holds together, because every color shares the same few ingredients. The idea comes from the painter James Gurney; the [[color-wheel]] here is perceptual, so colors facing each other are the eye's opposites, not the painter's-wheel pairs (see [[complementary-colors|complements]]).")}</p>
-    <p class="fine">The wheel is OKLab hue (Björn Ottosson, 2020); the Harmony lab rotates CIELAB hue, so their angles differ a little. Rim: the most vivid screen color of each hue. Center: grey. The palette is the shape's corners, plus a light and a dark mixed from its middle. Inspired by <a href="https://petertdonahue.com/" target="_blank" rel="noopener">Peter Donahue (Color Nerd)</a>: his Color Fidget and ColorDisk.</p>
+    <p class="fine">The wheel is OKLab hue (Björn Ottosson, 2020) (the old Harmony lab is folded into this wheel's Triad, Complement, Analogous and Square). Rim: the most vivid screen color of each hue. Center: grey. The palette is the shape's corners, plus a light and a dark mixed from its middle. Inspired by <a href="https://petertdonahue.com/" target="_blank" rel="noopener">Peter Donahue (Color Nerd)</a>: his Color Fidget and ColorDisk.</p>
   `, "article lab studio");
   // one-step Back, same as every other Studio screen (ROADMAP.md §17 job #1): Back pops this screen's own
   // place in the shared trail (XSTACK), so it lands one level down (Studio, or wherever a [[link]] led onward from here).
@@ -184,7 +186,7 @@ function gamutWheel(preset = "Warm", initPts = null, push = true) {
     if (cur && cur.join() === pal.cols.join()) return;
     cur = pal.cols;
     el.querySelector("#pal").innerHTML = pal.cols.map(h => `<i style="--c:${h}" data-swatch="${h}"></i>`).join("");
-    el.querySelector("#hlist").innerHTML = pal.cols.map((h, i) => { const nm = nameOf(h); return `<button class="h-item" data-copy="${h}" data-swatch="${h}"><i style="--c:${h}"></i><span><b>${esc(nm.text)}</b><em class="mono">${h}${i === 0 ? " · light" : i === pal.cols.length - 1 ? " · dark" : ""}</em></span></button>`; }).join("");
+    el.querySelector("#hlist").innerHTML = pal.cols.map((h, i) => { const nm = nameOf(h); return `<button class="h-item" data-copy="${h}" data-swatch="${h}"><i style="--c:${h}"></i><span><b>${esc(nm.text)}</b><em>${i === 0 ? "Light" : i === pal.cols.length - 1 ? "Dark" : ""}</em></span></button>`; }).join("");
   };
   // dragging: a corner reshapes, the inside moves the whole shape; everything stays on the wheel
   let drag = null;
