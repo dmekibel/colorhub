@@ -570,9 +570,43 @@ function ooLineRound(rnd, o) {
 // the line's own staircase: the push past the boundary, 8 at the start down to 1.5
 const OO_LINE_P0 = 5, OO_LINE_MIN = 1;
 
+// ---------- Painters' pairs: which two colors turn up together in paintings (data/games/pairs.js) ----------
+// A round shows two pairs of colors. "love": which pair appears together more often (by lift over chance);
+// "group": the same question inside one country or century; "avoided": one pair is a clear stranger (seen
+// together at most half as often as chance): which? Only clearly separated pairs are played:
+// |ln L1 − ln L2| ≥ 3 standard errors (SE ≈ sqrt(1/n1 + 1/n2), n = paintings with both, or expected for a
+// stranger) and a lift ratio of at least the tier's (easy 3, medium 2, hard 1.5).
+const OO_PAIR_RATIO = { intro: 3, easy: 3, medium: 2, hard: 1.5, harder: 1.5, boss: 1.5 };
+const ooPairSE = p => 1 / Math.max(p[2], p[4] < 1 ? p[3] : 1, 1);
+function ooPairClear(p, q, ratio) {
+  const d = Math.abs(Math.log(Math.max(p[4], .02) / Math.max(q[4], .02)));
+  return d >= Math.log(ratio) && d >= 3 * Math.sqrt(ooPairSE(p) + ooPairSE(q));
+}
+// P: window.OO_PAIRS; o: { variant: "love" | "group" | "avoided", group, tier }. Returns { variant, group, a, b, win (0|1) } or null.
+function ooPairsRound(P, rnd, o = {}) {
+  const v = o.variant || "love";
+  const groups = Object.keys(P.groups).filter(g => g !== "all" && P.groups[g].pairs.filter(p => p[4] >= 1.2).length >= 4);
+  // a small group may have no clear pair at this tier: try the others, then a gentler ratio (still 3 SE apart)
+  const order = v === "group" ? [...(o.group && P.groups[o.group] ? [o.group] : []), ...ooShuf(groups, rnd)] : ["all"];
+  for (const ratio of [OO_PAIR_RATIO[o.tier || "medium"] || 2, 1.5]) for (const g of order) { const r = ooPairsIn(P, rnd, v, g, ratio); if (r) return r; }
+  return null;
+}
+function ooPairsIn(P, rnd, v, g, ratio) {
+  const pairs = P.groups[g].pairs, comp = pairs.filter(p => p[4] >= 1.2 && p[5].length >= 3), strange = pairs.filter(p => p[4] <= .55);
+  for (let t = 0; t < 200; t++) {
+    let a, b;
+    if (v === "avoided") { a = ooPick(comp, rnd); b = ooPick(strange, rnd); }
+    else { a = ooPick(comp, rnd); b = ooPick(t < 120 ? comp.filter(q => q !== a && (q[0] === a[0] || q[1] === a[1] || q[0] === a[1] || q[1] === a[0] || t > 60)) : comp, rnd); }
+    if (!a || !b || a === b || !ooPairClear(a, b, ratio)) continue;
+    const win = v === "avoided" ? 1 : a[4] > b[4] ? 0 : 1;
+    return rnd() < .5 ? { variant: v, group: g, a, b, win } : { variant: v, group: g, a: b, b: a, win: 1 - win };
+  }
+  return null;
+}
+
 if (typeof module !== "undefined") module.exports = {
   ooHash, ooRnd, ooShuf, OO_JUDG, OO_AXES, OO_START, OO_MIN, OO_MAX, OO_SLOPE, ooP, OO_TIER, OO_BREATH, OO_VF, OO_BF, ooModel, ooTheta, ooTheta0, ooUpdate, ooEye,
   ooStair, ooStairStep, ooStairScore, ooFam, OO_FAMS, ooBase, ooMove, ooMoveDir, ooDirWord, ooHuePair, ooDirChoices, OO_DIR_WORDS, ooCells, OO_SHAPES, ooRound, ooBand, ooPaintShift,
   OO_WORLDS, OO_LEVELS, OO_KINDS, OO_ROUNDS, OO_MIX_AT, OO_MIX, OO_PASS, OO_FAST_MS, ooTierAt, ooKindKey, OO_DAILY_D, ooDaily, ooDayNum, ooShareText,
-  ooLineRound, OO_LINE_P0, OO_LINE_MIN, ooGradStrip, ooOrderRound, ooChangedRound, ooWasRound, ooNbackSeq, ooCountPick,
+  ooPairsRound, ooPairClear, OO_PAIR_RATIO, ooLineRound, OO_LINE_P0, OO_LINE_MIN, ooGradStrip, ooOrderRound, ooChangedRound, ooWasRound, ooNbackSeq, ooCountPick,
 };

@@ -245,3 +245,23 @@
 .oo-lbar i.odd{box-shadow:0 0 0 2px var(--good),0 0 0 4px rgba(0,0,0,.25)}
 .oo-lends{display:flex;justify-content:space-between;margin-top:10px;font:italic 400 15px/1 var(--serif);color:var(--soft)}
 .oo-shotmode .oo-in,.oo-shotmode .oo-tn,.oo-shotmode .oo-streak,.oo-shotmode .oo-star.new i{animation:none!important}
+
+/* Painters' pairs: two pair cards, then lifts, then three paintings that hold the winner */
+.oo-pairsrun .drill-stage{align-items:flex-start}
+.oo-pairs{display:flex;flex-direction:column;gap:12px;width:100%}
+.oo-pc{display:grid;grid-template-columns:96px 1fr;grid-template-rows:auto auto;column-gap:14px;align-items:center;padding:12px;background:#F4F4F2;color:#141311;border-radius:var(--r-2);text-align:left;transition:transform .25s var(--spring),box-shadow .25s}
+.oo-pc:active{transform:scale(.98)}
+.oo-pcs{grid-row:1/3;display:grid;grid-template-columns:1fr 1fr;height:64px}
+.oo-pcs i{background:var(--c)}
+.oo-pcs i:first-child{border-radius:var(--r-1) 0 0 var(--r-1)}.oo-pcs i:last-child{border-radius:0 var(--r-1) var(--r-1) 0}
+.oo-pc b{font:400 21px/1.1 var(--serif)}
+.oo-pc b em{font-style:italic;color:var(--paper-soft)}
+.oo-pcl{font:italic 400 14px/1.3 var(--serif);color:var(--paper-soft);margin-top:4px}
+.oo-pcl:empty{display:none}
+.oo-pc.ring{box-shadow:0 0 0 3px var(--good)}.oo-pc.miss{box-shadow:0 0 0 3px var(--bad)}
+.oo-pexh{font:italic 400 16px/1.3 var(--serif);color:var(--soft);margin:4px 0 8px}
+.oo-pexr{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.oo-pp{display:flex;flex-direction:column;gap:4px;text-align:left;min-width:0}
+.oo-pp img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:var(--r-1);background:var(--booth-2)}
+.oo-pp span{font:400 13px/1.15 var(--serif);color:var(--ink);overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.oo-pp em{font-style:normal;font-size:11px;color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}

@@ -25,8 +25,8 @@ const OO_STEP_KINDS = {
   "odd-strip": { v: "one", b: "strip", n: 6, name: "Paint strip" },
   "odd-ground": { v: "one", b: "busy", n: 3, name: "Odd one out on a colored ground" },
 };
-const OO_STEP_MIX = { "what-changed": "changed", "out-of-order": "outoforder", "rebuild": "rebuild", "was-it-there": "wasthere", "imposter": "imposter", "n-back": "nback", "whose-palette": "whose", "across-the-line": "across" };
-const OO_STEP_NAMES = { whose: "Whose palette?", across: "Across the line" };
+const OO_STEP_MIX = { "what-changed": "changed", "out-of-order": "outoforder", "rebuild": "rebuild", "was-it-there": "wasthere", "imposter": "imposter", "n-back": "nback", "whose-palette": "whose", "across-the-line": "across", "painters-pairs": "pairs" };
+const OO_STEP_NAMES = { whose: "Whose palette?", across: "Across the line", pairs: "Painters' pairs" };
 function ooStepFrame(box, opts) {
   box.innerHTML = `<div class="oo-step">${opts.note ? `<p class="note">${esc(opts.note)}</p>` : ""}<h2 class="oo-sq"></h2><div class="oo-sstage"></div><div class="oo-sfoot"></div></div>`;
   return { q: box.querySelector(".oo-sq"), stage: box.querySelector(".oo-sstage"), foot: box.querySelector(".oo-sfoot"), el: box };
@@ -52,14 +52,15 @@ Object.entries(OO_STEP_KINDS).forEach(([kind, K]) => {
 });
 Object.entries(OO_STEP_MIX).forEach(([kind, id]) => {
   const g = OO_MIX.find(m => m.id === id);
-  GAME_STEPS[kind] = { by: id === "whose" || id === "imposter" || id === "across" ? null : "pick", name: g ? g.name : OO_STEP_NAMES[id], render(box, opts = {}) {
+  GAME_STEPS[kind] = { by: id === "whose" || id === "imposter" || id === "across" || id === "pairs" ? null : "pick", name: g ? g.name : OO_STEP_NAMES[id], render(box, opts = {}) {
     const ui = ooStepFrame(box, opts), set = opts.colors ? ooSetHexes(opts.colors) : null;
     const it = ooMixIt(id, 0, { set: set && set.length ? set : null });
     if (opts.d != null) it.d = opts.d;
     // step-sized: a smaller board, a shorter sequence
     Object.assign(it, { n: 3, k: id === "rebuild" ? 4 : 6, len: 7, look: 1500 });
     if (id === "across") Object.assign(it, { p: opts.d != null ? opts.d : clamp(+((ooS().line || {}).p) || OO_LINE_P0, OO_LINE_MIN, 8), k: 4, record: false });
-    const go = id === "whose" ? ooWhoseLoad() : id === "across" ? eyeNamesReady() : Promise.resolve(true);
+    if (id === "pairs") Object.assign(it, { variant: "love", tier: opts.tier || "easy", record: false });
+    const go = id === "whose" ? ooWhoseLoad() : id === "pairs" ? ooPairsLoad() : id === "across" ? eyeNamesReady() : Promise.resolve(true);
     return go.then(() => OO_MIXPLAY[id](ui, it)).then(res => new Promise(resolve => {
       if (opts.record !== false && it.judg && res.act > 0 && !res.noModel) { ooUpdate(ooS().model, it.judg, ooFam(res.right || "#808080"), res.act / (it.vf || 1), !!res.ok, it.g || 0); save(); }
       if (!res.ok && res.picked && res.right) ooLogMiss(res.right, res.picked, { game: "step:" + kind, judg: it.judg, d: res.act });

@@ -442,6 +442,7 @@ function ooResults(o) {
       ${s.minPair ? `<div class="res"><span>Smallest you spotted</span><b class="mono">${pctFmt(s.min)}</b><span class="oo-pair"><i style="--c:${s.minPair[0]}"></i><i style="--c:${s.minPair[1]}"></i></span></div>` : ""}
       ${moved ? `<div class="res"><span>Your ${esc(OO_JUDG[moved].toLowerCase())}</span><b class="mono">${pctFmt(s.th0[moved])} → ${pctFmt(s.th1[moved])}</b><span></span></div>` : ""}
     </div>
+    ${o.unlockLine ? `<p class="gy-news"><b>Next time</b> ${esc(o.unlockLine)}.</p>` : ""}
     ${o.mixNew ? `<p class="gy-news"><b>Unlocked</b> The Mix: What changed?, Out of order, Rebuild, Was it there?, Imposter and n-back.</p>` : ""}
     ${misses.length ? `<div class="sec-head"><b>Your misses</b><span>tap a color to open it</span></div><div class="oo-miss">${misses.map(m => `<span><i style="--c:${m.base}" data-swatch="${m.base}"></i><i style="--c:${m.odd}" data-swatch="${m.odd}"></i><em class="mono">${pctFmt(m.act || 0)}</em></span>`).join("")}</div>` : ""}
     <p class="fine">Differences are measured on the colors as your screen drew them (CIEDE2000: 100% is black against white, and about 1% is the smallest difference most people see side by side). Phone screens and room light vary.</p>
@@ -581,6 +582,7 @@ function ooShelf() {
       <span class="mono oo-tot">${st.sets ? `${ooStarCount()} ★` : ""}</span>
     </button>
     <button class="play-row" data-oo-line><span><b>Across the line</b><span>Three of these are Teal. Which one isn't?</span></span><em class="lt-best">${ln.best ? `<b>${ln.best}</b>best` : "new"}</em></button>
+    <button class="play-row" data-oo-pairs><span><b>Painters' pairs</b><span>Which colors did painters put together?</span></span><em class="lt-best">${st.pairs && st.pairs.best ? `<b>${st.pairs.best}</b>best` : "new"}</em></button>
     <button class="play-row" data-oo-whose><span><b>Whose palette?</b><span>Five colors from a painter's work: whose are they?</span></span><em class="lt-best">${st.mix.whose && st.mix.whose.best ? `<b>${st.mix.whose.best}</b>best` : "new"}</em></button>`;
 }
 // the first tap on Odd one out goes straight into level 1 (taught by doing); after that, the map
@@ -589,6 +591,7 @@ function ooWire(el) {
   const m = el.querySelector("[data-oo-map]"); if (m) m.onclick = ooEnter;
   const l = el.querySelector("[data-oo-line]"); if (l) l.onclick = () => ooAcross();
   const w = el.querySelector("[data-oo-whose]"); if (w) w.onclick = () => ooWhose();
+  const pp = el.querySelector("[data-oo-pairs]"); if (pp) pp.onclick = () => ooPairs();
 }
 // The old stations this replaces (design/IDEAS-10X/train-games.md §5): Odd one out, Color memory and Sort the
 // strip open their new homes. Their history stays in S.gym (the old Odd one out's family scores seed
@@ -603,5 +606,6 @@ function ooOpenRoute(id) {
   if (id === "eye") return ooEyePage();
   if (id === "whose") return ooWhose();
   if (id === "line") return ooAcross();
+  if (id === "pairs") return ooPairs();
   return ooMap();
 }

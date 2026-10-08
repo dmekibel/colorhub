@@ -153,5 +153,25 @@ for (const [j, truth, g] of [["hue", 1.4, 1 / 9], ["light", 2.1, 1 / 16], ["chro
   ok(ch && ch.before.filter((c, i) => c !== ch.after[i]).length === 1, "what changed: exactly one tile changes");
 }
 
+// ---------- 6. Painters' pairs: only clearly separated pairs are played ----------
+{
+  global.window = global.window || {};
+  require("../data/games/pairs.js");
+  const P = global.window.OO_PAIRS;
+  let n = 0, bad = 0;
+  for (const variant of ["love", "group", "avoided"]) for (const tier of ["easy", "medium", "hard"]) for (let k = 0; k < 60; k++) {
+    const r = E.ooPairsRound(P, rnd, { variant, tier });
+    if (!r) { bad++; continue; }
+    n++;
+    const w = r.win ? r.b : r.a, l = r.win ? r.a : r.b;
+    if (variant === "avoided") ok(w[4] <= .55 && l[4] >= 1.2, "avoided: the answer is the stranger");
+    else ok(w[4] > l[4], `${variant}: the answer has the higher lift`);
+    ok(E.ooPairClear(r.a, r.b, E.OO_PAIR_RATIO[tier]), `${variant}/${tier}: the two lifts are clearly apart`);
+    ok(variant === "avoided" || w[2] >= 25, "the winning pair rests on at least 25 paintings");
+  }
+  say(`Painters' pairs: ${n} rounds drawn, ${bad} not drawable`);
+  ok(bad === 0, "every variant and tier can be drawn");
+}
+
 say(`\n${passes} passed, ${fails} failed`);
 process.exit(fails ? 1 : 0);
