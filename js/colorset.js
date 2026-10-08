@@ -30,7 +30,27 @@ function colorSet(o = {}) {
     if (c.share != null && isFinite(c.share)) out.share = +c.share;
     colors.push(out);
   });
-  return { kind, id, key: kind + ":" + id, title: String(o.title || ""), colors, src: o.src || "" };
+  const set = { kind, id, key: kind + ":" + id, title: String(o.title || ""), colors, src: o.src || "" };
+  // a set drawn from a bigger pool (a painting's measured colors): pick(k) -> its k biggest, as { h, n?, share? }, so
+  // the map's "How many" can show more or fewer of them (honey.js honeyLitBar). max: how many the pool holds.
+  if (typeof o.pick === "function" && o.max > 0) { set.pick = o.pick; set.max = Math.min(CS_POOL_MAX, o.max | 0); }
+  return set;
+}
+const CS_POOL_MAX = 30;
+// a pool of measured colors -> a pick(k) for colorSet: the k biggest (by share of the canvas), merged by nearest name
+// (two pool colors that share a name become one, shares added), biggest first
+function csPoolPick(pool) {
+  const sorted = (pool || []).filter(p => p && p.h).slice().sort((a, b) => (b.share || 0) - (a.share || 0));
+  return k => {
+    const by = new Map();
+    for (const p of sorted) {
+      const n = p.n || p.name || (typeof nameOf === "function" ? nameOf(p.h).text : p.h), o = by.get(n);
+      if (o) { o.share += p.share || 0; continue; }
+      if (by.size >= k) continue;
+      by.set(n, { h: csHex(p.h), n, share: p.share || 0 });
+    }
+    return [...by.values()].sort((a, b) => b.share - a.share);
+  };
 }
 const csName = c => c.n || (typeof nameOf === "function" ? nameOf(c.h).text : "") || c.h;   // honest: "Between black and gunmetal", never a far name
 

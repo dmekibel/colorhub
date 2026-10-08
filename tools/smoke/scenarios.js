@@ -140,7 +140,7 @@ scenario("home", "Arrange sheet: Looks and the feel sliders", async t => {
   await H.sheet(t, "arrange");
   t.expect(!t.$(".hm-tabs, [data-tab]"), "the Arrange sheet still has tabs");
   const styles = t.$$(".hm-look-chip");
-  t.expect(styles.length >= 3, `only ${styles.length} style chips`);
+  t.expect(styles.length === 2, `${styles.length} Look chips (Bubbles and Honeycomb; magnification is the Magnify slider)`);
   const n0 = H.num(t.text("[data-count]"));
   for (const s of styles.filter(s => !s.classList.contains("on")).slice(0, 3)) {
     await t.click(s, { wait: 300 });
@@ -166,8 +166,8 @@ scenario("home", "Arrange sheet: the strip morphs the map and keeps every color"
   await H.homeReady(t);
   await H.sheet(t, "arrange");
   const arrs = t.$$(".hm-chooser [data-arr]");
-  t.expect(arrs.length >= 8, `only ${arrs.length} arrangements`);
-  // each arrangement has its own flat icon (js/home.js hmArrIcon) and a one-line label
+  t.expect(arrs.length >= 5, `only ${arrs.length} shapes`);
+  // each shape has its own flat icon (js/home.js hmArrIcon) and a one-line label
   t.expect(arrs.every(b => b.querySelectorAll(".hm-arr-pic svg circle, .hm-arr-pic svg rect, .hm-arr-pic svg path").length >= 6), "an arrangement picture is empty");
   t.expect(arrs.every(b => b.querySelector("b").scrollWidth <= b.querySelector("b").clientWidth + 1), "an arrangement label is cut off");
   const n0 = H.num(t.text("[data-count]"));
@@ -178,9 +178,9 @@ scenario("home", "Arrange sheet: the strip morphs the map and keeps every color"
     t.expect(H.num(t.text("[data-count]")) === n0, `arrangement "${b.dataset.arr}" changed the count`);
     t.expect(/\S/.test(t.text("[data-arr-sub]")), "no line says what the arrangement means");
   }
-  // every color exactly once in each arrangement
-  const dupes = t.ev("HONEY_ARR_IDS.filter(id => { const its = hmStageItems(250); const l = honeyLayout(its, hmLayoutKey(id, 'original')); return new Set(l.pts.map(p => p.it.n)).size !== its.length || l.pts.length !== its.length; })");
-  t.expect(!dupes.length, `arrangements that drop or repeat colors: ${dupes.join(", ")}`);
+  // every color exactly once in each shape, in every order
+  const dupes = t.ev("HONEY_ARR_IDS.flatMap(id => (honeyOrdersOf(id).length ? honeyOrdersOf(id) : ['']).map(o => [id, o])).filter(([id, o]) => { const its = hmStageItems(250); const l = honeyLayout(its, hmLayoutKey(id, 'original', o)); return new Set(l.pts.map(p => p.it.n)).size !== its.length || l.pts.length !== its.length; }).map(x => x.join(':'))");
+  t.expect(!dupes.length, `shape and order pairs that drop or repeat colors: ${dupes.join(", ")}`);
   // leaving: the clear ✕, and a tap on the map above the sheet
   await t.click("[data-sheet-close]", { wait: 450 });
   t.expect(!t.$(".hm-chooser"), "✕ did not close the Arrange sheet");
@@ -190,6 +190,40 @@ scenario("home", "Arrange sheet: the strip morphs the map and keeps every color"
   scrim.dispatchEvent(new t.w.PointerEvent("pointerdown", { bubbles: true, cancelable: true }));
   await t.sleep(450);
   t.expect(!t.$(".hm-chooser"), "a tap on the map did not close the View sheet");
+});
+
+scenario("home", "Arrange sheet: Center on and Sort by change the order inside a shape, and are kept", async t => {
+  await H.homeReady(t);
+  await H.sheet(t, "arrange");
+  const n0 = H.num(t.text("[data-count]"));
+  await t.click('.hm-chooser [data-arr="rings"]', { wait: 150 });
+  t.expect(/Center on/.test(t.text("[data-ord-row]")), "Rings has no Center on row");
+  for (const id of ["vivid", "muted", "dark", "known", "near", "today"]) {
+    await t.click(`[data-ord="${id}"]`, { wait: 120 });
+    t.expect(t.ev("hmOrd('rings')") === id && t.$(`[data-ord="${id}"]`).classList.contains("on"), `Center on ${id} did not turn on`);
+    t.expect(t.ev("HM_CTRL.getCfg().resolved.layout").startsWith("rings~" + id), `the map did not take Center on ${id}`);
+    t.expect(/Middle: .+ Edge: /.test(t.text("[data-arr-sub]")), `no line says what the middle and edge mean (${id})`);
+    t.expect(H.num(t.text("[data-count]")) === n0, `Center on ${id} changed the count`);
+  }
+  await t.click('[data-ord="vivid"]', { wait: 120 });
+  // the most vivid sits in the middle: the middle bubble is stronger than the average
+  const midC = t.ev("(() => { const l = honeyLayout(hmStageItems(100), 'rings~vivid'); const s = l.pts.slice().sort((a, b) => Math.hypot(a.x, a.y) - Math.hypot(b.x, b.y)); return [s[0].it.C, s.reduce((t, p) => t + p.it.C, 0) / s.length]; })()");
+  t.expect(midC[0] > midC[1] * 1.5, `Center on Vivid put a weak color in the middle (${midC.map(x => x.toFixed(0)).join(" vs ")})`);
+  await t.click('.hm-chooser [data-arr="map"]', { wait: 150 });
+  t.expect(/Sort by/.test(t.text("[data-ord-row]")), "the Map has no Sort by row");
+  await t.click('[data-ord="light"]', { wait: 150 });
+  t.expect(t.ev("HM_CTRL.getCfg().resolved.layout") === "map~light", "the Map did not take Sort by lightness");
+  t.expect(t.$$(".hm-ax-l, .hm-ax-r").length === 2, "no edge captions for a sorted Map");
+  await t.click('[data-ord="painted"]', { wait: 400 });
+  await t.waitFor(() => t.ev("!!HONEY_PAINTED") && t.ev("HM_CTRL.getCfg().resolved.layout") === "map~painted", 6000, "the painting counts to load");
+  await t.click('[data-ord="hue"]', { wait: 150 });
+  t.expect(t.ev("S.hm.ord.rings") === "vivid" && t.ev("S.hm.ord.map") === "hue", "the orders were not kept per shape");
+  await t.click('.hm-chooser [data-arr="temp"]', { wait: 150 });
+  t.expect(t.$("[data-ord-row]").hidden, "Warm and cool shows an order row (its plane has no order)");
+  // an old save upgrades: Color wheel = Rings centered on greys; the Magnifier = Bubbles with a strong Magnify
+  t.ev("S.hm.arr = 'wheel'; S.hm.style = 'magnifier'; S.hm.feel.mag = .5; hmView()");
+  t.expect(t.ev("S.hm.arr") === "rings" && t.ev("S.hm.ord.rings") === "muted" && t.ev("S.hm.style") === "original" && t.ev("S.hm.feel.mag") >= .9, "an old save did not upgrade");
+  t.ev("S.hm.arr = 'map'; S.hm.ord = {}; S.hm.feel.mag = HM_FEEL0.mag");
 });
 
 scenario("home", "View sheet: families tell the truth and combine with tone and your words", async t => {
@@ -346,7 +380,11 @@ scenario("daily", "Today's painting: a tap answers round 1, Next opens round 2's
 // ================================================================== TRAIN
 scenario("train", "check-in card opens the drill", async t => {
   await t.open("#shot=gx:due", { settle: 600 });
-  const ck = await t.waitFor("[data-checkin]", 6000, "the weekly check-in card");
+  // the check-in lives on Train > Your eye (js/rooms2.js); the row says it's ready
+  const eyeRow = await t.waitFor("[data-r2-eye]", 6000, "the Your eye row");
+  t.expect(/check-in/i.test(eyeRow.textContent), "the Your eye row doesn't say a check-in is ready");
+  await t.click(eyeRow, { wait: 500 });
+  const ck = await t.waitFor("[data-checkin]", 6000, "the weekly check-in row");
   await t.click(ck, { wait: 500 });
   await t.waitFor(".drill.gy-checkin", 6000, "the check-in drill");
   await t.waitFor(".drill .tile, .drill .half, .drill .sq-dot, .drill [data-check], .drill [data-lock], .drill input[type=range]", 5000, "something to answer in the drill");
@@ -360,21 +398,45 @@ scenario("train", "check-in card opens the drill", async t => {
 });
 
 scenario("train", "every entry on the Train menu opens something (nothing locked)", async t => {
-  // design round 2 (js/rooms2.js): the games grid, the drills and the checks; each tap must leave the room
-  // (a game, a drill, a page) or answer with a sheet or a toast, with no error
+  // js/rooms2.js: Today (3), the six games, then Drills and Your eye; each tap must leave the room (a game, a
+  // drill, a page) or answer with a sheet or a toast, with no error. Then every drill on the Drills page.
   await t.open("#shot=gx:home", { settle: 600 });
   await t.waitFor(".r2-games .r2-g", 6000, "the Train games grid");
-  const n = t.$$(".r2-games .r2-g, .r2-list .r2-li").length;
-  t.expect(n >= 25, `only ${n} entries on the Train menu`);
+  const SEL = ".r2-td-row .r2-td, .r2-games .r2-g, .r2-rows .r2-row";
+  const n = t.$$(SEL).length, g = t.$$(".r2-games .r2-g").length;
+  t.expect(g >= 6 && g <= 7, `${g} game tiles on Train (want the six)`);
+  t.expect(t.$$(".r2-td-row .r2-td").length === 3, "the Today row doesn't have three parts");
+  t.expect(t.$$(".r2-new").length <= 2, `${t.$$(".r2-new").length} "New" tags (at most two)`);
   t.expect(!t.$(".r2-train .locked, .r2-train [data-locked]"), "a locked entry on the Train menu");
+  // nothing sits under the rooms button: scrolled to the end, the last row ends at least a corner (48 px) plus its
+  // gap above the room's bottom edge (measured against the room itself, which may still be mid-entrance here)
+  t.ev("document.querySelectorAll('.r2-train').forEach(e => e.scrollTop = 1e6); window.scrollTo(0, 1e6)"); await t.sleep(300);
+  const last = t.$$(".r2-rows .r2-row").pop(), room = t.$(".r2-train");
+  if (last && room) { const a2 = last.getBoundingClientRect(), r2 = room.getBoundingClientRect(), k = r2.width / room.offsetWidth || 1, gap = (r2.bottom - a2.bottom) / k; t.expect(gap >= 56, `the last Train row ends ${Math.round(gap)} px from the bottom, under the rooms button`); }
   for (let i = 0; i < n; i++) {
-    const b = t.$$(".r2-games .r2-g, .r2-list .r2-li")[i], label = (b.querySelector("b") || b).textContent.trim();
+    const b = t.$$(SEL)[i], label = (b.querySelector("b") || b).textContent.trim();
     await t.click(b, { wait: 500 });
     await t.waitFor(() => !t.$('.room-sheet[data-room="gym"]') || t.$(".sheet") || t.$(".toast"), 6000, `"${label}" to open something`);
     t.ev("document.querySelectorAll('.scrim,.sheet,.toast').forEach(n => n.remove()); go('gym')");
     await t.waitFor(".r2-games .r2-g", 6000, `the Train menu again after "${label}"`);
   }
-  t.notes.push(`${n} entries opened`);
+  await t.click("[data-r2-drills]", { wait: 500 });
+  await t.waitFor(".r2-sub .r2-list .r2-li", 6000, "the Drills page");
+  const d = t.$$(".r2-sub .r2-li").length;
+  t.expect(d >= 12, `only ${d} drills on the Drills page`);
+  for (let i = 0; i < d; i++) {
+    const b = t.$$(".r2-sub .r2-li")[i], label = (b.querySelector("b") || b).textContent.trim();
+    await t.click(b, { wait: 500 });
+    await t.waitFor(() => !t.$(".r2-sub") || t.$(".sheet") || t.$(".toast"), 6000, `drill "${label}" to open something`);
+    t.ev("document.querySelectorAll('.scrim,.sheet,.toast').forEach(n => n.remove()); r2DrillsPage()");
+    await t.waitFor(".r2-sub .r2-li", 6000, `the Drills page again after "${label}"`);
+  }
+  await t.click("[data-close]", { wait: 500 });
+  await t.waitFor(".r2-games .r2-g", 6000, "Train after Back from Drills");
+  await t.click("[data-r2-eye]", { wait: 500 });
+  await t.waitFor(".r2-fams.big .r2-fam", 6000, "the Your eye page");
+  t.expect(t.$$(".r2-fams.big .r2-fam").length === 9, "Your eye doesn't show nine families");
+  t.notes.push(`${n} Train entries and ${d} drills opened`);
 });
 
 scenario("train", "Odd one out: tap tiles through a whole round", async t => {
@@ -700,8 +762,8 @@ scenario("home", "Study corner opens the instant deck seeded with the middle col
 // ================================================================== LEARN A SET (js/learnset.js)
 const LS_SOLVE = `(() => {
   const st = document.querySelector('.ls-study .pr-stage'); if (!st) return 'gone';
-  const nx = st.querySelector('[data-next]'); if (nx) { nx.click(); return 'next'; }
   const boss = st.querySelector('[data-boss]'); if (boss) { boss.click(); return 'boss'; }
+  const nx = st.querySelector('[data-next]'); if (nx) { nx.click(); return 'next'; }
   const it = st._lsIt, nm = it ? prName(it) : '';
   if (st.querySelector('.pr-s-match') && st._prMatch) {
     const { tiles } = st._prMatch, btns = [...st.querySelectorAll('.pr-tile')];
@@ -761,6 +823,86 @@ scenario("learnset", "Study: a mixed session runs to the results", async t => {
   t.expect(t.ev("Object.values(S.cards).filter(c => c.from && c.due > today()).length") >= 1, "the Study colors are in spaced review");
   await t.click(".ls-res [data-a=look]", { wait: 500 });
   await t.waitFor(".ls-lookscr", 4000, "Look again from the results");
+});
+// Answer wrong (every other question, so the session can end) and press Next the way an iPhone does: a touch
+// pointerdown/pointerup with no click after it (iOS can drop the synthesized click), or the miss compare's Got it.
+// David, 2026-10-08: "I'm clicking Next and it's stuck."
+const LS_WRONG = `(() => {
+  const st = document.querySelector('.ls-study .pr-stage'); if (!st) return 'gone';
+  const touch = (b, k) => { const r = b.getBoundingClientRect(), o = { bubbles: true, pointerId: 7 + k, pointerType: 'touch', isPrimary: true, clientX: r.left + r.width / 2, clientY: r.top + r.height / 2 };
+    b.dispatchEvent(new PointerEvent('pointerdown', o)); b.dispatchEvent(new PointerEvent('pointerup', o)); };
+  window.__lsN = (window.__lsN || 0) + 1;
+  const mc = document.querySelector('.mc:not(.out) .mc-go'); if (mc) { if (window.__lsN % 2) touch(mc, 1); else mc.click(); return 'mc'; }
+  const meet = document.querySelector('.ls-study [data-meetnext]'); if (meet) { meet.click(); return 'meet'; }
+  const boss = st.querySelector('[data-boss]'); if (boss) { boss.click(); return 'boss'; }
+  const nx = st.querySelector('[data-next]'); if (nx) { if (window.__lsN % 2) touch(nx, 2); else nx.click(); return 'next'; }
+  const it = st._lsIt, nm = it ? prName(it) : '', wrong = (window.__lsW = !window.__lsW);
+  const pick = labels => { const k = labels.findIndex(t => (t === nm) !== wrong); return k < 0 ? 0 : k; };
+  if (st.querySelector('.pr-s-match') && st._prMatch) {
+    const { tiles } = st._prMatch, btns = [...st.querySelectorAll('.pr-tile')];
+    const k = tiles.findIndex((t, i) => !t.sw && !btns[i].classList.contains('gone')); if (k < 0) return 'wait';
+    const j = tiles.findIndex(t => t.sw && t.i === tiles[k].i); btns[k].click(); btns[j].click(); return 'match';
+  }
+  if (st.querySelector('.pr-s-odd')) { const k = st._prOpts.findIndex(o => !o.same); st._prChoose(wrong ? (k + 1) % st._prOpts.length : k); return wrong ? 'oddx' : 'odd'; }
+  if (st.querySelector('.pr-s-quiz')) { const b = [...st.querySelectorAll('.pr-opt')]; b[pick(b.map(x => x.textContent.trim()))].click(); return wrong ? 'qnx' : 'qn'; }
+  if (st.querySelector('.pr-s-qc')) { const b = [...st.querySelectorAll('.pr-cell')]; b[pick(b.map(x => x.querySelector('.pr-tag').textContent.trim()))].click(); return wrong ? 'qcx' : 'qc'; }
+  if (st.querySelector('.pr-s-type input') && !st.querySelector('.pr-typef.done')) { st._prType(wrong ? 'qqqq' : nm); return wrong ? 'typex' : 'type'; }
+  if (st.querySelector('.pr-s-card')) { if (!st.querySelector('.pr-card.revealed')) { st._prReveal(); return 'reveal'; } const y = st.querySelector(wrong ? '[data-no]' : '[data-yes]'); if (y) { y.click(); return 'card'; } }
+  return 'wait';
+})()`;
+scenario("learnset", "Study: wrong answers and touch-only Next play a 3-color session to the end", async t => {
+  await H.openPage(t, "#/color/teal", "Teal");
+  t.ev("window.__lsN = 0; window.__lsW = false");
+  if (t.ev("typeof lsQuick === 'function'")) { t.ev("lsQuick({ seed: prByKey('teal') })"); }
+  else {
+    await t.click("[data-learnit]", { wait: 600 });
+    await t.waitFor(".ls-sheet", 4000, "the Learn sheet");
+    t.ev("(() => { const r = document.querySelector('.ls-sheet [data-size]'); r.value = 3; r.dispatchEvent(new Event('input', { bubbles: true })); })()");
+    await t.click(".ls-sheet [data-go]", { wait: 600 });
+  }
+  await t.waitFor(".ls-study", 6000, "the Study screen");
+  const seen = [];
+  let lastSig = "", same = 0;
+  for (let i = 0; i < 260 && !t.$(".ls-res"); i++) {
+    const k = t.ev(LS_WRONG); seen.push(k);
+    await t.sleep(k === "wait" ? 300 : k === "next" || k === "mc" ? 450 : 300);
+    const sig = t.ev("(() => { const s = document.querySelector('.ls-study .pr-stage'); return s ? s.innerHTML.length + '|' + !!s.querySelector('[data-next]') : 'x'; })()");
+    if (k === "next" && sig === lastSig && /true$/.test(sig)) { same++; t.expect(same < 2, `Next did nothing (stuck after: ${seen.slice(-8).join(" ")})`); } else same = 0;
+    lastSig = sig;
+  }
+  await t.waitFor(".ls-res", 8000, "the results after a session with misses");
+  t.notes.push("steps: " + seen.length + " · " + [...new Set(seen)].join(","));
+  t.expect(seen.some(k => /x$/.test(k)), "the session had wrong answers");
+  t.expect(seen.includes("next") || seen.includes("mc"), "a Next or Got it was pressed after a miss");
+});
+scenario("learnset", "Study: new colors are met (a Meet card each, then the closest two) before any question; Test me skips Meet", async t => {
+  await H.openPage(t, "#/color/teal", "Teal");
+  await t.click("[data-learnit]", { wait: 600 });
+  await t.waitFor(".ls-sheet", 4000, "the Learn sheet");
+  t.expect(t.$$(".ls-sheet [data-pace]").length === 4 && t.$(".ls-sheet [data-pace].on"), "the pace chips, one on");
+  t.expect(/new ones? first|Nothing new/.test(t.text(".ls-sheet [data-pacesay]")), "the pace line says what Study will do");
+  t.ev("(() => { const r = document.querySelector('.ls-sheet [data-size]'); r.value = 4; r.dispatchEvent(new Event('input', { bubbles: true })); })()");
+  await t.click(".ls-sheet [data-go]", { wait: 600 });
+  await t.waitFor(".ls-study .ls-meet", 6000, "a Meet card first");
+  t.expect(/Meet/.test(t.text(".ls-study [data-status]")), "the status says Meet");
+  t.expect(t.$(".ls-meet .ls-meet-n") && t.text(".ls-meet .ls-meet-n").length > 1, "the Meet card names the color");
+  t.expect(!t.$(".ls-study .pr-s-quiz, .ls-study .pr-s-qc"), "no question before the colors are met");
+  const seen = [];
+  for (let i = 0; i < 12 && !t.$(".ls-study .pr-s-quiz, .ls-study .pr-s-qc"); i++) {
+    seen.push(t.$(".ls-mpair") ? "pair" : t.$(".ls-meet") ? "meet" : "?");
+    await t.waitFor(".ls-study [data-meetnext][data-next]", 3000, "the Meet card's Next");
+    await t.click(".ls-study [data-meetnext][data-next]", { wait: 420 });
+  }
+  t.notes.push(seen.join(" "));
+  t.expect(seen.filter(x => x === "meet").length >= 2 && seen.filter(x => x === "meet").length <= 3, `a wave of 2-3 colors is met (${seen.join(" ")})`);
+  t.expect(seen.includes("pair"), "the closest two are shown side by side");
+  t.expect(t.$(".ls-study .pr-s-quiz, .ls-study .pr-s-qc"), "then the first question");
+  // Test me: straight to a question
+  t.ev("lsState().pace = 'test'");
+  t.ev("lsStudy(lsAlike(prByKey('teal'), 4, 5), { label: 'x' })");
+  await t.waitFor(".ls-study .pr-step", 4000, "a Test me session");
+  t.expect(!t.$(".ls-study .ls-meet"), "Test me skips Meet");
+  t.ev("lsState().pace = 'you'");
 });
 scenario("learnset", "Study: stop part-way, Keep going picks each color up at its level", async t => {
   await H.openPage(t, "#/color/teal", "Teal");
@@ -1089,6 +1231,14 @@ scenario("map", "On the map: a painting page lights its colors on Home; #/map/ga
   t.notes.push(t.text(".cs-hl-pill"));
   await H.homeReady(t); t.ev("openRoute('#/map/gallery/3')");
   await t.waitFor(() => /named colou?rs? · as photographed/.test(t.text(".cs-hl-pill")), 20000, "a museum painting's constellation from its address");
+  // How many: the measured pool, not a fixed six; the lit set and the named chips follow the slider
+  const nIn = t.$$(".cs-hl-n input").pop();
+  t.expect(nIn && +nIn.max > 6, "a museum painting on the map has no How many slider over its pool");
+  nIn.value = 12; nIn.dispatchEvent(new t.w.Event("input", { bubbles: true })); nIn.dispatchEvent(new t.w.Event("change", { bubbles: true }));
+  await t.sleep(200);
+  const bars = t.$$(".cs-hl-bar"), bar = bars[bars.length - 1], lit = t.ev("HONEY_HL.hexes.length"), chips = bar.querySelectorAll(".cs-hl-c").length;
+  t.expect(lit > 6 && lit <= 12 && chips === lit, `How many 12 lit ${lit} colors and named ${chips}`);
+  t.expect(/%/.test(bar.querySelector(".cs-hl-c").textContent), "the named chips don't say their share of the canvas");
 });
 scenario("map", "panning keeps the resting seams, and fast pans and pinches at every size never blank the canvas", async t => {
   const cv = await H.homeReady(t), r = cv.getBoundingClientRect();

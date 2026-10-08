@@ -559,7 +559,9 @@ function xbZero(body, F, f) {
 // Bands are the nine families (by CIELAB hue), each tinted per decade by that family's own average color there.
 // A band's thickness follows how many paintings the decade has here, so collecting bias stays visible.
 const XB_RIVER_ORDER = [8, 3, 0, 1, 7, 6, 5, 4, 2];   // greys at the bottom, then browns, reds, pinks, purples, blues, greens, yellows, oranges
-function xbRiver(body, F, res) {
+// o (optional, for the River mounted outside Browse, e.g. js/artwiki.js's index): set:false leaves out the set's
+// color strip and actions; decBtn(yr) returns the decade panel's button html in place of "Only the 1880s, in the grid".
+function xbRiver(body, F, res, o = {}) {
   const G = F.G, list = res.list, D = XB_NDEC;
   const n = new Int32Array(D), fs = new Float32Array(D * 9), fc = new Float32Array(D * 27);
   for (let q = 0; q < list.length; q++) {
@@ -598,7 +600,7 @@ function xbRiver(body, F, res) {
   const tickStep = ticks.length > 7 ? 2 : 1;
   const best = (() => { let b = d0; for (let d = d0; d <= d1; d++) if (n[d] > n[b]) b = d; return b; })();
   let sel = XB.riverSel != null && XB.riverSel >= d0 && XB.riverSel <= d1 && n[XB.riverSel] ? XB.riverSel : best;
-  body.innerHTML = xbSetBlock(F, list) + `
+  body.innerHTML = (o.set === false ? "" : xbSetBlock(F, list)) + `
     <div class="xb-river" data-xbriver>
       <svg viewBox="0 0 ${W} ${H + 22}" width="${W}" height="${H + 22}" aria-label="Color families by decade, ${XB_DEC0 + d0 * 10}s to ${XB_DEC0 + d1 * 10}s">
         <defs>${defs}<pattern id="xbhatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="5" height="5" fill="rgba(14,13,11,.18)"/><line x1="0" y1="0" x2="0" y2="5" stroke="rgba(236,232,223,.12)" stroke-width="1.2"/></pattern></defs>
@@ -627,7 +629,7 @@ function xbRiver(body, F, res) {
       ${mk ? `<p class="xb-rv-mk">${mk.charAt(0).toUpperCase() + mk.slice(1)}.${items.length < 25 ? ` Only ${items.length} here, so read this decade lightly.` : ""}</p>` : ""}
       ${dist.length ? `<p class="xb-rv-sub">Colors this decade holds more of than the rest:</p><div class="xb-rv-cols">${dist.map(c => `<button class="xb-chip" data-swatch="${c.h}"><i style="--c:${c.h}"></i><span>${esc(nameOf(c.h).text)}</span><em class="mono">${c.lift >= 10 ? "10×+" : c.lift.toFixed(1) + "×"}</em></button>`).join("")}</div>` : `<p class="xb-rv-sub">No color stands out from the rest here.</p>`}
       <div class="xb-rail">${items.slice(0, 12).map(i => xbTileHTML(i, F, res)).join("")}</div>
-      ${items.length > 1 ? `<button class="btn ghost" data-xbonly="d${yr}">Only the ${yr}s, in the grid ${ICON.arrow}</button>` : ""}`;
+      ${items.length > 1 ? (o.decBtn ? o.decBtn(yr) : `<button class="btn ghost" data-xbonly="d${yr}">Only the ${yr}s, in the grid ${ICON.arrow}</button>`) : ""}`;
     xbFillTiles(panel);
   };
   const at = clientX => { const r = river.getBoundingClientRect(); let d = Math.round(d0 + clamp((clientX - r.left) / r.width, 0, 1) * span); if (!n[d]) { let k = 1; while (k < span && !n[clamp(d + k, d0, d1)] && !n[clamp(d - k, d0, d1)]) k++; d = n[clamp(d - k, d0, d1)] ? clamp(d - k, d0, d1) : clamp(d + k, d0, d1); } return d; };

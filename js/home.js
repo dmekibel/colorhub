@@ -56,11 +56,13 @@ const hmSet = id => COLOR_SETS.find(s => s.id === id) || null;
 const hmCard = it => { const id = it.c && it.c.id ? it.c.id : typeof cardIdFor === "function" && !it.shade ? cardIdFor(it) : null; return id ? S.cards[id] || null : null; };
 const HM_KEEP = { all: () => true, learned: it => isMine(hmCard(it)), learning: it => !!hmCard(it) && !isMine(hmCard(it)), new: it => !hmCard(it) };
 // the Looks Home offers (the lens and the cell shape; where colors go is the arrangement now)
-const HM_LOOKS = [["original", "Bubbles"], ["honeycomb", "Honeycomb"], ["magnifier", "Magnifier"]];
+// (David, 2026-10-08: magnification applies to either, so the Magnifier is no longer a Look: it's the Magnify slider
+// turned up, and an old "Magnifier" save becomes Bubbles with a strong Magnify)
+const HM_LOOKS = [["original", "Bubbles"], ["honeycomb", "Honeycomb"]];
 // ---- the Arrange sheet's pictures (David, 2026-10-08: "the previews need to be simple icon versions"): one flat,
 // iconic diagram per arrangement, same 64 px grid, same dot size, a fixed calm palette (never the live colors, which
 // read as noise at this size). Short one-line labels; the full title and its line show under the strip. ----------
-const HM_ARR_SHORT = { map: "Hue map", wheel: "Wheel", light: "Light–dark", families: "Families", pages: "Pages", temp: "Warm–cool", path: "Path", known: "Your words", sunflower: "Sunflower" };
+const HM_ARR_SHORT = { map: "Map", rings: "Rings", sunflower: "Sunflower", families: "Families", temp: "Warm–cool" };
 const hmHue = (h, l = 60, c = 62) => `hsl(${Math.round(h)} ${c}% ${l}%)`;
 function hmArrIcon(id) {
   const dot = (x, y, r, f, extra = "") => `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r}" fill="${f}"${extra}/>`;
@@ -87,7 +89,7 @@ function hmArrIcon(id) {
       const x = 12 + c * 10, y = 17 + r * 10;
       b += dot(x, y, 3.8, c === 2 ? `hsl(40 5% ${76 - r * 12}%)` : c < 2 ? hmHue(4 + c * 24 + r * 6, 72 - r * 9) : hmHue(170 + (c - 3) * 44 + r * 6, 72 - r * 9));
     }
-  } else if (id === "path") {   // first words in the middle, a ring per stage
+  } else if (id === "path" || id === "rings") {   // rings from the middle out, hue going round
     b = `<circle cx="32" cy="32" r="11.5" fill="none" stroke="rgba(236,232,223,.18)" stroke-width="1"/><circle cx="32" cy="32" r="22" fill="none" stroke="rgba(236,232,223,.18)" stroke-width="1"/>`
       + dot(32, 32, 4.4, hmHue(24, 64)) + ring(6, 11.5, 3.4, i => hmHue(30 + i * 60, 62)) + ring(12, 22, 3.4, i => hmHue(i * 30 + 15, 60));
   } else if (id === "known") {   // learned in the middle, then learning, then new
@@ -131,7 +133,13 @@ function hmView() {   // the saved view, upgrading older saves in place (unknown
   h.fam = CS_FAMS.includes(h.fam) ? h.fam : "";
   h.tone = CS_TONES.some(t => t[0] === h.tone) ? h.tone : "";
   // the learning spiral and the sunflower were Looks; they're arrangements now
-  if (!HONEY_ARR[h.arr]) h.arr = h.style === "spiral" ? "path" : h.style === "sunflower" ? "sunflower" : "map";
+  if (!HONEY_ARR[h.arr] && !HONEY_ARR_OLD[h.arr]) h.arr = h.style === "spiral" ? "path" : h.style === "sunflower" ? "sunflower" : "map";
+  // shape x order: the old arrangements that were really one shape in one order (Color wheel = Rings centered on
+  // greys, Path rings = Rings centered on everyday words, Hue pages = Families sorted by vividness...)
+  h.ord = h.ord && typeof h.ord === "object" ? h.ord : {};
+  if (HONEY_ARR_OLD[h.arr]) { const [id, ord] = HONEY_ARR_OLD[h.arr]; h.arr = id; h.ord[id] = ord; }
+  for (const id of Object.keys(h.ord)) if (!honeyOrdersOf(id).includes(h.ord[id])) delete h.ord[id];
+  if (h.style === "magnifier") { h.style = "original"; h.feel = { ...(h.feel || HM_FEEL0), mag: Math.max(.92, +((h.feel || {}).mag) || 0) }; }
   if (!HM_LOOKS.some(l => l[0] === h.style)) h.style = "original";
   delete h.famNames;   // the zoomed-out family names are gone (David, 2026-10-08: "they don't add anything")
   const f = h.feel || {}; h.feel = { mag: clamp(+(f.mag ?? HM_FEEL0.mag), 0, 1), space: clamp(+(f.space ?? HM_FEEL0.space), 0, 1), size: clamp(+(f.size ?? HM_FEEL0.size), 0, 1) };
@@ -156,18 +164,58 @@ function hmFiltered(base, o = {}) {
   return base.filter(it => (!fam || csFamilyHas(it, fam)) && (!tone || csTone(it, tone)) && keep(it));
 }
 // the feel sliders as lens settings over the Look's own preset. Magnify: the middle-to-edge size ratio (flat at 0,
-// the preset's own ratio at .5); Bubble size: both ends together; Spacing: the seam (0 to 8 px).
+// the preset's own ratio at .5, and past .75 on up to the old Magnifier's strong lens, about 9x with a tighter
+// falloff, for either Look); Bubble size: both ends together; Spacing: the seam (0 to 8 px).
 function hmFeelTweak(style, feel) {
   const p = { ...HONEY_CFG_BASE, ...((HONEY_STYLES[style] || HONEY_STYLES.original).cfg) }, f = feel || HM_FEEL0;
   const pr = Math.max(1.2, p.m0 / p.m1), sz = .72 + f.size * .56, m1 = p.m1 * sz;
-  const ratio = 1 + (pr - 1) * Math.pow(f.mag / .5, 1.25);
-  return { m1, m0: Math.max(m1 + .05, m1 * ratio), gap: f.space * .4 };
+  const hi = Math.max(0, (f.mag - .75) / .25), ratio = 1 + (pr - 1) * Math.pow(f.mag / .5, 1.25) + hi * hi * Math.max(0, 9.3 - (1 + (pr - 1) * 2.38));
+  const out = { m1, m0: Math.max(m1 + .05, m1 * ratio), gap: f.space * .4 };
+  out.sig = p.sig + (1.2 - p.sig) * hi;
+  return out;
 }
-// the layout the arrangement asks for (the Hue map keeps its Look's own map shape)
-const hmLayoutKey = (arr, style) => arr === "map" || !HONEY_ARR[arr] ? ((HONEY_STYLES[style] || {}).cfg || {}).layout || "mapTall" : arr;
+// the order a shape is in (your choice for that shape, else its default), and the color "Around a color" circles
+const hmOrd = (arr, v = hmView()) => { const o = v.ord && v.ord[arr]; return honeyOrdersOf(arr).includes(o) ? o : (HONEY_ARR[arr] || {}).def || ""; };
+function hmNear(v = hmView()) {
+  const n = v.near;
+  if (n && /^#[0-9a-f]{6}$/i.test(n.h || "")) return n;
+  const d = typeof dailyColor === "function" ? dailyColor() : null;   // until you pick one: today's color
+  return d ? { h: d.h, n: d.n } : { h: "#808080", n: "Grey" };
+}
+// the layout a shape in an order asks for: "rings~vivid", "rings~near~#2A9D8F"; the Hue map in hue order keeps its
+// Look's own map shape (the approved one, endless edges and all)
+function hmLayoutKey(arr, style, ord) {
+  if (!HONEY_ARR[arr]) arr = "map";
+  ord = ord || hmOrd(arr);
+  if (arr === "map" && ord === "hue") return ((HONEY_STYLES[style] || {}).cfg || {}).layout || "mapTall";
+  if (!HONEY_ARR[arr].kind) return arr;
+  if (ord === "today" && typeof dailyColor === "function") return `${arr}~today~${dailyColor().h.toUpperCase()}`;
+  return ord === "near" ? `${arr}~near~${hmNear().h.toUpperCase()}` : `${arr}~${ord}`;
+}
+// the shape and its order in a few words: "Rings · Vivid", "Map" (the default Hue map), "Families · Vividness"
+function hmArrLabel(v = hmView()) {
+  const a = HONEY_ARR[v.arr] || HONEY_ARR.map, ord = hmOrd(v.arr, v), sp = honeyOrderSpec(v.arr, ord);
+  if (!sp) return a.title;
+  return `${a.title} · ${ord === "near" ? "Around " + hmNear(v).n : sp.t}`;
+}
+// what position means right now, in words: line (the sheet's one line), top (the map's caption for a radial shape),
+// l and r (the map's edge captions for a grid)
+function hmMeaning(v = hmView()) {
+  const a = HONEY_ARR[v.arr] || HONEY_ARR.map, ord = hmOrd(v.arr, v), spec = honeyOrderSpec(v.arr, ord);
+  if (a.kind === "radial") {
+    const mid = ord === "near" ? hmNear(v).n : ord === "today" && typeof dailyColor === "function" ? `today's color, ${dailyColor().n}` : spec.mid;
+    return { line: `Middle: ${mid}. Edge: ${spec.edge}.`, top: `Middle: ${mid} · Edge: ${ord === "common" ? "the rarest" : spec.edge}` };
+  }
+  if (a.kind === "grid") {
+    if (v.arr === "map" && ord === "hue") return { line: a.sub + "." };
+    const line = spec.line.charAt(0).toUpperCase() + spec.line.slice(1);
+    return { line: v.arr === "families" ? `Inside each family: ${spec.line}.` : line + ".", l: spec.l, r: spec.r };
+  }
+  return { line: a.sub + ".", l: a.axes && a.axes.l, r: a.axes && a.axes.r };
+}
 // regions (Families, Hue pages) read as a whole book, so the lens is gentler there: a strong fisheye shrank the outer
 // regions to specks. Your Magnify still moves it, from a calmer start.
-const hmLiveTweak = v => { const a = HONEY_ARR[v.arr], feel = a && a.fit ? { ...v.feel, mag: v.feel.mag * .45 } : v.feel; return { ...hmFeelTweak(v.style, feel), layout: hmLayoutKey(v.arr, v.style) }; };
+const hmLiveTweak = v => { const a = HONEY_ARR[v.arr], feel = a && a.fit ? { ...v.feel, mag: v.feel.mag * .45 } : v.feel; return { ...hmFeelTweak(v.style, feel), layout: hmLayoutKey(v.arr, v.style, hmOrd(v.arr, v)) }; };
 
 // ---------- the Tweak panel: live sliders over whatever preset is active, saved in S.hm.tweak ----------
 // A compact, opaque, non-modal sheet (~45dvh): the honeycomb above it keeps running and repainting as the
@@ -389,6 +437,8 @@ function hmHome() {
       }
       items = out.length ? out : items;
     }
+    // an order that reads the painting counts (Painted) waits for them the first time (a small file)
+    { const vv = hmView(), sp = honeyOrderSpec(vv.arr, hmOrd(vv.arr, vv)); if (sp && sp.needs === "painted" && !HONEY_PAINTED) { await honeyLoadPainted().catch(() => {}); if (!el.isConnected || g !== gen) return; } }
     paintTitle(); hmAxes();
     if (typeof paintDo === "function") paintDo();
     const tw = hmLiveTweak(hmView());
@@ -424,6 +474,7 @@ function hmHome() {
       body = `${head("Arrange", "")}
       <div class="hm-ch-scroll" data-sheet-scroll>
         <div class="hm-arr" role="radiogroup" aria-label="Arrange by">${HONEY_ARR_IDS.map(id => `<button class="hm-arr-b${v.arr === id ? " on" : ""}" data-arr="${id}" role="radio" aria-checked="${v.arr === id}" aria-label="${esc(HONEY_ARR[id].title)}: ${esc(HONEY_ARR[id].sub)}"><span class="hm-arr-pic">${hmArrIcon(id)}</span><b>${esc(HM_ARR_SHORT[id] || HONEY_ARR[id].title)}</b></button>`).join("")}</div>
+        <div class="hm-ladder hm-ord" data-ord-row role="radiogroup"></div>
         <p class="hm-arr-sub" data-arr-sub></p>
         <div class="cx-sec"><b>Look</b></div>
         <div class="hm-look-row" role="radiogroup" aria-label="Look">${HM_LOOKS.map(([id, t]) => `<button class="hm-look-chip${v.style === id ? " on" : ""}" data-style="${id}" role="radio" aria-checked="${v.style === id}"><i class="hm-look-ic">${hmLookIcon(id)}</i><b>${esc(t)}</b></button>`).join("")}</div>
@@ -467,26 +518,61 @@ function hmHome() {
     const fmt = n => n.toLocaleString();
     function paintCount() {
       const p = q("[data-count]"); if (!p || !p.isConnected) return;
-      p.textContent = arrange ? `${fmt(items.length)} color${items.length === 1 ? "" : "s"} · ${HONEY_ARR[hmView().arr].title}`
+      p.textContent = arrange ? `${fmt(items.length)} color${items.length === 1 ? "" : "s"} · ${hmArrLabel()}`
         : `${fmt(items.length)} color${items.length === 1 ? "" : "s"}${hlAll ? "" : " · " + hmViewLabel()}`;
     }
     paintCount();
 
     if (arrange) {
       // ---- Arrange by: flat iconic pictures (hmArrIcon), drawn once with the sheet ----
+      // ---- the order inside the shape: Center on (radial shapes) or Sort by (grids), one row of small chips ----
+      const ordRow = q("[data-ord-row]");
+      const paintOrd = () => {
+        const vv = hmView(), a = HONEY_ARR[vv.arr], ids = honeyOrdersOf(vv.arr), cur = hmOrd(vv.arr, vv);
+        ordRow.hidden = !ids.length;
+        if (!ids.length) { ordRow.innerHTML = ""; return; }
+        ordRow.setAttribute("aria-label", a.kind === "radial" ? "Center on" : "Sort by");
+        const dot = h => `<i class="hm-ord-dot" style="background:${esc(h)}"></i>`;
+        ordRow.innerHTML = `<span class="hm-ord-l">${a.kind === "radial" ? "Center on" : "Sort by"}</span>` + ids.map(id => {
+          const sp = honeyOrderSpec(vv.arr, id), on = id === cur;
+          const t = id === "near" ? (on ? `Around ${hmNear(vv).n}` : "Around this color") : sp.t;
+          const sw = id === "near" && on ? dot(hmNear(vv).h) : id === "today" && typeof dailyColor === "function" ? dot(dailyColor().h) : "";
+          return `<button class="hm-rung${on ? " on" : ""}" data-ord="${id}" role="radio" aria-checked="${on}">${sw}<b>${esc(t)}</b></button>`;
+        }).join("");
+        qa("[data-ord]").forEach(b => b.onclick = () => pickOrd(b.dataset.ord, b));
+        const onB = ordRow.querySelector(".on"); if (onB) onB.scrollIntoView({ block: "nearest", inline: "nearest" });
+      };
+      const pickOrd = async (id, b) => {
+        const vv = hmView(), arr = vv.arr;
+        if (id === "near") {   // the color in the middle of the map right now is the new middle
+          const c = ctrl && ctrl.current(), it = c && (c.o || c);
+          if (!it || !it.h) return;
+          if (hmOrd(arr, vv) === "near" && vv.near && vv.near.h === it.h) return;
+          S.hm.near = { h: it.h, n: it.n };
+        } else if (hmOrd(arr, vv) === id) return;
+        const spec = honeyOrderSpec(arr, id);
+        if (spec && spec.needs === "painted") { b.classList.add("on"); try { await honeyLoadPainted(); } catch (e) { b.classList.remove("on"); toast("Couldn't load the painting counts. Try again in a moment."); return; } if (!sh.isConnected) return; }
+        S.hm.ord = { ...(S.hm.ord || {}), [arr]: id }; save(); buzz(4);
+        paintOrd(); paintArr();
+        if (ctrl) ctrl.update({ items, soft: true, arrange: true, recenter: true, tweak: hmLiveTweak(hmView()) });
+        hmAxes(true);
+      };
       const paintArr = () => {
         const a = hmView().arr;
         qa("[data-arr]").forEach(b => { const on = b.dataset.arr === a; b.classList.toggle("on", on); b.setAttribute("aria-checked", on); });
-        q("[data-arr-sub]").innerHTML = `<b>${esc(HONEY_ARR[a].title)}</b> · ${esc(HONEY_ARR[a].sub)}`;
+        q("[data-arr-sub]").innerHTML = `<b>${esc(HONEY_ARR[a].title)}</b> · ${esc(hmMeaning().line)}`;
         paintCount();
       };
-      qa("[data-arr]").forEach(b => b.onclick = () => {
+      qa("[data-arr]").forEach(b => b.onclick = async () => {
         if (hmView().arr === b.dataset.arr) return;
-        applyView("arr", b.dataset.arr); paintArr();
+        applyView("arr", b.dataset.arr); paintArr(); paintOrd();
         b.scrollIntoView({ block: "nearest", inline: "nearest", behavior: reduceMotion ? "auto" : "smooth" });
+        const spec = honeyOrderSpec(b.dataset.arr, hmOrd(b.dataset.arr));
+        if (spec && spec.needs === "painted") await honeyLoadPainted().catch(() => {});
         if (ctrl) ctrl.update({ items, soft: true, arrange: true, tweak: hmLiveTweak(hmView()) });
-        hmAxes();
+        hmAxes(true);
       });
+      paintOrd();
       { const cur = q(".hm-arr-b.on"); if (cur) cur.scrollIntoView({ block: "nearest", inline: "center" }); }
       paintArr();
       // ---- Look: the lens and the cells, then the feel ----
@@ -555,12 +641,20 @@ function hmHome() {
   }
   // a quiet caption at the screen's edges for an arrangement whose direction means something ("Warmer", "Cooler"):
   // never a label on a bubble, and it fades with the rest of the chrome while you drag
-  function hmAxes() {
+  // A radial shape says what its middle and edge mean in one line at the top, for a few seconds after you open Home
+  // or change the order (then it goes: the map is the content).
+  let axT = 0;
+  function hmAxes(fresh) {
     let ax = el.querySelector(".hm-axes");
-    const a = HONEY_ARR[hmView().arr], cap = a && a.axes;
-    if (!cap || hlAll) { if (ax) ax.remove(); return; }
-    if (!ax) { ax = document.createElement("div"); ax.className = "hm-axes"; ax.setAttribute("aria-hidden", "true"); el.appendChild(ax); }
-    ax.innerHTML = Object.entries(cap).map(([side, t]) => `<span class="hm-ax hm-ax-${side}">${esc(t)}</span>`).join("");
+    const m = hmMeaning(), cap = {};
+    if (m.l) cap.l = m.l;
+    if (m.r) cap.r = m.r;
+    if (m.top) cap.t = m.top;
+    if (!Object.keys(cap).length || hlAll) { if (ax) ax.remove(); return; }
+    if (!ax) { ax = document.createElement("div"); ax.className = "hm-axes"; ax.setAttribute("aria-hidden", "true"); el.appendChild(ax); fresh = true; }
+    const html = Object.entries(cap).map(([side, t]) => `<span class="hm-ax hm-ax-${side}">${esc(t)}</span>`).join("");
+    if (ax.innerHTML !== html) { ax.innerHTML = html; fresh = true; }
+    if (fresh && cap.t) { const t = ax.querySelector(".hm-ax-t"); clearTimeout(axT); axT = setTimeout(() => { if (t.isConnected) t.classList.add("gone"); }, 4500); }
   }
   // ---------- search: a tap (from the View panel's header) reveals the field; typing filters the honeycomb ----------
   const searchBox = $("#hmSearch"), searchInput = $("#hmq"), searchHint = $("#hmqHint");
@@ -654,7 +748,7 @@ function hmHome() {
       typeof fvPickStart === "function" && { id: "fav", t: "Favorites", n: "Tap the colors you love", art: ic(FV_HEART), attr: 'id="hmFav"' },
       { id: "search", t: "Search", n: "A color, a hex, a painter, a decade", art: ic(ICON.search), attr: "data-do-search" },
       { id: "colors", t: "Colors", n: `${hlAll ? "Every name" : hmViewLabel()} · ${items.length.toLocaleString()}`, art: dots(sample), attr: "data-do-colors" },
-      { id: "arrange", t: "Arrange", n: `${HONEY_ARR[v.arr].title} · ${(HM_LOOKS.find(l => l[0] === v.style) || [, ""])[1]}`, art: ic(HM_SLIDERS), attr: "data-do-arrange" },
+      { id: "arrange", t: "Arrange", n: `${hmArrLabel()} · ${(HM_LOOKS.find(l => l[0] === v.style) || [, ""])[1]}`, art: ic(HM_SLIDERS), attr: "data-do-arrange" },
     ].filter(Boolean);
     const n = rows.length;
     const scrim = document.createElement("div"); scrim.className = "rm-scrim";
@@ -893,14 +987,18 @@ function hmPaintingSet(n) {
   const by = new Map();
   (n.palette || []).forEach(p => { const nm = p.name || (typeof nameOf === "function" ? nameOf(p.h).text : p.h), o = by.get(nm); if (o) o.share += p.share || 0; else by.set(nm, { h: p.h, n: nm, share: p.share || 0 }); });
   const colors = [...by.values()].sort((a, b) => b.share - a.share);
-  return colorSet({ kind: "painting", id: n.id || n.title, title: `${n.title} · ${colors.length} named color${colors.length === 1 ? "" : "s"} · as photographed`, colors, src: n.src || "painting/" + routeSlug(String(n.id || "").replace(/^painting-/, "")) });
+  // the full measured pool when there is one (a museum painting's ~24 colors), so the map's How many can show more
+  const pool = n.pool && n.pool.length > colors.length ? n.pool : null;
+  return colorSet({ kind: "painting", id: n.id || n.title, title: pool ? n.title : `${n.title} · ${colors.length} named color${colors.length === 1 ? "" : "s"} · as photographed`, colors, src: n.src || "painting/" + routeSlug(String(n.id || "").replace(/^painting-/, "")),
+    ...(pool ? { pick: csPoolPick(pool), max: pool.length } : {}) });
 }
 function hmMapRoute(kind, id) {
   if (kind === "gallery" && /^\d+$/.test(id) && typeof loadGallery === "function") {
     const i = +id;
     return loadGallery().then(() => glDetail(i)).then(d => {
       const pal = glPal(i).map(p => ({ ...p, name: nameOf(p.h).text }));
-      csOnMap(hmPaintingSet({ id: "g" + i, title: d.t || "Painting", palette: pal, src: "gallery/" + i }));
+      const pool = typeof glPoolDecode === "function" ? glPoolDecode(d.pl) : [];
+      csOnMap(hmPaintingSet({ id: "g" + i, title: d.t || "Painting", palette: pal, pool, src: "gallery/" + i }));
     }).catch(() => { hmHome(); toast("That painting didn't load"); });
   }
   if (kind === "painting") return loadWiki().then(() => { const n = graph().nodes.get("painting-" + id); if (n && (n.palette || []).length) csOnMap(hmPaintingSet(n)); else hmHome(); });

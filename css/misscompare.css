@@ -9,7 +9,7 @@
 .mc-cell{flex:1;min-height:0;position:relative;display:flex;flex-direction:column;justify-content:flex-end;gap:6px;
   padding:calc(env(safe-area-inset-top,0px) + 18px) 16px 26px;background:var(--c);color:#fff;overflow:hidden}
 .mc-cell[data-ink="dark"]{color:#141311}
-.mc-lab{position:absolute;left:16px;top:calc(env(safe-area-inset-top,0px) + 18px);font:600 12px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;opacity:.78}
+.mc-lab{position:absolute;left:16px;top:calc(env(safe-area-inset-top,0px) + 18px);font:400 18px/1.1 var(--serif);letter-spacing:0;opacity:.82}
 .mc-side .mc-cell+.mc-cell .mc-lab{display:none}
 .mc-n{all:unset;box-sizing:border-box;cursor:pointer;display:block;min-height:44px;font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.02em;
   overflow-wrap:anywhere;text-wrap:balance;color:inherit;text-decoration:underline;text-decoration-color:color-mix(in srgb,currentColor 35%,transparent);text-underline-offset:5px;text-decoration-thickness:1px}
@@ -33,7 +33,7 @@
 .pr-sw.pr-split{display:flex;overflow:hidden;padding:0}
 .pr-half{flex:1 1 50%;min-width:0;background:var(--c);display:flex;flex-direction:column;justify-content:flex-end;gap:6px;padding:16px 14px;color:#fff;transition:flex-basis .4s cubic-bezier(.2,.8,.2,1)}
 .pr-half[data-ink="dark"]{color:#141311}
-.pr-half small{font:600 12px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;opacity:.78}
+.pr-half small{font:400 17px/1.1 var(--serif);letter-spacing:0;opacity:.82}
 .pr-half button{all:unset;cursor:pointer;min-height:44px;font:400 32px/1.02 var(--serif);letter-spacing:-.02em;overflow-wrap:anywhere;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px;text-decoration-color:color-mix(in srgb,currentColor 35%,transparent)}
 .pr-splitting .pr-half:first-child{flex-basis:100%}
 .pr-splitting .pr-half:last-child{flex-basis:0;padding:0;opacity:0}

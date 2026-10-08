@@ -173,3 +173,6 @@ Borrow two things:
 7. **Rework the screens that are still generic:** Train's launcher into a hero plus groups, You and Settings rows into the Row component with leading swatches, and the fresh-profile Home into a real map.
 
 Every lane with UI checks itself against this file and design/CRAFT-RUBRIC.md, with 440x956 screenshots of every state, before merge.
+
+## Decision (2026-10-08)
+David picked **A, Night Gallery**. It is now the app's visual direction and overrides DESIGN-SYSTEM.md where they conflict.
