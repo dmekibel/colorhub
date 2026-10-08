@@ -392,7 +392,7 @@ function roomsBubbleArt(id) {
 }
 function roomsNote(id) {
   try {
-    if (id === "learn") { const n = dueList().length; return n ? `${n} to recall` : "All caught up"; }
+    if (id === "learn") { const n = dueList().length, nu = !n && typeof nextUnit === "function" && nextUnit(); return n ? `${n} to recall` : nu ? `${nu.colors.length} new names` : "All caught up"; }
     if (id === "gym" && typeof todayTrain === "function") return todayTrain().what;
     if (id === "explore") return "Browse by color";
     if (id === "studio") return "Wheel, camera, palettes";

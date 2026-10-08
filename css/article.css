@@ -174,3 +174,5 @@
 
 @media (prefers-reduced-motion:reduce){.ar-hex{transition:none}}
 .ar-act[hidden],.ar-slotpanel[hidden]{display:none}
+/* craft pass 2026-10-08: each sense on a "Which" page says how it differs from the main one */
+.ar-plate em{font:italic 400 17px/1.25 var(--serif);max-width:30ch}
