@@ -307,6 +307,7 @@ function gymHome() {
     ${top}
     ${eyeProfile()}
     ${typeof ooShelf === "function" ? ooShelf() : ""}
+    ${typeof hgShelf === "function" ? hgShelf() : ""}
     ${cvdOn() ? `<p class="x-sub" style="margin-top:12px">A simple adjustment for ${S.profile.cvd} color blindness, not a simulation of it: differences lean on lightness and on the colors you see best.</p>` : ""}
     ${SHELVES.map(([name, ks]) => `<div class="sec-head"><b>${name}</b><span>${name === "Applied" ? "built on the basics" : name === "In context" ? "color next to color" : "one judgment at a time"}</span></div>
       <div class="gs-grid">${ks.filter(k => typeof ooRetired !== "function" || !["hue", "memory", "order"].includes(k)).map(stationTile).join("")}</div>`).join("")}
@@ -322,6 +323,7 @@ function gymHome() {
   el.querySelector("[data-eye]").onclick = eyeReport;
   if (typeof wireMatch === "function") wireMatch(el);
   if (typeof ooWire === "function") ooWire(el);   // js/games/oo-ui.js: Odd one out, today's board, Whose palette?
+  if (typeof hgWire === "function") hgWire(el);   // js/games/hue-ui.js: Gradients and today's gradient
 }
 const k0Trials = k => k === "order" ? `${SKILLS[k].trials} strips` : k === "squint" ? `${SKILLS[k].trials} paintings` : `${SKILLS[k].trials} rounds`;
 const dueWords = n => n <= 0 ? "today" : n === 1 ? "tomorrow" : `in ${n} days`;
@@ -1187,6 +1189,7 @@ function gymShotState() {
 }
 function gymShot(arg) {
   if (/^oo(:|$)/.test(arg || "") && typeof ooShot === "function") return ooShot((arg || "").slice(3));   // js/games/oo-shot.js
+  if (/^hue(:|$)/.test(arg || "") && typeof hgShot === "function") return hgShot((arg || "").slice(4));   // js/games/hue-shot.js
   const [what, k] = (arg || "home").split("-");
   if (what === "fresh") { S.gym.skills = {}; S.best = {}; return go("gym"); }
   if (what === "first") return go("gym");
