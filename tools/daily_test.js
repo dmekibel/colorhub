@@ -92,14 +92,20 @@ const day = n => run(`addDays("2026-10-07", ${n})`);
     if (Math.abs(dC) >= 3) ok(a.C.word === (dC > 0 ? "stronger" : "weaker"), `${g}->${t}: strength word vs ΔC* ${dC.toFixed(1)}`);
     if (Math.hypot(ag, bg) < 8 && Math.hypot(at, bt) < 8) ok(a.H.st === "grey" && !a.H.word, `${g}->${t}: two greys get no hue word`);
     else {
-      ok(["redder", "yellower", "greener", "bluer"].includes(a.H.word), `${g}->${t}: hue word "${a.H.word}"`);
-      // the word's pull points the way the hue moves: for a turn up to 60 degrees, along the turn as seen from the
-      // guess; for a bigger one, toward where today's hue sits
-      const pull = { redder: [1, 0], greener: [-1, 0], yellower: [0, 1], bluer: [0, -1] }[a.H.word];
-      const hg = Math.atan2(bg, ag), ht = Math.atan2(bt, at);
-      let dh = ht - hg; if (dh > Math.PI) dh -= 2 * Math.PI; if (dh < -Math.PI) dh += 2 * Math.PI;
-      if (Math.abs(dh) > Math.PI / 3) ok(pull[0] * Math.cos(ht) + pull[1] * Math.sin(ht) > 0.7, `${g}->${t}: "${a.H.word}" points at today's hue`);
-      else if (Math.abs(dh) > .02) { const sg = Math.sign(dh); ok((pull[0] * -Math.sin(hg) + pull[1] * Math.cos(hg)) * sg > 0, `${g}->${t}: "${a.H.word}" turns the hue toward today's`); }
+      ok(["redder", "yellower", "greener", "bluer", "purpler"].includes(a.H.word), `${g}->${t}: hue word "${a.H.word}"`);
+      // the word names the hue zone (the same zones as lookDiff) the guess turns into, going the way today's hue
+      // lies; for a turn over 60 degrees, the zone today's hue sits in
+      const Z = [[55, "redder"], [130, "yellower"], [190, "greener"], [280, "bluer"], [345, "purpler"], [361, "redder"]];
+      const zone = h => { h = ((h % 360) + 360) % 360; return Z.find(z => h < z[0])[1]; };
+      const hg = Math.atan2(bg, ag) * 180 / Math.PI, ht = Math.atan2(bt, at) * 180 / Math.PI;
+      let dh = ht - hg; if (dh > 180) dh -= 360; if (dh < -180) dh += 360;
+      if (Math.abs(dh) > 60) ok(a.H.word === zone(ht), `${g}->${t}: "${a.H.word}" is where today's hue sits (${zone(ht)})`);
+      else {
+        // walking from the guess toward today's hue, the word's zone is reached within the first 30 degrees
+        const sg = Math.sign(dh) || 1, seen = new Set();
+        for (let d = 0; d <= Math.min(30, Math.abs(dh) + 5); d++) seen.add(zone(hg + sg * d));
+        ok(seen.has(a.H.word), `${g}->${t}: "${a.H.word}" lies the way the hue turns`);
+      }
     }
     const words = ["L", "H", "C"].map(x => run(`dnCell(dnAxes(__g, __t).${x}, "${x}")`)).join(" ") + " " + run(`dnSentence(dnAxes(__g, __t), "Cerulean")`);
     ok(!BANNED.test(words), `${g}->${t}: no banned words in "${words}"`);

@@ -164,8 +164,8 @@ function dpPlay(e, k) {
     <div class="dp-head" id="dpHead"></div>
     <div class="dp-stage" id="dpStage"><div class="dp-frame" id="dpFrame" style="aspect-ratio:${e.w}/${e.h}">
       <img src="${esc(src)}" alt="${esc(e.t)}, ${esc(e.a)}" draggable="false">
-      <canvas class="dp-veil" id="dpVeil"></canvas><div class="dp-marks" id="dpMarks"></div></div></div>
-    <p class="dp-credit"><span>${esc(e.t)}</span> · ${esc(e.a)} · <em>as photographed</em></p>
+      <canvas class="dp-veil" id="dpVeil"></canvas><div class="dp-marks" id="dpMarks"></div></div>
+      <p class="dp-credit"><span>${esc(e.t)}</span> · ${esc(e.a)} · <em>as photographed</em></p></div>
     <div class="dp-foot" id="dpFoot"></div>
   `, "fixed daily dp");
   const $ = s => el.querySelector(s), head = $("#dpHead"), foot = $("#dpFoot"), frame = $("#dpFrame"), marks = $("#dpMarks"), img = frame.querySelector("img");
@@ -175,7 +175,7 @@ function dpPlay(e, k) {
   // keep the painting as large as the stage allows, at its own proportions
   const fit = () => {
     const s = $("#dpStage"); if (!s) return;
-    const W = s.clientWidth, H = s.clientHeight, r = e.w / e.h;
+    const W = s.clientWidth, H = s.clientHeight - 40, r = e.w / e.h;   // 40: the credit line under it
     const w = Math.min(W, H * r);
     frame.style.width = Math.floor(w) + "px"; frame.style.height = Math.floor(w / r) + "px";
   };
@@ -229,7 +229,11 @@ function dpPlay(e, k) {
   const nameLink = (hex, cls = "") => { const nm = nameOf(hex); return `<button class="dp-name ${cls}" data-swatch="${hex}">${esc(nm.text || nm.n)}</button>`; };
   const pctOf = s => `${Math.round(s * 100)}%`;
   const next = (txt) => {
-    foot.innerHTML = `<p class="dp-line small">${txt}</p><button class="btn" data-next>${st.i >= 4 ? "See your painting" : "Next"} ${ICON.arrow}</button>`;
+    // the choices stay (your pick and the answer ringed, smaller now); the line explains; Next waits under the thumb
+    foot.querySelectorAll(".dp-line").forEach(x => x.remove());
+    foot.classList.add("answered");
+    foot.insertAdjacentHTML("afterbegin", `<p class="dp-line small">${txt}</p>`);
+    foot.insertAdjacentHTML("beforeend", `<button class="btn" data-next>${st.i >= 4 ? "See your painting" : "Next"} ${ICON.arrow}</button>`);
     foot.querySelector("[data-next]").onclick = () => { st.i++; save(); round(); };
   };
   const answer = (ok, pick, txt) => {
@@ -335,7 +339,7 @@ function dpPlay(e, k) {
     while (st.i < 5 && st.hits[st.i] != null) st.i++;   // an answered round never comes back
     if (st.i >= 5) return dpFinish(e, k);
     el.querySelector("#dpN").textContent = `${st.i + 1}/5`;
-    marks.innerHTML = ""; frame.onclick = null; frame.classList.remove("tappable");
+    marks.innerHTML = ""; foot.classList.remove("answered"); frame.onclick = null; frame.classList.remove("tappable");
     if (st.i !== 0) veil(0, false);
     ROUNDS[st.i]();
   }
@@ -364,7 +368,7 @@ function challengeDone(fresh, e) {
     <header class="deck-top"><button class="icon-btn" data-close aria-label="Close">${ICON.x}</button><span class="note dp-no">Today's painting, No. ${no}</span><span style="width:44px"></span></header>
     <button class="dp-whole" data-open aria-label="Open ${esc(e.t)}"><img src="${esc(src)}" alt="${esc(e.t)}" style="aspect-ratio:${e.w}/${e.h}"></button>
     <h1 class="title-1 dp-verdict">${verdict}</h1>
-    <p class="note dp-cap"><b>${esc(e.t)}</b> · ${esc(e.a)}, ${esc(e.yr)} · ${esc(e.pl)}</p>
+    <p class="note dp-cap"><span class="dp-t">${esc(e.t)}</span> · ${esc(e.a)}, ${esc(e.yr)} · ${esc(e.pl)}</p>
     <div class="dp-plates">${plates.map((h, i) => `<button class="${hits[i] ? "hit" : "miss"}" data-swatch="${h}" style="--c:${h}" aria-label="${esc(DP_ROUND_NAMES[i])}: ${hits[i] ? "got it" : "missed"}"><i></i><span>${esc(DP_ROUND_NAMES[i])}</span></button>`).join("")}</div>
     ${dpFinding(e) ? `<p class="lead dp-find">${dpFinding(e)}</p>` : ""}
     <div class="dp-acts">
@@ -420,11 +424,29 @@ function dlWireToday(el) {
 // dl:row · dl:paint[:<round 0-4>|:end] · dl:name[:empty|:three|:hint|:won|:lost]
 function dlShot(arg = "") {
   const [what, sub = ""] = arg.split(":"), k = today();
+  // dl:card:paint | dl:card:name — the share images themselves, drawn by js/sharecard.js
+  if (what === "card") return Promise.all([dpLoad(k), loadCoreNames()]).then(([e]) => {
+    const t = dnTarget(k), near = nearestCore(t.h, CORE_NAMES, 12).map(x => x.n).filter(n => n !== t.n);
+    const spec = sub === "name" ? dnShareSpec({ t: t.n, g: [near[9], near[4], near[1], t.n], done: true, ok: true }, chNumber(k), t) : dpShareSpec(e, [1, 1, 0, 1, 1], chNumber(k));
+    return cardRender(spec).then(b => show(`<img src="${URL.createObjectURL(b)}" style="width:100%;display:block;margin:auto">`, "fixed"));
+  });
   if (what === "row") { S.challenge = { [addDays(k, -1)]: { hits: [1, 1, 0, 1, 1] }, [addDays(k, -2)]: { hits: [1, 0, 0, 1, 1] } }; return go("learn"); }
   if (what === "paint") {
     if (sub === "end") { S.challenge = { [k]: { hits: [true, true, false, true, true], v: 2 }, [addDays(k, -1)]: { hits: [1, 1, 1, 1, 1] } }; return challenge(); }
-    if (sub) S.dpNow = { k, p: null, i: +sub, hits: Array.from({ length: +sub }, (_, i) => i !== 1), picks: [] };
-    return dpLoad(k).then(e => { if (S.dpNow) S.dpNow.p = e.id; challenge(); });
+    // "<n>a": round n answered (a tap on the right spot for round 1, the first choice otherwise, all four in order 4)
+    const n = parseInt(sub, 10), answered = /a$/.test(sub);
+    if (sub) S.dpNow = { k, p: null, i: n, hits: Array.from({ length: n }, (_, i) => i !== 1), picks: [] };
+    return dpLoad(k).then(e => {
+      if (S.dpNow) S.dpNow.p = e.id;
+      challenge();
+      if (answered) setTimeout(() => {
+        const f = document.querySelector("#dpFrame");
+        if (n === 0 && f) { const r = f.getBoundingClientRect(); f.onclick({ clientX: r.left + e.hc[0] * r.width, clientY: r.top + e.hc[1] * r.height }); return; }
+        const bs = [...document.querySelectorAll("#dpFoot [data-o]")];
+        if (n === 3) { [...bs].sort((a, b) => a.dataset.o - b.dataset.o).forEach(b => b.click()); return; }
+        if (bs[0]) bs[0].click();
+      }, 1500);
+    });
   }
   return loadCoreNames().then(() => {
     const t = dnTarget(k), near = nearestCore(t.h, CORE_NAMES, 30).map(x => x.n).filter(n => n !== t.n);

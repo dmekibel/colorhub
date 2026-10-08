@@ -32,6 +32,7 @@ function dnTarget(k = today(), list = CORE_NAMES) {
   const o = dnOrder(list), n = chNumber(k) - 1;
   return o[((n % o.length) + o.length) % o.length];
 }
+const dnZone = h => { h = (h + 360) % 360; return h < 55 || h >= 345 ? "redder" : h < 130 ? "yellower" : h < 190 ? "greener" : h < 280 ? "bluer" : "purpler"; };
 // Which way today's color (t) lies from a guess (g), per axis. Each axis: { st: same|near|far, word, v }.
 function dnAxes(g, t) {
   const [Lg, ag, bg] = lab(g), [Lt, at, bt] = lab(t), Cg = Math.hypot(ag, bg), Ct = Math.hypot(at, bt);
@@ -45,12 +46,10 @@ function dnAxes(g, t) {
   let H;
   if (Cg < DN_GREY_C && Ct < DN_GREY_C) H = { st: "grey", v: 0, word: "" };
   else {
-    // the direction the hue turns, as the strongest of four pulls on the a*b* plane (toward +a* redder,
-    // +b* yellower, −a* greener, −b* bluer): for a small turn, along the circle at the mid hue; for a big one
-    // (over 60°), simply where today's hue sits, since "the other side of the wheel" has no single turn word
-    const m = (hg + dh / 2) * Math.PI / 180, s = Math.sign(dh) || 1, big = Math.abs(dh) > 60;
-    const ta = big ? Math.cos(ht * Math.PI / 180) : -Math.sin(m) * s, tb = big ? Math.sin(ht * Math.PI / 180) : Math.cos(m) * s;
-    const word = Math.abs(ta) >= Math.abs(tb) ? (ta > 0 ? "redder" : "greener") : (tb > 0 ? "yellower" : "bluer");
+    // the way the hue turns, in the app's one hue vocabulary (js/lookalikes.js lookDiff: redder, yellower, greener,
+    // bluer, purpler; never "warmer"): the hue zone the guess moves into as it turns toward today's. For a big
+    // turn (over 60°) there's no single "way", so it names the zone today's hue sits in.
+    const word = Math.abs(dh) > 60 ? dnZone(ht) : dnZone(hg + Math.sign(dh || 1) * Math.min(25, Math.abs(dh) + 5));
     H = { st: st(dH), v: dH, word };
   }
   const de = de2000(g, t);
@@ -232,10 +231,13 @@ function daily() {
       : node && (node.o || node.d) ? esc(node.o || node.d)
       : fam && fam.head && fam.head.n !== t.n ? `${esc(t.n)} belongs to the <a data-node="c:${esc(fam.head.n)}">${esc(fam.head.n.toLowerCase())}</a> family${(t.also || []).length ? `. It's also called ${esc(t.also.slice(0, 3).join(", "))}` : ""}.` : "";
     const near = rec.g.filter(x => x !== t.n).map(ent).sort((p, q) => de2000(p.h, t.h) - de2000(q.h, t.h))[0];
+    // the closest guess, said the same way the rows say it: "Next to easter green, it's redder and weaker."
+    const dnNextTo = g => { const a = dnAxes(g.h, t.h), ps = ["L", "H", "C"].filter(x => a[x].st === "near" || a[x].st === "far").map(x => dnCell(a[x], x));
+      return ps.length ? `Next to ${g.n.toLowerCase()}, it's ${ps.length === 1 ? ps[0] : ps.slice(0, -1).join(", ") + " and " + ps[ps.length - 1]}.` : `It sits right beside ${g.n.toLowerCase()}.`; };
     const n1 = rec.g.length, verdict = rec.ok ? (rec.hint ? `Found with <em>choices.</em>` : n1 === 1 ? `First <em>try.</em>` : `Named in <em>${["", "one", "two", "three", "four", "five", "six"][n1]}.</em>`) : `It's <em>${esc(t.n.toLowerCase())}.</em>`;
     $("#dnName").innerHTML = `<b>${esc(t.n)}</b><span class="code">${t.h}</span>`;
     el.querySelector(".dn-hero").classList.add("named");
-    $("#dnAsk").innerHTML = `<h2 class="dn-q dn-verdict">${verdict}</h2>${near ? `<p class="lead dn-diff">Next to ${esc(near.n.toLowerCase())}, it's ${esc(lookDiff(near, t))}.</p>` : ""}`;
+    $("#dnAsk").innerHTML = `<h2 class="dn-q dn-verdict">${verdict}</h2>${near ? `<p class="lead dn-diff">${esc(dnNextTo(near))}</p>` : ""}`;
     const misses = dlMisses(k);
     $("#dnEnd").innerHTML = `
       ${story ? `<p class="dn-story">${story}</p>` : ""}
