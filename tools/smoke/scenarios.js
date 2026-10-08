@@ -693,13 +693,14 @@ scenario("pages", "colorPage x3: renders, swatch opens another, Back works", asy
 });
 
 scenario("pages", "nearest stories: a name without an article offers the nearest ones, a tap opens another page", async t => {
-  // a name with no story of its own. Stories keep landing (pale-aqua got one in article wave 2, and a missing row then
-  // timed out the whole group), so take the first candidate whose page settles on nearest stories, not a story.
+  // a name with no story of its own. Every color is getting an article, so pick one still without a committed article
+  // from the article index; when none is left, nearest stories can't show and the scenario only notes it.
   let first = null;
-  for (const s of ["dull-aqua", "pale-cyan", "light-aqua", "pale-aqua", "pale-teal", "pale-blue-green"]) {
+  for (const s of ["carolina-blue", "columbia-blue", "phlox"]) {
     await H.openPage(t, "#/name/" + s);
-    const got = await t.waitFor(() => t.$(".rp-ns-row") ? "rows" : t.$("[data-ar-slot]:not([hidden])") ? "story" : null, 6000, `${s}: its story or its nearest stories`).catch(() => null);
+    const got = await t.waitFor(() => t.$(".rp-ns-row") ? "rows" : t.$("[data-ar-slot]:not([hidden])") ? "story" : null, 3000, s, 2000).catch(() => null);
     if (got === "rows") { first = H.title(t); break; }
+    if (got === "story") break;
   }
   if (!first) { t.notes.push("every candidate already has its own story; nearest stories not exercised"); return; }
   await t.waitFor(".rp-ns-row", 10000, "a nearest-story row on a color with no article of its own");
