@@ -192,15 +192,199 @@ function honeySphere(items) {
   }
   return { pts, globe: true, finite: true, ext: 1 };
 }
+// ---------- arrangements (design/HOME-VIEWS.md §3): where each color goes, separate from how it looks ----------
+// The rule: position means something, and a bubble's neighbors are its relatives. Every arrangement places each
+// color exactly once and is finite, so switching between them is a glide (each bubble flies to its new place).
+// Two engines: a GRID (columns by one key, rows by another, on the hex lattice) and RINGS (hex rings filled in order
+// of one key, each ring's colors placed at the angle of their hue). "Families" is islands of small grids.
+const honeyAngleOf = it => it.C < 7 ? 359.5 : honeyHueKey(it);   // greys gather in one quiet spoke at the wrap
+function honeyCenterPts(pts) {
+  const cx = pts.reduce((t, q) => t + q.x, 0) / (pts.length || 1), cy = pts.reduce((t, q) => t + q.y, 0) / (pts.length || 1);
+  return pts.map(q => ({ it: q.it, x: q.x - cx, y: q.y - cy, g: q.g }));
+}
+// GRID: xKey picks the column (sorted, cut into even columns), yKey orders each column top to bottom. k: rows per
+// column ~ sqrt(N * k), so k > 1 is taller than wide (phone-shaped).
+function honeyGridArr(items, xKey, yKey, k = 1.9) {
+  const N = items.length; if (!N) return { pts: [], finite: true };
+  const H = Math.max(1, Math.min(N, Math.round(Math.sqrt(N * k)))), W = Math.ceil(N / H), e = W * H - N;
+  const order = items.slice().sort((a, b) => xKey(a) - xKey(b) || yKey(a) - yKey(b)), pts = [];
+  for (let j = 0, k2 = 0; j < W; j++) {
+    const short = Math.floor((j + 1) * e / W) > Math.floor(j * e / W), col = order.slice(k2, k2 + (short ? H - 1 : H)).sort((a, b) => yKey(a) - yKey(b));
+    k2 += col.length;
+    col.forEach((it, r) => pts.push({ it, x: j + (r & 1 ? .5 : 0), y: r * HONEY_SQ3 }));
+  }
+  return { pts: honeyCenterPts(pts), finite: true };
+}
+// RINGS: hex rings from the middle out, filled in rank order; within a ring each color takes the free cell nearest
+// its hue's angle, keeping hue order (so a ring reads as a hue circle and neighboring rings line up by hue).
+// groupOf (optional) names a group per color (a stage, Learned/Learning/New): the seams between groups are drawn
+// on the ground (lay.bounds, one smooth closed curve per seam, following where the groups really meet).
+function honeyRingArr(items, rankOf, groupOf) {
+  const N = items.length; if (!N) return { pts: [], finite: true };
+  let n = 0; while (3 * n * n + 3 * n + 1 < N) n++;
+  const rings = honeyRings(n), ordered = items.slice().sort((a, b) => rankOf(a) - rankOf(b) || honeyAngleOf(a) - honeyAngleOf(b)), pts = [];
+  for (let d = 0, k = 0; d <= n && k < N; d++) {
+    const cells = rings[d].slice().sort((a, b) => a.a - b.a), c = cells.length, m = Math.min(c, N - k);
+    const grp = ordered.slice(k, k + m).sort((a, b) => honeyAngleOf(a) - honeyAngleOf(b)); k += m;
+    // ideal cell for each color, then the nearest order-keeping placement (forward pass, then pull back from the end)
+    const p = grp.map(it => Math.min(c - 1, Math.round(honeyAngleOf(it) / 360 * c)));
+    for (let i = 1; i < m; i++) p[i] = Math.max(p[i], p[i - 1] + 1);
+    if (m && p[m - 1] > c - 1) { p[m - 1] = c - 1; for (let i = m - 2; i >= 0; i--) p[i] = Math.min(p[i], p[i + 1] - 1); }
+    grp.forEach((it, i) => { const cell = cells[p[i]]; pts.push({ it, x: cell.x, y: cell.y, d, g: groupOf ? groupOf(it) : 0 }); });
+  }
+  const lay = { pts: pts.map(q => ({ it: q.it, x: q.x, y: q.y, g: q.g })), finite: true };
+  if (groupOf) {
+    const g = new Map(items.map(it => [it, groupOf(it)])), gs = [...new Set(g.values())].sort((a, b) => a - b), B = 72;
+    lay.bounds = [];
+    for (const gi of gs.slice(0, -1)) {
+      const inR = new Array(B).fill(-1), outR = new Array(B).fill(Infinity);
+      for (const q of pts) {
+        const b = Math.floor(((Math.atan2(q.y, q.x) / (2 * Math.PI) + 1) % 1) * B), r = Math.hypot(q.x, q.y);
+        if (g.get(q.it) <= gi) inR[b] = Math.max(inR[b], r); else outR[b] = Math.min(outR[b], r);
+      }
+      if (inR.every(v => v < 0) || outR.every(v => v === Infinity)) continue;
+      let rr = inR.map((v, b) => v < 0 ? (outR[b] < Infinity ? outR[b] - .5 : null) : outR[b] < Infinity ? (v + outR[b]) / 2 : v + .5);
+      const fill = rr.filter(v => v != null), avg = fill.reduce((t, v) => t + v, 0) / (fill.length || 1);
+      rr = rr.map(v => v == null ? avg : v);
+      for (let pass = 0; pass < 3; pass++) rr = rr.map((v, b) => (rr[(b + B - 1) % B] + 2 * v + rr[(b + 1) % B]) / 4);
+      lay.bounds.push(rr);
+    }
+  }
+  return lay;
+}
+// a family per region: each family a small grid of its own (sub(items) -> a finite layout), the regions laid out three
+// across like the pages of a book (read left to right, top to bottom), with a one-cell sea between them. Each region
+// is snapped to the lattice (whole columns, an even number of rows), so its cells stay on the honeycomb.
+// read around the middle (Greys) clockwise from the top left: Pinks, Reds, Oranges, Browns, Yellows, Greens, Blues, Purples
+const HONEY_PAGE_ORDER = ["Pinks", "Reds", "Oranges", "Purples", "Greys", "Browns", "Blues", "Greens", "Yellows"];
+function honeyRegions(items, sub, order = HONEY_PAGE_ORDER) {
+  const by = new Map();
+  for (const it of items) { const f = csFamily(it); let a = by.get(f); if (!a) by.set(f, a = []); a.push(it); }
+  const regs = order.filter(f => by.has(f)).map(f => {
+    const g = sub(by.get(f)), xs = g.pts.map(q => q.x), ys = g.pts.map(q => q.y);
+    return { f, g, x0: Math.min(...xs), x1: Math.max(...xs), y0: Math.min(...ys), y1: Math.max(...ys) };
+  });
+  const COLS = regs.length > 4 ? 3 : 2, gap = 1.1, colW = [], rowH = [];
+  regs.forEach((r, i) => { const c = i % COLS, rw = Math.floor(i / COLS); colW[c] = Math.max(colW[c] || 0, r.x1 - r.x0 + 1); rowH[rw] = Math.max(rowH[rw] || 0, r.y1 - r.y0 + HONEY_SQ3); });
+  const cx = [0], cy = [0];
+  for (let c = 1; c < colW.length; c++) cx[c] = cx[c - 1] + colW[c - 1] + gap;
+  for (let r = 1; r < rowH.length; r++) cy[r] = cy[r - 1] + rowH[r - 1] + gap;
+  const pts = [];
+  regs.forEach((r, i) => {
+    const c = i % COLS, rw = Math.floor(i / COLS);
+    // centered in its cell of the book, then snapped to the lattice
+    const ox = Math.round(cx[c] + (colW[c] - (r.x1 - r.x0 + 1)) / 2 - r.x0), oy = Math.round((cy[rw] + (rowH[rw] - (r.y1 - r.y0 + HONEY_SQ3)) / 2 - r.y0) / (2 * HONEY_SQ3)) * 2 * HONEY_SQ3;
+    r.g.pts.forEach(q => pts.push({ it: q.it, x: q.x + ox, y: q.y + oy, g: r.f }));
+  });
+  return { pts: honeyCenterPts(pts), finite: true, regions: true };
+}
+// Families: inside each region, hue across and light to dark down
+const honeyIslands = items => honeyRegions(items, a => honeyGridArr(a, honeyHueKey, it => 100 - it.L, 2.4));   // tall regions: the book is phone-shaped
+// Pages by hue (a page of the Munsell book per family): inside each region, muted to vivid across, light to dark down
+const honeyPages = items => honeyRegions(items, a => honeyGridArr(a, it => it.C, it => 100 - it.L, 2.4));
+// warm (+1, orange-yellow) to cool (-1, blue), scaled by strength so greys sit in the seam
+const honeyTemp = it => it.C < 6 ? 0 : it.C / (it.C + 18) * Math.cos((it.H - 60) * Math.PI / 180);
+const honeyTier = it => { const c = typeof hmCard === "function" ? hmCard(it.o) : null; return !c ? 2 : typeof isMine === "function" && isMine(c) ? 0 : 1; };
+const honeyRankOf = it => it.o.rank != null ? +it.o.rank : 1e9;
+// the stage each color falls in (by its place in rank order, so a stage is exactly its round number)
+function honeyStageGroups(items) {
+  const st = typeof HM_STAGES !== "undefined" ? HM_STAGES : [25, 50, 100, 150, 250, 400, 600, 800, 1000], ord = items.slice().sort((a, b) => honeyRankOf(a) - honeyRankOf(b)), m = new Map();
+  ord.forEach((it, i) => { let s = 0; while (s < st.length && i >= st[s]) s++; m.set(it, s); });
+  return it => m.get(it) || 0;
+}
+// id -> { title, sub (one line: what position means), make(items) }. In strip order (js/home.js View sheet).
+const HONEY_ARR = {
+  map: { title: "Hue map", sub: "Hue across, light to dark down" },
+  wheel: { title: "Color wheel", sub: "Greys in the middle, stronger outward", make: items => honeyRingArr(items, it => it.C) },
+  light: { title: "Light to dark", sub: "White in the middle, black at the rim", make: items => honeyRingArr(items, it => -it.L) },
+  families: { title: "Families", sub: "A region per family, greys in the middle", make: honeyIslands, fit: true },
+  pages: { title: "Hue pages", sub: "A page per family: muted to vivid across, light to dark down", make: honeyPages, fit: true },
+  // the color plane seen from above (lightness set aside): warm left, cool right, greens up, magentas down
+  temp: { title: "Warm and cool", sub: "Warm left, cool right, greys in the middle", axes: { l: "Warmer", r: "Cooler" }, make: items => honeyGridArr(items, it => -honeyTemp(it), it => -(it.C < 6 ? 0 : it.C / (it.C + 18) * Math.sin((it.H - 60) * Math.PI / 180)), 1.25) },
+  path: { title: "Path rings", sub: "First words in the middle, a ring per stage", make: items => { const g = honeyStageGroups(items); return honeyRingArr(items, honeyRankOf, g); } },
+  known: { title: "Your words", sub: "Learned in the middle, then learning, then new", sig: items => items.map(honeyTier).join(""),
+    make: items => honeyRingArr(items, it => honeyTier(it) * 1e7 + Math.min(1e7 - 1, honeyRankOf(it)), honeyTier) },
+  sunflower: { title: "Sunflower", sub: "A spiral by hue, then lightness", make: items => honeySunflower(items) },
+};
+const HONEY_ARR_IDS = Object.keys(HONEY_ARR);
+const honeyIsLayout = k => ["wheel", "sunflower", "globe", "spiral", "mapTall", "mapWide"].includes(k) || !!(HONEY_ARR[k] && HONEY_ARR[k].make);
+// a small live picture of an arrangement, drawn from the actual colors (the View sheet's strip): every color a dot
+// at its place, fitted to the canvas. Uses the same layout cache as the map, so the tap that follows is instant.
+function honeyPreview(cv, raw, layoutKey) {
+  const ctx = cv.getContext("2d"), w = cv.width, h = cv.height;
+  ctx.clearRect(0, 0, w, h);
+  if (!raw || !raw.length) return;
+  const lay = honeyLayout(raw, layoutKey), pts = lay.pts; if (!pts.length) return;
+  let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
+  for (const q of pts) { if (q.x < x0) x0 = q.x; if (q.x > x1) x1 = q.x; if (q.y < y0) y0 = q.y; if (q.y > y1) y1 = q.y; }
+  const pad = w * .08, s = Math.min((w - 2 * pad) / Math.max(1, x1 - x0 + 1), (h - 2 * pad) / Math.max(1, y1 - y0 + 1));
+  const r = Math.max(.7, s * .5), ox = w / 2 - (x0 + x1) / 2 * s, oy = h / 2 - (y0 + y1) / 2 * s;
+  for (const q of pts) { ctx.fillStyle = q.it.h; ctx.beginPath(); ctx.arc(ox + q.x * s, oy + q.y * s, r, 0, 6.2832); ctx.fill(); }
+}
+// ---------- the layout-quality pass (David, 2026-10-08: "does Niagara Green really belong in that spot?") ----------
+// Every arrangement first places colors by its own rule (hue, lightness, rank...). Then each color should sit among
+// colors like it: measure each bubble's mean OKLab difference (x100) to its touching neighbors, and swap nearby pairs
+// (neighbors and neighbors' neighbors) whenever that lowers the total. Swaps are local, so each arrangement's meaning
+// holds (a color moves a cell or two, never across the map), and never cross a group (a stage, a family, a tier).
+// Time-boxed and cached with the layout. lay.quality = { before, after, worst: [[name, mean dE], ...10] }.
+function honeyOk(it) {
+  if (it.ok) return it.ok;
+  const h = it.h, f = v => { v /= 255; return v > .04045 ? ((v + .055) / 1.055) ** 2.4 : v / 12.92; };
+  const r = f(parseInt(h.slice(1, 3), 16)), g = f(parseInt(h.slice(3, 5), 16)), b = f(parseInt(h.slice(5, 7), 16));
+  const l = Math.cbrt(.4122214708 * r + .5363325363 * g + .0514459929 * b), m = Math.cbrt(.2119034982 * r + .6806995451 * g + .1073969566 * b), s = Math.cbrt(.0883024619 * r + .2817188376 * g + .6299787005 * b);
+  return (it.ok = [100 * (.2104542553 * l + .793617785 * m - .0040720468 * s), 100 * (1.9779984951 * l - 2.428592205 * m + .4505937099 * s), 100 * (.0259040371 * l + .7827717662 * m - .808675766 * s)]);
+}
+function honeySmooth(lay, budgetMs = 120) {
+  const P = lay.pts, n = P.length;
+  if (n < 8 || lay.globe || new Set(P.map(q => q.it)).size !== n) return;   // a tiled map repeats colors: leave it
+  // neighbors: everything within 1.25 lattice units (the six around a cell; a spiral's nearest too), as flat arrays
+  const R = 1.25, cell = new Map(), key = (i, j) => i * 100003 + j, nbs = [];
+  P.forEach((q, k) => { const kk = key(Math.floor(q.x / R), Math.floor(q.y / R)); let a = cell.get(kk); if (!a) cell.set(kk, a = []); a.push(k); });
+  P.forEach((q, k) => {
+    const ci = Math.floor(q.x / R), cj = Math.floor(q.y / R), out = [];
+    for (let i = ci - 1; i <= ci + 1; i++) for (let j = cj - 1; j <= cj + 1; j++) for (const m of cell.get(key(i, j)) || []) {
+      if (m !== k && Math.hypot(P[m].x - q.x, P[m].y - q.y) <= R) out.push(m);
+    }
+    nbs.push(out);
+  });
+  // colors as OKLab triples in one array; col[k] = which color sits at place k
+  const its = P.map(q => q.it), O = new Float64Array(n * 3), col = new Int32Array(n), grp = P.map(q => q.g == null ? 0 : q.g);
+  its.forEach((it, i) => { const o = honeyOk(it); O[i * 3] = o[0]; O[i * 3 + 1] = o[1]; O[i * 3 + 2] = o[2]; col[i] = i; });
+  const local = k => {
+    const c = col[k] * 3, L = O[c], A = O[c + 1], B = O[c + 2], nb = nbs[k]; let t = 0;
+    for (let i = 0; i < nb.length; i++) { const d = col[nb[i]] * 3, x = O[d] - L, y = O[d + 1] - A, z = O[d + 2] - B; t += Math.sqrt(x * x + y * y + z * z); }
+    return t;
+  };
+  const mean = () => { let t = 0, c = 0; for (let k = 0; k < n; k++) if (nbs[k].length) { t += local(k) / nbs[k].length; c++; } return c ? t / c : 0; };
+  // candidates: neighbors and neighbors' neighbors in the same group (worked out once)
+  const cands = nbs.map((nb, k) => { const s = new Set(nb); for (const m of nb) for (const m2 of nbs[m]) if (m2 !== k) s.add(m2); return [...s].filter(m => m > k && grp[m] === grp[k]); });
+  const before = mean(), t0 = performance.now();
+  for (let pass = 0; pass < 14; pass++) {
+    let moved = 0;
+    for (let k = 0; k < n; k++) for (const m of cands[k]) {
+      const b0 = local(k) + local(m);
+      let tmp = col[k]; col[k] = col[m]; col[m] = tmp;
+      if (local(k) + local(m) < b0 - .05) { moved++; continue; }
+      tmp = col[k]; col[k] = col[m]; col[m] = tmp;
+    }
+    if (!moved || performance.now() - t0 > budgetMs) break;
+  }
+  const after = mean();
+  P.forEach((q, k) => { q.it = its[col[k]]; });
+  const worst = P.map((q, k) => [q.it.n, nbs[k].length ? local(k) / nbs[k].length : 0]).sort((a, b) => b[1] - a[1]).slice(0, 10).map(([a, b]) => [a, +b.toFixed(1)]);
+  lay.quality = { before: +before.toFixed(2), after: +after.toFixed(2), ms: Math.round(performance.now() - t0), worst };
+}
 let HONEY_ENDLESS = false;   // L18: the endless mirrored map, opt-in (js/home.js sets it from S.hm.endless)
 const HONEY_MAP_K = { mapWide: 1 / 2.4, mapTall: .63 };
 function honeyLayout(raw, layoutKey) {
   let hs = 2166136261; for (const o of raw) for (let i = 0; i < o.n.length; i++) { hs ^= o.n.charCodeAt(i); hs = Math.imul(hs, 16777619); }
-  const key = `${layoutKey}|${HONEY_ENDLESS ? "e" : "b"}|${raw.length}|${hs >>> 0}`;
+  const arr = HONEY_ARR[layoutKey] && HONEY_ARR[layoutKey].make ? HONEY_ARR[layoutKey] : null, items0 = arr && arr.sig ? raw.map(honeyNorm) : null;
+  const key = `${layoutKey}|${HONEY_ENDLESS ? "e" : "b"}|${raw.length}|${hs >>> 0}${items0 ? "|" + honeyNameHash(arr.sig(items0)) : ""}`;
   const hit = HONEY_LAYOUTS.get(key); if (hit && hit.raw === raw) return hit;
-  const items = raw.map(honeyNorm);
+  const items = items0 || raw.map(honeyNorm);
   let lay;
-  if (layoutKey === "globe") lay = honeySphere(items);
+  if (arr) lay = arr.make(items);
+  else if (layoutKey === "globe") lay = honeySphere(items);
   else if (layoutKey === "sunflower") lay = honeySunflower(items);
   else if (layoutKey === "spiral") lay = honeySpiral(items);
   // the wheel's own cut edges never match a neighboring copy's, so (David's wrap rule) it stays finite always,
@@ -218,6 +402,7 @@ function honeyLayout(raw, layoutKey) {
       lay = { pts: one.map(q => ({ it: q.it, x: q.x - cx, y: q.y - cy })), finite: true };
     }
   }
+  if (lay.finite && !lay.globe && !lay.spiral) honeySmooth(lay);   // every color among colors like it
   if (lay.finite) { if (!lay.globe) lay.ext = Math.max(.5, ...lay.pts.map(p => Math.hypot(p.x, p.y))); }
   else { const [A, B] = [lay.A, lay.B], det = A[0] * B[1] - B[0] * A[1]; lay.inv = [B[1] / det, -B[0] / det, -A[1] / det, A[0] / det]; lay.per = Math.min(Math.hypot(...A), Math.hypot(...B)); lay.perX = lay.perX || lay.per; lay.perY = lay.perY || lay.per; }
   Object.assign(lay, { key, raw, items });
@@ -265,11 +450,10 @@ const HONEY_MAX_DRAWN = 3000;   // phones stay smooth and safe; see the draw loo
 // biggest, most zoomed-out sets too — idle drift is unaffected (it only ever moves one pan value, not per-bubble)
 const HONEY_MOTION_BUDGET = Math.round(HONEY_MAX_DRAWN * .5);
 const HONEY_ALIVE_MAX = 1500;   // above this many drawn bubbles: no idle drift or water at all (see the loop)
-// the five styles the home's View panel shows (ROADMAP: "fewer choices, chosen well"); the rest (Current, Edges,
-// Wheel, Tapestry) stay reachable only from the honeycomb lab (#/lab/honey), which still steps through all of them
-// The Globe stays in the lab until its colors are spread evenly over the sphere (today they bunch up and leave
-// bare patches); see NOTES-TRACKER.md.
-const HM_HOME_STYLES = ["original", "honeycomb", "sunflower", "magnifier", "spiral"];
+// Home's View sheet offers three Looks (js/home.js HM_LOOKS: Bubbles, Honeycomb, Magnifier); where the colors go is an
+// arrangement now (HONEY_ARR above). The rest stay reachable from the honeycomb lab (#/lab/honey). The Globe stays in
+// the lab until its colors are spread evenly over the sphere (today they bunch up and leave bare patches).
+
 const HONEY_STYLE_LIST = Object.keys(HONEY_STYLES).map(id => ({ id, title: HONEY_STYLES[id].title }));
 function honeyResolveCfg(styleId, tweak, N) {
   const preset = HONEY_STYLES[styleId] || HONEY_STYLES.current;
@@ -442,49 +626,6 @@ function honeyPicked(ctx, b, shapeAmt, a) {
   ctx.bezierCurveTo(bx + s * 1, by - s, bx + s * 1.4, by + s * .1, bx, by + s * .95); ctx.fill();
   ctx.restore();
 }
-// ---- L18 H1: family names at far zoom (an optional Look toggle, off by default; David 0c) ----
-// When the map is zoomed out (names are off), a paper pill names each family's region: Blues, Greens, Earths...
-// Pills sit on the ground over the region's middle, fade in as the bubble names fade out, and never overlap.
-function honeyFamOf(it) {
-  if (it.fam) return it.fam;
-  const L = it.L, C = it.C, H = it.H;
-  return (it.fam = C < 12 ? "Greys" : H >= 345 || H < 40 ? (L > 70 ? "Pinks" : "Reds") : H < 70 ? (L < 48 ? "Browns" : "Oranges")
-    : H < 100 ? (L < 55 ? "Browns" : "Yellows") : H < 195 ? "Greens" : H < 290 ? "Blues" : L > 72 ? "Pinks" : "Purples");
-}
-function honeyFamPills(ctx, drawn, W, H, alpha) {
-  if (alpha <= .01 || drawn.length < 24) return;
-  const x0 = W * .1, x1 = W * .9, y0 = H * .1, y1 = H * .9, bins = new Map(), cellN = new Map();
-  for (const b of drawn) {
-    if (b.x < x0 || b.x > x1 || b.y < y0 || b.y > y1) continue;
-    const f = honeyFamOf(b.it), k = f + "|" + Math.floor((b.x - x0) / (x1 - x0) * 3) + "|" + Math.floor((b.y - y0) / (y1 - y0) * 4);
-    let g = bins.get(k); if (!g) bins.set(k, g = { f, c: k.slice(f.length), n: 0, x: 0, y: 0 });
-    g.n++; g.x += b.x; g.y += b.y; cellN.set(g.c, (cellN.get(g.c) || 0) + 1);
-  }
-  // each family's bins, nearest the middle first; a family whose best spot is taken tries its next region
-  const fams = new Map();
-  for (const g of bins.values()) {
-    if (g.n < 12 || g.n < cellN.get(g.c) * .4) continue;   // the family has to own the region, not just pass through it
-    g.x /= g.n; g.y /= g.n; g.dc = Math.hypot(g.x - W / 2, g.y - H / 2);
-    let a = fams.get(g.f); if (!a) fams.set(g.f, a = []); a.push(g);
-  }
-  const list = [...fams.values()].map(a => a.sort((p, q) => p.dc - q.dc)).sort((a, b) => b.reduce((t, g) => t + g.n, 0) - a.reduce((t, g) => t + g.n, 0)), placed = [];
-  ctx.save(); ctx.font = `18px "Instrument Serif",Georgia,serif`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
-  for (const cands of list) {
-    const f = cands[0].f, w = ctx.measureText(f).width + 20, h = 28;
-    let g = null, r = null;
-    for (const c of cands) {
-      const x = clamp(c.x, w / 2 + 12, W - w / 2 - 12), y = clamp(c.y, h / 2 + 12, H - h / 2 - 12), rr = { l: x - w / 2, t: y - h / 2, r: x + w / 2, b: y + h / 2 };
-      if (placed.some(q => rr.l < q.r + 6 && rr.r > q.l - 6 && rr.t < q.b + 6 && rr.b > q.t - 6)) continue;   // taken: try the next region
-      g = { f, x, y }; r = rr; break;
-    }
-    if (!g) continue;
-    placed.push(r);
-    ctx.globalAlpha = alpha; ctx.fillStyle = "#EFEBE3"; ctx.beginPath();
-    if (ctx.roundRect) ctx.roundRect(r.l, r.t, w, h, 999); else ctx.rect(r.l, r.t, w, h);
-    ctx.fill(); ctx.fillStyle = "#141311"; ctx.fillText(g.f, g.x, g.y + 1);
-  }
-  ctx.restore();
-}
 function honeyPath(ctx, cx, cy, r, shapeAmt) {
   ctx.beginPath();
   if (shapeAmt <= .02 || r < 3) { ctx.arc(cx, cy, r, 0, 6.2832); return; }
@@ -617,7 +758,7 @@ function honeycomb(host, opts = {}) {
   let styleId = typeof opts.style === "string" ? opts.style : "current", liveTweak = opts.tweak ? { ...opts.tweak } : null;
   // back-compat: callers that still pass layout/lens/lensMode directly (colorsets.js, and any legacy caller).
   // These fold into liveTweak (not a one-off cfg mutation) so they survive setItems()'s re-resolve on every call.
-  if (opts.layout) liveTweak = { ...(liveTweak || {}), layout: ["wheel", "sunflower", "globe", "spiral"].includes(opts.layout) ? opts.layout : "mapTall" };
+  if (opts.layout) liveTweak = { ...(liveTweak || {}), layout: honeyIsLayout(opts.layout) ? opts.layout : "mapTall" };
   if (opts.lensMode) liveTweak = { ...(liveTweak || {}), lensMode: opts.lensMode === "edges" ? "edges" : opts.lensMode === "none" ? "none" : "round" };
   if (opts.lens != null && !(liveTweak && liveTweak.m0 != null)) {
     const base0 = HONEY_STYLES[styleId] ? HONEY_STYLES[styleId].cfg : {}, pm0 = base0.m0 != null ? base0.m0 : HONEY_CFG_BASE.m0, pm1 = base0.m1 != null ? base0.m1 : HONEY_CFG_BASE.m1, lk = clamp(+opts.lens, 0, 2);
@@ -638,7 +779,6 @@ function honeycomb(host, opts = {}) {
   // it (the opt-in "your map" view only, never a default); marks: name -> { kind, t0 } rings drawn over the bubbles.
   const ST = { hit: null, label: null, fog: null, marks: new Map() };
   // per-bubble size memory, so a bubble never snaps to a new size (cells change as neighbors come and go): sizes ease
-  let famOn = !!opts.famNames;   // L18 H1: family-name pills when zoomed out (Look toggle, off by default)
   let sizeMem = new Map(), sizeT = 0, sizeRaf = 0, glided = null;   // glided: the item a tap last brought to the middle
   const vy = () => Math.max(60, Hh - insetCur);   // the visible height above whatever panel is inset
   const vcy = () => vy() / 2;
@@ -846,6 +986,7 @@ function honeycomb(host, opts = {}) {
     if (pressed) { const i = drawn.findIndex(b => b.it === pressed.it && Math.abs(b.x - pressed.x) < 3 && Math.abs(b.y - pressed.y) < 3); if (i >= 0) { pb = drawn.splice(i, 1)[0]; drawn.push(pb); } }
     const hlSet = hlItems();
     if (lay.spiral && !hlSet) l18StageRings(l);
+    else if (lay.bounds && !hlSet && !morph) honeyBoundsDraw(l);
     for (const b of drawn) {
       const it = b.it, d = b.d * (b === pb ? 1 + .12 * pressK : 1), r = d / 2;
       honeyCellPath(ctx, b, shapeAmt, b === pb ? 1 + .12 * pressK : 1); ctx.fillStyle = it.h; ctx.fill();
@@ -872,7 +1013,6 @@ function honeycomb(host, opts = {}) {
     ctx.globalAlpha = 1;
     if (ST.marks.size) honeyStudyMarks(ctx, drawn, ST.marks, t);
     if (sel) for (const b of drawn) if (b.d >= 10 && sel.isOn(b.it.o)) honeyPicked(ctx, b, shapeAmt, l.a);
-    if (famOn && !hlSet && !lay.globe) { const fa = l18FarAmount(); if (fa > 0) honeyFamPills(ctx, drawn, W, vy(), fa * l.a); }
     if (ghost) {
       const a = 1 - (t - ghostT0) / 240;
       if (a > 0) { ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = a; ctx.drawImage(ghost, 0, 0); ctx.globalAlpha = 1; } else ghost.on = false;
@@ -1031,16 +1171,6 @@ function honeycomb(host, opts = {}) {
   // the zoomed-out tap rule (David, MASTER-PLAN 0c): when the map is zoomed out and bubbles are tiny, a tap zooms
   // in to that bubble and centers it; the next tap (it's now the center) opens its page.
   const L18_TINY_D = 46;
-  // 0 at normal zoom, 1 once the center bubble is too small for its name (a 12 px fade between, so nothing snaps)
-  // How far zoomed out the map is, 0..1, for the family-name pills. Measured on the typical bubble on screen, not the
-  // center one: the lens keeps the center bubble large even at the zoom-out floor, so a center-based test never
-  // reached the threshold and the pills never showed.
-  function l18FarAmount() {
-    const ds = []; for (const q of drawn) if (q.d >= 1) ds.push(q.d);
-    if (ds.length < 24) return 0;
-    ds.sort((a, b) => a - b);
-    return clamp((Math.max(L18_TINY_D, zc("labelMin") * 1.8) + 6 - ds[ds.length >> 1]) / 12, 0, 1);
-  }
   function l18ZoomedOut() {
     // the center's own copy (a wrapping map repeats it; a far copy is always tiny): the biggest one on screen
     let cd = 0; for (const q of drawn) if (q.it === center && q.d > cd) cd = q.d;
@@ -1056,7 +1186,8 @@ function honeycomb(host, opts = {}) {
   // between. Positions only: honeyCells still sizes every bubble from its real neighbors each frame, so the
   // no-overlap guarantee holds at every moment of the glide.
   let morph = null, l18ForceMorph = false;
-  const L18_MORPH_MS = 450;
+  const L18_MORPH_MS = 450, L18_ARRANGE_MS = 680;
+  let morphMs = L18_MORPH_MS;
   function l18Snapshot() {
     const old = new Map();
     for (const b of drawn) { if (b.d < 1) continue; let a = old.get(b.it.n); if (!a) old.set(b.it.n, a = []); a.push({ x: b.x, y: b.y, d: b.d, it: b.it }); }
@@ -1064,7 +1195,7 @@ function honeycomb(host, opts = {}) {
   }
   const l18MorphStart = old => ({ t0: performance.now(), old });
   function l18MorphApply(t) {
-    const m = morph, u = clamp((t - m.t0) / L18_MORPH_MS, 0, 1);
+    const m = morph, u = clamp((t - m.t0) / morphMs, 0, 1);
     if (u >= 1) { morph = null; return; }
     const e = honeyEaseS(u), shrink = 1 - .15 * Math.sin(Math.PI * u), grow = honeyEaseS(clamp((u - .56) / .44, 0, 1));
     const used = new Set();
@@ -1076,12 +1207,15 @@ function honeycomb(host, opts = {}) {
       // leaving one held, so the two never share it)
       if (!o) { b.d *= grow; continue; }
       used.add(o);
-      b.x = o.x + (b.x - o.x) * e; b.y = o.y + (b.y - o.y) * e; b.d = (o.d + (b.d - o.d) * e) * shrink;
+      // a gentle arc, not a straight line: two colors trading places curve past each other instead of meeting
+      // head-on in the middle (and it reads as flight)
+      const dx = b.x - o.x, dy = b.y - o.y, arc = .14 * Math.sin(Math.PI * u);
+      b.x = o.x + dx * e - dy * arc; b.y = o.y + dy * e + dx * arc; b.d = (o.d + (b.d - o.d) * e) * shrink;
       b.k = null;   // mid-glide sizes are the glide's, not the size memory's
     }
     if (grow <= 0) drawn = drawn.filter(b => b.d > 0);
     // removed colors (and kept ones whose new place is off screen) shrink away where they were
-    const gu = 1 - honeyEaseS(clamp(u * L18_MORPH_MS / 250, 0, 1));
+    const gu = 1 - honeyEaseS(clamp(u * morphMs / 250, 0, 1));
     if (gu > 0) {
       const here = new Set(); for (const b of drawn) here.add(b.it.n);
       const n0 = drawn.length;
@@ -1095,7 +1229,7 @@ function honeycomb(host, opts = {}) {
     const m = morph; if (!m) return { ok: false, why: "no glide" };
     const out = [];
     for (const u of [.25, .5, .75]) {
-      m.t0 = performance.now() - u * L18_MORPH_MS; morph = m; draw(performance.now());
+      m.t0 = performance.now() - u * morphMs; morph = m; draw(performance.now());
       let bad = 0;
       for (let i = 0; i < drawn.length; i++) for (let j = i + 1; j < drawn.length; j++) {
         const a = drawn[i], c = drawn[j], dd = Math.hypot(a.x - c.x, a.y - c.y); if (dd < (a.d + c.d) / 2 - .3) { bad++; if (bad < 4) out.ex = (out.ex || []).concat([[a.it.n, c.it.n, +dd.toFixed(2), +a.d.toFixed(2), +c.d.toFixed(2), a.z === 1e9, c.z === 1e9, !!a.poly, !!c.poly]]); }
@@ -1142,6 +1276,25 @@ function honeycomb(host, opts = {}) {
     });
     ctx.restore();
   }
+  // the seams between groups on a rings arrangement (Path rings: one per stage; What you know: Learned | Learning |
+  // New), on the ground between bubbles, mapped through the lens. Thin and quiet; never a mark on a bubble (X7).
+  function honeyBoundsDraw(l) {
+    const cx = W / 2, cy = vcy(), round = cfg.lensMode === "round", B = 72;
+    const scr = (wx, wy) => {
+      const ex = wx - P[0], ey = wy - P[1], z = Math.hypot(ex, ey);
+      if (round) { const k = z ? F(z, l) / z : base * l.s * l.m0; return [cx + ex * k, cy + ey * k]; }
+      return [cx + ex * l.K, cy + ey * l.K];
+    };
+    // the layout was centered after the rings were measured: the curves are around the layout's own origin shift
+    const o = lay.boundsAt || [0, 0];
+    ctx.save(); ctx.lineWidth = 1.25; ctx.strokeStyle = "rgba(236,232,223,.32)"; ctx.setLineDash([5, 5]);
+    for (const rr of lay.bounds) {
+      ctx.beginPath();
+      for (let i = 0; i <= B; i++) { const a = ((i % B) + .5) / B * 2 * Math.PI, r = rr[i % B], q = scr(o[0] + r * Math.cos(a), o[1] + r * Math.sin(a)); if (i) ctx.lineTo(q[0], q[1]); else ctx.moveTo(q[0], q[1]); }
+      ctx.stroke();
+    }
+    ctx.restore();
+  }
   // where an item sits in the plane, the copy nearest the current pan (a wrapping map repeats every item)
   function l18WorldOf(it) {
     let best = null, bd = Infinity;
@@ -1178,6 +1331,16 @@ function honeycomb(host, opts = {}) {
   const ptrs = new Map();
   const hit = (x, y) => { let best = null, bd = Infinity; for (const b of drawn) { const d = Math.hypot(b.x - x, b.y - y); if (d < b.d / 2 + 4 && d / b.d < bd) { bd = d / b.d; best = b; } } return best; };
   const local = e => { const r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+  // A bubble opens on pointerup, so the page is already under the finger when a phone sends the tap's own click
+  // a moment later: that click must not land on the new page (it pressed whatever sat at the bubble's spot).
+  const swallowClick = e => {
+    if (e.pointerType === "mouse") return;
+    const x = e.clientX, y = e.clientY, t0 = performance.now();
+    const eat = ev => { if (performance.now() - t0 < 600 && Math.hypot(ev.clientX - x, ev.clientY - y) < 30) { ev.preventDefault(); ev.stopPropagation(); } done(); };
+    const done = () => { removeEventListener("click", eat, true); clearTimeout(tm); };
+    const tm = setTimeout(done, 600);
+    addEventListener("click", eat, true);
+  };
   const GLOBE_ROT_K = 150;
   cv.addEventListener("pointerdown", e => {
     if (!lay) return;
@@ -1281,7 +1444,7 @@ function honeycomb(host, opts = {}) {
         const reach = Math.max(cd * .5 + p.b.d * .95, Math.min(W, vy()) * .16);
         const far = opts.centerFirst && p.it !== center && p.it !== glided && Math.hypot(p.x - W / 2, p.y - vcy()) > reach;
         pressed = null; kick();
-        if (far) { glided = p.it; lay.globe ? glideToGlobe(p.it) : glideTo(p.x, p.y); } else { glided = null; open(p.it, p.b); }
+        if (far) { glided = p.it; lay.globe ? glideToGlobe(p.it) : glideTo(p.x, p.y); } else { glided = null; swallowClick(e); open(p.it, p.b); }
         return;
       }
       pressed = null; kick();
@@ -1317,9 +1480,11 @@ function honeycomb(host, opts = {}) {
     // there's no real DOM element at the bubble's spot for growFrom()/morphFrom() to read a rect from.
     const mkSrc = () => {
       if (!b) return null;
+      cv.parentNode.querySelectorAll(".hc-morph").forEach(n => n.remove());   // only ever one, and only for this tap
       const m = document.createElement("div"), r = b.d * 1.06;
       m.className = "hc-morph"; Object.assign(m.style, { left: b.x - r / 2 + "px", top: b.y - r / 2 + "px", width: r + "px", height: r + "px", background: it.h });
       cv.parentNode.appendChild(m);
+      setTimeout(() => m.remove(), 700);   // a stand-in lives for one tap; it can never stay stuck on the map
       return m;
     };
     const morph = () => { const m = mkSrc(); if (m) { morphFrom(m); m.remove(); } };
@@ -1348,7 +1513,12 @@ function honeycomb(host, opts = {}) {
         const f = focus && (focus.h ? focus : BYNAME.get(String(focus.n || "").toLowerCase())), p = f && lay.pts.find(q => q.it.n === f.n);
         P = p ? [-p.lon, clamp(Math.asin(clamp(p.y, -1, 1)), -1.5, 1.5)] : [0, 0];
       }
-    } else if (how === "restore" && HONEY_PAN && HONEY_PAN.key === lay.key) { P = [HONEY_PAN.x, HONEY_PAN.y]; if (HONEY_PAN.z) Z = clamp(HONEY_PAN.z, ZMIN, ZMAX);   /* L18: the last zoom you left, always */ }
+    } else if (how === "restore" && HONEY_PAN && HONEY_PAN.key === lay.key) {
+      P = [HONEY_PAN.x, HONEY_PAN.y]; if (HONEY_PAN.z) Z = clamp(HONEY_PAN.z, ZMIN, ZMAX);   /* L18: the last zoom you left, always */
+      // a tap can open a bubble mid-glide or mid rubber-band (taps open at once), which saved a half-way pan: come
+      // back centered on the nearest bubble, never off to one side (a no-op for a pan saved at rest)
+      const n = nearestTo(P); if (n) P = [n.x, n.y];
+    }
     else {
       const f = focus && (focus.h ? focus : BYNAME.get(String(focus.n || "").toLowerCase()));
       let p = f && lay.pts.find(q => q.it.n === f.n);
@@ -1458,9 +1628,14 @@ function honeycomb(host, opts = {}) {
   }
   return {
     update(o = {}) {
-      if (o.layout) liveTweak = { ...(liveTweak || {}), layout: ["wheel", "sunflower", "globe", "spiral"].includes(o.layout) ? o.layout : "mapTall" };
+      if (o.layout) liveTweak = { ...(liveTweak || {}), layout: honeyIsLayout(o.layout) ? o.layout : "mapTall" };
+      if (o.tweak) liveTweak = { ...(liveTweak || {}), ...o.tweak };
       if (o.style && HONEY_STYLES[o.style]) styleId = o.style;
+      // a new arrangement is a longer, calmer glide (each bubble flies across the map to its new place)
+      morphMs = o.arrange ? L18_ARRANGE_MS : L18_MORPH_MS;
       setItems(o.items || (lay && lay.raw), o.focus || (center && center.o), o.soft ? "soft" : "");
+      // regions (Families, Hue pages) read best whole: the arrival eases out until most of the book is in view
+      if (o.arrange && HONEY_ARR[cfg.layout] && HONEY_ARR[cfg.layout].fit && !lay.globe) { P = [0, 0]; Plag = P.slice(); zoomTo(Math.max(ZMIN, Math.min(Z, ZMIN * 1.3)), W / 2, vcy()); }
     },
     zoom: (z, animate = true) => animate ? zoomTo(z) : (Z = clamp(z, ZMIN, ZMAX), draw(), remember(), opts.onZoom && opts.onZoom(Z)),
     // so a bottom sheet never covers the magnified middle: the lens center, the "center" bubble and the
@@ -1500,7 +1675,6 @@ function honeycomb(host, opts = {}) {
     },
     zoomValue: () => Z,
     panValue: () => [P[0], P[1], Z],   // QA: the pan a return to Home must keep
-    famNames(on) { famOn = !!on; draw(); },
     _morphCheck: items => l18MorphCheck(items),
     // QA (tools/smoke map group): the median seam between each readable bubble and its nearest neighbor, in px
     _gapStat() {
