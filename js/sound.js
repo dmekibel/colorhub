@@ -5,7 +5,7 @@
 //
 // Public API (safe to call any time; silent until the first real tap, when Sound is off, in #shot= screenshot mode,
 // and in the smoke harness, whose synthetic taps are never trusted so the audio never starts):
-//   sfx(name)              a named sound: tap tick select next back open close rooms right wrong near combo flip knew
+//   sfx(name)              a named sound: tap tick select next back open close reveal tuck rooms right wrong near combo flip knew
 //                          again complete settle best levelup done
 //   sfxColor(hex, o)       the color's own note (one mapping for the whole app: colorTone)
 //   sfxChord(hexes, o)     a palette as a rolled chord (o.shares: louder for the bigger areas)
@@ -138,7 +138,7 @@ function sndNoise(t, o) {
   src.buffer = SND.noise; src.loop = true;
   bp.type = o.hp ? "highpass" : "bandpass"; bp.Q.value = o.q || .9;
   bp.frequency.setValueAtTime(o.f0, t); if (o.f1) bp.frequency.exponentialRampToValueAtTime(o.f1, t + o.dur);
-  src.connect(bp); bp.connect(vca);
+  src.connect(bp); if (o.lp) sndLP(bp, o.lp, .5).connect(vca); else bp.connect(vca);
   vca.gain.setValueAtTime(0, t); vca.gain.linearRampToValueAtTime(o.vel, t + (o.att || o.dur * .45)); vca.gain.linearRampToValueAtTime(0, t + o.dur);
   src.start(t, Math.random() * .5); src.stop(t + o.dur + .02);
   sndOut(vca, o);
@@ -196,18 +196,22 @@ function sndSparkle(t, hexes, o = {}) {
   degs.forEach((d, i) => sndInst("glass", sndDeg(d, SND_C4), t + i * .055, { vel: (o.vel || .05) * (1 - i * .08), verb: .4, dur: .9 }));
 }
 const SND_FX = {
-  // a soft "pok": the touch of a rounded button
-  tap: t => { sndSine(560, t, { to: 820, gt: .018, vel: .085, dur: .07, lp: 2600 }); sndNoise(t, { f0: 3200, q: 1.4, vel: .012, dur: .012 }); },
+  // UI sounds are muffled: low, slow attack (6-10 ms, no transient), lowpassed at or under 1.5 kHz, no noise click
+  // a soft, dull "pok": the touch of a rounded button
+  tap: t => sndSine(420, t, { to: 480, gt: .03, att: .008, vel: .055, dur: .07, lp: 1200 }),
   // lighter still: a bubble crossing the lens, a slider stop
-  tick: t => sndSine(1250, t, { to: 1480, gt: .012, vel: .04, dur: .035 }),
-  // the bubbly select: a pop that rises
-  select: t => { sndSine(330, t, { to: 680, gt: .07, vel: .11, dur: .14, verb: .12 }); sndSine(660, t + .01, { to: 1360, gt: .07, vel: .025, dur: .1 }); },
+  tick: t => sndSine(700, t, { to: 760, gt: .02, att: .007, vel: .026, dur: .04, lp: 1200 }),
+  // the select: a low pop that rises a little
+  select: t => sndSine(260, t, { to: 400, gt: .08, att: .008, vel: .07, dur: .14, lp: 1300, verb: .1 }),
   // forward: two soft marimba notes stepping up
   next: t => { sndInst("marimba", sndDeg(2), t, { vel: .09, dur: .3 }); sndInst("marimba", sndDeg(4), t + .06, { vel: .11, dur: .4, verb: .12 }); },
   // back / close: a tiny reverse pluck, swelling in and stepping down
-  back: t => sndSine(sndDeg(4), t, { to: sndDeg(2), gt: .08, att: .045, vel: .075, dur: .07, lp: 2200 }),
-  open: t => { sndNoise(t, { f0: 480, f1: 2600, q: .8, vel: .04, dur: .22 }); sndSine(420, t + .12, { to: 780, gt: .06, vel: .06, dur: .12, verb: .15 }); },
-  close: t => { sndNoise(t, { f0: 2400, f1: 520, q: .8, vel: .032, dur: .2 }); sndInst("marimba", sndDeg(0), t + .1, { vel: .05, dur: .3 }); },
+  back: t => sndSine(520, t, { to: 400, gt: .08, att: .012, vel: .05, dur: .07, lp: 1200 }),
+  open: t => { sndNoise(t, { f0: 300, f1: 900, q: .6, vel: .022, dur: .22, lp: 1300 }); sndSine(300, t + .12, { to: 480, gt: .06, att: .008, vel: .035, dur: .12, lp: 1200, verb: .12 }); },
+  close: t => { sndNoise(t, { f0: 900, f1: 300, q: .6, vel: .018, dur: .2, lp: 1300 }); sndSine(250, t + .1, { to: 200, gt: .1, att: .008, vel: .03, dur: .18, lp: 1100 }); },
+  // a drawer (details / summary) opens: a very quiet low breath, rising; closing tucks it away, softer and falling, no note
+  reveal: t => sndNoise(t, { f0: 350, f1: 900, q: .7, vel: .02, dur: .16, lp: 1300 }),
+  tuck: t => sndNoise(t, { f0: 800, f1: 300, q: .7, vel: .014, dur: .12, lp: 1200 }),
   // the rooms fan out: one note per bubble, rising with their 30 ms stagger
   rooms: (t, n = 4) => { for (let i = 0; i < Math.min(n, 6); i++) sndInst("kalimba", sndDeg([0, 2, 3, 4, 5, 7][i]), t + .04 + i * .035, { vel: .06, dur: .45, verb: .15 }); },
   // right: a rising pair that climbs the scale with the streak
@@ -245,7 +249,7 @@ const SND_FX = {
   scale: (t, a) => { const l = [], seen = new Set(); (a.hexes || []).forEach(h => { if (!/^#[0-9a-f]{6}$/i.test(h || "")) return; const tn = colorTone(h); if (!seen.has(tn.semi)) { seen.add(tn.semi); l.push({ h, f: tn.f }); } }); l.sort((x, y) => x.f - y.f); const n = Math.min(l.length, 10), step = n > 1 ? l.length / n : 1; for (let i = 0; i < n; i++) sndColorAt(l[Math.min(l.length - 1, Math.floor(i * step))].h, t + i * .075, { vel: .09, long: i === n - 1, verb: .2 }); },
   chord: (t, a) => sndChordAt(a.hexes, t, a),
 };
-const SND_PRI = { scale: 7, tick: 1, tap: 1, select: 2, color: 2, flip: 3, next: 3, back: 3, open: 3, close: 3, rooms: 3, chord: 4, near: 4, right: 5, wrong: 5, knew: 5, again: 5, combo: 6, done: 7, settle: 8, complete: 8, levelup: 9, best: 9 };
+const SND_PRI = { scale: 7, tick: 1, tap: 1, reveal: 1, tuck: 1, select: 2, color: 2, flip: 3, next: 3, back: 3, open: 3, close: 3, rooms: 3, chord: 4, near: 4, right: 5, wrong: 5, knew: 5, again: 5, combo: 6, done: 7, settle: 8, complete: 8, levelup: 9, best: 9 };
 function sndColorAt(hex, t, o = {}) {
   const tn = colorTone(hex), P = SND_INST[tn.inst];
   sndFM(tn.f, t, { ...P, index: P.index * (.3 + .9 * tn.bright), lp: P.lp * (.45 + .55 * tn.bright), vel: o.vel != null ? o.vel : .12, pan: tn.pan, verb: o.verb != null ? o.verb : .16, dur: P.dur * (o.long ? 1.6 : 1) });
@@ -357,6 +361,9 @@ document.addEventListener("click", e => {
   if (t.closest("[data-next], [data-nextlv], [data-a='next']")) return sndQ("next");
   if (t.closest("[data-back], [data-close], .pr-x")) return sndQ("back");
   if (t.closest("input, textarea, select, .scrim")) return;
+  // a drawer: the click fires before <details> toggles, so the open state is still the old one
+  const sm = t.closest("summary");
+  if (sm && sm.parentElement && sm.parentElement.tagName === "DETAILS") return sndQ(sm.parentElement.open ? "tuck" : "reveal");
   const hit = t.closest(SND_CLICKABLE) || (getComputedStyle(t).cursor === "pointer" ? t : null);
   if (!hit) return;
   const h = t.closest(SND_QUIET) ? null : sndHexOf(t);
@@ -490,7 +497,7 @@ function sndMenuAct(a) {
 
 // ---------- #/lab/sounds: hear every sound, and play with colors ----------
 const SND_LAB_GROUPS = [
-  ["Taps and moves", [["tap", "Tap", "every button"], ["tick", "Tick", "a bubble passing, a slider stop"], ["select", "Select", "a choice"], ["next", "Next", "moving on"], ["back", "Back", "back or close"], ["open", "Sheet up", "a sheet opens"], ["close", "Sheet down", "a sheet closes"], ["rooms", "Rooms", "the rooms fan out"]]],
+  ["Taps and moves", [["tap", "Tap", "every button"], ["tick", "Tick", "a bubble passing, a slider stop"], ["select", "Select", "a choice"], ["next", "Next", "moving on"], ["back", "Back", "back or close"], ["open", "Sheet up", "a sheet opens"], ["close", "Sheet down", "a sheet closes"], ["reveal", "Reveal", "a drawer opens"], ["tuck", "Tuck", "a drawer closes"], ["rooms", "Rooms", "the rooms fan out"]]],
   ["Answers", [["right", "Right", "climbs with your streak"], ["streak", "A streak", "six right in a row"], ["near", "Close", "almost"], ["wrong", "Not quite", "soft and low"], ["combo", "In a row", "a streak moment"]]],
   ["Cards", [["flip", "Turn over", "then the color's note"], ["knew", "Knew it", "swipe right"], ["again", "Again", "swipe left"]]],
   ["Endings", [["complete", "Well done", "a session that went well"], ["settle", "Not yet", "a kind ending"], ["best", "A new best", "the sparkle on top"], ["levelup", "Level up", "a short fanfare"], ["done", "Set done", "a lesson or a set"]]],
