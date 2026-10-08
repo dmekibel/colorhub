@@ -351,3 +351,20 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--ink);outline-of
 @media (prefers-reduced-motion:reduce){.rooms-stem.mn-panel,.rooms-stem.mn-panel .rm-bubble,.rooms-stem.mn-panel.on .rm-bubble{transform:none;transition:opacity 160ms linear;transition-delay:0ms}}
 /* sheets take the Night Gallery radius */
 .sheet{border-radius:var(--r-sheet) var(--r-sheet) 0 0}
+
+/* ============================================================ rows: grouped inset sections (VISUAL-DIRECTION component 3)
+   A group is one e1 card (radius 18); its rows are 56 pt with inset hairlines between them, never a box around each.
+   Serif title-3 name, a Geist sub-label (14), a soft value on the right, a chevron only when the row navigates. */
+.mn-group{margin:0 0 22px}
+.mn-gnote{font:500 var(--type-cap)/1.3 var(--sans);font-style:normal;color:var(--soft);margin:0 4px 8px}
+.mn-row{min-height:var(--tap-l);padding:10px 16px;gap:14px;background:var(--s1);border:0;border-radius:0;position:relative}
+.mn-group>.mn-row:first-of-type,.mn-gnote+.mn-row{border-top:0;border-top-left-radius:var(--r-card);border-top-right-radius:var(--r-card)}
+.mn-group>.mn-row:last-of-type{border-bottom:0;border-bottom-left-radius:var(--r-card);border-bottom-right-radius:var(--r-card)}
+.mn-row:not(:last-of-type)::after{content:"";position:absolute;left:62px;right:0;bottom:0;height:1px;background:var(--line)}
+.mn-row:not(:has(.mn-lead)):not(:last-of-type)::after{left:16px}
+.mn-row:active{opacity:1;background:var(--s2)}
+.mn-lead{width:32px;height:32px;border-radius:50%;background:var(--s3);color:var(--ink)}
+.mn-lead svg{width:18px;height:18px}
+.mn-txt small{font:400 14px/1.35 var(--sans)}
+.mn-val{font:400 15px/1.2 var(--sans);font-style:normal;font-variant-numeric:tabular-nums}
+.mn-row.danger .mn-lead{background:rgba(240,154,134,.12)}

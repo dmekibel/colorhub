@@ -8,15 +8,15 @@
 // Also here: the shared menu family's two helpers, mnHead() and mnConfirm(), and the settings sheet (menu()).
 
 const YM_I = {
-  eye: sv('<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/>', 20, 1.7),
+  eye: icon("train", 20),
   tap: sv('<path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V11m0-2a1.5 1.5 0 0 1 3 0v2m0-1a1.5 1.5 0 0 1 3 0v4.5a6 6 0 0 1-6 6h-.8a5 5 0 0 1-4-2L4.6 15a1.5 1.5 0 0 1 2.2-2L9 15"/>', 20, 1.6),
-  quick: sv('<path d="M13 2.5L4.5 13.5H11l-1 8 8.5-11H12z"/>', 20, 1.7),
+  quick: icon("bolt", 20),
   down: sv('<path d="M12 4v11M7 10l5 5 5-5M5 20h14"/>', 20, 1.7),
   up: sv('<path d="M12 15V4M7 9l5-5 5 5M5 20h14"/>', 20, 1.7),
   path: sv('<circle cx="6" cy="18" r="2.2"/><circle cx="18" cy="6" r="2.2"/><path d="M8 17c6-1 2-9 8-10"/>', 20, 1.7),
   book: sv('<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5zM4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/>', 20, 1.6),
   trash: sv('<path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/>', 20, 1.7),
-  x: sv('<path d="M6 6l12 12M18 6L6 18"/>', 20, 2),
+  x: icon("x", 20),
 };
 
 // ---------------------------------------------------------------- the menu family (css/menus2.css)
