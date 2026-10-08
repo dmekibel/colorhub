@@ -68,6 +68,7 @@ function shot(name) {
       }); }
     // the Learn it mini-lesson (js/learnit.js): learnit:<meet|recall|tell|done>
     case "learnit": return hmLearnitShot(arg || "meet");
+    case "lx": return lxShot(arg || "room");   // js/learnmore.js: lx:<room|unit|meet|deck|learnit|learnitpage|edge>
     case "gym": return go("gym");
     case "studio": return go("studio");
     // a Studio photo palette, for design review (ROADMAP §17 job #1 screenshots): a synthetic canvas run

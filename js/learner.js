@@ -175,6 +175,12 @@ function knowState(color) {
       if (st && typeof isMine === "function" && isMine(st)) return "yours";
       if (st) return "learning";
     }
+    // any other learnable color can have a review card too (core:<slug> / lib:<slug>, js/learnmore.js)
+    if (!app && c.n && typeof cardIdFor === "function") {
+      const st = S.cards && S.cards[cardIdFor(c)];
+      if (st && typeof isMine === "function" && isMine(st)) return "yours";
+      if (st) return "learning";
+    }
     const x = lnIndex().c[lnKeyOf(c)];
     if (!x) return "none";
     if (x.ck && x.ck.ok && lnDay(x.ck.t) > lnDay(x.t0)) return "yours";
