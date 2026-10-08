@@ -96,14 +96,21 @@
 .pt-add-sw button{width:30px;height:30px;border-radius:2px;background:var(--c)}
 
 /* ---------- the pinned color on a painting ---------- */
-.pt-arrive{display:grid;grid-template-columns:44px minmax(0,1fr);gap:14px;margin:22px 0 4px;padding:16px 0;border-top:1px solid var(--rule-strong);border-bottom:1px solid var(--rule)}
+/* David, 2026-10-08: lower and quieter than the palette, one row under it; a tap on the row opens the rest */
+.pt-arrive{display:block;margin:14px 0 4px;padding:10px 0;border-bottom:1px solid var(--rule)}
 .pt-arrive[hidden]{display:none}
-.pt-ar-sw{display:block;width:44px;height:44px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(236,232,223,.22),0 0 0 3px var(--ground),0 0 0 4px rgba(236,232,223,.5)}
-.pt-ar-line{display:block;font:400 22px/1.3 var(--serif);letter-spacing:-.005em}
-.pt-ar-line b{font-weight:400}
-.pt-ar-body small{display:block;margin-top:6px;font:400 12.5px/1.45 var(--sans);color:var(--soft)}
-.pt-ar-tools{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:14px}
-.pt-ar-map{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px 0 12px;border:1px solid var(--rule);border-radius:var(--r-pill);font:500 13px/1 var(--sans);color:var(--ink);transition:background .2s,color .2s}
+.pt-ar-row{display:flex;align-items:center;gap:12px;min-height:44px}
+.pt-ar-sw{flex:none;display:block;width:22px;height:22px;border-radius:50%;background:var(--c);cursor:pointer;position:relative;box-shadow:inset 0 0 0 1px rgba(236,232,223,.22)}
+.pt-ar-sw::after{content:"";position:absolute;inset:-11px}
+.pt-ar-txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;padding:4px 0;text-align:left;color:var(--ink)}
+.pt-ar-line{display:block;font:400 15px/1.3 var(--sans);color:var(--soft)}
+.pt-ar-line b{font:400 18px/1.1 var(--serif);color:var(--ink)}
+.pt-ar-txt small{font:400 13px/1.35 var(--sans);color:var(--soft);font-variant-numeric:tabular-nums}
+.pt-ar-txt small b{font-weight:500;color:var(--ink)}
+.pt-ar-more small{display:block;margin-top:8px;font:400 13px/1.45 var(--sans);color:var(--soft)}
+.pt-ar-more[hidden]{display:none}
+.pt-ar-tools{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:8px}
+.pt-ar-map{flex:none;display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 12px 0 10px;border:1px solid var(--rule);border-radius:var(--r-pill);font:500 13px/1 var(--sans);color:var(--soft);transition:background .2s,color .2s}
 .pt-ar-map.on{background:var(--paper);border-color:var(--paper);color:var(--paper-ink)}
 .pt-ar-all{min-height:40px;padding:0 2px;font:italic 400 16px/1 var(--serif);color:var(--soft);text-decoration:underline;text-decoration-color:rgba(236,232,223,.3);text-underline-offset:4px}
 .pt-ar-reg{display:flex;align-items:center;gap:10px;margin-top:12px}
