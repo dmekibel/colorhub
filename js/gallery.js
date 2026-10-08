@@ -68,7 +68,7 @@ function glShard(k) {
   GL_SHARDS.set(k, p);
   return p;
 }
-const glRowObj = r => r && { id: r[0], t: r[1] || "Untitled", a: r[2], co: r[3], mv: r[4], img: r[5], rec: r[6], li: r[7], wi: r[8], hi: r[9] || "", pl: r[10] || "" };
+const glRowObj = r => r && { id: r[0], t: r[1] || "Untitled", a: r[2], co: r[3], mv: r[4], img: r[5], rec: r[6], li: r[7], wi: r[8], hi: r[9] || "", pl: r[10] || "", crop: r[11] || null };
 const glDetailNow = i => { const s = GL_SHARDS.get(Math.floor(i / GAL.shard)); return Array.isArray(s) ? glRowObj(s[i % GAL.shard]) : null; };
 const glDetail = i => glShard(Math.floor(i / GAL.shard)).then(rows => glRowObj(rows[i % GAL.shard]));
 
@@ -76,6 +76,19 @@ const glDetail = i => glShard(Math.floor(i / GAL.shard)).then(rows => glRowObj(r
 const glHex = (i, j) => { const k = (i * 6 + j) * 3, c = GAL.rgb; return "#" + ((1 << 24) | c[k] << 16 | c[k + 1] << 8 | c[k + 2]).toString(16).slice(1).toUpperCase(); };
 const glPal = i => Array.from({ length: 6 }, (_, j) => ({ h: glHex(i, j), share: GAL.sh[i * 6 + j] }));
 const glAR = i => clamp(GAL.ar[i], .55, 1.9);          // pin boxes crop extreme scrolls and panoramas
+// The painting inside its frame, wall or margin (tools/crop_paintings.py): d.crop = [left, top, right, bottom] in thousandths
+// of the museum photo, and GAL.ar[i] is already the CROPPED shape (h/w). The <img> keeps the photo's own shape and is scaled
+// and shifted inside its box (aspect ab, h/w) so only the crop shows, covering the box when the box was clamped. "" = no crop.
+function glCropStyle(i, d, ab) {
+  const c = d && d.crop; if (!c || c.length !== 4) return "";
+  const l = c[0] / 1000, t = c[1] / 1000, cw = (c[2] - c[0]) / 1000, ch = (c[3] - c[1]) / 1000;
+  if (!(cw > .05 && ch > .05)) return "";
+  const arF = GAL.ar[i] * cw / ch;                        // the whole photo's h/w
+  const W = Math.max(100 / cw, 100 / ch * ab / arF), H = W * arF / ab;   // the photo's size as a % of the box
+  const L = -l * W - (cw * W - 100) / 2, T = -t * H - (ch * H - 100) / 2;
+  const f = v => v.toFixed(3);
+  return ` style="inset:auto;max-width:none;object-fit:fill;width:${f(W)}%;height:${f(H)}%;left:${f(L)}%;top:${f(T)}%"`;
+}
 const glYear = i => { const y = GAL.year[i]; return y === GL_UNDATED ? "" : y < 0 ? `${-y} BCE` : String(y); };
 // artist (or country) and year; the name gives way before the year does
 const glByline = (i, d) => { const who = d.a || d.co || "", y = glYear(i); return `<span>${esc(who)}</span>${y ? `<em>${who ? " · " : ""}${y}</em>` : ""}`; };
@@ -259,7 +272,7 @@ function glSimilar(i, k = 5) {
 function glPinHTML(i, o = {}) {
   const d = glDetailNow(i), pal = glPal(i), dom = pal.reduce((a, b) => b.share > a.share ? b : a);
   const box = o.imH ? `height:${o.imH}px` : `aspect-ratio:${(1 / glAR(i)).toFixed(3)}`;
-  return `<button class="gl-pin${d ? "" : " wait"}" data-gi="${i}"${o.pos ? ` style="${o.pos}"` : ""}><span class="gl-im" style="--c:${dom.h};${box}">${d ? `<img src="${esc(d.img)}" alt="" loading="lazy" decoding="async">` : ""}${o.badge ? `<span class="gl-badge">${esc(o.badge)}</span>` : ""}</span>`
+  return `<button class="gl-pin${d ? "" : " wait"}" data-gi="${i}"${o.pos ? ` style="${o.pos}"` : ""}><span class="gl-im" style="--c:${dom.h};${box}">${d ? `<img src="${esc(d.img)}" alt="" loading="lazy" decoding="async"${glCropStyle(i, d, glAR(i))}>` : ""}${o.badge ? `<span class="gl-badge">${esc(o.badge)}</span>` : ""}</span>`
     + `<span class="mini-pal">${pal.map(c => `<i style="--c:${c.h};flex:${c.share.toFixed(3)}"></i>`).join("")}</span><b>${d ? esc(d.t) : ""}</b><small>${d ? glByline(i, d) : ""}</small></button>`;
 }
 // fill in the pins under root that are still waiting for their shard
@@ -270,7 +283,7 @@ function glFill(root) {
     if (!el.isConnected || !el.classList.contains("wait")) return;
     const i = +el.dataset.gi, d = glDetailNow(i); if (!d) return;
     el.classList.remove("wait");
-    el.querySelector(".gl-im").insertAdjacentHTML("afterbegin", `<img src="${esc(d.img)}" alt="" loading="lazy" decoding="async">`);
+    el.querySelector(".gl-im").insertAdjacentHTML("afterbegin", `<img src="${esc(d.img)}" alt="" loading="lazy" decoding="async"${glCropStyle(i, d, glAR(i))}>`);
     el.querySelector("b").textContent = d.t; el.querySelector("small").innerHTML = glByline(i, d);
   })).catch(() => {}));
 }
@@ -527,7 +540,7 @@ function glPage(i, d, fromHex, tol) {
   const dom = pal6.reduce((a, b) => b.share > a.share ? b : a).h;
   const el = show(`
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button>${d.rec ? `<a class="glass-pill" href="${esc(d.rec)}" target="_blank" rel="noopener">${GL_ICON_OUT}<span>${esc(src.short)}</span></a>` : ""}</header>
-    <div class="gl-hero${glSmall(d) && !d.hi ? " small" : ""}"><span style="--c:${dom};width:${glSmall(d) && !d.hi ? "min(100%, 300px, calc(66dvh / " + ar.toFixed(3) + "))" : "min(100%, calc(66dvh / " + ar.toFixed(3) + "))"};aspect-ratio:${(1 / ar).toFixed(4)}"><img src="${esc(glBig(d.img))}" alt="${esc(d.t)}${d.a ? " by " + esc(d.a) : ""}"${d.hi ? ` data-hi="${esc(d.hi)}"` : ""}${glCORS(glBig(d.img))}></span>${glSmall(d) && !d.hi && d.rec ? `<a class="gl-full" href="${esc(d.rec)}" target="_blank" rel="noopener">See it full size at the museum ↗</a>` : ""}</div>
+    <div class="gl-hero${glSmall(d) && !d.hi ? " small" : ""}"><span style="--c:${dom};width:${glSmall(d) && !d.hi ? "min(100%, 300px, calc(66dvh / " + ar.toFixed(3) + "))" : "min(100%, calc(66dvh / " + ar.toFixed(3) + "))"};aspect-ratio:${(1 / ar).toFixed(4)}"><img src="${esc(glBig(d.img))}" alt="${esc(d.t)}${d.a ? " by " + esc(d.a) : ""}"${glCropStyle(i, d, ar)}${d.hi ? ` data-hi="${esc(d.hi)}"` : ""}${glCORS(glBig(d.img))}></span>${glSmall(d) && !d.hi && d.rec ? `<a class="gl-full" href="${esc(d.rec)}" target="_blank" rel="noopener">See it full size at the museum ↗</a>` : ""}</div>
     <p class="eyebrow p-type">Painting${yr ? " · " + yr : ""}</p>
     <h1 class="p-title">${esc(d.t)}</h1>
     <p class="p-dek">${esc([d.a || "Artist unknown", d.co, d.mv].filter(Boolean).join(" · "))}</p>
@@ -599,8 +612,9 @@ function glPage(i, d, fromHex, tol) {
   heroSpan.addEventListener("click", e => {
     if (arrival && arrival.tap(e)) return;
     if (!canSample || e.target.closest("a")) return;
-    const r = sampleImg.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
-    if (x < 0 || y < 0 || x > r.width || y > r.height || !sampleImg.naturalWidth) return;
+    // r = the whole photo (a cropped painting's <img> is bigger than the box that shows it), sr = what is on screen
+    const r = sampleImg.getBoundingClientRect(), sr = heroSpan.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
+    if (e.clientX < sr.left || e.clientY < sr.top || e.clientX > sr.right || e.clientY > sr.bottom || !sampleImg.naturalWidth) return;
     if (typeof isoOpen === "function") {   // guess its name, then see it alone on grey (js/isolate.js); the reveal is one tap from its page
       const k = Math.min(r.width / sampleImg.naturalWidth, r.height / sampleImg.naturalHeight), dw = sampleImg.naturalWidth * k, dh = sampleImg.naturalHeight * k;
       const fx = (x - (r.width - dw) / 2) / dw, fy = (y - (r.height - dh) / 2) / dh;
@@ -618,7 +632,7 @@ function glPage(i, d, fromHex, tol) {
       for (let k = 0; k < data.length; k += 4) { rr += data[k]; gg += data[k + 1]; bb += data[k + 2]; n++; }
       const hex = "#" + [rr, gg, bb].map(v => clamp(Math.round(v / n), 0, 255).toString(16).padStart(2, "0")).join("").toUpperCase();
       heroSpan.querySelectorAll(".gl-tap-dot").forEach(nd => nd.remove());
-      const dot = document.createElement("span"); dot.className = "gl-tap-dot"; dot.style.left = x + "px"; dot.style.top = y + "px";
+      const dot = document.createElement("span"); dot.className = "gl-tap-dot"; dot.style.left = (e.clientX - sr.left) + "px"; dot.style.top = (e.clientY - sr.top) + "px";
       heroSpan.appendChild(dot);
       buzz(6); openTappedColor(hex);   // David, 2026-10-07: tap anywhere on the painting opens that color's page, not the sheet
     } catch (e) { canSample = false; heroSpan.classList.remove("gl-tap"); }   // tainted after all: quietly give up
