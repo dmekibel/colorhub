@@ -124,59 +124,89 @@ const spCap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 
 // ---------- improve: suggestions the numbers call for ----------
 // Each: { id, title, why, after: [hex] } with after in the same order as hexes. s = strength 0.4 / 0.7 / 1.
-function spImprove(hexes, s, ctx = {}) {
+// locks: { id: Set(index) } colors the person keeps as they are, per suggestion. With none, each suggestion moves the
+// fewest colors that reach its goal (a pair usually changes ONE color), so the palette stays recognizable.
+function spImprove(hexes, s, ctx = {}, locks = {}) {
   const cs = hexes.map(h => { const [L, C, H] = lch(h); return { h, L, C, H }; }), k = cs.length, out = [];
   const nm = h => spNm(h);
+  const lk = id => locks[id] || new Set(), changed = (a, b) => de2000(a, b) >= .8;
+  // a suggestion with the locked colors put back; none left to move -> a "blocked" card (so the locks can be undone)
+  const put = (id, o, after) => {
+    const a = after.map((h, i) => lk(id).has(i) ? hexes[i] : h);
+    if (a.some((h, i) => changed(h, hexes[i]))) out.push({ id, ...o, after: a });
+    else if (lk(id).size) out.push({ id, need: o.need, title: o.title, after: hexes.slice(), blocked: true, why: "With those colors kept as they are, there's nothing left to move for this. Unlock one to see it." });
+  };
   // 1. a pair too close to tell apart: part their lightness
   let close = null;
   for (let i = 0; i < k; i++) for (let j = i + 1; j < k; j++) { const d = de2000(cs[i].h, cs[j].h); if (!close || d < close.d) close = { i, j, d }; }
   if (close && close.d < 10) {
     const a = cs[close.i], b = cs[close.j], up = a.L >= b.L ? a : b, dn = up === a ? b : a, push = (6 + 10 * s) / 2 + Math.max(0, 8 - close.d) * s;
-    const after = cs.map(c => c === up ? spMake(c.L + push, c.C, c.H) : c === dn ? spMake(c.L - push, c.C, c.H) : c.h);
-    const nd = de2000(after[close.i], after[close.j]);
-    out.push({ id: "part", need: 12 - close.d, title: "Part the closest pair", after,
-      why: `${nm(a.h)} and ${nm(b.h).toLowerCase()} are only ${pctDiff(close.d)}. Moving one lighter and one darker makes them read as two colors (${pctDiff(nd)}).` });
+    const both = cs.map(c => c === up ? spMake(c.L + push, c.C, c.H) : c === dn ? spMake(c.L - push, c.C, c.H) : c.h);
+    const ref = de2000(both[close.i], both[close.j]), free = i => !lk("part").has(i);
+    // the fewest moves: just one of the two, twice as far, the one that moves least (and has room to move)
+    const singles = [[up, 1], [dn, -1]].map(([c, sg]) => {
+      const i = cs.indexOf(c), L = c.L + sg * 2 * push;
+      if (!free(i) || L < 4 || L > 97) return null;
+      const after = cs.map((x, j) => j === i ? spMake(L, c.C, c.H) : x.h);
+      return de2000(after[close.i], after[close.j]) >= .9 * ref ? { after, cost: de2000(c.h, after[i]) } : null;
+    }).filter(Boolean).sort((x, y) => x.cost - y.cost);
+    const after = singles.length ? singles[0].after : free(close.i) && free(close.j) ? both : null;
+    const moved = after ? after.map((h, i) => changed(h, hexes[i]) ? i : -1).filter(i => i >= 0) : [];
+    const o = { need: 12 - close.d, title: "Part the closest pair" };
+    if (after) { const nd = de2000(after[close.i], after[close.j]); put("part", { ...o, why: `${nm(a.h)} and ${nm(b.h).toLowerCase()} are only ${pctDiff(close.d)}. ${moved.length === 1 ? `Moving just ${nm(hexes[moved[0]]).toLowerCase()} ${after[moved[0]] && lab(after[moved[0]])[0] > lab(hexes[moved[0]])[0] ? "lighter" : "darker"}` : "Moving one lighter and one darker"} makes them read as two colors (${pctDiff(nd)}).` }, after); }
+    else put("part", o, hexes);
   }
   // 2. lightness range: spread it around its middle
   const Ls = cs.map(c => c.L), lo = Math.min(...Ls), hi = Math.max(...Ls), range = hi - lo;
   if (range < 50) {
-    const target = range + (72 - range) * s, mid = (lo + hi) / 2, order = cs.map((c, i) => i).sort((x, y) => cs[x].L - cs[y].L);
-    const after = cs.map((c, i) => {
+    const target = range + (72 - range) * s, mid = (lo + hi) / 2, order = cs.map((c, i) => i).sort((x, y) => cs[x].L - cs[y].L), delta = target - range;
+    const both = cs.map((c, i) => {
       const t = range < 3 ? (order.indexOf(i) / Math.max(1, k - 1) - .5) : (c.L - mid) / range;
       return spMake(clamp(mid + t * target, 6, 96), c.C, c.H);
     });
-    const nl = after.map(h => lab(h)[0]);
-    out.push({ id: "value", need: (50 - range) / 2, title: "More dark and light", after,
-      why: `Lightness spans only ${Math.round(range)} of 100, so the palette reads flat in black and white. Spreading it to ${Math.round(Math.max(...nl) - Math.min(...nl))} gives it a clear dark and light.` });
+    const spanOf = arr => { const l = arr.map(h => lab(h)[0]); return Math.max(...l) - Math.min(...l); };
+    // the fewest moves: only the lightest lighter, or only the darkest darker, whichever moves less
+    const iHi = order[k - 1], iLo = order[0];
+    const singles = [[iHi, 1], [iLo, -1]].map(([i, sg]) => {
+      const L = cs[i].L + sg * delta;
+      if (lk("value").has(i) || L < 6 || L > 96) return null;
+      const after = cs.map((x, j) => j === i ? spMake(L, x.C, x.H) : x.h);
+      return spanOf(after) >= range + .85 * delta ? { after, cost: de2000(cs[i].h, after[i]) } : null;
+    }).filter(Boolean).sort((x, y) => x.cost - y.cost);
+    const after = singles.length ? singles[0].after : both.map((h, i) => lk("value").has(i) ? hexes[i] : h);
+    const span = spanOf(after);
+    if (span >= range + .4 * delta) put("value", { need: (50 - range) / 2, title: "More dark and light",
+      why: `Lightness spans only ${Math.round(range)} of 100, so the palette reads flat in black and white. ${after.filter((h, i) => changed(h, hexes[i])).length === 1 ? "Moving one color" : "Spreading it"} to ${Math.round(span)} gives it a clear dark and light.` }, after);
+    else put("value", { need: (50 - range) / 2, title: "More dark and light" }, hexes);
   }
   // 3. calm all but one: several colors at full strength compete
   const loud = cs.filter(c => c.C > 45);
   if (k >= 3 && loud.length >= 2) {
     const lead = cs.reduce((a, b) => b.C > a.C ? b : a), after = cs.map(c => c === lead || c.C < 20 ? c.h : spMake(c.L, c.C * (1 - .5 * s), c.H));
-    out.push({ id: "accent", need: loud.length * 4, title: `Let ${nm(lead.h).toLowerCase()} lead`, after,
-      why: `${loud.length} colors compete at full strength (chroma over 45). Calming the others lets one accent carry the palette.` });
+    put("accent", { need: loud.length * 4, title: `Let ${nm(lead.h).toLowerCase()} lead`,
+      why: `${loud.length} colors compete at full strength (chroma over 45). Calming the others lets one accent carry the palette.` }, after);
   }
   // 4. hues near a textbook scheme: nudge them onto it
   const sch = spScheme(hexes);
   if (sch.targets && sch.off > 4 && sch.off <= 30 && [...sch.targets.keys()].every(i => cs[i].C >= 18)) {
     const after = cs.map((c, i) => { if (!sch.targets.has(i)) return c.h; let d = sch.targets.get(i) - c.H; if (d > 180) d -= 360; if (d < -180) d += 360; return spMake(c.L, c.C, c.H + d * s); });
-    out.push({ id: "scheme", need: sch.off / 2, title: `Toward a ${sch.name}`, after,
-      why: `The hues sit ${Math.round(sch.off)}° off a ${sch.name} on average (perceptual wheel). Rotating them ${s < 1 ? "partway " : ""}onto it makes the scheme exact.` });
+    put("scheme", { need: sch.off / 2, title: `Toward a ${sch.name}`,
+      why: `The hues sit ${Math.round(sch.off)}° off a ${sch.name} on average (perceptual wheel). Rotating them ${s < 1 ? "partway " : ""}onto it makes the scheme exact.` }, after);
   }
   // 5. warm and cool pulling against each other: lean the minority toward the majority
   const warm = cs.filter(c => c.C >= 8 && spTemp(c.h) === "warm"), cool = cs.filter(c => c.C >= 8 && spTemp(c.h) === "cool");
   if (warm.length && cool.length && k >= 3 && warm.length !== cool.length) {
     const few = warm.length < cool.length ? warm : cool, pole = few === warm ? 250 : 45, word = few === warm ? "cool" : "warm";
     const after = cs.map(c => { if (!few.includes(c)) return c.h; let d = pole - c.H; if (d > 180) d -= 360; if (d < -180) d += 360; return spMake(c.L, c.C * (1 - .35 * s), c.H + Math.sign(d) * Math.min(Math.abs(d), 40 * s)); });
-    out.push({ id: "temp", need: 3, title: `One temperature: ${word}`, after,
-      why: `${warm.length} warm and ${cool.length} cool. Leaning ${spList(few.map(c => nm(c.h).toLowerCase()))} toward ${word} and calming ${few.length === 1 ? "it" : "them"} lets the palette read as one temperature.` });
+    put("temp", { need: 3, title: `One temperature: ${word}`,
+      why: `${warm.length} warm and ${cool.length} cool. Leaning ${spList(few.map(c => nm(c.h).toLowerCase()))} toward ${word} and calming ${few.length === 1 ? "it" : "them"} lets the palette read as one temperature.` }, after);
   }
   // 6. the weakest color in painters' eyes: swap toward a color painters do pair with the rest
   if (ctx.swap) {
     const { i, lift, cand } = ctx.swap, c = cs[i], [L, A, B] = lab(c.h), [L2, A2, B2] = lab(cand.h), m = Math.min(1, .45 + .55 * s);
     const after = cs.map((x, j) => j === i ? labHex(L + (L2 - L) * m, A + (A2 - A) * m, B + (B2 - B) * m) : x.h);
-    out.push({ id: "swap", need: 5, title: `Swap ${nm(c.h).toLowerCase()}`, after,
-      why: `${nm(c.h)} turns up with the rest less often than chance (${spTimes(lift)} in paintings, as photographed). Painters put ${cand.n.toLowerCase()} beside them ${spTimes(cand.l)} more often than chance.` });
+    put("swap", { need: 5, title: `Swap ${nm(c.h).toLowerCase()}`,
+      why: `${nm(c.h)} turns up with the rest less often than chance (${spTimes(lift)} in paintings, as photographed). Painters put ${cand.n.toLowerCase()} beside them ${spTimes(cand.l)} more often than chance.` }, after);
   }
   // 7. as a painter would: each color toward that painter's nearest habitual color
   if (ctx.painter && ctx.painter.cols && ctx.painter.cols.length) {
@@ -187,10 +217,12 @@ function spImprove(hexes, s, ctx = {}) {
       const [L, A, B] = lab(c.h), [L2, A2, B2] = lab(best), m = .3 + .6 * s; moved.push(c.h);
       return labHex(L + (L2 - L) * m, A + (A2 - A) * m, B + (B2 - B) * m);
     });
-    if (moved.length) out.push({ id: "painter", need: 2, title: `As ${P.name} would`, after,
-      why: `${P.name} is the painter who uses this combination most here. Each color moves toward the nearest of the colors in most of ${P.name}'s ${P.n} paintings (as photographed).` });
+    if (moved.length) put("painter", { need: 2, title: `As ${P.name} would`,
+      why: `${P.name} is the painter who uses this combination most here. Each color moves toward the nearest of the colors in most of ${P.name}'s ${P.n} paintings (as photographed).` }, after);
   }
-  return out.filter(x => x.after.some((h, i) => de2000(h, hexes[i]) >= .8)).sort((a, b) => b.need - a.need).slice(0, 4);
+  // recognizable: unless Bold, never rebuild the whole palette (every color moved, by about 15% on average or more)
+  const remake = x => { const d = x.after.map((h, i) => de2000(h, hexes[i])); return s < 1 && !x.blocked && d.every(v => v >= .8) && d.reduce((a, b) => a + b, 0) / k > 15; };
+  return out.filter(x => !remake(x)).sort((a, b) => b.need - a.need).slice(0, 4);
 }
 
 // ---------- the page ----------
@@ -199,7 +231,7 @@ function spPage(hexes, o = {}) {
   if (hexes.length < 2) { if (typeof sxPick === "function") return sxPick(hexes[0] || "#5F8C8A"); return; }
   const k = hexes.length, pair = k === 2, path = spPath(hexes), key = "sp:" + path, names = hexes.map(spNm);
   if (o.push !== false && XSTACK[XSTACK.length - 1] !== key) XSTACK.push(key);
-  if (typeof sxSetTray === "function") sxSetTray(hexes);
+  // the set page does not keep the tray alive: opening it consumed the tray (js/settray.js sxOpen)
   const set = () => colorSet({ kind: "set", id: hexes.join("+"), title: spTitle(hexes), colors: hexes.map(h => ({ h, n: spNm(h) })), src: path });
   const plate = (h, other) => `<button class="sp-plate" data-swatch="${h}" style="--c:${h}" data-ink="${ink(h)}" aria-label="Open ${esc(spNm(h))}"><span class="sp-sample" style="color:${other}">Aa</span><b>${esc(spNm(h))}</b><em class="mono">${h}</em></button>`;
   const el = show(`
@@ -333,19 +365,36 @@ function spPage(hexes, o = {}) {
   });
 
   // ---- improve ----
-  let shown = [];
+  let shown = [], LOCKS = {};
+  // how one color changed, in words: "Teal → slightly lighter teal (+8% lightness)"
+  const chgLine = (a, b) => {
+    const [L1, A1, B1] = lab(a), [L2, A2, B2] = lab(b), c1 = Math.hypot(A1, B1), c2 = Math.hypot(A2, B2);
+    const [, , h1] = lch(a), [, , h2] = lch(b);
+    let dh = h2 - h1; if (dh > 180) dh -= 360; if (dh < -180) dh += 360;
+    const dL = L2 - L1, dC = c1 > 4 ? (c2 - c1) / c1 * 100 : 0, dH = c1 > 8 ? dh : 0;
+    const axes = [[Math.abs(dL), dL > 0 ? "lighter" : "darker", `${dL > 0 ? "+" : "\u2212"}${Math.abs(Math.round(dL))}% lightness`],
+      [Math.abs(dC) * .5, dC > 0 ? "more vivid" : "softer", `${dC > 0 ? "+" : "\u2212"}${Math.abs(Math.round(dC))}% vividness`],
+      [Math.abs(dH) * .4, dH > 0 ? "warmer" : "cooler", `${Math.abs(Math.round(dH))}\u00B0 of hue`]].sort((x, y) => y[0] - x[0]);
+    const top = axes[0], n1 = spNm(a), n2 = spNm(b);
+    return `${esc(n1)} \u2192 ${n1 === n2 ? `slightly ${top[1]} ${esc(n1.toLowerCase())}` : `${esc(n2.toLowerCase())}`} <em>${top[2]}</em>`;
+  };
+  const LOCK_ON = sv('<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/>', 16, 1.8), LOCK_OFF = sv('<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 017.6-1.7"/>', 16, 1.8);
   function improve() {
     if (!live()) return;
     const s = SP_STRENGTH.find(x => x[0] === SP_STR)[2];
-    shown = spImprove(hexes, s, ctx);
-    const strip = (cols, was) => `<span class="sp-istrip">${cols.map((h, i) => `<i style="--c:${h}"${was && de2000(h, was[i]) >= .8 ? ` class="moved"` : ""}></i>`).join("")}</span>`;
+    shown = spImprove(hexes, s, ctx, LOCKS);
+    // the After strip: the changed colors lit, the rest stepped back
+    const strip = (cols, was) => `<span class="sp-istrip${was ? " after" : ""}">${cols.map((h, i) => `<i style="--c:${h}"${was && de2000(h, was[i]) >= .8 ? ` class="moved"` : ""}></i>`).join("")}</span>`;
     $("[data-impbody]").innerHTML = shown.length ? shown.map((x, j) => {
-      const ch = x.after.map((h, i) => [hexes[i], h]).filter(([a, b]) => de2000(a, b) >= .8);
-      return `<div class="sp-imp">
-        <div class="sp-imp-t"><b>${esc(x.title)}</b><button class="sp-apply" data-apply="${j}">Apply</button></div>
+      const ch = x.after.map((h, i) => [hexes[i], h]).filter(([a, b]) => de2000(a, b) >= .8), lock = LOCKS[x.id] || new Set();
+      const sel = `<div class="sp-sel" role="group" aria-label="Which colors may change">${hexes.map((h, i) => `<button class="sp-lk${lock.has(i) ? " on" : ""}" data-lock="${x.id}:${i}" aria-pressed="${lock.has(i)}" aria-label="${lock.has(i) ? "Unlock" : "Keep"} ${esc(spNm(h))}"><i style="--c:${h}"></i>${esc(spNm(h))}${lock.has(i) ? LOCK_ON : LOCK_OFF}</button>`).join("")}</div>
+        <p class="sp-selnote">${lock.size ? "Locked colors stay as they are." : ch.length === 1 ? `Changes just one color. Tap a color to keep it.` : "Changes as few colors as it can. Tap a color to keep it."}</p>`;
+      return `<div class="sp-imp${x.blocked ? " blocked" : ""}">
+        <div class="sp-imp-t"><b>${esc(x.title)}</b>${x.blocked ? "" : `<button class="sp-apply" data-apply="${j}">Apply</button>`}</div>
         <p>${esc(x.why)}</p>
-        <div class="sp-ba"><span>Now</span>${strip(hexes)}<span>After</span>${strip(x.after, hexes)}</div>
-        <ul class="sp-chg">${ch.map(([a, b]) => `<li><button data-swatch="${a}"><i style="--c:${a}"></i>${esc(spNm(a))}</button> <span>→</span> <button data-swatch="${b}"><i style="--c:${b}"></i>${spNm(a) === spNm(b) ? "a touch different" : esc(spNm(b).toLowerCase())}</button> <em>${pctFmt(de2000(a, b))} change</em></li>`).join("")}</ul>
+        ${x.blocked ? "" : `<div class="sp-ba"><span>Now</span>${strip(hexes)}<span>After</span>${strip(x.after, hexes)}</div>
+        <ul class="sp-chg">${ch.map(([a, b]) => `<li><button data-swatch="${a}"><i style="--c:${a}"></i></button><button data-swatch="${b}"><i style="--c:${b}"></i></button> ${chgLine(a, b)}</li>`).join("")}</ul>`}
+        ${sel}
       </div>`;
     }).join("") : `<p class="sp-say">Nothing the numbers call for: the colors are distinct, the lightness range is wide, and nothing competes. It's a sound palette as it stands.</p>`;
   }
@@ -362,6 +411,8 @@ function spPage(hexes, o = {}) {
     const ad = e.target.closest("[data-addhex]"); if (ad) { buzz(8); return spPage([...hexes, ad.dataset.addhex]); }
     if (e.target.closest("[data-sp-add]")) { e.stopPropagation(); buzz(5); return sxPick(hexes[hexes.length - 1], { title: spTitle(hexes), onPick: h => spPage([...hexes, h]) }); }
     const dr = e.target.closest("[data-drop]"); if (dr) { buzz(6); const left = hexes.filter((_, i) => i !== +dr.dataset.drop); ROUTE_REPLACE = true; return spPage(left, { push: false, undo: hexes, applied: `Removed ${spNm(hexes[+dr.dataset.drop]).toLowerCase()}` }); }
+    const lkb = e.target.closest("[data-lock]");
+    if (lkb) { const [id, i] = lkb.dataset.lock.split(":"), set = LOCKS[id] || (LOCKS[id] = new Set()); set.has(+i) ? set.delete(+i) : set.add(+i); buzz(5); const y = scrollY; improve(); scrollTo(0, y); return; }
     const sb = e.target.closest("[data-str]"); if (sb) { SP_STR = sb.dataset.str; el.querySelectorAll("[data-str]").forEach(b => b.classList.toggle("on", b === sb)); buzz(4); return improve(); }
     const ap = e.target.closest("[data-apply]"); if (ap) { const x = shown[+ap.dataset.apply]; if (!x) return; buzz(10); ROUTE_REPLACE = true; scrollTo(0, 0); return spPage(x.after, { push: false, undo: hexes, applied: `Applied: ${x.title.charAt(0).toLowerCase() + x.title.slice(1)}` }); }
     if (e.target.closest("[data-undo]")) { buzz(6); ROUTE_REPLACE = true; return spPage(o.undo, { push: false }); }

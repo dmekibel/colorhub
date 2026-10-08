@@ -17,7 +17,13 @@ const sxNm = h => { const n = nameOf(h); return n.de < VERY_CLOSE_DE && !n.betwe
 // one color, already in the set? (within 1% different counts as the same color)
 const sxHas = (list, h) => list.some(x => de2000(x, h) < 1);
 
+// The tray is only for building a set: opening the set page consumes it, two screens without adding clears it, ✕ clears it.
+// (The pair/set lives on at its own address, in the trail and in You → Kept.)
+let SX_NAV = 0;
+const SX_STALE = 2;
+addEventListener("hashchange", () => { if (sxTray().length && ++SX_NAV >= SX_STALE) { S.setTray = []; save(); sxSync(); } });
 function sxSetTray(list) {
+  SX_NAV = 0;
   const out = [];
   list.map(sxHex).filter(Boolean).forEach(h => { if (!sxHas(out, h) && out.length < SX_MAX) out.push(h); });
   S.setTray = out; save(); sxSync(true);
@@ -35,7 +41,9 @@ function sxAdd(hex, o = {}) {
 function sxOpen(hexes) {
   const list = (hexes || []).map(sxHex).filter(Boolean);
   if (list.length < 2) return sxPick(list[0] || sxTray()[0]);
+  S.setTray = []; save(); SX_NAV = 0;   // opening the set page consumes the tray
   if (typeof spPage === "function") spPage(list);
+  sxSync();
 }
 
 // ---------- the "Pair with…" button on a color page ----------

@@ -8,6 +8,8 @@
 //     mix     [[keyA, keyB], …] pairs you've mixed up before (confusions()), both in the set
 //     resume  Map key -> rung from a stopped session ("Keep going")
 //     de      (hexA, hexB) -> ΔE2000 (de2000)
+//     groups  [[keyPin, keyNeighbor…], …] a pinned color with its look-alikes: they're met together (one wave per group) and
+//             practiced beside each other (js/learnset.js lsGroups); omitted = no grouping
 //     looked  true when you come from Look ("Test me"): you've just seen them all, so no Meet
 //   spNext(P) -> { t: "meet", q, i, of, wave } | { t: "pair", a, b, why } | { t: "relook", q }
 //             |  { t: "ask", q, kind, far, opts } | { t: "match", qs } | null (every color climbed or set aside)
@@ -24,6 +26,10 @@ function spNew(items, o = {}) {
   const de = o.de || (() => 99);
   const P = { top, pace, typing: o.typing !== false, quick: !!o.quick, de, qs: new Map(), queue: [], fresh: [], newQ: [], wave: [], acts: [],
     hist: [], ease: pace === "gentle" ? -1 : test ? 1 : 0, asked: 0, sinceMatch: 0, lastKind: "", mix: [], pairsShown: new Set(), meetDone: 0, cap: Math.max(24, items.length * 10) };
+  // a pinned color and its look-alikes stay together: the order they're met and queued in, and one wave per group
+  const grouped = Array.isArray(o.groups) && o.groups.some(g => g.length > 1);
+  if (grouped) { P.gof = new Map(); o.groups.forEach((g, i) => g.forEach((k, j) => { if (!P.gof.has(k)) P.gof.set(k, i + j / 100); })); }
+  items = grouped ? items.slice().sort((a, b) => (P.gof.has(a.key) ? P.gof.get(a.key) : 1e6) - (P.gof.has(b.key) ? P.gof.get(b.key) : 1e6)) : items;
   items.forEach(it => {
     const k = know.get(it.key) || "none", r = o.resume && o.resume.get(it.key);
     const fresh = k === "none" || k === "met";
@@ -63,7 +69,15 @@ const spLive = P => [...P.qs.values()].filter(q => !q.up && !q.out);
 // a wave is settled when each of its colors is past plain recognition (or set aside)
 const spSettled = P => P.wave.every(q => q.up || q.out || q.lv >= 2);
 function spStartWave(P) {
-  const n = Math.min(spWaveSize(P), P.newQ.length), wave = P.newQ.splice(0, n);
+  const n = Math.min(spWaveSize(P), P.newQ.length);
+  let wave;
+  if (P.gof) {
+    // one group at a time (its pinned color first); a lone color borrows the next one so a wave is never a single card
+    const gi = k => Math.floor(P.gof.has(k) ? P.gof.get(k) : -1), g0 = gi(P.newQ[0].it.key);
+    wave = P.newQ.filter(q => gi(q.it.key) === g0).slice(0, n);
+    if (wave.length < 2) P.newQ.filter(q => !wave.includes(q)).slice(0, 2 - wave.length).forEach(q => wave.push(q));
+    P.newQ = P.newQ.filter(q => !wave.includes(q));
+  } else wave = P.newQ.splice(0, n);
   P.wave = wave;
   wave.forEach((q, i) => { P.acts.push({ t: "meet", q, i: i + 1, of: wave.length, wave: P.meetDone }); });
   P.meetDone++;

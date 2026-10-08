@@ -835,6 +835,25 @@ scenario("learnset", "Learn sheet: live preview, size and closeness sliders, Loo
   t.expect(t.ev("[...document.querySelectorAll('.ls-prev i')].map(i => i.style.cssText).join()") !== before, "the closeness slider changes the set");
   t.expect(/Wide/.test(t.text(".ls-sheet [data-closev]")), "the closeness label reads Wide");
 });
+scenario("learnset", "Study from a pair: its colors are pinned, look-alikes are added per color and can be removed or Studied", async t => {
+  SP.placed();
+  await t.open("#/pair/2b2a4c+e0c097", { settle: 800, keepState: true });
+  await t.waitFor(".sp-page .sp-strip, .sp-page .sp-pair", 12000, "the pair page");
+  await t.click('[data-cs="learn"]', { force: true, wait: 800 });
+  await t.waitFor(".ls-sheet [data-groups] .ls-chip.pin", 6000, "the Study sheet with the pair pinned");
+  t.expect(t.$$(".ls-sheet .ls-chip.pin").length === 2, "both colors of the pair are pinned");
+  const nb = () => t.$$(".ls-sheet .ls-chip.nb").length;
+  t.expect(nb() === 4, `a pair defaults to 2 look-alikes each (${nb()})`);
+  const set = v => t.ev(`(() => { const r = document.querySelector('.ls-sheet [data-per]'); r.value = ${v}; r.dispatchEvent(new Event('input', { bubbles: true })); })()`);
+  set(0); await t.sleep(150); t.expect(nb() === 0 && t.$$(".ls-sheet .ls-chip.pin").length === 2, "0 neighbors leaves only the pair");
+  set(3); await t.sleep(150); t.expect(nb() === 6, `3 each is 6 look-alikes (${nb()})`);
+  await t.click(".ls-sheet .ls-chip.nb", { force: true, wait: 200 });
+  t.expect(nb() === 5 && t.$$(".ls-sheet .ls-chip.pin").length === 2, "tapping a look-alike removes just it");
+  t.expect(t.$(".ls-sheet [data-add]"), "there's a + to add any color");
+  await t.click(".ls-sheet [data-go]", { force: true, wait: 900 });
+  await t.waitFor(".ls-study .ls-meet", 8000, "Study starts with a Meet card");
+  t.expect(/In your set/.test(t.text(".ls-study .ls-meet-tag")), "the first card is a pinned color");
+});
 scenario("learnset", "Look: every view draws, a tile opens its page", async t => {
   await H.openPage(t, "#/color/teal", "Teal");
   await t.click("[data-learnit]", { wait: 600 });
@@ -1574,6 +1593,17 @@ scenario("sets", "a set page: pairs inside and Improve with Apply and Undo", asy
   await SP.lead(t);
   await t.waitFor(() => t.$$("[data-pairs] .sp-prow").length === 6, 25000, "six pairs inside a four-color set");
   for (const k of ["subtle", "bold", "clear"]) await t.click(`[data-str="${k}"]`, { force: true, wait: 150 });
+  // Improve: a suggestion offers per-color locks; locking one keeps it exactly as it was, and the After strip lights only what moved
+  const lockBtn = t.$("[data-lock]");
+  if (lockBtn) {
+    const [id, i] = lockBtn.dataset.lock.split(":");
+    await t.click(lockBtn, { force: true, wait: 300 });
+    const again = t.$$(`[data-lock="${id}:${i}"]`)[0];
+    t.expect(again && again.classList.contains("on"), "the lock toggles on");
+    const card = again && again.closest(".sp-imp");
+    if (card && !card.classList.contains("blocked")) t.expect(![...card.querySelectorAll(".sp-istrip.after i")][+i].classList.contains("moved"), "a locked color is not changed");
+    await t.click(again, { force: true, wait: 300 });
+  }
   const ap = t.$("[data-apply]");
   if (ap) {
     const before = t.w.location.hash;
@@ -1584,6 +1614,21 @@ scenario("sets", "a set page: pairs inside and Improve with Apply and Undo", asy
   } else t.expect(/Nothing the numbers call for/.test(t.text("[data-impbody]")), "no suggestion and no honest line");
   await t.click(".sp-names .sp-drop", { force: true, wait: 800 });
   await t.waitFor(() => t.$$(".sp-names .sp-name").length === 3, 8000, "a color to drop");
+});
+scenario("sets", "the tray is only for building: opening the set page consumes it, and it stays gone on a single color", async t => {
+  SP.placed();
+  await t.open("#/color/teal", { settle: 800, keepState: true });
+  t.ev('sxSetTray(["#2B2A4C", "#E0C097"])'); await t.sleep(300);
+  t.expect(t.$(".sx-tray:not([hidden])"), "the tray shows while a set is being built");
+  await t.click(".sx-tray-main", { force: true, wait: 800 });
+  await t.waitFor(".sp-page .sp-pair", 12000, "the pair page");
+  t.expect(t.ev("sxTray().length") === 0, "opening the pair page consumed the tray");
+  t.ev('location.hash = "#/color/teal"'); await t.waitFor(".cp-page", 12000, "a single color");
+  await t.sleep(300);
+  t.expect(!t.$(".sx-tray:not([hidden])"), "the pair does not float over a single color");
+  // a stale half-built set clears itself after two screens without adding
+  t.ev('sxSetTray(["#2B2A4C"])'); t.ev('location.hash = "#/color/rose"'); await t.sleep(500); t.ev('location.hash = "#/color/teal"'); await t.sleep(500);
+  t.expect(t.ev("sxTray().length") === 0, "a half-built set clears after two screens without adding");
 });
 scenario("sets", "long-press a swatch adds it to the tray and the tray opens the set", async t => {
   SP.placed();

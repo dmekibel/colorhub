@@ -42,3 +42,8 @@ One screen, `spPage(hexes)`, two shapes:
 - Paintings queries take at most 5 colors (the index); a bigger set is measured on its 5 most distinct colors and
   says so.
 - One tap on any color opens its page; every pair row opens its pair page; every painting opens the painting.
+
+## Update 2026-10-08
+- **Tray**: only while building. Opening the set page consumes it, two screens without adding clears it, ✕ clears it.
+- **Improve**: minimal moves (a pair usually changes one color); per-suggestion color locks; "Teal → slightly lighter teal (+8% lightness)"; the After strip lights only what moved; non-Bold suggestions never rebuild the whole palette.
+- **Learn**: pins the set's colors and offers look-alikes (design/STUDY-FLOW.md §5).
