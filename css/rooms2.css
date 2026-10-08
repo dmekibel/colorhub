@@ -4,7 +4,7 @@
    and the safe areas belong to the shell (app.css / polish.css); this file only lays out the content and makes
    sure the last line clears the Rooms button. */
 
-.r2{--r2-gap:12px;padding-bottom:calc(var(--bottom) + 56px + 16px + 48px) !important}
+.r2{--r2-gap:12px;width:100%;min-width:0;padding-bottom:calc(var(--bottom) + 56px + 16px + 48px) !important}
 .r2 .room-head,.r2>.room-head{margin-bottom:var(--s4)}
 
 /* ---------------------------------------------------------------- shared: block heads, rails, text links */
@@ -16,7 +16,8 @@
   font:italic 400 17px/1 var(--serif);text-decoration:underline;text-decoration-color:rgba(236,232,223,.3);text-underline-offset:4px}
 .r2-fine{margin:var(--s6) 0 0;font:400 13px/1.5 var(--sans);color:var(--faint);max-width:44ch}
 .r2-rail{display:flex;gap:var(--r2-gap);overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scrollbar-width:none;
-  margin:0 calc(-1 * var(--g));padding:0 var(--g);scroll-padding:0 var(--g);touch-action:pan-x}
+  width:calc(100% + 2 * var(--g));min-width:0;contain:inline-size;margin:0 calc(-1 * var(--g));padding:0 var(--g);scroll-padding:0 var(--g);touch-action:pan-x}
+.r2-blk,.r2-hero{min-width:0;max-width:100%}
 .r2-rail::-webkit-scrollbar{display:none}
 .r2-rail>*{scroll-snap-align:start;flex:none}
 
@@ -95,7 +96,7 @@
 /* ---------------------------------------------------------------- Studio: capture (the hero) */
 .r2-hero{display:flex;flex-direction:column}
 .r2-hpic{position:relative;display:block;width:100%;padding:0;border:0;border-radius:var(--r-2);overflow:hidden;background:var(--surface-2);cursor:pointer;
-  aspect-ratio:16/10;max-height:34dvh;transition:transform var(--dur-0) ease-out}
+  aspect-ratio:16/9;max-height:28dvh;transition:transform var(--dur-0) ease-out}
 .r2-hpic:active{transform:scale(.98)}
 .r2-ht{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-top:var(--s4)}
 .r2-ht .title-2{margin:0}.r2-ht .title-2 em{font-style:italic}
@@ -134,7 +135,7 @@
 .r2-tm{margin-top:3px;font:italic 400 14.5px/1.25 var(--serif);color:var(--soft);text-wrap:pretty}
 .r2-wheelpic{display:flex;align-items:center;gap:20px;padding:0 20px}
 .r2-mini{position:relative;flex:none;width:104px;height:104px}
-.r2-mini canvas,.r2-mini svg{position:absolute;inset:0;width:100%;height:100%;border-radius:50%}
+.r2-mini canvas,.r2-mini svg{position:absolute;inset:0;width:100% !important;height:100% !important;border-radius:50%}
 .r2-wheelpal{flex:1;display:flex;height:40px;border-radius:var(--r-1);overflow:hidden}
 .r2-wheelpal i{flex:1;background:var(--c)}
 .r2-harm{display:grid;place-items:center}
@@ -164,7 +165,7 @@
 .r2-ph-band{display:flex;height:10px;border-radius:0 0 var(--r-1) var(--r-1);overflow:hidden}
 .r2-ph-band i{background:var(--c)}
 .r2-ph small{margin-top:6px;font:italic 400 14px/1.2 var(--serif);color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.r2-empty{display:flex;flex-direction:column;gap:6px;padding:var(--s4) 0 var(--s5);border-bottom:1px solid var(--rule)}
+.r2-empty{display:flex;flex-direction:column;gap:6px;padding:var(--s2) 0 var(--s5)}
 .r2-empty[hidden]{display:none}
 .r2-empty .title-3{margin:0}
 .r2-empty span{font:400 14px/1.5 var(--sans);color:var(--soft);max-width:36ch}
@@ -178,6 +179,7 @@
 .r2-pal-t em{font:italic 400 14px/1.2 var(--serif);color:var(--soft)}
 .r2-palmore[hidden]{display:none}
 .r2-yours .fv-st-row{margin-top:var(--s2)}
+.r2-yours .fv-st-row small{font:italic 400 15px/1.25 var(--serif);color:var(--soft)}
 .r2-export{margin-top:0}
 .r2-ex-t{flex:1;display:flex;flex-direction:column;gap:3px}
 .r2-ex-t b{font:400 22px/1.1 var(--serif)}

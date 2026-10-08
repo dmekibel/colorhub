@@ -248,8 +248,8 @@ function r2StudioHome() {
 
     <section class="r2-blk" style="--k:1">
       <div class="r2-sh"><h3 class="title-3">Name</h3><span class="note">any color, about 1,000 words</span></div>
-      <button class="r2-wide" data-namer><span class="r2-namer" aria-hidden="true"><span class="ring" style="background:${ringStops()}"></span><i style="--c:${cols[1] || mid}"></i></span>
-        <span class="r2-wide-t"><b>Name any color</b><em>Drag, type or eyedrop. The nearest names follow as you go; this one is ${esc(nameOf(cols[1] || mid).n)}.</em></span>${ICON.chev}</button>
+      <button class="r2-wide" data-namer><span class="r2-namer" aria-hidden="true"><span class="ring" style="background:${ringStops()}"></span><i style="--c:${r2Acc(cols, 1)}"></i></span>
+        <span class="r2-wide-t"><b>Name any color</b><em>Drag, type or eyedrop. The nearest names follow as you go; this one is ${esc(nameOf(r2Acc(cols, 1)).n)}.</em></span>${ICON.chev}</button>
     </section>
 
     <section class="r2-blk" style="--k:2">
@@ -268,7 +268,7 @@ function r2StudioHome() {
       ${saved.length ? `<div class="r2-pals">${saved.slice(0, 4).map(palRow).join("")}${saved.length > 4 ? `<div class="r2-palmore" hidden>${saved.slice(4).map(palRow).join("")}</div><button class="r2-text" data-r2-more>All ${saved.length} palettes</button>` : ""}</div>` : ""}
       ${typeof fvStudioRow === "function" ? fvStudioRow() : ""}
       <div class="r2-grid r2-taste">
-        <button class="r2-tile" data-taste="color"><span class="r2-pic r2-duel">${favC ? `<i class="one" style="--c:${favC}"></i>` : `<i style="--c:${cols[0]}"></i><i style="--c:${cols[2] || cols[1]}"></i>`}</span><b class="r2-tn">${favC ? "Your color" : "Find your color"}</b><span class="r2-tm">${favC ? `${esc(S.fav.n)}-ish. Take it again` : "About 20 taps"}</span></button>
+        <button class="r2-tile" data-taste="color"><span class="r2-pic r2-duel">${favC ? `<i class="one" style="--c:${favC}"></i>` : `<i style="--c:${r2Acc(cols, 0)}"></i><i style="--c:${r2Acc(cols, 1)}"></i>`}</span><b class="r2-tn">${favC ? "Your color" : "Find your color"}</b><span class="r2-tm">${favC ? `${esc(S.fav.n.charAt(0).toUpperCase() + S.fav.n.slice(1))}-ish. Take it again` : "About 20 taps"}</span></button>
         <button class="r2-tile" data-taste="palette"><span class="r2-pic r2-duel r2-duel-pal">${[cols.slice(0, 4), r2ByL(cols).slice(-4)].map(p => `<i>${p.map(h => `<b style="--c:${h}"></b>`).join("")}</i>`).join("")}</span><b class="r2-tn">Find your palette</b><span class="r2-tm">About 15 taps</span></button>
       </div>
     </section>

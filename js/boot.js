@@ -5,14 +5,18 @@
 // Screenshot mode for design review: index.html#shot=<screen> renders one screen with sample progress
 // (in memory only; nothing is saved). Used by tools/shots.sh. It waits for the whole wiki first.
 const SHOT = location.hash.startsWith("#shot=") ? decodeURIComponent(location.hash.slice(6)) : null;
-routeWrapAll();   // js/router.js: wrap the screens of scripts that loaded after it (art wiki, hubs, looks, fashion)
-if (SHOT) loadWiki().then(() => shot(SHOT));
-else {
+// Start once every script is in: js/artwiki.js, article.js, looks.js and friends load after this file, and a
+// first-load address like #/painter/<slug> or #/hub/<id> fell back to Home without them.
+function bootStart() {
+  if (typeof routeWrapAll === "function") routeWrapAll();   // js/router.js: wrap screens from scripts that loaded after it
+  if (SHOT) return loadWiki().then(() => shot(SHOT));
   ROUTE_REPLACE = true;   // the first screen takes over the page's own history entry
   // Home (the honeycomb) is the floor of the app (DESIGN-SYSTEM.md §2) and the default landing place, not a tab.
   if (!openRoute(location.hash, true)) S.placed ? hmHome() : welcome();
   prefetchWiki();
 }
+if (document.readyState === "loading") addEventListener("DOMContentLoaded", bootStart, { once: true });
+else bootStart();
 
 function shot(name) {
   S = Object.assign(fresh(), { placed: { tier: 2, at: today() }, done: { "t2-blues": today() }, profileAsked: true });
@@ -100,6 +104,7 @@ function shot(name) {
     case "gymres": return stationDone({ k: arg || "neutral", est: 3.2, before: 4.1, pb: true, best: 3.2 });
     case "closeup": return closeup(g().nodes.get(arg || "c:Cobalt"));
     case "name": return namesShot(arg);   // js/names.js: name:<slug>[@scrolldown], e.g. name:ecru or name:seafoam-green@700
+    case "tapped": return (CORE_NAMES ? Promise.resolve() : loadCoreNames()).then(() => { XSTACK = []; openTappedColor(arg || "#967989"); });   // an in-between hex, never an exact name: tapped:<hex>
     // a honeycomb tap on a non-101 bubble, from a bigger stage (js/home.js hmOpenName): hmname[:stage]
     case "hmname": { S.hm = S.hm || {}; S.hm.src = "stage:" + (arg || "400"); return loadCoreNames().then(() => { const item = hmStageItems(+(arg || 400)).find(it => !it.c); return item ? hmOpenName(item) : hmHome(); }); }
     case "page": return openNode(g().nodes.get(arg || "alchemy"));
