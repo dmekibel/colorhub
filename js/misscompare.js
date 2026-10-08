@@ -94,6 +94,19 @@ function mcShow(o) {
     e.preventDefault(); e.stopImmediatePropagation(); cont();
   };
   window.addEventListener("click", m.tap, true); window.addEventListener("keydown", m.key, true);
+  // a touch moves on at pointerup: iOS only synthesizes a click over a plain div when something on it listens for
+  // clicks, and may drop it after DOM changes, so "tap anywhere" and Got it must not depend on that click. The
+  // click that may follow is swallowed (prSwallow, js/practice.js) so it can't land on the next question.
+  let down = null;
+  el.addEventListener("pointerdown", e => { down = e.pointerType !== "mouse" && e.isPrimary ? { id: e.pointerId, x: e.clientX, y: e.clientY } : null; });
+  el.addEventListener("pointerup", e => {
+    if (!down || e.pointerId !== down.id || Math.hypot(e.clientX - down.x, e.clientY - down.y) > 14) return;
+    down = null;
+    if (e.target.closest(".mc-n") || done) return;
+    if (e.target.closest(".mc-go") || ready) { if (typeof prSwallow === "function") prSwallow(e); cont(); }
+  });
+  el.addEventListener("pointercancel", () => { down = null; });
+  el.style.cursor = "pointer";
   document.body.appendChild(el);
   MC_OPEN = m;
   if (typeof cleanup !== "undefined" && Array.isArray(cleanup)) cleanup.push(() => { if (MC_OPEN === m) mcClose(true); });

@@ -1,0 +1,167 @@
+{
+ "slug": "duck-green",
+ "name": "Duck Green",
+ "hex": "#33431E",
+ "names": [
+  "Duck Green"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Duck green is the dark green of a mallard's neck and of yew leaves in the old naturalists' color charts, and also, confusingly, the name of a pale green in later dictionaries.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two ducks, two greens",
+   "body": "The older duck green is a dark, slightly yellowish green. In the color nomenclature that went back to Abraham Werner, it comes with three examples: the neck of a mallard, the upper surface of yew leaves, and the mineral ceylonite, a spinel [1][2]. Baty describes it as a late addition to Werner's list, made up of emerald green with a little indigo blue, a good deal of gamboge yellow and a touch of carmine red [1].\n\nThe dictionaries disagree. Paterson calls duck green an imprecise pale green and says the duck in question is the egg, not the bird, which is why it is often called duck's egg green [3]. He lists duck-egg blue separately, as a light turquoise [3]. Two quite different colors have therefore shared one name, and the swatch here is the dark one [4]."
+  },
+  {
+   "id": "charts",
+   "title": "Number 55 in the greens",
+   "body": "On Baty's chart of nature-matched colors, Duck Green is number 55, between Grass Green and Sap Green [1][5]. Its neighbors are all named for plants: [[grass-green]], [[sap-green]], then pistachio and asparagus [5].\n\nBaty shows duck green attached to the egg of the hooded crow in William Hewitson's book on British birds' eggs of 1833, and to a jewel beetle of the genus *Belionota* in a display case from Alfred Russel Wallace's collection [6]. A color name that fits a mallard's neck, a yew leaf and a crow's egg shows how loose the nineteenth-century idea of a match was.\n\nLater systems kept the name. Ridgway's 1912 atlas has its own Duck Green, a much bluer one at #295C5C [4]. The ISCC-NBS system of 1955 lists Dark Ivy, Exterior and Man Green as names for this swatch's block [4]. Maerz and Paul's dictionary of 1930 gives 1789 as the first recorded use [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, 244 hold a color within six units of this swatch over at least five per cent of the canvas, about 1 per cent of the collection [7]. The most extreme is Henri Rousseau's *Fight Between a Tiger and a Buffalo* of 1908, where the dark jungle green covers 64 per cent of the picture [7]. George Catlin's *Mauhees Encampment* of 1854 is close behind, at 60 per cent [7].\n\nThe 1510s stand out: 11 of the 243 paintings from that decade hold the color, about 4.4 times the rate across the whole archive [7]. [[painter:albrecht-durer|Dürer]] is among the painters who return to it, with 4 of his 47 works [7]. Swedish and Norwegian paintings use it more often than most, 6 of 120 and 5 of 120 [7]. As always these are photographs of aged, varnished paintings, so the dark greens in them are as photographed [7].\n\nThe nearest named color in our data is [[hunter-green]], a little brighter, at a distance of 10.3 [4]. Darker and bluer is [[fir-green]]. Look for it in the shaded interior of a conifer or the glossy dark of a mallard's head."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the mallard's neck (Werner's examples); Paterson says the pale duck green is named for the egg",
+   "first_recorded": "Maerz & Paul give 1789",
+   "source": "Baty, Nature's Palette, p. 153; Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "Duck's egg green (the pale sense)"
+  ],
+  "siblings": [
+   "sap-green",
+   "grass-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "hunter-green",
+    "gloss": "a similar dark green with a different name and history"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#33431E",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 244,
+  "top_paintings": [
+   "cma-126769",
+   "nga-50595"
+  ],
+  "measured": {
+   "lch": [
+    26,
+    25,
+    124
+   ],
+   "nearest": [
+    [
+     "Hunter green",
+     10.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, entry for Duck Green, pp. 152-153",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library: Werner's examples for Duck Green (mallard, yew leaves, ceylonite)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"duck green\" and \"duck-egg blue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub library: Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930; nearest names by CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, color chart, pp. 5, 34 and 152",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, specimen plates, pp. 123 and 129",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, color within dE 6 covering at least 5% of the canvas; as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In Werner's examples, which natural things share the color duck green?",
+   "choices": [
+    "A mallard's neck and yew leaves",
+    "A robin's egg and a violet",
+    "A peacock feather and jade",
+    "Moss and a green apple"
+   ],
+   "answer": "A mallard's neck and yew leaves",
+   "kind": "pick"
+  },
+  {
+   "q": "Why can the name duck green mean two different colors?",
+   "choices": [
+    "One refers to the bird's plumage, the other to the egg",
+    "It was once a dye and later a paint",
+    "One is French and one is English",
+    "The two were named in the same year"
+   ],
+   "answer": "One refers to the bird's plumage, the other to the egg",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Duck green is a mallard's neck in one dictionary and a duck's egg in another.",
+  "A hooded crow's egg and a jewel beetle both carried the name duck green in nineteenth-century charts."
+ ],
+ "words": 503,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Dropped unsupported \"black\" for ceylonite.",
+   "Removed generic \"field vocabulary\" claim.",
+   "Replaced unsupported darkened-varnish claim with as-photographed caveat."
+  ]
+ }
+}

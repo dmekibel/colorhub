@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A name from a nomenclature",
-   "body": "Violet purple is not a flower's name or a dye's. It is a term from a color list made for naturalists, which makes it unusual among the names in our archive [1][2]. Abraham Gottlob Werner, the mineralogist at Freiberg, drew up a short list of colors for describing minerals; his student Robert Jameson published an English version in 1805 [1]. In 1814 the Scottish flower painter Patrick Syme expanded the list to 108 terms, added a painted swatch for each, and in 1821 raised it to 110 [1].\n\nSyme made purple and orange principal colors, which forced renaming. Werner's *violet blue* became violet purple, and *plum blue* became plum purple [1][2]. Syme's own contribution was to fill the group with flower names such as [[pansy-purple]] and [[auricula-purple]] [2]. Next to it in his list sat [[campanula-purple]], and the whole family reads as blues taken toward red [3][2]."
+   "body": "Violet purple is not a flower's name or a dye's. It is a term from a color list made for naturalists, which makes it unusual among the names in our archive [1][2]. Abraham Gottlob Werner, the mineralogist at Freiberg, drew up a short list of colors for describing minerals; his student Robert Jameson published an English version in 1805 [1]. In 1814 the Scottish artist Patrick Syme expanded the list to 108 terms, added a painted swatch for each, and in 1821 raised it to 110 [1].\n\nSyme made purple and orange principal colors, which forced renaming. Werner's *violet blue* became violet purple, and *plum blue* became plum purple [1][2]. Near it in his list sit [[pansy-purple]], [[campanula-purple]] and [[auricula-purple]], purples with flower names [2]."
   },
   {
    "id": "swatch",
@@ -27,7 +27,7 @@
   {
    "id": "pliny",
    "title": "Not Pliny's violet purple",
-   "body": "A different \"violet purple\" appears in translations of Pliny, who quotes an older writer on shellfish dyes [6]. In that passage the violet purple cost 100 denarii a pound, then came Tarentine red, and last the Tyrian dye at more than 1,000 denarii a pound [6]. That is a murex dye fashion from the speaker's youth, and it has no connection to Syme's aster-and-amethyst swatch [6]. The two share only an English phrase [6]."
+   "body": "A different \"violet purple\" appears in translations of Pliny, who quotes an older writer on shellfish dyes [6]. In that passage the violet purple cost 100 denarii a pound, then came Tarentine red, and last the Tyrian dye that could not be bought for a thousand denarii a pound [6]. That is a murex dye fashion from the speaker's youth, and it has no connection to Syme's aster-and-amethyst swatch [6]. The two share only an English phrase [6]."
   },
   {
    "id": "field",
@@ -173,15 +173,15 @@
   "Violet Purple was invented for describing minerals and flowers, not for dyers or painters.",
   "The same two words name a dark violet in 1821 and a bright magenta-leaning purple in 1912."
  ],
- "words": 667,
+ "words": 649,
  "status": "checked",
  "checked": {
-  "by": "batch-61 writer self-check",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Short honest article: books say little beyond Baty on Syme.",
-   "Pliny's violet purple (Finlay) kept separate.",
-   "Ridgway swatch from library data, approximate."
+   "Baty calls Syme a Scottish artist, not flower painter; fixed.",
+   "Removed unsupported 'Syme's own contribution' flower-name claim.",
+   "Pliny Tyrian price matched to Finlay's wording."
   ]
  }
 }

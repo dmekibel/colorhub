@@ -8,8 +8,6 @@
 
 const LS_CLOSE = [["Twins", 2.5, "Very hard to tell apart"], ["Close", 5, "Easy to mix up"], ["Neighbors", 9, "Related, each its own"], ["Cousins", 14, "Same corner of the map"], ["Wide", 22, "A gentle tour"]];
 const LS_VIEWS = [["grid", "Grid"], ["strip", "Strip"], ["pairs", "Pairs"], ["map", "Map"], ["art", "Paintings"], ["carousel", "Carousel"]];
-const LS_INPLAY = 4;          // colors being worked on at once
-const LS_MATCH_EVERY = 6;     // a Matching round after this many single questions
 const LS_COMBO = [3, 5, 10, 15, 20, 30];
 // S.practice.ls (kept by migrateState as an unknown key; prState and this repair it, never wipe it). sets: the Study sets
 // you worked on, with where they came from: { id: { t title, src kind, r route, hs hexes, at first day, last day, climbed keys } }
@@ -91,6 +89,7 @@ function lsOpen(o = {}) {
     <label class="ls-slide" data-closerow><span class="ls-sl-t">How close</span><input type="range" min="0" max="${LS_CLOSE.length - 1}" step="1" data-closeness aria-label="How close the look-alikes are"><b class="ls-sl-v" data-closev></b></label>
     <p class="ls-closehint" data-closehint></p>
     <div class="ls-go" data-qgo><button class="ls-look" data-look>${LS_ICON.eye}<span>Look</span></button>${prPrimary("Study", "", "data-go")}</div>
+    <div class="ls-pace"><div class="pr-rail" role="radiogroup" aria-label="Pace">${LS_PACES.map(([k, t]) => `<button class="pr-chip" role="radio" data-pace="${k}">${t}</button>`).join("")}</div><p class="ls-pace-say" data-pacesay></p></div>
     <label class="ls-typing"><input type="checkbox" data-typing${ls.typing !== false ? " checked" : ""}><span>Ask me to type names near the end</span></label>
     <div class="ls-just"><span class="pr-note">Just one way</span><div class="pr-rail">${[["cards", "Flashcards"], ["quiz", "Quiz"], ["match", "Matching"], ["type", "Type it"], ["odd", "Odd one out"]].map(([m, t]) => `<button class="pr-chip" data-method="${m}">${t}</button>`).join("")}${app && typeof hmLearnIt === "function" ? `<button class="pr-chip" data-method="lesson">The full lesson</button>` : ""}</div></div>
   </div>`);
@@ -121,7 +120,10 @@ function lsOpen(o = {}) {
     const showClose = st.from === "alike";
     $s("[data-closerow]").hidden = !showClose; $s("[data-closehint]").hidden = !showClose;
     closeIn.value = st.close; $s("[data-closev]").textContent = LS_CLOSE[st.close][0]; $s("[data-closehint]").textContent = LS_CLOSE[st.close][2] + (items.length < st.size ? `. Only ${items.length} names are that far apart here.` : ".");
-    const mins = Math.max(1, Math.round(items.length * 2.6 * 5 / 60));
+    const pace = ls.pace || "you", nNew = items.filter(it => { const k = fromThese ? pick.know.get(it.key) || lsKnow(it) : lsKnow(it); return k === "none" || k === "met"; }).length;
+    sh.querySelectorAll("[data-pace]").forEach(b => { const on = b.dataset.pace === pace; b.classList.toggle("on", on); b.setAttribute("aria-checked", on); });
+    $s("[data-pacesay]").textContent = lsPaceSay(pace, nNew);
+    const mins = Math.max(1, Math.round((items.length * 2.6 * 5 + (pace === "test" ? 0 : nNew * 6)) / 60));
     $s("[data-go]").querySelector("em") ? 0 : $s("[data-go] span").insertAdjacentHTML("afterend", "<em></em>");
     $s("[data-go] em").textContent = `about ${mins} min`;
   };
@@ -135,6 +137,7 @@ function lsOpen(o = {}) {
   const setOpts = () => ({ label: label(), back: exit, reopen: again, route: typeof backTo === "string" ? backTo : "", src: lsSrcOf(o, st.from, backTo) });
   sh.addEventListener("click", e => {
     const f = e.target.closest("[data-fromk]"); if (f) { st.from = f.dataset.fromk; buzz(4); paint(); return; }
+    const pc = e.target.closest("[data-pace]"); if (pc) { ls.pace = pc.dataset.pace; save(); buzz(4); paint(); return; }
     const m = e.target.closest("[data-method]"); if (!m || !items.length) return;
     remember(); close(); buzz(8);
     if (m.dataset.method === "lesson") return hmLearnIt(app);
@@ -144,6 +147,14 @@ function lsOpen(o = {}) {
   $s("[data-go]").onclick = () => { if (!items.length) return; remember(); close(); buzz(8); lsStudy(items, setOpts()); };
   paint();
   return { sh, close };
+}
+// the line under the pace chips: what Study will do with these colors
+function lsPaceSay(pace, nNew) {
+  const meet = nNew ? `Meets the ${nNew === 1 ? "new one" : `${nNew} new ones`} first` : "Nothing new to meet";
+  if (pace === "gentle") return `${meet}, two at a time, with easy questions to start.`;
+  if (pace === "standard") return `${meet}, then a steady climb from picking to typing.`;
+  if (pace === "test") return "No looking first: straight to finding and naming.";
+  return `${meet}, then questions that keep up with you.`;
 }
 // a hex's label: one line when it fits, else two balanced lines, sized so the longest line fits the hex (about 0.9 wide)
 function lsHexLabel(name, x, y, fill) {
@@ -228,7 +239,7 @@ function lsLook(items, o = {}) {
     const pt = e.target.closest("[data-ptg]"); if (pt) { buzz(6); return void openRoute("#/painting/" + pt.dataset.ptg); }
     const t = e.target.closest("[data-i]"); if (t && items[+t.dataset.i]) { buzz(6); lsOpenPage(items[+t.dataset.i]); }
   });
-  el.querySelector("[data-test]").onclick = () => { buzz(8); lsStudy(items, o); };
+  el.querySelector("[data-test]").onclick = () => { buzz(8); lsStudy(items, { ...o, looked: true }); };
   el.querySelector("[data-close]").onclick = () => (o.back || lsExitTo(""))();
   onKey = e => { if (e.key === "Escape") el.querySelector("[data-close]").click(); };
   paint();
@@ -238,19 +249,12 @@ function lsLook(items, o = {}) {
 // ======================================================================
 // Study: the mixed session
 // ======================================================================
-function lsKindFor(q, typing, last) {
-  const lv = q.lv;
-  let opts = lv <= 0 ? ["quiz-name"] : lv === 1 ? ["quiz-color", "odd-one-out"] : typing ? ["type"] : ["card"];
-  if (lv === 1 && q.n1 % 2) opts = opts.reverse();
-  let k = opts.find(x => x !== last) || opts[0];
-  if (k === last) k = lv <= 0 ? "quiz-color" : lv === 1 ? "quiz-name" : "quiz-color";   // never the same kind twice in a row
-  return k;
-}
 // Study keeps what you did. Every color you answered joins spaced review with the same new card as a path unit or
 // Learn it (cardNew, js/learnmore.js: due tomorrow, so the first gap crosses a night's sleep), tagged with the set it
 // came from; and the set itself is kept (lsState().sets) with its source, so a review can say where a name came from.
 // A color that was already yours when the session began gets no card (a new one would read as "learning" again).
 // Climbing in one session never makes a color yours: only tomorrow's unassisted recall does (isMine, js/pickit.js).
+const lsUp = q => q.up != null ? !!q.up : q.lv >= 3;
 function lsKeep(sess, items, o, lvOf) {
   const t = today(), ls = lsState(), id = lsSetId(items), made = [];
   sess.first.forEach(f => {
@@ -261,43 +265,72 @@ function lsKeep(sess, items, o, lvOf) {
   });
   const old = ls.sets[id] || {};
   ls.sets[id] = { t: String(o.label || old.t || "").slice(0, 80), src: o.src || old.src || "set", r: o.route || old.r || "", hs: items.map(it => it.h),
-    at: old.at || t, last: t, climbed: lvOf ? [...lvOf.values()].filter(q => q.lv >= 3).map(q => q.it.key) : (old.climbed || []) };
+    at: old.at || t, last: t, climbed: lvOf ? [...lvOf.values()].filter(lsUp).map(q => q.it.key) : (old.climbed || []) };
   const ids = Object.keys(ls.sets);
   if (ids.length > LS_SETS_MAX) ids.sort((a, b) => String(ls.sets[a].last).localeCompare(String(ls.sets[b].last))).slice(0, ids.length - LS_SETS_MAX).forEach(k => { delete ls.sets[k]; });
   save();
   return made;
 }
-// Each color's rung (0 pick a name · 1 pick a color · 2 type · 3 climbed). A color already yours starts a rung up
-// (y: it gets no new card). resume: Map(key -> rung) from a stopped session, so "Keep going" picks each one up there.
-function lsLevels(items, resume) {
-  return new Map(items.map(it => { const y = lsKnow(it) === "yours", r = resume && resume.get(it.key); return [it.key, { it, y, lv: r != null ? Math.max(0, Math.min(3, +r || 0)) : y ? 1 : 0, n1: 0 }]; }));
+// The plan for one session (js/studypace.js): each color's rung from what you know (new 0 · learning 1 · yours 3,
+// straight to recall), the pace you chose, your past mix-ups inside the set. y: yours already (it gets no new card).
+// resume: Map(key -> rung) from a stopped session, so "Keep going" picks each one up there.
+const LS_PACES = [["you", "For you"], ["gentle", "Gentle"], ["standard", "Standard"], ["test", "Test me"]];
+function lsPlan(items, o = {}, resume = null) {
+  const know = new Map(items.map(it => [it.key, lsKnow(it)])), keys = new Set(items.map(it => it.key));
+  let mix = [];
+  try { if (typeof confusions === "function") mix = confusions(null, 40).map(p => [String(p.a || "").toLowerCase(), String(p.b || "").toLowerCase()]).filter(([a, b]) => keys.has(a) && keys.has(b)).slice(0, 3); } catch (e) {}
+  const P = spNew(items, { know, pace: o.pace || "you", typing: o.typing, quick: o.quick, looked: o.looked, mix, resume, de: de2000 });
+  P.qs.forEach(q => { q.y = q.k === "yours"; });
+  return P;
+}
+function lsLevels(items, resume, o = {}) { return lsPlan(items, o, resume).qs; }
+// A Meet card: the color big, its name, and how it differs from its nearest neighbor in the set. Learning, not a test.
+function lsMeetHTML(it, nb, o = {}) {
+  const dark = ink(it.h) === "dark" ? "#141311" : "#fff", nm = prName(it);
+  return `<div class="pr-step ls-meet${o.again ? " again" : ""}">
+    <div class="ls-meet-sw" style="--c:${it.h};color:${dark}">
+      <span class="ls-meet-tag">${o.again ? "Look again" : o.tag || "New"}</span>
+      <span class="ls-meet-name"><button class="ls-meet-n" data-swatch="${it.h}" style="${prFit(nm, 56)}">${esc(nm)}</button><span class="pr-code">${it.h}</span></span>
+    </div>
+    ${nb ? `<p class="ls-meet-line"><span class="pr-pair"><i style="--c:${it.h}"></i><i style="--c:${nb.h}"></i></span><span>${esc(prDiff(it, nb))}</span></p>` : `<p class="ls-meet-line"></p>`}
+    <div class="pr-foot">${prPrimary(o.label || "Next", "", "data-meetnext")}</div></div>`;
+}
+function lsPairHTML(a, b, why) {
+  const half = x => `<div class="ls-mp-half" style="--c:${x.h}" data-ink="${ink(x.h)}"><button class="ls-meet-n" data-swatch="${x.h}" style="${prFit(prName(x), 30)}">${esc(prName(x))}</button><span class="pr-code">${x.h}</span></div>`;
+  return `<div class="pr-step ls-meet ls-mpair">
+    <p class="ls-mp-t">${why === "mixup" ? "You've mixed these up before" : "The closest two"}</p>
+    <div class="ls-mp">${half(a)}${half(b)}</div>
+    <p class="ls-meet-line"><span>${esc(prDiff(a, b))}</span></p>
+    <div class="pr-foot">${prPrimary("Next", "", "data-meetnext")}</div></div>`;
 }
 function lsStudy(items, o = {}, resume = null) {
   if (!items.length) return;
-  const ls = lsState(), typing = ls.typing !== false, n = items.length;
+  const ls = lsState(), n = items.length;
   const sess = prSession("learn", { dir: "f" }, items, { deckAll: items, label: o.label || "" });
-  const lvOf = lsLevels(items, resume);
-  const fresh = items.filter(it => lvOf.get(it.key).lv < 3), queue = [];
-  let asked = 0, sinceMatch = 0, combo = 0, bestCombo = 0, lastKind = "", climbed = n - fresh.length, boss = null, stopped = false;
+  const P = lsPlan(items, { pace: o.pace || ls.pace || "you", typing: ls.typing !== false, quick: o.quick, looked: o.looked }, resume), lvOf = P.qs;
+  let combo = 0, bestCombo = 0, climbed = [...lvOf.values()].filter(lsUp).length, boss = null, meeting = null, aside = 0;
   const keep = () => lsKeep(sess, items, o, lvOf);
   // screenshot states (#lsshot=study:…): start mid-session
-  if (o.shot === "match") { lvOf.forEach(q => { q.lv = 1; }); sinceMatch = LS_MATCH_EVERY; fresh.length = 0; items.forEach(it => queue.push(lvOf.get(it.key))); }
-  if (o.shot === "boss") { lvOf.forEach(q => { q.lv = 3; }); climbed = n; fresh.length = 0; }
-  if (o.shot === "grad") { combo = 4; bestCombo = 4; const q = lvOf.get(items[0].key); q.lv = 2; fresh.splice(fresh.indexOf(items[0]), 1); queue.push(q); lvOf.forEach(x => { if (x !== q && x.lv === 0 && Math.random() < .5) x.lv = 1; }); }
+  if (o.shot === "match") { lvOf.forEach(q => { q.lv = 1; q.met = true; }); P.newQ.length = 0; P.wave = []; P.fresh = [...lvOf.values()]; P.sinceMatch = 6; }
+  if (o.shot === "boss") { lvOf.forEach(q => { q.lv = P.top; q.up = true; }); climbed = n; P.newQ.length = 0; P.fresh.length = 0; }
+  if (o.shot === "grad") { combo = 4; bestCombo = 4; lvOf.forEach(q => { q.met = true; q.lv = 1; }); P.newQ.length = 0; P.wave = []; const q = lvOf.get(items[0].key); q.lv = P.top - 1; P.fresh = [q, ...[...lvOf.values()].filter(x => x !== q)]; }
+  if (o.shot === "ask" || o.shot === "wrong") { lvOf.forEach(q => { q.met = true; }); P.fresh = [...P.newQ, ...P.fresh]; P.newQ.length = 0; }
   const el = show(`<header class="pr-top"><button class="pr-x" data-close aria-label="Close">${prX()}</button>
       <div class="ls-prog">${items.map(it => `<i data-k="${esc(it.key)}" style="--c:${it.h}"></i>`).join("")}</div>
-      <span class="ls-combo" data-combo aria-live="polite"><b>0</b><span>in a row</span></span></header>
+      <span class="ls-combo" data-combo aria-live="polite"><b>0</b><span>in a row</span></span>${o.adjust ? `<button class="pr-text ls-adjust" data-adjust>Adjust</button>` : ""}</header>
     <p class="ls-status"><span data-status></span><span class="ls-pop" data-pop></span></p>
-    <p class="pr-coach"${prState().seen.learnset ? " hidden" : ""}>Each color climbs from picking to typing. Misses come back.</p>
+    <p class="pr-coach"${prState().seen.learnset ? " hidden" : ""}>Meet each color first. Then each one climbs from picking to typing.</p>
     <div class="pr-stage"></div><div class="ls-grad" data-grad></div>`, "fixed pr-play pr-booth pr-m-learn ls-study");
   const stage = el.querySelector(".pr-stage"), comboEl = el.querySelector("[data-combo]");
   let stepKey = null;
   const setKey = fn => { stepKey = fn; };
   onKey = e => { if (e.key === "Escape") return el.querySelector("[data-close]").click(); if (stepKey) stepKey(e); };
   const status = () => {
-    const met = [...lvOf.values()].filter(q => q.lv > 0 && q.lv < 3).length;
-    el.querySelector("[data-status]").innerHTML = boss ? `Final round` : `<span class="pr-code">${climbed}</span> of <span class="pr-code">${n}</span> climbed${met ? ` · <span class="pr-code">${met}</span> getting there` : ""}`;
-    lvOf.forEach((q, k) => { const s = el.querySelector(`.ls-prog i[data-k="${CSS.escape(k)}"]`); if (s) s.style.setProperty("--lv", Math.min(3, q.lv) / 3); s && s.classList.toggle("done", q.lv >= 3); });
+    const met = [...lvOf.values()].filter(q => !lsUp(q) && !q.out && q.met && q.lv > 0).length;
+    el.querySelector("[data-status]").innerHTML = boss ? `Final round`
+      : meeting ? `Meet · <span class="pr-code">${meeting.i}</span> of <span class="pr-code">${meeting.of}</span>`
+      : `<span class="pr-code">${climbed}</span> of <span class="pr-code">${n}</span> climbed${met ? ` · <span class="pr-code">${met}</span> getting there` : ""}${aside ? ` · <span class="pr-code">${aside}</span> for tomorrow` : ""}`;
+    lvOf.forEach((q, k) => { const s = el.querySelector(`.ls-prog i[data-k="${CSS.escape(k)}"]`); if (!s) return; s.style.setProperty("--lv", Math.min(P.top, q.lv) / P.top); s.classList.toggle("done", lsUp(q)); s.classList.toggle("aside", !!q.out); });
   };
   const pop = (txt, cls = "") => { const p = el.querySelector("[data-pop]"); p.className = "ls-pop " + cls; p.textContent = txt; void p.offsetWidth; p.classList.add("go"); };
   const bump = ok => {
@@ -314,54 +347,88 @@ function lsStudy(items, o = {}, resume = null) {
     g.innerHTML = `<span class="ls-gchip"><i style="--c:${it.h}"></i><b>${esc(prName(it))}</b><span>climbed</span></span>`;
     g.classList.remove("go"); void g.offsetWidth; g.classList.add("go");
   };
-  const climb = (q, ok) => {
-    if (ok) { const was = q.lv; q.lv = Math.min(3, q.lv + 1); if (q.lv === 1) q.n1++; if (q.lv === 3 && was < 3) graduate(q.it); }
-    else q.lv = Math.max(0, q.lv - 1);
-  };
-  const next = () => {
-    while (queue.length < LS_INPLAY && fresh.length) queue.push(lvOf.get(fresh.shift().key));
-    return queue.shift() || null;
+  const answer = (q, ok) => {
+    const r = spAnswer(P, q, ok);
+    if (r.up) graduate(q.it);
+    if (r.out) { aside++; pop(`${prName(q.it)} comes back tomorrow`, "round"); }
+    return r;
   };
   el._lsFx = { bump, graduate };   // screenshot hook
   const ctx = extra => ({ deck: items, feedback: true, setKey, screen: el, ...extra });
-  el.querySelector("[data-close]").onclick = () => { stopped = true; sess.ended = true; if (sess.first.size) lsResults(sess, { items, o, stopped: true, bestCombo, climbed, lvOf }); else (o.back || lsExitTo(""))(); };
+  el.querySelector("[data-close]").onclick = () => { sess.ended = true; if (sess.first.size) lsResults(sess, { items, o, stopped: true, bestCombo, climbed, lvOf }); else (o.back || lsExitTo(""))(); };
+  { const adj = el.querySelector("[data-adjust]"); if (adj) adj.onclick = () => { sess.ended = true; el.remove(); o.adjust(); }; }
   const coachDone = () => { const c = el.querySelector(".pr-coach"); if (c && !c.hidden) { c.hidden = true; const p = prState(); p.seen.learnset = today(); save(); } };
+  // the nearest other color in the set (for a Meet card's one line)
+  const nearestIn = it => { let b = null, bd = Infinity; items.forEach(x => { if (x !== it) { const d = de2000(it.h, x.h); if (d < bd) { bd = d; b = x; } } }); return b; };
+  // a Meet / pair card: waits for Next (button, Enter, Space, →), one beat so a fast double tap can't skip it unseen
+  const card = html => new Promise(resolve => {
+    stage.innerHTML = html;
+    const b = stage.querySelector("[data-meetnext]");
+    let gone = false, live = false;
+    const go = () => { if (gone) return; gone = true; buzz(6); resolve(); };
+    // the button takes taps after a beat: the second tap of a quick double tap is dropped, not spent on this card
+    later(() => { if (!b.isConnected) return; live = true; prNextBtn(b.parentElement, go, b.querySelector("span").textContent).setAttribute("data-meetnext", ""); }, 280);
+    setKey(e => { if (live && ["Enter", " ", "ArrowRight"].includes(e.key)) { e.preventDefault(); go(); } });
+  });
+  // options for an early rung: three far apart in the same family (spFar), so the first questions are winnable
+  const farOpts = (it, k) => { const w = spFar(it, k, prUnique([...items, ...prCore().filter(x => x.rank <= 600)]), de2000, prFam9); return w.length >= k ? w : null; };
   (async () => {
     status();
     while (!sess.ended) {
-      // a Matching round now and then, with the colors in play
-      const inPlay = [...lvOf.values()].filter(q => q.lv >= 1 && q.lv < 3);
-      if (sinceMatch >= LS_MATCH_EVERY && inPlay.length >= 3) {
-        sinceMatch = 0;
-        const set = prShuffle(inPlay).slice(0, 5);
+      let a;
+      try { a = spNext(P); } catch (err) { console.error("Study pacer failed", err); a = null; }
+      if (!a) break;
+      if (a.t === "meet" || a.t === "relook") {
+        const it = a.q.it;
+        meeting = a.t === "meet" ? { i: a.i, of: a.of } : null; status();
+        if (a.t === "meet" && a.i === 1 && a.wave > 0) pop(a.of === 1 ? "One more to meet" : `${a.of} more to meet`, "round");
+        lsSfx("sfxColor", it.h);
+        await card(lsMeetHTML(it, a.t === "relook" && a.q.pick && a.q.pick.h !== it.h ? a.q.pick : nearestIn(it), { again: a.t === "relook", label: a.t === "relook" ? "Got it" : a.i === a.of ? "Start" : "Next" }));
+        if (sess.ended || !stage.isConnected) return;
+        coachDone(); meeting = null;
+        continue;
+      }
+      if (a.t === "pair") {
+        meeting = null; status();
+        await card(lsPairHTML(a.a.it, a.b.it, a.why));
+        if (sess.ended || !stage.isConnected) return;
+        continue;
+      }
+      if (a.t === "match") {
+        const set = prShuffle(a.qs);
         pop("Matching round", "round"); buzz(8); lsSfx("sfx", "rooms", 4);
         const res = await PR_STEPS.match.render(stage, set.map(q => q.it), ctx({ note: "Pair each name with its color" }));
         if (sess.ended || !stage.isConnected) return;
-        (res.per || []).forEach(p => { const q = lvOf.get(p.item.key); prRecord(sess, p.item, { ok: p.ok, answer: p.answer, ms: res.ms / set.length }, "match"); climb(q, p.ok); if (!p.ok) { const i = queue.indexOf(q); if (i > 1) { queue.splice(i, 1); queue.splice(1, 0, q); } } });
-        keep(); bump(res.ok); lastKind = "match"; status(); coachDone();
+        (res.per || []).forEach(p => { const q = lvOf.get(p.item.key); try { prRecord(sess, p.item, { ok: p.ok, answer: p.answer, ms: res.ms / set.length }, "match"); } catch (err) { console.error(err); } answer(q, p.ok); });
+        try { keep(); } catch (err) { console.error("Study keep failed", err); }
+        bump(res.ok); status(); coachDone();
         continue;
       }
-      const q = next();
-      if (!q) break;
-      const kind = lsKindFor(q, typing, lastKind);
+      const q = a.q, kind = a.kind;
       stage._lsIt = q.it;   // test hook
-      const res = await PR_STEPS[kind].render(stage, q.it, ctx({ dir: kind === "quiz-color" ? "r" : "f" }));
+      const wrong = a.far ? farOpts(q.it, kind === "quiz-color" ? 3 : a.opts) : null;
+      // a step that throws, or bookkeeping that throws, must never leave the screen frozen on Next: log it, move on
+      let res;
+      try { res = await PR_STEPS[kind].render(stage, q.it, ctx({ dir: kind === "quiz-color" ? "r" : "f", wrong })); }
+      catch (err) { console.error("Study step failed", kind, err); res = await PR_STEPS["quiz-name"].render(stage, q.it, ctx({})); }
       if (sess.ended || !stage.isConnected) return;
-      prRecord(sess, q.it, res, kind);
-      asked++; sinceMatch++; lastKind = kind; coachDone();
-      climb(q, !!res.ok); keep(); bump(!!res.ok);
-      if (q.lv < 3) queue.splice(res.ok ? Math.min(queue.length, 2 + q.lv) : Math.min(1, queue.length), 0, q);
-      status();
+      try { prRecord(sess, q.it, res, kind); } catch (err) { console.error("Study record failed", err); }
+      coachDone();
+      if (!res.ok && res.answer && res.answer.h && res.answer.h !== q.it.h) { try { q.pick = prItemOf(res.answer.h); } catch (err) {} }   // a re-Look compares it with what you picked
+      answer(q, !!res.ok);
+      try { keep(); } catch (err) { console.error("Study keep failed", err); }
+      bump(!!res.ok); status();
     }
     if (sess.ended) return;
-    // the boss: a lightning Matching round of everything
+    // the boss: a lightning Matching round of everything climbed (not for a quick session, or one set mostly aside)
     let bossMs = null;
-    if (n >= 3) {
+    const won = items.filter(it => lsUp(lvOf.get(it.key)));
+    if (won.length >= 3 && !o.quick) {
       boss = true; status(); coachDone();
-      const set = prShuffle(items).slice(0, 6);
-      stage.innerHTML = `<div class="ls-boss"><div class="ls-fan">${set.map((it, k) => `<i style="--c:${it.h};--k:${k}"></i>`).join("")}</div><span class="pr-note">Every color climbed</span><b class="pr-t1">Final round</b><p class="pr-notep">Lightning match: pair all ${set.length} as fast as you can.</p>${prPrimary("Go", "", "data-boss")}</div>`;
+      const set = prShuffle(won).slice(0, 6);
+      stage.innerHTML = `<div class="ls-boss"><div class="ls-fan">${set.map((it, k) => `<i style="--c:${it.h};--k:${k}"></i>`).join("")}</div><span class="pr-note">${won.length === n ? "Every color climbed" : `${won.length} colors climbed`}</span><b class="pr-t1">Final round</b><p class="pr-notep">Lightning match: pair all ${set.length} as fast as you can.</p><div class="ls-boss-go"></div></div>`;
       buzz([10, 40, 10, 40, 20]); lsSfx("sfxChord", set.map(it => it.h));
-      await new Promise(r => { const b = stage.querySelector("[data-boss]"); b.onclick = r; setKey(e => { if (e.key === "Enter") r(); }); });
+      await new Promise(r => { prNextBtn(stage.querySelector(".ls-boss-go"), r, "Go").setAttribute("data-boss", ""); setKey(e => { if (e.key === "Enter") r(); }); });
       if (sess.ended) return;
       const clock = el.querySelector("[data-status]"); let pen = 0; const t0 = performance.now();
       const tick = setInterval(() => { if (!clock.isConnected) return clearInterval(tick); clock.innerHTML = `<span class="pr-code">${((performance.now() - t0) / 1000 + pen).toFixed(1)} s</span>${pen ? ` · <span class="pr-code">+${pen}</span>` : ""}`; }, 100);
@@ -372,7 +439,7 @@ function lsStudy(items, o = {}, resume = null) {
       bossMs = performance.now() - t0 + pen * 1000;
       lsSfx("sfx", "levelup", set.map(it => it.h));
     }
-    lsResults(sess, { items, o, bestCombo, climbed, lvOf, bossMs });
+    lsResults(sess, { items, o, bestCombo, climbed, lvOf, bossMs, aside });
   })();
   return el;
 }
@@ -386,7 +453,7 @@ function lsResults(sess, r) {
   const pct = total ? Math.round(right * 100 / total) : 0, ms = performance.now() - sess.t0, ls = lsState(), key = lsSetKey(items);
   let best = null, newBest = false;
   if (r.bossMs != null) { const old = ls.best[key]; newBest = !old || r.bossMs < old.v; if (newBest) ls.best[key] = { v: r.bossMs, at: today() }; best = old ? old.v : null; save(); }
-  const climbedList = [...r.lvOf.values()].filter(q => q.lv >= 3).map(q => q.it);
+  const climbedList = [...r.lvOf.values()].filter(lsUp).map(q => q.it);
   // everything answered is in spaced review now (lsKeep); the ring on each climbed color fills only when it's yours,
   // which takes a check a day or more later (isMine, js/pickit.js), never this session
   lsKeep(sess, items, o, r.lvOf);
@@ -460,7 +527,7 @@ function lsShot(arg) {
     const sess = prSession("learn", { dir: "f" }, items, { deckAll: items });
     items.forEach((it, i) => { const nb = items[(i + 1) % items.length], ok = i % 3 !== 1; const r = { ok, answer: ok ? null : { kind: "pick", n: prName(nb), h: nb.h } }; sess.first.set(it.key, { it, ...r, kind: "quiz-name" }); sess.log.push({ it, kind: "quiz-name", ...r }); });
     sess.t0 = performance.now() - 192000;
-    const lvOf = new Map(items.map(it => [it.key, { it, lv: 3 }]));
+    const lvOf = new Map(items.map(it => [it.key, { it, lv: 4, up: true }]));
     return lsResults(sess, { items, o: { label }, bestCombo: 9, climbed: items.length, lvOf, bossMs: 8400 });
   }
 }

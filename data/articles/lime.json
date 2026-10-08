@@ -7,17 +7,17 @@
  ],
  "tier": "nature",
  "depth": "long",
- "lede": "Lime is the yellowish green of the lime fruit, and the same word names the white caustic mineral that coated walls, set fresco and sat in dye vats for thousands of years.",
+ "lede": "Lime is the yellowish green of the lime fruit, and the same word names the white caustic mineral that coated walls, set fresco and sat in dye vats for centuries.",
  "sections": [
   {
    "id": "name",
    "title": "A fruit and a mineral",
-   "body": "Lime is two words that look alike. As a color it is the green or yellowish green of the lime fruit [1]. St Clair adds that the shade has drifted from the fruit and is now usually much more luminous, even neon [2]. As a material it is something else entirely: calcium oxide, the white caustic powder made by burning limestone, which painters, plasterers and dyers used for thousands of years [3][4].\n\nThe two meanings meet in the color words. Paterson lists lime for the fruit color, lime white for the color of calcium oxide, and lime green for a pale or greenish-yellow green, with lime yellow and lime blue beside them [1]. Our library dates lime green as a color name in English to about 1883, an approximate date from the name's first appearances [13]. The books do not say who used the word first."
+   "body": "Lime is two words that look alike. As a color it is the green or yellowish green of the lime fruit [1]. St Clair adds that the shade has drifted from the fruit and is now usually much more luminous, even neon [2]. As a material it is something else entirely: calcium oxide, the white caustic powder made by burning limestone, which painters, plasterers and dyers have long used [3][4].\n\nThe two meanings meet in the color words. Paterson lists lime for the fruit color, lime white for the color of calcium oxide, and lime green for a pale or greenish-yellow green, with lime yellow and lime blue beside them [1]. Our library dates lime green as a color name in English to about 1883, an approximate date from the name's first appearances [13]. The books do not say who used the word first."
   },
   {
    "id": "mineral",
    "title": "Lime the mineral",
-   "body": "Strictly speaking, lime is calcium oxide, made by heating limestone to about 900 degrees Celsius until the calcium carbonate gives up its carbon dioxide [3]. Add water and it slakes into calcium hydroxide, the putty used in mortar and the limewash painted on walls [3]. As the paint dries it takes carbon dioxide back from the air and turns again into calcium carbonate, a slow process that can take years to finish [3]. The Latin word for lime, *calx*, is the root of calcium, calcite and calcination [3].\n\nThat is why lime white is the oldest of wall colors. In fresco the plaster is made of sand and lime, and the pigments are brushed onto it while it is still wet, so that the lime binds the sand and slowly turns to chalky calcium carbonate over the color [5]. Paterson defines lime-resisting colors as those that do not react to alkali and so can be applied to fresh plaster [1]. Cennino Cennini, Ball notes, describes a sky blue made by mixing Baghdad indigo with white lead or with lime white [6].\n\nLime white has a plain virtue and a plain fault. Finlay reports that chalks and limes did not alter with time, and unlike lead white they were safe to use with orpiment, but they look thin and transparent in oil [7]. The cheaper lime whites also had to be repainted every year [7]."
+   "body": "Strictly speaking, lime is calcium oxide, made by heating limestone to about 900 degrees Celsius until the calcium carbonate gives up its carbon dioxide [3]. Add water and it slakes into calcium hydroxide, the putty used in mortar and the limewash painted on walls [3]. As the paint dries it takes carbon dioxide back from the air and turns again into calcium carbonate, a slow process that can take years to finish [3]. The Latin word for lime, *calx*, is the root of calcium, calcite and calcination [3].\n\nIn fresco the plaster is made of sand and lime, and the pigments are brushed onto it while it is still wet, so that the lime binds the sand and slowly turns to chalky calcium carbonate over the color [5]. Paterson defines lime-resisting colors as those that do not react to alkali and so can be applied to fresh plaster [1]. Cennino Cennini, Ball notes, describes a sky blue made by mixing Baghdad indigo with white lead or with lime white [6].\n\nLime white has a plain virtue and a plain fault. Finlay reports that chalks and limes did not alter with time, and unlike lead white they were safe to use with orpiment, but they look thin and transparent in oil [7]. The cheaper lime whites also had to be repainted every year [7]."
   },
   {
    "id": "whitewash",
@@ -270,10 +270,10 @@
   "The web's lime is pure green; the fruit's lime is yellower.",
   "A sea-snail's stain goes fluorescent lime green, then yellow, then purple, in a few minutes of sun."
  ],
- "words": 1105,
+ "words": 1090,
  "status": "checked",
  "checked": {
-  "by": "Sonnet 5.5 batch 12 (sentence-to-card trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
    "Etymology of the fruit word is not in the books; not stated.",
@@ -281,7 +281,8 @@
    "Pigment Compendium pages are PDF pages 252-253.",
    "Gage page 247 is the concordance page number; limelight 'about 1820'.",
    "Lime-green date 1883 is approximate (library note).",
-   "Archive count of 0 uses the 1% / CIEDE2000 4 lens of the graph fieldnotes; article_field.py could not run on a zero-hit color."
+   "Archive count of 0 uses the 1% / CIEDE2000 4 lens of the graph fieldnotes; article_field.py could not run on a zero-hit color.",
+   "Removed unsupported 'oldest of wall colors'; softened 'thousands of years' to 'long used'."
   ]
  }
 }

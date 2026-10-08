@@ -141,6 +141,19 @@
 .cs-hl-pill.cs-hl-bar{display:block;left:16px;right:16px;transform:none;max-width:420px;margin:0 auto;min-height:0;padding:8px 8px 10px;border-radius:24px;font:inherit;
   animation:csHlIn .32s var(--ease,ease-out) both}
 @keyframes csHlIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+/* How many: a slider over the set's measured pool, then each lit color by name with its share of the canvas */
+.cs-hl-n{margin:4px 4px 0}
+.cs-hl-nl{display:flex;align-items:center;gap:10px;min-height:40px}
+.cs-hl-nl span{flex:none;font:400 15px/1 var(--sans);opacity:.72}
+.cs-hl-nl input{flex:1;min-width:0;height:32px;accent-color:var(--paper-ink);touch-action:pan-x}
+.cs-hl-nl b{flex:none;min-width:2ch;text-align:right;font:400 20px/1 var(--serif);font-variant-numeric:tabular-nums}
+.cs-hl-cols{display:flex;gap:6px;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;padding:4px 0 2px;margin:0 -4px;padding-inline:4px}
+.cs-hl-cols::-webkit-scrollbar{display:none}
+.cs-hl-c{flex:none;display:flex;align-items:center;gap:7px;min-height:36px;padding:0 12px 0 6px;border-radius:var(--r-pill,999px);box-shadow:inset 0 0 0 1px rgba(20,19,17,.18);color:inherit}
+.cs-hl-c i{width:24px;height:24px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(20,19,17,.15)}
+.cs-hl-c span{font:400 15px/1 var(--serif);white-space:nowrap}
+.cs-hl-c em{font:400 13px/1 var(--sans);font-style:normal;opacity:.62;font-variant-numeric:tabular-nums}
+.cs-hl-c:active{transform:scale(.96)}
 .cs-hl-head{display:flex;align-items:center;gap:8px;min-height:48px}
 .cs-hl-bar .cs-hl-back{flex:none;width:40px;height:44px;margin:0 -6px 0 -2px;padding:0;min-width:0;display:grid;place-items:center;font:400 32px/1 var(--serif);color:inherit;border-radius:50%}
 .cs-hl-th{flex:none;width:44px;height:44px;border-radius:10px;overflow:hidden;background:rgba(0,0,0,.08)}
@@ -223,7 +236,7 @@
 .hm-clear{display:block;margin:14px 0 0;min-height:44px;padding:0 18px;border-radius:var(--r-pill);background:var(--surface-2);font:400 16px/1 var(--sans);color:var(--ink)}
 .hm-clear[hidden]{display:none}
 /* Look: three chips, then the feel sliders on one line each, words at both ends (no numbers) */
-.hm-sheet-panel .hm-look-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;overflow:visible;padding-top:12px}
+.hm-sheet-panel .hm-look-row{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;overflow:visible;padding-top:12px}
 .hm-sheet-panel .hm-look-chip{width:auto;min-height:74px;justify-content:center;gap:6px;padding:10px 6px;border-radius:var(--r-2);background:var(--surface-2);border:0}
 .hm-sheet-panel .hm-look-chip b{font:400 16px/1.1 var(--serif);color:var(--soft)}
 .hm-sheet-panel .hm-look-chip .hm-look-ic{width:32px;height:32px}
@@ -241,6 +254,13 @@
 @media (max-width:360px){.hm-fam b{font-size:16px}.hm-seg-n button{font-size:14.5px}.hm-arr-b{width:68px}.hm-arr-pic,.hm-arr-pic canvas{width:64px;height:64px}.hm-feel-row{grid-template-columns:80px 1fr}}
 /* Arrange: one focused sheet, no taller than its content (the map keeps most of the screen) */
 .sheet.hm-sheet-panel.hm-sheet-arrange{height:auto}
+/* Center on / Sort by: one compact row of small chips under the shapes */
+.hm-ord{align-items:center;padding:10px 0 2px}
+.hm-ord[hidden]{display:none}
+.hm-ord-l{flex:none;font:400 14px/1 var(--sans);color:var(--soft);padding-right:2px}
+.hm-ord .hm-rung{min-width:0;min-height:40px;flex-direction:row;align-items:center;gap:7px;padding:0 14px;border-radius:var(--r-pill)}
+.hm-ord .hm-rung b{font-size:16px;white-space:nowrap}
+.hm-ord-dot{flex:none;width:14px;height:14px;border-radius:50%;box-shadow:0 0 0 1px rgba(236,232,223,.25)}
 .hm-sheet-arrange .hm-arr{margin:0 -16px;padding-top:4px}
 .hm-sheet-arrange .hm-arr-sub{padding:0;margin-top:2px}
 
@@ -261,6 +281,9 @@
 /* a quiet caption at the edges for an arrangement whose direction means something (Warm and cool) */
 .hm-axes{position:absolute;inset:0;pointer-events:none;z-index:2;transition:opacity .4s var(--ease)}
 .hm.chrome-hide .hm-axes{opacity:0}
-.hm-ax{position:absolute;top:50%;padding:5px 10px;border-radius:var(--r-pill);background:rgba(14,13,11,.72);font:italic 400 14px/1 var(--serif);color:var(--soft)}
+.hm-ax{position:absolute;top:50%;padding:5px 10px;border-radius:var(--r-pill);background:var(--surface-2);font:italic 400 14px/1 var(--serif);color:var(--soft);transition:opacity .6s var(--ease)}
+/* a radial shape's one line (what the middle and the edge mean), at the top for a few seconds */
+.hm-ax-t{top:calc(env(safe-area-inset-top,0px) + 18px);left:50%;transform:translateX(-50%);max-width:calc(100% - 32px);padding:7px 14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:15px}
+.hm-ax.gone{opacity:0}
 .hm-ax-l{left:8px;transform:translateY(-50%)}
 .hm-ax-r{right:8px;transform:translateY(-50%)}

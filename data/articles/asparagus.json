@@ -1,0 +1,218 @@
+{
+ "slug": "asparagus",
+ "name": "Asparagus",
+ "hex": "#77AB56",
+ "names": [
+  "Asparagus"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Asparagus is a mid-light yellowish green named for the vegetable, and as a color word it is older than most people expect: it sits at number 58 in Werner's list of mineral colors as Syme published it in Britain.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A vegetable's name",
+   "body": "Paterson's dictionary defines *asparagus* simply as the green of the vegetable, also written *asparagus-green* [1]. St Clair's glossary of other interesting colors describes it as a toned-down spring green [2]. Maerz and Paul's dictionary of color gives 1805 as the first recorded use of the name, which makes it a nineteenth-century word, not a modern food-court one [3]."
+  },
+  {
+   "id": "werner",
+   "title": "Number 58 in Werner's list",
+   "body": "The mineralogist Abraham Gottlob Werner's list of colors, made for describing minerals and published in Britain by Patrick Syme, gives asparagus green the number 58 among the greens [4]. Syme defined it as pistachio green mixed with much greyish white [4]. In the same list [[pistachio]] is emerald green with a little lemon yellow and some brown, [[sap-green]] is emerald with much saffron yellow, and [[olive-green]] is grass green with much brown [4].\n\nSyme's list gave each color three examples, one from the animal, vegetable and mineral kingdoms. For asparagus green they are the brimstone butterfly, the leaves of a variegated horseshoe geranium, and beryl [4]. Beryl is the mineral family that includes [[gem:emerald|emerald]] [4]. A modern edition illustrates them with a butterfly plate from 1782, a flower plate from 1857 and a mineral plate from 1916 [4].\n\nThe name was not Syme's alone [5]. It appears in the 108-color list of Syme's 1814 edition and in the 80-color list printed by the American mineralogist Parker Cleaveland in 1816, which Baty says is almost identical to the one in Jameson's 1805 book, itself based on Werner [5][6]."
+  },
+  {
+   "id": "swatch",
+   "title": "Which asparagus",
+   "body": "The swatch on this page, #77AB56, is the color that web surveys settled on in 2010: a moderate yellow green, block 120 in the ISCC-NBS system [7]. It is not Werner's [4][7]. The library's *Asparagus Green*, drawn from Werner, Maerz and Paul and Ridgway, is a pale greyish yellow-green, #C2C190, about 31 units of Lab distance away from this swatch [7]. Both are called asparagus, but one is a paint-box green and the other is the washed, greyed green that Syme described in words [4][7]. The aged chart swatch may have faded, so treat the older number as approximate [7]. The older color has its own page, [[asparagus-green]]."
+  },
+  {
+   "id": "sap-green",
+   "title": "Asparagus and sap green",
+   "body": "The vegetable shows up in pigment history by an odd route. Sap green, a paint made from plant juice, is colored almost entirely by chlorophyll, according to Mills and White, so it could be made from many leaves and berries [8]. An early seventeenth-century Portuguese treatise by Nunes names asparagus seeds among the possible sources, which the Pigment Compendium cites as an example of that variety [8]. It is a single mention, and the book does not say that anyone made a lasting paint this way [8]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 museum paintings, 13 contain this green as at least five per cent of the canvas, within a ΔE of 6 [9]. These are photographs of aged, varnished paintings, so a match is a screen reading and not a pigment test [9]. The largest cover is a portrait of Emperor Jahangir dated 1795 in the museum record, where it fills 51 per cent [9]. Next come Matisse's [[painting:commons-Q21723020|Nymph and Satyr]] of 1908 and Morisot's [[painting:nga-52194|Girl in a Boat with Geese]] of 1889, each around 32 per cent [9].\n\nThe color is almost absent before 1800 and then turns up in the nineteenth century: 7 of 8,345 paintings from the 1800s, and 4 of 1,674 from the 1900s, about four times the average rate [9]. Two of the 168 Mughal paintings hold it, a lift of about 22 times, and one of 140 Impressionist paintings does too [9]. Van Gogh's [[painting:nga-163323|Green Wheat Fields, Auvers]] of 1890 reaches 16 per cent [9]. When it appears it is a lit color, with 62 per cent of its pixels in the highlight band [9].\n\nGoogle Books shows *asparagus* peaking around 1931, but the word is overwhelmingly the vegetable, so that curve says little about the color [10]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the vegetable",
+   "first_recorded": "1805 (Maerz & Paul); Werner/Syme no. 58",
+   "source": "Baty, Nature's Palette; Maerz & Paul 1930"
+  },
+  "aka": [
+   "asparagus green"
+  ],
+  "siblings": [
+   "asparagus-green",
+   "pistachio",
+   "fern"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "asparagus-green",
+    "gloss": "Werner's and Ridgway's pale greyish green, far from this swatch"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#77AB56",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 13,
+  "top_paintings": [
+   "aic-62243",
+   "commons-Q21723020",
+   "nga-52194",
+   "nga-163323"
+  ],
+  "role": {
+   "mid": 0.38,
+   "highlight": 0.62
+  },
+  "ngram": {
+   "word": "asparagus",
+   "peak": 1931
+  },
+  "measured": {
+   "lch": [
+    64.7,
+    50.2,
+    130.6
+   ],
+   "contrast_white": 2.71,
+   "contrast_black": 7.74,
+   "nearest": [
+    [
+     "Pistachio",
+     7.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"asparagus\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, glossary, p. 125",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub library: Maerz & Paul 1930, first recorded 1805, entry Asparagus Green",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty (ed.), Nature's Palette: A Colour Reference System from the Natural World (Syme's Werner), no. 58, p. 157",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 32-34 (chart of nomenclatures, Werner to Syme)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, introduction (Cleaveland, 1816; Jameson, 1805)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub library: xkcd 2010; ISCC-NBS 1955 blocks 119-121; Ridgway 1912 plate XXXII; Werner no. 58 aged swatch (approximate); Lab distance computed",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Eastaugh and others, Pigment Compendium, \"sap green\", p. 346",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed; threshold: ΔE 6, at least 5% of the canvas",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "Google Books Ngram, \"asparagus\", 5-year smoothed, relative to peak",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In Syme's version of Werner's list, what is asparagus green?",
+   "choices": [
+    "Pistachio green mixed with much greyish white",
+    "Olive green with a little blue",
+    "Grass green with much brown",
+    "Emerald green with saffron yellow"
+   ],
+   "answer": "Pistachio green mixed with much greyish white",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the asparagus green of Werner's list is the same bright green as the swatch on this page.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which mineral did Syme give as the mineral example of asparagus green?",
+   "choices": [
+    "Beryl",
+    "Lapis lazuli",
+    "Malachite",
+    "Jet"
+   ],
+   "answer": "Beryl",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Asparagus green was number 58 on a mineralogist's list of colors, published in Britain by Syme.",
+  "Werner's asparagus green is a washed, greyish tint; the web's asparagus is much brighter."
+ ],
+ "words": 664,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported 'ladder' reading of the Werner greens (listed order does not match the mixing recipes)."
+  ]
+ }
+}

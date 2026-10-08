@@ -1,0 +1,222 @@
+{
+ "slug": "greenish-black",
+ "name": "Greenish Black",
+ "hex": "#454445",
+ "names": [
+  "Greenish Black"
+ ],
+ "tier": "standard",
+ "depth": "medium",
+ "lede": "Greenish Black is one of the named blacks in Werner's nomenclature of colors, the mineralogist's vocabulary of the 1770s, and its swatch on a screen is a neutral dark grey with no green in it at all.",
+ "sections": [
+  {
+   "id": "werner",
+   "title": "A black in Werner's list",
+   "body": "Abraham Gottlob Werner devised his color nomenclature in 1774 to help identify minerals, starting from 54 terms and revising them for about forty years [1]. Patrick Syme later expanded the list to 108 terms in 1814 and 110 in 1821, adding a painted swatch and examples from the animal, vegetable and mineral worlds for each [1]. Greenish Black is number 19, in the section of whites, greys and blacks [2].\n\nSyme's recipe starts from velvet black and adds small amounts of brown, yellow and green [2]. His examples are the breast of the lapwing, the mineral hornblende, and the bracts of the artichoke, drawn from Weinmann's *Phytanthoza iconographia* of 1737 [2]. Earlier tables by Lenz and Widenmann already list it, and one list in Baty's reproductions gives the alternative name raven-black [3]. Baty's index sends the reader to it on several pages, among them 8, 40, 62-3, 67 and 130 [2]."
+  },
+  {
+   "id": "other-uses",
+   "title": "Greenish black outside Werner",
+   "body": "The phrase outlived the system, because dark minerals really do come in it. The Pigment Compendium describes hornblende as a dark green or greenish-black amphibole mineral, and brochantite, a copper mineral found in Cornwall and Derbyshire, as ranging from emerald green to greenish black [4]. Salter wrote in 1869 that bronze green, a species of Prussian green, looks greenish-black in deep washes, with a coppery cast [4].\n\nMedicine borrowed the scale too. In 1827 the Nuremberg dermatologist Heinrich Eichhorn listed skin colors in disease using Werner's vocabulary, among them black, hornblende black or greenish black [5]. It is a reminder that these names were meant as tools for matching, not as poetry."
+  },
+  {
+   "id": "swatch",
+   "title": "Why the swatch is grey",
+   "body": "The swatch here, #454445, is a scan of an aged Werner swatch, and our library notes it as approximate [6]. Its measured chroma is about 1, so on screen it reads as a neutral dark grey, and the nearest named color is [[charcoal]], 8.1 units away [6]. ISCC-NBS 1955 files it with its own black block [6].\n\nTwo effects explain the missing green. Old pigments and paper change over two centuries, and a faint tint is the first thing to vanish on a screen. Neighbors in Werner's row make the same point: [[bluish-black]] is the black with a little blue, and [[greyish-black]] the one softened with grey [2]. The three are hard to tell apart on a screen, and were meant to be told apart by eye against a black object."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 1,674 works, or 7.0 per cent [7]. It is mostly a shadow color, 63 per cent of the time, and a mid-tone in 35 per cent [7]. The largest cover is a portrait of 1821 by Ammi Phillips, at 83 per cent, followed by a Japanese painting of the descent of Amida Buddha, of 1270, at 77 per cent [7].\n\nThe lift grows in the twentieth century: 272 of 1,674 works from the 1900s, or 16.2 per cent, against 5.3 per cent of the 1400s, and the 1910s peak at 19.1 per cent [7]. Danish and Norwegian paintings carry it most, 247 of 1,676 and 25 of 120, and among individual painters Hammershøi has it in 19 of 50 works and Derain in 9 of 22 [7]. A neutral dark like this matches many blacks, and old varnish darkens pictures further, so it is a marker for dark pictures and not for any pigment [7].\n\nIn print, *greenish black* peaked around 1926 and has fallen to about 13 per cent of that peak by 2000 [8]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Werner's nomenclature of colors (no. 19, Blacks)",
+   "first_recorded": "Werner's system, in lists by Lenz, Widenmann and Syme (1814, 1821)",
+   "source": "Baty, Nature's Palette; ColorHub library"
+  },
+  "aka": [
+   "raven-black (in one early list)"
+  ],
+  "siblings": [
+   "bluish-black",
+   "greyish-black",
+   "black-olive"
+  ],
+  "parent": "black",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "black-olive",
+    "gloss": "a dark green-brown black from a modern list, not a Werner color"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#454445",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1674,
+  "top_paintings": [
+   "aic-55710",
+   "cma-157150",
+   "commons-Q59844214",
+   "smk-KMSr21"
+  ],
+  "role": {
+   "shadow": 0.63,
+   "mid": 0.35,
+   "highlight": 0.02
+  },
+  "peak_decade": {
+   "1910s": {
+    "hits": 100,
+    "n": 523,
+    "rate": 0.191
+   }
+  },
+  "countries": {
+   "Norway": {
+    "hits": 25,
+    "n": 120
+   },
+   "Denmark": {
+    "hits": 247,
+    "n": 1676
+   }
+  },
+  "ngram": {
+   "peak": 1926,
+   "rel_2000": 0.132
+  },
+  "company": [
+   "Charcoal",
+   "Bluish Black",
+   "Greyish Black"
+  ],
+  "measured": {
+   "lch": [
+    29,
+    1,
+    324
+   ],
+   "nearest": [
+    [
+     "Charcoal",
+     8.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, introduction (Werner and Syme)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, Syme's plates of whites, greys and blacks, pp. 60-67, and the index",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 32-35 (tables of Lenz, Widenmann and Syme)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Hornblende\", \"Brochantite\" and \"Bronze green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 220 (Eichhorn 1827)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub library, entry Greenish Black: Werner no. 19, aged swatch, approximate; ISCC-NBS 1955 block 1",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub archive field notes, tools/article_field.py, CIEDE2000 6, 5% cover. As photographed: museum photographs of aged, varnished paintings. A color match, not a pigment test.",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "Google Books Ngram, \"greenish black\", 5-year smoothed, relative to peak",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What was Werner's 1774 color nomenclature first made to help identify?",
+   "choices": [
+    "Minerals",
+    "Dyes",
+    "Birds",
+    "Paints"
+   ],
+   "answer": "Minerals",
+   "kind": "pick"
+  },
+  {
+   "q": "Why does the Greenish Black swatch on a screen look neutral grey?",
+   "choices": [
+    "It is an aged scan of a Werner swatch whose faint tint has gone",
+    "Green cannot be shown on screens",
+    "It is a different color from Werner's",
+    "Black always appears grey in browsers"
+   ],
+   "answer": "It is an aged scan of a Werner swatch whose faint tint has gone",
+   "kind": "pick"
+  },
+  {
+   "q": "According to Baty, Syme's recipe for Greenish Black starts from velvet black.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Greenish black was a mineralogist's name: Werner's examples include the mineral hornblende and a lapwing's breast.",
+  "Where to look: dark portraits and shadows often hold a black that is a little tinted, not neutral."
+ ],
+ "words": 621,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Only Baty and the Pigment Compendium discuss it; article short by design.",
+   "The sentence about aging pigments and screens is interpretation, uncited.",
+   "Swatch is an aged scan, so the green has gone; ISCC block number from the library note."
+  ]
+ }
+}

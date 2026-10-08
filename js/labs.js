@@ -100,38 +100,12 @@ function storyPlayer(s) {
 const LAB = {};
 const pickerRow = (sel) => `<div class="pick-row">${EVERY().slice().sort((a, b) => { const A = lch(a.h), B = lch(b.h); return (A[1] < 12) - (B[1] < 12) || ((A[2] + 330) % 360) - ((B[2] + 330) % 360); }).map(c => `<button data-pick="${c.h}" title="${esc(c.n)}" style="--c:${c.h}" class="${c.h === sel ? "on" : ""}"></button>`).join("")}</div>`;
 
-// Harmony: drag the base around the picker's ring and the harmony colors swing with it, live. The base and
-// scheme are remembered (LAB_HARMONY_STATE) so a [[link]] out to a wiki page, then Back, lands on this same spot.
+// Harmony is retired as its own screen (design round 2): the Gamut wheel (js/studio.js) is the one OKLab wheel in
+// the app, and its Triad / Complement / Analogous / Square presets are the harmonies. #/lab/harmony and any old
+// Back-trail token land there. LAB_HARMONY_STATE stays declared for the old trail case in js/explore.js.
 let LAB_HARMONY_STATE = null;
-LAB.harmony = (base = lch(dailyColor().h)[1] > 30 ? dailyColor().h : "#C8553D", scheme = "triadic", push = true) => {
-  if (push && XSTACK[XSTACK.length - 1] !== "harmony") XSTACK.push("harmony");
-  const el = show(`
-    <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span class="eyebrow">Lab · Harmony</span><span style="width:44px"></span></header>
-    <div class="poster" id="poster" aria-hidden="true"></div>
-    <div class="schemes">${Object.keys(SCHEMES).map(k => `<button class="${k === scheme ? "on" : ""}" data-scheme="${k}">${k}</button>`).join("")}</div>
-    <div class="h-list" id="hlist"></div>
-    <p class="eyebrow" style="margin:26px 0 10px">Base color · drag the ring</p>
-    <div id="pick"></div>
-    <p class="p-body">${linkText("Why these work: [[complementary-colors|complements]] sit opposite on the [[color-wheel]] and make each other look stronger, the effect [[chevreul|Chevreul]] described for tapestry dyes. Analogous colors sit side by side and feel calm. Triads were a [[bauhaus|Bauhaus]] favorite.")}</p>
-    <p class="fine">Harmonies rotate CIELAB hue (LCh h) at the same lightness and strength. The Studio gamut wheel uses OKLab hue instead, so the same angle can land on a slightly different color there. Names are the nearest of about 1,000. Tap a color to open its page; press and hold to copy the hex.</p>
-  `, "article lab");
-  // one-step Back (ROADMAP.md §17 job #1): pops this lab's own place in the shared trail, so it lands wherever
-  // it was opened from (Studio, usually) rather than always jumping straight to the Studio tab.
-  el.querySelector("[data-back]").onclick = xBack;
-  wireLinks(el);
-  const draw = hex => {
-    base = hex; LAB_HARMONY_STATE = { base, scheme };
-    const cols = schemeColors(hex, scheme), [p0, p1, p2 = p1, p3 = p0] = cols, light = cols.slice().sort((a, b) => lab(b)[0] - lab(a)[0]);
-    el.querySelector("#poster").innerHTML = `<svg viewBox="0 0 320 300"><rect width="320" height="300" fill="${light[0]}"/><rect x="0" y="196" width="320" height="104" fill="${p1}"/>
-      <circle cx="204" cy="122" r="80" fill="${p0}"/><rect x="30" y="44" width="58" height="176" fill="${p2}"/><rect x="238" y="222" width="50" height="50" fill="${p3}"/><rect x="30" y="238" width="140" height="10" fill="${light[light.length - 1]}"/></svg>`;
-    el.querySelector("#hlist").innerHTML = cols.map((h, i) => { const nm = nameOf(h); return `<button class="h-item" data-copy="${h}" data-swatch="${h}"><i style="--c:${h}"></i><span><b>${i ? "" : "Base · "}${esc(nm.text)}</b><em class="mono">${h} · ${closeness(nm.de)}</em></span></button>`; }).join("");
-  };
-  const picker = colorPicker(el.querySelector("#pick"), { hex: base, onChange: draw, marks: hex => schemeColors(hex, scheme) });
-  draw(base);
-  if (!CORE_NAMES) loadCoreNames().then(() => { if (el.isConnected) draw(base); });
-  el.querySelectorAll("[data-scheme]").forEach(b => b.onclick = () => { scheme = b.dataset.scheme; el.querySelectorAll("[data-scheme]").forEach(x => x.classList.toggle("on", x === b)); draw(base); picker.set(base); });
-  if (typeof exLongCopy === "function") exLongCopy(el.querySelector("#hlist"));   // one tap opens the page; a long press copies the hex
-};
+const HARMONY_TO_PRESET = { triadic: "Triad", complementary: "Complement", analogous: "Analogous", square: "Square" };
+LAB.harmony = (base, scheme, push = true) => gamutWheel(HARMONY_TO_PRESET[scheme] || "Triad", null, push);
 
 // One color, two looks (Albers): the same inner color on two grounds, then lift the grounds. set/slot are
 // remembered the same way as Harmony's base/scheme, for the same reason.

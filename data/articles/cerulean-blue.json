@@ -1,311 +1,307 @@
 {
- "slug": "cerulean-blue",
- "name": "Cerulean Blue",
- "hex": "#2A52BE",
- "names": [
-  "Cerulean Blue"
- ],
- "tier": "pigment",
- "depth": "epic",
- "lede": "Cerulean blue is the sky-blue paint of cobalt and tin oxides, a light greenish blue that reached artists in the 1860s and went onto the Impressionists' palettes. The swatch filed under its name here is a much deeper purplish blue, and that gap is part of the story.",
- "sections": [
-  {
-   "id": "swatch",
-   "title": "The swatch is not the paint",
-   "body": "The swatch on this page, #2A52BE, is a strong purplish blue [13]. Our library files it under the pigment word *cerulean*, citing ISCC-NBS 1955 (block 167), a Wikipedia color box and Maerz and Paul's 1930 dictionary [13]. The paint itself is a different color. Paterson defines cerulean blue as a vivid light greenish blue [2], and Ball describes it as greenish-tinged and somewhat comparable to [[gem:azurite|azurite]] [5].\n\nThe greener entry in the same library, [[cerulean]], is the one that matches the tube, and it is 18 ΔE away from this swatch on the CIEDE2000 scale [13]. This swatch sits instead among the cobalt-family blues: its nearest names are Helvetia Blue, [[cobalt]] and Blue Blue, all within six units [13]. So read this page as the story of the name and the paint, with the swatch as a caution that a hex value filed under a pigment's name is only somebody's reading of it [13]."
-  },
-  {
-   "id": "name",
-   "title": "A sky word and a tangle of spellings",
-   "body": "*Cerulean* comes from the Latin *caeruleus*, which Pigment Compendium glosses as dark blue or dark green, and which Coles ties to *caelum*, the vault of heaven [1][3]. English had the word by the seventeenth century: Primatt advertised a \"Cerulian\" blue for oil painting in 1677 [3]. In France the paint is *bleu céleste*, heavenly blue [1][15].\n\nThat 1677 blue was not the cobalt paint [3]. The compendium says the earliest references to the pigment we now call cerulean were to *ceruleum*, and that the spellings *cerulean*, *ceruleum*, *cerulium* and *coelin* were mixed up for decades [3][15]. Church in 1901 listed the paint under *cœruleum*, with *cerulium* and *cerulean blue* as alternatives, and by 1935 Doerner had made *cerulean* the main term [3].\n\nEven the trade word *coelin* was not stable. Salter wrote in 1869 that a tin-based cobalt blue called *coelin* had lately been imported from Germany, mixed with gypsum, silica and sometimes magnesia [15]. Jännicke in 1893 used the same word for a slightly greenish cobalt phosphate color [15]. When an old text says *coelin* or *cerulium*, check which blue its author means.\n\nThe Roman *caeruleum* was a different material altogether [1]. Coles says Pliny's varieties were really forms of [[egyptian-blue]], and that the name later wandered onto other blues, including azurite and smalt [1]."
-  },
-  {
-   "id": "launch",
-   "title": "A launch date nobody agrees on",
-   "body": "The compound is older than the paint. Höpfner published a cobalt-tin blue in 1789, and Schreger listed it in 1805 as a beautiful blue painter's color; it was then largely forgotten until the 1850s and 1860s [3]. Coles also places Höpfner, whom he calls a Swiss chemist, in the late eighteenth century [1].\n\nThe date the paint reached artists depends on the book. Paterson says the firm of George Rowney and Son discovered it in 1860 [2]. Ball says Rowney sold it as a watercolor in the 1860s and as an oil color by the 1870s, and St Clair gives the same two decades [5][11]. Coffignier in 1924 put its introduction by Rowney \"about 1850\", but Carlyle's research, summarized in the compendium, shows that was unlikely before about 1862 or 1863 [3].\n\nPrinted evidence pulls the other way. The Times of 28 December 1859 carried an advertisement for *Cæruleum*, a new permanent color prepared for artists [3]. Carlyle also found that, just before 1862 or 1863, the London firm Roberson was buying a *Cerulium*, as item 58 in its blues, from the German firm Frauenknecht and Stotz [3]. Gentele's German manual of color-making leaves cerulean out in its 1860 edition and includes it in 1880 [3].\n\nTaken together, the sources fit a cobalt-tin blue in the German and British trade by about 1860, on most artists' shelves by the 1870s, with who sold it first still open [3][5]. Our library's note for the name gives 1859 as its first record in Maerz and Paul [13]."
-  },
-  {
-   "id": "chemistry",
-   "title": "What is in the tube",
-   "body": "Cerulean blue is cobalt stannate, or cobalt tin oxide, CoSnO3 [3][4]. Church in 1901 gave two ways to make it: combine tin oxide with cobalt nitrate, or precipitate potassium stannate with cobalt chloride and mix the result with pure silica [4]. Ure's dictionary of 1875 described the paint as a cobalt stannate padded out with stannic acid and gypsum [3].\n\nThe name now covers more than one compound. Analysis has found chromium cobalt aluminium oxide, not cobalt tin oxide, in modern acrylics labelled cerulean, and Kühn found the same chromium compound in an 1862 painting by Eduard Schleich the Elder [3][4]. Coles describes a second cerulean in which chromium replaces the tin and gives a greener color, often called cobalt turquoise [1]. Paterson says instead that cobalt turquoise is made from cobalt titanium oxide, so the books disagree on what that second paint is [1][2].\n\nColes calls the paint very stable and unaffected by light or chemicals, and says its slight green cast makes it a foil for the redder tone of [[cobalt-blue]] [1]. That stability is the reason it has stayed in paint boxes while the nineteenth-century doubts about it have faded."
-  },
-  {
-   "id": "impressionists",
-   "title": "The Impressionists' blue",
-   "body": "Ball counts twelve new synthetics among the twenty principal pigments identified in [[look:impressionism|Impressionist]] pictures, and cerulean blue is one of them, alongside cobalt blue, viridian and artificial ultramarine [6]. In his four 1877 views of the Gare Saint-Lazare, [[painter:claude-monet|Monet]] built even the greys, browns and blacks from mixtures of bright colors, almost without earth pigments [6]. One of the browns there is vermilion mixed with cobalt and cerulean blue, plus both greens, a red lake and chrome yellow [6]. So a Saint-Lazare shadow that reads as brown or black is, by Ball's account, a blend of bright colors with cerulean among them [6].\n\nThe paint's reputation was mixed. By the 1890s it was said to be impermanent, yet [[painter:paul-signac|Signac]] liked it enough to take the risk [5]. Gage reports that in late nineteenth-century France, as *bleu céleste*, it had a reputation for fading, though it is now regarded as stable [10]. A note adds that the trade term was loosely applied: Vibert in 1902 grouped it with Prussian blue [10]. That leaves open how much of the old fading reputation belonged to cobalt tin oxide itself [10].\n\nSt Clair says Signac and Monet used it heavily, while [[painter:vincent-van-gogh|Van Gogh]] imitated it by mixing cobalt, cadmium yellow and white [11]. Raoul Dufy, it is said, gave up browns for the Mars colors and the new cerulean [7]. Ball argues that [[look:fauvism|Fauvism]], more than Impressionism, was the fruit of the century's new pigments [7]. Picasso's 1943 paint order includes cerulean, and Ball reports him greeting it, with ivory black and cobalt violet, among his old companions [9][11]."
-  },
-  {
-   "id": "rothko",
-   "title": "A blue inside a pink: Rothko's Harvard murals",
-   "body": "Cerulean sometimes works inside a mixture where nobody can see it. Rothko gave his murals to Harvard in 1962; within five years they were deteriorating, and by 1979 they had been removed from view [8]. Their predominant colors were dark pink and crimson, but they have turned light blue [8].\n\nBy Ball's account, Rothko mixed his crimsons from artificial ultramarine, cerulean, white and two modern organic reds, Naphthol Red and Lithol Red [8]. Naphthol Red has lasted well, but Lithol Red is badly fugitive in light and has faded as the worst medieval red lakes did [8]. A red that fades out of a mixture leaves the blue behind, which is the plain reading of Ball's account [8]. The blues were mixing partners, and when the red went, they were what remained [8]."
-  },
-  {
-   "id": "sky",
-   "title": "Where to look: low in the sky",
-   "body": "Gurney notes that the sky generally gets lighter toward the horizon, because we look through more air, and that near the horizon it can range from pale cerulean to warm grey to dull orange [12]. So the paint's color is easiest to find low in a clear sky, with a deeper blue overhead. He suggests holding paint-store blue swatches up to the sky, as a homemade cyanometer, to see which one matches [12].\n\nThe name has also served as a symbol. St Clair reports that the United Nations emblem sits on a slightly grayish cerulean ground, which the designer Oliver Lundquist is said to have chosen as the opposite of red, the color of war [11]. That is a single-source account of intent, and a blue ground does not make a color peaceful [11]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Held to a ΔE of 6 and at least five per cent of the canvas, a color like this swatch appears in 7 of 23,781 paintings in our archive [14]. The largest share belongs to Matisse's [[painting:commons-Q7727514|The Conversation]], where it covers about 36 per cent, followed by Lundstrøm's portrait of the poet Emil Bønnelycke (1921) at about 17 per cent and [[painter:andre-derain|Derain]]'s *Woman in a Chemise* (1906) at about 11 per cent [14]. Four of the seven are twentieth-century works, which is 8.1 times the archive's rate for that century [14].\n\nThree of the matches are older than any cerulean paint: Samuel Cooper's portrait of Lady Clarke (1655), William Gibson's portrait of a nobleman (1675) and Gervase Spencer's portrait of George III (1745) [14]. All three predate Höpfner's 1789 recipe, so the match says only that a deep blue of this hue is much older than the pigment [3][14]. As always, these are photographs of aged, varnished paintings: a color match, not a pigment test [14].\n\nThe phrase is easier to date than the paint. In Google Books, *cerulean blue* already stands at about 92 per cent of its later peak around 1800, a reading from small early samples, because writers used the word for the sky long before the pigment [2][16]. It slides to about 27 per cent of that peak by 1920 and climbs back to a peak in 2016 [16]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "Latin caeruleus, dark blue, tied to caelum, the sky",
-   "first_recorded": "advertised in The Times, 28 December 1859; sold by Rowney in the early 1860s (books disagree)",
-   "source": "Pigment Compendium, \"Cerulean blue\"; Paterson; Coles, Chromatopia"
-  },
-  "aka": [
-   "cerulean",
-   "ceruleum",
-   "coeruleum",
-   "cerulium",
-   "coelin",
-   "bleu céleste",
-   "cobalt stannate",
-   "Höpfner blue"
+  "slug": "cerulean-blue",
+  "name": "Cerulean Blue",
+  "hex": "#2A52BE",
+  "names": [
+    "Cerulean Blue"
   ],
-  "siblings": [
-   "cerulean",
-   "cobalt",
-   "celeste"
+  "tier": "pigment",
+  "depth": "epic",
+  "lede": "Cerulean blue is the sky-blue paint of cobalt and tin oxides, a light greenish blue that reached artists in the 1860s and went onto the Impressionists' palettes. The swatch filed under its name here is a much deeper purplish blue, and that gap is part of the story.",
+  "sections": [
+    {
+      "id": "swatch",
+      "title": "The swatch is not the paint",
+      "body": "The swatch on this page, #2A52BE, is a strong purplish blue [13]. Our library files it under the pigment word *cerulean*, citing ISCC-NBS 1955 (block 167), a Wikipedia color box and Maerz and Paul's 1930 dictionary [13]. The paint itself is a different color. Paterson defines cerulean blue as a vivid light greenish blue [2], and Ball describes it as greenish-tinged and somewhat comparable to [[gem:azurite|azurite]] [5].\n\nThe greener entry in the same library, [[cerulean]], is the one that matches the tube, and it is 18 ΔE away from this swatch on the CIEDE2000 scale [13]. This swatch sits instead among the cobalt-family blues: its nearest names are Helvetia Blue, [[cobalt]] and Blue Blue, all within six units [13]. So read this page as the story of the name and the paint, with the swatch as a caution that a hex value filed under a pigment's name is only somebody's reading of it [13]."
+    },
+    {
+      "id": "name",
+      "title": "A sky word and a tangle of spellings",
+      "body": "*Cerulean* comes from the Latin *caeruleus*, which Pigment Compendium glosses as dark blue or dark green, and which Coles ties to *caelum*, the vault of heaven [1][3]. English had the word by the seventeenth century: Primatt advertised a \"Cerulian\" blue for oil painting in 1677 [3]. In France the paint is *bleu céleste*, heavenly blue [1][15].\n\nThat 1677 blue was not the cobalt paint [3]. The compendium says the earliest references to the pigment we now call cerulean were to *ceruleum*, and that the spellings *cerulean*, *ceruleum*, *cerulium* and *coelin* were mixed up for decades [3][15]. Church in 1901 listed the paint under *cœruleum*, with *cerulium* and *cerulean blue* as alternatives, and by 1935 Doerner had made *cerulean* the main term [3].\n\nEven the trade word *coelin* was not stable. Salter wrote in 1869 that a tin-based cobalt blue called *coelin* had lately been imported from Germany, mixed with gypsum, silica and sometimes magnesia [15]. Jännicke in 1893 used the same word for a slightly greenish cobalt phosphate color [15]. When an old text says *coelin* or *cerulium*, check which blue its author means.\n\nThe Roman *caeruleum* was a different material altogether [1]. Coles says Pliny's varieties were really forms of [[egyptian-blue]], and that the name later wandered onto other blues, including azurite and smalt [1]."
+    },
+    {
+      "id": "launch",
+      "title": "A launch date nobody agrees on",
+      "body": "The compound is older than the paint. Höpfner published a cobalt-tin blue in 1789, and Schreger listed it in 1805 as a beautiful blue painter's color; it was then largely forgotten until the 1850s and 1860s [3]. Coles also places Höpfner, whom he calls a Swiss chemist, in the late eighteenth century [1].\n\nThe date the paint reached artists depends on the book. Paterson says the firm of George Rowney and Son discovered it in 1860 [2]. Ball says Rowney sold it as a watercolor in the 1860s and as an oil color by the 1870s, and St Clair gives the same two decades [5][11]. Coffignier in 1924 put its introduction by Rowney \"about 1850\", but Carlyle's research, summarized in the compendium, shows that was unlikely before about 1862 or 1863 [3].\n\nPrinted evidence pulls the other way. The Times of 28 December 1859 carried an advertisement for *Cæruleum*, a new permanent color prepared for artists [3]. Carlyle also found that, just before 1862 or 1863, the London firm Roberson was buying a *Cerulium*, as item 58 in its blues, from the German firm Frauenknecht and Stotz [3]. Gentele's German manual of color-making leaves cerulean out in its 1860 edition and includes it in 1880 [3].\n\nTaken together, the sources fit a cobalt-tin blue in the German and British trade by about 1860, on most artists' shelves by the 1870s, with who sold it first still open [3][5]. Our library's note for the name gives 1859 as its first record in Maerz and Paul [13]."
+    },
+    {
+      "id": "chemistry",
+      "title": "What is in the tube",
+      "body": "Cerulean blue is cobalt stannate, or cobalt tin oxide, CoSnO3 [3][4]. Church in 1901 gave two ways to make it: combine tin oxide with cobalt nitrate, or precipitate potassium stannate with cobalt chloride and mix the result with pure silica [4]. Ure's dictionary of 1875 described the paint as a cobalt stannate padded out with stannic acid and gypsum [3].\n\nThe name now covers more than one compound. Analysis has found chromium cobalt aluminium oxide, not cobalt tin oxide, in modern acrylics labelled cerulean, and Kühn found the same chromium compound in an 1862 painting by Eduard Schleich the Elder [3][4]. Coles describes a second cerulean in which chromium replaces the tin and gives a greener color, often called cobalt turquoise [1]. Paterson says instead that cobalt turquoise is made from cobalt titanium oxide, so the books disagree on what that second paint is [1][2].\n\nColes calls the paint very stable and unaffected by light or chemicals, and says its slight green cast makes it a foil for the redder tone of [[cobalt-blue]] [1]. That stability is the reason it has stayed in paint boxes while the nineteenth-century doubts about it have faded."
+    },
+    {
+      "id": "impressionists",
+      "title": "The Impressionists' blue",
+      "body": "Ball counts twelve new synthetics among the twenty principal pigments identified in [[look:impressionism|Impressionist]] pictures, and cerulean blue is one of them, alongside cobalt blue, viridian and artificial ultramarine [6]. In his four 1877 views of the Gare Saint-Lazare, [[painter:claude-monet|Monet]] built even the greys, browns and blacks from mixtures of bright colors, almost without earth pigments [6]. One of the browns there is vermilion mixed with cobalt and cerulean blue, plus both greens, a red lake and chrome yellow [6]. So a Saint-Lazare shadow that reads as brown or black is, by Ball's account, a blend of bright colors with cerulean among them [6].\n\nThe paint's reputation was mixed. By the 1890s it was said to be impermanent, yet [[painter:paul-signac|Signac]] liked it enough to take the risk [5]. Gage reports that in late nineteenth-century France, as *bleu céleste*, it had a reputation for fading, though it is now regarded as stable [10]. A note adds that the trade term was loosely applied: Vibert in 1902 grouped it with Prussian blue [10]. That leaves open how much of the old fading reputation belonged to cobalt tin oxide itself [10].\n\nSt Clair says Signac and Monet used it heavily, while [[painter:vincent-van-gogh|Van Gogh]] imitated it by mixing cobalt, cadmium yellow and white [11]. Raoul Dufy, it is said, gave up browns for the Mars colors and the new cerulean [7]. Ball argues that [[look:fauvism|Fauvism]], more than Impressionism, was the fruit of the century's new pigments [7]. Picasso's 1943 paint order includes cerulean, and Ball reports him greeting it, with ivory black and cobalt violet, among his old companions [9][11]."
+    },
+    {
+      "id": "rothko",
+      "title": "A blue inside a pink: Rothko's Harvard murals",
+      "body": "Cerulean sometimes works inside a mixture where nobody can see it. Rothko gave his murals to Harvard in 1962; within five years they were deteriorating, and by 1979 they had been removed from view [8]. Their predominant colors were dark pink and crimson, but they have turned light blue [8].\n\nBy Ball's account, Rothko mixed his crimsons from artificial ultramarine, cerulean, white and two modern organic reds, Naphthol Red and Lithol Red [8]. Naphthol Red has lasted well, but Lithol Red is badly fugitive in light and has faded as the worst medieval red lakes did [8]. A red that fades out of a mixture leaves the blue behind, which is the plain reading of Ball's account [8]. The blues were mixing partners, and when the red went, they were what remained [8]."
+    },
+    {
+      "id": "sky",
+      "title": "Where to look: low in the sky",
+      "body": "Gurney notes that the sky generally gets lighter toward the horizon, because we look through more air, and that near the horizon it can range from pale cerulean to warm grey to dull orange [12]. So the paint's color is easiest to find low in a clear sky, with a deeper blue overhead. He suggests holding paint-store blue swatches up to the sky, as a homemade cyanometer, to see which one matches [12].\n\nThe name has also served as a symbol. St Clair reports that the United Nations emblem sits on a slightly grayish cerulean ground, which the designer Oliver Lundquist is said to have chosen as the opposite of red, the color of war [11]. That is a single-source account of intent, and a blue ground does not make a color peaceful [11]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Held to a ΔE of 6 and at least five per cent of the canvas, a color like this swatch appears in 7 of 23,781 paintings in our archive [14]. The largest share belongs to Matisse's [[painting:commons-Q7727514|The Conversation]], where it covers about 36 per cent, followed by Lundstrøm's portrait of the poet Emil Bønnelycke (1921) at about 17 per cent and [[painter:andre-derain|Derain]]'s *Woman in a Chemise* (1906) at about 11 per cent [14]. Four of the seven are twentieth-century works, which is 8.1 times the archive's rate for that century [14].\n\nThree of the matches are older than any cerulean paint: Samuel Cooper's portrait of Lady Clarke (1655), William Gibson's portrait of a nobleman (1675) and Gervase Spencer's portrait of George III (1745) [14]. All three predate Höpfner's 1789 recipe, so the match says only that a deep blue of this hue is much older than the pigment [3][14]. As always, these are photographs of aged, varnished paintings: a color match, not a pigment test [14].\n\nThe phrase is easier to date than the paint. In Google Books, *cerulean blue* already stands at about 92 per cent of its later peak around 1800, a reading from small early samples, because writers used the word for the sky long before the pigment [2][16]. It slides to about 27 per cent of that peak by 1920 and climbs back to a peak in 2016 [16]."
+    }
   ],
-  "parent": null,
-  "children": [
-   "pale-cerulean",
-   "cerulean-sea"
-  ],
-  "disambiguation": [
-   {
-    "slug": "cerulean",
-    "gloss": "the greener library swatch that matches the tube of paint"
-   },
-   {
-    "slug": "egyptian-blue",
-    "gloss": "the Roman caeruleum was Egyptian blue, not this paint"
-   }
-  ],
-  "other_languages": [
-   {
-    "lang": "fr",
-    "name": "bleu céleste (heavenly blue)"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#2A52BE",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 7,
-  "top_paintings": [
-   "commons-Q7727514",
-   "smk-KMS8760",
-   "smk-KMSr14",
-   "aic-7303",
-   "aic-139958",
-   "aic-7440"
-  ],
-  "century_1900s": {
-   "hits": 4,
-   "n": 1674,
-   "lift": 8.12
-  },
-  "ngram": {
-   "phrase": "cerulean blue",
-   "rel_1800": 0.918,
-   "rel_1920": 0.274,
-   "peak": 2016
-  },
-  "measured": {
-   "lch": [
-    38.3,
-    65.8,
-    292.7
-   ],
-   "iscc": "block 167, strong purplish blue (dE 5.9)",
-   "de_to_cerulean": 18.3,
-   "nearest": [
-    [
-     "Helvetia Blue",
-     4.0
+  "aside": {
+    "origin": {
+      "named_after": "Latin caeruleus, dark blue, tied to caelum, the sky",
+      "first_recorded": "advertised in The Times, 28 December 1859; sold by Rowney in the early 1860s (books disagree)",
+      "source": "Pigment Compendium, \"Cerulean blue\"; Paterson; Coles, Chromatopia"
+    },
+    "aka": [
+      "cerulean",
+      "ceruleum",
+      "coeruleum",
+      "cerulium",
+      "coelin",
+      "bleu céleste",
+      "cobalt stannate",
+      "Höpfner blue"
     ],
-    [
-     "Cobalt",
-     4.7
+    "siblings": [
+      "cerulean",
+      "cobalt",
+      "celeste"
     ],
-    [
-     "Blue Blue",
-     5.3
+    "parent": null,
+    "children": [
+      "pale-cerulean",
+      "cerulean-sea"
+    ],
+    "disambiguation": [
+      {
+        "slug": "cerulean",
+        "gloss": "the greener library swatch that matches the tube of paint"
+      },
+      {
+        "slug": "egyptian-blue",
+        "gloss": "the Roman caeruleum was Egyptian blue, not this paint"
+      }
+    ],
+    "other_languages": [
+      {
+        "lang": "fr",
+        "name": "bleu céleste (heavenly blue)"
+      }
     ]
-   ]
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#2A52BE",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 7,
+    "top_paintings": [
+      "commons-Q7727514",
+      "smk-KMS8760",
+      "smk-KMSr14",
+      "aic-7303",
+      "aic-139958",
+      "aic-7440"
+    ],
+    "century_1900s": {
+      "hits": 4,
+      "n": 1674,
+      "lift": 8.12
+    },
+    "ngram": {
+      "phrase": "cerulean blue",
+      "rel_1800": 0.918,
+      "rel_1920": 0.274,
+      "peak": 2016
+    },
+    "measured": {
+      "lch": [
+        38.3,
+        65.8,
+        292.7
+      ],
+      "iscc": "block 167, strong purplish blue (dE 5.9)",
+      "de_to_cerulean": 18.3,
+      "nearest": [
+        [
+          "Helvetia Blue",
+          4.0
+        ],
+        [
+          "Cobalt",
+          4.7
+        ],
+        [
+          "Blue Blue",
+          5.3
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Coles, Chromatopia, \"Cerulean blue\" (p. 153)",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"cerulean blue\", \"caerulean\", \"cobalt turquoise\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Pigment Compendium, \"Cerulean blue\" (pp. 103-104)",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Pigment Compendium, \"Cobalt tin oxide\" (p. 129) and \"Chromium aluminium cobalt oxide\" (p. 113)",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 15",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 16",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 21",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 22",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 9, citing Brassaï, Conversations avec Picasso",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 10,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, p. 228 and p. 300 (note 83)",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 11,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, ch. 91 (\"Cerulean\") and ch. 13",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 12,
+      "kind": "book",
+      "cite": "Gurney, Color and Light, p. 176",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 13,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): Cerulean Blue, ISCC-NBS 1955 block 167; CIEDE2000 distances from data/graph/names.json",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 14,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), tools/article_field.py, as photographed",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 15,
+      "kind": "book",
+      "cite": "Pigment Compendium, \"Bleu celeste\" (p. 66), \"Coelin\" (p. 132) and \"Coeruleum\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 16,
+      "kind": "data",
+      "cite": "Google Books Ngram for \"cerulean blue\" via tools/article_field.py (case-insensitive, 5-year smoothed, relative to peak)",
+      "loc_kind": "entry",
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which description fits the paint cerulean blue, as the books define it?",
+      "choices": [
+        "A vivid light greenish blue made from cobalt and tin oxides",
+        "A deep purplish blue made from cobalt and aluminium oxides",
+        "A greyish blue ground from indigo and chalk",
+        "A pale blue made from calcium copper silicate"
+      ],
+      "answer": "A vivid light greenish blue made from cobalt and tin oxides",
+      "kind": "pick"
+    },
+    {
+      "q": "The Roman caeruleum that Pliny describes was cerulean blue paint.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "Why have Rothko's Harvard murals turned light blue?",
+      "choices": [
+        "A fugitive red faded out of the mixtures and left the blues",
+        "The cerulean blue darkened and covered the pink",
+        "Sunlight bleached the blue pigments to white",
+        "Varnish yellowed over the crimson and turned it green"
+      ],
+      "answer": "A fugitive red faded out of the mixtures and left the blues",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Look at a Monet shadow that seems brown or black: by Ball's account, it is a blend of bright colors with cerulean blue among them.",
+    "Books disagree on who sold cerulean blue first, but a Times advertisement for a new permanent artists' color ran on 28 December 1859."
+  ],
+  "words": 1571,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Verified 8 key claims (launch date conflict, Rothko, Monet, Signac/Van Gogh/UN, Impressionist pigments) against Ball and St Clair text; none changed"
+    ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Coles, Chromatopia, \"Cerulean blue\" (p. 153)",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"cerulean blue\", \"caerulean\", \"cobalt turquoise\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Pigment Compendium, \"Cerulean blue\" (pp. 103-104)",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Pigment Compendium, \"Cobalt tin oxide\" (p. 129) and \"Chromium aluminium cobalt oxide\" (p. 113)",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 15",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 16",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 21",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 22",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 9,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 9, citing Brassaï, Conversations avec Picasso",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 10,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, p. 228 and p. 300 (note 83)",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 11,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, ch. 91 (\"Cerulean\") and ch. 13",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 12,
-   "kind": "book",
-   "cite": "Gurney, Color and Light, p. 176",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 13,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json): Cerulean Blue, ISCC-NBS 1955 block 167; CIEDE2000 distances from data/graph/names.json",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 14,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), tools/article_field.py, as photographed",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 15,
-   "kind": "book",
-   "cite": "Pigment Compendium, \"Bleu celeste\" (p. 66), \"Coelin\" (p. 132) and \"Coeruleum\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 16,
-   "kind": "data",
-   "cite": "Google Books Ngram for \"cerulean blue\" via tools/article_field.py (case-insensitive, 5-year smoothed, relative to peak)",
-   "loc_kind": "entry",
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which description fits the paint cerulean blue, as the books define it?",
-   "choices": [
-    "A vivid light greenish blue made from cobalt and tin oxides",
-    "A deep purplish blue made from cobalt and aluminium oxides",
-    "A greyish blue ground from indigo and chalk",
-    "A pale blue made from calcium copper silicate"
-   ],
-   "answer": "A vivid light greenish blue made from cobalt and tin oxides",
-   "kind": "pick"
-  },
-  {
-   "q": "The Roman caeruleum that Pliny describes was cerulean blue paint.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  },
-  {
-   "q": "Why have Rothko's Harvard murals turned light blue?",
-   "choices": [
-    "A fugitive red faded out of the mixtures and left the blues",
-    "The cerulean blue darkened and covered the pink",
-    "Sunlight bleached the blue pigments to white",
-    "Varnish yellowed over the crimson and turned it green"
-   ],
-   "answer": "A fugitive red faded out of the mixtures and left the blues",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Look at a Monet shadow that seems brown or black: by Ball's account, it is a blend of bright colors with cerulean blue among them.",
-  "Books disagree on who sold cerulean blue first, but a Times advertisement for a new permanent artists' color ran on 28 December 1859."
- ],
- "words": 1571,
- "status": "checked",
- "checked": {
-  "by": "claude-sonnet-5-5 (batch 37)",
-  "date": "2026-10-08",
-  "issues": [
-   "Launch date is a book conflict (Paterson 1860; Coffignier c. 1850; Carlyle c. 1862-63; Times advert Dec 1859); article names all four.",
-   "Cobalt turquoise definitions conflict (Coles: chromium for tin; Paterson: cobalt titanium oxide); both named.",
-   "Library note 'first recorded 1859' (Maerz & Paul) merges several entries; hedged as 'our library's note'.",
-   "Ngram early-year values come from tiny samples; hedged. Cerulean article note 12/14 attributes the 'rarer than 73 per cent' graph fact to the #007BA7 swatch, but the graph computed it for this #2A52BE swatch (worth a look).",
-   "Gage fading reputation vs Coles stable: dated as trade reputation vs modern assessment; Vibert grouping caveat."
-  ]
- }
 }

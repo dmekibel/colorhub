@@ -13,7 +13,7 @@
   {
    "id": "name",
    "title": "A shepherd's name",
-   "body": "Celadon is named for a fictional shepherd, not for China [1][2]. Honoré d'Urfé's pastoral romance *L'Astrée*, published between 1607 and 1627, runs to 60 books and some 5,400 pages, and follows Céladon, a lovelorn shepherd trying to win back his Astrée after a quarrel [1]. It was translated across Europe, adapted for the stage, and started a vogue for woodland-green clothes named for its hero [1]. Finlay describes the hero as wearing a pale green suit with swirling green ribbons, and says that all of Paris was soon dressed à la celadon [2].\n\nPaterson, citing Partridge, agrees that the word comes from a rustic lover in French pastoral poetry [3]. Finlay mentions a rival story, in which the word recalls Saladin sending forty pieces of green ware to Sultan Nureddin in 1117, but he finds the novel the more interesting and likelier source [2]. St Clair gives the novel flatly [1].\n\nThe color word then moved to the pottery. The Chinese had been making grey-green glazed wares for centuries before d'Urfé's hero existed [1]. European buyers, far down the trade routes, could read none of the signs of period or kiln that mattered to a Chinese eye, so the green was all they had to go on [1]. Finlay notes that Chinese porcelain became highly fashionable in seventeenth-century Europe, and that some of it happened to be this popular color [2]."
+   "body": "Celadon is named for a fictional shepherd, not for China [1][2]. Honoré d'Urfé's pastoral romance *L'Astrée*, published between 1607 and 1627, runs to 60 books and some 5,400 pages, and follows Céladon, a lovelorn shepherd trying to win back his Astrée after a quarrel [1]. It was translated across Europe, adapted for the stage, and started a vogue for woodland-green clothes named for its hero [1]. Finlay describes the hero as wearing a pale green suit with swirling green ribbons, and says that all of Paris was soon dressed à la celadon [2].\n\nPaterson, citing Partridge, agrees that the word comes from a rustic lover in French pastoral poetry [3]. Finlay mentions a rival story, in which the word recalls Saladin sending forty pieces of green ware to Sultan Nureddin in 1117, but he calls the novel the more interesting theory [2]. St Clair gives the novel flatly [1].\n\nThe color word then moved to the pottery. The Chinese had been making grey-green glazed wares for centuries before d'Urfé's hero existed [1]. European buyers, far down the trade routes, understood little of the classifications behind the ware, and the patterns and colors that told a trained eye its place and age meant nothing to them [1]. Finlay notes that Chinese porcelain became highly fashionable in seventeenth-century Europe, and that some of it happened to be this popular color [2]."
   },
   {
    "id": "glaze",
@@ -23,7 +23,7 @@
   {
    "id": "mi-se",
    "title": "Mi se, the mysterious color",
-   "body": "The most famous celadon was never seen by most of the people who wrote poems about it. Mi se, \"mysterious color\" or \"secret color\", was for a long time China's dearest and most exclusive pottery, kept for royal households, and hardly anyone outside the court had seen a piece [1]. Xu Yin, a tenth-century poet, imagined it as light carved from the moon to tint a mountain stream [1]. Scott points out that the Chinese word for secrecy can also mean reserved or held back, so the name may mean a ware kept for the court [2].\n\nThe proof came in 1987, when a secret chamber was found under the ruined pagoda of Famen temple, near Xi'an, after half of the brick tower had slid to the ground in a rainstorm in 1981 [2]. Finlay's account has the emperor's family donating a great treasure to Famen in 874, with the secret celadon among it, and a stone inventory in the chamber naming the pieces [2]. The inventory pushed the beginnings of mi se back by at least thirty years [2]. St Clair dates the rediscovery to the late 1980s [1].\n\nThe pieces were a disappointment to anyone expecting jade. St Clair calls the color a rather drab olive, and Finlay a dirty olive brown [1][2]. The ware comes from the Shanglinhu kilns in Zhejiang, and its glaze held about 3 per cent iron, against about 2 per cent in an ordinary celadon [2]. Finlay's reading of its appeal is that rulers surrounded by gold and silk may have prized something plain and earthy [2]. The Song court abandoned mi se, and the last reference to it is from 1068, in an encyclopedia of Song institutions [2]."
+   "body": "The most famous celadon was never seen by most of the people who wrote about it. Mi se, \"mysterious color\" or \"secret color\", was for a long time China's dearest and most exclusive pottery, kept for royal households, and hardly anyone outside the court had seen a piece [1]. Xu Yin, a tenth-century poet, imagined it as light carved from the moon to tint a mountain stream [1]. Scott points out that the Chinese word for secrecy can also mean reserved or held back, so the name may mean a ware kept for the court [2].\n\nThe proof came in 1987, when a secret chamber was found under the ruined pagoda of Famen temple, near Xi'an, after half of the brick tower had slid to the ground in a rainstorm in 1981 [2]. Finlay's account has the emperor's family donating a great treasure to Famen in 874, with the secret celadon among it, and a stone inventory in the chamber naming the pieces [2]. The inventory pushed the beginnings of mi se back by at least thirty years [2]. St Clair dates the rediscovery to the late 1980s [1].\n\nThe pieces were a disappointment to anyone expecting jade. St Clair calls the color a rather drab olive, and Finlay found the pieces brownish and plainish [1][2]. The ware comes from the Shanglinhu kilns in Zhejiang, and its glaze held about 3 per cent iron, against about 2 per cent in an ordinary celadon [2]. Finlay's reading of its appeal is that rulers surrounded by gold and silk may have prized something plain and earthy [2]. The Song court abandoned mi se, and the last reference to it is from 1068, in an encyclopedia of Song institutions [2]."
   },
   {
    "id": "poison",
@@ -232,15 +232,15 @@
   "The famous secret celadon of the Tang court turned out, when found in 1987, to be a drab olive."
  ],
  "checked": {
-  "by": "claude-sonnet-5-5 batch 32",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Name origin: Finlay mentions a Saladin 1117 story and prefers d'Urfe",
-   "Jahangir date omitted (Finlay's date unreliable)",
-   "Celandine/celadon in Baty is from a bracketed gloss on tables",
-   "Roses faded-madder claim rests on Madder article"
+   "Finlay prefers the novel as 'more interesting', not 'likelier'",
+   "Removed 'dirty olive brown' (Finlay says brownish and plainish)",
+   "Reworded European-buyers sentence to match St Clair",
+   "Poems claim softened to 'wrote about it'"
   ]
  },
  "status": "checked",
- "words": 1435
+ "words": 1434
 }

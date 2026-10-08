@@ -1,0 +1,228 @@
+{
+ "slug": "tomato",
+ "name": "Tomato",
+ "hex": "#FF6347",
+ "names": [
+  "Tomato"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Tomato is the bright orange-red of the ripe fruit, a plant that Europeans grew for two centuries as an ornament before they ate it, and a colour that explains a good deal about how vision works.",
+ "sections": [
+  {
+   "id": "fruit",
+   "title": "An ornamental before a food",
+   "body": "Pastoureau traces the tomato to the Andean slopes of South America and says the Spanish brought it to Europe early in the sixteenth century [1]. It was not considered edible until much later, and for two centuries it was grown for ornament, its fruits turning from green through yellow to red [1]. That red he calls earthy and sensual, one that dyers tried to imitate [1]. Authors who praised the plant's beauty named it the \"apple of gold\" or \"apple of love\" [1].\n\nOlivier de Serres, in his agricultural treatise of 1600, recommends these apples of love for covering sheds and bowers, and says the fruits are not good to eat but useful in medicine and pleasant to handle and smell [1].\n\nThe tomato also appears in Baty's colour plates, which pair historic colour names with natural examples [2]. For Vermilion Red, the plant example is the skin of the \"love apple\" in an engraving from E. Blackwell's *Herbarium Blackwellianum* of 1754, set beside red coral and cinnabar [2]. The name *tomato* for a colour is much younger."
+  },
+  {
+   "id": "name",
+   "title": "The name as a colour",
+   "body": "Paterson lists *Tomato* among the 140 colours of the X11 set, with the hex code #FF6347, and defines *tomato red* as the rich red of the fruit, adopted as an orange-red colour name by web page compilers [3]. He adds that not all tomatoes are red: Heinz made a green ketchup from green tomatoes, which sold well enough in Canada that a purple one followed to attract children [3].\n\nOur library merges the web list with a Maerz and Paul entry and an xkcd survey colour (#EF4026), and gives the fruit's nearest Japanese colour names as *sango-iro*, \"coral colour\", and *benihi*, \"blood red\" [4]. Maerz and Paul's first-recorded year is 1891, a date we treat as unconfirmed [4]. The swatch is paler and more orange than the library's separate entry [[tomato-red]], which is closer to [[brick]] [4], and sits in the family of [[vermilion]], [[scarlet]], [[orange-red]] and [[coral]].\n\nColour names for foods tend to be advertising names. Paterson reports that the British Tomato Growers Association adopted Pantone red as its trade logo in 1998, though only a small share of British tomatoes reach so dark a red [3]."
+  },
+  {
+   "id": "lycopene",
+   "title": "What makes it red",
+   "body": "The red is lycopene, which Paterson describes as the antioxidant pigment that gives tomatoes their red colour and also colours watermelons, apricots, pink grapefruits and guavas [5]. It is listed as food colouring E160(d) [5]. He adds that processing breaks up the cells and makes the pigment easier for the body to absorb, which is why tomato sauce can carry more than the raw fruit [5].\n\nSeeing it as red is a different matter. St Clair explains that the ripe fruit's skin soaks up most of the short and medium wavelengths, the blues, greens and yellows, and that the remainder, the reds, reach our eyes [6]. Finlay prefers to say that an object \"does\" a colour rather than \"is\" one: a week earlier, the same fruit was absorbing red and rejecting the rest, which gave a green tomato [7]. Eckstut adds the point of it all: the colour of a tomato tells us whether it is ripe [8]."
+  },
+  {
+   "id": "seeing",
+   "title": "Why a tomato stays red under any light",
+   "body": "Livingstone uses a tomato for a famous demonstration [9]. In a dark room, with a red filter on one torch and a green or blue filter on another, shine the red light on a tomato lying on white paper. Both look a washed-out pink, and the tomato is as white as the paper [9]. Switch to the green light and the table looks greenish white while the tomato looks black, since it reflects no green [9]. Turn on the red light and then add the green, and the tomato suddenly looks very red, although the green light added nothing to the light coming from the fruit [9].\n\nThe lesson, she says, is that seeing red takes more than an object reflecting more red than green: it must reflect more red than the things around it [9]. She adds that perceived colour depends on the ratio between the three cone classes [9]. The ratio of long to medium waveband rises from a leaf to an orange to a tomato, and that ranking holds under daylight and fluorescent light alike, although her spectrophotometer shows the reflected light differs a great deal [9]. Our colour system codes an object's colour by its edges and lets the interior fill in, which is why a tomato looks red at its centre as well [9].\n\nThe colour has fashion history too. Jarman recalls that grey was broken in the 1960s by youth fashions that grew out of Cecil Gee's tomato and sky-blue drape jackets, worn defiantly by Teddy boys [10]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A colour within six units (ΔE 2000) of this swatch, covering at least five per cent of the canvas, appears in only 5 of the 23,781 paintings in our archive, 0.02 per cent [11]. These are photographs of aged, varnished paintings, so a match is a colour match, not a pigment test or a fruit [11].\n\nThe highest coverage is 18 per cent of Eleanor Fortescue-Brickdale's *The Pale Complexion of True Love* (1899), followed by 13 per cent of an Indian miniature of about 1650 and 10 per cent of the Martyrdom of Saint James panel in Dürer's Heller altar (1500) [11]. The other two are a portrait of Benito Arias Montano, painted about 1601, and André Derain's *Woman in a Chemise* of 1906 [11]. Three of the five matches sit among the lighter tones of their painting and two among the darker [11].\n\nSo this web red-orange is almost absent from the museum record, at least as photographed [11].\n\nThe word follows the fruit's career. In printed books *tomato* stood at under one per cent of its peak frequency in 1800, 6 per cent in 1860, 23 per cent in 1900, and peaked in the 1940s [12]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the fruit; origin of the word not covered by the books read",
+   "first_recorded": "Maerz and Paul give 1891 (not confirmed)",
+   "source": "Paterson; ColorHub library"
+  },
+  "aka": [
+   "Tomato red (web)",
+   "Sango-iro"
+  ],
+  "siblings": [
+   "tomato-red",
+   "vermilion",
+   "scarlet"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "tomato-red",
+    "gloss": "the library's deeper, redder entry, closer to brick"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Sango-iro (coral colour), Benihi (blood red)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "museum paintings as photographed",
+  "match": {
+   "hex": "#FF6347",
+   "de2000": 6.0,
+   "min_cover": 0.05
+  },
+  "n_present": 5,
+  "n_archive": 23781,
+  "rate": 0.0002,
+  "role": {
+   "highlight": 0.6,
+   "shadow": 0.4
+  },
+  "ngram": {
+   "word": "tomato",
+   "peak": 1942
+  },
+  "measured": {
+   "lch": [
+    62,
+    74,
+    39
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pastoureau, Red, ch. 30",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 235-236",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Tomato\", \"tomato red\", \"Pantone Red\", pp. 297, 396",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): CSS, xkcd, Maerz and Paul 1930, Japanese names",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"lycopene\", p. 251",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, ch. 9",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 8",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Eckstut, What Is Color?, ch. 6",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Livingstone, Vision and Art, ch. 15 and ch. 17",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 31",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes; tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothed, relative to peak (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "For about two centuries after reaching Europe, what was the tomato mainly used for?",
+   "choices": [
+    "As an ornamental plant",
+    "As a dye for cloth",
+    "As a medicine only",
+    "As a salad staple"
+   ],
+   "answer": "As an ornamental plant",
+   "kind": "pick"
+  },
+  {
+   "q": "In Livingstone's demonstration, what happens to the tomato when the room has only green light on it?",
+   "choices": [
+    "It looks black",
+    "It looks bright red",
+    "It looks green",
+    "It disappears"
+   ],
+   "answer": "It looks black",
+   "kind": "pick"
+  },
+  {
+   "q": "Many museum paintings contain a large patch of this exact bright tomato colour.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "For two centuries Europeans grew the tomato as an ornamental and called it the apple of love.",
+  "Under green light alone a red tomato looks black; add red light first and it blazes.",
+  "Where to look: only 5 of 23,781 museum paintings in our archive carry this exact tomato red."
+ ],
+ "words": 982,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Reworded Pastoureau passage that followed the source too closely.",
+   "Pastoureau, Baty plate, Paterson (Heinz, Pantone), Livingstone, Eckstut, Finlay, Jarman verified."
+  ]
+ }
+}

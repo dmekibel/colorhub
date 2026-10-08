@@ -568,8 +568,9 @@ function rcTierLine(src) {
   if (has("jp")) return "A traditional Japanese color name";
   return "Origin undocumented";
 }
-function rcPassportHTML(src) {
+// noTier: the color page's Names and codes drawer says the tier itself, in the cover's words (js/richpage.js)
+function rcPassportHTML(src, noTier) {
   const stamps = RC_STAMPS.filter(([k]) => (src || []).includes(k));
   if (!stamps.length) return "";
-  return `<div class="rc-passport">${stamps.map(([, label, date]) => `<span class="rc-stamp"><b>${esc(label)}</b>${date ? `<em>${esc(date)}</em>` : ""}</span>`).join("")}</div><p class="fine rc-tier">${esc(rcTierLine(src))}.</p>`;
+  return `<div class="rc-passport">${stamps.map(([, label, date]) => `<span class="rc-stamp"><b>${esc(label)}</b>${date ? `<em>${esc(date)}</em>` : ""}</span>`).join("")}</div>${noTier ? "" : `<p class="fine rc-tier">${esc(rcTierLine(src))}.</p>`}`;
 }

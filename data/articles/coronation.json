@@ -1,0 +1,200 @@
+{
+ "slug": "coronation",
+ "name": "Coronation",
+ "hex": "#512944",
+ "names": [
+  "Coronation"
+ ],
+ "tier": "commercial",
+ "depth": "medium",
+ "lede": "Coronation is a very dark, reddish purple that appears in the 1930 Maerz and Paul color dictionary; the sources do not say who named it, but the ceremony it recalls has a long and mostly red history.",
+ "sections": [
+  {
+   "id": "swatch",
+   "title": "A purple in a dictionary",
+   "body": "The swatch comes from the Maerz and Paul dictionary of 1930, plate 46, and the name is recorded from 1917 [1]. It is a deep purple, close to [[aubergine]] (about 9 units of ΔE away) and to [[purple-violet]] [1]. The books we hold are silent on why this purple took its name, and on who first used it.\n\nSo the history that follows is the history of the ceremony and its colors, not of this exact swatch."
+  },
+  {
+   "id": "red",
+   "title": "Coronations were red first",
+   "body": "The oldest coronation color in the books is red. Charlemagne's biographer Einhard reports that at his coronation in Rome on Christmas Day, 800, he stood before the pope dressed entirely in red: tunic, cloak and shoes [2]. His grandson Charles the Bald received the red cloak, with other insignia, from Pope John VIII at his own coronation in 875 [2]. By the year 1000 the mantle ranked among the imperial insignia, with the globe, sword, scepter and holy lance [2].\n\nThe best surviving example is the mantle woven in Palermo for Roger II of Sicily, crowned in December 1130: red silk, embroidered with gold and silver thread and set with almost five thousand pearls [2]. Henry VI had it carried to Germany in 1194, and it was used at the coronation of emperors until the end of the eighteenth century [2]. Kings of Spain, Scotland, Poland and especially England also had red coronation mantles, which Pastoureau reads as a claim on the inheritance of ancient [[imperial-purple]] and [[tyrian-purple]] [2]."
+  },
+  {
+   "id": "france",
+   "title": "France chose blue",
+   "body": "The kings of France, who always asserted their difference from other rulers, never wore the red mantle [2]. From Philip Augustus, crowned in 1179, until Charles X in 1825, the coronation mantle was azure sown with golden fleurs-de-lis [2]. Over the centuries the azure grew darker and sometimes took on purplish or crimson shades [2]. Blue also appeared at royal anointings, feasts and entries, which helped to spread the taste for it in the thirteenth and fourteenth centuries [3].\n\nGreen had a smaller role. A Roman serpentine paten inlaid with gold fish, kept at Saint-Denis, served for centuries at the crowning of French queens [4]."
+  },
+  {
+   "id": "england",
+   "title": "Scarlet at the English court",
+   "body": "For his coronation Richard II dressed in crimson from foot to gown [5]. Elizabeth I enjoyed scarlet as a princess but, after her coronation in 1558, turned to neutral or broken tones such as tawny, gold and ash, and dressed her ladies and retainers in scarlet instead [6]. At the next coronation, of James I, William Shakespeare was issued four and a half yards of scarlet cloth for his livery as a royal actor [5][6]."
+  },
+  {
+   "id": "television",
+   "title": "Seen in grey",
+   "body": "Derek Jarman recalls that in the 1950s the purples and reds of the Coronation were enchanting, but his family saw them in grey on a television [7]. That is a fair warning for this swatch: it is a dark color that a monochrome screen reduces to near-black."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This color is rare in our archive: 5 of 23,781 paintings contain it on at least five per cent of the canvas, within six units of ΔE [8]. The earliest is Gentile da Fabriano's [[painting:commons-Q111821584|Adoration of the Three Kings]], from 1423, where it covers 24 per cent [8]. The largest share belongs to Kristian Zahrtmann's [[painting:smk-KMS7474|Self-portrait by Lamplight]], 1914, at 34 per cent [8]. Of its role in a painting's lightness order, 60 per cent is shadow and 40 per cent midtone [8].\n\nThe contrast against white is 12 to 1, so the swatch is legible as text-on-light [8]. These are photographs of aged, varnished paintings, so a color match is not a pigment test [8]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented; recalls the ceremony",
+   "first_recorded": "1917, recorded in Maerz and Paul (1930), plate 46",
+   "source": "Maerz & Paul, A Dictionary of Color, 1930"
+  },
+  "aka": [],
+  "siblings": [
+   "aubergine",
+   "purple-violet"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "imperial-purple",
+    "gloss": "the historical purple of emperors, a different swatch and a different story"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#512944",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 5,
+  "first": {
+   "id": "commons-Q111821584",
+   "year": 1423,
+   "cover": 0.24
+  },
+  "role": {
+   "shadow": 0.6,
+   "mid": 0.4
+  },
+  "measured": {
+   "lch": [
+    23,
+    24,
+    339
+   ],
+   "contrast_white": 12.0,
+   "nearest": [
+    [
+     "Aubergine",
+     8.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz & Paul 1930, first recorded 1917, plate 46 L 8; nearest names Aubergine (ΔE 8.6) and Purple Violet",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, Red: The History of a Color, chapter on the Romans and the medieval emperors (epub chapter 19)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Blue: The History of a Color, epub chapter 8",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, epub chapter 14 (serpentine paten, Saint-Denis)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, epub chapter 7 and footnote (epub chapter 42)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, epub chapter 65 (\"Scarlet\")",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 31",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive (tools/article_field.py), #512944, ΔE 6, at least 5% of canvas, as photographed; contrast computed from sRGB luminance",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What color was the coronation mantle of the kings of France?",
+   "choices": [
+    "Azure blue sown with golden fleurs-de-lis",
+    "Red silk with pearls",
+    "Imperial purple",
+    "Green with gold fish"
+   ],
+   "answer": "Azure blue sown with golden fleurs-de-lis",
+   "kind": "pick"
+  },
+  {
+   "q": "In what did Charlemagne appear at his coronation in Rome in 800, according to Einhard?",
+   "choices": [
+    "Entirely red",
+    "Entirely white",
+    "Blue with a gold hem",
+    "A purple cloak and white shoes"
+   ],
+   "answer": "Entirely red",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the books explain why this purple was named Coronation.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Charlemagne was crowned in red from head to foot in 800; the kings of France later chose blue instead.",
+  "This dark purple is rarer than it looks: only 5 of 23,781 archive paintings contain it on a twentieth of the canvas."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported claim that the name is a modern trade-and-fashion name."
+  ]
+ },
+ "words": 607
+}

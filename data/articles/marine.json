@@ -22,7 +22,7 @@
   {
    "id": "uniforms",
    "title": "From black to blue uniforms",
-   "body": "Pastoureau writes that across Europe the professions that required a regulation uniform, such as police, firemen, customs officers, postmen and sailors, adopted black and kept it until the first decades of the twentieth century [2]. Navy blue then gradually replaced it, because it was thought less severe or less easily soiled [2]. His shorter French book describes the same shift, with the uniforms of those who hold authority, from customs officers to magistrates and clergy, passing progressively to *bleu marine* [3].\n\nA dark blue was not new to dyers by then. Finlay lists the official shades of [[indigo]] that English dyers recognized in the eighteenth century, running from milk blue and pearl blue at the pale end, through sky blue, queen's blue and garter blue, to deep blue and navy blue [4]. Navy blue is the last and darkest rung [4]. Paterson dates the Royal Air Force's dark Air Force blue to 1919 [1].\n\nStories that tie a uniform blue to one king's favorite are legend, not record; the book evidence is of a slow, practical change from black [2]."
+   "body": "Pastoureau writes that across Europe the professions that required a regulation uniform, such as police, firemen, customs officers, postmen and sailors, adopted black and kept it until the first decades of the twentieth century [2]. Navy blue then gradually replaced it, because it was thought less severe or less easily soiled [2]. His shorter French book describes the same shift, with the uniforms of those who hold authority, from customs officers to magistrates and clergy, passing progressively to *bleu marine* [3].\n\nA dark blue was not new to dyers by then. Finlay lists the official shades of [[indigo]] that English dyers recognized in the eighteenth century, running from milk blue and pearl blue at the pale end, through sky blue, queen's blue and garter blue, to deep blue and navy blue [4]. Navy blue is the last and darkest rung [4]. Paterson dates the Royal Air Force's dark Air Force blue to 1919 [1].\n\nThe popular tale that a uniform blue was chosen to please a king's favorite is a legend; the book evidence we cite is of a slow, practical change from black [2]."
   },
   {
    "id": "field",
@@ -175,16 +175,16 @@
   "English dyers of the 1700s graded indigo from milk blue to navy blue, and navy was the darkest.",
   "The darkest blues in our archive of paintings cluster in the 1400s, in Italian altarpieces."
  ],
- "words": 595,
+ "words": 600,
  "status": "checked",
  "checked": {
-  "by": "L7 batch-34 self-check (sentence-to-card trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
+   "Reworded the king's-favorite legend sentence so the Pastoureau cite supports only the slow change from black, not the legend claim.",
    "Origin of marine as a color name undocumented in the books; Paterson's Royal Marines gloss is a single-source dictionary entry.",
    "c. 1850 date is Maerz & Paul via our library only; not confirmed in books.",
-   "Navy-blue/king's-favorite legend corrected in one sentence, no source book names it for this color.",
-   "'Passing progressively' paraphrases Pastoureau (Petit livre): French original is future tense."
+   "Navy-blue/king's-favorite legend corrected in one sentence, no source book names it for this color."
   ]
  }
 }

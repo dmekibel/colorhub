@@ -1,0 +1,253 @@
+{
+ "slug": "sepia",
+ "name": "Sepia",
+ "hex": "#8A6A4F",
+ "names": [
+  "Sepia"
+ ],
+ "tier": "pigment",
+ "depth": "long",
+ "lede": "Sepia is the warm brown ink of the cuttlefish, named with the Greek word for the animal; it dried on drawing papers for centuries and then lent its name to old photographs.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A cuttlefish's name",
+   "body": "*Sepia* is the Greek word for cuttlefish, and the brown pigment is named after the animal [1]. The common cuttlefish, *Sepia officinalis*, is the species most books have in mind [2][3]. Paterson's dictionary defines the color as a reddish dark brown, first made from the animal's ink and used from the 1700s in place of bistre [4].\n\nThe word has since moved well beyond the ink. Most people now meet it as a tone: the warm brown of old photographs, a word for nostalgia, a filter on a phone [2]. The swatch here is a dictionary-style brown, and the section on the swatch below says how loosely that ties it to the ink."
+  },
+  {
+   "id": "material",
+   "title": "The ink and what it is",
+   "body": "A cuttlefish under attack releases a cloud of dark ink as a smokescreen, and Aristotle already described this as a shield held in front of the body [1]. The ink is almost pure melanin, the same family of pigments that darkens hair and skin, and it has great tinting strength [2]. The Pigment Compendium puts it more exactly: sepia contains a pure eumelanin, the black type of melanin as opposed to the reddish pheomelanins [3].\n\nThe chemistry is less settled than the color. The same source notes that, as of 2002, no one had assigned a firm molecular structure to melanin [3]. Cuttlefish ink therefore sits among the pigments we have used for millennia without being able to draw their formula."
+  },
+  {
+   "id": "making",
+   "title": "Making the pigment",
+   "body": "The recipe was stable for centuries. The ink sacs are cut out of the animal and dried so that they do not rot [1]. The dried sacs are boiled in an alkali, potash or soda, and the solution is filtered clear of tissue [1][3]. Acid then precipitates the pigment, which is washed, dried and ground into cakes for sale [1][2][3].\n\nThe Pigment Compendium quotes a description of this process from Terry in 1893, itself apparently taken from Ure [3]. Jarman, writing as a painter, calls sepia the odd one out among the browns: the earth browns are all clays and oxides baked red hot, while sepia is an animal ink boiled with lye [7]."
+  },
+  {
+   "id": "history",
+   "title": "From Roman ink to the colourman's cake",
+   "body": "The ancient record is thin but real. St Clair reports that Cicero and Persius both mention sepia as an ink, and that the poet Martial probably wrote with it [2]. She adds an anecdote of Martial mailing a sponge with a book so the recipient could wipe the verses away if they disliked them [2]. Coles agrees that sepia was a writing ink from Roman times, and says it became popular for drawing only from the Renaissance [1]. St Clair also names Leonardo as a keen user of sepia in his sketches [2].\n\nWhen it became an artist's staple is where the books disagree. Coles says it was introduced as a watercolor around 1780 and generally replaced bistre for wash drawings [1]. Paterson dates the replacement of bistre to the 1700s [4]. Finlay says brown ink was often made from sepia after the eighteenth century [5]. The Pigment Compendium, following Harley, implies that sepia only became available at the start of the 1800s, partly displacing Indian ink as well as bistre [3]. A safe summary is that the ink was ancient, the watercolor cake came in the late eighteenth or early nineteenth century, and the books do not agree on the year.\n\nBistre was the soot of boiled beechwood, a Renaissance painter's brown that was not very lightfast [4]. In 1835 the colorist George Field described sepia as a powerful dusky brown of fine texture and recommended it as a watercolor [2]. The same Field gives a recipe for neutral tint that includes sepia, mixed with indigo or another blue and a madder or other lake [13]."
+  },
+  {
+   "id": "names",
+   "title": "Variants and relatives",
+   "body": "Nineteenth-century colourmen sold several kinds. The Pigment Compendium lists old synonyms such as *seppia* and animal aethiops, along with a liquid form of the ink [3]. Two trade names, warm and Roman, meant sepia adjusted with other pigments, as Salter recorded in 1869 [3].\n\nIn our name set the nearest relatives are the earth browns. [[umber]] and [[raw-umber]] are mineral browns, and [[bistre]] is the soot brown that sepia displaced. [[sienna]] sits warmer and redder. The cuttlefish brown differs from all of these in being an animal ink rather than a ground rock or a burnt wood."
+  },
+  {
+   "id": "photography",
+   "title": "Sepia the photograph",
+   "body": "Early photography could not hold much color. Ball notes that photographs of artworks were still tonal sketches in sepia and grey, which left art lovers unsatisfied [8]. The brown tone came from chemical toning of the print, which replaced the silver with a more stable compound and so made the image last longer [2]. In that sense photographic sepia is named for the ink's color, not made from the ink.\n\nThe tone then took on a second life as a signal of the past. Gurney observes that people living early in the twentieth century grew used to seeing the world in black and white or sepia, and that comics still use sepia for flashbacks [9]. St Clair adds that digital tools now let a photographer disguise a new image as a century-old one in a few clicks [2]."
+  },
+  {
+   "id": "leiner",
+   "title": "The sepia blue that was not",
+   "body": "One odd episode shows how loosely the word sat on the animal. By Finlay's account, a rabbi named Leiner in Poland concluded in the 1880s that the sacred blue thread of the Jewish prayer shawl had come from a squid [6]. Chemists showed him that a fine blue could be made from squid sepia by adding iron filings, and within months thousands of men wore blue fringes [6].\n\nIn 1913 the student Isaac Herzog, later the first Chief Rabbi of the State of Israel, sent some of the dye to a laboratory, which reported that it was not organic at all but Prussian blue [6]. The squid had done nothing; the iron had done the dyeing [6]. This is a single-source account, but it is a good reminder that an ink can be a recipe's ingredient without being its color."
+  },
+  {
+   "id": "swatch",
+   "title": "What this swatch is",
+   "body": "The swatch is not a measured sample of cuttlefish ink. Our library traces the name to Ridgway's 1886 nomenclature of colors, carried over into his 1912 *Color Standards*, and it also appears in the Maerz and Paul dictionary of 1930 [10]. The ISCC-NBS standard of 1955 classes it as a moderate yellowish brown, within a color distance of 4 of the swatch [10].\n\nThe sources disagree about the color itself. Ridgway's own aged plate scans to a darker, greyer brown, around #665841, a common web list gives a redder #704214, and the xkcd survey gives a warmer #985E2B [10]. All of them are brown, but none is the one true sepia, and real ink and cake vary by maker and by how dilute the wash is."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Sepia is common as a painted brown. In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 3,681 works, about 15 per cent [11]. These are photographs of aged, varnished pictures, so the count says more about brown surfaces than about the ink [11].\n\nThe pattern follows age. In the 1100s the rate is 46 per cent of the 50 works we hold, and it falls to about 13 per cent from the 1600s onward [11]. The highest rates by painter include Maarten van Heemskerck, 8 of 12 works, and Corrado Giaquinto, 8 of 13 [11]. By country, Korea, Tibet and China rank highest, which fits aged paper and silk more than any pigment [11]. The earliest match is a funerary papyrus of about 1069 BC, long before the name existed in our sources, so a match here is a look-alike hue and not proof of cuttlefish ink [11].\n\nIn Google Books, the word *sepia* rises from about 15 per cent of its peak in 1800 to its peak around 1880, dips, and still stays at about 45 per cent of that peak in recent decades [12]. Used as an adjective, the color sense rose fastest in the 1900s and peaks in the 2010s [12]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the cuttlefish (Greek sepia)",
+   "first_recorded": "as writing ink in Roman times; as a watercolor cake from the late 1700s or early 1800s (books disagree)",
+   "source": "Coles, Chromatopia, p. 107; Paterson, A Dictionary of Colour, p. 362"
+  },
+  "aka": [
+   "cuttlefish ink",
+   "seppia",
+   "Roman sepia",
+   "warm sepia"
+  ],
+  "siblings": [
+   "umber",
+   "raw-umber",
+   "bistre"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "bistre",
+    "gloss": "the soot-based brown that sepia replaced in wash drawings"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "it",
+    "name": "seppia (cuttlefish)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#8A6A4F",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 3681,
+  "rate": 0.1548,
+  "peak_century": 1100,
+  "ngram": {
+   "peak": 1880,
+   "rel_1800": 0.154,
+   "rel_2000": 0.449
+  },
+  "measured": {
+   "iscc": "moderate yellowish brown",
+   "iscc_de": 4.0,
+   "alts": {
+    "ridgway_scan": "#665841",
+    "wiki": "#704214",
+    "xkcd": "#985E2B"
+   }
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 107",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Sepia\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Kirby, Pigment Compendium, \"sepia\", p. 337",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"sepia\" and \"bistre\", pp. 51, 362",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 11",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 19",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 44",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 20",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Gurney, Colour and Light, p. 112",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "ColorHub library: ridgway-1886, Ridgway 1912, ISCC-NBS 1955 block 61, Maerz & Paul 1930",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "ColorHub archive and graph field notes, as photographed (n = 23,781)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "Google Books Ngram, \"sepia\" (5-year smoothed, relative to peak)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"neutral tint\", p. 288",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What gives cuttlefish ink its brown?",
+   "choices": [
+    "Melanin",
+    "Iron oxide",
+    "Soot",
+    "Tannin"
+   ],
+   "answer": "Melanin",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: photographic sepia is made from cuttlefish ink.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which brown did sepia largely replace in wash drawings?",
+   "choices": [
+    "Bistre",
+    "Burnt umber",
+    "Madder brown",
+    "Walnut stain"
+   ],
+   "answer": "Bistre",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Sepia is named for the animal: the Greek word for cuttlefish.",
+  "A famous blue thread dye said to be made from squid sepia turned out to be Prussian blue.",
+  "Look at an old wash drawing: the warm brown may be cuttlefish ink or the bistre it replaced."
+ ],
+ "words": 1325,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

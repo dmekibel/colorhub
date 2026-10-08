@@ -246,7 +246,8 @@ function awPainter(slug, push = true) {
   const acts = el.querySelector("[data-aw-acts]");
   if (typeof colorSet === "function" && typeof csActions === "function") {
     const hx = [...new Set([...(A.clusters || []).flatMap(c => c.colors.slice(0, 3)), ...(P.sig || []).map(r => awCol(r[0])[0])])].map(awHex).filter(h => h !== "#808080");
-    acts.appendChild(csActions(colorSet({ kind: "painter", id: slug, title: A.name, colors: hx.map(h => ({ h })), src: "painter/" + slug }), { back: () => awPainter(slug, false) }));
+    acts.appendChild(csActions(colorSet({ kind: "painter", id: slug, title: A.name, colors: hx.map(h => ({ h })), src: "painter/" + slug,
+      ...(hx.length > 3 ? { pick: k => hx.slice(0, k).map(h => ({ h })), max: hx.length } : {}) }), { back: () => awPainter(slug, false) }));
   }
   if (typeof whosePalette === "function") acts.insertAdjacentHTML("beforeend", `<button class="btn ghost" data-awwhose="${esc(slug)}">Whose palette? Guess ${esc(A.name.split(" ").pop())} from five colors ${ICON.arrow}</button>`);
   acts.onclick = e => { const w = e.target.closest("[data-awwhose]"); if (w) whosePalette(w.dataset.awwhose); };

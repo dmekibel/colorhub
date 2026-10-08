@@ -17,7 +17,8 @@ const H = {
   // Tap something on a color/name page that should open another page (a swatch, a near color, a palette chip).
   async tapSwatch(t) {
     const before = H.title(t) + "|" + H.chip(t);
-    const sels = ["[data-swatch]", ".lk-row[data-cp-near]", ".lk-row[data-np-near]", ".pchip[data-node]", ".kin[data-node]"];
+    // the Walk's honeycomb is a color page's one neighbor list now (it absorbed Nearest names, 2026-10-08)
+    const sels = ["[data-swatch]", ".lk-row[data-cp-near]", ".lk-row[data-np-near]", ".rp-hc-c[data-rc-open]", ".pchip[data-node]", ".kin[data-node]"];
     let target = null, used = "";
     for (const s of sels) { const e = t.$$(s, t.$("#app"))[0]; if (e) { target = e; used = s; break; } }
     t.expect(target, "no swatch / near-color / palette chip on the page to tap");
@@ -139,7 +140,7 @@ scenario("home", "Arrange sheet: Looks and the feel sliders", async t => {
   await H.sheet(t, "arrange");
   t.expect(!t.$(".hm-tabs, [data-tab]"), "the Arrange sheet still has tabs");
   const styles = t.$$(".hm-look-chip");
-  t.expect(styles.length >= 3, `only ${styles.length} style chips`);
+  t.expect(styles.length === 2, `${styles.length} Look chips (Bubbles and Honeycomb; magnification is the Magnify slider)`);
   const n0 = H.num(t.text("[data-count]"));
   for (const s of styles.filter(s => !s.classList.contains("on")).slice(0, 3)) {
     await t.click(s, { wait: 300 });
@@ -165,7 +166,7 @@ scenario("home", "Arrange sheet: the strip morphs the map and keeps every color"
   await H.homeReady(t);
   await H.sheet(t, "arrange");
   const arrs = t.$$(".hm-chooser [data-arr]");
-  t.expect(arrs.length >= 8, `only ${arrs.length} arrangements`);
+  t.expect(arrs.length >= 5, `only ${arrs.length} shapes`);
   await t.waitFor(() => arrs.every(b => { const c = b.querySelector("canvas"), d = c.getContext("2d").getImageData(0, 0, c.width, c.height).data; for (let i = 3; i < d.length; i += 16) if (d[i]) return true; return false; }), 6000, "every arrangement picture to draw");
   const n0 = H.num(t.text("[data-count]"));
   for (const b of arrs.filter(b => !b.classList.contains("on"))) {
@@ -175,9 +176,9 @@ scenario("home", "Arrange sheet: the strip morphs the map and keeps every color"
     t.expect(H.num(t.text("[data-count]")) === n0, `arrangement "${b.dataset.arr}" changed the count`);
     t.expect(/\S/.test(t.text("[data-arr-sub]")), "no line says what the arrangement means");
   }
-  // every color exactly once in each arrangement
-  const dupes = t.ev("HONEY_ARR_IDS.filter(id => { const its = hmStageItems(250); const l = honeyLayout(its, hmLayoutKey(id, 'original')); return new Set(l.pts.map(p => p.it.n)).size !== its.length || l.pts.length !== its.length; })");
-  t.expect(!dupes.length, `arrangements that drop or repeat colors: ${dupes.join(", ")}`);
+  // every color exactly once in each shape, in every order
+  const dupes = t.ev("HONEY_ARR_IDS.flatMap(id => (honeyOrdersOf(id).length ? honeyOrdersOf(id) : ['']).map(o => [id, o])).filter(([id, o]) => { const its = hmStageItems(250); const l = honeyLayout(its, hmLayoutKey(id, 'original', o)); return new Set(l.pts.map(p => p.it.n)).size !== its.length || l.pts.length !== its.length; }).map(x => x.join(':'))");
+  t.expect(!dupes.length, `shape and order pairs that drop or repeat colors: ${dupes.join(", ")}`);
   // leaving: the clear ✕, and a tap on the map above the sheet
   await t.click("[data-sheet-close]", { wait: 450 });
   t.expect(!t.$(".hm-chooser"), "✕ did not close the Arrange sheet");
@@ -187,6 +188,40 @@ scenario("home", "Arrange sheet: the strip morphs the map and keeps every color"
   scrim.dispatchEvent(new t.w.PointerEvent("pointerdown", { bubbles: true, cancelable: true }));
   await t.sleep(450);
   t.expect(!t.$(".hm-chooser"), "a tap on the map did not close the View sheet");
+});
+
+scenario("home", "Arrange sheet: Center on and Sort by change the order inside a shape, and are kept", async t => {
+  await H.homeReady(t);
+  await H.sheet(t, "arrange");
+  const n0 = H.num(t.text("[data-count]"));
+  await t.click('.hm-chooser [data-arr="rings"]', { wait: 150 });
+  t.expect(/Center on/.test(t.text("[data-ord-row]")), "Rings has no Center on row");
+  for (const id of ["vivid", "muted", "dark", "known", "near", "today"]) {
+    await t.click(`[data-ord="${id}"]`, { wait: 120 });
+    t.expect(t.ev("hmOrd('rings')") === id && t.$(`[data-ord="${id}"]`).classList.contains("on"), `Center on ${id} did not turn on`);
+    t.expect(t.ev("HM_CTRL.getCfg().resolved.layout").startsWith("rings~" + id), `the map did not take Center on ${id}`);
+    t.expect(/Middle: .+ Edge: /.test(t.text("[data-arr-sub]")), `no line says what the middle and edge mean (${id})`);
+    t.expect(H.num(t.text("[data-count]")) === n0, `Center on ${id} changed the count`);
+  }
+  await t.click('[data-ord="vivid"]', { wait: 120 });
+  // the most vivid sits in the middle: the middle bubble is stronger than the average
+  const midC = t.ev("(() => { const l = honeyLayout(hmStageItems(100), 'rings~vivid'); const s = l.pts.slice().sort((a, b) => Math.hypot(a.x, a.y) - Math.hypot(b.x, b.y)); return [s[0].it.C, s.reduce((t, p) => t + p.it.C, 0) / s.length]; })()");
+  t.expect(midC[0] > midC[1] * 1.5, `Center on Vivid put a weak color in the middle (${midC.map(x => x.toFixed(0)).join(" vs ")})`);
+  await t.click('.hm-chooser [data-arr="map"]', { wait: 150 });
+  t.expect(/Sort by/.test(t.text("[data-ord-row]")), "the Map has no Sort by row");
+  await t.click('[data-ord="light"]', { wait: 150 });
+  t.expect(t.ev("HM_CTRL.getCfg().resolved.layout") === "map~light", "the Map did not take Sort by lightness");
+  t.expect(t.$$(".hm-ax-l, .hm-ax-r").length === 2, "no edge captions for a sorted Map");
+  await t.click('[data-ord="painted"]', { wait: 400 });
+  await t.waitFor(() => t.ev("!!HONEY_PAINTED") && t.ev("HM_CTRL.getCfg().resolved.layout") === "map~painted", 6000, "the painting counts to load");
+  await t.click('[data-ord="hue"]', { wait: 150 });
+  t.expect(t.ev("S.hm.ord.rings") === "vivid" && t.ev("S.hm.ord.map") === "hue", "the orders were not kept per shape");
+  await t.click('.hm-chooser [data-arr="temp"]', { wait: 150 });
+  t.expect(t.$("[data-ord-row]").hidden, "Warm and cool shows an order row (its plane has no order)");
+  // an old save upgrades: Color wheel = Rings centered on greys; the Magnifier = Bubbles with a strong Magnify
+  t.ev("S.hm.arr = 'wheel'; S.hm.style = 'magnifier'; S.hm.feel.mag = .5; hmView()");
+  t.expect(t.ev("S.hm.arr") === "rings" && t.ev("S.hm.ord.rings") === "muted" && t.ev("S.hm.style") === "original" && t.ev("S.hm.feel.mag") >= .9, "an old save did not upgrade");
+  t.ev("S.hm.arr = 'map'; S.hm.ord = {}; S.hm.feel.mag = HM_FEEL0.mag");
 });
 
 scenario("home", "View sheet: families tell the truth and combine with tone and your words", async t => {
@@ -589,6 +624,12 @@ scenario("pages", "namePage x3: renders, a near name opens another, Back works",
 // js/article-refs.js: the figure cards in an article (Mauve has an article, a twin gem, a film and paintings that hold the color)
 scenario("pages", "article figure cards: Mauve draws them, a card opens its page, Back returns to the article", async t => {
   await H.openPage(t, "#/color/mauve", "Mauve");
+  // a long story is a door on the page (chapters, minutes); Begin reading opens the book on its own screen
+  const door = await t.waitFor(".ar-door [data-ar-begin]", 20000, "Mauve's story door");
+  t.expect(!t.$(".cp-page .ar-sec"), "the long story is drawn inline on the color page, not behind its door");
+  t.expect(t.$$(".ar-door [data-ar-chap]").length >= 2, "the door lists no chapters");
+  await t.click(door, { wait: 700 });
+  await t.waitFor(() => t.$(".ar-read .ar") && /#\/read\/mauve/.test(decodeURIComponent(t.w.location.hash)), 15000, "the book at #/read/mauve");
   await t.waitFor(() => t.$$(".ar-fig").length >= 2, 25000, "the article's figure cards");
   const figs = t.$$(".ar-fig");
   t.expect(figs.length <= 5, `${figs.length} auto-figures, the limit is 5`);
@@ -601,7 +642,9 @@ scenario("pages", "article figure cards: Mauve draws them, a card opens its page
   await t.click(card, { wait: 700 });
   await t.waitFor(() => !t.$(".ar") && t.$(".p-title, .cp-hero-foot h1, .gl-page, .film-page"), 10000, `the page for "${title}"`);
   await t.click("[data-back]", { wait: 600 });
-  await t.waitFor(() => t.$(".ar") && t.$$(".ar-fig").length >= 2, 20000, "the article and its figures after Back");
+  await t.waitFor(() => t.$(".ar-read .ar") && t.$$(".ar-fig").length >= 2, 20000, "the book and its figures after Back");
+  await t.click("[data-back]", { wait: 600 });
+  await t.waitFor(() => t.$(".cp-page .cp-hero-foot h1") && H.title(t) === "Mauve" && t.$(".ar-door"), 15000, "Back from the book to Mauve's page and its door");
 });
 
 scenario("pages", "a tapped in-between hex opens its nearest name with 'Your color'", async t => {
@@ -717,8 +760,8 @@ scenario("home", "Study corner opens the instant deck seeded with the middle col
 // ================================================================== LEARN A SET (js/learnset.js)
 const LS_SOLVE = `(() => {
   const st = document.querySelector('.ls-study .pr-stage'); if (!st) return 'gone';
-  const nx = st.querySelector('[data-next]'); if (nx) { nx.click(); return 'next'; }
   const boss = st.querySelector('[data-boss]'); if (boss) { boss.click(); return 'boss'; }
+  const nx = st.querySelector('[data-next]'); if (nx) { nx.click(); return 'next'; }
   const it = st._lsIt, nm = it ? prName(it) : '';
   if (st.querySelector('.pr-s-match') && st._prMatch) {
     const { tiles } = st._prMatch, btns = [...st.querySelectorAll('.pr-tile')];
@@ -779,6 +822,86 @@ scenario("learnset", "Study: a mixed session runs to the results", async t => {
   await t.click(".ls-res [data-a=look]", { wait: 500 });
   await t.waitFor(".ls-lookscr", 4000, "Look again from the results");
 });
+// Answer wrong (every other question, so the session can end) and press Next the way an iPhone does: a touch
+// pointerdown/pointerup with no click after it (iOS can drop the synthesized click), or the miss compare's Got it.
+// David, 2026-10-08: "I'm clicking Next and it's stuck."
+const LS_WRONG = `(() => {
+  const st = document.querySelector('.ls-study .pr-stage'); if (!st) return 'gone';
+  const touch = (b, k) => { const r = b.getBoundingClientRect(), o = { bubbles: true, pointerId: 7 + k, pointerType: 'touch', isPrimary: true, clientX: r.left + r.width / 2, clientY: r.top + r.height / 2 };
+    b.dispatchEvent(new PointerEvent('pointerdown', o)); b.dispatchEvent(new PointerEvent('pointerup', o)); };
+  window.__lsN = (window.__lsN || 0) + 1;
+  const mc = document.querySelector('.mc:not(.out) .mc-go'); if (mc) { if (window.__lsN % 2) touch(mc, 1); else mc.click(); return 'mc'; }
+  const meet = document.querySelector('.ls-study [data-meetnext]'); if (meet) { meet.click(); return 'meet'; }
+  const boss = st.querySelector('[data-boss]'); if (boss) { boss.click(); return 'boss'; }
+  const nx = st.querySelector('[data-next]'); if (nx) { if (window.__lsN % 2) touch(nx, 2); else nx.click(); return 'next'; }
+  const it = st._lsIt, nm = it ? prName(it) : '', wrong = (window.__lsW = !window.__lsW);
+  const pick = labels => { const k = labels.findIndex(t => (t === nm) !== wrong); return k < 0 ? 0 : k; };
+  if (st.querySelector('.pr-s-match') && st._prMatch) {
+    const { tiles } = st._prMatch, btns = [...st.querySelectorAll('.pr-tile')];
+    const k = tiles.findIndex((t, i) => !t.sw && !btns[i].classList.contains('gone')); if (k < 0) return 'wait';
+    const j = tiles.findIndex(t => t.sw && t.i === tiles[k].i); btns[k].click(); btns[j].click(); return 'match';
+  }
+  if (st.querySelector('.pr-s-odd')) { const k = st._prOpts.findIndex(o => !o.same); st._prChoose(wrong ? (k + 1) % st._prOpts.length : k); return wrong ? 'oddx' : 'odd'; }
+  if (st.querySelector('.pr-s-quiz')) { const b = [...st.querySelectorAll('.pr-opt')]; b[pick(b.map(x => x.textContent.trim()))].click(); return wrong ? 'qnx' : 'qn'; }
+  if (st.querySelector('.pr-s-qc')) { const b = [...st.querySelectorAll('.pr-cell')]; b[pick(b.map(x => x.querySelector('.pr-tag').textContent.trim()))].click(); return wrong ? 'qcx' : 'qc'; }
+  if (st.querySelector('.pr-s-type input') && !st.querySelector('.pr-typef.done')) { st._prType(wrong ? 'qqqq' : nm); return wrong ? 'typex' : 'type'; }
+  if (st.querySelector('.pr-s-card')) { if (!st.querySelector('.pr-card.revealed')) { st._prReveal(); return 'reveal'; } const y = st.querySelector(wrong ? '[data-no]' : '[data-yes]'); if (y) { y.click(); return 'card'; } }
+  return 'wait';
+})()`;
+scenario("learnset", "Study: wrong answers and touch-only Next play a 3-color session to the end", async t => {
+  await H.openPage(t, "#/color/teal", "Teal");
+  t.ev("window.__lsN = 0; window.__lsW = false");
+  if (t.ev("typeof lsQuick === 'function'")) { t.ev("lsQuick({ seed: prByKey('teal') })"); }
+  else {
+    await t.click("[data-learnit]", { wait: 600 });
+    await t.waitFor(".ls-sheet", 4000, "the Learn sheet");
+    t.ev("(() => { const r = document.querySelector('.ls-sheet [data-size]'); r.value = 3; r.dispatchEvent(new Event('input', { bubbles: true })); })()");
+    await t.click(".ls-sheet [data-go]", { wait: 600 });
+  }
+  await t.waitFor(".ls-study", 6000, "the Study screen");
+  const seen = [];
+  let lastSig = "", same = 0;
+  for (let i = 0; i < 260 && !t.$(".ls-res"); i++) {
+    const k = t.ev(LS_WRONG); seen.push(k);
+    await t.sleep(k === "wait" ? 300 : k === "next" || k === "mc" ? 450 : 300);
+    const sig = t.ev("(() => { const s = document.querySelector('.ls-study .pr-stage'); return s ? s.innerHTML.length + '|' + !!s.querySelector('[data-next]') : 'x'; })()");
+    if (k === "next" && sig === lastSig && /true$/.test(sig)) { same++; t.expect(same < 2, `Next did nothing (stuck after: ${seen.slice(-8).join(" ")})`); } else same = 0;
+    lastSig = sig;
+  }
+  await t.waitFor(".ls-res", 8000, "the results after a session with misses");
+  t.notes.push("steps: " + seen.length + " · " + [...new Set(seen)].join(","));
+  t.expect(seen.some(k => /x$/.test(k)), "the session had wrong answers");
+  t.expect(seen.includes("next") || seen.includes("mc"), "a Next or Got it was pressed after a miss");
+});
+scenario("learnset", "Study: new colors are met (a Meet card each, then the closest two) before any question; Test me skips Meet", async t => {
+  await H.openPage(t, "#/color/teal", "Teal");
+  await t.click("[data-learnit]", { wait: 600 });
+  await t.waitFor(".ls-sheet", 4000, "the Learn sheet");
+  t.expect(t.$$(".ls-sheet [data-pace]").length === 4 && t.$(".ls-sheet [data-pace].on"), "the pace chips, one on");
+  t.expect(/new ones? first|Nothing new/.test(t.text(".ls-sheet [data-pacesay]")), "the pace line says what Study will do");
+  t.ev("(() => { const r = document.querySelector('.ls-sheet [data-size]'); r.value = 4; r.dispatchEvent(new Event('input', { bubbles: true })); })()");
+  await t.click(".ls-sheet [data-go]", { wait: 600 });
+  await t.waitFor(".ls-study .ls-meet", 6000, "a Meet card first");
+  t.expect(/Meet/.test(t.text(".ls-study [data-status]")), "the status says Meet");
+  t.expect(t.$(".ls-meet .ls-meet-n") && t.text(".ls-meet .ls-meet-n").length > 1, "the Meet card names the color");
+  t.expect(!t.$(".ls-study .pr-s-quiz, .ls-study .pr-s-qc"), "no question before the colors are met");
+  const seen = [];
+  for (let i = 0; i < 12 && !t.$(".ls-study .pr-s-quiz, .ls-study .pr-s-qc"); i++) {
+    seen.push(t.$(".ls-mpair") ? "pair" : t.$(".ls-meet") ? "meet" : "?");
+    await t.waitFor(".ls-study [data-meetnext][data-next]", 3000, "the Meet card's Next");
+    await t.click(".ls-study [data-meetnext][data-next]", { wait: 420 });
+  }
+  t.notes.push(seen.join(" "));
+  t.expect(seen.filter(x => x === "meet").length >= 2 && seen.filter(x => x === "meet").length <= 3, `a wave of 2-3 colors is met (${seen.join(" ")})`);
+  t.expect(seen.includes("pair"), "the closest two are shown side by side");
+  t.expect(t.$(".ls-study .pr-s-quiz, .ls-study .pr-s-qc"), "then the first question");
+  // Test me: straight to a question
+  t.ev("lsState().pace = 'test'");
+  t.ev("lsStudy(lsAlike(prByKey('teal'), 4, 5), { label: 'x' })");
+  await t.waitFor(".ls-study .pr-step", 4000, "a Test me session");
+  t.expect(!t.$(".ls-study .ls-meet"), "Test me skips Meet");
+  t.ev("lsState().pace = 'you'");
+});
 scenario("learnset", "Study: stop part-way, Keep going picks each color up at its level", async t => {
   await H.openPage(t, "#/color/teal", "Teal");
   await t.click("[data-learnit]", { wait: 600 });
@@ -804,7 +927,7 @@ scenario("studio", "gamut wheel: presets, mask, keep, swatch tap", async t => {
   await t.click("[data-wheel]", { wait: 700 });
   await t.waitFor("canvas.gw-wheel", 6000, "the gamut wheel");
   const presets = t.$$("[data-m]");
-  t.expect(presets.length === 5, `${presets.length} mask presets instead of 5`);
+  t.expect(presets.length === 7, `${presets.length} mask presets instead of 7`);
   const sw0 = t.$$("i[data-swatch]").map(e => e.dataset.swatch).join();
   for (const p of presets) await t.click(p, { wait: 250 });
   const sw1 = t.$$("i[data-swatch]").map(e => e.dataset.swatch).join();
@@ -1106,6 +1229,14 @@ scenario("map", "On the map: a painting page lights its colors on Home; #/map/ga
   t.notes.push(t.text(".cs-hl-pill"));
   await H.homeReady(t); t.ev("openRoute('#/map/gallery/3')");
   await t.waitFor(() => /named colou?rs? · as photographed/.test(t.text(".cs-hl-pill")), 20000, "a museum painting's constellation from its address");
+  // How many: the measured pool, not a fixed six; the lit set and the named chips follow the slider
+  const nIn = t.$$(".cs-hl-n input").pop();
+  t.expect(nIn && +nIn.max > 6, "a museum painting on the map has no How many slider over its pool");
+  nIn.value = 12; nIn.dispatchEvent(new t.w.Event("input", { bubbles: true })); nIn.dispatchEvent(new t.w.Event("change", { bubbles: true }));
+  await t.sleep(200);
+  const bars = t.$$(".cs-hl-bar"), bar = bars[bars.length - 1], lit = t.ev("HONEY_HL.hexes.length"), chips = bar.querySelectorAll(".cs-hl-c").length;
+  t.expect(lit > 6 && lit <= 12 && chips === lit, `How many 12 lit ${lit} colors and named ${chips}`);
+  t.expect(/%/.test(bar.querySelector(".cs-hl-c").textContent), "the named chips don't say their share of the canvas");
 });
 scenario("map", "panning keeps the resting seams, and fast pans and pinches at every size never blank the canvas", async t => {
   const cv = await H.homeReady(t), r = cv.getBoundingClientRect();

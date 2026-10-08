@@ -1,0 +1,234 @@
+{
+ "slug": "aubergine",
+ "name": "Aubergine",
+ "hex": "#3D0734",
+ "names": [
+  "Aubergine"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Aubergine is the deep purple of the eggplant's skin, so dark on a screen that it reads almost black, and the name of a glaze on Ming-era Chinese porcelain.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The vegetable's name",
+   "body": "Aubergine is the British name for the eggplant, and as a color word it means the purplish blue of the vegetable's skin, according to Paterson, who also lists *aubergine purple* as a shade of purple [1]. Our swatch is the dark end of that range: ISCC-NBS files it as a very dark reddish purple, 3.7 units from its block center [2]. At this lightness a screen shows it as almost black with a plum tint.\n\nThe word had reached fashion reports by 1890 [3]. St Clair notes that in May of that year *Harper's Bazar* suggested aubergine, prune and lees-of-wine, among others, for silks and woolens [3]. Our library's note on Maerz and Paul's dictionary of color dates the word's first recorded use as a color to 1794 [2]. Treat that date as a library note, not as a checked citation."
+  },
+  {
+   "id": "relatives",
+   "title": "A nightshade in the kitchen",
+   "body": "The eggplant, *Solanum melongena*, belongs to the huge nightshade genus of about 1,700 species, which also holds the potato [4]. Another member, black nightshade, has berries that turn from green to purplish black as they ripen, and the Pigment Compendium records it as a source of a green color [4]. Jarman, listing purples in nature, puts plums, grapes, figs and aubergine together [5]."
+  },
+  {
+   "id": "porcelain",
+   "title": "On Chinese porcelain",
+   "body": "Aubergine is also a potter's color. Paterson's entry for *Five Colours* describes Ming-era Chinese porcelain decorated with enamels in five main colors: apple green, aubergine, iron red, violet and yellow, a style also called *wu t'sai* [6]. He dates the Ming era from 1368 to 1642 [6]. A second entry, three-colour ware, names the colors of another family of Chinese pottery as aubergine, blue and turquoise [7].\n\nWhere to look: on a Chinese glazed vessel, the aubergine glaze is one of the listed enamel colors, alongside apple green, iron red, violet and yellow [6]."
+  },
+  {
+   "id": "modern",
+   "title": "A paint-chart color",
+   "body": "Modern paint makers took the name up. In Baty's table of modern equivalents for Werner's colors, Aubergine appears as a paint name in the table, which shows the name was still in use for paints [8]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is a color painters seem to avoid, or varnish hides. In our archive of 23,781 museum paintings, no painting has a color within four units of this swatch covering at least one per cent of the canvas [9]. At this lightness a match would be near black, so what the archive shows is the limit of a photograph of a varnished painting, not proof that artists never used it [9]. Its closest named neighbors are [[dark-plum]] (2.9 units away), [[deep-violet]] (4.9), [[deep-purple]] (5.4) and [[midnight-purple]] (6.9) [2].\n\nThe word is a modern one in print. In Google Books the color sense is almost absent until the early twentieth century, rises fastest from the 2000s and peaks in 2010, the last decade measured [10]. The vegetable and the color share the word, so the curve is only a guide [10]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the aubergine (eggplant), Solanum melongena",
+   "first_recorded": "1794 per our library's note on Maerz and Paul (1930); 1890 in Harper's Bazar via St Clair",
+   "source": "Paterson, A Dictionary of Colour; St Clair, The Secret Lives of Color"
+  },
+  "aka": [
+   "eggplant",
+   "aubergine purple"
+  ],
+  "siblings": [
+   "eggplant",
+   "dark-plum"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "eggplant",
+    "gloss": "the American name for the same vegetable, a different swatch in our library"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "zh",
+    "name": "aubergine glaze on wu t'sai (five-color) porcelain"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#3D0734",
+   "de2000": 4,
+   "min_cover": 0.01
+  },
+  "n_present": 0,
+  "ngram": {
+   "first": 1910,
+   "peak": 2010,
+   "rise": 2000
+  },
+  "measured": {
+   "lch": [
+    11.9,
+    34.1,
+    334.4
+   ],
+   "nearest": [
+    [
+     "Dark Plum",
+     2.9
+    ],
+    [
+     "Deep Violet",
+     4.9
+    ],
+    [
+     "Deep Purple",
+     5.4
+    ],
+    [
+     "Midnight Purple",
+     6.9
+    ]
+   ]
+  },
+  "iscc": {
+   "block": 230,
+   "name": "very dark reddish purple",
+   "de": 3.7
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"aubergine\" and \"aubergine purple\" (pdf p. 36)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library and graph (data/library.json, data/graph; ISCC-NBS 1955, CIEDE2000 distances); Maerz and Paul (1930), plate 48 H 12",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, \"Amaranth\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Nightshade\" (pdf pp. 290, 361)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 71",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Five Colours\" (pdf p. 168)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"three-colour ware\" (pdf p. 393)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 267-268 (table of modern equivalents)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph fieldnotes; color within CIEDE2000 4 of the swatch, at least 1% of the canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which plant family does the aubergine belong to?",
+   "choices": [
+    "The nightshades, with the potato",
+    "The mallows",
+    "The gourds",
+    "The lilies"
+   ],
+   "answer": "The nightshades, with the potato",
+   "kind": "pick"
+  },
+  {
+   "q": "What does aubergine name on Ming-era Chinese porcelain?",
+   "choices": [
+    "A dark purple enamel or glaze",
+    "A pink ground",
+    "A black outline",
+    "A white slip"
+   ],
+   "answer": "A dark purple enamel or glaze",
+   "kind": "pick"
+  },
+  {
+   "q": "Why does the aubergine swatch look almost black on screen?",
+   "choices": [
+    "Its lightness is very low",
+    "It is mixed with black pigment",
+    "The screen cannot show purple",
+    "It contains no red"
+   ],
+   "answer": "Its lightness is very low",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Aubergine is a glaze name on Ming porcelain as well as a vegetable.",
+  "The eggplant is a nightshade, a cousin of the potato and of a plant once used for a green dye.",
+  "In our archive of 23,781 paintings, none holds this color at one per cent of the canvas."
+ ],
+ "words": 496,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Baty table: removed unsupported 'four entries, all dark purples' (OCR scrambled)",
+   "Removed 'none of them rare' (not in Jarman)",
+   "Where-to-look rewritten to what Paterson lists"
+  ]
+ }
+}

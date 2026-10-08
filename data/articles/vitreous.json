@@ -1,0 +1,182 @@
+{
+ "slug": "vitreous",
+ "name": "Vitreous",
+ "hex": "#B6C182",
+ "names": [
+  "Vitreous"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Vitreous is the color of glass: in the Maerz and Paul dictionary of 1930 a pale yellow-green, and in most books a word for a mineral's glassy shine rather than for any hue.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A word for glass",
+   "body": "*Vitreous* means having the color, and the other qualities, of glass [1]. Paterson traces the Latin *vitrium*, glass, to an older word for blue-green, the color glass takes when its impurities are left in [1]. Glassmakers add metal oxides to steer it: iron gives green or amber, copper a turquoise, and chromium anything from green to brown [1].\n\nThe link between glass and color is old. Coles notes that cobalt colored glass in ancient Mesopotamia and Egypt, alongside the first vitreous enamels for jewelry and ceramics [2]. Pastoureau describes Egyptian craftsmen firing blue-green and green bodies and coating small funerary figures with a glaze that gave them a vitreous, precious look [3]."
+  },
+  {
+   "id": "two-meanings",
+   "title": "Two meanings, one word",
+   "body": "Most uses of the word in color books are about shine, not hue. The Pigment Compendium calls the crystals of brochantite vitreous and green, those of cuprorivaite vitreous and blue, and forsterite vitreous and green [4]. In that vocabulary *vitreous* means glassy lustre, and the crystals can be of any color [4].\n\nOlder chemists used it for the glass itself. Tingry in 1804 called azure a vitreous oxide of cobalt, meaning smalt, the blue glass ground into a pigment [5]. Neither use gives a yellow-green."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch here is Maerz and Paul's plate 18 F 3 of 1930, a name they record as first used in 1874 [6]. It is a pale, slightly yellow green, lightness 76 and chroma 34, and its nearest named neighbor is [[khaki]] at a distance of 6.1 [6]. Why the dictionary gave this name to a yellow-green is not explained in the sources we hold, and the blue-green origin Paterson describes is paler in hue and bluer than this plate [1][6].\n\nSo read the swatch as a dictionary plate, not as a piece of glass. Real glass shifts with thickness: thin it is nearly clear, and only a thick edge shows the green."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "At least five per cent of the canvas within a color distance of six, the swatch appears in 95 of the 23,781 paintings in our archive, about 0.4 per cent, as photographed [7]. The share is highest in the 1870s, when 14 of 1,065 paintings match, and it is concentrated in [[look:impressionism|Impressionism]]: 4 of 140 Impressionist paintings, and 3 of the 50 by [[painter:alfred-sisley|Sisley]] [7].\n\nThe colors it keeps company with in a painting are [[khaki]], [[sage]] and [[moss]] [7]. These are photographs of aged, varnished paintings, so a match is a look-alike hue and not a pigment test [7]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "glass (Latin vitrium)",
+   "first_recorded": "1874, per Maerz and Paul (1930)",
+   "source": "Paterson, A Dictionary of Colour; ColorHub library"
+  },
+  "aka": [
+   "glass green"
+  ],
+  "siblings": [
+   "khaki-green",
+   "sage-green",
+   "moss-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#B6C182",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 95,
+  "peak_decade": {
+   "decade": 1870,
+   "n": 1065,
+   "hits": 14
+  },
+  "measured": {
+   "lch": [
+    76,
+    34,
+    115
+   ],
+   "nearest": [
+    [
+     "Khaki",
+     6.1
+    ]
+   ]
+  },
+  "company": [
+   "Khaki",
+   "Sage",
+   "Moss"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"vitreous\", p. 415",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 93",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, p. 10",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, entries brochantite, cuprorivaite and forsterite, pp. 75, 149, 172",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, entries azure and Saxon blue (citing Tingry, 1804), pp. 46, 347",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub color library (Maerz and Paul 1930, plate 18 F 3), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub archive field notes, 23,781 paintings, as photographed; tools/article_field.py",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In color books, what does the word vitreous usually describe?",
+   "choices": [
+    "The hue of a pigment",
+    "The glassy shine of a mineral",
+    "A pale green dye",
+    "A kind of enamel"
+   ],
+   "answer": "The glassy shine of a mineral",
+   "kind": "pick"
+  },
+  {
+   "q": "Why does glass often look green when it is thick or impure?",
+   "choices": [
+    "Iron and other impurities tint it",
+    "Glass is always made with copper",
+    "Light is bent into green",
+    "Sand is naturally green"
+   ],
+   "answer": "Iron and other impurities tint it",
+   "kind": "pick"
+  },
+  {
+   "q": "Real vitreous crystals are always yellow-green.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Vitreous mostly describes a mineral's shine, and the crystals it describes can be green, blue or clear.",
+  "Look at the cut edge of a thick pane of glass: the green you see is what the Latin word for glass first meant."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "All claims match fact card; no changes needed.",
+   "Etymology rests on Paterson alone."
+  ]
+ },
+ "words": 432
+}

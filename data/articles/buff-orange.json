@@ -1,0 +1,199 @@
+{
+ "slug": "buff-orange",
+ "name": "Buff Orange",
+ "hex": "#EBBC71",
+ "names": [
+  "Buff Orange"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Buff Orange is a soft yellow-orange from the colour lists of the early nineteenth-century naturalists, matched to a kingfisher's eye-streak and the stamens of a white cistus flower.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A kingfisher, a flower and a stone",
+   "body": "In Patrick Syme's chart, Buff Orange is number 77, the second of the oranges [1]. His examples from nature are the streak beside the eye of the kingfisher, the stamens of the large white cistus, and a silicate mineral, natrolite [1]. The kingfisher is *Alcedo atthis*, and the cistus is a rockrose [2].\n\nThe recipe is sienna yellow with a little Dutch orange [2]. Dutch orange is the preceding colour on the chart, a mix of gamboge yellow and carmine red [2]. Syme's next orange is built from Buff Orange itself: Reddish Orange is Buff Orange with a considerable portion of tile red [3].\n\nThe screen swatch is warm and light, and our library finds [[tan]] its nearest common name [4]. It is not the buff of leather and army coats. That colour has its own article, [[buff]]."
+  },
+  {
+   "id": "lists",
+   "title": "In the lists",
+   "body": "Buff Orange appears in Cleaveland's American mineralogy textbook of 1816, in a list of 80 colours adapted from Jameson, and in Syme's chart [5]. Syme's second edition of 1821 added only one blue and one red, so the orange was already in his first book of 1814 [6]. Baty's chart does not show it in Jameson's list of 1805, and the books consulted do not say who coined it [5].\n\nSyme's chart was perhaps the only one used by English-speaking botanists until 1886 [7]. In a botanical list Baty reproduces, Buff Orange is the colour assigned to the common tulip [7]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a colour within six units of this swatch covers at least five per cent of the canvas in 493 works, or 2.1 per cent [8]. India has the most: 42 of 721 Indian works carry it, and 18 of the 168 Mughal paintings [8]. Japan follows with 33 of 698 [8].\n\nThree of the four largest patches are Japanese: Reizei's *Twelve Poetic Immortals and Their Poems*, of 1845, where the match fills 82 per cent of the picture, then Kanō Tsunenobu's fan album of 1636 and Kishi Ganku's *Bamboo* of 1801 [8]. See [[painting:aic-198910|Bamboo]] for the quieter, paper-ground version. By decade it peaks in the 1820s, with 40 of 731 works [8]. Among painters with enough works to compare, Sir Henry Raeburn stands out, with 4 of 12 [8]. It sits with [[marigold]], [[mustard]] and [[ochre]] more than chance would predict [8]. As always these are photographs of aged, varnished paintings, so read them as screen colours, not pigment tests [8]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented in the books consulted",
+   "first_recorded": "Cleaveland, 1816; Syme, 1814 (inferred from the 1821 additions)",
+   "source": "Baty, Nature's Palette, pp. 28, 34, 206"
+  },
+  "aka": [
+   "Werner's buff orange"
+  ],
+  "siblings": [
+   "marigold",
+   "tan",
+   "ochre"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "buff",
+    "gloss": "the buffalo-leather tan, a lighter and paler colour with a different history"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#EBBC71",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 493,
+  "top_paintings": [
+   "aic-76645",
+   "met-829398",
+   "aic-198910",
+   "aic-30420"
+  ],
+  "countries": {
+   "India": [
+    42,
+    721
+   ],
+   "Japan": [
+    33,
+    698
+   ]
+  },
+  "peak_decade": 1820,
+  "role": {
+   "highlight": 0.96,
+   "mid": 0.04
+  },
+  "measured": {
+   "lch": [
+    79,
+    45,
+    80
+   ],
+   "nearest": [
+    [
+     "Tan",
+     8.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 205-206 (Syme's chart no. 77)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 206 (captions and recipes)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 210 (Reddish Orange recipe)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub library, Buff Orange (Syme 1821 no. 77; aged swatch)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 34 (comparison of the colour lists)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 28",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 171-172",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive, tools/article_field.py, #EBBC71, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is Buff Orange's recipe in Syme's chart?",
+   "choices": [
+    "Sienna yellow with a little Dutch orange",
+    "Scarlet red with much lemon yellow",
+    "Gamboge with carmine and white",
+    "Ochre with tile red"
+   ],
+   "answer": "Sienna yellow with a little Dutch orange",
+   "kind": "pick"
+  },
+  {
+   "q": "Which bird gives Syme's animal example for Buff Orange?",
+   "choices": [
+    "The kingfisher",
+    "The siskin",
+    "The black-headed gull",
+    "The goldcrest"
+   ],
+   "answer": "The kingfisher",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Buff Orange is the same colour as the buff of army coats.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Buff Orange is the colour of the streak beside a kingfisher's eye, as Syme matched it.",
+  "Three of the four largest Buff Orange patches in our archive are Japanese paintings."
+ ],
+ "words": 416,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Verified key claims against Baty text and fact card; no changes needed."
+  ]
+ }
+}

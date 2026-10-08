@@ -7,7 +7,7 @@
  ],
  "tier": "pigment",
  "depth": "epic",
- "lede": "Viridian is a deep, cool green made from chromium oxide with water in its crystal, invented in Paris in 1838 and kept secret until 1859, and it became Cézanne's definitive green.",
+ "lede": "Viridian is a deep, cool green made from chromium oxide with water in its crystal, first made in Paris about 1838 by a maker who guarded the recipe, and it became Cézanne's definitive green.",
  "sections": [
   {
    "id": "name",
@@ -37,17 +37,17 @@
   {
    "id": "painters",
    "title": "In painting",
-   "body": "Until the early nineteenth century, Ball observes, nobody had seen greens, yellows and violets as brilliant as the new synthetic pigments produced [4]. Ball counts twelve new synthetics among the twenty chief pigments found in Impressionist paintings, viridian included [4]. The Compendium finds it on French Impressionist paintings in the National Gallery in London, on van Gogh's canvases, and on German neoclassical paintings in Munich's Schack Gallery [2].\n\n[[painter:paul-cezanne|Cézanne]] is the painter most tied to it. Ball calls it his definitive green, and says it is the only one of the newest pigments to feature prominently in his work [1][4]. In *Hillside in Provence*, about 1885, he put emerald green and viridian beside ochres mixed with vermilion, and the strong greens sit against subdued earths [4]. Gage agrees that Cézanne used viridian and no other new synthetic, though Ball adds emerald green to the picture, so the books differ on how pure the choice was [4][5].\n\nThe Impressionists used it in bright, nearly unmixed touches [4]. Renoir's *Boating on the Seine* of 1879 to 1880 uses viridian with cobalt blue, chrome yellow, vermilion and lead white, applied almost unmixed [4]. [[painter:claude-monet|Monet]] built the smoke and shadows of his 1877 *Gare Saint-Lazare* views from mixtures of bright pigments, viridian among them, with only a little ivory black [4]. Seurat's palette for *La Grande Jatte* also included it [4]. Gauguin used it too, but seldom straight from the tube [4].\n\nIt lasted into the twentieth century. [[painter:henri-matisse|Matisse]]'s palette of 1937 held seventeen colours in an apparently arbitrary order, with large mounds of white, and viridian was one of them [5]."
+   "body": "Until the early nineteenth century, Ball observes, nobody had seen greens, yellows and violets as brilliant as the new synthetic pigments produced [4]. Ball counts twelve new synthetics among the twenty chief pigments found in Impressionist paintings, viridian included [4]. The Compendium finds it on French Impressionist paintings in the National Gallery in London, on van Gogh's canvases, and on German neoclassical paintings in Munich's Schack Gallery [2].\n\n[[painter:paul-cezanne|Cézanne]] is the painter most tied to it. Ball calls it his definitive green, and says it is the only one of the newest pigments to feature prominently in his work [1][4]. In *Hillside in Provence*, about 1885, he put emerald green and viridian beside ochres mixed with vermilion, and the strong greens sit against subdued earths [4]. Gage agrees that Cézanne used viridian and no other new synthetic, though Ball adds emerald green to the picture, so the books differ on how pure the choice was [4][5].\n\nThe Impressionists used it in bright, nearly unmixed touches [4]. Renoir's *Boating on the Seine* of 1879 to 1880 uses viridian with cobalt blue, chrome yellow, vermilion and lead white, applied almost unmixed [4]. [[painter:claude-monet|Monet]] built the smoke and shadows of his 1877 *Gare Saint-Lazare* views from mixtures of bright pigments, viridian among them, with only a little ivory black [4]. Ball says Seurat's palette ran to a fairly typical Impressionist range that included viridian or emerald green [4]. Gauguin used it too, but seldom straight from the tube [4].\n\nIt lasted into the twentieth century. [[painter:henri-matisse|Matisse]]'s palette of 1937 held seventeen colours in an apparently arbitrary order, with large mounds of white, and viridian was one of them [5]."
   },
   {
    "id": "older-greens",
    "title": "What it replaced",
-   "body": "Older greens had a poor record. Verdigris is corrupted by sulphur compounds in the air, so it had to be sealed under varnish [8]. Painters in the fifteenth century tried to protect it by dissolving it in hot resin, producing copper resinate, but that green turned brown in light and air [8]. Many Renaissance paintings now show dull umber foliage and drapery where a copper green once stood [8].\n\nViridian had none of this problem. Both the Compendium and Paterson call it a durable colour, and the Compendium notes it was considered beautiful as well [2][3]. That durability is the real reason a pigment that cost so much was worth buying."
+   "body": "Older greens had a poor record. Verdigris is corrupted by sulphur compounds in the air, so it had to be sealed under varnish [8]. Painters in the fifteenth century tried to protect it by dissolving it in hot resin, producing copper resinate, but that green turned brown in light and air [8]. Many Renaissance paintings now show dull umber foliage and drapery where a copper green once stood [8].\n\nViridian had none of this problem. The Compendium says it was considered a beautiful and durable colour, and Paterson calls it an excellent pigment for artists [2][3]. That durability is the real reason a pigment that cost so much was worth buying."
   },
   {
    "id": "mixtures",
    "title": "Mixtures and descendants",
-   "body": "Viridian became a base for other named colours. Mixed with zinc yellows it gave Victoria green, permanent green and *verts solides* [2]. With ultramarine it made academy blue, according to Heaton as reported by the Compendium [2]. The same source records cadmium green as a composite of cadmium yellow and viridian [2]. Church noted that makers sometimes added barium chromate to shift the hue [2].\n\nIn modern use it is still a mixing green. Gurney's lists of limited palettes for plein-air painting include viridian, in one case with ultramarine and cadmium yellow as the trio [10]."
+   "body": "Viridian became a base for other named colours. Mixed with zinc yellows it gave Victoria green, permanent green and *verts solides* [2]. With ultramarine it made academy blue, according to Heaton as reported by the Compendium [2]. The same source records cadmium green as a composite of cadmium yellow and viridian [2]. Church noted that makers sometimes added barium chromate to shift the hue [2].\n\nIn modern use it is still a mixing green. Gurney's limited palettes for painters include viridian (Pigment Green 18) alongside ultramarine and other colours [10]."
   },
   {
    "id": "swatch",
@@ -288,16 +288,16 @@
   "Pannetier sold the green dearly and told his method to only one man, so a rival chemist had to reinvent it in 1859.",
   "Look for the strong greens against muted earths in a late Cézanne landscape: that is viridian at work."
  ],
- "words": 1543,
+ "words": 1548,
  "status": "checked",
  "checked": {
-  "by": "Sonnet 5.5 batch 25",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Date of Pannetier's invention is c. 1838 in all three sources; Guignet 1859 uniform.",
-   "Ball vs Gage on whether Cezanne also used emerald green is named in the text.",
-   "Paterson's general claim that artificial colours began in 1856 not used (conflicts with 1838).",
-   "Latin root of the name not stated by sources; text says only that it sits beside viridescent."
+   "Lede: removed 'kept secret until 1859' overstatement",
+   "Paterson does not call viridian durable: attributed durability to the Compendium only",
+   "Gurney palette claim softened to what the text shows",
+   "Seurat claim reworded to Ball's 'viridian or emerald green'"
   ]
  }
 }

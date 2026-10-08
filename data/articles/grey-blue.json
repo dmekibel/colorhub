@@ -1,0 +1,197 @@
+{
+ "slug": "grey-blue",
+ "name": "Grey Blue",
+ "hex": "#77A1B5",
+ "names": [
+  "Grey Blue"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Grey Blue is a muted, slightly greenish sky blue, a plain name built from two colour words that most traditions have used for a very long time without ever fixing it to one pigment.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two words, one colour",
+   "body": "Grey Blue is a descriptive name, a grey pulled toward blue, and no single pigment, dye or place lies behind it [7]. It appears in the older colour systems as a modifier: Werner's chart of 1821, Ridgway in 1912 and the RAL range of 1927 all list a grey-blue [7]. The ISCC-NBS system of 1955 files this swatch under \"pale blue\", about six units away, and the 2010 xkcd survey attached the words to three different colours, each darker than this one [7].\n\nBecause no recipe stands behind the name, books use it in passing. Ball quotes an art historian describing the figure at the right of Millet's *The Gleaners* in silvery blue-greys and dove greys [1]. Nelson's *Bluets* describes twenty-one gray-blue horses paraded at a Japanese court festival [2]. Finlay does the same twice, for a hopper in a wool mill and for a heavy Anni Albers fabric, a quick colour for a quiet object [3]."
+  },
+  {
+   "id": "history",
+   "title": "A colour for sober people",
+   "body": "The history is better told through the pair than the phrase. Greenfield says the quieter blues won favour across every class after the French Revolution and kept gaining through the Victorian century, because they drew little notice [4]. In the sixteenth century, Pastoureau writes, the Protestant Reformation set a black-gray-blue axis against what it called papist polychromy [5][6].\n\nThe ancient world kept the two words closer together. Pastoureau notes that the Greek *glaukos* could mean gray, blue, and sometimes yellow or brown, standing for a feeble or weak colour more than for a hue [8]. This does not mean the Greeks could not see blue, an old myth; their words simply sorted colour by lightness and effect, not by hue [8]."
+  },
+  {
+   "id": "material",
+   "title": "Where grey blues come from",
+   "body": "In pigments, a grey-blue is often a failure of something better. Coles notes that lower-quality lapis ore yields only a pale grey-blue ultramarine, which is why the pigment makers of old graded the stone so closely [9]. In a Byzantine mosaic of the Dormition, Gage notes, the grey and blue mandorla around Christ turns the golden seraphim it overlaps grey-blue [10].\n\nNearby words include [[slate]], [[steel-blue]], [[slate-grey]] and the fresher [[cornflower]] and [[sky-blue]] [7]. Only the last two are more saturated than this swatch [7]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a colour within six units of this swatch fills at least five per cent of the canvas in 149 works, or 0.63 per cent [11]. These are photographs of aged, varnished paintings, so the figures describe screen colours and not pigments [11].\n\nIt is a modern colour. It appears in 26 of the 1,674 paintings of the 1900s, 1.6 per cent, and in none of the 443 works we hold from the 1100s to the 1300s [11]. The earliest is Rogier van der Weyden's *The Pietà* of about 1440 [11]. Five of the 140 Impressionist works carry it, 3.6 per cent, and the painters who use it most are Berchem, Marquet and Wouwerman [11]. The biggest patches are [[painting:cma-135185|Cézanne's Mount Sainte-Victoire]] of 1904, covering 43 per cent, and Picknell's [[painting:cma-151796|Pointe de Cabellou, Brittany]], covering 48 per cent [11]. Within a painting it is most often a hidden colour, a tone you do not notice until the picture is cut to a few colours [11]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive: grey tinted toward blue",
+   "first_recorded": "Werner/Syme 1821 (library)",
+   "source": "ColorHub library; no single origin"
+  },
+  "aka": [
+   "gray blue",
+   "blue-grey"
+  ],
+  "siblings": [
+   "slate",
+   "steel-blue",
+   "slate-grey"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "cornflower",
+    "gloss": "a clearer, more saturated pale blue"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#77A1B5",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 149,
+  "century_peak": {
+   "century": 1900,
+   "hits": 26,
+   "of": 1674,
+   "lift": 2.48
+  },
+  "measured": {
+   "iscc": "pale blue",
+   "de": 5.6
+  },
+  "company": [
+   "Cornflower",
+   "Sky blue",
+   "Grey",
+   "Slate"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 8",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Nelson, Bluets, section 126",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Finlay, Fabric, pp. 237 and 408",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 24",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Green, ch. 32 (\"Protestant morals\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, Green, notes, ch. 48",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub library: Werner 1821, Ridgway 1912, RAL 1927, ISCC-NBS 1955, xkcd 2010",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pastoureau, Blue, ch. 1 (\"An Uncommon Color\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 200",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 64",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does a poor grade of lapis lazuli ore give when ground for ultramarine?",
+   "choices": [
+    "A pale grey-blue pigment",
+    "A bright violet",
+    "A green",
+    "Nothing at all"
+   ],
+   "answer": "A pale grey-blue pigment",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the Greek word glaukos meant only the colour blue.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Look for grey-blue in the third plane of a landscape: in our archive it is most often a colour hidden inside a painting."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed Pigment Compendium cudbear/glaucophane sentence (source passage did not support it).",
+   "Gage seraphim sentence aligned to source (mandorla, grey and blue)."
+  ]
+ },
+ "words": 554
+}

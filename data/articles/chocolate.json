@@ -14,7 +14,7 @@
   {
    "id": "swatch",
    "title": "Which chocolate",
-   "body": "The web has two chocolates, and they are not close. The CSS and X11 colour named `chocolate` is a bright orange-brown, #D2691E, a value Paterson prints in his dictionary [1]. The swatch on this page, #7B3F00, is a darker, deeper brown, about 30 units away on the CIE76 distance scale [13]. Our library calls that darker value \"Chocolate (Traditional)\" and finds it, to be the same colour as this swatch [13].\n\nThe other sources scatter further. Ridgway's 1912 plate gives a duller, greyer brown, #6D4E43, and the xkcd survey's chocolate is a near-black brown, #3D1C02 [13]. Milk chocolate, in the same survey, is a lighter #7F4E1E [13]. ISCC-NBS 1955 files the name in its block 62 and Maerz and Paul's dictionary dates the name to 1737 [13].\n\nPaterson's gloss explains the spread: the word names a deep brown, he says, but covers many shades [1]. The name points at a food, and a food comes in dark, milk and cocoa-heavy versions. Treat the swatch as one reasonable reading."
+   "body": "The web has two chocolates, and they are not close. The CSS and X11 colour named `chocolate` is a bright orange-brown, #D2691E, a value Paterson prints in his dictionary [1]. The swatch on this page, #7B3F00, is a darker, deeper brown, about 30 units away on the CIE76 distance scale [13]. Our library calls that darker value \"Chocolate (Traditional)\" and treats it as the same colour as this swatch [13].\n\nThe other sources scatter further. Ridgway's 1912 plate gives a duller, greyer brown, #6D4E43, and the xkcd survey's chocolate is a near-black brown, #3D1C02 [13]. Milk chocolate, in the same survey, is a lighter #7F4E1E [13]. ISCC-NBS 1955 files the name in its block 62 and Maerz and Paul's dictionary dates the name to 1737 [13].\n\nPaterson's gloss explains the spread: the word names a deep brown, he says, but covers many shades [1]. The name points at a food, and a food comes in dark, milk and cocoa-heavy versions. Treat the swatch as one reasonable reading."
   },
   {
    "id": "food",
@@ -277,16 +277,14 @@
   "Red lead in old wall paintings can darken to chocolate-brown.",
   "The web's 'chocolate' is a bright orange-brown, about 30 units away from the traditional dark one."
  ],
- "words": 1196,
+ "words": 1195,
  "status": "checked",
  "checked": {
-  "by": "article engine (batch 40), sentence-to-card trace, myth list",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Books say little about the colour name itself; word etymology left undocumented.",
-   "Harris tweed recipe is Finlay's imagined formula: hedged.",
-   "Tubbs staining story is hearsay in Finlay: hedged.",
-   "Archive match is a colour, not a pigment test: stated."
+   "Fixed garbled sentence about Chocolate (Traditional)",
+   "8 claims traced to Paterson, Baty, Greenfield, Ball, Finlay, St Clair, Jarman, Coles, Pigment Compendium: supported"
   ]
  }
 }

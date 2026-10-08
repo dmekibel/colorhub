@@ -259,14 +259,15 @@
  "words": 747,
  "status": "checked",
  "checked": {
-  "by": "L7 self-check (sentence-to-card trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
    "Books disagree on slate's lightness and blueness (Paterson, St Clair): stated.",
    "Mineral grey: Field vs Martel: stated as disagreement.",
    "Maerz & Paul dates for Slate are merged with near-identical names in the library: not quoted.",
    "Prince's brown: slate quarry link is the maker's background, not the ore: worded accordingly.",
-   "Overlaps lightly with the checked article slate-grey (stone, filler, Ladakh): this page covers the word's family."
+   "Overlaps lightly with the checked article slate-grey (stone, filler, Ladakh): this page covers the word's family.",
+   "Checker pass: key claims re-traced to fact cards and book text; no changes needed."
   ]
  }
 }

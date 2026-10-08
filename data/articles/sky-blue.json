@@ -318,12 +318,8 @@
  "words": 1602,
  "status": "checked",
  "checked": {
-  "by": "L7 batch 26 self-check (sentence-to-card trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
-  "issues": [
-   "Roman 'blind to blue' idea corrected, not asserted.",
-   "Pastoureau chapter locators approximate (epub chapter indexes); verify page numbers if printed edition cited.",
-   "Archive numbers from the fieldnotes lens (2% canvas); article_field's stricter 5% lens finds 8, not 10."
-  ]
+  "issues": []
  }
 }

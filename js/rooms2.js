@@ -11,7 +11,7 @@
 // Another lane can add a game without touching this file: push { id, name, meta, icon (a key of R2_IC, default
 // "gradient"), more (true = the drills list), open () } onto window.TRAIN_TILES before the room is drawn.
 //
-// Studio: four verbs. Capture (the camera is the primary; pick a photo is the quiet second), Name, Make, Yours
+// Studio: Capture (the camera is the primary; pick a photo is the quiet second), Name, Build (the Gamut wheel, Albers), Yours
 // (photos, palettes, hearted colors, taste), then Export. Its pictures come from your own latest palette and
 // photo when you have them, else from today's painting.
 
@@ -300,12 +300,11 @@ function r2StudioHome() {
   const vf = r2Viewfinder(cols), vfName = nameOf(vf.mid);
   const byL = r2ByL(cols), dark = byL[0], light = byL[byL.length - 1], mid = r2Mid(cols, 0), [, , Hm] = lch(mid);
   const tri = [0, 120, 240].map(d => gyFit(64, 48, Hm + d));
-  const triPts = [90, 210, 330].map(a => [50 + 34 * Math.cos(a * Math.PI / 180), 50 - 34 * Math.sin(a * Math.PI / 180)]);
   const palRow = p => `<button class="r2-pal" data-id="${esc(p.id)}"><span class="r2-pal-s">${p.cols.map(h => r2i(h)).join("")}</span><span class="r2-pal-t"><b>${esc(p.name || p.from || "Palette")}</b><em>${esc(p.at ? fmtDay(p.at) : "")}</em></span></button>`;
-  const favC = S.fav && S.fav.h;
   const el = show(`
     ${tabHead()}
     <h1 class="tab-title">Studio</h1>
+    <div class="r2-sh r2-sh-cap"><h3 class="title-3">Capture</h3><span class="note">camera or photo</span></div>
     <section class="r2-hero r2-cap r2-k0">
       <button class="r2-hpic r2-vf" data-eye aria-label="Point the camera"><span class="r2-vf-img" id="r2VfImg">${vf.html}</span>
         <span class="r2-reticle" aria-hidden="true"></span><span class="r2-vf-tag" id="r2VfTag" data-ink="${ink(vf.mid)}" style="--c:${vf.mid}">${esc(vfName.text || vfName.n)}</span></button>
@@ -322,10 +321,9 @@ function r2StudioHome() {
     </section>
 
     <section class="r2-blk" style="--k:2">
-      <div class="r2-sh"><h3 class="title-3">Make</h3><span class="note">palettes from scratch</span></div>
+      <div class="r2-sh"><h3 class="title-3">Build</h3><span class="note">palettes from scratch</span></div>
       <div class="r2-grid">
-        <button class="r2-tile wide2" data-wheel><span class="r2-pic r2-wheelpic"><span class="r2-mini" id="r2Mini"></span><span class="r2-wheelpal">${tri.concat(cols.slice(0, 3)).slice(0, 5).map(h => r2i(h)).join("")}</span></span><b class="r2-tn">Gamut wheel</b><span class="r2-tm">Lay a shape on the wheel; what's inside is your palette</span></button>
-        <button class="r2-tile" data-lab="harmony"><span class="r2-pic r2-harm"><span class="ring" style="background:${ringStops()}"></span><svg viewBox="0 0 100 100" aria-hidden="true"><polygon points="${triPts.map(p => p.map(v => v.toFixed(1)).join(",")).join(" ")}"/>${triPts.map((p, i) => `<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="7.5" fill="${tri[i]}"/>`).join("")}</svg></span><b class="r2-tn">Harmony</b><span class="r2-tm">Build on the wheel</span></button>
+        <button class="r2-tile wide2" data-wheel><span class="r2-pic r2-wheelpic"><span class="r2-mini" id="r2Mini"></span><span class="r2-wheelpal">${tri.concat(cols.slice(0, 3)).slice(0, 5).map(h => r2i(h)).join("")}</span></span><b class="r2-tn">Gamut wheel</b><span class="r2-tm">Lay a shape on the wheel, or start from Triad, Complement, Analogous or Square. What's inside is your palette.</span></button>
         <button class="r2-tile" data-lab="contrast"><span class="r2-pic r2-albers"><span style="--g:${light}"><b style="--c:${mid}"></b></span><span style="--g:${dark}"><b style="--c:${mid}"></b></span></span><b class="r2-tn">Albers</b><span class="r2-tm">One color, two looks</span></button>
       </div>
     </section>
@@ -336,10 +334,6 @@ function r2StudioHome() {
       <div class="r2-empty" id="r2Empty" hidden><b class="title-3">Your photos and palettes land here</b><span>Point the camera or pick a photo, and its palette is waiting next time. Palettes you keep from the wheel come here too.</span></div>
       ${saved.length ? `<div class="r2-pals">${saved.slice(0, 4).map(palRow).join("")}${saved.length > 4 ? `<div class="r2-palmore" hidden>${saved.slice(4).map(palRow).join("")}</div><button class="r2-text" data-r2-more>All ${saved.length} palettes</button>` : ""}</div>` : ""}
       ${typeof fvStudioRow === "function" ? fvStudioRow() : ""}
-      <div class="r2-grid r2-taste">
-        <button class="r2-tile" data-taste="color"><span class="r2-pic r2-duel">${favC ? `<i class="one" style="--c:${favC}"></i>` : `<i style="--c:${r2Acc(cols, 0)}"></i><i style="--c:${r2Acc(cols, 1)}"></i>`}</span><b class="r2-tn">${favC ? "Your color" : "Find your color"}</b><span class="r2-tm">${favC ? `${esc(S.fav.n.charAt(0).toUpperCase() + S.fav.n.slice(1))}-ish. Take it again` : "About 20 taps"}</span></button>
-        <button class="r2-tile" data-taste="palette"><span class="r2-pic r2-duel r2-duel-pal">${[cols.slice(0, 4), r2ByL(cols).slice(-4)].map(p => `<i>${p.map(h => `<b style="--c:${h}"></b>`).join("")}</i>`).join("")}</span><b class="r2-tn">Find your palette</b><span class="r2-tm">About 15 taps</span></button>
-      </div>
     </section>
 
     ${saved.length || fvN ? `<section class="r2-blk" style="--k:4"><button class="qrow r2-export" data-r2-export><span class="r2-ex-t"><b>Export</b><em>CSS, Tailwind, Figma, Procreate, Adobe</em></span>${ICON.chev}</button></section>` : ""}
@@ -352,7 +346,6 @@ function r2WireStudio(el) {
   on("[data-namer]", () => LAB.namer());
   on("[data-wheel]", () => gamutWheel());
   on("[data-lab]", b => LAB[b.dataset.lab]());
-  on("[data-taste]", b => tasteIntro(b.dataset.taste));
   on("[data-id]", b => openSavedPalette(b.dataset.id));
   on("[data-fv-row]", () => favShelf(() => go("studio")));
   on("[data-r2-more]", b => { const m = el.querySelector(".r2-palmore"); if (m) { m.hidden = false; b.remove(); } });

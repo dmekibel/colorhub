@@ -1,0 +1,246 @@
+{
+ "slug": "bole",
+ "name": "Bole",
+ "hex": "#79443B",
+ "names": [
+  "Bole"
+ ],
+ "tier": "pigment",
+ "depth": "long",
+ "lede": "Bole is a fine red-brown clay or ochre, best known as the smooth base laid under gold leaf, and a word that has meant several different earths.",
+ "sections": [
+  {
+   "id": "material",
+   "title": "A red earth for gilding",
+   "body": "Bole is an iron-rich earth, red in most of its uses, that was valued where a surface had to take a very high polish, above all as the base under gold leaf [1]. Paterson's dictionary calls it an orange-red or reddish-brown earth color from the unctuous clays of the same name [2]. The color ground of a painting, the prepared layer that makes a surface less absorbent, could be bole or gesso [2].\n\nPigment sources recognize white boles and red boles, and the word has never named one single material [1]. The books do not trace where the word itself comes from."
+  },
+  {
+   "id": "kinds",
+   "title": "Armenian, red and white",
+   "body": "Armenian bole was a deep red ochre found originally in Cappadocia, according to Field in 1835 [3]. It was the variety used as a base for gilding [4]. Red bole is a different thing in geology: a soft red clay formed by weathering on the surfaces of lava flows, which includes impure halloysite, a mineral named after O. d'Halloy (1707-89) [5]. White bole is simply a name for kaolin, the china clay [6].\n\nBooks disagree about what the plain word means. Weber and Bristow treat bole and bolus as synonyms for red ochre [4]. Harley found in seventeenth-century British sources that bole occasionally meant red ochre, but more often meant Armenian bole, \"bole Armoniack\", which de Mayerne records in the priming of canvas [1]. Terry, writing in 1893, used bole for the chestnut-colored grade of Tuscan sienna earth, and Weber called it the typical sienna [7]. Terry's trade grades for it, in falling quality, were boletta, fascia, cerchione and terra guilla [7]."
+  },
+  {
+   "id": "records",
+   "title": "Where bole turns up",
+   "body": "In 1703-04 the Cambridge chemist John Francis Vigani put together a collection of nearly 700 samples of materia medica, and it includes an Armenian bole beside red ochre and vermilion [8]. By 1869 a bookbinders' preparation called assiette, used on page edges before gilding, was a mix of one pound of Armenian bole with 2 ounces each of bloodstone and galena [9]. Green earth was recommended as an alternative base for gilding when red bole was not wanted [10].\n\nMedieval Latin texts used *brunus* for a brown earth [11]. Brunello reads it as an iron- and manganese-rich ochre like umber or sienna, and says it may have been the same as bole, while Thompson found the word in a fourteenth-century manuscript and suggested it could be bole used as a pigment [11]. Related red earths have local histories: a letters patent of 1626 gave control of the Forest of Dean's \"Spanish Browne\" and \"Almagro\", and Carrillo reports an almagre mine near Questa, New Mexico, worked in prehistoric times [12]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch here is a moderate reddish brown, within a color distance (ΔE) of 1.6 of an ISCC-NBS 1955 block of that name [13]. Maerz and Paul's 1930 dictionary pictures the color on plate 6 and dates its first record to 1386 [13]. That is a dictionary color, one red-brown out of a family that ran from white clay through red to chestnut [1][6][13]. Fresh bole sold for gilding would not necessarily look like this on a screen."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, as photographed, a color within ΔE 6 of this swatch covers at least 5% of the canvas in 895 paintings, 3.8% of the archive [14]. The decade 1450 stands out, with 27 of 109 paintings (25%, 6.6 times the museums' baseline) [14]. By role, it is a mid-tone in 65% of those paintings and a shadow in 30% [14].\n\nThe country that carries it most is Tibet, in 15 of 47 paintings (32%), followed by Nepal in 4 of 25 [14]. The strongest matches include [[painting:cma-136332|Vajradhara, Nairatmya, and mahasiddhas Virupa and Kanha]], a Tibetan painting of about 1450, and the Teotihuacan [[painting:aic-14968|mural fragment of a maguey ritual]] [14]. Clay in this family does turn up there: metahalloysite has been tentatively identified in late seventeenth-century Tibetan thangkas, though in a white pigment role and not as bole [5]. Among painters, Dürer has it in 7 of 47 works and Munch in 7 of 50 [14].\n\nIt keeps the company of [[brick]], [[mahogany]], [[terracotta]] and [[sienna]] [14]. These are photographs of aged, varnished paintings, so a match is a look-alike color and not proof of any clay [14]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the clay itself; the books do not trace the word's origin",
+   "first_recorded": "in English pigment literature by the 1600s (Harley); Maerz & Paul record the color from 1386",
+   "source": "Pigment Compendium; Maerz & Paul via our library"
+  },
+  "aka": [
+   "Armenian bole",
+   "red bole",
+   "white bole (kaolin)"
+  ],
+  "siblings": [
+   "red-oxide",
+   "sinopia"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "sienna",
+    "gloss": "Terry and Weber call the chestnut Tuscan grade of sienna earth 'bole'"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#79443B",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 895,
+  "top_country": {
+   "name": "Tibet",
+   "hits": 15,
+   "n": 47
+  },
+  "peak_decade": {
+   "key": 1450,
+   "hits": 27,
+   "n": 109,
+   "lift": 6.58
+  },
+  "role": {
+   "mid": 0.65,
+   "shadow": 0.3,
+   "highlight": 0.05
+  },
+  "company": [
+   "Brick",
+   "Mahogany",
+   "Terracotta",
+   "Sienna"
+  ],
+  "measured": {
+   "nearest": [
+    [
+     "moderate reddish brown (ISCC-NBS block 43)",
+     1.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Bole\", pdf p. 70",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"bole\" and \"colour ground\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Armenian bole\", pdf p. 35",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Red ochre\", pdf p. 334",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Halloysite\", pdf pp. 193-194",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Kaolin\" and \"White bole\", pdf pp. 222, 408",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Sienna\", pdf p. 352",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, Vigani's materia medica collection, pdf p. 75",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Assiette\", pdf p. 40",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Green earth\", pdf p. 188",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Brunus\", pdf p. 78",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Almagre\", pdf p. 18",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "data",
+   "cite": "ColorHub library: ISCC-NBS 1955 block 43; Maerz & Paul 1930 plate 6 F 11",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed: match within ΔE 6, at least 5% of the canvas",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why was bole used under gold leaf?",
+   "choices": [
+    "It gave a smooth surface that could be polished to a high shine",
+    "It made gold cheaper",
+    "Gold only sticks to white",
+    "It was the only red pigment"
+   ],
+   "answer": "It gave a smooth surface that could be polished to a high shine",
+   "kind": "pick"
+  },
+  {
+   "q": "Bole always meant one and the same red earth.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which material is called white bole?",
+   "choices": [
+    "Kaolin, or china clay",
+    "Chalk",
+    "Lead white",
+    "Bone white"
+   ],
+   "answer": "Kaolin, or china clay",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Armenian bole was the red earth that went under gold leaf; white bole was just china clay.",
+  "Look for a red-brown showing through worn gilding on an old frame or icon: that is the bole beneath."
+ ],
+ "words": 704,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

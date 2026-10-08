@@ -1,0 +1,172 @@
+{
+ "slug": "imperial-green",
+ "name": "Imperial Green",
+ "hex": "#5FBA83",
+ "names": [
+  "Imperial Green"
+ ],
+ "tier": "pigment",
+ "depth": "medium",
+ "lede": "Imperial green is a nineteenth-century name for a copper-arsenic green related to emerald green, and today's swatch is a clean mid green far brighter than the dull pigment the trade manuals describe.",
+ "sections": [
+  {
+   "id": "two",
+   "title": "Two things with one name",
+   "body": "The swatch is from the Maerz and Paul dictionary of 1930, plate 18, which records the name from 1853 [1]. It is a clear, fairly light green, nearest the name [[emerald]] (about 6 units of ΔE away) [1].\n\nThe pigment is a different matter. The British dictionary of colour words says simply to see emerald green [2], and the pigment reference lists imperial green among the names and variants of the copper-arsenic greens, with Paris green, Schweinfurt green, Vienna green and Brunswick green [3][2]. Those greens are the family of [[emerald-green]], [[scheele-s-green]] and [[brunswick-green]] [3]."
+  },
+  {
+   "id": "pigment",
+   "title": "What the pigment was",
+   "body": "Descriptions differ. A 1906 manual by Zerr and Rübencamp calls imperial green one of countless products of varying proportions of arsenic, copper sulphate and vinegar, and describes the dull kind as having no special covering power and sitting between emerald green and Neuwied lime green [3]. Mayer, writing in 1991, describes it as an emerald green carrying an inert filler [3].\n\nBoth accounts place it close to emerald green, one as a dull kind and the other as one carrying a filler, but neither gives a date for its invention, and the reference itself calls the use of these names within the group loose [3]."
+  },
+  {
+   "id": "mixtures",
+   "title": "In other greens' recipes",
+   "body": "The name turns up as an ingredient in other trade names. Kirchberg green, according to Zerr and Rübencamp, was 40 to 50 parts imperial green mixed with 50 to 60 parts baryte [3]. Mitis green, by the same authors, was 35 to 55 parts emerald green and 45 to 65 parts imperial green, although another source uses Mitis green for other copper-arsenic compounds [3]. Neuwied green, which contains baryte and other fillers, is closely related to both Brunswick green and imperial green [3].\n\nThe family was toxic. The dictionary notes that Schweinfurt green, the group's best-known member, was used in wallpaper and was blamed in the 1860s for a number of deaths from arsenic fumes [2]."
+  },
+  {
+   "id": "imperial",
+   "title": "The word imperial",
+   "body": "The dictionary explains that *imperial* was first used for imperial yellow and then borrowed by other colors with pretensions of majesty [2]. Its entries include imperial blue, a deep blue dye, imperial red, a deep bluish red, and imperial yellow, a deep yellow taken from the porcelain reserved for the Chinese court [2]. Our own colors [[imperial-blue]] and [[imperial-red]] share the prefix.\n\nA bibliography in Finlay's book on gems lists a work on imperial green jade, so the phrase is also used for a prized jade color [4]. The books we hold do not explain it, and it is a separate use from the pigment."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive, 2 of 23,781 paintings contain this green on at least five per cent of the canvas, within six units of ΔE [5]. They are Van Gogh's [[painting:nga-72328|Roses]] of 1890, where it covers 10 per cent, and Delaunay's [[painting:nga-52397|Political Drama]] of 1914, at 7.6 per cent [5]. The swatch has a contrast of only 2.4 to 1 against white [5].\n\nThese are photographs of aged, varnished paintings, and a color match is not a pigment test [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented; 'imperial' as a prestige prefix",
+   "first_recorded": "1853 (Maerz & Paul 1930 records the name from 1853)",
+   "source": "Paterson, A Dictionary of Colour; Pigment Compendium"
+  },
+  "aka": [],
+  "siblings": [
+   "emerald-green",
+   "scheele-s-green",
+   "brunswick-green"
+  ],
+  "parent": "emerald-green",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "jade",
+    "gloss": "'imperial green jade' is a prized stone color, a separate use of the name"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#5FBA83",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 2,
+  "top_paintings": [
+   "nga-72328",
+   "nga-52397"
+  ],
+  "measured": {
+   "lch": [
+    69,
+    44,
+    154
+   ],
+   "contrast_white": 2.38,
+   "nearest": [
+    [
+     "Emerald",
+     5.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz & Paul 1930, first recorded 1853, plate 18 B 9; nearest name Emerald (ΔE 5.6)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"emerald green\" / \"Schweinfurt green\" (p. 158) and \"imperial\" (p. 216)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium (Eastaugh et al.), \"imperial green\", \"Kirchberg green\", \"Mitis green\", \"Neuwied green\" (pp. 205, 225, 277, 288) and emerald green group (p. 162)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Finlay, Colour: Travels Through the Paintbox, bibliography (Levy and Scott-Clark, The Stone of Heaven)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive (tools/article_field.py), #5FBA83, ΔE 6, at least 5% of canvas, as photographed; contrast computed from sRGB luminance",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did the Pigment Compendium say imperial green was made from, according to Zerr and Rübencamp?",
+   "choices": [
+    "Arsenic, copper sulphate and vinegar",
+    "Lead and tin",
+    "Ground malachite and egg",
+    "Indigo and weld"
+   ],
+   "answer": "Arsenic, copper sulphate and vinegar",
+   "kind": "pick"
+  },
+  {
+   "q": "Which pigment's family does imperial green belong to?",
+   "choices": [
+    "Emerald green",
+    "Prussian blue",
+    "Madder",
+    "Verdigris from copper plates alone"
+   ],
+   "answer": "Emerald green",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the swatch shown here is the dull green the trade manuals describe.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Imperial green was a dull cousin of emerald green, and the family's arsenic made wallpaper dangerous.",
+  "Only two paintings in our archive hold this green on more than a twentieth of the canvas, one of them Van Gogh's Roses."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Softened 'weaker, cheaper cousin' agreement claim to what the two sources say.",
+   "Removed undocumented Kaisergrün aka.",
+   "Adjusted opener to match."
+  ]
+ },
+ "words": 522
+}

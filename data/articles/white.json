@@ -1,0 +1,495 @@
+{
+ "slug": "white",
+ "name": "White",
+ "hex": "#F7F6F2",
+ "names": [
+  "White"
+ ],
+ "tier": "pigment",
+ "depth": "epic",
+ "lede": "White is the lightest color, the one with no hue at all: the color of chalk, milk and snow, which for most of history was far easier to name than to make.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The word and its two whites",
+   "body": "English *white* comes from Old English *hwīt*, from a Proto-Germanic word whose deeper root meant to shine; its cousins include Dutch *wit*, German *weiß* and Sanskrit *śvetá*, white or bright [5]. Older languages split the color in two. Latin had *albus*, a flat, natural white used for bones and for place names such as the Alps, and *candidus*, a brilliant white that also meant pure and happy [4]. Old High German likewise had a matte *wiz* and a glossy *blank*, and by Pastoureau's account English *blank* and *black* grow from one root meaning to gleam [4].\n\nWhat the old words never meant was colorless. In Greek, Latin and the medieval vernaculars, white meant clean, bright or empty, but not without color; the two ideas merged only at the end of the Middle Ages, helped by paper [1]. In medieval Europe the color set against white was more often red than black [1].\n\nThe swatch on this page is a very slightly warm off-white, about 2.7 units from pure screen white, #FFFFFF [35]. Its nearest named neighbors are [[traffic-white]] and [[floral-white]], with [[linen]] close behind; the warmer whites [[ivory]], [[cream]] and [[ecru]] sit further out [35]."
+  },
+  {
+   "id": "material",
+   "title": "Chalk, lead, zinc and titanium",
+   "body": "The first whites were earths and minerals. Paleolithic painters used chalk, talc and kaolin, more rarely gypsum or calcite, and white is rarer in the caves than red or black [2]. Humphry Davy found that the whites of the Pompeii frescoes were chalk, not lead [14]. Chalk is safe and stable, but it turns nearly transparent in oil, so oil painters needed something else [14].\n\nThat something was lead white, a basic lead carbonate made since about 2300 BC by exposing lead to vinegar in pots buried in dung [17]. In Rembrandt's time Dutch makers used the *stack process*, burying pots of lead and vinegar in manure for about ninety days [14]. It was cheap: in Florence in 1471 the painter Neri di Bicci paid roughly a hundredth of azurite's price for it [17][36]. Pastoureau calls lead white, or ceruse, the commonest European white from Roman times to the nineteenth century [11]. The Fogg Museum chemist Rutherford Gettens called it the most important pigment in Western painting [14]. Because lead is dense it shows on X-rays, which is how conservators traced the changes Titian made to his *Death of Actaeon* [14].\n\nIt was also a poison. Nicander described its dangers in the second century BC, and in 1678 Vernatti recorded colic, blindness and paralysis among the men who made it [17]. In water-based paint it can darken as lead carbonate turns to lead sulphide; Cennino Cennini warned of this, and figures in the Dunhuang caves that were once pale pink are now dark [14]. Lead white has been banned from general sale in the European Union since 1994 [14].\n\nThe search for a safe white began in France in the 1780s, when Guyton de Morveau proposed zinc oxide [15]. It cost four times as much as lead white and dried slowly in oil, so it first sold as a watercolor, Winsor & Newton's *Chinese White* of 1834, which had nothing to do with China [15][14]. Artists found it cold, and in 1888 only 12 of 46 English watercolorists said they used it [15]. Titanium dioxide finally won: made commercially from 1916 to 1918, it has twice the covering power of lead white and held 80 per cent of the white market by 1945 [16]. In Britain, deaths from preparing lead white fell from 38 in 1910 to none in 1950 [16]."
+  },
+  {
+   "id": "history",
+   "title": "Ancient white: undyed and bleached",
+   "body": "Ancient white was mostly the color of cloth left alone. White colorants did not penetrate fibers or survive washing and sunlight, so textiles were left natural or bleached in fields by dew and sun, giving off-white, beige or greyish results [4]. Pastoureau warns that the dazzling white robes in films and paintings of antiquity are therefore false [4]. The Roman toga had to be as white as possible: undyed wool was bleached with potash or saponin-rich plants and dusted with chalk before civic ceremonies, and colored togas appeared only in the third century AD [4].\n\nWhite also marked rank. Greek and Roman women of the elite whitened their faces and arms with plaster or ceruse to set themselves apart from sunburnt field workers [4]. In Rome, the whiter the bread, the more it cost [4]. Plato called white the purest color and the one most fitting for the gods, and tied it to things left undyed [4].\n\nThe famous white of Greek temples is a later invention [3]. Greek temples, friezes and statues were painted and gilded; the idea of a white Greece spread through Roman copies in bare marble and hardened into a myth in the eighteenth century [3][30]. Archaeologists of the early nineteenth century who reported traces of paint were disbelieved in Paris, London and Berlin [3]. Americans built the White House white partly because they believed Greek temples had been white [14]."
+  },
+  {
+   "id": "middle-ages",
+   "title": "White against red",
+   "body": "Christian Europe made white the color of Christ and the angels [6]. In Revelation the heavenly armies ride white horses, and at the Transfiguration Christ's clothes turn whiter than anything on earth [6]. Around 1195 the future Pope Innocent III fixed white for the feasts of Christ, the angels, virgins and confessors, beside red, black and green for other days [6].\n\nColor could also start a quarrel. The Cistercians, founded in 1098, began as *grey monks* in undyed wool and then became white monks [6]. In 1124 Peter the Venerable of Cluny mocked Bernard of Clairvaux for the pride of wearing white, and Bernard answered that black was the devil's color [6]. The real cloth on both sides was ecru, grey or brown, since a true white or a true black was hard to dye until the eighteenth century [6].\n\nChess shows how slowly black took red's place as white's opposite. The game reached Europe around the year 1000 with black and red sides, as in India and the Islamic world, and Europeans turned one side white [7]. Books disagree on when black replaced red: Pastoureau's history of white says from the late fourteenth century, his history of black says from the mid-thirteenth, and his history of red says the fifteenth [7][32][33].\n\nWhite was also worn next to the skin. In the thirteenth and fourteenth centuries every cloth that touched the naked body had to be white, and the cleaner and brighter it was, the higher the wearer's rank [8]. French queens mourned in white: Blanche of Navarre, widowed in 1350, wore it for nearly 48 years, and the last to do so was Louise of Lorraine, widowed in 1589 [8]."
+  },
+  {
+   "id": "making",
+   "title": "The long road to a true white",
+   "body": "For most of European history a true white could be named but not made [1]. Until about the eighteenth century, painters' and dyers' whites were near-whites: drab, ecru, beige, greyish or yellowed [1]. Wool was bleached by dew and sun in open fields, a slow method impossible in winter that drifted back toward grey or yellow, and washes of ash, clay or chalk left greyish, greenish or bluish tints [8]. Before chlorine, cloth was also treated with wood ash, saponin plants or a bath of dilute sulphuric acid, which could ruin the fibers if mixed too strong [12].\n\nChemistry changed this at the end of the eighteenth century. Carl Wilhelm Scheele isolated chlorine in 1774, Claude-Louis Berthollet made a bleach from it between 1775 and 1777 at Javel near Paris, and Humphry Davy named the gas in 1809 after the Greek *chloros*, pale green [12]. For the first time ordinary people could own truly white linen [12]. Pastoureau finds nothing in physics, chemistry or physiology that explains why white came to mean hygiene; he calls the link symbolic and very old [12]."
+  },
+  {
+   "id": "print",
+   "title": "Black on white",
+   "body": "Printing gave white a new partner. From the 1450s, dense black ink on white paper became the standard image, and Pastoureau argues that printing, more than any theory, set black and white apart from the other colors [10]. Paper had reached Spain by the late eleventh century, made from linen and hemp rags; early European paper was yellow or beige, and it lightened quickly once printers demanded it [10].\n\nScience followed. In 1665 and 1666 Isaac Newton showed that white sunlight spreads through a prism into a fixed sequence of colors that recombine into white [10]. His spectrum held white only as the sum of all its colors and had no separate place for it [10]. For more than a century afterward, black-and-white images were trusted as accurate and color was suspect; in France, color photographs were still forbidden on passports and identity cards in the early 1960s [10]."
+  },
+  {
+   "id": "culture",
+   "title": "Mourning, brides, flags and tennis",
+   "body": "White's meanings depend on where you stand. In much of Asia and Africa it is a color of death, understood as the opposite of birth, while on a Western woman it has long meant purity [1][14]. Between 1790 and 1820 fashionable European women wore white dresses in the antique style, and in 1810 Goethe noted that women now appeared almost universally in white and men in black [13].\n\nThe white wedding dress has its own story. A popular account credits Queen Victoria's wedding of 1840, and St Clair says brides followed her ivory satin [26]. Pastoureau calls that a legend: brides in France and Italy were already marrying in white in the 1830s, and Victoria's real novelty was wearing a veil during the ceremony [13]. In the countryside, brides often married in red until white reached the villages in the late nineteenth century [31].\n\nWhite also became political. Some units of Philip IV's army wore a white sash at Mons-en-Pévèle in 1304, the first material link between the French kings and the color [9]. After 1789 the royal white became the color of counter-revolution, and from the eighteenth century a plain white flag meant surrender in European armies [9].\n\nIn sport white began as a practical rule. Early uniforms of 1850 to 1870 touched the skin and had to be boiled, which vegetable dyes could not survive [13]. Wimbledon still requires all-white clothing, and in 2013 it banned off-white, cream and ecru [13]. Everyday language is looser: white wine is yellow, golden or greenish, never white [13]."
+  },
+  {
+   "id": "art",
+   "title": "Painting white",
+   "body": "Painters have long treated white as a tool rather than a finish. In the 1430s Leon Battista Alberti called white and black *moderators* that change a color's lightness without changing its kind, and advised never painting a surface so white that it could not be whiter [22]. Vermeer's whites contain traces of antimony that modern lead white lacks, a detail that helped expose Han van Meegeren's forged Vermeers [11]. Eighteenth-century painters softened lead white with chalk and added touches of blue or pink to keep it from looking flat [11].\n\nSnow taught painters to see many whites. Pastoureau calls Hendrick Avercamp the first painter to make winter his central subject, multiplying whites by the state of the snow, the ice and the light, as in *[[art:rijks-200108163|Winter Landscape with Ice Skaters]]* [12]. In the winter of 1875 Monet painted eighteen snowy views of Argenteuil, their whites bluish, greyish, pinkish and above all purplish [12]. Renoir once insisted to a student that nature holds no true white, since snow mirrors the blue sky [18].\n\nThen white became a subject in itself. Whistler's *[[art:nga-12198|The White Girl]]*, his first *Symphony in White*,, shown in 1862, is almost entirely white; when critics complained that it held other colors, he replied that a symphony in F contains other notes too [14]. Kazimir Malevich's *White on White* took the idea to its limit; Pastoureau dates it 1918 and Gage 1917 to 1918 [27][28]. Pastoureau adds that it is often misread as restoring white to the ranks of the colors, which it did not do [27]."
+  },
+  {
+   "id": "science",
+   "title": "Seeing white",
+   "body": "A white surface sends back most of the light that falls on it, across the whole spectrum; Newton's prism showed that sunlight itself is such a mixture [10]. Ordinary white paints reflect about 90 per cent of sunlight, and in 2022 engineers at Purdue reported a barium sulphate white that reflects over 98 per cent [25].\n\nThe eye judges white by comparison, not by measurement. A newspaper page looks white in a dim room even though it reflects about a thousand times less light than its black headline did in sunshine [20]. Even the brightest white paint returns only some twenty times the light of the darkest black, while a real scene can span a thousandfold range, so a painter must compress [21]. Snow in shadow on a clear day is lit only by bluish skylight, which is why the shadows look blue beside the yellowish sunlit snow [19]. Livingstone rejects the rule that white is not a color: it is a color without hue, placed on the lightness axis that every color shares [19]."
+  },
+  {
+   "id": "myths",
+   "title": "Myths and loose ends",
+   "body": "The white Greek statue is the best-known myth, but not the only one [3]. Le Corbusier's 1925 *Law of Ripolin* urged citizens to cover their wallpapers in white enamel paint, yet his own Pavillon de l'Esprit Nouveau of that year was painted in about ten colors [23]. Batchelor, citing the historian Mark Wigley, says Le Corbusier built only one truly white building [23]. Pliny's claim that the great Greek painters used only four colors, white among them, is contradicted by the 29 pigments found at Pompeii [29].\n\nThe story that the Inuit have dozens of words for snow touches white directly [24]. Pastoureau repeats a mild version, writing that peoples of the Far North can tell apart whites in snow and ice that others miss [1]. Finlay calls the story apocryphal and traces it to the anthropologist Franz Boas, who in 1911 suggested only four word roots for snow [24]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a screen color within six units of this White covers at least five per cent of the canvas in 570 works, about one in forty [34]. Inside a painting it always plays the lightest role, the highlight [34]. The works where it covers the most include John Singer Sargent's *[[art:commons-Q115241482|After El Jaleo]]* of 1882, about 90 per cent, and Piet Mondrian's *[[art:commons-Q17491107|Composition in Red, Yellow and Blue]]* of 1922, about 80 per cent [34].\n\nSome painters carry it far more than others: Vincenzo Carducci in 35 of his 50 works here, 29 times the archive rate [34]. Paintings of the 1300s carry it at five times the archive rate, 31 of 251, and Chinese paintings at three times, 47 of 635 [34]. The earliest dated match is a Chinese *[[art:cma-173574|Winter Scene]]* dated 960 [34].\n\nThe most telling number is a zero. Of the 140 Impressionist paintings in the archive, not one carries this near-neutral white over five per cent of its surface [34]. That fits how those painters worked, building snow and light from bluish, pinkish, yellowish and purplish whites [12][18]. Two caveats travel with every number here: these are photographs of aged, varnished paintings, and a color match is not a pigment test, so it cannot tell lead white from titanium white, or white paint from a bare ground of paper or silk [34]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Old English hwīt, from a root meaning to shine or be bright",
+   "first_recorded": "Old English hwīt",
+   "source": "Wiktionary (white)"
+  },
+  "aka": [
+   "Argent (heraldry)",
+   "Lead white, flake white, ceruse (pigment)",
+   "Zinc white, Chinese white (pigment)",
+   "Titanium white (pigment)"
+  ],
+  "siblings": [
+   "traffic-white",
+   "floral-white",
+   "ghost-white",
+   "linen"
+  ],
+  "parent": null,
+  "children": [
+   "antique-white",
+   "bright-white",
+   "ivory",
+   "ecru"
+  ],
+  "disambiguation": [
+   {
+    "slug": "pale-grey",
+    "gloss": "the library swatch closest to pure screen white #FFFFFF"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "la",
+    "name": "albus (matte), candidus (brilliant)"
+   },
+   {
+    "lang": "fr",
+    "name": "blanc"
+   },
+   {
+    "lang": "de",
+    "name": "weiß"
+   },
+   {
+    "lang": "ja",
+    "name": "shiro (白)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#F7F6F2",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 570,
+  "top_paintings": [
+   "commons-Q115241482",
+   "aic-187050",
+   "commons-Q17491107",
+   "aic-8266",
+   "nga-234270",
+   "aic-20804"
+  ],
+  "painter": {
+   "name": "Vincenzo Carducci",
+   "hits": 35,
+   "n": 50,
+   "lift": 29.2
+  },
+  "century": {
+   "key": 1300,
+   "hits": 31,
+   "n": 251,
+   "lift": 5.15
+  },
+  "top_country": {
+   "name": "China",
+   "hits": 47,
+   "n": 635,
+   "lift": 3.09
+  },
+  "impressionism": {
+   "hits": 0,
+   "n": 140
+  },
+  "first_dated": {
+   "id": "cma-173574",
+   "painter": null,
+   "year": 960
+  },
+  "role": {
+   "highlight": 1.0
+  },
+  "measured": {
+   "lch": [
+    96.9,
+    2.1,
+    100.1
+   ],
+   "contrast_black": 19.42,
+   "de2000_to_ffffff": 2.7,
+   "nearest": [
+    [
+     "Traffic White",
+     2.9
+    ],
+    [
+     "Pale Grey",
+     2.9
+    ],
+    [
+     "Floral White",
+     3.1
+    ],
+    [
+     "Linen",
+     4.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pastoureau, White: The History of a Color, pp. 9-11 (introduction)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, White: The History of a Color, pp. 18-19",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, White: The History of a Color, pp. 28-35",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, White: The History of a Color, pp. 26, 38-49",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "web",
+   "cite": "Wiktionary, \"white\" (etymology)",
+   "loc_kind": null,
+   "url": "https://en.wiktionary.org/wiki/white"
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, White: The History of a Color, pp. 66-73",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pastoureau, White: The History of a Color, pp. 74-77",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pastoureau, White: The History of a Color, pp. 100-102, 140",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Pastoureau, White: The History of a Color, pp. 146-151",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Pastoureau, White: The History of a Color, pp. 155-168",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Pastoureau, White: The History of a Color, pp. 170-176",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Pastoureau, White: The History of a Color, pp. 172-186",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Pastoureau, White: The History of a Color, pp. 196-206",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 3 (\"White\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 7",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 22",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Lead white\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 18,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 8",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 19,
+   "kind": "book",
+   "cite": "Livingstone, Vision and Art, ch. 15",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 20,
+   "kind": "book",
+   "cite": "Livingstone, Vision and Art, ch. 14",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 21,
+   "kind": "book",
+   "cite": "Livingstone, Vision and Art, ch. 20",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 22,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 122",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 23,
+   "kind": "book",
+   "cite": "Batchelor, Chromophobia, ch. 2",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 24,
+   "kind": "book",
+   "cite": "Finlay, Colour, closing chapter and endnote on the snow-words story",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 25,
+   "kind": "book",
+   "cite": "Westland et al., Universal Principles of Color, ch. 16",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 26,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Ivory\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 27,
+   "kind": "book",
+   "cite": "Pastoureau, Black: The History of a Color, p. 184",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 28,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 229",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 29,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 9",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 30,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 3",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 31,
+   "kind": "book",
+   "cite": "Pastoureau, Red: The History of a Color, ch. 30",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 32,
+   "kind": "book",
+   "cite": "Pastoureau, Black: The History of a Color, p. 42",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 33,
+   "kind": "book",
+   "cite": "Pastoureau, Red: The History of a Color, ch. 25",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 34,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 35,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/names.json, data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 36,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 5",
+   "loc_kind": "epub-chapter",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why was truly white cloth a mark of rank in Europe until about 1800?",
+   "choices": [
+    "White colorants would not bind to fibers, and field bleaching was slow and drifted back to grey or yellow until chlorine bleach arrived",
+    "White dye was imported from China at great cost",
+    "Laws reserved white for the clergy",
+    "White cloth was made only from silk"
+   ],
+   "answer": "White colorants would not bind to fibers, and field bleaching was slow and drifted back to grey or yellow until chlorine bleach arrived",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: ancient Greek temples and statues were meant to be seen as bare white marble.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "On a clear day, why do shadows on snow look blue?",
+   "choices": [
+    "They are lit only by bluish skylight, beside yellowish sunlit snow",
+    "Snow contains blue minerals",
+    "The eye cannot see white in shade",
+    "Ice crystals absorb all yellow light"
+   ],
+   "answer": "They are lit only by bluish skylight, beside yellowish sunlit snow",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "For most of history white was easier to name than to make: until chlorine bleach arrived around 1800, white cloth was really ecru, grey or yellowish.",
+  "Look at snow in shadow on a clear day: lit only by the sky, it reads blue, which is why Renoir insisted that nature holds no true white.",
+  "Lead white was the painter's main white for some two thousand years; it has been banned from general sale in the EU since 1994."
+ ],
+ "words": 2442,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Fixed stray double comma after 'Symphony in White'.",
+   "Verified 8+ key claims against Pastoureau, Finlay, Ball, St Clair text (Mons-en-Pevele sash, Davy at Pompeii chalk whites, Nicander, hygiene as symbolic primacy, Paleolithic whites rare, Chinese White 1834 and 12 of 46, Greek polychromy scholars disbelieved); all supported.",
+   "Myth list clean (Greek white statues, Victoria wedding dress, Le Corbusier, Inuit snow words, Pliny four colors all corrected or hedged); books-disagree items (chess dates, Malevich) hedged."
+  ]
+ }
+}

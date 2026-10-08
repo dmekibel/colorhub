@@ -22,12 +22,12 @@
   {
    "id": "price",
    "title": "Price and law",
-   "body": "Dyers had to crush thousands of snails to dye a single garment [1]. In the fourth century, in Diocletian's reign, the finest imperial purple cloth was priced at 50,000 denarii a pound and cheaper grades at 16,000, while a stoneworker made 50 denarii a day [1]. By that arithmetic a pound of the best cloth equalled a thousand days of a stoneworker's pay.\n\nThe law followed the price. For holidays and feasts the cloth was open only to senators and other leading men, and under Caligula, Nero and the fourth-century emperors its use was restricted to the imperial family [1]. Greenfield notes that the evidence suggests many elite Romans wore some shades of it anyway, and Pliny recorded a double-dyed variety used to cover dining couches [1].\n\nFashion moved inside the privilege. In the early first century wealthy Romans preferred purples that leaned toward red, and about fifty years later the most desirable shade was a mixture of scarlet and purple-black dyes [1]. Finlay's notes add that Pliny described the blackness as made with two shellfish, the small buccinum giving a crimson-like sheen to the larger purpura, and that people of Pliny's own day seemed to favor a lighter shade [10]."
+   "body": "Dyers had to crush thousands of snails to dye a single garment [1]. In the fourth century, in Diocletian's reign, the finest imperial purple cloth was priced at 50,000 denarii a pound and cheaper grades at 16,000, while a stoneworker made 50 denarii a day [1]. By that arithmetic a pound of the best cloth equalled a thousand days of a stoneworker's pay.\n\nThe law followed the price. For holidays and feasts the cloth was open only to senators and other leading men, and at various times, Greenfield names Caligula, Nero and emperors of the fourth century, only the imperial family could wear it [1]. Greenfield notes that the evidence suggests many elite Romans wore some shades of it anyway, and Pliny recorded a double-dyed variety used to cover dining couches [1].\n\nFashion moved inside the privilege. Early in the first century, rich Romans favored reddish purples, and about fifty years later the most desirable shade was a mixture of scarlet and purple-black dyes [1]. Finlay's notes add that Pliny described the blackness as made with two shellfish, the small buccinum giving a crimson-like sheen to the larger purpura, and that people of Pliny's own day seemed to favor a lighter shade [10]."
   },
   {
    "id": "hue",
    "title": "Hue, shine and doubt",
-   "body": "Because the name covered a range, the surviving images disagree about the color. Gage reads the Empress Theodora's robe in the Ravenna mosaic as announcing the true imperial purple by its shine rather than its hue [4]. In a Byzantine scene of Mary receiving the skein of wool, an inscription calls the cloth *porphyrion*, yet the painted color is a clear vermilion red [4].\n\nThe filmmaker and painter Derek Jarman asks the same question from the other side: since the Greeks had no word for a true blue, was imperial purple in fact red [5]? It is a question, not a finding, but it matches what the other books say.\n\nThe long search for the blue thread of Jewish ritual, *tekhelet*, ran into the same problem [3]. The Hebrew word can suggest both violet and blue, scholars were convinced the historical color leaned toward blue, and whatever they made from the shellfish usually came out purple [3]. Finlay says the experimenter John Edmonds, who had worked on woad, was sent a vial of pigment and some wool to test whether the dye, like indigo, needs oxygen removed from the vat before it will dye [3]."
+   "body": "Because the name covered a range, the surviving images disagree about the color. Gage says that in the Empress Theodora's robe in the Ravenna mosaic it was probably the shine, not the hue, that marked it as true imperial purple [4]. In a Byzantine scene of Mary receiving the skein of wool, an inscription calls the cloth *porphyrion*, yet the painted color is a clear vermilion red [4].\n\nThe filmmaker and painter Derek Jarman asks the same question from the other side: since the Greeks had no word for a true blue, was imperial purple in fact red [5]? It is a question, not a finding.\n\nThe long search for the blue thread of Jewish ritual, *tekhelet*, ran into the same problem [3]. The Hebrew word can suggest both violet and blue, scholars were convinced the historical color leaned toward blue, and whatever they made from the shellfish usually came out purple [3]. Finlay says the experimenter John Edmonds, who had worked on woad, was sent a vial of pigment and some wool to test whether the dye, like indigo, needs oxygen removed from the vat before it will dye [3]."
   },
   {
    "id": "end",
@@ -247,16 +247,16 @@
   "The same snail dye can dye blue on a sunny day and purple on a cloudy one.",
   "In the Ravenna mosaics, look for the shine of the purple robes, not their hue."
  ],
- "words": 1366,
+ "words": 1364,
  "status": "checked",
  "checked": {
-  "by": "batch-53 self-check (sentence-to-source trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Books disagree on when the dye died: Greenfield 1453, Finlay 1453 or earlier, possibly 1165.",
-   "Cardinal scarlet date not stated as fact; hedged.",
-   "Jarman is an artist's essay, used only as a question.",
-   "Swatch is Syme/ISCC, not the dye; stated."
+   "Theodora sentence hedged to Gage's 'probably'.",
+   "Removed unsupported 'matches the other books' after Jarman's question.",
+   "Reworded restriction sentence (close to book phrasing).",
+   "Verified Diocletian prices, Elsner, Cole, Edmonds vial, Isidore, Benjamin of Tudela, 1295/1453, Syme dates against book text."
   ]
  }
 }

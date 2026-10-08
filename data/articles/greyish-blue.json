@@ -283,13 +283,14 @@
  "words": 1164,
  "status": "checked",
  "checked": {
-  "by": "L7 self-check (sentence-to-card trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
    "Paterson's horizon blue (light greenish blue) vs Pastoureau's grayish-blue 1915 uniform: stated as books disagree.",
    "Smalt origin: tradition (Schurer 1540-60) vs Bouts c. 1455: stated as disputed.",
    "Venet camouflage anecdote is Paterson relaying Maerz & Paul: hedged.",
-   "Archive matches are colors, not pigment identifications (said in text)."
+   "Archive matches are colors, not pigment identifications (said in text).",
+   "Checker pass: key claims re-traced to fact cards and book text; no changes needed."
   ]
  }
 }

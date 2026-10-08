@@ -1,0 +1,225 @@
+{
+ "slug": "plum-purple",
+ "name": "Plum Purple",
+ "hex": "#463759",
+ "names": [
+  "Plum Purple"
+ ],
+ "tier": "standard",
+ "depth": "medium",
+ "lede": "Plum Purple is a dark, blue-leaning violet whose name was fixed by the painter Patrick Syme, who in 1814 moved Werner's plum blue into a new purple category.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A mineralogist's purple",
+   "body": "Plum Purple was a color of rocks and fruit before it was a color of paint [2][4]. In the mineralogical system of Abraham Werner it was filed as *plum blue*, one of the blues, between violet blue and lavender blue [4]. Patrick Syme's color book of 1814 made purple and orange principal colors, and the names beneath them moved with them: violet blue became [[violet-purple]], and plum blue became plum purple [1].\n\nIn Syme's table the color is number 42 [2]. His example from plants is the plum, and his example from minerals is fluor spar, the stone now called fluorite [2]. Baty reads number 42 as most likely descended from Jameson's Plum Blue, and notes that the 1821 edition of Syme carried it [2]. The neighboring purples were named from flowers, among them [[auricula-purple]], [[campanula-purple]], [[imperial-purple]] and [[pansy-purple]] [4]."
+  },
+  {
+   "id": "recipe",
+   "title": "Syme's recipe",
+   "body": "Syme did not leave the name to the eye alone. His text gives it as Berlin blue with a good deal of carmine red, a trace of brown and the faintest touch of black [3]. The recipe makes it a mixture of a blue and a red lake: [[berlin-blue]] and [[carmine]] carry the hue, and the brown and black only quiet it [3].\n\nThe next purple is built on this one. Auricula Purple, number 41, starts from this color and adds indigo blue and a good deal more carmine [3]. In Syme's system a color is therefore both a neighbor and a starting point, and the second edition grew to 110 references [1]."
+  },
+  {
+   "id": "seen",
+   "title": "Where Syme found it",
+   "body": "Baty's plates show the color in three places that Syme's readers could check against the table [3]. It appears on the skin of a plum in an 1856 horticultural journal, on a fluorite specimen in Rashleigh's *Specimens of British Minerals* of 1797, and on the wing feathers of the spectacled cormorant in a zoological report of 1843 [3]. A fruit, a stone and a bird's wing share one dark, bluish plum tone.\n\nThe same words crossed into medicine. In 1827 the Nuremberg dermatologist Heinrich Eichhorn listed the colors seen in skin disease, among them a purple of a campanula, imperial or plum shade, three names that are all on Syme's list of purples [5][4]. A color table, he wrote, would be of great worth for judging skin illness [5]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch here is #463759 [6]. It is dark and quiet: lightness 26, chroma 23 and a hue angle of 309, which is blue-violet [6]. Against white it has a contrast ratio of about 10.8, so white lettering reads well on it (computed from the hex) [6].\n\nIt is much darker and bluer than the modern [[plum]], #8E4585, from which it sits roughly 30 units away in CIELAB (our own calculation) [6]. Its close neighbors are other old purples. [[violet-purple]] (#3A2F52, Syme's next name) and [[blackish-violet]] (#473B63, from Ridgway's 1912 atlas) are each within about 4 units of it [6].\n\nTwo similar names point elsewhere. The xkcd color survey gave a plum purple of #4E0550, a deeper and more saturated violet [6]. The Japanese *umemurasaki*, glossed \"plum purple,\" is a reddish wine tone, #8F4155, filed here under [[light-wine]] [6]."
+  },
+  {
+   "id": "dates",
+   "title": "Books and records disagree on the date",
+   "body": "The library records the color in three ways. Werner's nomenclature, in Syme's edition of 1821, is its earliest source in our data [6]. Maerz and Paul's dictionary of 1930 gives a first record of 1814, the year of Syme's first edition, and the ISCC-NBS system of 1955 files the swatch in block 212 [6]. Baty puts the descent of number 42 in the 1821 edition, from Jameson's Plum Blue, not in 1814 [2]. Which edition first printed the name *plum purple* is therefore not settled by these sources.\n\nIn printed English, the phrase reaches 5 per cent of its eventual peak by 1812 and peaks in the 1920s (Google Books, all senses, so plum fruit and purple can both inflate it) [8]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color match to this swatch turns up in 23 paintings, about 0.1 per cent, and in 12 when we count only paintings where it covers at least 5 per cent of the canvas (as photographed) [7]. It is rarer than 66 per cent of named colors in the archive [7].\n\nThe strongest matches are canvases dominated by it. Bronzino's [[painting:commons-Q48814933|Portrait of a girl]], from about 1545, is 40 per cent this color, and a portrait of Fiodor Alexeyevich Romanov from 1825 is 37 per cent [7]. Inside a painting it most often plays a hidden color, in 42 per cent of the 12 paintings, found by lightness rank within each painting [7].\n\nThe earliest dated match is 1539, in Sebastiano del Piombo's *La Piedad*, which is 282 years before the name's earliest record in our sources; it is a look-alike hue in an aged photograph, not proof of a pigment [7]. The 1900s decade shows 6.7 times the expected rate (5 paintings of 809) [7]. These are photographs of aged, varnished paintings, so a color match is not a pigment test."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the skin of the plum (Werner's earlier name: plum blue)",
+   "first_recorded": "Syme's nomenclature, 1814 (Maerz & Paul) or 1821 edition (our library); books differ",
+   "source": "Baty, Nature's Palette, pp. 81-82, 104"
+  },
+  "aka": [
+   "plum blue (Werner)"
+  ],
+  "siblings": [
+   "violet-purple",
+   "auricula-purple",
+   "campanula-purple",
+   "imperial-purple",
+   "pansy-purple",
+   "red-lilac-purple",
+   "lavender-purple"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "plum",
+    "gloss": "the modern plum is a lighter, redder purple, about 30 units away"
+   },
+   {
+    "slug": "light-wine",
+    "gloss": "the Japanese umemurasaki, glossed plum purple, is a reddish wine tone"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "umemurasaki (different color: a reddish wine tone)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#463759",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 23,
+  "top_paintings": [
+   "commons-Q48814933",
+   "commons-Q21722619"
+  ],
+  "first": {
+   "id": "commons-Q99897791",
+   "year": 1539
+  },
+  "ngram": {
+   "first_5pct": 1812,
+   "peak": 1925
+  },
+  "measured": {
+   "lch": [
+    26,
+    23,
+    309
+   ],
+   "contrast_white": 10.8,
+   "nearest": [
+    [
+     "Violet Purple",
+     4.3
+    ],
+    [
+     "Blackish Violet",
+     4.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 81-82 (Syme's new principal colors)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 104 (Syme's purples, number 42)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 111-112 (Plum Purple plate and recipe)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 34-35 (name lists of Werner and Syme)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 220-221 (Eichhorn, 1827)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json): Plum Purple, Werner no. 42, ISCC-NBS block 212, Maerz & Paul 1930; swatch measurements computed from the hex",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "Google Books Ngram, 'plum purple', case-insensitive, 5-year smoothed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which mineral was Syme's example for number 42, Plum Purple?",
+   "choices": [
+    "Fluorite (fluor spar)",
+    "Amethyst",
+    "Lapis lazuli",
+    "Garnet"
+   ],
+   "answer": "Fluorite (fluor spar)",
+   "kind": "pick"
+  },
+  {
+   "q": "Before Syme renamed it, what was Plum Purple called in Werner's system?",
+   "choices": [
+    "Plum blue",
+    "Violet red",
+    "Lavender gray",
+    "Imperial black"
+   ],
+   "answer": "Plum blue",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the Japanese 'plum purple' (umemurasaki) is the same dark blue-violet as this color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Plum Purple began as plum blue: when Syme added purple as a principal color in 1814, the name moved across.",
+  "Syme gave a recipe: Berlin blue, much carmine, a little brown and a trace of black.",
+  "Look at a plum's skin in shade, or at a piece of fluorite: Syme saw this one color in both."
+ ],
+ "words": 840,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Verified against Baty text (Werner order, plates, Eichhorn quote); no text changes needed",
+   "Edition date (1814 vs 1821) remains flagged as unsettled in the article"
+  ]
+ }
+}

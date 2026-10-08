@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A name for a zone",
-   "body": "*Orange red* is a compound name: a red leaning toward orange, or an orange pushed toward red. It is not one historical dye or mineral, and no book traces it to a single origin. The swatch here is the web color `orangered`, #FF4500 [6]. The same name turns up in Ridgway's color atlas of 1912, in the RAL system of 1927 and in the ISCC-NBS names of 1955, which file this exact swatch as a vivid reddish orange [6].\n\nBooks use the words loosely, as a zone rather than a point. Paterson's dictionary calls scarlet a bright orange-red, sard a deep orange-red, Goya a rich orange-red, and notes that web designers adopted tomato red as an orange-red name [1][2]. The words mean \"somewhere between\", and each writer places the dial differently.\n\nThe idea of orange as a separate step between yellow and red is itself fairly late. Pastoureau reports that the old Aristotelian order of colors, which dominated European thought for some two thousand years, ran from white through yellow to red, with orange only occasionally inserted [27]. Newton's seven-color spectrum, in which orange sits as its own band beside red, became the standard reference only in the eighteenth century [28]. Before then there was less reason to name a color that was neither one nor the other."
+   "body": "*Orange red* is a compound name: a red leaning toward orange, or an orange pushed toward red. It is not one historical dye or mineral, and no book traces it to a single origin. The swatch here is the web color `orangered`, #FF4500 [6]. The same name turns up in Ridgway's color atlas of 1912, in the RAL system of 1927 and in the ISCC-NBS names of 1955, which file this exact swatch as a vivid reddish orange [6].\n\nBooks use the words loosely, as a zone rather than a point. Paterson's dictionary calls scarlet a bright orange-red, sard a deep orange-red, Goya a rich orange-red, and notes that web designers adopted tomato red as an orange-red name [1][2]. The words mean \"somewhere between\", and each writer places the dial differently.\n\nThe idea of orange as a separate step between yellow and red is itself fairly late. Pastoureau reports that the old Aristotelian order of colors, which dominated European thought for some two thousand years, ran roughly from white through yellow and red toward green, blue and black, and that orange sat in it only as a later or occasional step [27]. Newton's seven-color spectrum, in which orange sits as its own band beside red, became the standard reference only in the eighteenth century [28]. Before then there was less reason to name a color that was neither one nor the other."
   },
   {
    "id": "material",
@@ -22,7 +22,7 @@
   {
    "id": "dyes",
    "title": "Dyes: madder and Turkey red",
-   "body": "For centuries a dyer could make orange-reds cheaply, from plants, while a true red stayed expensive. Greenfield notes that russets and orange-reds came easily from plant dyes, but a true red needed rare materials and guarded techniques until artificial dyes arrived in the nineteenth century [16]. The commonest source was [[madder]], a small bush with a pink root. Finlay describes the richest orange-reds of the Ottoman world as coming from madder, beside dark reds from kermes and blues from indigo [18].\n\nOrange-red was therefore the red of ordinary people. Peasants could afford the cheaper orange-red and russet dyes, though a too-bright cloth could still collide with sumptuary laws and local custom [17]. For grander wearers only [[scarlet]] and crimson would do, and madder's orange-red was glory enough for those lower and middling ranks [17].\n\nThe best orange-red dye was a secret. Finlay says that \"Turkey red\", the luminous orange-red seen on the carpets of Constantinople, guarded its recipe closely, one of the dyeing world's great secrets [18]. Madder's reach goes back much further than the Turkish dyers [19]. A scrap of cotton found stuck to a silver vase at Mohenjo-daro in the Indus Valley, woven some 4,600 years ago, was dyed with madder root and was pink or orange-red depending on the mordant [19].\n\nAnother orange-red dye came from the Americas [4]. Annatto, from Central America, is a natural orange-red dye now used in food coloring; capsanthin, the pigment of red peppers, is another orange-red food colorant [4]."
+   "body": "For centuries a dyer could make orange-reds cheaply, from plants, while a true red stayed expensive. Greenfield notes that russets and orange-reds came easily from plant dyes, but a true red needed rare materials and guarded techniques until artificial dyes arrived in the nineteenth century [16]. The commonest source was [[madder]], a small bush with a pink root. Finlay describes the richest orange-reds of the Ottoman world as coming from madder, beside dark reds from kermes and blues from indigo [18].\n\nOrange-red was therefore the red of ordinary people. Peasants could afford the cheaper orange-red and russet dyes, though a too-bright cloth could still collide with sumptuary laws and local custom [17]. For grander wearers only [[scarlet]] and crimson would do, and madder's orange-red was glory enough for those lower and middling ranks [17].\n\nThe best orange-red dye was a secret. Greenfield says that only dyers in the Ottoman world, India and elsewhere in the East could make a rich madder red reliably [17]; Europeans called the result \"Turkey red\". The process took more than a dozen steps and months to finish, and European dyers, despite trying, did not master it until the eighteenth century [17]. Madder's reach goes back much further than the Turkish dyers [19]. A scrap of cotton found stuck to a silver vase at Mohenjo-daro in the Indus Valley, woven some 4,600 years ago, was dyed with madder root and was pink or orange-red depending on the mordant [19].\n\nAnother orange-red dye came from the Americas [4]. Annatto, from Central America, is a natural orange-red dye now used in food coloring; capsanthin, the pigment of red peppers, is another orange-red food colorant [4]."
   },
   {
    "id": "art",
@@ -312,13 +312,13 @@
   "Look at two reproductions of the same Titian: one robe may read orange-red, the other nearly pink."
  ],
  "checked": {
-  "by": "batch-21 writer",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Thin source base: no book treats 'orange red' as one color; honest medium-length article.",
-   "Pigment Compendium notes are entry-level; Gage De Stijl painter unnamed in concordance; hedged."
+   "Turkey red 'carpets of Constantinople / luminous / great secrets' not in Finlay ch14: replaced with Greenfield-supported wording",
+   "Aristotelian color order hedged (Pastoureau lists orange in some versions)"
   ]
  },
  "status": "checked",
- "words": 1283
+ "words": 1325
 }

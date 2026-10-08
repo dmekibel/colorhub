@@ -1,0 +1,294 @@
+{
+ "slug": "jade",
+ "name": "Jade",
+ "hex": "#00A86B",
+ "names": [
+  "Jade"
+ ],
+ "tier": "pigment",
+ "depth": "long",
+ "lede": "Jade is a green named for a stone, and the stone is really two unrelated minerals; the word came into English from a Spanish phrase for the flank, because the rock was once worn against kidney pain.",
+ "sections": [
+  {
+   "id": "material",
+   "title": "Two stones under one name",
+   "body": "Jade is not one mineral. Jadeite is the intensely colored stone of Burma, found around Myitkyina in the northern mountains, usually green and sometimes lavender [1]. Nephrite is a different material that is mineralogically no relation: duller, found near Khotan in western China and around the Pacific Rim, in Japan, New Zealand, California and Peru [1]. Our gem page credits the French mineralogist Alexis Damour with separating the two chemically in 1863, a date taken from Wikipedia and not checked in the books [2].\n\nNephrite is the tougher of the two. Finlay notes that it scarcely breaks under a hammer, although it ranks only 6.5 on the Mohs scale, because its fibers are interwoven [3]. Chemists know the same fibrous mineral family as actinolite, a green amphibole whose name comes from the Greek for *ray*, and which is sometimes called nephrite jade [4]. Neither stone is a pigment of its own; the *Pigment Compendium* treats actinolite only as an occasional trace in other materials [4].\n\nOne caution for buyers: Finlay adds that nephrite is often faked and dyed [1]. The word on a shop label has never guaranteed the stone."
+  },
+  {
+   "id": "name",
+   "title": "A flank stone",
+   "body": "The English word comes from Spanish [1]. Finlay credits Nicolás Monardes, a sixteenth-century doctor in Seville, who used the stone against kidney trouble and called it *piedra de hijada*, the flank stone [1]. Among the books we hold only Finlay gives this origin, so it rests on one source [1].\n\nThe dictionary sense is looser than the stone. Paterson defines jade as a green in various shades, mainly yellowish-green, and jade green as a blue-green or a yellowy green [5]. The same book lists Caledon Jade Green, a synthetic dye discovered in 1920 [6]. So by the twentieth century the name could describe a dye as easily as a rock."
+  },
+  {
+   "id": "china",
+   "title": "The stone of China",
+   "body": "Finlay reports that nephrite was believed in ancient China to confer immortality and is still treasured there [1]. Jadeite was highly prized in the imperial China of the nineteenth century [1]. A Chinese interest in green stone shows up in unexpected places: an opal dealer in Coober Pedy guessed that Japanese buyers prefer blue and green opals because the color reminds them of jade, though this is his hunch alone [7].\n\nThe tradition is changing. Since a diamond marketing campaign reached China in 1993, Finlay says, 51 per cent of urban couples have swapped the traditional green jade for a diamond as the stone of betrothal [3]. In the English-speaking anniversary lists jade marks the 35th year in the modern list, while the older list gave coral or jade for the same year [8]. Alaska and Wyoming both claim jade as their own stone [8]."
+  },
+  {
+   "id": "mandalay",
+   "title": "The jade market in Mandalay",
+   "body": "Mandalay is sometimes said to have three colors: red, green and white, for ruby, jade and heroin, as well as for its soil, hills and pagodas [9]. Finlay went to the jade market expecting green and found a pale, white place, full of cutting dust [9]. The jade on offer was poor quality, and the only solid green he saw was the baize of the workers' pool tables [9].\n\nThe visit shows how far a market stall can sit from a screen swatch, which stands for the best of the stone and not for the average [1][9]."
+  },
+  {
+   "id": "ceramics",
+   "title": "Jade in porcelain and ink",
+   "body": "One glaze was made to echo jade. Finlay says the first Tang emperor commissioned imperial celadon makers to make bowls prized for resembling white jade [10]. Chinese collectors also prized the fine web of cracks in the glaze, the crackle, because it looks like the fissures in jade [11][12]. Finlay explains that crackle comes from body and glaze shrinking at different rates in the kiln, and a conservator told her it has to be wrong just enough [11]. See [[celadon]] for the glaze itself.\n\nJade had other luxury uses. Old Chinese ink recipes listed powdered jade beside musk and pearl, and Finlay pictures an emperor eating with jade chopsticks [13][14]."
+  },
+  {
+   "id": "belief",
+   "title": "Amulets and cures",
+   "body": "Birren's survey of amulet wearers records what the stone was thought to do: ease childbirth, cure dropsy, quench thirst and calm a racing heart [15]. These are old beliefs, not medicine. The kidney remedy behind the word *jade* belongs to the same family of claims [1][15]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch and the stone",
+   "body": "The swatch here, #00A86B, is a vivid bluish green, within three units of the ISCC-NBS block called vivid green [16]. It is bluer than Paterson's yellowish-green jade, and far more saturated than most nephrite [5][16]. Our gem page pairs it with a duller nephrite green and a lavender jadeite, because a single color cannot stand for both stones [17].\n\nIts nearest named colors are [[green-crayola]], [[jade-green]] and [[shamrock-green]], all within about three units [16]. The color has two children, [[deep-jade]] and [[jade-green]] [16]. The nearest cut stone in our gem data is [[gem:jade|jade]] itself, and a daylight [[gem:alexandrite|alexandrite]] green is 9.5 units away [16].\n\nIn [[film:hero|Hero]] (2002), a memory of an earlier attempt on the king is shown in a vivid green that our film notes list as jade green [18]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Painters have used this exact green rarely. No painting in our archive of 23,781 has a color within CIEDE2000 4 of it covering at least 1 per cent of its canvas, as photographed [19]. That describes our archive, not painting as a whole. It also contrasts weakly with white, at 3.08 to 1, so a white label on this swatch is hard to read [16]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Spanish piedra de hijada, 'flank stone' (Finlay, via Monardes of Seville)",
+   "first_recorded": "as a stone, c. 4700 BC (Hongshan culture, per our library); as a color word, later",
+   "source": "Finlay, Jewels: A Secret History; Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "nephrite and jadeite (the stones)",
+   "imperial green (top-grade jadeite)"
+  ],
+  "siblings": [
+   "jade-green",
+   "emerald"
+  ],
+  "parent": null,
+  "children": [
+   "deep-jade",
+   "jade-green"
+  ],
+  "disambiguation": [
+   {
+    "slug": "celadon",
+    "gloss": "the grey-green glaze made to look like jade, much paler and greyer"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "match": {
+   "hex": "#00A86B",
+   "de2000": 4,
+   "min_cover": 0.01
+  },
+  "measured": {
+   "lch": [
+    60.8,
+    55.7,
+    157.4
+   ],
+   "contrast_white": 3.08,
+   "iscc": "vivid green",
+   "de": 3.0,
+   "nearest": [
+    [
+     "Green (Crayola)",
+     2.6
+    ],
+    [
+     "Jade Green",
+     3.0
+    ],
+    [
+     "Shamrock Green",
+     3.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Finlay, Jewels: A Secret History, appendix glossary (\"Jadeite\", \"Nephrite jade\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "web",
+   "cite": "Wikipedia, \"Jade\" (via ColorHub gem page, data/gems.js)",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/Jade"
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Finlay, Jewels: A Secret History, ch. 18",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Actinolite\", p. 14",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"jade\", \"jade green\", p. 226",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Caledon Jade Green\", p. 86",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Finlay, Jewels: A Secret History, ch. 13",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Finlay, Jewels: A Secret History, ch. 20",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Finlay, Jewels: A Secret History, ch. 17",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 21",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 16",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Celadon\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 11",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 16",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 3 (\"The Amulet Wearers\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "data",
+   "cite": "ColorHub color library and look-alike graph (ISCC-NBS 1955; CIEDE2000 distances)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "data",
+   "cite": "ColorHub gem page \"Jade\" (data/gems.js)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 18,
+   "kind": "data",
+   "cite": "ColorHub film notes, \"Hero\" (data/films.js)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 19,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (data/graph/fieldnotes/j.json), 23,781 paintings, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How are jadeite and nephrite related?",
+   "choices": [
+    "They are unrelated minerals sold under one name",
+    "They are the same mineral from two countries",
+    "Nephrite is weathered jadeite",
+    "Jadeite is a dyed nephrite"
+   ],
+   "answer": "They are unrelated minerals sold under one name",
+   "kind": "pick"
+  },
+  {
+   "q": "Nephrite is easy to shatter with a hammer.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Why did Chinese collectors prize crackle in celadon glaze?",
+   "choices": [
+    "It resembles the fissures in jade",
+    "It shows the glaze is poisonous",
+    "It marks imperial gold",
+    "It makes the glaze waterproof"
+   ],
+   "answer": "It resembles the fissures in jade",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Jade is two unrelated stones sharing one name, and the word itself means flank stone.",
+  "At Mandalay's jade market the only solid green Finlay saw was a pool table."
+ ],
+ "words": 903,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "garbled 'first emperor' Tang claim fixed; near-verbatim book phrase paraphrased; 'most famous imitation' overstated"
+  ]
+ }
+}

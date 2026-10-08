@@ -18,7 +18,7 @@
   {
    "id": "werner",
    "title": "A mineralogist's blue",
-   "body": "Abraham Gottlob Werner (1749-1817) treated color as the first thing a mineral shows the senses, and in 1774 he published a vocabulary meant to let anyone describing a specimen be understood by others [2]. Violet blue was one of the names in that school's range of blues, and his Scottish follower Robert Jameson kept it, together with plum blue, in his own mineralogy [2][3].\n\nThe name did not survive the next step. In 1814 Patrick Syme, painter to the Wernerian Natural History Society, issued *Werner's Nomenclature of Colours*, which, unlike Werner's and Jameson's lists, carried color samples, and in it he made purple and orange principal colors [2]. Werner's violet blue and plum blue were therefore renamed violet purple and plum purple [2][3]. Syme's own entry says that the violet purple of his chart is the violet blue of Werner, made by mixing Berlin blue with red and a little brown, and it shows the amethyst and the purple aster as examples [3]. Syme grew the list to 108 colors in 1814 and 110 in the 1821 edition [2].\n\nSo violet blue never became a Syme color, but the idea lives on in [[amethyst]], the stone his chart used to show the shade [3]."
+   "body": "Abraham Gottlob Werner (1749-1817) treated color as the first thing a mineral shows the senses, and in 1774 he published a vocabulary meant to let anyone describing a specimen be understood by others [2]. Violet blue was one of the names in that school's range of blues, and his Scottish follower Robert Jameson kept it, together with plum blue, in his own mineralogy [2][3].\n\nThe name did not survive the next step. In 1814 Patrick Syme, a flower painter who worked for the Wernerian Natural History Society, issued *Werner's Nomenclature of Colours*, which, unlike Werner's and Jameson's lists, carried color samples, and in it he made purple and orange principal colors [2]. Werner's violet blue and plum blue were therefore renamed violet purple and plum purple [2][3]. Syme's own entry says that the violet purple of his chart is the violet blue of Werner, made by mixing Berlin blue with red and a little brown, and it shows the amethyst and the purple aster as examples [3]. Syme grew the list to 108 colors in 1814 and 110 in the 1821 edition [2].\n\nSo violet blue never became a Syme color, but the idea lives on in [[amethyst]], the stone his chart used to show the shade [3]."
   },
   {
    "id": "smalt",
@@ -38,7 +38,7 @@
   {
    "id": "stone",
    "title": "In stone and porcelain",
-   "body": "The words turn up wherever a dealer needs to name a blue that leans purple. Some sapphires are color-change stones, green by day and violet-blue at night, and when natural they are expensive [10]. [[gem:tanzanite|Tanzanite]], found near Kilimanjaro in 1967, is a violet-blue stone said to be the closest match to a Kashmir [[gem:sapphire|sapphire]], though Finlay marks the tale as contested [11].\n\nIn Chinese porcelain, the blue-and-white wares of the Zhengde (1506-21) and Jiajing (1522-66) reigns carry a rich violet blue that is unusual for its intensity, and only the Xuande period (1426-35) is rated better in the ranking Finlay reports from Boger [12]."
+   "body": "The words turn up wherever a dealer needs to name a blue that leans purple. Some sapphires are color-change stones, green by day and violet-blue at night, and when natural they are expensive [10]. [[gem:tanzanite|Tanzanite]], found near Kilimanjaro in 1967, is a violet-blue stone that Finlay calls the closest visual match to a Kashmir [[gem:sapphire|sapphire]] [11].\n\nIn Chinese porcelain, the blue-and-white wares of the Zhengde (1506-21) and Jiajing (1522-66) reigns carry a rich violet blue that is unusual for its intensity, and only the Xuande period (1426-35) is rated better in the ranking Finlay reports from Boger [12]."
   },
   {
    "id": "field",
@@ -188,7 +188,7 @@
   {
    "n": 11,
    "kind": "book",
-   "cite": "Finlay, Jewels: A Secret History, ch. 16, tanzanite (marked contested in the notes)",
+   "cite": "Finlay, Jewels: A Secret History, ch. 16, tanzanite (Kashmir comparison)",
    "loc_kind": "book-chapter",
    "url": null
   },
@@ -252,16 +252,14 @@
   "Syme's 1814 chart renamed Werner's violet blue as violet purple, and chose amethyst to show it.",
   "Two books describe the blue of a screen, the primary of light, as a violet-blue."
  ],
- "words": 1022,
+ "words": 1020,
  "status": "checked",
  "checked": {
-  "by": "L7 self-check (sentence-to-card trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Swatch is the Wikipedia/Crayola list color; no date or coiner documented.",
-   "Which edition of Werner first listed 'violet blue' is not stated by Baty; stated only as Werner's school (Werner and Jameson) before Syme.",
-   "Tanzanite/Kashmir sapphire link is marked contested by Finlay's notes; stated as 'said to be'.",
-   "Archive count is only 3 paintings; no trend claimed."
+   "Syme described as a flower painter who worked for the Wernerian society (Baty), not \"painter to\" it.",
+   "Tanzanite/Kashmir match is Finlay's flat claim; the contested part is the Titanic lore, so the \"contested\" hedge was removed."
   ]
  }
 }

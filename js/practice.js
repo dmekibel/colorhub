@@ -531,20 +531,41 @@ function prMiss(it, pick, from, go, delay = 380) {
   later(() => { if (from && !from.isConnected) return; mcShow({ you: { n: prName(pick), h: pick.h }, was: { n: prName(it), h: it.h }, line: prDiff(it, pick), from, go }); }, delay);
   return true;
 }
+// Next after a miss (David, 2026-10-08, iPhone: "I'm clicking Next and it's stuck"). A touch moves on at pointerup,
+// not only at the click iOS may or may not synthesize afterwards (it drops the click after some DOM changes under
+// the finger), and the click that does follow is swallowed so it can't land on the next question. Fires once.
+let PR_SWALLOW = null;   // { t, x, y }: the click iOS may still send for a touch already acted on at pointerup
+const prSwallow = e => { PR_SWALLOW = { t: performance.now() + 450, x: e.clientX, y: e.clientY }; };
+if (typeof document !== "undefined") document.addEventListener("click", e => {
+  const s = PR_SWALLOW; if (!s) return;
+  if (performance.now() > s.t) { PR_SWALLOW = null; return; }
+  if (Math.hypot(e.clientX - s.x, e.clientY - s.y) > 40) return;
+  PR_SWALLOW = null; e.stopPropagation(); e.preventDefault();
+}, true);
 function prNextBtn(foot, go, label = "Next") {
   foot.innerHTML = prPrimary(label, "", "data-next");
   const b = foot.querySelector("[data-next]");
-  b.onclick = go;
+  let fired = false, down = null;
+  const fire = () => { if (fired) return; fired = true; b.classList.add("pr-fired"); go(); };
+  b.onclick = fire;
+  b.addEventListener("pointerdown", e => { down = e.pointerType !== "mouse" && e.isPrimary ? { id: e.pointerId, x: e.clientX, y: e.clientY } : null; });
+  b.addEventListener("pointerup", e => {
+    if (!down || e.pointerId !== down.id || Math.hypot(e.clientX - down.x, e.clientY - down.y) > 14) return;
+    down = null; if (fired) return;
+    prSwallow(e); fire();
+  });
+  b.addEventListener("pointercancel", () => { down = null; });
   return b;
 }
 PR_STEPS["quiz-name"] = { by: "pick", render(box, it, ctx = {}) {
   return new Promise(resolve => {
-    const t0 = performance.now(), opts = prShuffle([it, ...prNear(it, 3, ctx.deck)]);
+    // ctx.wrong: the wrong options chosen by the caller (Study's early rungs: fewer and farther apart, js/studypace.js)
+    const t0 = performance.now(), opts = prShuffle([it, ...(ctx.wrong && ctx.wrong.length ? ctx.wrong : prNear(it, 3, ctx.deck))]);
     box.innerHTML = `<div class="pr-step pr-s-quiz">
       ${ctx.note ? `<p class="pr-stepnote">${esc(ctx.note)}</p>` : ""}
       <div class="pr-sw" style="--c:${it.h}"></div>
       <div class="pr-fb" aria-live="polite"></div>
-      <div class="pr-opts">${opts.map((o, i) => `<button class="pr-opt" data-i="${i}"><span>${esc(prName(o))}</span></button>`).join("")}</div>
+      <div class="pr-opts${opts.length === 3 ? " pr-opts-3" : ""}">${opts.map((o, i) => `<button class="pr-opt" data-i="${i}"><span>${esc(prName(o))}</span></button>`).join("")}</div>
       <div class="pr-foot"><p class="pr-hint">Tap its name</p></div></div>`;
     const fb = box.querySelector(".pr-fb"), foot = box.querySelector(".pr-foot");
     let done = false;
@@ -572,7 +593,7 @@ PR_STEPS["quiz-name"] = { by: "pick", render(box, it, ctx = {}) {
 // ---------- quiz-color: a name, four same-family swatches ----------
 PR_STEPS["quiz-color"] = { by: "pick", render(box, it, ctx = {}) {
   return new Promise(resolve => {
-    const t0 = performance.now(), opts = prShuffle([it, ...prNear(it, 3, ctx.deck)]), nm = prName(it);
+    const t0 = performance.now(), opts = prShuffle([it, ...(ctx.wrong && ctx.wrong.length === 3 ? ctx.wrong : prNear(it, 3, ctx.deck))]), nm = prName(it);
     box.innerHTML = `<div class="pr-step pr-s-qc">
       ${ctx.note ? `<p class="pr-stepnote">${esc(ctx.note)}</p>` : ""}
       <div class="pr-q"><span class="pr-note">Which one is</span><b class="pr-t1" style="${prFit(nm, 44)}">${esc(nm)}?</b></div>

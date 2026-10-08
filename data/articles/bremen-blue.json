@@ -1,0 +1,227 @@
+{
+ "slug": "bremen-blue",
+ "name": "Bremen Blue",
+ "hex": "#68BECB",
+ "names": [
+  "Bremen Blue"
+ ],
+ "tier": "pigment",
+ "depth": "long",
+ "lede": "Bremen blue was a pale greenish-blue copper pigment of the nineteenth-century paint trade, so tangled with its cousin verditer that even specialists cannot say for sure where one ends and the other begins.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A copper blue with a German name",
+   "body": "Paterson's dictionary glosses *Bremen blue* simply as a blue copper pigment, and gives Bremen green as another word for [[malachite]] [1]. The books say nothing on why the pigment carries the name of the German port city [1][2]. The Pigment Compendium treats it as a trade synonym, one of many names for the family of artificial copper blues [2].\n\nThe swatch here comes from the early-twentieth-century color charts, not from a recipe. It matches Ridgway's 1912 plate XX, ISCC-NBS block 164 and a Maerz and Paul entry first recorded in 1839, and the scanned plates are approximate [8]. It is a clear, light cyan-blue, nearest to [[sky-blue]] among our common names [8], which fits the description of the pigment as a pale greenish-blue tint [2]."
+  },
+  {
+   "id": "what-it-was",
+   "title": "What the pigment was",
+   "body": "The older literature generally treats Bremen blue as a copper hydroxide pigment [2]. Heaton, writing in 1928, describes it as a pale greenish-blue made mostly of copper hydroxide with a little carbonate, prepared by corroding copper with salt and copper sulfate to give a basic chloride, then treating that with sodium carbonate [2]. The Colour Index of 1971, citing the German chemist Bersch (1901), agrees [2].\n\nBooks disagree here. More recent writers such as Scott (2002) say Bremen blue is simply blue verditer, a copper carbonate hydroxide with the crystal structure of the mineral azurite [2]. The Compendium's authors say the question may stay open until someone remakes the pigment from an original recipe [2].\n\nZerr and Rübencamp (1906) describe the manufacture in detail: every route starts by precipitating copper sulfate with a caustic alkali, which yields copper hydroxide [2]. They also report that the product was adulterated with gypsum, ground pumice, diatomaceous earth and similar fillers, and that its use was already declining over the previous decade because synthetic ultramarines were taking its place [2]. One later author, Rose (1916), says Bremen blue was supplied as a powder [3]."
+  },
+  {
+   "id": "verditer",
+   "title": "Verditer and the family of names",
+   "body": "Blue verditer is the better-documented cousin. A seventeenth-century manuscript attributed to de Mayerne says it was found by accident, when copper nitrate left over from separating silver from copper was added to chalk or white lead and turned green [4]. The blue, which needs lower temperatures and was made unreliably, came later and became an English speciality [4]. French makers did not understand the process well until the late eighteenth century, when Pelletier analysed it, and Chaptal (1807) later proposed improvements such as limewater in place of ground lime [4].\n\nThe synonyms pile up. Blue verditer was also called blue bice, ashes blue, and *cendres bleues*, and Harley (1982) calls the English form Sanders blue an eighteenth-century affectation drawn from the French [4][5]. Ashes blue itself was applied to natural and synthetic copper blues alike, and the authorities split: Mérimée (1830) and Osborn (1845) call it a copper-based blue, Standage (1887) takes it for the last grinding of [[lapis-lazuli]], and Mayer (1991) links it to Bremen blue [5]. Lime blue, Italian blue, Neuwied blue and air blue add to the tangle [4][3][6]. Mayer lists Italian blue both as a name for [[egyptian-blue]] and also for lake-based imitations or particular tints of Bremen blue [6].\n\nLime blue shows how the lines blurred. Bersch (1901) ties it to Bremen blue as copper hydroxide pigments but also lists blue verditer among its synonyms [3]. Gentele (1860) says lime blue came as irregular lumps, whereas Rose says Bremen blue was a powder, which gives at least one practical way to tell them apart [3]."
+  },
+  {
+   "id": "use",
+   "title": "Where it was used",
+   "body": "Most of what we know of use is under the verditer name. Refiner's verditer was a routine house-painter's color in the seventeenth and eighteenth centuries [4]. Verweij (2000) identified blue verditer in the decorative schemes of an eighteenth-century house in Haarlem [4]. Heaton had already listed blue verditer as obsolete or of little importance by 1928 [4], which fits the decline reported in 1906 [2].\n\nNo painter of renown is known to have chosen it for fine art in our books, which is not a proof that none did."
+  },
+  {
+   "id": "green",
+   "title": "Bremen green, Brunswick green and Elsner green",
+   "body": "A greener version, Bremen green, was made by the same hydroxide route, and Bersch makes no distinction in preparation [2]. Terry (1893) ties it to green verditer, and Gettens and FitzHugh link the name secondarily to malachite, which matches Paterson's cross-reference [2][1]. Elsner green mixed Bremen blue with a fustic-and-tin lake to reach a green [7].\n\nBrunswick green, the English form of *Braunschweiger Grün*, wandered even further [9]. Krünitz (1789) describes a copper chloride pigment; late-eighteenth-century sources add copper tartrate; Mérimée (1830) gives a copper-arsenic recipe; and Salter (1869) lists a mixture of chromates with [[prussian-blue]] [9]. Zerr and Rübencamp (1906) tie the name to Bremen blue, though the Compendium leaves the exact link unclear [9]. A pigment name in this trade, as a result, is a clue to a family of formulas rather than to one compound [9]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The word itself is easy to date. In Google Books, *Bremen blue* appears in the 1840s, a year after Maerz and Paul's first record, and peaks in the 1870s; these counts include every sense of the words, so Bremen the city can inflate them [8][10].\n\nIn paint, the color is rare. In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in only 8 works [10]. Under the looser name-lens test it appears in 13, rarer than 69 per cent of the named colors [10]. The largest patch is Courbet's [[painting:nga-53126|La Bretonnerie in the Department of Indre]], 1856, at 29 per cent of the canvas [10]. The earliest dated match is a 1729 work by Georg Gsell, [[painting:commons-Q106376473|a painting by Georg Gsell]] [10]. That is 183 years before the name's first record in our sources (1912), so it is a look-alike hue in an aged photograph, not a pigment test [10]. As always, these are photographs of varnished paintings [10]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented in our books (the German port city Bremen is the obvious guess)",
+   "first_recorded": "Maerz and Paul list the color first recorded 1839; Ridgway 1912 in our library",
+   "source": "Pigment Compendium, \"Bremen blue\"; ColorHub library"
+  },
+  "aka": [
+   "copper blue",
+   "lime blue (a related name)",
+   "blue verditer (a disputed equivalent)"
+  ],
+  "siblings": [
+   "sky-blue",
+   "egyptian-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "malachite",
+    "gloss": "Paterson cross-refers Bremen green, not Bremen blue, to malachite"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "de",
+    "name": "Bremer Blau"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#68BECB",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 8,
+  "first_seen": {
+   "id": "commons-Q106376473",
+   "year": 1729,
+   "painter": "Georg Gsell"
+  },
+  "top": {
+   "id": "nga-53126",
+   "cover": 0.292
+  },
+  "ngram": {
+   "first": 1840,
+   "peak": 1870
+  },
+  "measured": {
+   "lch": [
+    72,
+    27,
+    213
+   ],
+   "nearest": [
+    [
+     "Sky blue",
+     8.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Bremen blue\" and \"Bremen green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Bremen blue\" and \"Bremen green\", pp. 74 and 141",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"lime blue\", pp. 252 and 288",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"blue verditer\", p. 69",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"ashes blue\" and \"Sanders blue\", p. 67",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Italian blue\", p. 217",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Elsner green\", p. 162",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub color library: Bremen Blue (Ridgway 1912 plate XX; ISCC-NBS 1955 block 164; Maerz & Paul 1930)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Brunswick green\", p. 77",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), field notes and Google Books Ngram, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What do the older sources say Bremen blue is made of?",
+   "choices": [
+    "Mostly copper hydroxide",
+    "Ground lapis lazuli",
+    "Cobalt glass",
+    "Iron and tannin"
+   ],
+   "answer": "Mostly copper hydroxide",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: books agree that Bremen blue and blue verditer are the same pigment.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "According to the Pigment Compendium, why was Bremen blue in decline by about 1906?",
+   "choices": [
+    "Synthetic ultramarines replaced it",
+    "The copper mines closed",
+    "It was banned",
+    "It was too expensive"
+   ],
+   "answer": "Synthetic ultramarines replaced it",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Bremen blue and blue verditer may be the same pigment, or not: the experts say it cannot be settled without remaking the original recipe.",
+  "Bremen blue was a powder and lime blue came in lumps, a practical way to tell the two copper blues apart."
+ ],
+ "status": "checked",
+ "words": 973,
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsourced speculation on why no fine-art use.",
+   "Other claims verified against fact card and Compendium text."
+  ]
+ }
+}

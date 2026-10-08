@@ -1,0 +1,204 @@
+{
+ "slug": "teal",
+ "name": "Teal",
+ "hex": "#008080",
+ "names": [
+  "Teal"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Teal is a dark greenish blue named after the colored band on the wing of a small duck, and on screens it is the web color #008080.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A duck's wing",
+   "body": "Teal is the name of a small freshwater duck, and the color takes its name from the dark greenish-blue band on the bird's wing [1][2]. Paterson's dictionary defines it that way and adds that it is also called teal blue [1]. St Clair's list of color-name origins gives much the same gloss: a strong green with a dash of blue [2].\n\nAs a color word it is young. Our word-history data records 1917 as the earliest use of teal as a color name in English [3]. The duck, though, was already in the color charts a century before that, as an example rather than a name, as the next section shows [4]."
+  },
+  {
+   "id": "charts",
+   "title": "The bird in the old charts",
+   "body": "In 1821 Patrick Syme's edition of Werner's *Nomenclature of Colours* used the teal drake to illustrate three different colors, none of them teal [4][5][6]. The beauty spot on its wing stands for emerald green, number 53 in the chart [4]. Syme's gloss on that color is that it is about equal parts Berlin blue and gamboge yellow, so the wing patch he had in mind was a green, not the blue-green we now call teal [4]. See [[emerald-green]] for the pigment-minded reading.\n\nThe drake's breast illustrates cream yellow, which Syme took over from Werner's Isabella yellow [5]. Its neck illustrates deep reddish brown, number 101 [6]. The duck was evidently a handy source of colors, but what it illustrated was a green and two warm tones, and the word *teal* did not yet name a color.\n\nPastoureau offers a different, modern use of the word. Heraldic azure is a bare word in a blazon, and artists rendered it as a bright blue, sometimes as a teal and sometimes as a dark shade, without changing the arms' meaning [8]. That is the writer's word, not a medieval one."
+  },
+  {
+   "id": "screen",
+   "title": "The web color",
+   "body": "On the web, Teal is one of the 140 colors of the X11 set, with hex code #008080 [7]. It is also among the 16 colors of the old VGA palette, next to aqua, navy, olive and purple [7]. In RGB it is 0, 128, 128, exactly half the strength of [[aqua]], which is 0, 255, 255 [3].\n\nThe swatch is a measured color, not a bird: lightness 48, chroma 30, hue 196 in LCH, which our matching places in the strong bluish green region of the 1955 ISCC-NBS system [3]. Its contrast ratio is 4.77 against white and 4.4 against black [3]. Other teals disagree with it. The xkcd color survey of 2010 produced a greener teal, #029386, about 8 units away from the web color [3]. Nearby names include [[teal-blue]], [[dark-cyan]], [[turquoise]] and [[dark-teal]] [3].\n\nPaterson also records a ketchup sold in three mystery colors, pink, orange or teal, revealed only when the packaging came off; he gives no date [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Teal is rare in the paintings of our archive. It appears in 11 of 23,781 paintings, 0.05 per cent, and is rarer than 86 per cent of the named colors [9]. The earliest dated match is [[painting:rijks-200108437|a painting of 1520]], and the latest is [[painting:aic-9021|a canvas of 1913]]; only 7 dated paintings have it over at least 2 per cent of the canvas [9]. That 1520 match is 397 years before the earliest record of the word in our sources, so it is a look-alike hue in an aged photograph, not evidence of a pigment or dye [9]. All of these numbers are as photographed: museum images of varnished, yellowed paintings.\n\nIn printed English the adjective peaks in the 2010s and rose fastest in the 1990s, by Google Books counts of adjective use only [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the Eurasian teal, a small duck (the band on its wing)",
+   "first_recorded": "1917, as a color word in English (our word-history data)",
+   "source": "Paterson, A Dictionary of Colour, \"teal\"; St Clair, The Secret Lives of Colour"
+  },
+  "aka": [
+   "teal blue"
+  ],
+  "siblings": [
+   "teal-blue",
+   "dark-cyan"
+  ],
+  "parent": null,
+  "children": [
+   "dark-teal"
+  ],
+  "disambiguation": [
+   {
+    "slug": "turquoise",
+    "gloss": "a lighter, bluer-green; named after a gemstone, not a duck"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 11,
+  "presence_pct": 0.05,
+  "rarer_than_pct_of_names": 86,
+  "first_seen": {
+   "id": "rijks-200108437",
+   "year": 1520
+  },
+  "latest": {
+   "id": "aic-9021",
+   "year": 1913
+  },
+  "name_first_recorded": 1917,
+  "top_paintings": [
+   "rijks-200108437",
+   "aic-9021"
+  ],
+  "measured": {
+   "rgb": [
+    0,
+    128,
+    128
+   ],
+   "lch": [
+    48.3,
+    30.1,
+    196.4
+   ],
+   "contrast_white": 4.77,
+   "contrast_black": 4.4
+  },
+  "xkcd_alt": "#029386"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"teal\", p. 389, and p. 396",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, list of color-name origins (\"Teal\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color data and word history (nodes, disambiguation, Google Books Ngram), Teal",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Natures Palette, pp. 150-151 (Emerald Green, no. 53)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Baty, Natures Palette, pp. 203-204 (Cream Yellow, no. 75)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Baty, Natures Palette, pp. 254-256 (Deep Reddish Brown, no. 101)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"X11 Color Set\", p. 428",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pastoureau, Blue: The History of a Color, ch. 8 (\"A New Color\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub archive field notes for Teal (23,781 paintings, as photographed)",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is the color teal named after?",
+   "choices": [
+    "The colored band on the wing of a small duck",
+    "A Turkish port city",
+    "A dye plant",
+    "A 1917 paint company"
+   ],
+   "answer": "The colored band on the wing of a small duck",
+   "kind": "pick"
+  },
+  {
+   "q": "In RGB, how does the web color Teal compare with aqua?",
+   "choices": [
+    "Teal is half the strength of aqua",
+    "Teal is twice the strength of aqua",
+    "Teal swaps the red and blue values",
+    "They are the same color"
+   ],
+   "answer": "Teal is half the strength of aqua",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: in Syme's 1821 chart the teal drake illustrates a color called teal.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Teal began as a duck's wing patch, but the 1821 color charts used the bird to illustrate emerald green, cream yellow and a brown.",
+  "The web color Teal is exactly half-strength aqua: 0, 128, 128 against 0, 255, 255.",
+  "Teal is rare in old paintings: 11 of 23,781 in our archive, as photographed."
+ ],
+ "words": 609,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No unsupported claims found; verified against fact card and book text; no edits needed"
+  ]
+ }
+}

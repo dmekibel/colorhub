@@ -1,0 +1,175 @@
+{
+ "slug": "deep-reddish-orange",
+ "name": "Deep Reddish Orange",
+ "hex": "#BB603C",
+ "names": [
+  "Deep Reddish Orange"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Deep reddish orange is the sixth and last of the oranges in Syme's 1821 edition of Werner's color nomenclature, a burnt, earthy orange defined by its goldfish, apple and topaz.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name built from its neighbors",
+   "body": "Deep reddish orange is no. 81 among the oranges of Patrick Syme's 1821 edition of Werner's *Nomenclature of Colours*, the sixth and last step in a run of oranges that begins with Dutch orange (no. 76) [1]. Between them come [[buff-orange]], [[orpiment-orange]], brownish orange and [[reddish-orange]], so the series slides gradually from yellow toward red [1]. The name is plain description, a modifier stacked on a modifier, and there is no object, place or person behind it.\n\nOther-language names are not part of the story here. The color belongs to the English-language mineralogical tradition that Werner started and Syme popularised [1]."
+  },
+  {
+   "id": "recipe",
+   "title": "A recipe in words",
+   "body": "Werner's scheme gave every color three real examples, one each from the animal, vegetable and mineral kingdoms. For no. 81 these are the lustre on a goldfish's scales, the Scarlet Leadington apple and a dark Brazilian topaz [2]. The goldfish and the apple were illustrated for Baty's reprint with a 1802 children's picture book and an 1829 pomological work; the mineral is shown with a lead-sulphide specimen drawn by James Sowerby in 1811 [2].\n\nSyme also described each color as a mix of its neighbors. Deep reddish orange, he wrote, is Dutch orange mixed with much scarlet red, while the step before it, reddish orange, is buff orange with a considerable portion of tile red [2]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch and the system",
+   "body": "Our swatch, #BB603C, comes from a scan of Werner's no. 81, so it carries the age of the printed plate and is approximate [3]. It is the only source for this name in our library; no later system adopted the term [3]. A modern ISCC-NBS description would call it a moderate reddish orange, 5.7 units away, and its nearest common name is [[sienna]], 7.4 units away [3]. In Munsell terms it sits near 1.0 YR 5.0/9.0, a medium-dark orange with moderate chroma [3].\n\nSo the modern eye sees a baked, earthy orange, like a fired tile or a rust-colored leaf."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 306 works, 1.3 per cent [4]. Indian painting leads again: 102 of 721 works carry it, 11 times the archive rate, and the Kalighat, Pahari and Rajput schools reach 23 of 96, 24 of 118 and 17 of 97 [4]. It is also common in the 1300s, with 11 of 251 paintings [4].\n\nThe largest single match is a ragamala leaf, *Sindhu Ragaputra*, of about 1680, where it covers 59 per cent of the picture [4]. In the West it turns up in [[painting:nga-41636|Saint Judas Thaddeus]] by Simone Martini, about 1315 [4], and in a [[painting:commons-Q52154241|self-portrait]] by Frederic Leighton of 1880 [4]. Pierre Bonnard and Albrecht Dürer are the painters who use it most often, four works each [4]. Its nearest company is [[vermilion]], [[burnt-orange]] and [[rust]] [4]. All of this is photographs of aged, varnished paintings, so read them as screen colors [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive name: a deep step on the way from orange to red",
+   "first_recorded": "Syme, Werner's Nomenclature of Colours, 1821 (no. 81)",
+   "source": "Baty, Nature's Palette, pp. 205-211"
+  },
+  "aka": [],
+  "siblings": [
+   "reddish-orange",
+   "buff-orange",
+   "orpiment-orange"
+  ],
+  "parent": "reddish-orange",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#BB603C",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 306,
+  "top_paintings": [
+   "cma-314141",
+   "nga-41630",
+   "commons-Q3937495"
+  ],
+  "countries": {
+   "India": [
+    102,
+    721
+   ]
+  },
+  "role": {
+   "mid": 0.62,
+   "highlight": 0.17,
+   "shadow": 0.21
+  },
+  "company": [
+   "Vermilion",
+   "Burnt orange",
+   "Rust",
+   "Terracotta",
+   "Sienna"
+  ],
+  "measured": {
+   "lch": [
+    51,
+    49.9,
+    47.5
+   ],
+   "iscc": "moderate reddish orange",
+   "munsell": "1.0YR 5.0/9.0",
+   "nearest": [
+    [
+     "Sienna",
+     7.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 34-35 and 205-211 (Syme, 1821: Oranges, nos. 76-81)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 205, 210-211 (example objects and Syme's descriptions)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library and graph (data/library.json; data/graph/nodes-d.json): Werner no. 81 (Oranges), aged swatch; ISCC-NBS 1955 and Munsell by computation",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, color within 6 CIEDE2000 units covering at least 5% of the canvas, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "According to Syme, deep reddish orange is Dutch orange mixed with a large amount of which color?",
+   "choices": [
+    "Scarlet red",
+    "Buff orange",
+    "Sienna yellow",
+    "Tile red"
+   ],
+   "answer": "Scarlet red",
+   "kind": "pick"
+  },
+  {
+   "q": "Which creature gave Werner an animal example of deep reddish orange?",
+   "choices": [
+    "A goldfish",
+    "A kingfisher",
+    "A tiger moth",
+    "A golden pheasant"
+   ],
+   "answer": "A goldfish",
+   "kind": "pick"
+  },
+  {
+   "q": "Deep reddish orange is a name taken from a dye or pigment.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Werner's no. 81 gave its color three examples: a goldfish's lustre, the Scarlet Leadington apple and a dark Brazilian topaz.",
+  "Syme defined deep reddish orange as Dutch orange mixed with much scarlet red.",
+  "In our archive 102 of 721 Indian paintings carry this orange, 11 times the archive rate."
+ ],
+ "words": 508,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsourced 'earliest approach to naming a color by its ingredients' claim.",
+   "Removed speculation that the goldfish and apple were brighter than the plates."
+  ]
+ }
+}
