@@ -144,6 +144,18 @@ body.stem-open .screen,body.stem-open .hc,body.stem-open .hm-stage{filter:none}
 .mn-act:active{transform:scale(.97)}
 .mn-quiet{display:block;width:100%;min-height:52px;margin-top:6px;border:0;background:none;color:var(--soft);font:italic 400 18px/1 var(--serif)}
 
+/* search fields in sheets match Home's: one solid pill, never an underline over color */
+.sheet .search{height:48px;padding:0 16px;margin:0 0 16px;border:1px solid var(--rule);border-radius:var(--r-pill);background:var(--surface-2);color:var(--soft)}
+.sheet .search svg{flex:none;width:18px;height:18px}
+.sheet .search input{font:400 20px/1 var(--serif)}
+.sheet .search+#xresults>.fine{font:italic 400 16px/1.4 var(--serif);color:var(--soft);margin-top:4px}
+.sheet .search+#xresults>.fine svg{width:15px;height:15px;vertical-align:-2px}
+
+/* empty states (DESIGN-SYSTEM §10): one title-3 line, one small line, one quiet action */
+.mn-empty{padding:20px 0 8px}
+.mn-empty b{display:block;font:400 22px/1.12 var(--serif);color:var(--ink)}
+.mn-empty small{display:block;margin-top:6px;font:400 14px/1.5 var(--sans);color:var(--soft)}
+
 /* ============================================================ toast (js/core.js toast) */
 /* under the status bar: clear of the corners, every primary and every lesson footer */
 .toast{position:fixed;left:50%;top:calc(var(--top) + 10px);bottom:auto;z-index:60;transform:translateX(-50%);
@@ -178,9 +190,7 @@ html.booth .toast{background:var(--booth-2);box-shadow:none;border-color:var(--b
 .ym-figs>div+div{padding-left:14px;border-left:1px solid var(--rule)}
 .ym-figs b{font:400 20px/1 var(--mono);color:var(--ink)}
 .ym-figs span{font:italic 400 15px/1.2 var(--serif);color:var(--soft)}
-.ym-hero .mn-link{align-self:flex-start;margin-top:6px}
-.ym-empty-t{font:400 22px/1.12 var(--serif);margin:18px 0 4px}
-.ym-empty-s{font:400 14px/1.5 var(--sans);color:var(--soft);margin:0}
+.ym-links{display:flex;flex-wrap:wrap;gap:4px 22px;margin-top:6px}
 .ym-sec{margin-top:var(--s6)}
 .ym-h{font:400 30px/1.02 var(--serif);letter-spacing:-.02em;margin:0 0 12px}
 .ym-lead{font:400 19px/1.32 var(--serif);color:var(--ink);margin:0 0 12px;text-wrap:pretty}

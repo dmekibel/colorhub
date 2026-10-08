@@ -60,7 +60,9 @@ const CARD_LAYOUT = {
       x.fillStyle = p.h; cardRR(x, X, top, w, h, 10); x.fill();
       if (lab(p.h)[0] < 12) { x.strokeStyle = "rgba(255,255,255,.1)"; x.lineWidth = 2; cardRR(x, X + 1, top + 1, w - 2, h - 2, 9); x.stroke(); }
       if (p.hit) { x.strokeStyle = CARD_INK.paper; x.lineWidth = 7; cardRR(x, X - 11, top - 11, w + 22, h + 22, 18); x.stroke(); }
-      else { x.fillStyle = CARD_INK.faint; x.font = `italic 400 34px ${CARD_SERIF}`; const t = "missed", tw = x.measureText(t).width; x.fillText(t, X + (w - tw) / 2, bot + 56); }
+      // a palette of names (the You card): each plate's name under it, fitted to the plate (design round 2)
+      if (p.n) { x.fillStyle = CARD_INK.soft; cardFit(x, p.n, `italic 400 {s}px ${CARD_SERIF}`, 34, w); const tw = x.measureText(p.n).width; x.fillText(p.n, X + (w - tw) / 2, bot + 56); }
+      else if (p.hit === false) { x.fillStyle = CARD_INK.faint; x.font = `italic 400 34px ${CARD_SERIF}`; const t = "missed", tw = x.measureText(t).width; x.fillText(t, X + (w - tw) / 2, bot + 56); }
     });
   },
   guesses(x, spec) {

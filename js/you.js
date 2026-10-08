@@ -165,8 +165,8 @@ function youPage() {
         <div><b class="mono">${n0(lrn.length)}</b><span>learning</span></div>
         <div><b class="mono">${n0(due)}</b><span>to recall today</span></div>
         <div><b class="mono">${n0(fvN)}</b><span>hearted</span></div></div>
-        ${mine.length ? `<button class="mn-link" data-ym="map">See them on your map</button>` : ""}`
-      : `<p class="ym-empty-t">Nothing yours yet</p><p class="ym-empty-s">A color becomes yours when you can still name it a day later.</p><button class="mn-link" data-ym="learn">Start in Learn</button>`}
+        ${mine.length ? `<div class="ym-links"><button class="mn-link" data-ym="map">See them on your map</button>${typeof cardShare === "function" && mine.length >= 3 ? `<button class="mn-link" data-ym="share">Share your colors</button>` : ""}</div>` : ""}`
+      : `<div class="mn-empty"><b>Nothing yours yet</b><small>A color becomes yours when you can still name it a day later.</small></div><button class="mn-link" data-ym="learn">Start in Learn</button>`}
     </section>
 
     ${dayN || streak ? `<section class="ym-sec">
@@ -224,6 +224,7 @@ function youPage() {
     if (b.dataset.pal) return openSavedPalette(b.dataset.pal);
     if (k === "map") { S.hm = S.hm || {}; S.hm.filter = "learned"; save(); buzz(8); return roomToFloor(b); }
     if (k === "learn") return go("learn");
+    if (k === "share") { buzz(8); return cardShare(ymShareSpec(mine), `${owned} colors I can name now, learned on ColorHub.`, routeURL("today"), "colorhub-my-colors.png"); }
     if (k === "favs") return favShelf();
     if (k === "ftaste") return favTaste();
     if (k === "tzc") return tzReopen("color");
@@ -244,7 +245,31 @@ function youPage() {
   }).catch(() => {});
   return el;
 }
+// the You card (js/sharecard.js palette layout): six of your colors spread across the hue order, each named
+function ymShareSpec(mine) {
+  const k = Math.min(6, mine.length), picks = Array.from({ length: k }, (_, i) => mine[Math.floor((i + .5) * mine.length / k)]);
+  return { layout: "palette", note: `Mine, as of ${fmtDay(today())}`, title: `${mine.length.toLocaleString("en-US")} colors`, sub: "Each one named from memory a day later.",
+    plates: picks.map(c => ({ h: c.h, n: c.n })) };
+}
+// screenshot mode: boot.js #shot=you[:empty|:card], a simulated person, in memory only (never saved)
+function ymShot(arg = "") {
+  if (arg === "empty") { S.cards = {}; S.placed = { tier: 1, at: today() }; S.done = {}; return youPage(); }
+  if (typeof fvDemo === "function") fvDemo(14, true);
+  const now = Date.now(), day = 864e5, C = (n, h) => ({ n, h });
+  [[0, "Teal", "#008080"], [1, "Coral", "#FF7F50"], [3, "Ochre", "#CC7722"], [4, "Lavender", "#B57EDC"], [6, "Sage", "#9CAF88"]]
+    .forEach(([d, n, h]) => learnerLog({ type: "answer", color: C(n, h), ok: true, by: "pick", at: now - d * day - 3600e3 }));
+  learnerLog({ type: "confuse", color: C("Teal", "#008080"), b: C("Petrol", "#005F6A"), src: "lesson" });
+  learnerLog({ type: "confuse", color: C("Teal", "#008080"), b: C("Petrol", "#005F6A"), src: "lesson" });
+  learnerLog({ type: "confuse", color: C("Mauve", "#E0B0FF"), b: C("Lilac", "#C8A2C8"), src: "lesson" });
+  ["Cerulean", "Vermilion", "Celadon", "Umber"].forEach((n, i) => { const c = BYNAME.get(n.toLowerCase()); if (c) learnerLog({ type: "seen", color: C(c.n, c.h), src: "page", at: now - i * 600e3 }); });
+  S.palettes = [{ id: "demo1", cols: ["#2F4E73", "#C8553D", "#E0A458", "#9CAF88", "#EFEBE3"], name: "Harbor at dusk", from: "From a photo", at: addDays(today(), -2) },
+    { id: "demo2", cols: ["#5E3A2E", "#B07A52", "#D9C3A0", "#6F7D5C"], from: "Gamut wheel", at: addDays(today(), -5) }];
+  S.challenge = { [today()]: { hits: [1, 1, 0, 1, 1, 1] }, [addDays(today(), -1)]: { hits: [1, 0, 1, 1, 0, 1] } };
+  const el = youPage();
+  if (arg === "card") cardRender(ymShareSpec(ymYours().mine)).then(b => show(`<img src="${URL.createObjectURL(b)}" style="width:100%;display:block;margin:auto">`, "fixed"));
+  return el;
+}
 // "Petrol is darker and bluer": the honest direction words, from lookDiff
 function ymDiff(p) {
-  try { const d = lookDiff({ n: p.a, h: p.ha }, { n: p.b, h: p.hb }); return typeof d === "string" ? d.replace(/<[^>]+>/g, "") : ""; } catch (e) { return ""; }
+  try { const d = lookDiff({ n: p.a, h: p.ha }, { n: p.b, h: p.hb }); return d === "almost the same" ? "almost the same" : `${String(p.b).toLowerCase()} is ${d}`; } catch (e) { return ""; }
 }
