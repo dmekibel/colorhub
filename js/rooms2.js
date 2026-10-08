@@ -100,10 +100,10 @@ function r2TrainGames() {
   const hs = typeof hgS === "function" ? hgS() : {};
   const games = [
     ...(ms ? [{ id: "map", ic: "map", name: "Study the map", attr: "data-mapstudy", played: msFound > 0, meta: msFound ? `${msFound.toLocaleString("en-US")} found` : "Find and name", done: !!(ms.day && ms.day.d === today() && ms.day.done) }] : []),
-    { id: "oo", ic: "odd", name: "Odd one out", attr: "data-oo-map", played: !!st.sets, done: st.last === today(), meta: st.sets ? `Level ${(Number.isFinite(st.lv) ? st.lv : ooYou()) + 1}${ooStarCount() ? ` · ${ooStarCount()} ★` : ""}` : "Spot the odd tile" },
+    { id: "oo", ic: "odd", name: "Odd one out", attr: "data-oo-map", played: !!st.sets, done: st.last === today(), meta: st.sets ? `Level ${(Number.isFinite(st.lv) ? st.lv : ooYou()) + 1}${ooStarCount() ? ` · ${ooStarCount()} stars` : ""}` : "Spot the odd tile" },
     ...(hue ? [{ ...r2Extra(hue), id: "hue", played: !!hs.plays, done: hs.last === today() }] : []),
     { id: "line", ic: "across", name: "Across the line", attr: "data-oo-line", played: !!(ln.n || ln.best), meta: ln.best ? `Best ${ln.best} of 8` : "Where a name ends" },
-    { id: "memory", ic: "wasthere", name: "Color memory", attr: "data-r2-mix=\"wasthere\"", played: !!(memN || mem.best), meta: memN ? `${memN} of 3 ★` : "Find the newcomer" },
+    { id: "memory", ic: "wasthere", name: "Color memory", attr: "data-r2-mix=\"wasthere\"", played: !!(memN || mem.best), meta: memN ? `${memN} of 3 stars` : "Find the newcomer" },
     eye ? r2Extra(eye) : { id: "pairs", ic: "pairs", name: "Painters' pairs", attr: "data-oo-pairs", played: !!(pr.n || pr.best), meta: pr.best ? `Best ${pr.best} of 6` : "Guess the painter" },
     // another lane's game (window.TRAIN_TILES) still gets a door, after the six
     ...xs.filter(t => !t.more && t !== hue && t !== eye && t.id !== "hue-daily").map(r2Extra),

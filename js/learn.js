@@ -517,15 +517,16 @@ function lrTodayHtml() {
   const pDone = !!p, dDone = typeof dnDone === "function" && dnDone(k);
   const pSt = p ? `${(p.hits || []).filter(Boolean).length} of ${(p.hits || []).length || 5} seen` : now ? `Round ${now.i + 1} of 5` : "Five ways to look";
   const dSt = dr ? (dr.done ? (dr.ok ? (dr.hint ? "Named, with choices" : `Named in ${dr.g.length}`) : "Missed today") : `${dr.g.length} ${dr.g.length === 1 ? "guess" : "guesses"} so far`) : d ? "Named" : "Six guesses";
-  const tick = on => `<span class="lr-tick${on ? " on" : ""}" aria-hidden="true">${on ? ICON.checkS : ""}</span>`;
+  // Night Gallery row lead (css/ng.css): a 32 px disc with the part's own icon; done, it turns --good with a tick
+  const tick = (on, ic) => `<span class="lr-tick${on ? " on" : ""}" aria-hidden="true">${icon(on ? "check" : ic, on ? 16 : 18)}</span>`;
   return `<section class="lr-today">
     <div class="dl-head"><h3 class="title-3">Today</h3><span class="note">${n > 1 ? `${n}-day streak` : ""}</span></div>
     <div class="lr-tcard${pDone && dDone ? " done" : ""}">
       <button class="lr-tc-art" data-dpaint aria-label="Today's painting"><span class="dl-art dl-ph lr-tc-img" id="dlPaintArt"></span><span class="lr-tc-chip" id="dlColorArt"></span></button>
       <div class="lr-tc-text"><p class="lr-tc-title" id="lrTcTitle">Today's painting <em>and color</em></p><p class="note lr-tc-sub" id="lrTcSub">&nbsp;</p></div>
       <div class="lr-tc-acts">
-        <button class="lr-tc-act${pDone ? " done" : ""}" data-dpaint>${tick(pDone)}<b>Look</b><span class="lr-tc-st">${esc(pSt)}</span>${ICON.chev}</button>
-        <button class="lr-tc-act${dDone ? " done" : ""}" data-daily>${tick(dDone)}<b>Name it in six</b><i class="lr-tc-sw" id="lrTcSw" aria-hidden="true"></i><span class="lr-tc-st" id="dlColorSt">${esc(dSt)}</span>${ICON.chev}</button>
+        <button class="lr-tc-act${pDone ? " done" : ""}" data-dpaint>${tick(pDone, "museum")}<b>Look</b><span class="lr-tc-st">${esc(pSt)}</span>${ICON.chev}</button>
+        <button class="lr-tc-act${dDone ? " done" : ""}" data-daily>${tick(dDone, "colors")}<b>Name it in six</b><i class="lr-tc-sw" id="lrTcSw" aria-hidden="true"></i><span class="lr-tc-st" id="dlColorSt">${esc(dSt)}</span>${ICON.chev}</button>
       </div>
     </div></section>`;
 }

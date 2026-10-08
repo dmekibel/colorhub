@@ -135,7 +135,7 @@ function rpGlanceHTML(name, hex) {
     const cards = rpGlanceCards(name, hex, g, rr && rr[name]);
     if (cards.length < 2) { box.remove(); return; }
     box.classList.remove("rp-wait");
-    box.innerHTML = cards.map(c => `<button class="rp-card" data-rp-door="${c.door}"><small>${esc(c.w)}</small><b>${esc(c.fig)}</b><span>${esc(c.text)}</span></button>`).join("");
+    box.innerHTML = cards.map(c => `<button class="rp-card" data-rp-door="${c.door}"><small>${esc(c.w.charAt(0).toUpperCase() + c.w.slice(1))}</small><b>${esc(c.fig)}</b><span>${esc(c.text)}</span></button>`).join("");
   });
   return `<div class="rp-glance rp-wait" id="${id}"><i></i><i></i></div>`;
 }

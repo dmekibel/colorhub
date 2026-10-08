@@ -36,7 +36,7 @@
 
 /* ---------- header extras: combo and hearts ---------- */
 .oo-head h2{min-height:46px}
-.oo-combo{display:flex;align-items:center;gap:10px;height:16px;margin-top:8px;color:var(--soft);font:500 12px/1 var(--mono);letter-spacing:.08em}
+.oo-combo{display:flex;align-items:center;gap:10px;height:16px;margin-top:8px;color:var(--soft);font:500 13px/1 var(--mono);letter-spacing:.08em}
 .oo-combo i{flex:1;max-width:120px;height:2px;background:var(--rule);position:relative}
 .oo-combo i::after{content:"";position:absolute;left:0;top:0;bottom:0;width:var(--w);background:#E8C66B;transition:width .4s var(--ease)}
 .oo-combo span:first-child{color:#F2D78A;font-size:13px}
@@ -68,7 +68,7 @@
 
 /* ---------- the journey map ---------- */
 .oo-map .deck-top{min-height:44px}
-.oo-tot{font:500 12px/1 var(--mono);color:#F2D78A;letter-spacing:.06em}
+.oo-tot{font:500 13px/1 var(--mono);color:#F2D78A;letter-spacing:.06em}
 .oo-title{margin:8px 0 6px}
 .oo-daily{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:16px;width:100%;margin-top:22px;padding:16px;background:var(--surface-2);border-radius:var(--r-2);text-align:left;transition:transform .3s var(--spring)}
 .oo-daily:active{transform:scale(.98)}
@@ -91,7 +91,7 @@
 .oo-node.cur .oo-mini{outline:2px solid var(--ink);outline-offset:3px}
 .oo-nt{min-width:0}
 .oo-nt b{display:block;font:400 21px/1.12 var(--serif)}
-.oo-nt b .mono{font:500 11px/1 var(--mono);color:var(--soft);margin-right:8px;vertical-align:3px}
+.oo-nt b .mono{font:500 13px/1 var(--mono);color:var(--soft);margin-right:8px;vertical-align:3px}
 .oo-node.done .oo-nt b .mono{color:var(--good)}
 .oo-nt em{display:block;font-style:normal;font-size:14px;line-height:1.35;color:var(--soft);margin-top:3px}
 .oo-mini{position:relative;display:block;height:52px;width:calc(52px * var(--ar));margin:0 auto;background:var(--surface-2);border-radius:var(--r-1)}
@@ -122,11 +122,11 @@
 .oo-miss span{flex:none;display:grid;grid-template-columns:44px 44px;gap:2px}
 .oo-miss i{height:44px;background:var(--c)}
 .oo-miss i:first-child{border-radius:var(--r-1) 0 0 var(--r-1)}.oo-miss i:nth-child(2){border-radius:0 var(--r-1) var(--r-1) 0}
-.oo-miss em{grid-column:1/-1;font-style:normal;font-size:11px;color:var(--soft);margin-top:4px}
+.oo-miss em{grid-column:1/-1;font-style:normal;font-size:13px;color:var(--soft);margin-top:4px}
 .oo-share{display:flex;gap:6px;margin:0 0 18px}
 .oo-share span{display:flex;flex-direction:column;align-items:center;gap:6px}
 .oo-share i{width:44px;height:44px;border-radius:4px}
-.oo-share em{font-style:normal;font-size:10.5px;color:var(--soft)}
+.oo-share em{font-style:normal;font-size:13px;color:var(--soft)}
 
 /* ---------- eye profile ---------- */
 .oo-eye .lede{color:var(--soft);font-size:15.5px;margin:10px 0 0;max-width:38ch}
@@ -175,7 +175,7 @@
 .oo-nb{display:flex;flex-direction:column;align-items:center;gap:14px;width:100%}
 .oo-nbc{display:block;width:min(64%,40dvh);aspect-ratio:1;background:var(--c);border-radius:var(--r-1);transition:opacity .18s}
 .oo-nbc.gone{opacity:0}
-.oo-nbn{font:500 12px/1 var(--mono);color:var(--soft)}
+.oo-nbn{font:500 13px/1 var(--mono);color:var(--soft)}
 .oo-nbsum{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;width:100%}
 .oo-nbsum span{display:block}
 .oo-nbsum i{display:block;aspect-ratio:1;background:var(--c);border-radius:var(--r-1)}
@@ -272,7 +272,7 @@
 @supports (width:1cqw){.oo-stage .oo-board{width:min(100cqw,100cqh * var(--ar));transition:width .35s var(--ease)}.oo-line .oo-stage .oo-board{width:min(100cqw,36dvh)}}
 .oo-map .fine,.oo-eye .fine,.oo-res .fine,.oo-jump .fine{font-size:14px}
 .oo-nt em,.oo-eyet small,.ey-row small{overflow-wrap:anywhere}
-.oo-eyet small,.ey-row small{display:block;font:400 12px/1.3 var(--sans);color:var(--faint)}
+.oo-eyet small,.ey-row small{display:block;font:400 13px/1.3 var(--sans);color:var(--faint)}
 .oo-lvs{margin:10px 0 0}
 .oo-dline{margin:0 0 12px}
 @media (max-width:340px){.oo-head h2{font-size:36px;line-height:1;min-height:76px}}

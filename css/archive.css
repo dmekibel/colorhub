@@ -22,7 +22,7 @@
 .pin-psg small{display:block;font:italic 400 13px/1.35 var(--serif);letter-spacing:0;text-transform:none;color:var(--faint);margin-top:4px}
 .pin-arch-all{border-top:1px solid var(--rule-2);border-bottom:1px solid var(--rule);padding:12px 0 16px;display:flex;flex-direction:column;gap:7px}
 .pin-arch-all b{font:400 28px/1 var(--serif);letter-spacing:-.015em}
-.pin-arch-all small{font-size:12.5px;line-height:1.35;color:var(--soft)}
+.pin-arch-all small{font-size:13px;line-height:1.35;color:var(--soft)}
 
 /* ---------- passage page ---------- */
 .psg-pal{display:flex;height:72px;gap:2px;margin-top:4px}
@@ -59,7 +59,7 @@
 .film-row{display:grid;grid-template-columns:96px 1fr;gap:14px;align-items:center;width:100%;text-align:left;padding:12px 0;border-bottom:1px solid var(--rule)}
 .film-row b{display:block;font:400 21px/1.05 var(--serif)}
 .film-row small{display:block;font:italic 400 13px/1.4 var(--serif);letter-spacing:0;text-transform:none;color:var(--faint);margin-top:4px}
-.film-row em{display:block;font-style:normal;font-size:12.5px;line-height:1.35;color:var(--soft);margin-top:5px}
+.film-row em{display:block;font-style:normal;font-size:13px;line-height:1.35;color:var(--soft);margin-top:5px}
 
 /* ---------- film strip: the colors discussed as frames between sprocket holes ---------- */
 .film-strip{display:block;position:relative;background:#060605;padding:9px 3px;border-radius:var(--r-1)}

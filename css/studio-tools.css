@@ -24,7 +24,7 @@
 .namer .nmr-hero{display:flex;flex-direction:column;align-items:flex-start;width:100%;padding:6px 0 14px;text-align:left;color:inherit}
 .nmr-name{display:block;width:100%;height:1.05em;font:400 clamp(32px,10vw,46px)/1.05 var(--serif);letter-spacing:-.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .nmr-sub{display:block;font:italic 400 17px/1.3 var(--serif);opacity:.85;margin-top:4px;white-space:nowrap}
-.nmr-sub .mono{font-style:normal;font-size:12px;margin-left:8px;letter-spacing:.04em}
+.nmr-sub .mono{font-style:normal;font-size:13px;margin-left:8px;letter-spacing:.04em}
 .nmr-near{flex:none;display:flex;gap:8px;overflow-x:auto;margin:10px calc(-1 * var(--g)) 0;padding:0 var(--g);scroll-snap-type:x proximity;scrollbar-width:none}
 .nmr-near::-webkit-scrollbar{display:none}
 .nmr-row{flex:none;max-width:min(300px,calc(100vw - 2 * var(--g) - 28px));display:grid;grid-template-columns:28px minmax(0,1fr) auto;align-items:center;gap:10px;height:58px;padding:0 14px 0 10px;border-radius:var(--r-1);background:var(--surface-1);text-align:left;scroll-snap-align:start}
@@ -33,7 +33,7 @@
 .nmr-row>span:nth-child(2){min-width:0}
 .nmr-row b{display:block;overflow:hidden;text-overflow:ellipsis;font:400 18px/1.1 var(--serif);white-space:nowrap}
 .nmr-row em{display:block;overflow:hidden;text-overflow:ellipsis;font:italic 400 14px/1.2 var(--serif);color:var(--soft);white-space:nowrap}
-.nmr-row .mono{align-self:start;margin-top:12px;color:var(--faint);font-size:11px}
+.nmr-row .mono{align-self:start;margin-top:12px;color:var(--faint);font-size:13px}
 .nmr-acts{flex:none;display:flex;gap:0 20px;height:44px;overflow:hidden;margin-top:2px}
 .nmr-trayacts{display:flex;flex-wrap:wrap;gap:0 22px;margin-top:6px}
 .nmr-acts button,.nmr-trayacts button{min-height:44px;font:italic 400 17px/1 var(--serif);color:var(--ink);text-decoration:underline;text-decoration-color:rgba(236,232,223,.3);text-underline-offset:4px;white-space:nowrap}
@@ -118,7 +118,7 @@
 .tw-im{display:block;position:relative;width:100%;height:150px;background:var(--c);border-radius:var(--r-1);overflow:hidden}
 .tw-im img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .tw-card>b{display:block;margin-top:8px;font:400 19px/1.15 var(--serif);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tw-card>small{display:block;font:400 12px/1.4 var(--sans);color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tw-card>small{display:block;font:400 13px/1.4 var(--sans);color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .tw-threads{margin-top:8px}
 .tw-thread{display:flex;align-items:center;margin-top:10px}
 .tw-thread button{position:relative;width:22px;height:22px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(236,232,223,.22);flex:none}
@@ -132,7 +132,7 @@
 .tw-werner i{width:22px;height:22px;border-radius:50%;background:var(--c);flex:none;box-shadow:inset 0 0 0 1px rgba(236,232,223,.22)}
 .tw-werner span{display:flex;flex-direction:column;min-width:0}
 .tw-werner b{font:400 18px/1.2 var(--serif)}.tw-werner b em{font-style:italic}
-.tw-werner small{font:400 12px/1.4 var(--sans);color:var(--soft)}
+.tw-werner small{font:400 13px/1.4 var(--sans);color:var(--soft)}
 
 /* ---------- Closest in the archive: the metric switch and each metric's picture ---------- */
 .tw-chips{display:flex;gap:8px;overflow-x:auto;margin:14px calc(-1 * var(--g)) 0;padding:0 var(--g) 2px;scrollbar-width:none}
@@ -151,7 +151,7 @@
 .tw-hist i{flex:1;min-height:1px;border-radius:1px 1px 0 0}
 .tw-hist .y,.tw-key .y{background:var(--soft)}
 .tw-hist .t,.tw-key .t{background:var(--ink)}
-.tw-key{display:flex;align-items:center;gap:8px;font:400 12px/1 var(--sans);color:var(--soft);margin:2px 0 0}
+.tw-key{display:flex;align-items:center;gap:8px;font:400 13px/1 var(--sans);color:var(--soft);margin:2px 0 0}
 .tw-key i{display:inline-block;width:10px;height:10px;border-radius:2px}
 .tw-key .t{margin-left:10px}
 .tw-pair{display:flex;gap:10px;margin-top:12px}

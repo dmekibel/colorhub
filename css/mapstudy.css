@@ -43,7 +43,7 @@
 .ms-lvs{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}
 .ms-lv{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;height:50px;border-radius:12px;background:var(--surface-2);transition:background .2s,transform .3s var(--spring)}
 .ms-lv b{font:400 19px/1 var(--serif);color:var(--ink);font-variant-numeric:tabular-nums}
-.ms-lv small{font-size:11px;line-height:1;color:var(--faint);white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.ms-lv small{font-size:13px;line-height:1;color:var(--faint);white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
 .ms-lv small:empty{display:none}
 .ms-lv.on{background:var(--paper)}.ms-lv.on b{color:var(--paper-ink)}.ms-lv.on small{color:var(--paper-soft)}
 
@@ -52,7 +52,7 @@
 .ms-sub[hidden]{display:none}
 .ms-set{display:inline-flex;align-items:baseline;gap:6px;height:38px;padding:0 14px;border-radius:var(--r-pill);background:var(--surface-2);align-items:center;transition:background .2s,transform .3s var(--spring)}
 .ms-set b{font:500 14px/1 var(--sans);color:var(--ink)}
-.ms-set small{font-size:12px;color:var(--faint);font-variant-numeric:tabular-nums}
+.ms-set small{font-size:13px;color:var(--faint);font-variant-numeric:tabular-nums}
 .ms-set.on{background:var(--paper)}.ms-set.on b{color:var(--paper-ink)}.ms-set.on small{color:var(--paper-soft)}
 .ms-set:disabled{opacity:.45}
 .ms-ptgs{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
@@ -133,7 +133,7 @@
 .ms-picks{flex-wrap:wrap;margin-top:0}
 .ms-picks button{flex:0 1 auto;padding:0 14px}
 .ms-test{margin-top:6px;justify-content:center}
-@media (max-width:340px){.ms-lv small{font-size:10px}}
+@media (max-width:340px){.ms-lv small{font-size:13px}}
 
 /* v2 dials (design/MAP-STUDY-2.md): the field and, under Choose, how many to pick from */
 .ms-slide{display:grid;grid-template-columns:88px 1fr 52px;align-items:center;gap:12px;min-height:52px}

@@ -38,7 +38,7 @@
 .wd-in{flex:none;width:132px;text-align:left;padding:10px;border:1px solid var(--rule);border-radius:var(--r-1)}
 .wd-in i{display:block;width:100%;height:40px;background:var(--c);border-radius:var(--r-1);margin-bottom:8px}
 .wd-in b{display:block;font:400 17px/1.1 var(--serif)}
-.wd-in small{display:block;font-size:11px;color:var(--soft);margin-top:2px}
+.wd-in small{display:block;font-size:13px;color:var(--soft);margin-top:2px}
 
 /* World tiles as small covers: a picture or a color graphic, then the title */
 .wd-cover{padding:0;overflow:hidden;gap:0;border:0;background:var(--lift)}

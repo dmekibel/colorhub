@@ -1,0 +1,191 @@
+/* Night Gallery: the screen conversion (design/VISUAL-DIRECTION.md, DESIGN-SYSTEM.md §14). Loaded last, so each
+   screen's older rules settle into the shared tokens of css/menus2.css's COMPONENT TOKENS block without rewriting them.
+   The grammar, everywhere: solid controls (rest --s2, no outline), a selection is raised (--s3), ringed (1.5 px --line-2,
+   or the item's own color when it is a color) and, on tiles, dotted; never a paper or white fill or frame. Radii 6 / 18
+   / 28 / pill. 44 pt hits, 56 pt primaries. Serif names, Geist controls and numbers. Grouped by screen. */
+
+/* ============================================================ shared: sliders, chips, answer tiles */
+/* every slider (except the color-mixing tracks, which paint their own gradient): a 6 px --s3 track, an ink fill up to
+   the thumb (--ngp, set by js/core.js ngRange) and a 28 px ink thumb with a 44 pt hit */
+input[type=range]:not(.mt-sl *):not(.mt-wh *):not(.pt-range){-webkit-appearance:none;appearance:none;background:none;height:var(--tap);margin:0;cursor:pointer}
+input[type=range]:not(.mt-sl *):not(.mt-wh *):not(.pt-range)::-webkit-slider-runnable-track{height:6px;border-radius:3px;
+  background:linear-gradient(90deg,var(--ink) var(--ngp,0%),var(--s3) var(--ngp,0%))}
+input[type=range]:not(.mt-sl *):not(.mt-wh *):not(.pt-range)::-moz-range-track{height:6px;border-radius:3px;background:var(--s3)}
+input[type=range]:not(.mt-sl *):not(.mt-wh *):not(.pt-range)::-moz-range-progress{height:6px;border-radius:3px;background:var(--ink)}
+input[type=range]:not(.mt-sl *):not(.mt-wh *):not(.pt-range)::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;margin-top:-11px;border:0;border-radius:50%;
+  background:var(--ink);box-shadow:0 2px 8px rgba(0,0,0,.45)}
+input[type=range]:not(.mt-sl *):not(.mt-wh *):not(.pt-range)::-moz-range-thumb{width:28px;height:28px;border:0;border-radius:50%;background:var(--ink);box-shadow:0 2px 8px rgba(0,0,0,.45)}
+
+/* ============================================================ Learn room (js/learn.js, js/learnmore.js) */
+/* Today's two parts (Look, Name it in six) are one grouped row card: 56 pt rows, a 32 px leading disc, inset hairline */
+.lr-tc-acts{border-top:0;background:var(--s1);border-radius:var(--r-card);overflow:hidden}
+.lr-tc-act{min-height:var(--tap-l);padding:8px 16px;border-bottom:0;position:relative;gap:14px}
+.lr-tc-act:not(:last-child)::after{content:"";position:absolute;left:62px;right:0;bottom:0;height:1px;background:var(--line)}
+.lr-tc-act:active{opacity:1;background:var(--s2)}
+.lr-tick{width:32px;height:32px;border:0;border-radius:50%;background:var(--s3);color:var(--ink)}
+.lr-tick svg{width:18px;height:18px}
+.lr-tick.on{background:var(--good);color:var(--ground);box-shadow:none}
+.lr-tick.on svg{width:16px;height:16px}
+.lr-tc-act b{font:400 21px/1.1 var(--serif)}
+.lr-tc-act .lr-tc-st{font:400 14px/1.2 var(--sans);font-style:normal;color:var(--soft)}
+.lr-tc-sw{width:20px;height:20px;border-radius:50%}
+.lr-tc-act svg:last-child{color:var(--faint)}
+/* the bet: how many will you name tomorrow (solid pills, the chosen one raised and ringed) */
+.lx-bet-b,.screen.learnit .lx-bet-b{border:0;background:var(--s2);border-radius:var(--r-pill);font:500 16px/1 var(--sans);font-variant-numeric:tabular-nums;max-width:64px;height:var(--tap)}
+.screen.learnit .lx-bet-b{background:rgba(14,13,11,.28)}
+
+/* ============================================================ Learn sheet, Study, Practice (js/learnset.js, js/practice.js) */
+/* Look's views (Grid, Strip, Pairs…): a pill row whose chosen view is raised and ringed, never paper */
+.ls-vb{height:var(--tap);border:0;background:var(--s2);color:var(--soft);font:500 var(--type-ui)/1 var(--sans)}
+.ls-vb.on{background:var(--sel-fill);color:var(--sel-ink);box-shadow:var(--sel-ring)}
+/* option chips (Which colors, Only, Order, Ask): solid at rest, raised + ringed when chosen */
+.pr-chip{height:var(--tap);border:0;background:var(--s2);color:var(--soft);font:500 var(--type-ui)/1 var(--sans)}
+.pr-chip.on{background:var(--sel-fill);color:var(--sel-ink);box-shadow:var(--sel-ring);border-color:transparent}
+.pr-listmode [data-row="range"] .pr-chip.on{background:var(--s2);box-shadow:none;color:var(--soft)}
+.pr-chip em,.pr-chip small{font-style:normal;color:var(--faint)}
+/* the switch: on = --good track with a ground knob; off = --s3 with a soft knob */
+.pr-switch i{background:var(--s3)}
+.pr-switch i::after{background:var(--soft)}
+.pr-switch input:checked + i{background:var(--good)}
+.pr-switch input:checked + i::after{background:var(--ground)}
+/* the climbed rings on Results: a 14 px ring that fills in --good once it's named on a later day */
+.ls-ring{width:14px;height:14px;box-shadow:inset 0 0 0 1.5px var(--faint)}
+.ls-ring.on{background:var(--good)}
+/* answer tiles in a game: the pick is raised and ringed (never a white frame); a color tile rings in its own color */
+.pr-opt{border-radius:var(--r-card);min-height:var(--tap-l)}
+.pr-opt.chosen,.pr-blind .pr-opt.chosen{outline-color:transparent;background:#666461;box-shadow:inset 0 0 0 1.5px rgba(236,232,223,.5)}
+.pr-tile{border-radius:var(--r-tile)}
+.pr-tile.nm{border-radius:var(--r-card)}
+.pr-tile.on{outline-color:transparent;transform:scale(.97);box-shadow:inset 0 0 0 1.5px rgba(236,232,223,.5)}
+.pr-tile.nm.on{background:#666461}
+.pr-tile.sw.on{outline:2px solid var(--c);outline-offset:3px;box-shadow:none}
+/* the flashcard's Again / Got it: solid 64 pt discs, the verdict in the icon's color */
+.act{border:0;background:var(--s2);box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.act:active{background:var(--s3)}
+/* the sheet's secondary (Look) is a solid pill beside the one paper primary (Study) */
+.ls-look{border:0;background:var(--s2)}
+
+/* ============================================================ Train: room, Drills, Your eye, games, Study the map */
+/* "For you / Choose" (Odd one out, Gradients, Study the map): a 44 pt pill track on e1, the chosen side a raised, ringed pill */
+.oo-pk-seg,.hg-seg,.hm-seg.ms-diff{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:4px;padding:4px;background:var(--s1);border-radius:var(--r-pill);box-shadow:inset 0 0 0 1px var(--line)}
+.oo-pk-seg button,.hg-seg button,.hm-seg.ms-diff button{min-height:var(--tap);height:auto;border:0;background:none;border-radius:var(--r-pill);font:500 var(--type-ui)/1 var(--sans);color:var(--soft)}
+.oo-pk-seg button.on,.hg-seg button.on,.hm-seg.ms-diff button.on{background:var(--sel-fill);color:var(--sel-ink);box-shadow:var(--sel-ring)}
+/* Choose's difficulty chips: solid, the chosen one raised and ringed */
+.oo-pk-ch button{height:var(--tap);border:0;background:var(--s2);font:500 var(--type-ui)/1 var(--sans)}
+/* star totals use the shared star icon */
+.oo-tot{display:inline-flex;align-items:center;gap:4px;font:500 15px/1 var(--sans);letter-spacing:0;font-variant-numeric:tabular-nums}
+.oo-tot svg{width:14px;height:14px}
+/* Your eye: the value column fits "1.9%" over "level 13" without wrapping */
+.ey-row{grid-template-columns:minmax(0,1.1fr) 1.6fr minmax(64px,auto)}
+.ey-row b,.ey-row b small{white-space:nowrap;overflow-wrap:normal}
+.ey-row i{height:6px;border-radius:3px;background:linear-gradient(var(--ink),var(--ink)) 0 0/var(--w) 100% no-repeat,var(--s3)}
+/* Study the map setup: modes, sets and levels are solid 44 pt controls; a chosen chip is ringed (no dot on a pill) */
+.ms-mode{height:var(--tap);font:500 var(--type-ui)/1 var(--sans);color:var(--soft)}
+.ms-set{height:var(--tap)}
+.ms-set.on::after{content:none}
+.ms-set.on b{color:var(--sel-ink)}
+.ms-lv{border-radius:var(--r-card);min-height:var(--tap-l)}
+.ms-chip{height:var(--tap);padding-right:16px}
+.ms-chip i{width:32px;height:32px}
+.ms-stars i.on{background:var(--sel-dot);border-color:var(--sel-dot)}
+.ms-ptg.on{border-color:transparent;box-shadow:var(--sel-ring)}
+/* drill picks on the booth grey: a ring with a ground gap, never a bare white outline */
+.tile.picked,.half.picked{outline:0;box-shadow:0 0 0 2px var(--booth,#5C5C5C),0 0 0 4px rgba(236,232,223,.9)}
+.oo-t.sel,.oo-oc.sel{outline:0;box-shadow:0 0 0 2px var(--ground),0 0 0 4px var(--ink)}
+
+/* ============================================================ Museum: covers, Art grid and filters, painting, painter, decade */
+/* filter pills, presets, chips and the view switch: solid --s2 at 44 pt, no outline; Geist for controls, serif for names */
+.xb-fc{height:var(--tap);border:0;background:var(--s2);font:500 var(--type-ui)/1 var(--sans)}
+.xb-fc i{width:20px;height:20px}
+.xb-presets button{height:var(--tap);border:0;background:var(--s2);font:500 var(--type-ui)/1 var(--sans);color:var(--soft)}
+.xb-seg{background:var(--s1);border:0;box-shadow:inset 0 0 0 1px var(--line);padding:4px}
+.xb-seg button{height:var(--tap);font:500 var(--type-ui)/1 var(--sans)}
+.xb-optrow .xb-opt{border:0;background:var(--s2);border-radius:var(--r-card)}
+.xb-opt.on>span::after{background:var(--sel-dot)}
+.xb-chip{min-height:var(--tap);border:0;background:var(--s2);padding:0 14px 0 6px}
+.xb-chip i{width:32px;height:32px}
+.xb-bub.on,.art-bubble.on{box-shadow:0 0 0 2px var(--ground),0 0 0 3.5px var(--c,var(--ink))}
+/* Museum's older gallery chips and swatches */
+.gl-chips button{height:var(--tap);padding:0 16px;border:0;border-radius:var(--r-pill);background:var(--s2);font:500 var(--type-ui)/1 var(--sans);font-style:normal}
+.gl-sw button.on{outline:0;box-shadow:0 0 0 2px var(--ground),0 0 0 3.5px var(--ink)}
+/* the top pills (Art history, More like this, Chicago): solid, no outline */
+.glass,.glass-pill{background:var(--s2);border:1px solid var(--line)}
+.glass-pill{height:var(--tap);padding:0 16px 0 13px;font:500 var(--type-ui)/1 var(--sans);font-style:normal}
+/* Name its colors: a quiet solid pill, not an outline */
+.tq-open{border:0;background:var(--s2);font:500 var(--type-ui)/1 var(--sans);font-style:normal}
+/* art wiki chips and the painting quiz */
+.aw-chip{min-height:var(--tap)}
+.aw-chip i{width:28px;height:28px;border-radius:var(--r-tile)}
+.aw-chip span{letter-spacing:0;font-variant-numeric:tabular-nums}
+.aw-opt{border-radius:var(--r-tile)}
+.aw-opt.right{outline:0;box-shadow:0 0 0 2px var(--ground),0 0 0 4px var(--good)}
+.aw-link{min-height:var(--tap)}
+.fx-ribbon button.on{box-shadow:0 0 0 2px var(--ground),0 0 0 3.5px var(--c,var(--ink))}
+.pt-chips button,.chd-eras button,.xb-cents button{height:var(--tap);padding:0 16px;border:0;background:var(--s2);border-radius:var(--r-pill);font:500 var(--type-ui)/1 var(--sans);color:var(--soft)}
+.pt-seg{background:var(--s1);border:0;box-shadow:inset 0 0 0 1px var(--line);padding:4px;border-radius:var(--r-pill)}
+.pt-seg button{min-height:var(--tap);border:0;font:500 var(--type-ui)/1 var(--sans)}
+.pt-ar-map{border:0;background:var(--s2)}
+/* signature-color chips on painter and decade pages: solid, a 32 px color disc */
+.aw-hl-chip{min-height:var(--tap);border:0;background:var(--s2)}
+.aw-hl-chip i{width:32px;height:32px}
+.aw-hl-chip em{font-variant-numeric:tabular-nums}
+
+/* ============================================================ Color page, name page, pair and set pages */
+/* the palettes switcher, Open on the map, Pair with: solid pills; the chosen palette raised and ringed */
+.rc-pal-tabs button{min-height:var(--tap);border:0;background:var(--s2);font:500 var(--type-ui)/1 var(--sans)}
+.rp-hc-map,.sx-pairbtn{min-height:var(--tap);height:auto;border:0;background:var(--s2);font:500 var(--type-ui)/1 var(--sans)}
+.rc-harm-chips .kin{border:0;background:var(--s2);min-height:var(--tap)}
+.cp-sheet-tag{border:0;background:var(--s2);font:500 13px/1 var(--sans);font-style:normal;padding:6px 12px}
+/* the stat cards: a Geist label in sentence case, a big figure, one line */
+.rp-card small{font:500 13px/1.2 var(--sans);letter-spacing:0;color:var(--soft)}
+/* Check yourself: answers are solid cards (radius 18); right and wrong ring in good and bad */
+.ar-choice{border:0;background:var(--s2);border-radius:var(--r-card);min-height:var(--tap-l);font:400 16px/1.35 var(--sans)}
+.ar-choice:active:not(:disabled){background:var(--s3)}
+.ar-choice.ok{box-shadow:inset 0 0 0 1.5px var(--good);background:var(--s2)}
+.ar-choice.no{box-shadow:inset 0 0 0 1.5px var(--bad);background:var(--s2)}
+/* the book's actions: solid pills */
+.ar-act{border:0;background:var(--s2);font:500 var(--type-ui)/1 var(--sans);font-style:normal}
+
+/* ============================================================ Studio, Colordle, Today, toasts, onboarding and placement */
+/* the profile's choices: a 24 px radio disc (on = good with a ground dot) or the 24 px checkbox square (on = good with a tick) */
+.opt{grid-template-columns:24px 1fr;min-height:var(--tap-l)}
+.opt i{width:24px;height:24px;background:var(--s3);box-shadow:inset 0 0 0 1.5px var(--line-2);position:relative;display:grid;place-items:center}
+.opt.multi i{border-radius:var(--r-tile)}
+.opt.on i{background:var(--good);box-shadow:none}
+.opt.on:not(.multi) i::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--ground)}
+.opt.multi.on i::after{content:"";width:12px;height:7px;border:solid var(--ground);border-width:0 0 2.4px 2.4px;transform:translateY(-1.5px) rotate(-45deg)}
+/* the toast: --s3 pill on a .22 edge; its action in Geist, underlined */
+.toast{border-color:var(--line-2);background:var(--s3)}
+.toast button{color:var(--ink);font:500 var(--type-ui)/1 var(--sans);font-style:normal;min-height:var(--tap)}
+/* Studio's tools: solid pills, never a near-white outline */
+.nmr-pill,.tw-chips button{border:0;background:var(--s2);min-height:var(--tap);font:500 var(--type-ui)/1 var(--sans)}
+.tw-pick button.on{box-shadow:0 0 0 2px var(--ground),0 0 0 3.5px var(--c,var(--ink))}
+/* Colordle and Today's painting: the order picks ring with a gap, never a paper outline */
+.dp-ord button.on{outline:0;box-shadow:0 0 0 2px var(--ground),0 0 0 4px var(--ink)}
+/* (Learn room) the part's name never breaks at 375; the status takes what's left (a nowrap status widened the room at 320) */
+.lr-tc-act{gap:10px}
+.lr-tc-act b{white-space:nowrap;flex:none}
+.lr-tc-act .lr-tc-st{min-width:0;flex:1 1 0}
+.lr-tick,.lr-tc-sw,.lr-tc-act svg:last-child{flex:none}
+/* (Museum, later additions) Auto, and the walk's Back: solid; Auto on is raised and ringed, never paper */
+.pt-auto{border:0;background:var(--s2);border-radius:var(--r-card)}
+.pt-auto.on{background:var(--sel-fill);color:var(--sel-ink);box-shadow:var(--sel-ring)}
+.pt-auto.on small{color:var(--soft);opacity:1}
+.rp-hc-back{border:0;background:var(--s2);font:500 var(--type-ui)/1 var(--sans)}
+
+/* ============================================================ games: picks, the miss compare, results */
+/* Gradients: the picked tile lifts and takes a ring with a gap, never a white square inside it */
+.hg-s.sel::before{inset:-5px;border-radius:calc(var(--r-tile) + 4px);border:2px solid var(--ink);box-shadow:inset 0 0 0 2px var(--booth,#5F5F5F)}
+.hg-k-sq.sel::before{border-radius:calc(var(--r-tile) + 4px);inset:-5px}
+/* the miss compare: the two colors stay full bleed; the panel under them is e1 (warm black), its Next the one paper button */
+.mc-panel{background:var(--s1);color:var(--ink);box-shadow:0 -1px 0 var(--line)}
+.mc-pct{font:500 28px/1 var(--sans);font-variant-numeric:tabular-nums;color:var(--ink)}
+.mc-pct em{color:var(--soft)}
+.mc .mc-line{color:var(--ink);font:400 16px/1.4 var(--sans)}
+.mc-go{background:var(--paper);color:var(--paper-ink);height:var(--tap-l);font:400 22px/1 var(--serif)}
+/* the bet on a booth-grey results screen: the pills sit in the booth, not as black holes */
+.ls-res .lx-bet-b,.pr-res .lx-bet-b{background:rgba(14,13,11,.22);color:#fff}
+.ms-fog input:checked::after{background:var(--ground)}
+/* (Study, Practice) once an answer is checked, the verdict ring wins over the pick's raised state */
+.pr-opt.chosen.ok,.pr-opt.ok{outline-color:var(--good);background:var(--booth-2,#555555);box-shadow:none}
+.pr-opt.chosen.bad,.pr-opt.bad{outline-color:var(--bad);background:var(--booth-2,#555555);box-shadow:none}
