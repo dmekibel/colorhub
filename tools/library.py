@@ -623,7 +623,10 @@ MP_NEW_DE = 2.5  # CIEDE2000: tighter than ISCC_DE (8) on purpose -- these are r
 
 
 def load_maerz_paul_rows():
-    lines = (ROOT / "data" / "sources" / "maerz-paul-1930.json").read_text(encoding="utf-8").splitlines()
+    # the OCR'd names are noisy (research/MAERZ-PAUL.md s7); tools/maerz_filter.py writes the cleaned subset, which is what merges
+    clean = ROOT / "data" / "sources" / "maerz-paul-1930-clean.json"
+    raw = ROOT / "data" / "sources" / "maerz-paul-1930.json"
+    lines = (clean if clean.exists() else raw).read_text(encoding="utf-8").splitlines()
     return [json.loads(l) for l in lines[1:] if l.strip()]
 
 
