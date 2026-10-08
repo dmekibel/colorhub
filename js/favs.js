@@ -444,25 +444,30 @@ function fvArtWire(el, i, d, pic) {
   };
   btn.onclick = e => { e.stopPropagation(); set(!fvArtHas(d.id), "tap"); };
   if (!pic) return;
+  // the bloom both gestures share: a heart over the tap point, the toggle underneath (on already → just a pulse)
+  const likeBurst = (x, y, how) => {
+    const r = pic.getBoundingClientRect(), bloom = document.createElement("i");
+    bloom.className = "fva-bloom"; bloom.innerHTML = FVA_HEART_ON;
+    bloom.style.left = (x - r.left) + "px"; bloom.style.top = (y - r.top) + "px";
+    pic.appendChild(bloom); setTimeout(() => bloom.remove(), 900);
+    if (!fvArtHas(d.id)) set(true, how); else { buzz(6); btn.classList.remove("pop"); void btn.offsetWidth; btn.classList.add("pop"); }
+  };
   let timer = 0, x0 = 0, y0 = 0, fired = false;
   const cancel = () => { clearTimeout(timer); timer = 0; };
   pic.addEventListener("pointerdown", e => {
     if (!e.isPrimary || e.button > 0) return;
     fired = false; x0 = e.clientX; y0 = e.clientY; cancel();
-    timer = setTimeout(() => {
-      timer = 0; fired = true;
-      const r = pic.getBoundingClientRect(), bloom = document.createElement("i");
-      bloom.className = "fva-bloom"; bloom.innerHTML = FVA_HEART_ON;
-      bloom.style.left = (x0 - r.left) + "px"; bloom.style.top = (y0 - r.top) + "px";
-      pic.appendChild(bloom); setTimeout(() => bloom.remove(), 900);
-      if (!fvArtHas(d.id)) set(true, "hold"); else { buzz(6); btn.classList.remove("pop"); void btn.offsetWidth; btn.classList.add("pop"); }
-    }, 480);
+    timer = setTimeout(() => { timer = 0; fired = true; likeBurst(x0, y0, "hold"); }, 480);
   });
   pic.addEventListener("pointermove", e => { if (timer && Math.hypot(e.clientX - x0, e.clientY - y0) > 9) cancel(); });
   ["pointerup", "pointercancel", "pointerleave"].forEach(t => pic.addEventListener(t, cancel));
   pic.addEventListener("contextmenu", e => e.preventDefault());
   // capture: runs before the picture's own tap (name a spot), and swallows the click a long press ends with
   pic.addEventListener("click", e => { if (fired) { fired = false; e.stopPropagation(); e.preventDefault(); } }, true);
+  // double-tap to like (Instagram-style, David 2026-10-09): js/gallery.js (and js/paintmap.js) catch the second
+  // tap themselves (their own single-tap already does something, so it waits a beat to listen for a pair) and
+  // hand it here as "fva-dbltap" with the tap point, so the burst and the toggle stay one shared gesture
+  pic.addEventListener("fva-dbltap", e => likeBurst(e.detail.x, e.detail.y, "tap"));
 }
 
 // ---------- in You ----------

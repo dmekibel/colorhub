@@ -2199,9 +2199,19 @@ scenario("paintmap", "arrange by time and painter and around the middle one then
   await t.waitFor(() => Math.abs(t.w.PM_CTRL.count - want) <= 1, 8000, "the map to show the filtered paintings");
   t.expect(/y0=\d+/.test(t.w.location.hash), `the address doesn't carry the years: ${t.w.location.hash}`);
 });
-scenario("favs", "a painting's heart keeps it; the shelf sorts favorites into kinds with counts, remembered", async t => {
+scenario("favs", "a painting's heart (now in the top bar) and a double-tap on the picture both keep it; the shelf sorts favorites into kinds with counts, remembered", async t => {
   await t.open("#/gallery/8136", { settle: 800 });
   await t.waitFor("[data-fva]", 14000, "the heart under the painting");
+  t.expect(!!t.$(".art-top [data-fva]"), "the heart isn't in the top bar beside the museum link, where it's visible without scrolling");
+  // double-tap to like (Instagram-style): a quick second tap on the picture favorites it, with a heart burst,
+  // before its single-tap action (name a spot) gets to fire
+  const hero = t.$(".gl-hero>span");
+  await t.click(hero, { wait: 100 });
+  await t.click(hero, { wait: 500 });
+  t.expect(t.ev("Object.keys(S.favArt || {}).length") === 1, "a double-tap on the painting didn't favorite it");
+  t.expect(t.$("[data-fva]").getAttribute("aria-pressed") === "true", "the heart didn't fill after the double-tap");
+  await t.click("[data-fva]", { wait: 400 });
+  t.expect(t.ev("Object.keys(S.favArt || {}).length") === 0, "the heart button didn't un-favorite it again");
   await t.click("[data-fva]", { wait: 400 });
   t.expect(t.$("[data-fva]").getAttribute("aria-pressed") === "true", "the heart didn't fill");
   t.expect(t.ev("Object.keys(S.favArt || {}).length") === 1, "the painting isn't in favorites");

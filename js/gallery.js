@@ -746,7 +746,7 @@ function glPage(i, d, fromHex, tol) {
   const curPal = () => curSet().pal;
   const dom = pal6.reduce((a, b) => b.share > a.share ? b : a).h;
   const el = show(`
-    <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button>${d.rec ? `<a class="glass-pill" href="${esc(d.rec)}" target="_blank" rel="noopener">${GL_ICON_OUT}<span>${esc(src.short)}</span></a>` : ""}</header>
+    <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><div class="art-top-r">${d.rec ? `<a class="glass-pill" href="${esc(d.rec)}" target="_blank" rel="noopener">${GL_ICON_OUT}<span>${esc(src.short)}</span></a>` : ""}${typeof fvArtHeart === "function" ? fvArtHeart(d.id) : ""}</div></header>
     <div class="gl-pal-wrap">
     <div class="gl-hero gl-full-w"><span style="--c:${dom};width:min(100%, calc(38dvh / ${ar.toFixed(3)}));aspect-ratio:${(1 / ar).toFixed(4)}"><img src="${esc(glBig(d.img))}" alt="${esc(d.t)}${d.a ? " by " + esc(d.a) : ""}"${glCropStyle(i, d, ar)}${d.hi ? ` data-hi="${esc(d.hi)}"` : ""}${glCORS(glBig(d.img))}><canvas class="gl-lit-cv" data-gllitcv aria-hidden="true"${glCropStyle(i, d, ar)}></canvas></span></div>
     <div class="gl-pal-ui">
@@ -760,7 +760,7 @@ function glPage(i, d, fromHex, tol) {
     <div class="gl-cov" data-glcov></div>
     <div data-csacts></div>
     </div></div>
-    <div class="gl-under"><div class="gl-quiz" data-glquiz></div>${glSmall(d) && !d.hi && d.rec ? `<a class="gl-full" href="${esc(d.rec)}" target="_blank" rel="noopener">Full size at the museum ↗</a>` : ""}${typeof fvArtHeart === "function" ? fvArtHeart(d.id) : ""}</div>
+    <div class="gl-under"><div class="gl-quiz" data-glquiz></div>${glSmall(d) && !d.hi && d.rec ? `<a class="gl-full" href="${esc(d.rec)}" target="_blank" rel="noopener">Full size at the museum ↗</a>` : ""}</div>
     <p class="eyebrow p-type">Painting${yr ? " · " + yr : ""}</p>
     <h1 class="p-title">${esc(d.t)}</h1>
     <p class="p-dek">${esc([d.a || "Artist unknown", d.co, d.mv].filter(Boolean).join(" · "))}</p>
@@ -1012,9 +1012,14 @@ function glPage(i, d, fromHex, tol) {
   };
   // the arriving color: pinned above the palette, with how much of this canvas it covers and where (js/paintingsof.js, L26)
   if (fromHex && typeof ptArrival === "function") arrival = ptArrival(el, { i, hex: fromHex, tol, pool, heroSpan, getImg: () => sampleImg, onMap: () => setWhere("off"), why: "This museum's image server doesn't let ColorHub read its pixels, so the map isn't available for this painting." });
-  if (typeof fvArtWire === "function") fvArtWire(el, i, d, heroSpan);   // the heart under the picture; a long press on it keeps it too (js/favs.js)
+  if (typeof fvArtWire === "function") fvArtWire(el, i, d, heroSpan);   // the heart action lives in the top bar now; a long press or a double-tap on the picture keeps it too (js/favs.js)
   if (sampleImg.complete && sampleImg.naturalWidth) armSample(sampleImg); else sampleImg.addEventListener("load", () => armSample(sampleImg), { once: true });
-  heroSpan.addEventListener("click", e => {
+  // Double-tap to like (Instagram-style, David 2026-10-09): since a single tap on the painting already does
+  // something (names a spot, picks a color, selects a map place), it waits ~280ms for a second tap before
+  // acting — the same delay js/swatch.js uses for [data-dbltap] — so a quick double tap can be caught first and
+  // turned into a heart burst + the favorite toggle (js/favs.js "fva-dbltap") instead of firing twice.
+  let glTapAt = 0, glTapT = 0;
+  const heroTap = e => {
     if (arrival && arrival.tap(e)) return;
     if (mode === "pick") {
       if (!canSample) return;
@@ -1052,6 +1057,17 @@ function glPage(i, d, fromHex, tol) {
       heroSpan.appendChild(dot);
       buzz(6); openTappedColor(hex);   // David, 2026-10-07: tap anywhere on the painting opens that color's page, not the sheet
     } catch (e) { canSample = false; heroSpan.classList.remove("gl-tap"); }   // tainted after all: quietly give up
+  };
+  heroSpan.addEventListener("click", e => {
+    const now = performance.now();
+    if (now - glTapAt < 300) {
+      clearTimeout(glTapT); glTapT = 0; glTapAt = 0;
+      heroSpan.dispatchEvent(new CustomEvent("fva-dbltap", { detail: { x: e.clientX, y: e.clientY } }));
+      if (typeof sfxColor === "function") sfxColor(dom);
+      return;
+    }
+    glTapAt = now;
+    glTapT = setTimeout(() => { glTapAt = 0; heroTap(e); }, 280);
   });
   el.querySelector("[data-back]").onclick = xBack;
   onKey = e => { if (e.key === "Escape") xBack(); };
