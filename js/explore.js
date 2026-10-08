@@ -345,7 +345,7 @@ function artHome() {
     <div class="art-band" style="${tint ? `--tint:${tint}` : ""}">
       <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><button class="icon-btn glass" data-search aria-label="Search">${ICON.search}</button></header>
       <h1 class="p-title">Art</h1>
-      <p class="p-dek">${hex ? `In ${esc(name.toLowerCase())}, from 23,531 paintings and eleven thousand poems.` : "23,531 paintings and eleven thousand poems, found by their colors."} <button class="aw-link" data-awindex>Art history by color</button></p>
+      <p class="p-dek">${hex ? `In ${esc(name.toLowerCase())}, from 23,781 paintings and eleven thousand poems.` : "23,781 paintings and eleven thousand poems, found by their colors."} <button class="aw-link" data-awindex>Art history by color</button></p>
       <div class="art-bubbles" role="tablist">${colors.map(c => `<button class="art-bubble${c.n === name ? " on" : ""}" data-hex="${c.h}" data-name="${esc(c.n)}" style="--c:${c.h}" aria-label="${esc(c.n)}"></button>`).join("")}</div>
     </div>
     <div class="art-feed" id="artFeed"><p class="fine">Loading the gallery…</p></div>
@@ -504,8 +504,12 @@ function wireLinks(el) {
   el.addEventListener("click", e => {
     const a = e.target.closest("[data-to],[data-node]");
     if (!a) return;
+    // a node the graph doesn't hold yet (a gem or flower page registered by its own file, after the wiki rebuilt
+    // the graph) is left for js/swatch.js's fallback, which waits for it: never a silent dead tap
+    const node = graph().nodes.get(a.dataset.to || a.dataset.node);
+    if (!node) return;
     e.preventDefault();
-    openNode(graph().nodes.get(a.dataset.to || a.dataset.node));
+    openNode(node);
   });
 }
 
@@ -589,17 +593,20 @@ function colorPage(n, tapped) {
   const seenN = new Set([c.n]);
   const stripOthers = tapped ? [c] : [nb, ...likes].filter(x => x && !seenN.has(x.n) && (seenN.add(x.n), true)).slice(0, 2);
   const stripDiff = tapped ? lookDiff({ h: tapped, n: "Your color" }, c) : c.d;
+  // every color page is rich (ROADMAP, David 2026-10-08): famC is a fallback family head for the shelves
+  // below that would otherwise go quiet on a thin name — a no-op for one of the 101 themselves (their own
+  // family head is always themselves, de 0).
+  const famC = typeof rcFamC === "function" ? rcFamC(tapped || c.h) : null;
+  const cover = rpCoverFoot(c.n, c.h, tapped, c);
   const el = show(`
     <div class="c-hero cp-hero cp-hero-full" style="--c:${heroHex}" data-ink="${ink(heroHex)}">
       <button class="cp-close" data-back aria-label="Back">${ICON.back}</button>
       <div class="cp-hero-foot">
-        <span class="cp-chip">${esc(status)}</span>
+        ${cover.html}
         ${typeof fvPageChip === "function" ? fvPageChip(c.h) : ""}
-        <h1>${esc(c.n)}</h1>
-        <button class="mono cp-hex" data-copy="${heroHex}">${heroHex}</button>
       </div>
-      <span class="cp-scroll-hint" aria-hidden="true">${ICON.up}</span>
     </div>
+    ${typeof rpGlanceHTML === "function" ? rpGlanceHTML(c.n, c.h) : ""}
     <div class="cp-primary-row">
       ${typeof prQuick === "function" || typeof hmLearnIt === "function" ? `<button class="cp-primary" data-learnit>${mine ? "Review it" : "Learn it"}${mine ? "" : `<em>2 min</em>`}${ICON.arrow}</button>` : ""}
       <button class="icon-btn cp-icon${saved ? " saved" : ""}" data-save aria-label="Save">${saved ? "♥" : "♡"}</button>
@@ -613,27 +620,27 @@ function colorPage(n, tapped) {
       <p class="cp-diff">${esc(stripDiff)}</p>
       ${tapped ? "" : `<div data-csacts></div>`}
     </section>` : ""}
-    <div class="ar-slot" data-ar-slot hidden></div>
     ${c.o && !(w && w.facets.some(f => f.k === "language")) ? `<p class="lead">${esc(c.o)}</p>` : ""}
     ${figHTML(c.n)}
-    <section class="gl-in" data-glin></section>
-    <div class="c-poems"></div>
-    ${typeof archiveRows === "function" ? archiveRows(c) : ""}
-    ${typeof btRow === "function" ? btRow(c) : ""}
-    ${typeof gmRow === "function" ? gmRow(c) : ""}
-    <section class="fx-in" data-world-in></section>
+    ${rpPageBody(c, c.n, c.h, heroHex, famC, `<section class="gl-in" data-glin></section>`)}
     ${(() => {
       const secs = (w ? w.facets : []).map((f, i) => [f.k + i, FACET_LABEL[f.k] || f.k, `<p>${linkText(f.text)}</p>` + figHTML(c.n, i + 1)]);
       if (w && w.related && w.related.length) secs.push(["kin", "Kin", w.related.map(r => { const x = graph().resolve(r.to); return x ? `<button class="kin" data-node="${esc(x.id)}"><i style="--c:${x.h}"></i><b>${esc(x.title)}</b><span>${esc(r.why)}</span></button>` : ""; }).join("")]);
       // the sheet used to be the only place these lived (David, 2026-10-07: "everything the sheet had moves
-      // onto the page") — the nearest of the ~1,000 core names, same list js/names.js's own pages show.
+      // onto the page") — the nearest of the ~1,000 core names, same list js/names.js's own pages show. A
+      // nearby name that already has a full written article reads naturally here (never "closest of the
+      // 101", David 2026-10-08) rather than as a separate list.
       if (typeof nearestCore === "function") {
         const list = CORE_NAMES || (typeof coreFallback === "function" ? coreFallback() : []);
         const near = nearestCore(tapped || c.h, list, 7).filter(x => x.n.toLowerCase() !== c.n.toLowerCase()).slice(0, 6);
-        if (near.length) secs.push(["nearnames", "Nearest names", `<div class="lk-list">${near.map(x => `<button class="lk-row" data-cp-near="${esc(x.n)}" data-h="${x.h}"><i style="--c:${x.h}"></i><b>${esc(x.n)}</b><span>${closeness(x.de)} · ${pctDiff(x.de)}</span></button>`).join("")}</div>`]);
+        if (near.length) secs.push(["nearnames", "Nearest names", `<div class="lk-list">${near.map(x => `<button class="lk-row" data-cp-near="${esc(x.n)}" data-h="${x.h}"><i style="--c:${x.h}"></i><b>${esc(x.n)}</b><span>${closeness(x.de)} · ${pctDiff(x.de)}${rcHasArticle(x.n) ? " · has its own story" : ""}</span></button>`).join("")}</div>`]);
+      }
+      const coreSelf = (CORE_NAMES || (typeof coreFallback === "function" ? coreFallback() : [])).find(e => e.n.toLowerCase() === c.n.toLowerCase());
+      if (coreSelf && ((coreSelf.also || []).length || (coreSelf.src || []).length)) {
+        secs.push(["names", "Also called", `${(coreSelf.also || []).length ? `<p>${(coreSelf.also || []).map(esc).join(", ")}.</p>` : ""}${rcPassportHTML(coreSelf.src || [])}`]);
       }
       secs.push(["codes", "Codes", `<div class="cp-codes">${codeRows(c.h).map(([k, v]) => `<button class="cp-code-row" data-copy="${esc(v)}"><span>${esc(k)}</span><b class="mono">${esc(v)}</b></button>`).join("")}</div>${codeRows(c.h).some(r => r[0].startsWith("CMYK")) ? `<p class="fine cp-codes-fine">CMYK here is a rough formula, not a print profile: real values depend on the paper and press, so check them in a print workflow with a proof.</p>` : ""}`]);
-      return (w ? "" : `<p class="fine">The full page for ${esc(c.n)} is being written. Its connections below are already live.</p>`) + tocHTML(secs.map(x => [x[0], x[1]])) + secs.map(x => secHTML(x[0], x[1], x[2], false)).join("");
+      return tocHTML(secs.map(x => [x[0], x[1]])) + secs.map(x => secHTML(x[0], x[1], x[2], false)).join("");
     })()}
     ${typeof wgColorTail === "function" ? wgColorTail(c, w) : ""}
     ${connSection(n)}
@@ -658,12 +665,14 @@ function colorPage(n, tapped) {
   // a tap anywhere on a near-name row grows its chip into the next page (js/core.js's morphFrom/runMorph)
   el.querySelectorAll("[data-cp-near]").forEach(b => b.onclick = () => { morphFrom(b.querySelector("i")); openCoreName(b.dataset.h, b.dataset.cpNear); });
   const gi = el.querySelector("[data-glin]"); if (gi) galleryColorRow(gi, c);
+  rpCoverFill(el, c.n, c.h, heroHex, c); rpDrawersWire(el, c.n, heroHex); rpHoldWalk(el, c.n, heroHex);
   // the Learner Model (js/learner.js) and the ColorSet verbs on the look-alike strip (js/colorset.js)
   if (typeof learnerLog === "function" && !tapped) learnerLog({ type: "seen", color: c, src: "page" });
   const csHost = el.querySelector("[data-csacts]");
   if (csHost && typeof colorSet === "function") csHost.appendChild(csActions(colorSet({ kind: "lookalikes", id: routeSlug(c.n), title: `${c.n} and its look-alikes`, colors: [c, nb, ...likes].filter(Boolean), src: "color/" + routeSlug(c.n) }), { only: ["play", "map"], back: () => colorPage(n) }));
-  colorPoems(el.querySelector(".c-poems"), c);
-  if (typeof worldColorRow === "function") worldColorRow(el, n);
+  colorPoems(el.querySelector(".c-poems"), c, famC);
+  if (typeof worldColorRow === "function") worldColorRow(el, n, famC);
+  if (typeof rcWireOpen === "function") rcWireOpen(el, tapped || c.h);
   el.querySelectorAll("[data-copy]").forEach(b => b.onclick = () => { try { navigator.clipboard.writeText(b.dataset.copy); toast("Copied " + b.dataset.copy); } catch (e) {} });
   return el;   // so growFrom (js/core.js, js/home.js hmOpenColor) can grow this page from the tapped honeycomb bubble
 }

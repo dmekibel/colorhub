@@ -19,6 +19,8 @@ FAIL (blocks the article):
   - "words" differs from the computed count (fix with --write-words)
   - a [[slug]] link (or aside sibling/child/parent/disambiguation) that resolves to no canonical slug in data/graph/names.json,
     no alias (data/graph/aliases.json, data/aliases.json), no link-map.json entry and no article; an [[art:id|label]] that is not in data/gallery
+  - a reference card [[gem:id]] [[flower:id]] [[painting:id or n]] [[look:id]] [[garment:id]] [[film:id]] [[painter:slug]] whose id is not in its dataset,
+    or a painting/painter reference with no |label
   - questions: 2-3, kind pick|true-false, answer among the choices
   - fewer than 4 connections (aside siblings + children + aka + [[links]]) or fewer than 3 field keys
 WARN (printed, does not block): a 10-word run shared with a private book text; an unused note; a sentence over 45 words.
@@ -198,6 +200,57 @@ class Resolver:
         return c is not None and (body or c != "plain")
 
 
+# ---------- reference cards: [[gem:id]] and friends ----------
+REF_KINDS = {"gem", "flower", "painting", "art", "look", "garment", "film", "painter"}
+REF_ID = re.compile(r"^[A-Za-z0-9._-]+$")
+REF_SRC = {"gem": "gems (data/gems.js)", "flower": "plants and dye plants (data/botany.js)", "painting": "gallery (data/gallery)",
+           "look": "looks (data/looks.js)", "garment": "garments (data/fashion/garments.json)", "film": "films (data/films.js)",
+           "painter": "painters (data/artists/meta.json)"}
+_REFS = {}
+
+
+def _ref_ids(kind, gallery):
+    """The ids a reference of this kind may use, read once from the data files the app itself loads."""
+    if kind in _REFS:
+        return _REFS[kind]
+    d = ROOT / "data"
+    out = set()
+    try:
+        if kind == "gem":
+            t = (d / "gems.js").read_text(encoding="utf-8")
+            t = t[re.search(r"^gems: \[", t, re.M).start():re.search(r"^essays: \[", t, re.M).start()]
+            out = set(re.findall(r'\bid:\s*"([a-z0-9-]+)"', t))
+        elif kind == "flower":
+            t = (d / "botany.js").read_text(encoding="utf-8")
+            j = json.loads(t[t.index("{", t.index("window.BOTANY")):t.rindex("}") + 1])
+            out = {p["id"] for p in j["plants"]} | {p["id"] for p in j["dyes"]}
+        elif kind == "look":
+            out = set(re.findall(r'"id":"([a-z0-9-]+)"', (d / "looks.js").read_text(encoding="utf-8")))
+        elif kind == "garment":
+            out = {r["id"] for r in json.loads((d / "fashion" / "garments.json").read_text(encoding="utf-8"))["rows"]}
+        elif kind == "film":
+            out = set(re.findall(r'"id": "([a-z0-9-]+)"', (d / "films.js").read_text(encoding="utf-8")))
+        elif kind == "painter":
+            out = set(json.loads((d / "artists" / "meta.json").read_text(encoding="utf-8"))["a"])
+        elif kind == "painting":
+            out = set(gallery or ())
+    except Exception as e:  # a missing data file must not hide behind a pass
+        print(f"gate: cannot read the {kind} ids ({e})")
+        out = None
+    _REFS[kind] = out
+    return out
+
+
+def ref_exists(kind, rid, gallery):
+    if kind == "painting" and rid.isdigit():   # a gallery number
+        try:
+            return int(rid) < json.loads((ROOT / "data" / "gallery" / "index.json").read_text(encoding="utf-8"))["n"]
+        except Exception:
+            return False
+    ids = _ref_ids(kind, gallery)
+    return ids is not None and rid in ids
+
+
 def load_gallery_ids():
     ids = set()
     d = ROOT / "data" / "gallery" / "d"
@@ -299,6 +352,7 @@ def check(path, names, gallery, slugs, write_words=False, res=None):
             fails.append(f"note {n}: web note without url")
     used = set()
     links = set()
+    refs_used = set()
     for where, t in texts:
         for m in REF.finditer(t):
             n = int(m.group(1))
@@ -307,9 +361,18 @@ def check(path, names, gallery, slugs, write_words=False, res=None):
                 fails.append(f"{where}: [{n}] has no note")
         for m in LINK.finditer(t):
             tgt = m.group(1).strip()
-            if tgt.startswith("art:"):
-                if gallery and tgt[4:] not in gallery:
-                    fails.append(f"{where}: painting link {tgt} not in data/gallery")
+            kind = tgt.split(":", 1)[0] if ":" in tgt else ""
+            if kind in REF_KINDS:
+                # reference cards (js/article-refs.js): [[gem:id]] [[flower:id]] [[painting:id|n]] [[look:id]] [[garment:id]] [[film:id]] [[painter:slug]] ([[art:id]] = painting)
+                rid = tgt.split(":", 1)[1]
+                k = "painting" if kind == "art" else kind
+                if not REF_ID.match(rid):
+                    fails.append(f"{where}: reference [[{tgt}]] has a malformed id")
+                elif not ref_exists(k, rid, gallery):
+                    fails.append(f"{where}: reference [[{tgt}]] is not in the {REF_SRC[k]}")
+                if k in ("painting", "painter") and not (m.group(2) or "").strip():
+                    fails.append(f"{where}: reference [[{tgt}]] needs a label ([[{tgt}|Title]]): the id says nothing to a reader")
+                refs_used.add(f"{k}:{rid}")
             else:
                 links.add(tgt)
                 if not res.ok(tgt):

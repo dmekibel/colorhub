@@ -47,6 +47,7 @@ function diskColor(x, y) {
 
 // ---------- Studio home ----------
 function studio() {
+  if (typeof r2StudioHome === "function") return r2StudioHome();   // design round 2: js/rooms2.js
   // Studio is a room like Explore (ROADMAP.md §17 job #1): entering it fresh (the tab, not a Back) starts its
   // own back chain over, so a trail from another tab never leaks in here.
   XSTACK = [];

@@ -202,7 +202,7 @@ scenario("home", "Rooms corner opens the stem; each room bubble navigates", asyn
 });
 
 // ================================================================== ROOMS
-for (const [shot, id, label, needs] of [["learn", "learn", "Learn", ".plates, .btn"], ["gym", "gym", "Train", ".gs-tile"], ["explore", "explore", "Explore", ".xp-cover"], ["studio", "studio", "Studio", "[data-wheel]"]]) {
+for (const [shot, id, label, needs] of [["learn", "learn", "Learn", ".plates, .btn"], ["gym", "gym", "Train", ".r2-g, .gs-tile"], ["explore", "explore", "Explore", ".xp-cover"], ["studio", "studio", "Studio", "[data-wheel]"]]) {
   scenario("rooms", `${label} renders inside the room sheet`, async t => {
     await t.open("#shot=" + shot, { settle: 600 });
     await t.waitFor(`.room-sheet[data-room="${id}"]`, 8000, `the ${label} room sheet`);
@@ -302,6 +302,24 @@ scenario("train", "check-in card opens the drill", async t => {
     if (b) await t.click(b, { force: true, wait: 400 }); else await t.sleep(300);
   }
   t.expect(t.$$(".drill .segs i.on").length >= done0 + 3 || t.$(".result"), "answering three check-in rounds did not advance the progress bar");
+});
+
+scenario("train", "every entry on the Train menu opens something (nothing locked)", async t => {
+  // design round 2 (js/rooms2.js): the games grid, the drills and the checks; each tap must leave the room
+  // (a game, a drill, a page) or answer with a sheet or a toast, with no error
+  await t.open("#shot=gx:home", { settle: 600 });
+  await t.waitFor(".r2-games .r2-g", 6000, "the Train games grid");
+  const n = t.$$(".r2-games .r2-g, .r2-list .r2-li").length;
+  t.expect(n >= 25, `only ${n} entries on the Train menu`);
+  t.expect(!t.$(".r2-train .locked, .r2-train [data-locked]"), "a locked entry on the Train menu");
+  for (let i = 0; i < n; i++) {
+    const b = t.$$(".r2-games .r2-g, .r2-list .r2-li")[i], label = (b.querySelector("b") || b).textContent.trim();
+    await t.click(b, { wait: 500 });
+    await t.waitFor(() => !t.$('.room-sheet[data-room="gym"]') || t.$(".sheet") || t.$(".toast"), 6000, `"${label}" to open something`);
+    t.ev("document.querySelectorAll('.scrim,.sheet,.toast').forEach(n => n.remove()); go('gym')");
+    await t.waitFor(".r2-games .r2-g", 6000, `the Train menu again after "${label}"`);
+  }
+  t.notes.push(`${n} entries opened`);
 });
 
 scenario("train", "Odd one out: tap tiles through a whole round", async t => {
@@ -425,6 +443,24 @@ scenario("pages", "namePage x3: renders, a near name opens another, Back works",
   }
 });
 
+// js/article-refs.js: the figure cards in an article (Mauve has an article, a twin gem, a film and paintings that hold the color)
+scenario("pages", "article figure cards: Mauve draws them, a card opens its page, Back returns to the article", async t => {
+  await H.openPage(t, "#/color/mauve", "Mauve");
+  await t.waitFor(() => t.$$(".ar-fig").length >= 2, 25000, "the article's figure cards");
+  const figs = t.$$(".ar-fig");
+  t.expect(figs.length <= 5, `${figs.length} auto-figures, the limit is 5`);
+  t.expect(figs.every(f => /\d+% match to Mauve/.test(t.text(f.querySelector(".ar-fig-m")))), "a card is missing its '% match to Mauve' line");
+  t.expect(figs.every(f => [112, 88].includes(f.querySelector(".ar-fig-im").getBoundingClientRect().width)), "a card's picture box lost its fixed size");
+  const secs = figs.map(f => (f.closest("[data-ar-sec]") || {}).id || "seen").filter(x => x !== "seen");
+  t.expect(new Set(secs).size === secs.length, "two figures landed in one section");
+  const card = t.$('.ar-fig[data-kind="gem"] .ar-fig-b') || t.$(".ar-fig .ar-fig-b");
+  const title = t.text(card.querySelector(".ar-fig-n"));
+  await t.click(card, { wait: 700 });
+  await t.waitFor(() => !t.$(".ar") && t.$(".p-title, .cp-hero-foot h1, .gl-page, .film-page"), 10000, `the page for "${title}"`);
+  await t.click("[data-back]", { wait: 600 });
+  await t.waitFor(() => t.$(".ar") && t.$$(".ar-fig").length >= 2, 20000, "the article and its figures after Back");
+});
+
 scenario("pages", "a tapped in-between hex opens its nearest name with 'Your color'", async t => {
   await H.openPage(t, "#/color/teal", "Teal");
   let sawYours = 0;
@@ -449,6 +485,42 @@ scenario("pages", "a tapped in-between hex opens its nearest name with 'Your col
     await H.openPage(t, "#/color/teal", "Teal");
   }
   t.expect(sawYours >= 1, "none of the in-between colors showed a 'Your color' page");
+});
+
+scenario("pages", "a world twin (In gems) opens its page in one tap, Back returns to the color", async t => {
+  await H.openPage(t, "#/name/fiery-rose", "Fiery Rose");
+  const d = await t.waitFor(() => t.$('[data-rp-drawer="world"]'), 8000, "the 'In the world' drawer");
+  await t.waitFor(() => !d.hidden && t.$$("[data-to]", d).length > 0, 10000, "a twin row (gem, flower, fashion or film) in the world drawer");
+  if (!d.open) await t.click(d.querySelector("summary"), { wait: 200 });
+  const row = t.$$("[data-to]", d).find(e => /^gm:/.test(e.dataset.to)) || t.$$("[data-to]", d)[0];
+  t.expect(row, "no twin row to tap");
+  const id = row.dataset.to;
+  await t.click(row, { wait: 700 });
+  await t.waitFor(() => !t.$(".cp-page .cp-hero-foot h1") || H.title(t) !== "Fiery Rose", 8000, `the twin page for ${id} to open`);
+  t.expect(t.$("#app").innerText.length > 100, `the page for ${id} is empty`);
+  t.notes.push(`Fiery Rose > ${id}`);
+  await t.click("[data-back]", { wait: 600 });
+  await t.waitFor(() => t.$(".cp-page .cp-hero-foot h1") && H.title(t) === "Fiery Rose", 8000, "Back to return to Fiery Rose");
+});
+
+scenario("pages", "hold the cover: the flower rises, dragging lights a hex, letting go opens that color; Back returns", async t => {
+  await H.openPage(t, "#/name/fiery-rose", "Fiery Rose");
+  const hero = t.$(".cp-hero"), r = hero.getBoundingClientRect();
+  const ev = (type, x, y) => new t.w.PointerEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: 7, pointerType: "touch", isPrimary: true, view: t.w });
+  hero.dispatchEvent(ev("pointerdown", r.left + r.width / 2, r.top + r.height / 3));
+  await t.sleep(520);
+  t.expect(t.$(".rp-hold .rp-flower"), "holding the cover did not raise the flower");
+  const hex = t.$$(".rp-hold .rp-hex[data-h]")[0];
+  t.expect(hex, "the flower has no neighbor to walk to");
+  const hr = hex.getBoundingClientRect(), name = hex.dataset.n;
+  hero.dispatchEvent(ev("pointermove", hr.left + hr.width / 2, hr.top + hr.height / 2));
+  await t.sleep(150);
+  t.expect(hex.classList.contains("hot"), "dragging onto a hex did not light it");
+  hero.dispatchEvent(ev("pointerup", hr.left + hr.width / 2, hr.top + hr.height / 2));
+  await t.waitFor(() => !t.$(".rp-hold") && t.$(".cp-page .cp-hero-foot h1") && H.title(t) !== "Fiery Rose", 8000, `letting go on ${name} to open its page`);
+  t.notes.push(`Fiery Rose > ${H.title(t)} (hold-to-walk)`);
+  await H.back(t);
+  await t.waitFor(() => t.$(".cp-page .cp-hero-foot h1") && H.title(t) === "Fiery Rose", 8000, "Back to return to Fiery Rose");
 });
 
 scenario("pages", "Learn it runs meet > recall from a color page", async t => {
@@ -957,6 +1029,9 @@ scenario("paintings", "a pair page, the masters' chords, and a painting with its
 scenario("paintings", "a color page's In paintings section: presets re-run the query; Fine-tune opens the sliders", async t => {
   await t.open("#/color/cobalt", { settle: 800 });
   const sec = await t.waitFor("[data-glin]", 12000, "the In paintings section");
+  // it lives in the "In paintings" field-note drawer (closed until a tap, like a thumb would)
+  const dr = sec.closest("details");
+  if (dr && !dr.open) await t.click(dr.querySelector("summary"), { wait: 300 });
   sec.scrollIntoView();
   await t.waitFor("[data-pt-quick] [data-pre-tol]", 15000, "the tolerance presets");
   await t.waitFor(() => t.$$("[data-pt-rail] .gl-pin, [data-pt-rail] .pin").length > 0 || /No painting/.test(t.text("[data-pt-lead]")), 20000, "the rail or an honest empty line");

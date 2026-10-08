@@ -563,37 +563,47 @@ function hmOpenName(o) {
 // this too, so it never skips straight to the honeycomb when there's a nearer screen to land on
 function hmBackOneStep() { const btn = app.querySelector("[data-back]"); if (btn) btn.click(); else hmHome(); }
 
-// Pull down from the top of a page to close it, like a sheet: the page follows the finger, and past ~110px (or a quick
-// flick) it slides away and close() runs. Anywhere below the top, a downward drag is just normal scrolling.
+// Pull down from the top of a page to close it, like a sheet: the page follows the finger, a "Release to close" pill
+// appears past the threshold, and letting go there slides it away and close() runs. Anywhere below the top, a downward
+// drag is just normal scrolling. David (2026-10-08): reading and scrolling back up must never close an article, so it
+// arms only after the page has RESTED at the top for 700 ms (a scroll-up that just reached the top is still scrolling),
+// there is no quick-flick shortcut, and the pull has to be long and deliberate (200px of finger travel).
 function hmPullClose(screen, close) {
   if (!screen) return;
   let y0 = null, x0 = 0, dy = 0, t0 = 0, on = false, lastScroll = 0;
   const born = performance.now();
   const onScroll = () => { lastScroll = performance.now(); if (!screen.isConnected) removeEventListener("scroll", onScroll); };
   addEventListener("scroll", onScroll, { passive: true, capture: true });
-  const reset = () => { screen.style.transition = "transform .35s var(--ease)"; screen.style.transform = ""; };
+  const REST = 700, PULL = 200;
+  let pill = null;
+  const hint = show => {
+    if (show && !pill) { pill = document.createElement("div"); pill.className = "hm-pullpill"; pill.textContent = "Release to close"; document.body.appendChild(pill); }
+    if (pill) pill.classList.toggle("on", !!show);
+  };
+  const reset = () => { screen.style.transition = "transform .35s var(--ease)"; screen.style.transform = ""; hint(false); };
   screen.addEventListener("touchstart", e => {
     // arm only when the page is resting at the top: not mid-fling (a scroll in the last 180 ms means the finger is
     // catching a page that's still moving), and not in the first moments after the page opened
-    if (e.touches.length !== 1 || pageScrollTop() > 0 || document.querySelector(".sheet") || performance.now() - lastScroll < 180 || performance.now() - born < 350) { y0 = null; return; }
+    if (e.touches.length !== 1 || pageScrollTop() > 0 || document.querySelector(".sheet") || performance.now() - lastScroll < REST || performance.now() - born < 350) { y0 = null; return; }
     y0 = e.touches[0].clientY; x0 = e.touches[0].clientX; dy = 0; on = false; t0 = performance.now();
   }, { passive: true });
   screen.addEventListener("touchmove", e => {
     if (y0 == null) return;
     const d = e.touches[0].clientY - y0, dx = e.touches[0].clientX - x0;
     if (!on) {
-      if (d > 14 && d > Math.abs(dx) * 1.5 && pageScrollTop() <= 0) on = true;
+      if (d > 24 && d > Math.abs(dx) * 2 && pageScrollTop() <= 0 && performance.now() - lastScroll >= REST) on = true;
       else if (Math.abs(dx) > 10 || d < -6) { y0 = null; return; } else return;
     }
     e.preventDefault();
     // the page follows with resistance, so a small pull looks small and only a deliberate one carries it away
-    dy = Math.max(0, d); screen.style.transition = "none"; screen.style.transform = `translateY(${dy < 60 ? dy * .5 : 30 + (dy - 60) * .8}px)`;
+    dy = Math.max(0, d); screen.style.transition = "none"; screen.style.transform = `translateY(${dy < 60 ? dy * .4 : 24 + (dy - 60) * .6}px)`;
+    const past = dy > PULL; if (past && !(pill && pill.classList.contains("on"))) buzz(4); hint(past);
   }, { passive: false });
   screen.addEventListener("touchend", () => {
     if (y0 == null || !on) { y0 = null; return; }
     y0 = null;
-    const fast = dy > 70 && dy / (performance.now() - t0) > .8;
-    if (dy > 150 || fast) {
+    hint(false);
+    if (dy > PULL) {
       buzz(6);
       screen.style.transition = reduceMotion ? "none" : "transform .25s var(--ease), opacity .25s";
       screen.style.transform = `translateY(${innerHeight * .4}px)`; screen.style.opacity = "0";

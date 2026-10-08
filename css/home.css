@@ -160,3 +160,6 @@
 /* L18: every Home corner fades together while you drag, and returns together (David: only the Study corner stayed) */
 .hm.chrome-hide .corner{opacity:0;pointer-events:none}
 .hm .corner{transition:opacity .45s var(--ease),transform .3s var(--spring)}
+/* pull-down-to-close hint (js/home.js hmPullClose): says what letting go will do, so a close is never a surprise */
+.hm-pullpill{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + 14px);transform:translate(-50%,-8px);z-index:90;padding:8px 14px;border-radius:var(--r-pill,999px);background:rgba(20,19,17,.82);color:#ECE8DF;font:500 14px/1 var(--sans);letter-spacing:.01em;opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.hm-pullpill.on{opacity:1;transform:translate(-50%,0)}
