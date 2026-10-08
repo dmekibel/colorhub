@@ -121,7 +121,8 @@ const ROUTED = [["colorPage", (n, tapped) => n && n.id ? routed(n.title, nodeRou
   ["ooMap", () => routed("Odd one out", "odd")], ["ooEyePage", () => routed("Your eye", "odd/eye")],   // js/games/oo-ui.js
   ["hgMap", () => routed("Gradients", "hue")], ["hgDaily", () => routed("Today's gradient", "hue/daily")],   // js/games/hue-ui.js
   ["ooWhose", () => routed("Whose palette?", "odd/whose")], ["ooAcross", () => routed("Across the line", "line")], ["ooPairs", () => routed("Painters' pairs", "odd/pairs")],
-  ["arHubPage", id => id ? routed(arPretty(id), "hub/" + id) : null], ["arWhichPage", name => name ? routed(arPretty(name), "which/" + name) : null]];   // js/article.js: #/hub/<id>, #/which/<name>
+  ["arHubPage", id => id ? routed(arPretty(id), "hub/" + id) : null], ["arWhichPage", name => name ? routed(arPretty(name), "which/" + name) : null],
+  ["arReadPage", (slug, ch) => slug ? routed(AR_READING.has(slug) ? AR_READING.get(slug).art.name : arPretty(slug), "read/" + slug + (ch ? "/" + ch : "")) : null]];   // js/article.js: the book, #/read/<slug>[/<chapter>]   // js/article.js: #/hub/<id>, #/which/<name>
 // Scripts loaded after router.js (artwiki.js, article.js, looks.js, fashion.js...) aren't defined yet when this runs, so boot.js
 // calls routeWrapAll() again before the first address opens (without it a typed #/painter/<slug> lost its address).
 function routeWrapAll() { ROUTED.forEach(([name, f]) => routeWrap(window, name, f)); }
@@ -259,6 +260,7 @@ function openRoute(hash, initial = false) {
   if (kind === "photo" && id && typeof photoPage === "function") { base(); XSTACK = []; photoPage(id); return true; }
   if (kind === "hub" && id && typeof arHubPage === "function") { base(); XSTACK = []; arHubPage(id); return true; }   // js/article.js
   if (kind === "which" && id && typeof arWhichPage === "function") { base(); XSTACK = []; arWhichPage(id); return true; }
+  if (kind === "read" && id && typeof arReadPage === "function") { base(); XSTACK = []; arReadPage(id, more || null); return true; }   // js/article.js: a story, opened as a book
   if (kind === "gallery" && /^\d+$/.test(id || "") && typeof galleryPage === "function") {
     // #/gallery/<n>?c=<hex>&t=<tol>: the color that brought you, and how close it had to be (stripped into tappedHex/tappedTol above)
     const fromHex = tappedHex || null;
