@@ -702,6 +702,7 @@ function honeycomb(host, opts = {}) {
   function caption() {
     const it = center; if (!it) return;
     cap.querySelector("i").style.setProperty("--c", it.h);
+    if (typeof relState === "function") cap.querySelector("i").dataset.rel = relState(it.c || it.h);   // the relation mark (js/polish.js)
     cap.querySelector("b").textContent = it.n;
     cap.querySelector("small").textContent = honeyWhere(it);
     cap.querySelector("em").textContent = it.h;
@@ -1083,6 +1084,8 @@ function honeycomb(host, opts = {}) {
     getCfg: () => ({ style: styleId, tweak: liveTweak, resolved: cfg }),
     getTweak: () => liveTweak,
     current: () => center && center.o,
+    // where a color sits on screen right now (js/polish.js flyToMap): the biggest drawn bubble with that hex, in viewport px
+    locate(h) { const H = String(h).toUpperCase(), b = drawn.filter(x => String(x.it.h).toUpperCase() === H).sort((x, y) => y.d - x.d)[0]; if (!b) return null; const r = cv.parentNode.getBoundingClientRect(); return { x: r.left + b.x, y: r.top + b.y, d: b.d }; },
     destroy,
   };
 }
