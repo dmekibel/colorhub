@@ -1452,3 +1452,19 @@ scenario("learnroom", "the Today card shows the painting and opens both of its p
   await t.click(await t.waitFor(".lr-tc-act[data-dpaint]", 8000, "the Look row"), { wait: 600 });
   await t.waitFor("#dpFrame", 8000, "Today's painting from the card");
 });
+scenario("you-coverage", "You: Untangle on a mix-up opens the Learn sheet on that pair, saved sets show a ring, the count is never negative", async t => {
+  await t.open("#/you", { settle: 400 });
+  t.ev(`(() => { const t = today(), c = (n, h) => ({ n, h });
+    learnerLog({ type: "confuse", color: c("Teal", "#008080"), b: c("Petrol", "#005F6A"), src: "lesson" });
+    const ls = lsState(); ls.sets.sdemo = { t: "The Milkmaid", src: "painting", r: "", hs: ["#008080", "#005F6A", "#FF7F50"], at: t, last: t, climbed: [] };
+    const u = ALL.find(x => !x.basic) || ALL[0]; S.cards[u.id] = { b: 1, due: addDays(t, -1), since: addDays(t, -3), own: false, n: u.n, h: u.h };
+    save(); youPage(); })()`);
+  await t.sleep(500);
+  t.expect(t.$(".ym-set .cov-ring"), "no ring on the saved set");
+  t.expect(/You can name/.test(t.text("#app")), "no You can name strip");
+  t.expect(!/-\d/.test(t.text(".ym-count")), `the count shows ${t.text(".ym-count")}`);
+  const u = await t.waitFor(".ym-untangle", 3000, "an Untangle button on the mix-up");
+  await t.click(u, { wait: 700 });
+  await t.waitFor(".ls-sheet", 4000, "the Learn sheet");
+  t.expect(/Teal/i.test(t.text(".ls-sheet")) && /Petrol/i.test(t.text(".ls-sheet")), "the sheet isn't on the pair");
+});
