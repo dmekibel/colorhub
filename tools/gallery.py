@@ -87,7 +87,16 @@ SOURCES = {
 CMA_IMG = re.compile(r"^https://openaccess-cdn\.clevelandart\.org/([^/]+)/\1_web\.jpg$")
 
 
-def load_corpus():
+def load_aliases():
+    """{variant painter name: canonical name} from data/artists/aliases.json (tools/artist_aliases.py builds it)."""
+    f = ROOT / "data" / "artists" / "aliases.json"
+    return json.loads(f.read_text(encoding="utf-8")) if f.exists() else {}
+
+
+def load_corpus(aliases=True):
+    """Corpus rows in gallery order. With aliases (the default) a painter's spelling variants are folded into one
+    name ("Hilaire Germain Edgar Degas" -> "Edgar Degas") so every later stage sees one identity per painter."""
+    al = load_aliases() if aliases else {}
     files = ([ROOT / "data" / "corpus.json"] if (ROOT / "data" / "corpus.json").exists() else []) + \
         sorted((ROOT / "data" / "corpus").glob("*.json"))
     seen, rows = set(), []
@@ -98,6 +107,8 @@ def load_corpus():
             if x["id"] in seen or not x.get("img") or len(x.get("p") or []) != 6:
                 continue
             seen.add(x["id"])
+            if x.get("a") in al:
+                x = dict(x, a=al[x["a"]])
             rows.append(x)
     order = {k: i for i, k in enumerate(SOURCES)}
 
