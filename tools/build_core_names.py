@@ -553,6 +553,16 @@ def main():
         centers = labv[None] if centers is None else np.vstack([centers, labv[None]])
         used_lower.add(name.lower())
 
+    def absorb(cl, e, dist):
+        """The library's own canonical-card data (tools/library_final.py): near-duplicate names folded into this card
+        become synonyms here too, and Japanese names moved into `also` (lang "ja") become cultural notes."""
+        for a2 in e.get("altn") or []:
+            if a2["n"] != cl["n"]:
+                cl["also"].append((a2["n"], e["src"], round(dist + 0.05, 2)))
+        for a2 in e.get("also") or []:
+            if isinstance(a2, dict) and a2.get("lang") == "ja" and len(cl["notes"]) < NOTES_CAP:
+                cl["notes"].append({"jp": a2["n"], "kanji": a2.get("kanji"), "meaning": a2.get("meaning")})
+
     def plain_primary_for(e, lab_e):
         """An obscure entry that didn't merge into anything close: try the bare name (paren qualifier
         stripped) first, then fall back to a synthesized base+modifier name."""
@@ -567,6 +577,8 @@ def main():
         n, h = row["n"], row["h"]
         e = lib_by_key.get(LIB.key(n))
         add_cluster(n, h, LIB.labs([h])[0], e["src"] if e else ["app"], locked=True)
+        if e:
+            absorb(clusters[-1], e, 0.0)
 
     # 2. every other English-sourced name, best-named first, merged into the nearest cluster within MERGE_DE
     #    (or JUNK_SKIP_DE for a name junk_penalty() already flagged — unchanged from the pre-existing build);
@@ -584,13 +596,16 @@ def main():
         if d[j] < threshold:
             if e["n"] != clusters[j]["n"]:
                 clusters[j]["also"].append((e["n"], e["src"], round(float(d[j]), 1)))
+            absorb(clusters[j], e, float(d[j]))
         elif is_obscure(e["n"], e["src"], silly):
             label, kind, synth = plain_primary_for(e, lab_e)
             add_cluster(label, e["h"], lab_e, e["src"], synth=synth)
             clusters[-1]["also"].append((e["n"], e["src"], 0.0))
+            absorb(clusters[-1], e, 0.0)
             renames.append((e["n"], label, kind))
         else:
             add_cluster(e["n"], e["h"], lab_e, e["src"])
+            absorb(clusters[-1], e, 0.0)
 
     # 3. Japanese names: a cultural note on the nearest color if one is close; otherwise its English
     #    translation becomes its own primary (never the romaji) — learnable like any other color, with the
@@ -606,7 +621,7 @@ def main():
             if len(clusters[j]["notes"]) < NOTES_CAP:
                 clusters[j]["notes"].append(note)
         else:
-            label = clean_jp_meaning(jp["meaning"]) or jp["romaji"]
+            label = e["n"] if e.get("jpEn") else (clean_jp_meaning(jp["meaning"]) or jp["romaji"])   # library_final.py already gave it an English title
             label = make_unique(label, used_lower)
             if label != jp["romaji"]:
                 renames.append((jp["romaji"], label, "Japanese translated"))

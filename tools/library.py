@@ -768,8 +768,10 @@ def build():
     mp_rep = None
     if mp_path.exists():
         entries, mp_rep = merge_maerz_paul(entries, app)
+    import library_final as LF   # canonical cards, English titles, field, useRank, teach flags (tools/library_final.py)
+    entries, _ = LF.finalize(entries, app_rows, report=True)
     entries.sort(key=sort_key)
-    order = ["n", "h", "src", "fam", "lch", "app", "alts", "altn", "approx", "werner", "jp", "note", "crude"]
+    order = LF.ORDER
     lines = [json.dumps({k: e[k] for k in order if k in e}, ensure_ascii=False, separators=(",", ":")) for e in entries]
     OUT.write_text("[\n" + ",\n".join(lines) + "\n]\n", encoding="utf-8")
     counts = {s: len(per[s]) for s in SOURCES}
