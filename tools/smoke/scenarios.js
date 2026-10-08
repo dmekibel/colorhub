@@ -243,6 +243,45 @@ scenario("learn", "a due review starts a deck", async t => {
   for (let i = 0; i < 4; i++) { const rev = t.$("[data-reveal]"); if (!rev) break; await t.click(rev, { wait: 80 }); const y = t.$("[data-yes]"); if (y) await t.click(y, { wait: 400 }); }
 });
 
+// ================================================================== THE DAILIES (js/challenge.js, js/colordle.js)
+scenario("daily", "Today row: both tiles show their art and open their games", async t => {
+  await t.open("#shot=learn", { settle: 600 });
+  await t.waitFor("#dlPaintArt img", 8000, "the painting tile's thumbnail");
+  await t.waitFor(() => !t.$("#dlColorArt.dl-ph"), 8000, "the color tile's swatch");
+  await t.click("[data-dpaint]", { wait: 500 });
+  await t.waitFor("#dpFrame", 8000, "Today's painting after tapping its tile");
+});
+scenario("daily", "Name today's color: a typed guess draws a row, a second says which way", async t => {
+  await t.open("#/daily", { settle: 600 });
+  const inp = await t.waitFor(".dn-in", 10000, "the guess field");
+  const t0 = t.ev("dnTarget()"), names = t.ev("nearestCore(dnTarget().h, CORE_NAMES, 6).map(x => x.n)").filter(n => n !== t0.n);
+  for (const n of names.slice(0, 2)) {
+    inp.value = n; inp.dispatchEvent(new t.w.Event("input", { bubbles: true }));
+    t.$("#dnForm").dispatchEvent(new t.w.Event("submit", { bubbles: true, cancelable: true }));
+    await t.sleep(300);
+  }
+  t.expect(t.$$(".dn-row").length === 2, `expected 2 guess rows, got ${t.$$(".dn-row").length}`);
+  t.expect(/than/.test(t.text("#dnMsg")), `the newest guess has no direction sentence: "${t.text("#dnMsg")}"`);
+  t.expect(t.$$(".dn-row .dn-cell").length >= 6, "the rows have no axis cells");
+  inp.value = t0.n; inp.dispatchEvent(new t.w.Event("input", { bubbles: true }));
+  t.$("#dnForm").dispatchEvent(new t.w.Event("submit", { bubbles: true, cancelable: true }));
+  await t.waitFor(".dn-hero.named", 4000, "the named reveal after the right guess");
+  t.expect(t.$("[data-share]") && t.$("[data-page]"), "the finish has no share or page button");
+});
+scenario("daily", "Today's painting: a tap answers round 1, Next opens round 2's names", async t => {
+  await t.open("#/challenge", { settle: 600 });
+  const f = await t.waitFor("#dpFrame", 10000, "the painting");
+  await t.stable(f);
+  await t.waitFor(() => t.ev("S.dpNow && S.dpNow.p"), 6000, "the round state");
+  const r = f.getBoundingClientRect();
+  f.dispatchEvent(new t.w.MouseEvent("click", { bubbles: true, clientX: r.left + r.width * .5, clientY: r.top + r.height * .5 }));
+  await t.waitFor("[data-next]", 4000, "Next after the tap");
+  t.expect(t.$(".dp-ring"), "no ring where the tap landed");
+  await t.click("[data-next]", { wait: 400 });
+  await t.waitFor("#dpFoot [data-o]", 4000, "round 2's four names");
+  t.expect(t.$$("#dpFoot [data-o]").length === 4, "round 2 doesn't have four names");
+});
+
 // ================================================================== TRAIN
 scenario("train", "check-in card opens the drill", async t => {
   await t.open("#shot=gx:due", { settle: 600 });
