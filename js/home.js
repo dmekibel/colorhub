@@ -472,35 +472,8 @@ function hmHome() {
     const favBtn = $("#hmFav"); if (favBtn) favBtn.onclick = () => { if (typeof hmDismissHint === "function") hmDismissHint(); buzz(6); fvPickStart(el, ctrl); };   // js/favs.js: Pick favorites
   }
   { const study = $("[data-pr-study]"); if (study) study.onclick = () => { const mid = ctrl && ctrl.current(); prQuick({ seed: mid ? { n: mid.n, h: mid.h } : null, items: items.slice(0, 400).map(x => x.h), label: hmViewLabel(), source: mid ? "alike" : "these" }); }; }   // js/practice.js
-  // swipe up from the bottom edge of Home opens Learn straight away (DESIGN-SYSTEM §2 "the shortcut"): the
-  // honeycomb keeps a short drag (bubbles near the bottom stay tappable), but a real upward swipe wins.
-  let edge = null;
-  const EDGE = 120;
-  viewEl.addEventListener("pointerdown", e => {
-    edge = e.isPrimary && e.clientY > innerHeight - EDGE ? { x0: e.clientX, y0: e.clientY, on: false } : null;
-  }, true);
-  viewEl.addEventListener("pointermove", e => {
-    if (!edge) return;
-    const dx = e.clientX - edge.x0, dy = e.clientY - edge.y0;
-    if (!edge.on) {
-      if (dy < -14 && -dy > Math.abs(dx) * 1.5) {
-        edge.on = true;
-        const cv = viewEl.querySelector("canvas");   // end the honeycomb's own drag cleanly
-        const ours = edge; edge = null;   // (so edgeEnd below ignores this synthetic cancel)
-        if (cv) cv.dispatchEvent(new PointerEvent("pointercancel", { pointerId: e.pointerId, bubbles: true, clientX: e.clientX, clientY: e.clientY }));
-        edge = ours;
-      } else { if (Math.hypot(dx, dy) > 14) edge = null; return; }
-    }
-    e.stopPropagation();
-  }, true);
-  const edgeEnd = e => {
-    if (!edge) return; const was = edge.on; edge = null;
-    if (!was) return;
-    e.stopPropagation();
-    buzz(6);
-    hmEdgeOpenLearn();
-  };
-  viewEl.addEventListener("pointerup", edgeEnd, true); viewEl.addEventListener("pointercancel", edgeEnd, true);
+  // (the swipe-up-from-the-bottom shortcut to Learn is gone: David, 2026-10-08, a scroll near the bottom kept landing
+  // in Learn. The rooms button is the way in.)
   // L18 B3: the mirror gesture, a pull down from the top of Home opens search (View's magnifier stays the second way in)
   let l18Pull = null;
   viewEl.addEventListener("pointerdown", e => { l18Pull = e.isPrimary && e.clientY < viewEl.getBoundingClientRect().top + 100 ? { x0: e.clientX, y0: e.clientY, on: false } : null; }, true);
@@ -519,16 +492,6 @@ function hmHome() {
   }, true);
   const l18PullEnd = e => { if (!l18Pull) return; const was = l18Pull.on; l18Pull = null; if (!was) return; e.stopPropagation(); buzz(6); openSearch(); };
   viewEl.addEventListener("pointerup", l18PullEnd, true); viewEl.addEventListener("pointercancel", l18PullEnd, true);
-  // the signature motion needs a source shape; a swipe has none, so grow from a thin strip at the very bottom
-  // edge — content rising up from where the finger was, same spirit as a bubble growing from where it was tapped
-  function hmEdgeOpenLearn() {
-    const src = document.createElement("div");
-    Object.assign(src.style, { position: "fixed", left: "0", right: "0", bottom: "0", height: "2px" });
-    document.body.appendChild(src);
-    hmSnapFloor();
-    growFrom(src, () => go("learn"));
-    src.remove();
-  }
 
   window.HM_SEARCH = q => { openSearch(); searchInput.value = q; searchInput.dispatchEvent(new Event("input")); };   // #shot=home:find:<q>
   window.HM_CHOOSER = chooser;   // #shot=home:look hook (tools/shots.sh): drive the Show/Look sheet without a tap

@@ -1269,12 +1269,12 @@ function honeycomb(host, opts = {}) {
     ZMIN = zFloor(); Z = clamp(Z, ZMIN, ZMAX);
     if (lay.globe) {
       // P means [yaw, pitch] here, not a plane offset — see the pointer handlers above
-      if (how === "restore" && HONEY_PAN && HONEY_PAN.key === lay.key) { P = [HONEY_PAN.x, HONEY_PAN.y]; if (!opts.zoom && HONEY_PAN.z) Z = HONEY_PAN.z; }
+      if (how === "restore" && HONEY_PAN && HONEY_PAN.key === lay.key) { P = [HONEY_PAN.x, HONEY_PAN.y]; if (HONEY_PAN.z) Z = clamp(HONEY_PAN.z, ZMIN, ZMAX);   /* L18: the last zoom you left, always */ }
       else {
         const f = focus && (focus.h ? focus : BYNAME.get(String(focus.n || "").toLowerCase())), p = f && lay.pts.find(q => q.it.n === f.n);
         P = p ? [-p.lon, clamp(Math.asin(clamp(p.y, -1, 1)), -1.5, 1.5)] : [0, 0];
       }
-    } else if (how === "restore" && HONEY_PAN && HONEY_PAN.key === lay.key) { P = [HONEY_PAN.x, HONEY_PAN.y]; if (!opts.zoom && HONEY_PAN.z) Z = HONEY_PAN.z; }
+    } else if (how === "restore" && HONEY_PAN && HONEY_PAN.key === lay.key) { P = [HONEY_PAN.x, HONEY_PAN.y]; if (HONEY_PAN.z) Z = clamp(HONEY_PAN.z, ZMIN, ZMAX);   /* L18: the last zoom you left, always */ }
     else {
       const f = focus && (focus.h ? focus : BYNAME.get(String(focus.n || "").toLowerCase()));
       let p = f && lay.pts.find(q => q.it.n === f.n);
@@ -1389,7 +1389,7 @@ function honeycomb(host, opts = {}) {
       if (o.style && HONEY_STYLES[o.style]) styleId = o.style;
       setItems(o.items || (lay && lay.raw), o.focus || (center && center.o), o.soft ? "soft" : "");
     },
-    zoom: (z, animate = true) => animate ? zoomTo(z) : (Z = clamp(z, ZMIN, ZMAX), draw()),
+    zoom: (z, animate = true) => animate ? zoomTo(z) : (Z = clamp(z, ZMIN, ZMAX), draw(), remember(), opts.onZoom && opts.onZoom(Z)),
     // so a bottom sheet never covers the magnified middle: the lens center, the "center" bubble and the
     // vignette all recenter into whatever's still visible above it. Animated (~300ms; see loop()'s insetCur tween).
     setInset({ bottom } = {}) { insetBottom = Math.max(0, +bottom || 0); kick(); },
@@ -1426,6 +1426,7 @@ function honeycomb(host, opts = {}) {
       return it.o;
     },
     zoomValue: () => Z,
+    panValue: () => [P[0], P[1], Z],   // QA: the pan a return to Home must keep
     famNames(on) { famOn = !!on; draw(); },
     _morphCheck: items => l18MorphCheck(items),
     // QA (tools/smoke map group): the median seam between each readable bubble and its nearest neighbor, in px

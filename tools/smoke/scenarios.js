@@ -912,6 +912,24 @@ scenario("map", "panning keeps the resting seams, and fast pans and pinches at e
     }
   }
 });
+scenario("map", "the map keeps its pan and zoom when you open a color and come back", async t => {
+  const cv = await H.homeReady(t), r = cv.getBoundingClientRect();
+  const o = (x, y) => ({ bubbles: true, cancelable: true, clientX: r.left + x, clientY: r.top + y, pointerId: 11, pointerType: "touch", isPrimary: true, view: t.w });
+  cv.dispatchEvent(new t.w.PointerEvent("pointerdown", o(200, 520)));
+  for (let i = 1; i <= 12; i++) { cv.dispatchEvent(new t.w.PointerEvent("pointermove", o(200 - i * 9, 520 - i * 7))); await t.sleep(16); }
+  await t.sleep(200);
+  cv.dispatchEvent(new t.w.PointerEvent("pointerup", o(92, 436)));
+  await t.sleep(400);
+  t.ev("HM_CTRL.zoom(0.8, false)");
+  const before = t.ev("HM_CTRL.panValue()"), name = t.ev("HM_CTRL.current().n");
+  t.ev("hmOpenColor(ALL[3])");
+  await t.waitFor(".cp-page", 8000, "a color page");
+  await H.back(t);
+  await t.waitFor(() => t.$$(".screen.hm canvas").length === 1, 8000, "Home again");
+  const after = t.ev("HM_CTRL.panValue()");
+  t.expect(Math.hypot(after[0] - before[0], after[1] - before[1]) < .6 && Math.abs(after[2] - before[2]) < .02, `pan/zoom reset: ${before.map(v => v.toFixed(2))} -> ${after.map(v => v.toFixed(2))}`);
+  t.expect(t.ev("HM_CTRL.current().n") === name, `the middle changed from ${name} to ${t.ev("HM_CTRL.current().n")}`);
+});
 scenario("map", "Look: family names when zoomed out is off by default and toggles on", async t => {
   await H.homeReady(t);
   t.expect(!t.ev("S.hm.famNames"), "family names are on by default");
