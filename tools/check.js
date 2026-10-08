@@ -94,7 +94,9 @@ console.log(`ids gate: ${idsGate.N} paintings, ${idsGate.errors.length} files ou
 const liteErrors = [];
 {
   const dir = path.join(__dirname, "../data/articles"), lite = path.join(__dirname, "../data/analysis/articles-lite.json");
-  const want = fs.readdirSync(dir).filter(f => f.endsWith(".json") && f !== "index.json").filter(f => { try { const a = JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")); return a.lede && a.hex; } catch (e) { return false; } }).length;
+  let tracked = null; try { tracked = new Set(require("child_process").execSync("git ls-files data/articles", { cwd: path.join(__dirname, ".."), encoding: "utf8" }).split("\n").map(x => path.basename(x))); } catch (e) {}
+  // only committed articles count: the writing workflow drops in-progress files into data/articles/
+  const want = fs.readdirSync(dir).filter(f => f.endsWith(".json") && f !== "index.json" && (!tracked || tracked.has(f))).filter(f => { try { const a = JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")); return a.lede && a.hex; } catch (e) { return false; } }).length;
   if (!fs.existsSync(lite)) liteErrors.push("data/analysis/articles-lite.json is missing (python3 tools/build_articles_lite.py)");
   else { const got = JSON.parse(fs.readFileSync(lite, "utf8")).length; if (got !== want) liteErrors.push(`articles-lite.json has ${got} entries but ${want} articles have a lede and a hex (python3 tools/build_articles_lite.py)`); }
 }
