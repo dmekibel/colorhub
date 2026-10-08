@@ -1,0 +1,13 @@
+<!doctype html><meta charset="utf-8">
+<style>html,body{margin:0;background:#0E0D0B}iframe{display:block;width:375px;height:812px;border:0;margin:0}</style>
+<iframe id="f"></iframe>
+<script>
+const q = new URLSearchParams(location.search), f = document.getElementById("f");
+f.style.height = (q.get("h") || 812) + "px";
+f.src = "/index.html" + (q.get("u") ? "#" + q.get("u") : "");
+const steps = JSON.parse(q.get("steps") || "[]");
+f.onload = () => {
+  let t = 1800;
+  steps.forEach(([ms, code]) => { t += ms; setTimeout(() => { try { f.contentWindow.eval(code); } catch (e) { document.title = "ERR " + e.message; } }, t); });
+};
+</script>

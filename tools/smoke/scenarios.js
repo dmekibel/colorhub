@@ -559,3 +559,60 @@ scenario("favs", "taste profile: findings, the painter match and a palette from 
   await t.click("[data-pal]", { wait: 800 });
   t.expect(t.ev("(S.palettes||[]).length") === n + 1, "no palette saved from the top five");
 });
+
+// ================================================================== PAINTINGS (lane L26: color in paintings)
+const PT = {
+  num: t => H.num(t.text("[data-finding]")),
+  async count(t) { await t.waitFor(() => !/Measuring/.test(t.text("[data-finding]")) && t.text("[data-finding]"), 20000, "the finding line"); return PT.num(t); },
+  slide(t, k, v) { const r = t.$$(".pt-range")[k]; r.value = v; r.dispatchEvent(new t.w.Event("input", { bubbles: true })); },
+};
+scenario("paintings", "paintings-of: looser tolerance never finds fewer; a second color joins; chips drop it", async t => {
+  await t.open("#/paintings-of/8a6b52?t=3&m=1", { settle: 600 });
+  await t.waitFor(".pt-page .pt-range", 12000, "the two sliders");
+  const a = await PT.count(t);
+  t.expect(a > 0, "no paintings for a common brown at 3% / 1%");
+  PT.slide(t, 0, 8); await t.sleep(300);                      // How close: index 8 = 10%
+  const b = await PT.count(t);
+  t.expect(b >= a, `looser tolerance found fewer paintings (${a} then ${b})`);
+  PT.slide(t, 1, 9); await t.sleep(300);                      // How much: stricter
+  await t.waitFor(() => PT.num(t) !== b, 15000, "the count to change after the coverage slider");
+  const c = PT.num(t);
+  t.expect(c <= b, `stricter coverage found more paintings (${b} then ${c})`);
+  t.expect(t.$$(".pt-results .pin, .pt-results .gl-pin").length > 0, "no painting tiles under the count");
+  await t.click("[data-add]", { wait: 500 });
+  await t.waitFor(".sheet .pt-add-sw button", 6000, "the add-a-color sheet");
+  await t.click(".sheet .pt-add-sw button", { force: true, wait: 700 });
+  await t.waitFor(() => t.$$(".pt-chip").length === 2, 6000, "two color chips");
+  t.expect(t.$$("[data-mode]").length === 3, "no All / Any / As a palette switch with two colors");
+  await t.click('[data-mode="any"]', { wait: 600 });
+  await PT.count(t);
+  await t.click("[data-drop]", { force: true, wait: 600 });
+  await t.waitFor(() => t.$$(".pt-chip").length === 1, 4000, "the chip to drop");
+});
+scenario("paintings", "a pair page, the masters' chords, and a painting with its color pinned", async t => {
+  await t.open("#/pair/c2412d+4f6b3a", { settle: 600 });
+  await t.waitFor(".pt-finding", 12000, "the pair page");
+  await PT.count(t);
+  t.expect(t.$$(".pt-chip").length === 2, "the pair page doesn't show two colors");
+  await t.open("#/chords", { settle: 600 });
+  await t.waitFor(".chd-row", 12000, "chord rows");
+  t.expect(t.$$(".chd-row").length >= 10, "fewer than ten chords");
+  await t.click('[data-kind="avoid"]', { wait: 400 });
+  t.expect(t.$$(".chd-row").length >= 5, "no pairs painters keep apart");
+  await t.click('[data-kind="pairs"]', { wait: 300 });
+  await t.click(".chd-row", { force: true, wait: 700 });
+  await t.waitFor(".pt-page .pt-chip", 12000, "a pair opened from a chord");
+  await t.open("#/gallery/15146?c=0047ab&t=3", { settle: 800 });
+  await t.waitFor(() => /covers/.test(t.text(".pt-arrive")), 14000, "the pinned coverage line");
+  t.expect(t.$(".pt-arrive [data-t]"), "no tolerance switch on the arrival");
+});
+scenario("paintings", "a color page's In paintings section: presets re-run the query; Fine-tune opens the sliders", async t => {
+  await t.open("#/color/cobalt", { settle: 800 });
+  const sec = await t.waitFor("[data-glin]", 12000, "the In paintings section");
+  sec.scrollIntoView();
+  await t.waitFor("[data-pt-quick] [data-pre-tol]", 15000, "the tolerance presets");
+  await t.waitFor(() => t.$$("[data-pt-rail] .gl-pin, [data-pt-rail] .pin").length > 0 || /No painting/.test(t.text("[data-pt-lead]")), 20000, "the rail or an honest empty line");
+  await t.click('[data-pt-quick] [data-pre-tol="10"]', { force: true, wait: 600 });
+  await t.click("[data-pt-tune]", { force: true, wait: 400 });
+  t.expect(t.$$("[data-pt-tuner] .pt-range").length === 2, "Fine-tune doesn't open two sliders");
+});
