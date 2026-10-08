@@ -31,11 +31,16 @@ const isIOS = () => /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.pla
 // (David's iPhone 16 Pro Max screenshot, 2026-10-08). --vb is that missing strip (0 everywhere else); the shell
 // in css/menus2.css reaches through it.
 function vbFix() {
-  let gap = 0;
-  try { if (standalone() && isIOS()) { const full = innerHeight > innerWidth ? Math.max(screen.width, screen.height) : Math.min(screen.width, screen.height); gap = full - innerHeight; if (gap < 1 || gap > 80) gap = 0; } } catch (e) {}
-  gap = 0;   // disabled 2026-10-08: on David's phone it pushed Home's bottom edge into a black bar; needs a device test before re-enabling
+  let gap = 0, full = 0;
+  try { if (standalone() && isIOS()) { full = innerHeight > innerWidth ? Math.max(screen.width, screen.height) : Math.min(screen.width, screen.height); gap = full - innerHeight; if (gap < 1 || gap > 80) gap = 0; } } catch (e) {}
+  // (re-enabled 2026-10-08. It once "pushed Home into a black bar": .fixed screens are 100dvh with overflow:hidden, so
+  // the stage reached into the strip but was clipped there. The map screens now size to the whole screen themselves
+  // (--app-full, css/menus2.css), whichever of innerHeight or 100dvh is the short one. David's 16 Pro Max screenshot:
+  // the strip is the status bar, 62 px.)
   document.documentElement.style.setProperty("--vb", gap + "px");
+  if (full) document.documentElement.style.setProperty("--app-full", full + "px"); else document.documentElement.style.removeProperty("--app-full");
 }
+
 vbFix(); addEventListener("resize", vbFix); addEventListener("orientationchange", () => setTimeout(vbFix, 300));
 
 // ---------- color math (CIELAB, D65) ----------
@@ -267,10 +272,12 @@ function runMorph(root) {
   const m = PENDING_MORPH; PENDING_MORPH = null;
   // only right after the tap that asked for it, so a stale chip never flies into an unrelated screen
   const t = m && performance.now() - m.at < 700 && root.querySelector(MORPH_TARGET);
-  if (!t) return;
+  if (!t || !root.isConnected) return;   // the screen already left (a quick Back): nothing to fly into
   const r = t.getBoundingClientRect();
   if (!r.width || r.top > innerHeight) return;
   const fly = document.createElement(m.img ? "img" : "div");
+  // never outlives its flight: if onfinish doesn't come (the page was swapped mid-flight), it still goes
+  setTimeout(() => { fly.remove(); t.style.visibility = ""; }, 900);
   fly.className = "flyer";
   if (m.img) fly.src = m.img; else fly.style.background = m.bg;
   Object.assign(fly.style, { left: r.left + "px", top: r.top + "px", width: r.width + "px", height: r.height + "px", borderRadius: getComputedStyle(t).borderRadius });
@@ -331,7 +338,9 @@ function show(html, cls = "", tab = null) {
   const backNav = BACK_RENDER; BACK_RENDER = false;
   timers.forEach(clearTimeout); timers = []; onKey = null;
   cleanup.forEach(f => { try { f(); } catch (e) {} }); cleanup = [];
-  document.querySelectorAll(".scrim,.sheet,.toast,.fade-ghost,.rooms-stem,.rm-scrim").forEach(n => n.remove());
+  // (.flyer / .hc-morph: a bubble-to-page shape belongs to the screen that asked for it; one left mid-flight or
+  // orphaned by an error must never float over the next screen as a stuck, unlabeled circle)
+  document.querySelectorAll(".scrim,.sheet,.toast,.fade-ghost,.rooms-stem,.rm-scrim,.flyer,.hc-morph").forEach(n => n.remove());
   document.body.classList.remove("stem-open"); STEM_OPEN = false;
   // a new screen always scrolls: release any scroll lock a sheet or panel left behind (leaving a screen with a sheet
   // open used to keep the body pinned, so the next page couldn't scroll)
@@ -443,6 +452,8 @@ function closeStem(instant) {
   document.body.classList.remove("stem-open");
   if (STEM_KEY) { removeEventListener("keydown", STEM_KEY, true); STEM_KEY = null; }
   document.querySelectorAll("[data-rooms-corner]").forEach(b => { b.classList.remove("on"); b.innerHTML = ROOMS_GLYPH; b.setAttribute("aria-expanded", "false"); });
+  // Home's right-corner menu (js/home.js doMenu) rides the same stem: its button gets its own face back
+  document.querySelectorAll("[data-do-corner]").forEach(b => { b.classList.remove("on"); b.setAttribute("aria-expanded", "false"); if (b._html) b.innerHTML = b._html; });
   const gone = () => { if (s) s.remove(); if (sc) sc.remove(); };
   if (instant === true || (!s && !sc)) return gone();
   if (s) s.classList.remove("on");
@@ -627,11 +638,18 @@ function sheet(html) {
     on = false; sh.style.transition = "transform .3s var(--ease)"; sh.style.transform = "";
   };
   // a drag that starts while the sheet is scrolled (or still gliding to the top) is scrolling, never a close
-  const start = (x, y, target) => { if (target.closest("input,textarea,select,input[type=range]") || ((sh.scrollTop > 0 || performance.now() - lastScroll < 700) && !target.closest(".grab"))) return; grab = !!target.closest(".grab"); y0 = y; x0 = x; dy = 0; on = false; t0 = performance.now(); };
+  // a sheet with its own inner scroller ([data-sheet-scroll]) closes from there only at that scroller's top; a
+  // [data-sheet-grab] header closes with any quick drag, like the grab bar (js/home.js View sheet)
+  const start = (x, y, target) => {
+    const isc = target.closest("[data-sheet-scroll]"), g = !!target.closest(".grab,[data-sheet-grab]");
+    if (target.closest("input,textarea,select,input[type=range]") || (isc && isc.scrollTop > 0) || ((sh.scrollTop > 0 || performance.now() - lastScroll < 700) && !g)) return;
+    grab = g; y0 = y; x0 = x; dy = 0; on = false; t0 = performance.now();
+  };
+  sh.addEventListener("scroll", () => { lastScroll = performance.now(); }, { passive: true, capture: true });   // an inner scroller counts too
   const move = (x, y, e) => {
     if (y0 == null) return;
     const d = y - y0;
-    if (!on) { if (d > (grab ? 12 : 24) && d > Math.abs(x - x0) * 1.5 && sh.scrollTop <= 0) on = true; else if (d < -6 || Math.abs(x - x0) > 10) { y0 = null; return; } else return; }
+    if (!on) { if (d > (grab ? 12 : 24) && d > Math.abs(x - x0) * 1.5 && (grab || sh.scrollTop <= 0)) on = true; else if (d < -6 || Math.abs(x - x0) > 10) { y0 = null; return; } else return; }
     if (e && e.cancelable) e.preventDefault();
     dy = Math.max(0, d); sh.style.transition = "none"; sh.style.transform = `translateY(${dy}px)`;
   };
