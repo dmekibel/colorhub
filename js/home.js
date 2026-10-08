@@ -62,7 +62,7 @@ const HM_LOOKS = [["original", "Bubbles"], ["honeycomb", "Honeycomb"]];
 // ---- the Arrange sheet's pictures (David, 2026-10-08: "the previews need to be simple icon versions"): one flat,
 // iconic diagram per arrangement, same 64 px grid, same dot size, a fixed calm palette (never the live colors, which
 // read as noise at this size). Short one-line labels; the full title and its line show under the strip. ----------
-const HM_ARR_SHORT = { map: "Map", rings: "Rings", sunflower: "Sunflower", families: "Families", temp: "Warm–cool" };
+const HM_ARR_SHORT = { map: "Map", rings: "Rings", sunflower: "Spiral", families: "Families", temp: "Warm–cool" };
 const hmHue = (h, l = 60, c = 62) => `hsl(${Math.round(h)} ${c}% ${l}%)`;
 function hmArrIcon(id) {
   const dot = (x, y, r, f, extra = "") => `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r}" fill="${f}"${extra}/>`;

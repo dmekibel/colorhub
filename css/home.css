@@ -292,11 +292,11 @@
    beautiful and clean"). Flat diagrams (js/home.js hmArrIcon) on one tile size, one-line labels, the shared selected
    state (tint + ring, css/menus2.css component tokens). The Look is a three-way picker in the same family; the
    sliders are quiet tracks with a white thumb and the filled part in ink. ---------- */
-.hm-arr{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;padding:4px 0 6px;overflow:visible}
+.hm-arr{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(70px,1fr);gap:8px;padding:4px 16px 6px;margin:0 -16px;overflow-x:auto;overflow-y:hidden;scroll-padding:0 16px}
 .hm-arr-b{width:auto;min-width:0;gap:8px;min-height:var(--tap)}
 .hm-arr-pic{width:100%;height:auto;aspect-ratio:1;border-radius:var(--r-card);background:var(--s2);box-shadow:none;display:grid;place-items:center;
   transition:box-shadow var(--dur-1),background var(--dur-1)}
-.hm-arr-pic svg{width:56px;height:56px;display:block}
+.hm-arr-pic svg{width:78%;height:78%;display:block}
 .hm-arr-b b{font:400 var(--type-cap)/1.15 var(--sans);min-height:0;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;-webkit-line-clamp:unset}
 .hm-arr-b.on .hm-arr-pic{background:var(--sel-fill);box-shadow:var(--sel-ring)}
 .hm-arr-b.on b{color:var(--sel-ink);font-weight:500}
