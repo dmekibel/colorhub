@@ -325,7 +325,7 @@ function rcPaintersHTML(name) {
   if (!rows || !rows.length) return "";
   return `<section class="rc-sec rc-painters"><h3>Painters who use it</h3>
     ${rows.slice(0, 5).map(r => `<div class="kin rc-plain"><i style="--c:#8a8a82"></i><b>${esc(r.a)}</b><span>${r.l.toFixed(1)}× more than his or her peers, from ${r.n} painting${r.n === 1 ? "" : "s"} here</span></div>`).join("")}
-    <p class="fine">Lift vs. the same decade and country (or country, or the whole archive, when that group is too small), as photographed, from the gallery's 23,531 paintings (n per painter above). Artist pages aren't built yet, so names aren't links yet.</p>
+    <p class="fine">Lift vs. the same decade and country (or country, or the whole archive, when that group is too small), as photographed, from the gallery's 23,781 paintings (n per painter above). Artist pages aren't built yet, so names aren't links yet.</p>
   </section>`;
 }
 function rcPaintersSection(name, hex) {
@@ -379,7 +379,7 @@ function rcWhenWhereHTML(name) {
   return `<section class="rc-sec rc-whenwhere"><h3>When and where</h3>
     ${decades.length > 1 ? rcSparkline(decades, peakDecade.key) : ""}
     <p>${sentences.join(" ")}</p>
-    <p class="fine">From the gallery's 23,531 paintings, as photographed; country is often the painter's nationality, and movement data covers only part of the corpus.</p>
+    <p class="fine">From the gallery's 23,781 paintings, as photographed; country is often the painter's nationality, and movement data covers only part of the corpus.</p>
   </section>`;
 }
 function rcWhenWhereSection(name, hex) {
@@ -416,7 +416,7 @@ function rcPairedHTML(name) {
     return `<button class="kin rc-harm" data-rc-open data-h="${e.h}" data-n="${esc(e.n)}"><i style="--c:${e.h}"></i><b>${esc(e.n)}</b><span>${r.l.toFixed(1)}× more than chance, ${r.n} paintings</span></button>`;
   }).filter(Boolean).join("");
   if (!chips) return "";
-  return `<section class="rc-sec rc-paired"><h3>Often paired with</h3>${chips}<p class="fine">How much more often two colors share a painting's palette than chance would predict, as photographed, from the gallery's 23,531 paintings (n per pair above).</p></section>`;
+  return `<section class="rc-sec rc-paired"><h3>Often paired with</h3>${chips}<p class="fine">How much more often two colors share a painting's palette than chance would predict, as photographed, from the gallery's 23,781 paintings (n per pair above).</p></section>`;
 }
 function rcPairedSection(name, hex) {
   const id = "rc-pair-" + Math.random().toString(36).slice(2, 8);
@@ -437,7 +437,7 @@ function rcPairedSection(name, hex) {
 // ======================================================================
 // ======================================================================
 // The history band -- the closest color any painting in the archive actually reaches (data/analysis/reach.json,
-// tools/archive_reach.py, from all 564,744 pool colors of the 23,531 paintings; a name outside the ~1,000
+// tools/archive_reach.py, from all 564,744 pool colors of the 23,781 paintings; a name outside the ~1,000
 // core names is measured live against each painting's six main colors instead). When nothing comes close the
 // headline says so: that is the honest fix for an empty page, and the caveat is built in (aged, varnished
 // paintings, photographed, 24 colors each).
@@ -479,7 +479,7 @@ function rcReachSection(name, hex) {
     const pin = () => (typeof GAL !== "undefined" && GAL) ? glPinHTML(pi, { badge: pctMatch(d) }) : "";
     const caveat = `<p class="fine">As photographed: aged, varnished paintings, each cut to a few dozen colors, so a very small vivid touch can be lost. This says what our archive shows, not what paint can do.</p>`;
     if (none) {
-      box.innerHTML = `<section class="rc-sec rc-reach rc-reach-none"><p class="rc-reach-head">No painting in our 23,531 reaches this color. It's a modern color.</p>
+      box.innerHTML = `<section class="rc-sec rc-reach rc-reach-none"><p class="rc-reach-head">No painting in our 23,781 reaches this color. It's a modern color.</p>
         <div class="rc-reach-pair"><div style="--c:${hex}" data-ink="${ink(hex)}"><b>This color</b></div><button style="--c:${ph}" data-ink="${ink(ph)}" data-rc-gi="${pi}"><b>The closest any painting gets</b><small>${pctDiff(d)} · tap to see the painting</small></button></div>${caveat}</section>`;
     } else {
       const few = n <= 3;
