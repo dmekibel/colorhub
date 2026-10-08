@@ -363,6 +363,7 @@ function missCard(k, t) {
       <span class="gy-miss-sw good" style="--c:${pr.correct}"><b>${k === "memory" ? "It was" : "Odd one"}</b></span>
     </div>
     <div class="gy-miss-meta"><b class="mono">${pctFmt(dist)}</b> <small>${unitWord(sk.unit)}</small>${why ? `<span>${esc(why)}</span>` : ""}</div>
+    ${typeof eyeNamesLine === "function" && k === "hue" ? `<p class="gy-miss-names">${eyeNamesLine(pr.picked, pr.correct, { found: false, what: k === "memory" ? "the color you saw" : "the odd one" })}</p>` : ""}
   </div>`;
 }
 // A short set built from exactly the missed pairs, at the same difference each was drawn at.
@@ -528,6 +529,8 @@ function runDrill(k, opts = {}) {
   if (!S.scr && !scrShot()) return screenCheck(() => runDrill(k, opts));
   if (k === "after") return afterimage();
   if (k && k.startsWith("mix:")) return runMixed(k.slice(4));
+  // Odd one out, Color memory and Sort the strip now live in js/games (design/IDEAS-10X/train-games.md §5)
+  if (!Object.keys(opts).length && !scrShot() && typeof ooRetired === "function" && ["hue", "memory", "order"].includes(k)) return ooRetired(k);
   const sk = SKILLS[k];
   if (!sk) return gymHome();
   const g = gyState(), st = stOf(k), day = gyDay();
@@ -729,7 +732,7 @@ const DRILLS = {
     ctx.stage.innerHTML = `<div class="grid" style="--n:${n}">${Array.from({ length: cells }, (_, i) =>
       `<button class="tile" data-i="${i}" style="--c:${i === at ? oddHex : baseHex}" aria-label="Tile ${i + 1}"></button>`).join("")}</div>`;
     tilePick(ctx, () => ctx.stage.querySelector(`[data-i="${at}"]`).classList.add("ring"), at,
-      { ...bandsOf(baseHex), rp: { a: baseHex, b: oddHex } }, `The ringed one was off by <b>${pctFmt(de2000(baseHex, oddHex))}</b>`);
+      { ...bandsOf(baseHex), rp: { a: baseHex, b: oddHex } }, typeof eyeNamesLine === "function" ? eyeNamesLine(baseHex, oddHex, { found: false }) : `The ringed one was off by <b>${pctFmt(de2000(baseHex, oddHex))}</b>`);   // js/eye-names.js
   },
 
   // Which is lighter? Two hues, different lightness (L*). Dials: the hues move apart, then their strength differs.

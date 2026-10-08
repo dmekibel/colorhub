@@ -137,7 +137,7 @@ function ooAsk(ui, r, o = {}) {
   OO_LAST = r;
   return new Promise(resolve => {
     const { q, stage, foot } = ui, v = r.v, tap = ["one", "pair", "group", "twins", "which"].includes(v);
-    q.textContent = r.b === "painting" ? "Which patch was recolored?" : o.flash ? "Remember the board" : OO_Q[v] || OO_Q.one;
+    q.textContent = o.teach ? o.teach : r.b === "painting" ? "Which patch was recolored?" : o.flash ? "Remember the board" : OO_Q[v] || OO_Q.one;
     stage.innerHTML = ooBoardHTML(r, o);
     const board = stage.querySelector(".oo-board"), tiles = [...board.querySelectorAll(".oo-t")];
     let t0 = performance.now(), done = false, hint = false, sel = [];
@@ -167,7 +167,7 @@ function ooAsk(ui, r, o = {}) {
     const askDir = (el) => {
       q.textContent = "How is it different?";
       el.classList.add("ring");
-      const words = OO_DIRS.map(p => `<div class="oo-dirrow">${p.map(w => `<button class="oo-k oo-w" data-w="${w}">${w.charAt(0).toUpperCase() + w.slice(1)}</button>`).join("")}</div>`).join("");
+      const words = ooDirChoices(r.base).map(p => `<div class="oo-dirrow">${p.map(w => `<button class="oo-k oo-w" data-w="${w}">${w.charAt(0).toUpperCase() + w.slice(1)}</button>`).join("")}</div>`).join("");
       foot.innerHTML = `<div class="oo-dirs">${words}</div>`;
       foot.querySelectorAll("[data-w]").forEach(b => b.onclick = () => { b.classList.add("on"); const ok = b.dataset.w === r.dir; finish(ok, { el, picked: ok ? r.odd : null, said: b.dataset.w }); });
     };
@@ -195,6 +195,8 @@ function ooAsk(ui, r, o = {}) {
       const keep = new Set(r.ans || []), others = tiles.map((_, i) => i).filter(i => !keep.has(i));
       ooShuf(others, Math.random).slice(0, Math.floor(others.length / 2)).forEach(i => { tiles[i].classList.add("off"); tiles[i].disabled = true; });
     };
+    // teach by doing: a new kind of round nudges the answer after a quiet wait (no wall of text)
+    if (o.nudge && v !== "count" && !r.none) later(() => { if (!done) (r.ans || []).slice(0, v === "group" ? 1 : 2).forEach(i => tiles[i] && tiles[i].classList.add("nudge")); }, o.nudge + (o.flash ? (o.flashMs || 1000) : 0));
     if (o.flash) {
       tiles.forEach(t => t.disabled = true);
       later(() => { board.classList.add("oo-hide"); q.textContent = v === "count" ? "How many were different?" : "Where was the different one?"; tiles.forEach(t => t.disabled = false); t0 = performance.now(); }, o.flashMs || 1000);
@@ -259,76 +261,102 @@ function ooPaintRound(sp) {
 }
 
 // ======================================================================
-// The set runner: rounds one after another, a feedback line, Next on a miss, a combo, hearts in survival.
-// cfg: { label ("Lv 7"), total, gen(i, state) -> { r, o, kind? } | null, lives?, endOnMiss?, combo?, onEnd(stats) }
+// The set runner: rounds one after another. Each answer lands in three beats (anticipation: the tile presses;
+// impact: ring, ripple and a haptic; settle: one line that names both colors). A right answer moves on by
+// itself; a miss stays until Next, with the two colors side by side and the direction words, so it teaches.
+// cfg: { label, total, gen(i, run) -> { r, o, kind? } | null, lives?, endOnMiss?, max?, combo?, onEnd(stats),
+//        onQuit?, cls?, box? (render inside this element, for a step or another lane's screen, instead of a screen) }
 // ======================================================================
+const OO_TIERS = ["intro", "easy", "medium", "hard", "harder", "boss"];
+// a miss eases the next round; three right in a row lift it one step (ROADMAP §4: streak-sensitive)
+function ooAdjTier(tier, run) {
+  let i = OO_TIERS.indexOf(tier);
+  if (run && run.prev && !run.prev.res.ok) i = Math.min(i, 2);
+  else if (run && run.combo >= 3 && i > 0 && i < 5) i++;
+  return OO_TIERS[i];
+}
+const ooThNow = () => { const m = ooS().model, o = {}; Object.keys(OO_JUDG).forEach(j => { if (m.j[j] && m.j[j].n) o[j] = Math.exp(m.j[j].r); }); return o; };
 function ooRun(cfg) {
-  const st = { i: 0, hits: 0, res: [], combo: 0, maxCombo: 0, pts: 0, lives: cfg.lives || 0, hint: false, prev: null };
-  const segs = cfg.lives ? `<div class="oo-hearts">${Array.from({ length: cfg.lives }, () => `<i></i>`).join("")}</div>`
+  eyeNamesReady();
+  const st = { i: 0, hits: 0, res: [], combo: 0, maxCombo: 0, pts: 0, lives: cfg.lives || 0, hint: false, prev: null, th0: ooThNow() };
+  const segs = cfg.lives ? `<div class="oo-hearts" aria-label="${cfg.lives} lives">${Array.from({ length: cfg.lives }, () => `<i></i>`).join("")}</div>`
     : `<div class="segs">${Array.from({ length: cfg.total }, () => `<i style="--c:var(--ink)"></i>`).join("")}</div>`;
-  const el = show(`
-    <header class="deck-top"><button class="icon-btn" data-close aria-label="Close">${ICON.x}</button>${segs}<span class="left mono oo-lvl">${esc(cfg.label || "")}</span></header>
+  const html = `
+    <header class="deck-top">${cfg.box ? "" : `<button class="icon-btn" data-close aria-label="Close">${ICON.x}</button>`}${segs}<span class="left mono oo-lvl">${esc(cfg.label || "")}</span></header>
     <div class="drill-head oo-head"><h2 id="ooq"></h2><p class="oo-combo" id="oocombo"></p></div>
     <div class="drill-stage oo-stage" id="oostage"></div>
-    <div class="drill-foot oo-foot" id="oofoot"></div>`, "fixed drill station oo-play" + (cfg.cls ? " " + cfg.cls : ""));
+    <div class="drill-foot oo-foot" id="oofoot"></div>`;
+  let el;
+  if (cfg.box) { cfg.box.innerHTML = `<div class="oo-inbox station">${html}</div>`; el = cfg.box; }
+  else el = show(html, "fixed drill station oo-play" + (cfg.cls ? " " + cfg.cls : ""));
   const ui = { q: el.querySelector("#ooq"), stage: el.querySelector("#oostage"), foot: el.querySelector("#oofoot"), el };
   const comboEl = el.querySelector("#oocombo");
   const quit = () => cfg.onQuit ? cfg.onQuit() : ooMap();
-  el.querySelector("[data-close]").onclick = quit;
-  onKey = e => { if (e.key === "Escape") quit(); };
+  const cb = el.querySelector("[data-close]"); if (cb) cb.onclick = quit;
+  if (!cfg.box) onKey = e => { if (e.key === "Escape") quit(); };
   const segEls = el.querySelectorAll(".segs i"), hearts = el.querySelectorAll(".oo-hearts i");
-  const showCombo = () => { comboEl.innerHTML = cfg.combo && st.combo >= 2 ? `<span class="mono">×${Math.min(st.combo, 5)}</span><i style="--w:${Math.min(st.combo, 5) / 5 * 100}%"></i><span class="mono">${st.pts.toLocaleString()}</span>` : ""; };
+  const showCombo = (moment) => {
+    if (moment) { comboEl.innerHTML = `<em class="oo-streak">${moment}</em>`; return; }
+    comboEl.innerHTML = cfg.combo && st.combo >= 2 ? `<span class="mono">×${Math.min(st.combo, 5)}</span><i style="--w:${Math.min(st.combo, 5) / 5 * 100}%"></i><span class="mono">${st.pts.toLocaleString()}</span>` : "";
+  };
   async function round() {
     const it = cfg.gen(st.i, st);
     if (!it) return end();
-    ui.foot.innerHTML = ""; showCombo();
+    ui.foot.innerHTML = ""; showCombo(it.note || null);
     const kind = it.kind || "board";
     const res = await (kind === "board" ? ooAsk(ui, it.r, it.o || {}) : OO_MIXPLAY[kind](ui, it));
     if (!ui.stage.isConnected) return;
     const r = it.r || {};
     if (it.record !== false && kind === "board") ooRecord(r, res);
-    if (it.record !== false && kind !== "board" && it.judg && res.act > 0 && OO_JUDG[it.judg]) ooUpdate(ooS().model, it.judg, ooFam(res.right || "#808080"), res.act / (it.vf || 1), !!res.ok, it.g || 0);
+    if (it.record !== false && kind !== "board" && it.judg && res.act > 0 && !res.noModel && OO_JUDG[it.judg]) ooUpdate(ooS().model, it.judg, ooFam(res.right || "#808080"), res.act / (it.vf || 1), !!res.ok, it.g || 0);
     if (!res.ok && res.picked && res.right) ooLogMiss(res.right, res.picked, { game: kind === "board" ? "odd:" + r.v : kind, judg: r.judg || it.judg, d: res.act });
     if (res.hint) st.hint = true;
-    // points: right earns 100 plus up to 100 for speed, times the combo; slow and right never costs (ROADMAP §4)
-    if (res.ok) { st.hits++; st.combo = res.ms < 5000 ? st.combo + 1 : 1; st.maxCombo = Math.max(st.maxCombo, st.combo); st.pts += Math.round((100 + clamp((6000 - res.ms) / 50, 0, 100)) * Math.min(Math.max(st.combo, 1), 5)); }
-    else { st.combo = 0; if (cfg.lives) { st.lives--; if (hearts[st.lives]) hearts[st.lives].classList.add("gone"); } }
+    // points: 100 for right, up to 100 more for speed, times the streak (to ×5); slow and right never costs
+    let moment = null;
+    if (res.ok) {
+      st.hits++; st.combo = res.ms < 5000 ? st.combo + 1 : 1; st.maxCombo = Math.max(st.maxCombo, st.combo);
+      st.pts += Math.round((100 + clamp((6000 - res.ms) / 50, 0, 100)) * Math.min(Math.max(st.combo, 1), 5));
+      if (cfg.combo && [3, 5, 8, 12].includes(st.combo)) { moment = `${st.combo} in a row`; buzz([8, 50, 8]); }
+    } else { st.combo = 0; if (cfg.lives) { st.lives--; if (hearts[st.lives]) hearts[st.lives].classList.add("gone"); } }
     st.res.push({ ...res, base: r.base || res.base, odd: r.odd || res.right, v: r.v || kind, b: r.b, none: r.none, count: r.count, dir: res.dir || r.dir, d: r.d });
     if (segEls[st.i]) { segEls[st.i].classList.add("on"); segEls[st.i].style.setProperty("--c", res.ok ? "var(--good)" : "var(--bad)"); }
     st.prev = { r, res };
     st.i++;
-    showCombo();
+    showCombo(moment);
     save();
-    const line = ooLine(r, res, kind, it);
+    const fb = kind === "board" ? ooLine(r, res) : { html: res.line || "", cmp: res.cmp || null };
     const last = (cfg.endOnMiss && !res.ok) || (cfg.lives && st.lives <= 0) || (!cfg.lives && !cfg.endOnMiss && st.i >= cfg.total) || st.i >= (cfg.max || 99);
+    const cmp = fb.cmp ? `<div class="oo-cmp">${fb.cmp.map(([h, w]) => `<span><i style="--c:${h}"></i><em>${esc(w)}</em></span>`).join("")}</div>` : "";
     if (res.ok && !last && !it.hold) {
-      ui.foot.innerHTML = `<p class="oo-fb ok">${line}</p>`;
-      return later(round, 900);
+      ui.foot.innerHTML = `<p class="oo-fb ok oo-in">${fb.html}</p>`;
+      return later(round, fb.html.length > 120 ? 1900 : 1300);
     }
-    ui.foot.innerHTML = `<div class="oo-rev"><p class="oo-fb${res.ok ? " ok" : ""}">${line}</p><button class="btn" data-next>${last ? "See results" : "Next"} ${ICON.arrow}</button></div>`;
+    ui.foot.innerHTML = `<div class="oo-rev oo-in">${res.ok ? "" : cmp}<p class="oo-fb${res.ok ? " ok" : ""}">${fb.html}</p><button class="btn" data-next>${last ? (cfg.box ? "Done" : "See how you did") : "Next"} ${ICON.arrow}</button></div>`;
     ui.foot.querySelector("[data-next]").onclick = () => last ? end() : round();
   }
   function end() {
-    ooS().sets++; ooSnap(); save();
+    const o = ooS(); o.sets++; o.last = today(); ooSnap(); save();
     const rights = st.res.filter(x => x.ok).map(x => x.ms).sort((a, b) => a - b);
     const med = rights.length ? rights[Math.floor(rights.length / 2)] : null;
-    const seen = st.res.filter(x => x.ok && x.act > 0).map(x => x.act);
-    cfg.onEnd({ ...st, med, min: seen.length ? Math.min(...seen) : null, total: st.res.length });
+    const seen = st.res.filter(x => x.ok && x.act > 0 && x.base && x.odd);
+    const best = seen.length ? seen.reduce((a, x) => x.act < a.act ? x : a) : null;
+    cfg.onEnd({ ...st, med, min: best ? best.act : null, minPair: best ? [best.base, best.odd] : null, total: st.res.length, th1: ooThNow() });
   }
   round();
 }
-// the one feedback line after an answer
-function ooLine(r, res, kind, it) {
-  if (kind !== "board" && res.line) return res.line;
-  const amt = res.act > 0 ? `<b class="mono">${pctFmt(res.act)}</b> different` : "";
-  const dir = res.dir || r.dir, how = dir ? `, ${dir}` : "";
-  if (r.none) return res.ok ? (r.v === "count" ? "Right: none. Every tile was the same color." : "Right: none. Every tile was the same color; the ground pushed some apart.")
-    : r.v === "count" ? "None were different: every tile was the same color." : "None was different: every tile was the same color. The ground pushed some of them apart.";
-  if (r.v === "count") return res.ok ? `Right: ${r.count}. ${amt}${how}.` : `There ${r.count === 1 ? "was" : "were"} ${r.count}, each ${amt}.`;
-  if (r.v === "which" && res.said && !res.ok) return `You found it; it was ${dir}. ${amt}.`;
-  if (r.v === "which" && res.ok) return `Right: ${dir}. ${amt}.`;
-  if (r.b === "painting" && r.paint) return `${res.ok ? "Right." : "The ringed patch."} ${amt}${how}. <span class="oo-src">${esc(r.paint.title)}, ${esc(r.paint.artist)}</span>`;
-  return res.ok ? `Right. ${amt}${how}.` : `The ringed ${r.v === "twins" ? "pair were the twins; the nearest others were" : "one was"} ${amt}${how}.`;
+// the settle line after an answer: both colors named (js/eye-names.js), the size, the direction words; on a miss,
+// the two colors side by side (cmp). Returns { html, cmp }.
+const ooNames = (a, b, found) => typeof eyeNamesLine === "function" ? eyeNamesLine(a, b, { found }) : `${found ? "Right" : "The odd one"}: <b class="mono">${pctFmt(de2000(a, b))}</b> different, ${ooDirWord(a, b)}.`;
+function ooLine(r, res) {
+  const base = r.base, odd = r.odd, pair = base && odd && base !== odd;
+  if (r.none) return { html: res.ok ? (r.v === "count" ? "Right: none. Every tile was the same color." : "Right: none. Every tile was the same color; the two grounds pushed them apart.")
+    : r.v === "count" ? "None were different: every tile was the same color." : "None was different: every tile was the same color. The two grounds pushed some of them apart, which is the illusion this round tests." };
+  if (r.v === "count") return { html: res.ok ? `Right: ${r.count}. ${pair ? ooNames(base, odd, true) : ""}` : `There ${r.count === 1 ? "was" : "were"} ${r.count}. ${pair ? ooNames(base, odd, false) : ""}`, cmp: !res.ok && pair ? [[base, "The rest"], [odd, "Different"]] : null };
+  if (r.v === "which" && res.said) return { html: res.ok ? `Right: ${esc(res.said)}. ${ooNames(base, odd, true)}` : `It was ${esc(r.dir)}, not ${esc(res.said)}. ${ooNames(base, odd, false)}`, cmp: res.ok ? null : [[base, "The rest"], [odd, `The odd one: ${r.dir}`]] };
+  if (r.v === "twins") return { html: res.ok ? "Right: the twins. Every other tile differs from them by at least " + `<b class="mono">${pctFmt(r.act)}</b>.` : `The ringed pair were the identical twins; the nearest other tile was <b class="mono">${pctFmt(r.act)}</b> away.` };
+  const src = r.b === "painting" && r.paint ? ` <span class="oo-src">${esc(r.paint.title)}, ${esc(r.paint.artist)}</span>` : "";
+  if (!pair) return { html: res.ok ? "Right." : "The ringed one was different." };
+  return { html: ooNames(base, odd, !!res.ok) + src, cmp: res.ok ? null : [[base, r.b === "painting" ? "The patch before" : "The rest"], [odd, r.b === "painting" ? "After" : "The odd one"]] };
 }
 
 // ======================================================================
@@ -339,7 +367,9 @@ function ooPlayLevel(i) {
   const L = OO_LEVELS[i];
   if (!L) return ooMap();
   const st = ooS(), tw = L.tw, survival = tw === "survival", grow = tw === "grow";
+  const first = st.sets === 0 && i === 0, warm = !!st.last && st.last !== today();
   let stair = null, n = L.n, chainBase = null;
+  const tierFor = (k, novel, run) => warm && k === 0 ? "easy" : ooAdjTier(ooTierAt(k, novel), run);
   const gen = (k, run) => {
     if (survival || grow) {
       // the board grows; in survival the difference also follows a 2-down / 1-up staircase
@@ -348,26 +378,28 @@ function ooPlayLevel(i) {
       n = Math.min(7, 3 + (survival ? Math.floor(run.hits / 2) : run.hits));
       const sp = ooSpec(L, k, { n, tw: null, d: survival ? stair.d : null, tier: grow ? "medium" : null });
       const r = ooRound(sp); Object.assign(r, { tw, kindKey: ooKindKey(L.v, L.b, tw), fam: sp.fam || r.fam });
-      return { r, o: { hint: true } };
+      return { r, o: { hint: true }, note: k > 0 && n > 3 && (survival ? run.hits % 2 === 0 : true) && run.prev && run.prev.res.ok ? `${n} × ${n}` : null };
     }
     if (L.v === "mixed") {
-      const rnd = Math.random, [v, b, nn, t] = ooPick(OO_KINDS, rnd), sp = ooSpec(L, k, { v, b, n: nn, tw: t || null });
-      const r = ooRound(sp); Object.assign(r, { tw: t, kindKey: sp.kind });
-      if (t === "flash") r.judg = "memory";
-      return { r, o: { flash: t === "flash", none: b === "busy", hint: true } };
+      const [v, b, nn, t] = ooPick(OO_KINDS, Math.random), sp0 = ooSpec(L, k, { v, b, n: nn, tw: t || null }), sp = { ...sp0, tier: tierFor(k, sp0.novel, run) };
+      sp.d = ooSpec(L, k, { v, b, n: nn, tw: t || null, tier: sp.tier }).d;
+      const r = ooRound({ ...sp, twist: t }); Object.assign(r, { tw: t, kindKey: sp.kind });
+      return { r, o: { flash: t === "flash", none: b === "busy", hint: true, nudge: sp.novel && k === 0 ? 6000 : 0 } };
     }
-    const sp = ooSpec(L, k, { base: tw === "chain" ? chainBase : null });
+    const novel = (st.seen[ooKindKey(L.v, L.b, tw)] || 0) < 2;
+    const sp = ooSpec(L, k, { base: tw === "chain" ? chainBase : null, tier: tierFor(k, novel, run) });
     let r;
     if (L.b === "painting") { r = ooPaintRound(sp); r.v = L.v; }
-    else { r = ooRound({ ...sp, twist: tw }); }
+    else r = ooRound({ ...sp, twist: tw });
     Object.assign(r, { tw, kindKey: sp.kind, fam: sp.fam || r.fam, rnd: sp.rnd });
     if (tw === "chain") chainBase = r.odd && !r.none ? r.odd : chainBase;
-    return { r, o: { flash: tw === "flash", breathe: tw === "breathe", none: L.b === "busy", hint: true } };
+    return { r, o: { flash: tw === "flash", breathe: tw === "breathe", none: L.b === "busy", hint: !(first && k < 3),
+      teach: first && k === 0 ? "One tile is a little different. Tap it." : null, nudge: first && k < 2 ? 3500 : novel && k === 0 ? 6000 : 0 },
+      note: warm && k === 0 ? "Warm-up" : tw === "chain" && k > 0 ? "The odd color is the new base" : null };
   };
   ooRun({
-    label: `Lv ${i + 1}`, total: survival ? 0 : grow ? 8 : OO_ROUNDS, max: survival ? 30 : grow ? 8 : OO_ROUNDS, lives: survival ? 3 : 0, endOnMiss: grow,
-    combo: i >= 5, gen,
-    onEnd: s => ooLevelDone(i, s),
+    label: `Level ${i + 1}`, total: survival ? 0 : grow ? 8 : OO_ROUNDS, max: survival ? 30 : grow ? 8 : OO_ROUNDS, lives: survival ? 3 : 0, endOnMiss: grow,
+    combo: i >= 5, gen, onEnd: s => ooLevelDone(i, s),
   });
 }
 function ooLevelDone(i, s) {
@@ -376,44 +408,52 @@ function ooLevelDone(i, s) {
   const fast = finish && s.med != null && s.med <= (tw === "flash" ? 3000 : OO_FAST_MS), nohint = finish && !s.hint;
   const old = ooStars(i), stars = [finish || old[0], fast || old[1], nohint || old[2]].map(x => x ? 1 : 0);
   st.stars[i] = stars;
-  const pb = s.pts > (st.best[i] || 0); if (pb) st.best[i] = s.pts;
+  const pb = s.pts > (st.best[i] || 0) && s.pts > 0; if (pb) st.best[i] = s.pts;
   const unlocked = finish && st.lv === i && i < OO_LEVELS.length - 1;
-  if (finish && st.lv <= i) st.lv = Math.min(OO_LEVELS.length - 1, i + 1);
+  if (finish && st.lv <= i) { st.lv = Math.min(OO_LEVELS.length - 1, i + 1); st.fresh = st.lv; }
+  const mastered = stars.every(Boolean) && !old.every(Boolean);
   save();
-  ooResults({ title: `Level ${i + 1} · ${L.name}`, s, finish, stars, got: [finish, fast, nohint], pb, unlocked,
+  ooResults({ title: `Level ${i + 1} · ${L.name}`, s, finish, stars, got: [finish, fast, nohint], pb, unlocked, mastered, world: L.w,
     next: finish && i < OO_LEVELS.length - 1 ? i + 1 : null, again: () => ooPlayLevel(i), mixNew: unlocked && i === OO_MIX_AT - 1,
     score: tw === "survival" ? `${s.total} rounds survived` : tw === "grow" ? `${s.hits} right · reached ${Math.min(7, 3 + s.hits)} × ${Math.min(7, 3 + s.hits)}` : `${s.hits} of ${s.total} right` });
 }
-// ---------- results ----------
+// ---------- results: every end of a set is designed (cleared, mastered, a best, not yet) ----------
 function ooResults(o) {
   const s = o.s, misses = s.res.filter(x => !x.ok && x.base && x.odd && x.base !== x.odd && !x.none).slice(0, 8);
-  const starRow = ["Finished", "Quick", "No hints"].map((w, k) => `<span class="oo-star${o.stars[k] ? " on" : ""}${o.got[k] && o.stars[k] ? " new" : ""}"><i></i>${w}</span>`).join("");
+  const starRow = ["Finished", "Quick", "No hints"].map((w, k) => `<span class="oo-star${o.stars[k] ? " on" : ""}${o.got[k] && o.stars[k] ? " new" : ""}" style="--k:${k}"><i></i>${w}</span>`).join("");
   const nx = o.next != null ? OO_LEVELS[o.next] : null;
-  const head = o.finish ? (o.unlocked ? "Level <em>cleared.</em>" : "Well <em>seen.</em>") : "Not <em>yet.</em>";
+  const head = o.mastered ? "Level <em>mastered.</em>" : o.unlocked ? "Level <em>cleared.</em>" : o.finish ? (o.pb ? "A new <em>best.</em>" : "Well <em>seen.</em>") : "Not <em>yet.</em>";
+  // the honest eye line: the judgment that moved most during this set
+  const moved = s.th0 && s.th1 ? Object.keys(s.th1).filter(j => s.th0[j] && Math.abs(Math.log(s.th1[j] / s.th0[j])) > .04).sort((a, b) => Math.abs(Math.log(s.th1[b] / s.th0[b])) - Math.abs(Math.log(s.th1[a] / s.th0[a])))[0] : null;
+  const lede = o.mastered ? `All three stars. ${o.world != null ? esc(OO_WORLDS[o.world].mile) : ""}`
+    : o.unlocked && nx ? `Level ${o.next + 1} is open: ${esc(nx.news.charAt(0).toLowerCase() + nx.news.slice(1))}.`
+    : o.finish ? "Every round was drawn near your own limit, so this is your eye working at its edge."
+    : `You need ${OO_PASS} of ${OO_ROUNDS}. Every round is drawn near your own limit, so misses mean you're at your edge; the next set starts from where you are now.`;
   const el = show(`
     <div style="flex:1"></div>
     <p class="eyebrow">${esc(o.title)}</p>
     <h1>${head}</h1>
     <div class="oo-stars-row">${starRow}</div>
+    <p class="lede">${lede}</p>
     <div class="res-list">
       <div class="res"><span>This set</span><b class="mono">${esc(o.score)}</b><span></span></div>
       ${s.pts ? `<div class="res"><span>Points</span><b class="mono">${s.pts.toLocaleString()}</b>${o.pb ? "<em>best</em>" : "<span></span>"}</div>` : ""}
-      ${s.min != null ? `<div class="res"><span>Smallest you spotted</span><b class="mono">${pctFmt(s.min)}</b><span></span></div>` : ""}
+      ${s.maxCombo >= 3 ? `<div class="res"><span>Longest streak</span><b class="mono">${s.maxCombo} in a row</b><span></span></div>` : ""}
+      ${s.minPair ? `<div class="res"><span>Smallest you spotted</span><b class="mono">${pctFmt(s.min)}</b><span class="oo-pair"><i style="--c:${s.minPair[0]}"></i><i style="--c:${s.minPair[1]}"></i></span></div>` : ""}
+      ${moved ? `<div class="res"><span>Your ${esc(OO_JUDG[moved].toLowerCase())}</span><b class="mono">${pctFmt(s.th0[moved])} → ${pctFmt(s.th1[moved])}</b><span></span></div>` : ""}
     </div>
     ${o.mixNew ? `<p class="gy-news"><b>Unlocked</b> The Mix: What changed?, Out of order, Rebuild, Was it there?, Imposter and n-back.</p>` : ""}
-    ${nx && o.unlocked ? `<p class="gy-news"><b>Next</b> ${esc(nx.name)}: ${esc(nx.news)}.</p>` : ""}
-    ${!o.finish ? `<p class="lede">${o.s.total && o.s.hits < OO_PASS ? `Clear it with ${OO_PASS} of ${OO_ROUNDS}. ` : ""}Every round is drawn near your own limit, so misses mean you're working at your edge.</p>` : ""}
-    ${misses.length ? `<div class="sec-head"><b>Your misses</b><span>side by side</span></div><div class="oo-miss">${misses.map(m => `<span><i style="--c:${m.base}"></i><i style="--c:${m.odd}"></i><em class="mono">${pctFmt(m.act || 0)}</em></span>`).join("")}</div>` : ""}
-    <p class="fine">Differences are measured on the colors as your screen drew them (CIEDE2000; 100% is black against white, and about 1% is the smallest most people see side by side). Phone screens vary.</p>
+    ${misses.length ? `<div class="sec-head"><b>Your misses</b><span>tap a color to open it</span></div><div class="oo-miss">${misses.map(m => `<span><i style="--c:${m.base}" data-swatch="${m.base}"></i><i style="--c:${m.odd}" data-swatch="${m.odd}"></i><em class="mono">${pctFmt(m.act || 0)}</em></span>`).join("")}</div>` : ""}
+    <p class="fine">Differences are measured on the colors as your screen drew them (CIEDE2000: 100% is black against white, and about 1% is the smallest difference most people see side by side). Phone screens and room light vary.</p>
     <div class="stack">
-      ${o.next != null && o.finish ? `<button class="btn" data-nextlv>Level ${o.next + 1} ${ICON.arrow}</button><button class="btn ghost" data-again>Play again</button>` : `<button class="btn" data-again>Try again ${ICON.arrow}</button>`}
-      <button class="btn ghost" data-map>Back to the map</button>
+      ${o.next != null && o.finish ? `<button class="btn" data-nextlv>Level ${o.next + 1} ${ICON.arrow}</button><button class="btn ghost" data-again>Play again</button>` : `<button class="btn" data-again>${o.finish ? "Play again" : "Try again"} ${ICON.arrow}</button>`}
+      <button class="btn ghost" data-map>${o.back || "Back to the map"}</button>
     </div>`, "result oo-res");
   const nb = el.querySelector("[data-nextlv]"); if (nb) nb.onclick = () => ooPlayLevel(o.next);
   el.querySelector("[data-again]").onclick = o.again;
-  el.querySelector("[data-map]").onclick = () => ooMap();
+  el.querySelector("[data-map]").onclick = o.onBack || (() => ooMap());
   onKey = e => { if (e.key === "Enter") (nb || el.querySelector("[data-again]")).click(); };
-  if (o.unlocked || o.pb) buzz([12, 60, 12]);
+  if (o.unlocked || o.pb || o.mastered) later(() => buzz([12, 60, 12]), 450);
 }
 
 // ======================================================================
@@ -426,53 +466,49 @@ function ooMini(L, i) {
   const pct = x => (x * 100).toFixed(1) + "%";
   return `<span class="oo-mini oo-b-${b}" style="--ar:${geo.aspect}">${geo.cells.map((c, k) => `<i class="oo-${c.shape}" style="left:${pct(c.x)};top:${pct(c.y)};width:${pct(c.w)};height:${pct(c.h)};--c:${k === at ? odd : base}"></i>`).join("")}</span>`;
 }
-const ooStarHTML = s => `<span class="oo-st">${s.map(x => `<i class="${x ? "on" : ""}"></i>`).join("")}</span>`;
+const ooStarHTML = s => `<span class="oo-st" aria-label="${s.filter(Boolean).length} of 3 stars">${s.map(x => `<i class="${x ? "on" : ""}"></i>`).join("")}</span>`;
 function ooEyeLine() {
   const m = ooS().model, fams = Object.keys(OO_FAMS).filter(f => f !== "Greys").map(f => [f, ooEye(m, f, null)]).filter(([, e]) => e.th && e.n >= 6).sort((a, b) => a[1].th - b[1].th);
   if (fams.length >= 2) return `You see ${fams[0][0].toLowerCase()} to ${pctFmt(fams[0][1].th)} different, ${fams[fams.length - 1][0].toLowerCase()} to ${pctFmt(fams[fams.length - 1][1].th)}.`;
   const any = ooEye(m, null, null);
-  return any.th ? `About ${pctFmt(any.th)} so far; the profile fills in as you play.` : "Your eye profile fills in as you play.";
+  return any.th ? `About ${pctFmt(any.th)} so far. Your eye profile fills in as you play.` : "Your eye profile fills in as you play.";
 }
 function ooMap() {
-  const st = ooS(), cur = st.lv, day = today(), dl = st.daily[day];
+  eyeNamesReady();
+  const st = ooS(), cur = st.lv, fresh = st.fresh, back = st.last && st.last !== today();
+  delete st.fresh;
+  const worldDone = w => OO_LEVELS.every((L, i) => L.w !== w || ooStars(i).every(Boolean));
   const rows = OO_LEVELS.map((L, i) => {
-    const locked = i > cur, s = ooStars(i), done = !!s[0];
-    const row = `<button class="oo-node${locked ? " locked" : ""}${i === cur ? " cur" : ""}${done ? " done" : ""}" data-lv="${i}"${locked ? ` data-locked="Clear level ${i} to unlock"` : ""}>
-      ${ooMini(L, i)}<span class="oo-nt"><b><span class="mono">${i + 1}</span>${esc(L.name)}</b><em>${esc(L.news)}</em></span>${ooStarHTML(s)}</button>`;
-    const world = i === 0 || OO_LEVELS[i - 1].w !== L.w ? `<div class="oo-world"><b>${esc(OO_WORLDS[L.w].name)}</b><span>${esc(OO_WORLDS[L.w].mile)}</span></div>` : "";
-    const mix = i === OO_MIX_AT - 1 ? ooMixBlock() : "";
-    return world + row + mix;
+    const locked = i > cur, s = ooStars(i), done = !!s[0], mast = s.every(Boolean);
+    const row = `<button class="oo-node${locked ? " locked" : ""}${i === cur ? " cur" : ""}${done ? " done" : ""}${i === fresh ? " fresh" : ""}" data-lv="${i}"${locked ? ` data-locked="Clear level ${i} to unlock this one"` : ""}>
+      ${ooMini(L, i)}<span class="oo-nt"><b><span class="mono">${i + 1}</span>${esc(L.name)}</b><em>${esc(mast ? "Mastered" : L.news)}</em></span>${ooStarHTML(s)}</button>`;
+    const world = i === 0 || OO_LEVELS[i - 1].w !== L.w ? `<div class="oo-world${worldDone(L.w) ? " lit" : ""}"><b>${esc(OO_WORLDS[L.w].name)}</b><span>${esc(OO_WORLDS[L.w].mile)}</span></div>` : "";
+    return world + row + (i === OO_MIX_AT - 1 ? ooMixBlock() : "");
   }).join("");
   const el = show(`
-    <header class="deck-top"><button class="icon-btn" data-close aria-label="Back to Train">${ICON.back}</button><span style="flex:1"></span><span class="mono oo-tot">★ ${ooStarCount()}</span></header>
+    <header class="deck-top"><button class="icon-btn" data-close aria-label="Back to Train">${ICON.back}</button><span style="flex:1"></span><span class="mono oo-tot">${ooStarCount()} ★</span></header>
     <h1 class="title-1 oo-title">Odd one out</h1>
-    <p class="note">Level ${cur + 1} of ${OO_LEVELS.length}. Every round is drawn near your own limit.</p>
-    <button class="oo-daily" data-daily>
-      <span class="oo-dgrid">${dl ? dl.map(r => `<i class="${r.ok ? (r.ms < 4000 ? "g" : "y") : "x"}"></i>`).join("") : ooDailyArt()}</span>
-      <span class="oo-dt"><b>Today's board</b><em>${dl ? `${dl.filter(r => r.ok).length} of 6 · share your grid` : "Six rounds, the same for everyone today"}</em></span>${ICON.chev}
-    </button>
+    <p class="note">${back ? "Welcome back. Your first round today is a warm-up." : st.sets ? `Level ${cur + 1} of ${OO_LEVELS.length}. Every round is drawn near your own limit.` : "Find the tile that's different. Each level adds a new twist."}</p>
     <button class="oo-eyeline" data-eye><span>${esc(ooEyeLine())}</span><b>Your eye ${ICON.chev}</b></button>
     <div class="oo-path">${rows}</div>
-    <p class="fine">How it works: each answer updates a hidden estimate of the smallest difference you can see, for hue, lightness, vividness, colors in context and colors from memory, and for each color family. Rounds are drawn from it, so a set breathes: easy, medium, hard, easy, harder, then a boss near your limit. New kinds of rounds start easy. Warmer means nearer orange on the hue circle and cooler nearer blue-cyan, a painters' convention. Stars: finish the level, answer quickly, and use no hints.</p>
-    <div class="oo-go"><button class="btn" data-play>${st.stars[cur] && st.stars[cur][0] && cur === OO_LEVELS.length - 1 ? "Play the grand boss" : `Play level ${cur + 1}`} ${ICON.arrow}</button></div>
+    <p class="fine">How it works: every answer updates a hidden estimate of the smallest difference you can see, for hue, lightness, vividness, colors in context and colors from memory, and for each color family. Rounds are drawn from it, so a set breathes: easy, medium, hard, easy, harder, then a boss near your limit. A miss makes the next round gentler and a streak makes it harder; new kinds of rounds start easy. Stars: finish the level, answer quickly, use no hints.</p>
+    <div class="oo-go"><button class="btn" data-play>${st.sets ? `Play level ${cur + 1}` : "Start"} ${ICON.arrow}</button></div>
   `, "oo-map");
   el.querySelector("[data-close]").onclick = () => go("gym");
   el.querySelector("[data-play]").onclick = () => ooPlayLevel(cur);
-  el.querySelector("[data-daily]").onclick = ooDailyStart;
   el.querySelector("[data-eye]").onclick = ooEyePage;
   el.querySelectorAll("[data-lv]").forEach(b => b.onclick = () => b.dataset.locked ? toast(b.dataset.locked) : ooPlayLevel(+b.dataset.lv));
   el.querySelectorAll("[data-mix]").forEach(b => b.onclick = () => b.dataset.locked ? toast(b.dataset.locked) : ooPlayMix(b.dataset.mix));
-  const cn = el.querySelector(".oo-node.cur");
-  if (cn && !ooShotMode()) later(() => cn.scrollIntoView({ block: "center", behavior: reduceMotion ? "auto" : "smooth" }), 250);
+  const cn = el.querySelector(".oo-node.fresh") || el.querySelector(".oo-node.cur");
+  if (cn && cur > 2 && !ooShotMode()) later(() => cn.scrollIntoView({ block: "center", behavior: reduceMotion ? "auto" : "smooth" }), 250);
 }
-const ooDailyArt = () => Array.from({ length: 6 }, () => `<i></i>`).join("");
 function ooMixBlock() {
   const open = ooMixOpen(), st = ooS();
   const tiles = [["set", "Mixed set", "One of each, shuffled"], ...OO_MIX.map(m => [m.id, m.name, m.what])].map(([id, name, what]) => {
     const ms = st.mix[id] || {}, s = Array.isArray(ms.stars) ? ms.stars : [0, 0, 0];
     return `<button class="oo-mx${open ? "" : " locked"}" data-mix="${id}"${open ? "" : ` data-locked="Clear level ${OO_MIX_AT} to unlock the Mix"`}><b>${esc(name)}</b><em>${esc(what)}</em>${ooStarHTML(s)}</button>`;
   }).join("");
-  return `<div class="oo-mixblock${open ? "" : " locked"}"><div class="oo-world"><b>The Mix</b><span>${open ? "Odd one out crossed with memory and rearranging." : `Unlocks after level ${OO_MIX_AT}.`}</span></div><div class="oo-mxgrid">${tiles}</div></div>`;
+  return `<div class="oo-mixblock${open ? "" : " locked"}"><div class="oo-world"><b>The Mix</b><span>${open ? "Odd one out crossed with memory and rearranging." : `Opens after level ${OO_MIX_AT}: odd one out crossed with memory and rearranging.`}</span></div><div class="oo-mxgrid">${tiles}</div></div>`;
 }
 
 // ======================================================================
@@ -480,8 +516,7 @@ function ooMixBlock() {
 // ======================================================================
 function ooEyePage() {
   const m = ooS().model, cell = e => e.th == null ? `<td class="na">–</td>` : `<td class="${e.sure ? "" : "thin"}">${pctFmt(e.th)}</td>`;
-  const fams = Object.keys(OO_FAMS);
-  const rows = fams.map(f => { const es = ["light", "chroma", "hue"].map(a => (m.f[f + ":" + a] || {}).n ? ooEye(m, f, a) : { th: null }); return es.some(e => e.th != null) ? `<tr><th><i style="--c:${ooFamHex(f)}"></i>${esc(f)}</th>${es.map(cell).join("")}</tr>` : ""; }).join("");
+  const rows = Object.keys(OO_FAMS).map(f => { const es = ["light", "chroma", "hue"].map(a => (m.f[f + ":" + a] || {}).n ? ooEye(m, f, a) : { th: null }); return es.some(e => e.th != null) ? `<tr><th><i style="--c:${ooFamHex(f)}"></i>${esc(f)}</th>${es.map(cell).join("")}</tr>` : ""; }).join("");
   const js = Object.keys(OO_JUDG).map(j => { const r = m.j[j]; return r && r.n ? `<div class="ey-row"><span>${esc(OO_JUDG[j])}</span><i style="--w:${clamp(100 - Math.log(Math.exp(r.r) / OO_MIN) / Math.log(OO_MAX / OO_MIN) * 100, 4, 100).toFixed(0)}%"></i><b>${pctFmt(Math.exp(r.r))}</b></div>` : ""; }).join("");
   const sn = ooS().snaps, first = sn.length >= 2 ? sn[0] : null, last = sn[sn.length - 1];
   const trend = first && last ? Object.keys(last[1]).filter(j => first[1][j]).map(j => `${OO_JUDG[j].toLowerCase()} ${pctFmt(first[1][j])} → ${pctFmt(last[1][j])}`).slice(0, 3).join(" · ") : "";
@@ -489,44 +524,29 @@ function ooEyePage() {
     <header class="deck-top"><button class="icon-btn" data-close aria-label="Back">${ICON.back}</button></header>
     <h1 class="title-1 oo-title">Your eye</h1>
     <p class="lede">${esc(ooEyeLine())}</p>
-    ${js ? `<div class="sec-head"><b>By judgment</b><span>smaller is sharper</span></div><div class="ey-rows oo-ey">${js}</div>` : `<p class="note">Play a few levels and your profile appears here.</p>`}
+    ${js ? `<div class="sec-head"><b>By judgment</b><span>smaller is sharper</span></div><div class="ey-rows oo-ey">${js}</div>` : `<p class="note oo-empty">Play a level of Odd one out and your profile starts here: one number for hue, lightness and vividness, then one for each color family.</p>`}
     ${rows ? `<div class="sec-head"><b>By family and axis</b><span>lightness · vividness · hue</span></div>
       <table class="oo-eyet"><thead><tr><th></th><th>Lightness</th><th>Vividness</th><th>Hue</th></tr></thead><tbody>${rows}</tbody></table>
       <p class="fine">Faded numbers rest on fewer than 12 answers. A dash means not measured yet.</p>` : ""}
     ${trend ? `<div class="sec-head"><b>Since ${esc(fmtDay(first[0]))}</b></div><p class="note">${esc(trend)}</p>` : ""}
-    <p class="fine">Each number is the difference you'd spot about half the time (on top of lucky guesses), estimated from every round you've played: harder rounds you get right bring it down, easy ones you miss push it up. It's measured on this screen, in this light, so it moves from day to day; 1% is roughly the smallest difference most people see side by side. These games sharpen this judgment; they make no wider brain-training claim.</p>
+    <p class="fine">Each number is the difference you'd spot about half the time (on top of lucky guesses), estimated from every round you've played: hard rounds you get right bring it down, easy ones you miss push it up. It's measured on this screen, in this light, so it moves from day to day; about 1% is the smallest difference most people see side by side. These games sharpen this judgment; they make no wider brain-training claim.</p>
   `, "oo-eye");
   el.querySelector("[data-close]").onclick = () => ooMap();
 }
 const ooFamHex = f => { const F = OO_FAMS[f]; const h = F.h[0] <= F.h[1] ? (F.h[0] + F.h[1]) / 2 : ((F.h[0] + F.h[1] + 360) / 2) % 360; return ooFit((F.L[0] + F.L[1]) / 2, (F.C[0] + F.C[1]) / 2, h); };
 
 // ======================================================================
-// The daily board (#/odd/daily): one shared board a day, a Wordle-style grid to share
+// The daily seed board, as a step another screen calls (the dailies belong to L25: challenge.js and daily()).
+// gameDailyBoard(container, day = today(), opts) plays six rounds at fixed differences, the same for everyone on
+// that day, inside the container, and resolves { day, num, res: [{ ok, ms, act, base, odd }], hits, min, text }.
+// text is a plain share line (no emoji grid): "ColorHub · Odd one out #1: 5 of 6, down to 1.8% different".
 // ======================================================================
-function ooDailyStart() {
-  const day = today(), st = ooS();
-  if (st.daily[day]) return ooDailyDone(day);
+function gameDailyBoard(box, day = today(), opts = {}) {
   const rounds = ooDaily(day);
-  ooRun({ label: `#${ooDayNum(day)}`, total: 6, combo: true, cls: "oo-dailyrun", onQuit: () => ooMap(),
-    gen: k => { const r = rounds[k]; if (!r) return null; r.kindKey = ooKindKey(r.v, r.b, ""); return { r, o: { none: false } }; },
-    onEnd: s => { st.daily[day] = s.res.map(x => ({ ok: x.ok, ms: Math.round(x.ms), act: +(x.act || 0).toFixed(2) })); save(); ooDailyDone(day); } });
-}
-function ooDailyDone(day) {
-  const res = ooS().daily[day] || [], text = ooShareText(day, res), hits = res.filter(r => r.ok).length;
-  const el = show(`
-    <div style="flex:1"></div>
-    <p class="eyebrow">Today's board · #${ooDayNum(day)}</p>
-    <h1>${hits >= 5 ? "Sharp <em>eyes.</em>" : hits >= 3 ? "Well <em>seen.</em>" : "Tough <em>board.</em>"}</h1>
-    <div class="oo-share">${res.map((r, i) => `<span class="${r.ok ? (r.ms < 4000 ? "g" : "y") : "x"}"><i></i><em class="mono">${pctFmt(OO_DAILY_D[i])}</em></span>`).join("")}</div>
-    <p class="lede">${hits} of 6. Each round is smaller than the last, the same for everyone today: green is right and quick, yellow right, dark missed. A new board comes tomorrow.</p>
-    <div class="stack"><button class="btn" data-share>Share your grid ${ICON.share}</button><button class="btn ghost" data-map>Back to the map</button></div>
-  `, "result oo-res");
-  el.querySelector("[data-map]").onclick = () => ooMap();
-  el.querySelector("[data-share]").onclick = async () => {
-    const url = typeof routeURL === "function" ? routeURL("odd/daily") : location.href;
-    try { if (navigator.share) return await navigator.share({ text: text + "\n" + url }); } catch (e) { return; }
-    try { await navigator.clipboard.writeText(text + "\n" + url); toast("Copied your grid"); } catch (e) { toast(text); }
-  };
+  return new Promise(resolve => ooRun({ box, label: opts.label || `#${ooDayNum(day)}`, total: 6, combo: true,
+    gen: k => { const r = rounds[k]; if (!r) return null; r.kindKey = ooKindKey(r.v, r.b, ""); return { r, o: {} }; },
+    onEnd: s => { const res = s.res.map(x => ({ ok: x.ok, ms: Math.round(x.ms), act: +(x.act || 0).toFixed(2), base: x.base, odd: x.odd }));
+      resolve({ day, num: ooDayNum(day), res, hits: s.hits, min: s.min, text: ooShareText(day, res) }); } }));
 }
 
 // ======================================================================
@@ -539,34 +559,46 @@ function ooPlaySet(set, task = "one", opts = {}) {
   const hexes = ooSetHexes(set), title = set && set.title || "Your colors";
   if (!hexes.length) return toast("No colors to play with");
   if (OO_MIXPLAY[task]) return ooPlayMix(task, { set: hexes, title, onQuit: opts.onQuit });
-  const v = OO_VF[task] ? task : "one", L = { v, b: v === "group" ? "grid" : "grid", n: v === "group" ? 6 : v === "twins" ? 3 : 4 };
+  const v = OO_VF[task] ? task : "one", L = { v, b: "grid", n: v === "group" ? 6 : v === "twins" ? 3 : 4 };
   ooRun({ label: title.length > 14 ? title.slice(0, 13) + "…" : title, total: OO_ROUNDS, combo: true, onQuit: opts.onQuit || (() => go("gym")),
-    gen: k => { const sp = ooSpec(L, k, { set: hexes }); const r = ooRound(sp); r.kindKey = sp.kind; return { r, o: { hint: true } }; },
-    onEnd: s => ooResults({ title, s, finish: s.hits >= OO_PASS, stars: [s.hits >= OO_PASS, s.med != null && s.med <= OO_FAST_MS && s.hits >= OO_PASS, s.hits >= OO_PASS && !s.hint].map(Number), got: [1, 1, 1], pb: false, next: null, again: () => ooPlaySet(set, task, opts), score: `${s.hits} of ${s.total} right` }) });
+    gen: (k, run) => { const sp = ooSpec(L, k, { set: hexes, tier: ooAdjTier(ooTierAt(k, false), run) }); const r = ooRound(sp); r.kindKey = sp.kind; return { r, o: { hint: true } }; },
+    onEnd: s => ooResults({ title, s, finish: s.hits >= OO_PASS, stars: [s.hits >= OO_PASS, s.med != null && s.med <= OO_FAST_MS && s.hits >= OO_PASS, s.hits >= OO_PASS && !s.hint].map(Number), got: [1, 1, 1], pb: false, next: null,
+      again: () => ooPlaySet(set, task, opts), score: `${s.hits} of ${s.total} right`, back: "Done", onBack: opts.onQuit || (() => go("gym")) }) });
 }
 
 // ======================================================================
-// The Train shelf (gym.js hook) and routes (router.js hook)
+// The Train shelf (gym.js hook), the old stations it replaces, and routes (router.js hook)
 // ======================================================================
 function ooShelf() {
-  const st = ooS(), L = OO_LEVELS[st.lv], dl = st.daily[today()];
+  const st = ooS(), L = OO_LEVELS[st.lv], ln = st.line || {};
   return `<div class="sec-head"><b>Odd one out</b><span>a game of its own</span></div>
     <button class="oo-shelf" data-oo-map>
       ${ooMini(L, st.lv)}
-      <span class="oo-nt"><b>Level ${st.lv + 1} · ${esc(L.name)}</b><em>${esc(L.news)}</em></span>
-      <span class="mono oo-tot">★ ${ooStarCount()}</span>
+      <span class="oo-nt"><b>${st.sets ? `Level ${st.lv + 1} · ${esc(L.name)}` : "Find the different tile"}</b><em>${st.sets ? esc(L.news) : "Twenty-four levels, from a 3 × 3 grid to paintings cut into tiles."}</em></span>
+      <span class="mono oo-tot">${st.sets ? `${ooStarCount()} ★` : ""}</span>
     </button>
-    <button class="play-row" data-oo-daily><span><b>Today's board</b><span>${dl ? `${dl.filter(r => r.ok).length} of 6 today · share your grid` : "Six rounds, the same for everyone today."}</span></span><em class="lt-best">${dl ? "done" : "new"}</em></button>
-    <button class="play-row" data-oo-whose><span><b>Whose palette?</b><span>Five colors from a painter's work: whose are they?</span></span><em class="lt-best">${ooS().mix.whose && ooS().mix.whose.best ? `<b>${ooS().mix.whose.best}</b>best` : "new"}</em></button>`;
+    <button class="play-row" data-oo-line><span><b>Across the line</b><span>Three of these are Teal. Which one isn't?</span></span><em class="lt-best">${ln.best ? `<b>${ln.best}</b>best` : "new"}</em></button>
+    <button class="play-row" data-oo-whose><span><b>Whose palette?</b><span>Five colors from a painter's work: whose are they?</span></span><em class="lt-best">${st.mix.whose && st.mix.whose.best ? `<b>${st.mix.whose.best}</b>best` : "new"}</em></button>`;
 }
+// the first tap on Odd one out goes straight into level 1 (taught by doing); after that, the map
+const ooEnter = () => ooS().sets ? ooMap() : ooPlayLevel(0);
 function ooWire(el) {
-  const m = el.querySelector("[data-oo-map]"); if (m) m.onclick = () => ooMap();
-  const d = el.querySelector("[data-oo-daily]"); if (d) d.onclick = ooDailyStart;
+  const m = el.querySelector("[data-oo-map]"); if (m) m.onclick = ooEnter;
+  const l = el.querySelector("[data-oo-line]"); if (l) l.onclick = () => ooAcross();
   const w = el.querySelector("[data-oo-whose]"); if (w) w.onclick = () => ooWhose();
 }
+// The old stations this replaces (design/IDEAS-10X/train-games.md §5): Odd one out, Color memory and Sort the
+// strip open their new homes. Their history stays in S.gym (the old Odd one out's family scores seed
+// eyeThreshold until the new model has answers), and check-ins still use the old drills underneath.
+function ooRetired(k) {
+  if (k === "hue") return ooEnter();
+  if (k === "memory") return ooPlayMix("wasthere", { title: "Color memory", onQuit: () => go("gym") });
+  if (k === "order") return ooPlayMix("outoforder", { title: "Sort the strip", onQuit: () => go("gym") });
+  return null;
+}
 function ooOpenRoute(id) {
-  if (id === "daily") return ooDailyStart();
   if (id === "eye") return ooEyePage();
   if (id === "whose") return ooWhose();
+  if (id === "line") return ooAcross();
   return ooMap();
 }

@@ -178,18 +178,28 @@ function ooMoveDir(baseHex, v, d) {
 }
 const ooRandDir = rnd => { const v = [rnd() * 2 - 1, rnd() * 2 - 1, rnd() * 2 - 1]; v[0] *= .7; return v; };
 
-// "Which way?": the plain word for a move. Warmer means nearer orange on the hue circle (LCh 50°), cooler nearer
-// blue-cyan (230°): a convention painters use, stated in How it works.
+// "Which way?": the plain word for a move (the same words as js/eye-names.js, COLORNERD §6.5): lighter or darker,
+// more vivid or greyer, and for hue the strongest pull on the a*b* plane: redder, yellower, greener or bluer.
+// Never "warmer", "cooler" or "brighter".
 const ooHueGap = (a, b) => { const d = Math.abs(a - b) % 360; return d > 180 ? 360 - d : d; };
+const ooPull = (x, y) => Math.abs(x) >= Math.abs(y) ? (x > 0 ? "redder" : "greener") : (y > 0 ? "yellower" : "bluer");
 function ooDirWord(baseHex, oddHex) {
-  const [L1, C1, H1] = lch(baseHex), [L2, C2, H2] = lch(oddHex);
-  const dL = L2 - L1, dC = C2 - C1, dH = ooHueGap(H2, 50) - ooHueGap(H1, 50);
-  const sL = Math.abs(dL), sC = Math.abs(dC) / 1.6, sH = C1 > 10 ? Math.abs(ooHueGap(H1, H2)) * Math.PI / 180 * (C1 + C2) / 2 / 1.4 : 0;
+  const [L1, a1, b1] = lab(baseHex), [L2, a2, b2] = lab(oddHex), C1 = Math.hypot(a1, b1), C2 = Math.hypot(a2, b2);
+  const dL = L2 - L1, dC = C2 - C1, ux = C1 > 1e-6 ? a1 / C1 : 0, uy = C1 > 1e-6 ? b1 / C1 : 0, ra = (a2 - a1) * ux + (b2 - b1) * uy;
+  const hx = (a2 - a1) - ra * ux, hy = (b2 - b1) - ra * uy, Cb = (C1 + C2) / 2;
+  const sL = Math.abs(dL), sC = Math.abs(dC) / (1 + .045 * Cb), sH = C1 > 8 || C2 > 8 ? Math.hypot(hx, hy) / (1 + .015 * Cb) : 0;
   if (sL >= sC && sL >= sH) return dL > 0 ? "lighter" : "darker";
-  if (sC >= sH) return dC > 0 ? "more vivid" : "duller";
-  return dH < 0 ? "warmer" : "cooler";
+  if (sC >= sH) return dC > 0 ? "more vivid" : "greyer";
+  return ooPull(hx, hy);
 }
-const OO_DIRS = [["lighter", "darker"], ["warmer", "cooler"], ["more vivid", "duller"]];
+// the two hue words a color can move in (turning one way or the other around the hue circle)
+function ooHuePair(baseHex) {
+  const [, C, H] = lch(baseHex), r = H * Math.PI / 180, x = -Math.sin(r), y = Math.cos(r);
+  return C < 8 ? null : [ooPull(x, y), ooPull(-x, -y)];
+}
+// the answer choices for "which way?": three pairs, the hue pair fitted to this color
+const ooDirChoices = baseHex => [["lighter", "darker"], ["more vivid", "greyer"], ooHuePair(baseHex) || ["redder", "bluer"]];
+const OO_DIR_WORDS = ["lighter", "darker", "more vivid", "greyer", "redder", "yellower", "greener", "bluer"];
 
 // ---------- boards: cell geometry in unit coordinates ----------
 // Every board returns { aspect (w/h), cells: [{ x, y, w, h, shape }] } with x, y, w, h as fractions of the board.
@@ -442,12 +452,11 @@ function ooDaily(key) {
   const rnd = ooRnd(ooHash("oo-daily:" + key)), kinds = ooShuf(OO_DAILY_KINDS, rnd).slice(0, 6);
   return OO_DAILY_D.map((d, i) => { const [v, b, n] = kinds[i]; return ooRound({ v, b, n, d, rnd, count: v === "count" ? 1 + Math.floor(rnd() * 4) : undefined }); });
 }
-// the shareable grid: right and quick, right, missed
+// the share line: plain words, no emoji grid ("ColorHub · Odd one out #1: 5 of 6, down to 1.8% different")
 function ooShareText(key, res) {
-  const hits = res.filter(r => r.ok).length, sq = res.map(r => r.ok ? (r.ms < 4000 ? "🟩" : "🟨") : "⬛").join("");
-  const seen = res.filter(r => r.ok && r.act > 0).map(r => r.act), min = seen.length ? Math.min(...seen) : null;
+  const hits = res.filter(r => r.ok).length, seen = res.filter(r => r.ok && r.act > 0).map(r => r.act), min = seen.length ? Math.min(...seen) : null;
   const pct = n => `${n >= 10 ? n.toFixed(0) : n.toFixed(1)}%`;
-  return `ColorHub · Odd one out #${ooDayNum(key)}\n${sq} ${hits}/6${min != null ? ` · saw ${pct(min)}` : ""}`;
+  return `ColorHub · Odd one out #${ooDayNum(key)}: ${hits} of ${res.length}${min != null ? `, down to ${pct(min)} different` : ""}`;
 }
 
 // ---------- the Mix games: pure generators ----------
@@ -502,9 +511,68 @@ function ooNbackSeq(len, d, rnd, from) {
   return { seq, kind, d };
 }
 
+// ---------- Across the line: odd one out by name (design/IDEAS-10X/train-games.md §2, §7 B) ----------
+// "Three of these are Teal. Which one isn't?" The in-name tiles vary inside Teal's region; one tile sits just
+// across the boundary in a neighbor name, often closer to its nearest tile than the in-name tiles are to each
+// other, so "the most different tile" fails and the word's edge is the skill.
+// opts: { p (ΔE past the line), k (tiles: 4 or 6), cats: [{ n, h }] (category words, e.g. the ones you've met),
+//         namer(hex) -> { n, de, near: [{ n, h }] } (nameOf in the app; a nearest-name list in tests) }
+// Returns { cat, catHex, nb, nbHex, colors, at, trap, B, p, act, spread, tries } or null.
+const OO_NEAR_DE = 8;
+function ooLineRound(rnd, o) {
+  const k = o.k || 4, p = o.p || 6, namer = o.namer, cats = o.cats || [];
+  let tries = 0;
+  const st = o.stats || {};
+  ["narrow", "noflip", "gate", "spread"].forEach(x => { st[x] = st[x] || 0; });
+  for (let c = 0; c < 12; c++) {
+    const N = ooPick(cats, rnd);
+    if (!N) return null;
+    const nN = namer(N.h);
+    if (nN.n !== N.n) continue;
+    // the region must be wide enough: jittered samples within ΔE 6 keep the name
+    const wide = [0, 1, 2, 3, 4].map(() => ooMoveDir(N.h, ooRandDir(rnd), ooBtw(2, 4, rnd))).filter(m => m && namer(m.hex).n === N.n && namer(m.hex).de < OO_NEAR_DE).length;
+    if (wide < 3) { st.narrow++; continue; }
+    const M = (nN.near || []).find(x => x.n !== N.n);
+    if (!M) continue;
+    for (let t = 0; t < 30; t++) {
+      tries++;
+      // march from N toward M (a little off the straight line, so rounds vary) until the name flips
+      const A = lab(N.h), Bm = lab(M.h), jit = ooRandDir(rnd).map(x => x * 3), dir = Bm.map((x, i) => x - A[i] + jit[i]);
+      const len = Math.hypot(...dir), u = dir.map(x => x / len);
+      let lo = 0, hi = null;
+      for (let s2 = .4; s2 <= len * 1.6; s2 += .4) { const P = A.map((x, i) => x + u[i] * s2); if (!inGamut(...P)) break; if (namer(labHex(...P)).n !== N.n) { hi = s2; break; } lo = s2; }
+      if (hi == null) { st.noflip++; continue; }
+      for (let i = 0; i < 10; i++) { const mid = (lo + hi) / 2, P = A.map((x, j) => x + u[j] * mid); if (namer(labHex(...P)).n !== N.n) hi = mid; else lo = mid; }
+      const Bhex = labHex(...A.map((x, i) => x + u[i] * hi));
+      const odd = ooMoveDir(Bhex, u, p * .5), trap = odd && ooMoveDir(odd.hex, u.map(x => -x), p);
+      if (!odd || !trap) continue;
+      // the odd tile's name is whichever neighbor the line leads into (revealed only after the tap)
+      const nb = namer(odd.hex);
+      if (nb.n === N.n || namer(trap.hex).n !== N.n || nb.de >= OO_NEAR_DE) { st.gate++; continue; }
+      const act = de2000(odd.hex, trap.hex);
+      if (act < .3) continue;
+      // the other in-name tiles: spread inside the region so at least one pair is further apart than odd vs trap
+      const ins = [trap.hex];
+      for (let g = 0; g < 80 && ins.length < k - 1; g++) {
+        const m = ooMoveDir(N.h, ooRandDir(rnd), ooBtw(.25, 1.1, rnd) * hi);
+        if (m && namer(m.hex).n === N.n && ins.every(h => de2000(h, m.hex) >= Math.max(.8, p * .4)) && de2000(m.hex, odd.hex) > act * .9) ins.push(m.hex);
+      }
+      if (ins.length < k - 1) { st.spread++; continue; }
+      const spread = Math.max(...ins.flatMap((a, i) => ins.slice(i + 1).map(b => de2000(a, b))));
+      // prefer boards where "the most different tile" is a trap: retry a few times before settling
+      if (spread <= act && t < 20) { st.spread++; continue; }
+      const colors = ooShuf([...ins, odd.hex], rnd);
+      return { cat: N.n, catHex: N.h, nb: nb.n, nbHex: (nb.near && nb.near[0] && nb.near[0].h) || M.h, colors, at: colors.indexOf(odd.hex), trap: colors.indexOf(trap.hex), odd: odd.hex, B: Bhex, p, act, spread, trapOk: spread > act, tries };
+    }
+  }
+  return null;
+}
+// the line's own staircase: the push past the boundary, 8 at the start down to 1.5
+const OO_LINE_P0 = 5, OO_LINE_MIN = 1;
+
 if (typeof module !== "undefined") module.exports = {
   ooHash, ooRnd, ooShuf, OO_JUDG, OO_AXES, OO_START, OO_MIN, OO_MAX, OO_SLOPE, ooP, OO_TIER, OO_BREATH, OO_VF, OO_BF, ooModel, ooTheta, ooTheta0, ooUpdate, ooEye,
-  ooStair, ooStairStep, ooStairScore, ooFam, OO_FAMS, ooBase, ooMove, ooMoveDir, ooDirWord, OO_DIRS, ooCells, OO_SHAPES, ooRound, ooBand, ooPaintShift,
+  ooStair, ooStairStep, ooStairScore, ooFam, OO_FAMS, ooBase, ooMove, ooMoveDir, ooDirWord, ooHuePair, ooDirChoices, OO_DIR_WORDS, ooCells, OO_SHAPES, ooRound, ooBand, ooPaintShift,
   OO_WORLDS, OO_LEVELS, OO_KINDS, OO_ROUNDS, OO_MIX_AT, OO_MIX, OO_PASS, OO_FAST_MS, ooTierAt, ooKindKey, OO_DAILY_D, ooDaily, ooDayNum, ooShareText,
-  ooGradStrip, ooOrderRound, ooChangedRound, ooWasRound, ooNbackSeq, ooCountPick,
+  ooLineRound, OO_LINE_P0, OO_LINE_MIN, ooGradStrip, ooOrderRound, ooChangedRound, ooWasRound, ooNbackSeq, ooCountPick,
 };

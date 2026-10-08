@@ -86,7 +86,8 @@ for (const [j, truth, g] of [["hue", 1.4, 1 / 9], ["light", 2.1, 1 / 16], ["chro
   ok(d.length === 6 && d.every((r, i) => r.d === E.OO_DAILY_D[i]), "the daily board has six rounds at the fixed ladder of differences");
   ok(E.ooDayNum("2026-10-08") === 1 && E.ooDayNum("2026-10-10") === 3, "daily numbers count from the start date");
   const txt = E.ooShareText("2026-10-08", [{ ok: 1, ms: 2000, act: 8 }, { ok: 1, ms: 5000, act: 5 }, { ok: 0 }, { ok: 1, ms: 1000, act: 2.5 }, { ok: 1, ms: 3000, act: 1.8 }, { ok: 0 }]);
-  ok(/🟩🟨⬛🟩🟩⬛ 4\/6 · saw 1\.8%/.test(txt), "the share grid reads right and quick / right / missed: " + txt.split("\n")[1]);
+  ok(txt === "ColorHub · Odd one out #1: 4 of 6, down to 1.8% different", "the share line is plain words: " + txt);
+  ok(!/[\u{1F300}-\u{1FAFF}\u2B1B]/u.test(txt), "no emoji grid in the share line");
 }
 
 // ---------- 4. every variant's target lies within its difficulty band ----------
@@ -106,7 +107,7 @@ for (const [j, truth, g] of [["hue", 1.4, 1 / 9], ["light", 2.1, 1 / 16], ["chro
     // the answer tiles are the odd ones and nothing else is
     if (!r.none && v !== "twins" && v !== "count" && b !== "gradient") ok(r.ans.every(i => r.colors[i] === r.odd) && r.colors.filter(c => c === r.odd).length === r.ans.length, `${v}/${b}: answer tiles carry the odd color`);
     if (v === "twins") ok(r.colors[r.ans[0]] === r.colors[r.ans[1]] && new Set(r.colors).size === r.colors.length - 1, "twins: exactly two identical tiles");
-    if (v === "which") ok(["lighter", "darker", "warmer", "cooler", "more vivid", "duller"].includes(r.dir), "which way: a direction word");
+    if (v === "which") ok(E.ooDirChoices(r.base).flat().includes(r.dir), "which way: the answer is one of the offered words");
   }
   say(`Bands: ${checked - out} of ${checked} rounds drawn inside their band`);
   ok(out / checked < .01, `at most 1% of rounds may miss their band (missed ${out})`);
@@ -116,10 +117,11 @@ for (const [j, truth, g] of [["hue", 1.4, 1 / 9], ["light", 2.1, 1 / 16], ["chro
     const axis = ["light", "chroma", "hue"][i % 3], sign = i % 2 ? 1 : -1, r = E.ooRound({ v: "which", b: "grid", n: 3, d: 4, axis, sign, rnd });
     if (r.fallback) continue;
     dirN++;
-    const want = axis === "light" ? ["lighter", "darker"] : axis === "chroma" ? ["more vivid", "duller"] : ["warmer", "cooler"];
+    const want = axis === "light" ? ["lighter", "darker"] : axis === "chroma" ? ["more vivid", "greyer"] : ["redder", "yellower", "greener", "bluer"];
     if (want.includes(r.dir)) dirOk++;
   }
   say(`Which way: the word matches the moved axis in ${dirOk} of ${dirN} rounds`);
+  ok(!/warmer|cooler|brighter/.test(JSON.stringify(E.OO_DIR_WORDS)), "no warmer, cooler or brighter (COLORNERD §6.5)");
   ok(dirOk / dirN > .95, "which-way words match the axis that moved");
   // busy grounds carry an illusion: every tile identical, "none" is right
   const il = E.ooRound({ v: "one", b: "busy", n: 4, d: 3, rnd, illusion: true });

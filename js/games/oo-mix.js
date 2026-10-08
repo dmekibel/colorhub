@@ -257,7 +257,8 @@ function ooPlayMix(id, opts = {}) {
       const stars = got.map((x, i) => x || old[i] ? 1 : 0), pb = s.pts > ((st.mix[id] || {}).best || 0);
       if (!opts.set) st.mix[id] = { stars, best: Math.max(s.pts, (st.mix[id] || {}).best || 0) };
       save();
-      ooResults({ title: `The Mix · ${name}`, s, finish, stars, got, pb, next: null, again: () => ooPlayMix(id, opts), score: `${s.hits} of ${s.total} right` });
+      ooResults({ title: opts.title ? `${opts.title} · ${name}` : `The Mix · ${name}`, s, finish, stars, got, pb, next: null, again: () => ooPlayMix(id, opts), score: `${s.hits} of ${s.total} right`,
+        back: opts.onQuit ? "Done" : null, onBack: opts.onQuit || null });
     } });
 }
 // ---------- Whose palette? (its own little station; the data loads on first use) ----------

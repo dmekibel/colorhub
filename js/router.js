@@ -105,7 +105,7 @@ const ROUTED = [["colorPage", (n, tapped) => n && n.id ? routed(n.title, nodeRou
   ["gamutWheel", () => routed("Gamut wheel", "studio/wheel")],   // js/studio.js
   ["openSavedPalette", id => routed("Your palette", "studio/palette/" + id)],   // js/studio.js
   ["ooMap", () => routed("Odd one out", "odd")], ["ooEyePage", () => routed("Your eye", "odd/eye")],   // js/games/oo-ui.js
-  ["ooDailyDone", () => routed("Today's board", "odd/daily")], ["ooWhose", () => routed("Whose palette?", "odd/whose")]];
+  ["ooWhose", () => routed("Whose palette?", "odd/whose")], ["ooAcross", () => routed("Across the line", "line")]];
 ROUTED.forEach(([name, f]) => routeWrap(window, name, f));
 routeWrap(LAB, "harmony", () => routed("Harmony", "lab/harmony"));
 routeWrap(LAB, "contrast", () => routed("Albers", "lab/contrast"));
@@ -181,7 +181,8 @@ function openRoute(hash, initial = false) {
     loadCoreNames().then(() => { const e = routeName(id); if (e) namePage(e, true, tappedHex); else go(S.tab || "learn"); });
     return true;
   }
-  if (kind === "odd" && typeof ooOpenRoute === "function") { base(); XSTACK = []; ooOpenRoute(id); return true; }   // js/games/oo-ui.js: #/odd, #/odd/daily, #/odd/eye, #/odd/whose
+  if (kind === "line" && typeof ooAcross === "function") { base(); XSTACK = []; ooAcross(); return true; }   // js/games/line.js
+  if (kind === "odd" && typeof ooOpenRoute === "function") { base(); XSTACK = []; ooOpenRoute(id); return true; }   // js/games/oo-ui.js: #/odd, #/odd/eye, #/odd/whose
   if (kind === "photo" && id && typeof photoPage === "function") { base(); XSTACK = []; photoPage(id); return true; }
   if (kind === "gallery" && /^\d+(\?c=[0-9a-f]{6})?$/i.test(id || "") && typeof galleryPage === "function") {
     const [numId, qs] = String(id).split("?c=");

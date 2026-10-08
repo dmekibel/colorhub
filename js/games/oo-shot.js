@@ -1,11 +1,11 @@
 "use strict";
 // Screenshot states for Odd one out (index.html#shot=gx:oo:<state>, through gymShot in js/gym.js). In memory only.
-//   map · fresh · shelf · eye · daily · dailydone · result · whose · wplay (Whose palette? playing)
+//   map · fresh · shelf · eye · daily (gameDailyBoard in a host box) · result · line · line-ans · line-miss · whose · wplay (Whose palette? playing)
 //   lv-<n> (level n, first round) · lv-<n>-ans (answered right) · lv-<n>-miss (answered wrong) · lv-<n>-dir (which way)
 //   mix-<id>[-ans] · step-<kind>
 function ooShotState() {
   const st = ooS(), day = today();
-  st.lv = 12;
+  st.lv = 12; st.sets = 31; st.last = today();
   for (let i = 0; i < 12; i++) st.stars[i] = [1, i % 3 !== 1 ? 1 : 0, i % 4 !== 2 ? 1 : 0];
   st.best = { 0: 2140, 5: 3900 };
   const m = st.model;
@@ -30,14 +30,23 @@ function ooShotTap(right, then) {
   if (then) then();
 }
 function ooShot(arg) {
+  document.documentElement.classList.add("oo-shotmode");   // headless screenshots don't run entrance animations
   const [what, a, b] = (arg || "map").split("-");
   if (what === "fresh") { if (S.games) delete S.games.oo; S.scr = { ok: true, t: today() }; return ooMap(); }
+  // the very first tap: straight into level 1, taught by doing (first-nudge waits for the nudge)
+  if (what === "first") { if (S.games) delete S.games.oo; S.scr = { ok: true, t: today() }; return ooEnter(); }
   ooShotState();
   if (what === "map") return ooMap();
+  if (what === "back") { ooS().last = addDays(today(), -1); ooS().fresh = 12; return ooMap(); }
+  if (what === "line") {
+    ooAcross();
+    if (a === "ans" || a === "miss") return setTimeout(() => { const r = OO_LAST, t = document.querySelectorAll(".oo-board .oo-t"); if (!r || !t.length) return; t[a === "ans" ? r.ans[0] : (r.ans[0] + 1) % t.length].click(); }, 2600);
+    return;
+  }
   if (what === "shelf") { go("gym"); return setTimeout(() => { const s = document.querySelector(".oo-shelf"); if (s) s.scrollIntoView({ block: "center" }); }, 300); }
   if (what === "eye") return ooEyePage();
-  if (what === "daily") { delete ooS().daily[today()]; return ooDailyStart(); }
-  if (what === "dailydone") { ooS().daily[today()] = [{ ok: 1, ms: 2100, act: 8 }, { ok: 1, ms: 3200, act: 5 }, { ok: 1, ms: 5200, act: 3.5 }, { ok: 1, ms: 2600, act: 2.5 }, { ok: 0, ms: 6000, act: 1.8 }, { ok: 1, ms: 7000, act: 1.3 }]; return ooDailyDone(today()); }
+  // the daily seed board as a step inside a host screen (L25 owns the daily screens)
+  if (what === "daily") { const el = show(`<div class="oo-stepbox" style="flex:1;display:flex;flex-direction:column;min-height:0"></div>`, "fixed drill station oo-play"), box = el.querySelector(".oo-stepbox"); return gameDailyBoard(box).then(r => { box.innerHTML = `<p class="oo-fb ok" style="margin-top:40vh">${esc(r.text)}</p>`; }); }
   if (what === "result") {
     const res = [{ ok: 1, ms: 1800, act: 4.1 }, { ok: 1, ms: 2400, act: 2.9 }, { ok: 0, ms: 5200, act: 1.9, base: "#5B7FA6", odd: "#5E86AE" }, { ok: 1, ms: 2100, act: 3.8 }, { ok: 1, ms: 3300, act: 2.2 }, { ok: 0, ms: 6100, act: 1.6, base: "#7A9A62", odd: "#7FA065" }];
     return ooResults({ title: "Level 7 · Paint strip", s: { res, hits: 4, total: 6, pts: 3120, min: 2.2, med: 2400, hint: false }, finish: true, stars: [1, 1, 1], got: [1, 1, 1], pb: true, unlocked: true, next: 7, again: () => ooPlayLevel(6), score: "4 of 6 right" });
