@@ -675,10 +675,13 @@ scenario("pages", "article figure cards: Mauve draws them, a card opens its page
   await t.click(door, { wait: 700 });
   await t.waitFor(() => t.$(".ar-read .ar") && /#\/read\/mauve/.test(decodeURIComponent(t.w.location.hash)), 15000, "the book at #/read/mauve");
   await t.waitFor(() => t.$$(".ar-fig").length >= 2, 25000, "the article's figure cards");
-  const figs = t.$$(".ar-fig");
+  // the planned twins (at most 5, one per section) plus the pictures that break up long runs of text (data-ar-gap, at most 10)
+  const all = t.$$(".ar-fig"), figs = all.filter(f => !f.hasAttribute("data-ar-gap")), gapFigs = all.filter(f => f.hasAttribute("data-ar-gap"));
   t.expect(figs.length <= 5, `${figs.length} auto-figures, the limit is 5`);
-  t.expect(figs.every(f => /\d+% match to Mauve/.test(t.text(f.querySelector(".ar-fig-m")))), "a card is missing its '% match to Mauve' line");
-  t.expect(figs.every(f => [112, 88].includes(f.querySelector(".ar-fig-im").getBoundingClientRect().width)), "a card's picture box lost its fixed size");
+  t.expect(gapFigs.length <= 10, `${gapFigs.length} pictures between paragraphs, the limit is 10`);
+  t.expect(all.every(f => /\d+% match to Mauve/.test(t.text(f.querySelector(".ar-fig-m")))), "a card is missing its '% match to Mauve' line");
+  // a compact card's picture is a fixed 112 (88 under 360 px) square; a wide one fills the measure at a fixed 4:3 or 3:2
+  t.expect(all.every(f => { const r = f.querySelector(".ar-fig-im").getBoundingClientRect(); return f.classList.contains("ar-wide") ? r.width > 200 && [3 / 4, 2 / 3].some(k => Math.abs(r.height - r.width * k) < 2) : [112, 88].includes(r.width); }), "a card's picture box lost its fixed proportions");
   const secs = figs.map(f => (f.closest("[data-ar-sec]") || {}).id || "seen").filter(x => x !== "seen");
   t.expect(new Set(secs).size === secs.length, "two figures landed in one section");
   const card = t.$('.ar-fig[data-kind="gem"] .ar-fig-b') || t.$(".ar-fig .ar-fig-b");

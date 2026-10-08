@@ -144,10 +144,157 @@ function arOpenColor(slug, srcEl) {
 }
 
 // ---------- inline text ----------
-function arLinkHTML(slug, label) {
+// hl: a paragraph's highlight budget ({ n }); while it lasts, the link's words take their own color, legibly (arAccent)
+function arLinkHTML(slug, label, hl, word) {
   const c = arColor(slug);
   if (!c) { const lm = AR_LM.get(slug); return `<span class="ar-link ar-x">${esc(label || (lm && lm.label) || arPretty(slug))}</span>`; }
-  return `<button type="button" class="ar-link" data-ar-open="${esc(c.slug)}"><i style="--c:${c.h}"></i>${esc(label || c.via || c.n)}</button>`;
+  const a = hl && hl.n < AR_HL_MAX ? arAccent(c.h) : null;
+  if (a && a.mode !== "none") hl.n++;
+  const cls = a && a.mode !== "none" ? ` ${AR_HL_CLS[a.mode]}" style="--hl:${a.c || "transparent"}` : "";
+  // word: a color word found in plain text ("then purple"): its color is the mark, so no swatch dot and no underline unless it is pale
+  return `<button type="button" class="ar-link${word ? " ar-cw" : ""}${cls}" data-ar-open="${esc(c.slug)}">${word ? "" : `<i style="--c:${c.h}"></i>`}${esc(label || c.via || c.n)}</button>`;
+}
+
+// ---------- reading aids (David, 2026-10-08: "a lot of text and hard to read ... some words pink, not light pink") ----------
+// Color in the text has to stay legible on the warm-black ground. arAccent(hex) decides how a color may mark words:
+//   text  the color itself (WCAG contrast >= 4.5 on the ground, and far enough from the body text to read as a color)
+//   tint  too dark for that: the same hue lifted until it passes 4.5 (Navy reads as a periwinkle of its own hue)
+//   line  white text with an underline in the color: pale colors (Baby Pink would read as white text) and greys
+//   none  a near-black grey: nothing to mark with (the link keeps its swatch dot)
+// deco is the color for big decorative marks (drop cap, quote marks, the timeline): the color itself at 3:1, else the tint.
+const AR_GROUND = "#0E0D0B", AR_BODY_HEX = "#D9D4C8", AR_HL_MAX = 3, AR_SPLIT_W = 90;
+const AR_HL_CLS = { text: "hl-t", tint: "hl-t", line: "hl-l" };
+function arLum(h) { return [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16) / 255).map(v => v <= .03928 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4).reduce((s, v, i) => s + v * [.2126, .7152, .0722][i], 0); }
+const arContrast = (a, b) => { const x = arLum(a) + .05, y = arLum(b) + .05; return x > y ? x / y : y / x; };
+const AR_ACC = new Map();
+function arAccent(hex) {
+  hex = String(hex || "").toUpperCase();
+  if (!/^#[0-9A-F]{6}$/.test(hex)) return { mode: "none", c: "", deco: "" };
+  if (AR_ACC.has(hex)) return AR_ACC.get(hex);
+  const k = arContrast(hex, AR_GROUND), far = h => typeof de2000 !== "function" || de2000(h, AR_BODY_HEX) >= 14;
+  let r;
+  if (typeof lch !== "function" || typeof lchHex !== "function") r = k >= 4.5 ? { mode: "text", c: hex } : k >= 1.6 ? { mode: "line", c: hex } : { mode: "none", c: "" };
+  else {
+    const [L, C, H] = lch(hex);
+    if (C < 12) r = k >= 1.6 ? { mode: "line", c: hex } : { mode: "none", c: "" };
+    else if (L >= 78 && C < 35) r = { mode: "line", c: hex };
+    else if (k >= 4.5 && far(hex)) r = { mode: "text", c: hex };
+    else {
+      r = k >= 1.6 ? { mode: "line", c: hex } : { mode: "none", c: "" };
+      for (let L2 = Math.max(L, 40); L2 <= 86; L2 += 2) {
+        let C2 = C; while (C2 > 8 && typeof inGamut === "function" && !inGamut(L2, C2 * Math.cos(H * Math.PI / 180), C2 * Math.sin(H * Math.PI / 180))) C2 -= 2;
+        const t = lchHex(L2, C2, H);
+        if (arContrast(t, AR_GROUND) >= 4.6) { if (far(t)) r = { mode: "tint", c: t }; break; }
+      }
+    }
+  }
+  r.deco = k >= 3 ? hex : r.mode === "tint" ? r.c : r.c && arContrast(r.c, AR_GROUND) >= 3 ? r.c : "";
+  AR_ACC.set(hex, r);
+  return r;
+}
+// The color words worth marking in plain text: the eleven basic terms and violet, and every name of two or more words in the
+// ~1,000 core names ("Paris blue", "sky blue"): unambiguous as words. Single-word names (Rose, Orange, Navy) stay plain.
+const AR_HLW = new Map();
+const AR_BEFORE_WORD = /^(?:a|an|the|of|in|into|to|and|or|nor|as|from|than|then|toward|towards|is|was|were|are|be|been|being|turn|turns|turned|turning|became|become|becomes|went|goes|go|dyed|painted|called|named|with|for|like|its|their|his|her|no|not|but|only|pure|plain|true|bright|any|every|each|between|over|under|on)$/i;
+let AR_HLW_RE = null, AR_HLW_N = -1;
+function arWordsRe() {
+  const list = typeof CORE_NAMES !== "undefined" && Array.isArray(CORE_NAMES) ? CORE_NAMES : [];
+  if (AR_HLW_RE && AR_HLW_N === list.length) return AR_HLW_RE;
+  AR_HLW.clear(); AR_HLW_N = list.length;
+  ["red", "orange", "yellow", "green", "blue", "purple", "pink", "brown", "violet"].forEach(w => AR_HLW.set(w, w));
+  list.forEach(e => { const n = String(e.n || ""); if (/^[A-Za-z]+(?:[ -][A-Za-z]+)+$/.test(n) && n.length <= 28) AR_HLW.set(n.toLowerCase(), routeSlug(n)); });
+  const alts = [...AR_HLW.keys()].sort((a, b) => b.length - a.length).map(k => k.replace(/[-]/g, "[- ]"));
+  AR_HLW_RE = alts.length ? new RegExp("(^|[^\\p{L}\\u0001-])(" + alts.join("|") + ")(?![\\p{L}\\u0002-])", "giu") : null;
+  return AR_HLW_RE;
+}
+// markup -> plain words (for quotes, dates and their captions)
+function arPlain(t) {
+  return String(t == null ? "" : t).replace(new RegExp(AR_REF_SRC, "gi"), (m, k, id, label) => label || arPretty(id))
+    .replace(/\[\[([a-z0-9-]+)(?:\|([^\]]+))?\]\]/gi, (m, s, label) => { if (label) return label; const c = arColor(s.toLowerCase()); return c ? c.via || c.n : arPretty(s); })
+    .replace(/\s*\[\d[\d,\s–-]*\]/g, "").replace(/\*\*([^*]+)\*\*/g, "$1").replace(/\*([^*]+)\*/g, "$1").replace(/`([^`]+)`/g, "$1").replace(/\s+/g, " ").trim();
+}
+// sentences, keeping each one's note refs ([n]) with it; never splits after "St." "c." "ch." or an initial ("J. M. W.")
+function arSentences(t) {
+  const out = [], s = String(t || ""), re = /[.!?][”"’)]*((?:\s*\[\d[\d,\s–-]*\])*)\s+(?=[A-Z“"‘\[])/g;
+  let last = 0, m;
+  while ((m = re.exec(s))) {
+    const before = s.slice(last, m.index), word = (before.match(/(\S+)$/) || ["", ""])[1];
+    if (/^(?:St|Mr|Mrs|Dr|Mme|Jr|Sr|c|ca|ch|cf|fig|vol|no|nos|pp?|vs|e\.g|i\.e|[A-Z])$/i.test(word.replace(/^[(“"‘]+/, ""))) continue;
+    if ((before.match(/\[\[/g) || []).length !== (before.match(/\]\]/g) || []).length) continue;   // inside a [[link|label]]
+    if (((s.slice(0, m.index).match(/[“”]/g) || []).length % 2) || ((s.slice(0, m.index).match(/"/g) || []).length % 2)) continue;   // inside a quotation
+    const end = m.index + m[0].length;
+    out.push(s.slice(last, end).trim()); last = end;
+  }
+  if (last < s.length) out.push(s.slice(last).trim());
+  return out.filter(Boolean);
+}
+// a paragraph of more than AR_SPLIT_W words -> 2-3 shorter ones, at sentence ends, as even as the sentences allow
+function arSplit(t) {
+  const words = x => arPlain(x).split(/\s+/).filter(Boolean).length, total = words(t);
+  if (total <= AR_SPLIT_W) return [t];
+  const ss = arSentences(t); if (ss.length < 2) return [t];
+  const target = total / Math.ceil(total / 62), out = [];
+  let cur = [], n = 0;
+  ss.forEach(x => { cur.push(x); n += words(x); if (n >= target * .85) { out.push(cur); cur = []; n = 0; } });
+  if (cur.length) { if (out.length && n < 22) out[out.length - 1].push(...cur); else out.push(cur); }
+  return out.map(c => c.join(" "));
+}
+// the chapter's short attributed quotation: 4-15 words in quotation marks, with who said it in the same sentence
+const AR_SAID = "called|wrote|said|described|declared|complained|remarked|praised|warned|recalled|observed|insisted|dubbed|named|proclaimed|announced|boasted|lamented";
+function arQuoteOf(text) {
+  for (const sent of arSentences(text)) {
+    const q = sent.match(/[“"]([^”"]{8,140})[”"]/); if (!q) continue;
+    const words = arPlain(q[1]).split(/\s+/).filter(Boolean);
+    if (words.length < 4 || words.length > 15 || /^\[\[|^[a-z-]+$/.test(q[1].trim())) continue;
+    const pre = sent.slice(0, q.index), post = sent.slice(q.index + q[0].length), NAME = "((?:[A-Z][\\p{L}'’.-]+)(?:\\s+(?:de|van|von|da|di|la|le|du)?\\s*[A-Z][\\p{L}'’.-]+){0,3})";
+    let who = null, m;
+    const reB = new RegExp(NAME + "\\s+(?:" + AR_SAID + ")\\b", "gu");
+    while ((m = reB.exec(pre))) who = m[1];
+    if (!who && (m = new RegExp("^[,]?\\s+(?:" + AR_SAID + ")\\s+" + NAME, "u").exec(post))) who = m[1];
+    who = who && arPlain(who).replace(/^(?:The|A|An|In|His|Her|Its|Their|When|Then|But|And)\s+/, "");
+    if (!who || /^(?:It|This|That|He|She|They|We|One|Some|Others|Many|The)$/.test(who)) continue;
+    return { q: arPlain(q[1]).replace(/^[,.;:\s]+|[,;:\s]+$/g, ""), who };
+  }
+  return null;
+}
+// the chapter's dates, in its own words: [{ y, label, snip, p }] (2-4 of them, in time order; p = the text it came from), or []
+// One date per sentence (a sentence with two years is a range or a doubt, "1704 or 1705", and is skipped unless its first is new).
+const AR_YEAR = /\b(1[0-9]{3}|20[0-2][0-9])(s)?\b(?![,.]\d)(?!\s*(?:%|per\b|kg|tons?|tonnes?|pounds?|lbs?|km|kilo\w*|miles?|met(?:re|er)s?|feet|ft\b|insects|people|names|colou?rs|paintings|times|words|species|grams?|years))/g;
+const AR_JOIN = /^(?:which|who|whose|whom|where|when|while|and|but|or|though|although|as|until|so|because|after|before)\b/i;
+function arDatesOf(texts) {
+  const seen = new Map();
+  texts.forEach((t, p) => arSentences(t).forEach(sent => {
+    const plain = arPlain(sent), ys = [...plain.matchAll(AR_YEAR)].filter(m => !/[£$€,.]\s*$/.test(plain.slice(0, m.index)));
+    if (!ys.length) return;
+    const m = ys[0], y = m[0];
+    if (seen.has(y) || (ys.length > 1 && [...seen.keys()].some(k => ys.some(x => x[0] === k)))) return;
+    const clauses = plain.split(/(?<=[,;:—–])\s+/);
+    let i = 0, pos = 0; for (; i < clauses.length - 1; i++) { if (m.index < pos + clauses[i].length + 1) break; pos += clauses[i].length + 1; }
+    let snip = clauses[i];
+    if (AR_JOIN.test(snip) && i > 0) snip = clauses[i - 1] + " " + snip;
+    if (snip.split(/\s+/).length <= 4 && clauses[i + 1]) snip += " " + clauses[i + 1];
+    snip = snip.replace(new RegExp("^(?:In|By|From|Until|Around|After|Before|Since|About|Circa|c\\.)\\s+(?:the\\s+)?(?:early\\s+|late\\s+|mid-)?" + y + "(?:\\s*(?:or|and|to|–|-)\\s*\\d{2,4}s?)?\\s*,?\\s*", "i"), "").replace(/[,;:—–]\s*$/, "").replace(/\.$/, "");
+    const w = snip.split(/\s+/), at = w.findIndex(x => x.includes(y));
+    if (w.length > 13) snip = at >= 0 && at > 10 ? "…" + w.slice(-12).join(" ") : w.slice(0, 12).join(" ").replace(/[,;:]$/, "") + "…";
+    snip = snip.replace(/^[a-z]/, c => c.toUpperCase());
+    if (snip.replace(/…/g, "").split(/\s+/).length >= 3) seen.set(y, { y: +m[1] + (m[2] ? 5 : 0), label: y, snip, p });
+  }));
+  let list = [...seen.values()].sort((a, b) => a.y - b.y);
+  if (list.length < 2) return [];
+  if (list.length > 4) list = [0, 1, 2, 3].map(k => list[Math.round(k * (list.length - 1) / 3)]);
+  return list;
+}
+function arDatesHTML(list) {
+  const lo = list[0].y, hi = list[list.length - 1].y, span = Math.max(1, hi - lo);
+  return `<figure class="ar-tl" aria-label="Key dates"><figcaption class="ar-tl-h">Key dates</figcaption>
+    <div class="ar-tl-axis" aria-hidden="true"><i class="ar-tl-line"></i>${list.map(d => `<i class="ar-tl-dot" style="left:${(4 + 92 * (d.y - lo) / span).toFixed(1)}%"></i>`).join("")}<span class="ar-tl-lo">${esc(list[0].label)}</span><span class="ar-tl-hi">${esc(list[list.length - 1].label)}</span></div>
+    <ol>${list.map(d => `<li><b>${esc(d.label)}</b><span>${esc(d.snip)}</span></li>`).join("")}</ol></figure>`;
+}
+function arQuoteHTML(q) { return `<figure class="ar-pq"><blockquote><p>${esc(q.q)}</p></blockquote><figcaption>${esc(q.who)}</figcaption></figure>`; }
+// the colors a paragraph names, side by side with the page's own: big plates, one tap opens each
+function arPlateHTML(self, cols) {
+  const tile = (c, me) => `<${me ? "span" : "button type=\"button\""} class="ar-pl${me ? " me" : ""}"${me ? ` aria-current="true"` : ` data-ar-open="${esc(c.slug)}"`}><i style="--c:${c.h}"></i><b>${esc(c.via || c.n)}</b></${me ? "span" : "button"}>`;
+  return `<div class="ar-plate2" role="group" aria-label="${esc([self, ...cols].map(c => c.via || c.n).join(", "))}, side by side">${tile(self, true)}${cols.map(c => tile(c, false)).join("")}</div>`;
 }
 function arRefsHTML(body, art) {
   const ids = [];
@@ -173,15 +320,43 @@ function arRefList(text) {
   String(text == null ? "" : text).replace(new RegExp(AR_REF_SRC, "gi"), (m, kind, id, label) => { const k = arRefKind(kind), key = k + ":" + id; if (!seen.has(key)) { seen.add(key); out.push({ kind: k, id, key, label: label || "" }); } return m; });
   return out;
 }
-function arInline(text, art) {
+// hl (optional): { n, self } a paragraph's highlight budget; self = { name, a, done } marks the page's own color name once a chapter
+function arInline(text, art, hl) {
   const stash = [];
   let s = String(text == null ? "" : text);
   s = s.replace(new RegExp(AR_REF_SRC, "gi"), (m, kind, id, label) => { stash.push(arRefChipHTML(kind, id, label)); return "\u0001" + (stash.length - 1) + "\u0002"; });
-  s = s.replace(/\[\[([a-z0-9-]+)(?:\|([^\]]+))?\]\]/gi, (m, slug, label) => { stash.push(arLinkHTML(slug.toLowerCase(), label)); return "\u0001" + (stash.length - 1) + "\u0002"; });
+  s = s.replace(/\[\[([a-z0-9-]+)(?:\|([^\]]+))?\]\]/gi, (m, slug, label) => { stash.push(arLinkHTML(slug.toLowerCase(), label, hl)); return "\u0001" + (stash.length - 1) + "\u0002"; });
   s = esc(s);
+  const me = hl && hl.self;
+  if (me && !me.done && me.name && me.a.mode !== "none" && hl.n < AR_HL_MAX) {
+    const re = new RegExp("(^|[^\\p{L}])(" + me.name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")(?![\\p{L}])", "iu");
+    s = s.replace(re, (m, pre, w) => { me.done = true; hl.n++; stash.push(`<span class="ar-hl ${AR_HL_CLS[me.a.mode]}" style="--hl:${me.a.c}">${w}</span>`); return pre + "\u0001" + (stash.length - 1) + "\u0002"; });
+  }
+  // color words written as plain text ("then purple, then a deep blue", "Paris blue"): one-tap links in their own color, each once a chapter
+  if (me && me.words && hl.n < AR_HL_MAX) {
+    s = s.replace(me.words, (m, pre, w, at, all) => {
+      const key = w.toLowerCase(), slug = AR_HLW.get(key);
+      if (hl.n >= AR_HL_MAX || !slug || me.used.has(slug)) return m;
+      // "Naples yellow", "Isabella yellow": a basic word after a proper name is part of another color's name, so it stays plain
+      // and a lone basic word counts only where it stands as the color itself ("in blue", "then purple", "turns it red"), never as part
+      // of a compound ("navy blue", "cadmium yellow") or a proper name ("the Blue Period")
+      if (!/\s/.test(w)) {
+        const before = all.slice(Math.max(0, at - 40), at + pre.length), prev = (before.match(/([\p{L}'’]+)[\s(“"‘]*$/u) || [])[1] || "";
+        if (/^[A-Z]/.test(w) && !/(?:^|[.!?:]\s*)$/.test(before.trim() ? before : "")) return m;
+        if (prev && !AR_BEFORE_WORD.test(prev) && !/[,;:(—–]\s*$/.test(before)) return m;
+        if (/^(?:-|\s+(?:red|orange|yellow|green|blue|purple|pink|brown|violet|grey|gray|black|white|ochre|lake|earth|oxide)\b)/i.test(all.slice(at + m.length, at + m.length + 12))) return m;   // "red brown", "blue-green"
+      }
+      const c = arColor(slug), a = c && arAccent(c.h);
+      if (!a || !(a.mode === "text" || a.mode === "tint" || (a.mode === "line" && typeof lch === "function" && lch(c.h)[1] >= 12))) return m;
+      me.used.add(slug);
+      stash.push(arLinkHTML(slug, w, hl, true));
+      return pre + "\u0001" + (stash.length - 1) + "\u0002";
+    });
+  }
   s = s.replace(/\[(\d+(?:\s*(?:,|–|-)\s*\d+)*)\]/g, (m, body) => { const h = arRefsHTML(body, art); if (!h) return m; stash.push(h); return "\u0001" + (stash.length - 1) + "\u0002"; });
   s = s.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>").replace(/\*([^*\s](?:[^*]*[^*\s])?)\*/g, "<em>$1</em>");
-  return s.replace(/\u0001(\d+)\u0002/g, (m, i) => stash[+i]);
+  // a link or chip never leaves its comma or full stop alone at the start of the next line
+  return s.replace(/\u0001(\d+)\u0002([,.;:!?)’”]+)/g, (m, i, p) => `<span class="ar-nw">\u0001${i}\u0002${p}</span>`).replace(/\u0001(\d+)\u0002/g, (m, i) => stash[+i]);
 }
 // every [[slug]] and [n] an article mentions, for the tests and the gate
 function arRefs(art) {
@@ -245,12 +420,13 @@ function arFactsHTML(art) {
     + (aka.length ? `<p class="ar-aka">Also called ${aka.map(esc).join(", ")}.</p>` : "");
 }
 const arCap = t => String(t || "").replace(/^\s*[a-z]/, m => m.toUpperCase());
-function arBlockHTML(b, art) {
+// o (optional, inside a chapter): { hl, cls } the paragraph's highlight budget and an extra class (the drop cap)
+function arBlockHTML(b, art, o) {
   if (b.t === "html") return b.html;   // a story built from the wiki's own facets (arFacetArt below): already linked HTML
   if (b.t === "books") return `<aside class="ar-call ar-books"><p class="ar-tag">Books disagree</p><p>${arInline(b.text, art)}</p></aside>`;
   if (b.t === "myth") return `<aside class="ar-call ar-myth"><p class="ar-tag">Myth</p><p class="ar-say"><em>The story says</em> ${arInline(arCap(b.say), art)}</p>${b.rec ? `<p class="ar-rec"><em>The record shows</em> ${arInline(arCap(b.rec), art)}</p>` : ""}</aside>`;
   const refs = arRefList(b.text);
-  return `<p${refs.length ? ` data-ar-refs="${esc(refs.map(r => r.key).join(" "))}"` : ""}>${arInline(b.text, art)}</p>`;
+  return `<p${o && o.cls ? ` class="${o.cls}"` : ""}${refs.length ? ` data-ar-refs="${esc(refs.map(r => r.key).join(" "))}"` : ""}>${arInline(b.text, art, o && o.hl)}</p>`;
 }
 const AR_INFER = [["duel", /look.?alike|confus|mistak|mix(?:ed)? up|apart|differ|neighbou?r|versus|\bvs\b/i], ["painting", /paint|artist|canvas|masters?\b|museum|studio/i],
   ["mix", /\bmix|recipe|blend|how (?:it|they) (?:is|are|was|were) made/i], ["map", /\bmap\b|trade route|geograph|where (?:it|they) (?:come|came|grew|grow)/i]];
@@ -265,9 +441,35 @@ function arActionsFor(sec) {
   kinds = [...new Set(kinds)].filter(k => AR_ACT_LABEL[k] && arActionAvailable(k));
   return kinds;
 }
-function arSectionHTML(sec, art) {
+// A chapter, made easier to read: long paragraphs split at sentence ends, a drop cap, the page's own color name marked once,
+// and between the paragraphs (never two in one gap, spread out): a plate of the colors a paragraph names, the chapter's
+// short attributed quotation, and its key dates. js/article-refs.js later fills the remaining long runs with pictures.
+function arSectionHTML(sec, art, self, ch) {
   const acts = arActionsFor(sec);
-  return `<section class="ar-sec" id="ar-s-${esc(sec.id)}" data-ar-sec="${esc(sec.id)}">${sec.title ? `<h2>${esc(sec.title)}</h2>` : ""}${sec.blocks.map(b => arBlockHTML(b, art)).join("")}`
+  const items = [];
+  sec.blocks.forEach(b => { if (b.t === "p") arSplit(b.text).forEach(t => items.push({ t: "p", text: t })); else items.push(b); });
+  const ps = items.map((b, i) => b.t === "p" ? i : -1).filter(i => i >= 0);
+  const after = new Map(), busy = new Set(ps.filter(i => arRefList(items[i].text).length));   // a paragraph with a reference gets its own figure card
+  const free = (i, near) => !after.has(i) && !busy.has(i) && (!near || ![...after.keys()].some(k => Math.abs(k - i) < 2));
+  const place = (from, html) => {
+    const order = ps.filter(i => i >= from);
+    const at = order.find(i => free(i, true)) ?? order.find(i => free(i)) ?? null;
+    if (at != null) after.set(at, html);
+  };
+  if (self && ps.length && sec.id !== "field") {
+    const others = i => [...new Set((items[i].text.match(/\[\[([a-z0-9-]+)(?:\|[^\]]+)?\]\]/gi) || []).map(m => m.slice(2, -2).split("|")[0].toLowerCase()))].map(arColor).filter(c => c && c.h && c.slug !== self.slug && String(c.h).toUpperCase() !== String(self.h).toUpperCase());
+    const pi = ps.find(i => others(i).length >= 2) ?? (ps.length >= 3 ? ps.find(i => others(i).length) : undefined);
+    if (pi != null) place(pi, arPlateHTML(self, others(pi).filter((c, k, a) => a.findIndex(x => x.h === c.h) === k).slice(0, 3)));
+    const qi = ps.find(i => arQuoteOf(items[i].text));
+    if (qi != null) place(qi, arQuoteHTML(arQuoteOf(items[qi].text)));
+    const dates = arDatesOf(ps.map(i => items[i].text));
+    if (dates.length) place(ps[Math.max(...dates.map(d => d.p))], arDatesHTML(dates));   // after the text that tells them
+  }
+  const me = self ? { name: art.name || self.n, a: arAccent(self.h), done: false, used: new Set([self.slug]), words: arWordsRe() } : null;
+  const first = ps[0], cap = first != null && /^[A-Z][A-Za-z]*[\s,]/.test(items[first].text) && arPlain(items[first].text).split(/\s+/).length >= 30 ? first : -1;   // a drop cap on a full first paragraph
+  const body = items.map((b, i) => (b.t === "p" ? arBlockHTML(b, art, { hl: { n: 0, self: me }, cls: i === cap ? "ar-dc" : "" }) : arBlockHTML(b, art)) + (after.get(i) || "")).join("");
+  const kick = ch && ch.n > 1 && sec.title ? `<p class="ar-chk">Chapter ${ch.i} of ${ch.n}</p>` : "";
+  return `<section class="ar-sec" id="ar-s-${esc(sec.id)}" data-ar-sec="${esc(sec.id)}">${kick}${sec.title ? `<h2>${esc(sec.title)}</h2>` : ""}${body}`
     + (acts.length ? `<div class="ar-acts">${acts.map(k => `<button type="button" class="ar-act" data-ar-act="${k}" data-ar-sec="${esc(sec.id)}">${AR_ACT_LABEL[k]}<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>`).join("")}</div><div class="ar-slotpanel" data-ar-panel="${esc(sec.id)}" hidden></div>` : "")
     + `</section>`;
 }
@@ -309,13 +511,14 @@ function arNotesHTML(art) {
 function arBuildHTML(art, self) {
   const tier = AR_TIERS[String(art.tier).toLowerCase()] != null ? AR_TIERS[String(art.tier).toLowerCase()] : arPretty(art.tier);
   const toc = art.sections.filter(s => s.title);
-  return `<article class="ar" data-ar="${esc(art.slug)}">
+  const acc = self && self.h ? arAccent(self.h) : null, accStyle = acc && acc.deco ? ` style="--ar-acc:${acc.deco}"` : "";
+  return `<article class="ar${acc && acc.deco ? " ar-has-acc" : ""}" data-ar="${esc(art.slug)}"${accStyle}>
     <p class="ar-kind">${[tier, arMinutes(art) + " min read"].filter(Boolean).map(esc).join(" · ")}</p>
     ${art.lede ? `<p class="ar-lede">${arInline(art.lede, art)}</p>` : ""}
     ${arFactsHTML(art)}
     ${art.status === "draft" ? `<p class="ar-draft">A draft: not yet fact-checked.</p>` : ""}
     ${toc.length > 1 ? `<button type="button" class="ar-bar" data-ar-bar aria-label="Contents"><span class="ar-bar-l">Contents</span><span class="ar-bar-c" data-ar-cur></span><span class="ar-bar-n mono" data-ar-pos></span><i class="ar-bar-p" data-ar-prog></i></button>` : ""}
-    ${art.sections.map(s => arSectionHTML(s, art)).join("")}
+    ${art.sections.map(s => arSectionHTML(s, art, self, s.title ? { i: toc.indexOf(s) + 1, n: toc.length } : null)).join("")}
     ${(() => { const tree = arTreeHTML(self, art.aside), dis = arDisambHTML(self, art.aside);
       return tree || dis ? `<section class="ar-fam" id="ar-s-family"><h2>Family</h2>${tree}${dis}</section>` : ""; })()}
     ${arYouHTML(self)}
@@ -394,11 +597,14 @@ function arWire(root, art, self) {
     const tick = () => {
       raf = 0;
       const r = root.getBoundingClientRect(), total = Math.max(1, r.height - innerHeight * .6), done = Math.min(1, Math.max(0, -r.top / total));
-      prog.style.transform = `scaleX(${done.toFixed(3)})`;
       let idx = -1; secsEl.forEach((s, i) => { if (s.getBoundingClientRect().top <= 90) idx = i; });
+      // the line under the bar is how far through this chapter you are (the whole story's progress is the n/N beside it)
+      const sr = idx >= 0 ? secsEl[idx].getBoundingClientRect() : null, inCh = sr ? Math.min(1, Math.max(0, (90 - sr.top) / Math.max(1, sr.height - innerHeight * .5))) : 0;
+      prog.style.transform = `scaleX(${inCh.toFixed(3)})`;
       const started = bar.getBoundingClientRect().top <= 2;
       cur.textContent = idx >= 0 && started ? secsEl[idx].querySelector("h2").textContent : "";
-      pos.textContent = idx >= 0 && started ? `${idx + 1}/${secsEl.length}` : "";
+      const chs = secsEl.filter(x => x.matches(".ar-sec")), ci = idx >= 0 ? chs.indexOf(secsEl[idx]) : -1;   // the same count as "Chapter 2 of 8"
+      pos.textContent = ci >= 0 && started ? `${ci + 1}/${chs.length}` : "";
       bar.classList.toggle("on", idx >= 0 && started);
       if (!readLogged && done > .92) { readLogged = true; arLog({ type: "seen", color: { n: self.n, h: self.h } }); }
     };
