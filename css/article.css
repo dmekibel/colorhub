@@ -155,7 +155,8 @@
 
 /* ---------- hub + which pages ---------- */
 .ar-page{padding-bottom:calc(var(--tabh) + 24px)}
-.ar-hubband{position:relative;display:flex;margin:calc(-1 * (var(--top) + 12px)) calc(-1 * var(--g)) 0;width:calc(100% + var(--g) * 2);height:34dvh;min-height:200px;background:var(--surface-1)}
+.ar-hubband{position:relative;display:flex;margin:0 calc(-1 * var(--g)) 0;   /* (an .article screen has no top padding to bleed past: app.css .article) */
+  width:calc(100% + var(--g) * 2);height:34dvh;min-height:200px;background:var(--surface-1)}
 .ar-hubband>i{flex:1;background:var(--c)}
 .ar-hubband.ar-flat{height:calc(var(--top) + 64px);min-height:0;background:none}
 .ar-back{background:var(--surface-2);border-radius:50%;color:var(--ink)}
@@ -235,7 +236,7 @@ span.ar-ref.ar-x{text-decoration:none;color:var(--ar-body)}
 .ar-door-go svg{margin-left:auto;flex:none}
 
 /* ---------- the book: its own screen ---------- */
-.ar-rd-top{display:flex;align-items:center;gap:12px;min-height:48px}
+.ar-rd-top{display:flex;align-items:center;gap:12px;min-height:48px;padding-top:calc(var(--top) + 10px)}   /* below the status bar (an .article screen has no top padding) */
 .ar-rd-t{flex:1;min-width:0;display:flex;align-items:center;gap:8px;font:italic 400 17px/1.2 var(--serif);color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ar-rd-t i{flex:none;width:10px;height:10px;border-radius:50%;background:var(--c)}
 .ar-rd-sp{width:44px;flex:none}
