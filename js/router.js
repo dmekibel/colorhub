@@ -102,6 +102,7 @@ const ROUTED = [["colorPage", (n, tapped) => n && n.id ? routed(n.title, nodeRou
   ["btFloriPage", () => routed("The language of flowers", "botany/flori")],   // js/botany.js
   ["gmListPage", kind => typeof gmListTitle === "function" ? routed(gmListTitle(kind), "gem/" + kind) : null],   // js/gems.js (gem/essay detail pages route via wikiPage above)
   ["labHoney", () => routed("Honeycomb lab", "lab/honey")],   // js/home.js: rate every preset at every set size
+  ["msOpen", () => routed("Study the map", "mapstudy")],   // js/mapstudy.js
   ["gamutWheel", () => routed("Gamut wheel", "studio/wheel")],   // js/studio.js
   ["openSavedPalette", id => routed("Your palette", "studio/palette/" + id)]];   // js/studio.js
 ROUTED.forEach(([name, f]) => routeWrap(window, name, f));
@@ -193,6 +194,7 @@ function openRoute(hash, initial = false) {
     taste: () => tasteIntro(id === "palette" ? "palette" : "color"),
     lab: () => id === "honey" && typeof labHoney === "function" ? labHoney() : (LAB[id] && ["harmony", "contrast"].includes(id) ? LAB[id] : LAB.harmony)(),
     fashion: () => typeof fashionPage === "function" && fashionPage(id),
+    mapstudy: () => typeof msOpen === "function" ? msOpen() : go(S.tab || "learn"),   // js/mapstudy.js
     // the honeycomb home's instant mini-lesson (js/learnit.js): #/learnit/<color>
     learnit: () => { const c = id && routeColor(id); if (c && typeof hmLearnIt === "function") hmLearnIt(c); else go(S.tab || "learn"); } };
   if (simple[kind]) { base(); simple[kind](); return true; }
