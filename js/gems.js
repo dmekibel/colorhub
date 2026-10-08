@@ -100,7 +100,7 @@ function gmListNodes(kind) {
   if (kind === "essays") return G.essays.map(e => gmNode("gm:essay:" + e.id));
   return G.gems.map(g => gmNode("gm:gem:" + g.id));
 }
-function gmFallback() { S.lens = "world"; go("explore"); }
+function gmFallback() { xToOrigin(); }   // where the trail started (js/explore.js), never a guessed room
 function gmListPage(kind, opts = {}) {
   if (!window.GEMS) return gmFallback();
   gmBuildNodes();

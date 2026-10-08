@@ -126,7 +126,7 @@ function fashionPage(slug, opts = {}) {
   if (kind === "garment" && id && typeof fxGarment === "function") return fxGarment(id, opts);
   return fashionFallback();
 }
-function fashionFallback() { S.lens = "world"; go("explore"); }
+function fashionFallback() { xToOrigin(); }   // where the trail started (js/explore.js), never a guessed room
 
 // ---------------------------------------------------------------- list screens (decades / houses / history)
 const FASHION_LIST_META = {

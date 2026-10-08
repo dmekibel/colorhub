@@ -69,14 +69,17 @@ function tlRestore() {
 // Called by show() (core.js) once the screen is in the page.
 function tlNote(el, tab, backNav) {
   const call = TL_CALL; TL_CALL = null;
-  if (typeof SHOT !== "undefined" && SHOT) { tlDecorate(el); return; }
+  // screenshot mode (#shot=…, boot.js) draws a screen as if it had been opened from its room
+  if (typeof SHOT !== "undefined" && SHOT) { if (tab || el.classList.contains("hm")) X_ROOT = tab || "home"; else if (!X_ROOT) X_ROOT = S.tab || "learn"; tlDecorate(el); return; }
   // a loading placeholder (loader.js waitScreen): the real screen it stands in for is the one that joins the trail
   if (el.classList.contains("waiting")) { TL_CALL = call; return; }
   if (TL_KEEP) { if (performance.now() - TL_KEEP.t < 4000) { XSTACK = TL_KEEP.stack; X_ROOT = TL_KEEP.root; } TL_KEEP = null; }
   if (!TL_BOOTED) { TL_BOOTED = true; tlRestore(); }
-  // a room or the map is where a trail starts: nothing behind it
-  if (tab || el.classList.contains("hm")) { XSTACK = []; TL_PREV = ""; tlSave(); return; }
+  // a room or the map is where a trail starts: nothing behind it, and it's where the trail returns when it runs out
+  if (tab || el.classList.contains("hm")) { XSTACK = []; X_ROOT = tab || "home"; TL_UNDER = null; TL_PREV = ""; tlSave(); return; }
   const back = tlBackBtn(el);
+  // a part of the Museum (Art, For you, Ideas, World, Saved) starts trails too: running out comes back to it
+  if (back && !call && !XSTACK.length && S.tab === "explore" && ROUTE_NOW.indexOf("#/" + TAB_ROUTE.explore[0]) === 0) X_ROOT = "explore";
   const sig = XSTACK.join("\n");
   if (!back) { TL_PREV = sig; return; }   // a task (✕) or a full-screen tool: it has its own way out
   let top = XSTACK[XSTACK.length - 1];
@@ -122,6 +125,16 @@ function tlDecorate(el) {
 }
 
 // ---------- going back, jumping, exiting ----------
+// A room page opened from a page (a color's "See it in Art"): the room page starts a trail of its own, but its ‹
+// should still come back to the page that opened it. tlKeepUnder() notes that trail; backToPager() asks tlBackUnder().
+let TL_UNDER = null;
+function tlKeepUnder() { TL_UNDER = XSTACK.length ? { stack: XSTACK.slice(), root: X_ROOT } : null; }
+function tlBackUnder() {
+  const u = TL_UNDER; if (!u) return false;
+  TL_UNDER = null; XSTACK = u.stack; X_ROOT = u.root; BACK_RENDER = true;
+  xStep(XSTACK[XSTACK.length - 1]);
+  return true;
+}
 function tlJump(i) {
   if (i < 0 || i >= XSTACK.length) return;
   XSTACK.length = i + 1;
@@ -136,6 +149,10 @@ function tlExit(btn) {
   const scr = app.querySelector(".screen"), home = () => typeof hmHome === "function" ? hmHome() : go(S.tab || "learn");
   if (scr && btn && btn.isConnected) shrinkTo(scr, btn, home); else home();
 }
+// the exact color that opened a color or name page as its nearest name ("Your color · 97% match"), so Back draws it
+// the same way: it rode in the page's address as ?c=<hex> (router.js tappedQS)
+function tlTapped(tok) { const m = TL_META.get(tok), q = m && /\?c=([0-9a-f]{6})/i.exec(m.hash || ""); return q ? "#" + q[1].toUpperCase() : null; }
+function tlTol(tok) { const m = TL_META.get(tok), q = m && /[?&]t=(\d+(?:\.\d+)?)/.exec(m.hash || ""); return q ? +q[1] : null; }
 // an "r:" token: draw that screen again, keeping the trail behind it
 function tlReplay(tok) {
   TL_KEEP = { stack: XSTACK.slice(), root: X_ROOT, t: performance.now() };
@@ -216,7 +233,7 @@ function tlSheet() {
     rows.push(tlRow(i, m, here ? `${tlKind(m.hash)} · You're here` : tlKind(m.hash), here));
   }
   // the foot: where this trail started, then the map itself if that wasn't it
-  const fromMap = X_ROOT === "home", room = xFallbackTab(), roomName = (ROOMS_LIST.find(r => r[0] === room) || [, "Learn"])[1];
+  const room = xFallbackTab(), fromMap = !room, roomName = (ROOMS_LIST.find(r => r[0] === room) || [, "Learn"])[1];
   const mapRow = `<li><button class="tl-row tl-foot" data-tl-go="map"><span class="tl-th tl-th-map">${HOME_GLYPH}</span><span class="tl-txt"><b>${esc(NAV_MAP)}</b><em>${fromMap ? "Where you started · " : ""}${esc(NAV_MAP_NOTE)}</em></span>${ICON.chev}</button></li>`;
   const roomRow = fromMap ? "" : `<li><button class="tl-row tl-foot" data-tl-go="origin"><span class="tl-th tl-th-room">${typeof roomsBubbleArt === "function" ? roomsBubbleArt(room) : ""}</span><span class="tl-txt"><b>${esc(roomName)}</b><em>Where you started</em></span>${ICON.chev}</button></li>`;
   const { sh, close } = sheet(`<div class="tl-sheet"><h2 class="title-2">Your trail</h2><p class="note">${XSTACK.length > 1 ? `${XSTACK.length} pages, newest first` : "Every page you open from here joins it"}</p>

@@ -120,7 +120,7 @@ function btListNodes(kind) {
   if (kind === "dyes") return B.dyes.map(d => btNode("bt:dye:" + d.id));
   return B.essays.map(e => btNode("bt:essay:" + e.id));
 }
-function btFallback() { S.lens = "world"; go("explore"); }
+function btFallback() { xToOrigin(); }   // where the trail started (js/explore.js), never a guessed room
 function btListPage(kind, opts = {}) {
   if (!window.BOTANY) return btFallback();
   btBuildNodes();

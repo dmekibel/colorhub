@@ -50,7 +50,7 @@ function storyPlayer(s) {
   `, "fixed story");
   const stage = el.querySelector("#st"), segs = el.querySelectorAll(".segs i");
   // ✕ returns to the page under the story (the story itself isn't on the trail, so nothing is popped)
-  const close = () => { if (!XSTACK.length) return go(xFallbackTab()); BACK_RENDER = true; xStep(XSTACK[XSTACK.length - 1]); };
+  const close = () => { if (!XSTACK.length) return xToOrigin(); BACK_RENDER = true; xStep(XSTACK[XSTACK.length - 1]); };
   el.querySelector("[data-close]").onclick = close;
   const g = graph();
   function draw() {
